@@ -49,13 +49,7 @@ namespace SteamKit2
         /// </summary>
         public NetHookNetworkListener()
         {
-#if NETSTANDARD1_3
-            var directory = System.AppContext.BaseDirectory;
-#elif NET46
             var directory = Path.GetDirectoryName( new Uri( GetType().Assembly.CodeBase ).LocalPath );
-#else
-#error Unknown Target Platform
-#endif
             LogDirectory = Path.Combine(
                 directory,
                 "nethook",

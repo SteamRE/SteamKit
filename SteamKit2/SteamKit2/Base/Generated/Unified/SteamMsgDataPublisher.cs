@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: steammessages_datapublisher.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"CDataPublisher_ClientContentCorruptionReport_Notification")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDataPublisher_ClientContentCorruptionReport_Notification")]
   public partial class CDataPublisher_ClientContentCorruptionReport_Notification : global::ProtoBuf.IExtensible
   {
     public CDataPublisher_ClientContentCorruptionReport_Notification() {}
@@ -30,7 +28,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -48,7 +46,7 @@ namespace SteamKit2.Unified.Internal
       set { _depotid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool depotidSpecified
     {
       get { return _depotid != null; }
@@ -66,7 +64,7 @@ namespace SteamKit2.Unified.Internal
       set { _download_source = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool download_sourceSpecified
     {
       get { return _download_source != null; }
@@ -84,7 +82,7 @@ namespace SteamKit2.Unified.Internal
       set { _objectid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool objectidSpecified
     {
       get { return _objectid != null; }
@@ -102,7 +100,7 @@ namespace SteamKit2.Unified.Internal
       set { _cellid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool cellidSpecified
     {
       get { return _cellid != null; }
@@ -120,7 +118,7 @@ namespace SteamKit2.Unified.Internal
       set { _is_manifest = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_manifestSpecified
     {
       get { return _is_manifest != null; }
@@ -138,7 +136,7 @@ namespace SteamKit2.Unified.Internal
       set { _object_size = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool object_sizeSpecified
     {
       get { return _object_size != null; }
@@ -156,7 +154,7 @@ namespace SteamKit2.Unified.Internal
       set { _corruption_type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool corruption_typeSpecified
     {
       get { return _corruption_type != null; }

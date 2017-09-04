@@ -10,12 +10,10 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: content_manifest.proto
 namespace SteamKit2.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"ContentManifestPayload")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ContentManifestPayload")]
   public partial class ContentManifestPayload : global::ProtoBuf.IExtensible
   {
     public ContentManifestPayload() {}
@@ -27,7 +25,7 @@ namespace SteamKit2.Internal
       get { return _mappings; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"FileMapping")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"FileMapping")]
   public partial class FileMapping : global::ProtoBuf.IExtensible
   {
     public FileMapping() {}
@@ -41,7 +39,7 @@ namespace SteamKit2.Internal
       set { _filename = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool filenameSpecified
     {
       get { return _filename != null; }
@@ -59,7 +57,7 @@ namespace SteamKit2.Internal
       set { _size = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sizeSpecified
     {
       get { return _size != null; }
@@ -77,7 +75,7 @@ namespace SteamKit2.Internal
       set { _flags = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool flagsSpecified
     {
       get { return _flags != null; }
@@ -95,7 +93,7 @@ namespace SteamKit2.Internal
       set { _sha_filename = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sha_filenameSpecified
     {
       get { return _sha_filename != null; }
@@ -113,7 +111,7 @@ namespace SteamKit2.Internal
       set { _sha_content = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sha_contentSpecified
     {
       get { return _sha_content != null; }
@@ -138,7 +136,7 @@ namespace SteamKit2.Internal
       set { _linktarget = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool linktargetSpecified
     {
       get { return _linktarget != null; }
@@ -147,7 +145,7 @@ namespace SteamKit2.Internal
     private bool ShouldSerializelinktarget() { return linktargetSpecified; }
     private void Resetlinktarget() { linktargetSpecified = false; }
     
-  [global::ProtoBuf.ProtoContract(Name=@"ChunkData")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ChunkData")]
   public partial class ChunkData : global::ProtoBuf.IExtensible
   {
     public ChunkData() {}
@@ -161,7 +159,7 @@ namespace SteamKit2.Internal
       set { _sha = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool shaSpecified
     {
       get { return _sha != null; }
@@ -179,7 +177,7 @@ namespace SteamKit2.Internal
       set { _crc = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool crcSpecified
     {
       get { return _crc != null; }
@@ -197,7 +195,7 @@ namespace SteamKit2.Internal
       set { _offset = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool offsetSpecified
     {
       get { return _offset != null; }
@@ -215,7 +213,7 @@ namespace SteamKit2.Internal
       set { _cb_original = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool cb_originalSpecified
     {
       get { return _cb_original != null; }
@@ -233,7 +231,7 @@ namespace SteamKit2.Internal
       set { _cb_compressed = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool cb_compressedSpecified
     {
       get { return _cb_compressed != null; }
@@ -257,7 +255,7 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"ContentManifestMetadata")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ContentManifestMetadata")]
   public partial class ContentManifestMetadata : global::ProtoBuf.IExtensible
   {
     public ContentManifestMetadata() {}
@@ -271,7 +269,7 @@ namespace SteamKit2.Internal
       set { _depot_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool depot_idSpecified
     {
       get { return _depot_id != null; }
@@ -289,7 +287,7 @@ namespace SteamKit2.Internal
       set { _gid_manifest = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool gid_manifestSpecified
     {
       get { return _gid_manifest != null; }
@@ -307,7 +305,7 @@ namespace SteamKit2.Internal
       set { _creation_time = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool creation_timeSpecified
     {
       get { return _creation_time != null; }
@@ -325,7 +323,7 @@ namespace SteamKit2.Internal
       set { _filenames_encrypted = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool filenames_encryptedSpecified
     {
       get { return _filenames_encrypted != null; }
@@ -343,7 +341,7 @@ namespace SteamKit2.Internal
       set { _cb_disk_original = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool cb_disk_originalSpecified
     {
       get { return _cb_disk_original != null; }
@@ -361,7 +359,7 @@ namespace SteamKit2.Internal
       set { _cb_disk_compressed = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool cb_disk_compressedSpecified
     {
       get { return _cb_disk_compressed != null; }
@@ -379,7 +377,7 @@ namespace SteamKit2.Internal
       set { _unique_chunks = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool unique_chunksSpecified
     {
       get { return _unique_chunks != null; }
@@ -397,7 +395,7 @@ namespace SteamKit2.Internal
       set { _crc_encrypted = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool crc_encryptedSpecified
     {
       get { return _crc_encrypted != null; }
@@ -415,7 +413,7 @@ namespace SteamKit2.Internal
       set { _crc_clear = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool crc_clearSpecified
     {
       get { return _crc_clear != null; }
@@ -429,7 +427,7 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"ContentManifestSignature")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ContentManifestSignature")]
   public partial class ContentManifestSignature : global::ProtoBuf.IExtensible
   {
     public ContentManifestSignature() {}
@@ -443,7 +441,7 @@ namespace SteamKit2.Internal
       set { _signature = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool signatureSpecified
     {
       get { return _signature != null; }

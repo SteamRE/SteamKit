@@ -52,9 +52,7 @@ namespace SteamKit2
                 if (socket.Connected)
                 {
                     socket.Shutdown(SocketShutdown.Both);
-#if NET46
                     socket.Disconnect( true );
-#endif
                 }
             }
             catch
@@ -158,26 +156,23 @@ namespace SteamKit2
                 return;
             }
             
-            var connectEventArgs = new SocketAsyncEventArgs { RemoteEndPoint = destination };
-            var asyncWaitHandle = new ManualResetEvent( initialState: false );
-            EventHandler<SocketAsyncEventArgs> completionHandler = ( s, e ) =>
+            var asyncResult = socket.BeginConnect( destination, null, null );
+            if ( WaitHandle.WaitAny( new WaitHandle[] { asyncResult.AsyncWaitHandle, cancellationToken.Token.WaitHandle }, timeout ) == 0 )
             {
-                asyncWaitHandle.Set();
-
-                var connected = e.ConnectSocket != null;
-                ConnectCompleted( connected );
-                (e as IDisposable)?.Dispose();
-            };
-            connectEventArgs.Completed += completionHandler;
-
-            if ( !socket.ConnectAsync( connectEventArgs ) )
-            {
-                completionHandler( socket, connectEventArgs );
+                try
+                {
+                    socket.EndConnect( asyncResult );
+                    ConnectCompleted( true );
+                }
+                catch ( Exception ex )
+                {
+                    DebugLog.WriteLine( "TcpConnection", "Socket exception while completing connection request to {0}: {1}", destination, ex );
+                    ConnectCompleted( false );
+                }
             }
-
-            if ( WaitHandle.WaitAny( new WaitHandle[] { asyncWaitHandle, cancellationToken.Token.WaitHandle }, timeout) != 0 )
+            else
             {
-                Socket.CancelConnectAsync( connectEventArgs );
+                ConnectCompleted( false );
             }
         }
 

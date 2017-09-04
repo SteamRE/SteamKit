@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.3;net46</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyOriginatorKeyFile>..\..\SteamKit.snk</AssemblyOriginatorKeyFile>
     <PackageReleaseNotes>Release notes are available at https://github.com/SteamRE/SteamKit/releases/tag/SteamKit_1.8.1</PackageReleaseNotes>
@@ -48,21 +48,7 @@
 
   <ItemGroup>
     <PackageReference Include="protobuf-net" Version="2.1.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
-    <PackageReference Include="System.AppContext" Version="4.3.0" />
-    <PackageReference Include="System.Diagnostics.Process" Version="4.3.0" />
-    <PackageReference Include="System.Net.Http" Version="4.3.1" />
-    <PackageReference Include="System.Net.NameResolution" Version="4.3.0" />
-    <PackageReference Include="System.Net.NetworkInformation" Version="4.3.0" />
-    <PackageReference Include="System.Net.WebSockets.Client" Version="4.3.1" />
-    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.0" />
-    <PackageReference Include="System.Threading.Thread" Version="4.3.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
-    <Reference Include="System.Net.Http" />
+    <PackageReference Include="Microsoft.Win32.Registry" Version="4.4.0-preview1-25305-02" />
   </ItemGroup>
 
 </Project>

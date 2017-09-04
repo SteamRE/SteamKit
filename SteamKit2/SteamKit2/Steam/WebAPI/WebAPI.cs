@@ -19,15 +19,6 @@ namespace SteamKit2
     /// </summary>
     public sealed class WebAPI
     {
-#if NET46
-        static WebAPI()
-        {
-            // stop WebClient from inserting this header into requests
-            // the backend doesn't like it
-            ServicePointManager.Expect100Continue = false;
-        }
-#endif
-
         /// <summary>
         /// The default base address used for the Steam Web API.
         /// A different base address can be specified in a <see cref="SteamConfiguration"/> object, or

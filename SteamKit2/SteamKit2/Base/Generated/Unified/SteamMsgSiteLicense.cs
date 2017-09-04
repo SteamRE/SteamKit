@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: steammessages_site_license.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"CSiteManagerClient_IncomingClient_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteManagerClient_IncomingClient_Request")]
   public partial class CSiteManagerClient_IncomingClient_Request : global::ProtoBuf.IExtensible
   {
     public CSiteManagerClient_IncomingClient_Request() {}
@@ -30,7 +28,7 @@ namespace SteamKit2.Unified.Internal
       set { _site_instanceid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool site_instanceidSpecified
     {
       get { return _site_instanceid != null; }
@@ -48,7 +46,7 @@ namespace SteamKit2.Unified.Internal
       set { _client_steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool client_steamidSpecified
     {
       get { return _client_steamid != null; }
@@ -66,7 +64,7 @@ namespace SteamKit2.Unified.Internal
       set { _client_local_ip = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool client_local_ipSpecified
     {
       get { return _client_local_ip != null; }
@@ -84,7 +82,7 @@ namespace SteamKit2.Unified.Internal
       set { _connection_key = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool connection_keySpecified
     {
       get { return _connection_key != null; }
@@ -98,7 +96,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CSiteManagerClient_IncomingClient_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteManagerClient_IncomingClient_Response")]
   public partial class CSiteManagerClient_IncomingClient_Response : global::ProtoBuf.IExtensible
   {
     public CSiteManagerClient_IncomingClient_Response() {}
@@ -108,7 +106,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_InitiateAssociation_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_InitiateAssociation_Request")]
   public partial class CSiteLicense_InitiateAssociation_Request : global::ProtoBuf.IExtensible
   {
     public CSiteLicense_InitiateAssociation_Request() {}
@@ -122,7 +120,7 @@ namespace SteamKit2.Unified.Internal
       set { _site_steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool site_steamidSpecified
     {
       get { return _site_steamid != null; }
@@ -140,7 +138,7 @@ namespace SteamKit2.Unified.Internal
       set { _site_instanceid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool site_instanceidSpecified
     {
       get { return _site_instanceid != null; }
@@ -158,7 +156,7 @@ namespace SteamKit2.Unified.Internal
       set { _client_local_ip = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool client_local_ipSpecified
     {
       get { return _client_local_ip != null; }
@@ -172,7 +170,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_InitiateAssociation_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_InitiateAssociation_Response")]
   public partial class CSiteLicense_InitiateAssociation_Response : global::ProtoBuf.IExtensible
   {
     public CSiteLicense_InitiateAssociation_Response() {}
@@ -186,7 +184,7 @@ namespace SteamKit2.Unified.Internal
       set { _connection_key = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool connection_keySpecified
     {
       get { return _connection_key != null; }
@@ -200,7 +198,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_LCSAuthenticate_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_LCSAuthenticate_Request")]
   public partial class CSiteLicense_LCSAuthenticate_Request : global::ProtoBuf.IExtensible
   {
     public CSiteLicense_LCSAuthenticate_Request() {}
@@ -214,7 +212,7 @@ namespace SteamKit2.Unified.Internal
       set { _instanceid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool instanceidSpecified
     {
       get { return _instanceid != null; }
@@ -228,7 +226,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_LCSAuthenticate_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_LCSAuthenticate_Response")]
   public partial class CSiteLicense_LCSAuthenticate_Response : global::ProtoBuf.IExtensible
   {
     public CSiteLicense_LCSAuthenticate_Response() {}
@@ -242,7 +240,7 @@ namespace SteamKit2.Unified.Internal
       set { _site_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool site_idSpecified
     {
       get { return _site_id != null; }
@@ -260,7 +258,7 @@ namespace SteamKit2.Unified.Internal
       set { _site_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool site_nameSpecified
     {
       get { return _site_name != null; }
@@ -278,7 +276,7 @@ namespace SteamKit2.Unified.Internal
       set { _new_session = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool new_sessionSpecified
     {
       get { return _new_session != null; }
@@ -292,7 +290,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_LCSAssociateUser_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_LCSAssociateUser_Request")]
   public partial class CSiteLicense_LCSAssociateUser_Request : global::ProtoBuf.IExtensible
   {
     public CSiteLicense_LCSAssociateUser_Request() {}
@@ -306,7 +304,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -324,7 +322,7 @@ namespace SteamKit2.Unified.Internal
       set { _local_ip = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool local_ipSpecified
     {
       get { return _local_ip != null; }
@@ -342,7 +340,7 @@ namespace SteamKit2.Unified.Internal
       set { _instanceid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool instanceidSpecified
     {
       get { return _instanceid != null; }
@@ -356,7 +354,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_LCSAssociateUser_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_LCSAssociateUser_Response")]
   public partial class CSiteLicense_LCSAssociateUser_Response : global::ProtoBuf.IExtensible
   {
     public CSiteLicense_LCSAssociateUser_Response() {}
@@ -366,7 +364,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_ClientSeatCheckout_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_ClientSeatCheckout_Request")]
   public partial class CSiteLicense_ClientSeatCheckout_Request : global::ProtoBuf.IExtensible
   {
     public CSiteLicense_ClientSeatCheckout_Request() {}
@@ -380,7 +378,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -398,7 +396,7 @@ namespace SteamKit2.Unified.Internal
       set { _instanceid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool instanceidSpecified
     {
       get { return _instanceid != null; }
@@ -416,7 +414,7 @@ namespace SteamKit2.Unified.Internal
       set { _packageid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool packageidSpecified
     {
       get { return _packageid != null; }
@@ -434,7 +432,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -448,7 +446,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_ClientSeatCheckout_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_ClientSeatCheckout_Response")]
   public partial class CSiteLicense_ClientSeatCheckout_Response : global::ProtoBuf.IExtensible
   {
     public CSiteLicense_ClientSeatCheckout_Response() {}
@@ -458,7 +456,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_ClientGetAvailableSeats_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_ClientGetAvailableSeats_Request")]
   public partial class CSiteLicense_ClientGetAvailableSeats_Request : global::ProtoBuf.IExtensible
   {
     public CSiteLicense_ClientGetAvailableSeats_Request() {}
@@ -472,7 +470,7 @@ namespace SteamKit2.Unified.Internal
       set { _packageid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool packageidSpecified
     {
       get { return _packageid != null; }
@@ -486,7 +484,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_ClientGetAvailableSeats_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_ClientGetAvailableSeats_Response")]
   public partial class CSiteLicense_ClientGetAvailableSeats_Response : global::ProtoBuf.IExtensible
   {
     public CSiteLicense_ClientGetAvailableSeats_Response() {}
@@ -500,7 +498,7 @@ namespace SteamKit2.Unified.Internal
       set { _available_seats = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool available_seatsSpecified
     {
       get { return _available_seats != null; }

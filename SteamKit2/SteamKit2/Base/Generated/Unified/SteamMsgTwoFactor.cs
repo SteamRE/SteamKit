@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: steammessages_twofactor.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_Status_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_Status_Request")]
   public partial class CTwoFactor_Status_Request : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_Status_Request() {}
@@ -30,7 +28,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -44,7 +42,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_Status_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_Status_Response")]
   public partial class CTwoFactor_Status_Response : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_Status_Response() {}
@@ -58,7 +56,7 @@ namespace SteamKit2.Unified.Internal
       set { _state = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool stateSpecified
     {
       get { return _state != null; }
@@ -76,7 +74,7 @@ namespace SteamKit2.Unified.Internal
       set { _inactivation_reason = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool inactivation_reasonSpecified
     {
       get { return _inactivation_reason != null; }
@@ -94,7 +92,7 @@ namespace SteamKit2.Unified.Internal
       set { _authenticator_type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool authenticator_typeSpecified
     {
       get { return _authenticator_type != null; }
@@ -112,7 +110,7 @@ namespace SteamKit2.Unified.Internal
       set { _authenticator_allowed = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool authenticator_allowedSpecified
     {
       get { return _authenticator_allowed != null; }
@@ -130,7 +128,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamguard_scheme = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamguard_schemeSpecified
     {
       get { return _steamguard_scheme != null; }
@@ -148,7 +146,7 @@ namespace SteamKit2.Unified.Internal
       set { _token_gid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool token_gidSpecified
     {
       get { return _token_gid != null; }
@@ -166,7 +164,7 @@ namespace SteamKit2.Unified.Internal
       set { _email_validated = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool email_validatedSpecified
     {
       get { return _email_validated != null; }
@@ -184,7 +182,7 @@ namespace SteamKit2.Unified.Internal
       set { _device_identifier = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool device_identifierSpecified
     {
       get { return _device_identifier != null; }
@@ -202,7 +200,7 @@ namespace SteamKit2.Unified.Internal
       set { _time_created = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool time_createdSpecified
     {
       get { return _time_created != null; }
@@ -220,7 +218,7 @@ namespace SteamKit2.Unified.Internal
       set { _revocation_attempts_remaining = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool revocation_attempts_remainingSpecified
     {
       get { return _revocation_attempts_remaining != null; }
@@ -238,7 +236,7 @@ namespace SteamKit2.Unified.Internal
       set { _classified_agent = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool classified_agentSpecified
     {
       get { return _classified_agent != null; }
@@ -256,7 +254,7 @@ namespace SteamKit2.Unified.Internal
       set { _allow_external_authenticator = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool allow_external_authenticatorSpecified
     {
       get { return _allow_external_authenticator != null; }
@@ -266,29 +264,29 @@ namespace SteamKit2.Unified.Internal
     private void Resetallow_external_authenticator() { allow_external_authenticatorSpecified = false; }
     
 
-    private uint? _external_authenticator_type;
-    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"external_authenticator_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint external_authenticator_type
+    private uint? _time_transferred;
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"time_transferred", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint time_transferred
     {
-      get { return _external_authenticator_type?? default(uint); }
-      set { _external_authenticator_type = value; }
+      get { return _time_transferred?? default(uint); }
+      set { _time_transferred = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
-    public bool external_authenticator_typeSpecified
+    [global::System.ComponentModel.Browsable(false)]
+    public bool time_transferredSpecified
     {
-      get { return _external_authenticator_type != null; }
-      set { if (value == (_external_authenticator_type== null)) _external_authenticator_type = value ? this.external_authenticator_type : (uint?)null; }
+      get { return _time_transferred != null; }
+      set { if (value == (_time_transferred== null)) _time_transferred = value ? this.time_transferred : (uint?)null; }
     }
-    private bool ShouldSerializeexternal_authenticator_type() { return external_authenticator_typeSpecified; }
-    private void Resetexternal_authenticator_type() { external_authenticator_typeSpecified = false; }
+    private bool ShouldSerializetime_transferred() { return time_transferredSpecified; }
+    private void Resettime_transferred() { time_transferredSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_AddAuthenticator_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_AddAuthenticator_Request")]
   public partial class CTwoFactor_AddAuthenticator_Request : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_AddAuthenticator_Request() {}
@@ -302,7 +300,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -320,7 +318,7 @@ namespace SteamKit2.Unified.Internal
       set { _authenticator_time = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool authenticator_timeSpecified
     {
       get { return _authenticator_time != null; }
@@ -338,7 +336,7 @@ namespace SteamKit2.Unified.Internal
       set { _serial_number = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool serial_numberSpecified
     {
       get { return _serial_number != null; }
@@ -356,7 +354,7 @@ namespace SteamKit2.Unified.Internal
       set { _authenticator_type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool authenticator_typeSpecified
     {
       get { return _authenticator_type != null; }
@@ -374,7 +372,7 @@ namespace SteamKit2.Unified.Internal
       set { _device_identifier = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool device_identifierSpecified
     {
       get { return _device_identifier != null; }
@@ -392,7 +390,7 @@ namespace SteamKit2.Unified.Internal
       set { _sms_phone_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sms_phone_idSpecified
     {
       get { return _sms_phone_id != null; }
@@ -413,7 +411,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_AddAuthenticator_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_AddAuthenticator_Response")]
   public partial class CTwoFactor_AddAuthenticator_Response : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_AddAuthenticator_Response() {}
@@ -427,7 +425,7 @@ namespace SteamKit2.Unified.Internal
       set { _shared_secret = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool shared_secretSpecified
     {
       get { return _shared_secret != null; }
@@ -445,7 +443,7 @@ namespace SteamKit2.Unified.Internal
       set { _serial_number = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool serial_numberSpecified
     {
       get { return _serial_number != null; }
@@ -463,7 +461,7 @@ namespace SteamKit2.Unified.Internal
       set { _revocation_code = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool revocation_codeSpecified
     {
       get { return _revocation_code != null; }
@@ -481,7 +479,7 @@ namespace SteamKit2.Unified.Internal
       set { _uri = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool uriSpecified
     {
       get { return _uri != null; }
@@ -499,7 +497,7 @@ namespace SteamKit2.Unified.Internal
       set { _server_time = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool server_timeSpecified
     {
       get { return _server_time != null; }
@@ -517,7 +515,7 @@ namespace SteamKit2.Unified.Internal
       set { _account_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool account_nameSpecified
     {
       get { return _account_name != null; }
@@ -535,7 +533,7 @@ namespace SteamKit2.Unified.Internal
       set { _token_gid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool token_gidSpecified
     {
       get { return _token_gid != null; }
@@ -553,7 +551,7 @@ namespace SteamKit2.Unified.Internal
       set { _identity_secret = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool identity_secretSpecified
     {
       get { return _identity_secret != null; }
@@ -571,7 +569,7 @@ namespace SteamKit2.Unified.Internal
       set { _secret_1 = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool secret_1Specified
     {
       get { return _secret_1 != null; }
@@ -589,7 +587,7 @@ namespace SteamKit2.Unified.Internal
       set { _status = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool statusSpecified
     {
       get { return _status != null; }
@@ -603,7 +601,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_SendEmail_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_SendEmail_Request")]
   public partial class CTwoFactor_SendEmail_Request : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_SendEmail_Request() {}
@@ -617,7 +615,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -635,7 +633,7 @@ namespace SteamKit2.Unified.Internal
       set { _email_type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool email_typeSpecified
     {
       get { return _email_type != null; }
@@ -653,7 +651,7 @@ namespace SteamKit2.Unified.Internal
       set { _include_activation_code = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool include_activation_codeSpecified
     {
       get { return _include_activation_code != null; }
@@ -667,7 +665,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_SendEmail_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_SendEmail_Response")]
   public partial class CTwoFactor_SendEmail_Response : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_SendEmail_Response() {}
@@ -677,7 +675,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_FinalizeAddAuthenticator_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_FinalizeAddAuthenticator_Request")]
   public partial class CTwoFactor_FinalizeAddAuthenticator_Request : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_FinalizeAddAuthenticator_Request() {}
@@ -691,7 +689,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -709,7 +707,7 @@ namespace SteamKit2.Unified.Internal
       set { _authenticator_code = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool authenticator_codeSpecified
     {
       get { return _authenticator_code != null; }
@@ -727,7 +725,7 @@ namespace SteamKit2.Unified.Internal
       set { _authenticator_time = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool authenticator_timeSpecified
     {
       get { return _authenticator_time != null; }
@@ -745,7 +743,7 @@ namespace SteamKit2.Unified.Internal
       set { _activation_code = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool activation_codeSpecified
     {
       get { return _activation_code != null; }
@@ -766,7 +764,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_FinalizeAddAuthenticator_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_FinalizeAddAuthenticator_Response")]
   public partial class CTwoFactor_FinalizeAddAuthenticator_Response : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_FinalizeAddAuthenticator_Response() {}
@@ -780,7 +778,7 @@ namespace SteamKit2.Unified.Internal
       set { _success = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool successSpecified
     {
       get { return _success != null; }
@@ -798,7 +796,7 @@ namespace SteamKit2.Unified.Internal
       set { _want_more = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool want_moreSpecified
     {
       get { return _want_more != null; }
@@ -816,7 +814,7 @@ namespace SteamKit2.Unified.Internal
       set { _server_time = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool server_timeSpecified
     {
       get { return _server_time != null; }
@@ -834,7 +832,7 @@ namespace SteamKit2.Unified.Internal
       set { _status = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool statusSpecified
     {
       get { return _status != null; }
@@ -848,7 +846,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_RemoveAuthenticator_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_RemoveAuthenticator_Request")]
   public partial class CTwoFactor_RemoveAuthenticator_Request : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_RemoveAuthenticator_Request() {}
@@ -862,7 +860,7 @@ namespace SteamKit2.Unified.Internal
       set { _revocation_code = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool revocation_codeSpecified
     {
       get { return _revocation_code != null; }
@@ -880,7 +878,7 @@ namespace SteamKit2.Unified.Internal
       set { _revocation_reason = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool revocation_reasonSpecified
     {
       get { return _revocation_reason != null; }
@@ -898,7 +896,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamguard_scheme = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamguard_schemeSpecified
     {
       get { return _steamguard_scheme != null; }
@@ -916,7 +914,7 @@ namespace SteamKit2.Unified.Internal
       set { _remove_all_steamguard_cookies = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool remove_all_steamguard_cookiesSpecified
     {
       get { return _remove_all_steamguard_cookies != null; }
@@ -930,7 +928,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_RemoveAuthenticator_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_RemoveAuthenticator_Response")]
   public partial class CTwoFactor_RemoveAuthenticator_Response : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_RemoveAuthenticator_Response() {}
@@ -944,7 +942,7 @@ namespace SteamKit2.Unified.Internal
       set { _success = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool successSpecified
     {
       get { return _success != null; }
@@ -962,7 +960,7 @@ namespace SteamKit2.Unified.Internal
       set { _server_time = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool server_timeSpecified
     {
       get { return _server_time != null; }
@@ -980,7 +978,7 @@ namespace SteamKit2.Unified.Internal
       set { _revocation_attempts_remaining = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool revocation_attempts_remainingSpecified
     {
       get { return _revocation_attempts_remaining != null; }
@@ -994,7 +992,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_CreateEmergencyCodes_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_CreateEmergencyCodes_Request")]
   public partial class CTwoFactor_CreateEmergencyCodes_Request : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_CreateEmergencyCodes_Request() {}
@@ -1004,7 +1002,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_CreateEmergencyCodes_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_CreateEmergencyCodes_Response")]
   public partial class CTwoFactor_CreateEmergencyCodes_Response : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_CreateEmergencyCodes_Response() {}
@@ -1021,7 +1019,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_DestroyEmergencyCodes_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_DestroyEmergencyCodes_Request")]
   public partial class CTwoFactor_DestroyEmergencyCodes_Request : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_DestroyEmergencyCodes_Request() {}
@@ -1035,7 +1033,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -1049,7 +1047,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_DestroyEmergencyCodes_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_DestroyEmergencyCodes_Response")]
   public partial class CTwoFactor_DestroyEmergencyCodes_Response : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_DestroyEmergencyCodes_Response() {}
@@ -1059,7 +1057,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_ValidateToken_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_ValidateToken_Request")]
   public partial class CTwoFactor_ValidateToken_Request : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_ValidateToken_Request() {}
@@ -1073,7 +1071,7 @@ namespace SteamKit2.Unified.Internal
       set { _code = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool codeSpecified
     {
       get { return _code != null; }
@@ -1087,7 +1085,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_ValidateToken_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_ValidateToken_Response")]
   public partial class CTwoFactor_ValidateToken_Response : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_ValidateToken_Response() {}
@@ -1101,7 +1099,7 @@ namespace SteamKit2.Unified.Internal
       set { _valid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool validSpecified
     {
       get { return _valid != null; }

@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: steammessages.proto
 // Note: requires additional types generated from: google/protobuf/descriptor.proto
 namespace SteamKit2.GC.CSGO.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgProtoBufHeader")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgProtoBufHeader")]
   public partial class CMsgProtoBufHeader : global::ProtoBuf.IExtensible
   {
     public CMsgProtoBufHeader() {}
@@ -30,7 +28,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _client_steam_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool client_steam_idSpecified
     {
       get { return _client_steam_id != null; }
@@ -48,7 +46,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _client_session_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool client_session_idSpecified
     {
       get { return _client_session_id != null; }
@@ -66,7 +64,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _source_app_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool source_app_idSpecified
     {
       get { return _source_app_id != null; }
@@ -84,7 +82,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _job_id_source = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool job_id_sourceSpecified
     {
       get { return _job_id_source != null; }
@@ -102,7 +100,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _job_id_target = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool job_id_targetSpecified
     {
       get { return _job_id_target != null; }
@@ -120,7 +118,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _target_job_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool target_job_nameSpecified
     {
       get { return _target_job_name != null; }
@@ -138,7 +136,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _eresult = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool eresultSpecified
     {
       get { return _eresult != null; }
@@ -156,7 +154,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _error_message = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool error_messageSpecified
     {
       get { return _error_message != null; }
@@ -174,7 +172,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _gc_msg_src = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool gc_msg_srcSpecified
     {
       get { return _gc_msg_src != null; }
@@ -192,7 +190,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _gc_dir_index_source = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool gc_dir_index_sourceSpecified
     {
       get { return _gc_dir_index_source != null; }
@@ -206,7 +204,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgWebAPIKey")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgWebAPIKey")]
   public partial class CMsgWebAPIKey : global::ProtoBuf.IExtensible
   {
     public CMsgWebAPIKey() {}
@@ -220,7 +218,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _status = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool statusSpecified
     {
       get { return _status != null; }
@@ -238,7 +236,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _account_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool account_idSpecified
     {
       get { return _account_id != null; }
@@ -256,7 +254,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _publisher_group_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool publisher_group_idSpecified
     {
       get { return _publisher_group_id != null; }
@@ -274,7 +272,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _key_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool key_idSpecified
     {
       get { return _key_id != null; }
@@ -292,7 +290,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _domain = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool domainSpecified
     {
       get { return _domain != null; }
@@ -306,7 +304,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgHttpRequest")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgHttpRequest")]
   public partial class CMsgHttpRequest : global::ProtoBuf.IExtensible
   {
     public CMsgHttpRequest() {}
@@ -320,7 +318,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _request_method = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool request_methodSpecified
     {
       get { return _request_method != null; }
@@ -338,7 +336,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _hostname = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool hostnameSpecified
     {
       get { return _hostname != null; }
@@ -356,7 +354,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _url = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool urlSpecified
     {
       get { return _url != null; }
@@ -395,7 +393,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _body = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool bodySpecified
     {
       get { return _body != null; }
@@ -413,7 +411,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _absolute_timeout = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool absolute_timeoutSpecified
     {
       get { return _absolute_timeout != null; }
@@ -422,7 +420,7 @@ namespace SteamKit2.GC.CSGO.Internal
     private bool ShouldSerializeabsolute_timeout() { return absolute_timeoutSpecified; }
     private void Resetabsolute_timeout() { absolute_timeoutSpecified = false; }
     
-  [global::ProtoBuf.ProtoContract(Name=@"RequestHeader")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestHeader")]
   public partial class RequestHeader : global::ProtoBuf.IExtensible
   {
     public RequestHeader() {}
@@ -436,7 +434,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool nameSpecified
     {
       get { return _name != null; }
@@ -454,7 +452,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _value = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool valueSpecified
     {
       get { return _value != null; }
@@ -468,7 +466,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"QueryParam")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"QueryParam")]
   public partial class QueryParam : global::ProtoBuf.IExtensible
   {
     public QueryParam() {}
@@ -482,7 +480,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool nameSpecified
     {
       get { return _name != null; }
@@ -500,7 +498,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _value = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool valueSpecified
     {
       get { return _value != null; }
@@ -519,7 +517,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgWebAPIRequest")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgWebAPIRequest")]
   public partial class CMsgWebAPIRequest : global::ProtoBuf.IExtensible
   {
     public CMsgWebAPIRequest() {}
@@ -533,7 +531,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _UNUSED_job_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool UNUSED_job_nameSpecified
     {
       get { return _UNUSED_job_name != null; }
@@ -551,7 +549,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _interface_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool interface_nameSpecified
     {
       get { return _interface_name != null; }
@@ -569,7 +567,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _method_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool method_nameSpecified
     {
       get { return _method_name != null; }
@@ -587,7 +585,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool versionSpecified
     {
       get { return _version != null; }
@@ -623,7 +621,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _routing_app_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool routing_app_idSpecified
     {
       get { return _routing_app_id != null; }
@@ -637,7 +635,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgHttpResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgHttpResponse")]
   public partial class CMsgHttpResponse : global::ProtoBuf.IExtensible
   {
     public CMsgHttpResponse() {}
@@ -651,7 +649,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _status_code = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool status_codeSpecified
     {
       get { return _status_code != null; }
@@ -676,7 +674,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _body = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool bodySpecified
     {
       get { return _body != null; }
@@ -685,7 +683,7 @@ namespace SteamKit2.GC.CSGO.Internal
     private bool ShouldSerializebody() { return bodySpecified; }
     private void Resetbody() { bodySpecified = false; }
     
-  [global::ProtoBuf.ProtoContract(Name=@"ResponseHeader")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ResponseHeader")]
   public partial class ResponseHeader : global::ProtoBuf.IExtensible
   {
     public ResponseHeader() {}
@@ -699,7 +697,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool nameSpecified
     {
       get { return _name != null; }
@@ -717,7 +715,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _value = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool valueSpecified
     {
       get { return _value != null; }
@@ -736,7 +734,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgAMFindAccounts")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAMFindAccounts")]
   public partial class CMsgAMFindAccounts : global::ProtoBuf.IExtensible
   {
     public CMsgAMFindAccounts() {}
@@ -750,7 +748,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _search_type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool search_typeSpecified
     {
       get { return _search_type != null; }
@@ -768,7 +766,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _search_string = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool search_stringSpecified
     {
       get { return _search_string != null; }
@@ -782,7 +780,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgAMFindAccountsResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAMFindAccountsResponse")]
   public partial class CMsgAMFindAccountsResponse : global::ProtoBuf.IExtensible
   {
     public CMsgAMFindAccountsResponse() {}
@@ -799,7 +797,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgNotifyWatchdog")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgNotifyWatchdog")]
   public partial class CMsgNotifyWatchdog : global::ProtoBuf.IExtensible
   {
     public CMsgNotifyWatchdog() {}
@@ -813,7 +811,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _source = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sourceSpecified
     {
       get { return _source != null; }
@@ -831,7 +829,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _alert_type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool alert_typeSpecified
     {
       get { return _alert_type != null; }
@@ -849,7 +847,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _alert_destination = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool alert_destinationSpecified
     {
       get { return _alert_destination != null; }
@@ -867,7 +865,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _critical = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool criticalSpecified
     {
       get { return _critical != null; }
@@ -885,7 +883,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _time = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool timeSpecified
     {
       get { return _time != null; }
@@ -903,7 +901,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -921,7 +919,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _text = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool textSpecified
     {
       get { return _text != null; }
@@ -935,7 +933,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgAMGetLicenses")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAMGetLicenses")]
   public partial class CMsgAMGetLicenses : global::ProtoBuf.IExtensible
   {
     public CMsgAMGetLicenses() {}
@@ -949,7 +947,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -963,7 +961,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgPackageLicense")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgPackageLicense")]
   public partial class CMsgPackageLicense : global::ProtoBuf.IExtensible
   {
     public CMsgPackageLicense() {}
@@ -977,7 +975,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _package_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool package_idSpecified
     {
       get { return _package_id != null; }
@@ -995,7 +993,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _time_created = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool time_createdSpecified
     {
       get { return _time_created != null; }
@@ -1013,7 +1011,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _owner_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool owner_idSpecified
     {
       get { return _owner_id != null; }
@@ -1027,7 +1025,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgAMGetLicensesResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAMGetLicensesResponse")]
   public partial class CMsgAMGetLicensesResponse : global::ProtoBuf.IExtensible
   {
     public CMsgAMGetLicensesResponse() {}
@@ -1048,7 +1046,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _result = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool resultSpecified
     {
       get { return _result != null; }
@@ -1062,7 +1060,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgAMGetUserGameStats")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAMGetUserGameStats")]
   public partial class CMsgAMGetUserGameStats : global::ProtoBuf.IExtensible
   {
     public CMsgAMGetUserGameStats() {}
@@ -1076,7 +1074,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steam_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steam_idSpecified
     {
       get { return _steam_id != null; }
@@ -1094,7 +1092,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _game_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool game_idSpecified
     {
       get { return _game_id != null; }
@@ -1115,7 +1113,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgAMGetUserGameStatsResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAMGetUserGameStatsResponse")]
   public partial class CMsgAMGetUserGameStatsResponse : global::ProtoBuf.IExtensible
   {
     public CMsgAMGetUserGameStatsResponse() {}
@@ -1129,7 +1127,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steam_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steam_idSpecified
     {
       get { return _steam_id != null; }
@@ -1147,7 +1145,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _game_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool game_idSpecified
     {
       get { return _game_id != null; }
@@ -1165,7 +1163,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _eresult = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool eresultSpecified
     {
       get { return _eresult != null; }
@@ -1188,7 +1186,7 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _achievement_blocks; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"Stats")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Stats")]
   public partial class Stats : global::ProtoBuf.IExtensible
   {
     public Stats() {}
@@ -1202,7 +1200,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _stat_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool stat_idSpecified
     {
       get { return _stat_id != null; }
@@ -1220,7 +1218,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _stat_value = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool stat_valueSpecified
     {
       get { return _stat_value != null; }
@@ -1234,7 +1232,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"Achievement_Blocks")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Achievement_Blocks")]
   public partial class Achievement_Blocks : global::ProtoBuf.IExtensible
   {
     public Achievement_Blocks() {}
@@ -1248,7 +1246,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _achievement_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool achievement_idSpecified
     {
       get { return _achievement_id != null; }
@@ -1266,7 +1264,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _achievement_bit_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool achievement_bit_idSpecified
     {
       get { return _achievement_bit_id != null; }
@@ -1284,7 +1282,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _unlock_time = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool unlock_timeSpecified
     {
       get { return _unlock_time != null; }
@@ -1303,7 +1301,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetCommandList")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetCommandList")]
   public partial class CMsgGCGetCommandList : global::ProtoBuf.IExtensible
   {
     public CMsgGCGetCommandList() {}
@@ -1317,7 +1315,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _app_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool app_idSpecified
     {
       get { return _app_id != null; }
@@ -1335,7 +1333,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _command_prefix = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool command_prefixSpecified
     {
       get { return _command_prefix != null; }
@@ -1349,7 +1347,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetCommandListResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetCommandListResponse")]
   public partial class CMsgGCGetCommandListResponse : global::ProtoBuf.IExtensible
   {
     public CMsgGCGetCommandListResponse() {}
@@ -1366,7 +1364,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCMsgMemCachedGet")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgMemCachedGet")]
   public partial class CGCMsgMemCachedGet : global::ProtoBuf.IExtensible
   {
     public CGCMsgMemCachedGet() {}
@@ -1383,7 +1381,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCMsgMemCachedGetResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgMemCachedGetResponse")]
   public partial class CGCMsgMemCachedGetResponse : global::ProtoBuf.IExtensible
   {
     public CGCMsgMemCachedGetResponse() {}
@@ -1395,7 +1393,7 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _values; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"ValueTag")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ValueTag")]
   public partial class ValueTag : global::ProtoBuf.IExtensible
   {
     public ValueTag() {}
@@ -1409,7 +1407,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _found = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool foundSpecified
     {
       get { return _found != null; }
@@ -1427,7 +1425,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _value = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool valueSpecified
     {
       get { return _value != null; }
@@ -1446,7 +1444,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCMsgMemCachedSet")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgMemCachedSet")]
   public partial class CGCMsgMemCachedSet : global::ProtoBuf.IExtensible
   {
     public CGCMsgMemCachedSet() {}
@@ -1458,7 +1456,7 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _keys; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"KeyPair")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"KeyPair")]
   public partial class KeyPair : global::ProtoBuf.IExtensible
   {
     public KeyPair() {}
@@ -1472,7 +1470,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool nameSpecified
     {
       get { return _name != null; }
@@ -1490,7 +1488,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _value = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool valueSpecified
     {
       get { return _value != null; }
@@ -1509,7 +1507,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCMsgMemCachedDelete")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgMemCachedDelete")]
   public partial class CGCMsgMemCachedDelete : global::ProtoBuf.IExtensible
   {
     public CGCMsgMemCachedDelete() {}
@@ -1526,7 +1524,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCMsgMemCachedStats")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgMemCachedStats")]
   public partial class CGCMsgMemCachedStats : global::ProtoBuf.IExtensible
   {
     public CGCMsgMemCachedStats() {}
@@ -1536,7 +1534,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCMsgMemCachedStatsResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgMemCachedStatsResponse")]
   public partial class CGCMsgMemCachedStatsResponse : global::ProtoBuf.IExtensible
   {
     public CGCMsgMemCachedStatsResponse() {}
@@ -1550,7 +1548,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _curr_connections = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool curr_connectionsSpecified
     {
       get { return _curr_connections != null; }
@@ -1568,7 +1566,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _cmd_get = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool cmd_getSpecified
     {
       get { return _cmd_get != null; }
@@ -1586,7 +1584,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _cmd_set = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool cmd_setSpecified
     {
       get { return _cmd_set != null; }
@@ -1604,7 +1602,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _cmd_flush = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool cmd_flushSpecified
     {
       get { return _cmd_flush != null; }
@@ -1622,7 +1620,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _get_hits = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool get_hitsSpecified
     {
       get { return _get_hits != null; }
@@ -1640,7 +1638,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _get_misses = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool get_missesSpecified
     {
       get { return _get_misses != null; }
@@ -1658,7 +1656,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _delete_hits = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool delete_hitsSpecified
     {
       get { return _delete_hits != null; }
@@ -1676,7 +1674,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _delete_misses = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool delete_missesSpecified
     {
       get { return _delete_misses != null; }
@@ -1694,7 +1692,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _bytes_read = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool bytes_readSpecified
     {
       get { return _bytes_read != null; }
@@ -1712,7 +1710,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _bytes_written = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool bytes_writtenSpecified
     {
       get { return _bytes_written != null; }
@@ -1730,7 +1728,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _limit_maxbytes = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool limit_maxbytesSpecified
     {
       get { return _limit_maxbytes != null; }
@@ -1748,7 +1746,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _curr_items = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool curr_itemsSpecified
     {
       get { return _curr_items != null; }
@@ -1766,7 +1764,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _evictions = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool evictionsSpecified
     {
       get { return _evictions != null; }
@@ -1784,7 +1782,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _bytes = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool bytesSpecified
     {
       get { return _bytes != null; }
@@ -1798,7 +1796,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCMsgSQLStats")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgSQLStats")]
   public partial class CGCMsgSQLStats : global::ProtoBuf.IExtensible
   {
     public CGCMsgSQLStats() {}
@@ -1812,7 +1810,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _schema_catalog = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool schema_catalogSpecified
     {
       get { return _schema_catalog != null; }
@@ -1826,7 +1824,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCMsgSQLStatsResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgSQLStatsResponse")]
   public partial class CGCMsgSQLStatsResponse : global::ProtoBuf.IExtensible
   {
     public CGCMsgSQLStatsResponse() {}
@@ -1840,7 +1838,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _threads = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool threadsSpecified
     {
       get { return _threads != null; }
@@ -1858,7 +1856,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _threads_connected = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool threads_connectedSpecified
     {
       get { return _threads_connected != null; }
@@ -1876,7 +1874,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _threads_active = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool threads_activeSpecified
     {
       get { return _threads_active != null; }
@@ -1894,7 +1892,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _operations_submitted = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool operations_submittedSpecified
     {
       get { return _operations_submitted != null; }
@@ -1912,7 +1910,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _prepared_statements_executed = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool prepared_statements_executedSpecified
     {
       get { return _prepared_statements_executed != null; }
@@ -1930,7 +1928,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _non_prepared_statements_executed = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool non_prepared_statements_executedSpecified
     {
       get { return _non_prepared_statements_executed != null; }
@@ -1948,7 +1946,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _deadlock_retries = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool deadlock_retriesSpecified
     {
       get { return _deadlock_retries != null; }
@@ -1966,7 +1964,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _operations_timed_out_in_queue = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool operations_timed_out_in_queueSpecified
     {
       get { return _operations_timed_out_in_queue != null; }
@@ -1984,7 +1982,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _errors = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool errorsSpecified
     {
       get { return _errors != null; }
@@ -1998,7 +1996,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgAMAddFreeLicense")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAMAddFreeLicense")]
   public partial class CMsgAMAddFreeLicense : global::ProtoBuf.IExtensible
   {
     public CMsgAMAddFreeLicense() {}
@@ -2012,7 +2010,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -2030,7 +2028,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _ip_public = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool ip_publicSpecified
     {
       get { return _ip_public != null; }
@@ -2048,7 +2046,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _packageid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool packageidSpecified
     {
       get { return _packageid != null; }
@@ -2066,7 +2064,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _store_country_code = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool store_country_codeSpecified
     {
       get { return _store_country_code != null; }
@@ -2080,7 +2078,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgAMAddFreeLicenseResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAMAddFreeLicenseResponse")]
   public partial class CMsgAMAddFreeLicenseResponse : global::ProtoBuf.IExtensible
   {
     public CMsgAMAddFreeLicenseResponse() {}
@@ -2094,7 +2092,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _eresult = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool eresultSpecified
     {
       get { return _eresult != null; }
@@ -2112,7 +2110,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _purchase_result_detail = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool purchase_result_detailSpecified
     {
       get { return _purchase_result_detail != null; }
@@ -2130,7 +2128,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _transid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool transidSpecified
     {
       get { return _transid != null; }
@@ -2144,7 +2142,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCMsgGetIPLocation")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgGetIPLocation")]
   public partial class CGCMsgGetIPLocation : global::ProtoBuf.IExtensible
   {
     public CGCMsgGetIPLocation() {}
@@ -2161,7 +2159,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CIPLocationInfo")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CIPLocationInfo")]
   public partial class CIPLocationInfo : global::ProtoBuf.IExtensible
   {
     public CIPLocationInfo() {}
@@ -2175,7 +2173,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _ip = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool ipSpecified
     {
       get { return _ip != null; }
@@ -2193,7 +2191,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _latitude = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool latitudeSpecified
     {
       get { return _latitude != null; }
@@ -2211,7 +2209,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _longitude = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool longitudeSpecified
     {
       get { return _longitude != null; }
@@ -2229,7 +2227,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _country = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool countrySpecified
     {
       get { return _country != null; }
@@ -2247,7 +2245,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _state = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool stateSpecified
     {
       get { return _state != null; }
@@ -2265,7 +2263,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _city = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool citySpecified
     {
       get { return _city != null; }
@@ -2279,7 +2277,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCMsgGetIPLocationResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgGetIPLocationResponse")]
   public partial class CGCMsgGetIPLocationResponse : global::ProtoBuf.IExtensible
   {
     public CGCMsgGetIPLocationResponse() {}
@@ -2296,7 +2294,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCMsgSystemStatsSchema")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgSystemStatsSchema")]
   public partial class CGCMsgSystemStatsSchema : global::ProtoBuf.IExtensible
   {
     public CGCMsgSystemStatsSchema() {}
@@ -2310,7 +2308,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _gc_app_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool gc_app_idSpecified
     {
       get { return _gc_app_id != null; }
@@ -2328,7 +2326,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _schema_kv = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool schema_kvSpecified
     {
       get { return _schema_kv != null; }
@@ -2342,7 +2340,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCMsgGetSystemStats")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgGetSystemStats")]
   public partial class CGCMsgGetSystemStats : global::ProtoBuf.IExtensible
   {
     public CGCMsgGetSystemStats() {}
@@ -2352,7 +2350,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCMsgGetSystemStatsResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgGetSystemStatsResponse")]
   public partial class CGCMsgGetSystemStatsResponse : global::ProtoBuf.IExtensible
   {
     public CGCMsgGetSystemStatsResponse() {}
@@ -2366,7 +2364,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _gc_app_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool gc_app_idSpecified
     {
       get { return _gc_app_id != null; }
@@ -2384,7 +2382,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _stats_kv = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool stats_kvSpecified
     {
       get { return _stats_kv != null; }
@@ -2402,7 +2400,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _active_jobs = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool active_jobsSpecified
     {
       get { return _active_jobs != null; }
@@ -2420,7 +2418,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _yielding_jobs = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool yielding_jobsSpecified
     {
       get { return _yielding_jobs != null; }
@@ -2438,7 +2436,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _user_sessions = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool user_sessionsSpecified
     {
       get { return _user_sessions != null; }
@@ -2456,7 +2454,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _game_server_sessions = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool game_server_sessionsSpecified
     {
       get { return _game_server_sessions != null; }
@@ -2474,7 +2472,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _socaches = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool socachesSpecified
     {
       get { return _socaches != null; }
@@ -2492,7 +2490,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _socaches_to_unload = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool socaches_to_unloadSpecified
     {
       get { return _socaches_to_unload != null; }
@@ -2510,7 +2508,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _socaches_loading = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool socaches_loadingSpecified
     {
       get { return _socaches_loading != null; }
@@ -2528,7 +2526,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _writeback_queue = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool writeback_queueSpecified
     {
       get { return _writeback_queue != null; }
@@ -2546,7 +2544,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steamid_locks = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamid_locksSpecified
     {
       get { return _steamid_locks != null; }
@@ -2564,7 +2562,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _logon_queue = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool logon_queueSpecified
     {
       get { return _logon_queue != null; }
@@ -2582,7 +2580,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _logon_jobs = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool logon_jobsSpecified
     {
       get { return _logon_jobs != null; }
@@ -2596,7 +2594,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgAMSendEmail")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAMSendEmail")]
   public partial class CMsgAMSendEmail : global::ProtoBuf.IExtensible
   {
     public CMsgAMSendEmail() {}
@@ -2610,7 +2608,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -2628,7 +2626,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _email_msg_type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool email_msg_typeSpecified
     {
       get { return _email_msg_type != null; }
@@ -2646,7 +2644,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _email_format = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool email_formatSpecified
     {
       get { return _email_format != null; }
@@ -2671,7 +2669,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _source_gc = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool source_gcSpecified
     {
       get { return _source_gc != null; }
@@ -2687,7 +2685,7 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _tokens; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"ReplacementToken")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReplacementToken")]
   public partial class ReplacementToken : global::ProtoBuf.IExtensible
   {
     public ReplacementToken() {}
@@ -2701,7 +2699,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _token_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool token_nameSpecified
     {
       get { return _token_name != null; }
@@ -2719,7 +2717,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _token_value = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool token_valueSpecified
     {
       get { return _token_value != null; }
@@ -2733,7 +2731,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"PersonaNameReplacementToken")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PersonaNameReplacementToken")]
   public partial class PersonaNameReplacementToken : global::ProtoBuf.IExtensible
   {
     public PersonaNameReplacementToken() {}
@@ -2747,7 +2745,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -2765,7 +2763,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _token_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool token_nameSpecified
     {
       get { return _token_name != null; }
@@ -2784,7 +2782,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgAMSendEmailResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAMSendEmailResponse")]
   public partial class CMsgAMSendEmailResponse : global::ProtoBuf.IExtensible
   {
     public CMsgAMSendEmailResponse() {}
@@ -2798,7 +2796,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _eresult = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool eresultSpecified
     {
       get { return _eresult != null; }
@@ -2812,7 +2810,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetEmailTemplate")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetEmailTemplate")]
   public partial class CMsgGCGetEmailTemplate : global::ProtoBuf.IExtensible
   {
     public CMsgGCGetEmailTemplate() {}
@@ -2826,7 +2824,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _app_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool app_idSpecified
     {
       get { return _app_id != null; }
@@ -2844,7 +2842,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _email_msg_type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool email_msg_typeSpecified
     {
       get { return _email_msg_type != null; }
@@ -2862,7 +2860,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _email_lang = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool email_langSpecified
     {
       get { return _email_lang != null; }
@@ -2880,7 +2878,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _email_format = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool email_formatSpecified
     {
       get { return _email_format != null; }
@@ -2894,7 +2892,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetEmailTemplateResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetEmailTemplateResponse")]
   public partial class CMsgGCGetEmailTemplateResponse : global::ProtoBuf.IExtensible
   {
     public CMsgGCGetEmailTemplateResponse() {}
@@ -2908,7 +2906,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _eresult = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool eresultSpecified
     {
       get { return _eresult != null; }
@@ -2926,7 +2924,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _template_exists = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool template_existsSpecified
     {
       get { return _template_exists != null; }
@@ -2944,7 +2942,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _template = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool templateSpecified
     {
       get { return _template != null; }
@@ -2958,7 +2956,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgAMGrantGuestPasses2")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAMGrantGuestPasses2")]
   public partial class CMsgAMGrantGuestPasses2 : global::ProtoBuf.IExtensible
   {
     public CMsgAMGrantGuestPasses2() {}
@@ -2972,7 +2970,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steam_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steam_idSpecified
     {
       get { return _steam_id != null; }
@@ -2990,7 +2988,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _package_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool package_idSpecified
     {
       get { return _package_id != null; }
@@ -3008,7 +3006,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _passes_to_grant = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool passes_to_grantSpecified
     {
       get { return _passes_to_grant != null; }
@@ -3026,7 +3024,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _days_to_expiration = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool days_to_expirationSpecified
     {
       get { return _days_to_expiration != null; }
@@ -3044,7 +3042,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _action = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool actionSpecified
     {
       get { return _action != null; }
@@ -3058,7 +3056,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgAMGrantGuestPasses2Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAMGrantGuestPasses2Response")]
   public partial class CMsgAMGrantGuestPasses2Response : global::ProtoBuf.IExtensible
   {
     public CMsgAMGrantGuestPasses2Response() {}
@@ -3072,7 +3070,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _eresult = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool eresultSpecified
     {
       get { return _eresult != null; }
@@ -3090,7 +3088,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _passes_granted = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool passes_grantedSpecified
     {
       get { return _passes_granted != null; }
@@ -3104,7 +3102,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCSystemMsg_GetAccountDetails")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCSystemMsg_GetAccountDetails")]
   public partial class CGCSystemMsg_GetAccountDetails : global::ProtoBuf.IExtensible
   {
     public CGCSystemMsg_GetAccountDetails() {}
@@ -3118,7 +3116,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -3136,7 +3134,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -3150,7 +3148,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCSystemMsg_GetAccountDetails_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCSystemMsg_GetAccountDetails_Response")]
   public partial class CGCSystemMsg_GetAccountDetails_Response : global::ProtoBuf.IExtensible
   {
     public CGCSystemMsg_GetAccountDetails_Response() {}
@@ -3164,7 +3162,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _eresult_deprecated = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool eresult_deprecatedSpecified
     {
       get { return _eresult_deprecated != null; }
@@ -3182,7 +3180,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _account_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool account_nameSpecified
     {
       get { return _account_name != null; }
@@ -3200,7 +3198,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _persona_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool persona_nameSpecified
     {
       get { return _persona_name != null; }
@@ -3218,7 +3216,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_profile_public = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_profile_publicSpecified
     {
       get { return _is_profile_public != null; }
@@ -3236,7 +3234,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_inventory_public = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_inventory_publicSpecified
     {
       get { return _is_inventory_public != null; }
@@ -3254,7 +3252,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_vac_banned = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_vac_bannedSpecified
     {
       get { return _is_vac_banned != null; }
@@ -3272,7 +3270,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_cyber_cafe = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_cyber_cafeSpecified
     {
       get { return _is_cyber_cafe != null; }
@@ -3290,7 +3288,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_school_account = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_school_accountSpecified
     {
       get { return _is_school_account != null; }
@@ -3308,7 +3306,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_limited = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_limitedSpecified
     {
       get { return _is_limited != null; }
@@ -3326,7 +3324,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_subscribed = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_subscribedSpecified
     {
       get { return _is_subscribed != null; }
@@ -3344,7 +3342,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _package = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool packageSpecified
     {
       get { return _package != null; }
@@ -3362,7 +3360,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_free_trial_account = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_free_trial_accountSpecified
     {
       get { return _is_free_trial_account != null; }
@@ -3380,7 +3378,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _free_trial_expiration = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool free_trial_expirationSpecified
     {
       get { return _free_trial_expiration != null; }
@@ -3398,7 +3396,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_low_violence = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_low_violenceSpecified
     {
       get { return _is_low_violence != null; }
@@ -3416,7 +3414,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_account_locked_down = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_account_locked_downSpecified
     {
       get { return _is_account_locked_down != null; }
@@ -3434,7 +3432,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_community_banned = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_community_bannedSpecified
     {
       get { return _is_community_banned != null; }
@@ -3452,7 +3450,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_trade_banned = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_trade_bannedSpecified
     {
       get { return _is_trade_banned != null; }
@@ -3470,7 +3468,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _trade_ban_expiration = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool trade_ban_expirationSpecified
     {
       get { return _trade_ban_expiration != null; }
@@ -3488,7 +3486,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _accountid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool accountidSpecified
     {
       get { return _accountid != null; }
@@ -3506,7 +3504,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _suspension_end_time = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool suspension_end_timeSpecified
     {
       get { return _suspension_end_time != null; }
@@ -3524,7 +3522,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _currency = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool currencySpecified
     {
       get { return _currency != null; }
@@ -3542,7 +3540,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steam_level = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steam_levelSpecified
     {
       get { return _steam_level != null; }
@@ -3560,7 +3558,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _friend_count = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool friend_countSpecified
     {
       get { return _friend_count != null; }
@@ -3578,7 +3576,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _account_creation_time = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool account_creation_timeSpecified
     {
       get { return _account_creation_time != null; }
@@ -3596,7 +3594,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_steamguard_enabled = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_steamguard_enabledSpecified
     {
       get { return _is_steamguard_enabled != null; }
@@ -3614,7 +3612,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_phone_verified = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_phone_verifiedSpecified
     {
       get { return _is_phone_verified != null; }
@@ -3632,7 +3630,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_two_factor_auth_enabled = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_two_factor_auth_enabledSpecified
     {
       get { return _is_two_factor_auth_enabled != null; }
@@ -3650,7 +3648,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _two_factor_enabled_time = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool two_factor_enabled_timeSpecified
     {
       get { return _two_factor_enabled_time != null; }
@@ -3668,7 +3666,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _phone_verification_time = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool phone_verification_timeSpecified
     {
       get { return _phone_verification_time != null; }
@@ -3686,7 +3684,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _phone_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool phone_idSpecified
     {
       get { return _phone_id != null; }
@@ -3704,7 +3702,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_phone_identifying = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_phone_identifyingSpecified
     {
       get { return _is_phone_identifying != null; }
@@ -3718,7 +3716,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetPersonaNames")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetPersonaNames")]
   public partial class CMsgGCGetPersonaNames : global::ProtoBuf.IExtensible
   {
     public CMsgGCGetPersonaNames() {}
@@ -3735,7 +3733,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetPersonaNames_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetPersonaNames_Response")]
   public partial class CMsgGCGetPersonaNames_Response : global::ProtoBuf.IExtensible
   {
     public CMsgGCGetPersonaNames_Response() {}
@@ -3754,7 +3752,7 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _failed_lookup_steamids; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"PersonaName")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PersonaName")]
   public partial class PersonaName : global::ProtoBuf.IExtensible
   {
     public PersonaName() {}
@@ -3768,7 +3766,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -3786,7 +3784,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _persona_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool persona_nameSpecified
     {
       get { return _persona_name != null; }
@@ -3805,7 +3803,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCCheckFriendship")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCheckFriendship")]
   public partial class CMsgGCCheckFriendship : global::ProtoBuf.IExtensible
   {
     public CMsgGCCheckFriendship() {}
@@ -3819,7 +3817,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steamid_left = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamid_leftSpecified
     {
       get { return _steamid_left != null; }
@@ -3837,7 +3835,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steamid_right = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamid_rightSpecified
     {
       get { return _steamid_right != null; }
@@ -3851,7 +3849,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCCheckFriendship_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCheckFriendship_Response")]
   public partial class CMsgGCCheckFriendship_Response : global::ProtoBuf.IExtensible
   {
     public CMsgGCCheckFriendship_Response() {}
@@ -3865,7 +3863,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _success = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool successSpecified
     {
       get { return _success != null; }
@@ -3883,7 +3881,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _found_friendship = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool found_friendshipSpecified
     {
       get { return _found_friendship != null; }
@@ -3897,7 +3895,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgMasterSetDirectory")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgMasterSetDirectory")]
   public partial class CMsgGCMsgMasterSetDirectory : global::ProtoBuf.IExtensible
   {
     public CMsgGCMsgMasterSetDirectory() {}
@@ -3911,7 +3909,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _master_dir_index = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool master_dir_indexSpecified
     {
       get { return _master_dir_index != null; }
@@ -3927,7 +3925,7 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _dir; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"SubGC")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SubGC")]
   public partial class SubGC : global::ProtoBuf.IExtensible
   {
     public SubGC() {}
@@ -3941,7 +3939,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _dir_index = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool dir_indexSpecified
     {
       get { return _dir_index != null; }
@@ -3959,7 +3957,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool nameSpecified
     {
       get { return _name != null; }
@@ -3977,7 +3975,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _box = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool boxSpecified
     {
       get { return _box != null; }
@@ -3995,7 +3993,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _command_line = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool command_lineSpecified
     {
       get { return _command_line != null; }
@@ -4013,7 +4011,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _gc_binary = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool gc_binarySpecified
     {
       get { return _gc_binary != null; }
@@ -4032,7 +4030,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgMasterSetDirectory_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgMasterSetDirectory_Response")]
   public partial class CMsgGCMsgMasterSetDirectory_Response : global::ProtoBuf.IExtensible
   {
     public CMsgGCMsgMasterSetDirectory_Response() {}
@@ -4046,7 +4044,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _eresult = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool eresultSpecified
     {
       get { return _eresult != null; }
@@ -4060,7 +4058,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgWebAPIJobRequestForwardResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgWebAPIJobRequestForwardResponse")]
   public partial class CMsgGCMsgWebAPIJobRequestForwardResponse : global::ProtoBuf.IExtensible
   {
     public CMsgGCMsgWebAPIJobRequestForwardResponse() {}
@@ -4074,7 +4072,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _dir_index = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool dir_indexSpecified
     {
       get { return _dir_index != null; }
@@ -4088,7 +4086,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCSystemMsg_GetPurchaseTrust_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCSystemMsg_GetPurchaseTrust_Request")]
   public partial class CGCSystemMsg_GetPurchaseTrust_Request : global::ProtoBuf.IExtensible
   {
     public CGCSystemMsg_GetPurchaseTrust_Request() {}
@@ -4102,7 +4100,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -4116,7 +4114,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCSystemMsg_GetPurchaseTrust_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCSystemMsg_GetPurchaseTrust_Response")]
   public partial class CGCSystemMsg_GetPurchaseTrust_Response : global::ProtoBuf.IExtensible
   {
     public CGCSystemMsg_GetPurchaseTrust_Response() {}
@@ -4130,7 +4128,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _has_prior_purchase_history = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool has_prior_purchase_historySpecified
     {
       get { return _has_prior_purchase_history != null; }
@@ -4148,7 +4146,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _has_no_recent_password_resets = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool has_no_recent_password_resetsSpecified
     {
       get { return _has_no_recent_password_resets != null; }
@@ -4166,7 +4164,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_wallet_cash_trusted = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_wallet_cash_trustedSpecified
     {
       get { return _is_wallet_cash_trusted != null; }
@@ -4184,7 +4182,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _time_all_trusted = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool time_all_trustedSpecified
     {
       get { return _time_all_trusted != null; }
@@ -4198,7 +4196,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCHAccountVacStatusChange")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCHAccountVacStatusChange")]
   public partial class CMsgGCHAccountVacStatusChange : global::ProtoBuf.IExtensible
   {
     public CMsgGCHAccountVacStatusChange() {}
@@ -4212,7 +4210,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steam_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steam_idSpecified
     {
       get { return _steam_id != null; }
@@ -4230,7 +4228,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _app_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool app_idSpecified
     {
       get { return _app_id != null; }
@@ -4248,7 +4246,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _rtime_vacban_starts = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool rtime_vacban_startsSpecified
     {
       get { return _rtime_vacban_starts != null; }
@@ -4266,7 +4264,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_banned_now = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_banned_nowSpecified
     {
       get { return _is_banned_now != null; }
@@ -4284,7 +4282,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _is_banned_future = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_banned_futureSpecified
     {
       get { return _is_banned_future != null; }
@@ -4298,7 +4296,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetPartnerAccountLink")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetPartnerAccountLink")]
   public partial class CMsgGCGetPartnerAccountLink : global::ProtoBuf.IExtensible
   {
     public CMsgGCGetPartnerAccountLink() {}
@@ -4312,7 +4310,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -4326,7 +4324,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetPartnerAccountLink_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetPartnerAccountLink_Response")]
   public partial class CMsgGCGetPartnerAccountLink_Response : global::ProtoBuf.IExtensible
   {
     public CMsgGCGetPartnerAccountLink_Response() {}
@@ -4340,7 +4338,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _pwid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool pwidSpecified
     {
       get { return _pwid != null; }
@@ -4358,7 +4356,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _nexonid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool nexonidSpecified
     {
       get { return _nexonid != null; }
@@ -4372,7 +4370,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCRoutingInfo")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCRoutingInfo")]
   public partial class CMsgGCRoutingInfo : global::ProtoBuf.IExtensible
   {
     public CMsgGCRoutingInfo() {}
@@ -4393,7 +4391,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _method = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool methodSpecified
     {
       get { return _method != null; }
@@ -4411,7 +4409,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _fallback = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool fallbackSpecified
     {
       get { return _fallback != null; }
@@ -4429,7 +4427,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _protobuf_field = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool protobuf_fieldSpecified
     {
       get { return _protobuf_field != null; }
@@ -4447,7 +4445,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _webapi_param = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool webapi_paramSpecified
     {
       get { return _webapi_param != null; }
@@ -4481,7 +4479,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgMasterSetWebAPIRouting")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgMasterSetWebAPIRouting")]
   public partial class CMsgGCMsgMasterSetWebAPIRouting : global::ProtoBuf.IExtensible
   {
     public CMsgGCMsgMasterSetWebAPIRouting() {}
@@ -4493,7 +4491,7 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _entries; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"Entry")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Entry")]
   public partial class Entry : global::ProtoBuf.IExtensible
   {
     public Entry() {}
@@ -4507,7 +4505,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _interface_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool interface_nameSpecified
     {
       get { return _interface_name != null; }
@@ -4525,7 +4523,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _method_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool method_nameSpecified
     {
       get { return _method_name != null; }
@@ -4553,7 +4551,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgMasterSetClientMsgRouting")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgMasterSetClientMsgRouting")]
   public partial class CMsgGCMsgMasterSetClientMsgRouting : global::ProtoBuf.IExtensible
   {
     public CMsgGCMsgMasterSetClientMsgRouting() {}
@@ -4565,7 +4563,7 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _entries; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"Entry")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Entry")]
   public partial class Entry : global::ProtoBuf.IExtensible
   {
     public Entry() {}
@@ -4579,7 +4577,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _msg_type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool msg_typeSpecified
     {
       get { return _msg_type != null; }
@@ -4607,7 +4605,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgMasterSetWebAPIRouting_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgMasterSetWebAPIRouting_Response")]
   public partial class CMsgGCMsgMasterSetWebAPIRouting_Response : global::ProtoBuf.IExtensible
   {
     public CMsgGCMsgMasterSetWebAPIRouting_Response() {}
@@ -4621,7 +4619,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _eresult = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool eresultSpecified
     {
       get { return _eresult != null; }
@@ -4635,7 +4633,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgMasterSetClientMsgRouting_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgMasterSetClientMsgRouting_Response")]
   public partial class CMsgGCMsgMasterSetClientMsgRouting_Response : global::ProtoBuf.IExtensible
   {
     public CMsgGCMsgMasterSetClientMsgRouting_Response() {}
@@ -4649,7 +4647,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _eresult = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool eresultSpecified
     {
       get { return _eresult != null; }
@@ -4663,7 +4661,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgSetOptions")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgSetOptions")]
   public partial class CMsgGCMsgSetOptions : global::ProtoBuf.IExtensible
   {
     public CMsgGCMsgSetOptions() {}
@@ -4682,7 +4680,7 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _client_msg_ranges; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"MessageRange")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MessageRange")]
   public partial class MessageRange : global::ProtoBuf.IExtensible
   {
     public MessageRange() {}
@@ -4728,7 +4726,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCHUpdateSession")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCHUpdateSession")]
   public partial class CMsgGCHUpdateSession : global::ProtoBuf.IExtensible
   {
     public CMsgGCHUpdateSession() {}
@@ -4742,7 +4740,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steam_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steam_idSpecified
     {
       get { return _steam_id != null; }
@@ -4760,7 +4758,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _app_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool app_idSpecified
     {
       get { return _app_id != null; }
@@ -4778,7 +4776,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _online = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool onlineSpecified
     {
       get { return _online != null; }
@@ -4796,7 +4794,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _server_steam_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool server_steam_idSpecified
     {
       get { return _server_steam_id != null; }
@@ -4814,7 +4812,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _server_addr = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool server_addrSpecified
     {
       get { return _server_addr != null; }
@@ -4832,7 +4830,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _server_port = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool server_portSpecified
     {
       get { return _server_port != null; }
@@ -4850,7 +4848,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _os_type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool os_typeSpecified
     {
       get { return _os_type != null; }
@@ -4868,7 +4866,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _client_addr = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool client_addrSpecified
     {
       get { return _client_addr != null; }
@@ -4884,7 +4882,7 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _extra_fields; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"ExtraField")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ExtraField")]
   public partial class ExtraField : global::ProtoBuf.IExtensible
   {
     public ExtraField() {}
@@ -4898,7 +4896,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool nameSpecified
     {
       get { return _name != null; }
@@ -4916,7 +4914,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _value = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool valueSpecified
     {
       get { return _value != null; }
@@ -4935,7 +4933,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgNotificationOfSuspiciousActivity")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgNotificationOfSuspiciousActivity")]
   public partial class CMsgNotificationOfSuspiciousActivity : global::ProtoBuf.IExtensible
   {
     public CMsgNotificationOfSuspiciousActivity() {}
@@ -4949,7 +4947,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -4967,7 +4965,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -4985,7 +4983,7 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _multiple_instances; }
       set { _multiple_instances = value; }
     }
-  [global::ProtoBuf.ProtoContract(Name=@"MultipleGameInstances")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MultipleGameInstances")]
   public partial class MultipleGameInstances : global::ProtoBuf.IExtensible
   {
     public MultipleGameInstances() {}
@@ -4999,7 +4997,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _app_instance_count = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool app_instance_countSpecified
     {
       get { return _app_instance_count != null; }

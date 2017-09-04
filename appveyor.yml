@@ -20,13 +20,14 @@ init:
   - git config --global core.autocrlf true
 
 before_build:
-  - nuget restore SteamKit2\SteamKit2.sln
-  - nuget restore Samples\Samples.sln
+  - dotnet restore SteamKit2\SteamKit2.sln
+  - dotnet restore Samples\Samples.sln
+  - nuget restore Resources\NetHookAnalyzer2\NetHookAnalyzer2.sln
   - Resources\NetHook2\SetupDependencies.cmd
 
 build_script:
-  - msbuild SteamKit2\SteamKit2.sln
-  - msbuild Samples\Samples.sln
+  - dotnet build SteamKit2\SteamKit2.sln
+  - dotnet build Samples\Samples.sln
   - msbuild Resources\NetHook2\NetHook2.sln
   - msbuild Resources\NetHookAnalyzer2\NetHookAnalyzer2.sln
 

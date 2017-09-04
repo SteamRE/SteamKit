@@ -10,12 +10,10 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: dota_gcmessages_client_guild.proto
 namespace SteamKit2.GC.Dota.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildSDO")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildSDO")]
   public partial class CMsgDOTAGuildSDO : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGuildSDO() {}
@@ -29,7 +27,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_idSpecified
     {
       get { return _guild_id != null; }
@@ -47,7 +45,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool nameSpecified
     {
       get { return _name != null; }
@@ -65,7 +63,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _tag = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool tagSpecified
     {
       get { return _tag != null; }
@@ -83,7 +81,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _time_created = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool time_createdSpecified
     {
       get { return _time_created != null; }
@@ -101,7 +99,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _time_disbanded = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool time_disbandedSpecified
     {
       get { return _time_disbanded != null; }
@@ -119,7 +117,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _logo = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool logoSpecified
     {
       get { return _logo != null; }
@@ -137,7 +135,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _base_logo = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool base_logoSpecified
     {
       get { return _base_logo != null; }
@@ -155,7 +153,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _banner_logo = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool banner_logoSpecified
     {
       get { return _banner_logo != null; }
@@ -187,7 +185,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _message = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool messageSpecified
     {
       get { return _message != null; }
@@ -205,7 +203,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _incremental = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool incrementalSpecified
     {
       get { return _incremental != null; }
@@ -214,7 +212,7 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializeincremental() { return incrementalSpecified; }
     private void Resetincremental() { incrementalSpecified = false; }
     
-  [global::ProtoBuf.ProtoContract(Name=@"Member")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Member")]
   public partial class Member : global::ProtoBuf.IExtensible
   {
     public Member() {}
@@ -228,7 +226,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _account_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool account_idSpecified
     {
       get { return _account_id != null; }
@@ -246,7 +244,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _time_joined = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool time_joinedSpecified
     {
       get { return _time_joined != null; }
@@ -264,7 +262,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _role = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool roleSpecified
     {
       get { return _role != null; }
@@ -278,7 +276,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"Invitation")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Invitation")]
   public partial class Invitation : global::ProtoBuf.IExtensible
   {
     public Invitation() {}
@@ -292,7 +290,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _account_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool account_idSpecified
     {
       get { return _account_id != null; }
@@ -310,7 +308,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _time_sent = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool time_sentSpecified
     {
       get { return _time_sent != null; }
@@ -328,7 +326,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _account_id_sender = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool account_id_senderSpecified
     {
       get { return _account_id_sender != null; }
@@ -347,7 +345,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildAuditSDO")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildAuditSDO")]
   public partial class CMsgDOTAGuildAuditSDO : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGuildAuditSDO() {}
@@ -361,7 +359,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_idSpecified
     {
       get { return _guild_id != null; }
@@ -377,7 +375,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _entries; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"Entry")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Entry")]
   public partial class Entry : global::ProtoBuf.IExtensible
   {
     public Entry() {}
@@ -391,7 +389,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _event_index = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool event_indexSpecified
     {
       get { return _event_index != null; }
@@ -409,7 +407,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _timestamp = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool timestampSpecified
     {
       get { return _timestamp != null; }
@@ -427,7 +425,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _action = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool actionSpecified
     {
       get { return _action != null; }
@@ -445,7 +443,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _account_id_requestor = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool account_id_requestorSpecified
     {
       get { return _account_id_requestor != null; }
@@ -463,7 +461,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _account_id_target = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool account_id_targetSpecified
     {
       get { return _account_id_target != null; }
@@ -481,7 +479,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _reference_data_a = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool reference_data_aSpecified
     {
       get { return _reference_data_a != null; }
@@ -499,7 +497,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _reference_data_b = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool reference_data_bSpecified
     {
       get { return _reference_data_b != null; }
@@ -518,7 +516,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAAccountGuildMembershipsSDO")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAAccountGuildMembershipsSDO")]
   public partial class CMsgDOTAAccountGuildMembershipsSDO : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAAccountGuildMembershipsSDO() {}
@@ -532,7 +530,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _account_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool account_idSpecified
     {
       get { return _account_id != null; }
@@ -555,7 +553,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _invitations; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"Membership")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Membership")]
   public partial class Membership : global::ProtoBuf.IExtensible
   {
     public Membership() {}
@@ -569,7 +567,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_idSpecified
     {
       get { return _guild_id != null; }
@@ -587,7 +585,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _role = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool roleSpecified
     {
       get { return _role != null; }
@@ -601,7 +599,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"Invitation")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Invitation")]
   public partial class Invitation : global::ProtoBuf.IExtensible
   {
     public Invitation() {}
@@ -615,7 +613,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_idSpecified
     {
       get { return _guild_id != null; }
@@ -633,7 +631,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _time_sent = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool time_sentSpecified
     {
       get { return _time_sent != null; }
@@ -651,7 +649,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _account_id_sender = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool account_id_senderSpecified
     {
       get { return _account_id_sender != null; }
@@ -670,7 +668,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildCreateRequest")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildCreateRequest")]
   public partial class CMsgDOTAGuildCreateRequest : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGuildCreateRequest() {}
@@ -684,7 +682,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool nameSpecified
     {
       get { return _name != null; }
@@ -702,7 +700,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _tag = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool tagSpecified
     {
       get { return _tag != null; }
@@ -720,7 +718,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _logo = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool logoSpecified
     {
       get { return _logo != null; }
@@ -738,7 +736,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _base_logo = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool base_logoSpecified
     {
       get { return _base_logo != null; }
@@ -756,7 +754,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _banner_logo = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool banner_logoSpecified
     {
       get { return _banner_logo != null; }
@@ -770,7 +768,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildCreateResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildCreateResponse")]
   public partial class CMsgDOTAGuildCreateResponse : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGuildCreateResponse() {}
@@ -784,7 +782,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_idSpecified
     {
       get { return _guild_id != null; }
@@ -840,7 +838,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildSetAccountRoleRequest")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildSetAccountRoleRequest")]
   public partial class CMsgDOTAGuildSetAccountRoleRequest : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGuildSetAccountRoleRequest() {}
@@ -854,7 +852,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_idSpecified
     {
       get { return _guild_id != null; }
@@ -872,7 +870,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _target_account_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool target_account_idSpecified
     {
       get { return _target_account_id != null; }
@@ -890,7 +888,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _target_role = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool target_roleSpecified
     {
       get { return _target_role != null; }
@@ -904,7 +902,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildSetAccountRoleResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildSetAccountRoleResponse")]
   public partial class CMsgDOTAGuildSetAccountRoleResponse : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGuildSetAccountRoleResponse() {}
@@ -918,7 +916,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _result = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool resultSpecified
     {
       get { return _result != null; }
@@ -955,7 +953,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildInviteAccountRequest")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildInviteAccountRequest")]
   public partial class CMsgDOTAGuildInviteAccountRequest : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGuildInviteAccountRequest() {}
@@ -969,7 +967,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_idSpecified
     {
       get { return _guild_id != null; }
@@ -987,7 +985,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _target_account_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool target_account_idSpecified
     {
       get { return _target_account_id != null; }
@@ -1001,7 +999,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildInviteAccountResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildInviteAccountResponse")]
   public partial class CMsgDOTAGuildInviteAccountResponse : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGuildInviteAccountResponse() {}
@@ -1015,7 +1013,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _result = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool resultSpecified
     {
       get { return _result != null; }
@@ -1058,7 +1056,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildCancelInviteRequest")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildCancelInviteRequest")]
   public partial class CMsgDOTAGuildCancelInviteRequest : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGuildCancelInviteRequest() {}
@@ -1072,7 +1070,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_idSpecified
     {
       get { return _guild_id != null; }
@@ -1090,7 +1088,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _target_account_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool target_account_idSpecified
     {
       get { return _target_account_id != null; }
@@ -1104,7 +1102,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildCancelInviteResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildCancelInviteResponse")]
   public partial class CMsgDOTAGuildCancelInviteResponse : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGuildCancelInviteResponse() {}
@@ -1118,7 +1116,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _result = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool resultSpecified
     {
       get { return _result != null; }
@@ -1146,7 +1144,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildUpdateDetailsRequest")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildUpdateDetailsRequest")]
   public partial class CMsgDOTAGuildUpdateDetailsRequest : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGuildUpdateDetailsRequest() {}
@@ -1160,7 +1158,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_idSpecified
     {
       get { return _guild_id != null; }
@@ -1178,7 +1176,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _logo = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool logoSpecified
     {
       get { return _logo != null; }
@@ -1196,7 +1194,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _base_logo = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool base_logoSpecified
     {
       get { return _base_logo != null; }
@@ -1214,7 +1212,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _banner_logo = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool banner_logoSpecified
     {
       get { return _banner_logo != null; }
@@ -1228,7 +1226,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildUpdateDetailsResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildUpdateDetailsResponse")]
   public partial class CMsgDOTAGuildUpdateDetailsResponse : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGuildUpdateDetailsResponse() {}
@@ -1242,7 +1240,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _result = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool resultSpecified
     {
       get { return _result != null; }
@@ -1270,7 +1268,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGCToGCUpdateOpenGuildPartyRequest")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGCToGCUpdateOpenGuildPartyRequest")]
   public partial class CMsgDOTAGCToGCUpdateOpenGuildPartyRequest : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGCToGCUpdateOpenGuildPartyRequest() {}
@@ -1284,7 +1282,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _party_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool party_idSpecified
     {
       get { return _party_id != null; }
@@ -1302,7 +1300,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_idSpecified
     {
       get { return _guild_id != null; }
@@ -1327,7 +1325,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _description = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool descriptionSpecified
     {
       get { return _description != null; }
@@ -1341,7 +1339,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGCToGCUpdateOpenGuildPartyResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGCToGCUpdateOpenGuildPartyResponse")]
   public partial class CMsgDOTAGCToGCUpdateOpenGuildPartyResponse : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGCToGCUpdateOpenGuildPartyResponse() {}
@@ -1355,7 +1353,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _maintain_association = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool maintain_associationSpecified
     {
       get { return _maintain_association != null; }
@@ -1369,7 +1367,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGCToGCDestroyOpenGuildPartyRequest")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGCToGCDestroyOpenGuildPartyRequest")]
   public partial class CMsgDOTAGCToGCDestroyOpenGuildPartyRequest : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGCToGCDestroyOpenGuildPartyRequest() {}
@@ -1383,7 +1381,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _party_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool party_idSpecified
     {
       get { return _party_id != null; }
@@ -1401,7 +1399,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_idSpecified
     {
       get { return _guild_id != null; }
@@ -1415,7 +1413,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGCToGCDestroyOpenGuildPartyResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGCToGCDestroyOpenGuildPartyResponse")]
   public partial class CMsgDOTAGCToGCDestroyOpenGuildPartyResponse : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGCToGCDestroyOpenGuildPartyResponse() {}
@@ -1425,7 +1423,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAPartySetOpenGuildRequest")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAPartySetOpenGuildRequest")]
   public partial class CMsgDOTAPartySetOpenGuildRequest : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAPartySetOpenGuildRequest() {}
@@ -1439,7 +1437,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_idSpecified
     {
       get { return _guild_id != null; }
@@ -1457,7 +1455,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _description = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool descriptionSpecified
     {
       get { return _description != null; }
@@ -1471,7 +1469,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAPartySetOpenGuildResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAPartySetOpenGuildResponse")]
   public partial class CMsgDOTAPartySetOpenGuildResponse : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAPartySetOpenGuildResponse() {}
@@ -1485,7 +1483,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _result = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool resultSpecified
     {
       get { return _result != null; }
@@ -1510,7 +1508,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAJoinOpenGuildPartyRequest")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAJoinOpenGuildPartyRequest")]
   public partial class CMsgDOTAJoinOpenGuildPartyRequest : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAJoinOpenGuildPartyRequest() {}
@@ -1524,7 +1522,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _party_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool party_idSpecified
     {
       get { return _party_id != null; }
@@ -1538,7 +1536,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAJoinOpenGuildPartyResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAJoinOpenGuildPartyResponse")]
   public partial class CMsgDOTAJoinOpenGuildPartyResponse : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAJoinOpenGuildPartyResponse() {}
@@ -1552,7 +1550,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _result = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool resultSpecified
     {
       get { return _result != null; }
@@ -1577,7 +1575,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildOpenPartyRefresh")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildOpenPartyRefresh")]
   public partial class CMsgDOTAGuildOpenPartyRefresh : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGuildOpenPartyRefresh() {}
@@ -1591,7 +1589,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_idSpecified
     {
       get { return _guild_id != null; }
@@ -1607,7 +1605,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _open_parties; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"OpenParty")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"OpenParty")]
   public partial class OpenParty : global::ProtoBuf.IExtensible
   {
     public OpenParty() {}
@@ -1621,7 +1619,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _party_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool party_idSpecified
     {
       get { return _party_id != null; }
@@ -1646,7 +1644,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _time_created = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool time_createdSpecified
     {
       get { return _time_created != null; }
@@ -1664,7 +1662,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _description = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool descriptionSpecified
     {
       get { return _description != null; }
@@ -1683,7 +1681,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTARequestGuildData")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTARequestGuildData")]
   public partial class CMsgDOTARequestGuildData : global::ProtoBuf.IExtensible
   {
     public CMsgDOTARequestGuildData() {}
@@ -1693,7 +1691,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildInviteData")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildInviteData")]
   public partial class CMsgDOTAGuildInviteData : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGuildInviteData() {}
@@ -1707,7 +1705,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _invited_to_guild = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool invited_to_guildSpecified
     {
       get { return _invited_to_guild != null; }
@@ -1725,7 +1723,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_idSpecified
     {
       get { return _guild_id != null; }
@@ -1743,7 +1741,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_nameSpecified
     {
       get { return _guild_name != null; }
@@ -1761,7 +1759,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_tag = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_tagSpecified
     {
       get { return _guild_tag != null; }
@@ -1779,7 +1777,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _logo = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool logoSpecified
     {
       get { return _logo != null; }
@@ -1797,7 +1795,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _inviter = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool inviterSpecified
     {
       get { return _inviter != null; }
@@ -1815,7 +1813,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _inviter_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool inviter_nameSpecified
     {
       get { return _inviter_name != null; }
@@ -1833,7 +1831,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _member_count = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool member_countSpecified
     {
       get { return _member_count != null; }
@@ -1847,7 +1845,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildUpdateMessage")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildUpdateMessage")]
   public partial class CMsgDOTAGuildUpdateMessage : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGuildUpdateMessage() {}
@@ -1861,7 +1859,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _message = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool messageSpecified
     {
       get { return _message != null; }
@@ -1879,7 +1877,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_idSpecified
     {
       get { return _guild_id != null; }
@@ -1893,7 +1891,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildEditLogoRequest")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildEditLogoRequest")]
   public partial class CMsgDOTAGuildEditLogoRequest : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGuildEditLogoRequest() {}
@@ -1907,7 +1905,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_idSpecified
     {
       get { return _guild_id != null; }
@@ -1925,7 +1923,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _logo = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool logoSpecified
     {
       get { return _logo != null; }
@@ -1939,7 +1937,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildEditLogoResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildEditLogoResponse")]
   public partial class CMsgDOTAGuildEditLogoResponse : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAGuildEditLogoResponse() {}
@@ -1953,7 +1951,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _guild_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool guild_idSpecified
     {
       get { return _guild_id != null; }
@@ -1971,7 +1969,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _result = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool resultSpecified
     {
       get { return _result != null; }

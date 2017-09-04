@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: engine_gcmessages.proto
 // Note: requires additional types generated from: google/protobuf/descriptor.proto
 namespace SteamKit2.GC.CSGO.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"CEngineGotvSyncPacket")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CEngineGotvSyncPacket")]
   public partial class CEngineGotvSyncPacket : global::ProtoBuf.IExtensible
   {
     public CEngineGotvSyncPacket() {}
@@ -30,7 +28,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _match_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool match_idSpecified
     {
       get { return _match_id != null; }
@@ -48,7 +46,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _instance_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool instance_idSpecified
     {
       get { return _instance_id != null; }
@@ -66,7 +64,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _signupfragment = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool signupfragmentSpecified
     {
       get { return _signupfragment != null; }
@@ -84,7 +82,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _currentfragment = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool currentfragmentSpecified
     {
       get { return _currentfragment != null; }
@@ -102,7 +100,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _tickrate = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool tickrateSpecified
     {
       get { return _tickrate != null; }
@@ -120,7 +118,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _tick = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool tickSpecified
     {
       get { return _tick != null; }
@@ -138,7 +136,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _rtdelay = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool rtdelaySpecified
     {
       get { return _rtdelay != null; }
@@ -156,7 +154,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _rcvage = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool rcvageSpecified
     {
       get { return _rcvage != null; }
@@ -174,7 +172,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _keyframe_interval = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool keyframe_intervalSpecified
     {
       get { return _keyframe_interval != null; }

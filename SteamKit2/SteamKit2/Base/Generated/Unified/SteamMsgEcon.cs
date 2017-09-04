@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: steammessages_econ.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"CEcon_ClientGetItemShopOverlayAuthURL_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CEcon_ClientGetItemShopOverlayAuthURL_Request")]
   public partial class CEcon_ClientGetItemShopOverlayAuthURL_Request : global::ProtoBuf.IExtensible
   {
     public CEcon_ClientGetItemShopOverlayAuthURL_Request() {}
@@ -30,7 +28,7 @@ namespace SteamKit2.Unified.Internal
       set { _return_url = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool return_urlSpecified
     {
       get { return _return_url != null; }
@@ -44,7 +42,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CEcon_ClientGetItemShopOverlayAuthURL_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CEcon_ClientGetItemShopOverlayAuthURL_Response")]
   public partial class CEcon_ClientGetItemShopOverlayAuthURL_Response : global::ProtoBuf.IExtensible
   {
     public CEcon_ClientGetItemShopOverlayAuthURL_Response() {}
@@ -58,7 +56,7 @@ namespace SteamKit2.Unified.Internal
       set { _url = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool urlSpecified
     {
       get { return _url != null; }

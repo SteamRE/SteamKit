@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: steammessages_oauth.steamworkssdk.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamworkssdk.proto
 namespace SteamKit2.Unified.Internal.Steamworks
 {
-  [global::ProtoBuf.ProtoContract(Name=@"COAuthToken_ImplicitGrantNoPrompt_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"COAuthToken_ImplicitGrantNoPrompt_Request")]
   public partial class COAuthToken_ImplicitGrantNoPrompt_Request : global::ProtoBuf.IExtensible
   {
     public COAuthToken_ImplicitGrantNoPrompt_Request() {}
@@ -30,7 +28,7 @@ namespace SteamKit2.Unified.Internal.Steamworks
       set { _clientid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool clientidSpecified
     {
       get { return _clientid != null; }
@@ -44,7 +42,7 @@ namespace SteamKit2.Unified.Internal.Steamworks
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"COAuthToken_ImplicitGrantNoPrompt_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"COAuthToken_ImplicitGrantNoPrompt_Response")]
   public partial class COAuthToken_ImplicitGrantNoPrompt_Response : global::ProtoBuf.IExtensible
   {
     public COAuthToken_ImplicitGrantNoPrompt_Response() {}
@@ -58,7 +56,7 @@ namespace SteamKit2.Unified.Internal.Steamworks
       set { _access_token = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool access_tokenSpecified
     {
       get { return _access_token != null; }
@@ -76,7 +74,7 @@ namespace SteamKit2.Unified.Internal.Steamworks
       set { _redirect_uri = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool redirect_uriSpecified
     {
       get { return _redirect_uri != null; }

@@ -8,10 +8,6 @@ using SteamKit2.Util;
 using SteamKit2.Util.MacHelpers;
 using Microsoft.Win32;
 
-#if NETSTANDARD1_3
-using System.Runtime.InteropServices;
-#endif
-
 using static SteamKit2.Util.MacHelpers.LibC;
 using static SteamKit2.Util.MacHelpers.CoreFoundation;
 using static SteamKit2.Util.MacHelpers.DiskArbitration;
@@ -23,20 +19,6 @@ namespace SteamKit2
     {
         public static MachineInfoProvider GetProvider()
         {
-#if NETSTANDARD1_3
-            if ( RuntimeInformation.IsOSPlatform( OSPlatform.Windows ) )
-            {
-                return new WindowsInfoProvider();
-            }
-            else if ( RuntimeInformation.IsOSPlatform( OSPlatform.OSX ) )
-            {
-                return new OSXInfoProvider();
-            }
-            else if ( RuntimeInformation.IsOSPlatform( OSPlatform.Linux ) )
-            {
-                return new LinuxInfoProvider();
-            }
-#elif NET46
             switch ( Environment.OSVersion.Platform )
             {
                 case PlatformID.Win32NT:
@@ -44,7 +26,7 @@ namespace SteamKit2
                     return new WindowsInfoProvider();
 
                 case PlatformID.Unix:
-                    if ( Utils.IsRunningOnDarwin() )
+                    if ( Utils.IsMacOS() )
                     {
                         return new OSXInfoProvider();
                     }
@@ -53,9 +35,6 @@ namespace SteamKit2
                         return new LinuxInfoProvider();
                     }
             }
-#else
-#error Unknown Target Platform
-#endif
 
             return new DefaultInfoProvider();
         }
@@ -69,13 +48,7 @@ namespace SteamKit2
     {
         public override byte[] GetMachineGuid()
         {
-#if NETSTANDARD1_3
-            return Encoding.UTF8.GetBytes( "SteamKit2-MachineID" );
-#elif NET46
             return Encoding.UTF8.GetBytes( Environment.MachineName + "-SteamKit" );
-#else
-#error Unknown Target Platform
-#endif
         }
 
         public override byte[] GetMacAddress()
@@ -106,9 +79,6 @@ namespace SteamKit2
     {
         public override byte[] GetMachineGuid()
         {
-#if NETSTANDARD1_3
-            return base.GetMachineGuid();
-#elif NET46
             RegistryKey localKey = RegistryKey
                 .OpenBaseKey( Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry64 )
                 .OpenSubKey( @"SOFTWARE\Microsoft\Cryptography" );
@@ -126,9 +96,6 @@ namespace SteamKit2
             }
 
             return Encoding.UTF8.GetBytes( guid.ToString() );
-#else
-#error Unknown Target Platform
-#endif
         }
 
         public override byte[] GetDiskId()

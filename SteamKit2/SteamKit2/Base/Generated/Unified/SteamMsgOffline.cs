@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: steammessages_offline.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"COffline_GetOfflineLogonTicket_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"COffline_GetOfflineLogonTicket_Request")]
   public partial class COffline_GetOfflineLogonTicket_Request : global::ProtoBuf.IExtensible
   {
     public COffline_GetOfflineLogonTicket_Request() {}
@@ -30,7 +28,7 @@ namespace SteamKit2.Unified.Internal
       set { _priority = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool prioritySpecified
     {
       get { return _priority != null; }
@@ -44,7 +42,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"COffline_GetOfflineLogonTicket_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"COffline_GetOfflineLogonTicket_Response")]
   public partial class COffline_GetOfflineLogonTicket_Response : global::ProtoBuf.IExtensible
   {
     public COffline_GetOfflineLogonTicket_Response() {}
@@ -58,7 +56,7 @@ namespace SteamKit2.Unified.Internal
       set { _serialized_ticket = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool serialized_ticketSpecified
     {
       get { return _serialized_ticket != null; }
@@ -76,7 +74,7 @@ namespace SteamKit2.Unified.Internal
       set { _signature = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool signatureSpecified
     {
       get { return _signature != null; }
@@ -90,7 +88,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"COffline_GetUnsignedOfflineLogonTicket_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"COffline_GetUnsignedOfflineLogonTicket_Request")]
   public partial class COffline_GetUnsignedOfflineLogonTicket_Request : global::ProtoBuf.IExtensible
   {
     public COffline_GetUnsignedOfflineLogonTicket_Request() {}
@@ -100,7 +98,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"COffline_OfflineLogonTicket")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"COffline_OfflineLogonTicket")]
   public partial class COffline_OfflineLogonTicket : global::ProtoBuf.IExtensible
   {
     public COffline_OfflineLogonTicket() {}
@@ -114,7 +112,7 @@ namespace SteamKit2.Unified.Internal
       set { _accountid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool accountidSpecified
     {
       get { return _accountid != null; }
@@ -132,7 +130,7 @@ namespace SteamKit2.Unified.Internal
       set { _rtime32_creation_time = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool rtime32_creation_timeSpecified
     {
       get { return _rtime32_creation_time != null; }
@@ -146,7 +144,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"COffline_GetUnsignedOfflineLogonTicket_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"COffline_GetUnsignedOfflineLogonTicket_Response")]
   public partial class COffline_GetUnsignedOfflineLogonTicket_Response : global::ProtoBuf.IExtensible
   {
     public COffline_GetUnsignedOfflineLogonTicket_Response() {}

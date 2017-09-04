@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: steammessages_gamenotifications.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_Variable")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_Variable")]
   public partial class CGameNotifications_Variable : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_Variable() {}
@@ -30,7 +28,7 @@ namespace SteamKit2.Unified.Internal
       set { _key = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool keySpecified
     {
       get { return _key != null; }
@@ -48,7 +46,7 @@ namespace SteamKit2.Unified.Internal
       set { _value = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool valueSpecified
     {
       get { return _value != null; }
@@ -62,7 +60,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_LocalizedText")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_LocalizedText")]
   public partial class CGameNotifications_LocalizedText : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_LocalizedText() {}
@@ -76,7 +74,7 @@ namespace SteamKit2.Unified.Internal
       set { _token = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool tokenSpecified
     {
       get { return _token != null; }
@@ -101,7 +99,7 @@ namespace SteamKit2.Unified.Internal
       set { _rendered_text = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool rendered_textSpecified
     {
       get { return _rendered_text != null; }
@@ -115,7 +113,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UserStatus")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UserStatus")]
   public partial class CGameNotifications_UserStatus : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_UserStatus() {}
@@ -129,7 +127,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -147,7 +145,7 @@ namespace SteamKit2.Unified.Internal
       set { _state = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool stateSpecified
     {
       get { return _state != null; }
@@ -179,7 +177,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_CreateSession_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_CreateSession_Request")]
   public partial class CGameNotifications_CreateSession_Request : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_CreateSession_Request() {}
@@ -193,7 +191,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -211,7 +209,7 @@ namespace SteamKit2.Unified.Internal
       set { _context = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool contextSpecified
     {
       get { return _context != null; }
@@ -245,7 +243,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -259,7 +257,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_CreateSession_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_CreateSession_Response")]
   public partial class CGameNotifications_CreateSession_Response : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_CreateSession_Response() {}
@@ -273,7 +271,7 @@ namespace SteamKit2.Unified.Internal
       set { _sessionid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sessionidSpecified
     {
       get { return _sessionid != null; }
@@ -287,7 +285,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_DeleteSession_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_DeleteSession_Request")]
   public partial class CGameNotifications_DeleteSession_Request : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_DeleteSession_Request() {}
@@ -301,7 +299,7 @@ namespace SteamKit2.Unified.Internal
       set { _sessionid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sessionidSpecified
     {
       get { return _sessionid != null; }
@@ -319,7 +317,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -337,7 +335,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -351,7 +349,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_DeleteSession_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_DeleteSession_Response")]
   public partial class CGameNotifications_DeleteSession_Response : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_DeleteSession_Response() {}
@@ -361,7 +359,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UpdateSession_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UpdateSession_Request")]
   public partial class CGameNotifications_UpdateSession_Request : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_UpdateSession_Request() {}
@@ -375,7 +373,7 @@ namespace SteamKit2.Unified.Internal
       set { _sessionid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sessionidSpecified
     {
       get { return _sessionid != null; }
@@ -393,7 +391,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -427,7 +425,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -441,7 +439,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UpdateSession_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UpdateSession_Response")]
   public partial class CGameNotifications_UpdateSession_Response : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_UpdateSession_Response() {}
@@ -451,7 +449,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_EnumerateSessions_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_EnumerateSessions_Request")]
   public partial class CGameNotifications_EnumerateSessions_Request : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_EnumerateSessions_Request() {}
@@ -465,7 +463,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -483,7 +481,7 @@ namespace SteamKit2.Unified.Internal
       set { _include_all_user_messages = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool include_all_user_messagesSpecified
     {
       get { return _include_all_user_messages != null; }
@@ -501,7 +499,7 @@ namespace SteamKit2.Unified.Internal
       set { _include_auth_user_message = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool include_auth_user_messageSpecified
     {
       get { return _include_auth_user_message != null; }
@@ -519,7 +517,7 @@ namespace SteamKit2.Unified.Internal
       set { _language = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool languageSpecified
     {
       get { return _language != null; }
@@ -533,7 +531,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_Session")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_Session")]
   public partial class CGameNotifications_Session : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_Session() {}
@@ -547,7 +545,7 @@ namespace SteamKit2.Unified.Internal
       set { _sessionid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sessionidSpecified
     {
       get { return _sessionid != null; }
@@ -565,7 +563,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -583,7 +581,7 @@ namespace SteamKit2.Unified.Internal
       set { _context = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool contextSpecified
     {
       get { return _context != null; }
@@ -610,7 +608,7 @@ namespace SteamKit2.Unified.Internal
       set { _time_created = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool time_createdSpecified
     {
       get { return _time_created != null; }
@@ -628,7 +626,7 @@ namespace SteamKit2.Unified.Internal
       set { _time_updated = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool time_updatedSpecified
     {
       get { return _time_updated != null; }
@@ -649,7 +647,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_EnumerateSessions_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_EnumerateSessions_Response")]
   public partial class CGameNotifications_EnumerateSessions_Response : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_EnumerateSessions_Response() {}
@@ -666,7 +664,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_GetSessionDetails_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_GetSessionDetails_Request")]
   public partial class CGameNotifications_GetSessionDetails_Request : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_GetSessionDetails_Request() {}
@@ -687,7 +685,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -705,7 +703,7 @@ namespace SteamKit2.Unified.Internal
       set { _language = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool languageSpecified
     {
       get { return _language != null; }
@@ -714,7 +712,7 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializelanguage() { return languageSpecified; }
     private void Resetlanguage() { languageSpecified = false; }
     
-  [global::ProtoBuf.ProtoContract(Name=@"RequestedSession")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestedSession")]
   public partial class RequestedSession : global::ProtoBuf.IExtensible
   {
     public RequestedSession() {}
@@ -728,7 +726,7 @@ namespace SteamKit2.Unified.Internal
       set { _sessionid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sessionidSpecified
     {
       get { return _sessionid != null; }
@@ -746,7 +744,7 @@ namespace SteamKit2.Unified.Internal
       set { _include_auth_user_message = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool include_auth_user_messageSpecified
     {
       get { return _include_auth_user_message != null; }
@@ -765,7 +763,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_GetSessionDetails_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_GetSessionDetails_Response")]
   public partial class CGameNotifications_GetSessionDetails_Response : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_GetSessionDetails_Response() {}
@@ -782,7 +780,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"GameNotificationSettings")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"GameNotificationSettings")]
   public partial class GameNotificationSettings : global::ProtoBuf.IExtensible
   {
     public GameNotificationSettings() {}
@@ -796,7 +794,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -814,7 +812,7 @@ namespace SteamKit2.Unified.Internal
       set { _allow_notifications = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool allow_notificationsSpecified
     {
       get { return _allow_notifications != null; }
@@ -828,7 +826,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UpdateNotificationSettings_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UpdateNotificationSettings_Request")]
   public partial class CGameNotifications_UpdateNotificationSettings_Request : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_UpdateNotificationSettings_Request() {}
@@ -845,7 +843,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UpdateNotificationSettings_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UpdateNotificationSettings_Response")]
   public partial class CGameNotifications_UpdateNotificationSettings_Response : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_UpdateNotificationSettings_Response() {}
@@ -855,7 +853,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_OnNotificationsRequested_Notification")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_OnNotificationsRequested_Notification")]
   public partial class CGameNotifications_OnNotificationsRequested_Notification : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_OnNotificationsRequested_Notification() {}
@@ -869,7 +867,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -887,7 +885,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -901,7 +899,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_OnUserStatusChanged_Notification")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_OnUserStatusChanged_Notification")]
   public partial class CGameNotifications_OnUserStatusChanged_Notification : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_OnUserStatusChanged_Notification() {}
@@ -915,7 +913,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -933,7 +931,7 @@ namespace SteamKit2.Unified.Internal
       set { _sessionid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sessionidSpecified
     {
       get { return _sessionid != null; }
@@ -951,7 +949,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -978,7 +976,7 @@ namespace SteamKit2.Unified.Internal
       set { _removed = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool removedSpecified
     {
       get { return _removed != null; }

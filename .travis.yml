@@ -3,7 +3,7 @@ dist: trusty
 
 language: csharp
 mono: none
-dotnet: 1.0.1
+dotnet: 2.0.0
 
 solution: SteamKit2/SteamKit2.sln
 
@@ -12,11 +12,11 @@ install:
     - dotnet restore Samples/Samples.sln
 
 script:
-    - dotnet build -f netstandard1.3 SteamKit2/SteamKit2/SteamKit2.csproj
-    - dotnet build -f netcoreapp1.1 SteamKit2/Tests/Tests.csproj
-    - dotnet build -f netcoreapp1.1 Resources/SteamLanguageParser/SteamLanguageParser.csproj
-    - dotnet build -f netcoreapp1.1 Samples/Samples.sln
-    - dotnet test -f netcoreapp1.1 SteamKit2/Tests/Tests.csproj
+    - dotnet build SteamKit2/SteamKit2/SteamKit2.csproj
+    - dotnet build SteamKit2/Tests/Tests.csproj
+    - dotnet build Resources/SteamLanguageParser/SteamLanguageParser.csproj
+    - dotnet build Samples/Samples.sln
+    - dotnet test SteamKit2/Tests/Tests.csproj
 
 notifications:
     irc:

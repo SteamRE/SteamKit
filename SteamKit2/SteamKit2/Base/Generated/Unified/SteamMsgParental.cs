@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: steammessages_parental.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"ParentalApp")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ParentalApp")]
   public partial class ParentalApp : global::ProtoBuf.IExtensible
   {
     public ParentalApp() {}
@@ -30,7 +28,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -48,7 +46,7 @@ namespace SteamKit2.Unified.Internal
       set { _is_allowed = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_allowedSpecified
     {
       get { return _is_allowed != null; }
@@ -62,7 +60,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"ParentalSettings")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ParentalSettings")]
   public partial class ParentalSettings : global::ProtoBuf.IExtensible
   {
     public ParentalSettings() {}
@@ -76,7 +74,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -94,7 +92,7 @@ namespace SteamKit2.Unified.Internal
       set { _applist_base_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool applist_base_idSpecified
     {
       get { return _applist_base_id != null; }
@@ -112,7 +110,7 @@ namespace SteamKit2.Unified.Internal
       set { _applist_base_description = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool applist_base_descriptionSpecified
     {
       get { return _applist_base_description != null; }
@@ -144,7 +142,7 @@ namespace SteamKit2.Unified.Internal
       set { _passwordhashtype = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool passwordhashtypeSpecified
     {
       get { return _passwordhashtype != null; }
@@ -162,7 +160,7 @@ namespace SteamKit2.Unified.Internal
       set { _salt = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool saltSpecified
     {
       get { return _salt != null; }
@@ -180,7 +178,7 @@ namespace SteamKit2.Unified.Internal
       set { _passwordhash = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool passwordhashSpecified
     {
       get { return _passwordhash != null; }
@@ -198,7 +196,7 @@ namespace SteamKit2.Unified.Internal
       set { _is_enabled = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_enabledSpecified
     {
       get { return _is_enabled != null; }
@@ -216,7 +214,7 @@ namespace SteamKit2.Unified.Internal
       set { _enabled_features = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool enabled_featuresSpecified
     {
       get { return _enabled_features != null; }
@@ -234,7 +232,7 @@ namespace SteamKit2.Unified.Internal
       set { _recovery_email = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool recovery_emailSpecified
     {
       get { return _recovery_email != null; }
@@ -248,7 +246,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_EnableParentalSettings_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_EnableParentalSettings_Request")]
   public partial class CParental_EnableParentalSettings_Request : global::ProtoBuf.IExtensible
   {
     public CParental_EnableParentalSettings_Request() {}
@@ -262,7 +260,7 @@ namespace SteamKit2.Unified.Internal
       set { _password = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool passwordSpecified
     {
       get { return _password != null; }
@@ -289,7 +287,7 @@ namespace SteamKit2.Unified.Internal
       set { _sessionid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sessionidSpecified
     {
       get { return _sessionid != null; }
@@ -307,7 +305,7 @@ namespace SteamKit2.Unified.Internal
       set { _enablecode = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool enablecodeSpecified
     {
       get { return _enablecode != null; }
@@ -325,7 +323,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -339,7 +337,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_EnableParentalSettings_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_EnableParentalSettings_Response")]
   public partial class CParental_EnableParentalSettings_Response : global::ProtoBuf.IExtensible
   {
     public CParental_EnableParentalSettings_Response() {}
@@ -349,7 +347,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_DisableParentalSettings_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_DisableParentalSettings_Request")]
   public partial class CParental_DisableParentalSettings_Request : global::ProtoBuf.IExtensible
   {
     public CParental_DisableParentalSettings_Request() {}
@@ -363,7 +361,7 @@ namespace SteamKit2.Unified.Internal
       set { _password = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool passwordSpecified
     {
       get { return _password != null; }
@@ -381,7 +379,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -395,7 +393,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_DisableParentalSettings_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_DisableParentalSettings_Response")]
   public partial class CParental_DisableParentalSettings_Response : global::ProtoBuf.IExtensible
   {
     public CParental_DisableParentalSettings_Response() {}
@@ -405,7 +403,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_GetParentalSettings_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_GetParentalSettings_Request")]
   public partial class CParental_GetParentalSettings_Request : global::ProtoBuf.IExtensible
   {
     public CParental_GetParentalSettings_Request() {}
@@ -419,7 +417,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -433,7 +431,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_GetParentalSettings_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_GetParentalSettings_Response")]
   public partial class CParental_GetParentalSettings_Response : global::ProtoBuf.IExtensible
   {
     public CParental_GetParentalSettings_Response() {}
@@ -452,7 +450,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_GetSignedParentalSettings_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_GetSignedParentalSettings_Request")]
   public partial class CParental_GetSignedParentalSettings_Request : global::ProtoBuf.IExtensible
   {
     public CParental_GetSignedParentalSettings_Request() {}
@@ -466,7 +464,7 @@ namespace SteamKit2.Unified.Internal
       set { _priority = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool prioritySpecified
     {
       get { return _priority != null; }
@@ -480,7 +478,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_GetSignedParentalSettings_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_GetSignedParentalSettings_Response")]
   public partial class CParental_GetSignedParentalSettings_Response : global::ProtoBuf.IExtensible
   {
     public CParental_GetSignedParentalSettings_Response() {}
@@ -494,7 +492,7 @@ namespace SteamKit2.Unified.Internal
       set { _serialized_settings = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool serialized_settingsSpecified
     {
       get { return _serialized_settings != null; }
@@ -512,7 +510,7 @@ namespace SteamKit2.Unified.Internal
       set { _signature = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool signatureSpecified
     {
       get { return _signature != null; }
@@ -526,7 +524,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_SetParentalSettings_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_SetParentalSettings_Request")]
   public partial class CParental_SetParentalSettings_Request : global::ProtoBuf.IExtensible
   {
     public CParental_SetParentalSettings_Request() {}
@@ -540,7 +538,7 @@ namespace SteamKit2.Unified.Internal
       set { _password = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool passwordSpecified
     {
       get { return _password != null; }
@@ -567,7 +565,7 @@ namespace SteamKit2.Unified.Internal
       set { _new_password = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool new_passwordSpecified
     {
       get { return _new_password != null; }
@@ -585,7 +583,7 @@ namespace SteamKit2.Unified.Internal
       set { _sessionid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sessionidSpecified
     {
       get { return _sessionid != null; }
@@ -603,7 +601,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -617,7 +615,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_SetParentalSettings_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_SetParentalSettings_Response")]
   public partial class CParental_SetParentalSettings_Response : global::ProtoBuf.IExtensible
   {
     public CParental_SetParentalSettings_Response() {}
@@ -627,7 +625,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_ValidateToken_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ValidateToken_Request")]
   public partial class CParental_ValidateToken_Request : global::ProtoBuf.IExtensible
   {
     public CParental_ValidateToken_Request() {}
@@ -641,7 +639,7 @@ namespace SteamKit2.Unified.Internal
       set { _unlock_token = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool unlock_tokenSpecified
     {
       get { return _unlock_token != null; }
@@ -655,7 +653,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_ValidateToken_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ValidateToken_Response")]
   public partial class CParental_ValidateToken_Response : global::ProtoBuf.IExtensible
   {
     public CParental_ValidateToken_Response() {}
@@ -665,7 +663,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_ValidatePassword_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ValidatePassword_Request")]
   public partial class CParental_ValidatePassword_Request : global::ProtoBuf.IExtensible
   {
     public CParental_ValidatePassword_Request() {}
@@ -679,7 +677,7 @@ namespace SteamKit2.Unified.Internal
       set { _password = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool passwordSpecified
     {
       get { return _password != null; }
@@ -697,7 +695,7 @@ namespace SteamKit2.Unified.Internal
       set { _session = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sessionSpecified
     {
       get { return _session != null; }
@@ -715,7 +713,7 @@ namespace SteamKit2.Unified.Internal
       set { _send_unlock_on_success = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool send_unlock_on_successSpecified
     {
       get { return _send_unlock_on_success != null; }
@@ -729,7 +727,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_ValidatePassword_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ValidatePassword_Response")]
   public partial class CParental_ValidatePassword_Response : global::ProtoBuf.IExtensible
   {
     public CParental_ValidatePassword_Response() {}
@@ -743,7 +741,7 @@ namespace SteamKit2.Unified.Internal
       set { _token = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool tokenSpecified
     {
       get { return _token != null; }
@@ -757,7 +755,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_LockClient_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_LockClient_Request")]
   public partial class CParental_LockClient_Request : global::ProtoBuf.IExtensible
   {
     public CParental_LockClient_Request() {}
@@ -771,7 +769,7 @@ namespace SteamKit2.Unified.Internal
       set { _session = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sessionSpecified
     {
       get { return _session != null; }
@@ -785,7 +783,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_LockClient_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_LockClient_Response")]
   public partial class CParental_LockClient_Response : global::ProtoBuf.IExtensible
   {
     public CParental_LockClient_Response() {}
@@ -795,7 +793,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_RequestRecoveryCode_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_RequestRecoveryCode_Request")]
   public partial class CParental_RequestRecoveryCode_Request : global::ProtoBuf.IExtensible
   {
     public CParental_RequestRecoveryCode_Request() {}
@@ -805,7 +803,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_RequestRecoveryCode_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_RequestRecoveryCode_Response")]
   public partial class CParental_RequestRecoveryCode_Response : global::ProtoBuf.IExtensible
   {
     public CParental_RequestRecoveryCode_Response() {}
@@ -815,7 +813,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_DisableWithRecoveryCode_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_DisableWithRecoveryCode_Request")]
   public partial class CParental_DisableWithRecoveryCode_Request : global::ProtoBuf.IExtensible
   {
     public CParental_DisableWithRecoveryCode_Request() {}
@@ -829,7 +827,7 @@ namespace SteamKit2.Unified.Internal
       set { _recovery_code = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool recovery_codeSpecified
     {
       get { return _recovery_code != null; }
@@ -847,7 +845,7 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -861,7 +859,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_DisableWithRecoveryCode_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_DisableWithRecoveryCode_Response")]
   public partial class CParental_DisableWithRecoveryCode_Response : global::ProtoBuf.IExtensible
   {
     public CParental_DisableWithRecoveryCode_Response() {}
@@ -871,7 +869,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_ParentalSettingsChange_Notification")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ParentalSettingsChange_Notification")]
   public partial class CParental_ParentalSettingsChange_Notification : global::ProtoBuf.IExtensible
   {
     public CParental_ParentalSettingsChange_Notification() {}
@@ -885,7 +883,7 @@ namespace SteamKit2.Unified.Internal
       set { _serialized_settings = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool serialized_settingsSpecified
     {
       get { return _serialized_settings != null; }
@@ -903,7 +901,7 @@ namespace SteamKit2.Unified.Internal
       set { _signature = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool signatureSpecified
     {
       get { return _signature != null; }
@@ -921,7 +919,7 @@ namespace SteamKit2.Unified.Internal
       set { _password = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool passwordSpecified
     {
       get { return _password != null; }
@@ -939,7 +937,7 @@ namespace SteamKit2.Unified.Internal
       set { _sessionid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sessionidSpecified
     {
       get { return _sessionid != null; }
@@ -953,7 +951,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_ParentalUnlock_Notification")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ParentalUnlock_Notification")]
   public partial class CParental_ParentalUnlock_Notification : global::ProtoBuf.IExtensible
   {
     public CParental_ParentalUnlock_Notification() {}
@@ -967,7 +965,7 @@ namespace SteamKit2.Unified.Internal
       set { _password = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool passwordSpecified
     {
       get { return _password != null; }
@@ -985,7 +983,7 @@ namespace SteamKit2.Unified.Internal
       set { _sessionid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sessionidSpecified
     {
       get { return _sessionid != null; }
@@ -999,7 +997,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CParental_ParentalLock_Notification")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ParentalLock_Notification")]
   public partial class CParental_ParentalLock_Notification : global::ProtoBuf.IExtensible
   {
     public CParental_ParentalLock_Notification() {}
@@ -1013,7 +1011,7 @@ namespace SteamKit2.Unified.Internal
       set { _sessionid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sessionidSpecified
     {
       get { return _sessionid != null; }

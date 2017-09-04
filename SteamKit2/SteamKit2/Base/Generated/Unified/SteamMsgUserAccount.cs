@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: steammessages_useraccount.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"CUserAccount_GetAccountLinkStatus_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CUserAccount_GetAccountLinkStatus_Request")]
   public partial class CUserAccount_GetAccountLinkStatus_Request : global::ProtoBuf.IExtensible
   {
     public CUserAccount_GetAccountLinkStatus_Request() {}
@@ -26,7 +24,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CUserAccount_GetAccountLinkStatus_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CUserAccount_GetAccountLinkStatus_Response")]
   public partial class CUserAccount_GetAccountLinkStatus_Response : global::ProtoBuf.IExtensible
   {
     public CUserAccount_GetAccountLinkStatus_Response() {}
@@ -40,7 +38,7 @@ namespace SteamKit2.Unified.Internal
       set { _pwid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool pwidSpecified
     {
       get { return _pwid != null; }
@@ -58,7 +56,7 @@ namespace SteamKit2.Unified.Internal
       set { _identity_verification = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool identity_verificationSpecified
     {
       get { return _identity_verification != null; }
