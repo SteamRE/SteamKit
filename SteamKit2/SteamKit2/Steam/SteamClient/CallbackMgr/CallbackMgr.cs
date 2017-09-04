@@ -31,6 +31,11 @@ namespace SteamKit2
         /// <param name="client">The <see cref="SteamClient"/> instance to handle the callbacks of.</param>
         public CallbackManager( SteamClient client )
         {
+            if ( client == null )
+            {
+                throw new ArgumentNullException( nameof(client) );
+            }
+
             registeredCallbacks = new List<CallbackBase>();
 
             this.client = client;
@@ -97,6 +102,16 @@ namespace SteamKit2
         public IDisposable Subscribe<TCallback>( JobID jobID, Action<TCallback> callbackFunc )
             where TCallback : class, ICallbackMsg
         {
+            if ( jobID == null )
+            {
+                throw new ArgumentNullException( nameof(jobID) );
+            }
+
+            if ( callbackFunc == null )
+            {
+                throw new ArgumentNullException( nameof(callbackFunc) );
+            }
+
             var callback = new Internal.Callback<TCallback>( callbackFunc, this, jobID );
             return new Subscription( callback, this );
         }
@@ -106,13 +121,13 @@ namespace SteamKit2
         /// </summary>
         /// <param name="callbackFunc">The function to invoke with the callback.</param>
         /// <returns>An <see cref="IDisposable"/>. Disposing of the return value will unsubscribe the <paramref name="callbackFunc"/>.</returns>
-        public IDisposable Subscribe<TCallback>( Action<TCallback> callbackFunc)
+        public IDisposable Subscribe<TCallback>( Action<TCallback> callbackFunc )
             where TCallback : class, ICallbackMsg
         {
             return Subscribe( JobID.Invalid, callbackFunc );
         }
 
-        void ICallbackMgrInternals.Register(CallbackBase call )
+        void ICallbackMgrInternals.Register( CallbackBase call )
         {
             if ( registeredCallbacks.Contains( call ) )
                 return;
@@ -127,14 +142,14 @@ namespace SteamKit2
                 .ForEach( callback => callback.Run( call ) ); // run them
         }
 
-        void ICallbackMgrInternals.Unregister(CallbackBase call )
+        void ICallbackMgrInternals.Unregister( CallbackBase call )
         {
             registeredCallbacks.Remove( call );
         }
 
         sealed class Subscription : IDisposable
         {
-            public Subscription(CallbackBase call, ICallbackMgrInternals manager)
+            public Subscription( CallbackBase call, ICallbackMgrInternals manager)
             {
                 this.manager = manager;
                 this.call = call;

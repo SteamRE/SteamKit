@@ -58,6 +58,11 @@ namespace SteamKit2
         /// </param>
         public UFSClient( SteamClient steamClient )
         {
+            if ( steamClient != null )
+            {
+                throw new ArgumentNullException( nameof(steamClient) );
+            }
+
             this.steamClient = steamClient;
 
             // our default timeout
@@ -158,6 +163,11 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="LoggedOnCallback"/>.</returns>
         public JobID Logon( IEnumerable<uint> appIds )
         {
+            if ( appIds == null )
+            {
+                throw new ArgumentNullException( nameof(appIds) );
+            }
+
             var jobId = steamClient.GetNextJobID();
 
             if ( !steamClient.IsConnected )
@@ -188,6 +198,11 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="UploadFileResponseCallback"/>.</returns>
         public JobID RequestFileUpload( UploadDetails details )
         {
+            if ( details == null )
+            {
+                throw new ArgumentNullException( nameof(details) );
+            }
+
             byte[] compressedData = ZipUtil.Compress( details.FileData );
 
             var msg = new ClientMsgProtobuf<CMsgClientUFSUploadFileRequest>( EMsg.ClientUFSUploadFileRequest );
@@ -215,6 +230,11 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="UploadFileFinishedCallback"/>.</returns>
         public void UploadFile( UploadDetails details )
         {
+            if ( details == null )
+            {
+                throw new ArgumentNullException( nameof(details) );
+            }
+
             const uint MaxBytesPerChunk = 10240;
 
             byte[] compressedData = ZipUtil.Compress( details.FileData );
@@ -256,6 +276,11 @@ namespace SteamKit2
         /// <param name="msg">The client message to send.</param>
         public void Send( IClientMsg msg )
         {
+            if ( msg == null )
+            {
+                throw new ArgumentNullException( nameof(msg) );
+            }
+
             msg.SteamID = steamClient.SteamID;
 
             DebugLog.WriteLine( "UFSClient", "Sent -> EMsg: {0} {1}", msg.MsgType, msg.IsProto ? "(Proto)" : "" );
@@ -303,9 +328,10 @@ namespace SteamKit2
                 { EMsg.ClientUFSUploadFileFinished, HandleUploadFileFinished },
             };
 
-            Action<IPacketMsg> handlerFunc;
-            if ( !msgDispatch.TryGetValue( packetMsg.MsgType, out handlerFunc ) )
+            if ( !msgDispatch.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
+            {
                 return;
+            }
 
             handlerFunc( packetMsg );
         }
