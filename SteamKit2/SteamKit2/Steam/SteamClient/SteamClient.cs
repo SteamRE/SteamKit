@@ -95,10 +95,13 @@ namespace SteamKit2
         public void AddHandler( ClientMsgHandler handler )
         {
             if ( handlers.ContainsKey( handler.GetType() ) )
+            {
                 throw new InvalidOperationException( string.Format( "A handler of type \"{0}\" is already registered.", handler.GetType() ) );
 
-            handlers[ handler.GetType() ] = handler;
+            }
+
             handler.Setup( this );
+            handlers[ handler.GetType() ] = handler;
         }
 
         /// <summary>
