@@ -104,18 +104,12 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PersonaChangeCallback"/>.</returns>
         public AsyncJob<PersonaChangeCallback> SetPersonaState( EPersonaState state )
         {
-            if (cache.LocalUser.Name == null) {
-                throw new ArgumentNullException(nameof(cache.LocalUser.Name),
-                    "The function was called before name of the local user could be registered.");
-            }
-
             cache.LocalUser.PersonaState = state;
 
             var stateMsg = new ClientMsgProtobuf<CMsgClientChangeStatus>( EMsg.ClientChangeStatus );
             stateMsg.SourceJobID = Client.GetNextJobID();
 
             stateMsg.Body.persona_state = ( uint )state;
-            stateMsg.Body.player_name = cache.LocalUser.Name;
 
             this.Client.Send( stateMsg );
 
