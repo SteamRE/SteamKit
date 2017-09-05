@@ -57,7 +57,7 @@ namespace SteamKit2
 
 
         /// <summary>
-        /// Gets the local user's persona name.
+        /// Gets the local user's persona name. Can be null before user's initialization.
         /// </summary>
         /// <returns>The name.</returns>
         public string GetPersonaName()
@@ -144,7 +144,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Gets the persona name of a friend.
+        /// Gets the persona name of a friend. Can be null before friend's initialization.
         /// </summary>
         /// <param name="steamId">The steam id.</param>
         /// <returns>The name.</returns>
@@ -226,7 +226,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Gets the name of a clan.
+        /// Gets the name of a clan. Can be null before clan's initialization.
         /// </summary>
         /// <param name="steamId">The clan SteamID.</param>
         /// <returns>The name.</returns>
