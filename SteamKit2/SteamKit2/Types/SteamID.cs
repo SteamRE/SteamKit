@@ -238,17 +238,22 @@ namespace SteamKit2
         public bool SetFromString( string steamId, EUniverse eUniverse )
         {
             if ( string.IsNullOrEmpty( steamId ) )
+            {
                 return false;
+            }
 
             Match m = Steam2Regex.Match( steamId );
 
             if ( !m.Success )
+            {
                 return false;
+            }
 
-            uint accId, authServer;
-            if ( !uint.TryParse( m.Groups[ "accountid" ].Value, out accId ) || 
-                 !uint.TryParse( m.Groups[ "authserver" ].Value, out authServer ) )
+            if ( !uint.TryParse( m.Groups[ "accountid" ].Value, out var accId ) || 
+                 !uint.TryParse( m.Groups[ "authserver" ].Value, out var authServer ) )
+            {
                 return false;
+            }
 
             this.AccountUniverse = eUniverse;
             this.AccountInstance = 1;
@@ -266,7 +271,9 @@ namespace SteamKit2
         public bool SetFromSteam3String( string steamId )
         {
             if ( string.IsNullOrEmpty( steamId ) )
+            {
                 return false;
+            }
 
             Match m = Steam3Regex.Match( steamId );
 
@@ -275,22 +282,28 @@ namespace SteamKit2
                 m = Steam3FallbackRegex.Match( steamId );
 
                 if ( !m.Success )
+                {
                     return false;
+                }
             }
 
-            uint accId;
-            if ( !uint.TryParse( m.Groups[ "account" ].Value, out accId ) )
+            if ( !uint.TryParse( m.Groups[ "account" ].Value, out var accId ) )
+            {
                 return false;
+            }
 
-            uint universe;
-            if ( !uint.TryParse( m.Groups[ "universe" ].Value, out universe ) )
+            if ( !uint.TryParse( m.Groups[ "universe" ].Value, out var universe ) )
+            {
                 return false;
+            }
 
-            char type;
             var typeString = m.Groups[ "type" ].Value;
             if ( typeString.Length != 1 )
+            {
                 return false;
-            type = typeString[ 0 ];
+            }
+
+            var type = typeString[ 0 ];
 
             uint instance;
             var instanceGroup = m.Groups[ "instance" ];
@@ -616,7 +629,9 @@ namespace SteamKit2
         public string Render( bool steam3 = false )
         {
             if ( steam3 )
+            {
                 return RenderSteam3();
+            }
 
             return RenderSteam2();
         }
@@ -645,9 +660,13 @@ namespace SteamKit2
             if ( AccountType == EAccountType.Chat )
             {
                 if ( ( ( ChatInstanceFlags )AccountInstance ).HasFlag( ChatInstanceFlags.Clan ) )
+                {
                    accountTypeChar = 'c';
+                }
                 else if ( ( ( ChatInstanceFlags )AccountInstance ).HasFlag( ChatInstanceFlags.Lobby ) )
+                {
                     accountTypeChar = 'L';
+                }
             }
 
             bool renderInstance = false;
@@ -696,6 +715,11 @@ namespace SteamKit2
         /// </returns>
         public static implicit operator UInt64( SteamID sid )
         {
+            if ( sid == null )
+            {
+                throw new ArgumentNullException( nameof(sid) );
+            }
+
             return sid.steamid.Data;
         }
 
@@ -721,11 +745,15 @@ namespace SteamKit2
         public override bool Equals( System.Object obj )
         {
             if ( obj == null )
+            {
                 return false;
+            }
 
             SteamID sid = obj as SteamID;
             if ( ( System.Object )sid == null )
+            {
                 return false;
+            }
 
             return steamid.Data == sid.steamid.Data;
         }
@@ -740,7 +768,9 @@ namespace SteamKit2
         public bool Equals( SteamID sid )
         {
             if ( ( object )sid == null )
+            {
                 return false;
+            }
 
             return steamid.Data == sid.steamid.Data;
         }
@@ -756,10 +786,14 @@ namespace SteamKit2
         public static bool operator ==( SteamID a, SteamID b )
         {
             if ( System.Object.ReferenceEquals( a, b ) )
+            {
                 return true;
+            }
 
             if ( ( ( object )a == null ) || ( ( object )b == null ) )
+            {
                 return false;
+            }
 
             return a.steamid.Data == b.steamid.Data;
         }

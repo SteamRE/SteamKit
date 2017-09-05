@@ -272,6 +272,11 @@ namespace SteamKit2
         {
             get
             {
+                if ( key == null )
+                {
+                    throw new ArgumentNullException( nameof(key) );
+                }
+
                 var child = this.Children
                     .FirstOrDefault( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
 
@@ -284,6 +289,11 @@ namespace SteamKit2
             }
             set
             {
+                if ( key == null )
+                {
+                    throw new ArgumentNullException( nameof(key) );
+                }
+
                 var existingChild = this.Children
                     .FirstOrDefault( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
 
@@ -556,6 +566,11 @@ namespace SteamKit2
         /// </remarks>
         public static KeyValue LoadFromString( string input )
         {
+            if ( input == null )
+            {
+                throw new ArgumentNullException( nameof(input) );
+            }
+
             byte[] bytes = Encoding.UTF8.GetBytes( input );
 
             using ( MemoryStream stream = new MemoryStream( bytes ) )
@@ -583,6 +598,11 @@ namespace SteamKit2
         /// <returns><c>true</c> if the read was successful; otherwise, <c>false</c>.</returns>
         public bool ReadAsText( Stream input )
         {
+            if ( input == null )
+            {
+                throw new ArgumentNullException( nameof(input) );
+            }
+
             this.Children = new List<KeyValue>();
 
             new KVTextReader( this, input );
@@ -622,7 +642,9 @@ namespace SteamKit2
                 }
 
                 if ( name.StartsWith( "}" ) && !wasQuoted )	// top level closed, stop reading
+                {
                     break;
+                }
 
                 KeyValue dat = new KeyValue( name );
                 dat.Children = new List<KeyValue>();
@@ -638,10 +660,14 @@ namespace SteamKit2
                 }
 
                 if ( value == null )
+                {
                     throw new Exception( "RecursiveLoadFromBuffer:  got NULL key" );
+                }
 
                 if ( value.StartsWith( "}" ) && !wasQuoted )
+                {
                     throw new Exception( "RecursiveLoadFromBuffer:  got } in key" );
+                }
 
                 if ( value.StartsWith( "{" ) && !wasQuoted )
                 {
@@ -680,6 +706,11 @@ namespace SteamKit2
         /// <param name="asBinary">If set to <c>true</c>, saves this instance as binary.</param>
         public void SaveToStream( Stream stream, bool asBinary )
         {
+            if ( stream == null )
+            {
+                throw new ArgumentNullException( nameof(stream) );
+            }
+
             if (asBinary)
             {
                 RecursiveSaveBinaryToStream( stream );
@@ -779,6 +810,11 @@ namespace SteamKit2
         /// <returns><c>true</c> if the read was successful; otherwise, <c>false</c>.</returns>
         public bool TryReadAsBinary( Stream input )
         {
+            if ( input == null )
+            {
+                throw new ArgumentNullException( nameof(input) );
+            }
+            
             return TryReadAsBinaryCore( input, this, null );
         }
 
