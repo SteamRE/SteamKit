@@ -4,6 +4,7 @@
  */
 
 
+using System;
 using System.IO;
 using SteamKit2.Internal;
 
@@ -54,6 +55,19 @@ namespace SteamKit2.GC
         byte[] GetData();
     }
 
+    static class IPacketGCMsgExtensions
+    {
+        public static uint GetMsgTypeWithNullCheck( this IPacketGCMsg msg, string name )
+        {
+            if ( msg == null )
+            {
+                throw new ArgumentNullException( name );
+            }
+
+            return msg.MsgType;
+        }
+    }
+
 
     /// <summary>
     /// Represents a protobuf backed packet message.
@@ -67,14 +81,14 @@ namespace SteamKit2.GC
         /// <value>
         /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
         /// </value>
-        public bool IsProto { get { return true; } }
+        public bool IsProto => true;
         /// <summary>
         /// Gets the network message type of this packet message.
         /// </summary>
         /// <value>
         /// The message type.
         /// </value>
-        public uint MsgType { get; private set; }
+        public uint MsgType { get; }
 
         /// <summary>
         /// Gets the target job id for this packet message.
@@ -82,17 +96,17 @@ namespace SteamKit2.GC
         /// <value>
         /// The target job id.
         /// </value>
-        public JobID TargetJobID { get; private set; }
+        public JobID TargetJobID { get; }
         /// <summary>
         /// Gets the source job id for this packet message.
         /// </summary>
         /// <value>
         /// The source job id.
         /// </value>
-        public JobID SourceJobID { get; private set; }
+        public JobID SourceJobID { get; }
 
 
-        byte[] payload;
+        readonly byte[] payload;
 
 
         /// <summary>
@@ -102,6 +116,11 @@ namespace SteamKit2.GC
         /// <param name="data">The data.</param>
         public PacketClientGCMsgProtobuf( uint eMsg, byte[] data )
         {
+            if ( data == null )
+            {
+                throw new ArgumentNullException( nameof(data) );
+            }
+
             MsgType = eMsg;
             payload = data;
 
@@ -140,14 +159,14 @@ namespace SteamKit2.GC
         /// <value>
         /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
         /// </value>
-        public bool IsProto { get { return false; } }
+        public bool IsProto => false;
         /// <summary>
         /// Gets the network message type of this packet message.
         /// </summary>
         /// <value>
         /// The message type.
         /// </value>
-        public uint MsgType { get; private set; }
+        public uint MsgType { get; }
 
         /// <summary>
         /// Gets the target job id for this packet message.
@@ -155,14 +174,14 @@ namespace SteamKit2.GC
         /// <value>
         /// The target job id.
         /// </value>
-        public JobID TargetJobID { get; private set; }
+        public JobID TargetJobID { get; }
         /// <summary>
         /// Gets the source job id for this packet message.
         /// </summary>
         /// <value>
         /// The source job id.
         /// </value>
-        public JobID SourceJobID { get; private set; }
+        public JobID SourceJobID { get; }
 
         byte[] payload;
 
@@ -174,6 +193,11 @@ namespace SteamKit2.GC
         /// <param name="data">The data.</param>
         public PacketClientGCMsg( uint eMsg, byte[] data )
         {
+            if ( data == null )
+            {
+                throw new ArgumentNullException( nameof(data) );
+            }
+
             MsgType = eMsg;
             payload = data;
 

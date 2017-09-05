@@ -3,6 +3,7 @@
  * file 'license.txt', which is part of this source code package.
  */
 
+using System;
 using System.IO;
 using System.Text;
 using SteamKit2.Internal;
@@ -79,11 +80,11 @@ namespace SteamKit2
         /// <summary>
         /// Returns a <see cref="System.IO.MemoryStream"/> which is the backing stream for client message payload data.
         /// </summary>
-        public MemoryStream Payload { get; private set; }
+        public MemoryStream Payload { get; }
 
 
-        BinaryReader reader;
-        BinaryWriter writer;
+        readonly BinaryReader reader;
+        readonly BinaryWriter writer;
 
 
         /// <summary>
@@ -216,7 +217,14 @@ namespace SteamKit2
         public void Write( string data, Encoding encoding )
         {
             if ( data == null )
+            {
                 return;
+            }
+
+            if ( encoding == null )
+            {
+                throw new ArgumentNullException( nameof(encoding) );
+            }
 
             Write( encoding.GetBytes( data ) );
         }
@@ -417,6 +425,11 @@ namespace SteamKit2
         /// /// <returns>The string.</returns>
         public string ReadNullTermString( Encoding encoding )
         {
+            if ( encoding == null )
+            {
+                throw new ArgumentNullException( nameof(encoding) );
+            }
+
             return Payload.ReadNullTermString( encoding );
         }
 
@@ -479,7 +492,7 @@ namespace SteamKit2
         /// <summary>
         /// Gets the header for this message type. 
         /// </summary>
-        public HdrType Header { get; private set; }
+        public HdrType Header { get; }
 
 
         /// <summary>

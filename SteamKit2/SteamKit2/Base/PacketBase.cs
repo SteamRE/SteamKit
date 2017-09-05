@@ -4,6 +4,7 @@
  */
 
 
+using System;
 using System.IO;
 using SteamKit2.Internal;
 
@@ -54,6 +55,18 @@ namespace SteamKit2
         byte[] GetData();
     }
 
+    static class IPacketMsgExtensions
+    {
+        public static EMsg GetMsgTypeWithNullCheck( this IPacketMsg msg, string name )
+        {
+            if ( msg == null )
+            {
+                throw new ArgumentNullException( name );
+            }
+
+            return msg.MsgType;
+        }
+    }
 
     /// <summary>
     /// Represents a protobuf backed packet message.
@@ -74,7 +87,7 @@ namespace SteamKit2
         /// <value>
         /// The message type.
         /// </value>
-        public EMsg MsgType { get; private set; }
+        public EMsg MsgType { get; }
 
         /// <summary>
         /// Gets the target job id for this packet message.
@@ -82,14 +95,14 @@ namespace SteamKit2
         /// <value>
         /// The target job id.
         /// </value>
-        public ulong TargetJobID { get; private set; }
+        public ulong TargetJobID { get; }
         /// <summary>
         /// Gets the source job id for this packet message.
         /// </summary>
         /// <value>
         /// The source job id.
         /// </value>
-        public ulong SourceJobID { get; private set; }
+        public ulong SourceJobID { get; }
 
 
         byte[] payload;
@@ -102,6 +115,11 @@ namespace SteamKit2
         /// <param name="data">The data.</param>
         public PacketClientMsgProtobuf( EMsg eMsg, byte[] data )
         {
+            if ( data == null )
+            {
+                throw new ArgumentNullException( nameof(data) );
+            }
+
             MsgType = eMsg;
             payload = data;
 
@@ -140,14 +158,14 @@ namespace SteamKit2
         /// <value>
         /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
         /// </value>
-        public bool IsProto { get { return false; } }
+        public bool IsProto => false;
         /// <summary>
         /// Gets the network message type of this packet message.
         /// </summary>
         /// <value>
         /// The message type.
         /// </value>
-        public EMsg MsgType { get; private set; }
+        public EMsg MsgType { get; }
 
         /// <summary>
         /// Gets the target job id for this packet message.
@@ -155,14 +173,14 @@ namespace SteamKit2
         /// <value>
         /// The target job id.
         /// </value>
-        public ulong TargetJobID { get; private set; }
+        public ulong TargetJobID { get; }
         /// <summary>
         /// Gets the source job id for this packet message.
         /// </summary>
         /// <value>
         /// The source job id.
         /// </value>
-        public ulong SourceJobID { get; private set; }
+        public ulong SourceJobID { get; }
 
         byte[] payload;
 
@@ -174,6 +192,11 @@ namespace SteamKit2
         /// <param name="data">The data.</param>
         public PacketClientMsg( EMsg eMsg, byte[] data )
         {
+            if ( data == null )
+            {
+                throw new ArgumentNullException( nameof(data) );
+            }
+
             MsgType = eMsg;
             payload = data;
 
@@ -212,14 +235,14 @@ namespace SteamKit2
         /// <value>
         /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
         /// </value>
-        public bool IsProto { get { return false; } }
+        public bool IsProto => false;
         /// <summary>
         /// Gets the network message type of this packet message.
         /// </summary>
         /// <value>
         /// The message type.
         /// </value>
-        public EMsg MsgType { get; private set; }
+        public EMsg MsgType { get; }
 
         /// <summary>
         /// Gets the target job id for this packet message.
@@ -227,14 +250,14 @@ namespace SteamKit2
         /// <value>
         /// The target job id.
         /// </value>
-        public ulong TargetJobID { get; private set; }
+        public ulong TargetJobID { get; }
         /// <summary>
         /// Gets the source job id for this packet message.
         /// </summary>
         /// <value>
         /// The source job id.
         /// </value>
-        public ulong SourceJobID { get; private set; }
+        public ulong SourceJobID { get; }
 
         byte[] payload;
 
@@ -246,6 +269,11 @@ namespace SteamKit2
         /// <param name="data">The data.</param>
         public PacketMsg( EMsg eMsg, byte[] data )
         {
+            if ( data == null )
+            {
+                throw new ArgumentNullException( nameof(data) );
+            }
+
             MsgType = eMsg;
             payload = data;
 

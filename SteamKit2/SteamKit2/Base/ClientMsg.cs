@@ -28,14 +28,14 @@ namespace SteamKit2
         /// <value>
         /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
         /// </value>
-        public override bool IsProto { get { return true; } }
+        public override bool IsProto => true;
         /// <summary>
         /// Gets the network message type of this client message.
         /// </summary>
         /// <value>
         /// The network message type.
         /// </value>
-        public override EMsg MsgType { get { return Header.Msg; } }
+        public override EMsg MsgType => Header.Msg;
 
         /// <summary>
         /// Gets or sets the session id for this client message.
@@ -45,8 +45,8 @@ namespace SteamKit2
         /// </value>
         public override int SessionID
         {
-            get { return ProtoHeader.client_sessionid; }
-            set { ProtoHeader.client_sessionid = value; }
+            get => ProtoHeader.client_sessionid;
+            set => ProtoHeader.client_sessionid = value;
         }
         /// <summary>
         /// Gets or sets the <see cref="SteamID"/> for this client message.
@@ -56,8 +56,8 @@ namespace SteamKit2
         /// </value>
         public override SteamID SteamID
         {
-            get { return ProtoHeader.steamid; }
-            set { ProtoHeader.steamid = value; }
+            get => ProtoHeader.steamid;
+            set => ProtoHeader.steamid = value ?? throw new ArgumentNullException( nameof(value) );
         }
 
         /// <summary>
@@ -68,8 +68,8 @@ namespace SteamKit2
         /// </value>
         public override JobID TargetJobID
         {
-            get { return ProtoHeader.jobid_target; }
-            set { ProtoHeader.jobid_target = value; }
+            get => ProtoHeader.jobid_target;
+            set => ProtoHeader.jobid_target = value ?? throw new ArgumentNullException( nameof(value) );
         }
         /// <summary>
         /// Gets or sets the source job id for this client message.
@@ -79,15 +79,15 @@ namespace SteamKit2
         /// </value>
         public override JobID SourceJobID
         {
-            get { return ProtoHeader.jobid_source; }
-            set { ProtoHeader.jobid_source = value; }
+            get => ProtoHeader.jobid_source;
+            set => ProtoHeader.jobid_source = value ?? throw new ArgumentNullException( nameof(value) );
         }
 
 
         /// <summary>
         /// Shorthand accessor for the protobuf header.
         /// </summary>
-        public CMsgProtoBufHeader ProtoHeader { get { return Header.Proto; } }
+        public CMsgProtoBufHeader ProtoHeader => Header.Proto;
 
 
         internal ClientMsgProtobuf( EMsg eMsg, int payloadReserve = 64 )
@@ -103,7 +103,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="msg">The packet message to build this client message from.</param>
         public ClientMsgProtobuf( IPacketMsg msg )
-            : this( msg.MsgType )
+            : this( msg.GetMsgTypeWithNullCheck( nameof(msg) ) )
         {
             DebugLog.Assert(msg.IsProto, "ClientMsgProtobuf", "ClientMsgProtobuf used for non-proto message!");
 
@@ -126,6 +126,11 @@ namespace SteamKit2
         /// <param name="data">The data representing a client message.</param>
         public override void Deserialize( byte[] data )
         {
+            if ( data == null )
+            {
+                throw new ArgumentNullException( nameof(data) );
+            }
+
             using ( MemoryStream ms = new MemoryStream( data ) )
             {
                 Header.Deserialize( ms );
@@ -181,7 +186,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="msg">The packet message to build this client message from.</param>
         public ClientMsgProtobuf( IPacketMsg msg )
-            : this( msg.MsgType )
+            : this( msg.GetMsgTypeWithNullCheck( nameof(msg) ) )
         {
             DebugLog.Assert( msg.IsProto, "ClientMsgProtobuf<>", $"ClientMsgProtobuf<{typeof(BodyType).FullName}> used for non-proto message!" );
 
@@ -211,6 +216,11 @@ namespace SteamKit2
         /// <param name="data">The data representing a client message.</param>
         public override void Deserialize( byte[] data )
         {
+            if ( data == null )
+            {
+                throw new ArgumentNullException( nameof(data) );
+            }
+
             using ( MemoryStream ms = new MemoryStream( data ) )
             {
                 Header.Deserialize( ms );
@@ -239,14 +249,14 @@ namespace SteamKit2
         /// <value>
         /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
         /// </value>
-        public override bool IsProto { get { return false; } }
+        public override bool IsProto => false;
         /// <summary>
         /// Gets the network message type of this client message.
         /// </summary>
         /// <value>
         /// The network message type.
         /// </value>
-        public override EMsg MsgType { get { return Header.Msg; } }
+        public override EMsg MsgType => Header.Msg;
 
         /// <summary>
         /// Gets or sets the session id for this client message.
@@ -256,8 +266,8 @@ namespace SteamKit2
         /// </value>
         public override int SessionID
         {
-            get { return Header.SessionID; }
-            set { Header.SessionID = value; }
+            get => Header.SessionID;
+            set => Header.SessionID = value;
         }
         /// <summary>
         /// Gets or sets the <see cref="SteamID"/> for this client message.
@@ -267,8 +277,8 @@ namespace SteamKit2
         /// </value>
         public override SteamID SteamID
         {
-            get { return Header.SteamID; }
-            set { Header.SteamID = value; }
+            get => Header.SteamID;
+            set => Header.SteamID = value ?? throw new ArgumentNullException( nameof(value) );
         }
 
         /// <summary>
@@ -279,8 +289,8 @@ namespace SteamKit2
         /// </value>
         public override JobID TargetJobID
         {
-            get { return Header.TargetJobID; }
-            set { Header.TargetJobID = value; }
+            get => Header.TargetJobID;
+            set => Header.TargetJobID = value ?? throw new ArgumentNullException( nameof(value) );
         }
         /// <summary>
         /// Gets or sets the source job id for this client message.
@@ -290,15 +300,15 @@ namespace SteamKit2
         /// </value>
         public override JobID SourceJobID
         {
-            get { return Header.SourceJobID; }
-            set { Header.SourceJobID = value; }
+            get => Header.SourceJobID;
+            set => Header.SourceJobID = value ?? throw new ArgumentNullException( nameof(value) );
         }
 
 
         /// <summary>
         /// Gets the body structure of this message.
         /// </summary>
-        public BodyType Body { get; private set; }
+        public BodyType Body { get; }
 
 
         /// <summary>
@@ -324,6 +334,11 @@ namespace SteamKit2
         public ClientMsg( MsgBase<ExtendedClientMsgHdr> msg, int payloadReserve = 64 )
             : this( payloadReserve )
         {
+            if ( msg == null )
+            {
+                throw new ArgumentNullException( nameof(msg) );
+            }
+
             // our target is where the message came from
             Header.TargetJobID = msg.Header.SourceJobID;
         }
@@ -336,6 +351,11 @@ namespace SteamKit2
         public ClientMsg( IPacketMsg msg )
             : this()
         {
+            if ( msg == null )
+            {
+                throw new ArgumentNullException( nameof(msg) );
+            }
+
             DebugLog.Assert( !msg.IsProto, "ClientMsg", $"ClientMsg<{typeof(BodyType).FullName}> used for proto message!" );
 
             Deserialize( msg.GetData() );
@@ -364,6 +384,11 @@ namespace SteamKit2
         /// <param name="data">The data representing a client message.</param>
         public override void Deserialize( byte[] data )
         {
+            if ( data == null )
+            {
+                throw new ArgumentNullException( nameof(data) );
+            }
+
             using ( MemoryStream ms = new MemoryStream( data ) )
             {
                 Header.Deserialize( ms );
@@ -392,14 +417,14 @@ namespace SteamKit2
         /// <value>
         /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
         /// </value>
-        public override bool IsProto { get { return false; } }
+        public override bool IsProto => false;
         /// <summary>
         /// Gets the network message type of this client message.
         /// </summary>
         /// <value>
         /// The network message type.
         /// </value>
-        public override EMsg MsgType { get { return Header.Msg; } }
+        public override EMsg MsgType => Header.Msg;
 
         /// <summary>
         /// Gets or sets the session id for this client message.
@@ -426,8 +451,8 @@ namespace SteamKit2
         /// </value>
         public override JobID TargetJobID
         {
-            get { return Header.TargetJobID; }
-            set { Header.TargetJobID = value; }
+            get => Header.TargetJobID;
+            set => Header.TargetJobID = value ?? throw new ArgumentNullException( nameof(value) );
         }
         /// <summary>
         /// Gets or sets the source job id for this client message.
@@ -437,15 +462,15 @@ namespace SteamKit2
         /// </value>
         public override JobID SourceJobID
         {
-            get { return Header.SourceJobID; }
-            set { Header.SourceJobID = value; }
+            get => Header.SourceJobID;
+            set => Header.SourceJobID = value ?? throw new ArgumentNullException( nameof(value) );
         }
 
 
         /// <summary>
         /// Gets the structure body of the message.
         /// </summary>
-        public BodyType Body { get; private set; }
+        public BodyType Body { get; }
 
 
         /// <summary>
@@ -471,6 +496,11 @@ namespace SteamKit2
         public Msg( MsgBase<MsgHdr> msg, int payloadReserve = 0 )
             : this( payloadReserve )
         {
+            if ( msg == null )
+            {
+                throw new ArgumentNullException( nameof(msg) );
+            }
+
             // our target is where the message came from
             Header.TargetJobID = msg.Header.SourceJobID;
         }
@@ -483,6 +513,11 @@ namespace SteamKit2
         public Msg( IPacketMsg msg )
             : this()
         {
+            if ( msg == null )
+            {
+                throw new ArgumentNullException( nameof(msg) );
+            }
+
             Deserialize( msg.GetData() );
         }
 
@@ -510,6 +545,11 @@ namespace SteamKit2
         /// <param name="data">The data representing a client message.</param>
         public override void Deserialize( byte[] data )
         {
+            if ( data == null )
+            {
+                throw new ArgumentNullException( nameof(data) );
+            }
+
             using ( MemoryStream ms = new MemoryStream( data ) )
             {
                 Header.Deserialize( ms );
