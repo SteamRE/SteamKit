@@ -109,7 +109,7 @@ namespace SteamKit2
                     "The function was called before name of the local user could be registered.");
             }
 
-			cache.LocalUser.PersonaState = state;
+            cache.LocalUser.PersonaState = state;
 
             var stateMsg = new ClientMsgProtobuf<CMsgClientChangeStatus>( EMsg.ClientChangeStatus );
             stateMsg.SourceJobID = Client.GetNextJobID();
