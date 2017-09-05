@@ -20,7 +20,6 @@ namespace SteamKit2
 
             public Account()
             {
-                Name = "[unknown]";
                 SteamID = new SteamID();
             }
         }
@@ -68,7 +67,6 @@ namespace SteamKit2
             public AccountCache()
             {
                 LocalUser = new User();
-                LocalUser.Name = null;
 
                 Users = new AccountList<User>();
                 Clans = new AccountList<Clan>();
