@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.ExceptionServices;
@@ -182,10 +181,10 @@ namespace SteamKit2
         /// </summary>
         public sealed class AsyncInterface : DynamicObject, IDisposable
         {
-            readonly HttpClient httpClient;
+            internal readonly HttpClient httpClient;
 
-            readonly string iface;
-            readonly string apiKey;
+            internal readonly string iface;
+            internal readonly string apiKey;
 
             static Regex funcNameRegex = new Regex(
                 @"(?<name>[a-zA-Z]+)(?<version>\d*)",
@@ -435,7 +434,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Retreives a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// Retrieves a dynamic handler capable of interacting with the specified interface on the Web API.
         /// </summary>
         /// <param name="baseAddress">The base <see cref="Uri"/> of the Steam Web API.</param>
         /// <param name="iface">The interface to retrieve a handler for.</param>
@@ -447,7 +446,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Retreives a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// Retrieves a dynamic handler capable of interacting with the specified interface on the Web API.
         /// </summary>
         /// <param name="iface">The interface to retrieve a handler for.</param>
         /// <param name="apiKey">An optional API key to be used for authorized requests.</param>
@@ -458,7 +457,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Retreives a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// Retrieves a dynamic handler capable of interacting with the specified interface on the Web API.
         /// </summary>
         /// <param name="iface">The interface to retrieve a handler for.</param>
         /// <param name="apiKey">An optional API key to be used for authorized requests.</param>
@@ -469,7 +468,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Retreives a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// Retrieves a dynamic handler capable of interacting with the specified interface on the Web API.
         /// </summary>
         /// <param name="baseAddress">The base <see cref="Uri"/> of the Steam Web API.</param>
         /// <param name="iface">The interface to retrieve a handler for.</param>
