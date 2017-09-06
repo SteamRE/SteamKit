@@ -181,10 +181,10 @@ namespace SteamKit2
         /// </summary>
         public sealed class AsyncInterface : DynamicObject, IDisposable
         {
-            readonly HttpClient httpClient;
+            internal readonly HttpClient httpClient;
 
-            readonly string iface;
-            readonly string apiKey;
+            internal readonly string iface;
+            internal readonly string apiKey;
 
             static Regex funcNameRegex = new Regex(
                 @"(?<name>[a-zA-Z]+)(?<version>\d*)",

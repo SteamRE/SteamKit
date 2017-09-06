@@ -13,5 +13,21 @@ namespace Tests
 
             Assert.Equal( iface.Timeout, 1000 * 100 );
         }
+
+        [Fact]
+        public void SteamConfigWebAPIInterface()
+        {
+            var config = new SteamConfiguration
+            {
+                WebAPIBaseAddress = new Uri("http://example.com"),
+                WebAPIKey = "hello world"
+            };
+
+            var iface = config.GetAsyncWebAPIInterface("TestInterface");
+
+            Assert.Equal(iface.iface, "TestInterface");
+            Assert.Equal(iface.apiKey, "hello world");
+            Assert.Equal(iface.httpClient.BaseAddress, new Uri("http://example.com"));
+        }
     }
 }
