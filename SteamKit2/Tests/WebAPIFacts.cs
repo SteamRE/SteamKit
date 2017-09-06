@@ -11,7 +11,15 @@ namespace Tests
         {
             var iface = WebAPI.GetInterface( new Uri("https://whatever/"), "ISteamWhatever" );
 
-            Assert.Equal( iface.Timeout, 1000 * 100 );
+            Assert.Equal( iface.Timeout, TimeSpan.FromSeconds( 100 ) );
+        }
+
+        [Fact]
+        public void WebAPIAsyncHasDefaultTimeout()
+        {
+            var iface = WebAPI.GetAsyncInterface( new Uri("https://whatever/"), "ISteamWhatever" );
+
+            Assert.Equal( iface.Timeout, TimeSpan.FromSeconds( 100 ) );
         }
 
         [Fact]
