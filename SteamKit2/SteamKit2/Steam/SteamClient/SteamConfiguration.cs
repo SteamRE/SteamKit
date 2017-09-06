@@ -74,6 +74,7 @@ namespace SteamKit2
 
         /// <summary>
         /// The base address of the Steam Web API to connect to.
+        /// Using "partner.steam-api.com" base address always requires a partner api key.
         /// </summary>
         public Uri WebAPIBaseAddress
         {
@@ -83,7 +84,6 @@ namespace SteamKit2
 
         /// <summary>
         /// An optional API key to be used for authorized requests.
-        /// API key is always required when using partner.steam-api.com base address.
         /// Keys can be obtained from https://steamcommunity.com/dev
         /// </summary>
         public string WebAPIKey { get; set; }
