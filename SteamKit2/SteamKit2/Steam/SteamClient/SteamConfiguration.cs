@@ -5,7 +5,6 @@
 
 
 using System;
-using System.Threading;
 using SteamKit2.Discovery;
 
 namespace SteamKit2
@@ -81,6 +80,13 @@ namespace SteamKit2
             get => webAPIBaseAddress;
             set => webAPIBaseAddress = value ?? throw new ArgumentNullException(nameof(value));
         }
+
+        /// <summary>
+        /// An optional API key to be used for authorized requests.
+        /// API key is always required when using partner.steam-api.com base address.
+        /// Keys can be obtained from https://steamcommunity.com/dev
+        /// </summary>
+        public string WebAPIKey { get; set; }
 
         /// <summary>
         /// The server list used for this configuration.
