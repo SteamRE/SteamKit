@@ -58,7 +58,7 @@ namespace SteamKit2
         /// </param>
         public UFSClient( SteamClient steamClient )
         {
-            this.steamClient = steamClient ?? throw new ArgumentNullException(nameof(steamClient));
+            this.steamClient = steamClient ?? throw new ArgumentNullException( nameof(steamClient) );
 
             // our default timeout
             ConnectionTimeout = TimeSpan.FromSeconds( 5 );

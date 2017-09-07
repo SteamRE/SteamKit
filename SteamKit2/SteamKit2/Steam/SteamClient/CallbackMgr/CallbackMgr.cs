@@ -149,7 +149,7 @@ namespace SteamKit2
 
         sealed class Subscription : IDisposable
         {
-            public Subscription( CallbackBase call, ICallbackMgrInternals manager)
+            public Subscription( CallbackBase call, ICallbackMgrInternals manager )
             {
                 this.manager = manager;
                 this.call = call;
@@ -160,7 +160,7 @@ namespace SteamKit2
 
             void IDisposable.Dispose()
             {
-                if (call != null && manager != null)
+                if ( call != null && manager != null )
                 {
                     manager.Unregister( call );
                     call = null;
