@@ -115,7 +115,7 @@ namespace SteamKit2
 
         public Steam3Manifest(byte[] data)
         {
-            if (data ==  null)
+            if (data == null)
             {
                 throw new ArgumentNullException(nameof(data));
             }
