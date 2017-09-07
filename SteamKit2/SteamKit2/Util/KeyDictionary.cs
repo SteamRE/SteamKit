@@ -83,8 +83,10 @@ namespace SteamKit2
         /// <param name="eUniverse">The universe.</param>
         public static byte[] GetPublicKey( EUniverse eUniverse )
         {
-            if ( keys.ContainsKey( eUniverse ) )
-                return keys[ eUniverse ];
+            if ( keys.TryGetValue( eUniverse, out var key ) )
+            {
+                return key;
+            }
 
             return keys[ EUniverse.Invalid ];
         }
