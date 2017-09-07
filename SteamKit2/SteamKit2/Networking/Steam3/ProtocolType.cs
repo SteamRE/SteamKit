@@ -21,11 +21,6 @@ namespace SteamKit2
         Tcp = 1 << 0,
 
         /// <summary>
-        /// UDP
-        /// </summary>
-        Udp = 1 << 1,
-
-        /// <summary>
         /// WebSockets (HTTP / TLS)
         /// </summary>
         WebSocket = 1 << 2,
@@ -33,7 +28,7 @@ namespace SteamKit2
         /// <summary>
         /// All available protocol types
         /// </summary>
-        All = Tcp | Udp | WebSocket
+        All = Tcp | WebSocket
     }
 
     static class ProtocolTypesExtensions
@@ -46,11 +41,6 @@ namespace SteamKit2
             if (self.HasFlagsFast(ProtocolTypes.Tcp))
             {
                 yield return ProtocolTypes.Tcp;
-            }
-
-            if (self.HasFlagsFast(ProtocolTypes.Udp))
-            {
-                yield return ProtocolTypes.Udp;
             }
 
             if (self.HasFlagsFast(ProtocolTypes.WebSocket))

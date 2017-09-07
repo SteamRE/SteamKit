@@ -343,10 +343,6 @@ namespace SteamKit2.Internal
             {
                 return new EnvelopeEncryptedConnection( new TcpConnection(), Universe );
             }
-            else if ( protocol.HasFlagsFast( ProtocolTypes.Udp ) )
-            {
-                return new EnvelopeEncryptedConnection( new UdpConnection(), Universe );
-            }
 
             throw new ArgumentOutOfRangeException( nameof(protocol), protocol, "Protocol bitmask has no supported protocols set." );
         }

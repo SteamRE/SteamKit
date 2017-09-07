@@ -64,7 +64,6 @@ namespace SteamKit2
             ConnectionTimeout = TimeSpan.FromSeconds( 5 );
 
             // steamclient has the connection type hardcoded as TCP
-            // todo: determine if UFS supports UDP and if we want to support it
             connection = new EnvelopeEncryptedConnection( new TcpConnection(), steamClient.Universe );
 
             connection.NetMsgReceived += NetMsgReceived;

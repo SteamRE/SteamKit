@@ -1,7 +1,6 @@
 #import "emsg.steamd"
 #import "eresult.steamd"
 #import "enums.steamd"
-#import "netheader.steamd"
 
 class MsgHdr
 {
