@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
@@ -36,7 +36,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(configuration) );
             }
 
-            var directory = new WebAPI.AsyncInterface( configuration.WebAPIBaseAddress, "ISteamDirectory", null );
+            var directory = configuration.GetAsyncWebAPIInterface( "ISteamDirectory" );
             var args = new Dictionary<string, string>
             {
                 ["cellid"] = configuration.CellID.ToString( CultureInfo.InvariantCulture )
