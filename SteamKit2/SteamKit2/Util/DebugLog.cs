@@ -75,6 +75,11 @@ namespace SteamKit2
         /// <param name="listener">The listener.</param>
         public static void AddListener( IDebugListener listener )
         {
+            if ( listener == null )
+            {
+                throw new ArgumentNullException( nameof(listener) );
+            }
+            
             listeners.Add( listener );
         }
         /// <summary>
@@ -84,7 +89,9 @@ namespace SteamKit2
         public static void AddListener( Action<string, string> listenerAction )
         {
             if ( listenerAction == null )
+            {
                 return;
+            }
 
             AddListener( new ActionListener( listenerAction ) );
         }
@@ -106,7 +113,9 @@ namespace SteamKit2
             // Just In Case
 
             if ( listenerAction == null )
+            {
                 return;
+            }
 
             var removals = listeners
                  .Where( list => list is ActionListener )
@@ -137,7 +146,9 @@ namespace SteamKit2
         public static void WriteLine( string category, string msg, params object[] args )
         {
             if ( !DebugLog.Enabled )
+            {
                 return;
+            }
 
             string strMsg;
 

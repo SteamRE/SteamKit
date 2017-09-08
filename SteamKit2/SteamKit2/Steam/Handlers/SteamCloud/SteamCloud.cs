@@ -38,6 +38,11 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="UGCDetailsCallback"/>.</returns>
         public AsyncJob<UGCDetailsCallback> RequestUGCDetails( UGCHandle ugcId )
         {
+            if ( ugcId == null )
+            {
+                throw new ArgumentNullException( nameof(ugcId) );
+            }
+
             var request = new ClientMsgProtobuf<CMsgClientUFSGetUGCDetails>( EMsg.ClientUFSGetUGCDetails );
             request.SourceJobID = Client.GetNextJobID();
 
@@ -56,9 +61,9 @@ namespace SteamKit2
         /// <param name="appid">The app id of the game.</param>
         /// <param name="filename">The path to the file being requested.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SingleFileInfoCallback"/>.</returns>
-        public AsyncJob<SingleFileInfoCallback> GetSingleFileInfo(uint appid, string filename)
+        public AsyncJob<SingleFileInfoCallback> GetSingleFileInfo( uint appid, string filename )
         {
-            var request = new ClientMsgProtobuf<CMsgClientUFSGetSingleFileInfo>(EMsg.ClientUFSGetSingleFileInfo);
+            var request = new ClientMsgProtobuf<CMsgClientUFSGetSingleFileInfo> (EMsg.ClientUFSGetSingleFileInfo );
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.app_id = appid;
@@ -77,7 +82,7 @@ namespace SteamKit2
         /// <param name="appid">The app id of the game.</param>
         /// <param name="filename">The path to the file being requested.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="ShareFileCallback"/>.</returns>
-        public AsyncJob<ShareFileCallback> ShareFile(uint appid, string filename)
+        public AsyncJob<ShareFileCallback> ShareFile( uint appid, string filename )
         {
             var request = new ClientMsgProtobuf<CMsgClientUFSShareFile>(EMsg.ClientUFSShareFile);
             request.SourceJobID = Client.GetNextJobID();
@@ -96,8 +101,12 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            Action<IPacketMsg> handlerFunc;
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
+            if ( packetMsg == null )
+            {
+                throw new ArgumentNullException( nameof(packetMsg) );
+            }
+            
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc );
 
             if ( !haveFunc )
             {

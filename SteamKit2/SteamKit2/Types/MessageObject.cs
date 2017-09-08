@@ -23,6 +23,11 @@ namespace SteamKit2
         /// <param name="keyValues">The KeyValue backing store for this message object.</param>
         public MessageObject( KeyValue keyValues )
         {
+            if ( keyValues == null )
+            {
+                throw new ArgumentNullException( nameof(keyValues) );
+            }
+
             this.KeyValues = keyValues;
         }
         /// <summary>
@@ -41,6 +46,11 @@ namespace SteamKit2
         /// <returns><c>true</c> on success; otherwise, <c>false</c>.</returns>
         public bool ReadFromStream( Stream stream )
         {
+            if ( stream == null )
+            {
+                throw new ArgumentNullException( nameof(stream) );
+            }
+
             return KeyValues.TryReadAsBinary( stream );
         }
 
@@ -50,6 +60,11 @@ namespace SteamKit2
         /// <param name="stream">The stream to write to.</param>
         public void WriteToStream( Stream stream )
         {
+            if ( stream == null )
+            {
+                throw new ArgumentNullException( nameof(stream) );
+            }
+
             KeyValues.SaveToStream( stream, true );
         }
     }

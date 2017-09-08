@@ -232,13 +232,19 @@ namespace SteamKit2
             async Task<KeyValue> CallAsyncCore( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null )
             {
                 if ( method == null )
+                {
                     throw new ArgumentNullException( nameof(method) );
+                }
 
                 if ( func == null )
+                {
                     throw new ArgumentNullException( nameof(func) );
+                }
 
                 if ( args == null )
+                {
                     args = new Dictionary<string, string>();
+                }
 
 
                 var urlBuilder = new StringBuilder();
@@ -443,6 +449,16 @@ namespace SteamKit2
         /// <returns>A dynamic <see cref="Interface"/> object to interact with the Web API.</returns>
         public static Interface GetInterface( Uri baseAddress, string iface, string apiKey = "" )
         {
+            if ( baseAddress == null )
+            {
+                throw new ArgumentNullException( nameof(baseAddress) );
+            }
+
+            if ( iface == null )
+            {
+                throw new ArgumentNullException( nameof(iface) );
+            }
+
             return new Interface( baseAddress, iface, apiKey );
         }
 
@@ -454,6 +470,11 @@ namespace SteamKit2
         /// <returns>A dynamic <see cref="Interface"/> object to interact with the Web API.</returns>
         public static Interface GetInterface( string iface, string apiKey = "" )
         {
+            if ( iface == null )
+            {
+                throw new ArgumentNullException( nameof(iface) );
+            }
+
             return new Interface( DefaultBaseAddress, iface, apiKey );
         }
 
@@ -465,6 +486,11 @@ namespace SteamKit2
         /// <returns>A dynamic <see cref="AsyncInterface"/> object to interact with the Web API.</returns>
         public static AsyncInterface GetAsyncInterface( string iface, string apiKey = "" )
         {
+            if ( iface == null )
+            {
+                throw new ArgumentNullException( nameof(iface) );
+            }
+
             return new AsyncInterface( DefaultBaseAddress, iface, apiKey );
         }
 
@@ -477,6 +503,16 @@ namespace SteamKit2
         /// <returns>A dynamic <see cref="AsyncInterface"/> object to interact with the Web API.</returns>
         public static AsyncInterface GetAsyncInterface( Uri baseAddress, string iface, string apiKey = "" )
         {
+            if ( baseAddress == null )
+            {
+                throw new ArgumentNullException( nameof(baseAddress) );
+            }
+
+            if ( iface == null )
+            {
+                throw new ArgumentNullException( nameof(iface) );
+            }
+            
             return new AsyncInterface( baseAddress, iface, apiKey );
         }
     }

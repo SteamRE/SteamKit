@@ -101,10 +101,19 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="ScreenshotAddedCallback"/>.</returns>
         public AsyncJob<ScreenshotAddedCallback> AddScreenshot( ScreenshotDetails details )
         {
+            if ( details == null )
+            {
+                throw new ArgumentNullException( nameof(details) );
+            }
+
             var msg = new ClientMsgProtobuf<CMsgClientUCMAddScreenshot>( EMsg.ClientUCMAddScreenshot );
             msg.SourceJobID = Client.GetNextJobID();
 
-            msg.Body.appid = details.GameID.AppID;
+            if ( details.GameID != null )
+            {
+                msg.Body.appid = details.GameID.AppID;
+            }
+
             msg.Body.caption = details.Caption;
             msg.Body.filename = details.UFSImageFilePath;
             msg.Body.permissions = ( uint )details.Privacy;
@@ -125,8 +134,12 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            Action<IPacketMsg> handlerFunc;
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
+            if ( packetMsg == null )
+            {
+                throw new ArgumentNullException( nameof(packetMsg) );
+            }
+
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc );
 
             if ( !haveFunc )
             {

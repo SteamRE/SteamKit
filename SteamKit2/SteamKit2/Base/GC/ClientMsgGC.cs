@@ -4,6 +4,7 @@
  */
 
 
+using System;
 using System.IO;
 using ProtoBuf;
 using SteamKit2.Internal;
@@ -27,14 +28,14 @@ namespace SteamKit2.GC
         /// <value>
         /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
         /// </value>
-        public override bool IsProto { get { return true; } }
+        public override bool IsProto => true;
         /// <summary>
         /// Gets the network message type of this gc message.
         /// </summary>
         /// <value>
         /// The network message type.
         /// </value>
-        public override uint MsgType { get { return Header.Msg; } }
+        public override uint MsgType => Header.Msg;
 
         /// <summary>
         /// Gets or sets the target job id for this gc message.
@@ -44,8 +45,8 @@ namespace SteamKit2.GC
         /// </value>
         public override JobID TargetJobID
         {
-            get { return ProtoHeader.job_id_target; }
-            set { ProtoHeader.job_id_target = value; }
+            get => ProtoHeader.job_id_target;
+            set => ProtoHeader.job_id_target = value ?? throw new ArgumentNullException( nameof(value) );
         }
         /// <summary>
         /// Gets or sets the source job id for this gc message.
@@ -55,15 +56,15 @@ namespace SteamKit2.GC
         /// </value>
         public override JobID SourceJobID
         {
-            get { return ProtoHeader.job_id_source; }
-            set { ProtoHeader.job_id_source = value; }
+            get => ProtoHeader.job_id_source;
+            set => ProtoHeader.job_id_source = value ?? throw new ArgumentNullException( nameof(value) );
         }
 
 
         /// <summary>
         /// Shorthand accessor for the protobuf header.
         /// </summary>
-        public CMsgProtoBufHeader ProtoHeader { get { return Header.Proto; } }
+        public CMsgProtoBufHeader ProtoHeader => Header.Proto;
 
         /// <summary>
         /// Gets the body structure of this message.
@@ -96,6 +97,11 @@ namespace SteamKit2.GC
         public ClientGCMsgProtobuf( uint eMsg, GCMsgBase<MsgGCHdrProtoBuf> msg, int payloadReserve = 64 )
             : this( eMsg, payloadReserve )
         {
+            if ( msg == null )
+            {
+                throw new ArgumentNullException( nameof(msg) );
+            }
+
             // our target is where the message came from
             Header.Proto.job_id_target = msg.Header.Proto.job_id_source;
         }
@@ -106,7 +112,7 @@ namespace SteamKit2.GC
         /// </summary>
         /// <param name="msg">The packet message to build this gc message from.</param>
         public ClientGCMsgProtobuf( IPacketGCMsg msg )
-            : this( msg.MsgType )
+            : this( msg.GetMsgTypeWithNullCheck( nameof(msg) ) )
         {
             DebugLog.Assert( msg.IsProto, "ClientGCMsgProtobuf", "ClientGCMsgProtobuf used for non-proto message!" );
 
@@ -136,6 +142,11 @@ namespace SteamKit2.GC
         /// <param name="data">The data representing a gc message.</param>
         public override void Deserialize( byte[] data )
         {
+            if ( data == null )
+            {
+                throw new ArgumentNullException( nameof(data) );
+            }
+
             using ( MemoryStream ms = new MemoryStream( data ) )
             {
                 Header.Deserialize( ms );
@@ -163,16 +174,16 @@ namespace SteamKit2.GC
         /// <value>
         /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
         /// </value>
-        public override bool IsProto { get { return false; } }
+        public override bool IsProto => false;
 
-        uint msgType;
+        readonly uint msgType;
         /// <summary>
         /// Gets the network message type of this gc message.
         /// </summary>
         /// <value>
         /// The network message type.
         /// </value>
-        public override uint MsgType { get { return msgType; } }
+        public override uint MsgType => msgType;
 
         /// <summary>
         /// Gets or sets the target job id for this gc message.
@@ -182,8 +193,8 @@ namespace SteamKit2.GC
         /// </value>
         public override JobID TargetJobID
         {
-            get { return Header.TargetJobID; }
-            set { Header.TargetJobID = value; }
+            get => Header.TargetJobID;
+            set => Header.TargetJobID = value = value ?? throw new ArgumentNullException( nameof(value) );
         }
         /// <summary>
         /// Gets or sets the source job id for this gc message.
@@ -193,15 +204,15 @@ namespace SteamKit2.GC
         /// </value>
         public override JobID SourceJobID
         {
-            get { return Header.SourceJobID; }
-            set { Header.SourceJobID = value; }
+            get => Header.SourceJobID;
+            set => Header.SourceJobID = value ?? throw new ArgumentNullException( nameof(value) );
         }
 
 
         /// <summary>
         /// Gets the body structure of this message.
         /// </summary>
-        public BodyType Body { get; private set; }
+        public BodyType Body { get; }
 
 
         /// <summary>
@@ -227,6 +238,11 @@ namespace SteamKit2.GC
         public ClientGCMsg( GCMsgBase<MsgGCHdr> msg, int payloadReserve = 64 )
             : this( payloadReserve )
         {
+            if ( msg == null )
+            {
+                throw new ArgumentNullException( nameof(msg) );
+            }
+
             // our target is where the message came from
             Header.TargetJobID = msg.Header.SourceJobID;
         }
@@ -239,6 +255,11 @@ namespace SteamKit2.GC
         public ClientGCMsg( IPacketGCMsg msg )
             : this()
         {
+            if ( msg == null )
+            {
+                throw new ArgumentNullException( nameof(msg) );
+            }
+
             DebugLog.Assert( !msg.IsProto, "ClientGCMsg", "ClientGCMsg used for proto message!" );
 
             Deserialize( msg.GetData() );
@@ -267,6 +288,11 @@ namespace SteamKit2.GC
         /// <param name="data">The data representing a client message.</param>
         public override void Deserialize( byte[] data )
         {
+            if ( data == null )
+            {
+                throw new ArgumentNullException( nameof(data) );
+            }
+
             using ( MemoryStream ms = new MemoryStream( data ) )
             {
                 Header.Deserialize( ms );

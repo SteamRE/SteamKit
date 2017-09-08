@@ -96,7 +96,7 @@ namespace SteamKit2.GC
         /// <summary>
         /// Gets the header for this message type. 
         /// </summary>
-        public HdrType Header { get; private set; }
+        public HdrType Header { get; }
 
 
         /// <summary>

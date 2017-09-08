@@ -1,8 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using ProtoBuf;
 
@@ -60,6 +60,11 @@ namespace SteamKit2.Discovery
         /// <returns>Awaitable task for write completion</returns>
         public Task UpdateServerListAsync(IEnumerable<ServerRecord> endpoints)
         {
+            if (endpoints == null)
+            {
+                throw new ArgumentNullException(nameof(endpoints));
+            }
+
             return Task.Run(() =>
             {
                 try

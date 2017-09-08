@@ -209,13 +209,19 @@ namespace SteamKit2.Internal
         public void Send( IClientMsg msg )
         {
             if ( msg == null )
-                throw new ArgumentException( "A value for 'msg' must be supplied" );
+            {
+                throw new ArgumentNullException( nameof(msg), "A value for 'msg' must be supplied" );
+            }
 
             if ( this.SessionID.HasValue )
+            {
                 msg.SessionID = this.SessionID.Value;
+            }
 
             if ( this.SteamID != null )
+            {
                 msg.SteamID = this.SteamID;
+            }
 
             DebugLog.WriteLine( "CMClient", "Sent -> EMsg: {0} (Proto: {1})", msg.MsgType, msg.IsProto );
 

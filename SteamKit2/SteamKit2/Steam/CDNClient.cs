@@ -135,12 +135,17 @@ namespace SteamKit2
             /// <exception cref="System.IO.InvalidDataException">Thrown if the processed data does not match the expected checksum given in it's chunk information.</exception>
             public void Process( byte[] depotKey )
             {
+                if ( depotKey == null )
+                {
+                    throw new ArgumentNullException( nameof(depotKey) );
+                }
+
                 if ( IsProcessed )
                     return;
 
                 byte[] processedData = CryptoHelper.SymmetricDecrypt( Data, depotKey );
 
-                if ( processedData[0] == 'V' && processedData[1] == 'Z' )
+                if ( processedData.Length > 1 &&  processedData[0] == 'V' && processedData[1] == 'Z' )
                 {
                     processedData = VZipUtil.Decompress( processedData );
                 }
@@ -193,6 +198,11 @@ namespace SteamKit2
         /// </param>
         public CDNClient( SteamClient steamClient, byte[] appTicket = null )
         {
+            if ( steamClient == null )
+            {
+                throw new ArgumentNullException( nameof(steamClient) );
+            }
+
             this.steamClient = steamClient;
             this.httpClient = new HttpClient();
 
@@ -318,7 +328,9 @@ namespace SteamKit2
             DebugLog.Assert( steamClient.IsConnected, "CDNClient", "CMClient is not connected!" );
 
             if ( csServer == null )
-                throw new ArgumentNullException( "csServer" );
+            {
+                throw new ArgumentNullException( nameof(csServer) );
+            }
 
             // Nothing needs to be done to initialize a session to a CDN server
             if ( csServer.Type == "CDN" )
@@ -369,7 +381,9 @@ namespace SteamKit2
         public async Task AuthenticateDepotAsync( uint depotid, byte[] depotKey = null, string cdnAuthToken = null )
         {
             if ( depotIds.ContainsKey( depotid ) )
+            {
                 return;
+            }
 
             string data;
 
@@ -401,11 +415,8 @@ namespace SteamKit2
         /// <returns>A <see cref="DepotManifest"/> instance that contains information about the files present within a depot.</returns>
         public async Task<DepotManifest> DownloadManifestAsync( uint depotId, ulong manifestId )
         {
-            string cdnToken = null;
-            depotCdnAuthKeys.TryGetValue( depotId, out cdnToken );
-
-            byte[] depotKey = null;
-            depotKeys.TryGetValue( depotId, out depotKey );
+            depotCdnAuthKeys.TryGetValue( depotId, out var cdnToken );
+            depotKeys.TryGetValue( depotId, out var depotKey );
 
             return await DownloadManifestCoreAsync( depotId, manifestId, connectedServer, cdnToken, depotKey ).ConfigureAwait(false);
         }
@@ -458,14 +469,18 @@ namespace SteamKit2
 #pragma warning restore 0419
 #pragma warning restore 1574
         {
+            if ( chunk == null )
+            {
+                throw new ArgumentNullException( nameof(chunk) );
+            }
+
             if ( chunk.ChunkID == null )
-                throw new ArgumentNullException( "chunk.ChunkID" );
+            {
+                throw new ArgumentException( "Chunk must have a ChunkID.", nameof(chunk) );
+            }
 
-            string cdnToken = null;
-            depotCdnAuthKeys.TryGetValue( depotId, out cdnToken );
-
-            byte[] depotKey = null;
-            depotKeys.TryGetValue( depotId, out depotKey );
+            depotCdnAuthKeys.TryGetValue( depotId, out var cdnToken );
+            depotKeys.TryGetValue( depotId, out var depotKey );
 
             return await DownloadDepotChunkCoreAsync( depotId, chunk, connectedServer, cdnToken, depotKey ).ConfigureAwait( false );
         }
@@ -501,8 +516,15 @@ namespace SteamKit2
 #pragma warning restore 1574
 #pragma warning restore 0419
         {
-            if (chunk.ChunkID == null)
-                throw new ArgumentNullException( "chunk.ChunkID" );
+            if ( chunk == null )
+            {
+                throw new ArgumentNullException( nameof(chunk) );
+            }
+
+            if ( chunk.ChunkID == null )
+            {
+                throw new ArgumentException( "Chunk must have a ChunkID.", nameof(chunk) );
+            }
 
             var server = new Server
             {
