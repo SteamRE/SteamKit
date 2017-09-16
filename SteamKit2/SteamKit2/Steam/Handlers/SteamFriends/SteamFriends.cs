@@ -57,8 +57,8 @@ namespace SteamKit2
 
 
         /// <summary>
-        /// Gets the local user's persona name. Will be null before user's initialization.
-        /// User initialization is typically happening during <see cref="AccountInfoCallback"/> callback.
+        /// Gets the local user's persona name. Will be null before user initialization.
+        /// User initialization is performed prior to <see cref="AccountInfoCallback"/> callback.
         /// </summary>
         /// <returns>The name.</returns>
         public string GetPersonaName()
@@ -145,8 +145,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Gets the persona name of a friend. Will be null before friend's initialization.
-        /// Friend initialization is typically happening during <see cref="PersonaStateCallback"/> callback.
+        /// Gets the persona name of a friend.
         /// </summary>
         /// <param name="steamId">The steam id.</param>
         /// <returns>The name.</returns>
@@ -228,8 +227,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Gets the name of a clan. Will be null before clan's initialization.
-        /// Clan initialization is typically happening during <see cref="PersonaStateCallback"/> callback.
+        /// Gets the name of a clan.
         /// </summary>
         /// <param name="steamId">The clan SteamID.</param>
         /// <returns>The name.</returns>
