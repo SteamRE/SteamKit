@@ -136,8 +136,9 @@ namespace SteamKit2
         {
             Type type = typeof( T );
 
-            if ( handlers.Contains( type ) )
+            if ( handlers.Contains( type ) ) {
                 return handlers[ type ] as T;
+            }
 
             return null;
         }
