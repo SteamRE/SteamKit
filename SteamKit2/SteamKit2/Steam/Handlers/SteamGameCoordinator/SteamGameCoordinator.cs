@@ -28,6 +28,11 @@ namespace SteamKit2
         /// <param name="appId">The app id of the game coordinator to send to.</param>
         public void Send( IClientGCMsg msg, uint appId )
         {
+            if ( msg == null )
+            {
+                throw new ArgumentNullException( nameof(msg) );
+            }
+
             var clientMsg = new ClientMsgProtobuf<CMsgGCClient>( EMsg.ClientToGC );
 
             clientMsg.ProtoHeader.routing_appid = appId;
@@ -46,8 +51,12 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            Action<IPacketMsg> handlerFunc;
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
+            if ( packetMsg == null )
+            {
+                throw new ArgumentNullException( nameof(packetMsg) );
+            }
+
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc );
 
             if ( !haveFunc )
             {

@@ -30,6 +30,11 @@ namespace SteamKit2
         /// <param name="key">The public key to encrypt with.</param>
         public RSACrypto( byte[] key )
         {
+            if ( key == null )
+            {
+                throw new ArgumentNullException( nameof(key) );
+            }
+
             AsnKeyParser keyParser = new AsnKeyParser( key );
 
             rsa = RSA.Create();
@@ -43,6 +48,11 @@ namespace SteamKit2
         /// <param name="input">The input to encrypt.</param>
         public byte[] Encrypt( byte[] input )
         {
+            if ( input == null )
+            {
+                throw new ArgumentNullException( nameof(input) );
+            }
+
             return rsa.Encrypt( input, RSAEncryptionPadding.OaepSHA1 );
         }
 
@@ -65,6 +75,11 @@ namespace SteamKit2
         /// </summary>
         public static byte[] SHAHash( byte[] input )
         {
+            if ( input == null )
+            {
+                throw new ArgumentNullException( nameof(input) );
+            }
+
             using ( var sha = SHA1.Create() )
             {
                 return sha.ComputeHash( input );
@@ -76,6 +91,21 @@ namespace SteamKit2
         /// </summary>
         public static byte[] AESEncrypt( byte[] input, byte[] key, byte[] iv )
         {
+            if ( input == null )
+            {
+                throw new ArgumentNullException( nameof(input) );
+            }
+            
+            if ( key == null )
+            {
+                throw new ArgumentNullException( nameof(key) );
+            }
+            
+            if ( iv == null )
+            {
+                throw new ArgumentNullException( nameof(iv) );
+            }
+
             using ( var aes = Aes.Create() )
             {
                 aes.BlockSize = 128;
@@ -101,6 +131,21 @@ namespace SteamKit2
         /// </summary>
         public static byte[] AESDecrypt( byte[] input, byte[] key, byte[] iv )
         {
+            if ( input == null )
+            {
+                throw new ArgumentNullException( nameof(input) );
+            }
+            
+            if ( key == null )
+            {
+                throw new ArgumentNullException( nameof(key) );
+            }
+            
+            if ( iv == null )
+            {
+                throw new ArgumentNullException( nameof(iv) );
+            }
+
             using ( var aes = Aes.Create() )
             {
                 aes.BlockSize = 128;
@@ -131,6 +176,21 @@ namespace SteamKit2
         /// </summary>
         public static byte[] SymmetricEncryptWithIV( byte[] input, byte[] key, byte[] iv )
         {
+            if ( input == null )
+            {
+                throw new ArgumentNullException( nameof(input) );
+            }
+            
+            if ( key == null )
+            {
+                throw new ArgumentNullException( nameof(key) );
+            }
+            
+            if ( iv == null )
+            {
+                throw new ArgumentNullException( nameof(iv) );
+            }
+
             DebugLog.Assert( key.Length == 32, "CryptoHelper", "SymmetricEncrypt used with non 32 byte key!" );
 
             using ( var aes = Aes.Create() )
@@ -178,6 +238,16 @@ namespace SteamKit2
         /// </summary>
         public static byte[] SymmetricEncrypt( byte[] input, byte[] key )
         {
+            if ( input == null )
+            {
+                throw new ArgumentNullException( nameof(input) );
+            }
+            
+            if ( key == null )
+            {
+                throw new ArgumentNullException( nameof(key) );
+            }
+
             var iv = GenerateRandomBlock( 16 );
             return SymmetricEncryptWithIV( input, key, iv );
         }
@@ -187,6 +257,21 @@ namespace SteamKit2
         /// </summary>
         public static byte[] SymmetricEncryptWithHMACIV( byte[] input, byte[] key, byte[] hmacSecret )
         {
+            if ( input == null )
+            {
+                throw new ArgumentNullException( nameof(input) );
+            }
+            
+            if ( key == null )
+            {
+                throw new ArgumentNullException( nameof(key) );
+            }
+            
+            if ( hmacSecret == null )
+            {
+                throw new ArgumentNullException( nameof(hmacSecret) );
+            }
+
             // IV is HMAC-SHA1(Random(3) + Plaintext) + Random(3). (Same random values for both)
             var iv = new byte[ 16 ];
             var random = GenerateRandomBlock( 3 );
@@ -211,8 +296,17 @@ namespace SteamKit2
         /// </summary>
         public static byte[] SymmetricDecrypt( byte[] input, byte[] key )
         {
-            byte[] iv;
-            return SymmetricDecrypt( input, key, out iv );
+            if ( input == null )
+            {
+                throw new ArgumentNullException( nameof(input) );
+            }
+            
+            if ( key == null )
+            {
+                throw new ArgumentNullException( nameof(key) );
+            }
+            
+            return SymmetricDecrypt( input, key, out _ );
         }
 
         /// <summary>
@@ -220,12 +314,26 @@ namespace SteamKit2
         /// </summary>
         public static byte[] SymmetricDecryptHMACIV( byte[] input, byte[] key, byte[] hmacSecret )
         {
+            if ( input == null )
+            {
+                throw new ArgumentNullException( nameof(input) );
+            }
+            
+            if ( key == null )
+            {
+                throw new ArgumentNullException( nameof(key) );
+            }
+            
+            if ( hmacSecret == null )
+            {
+                throw new ArgumentNullException( nameof(hmacSecret) );
+            }
+
             Debug.Assert( key.Length >= 16 );
             var truncatedKeyForHmac = new byte[ 16 ];
             Array.Copy( key, 0, truncatedKeyForHmac, 0, truncatedKeyForHmac.Length );
 
-            byte[] iv;
-            var plaintextData = SymmetricDecrypt( input, key, out iv );
+            var plaintextData = SymmetricDecrypt( input, key, out var iv );
 
             // validate HMAC
             byte[] hmacBytes;
@@ -252,6 +360,16 @@ namespace SteamKit2
         /// </summary>
         static byte[] SymmetricDecrypt( byte[] input, byte[] key, out byte[] iv )
         {
+            if ( input == null )
+            {
+                throw new ArgumentNullException( nameof(input) );
+            }
+            
+            if ( key == null )
+            {
+                throw new ArgumentNullException( nameof(key) );
+            }
+
             DebugLog.Assert( key.Length == 32, "CryptoHelper", "SymmetricDecrypt used with non 32 byte key!" );
 
             using ( var aes = Aes.Create() )
@@ -303,6 +421,16 @@ namespace SteamKit2
         /// </summary>
         public static byte[] VerifyAndDecryptPassword( byte[] input, string password )
         {
+            if ( input == null )
+            {
+                throw new ArgumentNullException( nameof(input) );
+            }
+            
+            if ( password == null )
+            {
+                throw new ArgumentNullException( nameof(password) );
+            }
+
             byte[] key, hash;
             using( var sha256 = SHA256.Create() )
             {
@@ -329,6 +457,16 @@ namespace SteamKit2
         /// </summary>
         public static byte[] SymmetricDecryptECB( byte[] input, byte[] key )
         {
+            if ( input == null )
+            {
+                throw new ArgumentNullException( nameof(input) );
+            }
+            
+            if ( key == null )
+            {
+                throw new ArgumentNullException( nameof(key) );
+            }
+            
             DebugLog.Assert( key.Length == 32, "CryptoHelper", "SymmetricDecryptECB used with non 32 byte key!" );
 
             using ( var aes = Aes.Create() )
@@ -352,6 +490,11 @@ namespace SteamKit2
         /// </summary>
         public static byte[] CRCHash( byte[] input )
         {
+            if ( input == null )
+            {
+                throw new ArgumentNullException( nameof(input) );
+            }
+
             using ( var crc = new Crc32() )
             {
                 byte[] hash = crc.ComputeHash( input );
@@ -366,6 +509,11 @@ namespace SteamKit2
         /// </summary>
         public static byte[] AdlerHash( byte[] input )
         {
+            if ( input == null )
+            {
+                throw new ArgumentNullException( nameof(input) );
+            }
+            
             uint a = 0, b = 0;
             for ( int i = 0 ; i < input.Length ; i++ )
             {

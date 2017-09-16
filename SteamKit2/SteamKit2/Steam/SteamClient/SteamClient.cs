@@ -98,10 +98,13 @@ namespace SteamKit2
         public void AddHandler( ClientMsgHandler handler )
         {
             if ( handlers.Contains( handler.GetType() ) )
+            {
                 throw new InvalidOperationException( string.Format( "A handler of type \"{0}\" is already registered.", handler.GetType() ) );
 
-            handlers[ handler.GetType() ] = handler;
+            }
+
             handler.Setup( this );
+            handlers[ handler.GetType() ] = handler;
         }
 
         /// <summary>
@@ -110,9 +113,6 @@ namespace SteamKit2
         /// <param name="handler">The handler name to remove.</param>
         public void RemoveHandler( Type handler )
         {
-            if ( !handlers.Contains( handler ) )
-                return;
-
             handlers.Remove( handler );
         }
         /// <summary>

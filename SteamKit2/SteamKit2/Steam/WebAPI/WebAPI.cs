@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.ExceptionServices;
@@ -32,22 +31,24 @@ namespace SteamKit2
         /// </summary>
         public sealed class Interface : DynamicObject, IDisposable
         {
-            AsyncInterface asyncInterface;
+            readonly AsyncInterface asyncInterface;
 
 
             /// <summary>
             /// Gets or sets the timeout value in milliseconds for any web requests made to the WebAPI.
             /// </summary>
             /// <value>
-            /// The timeout value in milliseconds. The default value is 100,000 milliseconds (100 seconds).
+            /// The timeout value in milliseconds. The default value is 100 seconds.
             /// </value>
-            public int Timeout { get; set; }
+            public TimeSpan Timeout
+            {
+                get => asyncInterface.Timeout;
+                set => asyncInterface.Timeout = value;
+            }
 
 
             internal Interface( Uri baseAddress, string iface, string apiKey )
             {
-                Timeout = 1000 * 100; // 100 sec
-
                 asyncInterface = new AsyncInterface( baseAddress, iface, apiKey );
             }
 
@@ -148,28 +149,11 @@ namespace SteamKit2
             {
                 bool success = asyncInterface.TryInvokeMember( binder, args, out result );
 
-                // the async interface's return of TryInvokeMember will be a Task<KeyValue>, but users of this interface class
-                // expect a non-future KeyValue, so we need to duplicate the timeout handling logic here
-                // to return a KeyValue, or throw an exception
-
-                Task<KeyValue> resultTask = result as Task<KeyValue>;
-
-                try
+                if ( success )
                 {
-                    bool completed = resultTask.Wait( Timeout );
-
-                    if ( !completed )
-                        throw new TimeoutException( "The WebAPI call timed out" );
+                    var resultTask = ( Task<KeyValue> )result;
+                    result = resultTask.GetAwaiter().GetResult();
                 }
-                catch ( AggregateException ex ) when ( ex.InnerException != null )
-                {
-                    // because we're internally using the async interface, any WebExceptions thrown will
-                    // be wrapped inside an AggregateException.
-                    // since callers don't expect this, we need to unwrap and rethrow the inner exception
-                    ExceptionDispatchInfo.Capture( ex.InnerException ).Throw();
-                }
-
-                result = resultTask.Result;
 
                 return success;
             }
@@ -182,10 +166,22 @@ namespace SteamKit2
         /// </summary>
         public sealed class AsyncInterface : DynamicObject, IDisposable
         {
-            readonly HttpClient httpClient;
+            internal readonly HttpClient httpClient;
 
-            readonly string iface;
-            readonly string apiKey;
+            internal readonly string iface;
+            internal readonly string apiKey;
+
+            /// <summary>
+            /// Gets or sets the timeout value in milliseconds for any web requests made to the WebAPI.
+            /// </summary>
+            /// <value>
+            /// The timeout value in milliseconds. The default value is 100 seconds.
+            /// </value>
+            public TimeSpan Timeout
+            {
+                    get => httpClient.Timeout;
+                    set => httpClient.Timeout = value;
+            }
 
             static Regex funcNameRegex = new Regex(
                 @"(?<name>[a-zA-Z]+)(?<version>\d*)",
@@ -194,7 +190,11 @@ namespace SteamKit2
 
             internal AsyncInterface( Uri baseAddress, string iface, string apiKey )
             {
-                httpClient = new HttpClient { BaseAddress = baseAddress };
+                httpClient = new HttpClient
+                {
+                    BaseAddress = baseAddress,
+                    Timeout = TimeSpan.FromSeconds(100)
+                };
 
                 this.iface = iface;
                 this.apiKey = apiKey;
@@ -232,13 +232,19 @@ namespace SteamKit2
             async Task<KeyValue> CallAsyncCore( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null )
             {
                 if ( method == null )
+                {
                     throw new ArgumentNullException( nameof(method) );
+                }
 
                 if ( func == null )
+                {
                     throw new ArgumentNullException( nameof(func) );
+                }
 
                 if ( args == null )
+                {
                     args = new Dictionary<string, string>();
+                }
 
 
                 var urlBuilder = new StringBuilder();
@@ -435,7 +441,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Retreives a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// Retrieves a dynamic handler capable of interacting with the specified interface on the Web API.
         /// </summary>
         /// <param name="baseAddress">The base <see cref="Uri"/> of the Steam Web API.</param>
         /// <param name="iface">The interface to retrieve a handler for.</param>
@@ -443,33 +449,53 @@ namespace SteamKit2
         /// <returns>A dynamic <see cref="Interface"/> object to interact with the Web API.</returns>
         public static Interface GetInterface( Uri baseAddress, string iface, string apiKey = "" )
         {
+            if ( baseAddress == null )
+            {
+                throw new ArgumentNullException( nameof(baseAddress) );
+            }
+
+            if ( iface == null )
+            {
+                throw new ArgumentNullException( nameof(iface) );
+            }
+
             return new Interface( baseAddress, iface, apiKey );
         }
 
         /// <summary>
-        /// Retreives a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// Retrieves a dynamic handler capable of interacting with the specified interface on the Web API.
         /// </summary>
         /// <param name="iface">The interface to retrieve a handler for.</param>
         /// <param name="apiKey">An optional API key to be used for authorized requests.</param>
         /// <returns>A dynamic <see cref="Interface"/> object to interact with the Web API.</returns>
         public static Interface GetInterface( string iface, string apiKey = "" )
         {
+            if ( iface == null )
+            {
+                throw new ArgumentNullException( nameof(iface) );
+            }
+
             return new Interface( DefaultBaseAddress, iface, apiKey );
         }
 
         /// <summary>
-        /// Retreives a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// Retrieves a dynamic handler capable of interacting with the specified interface on the Web API.
         /// </summary>
         /// <param name="iface">The interface to retrieve a handler for.</param>
         /// <param name="apiKey">An optional API key to be used for authorized requests.</param>
         /// <returns>A dynamic <see cref="AsyncInterface"/> object to interact with the Web API.</returns>
         public static AsyncInterface GetAsyncInterface( string iface, string apiKey = "" )
         {
+            if ( iface == null )
+            {
+                throw new ArgumentNullException( nameof(iface) );
+            }
+
             return new AsyncInterface( DefaultBaseAddress, iface, apiKey );
         }
 
         /// <summary>
-        /// Retreives a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// Retrieves a dynamic handler capable of interacting with the specified interface on the Web API.
         /// </summary>
         /// <param name="baseAddress">The base <see cref="Uri"/> of the Steam Web API.</param>
         /// <param name="iface">The interface to retrieve a handler for.</param>
@@ -477,6 +503,16 @@ namespace SteamKit2
         /// <returns>A dynamic <see cref="AsyncInterface"/> object to interact with the Web API.</returns>
         public static AsyncInterface GetAsyncInterface( Uri baseAddress, string iface, string apiKey = "" )
         {
+            if ( baseAddress == null )
+            {
+                throw new ArgumentNullException( nameof(baseAddress) );
+            }
+
+            if ( iface == null )
+            {
+                throw new ArgumentNullException( nameof(iface) );
+            }
+            
             return new AsyncInterface( baseAddress, iface, apiKey );
         }
     }

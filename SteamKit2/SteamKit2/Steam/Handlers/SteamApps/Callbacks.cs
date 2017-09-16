@@ -459,7 +459,7 @@ namespace SteamKit2
 
                     this.KeyValues = new KeyValue();
 
-                    if ( app_info.buffer != null )
+                    if ( app_info.buffer != null && app_info.buffer.Length > 0 )
                     {
                         // we don't want to read the trailing null byte
                         using ( var ms = new MemoryStream( app_info.buffer, 0, app_info.buffer.Length - 1 ) )

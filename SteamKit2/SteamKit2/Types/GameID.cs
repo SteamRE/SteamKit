@@ -92,6 +92,11 @@ namespace SteamKit2
         /// </returns>
         public static implicit operator string( GameID gid )
         {
+            if ( gid == null )
+            {
+                throw new ArgumentNullException( nameof(gid) );
+            }
+
             return gid.gameid.Data.ToString();
         }
 
@@ -104,6 +109,11 @@ namespace SteamKit2
         /// </returns>
         public static implicit operator UInt64( GameID gid )
         {
+            if ( gid == null )
+            {
+                throw new ArgumentNullException( nameof(gid) );
+            }
+
             return gid.gameid.Data;
         }
 
@@ -225,11 +235,15 @@ namespace SteamKit2
         public override bool Equals( System.Object obj )
         {
             if ( obj == null )
+            {
                 return false;
+            }
 
             GameID gid = obj as GameID;
             if ( ( System.Object )gid == null )
+            {
                 return false;
+            }
 
             return gameid.Data == gid.gameid.Data;
         }
@@ -244,7 +258,9 @@ namespace SteamKit2
         public bool Equals( GameID gid )
         {
             if ( ( object )gid == null )
+            {
                 return false;
+            }
 
             return gameid.Data == gid.gameid.Data;
         }
@@ -260,10 +276,14 @@ namespace SteamKit2
         public static bool operator ==( GameID a, GameID b )
         {
             if ( System.Object.ReferenceEquals( a, b ) )
+            {
                 return true;
+            }
 
             if ( ( ( object )a == null ) || ( ( object )b == null ) )
+            {
                 return false;
+            }
 
             return a.gameid.Data == b.gameid.Data;
         }

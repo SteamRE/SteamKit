@@ -35,6 +35,11 @@ namespace SteamKit2
         /// <param name="user">The client to trade.</param>
         public void Trade( SteamID user )
         {
+            if ( user == null )
+            {
+                throw new ArgumentNullException( nameof(user) );
+            }
+
             var tradeReq = new ClientMsgProtobuf<CMsgTrading_InitiateTradeRequest>( EMsg.EconTrading_InitiateTradeRequest );
 
             tradeReq.Body.other_steamid = user;
@@ -63,6 +68,11 @@ namespace SteamKit2
         /// <param name="user">The user.</param>
         public void CancelTrade( SteamID user )
         {
+            if ( user == null )
+            {
+                throw new ArgumentNullException( nameof(user) );
+            }
+
             var cancelTrade = new ClientMsgProtobuf<CMsgTrading_CancelTradeRequest>( EMsg.EconTrading_CancelTradeRequest );
 
             cancelTrade.Body.other_steamid = user;
@@ -77,8 +87,12 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            Action<IPacketMsg> handlerFunc;
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
+            if ( packetMsg == null )
+            {
+                throw new ArgumentNullException( nameof(packetMsg) );
+            }
+
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc );
 
             if ( !haveFunc )
             {

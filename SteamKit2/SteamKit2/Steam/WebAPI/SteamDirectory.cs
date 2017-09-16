@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
@@ -31,7 +31,12 @@ namespace SteamKit2
         /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="ServerRecord"/>s.</returns>
         public static Task<IReadOnlyCollection<ServerRecord>> LoadAsync( SteamConfiguration configuration, CancellationToken cancellationToken )
         {
-            var directory = new WebAPI.AsyncInterface( configuration.WebAPIBaseAddress, "ISteamDirectory", null );
+            if ( configuration == null )
+            {
+                throw new ArgumentNullException( nameof(configuration) );
+            }
+
+            var directory = configuration.GetAsyncWebAPIInterface( "ISteamDirectory" );
             var args = new Dictionary<string, string>
             {
                 ["cellid"] = configuration.CellID.ToString( CultureInfo.InvariantCulture )

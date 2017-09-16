@@ -48,6 +48,11 @@ namespace SteamKit2
         /// </returns>
         public static implicit operator ulong( GlobalID gid )
         {
+            if ( gid == null )
+            {
+                throw new ArgumentNullException( nameof(gid) );
+            }
+
             return gid.gidBits.Data;
         }
 
@@ -144,11 +149,15 @@ namespace SteamKit2
         public override bool Equals( object obj )
         {
             if ( obj == null )
+            {
                 return false;
+            }
 
             GlobalID gid = obj as GlobalID;
             if ( ( object )gid == null )
+            {
                 return false;
+            }
 
             return gidBits.Data == gid.gidBits.Data;
         }
@@ -163,7 +172,9 @@ namespace SteamKit2
         public bool Equals( GlobalID gid )
         {
             if ( ( object )gid == null )
+            {
                 return false;
+            }
 
             return gidBits.Data == gid.gidBits.Data;
         }
@@ -179,10 +190,14 @@ namespace SteamKit2
         public static bool operator ==( GlobalID a, GlobalID b )
         {
             if ( System.Object.ReferenceEquals( a, b ) )
+            {
                 return true;
+            }
 
             if ( ( ( object )a == null ) || ( ( object )b == null ) )
+            {
                 return false;
+            }
 
             return a.gidBits.Data == b.gidBits.Data;
         }
@@ -255,6 +270,11 @@ namespace SteamKit2
         /// </returns>
         public static implicit operator ulong( UGCHandle handle )
         {
+            if ( handle == null )
+            {
+                throw new ArgumentNullException( nameof(handle) );
+            }
+
             return handle.Value;
         }
 

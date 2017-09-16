@@ -103,9 +103,13 @@ namespace SteamKit2
             internal FileData(string filename, EDepotFileFlag flag, ulong size, byte[] hash, bool encrypted, int numChunks)
             {
                 if (encrypted)
+                {
                     this.FileName = filename;
+                }
                 else
+                {
                     this.FileName = filename.Replace(altDirChar, Path.DirectorySeparatorChar);
+                }
 
                 this.Flags = flag;
                 this.TotalSize = size;
@@ -141,7 +145,9 @@ namespace SteamKit2
         public bool DecryptFilenames(byte[] encryptionKey)
         {
             if (!FilenamesEncrypted)
+            {
                 return true;
+            }
 
             foreach (var file in Files)
             {

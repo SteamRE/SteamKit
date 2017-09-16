@@ -245,6 +245,16 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSProductInfoCallback"/>.</returns>
         public AsyncJobMultiple<PICSProductInfoCallback> PICSGetProductInfo( IEnumerable<PICSRequest> apps, IEnumerable<PICSRequest> packages, bool metaDataOnly = false )
         {
+            if ( apps == null )
+            {
+                throw new ArgumentNullException( nameof(apps) );
+            }
+
+            if ( packages == null )
+            {
+                throw new ArgumentNullException( nameof(apps) );
+            }
+
             var request = new ClientMsgProtobuf<CMsgClientPICSProductInfoRequest>( EMsg.ClientPICSProductInfoRequest );
             request.SourceJobID = Client.GetNextJobID();
 
@@ -284,16 +294,16 @@ namespace SteamKit2
         /// <param name="depot">Depot id requested.</param>
         /// <param name="host_name">CDN host name being requested.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="CDNAuthTokenCallback"/>.</returns>
-        public AsyncJob<CDNAuthTokenCallback> GetCDNAuthToken(uint app, uint depot, string host_name)
+        public AsyncJob<CDNAuthTokenCallback> GetCDNAuthToken( uint app, uint depot, string host_name )
         {
-            var request = new ClientMsgProtobuf<CMsgClientGetCDNAuthToken>(EMsg.ClientGetCDNAuthToken);
+            var request = new ClientMsgProtobuf<CMsgClientGetCDNAuthToken>( EMsg.ClientGetCDNAuthToken );
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.app_id = app;
             request.Body.depot_id = depot;
             request.Body.host_name = host_name;
 
-            this.Client.Send(request);
+            this.Client.Send( request );
 
             return new AsyncJob<CDNAuthTokenCallback>( this.Client, request.SourceJobID );
         }
@@ -318,6 +328,11 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="FreeLicenseCallback"/>.</returns>
         public AsyncJob<FreeLicenseCallback> RequestFreeLicense( IEnumerable<uint> apps )
         {
+            if ( apps == null )
+            {
+                throw new ArgumentNullException( nameof(apps) );
+            }
+
             var request = new ClientMsgProtobuf<CMsgClientRequestFreeLicense>( EMsg.ClientRequestFreeLicense );
             request.SourceJobID = Client.GetNextJobID();
 
@@ -355,8 +370,12 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            Action<IPacketMsg> handlerFunc;
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
+            if ( packetMsg == null )
+            {
+                throw new ArgumentNullException( nameof(packetMsg) );
+            }
+
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc );
 
             if ( !haveFunc )
             {

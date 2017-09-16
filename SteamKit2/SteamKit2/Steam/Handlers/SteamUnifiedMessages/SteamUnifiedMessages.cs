@@ -43,7 +43,12 @@ namespace SteamKit2
             /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
             public AsyncJob<ServiceMethodResponse> SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification = false )
             {
-                var call = expr.Body as MethodCallExpression;
+                // This also doubles as a null check.
+                if ( !( (object)expr is MethodCallExpression call ) )
+                {
+                    throw new ArgumentException( "Expression must be a method call expression.", nameof(expr) );
+                }
+
                 var methodInfo = call.Method;
 
                 var argument = call.Arguments.Single();
@@ -98,6 +103,11 @@ namespace SteamKit2
         public AsyncJob<ServiceMethodResponse> SendMessage<TRequest>( string name, TRequest message, bool isNotification = false )
             where TRequest : IExtensible
         {
+            if ( message == null )
+            {
+                throw new ArgumentNullException( nameof(message) );
+            }
+
             var msg = new ClientMsgProtobuf<CMsgClientServiceMethod>( EMsg.ClientServiceMethod );
             msg.SourceJobID = Client.GetNextJobID();
 
@@ -132,8 +142,12 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            Action<IPacketMsg> handlerFunc;
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
+            if ( packetMsg == null )
+            {
+                throw new ArgumentNullException( nameof(packetMsg) );
+            }
+
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc );
 
             if ( !haveFunc )
             {

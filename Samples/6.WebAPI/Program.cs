@@ -64,9 +64,9 @@ namespace Sample6_WebAPI
                 {
                     kvNews = steamNews.GetNewsForApp002( appid: 730, maxlength: 100, count: 5 );
                 }
-                catch ( WebException ex )
+                catch ( Exception ex )
                 {
-                    Console.WriteLine( "Unable to make API request: {0}", ex.Message );
+                    Console.WriteLine( "Unable to make GetNewsForApp API request: {0}", ex.Message );
                 }
             }
 
@@ -74,11 +74,18 @@ namespace Sample6_WebAPI
             using ( dynamic steamUserAuth = WebAPI.GetInterface( "ISteamUserAuth", "APIKEYGOESHERE" ) )
             {
                 // as the interface functions are synchronous, it may be beneficial to specify a timeout for calls
-                steamUserAuth.Timeout = ( int )TimeSpan.FromSeconds( 5 ).TotalMilliseconds;
+                steamUserAuth.Timeout = TimeSpan.FromSeconds( 5 );
 
                 // additionally, if the API you are using requires you to POST or use an SSL connection, you may specify
                 // these settings with the "method" and "secure" reserved parameters
-                steamUserAuth.AuthenticateUser( someParam: "someValue", method: HttpMethod.Get, secure: true );
+                try
+                {
+                    steamUserAuth.AuthenticateUser( someParam: "someValue", method: HttpMethod.Post, secure: true );
+                }
+                catch ( Exception ex )
+                {
+                    Console.WriteLine( "Unable to make AuthenticateUser API Request: {0}", ex.Message );
+                }
             }
 
             // if you are using a language that does not have dynamic object support, or you otherwise don't wish to use it
