@@ -57,7 +57,8 @@ namespace SteamKit2
 
 
         /// <summary>
-        /// Gets the local user's persona name.
+        /// Gets the local user's persona name. Will be null before user initialization.
+        /// User initialization is performed prior to <see cref="AccountInfoCallback"/> callback.
         /// </summary>
         /// <returns>The name.</returns>
         public string GetPersonaName()
@@ -110,7 +111,6 @@ namespace SteamKit2
             stateMsg.SourceJobID = Client.GetNextJobID();
 
             stateMsg.Body.persona_state = ( uint )state;
-            stateMsg.Body.player_name = cache.LocalUser.Name;
 
             this.Client.Send( stateMsg );
 
