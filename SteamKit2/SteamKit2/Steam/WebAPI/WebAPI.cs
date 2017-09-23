@@ -289,6 +289,7 @@ namespace SteamKit2
                 }
 
                 var response = await httpClient.SendAsync( request ).ConfigureAwait( false );
+                response.EnsureSuccessStatusCode();
 
                 var kv = new KeyValue();
 

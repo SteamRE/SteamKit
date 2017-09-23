@@ -1,4 +1,9 @@
 ﻿using System;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Net.Sockets;
+using System.Threading.Tasks;
 using SteamKit2;
 using Xunit;
 
@@ -36,6 +41,70 @@ namespace Tests
             Assert.Equal(iface.iface, "TestInterface");
             Assert.Equal(iface.apiKey, "hello world");
             Assert.Equal(iface.httpClient.BaseAddress, new Uri("http://example.com"));
+        }
+
+        [Fact]
+        public async Task ThrowsHttpRequestExceptionIfRequestUnsuccessful()
+        {
+            var listener = new TcpListener(new IPEndPoint(IPAddress.Loopback, 28123));
+            listener.Start();
+            try
+            {
+                AcceptAndAutoReplySockets(listener);
+
+                var baseUri = "http://localhost:28123";
+                dynamic iface = WebAPI.GetAsyncInterface(new Uri(baseUri), "IFooService");
+
+                await Assert.ThrowsAsync(typeof(HttpRequestException), () => (Task)iface.PerformFooOperation());
+            }
+            finally
+            {
+                listener.Stop();
+            }
+        }
+
+        // Primitive HTTP listener function that always returns HTTP 503.
+        static void AcceptAndAutoReplySockets(TcpListener listener)
+        {
+            void OnSocketAccepted(IAsyncResult result)
+            {
+                try
+                {
+                    using (var socket = listener.EndAcceptSocket(result))
+                    using (var stream = new NetworkStream(socket))
+                    using (var reader = new StreamReader(stream))
+                    using (var writer = new StreamWriter(stream))
+                    {
+                        string line;
+                        do
+                        {
+                            line = reader.ReadLine();
+                        }
+                        while (!string.IsNullOrEmpty(line));
+
+                        writer.WriteLine("HTTP/1.1 503 Service Unavailable");
+                        writer.WriteLine("X-Response-Source: Unit Test");
+                        writer.WriteLine();
+                    }
+                }
+                catch
+                {
+                }
+
+                try
+                {
+                    AcceptAndAutoReplySockets(listener);
+                }
+                catch (ObjectDisposedException)
+                {
+                }
+            }
+
+            var ar = listener.BeginAcceptSocket(OnSocketAccepted, null);
+            if (ar.CompletedSynchronously)
+            {
+                OnSocketAccepted(ar);
+            }
         }
     }
 }
