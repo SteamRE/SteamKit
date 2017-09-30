@@ -1628,6 +1628,8 @@ namespace SteamKit2
 		GSLTExpired = 106,
 		InsufficientFunds = 107,
 		TooManyPending = 108,
+		NoSiteLicensesFound = 109,
+		WGNetworkSendExceeded = 110,
 	}
 	public enum EUniverse
 	{
