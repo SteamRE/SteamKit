@@ -1,0 +1,126 @@
+import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
+
+message CAccountHardware_RegisterSteamController_Request {
+	optional string serial_number = 1;
+	optional string controller_code = 2;
+}
+
+message CAccountHardware_RegisterSteamController_Response {
+}
+
+message CAccountHardware_CompleteSteamControllerRegistration_Request {
+	optional string serial_number = 1;
+	optional string controller_code = 2;
+}
+
+message CAccountHardware_CompleteSteamControllerRegistration_Response {
+}
+
+message CAccountHardware_QueryAccountsRegisteredToSerial_Request {
+	optional string serial_number = 1;
+	optional string controller_code = 2;
+}
+
+message CAccountHardware_QueryAccountsRegisteredToSerial_Accounts {
+	optional uint32 accountid = 1;
+	optional bool registration_complete = 2;
+}
+
+message CAccountHardware_QueryAccountsRegisteredToSerial_Response {
+	repeated .CAccountHardware_QueryAccountsRegisteredToSerial_Accounts accounts = 1;
+}
+
+message CAccountHardware_SteamControllerSetConfig_ControllerConfig {
+	optional string appidorname = 1;
+	optional uint64 publishedfileid = 2;
+	optional string templatename = 3;
+}
+
+message CAccountHardware_SteamControllerSetConfig_Request {
+	optional string serial_number = 1;
+	optional string controller_code = 2;
+	optional uint32 accountid = 3;
+	repeated .CAccountHardware_SteamControllerSetConfig_ControllerConfig configurations = 4;
+	optional int32 controller_type = 5 [default = 2];
+	optional bool only_for_this_serial = 6 [default = false];
+}
+
+message CAccountHardware_SteamControllerSetConfig_Response {
+}
+
+message CAccountHardware_SteamControllerGetConfig_Request {
+	optional string serial_number = 1;
+	optional string controller_code = 2;
+	optional uint32 accountid = 3;
+	optional string appidorname = 4;
+	optional int32 controller_type = 5 [default = 2];
+	optional bool only_for_this_serial = 6 [default = false];
+}
+
+message CAccountHardware_SteamControllerGetConfig_ControllerConfig {
+	optional string appidorname = 1;
+	optional uint64 publishedfileid = 2;
+	optional string templatename = 3;
+	optional string serial_number = 4;
+}
+
+message CAccountHardware_SteamControllerGetConfig_Response {
+	repeated .CAccountHardware_SteamControllerGetConfig_ControllerConfig configurations = 1;
+}
+
+message CAccountHardware_DeRegisterSteamController_Request {
+	optional string serial_number = 1;
+	optional string controller_code = 2;
+	optional uint32 accountid = 3;
+}
+
+message CAccountHardware_DeRegisterSteamController_Response {
+}
+
+message CAccountHardware_SetPersonalizationFile_Request {
+	optional string serial_number = 1;
+	optional uint64 publishedfileid = 2;
+	optional uint32 accountid = 3;
+}
+
+message CAccountHardware_SetPersonalizationFile_Response {
+}
+
+message CAccountHardware_GetPersonalizationFile_Request {
+	optional string serial_number = 1;
+	optional uint32 accountid = 2;
+}
+
+message CAccountHardware_GetPersonalizationFile_Response {
+	optional uint64 publishedfileid = 1;
+}
+
+service AccountHardware {
+	option (service_description) = "A service to use account hardware related methods";
+	rpc RegisterSteamController (.CAccountHardware_RegisterSteamController_Request) returns (.CAccountHardware_RegisterSteamController_Response) {
+		option (method_description) = "Records a serial number and the calling user's account info for warranty purposes.";
+	}
+	rpc CompleteSteamControllerRegistration (.CAccountHardware_CompleteSteamControllerRegistration_Request) returns (.CAccountHardware_CompleteSteamControllerRegistration_Response) {
+		option (method_description) = "Marks a controller's registration as complete";
+	}
+	rpc QueryAccountsRegisteredToController (.CAccountHardware_QueryAccountsRegisteredToSerial_Request) returns (.CAccountHardware_QueryAccountsRegisteredToSerial_Response) {
+		option (method_description) = "Sends back a list of accounts registered to a controller.";
+	}
+	rpc SetDesiredControllerConfigForApp (.CAccountHardware_SteamControllerSetConfig_Request) returns (.CAccountHardware_SteamControllerSetConfig_Response) {
+		option (method_description) = "Sets a desired controller config for an app";
+	}
+	rpc GetDesiredControllerConfigForApp (.CAccountHardware_SteamControllerGetConfig_Request) returns (.CAccountHardware_SteamControllerGetConfig_Response) {
+		option (method_description) = "Gets a desired controller config for an app";
+	}
+	rpc DeRegisterSteamController (.CAccountHardware_DeRegisterSteamController_Request) returns (.CAccountHardware_DeRegisterSteamController_Response) {
+		option (method_description) = "De registers a controller";
+	}
+	rpc SetControllerPersonalizationFile (.CAccountHardware_SetPersonalizationFile_Request) returns (.CAccountHardware_SetPersonalizationFile_Response) {
+		option (method_description) = "Stores the file ID of the personalization file";
+	}
+	rpc GetControllerPersonalizationFile (.CAccountHardware_GetPersonalizationFile_Request) returns (.CAccountHardware_GetPersonalizationFile_Response) {
+		option (method_description) = "Gets the file ID of the personalization file";
+	}
+}

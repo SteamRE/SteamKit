@@ -1,0 +1,25 @@
+import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
+
+message CStore_GetLocalizedNameForTags_Request {
+	optional string language = 1;
+	repeated uint32 tagids = 2;
+}
+
+message CStore_GetLocalizedNameForTags_Response {
+	message Tag {
+		optional uint32 tagid = 1;
+		optional string english_name = 2;
+		optional string name = 3;
+	}
+
+	repeated .CStore_GetLocalizedNameForTags_Response.Tag tags = 1;
+}
+
+service Store {
+	option (service_description) = "A service to access store data.";
+	rpc GetLocalizedNameForTags (.CStore_GetLocalizedNameForTags_Request) returns (.CStore_GetLocalizedNameForTags_Response) {
+		option (method_description) = "Gets tag names in a different language";
+	}
+}

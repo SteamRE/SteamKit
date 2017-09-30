@@ -10,7 +10,6 @@ message CMsgClientSiteInfo {
 
 message CMsgClientSiteLicenseCheckout {
 	optional uint32 appid = 1;
-	optional uint32 packageid = 2;
 }
 
 message CMsgClientSiteLicenseCheckoutResponse {
@@ -18,11 +17,21 @@ message CMsgClientSiteLicenseCheckoutResponse {
 }
 
 message CMsgClientSiteLicenseGetAvailableSeats {
-	optional uint32 packageid = 1;
+	optional uint32 appid = 1;
 }
 
 message CMsgClientSiteLicenseGetAvailableSeatsResponse {
 	optional int32 eresult = 1 [default = 2];
 	optional uint32 seats = 2;
+}
+
+message CMsgClientSiteLicenseGetContentCacheInfo {
+}
+
+message CMsgClientSiteLicenseGetContentCacheInfoResponse {
+	optional bool use_cache = 1;
+	optional uint32 ipv4_address = 2;
+	optional uint32 port_number = 3;
+	optional uint32 p2p_group = 4;
 }
 

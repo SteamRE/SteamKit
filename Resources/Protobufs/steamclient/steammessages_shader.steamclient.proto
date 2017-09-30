@@ -1,0 +1,55 @@
+import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
+
+message CShader_RegisterShader_Request {
+	message Shader {
+		optional bytes cache_key_sha = 1;
+		optional bytes shader_code_sha = 2;
+	}
+
+	optional uint32 appid = 1;
+	optional string gpu_desc = 2;
+	optional string driver_desc = 3;
+	repeated .CShader_RegisterShader_Request.Shader shaders = 4;
+}
+
+message CShader_RegisterShader_Response {
+	repeated uint32 requested_codeids = 1;
+}
+
+message CShader_SendShader_Request {
+	message ShaderCode {
+		optional bytes shader_code_sha = 1;
+		optional bytes shader_code = 2;
+	}
+
+	optional uint32 appid = 1;
+	repeated .CShader_SendShader_Request.ShaderCode shaders = 2;
+}
+
+message CShader_SendShader_Response {
+}
+
+message CShader_GetBucketManifest_Request {
+	optional uint32 appid = 1;
+	optional string gpu_desc = 2;
+	optional string driver_desc = 3;
+}
+
+message CShader_GetBucketManifest_Response {
+	optional uint64 manifestid = 1;
+}
+
+service Shader {
+	option (service_description) = "Shader methods";
+	rpc RegisterShader (.CShader_RegisterShader_Request) returns (.CShader_RegisterShader_Response) {
+		option (method_description) = "Client just finished playing a game, detected new shader cache entries and is notifying us about them";
+	}
+	rpc SendShader (.CShader_SendShader_Request) returns (.CShader_SendShader_Response) {
+		option (method_description) = "Client is sending us actual compiled shader code that we requested";
+	}
+	rpc GetBucketManifest (.CShader_GetBucketManifest_Request) returns (.CShader_GetBucketManifest_Response) {
+		option (method_description) = "Client wants to know the manifest ID to fetch (if any) for a bucket's depot";
+	}
+}
