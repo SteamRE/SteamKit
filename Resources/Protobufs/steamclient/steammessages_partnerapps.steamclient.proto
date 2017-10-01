@@ -38,6 +38,27 @@ message CPartnerApps_FinishUploadLegacyDRM_Response {
 message CPartnerApps_FinishUpload_Response {
 }
 
+message CPartnerApps_FinishUploadDepot_Request {
+	optional uint64 upload_token = 1;
+	optional uint64 routing_id = 2;
+	optional uint32 app_id = 3;
+	optional uint32 depot_id = 4;
+	optional uint32 build_flags = 5;
+}
+
+message CPartnerApps_FinishUploadDepot_Response {
+}
+
+message CPartnerApps_GetDepotBuildResult_Request {
+	optional uint64 upload_token = 1;
+	optional uint64 routing_id = 2;
+}
+
+message CPartnerApps_GetDepotBuildResult_Response {
+	optional uint64 manifest_id = 1;
+	optional string error_msg = 2;
+}
+
 message CPartnerApps_FindDRMUploads_Request {
 	optional int32 app_id = 1;
 }
@@ -78,6 +99,9 @@ service PartnerApps {
 	rpc RequestCEGUploadToken (.CPartnerApps_RequestUploadToken_Request) returns (.CPartnerApps_RequestUploadToken_Response) {
 		option (method_description) = "Request upload token for custom executable file upload / processing";
 	}
+	rpc RequestDepotUploadToken (.CPartnerApps_RequestUploadToken_Request) returns (.CPartnerApps_RequestUploadToken_Response) {
+		option (method_description) = "Request upload token for steampipe depot upload";
+	}
 	rpc FinishUploadKVSign (.CPartnerApps_FinishUpload_Request) returns (.CPartnerApps_FinishUploadKVSign_Response) {
 		option (method_description) = "Commit method to sign an installscript after an upload is complete";
 	}
@@ -86,6 +110,12 @@ service PartnerApps {
 	}
 	rpc FinishUploadCEGUpload (.CPartnerApps_FinishUpload_Request) returns (.CPartnerApps_FinishUpload_Response) {
 		option (method_description) = "Commit method for custom executable file processing";
+	}
+	rpc FinishUploadDepotUpload (.CPartnerApps_FinishUploadDepot_Request) returns (.CPartnerApps_FinishUploadDepot_Response) {
+		option (method_description) = "Commit method for custom executable file processing";
+	}
+	rpc GetDepotBuildResult (.CPartnerApps_GetDepotBuildResult_Request) returns (.CPartnerApps_GetDepotBuildResult_Response) {
+		option (method_description) = "Get build status for previously uploaded depot ZIP";
 	}
 	rpc FindDRMUploads (.CPartnerApps_FindDRMUploads_Request) returns (.CPartnerApps_FindDRMUploads_Response) {
 		option (method_description) = "Finds N most recent prior uploads by appid";

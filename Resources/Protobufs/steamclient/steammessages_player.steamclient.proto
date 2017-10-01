@@ -38,8 +38,25 @@ message CPlayer_AcceptSSA_Request {
 message CPlayer_AcceptSSA_Response {
 }
 
+message CPlayer_GetNicknameList_Request {
+}
+
+message CPlayer_GetNicknameList_Response {
+	message PlayerNickname {
+		optional fixed32 accountid = 1;
+		optional string nickname = 2;
+	}
+
+	repeated .CPlayer_GetNicknameList_Response.PlayerNickname nicknames = 1;
+}
+
 message CPlayer_LastPlayedTimes_Notification {
 	repeated .CPlayer_GetLastPlayedTimes_Response.Game games = 1;
+}
+
+message CPlayer_FriendNicknameChanged_Notification {
+	optional fixed32 accountid = 1;
+	optional string nickname = 2;
 }
 
 service Player {
@@ -53,11 +70,17 @@ service Player {
 	rpc AcceptSSA (.CPlayer_AcceptSSA_Request) returns (.CPlayer_AcceptSSA_Response) {
 		option (method_description) = "User is accepting the SSA";
 	}
+	rpc GetNicknameList (.CPlayer_GetNicknameList_Request) returns (.CPlayer_GetNicknameList_Response) {
+		option (method_description) = "Gets the list of nicknames this user has for other users";
+	}
 }
 service PlayerClient {
 	option (service_description) = "Steam player data client notifications";
 	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
 	rpc NotifyLastPlayedTimes (.CPlayer_LastPlayedTimes_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client of more recent play time";
+	}
+	rpc NotifyFriendNicknameChanged (.CPlayer_FriendNicknameChanged_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification from server to client that a friend's nickname has changed";
 	}
 }
