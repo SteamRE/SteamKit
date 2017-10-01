@@ -50,7 +50,7 @@ namespace Tests
             listener.Start();
             try
             {
-                AcceptAndAutoReplySockets(listener);
+                AcceptAndAutoReplyNextSocket(listener);
 
                 var baseUri = "http://localhost:28123";
                 dynamic iface = WebAPI.GetAsyncInterface(new Uri(baseUri), "IFooService");
@@ -64,7 +64,7 @@ namespace Tests
         }
 
         // Primitive HTTP listener function that always returns HTTP 503.
-        static void AcceptAndAutoReplySockets(TcpListener listener)
+        static void AcceptAndAutoReplyNextSocket(TcpListener listener)
         {
             void OnSocketAccepted(IAsyncResult result)
             {
@@ -88,14 +88,6 @@ namespace Tests
                     }
                 }
                 catch
-                {
-                }
-
-                try
-                {
-                    AcceptAndAutoReplySockets(listener);
-                }
-                catch (ObjectDisposedException)
                 {
                 }
             }
