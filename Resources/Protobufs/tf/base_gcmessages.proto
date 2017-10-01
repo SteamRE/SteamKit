@@ -551,10 +551,6 @@ message CMsgDeliverGiftResponseGiver {
 }
 
 message CSOEconGameAccountForGameServers {
-	optional uint32 skill_rating = 3;
-	optional uint32 skill_rating_6v6 = 2;
-	optional uint32 skill_rating_9v9 = 4;
-	optional uint32 skill_rating_12v12 = 5;
 }
 
 message CWorkshop_PopulateItemDescriptions_Request {

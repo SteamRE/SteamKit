@@ -4010,13 +4010,6 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _members; }
     }
   
-    private readonly global::System.Collections.Generic.List<CTFLobbyMember> _left_members = new global::System.Collections.Generic.List<CTFLobbyMember>();
-    [global::ProtoBuf.ProtoMember(7, Name=@"left_members", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CTFLobbyMember> left_members
-    {
-      get { return _left_members; }
-    }
-  
 
     private ulong? _leader_id;
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"leader_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
@@ -4065,7 +4058,7 @@ namespace SteamKit2.GC.TF2.Internal
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public CSOTFGameServerLobby.State state
     {
-      get { return _state?? CSOTFGameServerLobby.State.SERVERSETUP; }
+      get { return _state?? CSOTFGameServerLobby.State.UNKNOWN; }
       set { _state = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
@@ -4499,6 +4492,24 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _next_maps_for_vote; }
     }
   
+
+    private uint? _lobby_mm_version;
+    [global::ProtoBuf.ProtoMember(48, IsRequired = false, Name=@"lobby_mm_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint lobby_mm_version
+    {
+      get { return _lobby_mm_version?? default(uint); }
+      set { _lobby_mm_version = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool lobby_mm_versionSpecified
+    {
+      get { return _lobby_mm_version != null; }
+      set { if (value == (_lobby_mm_version== null)) _lobby_mm_version = value ? this.lobby_mm_version : (uint?)null; }
+    }
+    private bool ShouldSerializelobby_mm_version() { return lobby_mm_versionSpecified; }
+    private void Resetlobby_mm_version() { lobby_mm_versionSpecified = false; }
+    
     [global::ProtoBuf.ProtoContract(Name=@"State", EnumPassthru=true)]
     public enum State
     {
@@ -5646,6 +5657,24 @@ namespace SteamKit2.GC.TF2.Internal
     }
     private bool ShouldSerializematch_group() { return match_groupSpecified; }
     private void Resetmatch_group() { match_groupSpecified = false; }
+    
+
+    private uint? _lobby_mm_version;
+    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"lobby_mm_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint lobby_mm_version
+    {
+      get { return _lobby_mm_version?? default(uint); }
+      set { _lobby_mm_version = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool lobby_mm_versionSpecified
+    {
+      get { return _lobby_mm_version != null; }
+      set { if (value == (_lobby_mm_version== null)) _lobby_mm_version = value ? this.lobby_mm_version : (uint?)null; }
+    }
+    private bool ShouldSerializelobby_mm_version() { return lobby_mm_versionSpecified; }
+    private void Resetlobby_mm_version() { lobby_mm_versionSpecified = false; }
     
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
   public partial class Player : global::ProtoBuf.IExtensible
@@ -6925,6 +6954,80 @@ namespace SteamKit2.GC.TF2.Internal
   public partial class CMsgPlayerLeftMatchResponse : global::ProtoBuf.IExtensible
   {
     public CMsgPlayerLeftMatchResponse() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgPlayerVoteKickedAfterLeavingMatch")]
+  public partial class CMsgPlayerVoteKickedAfterLeavingMatch : global::ProtoBuf.IExtensible
+  {
+    public CMsgPlayerVoteKickedAfterLeavingMatch() {}
+    
+
+    private ulong? _steam_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong steam_id
+    {
+      get { return _steam_id?? default(ulong); }
+      set { _steam_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool steam_idSpecified
+    {
+      get { return _steam_id != null; }
+      set { if (value == (_steam_id== null)) _steam_id = value ? this.steam_id : (ulong?)null; }
+    }
+    private bool ShouldSerializesteam_id() { return steam_idSpecified; }
+    private void Resetsteam_id() { steam_idSpecified = false; }
+    
+
+    private ulong? _lobby_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"lobby_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong lobby_id
+    {
+      get { return _lobby_id?? default(ulong); }
+      set { _lobby_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool lobby_idSpecified
+    {
+      get { return _lobby_id != null; }
+      set { if (value == (_lobby_id== null)) _lobby_id = value ? this.lobby_id : (ulong?)null; }
+    }
+    private bool ShouldSerializelobby_id() { return lobby_idSpecified; }
+    private void Resetlobby_id() { lobby_idSpecified = false; }
+    
+
+    private ulong? _match_id;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong match_id
+    {
+      get { return _match_id?? default(ulong); }
+      set { _match_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool match_idSpecified
+    {
+      get { return _match_id != null; }
+      set { if (value == (_match_id== null)) _match_id = value ? this.match_id : (ulong?)null; }
+    }
+    private bool ShouldSerializematch_id() { return match_idSpecified; }
+    private void Resetmatch_id() { match_idSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgPlayerVoteKickedAfterLeavingMatchResponse")]
+  public partial class CMsgPlayerVoteKickedAfterLeavingMatchResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgPlayerVoteKickedAfterLeavingMatchResponse() {}
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -9408,42 +9511,6 @@ namespace SteamKit2.GC.TF2.Internal
     }
   
 
-    private uint? _red_skillrating;
-    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"red_skillrating", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint red_skillrating
-    {
-      get { return _red_skillrating?? default(uint); }
-      set { _red_skillrating = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool red_skillratingSpecified
-    {
-      get { return _red_skillrating != null; }
-      set { if (value == (_red_skillrating== null)) _red_skillrating = value ? this.red_skillrating : (uint?)null; }
-    }
-    private bool ShouldSerializered_skillrating() { return red_skillratingSpecified; }
-    private void Resetred_skillrating() { red_skillratingSpecified = false; }
-    
-
-    private uint? _blue_skillrating;
-    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"blue_skillrating", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint blue_skillrating
-    {
-      get { return _blue_skillrating?? default(uint); }
-      set { _blue_skillrating = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool blue_skillratingSpecified
-    {
-      get { return _blue_skillrating != null; }
-      set { if (value == (_blue_skillrating== null)) _blue_skillrating = value ? this.blue_skillrating : (uint?)null; }
-    }
-    private bool ShouldSerializeblue_skillrating() { return blue_skillratingSpecified; }
-    private void Resetblue_skillrating() { blue_skillratingSpecified = false; }
-    
-
     private uint? _win_reason;
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"win_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint win_reason
@@ -9480,24 +9547,6 @@ namespace SteamKit2.GC.TF2.Internal
     private void Resetflags() { flagsSpecified = false; }
     
 
-    private uint? _server_version;
-    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"server_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint server_version
-    {
-      get { return _server_version?? default(uint); }
-      set { _server_version = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool server_versionSpecified
-    {
-      get { return _server_version != null; }
-      set { if (value == (_server_version== null)) _server_version = value ? this.server_version : (uint?)null; }
-    }
-    private bool ShouldSerializeserver_version() { return server_versionSpecified; }
-    private void Resetserver_version() { server_versionSpecified = false; }
-    
-
     private uint? _bots;
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"bots", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint bots
@@ -9514,24 +9563,6 @@ namespace SteamKit2.GC.TF2.Internal
     }
     private bool ShouldSerializebots() { return botsSpecified; }
     private void Resetbots() { botsSpecified = false; }
-    
-
-    private bool? _server_created;
-    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"server_created", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool server_created
-    {
-      get { return _server_created?? (bool)false; }
-      set { _server_created = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool server_createdSpecified
-    {
-      get { return _server_created != null; }
-      set { if (value == (_server_created== null)) _server_created = value ? this.server_created : (bool?)null; }
-    }
-    private bool ShouldSerializeserver_created() { return server_createdSpecified; }
-    private void Resetserver_created() { server_createdSpecified = false; }
     
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
   public partial class Player : global::ProtoBuf.IExtensible
@@ -9645,42 +9676,6 @@ namespace SteamKit2.GC.TF2.Internal
     }
     private bool ShouldSerializeflags() { return flagsSpecified; }
     private void Resetflags() { flagsSpecified = false; }
-    
-
-    private uint? _skillrating;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"skillrating", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint skillrating
-    {
-      get { return _skillrating?? default(uint); }
-      set { _skillrating = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool skillratingSpecified
-    {
-      get { return _skillrating != null; }
-      set { if (value == (_skillrating== null)) _skillrating = value ? this.skillrating : (uint?)null; }
-    }
-    private bool ShouldSerializeskillrating() { return skillratingSpecified; }
-    private void Resetskillrating() { skillratingSpecified = false; }
-    
-
-    private int? _skillrating_change;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"skillrating_change", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int skillrating_change
-    {
-      get { return _skillrating_change?? default(int); }
-      set { _skillrating_change = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool skillrating_changeSpecified
-    {
-      get { return _skillrating_change != null; }
-      set { if (value == (_skillrating_change== null)) _skillrating_change = value ? this.skillrating_change : (int?)null; }
-    }
-    private bool ShouldSerializeskillrating_change() { return skillrating_changeSpecified; }
-    private void Resetskillrating_change() { skillrating_changeSpecified = false; }
     
 
     private uint? _rank;
@@ -10185,60 +10180,6 @@ namespace SteamKit2.GC.TF2.Internal
     private void Resetseason_id() { season_idSpecified = false; }
     
 
-    private uint? _rating;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"rating", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint rating
-    {
-      get { return _rating?? default(uint); }
-      set { _rating = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool ratingSpecified
-    {
-      get { return _rating != null; }
-      set { if (value == (_rating== null)) _rating = value ? this.rating : (uint?)null; }
-    }
-    private bool ShouldSerializerating() { return ratingSpecified; }
-    private void Resetrating() { ratingSpecified = false; }
-    
-
-    private uint? _last_ackd_rating;
-    [global::ProtoBuf.ProtoMember(31, IsRequired = false, Name=@"last_ackd_rating", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint last_ackd_rating
-    {
-      get { return _last_ackd_rating?? default(uint); }
-      set { _last_ackd_rating = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool last_ackd_ratingSpecified
-    {
-      get { return _last_ackd_rating != null; }
-      set { if (value == (_last_ackd_rating== null)) _last_ackd_rating = value ? this.last_ackd_rating : (uint?)null; }
-    }
-    private bool ShouldSerializelast_ackd_rating() { return last_ackd_ratingSpecified; }
-    private void Resetlast_ackd_rating() { last_ackd_ratingSpecified = false; }
-    
-
-    private int? _last_rating_change;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"last_rating_change", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int last_rating_change
-    {
-      get { return _last_rating_change?? default(int); }
-      set { _last_rating_change = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool last_rating_changeSpecified
-    {
-      get { return _last_rating_change != null; }
-      set { if (value == (_last_rating_change== null)) _last_rating_change = value ? this.last_rating_change : (int?)null; }
-    }
-    private bool ShouldSerializelast_rating_change() { return last_rating_changeSpecified; }
-    private void Resetlast_rating_change() { last_rating_changeSpecified = false; }
-    
-
     private uint? _rank;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint rank
@@ -10705,6 +10646,106 @@ namespace SteamKit2.GC.TF2.Internal
     }
     private bool ShouldSerializesupport_gold() { return support_goldSpecified; }
     private void Resetsupport_gold() { support_goldSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSOTFRatingData")]
+  public partial class CSOTFRatingData : global::ProtoBuf.IExtensible
+  {
+    public CSOTFRatingData() {}
+    
+
+    private uint? _account_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint account_id
+    {
+      get { return _account_id?? default(uint); }
+      set { _account_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool account_idSpecified
+    {
+      get { return _account_id != null; }
+      set { if (value == (_account_id== null)) _account_id = value ? this.account_id : (uint?)null; }
+    }
+    private bool ShouldSerializeaccount_id() { return account_idSpecified; }
+    private void Resetaccount_id() { account_idSpecified = false; }
+    
+
+    private int? _rating_type;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"rating_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int rating_type
+    {
+      get { return _rating_type?? default(int); }
+      set { _rating_type = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool rating_typeSpecified
+    {
+      get { return _rating_type != null; }
+      set { if (value == (_rating_type== null)) _rating_type = value ? this.rating_type : (int?)null; }
+    }
+    private bool ShouldSerializerating_type() { return rating_typeSpecified; }
+    private void Resetrating_type() { rating_typeSpecified = false; }
+    
+
+    private uint? _rating_primary;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"rating_primary", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint rating_primary
+    {
+      get { return _rating_primary?? default(uint); }
+      set { _rating_primary = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool rating_primarySpecified
+    {
+      get { return _rating_primary != null; }
+      set { if (value == (_rating_primary== null)) _rating_primary = value ? this.rating_primary : (uint?)null; }
+    }
+    private bool ShouldSerializerating_primary() { return rating_primarySpecified; }
+    private void Resetrating_primary() { rating_primarySpecified = false; }
+    
+
+    private uint? _rating_secondary;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"rating_secondary", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint rating_secondary
+    {
+      get { return _rating_secondary?? default(uint); }
+      set { _rating_secondary = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool rating_secondarySpecified
+    {
+      get { return _rating_secondary != null; }
+      set { if (value == (_rating_secondary== null)) _rating_secondary = value ? this.rating_secondary : (uint?)null; }
+    }
+    private bool ShouldSerializerating_secondary() { return rating_secondarySpecified; }
+    private void Resetrating_secondary() { rating_secondarySpecified = false; }
+    
+
+    private uint? _rating_tertiary;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"rating_tertiary", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint rating_tertiary
+    {
+      get { return _rating_tertiary?? default(uint); }
+      set { _rating_tertiary = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool rating_tertiarySpecified
+    {
+      get { return _rating_tertiary != null; }
+      set { if (value == (_rating_tertiary== null)) _rating_tertiary = value ? this.rating_tertiary : (uint?)null; }
+    }
+    private bool ShouldSerializerating_tertiary() { return rating_tertiarySpecified; }
+    private void Resetrating_tertiary() { rating_tertiarySpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -11311,40 +11352,40 @@ namespace SteamKit2.GC.TF2.Internal
     private void Resetflags() { flagsSpecified = false; }
     
 
-    private uint? _skillrating;
-    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"skillrating", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint skillrating
+    private uint? _display_rating;
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"display_rating", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint display_rating
     {
-      get { return _skillrating?? default(uint); }
-      set { _skillrating = value; }
+      get { return _display_rating?? default(uint); }
+      set { _display_rating = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
     [global::System.ComponentModel.Browsable(false)]
-    public bool skillratingSpecified
+    public bool display_ratingSpecified
     {
-      get { return _skillrating != null; }
-      set { if (value == (_skillrating== null)) _skillrating = value ? this.skillrating : (uint?)null; }
+      get { return _display_rating != null; }
+      set { if (value == (_display_rating== null)) _display_rating = value ? this.display_rating : (uint?)null; }
     }
-    private bool ShouldSerializeskillrating() { return skillratingSpecified; }
-    private void Resetskillrating() { skillratingSpecified = false; }
+    private bool ShouldSerializedisplay_rating() { return display_ratingSpecified; }
+    private void Resetdisplay_rating() { display_ratingSpecified = false; }
     
 
-    private int? _skillrating_change;
-    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"skillrating_change", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int skillrating_change
+    private int? _display_rating_change;
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"display_rating_change", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int display_rating_change
     {
-      get { return _skillrating_change?? default(int); }
-      set { _skillrating_change = value; }
+      get { return _display_rating_change?? default(int); }
+      set { _display_rating_change = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
     [global::System.ComponentModel.Browsable(false)]
-    public bool skillrating_changeSpecified
+    public bool display_rating_changeSpecified
     {
-      get { return _skillrating_change != null; }
-      set { if (value == (_skillrating_change== null)) _skillrating_change = value ? this.skillrating_change : (int?)null; }
+      get { return _display_rating_change != null; }
+      set { if (value == (_display_rating_change== null)) _display_rating_change = value ? this.display_rating_change : (int?)null; }
     }
-    private bool ShouldSerializeskillrating_change() { return skillrating_changeSpecified; }
-    private void Resetskillrating_change() { skillrating_changeSpecified = false; }
+    private bool ShouldSerializedisplay_rating_change() { return display_rating_changeSpecified; }
+    private void Resetdisplay_rating_change() { display_rating_changeSpecified = false; }
     
 
     private uint? _rank;
@@ -12549,6 +12590,12 @@ namespace SteamKit2.GC.TF2.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_ChangeMatchPlayerTeamsResponse", Value=6540)]
       k_EMsgGC_ChangeMatchPlayerTeamsResponse = 6540,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPlayerVoteKickedAfterLeavingMatch", Value=6551)]
+      k_EMsgGCPlayerVoteKickedAfterLeavingMatch = 6551,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPlayerVoteKickedAfterLeavingMatchResponse", Value=6552)]
+      k_EMsgGCPlayerVoteKickedAfterLeavingMatchResponse = 6552,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=10001)]
       k_EMsgGCDev_GrantWarKill = 10001

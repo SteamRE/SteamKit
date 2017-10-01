@@ -138,6 +138,8 @@ enum ETFGCMsg {
 	k_EMsgGC_NewMatchForLobbyResponse = 6538;
 	k_EMsgGC_ChangeMatchPlayerTeamsRequest = 6539;
 	k_EMsgGC_ChangeMatchPlayerTeamsResponse = 6540;
+	k_EMsgGCPlayerVoteKickedAfterLeavingMatch = 6551;
+	k_EMsgGCPlayerVoteKickedAfterLeavingMatchResponse = 6552;
 	k_EMsgGCDev_GrantWarKill = 10001;
 }
 
@@ -677,11 +679,10 @@ message CSOTFGameServerLobby {
 
 	optional uint64 lobby_id = 1 [(key_field) = true];
 	repeated .CTFLobbyMember members = 2;
-	repeated .CTFLobbyMember left_members = 7;
 	optional fixed64 leader_id = 11;
 	optional fixed64 server_id = 6 [default = 0];
 	repeated fixed64 pending_invites = 10;
-	optional .CSOTFGameServerLobby.State state = 4 [default = SERVERSETUP];
+	optional .CSOTFGameServerLobby.State state = 4 [default = UNKNOWN];
 	optional string connect = 5;
 	optional .CSOTFGameServerLobby.LobbyType lobby_type = 12 [default = INVALID];
 	optional bool allow_cheats = 13;
@@ -706,6 +707,7 @@ message CSOTFGameServerLobby {
 	optional uint32 fixed_match_size = 45;
 	optional .CSOTFGameServerLobby.WarMatch is_war_match = 46 [default = NOPE];
 	repeated uint32 next_maps_for_vote = 47;
+	optional uint32 lobby_mm_version = 48;
 }
 
 message CMsgExitMatchmaking {
@@ -834,6 +836,7 @@ message CMsgGameServerMatchmakingStatus {
 	optional uint32 mvm_credits_acquired = 19;
 	optional uint32 mvm_credits_dropped = 20;
 	optional sint32 match_group = 23 [default = -1];
+	optional uint32 lobby_mm_version = 24;
 }
 
 message CMsgMatchmakingProgress {
@@ -948,6 +951,15 @@ message CMsgPlayerLeftMatch {
 }
 
 message CMsgPlayerLeftMatchResponse {
+}
+
+message CMsgPlayerVoteKickedAfterLeavingMatch {
+	optional fixed64 steam_id = 1;
+	optional fixed64 lobby_id = 2;
+	optional fixed64 match_id = 3;
+}
+
+message CMsgPlayerVoteKickedAfterLeavingMatchResponse {
 }
 
 message CMsgHalloween_ServerBossEvent {
@@ -1169,8 +1181,6 @@ message CMsgGC_Match_Result {
 		optional uint32 score = 4;
 		optional uint32 ping = 5;
 		optional uint32 flags = 6;
-		optional uint32 skillrating = 7;
-		optional int32 skillrating_change = 8;
 		optional uint32 rank = 9;
 		optional uint32 classes_played = 10;
 		optional uint32 kills = 11;
@@ -1209,13 +1219,9 @@ message CMsgGC_Match_Result {
 	optional uint32 map_index = 8;
 	optional uint32 game_type = 9 [default = 0];
 	repeated .CMsgGC_Match_Result.Player players = 10;
-	optional uint32 red_skillrating = 11;
-	optional uint32 blue_skillrating = 12;
 	optional uint32 win_reason = 13;
 	optional uint32 flags = 14;
-	optional uint32 server_version = 15;
 	optional uint32 bots = 16;
-	optional bool server_created = 17 [default = false];
 }
 
 message CMsgGC_Match_ResultResponse {
@@ -1240,9 +1246,6 @@ message CSOTFLadderPlayerStats {
 	optional uint32 account_id = 1 [(key_field) = true];
 	optional int32 match_group = 2 [(key_field) = true];
 	optional uint32 season_id = 3 [(key_field) = true];
-	optional uint32 rating = 4;
-	optional uint32 last_ackd_rating = 31;
-	optional int32 last_rating_change = 5;
 	optional uint32 rank = 6;
 	optional uint32 highest_rank = 7;
 	optional uint32 experience = 8;
@@ -1269,6 +1272,14 @@ message CSOTFLadderPlayerStats {
 	optional uint32 support_bronze = 28;
 	optional uint32 support_silver = 29;
 	optional uint32 support_gold = 30;
+}
+
+message CSOTFRatingData {
+	optional uint32 account_id = 1 [(key_field) = true];
+	optional int32 rating_type = 2 [(key_field) = true];
+	optional uint32 rating_primary = 3;
+	optional uint32 rating_secondary = 4;
+	optional uint32 rating_tertiary = 5;
 }
 
 message CMsgGC_TFVoteKickPlayerRequest {
@@ -1328,8 +1339,8 @@ message CSOTFMatchResultPlayerStats {
 	optional uint32 score = 9;
 	optional uint32 ping = 10;
 	optional uint32 flags = 11;
-	optional uint32 skillrating = 12;
-	optional int32 skillrating_change = 13;
+	optional uint32 display_rating = 12;
+	optional int32 display_rating_change = 13;
 	optional uint32 rank = 14;
 	optional uint32 classes_played = 15;
 	optional uint32 kills = 16;
