@@ -497,6 +497,12 @@ namespace SteamKit2.GC.CSGO.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgGetPartnerAccountLinkResponse", Value=508)]
       k_EGCMsgGetPartnerAccountLinkResponse = 508,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgDPPartnerMicroTxns", Value=512)]
+      k_EGCMsgDPPartnerMicroTxns = 512,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgDPPartnerMicroTxnsResponse", Value=513)]
+      k_EGCMsgDPPartnerMicroTxnsResponse = 513,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgVacVerificationChange", Value=518)]
       k_EGCMsgVacVerificationChange = 518,
             

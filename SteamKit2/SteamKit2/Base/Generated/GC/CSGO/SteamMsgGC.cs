@@ -208,6 +208,31 @@ namespace SteamKit2.GC.CSGO.Internal
     private bool ShouldSerializetxn_id() { return txn_idSpecified; }
     private void Resettxn_id() { txn_idSpecified = false; }
     
+
+    private string _url;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string url
+    {
+      get { return _url?? ""; }
+      set { _url = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool urlSpecified
+    {
+      get { return _url != null; }
+      set { if (value == (_url== null)) _url = value ? this.url : (string)null; }
+    }
+    private bool ShouldSerializeurl() { return urlSpecified; }
+    private void Reseturl() { urlSpecified = false; }
+    
+    private readonly global::System.Collections.Generic.List<ulong> _item_ids = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"item_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> item_ids
+    {
+      get { return _item_ids; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

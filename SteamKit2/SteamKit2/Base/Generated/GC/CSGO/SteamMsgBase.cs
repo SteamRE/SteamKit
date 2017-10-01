@@ -4882,6 +4882,67 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _extra_fields; }
     }
   
+
+    private ulong? _owner_id;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"owner_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong owner_id
+    {
+      get { return _owner_id?? default(ulong); }
+      set { _owner_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool owner_idSpecified
+    {
+      get { return _owner_id != null; }
+      set { if (value == (_owner_id== null)) _owner_id = value ? this.owner_id : (ulong?)null; }
+    }
+    private bool ShouldSerializeowner_id() { return owner_idSpecified; }
+    private void Resetowner_id() { owner_idSpecified = false; }
+    
+
+    private uint? _cm_session_sysid;
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"cm_session_sysid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint cm_session_sysid
+    {
+      get { return _cm_session_sysid?? default(uint); }
+      set { _cm_session_sysid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool cm_session_sysidSpecified
+    {
+      get { return _cm_session_sysid != null; }
+      set { if (value == (_cm_session_sysid== null)) _cm_session_sysid = value ? this.cm_session_sysid : (uint?)null; }
+    }
+    private bool ShouldSerializecm_session_sysid() { return cm_session_sysidSpecified; }
+    private void Resetcm_session_sysid() { cm_session_sysidSpecified = false; }
+    
+
+    private uint? _cm_session_identifier;
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"cm_session_identifier", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint cm_session_identifier
+    {
+      get { return _cm_session_identifier?? default(uint); }
+      set { _cm_session_identifier = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool cm_session_identifierSpecified
+    {
+      get { return _cm_session_identifier != null; }
+      set { if (value == (_cm_session_identifier== null)) _cm_session_identifier = value ? this.cm_session_identifier : (uint?)null; }
+    }
+    private bool ShouldSerializecm_session_identifier() { return cm_session_identifierSpecified; }
+    private void Resetcm_session_identifier() { cm_session_identifierSpecified = false; }
+    
+    private readonly global::System.Collections.Generic.List<uint> _depot_ids = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(13, Name=@"depot_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> depot_ids
+    {
+      get { return _depot_ids; }
+    }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ExtraField")]
   public partial class ExtraField : global::ProtoBuf.IExtensible
   {
@@ -5017,6 +5078,544 @@ namespace SteamKit2.GC.CSGO.Internal
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDPPartnerMicroTxns")]
+  public partial class CMsgDPPartnerMicroTxns : global::ProtoBuf.IExtensible
+  {
+    public CMsgDPPartnerMicroTxns() {}
+    
+
+    private uint? _appid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint appid
+    {
+      get { return _appid?? default(uint); }
+      set { _appid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
+
+    private string _gc_name;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"gc_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string gc_name
+    {
+      get { return _gc_name?? ""; }
+      set { _gc_name = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool gc_nameSpecified
+    {
+      get { return _gc_name != null; }
+      set { if (value == (_gc_name== null)) _gc_name = value ? this.gc_name : (string)null; }
+    }
+    private bool ShouldSerializegc_name() { return gc_nameSpecified; }
+    private void Resetgc_name() { gc_nameSpecified = false; }
+    
+
+    private CMsgDPPartnerMicroTxns.PartnerInfo _partner = null;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"partner", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgDPPartnerMicroTxns.PartnerInfo partner
+    {
+      get { return _partner; }
+      set { _partner = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgDPPartnerMicroTxns.PartnerMicroTxn> _transactions = new global::System.Collections.Generic.List<CMsgDPPartnerMicroTxns.PartnerMicroTxn>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"transactions", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgDPPartnerMicroTxns.PartnerMicroTxn> transactions
+    {
+      get { return _transactions; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PartnerMicroTxn")]
+  public partial class PartnerMicroTxn : global::ProtoBuf.IExtensible
+  {
+    public PartnerMicroTxn() {}
+    
+
+    private uint? _init_time;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"init_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint init_time
+    {
+      get { return _init_time?? default(uint); }
+      set { _init_time = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool init_timeSpecified
+    {
+      get { return _init_time != null; }
+      set { if (value == (_init_time== null)) _init_time = value ? this.init_time : (uint?)null; }
+    }
+    private bool ShouldSerializeinit_time() { return init_timeSpecified; }
+    private void Resetinit_time() { init_timeSpecified = false; }
+    
+
+    private uint? _last_update_time;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"last_update_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint last_update_time
+    {
+      get { return _last_update_time?? default(uint); }
+      set { _last_update_time = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool last_update_timeSpecified
+    {
+      get { return _last_update_time != null; }
+      set { if (value == (_last_update_time== null)) _last_update_time = value ? this.last_update_time : (uint?)null; }
+    }
+    private bool ShouldSerializelast_update_time() { return last_update_timeSpecified; }
+    private void Resetlast_update_time() { last_update_timeSpecified = false; }
+    
+
+    private ulong? _txn_id;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"txn_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong txn_id
+    {
+      get { return _txn_id?? default(ulong); }
+      set { _txn_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool txn_idSpecified
+    {
+      get { return _txn_id != null; }
+      set { if (value == (_txn_id== null)) _txn_id = value ? this.txn_id : (ulong?)null; }
+    }
+    private bool ShouldSerializetxn_id() { return txn_idSpecified; }
+    private void Resettxn_id() { txn_idSpecified = false; }
+    
+
+    private uint? _account_id;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint account_id
+    {
+      get { return _account_id?? default(uint); }
+      set { _account_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool account_idSpecified
+    {
+      get { return _account_id != null; }
+      set { if (value == (_account_id== null)) _account_id = value ? this.account_id : (uint?)null; }
+    }
+    private bool ShouldSerializeaccount_id() { return account_idSpecified; }
+    private void Resetaccount_id() { account_idSpecified = false; }
+    
+
+    private uint? _line_item;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"line_item", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint line_item
+    {
+      get { return _line_item?? default(uint); }
+      set { _line_item = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool line_itemSpecified
+    {
+      get { return _line_item != null; }
+      set { if (value == (_line_item== null)) _line_item = value ? this.line_item : (uint?)null; }
+    }
+    private bool ShouldSerializeline_item() { return line_itemSpecified; }
+    private void Resetline_item() { line_itemSpecified = false; }
+    
+
+    private ulong? _item_id;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong item_id
+    {
+      get { return _item_id?? default(ulong); }
+      set { _item_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool item_idSpecified
+    {
+      get { return _item_id != null; }
+      set { if (value == (_item_id== null)) _item_id = value ? this.item_id : (ulong?)null; }
+    }
+    private bool ShouldSerializeitem_id() { return item_idSpecified; }
+    private void Resetitem_id() { item_idSpecified = false; }
+    
+
+    private uint? _def_index;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"def_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint def_index
+    {
+      get { return _def_index?? default(uint); }
+      set { _def_index = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool def_indexSpecified
+    {
+      get { return _def_index != null; }
+      set { if (value == (_def_index== null)) _def_index = value ? this.def_index : (uint?)null; }
+    }
+    private bool ShouldSerializedef_index() { return def_indexSpecified; }
+    private void Resetdef_index() { def_indexSpecified = false; }
+    
+
+    private ulong? _price;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"price", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong price
+    {
+      get { return _price?? default(ulong); }
+      set { _price = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool priceSpecified
+    {
+      get { return _price != null; }
+      set { if (value == (_price== null)) _price = value ? this.price : (ulong?)null; }
+    }
+    private bool ShouldSerializeprice() { return priceSpecified; }
+    private void Resetprice() { priceSpecified = false; }
+    
+
+    private ulong? _tax;
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"tax", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong tax
+    {
+      get { return _tax?? default(ulong); }
+      set { _tax = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool taxSpecified
+    {
+      get { return _tax != null; }
+      set { if (value == (_tax== null)) _tax = value ? this.tax : (ulong?)null; }
+    }
+    private bool ShouldSerializetax() { return taxSpecified; }
+    private void Resettax() { taxSpecified = false; }
+    
+
+    private ulong? _price_usd;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"price_usd", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong price_usd
+    {
+      get { return _price_usd?? default(ulong); }
+      set { _price_usd = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool price_usdSpecified
+    {
+      get { return _price_usd != null; }
+      set { if (value == (_price_usd== null)) _price_usd = value ? this.price_usd : (ulong?)null; }
+    }
+    private bool ShouldSerializeprice_usd() { return price_usdSpecified; }
+    private void Resetprice_usd() { price_usdSpecified = false; }
+    
+
+    private ulong? _tax_usd;
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"tax_usd", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong tax_usd
+    {
+      get { return _tax_usd?? default(ulong); }
+      set { _tax_usd = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool tax_usdSpecified
+    {
+      get { return _tax_usd != null; }
+      set { if (value == (_tax_usd== null)) _tax_usd = value ? this.tax_usd : (ulong?)null; }
+    }
+    private bool ShouldSerializetax_usd() { return tax_usdSpecified; }
+    private void Resettax_usd() { tax_usdSpecified = false; }
+    
+
+    private uint? _purchase_type;
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"purchase_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint purchase_type
+    {
+      get { return _purchase_type?? default(uint); }
+      set { _purchase_type = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool purchase_typeSpecified
+    {
+      get { return _purchase_type != null; }
+      set { if (value == (_purchase_type== null)) _purchase_type = value ? this.purchase_type : (uint?)null; }
+    }
+    private bool ShouldSerializepurchase_type() { return purchase_typeSpecified; }
+    private void Resetpurchase_type() { purchase_typeSpecified = false; }
+    
+
+    private uint? _steam_txn_type;
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"steam_txn_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint steam_txn_type
+    {
+      get { return _steam_txn_type?? default(uint); }
+      set { _steam_txn_type = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool steam_txn_typeSpecified
+    {
+      get { return _steam_txn_type != null; }
+      set { if (value == (_steam_txn_type== null)) _steam_txn_type = value ? this.steam_txn_type : (uint?)null; }
+    }
+    private bool ShouldSerializesteam_txn_type() { return steam_txn_typeSpecified; }
+    private void Resetsteam_txn_type() { steam_txn_typeSpecified = false; }
+    
+
+    private string _country_code;
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"country_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string country_code
+    {
+      get { return _country_code?? ""; }
+      set { _country_code = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool country_codeSpecified
+    {
+      get { return _country_code != null; }
+      set { if (value == (_country_code== null)) _country_code = value ? this.country_code : (string)null; }
+    }
+    private bool ShouldSerializecountry_code() { return country_codeSpecified; }
+    private void Resetcountry_code() { country_codeSpecified = false; }
+    
+
+    private string _region_code;
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"region_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string region_code
+    {
+      get { return _region_code?? ""; }
+      set { _region_code = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool region_codeSpecified
+    {
+      get { return _region_code != null; }
+      set { if (value == (_region_code== null)) _region_code = value ? this.region_code : (string)null; }
+    }
+    private bool ShouldSerializeregion_code() { return region_codeSpecified; }
+    private void Resetregion_code() { region_codeSpecified = false; }
+    
+
+    private int? _quantity;
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"quantity", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int quantity
+    {
+      get { return _quantity?? default(int); }
+      set { _quantity = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool quantitySpecified
+    {
+      get { return _quantity != null; }
+      set { if (value == (_quantity== null)) _quantity = value ? this.quantity : (int?)null; }
+    }
+    private bool ShouldSerializequantity() { return quantitySpecified; }
+    private void Resetquantity() { quantitySpecified = false; }
+    
+
+    private ulong? _ref_trans_id;
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"ref_trans_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong ref_trans_id
+    {
+      get { return _ref_trans_id?? default(ulong); }
+      set { _ref_trans_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool ref_trans_idSpecified
+    {
+      get { return _ref_trans_id != null; }
+      set { if (value == (_ref_trans_id== null)) _ref_trans_id = value ? this.ref_trans_id : (ulong?)null; }
+    }
+    private bool ShouldSerializeref_trans_id() { return ref_trans_idSpecified; }
+    private void Resetref_trans_id() { ref_trans_idSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PartnerInfo")]
+  public partial class PartnerInfo : global::ProtoBuf.IExtensible
+  {
+    public PartnerInfo() {}
+    
+
+    private uint? _partner_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"partner_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint partner_id
+    {
+      get { return _partner_id?? default(uint); }
+      set { _partner_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool partner_idSpecified
+    {
+      get { return _partner_id != null; }
+      set { if (value == (_partner_id== null)) _partner_id = value ? this.partner_id : (uint?)null; }
+    }
+    private bool ShouldSerializepartner_id() { return partner_idSpecified; }
+    private void Resetpartner_id() { partner_idSpecified = false; }
+    
+
+    private string _partner_name;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"partner_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string partner_name
+    {
+      get { return _partner_name?? ""; }
+      set { _partner_name = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool partner_nameSpecified
+    {
+      get { return _partner_name != null; }
+      set { if (value == (_partner_name== null)) _partner_name = value ? this.partner_name : (string)null; }
+    }
+    private bool ShouldSerializepartner_name() { return partner_nameSpecified; }
+    private void Resetpartner_name() { partner_nameSpecified = false; }
+    
+
+    private string _currency_code;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"currency_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string currency_code
+    {
+      get { return _currency_code?? ""; }
+      set { _currency_code = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool currency_codeSpecified
+    {
+      get { return _currency_code != null; }
+      set { if (value == (_currency_code== null)) _currency_code = value ? this.currency_code : (string)null; }
+    }
+    private bool ShouldSerializecurrency_code() { return currency_codeSpecified; }
+    private void Resetcurrency_code() { currency_codeSpecified = false; }
+    
+
+    private string _currency_name;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"currency_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string currency_name
+    {
+      get { return _currency_name?? ""; }
+      set { _currency_name = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool currency_nameSpecified
+    {
+      get { return _currency_name != null; }
+      set { if (value == (_currency_name== null)) _currency_name = value ? this.currency_name : (string)null; }
+    }
+    private bool ShouldSerializecurrency_name() { return currency_nameSpecified; }
+    private void Resetcurrency_name() { currency_nameSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDPPartnerMicroTxnsResponse")]
+  public partial class CMsgDPPartnerMicroTxnsResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgDPPartnerMicroTxnsResponse() {}
+    
+
+    private uint? _eresult;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint eresult
+    {
+      get { return _eresult?? (uint)2; }
+      set { _eresult = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool eresultSpecified
+    {
+      get { return _eresult != null; }
+      set { if (value == (_eresult== null)) _eresult = value ? this.eresult : (uint?)null; }
+    }
+    private bool ShouldSerializeeresult() { return eresultSpecified; }
+    private void Reseteresult() { eresultSpecified = false; }
+    
+
+    private CMsgDPPartnerMicroTxnsResponse.EErrorCode? _eerrorcode;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"eerrorcode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public CMsgDPPartnerMicroTxnsResponse.EErrorCode eerrorcode
+    {
+      get { return _eerrorcode?? CMsgDPPartnerMicroTxnsResponse.EErrorCode.k_MsgValid; }
+      set { _eerrorcode = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool eerrorcodeSpecified
+    {
+      get { return _eerrorcode != null; }
+      set { if (value == (_eerrorcode== null)) _eerrorcode = value ? this.eerrorcode : (CMsgDPPartnerMicroTxnsResponse.EErrorCode?)null; }
+    }
+    private bool ShouldSerializeeerrorcode() { return eerrorcodeSpecified; }
+    private void Reseteerrorcode() { eerrorcodeSpecified = false; }
+    
+    [global::ProtoBuf.ProtoContract(Name=@"EErrorCode", EnumPassthru=true)]
+    public enum EErrorCode
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_MsgValid", Value=0)]
+      k_MsgValid = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_MsgInvalidAppID", Value=1)]
+      k_MsgInvalidAppID = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_MsgInvalidPartnerInfo", Value=2)]
+      k_MsgInvalidPartnerInfo = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_MsgNoTransactions", Value=3)]
+      k_MsgNoTransactions = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_MsgSQLFailure", Value=4)]
+      k_MsgSQLFailure = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_MsgPartnerInfoDiscrepancy", Value=5)]
+      k_MsgPartnerInfoDiscrepancy = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_MsgTransactionInsertFailed", Value=7)]
+      k_MsgTransactionInsertFailed = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_MsgAlreadyRunning", Value=8)]
+      k_MsgAlreadyRunning = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_MsgInvalidTransactionData", Value=9)]
+      k_MsgInvalidTransactionData = 9
+    }
   
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

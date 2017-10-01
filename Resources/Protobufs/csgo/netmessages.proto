@@ -27,6 +27,8 @@ enum CLC_Messages {
 	clc_ClientMessage = 17;
 	clc_CmdKeyValues = 18;
 	clc_HltvReplay = 20;
+	clc_HltvFixupOperatorTick = 21;
+	clc_HltvFixupOperatorReceiver = 22;
 }
 
 enum VoiceDataFormat_t {
@@ -71,6 +73,7 @@ enum SVC_Messages {
 	svc_EncryptedData = 35;
 	svc_HltvReplay = 36;
 	svc_Broadcast_Command = 38;
+	svc_HltvFixupOperatorStatus = 39;
 }
 
 enum ReplayEventType_t {
@@ -488,5 +491,21 @@ message CCLCMsg_HltvReplay {
 
 message CSVCMsg_Broadcast_Command {
 	optional string cmd = 1;
+}
+
+message CCLCMsg_HltvFixupOperatorTick {
+	optional int32 tick = 1;
+	optional bytes props_data = 2;
+	optional .CMsgVector origin = 3;
+	optional .CMsgQAngle eye_angles = 4;
+	optional int32 observer_mode = 5;
+	optional bool cameraman_scoreboard = 6;
+	optional int32 observer_target = 7;
+	optional .CMsgVector view_offset = 8;
+}
+
+message CSVCMsg_HltvFixupOperatorStatus {
+	optional uint32 mode = 1;
+	optional string override_operator_name = 2;
 }
 
