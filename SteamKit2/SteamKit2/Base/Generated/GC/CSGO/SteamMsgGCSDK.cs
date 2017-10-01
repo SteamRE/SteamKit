@@ -2099,6 +2099,183 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameServers_AggregationQuery_Request")]
+  public partial class CGameServers_AggregationQuery_Request : global::ProtoBuf.IExtensible
+  {
+    public CGameServers_AggregationQuery_Request() {}
+    
+
+    private string _filter;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"filter", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string filter
+    {
+      get { return _filter?? ""; }
+      set { _filter = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool filterSpecified
+    {
+      get { return _filter != null; }
+      set { if (value == (_filter== null)) _filter = value ? this.filter : (string)null; }
+    }
+    private bool ShouldSerializefilter() { return filterSpecified; }
+    private void Resetfilter() { filterSpecified = false; }
+    
+    private readonly global::System.Collections.Generic.List<string> _group_fields = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"group_fields", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> group_fields
+    {
+      get { return _group_fields; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameServers_AggregationQuery_Response")]
+  public partial class CGameServers_AggregationQuery_Response : global::ProtoBuf.IExtensible
+  {
+    public CGameServers_AggregationQuery_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<CGameServers_AggregationQuery_Response.Group> _groups = new global::System.Collections.Generic.List<CGameServers_AggregationQuery_Response.Group>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"groups", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CGameServers_AggregationQuery_Response.Group> groups
+    {
+      get { return _groups; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Group")]
+  public partial class Group : global::ProtoBuf.IExtensible
+  {
+    public Group() {}
+    
+    private readonly global::System.Collections.Generic.List<string> _group_values = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"group_values", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> group_values
+    {
+      get { return _group_values; }
+    }
+  
+
+    private uint? _servers_empty;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"servers_empty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint servers_empty
+    {
+      get { return _servers_empty?? default(uint); }
+      set { _servers_empty = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool servers_emptySpecified
+    {
+      get { return _servers_empty != null; }
+      set { if (value == (_servers_empty== null)) _servers_empty = value ? this.servers_empty : (uint?)null; }
+    }
+    private bool ShouldSerializeservers_empty() { return servers_emptySpecified; }
+    private void Resetservers_empty() { servers_emptySpecified = false; }
+    
+
+    private uint? _servers_full;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"servers_full", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint servers_full
+    {
+      get { return _servers_full?? default(uint); }
+      set { _servers_full = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool servers_fullSpecified
+    {
+      get { return _servers_full != null; }
+      set { if (value == (_servers_full== null)) _servers_full = value ? this.servers_full : (uint?)null; }
+    }
+    private bool ShouldSerializeservers_full() { return servers_fullSpecified; }
+    private void Resetservers_full() { servers_fullSpecified = false; }
+    
+
+    private uint? _servers_total;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"servers_total", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint servers_total
+    {
+      get { return _servers_total?? default(uint); }
+      set { _servers_total = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool servers_totalSpecified
+    {
+      get { return _servers_total != null; }
+      set { if (value == (_servers_total== null)) _servers_total = value ? this.servers_total : (uint?)null; }
+    }
+    private bool ShouldSerializeservers_total() { return servers_totalSpecified; }
+    private void Resetservers_total() { servers_totalSpecified = false; }
+    
+
+    private uint? _players_humans;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"players_humans", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint players_humans
+    {
+      get { return _players_humans?? default(uint); }
+      set { _players_humans = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool players_humansSpecified
+    {
+      get { return _players_humans != null; }
+      set { if (value == (_players_humans== null)) _players_humans = value ? this.players_humans : (uint?)null; }
+    }
+    private bool ShouldSerializeplayers_humans() { return players_humansSpecified; }
+    private void Resetplayers_humans() { players_humansSpecified = false; }
+    
+
+    private uint? _players_bots;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"players_bots", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint players_bots
+    {
+      get { return _players_bots?? default(uint); }
+      set { _players_bots = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool players_botsSpecified
+    {
+      get { return _players_bots != null; }
+      set { if (value == (_players_bots== null)) _players_bots = value ? this.players_bots : (uint?)null; }
+    }
+    private bool ShouldSerializeplayers_bots() { return players_botsSpecified; }
+    private void Resetplayers_bots() { players_botsSpecified = false; }
+    
+
+    private uint? _player_capacity;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"player_capacity", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint player_capacity
+    {
+      get { return _player_capacity?? default(uint); }
+      set { _player_capacity = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool player_capacitySpecified
+    {
+      get { return _player_capacity != null; }
+      set { if (value == (_player_capacity== null)) _player_capacity = value ? this.player_capacity : (uint?)null; }
+    }
+    private bool ShouldSerializeplayer_capacity() { return player_capacitySpecified; }
+    private void Resetplayer_capacity() { player_capacitySpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"GCClientLauncherType", EnumPassthru=true)]
     public enum GCClientLauncherType
     {

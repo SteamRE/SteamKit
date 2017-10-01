@@ -622,7 +622,13 @@ namespace SteamKit2.GC.CSGO.Internal
       k_EGCMsgResponseNotLoggedOn = 7,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgFailedToCreate", Value=8)]
-      k_EGCMsgFailedToCreate = 8
+      k_EGCMsgFailedToCreate = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgLimitExceeded", Value=9)]
+      k_EGCMsgLimitExceeded = 9,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgCommitUnfinalized", Value=10)]
+      k_EGCMsgCommitUnfinalized = 10
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EUnlockStyle", EnumPassthru=true)]

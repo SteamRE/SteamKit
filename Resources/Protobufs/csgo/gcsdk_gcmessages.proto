@@ -235,3 +235,22 @@ message CWorkshop_SetItemPaymentRules_Request {
 message CWorkshop_SetItemPaymentRules_Response {
 }
 
+message CGameServers_AggregationQuery_Request {
+	optional string filter = 1;
+	repeated string group_fields = 3;
+}
+
+message CGameServers_AggregationQuery_Response {
+	message Group {
+		repeated string group_values = 1;
+		optional uint32 servers_empty = 2;
+		optional uint32 servers_full = 3;
+		optional uint32 servers_total = 4;
+		optional uint32 players_humans = 5;
+		optional uint32 players_bots = 6;
+		optional uint32 player_capacity = 7;
+	}
+
+	repeated .CGameServers_AggregationQuery_Response.Group groups = 1;
+}
+

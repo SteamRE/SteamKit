@@ -509,6 +509,10 @@ message CMsgGCHUpdateSession {
 	optional uint32 os_type = 7;
 	optional uint32 client_addr = 8;
 	repeated .CMsgGCHUpdateSession.ExtraField extra_fields = 9;
+	optional fixed64 owner_id = 10;
+	optional uint32 cm_session_sysid = 11;
+	optional uint32 cm_session_identifier = 12;
+	repeated uint32 depot_ids = 13;
 }
 
 message CMsgNotificationOfSuspiciousActivity {
@@ -520,5 +524,56 @@ message CMsgNotificationOfSuspiciousActivity {
 	optional fixed64 steamid = 1;
 	optional uint32 appid = 2;
 	optional .CMsgNotificationOfSuspiciousActivity.MultipleGameInstances multiple_instances = 3;
+}
+
+message CMsgDPPartnerMicroTxns {
+	message PartnerMicroTxn {
+		optional uint32 init_time = 1;
+		optional uint32 last_update_time = 2;
+		optional uint64 txn_id = 3;
+		optional uint32 account_id = 4;
+		optional uint32 line_item = 5;
+		optional uint64 item_id = 6;
+		optional uint32 def_index = 7;
+		optional uint64 price = 8;
+		optional uint64 tax = 9;
+		optional uint64 price_usd = 10;
+		optional uint64 tax_usd = 11;
+		optional uint32 purchase_type = 12;
+		optional uint32 steam_txn_type = 13;
+		optional string country_code = 14;
+		optional string region_code = 15;
+		optional int32 quantity = 16;
+		optional uint64 ref_trans_id = 17;
+	}
+
+	message PartnerInfo {
+		optional uint32 partner_id = 1;
+		optional string partner_name = 2;
+		optional string currency_code = 3;
+		optional string currency_name = 4;
+	}
+
+	optional uint32 appid = 1;
+	optional string gc_name = 2;
+	optional .CMsgDPPartnerMicroTxns.PartnerInfo partner = 3;
+	repeated .CMsgDPPartnerMicroTxns.PartnerMicroTxn transactions = 4;
+}
+
+message CMsgDPPartnerMicroTxnsResponse {
+	enum EErrorCode {
+		k_MsgValid = 0;
+		k_MsgInvalidAppID = 1;
+		k_MsgInvalidPartnerInfo = 2;
+		k_MsgNoTransactions = 3;
+		k_MsgSQLFailure = 4;
+		k_MsgPartnerInfoDiscrepancy = 5;
+		k_MsgTransactionInsertFailed = 7;
+		k_MsgAlreadyRunning = 8;
+		k_MsgInvalidTransactionData = 9;
+	}
+
+	optional uint32 eresult = 1 [default = 2];
+	optional .CMsgDPPartnerMicroTxnsResponse.EErrorCode eerrorcode = 2 [default = k_MsgValid];
 }
 

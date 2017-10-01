@@ -153,6 +153,8 @@ enum EGCMsgResponse {
 	k_EGCMsgResponseUnknownError = 6;
 	k_EGCMsgResponseNotLoggedOn = 7;
 	k_EGCMsgFailedToCreate = 8;
+	k_EGCMsgLimitExceeded = 9;
+	k_EGCMsgCommitUnfinalized = 10;
 }
 
 enum EUnlockStyle {

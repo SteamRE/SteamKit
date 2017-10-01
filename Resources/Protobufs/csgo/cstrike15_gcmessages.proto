@@ -95,6 +95,9 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_Party_Search = 9191;
 	k_EMsgGCCStrike15_v2_Party_Invite = 9192;
 	k_EMsgGCCStrike15_v2_Account_RequestCoPlays = 9193;
+	k_EMsgGCCStrike15_v2_ClientGCRankUpdate = 9194;
+	k_EMsgGCCStrike15_v2_ClientRequestOffers = 9195;
+	k_EMsgGCCStrike15_v2_ClientAccountBalance = 9196;
 }
 
 message GameServerPing {
@@ -158,6 +161,8 @@ message GlobalStatistics {
 	optional uint32 twitch_streams_version = 11;
 	optional uint32 active_tournament_eventid = 12;
 	optional uint32 active_survey_id = 13;
+	optional uint32 rtime32_cur = 14;
+	optional uint32 rtime32_event_start = 15;
 }
 
 message OperationalStatisticDescription {
@@ -181,6 +186,7 @@ message PlayerRankingInfo {
 	optional uint32 rank_id = 2;
 	optional uint32 wins = 3;
 	optional float rank_change = 4;
+	optional uint32 type_id = 5;
 }
 
 message PlayerCommendationInfo {
@@ -284,6 +290,7 @@ message PlayerQuestData {
 	optional uint32 time_played = 4;
 	optional uint32 mm_game_mode = 5;
 	repeated .MatchEndItemUpdates item_updates = 6;
+	optional bool operation_points_eligible = 7;
 }
 
 message CMsgGC_ServerQuestUpdateData {
@@ -353,6 +360,7 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate {
 	repeated uint32 penalty_account_id_sessions_green = 14;
 	repeated uint32 insufficientlevel_sessions = 15;
 	repeated uint32 vsncheck_account_id_sessions = 16;
+	repeated uint32 launcher_mismatch_sessions = 17;
 }
 
 message CDataGCCStrike15_v2_TournamentMatchDraft {
@@ -383,6 +391,7 @@ message CPreMatchInfoData {
 	optional int32 predictions_pct = 1;
 	optional .CDataGCCStrike15_v2_TournamentMatchDraft draft = 4;
 	repeated .CPreMatchInfoData.TeamStats stats = 5;
+	repeated int32 wins = 6;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve {
@@ -401,6 +410,7 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve {
 	repeated uint32 tournament_casters_account_ids = 13;
 	optional uint64 tv_relay_steamid = 14;
 	optional .CPreMatchInfoData pre_match_data = 15;
+	optional uint32 rtime32_event_start = 16;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingServerReservationResponse {
@@ -525,6 +535,10 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ServerRankUpdate {
 	optional uint64 match_id = 2;
 }
 
+message CMsgGCCStrike15_v2_ClientGCRankUpdate {
+	repeated .PlayerRankingInfo rankings = 1;
+}
+
 message CMsgGCCStrike15_v2_MatchmakingOperator2GCBlogUpdate {
 	optional string main_post_url = 1;
 }
@@ -610,6 +624,7 @@ message CMsgGCCStrike15_v2_ClientRequestJoinServerData {
 	optional uint32 server_ip = 4;
 	optional uint32 server_port = 5;
 	optional .CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve res = 6;
+	optional string errormsg = 7;
 }
 
 message CMsgGCCstrike15_v2_ClientRequestNewMission {
@@ -623,6 +638,7 @@ message CMsgGCCstrike15_v2_GC2ServerNotifyXPRewarded {
 	optional uint32 current_xp = 3;
 	optional uint32 current_level = 4;
 	optional uint32 upgraded_defidx = 5;
+	optional uint32 operation_points_awarded = 6;
 }
 
 message CMsgGCCStrike15_v2_WatchInfoUsers {
@@ -1018,6 +1034,7 @@ message CMsgGCCStrike15_v2_ClientPlayerDecalSign {
 message CMsgGCCStrike15_v2_ClientLogonFatalError {
 	optional uint32 errorcode = 1;
 	optional string message = 2;
+	optional string country = 3;
 }
 
 message CMsgGCCStrike15_v2_ClientPollState {
@@ -1035,6 +1052,7 @@ message CMsgGCCStrike15_v2_Party_Register {
 	optional uint32 grp = 6;
 	optional uint32 slots = 7;
 	optional uint32 launcher = 8;
+	optional uint32 game_type = 9;
 }
 
 message CMsgGCCStrike15_v2_Party_Search {
@@ -1043,6 +1061,7 @@ message CMsgGCCStrike15_v2_Party_Search {
 	optional uint32 ark = 3;
 	repeated uint32 grps = 4;
 	optional uint32 launcher = 5;
+	optional uint32 game_type = 6;
 }
 
 message CMsgGCCStrike15_v2_Party_SearchResults {
@@ -1075,5 +1094,13 @@ message CMsgGCCStrike15_v2_ClientToGCRequestTicket {
 	optional fixed32 authorized_public_ip = 2;
 	optional fixed64 gameserver_steam_id = 3;
 	optional fixed64 gameserver_net_id = 4;
+}
+
+message CMsgGCCStrike15_v2_ClientRequestOffers {
+}
+
+message CMsgGCCStrike15_v2_ClientAccountBalance {
+	optional uint64 amount = 1;
+	optional string url = 2;
 }
 
