@@ -138,8 +138,8 @@ namespace SteamKit2.Internal
 
             var cancellation = new CancellationTokenSource();
             var token = cancellation.Token;
-            var oldCancellation = Interlocked.Exchange(ref connectionCancellation, cancellation);
-            Debug.Assert(oldCancellation == null);
+            var oldCancellation = Interlocked.Exchange( ref connectionCancellation, cancellation );
+            Debug.Assert( oldCancellation == null );
 
             ExpectDisconnection = false;
 
@@ -154,7 +154,7 @@ namespace SteamKit2.Internal
                 recordTask = Task.FromResult( cmServer );
             }
 
-            connectionSetupTask = recordTask.ContinueWith(t =>
+            connectionSetupTask = recordTask.ContinueWith( t =>
             {
                 if ( token.IsCancellationRequested )
                 {
@@ -176,7 +176,11 @@ namespace SteamKit2.Internal
                 connection.Connected += Connected;
                 connection.Disconnected += Disconnected;
                 connection.Connect( record.EndPoint, ( int )ConnectionTimeout.TotalMilliseconds );
-            });
+            } ).ContinueWith( t =>
+            {
+                DebugLog.WriteLine( nameof(CMClient), "Unhandled exception when attempting to connect to Steam: {0}", t.Exception );
+                OnClientDisconnected( userInitiated: false );
+            }, TaskContinuationOptions.OnlyOnFaulted );
         }
 
         /// <summary>
