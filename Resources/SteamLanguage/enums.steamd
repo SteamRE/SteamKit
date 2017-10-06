@@ -808,8 +808,10 @@ enum EBillingType
 	Repurchaseable = 11;
 	FreeOnDemand = 12;
 	Rental = 13;
+	CommercialLicense = 14;
+	FreeCommercialLicense = 15;
 
-	NumBillingTypes = 14;
+	NumBillingTypes = 16;
 };
 
 enum EActivationCodeClass<uint>
