@@ -175,12 +175,15 @@ namespace SteamKit2.Internal
                 connection.NetMsgReceived += NetMsgReceived;
                 connection.Connected += Connected;
                 connection.Disconnected += Disconnected;
-                connection.Connect( record.EndPoint, ( int )ConnectionTimeout.TotalMilliseconds );
-            } ).ContinueWith( t =>
+                connection.Connect( record.EndPoint, (int)ConnectionTimeout.TotalMilliseconds );
+            }).ContinueWith(t =>
             {
-                DebugLog.WriteLine( nameof(CMClient), "Unhandled exception when attempting to connect to Steam: {0}", t.Exception );
-                OnClientDisconnected( userInitiated: false );
-            }, TaskContinuationOptions.OnlyOnFaulted );
+                if ( t.IsFaulted )
+                {
+                    DebugLog.WriteLine( nameof(CMClient), "Unhandled exception when attempting to connect to Steam: {0}", t.Exception );
+                    OnClientDisconnected( userInitiated: false );
+                }
+            });
         }
 
         /// <summary>
