@@ -175,7 +175,7 @@ namespace SteamKit2.Internal
                 connection.NetMsgReceived += NetMsgReceived;
                 connection.Connected += Connected;
                 connection.Disconnected += Disconnected;
-                connection.Connect( record.EndPoint, (int)ConnectionTimeout.TotalMilliseconds );
+                connection.Connect( record.EndPoint, ( int )ConnectionTimeout.TotalMilliseconds );
             }, TaskContinuationOptions.ExecuteSynchronously).ContinueWith(t =>
             {
                 if ( t.IsFaulted )
