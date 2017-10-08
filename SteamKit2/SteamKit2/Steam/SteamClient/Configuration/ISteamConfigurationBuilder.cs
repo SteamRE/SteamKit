@@ -75,7 +75,7 @@ namespace SteamKit2
         ISteamConfigurationBuilder WithWebAPIBaseAddress(Uri baseAddress);
 
         /// <summary>
-        /// Configures this <see cref="SteamConfiguration" /> to discover available servers.
+        /// Configures this <see cref="SteamConfiguration" /> with a Web API key to attach to requests.
         /// </summary>
         /// <param name="webApiKey">An API key to be used for authorized requests.
         /// Keys can be obtained from https://steamcommunity.com/dev or the Steamworks Partner site.</param>
