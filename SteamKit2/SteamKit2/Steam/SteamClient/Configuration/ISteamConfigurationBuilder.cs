@@ -16,13 +16,6 @@ namespace SteamKit2
     public interface ISteamConfigurationBuilder
     {
         /// <summary>
-        /// Configures this <see cref="SteamConfiguration" /> to discover available servers.
-        /// </summary>
-        /// <param name="allowDirectoryFetch">Whether or not to use the Steam Directory to discover available servers.</param>
-        /// <returns>A builder with modified configuration.</returns>
-        ISteamConfigurationBuilder WithDirectoryFetch(bool allowDirectoryFetch);
-
-        /// <summary>
         /// Configures this <see cref="SteamConfiguration" /> for a particular Steam cell.
         /// </summary>
         /// <param name="cellID">The Steam Cell ID to prioritize when connecting.</param>
@@ -43,6 +36,13 @@ namespace SteamKit2
         /// when calling <c>SteamFriends.RequestFriendInfo</c> without specifying flags.</param>
         /// <returns>A builder with modified configuration.</returns>
         ISteamConfigurationBuilder WithDefaultPersonaStateFlags(EClientPersonaStateFlag personaStateFlags);
+
+        /// <summary>
+        /// Configures this <see cref="SteamConfiguration" /> to discover available servers.
+        /// </summary>
+        /// <param name="allowDirectoryFetch">Whether or not to use the Steam Directory to discover available servers.</param>
+        /// <returns>A builder with modified configuration.</returns>
+        ISteamConfigurationBuilder WithDirectoryFetch(bool allowDirectoryFetch);
 
         /// <summary>
         /// Configures how this <see cref="SteamConfiguration" /> will be used to connect to Steam.
