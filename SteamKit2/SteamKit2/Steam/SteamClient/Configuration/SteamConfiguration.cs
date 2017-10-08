@@ -16,83 +16,88 @@ namespace SteamKit2
     public sealed class SteamConfiguration
     {
         /// <summary>
-        /// Creates a <see cref="SteamConfiguration"/> object.
+        /// Do not use directly - create a SteamConfiguration object by using a builder or helper method.
         /// </summary>
-        public SteamConfiguration()
+        internal SteamConfiguration(SteamConfigurationState state)
         {
-            serverListProvider = new NullServerListProvider();
-            webAPIBaseAddress = WebAPI.DefaultBaseAddress;
+            this.state = state;
             ServerList = new SmartCMServerList(this);
         }
 
-        IServerListProvider serverListProvider;
-        Uri webAPIBaseAddress;
+        /// <summary>
+        /// Creates a <see cref="SteamConfiguration" />, allowing for configuration.
+        /// </summary>
+        /// <param name="configurator">A method which is used to configure the configuration.</param>
+        /// <returns>A configuration object.</returns>
+        public static SteamConfiguration Create(Action<ISteamConfigurationBuilder> configurator)
+        {
+            if (configurator == null)
+            {
+                throw new ArgumentNullException(nameof(configurator));
+            }
+
+            var builder = new SteamConfigurationBuilder();
+            configurator(builder);
+            return builder.Build();
+        }
+
+        internal static SteamConfiguration CreateDefault()
+            => new SteamConfigurationBuilder().Build();
+
+        readonly SteamConfigurationState state;
 
         /// <summary>
         /// Whether or not to use the Steam Directory to discover available servers.
         /// </summary>
-        public bool AllowDirectoryFetch { get; set; } = true;
+        public bool AllowDirectoryFetch => state.AllowDirectoryFetch;
 
         /// <summary>
         /// The Steam Cell ID to prioritize when connecting.
         /// </summary>
-        public uint CellID { get; set; } = 0;
+        public uint CellID => state.CellID;
 
         /// <summary>
         /// The connection timeout used when connecting to Steam serves.
         /// </summary>
-        public TimeSpan ConnectionTimeout { get; set; } = TimeSpan.FromSeconds(5);
+        public TimeSpan ConnectionTimeout => state.ConnectionTimeout;
 
         /// <summary>
         /// The default persona state flags used when requesting information for a new friend, or
         /// when calling <c>SteamFriends.RequestFriendInfo</c> without specifying flags.
         /// </summary>
-        public EClientPersonaStateFlag DefaultPersonaStateFlags { get; set; } =
-            EClientPersonaStateFlag.PlayerName | EClientPersonaStateFlag.Presence |
-            EClientPersonaStateFlag.SourceID | EClientPersonaStateFlag.GameExtraInfo |
-            EClientPersonaStateFlag.LastSeen;
-
+        public EClientPersonaStateFlag DefaultPersonaStateFlags => state.DefaultPersonaStateFlags;
         /// <summary>
         /// The supported protocol types to use when attempting to connect to Steam.
         /// </summary>
-        public ProtocolTypes ProtocolTypes { get; set; } = ProtocolTypes.Tcp;
+        public ProtocolTypes ProtocolTypes => state.ProtocolTypes;
 
         /// <summary>
         /// The server list provider to use.
         /// </summary>
-        public IServerListProvider ServerListProvider
-        {
-            get => serverListProvider;
-            set => serverListProvider = value ?? throw new ArgumentNullException(nameof(value));
-        }
+        public IServerListProvider ServerListProvider => state.ServerListProvider;
 
         /// <summary>
         /// The Universe to connect to. This should always be <see cref="EUniverse.Public"/> unless
         /// you work at Valve and are using this internally. If this is you, hello there.
         /// </summary>
-        public EUniverse Universe { get; set; } = EUniverse.Public;
+        public EUniverse Universe => state.Universe;
 
         /// <summary>
         /// The base address of the Steam Web API to connect to.
-        /// Using "partner.steam-api.com" base address always requires a partner api key.
+        /// Use of "partner.steam-api.com" requires a Partner API key.
         /// </summary>
-        public Uri WebAPIBaseAddress
-        {
-            get => webAPIBaseAddress;
-            set => webAPIBaseAddress = value ?? throw new ArgumentNullException(nameof(value));
-        }
+        public Uri WebAPIBaseAddress => state.WebAPIBaseAddress;
 
         /// <summary>
-        /// An optional API key to be used for authorized requests.
-        /// Keys can be obtained from https://steamcommunity.com/dev
+        /// An  API key to be used for authorized requests.
+        /// Keys can be obtained from https://steamcommunity.com/dev or the Steamworks Partner site.
         /// </summary>
-        public string WebAPIKey { get; set; }
+        public string WebAPIKey => state.WebAPIKey;
 
         /// <summary>
         /// The server list used for this configuration.
         /// If this configuration is used by multiple <see cref="SteamClient"/> instances, they all share the server list.
         /// </summary>
         public SmartCMServerList ServerList { get; }
-
     }
 }
