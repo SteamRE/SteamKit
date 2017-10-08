@@ -13,8 +13,12 @@ namespace SteamKit2
     {
         public SteamConfigurationBuilder()
         {
-            // Defaults are specified here.
-            state = new SteamConfigurationState
+            state = CreateDefaultState();
+        }
+
+        public static SteamConfigurationState CreateDefaultState()
+        {
+            return new SteamConfigurationState
             {
                 AllowDirectoryFetch = true,
 
