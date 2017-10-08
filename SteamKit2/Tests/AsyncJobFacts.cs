@@ -55,7 +55,7 @@ namespace Tests
         }
 
         [Fact]
-        public async void AsyncJobClearsOnTimeout()
+        public async Task AsyncJobClearsOnTimeout()
         {
             SteamClient client = new SteamClient();
             client.jobManager.SetTimeoutsEnabled( true );
@@ -70,7 +70,7 @@ namespace Tests
         }
 
         [Fact]
-        public async void AsyncJobCancelsOnSetFailedTimeout()
+        public async Task AsyncJobCancelsOnSetFailedTimeout()
         {
             SteamClient client = new SteamClient();
 
@@ -102,7 +102,7 @@ namespace Tests
         }
 
         [Fact]
-        public async void AsyncJobTimesout()
+        public async Task AsyncJobTimesout()
         {
             SteamClient client = new SteamClient();
             client.jobManager.SetTimeoutsEnabled( true );
@@ -132,7 +132,7 @@ namespace Tests
         }
 
         [Fact]
-        public async void AsyncJobThrowsFailureExceptionOnFailure()
+        public async Task AsyncJobThrowsFailureExceptionOnFailure()
         {
             SteamClient client = new SteamClient();
 
@@ -201,7 +201,7 @@ namespace Tests
         }
 
         [Fact]
-        public async void AsyncJobMultipleClearsOnTimeout()
+        public async Task AsyncJobMultipleClearsOnTimeout()
         {
             SteamClient client = new SteamClient();
             client.jobManager.SetTimeoutsEnabled( true );
@@ -216,7 +216,7 @@ namespace Tests
         }
 
         [Fact]
-        public async void AsyncJobMultipleExtendsTimeoutOnMessage()
+        public async Task AsyncJobMultipleExtendsTimeoutOnMessage()
         {
             SteamClient client = new SteamClient();
             client.jobManager.SetTimeoutsEnabled( true );
@@ -254,7 +254,7 @@ namespace Tests
         }
 
         [Fact]
-        public async void AsyncJobMultipleTimesout()
+        public async Task AsyncJobMultipleTimesout()
         {
             SteamClient client = new SteamClient();
             client.jobManager.SetTimeoutsEnabled( true );
@@ -274,7 +274,7 @@ namespace Tests
         }
 
         [Fact]
-        public async void AsyncJobMultipleCompletesOnIncompleteResult()
+        public async Task AsyncJobMultipleCompletesOnIncompleteResult()
         {
             SteamClient client = new SteamClient();
             client.jobManager.SetTimeoutsEnabled( true );
@@ -345,7 +345,7 @@ namespace Tests
         }
 
         [Fact]
-        public async void AsyncJobMultipleThrowsFailureExceptionOnFailure()
+        public async Task AsyncJobMultipleThrowsFailureExceptionOnFailure()
         {
             SteamClient client = new SteamClient();
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using SteamKit2;
 using SteamKit2.Discovery;
 using Xunit;
@@ -17,7 +18,7 @@ namespace Tests
         readonly IsolatedStorageServerListProvider isolatedStorageProvider;
 
         [Fact]
-        public async void ReadsUpdatedServerList()
+        public async Task ReadsUpdatedServerList()
         {
             await isolatedStorageProvider.UpdateServerListAsync(new List<ServerRecord>()
             {
