@@ -10,7 +10,7 @@ namespace Tests
     {
         public SmartCMServerListFacts()
         {
-            var configuration = new SteamConfiguration { AllowDirectoryFetch = false };
+            var configuration = SteamConfiguration.Create(b => b.WithDirectoryFetch(false));
             serverList = new SmartCMServerList(configuration);
         }
 

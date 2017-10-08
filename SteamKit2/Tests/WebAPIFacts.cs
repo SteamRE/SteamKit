@@ -30,11 +30,9 @@ namespace Tests
         [Fact]
         public void SteamConfigWebAPIInterface()
         {
-            var config = new SteamConfiguration
-            {
-                WebAPIBaseAddress = new Uri("http://example.com"),
-                WebAPIKey = "hello world"
-            };
+            var config = SteamConfiguration.Create(b =>
+                b.WithWebAPIBaseAddress(new Uri("http://example.com"))
+                 .WithWebAPIKey("hello world"));
 
             var iface = config.GetAsyncWebAPIInterface("TestInterface");
 
