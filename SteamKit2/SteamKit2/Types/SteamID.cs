@@ -538,7 +538,7 @@ namespace SteamKit2
         /// <returns>
         /// A string Steam2 "STEAM_" representation of this SteamID, or a Steam3 representation.
         /// </returns>
-        public string Render( bool steam3 = false )
+        public string Render( bool steam3 = true )
         {
             if ( steam3 )
             {
@@ -608,7 +608,7 @@ namespace SteamKit2
         /// <returns>
         /// A <see cref="string"/> that represents this instance.
         /// </returns>
-        public override string ToString() => Render( false ); // for compatibility, we will always return a Steam2 rendering when ToString()'d
+        public override string ToString() => Render();
 
         /// <summary>
         /// Performs an implicit conversion from <see cref="SteamKit2.SteamID"/> to <see cref="ulong"/>.
