@@ -1,14 +1,44 @@
 ------------------------------------------------------------------------------
-v 2.0.0			Mar 28, 2017 (Alpha)
+v 2.0.0			Oct 14, 2017 (Beta)
 ------------------------------------------------------------------------------
-* SteamKit2 now requires .NET Framework 4.6 or a .NET Standard 1.3-compatible runtime.
-	* SteamKit2 is now supported on .NET Core.
-	* `IsolatedStorageServerListProvider` is only available in .NET Framework 4.6 and higher.
-
+* SteamKit 2.0 now targets .NET Standard 2.0. This means it now requires .NET Framework 4.6.1 or higher, .NET Core 2.0 or higher, or any other .NET Standard 2.0-compatible runtime.
+* Added support for WebSocket client connections.
+	* Server List treats WebSocket, TCP and UDP independently, even for the same server.
+	* If a server is not reachable on TCP, SteamKit will still attempt UDP and vice-versa.
+* Added `SteamConfiguration`, which replaces the previous assortment of individual configuration properties and parameters.
+	* If the `SteamConfiguration` permits both TCP and UDP, both can now be used (depending on server ranking).
+	* See the Breaking Changes section below for further details.
+* Added `ArgumentNullException` to the public API surface when passing null into methods that would have previously triggered a `NullReferenceException`.
 * Updated Protobuf message classes to expose a property indicating if any wire value was specified or not, and a method to clear the value.
-* Updated `CDNClient` and `WebAPI` to expose `Task`-based asynchronous methods.
-* Removed all methods, properties and enum values that were marked as `[Obsolete]`.
-* Removed `MsgClientSendGuestPass`, `MsgClientSendGuestPassResponse` and `SendGuestPassCallback` which relied upon obsoleted messaging.
+* Updated game-related GC messages and protobufs.
+* Updated Steam enums and protobufs.
+* Fixed no callback being fired when calling `SteamUserStats.GetLeaderboardEntries` .
+* Fixed a crash if we encountered a message that's too small to actually contain a message.
+* Fixed user's name being changed to `[unassigned]` if `SteamFriends.SetPersonaState()` is called too early.
+* Fixed order of handlers being non-deterministic.
+* Fixed exception when using `SteamUnifiedMessages.UnifiedService<>.SendMessage`.
+
+BREAKING CHANGES
+
+* Removed all methods and properties that were marked as `[Obsolete]`.
+* The `SteamClient` constructor now accepts a `SteamConfiguration` object, which is a container for various configuration settings.
+	* If you were using the `SteamClient` constructor to specify a specific protocol type (TCP or UDP), use `SteamConfiguration` instead.
+	* If you were using various properties to modify timeouts etc., use `SteamConfiguration` instead.
+	* If you do not provide a `SteamConfiguration` when constructing a `SteamClient`, the server list will be private to that `SteamClient` instance.
+	* If you create multiple clients from a single configuration, the server list will be shared among those clients.
+	* `SteamClient.ConnectedUniverse` is now `SteamClient.Universe`. This is now set from the configuration, and is no longer `EUniverse.Invalid` when not connected.
+	* `SteamClient.ConnectionTimeout` is now read-only. Setting this property is now performed on `SteamConfiguration`.
+* Removed `SteamClient.ConnectedCallback.EResult`, as it could only ever be `EResult.OK`.
+* Servers are now represented by `ServerRecord` objects, not IP addresses.
+	* `CMListCallback` now returns a collection of `ServerRecord` objects, not IP addresses.
+	* `CMListCallback` now also includes WebSocket servers.
+	* `SteamClient.Connect` now optionally accepts a `ServerRecord` instead of optionally accepting an `IPEndPoint`. You can create a `ServerRecord` for a particular protocol type or set of protocol types.
+	* `IServerListProvider` now deals with `ServerRecord`s instead of `IPEndPoint`s.
+* Disabling server list fetching from the directory is now done via `SteamConfiguration` instead of `SmartCMServerList`.
+* `SteamDirectory` helper methods now accept a `SteamConfiguration` rather than just a cellid.
+* `SteamFriends.GetPersonaName()`, `SteamFriends.GetFriendPersonaName` and `SteamFriends.GetClanName` can all now return null if the value is unknown.
+* `WebAPI` used to throw a `WebException` on non-success status code, or other failure. It now throws `HttpRequestException`.
+* `CDNClient` and `WebAPI` now expose `Task`-based asynchronous methods. This replaces the previous synchronous methods.
 
 
 ------------------------------------------------------------------------------
