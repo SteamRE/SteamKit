@@ -43,12 +43,12 @@ namespace SteamKit2
             /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
             public AsyncJob<ServiceMethodResponse> SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification = false )
             {
-                // This also doubles as a null check.
-                if ( !( (object)expr is MethodCallExpression call ) )
+                if ( expr == null )
                 {
-                    throw new ArgumentException( "Expression must be a method call expression.", nameof(expr) );
+                    throw new ArgumentNullException( nameof(expr) );
                 }
 
+                var call = ExtractMethodCallExpression( expr, nameof(expr) );
                 var methodInfo = call.Method;
 
                 var argument = call.Arguments.Single();
@@ -72,9 +72,30 @@ namespace SteamKit2
 
                 var rpcName = string.Format( "{0}.{1}#{2}", serviceName, methodName, version );
 
-                var method = typeof(SteamUnifiedMessages).GetMethod( "SendMessage" ).MakeGenericMethod( message.GetType() );
+                var method = typeof(SteamUnifiedMessages).GetMethod( nameof(SteamUnifiedMessages.SendMessage) ).MakeGenericMethod( message.GetType() );
                 var result = method.Invoke( this.steamUnifiedMessages, new[] { rpcName, message, isNotification } );
-                return (AsyncJob<ServiceMethodResponse>)result;
+                return ( AsyncJob<ServiceMethodResponse> )result;
+            }
+            
+            static MethodCallExpression ExtractMethodCallExpression<TResponse>( Expression<Func<TService, TResponse>> expression, string paramName )
+            {
+                switch ( expression.NodeType )
+                {
+                    // Older code/tests/whatever were compiled down to just a single MethodCallExpression.
+                    case ExpressionType.Call:
+                        return ( MethodCallExpression )expression.Body;
+
+                    // Newer code/tests/whatever are now compiled by wrapping the MethodCallExpression in a LambdaExpression.
+                    case ExpressionType.Lambda:
+                        if ( expression.Body.NodeType == ExpressionType.Call )
+                        {
+                            var lambda = ( LambdaExpression )expression;
+                            return ( MethodCallExpression )lambda.Body;
+                        }
+                        break;
+                }
+
+                throw new ArgumentException( "Expression must be a method call.", paramName );
             }
         }
 
