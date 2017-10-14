@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Reflection;
 
-
 using SteamKit2.GC.Dota.Internal; // for CMsgDOTAMatch
-
 
 namespace DotaMatchRequest
 {
