@@ -149,7 +149,7 @@ namespace Tests
                 SteamID sid = new SteamID();
                 bool parsed = sid.SetFromSteam3String( steamId );
                 Assert.True( parsed );
-                Assert.Equal( steamId, sid.Render( steam3: true ) );
+                Assert.Equal( steamId, sid.Render() );
             }
         }
 
@@ -230,14 +230,22 @@ namespace Tests
         {
             SteamID sid = 76561197969249708;
 
-            Assert.Equal( "STEAM_0:0:4491990", sid.Render() );
-            Assert.Equal( sid.Render(), sid.ToString() );
+            Assert.Equal( "STEAM_0:0:4491990", sid.Render( steam3: false ) );
 
             sid.AccountUniverse = EUniverse.Beta;
-            Assert.Equal( "STEAM_2:0:4491990", sid.Render() );
+            Assert.Equal( "STEAM_2:0:4491990", sid.Render( steam3: false ) );
 
             sid.AccountType = EAccountType.GameServer;
-            Assert.Equal( "157625991261918636", sid.Render() );
+            Assert.Equal( "157625991261918636", sid.Render( steam3: false ) );
+        }
+
+        [Fact]
+        public void RendersSteam3ByDefault()
+        {
+            SteamID sid = 76561197969249708;
+
+            Assert.Equal( "[U:1:8983980]", sid.Render() );
+            Assert.Equal( "[U:1:8983980]", sid.ToString() );
         }
 
         [Fact]
@@ -305,7 +313,7 @@ namespace Tests
         public void RendersOutOfRangeAccountTypeAsLowercaseI()
         {
             SteamID sid = new SteamID( 123, EUniverse.Beta, (EAccountType)(-1) );
-            Assert.Equal( "[i:2:123]", sid.Render(steam3: true) );
+            Assert.Equal( "[i:2:123]", sid.Render() );
         }
     }
 }
