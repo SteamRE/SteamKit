@@ -19,17 +19,17 @@ namespace ProtobufDumper
     {
         public EnumProxyAttribute(object defaultValue, string type)
         {
-            this.DefaultValue = defaultValue;
-            this.EnumType = type;
+            DefaultValue = defaultValue;
+            EnumType = type;
         }
 
         public object DefaultValue;
-        public String EnumType;
+        public string EnumType;
     }
 
     class ImageFile
     {
-        private static ModuleBuilder moduleBuilder;
+        private static readonly ModuleBuilder moduleBuilder;
 
         static ImageFile()
         {
@@ -37,48 +37,48 @@ namespace ProtobufDumper
             moduleBuilder = assemblyBuilder.DefineDynamicModule("JIT");
         }
 
-        public string OutputDir { get; private set; }
-        public List<string> ProtoList { get; private set; }
+        private string OutputDir { get; }
+        private List<string> ProtoList { get; }
 
-        struct ProtoData
+        private struct ProtoData
         {
             public FileDescriptorProto file;
             public StringBuilder buffer;
         }
 
-        private string FileName;
+        private readonly string FileName;
 
-        private List<ProtoData> FinalProtoDefinition; 
+        private readonly List<ProtoData> FinalProtoDefinition; 
 
-        private List<FileDescriptorProto> deferredProtos;
+        private readonly List<FileDescriptorProto> deferredProtos;
 
-        private Dictionary<string, List<Type>> protobufExtensions;
+        private readonly Dictionary<string, List<Type>> protobufExtensions;
 
-        private Stack<string> messageNameStack;
-        private Dictionary<string, EnumDescriptorProto> enumLookup;
-        private Dictionary<string, int> enumLookupCount;
-        private List<string> deferredEnumTokens;
+        private readonly Stack<string> messageNameStack;
+        private readonly Dictionary<string, EnumDescriptorProto> enumLookup;
+        private readonly Dictionary<string, int> enumLookupCount;
+        private readonly List<string> deferredEnumTokens;
 
-        private Regex ProtoFileNameRegex;
+        private readonly Regex ProtoFileNameRegex;
 
         public ImageFile(string fileName, string output = null)
         {
-            this.FileName = fileName;
-            this.OutputDir = output ?? Path.GetFileNameWithoutExtension(fileName);
-            this.ProtoList = new List<string>();
+            FileName = fileName;
+            OutputDir = output ?? Path.GetFileNameWithoutExtension(fileName);
+            ProtoList = new List<string>();
 
-            this.FinalProtoDefinition = new List<ProtoData>();
+            FinalProtoDefinition = new List<ProtoData>();
 
-            this.deferredProtos = new List<FileDescriptorProto>();
+            deferredProtos = new List<FileDescriptorProto>();
 
-            this.protobufExtensions = new Dictionary<string, List<Type>>();
+            protobufExtensions = new Dictionary<string, List<Type>>();
 
-            this.messageNameStack = new Stack<string>();
-            this.enumLookup = new Dictionary<string, EnumDescriptorProto>();
-            this.enumLookupCount = new Dictionary<string, int>();
-            this.deferredEnumTokens = new List<string>();
+            messageNameStack = new Stack<string>();
+            enumLookup = new Dictionary<string, EnumDescriptorProto>();
+            enumLookupCount = new Dictionary<string, int>();
+            deferredEnumTokens = new List<string>();
 
-            this.ProtoFileNameRegex = new Regex(@"^[a-zA-Z_0-9\\/.]+\.proto$", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture);
+            ProtoFileNameRegex = new Regex(@"^[a-zA-Z_0-9\\/.]+\.proto$", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture);
         }
 
         public void Process()
@@ -112,7 +112,7 @@ namespace ProtobufDumper
 
         void ScanFile(Stream stream)
         {
-            int characterSize = Encoding.ASCII.GetByteCount("e");
+            var characterSize = Encoding.ASCII.GetByteCount("e");
             const char marker = '\n';
 
             while (stream.Position < stream.Length)
@@ -121,7 +121,7 @@ namespace ProtobufDumper
 
                 if (currentByte == marker)
                 {
-                    bool nullSkip = false;
+                    var nullSkip = false;
                     byte[] data = null;
 
                 continueScanning:
@@ -160,14 +160,14 @@ namespace ProtobufDumper
                         continue;
                     }
 
-                    byte strLen = data[1];
+                    var strLen = data[1];
 
                     if (data.Length - 2 < strLen)
                     {
                         continue;
                     }
 
-                    string protoName = Encoding.ASCII.GetString(data, 2, strLen);
+                    var protoName = Encoding.ASCII.GetString(data, 2, strLen);
 
                     if (!ProtoFileNameRegex.IsMatch(protoName))
                     {
@@ -212,7 +212,7 @@ namespace ProtobufDumper
             }
 
             messageNameStack.Push(descriptor);
-            string messageName = String.Join(".", messageNameStack.ToArray().Reverse());
+            var messageName = string.Join(".", messageNameStack.ToArray().Reverse());
             messageNameStack.Pop();
 
             return messageName;
@@ -231,48 +231,42 @@ namespace ProtobufDumper
 
         private static string GetEnumDescriptorTokenDefault(string messageName)
         {
-            return String.Format("${0}_DEFAULT_VALUE$", messageName);
+            return $"${messageName}_DEFAULT_VALUE$";
         }
 
         private static string GetEnumDescriptorTokenAt(string messageName, int index)
         {
-            return String.Format("${0}_{1}_VALUE$", messageName, index);
+            return $"${messageName}_{index}_VALUE$";
         }
 
         private string ResolveOrDeferEnumDefaultValue(string type)
         {
-            EnumDescriptorProto proto;
-            string descName = GetDescriptorName(type);
+            var descName = GetDescriptorName(type);
 
-            if (enumLookup.TryGetValue(descName, out proto))
+            if (enumLookup.TryGetValue(descName, out var proto))
                 return proto.value[0].name;
-            else
-            {
-                string absType = '.' + descName;
 
-                if(!deferredEnumTokens.Contains(absType))
-                    deferredEnumTokens.Add(absType);
+            var absType = '.' + descName;
 
-                return GetEnumDescriptorTokenDefault(absType);
-            }
+            if(!deferredEnumTokens.Contains(absType))
+                deferredEnumTokens.Add(absType);
+
+            return GetEnumDescriptorTokenDefault(absType);
         }
 
         private string ResolveOrDeferEnumValueAt(string type, int index)
         {
-            EnumDescriptorProto proto;
-            string descName = GetDescriptorName(type);
+            var descName = GetDescriptorName(type);
 
-            if (enumLookup.TryGetValue(descName, out proto))
+            if (enumLookup.TryGetValue(descName, out var proto))
                 return proto.value[index].name;
-            else
-            {
-                string absType = '.' + descName;
 
-                if (!deferredEnumTokens.Contains(absType))
-                    deferredEnumTokens.Add(absType);
+            var absType = '.' + descName;
 
-                return GetEnumDescriptorTokenAt(absType, index);
-            }
+            if (!deferredEnumTokens.Contains(absType))
+                deferredEnumTokens.Add(absType);
+
+            return GetEnumDescriptorTokenAt(absType, index);
         }
  
         private bool HandleProto(string name, byte[] data)
@@ -283,7 +277,7 @@ namespace ProtobufDumper
 
             if (Environment.GetCommandLineArgs().Contains("-dump", StringComparer.OrdinalIgnoreCase))
             {
-                string fileName = Path.Combine(OutputDir, name + ".dump");
+                var fileName = Path.Combine(OutputDir, $"{name}.dump");
                 Directory.CreateDirectory(Path.GetDirectoryName(fileName));
 
                 Console.WriteLine("  ! Dumping to '{0}'!", fileName);
@@ -300,7 +294,7 @@ namespace ProtobufDumper
 
             try
             {
-                using (MemoryStream ms = new MemoryStream(data))
+                using (var ms = new MemoryStream(data))
                     set = Serializer.Deserialize<FileDescriptorProto>(ms);
             }
             catch (EndOfStreamException ex)
@@ -329,22 +323,20 @@ namespace ProtobufDumper
 
         private bool ShouldDeferProto(FileDescriptorProto set)
         {
-            bool defer = false;
-            foreach (string dependency in set.dependency)
+            foreach (var dependency in set.dependency)
             {
                 if (!dependency.StartsWith("google", StringComparison.Ordinal) && !ProtoList.Contains(dependency))
                 {
-                    defer = true;
-                    break;
+                    return true;
                 }
             }
 
-            return defer;
+            return false;
         }
 
         private void DoParseFile(FileDescriptorProto set)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
             DumpFileDescriptor(set, sb);
 
@@ -359,16 +351,16 @@ namespace ProtobufDumper
             foreach (var proto in FinalProtoDefinition)
             {
                 Directory.CreateDirectory(OutputDir);
-                string outputFile = Path.Combine(OutputDir, proto.file.name);
+                var outputFile = Path.Combine(OutputDir, proto.file.name);
 
                 Console.WriteLine("  ! Outputting proto to '{0}'", outputFile);
                 Directory.CreateDirectory(Path.GetDirectoryName(outputFile));
 
-                foreach(string type in deferredEnumTokens)
+                foreach(var type in deferredEnumTokens)
                 {
                     proto.buffer.Replace(GetEnumDescriptorTokenDefault(type), ResolveOrDeferEnumDefaultValue(type));
 
-                    for (int i = 0; i < enumLookupCount[GetDescriptorName(type)]; i++)
+                    for (var i = 0; i < enumLookupCount[GetDescriptorName(type)]; i++)
                     {
                         proto.buffer.Replace(GetEnumDescriptorTokenAt(type, i), ResolveOrDeferEnumValueAt(type, i));
                     }
@@ -378,7 +370,7 @@ namespace ProtobufDumper
             }
         }
 
-        private static String GetLabel(FieldDescriptorProto.Label label)
+        private static string GetLabel(FieldDescriptorProto.Label label)
         {
             switch (label)
             {
@@ -392,7 +384,7 @@ namespace ProtobufDumper
             }
         }
 
-        private static String GetType(FieldDescriptorProto.Type type)
+        private static string GetType(FieldDescriptorProto.Type type)
         {
             switch (type)
             {
@@ -437,7 +429,7 @@ namespace ProtobufDumper
             }
         }
 
-        public static Type LookupBasicType(FieldDescriptorProto.Type type, out DataFormat format, out bool buildEnumProxy)
+        private static Type LookupBasicType(FieldDescriptorProto.Type type, out DataFormat format, out bool buildEnumProxy)
         {
             buildEnumProxy = false;
             format = DataFormat.Default;
@@ -446,25 +438,25 @@ namespace ProtobufDumper
                 default:
                     return null;
                 case FieldDescriptorProto.Type.TYPE_INT32:
-                    return typeof(Int32);
+                    return typeof(int);
                 case FieldDescriptorProto.Type.TYPE_INT64:
-                    return typeof(Int64);
+                    return typeof(long);
                 case FieldDescriptorProto.Type.TYPE_SINT32:
-                    return typeof(Int32);
+                    return typeof(int);
                 case FieldDescriptorProto.Type.TYPE_SINT64:
-                    return typeof(Int64);
+                    return typeof(long);
                 case FieldDescriptorProto.Type.TYPE_UINT32:
-                    return typeof(UInt32);
+                    return typeof(uint);
                 case FieldDescriptorProto.Type.TYPE_UINT64:
-                    return typeof(UInt64);
+                    return typeof(ulong);
                 case FieldDescriptorProto.Type.TYPE_STRING:
-                    return typeof(String);
+                    return typeof(string);
                 case FieldDescriptorProto.Type.TYPE_BOOL:
-                    return typeof(Boolean);
+                    return typeof(bool);
                 case FieldDescriptorProto.Type.TYPE_BYTES:
                     return typeof(byte[]);
                 case FieldDescriptorProto.Type.TYPE_DOUBLE:
-                    return typeof(Double);
+                    return typeof(double);
                 case FieldDescriptorProto.Type.TYPE_FLOAT:
                     return typeof(float);
                 case FieldDescriptorProto.Type.TYPE_MESSAGE:
@@ -472,50 +464,46 @@ namespace ProtobufDumper
                 case FieldDescriptorProto.Type.TYPE_FIXED32:
                     {
                         format = DataFormat.FixedSize;
-                        return typeof(Int32);
+                        return typeof(int);
                     }
                 case FieldDescriptorProto.Type.TYPE_FIXED64:
                     {
                         format = DataFormat.FixedSize;
-                        return typeof(Int64);
+                        return typeof(long);
                     }
                 case FieldDescriptorProto.Type.TYPE_SFIXED32:
                     {
                         format = DataFormat.FixedSize;
-                        return typeof(Int32);
+                        return typeof(int);
                     }
                 case FieldDescriptorProto.Type.TYPE_SFIXED64:
                     {
                         format = DataFormat.FixedSize;
-                        return typeof(Int64);
+                        return typeof(long);
                     }
                 case FieldDescriptorProto.Type.TYPE_ENUM:
                     {
                         buildEnumProxy = true;
-                        return typeof(Int32);
+                        return typeof(int);
                     }
             }
         }
 
-        private String ResolveType(FieldDescriptorProto field)
+        private string ResolveType(FieldDescriptorProto field)
         {
-            if (field.type == FieldDescriptorProto.Type.TYPE_MESSAGE)
+            if (field.type == FieldDescriptorProto.Type.TYPE_ENUM || field.type == FieldDescriptorProto.Type.TYPE_MESSAGE)
             {
                 return field.type_name;
             }
-            else if (field.type == FieldDescriptorProto.Type.TYPE_ENUM)
-            {
-                return field.type_name;
-            }
-
+            
             return GetType(field.type);
         }
 
         private string GetValueForProp(dynamic propInfo, object options, bool field, out string name)
         {
-            ProtoMemberAttribute[] protoMember = (ProtoMemberAttribute[])propInfo.GetCustomAttributes(typeof(ProtoMemberAttribute), false);
-            DefaultValueAttribute[] defaultValueList = (DefaultValueAttribute[])propInfo.GetCustomAttributes(typeof(DefaultValueAttribute), false);
-            EnumProxyAttribute[] enumProxyList = (EnumProxyAttribute[])propInfo.GetCustomAttributes(typeof(EnumProxyAttribute), false);
+            var protoMember = (ProtoMemberAttribute[])propInfo.GetCustomAttributes(typeof(ProtoMemberAttribute), false);
+            var defaultValueList = (DefaultValueAttribute[])propInfo.GetCustomAttributes(typeof(DefaultValueAttribute), false);
+            var enumProxyList = (EnumProxyAttribute[])propInfo.GetCustomAttributes(typeof(EnumProxyAttribute), false);
 
             name = null;
 
@@ -527,7 +515,7 @@ namespace ProtobufDumper
 
             try
             {
-                if(field)
+                if (field)
                     value = propInfo.GetValue(options);
                 else
                     value = propInfo.GetValue(options, null);
@@ -545,14 +533,14 @@ namespace ProtobufDumper
 
             if (defaultValueList.Length > 0)
             {
-                object defValue = defaultValueList[0].Value;
+                var defValue = defaultValueList[0].Value;
                 if (defValue != null && defValue.Equals(value))
                     return null;
             }
 
             if (enumProxyList.Length > 0)
             {
-                EnumProxyAttribute enumProxy = enumProxyList[0];
+                var enumProxy = enumProxyList[0];
                 value = ResolveOrDeferEnumValueAt(enumProxy.EnumType, (int)value - 1);
             }
             else if (value is string)
@@ -560,7 +548,7 @@ namespace ProtobufDumper
                 if (string.IsNullOrEmpty((string)value))
                     return null;
 
-                value = string.Format("\"{0}\"", value);
+                value = $"\"{value}\"";
             }
             else if (value is bool)
             {
@@ -580,7 +568,7 @@ namespace ProtobufDumper
 
         private Dictionary<string, string> DumpOptions(dynamic options)
         {
-            Dictionary<string, string> options_kv = new Dictionary<string, string>();
+            var options_kv = new Dictionary<string, string>();
 
             if (options == null)
                 return options_kv;
@@ -616,21 +604,21 @@ namespace ProtobufDumper
             }
 
             // generate reflected options (extensions to this type)
-            IExtension extend = ((IExtensible)options).GetExtensionObject(false);
-            List<Type> extensions = new List<Type>();
+            var extend = ((IExtensible)options).GetExtensionObject(false);
+            var extensions = new List<Type>();
 
             if (extend != null && protobufExtensions.TryGetValue(options.GetType().FullName, out extensions))
             {
                 foreach (var extension in extensions)
                 {
-                    Stream ms = extend.BeginQuery();
+                    var ms = extend.BeginQuery();
 
-                    object deserialized = RuntimeTypeModel.Default.Deserialize(ms, null, extension);
+                    var deserialized = RuntimeTypeModel.Default.Deserialize(ms, null, extension);
 
                     foreach (var fieldInfo in extension.GetFields(BindingFlags.Instance | BindingFlags.Public))
                     {
                         string name;
-                        string value = GetValueForProp(fieldInfo, deserialized, true, out name);
+                        var value = GetValueForProp(fieldInfo, deserialized, true, out name);
 
                         if (value != null)
                             options_kv.Add(name, value);
@@ -647,15 +635,15 @@ namespace ProtobufDumper
         {
             PushDescriptorName(field);
 
-            string type = ResolveType(field);
-            Dictionary<string, string> options = new Dictionary<string, string>();
+            var type = ResolveType(field);
+            var options = new Dictionary<string, string>();
 
-            if (!String.IsNullOrEmpty(field.default_value))
+            if (!string.IsNullOrEmpty(field.default_value))
             {
-                string default_value = field.default_value;
+                var default_value = field.default_value;
 
                 if (field.type == FieldDescriptorProto.Type.TYPE_STRING)
-                    default_value = String.Format("\"{0}\"", default_value);
+                    default_value = $"\"{default_value}\"";
 
                 options.Add("default", default_value);
             }
@@ -664,16 +652,16 @@ namespace ProtobufDumper
                 options.Add("default", ResolveOrDeferEnumDefaultValue(type));
             }
 
-            Dictionary<string, string> fieldOptions = DumpOptions(field.options);
+            var fieldOptions = DumpOptions(field.options);
             foreach (var pair in fieldOptions)
             {
                 options[pair.Key] = pair.Value;
             }
 
-            string parameters = String.Empty;
+            var parameters = string.Empty;
             if (options.Count > 0)
             {
-                parameters = " [" + String.Join(", ", options.Select(kvp => String.Format("{0} = {1}", kvp.Key, kvp.Value))) + "]";
+                parameters = $" [{string.Join(", ", options.Select(kvp => $"{kvp.Key} = {kvp.Value}"))}]";
             }
 
             PopDescriptorName();
@@ -684,17 +672,17 @@ namespace ProtobufDumper
                 descriptorDeclarationBuilder.Append(GetLabel(field.label));
                 descriptorDeclarationBuilder.Append(" ");
             }
-
-            descriptorDeclarationBuilder.AppendFormat("{0} {1} = {2}{3};", type, field.name, field.number, parameters);
+            
+            descriptorDeclarationBuilder.Append($"{type} {field.name} = {field.number}{parameters};");
 
             return descriptorDeclarationBuilder.ToString();
         }
 
-        private void DumpExtensionDescriptor(List<FieldDescriptorProto> fields, StringBuilder sb, string levelspace)
+        private void DumpExtensionDescriptor(IEnumerable<FieldDescriptorProto> fields, StringBuilder sb, string levelspace)
         {
-            foreach (var mapping in fields.GroupBy(x => { return x.extendee; }))
+            foreach (var mapping in fields.GroupBy(x => x.extendee))
             {
-                if (String.IsNullOrEmpty(mapping.Key))
+                if (string.IsNullOrEmpty(mapping.Key))
                     throw new Exception("Empty extendee in extension, this should not be possible");
 
                 if (mapping.Key.StartsWith(".google.protobuf", StringComparison.Ordinal))
@@ -702,28 +690,28 @@ namespace ProtobufDumper
                     BuildExtension(mapping.Key.Substring(1), mapping.ToArray());
                 }
 
-                sb.AppendLine(levelspace + "extend " + mapping.Key + " {");
+                sb.AppendLine($"{levelspace}extend {mapping.Key} {{");
 
-                foreach (FieldDescriptorProto field in mapping)
+                foreach (var field in mapping)
                 {
-                    sb.AppendLine(levelspace + "\t" + BuildDescriptorDeclaration(field));
+                    sb.AppendLine($"{levelspace}\t{BuildDescriptorDeclaration(field)}");
                 }
 
-                sb.AppendLine(levelspace + "}");
+                sb.AppendLine($"{levelspace}}}");
                 sb.AppendLine();
             }
         }
 
         private void DumpFileDescriptor(FileDescriptorProto set, StringBuilder sb)
         {
-            if(!String.IsNullOrEmpty(set.package))
+            if(!string.IsNullOrEmpty(set.package))
                 PushDescriptorName(set);
 
-            bool marker = false;
+            var marker = false;
 
-            foreach (string dependency in set.dependency)
+            foreach (var dependency in set.dependency)
             {
-                sb.AppendLine("import \"" + dependency + "\";");
+                sb.AppendLine($"import \"{dependency}\";");
                 marker = true;
             }
 
@@ -735,7 +723,7 @@ namespace ProtobufDumper
 
             if (!string.IsNullOrEmpty(set.package))
             {
-                sb.AppendLine("package " + set.package + ";");
+                sb.AppendLine($"package {set.package};");
                 marker = true;
             }
 
@@ -747,55 +735,54 @@ namespace ProtobufDumper
 
             foreach (var option in DumpOptions(set.options))
             {
-                sb.AppendLine("option " + option.Key + " = " + option.Value + ";");
+                sb.AppendLine($"option {option.Key} = {option.Value};");
                 marker = true;
             }
 
             if (marker)
             {
                 sb.AppendLine();
-                marker = false;
             }
 
-            DumpExtensionDescriptor(set.extension, sb, String.Empty);
+            DumpExtensionDescriptor(set.extension, sb, string.Empty);
 
-            foreach (EnumDescriptorProto field in set.enum_type)
+            foreach (var field in set.enum_type)
             {
                 DumpEnumDescriptor(field, sb, 0);
             }
 
-            foreach (DescriptorProto proto in set.message_type)
+            foreach (var proto in set.message_type)
             {
                 DumpDescriptor(proto, set, sb, 0);
             }
 
-            foreach (ServiceDescriptorProto service in set.service)
+            foreach (var service in set.service)
             {
-                sb.AppendLine("service " + service.name + " {");
+                sb.AppendLine($"service {service.name} {{");
 
                 foreach (var option in DumpOptions(service.options))
                 {
-                    sb.AppendLine("\toption " + option.Key + " = " + option.Value + ";");
+                    sb.AppendLine($"\toption {option.Key} = {option.Value};");
                 }
 
-                foreach (MethodDescriptorProto method in service.method)
+                foreach (var method in service.method)
                 {
-                    string declaration = "\trpc " + method.name + " (" + method.input_type + ") returns (" + method.output_type + ")";
+                    var declaration = $"\trpc {method.name} ({method.input_type}) returns ({method.output_type})";
 
-                    Dictionary<string, string> options = DumpOptions(method.options);
+                    var options = DumpOptions(method.options);
 
-                    string parameters = String.Empty;
+                    var parameters = string.Empty;
                     if (options.Count == 0)
                     {
-                        sb.AppendLine(declaration + ";");
+                        sb.AppendLine($"{declaration};");
                     }
                     else
                     {
-                        sb.AppendLine(declaration + " {");
+                        sb.AppendLine($"{declaration} {{");
 
                         foreach (var option in options)
                         {
-                            sb.AppendLine("\t\toption " + option.Key + " = " + option.Value + ";");
+                            sb.AppendLine($"\t\toption {option.Key} = {option.Value};");
                         }
 
                         sb.AppendLine("\t}");
@@ -805,7 +792,7 @@ namespace ProtobufDumper
                 sb.AppendLine("}");
             }
 
-            if (!String.IsNullOrEmpty(set.package))
+            if (!string.IsNullOrEmpty(set.package))
                 PopDescriptorName();
         }
 
@@ -813,58 +800,58 @@ namespace ProtobufDumper
         {
             PushDescriptorName(proto);
 
-            string levelspace = new String('\t', level);
+            var levelspace = new string('\t', level);
 
-            sb.AppendLine(levelspace + "message " + proto.name + " {");
+            sb.AppendLine($"{levelspace}message {proto.name} {{");
 
             foreach (var option in DumpOptions(proto.options))
             {
-                sb.AppendLine(levelspace + "\toption " + option.Key + " = " + option.Value + ";");
+                sb.AppendLine($"{levelspace}\toption {option.Key} = {option.Value};");
             }
 
-            foreach (DescriptorProto field in proto.nested_type)
+            foreach (var field in proto.nested_type)
             {
                 DumpDescriptor(field, set, sb, level + 1);
             }
 
-            DumpExtensionDescriptor(proto.extension, sb, levelspace + '\t');
+            DumpExtensionDescriptor(proto.extension, sb, $"{levelspace}\t");
 
-            foreach (EnumDescriptorProto field in proto.enum_type)
+            foreach (var field in proto.enum_type)
             {
                 DumpEnumDescriptor(field, sb, level + 1);
             }
 
-            foreach (FieldDescriptorProto field in proto.field.Where(x => !x.oneof_indexSpecified))
+            foreach (var field in proto.field.Where(x => !x.oneof_indexSpecified))
             {
                 var enumLookup = new List<EnumDescriptorProto>();
 
                 enumLookup.AddRange( set.enum_type ); // add global enums
                 enumLookup.AddRange( proto.enum_type ); // add this message's nested enums
 
-                sb.AppendLine(levelspace + "\t" + BuildDescriptorDeclaration(field));
+                sb.AppendLine($"{levelspace}\t{BuildDescriptorDeclaration(field)}");
             }
 
-            for (int i = 0; i < proto.oneof_decl.Count; i++)
+            for (var i = 0; i < proto.oneof_decl.Count; i++)
             {
                 var oneof = proto.oneof_decl[i];
                 var fields = proto.field.Where(x => x.oneof_indexSpecified && x.oneof_index == i).ToArray();
 
-                sb.AppendLine(levelspace + "\toneof " + oneof.name + " {");
+                sb.AppendLine($"{levelspace}\toneof {oneof.name} {{");
 
                 foreach(var field in fields)
                 {
-                    sb.AppendLine(levelspace + "\t\t" + BuildDescriptorDeclaration(field, emitFieldLabel: false));
+                    sb.AppendLine($"{levelspace}\t\t{BuildDescriptorDeclaration(field, emitFieldLabel: false)}");
                 }
 
-                sb.AppendLine(levelspace + "\t}");
+                sb.AppendLine($"{levelspace}\t}}");
             }
 
             if (proto.extension_range.Count > 0)
                 sb.AppendLine();
 
-            foreach (DescriptorProto.ExtensionRange range in proto.extension_range)
+            foreach (var range in proto.extension_range)
             {
-                string max = Convert.ToString( range.end );
+                var max = Convert.ToString( range.end );
 
                 // http://code.google.com/apis/protocolbuffers/docs/proto.html#extensions
                 // If your numbering convention might involve extensions having very large numbers as tags, you can specify
@@ -875,10 +862,10 @@ namespace ProtobufDumper
                     max = "max";
                 }
 
-                sb.AppendLine(levelspace + "\textensions " + range.start + " to " + max + ";");
+                sb.AppendLine($"{levelspace}\textensions {range.start} to {max};");
             }
 
-            sb.AppendLine(levelspace + "}");
+            sb.AppendLine($"{levelspace}}}");
             sb.AppendLine();
 
             PopDescriptorName();
@@ -888,58 +875,55 @@ namespace ProtobufDumper
         {
             AddEnumDescriptorLookup(field);
 
-            string levelspace = new String('\t', level);
+            var levelspace = new string('\t', level);
 
-            sb.AppendLine(levelspace + "enum " + field.name + " {");
+            sb.AppendLine($"{levelspace}enum {field.name} {{");
 
             foreach (var option in DumpOptions(field.options))
             {
-                sb.AppendLine(levelspace + "\toption " + option.Key + " = " + option.Value + ";");
+                sb.AppendLine($"{levelspace}\toption {option.Key} = {option.Value};");
             }
 
-            foreach (EnumValueDescriptorProto enumValue in field.value)
+            foreach (var enumValue in field.value)
             {
-                Dictionary<string, string> options = DumpOptions(enumValue.options);
+                var options = DumpOptions(enumValue.options);
 
-                string parameters = String.Empty;
+                var parameters = string.Empty;
                 if (options.Count > 0)
                 {
-                    parameters = " [" + String.Join(", ", options.Select(kvp => String.Format("{0} = {1}", kvp.Key, kvp.Value))) + "]";
+                    parameters = $" [{string.Join(", ", options.Select(kvp => $"{kvp.Key} = {kvp.Value}"))}]";
                 }
 
-                sb.AppendLine(levelspace + "\t" + enumValue.name + " = " + enumValue.number + parameters + ";");
+                sb.AppendLine($"{levelspace}\t{enumValue.name} = {enumValue.number}{parameters};");
             }
 
-            sb.AppendLine(levelspace + "}");
+            sb.AppendLine($"{levelspace}}}");
             sb.AppendLine();
         }
 
         // because of protobuf-net we're limited to parsing simple types at run-time as we can't parse the protobuf, but options shouldn't be too complex
-        private void BuildExtension(string key, FieldDescriptorProto[] fields)
+        private void BuildExtension(string key, IEnumerable<FieldDescriptorProto> fields)
         {
-            string name = key + "Ext" + Guid.NewGuid().ToString();
-            TypeBuilder extension = moduleBuilder.DefineType(name, TypeAttributes.Class);
+            var name = $"{key}Ext{Guid.NewGuid()}";
+            var extension = moduleBuilder.DefineType(name, TypeAttributes.Class);
 
-            Type pcType = typeof(ProtoContractAttribute);
-            ConstructorInfo pcCtor = pcType.GetConstructor(Type.EmptyTypes);
-            CustomAttributeBuilder pcBuilder = new CustomAttributeBuilder(pcCtor,Type.EmptyTypes);
+            var pcType = typeof(ProtoContractAttribute);
+            var pcCtor = pcType.GetConstructor(Type.EmptyTypes);
+            var pcBuilder = new CustomAttributeBuilder(pcCtor, Type.EmptyTypes);
 
             extension.SetCustomAttribute(pcBuilder);
 
             foreach (var field in fields)
             {
-                DataFormat format;
-                bool buildEnumProxy;
-                Type fieldType = ImageFile.LookupBasicType(field.type, out format, out buildEnumProxy);
-
-                FieldBuilder fbuilder = extension.DefineField(field.name, fieldType, FieldAttributes.Public);
+                var fieldType = LookupBasicType(field.type, out var format, out var buildEnumProxy);
+                var fbuilder = extension.DefineField(field.name, fieldType, FieldAttributes.Public);
 
                 object defaultValue = field.default_value;
                 if (field.type == FieldDescriptorProto.Type.TYPE_ENUM)
                 {
                     defaultValue = 0;
                 }
-                else if (String.IsNullOrEmpty(field.default_value))
+                else if (string.IsNullOrEmpty(field.default_value))
                 {
                     if (field.type == FieldDescriptorProto.Type.TYPE_STRING)
                         defaultValue = "";
@@ -964,37 +948,37 @@ namespace ProtobufDumper
 
                 if (buildEnumProxy)
                 {
-                    Type epType = typeof(EnumProxyAttribute);
-                    ConstructorInfo epCtor = epType.GetConstructor(new Type[] { typeof(object), typeof(string) });
-                    CustomAttributeBuilder epBuilder = new CustomAttributeBuilder(epCtor, new object[] { field.default_value, field.type_name });
+                    var epType = typeof(EnumProxyAttribute);
+                    var epCtor = epType.GetConstructor(new[] { typeof(object), typeof(string) });
+                    var epBuilder = new CustomAttributeBuilder(epCtor, new object[] { field.default_value, field.type_name });
 
                     fbuilder.SetCustomAttribute(epBuilder);
                 }
 
-                Type dvType = typeof(DefaultValueAttribute);
-                ConstructorInfo dvCtor = dvType.GetConstructor(new Type[] { typeof(object) });
-                CustomAttributeBuilder dvBuilder = new CustomAttributeBuilder(dvCtor, new object[] { defaultValue });
+                var dvType = typeof(DefaultValueAttribute);
+                var dvCtor = dvType.GetConstructor(new[] { typeof(object) });
+                var dvBuilder = new CustomAttributeBuilder(dvCtor, new[] { defaultValue });
 
                 fbuilder.SetCustomAttribute(dvBuilder);
 
-                Type pmType = typeof(ProtoMemberAttribute);
-                ConstructorInfo pmCtor = pmType.GetConstructor(new Type[] { typeof(int) });
-                CustomAttributeBuilder pmBuilder = new CustomAttributeBuilder(pmCtor, new object[] { field.number }, 
-                                                        new PropertyInfo[] { pmType.GetProperty("Name"), pmType.GetProperty("DataFormat") },
-                                                        new object[] {  "(" + field.name + ")", format } );
+                var pmType = typeof(ProtoMemberAttribute);
+                var pmCtor = pmType.GetConstructor(new[] { typeof(int) });
+                var pmBuilder = new CustomAttributeBuilder(pmCtor, new object[] { field.number }, 
+                                                        new[] { pmType.GetProperty("Name"), pmType.GetProperty("DataFormat") },
+                                                        new object[] {$"({field.name})", format } );
 
 
                 fbuilder.SetCustomAttribute(pmBuilder);
             }
 
-            Type extensionType = extension.CreateType();
+            var extensionType = extension.CreateType();
 
-            if (!this.protobufExtensions.ContainsKey(key))
+            if (!protobufExtensions.ContainsKey(key))
             {
-                this.protobufExtensions[key] = new List<Type>();
+                protobufExtensions[key] = new List<Type>();
             }
 
-            this.protobufExtensions[key].Add(extensionType);
+            protobufExtensions[key].Add(extensionType);
         }
     }
 }
