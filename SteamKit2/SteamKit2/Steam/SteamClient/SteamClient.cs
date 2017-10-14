@@ -39,7 +39,7 @@ namespace SteamKit2
         /// Initializes a new instance of the <see cref="SteamClient"/> class with the default configuration.
         /// </summary>
         public SteamClient()
-            : this( new SteamConfiguration () )
+            : this( SteamConfiguration.CreateDefault() )
         {
         }
 

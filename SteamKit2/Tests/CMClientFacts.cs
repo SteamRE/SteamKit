@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
 using SteamKit2;
 using SteamKit2.Internal;
 using Xunit;
@@ -19,7 +18,7 @@ namespace Tests
                 EMsg.ChannelEncryptResult
             };
 
-            foreach(var emsg in messages)
+            foreach (var emsg in messages)
             {
                 var msgHdr = new MsgHdr { Msg = emsg };
 
@@ -123,7 +122,7 @@ namespace Tests
         class DummyCMClient : CMClient
         {
             public DummyCMClient()
-                : base( new SteamConfiguration() )
+                : base( SteamConfiguration.CreateDefault() )
             {
             }
 

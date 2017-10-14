@@ -12,14 +12,14 @@ namespace SteamKit2.Discovery
     /// </summary>
     public class FileStorageServerListProvider : IServerListProvider
     {
-        string filename;
+        readonly string filename;
 
         /// <summary>
         /// Initialize a new instance of FileStorageServerListProvider
         /// </summary>
         public FileStorageServerListProvider(string filename)
         {
-            this.filename = filename;
+            this.filename = filename ?? throw new ArgumentNullException(nameof(filename));
         }
 
         /// <summary>
