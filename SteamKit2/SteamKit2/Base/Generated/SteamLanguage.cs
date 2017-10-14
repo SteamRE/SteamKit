@@ -2336,7 +2336,9 @@ namespace SteamKit2
 		Repurchaseable = 11,
 		FreeOnDemand = 12,
 		Rental = 13,
-		NumBillingTypes = 14,
+		CommercialLicense = 14,
+		FreeCommercialLicense = 15,
+		NumBillingTypes = 16,
 	}
 	public enum EActivationCodeClass : uint
 	{
