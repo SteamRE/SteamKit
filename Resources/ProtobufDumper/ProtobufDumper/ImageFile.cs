@@ -33,8 +33,8 @@ namespace ProtobufDumper
 
         static ImageFile()
         {
-            AssemblyBuilder assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(new AssemblyName("ProtobufDumper"), AssemblyBuilderAccess.RunAndSave);
-            moduleBuilder = assemblyBuilder.DefineDynamicModule("JIT", true);
+            var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("ProtobufDumper"), AssemblyBuilderAccess.Run);
+            moduleBuilder = assemblyBuilder.DefineDynamicModule("JIT");
         }
 
         public string OutputDir { get; private set; }
