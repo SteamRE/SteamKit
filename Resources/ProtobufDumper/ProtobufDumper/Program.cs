@@ -2,7 +2,7 @@
 
 namespace ProtobufDumper
 {
-    class Program
+    static class Program
     {
         static void Main( string[] args )
         {
@@ -16,21 +16,11 @@ namespace ProtobufDumper
                 return;
             }
 
-            string target = args[ 0 ];
-            string output = ( ( args.Length > 1 ) ? args[ 1 ] : null );
+            var target = args[ 0 ];
+            var output = args.Length > 1 ? args[ 1 ] : null;
 
-            ImageFile imgFile = new ImageFile( target, output );
-
-            try
-            {
-                imgFile.Process();
-            }
-            catch ( Exception ex )
-            {
-                Console.WriteLine( "Unable to process file: {0}", ex.Message );
-                Console.WriteLine( ex.StackTrace );
-                Environment.ExitCode = -1;
-            }
+            var imgFile = new ImageFile( target, output );
+            imgFile.Process();
         }
     }
 }
