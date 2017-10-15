@@ -1,21 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Reflection;
-
 
 using SteamKit2;
 using SteamKit2.Internal; // brings in our protobuf client messages
-
 using SteamKit2.GC; // brings in the GC related classes
-using SteamKit2.GC.Internal; // brings the base GC protobuf messages
-
-using SteamKit2.GC.Dota; // brings in dota specific things
 using SteamKit2.GC.Dota.Internal; // brings in dota specific protobuf messages
-
-
 
 namespace DotaMatchRequest
 {
@@ -86,18 +76,6 @@ namespace DotaMatchRequest
         // called when the client successfully (or unsuccessfully) connects to steam
         void OnConnected( SteamClient.ConnectedCallback callback )
         {
-            if ( callback.Result != EResult.OK )
-            {
-                // connection failed (steam servers down, at capacity, etc)
-                // here you would delay your next connection attempt by say 30 seconds
-                // steamkit doesn't automatically reconnect, you have to perform the connection yourself
-
-                Console.WriteLine( "Unable to connect to Steam: {0}", callback.Result );
-
-                gotMatch = true; // we didn't actually get the match details, but we need to jump out of the callback loop
-                return;
-            }
-
             Console.WriteLine( "Connected! Logging '{0}' into Steam...", userName );
 
             // we've successfully connected, so now attempt to logon
