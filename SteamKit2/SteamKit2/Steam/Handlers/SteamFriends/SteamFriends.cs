@@ -58,7 +58,7 @@ namespace SteamKit2
 
         /// <summary>
         /// Gets the local user's persona name. Will be null before user initialization.
-        /// User initialization is performed prior to <see cref="AccountInfoCallback"/> callback.
+        /// User initialization is performed prior to <see cref="SteamUser.AccountInfoCallback"/> callback.
         /// </summary>
         /// <returns>The name.</returns>
         public string GetPersonaName()
