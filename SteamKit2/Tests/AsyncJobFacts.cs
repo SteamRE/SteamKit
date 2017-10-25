@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using SteamKit2;
 using Xunit;
@@ -359,6 +360,52 @@ namespace Tests
             Assert.True( asyncTask.IsFaulted, "AsyncJobMultiple should be faulted after job failure" );
 
             await Assert.ThrowsAsync( typeof( AsyncJobFailedException ), async () => await asyncTask );
+        }
+
+        [Fact]
+        public async Task AsyncJobContinuesAsynchronously()
+        {
+            SteamClient client = new SteamClient();
+
+            var asyncJob = new AsyncJob<Callback>( client, 123 );
+            var asyncTask = asyncJob.ToTask();
+
+            var continuationThreadID = -1;
+            var continuation = asyncTask.ContinueWith( t =>
+            {
+                continuationThreadID = Thread.CurrentThread.ManagedThreadId;
+            }, TaskContinuationOptions.ExecuteSynchronously );
+
+            var completionThreadID = Thread.CurrentThread.ManagedThreadId;
+            asyncJob.AddResult( new Callback { JobID = 123 } );
+
+            await continuation;
+
+            Assert.NotEqual( -1, continuationThreadID );
+            Assert.NotEqual( completionThreadID, continuationThreadID );
+        }
+
+        [Fact]
+        public async Task AsyncJobMultipleContinuesAsynchronously()
+        {
+            SteamClient client = new SteamClient();
+
+            var asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => true );
+            var asyncTask = asyncJob.ToTask();
+
+            var continuationThreadID = -1;
+            var continuation = asyncTask.ContinueWith( t =>
+            {
+                continuationThreadID = Thread.CurrentThread.ManagedThreadId;
+            }, TaskContinuationOptions.ExecuteSynchronously );
+
+            var completionThreadID = Thread.CurrentThread.ManagedThreadId;
+            asyncJob.AddResult( new Callback { JobID = 123 } );
+
+            await continuation;
+
+            Assert.NotEqual( -1, continuationThreadID );
+            Assert.NotEqual( completionThreadID, continuationThreadID );
         }
     }
 }
