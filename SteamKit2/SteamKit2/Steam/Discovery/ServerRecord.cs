@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Net;
 
 namespace SteamKit2.Discovery
@@ -122,5 +122,55 @@ namespace SteamKit2.Discovery
 
             return new ServerRecord(endPoint, ProtocolTypes.WebSocket);
         }
+
+        #region Equality and Hashing
+
+        /// <summary>
+        /// Determines whether two objects are equal.
+        /// </summary>
+        /// <param name="left">The object on the left-hand side of the equality operator.</param>
+        /// <param name="right">The object on the right-hand side of the equality operator.</param>
+        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
+        public static bool operator ==(ServerRecord left, ServerRecord right)
+        {
+            if (ReferenceEquals(left, right))
+            {
+                return true;
+            }
+
+            return !ReferenceEquals(left, null) && left.Equals(right);
+        }
+
+        /// <summary>
+        /// Determines whether two objects are not equal.
+        /// </summary>
+        /// <param name="left">The object on the left-hand side of the inequality operator.</param>
+        /// <param name="right">The object on the right-hand side of the inequality operator.</param>
+        /// <returns>true if the specified object is not equal to the current object; otherwise, false.</returns>
+        public static bool operator !=(ServerRecord left, ServerRecord right)
+        {
+            return !(left == right);
+        }
+
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
+        public override bool Equals(object obj)
+            => obj is ServerRecord other &&
+               EndPoint.Equals(other.EndPoint) &&
+               ProtocolTypes == other.ProtocolTypes;
+
+        /// <summary>
+        /// Hash function
+        /// </summary>
+        /// <returns>A hash code for the current object.</returns>
+        public override int GetHashCode()
+        {
+            return EndPoint.GetHashCode() ^ ProtocolTypes.GetHashCode();
+        }
+
+        #endregion
     }
 }
