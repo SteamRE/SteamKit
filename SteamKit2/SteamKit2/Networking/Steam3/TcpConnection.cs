@@ -132,6 +132,8 @@ namespace SteamKit2
 
                     netThread = new Thread(NetLoop);
                     netThread.Name = "TcpConnection Thread";
+
+                    CurrentEndPoint = socket.RemoteEndPoint;
                 }
 
                 netThread.Start();

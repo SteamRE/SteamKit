@@ -382,7 +382,7 @@ namespace SteamKit2.Internal
         {
             IsConnected = false;
 
-            if ( !e.UserInitiated )
+            if ( !e.UserInitiated && !ExpectDisconnection )
             {
                 Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Bad );
             }
