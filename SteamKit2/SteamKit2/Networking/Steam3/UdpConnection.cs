@@ -56,7 +56,7 @@ namespace SteamKit2
         private DateTime timeOut;
         private DateTime nextResend;
 
-        private uint sourceConnId = 512;
+        private static uint sourceConnId = 512;
         private uint remoteConnId;
 
         /// <summary>
@@ -116,8 +116,6 @@ namespace SteamKit2
         /// <param name="timeout">Timeout in milliseconds</param>
         public void Connect(EndPoint endPoint, int timeout)
         {
-            Disconnect();
-
             outPackets = new List<UdpPacket>();
             inPackets = new Dictionary<uint, UdpPacket>();
 
@@ -159,11 +157,10 @@ namespace SteamKit2
                 SendSequenced(new UdpPacket(EUdpPacketType.Disconnect));
             }
 
-            // Graceful shutdown allows for the connection to empty its queue of messages to send
-            netThread.Join();
-
             // Advance this the same way that steam does, when a socket gets reused.
             sourceConnId += 256;
+
+            Disconnected?.Invoke( this, new DisconnectedEventArgs( true ) );
         }
 
         /// <summary>

@@ -38,7 +38,7 @@ namespace SteamKit2.Internal
         /// Returns the the local IP of this client.
         /// </summary>
         /// <returns>The local IP.</returns>
-        public IPAddress LocalIP => connection.GetLocalIP();
+        public IPAddress LocalIP => connection?.GetLocalIP();
 
         /// <summary>
         /// Gets the universe of this client.
@@ -94,6 +94,8 @@ namespace SteamKit2.Internal
 
         internal bool ExpectDisconnection { get; set; }
 
+        // connection lock around the setup and tear down of the connection task
+        object connectionLock = new object();
         CancellationTokenSource connectionCancellation;
         Task connectionSetupTask;
         IConnection connection;
@@ -131,59 +133,62 @@ namespace SteamKit2.Internal
         /// The <see cref="IPEndPoint"/> of the CM server to connect to.
         /// If <c>null</c>, SteamKit will randomly select a CM server from its internal list.
         /// </param>
-        public void Connect( ServerRecord cmServer = null  )
+        public void Connect( ServerRecord cmServer = null )
         {
-            this.Disconnect();
-            Debug.Assert( connection == null );
-
-            var cancellation = new CancellationTokenSource();
-            var token = cancellation.Token;
-            var oldCancellation = Interlocked.Exchange( ref connectionCancellation, cancellation );
-            Debug.Assert( oldCancellation == null );
-
-            ExpectDisconnection = false;
-
-            Task<ServerRecord> recordTask = null;
-
-            if ( cmServer == null )
+            lock ( connectionLock )
             {
-                recordTask = Servers.GetNextServerCandidateAsync( Configuration.ProtocolTypes );
+                this.Disconnect();
+                Debug.Assert( connection == null );
+
+                Debug.Assert( connectionCancellation == null );
+
+                connectionCancellation = new CancellationTokenSource();
+                var token = connectionCancellation.Token;
+
+                ExpectDisconnection = false;
+
+                Task<ServerRecord> recordTask = null;
+
+                if ( cmServer == null )
+                {
+                    recordTask = Servers.GetNextServerCandidateAsync( Configuration.ProtocolTypes );
+                }
+                else
+                {
+                    recordTask = Task.FromResult( cmServer );
+                }
+
+                connectionSetupTask = recordTask.ContinueWith( t =>
+                {
+                    if ( token.IsCancellationRequested )
+                    {
+                        DebugLog.WriteLine( nameof( CMClient ), "Connection cancelled before a server could be chosen." );
+                        OnClientDisconnected( userInitiated: true );
+                        return;
+                    }
+                    else if ( t.IsFaulted || t.IsCanceled )
+                    {
+                        DebugLog.WriteLine( nameof( CMClient ), "Server record task threw exception: {0}", t.Exception );
+                        OnClientDisconnected( userInitiated: false );
+                        return;
+                    }
+
+                    var record = t.Result;
+
+                    connection = CreateConnection( record.ProtocolTypes & Configuration.ProtocolTypes );
+                    connection.NetMsgReceived += NetMsgReceived;
+                    connection.Connected += Connected;
+                    connection.Disconnected += Disconnected;
+                    connection.Connect( record.EndPoint, ( int )ConnectionTimeout.TotalMilliseconds );
+                }, TaskContinuationOptions.ExecuteSynchronously ).ContinueWith( t =>
+              {
+                    if ( t.IsFaulted )
+                    {
+                        DebugLog.WriteLine( nameof( CMClient ), "Unhandled exception when attempting to connect to Steam: {0}", t.Exception );
+                        OnClientDisconnected( userInitiated: false );
+                    }
+                }, TaskContinuationOptions.ExecuteSynchronously );
             }
-            else
-            {
-                recordTask = Task.FromResult( cmServer );
-            }
-
-            connectionSetupTask = recordTask.ContinueWith( t =>
-            {
-                if ( token.IsCancellationRequested )
-                {
-                    DebugLog.WriteLine( nameof(CMClient), "Connection cancelled before a server could be chosen." );
-                    OnClientDisconnected( userInitiated: true );
-                    return;
-                }
-                else if ( t.IsFaulted || t.IsCanceled )
-                {
-                    DebugLog.WriteLine( nameof(CMClient), "Server record task threw exception: {0}", t.Exception );
-                    OnClientDisconnected( userInitiated: false );
-                    return;
-                }
-
-                var record = t.Result;
-
-                connection = CreateConnection( record.ProtocolTypes & Configuration.ProtocolTypes );
-                connection.NetMsgReceived += NetMsgReceived;
-                connection.Connected += Connected;
-                connection.Disconnected += Disconnected;
-                connection.Connect( record.EndPoint, ( int )ConnectionTimeout.TotalMilliseconds );
-            }, TaskContinuationOptions.ExecuteSynchronously).ContinueWith(t =>
-            {
-                if ( t.IsFaulted )
-                {
-                    DebugLog.WriteLine( nameof(CMClient), "Unhandled exception when attempting to connect to Steam: {0}", t.Exception );
-                    OnClientDisconnected( userInitiated: false );
-                }
-            }, TaskContinuationOptions.ExecuteSynchronously);
         }
 
         /// <summary>
@@ -191,21 +196,28 @@ namespace SteamKit2.Internal
         /// </summary>
         public void Disconnect()
         {
-            heartBeatFunc.Stop();
-
-            var cts = Interlocked.Exchange(ref connectionCancellation, null);
-            if (cts != null)
+            lock ( connectionLock )
             {
-                cts.Cancel();
-                cts.Dispose();
-            }
+                heartBeatFunc.Stop();
 
-            var task = Interlocked.Exchange(ref connectionSetupTask, null);
-            if ( task != null )
-            {
-                task.GetAwaiter().GetResult();
+                if ( connectionCancellation != null )
+                {
+                    connectionCancellation.Cancel();
+                    connectionCancellation.Dispose();
+                    connectionCancellation = null;
+                }
+
+                if ( connectionSetupTask != null )
+                {
+                    // though it's ugly, we want to wait for the completion of this task and keep hold of the lock
+                    connectionSetupTask.GetAwaiter().GetResult();
+                    connectionSetupTask = null;
+                }
+
+                // Connection implementations are required to issue the Disconnected callback before Disconnect() returns
+                connection?.Disconnect();
+                Debug.Assert( connection == null );
             }
-            connection?.Disconnect();
         }
 
         /// <summary>

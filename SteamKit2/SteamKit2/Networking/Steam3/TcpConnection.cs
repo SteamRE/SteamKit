@@ -24,14 +24,11 @@ namespace SteamKit2
         private BinaryWriter netWriter;
 
         private CancellationTokenSource cancellationToken;
-        private ManualResetEvent connectionFree;
-        private object netLock, connectLock;
+        private object netLock;
 
         public TcpConnection()
         {
             netLock = new object();
-            connectLock = new object();
-            connectionFree = new ManualResetEvent(true);
         }
 
         public event EventHandler<NetMsgEventArgs> NetMsgReceived;
@@ -98,8 +95,6 @@ namespace SteamKit2
             }
 
             Disconnected?.Invoke( this, new DisconnectedEventArgs( userRequestedDisconnect ) );
-
-            connectionFree.Set();
         }
 
         private void ConnectCompleted(bool success)
@@ -184,46 +179,29 @@ namespace SteamKit2
         /// <param name="timeout">Timeout in milliseconds</param>
         public void Connect(EndPoint endPoint, int timeout)
         {
-            lock (connectLock)
+            lock ( netLock )
             {
-                Disconnect();
+                Debug.Assert( cancellationToken == null );
+                cancellationToken = new CancellationTokenSource();
 
-                connectionFree.Reset();
+                socket = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
+                socket.ReceiveTimeout = timeout;
+                socket.SendTimeout = timeout;
 
-                lock (netLock)
-                {
-                    Debug.Assert(cancellationToken == null);
-                    cancellationToken = new CancellationTokenSource();
-
-                    socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                    socket.ReceiveTimeout = timeout;
-                    socket.SendTimeout = timeout;
-
-                    destination = endPoint;
-                    DebugLog.WriteLine("TcpConnection", "Connecting to {0}...", destination);
-                    TryConnect(timeout);
-                }
+                destination = endPoint;
+                DebugLog.WriteLine( "TcpConnection", "Connecting to {0}...", destination );
+                TryConnect( timeout );
             }
+
         }
 
         public void Disconnect()
         {
-            lock (connectLock)
+            lock ( netLock )
             {
-                lock (netLock)
-                {
-                    if (cancellationToken != null)
-                    {
-                        cancellationToken.Cancel();
-                    }
-                    else
-                    {
-                        // we already appear to be disconncted, nothing to wait for
-                        return;
-                    }
-                }
+                cancellationToken?.Cancel();
 
-                connectionFree.WaitOne();
+                Disconnected?.Invoke( this, new DisconnectedEventArgs( true ) );
             }
         }
 
