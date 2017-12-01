@@ -27,10 +27,32 @@ namespace SteamKit2
         /// </summary>
         public sealed class Server
         {
+            /// The protocol used to connect to this server
+            /// </summary>
+            public enum ConnectionProtocol
+            {
+                /// <summary>
+                /// Server does not advertise HTTPS support, connect over HTTP
+                /// </summary>
+                HTTP = 0,
+                /// <summary>
+                /// Server advertises it supports HTTPS, connection made over HTTPS
+                /// </summary>
+                HTTPS = 1
+            }
+
+            /// <summary>
+            /// Gets the supported connection protocol of the server.
+            /// </summary>
+            public ConnectionProtocol Protocol { get; internal set; }
             /// <summary>
             /// Gets the hostname of the server.
             /// </summary>
             public string Host { get; internal set; }
+            /// <summary>
+            /// Gets the virtual hostname of the server.
+            /// </summary>
+            public string VHost { get; internal set; }
             /// <summary>
             /// Gets the port of the server.
             /// </summary>
@@ -70,7 +92,9 @@ namespace SteamKit2
             {
                 return new Server
                 {
+                    Protocol = endPoint.Port == 443 ? ConnectionProtocol.HTTPS : ConnectionProtocol.HTTP,
                     Host = endPoint.Address.ToString(),
+                    VHost = endPoint.Address.ToString(),
                     Port = endPoint.Port,
                 };
             }
@@ -86,7 +110,9 @@ namespace SteamKit2
             {
                 return new Server
                 {
+                    Protocol = endPoint.Port == 443 ? ConnectionProtocol.HTTPS : ConnectionProtocol.HTTP,
                     Host = endPoint.Host,
+                    VHost = endPoint.Host,
                     Port = endPoint.Port,
                 };
             }
@@ -273,6 +299,7 @@ namespace SteamKit2
             {
                 string type = server[ "type" ].AsString();
                 string host = server[ "host" ].AsString();
+                string vhost = server[ "vhost" ].AsString();
 
                 string[] hostSplits = host.Split( ':' );
 
@@ -291,6 +318,7 @@ namespace SteamKit2
                 int weightedLoad = server[ "weightedload" ].AsInteger();
                 int entries = server[ "NumEntriesInClientList" ].AsInteger( 1 );
                 int useTokenAuth = server[ "usetokenauth" ].AsInteger();
+                string httpsSupport = server[ "https_support" ].AsString();
 
                 // If usetokenauth is specified, we can treat this server as a CDN and request tokens
                 if ( useTokenAuth > 0 )
@@ -298,10 +326,14 @@ namespace SteamKit2
                     type = "CDN";
                 }
 
+                Server.ConnectionProtocol protocol = ( httpsSupport == "optional" || httpsSupport == "mandatory" ) ? Server.ConnectionProtocol.HTTPS : Server.ConnectionProtocol.HTTP;
+
                 serverList.Add( new Server
                 {
+                    Protocol = protocol,
                     Host = host,
-                    Port = port,
+                    VHost = vhost,
+                    Port = protocol == Server.ConnectionProtocol.HTTPS ? 443 : port,
 
                     Type = type,
 
@@ -437,7 +469,9 @@ namespace SteamKit2
         {
             var server = new Server
             {
+                Protocol = Server.ConnectionProtocol.HTTP,
                 Host = host,
+                VHost = host,
                 Port = 80
             };
 
@@ -528,7 +562,9 @@ namespace SteamKit2
 
             var server = new Server
             {
+                Protocol = Server.ConnectionProtocol.HTTP,
                 Host = host,
+                VHost = host,
                 Port = 80
             };
 
@@ -545,7 +581,8 @@ namespace SteamKit2
 
         string BuildCommand( Server server, string command, string args, string authtoken = null )
         {
-            return string.Format( "http://{0}:{1}/{2}/{3}{4}", server.Host, server.Port, command, args, authtoken ?? "" );
+            string protocol = server.Protocol == Server.ConnectionProtocol.HTTP ? "http" : "https";
+            return string.Format( "{0}://{1}:{2}/{3}/{4}{5}", protocol, server.VHost, server.Port, command, args, authtoken ?? "" );
         }
 
         async Task<byte[]> DoRawCommandAsync( Server server, HttpMethod method, string command, string data = null, bool doAuth = false, string args = "", string authtoken = null )
@@ -584,15 +621,13 @@ namespace SteamKit2
                 request.Content.Headers.ContentType = new MediaTypeHeaderValue( "application/x-www-form-urlencoded" );
             }
 
-
-            HttpResponseMessage response;
             using ( var cts = new CancellationTokenSource() )
             {
                 cts.CancelAfter( RequestTimeout );
 
                 try
                 {
-                    response = await httpClient.SendAsync( request, cts.Token ).ConfigureAwait( false );
+                    var response = await httpClient.SendAsync( request, cts.Token ).ConfigureAwait( false );
 
                     var responseData = await response.Content.ReadAsByteArrayAsync().ConfigureAwait( false );
                     return responseData;
