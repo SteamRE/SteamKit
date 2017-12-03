@@ -27,6 +27,7 @@ namespace SteamKit2
         /// </summary>
         public sealed class Server
         {
+            /// <summary>
             /// The protocol used to connect to this server
             /// </summary>
             public enum ConnectionProtocol
