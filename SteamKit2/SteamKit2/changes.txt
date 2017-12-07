@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
-v 2.0.0			Oct 14, 2017 (Beta)
+v 2.0.0			Dec 03, 2017 (Beta 2)
 ------------------------------------------------------------------------------
 * SteamKit 2.0 now targets .NET Standard 2.0. This means it now requires .NET Framework 4.6.1 or higher, .NET Core 2.0 or higher, or any other .NET Standard 2.0-compatible runtime.
 * Added support for WebSocket client connections.
@@ -9,6 +9,7 @@ v 2.0.0			Oct 14, 2017 (Beta)
 	* If the `SteamConfiguration` permits both TCP and UDP, both can now be used (depending on server ranking).
 	* See the Breaking Changes section below for further details.
 * Added `ArgumentNullException` to the public API surface when passing null into methods that would have previously triggered a `NullReferenceException`.
+* Added HTTPS support to CDNClient.
 * Updated Protobuf message classes to expose a property indicating if any wire value was specified or not, and a method to clear the value.
 * Updated game-related GC messages and protobufs.
 * Updated Steam enums and protobufs.
@@ -17,6 +18,9 @@ v 2.0.0			Oct 14, 2017 (Beta)
 * Fixed user's name being changed to `[unassigned]` if `SteamFriends.SetPersonaState()` is called too early.
 * Fixed order of handlers being non-deterministic.
 * Fixed exception when using `SteamUnifiedMessages.UnifiedService<>.SendMessage`.
+* Fixed a potential deadlock when awaiting an `AsyncJob`.
+* Fixed TCP connections not being correctly flagged in the server list.
+* Fixed TCP disconnections not being correctly flagged as user-initiated.
 
 BREAKING CHANGES
 
@@ -39,6 +43,9 @@ BREAKING CHANGES
 * `SteamFriends.GetPersonaName()`, `SteamFriends.GetFriendPersonaName` and `SteamFriends.GetClanName` can all now return null if the value is unknown.
 * `WebAPI` used to throw a `WebException` on non-success status code, or other failure. It now throws `HttpRequestException`.
 * `CDNClient` and `WebAPI` now expose `Task`-based asynchronous methods. This replaces the previous synchronous methods.
+* `SteamID.ToString()` now prints a Steam3 string by default. For the older Steam2 `STEAM_X:Y:Z` format, use `SteamID.Render()`.
+* The default argument of `SteamID.Render(bool)` has been changed to render Steam3 by default instead of Steam2.\
+* Async job continuations are no longer invoked on the `CallbackMgr` thread.
 
 
 ------------------------------------------------------------------------------
