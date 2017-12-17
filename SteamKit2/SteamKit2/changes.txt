@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
-v 2.0.0			Dec 03, 2017 (Beta 2)
+v 2.0.0			Dec 17, 2017
 ------------------------------------------------------------------------------
 * SteamKit 2.0 now targets .NET Standard 2.0. This means it now requires .NET Framework 4.6.1 or higher, .NET Core 2.0 or higher, or any other .NET Standard 2.0-compatible runtime.
 * Added support for WebSocket client connections.
@@ -9,7 +9,7 @@ v 2.0.0			Dec 03, 2017 (Beta 2)
 	* If the `SteamConfiguration` permits both TCP and UDP, both can now be used (depending on server ranking).
 	* See the Breaking Changes section below for further details.
 * Added `ArgumentNullException` to the public API surface when passing null into methods that would have previously triggered a `NullReferenceException`.
-* Added HTTPS support to CDNClient.
+* Added HTTPS support to `CDNClient`.
 * Updated Protobuf message classes to expose a property indicating if any wire value was specified or not, and a method to clear the value.
 * Updated game-related GC messages and protobufs.
 * Updated Steam enums and protobufs.
