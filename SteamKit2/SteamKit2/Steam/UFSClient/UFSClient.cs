@@ -314,7 +314,14 @@ namespace SteamKit2
         {
             var packetMsg = CMClient.GetPacketMsg( e.Data );
 
-            DebugLog.WriteLine( "UFSClient", "<- Recv'd EMsg: {0} ({1}) {2}", packetMsg.MsgType, ( int )packetMsg.MsgType, packetMsg.IsProto ? "(Proto)" : "" );
+            if ( packetMsg == null )
+            {
+                DebugLog.WriteLine( nameof(UFSClient), "Packet message failed to parse, shutting down connection");
+                Disconnect();
+                return;
+            }
+
+            DebugLog.WriteLine( nameof(UFSClient), "<- Recv'd EMsg: {0} ({1}) {2}", packetMsg.MsgType, ( int )packetMsg.MsgType, packetMsg.IsProto ? "(Proto)" : "" );
 
             var msgDispatch = new Dictionary<EMsg, Action<IPacketMsg>>
             {

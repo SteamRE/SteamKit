@@ -77,9 +77,15 @@ namespace SteamKit2
             
             var packetMsg = CMClient.GetPacketMsg( e.Data );
 
-            if ( !IsExpectedEMsg( packetMsg.MsgType ) )
+            if ( packetMsg == null )
             {
-                DebugLog.WriteLine(nameof(EnvelopeEncryptedConnection), "Rejected EMsg: {0} during channel setup", packetMsg.MsgType);
+                DebugLog.WriteLine( nameof(EnvelopeEncryptedConnection), "Failed to parse message during channel setup, shutting down connection" );
+                Disconnect();
+                return;
+            }
+            else if ( !IsExpectedEMsg( packetMsg.MsgType ) )
+            {
+                DebugLog.WriteLine( nameof(EnvelopeEncryptedConnection), "Rejected EMsg: {0} during channel setup", packetMsg.MsgType );
                 return;
             }
 
