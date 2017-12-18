@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample1_Logon", "1.Logon\Sample1_Logon.csproj", "{CEF39496-576D-4A70-9A06-16112B84B79F}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample9_AsyncJobs", "9.AsyncJobs\Sample9_AsyncJobs.csproj", "{73111906-9685-4DD4-BFFB-813AEB08FFD0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample10_DotaMatchRequest", "10.DotaMatchRequest\Sample10_DotaMatchRequest.csproj", "{734863D3-4EED-4758-B1E9-7B324C2D8D72}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SteamKit2", "..\SteamKit2\SteamKit2\SteamKit2.csproj", "{D3E2F2D3-A663-4232-B9C5-A4F81DB665A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -153,6 +155,18 @@ Global
 		{734863D3-4EED-4758-B1E9-7B324C2D8D72}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{734863D3-4EED-4758-B1E9-7B324C2D8D72}.Release|x86.ActiveCfg = Release|Any CPU
 		{734863D3-4EED-4758-B1E9-7B324C2D8D72}.Release|x86.Build.0 = Release|Any CPU
+		{D3E2F2D3-A663-4232-B9C5-A4F81DB665A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3E2F2D3-A663-4232-B9C5-A4F81DB665A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3E2F2D3-A663-4232-B9C5-A4F81DB665A2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D3E2F2D3-A663-4232-B9C5-A4F81DB665A2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D3E2F2D3-A663-4232-B9C5-A4F81DB665A2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D3E2F2D3-A663-4232-B9C5-A4F81DB665A2}.Debug|x86.Build.0 = Debug|Any CPU
+		{D3E2F2D3-A663-4232-B9C5-A4F81DB665A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3E2F2D3-A663-4232-B9C5-A4F81DB665A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3E2F2D3-A663-4232-B9C5-A4F81DB665A2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D3E2F2D3-A663-4232-B9C5-A4F81DB665A2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D3E2F2D3-A663-4232-B9C5-A4F81DB665A2}.Release|x86.ActiveCfg = Release|Any CPU
+		{D3E2F2D3-A663-4232-B9C5-A4F81DB665A2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
