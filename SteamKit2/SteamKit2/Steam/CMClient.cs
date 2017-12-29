@@ -402,15 +402,19 @@ namespace SteamKit2.Internal
             SessionID = null;
             SteamID = null;
 
+            lock ( connectionLock )
+            {
+                if ( connection == null ) return;
 
-            connection.NetMsgReceived -= NetMsgReceived;
-            connection.Connected -= Connected;
-            connection.Disconnected -= Disconnected;
-            connection = null;
+                connection.NetMsgReceived -= NetMsgReceived;
+                connection.Connected -= Connected;
+                connection.Disconnected -= Disconnected;
+                connection = null;
 
-            heartBeatFunc.Stop();
+                heartBeatFunc.Stop();
 
-            OnClientDisconnected( userInitiated: e.UserInitiated || ExpectDisconnection );
+                OnClientDisconnected( userInitiated: e.UserInitiated || ExpectDisconnection );
+            }
         }
 
         internal static IPacketMsg GetPacketMsg( byte[] data )
