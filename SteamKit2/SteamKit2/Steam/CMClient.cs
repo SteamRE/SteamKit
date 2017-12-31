@@ -293,7 +293,7 @@ namespace SteamKit2.Internal
             if ( packetMsg == null )
             {
                 DebugLog.WriteLine( "CMClient", "Packet message failed to parse, shutting down connection" );
-                ThreadPool.QueueUserWorkItem( delegate ( object client ) { (( CMClient )client).Disconnect(); }, this );
+                Disconnect();
                 return false;
             }
 
