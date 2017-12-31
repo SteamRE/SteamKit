@@ -283,6 +283,13 @@ namespace SteamKit2
         {
             if ( DateTime.Now > nextResend && outSeqSent > outSeqAcked )
             {
+                // if we aren't able to clear the send queue during a Disconnect, don't bother retrying
+                if ( state == ( int )State.Disconnecting )
+                {
+                    outPackets.Clear();
+                    return;
+                }
+
                 DebugLog.WriteLine("UdpConnection", "Sequenced packet resend required");
 
                 // Don't send more than 3 (Steam behavior?)
