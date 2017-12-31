@@ -35,7 +35,7 @@ namespace SteamKit2
 
             public void Start(TimeSpan connectionTimeout)
             {
-                runloopTask = RunCore(cts.Token, connectionTimeout);
+                runloopTask = RunCore(cts.Token, connectionTimeout).IgnoringCancellation(cts.Token);
             }
 
             async Task RunCore(CancellationToken cancellationToken, TimeSpan connectionTimeout)
@@ -54,13 +54,13 @@ namespace SteamKit2
                     catch (TaskCanceledException) when (timeout.IsCancellationRequested)
                     {
                         DebugLog.WriteLine(nameof(WebSocketContext), "Time out connecting websocket {0} after {1}", uri, connectionTimeout);
-                        DisconnectNonBlocking(userInitiated: false);
+                        connection.DisconnectCore(userInitiated: false, specificContext: this);
                         return;
                     }
                     catch (Exception ex)
                     {
                         DebugLog.WriteLine(nameof(WebSocketContext), "Exception connecting websocket: {0} - {1}", ex.GetType().FullName, ex.Message);
-                        DisconnectNonBlocking(userInitiated: false);
+                        connection.DisconnectCore(userInitiated: false, specificContext: this);
                         return;
                     }
                 }
@@ -101,7 +101,7 @@ namespace SteamKit2
                 catch (WebSocketException ex)
                 {
                     DebugLog.WriteLine(nameof(WebSocketContext), "{0} exception when sending message: {1}", ex.GetType().FullName, ex.Message);
-                    DisconnectNonBlocking(userInitiated: false);
+                    connection.DisconnectCore(userInitiated: false, specificContext: this);
                     return;
                 }
                 DebugLog.WriteLine(nameof(WebSocketContext), "Sent {0} bytes.", data.Length);
@@ -116,15 +116,6 @@ namespace SteamKit2
 
                 cts.Cancel();
                 cts.Dispose();
-
-                try
-                {
-                    runloopTask?.GetAwaiter().GetResult();
-                }
-                catch (OperationCanceledException)
-                {
-                    // We know, we canceled it.
-                }
                 runloopTask = null;
 
                 socket.Dispose();
@@ -146,17 +137,17 @@ namespace SteamKit2
                         }
                         catch (ObjectDisposedException)
                         {
-                            DisconnectNonBlocking(userInitiated: cancellationToken.IsCancellationRequested);
+                            connection.DisconnectCore(userInitiated: cancellationToken.IsCancellationRequested, specificContext: this);
                             return null;
                         }
                         catch (WebSocketException)
                         {
-                            DisconnectNonBlocking(userInitiated: false);
+                            connection.DisconnectCore(userInitiated: false, specificContext: this);
                             return null;
                         }
                         catch (Win32Exception)
                         {
-                            DisconnectNonBlocking(userInitiated: false);
+                            connection.DisconnectCore(userInitiated: false, specificContext: this);
                             return null;
                         }
 
@@ -184,7 +175,7 @@ namespace SteamKit2
 
                             case WebSocketMessageType.Close:
                             default:
-                                DisconnectNonBlocking(userInitiated: false);
+                                connection.DisconnectCore(userInitiated: false, specificContext: this);
                                 return null;
                         }
                     }
@@ -193,14 +184,6 @@ namespace SteamKit2
                     return ms.ToArray();
                 }
             }
-
-            void DisconnectNonBlocking(bool userInitiated)
-                => Task.Run(() => connection.DisconnectCore(userInitiated, this))
-                       .ContinueWith(t =>
-                        {
-                            var ex = t.Exception;
-                            DebugLog.WriteLine(nameof(WebSocketContext), "Unhandled {0} when disconnecting: {1}", ex.GetType().FullName, ex.Message);
-                        }, TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously);
 
             static string GetHostAndPort(EndPoint endPoint)
             {

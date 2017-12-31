@@ -194,7 +194,9 @@ namespace SteamKit2.Internal
         /// <summary>
         /// Disconnects this client.
         /// </summary>
-        public void Disconnect()
+        public void Disconnect() => Disconnect( userInitiated: true ); 
+
+        void Disconnect( bool userInitiated)
         {
             lock ( connectionLock )
             {
@@ -215,7 +217,7 @@ namespace SteamKit2.Internal
                 }
 
                 // Connection implementations are required to issue the Disconnected callback before Disconnect() returns
-                connection?.Disconnect();
+                connection?.Disconnect( userInitiated );
                 Debug.Assert( connection == null );
             }
         }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Net;
-using System.Threading.Tasks;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -36,9 +35,9 @@ namespace SteamKit2
         public void Connect( EndPoint endPoint, int timeout = 5000 )
             => inner.Connect( endPoint, timeout );
 
-        public void Disconnect()
+        public void Disconnect( bool userInitiated )
         {
-            inner.Disconnect();
+            inner.Disconnect( userInitiated );
         }
 
         public IPAddress GetLocalIP() => inner.GetLocalIP();
@@ -77,9 +76,15 @@ namespace SteamKit2
             
             var packetMsg = CMClient.GetPacketMsg( e.Data );
 
-            if ( !IsExpectedEMsg( packetMsg.MsgType ) )
+            if ( packetMsg == null )
             {
-                DebugLog.WriteLine(nameof(EnvelopeEncryptedConnection), "Rejected EMsg: {0} during channel setup", packetMsg.MsgType);
+                DebugLog.WriteLine( nameof(EnvelopeEncryptedConnection), "Failed to parse message during channel setup, shutting down connection" );
+                Disconnect( userInitiated: false );
+                return;
+            }
+            else if ( !IsExpectedEMsg( packetMsg.MsgType ) )
+            {
+                DebugLog.WriteLine( nameof(EnvelopeEncryptedConnection), "Rejected EMsg: {0} during channel setup", packetMsg.MsgType );
                 return;
             }
 
@@ -122,7 +127,7 @@ namespace SteamKit2
             {
                 DebugLog.WriteLine(nameof(EnvelopeEncryptedConnection), "HandleEncryptRequest got request for invalid universe! Universe: {0} Protocol ver: {1}", connectedUniverse, protoVersion );
 
-                Disconnect();
+                Disconnect( userInitiated: false );
             }
 
             var response = new Msg<MsgChannelEncryptResponse>();
@@ -180,7 +185,7 @@ namespace SteamKit2
             else
             {
                 DebugLog.WriteLine( nameof(EnvelopeEncryptedConnection), "Encryption channel setup failed" );
-                Disconnect();
+                Disconnect( userInitiated: false );
             }
         }
 

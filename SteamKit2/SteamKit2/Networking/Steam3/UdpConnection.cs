@@ -139,7 +139,7 @@ namespace SteamKit2
         /// Disconnects this instance, blocking until the queue of messages is empty or the connection
         /// is otherwise terminated.
         /// </summary>
-        public void Disconnect()
+        public void Disconnect( bool userInitiated )
         {
             if ( netThread == null )
                 return;
@@ -160,7 +160,7 @@ namespace SteamKit2
             // Advance this the same way that steam does, when a socket gets reused.
             sourceConnId += 256;
 
-            Disconnected?.Invoke( this, new DisconnectedEventArgs( true ) );
+            Disconnected?.Invoke( this, new DisconnectedEventArgs( userInitiated ) );
         }
 
         /// <summary>
