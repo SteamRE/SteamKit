@@ -195,13 +195,13 @@ namespace SteamKit2
 
         }
 
-        public void Disconnect()
+        public void Disconnect( bool userInitiated )
         {
             lock ( netLock )
             {
                 cancellationToken?.Cancel();
 
-                Disconnected?.Invoke( this, new DisconnectedEventArgs( true ) );
+                Disconnected?.Invoke( this, new DisconnectedEventArgs( userInitiated ) );
             }
         }
 

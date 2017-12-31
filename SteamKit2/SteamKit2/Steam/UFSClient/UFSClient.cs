@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -106,10 +105,9 @@ namespace SteamKit2
         /// Disconnects this client from the UFS server.
         /// a <see cref="DisconnectedCallback"/> will be posted upon disconnection.
         /// </summary>
-        public void Disconnect()
-        {
-            connection.Disconnect();
-        }
+        public void Disconnect() => Disconnect( userInitiated: true );
+
+        void Disconnect( bool userInitiated ) => connection.Disconnect( userInitiated );
 
         /// <summary>
         /// Represents all the information required to upload a file to the UFS server.
@@ -317,7 +315,7 @@ namespace SteamKit2
             if ( packetMsg == null )
             {
                 DebugLog.WriteLine( nameof(UFSClient), "Packet message failed to parse, shutting down connection");
-                Disconnect();
+                Disconnect( userInitiated: false );
                 return;
             }
 

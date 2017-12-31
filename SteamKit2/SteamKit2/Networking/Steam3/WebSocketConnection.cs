@@ -32,8 +32,8 @@ namespace SteamKit2
             newContext.Start(TimeSpan.FromMilliseconds(timeout));
         }
 
-        public void Disconnect()
-            => DisconnectCore(userInitiated: true, specificContext: null);
+        public void Disconnect(bool userInitiated)
+            => DisconnectCore(userInitiated, specificContext: null);
 
         public IPAddress GetLocalIP() => IPAddress.None;
 

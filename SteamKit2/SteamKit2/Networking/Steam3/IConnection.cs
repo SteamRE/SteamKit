@@ -7,7 +7,6 @@
 
 using System;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace SteamKit2
 {
@@ -43,7 +42,8 @@ namespace SteamKit2
         /// <summary>
         /// Disconnects this instance.
         /// </summary>
-        void Disconnect();
+        /// <param name="userInitiated">If true, this disconnection attempt was initated by a consumer.</param>
+        void Disconnect( bool userInitiated );
 
         /// <summary>
         /// Sends the specified data packet.
