@@ -10,7 +10,7 @@ using Xunit;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SteamRE Team")]
 [assembly: AssemblyProduct("SteamKit2Tests")]
-[assembly: AssemblyCopyright("Copyright © SteamRE Team 2017")]
+[assembly: AssemblyCopyright("Copyright © SteamRE Team 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
