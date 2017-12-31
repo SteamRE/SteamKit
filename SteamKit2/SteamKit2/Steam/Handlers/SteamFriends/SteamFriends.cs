@@ -67,25 +67,19 @@ namespace SteamKit2
         }
         /// <summary>
         /// Sets the local user's persona name and broadcasts it over the network.
-        /// Results are returned in a <see cref="PersonaChangeCallback"/> callback.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="name">The name.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PersonaChangeCallback"/>.</returns>
-        public AsyncJob<PersonaChangeCallback> SetPersonaName( string name )
+        public void SetPersonaName( string name )
         {
             // cache the local name right away, so that early calls to SetPersonaState don't reset the set name
             cache.LocalUser.Name = name ?? throw new ArgumentNullException( nameof(name) );
 
             var stateMsg = new ClientMsgProtobuf<CMsgClientChangeStatus>( EMsg.ClientChangeStatus );
-            stateMsg.SourceJobID = Client.GetNextJobID();
 
             stateMsg.Body.persona_state = ( uint )cache.LocalUser.PersonaState;
             stateMsg.Body.player_name = name;
 
             this.Client.Send( stateMsg );
-
-            return new AsyncJob<PersonaChangeCallback>( this.Client, stateMsg.SourceJobID );
         }
 
         /// <summary>
@@ -98,23 +92,17 @@ namespace SteamKit2
         }
         /// <summary>
         /// Sets the local user's persona state and broadcasts it over the network.
-        /// Results are returned in a <see cref="PersonaChangeCallback"/> callback.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="state">The state.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PersonaChangeCallback"/>.</returns>
-        public AsyncJob<PersonaChangeCallback> SetPersonaState( EPersonaState state )
+        public void SetPersonaState( EPersonaState state )
         {
             cache.LocalUser.PersonaState = state;
 
             var stateMsg = new ClientMsgProtobuf<CMsgClientChangeStatus>( EMsg.ClientChangeStatus );
-            stateMsg.SourceJobID = Client.GetNextJobID();
 
             stateMsg.Body.persona_state = ( uint )state;
 
             this.Client.Send( stateMsg );
-
-            return new AsyncJob<PersonaChangeCallback>( this.Client, stateMsg.SourceJobID );
         }
 
         /// <summary>
