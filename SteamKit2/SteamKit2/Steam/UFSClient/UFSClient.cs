@@ -86,7 +86,7 @@ namespace SteamKit2
         /// </param>
         public void Connect( IPEndPoint ufsServer = null )
         {
-            DebugLog.Assert( steamClient.IsConnected, "UFSClient", "CMClient is not connected!" );
+            DebugLog.Assert( steamClient.IsConnected, nameof(UFSClient), "CMClient is not connected!" );
 
             Disconnect();
 
@@ -94,7 +94,14 @@ namespace SteamKit2
             {
                 var serverList = steamClient.GetServersOfType( EServerType.UFS );
 
-                Random random = new Random();
+                if ( serverList.Count == 0 )
+                {
+                    DebugLog.WriteLine( nameof(UFSClient), "No UFS server addresses were provided yet." );
+                    Disconnected( this, new DisconnectedEventArgs( userInitiated: false ) );
+                    return;
+                }
+
+                var random = new Random();
                 ufsServer = serverList[ random.Next( serverList.Count ) ];
             }
 
@@ -276,7 +283,7 @@ namespace SteamKit2
 
             msg.SteamID = steamClient.SteamID;
 
-            DebugLog.WriteLine( "UFSClient", "Sent -> EMsg: {0} {1}", msg.MsgType, msg.IsProto ? "(Proto)" : "" );
+            DebugLog.WriteLine( nameof(UFSClient), "Sent -> EMsg: {0} {1}", msg.MsgType, msg.IsProto ? "(Proto)" : "" );
 
             // we'll swallow any network failures here because they will be thrown later
             // on the network thread, and that will lead to a disconnect callback
