@@ -31,7 +31,7 @@ namespace SteamKit2
         public sealed class DisconnectedCallback : CallbackMsg
         {
             /// <summary>
-            /// If true, the disconnection was initiated by calling <see cref="CMClient.Disconnect"/>.
+            /// If true, the disconnection was initiated by calling <see cref="CMClient.Disconnect()"/>.
             /// If false, the disconnection was the cause of something not user-controlled, such as a network failure or
             /// a forcible disconnection by the remote server.
             /// </summary>
