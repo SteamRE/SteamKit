@@ -16,6 +16,11 @@
   <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\SteamKit2.xml</DocumentationFile>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
   
   <ItemGroup>
     <None Remove="3rd party.txt" />
