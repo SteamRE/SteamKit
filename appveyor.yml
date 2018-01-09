@@ -54,10 +54,9 @@ test_script:
       if ($env:CONFIGURATION -eq 'Debug')
       {
           & nuget install OpenCover -Version 4.6.519 -OutputDirectory SteamKit2\packages
-          & SteamKit2\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user "-target:%ProgramFiles%\dotnet\dotnet.exe" "-targetargs:test SteamKit2\Tests\Tests.csproj" -returntargetcode "-filter:+[SteamKit2]* -[SteamKit2]SteamKit2.Internal.* -[SteamKit2]SteamKit2.*.Internal.* -[SteamKit2]SevenZip*" "-excludebyattribute:*.ProtoContract*" -hideskipped:All -output:SteamKit2-code-coverage.xml
-          $env:Path = "C:\Python34;C:\Python34\Scripts;" + $env:Path
-          & pip install codecov
-          & codecov -f "SteamKit2-code-coverage.xml" -X gcov
+          & SteamKit2\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user "-target:%ProgramFiles%\dotnet\dotnet.exe" "-targetargs:test SteamKit2\Tests\Tests.csproj" -returntargetcode "-filter:+[SteamKit2]* -[SteamKit2]SteamKit2.Internal.* -[SteamKit2]SteamKit2.*.Internal.* -[SteamKit2]SevenZip*" "-excludebyattribute:*.ProtoContract*" -hideskipped:All -output:SteamKit2-code-coverage.xml -oldStyle
+          & nuget install Codecov -Version 1.0.3 -OutputDirectory SteamKit2\packages
+          & SteamKit2\packages\Codecov.1.0.3\tools\codecov.exe -f "SteamKit2-code-coverage.xml"
       }
 
 artifacts:
