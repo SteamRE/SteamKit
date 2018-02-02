@@ -12,8 +12,6 @@
 SymmetricEncryptChosenIVFn Encrypt_Orig = 0;
 bool (__cdecl *GetMessageFn)( int * ) = 0;
 
-
-
 struct MsgInfo_t
 {
 	EMsg eMsg;
@@ -67,24 +65,23 @@ CCrypto::CCrypto()
 
 	char *pGetMessageList = NULL;
 	bool bGetMessageList = steamClientScan.FindFunction(
-		"\xA1\x00\x00\x00\x00\xA8\x01\x75\x00\x83\xC8\x01\xB9\x00\x00\x00\x00\x0056",
-		"x????xxx?xxxx????x",
+		"\x64\xA1\x2C\x00\x00\x00\x8B\x0D\x2A\x2A\x2A\x2A\x8B\x0C\x88\xA1\x2A\x2A\x2A\x2A\x3B\x81\x04\x00\x00\x00\x7F\x2A\xB8\x2A\x2A\x2A\x2A\xC3\x68\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\x83\xC4\x04\x83\x3D\x2A\x2A\x2A\x2A\xFF\x75\x2A\x68\xD7\x01\x00\x00",
+		"xxxxxxxx????xxxx????xxxxxxx?x????xx????x????xxxxx????xx?xxxxx",
 		(void **)&pGetMessageList
 	);
 
 	if (bGetMessageList)
 	{
-		const uint32 uMessageListStartPtrOffset = 38;
-		const uint32 uMessageListEndPtrOffset = uMessageListStartPtrOffset + 26;
+		const uint32 uMessageListStartPtrOffset = 62;
+		const uint32 uMessageListCountPtrOffset = 57;
 
 		MsgInfo_t *pInfos = *(MsgInfo_t **)( pGetMessageList + uMessageListStartPtrOffset );
-		MsgInfo_t *pEndInfos = *(MsgInfo_t **)( pGetMessageList + uMessageListEndPtrOffset );
-		uint16 numMessages = ( ( int )pEndInfos - ( int )pInfos ) / sizeof( MsgInfo_t );
+		const uint32 uNumMessages = *(uint32 *)( pGetMessageList + uMessageListCountPtrOffset );
 
-		g_pLogger->LogConsole( "pGetMessageList = 0x%x\npInfos = 0x%x\nnumMessages = %d\n", pGetMessageList, pInfos, numMessages );
+		g_pLogger->LogConsole( "pGetMessageList = 0x%x\npInfos = 0x%x\nnumMessages = %d\n", pGetMessageList, pInfos, uNumMessages );
 
 
-		for ( uint16 x = 0 ; x < numMessages; x++ )
+		for ( uint16 x = 0 ; x < uNumMessages; x++ )
 		{
 			eMsgList.insert( MsgPair( pInfos->eMsg, pInfos ) );
 
