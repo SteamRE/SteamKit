@@ -269,7 +269,7 @@ namespace SteamKit2
                 }
 
                 // append any args
-                paramBuilder.Append( string.Join( "&", args.Select( kvp =>
+                paramBuilder.Append( string.Join( "&", args.Where( kvp => !string.IsNullOrEmpty( kvp.Value ) ).Select( kvp =>
                 {
                     // TODO: the WebAPI is a special snowflake that needs to appropriately handle url encoding
                     // this is in contrast to the steam3 content server APIs which use an entirely different scheme of encoding
