@@ -269,7 +269,7 @@ namespace SteamKit2
                 }
 
                 // append any args
-                paramBuilder.Append( string.Join( "&", args.Where( kvp => !string.IsNullOrEmpty( kvp.Value ) ).Select( kvp =>
+                paramBuilder.Append( string.Join( "&", args.Select( kvp =>
                 {
                     // TODO: the WebAPI is a special snowflake that needs to appropriately handle url encoding
                     // this is in contrast to the steam3 content server APIs which use an entirely different scheme of encoding
@@ -374,6 +374,12 @@ namespace SteamKit2
                     string argName = binder.CallInfo.ArgumentNames[ x ];
                     object argValue = args[ x ];
 
+                    if ( argValue == null )
+                    {
+                        // null value is not valid for any of below methods
+                        continue;
+                    }
+
                     // method is a reserved param for selecting the http request method
                     if ( argName.Equals( "method", StringComparison.OrdinalIgnoreCase ) )
                     {
@@ -408,8 +414,15 @@ namespace SteamKit2
                         continue;
                     }
 
+                    string stringValue = argValue.ToString();
 
-                    apiArgs.Add( argName, argValue.ToString() );
+                    if ( stringValue.Length == 0 )
+                    {
+                        // empty value serves no purpose in URL query string
+                        continue;
+                    }
+
+                    apiArgs.Add( argName, stringValue );
                 }
 
                 Match match = funcNameRegex.Match( binder.Name );
