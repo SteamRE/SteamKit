@@ -5,10 +5,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -61,14 +63,6 @@ namespace SteamKit2
 
             // our default timeout
             ConnectionTimeout = TimeSpan.FromSeconds( 5 );
-
-            // steamclient has the connection type hardcoded as TCP
-            // todo: determine if UFS supports UDP and if we want to support it
-            connection = new EnvelopeEncryptedConnection( new TcpConnection(), steamClient.Universe );
-
-            connection.NetMsgReceived += NetMsgReceived;
-            connection.Connected += Connected;
-            connection.Disconnected += Disconnected;
         }
 
 
@@ -89,6 +83,7 @@ namespace SteamKit2
             DebugLog.Assert( steamClient.IsConnected, nameof(UFSClient), "CMClient is not connected!" );
 
             Disconnect();
+            Debug.Assert( connection == null );
 
             if ( ufsServer == null )
             {
@@ -105,6 +100,14 @@ namespace SteamKit2
                 ufsServer = serverList[ random.Next( serverList.Count ) ];
             }
 
+            // steamclient has the connection type hardcoded as TCP
+            // todo: determine if UFS supports UDP and if we want to support it
+            connection = new EnvelopeEncryptedConnection( new TcpConnection(), steamClient.Universe );
+
+            connection.NetMsgReceived += NetMsgReceived;
+            connection.Connected += Connected;
+            connection.Disconnected += Disconnected;
+
             connection.Connect( ufsServer, ( int )ConnectionTimeout.TotalMilliseconds );
         }
 
@@ -114,7 +117,11 @@ namespace SteamKit2
         /// </summary>
         public void Disconnect() => Disconnect( userInitiated: true );
 
-        void Disconnect( bool userInitiated ) => connection.Disconnect( userInitiated );
+        void Disconnect( bool userInitiated )
+        {
+            connection?.Disconnect( userInitiated );
+            Debug.Assert(connection == null);
+        }
 
         /// <summary>
         /// Represents all the information required to upload a file to the UFS server.
@@ -311,6 +318,14 @@ namespace SteamKit2
         void Disconnected( object sender, DisconnectedEventArgs e )
         {
             ConnectedUniverse = EUniverse.Invalid;
+
+            var oldConnection = Interlocked.Exchange( ref connection, null );
+            if ( oldConnection != null )
+            {
+                oldConnection.NetMsgReceived -= NetMsgReceived;
+                oldConnection.Connected -= Connected;
+                oldConnection.Disconnected -= Disconnected;
+            }
 
             steamClient.PostCallback( new DisconnectedCallback( e.UserInitiated ) );
         }
