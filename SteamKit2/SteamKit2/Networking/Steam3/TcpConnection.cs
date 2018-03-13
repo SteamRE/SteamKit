@@ -16,7 +16,6 @@ namespace SteamKit2
     {
         const uint MAGIC = 0x31305456; // "VT01"
 
-        private EndPoint destination;
         private Socket socket;
         private Thread netThread;
         private NetworkStream netStream;
@@ -103,19 +102,19 @@ namespace SteamKit2
             // If we have no cancellation token source, we were already Release()'ed
             if (cancellationToken?.IsCancellationRequested ?? true)
             {
-                DebugLog.WriteLine("TcpConnection", "Connection request to {0} was cancelled", destination);
+                DebugLog.WriteLine("TcpConnection", "Connection request to {0} was cancelled", CurrentEndPoint);
                 if (success) Shutdown();
                 Release( userRequestedDisconnect: true );
                 return;
             }
             else if (!success)
             {
-                DebugLog.WriteLine("TcpConnection", "Timed out while connecting to {0}", destination);
+                DebugLog.WriteLine("TcpConnection", "Timed out while connecting to {0}", CurrentEndPoint);
                 Release( userRequestedDisconnect: false );
                 return;
             }
 
-            DebugLog.WriteLine("TcpConnection", "Connected to {0}", destination);
+            DebugLog.WriteLine("TcpConnection", "Connected to {0}", CurrentEndPoint);
 
             try
             {
@@ -137,7 +136,7 @@ namespace SteamKit2
             }
             catch (Exception ex)
             {
-                DebugLog.WriteLine("TcpConnection", "Exception while setting up connection to {0}: {1}", destination, ex);
+                DebugLog.WriteLine("TcpConnection", "Exception while setting up connection to {0}: {1}", CurrentEndPoint, ex);
                 Release( userRequestedDisconnect: false );
             }
         }
@@ -147,12 +146,12 @@ namespace SteamKit2
             int timeout = (int)sender;
             if (cancellationToken.IsCancellationRequested)
             {
-                DebugLog.WriteLine("TcpConnection", "Connection to {0} cancelled by user", destination);
+                DebugLog.WriteLine("TcpConnection", "Connection to {0} cancelled by user", CurrentEndPoint);
                 Release( userRequestedDisconnect: true );
                 return;
             }
             
-            var asyncResult = socket.BeginConnect( destination, null, null );
+            var asyncResult = socket.BeginConnect(CurrentEndPoint, null, null );
             if ( WaitHandle.WaitAny( new WaitHandle[] { asyncResult.AsyncWaitHandle, cancellationToken.Token.WaitHandle }, timeout ) == 0 )
             {
                 try
@@ -162,7 +161,7 @@ namespace SteamKit2
                 }
                 catch ( Exception ex )
                 {
-                    DebugLog.WriteLine( "TcpConnection", "Socket exception while completing connection request to {0}: {1}", destination, ex );
+                    DebugLog.WriteLine( "TcpConnection", "Socket exception while completing connection request to {0}: {1}", CurrentEndPoint, ex );
                     ConnectCompleted( false );
                 }
             }
@@ -188,8 +187,8 @@ namespace SteamKit2
                 socket.ReceiveTimeout = timeout;
                 socket.SendTimeout = timeout;
 
-                destination = endPoint;
-                DebugLog.WriteLine( "TcpConnection", "Connecting to {0}...", destination );
+                CurrentEndPoint = endPoint;
+                DebugLog.WriteLine( "TcpConnection", "Connecting to {0}...", CurrentEndPoint);
                 TryConnect( timeout );
             }
 
@@ -249,7 +248,7 @@ namespace SteamKit2
 
                 try
                 {
-                    NetMsgReceived?.Invoke( this, new NetMsgEventArgs( packData, destination ) );
+                    NetMsgReceived?.Invoke( this, new NetMsgEventArgs( packData, CurrentEndPoint) );
                 }
                 catch (Exception ex)
                 {
