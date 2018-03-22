@@ -65,15 +65,15 @@ CCrypto::CCrypto()
 
 	char *pGetMessageList = NULL;
 	bool bGetMessageList = steamClientScan.FindFunction(
-		"\x64\xA1\x2C\x00\x00\x00\x8B\x0D\x2A\x2A\x2A\x2A\x8B\x0C\x88\xA1\x2A\x2A\x2A\x2A\x3B\x81\x04\x00\x00\x00\x7F\x2A\xB8\x2A\x2A\x2A\x2A\xC3\x68\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\x83\xC4\x04\x83\x3D\x2A\x2A\x2A\x2A\xFF\x75\x2A\x68\xD7\x01\x00\x00",
-		"xxxxxxxx????xxxx????xxxxxxx?x????xx????x????xxxxx????xx?xxxxx",
+		"\xA1\x00\x00\x00\x00\xA8\x01\x75\x29\x68\x00\x00\x00\x00\x83\xC8\x01\xB9\x00\x00\x00\x00\x68\x00\x00\x00\x00\xA3\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x68\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x83\xC4\x04\xB8\x00\x00\x00\x00\xC3",
+		"x????xxxxx????xxxx????x????x????x????x????x????xxxx????x",
 		(void **)&pGetMessageList
 	);
 
 	if (bGetMessageList)
 	{
-		const uint32 uMessageListStartPtrOffset = 62;
-		const uint32 uMessageListCountPtrOffset = 57;
+		const uint32 uMessageListStartPtrOffset = 23;
+		const uint32 uMessageListCountPtrOffset = 10;
 
 		MsgInfo_t *pInfos = *(MsgInfo_t **)( pGetMessageList + uMessageListStartPtrOffset );
 		const uint32 uNumMessages = *(uint32 *)( pGetMessageList + uMessageListCountPtrOffset );
