@@ -1470,6 +1470,77 @@ namespace SteamKit2.Internal
     private bool ShouldSerializefacebook_id() { return facebook_idSpecified; }
     private void Resetfacebook_id() { facebook_idSpecified = false; }
     
+    private readonly global::System.Collections.Generic.List<CMsgClientPersonaState.Friend.KV> _rich_presence = new global::System.Collections.Generic.List<CMsgClientPersonaState.Friend.KV>();
+    [global::ProtoBuf.ProtoMember(71, Name=@"rich_presence", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgClientPersonaState.Friend.KV> rich_presence
+    {
+      get { return _rich_presence; }
+    }
+  
+
+    private ulong? _broadcast_id;
+    [global::ProtoBuf.ProtoMember(72, IsRequired = false, Name=@"broadcast_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong broadcast_id
+    {
+      get { return _broadcast_id?? default(ulong); }
+      set { _broadcast_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool broadcast_idSpecified
+    {
+      get { return _broadcast_id != null; }
+      set { if (value == (_broadcast_id== null)) _broadcast_id = value ? this.broadcast_id : (ulong?)null; }
+    }
+    private bool ShouldSerializebroadcast_id() { return broadcast_idSpecified; }
+    private void Resetbroadcast_id() { broadcast_idSpecified = false; }
+    
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"KV")]
+  public partial class KV : global::ProtoBuf.IExtensible
+  {
+    public KV() {}
+    
+
+    private string _key;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"key", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string key
+    {
+      get { return _key?? ""; }
+      set { _key = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool keySpecified
+    {
+      get { return _key != null; }
+      set { if (value == (_key== null)) _key = value ? this.key : (string)null; }
+    }
+    private bool ShouldSerializekey() { return keySpecified; }
+    private void Resetkey() { keySpecified = false; }
+    
+
+    private string _value;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"value", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string value
+    {
+      get { return _value?? ""; }
+      set { _value = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool valueSpecified
+    {
+      get { return _value != null; }
+      set { if (value == (_value== null)) _value = value ? this.value : (string)null; }
+    }
+    private bool ShouldSerializevalue() { return valueSpecified; }
+    private void Resetvalue() { valueSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

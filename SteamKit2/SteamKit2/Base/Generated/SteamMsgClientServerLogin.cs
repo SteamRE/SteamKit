@@ -24,6 +24,80 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientServerTimestampRequest")]
+  public partial class CMsgClientServerTimestampRequest : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientServerTimestampRequest() {}
+    
+
+    private ulong? _client_request_timestamp;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"client_request_timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong client_request_timestamp
+    {
+      get { return _client_request_timestamp?? default(ulong); }
+      set { _client_request_timestamp = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool client_request_timestampSpecified
+    {
+      get { return _client_request_timestamp != null; }
+      set { if (value == (_client_request_timestamp== null)) _client_request_timestamp = value ? this.client_request_timestamp : (ulong?)null; }
+    }
+    private bool ShouldSerializeclient_request_timestamp() { return client_request_timestampSpecified; }
+    private void Resetclient_request_timestamp() { client_request_timestampSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientServerTimestampResponse")]
+  public partial class CMsgClientServerTimestampResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientServerTimestampResponse() {}
+    
+
+    private ulong? _client_request_timestamp;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"client_request_timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong client_request_timestamp
+    {
+      get { return _client_request_timestamp?? default(ulong); }
+      set { _client_request_timestamp = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool client_request_timestampSpecified
+    {
+      get { return _client_request_timestamp != null; }
+      set { if (value == (_client_request_timestamp== null)) _client_request_timestamp = value ? this.client_request_timestamp : (ulong?)null; }
+    }
+    private bool ShouldSerializeclient_request_timestamp() { return client_request_timestampSpecified; }
+    private void Resetclient_request_timestamp() { client_request_timestampSpecified = false; }
+    
+
+    private ulong? _server_timestamp_ms;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"server_timestamp_ms", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong server_timestamp_ms
+    {
+      get { return _server_timestamp_ms?? default(ulong); }
+      set { _server_timestamp_ms = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool server_timestamp_msSpecified
+    {
+      get { return _server_timestamp_ms != null; }
+      set { if (value == (_server_timestamp_ms== null)) _server_timestamp_ms = value ? this.server_timestamp_ms : (ulong?)null; }
+    }
+    private bool ShouldSerializeserver_timestamp_ms() { return server_timestamp_msSpecified; }
+    private void Resetserver_timestamp_ms() { server_timestamp_msSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientLogon")]
   public partial class CMsgClientLogon : global::ProtoBuf.IExtensible
   {
@@ -316,6 +390,24 @@ namespace SteamKit2.Internal
     }
     private bool ShouldSerializeui_mode() { return ui_modeSpecified; }
     private void Resetui_mode() { ui_modeSpecified = false; }
+    
+
+    private uint? _chat_mode;
+    [global::ProtoBuf.ProtoMember(33, IsRequired = false, Name=@"chat_mode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint chat_mode
+    {
+      get { return _chat_mode?? (uint)0; }
+      set { _chat_mode = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool chat_modeSpecified
+    {
+      get { return _chat_mode != null; }
+      set { if (value == (_chat_mode== null)) _chat_mode = value ? this.chat_mode : (uint?)null; }
+    }
+    private bool ShouldSerializechat_mode() { return chat_modeSpecified; }
+    private void Resetchat_mode() { chat_modeSpecified = false; }
     
 
     private byte[] _steam2_auth_ticket;
@@ -874,6 +966,24 @@ namespace SteamKit2.Internal
     }
     private bool ShouldSerializeweb_logon_nonce() { return web_logon_nonceSpecified; }
     private void Resetweb_logon_nonce() { web_logon_nonceSpecified = false; }
+    
+
+    private int? _priority_reason;
+    [global::ProtoBuf.ProtoMember(104, IsRequired = false, Name=@"priority_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int priority_reason
+    {
+      get { return _priority_reason?? default(int); }
+      set { _priority_reason = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool priority_reasonSpecified
+    {
+      get { return _priority_reason != null; }
+      set { if (value == (_priority_reason== null)) _priority_reason = value ? this.priority_reason : (int?)null; }
+    }
+    private bool ShouldSerializepriority_reason() { return priority_reasonSpecified; }
+    private void Resetpriority_reason() { priority_reasonSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

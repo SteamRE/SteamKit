@@ -9,6 +9,7 @@ message CBroadcast_BeginBroadcastSession_Request {
 	optional string title = 4;
 	optional uint32 cellid = 5;
 	optional uint64 rtmp_token = 6;
+	optional bool thumbnail_upload = 7;
 }
 
 message CBroadcast_BeginBroadcastSession_Response {
@@ -16,7 +17,6 @@ message CBroadcast_BeginBroadcastSession_Response {
 	optional string thumbnail_upload_address = 2 [(description) = "Http address to upload the thumbnail data."];
 	optional string thumbnail_upload_token = 3 [(description) = "token to authorize as broadcaster to upload content to the relay."];
 	optional uint32 thumbnail_interval_seconds = 4 [(description) = "how many seconds between thumbnails"];
-	optional fixed64 thumbnail_broadcast_relay_id = 5 [(description) = "unique identifier on the broadcast relay"];
 }
 
 message CBroadcast_EndBroadcastSession_Request {
@@ -37,6 +37,8 @@ message CBroadcast_StartBroadcastUpload_Response {
 	optional string upload_token = 1;
 	optional string upload_address = 2;
 	optional fixed64 upload_relay_id = 3;
+	optional string thumbnail_upload_address = 4;
+	optional uint32 thumbnail_interval_seconds = 5;
 }
 
 message CBroadcast_NotifyBroadcastUploadStop_Notification {
@@ -94,6 +96,16 @@ message CBroadcast_GetBroadcastStatus_Response {
 	optional bool is_rtmp = 5;
 	optional int32 seconds_delay = 6;
 	optional bool is_publisher = 7;
+}
+
+message CBroadcast_GetBroadcastThumbnail_Request {
+	optional fixed64 steamid = 1;
+	optional fixed64 broadcast_id = 2;
+}
+
+message CBroadcast_GetBroadcastThumbnail_Response {
+	optional string thumbnail_url = 1;
+	optional int32 update_interval = 2;
 }
 
 message CBroadcast_InviteToBroadcast_Request {
@@ -212,7 +224,7 @@ message CBroadcast_BroadcastStatus_Notification {
 
 message CBroadcast_SendThumbnailToRelay_Notification {
 	optional string thumbnail_upload_token = 1;
-	optional fixed64 thumbnail_broadcast_relay_id = 2;
+	optional fixed64 thumbnail_broadcast_session_id = 2;
 	optional bytes thumbnail_data = 3;
 	optional uint32 thumbnail_width = 4;
 	optional uint32 thumbnail_height = 5;
@@ -237,6 +249,9 @@ service Broadcast {
 	}
 	rpc GetBroadcastStatus (.CBroadcast_GetBroadcastStatus_Request) returns (.CBroadcast_GetBroadcastStatus_Response) {
 		option (method_description) = "Request from viewer about broadcast details";
+	}
+	rpc GetBroadcastThumbnail (.CBroadcast_GetBroadcastThumbnail_Request) returns (.CBroadcast_GetBroadcastThumbnail_Response) {
+		option (method_description) = "Request thumbnail URL for broadcast";
 	}
 	rpc InviteToBroadcast (.CBroadcast_InviteToBroadcast_Request) returns (.CBroadcast_InviteToBroadcast_Response) {
 		option (method_description) = "Invites another steam user to watch the caller's broadcast";

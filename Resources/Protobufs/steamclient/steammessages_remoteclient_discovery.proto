@@ -12,6 +12,7 @@ enum ERemoteClientBroadcastMsg {
 	k_ERemoteDeviceProofResponse = 8;
 	k_ERemoteDeviceAuthorizationCancelRequest = 9;
 	k_ERemoteDeviceStreamingCancelRequest = 10;
+	k_ERemoteClientBroadcastMsgClientIDDeconflict = 11;
 }
 
 enum ERemoteClientService {
@@ -83,6 +84,10 @@ message CMsgRemoteClientBroadcastDiscovery {
 	repeated uint64 client_ids = 2;
 }
 
+message CMsgRemoteClientBroadcastClientIDDeconflict {
+	repeated uint64 client_ids = 2;
+}
+
 message CMsgRemoteDeviceAuthorizationRequest {
 	message CKeyEscrow_Ticket {
 		optional bytes password = 1;
@@ -124,6 +129,7 @@ message CMsgRemoteDeviceStreamingRequest {
 	optional bool enable_video_streaming = 9 [default = true];
 	optional bool enable_audio_streaming = 10 [default = true];
 	optional bool enable_input_streaming = 11 [default = true];
+	optional bool network_test = 12;
 }
 
 message CMsgRemoteDeviceStreamingCancelRequest {

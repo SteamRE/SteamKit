@@ -127,6 +127,24 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializertmp_token() { return rtmp_tokenSpecified; }
     private void Resetrtmp_token() { rtmp_tokenSpecified = false; }
     
+
+    private bool? _thumbnail_upload;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"thumbnail_upload", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool thumbnail_upload
+    {
+      get { return _thumbnail_upload?? default(bool); }
+      set { _thumbnail_upload = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool thumbnail_uploadSpecified
+    {
+      get { return _thumbnail_upload != null; }
+      set { if (value == (_thumbnail_upload== null)) _thumbnail_upload = value ? this.thumbnail_upload : (bool?)null; }
+    }
+    private bool ShouldSerializethumbnail_upload() { return thumbnail_uploadSpecified; }
+    private void Resetthumbnail_upload() { thumbnail_uploadSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -208,24 +226,6 @@ namespace SteamKit2.Unified.Internal
     }
     private bool ShouldSerializethumbnail_interval_seconds() { return thumbnail_interval_secondsSpecified; }
     private void Resetthumbnail_interval_seconds() { thumbnail_interval_secondsSpecified = false; }
-    
-
-    private ulong? _thumbnail_broadcast_relay_id;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"thumbnail_broadcast_relay_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public ulong thumbnail_broadcast_relay_id
-    {
-      get { return _thumbnail_broadcast_relay_id?? default(ulong); }
-      set { _thumbnail_broadcast_relay_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool thumbnail_broadcast_relay_idSpecified
-    {
-      get { return _thumbnail_broadcast_relay_id != null; }
-      set { if (value == (_thumbnail_broadcast_relay_id== null)) _thumbnail_broadcast_relay_id = value ? this.thumbnail_broadcast_relay_id : (ulong?)null; }
-    }
-    private bool ShouldSerializethumbnail_broadcast_relay_id() { return thumbnail_broadcast_relay_idSpecified; }
-    private void Resetthumbnail_broadcast_relay_id() { thumbnail_broadcast_relay_idSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -410,6 +410,42 @@ namespace SteamKit2.Unified.Internal
     }
     private bool ShouldSerializeupload_relay_id() { return upload_relay_idSpecified; }
     private void Resetupload_relay_id() { upload_relay_idSpecified = false; }
+    
+
+    private string _thumbnail_upload_address;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"thumbnail_upload_address", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string thumbnail_upload_address
+    {
+      get { return _thumbnail_upload_address?? ""; }
+      set { _thumbnail_upload_address = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool thumbnail_upload_addressSpecified
+    {
+      get { return _thumbnail_upload_address != null; }
+      set { if (value == (_thumbnail_upload_address== null)) _thumbnail_upload_address = value ? this.thumbnail_upload_address : (string)null; }
+    }
+    private bool ShouldSerializethumbnail_upload_address() { return thumbnail_upload_addressSpecified; }
+    private void Resetthumbnail_upload_address() { thumbnail_upload_addressSpecified = false; }
+    
+
+    private uint? _thumbnail_interval_seconds;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"thumbnail_interval_seconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint thumbnail_interval_seconds
+    {
+      get { return _thumbnail_interval_seconds?? default(uint); }
+      set { _thumbnail_interval_seconds = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool thumbnail_interval_secondsSpecified
+    {
+      get { return _thumbnail_interval_seconds != null; }
+      set { if (value == (_thumbnail_interval_seconds== null)) _thumbnail_interval_seconds = value ? this.thumbnail_interval_seconds : (uint?)null; }
+    }
+    private bool ShouldSerializethumbnail_interval_seconds() { return thumbnail_interval_secondsSpecified; }
+    private void Resetthumbnail_interval_seconds() { thumbnail_interval_secondsSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -987,6 +1023,98 @@ namespace SteamKit2.Unified.Internal
     }
     private bool ShouldSerializeis_publisher() { return is_publisherSpecified; }
     private void Resetis_publisher() { is_publisherSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_GetBroadcastThumbnail_Request")]
+  public partial class CBroadcast_GetBroadcastThumbnail_Request : global::ProtoBuf.IExtensible
+  {
+    public CBroadcast_GetBroadcastThumbnail_Request() {}
+    
+
+    private ulong? _steamid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong steamid
+    {
+      get { return _steamid?? default(ulong); }
+      set { _steamid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
+
+    private ulong? _broadcast_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"broadcast_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong broadcast_id
+    {
+      get { return _broadcast_id?? default(ulong); }
+      set { _broadcast_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool broadcast_idSpecified
+    {
+      get { return _broadcast_id != null; }
+      set { if (value == (_broadcast_id== null)) _broadcast_id = value ? this.broadcast_id : (ulong?)null; }
+    }
+    private bool ShouldSerializebroadcast_id() { return broadcast_idSpecified; }
+    private void Resetbroadcast_id() { broadcast_idSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_GetBroadcastThumbnail_Response")]
+  public partial class CBroadcast_GetBroadcastThumbnail_Response : global::ProtoBuf.IExtensible
+  {
+    public CBroadcast_GetBroadcastThumbnail_Response() {}
+    
+
+    private string _thumbnail_url;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"thumbnail_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string thumbnail_url
+    {
+      get { return _thumbnail_url?? ""; }
+      set { _thumbnail_url = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool thumbnail_urlSpecified
+    {
+      get { return _thumbnail_url != null; }
+      set { if (value == (_thumbnail_url== null)) _thumbnail_url = value ? this.thumbnail_url : (string)null; }
+    }
+    private bool ShouldSerializethumbnail_url() { return thumbnail_urlSpecified; }
+    private void Resetthumbnail_url() { thumbnail_urlSpecified = false; }
+    
+
+    private int? _update_interval;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"update_interval", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int update_interval
+    {
+      get { return _update_interval?? default(int); }
+      set { _update_interval = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool update_intervalSpecified
+    {
+      get { return _update_interval != null; }
+      set { if (value == (_update_interval== null)) _update_interval = value ? this.update_interval : (int?)null; }
+    }
+    private bool ShouldSerializeupdate_interval() { return update_intervalSpecified; }
+    private void Resetupdate_interval() { update_intervalSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1985,22 +2113,22 @@ namespace SteamKit2.Unified.Internal
     private void Resetthumbnail_upload_token() { thumbnail_upload_tokenSpecified = false; }
     
 
-    private ulong? _thumbnail_broadcast_relay_id;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"thumbnail_broadcast_relay_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public ulong thumbnail_broadcast_relay_id
+    private ulong? _thumbnail_broadcast_session_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"thumbnail_broadcast_session_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong thumbnail_broadcast_session_id
     {
-      get { return _thumbnail_broadcast_relay_id?? default(ulong); }
-      set { _thumbnail_broadcast_relay_id = value; }
+      get { return _thumbnail_broadcast_session_id?? default(ulong); }
+      set { _thumbnail_broadcast_session_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
     [global::System.ComponentModel.Browsable(false)]
-    public bool thumbnail_broadcast_relay_idSpecified
+    public bool thumbnail_broadcast_session_idSpecified
     {
-      get { return _thumbnail_broadcast_relay_id != null; }
-      set { if (value == (_thumbnail_broadcast_relay_id== null)) _thumbnail_broadcast_relay_id = value ? this.thumbnail_broadcast_relay_id : (ulong?)null; }
+      get { return _thumbnail_broadcast_session_id != null; }
+      set { if (value == (_thumbnail_broadcast_session_id== null)) _thumbnail_broadcast_session_id = value ? this.thumbnail_broadcast_session_id : (ulong?)null; }
     }
-    private bool ShouldSerializethumbnail_broadcast_relay_id() { return thumbnail_broadcast_relay_idSpecified; }
-    private void Resetthumbnail_broadcast_relay_id() { thumbnail_broadcast_relay_idSpecified = false; }
+    private bool ShouldSerializethumbnail_broadcast_session_id() { return thumbnail_broadcast_session_idSpecified; }
+    private void Resetthumbnail_broadcast_session_id() { thumbnail_broadcast_session_idSpecified = false; }
     
 
     private byte[] _thumbnail_data;
@@ -2069,6 +2197,7 @@ namespace SteamKit2.Unified.Internal
     NoResponse NotifyBroadcastUploadStop(CBroadcast_NotifyBroadcastUploadStop_Notification request);
     CBroadcast_WatchBroadcast_Response WatchBroadcast(CBroadcast_WatchBroadcast_Request request);
     CBroadcast_GetBroadcastStatus_Response GetBroadcastStatus(CBroadcast_GetBroadcastStatus_Request request);
+    CBroadcast_GetBroadcastThumbnail_Response GetBroadcastThumbnail(CBroadcast_GetBroadcastThumbnail_Request request);
     CBroadcast_InviteToBroadcast_Response InviteToBroadcast(CBroadcast_InviteToBroadcast_Request request);
     CBroadcast_SendBroadcastStateToServer_Response SendBroadcastStateToServer(CBroadcast_SendBroadcastStateToServer_Request request);
     NoResponse NotifyBroadcastSessionHeartbeat(CBroadcast_NotifyBroadcastSessionHeartbeat_Notification request);

@@ -288,6 +288,79 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetNicknameList_Request")]
+  public partial class CPlayer_GetNicknameList_Request : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_GetNicknameList_Request() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetNicknameList_Response")]
+  public partial class CPlayer_GetNicknameList_Response : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_GetNicknameList_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<CPlayer_GetNicknameList_Response.PlayerNickname> _nicknames = new global::System.Collections.Generic.List<CPlayer_GetNicknameList_Response.PlayerNickname>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"nicknames", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CPlayer_GetNicknameList_Response.PlayerNickname> nicknames
+    {
+      get { return _nicknames; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PlayerNickname")]
+  public partial class PlayerNickname : global::ProtoBuf.IExtensible
+  {
+    public PlayerNickname() {}
+    
+
+    private uint? _accountid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public uint accountid
+    {
+      get { return _accountid?? default(uint); }
+      set { _accountid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool accountidSpecified
+    {
+      get { return _accountid != null; }
+      set { if (value == (_accountid== null)) _accountid = value ? this.accountid : (uint?)null; }
+    }
+    private bool ShouldSerializeaccountid() { return accountidSpecified; }
+    private void Resetaccountid() { accountidSpecified = false; }
+    
+
+    private string _nickname;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"nickname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string nickname
+    {
+      get { return _nickname?? ""; }
+      set { _nickname = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool nicknameSpecified
+    {
+      get { return _nickname != null; }
+      set { if (value == (_nickname== null)) _nickname = value ? this.nickname : (string)null; }
+    }
+    private bool ShouldSerializenickname() { return nicknameSpecified; }
+    private void Resetnickname() { nicknameSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_LastPlayedTimes_Notification")]
   public partial class CPlayer_LastPlayedTimes_Notification : global::ProtoBuf.IExtensible
   {
@@ -305,11 +378,58 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_FriendNicknameChanged_Notification")]
+  public partial class CPlayer_FriendNicknameChanged_Notification : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_FriendNicknameChanged_Notification() {}
+    
+
+    private uint? _accountid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public uint accountid
+    {
+      get { return _accountid?? default(uint); }
+      set { _accountid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool accountidSpecified
+    {
+      get { return _accountid != null; }
+      set { if (value == (_accountid== null)) _accountid = value ? this.accountid : (uint?)null; }
+    }
+    private bool ShouldSerializeaccountid() { return accountidSpecified; }
+    private void Resetaccountid() { accountidSpecified = false; }
+    
+
+    private string _nickname;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"nickname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string nickname
+    {
+      get { return _nickname?? ""; }
+      set { _nickname = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool nicknameSpecified
+    {
+      get { return _nickname != null; }
+      set { if (value == (_nickname== null)) _nickname = value ? this.nickname : (string)null; }
+    }
+    private bool ShouldSerializenickname() { return nicknameSpecified; }
+    private void Resetnickname() { nicknameSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface IPlayer
     {
       CPlayer_GetGameBadgeLevels_Response GetGameBadgeLevels(CPlayer_GetGameBadgeLevels_Request request);
     CPlayer_GetLastPlayedTimes_Response ClientGetLastPlayedTimes(CPlayer_GetLastPlayedTimes_Request request);
     CPlayer_AcceptSSA_Response AcceptSSA(CPlayer_AcceptSSA_Request request);
+    CPlayer_GetNicknameList_Response GetNicknameList(CPlayer_GetNicknameList_Request request);
     
     }
     
@@ -317,6 +437,7 @@ namespace SteamKit2.Unified.Internal
     public interface IPlayerClient
     {
       NoResponse NotifyLastPlayedTimes(CPlayer_LastPlayedTimes_Notification request);
+    NoResponse NotifyFriendNicknameChanged(CPlayer_FriendNicknameChanged_Notification request);
     
     }
     

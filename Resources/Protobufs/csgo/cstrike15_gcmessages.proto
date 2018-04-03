@@ -186,7 +186,7 @@ message PlayerRankingInfo {
 	optional uint32 rank_id = 2;
 	optional uint32 wins = 3;
 	optional float rank_change = 4;
-	optional uint32 type_id = 5;
+	optional uint32 rank_type_id = 6;
 }
 
 message PlayerCommendationInfo {
@@ -336,6 +336,7 @@ message CMsgGCCStrike15_v2_MatchmakingClient2ServerPing {
 	optional int32 final_batch = 3;
 	repeated .DataCenterPing data_center_pings = 4;
 	optional uint32 max_ping = 5;
+	optional fixed32 test_token = 6;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate {
@@ -428,6 +429,7 @@ message CMsgGCCStrike15_v2_MatchmakingServerReservationResponse {
 	optional uint32 reward_drop_list = 12;
 	optional string tournament_tag = 13;
 	optional uint32 steamdatagram_port = 14;
+	optional fixed32 test_token = 15;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve {
@@ -979,6 +981,10 @@ message CMsgGCCStrike15_v2_AcknowledgePenalty {
 }
 
 message CMsgGCCStrike15_v2_Client2GCRequestPrestigeCoin {
+	optional uint32 defindex = 1;
+	optional uint64 upgradeid = 2;
+	optional uint32 hours = 3;
+	optional uint32 prestigetime = 4;
 }
 
 message CMsgGCCStrike15_v2_Client2GCStreamUnlock {
@@ -1094,6 +1100,18 @@ message CMsgGCCStrike15_v2_ClientToGCRequestTicket {
 	optional fixed32 authorized_public_ip = 2;
 	optional fixed64 gameserver_steam_id = 3;
 	optional fixed64 gameserver_net_id = 4;
+}
+
+message CMsgGCToClientSteamDatagramTicket {
+	optional fixed32 legacy_time_expiry = 1;
+	optional fixed64 legacy_authorized_steam_id = 2;
+	optional fixed32 legacy_authorized_public_ip = 3;
+	optional fixed64 legacy_gameserver_steam_id = 4;
+	optional fixed64 legacy_gameserver_net_id = 5;
+	optional bytes legacy_signature = 6;
+	optional uint32 legacy_app_id = 7;
+	repeated bytes legacy_extra_fields = 8;
+	optional bytes serialized_ticket = 16;
 }
 
 message CMsgGCCStrike15_v2_ClientRequestOffers {

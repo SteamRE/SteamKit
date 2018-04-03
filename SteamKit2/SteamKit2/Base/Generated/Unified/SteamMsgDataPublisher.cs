@@ -163,6 +163,134 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializecorruption_type() { return corruption_typeSpecified; }
     private void Resetcorruption_type() { corruption_typeSpecified = false; }
     
+
+    private bool? _used_https;
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"used_https", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool used_https
+    {
+      get { return _used_https?? default(bool); }
+      set { _used_https = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool used_httpsSpecified
+    {
+      get { return _used_https != null; }
+      set { if (value == (_used_https== null)) _used_https = value ? this.used_https : (bool?)null; }
+    }
+    private bool ShouldSerializeused_https() { return used_httpsSpecified; }
+    private void Resetused_https() { used_httpsSpecified = false; }
+    
+
+    private bool? _oc_proxy_detected;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"oc_proxy_detected", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool oc_proxy_detected
+    {
+      get { return _oc_proxy_detected?? default(bool); }
+      set { _oc_proxy_detected = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool oc_proxy_detectedSpecified
+    {
+      get { return _oc_proxy_detected != null; }
+      set { if (value == (_oc_proxy_detected== null)) _oc_proxy_detected = value ? this.oc_proxy_detected : (bool?)null; }
+    }
+    private bool ShouldSerializeoc_proxy_detected() { return oc_proxy_detectedSpecified; }
+    private void Resetoc_proxy_detected() { oc_proxy_detectedSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CValveHWSurvey_GetSurveySchedule_Request")]
+  public partial class CValveHWSurvey_GetSurveySchedule_Request : global::ProtoBuf.IExtensible
+  {
+    public CValveHWSurvey_GetSurveySchedule_Request() {}
+    
+
+    private string _surveydatetoken;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"surveydatetoken", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string surveydatetoken
+    {
+      get { return _surveydatetoken?? ""; }
+      set { _surveydatetoken = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool surveydatetokenSpecified
+    {
+      get { return _surveydatetoken != null; }
+      set { if (value == (_surveydatetoken== null)) _surveydatetoken = value ? this.surveydatetoken : (string)null; }
+    }
+    private bool ShouldSerializesurveydatetoken() { return surveydatetokenSpecified; }
+    private void Resetsurveydatetoken() { surveydatetokenSpecified = false; }
+    
+
+    private ulong? _surveydatetokenversion;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"surveydatetokenversion", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong surveydatetokenversion
+    {
+      get { return _surveydatetokenversion?? default(ulong); }
+      set { _surveydatetokenversion = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool surveydatetokenversionSpecified
+    {
+      get { return _surveydatetokenversion != null; }
+      set { if (value == (_surveydatetokenversion== null)) _surveydatetokenversion = value ? this.surveydatetokenversion : (ulong?)null; }
+    }
+    private bool ShouldSerializesurveydatetokenversion() { return surveydatetokenversionSpecified; }
+    private void Resetsurveydatetokenversion() { surveydatetokenversionSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CValveHWSurvey_GetSurveySchedule_Response")]
+  public partial class CValveHWSurvey_GetSurveySchedule_Response : global::ProtoBuf.IExtensible
+  {
+    public CValveHWSurvey_GetSurveySchedule_Response() {}
+    
+
+    private uint? _surveydatetoken;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"surveydatetoken", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint surveydatetoken
+    {
+      get { return _surveydatetoken?? default(uint); }
+      set { _surveydatetoken = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool surveydatetokenSpecified
+    {
+      get { return _surveydatetoken != null; }
+      set { if (value == (_surveydatetoken== null)) _surveydatetoken = value ? this.surveydatetoken : (uint?)null; }
+    }
+    private bool ShouldSerializesurveydatetoken() { return surveydatetokenSpecified; }
+    private void Resetsurveydatetoken() { surveydatetokenSpecified = false; }
+    
+
+    private ulong? _surveydatetokenversion;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"surveydatetokenversion", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong surveydatetokenversion
+    {
+      get { return _surveydatetokenversion?? default(ulong); }
+      set { _surveydatetokenversion = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool surveydatetokenversionSpecified
+    {
+      get { return _surveydatetokenversion != null; }
+      set { if (value == (_surveydatetokenversion== null)) _surveydatetokenversion = value ? this.surveydatetokenversion : (ulong?)null; }
+    }
+    private bool ShouldSerializesurveydatetokenversion() { return surveydatetokenversionSpecified; }
+    private void Resetsurveydatetokenversion() { surveydatetokenversionSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -171,6 +299,13 @@ namespace SteamKit2.Unified.Internal
     public interface IDataPublisher
     {
       NoResponse ClientContentCorruptionReport(CDataPublisher_ClientContentCorruptionReport_Notification request);
+    
+    }
+    
+    
+    public interface IValveHWSurvey
+    {
+      CValveHWSurvey_GetSurveySchedule_Response GetSurveySchedule(CValveHWSurvey_GetSurveySchedule_Request request);
     
     }
     

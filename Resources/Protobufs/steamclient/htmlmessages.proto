@@ -36,6 +36,7 @@ message CMsgMouseUp {
 	optional uint32 browser_handle = 1;
 	optional uint32 mouse_button = 2;
 	optional uint32 modifiers = 3;
+	optional bool is_off_panel = 4;
 }
 
 message CMsgMouseDblClick {
@@ -115,6 +116,20 @@ message CMsgBrowserSize {
 	optional uint32 browser_handle = 1;
 	optional uint32 width = 2;
 	optional uint32 height = 3;
+}
+
+message CMsgBrowserSetMinSize {
+	optional uint32 browser_handle = 1;
+	optional uint32 width = 2;
+	optional uint32 height = 3;
+}
+
+message CMsgBrowserResized {
+	optional uint32 browser_handle = 1;
+	optional uint32 x = 2;
+	optional uint32 y = 3;
+	optional uint32 width = 4;
+	optional uint32 height = 5;
 }
 
 message CMsgPostURL {
@@ -315,6 +330,7 @@ message CMsgPopupHTMLWindow {
 	optional uint32 wide = 5;
 	optional uint32 tall = 6;
 	optional uint32 popup_index = 7;
+	optional bool trusted_creator = 8;
 }
 
 message CMsgPopupHTMLWindowResponse {
@@ -389,6 +405,10 @@ message CMsgSetSharedPaintBuffers {
 	optional uint64 source_pid = 4;
 	optional uint64 source_handle = 5;
 	optional uint64 handle = 6;
+}
+
+message CMsgAckSharedPaintBuffers {
+	optional uint32 browser_handle = 1;
 }
 
 message CMsgNeedsPaint {
@@ -666,7 +686,7 @@ message CMsgJSValue {
 	optional bool bool_value = 1;
 	optional int32 int_value = 2;
 	optional uint32 uint_value = 3;
-	optional float float_value = 4;
+	optional double double_value = 4;
 	optional string string_value = 5;
 	optional uint64 function_handle = 6;
 	optional bool is_array = 8;
@@ -736,5 +756,18 @@ message CMsgGameOverlayTargetTextureID {
 	optional uint32 browser_handle = 1;
 	optional uint32 target_pid = 2;
 	optional uint32 texture_handle = 3;
+}
+
+message CMsgDraggableRegionsChanged {
+	message DraggableRects {
+		optional int32 x = 1;
+		optional int32 y = 2;
+		optional int32 width = 3;
+		optional int32 height = 4;
+		optional bool draggable = 5;
+	}
+
+	optional uint32 browser_handle = 1;
+	repeated .CMsgDraggableRegionsChanged.DraggableRects rects = 2;
 }
 

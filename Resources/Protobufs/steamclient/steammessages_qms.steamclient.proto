@@ -1,0 +1,119 @@
+import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
+
+enum EGameSearchAction {
+	k_EGameSearchAction_None = 0;
+	k_EGameSearchAction_Accept = 1;
+	k_EGameSearchAction_Decline = 2;
+	k_EGameSearchAction_Cancel = 3;
+}
+
+enum EGameSearchResult {
+	k_EGameSearchResult_Invalid = 0;
+	k_EGameSearchResult_SearchInProgress = 1;
+	k_EGameSearchResult_SearchFailedNoHosts = 2;
+	k_EGameSearchResult_SearchGameFound = 3;
+	k_EGameSearchResult_SearchCompleteAccepted = 4;
+	k_EGameSearchResult_SearchCompleteDeclined = 5;
+	k_EGameSearchResult_SearchCanceled = 6;
+}
+
+message GameSearchParam {
+	optional string key_name = 1;
+	repeated string value = 2;
+}
+
+message CQueuedMatchmaking_SearchForGame_Request {
+	optional uint32 appid = 1;
+	optional .EGameSearchAction action = 2 [default = k_EGameSearchAction_None];
+	repeated .GameSearchParam params = 3;
+	optional uint32 player_min = 4;
+	optional uint32 player_max = 5;
+	optional fixed64 steamidlobby = 6;
+	optional uint64 searchid = 7;
+}
+
+message CQueuedMatchmaking_SearchForGame_Response {
+	optional .EGameSearchResult gamesearchresult = 1 [default = k_EGameSearchResult_Invalid];
+	optional uint64 searchid = 2;
+	optional uint32 seconds_time_estimate = 3;
+	optional uint32 poll_frequency = 4;
+	optional uint32 count_searching = 5;
+	optional uint32 players_in_match = 6;
+	optional uint32 players_accepted = 7;
+	optional string connect_string = 9;
+	optional fixed64 steamidhost = 10;
+	optional uint32 rtime_match_made = 11;
+	optional uint32 rtime_now = 12;
+	optional fixed64 steamid_canceled_search = 13;
+}
+
+message CQueuedMatchmakingGameHost_SearchForPlayers_Request {
+	optional uint32 appid = 1;
+	optional .EGameSearchAction action = 2 [default = k_EGameSearchAction_None];
+	repeated .GameSearchParam params = 3;
+	optional uint32 player_min = 4;
+	optional uint32 player_max = 5;
+	optional uint32 player_max_team_size = 6;
+	optional string connection_string = 7;
+	optional uint64 searchid = 8;
+}
+
+message PlayerFound {
+	optional fixed64 steamid = 1;
+	optional .EGameSearchAction action = 2 [default = k_EGameSearchAction_None];
+	repeated .GameSearchParam params = 3;
+	optional uint32 team_number = 4;
+}
+
+message CQueuedMatchmakingGameHost_SearchForPlayers_Response {
+	optional .EGameSearchResult gamesearchresult = 1 [default = k_EGameSearchResult_Invalid];
+	optional uint64 searchid = 2;
+	optional uint32 poll_frequency = 3;
+	optional uint64 matchid = 4;
+	repeated .PlayerFound players = 5;
+	optional uint32 rtime_match_made = 6;
+	optional uint32 rtime_now = 7;
+}
+
+message PlayerResult {
+	optional fixed64 steamid = 1;
+	optional uint32 value = 2;
+}
+
+message CQueuedMatchmakingGameHost_SubmitPlayerResult_Request {
+	optional uint32 appid = 1;
+	optional uint64 matchid = 2;
+	repeated .PlayerResult player_results = 3;
+}
+
+message CQueuedMatchmakingGameHost_SubmitPlayerResult_Response {
+}
+
+message CQueuedMatchmakingGameHost_EndGame_Request {
+	optional uint32 appid = 1;
+	optional uint64 matchid = 2;
+}
+
+message CQueuedMatchmakingGameHost_EndGame_Response {
+}
+
+service QueuedMatchmaking {
+	option (service_description) = "Queued matchmaking service";
+	rpc SearchForGame (.CQueuedMatchmaking_SearchForGame_Request) returns (.CQueuedMatchmaking_SearchForGame_Response) {
+		option (method_description) = "Search for a game";
+	}
+}
+service QueuedMatchmakingGameHost {
+	option (service_description) = "Queued matchmaking host service";
+	rpc SearchForPlayers (.CQueuedMatchmakingGameHost_SearchForPlayers_Request) returns (.CQueuedMatchmakingGameHost_SearchForPlayers_Response) {
+		option (method_description) = "SearchForPlayers";
+	}
+	rpc SubmitPlayerResult (.CQueuedMatchmakingGameHost_SubmitPlayerResult_Request) returns (.CQueuedMatchmakingGameHost_SubmitPlayerResult_Response) {
+		option (method_description) = "SubmitPlayerResult";
+	}
+	rpc EndGame (.CQueuedMatchmakingGameHost_EndGame_Request) returns (.CQueuedMatchmakingGameHost_EndGame_Response) {
+		option (method_description) = "EndGame";
+	}
+}

@@ -779,6 +779,42 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializereturn_playtime_stats() { return return_playtime_statsSpecified; }
     private void Resetreturn_playtime_stats() { return_playtime_statsSpecified = false; }
     
+
+    private uint? _appid;
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint appid
+    {
+      get { return _appid?? default(uint); }
+      set { _appid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
+
+    private bool? _strip_description_bbcode;
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"strip_description_bbcode", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool strip_description_bbcode
+    {
+      get { return _strip_description_bbcode?? default(bool); }
+      set { _strip_description_bbcode = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool strip_description_bbcodeSpecified
+    {
+      get { return _strip_description_bbcode != null; }
+      set { if (value == (_strip_description_bbcode== null)) _strip_description_bbcode = value ? this.strip_description_bbcode : (bool?)null; }
+    }
+    private bool ShouldSerializestrip_description_bbcode() { return strip_description_bbcodeSpecified; }
+    private void Resetstrip_description_bbcode() { strip_description_bbcodeSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2286,11 +2322,11 @@ namespace SteamKit2.Unified.Internal
     private void Resetprice_category() { price_categorySpecified = false; }
     
 
-    private PublishedFileDetails.EPublishedFileForSaleStatus? _estatus;
+    private EPublishedFileForSaleStatus? _estatus;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"estatus", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public PublishedFileDetails.EPublishedFileForSaleStatus estatus
+    public EPublishedFileForSaleStatus estatus
     {
-      get { return _estatus?? PublishedFileDetails.EPublishedFileForSaleStatus.k_PFFSS_NotForSale; }
+      get { return _estatus?? EPublishedFileForSaleStatus.k_PFFSS_NotForSale; }
       set { _estatus = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
@@ -2298,7 +2334,7 @@ namespace SteamKit2.Unified.Internal
     public bool estatusSpecified
     {
       get { return _estatus != null; }
-      set { if (value == (_estatus== null)) _estatus = value ? this.estatus : (PublishedFileDetails.EPublishedFileForSaleStatus?)null; }
+      set { if (value == (_estatus== null)) _estatus = value ? this.estatus : (EPublishedFileForSaleStatus?)null; }
     }
     private bool ShouldSerializeestatus() { return estatusSpecified; }
     private void Resetestatus() { estatusSpecified = false; }
@@ -2407,29 +2443,6 @@ namespace SteamKit2.Unified.Internal
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"EPublishedFileForSaleStatus", EnumPassthru=true)]
-    public enum EPublishedFileForSaleStatus
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_NotForSale", Value=0)]
-      k_PFFSS_NotForSale = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_PendingApproval", Value=1)]
-      k_PFFSS_PendingApproval = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_ApprovedForSale", Value=2)]
-      k_PFFSS_ApprovedForSale = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_RejectedForSale", Value=3)]
-      k_PFFSS_RejectedForSale = 3,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_NoLongerForSale", Value=4)]
-      k_PFFSS_NoLongerForSale = 4,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_TentativeApproval", Value=5)]
-      k_PFFSS_TentativeApproval = 5
-    }
   
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -3108,6 +3121,24 @@ namespace SteamKit2.Unified.Internal
     }
     private bool ShouldSerializereturn_playtime_stats() { return return_playtime_statsSpecified; }
     private void Resetreturn_playtime_stats() { return_playtime_statsSpecified = false; }
+    
+
+    private bool? _strip_description_bbcode;
+    [global::ProtoBuf.ProtoMember(32, IsRequired = false, Name=@"strip_description_bbcode", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool strip_description_bbcode
+    {
+      get { return _strip_description_bbcode?? default(bool); }
+      set { _strip_description_bbcode = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool strip_description_bbcodeSpecified
+    {
+      get { return _strip_description_bbcode != null; }
+      set { if (value == (_strip_description_bbcode== null)) _strip_description_bbcode = value ? this.strip_description_bbcode : (bool?)null; }
+    }
+    private bool ShouldSerializestrip_description_bbcode() { return strip_description_bbcodeSpecified; }
+    private void Resetstrip_description_bbcode() { strip_description_bbcodeSpecified = false; }
     
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"KVTag")]
   public partial class KVTag : global::ProtoBuf.IExtensible
@@ -4378,6 +4409,42 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializereturn_playtime_stats() { return return_playtime_statsSpecified; }
     private void Resetreturn_playtime_stats() { return_playtime_statsSpecified = false; }
     
+
+    private bool? _return_details;
+    [global::ProtoBuf.ProtoMember(37, IsRequired = false, Name=@"return_details", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool return_details
+    {
+      get { return _return_details?? default(bool); }
+      set { _return_details = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool return_detailsSpecified
+    {
+      get { return _return_details != null; }
+      set { if (value == (_return_details== null)) _return_details = value ? this.return_details : (bool?)null; }
+    }
+    private bool ShouldSerializereturn_details() { return return_detailsSpecified; }
+    private void Resetreturn_details() { return_detailsSpecified = false; }
+    
+
+    private bool? _strip_description_bbcode;
+    [global::ProtoBuf.ProtoMember(38, IsRequired = false, Name=@"strip_description_bbcode", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool strip_description_bbcode
+    {
+      get { return _strip_description_bbcode?? default(bool); }
+      set { _strip_description_bbcode = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool strip_description_bbcodeSpecified
+    {
+      get { return _strip_description_bbcode != null; }
+      set { if (value == (_strip_description_bbcode== null)) _strip_description_bbcode = value ? this.strip_description_bbcode : (bool?)null; }
+    }
+    private bool ShouldSerializestrip_description_bbcode() { return strip_description_bbcodeSpecified; }
+    private void Resetstrip_description_bbcode() { strip_description_bbcodeSpecified = false; }
+    
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"KVTag")]
   public partial class KVTag : global::ProtoBuf.IExtensible
   {
@@ -5033,6 +5100,29 @@ namespace SteamKit2.Unified.Internal
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EPublishedFileForSaleStatus", EnumPassthru=true)]
+    public enum EPublishedFileForSaleStatus
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_NotForSale", Value=0)]
+      k_PFFSS_NotForSale = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_PendingApproval", Value=1)]
+      k_PFFSS_PendingApproval = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_ApprovedForSale", Value=2)]
+      k_PFFSS_ApprovedForSale = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_RejectedForSale", Value=3)]
+      k_PFFSS_RejectedForSale = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_NoLongerForSale", Value=4)]
+      k_PFFSS_NoLongerForSale = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_TentativeApproval", Value=5)]
+      k_PFFSS_TentativeApproval = 5
+    }
   
     public interface IPublishedFile
     {

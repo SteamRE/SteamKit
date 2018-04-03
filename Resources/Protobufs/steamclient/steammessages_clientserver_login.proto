@@ -6,6 +6,15 @@ option cc_generic_services = false;
 message CMsgClientHeartBeat {
 }
 
+message CMsgClientServerTimestampRequest {
+	optional uint64 client_request_timestamp = 1;
+}
+
+message CMsgClientServerTimestampResponse {
+	optional uint64 client_request_timestamp = 1;
+	optional uint64 server_timestamp_ms = 2;
+}
+
 message CMsgClientLogon {
 	optional uint32 protocol_version = 1;
 	optional uint32 obfustucated_private_ip = 2;
@@ -23,6 +32,7 @@ message CMsgClientLogon {
 	optional bytes machine_id = 30;
 	optional uint32 launcher_type = 31 [default = 0];
 	optional uint32 ui_mode = 32 [default = 0];
+	optional uint32 chat_mode = 33 [default = 0];
 	optional bytes steam2_auth_ticket = 41;
 	optional string email_address = 42;
 	optional fixed32 rtime32_account_creation = 43;
@@ -54,6 +64,7 @@ message CMsgClientLogon {
 	optional string two_factor_code = 101;
 	optional bool supports_rate_limit_response = 102;
 	optional string web_logon_nonce = 103;
+	optional int32 priority_reason = 104;
 }
 
 message CMsgClientLogonResponse {

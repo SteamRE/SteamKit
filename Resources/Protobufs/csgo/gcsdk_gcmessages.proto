@@ -152,6 +152,7 @@ message CMsgClientHello {
 	optional uint32 partner_srcid = 5;
 	optional uint32 partner_accountid = 6;
 	optional uint32 partner_accountflags = 7;
+	optional uint32 partner_accountbalance = 8;
 }
 
 message CMsgServerHello {
@@ -177,6 +178,8 @@ message CMsgClientWelcome {
 	optional bytes game_data2 = 6;
 	optional uint32 rtime32_gc_welcome_timestamp = 7;
 	optional uint32 currency = 8;
+	optional uint32 balance = 9;
+	optional string balance_url = 10;
 }
 
 message CMsgConnectionStatus {

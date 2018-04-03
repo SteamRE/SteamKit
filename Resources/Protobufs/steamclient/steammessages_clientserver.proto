@@ -51,6 +51,8 @@ message CMsgClientP2PConnectionInfo {
 	optional fixed64 steam_id_src = 2;
 	optional uint32 app_id = 3;
 	optional bytes candidate = 4;
+	optional fixed64 connection_id_src = 5;
+	optional bytes rendezvous = 6;
 }
 
 message CMsgClientP2PConnectionFailInfo {
@@ -58,6 +60,20 @@ message CMsgClientP2PConnectionFailInfo {
 	optional fixed64 steam_id_src = 2;
 	optional uint32 app_id = 3;
 	optional uint32 ep2p_session_error = 4;
+	optional fixed64 connection_id_dest = 5;
+	optional uint32 close_reason = 7;
+	optional string close_message = 8;
+}
+
+message CMsgClientNetworkingCertRequest {
+	optional bytes key_data = 2;
+	optional uint32 app_id = 3;
+}
+
+message CMsgClientNetworkingCertReply {
+	optional bytes cert = 4;
+	optional fixed64 ca_key_id = 5;
+	optional bytes ca_signature = 6;
 }
 
 message CMsgClientGetAppOwnershipTicket {

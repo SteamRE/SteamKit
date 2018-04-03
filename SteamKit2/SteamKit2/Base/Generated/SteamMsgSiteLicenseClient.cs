@@ -83,24 +83,6 @@ namespace SteamKit2.Internal
     private bool ShouldSerializeappid() { return appidSpecified; }
     private void Resetappid() { appidSpecified = false; }
     
-
-    private uint? _packageid;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"packageid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint packageid
-    {
-      get { return _packageid?? default(uint); }
-      set { _packageid = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool packageidSpecified
-    {
-      get { return _packageid != null; }
-      set { if (value == (_packageid== null)) _packageid = value ? this.packageid : (uint?)null; }
-    }
-    private bool ShouldSerializepackageid() { return packageidSpecified; }
-    private void Resetpackageid() { packageidSpecified = false; }
-    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -140,22 +122,22 @@ namespace SteamKit2.Internal
     public CMsgClientSiteLicenseGetAvailableSeats() {}
     
 
-    private uint? _packageid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"packageid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint packageid
+    private uint? _appid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint appid
     {
-      get { return _packageid?? default(uint); }
-      set { _packageid = value; }
+      get { return _appid?? default(uint); }
+      set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
     [global::System.ComponentModel.Browsable(false)]
-    public bool packageidSpecified
+    public bool appidSpecified
     {
-      get { return _packageid != null; }
-      set { if (value == (_packageid== null)) _packageid = value ? this.packageid : (uint?)null; }
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
     }
-    private bool ShouldSerializepackageid() { return packageidSpecified; }
-    private void Resetpackageid() { packageidSpecified = false; }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -202,6 +184,98 @@ namespace SteamKit2.Internal
     }
     private bool ShouldSerializeseats() { return seatsSpecified; }
     private void Resetseats() { seatsSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientSiteLicenseGetContentCacheInfo")]
+  public partial class CMsgClientSiteLicenseGetContentCacheInfo : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientSiteLicenseGetContentCacheInfo() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientSiteLicenseGetContentCacheInfoResponse")]
+  public partial class CMsgClientSiteLicenseGetContentCacheInfoResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientSiteLicenseGetContentCacheInfoResponse() {}
+    
+
+    private bool? _use_cache;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"use_cache", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool use_cache
+    {
+      get { return _use_cache?? default(bool); }
+      set { _use_cache = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool use_cacheSpecified
+    {
+      get { return _use_cache != null; }
+      set { if (value == (_use_cache== null)) _use_cache = value ? this.use_cache : (bool?)null; }
+    }
+    private bool ShouldSerializeuse_cache() { return use_cacheSpecified; }
+    private void Resetuse_cache() { use_cacheSpecified = false; }
+    
+
+    private uint? _ipv4_address;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"ipv4_address", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint ipv4_address
+    {
+      get { return _ipv4_address?? default(uint); }
+      set { _ipv4_address = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool ipv4_addressSpecified
+    {
+      get { return _ipv4_address != null; }
+      set { if (value == (_ipv4_address== null)) _ipv4_address = value ? this.ipv4_address : (uint?)null; }
+    }
+    private bool ShouldSerializeipv4_address() { return ipv4_addressSpecified; }
+    private void Resetipv4_address() { ipv4_addressSpecified = false; }
+    
+
+    private uint? _port_number;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"port_number", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint port_number
+    {
+      get { return _port_number?? default(uint); }
+      set { _port_number = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool port_numberSpecified
+    {
+      get { return _port_number != null; }
+      set { if (value == (_port_number== null)) _port_number = value ? this.port_number : (uint?)null; }
+    }
+    private bool ShouldSerializeport_number() { return port_numberSpecified; }
+    private void Resetport_number() { port_numberSpecified = false; }
+    
+
+    private uint? _p2p_group;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"p2p_group", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint p2p_group
+    {
+      get { return _p2p_group?? default(uint); }
+      set { _p2p_group = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool p2p_groupSpecified
+    {
+      get { return _p2p_group != null; }
+      set { if (value == (_p2p_group== null)) _p2p_group = value ? this.p2p_group : (uint?)null; }
+    }
+    private bool ShouldSerializep2p_group() { return p2p_groupSpecified; }
+    private void Resetp2p_group() { p2p_groupSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

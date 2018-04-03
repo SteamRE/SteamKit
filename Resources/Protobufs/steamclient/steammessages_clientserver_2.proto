@@ -1013,6 +1013,7 @@ message CMsgClientServiceMethodResponse {
 
 message CMsgClientUIMode {
 	optional uint32 uimode = 1;
+	optional uint32 chat_mode = 2;
 }
 
 message CMsgClientVanityURLChangedNotification {

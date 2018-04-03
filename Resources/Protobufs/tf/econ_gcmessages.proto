@@ -157,7 +157,6 @@ enum EGCItemMsg {
 	k_EMsgGCQuestObjective_Progress = 2558;
 	k_EMsgGCQuestCompleted = 2559;
 	k_EMsgGCApplyDuckToken = 2560;
-	k_EMsgGCQuestComplete_Request = 2561;
 	k_EMsgGCQuestObjective_PointsChange = 2562;
 	k_EMsgGCQuestObjective_RequestLoanerItems = 2564;
 	k_EMsgGCQuestObjective_RequestLoanerResponse = 2565;
@@ -321,29 +320,30 @@ message CMsgGCShuffleCrateContents {
 }
 
 message CMsgGCQuestObjective_Progress {
-	optional uint64 quest_item_id = 1;
+	optional uint64 quest_id = 1;
 	optional uint32 quest_attrib_index = 2;
 	optional uint32 delta = 3;
 	optional fixed64 owner_steamid = 4;
 }
 
 message CMsgGCQuestObjective_PointsChange {
-	optional uint64 quest_item_id = 1;
-	optional uint32 standard_points = 2;
-	optional uint32 bonus_points = 3;
+	optional uint64 quest_id = 1;
 	optional fixed64 owner_steamid = 4;
 	optional bool update_base_points = 5 [default = false];
+	optional uint32 points_0 = 6;
+	optional uint32 points_1 = 7;
+	optional uint32 points_2 = 8;
 }
 
 message CMsgGCQuestComplete_Request {
-	optional uint64 quest_item_id = 1;
+	optional uint64 quest_id = 1;
 }
 
 message CMsgGCQuestCompleted {
 }
 
 message CMsgGCQuestObjective_RequestLoanerItems {
-	optional uint64 quest_item_id = 1;
+	optional uint64 quest_id = 1;
 }
 
 message CMsgGCQuestObjective_RequestLoanerResponse {
@@ -364,6 +364,6 @@ message CMsgCraftCommonStatClock {
 }
 
 message CMsgGCQuestDiscard_Request {
-	optional uint64 quest_item_id = 1;
+	optional uint64 quest_id = 1;
 }
 

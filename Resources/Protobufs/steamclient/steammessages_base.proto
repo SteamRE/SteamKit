@@ -92,3 +92,20 @@ message CMsgAppRights {
 	optional bool broadcast_live = 15;
 }
 
+message CCuratorPreferences {
+	optional uint32 supported_languages = 1;
+	optional bool platform_windows = 2;
+	optional bool platform_mac = 3;
+	optional bool platform_linux = 4;
+	optional bool vr_content = 5;
+	optional bool adult_content_violence = 6;
+	optional bool adult_content_sex = 7;
+	optional uint32 timestamp_updated = 8;
+	repeated uint32 tagids_curated = 9;
+	repeated uint32 tagids_filtered = 10;
+	optional string website_title = 11;
+	optional string website_url = 12;
+	optional string discussion_url = 13;
+	optional bool show_broadcast = 14;
+}
+

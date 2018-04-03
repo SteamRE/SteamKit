@@ -354,6 +354,208 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_FinishUploadDepot_Request")]
+  public partial class CPartnerApps_FinishUploadDepot_Request : global::ProtoBuf.IExtensible
+  {
+    public CPartnerApps_FinishUploadDepot_Request() {}
+    
+
+    private ulong? _upload_token;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"upload_token", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong upload_token
+    {
+      get { return _upload_token?? default(ulong); }
+      set { _upload_token = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool upload_tokenSpecified
+    {
+      get { return _upload_token != null; }
+      set { if (value == (_upload_token== null)) _upload_token = value ? this.upload_token : (ulong?)null; }
+    }
+    private bool ShouldSerializeupload_token() { return upload_tokenSpecified; }
+    private void Resetupload_token() { upload_tokenSpecified = false; }
+    
+
+    private ulong? _routing_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"routing_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong routing_id
+    {
+      get { return _routing_id?? default(ulong); }
+      set { _routing_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool routing_idSpecified
+    {
+      get { return _routing_id != null; }
+      set { if (value == (_routing_id== null)) _routing_id = value ? this.routing_id : (ulong?)null; }
+    }
+    private bool ShouldSerializerouting_id() { return routing_idSpecified; }
+    private void Resetrouting_id() { routing_idSpecified = false; }
+    
+
+    private uint? _app_id;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint app_id
+    {
+      get { return _app_id?? default(uint); }
+      set { _app_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool app_idSpecified
+    {
+      get { return _app_id != null; }
+      set { if (value == (_app_id== null)) _app_id = value ? this.app_id : (uint?)null; }
+    }
+    private bool ShouldSerializeapp_id() { return app_idSpecified; }
+    private void Resetapp_id() { app_idSpecified = false; }
+    
+
+    private uint? _depot_id;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"depot_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint depot_id
+    {
+      get { return _depot_id?? default(uint); }
+      set { _depot_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool depot_idSpecified
+    {
+      get { return _depot_id != null; }
+      set { if (value == (_depot_id== null)) _depot_id = value ? this.depot_id : (uint?)null; }
+    }
+    private bool ShouldSerializedepot_id() { return depot_idSpecified; }
+    private void Resetdepot_id() { depot_idSpecified = false; }
+    
+
+    private uint? _build_flags;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"build_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint build_flags
+    {
+      get { return _build_flags?? default(uint); }
+      set { _build_flags = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool build_flagsSpecified
+    {
+      get { return _build_flags != null; }
+      set { if (value == (_build_flags== null)) _build_flags = value ? this.build_flags : (uint?)null; }
+    }
+    private bool ShouldSerializebuild_flags() { return build_flagsSpecified; }
+    private void Resetbuild_flags() { build_flagsSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_FinishUploadDepot_Response")]
+  public partial class CPartnerApps_FinishUploadDepot_Response : global::ProtoBuf.IExtensible
+  {
+    public CPartnerApps_FinishUploadDepot_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_GetDepotBuildResult_Request")]
+  public partial class CPartnerApps_GetDepotBuildResult_Request : global::ProtoBuf.IExtensible
+  {
+    public CPartnerApps_GetDepotBuildResult_Request() {}
+    
+
+    private ulong? _upload_token;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"upload_token", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong upload_token
+    {
+      get { return _upload_token?? default(ulong); }
+      set { _upload_token = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool upload_tokenSpecified
+    {
+      get { return _upload_token != null; }
+      set { if (value == (_upload_token== null)) _upload_token = value ? this.upload_token : (ulong?)null; }
+    }
+    private bool ShouldSerializeupload_token() { return upload_tokenSpecified; }
+    private void Resetupload_token() { upload_tokenSpecified = false; }
+    
+
+    private ulong? _routing_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"routing_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong routing_id
+    {
+      get { return _routing_id?? default(ulong); }
+      set { _routing_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool routing_idSpecified
+    {
+      get { return _routing_id != null; }
+      set { if (value == (_routing_id== null)) _routing_id = value ? this.routing_id : (ulong?)null; }
+    }
+    private bool ShouldSerializerouting_id() { return routing_idSpecified; }
+    private void Resetrouting_id() { routing_idSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_GetDepotBuildResult_Response")]
+  public partial class CPartnerApps_GetDepotBuildResult_Response : global::ProtoBuf.IExtensible
+  {
+    public CPartnerApps_GetDepotBuildResult_Response() {}
+    
+
+    private ulong? _manifest_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"manifest_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong manifest_id
+    {
+      get { return _manifest_id?? default(ulong); }
+      set { _manifest_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool manifest_idSpecified
+    {
+      get { return _manifest_id != null; }
+      set { if (value == (_manifest_id== null)) _manifest_id = value ? this.manifest_id : (ulong?)null; }
+    }
+    private bool ShouldSerializemanifest_id() { return manifest_idSpecified; }
+    private void Resetmanifest_id() { manifest_idSpecified = false; }
+    
+
+    private string _error_msg;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"error_msg", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string error_msg
+    {
+      get { return _error_msg?? ""; }
+      set { _error_msg = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool error_msgSpecified
+    {
+      get { return _error_msg != null; }
+      set { if (value == (_error_msg== null)) _error_msg = value ? this.error_msg : (string)null; }
+    }
+    private bool ShouldSerializeerror_msg() { return error_msgSpecified; }
+    private void Reseterror_msg() { error_msgSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_FindDRMUploads_Request")]
   public partial class CPartnerApps_FindDRMUploads_Request : global::ProtoBuf.IExtensible
   {
@@ -650,9 +852,12 @@ namespace SteamKit2.Unified.Internal
       CPartnerApps_RequestUploadToken_Response RequestKVSignUploadToken(CPartnerApps_RequestUploadToken_Request request);
     CPartnerApps_RequestUploadToken_Response RequestDRMUploadToken(CPartnerApps_RequestUploadToken_Request request);
     CPartnerApps_RequestUploadToken_Response RequestCEGUploadToken(CPartnerApps_RequestUploadToken_Request request);
+    CPartnerApps_RequestUploadToken_Response RequestDepotUploadToken(CPartnerApps_RequestUploadToken_Request request);
     CPartnerApps_FinishUploadKVSign_Response FinishUploadKVSign(CPartnerApps_FinishUpload_Request request);
     CPartnerApps_FinishUploadLegacyDRM_Response FinishUploadDRMUpload(CPartnerApps_FinishUploadLegacyDRM_Request request);
     CPartnerApps_FinishUpload_Response FinishUploadCEGUpload(CPartnerApps_FinishUpload_Request request);
+    CPartnerApps_FinishUploadDepot_Response FinishUploadDepotUpload(CPartnerApps_FinishUploadDepot_Request request);
+    CPartnerApps_GetDepotBuildResult_Response GetDepotBuildResult(CPartnerApps_GetDepotBuildResult_Request request);
     CPartnerApps_FindDRMUploads_Response FindDRMUploads(CPartnerApps_FindDRMUploads_Request request);
     CPartnerApps_Download_Response Download(CPartnerApps_Download_Request request);
     
