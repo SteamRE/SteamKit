@@ -689,8 +689,7 @@ namespace SteamKit2
                 return false;
             }
 
-            SteamID sid = obj as SteamID;
-            if ( ( object )sid == null )
+            if ( !( obj is SteamID sid ) )
             {
                 return false;
             }
