@@ -548,6 +548,45 @@ namespace SteamKit2
             return RenderSteam2();
         }
 
+        /// <summary>
+        /// Converts this clan ID to a chat ID.
+        /// </summary>
+        /// <returns>The Chat ID for this clan's group chat.</returns>
+        public SteamID ToChatID()
+        {
+            if ( !IsClanAccount )
+            {
+                throw new InvalidOperationException( "Only Clan IDs can be converted to Chat IDs." );
+            }
+
+            SteamID chatID = ConvertToUInt64();
+            chatID.AccountInstance = ( uint )ChatInstanceFlags.Clan;
+            chatID.AccountType = EAccountType.Chat;
+            return chatID;
+        }
+
+        /// <summary>
+        /// Converts this chat ID to a clan ID.
+        /// This can be used to get the group that a group chat is associated with.
+        /// </summary>
+        /// <returns><c>true</c> if this chat ID represents a group chat, <c>false</c> otherwise.</returns>\
+        /// <param name="groupID">If the method returned <c>true</c>, then this is the group that this chat is associated with. Otherwise, this is <c>null</c>.</param>
+        public bool TryGetClanID( out SteamID groupID )
+        {
+            if ( IsChatAccount && AccountInstance == (uint)ChatInstanceFlags.Clan )
+            {
+                groupID = ConvertToUInt64();
+                groupID.AccountType = EAccountType.Clan;
+                groupID.AccountInstance = 0;
+                return true;
+            }
+            else
+            {
+                groupID = default( SteamID );
+                return false;
+            }
+        }
+
         string RenderSteam2()
         {
             switch ( AccountType )
