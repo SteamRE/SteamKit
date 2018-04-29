@@ -384,16 +384,14 @@ namespace SteamKit2
 
             if ( chatId.IsClanAccount )
             {
-                // this steamid is incorrect, so we'll fix it up
-                chatId.AccountInstance = ( uint )SteamID.ChatInstanceFlags.Clan;
-                chatId.AccountType = EAccountType.Chat;
+                chatId = chatId.ToChatID();
             }
 
             joinChat.Body.SteamIdChat = chatId;
 
             Client.Send( joinChat );
-
         }
+
         /// <summary>
         /// Attempts to leave a chat room.
         /// </summary>
