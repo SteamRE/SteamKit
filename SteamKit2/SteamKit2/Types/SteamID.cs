@@ -552,6 +552,7 @@ namespace SteamKit2
         /// Converts this clan ID to a chat ID.
         /// </summary>
         /// <returns>The Chat ID for this clan's group chat.</returns>
+        /// <exception cref="InvalidOperationException">This SteamID is not a clan ID.</exception>
         public SteamID ToChatID()
         {
             if ( !IsClanAccount )
