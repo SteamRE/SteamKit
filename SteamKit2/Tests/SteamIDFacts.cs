@@ -1,5 +1,6 @@
-﻿using Xunit;
+﻿using System;
 using SteamKit2;
+using Xunit;
 
 namespace Tests
 {
@@ -314,6 +315,84 @@ namespace Tests
         {
             SteamID sid = new SteamID( 123, EUniverse.Beta, (EAccountType)(-1) );
             Assert.Equal( "[i:2:123]", sid.Render() );
+        }
+
+        [Fact]
+        public void ToChatIDConvertsWellKnownID()
+        {
+            var clanID = new SteamID( 4, EUniverse.Public, EAccountType.Clan );
+            var expectedChatID = 110338190870577156UL;
+            Assert.Equal( expectedChatID, clanID.ToChatID().ConvertToUInt64() );
+        }
+
+        [Fact]
+        public void ToChatIDDoesNotModifySelf()
+        {
+            var clanID = new SteamID( 4, EUniverse.Public, EAccountType.Clan );
+            clanID.ToChatID();
+            Assert.Equal( EUniverse.Public, clanID.AccountUniverse );
+            Assert.Equal( EAccountType.Clan, clanID.AccountType );
+            Assert.Equal( 0u, clanID.AccountInstance );
+            Assert.Equal( 4u, clanID.AccountID );
+        }
+
+        [InlineData(EAccountType.AnonGameServer)]
+        [InlineData(EAccountType.AnonUser)]
+        [InlineData(EAccountType.Chat)]
+        [InlineData(EAccountType.ConsoleUser)]
+        [InlineData(EAccountType.ContentServer)]
+        [InlineData(EAccountType.GameServer)]
+        [InlineData(EAccountType.Individual)]
+        [InlineData(EAccountType.Multiseat)]
+        [InlineData(EAccountType.Pending)]
+        public void ToChatIDOnlySupportsClans( EAccountType type )
+        {
+            var id = new SteamID( 1, EUniverse.Public, type );
+            Assert.Throws<InvalidOperationException>( () => id.ToChatID() );
+        }
+
+        [Fact]
+        public void TryGetClanIDConvertsWellKnownID()
+        {
+            var clanID = new SteamID( 4, (uint)SteamID.ChatInstanceFlags.Clan, EUniverse.Public, EAccountType.Chat );
+            Assert.True( clanID.TryGetClanID( out var groupID ) );
+            Assert.Equal( 103582791429521412UL, groupID.ConvertToUInt64() );
+        }
+
+        [Fact]
+        public void TryGetClanIDDoesNotModifySelf()
+        {
+            var clanID = new SteamID(4, (uint)SteamID.ChatInstanceFlags.Clan, EUniverse.Public, EAccountType.Chat );
+            Assert.True( clanID.TryGetClanID( out var groupID ) );
+
+            Assert.Equal( EUniverse.Public, clanID.AccountUniverse );
+            Assert.Equal( EAccountType.Chat, clanID.AccountType );
+            Assert.Equal( ( uint )SteamID.ChatInstanceFlags.Clan, clanID.AccountInstance );
+            Assert.Equal( 4u, clanID.AccountID );
+        }
+
+        [Fact]
+        public void TryGetClanIDReturnsFalseForAdHocChatRoom()
+        {
+            var chatID = new SteamID( 108093571196988453 );
+            Assert.False( chatID.TryGetClanID( out var groupID ), groupID?.Render() );
+            Assert.Null( groupID );
+        }
+
+        [InlineData(EAccountType.AnonGameServer)]
+        [InlineData(EAccountType.AnonUser)]
+        [InlineData(EAccountType.Chat)]
+        [InlineData(EAccountType.ConsoleUser)]
+        [InlineData(EAccountType.ContentServer)]
+        [InlineData(EAccountType.GameServer)]
+        [InlineData(EAccountType.Individual)]
+        [InlineData(EAccountType.Multiseat)]
+        [InlineData(EAccountType.Pending)]
+        public void TryGetClanIDOnlySupportsClanChatRooms( EAccountType type )
+        {
+            var id = new SteamID( 4, ( uint )SteamID.ChatInstanceFlags.Clan, EUniverse.Public, type );
+            Assert.False( id.TryGetClanID( out var groupID ), groupID?.Render() );
+            Assert.Null( groupID );
         }
     }
 }
