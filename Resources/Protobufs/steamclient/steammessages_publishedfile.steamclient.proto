@@ -2,6 +2,15 @@ import "steammessages_unified_base.steamclient.proto";
 
 option cc_generic_services = true;
 
+enum EPublishedFileForSaleStatus {
+	k_PFFSS_NotForSale = 0;
+	k_PFFSS_PendingApproval = 1;
+	k_PFFSS_ApprovedForSale = 2;
+	k_PFFSS_RejectedForSale = 3;
+	k_PFFSS_NoLongerForSale = 4;
+	k_PFFSS_TentativeApproval = 5;
+}
+
 message CPublishedFile_Subscribe_Request {
 	optional uint64 publishedfileid = 1;
 	optional uint32 list_type = 2;
@@ -66,6 +75,8 @@ message CPublishedFile_GetDetails_Request {
 	optional bool includemetadata = 11 [(description) = "If true, populate the metadata field."];
 	optional int32 language = 12 [default = 0, (description) = "Specifies the localized text to return. Defaults to English."];
 	optional uint32 return_playtime_stats = 13 [(description) = "Return playtime stats for the specified number of days before today."];
+	optional uint32 appid = 14;
+	optional bool strip_description_bbcode = 15 [(description) = "Strips BBCode from descriptions."];
 }
 
 message PublishedFileDetails {
@@ -105,7 +116,7 @@ message PublishedFileDetails {
 	message ForSaleData {
 		optional bool is_for_sale = 1;
 		optional uint32 price_category = 2;
-		optional .PublishedFileDetails.EPublishedFileForSaleStatus estatus = 3 [default = k_PFFSS_NotForSale];
+		optional .EPublishedFileForSaleStatus estatus = 3 [default = k_PFFSS_NotForSale];
 		optional uint32 price_category_floor = 4;
 		optional bool price_is_pay_what_you_want = 5;
 		optional uint32 discount_percentage = 6;
@@ -114,15 +125,6 @@ message PublishedFileDetails {
 	message PlaytimeStats {
 		optional uint64 playtime_seconds = 1;
 		optional uint64 num_sessions = 2;
-	}
-
-	enum EPublishedFileForSaleStatus {
-		k_PFFSS_NotForSale = 0;
-		k_PFFSS_PendingApproval = 1;
-		k_PFFSS_ApprovedForSale = 2;
-		k_PFFSS_RejectedForSale = 3;
-		k_PFFSS_NoLongerForSale = 4;
-		k_PFFSS_TentativeApproval = 5;
 	}
 
 	optional uint32 result = 1;
@@ -250,6 +252,7 @@ message CPublishedFile_GetUserFiles_Request {
 	optional bool return_for_sale_data = 26 [(description) = "Return pricing information, if applicable"];
 	optional bool return_metadata = 28 [default = false, (description) = "Populate the metadata field"];
 	optional uint32 return_playtime_stats = 31 [(description) = "Return playtime stats for the specified number of days before today."];
+	optional bool strip_description_bbcode = 32 [(description) = "Strips BBCode from descriptions."];
 }
 
 message CPublishedFile_GetUserFiles_Response {
@@ -359,6 +362,8 @@ message CPublishedFile_QueryFiles_Request {
 	optional bool return_for_sale_data = 30 [(description) = "Return pricing information, if applicable"];
 	optional bool return_metadata = 32 [default = false, (description) = "Populate the metadata"];
 	optional uint32 return_playtime_stats = 36 [(description) = "Return playtime stats for the specified number of days before today."];
+	optional bool return_details = 37 [(description) = "By default, if none of the other 'return_*' fields are set, only some voting details are returned. Set this to true to return the default set of details."];
+	optional bool strip_description_bbcode = 38 [(description) = "Strips BBCode from descriptions."];
 }
 
 message CPublishedFile_QueryFiles_Response {

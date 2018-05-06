@@ -106,6 +106,52 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_ClientSeatCheckout_Notification")]
+  public partial class CSiteLicense_ClientSeatCheckout_Notification : global::ProtoBuf.IExtensible
+  {
+    public CSiteLicense_ClientSeatCheckout_Notification() {}
+    
+
+    private uint? _appid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint appid
+    {
+      get { return _appid?? default(uint); }
+      set { _appid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
+
+    private uint? _eresult;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint eresult
+    {
+      get { return _eresult?? default(uint); }
+      set { _eresult = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool eresultSpecified
+    {
+      get { return _eresult != null; }
+      set { if (value == (_eresult== null)) _eresult = value ? this.eresult : (uint?)null; }
+    }
+    private bool ShouldSerializeeresult() { return eresultSpecified; }
+    private void Reseteresult() { eresultSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_InitiateAssociation_Request")]
   public partial class CSiteLicense_InitiateAssociation_Request : global::ProtoBuf.IExtensible
   {
@@ -285,6 +331,24 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializenew_session() { return new_sessionSpecified; }
     private void Resetnew_session() { new_sessionSpecified = false; }
     
+
+    private bool? _no_site_licenses;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"no_site_licenses", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool no_site_licenses
+    {
+      get { return _no_site_licenses?? default(bool); }
+      set { _no_site_licenses = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool no_site_licensesSpecified
+    {
+      get { return _no_site_licenses != null; }
+      set { if (value == (_no_site_licenses== null)) _no_site_licenses = value ? this.no_site_licenses : (bool?)null; }
+    }
+    private bool ShouldSerializeno_site_licenses() { return no_site_licensesSpecified; }
+    private void Resetno_site_licenses() { no_site_licensesSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -349,6 +413,24 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializeinstanceid() { return instanceidSpecified; }
     private void Resetinstanceid() { instanceidSpecified = false; }
     
+
+    private string _machine_name;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"machine_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string machine_name
+    {
+      get { return _machine_name?? ""; }
+      set { _machine_name = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool machine_nameSpecified
+    {
+      get { return _machine_name != null; }
+      set { if (value == (_machine_name== null)) _machine_name = value ? this.machine_name : (string)null; }
+    }
+    private bool ShouldSerializemachine_name() { return machine_nameSpecified; }
+    private void Resetmachine_name() { machine_nameSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -406,26 +488,8 @@ namespace SteamKit2.Unified.Internal
     private void Resetinstanceid() { instanceidSpecified = false; }
     
 
-    private uint? _packageid;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"packageid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint packageid
-    {
-      get { return _packageid?? default(uint); }
-      set { _packageid = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool packageidSpecified
-    {
-      get { return _packageid != null; }
-      set { if (value == (_packageid== null)) _packageid = value ? this.packageid : (uint?)null; }
-    }
-    private bool ShouldSerializepackageid() { return packageidSpecified; }
-    private void Resetpackageid() { packageidSpecified = false; }
-    
-
     private uint? _appid;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint appid
     {
       get { return _appid?? default(uint); }
@@ -462,22 +526,58 @@ namespace SteamKit2.Unified.Internal
     public CSiteLicense_ClientGetAvailableSeats_Request() {}
     
 
-    private uint? _packageid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"packageid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint packageid
+    private ulong? _steamid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong steamid
     {
-      get { return _packageid?? default(uint); }
-      set { _packageid = value; }
+      get { return _steamid?? default(ulong); }
+      set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
     [global::System.ComponentModel.Browsable(false)]
-    public bool packageidSpecified
+    public bool steamidSpecified
     {
-      get { return _packageid != null; }
-      set { if (value == (_packageid== null)) _packageid = value ? this.packageid : (uint?)null; }
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
     }
-    private bool ShouldSerializepackageid() { return packageidSpecified; }
-    private void Resetpackageid() { packageidSpecified = false; }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
+
+    private ulong? _instanceid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"instanceid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong instanceid
+    {
+      get { return _instanceid?? default(ulong); }
+      set { _instanceid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool instanceidSpecified
+    {
+      get { return _instanceid != null; }
+      set { if (value == (_instanceid== null)) _instanceid = value ? this.instanceid : (ulong?)null; }
+    }
+    private bool ShouldSerializeinstanceid() { return instanceidSpecified; }
+    private void Resetinstanceid() { instanceidSpecified = false; }
+    
+
+    private uint? _appid;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint appid
+    {
+      get { return _appid?? default(uint); }
+      set { _appid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -515,6 +615,7 @@ namespace SteamKit2.Unified.Internal
     public interface ISiteManagerClient
     {
       CSiteManagerClient_IncomingClient_Response IncomingClient(CSiteManagerClient_IncomingClient_Request request);
+    NoResponse ClientSeatCheckoutNotification(CSiteLicense_ClientSeatCheckout_Notification request);
     
     }
     

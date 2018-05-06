@@ -1305,6 +1305,24 @@ namespace SteamKit2.GC.CSGO.Internal
     private bool ShouldSerializepartner_accountflags() { return partner_accountflagsSpecified; }
     private void Resetpartner_accountflags() { partner_accountflagsSpecified = false; }
     
+
+    private uint? _partner_accountbalance;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"partner_accountbalance", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint partner_accountbalance
+    {
+      get { return _partner_accountbalance?? default(uint); }
+      set { _partner_accountbalance = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool partner_accountbalanceSpecified
+    {
+      get { return _partner_accountbalance != null; }
+      set { if (value == (_partner_accountbalance== null)) _partner_accountbalance = value ? this.partner_accountbalance : (uint?)null; }
+    }
+    private bool ShouldSerializepartner_accountbalance() { return partner_accountbalanceSpecified; }
+    private void Resetpartner_accountbalance() { partner_accountbalanceSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1516,6 +1534,42 @@ namespace SteamKit2.GC.CSGO.Internal
     }
     private bool ShouldSerializecurrency() { return currencySpecified; }
     private void Resetcurrency() { currencySpecified = false; }
+    
+
+    private uint? _balance;
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"balance", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint balance
+    {
+      get { return _balance?? default(uint); }
+      set { _balance = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool balanceSpecified
+    {
+      get { return _balance != null; }
+      set { if (value == (_balance== null)) _balance = value ? this.balance : (uint?)null; }
+    }
+    private bool ShouldSerializebalance() { return balanceSpecified; }
+    private void Resetbalance() { balanceSpecified = false; }
+    
+
+    private string _balance_url;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"balance_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string balance_url
+    {
+      get { return _balance_url?? ""; }
+      set { _balance_url = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool balance_urlSpecified
+    {
+      get { return _balance_url != null; }
+      set { if (value == (_balance_url== null)) _balance_url = value ? this.balance_url : (string)null; }
+    }
+    private bool ShouldSerializebalance_url() { return balance_urlSpecified; }
+    private void Resetbalance_url() { balance_urlSpecified = false; }
     
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Location")]
   public partial class Location : global::ProtoBuf.IExtensible

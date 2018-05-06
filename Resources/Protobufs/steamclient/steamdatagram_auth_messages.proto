@@ -1,0 +1,56 @@
+option cc_generic_services = false;
+
+message CMsgSteamDatagramRelayAuthTicket {
+	message ExtraField {
+		optional string name = 1;
+		optional string string_value = 2;
+		optional sint64 int64_value = 3;
+		optional fixed64 fixed64_value = 5;
+	}
+
+	optional fixed32 time_expiry = 1;
+	optional fixed64 authorized_steam_id = 2;
+	optional fixed32 authorized_public_ip = 3;
+	optional fixed64 gameserver_steam_id = 4;
+	optional fixed64 gameserver_net_id = 5;
+	optional bytes legacy_signature = 6;
+	optional uint32 app_id = 7;
+	optional fixed32 gameserver_pop_id = 9;
+	optional uint32 virtual_port = 10;
+	repeated .CMsgSteamDatagramRelayAuthTicket.ExtraField extra_fields = 8;
+}
+
+message CMsgSteamDatagramSignedRelayAuthTicket {
+	optional fixed64 reserved_do_not_use = 1;
+	optional fixed64 key_id = 2;
+	optional bytes ticket = 3;
+	optional bytes signature = 4;
+}
+
+message CMsgSteamDatagramCertificate {
+	enum EKeyType {
+		INVALID = 0;
+		ED25519 = 1;
+	}
+
+	optional .CMsgSteamDatagramCertificate.EKeyType key_type = 1 [default = INVALID];
+	optional bytes key_data = 2;
+	optional fixed64 steam_id = 4;
+	repeated fixed32 gameserver_datacenter_ids = 5;
+	optional fixed32 time_created = 8;
+	optional fixed32 time_expiry = 9;
+	optional uint32 app_id = 10;
+}
+
+message CMsgSteamDatagramCertificateSigned {
+	optional bytes cert = 4;
+	optional fixed64 ca_key_id = 5;
+	optional bytes ca_signature = 6;
+}
+
+message CMsgSteamDatagramCachedCredentialsForApp {
+	optional bytes private_key = 1;
+	optional bytes cert = 2;
+	repeated bytes relay_tickets = 3;
+}
+

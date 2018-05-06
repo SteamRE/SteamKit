@@ -365,6 +365,7 @@ message CCSUsrMsg_ServerRankUpdate {
 		optional int32 rank_new = 3;
 		optional int32 num_wins = 4;
 		optional float rank_change = 5;
+		optional int32 rank_type_id = 6;
 	}
 
 	repeated .CCSUsrMsg_ServerRankUpdate.RankUpdate rank_update = 1;

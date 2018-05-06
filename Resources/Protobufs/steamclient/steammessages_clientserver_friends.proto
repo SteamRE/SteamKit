@@ -109,6 +109,11 @@ message CMsgPersonaChangeResponse {
 
 message CMsgClientPersonaState {
 	message Friend {
+		message KV {
+			optional string key = 1;
+			optional string value = 2;
+		}
+
 		optional fixed64 friendid = 1;
 		optional uint32 persona_state = 2;
 		optional uint32 game_played_app_id = 3;
@@ -131,6 +136,8 @@ message CMsgClientPersonaState {
 		optional string clan_tag = 65;
 		optional string facebook_name = 66;
 		optional uint64 facebook_id = 67;
+		repeated .CMsgClientPersonaState.Friend.KV rich_presence = 71;
+		optional fixed64 broadcast_id = 72;
 	}
 
 	optional uint32 status_flags = 1;

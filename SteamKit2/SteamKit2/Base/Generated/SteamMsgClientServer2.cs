@@ -6222,6 +6222,24 @@ namespace SteamKit2.Internal
     private bool ShouldSerializebytes() { return bytesSpecified; }
     private void Resetbytes() { bytesSpecified = false; }
     
+
+    private string _host_name;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"host_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string host_name
+    {
+      get { return _host_name?? ""; }
+      set { _host_name = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool host_nameSpecified
+    {
+      get { return _host_name != null; }
+      set { if (value == (_host_name== null)) _host_name = value ? this.host_name : (string)null; }
+    }
+    private bool ShouldSerializehost_name() { return host_nameSpecified; }
+    private void Resethost_name() { host_nameSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -10770,6 +10788,24 @@ namespace SteamKit2.Internal
     }
     private bool ShouldSerializeuimode() { return uimodeSpecified; }
     private void Resetuimode() { uimodeSpecified = false; }
+    
+
+    private uint? _chat_mode;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"chat_mode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint chat_mode
+    {
+      get { return _chat_mode?? default(uint); }
+      set { _chat_mode = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool chat_modeSpecified
+    {
+      get { return _chat_mode != null; }
+      set { if (value == (_chat_mode== null)) _chat_mode = value ? this.chat_mode : (uint?)null; }
+    }
+    private bool ShouldSerializechat_mode() { return chat_modeSpecified; }
+    private void Resetchat_mode() { chat_modeSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

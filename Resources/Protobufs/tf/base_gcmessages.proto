@@ -7,11 +7,6 @@ enum EGCBaseMsg {
 	k_EMsgGCSystemMessage = 4001;
 	k_EMsgGCReplicateConVars = 4002;
 	k_EMsgGCConVarUpdated = 4003;
-	k_EMsgGCInviteToParty = 4501;
-	k_EMsgGCInvitationCreated = 4502;
-	k_EMsgGCPartyInviteResponse = 4503;
-	k_EMsgGCKickFromParty = 4504;
-	k_EMsgGCLeaveParty = 4505;
 	k_EMsgGCServerAvailable = 4506;
 	k_EMsgGCClientConnectToServer = 4507;
 	k_EMsgGCGameServerInfo = 4508;
@@ -49,18 +44,6 @@ message CMsgGCStorePurchaseInitResponse {
 	optional uint64 txn_id = 2;
 }
 
-message CSOPartyInvite {
-	optional uint64 group_id = 1 [(key_field) = true];
-	optional fixed64 sender_id = 2;
-	optional string sender_name = 3;
-}
-
-message CSOLobbyInvite {
-	optional uint64 group_id = 1 [(key_field) = true];
-	optional fixed64 sender_id = 2;
-	optional string sender_name = 3;
-}
-
 message CMsgSystemBroadcast {
 	optional string message = 1;
 }
@@ -91,35 +74,6 @@ message CMsgServerGoodbye {
 	optional .GCGoodbyeReason reason = 1 [default = GCGoodbyeReason_GC_GOING_DOWN];
 }
 
-message CMsgInviteToParty {
-	optional fixed64 steam_id = 1;
-	optional uint32 client_version = 2;
-	optional uint32 team_id = 3;
-	optional bool as_coach = 4;
-}
-
-message CMsgInvitationCreated {
-	optional uint64 group_id = 1;
-	optional fixed64 steam_id = 2;
-}
-
-message CMsgPartyInviteResponse {
-	optional uint64 party_id = 1;
-	optional bool accept = 2;
-	optional uint32 client_version = 3;
-	optional uint32 team_id = 4;
-	optional bool as_coach = 5;
-}
-
-message CMsgKickFromParty {
-	optional fixed64 steam_id = 1;
-}
-
-message CMsgLeaveParty {
-	optional uint64 party_id = 1;
-	optional uint64 lobby_id = 2;
-}
-
 message CMsgServerAvailable {
 }
 
@@ -148,6 +102,8 @@ message CSOEconGameAccountClient {
 	optional uint32 matchmaking_casual_ban_last_duration = 29;
 	optional uint32 matchmaking_casual_low_priority_last_duration = 30;
 	optional bool phone_identifying = 31 [default = false];
+	optional bool disable_party_quest_progress = 32 [default = false];
+	optional uint32 quest_reward_credits = 33;
 }
 
 message CSOItemCriteriaCondition {
@@ -169,6 +125,7 @@ message CSOItemCriteria {
 	repeated .CSOItemCriteriaCondition conditions = 9;
 	optional bool recent_only = 10;
 	optional string tags = 11;
+	optional string equip_regions = 12;
 }
 
 message CSOItemRecipe {
@@ -382,9 +339,9 @@ message CMsgSetItemPositions {
 }
 
 message CSOEconItemPresetInstance {
-	optional uint32 class_id = 2 [(key_field) = true];
-	optional uint32 preset_id = 3 [(key_field) = true];
-	optional uint32 slot_id = 4 [(key_field) = true];
+	optional uint32 class_id = 2 [(editable) = false, (allow_add) = false, (allow_delete) = false, (key_field) = true];
+	optional uint32 preset_id = 3 [(editable) = false, (allow_add) = false, (allow_delete) = false, (key_field) = true];
+	optional uint32 slot_id = 4 [(editable) = false, (allow_add) = false, (allow_delete) = false, (key_field) = true];
 	optional uint64 item_id = 5;
 }
 
@@ -439,7 +396,7 @@ message CMsgUpdatePeriodicEvent {
 }
 
 message CMsgGCIncrementKillCountResponse {
-	optional uint32 killer_account_id = 1 [(key_field) = true];
+	optional uint32 killer_account_id = 1 [(editable) = false, (allow_add) = false, (allow_delete) = false, (key_field) = true];
 	optional uint32 num_kills = 2;
 	optional uint32 item_def = 3;
 	optional uint32 level_type = 4;
@@ -551,6 +508,7 @@ message CMsgDeliverGiftResponseGiver {
 }
 
 message CSOEconGameAccountForGameServers {
+	optional bool disable_party_quest_progress = 6 [default = false];
 }
 
 message CWorkshop_PopulateItemDescriptions_Request {
