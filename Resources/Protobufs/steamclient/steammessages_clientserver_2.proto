@@ -1146,6 +1146,13 @@ message CMsgAMUnlockStreamingResponse {
 	optional bytes encryption_key = 2;
 }
 
+message CMsgAMUnlockHEVC {
+}
+
+message CMsgAMUnlockHEVCResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
 message CMsgClientPlayingSessionState {
 	optional bool playing_blocked = 2;
 	optional uint32 playing_app = 3;

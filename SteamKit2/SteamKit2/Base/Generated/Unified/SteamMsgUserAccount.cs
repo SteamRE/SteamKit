@@ -70,9 +70,48 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CUserAccount_RegisterCompatTool_Request")]
+  public partial class CUserAccount_RegisterCompatTool_Request : global::ProtoBuf.IExtensible
+  {
+    public CUserAccount_RegisterCompatTool_Request() {}
+    
+
+    private uint? _compat_tool;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"compat_tool", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint compat_tool
+    {
+      get { return _compat_tool?? default(uint); }
+      set { _compat_tool = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool compat_toolSpecified
+    {
+      get { return _compat_tool != null; }
+      set { if (value == (_compat_tool== null)) _compat_tool = value ? this.compat_tool : (uint?)null; }
+    }
+    private bool ShouldSerializecompat_tool() { return compat_toolSpecified; }
+    private void Resetcompat_tool() { compat_toolSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CUserAccount_RegisterCompatTool_Response")]
+  public partial class CUserAccount_RegisterCompatTool_Response : global::ProtoBuf.IExtensible
+  {
+    public CUserAccount_RegisterCompatTool_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface IUserAccount
     {
       CUserAccount_GetAccountLinkStatus_Response GetAccountLinkStatus(CUserAccount_GetAccountLinkStatus_Request request);
+    CUserAccount_RegisterCompatTool_Response RegisterCompatTool(CUserAccount_RegisterCompatTool_Request request);
     
     }
     
