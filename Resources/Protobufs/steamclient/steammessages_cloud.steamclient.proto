@@ -59,6 +59,7 @@ message CCloud_UserFile {
 	optional uint32 file_size = 5;
 	optional string url = 6;
 	optional fixed64 steamid_creator = 7;
+	optional uint32 flags = 8;
 }
 
 message CCloud_GetFileDetails_Response {
@@ -199,6 +200,19 @@ message CCloud_ClientConflictResolution_Notification {
 	optional bool chose_local_files = 2 [(description) = "Did the user choose to keep the files local to the machine they are on right now?"];
 }
 
+message CCloud_EnumerateUserApps_Request {
+}
+
+message CCloud_EnumerateUserApps_Response {
+	message Apps {
+		optional uint32 appid = 1;
+		optional int32 totalcount = 2;
+		optional int64 totalsize = 3;
+	}
+
+	repeated .CCloud_EnumerateUserApps_Response.Apps apps = 1;
+}
+
 service Cloud {
 	option (service_description) = "A service for Steam Cloud operations.";
 	rpc GetUploadServerInfo (.CCloud_GetUploadServerInfo_Request) returns (.CCloud_GetUploadServerInfo_Response) {
@@ -242,5 +256,8 @@ service Cloud {
 	}
 	rpc ClientConflictResolution (.CCloud_ClientConflictResolution_Notification) returns (.NoResponse) {
 		option (method_description) = "User has picked a resolution for a Cloud conflict.";
+	}
+	rpc EnumerateUserApps (.CCloud_EnumerateUserApps_Request) returns (.CCloud_EnumerateUserApps_Response) {
+		option (method_description) = "Enumerates apps stroing cloud files for a user.";
 	}
 }

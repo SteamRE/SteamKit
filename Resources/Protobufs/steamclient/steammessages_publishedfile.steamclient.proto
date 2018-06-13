@@ -191,6 +191,10 @@ message PublishedFileDetails {
 	optional fixed64 incompatible_actor = 59;
 	optional uint32 incompatible_timestamp = 60;
 	optional int32 language = 61 [default = 0, (description) = "The language of the title and description."];
+	optional bool app_has_adult_content = 65;
+	optional bool app_has_adult_content_sex = 66;
+	optional bool app_has_adult_content_violence = 67;
+	optional bool maybe_inappropriate = 68;
 }
 
 message CPublishedFile_GetDetails_Response {

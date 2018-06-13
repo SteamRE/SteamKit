@@ -201,6 +201,60 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializetimedtext_track_id() { return timedtext_track_idSpecified; }
     private void Resettimedtext_track_id() { timedtext_track_idSpecified = false; }
     
+
+    private uint? _last_modified;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"last_modified", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint last_modified
+    {
+      get { return _last_modified?? default(uint); }
+      set { _last_modified = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool last_modifiedSpecified
+    {
+      get { return _last_modified != null; }
+      set { if (value == (_last_modified== null)) _last_modified = value ? this.last_modified : (uint?)null; }
+    }
+    private bool ShouldSerializelast_modified() { return last_modifiedSpecified; }
+    private void Resetlast_modified() { last_modifiedSpecified = false; }
+    
+
+    private bool? _hide_from_watch_history;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"hide_from_watch_history", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool hide_from_watch_history
+    {
+      get { return _hide_from_watch_history?? (bool)false; }
+      set { _hide_from_watch_history = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool hide_from_watch_historySpecified
+    {
+      get { return _hide_from_watch_history != null; }
+      set { if (value == (_hide_from_watch_history== null)) _hide_from_watch_history = value ? this.hide_from_watch_history : (bool?)null; }
+    }
+    private bool ShouldSerializehide_from_watch_history() { return hide_from_watch_historySpecified; }
+    private void Resethide_from_watch_history() { hide_from_watch_historySpecified = false; }
+    
+
+    private bool? _hide_from_library;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"hide_from_library", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool hide_from_library
+    {
+      get { return _hide_from_library?? (bool)false; }
+      set { _hide_from_library = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool hide_from_librarySpecified
+    {
+      get { return _hide_from_library != null; }
+      set { if (value == (_hide_from_library== null)) _hide_from_library = value ? this.hide_from_library : (bool?)null; }
+    }
+    private bool ShouldSerializehide_from_library() { return hide_from_librarySpecified; }
+    private void Resethide_from_library() { hide_from_librarySpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
