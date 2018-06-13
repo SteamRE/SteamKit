@@ -22,8 +22,6 @@ namespace NetHookAnalyzer2
             { EMsg.ClientFriendMsgIncoming, typeof(CMsgClientFriendMsgIncoming) },
             { EMsg.ClientFriendMsgEchoToSender, typeof(CMsgClientFriendMsgIncoming) },
             { EMsg.ClientCurrentUIMode, typeof(CMsgClientUIMode) },
-            { EMsg.ClientCreateAccountProto, typeof(CMsgClientCreateAccount) },
-            { EMsg.ClientCreateAccountProtoResponse, typeof(CMsgClientCreateAccountResponse) },
             { EMsg.ClientGetNumberOfCurrentPlayersDP, typeof(CMsgDPGetNumberOfCurrentPlayers) },
             { EMsg.ClientGetNumberOfCurrentPlayersDPResponse, typeof(CMsgDPGetNumberOfCurrentPlayersResponse) },
 
