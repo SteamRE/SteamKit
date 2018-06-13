@@ -41,6 +41,7 @@ namespace SteamKit2
 		ClientPackageVersions = 148,
 		TimestampRequest = 149,
 		TimestampResponse = 150,
+		ServiceMethodCallFromClient = 151,
 		BaseShell = 200,
 		AssignSysID = 200,
 		Exit = 201,
