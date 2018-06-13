@@ -455,5 +455,176 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ContentDeltaChunks")]
+  public partial class ContentDeltaChunks : global::ProtoBuf.IExtensible
+  {
+    public ContentDeltaChunks() {}
+    
+
+    private uint? _depot_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"depot_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint depot_id
+    {
+      get { return _depot_id?? default(uint); }
+      set { _depot_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool depot_idSpecified
+    {
+      get { return _depot_id != null; }
+      set { if (value == (_depot_id== null)) _depot_id = value ? this.depot_id : (uint?)null; }
+    }
+    private bool ShouldSerializedepot_id() { return depot_idSpecified; }
+    private void Resetdepot_id() { depot_idSpecified = false; }
+    
+
+    private ulong? _manifest_id_source;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"manifest_id_source", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong manifest_id_source
+    {
+      get { return _manifest_id_source?? default(ulong); }
+      set { _manifest_id_source = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool manifest_id_sourceSpecified
+    {
+      get { return _manifest_id_source != null; }
+      set { if (value == (_manifest_id_source== null)) _manifest_id_source = value ? this.manifest_id_source : (ulong?)null; }
+    }
+    private bool ShouldSerializemanifest_id_source() { return manifest_id_sourceSpecified; }
+    private void Resetmanifest_id_source() { manifest_id_sourceSpecified = false; }
+    
+
+    private ulong? _manifest_id_target;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"manifest_id_target", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong manifest_id_target
+    {
+      get { return _manifest_id_target?? default(ulong); }
+      set { _manifest_id_target = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool manifest_id_targetSpecified
+    {
+      get { return _manifest_id_target != null; }
+      set { if (value == (_manifest_id_target== null)) _manifest_id_target = value ? this.manifest_id_target : (ulong?)null; }
+    }
+    private bool ShouldSerializemanifest_id_target() { return manifest_id_targetSpecified; }
+    private void Resetmanifest_id_target() { manifest_id_targetSpecified = false; }
+    
+    private readonly global::System.Collections.Generic.List<ContentDeltaChunks.DeltaChunk> _deltaChunks = new global::System.Collections.Generic.List<ContentDeltaChunks.DeltaChunk>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"deltaChunks", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<ContentDeltaChunks.DeltaChunk> deltaChunks
+    {
+      get { return _deltaChunks; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"DeltaChunk")]
+  public partial class DeltaChunk : global::ProtoBuf.IExtensible
+  {
+    public DeltaChunk() {}
+    
+
+    private byte[] _sha_source;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"sha_source", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] sha_source
+    {
+      get { return _sha_source?? null; }
+      set { _sha_source = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool sha_sourceSpecified
+    {
+      get { return _sha_source != null; }
+      set { if (value == (_sha_source== null)) _sha_source = value ? this.sha_source : (byte[])null; }
+    }
+    private bool ShouldSerializesha_source() { return sha_sourceSpecified; }
+    private void Resetsha_source() { sha_sourceSpecified = false; }
+    
+
+    private byte[] _sha_target;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"sha_target", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] sha_target
+    {
+      get { return _sha_target?? null; }
+      set { _sha_target = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool sha_targetSpecified
+    {
+      get { return _sha_target != null; }
+      set { if (value == (_sha_target== null)) _sha_target = value ? this.sha_target : (byte[])null; }
+    }
+    private bool ShouldSerializesha_target() { return sha_targetSpecified; }
+    private void Resetsha_target() { sha_targetSpecified = false; }
+    
+
+    private uint? _size_original;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"size_original", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint size_original
+    {
+      get { return _size_original?? default(uint); }
+      set { _size_original = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool size_originalSpecified
+    {
+      get { return _size_original != null; }
+      set { if (value == (_size_original== null)) _size_original = value ? this.size_original : (uint?)null; }
+    }
+    private bool ShouldSerializesize_original() { return size_originalSpecified; }
+    private void Resetsize_original() { size_originalSpecified = false; }
+    
+
+    private uint? _patch_method;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"patch_method", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint patch_method
+    {
+      get { return _patch_method?? default(uint); }
+      set { _patch_method = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool patch_methodSpecified
+    {
+      get { return _patch_method != null; }
+      set { if (value == (_patch_method== null)) _patch_method = value ? this.patch_method : (uint?)null; }
+    }
+    private bool ShouldSerializepatch_method() { return patch_methodSpecified; }
+    private void Resetpatch_method() { patch_methodSpecified = false; }
+    
+
+    private byte[] _chunk;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"chunk", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] chunk
+    {
+      get { return _chunk?? null; }
+      set { _chunk = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool chunkSpecified
+    {
+      get { return _chunk != null; }
+      set { if (value == (_chunk== null)) _chunk = value ? this.chunk : (byte[])null; }
+    }
+    private bool ShouldSerializechunk() { return chunkSpecified; }
+    private void Resetchunk() { chunkSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
 }
 #pragma warning restore 1591

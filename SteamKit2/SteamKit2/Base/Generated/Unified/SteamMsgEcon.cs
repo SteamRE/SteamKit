@@ -14,6 +14,62 @@
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CEcon_GetTradeOfferAccessToken_Request")]
+  public partial class CEcon_GetTradeOfferAccessToken_Request : global::ProtoBuf.IExtensible
+  {
+    public CEcon_GetTradeOfferAccessToken_Request() {}
+    
+
+    private bool? _generate_new_token;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"generate_new_token", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool generate_new_token
+    {
+      get { return _generate_new_token?? default(bool); }
+      set { _generate_new_token = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool generate_new_tokenSpecified
+    {
+      get { return _generate_new_token != null; }
+      set { if (value == (_generate_new_token== null)) _generate_new_token = value ? this.generate_new_token : (bool?)null; }
+    }
+    private bool ShouldSerializegenerate_new_token() { return generate_new_tokenSpecified; }
+    private void Resetgenerate_new_token() { generate_new_tokenSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CEcon_GetTradeOfferAccessToken_Response")]
+  public partial class CEcon_GetTradeOfferAccessToken_Response : global::ProtoBuf.IExtensible
+  {
+    public CEcon_GetTradeOfferAccessToken_Response() {}
+    
+
+    private string _trade_offer_access_token;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"trade_offer_access_token", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string trade_offer_access_token
+    {
+      get { return _trade_offer_access_token?? ""; }
+      set { _trade_offer_access_token = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool trade_offer_access_tokenSpecified
+    {
+      get { return _trade_offer_access_token != null; }
+      set { if (value == (_trade_offer_access_token== null)) _trade_offer_access_token = value ? this.trade_offer_access_token : (string)null; }
+    }
+    private bool ShouldSerializetrade_offer_access_token() { return trade_offer_access_tokenSpecified; }
+    private void Resettrade_offer_access_token() { trade_offer_access_tokenSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CEcon_ClientGetItemShopOverlayAuthURL_Request")]
   public partial class CEcon_ClientGetItemShopOverlayAuthURL_Request : global::ProtoBuf.IExtensible
   {
@@ -862,7 +918,8 @@ namespace SteamKit2.Unified.Internal
   
     public interface IEcon
     {
-      CEcon_ClientGetItemShopOverlayAuthURL_Response ClientGetItemShopOverlayAuthURL(CEcon_ClientGetItemShopOverlayAuthURL_Request request);
+      CEcon_GetTradeOfferAccessToken_Response GetTradeOfferAccessToken(CEcon_GetTradeOfferAccessToken_Request request);
+    CEcon_ClientGetItemShopOverlayAuthURL_Response ClientGetItemShopOverlayAuthURL(CEcon_ClientGetItemShopOverlayAuthURL_Request request);
     CEcon_GetAssetClassInfo_Response GetAssetClassInfo(CEcon_GetAssetClassInfo_Request request);
     
     }

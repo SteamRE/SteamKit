@@ -631,6 +631,24 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializesteamid_creator() { return steamid_creatorSpecified; }
     private void Resetsteamid_creator() { steamid_creatorSpecified = false; }
     
+
+    private uint? _flags;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint flags
+    {
+      get { return _flags?? default(uint); }
+      set { _flags = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool flagsSpecified
+    {
+      get { return _flags != null; }
+      set { if (value == (_flags== null)) _flags = value ? this.flags : (uint?)null; }
+    }
+    private bool ShouldSerializeflags() { return flagsSpecified; }
+    private void Resetflags() { flagsSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2143,6 +2161,97 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_EnumerateUserApps_Request")]
+  public partial class CCloud_EnumerateUserApps_Request : global::ProtoBuf.IExtensible
+  {
+    public CCloud_EnumerateUserApps_Request() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_EnumerateUserApps_Response")]
+  public partial class CCloud_EnumerateUserApps_Response : global::ProtoBuf.IExtensible
+  {
+    public CCloud_EnumerateUserApps_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<CCloud_EnumerateUserApps_Response.Apps> _apps = new global::System.Collections.Generic.List<CCloud_EnumerateUserApps_Response.Apps>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"apps", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CCloud_EnumerateUserApps_Response.Apps> apps
+    {
+      get { return _apps; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Apps")]
+  public partial class Apps : global::ProtoBuf.IExtensible
+  {
+    public Apps() {}
+    
+
+    private uint? _appid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint appid
+    {
+      get { return _appid?? default(uint); }
+      set { _appid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
+
+    private int? _totalcount;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"totalcount", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int totalcount
+    {
+      get { return _totalcount?? default(int); }
+      set { _totalcount = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool totalcountSpecified
+    {
+      get { return _totalcount != null; }
+      set { if (value == (_totalcount== null)) _totalcount = value ? this.totalcount : (int?)null; }
+    }
+    private bool ShouldSerializetotalcount() { return totalcountSpecified; }
+    private void Resettotalcount() { totalcountSpecified = false; }
+    
+
+    private long? _totalsize;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"totalsize", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long totalsize
+    {
+      get { return _totalsize?? default(long); }
+      set { _totalsize = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool totalsizeSpecified
+    {
+      get { return _totalsize != null; }
+      set { if (value == (_totalsize== null)) _totalsize = value ? this.totalsize : (long?)null; }
+    }
+    private bool ShouldSerializetotalsize() { return totalsizeSpecified; }
+    private void Resettotalsize() { totalsizeSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface ICloud
     {
       CCloud_GetUploadServerInfo_Response GetUploadServerInfo(CCloud_GetUploadServerInfo_Request request);
@@ -2159,6 +2268,7 @@ namespace SteamKit2.Unified.Internal
     CCloud_ClientFileDownload_Response ClientFileDownload(CCloud_ClientFileDownload_Request request);
     CCloud_ClientDeleteFile_Response ClientDeleteFile(CCloud_ClientDeleteFile_Request request);
     NoResponse ClientConflictResolution(CCloud_ClientConflictResolution_Notification request);
+    CCloud_EnumerateUserApps_Response EnumerateUserApps(CCloud_EnumerateUserApps_Request request);
     
     }
     
