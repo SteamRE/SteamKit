@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
-v 2.1.0 (Beta)	May 27, 2018
+v 2.1.0			Jun 13, 2018
 ------------------------------------------------------------------------------
 * Added `SimpleConsoleDebugListener`.
 * Added helper methods to convert between Clan (Group) SteamIDs and their corresponding Chat SteamIDs.
@@ -8,6 +8,7 @@ v 2.1.0 (Beta)	May 27, 2018
 * Fixed several possible crashes.
 * Fixed NuGet package description.
 * Fixed `UFSClient` sending an extra `DisconnectedCallback` when connecting.
+* Updated Steam enums and protobufs.
 
 BREAKING CHANGES
 * `SteamFriends.SetPersonaName()` and `SteamFriends.SetPersonaState()` are no longer Job-based.
