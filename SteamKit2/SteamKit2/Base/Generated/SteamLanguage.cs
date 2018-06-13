@@ -1667,7 +1667,8 @@ namespace SteamKit2
 		Snooze = 4,
 		LookingToTrade = 5,
 		LookingToPlay = 6,
-		Max = 7,
+		Invisible = 7,
+		Max = 8,
 	}
 	public enum EAccountType
 	{
