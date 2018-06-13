@@ -1159,6 +1159,150 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetBorrowerPlayHistory_Request")]
+  public partial class CDeviceAuth_GetBorrowerPlayHistory_Request : global::ProtoBuf.IExtensible
+  {
+    public CDeviceAuth_GetBorrowerPlayHistory_Request() {}
+    
+
+    private ulong? _steamid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong steamid
+    {
+      get { return _steamid?? default(ulong); }
+      set { _steamid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetBorrowerPlayHistory_Response")]
+  public partial class CDeviceAuth_GetBorrowerPlayHistory_Response : global::ProtoBuf.IExtensible
+  {
+    public CDeviceAuth_GetBorrowerPlayHistory_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<CDeviceAuth_GetBorrowerPlayHistory_Response.LenderHistory> _lender_history = new global::System.Collections.Generic.List<CDeviceAuth_GetBorrowerPlayHistory_Response.LenderHistory>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"lender_history", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CDeviceAuth_GetBorrowerPlayHistory_Response.LenderHistory> lender_history
+    {
+      get { return _lender_history; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"GameHistory")]
+  public partial class GameHistory : global::ProtoBuf.IExtensible
+  {
+    public GameHistory() {}
+    
+
+    private uint? _appid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint appid
+    {
+      get { return _appid?? default(uint); }
+      set { _appid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
+
+    private uint? _time_last;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"time_last", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint time_last
+    {
+      get { return _time_last?? default(uint); }
+      set { _time_last = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool time_lastSpecified
+    {
+      get { return _time_last != null; }
+      set { if (value == (_time_last== null)) _time_last = value ? this.time_last : (uint?)null; }
+    }
+    private bool ShouldSerializetime_last() { return time_lastSpecified; }
+    private void Resettime_last() { time_lastSpecified = false; }
+    
+
+    private uint? _time_total;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"time_total", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint time_total
+    {
+      get { return _time_total?? default(uint); }
+      set { _time_total = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool time_totalSpecified
+    {
+      get { return _time_total != null; }
+      set { if (value == (_time_total== null)) _time_total = value ? this.time_total : (uint?)null; }
+    }
+    private bool ShouldSerializetime_total() { return time_totalSpecified; }
+    private void Resettime_total() { time_totalSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"LenderHistory")]
+  public partial class LenderHistory : global::ProtoBuf.IExtensible
+  {
+    public LenderHistory() {}
+    
+
+    private ulong? _steamid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong steamid
+    {
+      get { return _steamid?? default(ulong); }
+      set { _steamid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
+    private readonly global::System.Collections.Generic.List<CDeviceAuth_GetBorrowerPlayHistory_Response.GameHistory> _game_history = new global::System.Collections.Generic.List<CDeviceAuth_GetBorrowerPlayHistory_Response.GameHistory>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"game_history", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CDeviceAuth_GetBorrowerPlayHistory_Response.GameHistory> game_history
+    {
+      get { return _game_history; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface IDeviceAuth
     {
       CDeviceAuth_GetOwnAuthorizedDevices_Response GetOwnAuthorizedDevices(CDeviceAuth_GetOwnAuthorizedDevices_Request request);
@@ -1171,6 +1315,7 @@ namespace SteamKit2.Unified.Internal
     CDeviceAuth_RemoveAuthorizedBorrowers_Response RemoveAuthorizedBorrowers(CDeviceAuth_RemoveAuthorizedBorrowers_Request request);
     CDeviceAuth_GetAuthorizedAsBorrower_Response GetAuthorizedAsBorrower(CDeviceAuth_GetAuthorizedAsBorrower_Request request);
     CDeviceAuth_GetExcludedGamesInLibrary_Response GetExcludedGamesInLibrary(CDeviceAuth_GetExcludedGamesInLibrary_Request request);
+    CDeviceAuth_GetBorrowerPlayHistory_Response GetBorrowerPlayHistory(CDeviceAuth_GetBorrowerPlayHistory_Request request);
     
     }
     

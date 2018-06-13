@@ -131,6 +131,25 @@ message CDeviceAuth_GetExcludedGamesInLibrary_Response {
 	repeated .CDeviceAuth_GetExcludedGamesInLibrary_Response.ExcludedGame excluded_games = 1;
 }
 
+message CDeviceAuth_GetBorrowerPlayHistory_Request {
+	optional fixed64 steamid = 1;
+}
+
+message CDeviceAuth_GetBorrowerPlayHistory_Response {
+	message GameHistory {
+		optional uint32 appid = 1;
+		optional uint32 time_last = 2;
+		optional uint32 time_total = 3;
+	}
+
+	message LenderHistory {
+		optional fixed64 steamid = 1;
+		repeated .CDeviceAuth_GetBorrowerPlayHistory_Response.GameHistory game_history = 2;
+	}
+
+	repeated .CDeviceAuth_GetBorrowerPlayHistory_Response.LenderHistory lender_history = 1;
+}
+
 service DeviceAuth {
 	option (service_description) = "Library Sharing settings service";
 	rpc GetOwnAuthorizedDevices (.CDeviceAuth_GetOwnAuthorizedDevices_Request) returns (.CDeviceAuth_GetOwnAuthorizedDevices_Response) {
@@ -162,5 +181,8 @@ service DeviceAuth {
 	}
 	rpc GetExcludedGamesInLibrary (.CDeviceAuth_GetExcludedGamesInLibrary_Request) returns (.CDeviceAuth_GetExcludedGamesInLibrary_Response) {
 		option (method_description) = "Get list of excluded games in lenders library";
+	}
+	rpc GetBorrowerPlayHistory (.CDeviceAuth_GetBorrowerPlayHistory_Request) returns (.CDeviceAuth_GetBorrowerPlayHistory_Response) {
+		option (method_description) = "Get list played games as borrower";
 	}
 }

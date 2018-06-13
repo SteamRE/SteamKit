@@ -18,6 +18,9 @@ message VideoBookmark {
 	optional uint64 video_track_id = 3 [(description) = "video track choice."];
 	optional uint64 audio_track_id = 4 [(description) = "audio track choice."];
 	optional uint64 timedtext_track_id = 5 [(description) = "timedtimed or subtitle track choice"];
+	optional uint32 last_modified = 6 [(description) = "when we recorded it was last modified. Not settable."];
+	optional bool hide_from_watch_history = 7 [default = false, (description) = "Whether I want to show this in my history"];
+	optional bool hide_from_library = 8 [default = false, (description) = "Whether I want to show this in my library"];
 }
 
 message CVideo_SetVideoBookmark_Notification {

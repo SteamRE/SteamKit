@@ -5886,10 +5886,10 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientUDSInviteToGame")]
-  public partial class CMsgClientUDSInviteToGame : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientInviteToGame")]
+  public partial class CMsgClientInviteToGame : global::ProtoBuf.IExtensible
   {
-    public CMsgClientUDSInviteToGame() {}
+    public CMsgClientInviteToGame() {}
     
 
     private ulong? _steam_id_dest;
@@ -12368,24 +12368,6 @@ namespace SteamKit2.Internal
     private void Resetsteamid_clan() { steamid_clanSpecified = false; }
     
 
-    private uint? _m_unStatusFlags;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"m_unStatusFlags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint m_unStatusFlags
-    {
-      get { return _m_unStatusFlags?? default(uint); }
-      set { _m_unStatusFlags = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool m_unStatusFlagsSpecified
-    {
-      get { return _m_unStatusFlags != null; }
-      set { if (value == (_m_unStatusFlags== null)) _m_unStatusFlags = value ? this.m_unStatusFlags : (uint?)null; }
-    }
-    private bool ShouldSerializem_unStatusFlags() { return m_unStatusFlagsSpecified; }
-    private void Resetm_unStatusFlags() { m_unStatusFlagsSpecified = false; }
-    
-
     private uint? _clan_account_flags;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"clan_account_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint clan_account_flags
@@ -12435,6 +12417,24 @@ namespace SteamKit2.Internal
       get { return _announcements; }
     }
   
+
+    private bool? _chat_room_private;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"chat_room_private", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool chat_room_private
+    {
+      get { return _chat_room_private?? default(bool); }
+      set { _chat_room_private = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool chat_room_privateSpecified
+    {
+      get { return _chat_room_private != null; }
+      set { if (value == (_chat_room_private== null)) _chat_room_private = value ? this.chat_room_private : (bool?)null; }
+    }
+    private bool ShouldSerializechat_room_private() { return chat_room_privateSpecified; }
+    private void Resetchat_room_private() { chat_room_privateSpecified = false; }
+    
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"NameInfo")]
   public partial class NameInfo : global::ProtoBuf.IExtensible
   {
@@ -12557,6 +12557,24 @@ namespace SteamKit2.Internal
     }
     private bool ShouldSerializein_game() { return in_gameSpecified; }
     private void Resetin_game() { in_gameSpecified = false; }
+    
+
+    private uint? _chat_room_members;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"chat_room_members", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint chat_room_members
+    {
+      get { return _chat_room_members?? default(uint); }
+      set { _chat_room_members = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool chat_room_membersSpecified
+    {
+      get { return _chat_room_members != null; }
+      set { if (value == (_chat_room_members== null)) _chat_room_members = value ? this.chat_room_members : (uint?)null; }
+    }
+    private bool ShouldSerializechat_room_members() { return chat_room_membersSpecified; }
+    private void Resetchat_room_members() { chat_room_membersSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

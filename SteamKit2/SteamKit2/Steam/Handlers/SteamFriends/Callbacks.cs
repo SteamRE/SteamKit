@@ -271,13 +271,13 @@ namespace SteamKit2
             public SteamID ClanID { get; private set; }
 
             /// <summary>
-            /// Gets the status flags.
-            /// </summary>
-            public EClientPersonaStateFlag StatusFlags { get; private set; }
-            /// <summary>
             /// Gets the account flags.
             /// </summary>
             public EAccountFlags AccountFlags { get; private set; }
+            /// <summary>
+            /// Gets the privacy of the chat room.
+            /// </summary>
+            public bool ChatRoomPrivate { get; private set; }
 
             /// <summary>
             /// Gets the name of the clan.
@@ -322,8 +322,8 @@ namespace SteamKit2
             {
                 ClanID = msg.steamid_clan;
 
-                StatusFlags = ( EClientPersonaStateFlag )msg.m_unStatusFlags;
                 AccountFlags = ( EAccountFlags )msg.clan_account_flags;
+                ChatRoomPrivate = msg.chat_room_private;
 
                 if ( msg.name_info != null )
                 {

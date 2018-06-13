@@ -84,7 +84,6 @@ message CInventory_SplitItemStack_Request {
 	optional uint32 appid = 1;
 	optional uint64 itemid = 2;
 	optional uint32 quantity = 3;
-	optional string timestamp = 4;
 }
 
 message CInventory_CombineItemStacks_Request {
@@ -92,8 +91,6 @@ message CInventory_CombineItemStacks_Request {
 	optional uint64 fromitemid = 2;
 	optional uint64 destitemid = 3;
 	optional uint32 quantity = 4;
-	optional string fromtimestamp = 5;
-	optional string desttimestamp = 6;
 }
 
 message CInventory_GetItemDefMeta_Request {
