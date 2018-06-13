@@ -916,24 +916,6 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializequantity() { return quantitySpecified; }
     private void Resetquantity() { quantitySpecified = false; }
     
-
-    private string _timestamp;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"timestamp", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string timestamp
-    {
-      get { return _timestamp?? ""; }
-      set { _timestamp = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool timestampSpecified
-    {
-      get { return _timestamp != null; }
-      set { if (value == (_timestamp== null)) _timestamp = value ? this.timestamp : (string)null; }
-    }
-    private bool ShouldSerializetimestamp() { return timestampSpecified; }
-    private void Resettimestamp() { timestampSpecified = false; }
-    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1015,42 +997,6 @@ namespace SteamKit2.Unified.Internal
     }
     private bool ShouldSerializequantity() { return quantitySpecified; }
     private void Resetquantity() { quantitySpecified = false; }
-    
-
-    private string _fromtimestamp;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"fromtimestamp", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string fromtimestamp
-    {
-      get { return _fromtimestamp?? ""; }
-      set { _fromtimestamp = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool fromtimestampSpecified
-    {
-      get { return _fromtimestamp != null; }
-      set { if (value == (_fromtimestamp== null)) _fromtimestamp = value ? this.fromtimestamp : (string)null; }
-    }
-    private bool ShouldSerializefromtimestamp() { return fromtimestampSpecified; }
-    private void Resetfromtimestamp() { fromtimestampSpecified = false; }
-    
-
-    private string _desttimestamp;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"desttimestamp", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string desttimestamp
-    {
-      get { return _desttimestamp?? ""; }
-      set { _desttimestamp = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool desttimestampSpecified
-    {
-      get { return _desttimestamp != null; }
-      set { if (value == (_desttimestamp== null)) _desttimestamp = value ? this.desttimestamp : (string)null; }
-    }
-    private bool ShouldSerializedesttimestamp() { return desttimestampSpecified; }
-    private void Resetdesttimestamp() { desttimestampSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

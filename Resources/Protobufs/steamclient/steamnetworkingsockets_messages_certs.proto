@@ -1,0 +1,23 @@
+option cc_generic_services = false;
+
+message CMsgSteamDatagramCertificate {
+	enum EKeyType {
+		INVALID = 0;
+		ED25519 = 1;
+	}
+
+	optional .CMsgSteamDatagramCertificate.EKeyType key_type = 1 [default = INVALID];
+	optional bytes key_data = 2;
+	optional fixed64 steam_id = 4;
+	repeated fixed32 gameserver_datacenter_ids = 5;
+	optional fixed32 time_created = 8;
+	optional fixed32 time_expiry = 9;
+	optional uint32 app_id = 10;
+}
+
+message CMsgSteamDatagramCertificateSigned {
+	optional bytes cert = 4;
+	optional fixed64 ca_key_id = 5;
+	optional bytes ca_signature = 6;
+}
+

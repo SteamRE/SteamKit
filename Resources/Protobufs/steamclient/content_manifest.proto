@@ -39,3 +39,18 @@ message ContentManifestSignature {
 	optional bytes signature = 1;
 }
 
+message ContentDeltaChunks {
+	message DeltaChunk {
+		optional bytes sha_source = 1;
+		optional bytes sha_target = 2;
+		optional uint32 size_original = 3;
+		optional uint32 patch_method = 4;
+		optional bytes chunk = 5;
+	}
+
+	optional uint32 depot_id = 1;
+	optional uint64 manifest_id_source = 2;
+	optional uint64 manifest_id_target = 3;
+	repeated .ContentDeltaChunks.DeltaChunk deltaChunks = 4;
+}
+

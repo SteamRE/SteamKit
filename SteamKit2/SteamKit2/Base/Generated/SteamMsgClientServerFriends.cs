@@ -91,6 +91,24 @@ namespace SteamKit2.Internal
     private bool ShouldSerializertime32_server_timestamp() { return rtime32_server_timestampSpecified; }
     private void Resetrtime32_server_timestamp() { rtime32_server_timestampSpecified = false; }
     
+
+    private bool? _echo_to_sender;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"echo_to_sender", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool echo_to_sender
+    {
+      get { return _echo_to_sender?? default(bool); }
+      set { _echo_to_sender = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool echo_to_senderSpecified
+    {
+      get { return _echo_to_sender != null; }
+      set { if (value == (_echo_to_sender== null)) _echo_to_sender = value ? this.echo_to_sender : (bool?)null; }
+    }
+    private bool ShouldSerializeecho_to_sender() { return echo_to_senderSpecified; }
+    private void Resetecho_to_sender() { echo_to_senderSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1417,6 +1435,15 @@ namespace SteamKit2.Internal
     private void Resetgame_data_blob() { game_data_blobSpecified = false; }
     
 
+    private CMsgClientPersonaState.Friend.ClanData _clan_data = null;
+    [global::ProtoBuf.ProtoMember(64, IsRequired = false, Name=@"clan_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgClientPersonaState.Friend.ClanData clan_data
+    {
+      get { return _clan_data; }
+      set { _clan_data = value; }
+    }
+
     private string _clan_tag;
     [global::ProtoBuf.ProtoMember(65, IsRequired = false, Name=@"clan_tag", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string clan_tag
@@ -1433,42 +1460,6 @@ namespace SteamKit2.Internal
     }
     private bool ShouldSerializeclan_tag() { return clan_tagSpecified; }
     private void Resetclan_tag() { clan_tagSpecified = false; }
-    
-
-    private string _facebook_name;
-    [global::ProtoBuf.ProtoMember(66, IsRequired = false, Name=@"facebook_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string facebook_name
-    {
-      get { return _facebook_name?? ""; }
-      set { _facebook_name = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool facebook_nameSpecified
-    {
-      get { return _facebook_name != null; }
-      set { if (value == (_facebook_name== null)) _facebook_name = value ? this.facebook_name : (string)null; }
-    }
-    private bool ShouldSerializefacebook_name() { return facebook_nameSpecified; }
-    private void Resetfacebook_name() { facebook_nameSpecified = false; }
-    
-
-    private ulong? _facebook_id;
-    [global::ProtoBuf.ProtoMember(67, IsRequired = false, Name=@"facebook_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong facebook_id
-    {
-      get { return _facebook_id?? default(ulong); }
-      set { _facebook_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool facebook_idSpecified
-    {
-      get { return _facebook_id != null; }
-      set { if (value == (_facebook_id== null)) _facebook_id = value ? this.facebook_id : (ulong?)null; }
-    }
-    private bool ShouldSerializefacebook_id() { return facebook_idSpecified; }
-    private void Resetfacebook_id() { facebook_idSpecified = false; }
     
     private readonly global::System.Collections.Generic.List<CMsgClientPersonaState.Friend.KV> _rich_presence = new global::System.Collections.Generic.List<CMsgClientPersonaState.Friend.KV>();
     [global::ProtoBuf.ProtoMember(71, Name=@"rich_presence", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -1495,6 +1486,70 @@ namespace SteamKit2.Internal
     private bool ShouldSerializebroadcast_id() { return broadcast_idSpecified; }
     private void Resetbroadcast_id() { broadcast_idSpecified = false; }
     
+
+    private ulong? _game_lobby_id;
+    [global::ProtoBuf.ProtoMember(73, IsRequired = false, Name=@"game_lobby_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong game_lobby_id
+    {
+      get { return _game_lobby_id?? default(ulong); }
+      set { _game_lobby_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool game_lobby_idSpecified
+    {
+      get { return _game_lobby_id != null; }
+      set { if (value == (_game_lobby_id== null)) _game_lobby_id = value ? this.game_lobby_id : (ulong?)null; }
+    }
+    private bool ShouldSerializegame_lobby_id() { return game_lobby_idSpecified; }
+    private void Resetgame_lobby_id() { game_lobby_idSpecified = false; }
+    
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ClanData")]
+  public partial class ClanData : global::ProtoBuf.IExtensible
+  {
+    public ClanData() {}
+    
+
+    private uint? _ogg_app_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ogg_app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint ogg_app_id
+    {
+      get { return _ogg_app_id?? default(uint); }
+      set { _ogg_app_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool ogg_app_idSpecified
+    {
+      get { return _ogg_app_id != null; }
+      set { if (value == (_ogg_app_id== null)) _ogg_app_id = value ? this.ogg_app_id : (uint?)null; }
+    }
+    private bool ShouldSerializeogg_app_id() { return ogg_app_idSpecified; }
+    private void Resetogg_app_id() { ogg_app_idSpecified = false; }
+    
+
+    private ulong? _chat_group_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"chat_group_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong chat_group_id
+    {
+      get { return _chat_group_id?? default(ulong); }
+      set { _chat_group_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool chat_group_idSpecified
+    {
+      get { return _chat_group_id != null; }
+      set { if (value == (_chat_group_id== null)) _chat_group_id = value ? this.chat_group_id : (ulong?)null; }
+    }
+    private bool ShouldSerializechat_group_id() { return chat_group_idSpecified; }
+    private void Resetchat_group_id() { chat_group_idSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"KV")]
   public partial class KV : global::ProtoBuf.IExtensible
   {
@@ -1792,6 +1847,13 @@ namespace SteamKit2.Internal
     private bool ShouldSerializegroupname() { return groupnameSpecified; }
     private void Resetgroupname() { groupnameSpecified = false; }
     
+    private readonly global::System.Collections.Generic.List<ulong> _steamid_friends = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"steamid_friends", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<ulong> steamid_friends
+    {
+      get { return _steamid_friends; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1917,10 +1979,10 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientRenameFriendsGroup")]
-  public partial class CMsgClientRenameFriendsGroup : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientManageFriendsGroup")]
+  public partial class CMsgClientManageFriendsGroup : global::ProtoBuf.IExtensible
   {
-    public CMsgClientRenameFriendsGroup() {}
+    public CMsgClientManageFriendsGroup() {}
     
 
     private int? _groupid;
@@ -1958,15 +2020,29 @@ namespace SteamKit2.Internal
     private bool ShouldSerializegroupname() { return groupnameSpecified; }
     private void Resetgroupname() { groupnameSpecified = false; }
     
+    private readonly global::System.Collections.Generic.List<ulong> _steamid_friends_added = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"steamid_friends_added", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<ulong> steamid_friends_added
+    {
+      get { return _steamid_friends_added; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<ulong> _steamid_friends_removed = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"steamid_friends_removed", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<ulong> steamid_friends_removed
+    {
+      get { return _steamid_friends_removed; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientRenameFriendsGroupResponse")]
-  public partial class CMsgClientRenameFriendsGroupResponse : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientManageFriendsGroupResponse")]
+  public partial class CMsgClientManageFriendsGroupResponse : global::ProtoBuf.IExtensible
   {
-    public CMsgClientRenameFriendsGroupResponse() {}
+    public CMsgClientManageFriendsGroupResponse() {}
     
 
     private uint? _eresult;
@@ -2201,6 +2277,42 @@ namespace SteamKit2.Internal
     }
     private bool ShouldSerializecount() { return countSpecified; }
     private void Resetcount() { countSpecified = false; }
+    
+
+    private uint? _time_last_used;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"time_last_used", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint time_last_used
+    {
+      get { return _time_last_used?? default(uint); }
+      set { _time_last_used = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool time_last_usedSpecified
+    {
+      get { return _time_last_used != null; }
+      set { if (value == (_time_last_used== null)) _time_last_used = value ? this.time_last_used : (uint?)null; }
+    }
+    private bool ShouldSerializetime_last_used() { return time_last_usedSpecified; }
+    private void Resettime_last_used() { time_last_usedSpecified = false; }
+    
+
+    private uint? _use_count;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"use_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint use_count
+    {
+      get { return _use_count?? default(uint); }
+      set { _use_count = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool use_countSpecified
+    {
+      get { return _use_count != null; }
+      set { if (value == (_use_count== null)) _use_count = value ? this.use_count : (uint?)null; }
+    }
+    private bool ShouldSerializeuse_count() { return use_countSpecified; }
+    private void Resetuse_count() { use_countSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

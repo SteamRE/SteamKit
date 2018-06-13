@@ -1146,6 +1146,13 @@ message CMsgAMUnlockStreamingResponse {
 	optional bytes encryption_key = 2;
 }
 
+message CMsgAMUnlockHEVC {
+}
+
+message CMsgAMUnlockHEVCResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
 message CMsgClientPlayingSessionState {
 	optional bool playing_blocked = 2;
 	optional uint32 playing_app = 3;
@@ -1153,19 +1160,6 @@ message CMsgClientPlayingSessionState {
 
 message CMsgClientKickPlayingSession {
 	optional bool only_stop_game = 1;
-}
-
-message CMsgClientCreateAccount {
-	optional string account_name = 1;
-	optional string password = 2;
-	optional string email = 3;
-	optional uint32 launcher = 6;
-	optional uint32 language = 7;
-}
-
-message CMsgClientCreateAccountResponse {
-	optional int32 eresult = 1 [default = 2];
-	optional fixed64 steamid = 2;
 }
 
 message CMsgClientVoiceCallPreAuthorize {

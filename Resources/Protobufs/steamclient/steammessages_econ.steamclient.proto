@@ -2,6 +2,14 @@ import "steammessages_unified_base.steamclient.proto";
 
 option cc_generic_services = true;
 
+message CEcon_GetTradeOfferAccessToken_Request {
+	optional bool generate_new_token = 1;
+}
+
+message CEcon_GetTradeOfferAccessToken_Response {
+	optional string trade_offer_access_token = 1;
+}
+
 message CEcon_ClientGetItemShopOverlayAuthURL_Request {
 	optional string return_url = 1;
 }
@@ -79,6 +87,9 @@ message CEcon_GetAssetClassInfo_Response {
 
 service Econ {
 	option (service_description) = "A service that provides communication with the econ servers";
+	rpc GetTradeOfferAccessToken (.CEcon_GetTradeOfferAccessToken_Request) returns (.CEcon_GetTradeOfferAccessToken_Response) {
+		option (method_description) = "Get the user's trade offer access token";
+	}
 	rpc ClientGetItemShopOverlayAuthURL (.CEcon_ClientGetItemShopOverlayAuthURL_Request) returns (.CEcon_ClientGetItemShopOverlayAuthURL_Response) {
 		option (method_description) = "Generates a URL which sets a secure cookie for in-game-browser itemshop purchases";
 	}

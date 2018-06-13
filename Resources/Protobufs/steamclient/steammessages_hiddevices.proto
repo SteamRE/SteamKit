@@ -11,6 +11,7 @@ enum EHIDDeviceDisconnectMethod {
 	k_EDeviceDisconnectMethodUnknown = 0;
 	k_EDeviceDisconnectMethodBluetooth = 1;
 	k_EDeviceDisconnectMethodFeatureReport = 2;
+	k_EDeviceDisconnectMethodOutputReport = 3;
 }
 
 message CHIDDeviceInfo {
@@ -28,6 +29,7 @@ message CHIDDeviceInfo {
 	optional int32 ostype = 12 [default = -1];
 	optional bool is_generic_gamepad = 13;
 	optional bool is_generic_joystick = 14;
+	optional uint32 caps_bits = 15;
 }
 
 message CHIDDeviceInputReport {
