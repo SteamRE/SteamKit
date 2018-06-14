@@ -338,7 +338,7 @@ namespace SteamKit2
             logon.Body.steam2_ticket_request = details.RequestSteam2Ticket;
 
             // we're now using the latest steamclient package version, this is required to get a proper sentry file for steam guard
-            logon.Body.client_package_version = 1771; // todo: determine if this is still required
+            logon.Body.client_package_version = 1528911438; // todo: determine if this is still required
             logon.Body.supports_rate_limit_response = true;
             logon.Body.machine_id = HardwareUtils.GetMachineID();
 
