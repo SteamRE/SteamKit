@@ -40,7 +40,7 @@ namespace SteamKit2
                 { EMsg.ClientFriendsList, HandleFriendsList },
                 { EMsg.ClientFriendMsgIncoming, HandleFriendMsg },
                 { EMsg.ClientFriendMsgEchoToSender, HandleFriendEchoMsg },
-                { EMsg.ClientFSGetFriendMessageHistoryResponse, HandleFriendMessageHistoryResponse },
+                { EMsg.ClientChatGetFriendMessageHistoryResponse, HandleFriendMessageHistoryResponse },
                 { EMsg.ClientAccountInfo, HandleAccountInfo },
                 { EMsg.ClientAddFriendResponse, HandleFriendResponse },
                 { EMsg.ClientChatEnter, HandleChatEnter },
@@ -712,7 +712,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(steamId) );
             }
 
-            var request = new ClientMsgProtobuf<CMsgClientChatGetFriendMessageHistory>( EMsg.ClientFSGetFriendMessageHistory );
+            var request = new ClientMsgProtobuf<CMsgClientChatGetFriendMessageHistory>( EMsg.ClientChatGetFriendMessageHistory );
 
             request.Body.steamid = steamId;
 
@@ -726,7 +726,7 @@ namespace SteamKit2
         /// </summary>
         public void RequestOfflineMessages()
         {
-            var request = new ClientMsgProtobuf<CMsgClientChatGetFriendMessageHistoryForOfflineMessages>( EMsg.ClientFSGetFriendMessageHistoryForOfflineMessages );
+            var request = new ClientMsgProtobuf<CMsgClientChatGetFriendMessageHistoryForOfflineMessages>( EMsg.ClientChatGetFriendMessageHistoryForOfflineMessages );
             
             this.Client.Send( request );
         }

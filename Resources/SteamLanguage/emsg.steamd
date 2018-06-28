@@ -38,6 +38,8 @@ enum EMsg
 	ClientPackageVersions = 148;
 	TimestampRequest = 149;
 	TimestampResponse = 150;
+	ServiceMethodCallFromClient = 151;
+	ServiceMethodSendToClient = 152;
 
 	BaseShell = 200;
 	AssignSysID = 200;
@@ -1444,6 +1446,8 @@ enum EMsg
 	DFSStartTransfer = 5618;
 	DFSTransferComplete = 5619;
 	DFSRouteFileResponse = 5620;
+	ClientNetworkingCertRequest = 5621;
+	ClientNetworkingCertRequestResponse = 5622;
 
 	BaseMDS = 5800;
 	ClientMDSLoginRequest = 5801; removed
@@ -1691,11 +1695,16 @@ enum EMsg
 	ClientFSEnumerateFollowingListResponse = 7520;
 	FSGetPendingNotificationCount = 7521;
 	FSGetPendingNotificationCountResponse = 7522;
-	ClientFSOfflineMessageNotification = 7523;
-	ClientFSRequestOfflineMessageCount = 7524;
-	ClientFSGetFriendMessageHistory = 7525;
-	ClientFSGetFriendMessageHistoryResponse = 7526;
-	ClientFSGetFriendMessageHistoryForOfflineMessages = 7527;
+	ClientFSOfflineMessageNotification = 7523; obsolete "Renamed to ClientChatOfflineMessageNotification"
+	ClientFSRequestOfflineMessageCount = 7524; obsolete "Renamed to ClientChatRequestOfflineMessageCount"
+	ClientFSGetFriendMessageHistory = 7525; obsolete "Renamed to ClientChatGetFriendMessageHistory"
+	ClientFSGetFriendMessageHistoryResponse = 7526; obsolete "Renamed to ClientChatGetFriendMessageHistoryResponse"
+	ClientFSGetFriendMessageHistoryForOfflineMessages = 7527; obsolete "Renamed to ClientChatGetFriendMessageHistoryForOfflineMessages"
+	ClientChatOfflineMessageNotification = 7523;
+	ClientChatRequestOfflineMessageCount = 7524;
+	ClientChatGetFriendMessageHistory = 7525;
+	ClientChatGetFriendMessageHistoryResponse = 7526;
+	ClientChatGetFriendMessageHistoryForOfflineMessages = 7527;
 	ClientFSGetFriendsSteamLevels = 7528;
 	ClientFSGetFriendsSteamLevelsResponse = 7529;
 	FSRequestFriendData = 7530;
@@ -1887,6 +1896,8 @@ enum EMsg
 	RemoteClientGetControllerConfig = 9510;
 	RemoteClientGetControllerConfigResposne = 9511;
 	RemoteClientStreamingEnabled = 9512;
+	ClientUnlockHEVC = 9513;
+	ClientUnlockHEVCResponse = 9514;
 
 	ClientConcurrentSessionsBase = 9600;
 	ClientPlayingSessionState = 9600;
@@ -1902,5 +1913,6 @@ enum EMsg
 	BaseClient3 = 9800;
 	ClientVoiceCallPreAuthorize = 9800;
 	ClientVoiceCallPreAuthorizeResponse = 9801;
+	ClientServerTimestampRequest = 9802;
 
 };
