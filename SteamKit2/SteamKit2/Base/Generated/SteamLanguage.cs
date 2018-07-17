@@ -42,6 +42,7 @@ namespace SteamKit2
 		TimestampRequest = 149,
 		TimestampResponse = 150,
 		ServiceMethodCallFromClient = 151,
+		ServiceMethodSendToClient = 152,
 		BaseShell = 200,
 		AssignSysID = 200,
 		Exit = 201,
@@ -1180,6 +1181,8 @@ namespace SteamKit2
 		DFSStartTransfer = 5618,
 		DFSTransferComplete = 5619,
 		DFSRouteFileResponse = 5620,
+		ClientNetworkingCertRequest = 5621,
+		ClientNetworkingCertRequestResponse = 5622,
 		BaseMDS = 5800,
 		AMToMDSGetDepotDecryptionKey = 5812,
 		MDSToAMGetDepotDecryptionKeyResponse = 5813,
@@ -1349,11 +1352,21 @@ namespace SteamKit2
 		ClientFSEnumerateFollowingListResponse = 7520,
 		FSGetPendingNotificationCount = 7521,
 		FSGetPendingNotificationCountResponse = 7522,
+		[Obsolete( "Renamed to ClientChatOfflineMessageNotification" )]
 		ClientFSOfflineMessageNotification = 7523,
+		[Obsolete( "Renamed to ClientChatRequestOfflineMessageCount" )]
 		ClientFSRequestOfflineMessageCount = 7524,
+		[Obsolete( "Renamed to ClientChatGetFriendMessageHistory" )]
 		ClientFSGetFriendMessageHistory = 7525,
+		[Obsolete( "Renamed to ClientChatGetFriendMessageHistoryResponse" )]
 		ClientFSGetFriendMessageHistoryResponse = 7526,
+		[Obsolete( "Renamed to ClientChatGetFriendMessageHistoryForOfflineMessages" )]
 		ClientFSGetFriendMessageHistoryForOfflineMessages = 7527,
+		ClientChatOfflineMessageNotification = 7523,
+		ClientChatRequestOfflineMessageCount = 7524,
+		ClientChatGetFriendMessageHistory = 7525,
+		ClientChatGetFriendMessageHistoryResponse = 7526,
+		ClientChatGetFriendMessageHistoryForOfflineMessages = 7527,
 		ClientFSGetFriendsSteamLevels = 7528,
 		ClientFSGetFriendsSteamLevelsResponse = 7529,
 		FSRequestFriendData = 7530,
@@ -1506,6 +1519,8 @@ namespace SteamKit2
 		RemoteClientGetControllerConfig = 9510,
 		RemoteClientGetControllerConfigResposne = 9511,
 		RemoteClientStreamingEnabled = 9512,
+		ClientUnlockHEVC = 9513,
+		ClientUnlockHEVCResponse = 9514,
 		ClientConcurrentSessionsBase = 9600,
 		ClientPlayingSessionState = 9600,
 		ClientKickPlayingSession = 9601,
@@ -1518,6 +1533,7 @@ namespace SteamKit2
 		BaseClient3 = 9800,
 		ClientVoiceCallPreAuthorize = 9800,
 		ClientVoiceCallPreAuthorizeResponse = 9801,
+		ClientServerTimestampRequest = 9802,
 	}
 	public enum EResult
 	{
@@ -2153,7 +2169,8 @@ namespace SteamKit2
 		SysReqs = 14,
 		Community = 15,
 		Store = 16,
-		Max = 17,
+		Localization = 17,
+		Max = 18,
 	}
 	public enum EContentDownloadSourceType
 	{
@@ -2163,7 +2180,10 @@ namespace SteamKit2
 		LCS = 3,
 		ProxyCache = 4,
 		LANPeer = 5,
-		Max = 5,
+		SLS = 6,
+		SteamCache = 7,
+		OpenCache = 8,
+		Max = 9,
 	}
 	public enum EPlatformType
 	{
@@ -2174,11 +2194,12 @@ namespace SteamKit2
 		OSX = 4,
 		PS3 = 5,
 		Linux32 = 6,
-		Max = 6,
+		Max = 7,
 	}
 	public enum EOSType
 	{
 		Unknown = -1,
+		Web = -700,
 		IOSUnknown = -600,
 		AndroidUnknown = -500,
 		UMQ = -400,
@@ -2197,6 +2218,8 @@ namespace SteamKit2
 		MacOS1010 = -87,
 		MacOS1011 = -86,
 		MacOS1012 = -85,
+		Macos1013 = -84,
+		Macos1014 = -83,
 		MacOSMax = -1,
 		LinuxUnknown = -203,
 		Linux22 = -202,
@@ -2206,7 +2229,14 @@ namespace SteamKit2
 		Linux35 = -198,
 		Linux36 = -197,
 		Linux310 = -196,
-		LinuxMax = -103,
+		Linux316 = -195,
+		Linux318 = -194,
+		Linux3x = -193,
+		Linux4x = -192,
+		Linux41 = -191,
+		Linux44 = -190,
+		Linux49 = -189,
+		LinuxMax = -101,
 		WinUnknown = 0,
 		Win311 = 1,
 		Win95 = 2,
@@ -2224,7 +2254,8 @@ namespace SteamKit2
 		Windows81 = 14,
 		Win2012R2 = 15,
 		Windows10 = 16,
-		WinMAX = 15,
+		Win2016 = 17,
+		WinMAX = 18,
 		Max = 26,
 	}
 	public enum EServerType

@@ -584,8 +584,9 @@ enum EAppInfoSection
 	SysReqs = 14;
 	Community = 15;
 	Store = 16;
+	Localization = 17;
 
-	Max = 17;
+	Max = 18;
 };
 
 enum EContentDownloadSourceType
@@ -597,8 +598,11 @@ enum EContentDownloadSourceType
 	LCS = 3;
 	ProxyCache = 4;
 	LANPeer = 5;
+	SLS = 6;
+	SteamCache = 7;
+	OpenCache = 8;
 
-	Max = 5;
+	Max = 9;
 };
 
 enum EPlatformType
@@ -613,12 +617,14 @@ enum EPlatformType
 	PS3 = 5;
 	Linux32 = 6;
 
-	Max = 6;
+	Max = 7;
 };
 
 enum EOSType
 {
 	Unknown = -1;
+
+	Web = -700;
 
 	IOSUnknown = -600;
 
@@ -642,6 +648,8 @@ enum EOSType
 	MacOS1010 = -87;
 	MacOS1011 = -86;
 	MacOS1012 = -85;
+	Macos1013 = -84;
+	Macos1014 = -83;
 	MacOSMax = -1;
 
 	LinuxUnknown = -203;
@@ -652,7 +660,14 @@ enum EOSType
 	Linux35 = -198;
 	Linux36 = -197;
 	Linux310 = -196;
-	LinuxMax = -103;
+	Linux316 = -195;
+	Linux318 = -194;
+	Linux3x = -193;
+	Linux4x = -192;
+	Linux41 = -191;
+	Linux44 = -190;
+	Linux49 = -189;
+	LinuxMax = -101;
 
 	WinUnknown = 0;
 	Win311 = 1;
@@ -676,8 +691,9 @@ enum EOSType
 	Win2012R2 = 15;
 	Win10 = 16; removed "renamed to Windows10"
 	Windows10 = 16;
+	Win2016 = 17;
 
-	WinMAX = 15;
+	WinMAX = 18;
 
 	Max = 26;
 };
@@ -706,7 +722,7 @@ enum EServerType
 	ASBOBSOLETE = 14; removed
 	PICS = 14;
 	Client = 15;
-	BootstrapOBSOLETE = 16; removed;
+	BootstrapOBSOLETE = 16; removed
 	DP = 17;
 	WG = 18;
 	SM = 19;

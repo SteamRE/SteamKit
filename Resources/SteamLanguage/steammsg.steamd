@@ -44,7 +44,7 @@ class MsgClientNewLoginKeyAccepted<EMsg::ClientNewLoginKeyAccepted>
 class MsgClientLogon<EMsg::ClientLogon>
 {
 	const uint ObfuscationMask = 0xBAADF00D;
-	const uint CurrentProtocol = 65579;
+	const uint CurrentProtocol = 65580;
 
 	const uint ProtocolVerMajorMask = 0xFFFF0000;
 	const uint ProtocolVerMinorMask = 0xFFFF;
