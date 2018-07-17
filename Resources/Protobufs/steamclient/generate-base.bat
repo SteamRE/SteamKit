@@ -33,7 +33,7 @@ echo Unified Messages
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_datapublisher.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgDataPublisher.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_depotbuilder.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgDepotBuilder.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_deviceauth.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgDeviceAuth.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
-..\..\Protogen\protogen -s:..\ -i:"steammessages_econ.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgEcon.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
+..\..\Protogen\protogen -s:..\ -i:"steammessages_econ.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgEcon.cs" -t:csharp -ns:".SteamKit2.Unified.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_gamenotifications.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgGameNotifications.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_gameservers.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgGameServers.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_linkfilter.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgLinkFilter.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
@@ -49,5 +49,11 @@ echo Unified Messages
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_twofactor.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgTwoFactor.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_useraccount.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgUserAccount.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_video.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgVideo.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
+echo.
+echo.
+
+echo WebUI Friends
+..\..\Protogen\protogen -s:..\ -i:"friends.js.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgWebUIFriends.cs" -t:csharp -ns:"SteamKit2.Internal" -p:import=SteamKit2.Internal -p:detectMissing
+
 
 pause
