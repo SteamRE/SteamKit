@@ -7703,7 +7703,7 @@ namespace SteamKit2.Unified.Internal
     public interface IVoiceChat
     {
       CVoiceChat_UpdateVoiceChatWebRTCData_Response UpdateVoiceChatWebRTCData(CVoiceChat_UpdateVoiceChatWebRTCData_Request request);
-    NoResponse NotifyUserVoiceStatus(NotImplemented request);
+    NoResponse NotifyUserVoiceStatus(CVoiceChat_UserVoiceStatus_Notification request);
     CVoiceChat_UploadClientVoiceChatLogs_Response UploadClientVoiceChatLogs(CVoiceChat_UploadClientVoiceChatLogs_Request request);
     CVoiceChat_LeaveVoiceChat_Response LeaveVoiceChat(NotImplemented request);
     CVoiceChat_RequestOneOnOneChat_Response RequestOneOnOneChat(CVoiceChat_RequestOneOnOneChat_Request request);
