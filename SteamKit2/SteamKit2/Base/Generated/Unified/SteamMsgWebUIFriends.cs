@@ -7637,7 +7637,7 @@ namespace SteamKit2.Unified.Internal
     CChatRoom_GetMyChatRoomGroups_Response GetMyChatRoomGroups(CChatRoom_GetMyChatRoomGroups_Request request);
     CChatRoom_GetChatRoomGroupState_Response GetChatRoomGroupState(CChatRoom_GetChatRoomGroupState_Request request);
     CChatRoom_GetChatRoomGroupSummary_Response GetChatRoomGroupSummary(NotImplemented request);
-    NoResponse AckChatMessage(NotImplemented request);
+    NoResponse AckChatMessage(CChatRoom_AckChatMessage_Notification request);
     CChatRoom_CreateInviteLink_Response CreateInviteLink(CChatRoom_CreateInviteLink_Request request);
     CChatRoom_GetInviteLinkInfo_Response GetInviteLinkInfo(CChatRoom_GetInviteLinkInfo_Request request);
     CChatRoom_GetInviteInfo_Response GetInviteInfo(CChatRoom_GetInviteInfo_Request request);
@@ -7703,7 +7703,7 @@ namespace SteamKit2.Unified.Internal
     public interface IVoiceChat
     {
       CVoiceChat_UpdateVoiceChatWebRTCData_Response UpdateVoiceChatWebRTCData(CVoiceChat_UpdateVoiceChatWebRTCData_Request request);
-    NoResponse NotifyUserVoiceStatus(NotImplemented request);
+    NoResponse NotifyUserVoiceStatus(CVoiceChat_UserVoiceStatus_Notification request);
     CVoiceChat_UploadClientVoiceChatLogs_Response UploadClientVoiceChatLogs(CVoiceChat_UploadClientVoiceChatLogs_Request request);
     CVoiceChat_LeaveVoiceChat_Response LeaveVoiceChat(NotImplemented request);
     CVoiceChat_RequestOneOnOneChat_Response RequestOneOnOneChat(CVoiceChat_RequestOneOnOneChat_Request request);
