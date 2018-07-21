@@ -90,7 +90,7 @@ namespace SteamKit2
                 serverRecords.Add( ServerRecord.CreateWebSocketServer( child.Value ) );
             }
 
-            return serverRecords;
+            return serverRecords.AsReadOnly();
         }
     }
 }
