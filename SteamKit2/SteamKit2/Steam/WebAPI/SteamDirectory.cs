@@ -53,7 +53,7 @@ namespace SteamKit2
                 ["cellid"] = configuration.CellID.ToString( CultureInfo.InvariantCulture )
             };
 
-            if (maxNumServers.HasValue )
+            if ( maxNumServers.HasValue )
             {
                 args[ "maxcount" ] = maxNumServers.Value.ToString(CultureInfo.InvariantCulture);
             }
