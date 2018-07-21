@@ -34,7 +34,7 @@ namespace SteamKit2
         /// Load a list of servers from the Steam Directory.
         /// </summary>
         /// <param name="configuration">Configuration Object</param>
-        /// <param name="maxNumServers">Max number of servers to return</param>
+        /// <param name="maxNumServers">Max number of servers to return. The API will typically return this number per server type (socket and websocket).</param>
         /// <param name="cancellationToken">Cancellation Token</param>
         /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="ServerRecord"/>s.</returns>
         public static Task<IReadOnlyCollection<ServerRecord>> LoadAsync( SteamConfiguration configuration, int maxNumServers, CancellationToken cancellationToken )
