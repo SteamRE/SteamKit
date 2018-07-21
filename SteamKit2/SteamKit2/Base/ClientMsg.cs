@@ -57,7 +57,7 @@ namespace SteamKit2
         public override SteamID SteamID
         {
             get => ProtoHeader.steamid;
-            set => ProtoHeader.steamid = value ?? throw new ArgumentNullException( nameof(value) );
+            set => ProtoHeader.steamid = value;
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace SteamKit2
         public override JobID TargetJobID
         {
             get => ProtoHeader.jobid_target;
-            set => ProtoHeader.jobid_target = value ?? throw new ArgumentNullException( nameof(value) );
+            set => ProtoHeader.jobid_target = value;
         }
         /// <summary>
         /// Gets or sets the source job id for this client message.
@@ -80,7 +80,7 @@ namespace SteamKit2
         public override JobID SourceJobID
         {
             get => ProtoHeader.jobid_source;
-            set => ProtoHeader.jobid_source = value ?? throw new ArgumentNullException( nameof(value) );
+            set => ProtoHeader.jobid_source = value;
         }
 
 
@@ -278,7 +278,7 @@ namespace SteamKit2
         public override SteamID SteamID
         {
             get => Header.SteamID;
-            set => Header.SteamID = value ?? throw new ArgumentNullException( nameof(value) );
+            set => Header.SteamID = value;
         }
 
         /// <summary>
@@ -290,7 +290,7 @@ namespace SteamKit2
         public override JobID TargetJobID
         {
             get => Header.TargetJobID;
-            set => Header.TargetJobID = value ?? throw new ArgumentNullException( nameof(value) );
+            set => Header.TargetJobID = value;
         }
         /// <summary>
         /// Gets or sets the source job id for this client message.
@@ -301,7 +301,7 @@ namespace SteamKit2
         public override JobID SourceJobID
         {
             get => Header.SourceJobID;
-            set => Header.SourceJobID = value ?? throw new ArgumentNullException( nameof(value) );
+            set => Header.SourceJobID = value;
         }
 
 
@@ -452,7 +452,7 @@ namespace SteamKit2
         public override JobID TargetJobID
         {
             get => Header.TargetJobID;
-            set => Header.TargetJobID = value ?? throw new ArgumentNullException( nameof(value) );
+            set => Header.TargetJobID = value;
         }
         /// <summary>
         /// Gets or sets the source job id for this client message.
@@ -463,7 +463,7 @@ namespace SteamKit2
         public override JobID SourceJobID
         {
             get => Header.SourceJobID;
-            set => Header.SourceJobID = value ?? throw new ArgumentNullException( nameof(value) );
+            set => Header.SourceJobID = value;
         }
 
 

@@ -102,11 +102,6 @@ namespace SteamKit2
         public IDisposable Subscribe<TCallback>( JobID jobID, Action<TCallback> callbackFunc )
             where TCallback : class, ICallbackMsg
         {
-            if ( jobID == null )
-            {
-                throw new ArgumentNullException( nameof(jobID) );
-            }
-
             if ( callbackFunc == null )
             {
                 throw new ArgumentNullException( nameof(callbackFunc) );

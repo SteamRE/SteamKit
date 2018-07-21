@@ -46,7 +46,7 @@ namespace SteamKit2.GC
         public override JobID TargetJobID
         {
             get => ProtoHeader.job_id_target;
-            set => ProtoHeader.job_id_target = value ?? throw new ArgumentNullException( nameof(value) );
+            set => ProtoHeader.job_id_target = value;
         }
         /// <summary>
         /// Gets or sets the source job id for this gc message.
@@ -57,7 +57,7 @@ namespace SteamKit2.GC
         public override JobID SourceJobID
         {
             get => ProtoHeader.job_id_source;
-            set => ProtoHeader.job_id_source = value ?? throw new ArgumentNullException( nameof(value) );
+            set => ProtoHeader.job_id_source = value;
         }
 
 
@@ -194,7 +194,7 @@ namespace SteamKit2.GC
         public override JobID TargetJobID
         {
             get => Header.TargetJobID;
-            set => Header.TargetJobID = value = value ?? throw new ArgumentNullException( nameof(value) );
+            set => Header.TargetJobID = value;
         }
         /// <summary>
         /// Gets or sets the source job id for this gc message.
@@ -205,7 +205,7 @@ namespace SteamKit2.GC
         public override JobID SourceJobID
         {
             get => Header.SourceJobID;
-            set => Header.SourceJobID = value ?? throw new ArgumentNullException( nameof(value) );
+            set => Header.SourceJobID = value;
         }
 
 

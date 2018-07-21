@@ -5,9 +5,6 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
 
 namespace SteamKit2
@@ -17,18 +14,10 @@ namespace SteamKit2
     /// Guaranteed to be unique across all racks and servers for a given Steam universe.
     /// </summary>
     [DebuggerDisplay( "{Value}" )]
-    public class GlobalID : IEquatable<GlobalID>
+    public struct GlobalID : IEquatable<GlobalID>
     {
         BitVector64 gidBits;
 
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GlobalID"/> class.
-        /// </summary>
-        public GlobalID()
-            : this( ulong.MaxValue )
-        {
-        }
         /// <summary>
         /// Initializes a new instance of the <see cref="GlobalID"/> class.
         /// </summary>
@@ -47,14 +36,7 @@ namespace SteamKit2
         /// The result of the conversion.
         /// </returns>
         public static implicit operator ulong( GlobalID gid )
-        {
-            if ( gid == null )
-            {
-                throw new ArgumentNullException( nameof(gid) );
-            }
-
-            return gid.gidBits.Data;
-        }
+            => gid.gidBits.Data;
 
         /// <summary>
         /// Performs an implicit conversion from <see cref="System.UInt64"/> to <see cref="SteamKit2.GlobalID"/>.
@@ -64,9 +46,7 @@ namespace SteamKit2
         /// The result of the conversion.
         /// </returns>
         public static implicit operator GlobalID( ulong gid )
-        {
-            return new GlobalID( gid );
-        }
+            => new GlobalID( gid );
 
 
         /// <summary>
@@ -148,13 +128,7 @@ namespace SteamKit2
         /// </returns>
         public override bool Equals( object obj )
         {
-            if ( obj == null )
-            {
-                return false;
-            }
-
-            GlobalID gid = obj as GlobalID;
-            if ( ( object )gid == null )
+            if ( !( obj is GlobalID gid ))
             {
                 return false;
             }
@@ -170,14 +144,7 @@ namespace SteamKit2
         ///   <c>true</c> if the specified <see cref="GlobalID"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals( GlobalID gid )
-        {
-            if ( ( object )gid == null )
-            {
-                return false;
-            }
-
-            return gidBits.Data == gid.gidBits.Data;
-        }
+            => gidBits.Data == gid.gidBits.Data;
 
         /// <summary>
         /// Implements the operator ==.
@@ -188,19 +155,7 @@ namespace SteamKit2
         /// The result of the operator.
         /// </returns>
         public static bool operator ==( GlobalID a, GlobalID b )
-        {
-            if ( System.Object.ReferenceEquals( a, b ) )
-            {
-                return true;
-            }
-
-            if ( ( ( object )a == null ) || ( ( object )b == null ) )
-            {
-                return false;
-            }
-
-            return a.gidBits.Data == b.gidBits.Data;
-        }
+            => a.gidBits.Data == b.gidBits.Data;
 
         /// <summary>
         /// Implements the operator !=.
@@ -242,23 +197,21 @@ namespace SteamKit2
     /// <summary>
     /// Represents a single unique handle to a piece of User Generated Content.
     /// </summary>
-    public sealed class UGCHandle : GlobalID
+    public struct UGCHandle
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UGCHandle"/> class.
-        /// </summary>
-        public UGCHandle()
-            : base()
-        {
-        }
         /// <summary>
         /// Initializes a new instance of the <see cref="UGCHandle"/> class.
         /// </summary>
         /// <param name="ugcId">The UGC ID.</param>
         public UGCHandle( ulong ugcId )
-            : base( ugcId )
         {
+            UCGID = ugcId;
         }
+
+        /// <summary>
+        /// Handle ID details.
+        /// </summary>
+        public GlobalID UCGID { get; }
 
 
         /// <summary>
@@ -269,14 +222,7 @@ namespace SteamKit2
         /// The result of the conversion.
         /// </returns>
         public static implicit operator ulong( UGCHandle handle )
-        {
-            if ( handle == null )
-            {
-                throw new ArgumentNullException( nameof(handle) );
-            }
-
-            return handle.Value;
-        }
+            => handle.UCGID.Value;
 
         /// <summary>
         /// Performs an implicit conversion from <see cref="System.UInt64"/> to <see cref="SteamKit2.UGCHandle"/>.

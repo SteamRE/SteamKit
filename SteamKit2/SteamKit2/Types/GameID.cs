@@ -14,7 +14,7 @@ namespace SteamKit2
     /// This 64bit structure represents an app, mod, shortcut, or p2p file on the Steam network.
     /// </summary>
     [DebuggerDisplay( "{ToUInt64()}" )]
-    public class GameID
+    public struct GameID
     {
         /// <summary>
         /// Represents various types of games.
@@ -41,13 +41,6 @@ namespace SteamKit2
 
         BitVector64 gameid;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GameID"/> class.
-        /// </summary>
-        public GameID()
-            : this( 0 )
-        {
-        }
         /// <summary>
         /// Initializes a new instance of the <see cref="GameID"/> class.
         /// </summary>
@@ -91,14 +84,7 @@ namespace SteamKit2
         /// The result of the conversion.
         /// </returns>
         public static implicit operator string( GameID gid )
-        {
-            if ( gid == null )
-            {
-                throw new ArgumentNullException( nameof(gid) );
-            }
-
-            return gid.gameid.Data.ToString();
-        }
+            => gid.gameid.Data.ToString();
 
         /// <summary>
         /// Performs an implicit conversion from <see cref="SteamKit2.GameID"/> to <see cref="System.UInt64"/>.
@@ -108,14 +94,7 @@ namespace SteamKit2
         /// The result of the conversion.
         /// </returns>
         public static implicit operator UInt64( GameID gid )
-        {
-            if ( gid == null )
-            {
-                throw new ArgumentNullException( nameof(gid) );
-            }
-
-            return gid.gameid.Data;
-        }
+            => gid.gameid.Data;
 
         /// <summary>
         /// Performs an implicit conversion from <see cref="System.UInt64"/> to <see cref="SteamKit2.GameID"/>.
@@ -234,13 +213,7 @@ namespace SteamKit2
         /// </returns>
         public override bool Equals( System.Object obj )
         {
-            if ( obj == null )
-            {
-                return false;
-            }
-
-            GameID gid = obj as GameID;
-            if ( ( System.Object )gid == null )
+            if ( !( obj is GameID gid ))
             {
                 return false;
             }
@@ -256,14 +229,7 @@ namespace SteamKit2
         ///   <c>true</c> if the specified <see cref="GameID"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals( GameID gid )
-        {
-            if ( ( object )gid == null )
-            {
-                return false;
-            }
-
-            return gameid.Data == gid.gameid.Data;
-        }
+            => gameid.Data == gid.gameid.Data;
 
         /// <summary>
         /// Implements the operator ==.
@@ -274,19 +240,7 @@ namespace SteamKit2
         /// The result of the operator.
         /// </returns>
         public static bool operator ==( GameID a, GameID b )
-        {
-            if ( System.Object.ReferenceEquals( a, b ) )
-            {
-                return true;
-            }
-
-            if ( ( ( object )a == null ) || ( ( object )b == null ) )
-            {
-                return false;
-            }
-
-            return a.gameid.Data == b.gameid.Data;
-        }
+            => a.gameid.Data == b.gameid.Data;
 
         /// <summary>
         /// Implements the operator !=.
