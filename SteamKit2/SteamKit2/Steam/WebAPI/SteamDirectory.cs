@@ -19,9 +19,7 @@ namespace SteamKit2
         /// <param name="configuration">Configuration Object</param>
         /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="ServerRecord"/>s.</returns>
         public static Task<IReadOnlyCollection<ServerRecord>> LoadAsync( SteamConfiguration configuration )
-        {
-            return LoadAsync( configuration, CancellationToken.None );
-        }
+            => LoadCoreAsync( configuration, null, CancellationToken.None );
 
         /// <summary>
         /// Load a list of servers from the Steam Directory.
@@ -30,6 +28,19 @@ namespace SteamKit2
         /// <param name="cancellationToken">Cancellation Token</param>
         /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="ServerRecord"/>s.</returns>
         public static Task<IReadOnlyCollection<ServerRecord>> LoadAsync( SteamConfiguration configuration, CancellationToken cancellationToken )
+            => LoadCoreAsync( configuration, null, cancellationToken );
+
+        /// <summary>
+        /// Load a list of servers from the Steam Directory.
+        /// </summary>
+        /// <param name="configuration">Configuration Object</param>
+        /// <param name="maxNumServers">Max number of servers to return</param>
+        /// <param name="cancellationToken">Cancellation Token</param>
+        /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="ServerRecord"/>s.</returns>
+        public static Task<IReadOnlyCollection<ServerRecord>> LoadAsync( SteamConfiguration configuration, int maxNumServers, CancellationToken cancellationToken )
+            => LoadCoreAsync( configuration, maxNumServers, cancellationToken );
+
+        static Task<IReadOnlyCollection<ServerRecord>> LoadCoreAsync( SteamConfiguration configuration, int? maxNumServers, CancellationToken cancellationToken )
         {
             if ( configuration == null )
             {
@@ -41,6 +52,11 @@ namespace SteamKit2
             {
                 ["cellid"] = configuration.CellID.ToString( CultureInfo.InvariantCulture )
             };
+
+            if (maxNumServers.HasValue )
+            {
+                args[ "maxcount" ] = maxNumServers.Value.ToString(CultureInfo.InvariantCulture);
+            }
 
             cancellationToken.ThrowIfCancellationRequested();
 
