@@ -63,12 +63,12 @@ namespace SteamKit2
 
                 foreach ( var child in socketList.Children )
                 {
-                    if ( !NetHelpers.TryParseIPEndPoint( child.Value, out var endpoint ) )
+                    if ( !ServerRecord.TryCreateSocketServer( child.Value, out var record ))
                     {
                         continue;
                     }
 
-                    serverRecords.Add( ServerRecord.CreateSocketServer( endpoint ) );
+                    serverRecords.Add( record );
                 }
 
                 foreach ( var child in websocketList.Children )

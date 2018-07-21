@@ -1,4 +1,5 @@
-﻿using SteamKit2;
+﻿using System.Net;
+using SteamKit2;
 using SteamKit2.Discovery;
 using Xunit;
 
@@ -83,6 +84,33 @@ namespace Tests
             Assert.True(r.Equals(l));
 
             Assert.Equal(l.GetHashCode(), r.GetHashCode());
+        }
+
+        [Fact]
+        public void CanTryCreateSocketServer()
+        {
+            Assert.True(ServerRecord.TryCreateSocketServer("127.0.0.1:1234", out var record));
+            Assert.NotNull(record);
+            Assert.Equal(new IPEndPoint(IPAddress.Loopback, 1234), record.EndPoint);
+            Assert.Equal(ProtocolTypes.Tcp | ProtocolTypes.Udp, record.ProtocolTypes);
+
+            Assert.True(ServerRecord.TryCreateSocketServer("192.168.0.1:5678", out record));
+            Assert.NotNull(record);
+            Assert.Equal(new IPEndPoint(IPAddress.Parse("192.168.0.1"), 5678), record.EndPoint);
+            Assert.Equal(ProtocolTypes.Tcp | ProtocolTypes.Udp, record.ProtocolTypes);
+        }
+
+        [Fact]
+        public void CannotTryCreateSocketServer()
+        {
+            Assert.False(ServerRecord.TryCreateSocketServer("127.0.0.1", out var record));
+            Assert.Null(record);
+
+            Assert.False(ServerRecord.TryCreateSocketServer("127.0.0.1:123456789", out record));
+            Assert.Null(record);
+
+            Assert.False(ServerRecord.TryCreateSocketServer("volvopls.valvesoftware.com:1234", out record));
+            Assert.Null(record);
         }
     }
 }

@@ -397,6 +397,12 @@ namespace SteamKit2
                 return false;
             }
 
+            if (port < ushort.MinValue || port > ushort.MaxValue)
+            {
+                endPoint = null;
+                return false;
+            }
+
             endPoint = new IPEndPoint(address, port);
             return true;
         }
