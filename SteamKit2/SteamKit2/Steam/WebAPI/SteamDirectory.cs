@@ -55,7 +55,7 @@ namespace SteamKit2
 
             if ( maxNumServers.HasValue )
             {
-                args[ "maxcount" ] = maxNumServers.Value.ToString(CultureInfo.InvariantCulture);
+                args[ "maxcount" ] = maxNumServers.Value.ToString( CultureInfo.InvariantCulture );
             }
 
             cancellationToken.ThrowIfCancellationRequested();
