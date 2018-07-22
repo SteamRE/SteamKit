@@ -109,6 +109,12 @@ namespace Tests
             Assert.False(ServerRecord.TryCreateSocketServer("127.0.0.1:123456789", out record));
             Assert.Null(record);
 
+            Assert.False(ServerRecord.TryCreateSocketServer("127.0.0.1:-1234", out record));
+            Assert.Null(record);
+
+            Assert.False(ServerRecord.TryCreateSocketServer("127.0.0.1:notanint", out record));
+            Assert.Null(record);
+
             Assert.False(ServerRecord.TryCreateSocketServer("volvopls.valvesoftware.com:1234", out record));
             Assert.Null(record);
         }
