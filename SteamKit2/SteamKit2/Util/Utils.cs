@@ -383,21 +383,13 @@ namespace SteamKit2
                 return false;
             }
 
-            IPAddress address;
-            if (!IPAddress.TryParse(endpointParts[0], out address))
+            if (!IPAddress.TryParse(endpointParts[0], out var address))
             {
                 endPoint = null;
                 return false;
             }
 
-            int port;
-            if (!int.TryParse(endpointParts[1], out port))
-            {
-                endPoint = null;
-                return false;
-            }
-
-            if (port < ushort.MinValue || port > ushort.MaxValue)
+            if (!ushort.TryParse(endpointParts[1], out var port))
             {
                 endPoint = null;
                 return false;
