@@ -75,15 +75,15 @@ namespace SteamKit2
 
             var serverRecords = new List<ServerRecord>( capacity: socketList.Children.Count + websocketList.Children.Count );
 
-            foreach ( var child in socketList.Children )
-            {
-                if ( !NetHelpers.TryParseIPEndPoint( child.Value, out var endpoint ) )
+                foreach ( var child in socketList.Children )
                 {
-                    continue;
-                }
+                    if ( !ServerRecord.TryCreateSocketServer( child.Value, out var record ))
+                    {
+                        continue;
+                    }
 
-                serverRecords.Add( ServerRecord.CreateSocketServer( endpoint ) );
-            }
+                    serverRecords.Add( record );
+                }
 
             foreach ( var child in websocketList.Children )
             {

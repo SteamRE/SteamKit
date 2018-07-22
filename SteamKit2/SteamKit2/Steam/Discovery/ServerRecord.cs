@@ -88,6 +88,24 @@ namespace SteamKit2.Discovery
             => new ServerRecord(endPoint, ProtocolTypes.Tcp | ProtocolTypes.Udp);
 
         /// <summary>
+        /// Creates a Socket server given an IP endpoint.
+        /// </summary>
+        /// <param name="address">The IP address and port of the server, as a string.</param>
+        /// <param name="serverRecord">A new <see cref="ServerRecord"/>, if the address was able to be parsed. <c>null</c> otherwise.</param>
+        /// <returns><c>true</c> if the address was able to be parsed, <c>false</c> otherwise.</returns>
+        public static bool TryCreateSocketServer(string address, out ServerRecord serverRecord)
+        {
+            if (!NetHelpers.TryParseIPEndPoint(address, out var endPoint))
+            {
+                serverRecord = default(ServerRecord);
+                return false;
+            }
+
+            serverRecord = new ServerRecord(endPoint, ProtocolTypes.Tcp | ProtocolTypes.Udp);
+            return true;
+        }
+
+        /// <summary>
         /// Creates a WebSocket server given an address in the form of "hostname:port".
         /// </summary>
         /// <param name="address">The name and port of the server</param>
