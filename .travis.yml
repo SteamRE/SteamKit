@@ -27,4 +27,5 @@ notifications:
 
 cache:
     directories:
+        - "~/.nuget/packages"
         - "~/.local/share/NuGet/Cache"
