@@ -18,13 +18,13 @@ namespace NetHookAnalyzer2
 				Text = item.Sequence.ToString(),
 			});
 
-		    lvi.SubItems.Add(new ListViewItem.ListViewSubItem
-		    {
-		        Name = "Timestamp",
-		        Text = item.Timestamp.ToString(CultureInfo.InvariantCulture),
-		    });
+			lvi.SubItems.Add(new ListViewItem.ListViewSubItem
+			{
+				Name = "Timestamp",
+				Text = item.Timestamp.ToString(CultureInfo.CurrentUICulture),
+			});
 
-            lvi.SubItems.Add(new ListViewItem.ListViewSubItem
+			lvi.SubItems.Add(new ListViewItem.ListViewSubItem
 			{
 				Name = "Direction",
 				Text = item.Direction.ToString().ToLowerInvariant(),

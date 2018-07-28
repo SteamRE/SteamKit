@@ -54,7 +54,7 @@ namespace NetHookAnalyzer2
 				return false;
 			}
 
-			Timestamp = File.GetLastWriteTime(fileInfo.FullName);
+			Timestamp = fileInfo.LastWriteTime;
 
 			var direction = m.Groups[ "direction" ].Value;
 			PacketDirection packetDirection;
