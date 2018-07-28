@@ -35,6 +35,7 @@
 			System.Windows.Forms.ColumnHeader innerMessageColumnHeader;
 			System.Windows.Forms.ColumnHeader itemNameColumnHeader;
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+			System.Windows.Forms.ColumnHeader timestampColumnHeader;
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,6 +59,7 @@
 			messageColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			innerMessageColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			itemNameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			timestampColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
 			this.splitContainer.Panel1.SuspendLayout();
@@ -274,6 +276,7 @@
 			this.itemsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             itemNameColumnHeader,
             sequenceColumnHeader,
+            timestampColumnHeader,
             directionColumnHeader,
             messageColumnHeader,
             innerMessageColumnHeader});
@@ -297,6 +300,11 @@
 			this.itemExplorerTreeView.Name = "itemExplorerTreeView";
 			this.itemExplorerTreeView.Size = new System.Drawing.Size(455, 426);
 			this.itemExplorerTreeView.TabIndex = 0;
+			// 
+			// timestampColumnHeader
+			// 
+			timestampColumnHeader.Text = "Timestamp";
+			timestampColumnHeader.Width = 134;
 			// 
 			// MainForm
 			// 
