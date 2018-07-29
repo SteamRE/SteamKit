@@ -22,6 +22,7 @@ namespace NetHookAnalyzer2
 
 		public string Name { get; private set; }
 		public int Sequence { get; private set; }
+		public DateTime Timestamp { get; private set; }
 		public PacketDirection Direction { get; private set; }
 		public EMsg EMsg { get; private set; }
 
@@ -52,6 +53,8 @@ namespace NetHookAnalyzer2
 			{
 				return false;
 			}
+
+			Timestamp = fileInfo.LastWriteTime;
 
 			var direction = m.Groups[ "direction" ].Value;
 			PacketDirection packetDirection;

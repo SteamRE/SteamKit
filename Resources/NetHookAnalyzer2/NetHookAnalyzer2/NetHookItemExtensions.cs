@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Globalization;
+using System.Windows.Forms;
 
 namespace NetHookAnalyzer2
 {
@@ -15,6 +16,12 @@ namespace NetHookAnalyzer2
 			{
 				Name = "#",
 				Text = item.Sequence.ToString(),
+			});
+
+			lvi.SubItems.Add(new ListViewItem.ListViewSubItem
+			{
+				Name = "Timestamp",
+				Text = item.Timestamp.ToString(CultureInfo.CurrentUICulture),
 			});
 
 			lvi.SubItems.Add(new ListViewItem.ListViewSubItem
