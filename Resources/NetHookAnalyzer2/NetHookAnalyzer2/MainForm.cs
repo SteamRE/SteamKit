@@ -150,9 +150,12 @@ namespace NetHookAnalyzer2
 				dialog.SelectedPath = GetLatestNethookDumpDirectory();
 			}
 
-			if (dialog.ShowDialog() != WinForms.DialogResult.OK)
-			{
-				return;
+			using (new CenterWinDialog(this))
+		 	{
+				if (dialog.ShowDialog() != WinForms.DialogResult.OK)
+				{
+					return;
+				}
 			}
 
 			var dumpDirectory = dialog.SelectedPath;
