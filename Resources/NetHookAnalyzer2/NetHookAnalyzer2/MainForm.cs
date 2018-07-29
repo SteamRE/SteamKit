@@ -151,7 +151,7 @@ namespace NetHookAnalyzer2
 			}
 
 			using (new CenterWinDialog(this))
-		 	{
+			{
 				if (dialog.ShowDialog() != WinForms.DialogResult.OK)
 				{
 					return;
