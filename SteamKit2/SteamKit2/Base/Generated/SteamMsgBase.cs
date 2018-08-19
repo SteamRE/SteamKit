@@ -386,6 +386,24 @@ namespace SteamKit2.Internal
       get { return _forward_to_sysid; }
     }
   
+
+    private uint? _cm_sysid;
+    [global::ProtoBuf.ProtoMember(28, IsRequired = false, Name=@"cm_sysid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint cm_sysid
+    {
+      get { return _cm_sysid?? default(uint); }
+      set { _cm_sysid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool cm_sysidSpecified
+    {
+      get { return _cm_sysid != null; }
+      set { if (value == (_cm_sysid== null)) _cm_sysid = value ? this.cm_sysid : (uint?)null; }
+    }
+    private bool ShouldSerializecm_sysid() { return cm_sysidSpecified; }
+    private void Resetcm_sysid() { cm_sysidSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1341,6 +1359,52 @@ namespace SteamKit2.Internal
     }
     private bool ShouldSerializeshow_broadcast() { return show_broadcastSpecified; }
     private void Resetshow_broadcast() { show_broadcastSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CLocalizationToken")]
+  public partial class CLocalizationToken : global::ProtoBuf.IExtensible
+  {
+    public CLocalizationToken() {}
+    
+
+    private uint? _language;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"language", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint language
+    {
+      get { return _language?? default(uint); }
+      set { _language = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool languageSpecified
+    {
+      get { return _language != null; }
+      set { if (value == (_language== null)) _language = value ? this.language : (uint?)null; }
+    }
+    private bool ShouldSerializelanguage() { return languageSpecified; }
+    private void Resetlanguage() { languageSpecified = false; }
+    
+
+    private string _localized_string;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"localized_string", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string localized_string
+    {
+      get { return _localized_string?? ""; }
+      set { _localized_string = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool localized_stringSpecified
+    {
+      get { return _localized_string != null; }
+      set { if (value == (_localized_string== null)) _localized_string = value ? this.localized_string : (string)null; }
+    }
+    private bool ShouldSerializelocalized_string() { return localized_stringSpecified; }
+    private void Resetlocalized_string() { localized_stringSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

@@ -109,6 +109,8 @@ namespace NetHookAnalyzer2
 				}
 
 				case SteamKit2.EMsg.ServiceMethod:
+				case SteamKit2.EMsg.ServiceMethodCallFromClient:
+				case SteamKit2.EMsg.ServiceMethodResponse:
 				{
 					var fileData = File.ReadAllBytes(FileInfo.FullName);
 					var hdr = new MsgHdrProtoBuf();

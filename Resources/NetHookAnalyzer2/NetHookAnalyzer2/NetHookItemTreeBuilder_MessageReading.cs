@@ -49,14 +49,20 @@ namespace NetHookAnalyzer2
 
 			object body;
 
-			// Unified Notifications
-			if (isProto && eMsg == EMsg.ServiceMethod && !string.IsNullOrEmpty(targetJobName.Value))
+			switch (eMsg)
 			{
-				body = UnifiedMessagingHelpers.ReadServiceMethodBody(targetJobName.Value, stream, x => x.GetParameters().First().ParameterType);
-			}
-			else
-			{
-				body = ReadMessageBody(rawEMsg, stream);
+				case EMsg.ServiceMethod:
+				case EMsg.ServiceMethodCallFromClient:
+					body = UnifiedMessagingHelpers.ReadServiceMethodBody(targetJobName.Value, stream, x => x.GetParameters().First().ParameterType);
+					break;
+
+				case EMsg.ServiceMethodResponse:
+					body = UnifiedMessagingHelpers.ReadServiceMethodBody(targetJobName.Value, stream, x => x.ReturnType);
+					break;
+
+				default:
+					body = ReadMessageBody(rawEMsg, stream);
+					break;
 			}
 
 			return body;

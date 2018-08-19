@@ -519,7 +519,7 @@ message CMsgClientMMSInviteToLobby {
 	optional fixed64 steam_id_user_invited = 3;
 }
 
-message CMsgClientUDSInviteToGame {
+message CMsgClientInviteToGame {
 	optional fixed64 steam_id_dest = 1;
 	optional fixed64 steam_id_src = 2;
 	optional string connect_string = 3;
@@ -1151,6 +1151,7 @@ message CMsgClientClanState {
 		optional uint32 online = 2;
 		optional uint32 chatting = 3;
 		optional uint32 in_game = 4;
+		optional uint32 chat_room_members = 5;
 	}
 
 	message Event {
@@ -1162,11 +1163,11 @@ message CMsgClientClanState {
 	}
 
 	optional fixed64 steamid_clan = 1;
-	optional uint32 m_unStatusFlags = 2;
 	optional uint32 clan_account_flags = 3;
 	optional .CMsgClientClanState.NameInfo name_info = 4;
 	optional .CMsgClientClanState.UserCounts user_counts = 5;
 	repeated .CMsgClientClanState.Event events = 6;
 	repeated .CMsgClientClanState.Event announcements = 7;
+	optional bool chat_room_private = 8;
 }
 

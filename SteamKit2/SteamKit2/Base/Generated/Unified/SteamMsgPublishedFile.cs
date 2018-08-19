@@ -1906,6 +1906,78 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializelanguage() { return languageSpecified; }
     private void Resetlanguage() { languageSpecified = false; }
     
+
+    private bool? _app_has_adult_content;
+    [global::ProtoBuf.ProtoMember(65, IsRequired = false, Name=@"app_has_adult_content", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool app_has_adult_content
+    {
+      get { return _app_has_adult_content?? default(bool); }
+      set { _app_has_adult_content = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool app_has_adult_contentSpecified
+    {
+      get { return _app_has_adult_content != null; }
+      set { if (value == (_app_has_adult_content== null)) _app_has_adult_content = value ? this.app_has_adult_content : (bool?)null; }
+    }
+    private bool ShouldSerializeapp_has_adult_content() { return app_has_adult_contentSpecified; }
+    private void Resetapp_has_adult_content() { app_has_adult_contentSpecified = false; }
+    
+
+    private bool? _app_has_adult_content_sex;
+    [global::ProtoBuf.ProtoMember(66, IsRequired = false, Name=@"app_has_adult_content_sex", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool app_has_adult_content_sex
+    {
+      get { return _app_has_adult_content_sex?? default(bool); }
+      set { _app_has_adult_content_sex = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool app_has_adult_content_sexSpecified
+    {
+      get { return _app_has_adult_content_sex != null; }
+      set { if (value == (_app_has_adult_content_sex== null)) _app_has_adult_content_sex = value ? this.app_has_adult_content_sex : (bool?)null; }
+    }
+    private bool ShouldSerializeapp_has_adult_content_sex() { return app_has_adult_content_sexSpecified; }
+    private void Resetapp_has_adult_content_sex() { app_has_adult_content_sexSpecified = false; }
+    
+
+    private bool? _app_has_adult_content_violence;
+    [global::ProtoBuf.ProtoMember(67, IsRequired = false, Name=@"app_has_adult_content_violence", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool app_has_adult_content_violence
+    {
+      get { return _app_has_adult_content_violence?? default(bool); }
+      set { _app_has_adult_content_violence = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool app_has_adult_content_violenceSpecified
+    {
+      get { return _app_has_adult_content_violence != null; }
+      set { if (value == (_app_has_adult_content_violence== null)) _app_has_adult_content_violence = value ? this.app_has_adult_content_violence : (bool?)null; }
+    }
+    private bool ShouldSerializeapp_has_adult_content_violence() { return app_has_adult_content_violenceSpecified; }
+    private void Resetapp_has_adult_content_violence() { app_has_adult_content_violenceSpecified = false; }
+    
+
+    private bool? _maybe_inappropriate;
+    [global::ProtoBuf.ProtoMember(68, IsRequired = false, Name=@"maybe_inappropriate", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool maybe_inappropriate
+    {
+      get { return _maybe_inappropriate?? default(bool); }
+      set { _maybe_inappropriate = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool maybe_inappropriateSpecified
+    {
+      get { return _maybe_inappropriate != null; }
+      set { if (value == (_maybe_inappropriate== null)) _maybe_inappropriate = value ? this.maybe_inappropriate : (bool?)null; }
+    }
+    private bool ShouldSerializemaybe_inappropriate() { return maybe_inappropriateSpecified; }
+    private void Resetmaybe_inappropriate() { maybe_inappropriateSpecified = false; }
+    
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Tag")]
   public partial class Tag : global::ProtoBuf.IExtensible
   {

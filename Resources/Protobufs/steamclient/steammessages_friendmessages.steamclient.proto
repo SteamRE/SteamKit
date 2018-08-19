@@ -1,0 +1,112 @@
+import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
+
+message CFriendMessages_GetRecentMessages_Request {
+	optional fixed64 steamid1 = 1;
+	optional fixed64 steamid2 = 2;
+	optional uint32 count = 3 [(description) = "If non-zero, cap the number of recent messages to return."];
+	optional bool most_recent_conversation = 4 [(description) = "Grab the block of chat from the most recent conversation (a ~5 minute period)"];
+	optional fixed32 rtime32_start_time = 5 [(description) = "If non-zero, return only messages with timestamps greater or equal to this. If zero, we only return messages from a recent time cutoff."];
+	optional bool bbcode_format = 6 [(description) = "Return the results with bbcode formatting."];
+	optional uint32 start_ordinal = 7 [(description) = "Combined with start time, only messages after this ordinal are returned (dedupes messages in same second)"];
+	optional uint32 time_last = 8 [(description) = "if present/non-zero, return only messages before this."];
+	optional uint32 ordinal_last = 9;
+}
+
+message CFriendMessages_GetRecentMessages_Response {
+	message FriendMessage {
+		optional uint32 accountid = 1;
+		optional uint32 timestamp = 2;
+		optional string message = 3;
+		optional uint32 ordinal = 4;
+	}
+
+	repeated .CFriendMessages_GetRecentMessages_Response.FriendMessage messages = 1 [(description) = "Array of messages, returned newest to oldest."];
+	optional bool more_available = 4;
+}
+
+message CFriendsMessages_GetActiveMessageSessions_Request {
+	optional uint32 lastmessage_since = 1 [(description) = "return only session information where a chat message has been sent since this time (for polling)"];
+}
+
+message CFriendsMessages_GetActiveMessageSessions_Response {
+	message FriendMessageSession {
+		optional uint32 accountid_friend = 1;
+		optional uint32 last_message = 2;
+		optional uint32 last_view = 3;
+		optional uint32 unread_message_count = 4;
+	}
+
+	repeated .CFriendsMessages_GetActiveMessageSessions_Response.FriendMessageSession message_sessions = 1;
+	optional uint32 timestamp = 2 [(description) = "This should be passed in the next request as lastmessage_since to poll for updates"];
+}
+
+message CFriendMessages_SendMessage_Request {
+	optional fixed64 steamid = 1;
+	optional int32 chat_entry_type = 2;
+	optional string message = 3;
+	optional bool contains_bbcode = 4;
+	optional bool echo_to_sender = 5;
+	optional bool low_priority = 6;
+}
+
+message CFriendMessages_SendMessage_Response {
+	optional string modified_message = 1;
+	optional uint32 server_timestamp = 2;
+	optional uint32 ordinal = 3;
+}
+
+message CFriendMessages_AckMessage_Notification {
+	optional fixed64 steamid_partner = 1;
+	optional uint32 timestamp = 2;
+}
+
+message CFriendMessages_IsInFriendsUIBeta_Request {
+	optional fixed64 steamid = 1;
+}
+
+message CFriendMessages_IsInFriendsUIBeta_Response {
+	optional bool online_in_friendsui = 1;
+	optional bool has_used_friendsui = 2;
+}
+
+message CFriendMessages_IncomingMessage_Notification {
+	optional fixed64 steamid_friend = 1;
+	optional int32 chat_entry_type = 2;
+	optional bool from_limited_account = 3;
+	optional string message = 4;
+	optional fixed32 rtime32_server_timestamp = 5;
+	optional uint32 ordinal = 6;
+	optional bool local_echo = 7;
+	optional string message_no_bbcode = 8;
+	optional bool low_priority = 9;
+}
+
+service FriendMessages {
+	option (service_description) = "A service for relaying and logging friend messages (user-to-user chats and offline messaging)";
+	rpc GetRecentMessages (.CFriendMessages_GetRecentMessages_Request) returns (.CFriendMessages_GetRecentMessages_Response) {
+		option (method_description) = "Get a log of recent chat messages between two users";
+	}
+	rpc GetActiveMessageSessions (.CFriendsMessages_GetActiveMessageSessions_Request) returns (.CFriendsMessages_GetActiveMessageSessions_Response) {
+		option (method_description) = "Get information about recent offline messages and chats";
+	}
+	rpc SendMessage (.CFriendMessages_SendMessage_Request) returns (.CFriendMessages_SendMessage_Response) {
+		option (method_description) = "Send a chat message to a friend";
+	}
+	rpc AckMessage (.CFriendMessages_AckMessage_Notification) returns (.NoResponse) {
+		option (method_description) = "Acknowledge that we have seen the most recent message from a friend";
+	}
+	rpc IsInFriendsUIBeta (.CFriendMessages_IsInFriendsUIBeta_Request) returns (.CFriendMessages_IsInFriendsUIBeta_Response) {
+		option (method_description) = "See if a friend is in the friendsui beta.";
+	}
+}
+service FriendMessagesClient {
+	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+	rpc IncomingMessage (.CFriendMessages_IncomingMessage_Notification) returns (.NoResponse) {
+		option (method_description) = "New chat message from a friend.";
+	}
+	rpc NotifyAckMessageEcho (.CFriendMessages_AckMessage_Notification) returns (.NoResponse) {
+		option (method_description) = "A session acked an unread message, echo to other sessions.";
+	}
+}

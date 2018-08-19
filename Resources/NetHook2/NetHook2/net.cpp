@@ -35,7 +35,7 @@ CNet::CNet()
 
 	RecvPktFn pRecvPktFunc = NULL;
 	bool bFoundRecvPktFunc = steamClientScan.FindFunction(
-		"\x55\x8B\xEC\x81\xEC\x98\x04\x00\x00",
+		"\x55\x8B\xEC\x81\xEC\x88\x04\x00\x00",
 		"xxxxxxxxx",
 		(void **)&pRecvPktFunc
 	);

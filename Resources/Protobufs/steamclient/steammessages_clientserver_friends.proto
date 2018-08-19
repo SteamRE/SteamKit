@@ -8,6 +8,7 @@ message CMsgClientFriendMsg {
 	optional int32 chat_entry_type = 2;
 	optional bytes message = 3;
 	optional fixed32 rtime32_server_timestamp = 4;
+	optional bool echo_to_sender = 5;
 }
 
 message CMsgClientFriendMsgIncoming {
@@ -109,6 +110,11 @@ message CMsgPersonaChangeResponse {
 
 message CMsgClientPersonaState {
 	message Friend {
+		message ClanData {
+			optional uint32 ogg_app_id = 1;
+			optional uint64 chat_group_id = 2;
+		}
+
 		message KV {
 			optional string key = 1;
 			optional string value = 2;
@@ -133,11 +139,11 @@ message CMsgClientPersonaState {
 		optional string game_name = 55;
 		optional fixed64 gameid = 56;
 		optional bytes game_data_blob = 60;
+		optional .CMsgClientPersonaState.Friend.ClanData clan_data = 64;
 		optional string clan_tag = 65;
-		optional string facebook_name = 66;
-		optional uint64 facebook_id = 67;
 		repeated .CMsgClientPersonaState.Friend.KV rich_presence = 71;
 		optional fixed64 broadcast_id = 72;
+		optional fixed64 game_lobby_id = 73;
 	}
 
 	optional uint32 status_flags = 1;
@@ -163,6 +169,7 @@ message CMsgClientFriendProfileInfoResponse {
 message CMsgClientCreateFriendsGroup {
 	optional fixed64 steamid = 1;
 	optional string groupname = 2;
+	repeated fixed64 steamid_friends = 3;
 }
 
 message CMsgClientCreateFriendsGroupResponse {
@@ -179,12 +186,14 @@ message CMsgClientDeleteFriendsGroupResponse {
 	optional uint32 eresult = 1;
 }
 
-message CMsgClientRenameFriendsGroup {
+message CMsgClientManageFriendsGroup {
 	optional int32 groupid = 1;
 	optional string groupname = 2;
+	repeated fixed64 steamid_friends_added = 3;
+	repeated fixed64 steamid_friends_removed = 4;
 }
 
-message CMsgClientRenameFriendsGroupResponse {
+message CMsgClientManageFriendsGroupResponse {
 	optional uint32 eresult = 1;
 }
 
@@ -213,6 +222,8 @@ message CMsgClientEmoticonList {
 	message Emoticon {
 		optional string name = 1;
 		optional int32 count = 2;
+		optional uint32 time_last_used = 3;
+		optional uint32 use_count = 4;
 	}
 
 	repeated .CMsgClientEmoticonList.Emoticon emoticons = 1;
