@@ -201,13 +201,16 @@ namespace SteamKit2
         /// <param name="packet">The packet.</param>
         private void SendSequenced(UdpPacket packet)
         {
-            packet.Header.SeqThis = outSeq;
-            packet.Header.MsgStartSeq = outSeq;
-            packet.Header.PacketsInMsg = 1;
+            lock ( outPackets )
+            {
+                packet.Header.SeqThis = outSeq;
+                packet.Header.MsgStartSeq = outSeq;
+                packet.Header.PacketsInMsg = 1;
 
-            outPackets.Add(packet);
+                outPackets.Add( packet );
 
-            outSeq++;
+                outSeq++;
+            }
         }
 
         /// <summary>
@@ -216,15 +219,18 @@ namespace SteamKit2
         /// <param name="packets">The packets that make up the single net message</param>
         private void SendSequenced(UdpPacket[] packets)
         {
-            uint msgStart = outSeq;
-
-            foreach ( UdpPacket packet in packets )
+            lock ( outPackets )
             {
-                SendSequenced(packet);
+                uint msgStart = outSeq;
 
-                // Correct for any assumptions made for the single-packet case.
-                packet.Header.PacketsInMsg = (uint) packets.Length;
-                packet.Header.MsgStartSeq = msgStart;
+                foreach ( UdpPacket packet in packets )
+                {
+                    SendSequenced( packet );
+
+                    // Correct for any assumptions made for the single-packet case.
+                    packet.Header.PacketsInMsg = ( uint )packets.Length;
+                    packet.Header.MsgStartSeq = msgStart;
+                }
             }
         }
 
@@ -281,29 +287,33 @@ namespace SteamKit2
         /// </summary>
         private void SendPendingMessages()
         {
-            if ( DateTime.Now > nextResend && outSeqSent > outSeqAcked )
+            lock ( outPackets )
             {
-                // if we aren't able to clear the send queue during a Disconnect, don't bother retrying
-                if ( state == ( int )State.Disconnecting )
+                var outPacketQueue = outPackets;
+
+                if ( DateTime.Now > nextResend && outSeqSent > outSeqAcked )
                 {
-                    outPackets.Clear();
-                    return;
+                    // If we can't clear the send queue during a Disconnect, clear out the pending messages
+                    if ( state == ( int )State.Disconnecting )
+                    {
+                        outPackets.Clear();
+                    }
+
+                    DebugLog.WriteLine( "UdpConnection", "Sequenced packet resend required" );
+
+                    // Don't send more than 3 (Steam behavior?)
+                    for ( int i = 0; i < RESEND_COUNT && i < outPacketQueue.Count; i++ )
+                        SendPacket( outPacketQueue[ i ] );
+
+                    nextResend = DateTime.Now.AddSeconds( RESEND_DELAY );
                 }
-
-                DebugLog.WriteLine("UdpConnection", "Sequenced packet resend required");
-
-                // Don't send more than 3 (Steam behavior?)
-                for ( int i = 0; i < RESEND_COUNT && i < outPackets.Count; i++ )
-                    SendPacket(outPackets[i]);
-
-                nextResend = DateTime.Now.AddSeconds(RESEND_DELAY);
-            }
-            else if ( outSeqSent < outSeqAcked + AHEAD_COUNT )
-            {
-                // I've never seen Steam send more than 4 packets before it gets an Ack, so this limits the
-                // number of sequenced packets that can be sent out at one time.
-                for ( int i = (int) ( outSeqSent - outSeqAcked ); i < AHEAD_COUNT && i < outPackets.Count; i++ )
-                    SendPacket(outPackets[i]);
+                else if ( outSeqSent < outSeqAcked + AHEAD_COUNT )
+                {
+                    // I've never seen Steam send more than 4 packets before it gets an Ack, so this limits the
+                    // number of sequenced packets that can be sent out at one time.
+                    for ( int i = ( int )( outSeqSent - outSeqAcked ); i < AHEAD_COUNT && i < outPacketQueue.Count; i++ )
+                        SendPacket( outPacketQueue[ i ] );
+                }
             }
         }
 
@@ -456,6 +466,11 @@ namespace SteamKit2
                     userRequestedDisconnect = true;
                     break;
                 }
+            }
+
+            if ( sock != null )
+            {
+                sock.Dispose();
             }
 
             DebugLog.WriteLine("UdpConnection", "Calling OnDisconnected");
