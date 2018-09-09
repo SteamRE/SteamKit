@@ -289,8 +289,6 @@ namespace SteamKit2
         {
             lock ( outPackets )
             {
-                var outPacketQueue = outPackets;
-
                 if ( DateTime.Now > nextResend && outSeqSent > outSeqAcked )
                 {
                     // If we can't clear the send queue during a Disconnect, clear out the pending messages
@@ -302,8 +300,8 @@ namespace SteamKit2
                     DebugLog.WriteLine( "UdpConnection", "Sequenced packet resend required" );
 
                     // Don't send more than 3 (Steam behavior?)
-                    for ( int i = 0; i < RESEND_COUNT && i < outPacketQueue.Count; i++ )
-                        SendPacket( outPacketQueue[ i ] );
+                    for ( int i = 0; i < RESEND_COUNT && i < outPackets.Count; i++ )
+                        SendPacket( outPackets[ i ] );
 
                     nextResend = DateTime.Now.AddSeconds( RESEND_DELAY );
                 }
@@ -311,8 +309,8 @@ namespace SteamKit2
                 {
                     // I've never seen Steam send more than 4 packets before it gets an Ack, so this limits the
                     // number of sequenced packets that can be sent out at one time.
-                    for ( int i = ( int )( outSeqSent - outSeqAcked ); i < AHEAD_COUNT && i < outPacketQueue.Count; i++ )
-                        SendPacket( outPacketQueue[ i ] );
+                    for ( int i = ( int )( outSeqSent - outSeqAcked ); i < AHEAD_COUNT && i < outPackets.Count; i++ )
+                        SendPacket( outPackets[ i ] );
                 }
             }
         }
