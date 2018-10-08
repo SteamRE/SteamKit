@@ -28,5 +28,4 @@ echo Building Dota messages...
 ..\..\Protogen\protogen -s:..\ -i:"dota_gcmessages_client_tournament.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\GC\Dota\MsgGCClientTournament.cs" -t:csharp -ns:"SteamKit2.GC.Dota.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"dota_gcmessages_client_watch.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\GC\Dota\MsgGCClientWatch.cs" -t:csharp -p:lightFramework=true -ns:"SteamKit2.GC.Dota.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"dota_gcmessages_server.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\GC\Dota\MsgGCServer.cs" -t:csharp -ns:"SteamKit2.GC.Dota.Internal" -p:detectMissing
-..\..\Protogen\protogen -s:..\ -i:"dota_gcmessages_server.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\GC\Dota\MsgGCServer.cs" -t:csharp -ns:"SteamKit2.GC.Dota.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"dota_match_metadata.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\GC\Dota\MsgMatchMetadata.cs" -t:csharp -ns:"SteamKit2.GC.Dota.Internal" -p:detectMissing
