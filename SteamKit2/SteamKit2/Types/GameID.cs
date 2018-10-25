@@ -64,6 +64,36 @@ namespace SteamKit2
             : this( ( UInt64 )nAppID )
         {
         }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GameID"/> class.
+        /// </summary>
+        /// <param name="nAppID">The base app id of the mod.</param>
+        /// <param name="modPath">The game folder name of the mod.</param>
+        public GameID( UInt32 nAppID, string modPath )
+            : this(0)
+        {
+            AppID = nAppID;
+            AppType = GameType.GameMod;
+            ModID = BitConverter.ToUInt32(CryptoHelper.CRCHash(System.Text.Encoding.ASCII.GetBytes(modPath)), 0);
+        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GameID"/> class.
+        /// </summary>
+        /// <param name="exePath">The path to the executable, usually quoted.</param>
+        /// <param name="appName">The name of the application shortcut.</param>
+        public GameID( string exePath, string appName )
+            : this(0)
+        {
+            string combined = string.Empty;
+            if (exePath != null)
+                combined += exePath;
+            if (appName != null)
+                combined += appName;
+
+            AppID = 0;
+            AppType = GameType.Shortcut;
+            ModID = BitConverter.ToUInt32(CryptoHelper.CRCHash(System.Text.Encoding.ASCII.GetBytes(combined)), 0);
+        }
 
 
         /// <summary>
@@ -179,6 +209,7 @@ namespace SteamKit2
             set
             {
                 gameid[ 32, 0xFFFFFFFF ] = ( UInt64 )value;
+                gameid[ 63, 0xFF ] = 1;
             }
         }
 
