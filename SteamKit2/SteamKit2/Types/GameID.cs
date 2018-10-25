@@ -74,7 +74,7 @@ namespace SteamKit2
         {
             AppID = nAppID;
             AppType = GameType.GameMod;
-            ModID = BitConverter.ToUInt32(CryptoHelper.CRCHash(System.Text.Encoding.ASCII.GetBytes(modPath)), 0);
+            ModID = Crc32.Compute(System.Text.Encoding.UTF8.GetBytes(modPath));
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="GameID"/> class.
@@ -92,7 +92,7 @@ namespace SteamKit2
 
             AppID = 0;
             AppType = GameType.Shortcut;
-            ModID = BitConverter.ToUInt32(CryptoHelper.CRCHash(System.Text.Encoding.ASCII.GetBytes(combined)), 0);
+            ModID = Crc32.Compute(System.Text.Encoding.UTF8.GetBytes(combined));
         }
 
 
