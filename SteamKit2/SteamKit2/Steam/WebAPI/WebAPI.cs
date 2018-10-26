@@ -138,10 +138,6 @@ namespace SteamKit2
             /// The dynamic method name was not in the correct format.
             /// All API function calls must be in the format 'FunctionName###' where the optional ###'s represent a version number.
             /// </exception>
-            /// <exception cref="ArgumentException">
-            /// The reserved named parameter 'secure' was not a boolean value.
-            /// This parameter is used when requests must go through the secure API.
-            /// </exception>
             /// <exception cref="ArgumentOutOfRangeException">
             /// The function version number specified was out of range.
             /// </exception>
@@ -349,10 +345,6 @@ namespace SteamKit2
             /// The dynamic method name was not in the correct format.
             /// All API function calls must be in the format 'FunctionName###' where the optional ###'s represent a version number.
             /// </exception>
-            /// <exception cref="ArgumentException">
-            /// The reserved named parameter 'secure' was not a boolean value.
-            /// This parameter is used when requests must go through the secure API.
-            /// </exception>
             /// <exception cref="ArgumentOutOfRangeException">
             /// The function version number specified was out of range.
             /// </exception>
@@ -366,7 +358,6 @@ namespace SteamKit2
                 var apiArgs = new Dictionary<string, string>();
 
                 var requestMethod = HttpMethod.Get;
-                bool secure = false;
 
                 // convert named arguments into key value pairs
                 for ( int x = 0 ; x < args.Length ; x++ )
@@ -378,20 +369,6 @@ namespace SteamKit2
                     if ( argName.Equals( "method", StringComparison.OrdinalIgnoreCase ) )
                     {
                         requestMethod = new HttpMethod( argValue.ToString() );
-                        continue;
-                    }
-                    // secure is another reserved param for selecting the http or https apis
-                    else if ( argName.Equals( "secure", StringComparison.OrdinalIgnoreCase ) )
-                    {
-                        try
-                        {
-                            secure = ( bool )argValue;
-                        }
-                        catch ( InvalidCastException )
-                        {
-                            throw new ArgumentException( "The parameter 'secure' is a reserved parameter that must be of type bool." );
-                        }
-
                         continue;
                     }
                     // flatten lists
