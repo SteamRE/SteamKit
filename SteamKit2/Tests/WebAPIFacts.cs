@@ -42,7 +42,7 @@ namespace Tests
         }
 
         [Fact]
-        public async Task ThrowsHttpRequestExceptionIfRequestUnsuccessful()
+        public async Task ThrowsWebAPIRequestExceptionIfRequestUnsuccessful()
         {
             var listener = new TcpListener(new IPEndPoint(IPAddress.Loopback, 28123));
             listener.Start();
@@ -53,7 +53,7 @@ namespace Tests
                 var baseUri = "http://localhost:28123";
                 dynamic iface = WebAPI.GetAsyncInterface(new Uri(baseUri), "IFooService");
 
-                await Assert.ThrowsAsync(typeof(HttpRequestException), () => (Task)iface.PerformFooOperation());
+                await Assert.ThrowsAsync(typeof(WebAPIRequestException), () => (Task)iface.PerformFooOperation());
             }
             finally
             {
