@@ -16,7 +16,6 @@ namespace SteamKit2
     /// <returns>A <see cref="HttpMessageHandler"/> to be used to send HTTP requests.</returns>
     public delegate HttpMessageHandler HttpMessageHandlerFactory();
 
-
     /// <summary>
     /// Factory function to create a user-configured HttpClient.
     /// The HttpClient will be disposed of after use.
