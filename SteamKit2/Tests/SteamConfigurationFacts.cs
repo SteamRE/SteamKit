@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using SteamKit2;
 using SteamKit2.Discovery;
@@ -45,6 +49,49 @@ namespace Tests
         }
 
         [Fact]
+        public void DefaultHttpMessageHandler()
+        {
+            Assert.NotNull(configuration.HttpMessageHandlerFactory);
+
+            using (var handler = configuration.HttpMessageHandlerFactory())
+            {
+                Assert.NotNull(handler);
+                Assert.IsType<HttpClientHandler>(handler);
+
+                using (var secondHandler = configuration.HttpMessageHandlerFactory())
+                {
+                    Assert.NotNull(secondHandler);
+                    Assert.IsType<HttpClientHandler>(secondHandler);
+
+                    Assert.NotSame(handler, secondHandler);
+                }
+            }
+        }
+
+        [Fact]
+        public async Task DefaultHttpClientFactory()
+        {
+            using (var handler = new StubHttpMessageHandler())
+            {
+                using (var client = configuration.HttpClientFactory(handler))
+                {
+                    var task = client.GetAsync("http://example.com/");
+
+                    Assert.Equal("http://example.com/", handler.LastRequest?.RequestUri.AbsoluteUri);
+                    Assert.False(task.IsCompleted);
+
+                    handler.Completion.SetResult(new HttpResponseMessage(HttpStatusCode.OK));
+                    await Task.Yield();
+
+                    Assert.True(task.IsCompleted);
+
+                    var result = await task;
+                    Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+                }
+            }
+        }
+
+        [Fact]
         public void ServerListProviderIsNothingFancy()
         {
             Assert.IsType<NullServerListProvider>(configuration.ServerListProvider);
@@ -79,6 +126,27 @@ namespace Tests
         {
             Assert.Null(configuration.WebAPIKey);
         }
+
+        class StubHttpMessageHandler : HttpMessageHandler
+        {
+            public HttpRequestMessage LastRequest { get; private set; }
+
+            public TaskCompletionSource<HttpResponseMessage> Completion { get; set; } = new TaskCompletionSource<HttpResponseMessage>();
+
+            public bool IsDisposed { get; private set; }
+
+            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            {
+                LastRequest = request;
+                return Completion.Task;
+            }
+
+            protected override void Dispose(bool disposing)
+            {
+                base.Dispose(disposing);
+                IsDisposed = true;
+            }
+        }
     }
 
     public class SteamConfigurationConfiguredObjectFacts
@@ -90,6 +158,8 @@ namespace Tests
                  .WithCellID(123)
                  .WithConnectionTimeout(TimeSpan.FromMinutes(1))
                  .WithDefaultPersonaStateFlags(EClientPersonaStateFlag.SourceID)
+                 .WithHttpClientFactory(h => { var c = new HttpClient(h); c.DefaultRequestHeaders.Add("X-SteamKit-Tests", "true"); return c; })
+                 .WithHttpMessageHandlerFactory(() => new HttpClientHandler() { Properties = { ["SteamKit2-Tests"] = "true" } })
                  .WithProtocolTypes(ProtocolTypes.WebSocket | ProtocolTypes.Udp)
                  .WithServerListProvider(new CustomServerListProvider())
                  .WithUniverse(EUniverse.Internal)
@@ -115,6 +185,25 @@ namespace Tests
         public void ConnectionTimeoutIsConfigured()
         {
             Assert.Equal(TimeSpan.FromMinutes(1), configuration.ConnectionTimeout);
+        }
+
+        [Fact]
+        public void HttpClientFactoryIsConfigured()
+        {
+            using (var handler = new HttpClientHandler())
+            {
+                var client = configuration.HttpClientFactory(handler);
+                Assert.Equal("true", client.DefaultRequestHeaders.GetValues("X-SteamKit-Tests").FirstOrDefault());
+            }
+        }
+
+        [Fact]
+        public void HttpMessageHandlerFactoryIsConfigured()
+        {
+            using (var client = configuration.HttpMessageHandlerFactory() as HttpClientHandler)
+            {
+                Assert.Equal("true", client.Properties["SteamKit2-Tests"]);
+            }
         }
 
         [Fact]
