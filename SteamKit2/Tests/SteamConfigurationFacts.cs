@@ -81,9 +81,6 @@ namespace Tests
                     Assert.False(task.IsCompleted);
 
                     handler.Completion.SetResult(new HttpResponseMessage(HttpStatusCode.OK));
-                    await Task.Yield();
-
-                    Assert.True(task.IsCompleted);
 
                     var result = await task;
                     Assert.Equal(HttpStatusCode.OK, result.StatusCode);
