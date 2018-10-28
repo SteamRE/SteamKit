@@ -5,6 +5,7 @@
 
 
 using System;
+using System.Net.Http;
 using SteamKit2.Discovery;
 
 namespace SteamKit2
@@ -28,6 +29,10 @@ namespace SteamKit2
                     EClientPersonaStateFlag.PlayerName | EClientPersonaStateFlag.Presence |
                     EClientPersonaStateFlag.SourceID | EClientPersonaStateFlag.GameExtraInfo |
                     EClientPersonaStateFlag.LastSeen,
+
+                HttpClientFactory = DefaultHttpClientFactory,
+
+                HttpMessageHandlerFactory = DefaultMessageHandlerFactory,
 
                 ProtocolTypes = ProtocolTypes.Tcp,
 
@@ -68,6 +73,19 @@ namespace SteamKit2
             return this;
         }
 
+        public ISteamConfigurationBuilder WithHttpClientFactory(HttpClientFactory factoryFunction)
+        {
+            state.HttpClientFactory = factoryFunction;
+            return this;
+        }
+
+
+        public ISteamConfigurationBuilder WithHttpMessageHandlerFactory(HttpMessageHandlerFactory factoryFunction)
+        {
+            state.HttpMessageHandlerFactory = factoryFunction;
+            return this;
+        }
+
         public ISteamConfigurationBuilder WithProtocolTypes(ProtocolTypes protocolTypes)
         {
             state.ProtocolTypes = protocolTypes;
@@ -97,5 +115,9 @@ namespace SteamKit2
             state.WebAPIKey = webApiKey ?? throw new ArgumentNullException(nameof(webApiKey));
             return this;
         }
+
+        static HttpMessageHandler DefaultMessageHandlerFactory() => new HttpClientHandler();
+
+        static HttpClient DefaultHttpClientFactory(HttpMessageHandler handler) => new HttpClient(handler, disposeHandler: true);
     }
 }
