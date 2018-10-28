@@ -26,6 +26,8 @@ namespace SteamKit2
         /// </summary>
         public static Uri DefaultBaseAddress { get; } = new Uri("https://api.steampowered.com/", UriKind.Absolute);
 
+        internal static TimeSpan DefaultTimeout { get; } = TimeSpan.FromSeconds(100);
+
         /// <summary>
         /// Represents a single interface that exists within the Web API.
         /// This is a dynamic object that allows function calls to interfaces with minimal code.
@@ -48,9 +50,9 @@ namespace SteamKit2
             }
 
 
-            internal Interface( Uri baseAddress, string iface, string apiKey )
+            internal Interface( HttpClient httpClient, string iface, string apiKey )
             {
-                asyncInterface = new AsyncInterface( baseAddress, iface, apiKey );
+                asyncInterface = new AsyncInterface( httpClient, iface, apiKey );
             }
 
 
@@ -187,14 +189,9 @@ namespace SteamKit2
                 RegexOptions.Compiled | RegexOptions.IgnoreCase
             );
 
-            internal AsyncInterface( Uri baseAddress, string iface, string apiKey )
+            internal AsyncInterface( HttpClient httpClient, string iface, string apiKey )
             {
-                httpClient = new HttpClient
-                {
-                    BaseAddress = baseAddress,
-                    Timeout = TimeSpan.FromSeconds(100)
-                };
-
+                this.httpClient = httpClient;
                 this.iface = iface;
                 this.apiKey = apiKey;
             }
@@ -445,7 +442,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(iface) );
             }
 
-            return new Interface( baseAddress, iface, apiKey );
+            return new Interface( CreateDefaultHttpClient( baseAddress ), iface, apiKey );
         }
 
         /// <summary>
@@ -461,7 +458,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(iface) );
             }
 
-            return new Interface( DefaultBaseAddress, iface, apiKey );
+            return new Interface( CreateDefaultHttpClient( DefaultBaseAddress ), iface, apiKey );
         }
 
         /// <summary>
@@ -477,7 +474,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(iface) );
             }
 
-            return new AsyncInterface( DefaultBaseAddress, iface, apiKey );
+            return new AsyncInterface( CreateDefaultHttpClient( DefaultBaseAddress ), iface, apiKey );
         }
 
         /// <summary>
@@ -499,7 +496,18 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(iface) );
             }
             
-            return new AsyncInterface( baseAddress, iface, apiKey );
+            return new AsyncInterface( CreateDefaultHttpClient( baseAddress ), iface, apiKey );
+        }
+
+        static HttpClient CreateDefaultHttpClient( Uri baseAddress )
+        {
+            var client = new HttpClient
+            {
+                BaseAddress = baseAddress,
+                Timeout = DefaultTimeout
+            };
+
+            return client;
         }
     }
 

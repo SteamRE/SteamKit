@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 
 namespace SteamKit2
 {
@@ -20,7 +21,7 @@ namespace SteamKit2
                 throw new ArgumentNullException(nameof(config));
             }
 
-            return new WebAPI.Interface(config.WebAPIBaseAddress, iface, config.WebAPIKey);
+            return new WebAPI.Interface(config.GetHttpClientForWebAPI(), iface, config.WebAPIKey);
         }
 
         /// <summary>
@@ -36,7 +37,29 @@ namespace SteamKit2
                 throw new ArgumentNullException(nameof(config));
             }
 
-            return new WebAPI.AsyncInterface(config.WebAPIBaseAddress, iface, config.WebAPIKey);
+            return new WebAPI.AsyncInterface(config.GetHttpClientForWebAPI(), iface, config.WebAPIKey);
+        }
+
+        internal static HttpClient GetHttpClientForWebAPI(this SteamConfiguration config)
+        {
+            var client = config.GetHttpClient();
+
+            client.BaseAddress = config.WebAPIBaseAddress;
+            client.Timeout = WebAPI.DefaultTimeout;
+
+            return client;
+        }
+
+        internal static HttpClient GetHttpClient(this SteamConfiguration config)
+        {
+            if (config == null)
+            {
+                throw new ArgumentNullException(nameof(config));
+            }
+
+            var handler = config.HttpMessageHandlerFactory();
+            var client = config.HttpClientFactory(handler);
+            return client;
         }
     }
 }
