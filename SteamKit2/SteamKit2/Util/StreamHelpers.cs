@@ -6,53 +6,68 @@ namespace SteamKit2
 {
     internal static class StreamHelpers
     {
-        static byte[] data = new byte[8];
+        [ThreadStatic]
+        static byte[] data;
+
+        static void EnsureInitialized()
+        {
+            if ( data == null )
+                data = new byte[ 8 ];
+        }
+
         public static Int16 ReadInt16(this Stream stream)
         {
-            stream.Read( data, 0, 2 );
+            EnsureInitialized();
 
+            stream.Read( data, 0, 2 );
             return BitConverter.ToInt16( data, 0 );
         }
 
         public static UInt16 ReadUInt16(this Stream stream)
         {
-            stream.Read(data, 0, 2);
+            EnsureInitialized();
 
-            return BitConverter.ToUInt16(data, 0);
+            stream.Read( data, 0, 2 );
+            return BitConverter.ToUInt16( data, 0);
         }
 
         public static Int32 ReadInt32(this Stream stream)
         {
-            stream.Read( data, 0, 4 );
+            EnsureInitialized();
 
+            stream.Read( data, 0, 4 );
             return BitConverter.ToInt32( data, 0 );
         }
 
         public static Int64 ReadInt64(this Stream stream)
         {
-            stream.Read( data, 0, 8 );
+            EnsureInitialized();
 
+            stream.Read( data, 0, 8 );
             return BitConverter.ToInt64( data, 0 );
         }
 
         public static UInt32 ReadUInt32(this Stream stream)
         {
-            stream.Read(data, 0, 4);
+            EnsureInitialized();
 
-            return BitConverter.ToUInt32(data, 0);
+            stream.Read(data, 0, 4);
+            return BitConverter.ToUInt32( data, 0);
         }
 
         public static UInt64 ReadUInt64(this Stream stream)
         {
-            stream.Read( data, 0, 8 );
+            EnsureInitialized();
 
+            stream.Read( data, 0, 8 );
             return BitConverter.ToUInt64( data, 0 );
         }
 
         public static float ReadFloat( this Stream stream )
         {
-            stream.Read( data, 0, 4 );
+            EnsureInitialized();
 
+            stream.Read( data, 0, 4 );
             return BitConverter.ToSingle( data, 0 );
         }
 
@@ -76,7 +91,7 @@ namespace SteamKit2
                     ms.Write( data, 0, data.Length );
                 }
 
-                return encoding.GetString( ms.ToArray() );
+                return encoding.GetString( ms.GetBuffer(), 0, ( int )ms.Length );
             }
         }
 
@@ -88,19 +103,6 @@ namespace SteamKit2
             data[ dataLength ] = 0x00; // '\0'
 
             stream.Write( data, 0, data.Length );
-        }
-
-        static byte[] discardBuffer = new byte[2 << 12];
-
-        public static void ReadAndDiscard(this Stream stream, int len)
-        {
-            while (len > discardBuffer.Length)
-            {
-                stream.Read(discardBuffer, 0, discardBuffer.Length);
-                len -= discardBuffer.Length;
-            }
-
-            stream.Read(discardBuffer, 0, len);
         }
     }
 }
