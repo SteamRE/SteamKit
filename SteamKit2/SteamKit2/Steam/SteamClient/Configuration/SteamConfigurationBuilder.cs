@@ -107,8 +107,6 @@ namespace SteamKit2
             return this;
         }
 
-        static HttpMessageHandler DefaultMessageHandlerFactory() => new HttpClientHandler();
-
         static HttpClient DefaultHttpClientFactory() => new HttpClient();
     }
 }
