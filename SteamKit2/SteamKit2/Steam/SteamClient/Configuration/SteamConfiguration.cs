@@ -11,18 +11,11 @@ using SteamKit2.Discovery;
 namespace SteamKit2
 {
     /// <summary>
-    /// Factory function to create a user-configured HttpMessageHandler.
-    /// </summary>
-    /// <returns>A <see cref="HttpMessageHandler"/> to be used to send HTTP requests.</returns>
-    public delegate HttpMessageHandler HttpMessageHandlerFactory();
-
-    /// <summary>
     /// Factory function to create a user-configured HttpClient.
     /// The HttpClient will be disposed of after use.
     /// </summary>
-    /// <param name="handler">The inner <see cref="HttpMessageHandler"/> to be used.</param>
     /// <returns>A new <see cref="HttpClient"/> to be used to send HTTP requests.</returns>
-    public delegate HttpClient HttpClientFactory(HttpMessageHandler handler);
+    public delegate HttpClient HttpClientFactory();
 
     /// <summary>
     /// Configuration object to use.
@@ -86,13 +79,6 @@ namespace SteamKit2
         /// Factory function to create a user-configured HttpClient.
         /// </summary>
         public HttpClientFactory HttpClientFactory => state.HttpClientFactory;
-
-        /// <summary>
-        /// Factory function to be used to create a user-configured HttpMessageHandler.
-        /// If this is to be re-used, then you must also implement a <see cref="HttpClientFactory"/> to ensure
-        /// that it is not disposed of too early.
-        /// </summary>
-        public HttpMessageHandlerFactory HttpMessageHandlerFactory => state.HttpMessageHandlerFactory;
 
         /// <summary>
         /// The supported protocol types to use when attempting to connect to Steam.

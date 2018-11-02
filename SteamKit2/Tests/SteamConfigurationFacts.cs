@@ -49,42 +49,12 @@ namespace Tests
         }
 
         [Fact]
-        public void DefaultHttpMessageHandler()
+        public void DefaultHttpClientFactory()
         {
-            Assert.NotNull(configuration.HttpMessageHandlerFactory);
-
-            using (var handler = configuration.HttpMessageHandlerFactory())
+            using (var client = configuration.HttpClientFactory())
             {
-                Assert.NotNull(handler);
-                Assert.IsType<HttpClientHandler>(handler);
-
-                using (var secondHandler = configuration.HttpMessageHandlerFactory())
-                {
-                    Assert.NotNull(secondHandler);
-                    Assert.IsType<HttpClientHandler>(secondHandler);
-
-                    Assert.NotSame(handler, secondHandler);
-                }
-            }
-        }
-
-        [Fact]
-        public async Task DefaultHttpClientFactory()
-        {
-            using (var handler = new StubHttpMessageHandler())
-            {
-                using (var client = configuration.HttpClientFactory(handler))
-                {
-                    var task = client.GetAsync("http://example.com/");
-
-                    Assert.Equal("http://example.com/", handler.LastRequest?.RequestUri.AbsoluteUri);
-                    Assert.False(task.IsCompleted);
-
-                    handler.Completion.SetResult(new HttpResponseMessage(HttpStatusCode.OK));
-
-                    var result = await task;
-                    Assert.Equal(HttpStatusCode.OK, result.StatusCode);
-                }
+                Assert.NotNull(client);
+                Assert.IsType<HttpClient>(client);
             }
         }
 
@@ -123,27 +93,6 @@ namespace Tests
         {
             Assert.Null(configuration.WebAPIKey);
         }
-
-        class StubHttpMessageHandler : HttpMessageHandler
-        {
-            public HttpRequestMessage LastRequest { get; private set; }
-
-            public TaskCompletionSource<HttpResponseMessage> Completion { get; set; } = new TaskCompletionSource<HttpResponseMessage>();
-
-            public bool IsDisposed { get; private set; }
-
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-            {
-                LastRequest = request;
-                return Completion.Task;
-            }
-
-            protected override void Dispose(bool disposing)
-            {
-                base.Dispose(disposing);
-                IsDisposed = true;
-            }
-        }
     }
 
     public class SteamConfigurationConfiguredObjectFacts
@@ -155,8 +104,7 @@ namespace Tests
                  .WithCellID(123)
                  .WithConnectionTimeout(TimeSpan.FromMinutes(1))
                  .WithDefaultPersonaStateFlags(EClientPersonaStateFlag.SourceID)
-                 .WithHttpClientFactory(h => { var c = new HttpClient(h); c.DefaultRequestHeaders.Add("X-SteamKit-Tests", "true"); return c; })
-                 .WithHttpMessageHandlerFactory(() => new HttpClientHandler() { Properties = { ["SteamKit2-Tests"] = "true" } })
+                 .WithHttpClientFactory(() => { var c = new HttpClient(); c.DefaultRequestHeaders.Add("X-SteamKit-Tests", "true"); return c; })
                  .WithProtocolTypes(ProtocolTypes.WebSocket | ProtocolTypes.Udp)
                  .WithServerListProvider(new CustomServerListProvider())
                  .WithUniverse(EUniverse.Internal)
@@ -187,19 +135,9 @@ namespace Tests
         [Fact]
         public void HttpClientFactoryIsConfigured()
         {
-            using (var handler = new HttpClientHandler())
+            using (var client = configuration.HttpClientFactory())
             {
-                var client = configuration.HttpClientFactory(handler);
                 Assert.Equal("true", client.DefaultRequestHeaders.GetValues("X-SteamKit-Tests").FirstOrDefault());
-            }
-        }
-
-        [Fact]
-        public void HttpMessageHandlerFactoryIsConfigured()
-        {
-            using (var client = configuration.HttpMessageHandlerFactory() as HttpClientHandler)
-            {
-                Assert.Equal("true", client.Properties["SteamKit2-Tests"]);
             }
         }
 

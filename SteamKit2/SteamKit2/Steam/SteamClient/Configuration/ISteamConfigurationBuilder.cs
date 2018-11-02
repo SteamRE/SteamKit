@@ -53,15 +53,6 @@ namespace SteamKit2
         ISteamConfigurationBuilder WithHttpClientFactory(HttpClientFactory factoryFunction);
 
         /// <summary>
-        /// Configures this <see cref="SteamConfiguration" /> to with custom HTTP behaviour.
-        /// </summary>
-        /// <param name="factoryFunction">A function to return a new or existing HttpMessageHandler.
-        /// If multiple invocations will return the same instance, then you must also configure <see cref="WithHttpClientFactory(HttpClientFactory)"/> to return
-        /// a <see cref="HttpClient"/> that will not dispose of the inner handler.</param>
-        /// <returns>A builder with modified configuration.</returns>
-        ISteamConfigurationBuilder WithHttpMessageHandlerFactory(HttpMessageHandlerFactory factoryFunction);
-
-        /// <summary>
         /// Configures how this <see cref="SteamConfiguration" /> will be used to connect to Steam.
         /// </summary>
         /// <param name="protocolTypes">The supported protocol types to use when attempting to connect to Steam.</param>

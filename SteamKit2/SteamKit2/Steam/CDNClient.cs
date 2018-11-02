@@ -231,7 +231,7 @@ namespace SteamKit2
             }
 
             this.steamClient = steamClient;
-            this.httpClient = steamClient.Configuration.GetHttpClient();
+            this.httpClient = steamClient.Configuration.HttpClientFactory();
 
             this.depotIds = new ConcurrentDictionary<uint, bool>();
             this.appTicket = appTicket;

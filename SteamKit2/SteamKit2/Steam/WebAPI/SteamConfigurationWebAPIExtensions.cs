@@ -42,23 +42,11 @@ namespace SteamKit2
 
         internal static HttpClient GetHttpClientForWebAPI(this SteamConfiguration config)
         {
-            var client = config.GetHttpClient();
+            var client = config.HttpClientFactory();
 
             client.BaseAddress = config.WebAPIBaseAddress;
             client.Timeout = WebAPI.DefaultTimeout;
 
-            return client;
-        }
-
-        internal static HttpClient GetHttpClient(this SteamConfiguration config)
-        {
-            if (config == null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
-            var handler = config.HttpMessageHandlerFactory();
-            var client = config.HttpClientFactory(handler);
             return client;
         }
     }

@@ -32,8 +32,6 @@ namespace SteamKit2
 
                 HttpClientFactory = DefaultHttpClientFactory,
 
-                HttpMessageHandlerFactory = DefaultMessageHandlerFactory,
-
                 ProtocolTypes = ProtocolTypes.Tcp,
 
                 ServerListProvider = new NullServerListProvider(),
@@ -79,13 +77,6 @@ namespace SteamKit2
             return this;
         }
 
-
-        public ISteamConfigurationBuilder WithHttpMessageHandlerFactory(HttpMessageHandlerFactory factoryFunction)
-        {
-            state.HttpMessageHandlerFactory = factoryFunction;
-            return this;
-        }
-
         public ISteamConfigurationBuilder WithProtocolTypes(ProtocolTypes protocolTypes)
         {
             state.ProtocolTypes = protocolTypes;
@@ -118,6 +109,6 @@ namespace SteamKit2
 
         static HttpMessageHandler DefaultMessageHandlerFactory() => new HttpClientHandler();
 
-        static HttpClient DefaultHttpClientFactory(HttpMessageHandler handler) => new HttpClient(handler, disposeHandler: true);
+        static HttpClient DefaultHttpClientFactory() => new HttpClient();
     }
 }
