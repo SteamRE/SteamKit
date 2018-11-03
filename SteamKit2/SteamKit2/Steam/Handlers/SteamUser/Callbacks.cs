@@ -305,7 +305,7 @@ namespace SteamKit2
             /// <summary>
             /// Gets the balance of the wallet as a 64-bit integer, in cents.
             /// </summary>
-            public long Balance64 { get; private set; }
+            public long LongBalance { get; private set; }
 
 
             internal WalletInfoCallback( CMsgClientWalletInfoUpdate wallet )
@@ -314,7 +314,7 @@ namespace SteamKit2
 
                 Currency = ( ECurrencyCode )wallet.currency;
                 Balance = wallet.balance;
-                Balance64 = wallet.balance64;
+                LongBalance = wallet.balance64;
             }
         }
 
