@@ -5,10 +5,18 @@
 
 
 using System;
+using System.Net.Http;
 using SteamKit2.Discovery;
 
 namespace SteamKit2
 {
+    /// <summary>
+    /// Factory function to create a user-configured HttpClient.
+    /// The HttpClient will be disposed of after use.
+    /// </summary>
+    /// <returns>A new <see cref="HttpClient"/> to be used to send HTTP requests.</returns>
+    public delegate HttpClient HttpClientFactory();
+
     /// <summary>
     /// Configuration object to use.
     /// This object should not be mutated after it is passed to one or more <see cref="SteamClient"/> objects.
@@ -66,6 +74,12 @@ namespace SteamKit2
         /// when calling <c>SteamFriends.RequestFriendInfo</c> without specifying flags.
         /// </summary>
         public EClientPersonaStateFlag DefaultPersonaStateFlags => state.DefaultPersonaStateFlags;
+
+        /// <summary>
+        /// Factory function to create a user-configured HttpClient.
+        /// </summary>
+        public HttpClientFactory HttpClientFactory => state.HttpClientFactory;
+
         /// <summary>
         /// The supported protocol types to use when attempting to connect to Steam.
         /// </summary>
