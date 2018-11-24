@@ -1,0 +1,48 @@
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
+enum EGCEconBaseMsg {
+	k_EMsgGCGenericResult = 2579;
+}
+
+enum EGCMsgResponse {
+	k_EGCMsgResponseOK = 0;
+	k_EGCMsgResponseDenied = 1;
+	k_EGCMsgResponseServerError = 2;
+	k_EGCMsgResponseTimeout = 3;
+	k_EGCMsgResponseInvalid = 4;
+	k_EGCMsgResponseNoMatch = 5;
+	k_EGCMsgResponseUnknownError = 6;
+	k_EGCMsgResponseNotLoggedOn = 7;
+	k_EGCMsgFailedToCreate = 8;
+}
+
+enum EGCPartnerRequestResponse {
+	k_EPartnerRequestOK = 1;
+	k_EPartnerRequestBadAccount = 2;
+	k_EPartnerRequestNotLinked = 3;
+	k_EPartnerRequestUnsupportedPartnerType = 4;
+}
+
+enum EGCMsgUseItemResponse {
+	k_EGCMsgUseItemResponse_ItemUsed = 0;
+	k_EGCMsgUseItemResponse_GiftNoOtherPlayers = 1;
+	k_EGCMsgUseItemResponse_ServerError = 2;
+	k_EGCMsgUseItemResponse_MiniGameAlreadyStarted = 3;
+	k_EGCMsgUseItemResponse_ItemUsed_ItemsGranted = 4;
+	k_EGCMsgUseItemResponse_DropRateBonusAlreadyGranted = 5;
+	k_EGCMsgUseItemResponse_NotInLowPriorityPool = 6;
+	k_EGCMsgUseItemResponse_NotHighEnoughLevel = 7;
+	k_EGCMsgUseItemResponse_EventNotActive = 8;
+	k_EGCMsgUseItemResponse_ItemUsed_EventPointsGranted = 9;
+	k_EGCMsgUseItemResponse_MissingRequirement = 10;
+	k_EGCMsgUseItemResponse_EmoticonUnlock_NoNew = 11;
+	k_EGCMsgUseItemResponse_EmoticonUnlock_Complete = 12;
+	k_EGCMsgUseItemResponse_ItemUsed_Compendium = 13;
+}
+
+message CMsgGenericResult {
+	optional uint32 eresult = 1 [default = 2];
+	optional string debug_message = 2;
+}
+

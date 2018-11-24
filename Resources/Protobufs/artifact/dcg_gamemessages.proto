@@ -1,0 +1,615 @@
+import "dcg_gcmessages_common.proto";
+
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
+enum EDCGGameMessages {
+	k_EMsgGameBoardGameCommand = 1;
+	k_EMsgGameBoardGameState = 2;
+	k_EMsgGameBoardGameButton = 3;
+	k_EMsgGamePlayerRequestHandoff = 4;
+	k_EMsgGameHandoff = 5;
+	k_EMsgGameReplayActionMarker = 6;
+	k_EMsgGameClientToServerChatMsg = 7;
+	k_EMsgGameServerToClientChatMsg = 8;
+	k_EMsgGameClientToServerPauseTimer = 9;
+	k_EMsgGameServerToClientConnectionStatus = 10;
+	k_EMsgGameClientToServerGiveOpponentTime = 11;
+	k_EMsgGameServerToClientInitialGameState = 12;
+	k_EMsgGameServerToClientGameCompleted = 13;
+	k_EMsgGameClientToServerBoardGameStateAck = 14;
+	k_EMsgTutorialEvent = 1000;
+}
+
+enum EScriptBlockType {
+	INVALID_SCRIPT_TYPE = 0;
+	CARD_PLAY_SCRIPT = 1;
+	GENERIC_TRIGGER_SCRIPT = 2;
+	SBE_UPDATE_SCRIPT = 3;
+	DEATH_CHECK_SCRIPT = 4;
+	COMBAT = 5;
+	CARD_DRAW_PHASE = 6;
+	END_OF_TURN_PHASE = 7;
+	COLLAPSE_LANE = 8;
+	CE_ADDED = 9;
+	CE_REMOVED = 10;
+	SURVIVED_DEATH = 11;
+	DEV_COMMAND = 12;
+	AFTER_COMBAT_PHASE = 13;
+	UPDATE_COMBAT_PREVIEW = 14;
+	UPDATE_OBJECT_ATTRIBUTES = 15;
+	TRIGGER_BLOCK = 16;
+	POST_SHOP_ITEM_PURCHASE = 17;
+	FLOP_DEPLOYMENT_TO_COMBAT = 18;
+	BEGINNING_OF_SPELLCASTING = 19;
+	PREGAME = 20;
+	RAPID_DEPLOYMENT = 21;
+	INITIAL_FLOP = 23;
+	CREEP_DEPLOYMENT = 24;
+	PREPARE_HEROES_FOR_LANE_ASSIGNMENT = 25;
+	SHOPPING_START = 26;
+	SHOPPING_UPDATE = 27;
+	SHOPPING_FINISHED = 28;
+	HERO_LANE_ASSIGNMENT = 29;
+	HERO_VS = 30;
+	PATHING_CARD_DEPLOYMENT = 31;
+	HACKED_EFFECT = 32;
+	EXPORT_CARD_SET_TO_IMAGES = 33;
+	GAME_OVER = 34;
+	TOKEN_DEPLOYED = 35;
+}
+
+enum EShoppingSlot {
+	eInvalidSlot = 0;
+	eMiddleShop = 1;
+	eSecretShop = 2;
+	eConsumableShop = 3;
+}
+
+enum EDCGDisconnectReason {
+	k_EDCGDisconnectReason_UserLeaveMatch = 1001;
+	k_EDCGDisconnectReason_UserQuitApp = 1002;
+	k_EDCGDisconnectReason_UserCancel = 1003;
+	k_EDCGDisconnectReason_BadMessage = 2001;
+	k_EDCGDisconnectReason_GameDestroyedUnexpectedly = 2002;
+	k_EDCGDisconnectReason_ChangingServer = 2003;
+	k_EDCGDisconnectReason_OldConnection = 2004;
+}
+
+message CMsgClientServerHeader {
+	optional uint64 game_instance_id = 1;
+	optional uint32 local_player_index = 2;
+	optional bytes payload = 3;
+	optional .EDCGGameMessages msg_id = 4 [default = k_EMsgGameBoardGameCommand];
+}
+
+message CMsgGameBoardGameCommand {
+	optional uint32 command_id = 1;
+	optional uint32 object_id = 2;
+}
+
+message CMsgGameBoardGameState {
+	optional bool is_diff = 1;
+	optional bool is_last = 2;
+	optional bytes payload = 3;
+	optional uint32 unpacked_state_size = 4;
+	optional uint32 network_group = 5;
+	optional uint32 server_time_ms = 6;
+}
+
+message CMsgGameBoardGameButton {
+	optional uint32 button_id = 1;
+}
+
+message CMsgGamePlayerRequestHandoff {
+}
+
+message CMsgGameHandoff {
+	optional uint32 player_count = 1;
+	optional bool is_spectator = 3;
+	optional .EDCGMatchMode game_mode = 4 [default = k_EDCGMatchMode_Unranked];
+}
+
+message CMsgGameServerToClientInitialGameState {
+	message CMsgDeckList {
+		optional uint32 owner_id = 1;
+		optional bytes deck_data = 2;
+	}
+
+	message CMsgCombatLogEntry {
+		optional uint32 type = 1;
+		optional uint32 target_object_id = 2;
+		optional uint32 target_card_id = 3;
+		optional uint32 value = 4;
+		optional uint32 secondary_value = 5;
+		optional uint32 sub_type = 6;
+		optional uint32 source_object_id = 7;
+		optional uint32 source_card_id = 8;
+		optional uint32 owner_id = 9;
+		optional uint32 lane_id = 10;
+		optional uint32 remaining_health = 11;
+		optional uint32 old_arrow_direction = 12;
+		optional .EShoppingSlot slot = 14 [default = eInvalidSlot];
+	}
+
+	repeated .CMsgGameServerToClientInitialGameState.CMsgDeckList decklist = 1;
+	repeated .CMsgGameServerToClientInitialGameState.CMsgCombatLogEntry combat_log_entry = 2;
+}
+
+message CMsgGameReplayActionMarker {
+	enum EActionType {
+		k_eActionType_TurnStart = 1;
+		k_eActionType_TurnEnd = 2;
+		k_eActionType_ShoppingStart = 3;
+		k_eActionType_ShoppingEnd = 4;
+		k_eActionType_HeroPlacementStart = 5;
+		k_eActionType_HeroPlacementEnd = 6;
+		k_eActionType_MatchComplete = 7;
+		k_eActionType_LaneStart = 8;
+		k_eActionType_LaneEnd = 9;
+		k_eActionType_LaneCombat = 10;
+		k_eActionType_PlayerAction = 11;
+	}
+
+	optional .CMsgGameReplayActionMarker.EActionType action = 1 [default = k_eActionType_TurnStart];
+}
+
+message CMsgTutorialEvent {
+	optional string type = 1;
+	optional uint32 object_id = 2;
+	optional string param1 = 3;
+	optional string param2 = 4;
+	optional string param3 = 5;
+}
+
+message CMsgGameClientToServerChatMsg {
+	optional .CExtraMsgBlock gc_chat_msg = 1;
+}
+
+message CMsgGameServerToClientChatMsg {
+	optional .CExtraMsgBlock gc_chat_response = 1;
+}
+
+message CMsgGameServerToClientGameCompleted {
+}
+
+message CMsgGameClientToServerBoardGameStateAck {
+	optional uint32 server_time_ms = 1;
+}
+
+message CMsgGameClientToServerPauseTimer {
+	optional bool pause = 1;
+}
+
+message CMsgGameServerToClientConnectionStatus {
+	message Player {
+		optional uint32 player_id = 1;
+		optional .CMsgGameServerToClientConnectionStatus.EStatus status = 2 [default = k_EConnected];
+		optional bool inactivity_ticking = 3;
+		optional uint32 inactivity_ms_remaining = 4;
+		optional uint32 inactivity_anim_ms_remaining = 5;
+	}
+
+	enum EStatus {
+		k_EConnected = 1;
+		k_EDisconnected = 2;
+	}
+
+	repeated .CMsgGameServerToClientConnectionStatus.Player players = 1;
+}
+
+message CMsgGameClientToServerGiveOpponentTime {
+}
+
+message CClientReconnectInfo {
+	optional fixed64 server_steam_id = 1;
+	optional uint64 match_id = 2;
+	optional uint32 time_updated = 3;
+}
+
+message CMsgPostMatchStats {
+	message CStat {
+		optional uint32 card_id = 1;
+		optional uint32 stat_id = 2;
+		optional uint32 value = 3;
+	}
+
+	message CLane {
+		optional uint32 player = 1;
+		optional uint32 turn = 2;
+		optional uint32 lane = 3;
+		repeated .CMsgPostMatchStats.CStat stats = 4;
+	}
+
+	repeated .CMsgPostMatchStats.CLane lanes = 1;
+}
+
+message CMsgPostMatchCardAchievements {
+	repeated uint32 achievement_id = 1 [packed = true];
+	repeated uint32 base_values = 2 [packed = true];
+	repeated uint32 progress = 3 [packed = true];
+}
+
+message CMsgSerializeQuestProgress {
+	message LocalUnlock {
+		optional uint32 node_id = 1;
+	}
+
+	optional uint32 version = 1;
+	optional uint32 quest_id = 2;
+	optional uint32 account_id = 3;
+	optional bytes progress_msg = 4;
+	repeated .CMsgSerializeQuestProgress.LocalUnlock local_unlocks = 5;
+}
+
+message CMsg_Card {
+	optional uint32 card_id = 1;
+	optional uint32 source_effect_card_id = 2;
+	optional string color = 3;
+}
+
+message CTraceMsg_PathingCardChanged {
+	optional uint32 new_card_id = 1;
+	optional bool is_boundary_path = 2;
+	optional bool is_valid_path_target = 3;
+}
+
+message CTraceMsg_CardBought {
+	optional int32 turn_card_entered_hand = 1;
+	optional int32 order_card_entered_hand = 2;
+}
+
+message CTraceMsg_ChargesChanged {
+	optional int32 charge_delta = 1;
+	optional uint32 new_charges = 2;
+}
+
+message CTraceMsg_ShoppingCardAppeared {
+	optional .EShoppingSlot slot = 1 [default = eInvalidSlot];
+}
+
+message CTraceMsg_ShopAction {
+}
+
+message CTraceMsg_ShopHoldItemAvailable {
+	optional uint32 owner_id = 1;
+	optional bool is_available = 2;
+}
+
+message CTraceMsg_ShopCardRemoved {
+}
+
+message CTraceMsg_ShopEnded {
+	optional uint32 owner_id = 1;
+}
+
+message CTraceMsg_ShoppingCardShuffled {
+	optional uint32 shop_order = 1;
+}
+
+message CTraceMsg_UnitEnteringCombat {
+	optional uint32 new_lane_id = 1;
+	optional uint32 new_combat_position = 2;
+	optional uint32 owner_id = 4;
+	optional bool is_valid_path_target = 5;
+	optional bool is_boundary_path = 6;
+}
+
+message CTraceMsg_ImprovementEnteringPlay {
+	optional uint32 new_lane_id = 1;
+	optional uint32 new_improvement_position = 2;
+	optional .CMsg_Card card = 3;
+	optional uint32 owner_id = 4;
+}
+
+message CTraceMsg_UnitLeavingCombat {
+	optional uint32 lane_id = 1;
+	optional uint32 new_zone_id = 2;
+}
+
+message CTraceMsg_DeathShieldUsed {
+}
+
+message CTraceMsg_CardSurvivedDeath {
+	optional uint32 survival_chance = 1;
+	optional uint32 source_card_id = 2;
+	optional uint32 source_object_id = 3;
+}
+
+message CTraceMsg_TowerKilled {
+	optional uint32 owner_id = 1;
+	optional bool is_combat = 2;
+	optional bool is_defeat_for_owner = 3;
+}
+
+message CTraceMsg_CardKilled {
+	optional uint32 owner_id = 1;
+	optional bool is_creep = 2;
+	optional bool is_hero = 3;
+	optional bool is_combat = 4;
+}
+
+message CTraceMsg_ImprovementDestroyed {
+	optional uint32 owner_id = 1;
+}
+
+message CTraceMsg_CardReturnedToFountain {
+}
+
+message CTraceMsg_CardMovedToDeck {
+	optional uint32 previous_zone_id = 1;
+	optional uint32 owner_id = 2;
+}
+
+message CTraceMsg_CardMovedToHand {
+	optional uint32 previous_zone_id = 1;
+}
+
+message CTraceMsg_CardMovedToDeployment {
+	optional uint32 lane_id = 1;
+}
+
+message CTraceMsg_CardMovedToEffects {
+}
+
+message CTraceMsg_CardMovedToSpellStack {
+}
+
+message CTraceMsg_CardReturnedToGuardDeck {
+}
+
+message CTraceMsg_CardMovedToGraveyard {
+}
+
+message CTraceMsg_CardDuplicated {
+	optional uint32 source_object_id = 1;
+	optional uint32 copied_card_object_id = 2;
+	optional uint32 source_effect_card_id = 3;
+	optional uint32 lane_id = 4;
+	optional uint32 zone_id = 5;
+}
+
+message CTraceMsg_CardDrawn {
+	enum ECardDrawnSource {
+		k_eCardDrawnSource_Deck = 1;
+		k_eCardDrawnSource_ItemDeck = 2;
+		k_eCardDrawnSource_Nowhere = 3;
+	}
+
+	optional uint32 owner_id = 1;
+	optional int32 turn_card_entered_hand = 2;
+	optional int32 order_card_entered_hand = 3;
+	optional .CTraceMsg_CardDrawn.ECardDrawnSource drawn_source = 4 [default = k_eCardDrawnSource_Deck];
+}
+
+message CTraceMsg_CardPlayed {
+}
+
+message CTraceMsg_UnitCondemned {
+	optional uint32 source_object_id = 1;
+}
+
+message CTraceMsg_TriggerTriggered {
+	optional uint32 source_object_id = 1;
+	optional uint32 source_effect_card_id = 2;
+	optional int32 event_name = 3;
+	optional uint32 related_object_id = 4;
+}
+
+message CTraceMsg_EffectProcced {
+	optional uint32 source_object_id = 1;
+}
+
+message CTraceMsg_UnitTargeted {
+	optional uint32 source_object_id = 1;
+	optional uint32 target_group = 2;
+	optional uint32 target_group_number = 3;
+}
+
+message CTraceMsg_PlayerPassed {
+	optional uint32 player_id = 1;
+	optional bool pass_to_combat = 2;
+}
+
+message CTraceMsg_UnitUserTargeted {
+}
+
+message CTraceMsg_UnitLocked {
+	optional uint32 turns = 1;
+	optional uint32 source_object_id = 2;
+}
+
+message CTraceMsg_UnitReadiedForDeploymentUponDeath {
+	optional uint32 source_card_id = 1;
+}
+
+message CTraceMsg_DamageAttempted {
+	optional uint32 source_object_id = 1;
+	optional uint32 damage_attempted = 2;
+	optional uint32 damage_dealt = 3;
+	optional uint32 source_effect_card_id = 4;
+	optional .CMsg_Card card = 5;
+	optional int32 damage_type = 6;
+	optional int32 remaining_health = 7;
+	optional bool is_tower = 8;
+	optional bool is_combat = 9;
+	optional uint32 damage_prevented = 10;
+}
+
+message CTraceMsg_UnitHealed {
+	optional uint32 source_object_id = 1;
+	optional uint32 heal = 2;
+	optional uint32 source_effect_card_id = 3;
+}
+
+message CTraceMsg_UnitChangedCombatPosition {
+	optional uint32 new_combat_position = 1;
+	optional int32 old_combat_position = 2;
+	optional uint32 owner_id = 3;
+	optional uint32 lane_id = 4;
+}
+
+message CTraceMsg_UnitChangedCombatTarget {
+	optional uint32 new_combat_target = 1;
+	optional uint32 lane_id = 2;
+	optional uint32 old_arrow_direction = 3;
+	optional uint32 arrow_direction = 4;
+	optional uint32 old_combat_target = 5;
+}
+
+message CTraceMsg_RandomlySelectedSecondaryTarget {
+}
+
+message ContinuousEffectSingleProperty {
+	optional uint32 attr_token = 1;
+	optional int32 value_diff = 2;
+}
+
+message CTraceMsg_GainedAppliedEffectEx {
+	optional uint32 source_object_id = 1;
+	optional uint32 source_card_id = 2;
+	optional uint32 effect_source_card_id = 3;
+	repeated .ContinuousEffectSingleProperty properties = 4;
+}
+
+message CTraceMsg_LostAppliedEffectEx {
+	optional uint32 source_object_id = 1;
+	optional uint32 source_card_id = 2;
+	optional uint32 effect_source_card_id = 3;
+	repeated .ContinuousEffectSingleProperty properties = 4;
+}
+
+message CTraceMsg_ContinuousAppliedEffectChangedEx {
+	optional uint32 source_object_id = 1;
+	optional uint32 source_card_id = 2;
+	optional uint32 effect_source_card_id = 3;
+	repeated .ContinuousEffectSingleProperty properties = 4;
+}
+
+message CTraceMsg_AttributeValueChanged {
+	optional uint32 attr_token = 1;
+	optional int32 value_final = 2;
+}
+
+message CTraceMsg_GoldEarned {
+	optional uint32 owner_id = 1;
+	optional uint32 source_object_id = 2;
+	optional int32 amount = 3;
+	optional int32 available = 4;
+}
+
+message CTraceMsg_TowerHealed {
+	optional uint32 source_object_id = 1;
+	optional uint32 heal = 2;
+	optional uint32 source_effect_card_id = 3;
+}
+
+message CTraceMsg_TargetSelected {
+}
+
+message CTraceMsg_CardDiscarded {
+	optional uint32 source_card_object_id = 1;
+	optional uint32 template_card_id = 2;
+	optional bytes card_instance_attributes = 3;
+	optional bytes card_calculated_effects = 4;
+}
+
+message CTraceMsg_CardCreated {
+	optional uint32 owner_id = 1;
+	optional uint32 template_card_id = 2;
+	optional bytes card_instance_attributes = 3;
+	optional bytes card_calculated_effects = 4;
+	optional bool is_item = 5;
+	optional bool was_spawned_as_dire = 6;
+	optional uint32 spawn_duplicate_index = 7;
+	optional bool is_duplicate = 8;
+}
+
+message CTraceMsg_CardRevealed {
+	optional uint32 owner_id = 3;
+	optional uint32 template_card_id = 4;
+	optional bytes card_instance_attributes = 5;
+	optional bytes card_calculated_effects = 6;
+}
+
+message CTraceMsg_TowerManaRestored {
+	optional uint32 mana_amount_restored = 1;
+	optional uint32 mana_amount_restore_attempt = 2;
+}
+
+message CTraceMsg_InnerBlock {
+	optional uint32 block_id = 1;
+	optional uint32 card_id = 2;
+	optional uint32 script_type = 3;
+	optional uint32 object_id = 4;
+}
+
+message CTraceMsg_PreviewDeathResultChanged {
+	optional uint32 old_preview_death_result = 1;
+	optional uint32 new_preview_death_result = 2;
+	optional uint32 owner_id = 3;
+	optional bool is_creep = 4;
+	optional bool is_hero = 5;
+	optional bool is_tower = 6;
+}
+
+message CTraceMsg_PreviewDamageChanged {
+	optional uint32 old_preview_damage = 1;
+	optional uint32 new_preview_damage = 2;
+	optional uint32 owner_id = 3;
+}
+
+message CTraceMsg_ColorsPlayableChanged {
+	optional uint32 owner_id = 1;
+	optional uint32 lane_id = 2;
+	optional uint32 color_flags = 3;
+	optional uint32 prev_color_flags = 4;
+}
+
+message CTraceMsg_ItemEquipped {
+	optional uint32 hero_equipped_to_id = 1;
+}
+
+message CTraceMsg_StateBasedEffectsUpdateStart {
+}
+
+message CTraceMsg_StateBasedEffectsUpdateEnd {
+}
+
+message CTraceMsg_TowerManaSpent {
+	optional uint32 source_object_id = 1;
+	optional uint32 mana_spent = 2;
+}
+
+message CTraceMsg_CardEffectCalculation {
+	optional uint32 source_object_id = 1;
+	optional int32 value = 2;
+}
+
+message CTraceMsg_DeathSyncPoint {
+}
+
+message CTraceMsg_ScriptBlockBegin {
+	optional uint32 script_type = 1;
+	optional uint32 card_id = 2;
+	optional uint32 object_id = 3;
+}
+
+message CTraceMsg_ScriptBlockEnd {
+	optional uint32 script_type = 1;
+}
+
+message CTraceMsg_PrepareHeroForLaneAssignment {
+	optional uint32 script_type = 1;
+	optional uint32 card_id = 2;
+}
+
+message CTraceMsg_HeroVS {
+	repeated uint32 hero_ids = 1;
+}
+
+message CTraceMsg_PlayerResult {
+	optional uint32 owner_id = 1;
+	optional bool has_won = 2;
+}
+
