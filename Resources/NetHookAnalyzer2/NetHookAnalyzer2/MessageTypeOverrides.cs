@@ -6,6 +6,7 @@ using SteamKit2.Internal;
 using CSGO = SteamKit2.GC.CSGO.Internal;
 using Dota = SteamKit2.GC.Dota.Internal;
 using TF2 = SteamKit2.GC.TF2.Internal;
+using Artifact = SteamKit2.GC.Artifact.Internal;
 
 namespace NetHookAnalyzer2
 {
@@ -72,6 +73,18 @@ namespace NetHookAnalyzer2
                 [(uint)CSGO.ESOMsg.k_ESOMsg_Destroy] = typeof(CSGO.CMsgSOSingleObject),
                 [(uint)CSGO.ESOMsg.k_ESOMsg_Update] = typeof(CSGO.CMsgSOSingleObject),
                 [(uint)CSGO.ESOMsg.k_ESOMsg_UpdateMultiple] = typeof(CSGO.CMsgSOMultipleObjects),
+            },
+            [WellKnownAppIDs.Artifact] = new Dictionary<uint, Type>
+            {
+                [(uint)Artifact.EGCBaseClientMsg.k_EMsgGCClientHello] = typeof(Artifact.CMsgClientHello),
+                [(uint)Artifact.EGCBaseClientMsg.k_EMsgGCClientWelcome] = typeof(Artifact.CMsgClientWelcome),
+                [(uint)Artifact.EGCBaseClientMsg.k_EMsgGCServerHello] = typeof(Artifact.CMsgClientHello),
+                [(uint)Artifact.EGCBaseClientMsg.k_EMsgGCServerWelcome] = typeof(Artifact.CMsgClientWelcome),
+
+                [(uint)Artifact.ESOMsg.k_ESOMsg_Create] = typeof(Artifact.CMsgSOSingleObject),
+                [(uint)Artifact.ESOMsg.k_ESOMsg_Destroy] = typeof(Artifact.CMsgSOSingleObject),
+                [(uint)Artifact.ESOMsg.k_ESOMsg_Update] = typeof(Artifact.CMsgSOSingleObject),
+                [(uint)Artifact.ESOMsg.k_ESOMsg_UpdateMultiple] = typeof(Artifact.CMsgSOMultipleObjects),
             },
         };
     }

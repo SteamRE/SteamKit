@@ -46,7 +46,10 @@ namespace NetHookAnalyzer2
 						new TF2CacheSubscribedGCSpecialization(),
 						new TF2SOMultipleObjectsGCSpecialization(),
 						new TF2SOSingleObjectGCSpecialization(),
-					}
+                        new ArtifactCacheSubscribedGCSpecialization(),
+                        new ArtifactSOMultipleObjectsGCSpecialization(),
+                        new ArtifactSOSingleObjectGCSpecialization(),
+                    }
 				}
 			};
 		}

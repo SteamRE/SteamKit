@@ -67,6 +67,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProtoBufFieldReader.cs" />
+    <Compile Include="Specializations\Artifact\ArtifactSOCacheSubscribedGCSpecialization.cs" />
+    <Compile Include="Specializations\Artifact\ArtifactSOHelper.cs" />
+    <Compile Include="Specializations\Artifact\ArtifactSOMultipleObjectsGCSpecialization.cs" />
+    <Compile Include="Specializations\Artifact\ArtifactSOSingleObjectGCSpecialization.cs" />
     <Compile Include="Specializations\CSGO\CSGOSOCacheSubscribedGCSpecialization.cs" />
     <Compile Include="Specializations\CSGO\CSGOSOHelper.cs" />
     <Compile Include="Specializations\CSGO\CSGOSOMultipleObjectsGCSpecialization.cs" />

@@ -139,7 +139,11 @@ namespace NetHookAnalyzer2
 				case WellKnownAppIDs.CounterStrikeGlobalOffensive:
 					yield return "SteamKit2.GC.CSGO.Internal.CMsg";
 					break;
-			}
+
+                case WellKnownAppIDs.Artifact:
+                    yield return "SteamKit2.GC.Artifact.Internal.CMsg";
+                    break;
+            }
 		}
 	}
 }
