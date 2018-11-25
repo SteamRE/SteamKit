@@ -9,7 +9,7 @@ namespace NetHookAnalyzer2.Specializations
         public static Dictionary<int, Type> SOTypes = new Dictionary<int, Type>()
         {
             {1, typeof(CSOEconItem)},
-            {7, typeof(CSOEconGameAccountClient)}
+            {7, typeof(CSOEconGameAccountClient)},
 
 
             {101, typeof(CSODCGLobby) },
