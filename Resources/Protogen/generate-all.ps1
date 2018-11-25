@@ -31,12 +31,6 @@ $protos | % {
         '-ns:"{0}"' -f $_.Namespace
     )
 
-    # Hack for friends.proto requiring other steam protos but being in separate dir
-    if ($_.ProtoDir -eq 'webui')
-    {
-        $params += ('-s:"{0}"' -f (Join-Path $ProtoBase 'steam'))
-    }
-
     & $ProtoGenExe $params > $null
 
     # Hack to work around protogen stderr messges not ending the line

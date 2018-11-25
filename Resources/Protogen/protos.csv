@@ -29,7 +29,8 @@ steam,steammessages_site_license.steamclient.proto,Unified\SteamMsgSiteLicense.c
 steam,steammessages_twofactor.steamclient.proto,Unified\SteamMsgTwoFactor.cs,SteamKit2.Unified.Internal
 steam,steammessages_useraccount.steamclient.proto,Unified\SteamMsgUserAccount.cs,SteamKit2.Unified.Internal
 steam,steammessages_video.steamclient.proto,Unified\SteamMsgVideo.cs,SteamKit2.Unified.Internal
-webui,friends.proto,Unified\SteamMsgWebUIFriends.cs,SteamKit2.Internal
+steam,steammessages_chat.steamclient.proto,Unified\SteamMsgChat.cs,SteamKit2.Unified.Internal
+steam,steammessages_friendmessages.steamclient.proto,Unified\SteamMsgFriendMessages.cs,SteamKit2.Unified.Internal
 artifact,steammessages.proto,GC\Artifact\SteamMsgBase.cs,SteamKit2.GC.Artifact.Internal
 artifact,gcsystemmsgs.proto,GC\Artifact\SteamMsgGCSystem.cs,SteamKit2.GC.Artifact.Internal
 artifact,base_gcmessages.proto,GC\Artifact\SteamMsgGC.cs,SteamKit2.GC.Artifact.Internal
