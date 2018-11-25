@@ -1,3 +1,16 @@
+<#
+.SYNOPSIS
+    Generate C# proto code from protobufs for SteamKit
+.DESCRIPTION
+    For each file in protos.csv, run protogen to create or update corresponding
+    C# code and classes for use in SteamKit
+.PARAMETER ProtoDir
+    Protobuf folders to process. (Default: all)
+.EXAMPLE
+    PS C:\> .\generate-all.ps1 -ProtoDir steam,tf2
+#>
+param([string[]]$ProtoDir)
+
 $ProtoGenDir = $PSScriptRoot
 $ProtoGenExe = Join-Path $PSScriptRoot 'protogen.exe'
 $ProtoBase = Join-Path $PSScriptRoot '..\ProtoBufs'
@@ -5,7 +18,8 @@ $SK2Base = Join-Path $PSScriptRoot '..\..\SteamKit2\SteamKit2\Base\Generated'
 
 Push-Location
 
-$protos = Import-Csv -LiteralPath (Join-Path $PSScriptRoot 'protos.csv')
+$protos = Import-Csv -LiteralPath (Join-Path $PSScriptRoot 'protos.csv') |
+    ? { (!$ProtoDir) -or ($_.ProtoDir -in $ProtoDir)}
 
 $CommonParams = @(
     '-s:"{0}"' -f $ProtoGenDir,
