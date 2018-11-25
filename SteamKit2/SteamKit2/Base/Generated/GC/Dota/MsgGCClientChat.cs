@@ -1142,42 +1142,6 @@ namespace SteamKit2.GC.Dota.Internal
     private void Resetsuggest_ban_hero_id() { suggest_ban_hero_idSpecified = false; }
     
 
-    private bool? _terse;
-    [global::ProtoBuf.ProtoMember(28, IsRequired = false, Name=@"terse", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool terse
-    {
-      get { return _terse?? default(bool); }
-      set { _terse = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool terseSpecified
-    {
-      get { return _terse != null; }
-      set { if (value == (_terse== null)) _terse = value ? this.terse : (bool?)null; }
-    }
-    private bool ShouldSerializeterse() { return terseSpecified; }
-    private void Resetterse() { terseSpecified = false; }
-    
-
-    private bool? _ignore_muted;
-    [global::ProtoBuf.ProtoMember(31, IsRequired = false, Name=@"ignore_muted", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool ignore_muted
-    {
-      get { return _ignore_muted?? default(bool); }
-      set { _ignore_muted = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool ignore_mutedSpecified
-    {
-      get { return _ignore_muted != null; }
-      set { if (value == (_ignore_muted== null)) _ignore_muted = value ? this.ignore_muted : (bool?)null; }
-    }
-    private bool ShouldSerializeignore_muted() { return ignore_mutedSpecified; }
-    private void Resetignore_muted() { ignore_mutedSpecified = false; }
-    
-
     private CMsgDOTAChatMessage.TriviaAnswered _trivia_answer = null;
     [global::ProtoBuf.ProtoMember(32, IsRequired = false, Name=@"trivia_answer", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(null)]
@@ -1186,6 +1150,42 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _trivia_answer; }
       set { _trivia_answer = value; }
     }
+
+    private uint? _requested_ability_id;
+    [global::ProtoBuf.ProtoMember(33, IsRequired = false, Name=@"requested_ability_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint requested_ability_id
+    {
+      get { return _requested_ability_id?? default(uint); }
+      set { _requested_ability_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool requested_ability_idSpecified
+    {
+      get { return _requested_ability_id != null; }
+      set { if (value == (_requested_ability_id== null)) _requested_ability_id = value ? this.requested_ability_id : (uint?)null; }
+    }
+    private bool ShouldSerializerequested_ability_id() { return requested_ability_idSpecified; }
+    private void Resetrequested_ability_id() { requested_ability_idSpecified = false; }
+    
+
+    private uint? _chat_flags;
+    [global::ProtoBuf.ProtoMember(34, IsRequired = false, Name=@"chat_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint chat_flags
+    {
+      get { return _chat_flags?? default(uint); }
+      set { _chat_flags = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool chat_flagsSpecified
+    {
+      get { return _chat_flags != null; }
+      set { if (value == (_chat_flags== null)) _chat_flags = value ? this.chat_flags : (uint?)null; }
+    }
+    private bool ShouldSerializechat_flags() { return chat_flagsSpecified; }
+    private void Resetchat_flags() { chat_flagsSpecified = false; }
+    
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"DiceRoll")]
   public partial class DiceRoll : global::ProtoBuf.IExtensible
   {
@@ -1655,7 +1655,10 @@ namespace SteamKit2.GC.Dota.Internal
       PRIVATE_CHAT_CREATE_LOCK_FAILED = 12,
             
       [global::ProtoBuf.ProtoEnum(Name=@"PRIVATE_CHAT_KICKED", Value=13)]
-      PRIVATE_CHAT_KICKED = 13
+      PRIVATE_CHAT_KICKED = 13,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"USER_NOT_ALLOWED", Value=14)]
+      USER_NOT_ALLOWED = 14
     }
   
     private global::ProtoBuf.IExtension extensionObject;

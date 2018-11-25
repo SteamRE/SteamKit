@@ -240,6 +240,39 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_SERVER_INCOMPATIBLE", Value=73)]
       NETWORK_DISCONNECT_SERVER_INCOMPATIBLE = 73,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_LOCALPROBLEM_MANYRELAYS", Value=74)]
+      NETWORK_DISCONNECT_LOCALPROBLEM_MANYRELAYS = 74,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_LOCALPROBLEM_HOSTEDSERVERPRIMARYRELAY", Value=75)]
+      NETWORK_DISCONNECT_LOCALPROBLEM_HOSTEDSERVERPRIMARYRELAY = 75,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_LOCALPROBLEM_NETWORKCONFIG", Value=76)]
+      NETWORK_DISCONNECT_LOCALPROBLEM_NETWORKCONFIG = 76,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_LOCALPROBLEM_OTHER", Value=77)]
+      NETWORK_DISCONNECT_LOCALPROBLEM_OTHER = 77,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_REMOTE_TIMEOUT", Value=79)]
+      NETWORK_DISCONNECT_REMOTE_TIMEOUT = 79,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_REMOTE_TIMEOUT_CONNECTING", Value=80)]
+      NETWORK_DISCONNECT_REMOTE_TIMEOUT_CONNECTING = 80,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_REMOTE_OTHER", Value=81)]
+      NETWORK_DISCONNECT_REMOTE_OTHER = 81,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_REMOTE_BADCRYPT", Value=82)]
+      NETWORK_DISCONNECT_REMOTE_BADCRYPT = 82,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_REMOTE_CERTNOTTRUSTED", Value=83)]
+      NETWORK_DISCONNECT_REMOTE_CERTNOTTRUSTED = 83,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_UNUSUAL", Value=84)]
+      NETWORK_DISCONNECT_UNUSUAL = 84,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_INTERNAL_ERROR", Value=85)]
+      NETWORK_DISCONNECT_INTERNAL_ERROR = 85,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_REJECT_BADCHALLENGE", Value=128)]
       NETWORK_DISCONNECT_REJECT_BADCHALLENGE = 128,
             

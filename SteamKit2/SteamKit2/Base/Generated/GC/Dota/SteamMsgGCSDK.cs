@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: gcsdk_gcmessages.proto
 // Note: requires additional types generated from: steammessages.proto
 namespace SteamKit2.GC.Dota.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgSHA1Digest")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSHA1Digest")]
   public partial class CMsgSHA1Digest : global::ProtoBuf.IExtensible
   {
     public CMsgSHA1Digest() {}
@@ -47,7 +45,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOIDOwner")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOIDOwner")]
   public partial class CMsgSOIDOwner : global::ProtoBuf.IExtensible
   {
     public CMsgSOIDOwner() {}
@@ -61,7 +59,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool typeSpecified
     {
       get { return _type != null; }
@@ -79,7 +77,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool idSpecified
     {
       get { return _id != null; }
@@ -93,7 +91,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOSingleObject")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOSingleObject")]
   public partial class CMsgSOSingleObject : global::ProtoBuf.IExtensible
   {
     public CMsgSOSingleObject() {}
@@ -107,7 +105,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _type_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool type_idSpecified
     {
       get { return _type_id != null; }
@@ -125,7 +123,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _object_data = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool object_dataSpecified
     {
       get { return _object_data != null; }
@@ -143,7 +141,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool versionSpecified
     {
       get { return _version != null; }
@@ -170,7 +168,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _service_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool service_idSpecified
     {
       get { return _service_id != null; }
@@ -184,7 +182,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOMultipleObjects")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOMultipleObjects")]
   public partial class CMsgSOMultipleObjects : global::ProtoBuf.IExtensible
   {
     public CMsgSOMultipleObjects() {}
@@ -205,7 +203,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool versionSpecified
     {
       get { return _version != null; }
@@ -246,7 +244,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _service_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool service_idSpecified
     {
       get { return _service_id != null; }
@@ -255,7 +253,7 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializeservice_id() { return service_idSpecified; }
     private void Resetservice_id() { service_idSpecified = false; }
     
-  [global::ProtoBuf.ProtoContract(Name=@"SingleObject")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SingleObject")]
   public partial class SingleObject : global::ProtoBuf.IExtensible
   {
     public SingleObject() {}
@@ -269,7 +267,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _type_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool type_idSpecified
     {
       get { return _type_id != null; }
@@ -287,7 +285,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _object_data = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool object_dataSpecified
     {
       get { return _object_data != null; }
@@ -306,7 +304,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscribed")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscribed")]
   public partial class CMsgSOCacheSubscribed : global::ProtoBuf.IExtensible
   {
     public CMsgSOCacheSubscribed() {}
@@ -327,7 +325,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool versionSpecified
     {
       get { return _version != null; }
@@ -354,7 +352,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _service_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool service_idSpecified
     {
       get { return _service_id != null; }
@@ -379,7 +377,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _sync_version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sync_versionSpecified
     {
       get { return _sync_version != null; }
@@ -388,7 +386,7 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializesync_version() { return sync_versionSpecified; }
     private void Resetsync_version() { sync_versionSpecified = false; }
     
-  [global::ProtoBuf.ProtoContract(Name=@"SubscribedType")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SubscribedType")]
   public partial class SubscribedType : global::ProtoBuf.IExtensible
   {
     public SubscribedType() {}
@@ -402,7 +400,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _type_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool type_idSpecified
     {
       get { return _type_id != null; }
@@ -428,7 +426,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscribedUpToDate")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscribedUpToDate")]
   public partial class CMsgSOCacheSubscribedUpToDate : global::ProtoBuf.IExtensible
   {
     public CMsgSOCacheSubscribedUpToDate() {}
@@ -442,7 +440,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool versionSpecified
     {
       get { return _version != null; }
@@ -469,7 +467,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _service_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool service_idSpecified
     {
       get { return _service_id != null; }
@@ -494,7 +492,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _sync_version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sync_versionSpecified
     {
       get { return _sync_version != null; }
@@ -508,7 +506,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheUnsubscribed")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheUnsubscribed")]
   public partial class CMsgSOCacheUnsubscribed : global::ProtoBuf.IExtensible
   {
     public CMsgSOCacheUnsubscribed() {}
@@ -527,7 +525,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscriptionCheck")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscriptionCheck")]
   public partial class CMsgSOCacheSubscriptionCheck : global::ProtoBuf.IExtensible
   {
     public CMsgSOCacheSubscriptionCheck() {}
@@ -541,7 +539,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool versionSpecified
     {
       get { return _version != null; }
@@ -568,7 +566,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _service_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool service_idSpecified
     {
       get { return _service_id != null; }
@@ -593,7 +591,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _sync_version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sync_versionSpecified
     {
       get { return _sync_version != null; }
@@ -607,7 +605,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscriptionRefresh")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscriptionRefresh")]
   public partial class CMsgSOCacheSubscriptionRefresh : global::ProtoBuf.IExtensible
   {
     public CMsgSOCacheSubscriptionRefresh() {}
@@ -626,7 +624,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheVersion")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheVersion")]
   public partial class CMsgSOCacheVersion : global::ProtoBuf.IExtensible
   {
     public CMsgSOCacheVersion() {}
@@ -640,7 +638,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool versionSpecified
     {
       get { return _version != null; }
@@ -654,7 +652,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCMultiplexMessage")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCMultiplexMessage")]
   public partial class CMsgGCMultiplexMessage : global::ProtoBuf.IExtensible
   {
     public CMsgGCMultiplexMessage() {}
@@ -668,7 +666,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _msgtype = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool msgtypeSpecified
     {
       get { return _msgtype != null; }
@@ -686,7 +684,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _payload = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool payloadSpecified
     {
       get { return _payload != null; }
@@ -707,7 +705,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterAck")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterAck")]
   public partial class CGCToGCMsgMasterAck : global::ProtoBuf.IExtensible
   {
     public CGCToGCMsgMasterAck() {}
@@ -721,7 +719,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _dir_index = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool dir_indexSpecified
     {
       get { return _dir_index != null; }
@@ -739,7 +737,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _machine_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool machine_nameSpecified
     {
       get { return _machine_name != null; }
@@ -757,7 +755,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _process_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool process_nameSpecified
     {
       get { return _process_name != null; }
@@ -773,7 +771,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _directory; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"Process")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Process")]
   public partial class Process : global::ProtoBuf.IExtensible
   {
     public Process() {}
@@ -787,7 +785,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _dir_index = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool dir_indexSpecified
     {
       get { return _dir_index != null; }
@@ -813,7 +811,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterAck_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterAck_Response")]
   public partial class CGCToGCMsgMasterAck_Response : global::ProtoBuf.IExtensible
   {
     public CGCToGCMsgMasterAck_Response() {}
@@ -827,7 +825,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _eresult = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool eresultSpecified
     {
       get { return _eresult != null; }
@@ -841,7 +839,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCUniverseStartup")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCUniverseStartup")]
   public partial class CMsgGCToGCUniverseStartup : global::ProtoBuf.IExtensible
   {
     public CMsgGCToGCUniverseStartup() {}
@@ -855,7 +853,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _is_initial_startup = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool is_initial_startupSpecified
     {
       get { return _is_initial_startup != null; }
@@ -869,7 +867,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCUniverseStartupResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCUniverseStartupResponse")]
   public partial class CMsgGCToGCUniverseStartupResponse : global::ProtoBuf.IExtensible
   {
     public CMsgGCToGCUniverseStartupResponse() {}
@@ -883,7 +881,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _eresult = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool eresultSpecified
     {
       get { return _eresult != null; }
@@ -897,7 +895,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterStartupComplete")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterStartupComplete")]
   public partial class CGCToGCMsgMasterStartupComplete : global::ProtoBuf.IExtensible
   {
     public CGCToGCMsgMasterStartupComplete() {}
@@ -909,7 +907,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _gc_info; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"GCInfo")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"GCInfo")]
   public partial class GCInfo : global::ProtoBuf.IExtensible
   {
     public GCInfo() {}
@@ -923,7 +921,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _dir_index = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool dir_indexSpecified
     {
       get { return _dir_index != null; }
@@ -941,7 +939,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _machine_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool machine_nameSpecified
     {
       get { return _machine_name != null; }
@@ -960,7 +958,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgRouted")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgRouted")]
   public partial class CGCToGCMsgRouted : global::ProtoBuf.IExtensible
   {
     public CGCToGCMsgRouted() {}
@@ -974,7 +972,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _msg_type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool msg_typeSpecified
     {
       get { return _msg_type != null; }
@@ -992,7 +990,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _sender_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sender_idSpecified
     {
       get { return _sender_id != null; }
@@ -1010,7 +1008,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _net_message = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool net_messageSpecified
     {
       get { return _net_message != null; }
@@ -1024,7 +1022,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgRoutedReply")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgRoutedReply")]
   public partial class CGCToGCMsgRoutedReply : global::ProtoBuf.IExtensible
   {
     public CGCToGCMsgRoutedReply() {}
@@ -1038,7 +1036,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _msg_type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool msg_typeSpecified
     {
       get { return _msg_type != null; }
@@ -1056,7 +1054,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _net_message = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool net_messageSpecified
     {
       get { return _net_message != null; }
@@ -1070,7 +1068,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCUpdateSubGCSessionInfo")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCUpdateSubGCSessionInfo")]
   public partial class CMsgGCUpdateSubGCSessionInfo : global::ProtoBuf.IExtensible
   {
     public CMsgGCUpdateSubGCSessionInfo() {}
@@ -1082,7 +1080,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _updates; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgUpdate")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgUpdate")]
   public partial class CMsgUpdate : global::ProtoBuf.IExtensible
   {
     public CMsgUpdate() {}
@@ -1096,7 +1094,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -1114,7 +1112,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _ip = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool ipSpecified
     {
       get { return _ip != null; }
@@ -1132,7 +1130,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _trusted = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool trustedSpecified
     {
       get { return _trusted != null; }
@@ -1151,7 +1149,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestSubGCSessionInfo")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestSubGCSessionInfo")]
   public partial class CMsgGCRequestSubGCSessionInfo : global::ProtoBuf.IExtensible
   {
     public CMsgGCRequestSubGCSessionInfo() {}
@@ -1165,7 +1163,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -1179,7 +1177,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestSubGCSessionInfoResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestSubGCSessionInfoResponse")]
   public partial class CMsgGCRequestSubGCSessionInfoResponse : global::ProtoBuf.IExtensible
   {
     public CMsgGCRequestSubGCSessionInfoResponse() {}
@@ -1193,7 +1191,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _ip = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool ipSpecified
     {
       get { return _ip != null; }
@@ -1211,7 +1209,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _trusted = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool trustedSpecified
     {
       get { return _trusted != null; }
@@ -1229,7 +1227,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _port = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool portSpecified
     {
       get { return _port != null; }
@@ -1247,7 +1245,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _success = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool successSpecified
     {
       get { return _success != null; }
@@ -1261,7 +1259,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheHaveVersion")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheHaveVersion")]
   public partial class CMsgSOCacheHaveVersion : global::ProtoBuf.IExtensible
   {
     public CMsgSOCacheHaveVersion() {}
@@ -1284,7 +1282,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool versionSpecified
     {
       get { return _version != null; }
@@ -1302,7 +1300,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _service_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool service_idSpecified
     {
       get { return _service_id != null; }
@@ -1320,7 +1318,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _cached_file_version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool cached_file_versionSpecified
     {
       get { return _cached_file_version != null; }
@@ -1334,7 +1332,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgClientHello")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientHello")]
   public partial class CMsgClientHello : global::ProtoBuf.IExtensible
   {
     public CMsgClientHello() {}
@@ -1348,7 +1346,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool versionSpecified
     {
       get { return _version != null; }
@@ -1373,7 +1371,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _client_session_need = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool client_session_needSpecified
     {
       get { return _client_session_need != null; }
@@ -1391,7 +1389,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _client_launcher = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool client_launcherSpecified
     {
       get { return _client_launcher != null; }
@@ -1409,7 +1407,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _secret_key = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool secret_keySpecified
     {
       get { return _secret_key != null; }
@@ -1427,7 +1425,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _client_language = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool client_languageSpecified
     {
       get { return _client_language != null; }
@@ -1445,7 +1443,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _engine = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool engineSpecified
     {
       get { return _engine != null; }
@@ -1459,7 +1457,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgClientWelcome")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientWelcome")]
   public partial class CMsgClientWelcome : global::ProtoBuf.IExtensible
   {
     public CMsgClientWelcome() {}
@@ -1473,7 +1471,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool versionSpecified
     {
       get { return _version != null; }
@@ -1491,7 +1489,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _game_data = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool game_dataSpecified
     {
       get { return _game_data != null; }
@@ -1532,7 +1530,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _save_game_key = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool save_game_keySpecified
     {
       get { return _save_game_key != null; }
@@ -1550,7 +1548,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _item_schema_crc = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool item_schema_crcSpecified
     {
       get { return _item_schema_crc != null; }
@@ -1568,7 +1566,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _items_game_url = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool items_game_urlSpecified
     {
       get { return _items_game_url != null; }
@@ -1586,7 +1584,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _gc_socache_file_version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool gc_socache_file_versionSpecified
     {
       get { return _gc_socache_file_version != null; }
@@ -1595,7 +1593,25 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializegc_socache_file_version() { return gc_socache_file_versionSpecified; }
     private void Resetgc_socache_file_version() { gc_socache_file_versionSpecified = false; }
     
-  [global::ProtoBuf.ProtoContract(Name=@"Location")]
+
+    private string _txn_country_code;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"txn_country_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string txn_country_code
+    {
+      get { return _txn_country_code?? ""; }
+      set { _txn_country_code = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool txn_country_codeSpecified
+    {
+      get { return _txn_country_code != null; }
+      set { if (value == (_txn_country_code== null)) _txn_country_code = value ? this.txn_country_code : (string)null; }
+    }
+    private bool ShouldSerializetxn_country_code() { return txn_country_codeSpecified; }
+    private void Resettxn_country_code() { txn_country_codeSpecified = false; }
+    
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Location")]
   public partial class Location : global::ProtoBuf.IExtensible
   {
     public Location() {}
@@ -1609,7 +1625,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _latitude = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool latitudeSpecified
     {
       get { return _latitude != null; }
@@ -1627,7 +1643,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _longitude = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool longitudeSpecified
     {
       get { return _longitude != null; }
@@ -1645,7 +1661,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _country = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool countrySpecified
     {
       get { return _country != null; }
@@ -1664,7 +1680,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgConnectionStatus")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgConnectionStatus")]
   public partial class CMsgConnectionStatus : global::ProtoBuf.IExtensible
   {
     public CMsgConnectionStatus() {}
@@ -1678,7 +1694,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _status = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool statusSpecified
     {
       get { return _status != null; }
@@ -1696,7 +1712,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _client_session_need = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool client_session_needSpecified
     {
       get { return _client_session_need != null; }
@@ -1714,7 +1730,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _queue_position = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool queue_positionSpecified
     {
       get { return _queue_position != null; }
@@ -1732,7 +1748,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _queue_size = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool queue_sizeSpecified
     {
       get { return _queue_size != null; }
@@ -1750,7 +1766,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _wait_seconds = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool wait_secondsSpecified
     {
       get { return _wait_seconds != null; }
@@ -1768,7 +1784,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _estimated_wait_seconds_remaining = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool estimated_wait_seconds_remainingSpecified
     {
       get { return _estimated_wait_seconds_remaining != null; }
@@ -1782,7 +1798,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCSOCacheSubscribe")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCSOCacheSubscribe")]
   public partial class CMsgGCToGCSOCacheSubscribe : global::ProtoBuf.IExtensible
   {
     public CMsgGCToGCSOCacheSubscribe() {}
@@ -1796,7 +1812,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _subscriber = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool subscriberSpecified
     {
       get { return _subscriber != null; }
@@ -1814,7 +1830,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _subscribe_to_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool subscribe_to_idSpecified
     {
       get { return _subscribe_to_id != null; }
@@ -1832,7 +1848,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _sync_version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool sync_versionSpecified
     {
       get { return _sync_version != null; }
@@ -1857,7 +1873,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _subscribe_to_type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool subscribe_to_typeSpecified
     {
       get { return _subscribe_to_type != null; }
@@ -1866,7 +1882,7 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializesubscribe_to_type() { return subscribe_to_typeSpecified; }
     private void Resetsubscribe_to_type() { subscribe_to_typeSpecified = false; }
     
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgHaveVersions")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgHaveVersions")]
   public partial class CMsgHaveVersions : global::ProtoBuf.IExtensible
   {
     public CMsgHaveVersions() {}
@@ -1880,7 +1896,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _service_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool service_idSpecified
     {
       get { return _service_id != null; }
@@ -1898,7 +1914,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool versionSpecified
     {
       get { return _version != null; }
@@ -1917,7 +1933,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCSOCacheUnsubscribe")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCSOCacheUnsubscribe")]
   public partial class CMsgGCToGCSOCacheUnsubscribe : global::ProtoBuf.IExtensible
   {
     public CMsgGCToGCSOCacheUnsubscribe() {}
@@ -1931,7 +1947,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _subscriber = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool subscriberSpecified
     {
       get { return _subscriber != null; }
@@ -1949,7 +1965,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _unsubscribe_from_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool unsubscribe_from_idSpecified
     {
       get { return _unsubscribe_from_id != null; }
@@ -1967,7 +1983,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _unsubscribe_from_type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool unsubscribe_from_typeSpecified
     {
       get { return _unsubscribe_from_type != null; }
@@ -1981,7 +1997,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCClientPing")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCClientPing")]
   public partial class CMsgGCClientPing : global::ProtoBuf.IExtensible
   {
     public CMsgGCClientPing() {}
@@ -1991,7 +2007,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCForwardAccountDetails")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCForwardAccountDetails")]
   public partial class CMsgGCToGCForwardAccountDetails : global::ProtoBuf.IExtensible
   {
     public CMsgGCToGCForwardAccountDetails() {}
@@ -2005,7 +2021,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -2032,7 +2048,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _age_seconds = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool age_secondsSpecified
     {
       get { return _age_seconds != null; }
@@ -2046,7 +2062,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCLoadSessionSOCache")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCLoadSessionSOCache")]
   public partial class CMsgGCToGCLoadSessionSOCache : global::ProtoBuf.IExtensible
   {
     public CMsgGCToGCLoadSessionSOCache() {}
@@ -2060,7 +2076,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _account_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool account_idSpecified
     {
       get { return _account_id != null; }
@@ -2083,7 +2099,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCLoadSessionSOCacheResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCLoadSessionSOCacheResponse")]
   public partial class CMsgGCToGCLoadSessionSOCacheResponse : global::ProtoBuf.IExtensible
   {
     public CMsgGCToGCLoadSessionSOCacheResponse() {}
@@ -2093,7 +2109,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCUpdateSessionStats")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCUpdateSessionStats")]
   public partial class CMsgGCToGCUpdateSessionStats : global::ProtoBuf.IExtensible
   {
     public CMsgGCToGCUpdateSessionStats() {}
@@ -2107,7 +2123,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _user_sessions = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool user_sessionsSpecified
     {
       get { return _user_sessions != null; }
@@ -2125,7 +2141,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _server_sessions = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool server_sessionsSpecified
     {
       get { return _server_sessions != null; }
@@ -2143,7 +2159,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _in_logon_surge = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool in_logon_surgeSpecified
     {
       get { return _in_logon_surge != null; }
@@ -2157,7 +2173,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CWorkshop_PopulateItemDescriptions_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_PopulateItemDescriptions_Request")]
   public partial class CWorkshop_PopulateItemDescriptions_Request : global::ProtoBuf.IExtensible
   {
     public CWorkshop_PopulateItemDescriptions_Request() {}
@@ -2171,7 +2187,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -2187,7 +2203,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _languages; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"SingleItemDescription")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SingleItemDescription")]
   public partial class SingleItemDescription : global::ProtoBuf.IExtensible
   {
     public SingleItemDescription() {}
@@ -2201,7 +2217,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _gameitemid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool gameitemidSpecified
     {
       get { return _gameitemid != null; }
@@ -2219,7 +2235,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _item_description = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool item_descriptionSpecified
     {
       get { return _item_description != null; }
@@ -2233,7 +2249,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"ItemDescriptionsLanguageBlock")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ItemDescriptionsLanguageBlock")]
   public partial class ItemDescriptionsLanguageBlock : global::ProtoBuf.IExtensible
   {
     public ItemDescriptionsLanguageBlock() {}
@@ -2247,7 +2263,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _language = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool languageSpecified
     {
       get { return _language != null; }
@@ -2273,7 +2289,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CWorkshop_GetContributors_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_GetContributors_Request")]
   public partial class CWorkshop_GetContributors_Request : global::ProtoBuf.IExtensible
   {
     public CWorkshop_GetContributors_Request() {}
@@ -2287,7 +2303,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -2305,7 +2321,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _gameitemid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool gameitemidSpecified
     {
       get { return _gameitemid != null; }
@@ -2319,7 +2335,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CWorkshop_GetContributors_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_GetContributors_Response")]
   public partial class CWorkshop_GetContributors_Response : global::ProtoBuf.IExtensible
   {
     public CWorkshop_GetContributors_Response() {}
@@ -2336,7 +2352,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CWorkshop_SetItemPaymentRules_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_SetItemPaymentRules_Request")]
   public partial class CWorkshop_SetItemPaymentRules_Request : global::ProtoBuf.IExtensible
   {
     public CWorkshop_SetItemPaymentRules_Request() {}
@@ -2350,7 +2366,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -2368,7 +2384,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _gameitemid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool gameitemidSpecified
     {
       get { return _gameitemid != null; }
@@ -2391,7 +2407,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _partner_accounts; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"WorkshopItemPaymentRule")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"WorkshopItemPaymentRule")]
   public partial class WorkshopItemPaymentRule : global::ProtoBuf.IExtensible
   {
     public WorkshopItemPaymentRule() {}
@@ -2405,7 +2421,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _workshop_file_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool workshop_file_idSpecified
     {
       get { return _workshop_file_id != null; }
@@ -2423,7 +2439,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _revenue_percentage = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool revenue_percentageSpecified
     {
       get { return _revenue_percentage != null; }
@@ -2441,7 +2457,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _rule_description = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool rule_descriptionSpecified
     {
       get { return _rule_description != null; }
@@ -2455,7 +2471,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"PartnerItemPaymentRule")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PartnerItemPaymentRule")]
   public partial class PartnerItemPaymentRule : global::ProtoBuf.IExtensible
   {
     public PartnerItemPaymentRule() {}
@@ -2469,7 +2485,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _account_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool account_idSpecified
     {
       get { return _account_id != null; }
@@ -2487,7 +2503,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _revenue_percentage = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool revenue_percentageSpecified
     {
       get { return _revenue_percentage != null; }
@@ -2505,7 +2521,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _rule_description = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool rule_descriptionSpecified
     {
       get { return _rule_description != null; }
@@ -2524,7 +2540,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CWorkshop_SetItemPaymentRules_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_SetItemPaymentRules_Response")]
   public partial class CWorkshop_SetItemPaymentRules_Response : global::ProtoBuf.IExtensible
   {
     public CWorkshop_SetItemPaymentRules_Response() {}
@@ -2534,7 +2550,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_PostGameDataFrame_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_PostGameDataFrame_Request")]
   public partial class CBroadcast_PostGameDataFrame_Request : global::ProtoBuf.IExtensible
   {
     public CBroadcast_PostGameDataFrame_Request() {}
@@ -2548,7 +2564,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -2566,7 +2582,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _steamid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool steamidSpecified
     {
       get { return _steamid != null; }
@@ -2584,7 +2600,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _broadcast_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool broadcast_idSpecified
     {
       get { return _broadcast_id != null; }
@@ -2602,7 +2618,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _frame_data = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool frame_dataSpecified
     {
       get { return _frame_data != null; }
@@ -2616,7 +2632,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgSerializedSOCache")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSerializedSOCache")]
   public partial class CMsgSerializedSOCache : global::ProtoBuf.IExtensible
   {
     public CMsgSerializedSOCache() {}
@@ -2630,7 +2646,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _file_version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool file_versionSpecified
     {
       get { return _file_version != null; }
@@ -2655,7 +2671,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _gc_socache_file_version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool gc_socache_file_versionSpecified
     {
       get { return _gc_socache_file_version != null; }
@@ -2664,7 +2680,7 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializegc_socache_file_version() { return gc_socache_file_versionSpecified; }
     private void Resetgc_socache_file_version() { gc_socache_file_versionSpecified = false; }
     
-  [global::ProtoBuf.ProtoContract(Name=@"TypeCache")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TypeCache")]
   public partial class TypeCache : global::ProtoBuf.IExtensible
   {
     public TypeCache() {}
@@ -2678,7 +2694,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool typeSpecified
     {
       get { return _type != null; }
@@ -2703,7 +2719,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _service_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool service_idSpecified
     {
       get { return _service_id != null; }
@@ -2717,7 +2733,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"Cache")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Cache")]
   public partial class Cache : global::ProtoBuf.IExtensible
   {
     public Cache() {}
@@ -2731,7 +2747,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool typeSpecified
     {
       get { return _type != null; }
@@ -2749,7 +2765,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool idSpecified
     {
       get { return _id != null; }
@@ -2772,7 +2788,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _type_caches; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"Version")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Version")]
   public partial class Version : global::ProtoBuf.IExtensible
   {
     public Version() {}
@@ -2786,7 +2802,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _service = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool serviceSpecified
     {
       get { return _service != null; }
@@ -2804,7 +2820,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _version = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool versionSpecified
     {
       get { return _version != null; }
@@ -2828,7 +2844,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientPollConvarRequest")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientPollConvarRequest")]
   public partial class CMsgGCToClientPollConvarRequest : global::ProtoBuf.IExtensible
   {
     public CMsgGCToClientPollConvarRequest() {}
@@ -2842,7 +2858,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _convar_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool convar_nameSpecified
     {
       get { return _convar_name != null; }
@@ -2860,7 +2876,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _poll_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool poll_idSpecified
     {
       get { return _poll_id != null; }
@@ -2874,7 +2890,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientPollConvarResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientPollConvarResponse")]
   public partial class CMsgGCToClientPollConvarResponse : global::ProtoBuf.IExtensible
   {
     public CMsgGCToClientPollConvarResponse() {}
@@ -2888,7 +2904,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _poll_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool poll_idSpecified
     {
       get { return _poll_id != null; }
@@ -2906,7 +2922,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _convar_value = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool convar_valueSpecified
     {
       get { return _convar_value != null; }
@@ -2914,6 +2930,347 @@ namespace SteamKit2.GC.Dota.Internal
     }
     private bool ShouldSerializeconvar_value() { return convar_valueSpecified; }
     private void Resetconvar_value() { convar_valueSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgCompressedMsgToClient")]
+  public partial class CGCMsgCompressedMsgToClient : global::ProtoBuf.IExtensible
+  {
+    public CGCMsgCompressedMsgToClient() {}
+    
+
+    private uint? _msg_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"msg_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint msg_id
+    {
+      get { return _msg_id?? default(uint); }
+      set { _msg_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool msg_idSpecified
+    {
+      get { return _msg_id != null; }
+      set { if (value == (_msg_id== null)) _msg_id = value ? this.msg_id : (uint?)null; }
+    }
+    private bool ShouldSerializemsg_id() { return msg_idSpecified; }
+    private void Resetmsg_id() { msg_idSpecified = false; }
+    
+
+    private byte[] _compressed_msg;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"compressed_msg", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] compressed_msg
+    {
+      get { return _compressed_msg?? null; }
+      set { _compressed_msg = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool compressed_msgSpecified
+    {
+      get { return _compressed_msg != null; }
+      set { if (value == (_compressed_msg== null)) _compressed_msg = value ? this.compressed_msg : (byte[])null; }
+    }
+    private bool ShouldSerializecompressed_msg() { return compressed_msgSpecified; }
+    private void Resetcompressed_msg() { compressed_msgSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCMasterBroadcastMessage")]
+  public partial class CMsgGCToGCMasterBroadcastMessage : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCMasterBroadcastMessage() {}
+    
+
+    private uint? _users_per_second;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"users_per_second", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint users_per_second
+    {
+      get { return _users_per_second?? default(uint); }
+      set { _users_per_second = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool users_per_secondSpecified
+    {
+      get { return _users_per_second != null; }
+      set { if (value == (_users_per_second== null)) _users_per_second = value ? this.users_per_second : (uint?)null; }
+    }
+    private bool ShouldSerializeusers_per_second() { return users_per_secondSpecified; }
+    private void Resetusers_per_second() { users_per_secondSpecified = false; }
+    
+
+    private bool? _send_to_users;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"send_to_users", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool send_to_users
+    {
+      get { return _send_to_users?? default(bool); }
+      set { _send_to_users = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool send_to_usersSpecified
+    {
+      get { return _send_to_users != null; }
+      set { if (value == (_send_to_users== null)) _send_to_users = value ? this.send_to_users : (bool?)null; }
+    }
+    private bool ShouldSerializesend_to_users() { return send_to_usersSpecified; }
+    private void Resetsend_to_users() { send_to_usersSpecified = false; }
+    
+
+    private bool? _send_to_servers;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"send_to_servers", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool send_to_servers
+    {
+      get { return _send_to_servers?? default(bool); }
+      set { _send_to_servers = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool send_to_serversSpecified
+    {
+      get { return _send_to_servers != null; }
+      set { if (value == (_send_to_servers== null)) _send_to_servers = value ? this.send_to_servers : (bool?)null; }
+    }
+    private bool ShouldSerializesend_to_servers() { return send_to_serversSpecified; }
+    private void Resetsend_to_servers() { send_to_serversSpecified = false; }
+    
+
+    private uint? _msg_id;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"msg_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint msg_id
+    {
+      get { return _msg_id?? default(uint); }
+      set { _msg_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool msg_idSpecified
+    {
+      get { return _msg_id != null; }
+      set { if (value == (_msg_id== null)) _msg_id = value ? this.msg_id : (uint?)null; }
+    }
+    private bool ShouldSerializemsg_id() { return msg_idSpecified; }
+    private void Resetmsg_id() { msg_idSpecified = false; }
+    
+
+    private byte[] _msg_data;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"msg_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] msg_data
+    {
+      get { return _msg_data?? null; }
+      set { _msg_data = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool msg_dataSpecified
+    {
+      get { return _msg_data != null; }
+      set { if (value == (_msg_data== null)) _msg_data = value ? this.msg_data : (byte[])null; }
+    }
+    private bool ShouldSerializemsg_data() { return msg_dataSpecified; }
+    private void Resetmsg_data() { msg_dataSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCMasterSubscribeToCache")]
+  public partial class CMsgGCToGCMasterSubscribeToCache : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCMasterSubscribeToCache() {}
+    
+
+    private uint? _soid_type;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"soid_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint soid_type
+    {
+      get { return _soid_type?? default(uint); }
+      set { _soid_type = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool soid_typeSpecified
+    {
+      get { return _soid_type != null; }
+      set { if (value == (_soid_type== null)) _soid_type = value ? this.soid_type : (uint?)null; }
+    }
+    private bool ShouldSerializesoid_type() { return soid_typeSpecified; }
+    private void Resetsoid_type() { soid_typeSpecified = false; }
+    
+
+    private ulong? _soid_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"soid_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong soid_id
+    {
+      get { return _soid_id?? default(ulong); }
+      set { _soid_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool soid_idSpecified
+    {
+      get { return _soid_id != null; }
+      set { if (value == (_soid_id== null)) _soid_id = value ? this.soid_id : (ulong?)null; }
+    }
+    private bool ShouldSerializesoid_id() { return soid_idSpecified; }
+    private void Resetsoid_id() { soid_idSpecified = false; }
+    
+    private readonly global::System.Collections.Generic.List<uint> _account_ids = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"account_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> account_ids
+    {
+      get { return _account_ids; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<ulong> _steam_ids = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"steam_ids", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<ulong> steam_ids
+    {
+      get { return _steam_ids; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCMasterSubscribeToCacheResponse")]
+  public partial class CMsgGCToGCMasterSubscribeToCacheResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCMasterSubscribeToCacheResponse() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCMasterSubscribeToCacheAsync")]
+  public partial class CMsgGCToGCMasterSubscribeToCacheAsync : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCMasterSubscribeToCacheAsync() {}
+    
+
+    private CMsgGCToGCMasterSubscribeToCache _subscribe_msg = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"subscribe_msg", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgGCToGCMasterSubscribeToCache subscribe_msg
+    {
+      get { return _subscribe_msg; }
+      set { _subscribe_msg = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCMasterUnsubscribeFromCache")]
+  public partial class CMsgGCToGCMasterUnsubscribeFromCache : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCMasterUnsubscribeFromCache() {}
+    
+
+    private uint? _soid_type;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"soid_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint soid_type
+    {
+      get { return _soid_type?? default(uint); }
+      set { _soid_type = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool soid_typeSpecified
+    {
+      get { return _soid_type != null; }
+      set { if (value == (_soid_type== null)) _soid_type = value ? this.soid_type : (uint?)null; }
+    }
+    private bool ShouldSerializesoid_type() { return soid_typeSpecified; }
+    private void Resetsoid_type() { soid_typeSpecified = false; }
+    
+
+    private ulong? _soid_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"soid_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong soid_id
+    {
+      get { return _soid_id?? default(ulong); }
+      set { _soid_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool soid_idSpecified
+    {
+      get { return _soid_id != null; }
+      set { if (value == (_soid_id== null)) _soid_id = value ? this.soid_id : (ulong?)null; }
+    }
+    private bool ShouldSerializesoid_id() { return soid_idSpecified; }
+    private void Resetsoid_id() { soid_idSpecified = false; }
+    
+    private readonly global::System.Collections.Generic.List<uint> _account_ids = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"account_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> account_ids
+    {
+      get { return _account_ids; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<ulong> _steam_ids = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"steam_ids", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<ulong> steam_ids
+    {
+      get { return _steam_ids; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCMasterDestroyCache")]
+  public partial class CMsgGCToGCMasterDestroyCache : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCMasterDestroyCache() {}
+    
+
+    private uint? _soid_type;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"soid_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint soid_type
+    {
+      get { return _soid_type?? default(uint); }
+      set { _soid_type = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool soid_typeSpecified
+    {
+      get { return _soid_type != null; }
+      set { if (value == (_soid_type== null)) _soid_type = value ? this.soid_type : (uint?)null; }
+    }
+    private bool ShouldSerializesoid_type() { return soid_typeSpecified; }
+    private void Resetsoid_type() { soid_typeSpecified = false; }
+    
+
+    private ulong? _soid_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"soid_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong soid_id
+    {
+      get { return _soid_id?? default(ulong); }
+      set { _soid_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool soid_idSpecified
+    {
+      get { return _soid_id != null; }
+      set { if (value == (_soid_id== null)) _soid_id = value ? this.soid_id : (ulong?)null; }
+    }
+    private bool ShouldSerializesoid_id() { return soid_idSpecified; }
+    private void Resetsoid_id() { soid_idSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

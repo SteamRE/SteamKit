@@ -1532,24 +1532,6 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializeteam_ui_logo() { return team_ui_logoSpecified; }
     private void Resetteam_ui_logo() { team_ui_logoSpecified = false; }
     
-
-    private uint? _team_date;
-    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"team_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint team_date
-    {
-      get { return _team_date?? default(uint); }
-      set { _team_date = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool team_dateSpecified
-    {
-      get { return _team_date != null; }
-      set { if (value == (_team_date== null)) _team_date = value ? this.team_date : (uint?)null; }
-    }
-    private bool ShouldSerializeteam_date() { return team_dateSpecified; }
-    private void Resetteam_date() { team_dateSpecified = false; }
-    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

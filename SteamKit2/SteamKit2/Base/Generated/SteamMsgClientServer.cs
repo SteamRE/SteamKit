@@ -1769,6 +1769,24 @@ namespace SteamKit2.Internal
     private bool ShouldSerializecontroller_workshop_file_id() { return controller_workshop_file_idSpecified; }
     private void Resetcontroller_workshop_file_id() { controller_workshop_file_idSpecified = false; }
     
+
+    private uint? _launch_source;
+    [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"launch_source", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint launch_source
+    {
+      get { return _launch_source?? (uint)0; }
+      set { _launch_source = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool launch_sourceSpecified
+    {
+      get { return _launch_source != null; }
+      set { if (value == (_launch_source== null)) _launch_source = value ? this.launch_source : (uint?)null; }
+    }
+    private bool ShouldSerializelaunch_source() { return launch_sourceSpecified; }
+    private void Resetlaunch_source() { launch_sourceSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
