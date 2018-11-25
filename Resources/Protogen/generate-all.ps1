@@ -22,7 +22,7 @@ $protos = Import-Csv -LiteralPath (Join-Path $PSScriptRoot 'protos.csv') |
     ? { (!$ProtoDir) -or ($_.ProtoDir -in $ProtoDir)}
 
 $CommonParams = @(
-    '-s:"{0}"' -f $ProtoGenDir,
+    '-s:"{0}"' -f $ProtoBase,
     '-t:csharp'
     '-p:detectMissing'
 )
