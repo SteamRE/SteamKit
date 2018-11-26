@@ -1853,42 +1853,6 @@ namespace SteamKit2.Unified.Internal
     private void Resetmetadata() { metadataSpecified = false; }
     
 
-    private ulong? _incompatible_actor;
-    [global::ProtoBuf.ProtoMember(59, IsRequired = false, Name=@"incompatible_actor", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public ulong incompatible_actor
-    {
-      get { return _incompatible_actor?? default(ulong); }
-      set { _incompatible_actor = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool incompatible_actorSpecified
-    {
-      get { return _incompatible_actor != null; }
-      set { if (value == (_incompatible_actor== null)) _incompatible_actor = value ? this.incompatible_actor : (ulong?)null; }
-    }
-    private bool ShouldSerializeincompatible_actor() { return incompatible_actorSpecified; }
-    private void Resetincompatible_actor() { incompatible_actorSpecified = false; }
-    
-
-    private uint? _incompatible_timestamp;
-    [global::ProtoBuf.ProtoMember(60, IsRequired = false, Name=@"incompatible_timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint incompatible_timestamp
-    {
-      get { return _incompatible_timestamp?? default(uint); }
-      set { _incompatible_timestamp = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool incompatible_timestampSpecified
-    {
-      get { return _incompatible_timestamp != null; }
-      set { if (value == (_incompatible_timestamp== null)) _incompatible_timestamp = value ? this.incompatible_timestamp : (uint?)null; }
-    }
-    private bool ShouldSerializeincompatible_timestamp() { return incompatible_timestampSpecified; }
-    private void Resetincompatible_timestamp() { incompatible_timestampSpecified = false; }
-    
-
     private int? _language;
     [global::ProtoBuf.ProtoMember(61, IsRequired = false, Name=@"language", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int language
@@ -1907,76 +1871,40 @@ namespace SteamKit2.Unified.Internal
     private void Resetlanguage() { languageSpecified = false; }
     
 
-    private bool? _app_has_adult_content;
-    [global::ProtoBuf.ProtoMember(65, IsRequired = false, Name=@"app_has_adult_content", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool app_has_adult_content
+    private bool? _maybe_inappropriate_sex;
+    [global::ProtoBuf.ProtoMember(65, IsRequired = false, Name=@"maybe_inappropriate_sex", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool maybe_inappropriate_sex
     {
-      get { return _app_has_adult_content?? default(bool); }
-      set { _app_has_adult_content = value; }
+      get { return _maybe_inappropriate_sex?? default(bool); }
+      set { _maybe_inappropriate_sex = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
     [global::System.ComponentModel.Browsable(false)]
-    public bool app_has_adult_contentSpecified
+    public bool maybe_inappropriate_sexSpecified
     {
-      get { return _app_has_adult_content != null; }
-      set { if (value == (_app_has_adult_content== null)) _app_has_adult_content = value ? this.app_has_adult_content : (bool?)null; }
+      get { return _maybe_inappropriate_sex != null; }
+      set { if (value == (_maybe_inappropriate_sex== null)) _maybe_inappropriate_sex = value ? this.maybe_inappropriate_sex : (bool?)null; }
     }
-    private bool ShouldSerializeapp_has_adult_content() { return app_has_adult_contentSpecified; }
-    private void Resetapp_has_adult_content() { app_has_adult_contentSpecified = false; }
+    private bool ShouldSerializemaybe_inappropriate_sex() { return maybe_inappropriate_sexSpecified; }
+    private void Resetmaybe_inappropriate_sex() { maybe_inappropriate_sexSpecified = false; }
     
 
-    private bool? _app_has_adult_content_sex;
-    [global::ProtoBuf.ProtoMember(66, IsRequired = false, Name=@"app_has_adult_content_sex", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool app_has_adult_content_sex
+    private bool? _maybe_inappropriate_violence;
+    [global::ProtoBuf.ProtoMember(66, IsRequired = false, Name=@"maybe_inappropriate_violence", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool maybe_inappropriate_violence
     {
-      get { return _app_has_adult_content_sex?? default(bool); }
-      set { _app_has_adult_content_sex = value; }
+      get { return _maybe_inappropriate_violence?? default(bool); }
+      set { _maybe_inappropriate_violence = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
     [global::System.ComponentModel.Browsable(false)]
-    public bool app_has_adult_content_sexSpecified
+    public bool maybe_inappropriate_violenceSpecified
     {
-      get { return _app_has_adult_content_sex != null; }
-      set { if (value == (_app_has_adult_content_sex== null)) _app_has_adult_content_sex = value ? this.app_has_adult_content_sex : (bool?)null; }
+      get { return _maybe_inappropriate_violence != null; }
+      set { if (value == (_maybe_inappropriate_violence== null)) _maybe_inappropriate_violence = value ? this.maybe_inappropriate_violence : (bool?)null; }
     }
-    private bool ShouldSerializeapp_has_adult_content_sex() { return app_has_adult_content_sexSpecified; }
-    private void Resetapp_has_adult_content_sex() { app_has_adult_content_sexSpecified = false; }
-    
-
-    private bool? _app_has_adult_content_violence;
-    [global::ProtoBuf.ProtoMember(67, IsRequired = false, Name=@"app_has_adult_content_violence", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool app_has_adult_content_violence
-    {
-      get { return _app_has_adult_content_violence?? default(bool); }
-      set { _app_has_adult_content_violence = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool app_has_adult_content_violenceSpecified
-    {
-      get { return _app_has_adult_content_violence != null; }
-      set { if (value == (_app_has_adult_content_violence== null)) _app_has_adult_content_violence = value ? this.app_has_adult_content_violence : (bool?)null; }
-    }
-    private bool ShouldSerializeapp_has_adult_content_violence() { return app_has_adult_content_violenceSpecified; }
-    private void Resetapp_has_adult_content_violence() { app_has_adult_content_violenceSpecified = false; }
-    
-
-    private bool? _maybe_inappropriate;
-    [global::ProtoBuf.ProtoMember(68, IsRequired = false, Name=@"maybe_inappropriate", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool maybe_inappropriate
-    {
-      get { return _maybe_inappropriate?? default(bool); }
-      set { _maybe_inappropriate = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool maybe_inappropriateSpecified
-    {
-      get { return _maybe_inappropriate != null; }
-      set { if (value == (_maybe_inappropriate== null)) _maybe_inappropriate = value ? this.maybe_inappropriate : (bool?)null; }
-    }
-    private bool ShouldSerializemaybe_inappropriate() { return maybe_inappropriateSpecified; }
-    private void Resetmaybe_inappropriate() { maybe_inappropriateSpecified = false; }
+    private bool ShouldSerializemaybe_inappropriate_violence() { return maybe_inappropriate_violenceSpecified; }
+    private void Resetmaybe_inappropriate_violence() { maybe_inappropriate_violenceSpecified = false; }
     
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Tag")]
   public partial class Tag : global::ProtoBuf.IExtensible
@@ -4051,6 +3979,24 @@ namespace SteamKit2.Unified.Internal
     private void Resetpage() { pageSpecified = false; }
     
 
+    private string _cursor;
+    [global::ProtoBuf.ProtoMember(39, IsRequired = false, Name=@"cursor", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string cursor
+    {
+      get { return _cursor?? ""; }
+      set { _cursor = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool cursorSpecified
+    {
+      get { return _cursor != null; }
+      set { if (value == (_cursor== null)) _cursor = value ? this.cursor : (string)null; }
+    }
+    private bool ShouldSerializecursor() { return cursorSpecified; }
+    private void Resetcursor() { cursorSpecified = false; }
+    
+
     private uint? _numperpage;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"numperpage", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint numperpage
@@ -4598,6 +4544,24 @@ namespace SteamKit2.Unified.Internal
       get { return _publishedfiledetails; }
     }
   
+
+    private string _next_cursor;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"next_cursor", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string next_cursor
+    {
+      get { return _next_cursor?? ""; }
+      set { _next_cursor = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool next_cursorSpecified
+    {
+      get { return _next_cursor != null; }
+      set { if (value == (_next_cursor== null)) _next_cursor = value ? this.next_cursor : (string)null; }
+    }
+    private bool ShouldSerializenext_cursor() { return next_cursorSpecified; }
+    private void Resetnext_cursor() { next_cursorSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

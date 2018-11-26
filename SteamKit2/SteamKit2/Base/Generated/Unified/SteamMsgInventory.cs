@@ -417,6 +417,24 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializetrade_restriction() { return trade_restrictionSpecified; }
     private void Resettrade_restriction() { trade_restrictionSpecified = false; }
     
+
+    private bool? _is_purchase;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"is_purchase", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool is_purchase
+    {
+      get { return _is_purchase?? (bool)false; }
+      set { _is_purchase = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool is_purchaseSpecified
+    {
+      get { return _is_purchase != null; }
+      set { if (value == (_is_purchase== null)) _is_purchase = value ? this.is_purchase : (bool?)null; }
+    }
+    private bool ShouldSerializeis_purchase() { return is_purchaseSpecified; }
+    private void Resetis_purchase() { is_purchaseSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1324,6 +1342,43 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventoryClient_NewItems_Notification")]
+  public partial class CInventoryClient_NewItems_Notification : global::ProtoBuf.IExtensible
+  {
+    public CInventoryClient_NewItems_Notification() {}
+    
+
+    private uint? _appid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint appid
+    {
+      get { return _appid?? default(uint); }
+      set { _appid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
+
+    private CInventory_Response _inventory_response = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"inventory_response", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CInventory_Response inventory_response
+    {
+      get { return _inventory_response; }
+      set { _inventory_response = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface IInventory
     {
       CInventory_Response GetInventory(CInventory_GetInventory_Request request);
@@ -1341,6 +1396,13 @@ namespace SteamKit2.Unified.Internal
     CInventory_GetUserPurchaseInfo_Response GetUserPurchaseInfo(CInventory_GetUserPurchaseInfo_Request request);
     CInventory_PurchaseInit_Response PurchaseInit(CInventory_PurchaseInit_Request request);
     CInventory_Response PurchaseFinalize(CInventory_PurchaseFinalize_Request request);
+    
+    }
+    
+    
+    public interface IInventoryClient
+    {
+      NoResponse NotifyNewItems(CInventoryClient_NewItems_Notification request);
     
     }
     

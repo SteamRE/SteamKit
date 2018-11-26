@@ -521,6 +521,80 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCommunity_TerminateGamePersonalDataEntries_Request")]
+  public partial class CCommunity_TerminateGamePersonalDataEntries_Request : global::ProtoBuf.IExtensible
+  {
+    public CCommunity_TerminateGamePersonalDataEntries_Request() {}
+    
+
+    private uint? _appid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint appid
+    {
+      get { return _appid?? default(uint); }
+      set { _appid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
+
+    private ulong? _steamid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong steamid
+    {
+      get { return _steamid?? default(ulong); }
+      set { _steamid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCommunity_TerminateGamePersonalDataEntries_Response")]
+  public partial class CCommunity_TerminateGamePersonalDataEntries_Response : global::ProtoBuf.IExtensible
+  {
+    public CCommunity_TerminateGamePersonalDataEntries_Response() {}
+    
+
+    private uint? _gceresult;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"gceresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint gceresult
+    {
+      get { return _gceresult?? default(uint); }
+      set { _gceresult = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool gceresultSpecified
+    {
+      get { return _gceresult != null; }
+      set { if (value == (_gceresult== null)) _gceresult = value ? this.gceresult : (uint?)null; }
+    }
+    private bool ShouldSerializegceresult() { return gceresultSpecified; }
+    private void Resetgceresult() { gceresultSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCSystemMsg", EnumPassthru=true)]
     public enum EGCSystemMsg
     {
@@ -784,7 +858,13 @@ namespace SteamKit2.GC.CSGO.Internal
       k_EGCMsgGetGamePersonalDataEntriesRequest = 526,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgGetGamePersonalDataEntriesResponse", Value=527)]
-      k_EGCMsgGetGamePersonalDataEntriesResponse = 527
+      k_EGCMsgGetGamePersonalDataEntriesResponse = 527,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgTerminateGamePersonalDataEntriesRequest", Value=528)]
+      k_EGCMsgTerminateGamePersonalDataEntriesRequest = 528,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgTerminateGamePersonalDataEntriesResponse", Value=529)]
+      k_EGCMsgTerminateGamePersonalDataEntriesResponse = 529
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"ESOMsg", EnumPassthru=true)]

@@ -995,6 +995,24 @@ namespace SteamKit2.GC.CSGO.Internal
     private bool ShouldSerializenet_message() { return net_messageSpecified; }
     private void Resetnet_message() { net_messageSpecified = false; }
     
+
+    private uint? _ip;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint ip
+    {
+      get { return _ip?? default(uint); }
+      set { _ip = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool ipSpecified
+    {
+      get { return _ip != null; }
+      set { if (value == (_ip== null)) _ip = value ? this.ip : (uint?)null; }
+    }
+    private bool ShouldSerializeip() { return ipSpecified; }
+    private void Resetip() { ipSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1571,6 +1589,24 @@ namespace SteamKit2.GC.CSGO.Internal
     private bool ShouldSerializebalance_url() { return balance_urlSpecified; }
     private void Resetbalance_url() { balance_urlSpecified = false; }
     
+
+    private string _txn_country_code;
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"txn_country_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string txn_country_code
+    {
+      get { return _txn_country_code?? ""; }
+      set { _txn_country_code = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool txn_country_codeSpecified
+    {
+      get { return _txn_country_code != null; }
+      set { if (value == (_txn_country_code== null)) _txn_country_code = value ? this.txn_country_code : (string)null; }
+    }
+    private bool ShouldSerializetxn_country_code() { return txn_country_codeSpecified; }
+    private void Resettxn_country_code() { txn_country_codeSpecified = false; }
+    
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Location")]
   public partial class Location : global::ProtoBuf.IExtensible
   {
@@ -2069,6 +2105,24 @@ namespace SteamKit2.GC.CSGO.Internal
     private bool ShouldSerializerule_description() { return rule_descriptionSpecified; }
     private void Resetrule_description() { rule_descriptionSpecified = false; }
     
+
+    private uint? _rule_type;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"rule_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint rule_type
+    {
+      get { return _rule_type?? (uint)1; }
+      set { _rule_type = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool rule_typeSpecified
+    {
+      get { return _rule_type != null; }
+      set { if (value == (_rule_type== null)) _rule_type = value ? this.rule_type : (uint?)null; }
+    }
+    private bool ShouldSerializerule_type() { return rule_typeSpecified; }
+    private void Resetrule_type() { rule_typeSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2330,6 +2384,116 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_AddSpecialPayment_Request")]
+  public partial class CWorkshop_AddSpecialPayment_Request : global::ProtoBuf.IExtensible
+  {
+    public CWorkshop_AddSpecialPayment_Request() {}
+    
+
+    private uint? _appid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint appid
+    {
+      get { return _appid?? default(uint); }
+      set { _appid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
+
+    private uint? _gameitemid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"gameitemid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint gameitemid
+    {
+      get { return _gameitemid?? default(uint); }
+      set { _gameitemid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool gameitemidSpecified
+    {
+      get { return _gameitemid != null; }
+      set { if (value == (_gameitemid== null)) _gameitemid = value ? this.gameitemid : (uint?)null; }
+    }
+    private bool ShouldSerializegameitemid() { return gameitemidSpecified; }
+    private void Resetgameitemid() { gameitemidSpecified = false; }
+    
+
+    private string _date;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"date", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string date
+    {
+      get { return _date?? ""; }
+      set { _date = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool dateSpecified
+    {
+      get { return _date != null; }
+      set { if (value == (_date== null)) _date = value ? this.date : (string)null; }
+    }
+    private bool ShouldSerializedate() { return dateSpecified; }
+    private void Resetdate() { dateSpecified = false; }
+    
+
+    private ulong? _payment_us_usd;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"payment_us_usd", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong payment_us_usd
+    {
+      get { return _payment_us_usd?? default(ulong); }
+      set { _payment_us_usd = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool payment_us_usdSpecified
+    {
+      get { return _payment_us_usd != null; }
+      set { if (value == (_payment_us_usd== null)) _payment_us_usd = value ? this.payment_us_usd : (ulong?)null; }
+    }
+    private bool ShouldSerializepayment_us_usd() { return payment_us_usdSpecified; }
+    private void Resetpayment_us_usd() { payment_us_usdSpecified = false; }
+    
+
+    private ulong? _payment_row_usd;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"payment_row_usd", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong payment_row_usd
+    {
+      get { return _payment_row_usd?? default(ulong); }
+      set { _payment_row_usd = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool payment_row_usdSpecified
+    {
+      get { return _payment_row_usd != null; }
+      set { if (value == (_payment_row_usd== null)) _payment_row_usd = value ? this.payment_row_usd : (ulong?)null; }
+    }
+    private bool ShouldSerializepayment_row_usd() { return payment_row_usdSpecified; }
+    private void Resetpayment_row_usd() { payment_row_usdSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_AddSpecialPayment_Response")]
+  public partial class CWorkshop_AddSpecialPayment_Response : global::ProtoBuf.IExtensible
+  {
+    public CWorkshop_AddSpecialPayment_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"GCClientLauncherType", EnumPassthru=true)]
     public enum GCClientLauncherType
     {
@@ -2359,6 +2523,26 @@ namespace SteamKit2.GC.CSGO.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"GCConnectionStatus_NO_STEAM", Value=4)]
       GCConnectionStatus_NO_STEAM = 4
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ESteamPaymentRuleType", EnumPassthru=true)]
+    public enum ESteamPaymentRuleType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EPaymentRuleTypeComposite", Value=0)]
+      k_EPaymentRuleTypeComposite = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EPaymentRuleTypeWorkshop", Value=1)]
+      k_EPaymentRuleTypeWorkshop = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EPaymentRuleTypeServiceProvider", Value=2)]
+      k_EPaymentRuleTypeServiceProvider = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EPaymentRuleTypePartner", Value=3)]
+      k_EPaymentRuleTypePartner = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EPaymentRuleTypeSpecialPayment", Value=4)]
+      k_EPaymentRuleTypeSpecialPayment = 4
     }
   
 }

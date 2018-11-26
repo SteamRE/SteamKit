@@ -150,24 +150,6 @@ namespace SteamKit2.GC.Dota.Internal
     private void Resetmatchlanguages() { matchlanguagesSpecified = false; }
     
 
-    private uint? _map_preference;
-    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"map_preference", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint map_preference
-    {
-      get { return _map_preference?? default(uint); }
-      set { _map_preference = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool map_preferenceSpecified
-    {
-      get { return _map_preference != null; }
-      set { if (value == (_map_preference== null)) _map_preference = value ? this.map_preference : (uint?)null; }
-    }
-    private bool ShouldSerializemap_preference() { return map_preferenceSpecified; }
-    private void Resetmap_preference() { map_preferenceSpecified = false; }
-    
-
     private uint? _team_id;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint team_id
@@ -265,6 +247,78 @@ namespace SteamKit2.GC.Dota.Internal
     }
     private bool ShouldSerializesolo_queue() { return solo_queueSpecified; }
     private void Resetsolo_queue() { solo_queueSpecified = false; }
+    
+
+    private uint? _bot_script_index;
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"bot_script_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint bot_script_index
+    {
+      get { return _bot_script_index?? default(uint); }
+      set { _bot_script_index = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool bot_script_indexSpecified
+    {
+      get { return _bot_script_index != null; }
+      set { if (value == (_bot_script_index== null)) _bot_script_index = value ? this.bot_script_index : (uint?)null; }
+    }
+    private bool ShouldSerializebot_script_index() { return bot_script_indexSpecified; }
+    private void Resetbot_script_index() { bot_script_indexSpecified = false; }
+    
+
+    private uint? _steam_clan_account_id;
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"steam_clan_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint steam_clan_account_id
+    {
+      get { return _steam_clan_account_id?? default(uint); }
+      set { _steam_clan_account_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool steam_clan_account_idSpecified
+    {
+      get { return _steam_clan_account_id != null; }
+      set { if (value == (_steam_clan_account_id== null)) _steam_clan_account_id = value ? this.steam_clan_account_id : (uint?)null; }
+    }
+    private bool ShouldSerializesteam_clan_account_id() { return steam_clan_account_idSpecified; }
+    private void Resetsteam_clan_account_id() { steam_clan_account_idSpecified = false; }
+    
+
+    private bool? _is_challenge_match;
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"is_challenge_match", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool is_challenge_match
+    {
+      get { return _is_challenge_match?? default(bool); }
+      set { _is_challenge_match = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool is_challenge_matchSpecified
+    {
+      get { return _is_challenge_match != null; }
+      set { if (value == (_is_challenge_match== null)) _is_challenge_match = value ? this.is_challenge_match : (bool?)null; }
+    }
+    private bool ShouldSerializeis_challenge_match() { return is_challenge_matchSpecified; }
+    private void Resetis_challenge_match() { is_challenge_matchSpecified = false; }
+    
+
+    private uint? _lane_selection_flags;
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"lane_selection_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint lane_selection_flags
+    {
+      get { return _lane_selection_flags?? default(uint); }
+      set { _lane_selection_flags = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool lane_selection_flagsSpecified
+    {
+      get { return _lane_selection_flags != null; }
+      set { if (value == (_lane_selection_flags== null)) _lane_selection_flags = value ? this.lane_selection_flags : (uint?)null; }
+    }
+    private bool ShouldSerializelane_selection_flags() { return lane_selection_flagsSpecified; }
+    private void Resetlane_selection_flags() { lane_selection_flagsSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1094,24 +1148,6 @@ namespace SteamKit2.GC.Dota.Internal
     private void Resetcustom_max_players() { custom_max_playersSpecified = false; }
     
 
-    private uint? _lan_host_ping_to_server_region;
-    [global::ProtoBuf.ProtoMember(32, IsRequired = false, Name=@"lan_host_ping_to_server_region", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint lan_host_ping_to_server_region
-    {
-      get { return _lan_host_ping_to_server_region?? default(uint); }
-      set { _lan_host_ping_to_server_region = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool lan_host_ping_to_server_regionSpecified
-    {
-      get { return _lan_host_ping_to_server_region != null; }
-      set { if (value == (_lan_host_ping_to_server_region== null)) _lan_host_ping_to_server_region = value ? this.lan_host_ping_to_server_region : (uint?)null; }
-    }
-    private bool ShouldSerializelan_host_ping_to_server_region() { return lan_host_ping_to_server_regionSpecified; }
-    private void Resetlan_host_ping_to_server_region() { lan_host_ping_to_server_regionSpecified = false; }
-    
-
     private DOTALobbyVisibility? _visibility;
     [global::ProtoBuf.ProtoMember(33, IsRequired = false, Name=@"visibility", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public DOTALobbyVisibility visibility
@@ -1148,42 +1184,6 @@ namespace SteamKit2.GC.Dota.Internal
     private void Resetcustom_game_crc() { custom_game_crcSpecified = false; }
     
 
-    private uint? _league_series_id;
-    [global::ProtoBuf.ProtoMember(35, IsRequired = false, Name=@"league_series_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint league_series_id
-    {
-      get { return _league_series_id?? default(uint); }
-      set { _league_series_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool league_series_idSpecified
-    {
-      get { return _league_series_id != null; }
-      set { if (value == (_league_series_id== null)) _league_series_id = value ? this.league_series_id : (uint?)null; }
-    }
-    private bool ShouldSerializeleague_series_id() { return league_series_idSpecified; }
-    private void Resetleague_series_id() { league_series_idSpecified = false; }
-    
-
-    private uint? _league_game_id;
-    [global::ProtoBuf.ProtoMember(36, IsRequired = false, Name=@"league_game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint league_game_id
-    {
-      get { return _league_game_id?? default(uint); }
-      set { _league_game_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool league_game_idSpecified
-    {
-      get { return _league_game_id != null; }
-      set { if (value == (_league_game_id== null)) _league_game_id = value ? this.league_game_id : (uint?)null; }
-    }
-    private bool ShouldSerializeleague_game_id() { return league_game_idSpecified; }
-    private void Resetleague_game_id() { league_game_idSpecified = false; }
-    
-
     private uint? _custom_game_timestamp;
     [global::ProtoBuf.ProtoMember(37, IsRequired = false, Name=@"custom_game_timestamp", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     public uint custom_game_timestamp
@@ -1218,60 +1218,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
     private bool ShouldSerializeprevious_match_override() { return previous_match_overrideSpecified; }
     private void Resetprevious_match_override() { previous_match_overrideSpecified = false; }
-    
-
-    private uint? _league_selection_priority_team;
-    [global::ProtoBuf.ProtoMember(39, IsRequired = false, Name=@"league_selection_priority_team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint league_selection_priority_team
-    {
-      get { return _league_selection_priority_team?? default(uint); }
-      set { _league_selection_priority_team = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool league_selection_priority_teamSpecified
-    {
-      get { return _league_selection_priority_team != null; }
-      set { if (value == (_league_selection_priority_team== null)) _league_selection_priority_team = value ? this.league_selection_priority_team : (uint?)null; }
-    }
-    private bool ShouldSerializeleague_selection_priority_team() { return league_selection_priority_teamSpecified; }
-    private void Resetleague_selection_priority_team() { league_selection_priority_teamSpecified = false; }
-    
-
-    private SelectionPriorityType? _league_selection_priority_choice;
-    [global::ProtoBuf.ProtoMember(40, IsRequired = false, Name=@"league_selection_priority_choice", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public SelectionPriorityType league_selection_priority_choice
-    {
-      get { return _league_selection_priority_choice?? SelectionPriorityType.UNDEFINED; }
-      set { _league_selection_priority_choice = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool league_selection_priority_choiceSpecified
-    {
-      get { return _league_selection_priority_choice != null; }
-      set { if (value == (_league_selection_priority_choice== null)) _league_selection_priority_choice = value ? this.league_selection_priority_choice : (SelectionPriorityType?)null; }
-    }
-    private bool ShouldSerializeleague_selection_priority_choice() { return league_selection_priority_choiceSpecified; }
-    private void Resetleague_selection_priority_choice() { league_selection_priority_choiceSpecified = false; }
-    
-
-    private SelectionPriorityType? _league_non_selection_priority_choice;
-    [global::ProtoBuf.ProtoMember(41, IsRequired = false, Name=@"league_non_selection_priority_choice", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public SelectionPriorityType league_non_selection_priority_choice
-    {
-      get { return _league_non_selection_priority_choice?? SelectionPriorityType.UNDEFINED; }
-      set { _league_non_selection_priority_choice = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool league_non_selection_priority_choiceSpecified
-    {
-      get { return _league_non_selection_priority_choice != null; }
-      set { if (value == (_league_non_selection_priority_choice== null)) _league_non_selection_priority_choice = value ? this.league_non_selection_priority_choice : (SelectionPriorityType?)null; }
-    }
-    private bool ShouldSerializeleague_non_selection_priority_choice() { return league_non_selection_priority_choiceSpecified; }
-    private void Resetleague_non_selection_priority_choice() { league_non_selection_priority_choiceSpecified = false; }
     
 
     private LobbyDotaPauseSetting? _pause_setting;
@@ -1344,6 +1290,78 @@ namespace SteamKit2.GC.Dota.Internal
     }
     private bool ShouldSerializebot_dire() { return bot_direSpecified; }
     private void Resetbot_dire() { bot_direSpecified = false; }
+    
+
+    private DOTASelectionPriorityRules? _selection_priority_rules;
+    [global::ProtoBuf.ProtoMember(46, IsRequired = false, Name=@"selection_priority_rules", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public DOTASelectionPriorityRules selection_priority_rules
+    {
+      get { return _selection_priority_rules?? DOTASelectionPriorityRules.k_DOTASelectionPriorityRules_Manual; }
+      set { _selection_priority_rules = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool selection_priority_rulesSpecified
+    {
+      get { return _selection_priority_rules != null; }
+      set { if (value == (_selection_priority_rules== null)) _selection_priority_rules = value ? this.selection_priority_rules : (DOTASelectionPriorityRules?)null; }
+    }
+    private bool ShouldSerializeselection_priority_rules() { return selection_priority_rulesSpecified; }
+    private void Resetselection_priority_rules() { selection_priority_rulesSpecified = false; }
+    
+
+    private bool? _custom_game_penalties;
+    [global::ProtoBuf.ProtoMember(47, IsRequired = false, Name=@"custom_game_penalties", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool custom_game_penalties
+    {
+      get { return _custom_game_penalties?? default(bool); }
+      set { _custom_game_penalties = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool custom_game_penaltiesSpecified
+    {
+      get { return _custom_game_penalties != null; }
+      set { if (value == (_custom_game_penalties== null)) _custom_game_penalties = value ? this.custom_game_penalties : (bool?)null; }
+    }
+    private bool ShouldSerializecustom_game_penalties() { return custom_game_penaltiesSpecified; }
+    private void Resetcustom_game_penalties() { custom_game_penaltiesSpecified = false; }
+    
+
+    private string _lan_host_ping_location;
+    [global::ProtoBuf.ProtoMember(48, IsRequired = false, Name=@"lan_host_ping_location", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string lan_host_ping_location
+    {
+      get { return _lan_host_ping_location?? ""; }
+      set { _lan_host_ping_location = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool lan_host_ping_locationSpecified
+    {
+      get { return _lan_host_ping_location != null; }
+      set { if (value == (_lan_host_ping_location== null)) _lan_host_ping_location = value ? this.lan_host_ping_location : (string)null; }
+    }
+    private bool ShouldSerializelan_host_ping_location() { return lan_host_ping_locationSpecified; }
+    private void Resetlan_host_ping_location() { lan_host_ping_locationSpecified = false; }
+    
+
+    private uint? _league_node_id;
+    [global::ProtoBuf.ProtoMember(49, IsRequired = false, Name=@"league_node_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint league_node_id
+    {
+      get { return _league_node_id?? default(uint); }
+      set { _league_node_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool league_node_idSpecified
+    {
+      get { return _league_node_id != null; }
+      set { if (value == (_league_node_id== null)) _league_node_id = value ? this.league_node_id : (uint?)null; }
+    }
+    private bool ShouldSerializeleague_node_id() { return league_node_idSpecified; }
+    private void Resetleague_node_id() { league_node_idSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1864,24 +1882,6 @@ namespace SteamKit2.GC.Dota.Internal
     public CMsgPracticeLobbyList() {}
     
 
-    private bool? _tournament_games;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"tournament_games", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool tournament_games
-    {
-      get { return _tournament_games?? default(bool); }
-      set { _tournament_games = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool tournament_gamesSpecified
-    {
-      get { return _tournament_games != null; }
-      set { if (value == (_tournament_games== null)) _tournament_games = value ? this.tournament_games : (bool?)null; }
-    }
-    private bool ShouldSerializetournament_games() { return tournament_gamesSpecified; }
-    private void Resettournament_games() { tournament_gamesSpecified = false; }
-    
-
     private string _pass_key;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"pass_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string pass_key
@@ -1962,42 +1962,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
     private bool ShouldSerializeid() { return idSpecified; }
     private void Resetid() { idSpecified = false; }
-    
-
-    private uint? _tournament_id;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"tournament_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint tournament_id
-    {
-      get { return _tournament_id?? default(uint); }
-      set { _tournament_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool tournament_idSpecified
-    {
-      get { return _tournament_id != null; }
-      set { if (value == (_tournament_id== null)) _tournament_id = value ? this.tournament_id : (uint?)null; }
-    }
-    private bool ShouldSerializetournament_id() { return tournament_idSpecified; }
-    private void Resettournament_id() { tournament_idSpecified = false; }
-    
-
-    private uint? _tournament_game_id;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"tournament_game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint tournament_game_id
-    {
-      get { return _tournament_game_id?? default(uint); }
-      set { _tournament_game_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool tournament_game_idSpecified
-    {
-      get { return _tournament_game_id != null; }
-      set { if (value == (_tournament_game_id== null)) _tournament_game_id = value ? this.tournament_game_id : (uint?)null; }
-    }
-    private bool ShouldSerializetournament_game_id() { return tournament_game_idSpecified; }
-    private void Resettournament_game_id() { tournament_game_idSpecified = false; }
     
     private readonly global::System.Collections.Generic.List<CMsgPracticeLobbyListResponseEntry.CLobbyMember> _members = new global::System.Collections.Generic.List<CMsgPracticeLobbyListResponseEntry.CLobbyMember>();
     [global::ProtoBuf.ProtoMember(5, Name=@"members", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -2223,24 +2187,6 @@ namespace SteamKit2.GC.Dota.Internal
     private void Resetserver_region() { server_regionSpecified = false; }
     
 
-    private uint? _lan_host_ping_to_server_region;
-    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"lan_host_ping_to_server_region", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint lan_host_ping_to_server_region
-    {
-      get { return _lan_host_ping_to_server_region?? default(uint); }
-      set { _lan_host_ping_to_server_region = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool lan_host_ping_to_server_regionSpecified
-    {
-      get { return _lan_host_ping_to_server_region != null; }
-      set { if (value == (_lan_host_ping_to_server_region== null)) _lan_host_ping_to_server_region = value ? this.lan_host_ping_to_server_region : (uint?)null; }
-    }
-    private bool ShouldSerializelan_host_ping_to_server_region() { return lan_host_ping_to_server_regionSpecified; }
-    private void Resetlan_host_ping_to_server_region() { lan_host_ping_to_server_regionSpecified = false; }
-    
-
     private uint? _league_id;
     [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"league_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint league_id
@@ -2257,6 +2203,24 @@ namespace SteamKit2.GC.Dota.Internal
     }
     private bool ShouldSerializeleague_id() { return league_idSpecified; }
     private void Resetleague_id() { league_idSpecified = false; }
+    
+
+    private string _lan_host_ping_location;
+    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"lan_host_ping_location", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string lan_host_ping_location
+    {
+      get { return _lan_host_ping_location?? ""; }
+      set { _lan_host_ping_location = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool lan_host_ping_locationSpecified
+    {
+      get { return _lan_host_ping_location != null; }
+      set { if (value == (_lan_host_ping_location== null)) _lan_host_ping_location = value ? this.lan_host_ping_location : (string)null; }
+    }
+    private bool ShouldSerializelan_host_ping_location() { return lan_host_ping_locationSpecified; }
+    private void Resetlan_host_ping_location() { lan_host_ping_locationSpecified = false; }
     
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CLobbyMember")]
   public partial class CLobbyMember : global::ProtoBuf.IExtensible
@@ -2313,24 +2277,6 @@ namespace SteamKit2.GC.Dota.Internal
   public partial class CMsgPracticeLobbyListResponse : global::ProtoBuf.IExtensible
   {
     public CMsgPracticeLobbyListResponse() {}
-    
-
-    private bool? _tournament_games;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"tournament_games", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool tournament_games
-    {
-      get { return _tournament_games?? default(bool); }
-      set { _tournament_games = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool tournament_gamesSpecified
-    {
-      get { return _tournament_games != null; }
-      set { if (value == (_tournament_games== null)) _tournament_games = value ? this.tournament_games : (bool?)null; }
-    }
-    private bool ShouldSerializetournament_games() { return tournament_gamesSpecified; }
-    private void Resettournament_games() { tournament_gamesSpecified = false; }
     
     private readonly global::System.Collections.Generic.List<CMsgPracticeLobbyListResponseEntry> _lobbies = new global::System.Collections.Generic.List<CMsgPracticeLobbyListResponseEntry>();
     [global::ProtoBuf.ProtoMember(2, Name=@"lobbies", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -2926,24 +2872,6 @@ namespace SteamKit2.GC.Dota.Internal
     private void Resetserver_region() { server_regionSpecified = false; }
     
 
-    private uint? _lan_host_ping_to_server_region;
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"lan_host_ping_to_server_region", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint lan_host_ping_to_server_region
-    {
-      get { return _lan_host_ping_to_server_region?? default(uint); }
-      set { _lan_host_ping_to_server_region = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool lan_host_ping_to_server_regionSpecified
-    {
-      get { return _lan_host_ping_to_server_region != null; }
-      set { if (value == (_lan_host_ping_to_server_region== null)) _lan_host_ping_to_server_region = value ? this.lan_host_ping_to_server_region : (uint?)null; }
-    }
-    private bool ShouldSerializelan_host_ping_to_server_region() { return lan_host_ping_to_server_regionSpecified; }
-    private void Resetlan_host_ping_to_server_region() { lan_host_ping_to_server_regionSpecified = false; }
-    
-
     private bool? _has_pass_key;
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"has_pass_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public bool has_pass_key
@@ -2960,6 +2888,24 @@ namespace SteamKit2.GC.Dota.Internal
     }
     private bool ShouldSerializehas_pass_key() { return has_pass_keySpecified; }
     private void Resethas_pass_key() { has_pass_keySpecified = false; }
+    
+
+    private string _lan_host_ping_location;
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"lan_host_ping_location", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string lan_host_ping_location
+    {
+      get { return _lan_host_ping_location?? ""; }
+      set { _lan_host_ping_location = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool lan_host_ping_locationSpecified
+    {
+      get { return _lan_host_ping_location != null; }
+      set { if (value == (_lan_host_ping_location== null)) _lan_host_ping_location = value ? this.lan_host_ping_location : (string)null; }
+    }
+    private bool ShouldSerializelan_host_ping_location() { return lan_host_ping_locationSpecified; }
+    private void Resetlan_host_ping_location() { lan_host_ping_locationSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -4463,6 +4409,44 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientRequestLaneSelection")]
+  public partial class CMsgGCToClientRequestLaneSelection : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToClientRequestLaneSelection() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientRequestLaneSelectionResponse")]
+  public partial class CMsgGCToClientRequestLaneSelectionResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToClientRequestLaneSelectionResponse() {}
+    
+
+    private uint? _lane_selection_flags;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"lane_selection_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint lane_selection_flags
+    {
+      get { return _lane_selection_flags?? default(uint); }
+      set { _lane_selection_flags = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool lane_selection_flagsSpecified
+    {
+      get { return _lane_selection_flags != null; }
+      set { if (value == (_lane_selection_flags== null)) _lane_selection_flags = value ? this.lane_selection_flags : (uint?)null; }
+    }
+    private bool ShouldSerializelane_selection_flags() { return lane_selection_flagsSpecified; }
+    private void Resetlane_selection_flags() { lane_selection_flagsSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EStartFindingMatchResult", EnumPassthru=true)]
     public enum EStartFindingMatchResult
     {
@@ -4537,7 +4521,13 @@ namespace SteamKit2.GC.Dota.Internal
       k_EStartFindingMatchResult_WeekendTourneyNotUnlocked = 119,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EStartFindingMatchResult_WeekendTourneyRecentParticipation", Value=120)]
-      k_EStartFindingMatchResult_WeekendTourneyRecentParticipation = 120
+      k_EStartFindingMatchResult_WeekendTourneyRecentParticipation = 120,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EStartFindingMatchResult_MemberMissingAnchoredPhoneNumber", Value=121)]
+      k_EStartFindingMatchResult_MemberMissingAnchoredPhoneNumber = 121,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EStartFindingMatchResult_NotMemberOfClan", Value=122)]
+      k_EStartFindingMatchResult_NotMemberOfClan = 122
     }
   
 }

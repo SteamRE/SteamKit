@@ -10,8 +10,6 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: gcsystemmsgs.proto
 namespace SteamKit2.GC.Artifact.Internal
 {

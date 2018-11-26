@@ -15,6 +15,7 @@ message CMsgProtoBufHeader {
 	optional string target_job_name = 12;
 	optional int32 eresult = 13 [default = 2];
 	optional string error_message = 14;
+	optional uint32 ip = 15;
 	optional .GCProtoBufMsgSrc gc_msg_src = 200 [default = GCProtoBufMsgSrc_Unspecified];
 	optional uint32 gc_dir_index_source = 201;
 }

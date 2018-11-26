@@ -320,6 +320,24 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializeplaytime_forever() { return playtime_foreverSpecified; }
     private void Resetplaytime_forever() { playtime_foreverSpecified = false; }
     
+
+    private uint? _first_playtime;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"first_playtime", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint first_playtime
+    {
+      get { return _first_playtime?? default(uint); }
+      set { _first_playtime = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool first_playtimeSpecified
+    {
+      get { return _first_playtime != null; }
+      set { if (value == (_first_playtime== null)) _first_playtime = value ? this.first_playtime : (uint?)null; }
+    }
+    private bool ShouldSerializefirst_playtime() { return first_playtimeSpecified; }
+    private void Resetfirst_playtime() { first_playtimeSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -418,6 +436,216 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetPerFriendPreferences_Request")]
+  public partial class CPlayer_GetPerFriendPreferences_Request : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_GetPerFriendPreferences_Request() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PerFriendPreferences")]
+  public partial class PerFriendPreferences : global::ProtoBuf.IExtensible
+  {
+    public PerFriendPreferences() {}
+    
+
+    private uint? _accountid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public uint accountid
+    {
+      get { return _accountid?? default(uint); }
+      set { _accountid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool accountidSpecified
+    {
+      get { return _accountid != null; }
+      set { if (value == (_accountid== null)) _accountid = value ? this.accountid : (uint?)null; }
+    }
+    private bool ShouldSerializeaccountid() { return accountidSpecified; }
+    private void Resetaccountid() { accountidSpecified = false; }
+    
+
+    private string _nickname;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"nickname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string nickname
+    {
+      get { return _nickname?? ""; }
+      set { _nickname = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool nicknameSpecified
+    {
+      get { return _nickname != null; }
+      set { if (value == (_nickname== null)) _nickname = value ? this.nickname : (string)null; }
+    }
+    private bool ShouldSerializenickname() { return nicknameSpecified; }
+    private void Resetnickname() { nicknameSpecified = false; }
+    
+
+    private ENotificationSetting? _notifications_showingame;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"notifications_showingame", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ENotificationSetting notifications_showingame
+    {
+      get { return _notifications_showingame?? ENotificationSetting.k_ENotificationSettingNotifyUseDefault; }
+      set { _notifications_showingame = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool notifications_showingameSpecified
+    {
+      get { return _notifications_showingame != null; }
+      set { if (value == (_notifications_showingame== null)) _notifications_showingame = value ? this.notifications_showingame : (ENotificationSetting?)null; }
+    }
+    private bool ShouldSerializenotifications_showingame() { return notifications_showingameSpecified; }
+    private void Resetnotifications_showingame() { notifications_showingameSpecified = false; }
+    
+
+    private ENotificationSetting? _notifications_showonline;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"notifications_showonline", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ENotificationSetting notifications_showonline
+    {
+      get { return _notifications_showonline?? ENotificationSetting.k_ENotificationSettingNotifyUseDefault; }
+      set { _notifications_showonline = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool notifications_showonlineSpecified
+    {
+      get { return _notifications_showonline != null; }
+      set { if (value == (_notifications_showonline== null)) _notifications_showonline = value ? this.notifications_showonline : (ENotificationSetting?)null; }
+    }
+    private bool ShouldSerializenotifications_showonline() { return notifications_showonlineSpecified; }
+    private void Resetnotifications_showonline() { notifications_showonlineSpecified = false; }
+    
+
+    private ENotificationSetting? _notifications_showmessages;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"notifications_showmessages", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ENotificationSetting notifications_showmessages
+    {
+      get { return _notifications_showmessages?? ENotificationSetting.k_ENotificationSettingNotifyUseDefault; }
+      set { _notifications_showmessages = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool notifications_showmessagesSpecified
+    {
+      get { return _notifications_showmessages != null; }
+      set { if (value == (_notifications_showmessages== null)) _notifications_showmessages = value ? this.notifications_showmessages : (ENotificationSetting?)null; }
+    }
+    private bool ShouldSerializenotifications_showmessages() { return notifications_showmessagesSpecified; }
+    private void Resetnotifications_showmessages() { notifications_showmessagesSpecified = false; }
+    
+
+    private ENotificationSetting? _sounds_showingame;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"sounds_showingame", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ENotificationSetting sounds_showingame
+    {
+      get { return _sounds_showingame?? ENotificationSetting.k_ENotificationSettingNotifyUseDefault; }
+      set { _sounds_showingame = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool sounds_showingameSpecified
+    {
+      get { return _sounds_showingame != null; }
+      set { if (value == (_sounds_showingame== null)) _sounds_showingame = value ? this.sounds_showingame : (ENotificationSetting?)null; }
+    }
+    private bool ShouldSerializesounds_showingame() { return sounds_showingameSpecified; }
+    private void Resetsounds_showingame() { sounds_showingameSpecified = false; }
+    
+
+    private ENotificationSetting? _sounds_showonline;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"sounds_showonline", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ENotificationSetting sounds_showonline
+    {
+      get { return _sounds_showonline?? ENotificationSetting.k_ENotificationSettingNotifyUseDefault; }
+      set { _sounds_showonline = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool sounds_showonlineSpecified
+    {
+      get { return _sounds_showonline != null; }
+      set { if (value == (_sounds_showonline== null)) _sounds_showonline = value ? this.sounds_showonline : (ENotificationSetting?)null; }
+    }
+    private bool ShouldSerializesounds_showonline() { return sounds_showonlineSpecified; }
+    private void Resetsounds_showonline() { sounds_showonlineSpecified = false; }
+    
+
+    private ENotificationSetting? _sounds_showmessages;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"sounds_showmessages", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ENotificationSetting sounds_showmessages
+    {
+      get { return _sounds_showmessages?? ENotificationSetting.k_ENotificationSettingNotifyUseDefault; }
+      set { _sounds_showmessages = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool sounds_showmessagesSpecified
+    {
+      get { return _sounds_showmessages != null; }
+      set { if (value == (_sounds_showmessages== null)) _sounds_showmessages = value ? this.sounds_showmessages : (ENotificationSetting?)null; }
+    }
+    private bool ShouldSerializesounds_showmessages() { return sounds_showmessagesSpecified; }
+    private void Resetsounds_showmessages() { sounds_showmessagesSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetPerFriendPreferences_Response")]
+  public partial class CPlayer_GetPerFriendPreferences_Response : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_GetPerFriendPreferences_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<PerFriendPreferences> _preferences = new global::System.Collections.Generic.List<PerFriendPreferences>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"preferences", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<PerFriendPreferences> preferences
+    {
+      get { return _preferences; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_SetPerFriendPreferences_Request")]
+  public partial class CPlayer_SetPerFriendPreferences_Request : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_SetPerFriendPreferences_Request() {}
+    
+
+    private PerFriendPreferences _preferences = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"preferences", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public PerFriendPreferences preferences
+    {
+      get { return _preferences; }
+      set { _preferences = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_SetPerFriendPreferences_Response")]
+  public partial class CPlayer_SetPerFriendPreferences_Response : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_SetPerFriendPreferences_Response() {}
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1151,6 +1379,57 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_PerFriendPreferencesChanged_Notification")]
+  public partial class CPlayer_PerFriendPreferencesChanged_Notification : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_PerFriendPreferencesChanged_Notification() {}
+    
+
+    private uint? _accountid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public uint accountid
+    {
+      get { return _accountid?? default(uint); }
+      set { _accountid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool accountidSpecified
+    {
+      get { return _accountid != null; }
+      set { if (value == (_accountid== null)) _accountid = value ? this.accountid : (uint?)null; }
+    }
+    private bool ShouldSerializeaccountid() { return accountidSpecified; }
+    private void Resetaccountid() { accountidSpecified = false; }
+    
+
+    private PerFriendPreferences _preferences = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"preferences", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public PerFriendPreferences preferences
+    {
+      get { return _preferences; }
+      set { _preferences = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ENotificationSetting", EnumPassthru=true)]
+    public enum ENotificationSetting
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ENotificationSettingNotifyUseDefault", Value=0)]
+      k_ENotificationSettingNotifyUseDefault = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ENotificationSettingAlways", Value=1)]
+      k_ENotificationSettingAlways = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ENotificationSettingNever", Value=2)]
+      k_ENotificationSettingNever = 2
+    }
+  
     public interface IPlayer
     {
       CPlayer_GetMutualFriendsForIncomingInvites_Response GetMutualFriendsForIncomingInvites(CPlayer_GetMutualFriendsForIncomingInvites_Request request);
@@ -1158,6 +1437,8 @@ namespace SteamKit2.Unified.Internal
     CPlayer_GetLastPlayedTimes_Response ClientGetLastPlayedTimes(CPlayer_GetLastPlayedTimes_Request request);
     CPlayer_AcceptSSA_Response AcceptSSA(CPlayer_AcceptSSA_Request request);
     CPlayer_GetNicknameList_Response GetNicknameList(CPlayer_GetNicknameList_Request request);
+    CPlayer_GetPerFriendPreferences_Response GetPerFriendPreferences(CPlayer_GetPerFriendPreferences_Request request);
+    CPlayer_SetPerFriendPreferences_Response SetPerFriendPreferences(CPlayer_SetPerFriendPreferences_Request request);
     CPlayer_AddFriend_Response AddFriend(CPlayer_AddFriend_Request request);
     CPlayer_RemoveFriend_Response RemoveFriend(CPlayer_RemoveFriend_Request request);
     CPlayer_IgnoreFriend_Response IgnoreFriend(CPlayer_IgnoreFriend_Request request);
@@ -1175,6 +1456,7 @@ namespace SteamKit2.Unified.Internal
     NoResponse NotifyFriendNicknameChanged(CPlayer_FriendNicknameChanged_Notification request);
     NoResponse NotifyNewSteamAnnouncementState(CPlayer_NewSteamAnnouncementState_Notification request);
     NoResponse NotifyCommunityPreferencesChanged(CPlayer_CommunityPreferencesChanged_Notification request);
+    NoResponse NotifyPerFriendPreferencesChanged(CPlayer_PerFriendPreferencesChanged_Notification request);
     
     }
     
