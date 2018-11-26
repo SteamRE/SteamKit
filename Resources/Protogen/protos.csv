@@ -23,6 +23,7 @@ steam,steammessages_linkfilter.steamclient.proto,Unified\SteamMsgLinkFilter.cs,S
 steam,steammessages_market.steamclient.proto,Unified\SteamMsgMarket.cs,SteamKit2.Unified.Internal
 steam,steammessages_offline.steamclient.proto,Unified\SteamMsgOffline.cs,SteamKit2.Unified.Internal
 steam,steammessages_parental.steamclient.proto,Unified\SteamMsgParental.cs,SteamKit2.Unified.Internal
+steam,steammessages_parties.steamclient.proto,Unified\SteamMsgParties.cs,SteamKit2.Unified.Internal
 steam,steammessages_partnerapps.steamclient.proto,Unified\SteamMsgPartnerApps.cs,SteamKit2.Unified.Internal
 steam,steammessages_player.steamclient.proto,Unified\SteamMsgPlayer.cs,SteamKit2.Unified.Internal
 steam,steammessages_publishedfile.steamclient.proto,Unified\SteamMsgPublishedFile.cs,SteamKit2.Unified.Internal
