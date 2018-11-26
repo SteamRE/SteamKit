@@ -14,6 +14,8 @@ using ProtoBuf.Meta;
 
 namespace ProtobufDumper
 {
+    using ProtoExtensionDefs = Dictionary<string, List<Type>>;
+
     [AttributeUsage(AttributeTargets.All)]
     public class EnumProxyAttribute : Attribute
     {
@@ -40,19 +42,22 @@ namespace ProtobufDumper
         private string OutputDir { get; }
         private List<string> ProtoList { get; }
 
-        private struct ProtoData
+        private struct ProtoOutputData
         {
             public FileDescriptorProto file;
             public StringBuilder buffer;
         }
 
+        private class ProtoInputData
+        {
+            public FileDescriptorProto proto;
+            public ProtoExtensionDefs extensions = new ProtoExtensionDefs();
+        }
+
         private readonly string FileName;
 
-        private readonly List<ProtoData> FinalProtoDefinition; 
-
-        private readonly List<FileDescriptorProto> deferredProtos;
-
-        private readonly Dictionary<string, List<Type>> protobufExtensions;
+        private readonly List<ProtoOutputData> outputProtoDefs; 
+        private readonly List<ProtoInputData> inputProtoDefs;
 
         private readonly Stack<string> messageNameStack;
         private readonly Dictionary<string, EnumDescriptorProto> enumLookup;
@@ -67,11 +72,8 @@ namespace ProtobufDumper
             OutputDir = output ?? Path.GetFileNameWithoutExtension(fileName);
             ProtoList = new List<string>();
 
-            FinalProtoDefinition = new List<ProtoData>();
-
-            deferredProtos = new List<FileDescriptorProto>();
-
-            protobufExtensions = new Dictionary<string, List<Type>>();
+            outputProtoDefs = new List<ProtoOutputData>();
+            inputProtoDefs = new List<ProtoInputData>();
 
             messageNameStack = new Stack<string>();
             enumLookup = new Dictionary<string, EnumDescriptorProto>();
@@ -94,15 +96,15 @@ namespace ProtobufDumper
 
             var safeguard = 10;
 
-            while (deferredProtos.Count > 0 && safeguard-- > 0)
+            while (inputProtoDefs.Count > 0 && safeguard-- > 0)
             {
-                foreach (var proto in deferredProtos.ToList())
+                foreach (var inputDef in inputProtoDefs.ToList())
                 {
-                    if (safeguard == 0 || !ShouldDeferProto(proto))
+                    if (safeguard == 0 || !ShouldDeferProto(inputDef))
                     {
-                        DoParseFile(proto);
+                        DoParseFile(inputDef);
 
-                        deferredProtos.Remove(proto);
+                        inputProtoDefs.Remove(inputDef);
                     }
                 }
             }
@@ -174,7 +176,7 @@ namespace ProtobufDumper
                         continue;
                     }
 
-                    if (deferredProtos.Any(x => x.name == protoName))
+                    if (inputProtoDefs.Any(x => x.proto.name == protoName))
                     {
                         continue;
                     }
@@ -273,7 +275,7 @@ namespace ProtobufDumper
         {
             Console.Write("{0}... ", name);
 
-            FileDescriptorProto set = null;
+            var inputData = new ProtoInputData();
 
             if (Environment.GetCommandLineArgs().Contains("-dump", StringComparer.OrdinalIgnoreCase))
             {
@@ -295,7 +297,7 @@ namespace ProtobufDumper
             try
             {
                 using (var ms = new MemoryStream(data))
-                    set = Serializer.Deserialize<FileDescriptorProto>(ms);
+                    inputData.proto = Serializer.Deserialize<FileDescriptorProto>(ms);
             }
             catch (EndOfStreamException ex)
             {
@@ -312,7 +314,7 @@ namespace ProtobufDumper
                 return true;
             }
 
-            deferredProtos.Add(set);
+            inputProtoDefs.Add(inputData);
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("OK!");
@@ -321,9 +323,9 @@ namespace ProtobufDumper
             return true;
         }
 
-        private bool ShouldDeferProto(FileDescriptorProto set)
+        private bool ShouldDeferProto(ProtoInputData inputData)
         {
-            foreach (var dependency in set.dependency)
+            foreach (var dependency in inputData.proto.dependency)
             {
                 if (!dependency.StartsWith("google", StringComparison.Ordinal) && !ProtoList.Contains(dependency))
                 {
@@ -334,21 +336,21 @@ namespace ProtobufDumper
             return false;
         }
 
-        private void DoParseFile(FileDescriptorProto set)
+        private void DoParseFile(ProtoInputData inputData)
         {
             var sb = new StringBuilder();
 
-            DumpFileDescriptor(set, sb);
+            DumpFileDescriptor(inputData, sb);
 
-            FinalProtoDefinition.Add(new ProtoData { file = set, buffer = sb });
-            ProtoList.Add(set.name);
+            outputProtoDefs.Add(new ProtoOutputData { file = inputData.proto, buffer = sb });
+            ProtoList.Add(inputData.proto.name);
         }
 
         private void FinalPassWriteFiles()
         {
             Console.WriteLine();
 
-            foreach (var proto in FinalProtoDefinition)
+            foreach (var proto in outputProtoDefs)
             {
                 Directory.CreateDirectory(OutputDir);
                 var outputFile = Path.Combine(OutputDir, proto.file.name);
@@ -566,7 +568,7 @@ namespace ProtobufDumper
             return Convert.ToString(value);
         }
 
-        private Dictionary<string, string> DumpOptions(dynamic options)
+        private Dictionary<string, string> DumpOptions(dynamic options, ProtoExtensionDefs protobufExtensions)
         {
             var options_kv = new Dictionary<string, string>();
 
@@ -631,7 +633,7 @@ namespace ProtobufDumper
             return options_kv;
         }
 
-        private string BuildDescriptorDeclaration(FieldDescriptorProto field, bool emitFieldLabel = true)
+        private string BuildDescriptorDeclaration(FieldDescriptorProto field, ProtoExtensionDefs extensions, bool emitFieldLabel = true)
         {
             PushDescriptorName(field);
 
@@ -652,7 +654,7 @@ namespace ProtobufDumper
                 options.Add("default", ResolveOrDeferEnumDefaultValue(type));
             }
 
-            var fieldOptions = DumpOptions(field.options);
+            var fieldOptions = DumpOptions(field.options, extensions);
             foreach (var pair in fieldOptions)
             {
                 options[pair.Key] = pair.Value;
@@ -678,7 +680,7 @@ namespace ProtobufDumper
             return descriptorDeclarationBuilder.ToString();
         }
 
-        private void DumpExtensionDescriptor(IEnumerable<FieldDescriptorProto> fields, StringBuilder sb, string levelspace)
+        private void DumpExtensionDescriptor(IEnumerable<FieldDescriptorProto> fields, ProtoInputData inputData, StringBuilder sb, string levelspace)
         {
             foreach (var mapping in fields.GroupBy(x => x.extendee))
             {
@@ -687,14 +689,14 @@ namespace ProtobufDumper
 
                 if (mapping.Key.StartsWith(".google.protobuf", StringComparison.Ordinal))
                 {
-                    BuildExtension(mapping.Key.Substring(1), mapping.ToArray());
+                    BuildExtension(mapping.Key.Substring(1), mapping.ToArray(), inputData);
                 }
 
                 sb.AppendLine($"{levelspace}extend {mapping.Key} {{");
 
                 foreach (var field in mapping)
                 {
-                    sb.AppendLine($"{levelspace}\t{BuildDescriptorDeclaration(field)}");
+                    sb.AppendLine($"{levelspace}\t{BuildDescriptorDeclaration(field, inputData.extensions)}");
                 }
 
                 sb.AppendLine($"{levelspace}}}");
@@ -702,14 +704,14 @@ namespace ProtobufDumper
             }
         }
 
-        private void DumpFileDescriptor(FileDescriptorProto set, StringBuilder sb)
+        private void DumpFileDescriptor(ProtoInputData inputData, StringBuilder sb)
         {
-            if(!string.IsNullOrEmpty(set.package))
-                PushDescriptorName(set);
+            if(!string.IsNullOrEmpty(inputData.proto.package))
+                PushDescriptorName(inputData.proto);
 
             var marker = false;
 
-            foreach (var dependency in set.dependency)
+            foreach (var dependency in inputData.proto.dependency)
             {
                 sb.AppendLine($"import \"{dependency}\";");
                 marker = true;
@@ -721,9 +723,9 @@ namespace ProtobufDumper
                 marker = false;
             }
 
-            if (!string.IsNullOrEmpty(set.package))
+            if (!string.IsNullOrEmpty(inputData.proto.package))
             {
-                sb.AppendLine($"package {set.package};");
+                sb.AppendLine($"package {inputData.proto.package};");
                 marker = true;
             }
 
@@ -733,7 +735,7 @@ namespace ProtobufDumper
                 marker = false;
             }
 
-            foreach (var option in DumpOptions(set.options))
+            foreach (var option in DumpOptions(inputData.proto.options, inputData.extensions))
             {
                 sb.AppendLine($"option {option.Key} = {option.Value};");
                 marker = true;
@@ -744,23 +746,23 @@ namespace ProtobufDumper
                 sb.AppendLine();
             }
 
-            DumpExtensionDescriptor(set.extension, sb, string.Empty);
+            DumpExtensionDescriptor(inputData.proto.extension, inputData, sb, string.Empty);
 
-            foreach (var field in set.enum_type)
+            foreach (var field in inputData.proto.enum_type)
             {
-                DumpEnumDescriptor(field, sb, 0);
+                DumpEnumDescriptor(field, inputData.extensions, sb, 0);
             }
 
-            foreach (var proto in set.message_type)
+            foreach (var proto in inputData.proto.message_type)
             {
-                DumpDescriptor(proto, set, sb, 0);
+                DumpDescriptor(proto, inputData, sb, 0);
             }
 
-            foreach (var service in set.service)
+            foreach (var service in inputData.proto.service)
             {
                 sb.AppendLine($"service {service.name} {{");
 
-                foreach (var option in DumpOptions(service.options))
+                foreach (var option in DumpOptions(service.options, inputData.extensions))
                 {
                     sb.AppendLine($"\toption {option.Key} = {option.Value};");
                 }
@@ -769,7 +771,7 @@ namespace ProtobufDumper
                 {
                     var declaration = $"\trpc {method.name} ({method.input_type}) returns ({method.output_type})";
 
-                    var options = DumpOptions(method.options);
+                    var options = DumpOptions(method.options, inputData.extensions);
 
                     var parameters = string.Empty;
                     if (options.Count == 0)
@@ -792,11 +794,11 @@ namespace ProtobufDumper
                 sb.AppendLine("}");
             }
 
-            if (!string.IsNullOrEmpty(set.package))
+            if (!string.IsNullOrEmpty(inputData.proto.package))
                 PopDescriptorName();
         }
 
-        private void DumpDescriptor(DescriptorProto proto, FileDescriptorProto set, StringBuilder sb, int level)
+        private void DumpDescriptor(DescriptorProto proto, ProtoInputData inputData, StringBuilder sb, int level)
         {
             PushDescriptorName(proto);
 
@@ -804,31 +806,31 @@ namespace ProtobufDumper
 
             sb.AppendLine($"{levelspace}message {proto.name} {{");
 
-            foreach (var option in DumpOptions(proto.options))
+            foreach (var option in DumpOptions(proto.options, inputData.extensions))
             {
                 sb.AppendLine($"{levelspace}\toption {option.Key} = {option.Value};");
             }
 
             foreach (var field in proto.nested_type)
             {
-                DumpDescriptor(field, set, sb, level + 1);
+                DumpDescriptor(field, inputData, sb, level + 1);
             }
 
-            DumpExtensionDescriptor(proto.extension, sb, $"{levelspace}\t");
+            DumpExtensionDescriptor(proto.extension, inputData, sb, $"{levelspace}\t");
 
             foreach (var field in proto.enum_type)
             {
-                DumpEnumDescriptor(field, sb, level + 1);
+                DumpEnumDescriptor(field, inputData.extensions, sb, level + 1);
             }
 
             foreach (var field in proto.field.Where(x => !x.oneof_indexSpecified))
             {
                 var enumLookup = new List<EnumDescriptorProto>();
 
-                enumLookup.AddRange( set.enum_type ); // add global enums
+                enumLookup.AddRange( inputData.proto.enum_type ); // add global enums
                 enumLookup.AddRange( proto.enum_type ); // add this message's nested enums
 
-                sb.AppendLine($"{levelspace}\t{BuildDescriptorDeclaration(field)}");
+                sb.AppendLine($"{levelspace}\t{BuildDescriptorDeclaration(field, inputData.extensions)}");
             }
 
             for (var i = 0; i < proto.oneof_decl.Count; i++)
@@ -840,7 +842,7 @@ namespace ProtobufDumper
 
                 foreach(var field in fields)
                 {
-                    sb.AppendLine($"{levelspace}\t\t{BuildDescriptorDeclaration(field, emitFieldLabel: false)}");
+                    sb.AppendLine($"{levelspace}\t\t{BuildDescriptorDeclaration(field, inputData.extensions, emitFieldLabel: false)}");
                 }
 
                 sb.AppendLine($"{levelspace}\t}}");
@@ -871,7 +873,7 @@ namespace ProtobufDumper
             PopDescriptorName();
         }
 
-        private void DumpEnumDescriptor(EnumDescriptorProto field, StringBuilder sb, int level)
+        private void DumpEnumDescriptor(EnumDescriptorProto field, ProtoExtensionDefs extensions, StringBuilder sb, int level)
         {
             AddEnumDescriptorLookup(field);
 
@@ -879,14 +881,14 @@ namespace ProtobufDumper
 
             sb.AppendLine($"{levelspace}enum {field.name} {{");
 
-            foreach (var option in DumpOptions(field.options))
+            foreach (var option in DumpOptions(field.options, extensions))
             {
                 sb.AppendLine($"{levelspace}\toption {option.Key} = {option.Value};");
             }
 
             foreach (var enumValue in field.value)
             {
-                var options = DumpOptions(enumValue.options);
+                var options = DumpOptions(enumValue.options, extensions);
 
                 var parameters = string.Empty;
                 if (options.Count > 0)
@@ -902,7 +904,7 @@ namespace ProtobufDumper
         }
 
         // because of protobuf-net we're limited to parsing simple types at run-time as we can't parse the protobuf, but options shouldn't be too complex
-        private void BuildExtension(string key, IEnumerable<FieldDescriptorProto> fields)
+        private void BuildExtension(string key, IEnumerable<FieldDescriptorProto> fields, ProtoInputData protoData)
         {
             var name = $"{key}Ext{Guid.NewGuid()}";
             var extension = moduleBuilder.DefineType(name, TypeAttributes.Class);
@@ -973,12 +975,23 @@ namespace ProtobufDumper
 
             var extensionType = extension.CreateType();
 
-            if (!protobufExtensions.ContainsKey(key))
+            if (!protoData.extensions.ContainsKey(key))
             {
-                protobufExtensions[key] = new List<Type>();
+                protoData.extensions[key] = new List<Type>();
             }
 
-            protobufExtensions[key].Add(extensionType);
+            protoData.extensions[key].Add(extensionType);
+
+            // Update extensions known by protodefs that rely on us
+            foreach (var dependent in inputProtoDefs.Where(x => x.proto.dependency.Contains(protoData.proto.name)))
+            {
+                if (!dependent.extensions.ContainsKey(key))
+                {
+                    dependent.extensions[key] = new List<Type>();
+                }
+
+                dependent.extensions[key].Add(extensionType);
+            }
         }
     }
 }
