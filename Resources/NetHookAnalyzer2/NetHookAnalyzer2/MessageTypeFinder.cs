@@ -140,10 +140,10 @@ namespace NetHookAnalyzer2
 					yield return "SteamKit2.GC.CSGO.Internal.CMsg";
 					break;
 
-                case WellKnownAppIDs.Artifact:
-                    yield return "SteamKit2.GC.Artifact.Internal.CMsg";
-                    break;
-            }
+				case WellKnownAppIDs.Artifact:
+					yield return "SteamKit2.GC.Artifact.Internal.CMsg";
+					break;
+			}
 		}
 	}
 }

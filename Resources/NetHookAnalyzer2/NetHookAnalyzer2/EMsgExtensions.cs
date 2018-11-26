@@ -57,16 +57,16 @@ namespace NetHookAnalyzer2
 					yield return typeof(CSGO.EGCBaseClientMsg);
 					break;
 
-                case WellKnownAppIDs.Artifact:
-                    yield return typeof(Artifact.EGCBaseMsg);
-                    yield return typeof(Artifact.ESOMsg);
-                    yield return typeof(Artifact.EGCItemMsg);
-                    yield return typeof(Artifact.EGCBaseClientMsg);
-                    yield return typeof(Artifact.EGCDCGClientMessages);
-                    yield return typeof(Artifact.EGCDCGCommonMessages);
-                    yield return typeof(Artifact.EGCDCGServerMessages);
-                    break;
-            }
+				case WellKnownAppIDs.Artifact:
+					yield return typeof(Artifact.EGCBaseMsg);
+					yield return typeof(Artifact.ESOMsg);
+					yield return typeof(Artifact.EGCItemMsg);
+					yield return typeof(Artifact.EGCBaseClientMsg);
+					yield return typeof(Artifact.EGCDCGClientMessages);
+					yield return typeof(Artifact.EGCDCGCommonMessages);
+					yield return typeof(Artifact.EGCDCGServerMessages);
+					break;
+			}
 		}
 	}
 }
