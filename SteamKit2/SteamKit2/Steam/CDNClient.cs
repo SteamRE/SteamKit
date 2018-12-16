@@ -20,7 +20,7 @@ namespace SteamKit2
     /// <summary>
     /// The CDNClient class is used for downloading game content from the Steam servers.
     /// </summary>
-    public sealed class CDNClient : IDisposable
+    public sealed partial class CDNClient : IDisposable
     {
         /// <summary>
         /// Represents a single Steam3 'Steampipe' content server.
