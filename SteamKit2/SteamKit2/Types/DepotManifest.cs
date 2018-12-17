@@ -129,6 +129,26 @@ namespace SteamKit2
         ///   <c>true</c> if the filenames are encrypted; otherwise, <c>false</c>.
         /// </value>
         public bool FilenamesEncrypted { get; private set; }
+        /// <summary>
+        /// Gets the depot id.
+        /// </summary>
+        public uint DepotID { get; private set; }
+        /// <summary>
+        /// Gets the manifest id.
+        /// </summary>
+        public ulong ManifestGID { get; private set; }
+        /// <summary>
+        /// Gets the depot creation time.
+        /// </summary>
+        public DateTime CreationTime { get; private set; }
+        /// <summary>
+        /// Gets the total uncompressed size of all files in this depot.
+        /// </summary>
+        public ulong TotalUncompressedSize { get; private set; }
+        /// <summary>
+        /// Gets the total compressed size of all files in this depot.
+        /// </summary>
+        public ulong TotalCompressedSize { get; private set; }
 
 
         internal DepotManifest(byte[] data)
@@ -239,6 +259,11 @@ namespace SteamKit2
         {
             Files = new List<FileData>( manifest.Mapping.Count );
             FilenamesEncrypted = manifest.AreFileNamesEncrypted;
+            DepotID = manifest.DepotID;
+            ManifestGID = manifest.ManifestGID;
+            CreationTime = manifest.CreationTime;
+            TotalUncompressedSize = manifest.TotalUncompressedSize;
+            TotalCompressedSize = manifest.TotalCompressedSize;
 
             foreach (var file_mapping in manifest.Mapping)
             {
@@ -273,6 +298,11 @@ namespace SteamKit2
         void ParseProtobufManifestMetadata(ContentManifestMetadata metadata)
         {
             FilenamesEncrypted = metadata.filenames_encrypted;
+            DepotID = metadata.depot_id;
+            ManifestGID = metadata.gid_manifest;
+            CreationTime = DateUtils.DateTimeFromUnixTime( metadata.creation_time );
+            TotalUncompressedSize = metadata.cb_disk_original;
+            TotalCompressedSize = metadata.cb_disk_compressed;
         }
     }
 }
