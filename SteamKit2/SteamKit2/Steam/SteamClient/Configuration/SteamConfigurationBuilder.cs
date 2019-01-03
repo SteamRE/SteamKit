@@ -7,7 +7,6 @@
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Reflection;
 using SteamKit2.Discovery;
 
 namespace SteamKit2
@@ -113,8 +112,8 @@ namespace SteamKit2
         {
             var client = new HttpClient();
 
-            var assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString(fieldCount: 3);
-            client.DefaultRequestHeaders.UserAgent.Add( new ProductInfoHeaderValue( "SteamKit", assemblyVersion ) );
+            var assemblyVersion = typeof(SteamConfiguration).Assembly.GetName().Version.ToString(fieldCount: 3);
+            client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("SteamKit", assemblyVersion));
             return client;
         }
     }
