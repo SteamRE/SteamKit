@@ -6,7 +6,9 @@ $ProtobufSourceZipUrl = "https://github.com/google/protobuf/releases/download/v2
 $ProtobufSourceFile = [System.IO.Path]::Combine($NetHook2DependenciesTemporaryDirectory, "protobuf.zip")
 $ProtobufSourceInnerFolderName = "protobuf-2.5.0"
 
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+if ([Net.ServicePointManager]::SecurityProtocol -notcontains 'Tls12') {
+    [Net.ServicePointManager]::SecurityProtocol += [Net.SecurityProtocolType]::Tls12
+}
 
 Set-Location $PSScriptRoot
 
