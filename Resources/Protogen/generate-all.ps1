@@ -24,11 +24,15 @@ if ( Test-Path $ProtoProcessedBase )
     Remove-Item -Recurse -Force $ProtoProcessedBase
 }
 
+$CommonParams = @(
+    '+langver=7.0'
+    '+names=original'
+)
+
 # one-off
-$params = @(
+$params = $CommonParams + @(
     '--proto_path="{0}"' -f $PSScriptRoot
     '--csharp_out="{0}"' -f (Join-Path $ProtoProcessedBase 'GC')
-    '+langver=7.0'
     '"gc.proto"'
 )
 
@@ -40,11 +44,10 @@ $protos | ForEach-Object {
     $OutputProtoDir = Split-Path -Path $OutputProtoFile
     $OutputProtoCompiled = Join-Path $OutputProtoDir $($_.ProtoFileName.Substring(0, $_.ProtoFileName.Length - 6) + ".cs")
 
-    $params = @(
+    $params = $CommonParams + @(
         '--proto_path="{0}"' -f $InputProtoDir
         '--csharp_out="{0}"' -f $OutputProtoDir
         '--package="{0}"' -f $_.Namespace
-        '+langver=7.0'
         $_.ProtoFileName
     )
 
