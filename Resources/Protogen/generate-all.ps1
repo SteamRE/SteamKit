@@ -38,6 +38,8 @@ $params = $CommonParams + @(
 
 & $ProtoGenExe $params > $null
 
+Move-Item -Force -Path (Join-Path $ProtoProcessedBase 'GC\gc.cs') -Destination (Join-Path $SK2Base 'GC\MsgBaseGC.cs')
+
 $protos | ForEach-Object {
     $InputProtoDir = Join-Path $ProtoBase $_.ProtoDir
     $OutputProtoFile = Join-Path $ProtoProcessedBase $_.ClassFilePath
@@ -51,11 +53,9 @@ $protos | ForEach-Object {
         $_.ProtoFileName
     )
 
-    & $ProtoGenExe $params
+    & $ProtoGenExe $params > $null
 
-    Copy-Item $OutputProtoCompiled -Destination (Join-Path $SK2Base $_.ClassFilePath)
+    Move-Item -Force -Path $OutputProtoCompiled -Destination (Join-Path $SK2Base $_.ClassFilePath)
 
-    Write-Output ""
+    $_
 }
-
-Remove-Item -Recurse -Force $ProtoProcessedBase
