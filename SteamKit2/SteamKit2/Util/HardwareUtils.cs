@@ -65,12 +65,12 @@ namespace SteamKit2
                 {
                     return firstEth.GetPhysicalAddress().GetAddressBytes();
                 }
-                // well...
-                return Encoding.UTF8.GetBytes( "SteamKit-MacAddress" );
             }
             catch( NetworkInformationException ) {
                 // See: https://github.com/SteamRE/SteamKit/issues/629
             }
+            // well...
+            return Encoding.UTF8.GetBytes( "SteamKit-MacAddress" );
         }
 
         public override byte[] GetDiskId()
