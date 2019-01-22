@@ -56,7 +56,8 @@ namespace SteamKit2
             // mono seems to have a pretty solid implementation of NetworkInterface for our platforms
             // if it turns out to be buggy we can always roll our own and poke into /sys/class/net on nix
 
-            try {
+            try
+            {
                 var firstEth = NetworkInterface.GetAllNetworkInterfaces()
                     .Where( i => i.NetworkInterfaceType == NetworkInterfaceType.Ethernet || i.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 )
                     .FirstOrDefault();
@@ -66,7 +67,8 @@ namespace SteamKit2
                     return firstEth.GetPhysicalAddress().GetAddressBytes();
                 }
             }
-            catch( NetworkInformationException ) {
+            catch ( NetworkInformationException )
+            {
                 // See: https://github.com/SteamRE/SteamKit/issues/629
             }
             // well...
