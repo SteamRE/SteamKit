@@ -500,6 +500,7 @@ namespace SteamKit2
         /// </param>
         /// <returns>A <see cref="DepotChunk"/> instance that contains the data for the given chunk.</returns>
         /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
+        /// <exception cref="System.IO.InvalidDataException">Thrown if the downloaded data does not match the expected length.</exception>
         public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk )
 #pragma warning restore 0419
 #pragma warning restore 1574
@@ -547,6 +548,7 @@ namespace SteamKit2
         /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
         /// </param>
         /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
+        /// <exception cref="System.IO.InvalidDataException">Thrown if the downloaded data does not match the expected length.</exception>
         public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk, string host, string cdnAuthToken, byte[] depotKey = null)
 #pragma warning restore 1574
 #pragma warning restore 0419
@@ -686,10 +688,10 @@ namespace SteamKit2
 
             var chunkData = await DoRawCommandAsync( server, HttpMethod.Get, "depot", doAuth: true, args: string.Format( "{0}/chunk/{1}", depotId, chunkID ), authtoken: cdnAuthToken ).ConfigureAwait( false );
 
-            if ( chunk.CompressedLength != default( uint ) )
+            // assert that lengths match only if the chunk has a length assigned.
+            if ( chunk.CompressedLength != default( uint ) && chunkData.Length != chunk.CompressedLength )
             {
-                // assert that lengths match only if the chunk has a length assigned.
-                DebugLog.Assert( chunkData.Length == chunk.CompressedLength, "CDNClient", "Length mismatch after downloading depot chunk!" );
+                throw new InvalidDataException( $"Length mismatch after downloading depot chunk! (was {chunkData.Length}, but should be {chunk.CompressedLength}" );
             }
 
             var depotChunk = new DepotChunk
