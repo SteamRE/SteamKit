@@ -35,7 +35,7 @@ namespace Tests
             var clientMsg = new ClientMsgProtobuf<CMsgClientGamesPlayed>(EMsg.ClientGamesPlayedNoDataBlob);
             steamClient.Send(clientMsg);
 
-            Assert.Equal(listener.LastOutgoingMessage, EMsg.ClientGamesPlayedNoDataBlob);
+            Assert.Equal(EMsg.ClientGamesPlayedNoDataBlob, listener.LastOutgoingMessage);
         }
     }
 }

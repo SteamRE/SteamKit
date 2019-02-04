@@ -36,9 +36,9 @@ namespace Tests
 
             var iface = config.GetAsyncWebAPIInterface("TestInterface");
 
-            Assert.Equal(iface.iface, "TestInterface");
-            Assert.Equal(iface.apiKey, "hello world");
-            Assert.Equal(iface.httpClient.BaseAddress, new Uri("http://example.com"));
+            Assert.Equal("TestInterface", iface.iface);
+            Assert.Equal("hello world", iface.apiKey);
+            Assert.Equal(new Uri("http://example.com"), iface.httpClient.BaseAddress);
         }
 
         [Fact]
@@ -53,7 +53,7 @@ namespace Tests
                 var baseUri = "http://localhost:28123";
                 dynamic iface = WebAPI.GetAsyncInterface(new Uri(baseUri), "IFooService");
 
-                await Assert.ThrowsAsync(typeof(WebAPIRequestException), () => (Task)iface.PerformFooOperation());
+                await Assert.ThrowsAsync<WebAPIRequestException>(() => (Task)iface.PerformFooOperation());
             }
             finally
             {

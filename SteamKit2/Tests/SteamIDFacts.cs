@@ -336,6 +336,7 @@ namespace Tests
             Assert.Equal( 4u, clanID.AccountID );
         }
 
+        [Theory]
         [InlineData(EAccountType.AnonGameServer)]
         [InlineData(EAccountType.AnonUser)]
         [InlineData(EAccountType.Chat)]
@@ -379,6 +380,7 @@ namespace Tests
             Assert.Null( groupID );
         }
 
+        [Theory]
         [InlineData(EAccountType.AnonGameServer)]
         [InlineData(EAccountType.AnonUser)]
         [InlineData(EAccountType.Chat)]

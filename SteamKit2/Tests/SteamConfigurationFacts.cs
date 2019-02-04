@@ -23,7 +23,7 @@ namespace Tests
         [Fact]
         public void AllowsDirectoryFetch()
         {
-            Assert.Equal(true, configuration.AllowDirectoryFetch);
+            Assert.True(configuration.AllowDirectoryFetch);
         }
 
         [Fact]
@@ -117,7 +117,7 @@ namespace Tests
         [Fact]
         public void DirectoryFetchIsConfigured()
         {
-            Assert.Equal(false, configuration.AllowDirectoryFetch);
+            Assert.False(configuration.AllowDirectoryFetch);
         }
 
         [Fact]

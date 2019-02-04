@@ -85,10 +85,10 @@ namespace Tests
             var client = new DummyCMClient();
             client.HandleClientMsg( msg );
 
-            Assert.Equal( 1, client.GetServersOfType( EServerType.CM ).Count );
+            Assert.Single( client.GetServersOfType( EServerType.CM ) );
 
             client.DummyDisconnect();
-            Assert.Equal( 0, client.GetServersOfType( EServerType.CM ).Count );
+            Assert.Empty( client.GetServersOfType( EServerType.CM ) );
         }
 
         [Fact]
@@ -104,10 +104,10 @@ namespace Tests
 
             var client = new DummyCMClient();
             client.HandleClientMsg( msg );
-            Assert.Equal( 1, client.GetServersOfType( EServerType.CM ).Count );
+            Assert.Single( client.GetServersOfType( EServerType.CM ) );
 
             client.HandleClientMsg( msg );
-            Assert.Equal( 1, client.GetServersOfType( EServerType.CM ).Count );
+            Assert.Single( client.GetServersOfType( EServerType.CM ) );
         }
 
         static byte[] Serialize(ISteamSerializableHeader hdr)
