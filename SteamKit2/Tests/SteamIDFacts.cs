@@ -383,7 +383,6 @@ namespace Tests
         [Theory]
         [InlineData(EAccountType.AnonGameServer)]
         [InlineData(EAccountType.AnonUser)]
-        [InlineData(EAccountType.Chat)]
         [InlineData(EAccountType.ConsoleUser)]
         [InlineData(EAccountType.ContentServer)]
         [InlineData(EAccountType.GameServer)]
