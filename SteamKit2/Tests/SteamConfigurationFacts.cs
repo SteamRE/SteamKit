@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -55,6 +56,9 @@ namespace Tests
             {
                 Assert.NotNull(client);
                 Assert.IsType<HttpClient>(client);
+
+                var steamKitAssemblyVersion = typeof( SteamClient ).Assembly.GetName().Version;
+                Assert.Equal("SteamKit/" + steamKitAssemblyVersion.ToString(fieldCount: 3), client.DefaultRequestHeaders.UserAgent.ToString());
             }
         }
 
