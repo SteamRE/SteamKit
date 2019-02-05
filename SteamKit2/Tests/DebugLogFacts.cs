@@ -101,7 +101,7 @@ namespace Tests
             DebugLog.AddListener( ( category, msg ) =>
             {
                 Assert.Equal( "category", category );
-                Assert.Equal( "msg{0}msg", msg);
+                Assert.Equal( "msg{0}msg", msg );
             } );
 
             DebugLog.WriteLine( "category", "msg{0}msg" );
