@@ -114,7 +114,7 @@ namespace Tests
             DebugLog.AddListener( ( category, msg ) =>
             {
                 Assert.Equal( "category", category );
-                Assert.Equal( "msg1msg2", msg);
+                Assert.Equal( "msg1msg2", msg );
             } );
 
             var msgText = "msg";
