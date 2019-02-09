@@ -101,10 +101,25 @@ namespace Tests
             DebugLog.AddListener( ( category, msg ) =>
             {
                 Assert.Equal( "category", category );
-                Assert.Equal( "msg{0}msg", msg);
+                Assert.Equal( "msg{0}msg", msg );
             } );
 
             DebugLog.WriteLine( "category", "msg{0}msg" );
+        }
+
+        [Fact, DebugLogSetupTeardown]
+        public void DebugLogFormatsParams()
+        {
+            DebugLog.Enabled = true;
+            DebugLog.AddListener( ( category, msg ) =>
+            {
+                Assert.Equal( "category", category );
+                Assert.Equal( "msg1msg2", msg );
+            } );
+
+            var msgText = "msg";
+            var integer = 2;
+            DebugLog.WriteLine( "category", "msg{0}{1}{2}", 1, msgText, integer );
         }
     }
 }
