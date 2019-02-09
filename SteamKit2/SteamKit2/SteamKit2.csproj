@@ -5,7 +5,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyOriginatorKeyFile>..\..\SteamKit.snk</AssemblyOriginatorKeyFile>
     <Description>.NET library that aims to interoperate with the Steam network.</Description>
-    <PackageReleaseNotes>Release notes are available at https://github.com/SteamRE/SteamKit/releases/tag/2.0.0-Beta.1</PackageReleaseNotes>
+    <PackageReleaseNotes>Release notes are available at https://github.com/SteamRE/SteamKit/releases/tag/2.2.0-Beta.1</PackageReleaseNotes>
     <PackageIconUrl>https://raw.github.com/SteamRE/SteamKit/master/Resources/Misc/steamkit_logo_128.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/SteamRE/SteamKit</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/SteamRE/SteamKit/blob/master/SteamKit2/SteamKit2/license.txt</PackageLicenseUrl>

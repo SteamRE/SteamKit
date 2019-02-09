@@ -1,4 +1,25 @@
 ------------------------------------------------------------------------------
+v 2.2.0 (Beta) 	Feb 9, 2019
+------------------------------------------------------------------------------
+* Added an overload of `SteamDirectory.LoadAsync` that accepts a maximum number of servers to return.
+* Added `ServerRecord.TryCreateSocketServer` to try parse a record from a string.
+* Added support for initializing a `GameID` for mods and shortcuts.
+* Added response details for some failed WebAPI responses. WebAPI can now throw a `WebAPIRequestException` with further details.
+* Added customization options to SteamKit's underlying HTTP stack.
+* Added `WalletInfoCallback.Balance64` for large Steam Wallet balances.
+* Added more details to `DepotManifest`.
+* Added SteamKit version to default HTTP user agent.
+* Fixed concurrency issues with UDP connections.
+* Fixed final fallback connection to Steam when server list is unavailable.
+* Fixed thread safety issues in message deserialization.
+* Fixed a crash on logon when network adapter information is not available from the underlying runtime.
+* Fixed downloaded content silently ignoring a length mismatch. An exception will now be thrown in this case.
+* Fixed WebSocket CM servers not being marked as bad by the server list, and thus not being ignored on subsequent connection attempts.
+* Updated Steam protocol version.
+* Updated Steam enums and protobufs.
+
+
+------------------------------------------------------------------------------
 v 2.1.0			Jun 13, 2018
 ------------------------------------------------------------------------------
 * Added `SimpleConsoleDebugListener`.
