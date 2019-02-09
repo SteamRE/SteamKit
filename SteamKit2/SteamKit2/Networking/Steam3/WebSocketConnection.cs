@@ -14,8 +14,7 @@ namespace SteamKit2
 
         public event EventHandler<DisconnectedEventArgs> Disconnected;
 
-        public EndPoint CurrentEndPoint => currentContext?.EndPoint;
-
+        public EndPoint CurrentEndPoint { get; set; }
         public ProtocolTypes ProtocolTypes => ProtocolTypes.WebSocket;
 
         public void Connect(EndPoint endPoint, int timeout = 5000)
@@ -29,6 +28,7 @@ namespace SteamKit2
                 Disconnected?.Invoke(this, new DisconnectedEventArgs(false));
             }
 
+            CurrentEndPoint = newContext.EndPoint;
             newContext.Start(TimeSpan.FromMilliseconds(timeout));
         }
 
@@ -58,6 +58,7 @@ namespace SteamKit2
                 oldContext.Dispose();
 
                 Disconnected?.Invoke(this, new DisconnectedEventArgs(userInitiated));
+                CurrentEndPoint = null;
             }
             else
             {
