@@ -65,7 +65,7 @@ namespace SteamKit2
             /// <returns>A <see cref="KeyValue"/> object representing the results of the Web API call.</returns>
             /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
-            /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
+            /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
             public KeyValue Call( string func, int version = 1, Dictionary<string, string> args = null )
                 => Call( HttpMethod.Get, func, version, args );
@@ -81,7 +81,7 @@ namespace SteamKit2
             /// <returns>A <see cref="KeyValue"/> object representing the results of the Web API call.</returns>
             /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
-            /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
+            /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
             public KeyValue Call( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null )
             {
@@ -207,7 +207,7 @@ namespace SteamKit2
             /// <returns>A <see cref="Task{T}"/> that contains a <see cref="KeyValue"/> object representing the results of the Web API call.</returns>
             /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
-            /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
+            /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
             public Task<KeyValue> CallAsync( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null )
             {
@@ -289,7 +289,7 @@ namespace SteamKit2
 
                 if ( !response.IsSuccessStatusCode )
                 {
-                    throw new WebAPIRequestException( $"Response status code does not indicate success: {response.StatusCode} ({response.ReasonPhrase}).", response );
+                    throw new SteamKitWebRequestException( $"Response status code does not indicate success: {response.StatusCode} ({response.ReasonPhrase}).", response );
                 }
 
                 var kv = new KeyValue();
@@ -508,34 +508,6 @@ namespace SteamKit2
             };
 
             return client;
-        }
-    }
-
-    /// <summary>
-    /// Thrown when WebAPI request fails.
-    /// </summary>
-    public sealed class WebAPIRequestException : HttpRequestException
-    {
-        /// <summary>
-        /// Represents the status code of the HTTP response.
-        /// </summary>
-        public HttpStatusCode StatusCode { get; private set; }
-
-        /// <summary>
-        /// Represents the collection of HTTP response headers.
-        /// </summary>
-        public HttpResponseHeaders Headers { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WebAPIRequestException"/> class.
-        /// </summary>
-        /// <param name="message">The message that describes the error.</param>
-        /// <param name="response">HTTP response message including the status code and data.</param>
-        public WebAPIRequestException(string message, HttpResponseMessage response)
-            : base(message)
-        {
-            this.StatusCode = response.StatusCode;
-            this.Headers = response.Headers;
         }
     }
 }
