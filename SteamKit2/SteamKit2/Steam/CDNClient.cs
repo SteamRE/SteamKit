@@ -691,7 +691,7 @@ namespace SteamKit2
             // assert that lengths match only if the chunk has a length assigned.
             if ( chunk.CompressedLength != default( uint ) && chunkData.Length != chunk.CompressedLength )
             {
-                throw new InvalidDataException( $"Length mismatch after downloading depot chunk! (was {chunkData.Length}, but should be {chunk.CompressedLength}" );
+                throw new InvalidDataException( $"Length mismatch after downloading depot chunk! (was {chunkData.Length}, but should be {chunk.CompressedLength})" );
             }
 
             var depotChunk = new DepotChunk
