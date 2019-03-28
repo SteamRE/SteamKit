@@ -1754,6 +1754,24 @@ namespace SteamKit2.GC.Artifact.Internal
     private bool ShouldSerializevalue_float() { return value_floatSpecified; }
     private void Resetvalue_float() { value_floatSpecified = false; }
     
+
+    private string _value_string;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"value_string", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string value_string
+    {
+      get { return _value_string?? ""; }
+      set { _value_string = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool value_stringSpecified
+    {
+      get { return _value_string != null; }
+      set { if (value == (_value_string== null)) _value_string = value ? this.value_string : (string)null; }
+    }
+    private bool ShouldSerializevalue_string() { return value_stringSpecified; }
+    private void Resetvalue_string() { value_stringSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

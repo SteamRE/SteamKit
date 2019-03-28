@@ -70,6 +70,235 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CUserAccount_CreateFriendInviteToken_Request")]
+  public partial class CUserAccount_CreateFriendInviteToken_Request : global::ProtoBuf.IExtensible
+  {
+    public CUserAccount_CreateFriendInviteToken_Request() {}
+    
+
+    private uint? _invite_limit;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"invite_limit", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint invite_limit
+    {
+      get { return _invite_limit?? default(uint); }
+      set { _invite_limit = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool invite_limitSpecified
+    {
+      get { return _invite_limit != null; }
+      set { if (value == (_invite_limit== null)) _invite_limit = value ? this.invite_limit : (uint?)null; }
+    }
+    private bool ShouldSerializeinvite_limit() { return invite_limitSpecified; }
+    private void Resetinvite_limit() { invite_limitSpecified = false; }
+    
+
+    private uint? _invite_duration;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"invite_duration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint invite_duration
+    {
+      get { return _invite_duration?? default(uint); }
+      set { _invite_duration = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool invite_durationSpecified
+    {
+      get { return _invite_duration != null; }
+      set { if (value == (_invite_duration== null)) _invite_duration = value ? this.invite_duration : (uint?)null; }
+    }
+    private bool ShouldSerializeinvite_duration() { return invite_durationSpecified; }
+    private void Resetinvite_duration() { invite_durationSpecified = false; }
+    
+
+    private string _invite_note;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"invite_note", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string invite_note
+    {
+      get { return _invite_note?? ""; }
+      set { _invite_note = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool invite_noteSpecified
+    {
+      get { return _invite_note != null; }
+      set { if (value == (_invite_note== null)) _invite_note = value ? this.invite_note : (string)null; }
+    }
+    private bool ShouldSerializeinvite_note() { return invite_noteSpecified; }
+    private void Resetinvite_note() { invite_noteSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CUserAccount_CreateFriendInviteToken_Response")]
+  public partial class CUserAccount_CreateFriendInviteToken_Response : global::ProtoBuf.IExtensible
+  {
+    public CUserAccount_CreateFriendInviteToken_Response() {}
+    
+
+    private string _invite_token;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"invite_token", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string invite_token
+    {
+      get { return _invite_token?? ""; }
+      set { _invite_token = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool invite_tokenSpecified
+    {
+      get { return _invite_token != null; }
+      set { if (value == (_invite_token== null)) _invite_token = value ? this.invite_token : (string)null; }
+    }
+    private bool ShouldSerializeinvite_token() { return invite_tokenSpecified; }
+    private void Resetinvite_token() { invite_tokenSpecified = false; }
+    
+
+    private ulong? _invite_limit;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"invite_limit", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong invite_limit
+    {
+      get { return _invite_limit?? default(ulong); }
+      set { _invite_limit = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool invite_limitSpecified
+    {
+      get { return _invite_limit != null; }
+      set { if (value == (_invite_limit== null)) _invite_limit = value ? this.invite_limit : (ulong?)null; }
+    }
+    private bool ShouldSerializeinvite_limit() { return invite_limitSpecified; }
+    private void Resetinvite_limit() { invite_limitSpecified = false; }
+    
+
+    private ulong? _invite_duration;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"invite_duration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong invite_duration
+    {
+      get { return _invite_duration?? default(ulong); }
+      set { _invite_duration = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool invite_durationSpecified
+    {
+      get { return _invite_duration != null; }
+      set { if (value == (_invite_duration== null)) _invite_duration = value ? this.invite_duration : (ulong?)null; }
+    }
+    private bool ShouldSerializeinvite_duration() { return invite_durationSpecified; }
+    private void Resetinvite_duration() { invite_durationSpecified = false; }
+    
+
+    private uint? _time_created;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"time_created", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public uint time_created
+    {
+      get { return _time_created?? default(uint); }
+      set { _time_created = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool time_createdSpecified
+    {
+      get { return _time_created != null; }
+      set { if (value == (_time_created== null)) _time_created = value ? this.time_created : (uint?)null; }
+    }
+    private bool ShouldSerializetime_created() { return time_createdSpecified; }
+    private void Resettime_created() { time_createdSpecified = false; }
+    
+
+    private bool? _valid;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"valid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool valid
+    {
+      get { return _valid?? default(bool); }
+      set { _valid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool validSpecified
+    {
+      get { return _valid != null; }
+      set { if (value == (_valid== null)) _valid = value ? this.valid : (bool?)null; }
+    }
+    private bool ShouldSerializevalid() { return validSpecified; }
+    private void Resetvalid() { validSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CUserAccount_GetFriendInviteTokens_Request")]
+  public partial class CUserAccount_GetFriendInviteTokens_Request : global::ProtoBuf.IExtensible
+  {
+    public CUserAccount_GetFriendInviteTokens_Request() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CUserAccount_GetFriendInviteTokens_Response")]
+  public partial class CUserAccount_GetFriendInviteTokens_Response : global::ProtoBuf.IExtensible
+  {
+    public CUserAccount_GetFriendInviteTokens_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<CUserAccount_CreateFriendInviteToken_Response> _tokens = new global::System.Collections.Generic.List<CUserAccount_CreateFriendInviteToken_Response>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"tokens", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CUserAccount_CreateFriendInviteToken_Response> tokens
+    {
+      get { return _tokens; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CUserAccount_RevokeFriendInviteToken_Request")]
+  public partial class CUserAccount_RevokeFriendInviteToken_Request : global::ProtoBuf.IExtensible
+  {
+    public CUserAccount_RevokeFriendInviteToken_Request() {}
+    
+
+    private string _invite_token;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"invite_token", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string invite_token
+    {
+      get { return _invite_token?? ""; }
+      set { _invite_token = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool invite_tokenSpecified
+    {
+      get { return _invite_token != null; }
+      set { if (value == (_invite_token== null)) _invite_token = value ? this.invite_token : (string)null; }
+    }
+    private bool ShouldSerializeinvite_token() { return invite_tokenSpecified; }
+    private void Resetinvite_token() { invite_tokenSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CUserAccount_RevokeFriendInviteToken_Response")]
+  public partial class CUserAccount_RevokeFriendInviteToken_Response : global::ProtoBuf.IExtensible
+  {
+    public CUserAccount_RevokeFriendInviteToken_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CUserAccount_RegisterCompatTool_Request")]
   public partial class CUserAccount_RegisterCompatTool_Request : global::ProtoBuf.IExtensible
   {
@@ -108,10 +337,301 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CAccountLinking_GetLinkedAccountInfo_Request")]
+  public partial class CAccountLinking_GetLinkedAccountInfo_Request : global::ProtoBuf.IExtensible
+  {
+    public CAccountLinking_GetLinkedAccountInfo_Request() {}
+    
+
+    private EInternalAccountType? _account_type;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public EInternalAccountType account_type
+    {
+      get { return _account_type?? EInternalAccountType.k_EInternalSteamAccountType; }
+      set { _account_type = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool account_typeSpecified
+    {
+      get { return _account_type != null; }
+      set { if (value == (_account_type== null)) _account_type = value ? this.account_type : (EInternalAccountType?)null; }
+    }
+    private bool ShouldSerializeaccount_type() { return account_typeSpecified; }
+    private void Resetaccount_type() { account_typeSpecified = false; }
+    
+
+    private ulong? _account_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong account_id
+    {
+      get { return _account_id?? default(ulong); }
+      set { _account_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool account_idSpecified
+    {
+      get { return _account_id != null; }
+      set { if (value == (_account_id== null)) _account_id = value ? this.account_id : (ulong?)null; }
+    }
+    private bool ShouldSerializeaccount_id() { return account_idSpecified; }
+    private void Resetaccount_id() { account_idSpecified = false; }
+    
+
+    private EExternalAccountType? _filter;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"filter", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public EExternalAccountType filter
+    {
+      get { return _filter?? EExternalAccountType.k_EExternalNone; }
+      set { _filter = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool filterSpecified
+    {
+      get { return _filter != null; }
+      set { if (value == (_filter== null)) _filter = value ? this.filter : (EExternalAccountType?)null; }
+    }
+    private bool ShouldSerializefilter() { return filterSpecified; }
+    private void Resetfilter() { filterSpecified = false; }
+    
+
+    private bool? _return_access_token;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"return_access_token", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool return_access_token
+    {
+      get { return _return_access_token?? default(bool); }
+      set { _return_access_token = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool return_access_tokenSpecified
+    {
+      get { return _return_access_token != null; }
+      set { if (value == (_return_access_token== null)) _return_access_token = value ? this.return_access_token : (bool?)null; }
+    }
+    private bool ShouldSerializereturn_access_token() { return return_access_tokenSpecified; }
+    private void Resetreturn_access_token() { return_access_tokenSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CAccountLinking_GetLinkedAccountInfo_Response")]
+  public partial class CAccountLinking_GetLinkedAccountInfo_Response : global::ProtoBuf.IExtensible
+  {
+    public CAccountLinking_GetLinkedAccountInfo_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response> _external_accounts = new global::System.Collections.Generic.List<CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"external_accounts", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response> external_accounts
+    {
+      get { return _external_accounts; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CExternalAccountTuple_Response")]
+  public partial class CExternalAccountTuple_Response : global::ProtoBuf.IExtensible
+  {
+    public CExternalAccountTuple_Response() {}
+    
+
+    private EExternalAccountType? _external_type;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"external_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public EExternalAccountType external_type
+    {
+      get { return _external_type?? EExternalAccountType.k_EExternalNone; }
+      set { _external_type = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool external_typeSpecified
+    {
+      get { return _external_type != null; }
+      set { if (value == (_external_type== null)) _external_type = value ? this.external_type : (EExternalAccountType?)null; }
+    }
+    private bool ShouldSerializeexternal_type() { return external_typeSpecified; }
+    private void Resetexternal_type() { external_typeSpecified = false; }
+    
+
+    private string _external_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"external_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string external_id
+    {
+      get { return _external_id?? ""; }
+      set { _external_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool external_idSpecified
+    {
+      get { return _external_id != null; }
+      set { if (value == (_external_id== null)) _external_id = value ? this.external_id : (string)null; }
+    }
+    private bool ShouldSerializeexternal_id() { return external_idSpecified; }
+    private void Resetexternal_id() { external_idSpecified = false; }
+    
+
+    private string _external_user_name;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"external_user_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string external_user_name
+    {
+      get { return _external_user_name?? ""; }
+      set { _external_user_name = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool external_user_nameSpecified
+    {
+      get { return _external_user_name != null; }
+      set { if (value == (_external_user_name== null)) _external_user_name = value ? this.external_user_name : (string)null; }
+    }
+    private bool ShouldSerializeexternal_user_name() { return external_user_nameSpecified; }
+    private void Resetexternal_user_name() { external_user_nameSpecified = false; }
+    
+
+    private string _external_url;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"external_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string external_url
+    {
+      get { return _external_url?? ""; }
+      set { _external_url = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool external_urlSpecified
+    {
+      get { return _external_url != null; }
+      set { if (value == (_external_url== null)) _external_url = value ? this.external_url : (string)null; }
+    }
+    private bool ShouldSerializeexternal_url() { return external_urlSpecified; }
+    private void Resetexternal_url() { external_urlSpecified = false; }
+    
+
+    private string _access_token;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"access_token", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string access_token
+    {
+      get { return _access_token?? ""; }
+      set { _access_token = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool access_tokenSpecified
+    {
+      get { return _access_token != null; }
+      set { if (value == (_access_token== null)) _access_token = value ? this.access_token : (string)null; }
+    }
+    private bool ShouldSerializeaccess_token() { return access_tokenSpecified; }
+    private void Resetaccess_token() { access_tokenSpecified = false; }
+    
+
+    private string _access_token_secret;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"access_token_secret", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string access_token_secret
+    {
+      get { return _access_token_secret?? ""; }
+      set { _access_token_secret = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool access_token_secretSpecified
+    {
+      get { return _access_token_secret != null; }
+      set { if (value == (_access_token_secret== null)) _access_token_secret = value ? this.access_token_secret : (string)null; }
+    }
+    private bool ShouldSerializeaccess_token_secret() { return access_token_secretSpecified; }
+    private void Resetaccess_token_secret() { access_token_secretSpecified = false; }
+    
+
+    private bool? _is_valid;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"is_valid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool is_valid
+    {
+      get { return _is_valid?? default(bool); }
+      set { _is_valid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool is_validSpecified
+    {
+      get { return _is_valid != null; }
+      set { if (value == (_is_valid== null)) _is_valid = value ? this.is_valid : (bool?)null; }
+    }
+    private bool ShouldSerializeis_valid() { return is_validSpecified; }
+    private void Resetis_valid() { is_validSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EInternalAccountType", EnumPassthru=true)]
+    public enum EInternalAccountType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EInternalSteamAccountType", Value=1)]
+      k_EInternalSteamAccountType = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EInternalClanType", Value=2)]
+      k_EInternalClanType = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EInternalAppType", Value=3)]
+      k_EInternalAppType = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EInternalBroadcastChannelType", Value=4)]
+      k_EInternalBroadcastChannelType = 4
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EExternalAccountType", EnumPassthru=true)]
+    public enum EExternalAccountType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EExternalNone", Value=0)]
+      k_EExternalNone = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EExternalSteamAccount", Value=1)]
+      k_EExternalSteamAccount = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EExternalGoogleAccount", Value=2)]
+      k_EExternalGoogleAccount = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EExternalFacebookAccount", Value=3)]
+      k_EExternalFacebookAccount = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EExternalTwitterAccount", Value=4)]
+      k_EExternalTwitterAccount = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EExternalTwitchAccount", Value=5)]
+      k_EExternalTwitchAccount = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EExternalYouTubeChannelAccount", Value=6)]
+      k_EExternalYouTubeChannelAccount = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EExternalFacebookPage", Value=7)]
+      k_EExternalFacebookPage = 7
+    }
+  
     public interface IUserAccount
     {
       CUserAccount_GetAccountLinkStatus_Response GetAccountLinkStatus(CUserAccount_GetAccountLinkStatus_Request request);
+    CUserAccount_CreateFriendInviteToken_Response CreateFriendInviteToken(CUserAccount_CreateFriendInviteToken_Request request);
+    CUserAccount_GetFriendInviteTokens_Response GetFriendInviteTokens(CUserAccount_GetFriendInviteTokens_Request request);
+    CUserAccount_RevokeFriendInviteToken_Response RevokeFriendInviteToken(CUserAccount_RevokeFriendInviteToken_Request request);
     CUserAccount_RegisterCompatTool_Response RegisterCompatTool(CUserAccount_RegisterCompatTool_Request request);
+    
+    }
+    
+    
+    public interface IAccountLinking
+    {
+      CAccountLinking_GetLinkedAccountInfo_Response GetLinkedAccountInfo(CAccountLinking_GetLinkedAccountInfo_Request request);
     
     }
     

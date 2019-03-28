@@ -1712,7 +1712,7 @@ namespace SteamKit2.GC.Dota.Internal
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"channel", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint channel
     {
-      get { return _channel?? default(uint); }
+      get { return _channel?? (uint)6; }
       set { _channel = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
@@ -1794,46 +1794,53 @@ namespace SteamKit2.GC.Dota.Internal
     private void Resetcoach_team() { coach_teamSpecified = false; }
     
 
-    private uint? _nexon_pc_bang_no;
-    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"nexon_pc_bang_no", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint nexon_pc_bang_no
+    private uint? _pwrd_cyber_cafe_id;
+    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"pwrd_cyber_cafe_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint pwrd_cyber_cafe_id
     {
-      get { return _nexon_pc_bang_no?? default(uint); }
-      set { _nexon_pc_bang_no = value; }
+      get { return _pwrd_cyber_cafe_id?? default(uint); }
+      set { _pwrd_cyber_cafe_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
     [global::System.ComponentModel.Browsable(false)]
-    public bool nexon_pc_bang_noSpecified
+    public bool pwrd_cyber_cafe_idSpecified
     {
-      get { return _nexon_pc_bang_no != null; }
-      set { if (value == (_nexon_pc_bang_no== null)) _nexon_pc_bang_no = value ? this.nexon_pc_bang_no : (uint?)null; }
+      get { return _pwrd_cyber_cafe_id != null; }
+      set { if (value == (_pwrd_cyber_cafe_id== null)) _pwrd_cyber_cafe_id = value ? this.pwrd_cyber_cafe_id : (uint?)null; }
     }
-    private bool ShouldSerializenexon_pc_bang_no() { return nexon_pc_bang_noSpecified; }
-    private void Resetnexon_pc_bang_no() { nexon_pc_bang_noSpecified = false; }
+    private bool ShouldSerializepwrd_cyber_cafe_id() { return pwrd_cyber_cafe_idSpecified; }
+    private void Resetpwrd_cyber_cafe_id() { pwrd_cyber_cafe_idSpecified = false; }
     
 
-    private string _nexon_pc_bang_name;
-    [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"nexon_pc_bang_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string nexon_pc_bang_name
+    private string _pwrd_cyber_cafe_name;
+    [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"pwrd_cyber_cafe_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string pwrd_cyber_cafe_name
     {
-      get { return _nexon_pc_bang_name?? ""; }
-      set { _nexon_pc_bang_name = value; }
+      get { return _pwrd_cyber_cafe_name?? ""; }
+      set { _pwrd_cyber_cafe_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
     [global::System.ComponentModel.Browsable(false)]
-    public bool nexon_pc_bang_nameSpecified
+    public bool pwrd_cyber_cafe_nameSpecified
     {
-      get { return _nexon_pc_bang_name != null; }
-      set { if (value == (_nexon_pc_bang_name== null)) _nexon_pc_bang_name = value ? this.nexon_pc_bang_name : (string)null; }
+      get { return _pwrd_cyber_cafe_name != null; }
+      set { if (value == (_pwrd_cyber_cafe_name== null)) _pwrd_cyber_cafe_name = value ? this.pwrd_cyber_cafe_name : (string)null; }
     }
-    private bool ShouldSerializenexon_pc_bang_name() { return nexon_pc_bang_nameSpecified; }
-    private void Resetnexon_pc_bang_name() { nexon_pc_bang_nameSpecified = false; }
+    private bool ShouldSerializepwrd_cyber_cafe_name() { return pwrd_cyber_cafe_nameSpecified; }
+    private void Resetpwrd_cyber_cafe_name() { pwrd_cyber_cafe_nameSpecified = false; }
     
     private readonly global::System.Collections.Generic.List<uint> _disabled_random_hero_id = new global::System.Collections.Generic.List<uint>();
-    [global::ProtoBuf.ProtoMember(26, Name=@"disabled_random_hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(26, Name=@"disabled_random_hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement, Options = global::ProtoBuf.MemberSerializationOptions.Packed)]
     public global::System.Collections.Generic.List<uint> disabled_random_hero_id
     {
       get { return _disabled_random_hero_id; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<uint> _disabled_random_hero_bits = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(41, Name=@"disabled_random_hero_bits", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<uint> disabled_random_hero_bits
+    {
+      get { return _disabled_random_hero_bits; }
     }
   
     private readonly global::System.Collections.Generic.List<CDOTALobbyMember.CDOTALobbyMemberXPBonus> _xp_bonuses = new global::System.Collections.Generic.List<CDOTALobbyMember.CDOTALobbyMemberXPBonus>();
@@ -2229,6 +2236,24 @@ namespace SteamKit2.GC.Dota.Internal
     }
     private bool ShouldSerializeteam_complete() { return team_completeSpecified; }
     private void Resetteam_complete() { team_completeSpecified = false; }
+    
+
+    private string _team_logo_url;
+    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"team_logo_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string team_logo_url
+    {
+      get { return _team_logo_url?? ""; }
+      set { _team_logo_url = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool team_logo_urlSpecified
+    {
+      get { return _team_logo_url != null; }
+      set { if (value == (_team_logo_url== null)) _team_logo_url = value ? this.team_logo_url : (string)null; }
+    }
+    private bool ShouldSerializeteam_logo_url() { return team_logo_urlSpecified; }
+    private void Resetteam_logo_url() { team_logo_urlSpecified = false; }
     
 
     private string _guild_name;
@@ -4412,6 +4437,34 @@ namespace SteamKit2.GC.Dota.Internal
     }
     private bool ShouldSerializeready_status() { return ready_statusSpecified; }
     private void Resetready_status() { ready_statusSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgLobbyEventGameDetails")]
+  public partial class CMsgLobbyEventGameDetails : global::ProtoBuf.IExtensible
+  {
+    public CMsgLobbyEventGameDetails() {}
+    
+
+    private byte[] _kv_data;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"kv_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] kv_data
+    {
+      get { return _kv_data?? null; }
+      set { _kv_data = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool kv_dataSpecified
+    {
+      get { return _kv_data != null; }
+      set { if (value == (_kv_data== null)) _kv_data = value ? this.kv_data : (byte[])null; }
+    }
+    private bool ShouldSerializekv_data() { return kv_dataSpecified; }
+    private void Resetkv_data() { kv_dataSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

@@ -462,6 +462,9 @@ namespace SteamKit2.GC.CSGO.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCItemCustomizationNotification", Value=1090)]
       k_EMsgGCItemCustomizationNotification = 1090,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCModifyItemAttribute", Value=1091)]
+      k_EMsgGCModifyItemAttribute = 1091,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTradingBase", Value=1500)]
       k_EMsgGCTradingBase = 1500,
             
@@ -628,7 +631,10 @@ namespace SteamKit2.GC.CSGO.Internal
       k_EMsgGCRequestPassportItemGrant = 2527,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientVersionUpdated", Value=2528)]
-      k_EMsgGCClientVersionUpdated = 2528
+      k_EMsgGCClientVersionUpdated = 2528,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCAdjustItemEquippedStateMulti", Value=2529)]
+      k_EMsgGCAdjustItemEquippedStateMulti = 2529
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse", EnumPassthru=true)]

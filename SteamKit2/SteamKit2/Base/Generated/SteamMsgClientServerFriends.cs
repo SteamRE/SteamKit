@@ -1024,6 +1024,24 @@ namespace SteamKit2.Internal
     private bool ShouldSerializeneed_persona_response() { return need_persona_responseSpecified; }
     private void Resetneed_persona_response() { need_persona_responseSpecified = false; }
     
+
+    private bool? _is_client_idle;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"is_client_idle", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool is_client_idle
+    {
+      get { return _is_client_idle?? default(bool); }
+      set { _is_client_idle = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool is_client_idleSpecified
+    {
+      get { return _is_client_idle != null; }
+      set { if (value == (_is_client_idle== null)) _is_client_idle = value ? this.is_client_idle : (bool?)null; }
+    }
+    private bool ShouldSerializeis_client_idle() { return is_client_idleSpecified; }
+    private void Resetis_client_idle() { is_client_idleSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

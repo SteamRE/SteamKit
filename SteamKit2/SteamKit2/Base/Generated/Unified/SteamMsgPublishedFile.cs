@@ -3333,6 +3333,158 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_AreFilesInSubscriptionList_Request")]
+  public partial class CPublishedFile_AreFilesInSubscriptionList_Request : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_AreFilesInSubscriptionList_Request() {}
+    
+
+    private uint? _appid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint appid
+    {
+      get { return _appid?? default(uint); }
+      set { _appid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
+    private readonly global::System.Collections.Generic.List<ulong> _publishedfileids = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"publishedfileids", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<ulong> publishedfileids
+    {
+      get { return _publishedfileids; }
+    }
+  
+
+    private uint? _listtype;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"listtype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint listtype
+    {
+      get { return _listtype?? default(uint); }
+      set { _listtype = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool listtypeSpecified
+    {
+      get { return _listtype != null; }
+      set { if (value == (_listtype== null)) _listtype = value ? this.listtype : (uint?)null; }
+    }
+    private bool ShouldSerializelisttype() { return listtypeSpecified; }
+    private void Resetlisttype() { listtypeSpecified = false; }
+    
+
+    private uint? _filetype;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"filetype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint filetype
+    {
+      get { return _filetype?? default(uint); }
+      set { _filetype = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool filetypeSpecified
+    {
+      get { return _filetype != null; }
+      set { if (value == (_filetype== null)) _filetype = value ? this.filetype : (uint?)null; }
+    }
+    private bool ShouldSerializefiletype() { return filetypeSpecified; }
+    private void Resetfiletype() { filetypeSpecified = false; }
+    
+
+    private uint? _workshopfiletype;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"workshopfiletype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint workshopfiletype
+    {
+      get { return _workshopfiletype?? default(uint); }
+      set { _workshopfiletype = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool workshopfiletypeSpecified
+    {
+      get { return _workshopfiletype != null; }
+      set { if (value == (_workshopfiletype== null)) _workshopfiletype = value ? this.workshopfiletype : (uint?)null; }
+    }
+    private bool ShouldSerializeworkshopfiletype() { return workshopfiletypeSpecified; }
+    private void Resetworkshopfiletype() { workshopfiletypeSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_AreFilesInSubscriptionList_Response")]
+  public partial class CPublishedFile_AreFilesInSubscriptionList_Response : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_AreFilesInSubscriptionList_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<CPublishedFile_AreFilesInSubscriptionList_Response.InList> _files = new global::System.Collections.Generic.List<CPublishedFile_AreFilesInSubscriptionList_Response.InList>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"files", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CPublishedFile_AreFilesInSubscriptionList_Response.InList> files
+    {
+      get { return _files; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"InList")]
+  public partial class InList : global::ProtoBuf.IExtensible
+  {
+    public InList() {}
+    
+
+    private ulong? _publishedfileid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"publishedfileid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong publishedfileid
+    {
+      get { return _publishedfileid?? default(ulong); }
+      set { _publishedfileid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool publishedfileidSpecified
+    {
+      get { return _publishedfileid != null; }
+      set { if (value == (_publishedfileid== null)) _publishedfileid = value ? this.publishedfileid : (ulong?)null; }
+    }
+    private bool ShouldSerializepublishedfileid() { return publishedfileidSpecified; }
+    private void Resetpublishedfileid() { publishedfileidSpecified = false; }
+    
+
+    private bool? _inlist;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"inlist", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool inlist
+    {
+      get { return _inlist?? default(bool); }
+      set { _inlist = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool inlistSpecified
+    {
+      get { return _inlist != null; }
+      set { if (value == (_inlist== null)) _inlist = value ? this.inlist : (bool?)null; }
+    }
+    private bool ShouldSerializeinlist() { return inlistSpecified; }
+    private void Resetinlist() { inlistSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_Update_Request")]
   public partial class CPublishedFile_Update_Request : global::ProtoBuf.IExtensible
   {
@@ -5137,6 +5289,234 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_FileSubscribed_Notification")]
+  public partial class CPublishedFile_FileSubscribed_Notification : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_FileSubscribed_Notification() {}
+    
+
+    private ulong? _published_file_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"published_file_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong published_file_id
+    {
+      get { return _published_file_id?? default(ulong); }
+      set { _published_file_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool published_file_idSpecified
+    {
+      get { return _published_file_id != null; }
+      set { if (value == (_published_file_id== null)) _published_file_id = value ? this.published_file_id : (ulong?)null; }
+    }
+    private bool ShouldSerializepublished_file_id() { return published_file_idSpecified; }
+    private void Resetpublished_file_id() { published_file_idSpecified = false; }
+    
+
+    private uint? _app_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint app_id
+    {
+      get { return _app_id?? default(uint); }
+      set { _app_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool app_idSpecified
+    {
+      get { return _app_id != null; }
+      set { if (value == (_app_id== null)) _app_id = value ? this.app_id : (uint?)null; }
+    }
+    private bool ShouldSerializeapp_id() { return app_idSpecified; }
+    private void Resetapp_id() { app_idSpecified = false; }
+    
+
+    private ulong? _file_hcontent;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"file_hcontent", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong file_hcontent
+    {
+      get { return _file_hcontent?? default(ulong); }
+      set { _file_hcontent = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool file_hcontentSpecified
+    {
+      get { return _file_hcontent != null; }
+      set { if (value == (_file_hcontent== null)) _file_hcontent = value ? this.file_hcontent : (ulong?)null; }
+    }
+    private bool ShouldSerializefile_hcontent() { return file_hcontentSpecified; }
+    private void Resetfile_hcontent() { file_hcontentSpecified = false; }
+    
+
+    private uint? _file_size;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"file_size", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint file_size
+    {
+      get { return _file_size?? default(uint); }
+      set { _file_size = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool file_sizeSpecified
+    {
+      get { return _file_size != null; }
+      set { if (value == (_file_size== null)) _file_size = value ? this.file_size : (uint?)null; }
+    }
+    private bool ShouldSerializefile_size() { return file_sizeSpecified; }
+    private void Resetfile_size() { file_sizeSpecified = false; }
+    
+
+    private uint? _rtime_subscribed;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"rtime_subscribed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint rtime_subscribed
+    {
+      get { return _rtime_subscribed?? default(uint); }
+      set { _rtime_subscribed = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool rtime_subscribedSpecified
+    {
+      get { return _rtime_subscribed != null; }
+      set { if (value == (_rtime_subscribed== null)) _rtime_subscribed = value ? this.rtime_subscribed : (uint?)null; }
+    }
+    private bool ShouldSerializertime_subscribed() { return rtime_subscribedSpecified; }
+    private void Resetrtime_subscribed() { rtime_subscribedSpecified = false; }
+    
+
+    private bool? _is_depot_content;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"is_depot_content", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool is_depot_content
+    {
+      get { return _is_depot_content?? default(bool); }
+      set { _is_depot_content = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool is_depot_contentSpecified
+    {
+      get { return _is_depot_content != null; }
+      set { if (value == (_is_depot_content== null)) _is_depot_content = value ? this.is_depot_content : (bool?)null; }
+    }
+    private bool ShouldSerializeis_depot_content() { return is_depot_contentSpecified; }
+    private void Resetis_depot_content() { is_depot_contentSpecified = false; }
+    
+
+    private uint? _rtime_updated;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"rtime_updated", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint rtime_updated
+    {
+      get { return _rtime_updated?? default(uint); }
+      set { _rtime_updated = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool rtime_updatedSpecified
+    {
+      get { return _rtime_updated != null; }
+      set { if (value == (_rtime_updated== null)) _rtime_updated = value ? this.rtime_updated : (uint?)null; }
+    }
+    private bool ShouldSerializertime_updated() { return rtime_updatedSpecified; }
+    private void Resetrtime_updated() { rtime_updatedSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_FileUnsubscribed_Notification")]
+  public partial class CPublishedFile_FileUnsubscribed_Notification : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_FileUnsubscribed_Notification() {}
+    
+
+    private ulong? _published_file_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"published_file_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong published_file_id
+    {
+      get { return _published_file_id?? default(ulong); }
+      set { _published_file_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool published_file_idSpecified
+    {
+      get { return _published_file_id != null; }
+      set { if (value == (_published_file_id== null)) _published_file_id = value ? this.published_file_id : (ulong?)null; }
+    }
+    private bool ShouldSerializepublished_file_id() { return published_file_idSpecified; }
+    private void Resetpublished_file_id() { published_file_idSpecified = false; }
+    
+
+    private uint? _app_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint app_id
+    {
+      get { return _app_id?? default(uint); }
+      set { _app_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool app_idSpecified
+    {
+      get { return _app_id != null; }
+      set { if (value == (_app_id== null)) _app_id = value ? this.app_id : (uint?)null; }
+    }
+    private bool ShouldSerializeapp_id() { return app_idSpecified; }
+    private void Resetapp_id() { app_idSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_FileDeleted_Client_Notification")]
+  public partial class CPublishedFile_FileDeleted_Client_Notification : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_FileDeleted_Client_Notification() {}
+    
+
+    private ulong? _published_file_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"published_file_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong published_file_id
+    {
+      get { return _published_file_id?? default(ulong); }
+      set { _published_file_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool published_file_idSpecified
+    {
+      get { return _published_file_id != null; }
+      set { if (value == (_published_file_id== null)) _published_file_id = value ? this.published_file_id : (ulong?)null; }
+    }
+    private bool ShouldSerializepublished_file_id() { return published_file_idSpecified; }
+    private void Resetpublished_file_id() { published_file_idSpecified = false; }
+    
+
+    private uint? _app_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint app_id
+    {
+      get { return _app_id?? default(uint); }
+      set { _app_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool app_idSpecified
+    {
+      get { return _app_id != null; }
+      set { if (value == (_app_id== null)) _app_id = value ? this.app_id : (uint?)null; }
+    }
+    private bool ShouldSerializeapp_id() { return app_idSpecified; }
+    private void Resetapp_id() { app_idSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EPublishedFileForSaleStatus", EnumPassthru=true)]
     public enum EPublishedFileForSaleStatus
     {
@@ -5169,6 +5549,7 @@ namespace SteamKit2.Unified.Internal
     CPublishedFile_GetDetails_Response GetDetails(CPublishedFile_GetDetails_Request request);
     CPublishedFile_GetItemInfo_Response GetItemInfo(CPublishedFile_GetItemInfo_Request request);
     CPublishedFile_GetUserFiles_Response GetUserFiles(CPublishedFile_GetUserFiles_Request request);
+    CPublishedFile_AreFilesInSubscriptionList_Response AreFilesInSubscriptionList(CPublishedFile_AreFilesInSubscriptionList_Request request);
     CPublishedFile_Update_Response Update(CPublishedFile_Update_Request request);
     CPublishedFile_GetChangeHistoryEntry_Response GetChangeHistoryEntry(CPublishedFile_GetChangeHistoryEntry_Request request);
     CPublishedFile_GetChangeHistory_Response GetChangeHistory(CPublishedFile_GetChangeHistory_Request request);
@@ -5183,6 +5564,15 @@ namespace SteamKit2.Unified.Internal
     CPublishedFile_SetPlaytimeForControllerConfigs_Response SetPlaytimeForControllerConfigs(CPublishedFile_SetPlaytimeForControllerConfigs_Request request);
     CPublishedFile_AddChild_Response AddChild(CPublishedFile_AddChild_Request request);
     CPublishedFile_RemoveChild_Response RemoveChild(CPublishedFile_RemoveChild_Request request);
+    
+    }
+    
+    
+    public interface IPublishedFileClient
+    {
+      NoResponse NotifyFileSubscribed(CPublishedFile_FileSubscribed_Notification request);
+    NoResponse NotifyFileUnsubscribed(CPublishedFile_FileUnsubscribed_Notification request);
+    NoResponse NotifyFileDeleted(CPublishedFile_FileDeleted_Client_Notification request);
     
     }
     

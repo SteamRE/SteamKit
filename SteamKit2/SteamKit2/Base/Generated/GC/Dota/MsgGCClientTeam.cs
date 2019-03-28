@@ -936,96 +936,20 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializegames_played_matchmaking() { return games_played_matchmakingSpecified; }
     private void Resetgames_played_matchmaking() { games_played_matchmakingSpecified = false; }
     
-
-    private string _url_logo;
-    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"url_logo", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string url_logo
+    private readonly global::System.Collections.Generic.List<uint> _registered_member_account_ids = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(30, Name=@"registered_member_account_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> registered_member_account_ids
     {
-      get { return _url_logo?? ""; }
-      set { _url_logo = value; }
+      get { return _registered_member_account_ids; }
     }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool url_logoSpecified
+  
+    private readonly global::System.Collections.Generic.List<CMsgDOTATeamInfo.AuditEntry> _audit_entries = new global::System.Collections.Generic.List<CMsgDOTATeamInfo.AuditEntry>();
+    [global::ProtoBuf.ProtoMember(31, Name=@"audit_entries", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgDOTATeamInfo.AuditEntry> audit_entries
     {
-      get { return _url_logo != null; }
-      set { if (value == (_url_logo== null)) _url_logo = value ? this.url_logo : (string)null; }
+      get { return _audit_entries; }
     }
-    private bool ShouldSerializeurl_logo() { return url_logoSpecified; }
-    private void Reseturl_logo() { url_logoSpecified = false; }
-    
-
-    private string _url_base_logo;
-    [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"url_base_logo", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string url_base_logo
-    {
-      get { return _url_base_logo?? ""; }
-      set { _url_base_logo = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool url_base_logoSpecified
-    {
-      get { return _url_base_logo != null; }
-      set { if (value == (_url_base_logo== null)) _url_base_logo = value ? this.url_base_logo : (string)null; }
-    }
-    private bool ShouldSerializeurl_base_logo() { return url_base_logoSpecified; }
-    private void Reseturl_base_logo() { url_base_logoSpecified = false; }
-    
-
-    private string _url_banner_logo;
-    [global::ProtoBuf.ProtoMember(26, IsRequired = false, Name=@"url_banner_logo", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string url_banner_logo
-    {
-      get { return _url_banner_logo?? ""; }
-      set { _url_banner_logo = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool url_banner_logoSpecified
-    {
-      get { return _url_banner_logo != null; }
-      set { if (value == (_url_banner_logo== null)) _url_banner_logo = value ? this.url_banner_logo : (string)null; }
-    }
-    private bool ShouldSerializeurl_banner_logo() { return url_banner_logoSpecified; }
-    private void Reseturl_banner_logo() { url_banner_logoSpecified = false; }
-    
-
-    private string _url_sponsor_logo;
-    [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"url_sponsor_logo", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string url_sponsor_logo
-    {
-      get { return _url_sponsor_logo?? ""; }
-      set { _url_sponsor_logo = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool url_sponsor_logoSpecified
-    {
-      get { return _url_sponsor_logo != null; }
-      set { if (value == (_url_sponsor_logo== null)) _url_sponsor_logo = value ? this.url_sponsor_logo : (string)null; }
-    }
-    private bool ShouldSerializeurl_sponsor_logo() { return url_sponsor_logoSpecified; }
-    private void Reseturl_sponsor_logo() { url_sponsor_logoSpecified = false; }
-    
-
-    private uint? _dpc_points;
-    [global::ProtoBuf.ProtoMember(28, IsRequired = false, Name=@"dpc_points", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint dpc_points
-    {
-      get { return _dpc_points?? default(uint); }
-      set { _dpc_points = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool dpc_pointsSpecified
-    {
-      get { return _dpc_points != null; }
-      set { if (value == (_dpc_points== null)) _dpc_points = value ? this.dpc_points : (uint?)null; }
-    }
-    private bool ShouldSerializedpc_points() { return dpc_pointsSpecified; }
-    private void Resetdpc_points() { dpc_pointsSpecified = false; }
-    
+  
 
     private ELeagueRegion? _region;
     [global::ProtoBuf.ProtoMember(29, IsRequired = false, Name=@"region", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -1102,6 +1026,70 @@ namespace SteamKit2.GC.Dota.Internal
     }
     private bool ShouldSerializeadmin() { return adminSpecified; }
     private void Resetadmin() { adminSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AuditEntry")]
+  public partial class AuditEntry : global::ProtoBuf.IExtensible
+  {
+    public AuditEntry() {}
+    
+
+    private uint? _audit_action;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"audit_action", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint audit_action
+    {
+      get { return _audit_action?? default(uint); }
+      set { _audit_action = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool audit_actionSpecified
+    {
+      get { return _audit_action != null; }
+      set { if (value == (_audit_action== null)) _audit_action = value ? this.audit_action : (uint?)null; }
+    }
+    private bool ShouldSerializeaudit_action() { return audit_actionSpecified; }
+    private void Resetaudit_action() { audit_actionSpecified = false; }
+    
+
+    private uint? _timestamp;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint timestamp
+    {
+      get { return _timestamp?? default(uint); }
+      set { _timestamp = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool timestampSpecified
+    {
+      get { return _timestamp != null; }
+      set { if (value == (_timestamp== null)) _timestamp = value ? this.timestamp : (uint?)null; }
+    }
+    private bool ShouldSerializetimestamp() { return timestampSpecified; }
+    private void Resettimestamp() { timestampSpecified = false; }
+    
+
+    private uint? _account_id;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint account_id
+    {
+      get { return _account_id?? default(uint); }
+      set { _account_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool account_idSpecified
+    {
+      get { return _account_id != null; }
+      set { if (value == (_account_id== null)) _account_id = value ? this.account_id : (uint?)null; }
+    }
+    private bool ShouldSerializeaccount_id() { return account_idSpecified; }
+    private void Resetaccount_id() { account_idSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

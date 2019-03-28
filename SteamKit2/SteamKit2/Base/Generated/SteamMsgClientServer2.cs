@@ -5073,206 +5073,6 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientEmailChange")]
-  public partial class CMsgClientEmailChange : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientEmailChange() {}
-    
-
-    private string _password;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"password", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string password
-    {
-      get { return _password?? ""; }
-      set { _password = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool passwordSpecified
-    {
-      get { return _password != null; }
-      set { if (value == (_password== null)) _password = value ? this.password : (string)null; }
-    }
-    private bool ShouldSerializepassword() { return passwordSpecified; }
-    private void Resetpassword() { passwordSpecified = false; }
-    
-
-    private string _email;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"email", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string email
-    {
-      get { return _email?? ""; }
-      set { _email = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool emailSpecified
-    {
-      get { return _email != null; }
-      set { if (value == (_email== null)) _email = value ? this.email : (string)null; }
-    }
-    private bool ShouldSerializeemail() { return emailSpecified; }
-    private void Resetemail() { emailSpecified = false; }
-    
-
-    private string _code;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"code", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string code
-    {
-      get { return _code?? ""; }
-      set { _code = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool codeSpecified
-    {
-      get { return _code != null; }
-      set { if (value == (_code== null)) _code = value ? this.code : (string)null; }
-    }
-    private bool ShouldSerializecode() { return codeSpecified; }
-    private void Resetcode() { codeSpecified = false; }
-    
-
-    private bool? _final;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"final", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool final
-    {
-      get { return _final?? default(bool); }
-      set { _final = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool finalSpecified
-    {
-      get { return _final != null; }
-      set { if (value == (_final== null)) _final = value ? this.final : (bool?)null; }
-    }
-    private bool ShouldSerializefinal() { return finalSpecified; }
-    private void Resetfinal() { finalSpecified = false; }
-    
-
-    private bool? _newmethod;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"newmethod", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool newmethod
-    {
-      get { return _newmethod?? default(bool); }
-      set { _newmethod = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool newmethodSpecified
-    {
-      get { return _newmethod != null; }
-      set { if (value == (_newmethod== null)) _newmethod = value ? this.newmethod : (bool?)null; }
-    }
-    private bool ShouldSerializenewmethod() { return newmethodSpecified; }
-    private void Resetnewmethod() { newmethodSpecified = false; }
-    
-
-    private string _twofactor_code;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"twofactor_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string twofactor_code
-    {
-      get { return _twofactor_code?? ""; }
-      set { _twofactor_code = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool twofactor_codeSpecified
-    {
-      get { return _twofactor_code != null; }
-      set { if (value == (_twofactor_code== null)) _twofactor_code = value ? this.twofactor_code : (string)null; }
-    }
-    private bool ShouldSerializetwofactor_code() { return twofactor_codeSpecified; }
-    private void Resettwofactor_code() { twofactor_codeSpecified = false; }
-    
-
-    private string _sms_code;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"sms_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string sms_code
-    {
-      get { return _sms_code?? ""; }
-      set { _sms_code = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool sms_codeSpecified
-    {
-      get { return _sms_code != null; }
-      set { if (value == (_sms_code== null)) _sms_code = value ? this.sms_code : (string)null; }
-    }
-    private bool ShouldSerializesms_code() { return sms_codeSpecified; }
-    private void Resetsms_code() { sms_codeSpecified = false; }
-    
-
-    private bool? _client_supports_sms;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"client_supports_sms", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool client_supports_sms
-    {
-      get { return _client_supports_sms?? default(bool); }
-      set { _client_supports_sms = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool client_supports_smsSpecified
-    {
-      get { return _client_supports_sms != null; }
-      set { if (value == (_client_supports_sms== null)) _client_supports_sms = value ? this.client_supports_sms : (bool?)null; }
-    }
-    private bool ShouldSerializeclient_supports_sms() { return client_supports_smsSpecified; }
-    private void Resetclient_supports_sms() { client_supports_smsSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientEmailChangeResponse")]
-  public partial class CMsgClientEmailChangeResponse : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientEmailChangeResponse() {}
-    
-
-    private int? _eresult;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int eresult
-    {
-      get { return _eresult?? (int)2; }
-      set { _eresult = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool eresultSpecified
-    {
-      get { return _eresult != null; }
-      set { if (value == (_eresult== null)) _eresult = value ? this.eresult : (int?)null; }
-    }
-    private bool ShouldSerializeeresult() { return eresultSpecified; }
-    private void Reseteresult() { eresultSpecified = false; }
-    
-
-    private bool? _requires_sms_code;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"requires_sms_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool requires_sms_code
-    {
-      get { return _requires_sms_code?? default(bool); }
-      set { _requires_sms_code = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool requires_sms_codeSpecified
-    {
-      get { return _requires_sms_code != null; }
-      set { if (value == (_requires_sms_code== null)) _requires_sms_code = value ? this.requires_sms_code : (bool?)null; }
-    }
-    private bool ShouldSerializerequires_sms_code() { return requires_sms_codeSpecified; }
-    private void Resetrequires_sms_code() { requires_sms_codeSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientGetCDNAuthToken")]
   public partial class CMsgClientGetCDNAuthToken : global::ProtoBuf.IExtensible
   {
@@ -6275,6 +6075,24 @@ namespace SteamKit2.Internal
     }
     private bool ShouldSerializehost_name() { return host_nameSpecified; }
     private void Resethost_name() { host_nameSpecified = false; }
+    
+
+    private ulong? _microseconds;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"microseconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong microseconds
+    {
+      get { return _microseconds?? default(ulong); }
+      set { _microseconds = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool microsecondsSpecified
+    {
+      get { return _microseconds != null; }
+      set { if (value == (_microseconds== null)) _microseconds = value ? this.microseconds : (ulong?)null; }
+    }
+    private bool ShouldSerializemicroseconds() { return microsecondsSpecified; }
+    private void Resetmicroseconds() { microsecondsSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

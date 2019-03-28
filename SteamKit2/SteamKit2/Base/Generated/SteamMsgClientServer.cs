@@ -12704,5 +12704,141 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientUnsignedInstallScript")]
+  public partial class CMsgClientUnsignedInstallScript : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientUnsignedInstallScript() {}
+    
+
+    private uint? _app_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint app_id
+    {
+      get { return _app_id?? default(uint); }
+      set { _app_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool app_idSpecified
+    {
+      get { return _app_id != null; }
+      set { if (value == (_app_id== null)) _app_id = value ? this.app_id : (uint?)null; }
+    }
+    private bool ShouldSerializeapp_id() { return app_idSpecified; }
+    private void Resetapp_id() { app_idSpecified = false; }
+    
+
+    private string _file_name;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"file_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string file_name
+    {
+      get { return _file_name?? ""; }
+      set { _file_name = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool file_nameSpecified
+    {
+      get { return _file_name != null; }
+      set { if (value == (_file_name== null)) _file_name = value ? this.file_name : (string)null; }
+    }
+    private bool ShouldSerializefile_name() { return file_nameSpecified; }
+    private void Resetfile_name() { file_nameSpecified = false; }
+    
+
+    private uint? _file_size;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"file_size", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint file_size
+    {
+      get { return _file_size?? default(uint); }
+      set { _file_size = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool file_sizeSpecified
+    {
+      get { return _file_size != null; }
+      set { if (value == (_file_size== null)) _file_size = value ? this.file_size : (uint?)null; }
+    }
+    private bool ShouldSerializefile_size() { return file_sizeSpecified; }
+    private void Resetfile_size() { file_sizeSpecified = false; }
+    
+
+    private bool? _signature_broken;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"signature_broken", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool signature_broken
+    {
+      get { return _signature_broken?? default(bool); }
+      set { _signature_broken = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool signature_brokenSpecified
+    {
+      get { return _signature_broken != null; }
+      set { if (value == (_signature_broken== null)) _signature_broken = value ? this.signature_broken : (bool?)null; }
+    }
+    private bool ShouldSerializesignature_broken() { return signature_brokenSpecified; }
+    private void Resetsignature_broken() { signature_brokenSpecified = false; }
+    
+
+    private uint? _depot_id;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"depot_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint depot_id
+    {
+      get { return _depot_id?? default(uint); }
+      set { _depot_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool depot_idSpecified
+    {
+      get { return _depot_id != null; }
+      set { if (value == (_depot_id== null)) _depot_id = value ? this.depot_id : (uint?)null; }
+    }
+    private bool ShouldSerializedepot_id() { return depot_idSpecified; }
+    private void Resetdepot_id() { depot_idSpecified = false; }
+    
+
+    private ulong? _manifest_id;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"manifest_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong manifest_id
+    {
+      get { return _manifest_id?? default(ulong); }
+      set { _manifest_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool manifest_idSpecified
+    {
+      get { return _manifest_id != null; }
+      set { if (value == (_manifest_id== null)) _manifest_id = value ? this.manifest_id : (ulong?)null; }
+    }
+    private bool ShouldSerializemanifest_id() { return manifest_idSpecified; }
+    private void Resetmanifest_id() { manifest_idSpecified = false; }
+    
+
+    private uint? _file_flags;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"file_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint file_flags
+    {
+      get { return _file_flags?? default(uint); }
+      set { _file_flags = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool file_flagsSpecified
+    {
+      get { return _file_flags != null; }
+      set { if (value == (_file_flags== null)) _file_flags = value ? this.file_flags : (uint?)null; }
+    }
+    private bool ShouldSerializefile_flags() { return file_flagsSpecified; }
+    private void Resetfile_flags() { file_flagsSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
 }
 #pragma warning restore 1591

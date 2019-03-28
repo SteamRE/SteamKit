@@ -1093,6 +1093,24 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializeteam_wager_amount() { return team_wager_amountSpecified; }
     private void Resetteam_wager_amount() { team_wager_amountSpecified = false; }
     
+
+    private uint? _periodic_point_adjustments;
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"periodic_point_adjustments", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint periodic_point_adjustments
+    {
+      get { return _periodic_point_adjustments?? default(uint); }
+      set { _periodic_point_adjustments = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool periodic_point_adjustmentsSpecified
+    {
+      get { return _periodic_point_adjustments != null; }
+      set { if (value == (_periodic_point_adjustments== null)) _periodic_point_adjustments = value ? this.periodic_point_adjustments : (uint?)null; }
+    }
+    private bool ShouldSerializeperiodic_point_adjustments() { return periodic_point_adjustmentsSpecified; }
+    private void Resetperiodic_point_adjustments() { periodic_point_adjustmentsSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2087,6 +2105,34 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTADPCMatch")]
+  public partial class CMsgDOTADPCMatch : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTADPCMatch() {}
+    
+
+    private CMsgDOTAMatch _match = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgDOTAMatch match
+    {
+      get { return _match; }
+      set { _match = value; }
+    }
+
+    private CDOTAMatchMetadata _metadata = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"metadata", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CDOTAMatchMetadata metadata
+    {
+      get { return _metadata; }
+      set { _metadata = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

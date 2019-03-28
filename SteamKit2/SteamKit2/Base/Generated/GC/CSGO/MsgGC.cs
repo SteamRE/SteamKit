@@ -1247,6 +1247,24 @@ namespace SteamKit2.GC.CSGO.Internal
     private bool ShouldSerializemap() { return mapSpecified; }
     private void Resetmap() { mapSpecified = false; }
     
+
+    private ulong? _matchid;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"matchid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong matchid
+    {
+      get { return _matchid?? default(ulong); }
+      set { _matchid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool matchidSpecified
+    {
+      get { return _matchid != null; }
+      set { if (value == (_matchid== null)) _matchid = value ? this.matchid : (ulong?)null; }
+    }
+    private bool ShouldSerializematchid() { return matchidSpecified; }
+    private void Resetmatchid() { matchidSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1680,6 +1698,24 @@ namespace SteamKit2.GC.CSGO.Internal
     }
     private bool ShouldSerializetv_relay_steamid() { return tv_relay_steamidSpecified; }
     private void Resettv_relay_steamid() { tv_relay_steamidSpecified = false; }
+    
+
+    private uint? _flags;
+    [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint flags
+    {
+      get { return _flags?? default(uint); }
+      set { _flags = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool flagsSpecified
+    {
+      get { return _flags != null; }
+      set { if (value == (_flags== null)) _flags = value ? this.flags : (uint?)null; }
+    }
+    private bool ShouldSerializeflags() { return flagsSpecified; }
+    private void Resetflags() { flagsSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -3276,6 +3312,24 @@ namespace SteamKit2.GC.CSGO.Internal
     private bool ShouldSerializeserver_version() { return server_versionSpecified; }
     private void Resetserver_version() { server_versionSpecified = false; }
     
+
+    private uint? _flags;
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint flags
+    {
+      get { return _flags?? default(uint); }
+      set { _flags = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool flagsSpecified
+    {
+      get { return _flags != null; }
+      set { if (value == (_flags== null)) _flags = value ? this.flags : (uint?)null; }
+    }
+    private bool ShouldSerializeflags() { return flagsSpecified; }
+    private void Resetflags() { flagsSpecified = false; }
+    
     private readonly global::System.Collections.Generic.List<PlayerRankingInfo> _rankings = new global::System.Collections.Generic.List<PlayerRankingInfo>();
     [global::ProtoBuf.ProtoMember(5, Name=@"rankings", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<PlayerRankingInfo> rankings
@@ -3418,6 +3472,24 @@ namespace SteamKit2.GC.CSGO.Internal
     }
     private bool ShouldSerializertime32_event_start() { return rtime32_event_startSpecified; }
     private void Resetrtime32_event_start() { rtime32_event_startSpecified = false; }
+    
+
+    private uint? _tv_control;
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"tv_control", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint tv_control
+    {
+      get { return _tv_control?? default(uint); }
+      set { _tv_control = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool tv_controlSpecified
+    {
+      get { return _tv_control != null; }
+      set { if (value == (_tv_control== null)) _tv_control = value ? this.tv_control : (uint?)null; }
+    }
+    private bool ShouldSerializetv_control() { return tv_controlSpecified; }
+    private void Resettv_control() { tv_controlSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -3624,22 +3696,40 @@ namespace SteamKit2.GC.CSGO.Internal
     private void Resettournament_tag() { tournament_tagSpecified = false; }
     
 
-    private uint? _steamdatagram_port;
-    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"steamdatagram_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint steamdatagram_port
+    private uint? _legacy_steamdatagram_port;
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"legacy_steamdatagram_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint legacy_steamdatagram_port
     {
-      get { return _steamdatagram_port?? default(uint); }
-      set { _steamdatagram_port = value; }
+      get { return _legacy_steamdatagram_port?? default(uint); }
+      set { _legacy_steamdatagram_port = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
     [global::System.ComponentModel.Browsable(false)]
-    public bool steamdatagram_portSpecified
+    public bool legacy_steamdatagram_portSpecified
     {
-      get { return _steamdatagram_port != null; }
-      set { if (value == (_steamdatagram_port== null)) _steamdatagram_port = value ? this.steamdatagram_port : (uint?)null; }
+      get { return _legacy_steamdatagram_port != null; }
+      set { if (value == (_legacy_steamdatagram_port== null)) _legacy_steamdatagram_port = value ? this.legacy_steamdatagram_port : (uint?)null; }
     }
-    private bool ShouldSerializesteamdatagram_port() { return steamdatagram_portSpecified; }
-    private void Resetsteamdatagram_port() { steamdatagram_portSpecified = false; }
+    private bool ShouldSerializelegacy_steamdatagram_port() { return legacy_steamdatagram_portSpecified; }
+    private void Resetlegacy_steamdatagram_port() { legacy_steamdatagram_portSpecified = false; }
+    
+
+    private uint? _steamdatagram_routing;
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"steamdatagram_routing", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint steamdatagram_routing
+    {
+      get { return _steamdatagram_routing?? default(uint); }
+      set { _steamdatagram_routing = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool steamdatagram_routingSpecified
+    {
+      get { return _steamdatagram_routing != null; }
+      set { if (value == (_steamdatagram_routing== null)) _steamdatagram_routing = value ? this.steamdatagram_routing : (uint?)null; }
+    }
+    private bool ShouldSerializesteamdatagram_routing() { return steamdatagram_routingSpecified; }
+    private void Resetsteamdatagram_routing() { steamdatagram_routingSpecified = false; }
     
 
     private uint? _test_token;
@@ -3658,6 +3748,24 @@ namespace SteamKit2.GC.CSGO.Internal
     }
     private bool ShouldSerializetest_token() { return test_tokenSpecified; }
     private void Resettest_token() { test_tokenSpecified = false; }
+    
+
+    private uint? _flags;
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint flags
+    {
+      get { return _flags?? default(uint); }
+      set { _flags = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool flagsSpecified
+    {
+      get { return _flags != null; }
+      set { if (value == (_flags== null)) _flags = value ? this.flags : (uint?)null; }
+    }
+    private bool ShouldSerializeflags() { return flagsSpecified; }
+    private void Resetflags() { flagsSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -4234,6 +4342,79 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint? _server_version;
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"server_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint server_version
+    {
+      get { return _server_version?? default(uint); }
+      set { _server_version = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool server_versionSpecified
+    {
+      get { return _server_version != null; }
+      set { if (value == (_server_version== null)) _server_version = value ? this.server_version : (uint?)null; }
+    }
+    private bool ShouldSerializeserver_version() { return server_versionSpecified; }
+    private void Resetserver_version() { server_versionSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCStrike15_v2_MatchmakingServerMatchEndPartial")]
+  public partial class CMsgGCCStrike15_v2_MatchmakingServerMatchEndPartial : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCCStrike15_v2_MatchmakingServerMatchEndPartial() {}
+    
+
+    private ulong? _reservationid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"reservationid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong reservationid
+    {
+      get { return _reservationid?? default(ulong); }
+      set { _reservationid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool reservationidSpecified
+    {
+      get { return _reservationid != null; }
+      set { if (value == (_reservationid== null)) _reservationid = value ? this.reservationid : (ulong?)null; }
+    }
+    private bool ShouldSerializereservationid() { return reservationidSpecified; }
+    private void Resetreservationid() { reservationidSpecified = false; }
+    
+
+    private CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve _reservation = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"reservation", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve reservation
+    {
+      get { return _reservation; }
+      set { _reservation = value; }
+    }
+
+    private CMsgGCCStrike15_v2_MatchmakingGC2ServerConfirm _confirm = null;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"confirm", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgGCCStrike15_v2_MatchmakingGC2ServerConfirm confirm
+    {
+      get { return _confirm; }
+      set { _confirm = value; }
+    }
+
+    private CMsgGC_ServerQuestUpdateData _completed_player_quest_data = null;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"completed_player_quest_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgGC_ServerQuestUpdateData completed_player_quest_data
+    {
+      get { return _completed_player_quest_data; }
+      set { _completed_player_quest_data = value; }
+    }
+
+    private uint? _server_version;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"server_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint server_version
     {
       get { return _server_version?? default(uint); }
@@ -10657,22 +10838,40 @@ namespace SteamKit2.GC.CSGO.Internal
     private void Resetgameserver_steam_id() { gameserver_steam_idSpecified = false; }
     
 
-    private ulong? _gameserver_net_id;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"gameserver_net_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public ulong gameserver_net_id
+    private ulong? _legacy_gameserver_net_id;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"legacy_gameserver_net_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong legacy_gameserver_net_id
     {
-      get { return _gameserver_net_id?? default(ulong); }
-      set { _gameserver_net_id = value; }
+      get { return _legacy_gameserver_net_id?? default(ulong); }
+      set { _legacy_gameserver_net_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
     [global::System.ComponentModel.Browsable(false)]
-    public bool gameserver_net_idSpecified
+    public bool legacy_gameserver_net_idSpecified
     {
-      get { return _gameserver_net_id != null; }
-      set { if (value == (_gameserver_net_id== null)) _gameserver_net_id = value ? this.gameserver_net_id : (ulong?)null; }
+      get { return _legacy_gameserver_net_id != null; }
+      set { if (value == (_legacy_gameserver_net_id== null)) _legacy_gameserver_net_id = value ? this.legacy_gameserver_net_id : (ulong?)null; }
     }
-    private bool ShouldSerializegameserver_net_id() { return gameserver_net_idSpecified; }
-    private void Resetgameserver_net_id() { gameserver_net_idSpecified = false; }
+    private bool ShouldSerializelegacy_gameserver_net_id() { return legacy_gameserver_net_idSpecified; }
+    private void Resetlegacy_gameserver_net_id() { legacy_gameserver_net_idSpecified = false; }
+    
+
+    private string _gameserver_sdr_routing;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"gameserver_sdr_routing", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string gameserver_sdr_routing
+    {
+      get { return _gameserver_sdr_routing?? ""; }
+      set { _gameserver_sdr_routing = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool gameserver_sdr_routingSpecified
+    {
+      get { return _gameserver_sdr_routing != null; }
+      set { if (value == (_gameserver_sdr_routing== null)) _gameserver_sdr_routing = value ? this.gameserver_sdr_routing : (string)null; }
+    }
+    private bool ShouldSerializegameserver_sdr_routing() { return gameserver_sdr_routingSpecified; }
+    private void Resetgameserver_sdr_routing() { gameserver_sdr_routingSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -10844,6 +11043,70 @@ namespace SteamKit2.GC.CSGO.Internal
   public partial class CMsgGCCStrike15_v2_ClientRequestOffers : global::ProtoBuf.IExtensible
   {
     public CMsgGCCStrike15_v2_ClientRequestOffers() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCStrike15_v2_ClientRequestSouvenir")]
+  public partial class CMsgGCCStrike15_v2_ClientRequestSouvenir : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCCStrike15_v2_ClientRequestSouvenir() {}
+    
+
+    private ulong? _itemid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"itemid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong itemid
+    {
+      get { return _itemid?? default(ulong); }
+      set { _itemid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool itemidSpecified
+    {
+      get { return _itemid != null; }
+      set { if (value == (_itemid== null)) _itemid = value ? this.itemid : (ulong?)null; }
+    }
+    private bool ShouldSerializeitemid() { return itemidSpecified; }
+    private void Resetitemid() { itemidSpecified = false; }
+    
+
+    private ulong? _matchid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"matchid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong matchid
+    {
+      get { return _matchid?? default(ulong); }
+      set { _matchid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool matchidSpecified
+    {
+      get { return _matchid != null; }
+      set { if (value == (_matchid== null)) _matchid = value ? this.matchid : (ulong?)null; }
+    }
+    private bool ShouldSerializematchid() { return matchidSpecified; }
+    private void Resetmatchid() { matchidSpecified = false; }
+    
+
+    private int? _eventid;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"eventid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int eventid
+    {
+      get { return _eventid?? default(int); }
+      set { _eventid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool eventidSpecified
+    {
+      get { return _eventid != null; }
+      set { if (value == (_eventid== null)) _eventid = value ? this.eventid : (int?)null; }
+    }
+    private bool ShouldSerializeeventid() { return eventidSpecified; }
+    private void Reseteventid() { eventidSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -11289,7 +11552,13 @@ namespace SteamKit2.GC.CSGO.Internal
       k_EMsgGCCStrike15_v2_ClientPartyJoinRelay = 9197,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_ClientPartyWarning", Value=9198)]
-      k_EMsgGCCStrike15_v2_ClientPartyWarning = 9198
+      k_EMsgGCCStrike15_v2_ClientPartyWarning = 9198,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_MatchmakingServerMatchEndPartial", Value=9199)]
+      k_EMsgGCCStrike15_v2_MatchmakingServerMatchEndPartial = 9199,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_ClientRequestSouvenir", Value=9204)]
+      k_EMsgGCCStrike15_v2_ClientRequestSouvenir = 9204
     }
   
 }

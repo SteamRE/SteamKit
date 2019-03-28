@@ -1866,9 +1866,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_COMPENDIUM_2014", Value=4)]
       EVENT_ID_COMPENDIUM_2014 = 4,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_NEXON_PC_BANG", Value=5)]
-      EVENT_ID_NEXON_PC_BANG = 5,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_PWRD_DAC_2015", Value=6)]
       EVENT_ID_PWRD_DAC_2015 = 6,
             
@@ -1920,8 +1917,17 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_INTERNATIONAL_2018", Value=22)]
       EVENT_ID_INTERNATIONAL_2018 = 22,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_COUNT", Value=23)]
-      EVENT_ID_COUNT = 23
+      [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_FROSTIVUS_2018", Value=23)]
+      EVENT_ID_FROSTIVUS_2018 = 23,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_NEW_BLOOM_2019", Value=24)]
+      EVENT_ID_NEW_BLOOM_2019 = 24,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_INTERNATIONAL_2019", Value=25)]
+      EVENT_ID_INTERNATIONAL_2019 = 25,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_COUNT", Value=26)]
+      EVENT_ID_COUNT = 26
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTALeaverStatus_t", EnumPassthru=true)]
@@ -1996,7 +2002,10 @@ namespace SteamKit2.GC.Dota.Internal
       FANTASY_ROLE_SUPPORT = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"FANTASY_ROLE_OFFLANE", Value=3)]
-      FANTASY_ROLE_OFFLANE = 3
+      FANTASY_ROLE_OFFLANE = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"FANTASY_ROLE_MID", Value=4)]
+      FANTASY_ROLE_MID = 4
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"Fantasy_Team_Slots", EnumPassthru=true)]
@@ -2259,7 +2268,10 @@ namespace SteamKit2.GC.Dota.Internal
       DOTA_JOIN_RESULT_TIMEOUT = 11,
             
       [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_CUSTOM_GAME_COOLDOWN", Value=12)]
-      DOTA_JOIN_RESULT_CUSTOM_GAME_COOLDOWN = 12
+      DOTA_JOIN_RESULT_CUSTOM_GAME_COOLDOWN = 12,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_BUSY", Value=13)]
+      DOTA_JOIN_RESULT_BUSY = 13
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTASelectionPriorityRules", EnumPassthru=true)]
@@ -2802,6 +2814,35 @@ namespace SteamKit2.GC.Dota.Internal
       LEAGUE_PHASE_MAIN_EVENT = 3
     }
   
+    [global::ProtoBuf.ProtoContract(Name=@"ELeagueFantasyPhase", EnumPassthru=true)]
+    public enum ELeagueFantasyPhase
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"LEAGUE_FANTASY_PHASE_UNSET", Value=0)]
+      LEAGUE_FANTASY_PHASE_UNSET = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"LEAGUE_FANTASY_PHASE_MAIN", Value=1)]
+      LEAGUE_FANTASY_PHASE_MAIN = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"LEAGUE_FANTASY_PHASE_QUALIFIER_NA", Value=2)]
+      LEAGUE_FANTASY_PHASE_QUALIFIER_NA = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"LEAGUE_FANTASY_PHASE_QUALIFIER_SA", Value=3)]
+      LEAGUE_FANTASY_PHASE_QUALIFIER_SA = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"LEAGUE_FANTASY_PHASE_QUALIFIER_EUROPE", Value=4)]
+      LEAGUE_FANTASY_PHASE_QUALIFIER_EUROPE = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"LEAGUE_FANTASY_PHASE_QUALIFIER_CIS", Value=5)]
+      LEAGUE_FANTASY_PHASE_QUALIFIER_CIS = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"LEAGUE_FANTASY_PHASE_QUALIFIER_CHINA", Value=6)]
+      LEAGUE_FANTASY_PHASE_QUALIFIER_CHINA = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"LEAGUE_FANTASY_PHASE_QUALIFIER_SEA", Value=7)]
+      LEAGUE_FANTASY_PHASE_QUALIFIER_SEA = 7
+    }
+  
     [global::ProtoBuf.ProtoContract(Name=@"ELeagueAuditAction", EnumPassthru=true)]
     public enum ELeagueAuditAction
     {
@@ -3076,6 +3117,38 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"FAVORITE_TYPE_LEAGUE", Value=3)]
       FAVORITE_TYPE_LEAGUE = 3
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EDPCPushNotification", EnumPassthru=true)]
+    public enum EDPCPushNotification
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DPC_PUSH_NOTIFICATION_MATCH_STARTING", Value=1)]
+      DPC_PUSH_NOTIFICATION_MATCH_STARTING = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DPC_PUSH_NOTIFICATION_PLAYER_LEFT_TEAM", Value=10)]
+      DPC_PUSH_NOTIFICATION_PLAYER_LEFT_TEAM = 10,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DPC_PUSH_NOTIFICATION_PLAYER_JOINED_TEAM", Value=11)]
+      DPC_PUSH_NOTIFICATION_PLAYER_JOINED_TEAM = 11,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DPC_PUSH_NOTIFICATION_LEAGUE_RESULT", Value=20)]
+      DPC_PUSH_NOTIFICATION_LEAGUE_RESULT = 20,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DPC_PUSH_NOTIFICATION_PREDICTION_MATCHES_AVAILABLE", Value=30)]
+      DPC_PUSH_NOTIFICATION_PREDICTION_MATCHES_AVAILABLE = 30,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DPC_PUSH_NOTIFICATION_PREDICTION_RESULT", Value=31)]
+      DPC_PUSH_NOTIFICATION_PREDICTION_RESULT = 31,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DPC_PUSH_NOTIFICATION_FANTASY_PLAYER_CLEARED", Value=40)]
+      DPC_PUSH_NOTIFICATION_FANTASY_PLAYER_CLEARED = 40,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DPC_PUSH_NOTIFICATION_FANTASY_DAILY_SUMMARY", Value=41)]
+      DPC_PUSH_NOTIFICATION_FANTASY_DAILY_SUMMARY = 41,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DPC_PUSH_NOTIFICATION_FANTASY_FINAL_RESULTS", Value=42)]
+      DPC_PUSH_NOTIFICATION_FANTASY_FINAL_RESULTS = 42
     }
   
 }

@@ -1615,6 +1615,70 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgModifyItemAttribute")]
+  public partial class CMsgModifyItemAttribute : global::ProtoBuf.IExtensible
+  {
+    public CMsgModifyItemAttribute() {}
+    
+
+    private ulong? _item_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong item_id
+    {
+      get { return _item_id?? default(ulong); }
+      set { _item_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool item_idSpecified
+    {
+      get { return _item_id != null; }
+      set { if (value == (_item_id== null)) _item_id = value ? this.item_id : (ulong?)null; }
+    }
+    private bool ShouldSerializeitem_id() { return item_idSpecified; }
+    private void Resetitem_id() { item_idSpecified = false; }
+    
+
+    private uint? _attr_defidx;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"attr_defidx", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint attr_defidx
+    {
+      get { return _attr_defidx?? default(uint); }
+      set { _attr_defidx = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool attr_defidxSpecified
+    {
+      get { return _attr_defidx != null; }
+      set { if (value == (_attr_defidx== null)) _attr_defidx = value ? this.attr_defidx : (uint?)null; }
+    }
+    private bool ShouldSerializeattr_defidx() { return attr_defidxSpecified; }
+    private void Resetattr_defidx() { attr_defidxSpecified = false; }
+    
+
+    private uint? _attr_value;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"attr_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint attr_value
+    {
+      get { return _attr_value?? default(uint); }
+      set { _attr_value = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool attr_valueSpecified
+    {
+      get { return _attr_value != null; }
+      set { if (value == (_attr_value== null)) _attr_value = value ? this.attr_value : (uint?)null; }
+    }
+    private bool ShouldSerializeattr_value() { return attr_valueSpecified; }
+    private void Resetattr_value() { attr_valueSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgApplyStatTrakSwap")]
   public partial class CMsgApplyStatTrakSwap : global::ProtoBuf.IExtensible
   {
@@ -2307,6 +2371,37 @@ namespace SteamKit2.GC.CSGO.Internal
     private bool ShouldSerializeswap() { return swapSpecified; }
     private void Resetswap() { swapSpecified = false; }
     
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAdjustItemEquippedStateMulti")]
+  public partial class CMsgAdjustItemEquippedStateMulti : global::ProtoBuf.IExtensible
+  {
+    public CMsgAdjustItemEquippedStateMulti() {}
+    
+    private readonly global::System.Collections.Generic.List<ulong> _t_equips = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"t_equips", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> t_equips
+    {
+      get { return _t_equips; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<ulong> _ct_equips = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"ct_equips", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> ct_equips
+    {
+      get { return _ct_equips; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<ulong> _noteam_equips = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"noteam_equips", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> noteam_equips
+    {
+      get { return _noteam_equips; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

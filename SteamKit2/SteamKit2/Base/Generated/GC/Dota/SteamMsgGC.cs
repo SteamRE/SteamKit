@@ -4578,6 +4578,16 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCReloadServerRegionSettings")]
+  public partial class CMsgGCToGCReloadServerRegionSettings : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCReloadServerRegionSettings() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCBaseMsg", EnumPassthru=true)]
     public enum EGCBaseMsg
     {
@@ -4637,7 +4647,10 @@ namespace SteamKit2.GC.Dota.Internal
       k_EMsgGCToGCPerformManualOp = 4516,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCPerformManualOpCompleted", Value=4517)]
-      k_EMsgGCToGCPerformManualOpCompleted = 4517
+      k_EMsgGCToGCPerformManualOpCompleted = 4517,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCReloadServerRegionSettings", Value=4518)]
+      k_EMsgGCToGCReloadServerRegionSettings = 4518
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCBaseProtoObjectTypes", EnumPassthru=true)]
