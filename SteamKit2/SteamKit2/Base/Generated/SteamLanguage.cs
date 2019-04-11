@@ -1649,6 +1649,7 @@ namespace SteamKit2
 		WGNetworkSendExceeded = 110,
 		AccountNotFriends = 111,
 		LimitedUserAccount = 112,
+		CantRemoveItem = 113,
 	}
 	public enum EUniverse
 	{
