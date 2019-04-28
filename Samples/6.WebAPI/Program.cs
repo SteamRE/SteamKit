@@ -92,7 +92,7 @@ namespace Sample6_WebAPI
             // you can call interface functions through a Call method
             using ( WebAPI.Interface steamNews = WebAPI.GetInterface( "ISteamNews" ) )
             {
-                Dictionary<string, object> newsArgs = new Dictionary<string,object>();
+                Dictionary<string, object> newsArgs = new Dictionary<string, object>();
                 newsArgs[ "appid" ] = "440";
 
                 KeyValue results = steamNews.Call( "GetNewsForApp", /* version */ 1, newsArgs );

@@ -272,9 +272,13 @@ namespace SteamKit2
                     string key = HttpUtility.UrlEncode( kvp.Key );
                     string value;
 
-                    if ( kvp.Value is byte[] )
+                    if ( kvp.Value == null )
                     {
-                        value = HttpUtility.UrlEncode( kvp.Value as byte[] );
+                        value = string.Empty;
+                    }
+                    else if ( kvp.Value is byte[] buffer )
+                    {
+                        value = HttpUtility.UrlEncode( buffer );
                     }
                     else
                     {
