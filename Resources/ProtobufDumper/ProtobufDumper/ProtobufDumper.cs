@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using google.protobuf;
@@ -66,6 +67,8 @@ namespace ProtobufDumper
             }
             else if ( source != null )
             {
+                Debug.Assert( node.Defined == false );
+
                 node.Proto = proto;
                 node.Source = source;
                 node.Defined = true;
@@ -249,8 +252,6 @@ namespace ProtobufDumper
 
             foreach ( var field in messageType.field )
             {
-                protoNode.Types.Add( GetOrCreateTypeNode( GetPackagePath( packagePath, field.name ), protoNode.Proto, field ) );
-
                 if ( IsNamedType( field.type ) && !string.IsNullOrEmpty( field.type_name ) )
                     protoNode.Types.Add( GetOrCreateTypeNode( GetPackagePath( packagePath, field.type_name ) ) );
 

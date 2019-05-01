@@ -26,7 +26,7 @@ namespace ProtobufDumper
             {
                 if ( i == 0 || i < args.Length - 1 )
                 {
-                    targets.Add(args[i]);
+                    targets.Add( args[ i ] );
                 }
                 else
                 {
@@ -34,7 +34,7 @@ namespace ProtobufDumper
                 }
             }
 
-            var outputDir = output ?? Path.GetFileNameWithoutExtension( targets[0] );
+            var outputDir = output ?? Path.GetFileNameWithoutExtension( targets[ 0 ] );
 
             ProtobufCollector collector = new ProtobufCollector();
 
@@ -64,7 +64,7 @@ namespace ProtobufDumper
                 } );
             }
 
-            ProtobufDumper dumper = new ProtobufDumper(collector.Candidates);
+            ProtobufDumper dumper = new ProtobufDumper( collector.Candidates );
 
             if ( dumper.Analyze() )
             {
