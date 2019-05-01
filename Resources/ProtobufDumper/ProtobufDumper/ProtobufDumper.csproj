@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PackageProjectUrl>https://github.com/SteamRE/SteamKit/tree/master/Resources/ProtobufDumper</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/SteamRE/SteamKit/blob/master/SteamKit2/SteamKit2/license.txt</PackageLicenseUrl>
@@ -11,8 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="protobuf-net" Version="2.3.2" />
-    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+    <PackageReference Include="protobuf-net" Version="2.4.0" />
   </ItemGroup>
 
 </Project>
