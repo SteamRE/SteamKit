@@ -128,8 +128,6 @@ namespace ProtobufDumper
                 Console.WriteLine( "Dump failed. Not all dependencies and types were found." );
                 Console.ResetColor();
             }
-
-            Console.ReadKey();
         }
     }
 }

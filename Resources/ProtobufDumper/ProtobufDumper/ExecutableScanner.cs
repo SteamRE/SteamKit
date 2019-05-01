@@ -21,8 +21,7 @@ namespace ProtobufDumper
             const char markerStart = '\n';
             const int markerLength = 2;
 
-            var scanSkipNull = 0;
-            var scanSkipTotal = 0;
+            var scanSkipOffset = 0;
 
             for ( var i = 0; i < data.Length - 1; i++ )
             {
@@ -31,13 +30,10 @@ namespace ProtobufDumper
 
                 if ( currentByte != markerStart ) continue;
 
-                var y = i;
+                var y = i + scanSkipOffset;
                 for ( ; y < data.Length; y++ )
                 {
-                    if ( data[ y ] != 0 ) continue;
-
-                    if ( scanSkipNull == 0 ) break;
-                    scanSkipNull -= 1;
+                    if ( data[ y ] == 0 ) break;
                 }
 
                 if ( y == data.Length ) continue;
@@ -55,14 +51,13 @@ namespace ProtobufDumper
 
                 if ( !processCandidate( protoName, bufferSpan ) )
                 {
-                    scanSkipTotal += 1;
-                    scanSkipNull = scanSkipTotal;
+                    scanSkipOffset = length + 1;
                     i -= 1;
                 }
                 else
                 {
                     i = y;
-                    scanSkipTotal = 0;
+                    scanSkipOffset = 0;
                 }
             }
         }
