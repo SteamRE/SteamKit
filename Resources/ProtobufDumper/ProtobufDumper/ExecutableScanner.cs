@@ -7,18 +7,16 @@ namespace ProtobufDumper
 {
     class ExecutableScanner
     {
-        private static readonly Regex ProtoFileNameRegex = new Regex( @"^[a-zA-Z_0-9\\/.]+\.proto$", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture );
+        static readonly Regex ProtoFileNameRegex = new Regex( @"^[a-zA-Z_0-9\\/.]+\.proto$", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture );
 
-        public delegate bool ProcessCandidate( string name, byte[] buffer );
+        public delegate bool ProcessCandidate( string name, ReadOnlySpan<byte> buffer );
 
         public static void ScanFile( string fileName, ProcessCandidate processCandidate )
         {
-            Console.WriteLine( "Loading binary '{0}'...", fileName );
-
             ScanFile( File.ReadAllBytes( fileName ), processCandidate );
         }
 
-        private static void ScanFile( byte[] data, ProcessCandidate processCandidate )
+        static void ScanFile( byte[] data, ProcessCandidate processCandidate )
         {
             const char markerStart = '\n';
             const int markerLength = 2;
@@ -48,7 +46,6 @@ namespace ProtobufDumper
 
                 if ( length < markerLength || length - 2 < expectedLength ) continue;
 
-
                 var bufferSpan = new ReadOnlySpan<byte>( data, i, length );
                 var nameSpan = bufferSpan.Slice( 2, expectedLength );
 
@@ -56,7 +53,7 @@ namespace ProtobufDumper
 
                 if ( !ProtoFileNameRegex.IsMatch( protoName ) ) continue;
 
-                if ( !processCandidate( protoName, bufferSpan.ToArray() ) )
+                if ( !processCandidate( protoName, bufferSpan ) )
                 {
                     scanSkipTotal += 1;
                     scanSkipNull = scanSkipTotal;
@@ -69,6 +66,5 @@ namespace ProtobufDumper
                 }
             }
         }
-
     }
 }

@@ -10,46 +10,49 @@ namespace ProtobufDumper
     {
         public List<FileDescriptorProto> Candidates { get; private set; }
 
+        public enum CandidateResult
+        {
+            OK,
+            Rescan,
+            Invalid
+        }
+
         public ProtobufCollector()
         {
             Candidates = new List<FileDescriptorProto>();
         }
 
-
-        public bool CollectCandidate( string name, byte[] data )
+        public bool TryParseCandidate( string name, ReadOnlySpan<byte> data, out CandidateResult result, out Exception error )
         {
             FileDescriptorProto candidate;
 
-            Console.Write( "{0}... ", name );
-
             try
             {
-                using ( var ms = new MemoryStream( data ) )
+                using ( var ms = new MemoryStream( data.Length ) )
+                {
+                    ms.Write( data );
+                    ms.Seek( 0, SeekOrigin.Begin );
                     candidate = Serializer.Deserialize<FileDescriptorProto>( ms );
+                }
             }
             catch ( EndOfStreamException ex )
             {
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine( "needs rescan: {0}", ex.Message );
-                Console.ResetColor();
+                result = CandidateResult.Rescan;
+                error = ex;
                 return false;
             }
             catch ( Exception ex )
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine( "is invalid: {0}", ex.Message );
-                Console.ResetColor();
+                result = CandidateResult.Invalid;
+                error = ex;
                 return true;
             }
 
             Candidates.Add( candidate );
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine( "OK!" );
-            Console.ResetColor();
-
+            result = CandidateResult.OK;
+            error = null;
             return true;
         }
-
     }
 }

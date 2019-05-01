@@ -11,7 +11,18 @@ namespace ProtobufDumper
         {
             Environment.ExitCode = 0;
 
-            if ( args.Length == 0 )
+            var namedArgs = new List<String>();
+            var unnamedArgs = new List<String>();
+
+            foreach ( var arg in args )
+            {
+                if ( arg.StartsWith( '-' ) )
+                    namedArgs.Add( arg );
+                else
+                    unnamedArgs.Add( arg );
+            }
+
+            if ( unnamedArgs.Count == 0 )
             {
                 Console.WriteLine( "No target specified." );
 
@@ -19,32 +30,61 @@ namespace ProtobufDumper
                 return;
             }
 
+            var hasDumpCandidates = namedArgs.Contains( "-dump", StringComparer.OrdinalIgnoreCase );
+
             var targets = new List<String>();
             string output = null;
 
-            for ( var i = 0; i < args.Length; i++ )
+            for ( var i = 0; i < unnamedArgs.Count; i++ )
             {
-                if ( i == 0 || i < args.Length - 1 )
+                if ( i == 0 || i < unnamedArgs.Count - 1 )
                 {
-                    targets.Add( args[ i ] );
+                    targets.Add( unnamedArgs[ i ] );
                 }
                 else
                 {
-                    output = args[ i ];
+                    output = unnamedArgs[ i ];
                 }
             }
 
             var outputDir = output ?? Path.GetFileNameWithoutExtension( targets[ 0 ] );
 
-            ProtobufCollector collector = new ProtobufCollector();
+            var collector = new ProtobufCollector();
 
             foreach ( var target in targets )
             {
+                Console.WriteLine( "Loading binary '{0}'...", target );
+
                 ExecutableScanner.ScanFile( target, ( name, buffer ) =>
                 {
-                    if ( Environment.GetCommandLineArgs().Contains( "-dump", StringComparer.OrdinalIgnoreCase ) )
+                    Console.Write( "{0}... ", name );
+
+                    var complete = collector.TryParseCandidate( name, buffer, out var result, out var error );
+
+                    switch ( result )
                     {
-                        Directory.CreateDirectory( outputDir );
+                        case ProtobufCollector.CandidateResult.OK:
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine( "OK!" );
+                            Console.ResetColor();
+                            break;
+
+                        case ProtobufCollector.CandidateResult.Rescan:
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine( "needs rescan: {0}", error.Message );
+                            Console.ResetColor();
+                            break;
+
+                        default:
+                        case ProtobufCollector.CandidateResult.Invalid:
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine( "is invalid: {0}", error.Message );
+                            Console.ResetColor();
+                            break;
+                    }
+
+                    if ( complete && hasDumpCandidates )
+                    {
                         var fileName = Path.Combine( outputDir, $"{name}.dump" );
                         Directory.CreateDirectory( Path.GetDirectoryName( fileName ) );
 
@@ -52,7 +92,10 @@ namespace ProtobufDumper
 
                         try
                         {
-                            File.WriteAllBytes( fileName, buffer );
+                            using ( var file = File.OpenWrite( fileName ) )
+                            {
+                                file.Write( buffer );
+                            }
                         }
                         catch ( Exception ex )
                         {
@@ -60,17 +103,16 @@ namespace ProtobufDumper
                         }
                     }
 
-                    return collector.CollectCandidate( name, buffer );
+                    return complete;
                 } );
             }
 
-            ProtobufDumper dumper = new ProtobufDumper( collector.Candidates );
+            var dumper = new ProtobufDumper( collector.Candidates );
 
             if ( dumper.Analyze() )
             {
                 dumper.DumpFiles( ( name, buffer ) =>
                 {
-                    Directory.CreateDirectory( outputDir );
                     var outputFile = Path.Combine( outputDir, name );
 
                     Console.WriteLine( "  ! Outputting proto to '{0}'", outputFile );
@@ -79,6 +121,15 @@ namespace ProtobufDumper
                     File.WriteAllText( outputFile, buffer.ToString() );
                 } );
             }
+            else
+            {
+                Environment.ExitCode = 1;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine( "Dump failed. Not all dependencies and types were found." );
+                Console.ResetColor();
+            }
+
+            Console.ReadKey();
         }
     }
 }

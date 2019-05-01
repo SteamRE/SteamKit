@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using google.protobuf;
@@ -12,12 +13,12 @@ namespace ProtobufDumper
     {
         public delegate void ProcessProtobuf( string name, string buffer );
 
-        private readonly IList<FileDescriptorProto> protobufs;
-        private readonly Stack<string> messageNameStack;
-        private readonly Dictionary<string, ProtoNode> protobufMap;
-        private readonly Dictionary<string, ProtoTypeNode> protobufTypeMap;
+        readonly List<FileDescriptorProto> protobufs;
+        readonly Stack<string> messageNameStack;
+        readonly Dictionary<string, ProtoNode> protobufMap;
+        readonly Dictionary<string, ProtoTypeNode> protobufTypeMap;
 
-        private class ProtoNode
+        class ProtoNode
         {
             public string Name;
             public FileDescriptorProto Proto;
@@ -27,7 +28,7 @@ namespace ProtobufDumper
             public bool Defined;
         }
 
-        private class ProtoTypeNode
+        class ProtoTypeNode
         {
             public string Name;
             public FileDescriptorProto Proto;
@@ -36,14 +37,17 @@ namespace ProtobufDumper
         }
 
         [ProtoContract]
-        private class ExtensionPlaceholder : IExtensible
+        class ExtensionPlaceholder : IExtensible
         {
-            private global::ProtoBuf.IExtension extensionObject;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject( bool createIfMissing )
-            { return global::ProtoBuf.Extensible.GetExtensionObject( ref extensionObject, createIfMissing ); }
+            IExtension extensionObject;
+
+            IExtension IExtensible.GetExtensionObject( bool createIfMissing )
+            {
+                return Extensible.GetExtensionObject( ref extensionObject, createIfMissing );
+            }
         }
 
-        public ProtobufDumper( IList<FileDescriptorProto> protobufs )
+        public ProtobufDumper( List<FileDescriptorProto> protobufs )
         {
             this.protobufs = protobufs;
             messageNameStack = new Stack<string>();
@@ -51,7 +55,7 @@ namespace ProtobufDumper
             protobufTypeMap = new Dictionary<string, ProtoTypeNode>();
         }
 
-        private ProtoTypeNode GetOrCreateTypeNode( string name, FileDescriptorProto proto = null, object source = null )
+        ProtoTypeNode GetOrCreateTypeNode( string name, FileDescriptorProto proto = null, object source = null )
         {
             if ( !protobufTypeMap.TryGetValue( name, out var node ) )
             {
@@ -212,7 +216,7 @@ namespace ProtobufDumper
             return true;
         }
 
-        private void RecursiveAddPublicDependencies( HashSet<FileDescriptorProto> set, ProtoNode node, int depth )
+        void RecursiveAddPublicDependencies( HashSet<FileDescriptorProto> set, ProtoNode node, int depth )
         {
             if ( depth == 0 )
             {
@@ -234,7 +238,7 @@ namespace ProtobufDumper
             }
         }
 
-        private void RecursiveAnalyzeMessageDescriptor( DescriptorProto messageType, ProtoNode protoNode, string packagePath )
+        void RecursiveAnalyzeMessageDescriptor( DescriptorProto messageType, ProtoNode protoNode, string packagePath )
         {
             protoNode.Types.Add( GetOrCreateTypeNode( GetPackagePath( packagePath, messageType.name ), protoNode.Proto, messageType ) );
 
@@ -276,7 +280,7 @@ namespace ProtobufDumper
             }
         }
 
-        private void DumpFileDescriptor( FileDescriptorProto proto, StringBuilder sb )
+        void DumpFileDescriptor( FileDescriptorProto proto, StringBuilder sb )
         {
             if ( !string.IsNullOrEmpty( proto.package ) )
                 PushDescriptorName( proto );
@@ -334,45 +338,14 @@ namespace ProtobufDumper
 
             foreach ( var service in proto.service )
             {
-                sb.AppendLine( $"service {service.name} {{" );
-
-
-                foreach ( var option in DumpOptions( proto, service.options ) )
-                {
-                    sb.AppendLine( $"\toption {option.Key} = {option.Value};" );
-                }
-
-                foreach ( var method in service.method )
-                {
-                    var declaration = $"\trpc {method.name} ({method.input_type}) returns ({method.output_type})";
-
-                    var options = DumpOptions( proto, method.options );
-
-                    if ( options.Count == 0 )
-                    {
-                        sb.AppendLine( $"{declaration};" );
-                    }
-                    else
-                    {
-                        sb.AppendLine( $"{declaration} {{" );
-
-                        foreach ( var option in options )
-                        {
-                            sb.AppendLine( $"\t\toption {option.Key} = {option.Value};" );
-                        }
-
-                        sb.AppendLine( "\t}" );
-                    }
-                }
-
-                sb.AppendLine( "}" );
+                DumpService( proto, service, sb );
             }
 
             if ( !string.IsNullOrEmpty( proto.package ) )
                 PopDescriptorName();
         }
 
-        private Dictionary<string, string> DumpOptions( FileDescriptorProto source, FileOptions options )
+        Dictionary<string, string> DumpOptions( FileDescriptorProto source, FileOptions options )
         {
             var optionsKv = new Dictionary<string, string>();
 
@@ -407,7 +380,7 @@ namespace ProtobufDumper
             return optionsKv;
         }
 
-        private Dictionary<string, string> DumpOptions( FileDescriptorProto source, FieldOptions options )
+        Dictionary<string, string> DumpOptions( FileDescriptorProto source, FieldOptions options )
         {
             var optionsKv = new Dictionary<string, string>();
 
@@ -432,7 +405,7 @@ namespace ProtobufDumper
             return optionsKv;
         }
 
-        private Dictionary<string, string> DumpOptions( FileDescriptorProto source, MessageOptions options )
+        Dictionary<string, string> DumpOptions( FileDescriptorProto source, MessageOptions options )
         {
             var optionsKv = new Dictionary<string, string>();
 
@@ -451,7 +424,7 @@ namespace ProtobufDumper
             return optionsKv;
         }
 
-        private Dictionary<string, string> DumpOptions( FileDescriptorProto source, EnumOptions options )
+        Dictionary<string, string> DumpOptions( FileDescriptorProto source, EnumOptions options )
         {
             var optionsKv = new Dictionary<string, string>();
 
@@ -468,7 +441,7 @@ namespace ProtobufDumper
             return optionsKv;
         }
 
-        private Dictionary<string, string> DumpOptions( FileDescriptorProto source, EnumValueOptions options )
+        Dictionary<string, string> DumpOptions( FileDescriptorProto source, EnumValueOptions options )
         {
             var optionsKv = new Dictionary<string, string>();
 
@@ -484,7 +457,7 @@ namespace ProtobufDumper
         }
 
 
-        private Dictionary<string, string> DumpOptions( FileDescriptorProto source, ServiceOptions options )
+        Dictionary<string, string> DumpOptions( FileDescriptorProto source, ServiceOptions options )
         {
             var optionsKv = new Dictionary<string, string>();
 
@@ -499,7 +472,7 @@ namespace ProtobufDumper
             return optionsKv;
         }
 
-        private Dictionary<string, string> DumpOptions( FileDescriptorProto source, MethodOptions options )
+        Dictionary<string, string> DumpOptions( FileDescriptorProto source, MethodOptions options )
         {
             var optionsKv = new Dictionary<string, string>();
 
@@ -514,7 +487,7 @@ namespace ProtobufDumper
             return optionsKv;
         }
 
-        private void DumpOptionsFieldRecursive( FieldDescriptorProto field, IExtensible options, Dictionary<string, string> optionsKv, string path )
+        void DumpOptionsFieldRecursive( FieldDescriptorProto field, IExtensible options, Dictionary<string, string> optionsKv, string path )
         {
             string key = string.IsNullOrEmpty( path ) ? $"({field.name})" : $"{path}.{field.name}";
 
@@ -552,7 +525,8 @@ namespace ProtobufDumper
                 }
             }
         }
-        private void DumpOptionsMatching( FileDescriptorProto source, string typeName, IExtensible options, Dictionary<string, string> optionsKv )
+
+        void DumpOptionsMatching( FileDescriptorProto source, string typeName, IExtensible options, Dictionary<string, string> optionsKv )
         {
             var dep = protobufMap[ source.name ].AllPublicDependencies;
 
@@ -568,7 +542,7 @@ namespace ProtobufDumper
             }
         }
 
-        private void DumpExtensionDescriptor( FileDescriptorProto source, IEnumerable<FieldDescriptorProto> fields, StringBuilder sb, string levelspace )
+        void DumpExtensionDescriptor( FileDescriptorProto source, IEnumerable<FieldDescriptorProto> fields, StringBuilder sb, string levelspace )
         {
             foreach ( var mapping in fields.GroupBy( x => x.extendee ) )
             {
@@ -587,7 +561,7 @@ namespace ProtobufDumper
             }
         }
 
-        private void DumpDescriptor( FileDescriptorProto source, DescriptorProto proto, StringBuilder sb, int level )
+        void DumpDescriptor( FileDescriptorProto source, DescriptorProto proto, StringBuilder sb, int level )
         {
             PushDescriptorName( proto );
 
@@ -656,7 +630,7 @@ namespace ProtobufDumper
             PopDescriptorName();
         }
 
-        private void DumpEnumDescriptor( FileDescriptorProto source, EnumDescriptorProto field, StringBuilder sb, int level )
+        void DumpEnumDescriptor( FileDescriptorProto source, EnumDescriptorProto field, StringBuilder sb, int level )
         {
             var levelspace = new string( '\t', level );
 
@@ -684,8 +658,43 @@ namespace ProtobufDumper
             sb.AppendLine();
         }
 
-        private string BuildDescriptorDeclaration( FileDescriptorProto source, FieldDescriptorProto field,
-            bool emitFieldLabel = true )
+        void DumpService( FileDescriptorProto source, ServiceDescriptorProto service, StringBuilder sb )
+        {
+            sb.AppendLine( $"service {service.name} {{" );
+
+            foreach ( var option in DumpOptions( source, service.options ) )
+            {
+                sb.AppendLine( $"\toption {option.Key} = {option.Value};" );
+            }
+
+            foreach ( var method in service.method )
+            {
+                var declaration = $"\trpc {method.name} ({method.input_type}) returns ({method.output_type})";
+
+                var options = DumpOptions( source, method.options );
+
+                if ( options.Count == 0 )
+                {
+                    sb.AppendLine( $"{declaration};" );
+                }
+                else
+                {
+                    sb.AppendLine( $"{declaration} {{" );
+
+                    foreach ( var option in options )
+                    {
+                        sb.AppendLine( $"\t\toption {option.Key} = {option.Value};" );
+                    }
+
+                    sb.AppendLine( "\t}" );
+                }
+            }
+
+            sb.AppendLine( "}" );
+            sb.AppendLine();
+        }
+
+        string BuildDescriptorDeclaration( FileDescriptorProto source, FieldDescriptorProto field, bool emitFieldLabel = true )
         {
             PushDescriptorName( field );
 
@@ -735,18 +744,18 @@ namespace ProtobufDumper
             return descriptorDeclarationBuilder.ToString();
         }
 
-        private bool IsNamedType( FieldDescriptorProto.Type type )
+        static bool IsNamedType( FieldDescriptorProto.Type type )
         {
             return type == FieldDescriptorProto.Type.TYPE_MESSAGE || type == FieldDescriptorProto.Type.TYPE_ENUM;
         }
 
-        public string GetPackagePath( string package, string name )
+        static string GetPackagePath( string package, string name )
         {
             package = package.Length == 0 || package.StartsWith( '.' ) ? package : $".{package}";
             return name.StartsWith( '.' ) ? name : $"{package}.{name}";
         }
 
-        private static string GetLabel( FieldDescriptorProto.Label label )
+        static string GetLabel( FieldDescriptorProto.Label label )
         {
             switch ( label )
             {
@@ -760,12 +769,10 @@ namespace ProtobufDumper
             }
         }
 
-        private static string GetType( FieldDescriptorProto.Type type )
+        static string GetType( FieldDescriptorProto.Type type )
         {
             switch ( type )
             {
-                default:
-                    return type.ToString();
                 case FieldDescriptorProto.Type.TYPE_INT32:
                     return "int32";
                 case FieldDescriptorProto.Type.TYPE_INT64:
@@ -802,18 +809,18 @@ namespace ProtobufDumper
                     return "sfixed32";
                 case FieldDescriptorProto.Type.TYPE_SFIXED64:
                     return "sfixed64";
+                default:
+                    return type.ToString();
             }
         }
 
-
-        private static bool ExtractType( IExtensible data, FieldDescriptorProto field, out string value )
+        static bool ExtractType( IExtensible data, FieldDescriptorProto field, out string value )
         {
             switch ( field.type )
             {
-                default:
-                    value = null;
-                    return false;
                 case FieldDescriptorProto.Type.TYPE_INT32:
+                case FieldDescriptorProto.Type.TYPE_UINT32:
+                case FieldDescriptorProto.Type.TYPE_FIXED32:
                     if ( Extensible.TryGetValue( data, field.number, out uint int32 ) )
                     {
                         value = Convert.ToString( int32 );
@@ -821,6 +828,8 @@ namespace ProtobufDumper
                     }
                     break;
                 case FieldDescriptorProto.Type.TYPE_INT64:
+                case FieldDescriptorProto.Type.TYPE_UINT64:
+                case FieldDescriptorProto.Type.TYPE_FIXED64:
                     if ( Extensible.TryGetValue( data, field.number, out ulong int64 ) )
                     {
                         value = Convert.ToString( int64 );
@@ -828,6 +837,7 @@ namespace ProtobufDumper
                     }
                     break;
                 case FieldDescriptorProto.Type.TYPE_SINT32:
+                case FieldDescriptorProto.Type.TYPE_SFIXED32:
                     if ( Extensible.TryGetValue( data, field.number, out int sint32 ) )
                     {
                         value = Convert.ToString( sint32 );
@@ -835,23 +845,10 @@ namespace ProtobufDumper
                     }
                     break;
                 case FieldDescriptorProto.Type.TYPE_SINT64:
+                case FieldDescriptorProto.Type.TYPE_SFIXED64:
                     if ( Extensible.TryGetValue( data, field.number, out long sint64 ) )
                     {
                         value = Convert.ToString( sint64 );
-                        return true;
-                    }
-                    break;
-                case FieldDescriptorProto.Type.TYPE_UINT32:
-                    if ( Extensible.TryGetValue( data, field.number, out uint uint32 ) )
-                    {
-                        value = Convert.ToString( uint32 );
-                        return true;
-                    }
-                    break;
-                case FieldDescriptorProto.Type.TYPE_UINT64:
-                    if ( Extensible.TryGetValue( data, field.number, out ulong uint64 ) )
-                    {
-                        value = Convert.ToString( uint64 );
                         return true;
                     }
                     break;
@@ -879,52 +876,27 @@ namespace ProtobufDumper
                 case FieldDescriptorProto.Type.TYPE_DOUBLE:
                     if ( Extensible.TryGetValue( data, field.number, out double dbl ) )
                     {
-                        value = Convert.ToString( dbl );
+                        value = Convert.ToString( dbl, CultureInfo.InvariantCulture );
                         return true;
                     }
                     break;
                 case FieldDescriptorProto.Type.TYPE_FLOAT:
                     if ( Extensible.TryGetValue( data, field.number, out float flt ) )
                     {
-                        value = Convert.ToString( flt );
+                        value = Convert.ToString( flt, CultureInfo.InvariantCulture );
                         return true;
                     }
                     break;
-                case FieldDescriptorProto.Type.TYPE_FIXED32:
-                    if ( Extensible.TryGetValue( data, field.number, out uint fixed32 ) )
-                    {
-                        value = Convert.ToString( fixed32 );
-                        return true;
-                    }
-                    break;
-                case FieldDescriptorProto.Type.TYPE_FIXED64:
-                    if ( Extensible.TryGetValue( data, field.number, out ulong fixed64 ) )
-                    {
-                        value = Convert.ToString( fixed64 );
-                        return true;
-                    }
-                    break;
-                case FieldDescriptorProto.Type.TYPE_SFIXED32:
-                    if ( Extensible.TryGetValue( data, field.number, out int sfixed32 ) )
-                    {
-                        value = Convert.ToString( sfixed32 );
-                        return true;
-                    }
-                    break;
-                case FieldDescriptorProto.Type.TYPE_SFIXED64:
-                    if ( Extensible.TryGetValue( data, field.number, out long sfixed64 ) )
-                    {
-                        value = Convert.ToString( sfixed64 );
-                        return true;
-                    }
-                    break;
+                default:
+                    value = null;
+                    return false;
             }
 
             value = null;
             return false;
         }
 
-        private string ResolveType( FieldDescriptorProto field )
+        static string ResolveType( FieldDescriptorProto field )
         {
             if ( IsNamedType( field.type ) )
             {
@@ -934,22 +906,22 @@ namespace ProtobufDumper
             return GetType( field.type );
         }
 
-        private void PushDescriptorName( FileDescriptorProto file )
+        void PushDescriptorName( FileDescriptorProto file )
         {
             messageNameStack.Push( file.package );
         }
 
-        private void PushDescriptorName( DescriptorProto proto )
+        void PushDescriptorName( DescriptorProto proto )
         {
             messageNameStack.Push( proto.name );
         }
 
-        private void PushDescriptorName( FieldDescriptorProto field )
+        void PushDescriptorName( FieldDescriptorProto field )
         {
             messageNameStack.Push( field.name );
         }
 
-        private void PopDescriptorName()
+        void PopDescriptorName()
         {
             messageNameStack.Pop();
         }
