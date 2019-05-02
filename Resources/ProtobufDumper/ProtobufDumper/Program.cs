@@ -73,6 +73,8 @@ namespace ProtobufDumper
 
                 ExecutableScanner.ScanFile( target, ( name, buffer ) =>
                 {
+                    if ( collector.Candidates.Find( c => c.name == name ) != null ) return true;
+
                     Console.Write( "{0}... ", name );
 
                     var complete = collector.TryParseCandidate( name, buffer, out var result, out var error );
