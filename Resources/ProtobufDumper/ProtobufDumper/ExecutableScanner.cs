@@ -9,7 +9,7 @@ namespace ProtobufDumper
     {
         static readonly Regex ProtoFileNameRegex = new Regex( @"^[a-zA-Z_0-9\\/.]+\.proto$", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture );
 
-        public delegate bool ProcessCandidate( string name, ReadOnlySpan<byte> buffer );
+        public delegate bool ProcessCandidate( string name, Stream buffer );
 
         public static void ScanFile( string fileName, ProcessCandidate processCandidate )
         {
@@ -40,24 +40,24 @@ namespace ProtobufDumper
 
                 var length = y - i;
 
-                if ( length < markerLength || length - 2 < expectedLength ) continue;
+                if ( length < markerLength || length - markerLength < expectedLength ) continue;
 
-                var bufferSpan = new ReadOnlySpan<byte>( data, i, length );
-                var nameSpan = bufferSpan.Slice( 2, expectedLength );
-
-                var protoName = Encoding.ASCII.GetString( nameSpan );
+                var protoName = Encoding.ASCII.GetString( data, i + markerLength, expectedLength );
 
                 if ( !ProtoFileNameRegex.IsMatch( protoName ) ) continue;
 
-                if ( !processCandidate( protoName, bufferSpan ) )
+                using ( var buffer = new MemoryStream( data, i, length ) )
                 {
-                    scanSkipOffset = length + 1;
-                    i -= 1;
-                }
-                else
-                {
-                    i = y;
-                    scanSkipOffset = 0;
+                    if ( !processCandidate( protoName, buffer ) )
+                    {
+                        scanSkipOffset = length + 1;
+                        i -= 1;
+                    }
+                    else
+                    {
+                        i = y;
+                        scanSkipOffset = 0;
+                    }
                 }
             }
         }

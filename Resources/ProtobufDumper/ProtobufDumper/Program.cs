@@ -37,13 +37,29 @@ namespace ProtobufDumper
 
             for ( var i = 0; i < unnamedArgs.Count; i++ )
             {
+                var exists = File.Exists( unnamedArgs[ i ] );
+
                 if ( i == 0 || i < unnamedArgs.Count - 1 )
                 {
                     targets.Add( unnamedArgs[ i ] );
+
+                    if ( exists ) continue;
+
+                    Console.WriteLine( "Could not find file {0}", unnamedArgs[ i ] );
+
+                    Environment.ExitCode = -1;
+                    return;
                 }
                 else
                 {
                     output = unnamedArgs[ i ];
+
+                    if ( !exists ) continue;
+
+                    Console.WriteLine( "Output directory path is not valid {0}", unnamedArgs[ i ] );
+
+                    Environment.ExitCode = -1;
+                    return;
                 }
             }
 
@@ -94,7 +110,9 @@ namespace ProtobufDumper
                         {
                             using ( var file = File.OpenWrite( fileName ) )
                             {
-                                file.Write( buffer );
+                                buffer.Seek( 0, SeekOrigin.Begin );
+                                file.SetLength( buffer.Length );
+                                buffer.CopyTo( file );
                             }
                         }
                         catch ( Exception ex )
@@ -123,10 +141,11 @@ namespace ProtobufDumper
             }
             else
             {
-                Environment.ExitCode = 1;
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine( "Dump failed. Not all dependencies and types were found." );
                 Console.ResetColor();
+
+                Environment.ExitCode = -1;
             }
         }
     }

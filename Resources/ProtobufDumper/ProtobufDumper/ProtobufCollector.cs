@@ -22,18 +22,13 @@ namespace ProtobufDumper
             Candidates = new List<FileDescriptorProto>();
         }
 
-        public bool TryParseCandidate( string name, ReadOnlySpan<byte> data, out CandidateResult result, out Exception error )
+        public bool TryParseCandidate( string name, Stream data, out CandidateResult result, out Exception error )
         {
             FileDescriptorProto candidate;
 
             try
             {
-                using ( var ms = new MemoryStream( data.Length ) )
-                {
-                    ms.Write( data );
-                    ms.Seek( 0, SeekOrigin.Begin );
-                    candidate = Serializer.Deserialize<FileDescriptorProto>( ms );
-                }
+                candidate = Serializer.Deserialize<FileDescriptorProto>( data );
             }
             catch ( EndOfStreamException ex )
             {
