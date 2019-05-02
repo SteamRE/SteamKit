@@ -65,7 +65,7 @@ namespace SteamKit2
             /// <returns>A <see cref="KeyValue"/> object representing the results of the Web API call.</returns>
             /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
-            /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
+            /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
             public KeyValue Call( string func, int version = 1, Dictionary<string, string> args = null )
                 => Call( HttpMethod.Get, func, version, args );
@@ -81,7 +81,7 @@ namespace SteamKit2
             /// <returns>A <see cref="KeyValue"/> object representing the results of the Web API call.</returns>
             /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
-            /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
+            /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
             public KeyValue Call( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null )
             {
@@ -207,7 +207,7 @@ namespace SteamKit2
             /// <returns>A <see cref="Task{T}"/> that contains a <see cref="KeyValue"/> object representing the results of the Web API call.</returns>
             /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
-            /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
+            /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
             public Task<KeyValue> CallAsync( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null )
             {
