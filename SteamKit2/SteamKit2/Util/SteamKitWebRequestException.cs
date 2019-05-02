@@ -1,12 +1,11 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
 namespace SteamKit2
 {
     /// <summary>
-    /// Thrown when WebAPI request fails.
+    /// Thrown when a HTTP request fails.
     /// </summary>
     public class SteamKitWebRequestException : HttpRequestException
     {
