@@ -8,7 +8,7 @@ namespace SteamKit2
     /// <summary>
     /// Thrown when WebAPI request fails.
     /// </summary>
-    public sealed class SteamKitWebRequestException : HttpRequestException
+    public class SteamKitWebRequestException : HttpRequestException
     {
         /// <summary>
         /// Represents the status code of the HTTP response.

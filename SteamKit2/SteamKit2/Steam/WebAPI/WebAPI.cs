@@ -289,7 +289,7 @@ namespace SteamKit2
 
                 if ( !response.IsSuccessStatusCode )
                 {
-                    throw new SteamKitWebRequestException( $"Response status code does not indicate success: {response.StatusCode} ({response.ReasonPhrase}).", response );
+                    throw new WebAPIRequestException( $"Response status code does not indicate success: {response.StatusCode} ({response.ReasonPhrase}).", response );
                 }
 
                 var kv = new KeyValue();
