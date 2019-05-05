@@ -380,6 +380,7 @@ namespace SteamKit2
                 {
                     methodArgs = new Dictionary<string, object>();
 
+                    // convert named arguments into key value pairs
                     for ( var x = 0; x < args.Length; x++ )
                     {
                         string argName = binder.CallInfo.ArgumentNames[ x ];
@@ -392,7 +393,6 @@ namespace SteamKit2
                 var apiArgs = new Dictionary<string, object>();
                 var requestMethod = HttpMethod.Get;
 
-                // convert named arguments into key value pairs
                 foreach ( var kvp in methodArgs )
                 {
                     string argName = kvp.Key;
