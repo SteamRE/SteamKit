@@ -51,12 +51,12 @@ namespace SteamKit2
         private volatile int state;
 
         private Thread netThread;
-        private Socket sock;
+        private readonly Socket sock;
 
         private DateTime timeOut;
         private DateTime nextResend;
 
-        private static uint sourceConnId = 512;
+        private static int sourceConnId = 512;
         private uint remoteConnId;
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace SteamKit2
             }
 
             // Advance this the same way that steam does, when a socket gets reused.
-            sourceConnId += 256;
+            Interlocked.Add( ref sourceConnId, 256 );
 
             Disconnected?.Invoke( this, new DisconnectedEventArgs( userInitiated ) );
         }
@@ -240,7 +240,7 @@ namespace SteamKit2
         /// <param name="packet">The packet.</param>
         private void SendPacket(UdpPacket packet)
         {
-            packet.Header.SourceConnID = sourceConnId;
+            packet.Header.SourceConnID = ( uint )sourceConnId;
             packet.Header.DestConnID = remoteConnId;
             packet.Header.SeqAck = inSeqAcked = inSeq;
 

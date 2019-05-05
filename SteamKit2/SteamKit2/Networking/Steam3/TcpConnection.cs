@@ -23,7 +23,7 @@ namespace SteamKit2
         private BinaryWriter netWriter;
 
         private CancellationTokenSource cancellationToken;
-        private object netLock;
+        private readonly object netLock;
 
         public TcpConnection()
         {

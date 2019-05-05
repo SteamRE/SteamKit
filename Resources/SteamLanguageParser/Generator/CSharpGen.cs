@@ -144,7 +144,7 @@ namespace SteamLanguageParser
 
             sb.AppendLine( padding + "{" );
 
-            string lastValue = "0";
+            string lastValue;
 
             foreach (PropNode prop in enode.childNodes)
             {
@@ -477,8 +477,8 @@ namespace SteamLanguageParser
                 {
                     EnumNode enode = ((StrongSymbol)prop.Type).Class as EnumNode;
 
-                    if (enode.Type is WeakSymbol)
-                        typecast = "(" + ((WeakSymbol)enode.Type).Identifier + ")";
+                    if (enode.Type is WeakSymbol weakSymbol)
+                        typecast = "(" + weakSymbol.Identifier + ")";
                     else
                         typecast = "(int)";
                 }

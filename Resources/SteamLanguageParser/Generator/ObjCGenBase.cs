@@ -7,7 +7,7 @@ namespace SteamLanguageParser {
 
     public abstract class ObjCGenBase : ICodeGen
     {
-        protected static Dictionary<String, String> readerTypeMap = new Dictionary<String, String>
+        protected static readonly Dictionary<String, String> readerTypeMap = new Dictionary<String, String>
         {
             {"byte", "UInt8"},
             {"short", "Int16"},
@@ -27,7 +27,7 @@ namespace SteamLanguageParser {
             {"NSData", "DataOfLength"},
         };
 
-        protected static Dictionary<String, String> weakTypeMap = new Dictionary<String, String>
+        protected static readonly Dictionary<String, String> weakTypeMap = new Dictionary<String, String>
         {
             {"byte", "uint8_t"},
             {"short", "int16_t"},

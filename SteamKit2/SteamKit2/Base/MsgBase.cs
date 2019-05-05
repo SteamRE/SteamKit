@@ -91,7 +91,7 @@ namespace SteamKit2
         /// Initializes a new instance of the <see cref="MsgBase"/> class.
         /// </summary>
         /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
-        public MsgBase( int payloadReserve = 0 )
+        protected MsgBase( int payloadReserve = 0 )
         {
             Payload = new MemoryStream( payloadReserve );
             reader = new BinaryReader( Payload );
@@ -499,7 +499,7 @@ namespace SteamKit2
         /// Initializes a new instance of the <see cref="MsgBase&lt;HdrType&gt;"/> class.
         /// </summary>
         /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
-        public MsgBase( int payloadReserve = 0 )
+        protected MsgBase( int payloadReserve = 0 )
             : base( payloadReserve )
         {
             Header = new HdrType();

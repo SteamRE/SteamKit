@@ -183,7 +183,7 @@ namespace SteamKit2.GC
         /// </value>
         public JobID SourceJobID { get; }
 
-        byte[] payload;
+        readonly byte[] payload;
 
 
         /// <summary>
