@@ -387,10 +387,8 @@ namespace SteamKit2
                 var apiArgs = new Dictionary<string, object>();
                 var requestMethod = HttpMethod.Get;
 
-                foreach ( var kvp in methodArgs )
+                foreach ( var ( argName, argValue ) in methodArgs )
                 {
-                    var ( argName, argValue) = ( kvp.Key, kvp.Value );
-
                     // method is a reserved param for selecting the http request method
                     if ( argName.Equals( "method", StringComparison.OrdinalIgnoreCase ) )
                     {
