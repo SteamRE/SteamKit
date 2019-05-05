@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 using SteamKit2;
 using Xunit;
@@ -61,6 +63,35 @@ namespace Tests
             }
         }
 
+        [Fact]
+        public async Task UsesSingleParameterArgumentsDictionary()
+        {
+            var capturingHandler = new CaturingHttpMessageHandler();
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( capturingHandler ) ) );
+
+            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var args = new Dictionary<string, object>
+            {
+                [ "f" ] = "foo",
+                [ "b" ] = "bar",
+                [ "method" ] = "PUT"
+            };
+
+            var response = await iface.PerformFooOperation2( args );
+
+            var request = capturingHandler.MostRecentRequest;
+            Assert.NotNull( request );
+            Assert.Equal( "/IFooService/PerformFooOperation/v2", request.RequestUri.AbsolutePath );
+            Assert.Equal( HttpMethod.Put, request.Method );
+
+            var formData = await request.Content.ReadAsFormDataAsync();
+            Assert.Equal( 3, formData.Count );
+            Assert.Equal( "foo", formData[ "f" ] );
+            Assert.Equal( "bar", formData[ "b" ] );
+            Assert.Equal( "vdf", formData[ "format" ] );
+        }
+
         // Primitive HTTP listener function that always returns HTTP 503.
         static void AcceptAndAutoReplyNextSocket(TcpListener listener)
         {
@@ -94,6 +125,21 @@ namespace Tests
             if (ar.CompletedSynchronously)
             {
                 OnSocketAccepted(ar);
+            }
+        }
+
+        sealed class CaturingHttpMessageHandler : HttpMessageHandler
+        {
+            public HttpRequestMessage MostRecentRequest { get; private set; }
+
+            protected override Task<HttpResponseMessage> SendAsync( HttpRequestMessage request, CancellationToken cancellationToken )
+            {
+                MostRecentRequest = request;
+
+                return Task.FromResult( new HttpResponseMessage( HttpStatusCode.OK )
+                {
+                    Content = new ByteArrayContent( Array.Empty<byte>() )
+                });
             }
         }
     }

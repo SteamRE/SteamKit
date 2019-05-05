@@ -366,20 +366,37 @@ namespace SteamKit2
             /// </exception>
             public override bool TryInvokeMember( InvokeMemberBinder binder, object[] args, out object result )
             {
-                if ( binder.CallInfo.ArgumentNames.Count != args.Length )
+                IDictionary<string, object> methodArgs;
+
+                if ( args.Length == 1 && binder.CallInfo.ArgumentNames.Count == 0 && args[ 0 ] is IDictionary<string, object> explicitArgs )
                 {
-                    throw new InvalidOperationException( "Argument mismatch in API call. All parameters must be passed as named arguments." );
+                    methodArgs = explicitArgs;
+                }
+                else if ( binder.CallInfo.ArgumentNames.Count != args.Length )
+                {
+                    throw new InvalidOperationException( "Argument mismatch in API call. All parameters must be passed as named arguments, or as a single un-named dictionary argument." );
+                }
+                else
+                {
+                    methodArgs = new Dictionary<string, object>();
+
+                    for ( var x = 0; x < args.Length; x++ )
+                    {
+                        string argName = binder.CallInfo.ArgumentNames[ x ];
+                        object argValue = args[ x ];
+
+                        methodArgs.Add( argName, argValue );
+                    }
                 }
 
                 var apiArgs = new Dictionary<string, object>();
-
                 var requestMethod = HttpMethod.Get;
 
                 // convert named arguments into key value pairs
-                for ( int x = 0 ; x < args.Length ; x++ )
+                foreach ( var kvp in methodArgs )
                 {
-                    string argName = binder.CallInfo.ArgumentNames[ x ];
-                    object argValue = args[ x ];
+                    string argName = kvp.Key;
+                    object argValue = kvp.Value;
 
                     // method is a reserved param for selecting the http request method
                     if ( argName.Equals( "method", StringComparison.OrdinalIgnoreCase ) )
