@@ -11,6 +11,7 @@ using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace SteamKit2
 {
@@ -67,7 +68,7 @@ namespace SteamKit2
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public KeyValue Call( string func, int version = 1, Dictionary<string, string> args = null )
+            public KeyValue Call( string func, int version = 1, Dictionary<string, object> args = null )
                 => Call( HttpMethod.Get, func, version, args );
 
 
@@ -83,7 +84,7 @@ namespace SteamKit2
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public KeyValue Call( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null )
+            public KeyValue Call( HttpMethod method, string func, int version = 1, Dictionary<string, object> args = null )
             {
                 var callTask = asyncInterface.CallAsync( method, func, version, args );
 
@@ -209,7 +210,7 @@ namespace SteamKit2
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public Task<KeyValue> CallAsync( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null )
+            public Task<KeyValue> CallAsync( HttpMethod method, string func, int version = 1, Dictionary<string, object> args = null )
             {
                 var task = CallAsyncCore( method, func, version, args );
 
@@ -226,7 +227,7 @@ namespace SteamKit2
                 return task;
             }
                 
-            async Task<KeyValue> CallAsyncCore( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null )
+            async Task<KeyValue> CallAsyncCore( HttpMethod method, string func, int version = 1, Dictionary<string, object> args = null )
             {
                 if ( method == null )
                 {
@@ -240,7 +241,7 @@ namespace SteamKit2
 
                 if ( args == null )
                 {
-                    args = new Dictionary<string, string>();
+                    args = new Dictionary<string, object>();
                 }
 
 
@@ -268,11 +269,21 @@ namespace SteamKit2
                 // append any args
                 paramBuilder.Append( string.Join( "&", args.Select( kvp =>
                 {
-                    // TODO: the WebAPI is a special snowflake that needs to appropriately handle url encoding
-                    // this is in contrast to the steam3 content server APIs which use an entirely different scheme of encoding
+                    string key = HttpUtility.UrlEncode( kvp.Key );
+                    string value;
 
-                    string key = WebHelpers.UrlEncode( kvp.Key );
-                    string value = kvp.Value; // WebHelpers.UrlEncode( kvp.Value );
+                    if ( kvp.Value == null )
+                    {
+                        value = string.Empty;
+                    }
+                    else if ( kvp.Value is byte[] buffer )
+                    {
+                        value = HttpUtility.UrlEncode( buffer );
+                    }
+                    else
+                    {
+                        value = HttpUtility.UrlEncode( kvp.Value.ToString() );
+                    }
 
                     return string.Format( "{0}={1}", key, value );
                 } ) ) );
@@ -360,7 +371,7 @@ namespace SteamKit2
                     throw new InvalidOperationException( "Argument mismatch in API call. All parameters must be passed as named arguments." );
                 }
 
-                var apiArgs = new Dictionary<string, string>();
+                var apiArgs = new Dictionary<string, object>();
 
                 var requestMethod = HttpMethod.Get;
 
@@ -384,14 +395,14 @@ namespace SteamKit2
 
                         foreach ( object value in enumerable )
                         {
-                            apiArgs.Add( String.Format( "{0}[{1}]", argName, index++ ), value.ToString() );
+                            apiArgs.Add( String.Format( "{0}[{1}]", argName, index++ ), value );
                         }
 
                         continue;
                     }
 
 
-                    apiArgs.Add( argName, argValue.ToString() );
+                    apiArgs.Add( argName, argValue );
                 }
 
                 Match match = funcNameRegex.Match( binder.Name );
