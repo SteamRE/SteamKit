@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using SteamKit2;
@@ -46,21 +44,10 @@ namespace Tests
         [Fact]
         public async Task ThrowsWebAPIRequestExceptionIfRequestUnsuccessful()
         {
-            var listener = new TcpListener(new IPEndPoint(IPAddress.Loopback, 28123));
-            listener.Start();
-            try
-            {
-                AcceptAndAutoReplyNextSocket(listener);
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( new ServiceUnavailableHttpMessageHandler() ) ) );
+            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" ); 
 
-                var baseUri = "http://localhost:28123";
-                dynamic iface = WebAPI.GetAsyncInterface(new Uri(baseUri), "IFooService");
-
-                await Assert.ThrowsAsync<WebAPIRequestException>(() => (Task)iface.PerformFooOperation());
-            }
-            finally
-            {
-                listener.Stop();
-            }
+           await Assert.ThrowsAsync<WebAPIRequestException>(() => (Task)iface.PerformFooOperation());
         }
 
         [Fact]
@@ -92,40 +79,10 @@ namespace Tests
             Assert.Equal( "vdf", formData[ "format" ] );
         }
 
-        // Primitive HTTP listener function that always returns HTTP 503.
-        static void AcceptAndAutoReplyNextSocket(TcpListener listener)
+        sealed class ServiceUnavailableHttpMessageHandler : HttpMessageHandler
         {
-            void OnSocketAccepted(IAsyncResult result)
-            {
-                try
-                {
-                    using (var socket = listener.EndAcceptSocket(result))
-                    using (var stream = new NetworkStream(socket))
-                    using (var reader = new StreamReader(stream))
-                    using (var writer = new StreamWriter(stream))
-                    {
-                        string line;
-                        do
-                        {
-                            line = reader.ReadLine();
-                        }
-                        while (!string.IsNullOrEmpty(line));
-
-                        writer.WriteLine("HTTP/1.1 503 Service Unavailable");
-                        writer.WriteLine("X-Response-Source: Unit Test");
-                        writer.WriteLine();
-                    }
-                }
-                catch
-                {
-                }
-            }
-
-            var ar = listener.BeginAcceptSocket(OnSocketAccepted, null);
-            if (ar.CompletedSynchronously)
-            {
-                OnSocketAccepted(ar);
-            }
+            protected override Task<HttpResponseMessage> SendAsync( HttpRequestMessage request, CancellationToken cancellationToken )
+                => Task.FromResult( new HttpResponseMessage( HttpStatusCode.ServiceUnavailable ) );
         }
 
         sealed class CaturingHttpMessageHandler : HttpMessageHandler
