@@ -258,6 +258,8 @@ namespace SteamKit2
         /// No Steam CS servers available, or the suggested CellID is unavailable.
         /// Check that the <see cref="SteamClient"/> associated with this <see cref="CDNClient"/> instance is logged onto Steam.
         /// </exception>
+        /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
+        /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
         public async Task<IList<Server>> FetchServerListAsync( IPEndPoint csServer = null, uint? cellId = null, int maxServers = 20 )
         {
             DebugLog.Assert( steamClient.IsConnected, "CDNClient", "CMClient is not connected!" );
@@ -356,6 +358,8 @@ namespace SteamKit2
         /// </summary>
         /// <param name="csServer">The content server to connect to.</param>
         /// <exception cref="System.ArgumentNullException">csServer was null.</exception>
+        /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
+        /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
         public async Task ConnectAsync( Server csServer )
         {
             DebugLog.Assert( steamClient.IsConnected, "CDNClient", "CMClient is not connected!" );
@@ -411,6 +415,8 @@ namespace SteamKit2
         /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
         /// </param>
         /// <param name="cdnAuthToken">CDN auth token for CDN content server endpoints.</param>
+        /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
+        /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
         public async Task AuthenticateDepotAsync( uint depotid, byte[] depotKey = null, string cdnAuthToken = null )
         {
             if ( depotIds.ContainsKey( depotid ) )
@@ -446,6 +452,8 @@ namespace SteamKit2
         /// <param name="depotId">The id of the depot being accessed.</param>
         /// <param name="manifestId">The unique identifier of the manifest to be downloaded.</param>
         /// <returns>A <see cref="DepotManifest"/> instance that contains information about the files present within a depot.</returns>
+        /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
+        /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
         public async Task<DepotManifest> DownloadManifestAsync( uint depotId, ulong manifestId )
         {
             depotCdnAuthKeys.TryGetValue( depotId, out var cdnToken );
@@ -466,6 +474,8 @@ namespace SteamKit2
         /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
         /// </param>
         /// <returns>A <see cref="DepotManifest"/> instance that contains information about the files present within a depot.</returns>
+        /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
+        /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
         public async Task<DepotManifest> DownloadManifestAsync( uint depotId, ulong manifestId, string host, string cdnAuthToken, byte[] depotKey = null )
         {
             var server = new Server
@@ -501,6 +511,8 @@ namespace SteamKit2
         /// <returns>A <see cref="DepotChunk"/> instance that contains the data for the given chunk.</returns>
         /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
         /// <exception cref="System.IO.InvalidDataException">Thrown if the downloaded data does not match the expected length.</exception>
+        /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
+        /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
         public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk )
 #pragma warning restore 0419
 #pragma warning restore 1574
@@ -549,6 +561,8 @@ namespace SteamKit2
         /// </param>
         /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
         /// <exception cref="System.IO.InvalidDataException">Thrown if the downloaded data does not match the expected length.</exception>
+        /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
+        /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
         public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk, string host, string cdnAuthToken, byte[] depotKey = null)
 #pragma warning restore 1574
 #pragma warning restore 0419
@@ -631,6 +645,11 @@ namespace SteamKit2
                 try
                 {
                     var response = await httpClient.SendAsync( request, cts.Token ).ConfigureAwait( false );
+
+                    if ( !response.IsSuccessStatusCode )
+                    {
+                        throw new SteamKitWebRequestException( $"Response status code does not indicate success: {response.StatusCode} ({response.ReasonPhrase}).", response );
+                    }
 
                     var responseData = await response.Content.ReadAsByteArrayAsync().ConfigureAwait( false );
                     return responseData;
