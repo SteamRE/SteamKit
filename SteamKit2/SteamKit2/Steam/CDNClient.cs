@@ -459,7 +459,7 @@ namespace SteamKit2
             depotCdnAuthKeys.TryGetValue( depotId, out var cdnToken );
             depotKeys.TryGetValue( depotId, out var depotKey );
 
-            return await DownloadManifestCoreAsync( depotId, manifestId, connectedServer, cdnToken, depotKey ).ConfigureAwait(false);
+            return await DownloadManifestAsync( depotId, manifestId, connectedServer, cdnToken, depotKey ).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -486,15 +486,44 @@ namespace SteamKit2
                 Port = 80
             };
 
-            return await DownloadManifestCoreAsync( depotId, manifestId, server, cdnAuthToken, depotKey ).ConfigureAwait( false );
+            return await DownloadManifestAsync( depotId, manifestId, server, cdnAuthToken, depotKey ).ConfigureAwait( false );
         }
 
-        // Ambiguous reference in cref attribute: 'CDNClient.DownloadManifest'. Assuming 'SteamKit2.CDNClient.DownloadManifest(uint, ulong)',
-        // but could have also matched other overloads including 'SteamKit2.CDNClient.DownloadManifest(uint, ulong, string, string, byte[])'.
-#pragma warning disable 0419
+        /// <summary>
+        /// Downloads the depot manifest specified by the given manifest ID, and optionally decrypts the manifest's filenames if the depot decryption key has been provided.
+        /// </summary>
+        /// <param name="depotId">The id of the depot being accessed.</param>
+        /// <param name="manifestId">The unique identifier of the manifest to be downloaded.</param>
+        /// <param name="server">The content server to connect to.</param>
+        /// <param name="cdnAuthToken">CDN auth token for CDN content server endpoints.</param>
+        /// <param name="depotKey">
+        /// The depot decryption key for the depot that will be downloaded.
+        /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
+        /// </param>
+        /// <returns>A <see cref="DepotManifest"/> instance that contains information about the files present within a depot.</returns>
+        /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
+        /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
+        public async Task<DepotManifest> DownloadManifestAsync( uint depotId, ulong manifestId, Server server, string cdnAuthToken, byte[] depotKey )
+        {
+            if ( server == null )
+            {
+                throw new ArgumentNullException( nameof( server ) );
+            }
 
-        // XML comment has cref attribute 'DownloadManifest' that could not be resolved
-#pragma warning disable 1574
+            var manifestData = await DoRawCommandAsync( server, HttpMethod.Get, "depot", doAuth: true, args: string.Format( "{0}/manifest/{1}/5", depotId, manifestId ), authtoken: cdnAuthToken ).ConfigureAwait( false );
+
+            manifestData = ZipUtil.Decompress( manifestData );
+
+            var depotManifest = new DepotManifest( manifestData );
+
+            if ( depotKey != null )
+            {
+                // if we have the depot key, decrypt the manifest filenames
+                depotManifest.DecryptFilenames( depotKey );
+            }
+
+            return depotManifest;
+        }
 
         /// <summary>
         /// Downloads the specified depot chunk, and optionally processes the chunk and verifies the checksum if the depot decryption key has been provided.
@@ -506,7 +535,7 @@ namespace SteamKit2
         /// <param name="depotId">The id of the depot being accessed.</param>
         /// <param name="chunk">
         /// A <see cref="DepotManifest.ChunkData"/> instance that represents the chunk to download.
-        /// This value should come from a manifest downloaded with <see cref="CDNClient.DownloadManifest"/>.
+        /// This value should come from a manifest downloaded with <see cref="o:DownloadManifestAsync"/>.
         /// </param>
         /// <returns>A <see cref="DepotChunk"/> instance that contains the data for the given chunk.</returns>
         /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
@@ -514,31 +543,12 @@ namespace SteamKit2
         /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
         /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
         public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk )
-#pragma warning restore 0419
-#pragma warning restore 1574
         {
-            if ( chunk == null )
-            {
-                throw new ArgumentNullException( nameof(chunk) );
-            }
-
-            if ( chunk.ChunkID == null )
-            {
-                throw new ArgumentException( "Chunk must have a ChunkID.", nameof(chunk) );
-            }
-
             depotCdnAuthKeys.TryGetValue( depotId, out var cdnToken );
             depotKeys.TryGetValue( depotId, out var depotKey );
 
-            return await DownloadDepotChunkCoreAsync( depotId, chunk, connectedServer, cdnToken, depotKey ).ConfigureAwait( false );
+            return await DownloadDepotChunkAsync( depotId, chunk, connectedServer, cdnToken, depotKey ).ConfigureAwait( false );
         }
-
-        // Ambiguous reference in cref attribute: 'CDNClient.DownloadManifest'. Assuming 'SteamKit2.CDNClient.DownloadManifest(uint, ulong)',
-        // but could have also matched other overloads including 'SteamKit2.CDNClient.DownloadManifest(uint, ulong, string, string, byte[])'.
-#pragma warning disable 0419
-
-        // XML comment has cref attribute 'DownloadManifest' that could not be resolved
-#pragma warning disable 1574
 
         /// <summary>
         /// Downloads the specified depot chunk, and optionally processes the chunk and verifies the checksum if the depot decryption key has been provided.
@@ -550,7 +560,7 @@ namespace SteamKit2
         /// <param name="depotId">The id of the depot being accessed.</param>
         /// <param name="chunk">
         /// A <see cref="DepotManifest.ChunkData"/> instance that represents the chunk to download.
-        /// This value should come from a manifest downloaded with <see cref="CDNClient.DownloadManifest"/>.
+        /// This value should come from a manifest downloaded with <see cref="o:DownloadManifestAsync"/>.
         /// </param>
         /// <returns>A <see cref="DepotChunk"/> instance that contains the data for the given chunk.</returns>
         /// <param name="host">CDN hostname.</param>
@@ -564,19 +574,7 @@ namespace SteamKit2
         /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
         /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
         public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk, string host, string cdnAuthToken, byte[] depotKey = null)
-#pragma warning restore 1574
-#pragma warning restore 0419
         {
-            if ( chunk == null )
-            {
-                throw new ArgumentNullException( nameof(chunk) );
-            }
-
-            if ( chunk.ChunkID == null )
-            {
-                throw new ArgumentException( "Chunk must have a ChunkID.", nameof(chunk) );
-            }
-
             var server = new Server
             {
                 Protocol = Server.ConnectionProtocol.HTTP,
@@ -585,7 +583,72 @@ namespace SteamKit2
                 Port = 80
             };
 
-            return await DownloadDepotChunkCoreAsync( depotId, chunk, server, cdnAuthToken, depotKey ).ConfigureAwait( false );
+            return await DownloadDepotChunkAsync( depotId, chunk, server, cdnAuthToken, depotKey ).ConfigureAwait( false );
+        }
+
+        /// <summary>
+        /// Downloads the specified depot chunk, and optionally processes the chunk and verifies the checksum if the depot decryption key has been provided.
+        /// </summary>
+        /// <remarks>
+        /// This function will also validate the length of the downloaded chunk with the value of <see cref="DepotManifest.ChunkData.CompressedLength"/>,
+        /// if it has been assigned a value.
+        /// </remarks>
+        /// <param name="depotId">The id of the depot being accessed.</param>
+        /// <param name="chunk">
+        /// A <see cref="DepotManifest.ChunkData"/> instance that represents the chunk to download.
+        /// This value should come from a manifest downloaded with <see cref="o:DownloadManifestAsync"/>.
+        /// </param>
+        /// <returns>A <see cref="DepotChunk"/> instance that contains the data for the given chunk.</returns>
+        /// <param name="server">The content server to connect to.</param>
+        /// <param name="cdnAuthToken">CDN auth token for CDN content server endpoints.</param>
+        /// <param name="depotKey">
+        /// The depot decryption key for the depot that will be downloaded.
+        /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
+        /// </param>
+        /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
+        /// <exception cref="System.IO.InvalidDataException">Thrown if the downloaded data does not match the expected length.</exception>
+        /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
+        /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
+        public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk, Server server, string cdnAuthToken, byte[] depotKey )
+        {
+            if ( server == null )
+            {
+                throw new ArgumentNullException( nameof( server ) );
+            }
+
+            if ( chunk == null )
+            {
+                throw new ArgumentNullException( nameof( chunk ) );
+            }
+
+            if ( chunk.ChunkID == null )
+            {
+                throw new ArgumentException( "Chunk must have a ChunkID.", nameof( chunk ) );
+            }
+
+            var chunkID = Utils.EncodeHexString( chunk.ChunkID );
+
+            var chunkData = await DoRawCommandAsync( server, HttpMethod.Get, "depot", doAuth: true, args: string.Format( "{0}/chunk/{1}", depotId, chunkID ), authtoken: cdnAuthToken ).ConfigureAwait( false );
+
+            // assert that lengths match only if the chunk has a length assigned.
+            if ( chunk.CompressedLength != default( uint ) && chunkData.Length != chunk.CompressedLength )
+            {
+                throw new InvalidDataException( $"Length mismatch after downloading depot chunk! (was {chunkData.Length}, but should be {chunk.CompressedLength})" );
+            }
+
+            var depotChunk = new DepotChunk
+            {
+                ChunkInfo = chunk,
+                Data = chunkData,
+            };
+
+            if ( depotKey != null )
+            {
+                // if we have the depot key, we can process the chunk immediately
+                depotChunk.Process( depotKey );
+            }
+
+            return depotChunk;
         }
 
         /// <summary>
@@ -681,51 +744,6 @@ namespace SteamKit2
             }
 
             return dataKv;
-        }
-
-        async Task<DepotManifest> DownloadManifestCoreAsync( uint depotId, ulong manifestId, Server server, string cdnAuthToken, byte[] depotKey )
-        {
-
-            var manifestData = await DoRawCommandAsync( server, HttpMethod.Get, "depot", doAuth: true, args: string.Format( "{0}/manifest/{1}/5", depotId, manifestId ), authtoken: cdnAuthToken ).ConfigureAwait( false );
-
-            manifestData = ZipUtil.Decompress( manifestData );
-
-            var depotManifest = new DepotManifest( manifestData );
-
-            if ( depotKey != null )
-            {
-                // if we have the depot key, decrypt the manifest filenames
-                depotManifest.DecryptFilenames( depotKey );
-            }
-
-            return depotManifest;
-        }
-
-        async Task<DepotChunk> DownloadDepotChunkCoreAsync( uint depotId, DepotManifest.ChunkData chunk, Server server, string cdnAuthToken, byte[] depotKey )
-        {
-            var chunkID = Utils.EncodeHexString( chunk.ChunkID );
-
-            var chunkData = await DoRawCommandAsync( server, HttpMethod.Get, "depot", doAuth: true, args: string.Format( "{0}/chunk/{1}", depotId, chunkID ), authtoken: cdnAuthToken ).ConfigureAwait( false );
-
-            // assert that lengths match only if the chunk has a length assigned.
-            if ( chunk.CompressedLength != default( uint ) && chunkData.Length != chunk.CompressedLength )
-            {
-                throw new InvalidDataException( $"Length mismatch after downloading depot chunk! (was {chunkData.Length}, but should be {chunk.CompressedLength})" );
-            }
-
-            var depotChunk = new DepotChunk
-            {
-                ChunkInfo = chunk,
-                Data = chunkData,
-            };
-
-            if ( depotKey != null )
-            {
-                // if we have the depot key, we can process the chunk immediately
-                depotChunk.Process( depotKey );
-            }
-
-            return depotChunk;
         }
     }
 }
