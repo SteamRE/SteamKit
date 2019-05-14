@@ -366,21 +366,29 @@ namespace SteamKit2
             /// </exception>
             public override bool TryInvokeMember( InvokeMemberBinder binder, object[] args, out object result )
             {
-                if ( binder.CallInfo.ArgumentNames.Count != args.Length )
+                IDictionary<string, object> methodArgs;
+
+                if ( args.Length == 1 && binder.CallInfo.ArgumentNames.Count == 0 && args[ 0 ] is IDictionary<string, object> explicitArgs )
                 {
-                    throw new InvalidOperationException( "Argument mismatch in API call. All parameters must be passed as named arguments." );
+                    methodArgs = explicitArgs;
+                }
+                else if ( binder.CallInfo.ArgumentNames.Count != args.Length )
+                {
+                    throw new InvalidOperationException( "Argument mismatch in API call. All parameters must be passed as named arguments, or as a single un-named dictionary argument." );
+                }
+                else
+                {
+                    methodArgs = Enumerable.Range( 0, args.Length )
+                        .ToDictionary( 
+                            x => binder.CallInfo.ArgumentNames[ x ],
+                            x => args[ x ] );
                 }
 
                 var apiArgs = new Dictionary<string, object>();
-
                 var requestMethod = HttpMethod.Get;
 
-                // convert named arguments into key value pairs
-                for ( int x = 0 ; x < args.Length ; x++ )
+                foreach ( var ( argName, argValue ) in methodArgs )
                 {
-                    string argName = binder.CallInfo.ArgumentNames[ x ];
-                    object argValue = args[ x ];
-
                     // method is a reserved param for selecting the http request method
                     if ( argName.Equals( "method", StringComparison.OrdinalIgnoreCase ) )
                     {
@@ -391,11 +399,11 @@ namespace SteamKit2
                     else if ( argValue is IEnumerable && !( argValue is string ) )
                     {
                         int index = 0;
-                        IEnumerable enumerable = argValue as IEnumerable;
+                        var enumerable = argValue as IEnumerable;
 
                         foreach ( object value in enumerable )
                         {
-                            apiArgs.Add( String.Format( "{0}[{1}]", argName, index++ ), value );
+                            apiArgs.Add( string.Format( "{0}[{1}]", argName, index++ ), value );
                         }
 
                         continue;
