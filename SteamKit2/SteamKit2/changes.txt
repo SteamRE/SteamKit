@@ -1,5 +1,19 @@
 ------------------------------------------------------------------------------
-v 2.2.0 (Beta) 	Feb 9, 2019
+v 2.2.0 (Beta 2) 	May 15, 2019
+------------------------------------------------------------------------------
+* Added overloads for `CDNClient.DownloadManifestAsync` and `CDNClient.DownloadDepotChunkAsync` for advanced consumers that perform their own server and key management.
+* The dynamic interface for WebAPI can now take a single un-named argument of `IDictionary<string, object>` instead of having to pass each argument as a named parameter. 
+* Updated Steam enums.
+
+BREAKING CHANGES
+* WebAPI now takes a arguments dictionary as `Dictionary<string, object>`, rather than `Dictionary<string, string>`.
+	* Arguments of type `byte[]` are converted to their Base-64 representation.
+	* Arguments of value `null` are treated as empty strings.
+	* All other arguments are converted to `string` by calling `object.ToString()`.
+
+
+------------------------------------------------------------------------------
+v 2.2.0 (Beta 1) 	Feb 9, 2019
 ------------------------------------------------------------------------------
 * Added an overload of `SteamDirectory.LoadAsync` that accepts a maximum number of servers to return.
 * Added `ServerRecord.TryCreateSocketServer` to try parse a record from a string.
