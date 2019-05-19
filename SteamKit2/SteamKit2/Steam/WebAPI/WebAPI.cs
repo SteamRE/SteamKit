@@ -396,7 +396,7 @@ namespace SteamKit2
                         continue;
                     }
                     // flatten lists
-                    else if ( argValue is IEnumerable && !( argValue is string ) )
+                    else if ( argValue is IEnumerable && !( argValue is string || argValue is byte[] ) )
                     {
                         int index = 0;
                         var enumerable = argValue as IEnumerable;
