@@ -9,7 +9,7 @@ BREAKING CHANGES
 * WebAPI now takes a arguments dictionary as `Dictionary<string, object>`, rather than `Dictionary<string, string>`.
 	* Arguments of type `byte[]` are converted to their Base-64 representation.
 	* Arguments of value `null` are treated as empty strings.
-	* All other arguments are converted to `string` by calling `object.ToString()`.
+	* All other arguments are converted to `string` by calling `object.ToString()` and encoded to a URL safe representation.
 
 
 ------------------------------------------------------------------------------
