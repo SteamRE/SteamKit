@@ -187,7 +187,7 @@ namespace SteamKit2
             var loginReq = new ClientMsgProtobuf<CMsgClientUFSLoginRequest>( EMsg.ClientUFSLoginRequest );
             loginReq.SourceJobID = jobId;
 
-            loginReq.Body.apps.AddRange( appIds );
+            loginReq.Body.apps = appIds.ToArray();
             loginReq.Body.protocol_version = MsgClientLogon.CurrentProtocol;
             loginReq.Body.am_session_token = steamClient.SessionToken;
 

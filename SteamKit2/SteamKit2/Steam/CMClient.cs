@@ -571,7 +571,7 @@ namespace SteamKit2.Internal
         void HandleCMList( IPacketMsg packetMsg )
         {
             var cmMsg = new ClientMsgProtobuf<CMsgClientCMList>( packetMsg );
-            DebugLog.Assert( cmMsg.Body.cm_addresses.Count == cmMsg.Body.cm_ports.Count, "CMClient", "HandleCMList received malformed message" );
+            DebugLog.Assert( cmMsg.Body.cm_addresses.Length == cmMsg.Body.cm_ports.Length, "CMClient", "HandleCMList received malformed message" );
 
             var cmList = cmMsg.Body.cm_addresses
                 .Zip( cmMsg.Body.cm_ports, ( addr, port ) => ServerRecord.CreateSocketServer( new IPEndPoint( NetHelpers.GetIPAddress( addr ) , ( int )port ) ) );
