@@ -52,14 +52,5 @@ namespace ProtobufGen
 
             ctx.WriteLine( $"{Escape( outputType )} {Escape( method.Name )}({Escape( inputType )} request);" );
         }
-
-        protected Access GetAccess( ServiceDescriptorProto obj )
-            => NullIfInherit( obj?.Options?.GetOptions()?.Access ) ?? Access.Public;
-
-        //
-        // Copied from base class
-        //
-        private static Access? NullIfInherit( Access? access )
-            => access == Access.Inherit ? null : access;
     }
 }
