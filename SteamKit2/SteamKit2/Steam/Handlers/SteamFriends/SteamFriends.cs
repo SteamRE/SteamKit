@@ -627,7 +627,7 @@ namespace SteamKit2
 
             var request = new ClientMsgProtobuf<CMsgClientRequestFriendData>( EMsg.ClientRequestFriendData );
 
-            request.Body.friends= steamIdList.Select( sID => sID.ConvertToUInt64() ).ToArray();
+            request.Body.friends.AddRange( steamIdList.Select( sID => sID.ConvertToUInt64() ) );
             request.Body.persona_state_requested = ( uint )requestedInfo;
 
             this.Client.Send( request );
@@ -808,8 +808,6 @@ namespace SteamKit2
 
             reqInfo.Body.persona_state_requested = ( uint )Client.Configuration.DefaultPersonaStateFlags;
 
-            var friendsToRequest = new List<SteamID>();
-
             lock ( listLock )
             {
                 List<SteamID> friendsToRemove = new List<SteamID>();
@@ -861,7 +859,7 @@ namespace SteamKit2
                     if ( !list.Body.bincremental )
                     {
                         // request persona state for our friend & clan list when it's a non-incremental update
-                        friendsToRequest.Add( friendId );
+                        reqInfo.Body.friends.Add( friendId );
                     }
                 }
 
@@ -871,9 +869,8 @@ namespace SteamKit2
 
             }
 
-            if ( friendsToRequest.Count > 0 )
+            if ( reqInfo.Body.friends.Count > 0 )
             {
-                reqInfo.Body.friends = friendsToRequest.Select( f => f.ConvertToUInt64() ).ToArray();
                 this.Client.Send( reqInfo );
             }
 

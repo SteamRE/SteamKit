@@ -167,8 +167,8 @@ namespace SteamKit2
             var request = new ClientMsgProtobuf<CMsgClientPICSAccessTokenRequest>( EMsg.ClientPICSAccessTokenRequest );
             request.SourceJobID = Client.GetNextJobID();
 
-            request.Body.packageids = packageIds.ToArray();
-            request.Body.appids = appIds.ToArray();
+            request.Body.packageids.AddRange( packageIds );
+            request.Body.appids.AddRange( appIds );
 
             this.Client.Send( request );
 
@@ -336,7 +336,7 @@ namespace SteamKit2
             var request = new ClientMsgProtobuf<CMsgClientRequestFreeLicense>( EMsg.ClientRequestFreeLicense );
             request.SourceJobID = Client.GetNextJobID();
 
-            request.Body.appids = apps.ToArray();
+            request.Body.appids.AddRange( apps );
 
             this.Client.Send( request );
 
