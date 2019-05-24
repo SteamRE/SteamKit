@@ -10,6 +10,8 @@ namespace ProtobufGen
         {
         }
 
+        protected override bool UseArray( FieldDescriptorProto field ) => false;
+
         protected override void WriteExtension( GeneratorContext ctx, FieldDescriptorProto field )
         {
         }
