@@ -42,16 +42,32 @@ namespace ProtobufGen
                 Console.Error.WriteLine( $"Could not find file '{fileName}'." );
             }
 
+            foreach (var file in set.Files)
+            {
+                file.Syntax = "proto2";
+            }
+
             set.Process();
 
             var errors = set.GetErrors();
             if ( errors.Length > 0 )
             {
+                var errorsCount = 0;
+
                 foreach ( var error in errors )
                 {
                     Console.Out.WriteLine( $"{error.File} ({error.LineNumber}, {error.ColumnNumber}): {error.Message}" );
+
+                    if (error.IsError)
+                    {
+                        errorsCount++;
+                    }
                 }
-                // return -1;
+
+                if (errorsCount > 0)
+                {
+                    return errorsCount;
+                }
             }
 
             var codegen = new SteamKitCSharpCodeGenerator();
@@ -59,7 +75,7 @@ namespace ProtobufGen
             var options = new Dictionary<string, string>
             {
                 [ "langver" ] = "7.0",
-                [ "names" ] = "original"
+                [ "names" ] = "original",
             };
 
             var files = codegen.Generate( set, options: options );
