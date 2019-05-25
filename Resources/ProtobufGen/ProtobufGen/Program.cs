@@ -42,11 +42,6 @@ namespace ProtobufGen
                 Console.Error.WriteLine( $"Could not find file '{fileName}'." );
             }
 
-            foreach (var file in set.Files)
-            {
-                file.Syntax = "proto2";
-            }
-
             set.Process();
 
             var errors = set.GetErrors();
