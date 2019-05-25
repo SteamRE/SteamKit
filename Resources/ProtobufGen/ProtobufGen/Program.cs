@@ -51,7 +51,7 @@ namespace ProtobufGen
 
                 foreach ( var error in errors )
                 {
-                    Console.Out.WriteLine( $"{error.File} ({error.LineNumber}, {error.ColumnNumber}): {error.Message}" );
+                    Console.Error.WriteLine( $"{error.File} ({error.LineNumber}, {error.ColumnNumber}): {error.Message}" );
 
                     if (error.IsError)
                     {
