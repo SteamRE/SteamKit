@@ -39,8 +39,8 @@ $protos | % {
         '--output', (Join-Path $SK2Base $_.ClassFilePath),
         '--namespace', $_.Namespace
     )
-    
-    & dotnet  $ProtoGenDll $params > $null
+
+    & dotnet $ProtoGenDll $params > $null
 
     $_
 }
