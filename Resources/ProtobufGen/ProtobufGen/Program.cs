@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using CommandLine;
 using Google.Protobuf.Reflection;
@@ -31,6 +32,11 @@ namespace ProtobufGen
         {
             var set = ParseFiles( arguments );
 
+            if ( set == null )
+            {
+                return -1;
+            }
+
             var errors = set.GetErrors();
             PrintErrors( errors, out var numErrors, out var reparse );
 
@@ -42,12 +48,10 @@ namespace ProtobufGen
             {
                 set = ReparseFiles( arguments, set );
                 errors = set.GetErrors();
-                PrintErrors( errors, out numErrors, out _ );
+                PrintErrors( errors, out numErrors, out reparse );
 
-                if ( numErrors > 0 )
-                {
-                    return numErrors;
-                }
+                Debug.Assert( numErrors == 0, "Errors should have been handled by first pass." );
+                Debug.Assert( !reparse, "Should not have to reparse after second pass." );
             }
 
             var codegen = new SteamKitCSharpCodeGenerator();
@@ -86,6 +90,7 @@ namespace ProtobufGen
             if ( !set.Add( fileName, includeInOutput: true ) )
             {
                 Console.Error.WriteLine( $"Could not find file '{fileName}'." );
+                return null;
             }
 
             set.Process();
