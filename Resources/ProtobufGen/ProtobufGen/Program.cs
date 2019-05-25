@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using CommandLine;
 using Google.Protobuf.Reflection;
-using ProtoBuf.Reflection;
 
 namespace ProtobufGen
 {
@@ -28,40 +27,26 @@ namespace ProtobufGen
             }
         }
 
-        static int Run(Options arguments)
+        static int Run( Options arguments )
         {
-            var set = new FileDescriptorSet
-            {
-                DefaultPackage = arguments.Namespace
-            };
-            set.AddImportPath( Path.GetDirectoryName( arguments.ProtobufPath ) );
-
-            var fileName = Path.GetFileName( arguments.ProtobufPath );
-            if (!set.Add( fileName, includeInOutput: true ))
-            {
-                Console.Error.WriteLine( $"Could not find file '{fileName}'." );
-            }
-
-            set.Process();
+            var set = ParseFiles( arguments );
 
             var errors = set.GetErrors();
-            if ( errors.Length > 0 )
+            PrintErrors( errors, out var numErrors, out var reparse );
+
+            if ( numErrors > 0 )
             {
-                var errorsCount = 0;
+                return numErrors;
+            }
+            else if ( reparse )
+            {
+                set = ReparseFiles( arguments, set );
+                errors = set.GetErrors();
+                PrintErrors( errors, out numErrors, out _ );
 
-                foreach ( var error in errors )
+                if ( numErrors > 0 )
                 {
-                    Console.Out.WriteLine( $"{error.File} ({error.LineNumber}, {error.ColumnNumber}): {error.Message}" );
-
-                    if (error.IsError)
-                    {
-                        errorsCount++;
-                    }
-                }
-
-                if (errorsCount > 0)
-                {
-                    return errorsCount;
+                    return numErrors;
                 }
             }
 
@@ -74,10 +59,11 @@ namespace ProtobufGen
             };
 
             var files = codegen.Generate( set, options: options );
+            var fileName = Path.GetFileName( arguments.ProtobufPath );
 
-            foreach (var file in files)
+            foreach ( var file in files )
             {
-                if (Path.GetFileNameWithoutExtension(file.Name) != Path.GetFileNameWithoutExtension( fileName ) )
+                if ( Path.GetFileNameWithoutExtension( file.Name ) != Path.GetFileNameWithoutExtension( fileName ) )
                 {
                     continue;
                 }
@@ -87,17 +73,83 @@ namespace ProtobufGen
 
             return 0;
         }
+
+        static FileDescriptorSet ParseFiles( Options arguments )
+        {
+            var set = new FileDescriptorSet
+            {
+                DefaultPackage = arguments.Namespace
+            };
+            set.AddImportPath( Path.GetDirectoryName( arguments.ProtobufPath ) );
+
+            var fileName = Path.GetFileName( arguments.ProtobufPath );
+            if ( !set.Add( fileName, includeInOutput: true ) )
+            {
+                Console.Error.WriteLine( $"Could not find file '{fileName}'." );
+            }
+
+            set.Process();
+            return set;
+        }
+
+        static FileDescriptorSet ReparseFiles( Options arguments, FileDescriptorSet firstPass )
+        {
+            var set = new FileDescriptorSet
+            {
+                DefaultPackage = firstPass.DefaultPackage
+            };
+
+            set.AddImportPath( Path.GetDirectoryName( arguments.ProtobufPath ) );
+
+            foreach ( var file in firstPass.Files )
+            {
+                if ( string.IsNullOrEmpty( file.Syntax ) )
+                {
+                    file.Syntax = "proto2";
+                }
+                set.Files.Add( file );
+            }
+
+            set.Process();
+            return set;
+        }
+
+        static void PrintErrors( ProtoBuf.Reflection.Error[] errors, out int numErrors, out bool reparse )
+        {
+            numErrors = 0;
+            reparse = false;
+
+            if ( errors.Length > 0 )
+            {
+                foreach ( var error in errors )
+                {
+                    if ( error.IsError )
+                    {
+                        numErrors++;
+                    }
+
+                    if ( error.IsWarning && error.Message.StartsWith( "no syntax specified;" ) )
+                    {
+                        reparse = true;
+                    }
+                    else if ( !error.IsWarning || !error.Message.StartsWith( "import not used:" ) )
+                    {
+                        Console.Error.WriteLine( $"{error.File} ({error.LineNumber}, {error.ColumnNumber}): {error.Message}" );
+                    }
+                }
+            }
+        }
     }
 
     class Options
     {
-        [Option("namespace")]
+        [Option( "namespace" )]
         public string Namespace { get; set; }
 
-        [Option("proto", Required = true)]
+        [Option( "proto", Required = true )]
         public string ProtobufPath { get; set; }
 
-        [Option("output", Required = true)]
+        [Option( "output", Required = true )]
         public string Output { get; set; }
     }
 }
