@@ -7,6 +7,7 @@ using CSGO = SteamKit2.GC.CSGO.Internal;
 using Dota = SteamKit2.GC.Dota.Internal;
 using TF2 = SteamKit2.GC.TF2.Internal;
 using Artifact = SteamKit2.GC.Artifact.Internal;
+using Underlords = SteamKit2.GC.Underlords.Internal;
 
 namespace NetHookAnalyzer2
 {
@@ -85,6 +86,20 @@ namespace NetHookAnalyzer2
                 [(uint)Artifact.ESOMsg.k_ESOMsg_Destroy] = typeof(Artifact.CMsgSOSingleObject),
                 [(uint)Artifact.ESOMsg.k_ESOMsg_Update] = typeof(Artifact.CMsgSOSingleObject),
                 [(uint)Artifact.ESOMsg.k_ESOMsg_UpdateMultiple] = typeof(Artifact.CMsgSOMultipleObjects),
+            },
+            [ WellKnownAppIDs.Underlords ] = new Dictionary<uint, Type>
+            {
+                [(uint)Underlords.EGCBaseClientMsg.k_EMsgGCClientHello] = typeof(Underlords.CMsgClientHello),
+                [(uint)Underlords.EGCBaseClientMsg.k_EMsgGCClientWelcome] = typeof(Underlords.CMsgClientWelcome),
+                [(uint)Underlords.EGCBaseClientMsg.k_EMsgGCServerHello] = typeof(Underlords.CMsgClientHello),
+                [(uint)Underlords.EGCBaseClientMsg.k_EMsgGCServerWelcome] = typeof(Underlords.CMsgClientWelcome),
+                [(uint)Underlords.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = typeof(Underlords.CMsgConnectionStatus),
+                [(uint)Underlords.EGCBaseClientMsg.k_EMsgGCServerConnectionStatus] = typeof(Underlords.CMsgConnectionStatus),
+
+                [(uint)Underlords.ESOMsg.k_ESOMsg_Create] = typeof(Underlords.CMsgSOSingleObject),
+                [(uint)Underlords.ESOMsg.k_ESOMsg_Destroy] = typeof(Underlords.CMsgSOSingleObject),
+                [(uint)Underlords.ESOMsg.k_ESOMsg_Update] = typeof(Underlords.CMsgSOSingleObject),
+                [(uint)Underlords.ESOMsg.k_ESOMsg_UpdateMultiple] = typeof(Underlords.CMsgSOMultipleObjects),
             },
         };
     }
