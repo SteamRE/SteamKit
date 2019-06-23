@@ -7,6 +7,7 @@ using CSGO = SteamKit2.GC.CSGO.Internal;
 using Dota = SteamKit2.GC.Dota.Internal;
 using TF2 = SteamKit2.GC.TF2.Internal;
 using Artifact = SteamKit2.GC.Artifact.Internal;
+using Underlords = SteamKit2.GC.Underlords.Internal;
 
 namespace NetHookAnalyzer2
 {
@@ -53,6 +54,8 @@ namespace NetHookAnalyzer2
                 [(uint)Dota.EGCBaseClientMsg.k_EMsgGCClientWelcome] = typeof(Dota.CMsgClientWelcome),
                 [(uint)Dota.EGCBaseClientMsg.k_EMsgGCServerHello] = typeof(Dota.CMsgClientHello),
                 [(uint)Dota.EGCBaseClientMsg.k_EMsgGCServerWelcome] = typeof(Dota.CMsgClientWelcome),
+                [(uint)Dota.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = typeof(Dota.CMsgConnectionStatus),
+                [(uint)Dota.EGCBaseClientMsg.k_EMsgGCServerConnectionStatus] = typeof(Dota.CMsgConnectionStatus),
 
                 [(uint)Dota.ESOMsg.k_ESOMsg_Create] = typeof(Dota.CMsgSOSingleObject),
                 [(uint)Dota.ESOMsg.k_ESOMsg_Destroy] = typeof(Dota.CMsgSOSingleObject),
@@ -68,6 +71,8 @@ namespace NetHookAnalyzer2
                 [(uint)CSGO.EGCBaseClientMsg.k_EMsgGCClientWelcome] = typeof(CSGO.CMsgClientWelcome),
                 [(uint)CSGO.EGCBaseClientMsg.k_EMsgGCServerHello] = typeof(CSGO.CMsgClientHello),
                 [(uint)CSGO.EGCBaseClientMsg.k_EMsgGCServerWelcome] = typeof(CSGO.CMsgClientWelcome),
+                [(uint)CSGO.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = typeof(CSGO.CMsgConnectionStatus),
+                [(uint)CSGO.EGCBaseClientMsg.k_EMsgGCServerConnectionStatus] = typeof(CSGO.CMsgConnectionStatus),
 
                 [(uint)CSGO.ESOMsg.k_ESOMsg_Create] = typeof(CSGO.CMsgSOSingleObject),
                 [(uint)CSGO.ESOMsg.k_ESOMsg_Destroy] = typeof(CSGO.CMsgSOSingleObject),
@@ -80,11 +85,27 @@ namespace NetHookAnalyzer2
                 [(uint)Artifact.EGCBaseClientMsg.k_EMsgGCClientWelcome] = typeof(Artifact.CMsgClientWelcome),
                 [(uint)Artifact.EGCBaseClientMsg.k_EMsgGCServerHello] = typeof(Artifact.CMsgClientHello),
                 [(uint)Artifact.EGCBaseClientMsg.k_EMsgGCServerWelcome] = typeof(Artifact.CMsgClientWelcome),
+                [(uint)Artifact.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = typeof(Artifact.CMsgConnectionStatus),
+                [(uint)Artifact.EGCBaseClientMsg.k_EMsgGCServerConnectionStatus] = typeof(Artifact.CMsgConnectionStatus),
 
                 [(uint)Artifact.ESOMsg.k_ESOMsg_Create] = typeof(Artifact.CMsgSOSingleObject),
                 [(uint)Artifact.ESOMsg.k_ESOMsg_Destroy] = typeof(Artifact.CMsgSOSingleObject),
                 [(uint)Artifact.ESOMsg.k_ESOMsg_Update] = typeof(Artifact.CMsgSOSingleObject),
                 [(uint)Artifact.ESOMsg.k_ESOMsg_UpdateMultiple] = typeof(Artifact.CMsgSOMultipleObjects),
+            },
+            [ WellKnownAppIDs.Underlords ] = new Dictionary<uint, Type>
+            {
+                [(uint)Underlords.EGCBaseClientMsg.k_EMsgGCClientHello] = typeof(Underlords.CMsgClientHello),
+                [(uint)Underlords.EGCBaseClientMsg.k_EMsgGCClientWelcome] = typeof(Underlords.CMsgClientWelcome),
+                [(uint)Underlords.EGCBaseClientMsg.k_EMsgGCServerHello] = typeof(Underlords.CMsgClientHello),
+                [(uint)Underlords.EGCBaseClientMsg.k_EMsgGCServerWelcome] = typeof(Underlords.CMsgClientWelcome),
+                [(uint)Underlords.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = typeof(Underlords.CMsgConnectionStatus),
+                [(uint)Underlords.EGCBaseClientMsg.k_EMsgGCServerConnectionStatus] = typeof(Underlords.CMsgConnectionStatus),
+
+                [(uint)Underlords.ESOMsg.k_ESOMsg_Create] = typeof(Underlords.CMsgSOSingleObject),
+                [(uint)Underlords.ESOMsg.k_ESOMsg_Destroy] = typeof(Underlords.CMsgSOSingleObject),
+                [(uint)Underlords.ESOMsg.k_ESOMsg_Update] = typeof(Underlords.CMsgSOSingleObject),
+                [(uint)Underlords.ESOMsg.k_ESOMsg_UpdateMultiple] = typeof(Underlords.CMsgSOMultipleObjects),
             },
         };
     }
