@@ -54,6 +54,8 @@ namespace NetHookAnalyzer2
                 [(uint)Dota.EGCBaseClientMsg.k_EMsgGCClientWelcome] = typeof(Dota.CMsgClientWelcome),
                 [(uint)Dota.EGCBaseClientMsg.k_EMsgGCServerHello] = typeof(Dota.CMsgClientHello),
                 [(uint)Dota.EGCBaseClientMsg.k_EMsgGCServerWelcome] = typeof(Dota.CMsgClientWelcome),
+                [(uint)Dota.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = typeof(Dota.CMsgConnectionStatus),
+                [(uint)Dota.EGCBaseClientMsg.k_EMsgGCServerConnectionStatus] = typeof(Dota.CMsgConnectionStatus),
 
                 [(uint)Dota.ESOMsg.k_ESOMsg_Create] = typeof(Dota.CMsgSOSingleObject),
                 [(uint)Dota.ESOMsg.k_ESOMsg_Destroy] = typeof(Dota.CMsgSOSingleObject),
@@ -69,6 +71,8 @@ namespace NetHookAnalyzer2
                 [(uint)CSGO.EGCBaseClientMsg.k_EMsgGCClientWelcome] = typeof(CSGO.CMsgClientWelcome),
                 [(uint)CSGO.EGCBaseClientMsg.k_EMsgGCServerHello] = typeof(CSGO.CMsgClientHello),
                 [(uint)CSGO.EGCBaseClientMsg.k_EMsgGCServerWelcome] = typeof(CSGO.CMsgClientWelcome),
+                [(uint)CSGO.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = typeof(CSGO.CMsgConnectionStatus),
+                [(uint)CSGO.EGCBaseClientMsg.k_EMsgGCServerConnectionStatus] = typeof(CSGO.CMsgConnectionStatus),
 
                 [(uint)CSGO.ESOMsg.k_ESOMsg_Create] = typeof(CSGO.CMsgSOSingleObject),
                 [(uint)CSGO.ESOMsg.k_ESOMsg_Destroy] = typeof(CSGO.CMsgSOSingleObject),
@@ -81,6 +85,8 @@ namespace NetHookAnalyzer2
                 [(uint)Artifact.EGCBaseClientMsg.k_EMsgGCClientWelcome] = typeof(Artifact.CMsgClientWelcome),
                 [(uint)Artifact.EGCBaseClientMsg.k_EMsgGCServerHello] = typeof(Artifact.CMsgClientHello),
                 [(uint)Artifact.EGCBaseClientMsg.k_EMsgGCServerWelcome] = typeof(Artifact.CMsgClientWelcome),
+                [(uint)Artifact.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = typeof(Artifact.CMsgConnectionStatus),
+                [(uint)Artifact.EGCBaseClientMsg.k_EMsgGCServerConnectionStatus] = typeof(Artifact.CMsgConnectionStatus),
 
                 [(uint)Artifact.ESOMsg.k_ESOMsg_Create] = typeof(Artifact.CMsgSOSingleObject),
                 [(uint)Artifact.ESOMsg.k_ESOMsg_Destroy] = typeof(Artifact.CMsgSOSingleObject),
