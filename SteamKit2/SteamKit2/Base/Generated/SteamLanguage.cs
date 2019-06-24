@@ -1712,7 +1712,6 @@ namespace SteamKit2
 		RequestInitiator = 4,
 		Ignored = 5,
 		IgnoredFriend = 6,
-		SuggestedFriend = 7,
 		Max = 8,
 	}
 	[Flags]
@@ -2082,6 +2081,8 @@ namespace SteamKit2
 		Member = 3,
 		Kicked = 4,
 		KickAcknowledged = 5,
+		PendingApproval = 6,
+		RequestDenied = 7,
 	}
 	public enum EAuthSessionResponse
 	{
@@ -2262,6 +2263,10 @@ namespace SteamKit2
 	}
 	public enum EServerType
 	{
+		Util = -2,
+		Client = -3,
+		CServer = -4,
+		CEconBase = -5,
 		Invalid = -1,
 		First = 0,
 		Shell = 0,
@@ -2277,17 +2282,17 @@ namespace SteamKit2
 		DRMS = 11,
 		Console = 13,
 		PICS = 14,
-		Client = 15,
+		ContentStats = 16,
 		DP = 17,
 		WG = 18,
 		SM = 19,
 		SLC = 20,
 		UFS = 21,
-		Util = 23,
 		Community = 24,
 		AppInformation = 26,
 		Spare = 27,
 		FTS = 28,
+		SiteLicense = 29,
 		PS = 30,
 		IS = 31,
 		CCS = 32,
@@ -2355,7 +2360,24 @@ namespace SteamKit2
 		Auth = 94,
 		StoreCatalog = 95,
 		HLTVRelay = 96,
-		Max = 97,
+		IDLS = 97,
+		Perf = 98,
+		ItemInventory = 99,
+		Watchdog = 100,
+		AccountHistory = 101,
+		Chat = 102,
+		Shader = 103,
+		AccountHardware = 104,
+		WebRTC = 105,
+		Giveaway = 106,
+		ChatRoom = 107,
+		VoiceChat = 108,
+		QMS = 109,
+		Trust = 110,
+		TimeMachine = 111,
+		VACDBMaster = 112,
+		ContentServerConfig = 113,
+		Max = 114,
 	}
 	public enum EBillingType
 	{
@@ -2545,6 +2567,8 @@ namespace SteamKit2
 		NeedsMobileConfirmation = 29,
 		TradingHoldForClearedTradeOffersInitiator = 30,
 		WouldExceedMaxAssetCount = 31,
+		DisabledInRegion = 32,
+		DisabledInPartnerRegion = 33,
 		OKToDeliver = 50,
 	}
 	[Flags]
