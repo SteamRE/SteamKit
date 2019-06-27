@@ -65,6 +65,11 @@ namespace SteamKit2
             public string Type { get; internal set; }
 
             /// <summary>
+            /// Gets the SourceID this server belongs to.
+            /// </summary>
+            public int SourceID { get; internal set; }
+
+            /// <summary>
             /// Gets the CellID this server belongs to.
             /// </summary>
             public uint CellID { get; internal set; }
@@ -370,7 +375,7 @@ namespace SteamKit2
             }
 
             // Nothing needs to be done to initialize a session to a CDN server
-            if ( csServer.Type == "CDN" )
+            if ( csServer.Type == "CDN" || csServer.Type == "SteamCache" )
             {
                 connectedServer = csServer;
                 return;
@@ -426,7 +431,7 @@ namespace SteamKit2
 
             string data;
 
-            if ( connectedServer.Type != "CDN" || cdnAuthToken == null )
+            if ( (connectedServer.Type != "CDN" && connectedServer.Type != "SteamCache") || cdnAuthToken == null )
             {
                 if ( appTicket == null )
                 {
