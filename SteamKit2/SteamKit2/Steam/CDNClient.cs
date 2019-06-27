@@ -431,7 +431,7 @@ namespace SteamKit2
 
             string data;
 
-            if ( connectedServer.Type != "CDN" || cdnAuthToken == null )
+            if ( (connectedServer.Type != "CDN" && connectedServer.Type != "SteamCache") || cdnAuthToken == null )
             {
                 if ( appTicket == null )
                 {
