@@ -1,19 +1,5 @@
 ------------------------------------------------------------------------------
-v 2.2.0 (Beta 2) 	May 15, 2019
-------------------------------------------------------------------------------
-* Added overloads for `CDNClient.DownloadManifestAsync` and `CDNClient.DownloadDepotChunkAsync` for advanced consumers that perform their own server and key management.
-* The dynamic interface for WebAPI can now take a single un-named argument of `IDictionary<string, object>` instead of having to pass each argument as a named parameter. 
-* Updated Steam enums.
-
-BREAKING CHANGES
-* WebAPI now takes a arguments dictionary as `Dictionary<string, object>`, rather than `Dictionary<string, string>`.
-	* Arguments of type `byte[]` are converted to their Base-64 representation.
-	* Arguments of value `null` are treated as empty strings.
-	* All other arguments are converted to `string` by calling `object.ToString()` and encoded to a URL safe representation.
-
-
-------------------------------------------------------------------------------
-v 2.2.0 (Beta 1) 	Feb 9, 2019
+v 2.2.0 	 	Jun 27, 2019
 ------------------------------------------------------------------------------
 * Added an overload of `SteamDirectory.LoadAsync` that accepts a maximum number of servers to return.
 * Added `ServerRecord.TryCreateSocketServer` to try parse a record from a string.
@@ -23,6 +9,9 @@ v 2.2.0 (Beta 1) 	Feb 9, 2019
 * Added `WalletInfoCallback.Balance64` for large Steam Wallet balances.
 * Added more details to `DepotManifest`.
 * Added SteamKit version to default HTTP user agent.
+* Added overloads for `CDNClient.DownloadManifestAsync` and `CDNClient.DownloadDepotChunkAsync` for advanced consumers that perform their own server and key management.
+* Added `ContentServerDirectoryService` for the discovery of ContentServers.
+* The dynamic interface for WebAPI can now take a single un-named argument of `IDictionary<string, object>` instead of having to pass each argument as a named parameter. 
 * Fixed concurrency issues with UDP connections.
 * Fixed final fallback connection to Steam when server list is unavailable.
 * Fixed thread safety issues in message deserialization.
@@ -31,6 +20,12 @@ v 2.2.0 (Beta 1) 	Feb 9, 2019
 * Fixed WebSocket CM servers not being marked as bad by the server list, and thus not being ignored on subsequent connection attempts.
 * Updated Steam protocol version.
 * Updated Steam enums and protobufs.
+
+BREAKING CHANGES
+* WebAPI now takes a arguments dictionary as `Dictionary<string, object>`, rather than `Dictionary<string, string>`.
+	* Arguments of type `byte[]` are converted to their Base-64 representation.
+	* Arguments of value `null` are treated as empty strings.
+	* All other arguments are converted to `string` by calling `object.ToString()` and encoded to a URL safe representation.
 
 
 ------------------------------------------------------------------------------
