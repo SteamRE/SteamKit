@@ -18,26 +18,15 @@ struct MsgInfo_t
 	const char *pchMsgName;
 	int nFlags;
 	EServerType k_EServerTarget;
-
-	uint32 nTimesSent;
-	uint64 uBytesSent;
-	
-	uint32 nTimesSentProfile;
-	uint64 uBytesSentProfile;
-
-	uint64 uUnk1;
+	uint32 nUnk1;
 };
 
-static_assert(sizeof(MsgInfo_t) == 56, "Wrong size of MsgInfo_t");
+static_assert(sizeof(MsgInfo_t) == 20, "Wrong size of MsgInfo_t");
 static_assert(offsetof(MsgInfo_t, eMsg) == 0, "Wrong offset of MsgInfo_t::eMsg");
 static_assert(offsetof(MsgInfo_t, pchMsgName) == 4, "Wrong offset of MsgInfo_t::pchMsgName");
 static_assert(offsetof(MsgInfo_t, nFlags) == 8, "Wrong offset of MsgInfo_t::nFlags");
 static_assert(offsetof(MsgInfo_t, k_EServerTarget) == 12, "Wrong offset of MsgInfo_t::k_EServerTarget");
-static_assert(offsetof(MsgInfo_t, nTimesSent) == 16, "Wrong offset of MsgInfo_t::nTimesSent");
-static_assert(offsetof(MsgInfo_t, uBytesSent) == 24, "Wrong offset of MsgInfo_t::uBytesSent");
-static_assert(offsetof(MsgInfo_t, nTimesSentProfile) == 32, "Wrong offset of MsgInfo_t::nTimesSentProfile");
-static_assert(offsetof(MsgInfo_t, uBytesSentProfile) == 40, "Wrong offset of MsgInfo_t::uBytesSentProfile");
-static_assert(offsetof(MsgInfo_t, uUnk1) == 48, "Wrong offset of MsgInfo_t::uUnk1");
+static_assert(offsetof(MsgInfo_t, nUnk1) == 16, "Wrong offset of MsgInfo_t::uUnk1");
 
 typedef std::map<EMsg, MsgInfo_t *> MsgList;
 typedef std::pair<EMsg, MsgInfo_t *> MsgPair;
