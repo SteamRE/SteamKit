@@ -6,6 +6,7 @@
 #include <cstddef>
 
 #include <map>
+#include <Psapi.h>
 
 
 
@@ -79,10 +80,22 @@ CCrypto::CCrypto()
 		const uint32 uNumMessages = *(uint32 *)( pGetMessageList + uMessageListCountPtrOffset );
 
 		g_pLogger->LogConsole( "pGetMessageList = 0x%x\npInfos = 0x%x\nnumMessages = %d\n", pGetMessageList, pInfos, uNumMessages );
+		
+		HMODULE sc = GetModuleHandle("steamclient.dll");
+		MODULEINFO modInfo;
+		GetModuleInformation(GetCurrentProcess(), sc, &modInfo, sizeof(modInfo));
 
+		uintptr_t uSteamAddrMin = (uintptr_t)modInfo.lpBaseOfDll;
+		uintptr_t uSteamAddrMax = (uintptr_t)modInfo.lpBaseOfDll + modInfo.SizeOfImage;
 
 		for ( uint16 x = 0 ; x < uNumMessages; x++ )
 		{
+			uintptr_t uMsgNameAddr = (uintptr_t)pInfos->pchMsgName;
+			if (uMsgNameAddr < uSteamAddrMin || uMsgNameAddr >= uSteamAddrMax)
+			{
+				g_pLogger->LogConsole("Found bad emsg name. Check size and layout of MsgInfo_t. Aborting emsg lookup.\n");
+				break;
+			}
 			eMsgList.insert( MsgPair( pInfos->eMsg, pInfos ) );
 
 			pInfos++;
