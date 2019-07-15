@@ -69,6 +69,7 @@ namespace SteamKit2
             this.AddHandler( new SteamTrading() );
             this.AddHandler( new SteamUnifiedMessages() );
             this.AddHandler( new SteamScreenshots() );
+            this.AddHandler( new SteamMatchmaking() );
 
             using ( var process = Process.GetCurrentProcess() )
             {
@@ -390,9 +391,16 @@ namespace SteamKit2
 
             jobManager.SetTimeoutsEnabled( false );
 
+            ClearHandlerCaches();
+
             PostCallback( new DisconnectedCallback( userInitiated ) );
         }
 
+
+        void ClearHandlerCaches()
+        {
+            GetHandler<SteamMatchmaking>()?.ClearLobbyCache();
+        }
 
         void HandleCMList( IPacketMsg packetMsg )
         {

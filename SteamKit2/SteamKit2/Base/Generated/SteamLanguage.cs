@@ -3169,6 +3169,38 @@ namespace SteamKit2
 		Email = 1,
 		MobileApp = 2,
 	}
+	public enum ELobbyType
+	{
+		Private = 0,
+		FriendsOnly = 1,
+		Public = 2,
+		Invisible = 3,
+		PrivateUnique = 4,
+	}
+	public enum ELobbyFilterType
+	{
+		String = 0,
+		Numerical = 1,
+		SlotsAvailable = 2,
+		NearValue = 3,
+		Distance = 4,
+	}
+	public enum ELobbyComparison
+	{
+		EqualToOrLessThan = -2,
+		LessThan = -1,
+		Equal = 0,
+		GreaterThan = 1,
+		EqualToOrGreaterThan = 2,
+		NotEqual = 3,
+	}
+	public enum ELobbyDistanceFilter
+	{
+		Close = 0,
+		Default = 1,
+		Far = 2,
+		Worldwide = 3,
+	}
 	public enum EUdpPacketType : byte
 	{
 		Invalid = 0,
