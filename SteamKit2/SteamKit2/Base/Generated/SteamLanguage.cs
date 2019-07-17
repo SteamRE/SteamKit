@@ -1816,6 +1816,7 @@ namespace SteamKit2
 		ClientTypeTenfoot = 1024,
 		ClientTypeVR = 2048,
 		LaunchTypeGamepad = 4096,
+		LaunchTypeCompatTool = 8192,
 	}
 	[Flags]
 	public enum EClientPersonaStateFlag
@@ -1826,11 +1827,18 @@ namespace SteamKit2
 		SourceID = 8,
 		Presence = 16,
 		LastSeen = 64,
+		[Obsolete( "renamed to UserClanRank" )]
 		ClanInfo = 128,
+		UserClanRank = 128,
 		GameExtraInfo = 256,
 		GameDataBlob = 512,
+		[Obsolete( "renamed to ClanData" )]
 		ClanTag = 1024,
+		ClanData = 1024,
 		Facebook = 2048,
+		RichPresence = 4096,
+		Broadcast = 8192,
+		Watching = 16384,
 	}
 	public enum EAppUsageEvent
 	{
@@ -2173,7 +2181,8 @@ namespace SteamKit2
 		Community = 15,
 		Store = 16,
 		Localization = 17,
-		Max = 18,
+		Broadcastgamedata = 18,
+		Max = 19,
 	}
 	public enum EContentDownloadSourceType
 	{
@@ -2204,7 +2213,40 @@ namespace SteamKit2
 		Unknown = -1,
 		Web = -700,
 		IOSUnknown = -600,
+		IOS1 = -599,
+		IOS2 = -598,
+		IOS3 = -597,
+		IOS4 = -596,
+		IOS5 = -595,
+		IOS6 = -594,
+		IOS6_1 = -593,
+		IOS7 = -592,
+		IOS7_1 = -591,
+		IOS8 = -590,
+		IOS8_1 = -589,
+		IOS8_2 = -588,
+		IOS8_3 = -587,
+		IOS8_4 = -586,
+		IOS9 = -585,
+		IOS9_1 = -584,
+		IOS9_2 = -583,
+		IOS9_3 = -582,
+		IOS10 = -581,
+		IOS10_1 = -580,
+		IOS10_2 = -579,
+		IOS10_3 = -578,
+		IOS11 = -577,
+		IOS11_1 = -576,
+		IOS11_2 = -575,
+		IOS11_3 = -574,
+		IOS11_4 = -573,
+		IOS12 = -572,
+		IOS12_1 = -571,
 		AndroidUnknown = -500,
+		Android6 = -499,
+		Android7 = -498,
+		Android8 = -497,
+		Android9 = -496,
 		UMQ = -400,
 		PS3 = -300,
 		MacOSUnknown = -102,
@@ -2239,6 +2281,9 @@ namespace SteamKit2
 		Linux41 = -191,
 		Linux44 = -190,
 		Linux49 = -189,
+		Linux414 = -188,
+		Linux419 = -187,
+		Linux5x = -186,
 		LinuxMax = -101,
 		WinUnknown = 0,
 		Win311 = 1,
@@ -2620,6 +2665,8 @@ namespace SteamKit2
 		PS3 = 4,
 		Linux = 8,
 		Reserved2 = 16,
+		Android = 32,
+		IPhoneOS = 64,
 		All = -1,
 	}
 	[Flags]
@@ -2711,6 +2758,215 @@ namespace SteamKit2
 		FriendsOnly = 4,
 		Public = 8,
 		All = Public | FriendsOnly | Private,
+	}
+	public enum EPublishedFileQueryType
+	{
+		RankedByVote = 0,
+		RankedByPublicationDate = 1,
+		AcceptedForGameRankedByAcceptanceDate = 2,
+		RankedByTrend = 3,
+		FavoritedByFriendsRankedByPublicationDate = 4,
+		CreatedByFriendsRankedByPublicationDate = 5,
+		RankedByNumTimesReported = 6,
+		CreatedByFollowedUsersRankedByPublicationDate = 7,
+		NotYetRated = 8,
+		RankedByTotalUniqueSubscriptions = 9,
+		RankedByTotalVotesAsc = 10,
+		RankedByVotesUp = 11,
+		RankedByTextSearch = 12,
+		RankedByPlaytimeTrend = 13,
+		RankedByTotalPlaytime = 14,
+		RankedByAveragePlaytimeTrend = 15,
+		RankedByLifetimeAveragePlaytime = 16,
+		RankedByPlaytimeSessionsTrend = 17,
+		RankedByLifetimePlaytimeSessions = 18,
+		RankedByInappropriateContentRating = 19,
+	}
+	public enum EPublishedFileInappropriateProvider
+	{
+		Invalid = 0,
+		Google = 1,
+		Amazon = 2,
+	}
+	public enum EPublishedFileInappropriateResult
+	{
+		NotScanned = 0,
+		VeryUnlikely = 1,
+		Possible = 50,
+		Likely = 75,
+		VeryLikely = 100,
+	}
+	public enum EDisplayStatus
+	{
+		Invalid = 0,
+		Launching = 1,
+		Uninstalling = 2,
+		Installing = 3,
+		Running = 4,
+		Validating = 5,
+		Updating = 6,
+		Downloading = 7,
+		Synchronizing = 8,
+		ReadyToInstall = 9,
+		ReadyToPreload = 10,
+		ReadyToLaunch = 11,
+		RegionRestricted = 12,
+		PresaleOnly = 13,
+		InvalidPlatform = 14,
+		ParentalBlocked = 15,
+		PreloadOnly = 16,
+		BorrowerLocked = 17,
+		UpdatePaused = 18,
+		UpdateQueued = 19,
+		UpdateRequired = 20,
+		UpdateDisabled = 21,
+		DownloadPaused = 22,
+		DownloadQueued = 23,
+		DownloadRequired = 24,
+		DownloadDisabled = 25,
+		LicensePending = 26,
+		LicenseExpired = 27,
+		AvailForFree = 28,
+		AvailToBorrow = 29,
+		AvailGuestPass = 30,
+		Purchase = 31,
+	}
+	[Flags]
+	public enum EAppType
+	{
+		Invalid = 0,
+		Game = 1,
+		Application = 2,
+		Tool = 4,
+		Demo = 8,
+		Deprected = 16,
+		DLC = 32,
+		Guide = 64,
+		Driver = 128,
+		Config = 256,
+		Hardware = 512,
+		Franchise = 1024,
+		Video = 2048,
+		Plugin = 4096,
+		Music = 8192,
+		Series = 16384,
+		Comic = 32768,
+		Beta = 65536,
+		Shortcut = 1073741824,
+		DepotOnly = -2147483648,
+	}
+	public enum EChatRoomGroupType
+	{
+		Default = 0,
+		Unmoderated = 1,
+	}
+	public enum EChatroomNotificationLevel
+	{
+		Invalid = 0,
+		None = 1,
+		MentionMe = 2,
+		MentionAll = 3,
+		AllMessages = 4,
+	}
+	public enum EChatRoomMemberStateChange
+	{
+		Invalid = 0,
+		Joined = 1,
+		Parted = 2,
+		Kicked = 3,
+		Invited = 4,
+		RankChanged = 7,
+		InviteDismissed = 8,
+		Muted = 9,
+		Banned = 10,
+		RolesChanged = 12,
+	}
+	public enum EChatRoomServerMsg
+	{
+		Invalid = 0,
+		RenameChatRoom = 1,
+		Joined = 2,
+		Parted = 3,
+		Kicked = 4,
+		Invited = 5,
+		InviteDismissed = 8,
+		ChatRoomTaglineChanged = 9,
+		ChatRoomAvatarChanged = 10,
+		AppCustom = 11,
+	}
+	public enum EChatRoomGroupRank
+	{
+		Default = 0,
+		Viewer = 10,
+		Guest = 15,
+		Member = 20,
+		Moderator = 30,
+		Officer = 40,
+		Owner = 50,
+	}
+	[Flags]
+	public enum EChatRoomGroupPermissions
+	{
+		Default = 0,
+		Valid = 1,
+		CanInvite = 2,
+		CanKick = 4,
+		CanBan = 8,
+		CanAdminChannel = 16,
+	}
+	public enum EChatRoomGroupAction
+	{
+		Default = 0,
+		CreateRenameDeleteChannel = 1,
+		Kick = 2,
+		Ban = 3,
+		Invite = 4,
+		ChangeTaglineAvatarName = 5,
+		Chat = 6,
+		ViewHistory = 7,
+		ChangeGroupRoles = 8,
+		ChangeUserRoles = 9,
+		MentionAll = 10,
+		SetWatchingBroadcast = 11,
+	}
+	public enum EChatRoomJoinState
+	{
+		Default = 0,
+		None = 1,
+		Joined = 2,
+	}
+	public enum EVoiceCallState
+	{
+		None = 0,
+		ScheduledInitiate = 1,
+		RequestedMicAccess = 2,
+		LocalMicOnly = 3,
+		CreatePeerConnection = 4,
+		InitatedWebRTCSession = 5,
+		WebRTCConnectedWaitingOnIceConnected = 6,
+		RequestedPermission = 7,
+		NotifyingVoiceChatOfWebRTCSession = 8,
+		Connected = 9,
+	}
+	public enum ETradeOfferState
+	{
+		Invalid = 1,
+		Active = 2,
+		Accepted = 3,
+		Countered = 4,
+		Expired = 5,
+		Canceled = 6,
+		Declined = 7,
+		InvalidItems = 8,
+		CreatedNeedsConfirmation = 9,
+		CanceledBySecondFactor = 10,
+		InEscrow = 11,
+	}
+	public enum ETradeOfferConfirmationMethod
+	{
+		Invalid = 0,
+		Email = 1,
+		MobileApp = 2,
 	}
 	public enum EUdpPacketType : byte
 	{
