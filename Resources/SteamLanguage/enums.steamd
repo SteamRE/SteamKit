@@ -710,8 +710,8 @@ enum EOSType
 	Linux44 = -190;
 	Linux49 = -189;
 	Linux414 = -188;
-    Linux419 = -187;
-    Linux5x = -186;
+	Linux419 = -187;
+	Linux5x = -186;
 	LinuxMax = -101;
 
 	WinUnknown = 0;
@@ -1140,7 +1140,7 @@ enum ERemoteStoragePlatform flags
 	Linux = 8;
 	Reserved2 = 16;
 	Android = 32;
-    IPhoneOS = 64;
+	IPhoneOS = 64;
 
 	All = -1;
 };
