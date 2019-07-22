@@ -158,7 +158,7 @@ namespace SteamKit2
                 {
                     using ( var ms = new MemoryStream( resp.parental_settings ) )
                     {
-                        ParentalSettings = Serializer.Deserialize<ParentalSettings>( ms );
+                        this.ParentalSettings = Serializer.Deserialize<ParentalSettings>( ms );
                     }
                 }
             }
