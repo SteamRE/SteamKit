@@ -1,5 +1,5 @@
-# When modifying version here, consider updating AssemblyInfo.cs manually as well for non-CI builds
 environment:
+  # When modifying version here, consider updating AssemblyInfo.cs manually as well for non-CI builds
   CoreVersion: 2.2.0
 
 version: $(CoreVersion).{build}
