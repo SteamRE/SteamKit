@@ -29,11 +29,6 @@ using System.Runtime.InteropServices;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid( "cd42d0bc-72e4-451e-bcd0-5d09c4bca2a9" )]
 
-// These are automatically modified by AppVeyor for CI builds and automated deployment, but you should still try to keep them up-to-date for non-CI builds.
-[assembly: AssemblyVersion( "2.2.0" )]
-[assembly: AssemblyFileVersion( "2.2.0.0" )]
-[assembly: AssemblyInformationalVersion( "2.2.0.0 - Development" )]
-
 #if DEBUG
 [assembly: InternalsVisibleTo( "Tests" )]
 #endif
