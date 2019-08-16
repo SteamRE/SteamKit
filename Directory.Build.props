@@ -1,0 +1,30 @@
+<Project>
+    <PropertyGroup>
+        <SteamKitRootDir>$(MSBuildThisFileDirectory)</SteamKitRootDir>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(APPVEYOR_BUILD_VERSION)' == ''">
+        <AppVeyorConfigPath>$(SteamKitRootDir)appveyor.yml</AppVeyorConfigPath>
+        <AppVeyorConfigText>$([System.IO.File]::ReadAllText($(AppVeyorConfigPath)))</AppVeyorConfigText>
+        <AppVeyorVersionExpression>CoreVersion: (\d+\.\d+\.\d+)</AppVeyorVersionExpression>
+        <SteamKitCoreVersion>$([System.Text.RegularExpressions.Regex]::Match($(AppVeyorConfigText), $(AppVeyorVersionExpression)).Groups[1].Value)</SteamKitCoreVersion>
+        <SteamKitVersion>$(SteamKitCoreVersion).0</SteamKitVersion>
+        <AssemblyVersion>$(SteamKitVersion)</AssemblyVersion>
+        <FileVersion>$(SteamKitVersion)</FileVersion>
+        <InformationalVersion>$(SteamKitVersion) - Development</InformationalVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(APPVEYOR_BUILD_VERSION)' != ''">
+        <AssemblyVersion>$(APPVEYOR_BUILD_VERSION)</AssemblyVersion>
+        <FileVersion>$(APPVEYOR_BUILD_VERSION)</FileVersion>
+        <SteamKitBranch Condition=" '$(APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH)' != '' ">$(APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH)</SteamKitBranch>
+        <SteamKitBranch Condition=" '$(SteamKitBranch)' == '' ">$(APPVEYOR_REPO_BRANCH)</SteamKitBranch>
+        <InformationalVersion>$(APPVEYOR_BUILD_VERSION) - CI (AppVeyor, branch: $(SteamKitBranch))</InformationalVersion>
+    </PropertyGroup>
+    <PropertyGroup>
+        <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+        <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+        <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+        <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+        <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    </PropertyGroup>
+</Project>
