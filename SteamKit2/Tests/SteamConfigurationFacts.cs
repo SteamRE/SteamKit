@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using SteamKit2;
 using SteamKit2.Discovery;
@@ -19,7 +24,7 @@ namespace Tests
         [Fact]
         public void AllowsDirectoryFetch()
         {
-            Assert.Equal(true, configuration.AllowDirectoryFetch);
+            Assert.True(configuration.AllowDirectoryFetch);
         }
 
         [Fact]
@@ -42,6 +47,19 @@ namespace Tests
                     EClientPersonaStateFlag.LastSeen;
 
             Assert.Equal(expected, configuration.DefaultPersonaStateFlags);
+        }
+
+        [Fact]
+        public void DefaultHttpClientFactory()
+        {
+            using (var client = configuration.HttpClientFactory())
+            {
+                Assert.NotNull(client);
+                Assert.IsType<HttpClient>(client);
+
+                var steamKitAssemblyVersion = typeof( SteamClient ).Assembly.GetName().Version;
+                Assert.Equal("SteamKit/" + steamKitAssemblyVersion.ToString(fieldCount: 3), client.DefaultRequestHeaders.UserAgent.ToString());
+            }
         }
 
         [Fact]
@@ -90,6 +108,7 @@ namespace Tests
                  .WithCellID(123)
                  .WithConnectionTimeout(TimeSpan.FromMinutes(1))
                  .WithDefaultPersonaStateFlags(EClientPersonaStateFlag.SourceID)
+                 .WithHttpClientFactory(() => { var c = new HttpClient(); c.DefaultRequestHeaders.Add("X-SteamKit-Tests", "true"); return c; })
                  .WithProtocolTypes(ProtocolTypes.WebSocket | ProtocolTypes.Udp)
                  .WithServerListProvider(new CustomServerListProvider())
                  .WithUniverse(EUniverse.Internal)
@@ -102,7 +121,7 @@ namespace Tests
         [Fact]
         public void DirectoryFetchIsConfigured()
         {
-            Assert.Equal(false, configuration.AllowDirectoryFetch);
+            Assert.False(configuration.AllowDirectoryFetch);
         }
 
         [Fact]
@@ -115,6 +134,15 @@ namespace Tests
         public void ConnectionTimeoutIsConfigured()
         {
             Assert.Equal(TimeSpan.FromMinutes(1), configuration.ConnectionTimeout);
+        }
+
+        [Fact]
+        public void HttpClientFactoryIsConfigured()
+        {
+            using (var client = configuration.HttpClientFactory())
+            {
+                Assert.Equal("true", client.DefaultRequestHeaders.GetValues("X-SteamKit-Tests").FirstOrDefault());
+            }
         }
 
         [Fact]

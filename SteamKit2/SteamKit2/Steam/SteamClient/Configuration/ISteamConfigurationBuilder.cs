@@ -5,6 +5,7 @@
 
 
 using System;
+using System.Net.Http;
 using SteamKit2.Discovery;
 
 namespace SteamKit2
@@ -43,6 +44,13 @@ namespace SteamKit2
         /// <param name="allowDirectoryFetch">Whether or not to use the Steam Directory to discover available servers.</param>
         /// <returns>A builder with modified configuration.</returns>
         ISteamConfigurationBuilder WithDirectoryFetch(bool allowDirectoryFetch);
+
+        /// <summary>
+        /// Configures this <see cref="SteamConfiguration" /> with custom HTTP behaviour.
+        /// </summary>
+        /// <param name="factoryFunction">A function to create and configure a new HttpClient.</param>
+        /// <returns>A builder with modified configuration.</returns>
+        ISteamConfigurationBuilder WithHttpClientFactory(HttpClientFactory factoryFunction);
 
         /// <summary>
         /// Configures how this <see cref="SteamConfiguration" /> will be used to connect to Steam.

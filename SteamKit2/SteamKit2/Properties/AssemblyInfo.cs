@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCompany( "SteamRE Team" )]
 [assembly: AssemblyProduct( "SteamKit2" )]
-[assembly: AssemblyCopyright( "Copyright © SteamRE Team 2018" )]
+[assembly: AssemblyCopyright( "Copyright © SteamRE Team 2019" )]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]
 
@@ -28,11 +28,6 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid( "cd42d0bc-72e4-451e-bcd0-5d09c4bca2a9" )]
-
-// These are automatically modified by AppVeyor for CI builds and automated deployment.
-[assembly: AssemblyVersion( "2.0.0.0" )]
-[assembly: AssemblyFileVersion( "2.0.0.0" )]
-[assembly: AssemblyInformationalVersion( "2.0.0 - Development" )]
 
 #if DEBUG
 [assembly: InternalsVisibleTo( "Tests" )]

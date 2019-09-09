@@ -177,6 +177,41 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCItemCustomizationNotification")]
+  public partial class CMsgGCItemCustomizationNotification : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCItemCustomizationNotification() {}
+    
+    private readonly global::System.Collections.Generic.List<ulong> _item_id = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> item_id
+    {
+      get { return _item_id; }
+    }
+  
+
+    private uint? _request;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"request", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint request
+    {
+      get { return _request?? default(uint); }
+      set { _request = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool requestSpecified
+    {
+      get { return _request != null; }
+      set { if (value == (_request== null)) _request = value ? this.request : (uint?)null; }
+    }
+    private bool ShouldSerializerequest() { return requestSpecified; }
+    private void Resetrequest() { requestSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCItemMsg", EnumPassthru=true)]
     public enum EGCItemMsg
     {
@@ -423,6 +458,9 @@ namespace SteamKit2.GC.CSGO.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCUserTrackTimePlayedConsecutively", Value=1089)]
       k_EMsgGCUserTrackTimePlayedConsecutively = 1089,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCItemCustomizationNotification", Value=1090)]
+      k_EMsgGCItemCustomizationNotification = 1090,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTradingBase", Value=1500)]
       k_EMsgGCTradingBase = 1500,

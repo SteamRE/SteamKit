@@ -10,7 +10,9 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Collections.Generic;
 using System.Text;
+using ProtoBuf;
 using SteamKit2.Internal;
+using SteamKit2.Unified.Internal;
 
 namespace SteamKit2
 {
@@ -113,6 +115,10 @@ namespace SteamKit2
             /// </summary>
             public int NumDisconnectsToMigrate { get; private set; }
 
+            /// <summary>
+            /// Gets the Steam parental settings.
+            /// </summary>
+            public ParentalSettings ParentalSettings { get; private set; }
 
             internal LoggedOnCallback( CMsgClientLogonResponse resp )
             {
@@ -147,6 +153,14 @@ namespace SteamKit2
 
                 this.NumLoginFailuresToMigrate = resp.count_loginfailures_to_migrate;
                 this.NumDisconnectsToMigrate = resp.count_disconnects_to_migrate;
+
+                if ( resp.parental_settings != null )
+                {
+                    using ( var ms = new MemoryStream( resp.parental_settings ) )
+                    {
+                        this.ParentalSettings = Serializer.Deserialize<ParentalSettings>( ms );
+                    }
+                }
             }
 
 
@@ -296,10 +310,16 @@ namespace SteamKit2
             /// Gets the currency code for this wallet.
             /// </summary>
             public ECurrencyCode Currency { get; private set; }
+
             /// <summary>
-            /// Gets the balance of the wallet, in cents.
+            /// Gets the balance of the wallet as a 32-bit integer, in cents.
             /// </summary>
             public int Balance { get; private set; }
+
+            /// <summary>
+            /// Gets the balance of the wallet as a 64-bit integer, in cents.
+            /// </summary>
+            public long LongBalance { get; private set; }
 
 
             internal WalletInfoCallback( CMsgClientWalletInfoUpdate wallet )
@@ -308,6 +328,7 @@ namespace SteamKit2
 
                 Currency = ( ECurrencyCode )wallet.currency;
                 Balance = wallet.balance;
+                LongBalance = wallet.balance64;
             }
         }
 

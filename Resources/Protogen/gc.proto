@@ -1,0 +1,21 @@
+enum GCProtoBufMsgSrc {
+	GCProtoBufMsgSrc_Unspecified = 0;
+	GCProtoBufMsgSrc_FromSystem = 1;
+	GCProtoBufMsgSrc_FromSteamID = 2;
+	GCProtoBufMsgSrc_FromGC = 3;
+	GCProtoBufMsgSrc_ReplySystem = 4;
+}
+
+message CMsgProtoBufHeader {
+	optional fixed64 client_steam_id = 1;
+	optional int32 client_session_id = 2;
+	optional uint32 source_app_id = 3;
+	optional fixed64 job_id_source = 10 [default = 18446744073709551615];
+	optional fixed64 job_id_target = 11 [default = 18446744073709551615];
+	optional string target_job_name = 12;
+	optional int32 eresult = 13 [default = 2];
+	optional string error_message = 14;
+	optional uint32 ip = 15;
+	optional .GCProtoBufMsgSrc gc_msg_src = 200 [default = GCProtoBufMsgSrc_Unspecified];
+	optional uint32 gc_dir_index_source = 201;
+}

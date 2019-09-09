@@ -115,7 +115,7 @@ namespace SteamKit2.Discovery
                 DebugWrite( "Could not query SteamDirectory, falling back to cm0" );
                 var cm0 = await Dns.GetHostAddressesAsync( "cm0.steampowered.com" ).ConfigureAwait( false );
 
-                endpointList = cm0.Select( ipaddr => ServerRecord.CreateSocketServer( new IPEndPoint(ipaddr, 27015) ) ).ToList();
+                endpointList = cm0.Select( ipaddr => ServerRecord.CreateSocketServer( new IPEndPoint(ipaddr, 27017) ) ).ToList();
             }
 
             DebugWrite( "Resolved {0} servers", endpointList.Count );

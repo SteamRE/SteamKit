@@ -41,7 +41,7 @@ namespace Tests
 
             string chatName = msg.ReadNullTermString();
 
-            Assert.Equal( chatName, "Saxton Hell" );
+            Assert.Equal( "Saxton Hell", chatName );
         }
 
         [Fact]
@@ -51,15 +51,15 @@ namespace Tests
 
             string chatName = msg.ReadNullTermString();
 
-            Assert.Equal( chatName, "Saxton Hell" );
+            Assert.Equal( "Saxton Hell", chatName );
 
             byte nextByte = msg.ReadByte();
             char mByte = (char)msg.ReadByte();
 
             // next byte should be a null
-            Assert.Equal( nextByte, 0 );
+            Assert.Equal( 0, nextByte );
             // and the one after should be the beginning of a MessageObject
-            Assert.Equal( mByte, 'M' );
+            Assert.Equal( 'M', mByte );
         }
 
         static IPacketMsg BuildStructMsg()

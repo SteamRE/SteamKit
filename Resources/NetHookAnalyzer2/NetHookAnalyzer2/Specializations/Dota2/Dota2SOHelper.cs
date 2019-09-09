@@ -28,6 +28,7 @@ namespace NetHookAnalyzer2.Specializations
             {2009, typeof(CMsgDOTATournament)},
             {2010, typeof(CSODOTAPlayerChallenge)},
             {2011, typeof(CSODOTALobbyInvite)},
+            {2012, typeof(CSODOTAGameAccountPlus)},
         };
     }
 }

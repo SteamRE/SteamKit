@@ -56,17 +56,23 @@ namespace SteamKit2
             // mono seems to have a pretty solid implementation of NetworkInterface for our platforms
             // if it turns out to be buggy we can always roll our own and poke into /sys/class/net on nix
 
-            var firstEth = NetworkInterface.GetAllNetworkInterfaces()
-                .Where( i => i.NetworkInterfaceType == NetworkInterfaceType.Ethernet || i.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 )
-                .FirstOrDefault();
-
-            if ( firstEth == null )
+            try
             {
-                // well...
-                return Encoding.UTF8.GetBytes( "SteamKit-MacAddress" );
-            }
+                var firstEth = NetworkInterface.GetAllNetworkInterfaces()
+                    .Where( i => i.NetworkInterfaceType == NetworkInterfaceType.Ethernet || i.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 )
+                    .FirstOrDefault();
 
-            return firstEth.GetPhysicalAddress().GetAddressBytes();
+                if ( firstEth != null )
+                {
+                    return firstEth.GetPhysicalAddress().GetAddressBytes();
+                }
+            }
+            catch ( NetworkInformationException )
+            {
+                // See: https://github.com/SteamRE/SteamKit/issues/629
+            }
+            // well...
+            return Encoding.UTF8.GetBytes( "SteamKit-MacAddress" );
         }
 
         public override byte[] GetDiskId()

@@ -10,12 +10,10 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: econ_shared_enums.proto
 namespace SteamKit2.GC.Dota.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGenericResult")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGenericResult")]
   public partial class CMsgGenericResult : global::ProtoBuf.IExtensible
   {
     public CMsgGenericResult() {}
@@ -29,7 +27,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _eresult = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool eresultSpecified
     {
       get { return _eresult != null; }
@@ -47,7 +45,7 @@ namespace SteamKit2.GC.Dota.Internal
       set { _debug_message = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool debug_messageSpecified
     {
       get { return _debug_message != null; }

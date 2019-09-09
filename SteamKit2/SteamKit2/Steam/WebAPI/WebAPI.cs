@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace SteamKit2
 {
@@ -24,6 +26,8 @@ namespace SteamKit2
         /// as a function argument where overloads are available.
         /// </summary>
         public static Uri DefaultBaseAddress { get; } = new Uri("https://api.steampowered.com/", UriKind.Absolute);
+
+        internal static TimeSpan DefaultTimeout { get; } = TimeSpan.FromSeconds(100);
 
         /// <summary>
         /// Represents a single interface that exists within the Web API.
@@ -47,9 +51,9 @@ namespace SteamKit2
             }
 
 
-            internal Interface( Uri baseAddress, string iface, string apiKey )
+            internal Interface( HttpClient httpClient, string iface, string apiKey )
             {
-                asyncInterface = new AsyncInterface( baseAddress, iface, apiKey );
+                asyncInterface = new AsyncInterface( httpClient, iface, apiKey );
             }
 
 
@@ -62,8 +66,9 @@ namespace SteamKit2
             /// <returns>A <see cref="KeyValue"/> object representing the results of the Web API call.</returns>
             /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
+            /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public KeyValue Call( string func, int version = 1, Dictionary<string, string> args = null )
+            public KeyValue Call( string func, int version = 1, Dictionary<string, object> args = null )
                 => Call( HttpMethod.Get, func, version, args );
 
 
@@ -77,8 +82,9 @@ namespace SteamKit2
             /// <returns>A <see cref="KeyValue"/> object representing the results of the Web API call.</returns>
             /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
+            /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public KeyValue Call( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null )
+            public KeyValue Call( HttpMethod method, string func, int version = 1, Dictionary<string, object> args = null )
             {
                 var callTask = asyncInterface.CallAsync( method, func, version, args );
 
@@ -138,10 +144,6 @@ namespace SteamKit2
             /// The dynamic method name was not in the correct format.
             /// All API function calls must be in the format 'FunctionName###' where the optional ###'s represent a version number.
             /// </exception>
-            /// <exception cref="ArgumentException">
-            /// The reserved named parameter 'secure' was not a boolean value.
-            /// This parameter is used when requests must go through the secure API.
-            /// </exception>
             /// <exception cref="ArgumentOutOfRangeException">
             /// The function version number specified was out of range.
             /// </exception>
@@ -188,14 +190,9 @@ namespace SteamKit2
                 RegexOptions.Compiled | RegexOptions.IgnoreCase
             );
 
-            internal AsyncInterface( Uri baseAddress, string iface, string apiKey )
+            internal AsyncInterface( HttpClient httpClient, string iface, string apiKey )
             {
-                httpClient = new HttpClient
-                {
-                    BaseAddress = baseAddress,
-                    Timeout = TimeSpan.FromSeconds(100)
-                };
-
+                this.httpClient = httpClient;
                 this.iface = iface;
                 this.apiKey = apiKey;
             }
@@ -211,8 +208,9 @@ namespace SteamKit2
             /// <returns>A <see cref="Task{T}"/> that contains a <see cref="KeyValue"/> object representing the results of the Web API call.</returns>
             /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
+            /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public Task<KeyValue> CallAsync( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null )
+            public Task<KeyValue> CallAsync( HttpMethod method, string func, int version = 1, Dictionary<string, object> args = null )
             {
                 var task = CallAsyncCore( method, func, version, args );
 
@@ -229,7 +227,7 @@ namespace SteamKit2
                 return task;
             }
                 
-            async Task<KeyValue> CallAsyncCore( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null )
+            async Task<KeyValue> CallAsyncCore( HttpMethod method, string func, int version = 1, Dictionary<string, object> args = null )
             {
                 if ( method == null )
                 {
@@ -243,7 +241,7 @@ namespace SteamKit2
 
                 if ( args == null )
                 {
-                    args = new Dictionary<string, string>();
+                    args = new Dictionary<string, object>();
                 }
 
 
@@ -271,11 +269,21 @@ namespace SteamKit2
                 // append any args
                 paramBuilder.Append( string.Join( "&", args.Select( kvp =>
                 {
-                    // TODO: the WebAPI is a special snowflake that needs to appropriately handle url encoding
-                    // this is in contrast to the steam3 content server APIs which use an entirely different scheme of encoding
+                    string key = HttpUtility.UrlEncode( kvp.Key );
+                    string value;
 
-                    string key = WebHelpers.UrlEncode( kvp.Key );
-                    string value = kvp.Value; // WebHelpers.UrlEncode( kvp.Value );
+                    if ( kvp.Value == null )
+                    {
+                        value = string.Empty;
+                    }
+                    else if ( kvp.Value is byte[] buffer )
+                    {
+                        value = HttpUtility.UrlEncode( buffer );
+                    }
+                    else
+                    {
+                        value = HttpUtility.UrlEncode( kvp.Value.ToString() );
+                    }
 
                     return string.Format( "{0}={1}", key, value );
                 } ) ) );
@@ -289,7 +297,11 @@ namespace SteamKit2
                 }
 
                 var response = await httpClient.SendAsync( request ).ConfigureAwait( false );
-                response.EnsureSuccessStatusCode();
+
+                if ( !response.IsSuccessStatusCode )
+                {
+                    throw new WebAPIRequestException( $"Response status code does not indicate success: {response.StatusCode} ({response.ReasonPhrase}).", response );
+                }
 
                 var kv = new KeyValue();
 
@@ -349,67 +361,56 @@ namespace SteamKit2
             /// The dynamic method name was not in the correct format.
             /// All API function calls must be in the format 'FunctionName###' where the optional ###'s represent a version number.
             /// </exception>
-            /// <exception cref="ArgumentException">
-            /// The reserved named parameter 'secure' was not a boolean value.
-            /// This parameter is used when requests must go through the secure API.
-            /// </exception>
             /// <exception cref="ArgumentOutOfRangeException">
             /// The function version number specified was out of range.
             /// </exception>
             public override bool TryInvokeMember( InvokeMemberBinder binder, object[] args, out object result )
             {
-                if ( binder.CallInfo.ArgumentNames.Count != args.Length )
+                IDictionary<string, object> methodArgs;
+
+                if ( args.Length == 1 && binder.CallInfo.ArgumentNames.Count == 0 && args[ 0 ] is IDictionary<string, object> explicitArgs )
                 {
-                    throw new InvalidOperationException( "Argument mismatch in API call. All parameters must be passed as named arguments." );
+                    methodArgs = explicitArgs;
+                }
+                else if ( binder.CallInfo.ArgumentNames.Count != args.Length )
+                {
+                    throw new InvalidOperationException( "Argument mismatch in API call. All parameters must be passed as named arguments, or as a single un-named dictionary argument." );
+                }
+                else
+                {
+                    methodArgs = Enumerable.Range( 0, args.Length )
+                        .ToDictionary( 
+                            x => binder.CallInfo.ArgumentNames[ x ],
+                            x => args[ x ] );
                 }
 
-                var apiArgs = new Dictionary<string, string>();
-
+                var apiArgs = new Dictionary<string, object>();
                 var requestMethod = HttpMethod.Get;
-                bool secure = false;
 
-                // convert named arguments into key value pairs
-                for ( int x = 0 ; x < args.Length ; x++ )
+                foreach ( var ( argName, argValue ) in methodArgs )
                 {
-                    string argName = binder.CallInfo.ArgumentNames[ x ];
-                    object argValue = args[ x ];
-
                     // method is a reserved param for selecting the http request method
                     if ( argName.Equals( "method", StringComparison.OrdinalIgnoreCase ) )
                     {
                         requestMethod = new HttpMethod( argValue.ToString() );
                         continue;
                     }
-                    // secure is another reserved param for selecting the http or https apis
-                    else if ( argName.Equals( "secure", StringComparison.OrdinalIgnoreCase ) )
-                    {
-                        try
-                        {
-                            secure = ( bool )argValue;
-                        }
-                        catch ( InvalidCastException )
-                        {
-                            throw new ArgumentException( "The parameter 'secure' is a reserved parameter that must be of type bool." );
-                        }
-
-                        continue;
-                    }
                     // flatten lists
-                    else if ( argValue is IEnumerable && !( argValue is string ) )
+                    else if ( argValue is IEnumerable && !( argValue is string || argValue is byte[] ) )
                     {
                         int index = 0;
-                        IEnumerable enumerable = argValue as IEnumerable;
+                        var enumerable = argValue as IEnumerable;
 
                         foreach ( object value in enumerable )
                         {
-                            apiArgs.Add( String.Format( "{0}[{1}]", argName, index++ ), value.ToString() );
+                            apiArgs.Add( string.Format( "{0}[{1}]", argName, index++ ), value );
                         }
 
                         continue;
                     }
 
 
-                    apiArgs.Add( argName, argValue.ToString() );
+                    apiArgs.Add( argName, argValue );
                 }
 
                 Match match = funcNameRegex.Match( binder.Name );
@@ -460,7 +461,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(iface) );
             }
 
-            return new Interface( baseAddress, iface, apiKey );
+            return new Interface( CreateDefaultHttpClient( baseAddress ), iface, apiKey );
         }
 
         /// <summary>
@@ -476,7 +477,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(iface) );
             }
 
-            return new Interface( DefaultBaseAddress, iface, apiKey );
+            return new Interface( CreateDefaultHttpClient( DefaultBaseAddress ), iface, apiKey );
         }
 
         /// <summary>
@@ -492,7 +493,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(iface) );
             }
 
-            return new AsyncInterface( DefaultBaseAddress, iface, apiKey );
+            return new AsyncInterface( CreateDefaultHttpClient( DefaultBaseAddress ), iface, apiKey );
         }
 
         /// <summary>
@@ -514,8 +515,18 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(iface) );
             }
             
-            return new AsyncInterface( baseAddress, iface, apiKey );
+            return new AsyncInterface( CreateDefaultHttpClient( baseAddress ), iface, apiKey );
+        }
+
+        static HttpClient CreateDefaultHttpClient( Uri baseAddress )
+        {
+            var client = new HttpClient
+            {
+                BaseAddress = baseAddress,
+                Timeout = DefaultTimeout
+            };
+
+            return client;
         }
     }
-
 }

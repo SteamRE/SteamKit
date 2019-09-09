@@ -200,12 +200,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCancelWatchGame", Value=7097)]
       k_EMsgGCCancelWatchGame = 7097,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCProfileRequest", Value=7098)]
-      k_EMsgGCProfileRequest = 7098,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCProfileResponse", Value=7099)]
-      k_EMsgGCProfileResponse = 7099,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPopup", Value=7102)]
       k_EMsgGCPopup = 7102,
             
@@ -272,23 +266,11 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPlayerHeroesFavoritesRemove", Value=7134)]
       k_EMsgGCPlayerHeroesFavoritesRemove = 7134,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCSetShowcaseHero", Value=7141)]
-      k_EMsgGCSetShowcaseHero = 7141,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCApplyTeamToPracticeLobby", Value=7142)]
       k_EMsgGCApplyTeamToPracticeLobby = 7142,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestInternatinalTicketEmail", Value=7143)]
-      k_EMsgGCRequestInternatinalTicketEmail = 7143,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTransferTeamAdmin", Value=7144)]
       k_EMsgGCTransferTeamAdmin = 7144,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgRequestLeagueInfo", Value=7147)]
-      k_EMsgRequestLeagueInfo = 7147,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgResponseLeagueInfo", Value=7148)]
-      k_EMsgResponseLeagueInfo = 7148,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPracticeLobbyJoinBroadcastChannel", Value=7149)]
       k_EMsgGCPracticeLobbyJoinBroadcastChannel = 7149,
@@ -389,24 +371,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCCheckLeaguePermissionResponse", Value=7190)]
       k_EMsgGCToGCCheckLeaguePermissionResponse = 7190,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCLeagueScheduleRequest", Value=7191)]
-      k_EMsgGCLeagueScheduleRequest = 7191,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCLeagueScheduleResponse", Value=7192)]
-      k_EMsgGCLeagueScheduleResponse = 7192,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCLeagueScheduleEdit", Value=7193)]
-      k_EMsgGCLeagueScheduleEdit = 7193,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCLeagueScheduleEditResponse", Value=7194)]
-      k_EMsgGCLeagueScheduleEditResponse = 7194,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCLeaguesInMonthRequest", Value=7195)]
-      k_EMsgGCLeaguesInMonthRequest = 7195,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCLeaguesInMonthResponse", Value=7196)]
-      k_EMsgGCLeaguesInMonthResponse = 7196,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCMatchmakingStatsRequest", Value=7197)]
       k_EMsgGCMatchmakingStatsRequest = 7197,
             
@@ -445,12 +409,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCResetMapLocationsResponse", Value=7210)]
       k_EMsgGCResetMapLocationsResponse = 7210,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCSetFeaturedItems", Value=7212)]
-      k_EMsgGCSetFeaturedItems = 7212,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFeaturedItems", Value=7215)]
-      k_EMsgGCFeaturedItems = 7215,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgRefreshPartnerAccountLink", Value=7216)]
       k_EMsgRefreshPartnerAccountLink = 7216,
@@ -713,12 +671,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCustomGameCreate", Value=7321)]
       k_EMsgGCCustomGameCreate = 7321,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFantasyPlayerInfoRequest", Value=7322)]
-      k_EMsgGCFantasyPlayerInfoRequest = 7322,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFantasyPlayerInfoResponse", Value=7323)]
-      k_EMsgGCFantasyPlayerInfoResponse = 7323,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCProcessPlayerReportForTarget", Value=7324)]
       k_EMsgGCToGCProcessPlayerReportForTarget = 7324,
             
@@ -733,12 +685,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCSetProfilePrivacyResponse", Value=7328)]
       k_EMsgGCSetProfilePrivacyResponse = 7328,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCSteamProfileRequest", Value=7329)]
-      k_EMsgGCSteamProfileRequest = 7329,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCSteamProfileRequestResponse", Value=7330)]
-      k_EMsgGCSteamProfileRequestResponse = 7330,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFantasyLeagueCreateInfoRequest", Value=7331)]
       k_EMsgGCFantasyLeagueCreateInfoRequest = 7331,
@@ -980,9 +926,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToServerConsoleCommand", Value=7418)]
       k_EMsgGCToServerConsoleCommand = 7418,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUpdateLiveLeagueGameInfo", Value=7420)]
-      k_EMsgGCToGCUpdateLiveLeagueGameInfo = 7420,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCMakeOffering", Value=7423)]
       k_EMsgGCMakeOffering = 7423,
             
@@ -1007,15 +950,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCSetNewNotifications", Value=7430)]
       k_EMsgGCToGCSetNewNotifications = 7430,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCSetIsLeagueAdmin", Value=7431)]
-      k_EMsgGCToGCSetIsLeagueAdmin = 7431,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCLeagueAdminState", Value=7432)]
-      k_EMsgGCLeagueAdminState = 7432,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCSendLeagueAdminState", Value=7433)]
-      k_EMsgGCToGCSendLeagueAdminState = 7433,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCLeagueAdminList", Value=7434)]
       k_EMsgGCLeagueAdminList = 7434,
             
@@ -1036,9 +970,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFantasyScheduledMatchesResponse", Value=7440)]
       k_EMsgGCFantasyScheduledMatchesResponse = 7440,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGrantLeagueAccess", Value=7441)]
-      k_EMsgGCToGCGrantLeagueAccess = 7441,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCEventGameCreate", Value=7443)]
       k_EMsgGCEventGameCreate = 7443,
@@ -1090,12 +1021,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetAccountPartnerResponse", Value=7461)]
       k_EMsgGCToGCGetAccountPartnerResponse = 7461,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetAccountProfile", Value=7462)]
-      k_EMsgGCToGCGetAccountProfile = 7462,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetAccountProfileResponse", Value=7463)]
-      k_EMsgGCToGCGetAccountProfileResponse = 7463,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAGetWeekendTourneySchedule", Value=7464)]
       k_EMsgDOTAGetWeekendTourneySchedule = 7464,
@@ -1352,15 +1277,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCFantasySetMatchLeague", Value=7557)]
       k_EMsgGCToGCFantasySetMatchLeague = 7557,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRecordCompendiumStats", Value=7558)]
-      k_EMsgClientToGCRecordCompendiumStats = 7558,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCItemEditorRequestLeagueInfo", Value=7559)]
-      k_EMsgGCItemEditorRequestLeagueInfo = 7559,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCItemEditorLeagueInfoResponse", Value=7560)]
-      k_EMsgGCItemEditorLeagueInfoResponse = 7560,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUpdatePlayerPredictions", Value=7561)]
       k_EMsgGCToGCUpdatePlayerPredictions = 7561,
             
@@ -1460,18 +1376,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCChatNewUserSession", Value=7598)]
       k_EMsgGCToGCChatNewUserSession = 7598,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCGetLeagueSeries", Value=7599)]
-      k_EMsgClientToGCGetLeagueSeries = 7599,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCGetLeagueSeriesResponse", Value=7600)]
-      k_EMsgClientToGCGetLeagueSeriesResponse = 7600,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSQLGCToGCSignoutUpdateLeagueSchedule", Value=7601)]
-      k_EMsgSQLGCToGCSignoutUpdateLeagueSchedule = 7601,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToServerUpdateBroadcastCheers", Value=7602)]
-      k_EMsgGCToServerUpdateBroadcastCheers = 7602,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCApplyGemCombiner", Value=7603)]
       k_EMsgClientToGCApplyGemCombiner = 7603,
             
@@ -1501,6 +1405,105 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCCheckOwnsEntireEmoticonRangeResponse", Value=7612)]
       k_EMsgGCToGCCheckOwnsEntireEmoticonRangeResponse = 7612,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRecycleHeroRelic", Value=7619)]
+      k_EMsgClientToGCRecycleHeroRelic = 7619,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRecycleHeroRelicResponse", Value=7620)]
+      k_EMsgClientToGCRecycleHeroRelicResponse = 7620,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCRevokeEventOwnership", Value=7621)]
+      k_EMsgGCToGCRevokeEventOwnership = 7621,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUnlockEventPointSpending", Value=7622)]
+      k_EMsgGCToGCUnlockEventPointSpending = 7622,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientRequestLaneSelection", Value=7623)]
+      k_EMsgGCToClientRequestLaneSelection = 7623,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientRequestLaneSelectionResponse", Value=7624)]
+      k_EMsgGCToClientRequestLaneSelectionResponse = 7624,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCCavernCrawlIsHeroActive", Value=7625)]
+      k_EMsgServerToGCCavernCrawlIsHeroActive = 7625,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCCavernCrawlIsHeroActiveResponse", Value=7626)]
+      k_EMsgServerToGCCavernCrawlIsHeroActiveResponse = 7626,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCPlayerCardSpecificPurchaseRequest", Value=7627)]
+      k_EMsgClientToGCPlayerCardSpecificPurchaseRequest = 7627,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCPlayerCardSpecificPurchaseResponse", Value=7628)]
+      k_EMsgClientToGCPlayerCardSpecificPurchaseResponse = 7628,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCtoServerTensorflowInstance", Value=7629)]
+      k_EMsgGCtoServerTensorflowInstance = 7629,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSQLSetIsLeagueAdmin", Value=7630)]
+      k_EMsgSQLSetIsLeagueAdmin = 7630,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetLiveLeagueMatches", Value=7631)]
+      k_EMsgGCToGCGetLiveLeagueMatches = 7631,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetLiveLeagueMatchesResponse", Value=7632)]
+      k_EMsgGCToGCGetLiveLeagueMatchesResponse = 7632,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTALeagueInfoListAdminsRequest", Value=7633)]
+      k_EMsgDOTALeagueInfoListAdminsRequest = 7633,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTALeagueInfoListAdminsReponse", Value=7634)]
+      k_EMsgDOTALeagueInfoListAdminsReponse = 7634,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCLeagueMatchStarted", Value=7645)]
+      k_EMsgGCToGCLeagueMatchStarted = 7645,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCLeagueMatchCompleted", Value=7646)]
+      k_EMsgGCToGCLeagueMatchCompleted = 7646,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCLeagueMatchStartedResponse", Value=7647)]
+      k_EMsgGCToGCLeagueMatchStartedResponse = 7647,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTALeagueNodeRequest", Value=7648)]
+      k_EMsgDOTALeagueNodeRequest = 7648,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTALeagueNodeResponse", Value=7649)]
+      k_EMsgDOTALeagueNodeResponse = 7649,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTALeagueAvailableLobbyNodesRequest", Value=7650)]
+      k_EMsgDOTALeagueAvailableLobbyNodesRequest = 7650,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTALeagueAvailableLobbyNodes", Value=7651)]
+      k_EMsgDOTALeagueAvailableLobbyNodes = 7651,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCLeagueRequest", Value=7652)]
+      k_EMsgGCToGCLeagueRequest = 7652,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCLeagueResponse", Value=7653)]
+      k_EMsgGCToGCLeagueResponse = 7653,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCLeagueNodeGroupRequest", Value=7654)]
+      k_EMsgGCToGCLeagueNodeGroupRequest = 7654,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCLeagueNodeGroupResponse", Value=7655)]
+      k_EMsgGCToGCLeagueNodeGroupResponse = 7655,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCLeagueNodeRequest", Value=7656)]
+      k_EMsgGCToGCLeagueNodeRequest = 7656,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCLeagueNodeResponse", Value=7657)]
+      k_EMsgGCToGCLeagueNodeResponse = 7657,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCRealtimeStatsTerseRequest", Value=7658)]
+      k_EMsgGCToGCRealtimeStatsTerseRequest = 7658,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCRealtimeStatsTerseResponse", Value=7659)]
+      k_EMsgGCToGCRealtimeStatsTerseResponse = 7659,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetTopMatchesRequest", Value=7660)]
+      k_EMsgGCToGCGetTopMatchesRequest = 7660,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetTopMatchesResponse", Value=7661)]
+      k_EMsgGCToGCGetTopMatchesResponse = 7661,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001,
@@ -1555,12 +1558,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientFriendsPlayedCustomGameResponse", Value=8021)]
       k_EMsgGCToClientFriendsPlayedCustomGameResponse = 8021,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCFeaturedHeroesRequest", Value=8022)]
-      k_EMsgClientToGCFeaturedHeroesRequest = 8022,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientFeaturedHeroesResponse", Value=8023)]
-      k_EMsgGCToClientFeaturedHeroesResponse = 8023,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTopCustomGamesList", Value=8024)]
       k_EMsgGCTopCustomGamesList = 8024,
@@ -1847,12 +1844,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTransferTeamAdminResponse", Value=8132)]
       k_EMsgGCTransferTeamAdminResponse = 8132,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCChangeTeamSub", Value=8133)]
-      k_EMsgGCChangeTeamSub = 8133,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCChangeTeamSubResponse", Value=8134)]
-      k_EMsgGCChangeTeamSubResponse = 8134,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientTeamInfo", Value=8135)]
       k_EMsgGCToClientTeamInfo = 8135,
             
@@ -1861,12 +1852,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCMyTeamInfoRequest", Value=8137)]
       k_EMsgClientToGCMyTeamInfoRequest = 8137,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRequestEventPointLog", Value=8138)]
-      k_EMsgClientToGCRequestEventPointLog = 8138,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRequestEventPointLogResponse", Value=8139)]
-      k_EMsgClientToGCRequestEventPointLogResponse = 8139,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCPublishUserStat", Value=8140)]
       k_EMsgClientToGCPublishUserStat = 8140,
@@ -1934,12 +1919,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSpectatorLobbyGameDetails", Value=8163)]
       k_EMsgSpectatorLobbyGameDetails = 8163,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCStartCompendiumInGamePredictions", Value=8164)]
-      k_EMsgServerToGCStartCompendiumInGamePredictions = 8164,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCEndCompendiumInGamePredictions", Value=8165)]
-      k_EMsgServerToGCEndCompendiumInGamePredictions = 8165,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCCompendiumInGamePredictionResults", Value=8166)]
       k_EMsgServerToGCCompendiumInGamePredictionResults = 8166,
             
@@ -1988,14 +1967,8 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCSetPlayerCardRosterResponse", Value=8181)]
       k_EMsgClientToGCSetPlayerCardRosterResponse = 8181,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCStartCompendiumInGamePredictionsResponse", Value=8182)]
-      k_EMsgServerToGCStartCompendiumInGamePredictionsResponse = 8182,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCCloseCompendiumInGamePredictionVotingResponse", Value=8183)]
       k_EMsgServerToGCCloseCompendiumInGamePredictionVotingResponse = 8183,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCEndCompendiumInGamePredictionsResponse", Value=8184)]
-      k_EMsgServerToGCEndCompendiumInGamePredictionsResponse = 8184,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCCompendiumInGamePredictionResultsResponse", Value=8185)]
       k_EMsgServerToGCCompendiumInGamePredictionResultsResponse = 8185,
@@ -2136,7 +2109,250 @@ namespace SteamKit2.GC.Dota.Internal
       k_EMsgGCToGCGetFavoriteTeam = 8230,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetFavoriteTeamResponse", Value=8231)]
-      k_EMsgGCToGCGetFavoriteTeamResponse = 8231
+      k_EMsgGCToGCGetFavoriteTeamResponse = 8231,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSignOutEventGameData", Value=8232)]
+      k_EMsgSignOutEventGameData = 8232,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientAllStarVotesRequest", Value=8233)]
+      k_EMsgGCToClientAllStarVotesRequest = 8233,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientAllStarVotesReply", Value=8234)]
+      k_EMsgGCToClientAllStarVotesReply = 8234,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientAllStarVotesSubmit", Value=8236)]
+      k_EMsgGCToClientAllStarVotesSubmit = 8236,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientAllStarVotesSubmitReply", Value=8237)]
+      k_EMsgGCToClientAllStarVotesSubmitReply = 8237,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCQuickStatsRequest", Value=8238)]
+      k_EMsgClientToGCQuickStatsRequest = 8238,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCQuickStatsResponse", Value=8239)]
+      k_EMsgClientToGCQuickStatsResponse = 8239,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCSubtractEventPointsFromUser", Value=8240)]
+      k_EMsgGCToGCSubtractEventPointsFromUser = 8240,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSelectionPriorityChoiceRequest", Value=8241)]
+      k_EMsgSelectionPriorityChoiceRequest = 8241,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSelectionPriorityChoiceResponse", Value=8242)]
+      k_EMsgSelectionPriorityChoiceResponse = 8242,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCCompendiumInGamePredictionResults", Value=8243)]
+      k_EMsgGCToGCCompendiumInGamePredictionResults = 8243,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGameAutographReward", Value=8244)]
+      k_EMsgGameAutographReward = 8244,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGameAutographRewardResponse", Value=8245)]
+      k_EMsgGameAutographRewardResponse = 8245,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDestroyLobbyRequest", Value=8246)]
+      k_EMsgDestroyLobbyRequest = 8246,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDestroyLobbyResponse", Value=8247)]
+      k_EMsgDestroyLobbyResponse = 8247,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgPurchaseItemWithEventPoints", Value=8248)]
+      k_EMsgPurchaseItemWithEventPoints = 8248,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgPurchaseItemWithEventPointsResponse", Value=8249)]
+      k_EMsgPurchaseItemWithEventPointsResponse = 8249,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCMatchPlayerItemPurchaseHistory", Value=8250)]
+      k_EMsgServerToGCMatchPlayerItemPurchaseHistory = 8250,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGrantPlusHeroMatchResults", Value=8251)]
+      k_EMsgGCToGCGrantPlusHeroMatchResults = 8251,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCGetHeroTimedStats", Value=8252)]
+      k_EMsgGCGetHeroTimedStats = 8252,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCGetHeroTimedStatsResponse", Value=8253)]
+      k_EMsgGCGetHeroTimedStatsResponse = 8253,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgLobbyPlayerPlusSubscriptionData", Value=8254)]
+      k_EMsgLobbyPlayerPlusSubscriptionData = 8254,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCMatchStateHistory", Value=8255)]
+      k_EMsgServerToGCMatchStateHistory = 8255,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgPurchaseHeroRelic", Value=8256)]
+      k_EMsgPurchaseHeroRelic = 8256,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgPurchaseHeroRelicResponse", Value=8257)]
+      k_EMsgPurchaseHeroRelicResponse = 8257,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgPurchaseHeroRandomRelic", Value=8258)]
+      k_EMsgPurchaseHeroRandomRelic = 8258,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgPurchaseHeroRandomRelicResponse", Value=8259)]
+      k_EMsgPurchaseHeroRandomRelicResponse = 8259,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgPartyReadyCheckRequest", Value=8262)]
+      k_EMsgPartyReadyCheckRequest = 8262,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgPartyReadyCheckResponse", Value=8263)]
+      k_EMsgPartyReadyCheckResponse = 8263,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgPartyReadyCheckAcknowledge", Value=8264)]
+      k_EMsgPartyReadyCheckAcknowledge = 8264,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGetRecentPlayTimeFriendsRequest", Value=8265)]
+      k_EMsgGetRecentPlayTimeFriendsRequest = 8265,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGetRecentPlayTimeFriendsResponse", Value=8266)]
+      k_EMsgGetRecentPlayTimeFriendsResponse = 8266,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientCommendNotification", Value=8267)]
+      k_EMsgGCToClientCommendNotification = 8267,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgProfileRequest", Value=8268)]
+      k_EMsgProfileRequest = 8268,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgProfileResponse", Value=8269)]
+      k_EMsgProfileResponse = 8269,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgProfileUpdate", Value=8270)]
+      k_EMsgProfileUpdate = 8270,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgProfileUpdateResponse", Value=8271)]
+      k_EMsgProfileUpdateResponse = 8271,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSuccessfulHero", Value=8273)]
+      k_EMsgSuccessfulHero = 8273,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgHeroGlobalDataRequest", Value=8274)]
+      k_EMsgHeroGlobalDataRequest = 8274,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgHeroGlobalDataResponse", Value=8275)]
+      k_EMsgHeroGlobalDataResponse = 8275,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRequestPlusWeeklyChallengeResult", Value=8276)]
+      k_EMsgClientToGCRequestPlusWeeklyChallengeResult = 8276,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRequestPlusWeeklyChallengeResultResponse", Value=8277)]
+      k_EMsgClientToGCRequestPlusWeeklyChallengeResultResponse = 8277,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGrantPlusPrepaidTime", Value=8278)]
+      k_EMsgGCToGCGrantPlusPrepaidTime = 8278,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgPrivateMetadataKeyRequest", Value=8279)]
+      k_EMsgPrivateMetadataKeyRequest = 8279,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgPrivateMetadataKeyResponse", Value=8280)]
+      k_EMsgPrivateMetadataKeyResponse = 8280,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCReconcilePlusStatus", Value=8281)]
+      k_EMsgGCToGCReconcilePlusStatus = 8281,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCCheckPlusStatus", Value=8282)]
+      k_EMsgGCToGCCheckPlusStatus = 8282,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCCheckPlusStatusResponse", Value=8283)]
+      k_EMsgGCToGCCheckPlusStatusResponse = 8283,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCReconcilePlusAutoGrantItems", Value=8284)]
+      k_EMsgGCToGCReconcilePlusAutoGrantItems = 8284,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCReconcilePlusStatusUnreliable", Value=8285)]
+      k_EMsgGCToGCReconcilePlusStatusUnreliable = 8285,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgActivatePlusFreeTrialRequest", Value=8286)]
+      k_EMsgActivatePlusFreeTrialRequest = 8286,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgActivatePlusFreeTrialResponse", Value=8287)]
+      k_EMsgActivatePlusFreeTrialResponse = 8287,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientCavernCrawlMapPathCompleted", Value=8288)]
+      k_EMsgGCToClientCavernCrawlMapPathCompleted = 8288,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCCavernCrawlClaimRoom", Value=8289)]
+      k_EMsgClientToGCCavernCrawlClaimRoom = 8289,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCCavernCrawlClaimRoomResponse", Value=8290)]
+      k_EMsgClientToGCCavernCrawlClaimRoomResponse = 8290,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCCavernCrawlUseItemOnRoom", Value=8291)]
+      k_EMsgClientToGCCavernCrawlUseItemOnRoom = 8291,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCCavernCrawlUseItemOnRoomResponse", Value=8292)]
+      k_EMsgClientToGCCavernCrawlUseItemOnRoomResponse = 8292,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCCavernCrawlUseItemOnPath", Value=8293)]
+      k_EMsgClientToGCCavernCrawlUseItemOnPath = 8293,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCCavernCrawlUseItemOnPathResponse", Value=8294)]
+      k_EMsgClientToGCCavernCrawlUseItemOnPathResponse = 8294,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCCavernCrawlRequestMapState", Value=8295)]
+      k_EMsgClientToGCCavernCrawlRequestMapState = 8295,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCCavernCrawlRequestMapStateResponse", Value=8296)]
+      k_EMsgClientToGCCavernCrawlRequestMapStateResponse = 8296,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSignOutTips", Value=8297)]
+      k_EMsgSignOutTips = 8297,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRequestEventPointLogV2", Value=8298)]
+      k_EMsgClientToGCRequestEventPointLogV2 = 8298,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRequestEventPointLogResponseV2", Value=8299)]
+      k_EMsgClientToGCRequestEventPointLogResponseV2 = 8299,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRequestEventTipsSummary", Value=8300)]
+      k_EMsgClientToGCRequestEventTipsSummary = 8300,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRequestEventTipsSummaryResponse", Value=8301)]
+      k_EMsgClientToGCRequestEventTipsSummaryResponse = 8301,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgHeroGlobalDataAllHeroes", Value=8302)]
+      k_EMsgHeroGlobalDataAllHeroes = 8302,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRequestSocialFeed", Value=8303)]
+      k_EMsgClientToGCRequestSocialFeed = 8303,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRequestSocialFeedResponse", Value=8304)]
+      k_EMsgClientToGCRequestSocialFeedResponse = 8304,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRequestSocialFeedComments", Value=8305)]
+      k_EMsgClientToGCRequestSocialFeedComments = 8305,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRequestSocialFeedCommentsResponse", Value=8306)]
+      k_EMsgClientToGCRequestSocialFeedCommentsResponse = 8306,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCSignoutAwardCappedUnderhollowEventGamePoints", Value=8307)]
+      k_EMsgGCToGCSignoutAwardCappedUnderhollowEventGamePoints = 8307,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCCavernCrawlGetClaimedRoomCount", Value=8308)]
+      k_EMsgClientToGCCavernCrawlGetClaimedRoomCount = 8308,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCCavernCrawlGetClaimedRoomCountResponse", Value=8309)]
+      k_EMsgClientToGCCavernCrawlGetClaimedRoomCountResponse = 8309,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCReconcilePlusAutoGrantItemsUnreliable", Value=8310)]
+      k_EMsgGCToGCReconcilePlusAutoGrantItemsUnreliable = 8310,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCAddBroadcastTimelineEvent", Value=8311)]
+      k_EMsgServerToGCAddBroadcastTimelineEvent = 8311,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToServerUpdateSteamBroadcasting", Value=8312)]
+      k_EMsgGCToServerUpdateSteamBroadcasting = 8312,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRecordContestVote", Value=8313)]
+      k_EMsgClientToGCRecordContestVote = 8313,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientRecordContestVoteResponse", Value=8314)]
+      k_EMsgGCToClientRecordContestVoteResponse = 8314,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGrantAutograph", Value=8315)]
+      k_EMsgGCToGCGrantAutograph = 8315,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGrantAutographResponse", Value=8316)]
+      k_EMsgGCToGCGrantAutographResponse = 8316
     }
   
 }

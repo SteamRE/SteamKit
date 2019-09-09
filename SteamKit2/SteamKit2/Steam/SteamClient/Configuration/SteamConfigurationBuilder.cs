@@ -6,6 +6,8 @@
 
 using System;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using SteamKit2.Discovery;
 
 namespace SteamKit2
@@ -29,6 +31,8 @@ namespace SteamKit2
                     EClientPersonaStateFlag.PlayerName | EClientPersonaStateFlag.Presence |
                     EClientPersonaStateFlag.SourceID | EClientPersonaStateFlag.GameExtraInfo |
                     EClientPersonaStateFlag.LastSeen,
+
+                HttpClientFactory = DefaultHttpClientFactory,
 
                 ProtocolTypes = ProtocolTypes.Tcp,
 
@@ -71,6 +75,12 @@ namespace SteamKit2
             return this;
         }
 
+        public ISteamConfigurationBuilder WithHttpClientFactory(HttpClientFactory factoryFunction)
+        {
+            state.HttpClientFactory = factoryFunction;
+            return this;
+        }
+
         public ISteamConfigurationBuilder WithProtocolTypes(ProtocolTypes protocolTypes)
         {
             state.ProtocolTypes = protocolTypes;
@@ -105,6 +115,15 @@ namespace SteamKit2
         {
             state.WebProxy = webProxy;
             return this;
+        }
+
+        static HttpClient DefaultHttpClientFactory()
+        {
+            var client = new HttpClient();
+
+            var assemblyVersion = typeof(SteamConfiguration).Assembly.GetName().Version.ToString(fieldCount: 3);
+            client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("SteamKit", assemblyVersion));
+            return client;
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
+# Visual Studio 15
+VisualStudioVersion = 15.0.28306.52
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHookAnalyzer2", "NetHookAnalyzer2\NetHookAnalyzer2.csproj", "{19DB2A0A-4D96-492A-AD32-BED727ECD39D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamKit2", "..\..\SteamKit2\SteamKit2\SteamKit2.csproj", "{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SteamKit2", "..\..\SteamKit2\SteamKit2\SteamKit2.csproj", "{4B2B0365-DE37-4B65-B614-3E4E7C05147D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,12 +17,15 @@ Global
 		{19DB2A0A-4D96-492A-AD32-BED727ECD39D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19DB2A0A-4D96-492A-AD32-BED727ECD39D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19DB2A0A-4D96-492A-AD32-BED727ECD39D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B2B0365-DE37-4B65-B614-3E4E7C05147D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B2B0365-DE37-4B65-B614-3E4E7C05147D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B2B0365-DE37-4B65-B614-3E4E7C05147D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B2B0365-DE37-4B65-B614-3E4E7C05147D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F55126E-55CC-47B3-9F03-4AB6C7AA3BE5}
 	EndGlobalSection
 EndGlobal
