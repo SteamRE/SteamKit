@@ -5,6 +5,7 @@
 
 
 using System;
+using System.Net;
 using SteamKit2.Discovery;
 
 namespace SteamKit2
@@ -19,6 +20,7 @@ namespace SteamKit2
         public IServerListProvider ServerListProvider;
         public EUniverse Universe;
         public Uri WebAPIBaseAddress;
+        public IWebProxy WebProxy;
         public string WebAPIKey;
     }
 }

@@ -136,7 +136,7 @@ namespace SteamKit2.Internal
         /// <param name="proxy">
         /// The proxy server that should be used to connect to CM server (only WebSocketConnection is supported).
         /// </param>
-        public void Connect( ServerRecord cmServer =  null, WebProxy proxy = null )
+        public void Connect( ServerRecord cmServer = null, WebProxy proxy = null )
         {
             lock ( connectionLock )
             {
@@ -183,16 +183,17 @@ namespace SteamKit2.Internal
                     connection.Connected += Connected;
                     connection.Disconnected += Disconnected;
 
-                    if ( ( proxy != null ) && connection is WebSocketConnection socketConnection)
+                    IWebProxy webProxy = proxy ?? Configuration.WebProxy;
+                    if ( ( webProxy != null ) && connection is WebSocketConnection socketConnection)
                     {
-                        socketConnection.Connect(record.EndPoint, proxy, (int) ConnectionTimeout.TotalMilliseconds);
+                        socketConnection.Connect(record.EndPoint, webProxy, (int) ConnectionTimeout.TotalMilliseconds);
                     }
                     else
                     {
                         connection.Connect(record.EndPoint, (int) ConnectionTimeout.TotalMilliseconds);
                     }
                 }, TaskContinuationOptions.ExecuteSynchronously ).ContinueWith( t =>
-              {
+                {
                     if ( t.IsFaulted )
                     {
                         DebugLog.WriteLine( nameof( CMClient ), "Unhandled exception when attempting to connect to Steam: {0}", t.Exception );

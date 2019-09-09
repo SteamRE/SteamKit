@@ -5,6 +5,7 @@
 
 
 using System;
+using System.Net;
 using SteamKit2.Discovery;
 
 namespace SteamKit2
@@ -89,10 +90,15 @@ namespace SteamKit2
         public Uri WebAPIBaseAddress => state.WebAPIBaseAddress;
 
         /// <summary>
-        /// An  API key to be used for authorized requests.
+        /// An API key to be used for authorized requests.
         /// Keys can be obtained from https://steamcommunity.com/dev or the Steamworks Partner site.
         /// </summary>
         public string WebAPIKey => state.WebAPIKey;
+
+        /// <summary>
+        /// A proxy server to use for WebSocket requests.
+        /// </summary>
+        public IWebProxy WebProxy => state.WebProxy;
 
         /// <summary>
         /// The server list used for this configuration.
