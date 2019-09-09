@@ -94,10 +94,8 @@ namespace SteamKit2
             /// <summary>
             /// Gets or sets machine ID.
             /// </summary>
-            /// <value>
-            /// Base64-encoded MachineID.
-            /// </value>
-            public string MachineID { get; set; }
+            /// <value>Provided machine ID.</value>
+            public byte[] MachineID { get; set; }
 
             /// <summary>
             /// Gets or sets a value indicating whether to request the Steam2 ticket.
@@ -348,7 +346,7 @@ namespace SteamKit2
             // we're now using the latest steamclient package version, this is required to get a proper sentry file for steam guard
             logon.Body.client_package_version = 1771; // todo: determine if this is still required
             logon.Body.supports_rate_limit_response = true;
-            logon.Body.machine_id = string.IsNullOrEmpty(details.MachineID) ? HardwareUtils.GetMachineID() : Convert.FromBase64String(details.MachineID);
+            logon.Body.machine_id = details.MachineID ?? HardwareUtils.GetMachineID();
 
             // steam guard 
             logon.Body.auth_code = details.AuthCode;
