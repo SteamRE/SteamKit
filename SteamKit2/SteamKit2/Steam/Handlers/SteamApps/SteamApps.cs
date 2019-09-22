@@ -252,7 +252,7 @@ namespace SteamKit2
 
             if ( packages == null )
             {
-                throw new ArgumentNullException( nameof(apps) );
+                throw new ArgumentNullException( nameof(packages) );
             }
 
             var request = new ClientMsgProtobuf<CMsgClientPICSProductInfoRequest>( EMsg.ClientPICSProductInfoRequest );

@@ -1,9 +1,8 @@
-sudo: required
-dist: trusty
+dist: xenial
 
 language: csharp
 mono: none
-dotnet: 2.1
+dotnet: 2.2
 
 git:
     depth: false

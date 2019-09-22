@@ -26,8 +26,8 @@ namespace Tests
 
             kv.Children.Add( new KeyValue( "exists", "value" ) );
 
-            Assert.Equal( kv["exists"].Value, "value" );
-            Assert.Equal( kv["thiskeydoesntexist"], KeyValue.Invalid );
+            Assert.Equal( "value", kv["exists"].Value );
+            Assert.Equal( KeyValue.Invalid, kv["thiskeydoesntexist"] );
         }
 
         [Fact]
@@ -37,15 +37,15 @@ namespace Tests
 
             kv["key"] = new KeyValue();
 
-            Assert.Equal( kv.Children.Count, 1 );
+            Assert.Single( kv.Children );
 
             kv["key"] = new KeyValue();
 
-            Assert.Equal( kv.Children.Count, 1 );
+            Assert.Single( kv.Children );
 
             kv["key2"] = new KeyValue();
 
-            Assert.Equal( kv.Children.Count, 2 );
+            Assert.Equal( 2, kv.Children.Count );
         }
 
         [Fact]
@@ -59,8 +59,8 @@ namespace Tests
 
             kv["subkey"] = subkey;
 
-            Assert.Equal( subkey.Name, "subkey" );
-            Assert.Equal( kv["subkey"].Name, "subkey" );
+            Assert.Equal( "subkey", subkey.Name );
+            Assert.Equal( "subkey", kv["subkey"].Name );
         }
 
         [Fact]
@@ -85,7 +85,7 @@ namespace Tests
 
             KeyValue subKey = kv[ "subkey" ];
 
-            Assert.Equal( 1, subKey.Children.Count );
+            Assert.Single( subKey.Children );
 
             Assert.Equal( "name2", subKey[ "name2" ].Name );
             Assert.Equal( "value2", subKey[ "name2" ].Value );
@@ -297,7 +297,7 @@ namespace Tests
 
             Assert.True( success, "Should have read test object." );
             Assert.Equal( "TestObject", kv.Name );
-            Assert.Equal( 1, kv.Children.Count );
+            Assert.Single( kv.Children );
             Assert.Equal( "key", kv.Children[0].Name );
             Assert.Equal( "value", kv.Children[0].Value );
         }
@@ -317,7 +317,7 @@ namespace Tests
 
             Assert.True( success, "Should have read test object." );
             Assert.Equal( "TestObject", kv.Name );
-            Assert.Equal( 1, kv.Children.Count );
+            Assert.Single( kv.Children );
             Assert.Equal( "key", kv.Children[0].Name );
             Assert.Equal( "value", kv.Children[0].Value );
         }

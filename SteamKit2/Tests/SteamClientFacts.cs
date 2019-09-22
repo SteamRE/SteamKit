@@ -100,7 +100,7 @@ namespace Tests
 			var steamClient = new SteamClient();
 			var jobID = steamClient.GetNextJobID();
 
-			Assert.Equal(jobID.BoxID, 0u);
+			Assert.Equal(0u, jobID.BoxID);
 		}
 
 		class TestMsgHandler : ClientMsgHandler

@@ -164,6 +164,24 @@ namespace SteamKit2.GC.CSGO.Internal
     private void Reseterror_message() { error_messageSpecified = false; }
     
 
+    private uint? _ip;
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint ip
+    {
+      get { return _ip?? default(uint); }
+      set { _ip = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool ipSpecified
+    {
+      get { return _ip != null; }
+      set { if (value == (_ip== null)) _ip = value ? this.ip : (uint?)null; }
+    }
+    private bool ShouldSerializeip() { return ipSpecified; }
+    private void Resetip() { ipSpecified = false; }
+    
+
     private GCProtoBufMsgSrc? _gc_msg_src;
     [global::ProtoBuf.ProtoMember(200, IsRequired = false, Name=@"gc_msg_src", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public GCProtoBufMsgSrc gc_msg_src
@@ -3710,6 +3728,60 @@ namespace SteamKit2.GC.CSGO.Internal
     }
     private bool ShouldSerializeis_phone_identifying() { return is_phone_identifyingSpecified; }
     private void Resetis_phone_identifying() { is_phone_identifyingSpecified = false; }
+    
+
+    private uint? _rt_identity_linked;
+    [global::ProtoBuf.ProtoMember(35, IsRequired = false, Name=@"rt_identity_linked", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint rt_identity_linked
+    {
+      get { return _rt_identity_linked?? default(uint); }
+      set { _rt_identity_linked = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool rt_identity_linkedSpecified
+    {
+      get { return _rt_identity_linked != null; }
+      set { if (value == (_rt_identity_linked== null)) _rt_identity_linked = value ? this.rt_identity_linked : (uint?)null; }
+    }
+    private bool ShouldSerializert_identity_linked() { return rt_identity_linkedSpecified; }
+    private void Resetrt_identity_linked() { rt_identity_linkedSpecified = false; }
+    
+
+    private uint? _rt_birth_date;
+    [global::ProtoBuf.ProtoMember(36, IsRequired = false, Name=@"rt_birth_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint rt_birth_date
+    {
+      get { return _rt_birth_date?? default(uint); }
+      set { _rt_birth_date = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool rt_birth_dateSpecified
+    {
+      get { return _rt_birth_date != null; }
+      set { if (value == (_rt_birth_date== null)) _rt_birth_date = value ? this.rt_birth_date : (uint?)null; }
+    }
+    private bool ShouldSerializert_birth_date() { return rt_birth_dateSpecified; }
+    private void Resetrt_birth_date() { rt_birth_dateSpecified = false; }
+    
+
+    private string _txn_country_code;
+    [global::ProtoBuf.ProtoMember(37, IsRequired = false, Name=@"txn_country_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string txn_country_code
+    {
+      get { return _txn_country_code?? ""; }
+      set { _txn_country_code = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool txn_country_codeSpecified
+    {
+      get { return _txn_country_code != null; }
+      set { if (value == (_txn_country_code== null)) _txn_country_code = value ? this.txn_country_code : (string)null; }
+    }
+    private bool ShouldSerializetxn_country_code() { return txn_country_codeSpecified; }
+    private void Resettxn_country_code() { txn_country_codeSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

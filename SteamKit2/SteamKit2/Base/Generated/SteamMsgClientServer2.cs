@@ -5910,6 +5910,42 @@ namespace SteamKit2.Internal
     private bool ShouldSerializetotal_bytes_legacy() { return total_bytes_legacySpecified; }
     private void Resettotal_bytes_legacy() { total_bytes_legacySpecified = false; }
     
+
+    private ulong? _total_bytes_patched;
+    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"total_bytes_patched", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong total_bytes_patched
+    {
+      get { return _total_bytes_patched?? default(ulong); }
+      set { _total_bytes_patched = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool total_bytes_patchedSpecified
+    {
+      get { return _total_bytes_patched != null; }
+      set { if (value == (_total_bytes_patched== null)) _total_bytes_patched = value ? this.total_bytes_patched : (ulong?)null; }
+    }
+    private bool ShouldSerializetotal_bytes_patched() { return total_bytes_patchedSpecified; }
+    private void Resettotal_bytes_patched() { total_bytes_patchedSpecified = false; }
+    
+
+    private ulong? _total_bytes_saved;
+    [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"total_bytes_saved", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong total_bytes_saved
+    {
+      get { return _total_bytes_saved?? default(ulong); }
+      set { _total_bytes_saved = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool total_bytes_savedSpecified
+    {
+      get { return _total_bytes_saved != null; }
+      set { if (value == (_total_bytes_saved== null)) _total_bytes_saved = value ? this.total_bytes_saved : (ulong?)null; }
+    }
+    private bool ShouldSerializetotal_bytes_saved() { return total_bytes_savedSpecified; }
+    private void Resettotal_bytes_saved() { total_bytes_savedSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -8059,6 +8095,24 @@ namespace SteamKit2.Internal
     }
     private bool ShouldSerializegcname() { return gcnameSpecified; }
     private void Resetgcname() { gcnameSpecified = false; }
+    
+
+    private uint? _ip;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint ip
+    {
+      get { return _ip?? default(uint); }
+      set { _ip = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool ipSpecified
+    {
+      get { return _ip != null; }
+      set { if (value == (_ip== null)) _ip = value ? this.ip : (uint?)null; }
+    }
+    private bool ShouldSerializeip() { return ipSpecified; }
+    private void Resetip() { ipSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

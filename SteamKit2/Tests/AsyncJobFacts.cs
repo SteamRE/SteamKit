@@ -84,7 +84,7 @@ namespace Tests
             Assert.True( asyncTask.IsCanceled, "Async job should be canceled on message timeout" );
             Assert.False( asyncTask.IsFaulted, "Async job should not be faulted on message timeout" );
 
-            await Assert.ThrowsAsync( typeof( TaskCanceledException ), async () => await asyncTask );
+            await Assert.ThrowsAsync<TaskCanceledException>( async () => await asyncTask );
         }
 
         [Fact]
@@ -119,7 +119,7 @@ namespace Tests
             Assert.True( asyncTask.IsCanceled, "Async job should be canceled after 5 seconds of a 1 second job timeout" );
             Assert.False( asyncTask.IsFaulted, "Async job should not be faulted after 5 seconds of a 1 second job timeout" );
 
-            await Assert.ThrowsAsync( typeof( TaskCanceledException ), async () => await asyncTask );
+            await Assert.ThrowsAsync<TaskCanceledException>( async () => await asyncTask );
         }
 
         [Fact]
@@ -146,7 +146,7 @@ namespace Tests
             Assert.False( asyncTask.IsCanceled, "Async job should not be canceled after job failure" );
             Assert.True( asyncTask.IsFaulted, "Async job should be faulted after job failure" );
 
-            await Assert.ThrowsAsync( typeof( AsyncJobFailedException ), async () => await asyncTask );
+            await Assert.ThrowsAsync<AsyncJobFailedException>( async () => await asyncTask );
         }
 
         [Fact]
@@ -271,7 +271,7 @@ namespace Tests
             Assert.True( asyncTask.IsCanceled, "AsyncJobMultiple should be canceled after 5 seconds of a 1 second job timeout" );
             Assert.False( asyncTask.IsFaulted, "AsyncJobMultiple should not be faulted after 5 seconds of a 1 second job timeout" );
 
-            await Assert.ThrowsAsync( typeof( TaskCanceledException ), async () => await asyncTask );
+            await Assert.ThrowsAsync<TaskCanceledException>( async () => await asyncTask );
         }
 
         [Fact]
@@ -302,7 +302,7 @@ namespace Tests
 
             Assert.False( result.Complete, "ResultSet should be incomplete" );
             Assert.False( result.Failed, "ResultSet should not be failed" );
-            Assert.Equal( result.Results.Count, 1 );
+            Assert.Single( result.Results );
             Assert.Contains( onlyResult, result.Results );
         }
 
@@ -331,7 +331,7 @@ namespace Tests
 
             Assert.False( result.Complete, "ResultSet should be incomplete" );
             Assert.True( result.Failed, "ResultSet should be failed" );
-            Assert.Equal( result.Results.Count, 1 );
+            Assert.Single( result.Results );
             Assert.Contains( onlyResult, result.Results );
         }
 
@@ -359,7 +359,7 @@ namespace Tests
             Assert.False( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled after job failure" );
             Assert.True( asyncTask.IsFaulted, "AsyncJobMultiple should be faulted after job failure" );
 
-            await Assert.ThrowsAsync( typeof( AsyncJobFailedException ), async () => await asyncTask );
+            await Assert.ThrowsAsync<AsyncJobFailedException>( async () => await asyncTask );
         }
 
         [Fact]

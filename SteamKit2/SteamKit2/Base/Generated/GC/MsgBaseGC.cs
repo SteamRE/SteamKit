@@ -163,6 +163,24 @@ namespace SteamKit2.GC.Internal
     private void Reseterror_message() { error_messageSpecified = false; }
     
 
+    private uint? _ip;
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint ip
+    {
+      get { return _ip?? default(uint); }
+      set { _ip = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool ipSpecified
+    {
+      get { return _ip != null; }
+      set { if (value == (_ip== null)) _ip = value ? this.ip : (uint?)null; }
+    }
+    private bool ShouldSerializeip() { return ipSpecified; }
+    private void Resetip() { ipSpecified = false; }
+    
+
     private GCProtoBufMsgSrc? _gc_msg_src;
     [global::ProtoBuf.ProtoMember(200, IsRequired = false, Name=@"gc_msg_src", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public GCProtoBufMsgSrc gc_msg_src

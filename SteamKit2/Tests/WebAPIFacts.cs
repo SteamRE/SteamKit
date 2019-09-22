@@ -1,8 +1,8 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 using SteamKit2;
 using Xunit;
@@ -36,64 +36,67 @@ namespace Tests
 
             var iface = config.GetAsyncWebAPIInterface("TestInterface");
 
-            Assert.Equal(iface.iface, "TestInterface");
-            Assert.Equal(iface.apiKey, "hello world");
-            Assert.Equal(iface.httpClient.BaseAddress, new Uri("http://example.com"));
+            Assert.Equal("TestInterface", iface.iface);
+            Assert.Equal("hello world", iface.apiKey);
+            Assert.Equal(new Uri("http://example.com"), iface.httpClient.BaseAddress);
         }
 
         [Fact]
-        public async Task ThrowsHttpRequestExceptionIfRequestUnsuccessful()
+        public async Task ThrowsWebAPIRequestExceptionIfRequestUnsuccessful()
         {
-            var listener = new TcpListener(new IPEndPoint(IPAddress.Loopback, 28123));
-            listener.Start();
-            try
-            {
-                AcceptAndAutoReplyNextSocket(listener);
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( new ServiceUnavailableHttpMessageHandler() ) ) );
+            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" ); 
 
-                var baseUri = "http://localhost:28123";
-                dynamic iface = WebAPI.GetAsyncInterface(new Uri(baseUri), "IFooService");
-
-                await Assert.ThrowsAsync(typeof(HttpRequestException), () => (Task)iface.PerformFooOperation());
-            }
-            finally
-            {
-                listener.Stop();
-            }
+           await Assert.ThrowsAsync<WebAPIRequestException>(() => (Task)iface.PerformFooOperation());
         }
 
-        // Primitive HTTP listener function that always returns HTTP 503.
-        static void AcceptAndAutoReplyNextSocket(TcpListener listener)
+        [Fact]
+        public async Task UsesSingleParameterArgumentsDictionary()
         {
-            void OnSocketAccepted(IAsyncResult result)
-            {
-                try
-                {
-                    using (var socket = listener.EndAcceptSocket(result))
-                    using (var stream = new NetworkStream(socket))
-                    using (var reader = new StreamReader(stream))
-                    using (var writer = new StreamWriter(stream))
-                    {
-                        string line;
-                        do
-                        {
-                            line = reader.ReadLine();
-                        }
-                        while (!string.IsNullOrEmpty(line));
+            var capturingHandler = new CaturingHttpMessageHandler();
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( capturingHandler ) ) );
 
-                        writer.WriteLine("HTTP/1.1 503 Service Unavailable");
-                        writer.WriteLine("X-Response-Source: Unit Test");
-                        writer.WriteLine();
-                    }
-                }
-                catch
-                {
-                }
-            }
+            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
-            var ar = listener.BeginAcceptSocket(OnSocketAccepted, null);
-            if (ar.CompletedSynchronously)
+            var args = new Dictionary<string, object>
             {
-                OnSocketAccepted(ar);
+                [ "f" ] = "foo",
+                [ "b" ] = "bar",
+                [ "method" ] = "PUT"
+            };
+
+            var response = await iface.PerformFooOperation2( args );
+
+            var request = capturingHandler.MostRecentRequest;
+            Assert.NotNull( request );
+            Assert.Equal( "/IFooService/PerformFooOperation/v2", request.RequestUri.AbsolutePath );
+            Assert.Equal( HttpMethod.Put, request.Method );
+
+            var formData = await request.Content.ReadAsFormDataAsync();
+            Assert.Equal( 3, formData.Count );
+            Assert.Equal( "foo", formData[ "f" ] );
+            Assert.Equal( "bar", formData[ "b" ] );
+            Assert.Equal( "vdf", formData[ "format" ] );
+        }
+
+        sealed class ServiceUnavailableHttpMessageHandler : HttpMessageHandler
+        {
+            protected override Task<HttpResponseMessage> SendAsync( HttpRequestMessage request, CancellationToken cancellationToken )
+                => Task.FromResult( new HttpResponseMessage( HttpStatusCode.ServiceUnavailable ) );
+        }
+
+        sealed class CaturingHttpMessageHandler : HttpMessageHandler
+        {
+            public HttpRequestMessage MostRecentRequest { get; private set; }
+
+            protected override Task<HttpResponseMessage> SendAsync( HttpRequestMessage request, CancellationToken cancellationToken )
+            {
+                MostRecentRequest = request;
+
+                return Task.FromResult( new HttpResponseMessage( HttpStatusCode.OK )
+                {
+                    Content = new ByteArrayContent( Array.Empty<byte>() )
+                });
             }
         }
     }
