@@ -15,8 +15,15 @@ using static SteamKit2.Util.MacHelpers.IOKit;
 
 namespace SteamKit2
 {
+    /// <summary>
+    /// Class used for retrieving hardware info about machine
+    /// </summary>
     public abstract class MachineInfoProvider
     {
+        /// <summary>
+        /// Gets default MachineInfoProvider for current OS
+        /// </summary>
+        /// <returns><see cref="WindowsInfoProvider"/> for Windows OS, <see cref="OSXInfoProvider"/> for Mac OS, <see cref="LinuxInfoProvider"/> for Linux, and <see cref="DefaultInfoProvider"/> for others.</returns>
         public static MachineInfoProvider GetProvider()
         {
             switch ( Environment.OSVersion.Platform )
@@ -39,8 +46,22 @@ namespace SteamKit2
             return new DefaultInfoProvider();
         }
 
+        /// <summary>
+        /// Gets machine's unique identificator
+        /// </summary>
+        /// <returns>Byte array with machine's GUID</returns>
         public abstract byte[] GetMachineGuid();
+        
+        /// <summary>
+        /// Gets machine's MAC address
+        /// </summary>
+        /// <returns>Byte array with MAC address</returns>
         public abstract byte[] GetMacAddress();
+        
+        /// <summary>
+        /// Gets first disk ID
+        /// </summary>
+        /// <returns>Byte array with disk ID</returns>
         public abstract byte[] GetDiskId();
     }
 

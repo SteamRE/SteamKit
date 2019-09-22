@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
 using SteamKit2;
 using SteamKit2.Discovery;
@@ -90,6 +91,7 @@ namespace Tests
                  .WithCellID(123)
                  .WithConnectionTimeout(TimeSpan.FromMinutes(1))
                  .WithDefaultPersonaStateFlags(EClientPersonaStateFlag.SourceID)
+                 .WithMachineInfoProvider(MachineInfoProvider.GetProvider())
                  .WithProtocolTypes(ProtocolTypes.WebSocket | ProtocolTypes.Udp)
                  .WithServerListProvider(new CustomServerListProvider())
                  .WithUniverse(EUniverse.Internal)
@@ -115,6 +117,12 @@ namespace Tests
         public void ConnectionTimeoutIsConfigured()
         {
             Assert.Equal(TimeSpan.FromMinutes(1), configuration.ConnectionTimeout);
+        }
+
+        [Fact]
+        public void MachineInfoProviderIsConfigured()
+        {
+            Assert.IsType<CustomMachineInfoProvider>(configuration.MachineInfoProvider);
         }
 
         [Fact]
@@ -166,6 +174,15 @@ namespace Tests
 
             Task IServerListProvider.UpdateServerListAsync(IEnumerable<ServerRecord> endpoints)
                 => throw new NotImplementedException();
+        }
+
+        class CustomMachineInfoProvider : MachineInfoProvider
+        {
+            public override byte[] GetMachineGuid() => throw new NotImplementedException();
+
+            public override byte[] GetMacAddress() => throw new NotImplementedException();
+
+            public override byte[] GetDiskId() => throw new NotImplementedException();
         }
     }
 }

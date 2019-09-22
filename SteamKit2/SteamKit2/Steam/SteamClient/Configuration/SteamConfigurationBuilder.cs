@@ -70,7 +70,8 @@ namespace SteamKit2
             return this;
         }
 
-        public ISteamConfigurationBuilder WithMachineInfoProvider(MachineInfoProvider machineInfoProvider) {
+        public ISteamConfigurationBuilder WithMachineInfoProvider(MachineInfoProvider machineInfoProvider)
+        {
             state.MachineInfoProvider = machineInfoProvider;
             return this;
         }
