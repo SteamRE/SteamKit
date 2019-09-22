@@ -15,7 +15,7 @@ using static SteamKit2.Util.MacHelpers.IOKit;
 
 namespace SteamKit2
 {
-    abstract class MachineInfoProvider
+    public abstract class MachineInfoProvider
     {
         public static MachineInfoProvider GetProvider()
         {
@@ -313,9 +313,9 @@ namespace SteamKit2
         static Task<MachineID> generateTask;
 
 
-        public static void Init()
+        public static void Init(MachineInfoProvider provider)
         {
-            generateTask = Task.Factory.StartNew( GenerateMachineID );
+            generateTask = Task.Factory.StartNew( () => GenerateMachineID(provider) );
         }
 
         public static byte[] GetMachineID()
@@ -339,15 +339,13 @@ namespace SteamKit2
         }
 
 
-        static MachineID GenerateMachineID()
+        static MachineID GenerateMachineID(MachineInfoProvider provider)
         {
             // the aug 25th 2015 CM update made well-formed machine MessageObjects required for logon
             // this was flipped off shortly after the update rolled out, likely due to linux steamclients running on distros without a way to build a machineid
             // so while a valid MO isn't currently (as of aug 25th) required, they could be in the future and we'll abide by The Valve Law now
 
             var machineId = new MachineID();
-
-            MachineInfoProvider provider = MachineInfoProvider.GetProvider();
 
             machineId.SetBB3( GetHexString( provider.GetMachineGuid() ) );
             machineId.SetFF2( GetHexString( provider.GetMacAddress() ) );

@@ -258,6 +258,8 @@ namespace SteamKit2
 
         internal SteamUser()
         {
+            HardwareUtils.Init(Client.Configuration.MachineInfoProvider);
+            
             dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
                 { EMsg.ClientLogOnResponse, HandleLogOnResponse },
@@ -270,11 +272,6 @@ namespace SteamKit2
                 { EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse, HandleWebAPIUserNonce },
                 { EMsg.ClientMarketingMessageUpdate2, HandleMarketingMessageUpdate },
             };
-        }
-
-        static SteamUser()
-        {
-            HardwareUtils.Init();
         }
 
 

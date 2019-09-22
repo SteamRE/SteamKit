@@ -15,6 +15,7 @@ namespace SteamKit2
         public uint CellID;
         public TimeSpan ConnectionTimeout;
         public EClientPersonaStateFlag DefaultPersonaStateFlags;
+        public MachineInfoProvider MachineInfoProvider;
         public ProtocolTypes ProtocolTypes;
         public IServerListProvider ServerListProvider;
         public EUniverse Universe;

@@ -28,6 +28,8 @@ namespace SteamKit2
                     EClientPersonaStateFlag.PlayerName | EClientPersonaStateFlag.Presence |
                     EClientPersonaStateFlag.SourceID | EClientPersonaStateFlag.GameExtraInfo |
                     EClientPersonaStateFlag.LastSeen,
+                
+                MachineInfoProvider = MachineInfoProvider.GetProvider(),
 
                 ProtocolTypes = ProtocolTypes.Tcp,
 
@@ -65,6 +67,11 @@ namespace SteamKit2
         public ISteamConfigurationBuilder WithDirectoryFetch(bool allowDirectoryFetch)
         {
             state.AllowDirectoryFetch = allowDirectoryFetch;
+            return this;
+        }
+
+        public ISteamConfigurationBuilder WithMachineInfoProvider(MachineInfoProvider machineInfoProvider) {
+            state.MachineInfoProvider = machineInfoProvider;
             return this;
         }
 
