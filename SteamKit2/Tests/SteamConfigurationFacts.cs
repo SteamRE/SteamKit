@@ -106,7 +106,7 @@ namespace Tests
                  .WithConnectionTimeout(TimeSpan.FromMinutes(1))
                  .WithDefaultPersonaStateFlags(EClientPersonaStateFlag.SourceID)
                  .WithHttpClientFactory(() => { var c = new HttpClient(); c.DefaultRequestHeaders.Add("X-SteamKit-Tests", "true"); return c; })
-                 .WithMachineInfoProvider(MachineInfoProvider.GetProvider())
+                 .WithMachineInfoProvider(new CustomMachineInfoProvider())
                  .WithProtocolTypes(ProtocolTypes.WebSocket | ProtocolTypes.Udp)
                  .WithServerListProvider(new CustomServerListProvider())
                  .WithUniverse(EUniverse.Internal)

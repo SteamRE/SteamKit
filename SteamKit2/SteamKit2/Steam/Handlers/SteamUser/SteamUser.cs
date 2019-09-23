@@ -258,8 +258,6 @@ namespace SteamKit2
 
         internal SteamUser()
         {
-            HardwareUtils.Init(Client.Configuration.MachineInfoProvider);
-            
             dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
                 { EMsg.ClientLogOnResponse, HandleLogOnResponse },
@@ -273,7 +271,6 @@ namespace SteamKit2
                 { EMsg.ClientMarketingMessageUpdate2, HandleMarketingMessageUpdate },
             };
         }
-
 
         /// <summary>
         /// Logs the client into the Steam3 network.
