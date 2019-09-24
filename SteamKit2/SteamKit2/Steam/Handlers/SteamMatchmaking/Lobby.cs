@@ -172,7 +172,6 @@ namespace SteamKit2
                 /// <summary>
                 /// Initializes a new instance of the <see cref="SlotsAvailableFilter"/> class.
                 /// </summary>
-                /// <param name="key">The metadata key this filter pertains to.</param>
                 /// <param name="slotsAvailable">Integer value to compare against.</param>
                 public SlotsAvailableFilter( int slotsAvailable ) : base( ELobbyFilterType.SlotsAvailable, "", ELobbyComparison.Equal )
                 {

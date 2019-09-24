@@ -106,7 +106,7 @@ namespace SteamKit2
         {
             dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
-                { EMsg.ClientServiceMethodResponse, HandleClientServiceMethodResponse },
+                { EMsg.ClientServiceMethodLegacyResponse, HandleClientServiceMethodResponse },
                 { EMsg.ServiceMethod, HandleServiceMethod },
             };
         }
@@ -129,7 +129,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(message) );
             }
 
-            var msg = new ClientMsgProtobuf<CMsgClientServiceMethod>( EMsg.ClientServiceMethod );
+            var msg = new ClientMsgProtobuf<CMsgClientServiceMethod>( EMsg.ClientServiceMethodLegacy );
             msg.SourceJobID = Client.GetNextJobID();
 
             using ( var ms = new MemoryStream() )
