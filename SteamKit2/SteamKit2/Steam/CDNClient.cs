@@ -329,6 +329,12 @@ namespace SteamKit2
                 var host = server[ "host" ].AsString();
                 var vhost = server[ "vhost" ].AsString();
 
+                if ( host is null )
+                {
+                    DebugLog.WriteLine( nameof( CDNClient ), "Encountered server list entry with no 'host' property." );
+                    continue;
+                }
+
                 string[] hostSplits = host.Split( ':' );
 
                 int port = 80;
@@ -387,7 +393,8 @@ namespace SteamKit2
         /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
         public async Task ConnectAsync( Server csServer )
         {
-            DebugLog.Assert( steamClient.IsConnected, "CDNClient", "CMClient is not connected!" );
+            DebugLog.Assert( steamClient.IsConnected, nameof(CDNClient), "CMClient is not connected!" );
+            DebugLog.Assert( steamClient.SteamID != null, nameof(CDNClient), "CMClient has no SteamID!" );
 
             if ( csServer == null )
             {
@@ -449,6 +456,16 @@ namespace SteamKit2
                 return;
             }
 
+            if ( connectedServer is null )
+            {
+                throw new InvalidOperationException( "Cannot perform CDN operations before connecting to CDN server." );
+            }
+
+            if (sessionKey is null)
+            {
+                throw new InvalidOperationException( "Inconsistent state - connected to CDN without a session key." );
+            }
+
             string data;
 
             if ( (connectedServer.Type != "CDN" && connectedServer.Type != "SteamCache") || cdnAuthToken == null )
@@ -481,6 +498,11 @@ namespace SteamKit2
         /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
         public async Task<DepotManifest> DownloadManifestAsync( uint depotId, ulong manifestId )
         {
+            if ( connectedServer is null )
+            {
+                throw new InvalidOperationException( "Cannot perform CDN operations before connecting to CDN server." );
+            }
+
             depotCdnAuthKeys.TryGetValue( depotId, out var cdnToken );
             depotKeys.TryGetValue( depotId, out var depotKey );
 
@@ -569,6 +591,11 @@ namespace SteamKit2
         /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
         public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk )
         {
+            if ( connectedServer is null )
+            {
+                throw new InvalidOperationException( "Cannot perform CDN operations before connecting to CDN server." );
+            }
+
             depotCdnAuthKeys.TryGetValue( depotId, out var cdnToken );
             depotKeys.TryGetValue( depotId, out var depotKey );
 

@@ -60,7 +60,7 @@ namespace SteamKit2
                     s = ReadToken( out wasQuoted, out wasConditional );
                 }
 
-                if ( s.StartsWith( "{" ) && !wasQuoted )
+                if ( s != null && s.StartsWith( "{" ) && !wasQuoted )
                 {
                     // header is valid so load the file
                     currentKey.RecursiveLoadFromBuffer( this );

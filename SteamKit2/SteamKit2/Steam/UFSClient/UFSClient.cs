@@ -222,7 +222,7 @@ namespace SteamKit2
             msg.Body.file_name = details.FileName;
             msg.Body.file_size = ( uint )compressedData.Length;
             msg.Body.raw_file_size = ( uint )rawData.Length;
-            msg.Body.sha_file = CryptoHelper.SHAHash( details.FileData );
+            msg.Body.sha_file = CryptoHelper.SHAHash( rawData );
             msg.Body.time_stamp = DateUtils.DateTimeToUnixTime( DateTime.UtcNow );
 
             Send( msg );

@@ -386,7 +386,7 @@ namespace SteamKit2
                 if ( body.eresult == ( int )EResult.OK && request != null )
                 {
                     var createLobby = ( CMsgClientMMSCreateLobby )request;
-                    var members = new List<Lobby.Member>( 1 ) { new Lobby.Member( Client.SteamID, createLobby.persona_name_owner ) };
+                    var members = new List<Lobby.Member>( 1 ) { new Lobby.Member( Client.SteamID!, createLobby.persona_name_owner ) };
 
                     lobbyCache.CacheLobby(
                         createLobby.app_id,

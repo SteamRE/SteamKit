@@ -161,7 +161,7 @@ namespace SteamKit2.Internal
 
                 ExpectDisconnection = false;
 
-                Task<ServerRecord> recordTask;
+                Task<ServerRecord?> recordTask;
 
                 if ( cmServer == null )
                 {
@@ -169,7 +169,7 @@ namespace SteamKit2.Internal
                 }
                 else
                 {
-                    recordTask = Task.FromResult( cmServer );
+                    recordTask = Task.FromResult( (ServerRecord?)cmServer );
                 }
 
                 connectionSetupTask = recordTask.ContinueWith( t =>
@@ -188,6 +188,13 @@ namespace SteamKit2.Internal
                     }
 
                     var record = t.Result;
+
+                    if ( record is null )
+                    {
+                        DebugLog.WriteLine( nameof( CMClient ), "Server record task returned no result." );
+                        OnClientDisconnected( userInitiated: false );
+                        return;
+                    }
 
                     connection = CreateConnection( record.ProtocolTypes & Configuration.ProtocolTypes );
                     connection.NetMsgReceived += NetMsgReceived;
@@ -304,7 +311,7 @@ namespace SteamKit2.Internal
         /// Called when a client message is received from the network.
         /// </summary>
         /// <param name="packetMsg">The packet message.</param>
-        protected virtual bool OnClientMsgReceived( IPacketMsg packetMsg )
+        protected virtual bool OnClientMsgReceived( IPacketMsg? packetMsg )
         {
             if ( packetMsg == null )
             {
@@ -400,6 +407,8 @@ namespace SteamKit2.Internal
 
         void Connected( object sender, EventArgs e )
         {
+            DebugLog.Assert( connection != null, nameof( CMClient ), "No connection object after connecting." );
+
             Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Good );
 
             IsConnected = true;
@@ -566,6 +575,7 @@ namespace SteamKit2.Internal
 
                 if ( logoffResult == EResult.TryAnotherCM || logoffResult == EResult.ServiceUnavailable )
                 {
+                    DebugLog.Assert( connection != null, nameof( CMClient ), "No connection object during ClientLoggedOff." );
                     Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Bad );
                 }
             }
