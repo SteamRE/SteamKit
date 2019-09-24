@@ -673,7 +673,7 @@ namespace SteamKit2
         async Task<byte[]> DoRawCommandAsync( Server server, HttpMethod method, string command, string data = null, bool doAuth = false, string args = "", string authtoken = null )
         {
             var url = BuildCommand( server, command, args, authtoken );
-            var request = new HttpRequestMessage( method, url );
+            using var request = new HttpRequestMessage( method, url );
 
             if ( doAuth && server.Type == "CS" )
             {
