@@ -131,7 +131,8 @@ namespace SteamKit2
                     steam_id_lobby = lobbySteamId,
                     steam_id_member = Client.SteamID,
                     metadata = Lobby.EncodeMetadata( metadata )
-                }
+                },
+                SourceJobID = Client.GetNextJobID()
             };
 
             Send( setLobbyData, appId );
@@ -374,6 +375,12 @@ namespace SteamKit2
             var lobbyListResponse = new ClientMsgProtobuf<CMsgClientMMSCreateLobbyResponse>( packetMsg );
             var body = lobbyListResponse.Body;
 
+            if ( lobbyListResponse.TargetJobID is null )
+            {
+                DebugLog.WriteLine( nameof( SteamMatchmaking ), "Got CreateLobbyResponse with no target job ID!" );
+                return;
+            }
+
             if ( lobbyManipulationRequests.TryRemove( lobbyListResponse.TargetJobID, out var request ) )
             {
                 if ( body.eresult == ( int )EResult.OK && request != null )
@@ -410,6 +417,13 @@ namespace SteamKit2
         void HandleSetLobbyDataResponse( IPacketMsg packetMsg )
         {
             var lobbyListResponse = new ClientMsgProtobuf<CMsgClientMMSSetLobbyDataResponse>( packetMsg );
+
+            if ( lobbyListResponse.TargetJobID is null )
+            {
+                DebugLog.WriteLine( nameof( SteamMatchmaking ), "Got SetLobbyDataResponse with no target job ID!" );
+                return;
+            }
+
             var body = lobbyListResponse.Body;
 
             if ( lobbyManipulationRequests.TryRemove( lobbyListResponse.TargetJobID, out var request ) )
@@ -464,6 +478,13 @@ namespace SteamKit2
         void HandleSetLobbyOwnerResponse( IPacketMsg packetMsg )
         {
             var setLobbyOwnerResponse = new ClientMsgProtobuf<CMsgClientMMSSetLobbyOwnerResponse>( packetMsg );
+
+            if ( setLobbyOwnerResponse.TargetJobID is null )
+            {
+                DebugLog.WriteLine( nameof( UFSClient ), "Got SetLobbyOwnerResponse with no target job ID!" );
+                return;
+            }
+
             var body = setLobbyOwnerResponse.Body;
 
             if ( lobbyManipulationRequests.TryRemove( setLobbyOwnerResponse.TargetJobID, out var request ) )
@@ -523,6 +544,13 @@ namespace SteamKit2
         void HandleJoinLobbyResponse( IPacketMsg packetMsg )
         {
             var joinLobbyResponse = new ClientMsgProtobuf<CMsgClientMMSJoinLobbyResponse>( packetMsg );
+
+            if ( joinLobbyResponse.TargetJobID is null )
+            {
+                DebugLog.WriteLine( nameof( SteamMatchmaking ), "Got JoinLobbyResponse with no target job ID!" );
+                return;
+            }
+
             var body = joinLobbyResponse.Body;
 
             Lobby? joinedLobby = null;
@@ -565,6 +593,13 @@ namespace SteamKit2
         void HandleLeaveLobbyResponse( IPacketMsg packetMsg )
         {
             var leaveLobbyResponse = new ClientMsgProtobuf<CMsgClientMMSLeaveLobbyResponse>( packetMsg );
+
+            if ( leaveLobbyResponse.TargetJobID is null )
+            {
+                DebugLog.WriteLine( nameof( SteamMatchmaking ), "Got LeaveLobbyResponse with no target job ID!" );
+                return;
+            }
+
             var body = leaveLobbyResponse.Body;
 
             if ( body.eresult == ( int )EResult.OK )
@@ -583,6 +618,13 @@ namespace SteamKit2
         void HandleLobbyData( IPacketMsg packetMsg )
         {
             var lobbyListResponse = new ClientMsgProtobuf<CMsgClientMMSLobbyData>( packetMsg );
+
+            if ( lobbyListResponse.TargetJobID is null )
+            {
+                DebugLog.WriteLine( nameof( SteamMatchmaking ), "Got LobbyData with no target job ID!" );
+                return;
+            }
+
             var body = lobbyListResponse.Body;
 
             var cachedLobby = lobbyCache.GetLobby( body.app_id, body.steam_id_lobby );

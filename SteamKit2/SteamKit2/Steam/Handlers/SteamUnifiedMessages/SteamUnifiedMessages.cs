@@ -185,6 +185,12 @@ namespace SteamKit2
         {
             var response = new ClientMsgProtobuf<CMsgClientServiceMethodResponse>( packetMsg );
 
+            if ( response.TargetJobID is null )
+            {
+                DebugLog.WriteLine( nameof( SteamUnifiedMessages ), "Got ServiceMethodsResponse with no target job ID!" );
+                return;
+            }
+
             var callback = new ServiceMethodResponse(response.TargetJobID, (EResult)response.ProtoHeader.eresult, response.Body);
             Client.PostCallback( callback );
         }

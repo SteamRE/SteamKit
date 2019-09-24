@@ -209,7 +209,7 @@ namespace SteamKit2
         /// <returns>
         /// The result of the operator.
         /// </returns>
-        public static bool operator !=( GlobalID a, GlobalID b )
+        public static bool operator !=( GlobalID? a, GlobalID? b )
         {
             return !( a == b );
         }

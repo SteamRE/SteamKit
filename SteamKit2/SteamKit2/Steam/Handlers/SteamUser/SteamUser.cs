@@ -427,7 +427,10 @@ namespace SteamKit2
             var response = new ClientMsgProtobuf<CMsgClientUpdateMachineAuthResponse>( EMsg.ClientUpdateMachineAuthResponse );
 
             // so we respond to the correct message
-            response.ProtoHeader.jobid_target = details.JobID;
+            if ( details.JobID != null )
+            {
+                response.ProtoHeader.jobid_target = details.JobID;
+            }
 
             response.Body.cubwrote = ( uint )details.BytesWritten;
             response.Body.eresult = ( uint )details.Result;

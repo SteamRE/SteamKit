@@ -43,7 +43,7 @@ namespace SteamKit2
         /// <value>
         /// The <see cref="SteamID"/>.
         /// </value>
-        SteamID SteamID { get; set; }
+        SteamID? SteamID { get; set; }
 
         /// <summary>
         /// Gets or sets the target job id for this client message.
@@ -51,14 +51,14 @@ namespace SteamKit2
         /// <value>
         /// The target job id.
         /// </value>
-        JobID TargetJobID { get; set; }
+        JobID? TargetJobID { get; set; }
         /// <summary>
         /// Gets or sets the source job id for this client message.
         /// </summary>
         /// <value>
         /// The source job id.
         /// </value>
-        JobID SourceJobID { get; set; }
+        JobID? SourceJobID { get; set; }
 
         /// <summary>
         /// Serializes this client message instance to a byte array.
@@ -471,7 +471,7 @@ namespace SteamKit2
         /// <value>
         /// The <see cref="SteamID"/>.
         /// </value>
-        public abstract SteamID SteamID { get; set; }
+        public abstract SteamID? SteamID { get; set; }
 
         /// <summary>
         /// Gets or sets the target job id for this client message.
@@ -479,14 +479,14 @@ namespace SteamKit2
         /// <value>
         /// The target job id.
         /// </value>
-        public abstract JobID TargetJobID { get; set; }
+        public abstract JobID? TargetJobID { get; set; }
         /// <summary>
         /// Gets or sets the source job id for this client message.
         /// </summary>
         /// <value>
         /// The source job id.
         /// </value>
-        public abstract JobID SourceJobID { get; set; }
+        public abstract JobID? SourceJobID { get; set; }
 
 
         /// <summary>
