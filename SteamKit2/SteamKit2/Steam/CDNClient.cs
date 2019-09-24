@@ -143,7 +143,7 @@ namespace SteamKit2
             /// <summary>
             /// Gets the depot manifest chunk information associated with this chunk.
             /// </summary>
-            public DepotManifest.ChunkData? ChunkInfo { get; internal set; }
+            public DepotManifest.ChunkData ChunkInfo { get; }
 
             /// <summary>
             /// Gets a value indicating whether this chunk has been processed. A chunk is processed when the data has been decrypted and decompressed.
@@ -156,8 +156,28 @@ namespace SteamKit2
             /// <summary>
             /// Gets the underlying data for this chunk.
             /// </summary>
-            public byte[]? Data { get; internal set; }
+            public byte[] Data { get; private set; }
 
+            /// <summary>
+            /// Initializes a new instance of the <see cref="DepotChunk"/> class.
+            /// </summary>
+            /// <param name="info">The manifest chunk information associated with this chunk.</param>
+            /// <param name="data">The underlying data for this chunk.</param>
+            public DepotChunk(DepotManifest.ChunkData info, byte[] data)
+            {
+                if ( info is null )
+                {
+                    throw new ArgumentNullException( nameof( info ) );
+                }
+
+                if ( data is null )
+                {
+                    throw new ArgumentNullException( nameof( data ) );
+                }
+
+                ChunkInfo = info;
+                Data = data;
+            }
 
             /// <summary>
             /// Processes the specified depot key by decrypting the data with the given depot encryption key, and then by decompressing the data.
@@ -200,7 +220,7 @@ namespace SteamKit2
         SteamClient steamClient;
         HttpClient httpClient;
 
-        byte[] appTicket;
+        byte[]? appTicket;
         ConcurrentDictionary<uint, bool> depotIds;
         ConcurrentDictionary<uint, byte[]?> depotKeys;
         ConcurrentDictionary<uint, string?> depotCdnAuthKeys;
@@ -241,7 +261,7 @@ namespace SteamKit2
             this.depotIds = new ConcurrentDictionary<uint, bool>();
             this.appTicket = appTicket;
 
-            this.depotKeys = new ConcurrentDictionary<uint, byte[]>();
+            this.depotKeys = new ConcurrentDictionary<uint, byte[]?>();
             this.depotCdnAuthKeys = new ConcurrentDictionary<uint, string?>();
         }
 
@@ -305,9 +325,9 @@ namespace SteamKit2
 
             foreach ( var server in serverKv.Children )
             {
-                string type = server[ "type" ].AsString();
-                string host = server[ "host" ].AsString();
-                string vhost = server[ "vhost" ].AsString();
+                var type = server[ "type" ].AsString();
+                var host = server[ "host" ].AsString();
+                var vhost = server[ "vhost" ].AsString();
 
                 string[] hostSplits = host.Split( ':' );
 
@@ -326,7 +346,7 @@ namespace SteamKit2
                 int weightedLoad = server[ "weightedload" ].AsInteger();
                 int entries = server[ "NumEntriesInClientList" ].AsInteger( 1 );
                 int useTokenAuth = server[ "usetokenauth" ].AsInteger();
-                string httpsSupport = server[ "https_support" ].AsString();
+                var httpsSupport = server[ "https_support" ].AsString();
 
                 // If usetokenauth is specified, we can treat this server as a CDN and request tokens
                 if ( useTokenAuth > 0 )
@@ -422,7 +442,7 @@ namespace SteamKit2
         /// <param name="cdnAuthToken">CDN auth token for CDN content server endpoints.</param>
         /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
         /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
-        public async Task AuthenticateDepotAsync( uint depotid, byte[]? depotKey = null, string cdnAuthToken? = null )
+        public async Task AuthenticateDepotAsync( uint depotid, byte[]? depotKey = null, string? cdnAuthToken = null )
         {
             if ( depotIds.ContainsKey( depotid ) )
             {
@@ -508,7 +528,7 @@ namespace SteamKit2
         /// <returns>A <see cref="DepotManifest"/> instance that contains information about the files present within a depot.</returns>
         /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
         /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
-        public async Task<DepotManifest> DownloadManifestAsync( uint depotId, ulong manifestId, Server server, string? cdnAuthToken, byte[] depotKey )
+        public async Task<DepotManifest> DownloadManifestAsync( uint depotId, ulong manifestId, Server server, string? cdnAuthToken, byte[]? depotKey )
         {
             if ( server == null )
             {
@@ -614,7 +634,7 @@ namespace SteamKit2
         /// <exception cref="System.IO.InvalidDataException">Thrown if the downloaded data does not match the expected length.</exception>
         /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
         /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
-        public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk, Server server, string cdnAuthToken, byte[] depotKey )
+        public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk, Server server, string? cdnAuthToken, byte[]? depotKey )
         {
             if ( server == null )
             {
@@ -641,11 +661,7 @@ namespace SteamKit2
                 throw new InvalidDataException( $"Length mismatch after downloading depot chunk! (was {chunkData.Length}, but should be {chunk.CompressedLength})" );
             }
 
-            var depotChunk = new DepotChunk
-            {
-                ChunkInfo = chunk,
-                Data = chunkData,
-            };
+            var depotChunk = new DepotChunk( chunk, chunkData );
 
             if ( depotKey != null )
             {

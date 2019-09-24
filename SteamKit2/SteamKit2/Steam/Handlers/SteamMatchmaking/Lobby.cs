@@ -296,7 +296,7 @@ namespace SteamKit2
             /// obtained/updated as a result of calling <see cref="SteamMatchmaking.GetLobbyList"/>
             /// may have a null (or non-null but state) owner.
             /// </summary>
-            public SteamID OwnerSteamID { get; }
+            public SteamID? OwnerSteamID { get; }
 
             /// <summary>
             /// The metadata of the lobby; string key-value pairs.
@@ -333,8 +333,8 @@ namespace SteamKit2
 
             static readonly IReadOnlyList<Member> EmptyMembers = Array.AsReadOnly(Array.Empty<Member>());
 
-            internal Lobby( SteamID steamId, ELobbyType lobbyType, int lobbyFlags, SteamID ownerSteamId, IReadOnlyDictionary<string, string> metadata,
-                int maxMembers, int numMembers, IReadOnlyList<Member> members, float? distance, long? weight )
+            internal Lobby( SteamID steamId, ELobbyType lobbyType, int lobbyFlags, SteamID? ownerSteamId, IReadOnlyDictionary<string, string>? metadata,
+                int maxMembers, int numMembers, IReadOnlyList<Member>? members, float? distance, long? weight )
             {
                 SteamID = steamId;
                 LobbyType = lobbyType;
@@ -388,6 +388,11 @@ namespace SteamKit2
 
                 foreach ( var value in keyValue.Children )
                 {
+                    if (value.Name is null || value.Value is null)
+                    {
+                        continue;
+                    }
+
                     metadata[ value.Name ] = value.Value;
                 }
 

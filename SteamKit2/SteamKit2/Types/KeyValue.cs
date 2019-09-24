@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace SteamKit2
             {
                 // bool bAccepted = true;
 
-                string s = ReadToken( out wasQuoted, out wasConditional );
+                var s = ReadToken( out wasQuoted, out wasConditional );
 
                 if ( string.IsNullOrEmpty( s ) )
                     break;
@@ -110,7 +111,7 @@ namespace SteamKit2
             return false;
         }
 
-        public string ReadToken( out bool wasQuoted, out bool wasConditional )
+        public string? ReadToken( out bool wasQuoted, out bool wasConditional )
         {
             wasQuoted = false;
             wasConditional = false;
@@ -314,7 +315,7 @@ namespace SteamKit2
         /// Returns the value of this instance as a string.
         /// </summary>
         /// <returns>The value of this instance as a string.</returns>
-        public string AsString()
+        public string? AsString()
         {
             return this.Value;
         }
@@ -501,7 +502,7 @@ namespace SteamKit2
         /// <remarks>
         /// This method will swallow any exceptions that occur when reading, use <see cref="ReadAsText"/> if you wish to handle exceptions.
         /// </remarks>
-        public static KeyValue LoadAsText( string path )
+        public static KeyValue? LoadAsText( string path )
         {
             return LoadFromFile( path, false );
         }
@@ -512,14 +513,14 @@ namespace SteamKit2
         /// <param name="path">The path to the file to load.</param>
         /// <param name="keyValue">The resulting <see cref="KeyValue"/> object if the load was successful, or <c>null</c> if unsuccessful.</param>
         /// <returns><c>true</c> if the load was successful, or <c>false</c> on failure.</returns>
-        public static bool TryLoadAsBinary( string path, out KeyValue keyValue )
+        public static bool TryLoadAsBinary( string path, [NotNullWhen(true)] out KeyValue? keyValue )
         {
             keyValue = LoadFromFile(path, true);
             return keyValue != null;
         }
 
 
-        static KeyValue LoadFromFile( string path, bool asBinary )
+        static KeyValue? LoadFromFile( string path, bool asBinary )
         {
             if ( File.Exists( path ) == false )
             {
@@ -564,7 +565,7 @@ namespace SteamKit2
         /// <remarks>
         /// This method will swallow any exceptions that occur when reading, use <see cref="ReadAsText"/> if you wish to handle exceptions.
         /// </remarks>
-        public static KeyValue LoadFromString( string input )
+        public static KeyValue? LoadFromString( string input )
         {
             if ( input == null )
             {
@@ -634,11 +635,11 @@ namespace SteamKit2
                 // bool bAccepted = true;
 
                 // get the key name
-                string name = kvr.ReadToken( out wasQuoted, out wasConditional );
+                var name = kvr.ReadToken( out wasQuoted, out wasConditional );
 
-                if ( string.IsNullOrEmpty( name ) )
+                if ( name is null || name.Length == 0 )
                 {
-                    throw new Exception( "RecursiveLoadFromBuffer: got EOF or empty keyname" );
+                    throw new InvalidDataException( "RecursiveLoadFromBuffer: got EOF or empty keyname" );
                 }
 
                 if ( name.StartsWith( "}" ) && !wasQuoted )	// top level closed, stop reading
@@ -651,7 +652,7 @@ namespace SteamKit2
                 this.Children.Add( dat );
 
                 // get the value
-                string value = kvr.ReadToken( out wasQuoted, out wasConditional );
+                string? value = kvr.ReadToken( out wasQuoted, out wasConditional );
 
                 if ( wasConditional && value != null )
                 {

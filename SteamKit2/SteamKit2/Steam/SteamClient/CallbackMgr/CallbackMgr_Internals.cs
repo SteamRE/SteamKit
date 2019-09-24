@@ -28,7 +28,7 @@ namespace SteamKit2.Internal
     sealed class Callback<TCall> : Internal.CallbackBase, IDisposable
         where TCall : class, ICallbackMsg
     {
-        ICallbackMgrInternals mgr;
+        ICallbackMgrInternals? mgr;
             
         public JobID JobID { get; set; }
             

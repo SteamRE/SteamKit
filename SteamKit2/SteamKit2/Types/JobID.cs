@@ -268,7 +268,7 @@ namespace SteamKit2
             /// <summary>
             /// Gets a read only collection of callback results for this async job.
             /// </summary>
-            public ReadOnlyCollection<T> Results { get; internal set; }
+            public ReadOnlyCollection<T>? Results { get; internal set; }
         }
 
 

@@ -48,7 +48,6 @@ namespace SteamKit2
         {
             if ( Client.CellID == null )
             {
-                // NULLABLE TODO: wtf is happening here
                 return null;
             }
 
@@ -117,7 +116,7 @@ namespace SteamKit2
         /// <param name="lobbySteamId">The SteamID of the lobby that should be updated.</param>
         /// <param name="metadata">The new metadata for the lobby.</param>
         /// <returns><c>null</c>, if the request could not be submitted i.e. not yet logged in. Otherwise, an <see cref="AsyncJob{SetLobbyDataCallback}"/>.</returns>
-        public AsyncJob<SetLobbyDataCallback> SetLobbyMemberData( uint appId, SteamID lobbySteamId, IReadOnlyDictionary<string, string> metadata )
+        public AsyncJob<SetLobbyDataCallback>? SetLobbyMemberData( uint appId, SteamID lobbySteamId, IReadOnlyDictionary<string, string> metadata )
         {
             if ( Client.SteamID == null )
             {
@@ -174,7 +173,7 @@ namespace SteamKit2
         /// <param name="filters">An optional list of filters.</param>
         /// <param name="maxLobbies">An optional maximum number of lobbies that will be returned.</param>
         /// <returns><c>null</c>, if the request could not be submitted i.e. not yet logged in. Otherwise, an <see cref="AsyncJob{GetLobbyListCallback}"/>.</returns>
-        public AsyncJob<GetLobbyListCallback> GetLobbyList( uint appId, List<Lobby.Filter>? filters = null, int maxLobbies = -1 )
+        public AsyncJob<GetLobbyListCallback>? GetLobbyList( uint appId, List<Lobby.Filter>? filters = null, int maxLobbies = -1 )
         {
             if ( Client.CellID == null )
             {
@@ -212,7 +211,7 @@ namespace SteamKit2
         /// <param name="appId">ID of app the lobby belongs to.</param>
         /// <param name="lobbySteamId">The SteamID of the lobby that should be joined.</param>
         /// <returns><c>null</c>, if the request could not be submitted i.e. not yet logged in. Otherwise, an <see cref="AsyncJob{JoinLobbyCallback}"/>.</returns>
-        public AsyncJob<JoinLobbyCallback> JoinLobby( uint appId, SteamID lobbySteamId )
+        public AsyncJob<JoinLobbyCallback>? JoinLobby( uint appId, SteamID lobbySteamId )
         {
             var personaName = Client.GetHandler<SteamFriends>()?.GetPersonaName();
 
@@ -649,8 +648,12 @@ namespace SteamKit2
             if ( lobby != null && lobby.Members.Count > 0 )
             {
                 var leavingMember = lobbyCache.RemoveLobbyMember( body.app_id, lobby, body.steam_id_user );
+                if ( leavingMember is null )
+                {
+                    return;
+                }
 
-                if ( leavingMember?.SteamID == Client.SteamID )
+                if ( leavingMember.SteamID == Client.SteamID )
                 {
                     lobbyCache.ClearLobbyMembers( body.app_id, body.steam_id_lobby );
                 }

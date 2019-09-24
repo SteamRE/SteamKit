@@ -38,7 +38,7 @@ namespace SteamKit2.Internal
         /// Returns the the local IP of this client.
         /// </summary>
         /// <returns>The local IP.</returns>
-        public IPAddress LocalIP => connection?.GetLocalIP();
+        public IPAddress? LocalIP => connection?.GetLocalIP();
 
         /// <summary>
         /// Gets the public IP address of this client. This value is assigned after a logon attempt has succeeded.
@@ -430,7 +430,7 @@ namespace SteamKit2.Internal
             OnClientDisconnected( userInitiated: e.UserInitiated || ExpectDisconnection );
         }
 
-        internal static IPacketMsg GetPacketMsg( byte[] data )
+        internal static IPacketMsg? GetPacketMsg( byte[] data )
         {
             if ( data.Length < sizeof( uint ) )
             {

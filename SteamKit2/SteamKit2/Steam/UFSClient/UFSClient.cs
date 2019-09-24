@@ -210,7 +210,9 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(details) );
             }
 
-            byte[] compressedData = ZipUtil.Compress( details.FileData );
+            var rawData = details.FileData ?? Array.Empty<byte>();
+
+            byte[] compressedData = ZipUtil.Compress( rawData );
 
             var msg = new ClientMsgProtobuf<CMsgClientUFSUploadFileRequest>( EMsg.ClientUFSUploadFileRequest );
             msg.SourceJobID = steamClient.GetNextJobID();
@@ -219,7 +221,7 @@ namespace SteamKit2
             msg.Body.can_encrypt = false;
             msg.Body.file_name = details.FileName;
             msg.Body.file_size = ( uint )compressedData.Length;
-            msg.Body.raw_file_size = ( uint )details.FileData.Length;
+            msg.Body.raw_file_size = ( uint )rawData.Length;
             msg.Body.sha_file = CryptoHelper.SHAHash( details.FileData );
             msg.Body.time_stamp = DateUtils.DateTimeToUnixTime( DateTime.UtcNow );
 
@@ -244,8 +246,10 @@ namespace SteamKit2
 
             const uint MaxBytesPerChunk = 10240;
 
-            byte[] compressedData = ZipUtil.Compress( details.FileData );
-            byte[] fileHash = CryptoHelper.SHAHash( details.FileData );
+            var rawData = details.FileData ?? Array.Empty<byte>();
+
+            byte[] compressedData = ZipUtil.Compress( rawData );
+            byte[] fileHash = CryptoHelper.SHAHash( rawData );
 
             var buffer = new byte[ MaxBytesPerChunk ];
 
@@ -254,7 +258,7 @@ namespace SteamKit2
                 for ( long readIndex = 0; readIndex < ms.Length; readIndex += buffer.Length )
                 {
                     var msg = new ClientMsgProtobuf<CMsgClientUFSFileChunk>( EMsg.ClientUFSUploadFileChunk );
-                    msg.TargetJobID = details.RemoteJobID;
+                    msg.TargetJobID = details.RemoteJobID ?? JobID.Invalid;
 
                     var bytesRead = ms.Read( buffer, 0, buffer.Length );
 
@@ -288,7 +292,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(msg) );
             }
 
-            msg.SteamID = steamClient.SteamID;
+            msg.SteamID = steamClient.SteamID ?? new SteamID();
 
             DebugLog.WriteLine( nameof(UFSClient), "Sent -> EMsg: {0} {1}", msg.MsgType, msg.IsProto ? "(Proto)" : "" );
 
@@ -296,15 +300,22 @@ namespace SteamKit2
             // on the network thread, and that will lead to a disconnect callback
             // down the line
 
-            try
+            if ( connection is { } conn )
             {
-                connection.Send( msg.Serialize() );
+                try
+                {
+                    conn.Send( msg.Serialize() );
+                }
+                catch ( IOException )
+                {
+                }
+                catch ( SocketException )
+                {
+                }
             }
-            catch ( IOException )
+            else
             {
-            }
-            catch ( SocketException )
-            {
+                throw new InvalidOperationException( "Cannot send message when disconnected." );
             }
         }
 
