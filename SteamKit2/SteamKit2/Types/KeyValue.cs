@@ -29,7 +29,7 @@ namespace SteamKit2
             bool wasQuoted;
             bool wasConditional;
 
-            KeyValue currentKey = kv;
+            KeyValue? currentKey = kv;
 
             do
             {
@@ -236,7 +236,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="name">The optional name of the root key.</param>
         /// <param name="value">The optional value assigned to the root key.</param>
-        public KeyValue( string name = null, string value = null )
+        public KeyValue( string? name = null, string? value = null )
         {
             this.Name = name;
             this.Value = value;
@@ -252,11 +252,11 @@ namespace SteamKit2
         /// <summary>
         /// Gets or sets the name of this instance.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
         /// <summary>
         /// Gets or sets the value of this instance.
         /// </summary>
-        public string Value { get; set; }
+        public string? Value { get; set; }
 
         /// <summary>
         /// Gets the children of this instance.
@@ -605,7 +605,7 @@ namespace SteamKit2
 
             this.Children = new List<KeyValue>();
 
-            new KVTextReader( this, input );
+            using var _ = new KVTextReader( this, input );
 
             return true;
         }
@@ -818,7 +818,7 @@ namespace SteamKit2
             return TryReadAsBinaryCore( input, this, null );
         }
 
-        static bool TryReadAsBinaryCore( Stream input, KeyValue current, KeyValue parent )
+        static bool TryReadAsBinaryCore( Stream input, KeyValue current, KeyValue? parent )
         {
             current.Children = new List<KeyValue>();
 

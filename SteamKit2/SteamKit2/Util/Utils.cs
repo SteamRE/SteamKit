@@ -338,7 +338,7 @@ namespace SteamKit2
     {
         public static IPAddress GetLocalIP(Socket activeSocket)
         {
-            IPEndPoint ipEndPoint = activeSocket.LocalEndPoint as IPEndPoint;
+            var ipEndPoint = activeSocket.LocalEndPoint as IPEndPoint;
 
             if ( ipEndPoint == null || ipEndPoint.Address == IPAddress.Any )
                 throw new InvalidOperationException( "Socket not connected" );
@@ -374,7 +374,9 @@ namespace SteamKit2
         {
             return ( ushort )IPAddress.NetworkToHostOrder( ( short )input );
         }
-        public static bool TryParseIPEndPoint(string stringValue, out IPEndPoint endPoint)
+
+        // NULLABLE TODO: NotNullIfTrue
+        public static bool TryParseIPEndPoint(string stringValue, out IPEndPoint? endPoint)
         {
             var endpointParts = stringValue.Split(':');
             if (endpointParts.Length != 2)

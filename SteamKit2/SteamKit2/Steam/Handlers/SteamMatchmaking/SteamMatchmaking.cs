@@ -43,11 +43,12 @@ namespace SteamKit2
         /// <param name="lobbyFlags">The new lobby flags. Defaults to 0.</param>
         /// <param name="metadata">The new metadata for the lobby. Defaults to <c>null</c> (treated as an empty dictionary).</param>
         /// <returns><c>null</c>, if the request could not be submitted i.e. not yet logged in. Otherwise, an <see cref="AsyncJob{CreateLobbyCallback}"/>.</returns>
-        public AsyncJob<CreateLobbyCallback> CreateLobby( uint appId, ELobbyType lobbyType, int maxMembers, int lobbyFlags = 0,
-            IReadOnlyDictionary<string, string> metadata = null )
+        public AsyncJob<CreateLobbyCallback>? CreateLobby( uint appId, ELobbyType lobbyType, int maxMembers, int lobbyFlags = 0,
+            IReadOnlyDictionary<string, string>? metadata = null )
         {
             if ( Client.CellID == null )
             {
+                // NULLABLE TODO: wtf is happening here
                 return null;
             }
 
@@ -86,7 +87,7 @@ namespace SteamKit2
         /// <param name="metadata">The new metadata for the lobby. Defaults to <c>null</c> (treated as an empty dictionary).</param>
         /// <returns>An <see cref="AsyncJob{SetLobbyDataCallback}"/>.</returns>
         public AsyncJob<SetLobbyDataCallback> SetLobbyData( uint appId, SteamID lobbySteamId, ELobbyType lobbyType, int maxMembers, int lobbyFlags = 0,
-            IReadOnlyDictionary<string, string> metadata = null )
+            IReadOnlyDictionary<string, string>? metadata = null )
         {
             var setLobbyData = new ClientMsgProtobuf<CMsgClientMMSSetLobbyData>( EMsg.ClientMMSSetLobbyData )
             {
@@ -173,7 +174,7 @@ namespace SteamKit2
         /// <param name="filters">An optional list of filters.</param>
         /// <param name="maxLobbies">An optional maximum number of lobbies that will be returned.</param>
         /// <returns><c>null</c>, if the request could not be submitted i.e. not yet logged in. Otherwise, an <see cref="AsyncJob{GetLobbyListCallback}"/>.</returns>
-        public AsyncJob<GetLobbyListCallback> GetLobbyList( uint appId, List<Lobby.Filter> filters = null, int maxLobbies = -1 )
+        public AsyncJob<GetLobbyListCallback> GetLobbyList( uint appId, List<Lobby.Filter>? filters = null, int maxLobbies = -1 )
         {
             if ( Client.CellID == null )
             {
@@ -525,7 +526,7 @@ namespace SteamKit2
             var joinLobbyResponse = new ClientMsgProtobuf<CMsgClientMMSJoinLobbyResponse>( packetMsg );
             var body = joinLobbyResponse.Body;
 
-            Lobby joinedLobby = null;
+            Lobby? joinedLobby = null;
 
             if ( body.steam_id_lobbySpecified )
             {

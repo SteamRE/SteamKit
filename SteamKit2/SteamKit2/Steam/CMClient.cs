@@ -45,14 +45,14 @@ namespace SteamKit2.Internal
         /// This value will be <c>null</c> if the client is logged off of Steam.
         /// </summary>
         /// <value>The SteamID.</value>
-        public IPAddress PublicIP { get; private set; }
+        public IPAddress? PublicIP { get; private set; }
 
         /// <summary>
         /// Gets the country code of our public IP address according to Steam. This value is assigned after a logon attempt has succeeded.
         /// This value will be <c>null</c> if the client is logged off of Steam.
         /// </summary>
         /// <value>The SteamID.</value>
-        public string IPCountryCode { get; private set; }
+        public string? IPCountryCode { get; private set; }
 
         /// <summary>
         /// Gets the universe of this client.
@@ -90,7 +90,7 @@ namespace SteamKit2.Internal
         /// This value will be <c>null</c> if the client is logged off of Steam.
         /// </summary>
         /// <value>The SteamID.</value>
-        public SteamID SteamID { get; private set; }
+        public SteamID? SteamID { get; private set; }
 
         /// <summary>
         /// Gets or sets the connection timeout used when connecting to the Steam server.
@@ -104,15 +104,15 @@ namespace SteamKit2.Internal
         /// Gets or sets the network listening interface. Use this for debugging only.
         /// For your convenience, you can use <see cref="NetHookNetworkListener"/> class.
         /// </summary>
-        public IDebugNetworkListener DebugNetworkListener { get; set; }
+        public IDebugNetworkListener? DebugNetworkListener { get; set; }
 
         internal bool ExpectDisconnection { get; set; }
 
         // connection lock around the setup and tear down of the connection task
         object connectionLock = new object();
-        CancellationTokenSource connectionCancellation;
-        Task connectionSetupTask;
-        volatile IConnection connection;
+        CancellationTokenSource? connectionCancellation;
+        Task? connectionSetupTask;
+        volatile IConnection? connection;
 
         ScheduledFunction heartBeatFunc;
 
@@ -147,7 +147,7 @@ namespace SteamKit2.Internal
         /// The <see cref="IPEndPoint"/> of the CM server to connect to.
         /// If <c>null</c>, SteamKit will randomly select a CM server from its internal list.
         /// </param>
-        public void Connect( ServerRecord cmServer = null )
+        public void Connect( ServerRecord? cmServer = null )
         {
             lock ( connectionLock )
             {
@@ -161,7 +161,7 @@ namespace SteamKit2.Internal
 
                 ExpectDisconnection = false;
 
-                Task<ServerRecord> recordTask = null;
+                Task<ServerRecord> recordTask;
 
                 if ( cmServer == null )
                 {

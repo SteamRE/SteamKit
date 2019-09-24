@@ -47,7 +47,7 @@ namespace SteamKit2
 
         SteamClient steamClient;
 
-        IConnection connection;
+        IConnection? connection;
 
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace SteamKit2
         /// The <see cref="System.Net.IPEndPoint"/> of the UFS server to connect to.
         /// If <c>null</c>, <see cref="UFSClient"/> will randomly select a UFS server from the <see cref="SteamClient"/>'s list of servers.
         /// </param>
-        public void Connect( IPEndPoint ufsServer = null )
+        public void Connect( IPEndPoint? ufsServer = null )
         {
             DebugLog.Assert( steamClient.IsConnected, nameof(UFSClient), "CMClient is not connected!" );
 
@@ -142,7 +142,7 @@ namespace SteamKit2
             /// <value>
             /// The name of the file.
             /// </value>
-            public string FileName { get; set; }
+            public string? FileName { get; set; }
 
             /// <summary>
             /// Gets or sets the physical file data for this upload.
@@ -150,7 +150,7 @@ namespace SteamKit2
             /// <value>
             /// The file data.
             /// </value>
-            public byte[] FileData { get; set; }
+            public byte[]? FileData { get; set; }
 
             /// <summary>
             /// Gets or sets the JobID of this file upload. This value should be assigned from <see cref="UploadFileResponseCallback.RemoteJobID"/>.
@@ -158,7 +158,7 @@ namespace SteamKit2
             /// <value>
             /// The job ID.
             /// </value>
-            public JobID RemoteJobID { get; set; }
+            public JobID? RemoteJobID { get; set; }
         }
 
         /// <summary>

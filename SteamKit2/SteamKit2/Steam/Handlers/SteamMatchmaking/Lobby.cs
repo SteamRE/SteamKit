@@ -243,7 +243,7 @@ namespace SteamKit2
                 /// </summary>
                 public IReadOnlyDictionary<string, string> Metadata { get; }
 
-                internal Member( SteamID steamId, string personaName, IReadOnlyDictionary<string, string> metadata = null )
+                internal Member( SteamID steamId, string personaName, IReadOnlyDictionary<string, string>? metadata = null )
                 {
                     SteamID = steamId;
                     PersonaName = personaName;
@@ -348,7 +348,7 @@ namespace SteamKit2
                 Weight = weight;
             }
 
-            internal static byte[] EncodeMetadata( IReadOnlyDictionary<string, string> metadata )
+            internal static byte[] EncodeMetadata( IReadOnlyDictionary<string, string>? metadata )
             {
                 var keyValue = new KeyValue( "" );
 

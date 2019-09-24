@@ -52,7 +52,7 @@ namespace SteamKit2
                 var methodInfo = call.Method;
 
                 var argument = call.Arguments.Single();
-                object message = null;
+                object message;
 
                 if ( argument.NodeType == ExpressionType.MemberAccess )
                 {
