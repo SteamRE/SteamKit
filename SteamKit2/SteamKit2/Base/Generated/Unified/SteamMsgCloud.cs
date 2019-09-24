@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+#nullable disable
 #pragma warning disable 1591
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
