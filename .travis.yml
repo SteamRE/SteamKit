@@ -28,7 +28,7 @@ script:
     - dotnet build SteamKit2/Tests/Tests.csproj
     - dotnet build Resources/SteamLanguageParser/SteamLanguageParser.csproj
     - dotnet build Samples/Samples.sln
-    - dotnet test SteamKit2/Tests/Tests.csproj --framework netcoreapp3.0
+    - dotnet test SteamKit2/Tests/Tests.csproj
     - dotnet sonarscanner end || true
 
 notifications:
