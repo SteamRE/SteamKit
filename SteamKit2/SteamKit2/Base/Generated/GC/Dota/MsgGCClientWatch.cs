@@ -2140,24 +2140,6 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializeteam_logo_url() { return team_logo_urlSpecified; }
     private void Resetteam_logo_url() { team_logo_urlSpecified = false; }
     
-
-    private uint? _wager_count;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"wager_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint wager_count
-    {
-      get { return _wager_count?? default(uint); }
-      set { _wager_count = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool wager_countSpecified
-    {
-      get { return _wager_count != null; }
-      set { if (value == (_wager_count== null)) _wager_count = value ? this.wager_count : (uint?)null; }
-    }
-    private bool ShouldSerializewager_count() { return wager_countSpecified; }
-    private void Resetwager_count() { wager_countSpecified = false; }
-    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

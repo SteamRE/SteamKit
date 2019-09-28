@@ -462,9 +462,6 @@ namespace SteamKit2.GC.CSGO.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCItemCustomizationNotification", Value=1090)]
       k_EMsgGCItemCustomizationNotification = 1090,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCModifyItemAttribute", Value=1091)]
-      k_EMsgGCModifyItemAttribute = 1091,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTradingBase", Value=1500)]
       k_EMsgGCTradingBase = 1500,
             
@@ -631,10 +628,7 @@ namespace SteamKit2.GC.CSGO.Internal
       k_EMsgGCRequestPassportItemGrant = 2527,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientVersionUpdated", Value=2528)]
-      k_EMsgGCClientVersionUpdated = 2528,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCAdjustItemEquippedStateMulti", Value=2529)]
-      k_EMsgGCAdjustItemEquippedStateMulti = 2529
+      k_EMsgGCClientVersionUpdated = 2528
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse", EnumPassthru=true)]
@@ -696,41 +690,6 @@ namespace SteamKit2.GC.CSGO.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantAffordAttrib", Value=5)]
       k_UnlockStyle_Failed_CantAffordAttrib = 5
-    }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"EGCItemCustomizationNotification", EnumPassthru=true)]
-    public enum EGCItemCustomizationNotification
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCItemCustomizationNotification_NameItem", Value=1006)]
-      k_EGCItemCustomizationNotification_NameItem = 1006,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCItemCustomizationNotification_UnlockCrate", Value=1007)]
-      k_EGCItemCustomizationNotification_UnlockCrate = 1007,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCItemCustomizationNotification_NameBaseItem", Value=1019)]
-      k_EGCItemCustomizationNotification_NameBaseItem = 1019,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCItemCustomizationNotification_RemoveItemName", Value=1030)]
-      k_EGCItemCustomizationNotification_RemoveItemName = 1030,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCItemCustomizationNotification_RemoveSticker", Value=1053)]
-      k_EGCItemCustomizationNotification_RemoveSticker = 1053,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCItemCustomizationNotification_ApplySticker", Value=1086)]
-      k_EGCItemCustomizationNotification_ApplySticker = 1086,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCItemCustomizationNotification_StatTrakSwap", Value=1088)]
-      k_EGCItemCustomizationNotification_StatTrakSwap = 1088,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCItemCustomizationNotification_ActivateFanToken", Value=9178)]
-      k_EGCItemCustomizationNotification_ActivateFanToken = 9178,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCItemCustomizationNotification_GraffitiUnseal", Value=9185)]
-      k_EGCItemCustomizationNotification_GraffitiUnseal = 9185,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCItemCustomizationNotification_GenerateSouvenir", Value=9204)]
-      k_EGCItemCustomizationNotification_GenerateSouvenir = 9204
     }
   
 }

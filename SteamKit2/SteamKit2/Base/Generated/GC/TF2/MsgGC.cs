@@ -460,6 +460,188 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgTFVoteKickBanPlayer")]
+  public partial class CMsgTFVoteKickBanPlayer : global::ProtoBuf.IExtensible
+  {
+    public CMsgTFVoteKickBanPlayer() {}
+    
+
+    private uint? _account_id_subject;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id_subject", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint account_id_subject
+    {
+      get { return _account_id_subject?? default(uint); }
+      set { _account_id_subject = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool account_id_subjectSpecified
+    {
+      get { return _account_id_subject != null; }
+      set { if (value == (_account_id_subject== null)) _account_id_subject = value ? this.account_id_subject : (uint?)null; }
+    }
+    private bool ShouldSerializeaccount_id_subject() { return account_id_subjectSpecified; }
+    private void Resetaccount_id_subject() { account_id_subjectSpecified = false; }
+    
+
+    private uint? _kick_reason;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"kick_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint kick_reason
+    {
+      get { return _kick_reason?? default(uint); }
+      set { _kick_reason = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool kick_reasonSpecified
+    {
+      get { return _kick_reason != null; }
+      set { if (value == (_kick_reason== null)) _kick_reason = value ? this.kick_reason : (uint?)null; }
+    }
+    private bool ShouldSerializekick_reason() { return kick_reasonSpecified; }
+    private void Resetkick_reason() { kick_reasonSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgTFVoteKickBanPlayerResult")]
+  public partial class CMsgTFVoteKickBanPlayerResult : global::ProtoBuf.IExtensible
+  {
+    public CMsgTFVoteKickBanPlayerResult() {}
+    
+
+    private uint? _account_id_initiator;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id_initiator", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint account_id_initiator
+    {
+      get { return _account_id_initiator?? default(uint); }
+      set { _account_id_initiator = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool account_id_initiatorSpecified
+    {
+      get { return _account_id_initiator != null; }
+      set { if (value == (_account_id_initiator== null)) _account_id_initiator = value ? this.account_id_initiator : (uint?)null; }
+    }
+    private bool ShouldSerializeaccount_id_initiator() { return account_id_initiatorSpecified; }
+    private void Resetaccount_id_initiator() { account_id_initiatorSpecified = false; }
+    
+
+    private uint? _account_id_subject;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"account_id_subject", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint account_id_subject
+    {
+      get { return _account_id_subject?? default(uint); }
+      set { _account_id_subject = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool account_id_subjectSpecified
+    {
+      get { return _account_id_subject != null; }
+      set { if (value == (_account_id_subject== null)) _account_id_subject = value ? this.account_id_subject : (uint?)null; }
+    }
+    private bool ShouldSerializeaccount_id_subject() { return account_id_subjectSpecified; }
+    private void Resetaccount_id_subject() { account_id_subjectSpecified = false; }
+    
+
+    private uint? _kick_reason;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"kick_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint kick_reason
+    {
+      get { return _kick_reason?? default(uint); }
+      set { _kick_reason = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool kick_reasonSpecified
+    {
+      get { return _kick_reason != null; }
+      set { if (value == (_kick_reason== null)) _kick_reason = value ? this.kick_reason : (uint?)null; }
+    }
+    private bool ShouldSerializekick_reason() { return kick_reasonSpecified; }
+    private void Resetkick_reason() { kick_reasonSpecified = false; }
+    
+
+    private bool? _kick_successful;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"kick_successful", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool kick_successful
+    {
+      get { return _kick_successful?? default(bool); }
+      set { _kick_successful = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool kick_successfulSpecified
+    {
+      get { return _kick_successful != null; }
+      set { if (value == (_kick_successful== null)) _kick_successful = value ? this.kick_successful : (bool?)null; }
+    }
+    private bool ShouldSerializekick_successful() { return kick_successfulSpecified; }
+    private void Resetkick_successful() { kick_successfulSpecified = false; }
+    
+
+    private uint? _num_yes_votes;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"num_yes_votes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint num_yes_votes
+    {
+      get { return _num_yes_votes?? default(uint); }
+      set { _num_yes_votes = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool num_yes_votesSpecified
+    {
+      get { return _num_yes_votes != null; }
+      set { if (value == (_num_yes_votes== null)) _num_yes_votes = value ? this.num_yes_votes : (uint?)null; }
+    }
+    private bool ShouldSerializenum_yes_votes() { return num_yes_votesSpecified; }
+    private void Resetnum_yes_votes() { num_yes_votesSpecified = false; }
+    
+
+    private uint? _num_no_votes;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"num_no_votes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint num_no_votes
+    {
+      get { return _num_no_votes?? default(uint); }
+      set { _num_no_votes = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool num_no_votesSpecified
+    {
+      get { return _num_no_votes != null; }
+      set { if (value == (_num_no_votes== null)) _num_no_votes = value ? this.num_no_votes : (uint?)null; }
+    }
+    private bool ShouldSerializenum_no_votes() { return num_no_votesSpecified; }
+    private void Resetnum_no_votes() { num_no_votesSpecified = false; }
+    
+
+    private uint? _num_possible_votes;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"num_possible_votes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint num_possible_votes
+    {
+      get { return _num_possible_votes?? default(uint); }
+      set { _num_possible_votes = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool num_possible_votesSpecified
+    {
+      get { return _num_possible_votes != null; }
+      set { if (value == (_num_possible_votes== null)) _num_possible_votes = value ? this.num_possible_votes : (uint?)null; }
+    }
+    private bool ShouldSerializenum_possible_votes() { return num_possible_votesSpecified; }
+    private void Resetnum_possible_votes() { num_possible_votesSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgTFFreeTrialChooseMostHelpfulFriend")]
   public partial class CMsgTFFreeTrialChooseMostHelpfulFriend : global::ProtoBuf.IExtensible
   {
@@ -6722,112 +6904,10 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgProcessMatchVoteKick")]
-  public partial class CMsgProcessMatchVoteKick : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgPlayerVoteKickedAfterLeavingMatch")]
+  public partial class CMsgPlayerVoteKickedAfterLeavingMatch : global::ProtoBuf.IExtensible
   {
-    public CMsgProcessMatchVoteKick() {}
-    
-
-    private ulong? _match_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public ulong match_id
-    {
-      get { return _match_id?? default(ulong); }
-      set { _match_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool match_idSpecified
-    {
-      get { return _match_id != null; }
-      set { if (value == (_match_id== null)) _match_id = value ? this.match_id : (ulong?)null; }
-    }
-    private bool ShouldSerializematch_id() { return match_idSpecified; }
-    private void Resetmatch_id() { match_idSpecified = false; }
-    
-
-    private ulong? _initiator_steam_id;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"initiator_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public ulong initiator_steam_id
-    {
-      get { return _initiator_steam_id?? default(ulong); }
-      set { _initiator_steam_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool initiator_steam_idSpecified
-    {
-      get { return _initiator_steam_id != null; }
-      set { if (value == (_initiator_steam_id== null)) _initiator_steam_id = value ? this.initiator_steam_id : (ulong?)null; }
-    }
-    private bool ShouldSerializeinitiator_steam_id() { return initiator_steam_idSpecified; }
-    private void Resetinitiator_steam_id() { initiator_steam_idSpecified = false; }
-    
-
-    private ulong? _target_steam_id;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"target_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public ulong target_steam_id
-    {
-      get { return _target_steam_id?? default(ulong); }
-      set { _target_steam_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool target_steam_idSpecified
-    {
-      get { return _target_steam_id != null; }
-      set { if (value == (_target_steam_id== null)) _target_steam_id = value ? this.target_steam_id : (ulong?)null; }
-    }
-    private bool ShouldSerializetarget_steam_id() { return target_steam_idSpecified; }
-    private void Resettarget_steam_id() { target_steam_idSpecified = false; }
-    
-
-    private TFVoteKickReason? _reason;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public TFVoteKickReason reason
-    {
-      get { return _reason?? TFVoteKickReason.TFVoteKickReason_Other; }
-      set { _reason = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool reasonSpecified
-    {
-      get { return _reason != null; }
-      set { if (value == (_reason== null)) _reason = value ? this.reason : (TFVoteKickReason?)null; }
-    }
-    private bool ShouldSerializereason() { return reasonSpecified; }
-    private void Resetreason() { reasonSpecified = false; }
-    
-    private readonly global::System.Collections.Generic.List<CMsgProcessMatchVoteKick.Vote> _votes = new global::System.Collections.Generic.List<CMsgProcessMatchVoteKick.Vote>();
-    [global::ProtoBuf.ProtoMember(5, Name=@"votes", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgProcessMatchVoteKick.Vote> votes
-    {
-      get { return _votes; }
-    }
-  
-
-    private bool? _default_pass;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"default_pass", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool default_pass
-    {
-      get { return _default_pass?? default(bool); }
-      set { _default_pass = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool default_passSpecified
-    {
-      get { return _default_pass != null; }
-      set { if (value == (_default_pass== null)) _default_pass = value ? this.default_pass : (bool?)null; }
-    }
-    private bool ShouldSerializedefault_pass() { return default_passSpecified; }
-    private void Resetdefault_pass() { default_passSpecified = false; }
-    
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Vote")]
-  public partial class Vote : global::ProtoBuf.IExtensible
-  {
-    public Vote() {}
+    public CMsgPlayerVoteKickedAfterLeavingMatch() {}
     
 
     private ulong? _steam_id;
@@ -6848,55 +6928,40 @@ namespace SteamKit2.GC.TF2.Internal
     private void Resetsteam_id() { steam_idSpecified = false; }
     
 
-    private bool? _vote_yay;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"vote_yay", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool vote_yay
+    private ulong? _lobby_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"lobby_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong lobby_id
     {
-      get { return _vote_yay?? default(bool); }
-      set { _vote_yay = value; }
+      get { return _lobby_id?? default(ulong); }
+      set { _lobby_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
     [global::System.ComponentModel.Browsable(false)]
-    public bool vote_yaySpecified
+    public bool lobby_idSpecified
     {
-      get { return _vote_yay != null; }
-      set { if (value == (_vote_yay== null)) _vote_yay = value ? this.vote_yay : (bool?)null; }
+      get { return _lobby_id != null; }
+      set { if (value == (_lobby_id== null)) _lobby_id = value ? this.lobby_id : (ulong?)null; }
     }
-    private bool ShouldSerializevote_yay() { return vote_yaySpecified; }
-    private void Resetvote_yay() { vote_yaySpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgProcessMatchVoteKickResponse")]
-  public partial class CMsgProcessMatchVoteKickResponse : global::ProtoBuf.IExtensible
-  {
-    public CMsgProcessMatchVoteKickResponse() {}
+    private bool ShouldSerializelobby_id() { return lobby_idSpecified; }
+    private void Resetlobby_id() { lobby_idSpecified = false; }
     
 
-    private bool? _rip;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"rip", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool rip
+    private ulong? _match_id;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong match_id
     {
-      get { return _rip?? default(bool); }
-      set { _rip = value; }
+      get { return _match_id?? default(ulong); }
+      set { _match_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
     [global::System.ComponentModel.Browsable(false)]
-    public bool ripSpecified
+    public bool match_idSpecified
     {
-      get { return _rip != null; }
-      set { if (value == (_rip== null)) _rip = value ? this.rip : (bool?)null; }
+      get { return _match_id != null; }
+      set { if (value == (_match_id== null)) _match_id = value ? this.match_id : (ulong?)null; }
     }
-    private bool ShouldSerializerip() { return ripSpecified; }
-    private void Resetrip() { ripSpecified = false; }
+    private bool ShouldSerializematch_id() { return match_idSpecified; }
+    private void Resetmatch_id() { match_idSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -10565,6 +10630,24 @@ namespace SteamKit2.GC.TF2.Internal
     public CMsgGC_TFVoteKickPlayerRequest() {}
     
 
+    private uint? _account_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint account_id
+    {
+      get { return _account_id?? default(uint); }
+      set { _account_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool account_idSpecified
+    {
+      get { return _account_id != null; }
+      set { if (value == (_account_id== null)) _account_id = value ? this.account_id : (uint?)null; }
+    }
+    private bool ShouldSerializeaccount_id() { return account_idSpecified; }
+    private void Resetaccount_id() { account_idSpecified = false; }
+    
+
     private ulong? _target_id;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"target_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public ulong target_id
@@ -10581,60 +10664,6 @@ namespace SteamKit2.GC.TF2.Internal
     }
     private bool ShouldSerializetarget_id() { return target_idSpecified; }
     private void Resettarget_id() { target_idSpecified = false; }
-    
-
-    private ulong? _voter_id;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"voter_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong voter_id
-    {
-      get { return _voter_id?? default(ulong); }
-      set { _voter_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool voter_idSpecified
-    {
-      get { return _voter_id != null; }
-      set { if (value == (_voter_id== null)) _voter_id = value ? this.voter_id : (ulong?)null; }
-    }
-    private bool ShouldSerializevoter_id() { return voter_idSpecified; }
-    private void Resetvoter_id() { voter_idSpecified = false; }
-    
-
-    private TFVoteKickReason? _reason;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public TFVoteKickReason reason
-    {
-      get { return _reason?? TFVoteKickReason.TFVoteKickReason_Other; }
-      set { _reason = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool reasonSpecified
-    {
-      get { return _reason != null; }
-      set { if (value == (_reason== null)) _reason = value ? this.reason : (TFVoteKickReason?)null; }
-    }
-    private bool ShouldSerializereason() { return reasonSpecified; }
-    private void Resetreason() { reasonSpecified = false; }
-    
-
-    private ulong? _match_id;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong match_id
-    {
-      get { return _match_id?? default(ulong); }
-      set { _match_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool match_idSpecified
-    {
-      get { return _match_id != null; }
-      set { if (value == (_match_id== null)) _match_id = value ? this.match_id : (ulong?)null; }
-    }
-    private bool ShouldSerializematch_id() { return match_idSpecified; }
-    private void Resetmatch_id() { match_idSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -10665,40 +10694,22 @@ namespace SteamKit2.GC.TF2.Internal
     private void Resetallowed() { allowedSpecified = false; }
     
 
-    private bool? _voter_inhibit;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"voter_inhibit", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool voter_inhibit
+    private uint? _cooldown;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"cooldown", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint cooldown
     {
-      get { return _voter_inhibit?? default(bool); }
-      set { _voter_inhibit = value; }
+      get { return _cooldown?? default(uint); }
+      set { _cooldown = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
     [global::System.ComponentModel.Browsable(false)]
-    public bool voter_inhibitSpecified
+    public bool cooldownSpecified
     {
-      get { return _voter_inhibit != null; }
-      set { if (value == (_voter_inhibit== null)) _voter_inhibit = value ? this.voter_inhibit : (bool?)null; }
+      get { return _cooldown != null; }
+      set { if (value == (_cooldown== null)) _cooldown = value ? this.cooldown : (uint?)null; }
     }
-    private bool ShouldSerializevoter_inhibit() { return voter_inhibitSpecified; }
-    private void Resetvoter_inhibit() { voter_inhibitSpecified = false; }
-    
-
-    private bool? _target_inhibit;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"target_inhibit", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool target_inhibit
-    {
-      get { return _target_inhibit?? default(bool); }
-      set { _target_inhibit = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool target_inhibitSpecified
-    {
-      get { return _target_inhibit != null; }
-      set { if (value == (_target_inhibit== null)) _target_inhibit = value ? this.target_inhibit : (bool?)null; }
-    }
-    private bool ShouldSerializetarget_inhibit() { return target_inhibitSpecified; }
-    private void Resettarget_inhibit() { target_inhibitSpecified = false; }
+    private bool ShouldSerializecooldown() { return cooldownSpecified; }
+    private void Resetcooldown() { cooldownSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -13204,6 +13215,12 @@ namespace SteamKit2.GC.TF2.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCReportWarKill", Value=5001)]
       k_EMsgGCReportWarKill = 5001,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCVoteKickBanPlayer", Value=5018)]
+      k_EMsgGCVoteKickBanPlayer = 5018,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCVoteKickBanPlayerResult", Value=5019)]
+      k_EMsgGCVoteKickBanPlayerResult = 5019,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCKickPlayer_DEPRECATED", Value=5020)]
       k_EMsgGCKickPlayer_DEPRECATED = 5020,
             
@@ -13603,6 +13620,12 @@ namespace SteamKit2.GC.TF2.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_SetDisablePartyQuestProgress", Value=6550)]
       k_EMsgGC_SetDisablePartyQuestProgress = 6550,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPlayerVoteKickedAfterLeavingMatch", Value=6551)]
+      k_EMsgGCPlayerVoteKickedAfterLeavingMatch = 6551,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPlayerVoteKickedAfterLeavingMatchResponse", Value=6552)]
+      k_EMsgGCPlayerVoteKickedAfterLeavingMatchResponse = 6552,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCQuestProgressReport", Value=6553)]
       k_EMsgGCQuestProgressReport = 6553,
             
@@ -13683,12 +13706,6 @@ namespace SteamKit2.GC.TF2.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_AcceptLobbyInviteReply", Value=6579)]
       k_EMsgGC_AcceptLobbyInviteReply = 6579,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_ProcessMatchVoteKick", Value=6581)]
-      k_EMsgGC_ProcessMatchVoteKick = 6581,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_ProcessMatchVoteKickResponse", Value=6582)]
-      k_EMsgGC_ProcessMatchVoteKickResponse = 6582,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=10001)]
       k_EMsgGCDev_GrantWarKill = 10001
@@ -13898,23 +13915,6 @@ namespace SteamKit2.GC.TF2.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"TFMatchLeaveReason_GC_REMOVED", Value=6)]
       TFMatchLeaveReason_GC_REMOVED = 6
-    }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"TFVoteKickReason", EnumPassthru=true)]
-    public enum TFVoteKickReason
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TFVoteKickReason_Other", Value=0)]
-      TFVoteKickReason_Other = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TFVoteKickReason_Cheating", Value=1)]
-      TFVoteKickReason_Cheating = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TFVoteKickReason_Idle", Value=2)]
-      TFVoteKickReason_Idle = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TFVoteKickReason_Scamming", Value=3)]
-      TFVoteKickReason_Scamming = 3
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"ServerMatchmakingState", EnumPassthru=true)]

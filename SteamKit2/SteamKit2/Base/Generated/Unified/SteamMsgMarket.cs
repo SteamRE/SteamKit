@@ -120,6 +120,42 @@ namespace SteamKit2.Unified.Internal
     private void Resetsteamguard_required_days() { steamguard_required_daysSpecified = false; }
     
 
+    private int? _sales_this_year;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"sales_this_year", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int sales_this_year
+    {
+      get { return _sales_this_year?? default(int); }
+      set { _sales_this_year = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool sales_this_yearSpecified
+    {
+      get { return _sales_this_year != null; }
+      set { if (value == (_sales_this_year== null)) _sales_this_year = value ? this.sales_this_year : (int?)null; }
+    }
+    private bool ShouldSerializesales_this_year() { return sales_this_yearSpecified; }
+    private void Resetsales_this_year() { sales_this_yearSpecified = false; }
+    
+
+    private int? _max_sales_per_year;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"max_sales_per_year", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int max_sales_per_year
+    {
+      get { return _max_sales_per_year?? default(int); }
+      set { _max_sales_per_year = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool max_sales_per_yearSpecified
+    {
+      get { return _max_sales_per_year != null; }
+      set { if (value == (_max_sales_per_year== null)) _max_sales_per_year = value ? this.max_sales_per_year : (int?)null; }
+    }
+    private bool ShouldSerializemax_sales_per_year() { return max_sales_per_yearSpecified; }
+    private void Resetmax_sales_per_year() { max_sales_per_yearSpecified = false; }
+    
+
     private bool? _forms_requested;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"forms_requested", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public bool forms_requested

@@ -1413,58 +1413,22 @@ namespace SteamKit2.GC.CSGO.Internal
     private void Resetclient_launcher() { client_launcherSpecified = false; }
     
 
-    private byte[] _legacy_steamdatagram_routing;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"legacy_steamdatagram_routing", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public byte[] legacy_steamdatagram_routing
+    private uint? _steamdatagram_port;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"steamdatagram_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint steamdatagram_port
     {
-      get { return _legacy_steamdatagram_routing?? null; }
-      set { _legacy_steamdatagram_routing = value; }
+      get { return _steamdatagram_port?? default(uint); }
+      set { _steamdatagram_port = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
     [global::System.ComponentModel.Browsable(false)]
-    public bool legacy_steamdatagram_routingSpecified
+    public bool steamdatagram_portSpecified
     {
-      get { return _legacy_steamdatagram_routing != null; }
-      set { if (value == (_legacy_steamdatagram_routing== null)) _legacy_steamdatagram_routing = value ? this.legacy_steamdatagram_routing : (byte[])null; }
+      get { return _steamdatagram_port != null; }
+      set { if (value == (_steamdatagram_port== null)) _steamdatagram_port = value ? this.steamdatagram_port : (uint?)null; }
     }
-    private bool ShouldSerializelegacy_steamdatagram_routing() { return legacy_steamdatagram_routingSpecified; }
-    private void Resetlegacy_steamdatagram_routing() { legacy_steamdatagram_routingSpecified = false; }
-    
-
-    private uint? _required_internal_addr;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"required_internal_addr", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint required_internal_addr
-    {
-      get { return _required_internal_addr?? default(uint); }
-      set { _required_internal_addr = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool required_internal_addrSpecified
-    {
-      get { return _required_internal_addr != null; }
-      set { if (value == (_required_internal_addr== null)) _required_internal_addr = value ? this.required_internal_addr : (uint?)null; }
-    }
-    private bool ShouldSerializerequired_internal_addr() { return required_internal_addrSpecified; }
-    private void Resetrequired_internal_addr() { required_internal_addrSpecified = false; }
-    
-
-    private byte[] _steamdatagram_login;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"steamdatagram_login", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public byte[] steamdatagram_login
-    {
-      get { return _steamdatagram_login?? null; }
-      set { _steamdatagram_login = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool steamdatagram_loginSpecified
-    {
-      get { return _steamdatagram_login != null; }
-      set { if (value == (_steamdatagram_login== null)) _steamdatagram_login = value ? this.steamdatagram_login : (byte[])null; }
-    }
-    private bool ShouldSerializesteamdatagram_login() { return steamdatagram_loginSpecified; }
-    private void Resetsteamdatagram_login() { steamdatagram_loginSpecified = false; }
+    private bool ShouldSerializesteamdatagram_port() { return steamdatagram_portSpecified; }
+    private void Resetsteamdatagram_port() { steamdatagram_portSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

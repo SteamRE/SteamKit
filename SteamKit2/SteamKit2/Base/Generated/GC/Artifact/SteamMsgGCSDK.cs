@@ -705,34 +705,6 @@ namespace SteamKit2.GC.Artifact.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCSubGCStarting")]
-  public partial class CMsgGCToGCSubGCStarting : global::ProtoBuf.IExtensible
-  {
-    public CMsgGCToGCSubGCStarting() {}
-    
-
-    private uint? _dir_index;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"dir_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint dir_index
-    {
-      get { return _dir_index?? default(uint); }
-      set { _dir_index = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool dir_indexSpecified
-    {
-      get { return _dir_index != null; }
-      set { if (value == (_dir_index== null)) _dir_index = value ? this.dir_index : (uint?)null; }
-    }
-    private bool ShouldSerializedir_index() { return dir_indexSpecified; }
-    private void Resetdir_index() { dir_indexSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterAck")]
   public partial class CGCToGCMsgMasterAck : global::ProtoBuf.IExtensible
   {

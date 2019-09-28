@@ -409,24 +409,6 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _responsible_party_members; }
     }
   
-
-    private uint? _result_metadata;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"result_metadata", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint result_metadata
-    {
-      get { return _result_metadata?? default(uint); }
-      set { _result_metadata = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool result_metadataSpecified
-    {
-      get { return _result_metadata != null; }
-      set { if (value == (_result_metadata== null)) _result_metadata = value ? this.result_metadata : (uint?)null; }
-    }
-    private bool ShouldSerializeresult_metadata() { return result_metadataSpecified; }
-    private void Resetresult_metadata() { result_metadataSpecified = false; }
-    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -4545,13 +4527,7 @@ namespace SteamKit2.GC.Dota.Internal
       k_EStartFindingMatchResult_MemberMissingAnchoredPhoneNumber = 121,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EStartFindingMatchResult_NotMemberOfClan", Value=122)]
-      k_EStartFindingMatchResult_NotMemberOfClan = 122,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EStartFindingMatchResult_CoachesChallengeBadPartySize", Value=123)]
-      k_EStartFindingMatchResult_CoachesChallengeBadPartySize = 123,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EStartFindingMatchResult_CoachesChallengeRequirementsNotMet", Value=124)]
-      k_EStartFindingMatchResult_CoachesChallengeRequirementsNotMet = 124
+      k_EStartFindingMatchResult_NotMemberOfClan = 122
     }
   
 }

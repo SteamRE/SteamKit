@@ -250,16 +250,5 @@ namespace SteamKit2.GC.Dota.Internal
       k_EDOTAGroupMergeResult_NOT_INVITED = 9
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EPartyBeaconType", EnumPassthru=true)]
-    public enum EPartyBeaconType
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EPartyBeaconType_Available", Value=0)]
-      k_EPartyBeaconType_Available = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EPartyBeaconType_Joinable", Value=1)]
-      k_EPartyBeaconType_Joinable = 1
-    }
-  
 }
 #pragma warning restore 1591

@@ -331,52 +331,6 @@ namespace SteamKit2.GC.Artifact.Internal
     private bool ShouldSerializetourney_series_id() { return tourney_series_idSpecified; }
     private void Resettourney_series_id() { tourney_series_idSpecified = false; }
     
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"GauntletInfo")]
-  public partial class GauntletInfo : global::ProtoBuf.IExtensible
-  {
-    public GauntletInfo() {}
-    
-
-    private uint? _wins;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"wins", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint wins
-    {
-      get { return _wins?? default(uint); }
-      set { _wins = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool winsSpecified
-    {
-      get { return _wins != null; }
-      set { if (value == (_wins== null)) _wins = value ? this.wins : (uint?)null; }
-    }
-    private bool ShouldSerializewins() { return winsSpecified; }
-    private void Resetwins() { winsSpecified = false; }
-    
-
-    private uint? _losses;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"losses", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint losses
-    {
-      get { return _losses?? default(uint); }
-      set { _losses = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool lossesSpecified
-    {
-      get { return _losses != null; }
-      set { if (value == (_losses== null)) _losses = value ? this.losses : (uint?)null; }
-    }
-    private bool ShouldSerializelosses() { return lossesSpecified; }
-    private void Resetlosses() { lossesSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Member")]
   public partial class Member : global::ProtoBuf.IExtensible
   {
@@ -472,15 +426,6 @@ namespace SteamKit2.GC.Artifact.Internal
     private bool ShouldSerializeis_anonymous() { return is_anonymousSpecified; }
     private void Resetis_anonymous() { is_anonymousSpecified = false; }
     
-
-    private CSODCGLobby.GauntletInfo _gauntlet_info = null;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"gauntlet_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CSODCGLobby.GauntletInfo gauntlet_info
-    {
-      get { return _gauntlet_info; }
-      set { _gauntlet_info = value; }
-    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -630,150 +575,6 @@ namespace SteamKit2.GC.Artifact.Internal
     }
     private bool ShouldSerializerecycling_progress() { return recycling_progressSpecified; }
     private void Resetrecycling_progress() { recycling_progressSpecified = false; }
-    
-
-    private uint? _progress_level;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"progress_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint progress_level
-    {
-      get { return _progress_level?? default(uint); }
-      set { _progress_level = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool progress_levelSpecified
-    {
-      get { return _progress_level != null; }
-      set { if (value == (_progress_level== null)) _progress_level = value ? this.progress_level : (uint?)null; }
-    }
-    private bool ShouldSerializeprogress_level() { return progress_levelSpecified; }
-    private void Resetprogress_level() { progress_levelSpecified = false; }
-    
-
-    private uint? _progress_xp;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"progress_xp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint progress_xp
-    {
-      get { return _progress_xp?? default(uint); }
-      set { _progress_xp = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool progress_xpSpecified
-    {
-      get { return _progress_xp != null; }
-      set { if (value == (_progress_xp== null)) _progress_xp = value ? this.progress_xp : (uint?)null; }
-    }
-    private bool ShouldSerializeprogress_xp() { return progress_xpSpecified; }
-    private void Resetprogress_xp() { progress_xpSpecified = false; }
-    
-
-    private uint? _constructed_mmr_level;
-    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"constructed_mmr_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint constructed_mmr_level
-    {
-      get { return _constructed_mmr_level?? default(uint); }
-      set { _constructed_mmr_level = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool constructed_mmr_levelSpecified
-    {
-      get { return _constructed_mmr_level != null; }
-      set { if (value == (_constructed_mmr_level== null)) _constructed_mmr_level = value ? this.constructed_mmr_level : (uint?)null; }
-    }
-    private bool ShouldSerializeconstructed_mmr_level() { return constructed_mmr_levelSpecified; }
-    private void Resetconstructed_mmr_level() { constructed_mmr_levelSpecified = false; }
-    
-
-    private uint? _last_win_bounus_time;
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"last_win_bounus_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint last_win_bounus_time
-    {
-      get { return _last_win_bounus_time?? default(uint); }
-      set { _last_win_bounus_time = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool last_win_bounus_timeSpecified
-    {
-      get { return _last_win_bounus_time != null; }
-      set { if (value == (_last_win_bounus_time== null)) _last_win_bounus_time = value ? this.last_win_bounus_time : (uint?)null; }
-    }
-    private bool ShouldSerializelast_win_bounus_time() { return last_win_bounus_timeSpecified; }
-    private void Resetlast_win_bounus_time() { last_win_bounus_timeSpecified = false; }
-    
-
-    private uint? _match_win_streak;
-    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"match_win_streak", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint match_win_streak
-    {
-      get { return _match_win_streak?? default(uint); }
-      set { _match_win_streak = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool match_win_streakSpecified
-    {
-      get { return _match_win_streak != null; }
-      set { if (value == (_match_win_streak== null)) _match_win_streak = value ? this.match_win_streak : (uint?)null; }
-    }
-    private bool ShouldSerializematch_win_streak() { return match_win_streakSpecified; }
-    private void Resetmatch_win_streak() { match_win_streakSpecified = false; }
-    
-
-    private uint? _bonus_period_wins;
-    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"bonus_period_wins", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint bonus_period_wins
-    {
-      get { return _bonus_period_wins?? default(uint); }
-      set { _bonus_period_wins = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool bonus_period_winsSpecified
-    {
-      get { return _bonus_period_wins != null; }
-      set { if (value == (_bonus_period_wins== null)) _bonus_period_wins = value ? this.bonus_period_wins : (uint?)null; }
-    }
-    private bool ShouldSerializebonus_period_wins() { return bonus_period_winsSpecified; }
-    private void Resetbonus_period_wins() { bonus_period_winsSpecified = false; }
-    
-
-    private uint? _player_badge;
-    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"player_badge", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint player_badge
-    {
-      get { return _player_badge?? default(uint); }
-      set { _player_badge = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool player_badgeSpecified
-    {
-      get { return _player_badge != null; }
-      set { if (value == (_player_badge== null)) _player_badge = value ? this.player_badge : (uint?)null; }
-    }
-    private bool ShouldSerializeplayer_badge() { return player_badgeSpecified; }
-    private void Resetplayer_badge() { player_badgeSpecified = false; }
-    
-
-    private uint? _draft_mmr_level;
-    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"draft_mmr_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint draft_mmr_level
-    {
-      get { return _draft_mmr_level?? default(uint); }
-      set { _draft_mmr_level = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool draft_mmr_levelSpecified
-    {
-      get { return _draft_mmr_level != null; }
-      set { if (value == (_draft_mmr_level== null)) _draft_mmr_level = value ? this.draft_mmr_level : (uint?)null; }
-    }
-    private bool ShouldSerializedraft_mmr_level() { return draft_mmr_levelSpecified; }
-    private void Resetdraft_mmr_level() { draft_mmr_levelSpecified = false; }
     
     [global::ProtoBuf.ProtoContract(Name=@"EFlags", EnumPassthru=true)]
     public enum EFlags
@@ -990,24 +791,6 @@ namespace SteamKit2.GC.Artifact.Internal
     }
     private bool ShouldSerializewins_mask() { return wins_maskSpecified; }
     private void Resetwins_mask() { wins_maskSpecified = false; }
-    
-
-    private bool? _select_random_deck;
-    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"select_random_deck", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool select_random_deck
-    {
-      get { return _select_random_deck?? default(bool); }
-      set { _select_random_deck = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool select_random_deckSpecified
-    {
-      get { return _select_random_deck != null; }
-      set { if (value == (_select_random_deck== null)) _select_random_deck = value ? this.select_random_deck : (bool?)null; }
-    }
-    private bool ShouldSerializeselect_random_deck() { return select_random_deckSpecified; }
-    private void Resetselect_random_deck() { select_random_deckSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1372,24 +1155,6 @@ namespace SteamKit2.GC.Artifact.Internal
     }
     private bool ShouldSerializejoined_time() { return joined_timeSpecified; }
     private void Resetjoined_time() { joined_timeSpecified = false; }
-    
-
-    private uint? _open_tourney;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"open_tourney", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint open_tourney
-    {
-      get { return _open_tourney?? default(uint); }
-      set { _open_tourney = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool open_tourneySpecified
-    {
-      get { return _open_tourney != null; }
-      set { if (value == (_open_tourney== null)) _open_tourney = value ? this.open_tourney : (uint?)null; }
-    }
-    private bool ShouldSerializeopen_tourney() { return open_tourneySpecified; }
-    private void Resetopen_tourney() { open_tourneySpecified = false; }
     
     [global::ProtoBuf.ProtoContract(Name=@"EStatus", EnumPassthru=true)]
     public enum EStatus
@@ -2395,24 +2160,6 @@ namespace SteamKit2.GC.Artifact.Internal
     private bool ShouldSerializedeck_name() { return deck_nameSpecified; }
     private void Resetdeck_name() { deck_nameSpecified = false; }
     
-
-    private uint? _deck_id;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"deck_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint deck_id
-    {
-      get { return _deck_id?? default(uint); }
-      set { _deck_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool deck_idSpecified
-    {
-      get { return _deck_id != null; }
-      set { if (value == (_deck_id== null)) _deck_id = value ? this.deck_id : (uint?)null; }
-    }
-    private bool ShouldSerializedeck_id() { return deck_idSpecified; }
-    private void Resetdeck_id() { deck_idSpecified = false; }
-    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3015,92 +2762,6 @@ namespace SteamKit2.GC.Artifact.Internal
     private bool ShouldSerializecooldown_time() { return cooldown_timeSpecified; }
     private void Resetcooldown_time() { cooldown_timeSpecified = false; }
     
-
-    private uint? _max_wins_per_deck_trophy_id;
-    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"max_wins_per_deck_trophy_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint max_wins_per_deck_trophy_id
-    {
-      get { return _max_wins_per_deck_trophy_id?? default(uint); }
-      set { _max_wins_per_deck_trophy_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool max_wins_per_deck_trophy_idSpecified
-    {
-      get { return _max_wins_per_deck_trophy_id != null; }
-      set { if (value == (_max_wins_per_deck_trophy_id== null)) _max_wins_per_deck_trophy_id = value ? this.max_wins_per_deck_trophy_id : (uint?)null; }
-    }
-    private bool ShouldSerializemax_wins_per_deck_trophy_id() { return max_wins_per_deck_trophy_idSpecified; }
-    private void Resetmax_wins_per_deck_trophy_id() { max_wins_per_deck_trophy_idSpecified = false; }
-    
-
-    private uint? _max_wins_random_mode_trophy_id;
-    [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"max_wins_random_mode_trophy_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint max_wins_random_mode_trophy_id
-    {
-      get { return _max_wins_random_mode_trophy_id?? default(uint); }
-      set { _max_wins_random_mode_trophy_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool max_wins_random_mode_trophy_idSpecified
-    {
-      get { return _max_wins_random_mode_trophy_id != null; }
-      set { if (value == (_max_wins_random_mode_trophy_id== null)) _max_wins_random_mode_trophy_id = value ? this.max_wins_random_mode_trophy_id : (uint?)null; }
-    }
-    private bool ShouldSerializemax_wins_random_mode_trophy_id() { return max_wins_random_mode_trophy_idSpecified; }
-    private void Resetmax_wins_random_mode_trophy_id() { max_wins_random_mode_trophy_idSpecified = false; }
-    
-
-    private uint? _is_ai_gauntlet;
-    [global::ProtoBuf.ProtoMember(26, IsRequired = false, Name=@"is_ai_gauntlet", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint is_ai_gauntlet
-    {
-      get { return _is_ai_gauntlet?? default(uint); }
-      set { _is_ai_gauntlet = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool is_ai_gauntletSpecified
-    {
-      get { return _is_ai_gauntlet != null; }
-      set { if (value == (_is_ai_gauntlet== null)) _is_ai_gauntlet = value ? this.is_ai_gauntlet : (uint?)null; }
-    }
-    private bool ShouldSerializeis_ai_gauntlet() { return is_ai_gauntletSpecified; }
-    private void Resetis_ai_gauntlet() { is_ai_gauntletSpecified = false; }
-    
-    private readonly global::System.Collections.Generic.List<CMsgDeckValidator> _ai_validators = new global::System.Collections.Generic.List<CMsgDeckValidator>();
-    [global::ProtoBuf.ProtoMember(27, Name=@"ai_validators", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgDeckValidator> ai_validators
-    {
-      get { return _ai_validators; }
-    }
-  
-    private readonly global::System.Collections.Generic.List<CMsgGauntletConfig.GauntletPointsLeaderboard> _gauntlet_points_leaderboards = new global::System.Collections.Generic.List<CMsgGauntletConfig.GauntletPointsLeaderboard>();
-    [global::ProtoBuf.ProtoMember(29, Name=@"gauntlet_points_leaderboards", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgGauntletConfig.GauntletPointsLeaderboard> gauntlet_points_leaderboards
-    {
-      get { return _gauntlet_points_leaderboards; }
-    }
-  
-
-    private string _timer;
-    [global::ProtoBuf.ProtoMember(30, IsRequired = false, Name=@"timer", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string timer
-    {
-      get { return _timer?? ""; }
-      set { _timer = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool timerSpecified
-    {
-      get { return _timer != null; }
-      set { if (value == (_timer== null)) _timer = value ? this.timer : (string)null; }
-    }
-    private bool ShouldSerializetimer() { return timerSpecified; }
-    private void Resettimer() { timerSpecified = false; }
-    
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RewardTier")]
   public partial class RewardTier : global::ProtoBuf.IExtensible
   {
@@ -3290,34 +2951,6 @@ namespace SteamKit2.GC.Artifact.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"GauntletPointsLeaderboard")]
-  public partial class GauntletPointsLeaderboard : global::ProtoBuf.IExtensible
-  {
-    public GauntletPointsLeaderboard() {}
-    
-
-    private uint? _expiration_time;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"expiration_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint expiration_time
-    {
-      get { return _expiration_time?? default(uint); }
-      set { _expiration_time = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool expiration_timeSpecified
-    {
-      get { return _expiration_time != null; }
-      set { if (value == (_expiration_time== null)) _expiration_time = value ? this.expiration_time : (uint?)null; }
-    }
-    private bool ShouldSerializeexpiration_time() { return expiration_timeSpecified; }
-    private void Resetexpiration_time() { expiration_timeSpecified = false; }
-    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -4459,24 +4092,6 @@ namespace SteamKit2.GC.Artifact.Internal
       get { return _entry_items; }
     }
   
-
-    private uint? _created_time;
-    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"created_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint created_time
-    {
-      get { return _created_time?? default(uint); }
-      set { _created_time = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool created_timeSpecified
-    {
-      get { return _created_time != null; }
-      set { if (value == (_created_time== null)) _created_time = value ? this.created_time : (uint?)null; }
-    }
-    private bool ShouldSerializecreated_time() { return created_timeSpecified; }
-    private void Resetcreated_time() { created_timeSpecified = false; }
-    
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Match")]
   public partial class Match : global::ProtoBuf.IExtensible
   {
@@ -4787,22 +4402,22 @@ namespace SteamKit2.GC.Artifact.Internal
     private void Resetlimited_pool_id() { limited_pool_idSpecified = false; }
     
 
-    private uint? _auto_advance_time;
-    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"auto_advance_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint auto_advance_time
+    private string _phase_name;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"phase_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string phase_name
     {
-      get { return _auto_advance_time?? default(uint); }
-      set { _auto_advance_time = value; }
+      get { return _phase_name?? ""; }
+      set { _phase_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
     [global::System.ComponentModel.Browsable(false)]
-    public bool auto_advance_timeSpecified
+    public bool phase_nameSpecified
     {
-      get { return _auto_advance_time != null; }
-      set { if (value == (_auto_advance_time== null)) _auto_advance_time = value ? this.auto_advance_time : (uint?)null; }
+      get { return _phase_name != null; }
+      set { if (value == (_phase_name== null)) _phase_name = value ? this.phase_name : (string)null; }
     }
-    private bool ShouldSerializeauto_advance_time() { return auto_advance_timeSpecified; }
-    private void Resetauto_advance_time() { auto_advance_timeSpecified = false; }
+    private bool ShouldSerializephase_name() { return phase_nameSpecified; }
+    private void Resetphase_name() { phase_nameSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -5406,10 +5021,7 @@ namespace SteamKit2.GC.Artifact.Internal
       k_eFormat_Bracket_SingleElim = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_eFormat_Swiss", Value=2)]
-      k_eFormat_Swiss = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_eFormat_FreeForAll", Value=3)]
-      k_eFormat_FreeForAll = 3
+      k_eFormat_Swiss = 2
     }
   
     private global::ProtoBuf.IExtension extensionObject;

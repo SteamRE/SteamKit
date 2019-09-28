@@ -997,24 +997,6 @@ namespace SteamKit2.Unified.Internal
   {
     public CTwoFactor_CreateEmergencyCodes_Request() {}
     
-
-    private string _code;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"code", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string code
-    {
-      get { return _code?? ""; }
-      set { _code = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool codeSpecified
-    {
-      get { return _code != null; }
-      set { if (value == (_code== null)) _code = value ? this.code : (string)null; }
-    }
-    private bool ShouldSerializecode() { return codeSpecified; }
-    private void Resetcode() { codeSpecified = false; }
-    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

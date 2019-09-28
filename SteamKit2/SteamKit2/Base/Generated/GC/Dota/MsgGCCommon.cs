@@ -1299,24 +1299,6 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializerecent_win_time_3() { return recent_win_time_3Specified; }
     private void Resetrecent_win_time_3() { recent_win_time_3Specified = false; }
     
-
-    private uint? _coach_rating;
-    [global::ProtoBuf.ProtoMember(109, IsRequired = false, Name=@"coach_rating", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint coach_rating
-    {
-      get { return _coach_rating?? default(uint); }
-      set { _coach_rating = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool coach_ratingSpecified
-    {
-      get { return _coach_rating != null; }
-      set { if (value == (_coach_rating== null)) _coach_rating = value ? this.coach_rating : (uint?)null; }
-    }
-    private bool ShouldSerializecoach_rating() { return coach_ratingSpecified; }
-    private void Resetcoach_rating() { coach_ratingSpecified = false; }
-    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1907,15 +1889,6 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializetip_amount() { return tip_amountSpecified; }
     private void Resettip_amount() { tip_amountSpecified = false; }
     
-
-    private CMsgLobbyEventPoints.PeriodicResourceValues _periodic_point_adjustments = null;
-    [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"periodic_point_adjustments", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgLobbyEventPoints.PeriodicResourceValues periodic_point_adjustments
-    {
-      get { return _periodic_point_adjustments; }
-      set { _periodic_point_adjustments = value; }
-    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2818,59 +2791,6 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializehero_id() { return hero_idSpecified; }
     private void Resethero_id() { hero_idSpecified = false; }
     
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartySearchClientParty")]
-  public partial class CPartySearchClientParty : global::ProtoBuf.IExtensible
-  {
-    public CPartySearchClientParty() {}
-    
-
-    private ulong? _party_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"party_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public ulong party_id
-    {
-      get { return _party_id?? default(ulong); }
-      set { _party_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool party_idSpecified
-    {
-      get { return _party_id != null; }
-      set { if (value == (_party_id== null)) _party_id = value ? this.party_id : (ulong?)null; }
-    }
-    private bool ShouldSerializeparty_id() { return party_idSpecified; }
-    private void Resetparty_id() { party_idSpecified = false; }
-    
-
-    private int? _beacon_type;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"beacon_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int beacon_type
-    {
-      get { return _beacon_type?? default(int); }
-      set { _beacon_type = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool beacon_typeSpecified
-    {
-      get { return _beacon_type != null; }
-      set { if (value == (_beacon_type== null)) _beacon_type = value ? this.beacon_type : (int?)null; }
-    }
-    private bool ShouldSerializebeacon_type() { return beacon_typeSpecified; }
-    private void Resetbeacon_type() { beacon_typeSpecified = false; }
-    
-    private readonly global::System.Collections.Generic.List<uint> _party_members = new global::System.Collections.Generic.List<uint>();
-    [global::ProtoBuf.ProtoMember(3, Name=@"party_members", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public global::System.Collections.Generic.List<uint> party_members
-    {
-      get { return _party_members; }
-    }
-  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -4924,24 +4844,6 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializecheers() { return cheersSpecified; }
     private void Resetcheers() { cheersSpecified = false; }
     
-
-    private string _team_logo_url;
-    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"team_logo_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string team_logo_url
-    {
-      get { return _team_logo_url?? ""; }
-      set { _team_logo_url = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool team_logo_urlSpecified
-    {
-      get { return _team_logo_url != null; }
-      set { if (value == (_team_logo_url== null)) _team_logo_url = value ? this.team_logo_url : (string)null; }
-    }
-    private bool ShouldSerializeteam_logo_url() { return team_logo_urlSpecified; }
-    private void Resetteam_logo_url() { team_logo_urlSpecified = false; }
-    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -6989,24 +6891,6 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializenet_worth() { return net_worthSpecified; }
     private void Resetnet_worth() { net_worthSpecified = false; }
     
-
-    private string _team_logo_url;
-    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"team_logo_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string team_logo_url
-    {
-      get { return _team_logo_url?? ""; }
-      set { _team_logo_url = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool team_logo_urlSpecified
-    {
-      get { return _team_logo_url != null; }
-      set { if (value == (_team_logo_url== null)) _team_logo_url = value ? this.team_logo_url : (string)null; }
-    }
-    private bool ShouldSerializeteam_logo_url() { return team_logo_urlSpecified; }
-    private void Resetteam_logo_url() { team_logo_urlSpecified = false; }
-    
     private readonly global::System.Collections.Generic.List<CMsgDOTARealtimeGameStatsTerse.PlayerDetails> _players = new global::System.Collections.Generic.List<CMsgDOTARealtimeGameStatsTerse.PlayerDetails>();
     [global::ProtoBuf.ProtoMember(6, Name=@"players", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<CMsgDOTARealtimeGameStatsTerse.PlayerDetails> players
@@ -7294,20 +7178,6 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializenet_worth() { return net_worthSpecified; }
     private void Resetnet_worth() { net_worthSpecified = false; }
     
-    private readonly global::System.Collections.Generic.List<uint> _abilities = new global::System.Collections.Generic.List<uint>();
-    [global::ProtoBuf.ProtoMember(16, Name=@"abilities", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public global::System.Collections.Generic.List<uint> abilities
-    {
-      get { return _abilities; }
-    }
-  
-    private readonly global::System.Collections.Generic.List<uint> _items = new global::System.Collections.Generic.List<uint>();
-    [global::ProtoBuf.ProtoMember(17, Name=@"items", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public global::System.Collections.Generic.List<uint> items
-    {
-      get { return _items; }
-    }
-  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -7461,52 +7331,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
     private bool ShouldSerializedestroyed() { return destroyedSpecified; }
     private void Resetdestroyed() { destroyedSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PickBanDetails")]
-  public partial class PickBanDetails : global::ProtoBuf.IExtensible
-  {
-    public PickBanDetails() {}
-    
-
-    private uint? _hero;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"hero", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint hero
-    {
-      get { return _hero?? default(uint); }
-      set { _hero = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool heroSpecified
-    {
-      get { return _hero != null; }
-      set { if (value == (_hero== null)) _hero = value ? this.hero : (uint?)null; }
-    }
-    private bool ShouldSerializehero() { return heroSpecified; }
-    private void Resethero() { heroSpecified = false; }
-    
-
-    private uint? _team;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint team
-    {
-      get { return _team?? default(uint); }
-      set { _team = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool teamSpecified
-    {
-      get { return _team != null; }
-      set { if (value == (_team== null)) _team = value ? this.team : (uint?)null; }
-    }
-    private bool ShouldSerializeteam() { return teamSpecified; }
-    private void Resetteam() { teamSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -7669,20 +7493,6 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializegame_state() { return game_stateSpecified; }
     private void Resetgame_state() { game_stateSpecified = false; }
     
-    private readonly global::System.Collections.Generic.List<CMsgDOTARealtimeGameStatsTerse.PickBanDetails> _picks = new global::System.Collections.Generic.List<CMsgDOTARealtimeGameStatsTerse.PickBanDetails>();
-    [global::ProtoBuf.ProtoMember(11, Name=@"picks", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgDOTARealtimeGameStatsTerse.PickBanDetails> picks
-    {
-      get { return _picks; }
-    }
-  
-    private readonly global::System.Collections.Generic.List<CMsgDOTARealtimeGameStatsTerse.PickBanDetails> _bans = new global::System.Collections.Generic.List<CMsgDOTARealtimeGameStatsTerse.PickBanDetails>();
-    [global::ProtoBuf.ProtoMember(12, Name=@"bans", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgDOTARealtimeGameStatsTerse.PickBanDetails> bans
-    {
-      get { return _bans; }
-    }
-  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -8800,6 +8610,13 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializequery_name() { return query_nameSpecified; }
     private void Resetquery_name() { query_nameSpecified = false; }
     
+    private readonly global::System.Collections.Generic.List<uint> _query_bind_params = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(12, Name=@"query_bind_params", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> query_bind_params
+    {
+      get { return _query_bind_params; }
+    }
+  
 
     private uint? _lock_on_selection_id;
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"lock_on_selection_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -8872,31 +8689,6 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializeuse_answer_value_ranges() { return use_answer_value_rangesSpecified; }
     private void Resetuse_answer_value_ranges() { use_answer_value_rangesSpecified = false; }
     
-
-    private ELeagueRegion? _region;
-    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"region", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ELeagueRegion region
-    {
-      get { return _region?? ELeagueRegion.LEAGUE_REGION_UNSET; }
-      set { _region = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool regionSpecified
-    {
-      get { return _region != null; }
-      set { if (value == (_region== null)) _region = value ? this.region : (ELeagueRegion?)null; }
-    }
-    private bool ShouldSerializeregion() { return regionSpecified; }
-    private void Resetregion() { regionSpecified = false; }
-    
-    private readonly global::System.Collections.Generic.List<ELeaguePhase> _phases = new global::System.Collections.Generic.List<ELeaguePhase>();
-    [global::ProtoBuf.ProtoMember(18, Name=@"phases", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public global::System.Collections.Generic.List<ELeaguePhase> phases
-    {
-      get { return _phases; }
-    }
-  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -9151,10 +8943,7 @@ namespace SteamKit2.GC.Dota.Internal
       Special = 4,
             
       [global::ProtoBuf.ProtoEnum(Name=@"YesNo", Value=5)]
-      YesNo = 5,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"QualifiersTeam", Value=6)]
-      QualifiersTeam = 6
+      YesNo = 5
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"eAnswerType", EnumPassthru=true)]
@@ -9620,42 +9409,6 @@ namespace SteamKit2.GC.Dota.Internal
     private void Resetdire_team_logo() { dire_team_logoSpecified = false; }
     
 
-    private string _radiant_team_logo_url;
-    [global::ProtoBuf.ProtoMember(54, IsRequired = false, Name=@"radiant_team_logo_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string radiant_team_logo_url
-    {
-      get { return _radiant_team_logo_url?? ""; }
-      set { _radiant_team_logo_url = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool radiant_team_logo_urlSpecified
-    {
-      get { return _radiant_team_logo_url != null; }
-      set { if (value == (_radiant_team_logo_url== null)) _radiant_team_logo_url = value ? this.radiant_team_logo_url : (string)null; }
-    }
-    private bool ShouldSerializeradiant_team_logo_url() { return radiant_team_logo_urlSpecified; }
-    private void Resetradiant_team_logo_url() { radiant_team_logo_urlSpecified = false; }
-    
-
-    private string _dire_team_logo_url;
-    [global::ProtoBuf.ProtoMember(55, IsRequired = false, Name=@"dire_team_logo_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string dire_team_logo_url
-    {
-      get { return _dire_team_logo_url?? ""; }
-      set { _dire_team_logo_url = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool dire_team_logo_urlSpecified
-    {
-      get { return _dire_team_logo_url != null; }
-      set { if (value == (_dire_team_logo_url== null)) _dire_team_logo_url = value ? this.dire_team_logo_url : (string)null; }
-    }
-    private bool ShouldSerializedire_team_logo_url() { return dire_team_logo_urlSpecified; }
-    private void Resetdire_team_logo_url() { dire_team_logo_urlSpecified = false; }
-    
-
     private uint? _radiant_team_complete;
     [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"radiant_team_complete", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint radiant_team_complete
@@ -10074,20 +9827,6 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializepre_game_duration() { return pre_game_durationSpecified; }
     private void Resetpre_game_duration() { pre_game_durationSpecified = false; }
     
-    private readonly global::System.Collections.Generic.List<uint> _mvp_account_id = new global::System.Collections.Generic.List<uint>();
-    [global::ProtoBuf.ProtoMember(56, Name=@"mvp_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public global::System.Collections.Generic.List<uint> mvp_account_id
-    {
-      get { return _mvp_account_id; }
-    }
-  
-    private readonly global::System.Collections.Generic.List<CMsgDOTAMatch.Coach> _coaches = new global::System.Collections.Generic.List<CMsgDOTAMatch.Coach>();
-    [global::ProtoBuf.ProtoMember(57, Name=@"coaches", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgDOTAMatch.Coach> coaches
-    {
-      get { return _coaches; }
-    }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
   public partial class Player : global::ProtoBuf.IExtensible
   {
@@ -11069,42 +10808,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
   
 
-    private string _pro_name;
-    [global::ProtoBuf.ProtoMember(72, IsRequired = false, Name=@"pro_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string pro_name
-    {
-      get { return _pro_name?? ""; }
-      set { _pro_name = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool pro_nameSpecified
-    {
-      get { return _pro_name != null; }
-      set { if (value == (_pro_name== null)) _pro_name = value ? this.pro_name : (string)null; }
-    }
-    private bool ShouldSerializepro_name() { return pro_nameSpecified; }
-    private void Resetpro_name() { pro_nameSpecified = false; }
-    
-
-    private string _real_name;
-    [global::ProtoBuf.ProtoMember(73, IsRequired = false, Name=@"real_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string real_name
-    {
-      get { return _real_name?? ""; }
-      set { _real_name = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool real_nameSpecified
-    {
-      get { return _real_name != null; }
-      set { if (value == (_real_name== null)) _real_name = value ? this.real_name : (string)null; }
-    }
-    private bool ShouldSerializereal_name() { return real_nameSpecified; }
-    private void Resetreal_name() { real_nameSpecified = false; }
-    
-
     private CMsgDOTAMatch.Player.CustomGameData _custom_game_data = null;
     [global::ProtoBuf.ProtoMember(50, IsRequired = false, Name=@"custom_game_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(null)]
@@ -11204,6 +10907,24 @@ namespace SteamKit2.GC.Dota.Internal
     private void Resethero_was_randomed() { hero_was_randomedSpecified = false; }
     
 
+    private bool? _hero_was_bonus;
+    [global::ProtoBuf.ProtoMember(65, IsRequired = false, Name=@"hero_was_bonus", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool hero_was_bonus
+    {
+      get { return _hero_was_bonus?? default(bool); }
+      set { _hero_was_bonus = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool hero_was_bonusSpecified
+    {
+      get { return _hero_was_bonus != null; }
+      set { if (value == (_hero_was_bonus== null)) _hero_was_bonus = value ? this.hero_was_bonus : (bool?)null; }
+    }
+    private bool ShouldSerializehero_was_bonus() { return hero_was_bonusSpecified; }
+    private void Resethero_was_bonus() { hero_was_bonusSpecified = false; }
+    
+
     private bool? _hero_was_dota_plus_suggestion;
     [global::ProtoBuf.ProtoMember(69, IsRequired = false, Name=@"hero_was_dota_plus_suggestion", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public bool hero_was_dota_plus_suggestion
@@ -11221,13 +10942,42 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializehero_was_dota_plus_suggestion() { return hero_was_dota_plus_suggestionSpecified; }
     private void Resethero_was_dota_plus_suggestion() { hero_was_dota_plus_suggestionSpecified = false; }
     
-    private readonly global::System.Collections.Generic.List<CMsgDOTAMatch.Player.HeroDamageReceived> _hero_damage_received = new global::System.Collections.Generic.List<CMsgDOTAMatch.Player.HeroDamageReceived>();
-    [global::ProtoBuf.ProtoMember(67, Name=@"hero_damage_received", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgDOTAMatch.Player.HeroDamageReceived> hero_damage_received
+
+    private uint? _hero_damage_received_pre_reduction;
+    [global::ProtoBuf.ProtoMember(67, IsRequired = false, Name=@"hero_damage_received_pre_reduction", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint hero_damage_received_pre_reduction
     {
-      get { return _hero_damage_received; }
+      get { return _hero_damage_received_pre_reduction?? default(uint); }
+      set { _hero_damage_received_pre_reduction = value; }
     }
-  
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool hero_damage_received_pre_reductionSpecified
+    {
+      get { return _hero_damage_received_pre_reduction != null; }
+      set { if (value == (_hero_damage_received_pre_reduction== null)) _hero_damage_received_pre_reduction = value ? this.hero_damage_received_pre_reduction : (uint?)null; }
+    }
+    private bool ShouldSerializehero_damage_received_pre_reduction() { return hero_damage_received_pre_reductionSpecified; }
+    private void Resethero_damage_received_pre_reduction() { hero_damage_received_pre_reductionSpecified = false; }
+    
+
+    private uint? _hero_damage_received_post_reduction;
+    [global::ProtoBuf.ProtoMember(68, IsRequired = false, Name=@"hero_damage_received_post_reduction", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint hero_damage_received_post_reduction
+    {
+      get { return _hero_damage_received_post_reduction?? default(uint); }
+      set { _hero_damage_received_post_reduction = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool hero_damage_received_post_reductionSpecified
+    {
+      get { return _hero_damage_received_post_reduction != null; }
+      set { if (value == (_hero_damage_received_post_reduction== null)) _hero_damage_received_post_reduction = value ? this.hero_damage_received_post_reduction : (uint?)null; }
+    }
+    private bool ShouldSerializehero_damage_received_post_reduction() { return hero_damage_received_post_reductionSpecified; }
+    private void Resethero_damage_received_post_reduction() { hero_damage_received_post_reductionSpecified = false; }
+    
 
     private uint? _seconds_dead;
     [global::ProtoBuf.ProtoMember(70, IsRequired = false, Name=@"seconds_dead", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -11309,84 +11059,6 @@ namespace SteamKit2.GC.Dota.Internal
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"HeroDamageReceived")]
-  public partial class HeroDamageReceived : global::ProtoBuf.IExtensible
-  {
-    public HeroDamageReceived() {}
-    
-
-    private uint? _pre_reduction;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"pre_reduction", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint pre_reduction
-    {
-      get { return _pre_reduction?? default(uint); }
-      set { _pre_reduction = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool pre_reductionSpecified
-    {
-      get { return _pre_reduction != null; }
-      set { if (value == (_pre_reduction== null)) _pre_reduction = value ? this.pre_reduction : (uint?)null; }
-    }
-    private bool ShouldSerializepre_reduction() { return pre_reductionSpecified; }
-    private void Resetpre_reduction() { pre_reductionSpecified = false; }
-    
-
-    private uint? _post_reduction;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"post_reduction", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint post_reduction
-    {
-      get { return _post_reduction?? default(uint); }
-      set { _post_reduction = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool post_reductionSpecified
-    {
-      get { return _post_reduction != null; }
-      set { if (value == (_post_reduction== null)) _post_reduction = value ? this.post_reduction : (uint?)null; }
-    }
-    private bool ShouldSerializepost_reduction() { return post_reductionSpecified; }
-    private void Resetpost_reduction() { post_reductionSpecified = false; }
-    
-
-    private CMsgDOTAMatch.Player.HeroDamageType? _damage_type;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"damage_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public CMsgDOTAMatch.Player.HeroDamageType damage_type
-    {
-      get { return _damage_type?? CMsgDOTAMatch.Player.HeroDamageType.HERO_DAMAGE_PHYSICAL; }
-      set { _damage_type = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool damage_typeSpecified
-    {
-      get { return _damage_type != null; }
-      set { if (value == (_damage_type== null)) _damage_type = value ? this.damage_type : (CMsgDOTAMatch.Player.HeroDamageType?)null; }
-    }
-    private bool ShouldSerializedamage_type() { return damage_typeSpecified; }
-    private void Resetdamage_type() { damage_typeSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"HeroDamageType", EnumPassthru=true)]
-    public enum HeroDamageType
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"HERO_DAMAGE_PHYSICAL", Value=0)]
-      HERO_DAMAGE_PHYSICAL = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"HERO_DAMAGE_MAGICAL", Value=1)]
-      HERO_DAMAGE_MAGICAL = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"HERO_DAMAGE_PURE", Value=2)]
-      HERO_DAMAGE_PURE = 2
-    }
   
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -11504,106 +11176,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
     private bool ShouldSerializelanguage_code() { return language_codeSpecified; }
     private void Resetlanguage_code() { language_codeSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Coach")]
-  public partial class Coach : global::ProtoBuf.IExtensible
-  {
-    public Coach() {}
-    
-
-    private uint? _account_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint account_id
-    {
-      get { return _account_id?? default(uint); }
-      set { _account_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool account_idSpecified
-    {
-      get { return _account_id != null; }
-      set { if (value == (_account_id== null)) _account_id = value ? this.account_id : (uint?)null; }
-    }
-    private bool ShouldSerializeaccount_id() { return account_idSpecified; }
-    private void Resetaccount_id() { account_idSpecified = false; }
-    
-
-    private string _coach_name;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"coach_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string coach_name
-    {
-      get { return _coach_name?? ""; }
-      set { _coach_name = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool coach_nameSpecified
-    {
-      get { return _coach_name != null; }
-      set { if (value == (_coach_name== null)) _coach_name = value ? this.coach_name : (string)null; }
-    }
-    private bool ShouldSerializecoach_name() { return coach_nameSpecified; }
-    private void Resetcoach_name() { coach_nameSpecified = false; }
-    
-
-    private uint? _coach_rating;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"coach_rating", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint coach_rating
-    {
-      get { return _coach_rating?? default(uint); }
-      set { _coach_rating = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool coach_ratingSpecified
-    {
-      get { return _coach_rating != null; }
-      set { if (value == (_coach_rating== null)) _coach_rating = value ? this.coach_rating : (uint?)null; }
-    }
-    private bool ShouldSerializecoach_rating() { return coach_ratingSpecified; }
-    private void Resetcoach_rating() { coach_ratingSpecified = false; }
-    
-
-    private uint? _coach_team;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"coach_team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint coach_team
-    {
-      get { return _coach_team?? default(uint); }
-      set { _coach_team = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool coach_teamSpecified
-    {
-      get { return _coach_team != null; }
-      set { if (value == (_coach_team== null)) _coach_team = value ? this.coach_team : (uint?)null; }
-    }
-    private bool ShouldSerializecoach_team() { return coach_teamSpecified; }
-    private void Resetcoach_team() { coach_teamSpecified = false; }
-    
-
-    private ulong? _coach_party_id;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"coach_party_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong coach_party_id
-    {
-      get { return _coach_party_id?? default(ulong); }
-      set { _coach_party_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool coach_party_idSpecified
-    {
-      get { return _coach_party_id != null; }
-      set { if (value == (_coach_party_id== null)) _coach_party_id = value ? this.coach_party_id : (ulong?)null; }
-    }
-    private bool ShouldSerializecoach_party_id() { return coach_party_idSpecified; }
-    private void Resetcoach_party_id() { coach_party_idSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -13337,24 +12909,6 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializeplayer_slot() { return player_slotSpecified; }
     private void Resetplayer_slot() { player_slotSpecified = false; }
     
-
-    private string _pro_name;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"pro_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string pro_name
-    {
-      get { return _pro_name?? ""; }
-      set { _pro_name = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool pro_nameSpecified
-    {
-      get { return _pro_name != null; }
-      set { if (value == (_pro_name== null)) _pro_name = value ? this.pro_name : (string)null; }
-    }
-    private bool ShouldSerializepro_name() { return pro_nameSpecified; }
-    private void Resetpro_name() { pro_nameSpecified = false; }
-    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -13645,920 +13199,6 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgConsumableUsage")]
-  public partial class CMsgConsumableUsage : global::ProtoBuf.IExtensible
-  {
-    public CMsgConsumableUsage() {}
-    
-
-    private uint? _item_def;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_def", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint item_def
-    {
-      get { return _item_def?? default(uint); }
-      set { _item_def = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool item_defSpecified
-    {
-      get { return _item_def != null; }
-      set { if (value == (_item_def== null)) _item_def = value ? this.item_def : (uint?)null; }
-    }
-    private bool ShouldSerializeitem_def() { return item_defSpecified; }
-    private void Resetitem_def() { item_defSpecified = false; }
-    
-
-    private int? _quantity_change;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"quantity_change", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int quantity_change
-    {
-      get { return _quantity_change?? default(int); }
-      set { _quantity_change = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool quantity_changeSpecified
-    {
-      get { return _quantity_change != null; }
-      set { if (value == (_quantity_change== null)) _quantity_change = value ? this.quantity_change : (int?)null; }
-    }
-    private bool ShouldSerializequantity_change() { return quantity_changeSpecified; }
-    private void Resetquantity_change() { quantity_changeSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgMatchConsumableUsage")]
-  public partial class CMsgMatchConsumableUsage : global::ProtoBuf.IExtensible
-  {
-    public CMsgMatchConsumableUsage() {}
-    
-    private readonly global::System.Collections.Generic.List<CMsgMatchConsumableUsage.PlayerUsage> _player_consumables_used = new global::System.Collections.Generic.List<CMsgMatchConsumableUsage.PlayerUsage>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"player_consumables_used", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgMatchConsumableUsage.PlayerUsage> player_consumables_used
-    {
-      get { return _player_consumables_used; }
-    }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PlayerUsage")]
-  public partial class PlayerUsage : global::ProtoBuf.IExtensible
-  {
-    public PlayerUsage() {}
-    
-
-    private uint? _account_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint account_id
-    {
-      get { return _account_id?? default(uint); }
-      set { _account_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool account_idSpecified
-    {
-      get { return _account_id != null; }
-      set { if (value == (_account_id== null)) _account_id = value ? this.account_id : (uint?)null; }
-    }
-    private bool ShouldSerializeaccount_id() { return account_idSpecified; }
-    private void Resetaccount_id() { account_idSpecified = false; }
-    
-    private readonly global::System.Collections.Generic.List<CMsgConsumableUsage> _consumables_used = new global::System.Collections.Generic.List<CMsgConsumableUsage>();
-    [global::ProtoBuf.ProtoMember(2, Name=@"consumables_used", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgConsumableUsage> consumables_used
-    {
-      get { return _consumables_used; }
-    }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgMatchEventActionGrants")]
-  public partial class CMsgMatchEventActionGrants : global::ProtoBuf.IExtensible
-  {
-    public CMsgMatchEventActionGrants() {}
-    
-    private readonly global::System.Collections.Generic.List<CMsgMatchEventActionGrants.PlayerGrants> _player_grants = new global::System.Collections.Generic.List<CMsgMatchEventActionGrants.PlayerGrants>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"player_grants", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgMatchEventActionGrants.PlayerGrants> player_grants
-    {
-      get { return _player_grants; }
-    }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Grant")]
-  public partial class Grant : global::ProtoBuf.IExtensible
-  {
-    public Grant() {}
-    
-
-    private uint? _event_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"event_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint event_id
-    {
-      get { return _event_id?? default(uint); }
-      set { _event_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool event_idSpecified
-    {
-      get { return _event_id != null; }
-      set { if (value == (_event_id== null)) _event_id = value ? this.event_id : (uint?)null; }
-    }
-    private bool ShouldSerializeevent_id() { return event_idSpecified; }
-    private void Resetevent_id() { event_idSpecified = false; }
-    
-
-    private uint? _action_id;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"action_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint action_id
-    {
-      get { return _action_id?? default(uint); }
-      set { _action_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool action_idSpecified
-    {
-      get { return _action_id != null; }
-      set { if (value == (_action_id== null)) _action_id = value ? this.action_id : (uint?)null; }
-    }
-    private bool ShouldSerializeaction_id() { return action_idSpecified; }
-    private void Resetaction_id() { action_idSpecified = false; }
-    
-
-    private uint? _audit;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"audit", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint audit
-    {
-      get { return _audit?? default(uint); }
-      set { _audit = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool auditSpecified
-    {
-      get { return _audit != null; }
-      set { if (value == (_audit== null)) _audit = value ? this.audit : (uint?)null; }
-    }
-    private bool ShouldSerializeaudit() { return auditSpecified; }
-    private void Resetaudit() { auditSpecified = false; }
-    
-
-    private uint? _quantity;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"quantity", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint quantity
-    {
-      get { return _quantity?? default(uint); }
-      set { _quantity = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool quantitySpecified
-    {
-      get { return _quantity != null; }
-      set { if (value == (_quantity== null)) _quantity = value ? this.quantity : (uint?)null; }
-    }
-    private bool ShouldSerializequantity() { return quantitySpecified; }
-    private void Resetquantity() { quantitySpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PlayerGrants")]
-  public partial class PlayerGrants : global::ProtoBuf.IExtensible
-  {
-    public PlayerGrants() {}
-    
-
-    private uint? _account_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint account_id
-    {
-      get { return _account_id?? default(uint); }
-      set { _account_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool account_idSpecified
-    {
-      get { return _account_id != null; }
-      set { if (value == (_account_id== null)) _account_id = value ? this.account_id : (uint?)null; }
-    }
-    private bool ShouldSerializeaccount_id() { return account_idSpecified; }
-    private void Resetaccount_id() { account_idSpecified = false; }
-    
-    private readonly global::System.Collections.Generic.List<CMsgMatchEventActionGrants.Grant> _actions_granted = new global::System.Collections.Generic.List<CMsgMatchEventActionGrants.Grant>();
-    [global::ProtoBuf.ProtoMember(2, Name=@"actions_granted", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgMatchEventActionGrants.Grant> actions_granted
-    {
-      get { return _actions_granted; }
-    }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgCustomGameWhitelist")]
-  public partial class CMsgCustomGameWhitelist : global::ProtoBuf.IExtensible
-  {
-    public CMsgCustomGameWhitelist() {}
-    
-
-    private uint? _version;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint version
-    {
-      get { return _version?? default(uint); }
-      set { _version = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool versionSpecified
-    {
-      get { return _version != null; }
-      set { if (value == (_version== null)) _version = value ? this.version : (uint?)null; }
-    }
-    private bool ShouldSerializeversion() { return versionSpecified; }
-    private void Resetversion() { versionSpecified = false; }
-    
-    private readonly global::System.Collections.Generic.List<ulong> _custom_games_whitelist = new global::System.Collections.Generic.List<ulong>();
-    [global::ProtoBuf.ProtoMember(2, Name=@"custom_games_whitelist", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public global::System.Collections.Generic.List<ulong> custom_games_whitelist
-    {
-      get { return _custom_games_whitelist; }
-    }
-  
-
-    private bool? _disable_whitelist;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"disable_whitelist", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool disable_whitelist
-    {
-      get { return _disable_whitelist?? default(bool); }
-      set { _disable_whitelist = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool disable_whitelistSpecified
-    {
-      get { return _disable_whitelist != null; }
-      set { if (value == (_disable_whitelist== null)) _disable_whitelist = value ? this.disable_whitelist : (bool?)null; }
-    }
-    private bool ShouldSerializedisable_whitelist() { return disable_whitelistSpecified; }
-    private void Resetdisable_whitelist() { disable_whitelistSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgCustomGameWhitelistForEdit")]
-  public partial class CMsgCustomGameWhitelistForEdit : global::ProtoBuf.IExtensible
-  {
-    public CMsgCustomGameWhitelistForEdit() {}
-    
-    private readonly global::System.Collections.Generic.List<CMsgCustomGameWhitelistForEdit.WhitelistEntry> _whitelist_entries = new global::System.Collections.Generic.List<CMsgCustomGameWhitelistForEdit.WhitelistEntry>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"whitelist_entries", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgCustomGameWhitelistForEdit.WhitelistEntry> whitelist_entries
-    {
-      get { return _whitelist_entries; }
-    }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"WhitelistEntry")]
-  public partial class WhitelistEntry : global::ProtoBuf.IExtensible
-  {
-    public WhitelistEntry() {}
-    
-
-    private ulong? _custom_game_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"custom_game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong custom_game_id
-    {
-      get { return _custom_game_id?? default(ulong); }
-      set { _custom_game_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool custom_game_idSpecified
-    {
-      get { return _custom_game_id != null; }
-      set { if (value == (_custom_game_id== null)) _custom_game_id = value ? this.custom_game_id : (ulong?)null; }
-    }
-    private bool ShouldSerializecustom_game_id() { return custom_game_idSpecified; }
-    private void Resetcustom_game_id() { custom_game_idSpecified = false; }
-    
-
-    private ECustomGameWhitelistState? _whitelist_state;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"whitelist_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ECustomGameWhitelistState whitelist_state
-    {
-      get { return _whitelist_state?? ECustomGameWhitelistState.CUSTOM_GAME_WHITELIST_STATE_UNKNOWN; }
-      set { _whitelist_state = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool whitelist_stateSpecified
-    {
-      get { return _whitelist_state != null; }
-      set { if (value == (_whitelist_state== null)) _whitelist_state = value ? this.whitelist_state : (ECustomGameWhitelistState?)null; }
-    }
-    private bool ShouldSerializewhitelist_state() { return whitelist_stateSpecified; }
-    private void Resetwhitelist_state() { whitelist_stateSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgPlayerRecentMatchInfo")]
-  public partial class CMsgPlayerRecentMatchInfo : global::ProtoBuf.IExtensible
-  {
-    public CMsgPlayerRecentMatchInfo() {}
-    
-
-    private ulong? _match_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong match_id
-    {
-      get { return _match_id?? default(ulong); }
-      set { _match_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool match_idSpecified
-    {
-      get { return _match_id != null; }
-      set { if (value == (_match_id== null)) _match_id = value ? this.match_id : (ulong?)null; }
-    }
-    private bool ShouldSerializematch_id() { return match_idSpecified; }
-    private void Resetmatch_id() { match_idSpecified = false; }
-    
-
-    private uint? _timestamp;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint timestamp
-    {
-      get { return _timestamp?? default(uint); }
-      set { _timestamp = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool timestampSpecified
-    {
-      get { return _timestamp != null; }
-      set { if (value == (_timestamp== null)) _timestamp = value ? this.timestamp : (uint?)null; }
-    }
-    private bool ShouldSerializetimestamp() { return timestampSpecified; }
-    private void Resettimestamp() { timestampSpecified = false; }
-    
-
-    private uint? _duration;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"duration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint duration
-    {
-      get { return _duration?? default(uint); }
-      set { _duration = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool durationSpecified
-    {
-      get { return _duration != null; }
-      set { if (value == (_duration== null)) _duration = value ? this.duration : (uint?)null; }
-    }
-    private bool ShouldSerializeduration() { return durationSpecified; }
-    private void Resetduration() { durationSpecified = false; }
-    
-
-    private bool? _win;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"win", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool win
-    {
-      get { return _win?? default(bool); }
-      set { _win = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool winSpecified
-    {
-      get { return _win != null; }
-      set { if (value == (_win== null)) _win = value ? this.win : (bool?)null; }
-    }
-    private bool ShouldSerializewin() { return winSpecified; }
-    private void Resetwin() { winSpecified = false; }
-    
-
-    private uint? _hero_id;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint hero_id
-    {
-      get { return _hero_id?? default(uint); }
-      set { _hero_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool hero_idSpecified
-    {
-      get { return _hero_id != null; }
-      set { if (value == (_hero_id== null)) _hero_id = value ? this.hero_id : (uint?)null; }
-    }
-    private bool ShouldSerializehero_id() { return hero_idSpecified; }
-    private void Resethero_id() { hero_idSpecified = false; }
-    
-
-    private uint? _kills;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"kills", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint kills
-    {
-      get { return _kills?? default(uint); }
-      set { _kills = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool killsSpecified
-    {
-      get { return _kills != null; }
-      set { if (value == (_kills== null)) _kills = value ? this.kills : (uint?)null; }
-    }
-    private bool ShouldSerializekills() { return killsSpecified; }
-    private void Resetkills() { killsSpecified = false; }
-    
-
-    private uint? _deaths;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"deaths", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint deaths
-    {
-      get { return _deaths?? default(uint); }
-      set { _deaths = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool deathsSpecified
-    {
-      get { return _deaths != null; }
-      set { if (value == (_deaths== null)) _deaths = value ? this.deaths : (uint?)null; }
-    }
-    private bool ShouldSerializedeaths() { return deathsSpecified; }
-    private void Resetdeaths() { deathsSpecified = false; }
-    
-
-    private uint? _assists;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"assists", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint assists
-    {
-      get { return _assists?? default(uint); }
-      set { _assists = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool assistsSpecified
-    {
-      get { return _assists != null; }
-      set { if (value == (_assists== null)) _assists = value ? this.assists : (uint?)null; }
-    }
-    private bool ShouldSerializeassists() { return assistsSpecified; }
-    private void Resetassists() { assistsSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgPlayerMatchRecord")]
-  public partial class CMsgPlayerMatchRecord : global::ProtoBuf.IExtensible
-  {
-    public CMsgPlayerMatchRecord() {}
-    
-
-    private uint? _wins;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"wins", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint wins
-    {
-      get { return _wins?? default(uint); }
-      set { _wins = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool winsSpecified
-    {
-      get { return _wins != null; }
-      set { if (value == (_wins== null)) _wins = value ? this.wins : (uint?)null; }
-    }
-    private bool ShouldSerializewins() { return winsSpecified; }
-    private void Resetwins() { winsSpecified = false; }
-    
-
-    private uint? _losses;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"losses", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint losses
-    {
-      get { return _losses?? default(uint); }
-      set { _losses = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool lossesSpecified
-    {
-      get { return _losses != null; }
-      set { if (value == (_losses== null)) _losses = value ? this.losses : (uint?)null; }
-    }
-    private bool ShouldSerializelosses() { return lossesSpecified; }
-    private void Resetlosses() { lossesSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgPlayerRecentMatchOutcomes")]
-  public partial class CMsgPlayerRecentMatchOutcomes : global::ProtoBuf.IExtensible
-  {
-    public CMsgPlayerRecentMatchOutcomes() {}
-    
-
-    private uint? _outcomes;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"outcomes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint outcomes
-    {
-      get { return _outcomes?? default(uint); }
-      set { _outcomes = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool outcomesSpecified
-    {
-      get { return _outcomes != null; }
-      set { if (value == (_outcomes== null)) _outcomes = value ? this.outcomes : (uint?)null; }
-    }
-    private bool ShouldSerializeoutcomes() { return outcomesSpecified; }
-    private void Resetoutcomes() { outcomesSpecified = false; }
-    
-
-    private uint? _match_count;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"match_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint match_count
-    {
-      get { return _match_count?? default(uint); }
-      set { _match_count = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool match_countSpecified
-    {
-      get { return _match_count != null; }
-      set { if (value == (_match_count== null)) _match_count = value ? this.match_count : (uint?)null; }
-    }
-    private bool ShouldSerializematch_count() { return match_countSpecified; }
-    private void Resetmatch_count() { match_countSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgPlayerRecentCommends")]
-  public partial class CMsgPlayerRecentCommends : global::ProtoBuf.IExtensible
-  {
-    public CMsgPlayerRecentCommends() {}
-    
-
-    private uint? _commends;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"commends", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint commends
-    {
-      get { return _commends?? default(uint); }
-      set { _commends = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool commendsSpecified
-    {
-      get { return _commends != null; }
-      set { if (value == (_commends== null)) _commends = value ? this.commends : (uint?)null; }
-    }
-    private bool ShouldSerializecommends() { return commendsSpecified; }
-    private void Resetcommends() { commendsSpecified = false; }
-    
-
-    private uint? _match_count;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"match_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint match_count
-    {
-      get { return _match_count?? default(uint); }
-      set { _match_count = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool match_countSpecified
-    {
-      get { return _match_count != null; }
-      set { if (value == (_match_count== null)) _match_count = value ? this.match_count : (uint?)null; }
-    }
-    private bool ShouldSerializematch_count() { return match_countSpecified; }
-    private void Resetmatch_count() { match_countSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgPlayerRecentAccomplishments")]
-  public partial class CMsgPlayerRecentAccomplishments : global::ProtoBuf.IExtensible
-  {
-    public CMsgPlayerRecentAccomplishments() {}
-    
-
-    private CMsgPlayerRecentMatchOutcomes _recent_outcomes = null;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"recent_outcomes", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgPlayerRecentMatchOutcomes recent_outcomes
-    {
-      get { return _recent_outcomes; }
-      set { _recent_outcomes = value; }
-    }
-
-    private CMsgPlayerMatchRecord _total_record = null;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"total_record", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgPlayerMatchRecord total_record
-    {
-      get { return _total_record; }
-      set { _total_record = value; }
-    }
-
-    private uint? _prediction_streak;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"prediction_streak", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint prediction_streak
-    {
-      get { return _prediction_streak?? default(uint); }
-      set { _prediction_streak = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool prediction_streakSpecified
-    {
-      get { return _prediction_streak != null; }
-      set { if (value == (_prediction_streak== null)) _prediction_streak = value ? this.prediction_streak : (uint?)null; }
-    }
-    private bool ShouldSerializeprediction_streak() { return prediction_streakSpecified; }
-    private void Resetprediction_streak() { prediction_streakSpecified = false; }
-    
-
-    private uint? _plus_prediction_streak;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"plus_prediction_streak", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint plus_prediction_streak
-    {
-      get { return _plus_prediction_streak?? default(uint); }
-      set { _plus_prediction_streak = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool plus_prediction_streakSpecified
-    {
-      get { return _plus_prediction_streak != null; }
-      set { if (value == (_plus_prediction_streak== null)) _plus_prediction_streak = value ? this.plus_prediction_streak : (uint?)null; }
-    }
-    private bool ShouldSerializeplus_prediction_streak() { return plus_prediction_streakSpecified; }
-    private void Resetplus_prediction_streak() { plus_prediction_streakSpecified = false; }
-    
-
-    private CMsgPlayerRecentCommends _recent_commends = null;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"recent_commends", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgPlayerRecentCommends recent_commends
-    {
-      get { return _recent_commends; }
-      set { _recent_commends = value; }
-    }
-
-    private uint? _first_match_timestamp;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"first_match_timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint first_match_timestamp
-    {
-      get { return _first_match_timestamp?? default(uint); }
-      set { _first_match_timestamp = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool first_match_timestampSpecified
-    {
-      get { return _first_match_timestamp != null; }
-      set { if (value == (_first_match_timestamp== null)) _first_match_timestamp = value ? this.first_match_timestamp : (uint?)null; }
-    }
-    private bool ShouldSerializefirst_match_timestamp() { return first_match_timestampSpecified; }
-    private void Resetfirst_match_timestamp() { first_match_timestampSpecified = false; }
-    
-
-    private CMsgPlayerRecentMatchInfo _last_match = null;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"last_match", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgPlayerRecentMatchInfo last_match
-    {
-      get { return _last_match; }
-      set { _last_match = value; }
-    }
-
-    private CMsgPlayerRecentMatchOutcomes _recent_mvps = null;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"recent_mvps", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgPlayerRecentMatchOutcomes recent_mvps
-    {
-      get { return _recent_mvps; }
-      set { _recent_mvps = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgPlayerHeroRecentAccomplishments")]
-  public partial class CMsgPlayerHeroRecentAccomplishments : global::ProtoBuf.IExtensible
-  {
-    public CMsgPlayerHeroRecentAccomplishments() {}
-    
-
-    private CMsgPlayerRecentMatchOutcomes _recent_outcomes = null;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"recent_outcomes", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgPlayerRecentMatchOutcomes recent_outcomes
-    {
-      get { return _recent_outcomes; }
-      set { _recent_outcomes = value; }
-    }
-
-    private CMsgPlayerMatchRecord _total_record = null;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"total_record", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgPlayerMatchRecord total_record
-    {
-      get { return _total_record; }
-      set { _total_record = value; }
-    }
-
-    private CMsgPlayerRecentMatchInfo _last_match = null;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"last_match", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgPlayerRecentMatchInfo last_match
-    {
-      get { return _last_match; }
-      set { _last_match = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgRecentAccomplishments")]
-  public partial class CMsgRecentAccomplishments : global::ProtoBuf.IExtensible
-  {
-    public CMsgRecentAccomplishments() {}
-    
-
-    private CMsgPlayerRecentAccomplishments _player_accomplishments = null;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"player_accomplishments", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgPlayerRecentAccomplishments player_accomplishments
-    {
-      get { return _player_accomplishments; }
-      set { _player_accomplishments = value; }
-    }
-
-    private CMsgPlayerHeroRecentAccomplishments _hero_accomplishments = null;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"hero_accomplishments", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgPlayerHeroRecentAccomplishments hero_accomplishments
-    {
-      get { return _hero_accomplishments; }
-      set { _hero_accomplishments = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgRequestPlayerRecentAccomplishments")]
-  public partial class CMsgRequestPlayerRecentAccomplishments : global::ProtoBuf.IExtensible
-  {
-    public CMsgRequestPlayerRecentAccomplishments() {}
-    
-
-    private uint? _account_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint account_id
-    {
-      get { return _account_id?? default(uint); }
-      set { _account_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool account_idSpecified
-    {
-      get { return _account_id != null; }
-      set { if (value == (_account_id== null)) _account_id = value ? this.account_id : (uint?)null; }
-    }
-    private bool ShouldSerializeaccount_id() { return account_idSpecified; }
-    private void Resetaccount_id() { account_idSpecified = false; }
-    
-
-    private uint? _hero_id;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint hero_id
-    {
-      get { return _hero_id?? default(uint); }
-      set { _hero_id = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool hero_idSpecified
-    {
-      get { return _hero_id != null; }
-      set { if (value == (_hero_id== null)) _hero_id = value ? this.hero_id : (uint?)null; }
-    }
-    private bool ShouldSerializehero_id() { return hero_idSpecified; }
-    private void Resethero_id() { hero_idSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgRequestPlayerRecentAccomplishmentsResponse")]
-  public partial class CMsgRequestPlayerRecentAccomplishmentsResponse : global::ProtoBuf.IExtensible
-  {
-    public CMsgRequestPlayerRecentAccomplishmentsResponse() {}
-    
-
-    private CMsgRequestPlayerRecentAccomplishmentsResponse.EResponse? _result;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public CMsgRequestPlayerRecentAccomplishmentsResponse.EResponse result
-    {
-      get { return _result?? CMsgRequestPlayerRecentAccomplishmentsResponse.EResponse.k_eInternalError; }
-      set { _result = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool resultSpecified
-    {
-      get { return _result != null; }
-      set { if (value == (_result== null)) _result = value ? this.result : (CMsgRequestPlayerRecentAccomplishmentsResponse.EResponse?)null; }
-    }
-    private bool ShouldSerializeresult() { return resultSpecified; }
-    private void Resetresult() { resultSpecified = false; }
-    
-
-    private CMsgRecentAccomplishments _player_accomplishments = null;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"player_accomplishments", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgRecentAccomplishments player_accomplishments
-    {
-      get { return _player_accomplishments; }
-      set { _player_accomplishments = value; }
-    }
-    [global::ProtoBuf.ProtoContract(Name=@"EResponse", EnumPassthru=true)]
-    public enum EResponse
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_eInternalError", Value=0)]
-      k_eInternalError = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_eSuccess", Value=1)]
-      k_eSuccess = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_eTooBusy", Value=2)]
-      k_eTooBusy = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_eDisabled", Value=3)]
-      k_eDisabled = 3
-    }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
     [global::ProtoBuf.ProtoContract(Name=@"ESpecialPingValue", EnumPassthru=true)]
     public enum ESpecialPingValue
     {
@@ -14688,20 +13328,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"EBroadcastTimelineEvent_FirstBlood", Value=9)]
       EBroadcastTimelineEvent_FirstBlood = 9
-    }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"ECustomGameWhitelistState", EnumPassthru=true)]
-    public enum ECustomGameWhitelistState
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"CUSTOM_GAME_WHITELIST_STATE_UNKNOWN", Value=0)]
-      CUSTOM_GAME_WHITELIST_STATE_UNKNOWN = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"CUSTOM_GAME_WHITELIST_STATE_APPROVED", Value=1)]
-      CUSTOM_GAME_WHITELIST_STATE_APPROVED = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"CUSTOM_GAME_WHITELIST_STATE_REJECTED", Value=2)]
-      CUSTOM_GAME_WHITELIST_STATE_REJECTED = 2
     }
   
 }

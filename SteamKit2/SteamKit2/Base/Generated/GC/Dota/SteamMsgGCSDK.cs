@@ -705,34 +705,6 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCSubGCStarting")]
-  public partial class CMsgGCToGCSubGCStarting : global::ProtoBuf.IExtensible
-  {
-    public CMsgGCToGCSubGCStarting() {}
-    
-
-    private uint? _dir_index;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"dir_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint dir_index
-    {
-      get { return _dir_index?? default(uint); }
-      set { _dir_index = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool dir_indexSpecified
-    {
-      get { return _dir_index != null; }
-      set { if (value == (_dir_index== null)) _dir_index = value ? this.dir_index : (uint?)null; }
-    }
-    private bool ShouldSerializedir_index() { return dir_indexSpecified; }
-    private void Resetdir_index() { dir_indexSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterAck")]
   public partial class CGCToGCMsgMasterAck : global::ProtoBuf.IExtensible
   {
@@ -1480,24 +1452,6 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializeengine() { return engineSpecified; }
     private void Resetengine() { engineSpecified = false; }
     
-
-    private byte[] _steamdatagram_login;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"steamdatagram_login", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public byte[] steamdatagram_login
-    {
-      get { return _steamdatagram_login?? null; }
-      set { _steamdatagram_login = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool steamdatagram_loginSpecified
-    {
-      get { return _steamdatagram_login != null; }
-      set { if (value == (_steamdatagram_login== null)) _steamdatagram_login = value ? this.steamdatagram_login : (byte[])null; }
-    }
-    private bool ShouldSerializesteamdatagram_login() { return steamdatagram_loginSpecified; }
-    private void Resetsteamdatagram_login() { steamdatagram_loginSpecified = false; }
-    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2213,16 +2167,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
     private bool ShouldSerializein_logon_surge() { return in_logon_surgeSpecified; }
     private void Resetin_logon_surge() { in_logon_surgeSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientRequestDropped")]
-  public partial class CMsgGCToClientRequestDropped : global::ProtoBuf.IExtensible
-  {
-    public CMsgGCToClientRequestDropped() {}
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -3353,6 +3297,9 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"PARTNER_PERFECT_WORLD", Value=1)]
       PARTNER_PERFECT_WORLD = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"PARTNER_NEXON", Value=2)]
+      PARTNER_NEXON = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"PARTNER_INVALID", Value=3)]
       PARTNER_INVALID = 3
