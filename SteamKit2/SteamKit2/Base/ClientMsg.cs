@@ -68,8 +68,7 @@ namespace SteamKit2
         /// <value>
         /// The target job id.
         /// </value>
-        [DisallowNull, NotNull]
-        public override JobID? TargetJobID
+        public override JobID TargetJobID
         {
             get => ProtoHeader.jobid_target;
             set => ProtoHeader.jobid_target = value ?? throw new ArgumentNullException( nameof(value) );
@@ -80,8 +79,7 @@ namespace SteamKit2
         /// <value>
         /// The source job id.
         /// </value>
-        [DisallowNull, NotNull]
-        public override JobID? SourceJobID
+        public override JobID SourceJobID
         {
             get => ProtoHeader.jobid_source;
             set => ProtoHeader.jobid_source = value ?? throw new ArgumentNullException( nameof(value) );
@@ -279,7 +277,7 @@ namespace SteamKit2
         /// <value>
         /// The <see cref="SteamID"/>.
         /// </value>
-        [DisallowNull]
+        [DisallowNull, NotNull]
         public override SteamID? SteamID
         {
             get => Header.SteamID;
@@ -292,8 +290,7 @@ namespace SteamKit2
         /// <value>
         /// The target job id.
         /// </value>
-        [DisallowNull, NotNull]
-        public override JobID? TargetJobID
+        public override JobID TargetJobID
         {
             get => Header.TargetJobID;
             set => Header.TargetJobID = value ?? throw new ArgumentNullException( nameof(value) );
@@ -304,8 +301,7 @@ namespace SteamKit2
         /// <value>
         /// The source job id.
         /// </value>
-        [DisallowNull, NotNull]
-        public override JobID? SourceJobID
+        public override JobID SourceJobID
         {
             get => Header.SourceJobID;
             set => Header.SourceJobID = value ?? throw new ArgumentNullException( nameof(value) );
@@ -456,8 +452,7 @@ namespace SteamKit2
         /// <value>
         /// The target job id.
         /// </value>
-        [DisallowNull]
-        public override JobID? TargetJobID
+        public override JobID TargetJobID
         {
             get => Header.TargetJobID;
             set => Header.TargetJobID = value ?? throw new ArgumentNullException( nameof(value) );
@@ -468,8 +463,7 @@ namespace SteamKit2
         /// <value>
         /// The source job id.
         /// </value>
-        [DisallowNull]
-        public override JobID? SourceJobID
+        public override JobID SourceJobID
         {
             get => Header.SourceJobID;
             set => Header.SourceJobID = value ?? throw new ArgumentNullException( nameof(value) );
