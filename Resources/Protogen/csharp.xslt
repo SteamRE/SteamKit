@@ -43,7 +43,6 @@
 //     the code is regenerated.
 // &lt;/auto-generated&gt;
 //------------------------------------------------------------------------------
-#nullable disable
 #pragma warning disable 1591
 </xsl:text><!--
     --><xsl:apply-templates select="*"/><!--
