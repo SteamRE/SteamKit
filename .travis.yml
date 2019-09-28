@@ -2,7 +2,7 @@ dist: xenial
 
 language: csharp
 mono: none
-dotnet: 2.2
+dotnet: 3.0
 
 git:
     depth: false
