@@ -736,7 +736,7 @@ namespace SteamKit2
             if ( Children.Any() )
             {
                 f.WriteByte( ( byte )Type.None );
-                f.WriteNullTermString( Name, Encoding.UTF8 );
+                f.WriteNullTermString( GetNameForSerialization(), Encoding.UTF8 );
                 foreach ( var child in Children )
                 {
                     child.RecursiveSaveBinaryToStreamCore( f );
@@ -746,7 +746,7 @@ namespace SteamKit2
             else
             {
                 f.WriteByte( ( byte )Type.String );
-                f.WriteNullTermString( Name, Encoding.UTF8 );
+                f.WriteNullTermString( GetNameForSerialization(), Encoding.UTF8 );
                 f.WriteNullTermString( Value ?? string.Empty, Encoding.UTF8 );
             }
         }
@@ -755,7 +755,7 @@ namespace SteamKit2
         {
             // write header
             WriteIndents( stream, indentLevel );
-            WriteString( stream, Name, true );
+            WriteString( stream, GetNameForSerialization(), true );
             WriteString( stream, "\n" );
             WriteIndents( stream, indentLevel );
             WriteString( stream, "{\n" );
@@ -770,9 +770,9 @@ namespace SteamKit2
                 else
                 {
                     WriteIndents( stream, indentLevel + 1 );
-                    WriteString( stream, child.Name, true );
+                    WriteString( stream, child.GetNameForSerialization(), true );
                     WriteString( stream, "\t\t" );
-                    WriteString( stream, EscapeText( child.AsString() ), true );
+                    WriteString( stream, EscapeText( child.Value ), true );
                     WriteString( stream, "\n" );
                 }
             }
@@ -899,6 +899,16 @@ namespace SteamKit2
             }
 
             return true;
+        }
+
+        string GetNameForSerialization()
+        {
+            if ( Name is null )
+            {
+                throw new InvalidOperationException( "Cannot serialise a KeyValue object with a null name!" );
+            }
+
+            return Name;
         }
     }
 }

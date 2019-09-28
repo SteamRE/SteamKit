@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -311,7 +312,7 @@ namespace SteamKit2.Internal
         /// Called when a client message is received from the network.
         /// </summary>
         /// <param name="packetMsg">The packet message.</param>
-        protected virtual bool OnClientMsgReceived( IPacketMsg? packetMsg )
+        protected virtual bool OnClientMsgReceived( [NotNullWhen(true)] IPacketMsg? packetMsg )
         {
             if ( packetMsg == null )
             {
