@@ -5,6 +5,7 @@
 
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using SteamKit2.Internal;
 
@@ -15,7 +16,9 @@ namespace SteamKit2
         public const uint MAX_PAYLOAD = 0x4DC;
 
         public UdpHeader Header { get; private set; }
-        public MemoryStream Payload { get; private set; }
+
+        [DisallowNull, NotNull]
+        public MemoryStream? Payload { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether this instance is valid.

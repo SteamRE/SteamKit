@@ -51,7 +51,7 @@ namespace SteamKit2
                 return null;
             }
 
-            var personaName = Client.GetHandler<SteamFriends>().GetPersonaName();
+            var personaName = Client.GetHandler<SteamFriends>()!.GetPersonaName();
 
             var createLobby = new ClientMsgProtobuf<CMsgClientMMSCreateLobby>( EMsg.ClientMMSCreateLobby )
             {
@@ -63,7 +63,7 @@ namespace SteamKit2
                     lobby_flags = lobbyFlags,
                     metadata = Lobby.EncodeMetadata( metadata ),
                     cell_id = Client.CellID.Value,
-                    public_ip = NetHelpers.GetIPAddress( Client.PublicIP ),
+                    public_ip = NetHelpers.GetIPAddress( Client.PublicIP! ),
                     persona_name_owner = personaName
                 },
                 SourceJobID = Client.GetNextJobID()
@@ -187,7 +187,7 @@ namespace SteamKit2
                 {
                     app_id = appId,
                     cell_id = Client.CellID.Value,
-                    public_ip = NetHelpers.GetIPAddress( Client.PublicIP ),
+                    public_ip = NetHelpers.GetIPAddress( Client.PublicIP! ),
                     num_lobbies_requested = maxLobbies
                 },
                 SourceJobID = Client.GetNextJobID()
@@ -312,7 +312,7 @@ namespace SteamKit2
         /// <param name="appId">The ID of app which we're attempting to obtain a lobby for.</param>
         /// <param name="lobbySteamId">The SteamID of the lobby that should be returned.</param>
         /// <returns>The <see cref="Lobby"/> corresponding with the specified app and lobby ID, if cached. Otherwise, <c>null</c>.</returns>
-        public Lobby GetLobby( uint appId, SteamID lobbySteamId )
+        public Lobby? GetLobby( uint appId, SteamID lobbySteamId )
         {
             return lobbyCache.GetLobby( appId, lobbySteamId );
         }
@@ -375,12 +375,6 @@ namespace SteamKit2
             var lobbyListResponse = new ClientMsgProtobuf<CMsgClientMMSCreateLobbyResponse>( packetMsg );
             var body = lobbyListResponse.Body;
 
-            if ( lobbyListResponse.TargetJobID is null )
-            {
-                DebugLog.WriteLine( nameof( SteamMatchmaking ), "Got CreateLobbyResponse with no target job ID!" );
-                return;
-            }
-
             if ( lobbyManipulationRequests.TryRemove( lobbyListResponse.TargetJobID, out var request ) )
             {
                 if ( body.eresult == ( int )EResult.OK && request != null )
@@ -417,13 +411,6 @@ namespace SteamKit2
         void HandleSetLobbyDataResponse( IPacketMsg packetMsg )
         {
             var lobbyListResponse = new ClientMsgProtobuf<CMsgClientMMSSetLobbyDataResponse>( packetMsg );
-
-            if ( lobbyListResponse.TargetJobID is null )
-            {
-                DebugLog.WriteLine( nameof( SteamMatchmaking ), "Got SetLobbyDataResponse with no target job ID!" );
-                return;
-            }
-
             var body = lobbyListResponse.Body;
 
             if ( lobbyManipulationRequests.TryRemove( lobbyListResponse.TargetJobID, out var request ) )
@@ -478,13 +465,6 @@ namespace SteamKit2
         void HandleSetLobbyOwnerResponse( IPacketMsg packetMsg )
         {
             var setLobbyOwnerResponse = new ClientMsgProtobuf<CMsgClientMMSSetLobbyOwnerResponse>( packetMsg );
-
-            if ( setLobbyOwnerResponse.TargetJobID is null )
-            {
-                DebugLog.WriteLine( nameof( UFSClient ), "Got SetLobbyOwnerResponse with no target job ID!" );
-                return;
-            }
-
             var body = setLobbyOwnerResponse.Body;
 
             if ( lobbyManipulationRequests.TryRemove( setLobbyOwnerResponse.TargetJobID, out var request ) )
@@ -544,13 +524,6 @@ namespace SteamKit2
         void HandleJoinLobbyResponse( IPacketMsg packetMsg )
         {
             var joinLobbyResponse = new ClientMsgProtobuf<CMsgClientMMSJoinLobbyResponse>( packetMsg );
-
-            if ( joinLobbyResponse.TargetJobID is null )
-            {
-                DebugLog.WriteLine( nameof( SteamMatchmaking ), "Got JoinLobbyResponse with no target job ID!" );
-                return;
-            }
-
             var body = joinLobbyResponse.Body;
 
             Lobby? joinedLobby = null;
@@ -593,13 +566,6 @@ namespace SteamKit2
         void HandleLeaveLobbyResponse( IPacketMsg packetMsg )
         {
             var leaveLobbyResponse = new ClientMsgProtobuf<CMsgClientMMSLeaveLobbyResponse>( packetMsg );
-
-            if ( leaveLobbyResponse.TargetJobID is null )
-            {
-                DebugLog.WriteLine( nameof( SteamMatchmaking ), "Got LeaveLobbyResponse with no target job ID!" );
-                return;
-            }
-
             var body = leaveLobbyResponse.Body;
 
             if ( body.eresult == ( int )EResult.OK )
@@ -619,15 +585,11 @@ namespace SteamKit2
         {
             var lobbyListResponse = new ClientMsgProtobuf<CMsgClientMMSLobbyData>( packetMsg );
 
-            if ( lobbyListResponse.TargetJobID is null )
-            {
-                DebugLog.WriteLine( nameof( SteamMatchmaking ), "Got LobbyData with no target job ID!" );
-                return;
-            }
-
             var body = lobbyListResponse.Body;
 
             var cachedLobby = lobbyCache.GetLobby( body.app_id, body.steam_id_lobby );
+            DebugLog.Assert( cachedLobby != null, nameof( SteamMatchmaking ), "Got LobbyData without corresponding object in cache." );
+
             var members = body.members.Count == 0
                 ? cachedLobby.Members
                 : body.members.ConvertAll( member => new Lobby.Member(

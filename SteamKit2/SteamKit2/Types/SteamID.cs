@@ -660,7 +660,7 @@ namespace SteamKit2
         /// </returns>
         public static implicit operator ulong( SteamID sid )
         {
-            if ( sid == null )
+            if ( sid is null )
             {
                 throw new ArgumentNullException( nameof(sid) );
             }

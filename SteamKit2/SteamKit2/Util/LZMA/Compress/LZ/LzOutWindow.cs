@@ -1,4 +1,5 @@
 // LzOutWindow.cs
+#nullable disable
 
 namespace SevenZip.Compression.LZ
 {

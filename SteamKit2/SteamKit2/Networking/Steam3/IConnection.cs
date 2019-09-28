@@ -21,17 +21,17 @@ namespace SteamKit2
         /// The remote <see cref="System.Net.EndPoint" /> of the current connection.
         /// This is non-null between <see cref="E:Connected"/> and <see cref="E:Disconnected"/>, inclusive.
         /// </summary>
-        EndPoint CurrentEndPoint { get; }
+        EndPoint? CurrentEndPoint { get; }
 
         /// <summary>
         /// Occurs when the physical connection is established.
         /// </summary>
-        event EventHandler Connected;
+        event EventHandler? Connected;
 
         /// <summary>
         /// Occurs when the physical connection is broken.
         /// </summary>
-        event EventHandler<DisconnectedEventArgs> Disconnected;
+        event EventHandler<DisconnectedEventArgs>? Disconnected;
 
         /// <summary>
         /// Connects to the specified end point.
@@ -55,7 +55,7 @@ namespace SteamKit2
         /// Gets the local IP.
         /// </summary>
         /// <returns>The local IP.</returns>
-        IPAddress GetLocalIP();
+        IPAddress? GetLocalIP();
 
         /// <summary>
         /// The type of communication protocol that this connection uses.

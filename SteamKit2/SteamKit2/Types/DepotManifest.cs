@@ -33,11 +33,11 @@ namespace SteamKit2
             /// <summary>
             /// Gets or sets the SHA-1 hash chunk id.
             /// </summary>
-            public byte[] ChunkID { get; set; }
+            public byte[]? ChunkID { get; set; }
             /// <summary>
             /// Gets or sets the expected Adler32 checksum of this chunk.
             /// </summary>
-            public byte[] Checksum { get; set; }
+            public byte[]? Checksum { get; set; }
             /// <summary>
             /// Gets or sets the chunk offset.
             /// </summary>
@@ -121,7 +121,7 @@ namespace SteamKit2
         /// <summary>
         /// Gets the list of files within this manifest.
         /// </summary>
-        public List<FileData> Files { get; private set; }
+        public List<FileData>? Files { get; private set; }
         /// <summary>
         /// Gets a value indicating whether filenames within this depot are encrypted.
         /// </summary>
@@ -169,6 +169,8 @@ namespace SteamKit2
                 return true;
             }
 
+            DebugLog.Assert( Files != null, nameof( DepotManifest ), "Files was null when attempting to decrypt filenames." );
+
             foreach (var file in Files)
             {
                 byte[] enc_filename = Convert.FromBase64String(file.FileName);
@@ -191,9 +193,9 @@ namespace SteamKit2
 
         void Deserialize(byte[] data)
         {
-            ContentManifestPayload payload = null;
-            ContentManifestMetadata metadata = null;
-            ContentManifestSignature signature = null;
+            ContentManifestPayload? payload = null;
+            ContentManifestMetadata? metadata = null;
+            ContentManifestSignature? signature = null;
 
             using ( var ms = new MemoryStream( data ) )
             using ( var br = new BinaryReader( ms ) )
@@ -267,11 +269,11 @@ namespace SteamKit2
 
             foreach (var file_mapping in manifest.Mapping)
             {
-                FileData filedata = new FileData(file_mapping.FileName, file_mapping.Flags, file_mapping.TotalSize, file_mapping.HashContent, FilenamesEncrypted, file_mapping.Chunks.Length);
+                FileData filedata = new FileData(file_mapping.FileName!, file_mapping.Flags, file_mapping.TotalSize, file_mapping.HashContent!, FilenamesEncrypted, file_mapping.Chunks!.Length);
 
                 foreach (var chunk in file_mapping.Chunks)
                 {
-                    filedata.Chunks.Add( new ChunkData( chunk.ChunkGID, chunk.Checksum, chunk.Offset, chunk.CompressedSize, chunk.DecompressedSize ) );
+                    filedata.Chunks.Add( new ChunkData( chunk.ChunkGID!, chunk.Checksum!, chunk.Offset, chunk.CompressedSize, chunk.DecompressedSize ) );
                 }
 
                 Files.Add(filedata);

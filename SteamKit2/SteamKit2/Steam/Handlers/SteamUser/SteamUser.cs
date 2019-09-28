@@ -580,13 +580,6 @@ namespace SteamKit2
         void HandleWebAPIUserNonce( IPacketMsg packetMsg )
         {
             var userNonce = new ClientMsgProtobuf<CMsgClientRequestWebAPIAuthenticateUserNonceResponse>( packetMsg );
-
-            if ( userNonce.TargetJobID is null )
-            {
-                DebugLog.WriteLine( nameof( UFSClient ), "Got WebAPIAuthenticateUserNonceResponse with no target job ID!" );
-                return;
-            }
-
             var callback = new WebAPIUserNonceCallback(userNonce.TargetJobID, userNonce.Body);
             this.Client.PostCallback( callback );
         }

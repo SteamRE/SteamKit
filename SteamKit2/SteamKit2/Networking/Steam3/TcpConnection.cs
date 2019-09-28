@@ -16,13 +16,13 @@ namespace SteamKit2
     {
         const uint MAGIC = 0x31305456; // "VT01"
 
-        private Socket socket;
-        private Thread netThread;
-        private NetworkStream netStream;
-        private BinaryReader netReader;
-        private BinaryWriter netWriter;
+        private Socket? socket;
+        private Thread? netThread;
+        private NetworkStream? netStream;
+        private BinaryReader? netReader;
+        private BinaryWriter? netWriter;
 
-        private CancellationTokenSource cancellationToken;
+        private CancellationTokenSource? cancellationToken;
         private object netLock;
 
         public TcpConnection()
@@ -30,13 +30,13 @@ namespace SteamKit2
             netLock = new object();
         }
 
-        public event EventHandler<NetMsgEventArgs> NetMsgReceived;
+        public event EventHandler<NetMsgEventArgs>? NetMsgReceived;
 
-        public event EventHandler Connected;
+        public event EventHandler? Connected;
 
-        public event EventHandler<DisconnectedEventArgs> Disconnected;
+        public event EventHandler<DisconnectedEventArgs>? Disconnected;
 
-        public EndPoint CurrentEndPoint { get; private set; }
+        public EndPoint? CurrentEndPoint { get; private set; }
 
         public ProtocolTypes ProtocolTypes => ProtocolTypes.Tcp;
 
@@ -44,7 +44,7 @@ namespace SteamKit2
         {
             try
             {
-                if (socket.Connected)
+                if (socket != null && socket.Connected)
                 {
                     socket.Shutdown(SocketShutdown.Both);
                     socket.Disconnect( true );
@@ -127,7 +127,7 @@ namespace SteamKit2
                     netThread = new Thread(NetLoop);
                     netThread.Name = "TcpConnection Thread";
 
-                    CurrentEndPoint = socket.RemoteEndPoint;
+                    CurrentEndPoint = socket!.RemoteEndPoint;
                 }
 
                 netThread.Start();
@@ -143,6 +143,8 @@ namespace SteamKit2
 
         private void TryConnect(object sender)
         {
+            DebugLog.Assert( cancellationToken != null, nameof( TcpConnection ), "null CancellationToken in TryConnect" );
+
             int timeout = (int)sender;
             if (cancellationToken.IsCancellationRequested)
             {
@@ -151,7 +153,7 @@ namespace SteamKit2
                 return;
             }
             
-            var asyncResult = socket.BeginConnect(CurrentEndPoint, null, null );
+            var asyncResult = socket!.BeginConnect(CurrentEndPoint, null, null );
             if ( WaitHandle.WaitAny( new WaitHandle[] { asyncResult.AsyncWaitHandle, cancellationToken.Token.WaitHandle }, timeout ) == 0 )
             {
                 try
@@ -213,13 +215,15 @@ namespace SteamKit2
             // poll for readable data every 100ms
             const int POLL_MS = 100;
 
+            DebugLog.Assert( cancellationToken != null, nameof( TcpConnection ), "null cancellationToken in NetLoop" );
+
             while (!cancellationToken.IsCancellationRequested)
             {
                 bool canRead = false;
 
                 try
                 {
-                    canRead = socket.Poll(POLL_MS * 1000, SelectMode.SelectRead);
+                    canRead = socket!.Poll(POLL_MS * 1000, SelectMode.SelectRead);
                 }
                 catch (SocketException ex)
                 {
@@ -233,7 +237,7 @@ namespace SteamKit2
                     continue;
                 }
 
-                byte[] packData = null;
+                byte[] packData;
 
                 try
                 {
@@ -248,7 +252,7 @@ namespace SteamKit2
 
                 try
                 {
-                    NetMsgReceived?.Invoke( this, new NetMsgEventArgs( packData, CurrentEndPoint) );
+                    NetMsgReceived?.Invoke( this, new NetMsgEventArgs( packData, CurrentEndPoint!) );
                 }
                 catch (Exception ex)
                 {
@@ -275,7 +279,7 @@ namespace SteamKit2
 
             try
             {
-                packetLen = netReader.ReadUInt32();
+                packetLen = netReader!.ReadUInt32();
                 packetMagic = netReader.ReadUInt32();
             }
             catch (IOException ex)
@@ -311,7 +315,7 @@ namespace SteamKit2
 
                 try
                 {
-                    netWriter.Write((uint)data.Length);
+                    netWriter!.Write((uint)data.Length);
                     netWriter.Write(MAGIC);
                     netWriter.Write(data);
                 }

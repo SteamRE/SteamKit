@@ -409,6 +409,7 @@ namespace SteamKit2.Internal
         void Connected( object sender, EventArgs e )
         {
             DebugLog.Assert( connection != null, nameof( CMClient ), "No connection object after connecting." );
+            DebugLog.Assert( connection.CurrentEndPoint != null, nameof( CMClient ), "No connection endpoint after connecting - cannot update server list" );
 
             Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Good );
 
@@ -419,13 +420,17 @@ namespace SteamKit2.Internal
         void Disconnected( object sender, DisconnectedEventArgs e )
         {
             var connectionRelease = Interlocked.Exchange( ref connection, null );
-            if ( connectionRelease == null ) return;
+            if ( connectionRelease == null )
+            {
+                return;
+            }
 
             IsConnected = false;
 
             if ( !e.UserInitiated && !ExpectDisconnection )
             {
-                Servers.TryMark( connectionRelease.CurrentEndPoint, connectionRelease.ProtocolTypes, ServerQuality.Bad );
+                DebugLog.Assert( connectionRelease.CurrentEndPoint != null, nameof( CMClient ), "No connection endpoint while disconnecting - cannot update server list" );
+                Servers.TryMark( connectionRelease.CurrentEndPoint!, connectionRelease.ProtocolTypes, ServerQuality.Bad );
             }
 
             SessionID = null;
@@ -577,6 +582,7 @@ namespace SteamKit2.Internal
                 if ( logoffResult == EResult.TryAnotherCM || logoffResult == EResult.ServiceUnavailable )
                 {
                     DebugLog.Assert( connection != null, nameof( CMClient ), "No connection object during ClientLoggedOff." );
+                    DebugLog.Assert( connection.CurrentEndPoint != null, nameof( CMClient ), "No connection endpoint during ClientLoggedOff - cannot update server list status" );
                     Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Bad );
                 }
             }

@@ -55,7 +55,7 @@ namespace SteamKit2
         /// <value>
         /// The <see cref="SteamID"/>.
         /// </value>
-        [DisallowNull]
+        [DisallowNull, NotNull]
         public override SteamID? SteamID
         {
             get => ProtoHeader.steamid;
@@ -68,7 +68,7 @@ namespace SteamKit2
         /// <value>
         /// The target job id.
         /// </value>
-        [DisallowNull]
+        [DisallowNull, NotNull]
         public override JobID? TargetJobID
         {
             get => ProtoHeader.jobid_target;
@@ -80,7 +80,7 @@ namespace SteamKit2
         /// <value>
         /// The source job id.
         /// </value>
-        [DisallowNull]
+        [DisallowNull, NotNull]
         public override JobID? SourceJobID
         {
             get => ProtoHeader.jobid_source;
@@ -292,7 +292,7 @@ namespace SteamKit2
         /// <value>
         /// The target job id.
         /// </value>
-        [DisallowNull]
+        [DisallowNull, NotNull]
         public override JobID? TargetJobID
         {
             get => Header.TargetJobID;
@@ -304,7 +304,7 @@ namespace SteamKit2
         /// <value>
         /// The source job id.
         /// </value>
-        [DisallowNull]
+        [DisallowNull, NotNull]
         public override JobID? SourceJobID
         {
             get => Header.SourceJobID;

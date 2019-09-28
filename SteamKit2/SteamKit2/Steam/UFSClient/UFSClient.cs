@@ -374,45 +374,18 @@ namespace SteamKit2
         void HandleLoginResponse( IPacketMsg packetMsg )
         {
             var loginResp = new ClientMsgProtobuf<CMsgClientUFSLoginResponse>( packetMsg );
-
-            if ( loginResp.TargetJobID is null )
-            {
-                DebugLog.WriteLine( nameof( UFSClient ), "Got UFSLoginResponse with no target job ID!" );
-                return;
-            }
-
             var callback = new LoggedOnCallback( loginResp.TargetJobID, loginResp.Body);
             steamClient.PostCallback( callback );
         }
         void HandleUploadFileResponse( IPacketMsg packetMsg )
         {
             var uploadResp = new ClientMsgProtobuf<CMsgClientUFSUploadFileResponse>( packetMsg );
-
-            if ( uploadResp.SourceJobID is null )
-            {
-                DebugLog.WriteLine( nameof( UFSClient ), "Got UFSUploadFileResponse with no source job ID!" );
-                return;
-            }
-
-            if ( uploadResp.TargetJobID is null )
-            {
-                DebugLog.WriteLine( nameof( UFSClient ), "Got UFSUploadFileResponse with no target job ID!" );
-                return;
-            }
-
             var callback = new UploadFileResponseCallback( uploadResp.TargetJobID, uploadResp.Body, uploadResp.SourceJobID );
             steamClient.PostCallback( callback );
         }
         void HandleUploadFileFinished( IPacketMsg packetMsg )
         {
             var uploadFin = new ClientMsgProtobuf<CMsgClientUFSUploadFileFinished>( packetMsg );
-
-            if ( uploadFin.TargetJobID is null )
-            {
-                DebugLog.WriteLine( nameof( UFSClient ), "Got UFSUploadFileFinished with no target job ID!" );
-                return;
-            }
-
             var callback = new UploadFileFinishedCallback( uploadFin.TargetJobID, uploadFin.Body );
             steamClient.PostCallback( callback );
         }

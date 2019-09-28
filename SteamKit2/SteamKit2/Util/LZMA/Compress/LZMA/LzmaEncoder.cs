@@ -1,4 +1,5 @@
 // LzmaEncoder.cs
+#nullable disable
 
 using System;
 

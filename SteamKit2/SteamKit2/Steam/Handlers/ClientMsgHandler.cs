@@ -4,6 +4,8 @@
  */
 
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace SteamKit2
 {
     /// <summary>
@@ -15,7 +17,8 @@ namespace SteamKit2
         /// <summary>
         /// Gets the underlying <see cref="SteamClient"/> for use in sending replies.
         /// </summary>
-        protected SteamClient Client { get; private set; }
+        [NotNull]
+        protected SteamClient? Client { get; private set; }
 
         /// <summary>
         /// Gets or sets whether or not the related <see cref="SteamClient" /> should imminently expect the server to close the connection.

@@ -408,7 +408,8 @@ namespace SteamKit2
                 return;
             }
 
-            byte[] pubKey = KeyDictionary.GetPublicKey( steamClient.Universe );
+            var pubKey = KeyDictionary.GetPublicKey( steamClient.Universe );
+            DebugLog.Assert( pubKey != null, nameof( CDNClient ), "Unable to load public key for Steam Universe that we're already connected to!" );
 
             sessionKey = CryptoHelper.GenerateRandomBlock( 32 );
 

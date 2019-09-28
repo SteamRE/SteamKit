@@ -28,7 +28,7 @@ namespace SteamKit2
             readonly CancellationTokenSource cts;
             readonly ClientWebSocket socket;
             readonly string hostAndPort;
-            Task runloopTask;
+            Task? runloopTask;
             int disposed;
 
             public EndPoint EndPoint { get; }
@@ -121,7 +121,7 @@ namespace SteamKit2
                 socket.Dispose();
             }
 
-            async Task<byte[]> ReadMessageAsync(CancellationToken cancellationToken)
+            async Task<byte[]?> ReadMessageAsync(CancellationToken cancellationToken)
             {
                 using (var ms = new MemoryStream())
                 {

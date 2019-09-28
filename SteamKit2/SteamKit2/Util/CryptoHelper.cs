@@ -419,7 +419,7 @@ namespace SteamKit2
         /// <summary>
         /// Verifies and performs a symmetricdecrypt on the input using the given password as a key
         /// </summary>
-        public static byte[] VerifyAndDecryptPassword( byte[] input, string password )
+        public static byte[]? VerifyAndDecryptPassword( byte[] input, string password )
         {
             if ( input == null )
             {

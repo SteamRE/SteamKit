@@ -15,8 +15,8 @@ namespace SteamKit2
         {
             public SteamID SteamID { get; set; }
 
-            public string Name { get; set; }
-            public byte[] AvatarHash { get; set; }
+            public string? Name { get; set; }
+            public byte[]? AvatarHash { get; set; }
 
             public Account()
             {
@@ -33,7 +33,7 @@ namespace SteamKit2
 
             public uint GameAppID { get; set; }
             public GameID GameID { get; set; }
-            public string GameName { get; set; }
+            public string? GameName { get; set; }
 
 
             public User()
