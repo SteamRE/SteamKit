@@ -2152,6 +2152,24 @@ namespace SteamKit2.GC.Artifact.Internal
       get { return _entry_costs; }
     }
   
+
+    private bool? _select_random_deck;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"select_random_deck", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool select_random_deck
+    {
+      get { return _select_random_deck?? default(bool); }
+      set { _select_random_deck = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool select_random_deckSpecified
+    {
+      get { return _select_random_deck != null; }
+      set { if (value == (_select_random_deck== null)) _select_random_deck = value ? this.select_random_deck : (bool?)null; }
+    }
+    private bool ShouldSerializeselect_random_deck() { return select_random_deckSpecified; }
+    private void Resetselect_random_deck() { select_random_deckSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2233,7 +2251,10 @@ namespace SteamKit2.GC.Artifact.Internal
       k_eHasUnownedCards = 9,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_eRateLimited", Value=10)]
-      k_eRateLimited = 10
+      k_eRateLimited = 10,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eRandomDeckNotAllowed", Value=11)]
+      k_eRandomDeckNotAllowed = 11
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -2345,6 +2366,160 @@ namespace SteamKit2.GC.Artifact.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_eDisabled", Value=4)]
       k_eDisabled = 4
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCAIGauntletResult")]
+  public partial class CMsgClientToGCAIGauntletResult : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCAIGauntletResult() {}
+    
+
+    private uint? _gauntlet_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"gauntlet_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint gauntlet_id
+    {
+      get { return _gauntlet_id?? default(uint); }
+      set { _gauntlet_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool gauntlet_idSpecified
+    {
+      get { return _gauntlet_id != null; }
+      set { if (value == (_gauntlet_id== null)) _gauntlet_id = value ? this.gauntlet_id : (uint?)null; }
+    }
+    private bool ShouldSerializegauntlet_id() { return gauntlet_idSpecified; }
+    private void Resetgauntlet_id() { gauntlet_idSpecified = false; }
+    
+
+    private bool? _is_win;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"is_win", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool is_win
+    {
+      get { return _is_win?? default(bool); }
+      set { _is_win = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool is_winSpecified
+    {
+      get { return _is_win != null; }
+      set { if (value == (_is_win== null)) _is_win = value ? this.is_win : (bool?)null; }
+    }
+    private bool ShouldSerializeis_win() { return is_winSpecified; }
+    private void Resetis_win() { is_winSpecified = false; }
+    
+
+    private ulong? _secret_key;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"secret_key", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong secret_key
+    {
+      get { return _secret_key?? default(ulong); }
+      set { _secret_key = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool secret_keySpecified
+    {
+      get { return _secret_key != null; }
+      set { if (value == (_secret_key== null)) _secret_key = value ? this.secret_key : (ulong?)null; }
+    }
+    private bool ShouldSerializesecret_key() { return secret_keySpecified; }
+    private void Resetsecret_key() { secret_keySpecified = false; }
+    
+
+    private uint? _expected_wins;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"expected_wins", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint expected_wins
+    {
+      get { return _expected_wins?? default(uint); }
+      set { _expected_wins = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool expected_winsSpecified
+    {
+      get { return _expected_wins != null; }
+      set { if (value == (_expected_wins== null)) _expected_wins = value ? this.expected_wins : (uint?)null; }
+    }
+    private bool ShouldSerializeexpected_wins() { return expected_winsSpecified; }
+    private void Resetexpected_wins() { expected_winsSpecified = false; }
+    
+
+    private uint? _expected_losses;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"expected_losses", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint expected_losses
+    {
+      get { return _expected_losses?? default(uint); }
+      set { _expected_losses = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool expected_lossesSpecified
+    {
+      get { return _expected_losses != null; }
+      set { if (value == (_expected_losses== null)) _expected_losses = value ? this.expected_losses : (uint?)null; }
+    }
+    private bool ShouldSerializeexpected_losses() { return expected_lossesSpecified; }
+    private void Resetexpected_losses() { expected_lossesSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCAIGauntletResultResponse")]
+  public partial class CMsgClientToGCAIGauntletResultResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCAIGauntletResultResponse() {}
+    
+
+    private CMsgClientToGCAIGauntletResultResponse.EResponse? _result;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public CMsgClientToGCAIGauntletResultResponse.EResponse result
+    {
+      get { return _result?? CMsgClientToGCAIGauntletResultResponse.EResponse.k_eInternalError; }
+      set { _result = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool resultSpecified
+    {
+      get { return _result != null; }
+      set { if (value == (_result== null)) _result = value ? this.result : (CMsgClientToGCAIGauntletResultResponse.EResponse?)null; }
+    }
+    private bool ShouldSerializeresult() { return resultSpecified; }
+    private void Resetresult() { resultSpecified = false; }
+    
+    [global::ProtoBuf.ProtoContract(Name=@"EResponse", EnumPassthru=true)]
+    public enum EResponse
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eInternalError", Value=0)]
+      k_eInternalError = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eSuccess", Value=1)]
+      k_eSuccess = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eFailed", Value=2)]
+      k_eFailed = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eDisabled", Value=3)]
+      k_eDisabled = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eBusy", Value=4)]
+      k_eBusy = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eInvalidKey", Value=5)]
+      k_eInvalidKey = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eMismatchedGames", Value=6)]
+      k_eMismatchedGames = 6
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -4377,6 +4552,34 @@ namespace SteamKit2.GC.Artifact.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCSetPlayerBadge")]
+  public partial class CMsgClientToGCSetPlayerBadge : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCSetPlayerBadge() {}
+    
+
+    private uint? _player_badge;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"player_badge", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint player_badge
+    {
+      get { return _player_badge?? default(uint); }
+      set { _player_badge = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool player_badgeSpecified
+    {
+      get { return _player_badge != null; }
+      set { if (value == (_player_badge== null)) _player_badge = value ? this.player_badge : (uint?)null; }
+    }
+    private bool ShouldSerializeplayer_badge() { return player_badgeSpecified; }
+    private void Resetplayer_badge() { player_badgeSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCReplacementSDRTicketResponse")]
   public partial class CMsgClientToGCReplacementSDRTicketResponse : global::ProtoBuf.IExtensible
   {
@@ -4784,24 +4987,6 @@ namespace SteamKit2.GC.Artifact.Internal
     private void Resetmax_players() { max_playersSpecified = false; }
     
 
-    private string _phase_name;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"phase_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string phase_name
-    {
-      get { return _phase_name?? ""; }
-      set { _phase_name = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool phase_nameSpecified
-    {
-      get { return _phase_name != null; }
-      set { if (value == (_phase_name== null)) _phase_name = value ? this.phase_name : (string)null; }
-    }
-    private bool ShouldSerializephase_name() { return phase_nameSpecified; }
-    private void Resetphase_name() { phase_nameSpecified = false; }
-    
-
     private bool? _edit_stage;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"edit_stage", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public bool edit_stage
@@ -4836,6 +5021,15 @@ namespace SteamKit2.GC.Artifact.Internal
     {
       get { return _swiss; }
       set { _swiss = value; }
+    }
+
+    private CMsgCreateTourneyPhase.FreeForAll _free_for_all = null;
+    [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"free_for_all", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgCreateTourneyPhase.FreeForAll free_for_all
+    {
+      get { return _free_for_all; }
+      set { _free_for_all = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"DeckSettings")]
   public partial class DeckSettings : global::ProtoBuf.IExtensible
@@ -5065,6 +5259,52 @@ namespace SteamKit2.GC.Artifact.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"FreeForAll")]
+  public partial class FreeForAll : global::ProtoBuf.IExtensible
+  {
+    public FreeForAll() {}
+    
+
+    private uint? _max_games_per_player;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"max_games_per_player", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint max_games_per_player
+    {
+      get { return _max_games_per_player?? default(uint); }
+      set { _max_games_per_player = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool max_games_per_playerSpecified
+    {
+      get { return _max_games_per_player != null; }
+      set { if (value == (_max_games_per_player== null)) _max_games_per_player = value ? this.max_games_per_player : (uint?)null; }
+    }
+    private bool ShouldSerializemax_games_per_player() { return max_games_per_playerSpecified; }
+    private void Resetmax_games_per_player() { max_games_per_playerSpecified = false; }
+    
+
+    private uint? _auto_advance_after_s;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"auto_advance_after_s", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint auto_advance_after_s
+    {
+      get { return _auto_advance_after_s?? default(uint); }
+      set { _auto_advance_after_s = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool auto_advance_after_sSpecified
+    {
+      get { return _auto_advance_after_s != null; }
+      set { if (value == (_auto_advance_after_s== null)) _auto_advance_after_s = value ? this.auto_advance_after_s : (uint?)null; }
+    }
+    private bool ShouldSerializeauto_advance_after_s() { return auto_advance_after_sSpecified; }
+    private void Resetauto_advance_after_s() { auto_advance_after_sSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"ESwissMatches", EnumPassthru=true)]
     public enum ESwissMatches
     {
@@ -5246,6 +5486,42 @@ namespace SteamKit2.GC.Artifact.Internal
     }
     private bool ShouldSerializeprivacy_mode() { return privacy_modeSpecified; }
     private void Resetprivacy_mode() { privacy_modeSpecified = false; }
+    
+
+    private bool? _open_spectating;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"open_spectating", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool open_spectating
+    {
+      get { return _open_spectating?? default(bool); }
+      set { _open_spectating = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool open_spectatingSpecified
+    {
+      get { return _open_spectating != null; }
+      set { if (value == (_open_spectating== null)) _open_spectating = value ? this.open_spectating : (bool?)null; }
+    }
+    private bool ShouldSerializeopen_spectating() { return open_spectatingSpecified; }
+    private void Resetopen_spectating() { open_spectatingSpecified = false; }
+    
+
+    private uint? _timer_mode;
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"timer_mode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint timer_mode
+    {
+      get { return _timer_mode?? default(uint); }
+      set { _timer_mode = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool timer_modeSpecified
+    {
+      get { return _timer_mode != null; }
+      set { if (value == (_timer_mode== null)) _timer_mode = value ? this.timer_mode : (uint?)null; }
+    }
+    private bool ShouldSerializetimer_mode() { return timer_modeSpecified; }
+    private void Resettimer_mode() { timer_modeSpecified = false; }
     
     [global::ProtoBuf.ProtoContract(Name=@"EPrivacy", EnumPassthru=true)]
     public enum EPrivacy
@@ -8638,7 +8914,7 @@ namespace SteamKit2.GC.Artifact.Internal
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"value_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public CMsgClientToGCTourneyChangeValue.EValueType value_type
     {
-      get { return _value_type?? CMsgClientToGCTourneyChangeValue.EValueType.k_ePhase_MaxPlayers; }
+      get { return _value_type?? CMsgClientToGCTourneyChangeValue.EValueType.k_eGlobal_SeedStage; }
       set { _value_type = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
@@ -8673,11 +8949,35 @@ namespace SteamKit2.GC.Artifact.Internal
     public enum EValueType
     {
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eGlobal_SeedStage", Value=1)]
+      k_eGlobal_SeedStage = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eGlobal_OpenSpectating", Value=2)]
+      k_eGlobal_OpenSpectating = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eGlobal_TimerMode", Value=3)]
+      k_eGlobal_TimerMode = 3,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_ePhase_MaxPlayers", Value=50)]
       k_ePhase_MaxPlayers = 50,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ePhase_EditStage", Value=51)]
+      k_ePhase_EditStage = 51,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_eSwiss_NumRounds", Value=100)]
-      k_eSwiss_NumRounds = 100
+      k_eSwiss_NumRounds = 100,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eSwiss_Matches", Value=101)]
+      k_eSwiss_Matches = 101,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eBracket_BestOf", Value=150)]
+      k_eBracket_BestOf = 150,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eBracket_FinalsBestOf", Value=151)]
+      k_eBracket_FinalsBestOf = 151,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eFreeForAll_MaxGames", Value=200)]
+      k_eFreeForAll_MaxGames = 200
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -8738,6 +9038,166 @@ namespace SteamKit2.GC.Artifact.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_eMissingPermissions", Value=9)]
       k_eMissingPermissions = 9
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCTourneyJoinOpenTourney")]
+  public partial class CMsgClientToGCTourneyJoinOpenTourney : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCTourneyJoinOpenTourney() {}
+    
+
+    private uint? _language;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"language", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint language
+    {
+      get { return _language?? default(uint); }
+      set { _language = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool languageSpecified
+    {
+      get { return _language != null; }
+      set { if (value == (_language== null)) _language = value ? this.language : (uint?)null; }
+    }
+    private bool ShouldSerializelanguage() { return languageSpecified; }
+    private void Resetlanguage() { languageSpecified = false; }
+    
+
+    private string _community_key;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"community_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string community_key
+    {
+      get { return _community_key?? ""; }
+      set { _community_key = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool community_keySpecified
+    {
+      get { return _community_key != null; }
+      set { if (value == (_community_key== null)) _community_key = value ? this.community_key : (string)null; }
+    }
+    private bool ShouldSerializecommunity_key() { return community_keySpecified; }
+    private void Resetcommunity_key() { community_keySpecified = false; }
+    
+
+    private uint? _open_tourney_mode;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"open_tourney_mode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint open_tourney_mode
+    {
+      get { return _open_tourney_mode?? default(uint); }
+      set { _open_tourney_mode = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool open_tourney_modeSpecified
+    {
+      get { return _open_tourney_mode != null; }
+      set { if (value == (_open_tourney_mode== null)) _open_tourney_mode = value ? this.open_tourney_mode : (uint?)null; }
+    }
+    private bool ShouldSerializeopen_tourney_mode() { return open_tourney_modeSpecified; }
+    private void Resetopen_tourney_mode() { open_tourney_modeSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCTourneyJoinOpenTourneyResponse")]
+  public partial class CMsgClientToGCTourneyJoinOpenTourneyResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCTourneyJoinOpenTourneyResponse() {}
+    
+
+    private CMsgClientToGCTourneyJoinOpenTourneyResponse.EResponse? _result;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public CMsgClientToGCTourneyJoinOpenTourneyResponse.EResponse result
+    {
+      get { return _result?? CMsgClientToGCTourneyJoinOpenTourneyResponse.EResponse.k_eInternalError; }
+      set { _result = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool resultSpecified
+    {
+      get { return _result != null; }
+      set { if (value == (_result== null)) _result = value ? this.result : (CMsgClientToGCTourneyJoinOpenTourneyResponse.EResponse?)null; }
+    }
+    private bool ShouldSerializeresult() { return resultSpecified; }
+    private void Resetresult() { resultSpecified = false; }
+    
+
+    private ulong? _joined_tourney_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"joined_tourney_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong joined_tourney_id
+    {
+      get { return _joined_tourney_id?? default(ulong); }
+      set { _joined_tourney_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool joined_tourney_idSpecified
+    {
+      get { return _joined_tourney_id != null; }
+      set { if (value == (_joined_tourney_id== null)) _joined_tourney_id = value ? this.joined_tourney_id : (ulong?)null; }
+    }
+    private bool ShouldSerializejoined_tourney_id() { return joined_tourney_idSpecified; }
+    private void Resetjoined_tourney_id() { joined_tourney_idSpecified = false; }
+    
+
+    private uint? _cooldown_time_after;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"cooldown_time_after", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint cooldown_time_after
+    {
+      get { return _cooldown_time_after?? default(uint); }
+      set { _cooldown_time_after = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool cooldown_time_afterSpecified
+    {
+      get { return _cooldown_time_after != null; }
+      set { if (value == (_cooldown_time_after== null)) _cooldown_time_after = value ? this.cooldown_time_after : (uint?)null; }
+    }
+    private bool ShouldSerializecooldown_time_after() { return cooldown_time_afterSpecified; }
+    private void Resetcooldown_time_after() { cooldown_time_afterSpecified = false; }
+    
+    [global::ProtoBuf.ProtoContract(Name=@"EResponse", EnumPassthru=true)]
+    public enum EResponse
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eInternalError", Value=0)]
+      k_eInternalError = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eSuccess", Value=1)]
+      k_eSuccess = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eDisabled", Value=2)]
+      k_eDisabled = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eInvalidMode", Value=3)]
+      k_eInvalidMode = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eInvalidRequest", Value=4)]
+      k_eInvalidRequest = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eTooBusy", Value=5)]
+      k_eTooBusy = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eRateLimited", Value=6)]
+      k_eRateLimited = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eInTooManyOpenAlready", Value=7)]
+      k_eInTooManyOpenAlready = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_eInTooManyTotal", Value=8)]
+      k_eInTooManyTotal = 8
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -8884,6 +9344,12 @@ namespace SteamKit2.GC.Artifact.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRegisterGauntletDeckResponse", Value=9105)]
       k_EMsgClientToGCRegisterGauntletDeckResponse = 9105,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCAIGauntletResult", Value=9106)]
+      k_EMsgClientToGCAIGauntletResult = 9106,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCAIGauntletResultResponse", Value=9107)]
+      k_EMsgClientToGCAIGauntletResultResponse = 9107,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCPrivateLobbyCreate", Value=9110)]
       k_EMsgClientToGCPrivateLobbyCreate = 9110,
             
@@ -8958,6 +9424,9 @@ namespace SteamKit2.GC.Artifact.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRecycleCardsResponse", Value=9136)]
       k_EMsgClientToGCRecycleCardsResponse = 9136,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCSetPlayerBadge", Value=9137)]
+      k_EMsgClientToGCSetPlayerBadge = 9137,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCTourneyGetInfo", Value=9500)]
       k_EMsgClientToGCTourneyGetInfo = 9500,
@@ -9152,7 +9621,13 @@ namespace SteamKit2.GC.Artifact.Internal
       k_EMsgClientToGCTourneyChangeValue = 9569,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCTourneyChangeValueResponse", Value=9570)]
-      k_EMsgClientToGCTourneyChangeValueResponse = 9570
+      k_EMsgClientToGCTourneyChangeValueResponse = 9570,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCTourneyJoinOpenTourney", Value=9571)]
+      k_EMsgClientToGCTourneyJoinOpenTourney = 9571,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCTourneyJoinOpenTourneyResponse", Value=9572)]
+      k_EMsgClientToGCTourneyJoinOpenTourneyResponse = 9572
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EChatRoomType", EnumPassthru=true)]

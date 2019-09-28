@@ -119,6 +119,24 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializewatching_broadcast_accountid() { return watching_broadcast_accountidSpecified; }
     private void Resetwatching_broadcast_accountid() { watching_broadcast_accountidSpecified = false; }
     
+
+    private ulong? _watching_broadcast_channel_id;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"watching_broadcast_channel_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong watching_broadcast_channel_id
+    {
+      get { return _watching_broadcast_channel_id?? default(ulong); }
+      set { _watching_broadcast_channel_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool watching_broadcast_channel_idSpecified
+    {
+      get { return _watching_broadcast_channel_id != null; }
+      set { if (value == (_watching_broadcast_channel_id== null)) _watching_broadcast_channel_id = value ? this.watching_broadcast_channel_id : (ulong?)null; }
+    }
+    private bool ShouldSerializewatching_broadcast_channel_id() { return watching_broadcast_channel_idSpecified; }
+    private void Resetwatching_broadcast_channel_id() { watching_broadcast_channel_idSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -684,6 +702,24 @@ namespace SteamKit2.Unified.Internal
       get { return _party_beacons; }
     }
   
+
+    private ulong? _watching_broadcast_channel_id;
+    [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"watching_broadcast_channel_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong watching_broadcast_channel_id
+    {
+      get { return _watching_broadcast_channel_id?? default(ulong); }
+      set { _watching_broadcast_channel_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool watching_broadcast_channel_idSpecified
+    {
+      get { return _watching_broadcast_channel_id != null; }
+      set { if (value == (_watching_broadcast_channel_id== null)) _watching_broadcast_channel_id = value ? this.watching_broadcast_channel_id : (ulong?)null; }
+    }
+    private bool ShouldSerializewatching_broadcast_channel_id() { return watching_broadcast_channel_idSpecified; }
+    private void Resetwatching_broadcast_channel_id() { watching_broadcast_channel_idSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -880,6 +916,42 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializesort_order() { return sort_orderSpecified; }
     private void Resetsort_order() { sort_orderSpecified = false; }
     
+
+    private string _last_message;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"last_message", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string last_message
+    {
+      get { return _last_message?? ""; }
+      set { _last_message = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool last_messageSpecified
+    {
+      get { return _last_message != null; }
+      set { if (value == (_last_message== null)) _last_message = value ? this.last_message : (string)null; }
+    }
+    private bool ShouldSerializelast_message() { return last_messageSpecified; }
+    private void Resetlast_message() { last_messageSpecified = false; }
+    
+
+    private uint? _accountid_last_message;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"accountid_last_message", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint accountid_last_message
+    {
+      get { return _accountid_last_message?? default(uint); }
+      set { _accountid_last_message = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool accountid_last_messageSpecified
+    {
+      get { return _accountid_last_message != null; }
+      set { if (value == (_accountid_last_message== null)) _accountid_last_message = value ? this.accountid_last_message : (uint?)null; }
+    }
+    private bool ShouldSerializeaccountid_last_message() { return accountid_last_messageSpecified; }
+    private void Resetaccountid_last_message() { accountid_last_messageSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1073,6 +1145,24 @@ namespace SteamKit2.Unified.Internal
     }
     private bool ShouldSerializeunread_indicator_muted() { return unread_indicator_mutedSpecified; }
     private void Resetunread_indicator_muted() { unread_indicator_mutedSpecified = false; }
+    
+
+    private uint? _time_first_unread;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"time_first_unread", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint time_first_unread
+    {
+      get { return _time_first_unread?? default(uint); }
+      set { _time_first_unread = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool time_first_unreadSpecified
+    {
+      get { return _time_first_unread != null; }
+      set { if (value == (_time_first_unread== null)) _time_first_unread = value ? this.time_first_unread : (uint?)null; }
+    }
+    private bool ShouldSerializetime_first_unread() { return time_first_unreadSpecified; }
+    private void Resettime_first_unread() { time_first_unreadSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1532,6 +1622,24 @@ namespace SteamKit2.Unified.Internal
     }
     private bool ShouldSerializewatching_broadcast_accountid() { return watching_broadcast_accountidSpecified; }
     private void Resetwatching_broadcast_accountid() { watching_broadcast_accountidSpecified = false; }
+    
+
+    private ulong? _watching_broadcast_channel_id;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"watching_broadcast_channel_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong watching_broadcast_channel_id
+    {
+      get { return _watching_broadcast_channel_id?? default(ulong); }
+      set { _watching_broadcast_channel_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool watching_broadcast_channel_idSpecified
+    {
+      get { return _watching_broadcast_channel_id != null; }
+      set { if (value == (_watching_broadcast_channel_id== null)) _watching_broadcast_channel_id = value ? this.watching_broadcast_channel_id : (ulong?)null; }
+    }
+    private bool ShouldSerializewatching_broadcast_channel_id() { return watching_broadcast_channel_idSpecified; }
+    private void Resetwatching_broadcast_channel_id() { watching_broadcast_channel_idSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -3910,6 +4018,24 @@ namespace SteamKit2.Unified.Internal
       get { return _party_beacons; }
     }
   
+
+    private ulong? _watching_broadcast_channel_id;
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"watching_broadcast_channel_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong watching_broadcast_channel_id
+    {
+      get { return _watching_broadcast_channel_id?? default(ulong); }
+      set { _watching_broadcast_channel_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool watching_broadcast_channel_idSpecified
+    {
+      get { return _watching_broadcast_channel_id != null; }
+      set { if (value == (_watching_broadcast_channel_id== null)) _watching_broadcast_channel_id = value ? this.watching_broadcast_channel_id : (ulong?)null; }
+    }
+    private bool ShouldSerializewatching_broadcast_channel_id() { return watching_broadcast_channel_idSpecified; }
+    private void Resetwatching_broadcast_channel_id() { watching_broadcast_channel_idSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -5601,6 +5727,24 @@ namespace SteamKit2.Unified.Internal
     }
     private bool ShouldSerializemessage_no_bbcode() { return message_no_bbcodeSpecified; }
     private void Resetmessage_no_bbcode() { message_no_bbcodeSpecified = false; }
+    
+
+    private string _chat_name;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"chat_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string chat_name
+    {
+      get { return _chat_name?? ""; }
+      set { _chat_name = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool chat_nameSpecified
+    {
+      get { return _chat_name != null; }
+      set { if (value == (_chat_name== null)) _chat_name = value ? this.chat_name : (string)null; }
+    }
+    private bool ShouldSerializechat_name() { return chat_nameSpecified; }
+    private void Resetchat_name() { chat_nameSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

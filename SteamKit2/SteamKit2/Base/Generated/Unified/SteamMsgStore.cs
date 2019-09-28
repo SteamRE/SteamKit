@@ -131,9 +131,423 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CStore_GetStorePreferences_Request")]
+  public partial class CStore_GetStorePreferences_Request : global::ProtoBuf.IExtensible
+  {
+    public CStore_GetStorePreferences_Request() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CStore_UserPreferences")]
+  public partial class CStore_UserPreferences : global::ProtoBuf.IExtensible
+  {
+    public CStore_UserPreferences() {}
+    
+
+    private uint? _primary_language;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"primary_language", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint primary_language
+    {
+      get { return _primary_language?? default(uint); }
+      set { _primary_language = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool primary_languageSpecified
+    {
+      get { return _primary_language != null; }
+      set { if (value == (_primary_language== null)) _primary_language = value ? this.primary_language : (uint?)null; }
+    }
+    private bool ShouldSerializeprimary_language() { return primary_languageSpecified; }
+    private void Resetprimary_language() { primary_languageSpecified = false; }
+    
+
+    private uint? _secondary_languages;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"secondary_languages", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint secondary_languages
+    {
+      get { return _secondary_languages?? default(uint); }
+      set { _secondary_languages = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool secondary_languagesSpecified
+    {
+      get { return _secondary_languages != null; }
+      set { if (value == (_secondary_languages== null)) _secondary_languages = value ? this.secondary_languages : (uint?)null; }
+    }
+    private bool ShouldSerializesecondary_languages() { return secondary_languagesSpecified; }
+    private void Resetsecondary_languages() { secondary_languagesSpecified = false; }
+    
+
+    private bool? _platform_windows;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"platform_windows", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool platform_windows
+    {
+      get { return _platform_windows?? default(bool); }
+      set { _platform_windows = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool platform_windowsSpecified
+    {
+      get { return _platform_windows != null; }
+      set { if (value == (_platform_windows== null)) _platform_windows = value ? this.platform_windows : (bool?)null; }
+    }
+    private bool ShouldSerializeplatform_windows() { return platform_windowsSpecified; }
+    private void Resetplatform_windows() { platform_windowsSpecified = false; }
+    
+
+    private bool? _platform_mac;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"platform_mac", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool platform_mac
+    {
+      get { return _platform_mac?? default(bool); }
+      set { _platform_mac = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool platform_macSpecified
+    {
+      get { return _platform_mac != null; }
+      set { if (value == (_platform_mac== null)) _platform_mac = value ? this.platform_mac : (bool?)null; }
+    }
+    private bool ShouldSerializeplatform_mac() { return platform_macSpecified; }
+    private void Resetplatform_mac() { platform_macSpecified = false; }
+    
+
+    private bool? _platform_linux;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"platform_linux", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool platform_linux
+    {
+      get { return _platform_linux?? default(bool); }
+      set { _platform_linux = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool platform_linuxSpecified
+    {
+      get { return _platform_linux != null; }
+      set { if (value == (_platform_linux== null)) _platform_linux = value ? this.platform_linux : (bool?)null; }
+    }
+    private bool ShouldSerializeplatform_linux() { return platform_linuxSpecified; }
+    private void Resetplatform_linux() { platform_linuxSpecified = false; }
+    
+
+    private bool? _hide_adult_content_violence;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"hide_adult_content_violence", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool hide_adult_content_violence
+    {
+      get { return _hide_adult_content_violence?? default(bool); }
+      set { _hide_adult_content_violence = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool hide_adult_content_violenceSpecified
+    {
+      get { return _hide_adult_content_violence != null; }
+      set { if (value == (_hide_adult_content_violence== null)) _hide_adult_content_violence = value ? this.hide_adult_content_violence : (bool?)null; }
+    }
+    private bool ShouldSerializehide_adult_content_violence() { return hide_adult_content_violenceSpecified; }
+    private void Resethide_adult_content_violence() { hide_adult_content_violenceSpecified = false; }
+    
+
+    private bool? _hide_adult_content_sex;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"hide_adult_content_sex", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool hide_adult_content_sex
+    {
+      get { return _hide_adult_content_sex?? default(bool); }
+      set { _hide_adult_content_sex = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool hide_adult_content_sexSpecified
+    {
+      get { return _hide_adult_content_sex != null; }
+      set { if (value == (_hide_adult_content_sex== null)) _hide_adult_content_sex = value ? this.hide_adult_content_sex : (bool?)null; }
+    }
+    private bool ShouldSerializehide_adult_content_sex() { return hide_adult_content_sexSpecified; }
+    private void Resethide_adult_content_sex() { hide_adult_content_sexSpecified = false; }
+    
+
+    private uint? _timestamp_updated;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"timestamp_updated", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint timestamp_updated
+    {
+      get { return _timestamp_updated?? default(uint); }
+      set { _timestamp_updated = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool timestamp_updatedSpecified
+    {
+      get { return _timestamp_updated != null; }
+      set { if (value == (_timestamp_updated== null)) _timestamp_updated = value ? this.timestamp_updated : (uint?)null; }
+    }
+    private bool ShouldSerializetimestamp_updated() { return timestamp_updatedSpecified; }
+    private void Resettimestamp_updated() { timestamp_updatedSpecified = false; }
+    
+
+    private bool? _hide_store_broadcast;
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"hide_store_broadcast", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool hide_store_broadcast
+    {
+      get { return _hide_store_broadcast?? default(bool); }
+      set { _hide_store_broadcast = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool hide_store_broadcastSpecified
+    {
+      get { return _hide_store_broadcast != null; }
+      set { if (value == (_hide_store_broadcast== null)) _hide_store_broadcast = value ? this.hide_store_broadcast : (bool?)null; }
+    }
+    private bool ShouldSerializehide_store_broadcast() { return hide_store_broadcastSpecified; }
+    private void Resethide_store_broadcast() { hide_store_broadcastSpecified = false; }
+    
+
+    private EUserReviewScorePreference? _review_score_preference;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"review_score_preference", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public EUserReviewScorePreference review_score_preference
+    {
+      get { return _review_score_preference?? EUserReviewScorePreference.k_EUserReviewScorePreference_Unset; }
+      set { _review_score_preference = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool review_score_preferenceSpecified
+    {
+      get { return _review_score_preference != null; }
+      set { if (value == (_review_score_preference== null)) _review_score_preference = value ? this.review_score_preference : (EUserReviewScorePreference?)null; }
+    }
+    private bool ShouldSerializereview_score_preference() { return review_score_preferenceSpecified; }
+    private void Resetreview_score_preference() { review_score_preferenceSpecified = false; }
+    
+
+    private int? _timestamp_content_descriptor_preferences_updated;
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"timestamp_content_descriptor_preferences_updated", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int timestamp_content_descriptor_preferences_updated
+    {
+      get { return _timestamp_content_descriptor_preferences_updated?? default(int); }
+      set { _timestamp_content_descriptor_preferences_updated = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool timestamp_content_descriptor_preferences_updatedSpecified
+    {
+      get { return _timestamp_content_descriptor_preferences_updated != null; }
+      set { if (value == (_timestamp_content_descriptor_preferences_updated== null)) _timestamp_content_descriptor_preferences_updated = value ? this.timestamp_content_descriptor_preferences_updated : (int?)null; }
+    }
+    private bool ShouldSerializetimestamp_content_descriptor_preferences_updated() { return timestamp_content_descriptor_preferences_updatedSpecified; }
+    private void Resettimestamp_content_descriptor_preferences_updated() { timestamp_content_descriptor_preferences_updatedSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CStore_UserTagPreferences")]
+  public partial class CStore_UserTagPreferences : global::ProtoBuf.IExtensible
+  {
+    public CStore_UserTagPreferences() {}
+    
+    private readonly global::System.Collections.Generic.List<CStore_UserTagPreferences.Tag> _tags_to_exclude = new global::System.Collections.Generic.List<CStore_UserTagPreferences.Tag>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"tags_to_exclude", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CStore_UserTagPreferences.Tag> tags_to_exclude
+    {
+      get { return _tags_to_exclude; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Tag")]
+  public partial class Tag : global::ProtoBuf.IExtensible
+  {
+    public Tag() {}
+    
+
+    private uint? _tagid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"tagid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint tagid
+    {
+      get { return _tagid?? default(uint); }
+      set { _tagid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool tagidSpecified
+    {
+      get { return _tagid != null; }
+      set { if (value == (_tagid== null)) _tagid = value ? this.tagid : (uint?)null; }
+    }
+    private bool ShouldSerializetagid() { return tagidSpecified; }
+    private void Resettagid() { tagidSpecified = false; }
+    
+
+    private string _name;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string name
+    {
+      get { return _name?? ""; }
+      set { _name = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool nameSpecified
+    {
+      get { return _name != null; }
+      set { if (value == (_name== null)) _name = value ? this.name : (string)null; }
+    }
+    private bool ShouldSerializename() { return nameSpecified; }
+    private void Resetname() { nameSpecified = false; }
+    
+
+    private uint? _timestamp_added;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"timestamp_added", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint timestamp_added
+    {
+      get { return _timestamp_added?? default(uint); }
+      set { _timestamp_added = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool timestamp_addedSpecified
+    {
+      get { return _timestamp_added != null; }
+      set { if (value == (_timestamp_added== null)) _timestamp_added = value ? this.timestamp_added : (uint?)null; }
+    }
+    private bool ShouldSerializetimestamp_added() { return timestamp_addedSpecified; }
+    private void Resettimestamp_added() { timestamp_addedSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CStore_UserContentDescriptorPreferences")]
+  public partial class CStore_UserContentDescriptorPreferences : global::ProtoBuf.IExtensible
+  {
+    public CStore_UserContentDescriptorPreferences() {}
+    
+    private readonly global::System.Collections.Generic.List<CStore_UserContentDescriptorPreferences.ContentDescriptor> _content_descriptors_to_exclude = new global::System.Collections.Generic.List<CStore_UserContentDescriptorPreferences.ContentDescriptor>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"content_descriptors_to_exclude", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CStore_UserContentDescriptorPreferences.ContentDescriptor> content_descriptors_to_exclude
+    {
+      get { return _content_descriptors_to_exclude; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ContentDescriptor")]
+  public partial class ContentDescriptor : global::ProtoBuf.IExtensible
+  {
+    public ContentDescriptor() {}
+    
+
+    private uint? _content_descriptorid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"content_descriptorid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint content_descriptorid
+    {
+      get { return _content_descriptorid?? default(uint); }
+      set { _content_descriptorid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool content_descriptoridSpecified
+    {
+      get { return _content_descriptorid != null; }
+      set { if (value == (_content_descriptorid== null)) _content_descriptorid = value ? this.content_descriptorid : (uint?)null; }
+    }
+    private bool ShouldSerializecontent_descriptorid() { return content_descriptoridSpecified; }
+    private void Resetcontent_descriptorid() { content_descriptoridSpecified = false; }
+    
+
+    private uint? _timestamp_added;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"timestamp_added", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint timestamp_added
+    {
+      get { return _timestamp_added?? default(uint); }
+      set { _timestamp_added = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool timestamp_addedSpecified
+    {
+      get { return _timestamp_added != null; }
+      set { if (value == (_timestamp_added== null)) _timestamp_added = value ? this.timestamp_added : (uint?)null; }
+    }
+    private bool ShouldSerializetimestamp_added() { return timestamp_addedSpecified; }
+    private void Resettimestamp_added() { timestamp_addedSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CStore_GetStorePreferences_Response")]
+  public partial class CStore_GetStorePreferences_Response : global::ProtoBuf.IExtensible
+  {
+    public CStore_GetStorePreferences_Response() {}
+    
+
+    private CStore_UserPreferences _preferences = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"preferences", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CStore_UserPreferences preferences
+    {
+      get { return _preferences; }
+      set { _preferences = value; }
+    }
+
+    private CStore_UserTagPreferences _tag_preferences = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"tag_preferences", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CStore_UserTagPreferences tag_preferences
+    {
+      get { return _tag_preferences; }
+      set { _tag_preferences = value; }
+    }
+
+    private CStore_UserContentDescriptorPreferences _content_descriptor_preferences = null;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"content_descriptor_preferences", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CStore_UserContentDescriptorPreferences content_descriptor_preferences
+    {
+      get { return _content_descriptor_preferences; }
+      set { _content_descriptor_preferences = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EUserReviewScorePreference", EnumPassthru=true)]
+    public enum EUserReviewScorePreference
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EUserReviewScorePreference_Unset", Value=0)]
+      k_EUserReviewScorePreference_Unset = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EUserReviewScorePreference_IncludeAll", Value=1)]
+      k_EUserReviewScorePreference_IncludeAll = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EUserReviewScorePreference_ExcludeBombs", Value=2)]
+      k_EUserReviewScorePreference_ExcludeBombs = 2
+    }
+  
     public interface IStore
     {
       CStore_GetLocalizedNameForTags_Response GetLocalizedNameForTags(CStore_GetLocalizedNameForTags_Request request);
+    CStore_GetStorePreferences_Response GetStorePreferences(CStore_GetStorePreferences_Request request);
     
     }
     

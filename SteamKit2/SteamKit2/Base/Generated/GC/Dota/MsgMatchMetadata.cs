@@ -830,6 +830,116 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CavernChallengeResult")]
+  public partial class CavernChallengeResult : global::ProtoBuf.IExtensible
+  {
+    public CavernChallengeResult() {}
+    
+
+    private uint? _completed_path_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"completed_path_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint completed_path_id
+    {
+      get { return _completed_path_id?? default(uint); }
+      set { _completed_path_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool completed_path_idSpecified
+    {
+      get { return _completed_path_id != null; }
+      set { if (value == (_completed_path_id== null)) _completed_path_id = value ? this.completed_path_id : (uint?)null; }
+    }
+    private bool ShouldSerializecompleted_path_id() { return completed_path_idSpecified; }
+    private void Resetcompleted_path_id() { completed_path_idSpecified = false; }
+    
+
+    private uint? _claimed_room_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"claimed_room_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint claimed_room_id
+    {
+      get { return _claimed_room_id?? default(uint); }
+      set { _claimed_room_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool claimed_room_idSpecified
+    {
+      get { return _claimed_room_id != null; }
+      set { if (value == (_claimed_room_id== null)) _claimed_room_id = value ? this.claimed_room_id : (uint?)null; }
+    }
+    private bool ShouldSerializeclaimed_room_id() { return claimed_room_idSpecified; }
+    private void Resetclaimed_room_id() { claimed_room_idSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ActionGrant")]
+  public partial class ActionGrant : global::ProtoBuf.IExtensible
+  {
+    public ActionGrant() {}
+    
+
+    private uint? _action_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"action_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint action_id
+    {
+      get { return _action_id?? default(uint); }
+      set { _action_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool action_idSpecified
+    {
+      get { return _action_id != null; }
+      set { if (value == (_action_id== null)) _action_id = value ? this.action_id : (uint?)null; }
+    }
+    private bool ShouldSerializeaction_id() { return action_idSpecified; }
+    private void Resetaction_id() { action_idSpecified = false; }
+    
+
+    private uint? _quantity;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"quantity", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint quantity
+    {
+      get { return _quantity?? default(uint); }
+      set { _quantity = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool quantitySpecified
+    {
+      get { return _quantity != null; }
+      set { if (value == (_quantity== null)) _quantity = value ? this.quantity : (uint?)null; }
+    }
+    private bool ShouldSerializequantity() { return quantitySpecified; }
+    private void Resetquantity() { quantitySpecified = false; }
+    
+
+    private uint? _audit;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"audit", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint audit
+    {
+      get { return _audit?? default(uint); }
+      set { _audit = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool auditSpecified
+    {
+      get { return _audit != null; }
+      set { if (value == (_audit== null)) _audit = value ? this.audit : (uint?)null; }
+    }
+    private bool ShouldSerializeaudit() { return auditSpecified; }
+    private void Resetaudit() { auditSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"EventData")]
   public partial class EventData : global::ProtoBuf.IExtensible
   {
@@ -1094,6 +1204,56 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializeteam_wager_amount() { return team_wager_amountSpecified; }
     private void Resetteam_wager_amount() { team_wager_amountSpecified = false; }
     
+
+    private uint? _periodic_point_adjustments;
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"periodic_point_adjustments", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint periodic_point_adjustments
+    {
+      get { return _periodic_point_adjustments?? default(uint); }
+      set { _periodic_point_adjustments = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool periodic_point_adjustmentsSpecified
+    {
+      get { return _periodic_point_adjustments != null; }
+      set { if (value == (_periodic_point_adjustments== null)) _periodic_point_adjustments = value ? this.periodic_point_adjustments : (uint?)null; }
+    }
+    private bool ShouldSerializeperiodic_point_adjustments() { return periodic_point_adjustmentsSpecified; }
+    private void Resetperiodic_point_adjustments() { periodic_point_adjustmentsSpecified = false; }
+    
+    private readonly global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.CavernChallengeResult> _cavern_challenge_map_results = new global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.CavernChallengeResult>();
+    [global::ProtoBuf.ProtoMember(17, Name=@"cavern_challenge_map_results", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.CavernChallengeResult> cavern_challenge_map_results
+    {
+      get { return _cavern_challenge_map_results; }
+    }
+  
+
+    private uint? _cavern_challenge_plus_shard_winnings;
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"cavern_challenge_plus_shard_winnings", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint cavern_challenge_plus_shard_winnings
+    {
+      get { return _cavern_challenge_plus_shard_winnings?? default(uint); }
+      set { _cavern_challenge_plus_shard_winnings = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool cavern_challenge_plus_shard_winningsSpecified
+    {
+      get { return _cavern_challenge_plus_shard_winnings != null; }
+      set { if (value == (_cavern_challenge_plus_shard_winnings== null)) _cavern_challenge_plus_shard_winnings = value ? this.cavern_challenge_plus_shard_winnings : (uint?)null; }
+    }
+    private bool ShouldSerializecavern_challenge_plus_shard_winnings() { return cavern_challenge_plus_shard_winningsSpecified; }
+    private void Resetcavern_challenge_plus_shard_winnings() { cavern_challenge_plus_shard_winningsSpecified = false; }
+    
+    private readonly global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.ActionGrant> _actions_granted = new global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.ActionGrant>();
+    [global::ProtoBuf.ProtoMember(19, Name=@"actions_granted", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.ActionGrant> actions_granted
+    {
+      get { return _actions_granted; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1558,6 +1718,204 @@ namespace SteamKit2.GC.Dota.Internal
     }
     private bool ShouldSerializelane_selection_flags() { return lane_selection_flagsSpecified; }
     private void Resetlane_selection_flags() { lane_selection_flagsSpecified = false; }
+    
+
+    private uint? _rampages;
+    [global::ProtoBuf.ProtoMember(35, IsRequired = false, Name=@"rampages", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint rampages
+    {
+      get { return _rampages?? default(uint); }
+      set { _rampages = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool rampagesSpecified
+    {
+      get { return _rampages != null; }
+      set { if (value == (_rampages== null)) _rampages = value ? this.rampages : (uint?)null; }
+    }
+    private bool ShouldSerializerampages() { return rampagesSpecified; }
+    private void Resetrampages() { rampagesSpecified = false; }
+    
+
+    private uint? _triple_kills;
+    [global::ProtoBuf.ProtoMember(36, IsRequired = false, Name=@"triple_kills", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint triple_kills
+    {
+      get { return _triple_kills?? default(uint); }
+      set { _triple_kills = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool triple_killsSpecified
+    {
+      get { return _triple_kills != null; }
+      set { if (value == (_triple_kills== null)) _triple_kills = value ? this.triple_kills : (uint?)null; }
+    }
+    private bool ShouldSerializetriple_kills() { return triple_killsSpecified; }
+    private void Resettriple_kills() { triple_killsSpecified = false; }
+    
+
+    private uint? _aegis_snatched;
+    [global::ProtoBuf.ProtoMember(37, IsRequired = false, Name=@"aegis_snatched", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint aegis_snatched
+    {
+      get { return _aegis_snatched?? default(uint); }
+      set { _aegis_snatched = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool aegis_snatchedSpecified
+    {
+      get { return _aegis_snatched != null; }
+      set { if (value == (_aegis_snatched== null)) _aegis_snatched = value ? this.aegis_snatched : (uint?)null; }
+    }
+    private bool ShouldSerializeaegis_snatched() { return aegis_snatchedSpecified; }
+    private void Resetaegis_snatched() { aegis_snatchedSpecified = false; }
+    
+
+    private uint? _rapiers_purchased;
+    [global::ProtoBuf.ProtoMember(38, IsRequired = false, Name=@"rapiers_purchased", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint rapiers_purchased
+    {
+      get { return _rapiers_purchased?? default(uint); }
+      set { _rapiers_purchased = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool rapiers_purchasedSpecified
+    {
+      get { return _rapiers_purchased != null; }
+      set { if (value == (_rapiers_purchased== null)) _rapiers_purchased = value ? this.rapiers_purchased : (uint?)null; }
+    }
+    private bool ShouldSerializerapiers_purchased() { return rapiers_purchasedSpecified; }
+    private void Resetrapiers_purchased() { rapiers_purchasedSpecified = false; }
+    
+
+    private uint? _couriers_killed;
+    [global::ProtoBuf.ProtoMember(39, IsRequired = false, Name=@"couriers_killed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint couriers_killed
+    {
+      get { return _couriers_killed?? default(uint); }
+      set { _couriers_killed = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool couriers_killedSpecified
+    {
+      get { return _couriers_killed != null; }
+      set { if (value == (_couriers_killed== null)) _couriers_killed = value ? this.couriers_killed : (uint?)null; }
+    }
+    private bool ShouldSerializecouriers_killed() { return couriers_killedSpecified; }
+    private void Resetcouriers_killed() { couriers_killedSpecified = false; }
+    
+
+    private uint? _net_worth_rank;
+    [global::ProtoBuf.ProtoMember(40, IsRequired = false, Name=@"net_worth_rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint net_worth_rank
+    {
+      get { return _net_worth_rank?? default(uint); }
+      set { _net_worth_rank = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool net_worth_rankSpecified
+    {
+      get { return _net_worth_rank != null; }
+      set { if (value == (_net_worth_rank== null)) _net_worth_rank = value ? this.net_worth_rank : (uint?)null; }
+    }
+    private bool ShouldSerializenet_worth_rank() { return net_worth_rankSpecified; }
+    private void Resetnet_worth_rank() { net_worth_rankSpecified = false; }
+    
+
+    private uint? _support_gold_spent;
+    [global::ProtoBuf.ProtoMember(41, IsRequired = false, Name=@"support_gold_spent", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint support_gold_spent
+    {
+      get { return _support_gold_spent?? default(uint); }
+      set { _support_gold_spent = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool support_gold_spentSpecified
+    {
+      get { return _support_gold_spent != null; }
+      set { if (value == (_support_gold_spent== null)) _support_gold_spent = value ? this.support_gold_spent : (uint?)null; }
+    }
+    private bool ShouldSerializesupport_gold_spent() { return support_gold_spentSpecified; }
+    private void Resetsupport_gold_spent() { support_gold_spentSpecified = false; }
+    
+
+    private uint? _observer_wards_placed;
+    [global::ProtoBuf.ProtoMember(42, IsRequired = false, Name=@"observer_wards_placed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint observer_wards_placed
+    {
+      get { return _observer_wards_placed?? default(uint); }
+      set { _observer_wards_placed = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool observer_wards_placedSpecified
+    {
+      get { return _observer_wards_placed != null; }
+      set { if (value == (_observer_wards_placed== null)) _observer_wards_placed = value ? this.observer_wards_placed : (uint?)null; }
+    }
+    private bool ShouldSerializeobserver_wards_placed() { return observer_wards_placedSpecified; }
+    private void Resetobserver_wards_placed() { observer_wards_placedSpecified = false; }
+    
+
+    private uint? _sentry_wards_placed;
+    [global::ProtoBuf.ProtoMember(43, IsRequired = false, Name=@"sentry_wards_placed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint sentry_wards_placed
+    {
+      get { return _sentry_wards_placed?? default(uint); }
+      set { _sentry_wards_placed = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool sentry_wards_placedSpecified
+    {
+      get { return _sentry_wards_placed != null; }
+      set { if (value == (_sentry_wards_placed== null)) _sentry_wards_placed = value ? this.sentry_wards_placed : (uint?)null; }
+    }
+    private bool ShouldSerializesentry_wards_placed() { return sentry_wards_placedSpecified; }
+    private void Resetsentry_wards_placed() { sentry_wards_placedSpecified = false; }
+    
+
+    private uint? _wards_dewarded;
+    [global::ProtoBuf.ProtoMember(44, IsRequired = false, Name=@"wards_dewarded", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint wards_dewarded
+    {
+      get { return _wards_dewarded?? default(uint); }
+      set { _wards_dewarded = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool wards_dewardedSpecified
+    {
+      get { return _wards_dewarded != null; }
+      set { if (value == (_wards_dewarded== null)) _wards_dewarded = value ? this.wards_dewarded : (uint?)null; }
+    }
+    private bool ShouldSerializewards_dewarded() { return wards_dewardedSpecified; }
+    private void Resetwards_dewarded() { wards_dewardedSpecified = false; }
+    
+
+    private uint? _stun_duration;
+    [global::ProtoBuf.ProtoMember(45, IsRequired = false, Name=@"stun_duration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint stun_duration
+    {
+      get { return _stun_duration?? default(uint); }
+      set { _stun_duration = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool stun_durationSpecified
+    {
+      get { return _stun_duration != null; }
+      set { if (value == (_stun_duration== null)) _stun_duration = value ? this.stun_duration : (uint?)null; }
+    }
+    private bool ShouldSerializestun_duration() { return stun_durationSpecified; }
+    private void Resetstun_duration() { stun_durationSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -2088,6 +2446,34 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTADPCMatch")]
+  public partial class CMsgDOTADPCMatch : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTADPCMatch() {}
+    
+
+    private CMsgDOTAMatch _match = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgDOTAMatch match
+    {
+      get { return _match; }
+      set { _match = value; }
+    }
+
+    private CDOTAMatchMetadata _metadata = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"metadata", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CDOTAMatchMetadata metadata
+    {
+      get { return _metadata; }
+      set { _metadata = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

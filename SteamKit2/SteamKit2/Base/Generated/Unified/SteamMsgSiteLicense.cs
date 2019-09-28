@@ -153,6 +153,231 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteManagerClient_TrackedPayments_Notification")]
+  public partial class CSiteManagerClient_TrackedPayments_Notification : global::ProtoBuf.IExtensible
+  {
+    public CSiteManagerClient_TrackedPayments_Notification() {}
+    
+
+    private ulong? _site_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"site_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong site_id
+    {
+      get { return _site_id?? default(ulong); }
+      set { _site_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool site_idSpecified
+    {
+      get { return _site_id != null; }
+      set { if (value == (_site_id== null)) _site_id = value ? this.site_id : (ulong?)null; }
+    }
+    private bool ShouldSerializesite_id() { return site_idSpecified; }
+    private void Resetsite_id() { site_idSpecified = false; }
+    
+    private readonly global::System.Collections.Generic.List<CSiteManagerClient_TrackedPayments_Notification.Payment> _payments = new global::System.Collections.Generic.List<CSiteManagerClient_TrackedPayments_Notification.Payment>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"payments", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CSiteManagerClient_TrackedPayments_Notification.Payment> payments
+    {
+      get { return _payments; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Payment")]
+  public partial class Payment : global::ProtoBuf.IExtensible
+  {
+    public Payment() {}
+    
+
+    private ulong? _transid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"transid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong transid
+    {
+      get { return _transid?? default(ulong); }
+      set { _transid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool transidSpecified
+    {
+      get { return _transid != null; }
+      set { if (value == (_transid== null)) _transid = value ? this.transid : (ulong?)null; }
+    }
+    private bool ShouldSerializetransid() { return transidSpecified; }
+    private void Resettransid() { transidSpecified = false; }
+    
+
+    private ulong? _steamid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong steamid
+    {
+      get { return _steamid?? default(ulong); }
+      set { _steamid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
+
+    private long? _amount;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"amount", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long amount
+    {
+      get { return _amount?? default(long); }
+      set { _amount = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool amountSpecified
+    {
+      get { return _amount != null; }
+      set { if (value == (_amount== null)) _amount = value ? this.amount : (long?)null; }
+    }
+    private bool ShouldSerializeamount() { return amountSpecified; }
+    private void Resetamount() { amountSpecified = false; }
+    
+
+    private uint? _ecurrency;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"ecurrency", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint ecurrency
+    {
+      get { return _ecurrency?? default(uint); }
+      set { _ecurrency = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool ecurrencySpecified
+    {
+      get { return _ecurrency != null; }
+      set { if (value == (_ecurrency== null)) _ecurrency = value ? this.ecurrency : (uint?)null; }
+    }
+    private bool ShouldSerializeecurrency() { return ecurrencySpecified; }
+    private void Resetecurrency() { ecurrencySpecified = false; }
+    
+
+    private int? _time_created;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"time_created", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int time_created
+    {
+      get { return _time_created?? default(int); }
+      set { _time_created = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool time_createdSpecified
+    {
+      get { return _time_created != null; }
+      set { if (value == (_time_created== null)) _time_created = value ? this.time_created : (int?)null; }
+    }
+    private bool ShouldSerializetime_created() { return time_createdSpecified; }
+    private void Resettime_created() { time_createdSpecified = false; }
+    
+
+    private int? _purchase_status;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"purchase_status", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int purchase_status
+    {
+      get { return _purchase_status?? default(int); }
+      set { _purchase_status = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool purchase_statusSpecified
+    {
+      get { return _purchase_status != null; }
+      set { if (value == (_purchase_status== null)) _purchase_status = value ? this.purchase_status : (int?)null; }
+    }
+    private bool ShouldSerializepurchase_status() { return purchase_statusSpecified; }
+    private void Resetpurchase_status() { purchase_statusSpecified = false; }
+    
+
+    private string _machine_name;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"machine_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string machine_name
+    {
+      get { return _machine_name?? ""; }
+      set { _machine_name = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool machine_nameSpecified
+    {
+      get { return _machine_name != null; }
+      set { if (value == (_machine_name== null)) _machine_name = value ? this.machine_name : (string)null; }
+    }
+    private bool ShouldSerializemachine_name() { return machine_nameSpecified; }
+    private void Resetmachine_name() { machine_nameSpecified = false; }
+    
+
+    private string _persona_name;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string persona_name
+    {
+      get { return _persona_name?? ""; }
+      set { _persona_name = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool persona_nameSpecified
+    {
+      get { return _persona_name != null; }
+      set { if (value == (_persona_name== null)) _persona_name = value ? this.persona_name : (string)null; }
+    }
+    private bool ShouldSerializepersona_name() { return persona_nameSpecified; }
+    private void Resetpersona_name() { persona_nameSpecified = false; }
+    
+
+    private string _profile_url;
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"profile_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string profile_url
+    {
+      get { return _profile_url?? ""; }
+      set { _profile_url = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool profile_urlSpecified
+    {
+      get { return _profile_url != null; }
+      set { if (value == (_profile_url== null)) _profile_url = value ? this.profile_url : (string)null; }
+    }
+    private bool ShouldSerializeprofile_url() { return profile_urlSpecified; }
+    private void Resetprofile_url() { profile_urlSpecified = false; }
+    
+
+    private string _avatar_url;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"avatar_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string avatar_url
+    {
+      get { return _avatar_url?? ""; }
+      set { _avatar_url = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool avatar_urlSpecified
+    {
+      get { return _avatar_url != null; }
+      set { if (value == (_avatar_url== null)) _avatar_url = value ? this.avatar_url : (string)null; }
+    }
+    private bool ShouldSerializeavatar_url() { return avatar_urlSpecified; }
+    private void Resetavatar_url() { avatar_urlSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_InitiateAssociation_Request")]
   public partial class CSiteLicense_InitiateAssociation_Request : global::ProtoBuf.IExtensible
   {
@@ -617,6 +842,7 @@ namespace SteamKit2.Unified.Internal
     {
       CSiteManagerClient_IncomingClient_Response IncomingClient(CSiteManagerClient_IncomingClient_Request request);
     NoResponse ClientSeatCheckoutNotification(CSiteLicense_ClientSeatCheckout_Notification request);
+    NoResponse TrackedPaymentsNotification(CSiteManagerClient_TrackedPayments_Notification request);
     
     }
     

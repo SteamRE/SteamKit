@@ -345,6 +345,24 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializedepotsize() { return depotsizeSpecified; }
     private void Resetdepotsize() { depotsizeSpecified = false; }
     
+
+    private ulong? _bucketid;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"bucketid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong bucketid
+    {
+      get { return _bucketid?? default(ulong); }
+      set { _bucketid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool bucketidSpecified
+    {
+      get { return _bucketid != null; }
+      set { if (value == (_bucketid== null)) _bucketid = value ? this.bucketid : (ulong?)null; }
+    }
+    private bool ShouldSerializebucketid() { return bucketidSpecified; }
+    private void Resetbucketid() { bucketidSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
