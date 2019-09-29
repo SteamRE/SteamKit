@@ -7,10 +7,6 @@ dotnet: 3.0
 git:
     depth: false
 
-addons:
-    sonarcloud:
-        organization: "steamre"
-
 solution: SteamKit2/SteamKit2.sln
 
 before_install:
@@ -18,7 +14,6 @@ before_install:
     - sudo apt-get install -y dotnet-runtime-2.1
 
 install:
-    - dotnet tool install --global dotnet-sonarscanner
     - dotnet restore SteamKit2/SteamKit2.sln
     - dotnet restore Samples/Samples.sln
 
@@ -26,13 +21,11 @@ before_script:
     - export PATH="$PATH:/home/travis/.dotnet/tools"
 
 script:
-    - dotnet sonarscanner begin /k:"SteamKit" /d:sonar.host.url="https://sonarcloud.io"
     - dotnet build SteamKit2/SteamKit2/SteamKit2.csproj
     - dotnet build SteamKit2/Tests/Tests.csproj
     - dotnet build Resources/SteamLanguageParser/SteamLanguageParser.csproj
     - dotnet build Samples/Samples.sln
     - dotnet test SteamKit2/Tests/Tests.csproj
-    - dotnet sonarscanner end || true
 
 notifications:
     irc:
