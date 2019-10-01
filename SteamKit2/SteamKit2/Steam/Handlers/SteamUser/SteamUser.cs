@@ -119,9 +119,6 @@ namespace SteamKit2
                 AccountInstance = SteamID.DesktopInstance; // use the default pc steam instance
                 AccountID = 0;
 
-                var configuration = SteamConfiguration.Create(b => b.WithProtocolTypes(ProtocolTypes.All));
-                CellID = configuration.CellID;
-
                 ClientOSType = Utils.GetOSType();
                 ClientLanguage = "english";
             }
@@ -156,9 +153,6 @@ namespace SteamKit2
             {
                 ClientOSType = Utils.GetOSType();
                 ClientLanguage = "english";
-
-                var configuration = SteamConfiguration.Create( b => b.WithProtocolTypes( ProtocolTypes.All ) );
-                CellID = configuration.CellID;
             }
         }
 
