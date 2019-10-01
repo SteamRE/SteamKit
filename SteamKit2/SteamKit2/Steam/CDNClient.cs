@@ -462,10 +462,7 @@ namespace SteamKit2
                 throw new InvalidOperationException( "Cannot perform CDN operations before connecting to CDN server." );
             }
 
-            if (sessionKey is null)
-            {
-                throw new InvalidOperationException( "Inconsistent state - connected to CDN without a session key." );
-            }
+            DebugLog.Assert( sessionKey != null, nameof( CDNClient ), "Inconsistent state - connected to CDN without a session key." );
 
             string data;
 
