@@ -252,7 +252,7 @@ namespace SteamKit2
 
                 try
                 {
-                    NetMsgReceived?.Invoke( this, new NetMsgEventArgs( packData, CurrentEndPoint!) );
+                    NetMsgReceived?.Invoke( this, new NetMsgEventArgs( packData, CurrentEndPoint! ) );
                 }
                 catch (Exception ex)
                 {
