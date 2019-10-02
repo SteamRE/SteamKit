@@ -6,6 +6,13 @@ namespace SteamKit2
 {
     partial class WebSocketConnection : IConnection
     {
+        public WebSocketConnection(LoggerToken loggerToken)
+        {
+            this.loggerToken = loggerToken;
+        }
+
+        readonly LoggerToken loggerToken;
+
         WebSocketContext? currentContext;
 
         public event EventHandler<NetMsgEventArgs>? NetMsgReceived;
@@ -19,11 +26,11 @@ namespace SteamKit2
 
         public void Connect(EndPoint endPoint, int timeout = 5000)
         {
-            var newContext = new WebSocketContext(this, endPoint);
+            var newContext = new WebSocketContext(this, endPoint, loggerToken);
             var oldContext = Interlocked.Exchange(ref currentContext, newContext);
             if (oldContext != null)
             {
-                DebugLog.WriteLine(nameof(WebSocketConnection), "Attempted to connect while already connected. Closing old connection...");
+                DebugLog.WriteLine(loggerToken, nameof(WebSocketConnection), "Attempted to connect while already connected. Closing old connection...");
                 oldContext.Dispose();
                 Disconnected?.Invoke(this, new DisconnectedEventArgs(false));
             }
@@ -45,7 +52,7 @@ namespace SteamKit2
             }
             catch (Exception ex)
             {
-                DebugLog.WriteLine(nameof(WebSocketConnection), "Exception while sending data: {0} - {1}", ex.GetType().FullName, ex.Message);
+                DebugLog.WriteLine( loggerToken, nameof( WebSocketConnection), "Exception while sending data: {0} - {1}", ex.GetType().FullName, ex.Message);
                 DisconnectCore(userInitiated: false, specificContext: null);
             }
         }

@@ -588,7 +588,7 @@ namespace SteamKit2
             var body = lobbyListResponse.Body;
 
             var cachedLobby = lobbyCache.GetLobby( body.app_id, body.steam_id_lobby );
-            DebugLog.Assert( cachedLobby != null, nameof( SteamMatchmaking ), "Got LobbyData without corresponding object in cache." );
+            DebugLog.Assert( cachedLobby != null, Client.LoggerToken, nameof( SteamMatchmaking ), "Got LobbyData without corresponding object in cache." );
 
             var members = body.members.Count == 0
                 ? cachedLobby.Members

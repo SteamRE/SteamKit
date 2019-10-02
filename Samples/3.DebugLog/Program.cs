@@ -29,12 +29,19 @@ namespace Sample3_DebugLog
     // define our debuglog listener
     class MyListener : IDebugListener
     {
-        public void WriteLine( string category, string msg )
+        public void WriteLine( LoggerToken token, string category, string msg )
         {
             // this function will be called when internal steamkit components write to the debuglog
 
             // for this example, we'll print the output to the console
-            Console.WriteLine( "MyListener - {0}: {1}", category, msg );
+            if ( token.IsDefault )
+            {
+                Console.WriteLine( "MyListener - {0}: {1}", category, msg );
+            }
+            else
+            {
+                Console.WriteLine( "MyListener - {0}/{1}: {2}", token.Identifier, category, msg );
+            }
         }
     }
 

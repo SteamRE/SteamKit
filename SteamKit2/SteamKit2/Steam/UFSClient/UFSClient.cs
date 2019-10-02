@@ -80,7 +80,7 @@ namespace SteamKit2
         /// </param>
         public void Connect( IPEndPoint? ufsServer = null )
         {
-            DebugLog.Assert( steamClient.IsConnected, nameof(UFSClient), "CMClient is not connected!" );
+            DebugLog.Assert( steamClient.IsConnected, steamClient.LoggerToken, nameof(UFSClient), "CMClient is not connected!" );
 
             Disconnect();
             Debug.Assert( connection == null );
@@ -91,7 +91,7 @@ namespace SteamKit2
 
                 if ( serverList.Count == 0 )
                 {
-                    DebugLog.WriteLine( nameof(UFSClient), "No UFS server addresses were provided yet." );
+                    DebugLog.WriteLine( steamClient.LoggerToken, nameof(UFSClient), "No UFS server addresses were provided yet." );
                     Disconnected( this, new DisconnectedEventArgs( userInitiated: false ) );
                     return;
                 }
@@ -102,7 +102,7 @@ namespace SteamKit2
 
             // steamclient has the connection type hardcoded as TCP
             // todo: determine if UFS supports UDP and if we want to support it
-            connection = new EnvelopeEncryptedConnection( new TcpConnection(), steamClient.Universe );
+            connection = new EnvelopeEncryptedConnection( new TcpConnection( steamClient.LoggerToken), steamClient.LoggerToken, steamClient.Universe );
 
             connection.NetMsgReceived += NetMsgReceived;
             connection.Connected += Connected;
@@ -294,7 +294,7 @@ namespace SteamKit2
 
             msg.SteamID = steamClient.SteamID ?? new SteamID();
 
-            DebugLog.WriteLine( nameof(UFSClient), "Sent -> EMsg: {0} {1}", msg.MsgType, msg.IsProto ? "(Proto)" : "" );
+            DebugLog.WriteLine( steamClient.LoggerToken, nameof(UFSClient), "Sent -> EMsg: {0} {1}", msg.MsgType, msg.IsProto ? "(Proto)" : "" );
 
             // we'll swallow any network failures here because they will be thrown later
             // on the network thread, and that will lead to a disconnect callback
@@ -343,16 +343,16 @@ namespace SteamKit2
 
         void NetMsgReceived( object sender, NetMsgEventArgs e )
         {
-            var packetMsg = CMClient.GetPacketMsg( e.Data );
+            var packetMsg = CMClient.GetPacketMsg( steamClient.LoggerToken, e.Data );
 
             if ( packetMsg == null )
             {
-                DebugLog.WriteLine( nameof(UFSClient), "Packet message failed to parse, shutting down connection");
+                DebugLog.WriteLine( steamClient.LoggerToken, nameof(UFSClient), "Packet message failed to parse, shutting down connection");
                 Disconnect( userInitiated: false );
                 return;
             }
 
-            DebugLog.WriteLine( nameof(UFSClient), "<- Recv'd EMsg: {0} ({1}) {2}", packetMsg.MsgType, ( int )packetMsg.MsgType, packetMsg.IsProto ? "(Proto)" : "" );
+            DebugLog.WriteLine( steamClient.LoggerToken, nameof(UFSClient), "<- Recv'd EMsg: {0} ({1}) {2}", packetMsg.MsgType, ( int )packetMsg.MsgType, packetMsg.IsProto ? "(Proto)" : "" );
 
             var msgDispatch = new Dictionary<EMsg, Action<IPacketMsg>>
             {

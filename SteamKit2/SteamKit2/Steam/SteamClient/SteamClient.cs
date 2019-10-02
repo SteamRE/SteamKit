@@ -354,13 +354,13 @@ namespace SteamKit2
                 }
                 catch ( ProtoException ex )
                 {
-                    DebugLog.WriteLine( "SteamClient", "'{0}' handler failed to (de)serialize a protobuf: '{1}'", key.Name, ex.Message );
+                    DebugLog.WriteLine( LoggerToken, "SteamClient", "'{0}' handler failed to (de)serialize a protobuf: '{1}'", key.Name, ex.Message );
                     Disconnect();
                     return false;
                 }
                 catch ( Exception ex )
                 {
-                    DebugLog.WriteLine( "SteamClient", "Unhandled '{0}' exception from '{1}' handler: '{2}'", ex.GetType().Name, key.Name, ex.Message );
+                    DebugLog.WriteLine( LoggerToken, "SteamClient", "Unhandled '{0}' exception from '{1}' handler: '{2}'", ex.GetType().Name, key.Name, ex.Message );
                     Disconnect();
                     return false;
                 }

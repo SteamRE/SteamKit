@@ -287,8 +287,8 @@ namespace SteamKit2
         /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
         public async Task<IList<Server>> FetchServerListAsync( IPEndPoint? csServer = null, uint? cellId = null, int maxServers = 20 )
         {
-            DebugLog.Assert( steamClient.IsConnected, "CDNClient", "CMClient is not connected!" );
-            DebugLog.Assert( steamClient.CellID != null, "CDNClient", "CMClient is not logged on!" );
+            DebugLog.Assert( steamClient.IsConnected, steamClient.LoggerToken, "CDNClient", "CMClient is not connected!" );
+            DebugLog.Assert( steamClient.CellID != null, steamClient.LoggerToken, "CDNClient", "CMClient is not logged on!" );
 
             if ( csServer == null )
             {
@@ -331,7 +331,7 @@ namespace SteamKit2
 
                 if ( host is null )
                 {
-                    DebugLog.WriteLine( nameof( CDNClient ), "Encountered server list entry with no 'host' property." );
+                    DebugLog.WriteLine( steamClient.LoggerToken, nameof( CDNClient ), "Encountered server list entry with no 'host' property." );
                     continue;
                 }
 
@@ -393,8 +393,8 @@ namespace SteamKit2
         /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
         public async Task ConnectAsync( Server csServer )
         {
-            DebugLog.Assert( steamClient.IsConnected, nameof(CDNClient), "CMClient is not connected!" );
-            DebugLog.Assert( steamClient.SteamID != null, nameof(CDNClient), "CMClient has no SteamID!" );
+            DebugLog.Assert( steamClient.IsConnected, steamClient.LoggerToken, nameof( CDNClient), "CMClient is not connected!" );
+            DebugLog.Assert( steamClient.SteamID != null, steamClient.LoggerToken, nameof( CDNClient), "CMClient has no SteamID!" );
 
             if ( csServer == null )
             {
@@ -409,7 +409,7 @@ namespace SteamKit2
             }
 
             var pubKey = KeyDictionary.GetPublicKey( steamClient.Universe );
-            DebugLog.Assert( pubKey != null, nameof( CDNClient ), "Unable to load public key for Steam Universe that we're already connected to!" );
+            DebugLog.Assert( pubKey != null, steamClient.LoggerToken, nameof( CDNClient ), "Unable to load public key for Steam Universe that we're already connected to!" );
 
             sessionKey = CryptoHelper.GenerateRandomBlock( 32 );
 
@@ -462,7 +462,7 @@ namespace SteamKit2
                 throw new InvalidOperationException( "Cannot perform CDN operations before connecting to CDN server." );
             }
 
-            DebugLog.Assert( sessionKey != null, nameof( CDNClient ), "Inconsistent state - connected to CDN without a session key." );
+            DebugLog.Assert( sessionKey != null, steamClient.LoggerToken, nameof( CDNClient ), "Inconsistent state - connected to CDN without a session key." );
 
             string data;
 
@@ -765,7 +765,7 @@ namespace SteamKit2
                 }
                 catch ( Exception ex )
                 {
-                    DebugLog.WriteLine( "CDNClient", "Failed to complete web request to {0}: {1}", url, ex.Message );
+                    DebugLog.WriteLine( steamClient.LoggerToken, "CDNClient", "Failed to complete web request to {0}: {1}", url, ex.Message );
                     throw;
                 }
             }
