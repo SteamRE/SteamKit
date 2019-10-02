@@ -439,9 +439,9 @@ namespace SteamKit2
     /// This is the abstract base class for all available client messages.
     /// It's used to maintain packet payloads and provide a header for all client messages.
     /// </summary>
-    /// <typeparam name="HdrType">The header type for this client message.</typeparam>
-    public abstract class MsgBase<HdrType> : MsgBase, IClientMsg
-        where HdrType : ISteamSerializableHeader, new()
+    /// <typeparam name="THeader">The header type for this client message.</typeparam>
+    public abstract class MsgBase<THeader> : MsgBase, IClientMsg
+        where THeader : ISteamSerializableHeader, new()
     {
         /// <summary>
         /// Gets a value indicating whether this client message is protobuf backed.
@@ -492,7 +492,7 @@ namespace SteamKit2
         /// <summary>
         /// Gets the header for this message type. 
         /// </summary>
-        public HdrType Header { get; }
+        public THeader Header { get; }
 
 
         /// <summary>
@@ -502,7 +502,7 @@ namespace SteamKit2
         public MsgBase( int payloadReserve = 0 )
             : base( payloadReserve )
         {
-            Header = new HdrType();
+            Header = new THeader();
         }
 
 
