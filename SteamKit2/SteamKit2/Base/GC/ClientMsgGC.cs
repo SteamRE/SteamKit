@@ -194,7 +194,7 @@ namespace SteamKit2.GC
         public override JobID TargetJobID
         {
             get => Header.TargetJobID;
-            set => Header.TargetJobID = value = value ?? throw new ArgumentNullException( nameof(value) );
+            set => Header.TargetJobID = value ?? throw new ArgumentNullException( nameof(value) );
         }
         /// <summary>
         /// Gets or sets the source job id for this gc message.
