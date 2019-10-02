@@ -271,7 +271,7 @@ namespace SteamKit2
             // Sending should generally carry on from the packet most recently sent, even if it was a
             // resend (who knows what else was lost).
             if ( packet.Header.SeqThis > 0 )
-                outSeqSent = packet.Header.SeqThis;
+                outSeqSent = Math.Max( outSeqSent, packet.Header.SeqThis );
         }
 
         /// <summary>
