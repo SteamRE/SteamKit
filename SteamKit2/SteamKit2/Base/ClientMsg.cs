@@ -5,6 +5,7 @@
 
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using ProtoBuf;
 using SteamKit2.Internal;
@@ -54,7 +55,8 @@ namespace SteamKit2
         /// <value>
         /// The <see cref="SteamID"/>.
         /// </value>
-        public override SteamID SteamID
+        [DisallowNull, NotNull]
+        public override SteamID? SteamID
         {
             get => ProtoHeader.steamid;
             set => ProtoHeader.steamid = value ?? throw new ArgumentNullException( nameof(value) );
@@ -275,7 +277,8 @@ namespace SteamKit2
         /// <value>
         /// The <see cref="SteamID"/>.
         /// </value>
-        public override SteamID SteamID
+        [DisallowNull, NotNull]
+        public override SteamID? SteamID
         {
             get => Header.SteamID;
             set => Header.SteamID = value ?? throw new ArgumentNullException( nameof(value) );
@@ -441,7 +444,7 @@ namespace SteamKit2
         /// <value>
         /// The <see cref="SteamID"/>.
         /// </value>
-        public override SteamID SteamID { get; set; }
+        public override SteamID? SteamID { get; set; }
 
         /// <summary>
         /// Gets or sets the target job id for this client message.

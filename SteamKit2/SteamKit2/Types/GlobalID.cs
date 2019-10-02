@@ -153,8 +153,7 @@ namespace SteamKit2
                 return false;
             }
 
-            GlobalID gid = obj as GlobalID;
-            if ( ( object )gid == null )
+            if ( !( obj is GlobalID gid ) )
             {
                 return false;
             }
@@ -187,14 +186,14 @@ namespace SteamKit2
         /// <returns>
         /// The result of the operator.
         /// </returns>
-        public static bool operator ==( GlobalID a, GlobalID b )
+        public static bool operator ==( GlobalID? a, GlobalID? b )
         {
             if ( System.Object.ReferenceEquals( a, b ) )
             {
                 return true;
             }
 
-            if ( ( ( object )a == null ) || ( ( object )b == null ) )
+            if ( a is null || b is null )
             {
                 return false;
             }
@@ -210,7 +209,7 @@ namespace SteamKit2
         /// <returns>
         /// The result of the operator.
         /// </returns>
-        public static bool operator !=( GlobalID a, GlobalID b )
+        public static bool operator !=( GlobalID? a, GlobalID? b )
         {
             return !( a == b );
         }

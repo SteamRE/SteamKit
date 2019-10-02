@@ -77,7 +77,7 @@ namespace SteamKit2
 
                 foreach ( var child in socketList.Children )
                 {
-                    if ( !ServerRecord.TryCreateSocketServer( child.Value, out var record ))
+                    if ( child.Value is null || !ServerRecord.TryCreateSocketServer( child.Value, out var record ))
                     {
                         continue;
                     }
@@ -87,6 +87,11 @@ namespace SteamKit2
 
             foreach ( var child in websocketList.Children )
             {
+                if ( child.Value is null )
+                {
+                    continue;
+                }
+
                 serverRecords.Add( ServerRecord.CreateWebSocketServer( child.Value ) );
             }
 

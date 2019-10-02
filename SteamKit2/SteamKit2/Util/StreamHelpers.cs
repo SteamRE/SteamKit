@@ -7,7 +7,7 @@ namespace SteamKit2
     internal static class StreamHelpers
     {
         [ThreadStatic]
-        static byte[] data;
+        static byte[]? data;
 
         static void EnsureInitialized()
         {

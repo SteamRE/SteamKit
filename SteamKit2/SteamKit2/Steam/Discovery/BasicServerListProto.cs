@@ -1,4 +1,5 @@
-﻿using ProtoBuf;
+﻿using System.Diagnostics.CodeAnalysis;
+using ProtoBuf;
 
 namespace SteamKit2.Discovery
 {
@@ -6,7 +7,8 @@ namespace SteamKit2.Discovery
     class BasicServerListProto
     {
         [ProtoMember(1)]
-        public string Address { get; set; }
+        [DisallowNull, NotNull]
+        public string? Address { get; set; }
 
         [ProtoMember(2)]
         public int Port { get; set; }

@@ -15,7 +15,7 @@ namespace SteamKit2
         private UInt32 hash;
         private UInt32 seed;
         private UInt32[] table;
-        private static UInt32[] defaultTable;
+        private static UInt32[]? defaultTable;
 
         public Crc32()
         {

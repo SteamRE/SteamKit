@@ -43,7 +43,7 @@ namespace SteamKit2
         /// <value>
         /// The <see cref="SteamID"/>.
         /// </value>
-        SteamID SteamID { get; set; }
+        SteamID? SteamID { get; set; }
 
         /// <summary>
         /// Gets or sets the target job id for this client message.
@@ -471,7 +471,7 @@ namespace SteamKit2
         /// <value>
         /// The <see cref="SteamID"/>.
         /// </value>
-        public abstract SteamID SteamID { get; set; }
+        public abstract SteamID? SteamID { get; set; }
 
         /// <summary>
         /// Gets or sets the target job id for this client message.

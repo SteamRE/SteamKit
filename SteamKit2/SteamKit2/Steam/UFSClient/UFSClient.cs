@@ -47,7 +47,7 @@ namespace SteamKit2
 
         SteamClient steamClient;
 
-        IConnection connection;
+        IConnection? connection;
 
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace SteamKit2
         /// The <see cref="System.Net.IPEndPoint"/> of the UFS server to connect to.
         /// If <c>null</c>, <see cref="UFSClient"/> will randomly select a UFS server from the <see cref="SteamClient"/>'s list of servers.
         /// </param>
-        public void Connect( IPEndPoint ufsServer = null )
+        public void Connect( IPEndPoint? ufsServer = null )
         {
             DebugLog.Assert( steamClient.IsConnected, nameof(UFSClient), "CMClient is not connected!" );
 
@@ -142,7 +142,7 @@ namespace SteamKit2
             /// <value>
             /// The name of the file.
             /// </value>
-            public string FileName { get; set; }
+            public string? FileName { get; set; }
 
             /// <summary>
             /// Gets or sets the physical file data for this upload.
@@ -150,7 +150,7 @@ namespace SteamKit2
             /// <value>
             /// The file data.
             /// </value>
-            public byte[] FileData { get; set; }
+            public byte[]? FileData { get; set; }
 
             /// <summary>
             /// Gets or sets the JobID of this file upload. This value should be assigned from <see cref="UploadFileResponseCallback.RemoteJobID"/>.
@@ -158,7 +158,7 @@ namespace SteamKit2
             /// <value>
             /// The job ID.
             /// </value>
-            public JobID RemoteJobID { get; set; }
+            public JobID? RemoteJobID { get; set; }
         }
 
         /// <summary>
@@ -210,7 +210,9 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(details) );
             }
 
-            byte[] compressedData = ZipUtil.Compress( details.FileData );
+            var rawData = details.FileData ?? Array.Empty<byte>();
+
+            byte[] compressedData = ZipUtil.Compress( rawData );
 
             var msg = new ClientMsgProtobuf<CMsgClientUFSUploadFileRequest>( EMsg.ClientUFSUploadFileRequest );
             msg.SourceJobID = steamClient.GetNextJobID();
@@ -219,8 +221,8 @@ namespace SteamKit2
             msg.Body.can_encrypt = false;
             msg.Body.file_name = details.FileName;
             msg.Body.file_size = ( uint )compressedData.Length;
-            msg.Body.raw_file_size = ( uint )details.FileData.Length;
-            msg.Body.sha_file = CryptoHelper.SHAHash( details.FileData );
+            msg.Body.raw_file_size = ( uint )rawData.Length;
+            msg.Body.sha_file = CryptoHelper.SHAHash( rawData );
             msg.Body.time_stamp = DateUtils.DateTimeToUnixTime( DateTime.UtcNow );
 
             Send( msg );
@@ -244,8 +246,10 @@ namespace SteamKit2
 
             const uint MaxBytesPerChunk = 10240;
 
-            byte[] compressedData = ZipUtil.Compress( details.FileData );
-            byte[] fileHash = CryptoHelper.SHAHash( details.FileData );
+            var rawData = details.FileData ?? Array.Empty<byte>();
+
+            byte[] compressedData = ZipUtil.Compress( rawData );
+            byte[] fileHash = CryptoHelper.SHAHash( rawData );
 
             var buffer = new byte[ MaxBytesPerChunk ];
 
@@ -254,7 +258,7 @@ namespace SteamKit2
                 for ( long readIndex = 0; readIndex < ms.Length; readIndex += buffer.Length )
                 {
                     var msg = new ClientMsgProtobuf<CMsgClientUFSFileChunk>( EMsg.ClientUFSUploadFileChunk );
-                    msg.TargetJobID = details.RemoteJobID;
+                    msg.TargetJobID = details.RemoteJobID ?? JobID.Invalid;
 
                     var bytesRead = ms.Read( buffer, 0, buffer.Length );
 
@@ -288,7 +292,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(msg) );
             }
 
-            msg.SteamID = steamClient.SteamID;
+            msg.SteamID = steamClient.SteamID ?? new SteamID();
 
             DebugLog.WriteLine( nameof(UFSClient), "Sent -> EMsg: {0} {1}", msg.MsgType, msg.IsProto ? "(Proto)" : "" );
 
@@ -296,15 +300,22 @@ namespace SteamKit2
             // on the network thread, and that will lead to a disconnect callback
             // down the line
 
-            try
+            if ( connection is { } conn )
             {
-                connection.Send( msg.Serialize() );
+                try
+                {
+                    conn.Send( msg.Serialize() );
+                }
+                catch ( IOException )
+                {
+                }
+                catch ( SocketException )
+                {
+                }
             }
-            catch ( IOException )
+            else
             {
-            }
-            catch ( SocketException )
-            {
+                throw new InvalidOperationException( "Cannot send message when disconnected." );
             }
         }
 
@@ -363,21 +374,18 @@ namespace SteamKit2
         void HandleLoginResponse( IPacketMsg packetMsg )
         {
             var loginResp = new ClientMsgProtobuf<CMsgClientUFSLoginResponse>( packetMsg );
-
             var callback = new LoggedOnCallback( loginResp.TargetJobID, loginResp.Body);
             steamClient.PostCallback( callback );
         }
         void HandleUploadFileResponse( IPacketMsg packetMsg )
         {
             var uploadResp = new ClientMsgProtobuf<CMsgClientUFSUploadFileResponse>( packetMsg );
-
             var callback = new UploadFileResponseCallback( uploadResp.TargetJobID, uploadResp.Body, uploadResp.SourceJobID );
             steamClient.PostCallback( callback );
         }
         void HandleUploadFileFinished( IPacketMsg packetMsg )
         {
             var uploadFin = new ClientMsgProtobuf<CMsgClientUFSUploadFileFinished>( packetMsg );
-            
             var callback = new UploadFileFinishedCallback( uploadFin.TargetJobID, uploadFin.Body );
             steamClient.PostCallback( callback );
         }
