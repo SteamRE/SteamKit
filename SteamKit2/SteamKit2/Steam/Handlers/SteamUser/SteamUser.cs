@@ -35,7 +35,7 @@ namespace SteamKit2
             /// Gets or sets the CellID.
             /// </summary>
             /// <value>The CellID.</value>
-            public uint CellID { get; set; }
+            public uint? CellID { get; set; }
 
             /// <summary>
             /// Gets or sets the LoginID. This number is used for identifying logon session.
@@ -133,7 +133,7 @@ namespace SteamKit2
             /// Gets or sets the CellID.
             /// </summary>
             /// <value>The CellID.</value>
-            public uint CellID { get; set; }
+            public uint? CellID { get; set; }
 
             /// <summary>
             /// Gets or sets the client operating system type.
@@ -333,7 +333,7 @@ namespace SteamKit2
             logon.Body.protocol_version = MsgClientLogon.CurrentProtocol;
             logon.Body.client_os_type = ( uint )details.ClientOSType;
             logon.Body.client_language = details.ClientLanguage;
-            logon.Body.cell_id = details.CellID;
+            logon.Body.cell_id = details.CellID ?? Client.Configuration.CellID;
 
             logon.Body.steam2_ticket_request = details.RequestSteam2Ticket;
 
@@ -393,7 +393,7 @@ namespace SteamKit2
             logon.Body.protocol_version = MsgClientLogon.CurrentProtocol;
             logon.Body.client_os_type = ( uint )details.ClientOSType;
             logon.Body.client_language = details.ClientLanguage;
-            logon.Body.cell_id = details.CellID;
+            logon.Body.cell_id = details.CellID ?? Client.Configuration.CellID;
 
             logon.Body.machine_id = HardwareUtils.GetMachineID();
 
