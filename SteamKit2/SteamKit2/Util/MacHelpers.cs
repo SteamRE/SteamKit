@@ -71,7 +71,7 @@ namespace SteamKit2.Util.MacHelpers
     {
         const string LibraryName = "libc";
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
         public static extern int statfs64(string path, ref statfs buf);
     }
 
@@ -91,10 +91,10 @@ namespace SteamKit2.Util.MacHelpers
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool CFDictionaryGetValueIfPresent(CFTypeRef theDict, CFTypeRef key, out IntPtr value);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
         public static extern CFTypeRef CFStringCreateWithCString(CFTypeRef allocator, string cStr, CFStringEncoding encoding);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
         [return:MarshalAs(UnmanagedType.U1)]
         public static extern bool CFStringGetCString(CFTypeRef theString, StringBuilder buffer, long bufferSize, CFStringEncoding encoding);
 
@@ -110,7 +110,7 @@ namespace SteamKit2.Util.MacHelpers
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CFTypeRef DASessionCreate(CFTypeRef allocator);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
         public static extern CFTypeRef DADiskCreateFromBSDName(CFTypeRef allocator, CFTypeRef session, string name);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
@@ -130,7 +130,7 @@ namespace SteamKit2.Util.MacHelpers
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern uint IOServiceGetMatchingService(uint masterPort, IntPtr matching);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
         public static extern IntPtr IOServiceMatching(string name);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]

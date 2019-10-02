@@ -168,7 +168,7 @@ namespace SteamKit2.Util
 			public static uint FILE_SHARE_WRITE = 2;
 			public static uint OPEN_EXISTING = 3;
 
-			[DllImport( "kernel32.dll", SetLastError = true )]
+			[DllImport( "kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode )]
 			public static extern FileSafeHandle CreateFile( string lpFileName, uint dwDesiredAccess, uint dwShareMode, IntPtr lpSecurityAttributes, uint dwCreationDisposition, uint dwFlagsAndAttributes, IntPtr hTemplateFile );
 
 			#endregion
