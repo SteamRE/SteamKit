@@ -2239,6 +2239,14 @@ namespace SteamKit2
 		PurchaseCannotBeReplayed = 65,
 		DelayedCompletion = 66,
 		BundleTypeCannotBeGifted = 67,
+		ItemsReservedForCommercialUse = 69,
+		ItemsNotAllowedForCommercialUse = 74,
+		CurrentCountryDoesNotMatchRegisteredBusiness = 75,
+		BillingAddressTooLong = 78,
+		CreditCardNumberInvalid = 79,
+		BillingNameInvalidEmptyOrTooManyNumbers = 81,
+		PaymentMethodTemporarilyUnavailable = 82,
+		PaymentMethodNotSupportedForProduct = 83,
 	}
 	public enum EIntroducerRouting
 	{
