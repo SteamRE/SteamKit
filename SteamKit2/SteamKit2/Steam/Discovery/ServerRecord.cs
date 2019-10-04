@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 
 namespace SteamKit2.Discovery
@@ -93,7 +94,7 @@ namespace SteamKit2.Discovery
         /// <param name="address">The IP address and port of the server, as a string.</param>
         /// <param name="serverRecord">A new <see cref="ServerRecord"/>, if the address was able to be parsed. <c>null</c> otherwise.</param>
         /// <returns><c>true</c> if the address was able to be parsed, <c>false</c> otherwise.</returns>
-        public static bool TryCreateSocketServer(string address, out ServerRecord serverRecord)
+        public static bool TryCreateSocketServer(string address, [NotNullWhen(true)] out ServerRecord? serverRecord)
         {
             if (!NetHelpers.TryParseIPEndPoint(address, out var endPoint))
             {
@@ -149,7 +150,7 @@ namespace SteamKit2.Discovery
         /// <param name="left">The object on the left-hand side of the equality operator.</param>
         /// <param name="right">The object on the right-hand side of the equality operator.</param>
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
-        public static bool operator ==(ServerRecord left, ServerRecord right)
+        public static bool operator ==(ServerRecord? left, ServerRecord? right)
         {
             if (ReferenceEquals(left, right))
             {
@@ -165,7 +166,7 @@ namespace SteamKit2.Discovery
         /// <param name="left">The object on the left-hand side of the inequality operator.</param>
         /// <param name="right">The object on the right-hand side of the inequality operator.</param>
         /// <returns>true if the specified object is not equal to the current object; otherwise, false.</returns>
-        public static bool operator !=(ServerRecord left, ServerRecord right)
+        public static bool operator !=(ServerRecord? left, ServerRecord? right)
         {
             return !(left == right);
         }
@@ -175,7 +176,7 @@ namespace SteamKit2.Discovery
         /// </summary>
         /// <param name="obj"></param>
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
             => obj is ServerRecord other &&
                EndPoint.Equals(other.EndPoint) &&
                ProtocolTypes == other.ProtocolTypes;

@@ -5,6 +5,7 @@
 
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using ProtoBuf;
 using SteamKit2.Internal;
@@ -54,7 +55,8 @@ namespace SteamKit2
         /// <value>
         /// The <see cref="SteamID"/>.
         /// </value>
-        public override SteamID SteamID
+        [DisallowNull, NotNull]
+        public override SteamID? SteamID
         {
             get => ProtoHeader.steamid;
             set => ProtoHeader.steamid = value ?? throw new ArgumentNullException( nameof(value) );
@@ -141,14 +143,14 @@ namespace SteamKit2
     /// <summary>
     /// Represents a protobuf backed client message.
     /// </summary>
-    /// <typeparam name="BodyType">The body type of this message.</typeparam>
-    public sealed class ClientMsgProtobuf<BodyType> : ClientMsgProtobuf
-        where BodyType : IExtensible, new()
+    /// <typeparam name="TBody">The body type of this message.</typeparam>
+    public sealed class ClientMsgProtobuf<TBody> : ClientMsgProtobuf
+        where TBody : IExtensible, new()
     {
         /// <summary>
         /// Gets the body structure of this message.
         /// </summary>
-        public BodyType Body { get; private set; }
+        public TBody Body { get; private set; }
 
 
         /// <summary>
@@ -160,7 +162,7 @@ namespace SteamKit2
         public ClientMsgProtobuf( EMsg eMsg, int payloadReserve = 64 )
             : base( payloadReserve )
         {
-            Body = new BodyType();
+            Body = new TBody();
 
             // set our emsg
             Header.Msg = eMsg;
@@ -188,7 +190,7 @@ namespace SteamKit2
         public ClientMsgProtobuf( IPacketMsg msg )
             : this( msg.GetMsgTypeWithNullCheck( nameof(msg) ) )
         {
-            DebugLog.Assert( msg.IsProto, "ClientMsgProtobuf<>", $"ClientMsgProtobuf<{typeof(BodyType).FullName}> used for non-proto message!" );
+            DebugLog.Assert( msg.IsProto, "ClientMsgProtobuf<>", $"ClientMsgProtobuf<{typeof(TBody).FullName}> used for non-proto message!" );
 
             Deserialize( msg.GetData() );
         }
@@ -224,7 +226,7 @@ namespace SteamKit2
             using ( MemoryStream ms = new MemoryStream( data ) )
             {
                 Header.Deserialize( ms );
-                Body = Serializer.Deserialize<BodyType>( ms );
+                Body = Serializer.Deserialize<TBody>( ms );
 
                 // the rest of the data is the payload
                 int payloadOffset = ( int )ms.Position;
@@ -239,9 +241,9 @@ namespace SteamKit2
     /// <summary>
     /// Represents a struct backed client message.
     /// </summary>
-    /// <typeparam name="BodyType">The body type of this message.</typeparam>
-    public sealed class ClientMsg<BodyType> : MsgBase<ExtendedClientMsgHdr>
-        where BodyType : ISteamSerializableMessage, new()
+    /// <typeparam name="TBody">The body type of this message.</typeparam>
+    public sealed class ClientMsg<TBody> : MsgBase<ExtendedClientMsgHdr>
+        where TBody : ISteamSerializableMessage, new()
     {
         /// <summary>
         /// Gets a value indicating whether this client message is protobuf backed.
@@ -275,7 +277,8 @@ namespace SteamKit2
         /// <value>
         /// The <see cref="SteamID"/>.
         /// </value>
-        public override SteamID SteamID
+        [DisallowNull, NotNull]
+        public override SteamID? SteamID
         {
             get => Header.SteamID;
             set => Header.SteamID = value ?? throw new ArgumentNullException( nameof(value) );
@@ -308,7 +311,7 @@ namespace SteamKit2
         /// <summary>
         /// Gets the body structure of this message.
         /// </summary>
-        public BodyType Body { get; }
+        public TBody Body { get; }
 
 
         /// <summary>
@@ -319,7 +322,7 @@ namespace SteamKit2
         public ClientMsg( int payloadReserve = 64 )
             : base( payloadReserve )
         {
-            Body = new BodyType();
+            Body = new TBody();
 
             // assign our emsg
             Header.SetEMsg( Body.GetEMsg() );
@@ -356,7 +359,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(msg) );
             }
 
-            DebugLog.Assert( !msg.IsProto, "ClientMsg", $"ClientMsg<{typeof(BodyType).FullName}> used for proto message!" );
+            DebugLog.Assert( !msg.IsProto, "ClientMsg", $"ClientMsg<{typeof(TBody).FullName}> used for proto message!" );
 
             Deserialize( msg.GetData() );
         }
@@ -407,9 +410,9 @@ namespace SteamKit2
     /// <summary>
     /// Represents a struct backed message without session or client info.
     /// </summary>
-    /// <typeparam name="BodyType">The body type of this message.</typeparam>
-    public sealed class Msg<BodyType> : MsgBase<MsgHdr>
-        where BodyType : ISteamSerializableMessage, new()
+    /// <typeparam name="TBody">The body type of this message.</typeparam>
+    public sealed class Msg<TBody> : MsgBase<MsgHdr>
+        where TBody : ISteamSerializableMessage, new()
     {
         /// <summary>
         /// Gets a value indicating whether this client message is protobuf backed.
@@ -441,7 +444,7 @@ namespace SteamKit2
         /// <value>
         /// The <see cref="SteamID"/>.
         /// </value>
-        public override SteamID SteamID { get; set; }
+        public override SteamID? SteamID { get; set; }
 
         /// <summary>
         /// Gets or sets the target job id for this client message.
@@ -470,7 +473,7 @@ namespace SteamKit2
         /// <summary>
         /// Gets the structure body of the message.
         /// </summary>
-        public BodyType Body { get; }
+        public TBody Body { get; }
 
 
         /// <summary>
@@ -481,7 +484,7 @@ namespace SteamKit2
         public Msg( int payloadReserve = 0 )
             : base( payloadReserve )
         {
-            Body = new BodyType();
+            Body = new TBody();
 
             // assign our emsg
             Header.SetEMsg( Body.GetEMsg() );

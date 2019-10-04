@@ -11,7 +11,7 @@ namespace SteamKit2
             readonly ConcurrentDictionary<uint, ConcurrentDictionary<SteamID, Lobby>> lobbies =
                 new ConcurrentDictionary<uint, ConcurrentDictionary<SteamID, Lobby>>();
 
-            public Lobby GetLobby( uint appId, SteamID lobbySteamId )
+            public Lobby? GetLobby( uint appId, SteamID lobbySteamId )
             {
                 return GetAppLobbies( appId ).TryGetValue( lobbySteamId, out var lobby ) ? lobby : null;
             }
@@ -21,7 +21,7 @@ namespace SteamKit2
                 GetAppLobbies( appId )[ lobby.SteamID ] = lobby;
             }
 
-            public Lobby.Member AddLobbyMember( uint appId, Lobby lobby, SteamID memberId, string personaName )
+            public Lobby.Member? AddLobbyMember( uint appId, Lobby lobby, SteamID memberId, string personaName )
             {
                 var existingMember = lobby.Members.FirstOrDefault( m => m.SteamID == memberId );
 
@@ -42,7 +42,7 @@ namespace SteamKit2
                 return addedMember;
             }
 
-            public Lobby.Member RemoveLobbyMember( uint appId, Lobby lobby, SteamID memberId )
+            public Lobby.Member? RemoveLobbyMember( uint appId, Lobby lobby, SteamID memberId )
             {
                 var removedMember = lobby.Members.FirstOrDefault( m => m.SteamID.Equals( memberId ) );
 
@@ -101,7 +101,7 @@ namespace SteamKit2
                 lobbies.Clear();
             }
 
-            void UpdateLobbyMembers( uint appId, Lobby lobby, SteamID owner, IReadOnlyList<Lobby.Member> members )
+            void UpdateLobbyMembers( uint appId, Lobby lobby, SteamID? owner, IReadOnlyList<Lobby.Member>? members )
             {
                 CacheLobby( appId, new Lobby(
                     lobby.SteamID,
@@ -122,7 +122,7 @@ namespace SteamKit2
                 return lobbies.GetOrAdd( appId, k => new ConcurrentDictionary<SteamID, Lobby>() );
             }
 
-            Lobby DeleteLobby( uint appId, SteamID lobbySteamId )
+            Lobby? DeleteLobby( uint appId, SteamID lobbySteamId )
             {
                 if ( !lobbies.TryGetValue( appId, out var appLobbies ) )
                 {

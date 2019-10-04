@@ -1,4 +1,5 @@
 // InBuffer.cs
+#nullable disable
 
 namespace SevenZip.Buffer
 {

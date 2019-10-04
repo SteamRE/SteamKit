@@ -7,10 +7,12 @@
     <PackageReleaseNotes>Release notes are available at https://github.com/SteamRE/SteamKit/releases/tag/2.2.0</PackageReleaseNotes>
     <PackageIconUrl>https://raw.github.com/SteamRE/SteamKit/master/Resources/Misc/steamkit_logo_128.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/SteamRE/SteamKit</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/SteamRE/SteamKit/blob/master/SteamKit2/SteamKit2/license.txt</PackageLicenseUrl>
+    <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/SteamRE/SteamKit</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <ProjectGuid>{4B2B0365-DE37-4B65-B614-3E4E7C05147D}</ProjectGuid>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -29,8 +31,6 @@
   <ItemGroup>
     <None Remove="3rd party.txt" />
     <None Remove="changes.txt" />
-    <None Remove="gpl.txt" />
-    <None Remove="lgpl.txt" />
     <None Remove="license.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -41,14 +41,6 @@
     <Content Include="changes.txt">
         <Pack>true</Pack>
         <PackagePath>readme.txt</PackagePath>
-    </Content>
-    <Content Include="gpl.txt">
-        <Pack>true</Pack>
-        <PackagePath />
-    </Content>
-    <Content Include="lgpl.txt">
-        <Pack>true</Pack>
-        <PackagePath />
     </Content>
     <Content Include="license.txt">
         <Pack>true</Pack>

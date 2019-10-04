@@ -4,6 +4,7 @@ using System.Text;
 
 namespace SteamKit2.Util.MacHelpers
 {
+#pragma warning disable CA2101 // Specify marshaling for P/Invoke string arguments. All the APIs in this file deal with regular UTF-8 strings (char *). With CharSet.Unicode, SK2 just crashes.
     class CFTypeRef : SafeHandle
     {
         CFTypeRef()
@@ -136,5 +137,6 @@ namespace SteamKit2.Util.MacHelpers
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int IOObjectRelease(uint @object);
     }
+#pragma warning restore CA2101 // Specify marshaling for P/Invoke string arguments
 }
 

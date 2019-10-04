@@ -6,15 +6,15 @@ namespace SteamKit2
 {
     partial class WebSocketConnection : IConnection
     {
-        WebSocketContext currentContext;
+        WebSocketContext? currentContext;
 
-        public event EventHandler<NetMsgEventArgs> NetMsgReceived;
+        public event EventHandler<NetMsgEventArgs>? NetMsgReceived;
 
-        public event EventHandler Connected;
+        public event EventHandler? Connected;
 
-        public event EventHandler<DisconnectedEventArgs> Disconnected;
+        public event EventHandler<DisconnectedEventArgs>? Disconnected;
 
-        public EndPoint CurrentEndPoint { get; set; }
+        public EndPoint? CurrentEndPoint { get; set; }
         public ProtocolTypes ProtocolTypes => ProtocolTypes.WebSocket;
 
         public void Connect(EndPoint endPoint, int timeout = 5000)
@@ -50,7 +50,7 @@ namespace SteamKit2
             }
         }
 
-        void DisconnectCore(bool userInitiated, WebSocketContext specificContext)
+        void DisconnectCore(bool userInitiated, WebSocketContext? specificContext)
         {
             var oldContext = Interlocked.Exchange(ref currentContext, null);
             if (oldContext != null && (specificContext == null || oldContext == specificContext))

@@ -20,17 +20,17 @@ namespace SteamKit2
         readonly IConnection inner;
         readonly EUniverse universe;
         EncryptionState state;
-        INetFilterEncryption encryption;
+        INetFilterEncryption? encryption;
 
-        public EndPoint CurrentEndPoint => inner.CurrentEndPoint;
+        public EndPoint? CurrentEndPoint => inner.CurrentEndPoint;
 
         public ProtocolTypes ProtocolTypes => inner.ProtocolTypes;
 
-        public event EventHandler<NetMsgEventArgs> NetMsgReceived;
+        public event EventHandler<NetMsgEventArgs>? NetMsgReceived;
 
-        public event EventHandler Connected;
+        public event EventHandler? Connected;
 
-        public event EventHandler<DisconnectedEventArgs> Disconnected;
+        public event EventHandler<DisconnectedEventArgs>? Disconnected;
 
         public void Connect( EndPoint endPoint, int timeout = 5000 )
             => inner.Connect( endPoint, timeout );
@@ -40,13 +40,13 @@ namespace SteamKit2
             inner.Disconnect( userInitiated );
         }
 
-        public IPAddress GetLocalIP() => inner.GetLocalIP();
+        public IPAddress? GetLocalIP() => inner.GetLocalIP();
 
         public void Send( byte[] data )
         {
             if ( state == EncryptionState.Encrypted )
             {
-                data = encryption.ProcessOutgoing( data );
+                data = encryption!.ProcessOutgoing( data );
             }
 
             inner.Send( data );
@@ -69,7 +69,7 @@ namespace SteamKit2
         {
             if (state == EncryptionState.Encrypted)
             {
-                var plaintextData = encryption.ProcessIncoming( e.Data );
+                var plaintextData = encryption!.ProcessIncoming( e.Data );
                 NetMsgReceived?.Invoke( this, e.WithData( plaintextData ) );
                 return;
             }
@@ -111,7 +111,7 @@ namespace SteamKit2
             DebugLog.Assert( protoVersion == 1, nameof(EnvelopeEncryptedConnection), "Encryption handshake protocol version mismatch!" );
             DebugLog.Assert( connectedUniverse == universe, nameof(EnvelopeEncryptedConnection), FormattableString.Invariant( $"Expected universe {universe} but server reported universe {connectedUniverse}" ) );
 
-            byte[] randomChallenge;
+            byte[]? randomChallenge;
             if ( request.Payload.Length >= 16 )
             {
                 randomChallenge = request.Payload.ToArray();
@@ -128,12 +128,13 @@ namespace SteamKit2
                 DebugLog.WriteLine(nameof(EnvelopeEncryptedConnection), "HandleEncryptRequest got request for invalid universe! Universe: {0} Protocol ver: {1}", connectedUniverse, protoVersion );
 
                 Disconnect( userInitiated: false );
+                return;
             }
 
             var response = new Msg<MsgChannelEncryptResponse>();
             
             var tempSessionKey = CryptoHelper.GenerateRandomBlock( 32 );
-            byte[] encryptedHandshakeBlob = null;
+            byte[] encryptedHandshakeBlob;
             
             using ( var rsa = new RSACrypto( publicKey ) )
             {

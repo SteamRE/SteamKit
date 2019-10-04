@@ -120,9 +120,9 @@ namespace SteamKit2
         /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="depotid">The DepotID to request a decryption key for.</param>
-        /// <param name="appid">The AppID to request the decryption key for.</param>
+        /// <param name="appid">The AppID parent of the DepotID.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="DepotKeyCallback"/>.</returns>
-        public AsyncJob<DepotKeyCallback> GetDepotDecryptionKey( uint depotid, uint appid = 0 )
+        public AsyncJob<DepotKeyCallback> GetDepotDecryptionKey( uint depotid, uint appid )
         {
             var request = new ClientMsgProtobuf<CMsgClientGetDepotDecryptionKey>( EMsg.ClientGetDepotDecryptionKey );
             request.SourceJobID = Client.GetNextJobID();

@@ -9,7 +9,7 @@ namespace SteamKit2.Util
 	{
 		#region Boot Disk Serial Number
 
-		public static string GetBootDiskSerialNumber()
+		public static string? GetBootDiskSerialNumber()
 		{
 			try
 			{
@@ -68,7 +68,7 @@ namespace SteamKit2.Util
 		//
 		// Here Be Dragons
 		//
-		static string GetPhysicalDriveSerialNumber( uint driveNumber )
+		static string? GetPhysicalDriveSerialNumber( uint driveNumber )
 		{
 			using (var handle = NativeMethods.CreateFile( $@"\\.\PhysicalDrive{driveNumber}", 0, NativeMethods.FILE_SHARE_READ | NativeMethods.FILE_SHARE_WRITE, IntPtr.Zero, NativeMethods.OPEN_EXISTING, 0, IntPtr.Zero ) )
 			{
@@ -168,7 +168,7 @@ namespace SteamKit2.Util
 			public static uint FILE_SHARE_WRITE = 2;
 			public static uint OPEN_EXISTING = 3;
 
-			[DllImport( "kernel32.dll", SetLastError = true )]
+			[DllImport( "kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode )]
 			public static extern FileSafeHandle CreateFile( string lpFileName, uint dwDesiredAccess, uint dwShareMode, IntPtr lpSecurityAttributes, uint dwCreationDisposition, uint dwFlagsAndAttributes, IntPtr hTemplateFile );
 
 			#endregion

@@ -181,7 +181,7 @@ namespace SteamKit2
 
             foreach ( string param in paramsToCheck )
             {
-                string paramValue = GetParamValue( bootParams, param );
+                var paramValue = GetParamValue( bootParams, param );
 
                 if ( !string.IsNullOrEmpty( paramValue ) )
                 {
@@ -232,7 +232,7 @@ namespace SteamKit2
                 return new string[0];
             }
         }
-        string GetParamValue( string[] bootOptions, string param )
+        string? GetParamValue( string[] bootOptions, string param )
         {
             string paramString = bootOptions
                 .FirstOrDefault( p => p.StartsWith( param, StringComparison.OrdinalIgnoreCase ) );
@@ -337,7 +337,7 @@ namespace SteamKit2
         }
 
 
-        static Task<MachineID> generateTask;
+        static Task<MachineID>? generateTask;
 
 
         public static void Init(MachineInfoProvider provider)
@@ -345,8 +345,14 @@ namespace SteamKit2
             generateTask = Task.Factory.StartNew( () => GenerateMachineID(provider) );
         }
 
-        public static byte[] GetMachineID()
+        public static byte[]? GetMachineID()
         {
+            if ( generateTask is null )
+            {
+                DebugLog.WriteLine( nameof( HardwareUtils ), "GetMachineID() called before Init()" );
+                return null;
+            }
+
             bool didComplete = generateTask.Wait( TimeSpan.FromSeconds( 30 ) );
 
             if ( !didComplete )

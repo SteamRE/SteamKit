@@ -9,6 +9,7 @@ using System.Linq;
 using SteamKit2.Internal;
 using System;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
 namespace SteamKit2
 {
@@ -100,12 +101,14 @@ namespace SteamKit2
             /// <summary>
             /// Gets the full name of the service method.
             /// </summary>
-            public string MethodName { get; private set; }
+            [DisallowNull, NotNull]
+            public string? MethodName { get; private set; }
 
             /// <summary>
             /// Gets the protobuf notification body.
             /// </summary>
-            public object Body { get; private set; }
+            [DisallowNull, NotNull]
+            public object? Body { get; private set; }
 
 
             internal ServiceMethodNotification( Type messageType, IPacketMsg packetMsg )

@@ -29,7 +29,7 @@ namespace SteamKit2
             /// Gets or sets the filter used for querying the master server.
             /// Check https://developer.valvesoftware.com/wiki/Master_Server_Query_Protocol for details on how the filter is structured.
             /// </summary>
-            public string Filter { get; set; }
+            public string? Filter { get; set; }
             /// <summary>
             /// Gets or sets the region that servers will be returned from.
             /// </summary>
@@ -39,7 +39,7 @@ namespace SteamKit2
             /// Gets or sets the IP address that will be GeoIP located.
             /// This is done to return servers closer to this location.
             /// </summary>
-            public IPAddress GeoLocatedIP { get; set; }
+            public IPAddress? GeoLocatedIP { get; set; }
 
             /// <summary>
             /// Gets or sets the maximum number of servers to return.
