@@ -31,9 +31,8 @@ int CSigScan::Init(unsigned char *sig, char *mask, size_t len) {
 	if ( sig_mask )
 		delete[] sig_mask;
 
-    sig_mask = new char[sig_len/*+1*/];
-    strncpy_s(sig_mask, sig_len, mask, sig_len);
-    //sig_mask[sig_len+1] = 0;
+    sig_mask = new char[sig_len + 1];
+    strncpy_s(sig_mask, sig_len + 1, mask, sig_len);
  
     if(!base_addr)
         return 2; // GetDllMemInfo() Failed
