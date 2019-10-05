@@ -22,7 +22,7 @@ class CNet
 {
 
 public:
-	CNet();
+	CNet() noexcept;
 	~CNet();
 
 

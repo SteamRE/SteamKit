@@ -12,14 +12,14 @@ class CBinaryReader
 public:
 	CBinaryReader( uint8 *pData, uint32 cubData );
 
-	uint32 GetPosition() { return m_Position; }
-	void SetPosition( uint32 pos ) { m_Position = pos; }
-	void SeekRelative( uint32 pos ) { m_Position += pos; }
+	uint32 GetPosition() noexcept { return m_Position; }
+	void SetPosition( uint32 pos ) noexcept { m_Position = pos; }
+	void SeekRelative( uint32 pos ) noexcept { m_Position += pos; }
 
-	uint32 GetSizeLeft() { return m_cubData - m_Position; }
+	uint32 GetSizeLeft() noexcept { return m_cubData - m_Position; }
 
 	template<typename T>
-	T Read()
+	T Read() noexcept
 	{
 		T readData = *(T *)( m_pData + m_Position );
 		m_Position += sizeof( T );
@@ -27,7 +27,7 @@ public:
 		return readData;
 	}
 
-	uint8 *ReadBytes( uint32 len )
+	uint8 *ReadBytes( uint32 len ) noexcept
 	{
 		uint8 *ret = ( m_pData + m_Position );
 		m_Position += len;

@@ -13,17 +13,17 @@ namespace NetHook
 {
 
 
-BBuildAndAsyncSendFrameFn BBuildAndAsyncSendFrame_Orig = NULL;
-RecvPktFn RecvPkt_Orig = NULL;
+BBuildAndAsyncSendFrameFn BBuildAndAsyncSendFrame_Orig = nullptr;
+RecvPktFn RecvPkt_Orig = nullptr;
 
-CNet::CNet()
-	: m_RecvPktDetour(NULL),
-	  m_BuildDetour(NULL)
+CNet::CNet() noexcept
+	: m_RecvPktDetour(nullptr),
+	  m_BuildDetour(nullptr)
 {
 	CSimpleScan steamClientScan("steamclient.dll");
 
-	BBuildAndAsyncSendFrameFn pBuildFunc = NULL;
-	bool bFoundBuildFunc = steamClientScan.FindFunction(
+	BBuildAndAsyncSendFrameFn pBuildFunc = nullptr;
+	const bool bFoundBuildFunc = steamClientScan.FindFunction(
 		"\x55\x8B\xEC\x83\xEC\x00\x53\x6A\x04\x6A\x00\x6A\x06\x8B\xD9\x8D\x4D\xEC\x6A\x00\x68",
 		"xxxxx?xxxxxxxxxxxxxxx",
 		(void **)&pBuildFunc
@@ -33,8 +33,8 @@ CNet::CNet()
 
 	g_pLogger->LogConsole("CWebSocketConnection::BBuildAndAsyncSendFrame = 0x%x\n", BBuildAndAsyncSendFrame_Orig);
 
-	RecvPktFn pRecvPktFunc = NULL;
-	bool bFoundRecvPktFunc = steamClientScan.FindFunction(
+	RecvPktFn pRecvPktFunc = nullptr;
+	const bool bFoundRecvPktFunc = steamClientScan.FindFunction(
 		"\x55\x8B\xEC\x81\xEC\x88\x04\x00\x00\x53\x56\x57\x6A\x01\xFF",
 		"xxxxx?xxxxxxxxx",
 		(void **)&pRecvPktFunc
@@ -44,8 +44,6 @@ CNet::CNet()
 
 	g_pLogger->LogConsole("CCMInterface::RecvPkt = 0x%x\n", RecvPkt_Orig);
 
-
-	RecvPktFn thisRecvPktFunc = CNet::RecvPkt;
 
 	if (bFoundBuildFunc)
 	{
@@ -95,9 +93,9 @@ CNet::~CNet()
 
 bool CNet::BBuildAndAsyncSendFrame(void *webSocketConnection, void *unused, EWebSocketOpCode eWebSocketOpCode, const uint8 *pubData, uint32 cubData)
 {
-	if (eWebSocketOpCode == k_eWebSocketOpCode_Binary)
+	if (eWebSocketOpCode == EWebSocketOpCode::k_eWebSocketOpCode_Binary)
 	{
-		g_pLogger->LogNetMessage(k_eNetOutgoing, pubData, cubData);
+		g_pLogger->LogNetMessage(ENetDirection::k_eNetOutgoing, pubData, cubData);
 	}
 	else
 	{
@@ -111,7 +109,7 @@ bool CNet::BBuildAndAsyncSendFrame(void *webSocketConnection, void *unused, EWeb
 
 void CNet::RecvPkt(void *cmConnection, void *unused, CNetPacket *pPacket)
 {
-	g_pLogger->LogNetMessage(k_eNetIncoming, pPacket->m_pubData, pPacket->m_cubData);
+	g_pLogger->LogNetMessage(ENetDirection::k_eNetIncoming, pPacket->m_pubData, pPacket->m_cubData);
 
 	(*RecvPkt_Orig)(cmConnection, unused, pPacket);
 }
