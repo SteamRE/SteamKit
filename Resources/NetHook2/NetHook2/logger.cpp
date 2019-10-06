@@ -16,7 +16,7 @@ CLogger::CLogger() noexcept
 {
 	m_uiMsgNum = 0;
 	char tempName[ MAX_PATH ];
-	GetModuleFileName(nullptr, tempName, MAX_PATH );
+	GetModuleFileName( nullptr, tempName, MAX_PATH );
 
 	m_RootDir = tempName;
 	m_RootDir = m_RootDir.substr( 0, m_RootDir.find_last_of( '\\' ) );
@@ -33,7 +33,7 @@ CLogger::CLogger() noexcept
 	m_LogDir = ss.str();
 
 	// create the session log directory
-	CreateDirectoryA( m_LogDir.c_str(), nullptr);
+	CreateDirectoryA( m_LogDir.c_str(), nullptr );
 }
 
 
@@ -93,10 +93,10 @@ void CLogger::LogSessionData( ENetDirection eDirection, const uint8 *pData, uint
 
 	std::string fullFileTmp = fullFile + ".tmp";
 	std::string fullFileFinal = fullFile + ".bin";
-	HANDLE hFile = CreateFile( fullFileTmp.c_str(), GENERIC_WRITE, FILE_SHARE_READ, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+	HANDLE hFile = CreateFile( fullFileTmp.c_str(), GENERIC_WRITE, FILE_SHARE_READ, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr );
 
 	DWORD numBytes = 0;
-	WriteFile( hFile, pData, cubData, &numBytes, nullptr);
+	WriteFile( hFile, pData, cubData, &numBytes, nullptr );
 
 	CloseHandle( hFile );
 
@@ -110,7 +110,7 @@ HANDLE CLogger::OpenFile( const char *szFileName, bool bSession )
 	std::string outputFile = ( bSession ? m_LogDir : m_RootDir );
 	outputFile += szFileName;
 
-	return CreateFile( outputFile.c_str(), GENERIC_WRITE, FILE_SHARE_READ, nullptr, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+	return CreateFile( outputFile.c_str(), GENERIC_WRITE, FILE_SHARE_READ, nullptr, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr );
 }
 
 void CLogger::CloseFile( HANDLE hFile ) noexcept
@@ -138,7 +138,7 @@ void CLogger::LogOpenFile( HANDLE hFile, const char *szFmt, ... )
 	SetFilePointer( hFile, 0, nullptr, FILE_END );
 
 	DWORD numBytes = 0;
-	WriteFile( hFile, szBuff, len, &numBytes, nullptr);
+	WriteFile( hFile, szBuff, len, &numBytes, nullptr );
 
 	delete [] szBuff;
 }
