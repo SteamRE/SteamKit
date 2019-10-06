@@ -85,14 +85,14 @@ typedef void  (*SteamAPIWarningMessageHook_t)(int hpipe, const char *message);
 // NOTE: for GID parsing/rendering and other utils, see gid.h
 typedef uint64 GID_t;
 
-const GID_t k_GIDNil = 0xffffffffffffffffull;
+constexpr GID_t k_GIDNil = 0xffffffffffffffffull;
 
 // For convenience, we define a number of types that are just new names for GIDs
 typedef GID_t JobID_t;			// Each Job has a unique ID
 typedef GID_t TxnID_t;			// Each financial transaction has a unique ID
 
-const GID_t k_TxnIDNil = k_GIDNil;
-const GID_t k_TxnIDUnknown = 0;
+constexpr GID_t k_TxnIDNil = k_GIDNil;
+constexpr GID_t k_TxnIDUnknown = 0;
 
 // this is baked into client messages and interfaces as an int, 
 // make sure we never break this.  AppIds and DepotIDs also presently
@@ -102,22 +102,22 @@ typedef uint32 AppId_t;
 typedef uint32 PackageId_t;
 typedef uint32 DepotId_t;
 
-const AppId_t k_uAppIdInvalid = 0x0;
+constexpr AppId_t k_uAppIdInvalid = 0x0;
 
-const PackageId_t k_uPackageIdFreeSub = 0x0;
-const PackageId_t k_uPackageIdInvalid = 0xFFFFFFFF;
-const PackageId_t k_uPackageIdWallet = -2;
-const PackageId_t k_uPackageIdMicroTxn = -3;
+constexpr PackageId_t k_uPackageIdFreeSub = 0x0;
+constexpr PackageId_t k_uPackageIdInvalid = 0xFFFFFFFF;
+constexpr PackageId_t k_uPackageIdWallet = -2;
+constexpr PackageId_t k_uPackageIdMicroTxn = -3;
 
-const DepotId_t k_uDepotIdInvalid = 0x0;
+constexpr DepotId_t k_uDepotIdInvalid = 0x0;
 
 
 typedef uint32 CellID_t;
-const CellID_t k_uCellIDInvalid = 0xFFFFFFFF;
+constexpr CellID_t k_uCellIDInvalid = 0xFFFFFFFF;
 
 // handle to a Steam API call
 typedef uint64 SteamAPICall_t;
-const SteamAPICall_t k_uAPICallInvalid = 0x0;
+constexpr SteamAPICall_t k_uAPICallInvalid = 0x0;
 
 
 // handle to a communication pipe to the Steam client
@@ -129,12 +129,12 @@ typedef int32 HSteamCall;
 
 // return type of GetAuthSessionTicket
 typedef uint32 HAuthTicket;
-const HAuthTicket k_HAuthTicketInvalid = 0;
+constexpr HAuthTicket k_HAuthTicketInvalid = 0;
 
 typedef int HVoiceCall;
 
 
-const int k_cchSystemIMTextMax = 4096;
+constexpr int k_cchSystemIMTextMax = 4096;
 
 
 
@@ -142,20 +142,20 @@ const int k_cchSystemIMTextMax = 4096;
 // We use this 32 bit time representing real world time.
 // It offers 1 second resolution beginning on January 1, 1970 (Unix time)
 typedef uint32 RTime32;
-const RTime32 k_RTime32Nil = 0;
-const RTime32 k_RTime32MinValid = 10;
-const RTime32 k_RTime32Infinite = 0x7FFFFFFF;
+constexpr RTime32 k_RTime32Nil = 0;
+constexpr RTime32 k_RTime32MinValid = 10;
+constexpr RTime32 k_RTime32Infinite = 0x7FFFFFFF;
 
 
 
-const uint32 k_nMagic = 0x31305356; // "VS01"
-const uint32 k_nMagic_Old1 = 0x4D545356; // "VSTM"
+constexpr uint32 k_nMagic = 0x31305356; // "VS01"
+constexpr uint32 k_nMagic_Old1 = 0x4D545356; // "VSTM"
 
-const uint32 k_cchTruncatedPassword = 20;
-const uint32 k_cchAccountName = 64;
+constexpr uint32 k_cchTruncatedPassword = 20;
+constexpr uint32 k_cchAccountName = 64;
 
-const uint32 k_nChallengeMask = 0xA426DF2B;
-const uint32 k_nObfuscationMask = 0xBAADF00D;
+constexpr uint32 k_nChallengeMask = 0xA426DF2B;
+constexpr uint32 k_nObfuscationMask = 0xBAADF00D;
 
 typedef void* (*CreateInterfaceFn)(const char *pName, int *pReturnCode);
 

@@ -13,10 +13,10 @@ class CSimpleDetour
 {
 
 public:
-	CSimpleDetour( void **old, void *replacement );
+	CSimpleDetour( void **old, void *replacement ) noexcept;
 
-	void Attach();
-	void Detach();
+	void Attach() noexcept;
+	void Detach() noexcept;
 
 private:
 	void **m_fnOld;

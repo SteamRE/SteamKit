@@ -32,7 +32,7 @@ private:
     size_t sig_len;
  
     /* Private Functions */
-    void* FindSignature(void);
+    void* FindSignature(void) noexcept;
  
 public:
     /* Public Variables */
@@ -48,17 +48,15 @@ public:
     /* Starting address of the found function */
     void *sig_addr;
  
-    CSigScan(void): sig_str(NULL), sig_mask(NULL), sig_len(0), sig_addr(NULL) {}
+    CSigScan(void) noexcept : sig_str(nullptr), sig_mask(nullptr), sig_len(0), sig_addr(nullptr), is_set(0) {}
 	~CSigScan(void);
 
-    static bool GetDllMemInfo(void);
-    int Init(unsigned char *sig, char *mask, size_t len);
+    static bool GetDllMemInfo(void) noexcept;
+    int Init(const unsigned char *sig, const char *mask, size_t len);
 };
  
 /* Sigscanned member functions are casted to member function pointers of this class
    and called with member function pointer syntax */
 class EmptyClass { };
- 
-void InitSigs(void);
  
 #endif
