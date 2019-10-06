@@ -70,6 +70,7 @@ namespace SteamKit2
             this.AddHandler( new SteamUnifiedMessages() );
             this.AddHandler( new SteamScreenshots() );
             this.AddHandler( new SteamMatchmaking() );
+            this.AddHandler( new SteamNetworking() );
 
             using ( var process = Process.GetCurrentProcess() )
             {
