@@ -16,72 +16,46 @@ using static SteamKit2.Util.MacHelpers.IOKit;
 namespace SteamKit2
 {
     /// <summary>
-    /// Class used for retrieving hardware info about machine
+    /// Interface used for retrieving hardware info about machine
     /// </summary>
-    public abstract class MachineInfoProvider
+    public interface IMachineInfoProvider
     {
-        /// <summary>
-        /// Gets default MachineInfoProvider for current OS
-        /// </summary>
-        /// <returns><see cref="WindowsInfoProvider"/> for Windows OS, <see cref="OSXInfoProvider"/> for Mac OS, <see cref="LinuxInfoProvider"/> for Linux, and <see cref="DefaultInfoProvider"/> for others.</returns>
-        public static MachineInfoProvider GetProvider()
-        {
-            switch ( Environment.OSVersion.Platform )
-            {
-                case PlatformID.Win32NT:
-                case PlatformID.Win32Windows:
-                    return new WindowsInfoProvider();
-
-                case PlatformID.Unix:
-                    if ( Utils.IsMacOS() )
-                    {
-                        return new OSXInfoProvider();
-                    }
-                    else
-                    {
-                        return new LinuxInfoProvider();
-                    }
-            }
-
-            return new DefaultInfoProvider();
-        }
-
         /// <summary>
         /// Gets machine's unique identificator
         /// </summary>
         /// <returns>Byte array with machine's GUID</returns>
-        public abstract byte[] GetMachineGuid();
+        byte[] GetMachineGuid();
         
         /// <summary>
         /// Gets machine's MAC address
         /// </summary>
         /// <returns>Byte array with MAC address</returns>
-        public abstract byte[] GetMacAddress();
+        byte[] GetMacAddress();
         
         /// <summary>
         /// Gets first disk ID
         /// </summary>
         /// <returns>Byte array with disk ID</returns>
-        public abstract byte[] GetDiskId();
+        byte[] GetDiskId();
     }
 
-    class DefaultInfoProvider : MachineInfoProvider
+    class DefaultInfoProvider : IMachineInfoProvider
     {
-        public override byte[] GetMachineGuid()
+        public virtual byte[] GetMachineGuid()
         {
             return Encoding.UTF8.GetBytes( Environment.MachineName + "-SteamKit" );
         }
 
-        public override byte[] GetMacAddress()
+        public byte[] GetMacAddress()
         {
             // mono seems to have a pretty solid implementation of NetworkInterface for our platforms
             // if it turns out to be buggy we can always roll our own and poke into /sys/class/net on nix
 
             try
             {
-                var firstEth = NetworkInterface.GetAllNetworkInterfaces()
-                    .Where( i => i.NetworkInterfaceType == NetworkInterfaceType.Ethernet || i.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 )
-                    .FirstOrDefault();
+                var firstEth = NetworkInterface
+                    .GetAllNetworkInterfaces()
+                    .FirstOrDefault( i => i.NetworkInterfaceType == NetworkInterfaceType.Ethernet || i.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 );
 
                 if ( firstEth != null )
                 {
@@ -96,7 +70,7 @@ namespace SteamKit2
             return Encoding.UTF8.GetBytes( "SteamKit-MacAddress" );
         }
 
-        public override byte[] GetDiskId()
+        public virtual byte[] GetDiskId()
         {
             return Encoding.UTF8.GetBytes( "SteamKit-DiskId" );
         }
@@ -278,22 +252,18 @@ namespace SteamKit2
             var statted = statfs64( "/", ref stat );
             if ( statted == 0 )
             {
-                using ( var session = DASessionCreate( CFTypeRef.None ) )
-                using ( var disk = DADiskCreateFromBSDName( CFTypeRef.None, session, stat.f_mntfromname ) )
-                using ( var properties = DADiskCopyDescription( disk ) )
-                using ( var key = CFStringCreateWithCString( CFTypeRef.None, DiskArbitration.kDADiskDescriptionMediaUUIDKey, CFStringEncoding.kCFStringEncodingASCII ) )
+                using var session = DASessionCreate( CFTypeRef.None );
+                using var disk = DADiskCreateFromBSDName( CFTypeRef.None, session, stat.f_mntfromname );
+                using var properties = DADiskCopyDescription( disk );
+                using var key = CFStringCreateWithCString( CFTypeRef.None, kDADiskDescriptionMediaUUIDKey, CFStringEncoding.kCFStringEncodingASCII );
+                IntPtr cfuuid = IntPtr.Zero;
+                if ( CFDictionaryGetValueIfPresent( properties, key, out cfuuid ) )
                 {
-                    IntPtr cfuuid = IntPtr.Zero;
-                    if ( CFDictionaryGetValueIfPresent( properties, key, out cfuuid ) )
+                    using var uuidString = CFUUIDCreateString( CFTypeRef.None, cfuuid );
+                    var stringBuilder = new StringBuilder( 64 );
+                    if ( CFStringGetCString( uuidString, stringBuilder, stringBuilder.Capacity, CFStringEncoding.kCFStringEncodingASCII ) )
                     {
-                        using ( var uuidString = CFUUIDCreateString( CFTypeRef.None, cfuuid ) )
-                        {
-                            var stringBuilder = new StringBuilder( 64 );
-                            if ( CFStringGetCString( uuidString, stringBuilder, stringBuilder.Capacity, CFStringEncoding.kCFStringEncodingASCII ) )
-                            {
-                                return Encoding.ASCII.GetBytes( stringBuilder.ToString() );
-                            }
-                        }
+                        return Encoding.ASCII.GetBytes( stringBuilder.ToString() );
                     }
                 }
             }
@@ -304,10 +274,31 @@ namespace SteamKit2
 
     static class HardwareUtils
     {
+        internal static IMachineInfoProvider GetProvider()
+        {
+            switch ( Environment.OSVersion.Platform )
+            {
+                case PlatformID.Win32NT:
+                case PlatformID.Win32Windows:
+                    return new WindowsInfoProvider();
+
+                case PlatformID.Unix:
+                    if ( Utils.IsMacOS() )
+                    {
+                        return new OSXInfoProvider();
+                    }
+                    else
+                    {
+                        return new LinuxInfoProvider();
+                    }
+            }
+
+            return new DefaultInfoProvider();
+        }
+        
         class MachineID : MessageObject
         {
             public MachineID()
-                : base()
             {
                 this.KeyValues["BB3"] = new KeyValue();
                 this.KeyValues["FF2"] = new KeyValue();
@@ -330,6 +321,8 @@ namespace SteamKit2
                 this.KeyValues["3B3"].Value = value;
             }
 
+            
+            // 333 is some sort of user supplied data and is currently unused
             public void Set333( string value )
             {
                 this.KeyValues["333"] = new KeyValue( value: value );
@@ -340,7 +333,7 @@ namespace SteamKit2
         static Task<MachineID>? generateTask;
 
 
-        public static void Init(MachineInfoProvider provider)
+        public static void Init(IMachineInfoProvider provider)
         {
             generateTask = Task.Factory.StartNew( () => GenerateMachineID(provider) );
         }
@@ -363,16 +356,14 @@ namespace SteamKit2
 
             MachineID machineId = generateTask.Result;
 
-            using ( MemoryStream ms = new MemoryStream() )
-            {
-                machineId.WriteToStream( ms );
+            using MemoryStream ms = new MemoryStream();
+            machineId.WriteToStream( ms );
 
-                return ms.ToArray();
-            }
+            return ms.ToArray();
         }
 
 
-        static MachineID GenerateMachineID(MachineInfoProvider provider)
+        static MachineID GenerateMachineID(IMachineInfoProvider provider)
         {
             // the aug 25th 2015 CM update made well-formed machine MessageObjects required for logon
             // this was flipped off shortly after the update rolled out, likely due to linux steamclients running on distros without a way to build a machineid

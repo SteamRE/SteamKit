@@ -106,7 +106,6 @@ namespace Tests
                  .WithConnectionTimeout(TimeSpan.FromMinutes(1))
                  .WithDefaultPersonaStateFlags(EClientPersonaStateFlag.SourceID)
                  .WithHttpClientFactory(() => { var c = new HttpClient(); c.DefaultRequestHeaders.Add("X-SteamKit-Tests", "true"); return c; })
-                 .WithMachineInfoProvider(new CustomMachineInfoProvider())
                  .WithProtocolTypes(ProtocolTypes.WebSocket | ProtocolTypes.Udp)
                  .WithServerListProvider(new CustomServerListProvider())
                  .WithUniverse(EUniverse.Internal)
@@ -141,12 +140,6 @@ namespace Tests
             {
                 Assert.Equal("true", client.DefaultRequestHeaders.GetValues("X-SteamKit-Tests").FirstOrDefault());
             }
-        }
-
-        [Fact]
-        public void MachineInfoProviderIsConfigured()
-        {
-            Assert.IsType<CustomMachineInfoProvider>(configuration.MachineInfoProvider);
         }
 
         [Fact]
@@ -198,15 +191,6 @@ namespace Tests
 
             Task IServerListProvider.UpdateServerListAsync(IEnumerable<ServerRecord> endpoints)
                 => throw new NotImplementedException();
-        }
-
-        class CustomMachineInfoProvider : MachineInfoProvider
-        {
-            public override byte[] GetMachineGuid() => throw new NotImplementedException();
-
-            public override byte[] GetMacAddress() => throw new NotImplementedException();
-
-            public override byte[] GetDiskId() => throw new NotImplementedException();
         }
     }
 }

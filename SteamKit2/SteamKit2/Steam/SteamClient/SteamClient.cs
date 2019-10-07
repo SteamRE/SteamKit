@@ -71,7 +71,7 @@ namespace SteamKit2
             this.AddHandler( new SteamScreenshots() );
             this.AddHandler( new SteamMatchmaking() );
 
-            HardwareUtils.Init(Configuration?.MachineInfoProvider ?? MachineInfoProvider.GetProvider());
+            HardwareUtils.Init(HardwareUtils.GetProvider());
 
             using ( var process = Process.GetCurrentProcess() )
             {

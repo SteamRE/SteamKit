@@ -80,12 +80,6 @@ namespace SteamKit2
         /// </summary>
         public HttpClientFactory HttpClientFactory => state.HttpClientFactory;
 
-
-        /// <summary>
-        /// The machine info provider used to provide hardware information to Steam.
-        /// </summary>
-        public MachineInfoProvider MachineInfoProvider => state.MachineInfoProvider;
-        
         /// <summary>
         /// The supported protocol types to use when attempting to connect to Steam.
         /// </summary>
