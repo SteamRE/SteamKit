@@ -29,6 +29,7 @@ before_build:
   - Resources\NetHook2\SetupDependencies.cmd
 
 build_script:
+  - git submodule update --init --recursive
   - dotnet build SteamKit2\SteamKit2.sln
   - dotnet build Samples\Samples.sln
   - msbuild Resources\NetHook2\NetHook2.sln
