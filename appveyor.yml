@@ -23,6 +23,7 @@ init:
   - git config --global core.autocrlf true
 
 before_build:
+  - git submodule update --init --recursive
   - dotnet restore SteamKit2\SteamKit2.sln
   - dotnet restore Samples\Samples.sln
   - nuget restore Resources\NetHookAnalyzer2\NetHookAnalyzer2.sln

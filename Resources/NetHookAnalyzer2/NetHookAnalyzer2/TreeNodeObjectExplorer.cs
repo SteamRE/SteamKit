@@ -146,11 +146,34 @@ namespace NetHookAnalyzer2
 			TreeNode.ExpandAll();
 		}
 
-		#endregion
+        void DisplayDataAsProtobuf( object sender, EventArgs e )
+        {
+            SetAsRadioSelected( sender );
 
-		#region IP Address
+            var data = ( byte[] )value;
 
-		void DisplayAsIPAddress(object sender, EventArgs e)
+            try
+            {
+                using ( MemoryStream ms = new MemoryStream( data ) )
+                {
+                    var dictionary = ProtoBufFieldReader.ReadProtobuf( ms );
+
+                    SetValueForDisplay( null, childNodes: new[] { new TreeNodeObjectExplorer( "Protobuf", dictionary, configuration ).TreeNode } );
+                }
+            }
+            catch
+            {
+                SetValueForDisplay( "Not a valid Protobuf object!" );
+            }
+
+            TreeNode.ExpandAll();
+        }
+
+        #endregion
+
+        #region IP Address
+
+        void DisplayAsIPAddress(object sender, EventArgs e)
 		{
 			SetAsRadioSelected(sender);
 
@@ -417,7 +440,8 @@ namespace NetHookAnalyzer2
 						ContextMenuItems.Add(new MenuItem("&UTF-8", DisplayDataAsUTF8) { RadioCheck = true });
 						ContextMenuItems.Add(new MenuItem("&Hexadecimal", DisplayDataAsHexadecimal) { RadioCheck = true, Checked = true });
 						ContextMenuItems.Add(new MenuItem("&Binary KeyValues (VDF)", DisplayDataAsBinaryKeyValues) { RadioCheck = true });
-					}
+                        ContextMenuItems.Add( new MenuItem( "&Protobuf", DisplayDataAsProtobuf ) { RadioCheck = true } );
+                    }
 				}
 			}
 		}

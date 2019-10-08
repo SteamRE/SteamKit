@@ -32,6 +32,8 @@ namespace NetHookAnalyzer2
             { EMsg.ClientDPUpdateAppJobReport, typeof(CMsgClientUpdateAppJobReport) },
 
             { EMsg.ClientPlayingSessionState, typeof(CMsgClientPlayingSessionState) },
+
+            { EMsg.ClientNetworkingCertRequestResponse, typeof(CMsgClientNetworkingCertReply) }
         };
 
         public static Dictionary<uint, Dictionary<uint, Type>> GCBodyMap = new Dictionary<uint, Dictionary<uint, Type>>

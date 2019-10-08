@@ -14,7 +14,7 @@
 #undef DeleteFile
 #endif
 
-enum ENetDirection
+enum class ENetDirection
 {
 	k_eNetIncoming,
 	k_eNetOutgoing,
@@ -24,7 +24,7 @@ class CLogger
 {
 
 public:
-	CLogger();
+	CLogger() noexcept;
 
 	void LogConsole( const char *szFmt, ... );
 	void LogNetMessage( ENetDirection eDirection, const uint8 *pData, uint32 cubData );
@@ -32,7 +32,7 @@ public:
 	void LogOpenFile( HANDLE hFile, const char *szFmt, ... );
 
 	HANDLE OpenFile( const char *szFileName, bool bSession );
-	void CloseFile( HANDLE hFile);
+	void CloseFile( HANDLE hFile) noexcept;
 	void DeleteFile( const char *szFileName, bool bSession );
 
 private:
