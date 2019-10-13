@@ -272,10 +272,40 @@ namespace SteamKit2
         }
     }
 
-    static class HardwareUtils
+    /// <summary>
+    /// Class to allow user to provide custom machine info provider.
+    /// </summary>
+    public static class HardwareUtils
     {
+        private static IMachineInfoProvider userMachineInfoProvider;
+        private static bool IsMachineInfoProviderInitialized;
+
+        /// <summary>
+        /// User-provided MachineInfoProvider.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Occurs when a user tries to (re-)set this property after its first usage.</exception>
+        public static IMachineInfoProvider UserMachineInfoProvider
+        {
+            get => userMachineInfoProvider;
+            set
+            {
+                if ( IsMachineInfoProviderInitialized )
+                {
+                    throw new InvalidOperationException(nameof(UserMachineInfoProvider) + " can't be re-set.");
+                }
+
+                userMachineInfoProvider = value;
+            }
+        }
+
         internal static IMachineInfoProvider GetProvider()
         {
+            IsMachineInfoProviderInitialized = true;
+            if ( UserMachineInfoProvider != null )
+            {
+                return UserMachineInfoProvider;
+            }
+            
             switch ( Environment.OSVersion.Platform )
             {
                 case PlatformID.Win32NT:
@@ -328,17 +358,15 @@ namespace SteamKit2
                 this.KeyValues["333"] = new KeyValue( value: value );
             }
         }
-
-
+        
         static Task<MachineID>? generateTask;
-
-
-        public static void Init(IMachineInfoProvider provider)
+        
+        internal static void Init(IMachineInfoProvider provider)
         {
             generateTask = Task.Factory.StartNew( () => GenerateMachineID(provider) );
         }
 
-        public static byte[]? GetMachineID()
+        internal static byte[]? GetMachineID()
         {
             if ( generateTask is null )
             {
