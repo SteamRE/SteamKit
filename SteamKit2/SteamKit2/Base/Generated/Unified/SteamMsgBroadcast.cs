@@ -3284,6 +3284,60 @@ namespace SteamKit2.Unified.Internal
         k_EBroadcastChatPermissionOwnsApp = 1,
     }
 
+    public interface IBroadcast
+    {
+        CBroadcast_BeginBroadcastSession_Response BeginBroadcastSession(CBroadcast_BeginBroadcastSession_Request request);
+        CBroadcast_EndBroadcastSession_Response EndBroadcastSession(CBroadcast_EndBroadcastSession_Request request);
+        CBroadcast_StartBroadcastUpload_Response StartBroadcastUpload(CBroadcast_StartBroadcastUpload_Request request);
+        NoResponse NotifyBroadcastUploadStop(CBroadcast_NotifyBroadcastUploadStop_Notification request);
+        CBroadcast_WatchBroadcast_Response WatchBroadcast(CBroadcast_WatchBroadcast_Request request);
+        NoResponse HeartbeatBroadcast(CBroadcast_HeartbeatBroadcast_Notification request);
+        NoResponse StopWatchingBroadcast(CBroadcast_StopWatchingBroadcast_Notification request);
+        CBroadcast_GetBroadcastStatus_Response GetBroadcastStatus(CBroadcast_GetBroadcastStatus_Request request);
+        CBroadcast_GetBroadcastThumbnail_Response GetBroadcastThumbnail(CBroadcast_GetBroadcastThumbnail_Request request);
+        CBroadcast_InviteToBroadcast_Response InviteToBroadcast(CBroadcast_InviteToBroadcast_Request request);
+        CBroadcast_SendBroadcastStateToServer_Response SendBroadcastStateToServer(CBroadcast_SendBroadcastStateToServer_Request request);
+        NoResponse NotifyBroadcastSessionHeartbeat(CBroadcast_NotifyBroadcastSessionHeartbeat_Notification request);
+        CBroadcast_GetBroadcastChatInfo_Response GetBroadcastChatInfo(CBroadcast_GetBroadcastChatInfo_Request request);
+        CBroadcast_PostChatMessage_Response PostChatMessage(CBroadcast_PostChatMessage_Request request);
+        CBroadcast_UpdateChatMessageFlair_Response UpdateChatMessageFlair(CBroadcast_UpdateChatMessageFlair_Request request);
+        CBroadcast_MuteBroadcastChatUser_Response MuteBroadcastChatUser(CBroadcast_MuteBroadcastChatUser_Request request);
+        CBroadcast_RemoveUserChatText_Response RemoveUserChatText(CBroadcast_RemoveUserChatText_Request request);
+        CBroadcast_GetBroadcastChatUserNames_Response GetBroadcastChatUserNames(CBroadcast_GetBroadcastChatUserNames_Request request);
+        CBroadcast_StartBuildClip_Response StartBuildClip(CBroadcast_StartBuildClip_Request request);
+        CBroadcast_GetBuildClipStatus_Response GetBuildClipStatus(CBroadcast_GetBuildClipStatus_Request request);
+        CBroadcast_GetClipDetails_Response GetClipDetails(CBroadcast_GetClipDetails_Request request);
+        CBroadcast_SetRTMPInfo_Response SetRTMPInfo(CBroadcast_SetRTMPInfo_Request request);
+        CBroadcast_GetRTMPInfo_Response GetRTMPInfo(CBroadcast_GetRTMPInfo_Request request);
+        NoResponse NotifyWebRTCHaveTURNServer(CBroadcast_WebRTCHaveTURNServer_Notification request);
+        CBroadcast_WebRTCStartResult_Response WebRTCStartResult(CBroadcast_WebRTCStartResult_Request request);
+        CBroadcast_WebRTCStopped_Response WebRTCStopped(CBroadcast_WebRTCStopped_Request request);
+        CBroadcast_WebRTCSetAnswer_Response WebRTCSetAnswer(CBroadcast_WebRTCSetAnswer_Request request);
+        CBroadcast_WebRTCLookupTURNServer_Response WebRTCLookupTURNServer(CBroadcast_WebRTCLookupTURNServer_Request request);
+        CBroadcast_WebRTCAddHostCandidate_Response WebRTCAddHostCandidate(CBroadcast_WebRTCAddHostCandidate_Request request);
+        CBroadcast_WebRTCAddViewerCandidate_Response WebRTCAddViewerCandidate(CBroadcast_WebRTCAddViewerCandidate_Request request);
+        CBroadcast_WebRTCGetHostCandidates_Response WebRTCGetHostCandidates(CBroadcast_WebRTCGetHostCandidates_Request request);
+        CBroadcast_GetBroadcastUploadStats_Response GetBroadcastUploadStats(CBroadcast_GetBroadcastUploadStats_Request request);
+        CBroadcast_GetBroadcastViewerStats_Response GetBroadcastViewerStats(CBroadcast_GetBroadcastViewerStats_Request request);
+    }
+
+    public interface IBroadcastClient
+    {
+        NoResponse NotifyBroadcastViewerState(CBroadcast_BroadcastViewerState_Notification request);
+        NoResponse NotifyWaitingBroadcastViewer(CBroadcast_WaitingBroadcastViewer_Notification request);
+        NoResponse NotifyBroadcastUploadStarted(CBroadcast_BroadcastUploadStarted_Notification request);
+        NoResponse NotifyStopBroadcastUpload(CBroadcast_StopBroadcastUpload_Notification request);
+        NoResponse NotifySessionClosed(CBroadcast_SessionClosed_Notification request);
+        NoResponse NotifyViewerBroadcastInvite(CBroadcast_ViewerBroadcastInvite_Notification request);
+        NoResponse NotifyBroadcastStatus(CBroadcast_BroadcastStatus_Notification request);
+        NoResponse NotifyBroadcastChannelLive(CBroadcast_BroadcastChannelLive_Notification request);
+        NoResponse SendThumbnailToRelay(CBroadcast_SendThumbnailToRelay_Notification request);
+        NoResponse NotifyWebRTCNeedTURNServer(CBroadcast_WebRTCNeedTURNServer_Notification request);
+        NoResponse NotifyWebRTCStart(CBroadcast_WebRTCStart_Notification request);
+        NoResponse NotifyWebRTCSetAnswer(CBroadcast_WebRTCSetAnswer_Notification request);
+        NoResponse NotifyWebRTCAddViewerCandidate(CBroadcast_WebRTCAddViewerCandidate_Notification request);
+    }
+
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

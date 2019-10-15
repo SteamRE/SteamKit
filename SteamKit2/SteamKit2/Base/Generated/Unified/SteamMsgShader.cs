@@ -233,6 +233,13 @@ namespace SteamKit2.Unified.Internal
 
     }
 
+    public interface IShader
+    {
+        CShader_RegisterShader_Response RegisterShader(CShader_RegisterShader_Request request);
+        CShader_SendShader_Response SendShader(CShader_SendShader_Request request);
+        CShader_GetBucketManifest_Response GetBucketManifest(CShader_GetBucketManifest_Request request);
+    }
+
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

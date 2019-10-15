@@ -3331,6 +3331,39 @@ namespace SteamKit2.Unified.Internal
         k_PFFSS_TentativeApproval = 5,
     }
 
+    public interface IPublishedFile
+    {
+        CPublishedFile_Subscribe_Response Subscribe(CPublishedFile_Subscribe_Request request);
+        CPublishedFile_Unsubscribe_Response Unsubscribe(CPublishedFile_Unsubscribe_Request request);
+        CPublishedFile_CanSubscribe_Response CanSubscribe(CPublishedFile_CanSubscribe_Request request);
+        CPublishedFile_Publish_Response Publish(CPublishedFile_Publish_Request request);
+        CPublishedFile_GetDetails_Response GetDetails(CPublishedFile_GetDetails_Request request);
+        CPublishedFile_GetItemInfo_Response GetItemInfo(CPublishedFile_GetItemInfo_Request request);
+        CPublishedFile_GetUserFiles_Response GetUserFiles(CPublishedFile_GetUserFiles_Request request);
+        CPublishedFile_AreFilesInSubscriptionList_Response AreFilesInSubscriptionList(CPublishedFile_AreFilesInSubscriptionList_Request request);
+        CPublishedFile_Update_Response Update(CPublishedFile_Update_Request request);
+        CPublishedFile_GetChangeHistoryEntry_Response GetChangeHistoryEntry(CPublishedFile_GetChangeHistoryEntry_Request request);
+        CPublishedFile_GetChangeHistory_Response GetChangeHistory(CPublishedFile_GetChangeHistory_Request request);
+        CPublishedFile_RefreshVotingQueue_Response RefreshVotingQueue(CPublishedFile_RefreshVotingQueue_Request request);
+        CPublishedFile_QueryFiles_Response QueryFiles(CPublishedFile_QueryFiles_Request request);
+        CPublishedFile_AddAppRelationship_Response AddAppRelationship(CPublishedFile_AddAppRelationship_Request request);
+        CPublishedFile_RemoveAppRelationship_Response RemoveAppRelationship(CPublishedFile_RemoveAppRelationship_Request request);
+        CPublishedFile_GetAppRelationships_Response GetAppRelationships(CPublishedFile_GetAppRelationships_Request request);
+        CPublishedFile_StartPlaytimeTracking_Response StartPlaytimeTracking(CPublishedFile_StartPlaytimeTracking_Request request);
+        CPublishedFile_StopPlaytimeTracking_Response StopPlaytimeTracking(CPublishedFile_StopPlaytimeTracking_Request request);
+        CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response StopPlaytimeTrackingForAllAppItems(CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request request);
+        CPublishedFile_SetPlaytimeForControllerConfigs_Response SetPlaytimeForControllerConfigs(CPublishedFile_SetPlaytimeForControllerConfigs_Request request);
+        CPublishedFile_AddChild_Response AddChild(CPublishedFile_AddChild_Request request);
+        CPublishedFile_RemoveChild_Response RemoveChild(CPublishedFile_RemoveChild_Request request);
+    }
+
+    public interface IPublishedFileClient
+    {
+        NoResponse NotifyFileSubscribed(CPublishedFile_FileSubscribed_Notification request);
+        NoResponse NotifyFileUnsubscribed(CPublishedFile_FileUnsubscribed_Notification request);
+        NoResponse NotifyFileDeleted(CPublishedFile_FileDeleted_Client_Notification request);
+    }
+
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

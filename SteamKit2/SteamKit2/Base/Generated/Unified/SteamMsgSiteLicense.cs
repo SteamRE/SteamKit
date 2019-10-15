@@ -522,6 +522,22 @@ namespace SteamKit2.Unified.Internal
 
     }
 
+    public interface ISiteManagerClient
+    {
+        CSiteManagerClient_IncomingClient_Response IncomingClient(CSiteManagerClient_IncomingClient_Request request);
+        NoResponse ClientSeatCheckoutNotification(CSiteLicense_ClientSeatCheckout_Notification request);
+        NoResponse TrackedPaymentsNotification(CSiteManagerClient_TrackedPayments_Notification request);
+    }
+
+    public interface ISiteLicense
+    {
+        CSiteLicense_InitiateAssociation_Response InitiateAssociation(CSiteLicense_InitiateAssociation_Request request);
+        CSiteLicense_LCSAuthenticate_Response LCSAuthenticate(CSiteLicense_LCSAuthenticate_Request request);
+        CSiteLicense_LCSAssociateUser_Response LCSAssociateUser(CSiteLicense_LCSAssociateUser_Request request);
+        CSiteLicense_ClientSeatCheckout_Response ClientSeatCheckout(CSiteLicense_ClientSeatCheckout_Request request);
+        CSiteLicense_ClientGetAvailableSeats_Response ClientGetAvailableSeats(CSiteLicense_ClientGetAvailableSeats_Request request);
+    }
+
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

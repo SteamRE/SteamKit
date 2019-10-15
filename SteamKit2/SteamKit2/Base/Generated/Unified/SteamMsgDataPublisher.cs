@@ -178,6 +178,16 @@ namespace SteamKit2.Unified.Internal
 
     }
 
+    public interface IDataPublisher
+    {
+        NoResponse ClientContentCorruptionReport(CDataPublisher_ClientContentCorruptionReport_Notification request);
+    }
+
+    public interface IValveHWSurvey
+    {
+        CValveHWSurvey_GetSurveySchedule_Response GetSurveySchedule(CValveHWSurvey_GetSurveySchedule_Request request);
+    }
+
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

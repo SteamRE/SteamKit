@@ -819,6 +819,21 @@ namespace SteamKit2.Unified.Internal
 
     }
 
+    public interface IDeviceAuth
+    {
+        CDeviceAuth_GetOwnAuthorizedDevices_Response GetOwnAuthorizedDevices(CDeviceAuth_GetOwnAuthorizedDevices_Request request);
+        CDeviceAuth_AcceptAuthorizationRequest_Response AcceptAuthorizationRequest(CDeviceAuth_AcceptAuthorizationRequest_Request request);
+        CDeviceAuth_AuthorizeRemoteDevice_Response AuthorizeRemoteDevice(CDeviceAuth_AuthorizeRemoteDevice_Request request);
+        CDeviceAuth_DeauthorizeRemoteDevice_Response DeauthorizeRemoteDevice(CDeviceAuth_DeauthorizeRemoteDevice_Request request);
+        CDeviceAuth_GetUsedAuthorizedDevices_Response GetUsedAuthorizedDevices(CDeviceAuth_GetUsedAuthorizedDevices_Request request);
+        CDeviceAuth_GetAuthorizedBorrowers_Response GetAuthorizedBorrowers(CDeviceAuth_GetAuthorizedBorrowers_Request request);
+        CDeviceAuth_AddAuthorizedBorrowers_Response AddAuthorizedBorrowers(CDeviceAuth_AddAuthorizedBorrowers_Request request);
+        CDeviceAuth_RemoveAuthorizedBorrowers_Response RemoveAuthorizedBorrowers(CDeviceAuth_RemoveAuthorizedBorrowers_Request request);
+        CDeviceAuth_GetAuthorizedAsBorrower_Response GetAuthorizedAsBorrower(CDeviceAuth_GetAuthorizedAsBorrower_Request request);
+        CDeviceAuth_GetExcludedGamesInLibrary_Response GetExcludedGamesInLibrary(CDeviceAuth_GetExcludedGamesInLibrary_Request request);
+        CDeviceAuth_GetBorrowerPlayHistory_Response GetBorrowerPlayHistory(CDeviceAuth_GetBorrowerPlayHistory_Request request);
+    }
+
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

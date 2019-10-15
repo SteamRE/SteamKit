@@ -180,6 +180,11 @@ namespace SteamKit2.Unified.Internal
         k_EKeyEscrowUsageStreamingDevice = 0,
     }
 
+    public interface ISecrets
+    {
+        CKeyEscrow_Response KeyEscrow(CKeyEscrow_Request request);
+    }
+
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

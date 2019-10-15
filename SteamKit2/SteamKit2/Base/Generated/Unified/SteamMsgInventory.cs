@@ -842,6 +842,30 @@ namespace SteamKit2.Unified.Internal
 
     }
 
+    public interface IInventory
+    {
+        CInventory_Response GetInventory(CInventory_GetInventory_Request request);
+        CInventory_Response ExchangeItem(CInventory_ExchangeItem_Request request);
+        CInventory_GetEligiblePromoItemDefIDs_Response GetEligiblePromoItemDefIDs(CInventory_GetEligiblePromoItemDefIDs_Request request);
+        CInventory_Response AddPromoItem(CInventory_AddItem_Request request);
+        CInventory_Response SafeModifyItems(CInventory_ModifyItems_Request request);
+        CInventory_Response ConsumePlaytime(CInventory_ConsumePlaytime_Request request);
+        CInventory_Response ConsumeItem(CInventory_ConsumeItem_Request request);
+        CInventory_Response DevGenerateItem(CInventory_AddItem_Request request);
+        CInventory_Response DevSetNextDrop(CInventory_DevSetNextDrop_Request request);
+        CInventory_Response SplitItemStack(CInventory_SplitItemStack_Request request);
+        CInventory_Response CombineItemStacks(CInventory_CombineItemStacks_Request request);
+        CInventory_GetItemDefMeta_Response GetItemDefMeta(CInventory_GetItemDefMeta_Request request);
+        CInventory_GetUserPurchaseInfo_Response GetUserPurchaseInfo(CInventory_GetUserPurchaseInfo_Request request);
+        CInventory_PurchaseInit_Response PurchaseInit(CInventory_PurchaseInit_Request request);
+        CInventory_Response PurchaseFinalize(CInventory_PurchaseFinalize_Request request);
+    }
+
+    public interface IInventoryClient
+    {
+        NoResponse NotifyNewItems(CInventoryClient_NewItems_Notification request);
+    }
+
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

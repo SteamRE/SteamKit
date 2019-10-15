@@ -564,6 +564,18 @@ namespace SteamKit2.Unified.Internal
         k_EGameSearchResult_SearchCanceled = 6,
     }
 
+    public interface IQueuedMatchmaking
+    {
+        CQueuedMatchmaking_SearchForGame_Response SearchForGame(CQueuedMatchmaking_SearchForGame_Request request);
+    }
+
+    public interface IQueuedMatchmakingGameHost
+    {
+        CQueuedMatchmakingGameHost_SearchForPlayers_Response SearchForPlayers(CQueuedMatchmakingGameHost_SearchForPlayers_Request request);
+        CQueuedMatchmakingGameHost_SubmitPlayerResult_Response SubmitPlayerResult(CQueuedMatchmakingGameHost_SubmitPlayerResult_Request request);
+        CQueuedMatchmakingGameHost_EndGame_Response EndGame(CQueuedMatchmakingGameHost_EndGame_Request request);
+    }
+
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

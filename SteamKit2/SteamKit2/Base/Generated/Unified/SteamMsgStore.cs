@@ -332,6 +332,12 @@ namespace SteamKit2.Unified.Internal
         k_EUserReviewScorePreference_ExcludeBombs = 2,
     }
 
+    public interface IStore
+    {
+        CStore_GetLocalizedNameForTags_Response GetLocalizedNameForTags(CStore_GetLocalizedNameForTags_Request request);
+        CStore_GetStorePreferences_Response GetStorePreferences(CStore_GetStorePreferences_Request request);
+    }
+
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

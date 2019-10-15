@@ -1315,6 +1315,38 @@ namespace SteamKit2.Unified.Internal
         k_ENotificationSettingNever = 2,
     }
 
+    public interface IPlayer
+    {
+        CPlayer_GetMutualFriendsForIncomingInvites_Response GetMutualFriendsForIncomingInvites(CPlayer_GetMutualFriendsForIncomingInvites_Request request);
+        CPlayer_GetFriendsGameplayInfo_Response GetFriendsGameplayInfo(CPlayer_GetFriendsGameplayInfo_Request request);
+        CPlayer_GetGameBadgeLevels_Response GetGameBadgeLevels(CPlayer_GetGameBadgeLevels_Request request);
+        CPlayer_GetEmoticonList_Response GetEmoticonList(CPlayer_GetEmoticonList_Request request);
+        CPlayer_GetLastPlayedTimes_Response ClientGetLastPlayedTimes(CPlayer_GetLastPlayedTimes_Request request);
+        CPlayer_AcceptSSA_Response AcceptSSA(CPlayer_AcceptSSA_Request request);
+        CPlayer_GetNicknameList_Response GetNicknameList(CPlayer_GetNicknameList_Request request);
+        CPlayer_GetPerFriendPreferences_Response GetPerFriendPreferences(CPlayer_GetPerFriendPreferences_Request request);
+        CPlayer_SetPerFriendPreferences_Response SetPerFriendPreferences(CPlayer_SetPerFriendPreferences_Request request);
+        CPlayer_AddFriend_Response AddFriend(CPlayer_AddFriend_Request request);
+        CPlayer_RemoveFriend_Response RemoveFriend(CPlayer_RemoveFriend_Request request);
+        CPlayer_IgnoreFriend_Response IgnoreFriend(CPlayer_IgnoreFriend_Request request);
+        CPlayer_GetCommunityPreferences_Response GetCommunityPreferences(CPlayer_GetCommunityPreferences_Request request);
+        CPlayer_SetCommunityPreferences_Response SetCommunityPreferences(CPlayer_SetCommunityPreferences_Request request);
+        CPlayer_GetNewSteamAnnouncementState_Response GetNewSteamAnnouncementState(CPlayer_GetNewSteamAnnouncementState_Request request);
+        CPlayer_UpdateSteamAnnouncementLastRead_Response UpdateSteamAnnouncementLastRead(CPlayer_UpdateSteamAnnouncementLastRead_Request request);
+        CPlayer_GetPrivacySettings_Response GetPrivacySettings(CPlayer_GetPrivacySettings_Request request);
+        CPlayer_GetDurationControl_Response GetDurationControl(CPlayer_GetDurationControl_Request request);
+    }
+
+    public interface IPlayerClient
+    {
+        NoResponse NotifyLastPlayedTimes(CPlayer_LastPlayedTimes_Notification request);
+        NoResponse NotifyFriendNicknameChanged(CPlayer_FriendNicknameChanged_Notification request);
+        NoResponse NotifyNewSteamAnnouncementState(CPlayer_NewSteamAnnouncementState_Notification request);
+        NoResponse NotifyCommunityPreferencesChanged(CPlayer_CommunityPreferencesChanged_Notification request);
+        NoResponse NotifyPerFriendPreferencesChanged(CPlayer_PerFriendPreferencesChanged_Notification request);
+        NoResponse NotifyPrivacyPrivacySettingsChanged(CPlayer_PrivacySettingsChanged_Notification request);
+    }
+
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

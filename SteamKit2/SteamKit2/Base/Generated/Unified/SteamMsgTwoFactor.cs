@@ -695,6 +695,18 @@ namespace SteamKit2.Unified.Internal
 
     }
 
+    public interface ITwoFactor
+    {
+        CTwoFactor_Status_Response QueryStatus(CTwoFactor_Status_Request request);
+        CTwoFactor_AddAuthenticator_Response AddAuthenticator(CTwoFactor_AddAuthenticator_Request request);
+        CTwoFactor_SendEmail_Response SendEmail(CTwoFactor_SendEmail_Request request);
+        CTwoFactor_FinalizeAddAuthenticator_Response FinalizeAddAuthenticator(CTwoFactor_FinalizeAddAuthenticator_Request request);
+        CTwoFactor_RemoveAuthenticator_Response RemoveAuthenticator(CTwoFactor_RemoveAuthenticator_Request request);
+        CTwoFactor_CreateEmergencyCodes_Response CreateEmergencyCodes(CTwoFactor_CreateEmergencyCodes_Request request);
+        CTwoFactor_DestroyEmergencyCodes_Response DestroyEmergencyCodes(CTwoFactor_DestroyEmergencyCodes_Request request);
+        CTwoFactor_ValidateToken_Response ValidateToken(CTwoFactor_ValidateToken_Request request);
+    }
+
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

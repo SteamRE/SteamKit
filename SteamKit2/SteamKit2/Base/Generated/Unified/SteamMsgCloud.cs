@@ -1383,6 +1383,25 @@ namespace SteamKit2.Unified.Internal
 
     }
 
+    public interface ICloud
+    {
+        CCloud_GetUploadServerInfo_Response GetUploadServerInfo(CCloud_GetUploadServerInfo_Request request);
+        CCloud_BeginHTTPUpload_Response BeginHTTPUpload(CCloud_BeginHTTPUpload_Request request);
+        CCloud_CommitHTTPUpload_Response CommitHTTPUpload(CCloud_CommitHTTPUpload_Request request);
+        CCloud_GetFileDetails_Response GetFileDetails(CCloud_GetFileDetails_Request request);
+        CCloud_EnumerateUserFiles_Response EnumerateUserFiles(CCloud_EnumerateUserFiles_Request request);
+        CCloud_Delete_Response Delete(CCloud_Delete_Request request);
+        CCloud_GetClientEncryptionKey_Response GetClientEncryptionKey(CCloud_GetClientEncryptionKey_Request request);
+        NoResponse CDNReport(CCloud_CDNReport_Notification request);
+        NoResponse ExternalStorageTransferReport(CCloud_ExternalStorageTransferReport_Notification request);
+        CCloud_ClientBeginFileUpload_Response ClientBeginFileUpload(CCloud_ClientBeginFileUpload_Request request);
+        CCloud_ClientCommitFileUpload_Response ClientCommitFileUpload(CCloud_ClientCommitFileUpload_Request request);
+        CCloud_ClientFileDownload_Response ClientFileDownload(CCloud_ClientFileDownload_Request request);
+        CCloud_ClientDeleteFile_Response ClientDeleteFile(CCloud_ClientDeleteFile_Request request);
+        NoResponse ClientConflictResolution(CCloud_ClientConflictResolution_Notification request);
+        CCloud_EnumerateUserApps_Response EnumerateUserApps(CCloud_EnumerateUserApps_Request request);
+    }
+
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
