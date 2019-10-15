@@ -48,14 +48,15 @@ namespace SteamKit2.GC.Dota.Internal
         private string __pbn__country_code;
 
         [global::ProtoBuf.ProtoMember(4)]
-        public uint fantasy_role
+        [global::System.ComponentModel.DefaultValue(Fantasy_Roles.FANTASY_ROLE_UNDEFINED)]
+        public Fantasy_Roles fantasy_role
         {
-            get { return __pbn__fantasy_role.GetValueOrDefault(); }
+            get { return __pbn__fantasy_role ?? Fantasy_Roles.FANTASY_ROLE_UNDEFINED; }
             set { __pbn__fantasy_role = value; }
         }
         public bool ShouldSerializefantasy_role() => __pbn__fantasy_role != null;
         public void Resetfantasy_role() => __pbn__fantasy_role = null;
-        private uint? __pbn__fantasy_role;
+        private Fantasy_Roles? __pbn__fantasy_role;
 
         [global::ProtoBuf.ProtoMember(5)]
         public uint team_id
@@ -154,6 +155,20 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(14)]
         public global::System.Collections.Generic.List<Results> results { get; } = new global::System.Collections.Generic.List<Results>();
 
+        [global::ProtoBuf.ProtoMember(15)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string team_url_logo
+        {
+            get { return __pbn__team_url_logo ?? ""; }
+            set { __pbn__team_url_logo = value; }
+        }
+        public bool ShouldSerializeteam_url_logo() => __pbn__team_url_logo != null;
+        public void Resetteam_url_logo() => __pbn__team_url_logo = null;
+        private string __pbn__team_url_logo;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public global::System.Collections.Generic.List<AuditEntry> audit_entries { get; } = new global::System.Collections.Generic.List<AuditEntry>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Results : global::ProtoBuf.IExtensible
         {
@@ -193,6 +208,78 @@ namespace SteamKit2.GC.Dota.Internal
 
         }
 
+        [global::ProtoBuf.ProtoContract()]
+        public partial class AuditEntry : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint start_timestamp
+            {
+                get { return __pbn__start_timestamp.GetValueOrDefault(); }
+                set { __pbn__start_timestamp = value; }
+            }
+            public bool ShouldSerializestart_timestamp() => __pbn__start_timestamp != null;
+            public void Resetstart_timestamp() => __pbn__start_timestamp = null;
+            private uint? __pbn__start_timestamp;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint end_timestamp
+            {
+                get { return __pbn__end_timestamp.GetValueOrDefault(); }
+                set { __pbn__end_timestamp = value; }
+            }
+            public bool ShouldSerializeend_timestamp() => __pbn__end_timestamp != null;
+            public void Resetend_timestamp() => __pbn__end_timestamp = null;
+            private uint? __pbn__end_timestamp;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint team_id
+            {
+                get { return __pbn__team_id.GetValueOrDefault(); }
+                set { __pbn__team_id = value; }
+            }
+            public bool ShouldSerializeteam_id() => __pbn__team_id != null;
+            public void Resetteam_id() => __pbn__team_id = null;
+            private uint? __pbn__team_id;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string team_name
+            {
+                get { return __pbn__team_name ?? ""; }
+                set { __pbn__team_name = value; }
+            }
+            public bool ShouldSerializeteam_name() => __pbn__team_name != null;
+            public void Resetteam_name() => __pbn__team_name = null;
+            private string __pbn__team_name;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string team_tag
+            {
+                get { return __pbn__team_tag ?? ""; }
+                set { __pbn__team_tag = value; }
+            }
+            public bool ShouldSerializeteam_tag() => __pbn__team_tag != null;
+            public void Resetteam_tag() => __pbn__team_tag = null;
+            private string __pbn__team_tag;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string team_url_logo
+            {
+                get { return __pbn__team_url_logo ?? ""; }
+                set { __pbn__team_url_logo = value; }
+            }
+            public bool ShouldSerializeteam_url_logo() => __pbn__team_url_logo != null;
+            public void Resetteam_url_logo() => __pbn__team_url_logo = null;
+            private string __pbn__team_url_logo;
+
+        }
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -204,6 +291,105 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(1)]
         public global::System.Collections.Generic.List<CMsgDOTAPlayerInfo> player_infos { get; } = new global::System.Collections.Generic.List<CMsgDOTAPlayerInfo>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgDOTADPCProfileInfo : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgDOTAPlayerInfo player_info { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public PredictionInfo prediction_info { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public FantasyInfo fantasy_info { get; set; }
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<uint> disabled_notifications { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class PredictionInfo : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint percent
+            {
+                get { return __pbn__percent.GetValueOrDefault(); }
+                set { __pbn__percent = value; }
+            }
+            public bool ShouldSerializepercent() => __pbn__percent != null;
+            public void Resetpercent() => __pbn__percent = null;
+            private uint? __pbn__percent;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public int shard_winnings
+            {
+                get { return __pbn__shard_winnings.GetValueOrDefault(); }
+                set { __pbn__shard_winnings = value; }
+            }
+            public bool ShouldSerializeshard_winnings() => __pbn__shard_winnings != null;
+            public void Resetshard_winnings() => __pbn__shard_winnings = null;
+            private int? __pbn__shard_winnings;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class FantasyInfo : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint top_90_finishes
+            {
+                get { return __pbn__top_90_finishes.GetValueOrDefault(); }
+                set { __pbn__top_90_finishes = value; }
+            }
+            public bool ShouldSerializetop_90_finishes() => __pbn__top_90_finishes != null;
+            public void Resettop_90_finishes() => __pbn__top_90_finishes = null;
+            private uint? __pbn__top_90_finishes;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint top_75_finishes
+            {
+                get { return __pbn__top_75_finishes.GetValueOrDefault(); }
+                set { __pbn__top_75_finishes = value; }
+            }
+            public bool ShouldSerializetop_75_finishes() => __pbn__top_75_finishes != null;
+            public void Resettop_75_finishes() => __pbn__top_75_finishes = null;
+            private uint? __pbn__top_75_finishes;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint top_50_finishes
+            {
+                get { return __pbn__top_50_finishes.GetValueOrDefault(); }
+                set { __pbn__top_50_finishes = value; }
+            }
+            public bool ShouldSerializetop_50_finishes() => __pbn__top_50_finishes != null;
+            public void Resettop_50_finishes() => __pbn__top_50_finishes = null;
+            private uint? __pbn__top_50_finishes;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public uint shard_winnings
+            {
+                get { return __pbn__shard_winnings.GetValueOrDefault(); }
+                set { __pbn__shard_winnings = value; }
+            }
+            public bool ShouldSerializeshard_winnings() => __pbn__shard_winnings != null;
+            public void Resetshard_winnings() => __pbn__shard_winnings = null;
+            private uint? __pbn__shard_winnings;
+
+        }
 
     }
 
@@ -3991,6 +4177,112 @@ namespace SteamKit2.GC.Dota.Internal
             ERROR_FAILED_CARD_INFO = 6,
             ERROR_ACCOUNT_DUPLICATE = 7,
             ERROR_LOCKED_TIMESTAMP = 8,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgDOTAFantasyDPCLeagueStatus : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<LeagueInfo> league_infos { get; } = new global::System.Collections.Generic.List<LeagueInfo>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class LeagueInfo : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint league_id
+            {
+                get { return __pbn__league_id.GetValueOrDefault(); }
+                set { __pbn__league_id = value; }
+            }
+            public bool ShouldSerializeleague_id() => __pbn__league_id != null;
+            public void Resetleague_id() => __pbn__league_id = null;
+            private uint? __pbn__league_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string league_name
+            {
+                get { return __pbn__league_name ?? ""; }
+                set { __pbn__league_name = value; }
+            }
+            public bool ShouldSerializeleague_name() => __pbn__league_name != null;
+            public void Resetleague_name() => __pbn__league_name = null;
+            private string __pbn__league_name;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint start_timestamp
+            {
+                get { return __pbn__start_timestamp.GetValueOrDefault(); }
+                set { __pbn__start_timestamp = value; }
+            }
+            public bool ShouldSerializestart_timestamp() => __pbn__start_timestamp != null;
+            public void Resetstart_timestamp() => __pbn__start_timestamp = null;
+            private uint? __pbn__start_timestamp;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public uint end_timestamp
+            {
+                get { return __pbn__end_timestamp.GetValueOrDefault(); }
+                set { __pbn__end_timestamp = value; }
+            }
+            public bool ShouldSerializeend_timestamp() => __pbn__end_timestamp != null;
+            public void Resetend_timestamp() => __pbn__end_timestamp = null;
+            private uint? __pbn__end_timestamp;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public global::System.Collections.Generic.List<uint> day_timestamps { get; } = new global::System.Collections.Generic.List<uint>();
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public bool is_qualifier
+            {
+                get { return __pbn__is_qualifier.GetValueOrDefault(); }
+                set { __pbn__is_qualifier = value; }
+            }
+            public bool ShouldSerializeis_qualifier() => __pbn__is_qualifier != null;
+            public void Resetis_qualifier() => __pbn__is_qualifier = null;
+            private bool? __pbn__is_qualifier;
+
+            [global::ProtoBuf.ProtoMember(7)]
+            [global::System.ComponentModel.DefaultValue(ELeagueFantasyPhase.LEAGUE_FANTASY_PHASE_UNSET)]
+            public ELeagueFantasyPhase phase
+            {
+                get { return __pbn__phase ?? ELeagueFantasyPhase.LEAGUE_FANTASY_PHASE_UNSET; }
+                set { __pbn__phase = value; }
+            }
+            public bool ShouldSerializephase() => __pbn__phase != null;
+            public void Resetphase() => __pbn__phase = null;
+            private ELeagueFantasyPhase? __pbn__phase;
+
+            [global::ProtoBuf.ProtoMember(8)]
+            [global::System.ComponentModel.DefaultValue(CMsgDOTAFantasyDPCLeagueStatus.ERosterStatus.UNSET)]
+            public CMsgDOTAFantasyDPCLeagueStatus.ERosterStatus status
+            {
+                get { return __pbn__status ?? CMsgDOTAFantasyDPCLeagueStatus.ERosterStatus.UNSET; }
+                set { __pbn__status = value; }
+            }
+            public bool ShouldSerializestatus() => __pbn__status != null;
+            public void Resetstatus() => __pbn__status = null;
+            private CMsgDOTAFantasyDPCLeagueStatus.ERosterStatus? __pbn__status;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum ERosterStatus
+        {
+            UNSET = 0,
+            PARTIAL = 1,
+            FULL = 2,
+            CONCLUDED = 3,
         }
 
     }

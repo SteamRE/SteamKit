@@ -159,13 +159,6 @@ namespace SteamKit2.Unified.Internal
 
     }
 
-    public interface ICommunityLinkFilter
-    {
-        CCommunity_GetLinkFilterHashPrefixes_Response GetLinkFilterHashPrefixes(CCommunity_GetLinkFilterHashPrefixes_Request request);
-        CCommunity_GetLinkFilterHashes_Response GetLinkFilterHashes(CCommunity_GetLinkFilterHashes_Request request);
-        CCommunity_GetLinkFilterListVersion_Response GetLinkFilterListVersion(CCommunity_GetLinkFilterListVersion_Request request);
-    }
-
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

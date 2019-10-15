@@ -537,21 +537,6 @@ namespace SteamKit2.Unified.Internal
 
     }
 
-    public interface IPartnerApps
-    {
-        CPartnerApps_RequestUploadToken_Response RequestKVSignUploadToken(CPartnerApps_RequestUploadToken_Request request);
-        CPartnerApps_RequestUploadToken_Response RequestDRMUploadToken(CPartnerApps_RequestUploadToken_Request request);
-        CPartnerApps_RequestUploadToken_Response RequestCEGUploadToken(CPartnerApps_RequestUploadToken_Request request);
-        CPartnerApps_RequestUploadToken_Response RequestDepotUploadToken(CPartnerApps_RequestUploadToken_Request request);
-        CPartnerApps_FinishUploadKVSign_Response FinishUploadKVSign(CPartnerApps_FinishUpload_Request request);
-        CPartnerApps_FinishUploadLegacyDRM_Response FinishUploadDRMUpload(CPartnerApps_FinishUploadLegacyDRM_Request request);
-        CPartnerApps_FinishUpload_Response FinishUploadCEGUpload(CPartnerApps_FinishUpload_Request request);
-        CPartnerApps_FinishUploadDepot_Response FinishUploadDepotUpload(CPartnerApps_FinishUploadDepot_Request request);
-        CPartnerApps_GetDepotBuildResult_Response GetDepotBuildResult(CPartnerApps_GetDepotBuildResult_Request request);
-        CPartnerApps_FindDRMUploads_Response FindDRMUploads(CPartnerApps_FindDRMUploads_Request request);
-        CPartnerApps_Download_Response Download(CPartnerApps_Download_Request request);
-    }
-
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

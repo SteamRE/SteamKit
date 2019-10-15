@@ -221,13 +221,16 @@ namespace SteamKit2.Unified.Internal
         public void Resetdepotsize() => __pbn__depotsize = null;
         private uint? __pbn__depotsize;
 
-    }
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong bucketid
+        {
+            get { return __pbn__bucketid.GetValueOrDefault(); }
+            set { __pbn__bucketid = value; }
+        }
+        public bool ShouldSerializebucketid() => __pbn__bucketid != null;
+        public void Resetbucketid() => __pbn__bucketid = null;
+        private ulong? __pbn__bucketid;
 
-    public interface IShader
-    {
-        CShader_RegisterShader_Response RegisterShader(CShader_RegisterShader_Request request);
-        CShader_SendShader_Response SendShader(CShader_SendShader_Request request);
-        CShader_GetBucketManifest_Response GetBucketManifest(CShader_GetBucketManifest_Request request);
     }
 
 }

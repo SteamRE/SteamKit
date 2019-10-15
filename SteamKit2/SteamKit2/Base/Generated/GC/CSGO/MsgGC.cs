@@ -750,6 +750,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetmap() => __pbn__map = null;
         private uint? __pbn__map;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public ulong matchid
+        {
+            get { return __pbn__matchid.GetValueOrDefault(); }
+            set { __pbn__matchid = value; }
+        }
+        public bool ShouldSerializematchid() => __pbn__matchid != null;
+        public void Resetmatchid() => __pbn__matchid = null;
+        private ulong? __pbn__matchid;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1000,6 +1010,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resettv_relay_steamid() => __pbn__tv_relay_steamid = null;
         private ulong? __pbn__tv_relay_steamid;
 
+        [global::ProtoBuf.ProtoMember(21)]
+        public uint flags
+        {
+            get { return __pbn__flags.GetValueOrDefault(); }
+            set { __pbn__flags = value; }
+        }
+        public bool ShouldSerializeflags() => __pbn__flags != null;
+        public void Resetflags() => __pbn__flags = null;
+        private uint? __pbn__flags;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1068,6 +1088,45 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializetoken() => __pbn__token != null;
         public void Resettoken() => __pbn__token = null;
         private uint? __pbn__token;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgCsgoSteamUserStatChange : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int ecsgosteamuserstat
+        {
+            get { return __pbn__ecsgosteamuserstat.GetValueOrDefault(); }
+            set { __pbn__ecsgosteamuserstat = value; }
+        }
+        public bool ShouldSerializeecsgosteamuserstat() => __pbn__ecsgosteamuserstat != null;
+        public void Resetecsgosteamuserstat() => __pbn__ecsgosteamuserstat = null;
+        private int? __pbn__ecsgosteamuserstat;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public int delta
+        {
+            get { return __pbn__delta.GetValueOrDefault(); }
+            set { __pbn__delta = value; }
+        }
+        public bool ShouldSerializedelta() => __pbn__delta != null;
+        public void Resetdelta() => __pbn__delta = null;
+        private int? __pbn__delta;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool absolute
+        {
+            get { return __pbn__absolute.GetValueOrDefault(); }
+            set { __pbn__absolute = value; }
+        }
+        public bool ShouldSerializeabsolute() => __pbn__absolute != null;
+        public void Resetabsolute() => __pbn__absolute = null;
+        private bool? __pbn__absolute;
 
     }
 
@@ -1280,6 +1339,9 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializeoperation_points_eligible() => __pbn__operation_points_eligible != null;
         public void Resetoperation_points_eligible() => __pbn__operation_points_eligible = null;
         private bool? __pbn__operation_points_eligible;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public global::System.Collections.Generic.List<CMsgCsgoSteamUserStatChange> userstatchanges { get; } = new global::System.Collections.Generic.List<CMsgCsgoSteamUserStatChange>();
 
         [global::ProtoBuf.ProtoContract()]
         public partial class QuestItemData : global::ProtoBuf.IExtensible
@@ -1930,6 +1992,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetserver_version() => __pbn__server_version = null;
         private uint? __pbn__server_version;
 
+        [global::ProtoBuf.ProtoMember(18)]
+        public uint flags
+        {
+            get { return __pbn__flags.GetValueOrDefault(); }
+            set { __pbn__flags = value; }
+        }
+        public bool ShouldSerializeflags() => __pbn__flags != null;
+        public void Resetflags() => __pbn__flags = null;
+        private uint? __pbn__flags;
+
         [global::ProtoBuf.ProtoMember(5)]
         public global::System.Collections.Generic.List<PlayerRankingInfo> rankings { get; } = new global::System.Collections.Generic.List<PlayerRankingInfo>();
 
@@ -2000,6 +2072,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializertime32_event_start() => __pbn__rtime32_event_start != null;
         public void Resetrtime32_event_start() => __pbn__rtime32_event_start = null;
         private uint? __pbn__rtime32_event_start;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public uint tv_control
+        {
+            get { return __pbn__tv_control.GetValueOrDefault(); }
+            set { __pbn__tv_control = value; }
+        }
+        public bool ShouldSerializetv_control() => __pbn__tv_control != null;
+        public void Resettv_control() => __pbn__tv_control = null;
+        private uint? __pbn__tv_control;
 
     }
 
@@ -2115,14 +2197,24 @@ namespace SteamKit2.GC.CSGO.Internal
         private string __pbn__tournament_tag;
 
         [global::ProtoBuf.ProtoMember(14)]
-        public uint steamdatagram_port
+        public uint legacy_steamdatagram_port
         {
-            get { return __pbn__steamdatagram_port.GetValueOrDefault(); }
-            set { __pbn__steamdatagram_port = value; }
+            get { return __pbn__legacy_steamdatagram_port.GetValueOrDefault(); }
+            set { __pbn__legacy_steamdatagram_port = value; }
         }
-        public bool ShouldSerializesteamdatagram_port() => __pbn__steamdatagram_port != null;
-        public void Resetsteamdatagram_port() => __pbn__steamdatagram_port = null;
-        private uint? __pbn__steamdatagram_port;
+        public bool ShouldSerializelegacy_steamdatagram_port() => __pbn__legacy_steamdatagram_port != null;
+        public void Resetlegacy_steamdatagram_port() => __pbn__legacy_steamdatagram_port = null;
+        private uint? __pbn__legacy_steamdatagram_port;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public uint steamdatagram_routing
+        {
+            get { return __pbn__steamdatagram_routing.GetValueOrDefault(); }
+            set { __pbn__steamdatagram_routing = value; }
+        }
+        public bool ShouldSerializesteamdatagram_routing() => __pbn__steamdatagram_routing != null;
+        public void Resetsteamdatagram_routing() => __pbn__steamdatagram_routing = null;
+        private uint? __pbn__steamdatagram_routing;
 
         [global::ProtoBuf.ProtoMember(15, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint test_token
@@ -2133,6 +2225,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializetest_token() => __pbn__test_token != null;
         public void Resettest_token() => __pbn__test_token = null;
         private uint? __pbn__test_token;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public uint flags
+        {
+            get { return __pbn__flags.GetValueOrDefault(); }
+            set { __pbn__flags = value; }
+        }
+        public bool ShouldSerializeflags() => __pbn__flags != null;
+        public void Resetflags() => __pbn__flags = null;
+        private uint? __pbn__flags;
 
     }
 
@@ -2444,6 +2546,44 @@ namespace SteamKit2.GC.CSGO.Internal
         public CMsgGC_ServerQuestUpdateData match_end_quest_data { get; set; }
 
         [global::ProtoBuf.ProtoMember(9)]
+        public uint server_version
+        {
+            get { return __pbn__server_version.GetValueOrDefault(); }
+            set { __pbn__server_version = value; }
+        }
+        public bool ShouldSerializeserver_version() => __pbn__server_version != null;
+        public void Resetserver_version() => __pbn__server_version = null;
+        private uint? __pbn__server_version;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCCStrike15_v2_MatchmakingServerMatchEndPartial : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong reservationid
+        {
+            get { return __pbn__reservationid.GetValueOrDefault(); }
+            set { __pbn__reservationid = value; }
+        }
+        public bool ShouldSerializereservationid() => __pbn__reservationid != null;
+        public void Resetreservationid() => __pbn__reservationid = null;
+        private ulong? __pbn__reservationid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve reservation { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public CMsgGCCStrike15_v2_MatchmakingGC2ServerConfirm confirm { get; set; }
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public CMsgGC_ServerQuestUpdateData completed_player_quest_data { get; set; }
+
+        [global::ProtoBuf.ProtoMember(5)]
         public uint server_version
         {
             get { return __pbn__server_version.GetValueOrDefault(); }
@@ -6131,6 +6271,46 @@ namespace SteamKit2.GC.CSGO.Internal
             public void Resetgrp() => __pbn__grp = null;
             private uint? __pbn__grp;
 
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint game_type
+            {
+                get { return __pbn__game_type.GetValueOrDefault(); }
+                set { __pbn__game_type = value; }
+            }
+            public bool ShouldSerializegame_type() => __pbn__game_type != null;
+            public void Resetgame_type() => __pbn__game_type = null;
+            private uint? __pbn__game_type;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public uint apr
+            {
+                get { return __pbn__apr.GetValueOrDefault(); }
+                set { __pbn__apr = value; }
+            }
+            public bool ShouldSerializeapr() => __pbn__apr != null;
+            public void Resetapr() => __pbn__apr = null;
+            private uint? __pbn__apr;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public uint ark
+            {
+                get { return __pbn__ark.GetValueOrDefault(); }
+                set { __pbn__ark = value; }
+            }
+            public bool ShouldSerializeark() => __pbn__ark != null;
+            public void Resetark() => __pbn__ark = null;
+            private uint? __pbn__ark;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public uint loc
+            {
+                get { return __pbn__loc.GetValueOrDefault(); }
+                set { __pbn__loc = value; }
+            }
+            public bool ShouldSerializeloc() => __pbn__loc != null;
+            public void Resetloc() => __pbn__loc = null;
+            private uint? __pbn__loc;
+
         }
 
     }
@@ -6262,15 +6442,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetgameserver_steam_id() => __pbn__gameserver_steam_id = null;
         private ulong? __pbn__gameserver_steam_id;
 
-        [global::ProtoBuf.ProtoMember(4, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong gameserver_net_id
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string gameserver_sdr_routing
         {
-            get { return __pbn__gameserver_net_id.GetValueOrDefault(); }
-            set { __pbn__gameserver_net_id = value; }
+            get { return __pbn__gameserver_sdr_routing ?? ""; }
+            set { __pbn__gameserver_sdr_routing = value; }
         }
-        public bool ShouldSerializegameserver_net_id() => __pbn__gameserver_net_id != null;
-        public void Resetgameserver_net_id() => __pbn__gameserver_net_id = null;
-        private ulong? __pbn__gameserver_net_id;
+        public bool ShouldSerializegameserver_sdr_routing() => __pbn__gameserver_sdr_routing != null;
+        public void Resetgameserver_sdr_routing() => __pbn__gameserver_sdr_routing = null;
+        private string __pbn__gameserver_sdr_routing;
 
     }
 
@@ -6280,79 +6461,6 @@ namespace SteamKit2.GC.CSGO.Internal
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public uint legacy_time_expiry
-        {
-            get { return __pbn__legacy_time_expiry.GetValueOrDefault(); }
-            set { __pbn__legacy_time_expiry = value; }
-        }
-        public bool ShouldSerializelegacy_time_expiry() => __pbn__legacy_time_expiry != null;
-        public void Resetlegacy_time_expiry() => __pbn__legacy_time_expiry = null;
-        private uint? __pbn__legacy_time_expiry;
-
-        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong legacy_authorized_steam_id
-        {
-            get { return __pbn__legacy_authorized_steam_id.GetValueOrDefault(); }
-            set { __pbn__legacy_authorized_steam_id = value; }
-        }
-        public bool ShouldSerializelegacy_authorized_steam_id() => __pbn__legacy_authorized_steam_id != null;
-        public void Resetlegacy_authorized_steam_id() => __pbn__legacy_authorized_steam_id = null;
-        private ulong? __pbn__legacy_authorized_steam_id;
-
-        [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public uint legacy_authorized_public_ip
-        {
-            get { return __pbn__legacy_authorized_public_ip.GetValueOrDefault(); }
-            set { __pbn__legacy_authorized_public_ip = value; }
-        }
-        public bool ShouldSerializelegacy_authorized_public_ip() => __pbn__legacy_authorized_public_ip != null;
-        public void Resetlegacy_authorized_public_ip() => __pbn__legacy_authorized_public_ip = null;
-        private uint? __pbn__legacy_authorized_public_ip;
-
-        [global::ProtoBuf.ProtoMember(4, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong legacy_gameserver_steam_id
-        {
-            get { return __pbn__legacy_gameserver_steam_id.GetValueOrDefault(); }
-            set { __pbn__legacy_gameserver_steam_id = value; }
-        }
-        public bool ShouldSerializelegacy_gameserver_steam_id() => __pbn__legacy_gameserver_steam_id != null;
-        public void Resetlegacy_gameserver_steam_id() => __pbn__legacy_gameserver_steam_id = null;
-        private ulong? __pbn__legacy_gameserver_steam_id;
-
-        [global::ProtoBuf.ProtoMember(5, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong legacy_gameserver_net_id
-        {
-            get { return __pbn__legacy_gameserver_net_id.GetValueOrDefault(); }
-            set { __pbn__legacy_gameserver_net_id = value; }
-        }
-        public bool ShouldSerializelegacy_gameserver_net_id() => __pbn__legacy_gameserver_net_id != null;
-        public void Resetlegacy_gameserver_net_id() => __pbn__legacy_gameserver_net_id = null;
-        private ulong? __pbn__legacy_gameserver_net_id;
-
-        [global::ProtoBuf.ProtoMember(6)]
-        public byte[] legacy_signature
-        {
-            get { return __pbn__legacy_signature; }
-            set { __pbn__legacy_signature = value; }
-        }
-        public bool ShouldSerializelegacy_signature() => __pbn__legacy_signature != null;
-        public void Resetlegacy_signature() => __pbn__legacy_signature = null;
-        private byte[] __pbn__legacy_signature;
-
-        [global::ProtoBuf.ProtoMember(7)]
-        public uint legacy_app_id
-        {
-            get { return __pbn__legacy_app_id.GetValueOrDefault(); }
-            set { __pbn__legacy_app_id = value; }
-        }
-        public bool ShouldSerializelegacy_app_id() => __pbn__legacy_app_id != null;
-        public void Resetlegacy_app_id() => __pbn__legacy_app_id = null;
-        private uint? __pbn__legacy_app_id;
-
-        [global::ProtoBuf.ProtoMember(8)]
-        public global::System.Collections.Generic.List<byte[]> legacy_extra_fields { get; } = new global::System.Collections.Generic.List<byte[]>();
 
         [global::ProtoBuf.ProtoMember(16)]
         public byte[] serialized_ticket
@@ -6372,6 +6480,45 @@ namespace SteamKit2.GC.CSGO.Internal
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCCStrike15_v2_ClientRequestSouvenir : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong itemid
+        {
+            get { return __pbn__itemid.GetValueOrDefault(); }
+            set { __pbn__itemid = value; }
+        }
+        public bool ShouldSerializeitemid() => __pbn__itemid != null;
+        public void Resetitemid() => __pbn__itemid = null;
+        private ulong? __pbn__itemid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong matchid
+        {
+            get { return __pbn__matchid.GetValueOrDefault(); }
+            set { __pbn__matchid = value; }
+        }
+        public bool ShouldSerializematchid() => __pbn__matchid != null;
+        public void Resetmatchid() => __pbn__matchid = null;
+        private ulong? __pbn__matchid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public int eventid
+        {
+            get { return __pbn__eventid.GetValueOrDefault(); }
+            set { __pbn__eventid = value; }
+        }
+        public bool ShouldSerializeeventid() => __pbn__eventid != null;
+        public void Reseteventid() => __pbn__eventid = null;
+        private int? __pbn__eventid;
 
     }
 
@@ -6476,6 +6623,95 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCCStrike15_v2_SetEventFavorite : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong eventid
+        {
+            get { return __pbn__eventid.GetValueOrDefault(); }
+            set { __pbn__eventid = value; }
+        }
+        public bool ShouldSerializeeventid() => __pbn__eventid != null;
+        public void Reseteventid() => __pbn__eventid = null;
+        private ulong? __pbn__eventid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool is_favorite
+        {
+            get { return __pbn__is_favorite.GetValueOrDefault(); }
+            set { __pbn__is_favorite = value; }
+        }
+        public bool ShouldSerializeis_favorite() => __pbn__is_favorite != null;
+        public void Resetis_favorite() => __pbn__is_favorite = null;
+        private bool? __pbn__is_favorite;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCCStrike15_v2_GetEventFavorites_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool all_events
+        {
+            get { return __pbn__all_events.GetValueOrDefault(); }
+            set { __pbn__all_events = value; }
+        }
+        public bool ShouldSerializeall_events() => __pbn__all_events != null;
+        public void Resetall_events() => __pbn__all_events = null;
+        private bool? __pbn__all_events;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCCStrike15_v2_GetEventFavorites_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool all_events
+        {
+            get { return __pbn__all_events.GetValueOrDefault(); }
+            set { __pbn__all_events = value; }
+        }
+        public bool ShouldSerializeall_events() => __pbn__all_events != null;
+        public void Resetall_events() => __pbn__all_events = null;
+        private bool? __pbn__all_events;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string json_favorites
+        {
+            get { return __pbn__json_favorites ?? ""; }
+            set { __pbn__json_favorites = value; }
+        }
+        public bool ShouldSerializejson_favorites() => __pbn__json_favorites != null;
+        public void Resetjson_favorites() => __pbn__json_favorites = null;
+        private string __pbn__json_favorites;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string json_featured
+        {
+            get { return __pbn__json_featured ?? ""; }
+            set { __pbn__json_featured = value; }
+        }
+        public bool ShouldSerializejson_featured() => __pbn__json_featured != null;
+        public void Resetjson_featured() => __pbn__json_featured = null;
+        private string __pbn__json_featured;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ECsgoGCMsg
     {
         k_EMsgGCCStrike15_v2_Base = 9100,
@@ -6572,6 +6808,19 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCCStrike15_v2_ClientAccountBalance = 9196,
         k_EMsgGCCStrike15_v2_ClientPartyJoinRelay = 9197,
         k_EMsgGCCStrike15_v2_ClientPartyWarning = 9198,
+        k_EMsgGCCStrike15_v2_MatchmakingServerMatchEndPartial = 9199,
+        k_EMsgGCCStrike15_v2_SetEventFavorite = 9200,
+        k_EMsgGCCStrike15_v2_GetEventFavorites_Request = 9201,
+        k_EMsgGCCStrike15_v2_GetEventFavorites_Response = 9203,
+        k_EMsgGCCStrike15_v2_ClientRequestSouvenir = 9204,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ECsgoSteamUserStat
+    {
+        k_ECsgoSteamUserStat_XpEarnedGames = 1,
+        k_ECsgoSteamUserStat_MatchWinsCompetitive = 2,
+        k_ECsgoSteamUserStat_SurvivedDangerZone = 3,
     }
 
 }

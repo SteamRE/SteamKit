@@ -193,6 +193,35 @@ namespace SteamKit2.GC.Artifact.Internal
         private uint? __pbn__tourney_series_id;
 
         [global::ProtoBuf.ProtoContract()]
+        public partial class GauntletInfo : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint wins
+            {
+                get { return __pbn__wins.GetValueOrDefault(); }
+                set { __pbn__wins = value; }
+            }
+            public bool ShouldSerializewins() => __pbn__wins != null;
+            public void Resetwins() => __pbn__wins = null;
+            private uint? __pbn__wins;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint losses
+            {
+                get { return __pbn__losses.GetValueOrDefault(); }
+                set { __pbn__losses = value; }
+            }
+            public bool ShouldSerializelosses() => __pbn__losses != null;
+            public void Resetlosses() => __pbn__losses = null;
+            private uint? __pbn__losses;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
         public partial class Member : global::ProtoBuf.IExtensible
         {
             private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -250,6 +279,9 @@ namespace SteamKit2.GC.Artifact.Internal
             public bool ShouldSerializeis_anonymous() => __pbn__is_anonymous != null;
             public void Resetis_anonymous() => __pbn__is_anonymous = null;
             private bool? __pbn__is_anonymous;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public CSODCGLobby.GauntletInfo gauntlet_info { get; set; }
 
         }
 
@@ -342,6 +374,86 @@ namespace SteamKit2.GC.Artifact.Internal
         public bool ShouldSerializerecycling_progress() => __pbn__recycling_progress != null;
         public void Resetrecycling_progress() => __pbn__recycling_progress = null;
         private uint? __pbn__recycling_progress;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint progress_level
+        {
+            get { return __pbn__progress_level.GetValueOrDefault(); }
+            set { __pbn__progress_level = value; }
+        }
+        public bool ShouldSerializeprogress_level() => __pbn__progress_level != null;
+        public void Resetprogress_level() => __pbn__progress_level = null;
+        private uint? __pbn__progress_level;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public uint progress_xp
+        {
+            get { return __pbn__progress_xp.GetValueOrDefault(); }
+            set { __pbn__progress_xp = value; }
+        }
+        public bool ShouldSerializeprogress_xp() => __pbn__progress_xp != null;
+        public void Resetprogress_xp() => __pbn__progress_xp = null;
+        private uint? __pbn__progress_xp;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public uint constructed_mmr_level
+        {
+            get { return __pbn__constructed_mmr_level.GetValueOrDefault(); }
+            set { __pbn__constructed_mmr_level = value; }
+        }
+        public bool ShouldSerializeconstructed_mmr_level() => __pbn__constructed_mmr_level != null;
+        public void Resetconstructed_mmr_level() => __pbn__constructed_mmr_level = null;
+        private uint? __pbn__constructed_mmr_level;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public uint last_win_bounus_time
+        {
+            get { return __pbn__last_win_bounus_time.GetValueOrDefault(); }
+            set { __pbn__last_win_bounus_time = value; }
+        }
+        public bool ShouldSerializelast_win_bounus_time() => __pbn__last_win_bounus_time != null;
+        public void Resetlast_win_bounus_time() => __pbn__last_win_bounus_time = null;
+        private uint? __pbn__last_win_bounus_time;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public uint match_win_streak
+        {
+            get { return __pbn__match_win_streak.GetValueOrDefault(); }
+            set { __pbn__match_win_streak = value; }
+        }
+        public bool ShouldSerializematch_win_streak() => __pbn__match_win_streak != null;
+        public void Resetmatch_win_streak() => __pbn__match_win_streak = null;
+        private uint? __pbn__match_win_streak;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public uint bonus_period_wins
+        {
+            get { return __pbn__bonus_period_wins.GetValueOrDefault(); }
+            set { __pbn__bonus_period_wins = value; }
+        }
+        public bool ShouldSerializebonus_period_wins() => __pbn__bonus_period_wins != null;
+        public void Resetbonus_period_wins() => __pbn__bonus_period_wins = null;
+        private uint? __pbn__bonus_period_wins;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public uint player_badge
+        {
+            get { return __pbn__player_badge.GetValueOrDefault(); }
+            set { __pbn__player_badge = value; }
+        }
+        public bool ShouldSerializeplayer_badge() => __pbn__player_badge != null;
+        public void Resetplayer_badge() => __pbn__player_badge = null;
+        private uint? __pbn__player_badge;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public uint draft_mmr_level
+        {
+            get { return __pbn__draft_mmr_level.GetValueOrDefault(); }
+            set { __pbn__draft_mmr_level = value; }
+        }
+        public bool ShouldSerializedraft_mmr_level() => __pbn__draft_mmr_level != null;
+        public void Resetdraft_mmr_level() => __pbn__draft_mmr_level = null;
+        private uint? __pbn__draft_mmr_level;
 
         [global::ProtoBuf.ProtoContract()]
         public enum EFlags
@@ -467,6 +579,16 @@ namespace SteamKit2.GC.Artifact.Internal
         public bool ShouldSerializewins_mask() => __pbn__wins_mask != null;
         public void Resetwins_mask() => __pbn__wins_mask = null;
         private ulong? __pbn__wins_mask;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public bool select_random_deck
+        {
+            get { return __pbn__select_random_deck.GetValueOrDefault(); }
+            set { __pbn__select_random_deck = value; }
+        }
+        public bool ShouldSerializeselect_random_deck() => __pbn__select_random_deck != null;
+        public void Resetselect_random_deck() => __pbn__select_random_deck = null;
+        private bool? __pbn__select_random_deck;
 
     }
 
@@ -684,6 +806,16 @@ namespace SteamKit2.GC.Artifact.Internal
         public bool ShouldSerializejoined_time() => __pbn__joined_time != null;
         public void Resetjoined_time() => __pbn__joined_time = null;
         private uint? __pbn__joined_time;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint open_tourney
+        {
+            get { return __pbn__open_tourney.GetValueOrDefault(); }
+            set { __pbn__open_tourney = value; }
+        }
+        public bool ShouldSerializeopen_tourney() => __pbn__open_tourney != null;
+        public void Resetopen_tourney() => __pbn__open_tourney = null;
+        private uint? __pbn__open_tourney;
 
         [global::ProtoBuf.ProtoContract()]
         public enum EStatus
@@ -1256,6 +1388,16 @@ namespace SteamKit2.GC.Artifact.Internal
             public void Resetdeck_name() => __pbn__deck_name = null;
             private string __pbn__deck_name;
 
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint deck_id
+            {
+                get { return __pbn__deck_id.GetValueOrDefault(); }
+                set { __pbn__deck_id = value; }
+            }
+            public bool ShouldSerializedeck_id() => __pbn__deck_id != null;
+            public void Resetdeck_id() => __pbn__deck_id = null;
+            private uint? __pbn__deck_id;
+
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -1607,6 +1749,53 @@ namespace SteamKit2.GC.Artifact.Internal
         public void Resetcooldown_time() => __pbn__cooldown_time = null;
         private uint? __pbn__cooldown_time;
 
+        [global::ProtoBuf.ProtoMember(24)]
+        public uint max_wins_per_deck_trophy_id
+        {
+            get { return __pbn__max_wins_per_deck_trophy_id.GetValueOrDefault(); }
+            set { __pbn__max_wins_per_deck_trophy_id = value; }
+        }
+        public bool ShouldSerializemax_wins_per_deck_trophy_id() => __pbn__max_wins_per_deck_trophy_id != null;
+        public void Resetmax_wins_per_deck_trophy_id() => __pbn__max_wins_per_deck_trophy_id = null;
+        private uint? __pbn__max_wins_per_deck_trophy_id;
+
+        [global::ProtoBuf.ProtoMember(25)]
+        public uint max_wins_random_mode_trophy_id
+        {
+            get { return __pbn__max_wins_random_mode_trophy_id.GetValueOrDefault(); }
+            set { __pbn__max_wins_random_mode_trophy_id = value; }
+        }
+        public bool ShouldSerializemax_wins_random_mode_trophy_id() => __pbn__max_wins_random_mode_trophy_id != null;
+        public void Resetmax_wins_random_mode_trophy_id() => __pbn__max_wins_random_mode_trophy_id = null;
+        private uint? __pbn__max_wins_random_mode_trophy_id;
+
+        [global::ProtoBuf.ProtoMember(26)]
+        public uint is_ai_gauntlet
+        {
+            get { return __pbn__is_ai_gauntlet.GetValueOrDefault(); }
+            set { __pbn__is_ai_gauntlet = value; }
+        }
+        public bool ShouldSerializeis_ai_gauntlet() => __pbn__is_ai_gauntlet != null;
+        public void Resetis_ai_gauntlet() => __pbn__is_ai_gauntlet = null;
+        private uint? __pbn__is_ai_gauntlet;
+
+        [global::ProtoBuf.ProtoMember(27)]
+        public global::System.Collections.Generic.List<CMsgDeckValidator> ai_validators { get; } = new global::System.Collections.Generic.List<CMsgDeckValidator>();
+
+        [global::ProtoBuf.ProtoMember(29)]
+        public global::System.Collections.Generic.List<GauntletPointsLeaderboard> gauntlet_points_leaderboards { get; } = new global::System.Collections.Generic.List<GauntletPointsLeaderboard>();
+
+        [global::ProtoBuf.ProtoMember(30)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string timer
+        {
+            get { return __pbn__timer ?? ""; }
+            set { __pbn__timer = value; }
+        }
+        public bool ShouldSerializetimer() => __pbn__timer != null;
+        public void Resettimer() => __pbn__timer = null;
+        private string __pbn__timer;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class RewardTier : global::ProtoBuf.IExtensible
         {
@@ -1722,6 +1911,25 @@ namespace SteamKit2.GC.Artifact.Internal
                 private uint? __pbn__quantity;
 
             }
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class GauntletPointsLeaderboard : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint expiration_time
+            {
+                get { return __pbn__expiration_time.GetValueOrDefault(); }
+                set { __pbn__expiration_time = value; }
+            }
+            public bool ShouldSerializeexpiration_time() => __pbn__expiration_time != null;
+            public void Resetexpiration_time() => __pbn__expiration_time = null;
+            private uint? __pbn__expiration_time;
 
         }
 
@@ -2385,6 +2593,16 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(18)]
         public global::System.Collections.Generic.List<EntryItem> entry_items { get; } = new global::System.Collections.Generic.List<EntryItem>();
 
+        [global::ProtoBuf.ProtoMember(19)]
+        public uint created_time
+        {
+            get { return __pbn__created_time.GetValueOrDefault(); }
+            set { __pbn__created_time = value; }
+        }
+        public bool ShouldSerializecreated_time() => __pbn__created_time != null;
+        public void Resetcreated_time() => __pbn__created_time = null;
+        private uint? __pbn__created_time;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Match : global::ProtoBuf.IExtensible
         {
@@ -2568,16 +2786,15 @@ namespace SteamKit2.GC.Artifact.Internal
             public void Resetlimited_pool_id() => __pbn__limited_pool_id = null;
             private ulong? __pbn__limited_pool_id;
 
-            [global::ProtoBuf.ProtoMember(8)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string phase_name
+            [global::ProtoBuf.ProtoMember(9)]
+            public uint auto_advance_time
             {
-                get { return __pbn__phase_name ?? ""; }
-                set { __pbn__phase_name = value; }
+                get { return __pbn__auto_advance_time.GetValueOrDefault(); }
+                set { __pbn__auto_advance_time = value; }
             }
-            public bool ShouldSerializephase_name() => __pbn__phase_name != null;
-            public void Resetphase_name() => __pbn__phase_name = null;
-            private string __pbn__phase_name;
+            public bool ShouldSerializeauto_advance_time() => __pbn__auto_advance_time != null;
+            public void Resetauto_advance_time() => __pbn__auto_advance_time = null;
+            private uint? __pbn__auto_advance_time;
 
         }
 
@@ -2935,6 +3152,7 @@ namespace SteamKit2.GC.Artifact.Internal
             k_eFormat_Invalid = 0,
             k_eFormat_Bracket_SingleElim = 1,
             k_eFormat_Swiss = 2,
+            k_eFormat_FreeForAll = 3,
         }
 
     }

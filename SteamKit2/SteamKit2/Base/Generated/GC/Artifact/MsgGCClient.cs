@@ -1301,6 +1301,16 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public global::System.Collections.Generic.List<ulong> entry_costs { get; } = new global::System.Collections.Generic.List<ulong>();
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public bool select_random_deck
+        {
+            get { return __pbn__select_random_deck.GetValueOrDefault(); }
+            set { __pbn__select_random_deck = value; }
+        }
+        public bool ShouldSerializeselect_random_deck() => __pbn__select_random_deck != null;
+        public void Resetselect_random_deck() => __pbn__select_random_deck = null;
+        private bool? __pbn__select_random_deck;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1345,6 +1355,7 @@ namespace SteamKit2.GC.Artifact.Internal
             k_eDisabled = 8,
             k_eHasUnownedCards = 9,
             k_eRateLimited = 10,
+            k_eRandomDeckNotAllowed = 11,
         }
 
     }
@@ -1416,6 +1427,97 @@ namespace SteamKit2.GC.Artifact.Internal
             k_eInvalidGauntlet = 2,
             k_eTooBusy = 3,
             k_eDisabled = 4,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCAIGauntletResult : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint gauntlet_id
+        {
+            get { return __pbn__gauntlet_id.GetValueOrDefault(); }
+            set { __pbn__gauntlet_id = value; }
+        }
+        public bool ShouldSerializegauntlet_id() => __pbn__gauntlet_id != null;
+        public void Resetgauntlet_id() => __pbn__gauntlet_id = null;
+        private uint? __pbn__gauntlet_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool is_win
+        {
+            get { return __pbn__is_win.GetValueOrDefault(); }
+            set { __pbn__is_win = value; }
+        }
+        public bool ShouldSerializeis_win() => __pbn__is_win != null;
+        public void Resetis_win() => __pbn__is_win = null;
+        private bool? __pbn__is_win;
+
+        [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong secret_key
+        {
+            get { return __pbn__secret_key.GetValueOrDefault(); }
+            set { __pbn__secret_key = value; }
+        }
+        public bool ShouldSerializesecret_key() => __pbn__secret_key != null;
+        public void Resetsecret_key() => __pbn__secret_key = null;
+        private ulong? __pbn__secret_key;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint expected_wins
+        {
+            get { return __pbn__expected_wins.GetValueOrDefault(); }
+            set { __pbn__expected_wins = value; }
+        }
+        public bool ShouldSerializeexpected_wins() => __pbn__expected_wins != null;
+        public void Resetexpected_wins() => __pbn__expected_wins = null;
+        private uint? __pbn__expected_wins;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint expected_losses
+        {
+            get { return __pbn__expected_losses.GetValueOrDefault(); }
+            set { __pbn__expected_losses = value; }
+        }
+        public bool ShouldSerializeexpected_losses() => __pbn__expected_losses != null;
+        public void Resetexpected_losses() => __pbn__expected_losses = null;
+        private uint? __pbn__expected_losses;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCAIGauntletResultResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse result
+        {
+            get { return __pbn__result ?? EResponse.k_eInternalError; }
+            set { __pbn__result = value; }
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResponse? __pbn__result;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eFailed = 2,
+            k_eDisabled = 3,
+            k_eBusy = 4,
+            k_eInvalidKey = 5,
+            k_eMismatchedGames = 6,
         }
 
     }
@@ -2639,6 +2741,25 @@ namespace SteamKit2.GC.Artifact.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCSetPlayerBadge : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint player_badge
+        {
+            get { return __pbn__player_badge.GetValueOrDefault(); }
+            set { __pbn__player_badge = value; }
+        }
+        public bool ShouldSerializeplayer_badge() => __pbn__player_badge != null;
+        public void Resetplayer_badge() => __pbn__player_badge = null;
+        private uint? __pbn__player_badge;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgClientToGCReplacementSDRTicketResponse : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2887,17 +3008,6 @@ namespace SteamKit2.GC.Artifact.Internal
         public void Resetmax_players() => __pbn__max_players = null;
         private uint? __pbn__max_players;
 
-        [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string phase_name
-        {
-            get { return __pbn__phase_name ?? ""; }
-            set { __pbn__phase_name = value; }
-        }
-        public bool ShouldSerializephase_name() => __pbn__phase_name != null;
-        public void Resetphase_name() => __pbn__phase_name = null;
-        private string __pbn__phase_name;
-
         [global::ProtoBuf.ProtoMember(5)]
         public bool edit_stage
         {
@@ -2913,6 +3023,9 @@ namespace SteamKit2.GC.Artifact.Internal
 
         [global::ProtoBuf.ProtoMember(21)]
         public Swiss swiss { get; set; }
+
+        [global::ProtoBuf.ProtoMember(22)]
+        public FreeForAll free_for_all { get; set; }
 
         [global::ProtoBuf.ProtoContract()]
         public partial class DeckSettings : global::ProtoBuf.IExtensible
@@ -3055,6 +3168,35 @@ namespace SteamKit2.GC.Artifact.Internal
         }
 
         [global::ProtoBuf.ProtoContract()]
+        public partial class FreeForAll : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint max_games_per_player
+            {
+                get { return __pbn__max_games_per_player.GetValueOrDefault(); }
+                set { __pbn__max_games_per_player = value; }
+            }
+            public bool ShouldSerializemax_games_per_player() => __pbn__max_games_per_player != null;
+            public void Resetmax_games_per_player() => __pbn__max_games_per_player = null;
+            private uint? __pbn__max_games_per_player;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint auto_advance_after_s
+            {
+                get { return __pbn__auto_advance_after_s.GetValueOrDefault(); }
+                set { __pbn__auto_advance_after_s = value; }
+            }
+            public bool ShouldSerializeauto_advance_after_s() => __pbn__auto_advance_after_s != null;
+            public void Resetauto_advance_after_s() => __pbn__auto_advance_after_s = null;
+            private uint? __pbn__auto_advance_after_s;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
         public enum ESwissMatches
         {
             k_eBestOfOne = 0,
@@ -3158,6 +3300,26 @@ namespace SteamKit2.GC.Artifact.Internal
         public bool ShouldSerializeprivacy_mode() => __pbn__privacy_mode != null;
         public void Resetprivacy_mode() => __pbn__privacy_mode = null;
         private EPrivacy? __pbn__privacy_mode;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public bool open_spectating
+        {
+            get { return __pbn__open_spectating.GetValueOrDefault(); }
+            set { __pbn__open_spectating = value; }
+        }
+        public bool ShouldSerializeopen_spectating() => __pbn__open_spectating != null;
+        public void Resetopen_spectating() => __pbn__open_spectating = null;
+        private bool? __pbn__open_spectating;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public uint timer_mode
+        {
+            get { return __pbn__timer_mode.GetValueOrDefault(); }
+            set { __pbn__timer_mode = value; }
+        }
+        public bool ShouldSerializetimer_mode() => __pbn__timer_mode != null;
+        public void Resettimer_mode() => __pbn__timer_mode = null;
+        private uint? __pbn__timer_mode;
 
         [global::ProtoBuf.ProtoContract()]
         public enum EPrivacy
@@ -5210,10 +5372,10 @@ namespace SteamKit2.GC.Artifact.Internal
         private uint? __pbn__phase_id;
 
         [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue(EValueType.k_ePhase_MaxPlayers)]
+        [global::System.ComponentModel.DefaultValue(EValueType.k_eGlobal_SeedStage)]
         public EValueType value_type
         {
-            get { return __pbn__value_type ?? EValueType.k_ePhase_MaxPlayers; }
+            get { return __pbn__value_type ?? EValueType.k_eGlobal_SeedStage; }
             set { __pbn__value_type = value; }
         }
         public bool ShouldSerializevalue_type() => __pbn__value_type != null;
@@ -5233,8 +5395,16 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoContract()]
         public enum EValueType
         {
+            k_eGlobal_SeedStage = 1,
+            k_eGlobal_OpenSpectating = 2,
+            k_eGlobal_TimerMode = 3,
             k_ePhase_MaxPlayers = 50,
+            k_ePhase_EditStage = 51,
             k_eSwiss_NumRounds = 100,
+            k_eSwiss_Matches = 101,
+            k_eBracket_BestOf = 150,
+            k_eBracket_FinalsBestOf = 151,
+            k_eFreeForAll_MaxGames = 200,
         }
 
     }
@@ -5269,6 +5439,100 @@ namespace SteamKit2.GC.Artifact.Internal
             k_eInvalidValue = 6,
             k_ePlayerMismatch = 8,
             k_eMissingPermissions = 9,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCTourneyJoinOpenTourney : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint language
+        {
+            get { return __pbn__language.GetValueOrDefault(); }
+            set { __pbn__language = value; }
+        }
+        public bool ShouldSerializelanguage() => __pbn__language != null;
+        public void Resetlanguage() => __pbn__language = null;
+        private uint? __pbn__language;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string community_key
+        {
+            get { return __pbn__community_key ?? ""; }
+            set { __pbn__community_key = value; }
+        }
+        public bool ShouldSerializecommunity_key() => __pbn__community_key != null;
+        public void Resetcommunity_key() => __pbn__community_key = null;
+        private string __pbn__community_key;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint open_tourney_mode
+        {
+            get { return __pbn__open_tourney_mode.GetValueOrDefault(); }
+            set { __pbn__open_tourney_mode = value; }
+        }
+        public bool ShouldSerializeopen_tourney_mode() => __pbn__open_tourney_mode != null;
+        public void Resetopen_tourney_mode() => __pbn__open_tourney_mode = null;
+        private uint? __pbn__open_tourney_mode;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCTourneyJoinOpenTourneyResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse result
+        {
+            get { return __pbn__result ?? EResponse.k_eInternalError; }
+            set { __pbn__result = value; }
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResponse? __pbn__result;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong joined_tourney_id
+        {
+            get { return __pbn__joined_tourney_id.GetValueOrDefault(); }
+            set { __pbn__joined_tourney_id = value; }
+        }
+        public bool ShouldSerializejoined_tourney_id() => __pbn__joined_tourney_id != null;
+        public void Resetjoined_tourney_id() => __pbn__joined_tourney_id = null;
+        private ulong? __pbn__joined_tourney_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint cooldown_time_after
+        {
+            get { return __pbn__cooldown_time_after.GetValueOrDefault(); }
+            set { __pbn__cooldown_time_after = value; }
+        }
+        public bool ShouldSerializecooldown_time_after() => __pbn__cooldown_time_after != null;
+        public void Resetcooldown_time_after() => __pbn__cooldown_time_after = null;
+        private uint? __pbn__cooldown_time_after;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eDisabled = 2,
+            k_eInvalidMode = 3,
+            k_eInvalidRequest = 4,
+            k_eTooBusy = 5,
+            k_eRateLimited = 6,
+            k_eInTooManyOpenAlready = 7,
+            k_eInTooManyTotal = 8,
         }
 
     }
@@ -5321,6 +5585,8 @@ namespace SteamKit2.GC.Artifact.Internal
         k_EMsgClientToGCGetGauntletMatchesResponse = 9103,
         k_EMsgClientToGCRegisterGauntletDeck = 9104,
         k_EMsgClientToGCRegisterGauntletDeckResponse = 9105,
+        k_EMsgClientToGCAIGauntletResult = 9106,
+        k_EMsgClientToGCAIGauntletResultResponse = 9107,
         k_EMsgClientToGCPrivateLobbyCreate = 9110,
         k_EMsgClientToGCPrivateLobbyCreateResponse = 9111,
         k_EMsgClientToGCPrivateLobbyLeave = 9112,
@@ -5346,6 +5612,7 @@ namespace SteamKit2.GC.Artifact.Internal
         k_EMsgClientToGCInitialGrantAck = 9134,
         k_EMsgClientToGCRecycleCards = 9135,
         k_EMsgClientToGCRecycleCardsResponse = 9136,
+        k_EMsgClientToGCSetPlayerBadge = 9137,
         k_EMsgClientToGCTourneyGetInfo = 9500,
         k_EMsgClientToGCTourneyGetInfoResponse = 9501,
         k_EMsgClientToGCTourneyUnsubscribe = 9502,
@@ -5411,6 +5678,8 @@ namespace SteamKit2.GC.Artifact.Internal
         k_EMsgClientToGCTourneyPlayerAbandonResponse = 9568,
         k_EMsgClientToGCTourneyChangeValue = 9569,
         k_EMsgClientToGCTourneyChangeValueResponse = 9570,
+        k_EMsgClientToGCTourneyJoinOpenTourney = 9571,
+        k_EMsgClientToGCTourneyJoinOpenTourneyResponse = 9572,
     }
 
     [global::ProtoBuf.ProtoContract()]

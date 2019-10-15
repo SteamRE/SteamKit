@@ -528,7 +528,7 @@ namespace SteamKit2
 
             Lobby? joinedLobby = null;
 
-            if ( body.steam_id_lobbySpecified )
+            if ( body.ShouldSerializesteam_id_lobby() )
             {
                 var members =
                     body.members.ConvertAll( member => new Lobby.Member(

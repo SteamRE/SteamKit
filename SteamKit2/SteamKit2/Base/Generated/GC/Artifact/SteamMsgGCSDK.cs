@@ -413,6 +413,25 @@ namespace SteamKit2.GC.Artifact.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToGCSubGCStarting : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint dir_index
+        {
+            get { return __pbn__dir_index.GetValueOrDefault(); }
+            set { __pbn__dir_index = value; }
+        }
+        public bool ShouldSerializedir_index() => __pbn__dir_index != null;
+        public void Resetdir_index() => __pbn__dir_index = null;
+        private uint? __pbn__dir_index;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CGCToGCMsgMasterAck : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;

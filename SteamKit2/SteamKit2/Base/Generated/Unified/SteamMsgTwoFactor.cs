@@ -603,6 +603,17 @@ namespace SteamKit2.Unified.Internal
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string code
+        {
+            get { return __pbn__code ?? ""; }
+            set { __pbn__code = value; }
+        }
+        public bool ShouldSerializecode() => __pbn__code != null;
+        public void Resetcode() => __pbn__code = null;
+        private string __pbn__code;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -682,18 +693,6 @@ namespace SteamKit2.Unified.Internal
         public void Resetvalid() => __pbn__valid = null;
         private bool? __pbn__valid;
 
-    }
-
-    public interface ITwoFactor
-    {
-        CTwoFactor_Status_Response QueryStatus(CTwoFactor_Status_Request request);
-        CTwoFactor_AddAuthenticator_Response AddAuthenticator(CTwoFactor_AddAuthenticator_Request request);
-        CTwoFactor_SendEmail_Response SendEmail(CTwoFactor_SendEmail_Request request);
-        CTwoFactor_FinalizeAddAuthenticator_Response FinalizeAddAuthenticator(CTwoFactor_FinalizeAddAuthenticator_Request request);
-        CTwoFactor_RemoveAuthenticator_Response RemoveAuthenticator(CTwoFactor_RemoveAuthenticator_Request request);
-        CTwoFactor_CreateEmergencyCodes_Response CreateEmergencyCodes(CTwoFactor_CreateEmergencyCodes_Request request);
-        CTwoFactor_DestroyEmergencyCodes_Response DestroyEmergencyCodes(CTwoFactor_DestroyEmergencyCodes_Request request);
-        CTwoFactor_ValidateToken_Response ValidateToken(CTwoFactor_ValidateToken_Request request);
     }
 
 }

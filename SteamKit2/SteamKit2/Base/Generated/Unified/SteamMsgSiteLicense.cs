@@ -96,6 +96,141 @@ namespace SteamKit2.Unified.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CSiteManagerClient_TrackedPayments_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong site_id
+        {
+            get { return __pbn__site_id.GetValueOrDefault(); }
+            set { __pbn__site_id = value; }
+        }
+        public bool ShouldSerializesite_id() => __pbn__site_id != null;
+        public void Resetsite_id() => __pbn__site_id = null;
+        private ulong? __pbn__site_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<Payment> payments { get; } = new global::System.Collections.Generic.List<Payment>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Payment : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public ulong transid
+            {
+                get { return __pbn__transid.GetValueOrDefault(); }
+                set { __pbn__transid = value; }
+            }
+            public bool ShouldSerializetransid() => __pbn__transid != null;
+            public void Resettransid() => __pbn__transid = null;
+            private ulong? __pbn__transid;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public ulong steamid
+            {
+                get { return __pbn__steamid.GetValueOrDefault(); }
+                set { __pbn__steamid = value; }
+            }
+            public bool ShouldSerializesteamid() => __pbn__steamid != null;
+            public void Resetsteamid() => __pbn__steamid = null;
+            private ulong? __pbn__steamid;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public long amount
+            {
+                get { return __pbn__amount.GetValueOrDefault(); }
+                set { __pbn__amount = value; }
+            }
+            public bool ShouldSerializeamount() => __pbn__amount != null;
+            public void Resetamount() => __pbn__amount = null;
+            private long? __pbn__amount;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public uint ecurrency
+            {
+                get { return __pbn__ecurrency.GetValueOrDefault(); }
+                set { __pbn__ecurrency = value; }
+            }
+            public bool ShouldSerializeecurrency() => __pbn__ecurrency != null;
+            public void Resetecurrency() => __pbn__ecurrency = null;
+            private uint? __pbn__ecurrency;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public int time_created
+            {
+                get { return __pbn__time_created.GetValueOrDefault(); }
+                set { __pbn__time_created = value; }
+            }
+            public bool ShouldSerializetime_created() => __pbn__time_created != null;
+            public void Resettime_created() => __pbn__time_created = null;
+            private int? __pbn__time_created;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public int purchase_status
+            {
+                get { return __pbn__purchase_status.GetValueOrDefault(); }
+                set { __pbn__purchase_status = value; }
+            }
+            public bool ShouldSerializepurchase_status() => __pbn__purchase_status != null;
+            public void Resetpurchase_status() => __pbn__purchase_status = null;
+            private int? __pbn__purchase_status;
+
+            [global::ProtoBuf.ProtoMember(7)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string machine_name
+            {
+                get { return __pbn__machine_name ?? ""; }
+                set { __pbn__machine_name = value; }
+            }
+            public bool ShouldSerializemachine_name() => __pbn__machine_name != null;
+            public void Resetmachine_name() => __pbn__machine_name = null;
+            private string __pbn__machine_name;
+
+            [global::ProtoBuf.ProtoMember(8)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string persona_name
+            {
+                get { return __pbn__persona_name ?? ""; }
+                set { __pbn__persona_name = value; }
+            }
+            public bool ShouldSerializepersona_name() => __pbn__persona_name != null;
+            public void Resetpersona_name() => __pbn__persona_name = null;
+            private string __pbn__persona_name;
+
+            [global::ProtoBuf.ProtoMember(9)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string profile_url
+            {
+                get { return __pbn__profile_url ?? ""; }
+                set { __pbn__profile_url = value; }
+            }
+            public bool ShouldSerializeprofile_url() => __pbn__profile_url != null;
+            public void Resetprofile_url() => __pbn__profile_url = null;
+            private string __pbn__profile_url;
+
+            [global::ProtoBuf.ProtoMember(10)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string avatar_url
+            {
+                get { return __pbn__avatar_url ?? ""; }
+                set { __pbn__avatar_url = value; }
+            }
+            public bool ShouldSerializeavatar_url() => __pbn__avatar_url != null;
+            public void Resetavatar_url() => __pbn__avatar_url = null;
+            private string __pbn__avatar_url;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CSiteLicense_InitiateAssociation_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -385,21 +520,6 @@ namespace SteamKit2.Unified.Internal
         public void Resetavailable_seats() => __pbn__available_seats = null;
         private uint? __pbn__available_seats;
 
-    }
-
-    public interface ISiteManagerClient
-    {
-        CSiteManagerClient_IncomingClient_Response IncomingClient(CSiteManagerClient_IncomingClient_Request request);
-        NoResponse ClientSeatCheckoutNotification(CSiteLicense_ClientSeatCheckout_Notification request);
-    }
-
-    public interface ISiteLicense
-    {
-        CSiteLicense_InitiateAssociation_Response InitiateAssociation(CSiteLicense_InitiateAssociation_Request request);
-        CSiteLicense_LCSAuthenticate_Response LCSAuthenticate(CSiteLicense_LCSAuthenticate_Request request);
-        CSiteLicense_LCSAssociateUser_Response LCSAssociateUser(CSiteLicense_LCSAssociateUser_Request request);
-        CSiteLicense_ClientSeatCheckout_Response ClientSeatCheckout(CSiteLicense_ClientSeatCheckout_Request request);
-        CSiteLicense_ClientGetAvailableSeats_Response ClientGetAvailableSeats(CSiteLicense_ClientGetAvailableSeats_Request request);
     }
 
 }

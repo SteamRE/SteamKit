@@ -3690,6 +3690,187 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CWorkshop_AddSpecialPayment_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get { return __pbn__appid.GetValueOrDefault(); }
+            set { __pbn__appid = value; }
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint gameitemid
+        {
+            get { return __pbn__gameitemid.GetValueOrDefault(); }
+            set { __pbn__gameitemid = value; }
+        }
+        public bool ShouldSerializegameitemid() => __pbn__gameitemid != null;
+        public void Resetgameitemid() => __pbn__gameitemid = null;
+        private uint? __pbn__gameitemid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string date
+        {
+            get { return __pbn__date ?? ""; }
+            set { __pbn__date = value; }
+        }
+        public bool ShouldSerializedate() => __pbn__date != null;
+        public void Resetdate() => __pbn__date = null;
+        private string __pbn__date;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public ulong payment_us_usd
+        {
+            get { return __pbn__payment_us_usd.GetValueOrDefault(); }
+            set { __pbn__payment_us_usd = value; }
+        }
+        public bool ShouldSerializepayment_us_usd() => __pbn__payment_us_usd != null;
+        public void Resetpayment_us_usd() => __pbn__payment_us_usd = null;
+        private ulong? __pbn__payment_us_usd;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public ulong payment_row_usd
+        {
+            get { return __pbn__payment_row_usd.GetValueOrDefault(); }
+            set { __pbn__payment_row_usd = value; }
+        }
+        public bool ShouldSerializepayment_row_usd() => __pbn__payment_row_usd != null;
+        public void Resetpayment_row_usd() => __pbn__payment_row_usd = null;
+        private ulong? __pbn__payment_row_usd;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CWorkshop_AddSpecialPayment_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CWorkshop_GetSpecialPayments_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get { return __pbn__appid.GetValueOrDefault(); }
+            set { __pbn__appid = value; }
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint gameitemid
+        {
+            get { return __pbn__gameitemid.GetValueOrDefault(); }
+            set { __pbn__gameitemid = value; }
+        }
+        public bool ShouldSerializegameitemid() => __pbn__gameitemid != null;
+        public void Resetgameitemid() => __pbn__gameitemid = null;
+        private uint? __pbn__gameitemid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string date
+        {
+            get { return __pbn__date ?? ""; }
+            set { __pbn__date = value; }
+        }
+        public bool ShouldSerializedate() => __pbn__date != null;
+        public void Resetdate() => __pbn__date = null;
+        private string __pbn__date;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CWorkshop_GetSpecialPayments_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<SpecialPayment> special_payments { get; } = new global::System.Collections.Generic.List<SpecialPayment>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class SpecialPayment : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint appid
+            {
+                get { return __pbn__appid.GetValueOrDefault(); }
+                set { __pbn__appid = value; }
+            }
+            public bool ShouldSerializeappid() => __pbn__appid != null;
+            public void Resetappid() => __pbn__appid = null;
+            private uint? __pbn__appid;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint gameitemid
+            {
+                get { return __pbn__gameitemid.GetValueOrDefault(); }
+                set { __pbn__gameitemid = value; }
+            }
+            public bool ShouldSerializegameitemid() => __pbn__gameitemid != null;
+            public void Resetgameitemid() => __pbn__gameitemid = null;
+            private uint? __pbn__gameitemid;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string date
+            {
+                get { return __pbn__date ?? ""; }
+                set { __pbn__date = value; }
+            }
+            public bool ShouldSerializedate() => __pbn__date != null;
+            public void Resetdate() => __pbn__date = null;
+            private string __pbn__date;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public ulong net_payment_us_usd
+            {
+                get { return __pbn__net_payment_us_usd.GetValueOrDefault(); }
+                set { __pbn__net_payment_us_usd = value; }
+            }
+            public bool ShouldSerializenet_payment_us_usd() => __pbn__net_payment_us_usd != null;
+            public void Resetnet_payment_us_usd() => __pbn__net_payment_us_usd = null;
+            private ulong? __pbn__net_payment_us_usd;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public ulong net_payment_row_usd
+            {
+                get { return __pbn__net_payment_row_usd.GetValueOrDefault(); }
+                set { __pbn__net_payment_row_usd = value; }
+            }
+            public bool ShouldSerializenet_payment_row_usd() => __pbn__net_payment_row_usd != null;
+            public void Resetnet_payment_row_usd() => __pbn__net_payment_row_usd = null;
+            private ulong? __pbn__net_payment_row_usd;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum GCProtoBufMsgSrc
     {
         GCProtoBufMsgSrc_Unspecified = 0,

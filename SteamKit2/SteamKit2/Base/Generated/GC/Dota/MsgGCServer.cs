@@ -428,25 +428,15 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetassigned_server_tv_port() => __pbn__assigned_server_tv_port = null;
         private uint? __pbn__assigned_server_tv_port;
 
-        [global::ProtoBuf.ProtoMember(21)]
-        public uint legacy_server_steamdatagram_port
-        {
-            get { return __pbn__legacy_server_steamdatagram_port.GetValueOrDefault(); }
-            set { __pbn__legacy_server_steamdatagram_port = value; }
-        }
-        public bool ShouldSerializelegacy_server_steamdatagram_port() => __pbn__legacy_server_steamdatagram_port != null;
-        public void Resetlegacy_server_steamdatagram_port() => __pbn__legacy_server_steamdatagram_port = null;
-        private uint? __pbn__legacy_server_steamdatagram_port;
-
         [global::ProtoBuf.ProtoMember(27)]
-        public byte[] server_steamdatagram_address
+        public byte[] legacy_server_steamdatagram_address
         {
-            get { return __pbn__server_steamdatagram_address; }
-            set { __pbn__server_steamdatagram_address = value; }
+            get { return __pbn__legacy_server_steamdatagram_address; }
+            set { __pbn__legacy_server_steamdatagram_address = value; }
         }
-        public bool ShouldSerializeserver_steamdatagram_address() => __pbn__server_steamdatagram_address != null;
-        public void Resetserver_steamdatagram_address() => __pbn__server_steamdatagram_address = null;
-        private byte[] __pbn__server_steamdatagram_address;
+        public bool ShouldSerializelegacy_server_steamdatagram_address() => __pbn__legacy_server_steamdatagram_address != null;
+        public void Resetlegacy_server_steamdatagram_address() => __pbn__legacy_server_steamdatagram_address = null;
+        private byte[] __pbn__legacy_server_steamdatagram_address;
 
         [global::ProtoBuf.ProtoMember(5)]
         [global::System.ComponentModel.DefaultValue("")]
@@ -658,6 +648,8 @@ namespace SteamKit2.GC.Dota.Internal
             GAME = 1,
             PROXY = 2,
             TENSORFLOW = 3,
+            DOTA_ONLY = 4,
+            CUSTOM_GAME_ONLY = 5,
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -1274,6 +1266,26 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetrange_creep_upgrade_gold_losers() => __pbn__range_creep_upgrade_gold_losers = null;
         private uint? __pbn__range_creep_upgrade_gold_losers;
 
+        [global::ProtoBuf.ProtoMember(48)]
+        public uint observer_wards_dewarded_winners
+        {
+            get { return __pbn__observer_wards_dewarded_winners.GetValueOrDefault(); }
+            set { __pbn__observer_wards_dewarded_winners = value; }
+        }
+        public bool ShouldSerializeobserver_wards_dewarded_winners() => __pbn__observer_wards_dewarded_winners != null;
+        public void Resetobserver_wards_dewarded_winners() => __pbn__observer_wards_dewarded_winners = null;
+        private uint? __pbn__observer_wards_dewarded_winners;
+
+        [global::ProtoBuf.ProtoMember(49)]
+        public uint observer_wards_dewarded_losers
+        {
+            get { return __pbn__observer_wards_dewarded_losers.GetValueOrDefault(); }
+            set { __pbn__observer_wards_dewarded_losers = value; }
+        }
+        public bool ShouldSerializeobserver_wards_dewarded_losers() => __pbn__observer_wards_dewarded_losers != null;
+        public void Resetobserver_wards_dewarded_losers() => __pbn__observer_wards_dewarded_losers = null;
+        private uint? __pbn__observer_wards_dewarded_losers;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class CTeam : global::ProtoBuf.IExtensible
         {
@@ -1649,16 +1661,6 @@ namespace SteamKit2.GC.Dota.Internal
                 public void Resethero_was_randomed() => __pbn__hero_was_randomed = null;
                 private bool? __pbn__hero_was_randomed;
 
-                [global::ProtoBuf.ProtoMember(44)]
-                public bool hero_was_bonus
-                {
-                    get { return __pbn__hero_was_bonus.GetValueOrDefault(); }
-                    set { __pbn__hero_was_bonus = value; }
-                }
-                public bool ShouldSerializehero_was_bonus() => __pbn__hero_was_bonus != null;
-                public void Resethero_was_bonus() => __pbn__hero_was_bonus = null;
-                private bool? __pbn__hero_was_bonus;
-
                 [global::ProtoBuf.ProtoMember(50)]
                 public bool hero_was_dota_plus_suggestion
                 {
@@ -1693,24 +1695,7 @@ namespace SteamKit2.GC.Dota.Internal
                 private bool? __pbn__is_using_plus_guide;
 
                 [global::ProtoBuf.ProtoMember(48)]
-                public uint hero_damage_received_pre_reduction
-                {
-                    get { return __pbn__hero_damage_received_pre_reduction.GetValueOrDefault(); }
-                    set { __pbn__hero_damage_received_pre_reduction = value; }
-                }
-                public bool ShouldSerializehero_damage_received_pre_reduction() => __pbn__hero_damage_received_pre_reduction != null;
-                public void Resethero_damage_received_pre_reduction() => __pbn__hero_damage_received_pre_reduction = null;
-                private uint? __pbn__hero_damage_received_pre_reduction;
-
-                [global::ProtoBuf.ProtoMember(49)]
-                public uint hero_damage_received_post_reduction
-                {
-                    get { return __pbn__hero_damage_received_post_reduction.GetValueOrDefault(); }
-                    set { __pbn__hero_damage_received_post_reduction = value; }
-                }
-                public bool ShouldSerializehero_damage_received_post_reduction() => __pbn__hero_damage_received_post_reduction != null;
-                public void Resethero_damage_received_post_reduction() => __pbn__hero_damage_received_post_reduction = null;
-                private uint? __pbn__hero_damage_received_post_reduction;
+                public global::System.Collections.Generic.List<HeroDamageReceived> hero_damage_received { get; } = new global::System.Collections.Generic.List<HeroDamageReceived>();
 
                 [global::ProtoBuf.ProtoMember(51)]
                 public uint seconds_dead
@@ -1759,6 +1744,54 @@ namespace SteamKit2.GC.Dota.Internal
                     public void Resetwinner() => __pbn__winner = null;
                     private bool? __pbn__winner;
 
+                }
+
+                [global::ProtoBuf.ProtoContract()]
+                public partial class HeroDamageReceived : global::ProtoBuf.IExtensible
+                {
+                    private global::ProtoBuf.IExtension __pbn__extensionData;
+                    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                        => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+                    [global::ProtoBuf.ProtoMember(1)]
+                    public uint pre_reduction
+                    {
+                        get { return __pbn__pre_reduction.GetValueOrDefault(); }
+                        set { __pbn__pre_reduction = value; }
+                    }
+                    public bool ShouldSerializepre_reduction() => __pbn__pre_reduction != null;
+                    public void Resetpre_reduction() => __pbn__pre_reduction = null;
+                    private uint? __pbn__pre_reduction;
+
+                    [global::ProtoBuf.ProtoMember(2)]
+                    public uint post_reduction
+                    {
+                        get { return __pbn__post_reduction.GetValueOrDefault(); }
+                        set { __pbn__post_reduction = value; }
+                    }
+                    public bool ShouldSerializepost_reduction() => __pbn__post_reduction != null;
+                    public void Resetpost_reduction() => __pbn__post_reduction = null;
+                    private uint? __pbn__post_reduction;
+
+                    [global::ProtoBuf.ProtoMember(3)]
+                    [global::System.ComponentModel.DefaultValue(CMsgGameMatchSignOut.CTeam.CPlayer.HeroDamageType.HERO_DAMAGE_PHYSICAL)]
+                    public CMsgGameMatchSignOut.CTeam.CPlayer.HeroDamageType damage_type
+                    {
+                        get { return __pbn__damage_type ?? CMsgGameMatchSignOut.CTeam.CPlayer.HeroDamageType.HERO_DAMAGE_PHYSICAL; }
+                        set { __pbn__damage_type = value; }
+                    }
+                    public bool ShouldSerializedamage_type() => __pbn__damage_type != null;
+                    public void Resetdamage_type() => __pbn__damage_type = null;
+                    private CMsgGameMatchSignOut.CTeam.CPlayer.HeroDamageType? __pbn__damage_type;
+
+                }
+
+                [global::ProtoBuf.ProtoContract()]
+                public enum HeroDamageType
+                {
+                    HERO_DAMAGE_PHYSICAL = 0,
+                    HERO_DAMAGE_MAGICAL = 1,
+                    HERO_DAMAGE_PURE = 2,
                 }
 
             }
@@ -2402,6 +2435,26 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializerapiers_purchased() => __pbn__rapiers_purchased != null;
         public void Resetrapiers_purchased() => __pbn__rapiers_purchased = null;
         private uint? __pbn__rapiers_purchased;
+
+        [global::ProtoBuf.ProtoMember(28)]
+        public uint observer_wards_placed
+        {
+            get { return __pbn__observer_wards_placed.GetValueOrDefault(); }
+            set { __pbn__observer_wards_placed = value; }
+        }
+        public bool ShouldSerializeobserver_wards_placed() => __pbn__observer_wards_placed != null;
+        public void Resetobserver_wards_placed() => __pbn__observer_wards_placed = null;
+        private uint? __pbn__observer_wards_placed;
+
+        [global::ProtoBuf.ProtoMember(29)]
+        public uint wards_destroyed
+        {
+            get { return __pbn__wards_destroyed.GetValueOrDefault(); }
+            set { __pbn__wards_destroyed = value; }
+        }
+        public bool ShouldSerializewards_destroyed() => __pbn__wards_destroyed != null;
+        public void Resetwards_destroyed() => __pbn__wards_destroyed = null;
+        private uint? __pbn__wards_destroyed;
 
     }
 
@@ -4271,6 +4324,17 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializetrade_ban_time() => __pbn__trade_ban_time != null;
             public void Resettrade_ban_time() => __pbn__trade_ban_time = null;
             private uint? __pbn__trade_ban_time;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            [global::System.ComponentModel.DefaultValue(false)]
+            public bool eligible_for_periodic_adjustment
+            {
+                get { return __pbn__eligible_for_periodic_adjustment ?? false; }
+                set { __pbn__eligible_for_periodic_adjustment = value; }
+            }
+            public bool ShouldSerializeeligible_for_periodic_adjustment() => __pbn__eligible_for_periodic_adjustment != null;
+            public void Reseteligible_for_periodic_adjustment() => __pbn__eligible_for_periodic_adjustment = null;
+            private bool? __pbn__eligible_for_periodic_adjustment;
 
         }
 
@@ -6624,6 +6688,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resethero_id() => __pbn__hero_id = null;
         private uint? __pbn__hero_id;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool turbo_mode
+        {
+            get { return __pbn__turbo_mode.GetValueOrDefault(); }
+            set { __pbn__turbo_mode = value; }
+        }
+        public bool ShouldSerializeturbo_mode() => __pbn__turbo_mode != null;
+        public void Resetturbo_mode() => __pbn__turbo_mode = null;
+        private bool? __pbn__turbo_mode;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -6652,6 +6726,48 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializepotential_winnings() => __pbn__potential_winnings != null;
         public void Resetpotential_winnings() => __pbn__potential_winnings = null;
         private uint? __pbn__potential_winnings;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<MapResults> map_results { get; } = new global::System.Collections.Generic.List<MapResults>();
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint potential_plus_shard_winnings
+        {
+            get { return __pbn__potential_plus_shard_winnings.GetValueOrDefault(); }
+            set { __pbn__potential_plus_shard_winnings = value; }
+        }
+        public bool ShouldSerializepotential_plus_shard_winnings() => __pbn__potential_plus_shard_winnings != null;
+        public void Resetpotential_plus_shard_winnings() => __pbn__potential_plus_shard_winnings = null;
+        private uint? __pbn__potential_plus_shard_winnings;
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class MapResults : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint path_id_completed
+            {
+                get { return __pbn__path_id_completed.GetValueOrDefault(); }
+                set { __pbn__path_id_completed = value; }
+            }
+            public bool ShouldSerializepath_id_completed() => __pbn__path_id_completed != null;
+            public void Resetpath_id_completed() => __pbn__path_id_completed = null;
+            private uint? __pbn__path_id_completed;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint room_id_claimed
+            {
+                get { return __pbn__room_id_claimed.GetValueOrDefault(); }
+                set { __pbn__room_id_claimed = value; }
+            }
+            public bool ShouldSerializeroom_id_claimed() => __pbn__room_id_claimed != null;
+            public void Resetroom_id_claimed() => __pbn__room_id_claimed = null;
+            private uint? __pbn__room_id_claimed;
+
+        }
 
     }
 

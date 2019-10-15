@@ -215,6 +215,7 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCStatTrakSwap = 1088,
         k_EMsgGCUserTrackTimePlayedConsecutively = 1089,
         k_EMsgGCItemCustomizationNotification = 1090,
+        k_EMsgGCModifyItemAttribute = 1091,
         k_EMsgGCTradingBase = 1500,
         k_EMsgGCTrading_InitiateTradeRequest = 1501,
         k_EMsgGCTrading_InitiateTradeResponse = 1502,
@@ -271,6 +272,7 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCRequestAnnouncementsResponse = 2526,
         k_EMsgGCRequestPassportItemGrant = 2527,
         k_EMsgGCClientVersionUpdated = 2528,
+        k_EMsgGCAdjustItemEquippedStateMulti = 2529,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -298,6 +300,21 @@ namespace SteamKit2.GC.CSGO.Internal
         k_UnlockStyle_Failed_CantCommit = 3,
         k_UnlockStyle_Failed_CantLockCache = 4,
         k_UnlockStyle_Failed_CantAffordAttrib = 5,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EGCItemCustomizationNotification
+    {
+        k_EGCItemCustomizationNotification_NameItem = 1006,
+        k_EGCItemCustomizationNotification_UnlockCrate = 1007,
+        k_EGCItemCustomizationNotification_NameBaseItem = 1019,
+        k_EGCItemCustomizationNotification_RemoveItemName = 1030,
+        k_EGCItemCustomizationNotification_RemoveSticker = 1053,
+        k_EGCItemCustomizationNotification_ApplySticker = 1086,
+        k_EGCItemCustomizationNotification_StatTrakSwap = 1088,
+        k_EGCItemCustomizationNotification_ActivateFanToken = 9178,
+        k_EGCItemCustomizationNotification_GraffitiUnseal = 9185,
+        k_EGCItemCustomizationNotification_GenerateSouvenir = 9204,
     }
 
 }

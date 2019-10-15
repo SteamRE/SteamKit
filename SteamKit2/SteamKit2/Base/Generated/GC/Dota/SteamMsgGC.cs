@@ -2816,6 +2816,15 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToGCReloadServerRegionSettings : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EGCBaseMsg
     {
         k_EMsgGCSystemMessage = 4001,
@@ -2837,6 +2846,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGCToClientPollFileResponse = 4515,
         k_EMsgGCToGCPerformManualOp = 4516,
         k_EMsgGCToGCPerformManualOpCompleted = 4517,
+        k_EMsgGCToGCReloadServerRegionSettings = 4518,
     }
 
     [global::ProtoBuf.ProtoContract()]

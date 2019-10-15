@@ -314,13 +314,6 @@ namespace SteamKit2.Unified.Internal
 
     }
 
-    public interface IGameServers
-    {
-        CGameServers_GetServerList_Response GetServerList(CGameServers_GetServerList_Request request);
-        CGameServers_IPsWithSteamIDs_Response GetServerSteamIDsByIP(CGameServers_GetServerSteamIDsByIP_Request request);
-        CGameServers_IPsWithSteamIDs_Response GetServerIPsBySteamID(CGameServers_GetServerIPsBySteamID_Request request);
-    }
-
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

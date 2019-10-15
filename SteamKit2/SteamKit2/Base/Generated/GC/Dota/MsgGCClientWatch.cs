@@ -1259,6 +1259,16 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetteam_logo_url() => __pbn__team_logo_url = null;
             private string __pbn__team_logo_url;
 
+            [global::ProtoBuf.ProtoMember(4)]
+            public uint wager_count
+            {
+                get { return __pbn__wager_count.GetValueOrDefault(); }
+                set { __pbn__wager_count = value; }
+            }
+            public bool ShouldSerializewager_count() => __pbn__wager_count != null;
+            public void Resetwager_count() => __pbn__wager_count = null;
+            private uint? __pbn__wager_count;
+
         }
 
         [global::ProtoBuf.ProtoContract()]

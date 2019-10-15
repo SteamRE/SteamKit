@@ -849,15 +849,35 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetclient_launcher() => __pbn__client_launcher = null;
         private uint? __pbn__client_launcher;
 
-        [global::ProtoBuf.ProtoMember(5)]
-        public uint steamdatagram_port
+        [global::ProtoBuf.ProtoMember(6)]
+        public byte[] legacy_steamdatagram_routing
         {
-            get { return __pbn__steamdatagram_port.GetValueOrDefault(); }
-            set { __pbn__steamdatagram_port = value; }
+            get { return __pbn__legacy_steamdatagram_routing; }
+            set { __pbn__legacy_steamdatagram_routing = value; }
         }
-        public bool ShouldSerializesteamdatagram_port() => __pbn__steamdatagram_port != null;
-        public void Resetsteamdatagram_port() => __pbn__steamdatagram_port = null;
-        private uint? __pbn__steamdatagram_port;
+        public bool ShouldSerializelegacy_steamdatagram_routing() => __pbn__legacy_steamdatagram_routing != null;
+        public void Resetlegacy_steamdatagram_routing() => __pbn__legacy_steamdatagram_routing = null;
+        private byte[] __pbn__legacy_steamdatagram_routing;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint required_internal_addr
+        {
+            get { return __pbn__required_internal_addr.GetValueOrDefault(); }
+            set { __pbn__required_internal_addr = value; }
+        }
+        public bool ShouldSerializerequired_internal_addr() => __pbn__required_internal_addr != null;
+        public void Resetrequired_internal_addr() => __pbn__required_internal_addr = null;
+        private uint? __pbn__required_internal_addr;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public byte[] steamdatagram_login
+        {
+            get { return __pbn__steamdatagram_login; }
+            set { __pbn__steamdatagram_login = value; }
+        }
+        public bool ShouldSerializesteamdatagram_login() => __pbn__steamdatagram_login != null;
+        public void Resetsteamdatagram_login() => __pbn__steamdatagram_login = null;
+        private byte[] __pbn__steamdatagram_login;
 
     }
 

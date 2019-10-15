@@ -242,6 +242,16 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public global::System.Collections.Generic.List<ulong> responsible_party_members { get; } = new global::System.Collections.Generic.List<ulong>();
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint result_metadata
+        {
+            get { return __pbn__result_metadata.GetValueOrDefault(); }
+            set { __pbn__result_metadata = value; }
+        }
+        public bool ShouldSerializeresult_metadata() => __pbn__result_metadata != null;
+        public void Resetresult_metadata() => __pbn__result_metadata = null;
+        private uint? __pbn__result_metadata;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2752,6 +2762,8 @@ namespace SteamKit2.GC.Dota.Internal
         k_EStartFindingMatchResult_WeekendTourneyRecentParticipation = 120,
         k_EStartFindingMatchResult_MemberMissingAnchoredPhoneNumber = 121,
         k_EStartFindingMatchResult_NotMemberOfClan = 122,
+        k_EStartFindingMatchResult_CoachesChallengeBadPartySize = 123,
+        k_EStartFindingMatchResult_CoachesChallengeRequirementsNotMet = 124,
     }
 
 }

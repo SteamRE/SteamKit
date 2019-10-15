@@ -978,6 +978,45 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgModifyItemAttribute : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong item_id
+        {
+            get { return __pbn__item_id.GetValueOrDefault(); }
+            set { __pbn__item_id = value; }
+        }
+        public bool ShouldSerializeitem_id() => __pbn__item_id != null;
+        public void Resetitem_id() => __pbn__item_id = null;
+        private ulong? __pbn__item_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint attr_defidx
+        {
+            get { return __pbn__attr_defidx.GetValueOrDefault(); }
+            set { __pbn__attr_defidx = value; }
+        }
+        public bool ShouldSerializeattr_defidx() => __pbn__attr_defidx != null;
+        public void Resetattr_defidx() => __pbn__attr_defidx = null;
+        private uint? __pbn__attr_defidx;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint attr_value
+        {
+            get { return __pbn__attr_value.GetValueOrDefault(); }
+            set { __pbn__attr_value = value; }
+        }
+        public bool ShouldSerializeattr_value() => __pbn__attr_value != null;
+        public void Resetattr_value() => __pbn__attr_value = null;
+        private uint? __pbn__attr_value;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgApplyStatTrakSwap : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1391,6 +1430,24 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializeswap() => __pbn__swap != null;
         public void Resetswap() => __pbn__swap = null;
         private bool? __pbn__swap;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgAdjustItemEquippedStateMulti : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<ulong> t_equips { get; } = new global::System.Collections.Generic.List<ulong>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<ulong> ct_equips { get; } = new global::System.Collections.Generic.List<ulong>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<ulong> noteam_equips { get; } = new global::System.Collections.Generic.List<ulong>();
 
     }
 

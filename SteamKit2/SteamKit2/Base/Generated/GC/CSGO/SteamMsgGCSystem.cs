@@ -156,6 +156,138 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CQuest_PublisherAddCommunityItemsToPlayer_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong steamid
+        {
+            get { return __pbn__steamid.GetValueOrDefault(); }
+            set { __pbn__steamid = value; }
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint appid
+        {
+            get { return __pbn__appid.GetValueOrDefault(); }
+            set { __pbn__appid = value; }
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint match_item_type
+        {
+            get { return __pbn__match_item_type.GetValueOrDefault(); }
+            set { __pbn__match_item_type = value; }
+        }
+        public bool ShouldSerializematch_item_type() => __pbn__match_item_type != null;
+        public void Resetmatch_item_type() => __pbn__match_item_type = null;
+        private uint? __pbn__match_item_type;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint match_item_class
+        {
+            get { return __pbn__match_item_class.GetValueOrDefault(); }
+            set { __pbn__match_item_class = value; }
+        }
+        public bool ShouldSerializematch_item_class() => __pbn__match_item_class != null;
+        public void Resetmatch_item_class() => __pbn__match_item_class = null;
+        private uint? __pbn__match_item_class;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string prefix_item_name
+        {
+            get { return __pbn__prefix_item_name ?? ""; }
+            set { __pbn__prefix_item_name = value; }
+        }
+        public bool ShouldSerializeprefix_item_name() => __pbn__prefix_item_name != null;
+        public void Resetprefix_item_name() => __pbn__prefix_item_name = null;
+        private string __pbn__prefix_item_name;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public global::System.Collections.Generic.List<Attribute> attributes { get; } = new global::System.Collections.Generic.List<Attribute>();
+
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string note
+        {
+            get { return __pbn__note ?? ""; }
+            set { __pbn__note = value; }
+        }
+        public bool ShouldSerializenote() => __pbn__note != null;
+        public void Resetnote() => __pbn__note = null;
+        private string __pbn__note;
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Attribute : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint attribute
+            {
+                get { return __pbn__attribute.GetValueOrDefault(); }
+                set { __pbn__attribute = value; }
+            }
+            public bool ShouldSerializeattribute() => __pbn__attribute != null;
+            public void Resetattribute() => __pbn__attribute = null;
+            private uint? __pbn__attribute;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public ulong value
+            {
+                get { return __pbn__value.GetValueOrDefault(); }
+                set { __pbn__value = value; }
+            }
+            public bool ShouldSerializevalue() => __pbn__value != null;
+            public void Resetvalue() => __pbn__value = null;
+            private ulong? __pbn__value;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CQuest_PublisherAddCommunityItemsToPlayer_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint items_matched
+        {
+            get { return __pbn__items_matched.GetValueOrDefault(); }
+            set { __pbn__items_matched = value; }
+        }
+        public bool ShouldSerializeitems_matched() => __pbn__items_matched != null;
+        public void Resetitems_matched() => __pbn__items_matched = null;
+        private uint? __pbn__items_matched;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint items_granted
+        {
+            get { return __pbn__items_granted.GetValueOrDefault(); }
+            set { __pbn__items_granted = value; }
+        }
+        public bool ShouldSerializeitems_granted() => __pbn__items_granted != null;
+        public void Resetitems_granted() => __pbn__items_granted = null;
+        private uint? __pbn__items_granted;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CCommunity_GamePersonalDataCategoryInfo : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -505,6 +637,37 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgRequestSessionIP = 155,
         k_EMsgRequestSessionIPResponse = 156,
         k_EGCToGCMsgMasterStartupComplete = 157,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ECommunityItemClass
+    {
+        k_ECommunityItemClass_Invalid = 0,
+        k_ECommunityItemClass_Badge = 1,
+        k_ECommunityItemClass_GameCard = 2,
+        k_ECommunityItemClass_ProfileBackground = 3,
+        k_ECommunityItemClass_Emoticon = 4,
+        k_ECommunityItemClass_BoosterPack = 5,
+        k_ECommunityItemClass_Consumable = 6,
+        k_ECommunityItemClass_GameGoo = 7,
+        k_ECommunityItemClass_ProfileModifier = 8,
+        k_ECommunityItemClass_Scene = 9,
+        k_ECommunityItemClass_SalienItem = 10,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ECommunityItemAttribute
+    {
+        k_ECommunityItemAttribute_Invalid = 0,
+        k_ECommunityItemAttribute_CardBorder = 1,
+        k_ECommunityItemAttribute_Level = 2,
+        k_ECommunityItemAttribute_IssueNumber = 3,
+        k_ECommunityItemAttribute_TradableTime = 4,
+        k_ECommunityItemAttribute_StorePackageID = 5,
+        k_ECommunityItemAttribute_CommunityItemAppID = 6,
+        k_ECommunityItemAttribute_CommunityItemType = 7,
+        k_ECommunityItemAttribute_ProfileModiferEnabled = 8,
+        k_ECommunityItemAttribute_ExpiryTime = 9,
     }
 
 }

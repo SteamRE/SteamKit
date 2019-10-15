@@ -562,13 +562,6 @@ namespace SteamKit2.Unified.Internal
 
     }
 
-    public interface IEcon
-    {
-        CEcon_GetTradeOfferAccessToken_Response GetTradeOfferAccessToken(CEcon_GetTradeOfferAccessToken_Request request);
-        CEcon_ClientGetItemShopOverlayAuthURL_Response ClientGetItemShopOverlayAuthURL(CEcon_ClientGetItemShopOverlayAuthURL_Request request);
-        CEcon_GetAssetClassInfo_Response GetAssetClassInfo(CEcon_GetAssetClassInfo_Request request);
-    }
-
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

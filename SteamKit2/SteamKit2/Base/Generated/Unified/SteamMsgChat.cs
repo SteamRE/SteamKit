@@ -77,6 +77,16 @@ namespace SteamKit2.Unified.Internal
         public void Resetwatching_broadcast_accountid() => __pbn__watching_broadcast_accountid = null;
         private uint? __pbn__watching_broadcast_accountid;
 
+        [global::ProtoBuf.ProtoMember(7)]
+        public ulong watching_broadcast_channel_id
+        {
+            get { return __pbn__watching_broadcast_channel_id.GetValueOrDefault(); }
+            set { __pbn__watching_broadcast_channel_id = value; }
+        }
+        public bool ShouldSerializewatching_broadcast_channel_id() => __pbn__watching_broadcast_channel_id != null;
+        public void Resetwatching_broadcast_channel_id() => __pbn__watching_broadcast_channel_id = null;
+        private ulong? __pbn__watching_broadcast_channel_id;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -406,6 +416,16 @@ namespace SteamKit2.Unified.Internal
         [global::ProtoBuf.ProtoMember(22)]
         public global::System.Collections.Generic.List<CChatPartyBeacon> party_beacons { get; } = new global::System.Collections.Generic.List<CChatPartyBeacon>();
 
+        [global::ProtoBuf.ProtoMember(23)]
+        public ulong watching_broadcast_channel_id
+        {
+            get { return __pbn__watching_broadcast_channel_id.GetValueOrDefault(); }
+            set { __pbn__watching_broadcast_channel_id = value; }
+        }
+        public bool ShouldSerializewatching_broadcast_channel_id() => __pbn__watching_broadcast_channel_id != null;
+        public void Resetwatching_broadcast_channel_id() => __pbn__watching_broadcast_channel_id = null;
+        private ulong? __pbn__watching_broadcast_channel_id;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -523,6 +543,27 @@ namespace SteamKit2.Unified.Internal
         public void Resetsort_order() => __pbn__sort_order = null;
         private uint? __pbn__sort_order;
 
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string last_message
+        {
+            get { return __pbn__last_message ?? ""; }
+            set { __pbn__last_message = value; }
+        }
+        public bool ShouldSerializelast_message() => __pbn__last_message != null;
+        public void Resetlast_message() => __pbn__last_message = null;
+        private string __pbn__last_message;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public uint accountid_last_message
+        {
+            get { return __pbn__accountid_last_message.GetValueOrDefault(); }
+            set { __pbn__accountid_last_message = value; }
+        }
+        public bool ShouldSerializeaccountid_last_message() => __pbn__accountid_last_message != null;
+        public void Resetaccountid_last_message() => __pbn__accountid_last_message = null;
+        private uint? __pbn__accountid_last_message;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -635,6 +676,16 @@ namespace SteamKit2.Unified.Internal
         public bool ShouldSerializeunread_indicator_muted() => __pbn__unread_indicator_muted != null;
         public void Resetunread_indicator_muted() => __pbn__unread_indicator_muted = null;
         private bool? __pbn__unread_indicator_muted;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public uint time_first_unread
+        {
+            get { return __pbn__time_first_unread.GetValueOrDefault(); }
+            set { __pbn__time_first_unread = value; }
+        }
+        public bool ShouldSerializetime_first_unread() => __pbn__time_first_unread != null;
+        public void Resettime_first_unread() => __pbn__time_first_unread = null;
+        private uint? __pbn__time_first_unread;
 
     }
 
@@ -930,6 +981,16 @@ namespace SteamKit2.Unified.Internal
         public bool ShouldSerializewatching_broadcast_accountid() => __pbn__watching_broadcast_accountid != null;
         public void Resetwatching_broadcast_accountid() => __pbn__watching_broadcast_accountid = null;
         private uint? __pbn__watching_broadcast_accountid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong watching_broadcast_channel_id
+        {
+            get { return __pbn__watching_broadcast_channel_id.GetValueOrDefault(); }
+            set { __pbn__watching_broadcast_channel_id = value; }
+        }
+        public bool ShouldSerializewatching_broadcast_channel_id() => __pbn__watching_broadcast_channel_id != null;
+        public void Resetwatching_broadcast_channel_id() => __pbn__watching_broadcast_channel_id = null;
+        private ulong? __pbn__watching_broadcast_channel_id;
 
     }
 
@@ -2434,6 +2495,16 @@ namespace SteamKit2.Unified.Internal
         [global::ProtoBuf.ProtoMember(18)]
         public global::System.Collections.Generic.List<CChatPartyBeacon> party_beacons { get; } = new global::System.Collections.Generic.List<CChatPartyBeacon>();
 
+        [global::ProtoBuf.ProtoMember(19)]
+        public ulong watching_broadcast_channel_id
+        {
+            get { return __pbn__watching_broadcast_channel_id.GetValueOrDefault(); }
+            set { __pbn__watching_broadcast_channel_id = value; }
+        }
+        public bool ShouldSerializewatching_broadcast_channel_id() => __pbn__watching_broadcast_channel_id != null;
+        public void Resetwatching_broadcast_channel_id() => __pbn__watching_broadcast_channel_id = null;
+        private ulong? __pbn__watching_broadcast_channel_id;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -3489,6 +3560,17 @@ namespace SteamKit2.Unified.Internal
         public void Resetmessage_no_bbcode() => __pbn__message_no_bbcode = null;
         private string __pbn__message_no_bbcode;
 
+        [global::ProtoBuf.ProtoMember(10)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string chat_name
+        {
+            get { return __pbn__chat_name ?? ""; }
+            set { __pbn__chat_name = value; }
+        }
+        public bool ShouldSerializechat_name() => __pbn__chat_name != null;
+        public void Resetchat_name() => __pbn__chat_name = null;
+        private string __pbn__chat_name;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -4542,88 +4624,6 @@ namespace SteamKit2.Unified.Internal
         k_EChatRoomMemberStateChange_Muted = 9,
         k_EChatRoomMemberStateChange_Banned = 10,
         k_EChatRoomMemberStateChange_RolesChanged = 12,
-    }
-
-    public interface IChat
-    {
-        CChat_RequestFriendPersonaStates_Response RequestFriendPersonaStates(CChat_RequestFriendPersonaStates_Request request);
-    }
-
-    public interface IChatRoom
-    {
-        CChatRoom_CreateChatRoomGroup_Response CreateChatRoomGroup(CChatRoom_CreateChatRoomGroup_Request request);
-        CChatRoom_SaveChatRoomGroup_Response SaveChatRoomGroup(CChatRoom_SaveChatRoomGroup_Request request);
-        CChatRoom_RenameChatRoomGroup_Response RenameChatRoomGroup(CChatRoom_RenameChatRoomGroup_Request request);
-        CChatRoom_SetChatRoomGroupTagline_Response SetChatRoomGroupTagline(CChatRoom_SetChatRoomGroupTagline_Request request);
-        CChatRoom_SetChatRoomGroupAvatar_Response SetChatRoomGroupAvatar(CChatRoom_SetChatRoomGroupAvatar_Request request);
-        CChatRoom_SetChatRoomGroupWatchingBroadcast_Response SetChatRoomGroupWatchingBroadcast(CChatRoom_SetChatRoomGroupWatchingBroadcast_Request request);
-        CChatRoom_MuteUser_Response MuteUserInGroup(CChatRoom_MuteUser_Request request);
-        CChatRoom_KickUser_Response KickUserFromGroup(CChatRoom_KickUser_Request request);
-        CChatRoom_SetUserBanState_Response SetUserBanState(CChatRoom_SetUserBanState_Request request);
-        CChatRoom_RevokeInvite_Response RevokeInviteToGroup(CChatRoom_RevokeInvite_Request request);
-        CChatRoom_CreateRole_Response CreateRole(CChatRoom_CreateRole_Request request);
-        CChatRoom_GetRoles_Response GetRoles(CChatRoom_GetRoles_Request request);
-        CChatRoom_RenameRole_Response RenameRole(CChatRoom_RenameRole_Request request);
-        CChatRoom_ReorderRole_Response ReorderRole(CChatRoom_ReorderRole_Request request);
-        CChatRoom_DeleteRole_Response DeleteRole(CChatRoom_DeleteRole_Request request);
-        CChatRoom_GetRoleActions_Response GetRoleActions(CChatRoom_GetRoleActions_Request request);
-        CChatRoom_ReplaceRoleActions_Response ReplaceRoleActions(CChatRoom_ReplaceRoleActions_Request request);
-        CChatRoom_AddRoleToUser_Response AddRoleToUser(CChatRoom_AddRoleToUser_Request request);
-        CChatRoom_GetRolesForUser_Response GetRolesForUser(CChatRoom_GetRolesForUser_Request request);
-        CChatRoom_DeleteRoleFromUser_Response DeleteRoleFromUser(CChatRoom_DeleteRoleFromUser_Request request);
-        CChatRoom_JoinChatRoomGroup_Response JoinChatRoomGroup(CChatRoom_JoinChatRoomGroup_Request request);
-        CChatRoom_InviteFriendToChatRoomGroup_Response InviteFriendToChatRoomGroup(CChatRoom_InviteFriendToChatRoomGroup_Request request);
-        CChatRoom_LeaveChatRoomGroup_Response LeaveChatRoomGroup(CChatRoom_LeaveChatRoomGroup_Request request);
-        CChatRoom_CreateChatRoom_Response CreateChatRoom(CChatRoom_CreateChatRoom_Request request);
-        CChatRoom_DeleteChatRoom_Response DeleteChatRoom(CChatRoom_DeleteChatRoom_Request request);
-        CChatRoom_RenameChatRoom_Response RenameChatRoom(CChatRoom_RenameChatRoom_Request request);
-        CChatRoom_ReorderChatRoom_Response ReorderChatRoom(CChatRoom_ReorderChatRoom_Request request);
-        CChatRoom_SendChatMessage_Response SendChatMessage(CChatRoom_SendChatMessage_Request request);
-        CChatRoom_JoinVoiceChat_Response JoinVoiceChat(CChatRoom_JoinVoiceChat_Request request);
-        CChatRoom_LeaveVoiceChat_Response LeaveVoiceChat(CChatRoom_LeaveVoiceChat_Request request);
-        CChatRoom_GetMessageHistory_Response GetMessageHistory(CChatRoom_GetMessageHistory_Request request);
-        CChatRoom_GetMyChatRoomGroups_Response GetMyChatRoomGroups(CChatRoom_GetMyChatRoomGroups_Request request);
-        CChatRoom_GetChatRoomGroupState_Response GetChatRoomGroupState(CChatRoom_GetChatRoomGroupState_Request request);
-        CChatRoom_GetChatRoomGroupSummary_Response GetChatRoomGroupSummary(CChatRoom_GetChatRoomGroupSummary_Request request);
-        NoResponse AckChatMessage(CChatRoom_AckChatMessage_Notification request);
-        CChatRoom_CreateInviteLink_Response CreateInviteLink(CChatRoom_CreateInviteLink_Request request);
-        CChatRoom_GetInviteLinkInfo_Response GetInviteLinkInfo(CChatRoom_GetInviteLinkInfo_Request request);
-        CChatRoom_GetInviteInfo_Response GetInviteInfo(CChatRoom_GetInviteInfo_Request request);
-        CChatRoom_GetInviteLinksForGroup_Response GetInviteLinksForGroup(CChatRoom_GetInviteLinksForGroup_Request request);
-        CChatRoom_GetBanList_Response GetBanList(CChatRoom_GetBanList_Request request);
-        CChatRoom_GetInviteList_Response GetInviteList(CChatRoom_GetInviteList_Request request);
-        CChatRoom_DeleteInviteLink_Response DeleteInviteLink(CChatRoom_DeleteInviteLink_Request request);
-        CChatRoom_SetSessionActiveChatRoomGroups_Response SetSessionActiveChatRoomGroups(CChatRoom_SetSessionActiveChatRoomGroups_Request request);
-        CChatRoom_SetUserChatGroupPreferences_Response SetUserChatGroupPreferences(CChatRoom_SetUserChatGroupPreferences_Request request);
-        CChatRoom_DeleteChatMessages_Response DeleteChatMessages(CChatRoom_DeleteChatMessages_Request request);
-    }
-
-    public interface IClanChatRooms
-    {
-        CClanChatRooms_GetClanChatRoomInfo_Response GetClanChatRoomInfo(CClanChatRooms_GetClanChatRoomInfo_Request request);
-        CClanChatRooms_SetClanChatRoomPrivate_Response SetClanChatRoomPrivate(CClanChatRooms_SetClanChatRoomPrivate_Request request);
-    }
-
-    public interface IChatRoomClient
-    {
-        NoResponse NotifyIncomingChatMessage(CChatRoom_IncomingChatMessage_Notification request);
-        NoResponse NotifyChatMessageModified(CChatRoom_ChatMessageModified_Notification request);
-        NoResponse NotifyMemberStateChange(CChatRoom_MemberStateChange_Notification request);
-        NoResponse NotifyChatRoomHeaderStateChange(CChatRoom_ChatRoomHeaderState_Notification request);
-        NoResponse NotifyChatRoomGroupRoomsChange(CChatRoom_ChatRoomGroupRoomsChange_Notification request);
-        NoResponse NotifyShouldRejoinChatRoomVoiceChat(CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification request);
-        NoResponse NotifyChatGroupUserStateChanged(ChatRoomClient_NotifyChatGroupUserStateChanged_Notification request);
-        NoResponse NotifyAckChatMessageEcho(CChatRoom_AckChatMessage_Notification request);
-    }
-
-    public interface IChatUsability
-    {
-        NoResponse NotifyClientUsabilityMetrics(CChatUsability_ClientUsabilityMetrics_Notification request);
-    }
-
-    public interface IChatUsabilityClient
-    {
-        NoResponse NotifyRequestClientUsabilityMetrics(CChatUsability_RequestClientUsabilityMetrics_Notification request);
     }
 
 }

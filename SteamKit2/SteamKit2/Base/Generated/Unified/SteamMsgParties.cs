@@ -351,16 +351,6 @@ namespace SteamKit2.Unified.Internal
 
     }
 
-    public interface IParties
-    {
-        CParties_JoinParty_Response JoinParty(CParties_JoinParty_Request request);
-        CParties_CreateBeacon_Response CreateBeacon(CParties_CreateBeacon_Request request);
-        CParties_OnReservationCompleted_Response OnReservationCompleted(CParties_OnReservationCompleted_Request request);
-        CParties_CancelReservation_Response CancelReservation(CParties_CancelReservation_Request request);
-        CParties_ChangeNumOpenSlots_Response ChangeNumOpenSlots(CParties_ChangeNumOpenSlots_Request request);
-        CParties_DestroyBeacon_Response DestroyBeacon(CParties_DestroyBeacon_Request request);
-    }
-
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

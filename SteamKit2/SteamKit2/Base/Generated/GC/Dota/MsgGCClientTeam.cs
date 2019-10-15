@@ -540,59 +540,11 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetgames_played_matchmaking() => __pbn__games_played_matchmaking = null;
         private uint? __pbn__games_played_matchmaking;
 
-        [global::ProtoBuf.ProtoMember(24)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string url_logo
-        {
-            get { return __pbn__url_logo ?? ""; }
-            set { __pbn__url_logo = value; }
-        }
-        public bool ShouldSerializeurl_logo() => __pbn__url_logo != null;
-        public void Reseturl_logo() => __pbn__url_logo = null;
-        private string __pbn__url_logo;
+        [global::ProtoBuf.ProtoMember(30)]
+        public global::System.Collections.Generic.List<uint> registered_member_account_ids { get; } = new global::System.Collections.Generic.List<uint>();
 
-        [global::ProtoBuf.ProtoMember(25)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string url_base_logo
-        {
-            get { return __pbn__url_base_logo ?? ""; }
-            set { __pbn__url_base_logo = value; }
-        }
-        public bool ShouldSerializeurl_base_logo() => __pbn__url_base_logo != null;
-        public void Reseturl_base_logo() => __pbn__url_base_logo = null;
-        private string __pbn__url_base_logo;
-
-        [global::ProtoBuf.ProtoMember(26)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string url_banner_logo
-        {
-            get { return __pbn__url_banner_logo ?? ""; }
-            set { __pbn__url_banner_logo = value; }
-        }
-        public bool ShouldSerializeurl_banner_logo() => __pbn__url_banner_logo != null;
-        public void Reseturl_banner_logo() => __pbn__url_banner_logo = null;
-        private string __pbn__url_banner_logo;
-
-        [global::ProtoBuf.ProtoMember(27)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string url_sponsor_logo
-        {
-            get { return __pbn__url_sponsor_logo ?? ""; }
-            set { __pbn__url_sponsor_logo = value; }
-        }
-        public bool ShouldSerializeurl_sponsor_logo() => __pbn__url_sponsor_logo != null;
-        public void Reseturl_sponsor_logo() => __pbn__url_sponsor_logo = null;
-        private string __pbn__url_sponsor_logo;
-
-        [global::ProtoBuf.ProtoMember(28)]
-        public uint dpc_points
-        {
-            get { return __pbn__dpc_points.GetValueOrDefault(); }
-            set { __pbn__dpc_points = value; }
-        }
-        public bool ShouldSerializedpc_points() => __pbn__dpc_points != null;
-        public void Resetdpc_points() => __pbn__dpc_points = null;
-        private uint? __pbn__dpc_points;
+        [global::ProtoBuf.ProtoMember(31)]
+        public global::System.Collections.Generic.List<AuditEntry> audit_entries { get; } = new global::System.Collections.Generic.List<AuditEntry>();
 
         [global::ProtoBuf.ProtoMember(29)]
         [global::System.ComponentModel.DefaultValue(ELeagueRegion.LEAGUE_REGION_UNSET)]
@@ -641,6 +593,45 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializeadmin() => __pbn__admin != null;
             public void Resetadmin() => __pbn__admin = null;
             private bool? __pbn__admin;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class AuditEntry : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint audit_action
+            {
+                get { return __pbn__audit_action.GetValueOrDefault(); }
+                set { __pbn__audit_action = value; }
+            }
+            public bool ShouldSerializeaudit_action() => __pbn__audit_action != null;
+            public void Resetaudit_action() => __pbn__audit_action = null;
+            private uint? __pbn__audit_action;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint timestamp
+            {
+                get { return __pbn__timestamp.GetValueOrDefault(); }
+                set { __pbn__timestamp = value; }
+            }
+            public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
+            public void Resettimestamp() => __pbn__timestamp = null;
+            private uint? __pbn__timestamp;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint account_id
+            {
+                get { return __pbn__account_id.GetValueOrDefault(); }
+                set { __pbn__account_id = value; }
+            }
+            public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+            public void Resetaccount_id() => __pbn__account_id = null;
+            private uint? __pbn__account_id;
 
         }
 

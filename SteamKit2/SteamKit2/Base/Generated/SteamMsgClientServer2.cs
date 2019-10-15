@@ -694,6 +694,16 @@ namespace SteamKit2.Internal
         public void Resetclear_in_progress() => __pbn__clear_in_progress = null;
         private bool? __pbn__clear_in_progress;
 
+        [global::ProtoBuf.ProtoMember(28)]
+        public bool remove_all_kvtags
+        {
+            get { return __pbn__remove_all_kvtags.GetValueOrDefault(); }
+            set { __pbn__remove_all_kvtags = value; }
+        }
+        public bool ShouldSerializeremove_all_kvtags() => __pbn__remove_all_kvtags != null;
+        public void Resetremove_all_kvtags() => __pbn__remove_all_kvtags = null;
+        private bool? __pbn__remove_all_kvtags;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class KeyValueTag : global::ProtoBuf.IExtensible
         {
@@ -3095,130 +3105,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientEmailChange : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string password
-        {
-            get { return __pbn__password ?? ""; }
-            set { __pbn__password = value; }
-        }
-        public bool ShouldSerializepassword() => __pbn__password != null;
-        public void Resetpassword() => __pbn__password = null;
-        private string __pbn__password;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string email
-        {
-            get { return __pbn__email ?? ""; }
-            set { __pbn__email = value; }
-        }
-        public bool ShouldSerializeemail() => __pbn__email != null;
-        public void Resetemail() => __pbn__email = null;
-        private string __pbn__email;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string code
-        {
-            get { return __pbn__code ?? ""; }
-            set { __pbn__code = value; }
-        }
-        public bool ShouldSerializecode() => __pbn__code != null;
-        public void Resetcode() => __pbn__code = null;
-        private string __pbn__code;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public bool final
-        {
-            get { return __pbn__final.GetValueOrDefault(); }
-            set { __pbn__final = value; }
-        }
-        public bool ShouldSerializefinal() => __pbn__final != null;
-        public void Resetfinal() => __pbn__final = null;
-        private bool? __pbn__final;
-
-        [global::ProtoBuf.ProtoMember(5)]
-        public bool newmethod
-        {
-            get { return __pbn__newmethod.GetValueOrDefault(); }
-            set { __pbn__newmethod = value; }
-        }
-        public bool ShouldSerializenewmethod() => __pbn__newmethod != null;
-        public void Resetnewmethod() => __pbn__newmethod = null;
-        private bool? __pbn__newmethod;
-
-        [global::ProtoBuf.ProtoMember(6)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string twofactor_code
-        {
-            get { return __pbn__twofactor_code ?? ""; }
-            set { __pbn__twofactor_code = value; }
-        }
-        public bool ShouldSerializetwofactor_code() => __pbn__twofactor_code != null;
-        public void Resettwofactor_code() => __pbn__twofactor_code = null;
-        private string __pbn__twofactor_code;
-
-        [global::ProtoBuf.ProtoMember(7)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string sms_code
-        {
-            get { return __pbn__sms_code ?? ""; }
-            set { __pbn__sms_code = value; }
-        }
-        public bool ShouldSerializesms_code() => __pbn__sms_code != null;
-        public void Resetsms_code() => __pbn__sms_code = null;
-        private string __pbn__sms_code;
-
-        [global::ProtoBuf.ProtoMember(8)]
-        public bool client_supports_sms
-        {
-            get { return __pbn__client_supports_sms.GetValueOrDefault(); }
-            set { __pbn__client_supports_sms = value; }
-        }
-        public bool ShouldSerializeclient_supports_sms() => __pbn__client_supports_sms != null;
-        public void Resetclient_supports_sms() => __pbn__client_supports_sms = null;
-        private bool? __pbn__client_supports_sms;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientEmailChangeResponse : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
-        public int eresult
-        {
-            get { return __pbn__eresult ?? 2; }
-            set { __pbn__eresult = value; }
-        }
-        public bool ShouldSerializeeresult() => __pbn__eresult != null;
-        public void Reseteresult() => __pbn__eresult = null;
-        private int? __pbn__eresult;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public bool requires_sms_code
-        {
-            get { return __pbn__requires_sms_code.GetValueOrDefault(); }
-            set { __pbn__requires_sms_code = value; }
-        }
-        public bool ShouldSerializerequires_sms_code() => __pbn__requires_sms_code != null;
-        public void Resetrequires_sms_code() => __pbn__requires_sms_code = null;
-        private bool? __pbn__requires_sms_code;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgClientGetCDNAuthToken : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -3623,6 +3509,16 @@ namespace SteamKit2.Internal
         public void Resettotal_bytes_saved() => __pbn__total_bytes_saved = null;
         private ulong? __pbn__total_bytes_saved;
 
+        [global::ProtoBuf.ProtoMember(22)]
+        public uint cell_id
+        {
+            get { return __pbn__cell_id.GetValueOrDefault(); }
+            set { __pbn__cell_id = value; }
+        }
+        public bool ShouldSerializecell_id() => __pbn__cell_id != null;
+        public void Resetcell_id() => __pbn__cell_id = null;
+        private uint? __pbn__cell_id;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -3823,6 +3719,16 @@ namespace SteamKit2.Internal
             public bool ShouldSerializehost_name() => __pbn__host_name != null;
             public void Resethost_name() => __pbn__host_name = null;
             private string __pbn__host_name;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public ulong microseconds
+            {
+                get { return __pbn__microseconds.GetValueOrDefault(); }
+                set { __pbn__microseconds = value; }
+            }
+            public bool ShouldSerializemicroseconds() => __pbn__microseconds != null;
+            public void Resetmicroseconds() => __pbn__microseconds = null;
+            private ulong? __pbn__microseconds;
 
         }
 

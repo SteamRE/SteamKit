@@ -282,114 +282,6 @@ namespace SteamKit2.GC.TF2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgTFVoteKickBanPlayer : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint account_id_subject
-        {
-            get { return __pbn__account_id_subject.GetValueOrDefault(); }
-            set { __pbn__account_id_subject = value; }
-        }
-        public bool ShouldSerializeaccount_id_subject() => __pbn__account_id_subject != null;
-        public void Resetaccount_id_subject() => __pbn__account_id_subject = null;
-        private uint? __pbn__account_id_subject;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint kick_reason
-        {
-            get { return __pbn__kick_reason.GetValueOrDefault(); }
-            set { __pbn__kick_reason = value; }
-        }
-        public bool ShouldSerializekick_reason() => __pbn__kick_reason != null;
-        public void Resetkick_reason() => __pbn__kick_reason = null;
-        private uint? __pbn__kick_reason;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgTFVoteKickBanPlayerResult : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint account_id_initiator
-        {
-            get { return __pbn__account_id_initiator.GetValueOrDefault(); }
-            set { __pbn__account_id_initiator = value; }
-        }
-        public bool ShouldSerializeaccount_id_initiator() => __pbn__account_id_initiator != null;
-        public void Resetaccount_id_initiator() => __pbn__account_id_initiator = null;
-        private uint? __pbn__account_id_initiator;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint account_id_subject
-        {
-            get { return __pbn__account_id_subject.GetValueOrDefault(); }
-            set { __pbn__account_id_subject = value; }
-        }
-        public bool ShouldSerializeaccount_id_subject() => __pbn__account_id_subject != null;
-        public void Resetaccount_id_subject() => __pbn__account_id_subject = null;
-        private uint? __pbn__account_id_subject;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public uint kick_reason
-        {
-            get { return __pbn__kick_reason.GetValueOrDefault(); }
-            set { __pbn__kick_reason = value; }
-        }
-        public bool ShouldSerializekick_reason() => __pbn__kick_reason != null;
-        public void Resetkick_reason() => __pbn__kick_reason = null;
-        private uint? __pbn__kick_reason;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public bool kick_successful
-        {
-            get { return __pbn__kick_successful.GetValueOrDefault(); }
-            set { __pbn__kick_successful = value; }
-        }
-        public bool ShouldSerializekick_successful() => __pbn__kick_successful != null;
-        public void Resetkick_successful() => __pbn__kick_successful = null;
-        private bool? __pbn__kick_successful;
-
-        [global::ProtoBuf.ProtoMember(5)]
-        public uint num_yes_votes
-        {
-            get { return __pbn__num_yes_votes.GetValueOrDefault(); }
-            set { __pbn__num_yes_votes = value; }
-        }
-        public bool ShouldSerializenum_yes_votes() => __pbn__num_yes_votes != null;
-        public void Resetnum_yes_votes() => __pbn__num_yes_votes = null;
-        private uint? __pbn__num_yes_votes;
-
-        [global::ProtoBuf.ProtoMember(6)]
-        public uint num_no_votes
-        {
-            get { return __pbn__num_no_votes.GetValueOrDefault(); }
-            set { __pbn__num_no_votes = value; }
-        }
-        public bool ShouldSerializenum_no_votes() => __pbn__num_no_votes != null;
-        public void Resetnum_no_votes() => __pbn__num_no_votes = null;
-        private uint? __pbn__num_no_votes;
-
-        [global::ProtoBuf.ProtoMember(7)]
-        public uint num_possible_votes
-        {
-            get { return __pbn__num_possible_votes.GetValueOrDefault(); }
-            set { __pbn__num_possible_votes = value; }
-        }
-        public bool ShouldSerializenum_possible_votes() => __pbn__num_possible_votes != null;
-        public void Resetnum_possible_votes() => __pbn__num_possible_votes = null;
-        private uint? __pbn__num_possible_votes;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgTFFreeTrialChooseMostHelpfulFriend : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -4259,33 +4151,13 @@ namespace SteamKit2.GC.TF2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgPlayerVoteKickedAfterLeavingMatch : global::ProtoBuf.IExtensible
+    public partial class CMsgProcessMatchVoteKick : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong steam_id
-        {
-            get { return __pbn__steam_id.GetValueOrDefault(); }
-            set { __pbn__steam_id = value; }
-        }
-        public bool ShouldSerializesteam_id() => __pbn__steam_id != null;
-        public void Resetsteam_id() => __pbn__steam_id = null;
-        private ulong? __pbn__steam_id;
-
-        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong lobby_id
-        {
-            get { return __pbn__lobby_id.GetValueOrDefault(); }
-            set { __pbn__lobby_id = value; }
-        }
-        public bool ShouldSerializelobby_id() => __pbn__lobby_id != null;
-        public void Resetlobby_id() => __pbn__lobby_id = null;
-        private ulong? __pbn__lobby_id;
-
-        [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong match_id
         {
             get { return __pbn__match_id.GetValueOrDefault(); }
@@ -4294,6 +4166,98 @@ namespace SteamKit2.GC.TF2.Internal
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
         private ulong? __pbn__match_id;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong initiator_steam_id
+        {
+            get { return __pbn__initiator_steam_id.GetValueOrDefault(); }
+            set { __pbn__initiator_steam_id = value; }
+        }
+        public bool ShouldSerializeinitiator_steam_id() => __pbn__initiator_steam_id != null;
+        public void Resetinitiator_steam_id() => __pbn__initiator_steam_id = null;
+        private ulong? __pbn__initiator_steam_id;
+
+        [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong target_steam_id
+        {
+            get { return __pbn__target_steam_id.GetValueOrDefault(); }
+            set { __pbn__target_steam_id = value; }
+        }
+        public bool ShouldSerializetarget_steam_id() => __pbn__target_steam_id != null;
+        public void Resettarget_steam_id() => __pbn__target_steam_id = null;
+        private ulong? __pbn__target_steam_id;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(TFVoteKickReason.TFVoteKickReason_Other)]
+        public TFVoteKickReason reason
+        {
+            get { return __pbn__reason ?? TFVoteKickReason.TFVoteKickReason_Other; }
+            set { __pbn__reason = value; }
+        }
+        public bool ShouldSerializereason() => __pbn__reason != null;
+        public void Resetreason() => __pbn__reason = null;
+        private TFVoteKickReason? __pbn__reason;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public global::System.Collections.Generic.List<Vote> votes { get; } = new global::System.Collections.Generic.List<Vote>();
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool default_pass
+        {
+            get { return __pbn__default_pass.GetValueOrDefault(); }
+            set { __pbn__default_pass = value; }
+        }
+        public bool ShouldSerializedefault_pass() => __pbn__default_pass != null;
+        public void Resetdefault_pass() => __pbn__default_pass = null;
+        private bool? __pbn__default_pass;
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Vote : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+            public ulong steam_id
+            {
+                get { return __pbn__steam_id.GetValueOrDefault(); }
+                set { __pbn__steam_id = value; }
+            }
+            public bool ShouldSerializesteam_id() => __pbn__steam_id != null;
+            public void Resetsteam_id() => __pbn__steam_id = null;
+            private ulong? __pbn__steam_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public bool vote_yay
+            {
+                get { return __pbn__vote_yay.GetValueOrDefault(); }
+                set { __pbn__vote_yay = value; }
+            }
+            public bool ShouldSerializevote_yay() => __pbn__vote_yay != null;
+            public void Resetvote_yay() => __pbn__vote_yay = null;
+            private bool? __pbn__vote_yay;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgProcessMatchVoteKickResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool rip
+        {
+            get { return __pbn__rip.GetValueOrDefault(); }
+            set { __pbn__rip = value; }
+        }
+        public bool ShouldSerializerip() => __pbn__rip != null;
+        public void Resetrip() => __pbn__rip = null;
+        private bool? __pbn__rip;
 
     }
 
@@ -6450,16 +6414,6 @@ namespace SteamKit2.GC.TF2.Internal
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint account_id
-        {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
-        }
-        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
-        public void Resetaccount_id() => __pbn__account_id = null;
-        private uint? __pbn__account_id;
-
         [global::ProtoBuf.ProtoMember(2)]
         public ulong target_id
         {
@@ -6469,6 +6423,37 @@ namespace SteamKit2.GC.TF2.Internal
         public bool ShouldSerializetarget_id() => __pbn__target_id != null;
         public void Resettarget_id() => __pbn__target_id = null;
         private ulong? __pbn__target_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong voter_id
+        {
+            get { return __pbn__voter_id.GetValueOrDefault(); }
+            set { __pbn__voter_id = value; }
+        }
+        public bool ShouldSerializevoter_id() => __pbn__voter_id != null;
+        public void Resetvoter_id() => __pbn__voter_id = null;
+        private ulong? __pbn__voter_id;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(TFVoteKickReason.TFVoteKickReason_Other)]
+        public TFVoteKickReason reason
+        {
+            get { return __pbn__reason ?? TFVoteKickReason.TFVoteKickReason_Other; }
+            set { __pbn__reason = value; }
+        }
+        public bool ShouldSerializereason() => __pbn__reason != null;
+        public void Resetreason() => __pbn__reason = null;
+        private TFVoteKickReason? __pbn__reason;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public ulong match_id
+        {
+            get { return __pbn__match_id.GetValueOrDefault(); }
+            set { __pbn__match_id = value; }
+        }
+        public bool ShouldSerializematch_id() => __pbn__match_id != null;
+        public void Resetmatch_id() => __pbn__match_id = null;
+        private ulong? __pbn__match_id;
 
     }
 
@@ -6489,15 +6474,25 @@ namespace SteamKit2.GC.TF2.Internal
         public void Resetallowed() => __pbn__allowed = null;
         private bool? __pbn__allowed;
 
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint cooldown
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool voter_inhibit
         {
-            get { return __pbn__cooldown.GetValueOrDefault(); }
-            set { __pbn__cooldown = value; }
+            get { return __pbn__voter_inhibit.GetValueOrDefault(); }
+            set { __pbn__voter_inhibit = value; }
         }
-        public bool ShouldSerializecooldown() => __pbn__cooldown != null;
-        public void Resetcooldown() => __pbn__cooldown = null;
-        private uint? __pbn__cooldown;
+        public bool ShouldSerializevoter_inhibit() => __pbn__voter_inhibit != null;
+        public void Resetvoter_inhibit() => __pbn__voter_inhibit = null;
+        private bool? __pbn__voter_inhibit;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool target_inhibit
+        {
+            get { return __pbn__target_inhibit.GetValueOrDefault(); }
+            set { __pbn__target_inhibit = value; }
+        }
+        public bool ShouldSerializetarget_inhibit() => __pbn__target_inhibit != null;
+        public void Resettarget_inhibit() => __pbn__target_inhibit = null;
+        private bool? __pbn__target_inhibit;
 
     }
 
@@ -8018,8 +8013,6 @@ namespace SteamKit2.GC.TF2.Internal
     public enum ETFGCMsg
     {
         k_EMsgGCReportWarKill = 5001,
-        k_EMsgGCVoteKickBanPlayer = 5018,
-        k_EMsgGCVoteKickBanPlayerResult = 5019,
         k_EMsgGCKickPlayer_DEPRECATED = 5020,
         k_EMsgGCStartedTraining_DEPRECATED = 5021,
         k_EMsgGCFreeTrial_ChooseMostHelpfulFriend = 5022,
@@ -8153,8 +8146,6 @@ namespace SteamKit2.GC.TF2.Internal
         k_EMsgGC_QuestMapUnlockNode = 6547,
         k_EMsgGC_QuestMapPurchaseReward = 6549,
         k_EMsgGC_SetDisablePartyQuestProgress = 6550,
-        k_EMsgGCPlayerVoteKickedAfterLeavingMatch = 6551,
-        k_EMsgGCPlayerVoteKickedAfterLeavingMatchResponse = 6552,
         k_EMsgGCQuestProgressReport = 6553,
         k_EMsgGCParty_SetOptions = 6554,
         k_EMsgGCParty_SetOptionsResponse = 6555,
@@ -8182,6 +8173,8 @@ namespace SteamKit2.GC.TF2.Internal
         k_EMsgGCQuestStrangeEvent = 6577,
         k_EMsgGC_AcceptLobbyInvite = 6578,
         k_EMsgGC_AcceptLobbyInviteReply = 6579,
+        k_EMsgGC_ProcessMatchVoteKick = 6581,
+        k_EMsgGC_ProcessMatchVoteKickResponse = 6582,
         k_EMsgGCDev_GrantWarKill = 10001,
     }
 
@@ -8275,6 +8268,15 @@ namespace SteamKit2.GC.TF2.Internal
         TFMatchLeaveReason_AWOL = 4,
         TFMatchLeaveReason_NO_SHOW = 5,
         TFMatchLeaveReason_GC_REMOVED = 6,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum TFVoteKickReason
+    {
+        TFVoteKickReason_Other = 0,
+        TFVoteKickReason_Cheating = 1,
+        TFVoteKickReason_Idle = 2,
+        TFVoteKickReason_Scamming = 3,
     }
 
     [global::ProtoBuf.ProtoContract()]

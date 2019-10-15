@@ -2190,6 +2190,55 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientMMSSetRatelimitPolicyOnClient : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint app_id
+        {
+            get { return __pbn__app_id.GetValueOrDefault(); }
+            set { __pbn__app_id = value; }
+        }
+        public bool ShouldSerializeapp_id() => __pbn__app_id != null;
+        public void Resetapp_id() => __pbn__app_id = null;
+        private uint? __pbn__app_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool enable_rate_limits
+        {
+            get { return __pbn__enable_rate_limits.GetValueOrDefault(); }
+            set { __pbn__enable_rate_limits = value; }
+        }
+        public bool ShouldSerializeenable_rate_limits() => __pbn__enable_rate_limits != null;
+        public void Resetenable_rate_limits() => __pbn__enable_rate_limits = null;
+        private bool? __pbn__enable_rate_limits;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public int seconds_per_message
+        {
+            get { return __pbn__seconds_per_message.GetValueOrDefault(); }
+            set { __pbn__seconds_per_message = value; }
+        }
+        public bool ShouldSerializeseconds_per_message() => __pbn__seconds_per_message != null;
+        public void Resetseconds_per_message() => __pbn__seconds_per_message = null;
+        private int? __pbn__seconds_per_message;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public int milliseconds_per_data_update
+        {
+            get { return __pbn__milliseconds_per_data_update.GetValueOrDefault(); }
+            set { __pbn__milliseconds_per_data_update = value; }
+        }
+        public bool ShouldSerializemilliseconds_per_data_update() => __pbn__milliseconds_per_data_update != null;
+        public void Resetmilliseconds_per_data_update() => __pbn__milliseconds_per_data_update = null;
+        private int? __pbn__milliseconds_per_data_update;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgClientMMSCreateLobby : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -3033,6 +3082,16 @@ namespace SteamKit2.Internal
         public void Resetlobby_cellid() => __pbn__lobby_cellid = null;
         private uint? __pbn__lobby_cellid;
 
+        [global::ProtoBuf.ProtoMember(11)]
+        public bool owner_should_accept_changes
+        {
+            get { return __pbn__owner_should_accept_changes.GetValueOrDefault(); }
+            set { __pbn__owner_should_accept_changes = value; }
+        }
+        public bool ShouldSerializeowner_should_accept_changes() => __pbn__owner_should_accept_changes != null;
+        public void Resetowner_should_accept_changes() => __pbn__owner_should_accept_changes = null;
+        private bool? __pbn__owner_should_accept_changes;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Member : global::ProtoBuf.IExtensible
         {
@@ -3545,6 +3604,95 @@ namespace SteamKit2.Internal
         public bool ShouldSerializesteam_id_user_invited() => __pbn__steam_id_user_invited != null;
         public void Resetsteam_id_user_invited() => __pbn__steam_id_user_invited = null;
         private ulong? __pbn__steam_id_user_invited;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientMMSGetLobbyStatus : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint app_id
+        {
+            get { return __pbn__app_id.GetValueOrDefault(); }
+            set { __pbn__app_id = value; }
+        }
+        public bool ShouldSerializeapp_id() => __pbn__app_id != null;
+        public void Resetapp_id() => __pbn__app_id = null;
+        private uint? __pbn__app_id;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steam_id_lobby
+        {
+            get { return __pbn__steam_id_lobby.GetValueOrDefault(); }
+            set { __pbn__steam_id_lobby = value; }
+        }
+        public bool ShouldSerializesteam_id_lobby() => __pbn__steam_id_lobby != null;
+        public void Resetsteam_id_lobby() => __pbn__steam_id_lobby = null;
+        private ulong? __pbn__steam_id_lobby;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool claim_membership
+        {
+            get { return __pbn__claim_membership.GetValueOrDefault(); }
+            set { __pbn__claim_membership = value; }
+        }
+        public bool ShouldSerializeclaim_membership() => __pbn__claim_membership != null;
+        public void Resetclaim_membership() => __pbn__claim_membership = null;
+        private bool? __pbn__claim_membership;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool claim_ownership
+        {
+            get { return __pbn__claim_ownership.GetValueOrDefault(); }
+            set { __pbn__claim_ownership = value; }
+        }
+        public bool ShouldSerializeclaim_ownership() => __pbn__claim_ownership != null;
+        public void Resetclaim_ownership() => __pbn__claim_ownership = null;
+        private bool? __pbn__claim_ownership;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientMMSGetLobbyStatusResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint app_id
+        {
+            get { return __pbn__app_id.GetValueOrDefault(); }
+            set { __pbn__app_id = value; }
+        }
+        public bool ShouldSerializeapp_id() => __pbn__app_id != null;
+        public void Resetapp_id() => __pbn__app_id = null;
+        private uint? __pbn__app_id;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steam_id_lobby
+        {
+            get { return __pbn__steam_id_lobby.GetValueOrDefault(); }
+            set { __pbn__steam_id_lobby = value; }
+        }
+        public bool ShouldSerializesteam_id_lobby() => __pbn__steam_id_lobby != null;
+        public void Resetsteam_id_lobby() => __pbn__steam_id_lobby = null;
+        private ulong? __pbn__steam_id_lobby;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(EMMSLobbyStatus.k_EMMSLobbyStatusInvalid)]
+        public EMMSLobbyStatus lobby_status
+        {
+            get { return __pbn__lobby_status ?? EMMSLobbyStatus.k_EMMSLobbyStatusInvalid; }
+            set { __pbn__lobby_status = value; }
+        }
+        public bool ShouldSerializelobby_status() => __pbn__lobby_status != null;
+        public void Resetlobby_status() => __pbn__lobby_status = null;
+        private EMMSLobbyStatus? __pbn__lobby_status;
 
     }
 
@@ -7654,6 +7802,95 @@ namespace SteamKit2.Internal
 
         }
 
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientUnsignedInstallScript : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint app_id
+        {
+            get { return __pbn__app_id.GetValueOrDefault(); }
+            set { __pbn__app_id = value; }
+        }
+        public bool ShouldSerializeapp_id() => __pbn__app_id != null;
+        public void Resetapp_id() => __pbn__app_id = null;
+        private uint? __pbn__app_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string file_name
+        {
+            get { return __pbn__file_name ?? ""; }
+            set { __pbn__file_name = value; }
+        }
+        public bool ShouldSerializefile_name() => __pbn__file_name != null;
+        public void Resetfile_name() => __pbn__file_name = null;
+        private string __pbn__file_name;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint file_size
+        {
+            get { return __pbn__file_size.GetValueOrDefault(); }
+            set { __pbn__file_size = value; }
+        }
+        public bool ShouldSerializefile_size() => __pbn__file_size != null;
+        public void Resetfile_size() => __pbn__file_size = null;
+        private uint? __pbn__file_size;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool signature_broken
+        {
+            get { return __pbn__signature_broken.GetValueOrDefault(); }
+            set { __pbn__signature_broken = value; }
+        }
+        public bool ShouldSerializesignature_broken() => __pbn__signature_broken != null;
+        public void Resetsignature_broken() => __pbn__signature_broken = null;
+        private bool? __pbn__signature_broken;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint depot_id
+        {
+            get { return __pbn__depot_id.GetValueOrDefault(); }
+            set { __pbn__depot_id = value; }
+        }
+        public bool ShouldSerializedepot_id() => __pbn__depot_id != null;
+        public void Resetdepot_id() => __pbn__depot_id = null;
+        private uint? __pbn__depot_id;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public ulong manifest_id
+        {
+            get { return __pbn__manifest_id.GetValueOrDefault(); }
+            set { __pbn__manifest_id = value; }
+        }
+        public bool ShouldSerializemanifest_id() => __pbn__manifest_id != null;
+        public void Resetmanifest_id() => __pbn__manifest_id = null;
+        private ulong? __pbn__manifest_id;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint file_flags
+        {
+            get { return __pbn__file_flags.GetValueOrDefault(); }
+            set { __pbn__file_flags = value; }
+        }
+        public bool ShouldSerializefile_flags() => __pbn__file_flags != null;
+        public void Resetfile_flags() => __pbn__file_flags = null;
+        private uint? __pbn__file_flags;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EMMSLobbyStatus
+    {
+        k_EMMSLobbyStatusInvalid = 0,
+        k_EMMSLobbyStatusExists = 1,
+        k_EMMSLobbyStatusDoesNotExist = 2,
+        k_EMMSLobbyStatusNotAMember = 3,
     }
 
 }

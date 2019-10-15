@@ -607,22 +607,6 @@ namespace SteamKit2.Unified.Internal
 
     }
 
-    public interface IGameNotifications
-    {
-        CGameNotifications_CreateSession_Response UserCreateSession(CGameNotifications_CreateSession_Request request);
-        CGameNotifications_DeleteSession_Response UserDeleteSession(CGameNotifications_DeleteSession_Request request);
-        CGameNotifications_UpdateSession_Response UserUpdateSession(CGameNotifications_UpdateSession_Request request);
-        CGameNotifications_EnumerateSessions_Response EnumerateSessions(CGameNotifications_EnumerateSessions_Request request);
-        CGameNotifications_GetSessionDetails_Response GetSessionDetails(CGameNotifications_GetSessionDetails_Request request);
-        CGameNotifications_UpdateNotificationSettings_Response UpdateNotificationSettings(CGameNotifications_UpdateNotificationSettings_Request request);
-    }
-
-    public interface IGameNotificationsClient
-    {
-        NoResponse OnNotificationsRequested(CGameNotifications_OnNotificationsRequested_Notification request);
-        NoResponse OnUserStatusChanged(CGameNotifications_OnUserStatusChanged_Notification request);
-    }
-
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

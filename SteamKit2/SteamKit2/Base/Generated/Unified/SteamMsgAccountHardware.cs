@@ -562,16 +562,146 @@ namespace SteamKit2.Unified.Internal
 
     }
 
-    public interface IAccountHardware
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAccountHardware_VRCompatibilityCheck_Request : global::ProtoBuf.IExtensible
     {
-        CAccountHardware_RegisterSteamController_Response RegisterSteamController(CAccountHardware_RegisterSteamController_Request request);
-        CAccountHardware_CompleteSteamControllerRegistration_Response CompleteSteamControllerRegistration(CAccountHardware_CompleteSteamControllerRegistration_Request request);
-        CAccountHardware_QueryAccountsRegisteredToSerial_Response QueryAccountsRegisteredToController(CAccountHardware_QueryAccountsRegisteredToSerial_Request request);
-        CAccountHardware_SteamControllerSetConfig_Response SetDesiredControllerConfigForApp(CAccountHardware_SteamControllerSetConfig_Request request);
-        CAccountHardware_SteamControllerGetConfig_Response GetDesiredControllerConfigForApp(CAccountHardware_SteamControllerGetConfig_Request request);
-        CAccountHardware_DeRegisterSteamController_Response DeRegisterSteamController(CAccountHardware_DeRegisterSteamController_Request request);
-        CAccountHardware_SetPersonalizationFile_Response SetControllerPersonalizationFile(CAccountHardware_SetPersonalizationFile_Request request);
-        CAccountHardware_GetPersonalizationFile_Response GetControllerPersonalizationFile(CAccountHardware_GetPersonalizationFile_Request request);
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string product_name
+        {
+            get { return __pbn__product_name ?? ""; }
+            set { __pbn__product_name = value; }
+        }
+        public bool ShouldSerializeproduct_name() => __pbn__product_name != null;
+        public void Resetproduct_name() => __pbn__product_name = null;
+        private string __pbn__product_name;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<Pair> values { get; } = new global::System.Collections.Generic.List<Pair>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Pair : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string key
+            {
+                get { return __pbn__key ?? ""; }
+                set { __pbn__key = value; }
+            }
+            public bool ShouldSerializekey() => __pbn__key != null;
+            public void Resetkey() => __pbn__key = null;
+            private string __pbn__key;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string value
+            {
+                get { return __pbn__value ?? ""; }
+                set { __pbn__value = value; }
+            }
+            public bool ShouldSerializevalue() => __pbn__value != null;
+            public void Resetvalue() => __pbn__value = null;
+            private string __pbn__value;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAccountHardware_VRCompatibilityCheck_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<Pair> values { get; } = new global::System.Collections.Generic.List<Pair>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<ComponentDisplay> components { get; } = new global::System.Collections.Generic.List<ComponentDisplay>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Pair : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string key
+            {
+                get { return __pbn__key ?? ""; }
+                set { __pbn__key = value; }
+            }
+            public bool ShouldSerializekey() => __pbn__key != null;
+            public void Resetkey() => __pbn__key = null;
+            private string __pbn__key;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string value
+            {
+                get { return __pbn__value ?? ""; }
+                set { __pbn__value = value; }
+            }
+            public bool ShouldSerializevalue() => __pbn__value != null;
+            public void Resetvalue() => __pbn__value = null;
+            private string __pbn__value;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class ComponentDisplay : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string name
+            {
+                get { return __pbn__name ?? ""; }
+                set { __pbn__name = value; }
+            }
+            public bool ShouldSerializename() => __pbn__name != null;
+            public void Resetname() => __pbn__name = null;
+            private string __pbn__name;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string image
+            {
+                get { return __pbn__image ?? ""; }
+                set { __pbn__image = value; }
+            }
+            public bool ShouldSerializeimage() => __pbn__image != null;
+            public void Resetimage() => __pbn__image = null;
+            private string __pbn__image;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string value
+            {
+                get { return __pbn__value ?? ""; }
+                set { __pbn__value = value; }
+            }
+            public bool ShouldSerializevalue() => __pbn__value != null;
+            public void Resetvalue() => __pbn__value = null;
+            private string __pbn__value;
+
+        }
+
     }
 
 }

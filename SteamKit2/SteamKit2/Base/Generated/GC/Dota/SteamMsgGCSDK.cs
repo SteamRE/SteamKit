@@ -413,6 +413,25 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToGCSubGCStarting : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint dir_index
+        {
+            get { return __pbn__dir_index.GetValueOrDefault(); }
+            set { __pbn__dir_index = value; }
+        }
+        public bool ShouldSerializedir_index() => __pbn__dir_index != null;
+        public void Resetdir_index() => __pbn__dir_index = null;
+        private uint? __pbn__dir_index;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CGCToGCMsgMasterAck : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -880,6 +899,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetengine() => __pbn__engine = null;
         private ESourceEngine? __pbn__engine;
 
+        [global::ProtoBuf.ProtoMember(8)]
+        public byte[] steamdatagram_login
+        {
+            get { return __pbn__steamdatagram_login; }
+            set { __pbn__steamdatagram_login = value; }
+        }
+        public bool ShouldSerializesteamdatagram_login() => __pbn__steamdatagram_login != null;
+        public void Resetsteamdatagram_login() => __pbn__steamdatagram_login = null;
+        private byte[] __pbn__steamdatagram_login;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1310,6 +1339,15 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializein_logon_surge() => __pbn__in_logon_surge != null;
         public void Resetin_logon_surge() => __pbn__in_logon_surge = null;
         private bool? __pbn__in_logon_surge;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToClientRequestDropped : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
     }
 
@@ -2010,7 +2048,6 @@ namespace SteamKit2.GC.Dota.Internal
     {
         PARTNER_NONE = 0,
         PARTNER_PERFECT_WORLD = 1,
-        PARTNER_NEXON = 2,
         PARTNER_INVALID = 3,
     }
 

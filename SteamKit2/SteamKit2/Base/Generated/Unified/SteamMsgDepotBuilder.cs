@@ -495,16 +495,6 @@ namespace SteamKit2.Unified.Internal
 
     }
 
-    public interface IContentBuilder
-    {
-        CContentBuilder_InitDepotBuild_Response InitDepotBuild(CContentBuilder_InitDepotBuild_Request request);
-        CContentBuilder_StartDepotUpload_Response StartDepotUpload(CContentBuilder_StartDepotUpload_Request request);
-        CContentBuilder_GetMissingDepotChunks_Response GetMissingDepotChunks(CContentBuilder_GetMissingDepotChunks_Request request);
-        CContentBuilder_FinishDepotUpload_Response FinishDepotUpload(CContentBuilder_FinishDepotUpload_Request request);
-        CContentBuilder_CommitAppBuild_Response CommitAppBuild(CContentBuilder_CommitAppBuild_Request request);
-        CContentBuilder_SignInstallScript_Response SignInstallScript(CContentBuilder_SignInstallScript_Request request);
-    }
-
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

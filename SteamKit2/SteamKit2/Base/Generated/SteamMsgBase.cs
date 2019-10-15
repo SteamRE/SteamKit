@@ -9,6 +9,35 @@ namespace SteamKit2.Internal
 {
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgIPAddress : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public uint v4
+        {
+            get { return __pbn__ip.Is(1) ? __pbn__ip.UInt32 : default(uint); }
+            set { __pbn__ip = new global::ProtoBuf.DiscriminatedUnion32Object(1, value); }
+        }
+        public bool ShouldSerializev4() => __pbn__ip.Is(1);
+        public void Resetv4() => global::ProtoBuf.DiscriminatedUnion32Object.Reset(ref __pbn__ip, 1);
+
+        private global::ProtoBuf.DiscriminatedUnion32Object __pbn__ip;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public byte[] v6
+        {
+            get { return __pbn__ip.Is(2) ? ((byte[])__pbn__ip.Object) : default(byte[]); }
+            set { __pbn__ip = new global::ProtoBuf.DiscriminatedUnion32Object(2, value); }
+        }
+        public bool ShouldSerializev6() => __pbn__ip.Is(2);
+        public void Resetv6() => global::ProtoBuf.DiscriminatedUnion32Object.Reset(ref __pbn__ip, 2);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgProtoBufHeader : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -109,16 +138,6 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeerror_message() => __pbn__error_message != null;
         public void Reseterror_message() => __pbn__error_message = null;
         private string __pbn__error_message;
-
-        [global::ProtoBuf.ProtoMember(15)]
-        public uint ip
-        {
-            get { return __pbn__ip.GetValueOrDefault(); }
-            set { __pbn__ip = value; }
-        }
-        public bool ShouldSerializeip() => __pbn__ip != null;
-        public void Resetip() => __pbn__ip = null;
-        private uint? __pbn__ip;
 
         [global::ProtoBuf.ProtoMember(16)]
         public uint auth_account_flags
@@ -234,6 +253,37 @@ namespace SteamKit2.Internal
         public bool ShouldSerializecm_sysid() => __pbn__cm_sysid != null;
         public void Resetcm_sysid() => __pbn__cm_sysid = null;
         private uint? __pbn__cm_sysid;
+
+        [global::ProtoBuf.ProtoMember(30)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string wg_token
+        {
+            get { return __pbn__wg_token ?? ""; }
+            set { __pbn__wg_token = value; }
+        }
+        public bool ShouldSerializewg_token() => __pbn__wg_token != null;
+        public void Resetwg_token() => __pbn__wg_token = null;
+        private string __pbn__wg_token;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public uint ip
+        {
+            get { return __pbn__ip_addr.Is(15) ? __pbn__ip_addr.UInt32 : default(uint); }
+            set { __pbn__ip_addr = new global::ProtoBuf.DiscriminatedUnion32Object(15, value); }
+        }
+        public bool ShouldSerializeip() => __pbn__ip_addr.Is(15);
+        public void Resetip() => global::ProtoBuf.DiscriminatedUnion32Object.Reset(ref __pbn__ip_addr, 15);
+
+        private global::ProtoBuf.DiscriminatedUnion32Object __pbn__ip_addr;
+
+        [global::ProtoBuf.ProtoMember(29)]
+        public byte[] ip_v6
+        {
+            get { return __pbn__ip_addr.Is(29) ? ((byte[])__pbn__ip_addr.Object) : default(byte[]); }
+            set { __pbn__ip_addr = new global::ProtoBuf.DiscriminatedUnion32Object(29, value); }
+        }
+        public bool ShouldSerializeip_v6() => __pbn__ip_addr.Is(29);
+        public void Resetip_v6() => global::ProtoBuf.DiscriminatedUnion32Object.Reset(ref __pbn__ip_addr, 29);
 
     }
 
@@ -824,6 +874,147 @@ namespace SteamKit2.Internal
         public bool ShouldSerializelocalized_string() => __pbn__localized_string != null;
         public void Resetlocalized_string() => __pbn__localized_string = null;
         private string __pbn__localized_string;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClanEventUserNewsTuple : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint clanid
+        {
+            get { return __pbn__clanid.GetValueOrDefault(); }
+            set { __pbn__clanid = value; }
+        }
+        public bool ShouldSerializeclanid() => __pbn__clanid != null;
+        public void Resetclanid() => __pbn__clanid = null;
+        private uint? __pbn__clanid;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong event_gid
+        {
+            get { return __pbn__event_gid.GetValueOrDefault(); }
+            set { __pbn__event_gid = value; }
+        }
+        public bool ShouldSerializeevent_gid() => __pbn__event_gid != null;
+        public void Resetevent_gid() => __pbn__event_gid = null;
+        private ulong? __pbn__event_gid;
+
+        [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong announcement_gid
+        {
+            get { return __pbn__announcement_gid.GetValueOrDefault(); }
+            set { __pbn__announcement_gid = value; }
+        }
+        public bool ShouldSerializeannouncement_gid() => __pbn__announcement_gid != null;
+        public void Resetannouncement_gid() => __pbn__announcement_gid = null;
+        private ulong? __pbn__announcement_gid;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint rtime_start
+        {
+            get { return __pbn__rtime_start.GetValueOrDefault(); }
+            set { __pbn__rtime_start = value; }
+        }
+        public bool ShouldSerializertime_start() => __pbn__rtime_start != null;
+        public void Resetrtime_start() => __pbn__rtime_start = null;
+        private uint? __pbn__rtime_start;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint rtime_end
+        {
+            get { return __pbn__rtime_end.GetValueOrDefault(); }
+            set { __pbn__rtime_end = value; }
+        }
+        public bool ShouldSerializertime_end() => __pbn__rtime_end != null;
+        public void Resetrtime_end() => __pbn__rtime_end = null;
+        private uint? __pbn__rtime_end;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint priority_score
+        {
+            get { return __pbn__priority_score.GetValueOrDefault(); }
+            set { __pbn__priority_score = value; }
+        }
+        public bool ShouldSerializepriority_score() => __pbn__priority_score != null;
+        public void Resetpriority_score() => __pbn__priority_score = null;
+        private uint? __pbn__priority_score;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint type
+        {
+            get { return __pbn__type.GetValueOrDefault(); }
+            set { __pbn__type = value; }
+        }
+        public bool ShouldSerializetype() => __pbn__type != null;
+        public void Resettype() => __pbn__type = null;
+        private uint? __pbn__type;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public uint clamp_range_slot
+        {
+            get { return __pbn__clamp_range_slot.GetValueOrDefault(); }
+            set { __pbn__clamp_range_slot = value; }
+        }
+        public bool ShouldSerializeclamp_range_slot() => __pbn__clamp_range_slot != null;
+        public void Resetclamp_range_slot() => __pbn__clamp_range_slot = null;
+        private uint? __pbn__clamp_range_slot;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public uint appid
+        {
+            get { return __pbn__appid.GetValueOrDefault(); }
+            set { __pbn__appid = value; }
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClanMatchEventByRange : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint rtime_before
+        {
+            get { return __pbn__rtime_before.GetValueOrDefault(); }
+            set { __pbn__rtime_before = value; }
+        }
+        public bool ShouldSerializertime_before() => __pbn__rtime_before != null;
+        public void Resetrtime_before() => __pbn__rtime_before = null;
+        private uint? __pbn__rtime_before;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint rtime_after
+        {
+            get { return __pbn__rtime_after.GetValueOrDefault(); }
+            set { __pbn__rtime_after = value; }
+        }
+        public bool ShouldSerializertime_after() => __pbn__rtime_after != null;
+        public void Resetrtime_after() => __pbn__rtime_after = null;
+        private uint? __pbn__rtime_after;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint qualified
+        {
+            get { return __pbn__qualified.GetValueOrDefault(); }
+            set { __pbn__qualified = value; }
+        }
+        public bool ShouldSerializequalified() => __pbn__qualified != null;
+        public void Resetqualified() => __pbn__qualified = null;
+        private uint? __pbn__qualified;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<CClanEventUserNewsTuple> events { get; } = new global::System.Collections.Generic.List<CClanEventUserNewsTuple>();
 
     }
 

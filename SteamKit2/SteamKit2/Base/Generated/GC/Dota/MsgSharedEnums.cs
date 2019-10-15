@@ -996,6 +996,7 @@ namespace SteamKit2.GC.Dota.Internal
         DOTA_GAMEMODE_ALL_DRAFT = 22,
         DOTA_GAMEMODE_TURBO = 23,
         DOTA_GAMEMODE_MUTATION = 24,
+        DOTA_GAMEMODE_COACHES_CHALLENGE = 25,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1034,7 +1035,6 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_SPRING_FESTIVAL = 2,
         EVENT_ID_FROSTIVUS_2013 = 3,
         EVENT_ID_COMPENDIUM_2014 = 4,
-        EVENT_ID_NEXON_PC_BANG = 5,
         EVENT_ID_PWRD_DAC_2015 = 6,
         EVENT_ID_NEW_BLOOM_2015 = 7,
         EVENT_ID_INTERNATIONAL_2015 = 8,
@@ -1052,7 +1052,10 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_SINGLES_DAY_2017 = 20,
         EVENT_ID_FROSTIVUS_2017 = 21,
         EVENT_ID_INTERNATIONAL_2018 = 22,
-        EVENT_ID_COUNT = 23,
+        EVENT_ID_FROSTIVUS_2018 = 23,
+        EVENT_ID_NEW_BLOOM_2019 = 24,
+        EVENT_ID_INTERNATIONAL_2019 = 25,
+        EVENT_ID_COUNT = 26,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1088,6 +1091,7 @@ namespace SteamKit2.GC.Dota.Internal
         FANTASY_ROLE_CORE = 1,
         FANTASY_ROLE_SUPPORT = 2,
         FANTASY_ROLE_OFFLANE = 3,
+        FANTASY_ROLE_MID = 4,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1209,6 +1213,7 @@ namespace SteamKit2.GC.Dota.Internal
         DOTA_JOIN_RESULT_CUSTOM_GAME_INCORRECT_VERSION = 10,
         DOTA_JOIN_RESULT_TIMEOUT = 11,
         DOTA_JOIN_RESULT_CUSTOM_GAME_COOLDOWN = 12,
+        DOTA_JOIN_RESULT_BUSY = 13,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1282,6 +1287,7 @@ namespace SteamKit2.GC.Dota.Internal
         MATCH_TYPE_LOWPRI_DEPRECATED = 9,
         MATCH_TYPE_STEAM_GROUP = 10,
         MATCH_TYPE_MUTATION = 11,
+        MATCH_TYPE_COACHES_CHALLENGE = 12,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1462,6 +1468,19 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public enum ELeagueFantasyPhase
+    {
+        LEAGUE_FANTASY_PHASE_UNSET = 0,
+        LEAGUE_FANTASY_PHASE_MAIN = 1,
+        LEAGUE_FANTASY_PHASE_QUALIFIER_NA = 2,
+        LEAGUE_FANTASY_PHASE_QUALIFIER_SA = 3,
+        LEAGUE_FANTASY_PHASE_QUALIFIER_EUROPE = 4,
+        LEAGUE_FANTASY_PHASE_QUALIFIER_CIS = 5,
+        LEAGUE_FANTASY_PHASE_QUALIFIER_CHINA = 6,
+        LEAGUE_FANTASY_PHASE_QUALIFIER_SEA = 7,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ELeagueAuditAction
     {
         LEAGUE_AUDIT_ACTION_INVALID = 0,
@@ -1561,6 +1580,20 @@ namespace SteamKit2.GC.Dota.Internal
         FAVORITE_TYPE_PLAYER = 1,
         FAVORITE_TYPE_TEAM = 2,
         FAVORITE_TYPE_LEAGUE = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EDPCPushNotification
+    {
+        DPC_PUSH_NOTIFICATION_MATCH_STARTING = 1,
+        DPC_PUSH_NOTIFICATION_PLAYER_LEFT_TEAM = 10,
+        DPC_PUSH_NOTIFICATION_PLAYER_JOINED_TEAM = 11,
+        DPC_PUSH_NOTIFICATION_LEAGUE_RESULT = 20,
+        DPC_PUSH_NOTIFICATION_PREDICTION_MATCHES_AVAILABLE = 30,
+        DPC_PUSH_NOTIFICATION_PREDICTION_RESULT = 31,
+        DPC_PUSH_NOTIFICATION_FANTASY_PLAYER_CLEARED = 40,
+        DPC_PUSH_NOTIFICATION_FANTASY_DAILY_SUMMARY = 41,
+        DPC_PUSH_NOTIFICATION_FANTASY_FINAL_RESULTS = 42,
     }
 
 }

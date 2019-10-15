@@ -632,6 +632,16 @@ namespace SteamKit2.Internal
         public void Resetneed_persona_response() => __pbn__need_persona_response = null;
         private bool? __pbn__need_persona_response;
 
+        [global::ProtoBuf.ProtoMember(8)]
+        public bool is_client_idle
+        {
+            get { return __pbn__is_client_idle.GetValueOrDefault(); }
+            set { __pbn__is_client_idle = value; }
+        }
+        public bool ShouldSerializeis_client_idle() => __pbn__is_client_idle != null;
+        public void Resetis_client_idle() => __pbn__is_client_idle = null;
+        private bool? __pbn__is_client_idle;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

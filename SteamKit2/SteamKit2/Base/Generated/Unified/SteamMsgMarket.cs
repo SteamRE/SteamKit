@@ -75,26 +75,6 @@ namespace SteamKit2.Unified.Internal
         public void Resetsteamguard_required_days() => __pbn__steamguard_required_days = null;
         private uint? __pbn__steamguard_required_days;
 
-        [global::ProtoBuf.ProtoMember(5)]
-        public int sales_this_year
-        {
-            get { return __pbn__sales_this_year.GetValueOrDefault(); }
-            set { __pbn__sales_this_year = value; }
-        }
-        public bool ShouldSerializesales_this_year() => __pbn__sales_this_year != null;
-        public void Resetsales_this_year() => __pbn__sales_this_year = null;
-        private int? __pbn__sales_this_year;
-
-        [global::ProtoBuf.ProtoMember(6)]
-        public int max_sales_per_year
-        {
-            get { return __pbn__max_sales_per_year.GetValueOrDefault(); }
-            set { __pbn__max_sales_per_year = value; }
-        }
-        public bool ShouldSerializemax_sales_per_year() => __pbn__max_sales_per_year != null;
-        public void Resetmax_sales_per_year() => __pbn__max_sales_per_year = null;
-        private int? __pbn__max_sales_per_year;
-
         [global::ProtoBuf.ProtoMember(7)]
         public bool forms_requested
         {
@@ -125,11 +105,6 @@ namespace SteamKit2.Unified.Internal
         public void Resetnew_device_cooldown_days() => __pbn__new_device_cooldown_days = null;
         private uint? __pbn__new_device_cooldown_days;
 
-    }
-
-    public interface IEconMarket
-    {
-        CEconMarket_IsMarketplaceAllowed_Response IsMarketplaceAllowed(CEconMarket_IsMarketplaceAllowed_Request request);
     }
 
 }

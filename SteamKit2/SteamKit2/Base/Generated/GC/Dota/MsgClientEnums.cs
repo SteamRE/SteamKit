@@ -107,6 +107,13 @@ namespace SteamKit2.GC.Dota.Internal
         k_EDOTAGroupMergeResult_NOT_INVITED = 9,
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public enum EPartyBeaconType
+    {
+        k_EPartyBeaconType_Available = 0,
+        k_EPartyBeaconType_Joinable = 1,
+    }
+
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

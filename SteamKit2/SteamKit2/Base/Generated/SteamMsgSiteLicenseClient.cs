@@ -36,6 +36,16 @@ namespace SteamKit2.Internal
         public void Resetsite_name() => __pbn__site_name = null;
         private string __pbn__site_name;
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool allow_cached_credentials
+        {
+            get { return __pbn__allow_cached_credentials.GetValueOrDefault(); }
+            set { __pbn__allow_cached_credentials = value; }
+        }
+        public bool ShouldSerializeallow_cached_credentials() => __pbn__allow_cached_credentials != null;
+        public void Resetallow_cached_credentials() => __pbn__allow_cached_credentials = null;
+        private bool? __pbn__allow_cached_credentials;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -181,6 +191,17 @@ namespace SteamKit2.Internal
         public bool ShouldSerializep2p_group() => __pbn__p2p_group != null;
         public void Resetp2p_group() => __pbn__p2p_group = null;
         private uint? __pbn__p2p_group;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string ip_address
+        {
+            get { return __pbn__ip_address ?? ""; }
+            set { __pbn__ip_address = value; }
+        }
+        public bool ShouldSerializeip_address() => __pbn__ip_address != null;
+        public void Resetip_address() => __pbn__ip_address = null;
+        private string __pbn__ip_address;
 
     }
 

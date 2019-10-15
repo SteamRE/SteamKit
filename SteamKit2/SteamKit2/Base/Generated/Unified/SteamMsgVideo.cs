@@ -282,23 +282,6 @@ namespace SteamKit2.Unified.Internal
 
     }
 
-    public interface IVideo
-    {
-        CVideo_ClientGetVideoURL_Response ClientGetVideoURL(CVideo_ClientGetVideoURL_Request request);
-        NoResponse SetVideoBookmark(CVideo_SetVideoBookmark_Notification request);
-        CVideo_GetVideoBookmarks_Response GetVideoBookmarks(CVideo_GetVideoBookmarks_Request request);
-    }
-
-    public interface IVideoClient
-    {
-        NoResponse NotifyUnlockedH264(CVideo_UnlockedH264_Notification request);
-    }
-
-    public interface IFovasVideo
-    {
-        CFovasVideo_ClientGetOPFSettings_Response ClientGetOPFSettings(CFovasVideo_ClientGetOPFSettings_Request request);
-    }
-
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

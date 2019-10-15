@@ -1090,6 +1090,17 @@ namespace SteamKit2.GC.Artifact.Internal
                 public void Resetvalue_float() => __pbn__value_float = null;
                 private float? __pbn__value_float;
 
+                [global::ProtoBuf.ProtoMember(4)]
+                [global::System.ComponentModel.DefaultValue("")]
+                public string value_string
+                {
+                    get { return __pbn__value_string ?? ""; }
+                    set { __pbn__value_string = value; }
+                }
+                public bool ShouldSerializevalue_string() => __pbn__value_string != null;
+                public void Resetvalue_string() => __pbn__value_string = null;
+                private string __pbn__value_string;
+
             }
 
             [global::ProtoBuf.ProtoContract()]

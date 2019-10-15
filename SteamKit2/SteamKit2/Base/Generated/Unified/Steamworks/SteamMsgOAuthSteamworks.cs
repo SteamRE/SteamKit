@@ -59,11 +59,6 @@ namespace SteamKit2.Unified.Internal.Steamworks
 
     }
 
-    public interface IOAuthToken
-    {
-        COAuthToken_ImplicitGrantNoPrompt_Response ImplicitGrantNoPrompt(COAuthToken_ImplicitGrantNoPrompt_Request request);
-    }
-
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
