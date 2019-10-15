@@ -7,17 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="protobuf-net">
-      <HintPath>..\..\..\..\protobuf-net\src\protobuf-net.Reflection\bin\Debug\netstandard2.0\protobuf-net.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
-    <Reference Include="protobuf-net.Reflection">
-      <HintPath>..\..\..\..\protobuf-net\src\protobuf-net.Reflection\bin\Debug\netstandard2.0\protobuf-net.Reflection.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
+    <PackageReference Include="protobuf-net.Reflection" Version="3.0.0-alpha.91" />
   </ItemGroup>
 
 </Project>
