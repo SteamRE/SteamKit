@@ -40,7 +40,7 @@ $protos | % {
         '--namespace', $_.Namespace
     )
 
-    & dotnet $ProtoGenDll $params > $null
+    & dotnet $ProtoGenDll -- $params > $null
 
     $_
 }
