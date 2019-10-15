@@ -9,15 +9,14 @@ class CSimpleScan
 {
 
 public:
-	CSimpleScan();
-	CSimpleScan( const char *filename );
+	CSimpleScan() noexcept;
+	CSimpleScan( const char *filename ) noexcept;
 
-	bool SetDLL( const char *filename );
-	bool FindFunction( const char *sig, const char *mask, void **func );
+	bool SetDLL( const char *filename ) noexcept;
+	bool FindFunction( const char *sig, const char *mask, void **func ) noexcept;
 
 private:
 	bool m_bInterfaceSet;
-	bool m_bDllInfo;
 
 	CreateInterfaceFn m_Interface;
 	CSigScan m_Signature;

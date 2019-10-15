@@ -2,16 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyOriginatorKeyFile>..\..\SteamKit.snk</AssemblyOriginatorKeyFile>
     <Description>.NET library that aims to interoperate with the Steam network.</Description>
-    <PackageReleaseNotes>Release notes are available at https://github.com/SteamRE/SteamKit/releases/tag/2.2.0-Beta.2</PackageReleaseNotes>
+    <PackageReleaseNotes>Release notes are available at https://github.com/SteamRE/SteamKit/releases/tag/2.2.0</PackageReleaseNotes>
     <PackageIconUrl>https://raw.github.com/SteamRE/SteamKit/master/Resources/Misc/steamkit_logo_128.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/SteamRE/SteamKit</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/SteamRE/SteamKit/blob/master/SteamKit2/SteamKit2/license.txt</PackageLicenseUrl>
+    <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/SteamRE/SteamKit</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <ProjectGuid>{4B2B0365-DE37-4B65-B614-3E4E7C05147D}</ProjectGuid>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -30,8 +31,6 @@
   <ItemGroup>
     <None Remove="3rd party.txt" />
     <None Remove="changes.txt" />
-    <None Remove="gpl.txt" />
-    <None Remove="lgpl.txt" />
     <None Remove="license.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -43,14 +42,6 @@
         <Pack>true</Pack>
         <PackagePath>readme.txt</PackagePath>
     </Content>
-    <Content Include="gpl.txt">
-        <Pack>true</Pack>
-        <PackagePath />
-    </Content>
-    <Content Include="lgpl.txt">
-        <Pack>true</Pack>
-        <PackagePath />
-    </Content>
     <Content Include="license.txt">
         <Pack>true</Pack>
         <PackagePath />
@@ -58,7 +49,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-62925-02" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19367-01" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="4.4.0" />
     <PackageReference Include="protobuf-net" Version="2.1.0" />
   </ItemGroup>

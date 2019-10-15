@@ -5,7 +5,7 @@
 #pragma once
 #endif
 
-enum EMsg
+enum class EMsg
 {
 	k_EMsgInvalid = 0,
 

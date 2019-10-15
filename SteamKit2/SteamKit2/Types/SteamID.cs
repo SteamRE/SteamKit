@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -572,7 +573,7 @@ namespace SteamKit2
         /// </summary>
         /// <returns><c>true</c> if this chat ID represents a group chat, <c>false</c> otherwise.</returns>\
         /// <param name="groupID">If the method returned <c>true</c>, then this is the group that this chat is associated with. Otherwise, this is <c>null</c>.</param>
-        public bool TryGetClanID( out SteamID groupID )
+        public bool TryGetClanID( [NotNullWhen(true)] out SteamID? groupID )
         {
             if ( IsChatAccount && AccountInstance == (uint)ChatInstanceFlags.Clan )
             {
@@ -659,7 +660,7 @@ namespace SteamKit2
         /// </returns>
         public static implicit operator ulong( SteamID sid )
         {
-            if ( sid == null )
+            if ( sid is null )
             {
                 throw new ArgumentNullException( nameof(sid) );
             }
@@ -723,14 +724,14 @@ namespace SteamKit2
         /// <returns>
         /// The result of the operator.
         /// </returns>
-        public static bool operator ==( SteamID a, SteamID b )
+        public static bool operator ==( SteamID? a, SteamID? b )
         {
             if ( ReferenceEquals( a, b ) )
             {
                 return true;
             }
 
-            if ( ( ( object )a == null ) || ( ( object )b == null ) )
+            if ( a is null || b is null )
             {
                 return false;
             }
@@ -746,7 +747,7 @@ namespace SteamKit2
         /// <returns>
         /// The result of the operator.
         /// </returns>
-        public static bool operator !=( SteamID a, SteamID b )
+        public static bool operator !=( SteamID? a, SteamID? b )
         {
             return !( a == b );
         }

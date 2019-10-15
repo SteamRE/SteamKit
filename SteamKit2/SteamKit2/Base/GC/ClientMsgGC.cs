@@ -17,9 +17,9 @@ namespace SteamKit2.GC
     /// <summary>
     /// Represents a protobuf backed game coordinator message.
     /// </summary>
-    /// <typeparam name="BodyType">The body type of this message.</typeparam>
-    public sealed class ClientGCMsgProtobuf<BodyType> : GCMsgBase<MsgGCHdrProtoBuf>
-        where BodyType : IExtensible, new()
+    /// <typeparam name="TBody">The body type of this message.</typeparam>
+    public sealed class ClientGCMsgProtobuf<TBody> : GCMsgBase<MsgGCHdrProtoBuf>
+        where TBody : IExtensible, new()
     {
         /// <summary>
         /// Gets a value indicating whether this gc message is protobuf backed.
@@ -69,7 +69,7 @@ namespace SteamKit2.GC
         /// <summary>
         /// Gets the body structure of this message.
         /// </summary>
-        public BodyType Body { get; private set; }
+        public TBody Body { get; private set; }
 
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace SteamKit2.GC
         public ClientGCMsgProtobuf( uint eMsg, int payloadReserve = 64 )
             : base( payloadReserve )
         {
-            Body = new BodyType();
+            Body = new TBody();
 
             // set our emsg
             Header.Msg = eMsg;
@@ -150,7 +150,7 @@ namespace SteamKit2.GC
             using ( MemoryStream ms = new MemoryStream( data ) )
             {
                 Header.Deserialize( ms );
-                Body = Serializer.Deserialize<BodyType>( ms );
+                Body = Serializer.Deserialize<TBody>( ms );
 
                 // the rest of the data is the payload
                 int payloadOffset = ( int )ms.Position;
@@ -164,9 +164,9 @@ namespace SteamKit2.GC
     /// <summary>
     /// Represents a struct backed game coordinator message.
     /// </summary>
-    /// <typeparam name="BodyType">The body type of this message.</typeparam>
-    public sealed class ClientGCMsg<BodyType> : GCMsgBase<MsgGCHdr>
-        where BodyType : IGCSerializableMessage, new()
+    /// <typeparam name="TBody">The body type of this message.</typeparam>
+    public sealed class ClientGCMsg<TBody> : GCMsgBase<MsgGCHdr>
+        where TBody : IGCSerializableMessage, new()
     {
         /// <summary>
         /// Gets a value indicating whether this gc message is protobuf backed.
@@ -194,7 +194,7 @@ namespace SteamKit2.GC
         public override JobID TargetJobID
         {
             get => Header.TargetJobID;
-            set => Header.TargetJobID = value = value ?? throw new ArgumentNullException( nameof(value) );
+            set => Header.TargetJobID = value ?? throw new ArgumentNullException( nameof(value) );
         }
         /// <summary>
         /// Gets or sets the source job id for this gc message.
@@ -212,7 +212,7 @@ namespace SteamKit2.GC
         /// <summary>
         /// Gets the body structure of this message.
         /// </summary>
-        public BodyType Body { get; }
+        public TBody Body { get; }
 
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace SteamKit2.GC
         public ClientGCMsg( int payloadReserve = 64 )
             : base( payloadReserve )
         {
-            Body = new BodyType();
+            Body = new TBody();
 
             // assign our emsg
             msgType = Body.GetEMsg();

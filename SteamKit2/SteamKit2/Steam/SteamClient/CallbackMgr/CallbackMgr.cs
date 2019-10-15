@@ -155,8 +155,8 @@ namespace SteamKit2
                 this.call = call;
             }
 
-            ICallbackMgrInternals manager;
-            CallbackBase call;
+            ICallbackMgrInternals? manager;
+            CallbackBase? call;
 
             void IDisposable.Dispose()
             {

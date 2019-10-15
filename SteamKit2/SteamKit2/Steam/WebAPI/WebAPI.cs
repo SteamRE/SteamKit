@@ -68,7 +68,7 @@ namespace SteamKit2
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public KeyValue Call( string func, int version = 1, Dictionary<string, object> args = null )
+            public KeyValue Call( string func, int version = 1, Dictionary<string, object>? args = null )
                 => Call( HttpMethod.Get, func, version, args );
 
 
@@ -84,7 +84,7 @@ namespace SteamKit2
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public KeyValue Call( HttpMethod method, string func, int version = 1, Dictionary<string, object> args = null )
+            public KeyValue Call( HttpMethod method, string func, int version = 1, Dictionary<string, object>? args = null )
             {
                 var callTask = asyncInterface.CallAsync( method, func, version, args );
 
@@ -210,7 +210,7 @@ namespace SteamKit2
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public Task<KeyValue> CallAsync( HttpMethod method, string func, int version = 1, Dictionary<string, object> args = null )
+            public Task<KeyValue> CallAsync( HttpMethod method, string func, int version = 1, Dictionary<string, object>? args = null )
             {
                 var task = CallAsyncCore( method, func, version, args );
 
@@ -227,7 +227,7 @@ namespace SteamKit2
                 return task;
             }
                 
-            async Task<KeyValue> CallAsyncCore( HttpMethod method, string func, int version = 1, Dictionary<string, object> args = null )
+            async Task<KeyValue> CallAsyncCore( HttpMethod method, string func, int version = 1, Dictionary<string, object>? args = null )
             {
                 if ( method == null )
                 {
@@ -396,10 +396,9 @@ namespace SteamKit2
                         continue;
                     }
                     // flatten lists
-                    else if ( argValue is IEnumerable && !( argValue is string || argValue is byte[] ) )
+                    else if ( argValue is IEnumerable enumerable && !( argValue is string || argValue is byte[] ) )
                     {
                         int index = 0;
-                        var enumerable = argValue as IEnumerable;
 
                         foreach ( object value in enumerable )
                         {

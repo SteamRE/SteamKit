@@ -6,6 +6,7 @@
 
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -24,7 +25,8 @@ namespace SteamKit2
                       ).ToString();
         }
 
-        public static byte[] DecodeHexString(string hex)
+        [return: NotNullIfNotNull("hex")]
+        public static byte[]? DecodeHexString(string? hex)
         {
             if (hex == null)
                 return null;
@@ -161,7 +163,7 @@ namespace SteamKit2
         public static T[] GetAttributes<T>( this Type type, bool inherit = false )
             where T : Attribute
         {
-            return type.GetTypeInfo().GetCustomAttributes( typeof( T ), inherit ) as T[];
+            return (T[])type.GetTypeInfo().GetCustomAttributes( typeof( T ), inherit );
         }
     }
 
@@ -338,7 +340,7 @@ namespace SteamKit2
     {
         public static IPAddress GetLocalIP(Socket activeSocket)
         {
-            IPEndPoint ipEndPoint = activeSocket.LocalEndPoint as IPEndPoint;
+            var ipEndPoint = activeSocket.LocalEndPoint as IPEndPoint;
 
             if ( ipEndPoint == null || ipEndPoint.Address == IPAddress.Any )
                 throw new InvalidOperationException( "Socket not connected" );
@@ -374,7 +376,8 @@ namespace SteamKit2
         {
             return ( ushort )IPAddress.NetworkToHostOrder( ( short )input );
         }
-        public static bool TryParseIPEndPoint(string stringValue, out IPEndPoint endPoint)
+
+        public static bool TryParseIPEndPoint(string stringValue, [NotNullWhen(true)] out IPEndPoint? endPoint)
         {
             var endpointParts = stringValue.Split(':');
             if (endpointParts.Length != 2)

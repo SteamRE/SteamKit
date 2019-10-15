@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -50,7 +51,7 @@ namespace SteamKit2
         /// </summary>
         private volatile int state;
 
-        private Thread netThread;
+        private Thread? netThread;
         private Socket sock;
 
         private DateTime timeOut;
@@ -86,8 +87,8 @@ namespace SteamKit2
         /// </summary>
         private uint inSeqHandled;
 
-        private List<UdpPacket> outPackets;
-        private Dictionary<uint, UdpPacket> inPackets;
+        [NotNull] private List<UdpPacket>? outPackets;
+        [NotNull] private Dictionary<uint, UdpPacket>? inPackets;
 
         public UdpConnection()
         {
@@ -99,13 +100,13 @@ namespace SteamKit2
             state = (int)State.Disconnected;
         }
 
-        public event EventHandler<NetMsgEventArgs> NetMsgReceived;
+        public event EventHandler<NetMsgEventArgs>? NetMsgReceived;
 
-        public event EventHandler Connected;
+        public event EventHandler? Connected;
 
-        public event EventHandler<DisconnectedEventArgs> Disconnected;
+        public event EventHandler<DisconnectedEventArgs>? Disconnected;
 
-        public EndPoint CurrentEndPoint { get; private set; }
+        public EndPoint? CurrentEndPoint { get; private set; }
 
         public ProtocolTypes ProtocolTypes => ProtocolTypes.Udp;
 
@@ -270,7 +271,7 @@ namespace SteamKit2
             // Sending should generally carry on from the packet most recently sent, even if it was a
             // resend (who knows what else was lost).
             if ( packet.Header.SeqThis > 0 )
-                outSeqSent = packet.Header.SeqThis;
+                outSeqSent = Math.Max( outSeqSent, packet.Header.SeqThis );
         }
 
         /// <summary>
@@ -361,7 +362,7 @@ namespace SteamKit2
 
             DebugLog.WriteLine("UdpConnection", "Dispatching message; {0} bytes", data.Length);
 
-            NetMsgReceived?.Invoke( this, new NetMsgEventArgs( data, CurrentEndPoint ) );
+            NetMsgReceived?.Invoke( this, new NetMsgEventArgs( data, CurrentEndPoint! ) );
 
             return true;
         }

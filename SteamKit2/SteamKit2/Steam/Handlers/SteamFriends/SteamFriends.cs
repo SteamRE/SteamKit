@@ -61,7 +61,7 @@ namespace SteamKit2
         /// User initialization is performed prior to <see cref="SteamUser.AccountInfoCallback"/> callback.
         /// </summary>
         /// <returns>The name.</returns>
-        public string GetPersonaName()
+        public string? GetPersonaName()
         {
             return cache.LocalUser.Name;
         }
@@ -137,7 +137,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="steamId">The steam id.</param>
         /// <returns>The name.</returns>
-        public string GetFriendPersonaName( SteamID steamId )
+        public string? GetFriendPersonaName( SteamID steamId )
         {
             if ( steamId == null )
             {
@@ -179,7 +179,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="steamId">The steam id.</param>
         /// <returns>The game name of a friend playing a game, or null if they haven't been cached yet.</returns>
-        public string GetFriendGamePlayedName( SteamID steamId )
+        public string? GetFriendGamePlayedName( SteamID steamId )
         {
             if ( steamId == null )
             {
@@ -207,7 +207,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="steamId">The SteamID of the friend to get the avatar of.</param>
         /// <returns>A byte array representing a SHA-1 hash of the friend's avatar.</returns>
-        public byte[] GetFriendAvatar( SteamID steamId )
+        public byte[]? GetFriendAvatar( SteamID steamId )
         {
             if ( steamId == null )
             {
@@ -249,7 +249,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="steamId">The clan SteamID.</param>
         /// <returns>The name.</returns>
-        public string GetClanName( SteamID steamId )
+        public string? GetClanName( SteamID steamId )
         {
             if ( steamId == null )
             {
@@ -277,7 +277,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="steamId">The SteamID of the clan to get the avatar of.</param>
         /// <returns>A byte array representing a SHA-1 hash of the clan's avatar, or null if the clan could not be found.</returns>
-        public byte[] GetClanAvatar( SteamID steamId )
+        public byte[]? GetClanAvatar( SteamID steamId )
         {
             if ( steamId == null )
             {
@@ -417,9 +417,11 @@ namespace SteamKit2
             leaveChat.Body.SteamIdChat = chatId;
             leaveChat.Body.Type = EChatInfoType.StateChange;
 
-            leaveChat.Write( Client.SteamID.ConvertToUInt64() ); // ChatterActedOn
+            var localSteamID = Client.SteamID?.ConvertToUInt64() ?? default; // SteamID can be null if not connected - will be ultimately ignored in Client.Send.
+
+            leaveChat.Write( localSteamID ); // ChatterActedOn
             leaveChat.Write( ( uint )EChatMemberStateChange.Left ); // StateChange
-            leaveChat.Write( Client.SteamID.ConvertToUInt64() ); // ChatterActedBy
+            leaveChat.Write( localSteamID ); // ChatterActedBy
 
             Client.Send( leaveChat );
         }
@@ -455,7 +457,7 @@ namespace SteamKit2
 
             chatMsg.Body.ChatMsgType = type;
             chatMsg.Body.SteamIdChatRoom = chatId;
-            chatMsg.Body.SteamIdChatter = Client.SteamID;
+            chatMsg.Body.SteamIdChatter = Client.SteamID ?? new SteamID(); // Can be null if not connected - will ultimately be ignored in Client.Send.
 
             chatMsg.WriteNullTermString( message, Encoding.UTF8 );
 
@@ -495,7 +497,7 @@ namespace SteamKit2
             inviteMsg.Body.steam_id_invited = steamIdUser;
             // steamclient also sends the steamid of the user that did the invitation
             // we'll mimic that behavior
-            inviteMsg.Body.steam_id_patron = Client.SteamID;
+            inviteMsg.Body.steam_id_patron = Client.SteamID ?? new SteamID();
 
             this.Client.Send( inviteMsg );
         }
@@ -666,7 +668,7 @@ namespace SteamKit2
             var ignore = new ClientMsg<MsgClientSetIgnoreFriend>();
             ignore.SourceJobID = Client.GetNextJobID();
 
-            ignore.Body.MySteamId = Client.SteamID;
+            ignore.Body.MySteamId = Client.SteamID ?? new SteamID(); // Can be null if not connected - will ultimately be ignored in Client.Send.
             ignore.Body.Ignore = ( byte )( setIgnore ? 1 : 0 );
             ignore.Body.SteamIdFriend = steamId;
 
@@ -791,7 +793,7 @@ namespace SteamKit2
         {
             var list = new ClientMsgProtobuf<CMsgClientFriendsList>( packetMsg );
 
-            cache.LocalUser.SteamID = this.Client.SteamID;
+            cache.LocalUser.SteamID = this.Client.SteamID!;
 
             if ( !list.Body.bincremental )
             {

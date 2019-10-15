@@ -143,7 +143,11 @@ namespace NetHookAnalyzer2
 				case WellKnownAppIDs.Artifact:
 					yield return "SteamKit2.GC.Artifact.Internal.CMsg";
 					break;
-			}
+
+                case WellKnownAppIDs.Underlords:
+                    yield return "SteamKit2.GC.Underlords.Internal.CMsg";
+                    break;
+            }
 		}
 	}
 }

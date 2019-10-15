@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -38,7 +39,21 @@ namespace SteamKit2.Internal
         /// Returns the the local IP of this client.
         /// </summary>
         /// <returns>The local IP.</returns>
-        public IPAddress LocalIP => connection?.GetLocalIP();
+        public IPAddress? LocalIP => connection?.GetLocalIP();
+
+        /// <summary>
+        /// Gets the public IP address of this client. This value is assigned after a logon attempt has succeeded.
+        /// This value will be <c>null</c> if the client is logged off of Steam.
+        /// </summary>
+        /// <value>The SteamID.</value>
+        public IPAddress? PublicIP { get; private set; }
+
+        /// <summary>
+        /// Gets the country code of our public IP address according to Steam. This value is assigned after a logon attempt has succeeded.
+        /// This value will be <c>null</c> if the client is logged off of Steam.
+        /// </summary>
+        /// <value>The SteamID.</value>
+        public string? IPCountryCode { get; private set; }
 
         /// <summary>
         /// Gets the universe of this client.
@@ -76,7 +91,7 @@ namespace SteamKit2.Internal
         /// This value will be <c>null</c> if the client is logged off of Steam.
         /// </summary>
         /// <value>The SteamID.</value>
-        public SteamID SteamID { get; private set; }
+        public SteamID? SteamID { get; private set; }
 
         /// <summary>
         /// Gets or sets the connection timeout used when connecting to the Steam server.
@@ -90,15 +105,15 @@ namespace SteamKit2.Internal
         /// Gets or sets the network listening interface. Use this for debugging only.
         /// For your convenience, you can use <see cref="NetHookNetworkListener"/> class.
         /// </summary>
-        public IDebugNetworkListener DebugNetworkListener { get; set; }
+        public IDebugNetworkListener? DebugNetworkListener { get; set; }
 
         internal bool ExpectDisconnection { get; set; }
 
         // connection lock around the setup and tear down of the connection task
         object connectionLock = new object();
-        CancellationTokenSource connectionCancellation;
-        Task connectionSetupTask;
-        volatile IConnection connection;
+        CancellationTokenSource? connectionCancellation;
+        Task? connectionSetupTask;
+        volatile IConnection? connection;
 
         ScheduledFunction heartBeatFunc;
 
@@ -133,7 +148,7 @@ namespace SteamKit2.Internal
         /// The <see cref="IPEndPoint"/> of the CM server to connect to.
         /// If <c>null</c>, SteamKit will randomly select a CM server from its internal list.
         /// </param>
-        public void Connect( ServerRecord cmServer = null )
+        public void Connect( ServerRecord? cmServer = null )
         {
             lock ( connectionLock )
             {
@@ -147,7 +162,7 @@ namespace SteamKit2.Internal
 
                 ExpectDisconnection = false;
 
-                Task<ServerRecord> recordTask = null;
+                Task<ServerRecord?> recordTask;
 
                 if ( cmServer == null )
                 {
@@ -155,7 +170,7 @@ namespace SteamKit2.Internal
                 }
                 else
                 {
-                    recordTask = Task.FromResult( cmServer );
+                    recordTask = Task.FromResult( (ServerRecord?)cmServer );
                 }
 
                 connectionSetupTask = recordTask.ContinueWith( t =>
@@ -174,6 +189,13 @@ namespace SteamKit2.Internal
                     }
 
                     var record = t.Result;
+
+                    if ( record is null )
+                    {
+                        DebugLog.WriteLine( nameof( CMClient ), "Server record task returned no result." );
+                        OnClientDisconnected( userInitiated: false );
+                        return;
+                    }
 
                     connection = CreateConnection( record.ProtocolTypes & Configuration.ProtocolTypes );
                     connection.NetMsgReceived += NetMsgReceived;
@@ -290,7 +312,7 @@ namespace SteamKit2.Internal
         /// Called when a client message is received from the network.
         /// </summary>
         /// <param name="packetMsg">The packet message.</param>
-        protected virtual bool OnClientMsgReceived( IPacketMsg packetMsg )
+        protected virtual bool OnClientMsgReceived( [NotNullWhen(true)] IPacketMsg? packetMsg )
         {
             if ( packetMsg == null )
             {
@@ -386,6 +408,9 @@ namespace SteamKit2.Internal
 
         void Connected( object sender, EventArgs e )
         {
+            DebugLog.Assert( connection != null, nameof( CMClient ), "No connection object after connecting." );
+            DebugLog.Assert( connection.CurrentEndPoint != null, nameof( CMClient ), "No connection endpoint after connecting - cannot update server list" );
+
             Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Good );
 
             IsConnected = true;
@@ -395,13 +420,17 @@ namespace SteamKit2.Internal
         void Disconnected( object sender, DisconnectedEventArgs e )
         {
             var connectionRelease = Interlocked.Exchange( ref connection, null );
-            if ( connectionRelease == null ) return;
+            if ( connectionRelease == null )
+            {
+                return;
+            }
 
             IsConnected = false;
 
             if ( !e.UserInitiated && !ExpectDisconnection )
             {
-                Servers.TryMark( connectionRelease.CurrentEndPoint, connectionRelease.ProtocolTypes, ServerQuality.Bad );
+                DebugLog.Assert( connectionRelease.CurrentEndPoint != null, nameof( CMClient ), "No connection endpoint while disconnecting - cannot update server list" );
+                Servers.TryMark( connectionRelease.CurrentEndPoint!, connectionRelease.ProtocolTypes, ServerQuality.Bad );
             }
 
             SessionID = null;
@@ -416,7 +445,7 @@ namespace SteamKit2.Internal
             OnClientDisconnected( userInitiated: e.UserInitiated || ExpectDisconnection );
         }
 
-        internal static IPacketMsg GetPacketMsg( byte[] data )
+        internal static IPacketMsg? GetPacketMsg( byte[] data )
         {
             if ( data.Length < sizeof( uint ) )
             {
@@ -523,6 +552,8 @@ namespace SteamKit2.Internal
                 SteamID = logonResp.ProtoHeader.steamid;
 
                 CellID = logonResp.Body.cell_id;
+                PublicIP = NetHelpers.GetIPAddress(logonResp.Body.public_ip);
+                IPCountryCode = logonResp.Body.ip_country_code;
 
                 int hbDelay = logonResp.Body.out_of_game_heartbeat_seconds;
 
@@ -538,6 +569,8 @@ namespace SteamKit2.Internal
             SteamID = null;
 
             CellID = null;
+            PublicIP = null;
+            IPCountryCode = null;
 
             heartBeatFunc.Stop();
 
@@ -548,6 +581,8 @@ namespace SteamKit2.Internal
 
                 if ( logoffResult == EResult.TryAnotherCM || logoffResult == EResult.ServiceUnavailable )
                 {
+                    DebugLog.Assert( connection != null, nameof( CMClient ), "No connection object during ClientLoggedOff." );
+                    DebugLog.Assert( connection.CurrentEndPoint != null, nameof( CMClient ), "No connection endpoint during ClientLoggedOff - cannot update server list status" );
                     Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Bad );
                 }
             }

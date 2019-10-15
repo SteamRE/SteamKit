@@ -52,7 +52,7 @@ namespace SteamKit2
                 var methodInfo = call.Method;
 
                 var argument = call.Arguments.Single();
-                object message = null;
+                object message;
 
                 if ( argument.NodeType == ExpressionType.MemberAccess )
                 {
@@ -106,7 +106,7 @@ namespace SteamKit2
         {
             dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
-                { EMsg.ClientServiceMethodResponse, HandleClientServiceMethodResponse },
+                { EMsg.ClientServiceMethodLegacyResponse, HandleClientServiceMethodResponse },
                 { EMsg.ServiceMethod, HandleServiceMethod },
             };
         }
@@ -129,7 +129,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(message) );
             }
 
-            var msg = new ClientMsgProtobuf<CMsgClientServiceMethod>( EMsg.ClientServiceMethod );
+            var msg = new ClientMsgProtobuf<CMsgClientServiceMethod>( EMsg.ClientServiceMethodLegacy );
             msg.SourceJobID = Client.GetNextJobID();
 
             using ( var ms = new MemoryStream() )
@@ -184,7 +184,6 @@ namespace SteamKit2
         void HandleClientServiceMethodResponse( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientServiceMethodResponse>( packetMsg );
-
             var callback = new ServiceMethodResponse(response.TargetJobID, (EResult)response.ProtoHeader.eresult, response.Body);
             Client.PostCallback( callback );
         }

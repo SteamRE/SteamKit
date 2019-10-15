@@ -58,9 +58,9 @@ namespace SteamKit2.GC
     /// This is the abstract base class for all available game coordinator messages.
     /// It's used to maintain packet payloads and provide a header for all gc messages.
     /// </summary>
-    /// <typeparam name="HdrType">The header type for this gc message.</typeparam>
-    public abstract class GCMsgBase<HdrType> : MsgBase, IClientGCMsg
-        where HdrType : IGCSerializableHeader, new()
+    /// <typeparam name="THeader">The header type for this gc message.</typeparam>
+    public abstract class GCMsgBase<THeader> : MsgBase, IClientGCMsg
+        where THeader : IGCSerializableHeader, new()
     {
         /// <summary>
         /// Gets a value indicating whether this gc message is protobuf backed.
@@ -96,7 +96,7 @@ namespace SteamKit2.GC
         /// <summary>
         /// Gets the header for this message type. 
         /// </summary>
-        public HdrType Header { get; }
+        public THeader Header { get; }
 
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace SteamKit2.GC
         public GCMsgBase( int payloadReserve = 0 )
             : base( payloadReserve )
         {
-            Header = new HdrType();
+            Header = new THeader();
         }
 
 

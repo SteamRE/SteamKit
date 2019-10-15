@@ -69,6 +69,8 @@ namespace SteamKit2
             this.AddHandler( new SteamTrading() );
             this.AddHandler( new SteamUnifiedMessages() );
             this.AddHandler( new SteamScreenshots() );
+            this.AddHandler( new SteamMatchmaking() );
+            this.AddHandler( new SteamNetworking() );
 
             using ( var process = Process.GetCurrentProcess() )
             {
@@ -131,7 +133,7 @@ namespace SteamKit2
         /// <returns>
         /// A registered handler on success, or null if the handler could not be found.
         /// </returns>
-        public T GetHandler<T>()
+        public T? GetHandler<T>()
             where T : ClientMsgHandler
         {
             Type type = typeof( T );
@@ -152,7 +154,7 @@ namespace SteamKit2
         /// This function does not dequeue the callback, you must call FreeLastCallback after processing it.
         /// </summary>
         /// <returns>The next callback in the queue, or null if no callback is waiting.</returns>
-        public ICallbackMsg GetCallback()
+        public ICallbackMsg? GetCallback()
         {
             return GetCallback( false );
         }
@@ -161,7 +163,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="freeLast">if set to <c>true</c> this function also frees the last callback if one existed.</param>
         /// <returns>The next callback in the queue, or null if no callback is waiting.</returns>
-        public ICallbackMsg GetCallback( bool freeLast )
+        public ICallbackMsg? GetCallback( bool freeLast )
         {
             lock ( callbackLock )
             {
@@ -177,7 +179,7 @@ namespace SteamKit2
         /// This function does not dequeue the callback, you must call FreeLastCallback after processing it.
         /// </summary>
         /// <returns>The callback object from the queue.</returns>
-        public ICallbackMsg WaitForCallback()
+        public ICallbackMsg? WaitForCallback()
         {
             return WaitForCallback( false );
         }
@@ -187,7 +189,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="timeout">The length of time to block.</param>
         /// <returns>A callback object from the queue if a callback has been posted, or null if the timeout has elapsed.</returns>
-        public ICallbackMsg WaitForCallback( TimeSpan timeout )
+        public ICallbackMsg? WaitForCallback( TimeSpan timeout )
         {
             lock ( callbackLock )
             {
@@ -221,7 +223,7 @@ namespace SteamKit2
         /// <param name="freeLast">if set to <c>true</c> this function also frees the last callback.</param>
         /// <param name="timeout">The length of time to block.</param>
         /// <returns>A callback object from the queue if a callback has been posted, or null if the timeout has elapsed.</returns>
-        public ICallbackMsg WaitForCallback( bool freeLast, TimeSpan timeout )
+        public ICallbackMsg? WaitForCallback( bool freeLast, TimeSpan timeout )
         {
             lock ( callbackLock )
             {
@@ -325,7 +327,7 @@ namespace SteamKit2
         /// Called when a client message is received from the network.
         /// </summary>
         /// <param name="packetMsg">The packet message.</param>
-        protected override bool OnClientMsgReceived( IPacketMsg packetMsg )
+        protected override bool OnClientMsgReceived( IPacketMsg? packetMsg )
         {
             // let the underlying CMClient handle this message first
             if ( !base.OnClientMsgReceived( packetMsg ) )
@@ -390,9 +392,16 @@ namespace SteamKit2
 
             jobManager.SetTimeoutsEnabled( false );
 
+            ClearHandlerCaches();
+
             PostCallback( new DisconnectedCallback( userInitiated ) );
         }
 
+
+        void ClearHandlerCaches()
+        {
+            GetHandler<SteamMatchmaking>()?.ClearLobbyCache();
+        }
 
         void HandleCMList( IPacketMsg packetMsg )
         {

@@ -120,9 +120,9 @@ namespace SteamKit2
         /// <returns>
         /// The result of the conversion.
         /// </returns>
-        public static implicit operator string( GameID gid )
+        public static implicit operator string( GameID? gid )
         {
-            if ( gid == null )
+            if ( gid is null )
             {
                 throw new ArgumentNullException( nameof(gid) );
             }
@@ -137,9 +137,9 @@ namespace SteamKit2
         /// <returns>
         /// The result of the conversion.
         /// </returns>
-        public static implicit operator UInt64( GameID gid )
+        public static implicit operator UInt64( GameID? gid )
         {
-            if ( gid == null )
+            if ( gid is null )
             {
                 throw new ArgumentNullException( nameof(gid) );
             }
@@ -263,15 +263,9 @@ namespace SteamKit2
         /// <returns>
         ///   <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals( System.Object obj )
+        public override bool Equals( object? obj )
         {
-            if ( obj == null )
-            {
-                return false;
-            }
-
-            GameID gid = obj as GameID;
-            if ( ( System.Object )gid == null )
+            if ( !( obj is GameID gid ) )
             {
                 return false;
             }
@@ -286,9 +280,9 @@ namespace SteamKit2
         /// <returns>
         ///   <c>true</c> if the specified <see cref="GameID"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public bool Equals( GameID gid )
+        public bool Equals( GameID? gid )
         {
-            if ( ( object )gid == null )
+            if ( gid is null )
             {
                 return false;
             }
@@ -304,14 +298,14 @@ namespace SteamKit2
         /// <returns>
         /// The result of the operator.
         /// </returns>
-        public static bool operator ==( GameID a, GameID b )
+        public static bool operator ==( GameID? a, GameID? b )
         {
-            if ( System.Object.ReferenceEquals( a, b ) )
+            if ( object.ReferenceEquals( a, b ) )
             {
                 return true;
             }
 
-            if ( ( ( object )a == null ) || ( ( object )b == null ) )
+            if ( a is null || b is null )
             {
                 return false;
             }
@@ -327,7 +321,7 @@ namespace SteamKit2
         /// <returns>
         /// The result of the operator.
         /// </returns>
-        public static bool operator !=( GameID a, GameID b )
+        public static bool operator !=( GameID? a, GameID? b )
         {
             return !( a == b );
         }

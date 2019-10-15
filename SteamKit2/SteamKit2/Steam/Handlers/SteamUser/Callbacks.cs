@@ -10,7 +10,9 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Collections.Generic;
 using System.Text;
+using ProtoBuf;
 using SteamKit2.Internal;
+using SteamKit2.Unified.Internal;
 
 namespace SteamKit2
 {
@@ -45,7 +47,7 @@ namespace SteamKit2
             /// <summary>
             /// Gets or sets the public IP of the client
             /// </summary>
-            public IPAddress PublicIP { get; private set; }
+            public IPAddress? PublicIP { get; private set; }
 
             /// <summary>
             /// Gets the Steam3 server time.
@@ -60,12 +62,12 @@ namespace SteamKit2
             /// <summary>
             /// Gets the client steam ID.
             /// </summary>
-            public SteamID ClientSteamID { get; private set; }
+            public SteamID? ClientSteamID { get; private set; }
 
             /// <summary>
             /// Gets the email domain.
             /// </summary>
-            public string EmailDomain { get; private set; }
+            public string? EmailDomain { get; private set; }
 
             /// <summary>
             /// Gets the Steam2 CellID.
@@ -82,7 +84,7 @@ namespace SteamKit2
             /// This is used for authenticated content downloads in Steam2.
             /// This field will only be set when <see cref="LogOnDetails.RequestSteam2Ticket"/> has been set to <c>true</c>.
             /// </summary>
-            public byte[] Steam2Ticket { get; private set; }
+            public byte[]? Steam2Ticket { get; private set; }
 
             /// <summary>
             /// Gets a value indicating whether the client should use PICS.
@@ -92,17 +94,17 @@ namespace SteamKit2
             /// <summary>
             /// Gets the WebAPI authentication user nonce.
             /// </summary>
-            public string WebAPIUserNonce { get; private set; }
+            public string? WebAPIUserNonce { get; private set; }
 
             /// <summary>
             /// Gets the IP country code.
             /// </summary>
-            public string IPCountryCode { get; private set; }
+            public string? IPCountryCode { get; private set; }
 
             /// <summary>
             /// Gets the vanity URL.
             /// </summary>
-            public string VanityURL { get; private set; }
+            public string? VanityURL { get; private set; }
 
             /// <summary>
             /// Gets the threshold for login failures before Steam wants the client to migrate to a new CM.
@@ -113,6 +115,10 @@ namespace SteamKit2
             /// </summary>
             public int NumDisconnectsToMigrate { get; private set; }
 
+            /// <summary>
+            /// Gets the Steam parental settings.
+            /// </summary>
+            public ParentalSettings? ParentalSettings { get; private set; }
 
             internal LoggedOnCallback( CMsgClientLogonResponse resp )
             {
@@ -147,6 +153,14 @@ namespace SteamKit2
 
                 this.NumLoginFailuresToMigrate = resp.count_loginfailures_to_migrate;
                 this.NumDisconnectsToMigrate = resp.count_disconnects_to_migrate;
+
+                if ( resp.parental_settings != null )
+                {
+                    using ( var ms = new MemoryStream( resp.parental_settings ) )
+                    {
+                        this.ParentalSettings = Serializer.Deserialize<ParentalSettings>( ms );
+                    }
+                }
             }
 
 
@@ -335,11 +349,11 @@ namespace SteamKit2
                 /// <summary>
                 /// Gets the OTP identifier.
                 /// </summary>
-                public string Identifier { get; internal set; }
+                public string? Identifier { get; internal set; }
                 /// <summary>
                 /// Gets the OTP shared secret.
                 /// </summary>
-                public byte[] SharedSecret { get; internal set; }
+                public byte[]? SharedSecret { get; internal set; }
                 /// <summary>
                 /// Gets the OTP time drift.
                 /// </summary>

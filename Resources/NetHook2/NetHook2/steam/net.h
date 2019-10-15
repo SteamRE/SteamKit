@@ -12,7 +12,7 @@
 typedef uint32 HCONNECTION;
 
 
-enum EWebSocketOpCode
+enum class EWebSocketOpCode
 {
 	k_eWebSocketOpCode_Continuation	= 0x00,
 	k_eWebSocketOpCode_Text			= 0x01,
@@ -23,9 +23,9 @@ enum EWebSocketOpCode
 	k_eWebSocketOpCode_Pong			= 0x0A,
 };
 
-inline const char *EWebSocketOpCodeToName(EWebSocketOpCode eWebSocketOpCode)
+inline const char *EWebSocketOpCodeToName(EWebSocketOpCode eWebSocketOpCode) noexcept
 {
-	const char *rgchWebSocketOpCodeNames[] =
+	const char * const rgchWebSocketOpCodeNames[] =
 	{
 		"Continuation",
 		"Text",
@@ -45,10 +45,12 @@ inline const char *EWebSocketOpCodeToName(EWebSocketOpCode eWebSocketOpCode)
 		"<Reserved>", // 0x0F
 	};
 
-	if (eWebSocketOpCode < 0 || eWebSocketOpCode >= sizeof(rgchWebSocketOpCodeNames))
+	const int iOpCodeValue = static_cast<int>(eWebSocketOpCode);
+
+	if (iOpCodeValue < 0 || iOpCodeValue >= sizeof(rgchWebSocketOpCodeNames))
 		return "<Invalid>";
 
-	return rgchWebSocketOpCodeNames[eWebSocketOpCode];
+	return rgchWebSocketOpCodeNames[iOpCodeValue];
 }
 
 
