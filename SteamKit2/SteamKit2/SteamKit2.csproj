@@ -8,6 +8,7 @@
     <PackageIconUrl>https://raw.github.com/SteamRE/SteamKit/master/Resources/Misc/steamkit_logo_128.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/SteamRE/SteamKit</PackageProjectUrl>
     <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
+    <PackageTags>steamkit;sk2;steam;valve;dota;dota2;csgo</PackageTags>
     <RepositoryUrl>https://github.com/SteamRE/SteamKit</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <ProjectGuid>{4B2B0365-DE37-4B65-B614-3E4E7C05147D}</ProjectGuid>
