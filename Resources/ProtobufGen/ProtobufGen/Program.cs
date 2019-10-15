@@ -60,6 +60,7 @@ namespace ProtobufGen
             {
                 [ "langver" ] = "7.0",
                 [ "names" ] = "original",
+                [ "services" ] = "1",
             };
 
             var files = codegen.Generate( set, options: options );
