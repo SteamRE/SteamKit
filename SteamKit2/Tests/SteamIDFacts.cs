@@ -143,6 +143,7 @@ namespace Tests
                 "[U:1:123:2]",
                 "[G:1:626]",
                 "[A:2:165:1234]",
+                "[M:2:165:1234]",
             };
 
             foreach ( var steamId in steamIds )
