@@ -203,7 +203,6 @@ namespace DotaMatchRequest
                 typeof( EGCBaseMsg ),
                 typeof( EGCItemMsg ),
                 typeof( ESOMsg ),
-                typeof( EGCSystemMsg ),
             };
 
             foreach ( var enumType in eMsgEnums )
