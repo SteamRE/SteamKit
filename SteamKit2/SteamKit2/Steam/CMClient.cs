@@ -552,7 +552,7 @@ namespace SteamKit2.Internal
                 SteamID = logonResp.ProtoHeader.steamid;
 
                 CellID = logonResp.Body.cell_id;
-                PublicIP = NetHelpers.GetIPAddress(logonResp.Body.public_ip);
+                PublicIP = NetHelpers.GetIPAddress( logonResp.Body.deprecated_public_ip );
                 IPCountryCode = logonResp.Body.ip_country_code;
 
                 int hbDelay = logonResp.Body.out_of_game_heartbeat_seconds;

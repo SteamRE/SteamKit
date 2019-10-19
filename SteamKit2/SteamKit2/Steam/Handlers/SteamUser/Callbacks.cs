@@ -128,7 +128,7 @@ namespace SteamKit2
                 this.OutOfGameSecsPerHeartbeat = resp.out_of_game_heartbeat_seconds;
                 this.InGameSecsPerHeartbeat = resp.in_game_heartbeat_seconds;
 
-                this.PublicIP = NetHelpers.GetIPAddress( resp.public_ip );
+                this.PublicIP = NetHelpers.GetIPAddress( resp.deprecated_public_ip );
 
                 this.ServerTime = DateUtils.DateTimeFromUnixTime( resp.rtime32_server_time );
 

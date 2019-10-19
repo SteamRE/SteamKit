@@ -129,7 +129,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(message) );
             }
 
-            var msg = new ClientMsgProtobuf<CMsgClientServiceMethod>( EMsg.ClientServiceMethodLegacy );
+            var msg = new ClientMsgProtobuf<CMsgClientServiceMethodLegacy>( EMsg.ClientServiceMethodLegacy );
             msg.SourceJobID = Client.GetNextJobID();
 
             using ( var ms = new MemoryStream() )
@@ -183,7 +183,7 @@ namespace SteamKit2
         #region ClientMsg Handlers
         void HandleClientServiceMethodResponse( IPacketMsg packetMsg )
         {
-            var response = new ClientMsgProtobuf<CMsgClientServiceMethodResponse>( packetMsg );
+            var response = new ClientMsgProtobuf<CMsgClientServiceMethodLegacyResponse>( packetMsg );
             var callback = new ServiceMethodResponse(response.TargetJobID, (EResult)response.ProtoHeader.eresult, response.Body);
             Client.PostCallback( callback );
         }

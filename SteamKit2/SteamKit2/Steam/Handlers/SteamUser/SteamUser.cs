@@ -315,12 +315,12 @@ namespace SteamKit2
 
             if ( details.LoginID.HasValue )
             {
-                logon.Body.obfustucated_private_ip = details.LoginID.Value;
+                logon.Body.deprecated_obfustucated_private_ip = details.LoginID.Value;
             }
             else
             {
                 uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP! );
-                logon.Body.obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
+                logon.Body.deprecated_obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
             }
 
             logon.ProtoHeader.client_sessionid = 0;
