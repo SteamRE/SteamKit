@@ -11,7 +11,6 @@
 #>
 param([string[]]$ProtoDir)
 
-$ProtoGenDir = $PSScriptRoot
 $ProtoGenDll = Join-Path $PSScriptRoot 'ProtobufGen\bin\Debug\netcoreapp2.1\ProtobufGen.dll'
 $ProtoBase = Join-Path $PSScriptRoot '..\ProtoBufs'
 $SK2Base = Join-Path $PSScriptRoot '..\..\SteamKit2\SteamKit2\Base\Generated'
