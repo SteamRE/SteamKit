@@ -18,7 +18,7 @@ $SK2Base = Join-Path $PSScriptRoot '..\..\SteamKit2\SteamKit2\Base\Generated'
 
 Push-Location
 
-$protos = Import-Csv -LiteralPath (Join-Path $PSScriptRoot 'protos.csv') # |
+$protos = Import-Csv -LiteralPath (Join-Path $PSScriptRoot 'protos.csv') |
     ? { (!$ProtoDir) -or ($_.ProtoDir -in $ProtoDir)}
 
 # one-off
