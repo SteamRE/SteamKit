@@ -142,6 +142,16 @@ namespace SteamKit2.Unified.Internal
         public void Resetrecovery_email() => __pbn__recovery_email = null;
         private string __pbn__recovery_email;
 
+        [global::ProtoBuf.ProtoMember(12)]
+        public bool is_site_license_lock
+        {
+            get { return __pbn__is_site_license_lock.GetValueOrDefault(); }
+            set { __pbn__is_site_license_lock = value; }
+        }
+        public bool ShouldSerializeis_site_license_lock() => __pbn__is_site_license_lock != null;
+        public void Resetis_site_license_lock() => __pbn__is_site_license_lock = null;
+        private bool? __pbn__is_site_license_lock;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

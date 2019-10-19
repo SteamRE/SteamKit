@@ -99,12 +99,6 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetversion() => __pbn__version = null;
         private ulong? __pbn__version;
 
-        [global::ProtoBuf.ProtoMember(4)]
-        public global::System.Collections.Generic.List<SingleObject> objects_added { get; } = new global::System.Collections.Generic.List<SingleObject>();
-
-        [global::ProtoBuf.ProtoMember(5)]
-        public global::System.Collections.Generic.List<SingleObject> objects_removed { get; } = new global::System.Collections.Generic.List<SingleObject>();
-
         [global::ProtoBuf.ProtoMember(6)]
         public CMsgSOIDOwner owner_soid { get; set; }
 

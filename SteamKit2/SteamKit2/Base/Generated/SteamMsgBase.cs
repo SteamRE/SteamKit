@@ -265,6 +265,17 @@ namespace SteamKit2.Internal
         public void Resetwg_token() => __pbn__wg_token = null;
         private string __pbn__wg_token;
 
+        [global::ProtoBuf.ProtoMember(31)]
+        [global::System.ComponentModel.DefaultValue(0)]
+        public uint launcher_type
+        {
+            get { return __pbn__launcher_type ?? 0; }
+            set { __pbn__launcher_type = value; }
+        }
+        public bool ShouldSerializelauncher_type() => __pbn__launcher_type != null;
+        public void Resetlauncher_type() => __pbn__launcher_type = null;
+        private uint? __pbn__launcher_type;
+
         [global::ProtoBuf.ProtoMember(15)]
         public uint ip
         {
@@ -974,6 +985,16 @@ namespace SteamKit2.Internal
         public void Resetappid() => __pbn__appid = null;
         private uint? __pbn__appid;
 
+        [global::ProtoBuf.ProtoMember(10)]
+        public uint rtime32_last_modified
+        {
+            get { return __pbn__rtime32_last_modified.GetValueOrDefault(); }
+            set { __pbn__rtime32_last_modified = value; }
+        }
+        public bool ShouldSerializertime32_last_modified() => __pbn__rtime32_last_modified != null;
+        public void Resetrtime32_last_modified() => __pbn__rtime32_last_modified = null;
+        private uint? __pbn__rtime32_last_modified;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1016,6 +1037,436 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public global::System.Collections.Generic.List<CClanEventUserNewsTuple> events { get; } = new global::System.Collections.Generic.List<CClanEventUserNewsTuple>();
 
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_ClanAnnouncementInfo : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong gid
+        {
+            get { return __pbn__gid.GetValueOrDefault(); }
+            set { __pbn__gid = value; }
+        }
+        public bool ShouldSerializegid() => __pbn__gid != null;
+        public void Resetgid() => __pbn__gid = null;
+        private ulong? __pbn__gid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong clanid
+        {
+            get { return __pbn__clanid.GetValueOrDefault(); }
+            set { __pbn__clanid = value; }
+        }
+        public bool ShouldSerializeclanid() => __pbn__clanid != null;
+        public void Resetclanid() => __pbn__clanid = null;
+        private ulong? __pbn__clanid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong posterid
+        {
+            get { return __pbn__posterid.GetValueOrDefault(); }
+            set { __pbn__posterid = value; }
+        }
+        public bool ShouldSerializeposterid() => __pbn__posterid != null;
+        public void Resetposterid() => __pbn__posterid = null;
+        private ulong? __pbn__posterid;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string headline
+        {
+            get { return __pbn__headline ?? ""; }
+            set { __pbn__headline = value; }
+        }
+        public bool ShouldSerializeheadline() => __pbn__headline != null;
+        public void Resetheadline() => __pbn__headline = null;
+        private string __pbn__headline;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint posttime
+        {
+            get { return __pbn__posttime.GetValueOrDefault(); }
+            set { __pbn__posttime = value; }
+        }
+        public bool ShouldSerializeposttime() => __pbn__posttime != null;
+        public void Resetposttime() => __pbn__posttime = null;
+        private uint? __pbn__posttime;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint updatetime
+        {
+            get { return __pbn__updatetime.GetValueOrDefault(); }
+            set { __pbn__updatetime = value; }
+        }
+        public bool ShouldSerializeupdatetime() => __pbn__updatetime != null;
+        public void Resetupdatetime() => __pbn__updatetime = null;
+        private uint? __pbn__updatetime;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string body
+        {
+            get { return __pbn__body ?? ""; }
+            set { __pbn__body = value; }
+        }
+        public bool ShouldSerializebody() => __pbn__body != null;
+        public void Resetbody() => __pbn__body = null;
+        private string __pbn__body;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public int commentcount
+        {
+            get { return __pbn__commentcount.GetValueOrDefault(); }
+            set { __pbn__commentcount = value; }
+        }
+        public bool ShouldSerializecommentcount() => __pbn__commentcount != null;
+        public void Resetcommentcount() => __pbn__commentcount = null;
+        private int? __pbn__commentcount;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public global::System.Collections.Generic.List<string> tags { get; } = new global::System.Collections.Generic.List<string>();
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public int language
+        {
+            get { return __pbn__language.GetValueOrDefault(); }
+            set { __pbn__language = value; }
+        }
+        public bool ShouldSerializelanguage() => __pbn__language != null;
+        public void Resetlanguage() => __pbn__language = null;
+        private int? __pbn__language;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public bool hidden
+        {
+            get { return __pbn__hidden.GetValueOrDefault(); }
+            set { __pbn__hidden = value; }
+        }
+        public bool ShouldSerializehidden() => __pbn__hidden != null;
+        public void Resethidden() => __pbn__hidden = null;
+        private bool? __pbn__hidden;
+
+        [global::ProtoBuf.ProtoMember(12, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong forum_topic_id
+        {
+            get { return __pbn__forum_topic_id.GetValueOrDefault(); }
+            set { __pbn__forum_topic_id = value; }
+        }
+        public bool ShouldSerializeforum_topic_id() => __pbn__forum_topic_id != null;
+        public void Resetforum_topic_id() => __pbn__forum_topic_id = null;
+        private ulong? __pbn__forum_topic_id;
+
+        [global::ProtoBuf.ProtoMember(13, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong event_gid
+        {
+            get { return __pbn__event_gid.GetValueOrDefault(); }
+            set { __pbn__event_gid = value; }
+        }
+        public bool ShouldSerializeevent_gid() => __pbn__event_gid != null;
+        public void Resetevent_gid() => __pbn__event_gid = null;
+        private ulong? __pbn__event_gid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClanEventData : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong gid
+        {
+            get { return __pbn__gid.GetValueOrDefault(); }
+            set { __pbn__gid = value; }
+        }
+        public bool ShouldSerializegid() => __pbn__gid != null;
+        public void Resetgid() => __pbn__gid = null;
+        private ulong? __pbn__gid;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong clan_steamid
+        {
+            get { return __pbn__clan_steamid.GetValueOrDefault(); }
+            set { __pbn__clan_steamid = value; }
+        }
+        public bool ShouldSerializeclan_steamid() => __pbn__clan_steamid != null;
+        public void Resetclan_steamid() => __pbn__clan_steamid = null;
+        private ulong? __pbn__clan_steamid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string event_name
+        {
+            get { return __pbn__event_name ?? ""; }
+            set { __pbn__event_name = value; }
+        }
+        public bool ShouldSerializeevent_name() => __pbn__event_name != null;
+        public void Resetevent_name() => __pbn__event_name = null;
+        private string __pbn__event_name;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(EProtoClanEventType.k_EClanOtherEvent)]
+        public EProtoClanEventType event_type
+        {
+            get { return __pbn__event_type ?? EProtoClanEventType.k_EClanOtherEvent; }
+            set { __pbn__event_type = value; }
+        }
+        public bool ShouldSerializeevent_type() => __pbn__event_type != null;
+        public void Resetevent_type() => __pbn__event_type = null;
+        private EProtoClanEventType? __pbn__event_type;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint appid
+        {
+            get { return __pbn__appid.GetValueOrDefault(); }
+            set { __pbn__appid = value; }
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string server_address
+        {
+            get { return __pbn__server_address ?? ""; }
+            set { __pbn__server_address = value; }
+        }
+        public bool ShouldSerializeserver_address() => __pbn__server_address != null;
+        public void Resetserver_address() => __pbn__server_address = null;
+        private string __pbn__server_address;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string server_password
+        {
+            get { return __pbn__server_password ?? ""; }
+            set { __pbn__server_password = value; }
+        }
+        public bool ShouldSerializeserver_password() => __pbn__server_password != null;
+        public void Resetserver_password() => __pbn__server_password = null;
+        private string __pbn__server_password;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public uint rtime32_start_time
+        {
+            get { return __pbn__rtime32_start_time.GetValueOrDefault(); }
+            set { __pbn__rtime32_start_time = value; }
+        }
+        public bool ShouldSerializertime32_start_time() => __pbn__rtime32_start_time != null;
+        public void Resetrtime32_start_time() => __pbn__rtime32_start_time = null;
+        private uint? __pbn__rtime32_start_time;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public uint rtime32_end_time
+        {
+            get { return __pbn__rtime32_end_time.GetValueOrDefault(); }
+            set { __pbn__rtime32_end_time = value; }
+        }
+        public bool ShouldSerializertime32_end_time() => __pbn__rtime32_end_time != null;
+        public void Resetrtime32_end_time() => __pbn__rtime32_end_time = null;
+        private uint? __pbn__rtime32_end_time;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public int comment_count
+        {
+            get { return __pbn__comment_count.GetValueOrDefault(); }
+            set { __pbn__comment_count = value; }
+        }
+        public bool ShouldSerializecomment_count() => __pbn__comment_count != null;
+        public void Resetcomment_count() => __pbn__comment_count = null;
+        private int? __pbn__comment_count;
+
+        [global::ProtoBuf.ProtoMember(11, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong creator_steamid
+        {
+            get { return __pbn__creator_steamid.GetValueOrDefault(); }
+            set { __pbn__creator_steamid = value; }
+        }
+        public bool ShouldSerializecreator_steamid() => __pbn__creator_steamid != null;
+        public void Resetcreator_steamid() => __pbn__creator_steamid = null;
+        private ulong? __pbn__creator_steamid;
+
+        [global::ProtoBuf.ProtoMember(12, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong last_update_steamid
+        {
+            get { return __pbn__last_update_steamid.GetValueOrDefault(); }
+            set { __pbn__last_update_steamid = value; }
+        }
+        public bool ShouldSerializelast_update_steamid() => __pbn__last_update_steamid != null;
+        public void Resetlast_update_steamid() => __pbn__last_update_steamid = null;
+        private ulong? __pbn__last_update_steamid;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string event_notes
+        {
+            get { return __pbn__event_notes ?? ""; }
+            set { __pbn__event_notes = value; }
+        }
+        public bool ShouldSerializeevent_notes() => __pbn__event_notes != null;
+        public void Resetevent_notes() => __pbn__event_notes = null;
+        private string __pbn__event_notes;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string jsondata
+        {
+            get { return __pbn__jsondata ?? ""; }
+            set { __pbn__jsondata = value; }
+        }
+        public bool ShouldSerializejsondata() => __pbn__jsondata != null;
+        public void Resetjsondata() => __pbn__jsondata = null;
+        private string __pbn__jsondata;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public CCommunity_ClanAnnouncementInfo announcement_body { get; set; }
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public bool published
+        {
+            get { return __pbn__published.GetValueOrDefault(); }
+            set { __pbn__published = value; }
+        }
+        public bool ShouldSerializepublished() => __pbn__published != null;
+        public void Resetpublished() => __pbn__published = null;
+        private bool? __pbn__published;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public bool hidden
+        {
+            get { return __pbn__hidden.GetValueOrDefault(); }
+            set { __pbn__hidden = value; }
+        }
+        public bool ShouldSerializehidden() => __pbn__hidden != null;
+        public void Resethidden() => __pbn__hidden = null;
+        private bool? __pbn__hidden;
+
+        [global::ProtoBuf.ProtoMember(18)]
+        public uint rtime32_visibility_start
+        {
+            get { return __pbn__rtime32_visibility_start.GetValueOrDefault(); }
+            set { __pbn__rtime32_visibility_start = value; }
+        }
+        public bool ShouldSerializertime32_visibility_start() => __pbn__rtime32_visibility_start != null;
+        public void Resetrtime32_visibility_start() => __pbn__rtime32_visibility_start = null;
+        private uint? __pbn__rtime32_visibility_start;
+
+        [global::ProtoBuf.ProtoMember(19)]
+        public uint rtime32_visibility_end
+        {
+            get { return __pbn__rtime32_visibility_end.GetValueOrDefault(); }
+            set { __pbn__rtime32_visibility_end = value; }
+        }
+        public bool ShouldSerializertime32_visibility_end() => __pbn__rtime32_visibility_end != null;
+        public void Resetrtime32_visibility_end() => __pbn__rtime32_visibility_end = null;
+        private uint? __pbn__rtime32_visibility_end;
+
+        [global::ProtoBuf.ProtoMember(20)]
+        public uint broadcaster_accountid
+        {
+            get { return __pbn__broadcaster_accountid.GetValueOrDefault(); }
+            set { __pbn__broadcaster_accountid = value; }
+        }
+        public bool ShouldSerializebroadcaster_accountid() => __pbn__broadcaster_accountid != null;
+        public void Resetbroadcaster_accountid() => __pbn__broadcaster_accountid = null;
+        private uint? __pbn__broadcaster_accountid;
+
+        [global::ProtoBuf.ProtoMember(21)]
+        public uint follower_count
+        {
+            get { return __pbn__follower_count.GetValueOrDefault(); }
+            set { __pbn__follower_count = value; }
+        }
+        public bool ShouldSerializefollower_count() => __pbn__follower_count != null;
+        public void Resetfollower_count() => __pbn__follower_count = null;
+        private uint? __pbn__follower_count;
+
+        [global::ProtoBuf.ProtoMember(22)]
+        public uint ignore_count
+        {
+            get { return __pbn__ignore_count.GetValueOrDefault(); }
+            set { __pbn__ignore_count = value; }
+        }
+        public bool ShouldSerializeignore_count() => __pbn__ignore_count != null;
+        public void Resetignore_count() => __pbn__ignore_count = null;
+        private uint? __pbn__ignore_count;
+
+        [global::ProtoBuf.ProtoMember(23, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong forum_topic_id
+        {
+            get { return __pbn__forum_topic_id.GetValueOrDefault(); }
+            set { __pbn__forum_topic_id = value; }
+        }
+        public bool ShouldSerializeforum_topic_id() => __pbn__forum_topic_id != null;
+        public void Resetforum_topic_id() => __pbn__forum_topic_id = null;
+        private ulong? __pbn__forum_topic_id;
+
+        [global::ProtoBuf.ProtoMember(24)]
+        public uint rtime32_last_modified
+        {
+            get { return __pbn__rtime32_last_modified.GetValueOrDefault(); }
+            set { __pbn__rtime32_last_modified = value; }
+        }
+        public bool ShouldSerializertime32_last_modified() => __pbn__rtime32_last_modified != null;
+        public void Resetrtime32_last_modified() => __pbn__rtime32_last_modified = null;
+        private uint? __pbn__rtime32_last_modified;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EProtoClanEventType
+    {
+        k_EClanOtherEvent = 1,
+        k_EClanGameEvent = 2,
+        k_EClanPartyEvent = 3,
+        k_EClanMeetingEvent = 4,
+        k_EClanSpecialCauseEvent = 5,
+        k_EClanMusicAndArtsEvent = 6,
+        k_EClanSportsEvent = 7,
+        k_EClanTripEvent = 8,
+        k_EClanChatEvent = 9,
+        k_EClanGameReleaseEvent = 10,
+        k_EClanBroadcastEvent = 11,
+        k_EClanSmallUpdateEvent = 12,
+        k_EClanPreAnnounceMajorUpdateEvent = 13,
+        k_EClanMajorUpdateEvent = 14,
+        k_EClanDLCReleaseEvent = 15,
+        k_EClanFutureReleaseEvent = 16,
+        k_EClanESportTournamentStreamEvent = 17,
+        k_EClanDevStreamEvent = 18,
+        k_EClanFamousStreamEvent = 19,
+        k_EClanGameSalesEvent = 20,
+        k_EClanGameItemSalesEvent = 21,
+        k_EClanInGameBonusXPEvent = 22,
+        k_EClanInGameLootEvent = 23,
+        k_EClanInGamePerksEvent = 24,
+        k_EClanInGameChallengeEvent = 25,
+        k_EClanInGameContestEvent = 26,
+        k_EClanIRLEvent = 27,
+        k_EClanNewsEvent = 28,
+        k_EClanBetaReleaseEvent = 29,
+        k_EClanInGameContentReleaseEvent = 30,
+        k_EClanFreeTrial = 31,
+        k_EClanSeasonRelease = 32,
+        k_EClanSeasonUpdate = 33,
+        k_ECrosspostEvent = 34,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum PartnerEventNotificationType
+    {
+        k_EEventStart = 0,
+        k_EEventBroadcastStart = 1,
+        k_EEventMatchStart = 2,
+        k_EEventPartnerMaxType = 3,
     }
 
 }

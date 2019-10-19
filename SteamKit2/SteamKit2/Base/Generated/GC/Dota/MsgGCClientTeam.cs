@@ -500,26 +500,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetlosses() => __pbn__losses = null;
         private uint? __pbn__losses;
 
-        [global::ProtoBuf.ProtoMember(17)]
-        public uint rank
-        {
-            get { return __pbn__rank.GetValueOrDefault(); }
-            set { __pbn__rank = value; }
-        }
-        public bool ShouldSerializerank() => __pbn__rank != null;
-        public void Resetrank() => __pbn__rank = null;
-        private uint? __pbn__rank;
-
-        [global::ProtoBuf.ProtoMember(18)]
-        public uint calibration_games_remaining
-        {
-            get { return __pbn__calibration_games_remaining.GetValueOrDefault(); }
-            set { __pbn__calibration_games_remaining = value; }
-        }
-        public bool ShouldSerializecalibration_games_remaining() => __pbn__calibration_games_remaining != null;
-        public void Resetcalibration_games_remaining() => __pbn__calibration_games_remaining = null;
-        private uint? __pbn__calibration_games_remaining;
-
         [global::ProtoBuf.ProtoMember(19)]
         public uint games_played_total
         {
@@ -1163,14 +1143,14 @@ namespace SteamKit2.GC.Dota.Internal
         private string __pbn__invitee_name;
 
         [global::ProtoBuf.ProtoMember(3)]
-        public uint required_badge_level
+        public uint required_play_time
         {
-            get { return __pbn__required_badge_level.GetValueOrDefault(); }
-            set { __pbn__required_badge_level = value; }
+            get { return __pbn__required_play_time.GetValueOrDefault(); }
+            set { __pbn__required_play_time = value; }
         }
-        public bool ShouldSerializerequired_badge_level() => __pbn__required_badge_level != null;
-        public void Resetrequired_badge_level() => __pbn__required_badge_level = null;
-        private uint? __pbn__required_badge_level;
+        public bool ShouldSerializerequired_play_time() => __pbn__required_play_time != null;
+        public void Resetrequired_play_time() => __pbn__required_play_time = null;
+        private uint? __pbn__required_play_time;
 
     }
 
@@ -1506,7 +1486,7 @@ namespace SteamKit2.GC.Dota.Internal
         TEAM_INVITE_ERROR_INVITEE_BUSY = 6,
         TEAM_INVITE_ERROR_INVITEE_ALREADY_MEMBER = 7,
         TEAM_INVITE_ERROR_INVITEE_AT_TEAM_LIMIT = 8,
-        TEAM_INVITE_ERROR_INVITEE_INSUFFICIENT_LEVEL = 9,
+        TEAM_INVITE_ERROR_INVITEE_INSUFFICIENT_PLAY_TIME = 9,
         TEAM_INVITE_ERROR_INVITER_INVALID_ACCOUNT_TYPE = 10,
         TEAM_INVITE_ERROR_INVITER_NOT_ADMIN = 11,
         TEAM_INVITE_ERROR_INCORRECT_USER_RESPONDED = 12,

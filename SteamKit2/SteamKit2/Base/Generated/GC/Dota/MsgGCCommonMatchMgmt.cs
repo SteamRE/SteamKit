@@ -564,6 +564,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetparty_search_beacon_active() => __pbn__party_search_beacon_active = null;
         private bool? __pbn__party_search_beacon_active;
 
+        [global::ProtoBuf.ProtoMember(67)]
+        public uint matchmaking_flags
+        {
+            get { return __pbn__matchmaking_flags.GetValueOrDefault(); }
+            set { __pbn__matchmaking_flags = value; }
+        }
+        public bool ShouldSerializematchmaking_flags() => __pbn__matchmaking_flags != null;
+        public void Resetmatchmaking_flags() => __pbn__matchmaking_flags = null;
+        private uint? __pbn__matchmaking_flags;
+
         [global::ProtoBuf.ProtoContract()]
         public enum State
         {
@@ -1203,6 +1213,23 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializewas_mvp_last_game() => __pbn__was_mvp_last_game != null;
         public void Resetwas_mvp_last_game() => __pbn__was_mvp_last_game = null;
         private bool? __pbn__was_mvp_last_game;
+
+        [global::ProtoBuf.ProtoMember(44)]
+        public global::System.Collections.Generic.List<CMsgPendingEventAward> pending_awards { get; } = new global::System.Collections.Generic.List<CMsgPendingEventAward>();
+
+        [global::ProtoBuf.ProtoMember(45)]
+        public global::System.Collections.Generic.List<CMsgPendingEventAward> pending_awards_on_victory { get; } = new global::System.Collections.Generic.List<CMsgPendingEventAward>();
+
+        [global::ProtoBuf.ProtoMember(46)]
+        [global::System.ComponentModel.DefaultValue(EDOTAMMRBoostType.k_EDOTAMMRBoostType_None)]
+        public EDOTAMMRBoostType rank_mmr_boost_type
+        {
+            get { return __pbn__rank_mmr_boost_type ?? EDOTAMMRBoostType.k_EDOTAMMRBoostType_None; }
+            set { __pbn__rank_mmr_boost_type = value; }
+        }
+        public bool ShouldSerializerank_mmr_boost_type() => __pbn__rank_mmr_boost_type != null;
+        public void Resetrank_mmr_boost_type() => __pbn__rank_mmr_boost_type = null;
+        private EDOTAMMRBoostType? __pbn__rank_mmr_boost_type;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class CDOTALobbyMemberXPBonus : global::ProtoBuf.IExtensible
@@ -2421,6 +2448,26 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetleague_phase() => __pbn__league_phase = null;
         private uint? __pbn__league_phase;
 
+        [global::ProtoBuf.ProtoMember(114)]
+        public bool record_detailed_stats
+        {
+            get { return __pbn__record_detailed_stats.GetValueOrDefault(); }
+            set { __pbn__record_detailed_stats = value; }
+        }
+        public bool ShouldSerializerecord_detailed_stats() => __pbn__record_detailed_stats != null;
+        public void Resetrecord_detailed_stats() => __pbn__record_detailed_stats = null;
+        private bool? __pbn__record_detailed_stats;
+
+        [global::ProtoBuf.ProtoMember(115)]
+        public bool is_allstar_game
+        {
+            get { return __pbn__is_allstar_game.GetValueOrDefault(); }
+            set { __pbn__is_allstar_game = value; }
+        }
+        public bool ShouldSerializeis_allstar_game() => __pbn__is_allstar_game != null;
+        public void Resetis_allstar_game() => __pbn__is_allstar_game = null;
+        private bool? __pbn__is_allstar_game;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class CExtraMsg : global::ProtoBuf.IExtensible
         {
@@ -2476,6 +2523,7 @@ namespace SteamKit2.GC.Dota.Internal
             WEEKEND_TOURNEY = 9,
             LOCAL_BOT_MATCH = 10,
             SPECTATOR = 11,
+            EVENT_MATCH = 12,
         }
 
     }
@@ -2641,12 +2689,73 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgMatchMatchmakingStats : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint average_queue_time
+        {
+            get { return __pbn__average_queue_time.GetValueOrDefault(); }
+            set { __pbn__average_queue_time = value; }
+        }
+        public bool ShouldSerializeaverage_queue_time() => __pbn__average_queue_time != null;
+        public void Resetaverage_queue_time() => __pbn__average_queue_time = null;
+        private uint? __pbn__average_queue_time;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint maximum_queue_time
+        {
+            get { return __pbn__maximum_queue_time.GetValueOrDefault(); }
+            set { __pbn__maximum_queue_time = value; }
+        }
+        public bool ShouldSerializemaximum_queue_time() => __pbn__maximum_queue_time != null;
+        public void Resetmaximum_queue_time() => __pbn__maximum_queue_time = null;
+        private uint? __pbn__maximum_queue_time;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(EMatchBehaviorScoreVariance.k_EMatchBehaviorScoreVariance_Invalid)]
+        public EMatchBehaviorScoreVariance behavior_score_variance
+        {
+            get { return __pbn__behavior_score_variance ?? EMatchBehaviorScoreVariance.k_EMatchBehaviorScoreVariance_Invalid; }
+            set { __pbn__behavior_score_variance = value; }
+        }
+        public bool ShouldSerializebehavior_score_variance() => __pbn__behavior_score_variance != null;
+        public void Resetbehavior_score_variance() => __pbn__behavior_score_variance = null;
+        private EMatchBehaviorScoreVariance? __pbn__behavior_score_variance;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ELaneSelection
+    {
+        k_ELaneSelection_SAFELANE = 0,
+        k_ELaneSelection_OFFLANE = 1,
+        k_ELaneSelection_MIDLANE = 2,
+        k_ELaneSelection_SUPPORT_SOFT = 3,
+        k_ELaneSelection_SUPPORT_HARD = 4,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ELaneSelectionFlags
     {
-        k_ELaneSelectionFlags_LANE_SELECTION_SAFELANE = 1,
-        k_ELaneSelectionFlags_LANE_SELECTION_OFFLANE = 2,
-        k_ELaneSelectionFlags_LANE_SELECTION_MIDLANE = 4,
-        k_ELaneSelectionFlags_LANE_SELECTION_OTHER = 8,
+        k_ELaneSelectionFlags_None = 0,
+        k_ELaneSelectionFlags_SAFELANE = 1,
+        k_ELaneSelectionFlags_OFFLANE = 2,
+        k_ELaneSelectionFlags_MIDLANE = 4,
+        k_ELaneSelectionFlags_CORE = 7,
+        k_ELaneSelectionFlags_SUPPORT_SOFT = 8,
+        k_ELaneSelectionFlags_SUPPORT_HARD = 16,
+        k_ELaneSelectionFlags_SUPPORT = 24,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EPartyMatchmakingFlags
+    {
+        k_EPartyMatchmakingFlags_None = 0,
+        k_EPartyMatchmakingFlags_LargeRankSpread = 1,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2681,6 +2790,15 @@ namespace SteamKit2.GC.Dota.Internal
         k_EReadyCheckRequestResult_NotInParty = 2,
         k_EReadyCheckRequestResult_SendError = 3,
         k_EReadyCheckRequestResult_UnknownError = 4,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EMatchBehaviorScoreVariance
+    {
+        k_EMatchBehaviorScoreVariance_Invalid = 0,
+        k_EMatchBehaviorScoreVariance_Low = 1,
+        k_EMatchBehaviorScoreVariance_Medium = 2,
+        k_EMatchBehaviorScoreVariance_High = 3,
     }
 
 }

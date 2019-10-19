@@ -2748,7 +2748,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_EStartFindingMatchResult_CompetitiveNoLowPriority = 106,
         k_EStartFindingMatchResult_CompetitiveNotUnlocked = 107,
         k_EStartFindingMatchResult_GameModeNotUnlocked = 108,
-        k_EStartFindingMatchResult_CompetitiveNotEnoughSkillData = 109,
+        k_EStartFindingMatchResult_CompetitiveNotEnoughPlayTime = 109,
         k_EStartFindingMatchResult_MissingInitialSkill = 110,
         k_EStartFindingMatchResult_CompetitiveRankSpreadTooLarge = 111,
         k_EStartFindingMatchResult_MemberAlreadyInLobby = 112,
@@ -2764,6 +2764,8 @@ namespace SteamKit2.GC.Dota.Internal
         k_EStartFindingMatchResult_NotMemberOfClan = 122,
         k_EStartFindingMatchResult_CoachesChallengeBadPartySize = 123,
         k_EStartFindingMatchResult_CoachesChallengeRequirementsNotMet = 124,
+        k_EStartFindingMatchResult_InvalidRoleSelections = 125,
+        k_EStartFindingMatchResult_PhoneNumberDiscrepancy = 126,
     }
 
 }

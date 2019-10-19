@@ -297,44 +297,44 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__low_priority_games_remaining;
 
         [global::ProtoBuf.ProtoMember(49)]
-        public uint competitive_rank
+        public uint competitive_2019_rank
         {
-            get { return __pbn__competitive_rank.GetValueOrDefault(); }
-            set { __pbn__competitive_rank = value; }
+            get { return __pbn__competitive_2019_rank.GetValueOrDefault(); }
+            set { __pbn__competitive_2019_rank = value; }
         }
-        public bool ShouldSerializecompetitive_rank() => __pbn__competitive_rank != null;
-        public void Resetcompetitive_rank() => __pbn__competitive_rank = null;
-        private uint? __pbn__competitive_rank;
+        public bool ShouldSerializecompetitive_2019_rank() => __pbn__competitive_2019_rank != null;
+        public void Resetcompetitive_2019_rank() => __pbn__competitive_2019_rank = null;
+        private uint? __pbn__competitive_2019_rank;
 
         [global::ProtoBuf.ProtoMember(51)]
-        public uint calibration_games_remaining
+        public uint competitive_2019_calibration_games_remaining
         {
-            get { return __pbn__calibration_games_remaining.GetValueOrDefault(); }
-            set { __pbn__calibration_games_remaining = value; }
+            get { return __pbn__competitive_2019_calibration_games_remaining.GetValueOrDefault(); }
+            set { __pbn__competitive_2019_calibration_games_remaining = value; }
         }
-        public bool ShouldSerializecalibration_games_remaining() => __pbn__calibration_games_remaining != null;
-        public void Resetcalibration_games_remaining() => __pbn__calibration_games_remaining = null;
-        private uint? __pbn__calibration_games_remaining;
+        public bool ShouldSerializecompetitive_2019_calibration_games_remaining() => __pbn__competitive_2019_calibration_games_remaining != null;
+        public void Resetcompetitive_2019_calibration_games_remaining() => __pbn__competitive_2019_calibration_games_remaining = null;
+        private uint? __pbn__competitive_2019_calibration_games_remaining;
 
         [global::ProtoBuf.ProtoMember(52)]
-        public uint solo_competitive_rank
+        public uint solo_competitive_2019_rank
         {
-            get { return __pbn__solo_competitive_rank.GetValueOrDefault(); }
-            set { __pbn__solo_competitive_rank = value; }
+            get { return __pbn__solo_competitive_2019_rank.GetValueOrDefault(); }
+            set { __pbn__solo_competitive_2019_rank = value; }
         }
-        public bool ShouldSerializesolo_competitive_rank() => __pbn__solo_competitive_rank != null;
-        public void Resetsolo_competitive_rank() => __pbn__solo_competitive_rank = null;
-        private uint? __pbn__solo_competitive_rank;
+        public bool ShouldSerializesolo_competitive_2019_rank() => __pbn__solo_competitive_2019_rank != null;
+        public void Resetsolo_competitive_2019_rank() => __pbn__solo_competitive_2019_rank = null;
+        private uint? __pbn__solo_competitive_2019_rank;
 
         [global::ProtoBuf.ProtoMember(54)]
-        public uint solo_calibration_games_remaining
+        public uint solo_competitive_2019_calibration_games_remaining
         {
-            get { return __pbn__solo_calibration_games_remaining.GetValueOrDefault(); }
-            set { __pbn__solo_calibration_games_remaining = value; }
+            get { return __pbn__solo_competitive_2019_calibration_games_remaining.GetValueOrDefault(); }
+            set { __pbn__solo_competitive_2019_calibration_games_remaining = value; }
         }
-        public bool ShouldSerializesolo_calibration_games_remaining() => __pbn__solo_calibration_games_remaining != null;
-        public void Resetsolo_calibration_games_remaining() => __pbn__solo_calibration_games_remaining = null;
-        private uint? __pbn__solo_calibration_games_remaining;
+        public bool ShouldSerializesolo_competitive_2019_calibration_games_remaining() => __pbn__solo_competitive_2019_calibration_games_remaining != null;
+        public void Resetsolo_competitive_2019_calibration_games_remaining() => __pbn__solo_competitive_2019_calibration_games_remaining = null;
+        private uint? __pbn__solo_competitive_2019_calibration_games_remaining;
 
         [global::ProtoBuf.ProtoMember(55)]
         public uint recruitment_level
@@ -405,16 +405,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializecasual_1v1_games_played() => __pbn__casual_1v1_games_played != null;
         public void Resetcasual_1v1_games_played() => __pbn__casual_1v1_games_played = null;
         private uint? __pbn__casual_1v1_games_played;
-
-        [global::ProtoBuf.ProtoMember(66)]
-        public uint competitive_team_games_played
-        {
-            get { return __pbn__competitive_team_games_played.GetValueOrDefault(); }
-            set { __pbn__competitive_team_games_played = value; }
-        }
-        public bool ShouldSerializecompetitive_team_games_played() => __pbn__competitive_team_games_played != null;
-        public void Resetcompetitive_team_games_played() => __pbn__competitive_team_games_played = null;
-        private uint? __pbn__competitive_team_games_played;
 
         [global::ProtoBuf.ProtoMember(67)]
         public uint curr_all_hero_challenge_id
@@ -736,6 +726,46 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetcoach_rating() => __pbn__coach_rating = null;
         private uint? __pbn__coach_rating;
 
+        [global::ProtoBuf.ProtoMember(110)]
+        public uint competitive_core_rank
+        {
+            get { return __pbn__competitive_core_rank.GetValueOrDefault(); }
+            set { __pbn__competitive_core_rank = value; }
+        }
+        public bool ShouldSerializecompetitive_core_rank() => __pbn__competitive_core_rank != null;
+        public void Resetcompetitive_core_rank() => __pbn__competitive_core_rank = null;
+        private uint? __pbn__competitive_core_rank;
+
+        [global::ProtoBuf.ProtoMember(111)]
+        public uint competitive_core_calibration_games_remaining
+        {
+            get { return __pbn__competitive_core_calibration_games_remaining.GetValueOrDefault(); }
+            set { __pbn__competitive_core_calibration_games_remaining = value; }
+        }
+        public bool ShouldSerializecompetitive_core_calibration_games_remaining() => __pbn__competitive_core_calibration_games_remaining != null;
+        public void Resetcompetitive_core_calibration_games_remaining() => __pbn__competitive_core_calibration_games_remaining = null;
+        private uint? __pbn__competitive_core_calibration_games_remaining;
+
+        [global::ProtoBuf.ProtoMember(112)]
+        public uint competitive_support_rank
+        {
+            get { return __pbn__competitive_support_rank.GetValueOrDefault(); }
+            set { __pbn__competitive_support_rank = value; }
+        }
+        public bool ShouldSerializecompetitive_support_rank() => __pbn__competitive_support_rank != null;
+        public void Resetcompetitive_support_rank() => __pbn__competitive_support_rank = null;
+        private uint? __pbn__competitive_support_rank;
+
+        [global::ProtoBuf.ProtoMember(113)]
+        public uint competitive_support_calibration_games_remaining
+        {
+            get { return __pbn__competitive_support_calibration_games_remaining.GetValueOrDefault(); }
+            set { __pbn__competitive_support_calibration_games_remaining = value; }
+        }
+        public bool ShouldSerializecompetitive_support_calibration_games_remaining() => __pbn__competitive_support_calibration_games_remaining != null;
+        public void Resetcompetitive_support_calibration_games_remaining() => __pbn__competitive_support_calibration_games_remaining = null;
+        private uint? __pbn__competitive_support_calibration_games_remaining;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1012,26 +1042,6 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializefavorite_team_level() => __pbn__favorite_team_level != null;
             public void Resetfavorite_team_level() => __pbn__favorite_team_level = null;
             private uint? __pbn__favorite_team_level;
-
-            [global::ProtoBuf.ProtoMember(7)]
-            public uint points_held
-            {
-                get { return __pbn__points_held.GetValueOrDefault(); }
-                set { __pbn__points_held = value; }
-            }
-            public bool ShouldSerializepoints_held() => __pbn__points_held != null;
-            public void Resetpoints_held() => __pbn__points_held = null;
-            private uint? __pbn__points_held;
-
-            [global::ProtoBuf.ProtoMember(8)]
-            public uint premium_points_held
-            {
-                get { return __pbn__premium_points_held.GetValueOrDefault(); }
-                set { __pbn__premium_points_held = value; }
-            }
-            public bool ShouldSerializepremium_points_held() => __pbn__premium_points_held != null;
-            public void Resetpremium_points_held() => __pbn__premium_points_held = null;
-            private uint? __pbn__premium_points_held;
 
             [global::ProtoBuf.ProtoMember(9)]
             public uint favorite_team_foil_level
@@ -2253,6 +2263,96 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetprevious_rank_tier() => __pbn__previous_rank_tier = null;
         private uint? __pbn__previous_rank_tier;
 
+        [global::ProtoBuf.ProtoMember(14)]
+        public uint rank_tier_mmr_type
+        {
+            get { return __pbn__rank_tier_mmr_type.GetValueOrDefault(); }
+            set { __pbn__rank_tier_mmr_type = value; }
+        }
+        public bool ShouldSerializerank_tier_mmr_type() => __pbn__rank_tier_mmr_type != null;
+        public void Resetrank_tier_mmr_type() => __pbn__rank_tier_mmr_type = null;
+        private uint? __pbn__rank_tier_mmr_type;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public uint rank_tier_core
+        {
+            get { return __pbn__rank_tier_core.GetValueOrDefault(); }
+            set { __pbn__rank_tier_core = value; }
+        }
+        public bool ShouldSerializerank_tier_core() => __pbn__rank_tier_core != null;
+        public void Resetrank_tier_core() => __pbn__rank_tier_core = null;
+        private uint? __pbn__rank_tier_core;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public uint rank_tier_core_score
+        {
+            get { return __pbn__rank_tier_core_score.GetValueOrDefault(); }
+            set { __pbn__rank_tier_core_score = value; }
+        }
+        public bool ShouldSerializerank_tier_core_score() => __pbn__rank_tier_core_score != null;
+        public void Resetrank_tier_core_score() => __pbn__rank_tier_core_score = null;
+        private uint? __pbn__rank_tier_core_score;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public uint leaderboard_rank_core
+        {
+            get { return __pbn__leaderboard_rank_core.GetValueOrDefault(); }
+            set { __pbn__leaderboard_rank_core = value; }
+        }
+        public bool ShouldSerializeleaderboard_rank_core() => __pbn__leaderboard_rank_core != null;
+        public void Resetleaderboard_rank_core() => __pbn__leaderboard_rank_core = null;
+        private uint? __pbn__leaderboard_rank_core;
+
+        [global::ProtoBuf.ProtoMember(18)]
+        public uint rank_tier_support
+        {
+            get { return __pbn__rank_tier_support.GetValueOrDefault(); }
+            set { __pbn__rank_tier_support = value; }
+        }
+        public bool ShouldSerializerank_tier_support() => __pbn__rank_tier_support != null;
+        public void Resetrank_tier_support() => __pbn__rank_tier_support = null;
+        private uint? __pbn__rank_tier_support;
+
+        [global::ProtoBuf.ProtoMember(19)]
+        public uint rank_tier_support_score
+        {
+            get { return __pbn__rank_tier_support_score.GetValueOrDefault(); }
+            set { __pbn__rank_tier_support_score = value; }
+        }
+        public bool ShouldSerializerank_tier_support_score() => __pbn__rank_tier_support_score != null;
+        public void Resetrank_tier_support_score() => __pbn__rank_tier_support_score = null;
+        private uint? __pbn__rank_tier_support_score;
+
+        [global::ProtoBuf.ProtoMember(20)]
+        public uint leaderboard_rank_support
+        {
+            get { return __pbn__leaderboard_rank_support.GetValueOrDefault(); }
+            set { __pbn__leaderboard_rank_support = value; }
+        }
+        public bool ShouldSerializeleaderboard_rank_support() => __pbn__leaderboard_rank_support != null;
+        public void Resetleaderboard_rank_support() => __pbn__leaderboard_rank_support = null;
+        private uint? __pbn__leaderboard_rank_support;
+
+        [global::ProtoBuf.ProtoMember(21)]
+        public uint rank_tier_core_peak
+        {
+            get { return __pbn__rank_tier_core_peak.GetValueOrDefault(); }
+            set { __pbn__rank_tier_core_peak = value; }
+        }
+        public bool ShouldSerializerank_tier_core_peak() => __pbn__rank_tier_core_peak != null;
+        public void Resetrank_tier_core_peak() => __pbn__rank_tier_core_peak = null;
+        private uint? __pbn__rank_tier_core_peak;
+
+        [global::ProtoBuf.ProtoMember(22)]
+        public uint rank_tier_support_peak
+        {
+            get { return __pbn__rank_tier_support_peak.GetValueOrDefault(); }
+            set { __pbn__rank_tier_support_peak = value; }
+        }
+        public bool ShouldSerializerank_tier_support_peak() => __pbn__rank_tier_support_peak != null;
+        public void Resetrank_tier_support_peak() => __pbn__rank_tier_support_peak = null;
+        private uint? __pbn__rank_tier_support_peak;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Slot : global::ProtoBuf.IExtensible
         {
@@ -2325,10 +2425,10 @@ namespace SteamKit2.GC.Dota.Internal
                     => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
                 [global::ProtoBuf.ProtoMember(1)]
-                [global::System.ComponentModel.DefaultValue(CMsgDOTAProfileCard.EStatID.k_eStat_SoloRank)]
+                [global::System.ComponentModel.DefaultValue(CMsgDOTAProfileCard.EStatID.k_eStat_CoreRank)]
                 public CMsgDOTAProfileCard.EStatID stat_id
                 {
-                    get { return __pbn__stat_id ?? CMsgDOTAProfileCard.EStatID.k_eStat_SoloRank; }
+                    get { return __pbn__stat_id ?? CMsgDOTAProfileCard.EStatID.k_eStat_CoreRank; }
                     set { __pbn__stat_id = value; }
                 }
                 public bool ShouldSerializestat_id() => __pbn__stat_id != null;
@@ -2458,13 +2558,14 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoContract()]
         public enum EStatID
         {
-            k_eStat_SoloRank = 1,
-            k_eStat_PartyRank = 2,
+            k_eStat_CoreRank = 1,
+            k_eStat_SupportRank = 2,
             k_eStat_Wins = 3,
             k_eStat_Commends = 4,
             k_eStat_GamesPlayed = 5,
             k_eStat_FirstMatchDate = 6,
             k_eStat_PreviousSeasonRank = 7,
+            k_eStat_GamesMVP = 8,
         }
 
     }
@@ -6005,25 +6106,15 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetrank_change() => __pbn__rank_change = null;
             private int? __pbn__rank_change;
 
-            [global::ProtoBuf.ProtoMember(49)]
-            public bool solo_rank
+            [global::ProtoBuf.ProtoMember(74)]
+            public uint mmr_type
             {
-                get { return __pbn__solo_rank.GetValueOrDefault(); }
-                set { __pbn__solo_rank = value; }
+                get { return __pbn__mmr_type.GetValueOrDefault(); }
+                set { __pbn__mmr_type = value; }
             }
-            public bool ShouldSerializesolo_rank() => __pbn__solo_rank != null;
-            public void Resetsolo_rank() => __pbn__solo_rank = null;
-            private bool? __pbn__solo_rank;
-
-            [global::ProtoBuf.ProtoMember(53)]
-            public bool seasonal_rank
-            {
-                get { return __pbn__seasonal_rank.GetValueOrDefault(); }
-                set { __pbn__seasonal_rank = value; }
-            }
-            public bool ShouldSerializeseasonal_rank() => __pbn__seasonal_rank != null;
-            public void Resetseasonal_rank() => __pbn__seasonal_rank = null;
-            private bool? __pbn__seasonal_rank;
+            public bool ShouldSerializemmr_type() => __pbn__mmr_type != null;
+            public void Resetmmr_type() => __pbn__mmr_type = null;
+            private uint? __pbn__mmr_type;
 
             [global::ProtoBuf.ProtoMember(66)]
             public bool rank_tier_updated
@@ -6492,6 +6583,16 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializegold_lost_to_death() => __pbn__gold_lost_to_death != null;
             public void Resetgold_lost_to_death() => __pbn__gold_lost_to_death = null;
             private uint? __pbn__gold_lost_to_death;
+
+            [global::ProtoBuf.ProtoMember(75)]
+            public uint lane_selection_flags
+            {
+                get { return __pbn__lane_selection_flags.GetValueOrDefault(); }
+                set { __pbn__lane_selection_flags = value; }
+            }
+            public bool ShouldSerializelane_selection_flags() => __pbn__lane_selection_flags != null;
+            public void Resetlane_selection_flags() => __pbn__lane_selection_flags = null;
+            private uint? __pbn__lane_selection_flags;
 
             [global::ProtoBuf.ProtoContract()]
             public partial class CustomGameData : global::ProtoBuf.IExtensible
@@ -8033,7 +8134,10 @@ namespace SteamKit2.GC.Dota.Internal
             private uint? __pbn__account_id;
 
             [global::ProtoBuf.ProtoMember(2)]
-            public global::System.Collections.Generic.List<CMsgMatchEventActionGrants.Grant> actions_granted { get; } = new global::System.Collections.Generic.List<CMsgMatchEventActionGrants.Grant>();
+            public global::System.Collections.Generic.List<CMsgMatchEventActionGrants.Grant> actions_granted_old { get; } = new global::System.Collections.Generic.List<CMsgMatchEventActionGrants.Grant>();
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public global::System.Collections.Generic.List<CMsgPendingEventAward> actions_granted { get; } = new global::System.Collections.Generic.List<CMsgPendingEventAward>();
 
         }
 
@@ -8434,6 +8538,45 @@ namespace SteamKit2.GC.Dota.Internal
             k_eTooBusy = 2,
             k_eDisabled = 3,
         }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgArcanaVoteMatchVotes : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint match_id
+        {
+            get { return __pbn__match_id.GetValueOrDefault(); }
+            set { __pbn__match_id = value; }
+        }
+        public bool ShouldSerializematch_id() => __pbn__match_id != null;
+        public void Resetmatch_id() => __pbn__match_id = null;
+        private uint? __pbn__match_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint hero_id
+        {
+            get { return __pbn__hero_id.GetValueOrDefault(); }
+            set { __pbn__hero_id = value; }
+        }
+        public bool ShouldSerializehero_id() => __pbn__hero_id != null;
+        public void Resethero_id() => __pbn__hero_id = null;
+        private uint? __pbn__hero_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint vote_count
+        {
+            get { return __pbn__vote_count.GetValueOrDefault(); }
+            set { __pbn__vote_count = value; }
+        }
+        public bool ShouldSerializevote_count() => __pbn__vote_count != null;
+        public void Resetvote_count() => __pbn__vote_count = null;
+        private uint? __pbn__vote_count;
 
     }
 

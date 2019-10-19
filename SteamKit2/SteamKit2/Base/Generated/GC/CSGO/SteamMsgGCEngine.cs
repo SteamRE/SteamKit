@@ -105,6 +105,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetkeyframe_interval() => __pbn__keyframe_interval = null;
         private float? __pbn__keyframe_interval;
 
+        [global::ProtoBuf.ProtoMember(11)]
+        public uint cdndelay
+        {
+            get { return __pbn__cdndelay.GetValueOrDefault(); }
+            set { __pbn__cdndelay = value; }
+        }
+        public bool ShouldSerializecdndelay() => __pbn__cdndelay != null;
+        public void Resetcdndelay() => __pbn__cdndelay = null;
+        private uint? __pbn__cdndelay;
+
     }
 
 }

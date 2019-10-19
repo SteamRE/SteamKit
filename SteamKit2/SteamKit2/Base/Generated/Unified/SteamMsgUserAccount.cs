@@ -47,6 +47,34 @@ namespace SteamKit2.Unified.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CUserAccount_CancelLicenseForApp_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get { return __pbn__appid.GetValueOrDefault(); }
+            set { __pbn__appid = value; }
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CUserAccount_CancelLicenseForApp_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CUserAccount_CreateFriendInviteToken_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -481,6 +509,117 @@ namespace SteamKit2.Unified.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CEmbeddedClient_AuthorizeCurrentDevice_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get { return __pbn__steamid.GetValueOrDefault(); }
+            set { __pbn__steamid = value; }
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint appid
+        {
+            get { return __pbn__appid.GetValueOrDefault(); }
+            set { __pbn__appid = value; }
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string device_info
+        {
+            get { return __pbn__device_info ?? ""; }
+            set { __pbn__device_info = value; }
+        }
+        public bool ShouldSerializedevice_info() => __pbn__device_info != null;
+        public void Resetdevice_info() => __pbn__device_info = null;
+        private string __pbn__device_info;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CEmbeddedClient_Token : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get { return __pbn__steamid.GetValueOrDefault(); }
+            set { __pbn__steamid = value; }
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public byte[] client_token
+        {
+            get { return __pbn__client_token; }
+            set { __pbn__client_token = value; }
+        }
+        public bool ShouldSerializeclient_token() => __pbn__client_token != null;
+        public void Resetclient_token() => __pbn__client_token = null;
+        private byte[] __pbn__client_token;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint expiry
+        {
+            get { return __pbn__expiry.GetValueOrDefault(); }
+            set { __pbn__expiry = value; }
+        }
+        public bool ShouldSerializeexpiry() => __pbn__expiry != null;
+        public void Resetexpiry() => __pbn__expiry = null;
+        private uint? __pbn__expiry;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint deviceid
+        {
+            get { return __pbn__deviceid.GetValueOrDefault(); }
+            set { __pbn__deviceid = value; }
+        }
+        public bool ShouldSerializedeviceid() => __pbn__deviceid != null;
+        public void Resetdeviceid() => __pbn__deviceid = null;
+        private uint? __pbn__deviceid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CEmbeddedClient_AuthorizeDevice_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint result
+        {
+            get { return __pbn__result.GetValueOrDefault(); }
+            set { __pbn__result = value; }
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private uint? __pbn__result;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CEmbeddedClient_Token token { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EInternalAccountType
     {
         k_EInternalSteamAccountType = 1,
@@ -505,6 +644,7 @@ namespace SteamKit2.Unified.Internal
     public interface IUserAccount
     {
         CUserAccount_GetAccountLinkStatus_Response GetAccountLinkStatus(CUserAccount_GetAccountLinkStatus_Request request);
+        CUserAccount_CancelLicenseForApp_Response CancelLicenseForApp(CUserAccount_CancelLicenseForApp_Request request);
         CUserAccount_CreateFriendInviteToken_Response CreateFriendInviteToken(CUserAccount_CreateFriendInviteToken_Request request);
         CUserAccount_GetFriendInviteTokens_Response GetFriendInviteTokens(CUserAccount_GetFriendInviteTokens_Request request);
         CUserAccount_ViewFriendInviteToken_Response ViewFriendInviteToken(CUserAccount_ViewFriendInviteToken_Request request);
@@ -516,6 +656,11 @@ namespace SteamKit2.Unified.Internal
     public interface IAccountLinking
     {
         CAccountLinking_GetLinkedAccountInfo_Response GetLinkedAccountInfo(CAccountLinking_GetLinkedAccountInfo_Request request);
+    }
+
+    public interface IEmbeddedClient
+    {
+        CEmbeddedClient_AuthorizeDevice_Response AuthorizeCurrentDevice(CEmbeddedClient_AuthorizeCurrentDevice_Request request);
     }
 
 }

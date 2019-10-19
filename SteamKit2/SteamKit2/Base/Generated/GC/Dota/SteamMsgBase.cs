@@ -3881,6 +3881,17 @@ namespace SteamKit2.GC.Dota.Internal
         GCProtoBufMsgSrc_SpoofedSteamID = 5,
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public enum EDACPlatform
+    {
+        k_eDACPlatform_None = 0,
+        k_eDACPlatform_PC = 1,
+        k_eDACPlatform_Mac = 2,
+        k_eDACPlatform_Linux = 3,
+        k_eDACPlatform_Android = 4,
+        k_eDACPlatform_iOS = 5,
+    }
+
 }
 
 #pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

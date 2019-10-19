@@ -97,6 +97,16 @@ namespace SteamKit2.Unified.Internal
         public void Resetclient_beta() => __pbn__client_beta = null;
         private string __pbn__client_beta;
 
+        [global::ProtoBuf.ProtoMember(9)]
+        public uint sysid
+        {
+            get { return __pbn__sysid.GetValueOrDefault(); }
+            set { __pbn__sysid = value; }
+        }
+        public bool ShouldSerializesysid() => __pbn__sysid != null;
+        public void Resetsysid() => __pbn__sysid = null;
+        private uint? __pbn__sysid;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -265,6 +275,16 @@ namespace SteamKit2.Unified.Internal
         public bool ShouldSerializeis_replay() => __pbn__is_replay != null;
         public void Resetis_replay() => __pbn__is_replay = null;
         private bool? __pbn__is_replay;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public uint sysid
+        {
+            get { return __pbn__sysid.GetValueOrDefault(); }
+            set { __pbn__sysid = value; }
+        }
+        public bool ShouldSerializesysid() => __pbn__sysid != null;
+        public void Resetsysid() => __pbn__sysid = null;
+        private uint? __pbn__sysid;
 
     }
 
@@ -907,6 +927,26 @@ namespace SteamKit2.Unified.Internal
         public bool ShouldSerializeis_replay() => __pbn__is_replay != null;
         public void Resetis_replay() => __pbn__is_replay = null;
         private bool? __pbn__is_replay;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public bool is_capturing_vod
+        {
+            get { return __pbn__is_capturing_vod.GetValueOrDefault(); }
+            set { __pbn__is_capturing_vod = value; }
+        }
+        public bool ShouldSerializeis_capturing_vod() => __pbn__is_capturing_vod != null;
+        public void Resetis_capturing_vod() => __pbn__is_capturing_vod = null;
+        private bool? __pbn__is_capturing_vod;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public bool is_store_whitelisted
+        {
+            get { return __pbn__is_store_whitelisted.GetValueOrDefault(); }
+            set { __pbn__is_store_whitelisted = value; }
+        }
+        public bool ShouldSerializeis_store_whitelisted() => __pbn__is_store_whitelisted != null;
+        public void Resetis_store_whitelisted() => __pbn__is_store_whitelisted = null;
+        private bool? __pbn__is_store_whitelisted;
 
     }
 
@@ -1608,6 +1648,65 @@ namespace SteamKit2.Unified.Internal
 
     [global::ProtoBuf.ProtoContract()]
     public partial class CBroadcast_GetBuildClipStatus_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CBroadcast_SetClipDetails_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong broadcast_clip_id
+        {
+            get { return __pbn__broadcast_clip_id.GetValueOrDefault(); }
+            set { __pbn__broadcast_clip_id = value; }
+        }
+        public bool ShouldSerializebroadcast_clip_id() => __pbn__broadcast_clip_id != null;
+        public void Resetbroadcast_clip_id() => __pbn__broadcast_clip_id = null;
+        private ulong? __pbn__broadcast_clip_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint start_time
+        {
+            get { return __pbn__start_time.GetValueOrDefault(); }
+            set { __pbn__start_time = value; }
+        }
+        public bool ShouldSerializestart_time() => __pbn__start_time != null;
+        public void Resetstart_time() => __pbn__start_time = null;
+        private uint? __pbn__start_time;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint end_time
+        {
+            get { return __pbn__end_time.GetValueOrDefault(); }
+            set { __pbn__end_time = value; }
+        }
+        public bool ShouldSerializeend_time() => __pbn__end_time != null;
+        public void Resetend_time() => __pbn__end_time = null;
+        private uint? __pbn__end_time;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string video_description
+        {
+            get { return __pbn__video_description ?? ""; }
+            set { __pbn__video_description = value; }
+        }
+        public bool ShouldSerializevideo_description() => __pbn__video_description != null;
+        public void Resetvideo_description() => __pbn__video_description = null;
+        private string __pbn__video_description;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CBroadcast_SetClipDetails_Response : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -2453,6 +2552,26 @@ namespace SteamKit2.Unified.Internal
         public void Resetupload_id() => __pbn__upload_id = null;
         private ulong? __pbn__upload_id;
 
+        [global::ProtoBuf.ProtoMember(4, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get { return __pbn__steamid.GetValueOrDefault(); }
+            set { __pbn__steamid = value; }
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public ulong session_id
+        {
+            get { return __pbn__session_id.GetValueOrDefault(); }
+            set { __pbn__session_id = value; }
+        }
+        public bool ShouldSerializesession_id() => __pbn__session_id != null;
+        public void Resetsession_id() => __pbn__session_id = null;
+        private ulong? __pbn__session_id;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2665,6 +2784,16 @@ namespace SteamKit2.Unified.Internal
             public void Resetis_replay() => __pbn__is_replay = null;
             private bool? __pbn__is_replay;
 
+            [global::ProtoBuf.ProtoMember(20)]
+            public ulong session_id
+            {
+                get { return __pbn__session_id.GetValueOrDefault(); }
+                set { __pbn__session_id = value; }
+            }
+            public bool ShouldSerializesession_id() => __pbn__session_id != null;
+            public void Resetsession_id() => __pbn__session_id = null;
+            private ulong? __pbn__session_id;
+
         }
 
     }
@@ -2685,6 +2814,16 @@ namespace SteamKit2.Unified.Internal
         public bool ShouldSerializeupload_id() => __pbn__upload_id != null;
         public void Resetupload_id() => __pbn__upload_id = null;
         private ulong? __pbn__upload_id;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get { return __pbn__steamid.GetValueOrDefault(); }
+            set { __pbn__steamid = value; }
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
 
     }
 
@@ -3306,6 +3445,7 @@ namespace SteamKit2.Unified.Internal
         CBroadcast_GetBroadcastChatUserNames_Response GetBroadcastChatUserNames(CBroadcast_GetBroadcastChatUserNames_Request request);
         CBroadcast_StartBuildClip_Response StartBuildClip(CBroadcast_StartBuildClip_Request request);
         CBroadcast_GetBuildClipStatus_Response GetBuildClipStatus(CBroadcast_GetBuildClipStatus_Request request);
+        CBroadcast_SetClipDetails_Response SetClipDetails(CBroadcast_SetClipDetails_Request request);
         CBroadcast_GetClipDetails_Response GetClipDetails(CBroadcast_GetClipDetails_Request request);
         CBroadcast_SetRTMPInfo_Response SetRTMPInfo(CBroadcast_SetRTMPInfo_Request request);
         CBroadcast_GetRTMPInfo_Response GetRTMPInfo(CBroadcast_GetRTMPInfo_Request request);
