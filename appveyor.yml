@@ -19,6 +19,8 @@ configuration:
   - Debug
   - Release
 
+skip_branch_with_pr: true
+
 init:
   - git config --global core.autocrlf true
 
