@@ -350,10 +350,6 @@ namespace SteamKit2.Internal
                     HandleLoggedOff( packetMsg );
                     break;
 
-                case EMsg.ClientServerList: // Steam server list
-                    HandleServerList( packetMsg );
-                    break;
-
                 case EMsg.ClientCMList:
                     HandleCMList( packetMsg );
                     break;
@@ -585,22 +581,6 @@ namespace SteamKit2.Internal
                     DebugLog.Assert( connection.CurrentEndPoint != null, nameof( CMClient ), "No connection endpoint during ClientLoggedOff - cannot update server list status" );
                     Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Bad );
                 }
-            }
-        }
-        void HandleServerList( IPacketMsg packetMsg )
-        {
-            var listMsg = new ClientMsgProtobuf<CMsgClientServerList>( packetMsg );
-
-            foreach ( var server in listMsg.Body.servers )
-            {
-                var type = ( EServerType )server.server_type;
-
-                if ( !serverMap.TryGetValue( type, out var endpointSet ) )
-                {
-                    serverMap[type] = endpointSet = new HashSet<IPEndPoint>();
-                }
-
-                endpointSet.Add( new IPEndPoint( NetHelpers.GetIPAddress( server.server_ip ), ( int )server.server_port ) );
             }
         }
         void HandleCMList( IPacketMsg packetMsg )

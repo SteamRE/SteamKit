@@ -71,45 +71,6 @@ namespace Tests
             Assert.Null(packetMsg);
         }
 
-        [Fact]
-        public void ServerLookupIsClearedWhenDisconnecting()
-        {
-            var msg = new ClientMsgProtobuf<CMsgClientServerList>( EMsg.ClientServerList );
-            msg.Body.servers.Add( new CMsgClientServerList.Server
-            {
-                server_type = ( int )EServerType.CM,
-                server_ip = 0x7F000001, // 127.0.0.1
-                server_port = 1234
-            });
-
-            var client = new DummyCMClient();
-            client.HandleClientMsg( msg );
-
-            Assert.Single( client.GetServersOfType( EServerType.CM ) );
-
-            client.DummyDisconnect();
-            Assert.Empty( client.GetServersOfType( EServerType.CM ) );
-        }
-
-        [Fact]
-        public void ServerLookupDoesNotAccumulateDuplicates()
-        {
-            var msg = new ClientMsgProtobuf<CMsgClientServerList>( EMsg.ClientServerList );
-            msg.Body.servers.Add( new CMsgClientServerList.Server
-            {
-                server_type = ( int )EServerType.CM,
-                server_ip = 0x7F000001, // 127.0.0.1
-                server_port = 1234
-            });
-
-            var client = new DummyCMClient();
-            client.HandleClientMsg( msg );
-            Assert.Single( client.GetServersOfType( EServerType.CM ) );
-
-            client.HandleClientMsg( msg );
-            Assert.Single( client.GetServersOfType( EServerType.CM ) );
-        }
-
         static byte[] Serialize(ISteamSerializableHeader hdr)
         {
             using (var ms = new MemoryStream())
