@@ -152,21 +152,27 @@ namespace NetHookAnalyzer2
 			Application.Exit();
 		}
 
-		void OnOpenToolStripMenuItemClick(object sender, EventArgs e)
+		void OnOpenToolStripMenuItemClick( object sender, EventArgs e )
 		{
-			var dialog = new FolderBrowserDialog { ShowNewFolderButton = false };
-			var latestNethookDir = GetLatestNethookDumpDirectory();
-			if (latestNethookDir != null)
-			{
-				dialog.SelectedPath = GetLatestNethookDumpDirectory();
-			}
+			string dumpDirectory;
 
-			if (dialog.ShowDialog() != WinForms.DialogResult.OK)
+			using ( var dialog = new FolderBrowserDialog() )
 			{
-				return;
-			}
+				dialog.ShowNewFolderButton = false;
 
-			var dumpDirectory = dialog.SelectedPath;
+				var latestNethookDir = GetLatestNethookDumpDirectory();
+				if ( latestNethookDir != null )
+				{
+					dialog.SelectedPath = GetLatestNethookDumpDirectory();
+				}
+
+				if ( dialog.ShowDialog() != WinForms.DialogResult.OK )
+				{
+					return;
+				}
+
+				dumpDirectory = dialog.SelectedPath;
+			}
 
 			var dump = new NetHookDump();
 			dump.LoadFromDirectory(dumpDirectory);
