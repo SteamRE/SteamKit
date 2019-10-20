@@ -49,9 +49,9 @@ namespace NetHookAnalyzer2
 						new ArtifactCacheSubscribedGCSpecialization(),
 						new ArtifactSOMultipleObjectsGCSpecialization(),
 						new ArtifactSOSingleObjectGCSpecialization(),
-                        new UnderlordsCacheSubscribedGCSpecialization(),
-                        new UnderlordsSOMultipleObjectsGCSpecialization(),
-                        new UnderlordsSOSingleObjectGCSpecialization(),
+						new UnderlordsCacheSubscribedGCSpecialization(),
+						new UnderlordsSOMultipleObjectsGCSpecialization(),
+						new UnderlordsSOSingleObjectGCSpecialization(),
 					}
 				}
 			};
