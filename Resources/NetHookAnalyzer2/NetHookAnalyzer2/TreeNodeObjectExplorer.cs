@@ -367,8 +367,6 @@ namespace NetHookAnalyzer2
 					{
 						// only allow displaying as an enum value if we're not a steamid
 
-						var enumMenuItem = new MenuItem("Display as &Enum Value");
-
 						var enumTypesByNamespace = typeof(CMClient).Assembly.ExportedTypes
 							.Where(x => x.IsEnum)
 							.GroupBy(x => x.Namespace)
@@ -377,6 +375,8 @@ namespace NetHookAnalyzer2
 
 						if (enumTypesByNamespace.Length > 0)
 						{
+							var enumMenuItem = new MenuItem( "Display as &Enum Value" );
+
 							foreach (var enumTypes in enumTypesByNamespace)
 							{
 								var enumNamespaceMenuItem = new MenuItem(enumTypes.Key);
