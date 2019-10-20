@@ -636,8 +636,8 @@ namespace NetHookAnalyzer2
 						var childConfiguration = configuration;
 						childConfiguration.IsUnsetField = !valueIsSet;
 
-					    var childObjectExplorer = new TreeNodeObjectExplorer(childName, childObject, childConfiguration);
-					    childNodes.Add(childObjectExplorer.TreeNode);
+						var childObjectExplorer = new TreeNodeObjectExplorer(childName, childObject, childConfiguration);
+						childNodes.Add(childObjectExplorer.TreeNode);
 					}
 				}
 
