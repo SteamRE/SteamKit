@@ -48,8 +48,7 @@ namespace NetHookAnalyzer2
 				return false;
 			}
 
-			int sequence;
-			if (!int.TryParse(m.Groups["num"].Value, out sequence))
+			if (!int.TryParse(m.Groups["num"].Value, out var sequence))
 			{
 				return false;
 			}
@@ -57,14 +56,13 @@ namespace NetHookAnalyzer2
 			Timestamp = fileInfo.LastWriteTime;
 
 			var direction = m.Groups[ "direction" ].Value;
-			PacketDirection packetDirection;
-			if (!Enum.TryParse<PacketDirection>(direction, ignoreCase: true, result: out packetDirection))
+
+			if (!Enum.TryParse<PacketDirection>(direction, ignoreCase: true, result: out var packetDirection))
 			{
 				return false;
 			}
 
-			uint emsg;
-			if (!uint.TryParse(m.Groups["emsg"].Value, out emsg))
+			if (!uint.TryParse(m.Groups["emsg"].Value, out var emsg))
 			{
 				return false;
 			}

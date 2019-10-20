@@ -35,8 +35,7 @@ namespace NetHookAnalyzer2.Specializations
             {
                 using (var ms = new MemoryStream(sharedObject.object_data))
                 {
-                    Type t;
-                    if (Dota2SOHelper.SOTypes.TryGetValue(sharedObject.type_id, out t))
+                    if (Dota2SOHelper.SOTypes.TryGetValue(sharedObject.type_id, out var t))
                     {
                             return RuntimeTypeModel.Default.Deserialize(ms, null, t);
                     }

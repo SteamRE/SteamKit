@@ -35,10 +35,9 @@ namespace NetHookAnalyzer2.Specializations
             {
                 using (var ms = new MemoryStream(sharedObject.object_data))
                 {
-                    Type t;
-                    if (TF2SOHelper.SOTypes.TryGetValue(sharedObject.type_id, out t))
+                    if (TF2SOHelper.SOTypes.TryGetValue(sharedObject.type_id, out var t))
                     {
-                            return RuntimeTypeModel.Default.Deserialize(ms, null, t);
+                        return RuntimeTypeModel.Default.Deserialize(ms, null, t);
                     }
                 }
             }
