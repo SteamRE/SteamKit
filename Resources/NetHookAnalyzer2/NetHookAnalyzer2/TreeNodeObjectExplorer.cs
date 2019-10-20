@@ -611,16 +611,6 @@ namespace NetHookAnalyzer2
 				var properties = value.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
 				bool valueIsProtobufMsg = value is ProtoBuf.IExtensible;
 
-				if (valueIsProtobufMsg)
-				{
-					// For proto msgs, we want to skip vars where name is "<blah>Specified", unless there's no var named "<blah>"
-					properties = properties.Where(x => {
-				        return !x.Name.EndsWith("Specified") || properties.FirstOrDefault(y => {
-				            return y.Name == x.Name.Remove(x.Name.Length - 9);
-				        }) == null;
-				    }).ToList();
-				}
-
 				foreach (var property in properties)
 				{
 					var childName = property.Name;
@@ -635,9 +625,9 @@ namespace NetHookAnalyzer2
 						}
 						else
 						{
-							// For non-repeated fields, look for the "<blah>Specfied" field existing and being set to false;
-							var propSpecified = value.GetType().GetProperty(property.Name + "Specified");
-							valueIsSet = propSpecified == null || (bool)propSpecified.GetValue(value);
+							// For non-repeated fields, look for the "ShouldSerialiez<blah>" method existing and being set to false;
+							var shouldSerializeProp = value.GetType().GetMethod("ShouldSerialize" + property.Name);
+							valueIsSet = shouldSerializeProp == null || shouldSerializeProp.Invoke(value, null) is bool specified && specified;
 						}
 					}
 					
