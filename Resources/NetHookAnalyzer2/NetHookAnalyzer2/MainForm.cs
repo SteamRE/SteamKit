@@ -23,8 +23,13 @@ namespace NetHookAnalyzer2
 			specializations = LoadMessageObjectSpecializations();
 		}
 
+#pragma warning disable IDE0069 // Disposable fields should be disposed
+
 		IDisposable itemsListViewFirstColumnHiderDisposable;
 		FileSystemWatcher folderWatcher;
+
+#pragma warning restore IDE0069 // Disposable fields should be disposed
+
 		readonly ISpecialization[] specializations;
 
 		static ISpecialization[] LoadMessageObjectSpecializations()
