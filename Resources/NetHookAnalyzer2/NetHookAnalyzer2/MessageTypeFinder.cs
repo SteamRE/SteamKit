@@ -110,16 +110,6 @@ namespace NetHookAnalyzer2
 			return true;
 		}
 
-		static bool FilterNonProtobufMessageBodyTypes(Type type, EMsg eMsg)
-		{
-			if (type.GetInterfaces().ToList().Find(@interface => @interface == typeof(ISteamSerializableMessage)) == null)
-				return false;
-
-			var gcMsg = Activator.CreateInstance(type) as ISteamSerializableMessage;
-
-			return gcMsg.GetEMsg() == eMsg;
-		}
-
 		#endregion
 
 		static IEnumerable<string> GetPossibleGCTypePrefixes(uint appid)

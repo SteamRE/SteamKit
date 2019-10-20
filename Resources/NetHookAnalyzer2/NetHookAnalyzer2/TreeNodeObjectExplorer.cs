@@ -88,7 +88,7 @@ namespace NetHookAnalyzer2
 		{
 			var data = (byte[])value;
 
-			var dialog = new SaveFileDialog { DefaultExt = "bin", SupportMultiDottedExtensions = true };
+			using var dialog = new SaveFileDialog { DefaultExt = "bin", SupportMultiDottedExtensions = true };
 			var result = dialog.ShowDialog();
 			if (result == DialogResult.OK)
 			{
@@ -154,12 +154,10 @@ namespace NetHookAnalyzer2
 
             try
             {
-                using ( MemoryStream ms = new MemoryStream( data ) )
-                {
-                    var dictionary = ProtoBufFieldReader.ReadProtobuf( ms );
+                using var ms = new MemoryStream( data );
+                var dictionary = ProtoBufFieldReader.ReadProtobuf( ms );
 
-                    SetValueForDisplay( null, childNodes: new[] { new TreeNodeObjectExplorer( "Protobuf", dictionary, configuration ).TreeNode } );
-                }
+                SetValueForDisplay( null, childNodes: new[] { new TreeNodeObjectExplorer( "Protobuf", dictionary, configuration ).TreeNode } );
             }
             catch
             {
@@ -532,14 +530,12 @@ namespace NetHookAnalyzer2
 			{
 				SetValueForDisplay(string.Format("\"{0}\"", value), (string)value);
 			}
-			else if (value is SteamID)
+			else if (value is SteamID steamID)
 			{
-				var steamID = (SteamID)value;
 				SetValueForDisplay(string.Format("{0} ({1})", steamID.Render(steam3: true), steamID.ConvertToUInt64()));
 			}
-			else if (value is byte[])
+			else if (value is byte[] data)
 			{
-				var data = (byte[])value;
 				if (data.Length == 0)
 				{
 					SetValueForDisplay("byte[ 0 ]");
@@ -554,9 +550,8 @@ namespace NetHookAnalyzer2
 					SetValueForDisplay(hexadecimalValue);
 				}
 			}
-			else if (value is KeyValue)
+			else if (value is KeyValue kv)
 			{
-				var kv = (KeyValue)value;
 				if (kv.Children.Count > 0)
 				{
 					var children = new List<TreeNode>();
@@ -633,10 +628,10 @@ namespace NetHookAnalyzer2
 					bool valueIsSet = true;
 					if (valueIsProtobufMsg)
 					{
-						if (childObject is IList)
+						if (childObject is IList childObjectList)
 						{
 							// Repeated fields are marshalled as Lists, but aren't "set"/sent if they have no values added.
-							valueIsSet = (property.GetValue(value) as IList).Count != 0;
+							valueIsSet = childObjectList.Count != 0;
 						}
 						else
 						{
