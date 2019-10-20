@@ -61,12 +61,15 @@ namespace NetHookAnalyzer2
 							}
 					}
 
-					if (!fields.ContainsKey(field))
+					if (fields.TryGetValue(field, out var values))
 					{
-						fields[field] = new List<object>();
+						values.Add( fieldValue );
 					}
-
-					fields[field].Add(fieldValue);
+					else
+					{
+						values = new List<object> { fieldValue };
+						fields[ field ] = values;
+					}
 				}
 
 				if (fields.Count > 0)
