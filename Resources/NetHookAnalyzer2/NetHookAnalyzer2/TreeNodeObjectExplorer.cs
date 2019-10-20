@@ -627,7 +627,7 @@ namespace NetHookAnalyzer2
 						{
 							// For non-repeated fields, look for the "ShouldSerialiez<blah>" method existing and being set to false;
 							var shouldSerializeProp = value.GetType().GetMethod("ShouldSerialize" + property.Name);
-							valueIsSet = shouldSerializeProp == null || shouldSerializeProp.Invoke(value, null) is bool specified && specified;
+							valueIsSet = shouldSerializeProp == null || (shouldSerializeProp.Invoke(value, null) is bool specified && specified);
 						}
 					}
 					
