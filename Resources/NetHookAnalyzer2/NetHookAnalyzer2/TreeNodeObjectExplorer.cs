@@ -88,7 +88,7 @@ namespace NetHookAnalyzer2
 		{
 			var data = (byte[])value;
 
-			var dialog = new SaveFileDialog { DefaultExt = "bin", SupportMultiDottedExtensions = true };
+			using var dialog = new SaveFileDialog { DefaultExt = "bin", SupportMultiDottedExtensions = true };
 			var result = dialog.ShowDialog();
 			if (result == DialogResult.OK)
 			{
@@ -154,12 +154,10 @@ namespace NetHookAnalyzer2
 
             try
             {
-                using ( MemoryStream ms = new MemoryStream( data ) )
-                {
-                    var dictionary = ProtoBufFieldReader.ReadProtobuf( ms );
+                using var ms = new MemoryStream( data );
+                var dictionary = ProtoBufFieldReader.ReadProtobuf( ms );
 
-                    SetValueForDisplay( null, childNodes: new[] { new TreeNodeObjectExplorer( "Protobuf", dictionary, configuration ).TreeNode } );
-                }
+                SetValueForDisplay( null, childNodes: new[] { new TreeNodeObjectExplorer( "Protobuf", dictionary, configuration ).TreeNode } );
             }
             catch
             {
@@ -369,8 +367,6 @@ namespace NetHookAnalyzer2
 					{
 						// only allow displaying as an enum value if we're not a steamid
 
-						var enumMenuItem = new MenuItem("Display as &Enum Value");
-
 						var enumTypesByNamespace = typeof(CMClient).Assembly.ExportedTypes
 							.Where(x => x.IsEnum)
 							.GroupBy(x => x.Namespace)
@@ -379,6 +375,8 @@ namespace NetHookAnalyzer2
 
 						if (enumTypesByNamespace.Length > 0)
 						{
+							var enumMenuItem = new MenuItem( "Display as &Enum Value" );
+
 							foreach (var enumTypes in enumTypesByNamespace)
 							{
 								var enumNamespaceMenuItem = new MenuItem(enumTypes.Key);
@@ -532,14 +530,12 @@ namespace NetHookAnalyzer2
 			{
 				SetValueForDisplay(string.Format("\"{0}\"", value), (string)value);
 			}
-			else if (value is SteamID)
+			else if (value is SteamID steamID)
 			{
-				var steamID = (SteamID)value;
 				SetValueForDisplay(string.Format("{0} ({1})", steamID.Render(steam3: true), steamID.ConvertToUInt64()));
 			}
-			else if (value is byte[])
+			else if (value is byte[] data)
 			{
-				var data = (byte[])value;
 				if (data.Length == 0)
 				{
 					SetValueForDisplay("byte[ 0 ]");
@@ -554,9 +550,8 @@ namespace NetHookAnalyzer2
 					SetValueForDisplay(hexadecimalValue);
 				}
 			}
-			else if (value is KeyValue)
+			else if (value is KeyValue kv)
 			{
-				var kv = (KeyValue)value;
 				if (kv.Children.Count > 0)
 				{
 					var children = new List<TreeNode>();
@@ -616,16 +611,6 @@ namespace NetHookAnalyzer2
 				var properties = value.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
 				bool valueIsProtobufMsg = value is ProtoBuf.IExtensible;
 
-				if (valueIsProtobufMsg)
-				{
-					// For proto msgs, we want to skip vars where name is "<blah>Specified", unless there's no var named "<blah>"
-					properties = properties.Where(x => {
-				        return !x.Name.EndsWith("Specified") || properties.FirstOrDefault(y => {
-				            return y.Name == x.Name.Remove(x.Name.Length - 9);
-				        }) == null;
-				    }).ToList();
-				}
-
 				foreach (var property in properties)
 				{
 					var childName = property.Name;
@@ -633,16 +618,16 @@ namespace NetHookAnalyzer2
 					bool valueIsSet = true;
 					if (valueIsProtobufMsg)
 					{
-						if (childObject is IList)
+						if (childObject is IList childObjectList)
 						{
 							// Repeated fields are marshalled as Lists, but aren't "set"/sent if they have no values added.
-							valueIsSet = (property.GetValue(value) as IList).Count != 0;
+							valueIsSet = childObjectList.Count != 0;
 						}
 						else
 						{
-							// For non-repeated fields, look for the "<blah>Specfied" field existing and being set to false;
-							var propSpecified = value.GetType().GetProperty(property.Name + "Specified");
-							valueIsSet = propSpecified == null || (bool)propSpecified.GetValue(value);
+							// For non-repeated fields, look for the "ShouldSerialiez<blah>" method existing and being set to false;
+							var shouldSerializeProp = value.GetType().GetMethod("ShouldSerialize" + property.Name);
+							valueIsSet = shouldSerializeProp == null || (shouldSerializeProp.Invoke(value, null) is bool specified && specified);
 						}
 					}
 					
@@ -651,8 +636,8 @@ namespace NetHookAnalyzer2
 						var childConfiguration = configuration;
 						childConfiguration.IsUnsetField = !valueIsSet;
 
-					    var childObjectExplorer = new TreeNodeObjectExplorer(childName, childObject, childConfiguration);
-					    childNodes.Add(childObjectExplorer.TreeNode);
+						var childObjectExplorer = new TreeNodeObjectExplorer(childName, childObject, childConfiguration);
+						childNodes.Add(childObjectExplorer.TreeNode);
 					}
 				}
 

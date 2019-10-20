@@ -36,15 +36,12 @@ namespace NetHookAnalyzer2.Specializations
 		{
 			try
 			{
-				using (var ms = new MemoryStream(sharedObject.object_data))
-				{
-					Type t;
-					if (TF2SOHelper.SOTypes.TryGetValue(sharedObject.type_id, out t))
-					{
-						return RuntimeTypeModel.Default.Deserialize(ms, null, t);
-					}
-				}
-			}
+                using var ms = new MemoryStream( sharedObject.object_data );
+                if ( TF2SOHelper.SOTypes.TryGetValue( sharedObject.type_id, out var t ) )
+                {
+                    return RuntimeTypeModel.Default.Deserialize( ms, null, t );
+                }
+            }
 			catch (ProtoException ex)
 			{
 				return "Error parsing SO data: " + ex.Message;
