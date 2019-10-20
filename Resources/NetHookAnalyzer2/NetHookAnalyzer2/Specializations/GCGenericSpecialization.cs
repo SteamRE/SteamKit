@@ -54,7 +54,7 @@ namespace NetHookAnalyzer2.Specializations
 
 		static IGCSerializableHeader ReadHeader(uint rawEMsg, Stream stream)
 		{
-			IGCSerializableHeader header = null;
+			IGCSerializableHeader header;
 
 			if (MsgUtil.IsProtoBuf(rawEMsg))
 			{
