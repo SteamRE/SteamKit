@@ -117,8 +117,6 @@ namespace SteamKit2.Internal
 
         ScheduledFunction heartBeatFunc;
 
-        Dictionary<EServerType, HashSet<IPEndPoint>> serverMap;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CMClient"/> class with a specific configuration.
         /// </summary>
@@ -127,7 +125,6 @@ namespace SteamKit2.Internal
         public CMClient( SteamConfiguration configuration )
         {
             Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-            serverMap = new Dictionary<EServerType, HashSet<IPEndPoint>>();
 
             heartBeatFunc = new ScheduledFunction( () =>
             {
@@ -295,20 +292,6 @@ namespace SteamKit2.Internal
 
 
         /// <summary>
-        /// Returns the list of servers matching the given type
-        /// </summary>
-        /// <param name="type">Server type requested</param>
-        /// <returns>List of server endpoints</returns>
-        public List<IPEndPoint> GetServersOfType( EServerType type )
-        {
-            if ( !serverMap.TryGetValue( type, out var set ) )
-                return new List<IPEndPoint>();
-
-            return set.ToList();
-        }
-
-
-        /// <summary>
         /// Called when a client message is received from the network.
         /// </summary>
         /// <param name="packetMsg">The packet message.</param>
@@ -372,10 +355,6 @@ namespace SteamKit2.Internal
         /// </summary>
         protected virtual void OnClientDisconnected( bool userInitiated )
         {
-            foreach ( var set in serverMap.Values )
-            {
-                set.Clear();
-            }
         }
 
         IConnection CreateConnection( ProtocolTypes protocol )

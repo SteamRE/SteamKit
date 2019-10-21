@@ -76,9 +76,8 @@ namespace SteamKit2
         /// </summary>
         /// <param name="ufsServer">
         /// The <see cref="System.Net.IPEndPoint"/> of the UFS server to connect to.
-        /// If <c>null</c>, <see cref="UFSClient"/> will randomly select a UFS server from the <see cref="SteamClient"/>'s list of servers.
         /// </param>
-        public void Connect( IPEndPoint? ufsServer = null )
+        public void Connect( IPEndPoint? ufsServer )
         {
             DebugLog.Assert( steamClient.IsConnected, nameof(UFSClient), "CMClient is not connected!" );
 
@@ -87,17 +86,7 @@ namespace SteamKit2
 
             if ( ufsServer == null )
             {
-                var serverList = steamClient.GetServersOfType( EServerType.UFS );
-
-                if ( serverList.Count == 0 )
-                {
-                    DebugLog.WriteLine( nameof(UFSClient), "No UFS server addresses were provided yet." );
-                    Disconnected( this, new DisconnectedEventArgs( userInitiated: false ) );
-                    return;
-                }
-
-                var random = new Random();
-                ufsServer = serverList[ random.Next( serverList.Count ) ];
+                throw new ArgumentNullException( nameof( ufsServer ) );
             }
 
             // steamclient has the connection type hardcoded as TCP
