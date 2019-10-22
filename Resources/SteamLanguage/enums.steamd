@@ -594,8 +594,10 @@ enum EAppInfoSection
 	Store = 16;
 	Localization = 17;
 	Broadcastgamedata = 18;
+	Computed = 19;
+	Albummetadata = 20;
 
-	Max = 19;
+	Max = 21;
 };
 
 enum EContentDownloadSourceType
@@ -1138,7 +1140,7 @@ enum ERemoteStoragePlatform flags
 	OSX = 2;
 	PS3 = 4;
 	Linux = 8;
-	Reserved2 = 16;
+	Switch = 16;
 	Android = 32;
 	IPhoneOS = 64;
 
@@ -1285,6 +1287,7 @@ enum EPublishedFileInappropriateResult
 {
 	NotScanned = 0;
 	VeryUnlikely = 1;
+	Unlikely = 30;
 	Possible = 50;
 	Likely = 75;
 	VeryLikely = 100;
@@ -1508,4 +1511,25 @@ public enum ELobbyDistanceFilter
     Default = 1;
     Far = 2;
     Worldwide = 3;
+};
+
+public enum ESteamIPv6ConnectivityProtocol
+{
+	Invalid = 0;
+	Http = 1;
+	Udp = 2;
+};
+
+public enum ESteamIPv6ConnectivityState
+{
+	Unknown = 0;
+	Good = 1;
+	Bad = 2;
+};
+
+public enum ESteamRealm
+{
+	Unknown = 0;
+	SteamGlobal = 1;
+	SteamChina = 2;
 };

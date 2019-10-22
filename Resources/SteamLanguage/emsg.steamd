@@ -474,6 +474,7 @@ enum EMsg
 	FBSBootstrapperGetPackageChunkResponse = 1131;
 	FBSBootstrapperPackageTransferProgress = 1132;
 	FBSRestartBootstrapper = 1133;
+	FBSPauseFrozenDumps = 1134;
 
 	BaseFileXfer = 1200;
 	FileXferRequest = 1200;
@@ -493,6 +494,8 @@ enum EMsg
 	BaseBS = 1400;
 	BSPurchaseStart = 1401;
 	BSPurchaseResponse = 1402;
+	BSAuthenticateCCTrans = 1403;
+	BSAuthenticateCCTransResponse = 1404;
 	BSSettleNOVA = 1404; removed
 	BSSettleComplete = 1406;
 	BSBannedRequest = 1407; removed
@@ -1498,6 +1501,7 @@ enum EMsg
 	ClientNetworkingCertRequestResponse = 5622;
 	ClientChallengeRequest = 5623;
 	ClientChallengeResponse = 5624;
+	BadgeCraftedNotification = 5625;
 
 	BaseMDS = 5800;
 	ClientMDSLoginRequest = 5801; removed
@@ -1601,6 +1605,8 @@ enum EMsg
 	ClientMMSSetRatelimitPolicyOnClient = 6625;
 	ClientMMSGetLobbyStatus = 6626;
 	ClientMMSGetLobbyStatusResponse = 6627;
+	MMSGetLobbyList = 6628;
+	MMSGetLobbyListResponse = 6629;
 
 	NonStdMsgBase = 6800;
 	NonStdMsgMemcached = 6801;
