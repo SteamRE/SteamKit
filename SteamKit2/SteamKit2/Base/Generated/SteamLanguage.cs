@@ -1073,6 +1073,8 @@ namespace SteamKit2
 		AMFundedPayment = 4418,
 		AMFundedPaymentResponse = 4419,
 		AMRequestPersonaUpdateForChatServer = 4420,
+		AMPerfectWorldPayment = 4421,
+		AMPerfectWorldPaymentResponse = 4422,
 		BasePSRange = 5000,
 		PSCreateShoppingCart = 5001,
 		PSCreateShoppingCartResponse = 5002,
