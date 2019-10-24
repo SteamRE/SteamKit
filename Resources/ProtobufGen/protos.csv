@@ -67,6 +67,7 @@ dota2,dota_gcmessages_common.proto,GC\Dota\MsgGCCommon.cs,SteamKit2.GC.Dota.Inte
 dota2,dota_gcmessages_common_match_management.proto,GC\Dota\MsgGCCommonMatchMgmt.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_msgid.proto,GC\Dota\MsgGCMsgId.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_server.proto,GC\Dota\MsgGCServer.cs,SteamKit2.GC.Dota.Internal
+dota2,extramsgblockutil.proto,GC\Dota\MsgGCExtraMsgBlock.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_match_metadata.proto,GC\Dota\MsgMatchMetadata.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_shared_enums.proto,GC\Dota\MsgSharedEnums.cs,SteamKit2.GC.Dota.Internal
 dota2,econ_gcmessages.proto,GC\Dota\SteamMsgGCEcon.cs,SteamKit2.GC.Dota.Internal
