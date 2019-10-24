@@ -105,7 +105,7 @@ namespace SteamKit2
 
                     Type = child[ "type" ].AsString(),
                     SourceID = child[ "source_id"].AsInteger(),
-                    CellID = (uint)child[ "cell" ].AsInteger(),
+                    CellID = (uint)child[ "cell_id" ].AsInteger(),
 
                     Load = child[ "load" ].AsInteger(),
                     WeightedLoad = child[ "weighted_load" ].AsInteger(),
