@@ -117,8 +117,6 @@ namespace SteamKit2.Internal
 
         ScheduledFunction heartBeatFunc;
 
-        Dictionary<EServerType, HashSet<IPEndPoint>> serverMap;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CMClient"/> class with a specific configuration.
         /// </summary>
@@ -127,7 +125,6 @@ namespace SteamKit2.Internal
         public CMClient( SteamConfiguration configuration )
         {
             Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-            serverMap = new Dictionary<EServerType, HashSet<IPEndPoint>>();
 
             heartBeatFunc = new ScheduledFunction( () =>
             {
@@ -295,20 +292,6 @@ namespace SteamKit2.Internal
 
 
         /// <summary>
-        /// Returns the list of servers matching the given type
-        /// </summary>
-        /// <param name="type">Server type requested</param>
-        /// <returns>List of server endpoints</returns>
-        public List<IPEndPoint> GetServersOfType( EServerType type )
-        {
-            if ( !serverMap.TryGetValue( type, out var set ) )
-                return new List<IPEndPoint>();
-
-            return set.ToList();
-        }
-
-
-        /// <summary>
         /// Called when a client message is received from the network.
         /// </summary>
         /// <param name="packetMsg">The packet message.</param>
@@ -350,10 +333,6 @@ namespace SteamKit2.Internal
                     HandleLoggedOff( packetMsg );
                     break;
 
-                case EMsg.ClientServerList: // Steam server list
-                    HandleServerList( packetMsg );
-                    break;
-
                 case EMsg.ClientCMList:
                     HandleCMList( packetMsg );
                     break;
@@ -376,10 +355,6 @@ namespace SteamKit2.Internal
         /// </summary>
         protected virtual void OnClientDisconnected( bool userInitiated )
         {
-            foreach ( var set in serverMap.Values )
-            {
-                set.Clear();
-            }
         }
 
         IConnection CreateConnection( ProtocolTypes protocol )
@@ -552,7 +527,7 @@ namespace SteamKit2.Internal
                 SteamID = logonResp.ProtoHeader.steamid;
 
                 CellID = logonResp.Body.cell_id;
-                PublicIP = NetHelpers.GetIPAddress(logonResp.Body.public_ip);
+                PublicIP = NetHelpers.GetIPAddress( logonResp.Body.deprecated_public_ip );
                 IPCountryCode = logonResp.Body.ip_country_code;
 
                 int hbDelay = logonResp.Body.out_of_game_heartbeat_seconds;
@@ -585,22 +560,6 @@ namespace SteamKit2.Internal
                     DebugLog.Assert( connection.CurrentEndPoint != null, nameof( CMClient ), "No connection endpoint during ClientLoggedOff - cannot update server list status" );
                     Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Bad );
                 }
-            }
-        }
-        void HandleServerList( IPacketMsg packetMsg )
-        {
-            var listMsg = new ClientMsgProtobuf<CMsgClientServerList>( packetMsg );
-
-            foreach ( var server in listMsg.Body.servers )
-            {
-                var type = ( EServerType )server.server_type;
-
-                if ( !serverMap.TryGetValue( type, out var endpointSet ) )
-                {
-                    serverMap[type] = endpointSet = new HashSet<IPEndPoint>();
-                }
-
-                endpointSet.Add( new IPEndPoint( NetHelpers.GetIPAddress( server.server_ip ), ( int )server.server_port ) );
             }
         }
         void HandleCMList( IPacketMsg packetMsg )

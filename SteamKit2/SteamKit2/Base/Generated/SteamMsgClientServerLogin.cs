@@ -66,6 +66,65 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientSecret : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint version
+        {
+            get { return __pbn__version.GetValueOrDefault(); }
+            set { __pbn__version = value; }
+        }
+        public bool ShouldSerializeversion() => __pbn__version != null;
+        public void Resetversion() => __pbn__version = null;
+        private uint? __pbn__version;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint appid
+        {
+            get { return __pbn__appid.GetValueOrDefault(); }
+            set { __pbn__appid = value; }
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint deviceid
+        {
+            get { return __pbn__deviceid.GetValueOrDefault(); }
+            set { __pbn__deviceid = value; }
+        }
+        public bool ShouldSerializedeviceid() => __pbn__deviceid != null;
+        public void Resetdeviceid() => __pbn__deviceid = null;
+        private uint? __pbn__deviceid;
+
+        [global::ProtoBuf.ProtoMember(4, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong nonce
+        {
+            get { return __pbn__nonce.GetValueOrDefault(); }
+            set { __pbn__nonce = value; }
+        }
+        public bool ShouldSerializenonce() => __pbn__nonce != null;
+        public void Resetnonce() => __pbn__nonce = null;
+        private ulong? __pbn__nonce;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public byte[] hmac
+        {
+            get { return __pbn__hmac; }
+            set { __pbn__hmac = value; }
+        }
+        public bool ShouldSerializehmac() => __pbn__hmac != null;
+        public void Resethmac() => __pbn__hmac = null;
+        private byte[] __pbn__hmac;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgClientLogon : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -83,14 +142,14 @@ namespace SteamKit2.Internal
         private uint? __pbn__protocol_version;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public uint obfustucated_private_ip
+        public uint deprecated_obfustucated_private_ip
         {
-            get { return __pbn__obfustucated_private_ip.GetValueOrDefault(); }
-            set { __pbn__obfustucated_private_ip = value; }
+            get { return __pbn__deprecated_obfustucated_private_ip.GetValueOrDefault(); }
+            set { __pbn__deprecated_obfustucated_private_ip = value; }
         }
-        public bool ShouldSerializeobfustucated_private_ip() => __pbn__obfustucated_private_ip != null;
-        public void Resetobfustucated_private_ip() => __pbn__obfustucated_private_ip = null;
-        private uint? __pbn__obfustucated_private_ip;
+        public bool ShouldSerializedeprecated_obfustucated_private_ip() => __pbn__deprecated_obfustucated_private_ip != null;
+        public void Resetdeprecated_obfustucated_private_ip() => __pbn__deprecated_obfustucated_private_ip = null;
+        private uint? __pbn__deprecated_obfustucated_private_ip;
 
         [global::ProtoBuf.ProtoMember(3)]
         public uint cell_id
@@ -166,24 +225,27 @@ namespace SteamKit2.Internal
         private string __pbn__wine_version;
 
         [global::ProtoBuf.ProtoMember(10)]
-        public uint ping_ms_from_cell_search
+        public uint deprecated_10
         {
-            get { return __pbn__ping_ms_from_cell_search.GetValueOrDefault(); }
-            set { __pbn__ping_ms_from_cell_search = value; }
+            get { return __pbn__deprecated_10.GetValueOrDefault(); }
+            set { __pbn__deprecated_10 = value; }
         }
-        public bool ShouldSerializeping_ms_from_cell_search() => __pbn__ping_ms_from_cell_search != null;
-        public void Resetping_ms_from_cell_search() => __pbn__ping_ms_from_cell_search = null;
-        private uint? __pbn__ping_ms_from_cell_search;
+        public bool ShouldSerializedeprecated_10() => __pbn__deprecated_10 != null;
+        public void Resetdeprecated_10() => __pbn__deprecated_10 = null;
+        private uint? __pbn__deprecated_10;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public CMsgIPAddress obfuscated_private_ip { get; set; }
 
         [global::ProtoBuf.ProtoMember(20)]
-        public uint public_ip
+        public uint deprecated_public_ip
         {
-            get { return __pbn__public_ip.GetValueOrDefault(); }
-            set { __pbn__public_ip = value; }
+            get { return __pbn__deprecated_public_ip.GetValueOrDefault(); }
+            set { __pbn__deprecated_public_ip = value; }
         }
-        public bool ShouldSerializepublic_ip() => __pbn__public_ip != null;
-        public void Resetpublic_ip() => __pbn__public_ip = null;
-        private uint? __pbn__public_ip;
+        public bool ShouldSerializedeprecated_public_ip() => __pbn__deprecated_public_ip != null;
+        public void Resetdeprecated_public_ip() => __pbn__deprecated_public_ip = null;
+        private uint? __pbn__deprecated_public_ip;
 
         [global::ProtoBuf.ProtoMember(21)]
         public uint qos_level
@@ -204,6 +266,9 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeclient_supplied_steam_id() => __pbn__client_supplied_steam_id != null;
         public void Resetclient_supplied_steam_id() => __pbn__client_supplied_steam_id = null;
         private ulong? __pbn__client_supplied_steam_id;
+
+        [global::ProtoBuf.ProtoMember(23)]
+        public CMsgIPAddress public_ip { get; set; }
 
         [global::ProtoBuf.ProtoMember(30)]
         public byte[] machine_id
@@ -585,6 +650,9 @@ namespace SteamKit2.Internal
         public void Resetpriority_reason() => __pbn__priority_reason = null;
         private int? __pbn__priority_reason;
 
+        [global::ProtoBuf.ProtoMember(105)]
+        public CMsgClientSecret embedded_client_secret { get; set; }
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -626,14 +694,14 @@ namespace SteamKit2.Internal
         private int? __pbn__in_game_heartbeat_seconds;
 
         [global::ProtoBuf.ProtoMember(4)]
-        public uint public_ip
+        public uint deprecated_public_ip
         {
-            get { return __pbn__public_ip.GetValueOrDefault(); }
-            set { __pbn__public_ip = value; }
+            get { return __pbn__deprecated_public_ip.GetValueOrDefault(); }
+            set { __pbn__deprecated_public_ip = value; }
         }
-        public bool ShouldSerializepublic_ip() => __pbn__public_ip != null;
-        public void Resetpublic_ip() => __pbn__public_ip = null;
-        private uint? __pbn__public_ip;
+        public bool ShouldSerializedeprecated_public_ip() => __pbn__deprecated_public_ip != null;
+        public void Resetdeprecated_public_ip() => __pbn__deprecated_public_ip = null;
+        private uint? __pbn__deprecated_public_ip;
 
         [global::ProtoBuf.ProtoMember(5, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint rtime32_server_time
@@ -737,6 +805,9 @@ namespace SteamKit2.Internal
         public bool ShouldSerializevanity_url() => __pbn__vanity_url != null;
         public void Resetvanity_url() => __pbn__vanity_url = null;
         private string __pbn__vanity_url;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public CMsgIPAddress public_ip { get; set; }
 
         [global::ProtoBuf.ProtoMember(20, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong client_supplied_steamid
@@ -1101,6 +1172,44 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeis_phone_needing_reverify() => __pbn__is_phone_needing_reverify != null;
         public void Resetis_phone_needing_reverify() => __pbn__is_phone_needing_reverify = null;
         private bool? __pbn__is_phone_needing_reverify;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientChallengeRequest : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get { return __pbn__steamid.GetValueOrDefault(); }
+            set { __pbn__steamid = value; }
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientChallengeResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong challenge
+        {
+            get { return __pbn__challenge.GetValueOrDefault(); }
+            set { __pbn__challenge = value; }
+        }
+        public bool ShouldSerializechallenge() => __pbn__challenge != null;
+        public void Resetchallenge() => __pbn__challenge = null;
+        private ulong? __pbn__challenge;
 
     }
 

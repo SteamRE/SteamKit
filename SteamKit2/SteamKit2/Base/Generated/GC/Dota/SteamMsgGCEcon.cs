@@ -4045,6 +4045,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetserver_deployed_version() => __pbn__server_deployed_version = null;
         private uint? __pbn__server_deployed_version;
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint what_changed
+        {
+            get { return __pbn__what_changed.GetValueOrDefault(); }
+            set { __pbn__what_changed = value; }
+        }
+        public bool ShouldSerializewhat_changed() => __pbn__what_changed != null;
+        public void Resetwhat_changed() => __pbn__what_changed = null;
+        private uint? __pbn__what_changed;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -4329,6 +4339,15 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToGCPurchaseSucceeded : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EGCItemMsg
     {
         k_EMsgGCBase = 1000,
@@ -4515,6 +4534,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGCToGCSelfPing = 2605,
         k_EMsgGCToGCGetInfuxIntervalStats = 2606,
         k_EMsgGCToGCGetInfuxIntervalStatsResponse = 2607,
+        k_EMsgGCToGCPurchaseSucceeded = 2608,
     }
 
     [global::ProtoBuf.ProtoContract()]

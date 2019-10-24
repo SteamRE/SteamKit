@@ -196,6 +196,16 @@ namespace SteamKit2.Unified.Internal
         public void Resetlastmessage_since() => __pbn__lastmessage_since = null;
         private uint? __pbn__lastmessage_since;
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool only_sessions_with_messages
+        {
+            get { return __pbn__only_sessions_with_messages.GetValueOrDefault(); }
+            set { __pbn__only_sessions_with_messages = value; }
+        }
+        public bool ShouldSerializeonly_sessions_with_messages() => __pbn__only_sessions_with_messages != null;
+        public void Resetonly_sessions_with_messages() => __pbn__only_sessions_with_messages = null;
+        private bool? __pbn__only_sessions_with_messages;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

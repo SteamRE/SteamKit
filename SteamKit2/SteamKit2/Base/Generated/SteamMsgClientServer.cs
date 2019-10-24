@@ -648,14 +648,14 @@ namespace SteamKit2.Internal
         private uint? __pbn__flags;
 
         [global::ProtoBuf.ProtoMember(3)]
-        public uint game_ip_address
+        public uint deprecated_game_ip_address
         {
-            get { return __pbn__game_ip_address.GetValueOrDefault(); }
-            set { __pbn__game_ip_address = value; }
+            get { return __pbn__deprecated_game_ip_address.GetValueOrDefault(); }
+            set { __pbn__deprecated_game_ip_address = value; }
         }
-        public bool ShouldSerializegame_ip_address() => __pbn__game_ip_address != null;
-        public void Resetgame_ip_address() => __pbn__game_ip_address = null;
-        private uint? __pbn__game_ip_address;
+        public bool ShouldSerializedeprecated_game_ip_address() => __pbn__deprecated_game_ip_address != null;
+        public void Resetdeprecated_game_ip_address() => __pbn__deprecated_game_ip_address = null;
+        private uint? __pbn__deprecated_game_ip_address;
 
         [global::ProtoBuf.ProtoMember(4)]
         public uint game_port
@@ -748,14 +748,14 @@ namespace SteamKit2.Internal
             private ulong? __pbn__steam_id;
 
             [global::ProtoBuf.ProtoMember(2)]
-            public uint public_ip
+            public uint deprecated_public_ip
             {
-                get { return __pbn__public_ip.GetValueOrDefault(); }
-                set { __pbn__public_ip = value; }
+                get { return __pbn__deprecated_public_ip.GetValueOrDefault(); }
+                set { __pbn__deprecated_public_ip = value; }
             }
-            public bool ShouldSerializepublic_ip() => __pbn__public_ip != null;
-            public void Resetpublic_ip() => __pbn__public_ip = null;
-            private uint? __pbn__public_ip;
+            public bool ShouldSerializedeprecated_public_ip() => __pbn__deprecated_public_ip != null;
+            public void Resetdeprecated_public_ip() => __pbn__deprecated_public_ip = null;
+            private uint? __pbn__deprecated_public_ip;
 
             [global::ProtoBuf.ProtoMember(3)]
             public byte[] token
@@ -766,6 +766,9 @@ namespace SteamKit2.Internal
             public bool ShouldSerializetoken() => __pbn__token != null;
             public void Resettoken() => __pbn__token = null;
             private byte[] __pbn__token;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public CMsgIPAddress public_ip { get; set; }
 
         }
 
@@ -789,14 +792,14 @@ namespace SteamKit2.Internal
         private ulong? __pbn__steam_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public uint public_ip
+        public uint deprecated_public_ip
         {
-            get { return __pbn__public_ip.GetValueOrDefault(); }
-            set { __pbn__public_ip = value; }
+            get { return __pbn__deprecated_public_ip.GetValueOrDefault(); }
+            set { __pbn__deprecated_public_ip = value; }
         }
-        public bool ShouldSerializepublic_ip() => __pbn__public_ip != null;
-        public void Resetpublic_ip() => __pbn__public_ip = null;
-        private uint? __pbn__public_ip;
+        public bool ShouldSerializedeprecated_public_ip() => __pbn__deprecated_public_ip != null;
+        public void Resetdeprecated_public_ip() => __pbn__deprecated_public_ip = null;
+        private uint? __pbn__deprecated_public_ip;
 
         [global::ProtoBuf.ProtoMember(3)]
         public byte[] token
@@ -807,6 +810,9 @@ namespace SteamKit2.Internal
         public bool ShouldSerializetoken() => __pbn__token != null;
         public void Resettoken() => __pbn__token = null;
         private byte[] __pbn__token;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public CMsgIPAddress public_ip { get; set; }
 
     }
 
@@ -877,14 +883,14 @@ namespace SteamKit2.Internal
             private ulong? __pbn__game_id;
 
             [global::ProtoBuf.ProtoMember(3)]
-            public uint game_ip_address
+            public uint deprecated_game_ip_address
             {
-                get { return __pbn__game_ip_address.GetValueOrDefault(); }
-                set { __pbn__game_ip_address = value; }
+                get { return __pbn__deprecated_game_ip_address.GetValueOrDefault(); }
+                set { __pbn__deprecated_game_ip_address = value; }
             }
-            public bool ShouldSerializegame_ip_address() => __pbn__game_ip_address != null;
-            public void Resetgame_ip_address() => __pbn__game_ip_address = null;
-            private uint? __pbn__game_ip_address;
+            public bool ShouldSerializedeprecated_game_ip_address() => __pbn__deprecated_game_ip_address != null;
+            public void Resetdeprecated_game_ip_address() => __pbn__deprecated_game_ip_address = null;
+            private uint? __pbn__deprecated_game_ip_address;
 
             [global::ProtoBuf.ProtoMember(4)]
             public uint game_port
@@ -1075,6 +1081,19 @@ namespace SteamKit2.Internal
             public bool ShouldSerializelaunch_source() => __pbn__launch_source != null;
             public void Resetlaunch_source() => __pbn__launch_source = null;
             private uint? __pbn__launch_source;
+
+            [global::ProtoBuf.ProtoMember(22)]
+            public uint vr_hmd_runtime
+            {
+                get { return __pbn__vr_hmd_runtime.GetValueOrDefault(); }
+                set { __pbn__vr_hmd_runtime = value; }
+            }
+            public bool ShouldSerializevr_hmd_runtime() => __pbn__vr_hmd_runtime != null;
+            public void Resetvr_hmd_runtime() => __pbn__vr_hmd_runtime = null;
+            private uint? __pbn__vr_hmd_runtime;
+
+            [global::ProtoBuf.ProtoMember(23)]
+            public CMsgIPAddress game_ip_address { get; set; }
 
         }
 
@@ -2017,57 +2036,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientServerList : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<Server> servers { get; } = new global::System.Collections.Generic.List<Server>();
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class Server : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint server_type
-            {
-                get { return __pbn__server_type.GetValueOrDefault(); }
-                set { __pbn__server_type = value; }
-            }
-            public bool ShouldSerializeserver_type() => __pbn__server_type != null;
-            public void Resetserver_type() => __pbn__server_type = null;
-            private uint? __pbn__server_type;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public uint server_ip
-            {
-                get { return __pbn__server_ip.GetValueOrDefault(); }
-                set { __pbn__server_ip = value; }
-            }
-            public bool ShouldSerializeserver_ip() => __pbn__server_ip != null;
-            public void Resetserver_ip() => __pbn__server_ip = null;
-            private uint? __pbn__server_ip;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public uint server_port
-            {
-                get { return __pbn__server_port.GetValueOrDefault(); }
-                set { __pbn__server_port = value; }
-            }
-            public bool ShouldSerializeserver_port() => __pbn__server_port != null;
-            public void Resetserver_port() => __pbn__server_port = null;
-            private uint? __pbn__server_port;
-
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgClientRequestedClientStats : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2296,14 +2264,14 @@ namespace SteamKit2.Internal
         private uint? __pbn__cell_id;
 
         [global::ProtoBuf.ProtoMember(6)]
-        public uint public_ip
+        public uint deprecated_public_ip
         {
-            get { return __pbn__public_ip.GetValueOrDefault(); }
-            set { __pbn__public_ip = value; }
+            get { return __pbn__deprecated_public_ip.GetValueOrDefault(); }
+            set { __pbn__deprecated_public_ip = value; }
         }
-        public bool ShouldSerializepublic_ip() => __pbn__public_ip != null;
-        public void Resetpublic_ip() => __pbn__public_ip = null;
-        private uint? __pbn__public_ip;
+        public bool ShouldSerializedeprecated_public_ip() => __pbn__deprecated_public_ip != null;
+        public void Resetdeprecated_public_ip() => __pbn__deprecated_public_ip = null;
+        private uint? __pbn__deprecated_public_ip;
 
         [global::ProtoBuf.ProtoMember(7)]
         public byte[] metadata
@@ -2325,6 +2293,9 @@ namespace SteamKit2.Internal
         public bool ShouldSerializepersona_name_owner() => __pbn__persona_name_owner != null;
         public void Resetpersona_name_owner() => __pbn__persona_name_owner = null;
         private string __pbn__persona_name_owner;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public CMsgIPAddress public_ip { get; set; }
 
     }
 
@@ -2647,17 +2618,20 @@ namespace SteamKit2.Internal
         private uint? __pbn__cell_id;
 
         [global::ProtoBuf.ProtoMember(5)]
-        public uint public_ip
+        public uint deprecated_public_ip
         {
-            get { return __pbn__public_ip.GetValueOrDefault(); }
-            set { __pbn__public_ip = value; }
+            get { return __pbn__deprecated_public_ip.GetValueOrDefault(); }
+            set { __pbn__deprecated_public_ip = value; }
         }
-        public bool ShouldSerializepublic_ip() => __pbn__public_ip != null;
-        public void Resetpublic_ip() => __pbn__public_ip = null;
-        private uint? __pbn__public_ip;
+        public bool ShouldSerializedeprecated_public_ip() => __pbn__deprecated_public_ip != null;
+        public void Resetdeprecated_public_ip() => __pbn__deprecated_public_ip = null;
+        private uint? __pbn__deprecated_public_ip;
 
         [global::ProtoBuf.ProtoMember(6)]
         public global::System.Collections.Generic.List<Filter> filters { get; } = new global::System.Collections.Generic.List<Filter>();
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public CMsgIPAddress public_ip { get; set; }
 
         [global::ProtoBuf.ProtoContract()]
         public partial class Filter : global::ProtoBuf.IExtensible
@@ -3378,14 +3352,14 @@ namespace SteamKit2.Internal
         private ulong? __pbn__steam_id_lobby;
 
         [global::ProtoBuf.ProtoMember(3)]
-        public uint game_server_ip
+        public uint deprecated_game_server_ip
         {
-            get { return __pbn__game_server_ip.GetValueOrDefault(); }
-            set { __pbn__game_server_ip = value; }
+            get { return __pbn__deprecated_game_server_ip.GetValueOrDefault(); }
+            set { __pbn__deprecated_game_server_ip = value; }
         }
-        public bool ShouldSerializegame_server_ip() => __pbn__game_server_ip != null;
-        public void Resetgame_server_ip() => __pbn__game_server_ip = null;
-        private uint? __pbn__game_server_ip;
+        public bool ShouldSerializedeprecated_game_server_ip() => __pbn__deprecated_game_server_ip != null;
+        public void Resetdeprecated_game_server_ip() => __pbn__deprecated_game_server_ip = null;
+        private uint? __pbn__deprecated_game_server_ip;
 
         [global::ProtoBuf.ProtoMember(4)]
         public uint game_server_port
@@ -3406,6 +3380,9 @@ namespace SteamKit2.Internal
         public bool ShouldSerializegame_server_steam_id() => __pbn__game_server_steam_id != null;
         public void Resetgame_server_steam_id() => __pbn__game_server_steam_id = null;
         private ulong? __pbn__game_server_steam_id;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public CMsgIPAddress game_server_ip { get; set; }
 
     }
 
@@ -3437,14 +3414,14 @@ namespace SteamKit2.Internal
         private ulong? __pbn__steam_id_lobby;
 
         [global::ProtoBuf.ProtoMember(3)]
-        public uint game_server_ip
+        public uint deprecated_game_server_ip
         {
-            get { return __pbn__game_server_ip.GetValueOrDefault(); }
-            set { __pbn__game_server_ip = value; }
+            get { return __pbn__deprecated_game_server_ip.GetValueOrDefault(); }
+            set { __pbn__deprecated_game_server_ip = value; }
         }
-        public bool ShouldSerializegame_server_ip() => __pbn__game_server_ip != null;
-        public void Resetgame_server_ip() => __pbn__game_server_ip = null;
-        private uint? __pbn__game_server_ip;
+        public bool ShouldSerializedeprecated_game_server_ip() => __pbn__deprecated_game_server_ip != null;
+        public void Resetdeprecated_game_server_ip() => __pbn__deprecated_game_server_ip = null;
+        private uint? __pbn__deprecated_game_server_ip;
 
         [global::ProtoBuf.ProtoMember(4)]
         public uint game_server_port
@@ -3465,6 +3442,9 @@ namespace SteamKit2.Internal
         public bool ShouldSerializegame_server_steam_id() => __pbn__game_server_steam_id != null;
         public void Resetgame_server_steam_id() => __pbn__game_server_steam_id = null;
         private ulong? __pbn__game_server_steam_id;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public CMsgIPAddress game_server_ip { get; set; }
 
     }
 
@@ -3733,6 +3713,17 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeconnect_string() => __pbn__connect_string != null;
         public void Resetconnect_string() => __pbn__connect_string = null;
         private string __pbn__connect_string;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string remote_play
+        {
+            get { return __pbn__remote_play ?? ""; }
+            set { __pbn__remote_play = value; }
+        }
+        public bool ShouldSerializeremote_play() => __pbn__remote_play != null;
+        public void Resetremote_play() => __pbn__remote_play = null;
+        private string __pbn__remote_play;
 
     }
 

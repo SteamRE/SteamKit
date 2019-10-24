@@ -42,6 +42,25 @@ namespace SteamKit2.GC.Underlords.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgDACClientHello : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool side_loaded
+        {
+            get { return __pbn__side_loaded.GetValueOrDefault(); }
+            set { __pbn__side_loaded = value; }
+        }
+        public bool ShouldSerializeside_loaded() => __pbn__side_loaded != null;
+        public void Resetside_loaded() => __pbn__side_loaded = null;
+        private bool? __pbn__side_loaded;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgClientToGCStartMatchmaking : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -97,6 +116,8 @@ namespace SteamKit2.GC.Underlords.Internal
             k_EResult_InternalError = 6,
             k_EResult_NoRegionPings = 7,
             k_EResult_InParty = 8,
+            k_EResult_ModeLocked = 9,
+            k_EResult_ModeBanned = 10,
         }
 
     }
@@ -203,6 +224,43 @@ namespace SteamKit2.GC.Underlords.Internal
 
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<CExtraMsgBlock> extra_messages { get; } = new global::System.Collections.Generic.List<CExtraMsgBlock>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint compatibility_version
+        {
+            get { return __pbn__compatibility_version.GetValueOrDefault(); }
+            set { __pbn__compatibility_version = value; }
+        }
+        public bool ShouldSerializecompatibility_version() => __pbn__compatibility_version != null;
+        public void Resetcompatibility_version() => __pbn__compatibility_version = null;
+        private uint? __pbn__compatibility_version;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<uint> active_events { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public ulong steam_announcement_gid
+        {
+            get { return __pbn__steam_announcement_gid.GetValueOrDefault(); }
+            set { __pbn__steam_announcement_gid = value; }
+        }
+        public bool ShouldSerializesteam_announcement_gid() => __pbn__steam_announcement_gid != null;
+        public void Resetsteam_announcement_gid() => __pbn__steam_announcement_gid = null;
+        private ulong? __pbn__steam_announcement_gid;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public global::System.Collections.Generic.List<string> console_commands { get; } = new global::System.Collections.Generic.List<string>();
+
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string patch_notes_preview_password
+        {
+            get { return __pbn__patch_notes_preview_password ?? ""; }
+            set { __pbn__patch_notes_preview_password = value; }
+        }
+        public bool ShouldSerializepatch_notes_preview_password() => __pbn__patch_notes_preview_password != null;
+        public void Resetpatch_notes_preview_password() => __pbn__patch_notes_preview_password = null;
+        private string __pbn__patch_notes_preview_password;
 
     }
 
@@ -662,6 +720,17 @@ namespace SteamKit2.GC.Underlords.Internal
         public void Resetserver_search_key() => __pbn__server_search_key = null;
         private string __pbn__server_search_key;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(EDACMatchMode.k_EDACMatchMode_Invalid)]
+        public EDACMatchMode match_mode
+        {
+            get { return __pbn__match_mode ?? EDACMatchMode.k_EDACMatchMode_Invalid; }
+            set { __pbn__match_mode = value; }
+        }
+        public bool ShouldSerializematch_mode() => __pbn__match_mode != null;
+        public void Resetmatch_mode() => __pbn__match_mode = null;
+        private EDACMatchMode? __pbn__match_mode;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -713,6 +782,10 @@ namespace SteamKit2.GC.Underlords.Internal
             k_eTooManySpectatorsForPrivate = 17,
             k_eTooFewPlayersForMM = 18,
             k_eTooFewPlayersForPrivate = 19,
+            k_eMismatchedVersions = 20,
+            k_eInvalidPartyMatchMode = 21,
+            k_eNotAllPlayersCanPlayRanked = 22,
+            k_ePlayerBannedFromMode = 23,
         }
 
     }
@@ -881,6 +954,7 @@ namespace SteamKit2.GC.Underlords.Internal
             k_eMatchMakingStopped_NoServerRegion = 7,
             k_eLeftParty = 8,
             k_eDeclinedInvite = 9,
+            k_eMatchMakingStopped_FailedOther = 10,
         }
 
     }
@@ -1262,16 +1336,6 @@ namespace SteamKit2.GC.Underlords.Internal
         public void Resetevent_id() => __pbn__event_id = null;
         private uint? __pbn__event_id;
 
-        [global::ProtoBuf.ProtoMember(3)]
-        public uint event_points
-        {
-            get { return __pbn__event_points.GetValueOrDefault(); }
-            set { __pbn__event_points = value; }
-        }
-        public bool ShouldSerializeevent_points() => __pbn__event_points != null;
-        public void Resetevent_points() => __pbn__event_points = null;
-        private uint? __pbn__event_points;
-
         [global::ProtoBuf.ProtoMember(4)]
         public bool event_owned
         {
@@ -1283,7 +1347,7 @@ namespace SteamKit2.GC.Underlords.Internal
         private bool? __pbn__event_owned;
 
         [global::ProtoBuf.ProtoMember(5)]
-        public global::System.Collections.Generic.List<Achievement> achievements { get; } = new global::System.Collections.Generic.List<Achievement>();
+        public global::System.Collections.Generic.List<Currency> currencies { get; } = new global::System.Collections.Generic.List<Currency>();
 
         [global::ProtoBuf.ProtoMember(6)]
         public global::System.Collections.Generic.List<Claim> claims { get; } = new global::System.Collections.Generic.List<Claim>();
@@ -1291,32 +1355,35 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public global::System.Collections.Generic.List<Challenge> challenges { get; } = new global::System.Collections.Generic.List<Challenge>();
 
+        [global::ProtoBuf.ProtoMember(8)]
+        public global::System.Collections.Generic.List<VirtualItem> virtual_items { get; } = new global::System.Collections.Generic.List<VirtualItem>();
+
         [global::ProtoBuf.ProtoContract()]
-        public partial class Achievement : global::ProtoBuf.IExtensible
+        public partial class Currency : global::ProtoBuf.IExtensible
         {
             private global::ProtoBuf.IExtension __pbn__extensionData;
             global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            public uint achievement_id
+            public uint currency_id
             {
-                get { return __pbn__achievement_id.GetValueOrDefault(); }
-                set { __pbn__achievement_id = value; }
+                get { return __pbn__currency_id.GetValueOrDefault(); }
+                set { __pbn__currency_id = value; }
             }
-            public bool ShouldSerializeachievement_id() => __pbn__achievement_id != null;
-            public void Resetachievement_id() => __pbn__achievement_id = null;
-            private uint? __pbn__achievement_id;
+            public bool ShouldSerializecurrency_id() => __pbn__currency_id != null;
+            public void Resetcurrency_id() => __pbn__currency_id = null;
+            private uint? __pbn__currency_id;
 
             [global::ProtoBuf.ProtoMember(2)]
-            public uint progress
+            public uint balance
             {
-                get { return __pbn__progress.GetValueOrDefault(); }
-                set { __pbn__progress = value; }
+                get { return __pbn__balance.GetValueOrDefault(); }
+                set { __pbn__balance = value; }
             }
-            public bool ShouldSerializeprogress() => __pbn__progress != null;
-            public void Resetprogress() => __pbn__progress = null;
-            private uint? __pbn__progress;
+            public bool ShouldSerializebalance() => __pbn__balance != null;
+            public void Resetbalance() => __pbn__balance = null;
+            private uint? __pbn__balance;
 
         }
 
@@ -1426,7 +1493,162 @@ namespace SteamKit2.GC.Underlords.Internal
             public void Resetconfig_id() => __pbn__config_id = null;
             private uint? __pbn__config_id;
 
+            [global::ProtoBuf.ProtoMember(8)]
+            public bool active
+            {
+                get { return __pbn__active.GetValueOrDefault(); }
+                set { __pbn__active = value; }
+            }
+            public bool ShouldSerializeactive() => __pbn__active != null;
+            public void Resetactive() => __pbn__active = null;
+            private bool? __pbn__active;
+
         }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class VirtualItem : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint def_index
+            {
+                get { return __pbn__def_index.GetValueOrDefault(); }
+                set { __pbn__def_index = value; }
+            }
+            public bool ShouldSerializedef_index() => __pbn__def_index != null;
+            public void Resetdef_index() => __pbn__def_index = null;
+            private uint? __pbn__def_index;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint equip_slot
+            {
+                get { return __pbn__equip_slot.GetValueOrDefault(); }
+                set { __pbn__equip_slot = value; }
+            }
+            public bool ShouldSerializeequip_slot() => __pbn__equip_slot != null;
+            public void Resetequip_slot() => __pbn__equip_slot = null;
+            private uint? __pbn__equip_slot;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint equip_sub_slot
+            {
+                get { return __pbn__equip_sub_slot.GetValueOrDefault(); }
+                set { __pbn__equip_sub_slot = value; }
+            }
+            public bool ShouldSerializeequip_sub_slot() => __pbn__equip_sub_slot != null;
+            public void Resetequip_sub_slot() => __pbn__equip_sub_slot = null;
+            private uint? __pbn__equip_sub_slot;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCEventRequestInfoSync : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint account_id
+        {
+            get { return __pbn__account_id.GetValueOrDefault(); }
+            set { __pbn__account_id = value; }
+        }
+        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+        public void Resetaccount_id() => __pbn__account_id = null;
+        private uint? __pbn__account_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint event_id
+        {
+            get { return __pbn__event_id.GetValueOrDefault(); }
+            set { __pbn__event_id = value; }
+        }
+        public bool ShouldSerializeevent_id() => __pbn__event_id != null;
+        public void Resetevent_id() => __pbn__event_id = null;
+        private uint? __pbn__event_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCEventRequestInfoSyncResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse result
+        {
+            get { return __pbn__result ?? EResponse.k_eInternalError; }
+            set { __pbn__result = value; }
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResponse? __pbn__result;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgGCToClientEventInfo event_info { get; set; }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eInvalidEventID = 3,
+            k_eInvalidPermissions = 4,
+            k_eRateLimited = 5,
+            k_eDisabled = 6,
+            k_eTooBusy = 7,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToClientEventInfoSerialize : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgGCToClientEventInfo event_info { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint time_stamp
+        {
+            get { return __pbn__time_stamp.GetValueOrDefault(); }
+            set { __pbn__time_stamp = value; }
+        }
+        public bool ShouldSerializetime_stamp() => __pbn__time_stamp != null;
+        public void Resettime_stamp() => __pbn__time_stamp = null;
+        private uint? __pbn__time_stamp;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint version
+        {
+            get { return __pbn__version.GetValueOrDefault(); }
+            set { __pbn__version = value; }
+        }
+        public bool ShouldSerializeversion() => __pbn__version != null;
+        public void Resetversion() => __pbn__version = null;
+        private uint? __pbn__version;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint account_id
+        {
+            get { return __pbn__account_id.GetValueOrDefault(); }
+            set { __pbn__account_id = value; }
+        }
+        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+        public void Resetaccount_id() => __pbn__account_id = null;
+        private uint? __pbn__account_id;
 
     }
 
@@ -1483,14 +1705,10 @@ namespace SteamKit2.GC.Underlords.Internal
         public global::System.Collections.Generic.List<Achievement> achievements { get; } = new global::System.Collections.Generic.List<Achievement>();
 
         [global::ProtoBuf.ProtoMember(3)]
-        public uint event_points
-        {
-            get { return __pbn__event_points.GetValueOrDefault(); }
-            set { __pbn__event_points = value; }
-        }
-        public bool ShouldSerializeevent_points() => __pbn__event_points != null;
-        public void Resetevent_points() => __pbn__event_points = null;
-        private uint? __pbn__event_points;
+        public global::System.Collections.Generic.List<Currency> currencies { get; } = new global::System.Collections.Generic.List<Currency>();
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<Challenge> challenges { get; } = new global::System.Collections.Generic.List<Challenge>();
 
         [global::ProtoBuf.ProtoContract()]
         public partial class Item : global::ProtoBuf.IExtensible
@@ -1550,6 +1768,84 @@ namespace SteamKit2.GC.Underlords.Internal
 
         }
 
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Currency : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint currency_id
+            {
+                get { return __pbn__currency_id.GetValueOrDefault(); }
+                set { __pbn__currency_id = value; }
+            }
+            public bool ShouldSerializecurrency_id() => __pbn__currency_id != null;
+            public void Resetcurrency_id() => __pbn__currency_id = null;
+            private uint? __pbn__currency_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint grant
+            {
+                get { return __pbn__grant.GetValueOrDefault(); }
+                set { __pbn__grant = value; }
+            }
+            public bool ShouldSerializegrant() => __pbn__grant != null;
+            public void Resetgrant() => __pbn__grant = null;
+            private uint? __pbn__grant;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Challenge : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint challenge_slot
+            {
+                get { return __pbn__challenge_slot.GetValueOrDefault(); }
+                set { __pbn__challenge_slot = value; }
+            }
+            public bool ShouldSerializechallenge_slot() => __pbn__challenge_slot != null;
+            public void Resetchallenge_slot() => __pbn__challenge_slot = null;
+            private uint? __pbn__challenge_slot;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint progress
+            {
+                get { return __pbn__progress.GetValueOrDefault(); }
+                set { __pbn__progress = value; }
+            }
+            public bool ShouldSerializeprogress() => __pbn__progress != null;
+            public void Resetprogress() => __pbn__progress = null;
+            private uint? __pbn__progress;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public bool activated
+            {
+                get { return __pbn__activated.GetValueOrDefault(); }
+                set { __pbn__activated = value; }
+            }
+            public bool ShouldSerializeactivated() => __pbn__activated != null;
+            public void Resetactivated() => __pbn__activated = null;
+            private bool? __pbn__activated;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public bool rolled
+            {
+                get { return __pbn__rolled.GetValueOrDefault(); }
+                set { __pbn__rolled = value; }
+            }
+            public bool ShouldSerializerolled() => __pbn__rolled != null;
+            public void Resetrolled() => __pbn__rolled = null;
+            private bool? __pbn__rolled;
+
+        }
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1600,6 +1896,9 @@ namespace SteamKit2.GC.Underlords.Internal
 
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<ulong> item_id { get; } = new global::System.Collections.Generic.List<ulong>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<uint> loadout_sub_slot { get; } = new global::System.Collections.Generic.List<uint>();
 
     }
 
@@ -2275,6 +2574,299 @@ namespace SteamKit2.GC.Underlords.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCEventEquipVirtualItem : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint event_id
+        {
+            get { return __pbn__event_id.GetValueOrDefault(); }
+            set { __pbn__event_id = value; }
+        }
+        public bool ShouldSerializeevent_id() => __pbn__event_id != null;
+        public void Resetevent_id() => __pbn__event_id = null;
+        private uint? __pbn__event_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint def_index
+        {
+            get { return __pbn__def_index.GetValueOrDefault(); }
+            set { __pbn__def_index = value; }
+        }
+        public bool ShouldSerializedef_index() => __pbn__def_index != null;
+        public void Resetdef_index() => __pbn__def_index = null;
+        private uint? __pbn__def_index;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint equip_slot
+        {
+            get { return __pbn__equip_slot.GetValueOrDefault(); }
+            set { __pbn__equip_slot = value; }
+        }
+        public bool ShouldSerializeequip_slot() => __pbn__equip_slot != null;
+        public void Resetequip_slot() => __pbn__equip_slot = null;
+        private uint? __pbn__equip_slot;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint equip_sub_slot
+        {
+            get { return __pbn__equip_sub_slot.GetValueOrDefault(); }
+            set { __pbn__equip_sub_slot = value; }
+        }
+        public bool ShouldSerializeequip_sub_slot() => __pbn__equip_sub_slot != null;
+        public void Resetequip_sub_slot() => __pbn__equip_sub_slot = null;
+        private uint? __pbn__equip_sub_slot;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCEventEquipVirtualItemResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse result
+        {
+            get { return __pbn__result ?? EResponse.k_eInternalError; }
+            set { __pbn__result = value; }
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResponse? __pbn__result;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eDisabled = 2,
+            k_eTooBusy = 3,
+            k_eInvalidItem = 4,
+            k_eInvalidSlot = 5,
+            k_eEventInactive = 6,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCDevEventOperation : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EOperation.k_eOp_Reset)]
+        public EOperation operation
+        {
+            get { return __pbn__operation ?? EOperation.k_eOp_Reset; }
+            set { __pbn__operation = value; }
+        }
+        public bool ShouldSerializeoperation() => __pbn__operation != null;
+        public void Resetoperation() => __pbn__operation = null;
+        private EOperation? __pbn__operation;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint event_id
+        {
+            get { return __pbn__event_id.GetValueOrDefault(); }
+            set { __pbn__event_id = value; }
+        }
+        public bool ShouldSerializeevent_id() => __pbn__event_id != null;
+        public void Resetevent_id() => __pbn__event_id = null;
+        private uint? __pbn__event_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint id
+        {
+            get { return __pbn__id.GetValueOrDefault(); }
+            set { __pbn__id = value; }
+        }
+        public bool ShouldSerializeid() => __pbn__id != null;
+        public void Resetid() => __pbn__id = null;
+        private uint? __pbn__id;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint amount
+        {
+            get { return __pbn__amount.GetValueOrDefault(); }
+            set { __pbn__amount = value; }
+        }
+        public bool ShouldSerializeamount() => __pbn__amount != null;
+        public void Resetamount() => __pbn__amount = null;
+        private uint? __pbn__amount;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EOperation
+        {
+            k_eOp_Reset = 0,
+            k_eOp_GrantCurrency = 1,
+            k_eOp_GrantChallenge = 2,
+            k_eOp_RerollCooldown = 3,
+            k_eOp_SetCurrencyLevel = 4,
+            k_eOp_SetCurrencyValue = 5,
+            k_eOp_SetChallengeValue = 6,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCDevEventOperationResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToClientUpdateConsoleCommands : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<string> console_commands { get; } = new global::System.Collections.Generic.List<string>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCPerformAutoActions : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint event_id
+        {
+            get { return __pbn__event_id.GetValueOrDefault(); }
+            set { __pbn__event_id = value; }
+        }
+        public bool ShouldSerializeevent_id() => __pbn__event_id != null;
+        public void Resetevent_id() => __pbn__event_id = null;
+        private uint? __pbn__event_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool update_auto_claims
+        {
+            get { return __pbn__update_auto_claims.GetValueOrDefault(); }
+            set { __pbn__update_auto_claims = value; }
+        }
+        public bool ShouldSerializeupdate_auto_claims() => __pbn__update_auto_claims != null;
+        public void Resetupdate_auto_claims() => __pbn__update_auto_claims = null;
+        private bool? __pbn__update_auto_claims;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<uint> update_challenge_slots { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public global::System.Collections.Generic.List<uint> update_claims { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint client_version
+        {
+            get { return __pbn__client_version.GetValueOrDefault(); }
+            set { __pbn__client_version = value; }
+        }
+        public bool ShouldSerializeclient_version() => __pbn__client_version != null;
+        public void Resetclient_version() => __pbn__client_version = null;
+        private uint? __pbn__client_version;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCPerformAutoActionsResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse result
+        {
+            get { return __pbn__result ?? EResponse.k_eInternalError; }
+            set { __pbn__result = value; }
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResponse? __pbn__result;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgEventClaimRewards rewards { get; set; }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eDisabled = 2,
+            k_eTooBusy = 3,
+            k_eInvalidEventID = 4,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCSetActiveUnderlord : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint underlord_id
+        {
+            get { return __pbn__underlord_id.GetValueOrDefault(); }
+            set { __pbn__underlord_id = value; }
+        }
+        public bool ShouldSerializeunderlord_id() => __pbn__underlord_id != null;
+        public void Resetunderlord_id() => __pbn__underlord_id = null;
+        private uint? __pbn__underlord_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCSetActiveUnderlordResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse result
+        {
+            get { return __pbn__result ?? EResponse.k_eInternalError; }
+            set { __pbn__result = value; }
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResponse? __pbn__result;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eDisabled = 2,
+            k_eTooBusy = 3,
+            k_eInvalidID = 4,
+            k_eUnowned = 5,
+            k_eUnavailable = 6,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EGCDACClientMessages
     {
         k_EMsgClientToGCStartMatchmaking = 9010,
@@ -2331,6 +2923,17 @@ namespace SteamKit2.GC.Underlords.Internal
         k_EMsgClientToGCRedeemFriendCodeResponse = 9162,
         k_EMsgClientToGCRevokeFriendCode = 9163,
         k_EMsgClientToGCRevokeFriendCodeResponse = 9164,
+        k_EMsgClientToGCEventRequestInfoSync = 9165,
+        k_EMsgClientToGCEventRequestInfoSyncResponse = 9166,
+        k_EMsgClientToGCEventEquipVirtualItem = 9167,
+        k_EMsgClientToGCEventEquipVirtualItemResponse = 9168,
+        k_EMsgClientToGCDevEventOperation = 9169,
+        k_EMsgClientToGCDevEventOperationResponse = 9170,
+        k_EMsgGCToClientUpdateConsoleCommands = 9171,
+        k_EMsgClientToGCPerformAutoActions = 9172,
+        k_EMsgClientToGCPerformAutoActionsResponse = 9173,
+        k_EMsgClientToGCSetActiveUnderlord = 9174,
+        k_EMsgClientToGCSetActiveUnderlordResponse = 9175,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2340,6 +2943,17 @@ namespace SteamKit2.GC.Underlords.Internal
         k_EItemEditorReservationResult_AlreadyExists = 2,
         k_EItemEditorReservationResult_Reserved = 3,
         k_EItemEditorReservationResult_TimedOut = 4,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EClientStatsEvent
+    {
+        k_EClientStatsEvent_Boot = 1,
+        k_EClientStatsEvent_StartMatch = 2,
+        k_EClientStatsEvent_AbandonMatch = 3,
+        k_EClientStatsEvent_FinishMatch = 4,
+        k_EClientStatsEvent_StartSteamSignon = 5,
+        k_EClientStatsEvent_FinishSteamSignon = 6,
     }
 
 }

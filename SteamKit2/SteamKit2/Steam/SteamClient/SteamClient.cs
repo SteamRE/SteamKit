@@ -80,7 +80,6 @@ namespace SteamKit2
             dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
                 { EMsg.ClientCMList, HandleCMList },
-                { EMsg.ClientServerList, HandleServerList },
 
                 // to support asyncjob life time
                 { EMsg.JobHeartbeat, HandleJobHeartbeat },
@@ -408,12 +407,6 @@ namespace SteamKit2
             var cmMsg = new ClientMsgProtobuf<CMsgClientCMList>( packetMsg );
 
             PostCallback( new CMListCallback( cmMsg.Body ) );
-        }
-        void HandleServerList( IPacketMsg packetMsg )
-        {
-            var listMsg = new ClientMsgProtobuf<CMsgClientServerList>( packetMsg );
-
-            PostCallback( new ServerListCallback( listMsg.Body ) );
         }
 
         void HandleJobHeartbeat( IPacketMsg packetMsg )

@@ -92,6 +92,9 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public global::System.Collections.Generic.List<CMsgMatchTips> match_tips { get; } = new global::System.Collections.Generic.List<CMsgMatchTips>();
 
+        [global::ProtoBuf.ProtoMember(8)]
+        public CMsgMatchMatchmakingStats matchmaking_stats { get; set; }
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Team : global::ProtoBuf.IExtensible
         {
@@ -1080,14 +1083,25 @@ namespace SteamKit2.GC.Dota.Internal
                 private uint? __pbn__wards_dewarded;
 
                 [global::ProtoBuf.ProtoMember(45)]
-                public uint stun_duration
+                public float stun_duration
                 {
                     get { return __pbn__stun_duration.GetValueOrDefault(); }
                     set { __pbn__stun_duration = value; }
                 }
                 public bool ShouldSerializestun_duration() => __pbn__stun_duration != null;
                 public void Resetstun_duration() => __pbn__stun_duration = null;
-                private uint? __pbn__stun_duration;
+                private float? __pbn__stun_duration;
+
+                [global::ProtoBuf.ProtoMember(46)]
+                [global::System.ComponentModel.DefaultValue(EDOTAMMRBoostType.k_EDOTAMMRBoostType_None)]
+                public EDOTAMMRBoostType rank_mmr_boost_type
+                {
+                    get { return __pbn__rank_mmr_boost_type ?? EDOTAMMRBoostType.k_EDOTAMMRBoostType_None; }
+                    set { __pbn__rank_mmr_boost_type = value; }
+                }
+                public bool ShouldSerializerank_mmr_boost_type() => __pbn__rank_mmr_boost_type != null;
+                public void Resetrank_mmr_boost_type() => __pbn__rank_mmr_boost_type = null;
+                private EDOTAMMRBoostType? __pbn__rank_mmr_boost_type;
 
             }
 

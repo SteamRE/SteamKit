@@ -22,30 +22,12 @@ namespace NetHookAnalyzer2.Specializations
 				yield break;
 			}
 
-			foreach(var singleObject in updateMultiple.objects_added)
-			{
-				var extraNode = ReadExtraObject(singleObject);
-				if (extraNode != null)
-				{
-					yield return new KeyValuePair<string, object>(string.Format("New SO ({0})", extraNode.GetType().Name), extraNode);
-				}
-			}
-
 			foreach (var singleObject in updateMultiple.objects_modified)
 			{
 				var extraNode = ReadExtraObject(singleObject);
 				if (extraNode != null)
 				{
 					yield return new KeyValuePair<string, object>(string.Format("Modified SO ({0})", extraNode.GetType().Name), extraNode);
-				}
-			}
-
-			foreach (var singleObject in updateMultiple.objects_removed)
-			{
-				var extraNode = ReadExtraObject(singleObject);
-				if (extraNode != null)
-				{
-					yield return new KeyValuePair<string, object>(string.Format("Removed SO ({0})", extraNode.GetType().Name), extraNode);
 				}
 			}
 		}

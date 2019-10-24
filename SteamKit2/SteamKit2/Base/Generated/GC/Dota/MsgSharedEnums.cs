@@ -966,6 +966,97 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetunit_status_label() => __pbn__unit_status_label = null;
         private uint? __pbn__unit_status_label;
 
+        [global::ProtoBuf.ProtoMember(73)]
+        public bool spell_generated_attack
+        {
+            get { return __pbn__spell_generated_attack.GetValueOrDefault(); }
+            set { __pbn__spell_generated_attack = value; }
+        }
+        public bool ShouldSerializespell_generated_attack() => __pbn__spell_generated_attack != null;
+        public void Resetspell_generated_attack() => __pbn__spell_generated_attack = null;
+        private bool? __pbn__spell_generated_attack;
+
+        [global::ProtoBuf.ProtoMember(74)]
+        public bool at_night_time
+        {
+            get { return __pbn__at_night_time.GetValueOrDefault(); }
+            set { __pbn__at_night_time = value; }
+        }
+        public bool ShouldSerializeat_night_time() => __pbn__at_night_time != null;
+        public void Resetat_night_time() => __pbn__at_night_time = null;
+        private bool? __pbn__at_night_time;
+
+        [global::ProtoBuf.ProtoMember(75)]
+        public bool attacker_has_scepter
+        {
+            get { return __pbn__attacker_has_scepter.GetValueOrDefault(); }
+            set { __pbn__attacker_has_scepter = value; }
+        }
+        public bool ShouldSerializeattacker_has_scepter() => __pbn__attacker_has_scepter != null;
+        public void Resetattacker_has_scepter() => __pbn__attacker_has_scepter = null;
+        private bool? __pbn__attacker_has_scepter;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgPendingEventAward : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
+        public EEvent event_id
+        {
+            get { return __pbn__event_id ?? EEvent.EVENT_ID_NONE; }
+            set { __pbn__event_id = value; }
+        }
+        public bool ShouldSerializeevent_id() => __pbn__event_id != null;
+        public void Resetevent_id() => __pbn__event_id = null;
+        private EEvent? __pbn__event_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint action_id
+        {
+            get { return __pbn__action_id.GetValueOrDefault(); }
+            set { __pbn__action_id = value; }
+        }
+        public bool ShouldSerializeaction_id() => __pbn__action_id != null;
+        public void Resetaction_id() => __pbn__action_id = null;
+        private uint? __pbn__action_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint num_to_grant
+        {
+            get { return __pbn__num_to_grant.GetValueOrDefault(); }
+            set { __pbn__num_to_grant = value; }
+        }
+        public bool ShouldSerializenum_to_grant() => __pbn__num_to_grant != null;
+        public void Resetnum_to_grant() => __pbn__num_to_grant = null;
+        private uint? __pbn__num_to_grant;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(EEventActionScoreMode.k_eEventActionScoreMode_Add)]
+        public EEventActionScoreMode score_mode
+        {
+            get { return __pbn__score_mode ?? EEventActionScoreMode.k_eEventActionScoreMode_Add; }
+            set { __pbn__score_mode = value; }
+        }
+        public bool ShouldSerializescore_mode() => __pbn__score_mode != null;
+        public void Resetscore_mode() => __pbn__score_mode = null;
+        private EEventActionScoreMode? __pbn__score_mode;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint audit_action
+        {
+            get { return __pbn__audit_action.GetValueOrDefault(); }
+            set { __pbn__audit_action = value; }
+        }
+        public bool ShouldSerializeaudit_action() => __pbn__audit_action != null;
+        public void Resetaudit_action() => __pbn__audit_action = null;
+        private uint? __pbn__audit_action;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1035,6 +1126,7 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_SPRING_FESTIVAL = 2,
         EVENT_ID_FROSTIVUS_2013 = 3,
         EVENT_ID_COMPENDIUM_2014 = 4,
+        EVENT_ID_NEXON_PC_BANG = 5,
         EVENT_ID_PWRD_DAC_2015 = 6,
         EVENT_ID_NEW_BLOOM_2015 = 7,
         EVENT_ID_INTERNATIONAL_2015 = 8,
@@ -1265,11 +1357,21 @@ namespace SteamKit2.GC.Dota.Internal
     {
         k_EDOTAPlayerMMRType_Invalid = 0,
         k_EDOTAPlayerMMRType_GeneralHidden = 1,
-        k_EDOTAPlayerMMRType_GeneralCompetitive = 3,
-        k_EDOTAPlayerMMRType_SoloCompetitive = 4,
+        k_EDOTAPlayerMMRType_GeneralCompetitive2019 = 3,
+        k_EDOTAPlayerMMRType_SoloCompetitive2019 = 4,
         k_EDOTAPlayerMMRType_1v1Competitive_UNUSED = 5,
         k_EDOTAPlayerMMRType_GeneralSeasonalRanked = 6,
         k_EDOTAPlayerMMRType_SoloSeasonalRanked = 7,
+        k_EDOTAPlayerMMRType_Competitive_Core = 8,
+        k_EDOTAPlayerMMRType_Competitive_Support = 9,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EDOTAMMRBoostType
+    {
+        k_EDOTAMMRBoostType_None = 0,
+        k_EDOTAMMRBoostType_Leader = 1,
+        k_EDOTAMMRBoostType_Follower = 2,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1277,7 +1379,7 @@ namespace SteamKit2.GC.Dota.Internal
     {
         MATCH_TYPE_CASUAL = 0,
         MATCH_TYPE_COOP_BOTS = 1,
-        MATCH_TYPE_TEAM_RANKED = 2,
+        MATCH_TYPE_LEGACY_TEAM_RANKED = 2,
         MATCH_TYPE_LEGACY_SOLO_QUEUE = 3,
         MATCH_TYPE_COMPETITIVE = 4,
         MATCH_TYPE_WEEKEND_TOURNEY = 5,
@@ -1594,6 +1696,13 @@ namespace SteamKit2.GC.Dota.Internal
         DPC_PUSH_NOTIFICATION_FANTASY_PLAYER_CLEARED = 40,
         DPC_PUSH_NOTIFICATION_FANTASY_DAILY_SUMMARY = 41,
         DPC_PUSH_NOTIFICATION_FANTASY_FINAL_RESULTS = 42,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EEventActionScoreMode
+    {
+        k_eEventActionScoreMode_Add = 0,
+        k_eEventActionScoreMode_Min = 1,
     }
 
 }

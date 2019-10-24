@@ -400,6 +400,20 @@ namespace SteamKit2.Unified.Internal
         public void Resetflags() => __pbn__flags = null;
         private uint? __pbn__flags;
 
+        [global::ProtoBuf.ProtoMember(9)]
+        public global::System.Collections.Generic.List<string> platforms_to_sync { get; } = new global::System.Collections.Generic.List<string>();
+
+        [global::ProtoBuf.ProtoMember(10)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string file_sha
+        {
+            get { return __pbn__file_sha ?? ""; }
+            set { __pbn__file_sha = value; }
+        }
+        public bool ShouldSerializefile_sha() => __pbn__file_sha != null;
+        public void Resetfile_sha() => __pbn__file_sha = null;
+        private string __pbn__file_sha;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -740,6 +754,36 @@ namespace SteamKit2.Unified.Internal
         public bool ShouldSerializecellid() => __pbn__cellid != null;
         public void Resetcellid() => __pbn__cellid = null;
         private uint? __pbn__cellid;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public bool proxied
+        {
+            get { return __pbn__proxied.GetValueOrDefault(); }
+            set { __pbn__proxied = value; }
+        }
+        public bool ShouldSerializeproxied() => __pbn__proxied != null;
+        public void Resetproxied() => __pbn__proxied = null;
+        private bool? __pbn__proxied;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public bool ipv6_local
+        {
+            get { return __pbn__ipv6_local.GetValueOrDefault(); }
+            set { __pbn__ipv6_local = value; }
+        }
+        public bool ShouldSerializeipv6_local() => __pbn__ipv6_local != null;
+        public void Resetipv6_local() => __pbn__ipv6_local = null;
+        private bool? __pbn__ipv6_local;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public bool ipv6_remote
+        {
+            get { return __pbn__ipv6_remote.GetValueOrDefault(); }
+            set { __pbn__ipv6_remote = value; }
+        }
+        public bool ShouldSerializeipv6_remote() => __pbn__ipv6_remote != null;
+        public void Resetipv6_remote() => __pbn__ipv6_remote = null;
+        private bool? __pbn__ipv6_remote;
 
     }
 

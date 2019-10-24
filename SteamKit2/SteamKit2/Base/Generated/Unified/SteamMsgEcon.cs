@@ -474,6 +474,28 @@ namespace SteamKit2.Unified.Internal
         public void Resetitem_expiration() => __pbn__item_expiration = null;
         private string __pbn__item_expiration;
 
+        [global::ProtoBuf.ProtoMember(30)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string market_buy_country_restriction
+        {
+            get { return __pbn__market_buy_country_restriction ?? ""; }
+            set { __pbn__market_buy_country_restriction = value; }
+        }
+        public bool ShouldSerializemarket_buy_country_restriction() => __pbn__market_buy_country_restriction != null;
+        public void Resetmarket_buy_country_restriction() => __pbn__market_buy_country_restriction = null;
+        private string __pbn__market_buy_country_restriction;
+
+        [global::ProtoBuf.ProtoMember(31)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string market_sell_country_restriction
+        {
+            get { return __pbn__market_sell_country_restriction ?? ""; }
+            set { __pbn__market_sell_country_restriction = value; }
+        }
+        public bool ShouldSerializemarket_sell_country_restriction() => __pbn__market_sell_country_restriction != null;
+        public void Resetmarket_sell_country_restriction() => __pbn__market_sell_country_restriction = null;
+        private string __pbn__market_sell_country_restriction;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

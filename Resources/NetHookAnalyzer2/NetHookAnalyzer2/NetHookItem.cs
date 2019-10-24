@@ -125,13 +125,13 @@ namespace NetHookAnalyzer2
 
 				case SteamKit2.EMsg.ClientServiceMethodLegacy:
 				{
-					var proto = ReadAsProtobufMsg<CMsgClientServiceMethod>();
+					var proto = ReadAsProtobufMsg<CMsgClientServiceMethodLegacy>();
 					return proto.Body.method_name;
 				}
 
 				case SteamKit2.EMsg.ClientServiceMethodLegacyResponse:
 				{
-					var proto = ReadAsProtobufMsg<CMsgClientServiceMethodResponse>();
+					var proto = ReadAsProtobufMsg<CMsgClientServiceMethodLegacyResponse>();
 					return proto.Body.method_name;
 				}
 

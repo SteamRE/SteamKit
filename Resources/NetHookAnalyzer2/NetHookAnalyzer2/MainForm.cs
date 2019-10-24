@@ -306,13 +306,16 @@ namespace NetHookAnalyzer2
 				return;
 			}
 
-			var listViewItem = item.AsListViewItem();
-			itemsListView.Items.Add(listViewItem);
-			
-			if (automaticallySelectNewItemsToolStripMenuItem.Checked)
+			itemsListView.Invoke( ( MethodInvoker ) delegate ()
 			{
-				SelectLastItem();
-			}
+				var listViewItem = item.AsListViewItem();
+				itemsListView.Items.Add( listViewItem );
+
+				if ( automaticallySelectNewItemsToolStripMenuItem.Checked )
+				{
+					SelectLastItem();
+				}
+			} );
 		}
 
 		void OnFolderWatcherCreated(object sender, FileSystemEventArgs e)

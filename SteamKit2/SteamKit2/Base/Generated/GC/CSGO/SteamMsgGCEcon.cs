@@ -307,6 +307,8 @@ namespace SteamKit2.GC.CSGO.Internal
     {
         k_EGCItemCustomizationNotification_NameItem = 1006,
         k_EGCItemCustomizationNotification_UnlockCrate = 1007,
+        k_EGCItemCustomizationNotification_XRayItemReveal = 1008,
+        k_EGCItemCustomizationNotification_XRayItemClaim = 1009,
         k_EGCItemCustomizationNotification_NameBaseItem = 1019,
         k_EGCItemCustomizationNotification_RemoveItemName = 1030,
         k_EGCItemCustomizationNotification_RemoveSticker = 1053,

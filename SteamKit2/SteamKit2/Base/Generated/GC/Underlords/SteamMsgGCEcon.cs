@@ -4045,6 +4045,16 @@ namespace SteamKit2.GC.Underlords.Internal
         public void Resetserver_deployed_version() => __pbn__server_deployed_version = null;
         private uint? __pbn__server_deployed_version;
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint what_changed
+        {
+            get { return __pbn__what_changed.GetValueOrDefault(); }
+            set { __pbn__what_changed = value; }
+        }
+        public bool ShouldSerializewhat_changed() => __pbn__what_changed != null;
+        public void Resetwhat_changed() => __pbn__what_changed = null;
+        private uint? __pbn__what_changed;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
