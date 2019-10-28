@@ -124,7 +124,7 @@ namespace NetHookAnalyzer2
 			}
 			else
 			{
-				predicate = nhi => (nhi.Name.IndexOf(searchTerm, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
+				predicate = nhi => (nhi.EMsg.ToString().IndexOf(searchTerm, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
 					(nhi.InnerMessageName != null && nhi.InnerMessageName.IndexOf(searchTerm, StringComparison.InvariantCultureIgnoreCase) >= 0);
 			}
 

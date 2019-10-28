@@ -7,7 +7,7 @@ namespace NetHookAnalyzer2
 	{
 		public static ListViewItem AsListViewItem(this NetHookItem item)
 		{
-			var lvi = new ListViewItem(item.Name)
+			var lvi = new ListViewItem(item.EMsg.ToString())
 			{
 				Tag = item
 			};
@@ -33,7 +33,7 @@ namespace NetHookAnalyzer2
 			lvi.SubItems.Add(new ListViewItem.ListViewSubItem
 			{
 				Name = "Message",
-				Text = item.Name,
+				Text = item.EMsg.ToString(),
 			});
 
 			lvi.SubItems.Add(new ListViewItem.ListViewSubItem
