@@ -5,13 +5,10 @@
 
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -485,12 +482,6 @@ namespace SteamKit2
             httpClient.Dispose();
         }
 
-        string BuildCommand( Server server, string command, string args )
-        {
-            string protocol = server.Protocol == Server.ConnectionProtocol.HTTP ? "http" : "https";
-            return string.Format( "{0}://{1}:{2}/{3}{4}", protocol, server.VHost, server.Port, command, args );
-        }
-
         async Task<byte[]> DoRawCommandAsync( Server server, string command, string? args )
         {
             var url = BuildCommand( server, command, args ?? string.Empty );
@@ -520,25 +511,18 @@ namespace SteamKit2
             }
         }
 
-        async Task<KeyValue> DoCommandAsync( Server server, string command, string? args )
+        static Uri BuildCommand( Server server, string command, string args )
         {
-            var resultData = await DoRawCommandAsync( server, command, args ).ConfigureAwait( false );
-
-            var dataKv = new KeyValue();
-
-            using ( MemoryStream ms = new MemoryStream( resultData ) )
+            var uriBuilder = new UriBuilder
             {
-                try
-                {
-                    dataKv.ReadAsText( ms );
-                }
-                catch ( Exception ex )
-                {
-                    throw new InvalidDataException( "An internal error occurred while attempting to parse the response from the CS server.", ex );
-                }
-            }
+                Scheme = server.Protocol == Server.ConnectionProtocol.HTTP ? "http" : "https",
+                Host = server.VHost,
+                Port = server.Port,
+                Path = command,
+                Query = args
+            };
 
-            return dataKv;
+            return uriBuilder.Uri;
         }
     }
 }
