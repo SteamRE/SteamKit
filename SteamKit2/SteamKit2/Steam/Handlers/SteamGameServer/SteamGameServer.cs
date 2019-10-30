@@ -119,8 +119,7 @@ namespace SteamKit2
             logon.ProtoHeader.client_sessionid = 0;
             logon.ProtoHeader.steamid = gsId.ConvertToUInt64();
 
-            uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP! );
-            logon.Body.deprecated_obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
+            logon.Body.obfuscated_private_ip = NetHelpers.ObfuscatePrivateIP( this.Client.LocalIP! );
 
             logon.Body.protocol_version = MsgClientLogon.CurrentProtocol;
 
@@ -154,8 +153,7 @@ namespace SteamKit2
             logon.ProtoHeader.client_sessionid = 0;
             logon.ProtoHeader.steamid = gsId.ConvertToUInt64();
 
-            uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP! );
-            logon.Body.deprecated_obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
+            logon.Body.obfuscated_private_ip = NetHelpers.ObfuscatePrivateIP( this.Client.LocalIP! );
 
             logon.Body.protocol_version = MsgClientLogon.CurrentProtocol;
 
