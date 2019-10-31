@@ -292,7 +292,7 @@ namespace SteamKit2
             {
                 if ( IsMachineInfoProviderInitialized )
                 {
-                    throw new InvalidOperationException(nameof(MachineInfoProvider) + " can't be re-set after initialization.");
+                    throw new InvalidOperationException(nameof(MachineInfoProvider) + " can't be (re-)set after its initialization.");
                 }
 
                 Interlocked.Exchange( ref machineInfoProvider, value );
