@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using System.Text;
+using System.Threading;
 using SteamKit2.Util;
 using SteamKit2.Util.MacHelpers;
 using Microsoft.Win32;
@@ -277,33 +278,37 @@ namespace SteamKit2
     /// </summary>
     public static class HardwareUtils
     {
-        private static IMachineInfoProvider userMachineInfoProvider;
+        private static IMachineInfoProvider machineInfoProvider;
         private static bool IsMachineInfoProviderInitialized;
 
         /// <summary>
         /// User-provided MachineInfoProvider.
         /// </summary>
         /// <exception cref="InvalidOperationException">Occurs when a user tries to (re-)set this property after its first usage.</exception>
-        public static IMachineInfoProvider UserMachineInfoProvider
+        public static IMachineInfoProvider MachineInfoProvider
         {
-            get => userMachineInfoProvider;
+            get => machineInfoProvider;
             set
             {
                 if ( IsMachineInfoProviderInitialized )
                 {
-                    throw new InvalidOperationException(nameof(UserMachineInfoProvider) + " can't be re-set.");
+                    throw new InvalidOperationException(nameof(MachineInfoProvider) + " can't be re-set after initialization.");
                 }
 
-                userMachineInfoProvider = value;
+                Interlocked.Exchange( ref machineInfoProvider, value );
             }
         }
 
-        internal static IMachineInfoProvider GetProvider()
+        private static IMachineInfoProvider GetProvider()
         {
-            IsMachineInfoProviderInitialized = true;
-            if ( UserMachineInfoProvider != null )
+            if ( !IsMachineInfoProviderInitialized )
             {
-                return UserMachineInfoProvider;
+                IsMachineInfoProviderInitialized = true;
+            }
+            
+            if ( MachineInfoProvider != null )
+            {
+                return MachineInfoProvider;
             }
             
             switch ( Environment.OSVersion.Platform )
@@ -350,9 +355,7 @@ namespace SteamKit2
             {
                 this.KeyValues["3B3"].Value = value;
             }
-
             
-            // 333 is some sort of user supplied data and is currently unused
             public void Set333( string value )
             {
                 this.KeyValues["333"] = new KeyValue( value: value );
@@ -361,9 +364,10 @@ namespace SteamKit2
         
         static Task<MachineID>? generateTask;
         
-        internal static void Init(IMachineInfoProvider provider)
+        internal static void Init(IMachineInfoProvider provider = null)
         {
-            generateTask = Task.Factory.StartNew( () => GenerateMachineID(provider) );
+            MachineInfoProvider = provider ?? GetProvider();
+            generateTask = Task.Factory.StartNew( GenerateMachineID );
         }
 
         internal static byte[]? GetMachineID()
@@ -391,7 +395,7 @@ namespace SteamKit2
         }
 
 
-        static MachineID GenerateMachineID(IMachineInfoProvider provider)
+        static MachineID GenerateMachineID()
         {
             // the aug 25th 2015 CM update made well-formed machine MessageObjects required for logon
             // this was flipped off shortly after the update rolled out, likely due to linux steamclients running on distros without a way to build a machineid
@@ -399,9 +403,9 @@ namespace SteamKit2
 
             var machineId = new MachineID();
 
-            machineId.SetBB3( GetHexString( provider.GetMachineGuid() ) );
-            machineId.SetFF2( GetHexString( provider.GetMacAddress() ) );
-            machineId.Set3B3( GetHexString( provider.GetDiskId() ) );
+            machineId.SetBB3( GetHexString( MachineInfoProvider.GetMachineGuid() ) );
+            machineId.SetFF2( GetHexString( MachineInfoProvider.GetMacAddress() ) );
+            machineId.Set3B3( GetHexString( MachineInfoProvider.GetDiskId() ) );
 
             // 333 is some sort of user supplied data and is currently unused
 
