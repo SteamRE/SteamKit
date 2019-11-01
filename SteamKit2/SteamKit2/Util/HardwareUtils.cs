@@ -301,11 +301,6 @@ namespace SteamKit2
 
         private static IMachineInfoProvider GetProvider()
         {
-            if ( !IsMachineInfoProviderInitialized )
-            {
-                IsMachineInfoProviderInitialized = true;
-            }
-            
             if ( MachineInfoProvider != null )
             {
                 return MachineInfoProvider;
@@ -367,6 +362,12 @@ namespace SteamKit2
         internal static void Init(IMachineInfoProvider provider = null)
         {
             MachineInfoProvider = provider ?? GetProvider();
+
+            if ( !IsMachineInfoProviderInitialized )
+            {
+                IsMachineInfoProviderInitialized = true;
+            }
+
             generateTask = Task.Factory.StartNew( GenerateMachineID );
         }
 
