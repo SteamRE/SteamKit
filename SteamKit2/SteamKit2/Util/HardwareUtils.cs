@@ -279,17 +279,17 @@ namespace SteamKit2
     public static class HardwareUtils
     {
         private static bool isMachineInfoProviderInitialized;
-        private static IMachineInfoProvider machineInfoProvider;
-        private static object setProviderLock = new object();
+        private static IMachineInfoProvider? machineInfoProvider;
+        private static readonly object setProviderLock = new object();
 
         /// <summary>
         /// MachineInfoProvider used for this device.
         /// </summary>
         /// <exception cref="InvalidOperationException">Occurs when a user tries to (re-)set this property after its first usage.</exception>
-        public static IMachineInfoProvider MachineInfoProvider
+        public static IMachineInfoProvider? MachineInfoProvider
         {
             get => machineInfoProvider;
-            set
+            private set
             {
                 if ( isMachineInfoProviderInitialized )
                 {
@@ -300,7 +300,7 @@ namespace SteamKit2
             }
         }
 
-        private static IMachineInfoProvider GetOSProvider()
+        internal static IMachineInfoProvider GetOSProvider()
         {
             switch ( Environment.OSVersion.Platform )
             {
@@ -355,16 +355,26 @@ namespace SteamKit2
         
         static Task<MachineID>? generateTask;
         
-        public static void Init(IMachineInfoProvider provider = null)
+        /// <summary>
+        /// Used for initializing <see cref="MachineInfoProvider"/>
+        /// </summary>
+        /// <param name="provider">User-provided <see cref="IMachineInfoProvider"/></param>
+        public static void Init(IMachineInfoProvider provider)
         {
-            if ( isMachineInfoProviderInitialized || ((provider == null) && (MachineInfoProvider != null)) )
+            if ( provider == null )
+            {
+                throw new ArgumentNullException( nameof(provider) );
+            }
+            
+            // Don't initialize MachineInfoProvider if it is already initialized
+            if ( isMachineInfoProviderInitialized )
             {
                 return;
             }
 
             lock ( setProviderLock )
             {
-                if ( isMachineInfoProviderInitialized || ((provider == null) && (MachineInfoProvider != null)) )
+                if ( isMachineInfoProviderInitialized )
                 {
                     return;
                 }
@@ -376,11 +386,6 @@ namespace SteamKit2
 
         internal static byte[]? GetMachineID()
         {
-            if ( !isMachineInfoProviderInitialized )
-            {
-                isMachineInfoProviderInitialized = true;
-            }
-
             if ( generateTask is null )
             {
                 DebugLog.WriteLine( nameof( HardwareUtils ), "GetMachineID() called before Init()" );
@@ -395,6 +400,11 @@ namespace SteamKit2
                 return null;
             }
 
+            if ( !isMachineInfoProviderInitialized )
+            {
+                isMachineInfoProviderInitialized = true;
+            }
+
             MachineID machineId = generateTask.Result;
 
             using MemoryStream ms = new MemoryStream();
@@ -402,7 +412,6 @@ namespace SteamKit2
 
             return ms.ToArray();
         }
-
 
         static MachineID GenerateMachineID()
         {
