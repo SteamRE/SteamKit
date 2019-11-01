@@ -278,11 +278,12 @@ namespace SteamKit2
     /// </summary>
     public static class HardwareUtils
     {
+        private static bool isMachineInfoProviderInitialized;
         private static IMachineInfoProvider machineInfoProvider;
-        private static bool IsMachineInfoProviderInitialized;
+        private static object setProviderLock = new object();
 
         /// <summary>
-        /// User-provided MachineInfoProvider.
+        /// MachineInfoProvider used for this device.
         /// </summary>
         /// <exception cref="InvalidOperationException">Occurs when a user tries to (re-)set this property after its first usage.</exception>
         public static IMachineInfoProvider MachineInfoProvider
@@ -290,7 +291,7 @@ namespace SteamKit2
             get => machineInfoProvider;
             set
             {
-                if ( IsMachineInfoProviderInitialized )
+                if ( isMachineInfoProviderInitialized )
                 {
                     throw new InvalidOperationException(nameof(MachineInfoProvider) + " can't be (re-)set after its initialization.");
                 }
@@ -299,13 +300,8 @@ namespace SteamKit2
             }
         }
 
-        private static IMachineInfoProvider GetProvider()
+        private static IMachineInfoProvider GetOSProvider()
         {
-            if ( MachineInfoProvider != null )
-            {
-                return MachineInfoProvider;
-            }
-            
             switch ( Environment.OSVersion.Platform )
             {
                 case PlatformID.Win32NT:
@@ -359,20 +355,32 @@ namespace SteamKit2
         
         static Task<MachineID>? generateTask;
         
-        internal static void Init(IMachineInfoProvider provider = null)
+        public static void Init(IMachineInfoProvider provider = null)
         {
-            MachineInfoProvider = provider ?? GetProvider();
-
-            if ( !IsMachineInfoProviderInitialized )
+            if ( isMachineInfoProviderInitialized || ((provider == null) && (MachineInfoProvider != null)) )
             {
-                IsMachineInfoProviderInitialized = true;
+                return;
             }
 
-            generateTask = Task.Factory.StartNew( GenerateMachineID );
+            lock ( setProviderLock )
+            {
+                if ( isMachineInfoProviderInitialized || ((provider == null) && (MachineInfoProvider != null)) )
+                {
+                    return;
+                }
+                
+                MachineInfoProvider = provider ?? GetOSProvider();
+                generateTask = Task.Factory.StartNew( GenerateMachineID );
+            }
         }
 
         internal static byte[]? GetMachineID()
         {
+            if ( !isMachineInfoProviderInitialized )
+            {
+                isMachineInfoProviderInitialized = true;
+            }
+
             if ( generateTask is null )
             {
                 DebugLog.WriteLine( nameof( HardwareUtils ), "GetMachineID() called before Init()" );
