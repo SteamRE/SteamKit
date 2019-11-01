@@ -24,21 +24,21 @@ namespace Tests
             {
                 case PlatformID.Win32NT:
                 case PlatformID.Win32Windows:
-                    Assert.IsType<WindowsInfoProvider>( HardwareUtils.MachineInfoProvider );
+                    Assert.IsType<WindowsInfoProvider>( machineInfoProvider );
                     break;
                 case PlatformID.Unix:
                     if ( Utils.IsMacOS() )
                     {
-                        Assert.IsType<OSXInfoProvider>( HardwareUtils.MachineInfoProvider );
+                        Assert.IsType<OSXInfoProvider>( machineInfoProvider );
                     }
                     else
                     {
-                        Assert.IsType<LinuxInfoProvider>( HardwareUtils.MachineInfoProvider );
+                        Assert.IsType<LinuxInfoProvider>( machineInfoProvider );
                     }
 
                     break;
                 default:
-                    Assert.IsType<DefaultInfoProvider>( HardwareUtils.MachineInfoProvider );
+                    Assert.IsType<DefaultInfoProvider>( machineInfoProvider );
                     break;
             }
         }

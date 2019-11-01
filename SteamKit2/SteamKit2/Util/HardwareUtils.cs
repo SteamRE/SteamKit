@@ -379,7 +379,7 @@ namespace SteamKit2
                     return;
                 }
                 
-                MachineInfoProvider = provider ?? GetOSProvider();
+                MachineInfoProvider = provider;
                 generateTask = Task.Factory.StartNew( GenerateMachineID );
             }
         }
