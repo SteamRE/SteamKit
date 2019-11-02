@@ -520,8 +520,9 @@ namespace SteamKit2.Internal
             }
 
             var logonResp = new ClientMsgProtobuf<CMsgClientLogonResponse>( packetMsg );
+            var logonResult = ( EResult )logonResp.Body.eresult;
 
-            if ( logonResp.Body.eresult == ( int )EResult.OK )
+            if ( logonResult == EResult.OK )
             {
                 SessionID = logonResp.ProtoHeader.client_sessionid;
                 SteamID = logonResp.ProtoHeader.steamid;
@@ -536,6 +537,10 @@ namespace SteamKit2.Internal
                 heartBeatFunc.Stop();
                 heartBeatFunc.Delay = TimeSpan.FromSeconds( hbDelay );
                 heartBeatFunc.Start();
+            }
+            else if ( logonResult == EResult.TryAnotherCM || logonResult == EResult.ServiceUnavailable )
+            {
+                Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Bad );
             }
         }
         void HandleLoggedOff( IPacketMsg packetMsg )
