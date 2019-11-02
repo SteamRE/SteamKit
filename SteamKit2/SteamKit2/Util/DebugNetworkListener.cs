@@ -82,6 +82,8 @@ namespace SteamKit2
         /// <param name="data">Raw packet data that was received.</param>
         public void OnIncomingNetworkMessage( EMsg msgType, byte[] data )
         {
+            DebugLog.WriteLine( "NetHook", $"<- Recv'd EMsg: {msgType} ({( int )msgType})" );
+
             LogNetMessage( "in", msgType, data );
         }
 
@@ -92,6 +94,8 @@ namespace SteamKit2
         /// <param name="data">Raw packet data that will be sent.</param>
         public void OnOutgoingNetworkMessage( EMsg msgType, byte[] data )
         {
+            DebugLog.WriteLine( "NetHook", $"Sent -> EMsg: {msgType} ({( int )msgType})" );
+
             LogNetMessage( "out", msgType, data );
         }
 

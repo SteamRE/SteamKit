@@ -263,8 +263,6 @@ namespace SteamKit2.Internal
                 msg.SteamID = this.SteamID;
             }
 
-            DebugLog.WriteLine( "CMClient", "Sent -> EMsg: {0} (Proto: {1})", msg.MsgType, msg.IsProto );
-
             try
             {
                 DebugNetworkListener?.OnOutgoingNetworkMessage(msg.MsgType, msg.Serialize());
@@ -303,8 +301,6 @@ namespace SteamKit2.Internal
                 Disconnect();
                 return false;
             }
-
-            DebugLog.WriteLine( "CMClient", "<- Recv'd EMsg: {0} ({1}) (Proto: {2})", packetMsg.MsgType, ( int )packetMsg.MsgType, packetMsg.IsProto );
 
             // Multi message gets logged down the line after it's decompressed
             if ( packetMsg.MsgType != EMsg.Multi )
