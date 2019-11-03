@@ -36,7 +36,8 @@ namespace SteamKit2
                 string fileName;
                 UInt32 decompressedSize;
                 UInt16 compressionMethod;
-                byte[] compressedBuffer = ReadLocalFile( reader, out fileName, out decompressedSize, out compressionMethod );
+                uint crc;
+                byte[] compressedBuffer = ReadLocalFile( reader, out fileName, out decompressedSize, out compressionMethod, out crc );
 
                 if ( !PeekHeader( reader, CentralDirectoryHeader ) )
                 {
@@ -53,10 +54,21 @@ namespace SteamKit2
 
                 /*UInt32 count =*/ ReadEndOfDirectory( reader );
 
+                byte[] decompressed;
+
                 if ( compressionMethod == DeflateCompression )
-                    return InflateBuffer( compressedBuffer, decompressedSize );
+                    decompressed = InflateBuffer( compressedBuffer, decompressedSize );
                 else
-                    return compressedBuffer;
+                    decompressed = compressedBuffer;
+
+                uint checkSum = Crc32.Compute( decompressed );
+
+                if ( checkSum != crc )
+                {
+                    throw new Exception( "Checksum validation failed for decompressed file" );
+                }
+
+                return decompressed;
             }
         }
 
@@ -65,7 +77,7 @@ namespace SteamKit2
             using ( MemoryStream ms = new MemoryStream() )
             using ( BinaryWriter writer = new BinaryWriter( ms ) )
             {
-                uint checkSum = Crc32.Compute(buffer);
+                uint checkSum = Crc32.Compute( buffer );
 
                 byte[] compressed = DeflateBuffer( buffer );
 
@@ -217,7 +229,7 @@ namespace SteamKit2
             return relativeOffset;
         }
 
-        private static byte[] ReadLocalFile( BinaryReader reader, out String fileName, out UInt32 decompressedSize, out UInt16 compressionMethod )
+        private static byte[] ReadLocalFile( BinaryReader reader, out String fileName, out UInt32 decompressedSize, out UInt16 compressionMethod, out UInt32 crc )
         {
             /*UInt16 version =*/ reader.ReadUInt16();
             /*UInt16 bitflags =*/ reader.ReadUInt16();
@@ -230,7 +242,7 @@ namespace SteamKit2
 
             /*UInt16 modtime =*/ reader.ReadUInt16();
             /*UInt16 createtime =*/ reader.ReadUInt16();
-            /*UInt32 crc =*/ reader.ReadUInt32();
+            crc = reader.ReadUInt32();
 
             UInt32 compressedSize = reader.ReadUInt32();
             decompressedSize = reader.ReadUInt32();
