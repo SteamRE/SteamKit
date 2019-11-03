@@ -43,30 +43,36 @@ namespace SteamKit2
     {
         private long MessageNumber;
         private string LogDirectory;
+        private ILogContext? log;
 
         /// <summary>
         /// Will create a folder in path "%assembly%/nethook/%currenttime%/"
         /// </summary>
-        public NetHookNetworkListener()
+        /// <param name="log">An optional logging context for log messages.</param>
+        public NetHookNetworkListener(ILogContext? log = null)
         {
+            this.log = log;
+
             var directory = Path.GetDirectoryName( new Uri( GetType().Assembly.CodeBase ).LocalPath );
             LogDirectory = Path.Combine(
                 directory,
                 "nethook",
                 DateUtils.DateTimeToUnixTime( DateTime.Now ).ToString()
             );
-
             Directory.CreateDirectory( LogDirectory );
 
-            DebugLog.WriteLine( "Created nethook directory: {0}", LogDirectory );
+            LogText( $"Created nethook directory: {LogDirectory}" );
         }
 
         /// <summary>
         /// Log to your own folder.
         /// </summary>
         /// <param name="path">Path to folder.</param>
-        public NetHookNetworkListener( string path )
+        /// <param name="log">An optional logging context for log messages.</param>
+        public NetHookNetworkListener( string path, ILogContext? log = null )
         {
+            this.log = log;
+
             if ( !Directory.Exists( path ) )
             {
                 throw new DirectoryNotFoundException( $"{path} does not exist." );
@@ -82,7 +88,7 @@ namespace SteamKit2
         /// <param name="data">Raw packet data that was received.</param>
         public void OnIncomingNetworkMessage( EMsg msgType, byte[] data )
         {
-            DebugLog.WriteLine( "NetHook", $"<- Recv'd EMsg: {msgType} ({( int )msgType})" );
+            LogText( $" <- Recv'd EMsg: {msgType} ({( int )msgType})" );
 
             LogNetMessage( "in", msgType, data );
         }
@@ -94,7 +100,7 @@ namespace SteamKit2
         /// <param name="data">Raw packet data that will be sent.</param>
         public void OnOutgoingNetworkMessage( EMsg msgType, byte[] data )
         {
-            DebugLog.WriteLine( "NetHook", $"Sent -> EMsg: {msgType} ({( int )msgType})" );
+            LogText( $"Sent -> EMsg: {msgType} ({( int )msgType})" );
 
             LogNetMessage( "out", msgType, data );
         }
@@ -104,6 +110,18 @@ namespace SteamKit2
             var path = Path.Combine( LogDirectory, GetFileName( direction, msgType ) );
 
             File.WriteAllBytes( path, data );
+        }
+
+        void LogText(string message)
+        {
+            if (log != null)
+            {
+                log.LogDebug( "NetHook", message );
+            }
+            else
+            {
+                DebugLog.WriteLine( "NetHook", message );
+            }
         }
 
         string GetFileName( string direction, EMsg msgType )

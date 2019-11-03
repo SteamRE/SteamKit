@@ -121,5 +121,25 @@ namespace Tests
             var integer = 2;
             DebugLog.WriteLine( "category", "msg{0}{1}{2}", 1, msgText, integer );
         }
+
+        [Fact, DebugLogSetupTeardown]
+        public void CMClientIDPrefixed()
+        {
+            DebugLog.Enabled = true;
+
+            string category = default;
+            string message = default;
+
+            DebugLog.AddListener( ( cat, msg ) =>
+            {
+                category = cat;
+                message = msg;
+            } );
+
+            var client = new SteamClient();
+            client.LogDebug( "MyCategory", "My {0}st message", 1 );
+            Assert.Equal( client.ID + "-MyCategory", category );
+            Assert.Equal( "My 1st message", message );
+        }
     }
 }

@@ -23,12 +23,17 @@ namespace SteamKit2.Internal
     /// <summary>
     /// This base client handles the underlying connection to a CM server. This class should not be use directly, but through the <see cref="SteamClient"/> class.
     /// </summary>
-    public abstract class CMClient
+    public abstract class CMClient : ILogContext
     {
         /// <summary>
         /// The configuration for this client.
         /// </summary>
         public SteamConfiguration Configuration { get; }
+
+        /// <summary>
+        /// A unique identifier for this client instance.
+        /// </summary>
+        public string ID { get; }
 
         /// <summary>
         /// Bootstrap list of CM servers.
@@ -125,6 +130,7 @@ namespace SteamKit2.Internal
         public CMClient( SteamConfiguration configuration )
         {
             Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            ID = Guid.NewGuid().ToString("N");
 
             heartBeatFunc = new ScheduledFunction( () =>
             {
@@ -174,13 +180,13 @@ namespace SteamKit2.Internal
                 {
                     if ( token.IsCancellationRequested )
                     {
-                        DebugLog.WriteLine( nameof( CMClient ), "Connection cancelled before a server could be chosen." );
+                        LogDebug( nameof( CMClient ), "Connection cancelled before a server could be chosen." );
                         OnClientDisconnected( userInitiated: true );
                         return;
                     }
                     else if ( t.IsFaulted || t.IsCanceled )
                     {
-                        DebugLog.WriteLine( nameof( CMClient ), "Server record task threw exception: {0}", t.Exception );
+                        LogDebug( nameof( CMClient ), "Server record task threw exception: {0}", t.Exception );
                         OnClientDisconnected( userInitiated: false );
                         return;
                     }
@@ -189,7 +195,7 @@ namespace SteamKit2.Internal
 
                     if ( record is null )
                     {
-                        DebugLog.WriteLine( nameof( CMClient ), "Server record task returned no result." );
+                        LogDebug( nameof( CMClient ), "Server record task returned no result." );
                         OnClientDisconnected( userInitiated: false );
                         return;
                     }
@@ -203,7 +209,7 @@ namespace SteamKit2.Internal
               {
                     if ( t.IsFaulted )
                     {
-                        DebugLog.WriteLine( nameof( CMClient ), "Unhandled exception when attempting to connect to Steam: {0}", t.Exception );
+                      LogDebug( nameof( CMClient ), "Unhandled exception when attempting to connect to Steam: {0}", t.Exception );
                         OnClientDisconnected( userInitiated: false );
                     }
                 }, TaskContinuationOptions.ExecuteSynchronously );
@@ -269,7 +275,7 @@ namespace SteamKit2.Internal
             }
             catch ( Exception e )
             {
-                DebugLog.WriteLine( "CMClient", "DebugNetworkListener threw an exception: {0}", e );
+                LogDebug( "CMClient", "DebugNetworkListener threw an exception: {0}", e );
             }
 
             // we'll swallow any network failures here because they will be thrown later
@@ -288,6 +294,23 @@ namespace SteamKit2.Internal
             }
         }
 
+        /// <summary>
+        /// Writes a line to the debug log, informing all listeners.
+        /// </summary>
+        /// <param name="category">The category of the message.</param>
+        /// <param name="message">A composite format string.</param>
+        /// <param name="args">An array containing zero or more objects to format.</param>
+        public void LogDebug( string category, string message, params object?[]? args )
+        {
+            if (!DebugLog.Enabled)
+            {
+                return;
+            }
+
+            var fullCategory = string.Concat( ID, "-", category );
+            DebugLog.WriteLine( fullCategory, message, args );
+        }
+
 
         /// <summary>
         /// Called when a client message is received from the network.
@@ -297,7 +320,7 @@ namespace SteamKit2.Internal
         {
             if ( packetMsg == null )
             {
-                DebugLog.WriteLine( "CMClient", "Packet message failed to parse, shutting down connection" );
+                LogDebug( "CMClient", "Packet message failed to parse, shutting down connection" );
                 Disconnect();
                 return false;
             }
@@ -311,7 +334,7 @@ namespace SteamKit2.Internal
                 }
                 catch ( Exception e )
                 {
-                    DebugLog.WriteLine( "CMClient", "DebugNetworkListener threw an exception: {0}", e );
+                    LogDebug( "CMClient", "DebugNetworkListener threw an exception: {0}", e );
                 }
             }
 
@@ -357,15 +380,15 @@ namespace SteamKit2.Internal
         {
             if ( protocol.HasFlagsFast( ProtocolTypes.WebSocket ) )
             {
-                return new WebSocketConnection();
+                return new WebSocketConnection( this );
             }
             else if ( protocol.HasFlagsFast( ProtocolTypes.Tcp ) )
             {
-                return new EnvelopeEncryptedConnection( new TcpConnection(), Universe );
+                return new EnvelopeEncryptedConnection( new TcpConnection(this), Universe, this );
             }
             else if ( protocol.HasFlagsFast( ProtocolTypes.Udp ) )
             {
-                return new EnvelopeEncryptedConnection( new UdpConnection(), Universe );
+                return new EnvelopeEncryptedConnection( new UdpConnection(this), Universe, this );
             }
 
             throw new ArgumentOutOfRangeException( nameof(protocol), protocol, "Protocol bitmask has no supported protocols set." );
@@ -374,7 +397,7 @@ namespace SteamKit2.Internal
 
         void NetMsgReceived( object sender, NetMsgEventArgs e )
         {
-            OnClientMsgReceived( GetPacketMsg( e.Data ) );
+            OnClientMsgReceived( GetPacketMsg( e.Data, this ) );
         }
 
         void Connected( object sender, EventArgs e )
@@ -416,11 +439,11 @@ namespace SteamKit2.Internal
             OnClientDisconnected( userInitiated: e.UserInitiated || ExpectDisconnection );
         }
 
-        internal static IPacketMsg? GetPacketMsg( byte[] data )
+        internal static IPacketMsg? GetPacketMsg( byte[] data, ILogContext log )
         {
             if ( data.Length < sizeof( uint ) )
             {
-                DebugLog.WriteLine( nameof(CMClient), "PacketMsg too small to contain a message, was only {0} bytes. Message: 0x{1}", data.Length, BitConverter.ToString( data ).Replace( "-", string.Empty ) );
+                log.LogDebug( nameof(CMClient), "PacketMsg too small to contain a message, was only {0} bytes. Message: 0x{1}", data.Length, BitConverter.ToString( data ).Replace( "-", string.Empty ) );
                 return null;
             }
 
@@ -451,7 +474,7 @@ namespace SteamKit2.Internal
             }
             catch (Exception ex)
             {
-                DebugLog.WriteLine( "CMClient", "Exception deserializing emsg {0} ({1}).\n{2}", eMsg, MsgUtil.IsProtoBuf( rawEMsg ), ex.ToString() );
+                log.LogDebug( "CMClient", "Exception deserializing emsg {0} ({1}).\n{2}", eMsg, MsgUtil.IsProtoBuf( rawEMsg ), ex.ToString() );
                 return null;
             }
         }
@@ -462,7 +485,7 @@ namespace SteamKit2.Internal
         {
             if ( !packetMsg.IsProto )
             {
-                DebugLog.WriteLine( "CMClient", "HandleMulti got non-proto MsgMulti!!" );
+                LogDebug( "CMClient", "HandleMulti got non-proto MsgMulti!!" );
                 return;
             }
 
@@ -484,7 +507,7 @@ namespace SteamKit2.Internal
                 }
                 catch ( Exception ex )
                 {
-                    DebugLog.WriteLine( "CMClient", "HandleMulti encountered an exception when decompressing.\n{0}", ex.ToString() );
+                    LogDebug( "CMClient", "HandleMulti encountered an exception when decompressing.\n{0}", ex.ToString() );
                     return;
                 }
             }
@@ -497,7 +520,7 @@ namespace SteamKit2.Internal
                     int subSize = br.ReadInt32();
                     byte[] subData = br.ReadBytes( subSize );
 
-                    if ( !OnClientMsgReceived( GetPacketMsg( subData ) ) )
+                    if ( !OnClientMsgReceived( GetPacketMsg( subData, this ) ) )
                     {
                         break;
                     }
@@ -511,7 +534,7 @@ namespace SteamKit2.Internal
             {
                 // a non proto ClientLogonResponse can come in as a result of connecting but never sending a ClientLogon
                 // in this case, it always fails, so we don't need to do anything special here
-                DebugLog.WriteLine( "CMClient", "Got non-proto logon response, this is indicative of no logon attempt after connecting." );
+                LogDebug( "CMClient", "Got non-proto logon response, this is indicative of no logon attempt after connecting." );
                 return;
             }
 
