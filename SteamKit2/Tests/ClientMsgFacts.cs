@@ -64,7 +64,7 @@ namespace Tests
 
         static IPacketMsg BuildStructMsg()
         {
-            return CMClient.GetPacketMsg( structMsgData );
+            return CMClient.GetPacketMsg( structMsgData, DebugLogContext.Instance );
         }
     }
 }

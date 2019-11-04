@@ -44,12 +44,33 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="SteamClient"/> class a specific identifier.
+        /// </summary>
+        /// <param name="identifier">A specific identifier to be used to uniquely identify this instance.</param>
+        public SteamClient( string identifier )
+            : this( SteamConfiguration.CreateDefault(), identifier )
+        {
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SteamClient"/> class with a specific configuration.
         /// </summary>
         /// <param name="configuration">The configuration to use for this client.</param>
         /// <exception cref="ArgumentNullException">The configuration object is <c>null</c></exception>
         public SteamClient( SteamConfiguration configuration )
-            : base( configuration )
+            : this( configuration, Guid.NewGuid().ToString( "N" ) )
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SteamClient"/> class with a specific configuration and identifier
+        /// </summary>
+        /// <param name="configuration">The configuration to use for this client.</param>
+        /// <param name="identifier">A specific identifier to be used to uniquely identify this instance.</param>
+        /// <exception cref="ArgumentNullException">The configuration object or identifier is <c>null</c></exception>
+        /// <exception cref="ArgumentException">The identifier is an empty string</exception>
+        public SteamClient( SteamConfiguration configuration, string identifier )
+            : base( configuration, identifier )
         {
             callbackQueue = new Queue<ICallbackMsg>();
 
@@ -354,13 +375,13 @@ namespace SteamKit2
                 }
                 catch ( ProtoException ex )
                 {
-                    DebugLog.WriteLine( "SteamClient", "'{0}' handler failed to (de)serialize a protobuf: '{1}'", key.Name, ex.Message );
+                    LogDebug( "SteamClient", "'{0}' handler failed to (de)serialize a protobuf: '{1}'", key.Name, ex.Message );
                     Disconnect();
                     return false;
                 }
                 catch ( Exception ex )
                 {
-                    DebugLog.WriteLine( "SteamClient", "Unhandled '{0}' exception from '{1}' handler: '{2}'", ex.GetType().Name, key.Name, ex.Message );
+                    LogDebug( "SteamClient", "Unhandled '{0}' exception from '{1}' handler: '{2}'", ex.GetType().Name, key.Name, ex.Message );
                     Disconnect();
                     return false;
                 }

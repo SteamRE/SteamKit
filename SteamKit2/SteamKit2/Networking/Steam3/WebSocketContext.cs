@@ -16,8 +16,8 @@ namespace SteamKit2
         {
             public WebSocketContext(WebSocketConnection connection, EndPoint endPoint)
             {
-                this.connection = connection;
-                EndPoint = endPoint;
+                this.connection = connection ?? throw new ArgumentNullException( nameof( connection ) );
+                EndPoint = endPoint ?? throw new ArgumentNullException( nameof( endPoint ) );
 
                 cts = new CancellationTokenSource();
                 socket = new ClientWebSocket();
@@ -53,19 +53,19 @@ namespace SteamKit2
                     }
                     catch (TaskCanceledException) when (timeout.IsCancellationRequested)
                     {
-                        DebugLog.WriteLine(nameof(WebSocketContext), "Time out connecting websocket {0} after {1}", uri, connectionTimeout);
+                        connection.log.LogDebug(nameof(WebSocketContext), "Time out connecting websocket {0} after {1}", uri, connectionTimeout);
                         connection.DisconnectCore(userInitiated: false, specificContext: this);
                         return;
                     }
                     catch (Exception ex)
                     {
-                        DebugLog.WriteLine(nameof(WebSocketContext), "Exception connecting websocket: {0} - {1}", ex.GetType().FullName, ex.Message);
+                        connection.log.LogDebug( nameof(WebSocketContext), "Exception connecting websocket: {0} - {1}", ex.GetType().FullName, ex.Message);
                         connection.DisconnectCore(userInitiated: false, specificContext: this);
                         return;
                     }
                 }
 
-                DebugLog.WriteLine(nameof(WebSocketContext), "Connected to {0}", uri);
+                connection.log.LogDebug( nameof(WebSocketContext), "Connected to {0}", uri);
                 connection.Connected?.Invoke(connection, EventArgs.Empty);
 
                 while (!cancellationToken.IsCancellationRequested && socket.State == WebSocketState.Open)
@@ -79,14 +79,14 @@ namespace SteamKit2
 
                 if (socket.State == WebSocketState.Open)
                 {
-                    DebugLog.WriteLine(nameof(WebSocketContext), "Closing connection...");
+                    connection.log.LogDebug( nameof(WebSocketContext), "Closing connection...");
                     try
                     {
                         await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, null, default(CancellationToken)).ConfigureAwait(false);
                     }
                     catch (Win32Exception ex)
                     {
-                        DebugLog.WriteLine(nameof(WebSocketContext), "Error closing connection: {0}", ex.Message);
+                        connection.log.LogDebug( nameof(WebSocketContext), "Error closing connection: {0}", ex.Message);
                     }
                 }
             }
@@ -100,11 +100,11 @@ namespace SteamKit2
                 }
                 catch (WebSocketException ex)
                 {
-                    DebugLog.WriteLine(nameof(WebSocketContext), "{0} exception when sending message: {1}", ex.GetType().FullName, ex.Message);
+                    connection.log.LogDebug( nameof(WebSocketContext), "{0} exception when sending message: {1}", ex.GetType().FullName, ex.Message);
                     connection.DisconnectCore(userInitiated: false, specificContext: this);
                     return;
                 }
-                DebugLog.WriteLine(nameof(WebSocketContext), "Sent {0} bytes.", data.Length);
+                connection.log.LogDebug( nameof(WebSocketContext), "Sent {0} bytes.", data.Length);
             }
 
             public void Dispose()
@@ -155,21 +155,21 @@ namespace SteamKit2
                         {
                             case WebSocketMessageType.Binary:
                                 ms.Write(buffer, 0, result.Count);
-                                DebugLog.WriteLine(nameof(WebSocketContext), "Recieved {0} bytes.", result.Count);
+                                connection.log.LogDebug( nameof(WebSocketContext), "Recieved {0} bytes.", result.Count);
                                 break;
 
                             case WebSocketMessageType.Text:
                                 try
                                 {
                                     var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
-                                    DebugLog.WriteLine(nameof(WebSocketContext), "Recieved websocket text message: \"{0}\"", message);
+                                    connection.log.LogDebug( nameof(WebSocketContext), "Recieved websocket text message: \"{0}\"", message);
                                 }
                                 catch
                                 {
                                     var frameBytes = new byte[result.Count];
                                     Array.Copy(buffer, 0, frameBytes, 0, result.Count);
                                     var frameHexBytes = BitConverter.ToString(frameBytes).Replace("-", string.Empty);
-                                    DebugLog.WriteLine(nameof(WebSocketContext), "Recieved websocket text message: 0x{0}", frameHexBytes);
+                                    connection.log.LogDebug( nameof(WebSocketContext), "Recieved websocket text message: 0x{0}", frameHexBytes);
                                 }
                                 break;
 

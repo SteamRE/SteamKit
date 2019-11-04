@@ -14,12 +14,14 @@ namespace SteamKit2
     {
         readonly byte[] sessionKey;
         readonly byte[] hmacSecret;
+        readonly ILogContext log;
 
-        public NetFilterEncryptionWithHMAC( byte[] sessionKey )
+        public NetFilterEncryptionWithHMAC( byte[] sessionKey, ILogContext log )
         {
             DebugLog.Assert( sessionKey.Length == 32, nameof(NetFilterEncryption), "AES session key was not 32 bytes!" );
 
             this.sessionKey = sessionKey;
+            this.log = log ?? throw new ArgumentNullException( nameof( log ) );
             this.hmacSecret = new byte[ 16 ];
             Array.Copy( sessionKey, 0, hmacSecret, 0, hmacSecret.Length );
         }
@@ -32,7 +34,7 @@ namespace SteamKit2
             }
             catch ( CryptographicException ex )
             {
-                DebugLog.WriteLine( nameof(NetFilterEncryptionWithHMAC), "Unable to decrypt incoming packet: " + ex.Message );
+                log.LogDebug( nameof(NetFilterEncryptionWithHMAC), "Unable to decrypt incoming packet: " + ex.Message );
 
                 // rethrow as an IO exception so it's handled in the network thread
                 throw new IOException( "Unable to decrypt incoming packet", ex );
