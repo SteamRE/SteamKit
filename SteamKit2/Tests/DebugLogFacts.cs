@@ -138,7 +138,7 @@ namespace Tests
 
             var client = new SteamClient();
             client.LogDebug( "MyCategory", "My {0}st message", 1 );
-            Assert.Equal( client.ID + "-MyCategory", category );
+            Assert.Equal( client.ID + "/MyCategory", category );
             Assert.Equal( "My 1st message", message );
         }
 
@@ -158,7 +158,7 @@ namespace Tests
 
             var client = new SteamClient("My Custom Client");
             client.LogDebug( "MyCategory", "My {0}st message", 1 );
-            Assert.Equal( "My Custom Client-MyCategory", category );
+            Assert.Equal( "My Custom Client/MyCategory", category );
             Assert.Equal( "My 1st message", message );
         }
     }

@@ -313,7 +313,7 @@ namespace SteamKit2.Internal
                 return;
             }
 
-            var fullCategory = string.Concat( ID, "-", category );
+            var fullCategory = string.Concat( ID, "/", category );
             DebugLog.WriteLine( fullCategory, message, args );
         }
 
