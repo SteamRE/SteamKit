@@ -126,11 +126,17 @@ namespace SteamKit2.Internal
         /// Initializes a new instance of the <see cref="CMClient"/> class with a specific configuration.
         /// </summary>
         /// <param name="configuration">The configuration to use for this client.</param>
-        /// <exception cref="ArgumentNullException">The configuration object is <c>null</c></exception>
-        public CMClient( SteamConfiguration configuration )
+        /// <param name="identifier">A specific identifier to be used to uniquely identify this instance.</param>
+        /// <exception cref="ArgumentNullException">The configuration object or identifier is <c>null</c></exception>
+        /// <exception cref="ArgumentException">The identifier is an empty string</exception>
+        public CMClient( SteamConfiguration configuration, string identifier )
         {
-            Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-            ID = Guid.NewGuid().ToString("N");
+            Configuration = configuration ?? throw new ArgumentNullException( nameof( configuration ) );
+
+            if ( identifier is null ) throw new ArgumentNullException( nameof( identifier ) );
+            if ( identifier.Length == 0 ) throw new ArgumentException( nameof( identifier ) );
+
+            ID = identifier;
 
             heartBeatFunc = new ScheduledFunction( () =>
             {

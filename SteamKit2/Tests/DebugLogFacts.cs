@@ -123,7 +123,7 @@ namespace Tests
         }
 
         [Fact, DebugLogSetupTeardown]
-        public void CMClientIDPrefixed()
+        public void GeneratedCMClientIDPrefixed()
         {
             DebugLog.Enabled = true;
 
@@ -139,6 +139,26 @@ namespace Tests
             var client = new SteamClient();
             client.LogDebug( "MyCategory", "My {0}st message", 1 );
             Assert.Equal( client.ID + "-MyCategory", category );
+            Assert.Equal( "My 1st message", message );
+        }
+
+        [Fact, DebugLogSetupTeardown]
+        public void CustomCMClientIDPrefixed()
+        {
+            DebugLog.Enabled = true;
+
+            string category = default;
+            string message = default;
+
+            DebugLog.AddListener( ( cat, msg ) =>
+            {
+                category = cat;
+                message = msg;
+            } );
+
+            var client = new SteamClient("My Custom Client");
+            client.LogDebug( "MyCategory", "My {0}st message", 1 );
+            Assert.Equal( "My Custom Client-MyCategory", category );
             Assert.Equal( "My 1st message", message );
         }
     }
