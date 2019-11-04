@@ -74,11 +74,8 @@ namespace Sample3_DebugLog
             user = args[ 0 ];
             pass = args[ 1 ];
 
-            var config = SteamConfiguration.Create( b => b.WithProtocolTypes( ProtocolTypes.Udp ) );
-
             // create our steamclient instance
-            steamClient = new SteamClient( config );
-            steamClient.DebugNetworkListener = new NetHookNetworkListener(steamClient);
+            steamClient = new SteamClient();
 
             // uncomment this if you'd like to dump raw sent and received packets
             // that can be opened for analysis in NetHookAnalyzer
@@ -99,7 +96,6 @@ namespace Sample3_DebugLog
 
             manager.Subscribe<SteamUser.LoggedOnCallback>( OnLoggedOn );
             manager.Subscribe<SteamUser.LoggedOffCallback>( OnLoggedOff );
-            manager.Subscribe<SteamUser.AccountInfoCallback>( OnAccountInfo );
 
             isRunning = true;
 
@@ -159,18 +155,14 @@ namespace Sample3_DebugLog
             Console.WriteLine( "Successfully logged on!" );
 
             // at this point, we'd be able to perform actions on Steam
+
+            // for this sample we'll just log off
+            steamUser.LogOff();
         }
 
         static void OnLoggedOff( SteamUser.LoggedOffCallback callback )
         {
             Console.WriteLine( "Logged off of Steam: {0}", callback.Result );
-        }
-
-        static void OnAccountInfo (SteamUser.AccountInfoCallback callback)
-        {
-            Console.WriteLine( "Got account info. Logging off..." );
-            // for this sample we'll just log off
-            steamUser.LogOff();
         }
     }
 }

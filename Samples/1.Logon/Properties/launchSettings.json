@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Sample1_Logon": {
-      "commandName": "Project",
-      "commandLineArgs": "netshroud_test netshroud"
-    }
-  }
-}
