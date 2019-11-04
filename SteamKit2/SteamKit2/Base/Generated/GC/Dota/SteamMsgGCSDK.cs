@@ -929,6 +929,106 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetgame_msg() => __pbn__game_msg = null;
         private byte[] __pbn__game_msg;
 
+        [global::ProtoBuf.ProtoMember(11)]
+        public int os_type
+        {
+            get { return __pbn__os_type.GetValueOrDefault(); }
+            set { __pbn__os_type = value; }
+        }
+        public bool ShouldSerializeos_type() => __pbn__os_type != null;
+        public void Resetos_type() => __pbn__os_type = null;
+        private int? __pbn__os_type;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public uint render_system
+        {
+            get { return __pbn__render_system.GetValueOrDefault(); }
+            set { __pbn__render_system = value; }
+        }
+        public bool ShouldSerializerender_system() => __pbn__render_system != null;
+        public void Resetrender_system() => __pbn__render_system = null;
+        private uint? __pbn__render_system;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public uint render_system_req
+        {
+            get { return __pbn__render_system_req.GetValueOrDefault(); }
+            set { __pbn__render_system_req = value; }
+        }
+        public bool ShouldSerializerender_system_req() => __pbn__render_system_req != null;
+        public void Resetrender_system_req() => __pbn__render_system_req = null;
+        private uint? __pbn__render_system_req;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public uint screen_width
+        {
+            get { return __pbn__screen_width.GetValueOrDefault(); }
+            set { __pbn__screen_width = value; }
+        }
+        public bool ShouldSerializescreen_width() => __pbn__screen_width != null;
+        public void Resetscreen_width() => __pbn__screen_width = null;
+        private uint? __pbn__screen_width;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public uint screen_height
+        {
+            get { return __pbn__screen_height.GetValueOrDefault(); }
+            set { __pbn__screen_height = value; }
+        }
+        public bool ShouldSerializescreen_height() => __pbn__screen_height != null;
+        public void Resetscreen_height() => __pbn__screen_height = null;
+        private uint? __pbn__screen_height;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public uint screen_refresh
+        {
+            get { return __pbn__screen_refresh.GetValueOrDefault(); }
+            set { __pbn__screen_refresh = value; }
+        }
+        public bool ShouldSerializescreen_refresh() => __pbn__screen_refresh != null;
+        public void Resetscreen_refresh() => __pbn__screen_refresh = null;
+        private uint? __pbn__screen_refresh;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public uint render_width
+        {
+            get { return __pbn__render_width.GetValueOrDefault(); }
+            set { __pbn__render_width = value; }
+        }
+        public bool ShouldSerializerender_width() => __pbn__render_width != null;
+        public void Resetrender_width() => __pbn__render_width = null;
+        private uint? __pbn__render_width;
+
+        [global::ProtoBuf.ProtoMember(18)]
+        public uint render_height
+        {
+            get { return __pbn__render_height.GetValueOrDefault(); }
+            set { __pbn__render_height = value; }
+        }
+        public bool ShouldSerializerender_height() => __pbn__render_height != null;
+        public void Resetrender_height() => __pbn__render_height = null;
+        private uint? __pbn__render_height;
+
+        [global::ProtoBuf.ProtoMember(19)]
+        public uint swap_width
+        {
+            get { return __pbn__swap_width.GetValueOrDefault(); }
+            set { __pbn__swap_width = value; }
+        }
+        public bool ShouldSerializeswap_width() => __pbn__swap_width != null;
+        public void Resetswap_width() => __pbn__swap_width = null;
+        private uint? __pbn__swap_width;
+
+        [global::ProtoBuf.ProtoMember(20)]
+        public uint swap_height
+        {
+            get { return __pbn__swap_height.GetValueOrDefault(); }
+            set { __pbn__swap_height = value; }
+        }
+        public bool ShouldSerializeswap_height() => __pbn__swap_height != null;
+        public void Resetswap_height() => __pbn__swap_height = null;
+        private uint? __pbn__swap_height;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -411,7 +411,6 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGCToClientProfileCardUpdated = 7539,
         k_EMsgServerToGCVictoryPredictions = 7540,
         k_EMsgClientToGCMarkNotificationListRead = 7542,
-        k_EMsgGCToClientNewNotificationAdded = 7543,
         k_EMsgServerToGCSuspiciousActivity = 7544,
         k_EMsgSignOutCommunicationSummary = 7545,
         k_EMsgServerToGCRequestStatus_Response = 7546,
@@ -518,6 +517,8 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgClientToGCVerifyFavoritePlayers = 7678,
         k_EMsgGCToClientVerifyFavoritePlayersResponse = 7679,
         k_EMsgGCToClientPartySearchInvites = 7680,
+        k_EMsgGCToClientRequestMMInfo = 7681,
+        k_EMsgClientToGCMMInfo = 7682,
         k_EMsgGCDev_GrantWarKill = 8001,
         k_EMsgServerToGCLockCharmTrading = 8004,
         k_EMsgClientToGCPlayerStatsRequest = 8006,
@@ -848,6 +849,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgSQLGCToGCGrantAllHeroProgressVictory = 8364,
         k_eMsgGCToGCGetAllHeroCurrent = 8635,
         k_eMsgGCToGCGetAllHeroCurrentResponse = 8636,
+        k_EMsgGCToClientNotificationsUpdated = 8639,
     }
 
 }

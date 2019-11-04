@@ -766,6 +766,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetcompetitive_support_calibration_games_remaining() => __pbn__competitive_support_calibration_games_remaining = null;
         private uint? __pbn__competitive_support_calibration_games_remaining;
 
+        [global::ProtoBuf.ProtoMember(114)]
+        public uint queue_points
+        {
+            get { return __pbn__queue_points.GetValueOrDefault(); }
+            set { __pbn__queue_points = value; }
+        }
+        public bool ShouldSerializequeue_points() => __pbn__queue_points != null;
+        public void Resetqueue_points() => __pbn__queue_points = null;
+        private uint? __pbn__queue_points;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

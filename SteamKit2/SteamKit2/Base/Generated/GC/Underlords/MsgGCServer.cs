@@ -264,6 +264,18 @@ namespace SteamKit2.GC.Underlords.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CServerLobbyData_GameModifiers : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgGameModifiers game_modifiers { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CSODACServerDynamicLobby : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -324,6 +336,16 @@ namespace SteamKit2.GC.Underlords.Internal
         public bool ShouldSerializereplay_salt() => __pbn__replay_salt != null;
         public void Resetreplay_salt() => __pbn__replay_salt = null;
         private uint? __pbn__replay_salt;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint active_event_id
+        {
+            get { return __pbn__active_event_id.GetValueOrDefault(); }
+            set { __pbn__active_event_id = value; }
+        }
+        public bool ShouldSerializeactive_event_id() => __pbn__active_event_id != null;
+        public void Resetactive_event_id() => __pbn__active_event_id = null;
+        private uint? __pbn__active_event_id;
 
         [global::ProtoBuf.ProtoMember(6)]
         public global::System.Collections.Generic.List<Member> members { get; } = new global::System.Collections.Generic.List<Member>();
@@ -1396,6 +1418,17 @@ namespace SteamKit2.GC.Underlords.Internal
         public void Resetpermission_request() => __pbn__permission_request = null;
         private uint? __pbn__permission_request;
 
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue(EDACGameMode.k_EDACGameMode_Invalid)]
+        public EDACGameMode game_mode
+        {
+            get { return __pbn__game_mode ?? EDACGameMode.k_EDACGameMode_Invalid; }
+            set { __pbn__game_mode = value; }
+        }
+        public bool ShouldSerializegame_mode() => __pbn__game_mode != null;
+        public void Resetgame_mode() => __pbn__game_mode = null;
+        private EDACGameMode? __pbn__game_mode;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1912,6 +1945,7 @@ namespace SteamKit2.GC.Underlords.Internal
     {
         k_EServerLobbyData_PlayerInfo = 1,
         k_EServerLobbyData_PlayerMMR = 2,
+        k_EServerLobbyData_GameModifiers = 3,
     }
 
     [global::ProtoBuf.ProtoContract()]
