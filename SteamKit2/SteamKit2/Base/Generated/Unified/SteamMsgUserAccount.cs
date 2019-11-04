@@ -546,6 +546,16 @@ namespace SteamKit2.Unified.Internal
         public void Resetdevice_info() => __pbn__device_info = null;
         private string __pbn__device_info;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint deviceid
+        {
+            get { return __pbn__deviceid.GetValueOrDefault(); }
+            set { __pbn__deviceid = value; }
+        }
+        public bool ShouldSerializedeviceid() => __pbn__deviceid != null;
+        public void Resetdeviceid() => __pbn__deviceid = null;
+        private uint? __pbn__deviceid;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -1457,7 +1457,8 @@ namespace SteamKit2.Internal
         k_EClanFreeTrial = 31,
         k_EClanSeasonRelease = 32,
         k_EClanSeasonUpdate = 33,
-        k_ECrosspostEvent = 34,
+        k_EClanCrosspostEvent = 34,
+        k_EClanInGameEventGeneral = 35,
     }
 
     [global::ProtoBuf.ProtoContract()]

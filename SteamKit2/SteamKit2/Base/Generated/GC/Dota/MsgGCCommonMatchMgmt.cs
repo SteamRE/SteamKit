@@ -92,6 +92,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resettourney_prevent_until() => __pbn__tourney_prevent_until = null;
         private uint? __pbn__tourney_prevent_until;
 
+        [global::ProtoBuf.ProtoMember(13)]
+        public bool mm_data_valid
+        {
+            get { return __pbn__mm_data_valid.GetValueOrDefault(); }
+            set { __pbn__mm_data_valid = value; }
+        }
+        public bool ShouldSerializemm_data_valid() => __pbn__mm_data_valid != null;
+        public void Resetmm_data_valid() => __pbn__mm_data_valid = null;
+        private bool? __pbn__mm_data_valid;
+
         [global::ProtoBuf.ProtoMember(11)]
         public uint lane_selection_flags
         {
@@ -101,6 +111,26 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializelane_selection_flags() => __pbn__lane_selection_flags != null;
         public void Resetlane_selection_flags() => __pbn__lane_selection_flags = null;
         private uint? __pbn__lane_selection_flags;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public bool high_priority_disabled
+        {
+            get { return __pbn__high_priority_disabled.GetValueOrDefault(); }
+            set { __pbn__high_priority_disabled = value; }
+        }
+        public bool ShouldSerializehigh_priority_disabled() => __pbn__high_priority_disabled != null;
+        public void Resethigh_priority_disabled() => __pbn__high_priority_disabled = null;
+        private bool? __pbn__high_priority_disabled;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public bool has_hp_resource
+        {
+            get { return __pbn__has_hp_resource.GetValueOrDefault(); }
+            set { __pbn__has_hp_resource = value; }
+        }
+        public bool ShouldSerializehas_hp_resource() => __pbn__has_hp_resource != null;
+        public void Resethas_hp_resource() => __pbn__has_hp_resource = null;
+        private bool? __pbn__has_hp_resource;
 
         [global::ProtoBuf.ProtoMember(12)]
         public bool joined_from_partyfinder
@@ -573,6 +603,17 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializematchmaking_flags() => __pbn__matchmaking_flags != null;
         public void Resetmatchmaking_flags() => __pbn__matchmaking_flags = null;
         private uint? __pbn__matchmaking_flags;
+
+        [global::ProtoBuf.ProtoMember(68)]
+        [global::System.ComponentModel.DefaultValue(EHighPriorityMMState.k_EHighPriorityMM_Unknown)]
+        public EHighPriorityMMState high_priority_state
+        {
+            get { return __pbn__high_priority_state ?? EHighPriorityMMState.k_EHighPriorityMM_Unknown; }
+            set { __pbn__high_priority_state = value; }
+        }
+        public bool ShouldSerializehigh_priority_state() => __pbn__high_priority_state != null;
+        public void Resethigh_priority_state() => __pbn__high_priority_state = null;
+        private EHighPriorityMMState? __pbn__high_priority_state;
 
         [global::ProtoBuf.ProtoContract()]
         public enum State
@@ -1230,6 +1271,16 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializerank_mmr_boost_type() => __pbn__rank_mmr_boost_type != null;
         public void Resetrank_mmr_boost_type() => __pbn__rank_mmr_boost_type = null;
         private EDOTAMMRBoostType? __pbn__rank_mmr_boost_type;
+
+        [global::ProtoBuf.ProtoMember(47, DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
+        public int queue_point_adjustment
+        {
+            get { return __pbn__queue_point_adjustment.GetValueOrDefault(); }
+            set { __pbn__queue_point_adjustment = value; }
+        }
+        public bool ShouldSerializequeue_point_adjustment() => __pbn__queue_point_adjustment != null;
+        public void Resetqueue_point_adjustment() => __pbn__queue_point_adjustment = null;
+        private int? __pbn__queue_point_adjustment;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class CDOTALobbyMemberXPBonus : global::ProtoBuf.IExtensible
@@ -2749,6 +2800,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_ELaneSelectionFlags_SUPPORT_SOFT = 8,
         k_ELaneSelectionFlags_SUPPORT_HARD = 16,
         k_ELaneSelectionFlags_SUPPORT = 24,
+        k_ELaneSelectionFlags_ALL = 31,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2756,6 +2808,19 @@ namespace SteamKit2.GC.Dota.Internal
     {
         k_EPartyMatchmakingFlags_None = 0,
         k_EPartyMatchmakingFlags_LargeRankSpread = 1,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EHighPriorityMMState
+    {
+        k_EHighPriorityMM_Unknown = 0,
+        k_EHighPriorityMM_MissingMMData = 1,
+        k_EHighPriorityMM_ResourceMissing = 2,
+        k_EHighPriorityMM_ManuallyDisabled = 3,
+        k_EHighPriorityMM_Min_Enabled = 64,
+        k_EHighPriorityMM_AllRolesSelected = 65,
+        k_EHighPriorityMM_UsingResource = 66,
+        k_EHighPriorityMM_FiveStack = 67,
     }
 
     [global::ProtoBuf.ProtoContract()]

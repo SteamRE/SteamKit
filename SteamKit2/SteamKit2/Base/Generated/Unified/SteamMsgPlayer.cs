@@ -213,6 +213,16 @@ namespace SteamKit2.Unified.Internal
         public void Resetnews_language() => __pbn__news_language = null;
         private string __pbn__news_language;
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint request_flags
+        {
+            get { return __pbn__request_flags.GetValueOrDefault(); }
+            set { __pbn__request_flags = value; }
+        }
+        public bool ShouldSerializerequest_flags() => __pbn__request_flags != null;
+        public void Resetrequest_flags() => __pbn__request_flags = null;
+        private uint? __pbn__request_flags;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -335,6 +345,16 @@ namespace SteamKit2.Unified.Internal
 
             [global::ProtoBuf.ProtoMember(2)]
             public global::System.Collections.Generic.List<CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime> friends { get; } = new global::System.Collections.Generic.List<CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime>();
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint display_order
+            {
+                get { return __pbn__display_order.GetValueOrDefault(); }
+                set { __pbn__display_order = value; }
+            }
+            public bool ShouldSerializedisplay_order() => __pbn__display_order != null;
+            public void Resetdisplay_order() => __pbn__display_order = null;
+            private uint? __pbn__display_order;
 
         }
 

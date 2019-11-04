@@ -9,51 +9,14 @@ namespace SteamKit2.GC.Underlords.Internal
 {
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CExtraMsgBlock : global::ProtoBuf.IExtensible
+    public partial class CMsgGameModifiers : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint msg_type
-        {
-            get { return __pbn__msg_type.GetValueOrDefault(); }
-            set { __pbn__msg_type = value; }
-        }
-        public bool ShouldSerializemsg_type() => __pbn__msg_type != null;
-        public void Resetmsg_type() => __pbn__msg_type = null;
-        private uint? __pbn__msg_type;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public byte[] contents
-        {
-            get { return __pbn__contents; }
-            set { __pbn__contents = value; }
-        }
-        public bool ShouldSerializecontents() => __pbn__contents != null;
-        public void Resetcontents() => __pbn__contents = null;
-        private byte[] __pbn__contents;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public ulong msg_key
-        {
-            get { return __pbn__msg_key.GetValueOrDefault(); }
-            set { __pbn__msg_key = value; }
-        }
-        public bool ShouldSerializemsg_key() => __pbn__msg_key != null;
-        public void Resetmsg_key() => __pbn__msg_key = null;
-        private ulong? __pbn__msg_key;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public bool is_compressed
-        {
-            get { return __pbn__is_compressed.GetValueOrDefault(); }
-            set { __pbn__is_compressed = value; }
-        }
-        public bool ShouldSerializeis_compressed() => __pbn__is_compressed != null;
-        public void Resetis_compressed() => __pbn__is_compressed = null;
-        private bool? __pbn__is_compressed;
+        [global::ProtoBuf.ProtoMember(1, IsPacked = true)]
+        public global::System.Collections.Generic.List<uint> banned_game_ids { get; } = new global::System.Collections.Generic.List<uint>();
 
     }
 
@@ -378,6 +341,16 @@ namespace SteamKit2.GC.Underlords.Internal
         public void Resetserver_steam_id() => __pbn__server_steam_id = null;
         private ulong? __pbn__server_steam_id;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool dev_ignore_staging_files
+        {
+            get { return __pbn__dev_ignore_staging_files.GetValueOrDefault(); }
+            set { __pbn__dev_ignore_staging_files = value; }
+        }
+        public bool ShouldSerializedev_ignore_staging_files() => __pbn__dev_ignore_staging_files != null;
+        public void Resetdev_ignore_staging_files() => __pbn__dev_ignore_staging_files = null;
+        private bool? __pbn__dev_ignore_staging_files;
+
         [global::ProtoBuf.ProtoMember(5)]
         public ulong lobby_id
         {
@@ -521,6 +494,22 @@ namespace SteamKit2.GC.Underlords.Internal
         public void Resetbot_difficulty() => __pbn__bot_difficulty = null;
         private EBotDifficulty? __pbn__bot_difficulty;
 
+        [global::ProtoBuf.ProtoMember(13)]
+        public bool use_custom_modifier
+        {
+            get { return __pbn__use_custom_modifier.GetValueOrDefault(); }
+            set { __pbn__use_custom_modifier = value; }
+        }
+        public bool ShouldSerializeuse_custom_modifier() => __pbn__use_custom_modifier != null;
+        public void Resetuse_custom_modifier() => __pbn__use_custom_modifier = null;
+        private bool? __pbn__use_custom_modifier;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public CMsgGameModifiers custom_modifier { get; set; }
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public global::System.Collections.Generic.List<TeamInfo> teams { get; } = new global::System.Collections.Generic.List<TeamInfo>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Member : global::ProtoBuf.IExtensible
         {
@@ -600,6 +589,26 @@ namespace SteamKit2.GC.Underlords.Internal
             public bool ShouldSerializeplatform() => __pbn__platform != null;
             public void Resetplatform() => __pbn__platform = null;
             private EDACPlatform? __pbn__platform;
+
+            [global::ProtoBuf.ProtoMember(8)]
+            public uint team
+            {
+                get { return __pbn__team.GetValueOrDefault(); }
+                set { __pbn__team = value; }
+            }
+            public bool ShouldSerializeteam() => __pbn__team != null;
+            public void Resetteam() => __pbn__team = null;
+            private uint? __pbn__team;
+
+            [global::ProtoBuf.ProtoMember(9)]
+            public uint underlord_id
+            {
+                get { return __pbn__underlord_id.GetValueOrDefault(); }
+                set { __pbn__underlord_id = value; }
+            }
+            public bool ShouldSerializeunderlord_id() => __pbn__underlord_id != null;
+            public void Resetunderlord_id() => __pbn__underlord_id = null;
+            private uint? __pbn__underlord_id;
 
         }
 
@@ -684,6 +693,99 @@ namespace SteamKit2.GC.Underlords.Internal
         }
 
         [global::ProtoBuf.ProtoContract()]
+        public partial class TeamInfo : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1, IsPacked = true)]
+            public global::System.Collections.Generic.List<uint> account_ids { get; } = new global::System.Collections.Generic.List<uint>();
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string team_name
+            {
+                get { return __pbn__team_name ?? ""; }
+                set { __pbn__team_name = value; }
+            }
+            public bool ShouldSerializeteam_name() => __pbn__team_name != null;
+            public void Resetteam_name() => __pbn__team_name = null;
+            private string __pbn__team_name;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint first_played
+            {
+                get { return __pbn__first_played.GetValueOrDefault(); }
+                set { __pbn__first_played = value; }
+            }
+            public bool ShouldSerializefirst_played() => __pbn__first_played != null;
+            public void Resetfirst_played() => __pbn__first_played = null;
+            private uint? __pbn__first_played;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public uint casual_games
+            {
+                get { return __pbn__casual_games.GetValueOrDefault(); }
+                set { __pbn__casual_games = value; }
+            }
+            public bool ShouldSerializecasual_games() => __pbn__casual_games != null;
+            public void Resetcasual_games() => __pbn__casual_games = null;
+            private uint? __pbn__casual_games;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public uint ranked_games
+            {
+                get { return __pbn__ranked_games.GetValueOrDefault(); }
+                set { __pbn__ranked_games = value; }
+            }
+            public bool ShouldSerializeranked_games() => __pbn__ranked_games != null;
+            public void Resetranked_games() => __pbn__ranked_games = null;
+            private uint? __pbn__ranked_games;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public uint num_first_place
+            {
+                get { return __pbn__num_first_place.GetValueOrDefault(); }
+                set { __pbn__num_first_place = value; }
+            }
+            public bool ShouldSerializenum_first_place() => __pbn__num_first_place != null;
+            public void Resetnum_first_place() => __pbn__num_first_place = null;
+            private uint? __pbn__num_first_place;
+
+            [global::ProtoBuf.ProtoMember(7)]
+            public uint num_top_three
+            {
+                get { return __pbn__num_top_three.GetValueOrDefault(); }
+                set { __pbn__num_top_three = value; }
+            }
+            public bool ShouldSerializenum_top_three() => __pbn__num_top_three != null;
+            public void Resetnum_top_three() => __pbn__num_top_three = null;
+            private uint? __pbn__num_top_three;
+
+            [global::ProtoBuf.ProtoMember(8)]
+            public uint mmr_level_score
+            {
+                get { return __pbn__mmr_level_score.GetValueOrDefault(); }
+                set { __pbn__mmr_level_score = value; }
+            }
+            public bool ShouldSerializemmr_level_score() => __pbn__mmr_level_score != null;
+            public void Resetmmr_level_score() => __pbn__mmr_level_score = null;
+            private uint? __pbn__mmr_level_score;
+
+            [global::ProtoBuf.ProtoMember(9)]
+            public uint flags
+            {
+                get { return __pbn__flags.GetValueOrDefault(); }
+                set { __pbn__flags = value; }
+            }
+            public bool ShouldSerializeflags() => __pbn__flags != null;
+            public void Resetflags() => __pbn__flags = null;
+            private uint? __pbn__flags;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
         public enum EMemberRights
         {
             k_eMemberRights_Admin = 1,
@@ -707,6 +809,13 @@ namespace SteamKit2.GC.Underlords.Internal
             k_eBotDifficulty_Medium = 2,
             k_eBotDifficulty_Hard = 3,
             k_eBotDifficulty_Nightmare = 4,
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum ETeamFlags
+        {
+            k_eTeamFlags_CanRename = 1,
+            k_eTeamFlags_RenameCooldown = 2,
         }
 
     }
@@ -768,16 +877,6 @@ namespace SteamKit2.GC.Underlords.Internal
         public void Resetunlock_ranked_progress() => __pbn__unlock_ranked_progress = null;
         private uint? __pbn__unlock_ranked_progress;
 
-        [global::ProtoBuf.ProtoMember(7)]
-        public uint active_underlord
-        {
-            get { return __pbn__active_underlord.GetValueOrDefault(); }
-            set { __pbn__active_underlord = value; }
-        }
-        public bool ShouldSerializeactive_underlord() => __pbn__active_underlord != null;
-        public void Resetactive_underlord() => __pbn__active_underlord = null;
-        private uint? __pbn__active_underlord;
-
         [global::ProtoBuf.ProtoMember(6)]
         public float mmr_level_partial_progress
         {
@@ -838,6 +937,16 @@ namespace SteamKit2.GC.Underlords.Internal
         public void Resetmm_ranked_ban_reason() => __pbn__mm_ranked_ban_reason = null;
         private uint? __pbn__mm_ranked_ban_reason;
 
+        [global::ProtoBuf.ProtoMember(13)]
+        public uint credits
+        {
+            get { return __pbn__credits.GetValueOrDefault(); }
+            set { __pbn__credits = value; }
+        }
+        public bool ShouldSerializecredits() => __pbn__credits != null;
+        public void Resetcredits() => __pbn__credits = null;
+        private uint? __pbn__credits;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -889,6 +998,38 @@ namespace SteamKit2.GC.Underlords.Internal
         public bool ShouldSerializebot_difficulty() => __pbn__bot_difficulty != null;
         public void Resetbot_difficulty() => __pbn__bot_difficulty = null;
         private CSODACParty.EBotDifficulty? __pbn__bot_difficulty;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue(EDACGameMode.k_EDACGameMode_Invalid)]
+        public EDACGameMode game_mode
+        {
+            get { return __pbn__game_mode ?? EDACGameMode.k_EDACGameMode_Invalid; }
+            set { __pbn__game_mode = value; }
+        }
+        public bool ShouldSerializegame_mode() => __pbn__game_mode != null;
+        public void Resetgame_mode() => __pbn__game_mode = null;
+        private EDACGameMode? __pbn__game_mode;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint underlord_id
+        {
+            get { return __pbn__underlord_id.GetValueOrDefault(); }
+            set { __pbn__underlord_id = value; }
+        }
+        public bool ShouldSerializeunderlord_id() => __pbn__underlord_id != null;
+        public void Resetunderlord_id() => __pbn__underlord_id = null;
+        private uint? __pbn__underlord_id;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        [global::System.ComponentModel.DefaultValue(EDACRegionMode.k_EDACRegionMode_ROW)]
+        public EDACRegionMode region_mode
+        {
+            get { return __pbn__region_mode ?? EDACRegionMode.k_EDACRegionMode_ROW; }
+            set { __pbn__region_mode = value; }
+        }
+        public bool ShouldSerializeregion_mode() => __pbn__region_mode != null;
+        public void Resetregion_mode() => __pbn__region_mode = null;
+        private EDACRegionMode? __pbn__region_mode;
 
     }
 
@@ -1031,6 +1172,23 @@ namespace SteamKit2.GC.Underlords.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public enum EDACStoreID
+    {
+        k_EDACStoreID_Invalid = 0,
+        k_EDACStoreID_iOS = 1,
+        k_EDACStoreID_GooglePlay = 2,
+        k_EDACStoreID_SteamOverlay = 3,
+        k_EDACStoreID_Test = 4,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EDACRegionMode
+    {
+        k_EDACRegionMode_ROW = 0,
+        k_EDACRegionMode_China = 1,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EDACMatchMode
     {
         k_EDACMatchMode_Invalid = 0,
@@ -1046,7 +1204,9 @@ namespace SteamKit2.GC.Underlords.Internal
         k_EDACGameMode_Invalid = 0,
         k_EDACGameMode_Normal = 1,
         k_EDACGameMode_Turbo = 2,
-        k_EDACGameMode_BuddyBattles = 3,
+        k_EDACGameMode_Duos = 3,
+        k_EDACGameMode_TechPrototypeA = 4,
+        k_EDACGameMode_Sandbox = 5,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1096,6 +1256,18 @@ namespace SteamKit2.GC.Underlords.Internal
         k_EDACAIType_PB18 = 38,
         k_EDACAIType_PB19 = 39,
         k_EDACAIType_PB20 = 40,
+        k_EDACAIType_PB21 = 41,
+        k_EDACAIType_PB22 = 42,
+        k_EDACAIType_PB23 = 43,
+        k_EDACAIType_PB24 = 44,
+        k_EDACAIType_PB25 = 45,
+        k_EDACAIType_PB26 = 46,
+        k_EDACAIType_PB27 = 47,
+        k_EDACAIType_PB28 = 48,
+        k_EDACAIType_PB29 = 49,
+        k_EDACAIType_PB30 = 50,
+        k_EDACAIType_PB31 = 51,
+        k_EDACAIType_PB32 = 52,
     }
 
     [global::ProtoBuf.ProtoContract()]

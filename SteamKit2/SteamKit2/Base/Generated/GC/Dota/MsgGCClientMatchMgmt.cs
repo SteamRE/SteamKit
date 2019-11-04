@@ -186,6 +186,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetlane_selection_flags() => __pbn__lane_selection_flags = null;
         private uint? __pbn__lane_selection_flags;
 
+        [global::ProtoBuf.ProtoMember(19)]
+        public bool high_priority_disabled
+        {
+            get { return __pbn__high_priority_disabled.GetValueOrDefault(); }
+            set { __pbn__high_priority_disabled = value; }
+        }
+        public bool ShouldSerializehigh_priority_disabled() => __pbn__high_priority_disabled != null;
+        public void Resethigh_priority_disabled() => __pbn__high_priority_disabled = null;
+        private bool? __pbn__high_priority_disabled;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2730,6 +2740,54 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializelane_selection_flags() => __pbn__lane_selection_flags != null;
         public void Resetlane_selection_flags() => __pbn__lane_selection_flags = null;
         private uint? __pbn__lane_selection_flags;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool high_priority_disabled
+        {
+            get { return __pbn__high_priority_disabled.GetValueOrDefault(); }
+            set { __pbn__high_priority_disabled = value; }
+        }
+        public bool ShouldSerializehigh_priority_disabled() => __pbn__high_priority_disabled != null;
+        public void Resethigh_priority_disabled() => __pbn__high_priority_disabled = null;
+        private bool? __pbn__high_priority_disabled;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToClientRequestMMInfo : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCMMInfo : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint lane_selection_flags
+        {
+            get { return __pbn__lane_selection_flags.GetValueOrDefault(); }
+            set { __pbn__lane_selection_flags = value; }
+        }
+        public bool ShouldSerializelane_selection_flags() => __pbn__lane_selection_flags != null;
+        public void Resetlane_selection_flags() => __pbn__lane_selection_flags = null;
+        private uint? __pbn__lane_selection_flags;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool high_priority_disabled
+        {
+            get { return __pbn__high_priority_disabled.GetValueOrDefault(); }
+            set { __pbn__high_priority_disabled = value; }
+        }
+        public bool ShouldSerializehigh_priority_disabled() => __pbn__high_priority_disabled != null;
+        public void Resethigh_priority_disabled() => __pbn__high_priority_disabled = null;
+        private bool? __pbn__high_priority_disabled;
 
     }
 

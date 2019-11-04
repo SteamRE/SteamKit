@@ -520,6 +520,45 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientNetworkingMobileCertRequest : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint app_id
+        {
+            get { return __pbn__app_id.GetValueOrDefault(); }
+            set { __pbn__app_id = value; }
+        }
+        public bool ShouldSerializeapp_id() => __pbn__app_id != null;
+        public void Resetapp_id() => __pbn__app_id = null;
+        private uint? __pbn__app_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientNetworkingMobileCertReply : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string encoded_cert
+        {
+            get { return __pbn__encoded_cert ?? ""; }
+            set { __pbn__encoded_cert = value; }
+        }
+        public bool ShouldSerializeencoded_cert() => __pbn__encoded_cert != null;
+        public void Resetencoded_cert() => __pbn__encoded_cert = null;
+        private string __pbn__encoded_cert;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgClientGetAppOwnershipTicket : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
