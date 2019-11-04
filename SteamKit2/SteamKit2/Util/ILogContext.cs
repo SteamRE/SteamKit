@@ -13,4 +13,12 @@
         /// <param name="args">An array containing zero or more objects to format.</param>
         void LogDebug( string category, string message, params object?[]? args );
     }
+
+    sealed class DebugLogContext : ILogContext
+    {
+        public static ILogContext Instance { get; } = new DebugLogContext();
+
+        public void LogDebug( string category, string message, params object?[]? args )
+            => DebugLog.WriteLine( category, message, args );
+    }
 }

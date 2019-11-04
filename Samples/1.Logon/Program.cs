@@ -37,13 +37,17 @@ namespace Sample1_Logon
                 Console.WriteLine( "Sample1: No username and password specified!" );
                 return;
             }
-
             // save our logon details
             user = args[ 0 ];
             pass = args[ 1 ];
 
+            var config = SteamConfiguration.Create( b => b.WithProtocolTypes( ProtocolTypes.WebSocket ) );
+
             // create our steamclient instance
-            steamClient = new SteamClient();
+            steamClient = new SteamClient(config);
+
+            // steamClient.DebugNetworkListener = new NetHookNetworkListener();
+
             // create the callback manager which will route callbacks to function calls
             manager = new CallbackManager( steamClient );
 
@@ -58,6 +62,7 @@ namespace Sample1_Logon
 
             manager.Subscribe<SteamUser.LoggedOnCallback>( OnLoggedOn );
             manager.Subscribe<SteamUser.LoggedOffCallback>( OnLoggedOff );
+            manager.Subscribe<SteamUser.AccountInfoCallback>( OnAccountInfo );
 
             isRunning = true;
 
@@ -72,6 +77,10 @@ namespace Sample1_Logon
                 // in order for the callbacks to get routed, they need to be handled by the manager
                 manager.RunWaitCallbacks( TimeSpan.FromSeconds( 1 ) );
             }
+
+            Console.WriteLine( "Total memory allocations: {0}", GC.GetTotalAllocatedBytes( precise: true ) );
+            Console.WriteLine( "Press any key to exit..." );
+            Console.ReadKey();
         }
 
         static void OnConnected( SteamClient.ConnectedCallback callback )
@@ -115,16 +124,17 @@ namespace Sample1_Logon
             }
 
             Console.WriteLine( "Successfully logged on!" );
-
-            // at this point, we'd be able to perform actions on Steam
-
-            // for this sample we'll just log off
-            steamUser.LogOff();
         }
 
         static void OnLoggedOff( SteamUser.LoggedOffCallback callback )
         {
             Console.WriteLine( "Logged off of Steam: {0}", callback.Result );
+        }
+
+        static void OnAccountInfo (SteamUser.AccountInfoCallback callback)
+        {
+            Console.WriteLine( "Got account info, logging off..." );
+            steamUser.LogOff();
         }
     }
 }
