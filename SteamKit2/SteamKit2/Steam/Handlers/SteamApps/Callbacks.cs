@@ -315,12 +315,12 @@ namespace SteamKit2
 
                 foreach ( var package_token in msg.package_access_tokens )
                 {
-                    PackageTokens.Add( package_token.packageid, package_token.access_token );
+                    PackageTokens[ package_token.packageid ] = package_token.access_token;
                 }
 
                 foreach ( var app_token in msg.app_access_tokens )
                 {
-                    AppTokens.Add( app_token.appid, app_token.access_token );
+                    AppTokens[ app_token.appid ] = app_token.access_token;
                 }
             }
         }
@@ -397,12 +397,12 @@ namespace SteamKit2
 
                 foreach ( var package_change in msg.package_changes )
                 {
-                    PackageChanges.Add( package_change.packageid, new PICSChangeData( package_change ) );
+                    PackageChanges[ package_change.packageid ] = new PICSChangeData( package_change );
                 }
 
                 foreach ( var app_change in msg.app_changes )
                 {
-                    AppChanges.Add( app_change.appid, new PICSChangeData( app_change ) );
+                    AppChanges[ app_change.appid ] = new PICSChangeData( app_change );
                 }
             }
         }
@@ -547,12 +547,12 @@ namespace SteamKit2
 
                 foreach ( var package_info in msg.packages )
                 {
-                    Packages.Add( package_info.packageid, new PICSProductInfo( package_info ) );
+                    Packages[ package_info.packageid ] = new PICSProductInfo( package_info );
                 }
 
                 foreach ( var app_info in msg.apps )
                 {
-                    Apps.Add( app_info.appid, new PICSProductInfo( msg, app_info ) );
+                    Apps[ app_info.appid ] = new PICSProductInfo( msg, app_info );
                 }
             }
         }
@@ -647,7 +647,7 @@ namespace SteamKit2
 
                 foreach ( var password in msg.betapasswords )
                 {
-                    BetaPasswords.Add( password.betaname, Utils.DecodeHexString( password.betapassword ) );
+                    BetaPasswords[ password.betaname ] = Utils.DecodeHexString( password.betapassword );
                 }
             }
         }
