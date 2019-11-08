@@ -402,8 +402,26 @@ namespace SteamKit2
 
             if ( ipAddr.AddressFamily == AddressFamily.InterNetworkV6 )
             {
-                // TODO: Implement ipv6 obfuscation, it uses MsgClientLogon.ObfuscationMask too
-                // See ObfuscatePrivateIP in steamclient
+                // TODO: See ObfuscatePrivateIP in steamclient, unsure if applied correctly
+                localIp.v6[ 0 ] ^= 0xBA;
+                localIp.v6[ 1 ] ^= 0xAD;
+                localIp.v6[ 2 ] ^= 0xF0;
+                localIp.v6[ 3 ] ^= 0x0D;
+
+                localIp.v6[ 4 ] ^= 0xBA;
+                localIp.v6[ 5 ] ^= 0xAD;
+                localIp.v6[ 6 ] ^= 0xF0;
+                localIp.v6[ 7 ] ^= 0x0D;
+
+                localIp.v6[ 8 ] ^= 0xBA;
+                localIp.v6[ 9 ] ^= 0xAD;
+                localIp.v6[ 10 ] ^= 0xF0;
+                localIp.v6[ 11 ] ^= 0x0D;
+
+                localIp.v6[ 12 ] ^= 0xBA;
+                localIp.v6[ 13 ] ^= 0xAD;
+                localIp.v6[ 14 ] ^= 0xF0;
+                localIp.v6[ 15 ] ^= 0x0D;
             }
             else
             {
