@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using System.Text;
-using System.Threading;
 using SteamKit2.Util;
 using SteamKit2.Util.MacHelpers;
 using Microsoft.Win32;
@@ -257,8 +256,7 @@ namespace SteamKit2
                 using var disk = DADiskCreateFromBSDName( CFTypeRef.None, session, stat.f_mntfromname );
                 using var properties = DADiskCopyDescription( disk );
                 using var key = CFStringCreateWithCString( CFTypeRef.None, kDADiskDescriptionMediaUUIDKey, CFStringEncoding.kCFStringEncodingASCII );
-                IntPtr cfuuid = IntPtr.Zero;
-                if ( CFDictionaryGetValueIfPresent( properties, key, out cfuuid ) )
+                if ( CFDictionaryGetValueIfPresent( properties, key, out IntPtr cfuuid ) )
                 {
                     using var uuidString = CFUUIDCreateString( CFTypeRef.None, cfuuid );
                     var stringBuilder = new StringBuilder( 64 );
@@ -348,7 +346,7 @@ namespace SteamKit2
             {
                 this.KeyValues["3B3"].Value = value;
             }
-            
+
             public void Set333( string value )
             {
                 this.KeyValues["333"] = new KeyValue( value: value );
@@ -417,7 +415,7 @@ namespace SteamKit2
             return ms.ToArray();
         }
 
-        // For tests
+        // For tests usage only
         internal static void ResetMachineProvider()
         {
             machineInfoProvider = null;
