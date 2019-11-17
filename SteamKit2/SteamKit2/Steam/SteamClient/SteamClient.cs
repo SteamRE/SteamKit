@@ -72,10 +72,7 @@ namespace SteamKit2
             this.AddHandler( new SteamMatchmaking() );
             this.AddHandler( new SteamNetworking() );
 
-            if ( HardwareUtils.MachineInfoProvider == null )
-            {
-                HardwareUtils.Init(HardwareUtils.GetOSProvider());
-            }
+            HardwareUtils.InitDefaultProvider();
 
             using ( var process = Process.GetCurrentProcess() )
             {

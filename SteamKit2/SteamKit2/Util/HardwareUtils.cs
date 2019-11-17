@@ -278,7 +278,6 @@ namespace SteamKit2
     /// </summary>
     public static class HardwareUtils
     {
-        private static bool isMachineInfoProviderInitialized;
         private static IMachineInfoProvider? machineInfoProvider;
         private static readonly object setProviderLock = new object();
 
@@ -291,12 +290,15 @@ namespace SteamKit2
             get => machineInfoProvider;
             private set
             {
-                if ( isMachineInfoProviderInitialized )
+                lock ( setProviderLock )
                 {
-                    throw new InvalidOperationException(nameof(MachineInfoProvider) + " can't be (re-)set after its initialization.");
-                }
+                    if ( machineInfoProvider != null )
+                    {
+                        throw new InvalidOperationException( nameof(MachineInfoProvider) + " can't be (re-)set after its initialization." );
+                    }
 
-                Interlocked.Exchange( ref machineInfoProvider, value );
+                    machineInfoProvider = value;
+                }
             }
         }
 
@@ -365,25 +367,32 @@ namespace SteamKit2
             {
                 throw new ArgumentNullException( nameof(provider) );
             }
-            
-            // Don't initialize MachineInfoProvider if it is already initialized
-            if ( isMachineInfoProviderInitialized )
+
+            if ( machineInfoProvider != null )
             {
-                return;
+                throw new InvalidOperationException(nameof(MachineInfoProvider) + " can't be (re-)set after its initialization.");
             }
 
-            lock ( setProviderLock )
+            machineInfoProvider = provider;
+            generateTask = Task.Factory.StartNew( GenerateMachineID );
+
+            if ( !generateTask.Wait( TimeSpan.FromSeconds( 30 ) ) )
             {
-                if ( isMachineInfoProviderInitialized )
-                {
-                    return;
-                }
-                
-                MachineInfoProvider = provider;
-                generateTask = Task.Factory.StartNew( GenerateMachineID );
+                throw new TimeoutException("Unable to generate machine_id in a timely fashion");
             }
         }
 
+        internal static void InitDefaultProvider()
+        {
+            if ( MachineInfoProvider != null )
+            {
+                return;
+            }
+            
+            MachineInfoProvider = GetOSProvider();
+            generateTask = Task.Factory.StartNew( GenerateMachineID );
+        }
+        
         internal static byte[]? GetMachineID()
         {
             if ( generateTask is null )
@@ -400,11 +409,6 @@ namespace SteamKit2
                 return null;
             }
 
-            if ( !isMachineInfoProviderInitialized )
-            {
-                isMachineInfoProviderInitialized = true;
-            }
-
             MachineID machineId = generateTask.Result;
 
             using MemoryStream ms = new MemoryStream();
@@ -413,6 +417,12 @@ namespace SteamKit2
             return ms.ToArray();
         }
 
+        // For tests
+        internal static void ResetMachineProvider()
+        {
+            machineInfoProvider = null;
+        }
+        
         static MachineID GenerateMachineID()
         {
             // the aug 25th 2015 CM update made well-formed machine MessageObjects required for logon
@@ -421,9 +431,9 @@ namespace SteamKit2
 
             var machineId = new MachineID();
 
-            machineId.SetBB3( GetHexString( MachineInfoProvider.GetMachineGuid() ) );
-            machineId.SetFF2( GetHexString( MachineInfoProvider.GetMacAddress() ) );
-            machineId.Set3B3( GetHexString( MachineInfoProvider.GetDiskId() ) );
+            machineId.SetBB3( GetHexString( MachineInfoProvider!.GetMachineGuid() ) );
+            machineId.SetFF2( GetHexString( MachineInfoProvider!.GetMacAddress() ) );
+            machineId.Set3B3( GetHexString( MachineInfoProvider!.GetDiskId() ) );
 
             // 333 is some sort of user supplied data and is currently unused
 
