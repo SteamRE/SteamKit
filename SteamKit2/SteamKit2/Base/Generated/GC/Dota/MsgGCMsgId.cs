@@ -849,6 +849,8 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgSQLGCToGCGrantAllHeroProgressVictory = 8364,
         k_eMsgGCToGCGetAllHeroCurrent = 8635,
         k_eMsgGCToGCGetAllHeroCurrentResponse = 8636,
+        k_EMsgGCSubmitPlayerAvoidRequest = 8637,
+        k_EMsgGCSubmitPlayerAvoidRequestResponse = 8638,
         k_EMsgGCToClientNotificationsUpdated = 8639,
     }
 

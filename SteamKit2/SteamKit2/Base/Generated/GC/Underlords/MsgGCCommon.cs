@@ -21,6 +21,59 @@ namespace SteamKit2.GC.Underlords.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgTeamInfo : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, IsPacked = true)]
+        public global::System.Collections.Generic.List<uint> member_account_ids { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string team_name
+        {
+            get { return __pbn__team_name ?? ""; }
+            set { __pbn__team_name = value; }
+        }
+        public bool ShouldSerializeteam_name() => __pbn__team_name != null;
+        public void Resetteam_name() => __pbn__team_name = null;
+        private string __pbn__team_name;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint mmr_level_score
+        {
+            get { return __pbn__mmr_level_score.GetValueOrDefault(); }
+            set { __pbn__mmr_level_score = value; }
+        }
+        public bool ShouldSerializemmr_level_score() => __pbn__mmr_level_score != null;
+        public void Resetmmr_level_score() => __pbn__mmr_level_score = null;
+        private uint? __pbn__mmr_level_score;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint mmr_level
+        {
+            get { return __pbn__mmr_level.GetValueOrDefault(); }
+            set { __pbn__mmr_level = value; }
+        }
+        public bool ShouldSerializemmr_level() => __pbn__mmr_level != null;
+        public void Resetmmr_level() => __pbn__mmr_level = null;
+        private uint? __pbn__mmr_level;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint mmr_leaderboard_place
+        {
+            get { return __pbn__mmr_leaderboard_place.GetValueOrDefault(); }
+            set { __pbn__mmr_leaderboard_place = value; }
+        }
+        public bool ShouldSerializemmr_leaderboard_place() => __pbn__mmr_leaderboard_place != null;
+        public void Resetmmr_leaderboard_place() => __pbn__mmr_leaderboard_place = null;
+        private uint? __pbn__mmr_leaderboard_place;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CServerLobbyData_PlayerInfo : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -724,24 +777,14 @@ namespace SteamKit2.GC.Underlords.Internal
             private uint? __pbn__first_played;
 
             [global::ProtoBuf.ProtoMember(4)]
-            public uint casual_games
+            public uint games_played
             {
-                get { return __pbn__casual_games.GetValueOrDefault(); }
-                set { __pbn__casual_games = value; }
+                get { return __pbn__games_played.GetValueOrDefault(); }
+                set { __pbn__games_played = value; }
             }
-            public bool ShouldSerializecasual_games() => __pbn__casual_games != null;
-            public void Resetcasual_games() => __pbn__casual_games = null;
-            private uint? __pbn__casual_games;
-
-            [global::ProtoBuf.ProtoMember(5)]
-            public uint ranked_games
-            {
-                get { return __pbn__ranked_games.GetValueOrDefault(); }
-                set { __pbn__ranked_games = value; }
-            }
-            public bool ShouldSerializeranked_games() => __pbn__ranked_games != null;
-            public void Resetranked_games() => __pbn__ranked_games = null;
-            private uint? __pbn__ranked_games;
+            public bool ShouldSerializegames_played() => __pbn__games_played != null;
+            public void Resetgames_played() => __pbn__games_played = null;
+            private uint? __pbn__games_played;
 
             [global::ProtoBuf.ProtoMember(6)]
             public uint num_first_place
@@ -764,6 +807,26 @@ namespace SteamKit2.GC.Underlords.Internal
             private uint? __pbn__num_top_three;
 
             [global::ProtoBuf.ProtoMember(8)]
+            public uint mmr_level
+            {
+                get { return __pbn__mmr_level.GetValueOrDefault(); }
+                set { __pbn__mmr_level = value; }
+            }
+            public bool ShouldSerializemmr_level() => __pbn__mmr_level != null;
+            public void Resetmmr_level() => __pbn__mmr_level = null;
+            private uint? __pbn__mmr_level;
+
+            [global::ProtoBuf.ProtoMember(9)]
+            public uint mmr_level_progress
+            {
+                get { return __pbn__mmr_level_progress.GetValueOrDefault(); }
+                set { __pbn__mmr_level_progress = value; }
+            }
+            public bool ShouldSerializemmr_level_progress() => __pbn__mmr_level_progress != null;
+            public void Resetmmr_level_progress() => __pbn__mmr_level_progress = null;
+            private uint? __pbn__mmr_level_progress;
+
+            [global::ProtoBuf.ProtoMember(10)]
             public uint mmr_level_score
             {
                 get { return __pbn__mmr_level_score.GetValueOrDefault(); }
@@ -773,7 +836,7 @@ namespace SteamKit2.GC.Underlords.Internal
             public void Resetmmr_level_score() => __pbn__mmr_level_score = null;
             private uint? __pbn__mmr_level_score;
 
-            [global::ProtoBuf.ProtoMember(9)]
+            [global::ProtoBuf.ProtoMember(11)]
             public uint flags
             {
                 get { return __pbn__flags.GetValueOrDefault(); }
@@ -782,6 +845,26 @@ namespace SteamKit2.GC.Underlords.Internal
             public bool ShouldSerializeflags() => __pbn__flags != null;
             public void Resetflags() => __pbn__flags = null;
             private uint? __pbn__flags;
+
+            [global::ProtoBuf.ProtoMember(12)]
+            public uint leaderboard_place
+            {
+                get { return __pbn__leaderboard_place.GetValueOrDefault(); }
+                set { __pbn__leaderboard_place = value; }
+            }
+            public bool ShouldSerializeleaderboard_place() => __pbn__leaderboard_place != null;
+            public void Resetleaderboard_place() => __pbn__leaderboard_place = null;
+            private uint? __pbn__leaderboard_place;
+
+            [global::ProtoBuf.ProtoMember(13)]
+            public uint games_to_unlock_rename
+            {
+                get { return __pbn__games_to_unlock_rename.GetValueOrDefault(); }
+                set { __pbn__games_to_unlock_rename = value; }
+            }
+            public bool ShouldSerializegames_to_unlock_rename() => __pbn__games_to_unlock_rename != null;
+            public void Resetgames_to_unlock_rename() => __pbn__games_to_unlock_rename = null;
+            private uint? __pbn__games_to_unlock_rename;
 
         }
 

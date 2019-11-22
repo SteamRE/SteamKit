@@ -896,6 +896,16 @@ namespace SteamKit2.Unified.Internal
         public void Resetis_shared_file() => __pbn__is_shared_file = null;
         private bool? __pbn__is_shared_file;
 
+        [global::ProtoBuf.ProtoMember(12)]
+        public uint realm
+        {
+            get { return __pbn__realm.GetValueOrDefault(); }
+            set { __pbn__realm = value; }
+        }
+        public bool ShouldSerializerealm() => __pbn__realm != null;
+        public void Resetrealm() => __pbn__realm = null;
+        private uint? __pbn__realm;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1141,6 +1151,16 @@ namespace SteamKit2.Unified.Internal
         public bool ShouldSerializefilename() => __pbn__filename != null;
         public void Resetfilename() => __pbn__filename = null;
         private string __pbn__filename;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint realm
+        {
+            get { return __pbn__realm.GetValueOrDefault(); }
+            set { __pbn__realm = value; }
+        }
+        public bool ShouldSerializerealm() => __pbn__realm != null;
+        public void Resetrealm() => __pbn__realm = null;
+        private uint? __pbn__realm;
 
     }
 

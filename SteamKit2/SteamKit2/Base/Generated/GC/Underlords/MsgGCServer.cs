@@ -172,6 +172,9 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public global::System.Collections.Generic.List<Player> players { get; } = new global::System.Collections.Generic.List<Player>();
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<Team> teams { get; } = new global::System.Collections.Generic.List<Team>();
+
         [global::ProtoBuf.ProtoMember(8)]
         public uint lords_elo_k
         {
@@ -181,6 +184,26 @@ namespace SteamKit2.GC.Underlords.Internal
         public bool ShouldSerializelords_elo_k() => __pbn__lords_elo_k != null;
         public void Resetlords_elo_k() => __pbn__lords_elo_k = null;
         private uint? __pbn__lords_elo_k;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public float duos_mmr_level_score_change_mult
+        {
+            get { return __pbn__duos_mmr_level_score_change_mult.GetValueOrDefault(); }
+            set { __pbn__duos_mmr_level_score_change_mult = value; }
+        }
+        public bool ShouldSerializeduos_mmr_level_score_change_mult() => __pbn__duos_mmr_level_score_change_mult != null;
+        public void Resetduos_mmr_level_score_change_mult() => __pbn__duos_mmr_level_score_change_mult = null;
+        private float? __pbn__duos_mmr_level_score_change_mult;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public uint lords_elo_k_duos
+        {
+            get { return __pbn__lords_elo_k_duos.GetValueOrDefault(); }
+            set { __pbn__lords_elo_k_duos = value; }
+        }
+        public bool ShouldSerializelords_elo_k_duos() => __pbn__lords_elo_k_duos != null;
+        public void Resetlords_elo_k_duos() => __pbn__lords_elo_k_duos = null;
+        private uint? __pbn__lords_elo_k_duos;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class Player : global::ProtoBuf.IExtensible
@@ -250,6 +273,46 @@ namespace SteamKit2.GC.Underlords.Internal
             private uint? __pbn__lords_elo_ante;
 
             [global::ProtoBuf.ProtoMember(9)]
+            public bool lords_elo_ignore
+            {
+                get { return __pbn__lords_elo_ignore.GetValueOrDefault(); }
+                set { __pbn__lords_elo_ignore = value; }
+            }
+            public bool ShouldSerializelords_elo_ignore() => __pbn__lords_elo_ignore != null;
+            public void Resetlords_elo_ignore() => __pbn__lords_elo_ignore = null;
+            private bool? __pbn__lords_elo_ignore;
+
+            [global::ProtoBuf.ProtoMember(10)]
+            [global::System.ComponentModel.DefaultValue(1)]
+            public float level_score_change_mult
+            {
+                get { return __pbn__level_score_change_mult ?? 1; }
+                set { __pbn__level_score_change_mult = value; }
+            }
+            public bool ShouldSerializelevel_score_change_mult() => __pbn__level_score_change_mult != null;
+            public void Resetlevel_score_change_mult() => __pbn__level_score_change_mult = null;
+            private float? __pbn__level_score_change_mult;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Team : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint lords_elo_ante
+            {
+                get { return __pbn__lords_elo_ante.GetValueOrDefault(); }
+                set { __pbn__lords_elo_ante = value; }
+            }
+            public bool ShouldSerializelords_elo_ante() => __pbn__lords_elo_ante != null;
+            public void Resetlords_elo_ante() => __pbn__lords_elo_ante = null;
+            private uint? __pbn__lords_elo_ante;
+
+            [global::ProtoBuf.ProtoMember(4)]
             public bool lords_elo_ignore
             {
                 get { return __pbn__lords_elo_ignore.GetValueOrDefault(); }
@@ -370,6 +433,9 @@ namespace SteamKit2.GC.Underlords.Internal
         public bool ShouldSerializebot_difficulty() => __pbn__bot_difficulty != null;
         public void Resetbot_difficulty() => __pbn__bot_difficulty = null;
         private CSODACParty.EBotDifficulty? __pbn__bot_difficulty;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public global::System.Collections.Generic.List<CMsgTeamInfo> team_info { get; } = new global::System.Collections.Generic.List<CMsgTeamInfo>();
 
         [global::ProtoBuf.ProtoContract()]
         public partial class Member : global::ProtoBuf.IExtensible
@@ -881,6 +947,16 @@ namespace SteamKit2.GC.Underlords.Internal
             public void Resetelimination_round() => __pbn__elimination_round = null;
             private uint? __pbn__elimination_round;
 
+            [global::ProtoBuf.ProtoMember(5)]
+            public uint underlord_id
+            {
+                get { return __pbn__underlord_id.GetValueOrDefault(); }
+                set { __pbn__underlord_id = value; }
+            }
+            public bool ShouldSerializeunderlord_id() => __pbn__underlord_id != null;
+            public void Resetunderlord_id() => __pbn__underlord_id = null;
+            private uint? __pbn__underlord_id;
+
         }
 
     }
@@ -1098,6 +1174,35 @@ namespace SteamKit2.GC.Underlords.Internal
         public bool ShouldSerializechat_line_count() => __pbn__chat_line_count != null;
         public void Resetchat_line_count() => __pbn__chat_line_count = null;
         private uint? __pbn__chat_line_count;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgPlayerSignoutData_TeamUpdate : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint other_team_member
+        {
+            get { return __pbn__other_team_member.GetValueOrDefault(); }
+            set { __pbn__other_team_member = value; }
+        }
+        public bool ShouldSerializeother_team_member() => __pbn__other_team_member != null;
+        public void Resetother_team_member() => __pbn__other_team_member = null;
+        private uint? __pbn__other_team_member;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint final_place
+        {
+            get { return __pbn__final_place.GetValueOrDefault(); }
+            set { __pbn__final_place = value; }
+        }
+        public bool ShouldSerializefinal_place() => __pbn__final_place != null;
+        public void Resetfinal_place() => __pbn__final_place = null;
+        private uint? __pbn__final_place;
 
     }
 
@@ -1957,6 +2062,7 @@ namespace SteamKit2.GC.Underlords.Internal
         k_EPlayerSignoutData_MMRUpdate = 10,
         k_EPlayerSignoutData_EventGrantProgress = 11,
         k_EPlayerSignoutData_ChatStats = 12,
+        k_EPlayerSignoutData_TeamUpdate = 13,
     }
 
 }

@@ -1599,6 +1599,36 @@ namespace SteamKit2.GC.Dota.Internal
                 public void Resetgold_lost_to_death() => __pbn__gold_lost_to_death = null;
                 private uint? __pbn__gold_lost_to_death;
 
+                [global::ProtoBuf.ProtoMember(53)]
+                public uint command_count
+                {
+                    get { return __pbn__command_count.GetValueOrDefault(); }
+                    set { __pbn__command_count = value; }
+                }
+                public bool ShouldSerializecommand_count() => __pbn__command_count != null;
+                public void Resetcommand_count() => __pbn__command_count = null;
+                private uint? __pbn__command_count;
+
+                [global::ProtoBuf.ProtoMember(54)]
+                public uint mouse_click_cast_command_count
+                {
+                    get { return __pbn__mouse_click_cast_command_count.GetValueOrDefault(); }
+                    set { __pbn__mouse_click_cast_command_count = value; }
+                }
+                public bool ShouldSerializemouse_click_cast_command_count() => __pbn__mouse_click_cast_command_count != null;
+                public void Resetmouse_click_cast_command_count() => __pbn__mouse_click_cast_command_count = null;
+                private uint? __pbn__mouse_click_cast_command_count;
+
+                [global::ProtoBuf.ProtoMember(55)]
+                public uint teleports_used
+                {
+                    get { return __pbn__teleports_used.GetValueOrDefault(); }
+                    set { __pbn__teleports_used = value; }
+                }
+                public bool ShouldSerializeteleports_used() => __pbn__teleports_used != null;
+                public void Resetteleports_used() => __pbn__teleports_used = null;
+                private uint? __pbn__teleports_used;
+
                 [global::ProtoBuf.ProtoContract()]
                 public partial class CCustomGameData : global::ProtoBuf.IExtensible
                 {

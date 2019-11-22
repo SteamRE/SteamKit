@@ -375,6 +375,17 @@ namespace SteamKit2.Unified.Internal
             public void Resetpublic_ipv4() => __pbn__public_ipv4 = null;
             private uint? __pbn__public_ipv4;
 
+            [global::ProtoBuf.ProtoMember(8)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string public_ip_address
+            {
+                get { return __pbn__public_ip_address ?? ""; }
+                set { __pbn__public_ip_address = value; }
+            }
+            public bool ShouldSerializepublic_ip_address() => __pbn__public_ip_address != null;
+            public void Resetpublic_ip_address() => __pbn__public_ip_address = null;
+            private string __pbn__public_ip_address;
+
         }
 
     }

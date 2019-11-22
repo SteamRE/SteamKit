@@ -2821,6 +2821,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_EHighPriorityMM_AllRolesSelected = 65,
         k_EHighPriorityMM_UsingResource = 66,
         k_EHighPriorityMM_FiveStack = 67,
+        k_EHighPriorityMM_HighDemand = 68,
     }
 
     [global::ProtoBuf.ProtoContract()]

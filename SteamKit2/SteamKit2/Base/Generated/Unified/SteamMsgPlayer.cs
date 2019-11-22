@@ -522,6 +522,120 @@ namespace SteamKit2.Unified.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetAchievementsProgress_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong steamid
+        {
+            get { return __pbn__steamid.GetValueOrDefault(); }
+            set { __pbn__steamid = value; }
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string language
+        {
+            get { return __pbn__language ?? ""; }
+            set { __pbn__language = value; }
+        }
+        public bool ShouldSerializelanguage() => __pbn__language != null;
+        public void Resetlanguage() => __pbn__language = null;
+        private string __pbn__language;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<uint> appids { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetAchievementsProgress_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<AchievementProgress> achievement_progress { get; } = new global::System.Collections.Generic.List<AchievementProgress>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class AchievementProgress : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint appid
+            {
+                get { return __pbn__appid.GetValueOrDefault(); }
+                set { __pbn__appid = value; }
+            }
+            public bool ShouldSerializeappid() => __pbn__appid != null;
+            public void Resetappid() => __pbn__appid = null;
+            private uint? __pbn__appid;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint unlocked
+            {
+                get { return __pbn__unlocked.GetValueOrDefault(); }
+                set { __pbn__unlocked = value; }
+            }
+            public bool ShouldSerializeunlocked() => __pbn__unlocked != null;
+            public void Resetunlocked() => __pbn__unlocked = null;
+            private uint? __pbn__unlocked;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint total
+            {
+                get { return __pbn__total.GetValueOrDefault(); }
+                set { __pbn__total = value; }
+            }
+            public bool ShouldSerializetotal() => __pbn__total != null;
+            public void Resettotal() => __pbn__total = null;
+            private uint? __pbn__total;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public float percentage
+            {
+                get { return __pbn__percentage.GetValueOrDefault(); }
+                set { __pbn__percentage = value; }
+            }
+            public bool ShouldSerializepercentage() => __pbn__percentage != null;
+            public void Resetpercentage() => __pbn__percentage = null;
+            private float? __pbn__percentage;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public bool all_unlocked
+            {
+                get { return __pbn__all_unlocked.GetValueOrDefault(); }
+                set { __pbn__all_unlocked = value; }
+            }
+            public bool ShouldSerializeall_unlocked() => __pbn__all_unlocked != null;
+            public void Resetall_unlocked() => __pbn__all_unlocked = null;
+            private bool? __pbn__all_unlocked;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public uint cache_time
+            {
+                get { return __pbn__cache_time.GetValueOrDefault(); }
+                set { __pbn__cache_time = value; }
+            }
+            public bool ShouldSerializecache_time() => __pbn__cache_time != null;
+            public void Resetcache_time() => __pbn__cache_time = null;
+            private uint? __pbn__cache_time;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CPlayer_PostStatusToFriends_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1743,6 +1857,7 @@ namespace SteamKit2.Unified.Internal
         CPlayer_GetFriendsAppsActivity_Response GetFriendsAppsActivity(CPlayer_GetFriendsAppsActivity_Request request);
         CPlayer_GetGameBadgeLevels_Response GetGameBadgeLevels(CPlayer_GetGameBadgeLevels_Request request);
         CPlayer_GetEmoticonList_Response GetEmoticonList(CPlayer_GetEmoticonList_Request request);
+        CPlayer_GetAchievementsProgress_Response GetAchievementsProgress(CPlayer_GetAchievementsProgress_Request request);
         CPlayer_PostStatusToFriends_Response PostStatusToFriends(CPlayer_PostStatusToFriends_Request request);
         CPlayer_GetPostedStatus_Response GetPostedStatus(CPlayer_GetPostedStatus_Request request);
         CPlayer_DeletePostedStatus_Response DeletePostedStatus(CPlayer_DeletePostedStatus_Request request);
