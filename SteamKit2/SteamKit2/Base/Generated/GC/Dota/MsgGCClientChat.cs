@@ -710,6 +710,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetchat_flags() => __pbn__chat_flags = null;
         private uint? __pbn__chat_flags;
 
+        [global::ProtoBuf.ProtoMember(35)]
+        public bool started_finding_match
+        {
+            get { return __pbn__started_finding_match.GetValueOrDefault(); }
+            set { __pbn__started_finding_match = value; }
+        }
+        public bool ShouldSerializestarted_finding_match() => __pbn__started_finding_match != null;
+        public void Resetstarted_finding_match() => __pbn__started_finding_match = null;
+        private bool? __pbn__started_finding_match;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class DiceRoll : global::ProtoBuf.IExtensible
         {

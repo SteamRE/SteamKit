@@ -1272,6 +1272,7 @@ namespace SteamKit2.GC.Dota.Internal
         DOTA_LOW_PRIORITY_BAN_ABANDON = 0,
         DOTA_LOW_PRIORITY_BAN_REPORTS = 1,
         DOTA_LOW_PRIORITY_BAN_SECONDARY_ABANDON = 2,
+        DOTA_LOW_PRIORITY_BAN_PRE_GAME_ROLE = 3,
     }
 
     [global::ProtoBuf.ProtoContract()]

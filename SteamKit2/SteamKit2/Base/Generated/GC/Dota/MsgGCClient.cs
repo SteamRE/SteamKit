@@ -722,6 +722,75 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgDOTASubmitPlayerAvoidRequest : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint target_account_id
+        {
+            get { return __pbn__target_account_id.GetValueOrDefault(); }
+            set { __pbn__target_account_id = value; }
+        }
+        public bool ShouldSerializetarget_account_id() => __pbn__target_account_id != null;
+        public void Resettarget_account_id() => __pbn__target_account_id = null;
+        private uint? __pbn__target_account_id;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public ulong lobby_id
+        {
+            get { return __pbn__lobby_id.GetValueOrDefault(); }
+            set { __pbn__lobby_id = value; }
+        }
+        public bool ShouldSerializelobby_id() => __pbn__lobby_id != null;
+        public void Resetlobby_id() => __pbn__lobby_id = null;
+        private ulong? __pbn__lobby_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgDOTASubmitPlayerAvoidRequestResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint target_account_id
+        {
+            get { return __pbn__target_account_id.GetValueOrDefault(); }
+            set { __pbn__target_account_id = value; }
+        }
+        public bool ShouldSerializetarget_account_id() => __pbn__target_account_id != null;
+        public void Resettarget_account_id() => __pbn__target_account_id = null;
+        private uint? __pbn__target_account_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint result
+        {
+            get { return __pbn__result.GetValueOrDefault(); }
+            set { __pbn__result = value; }
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private uint? __pbn__result;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string debug_message
+        {
+            get { return __pbn__debug_message ?? ""; }
+            set { __pbn__debug_message = value; }
+        }
+        public bool ShouldSerializedebug_message() => __pbn__debug_message != null;
+        public void Resetdebug_message() => __pbn__debug_message = null;
+        private string __pbn__debug_message;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgDOTAReportCountsRequest : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -6886,16 +6955,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetbehavior_grade() => __pbn__behavior_grade = null;
         private uint? __pbn__behavior_grade;
 
-        [global::ProtoBuf.ProtoMember(16)]
-        public uint old_behavior_grade
-        {
-            get { return __pbn__old_behavior_grade.GetValueOrDefault(); }
-            set { __pbn__old_behavior_grade = value; }
-        }
-        public bool ShouldSerializeold_behavior_grade() => __pbn__old_behavior_grade != null;
-        public void Resetold_behavior_grade() => __pbn__old_behavior_grade = null;
-        private uint? __pbn__old_behavior_grade;
-
         [global::ProtoBuf.ProtoMember(17)]
         public uint raw_behavior_score
         {
@@ -6915,6 +6974,26 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeold_raw_behavior_score() => __pbn__old_raw_behavior_score != null;
         public void Resetold_raw_behavior_score() => __pbn__old_raw_behavior_score = null;
         private uint? __pbn__old_raw_behavior_score;
+
+        [global::ProtoBuf.ProtoMember(19)]
+        public uint comms_reports
+        {
+            get { return __pbn__comms_reports.GetValueOrDefault(); }
+            set { __pbn__comms_reports = value; }
+        }
+        public bool ShouldSerializecomms_reports() => __pbn__comms_reports != null;
+        public void Resetcomms_reports() => __pbn__comms_reports = null;
+        private uint? __pbn__comms_reports;
+
+        [global::ProtoBuf.ProtoMember(20)]
+        public uint comms_parties
+        {
+            get { return __pbn__comms_parties.GetValueOrDefault(); }
+            set { __pbn__comms_parties = value; }
+        }
+        public bool ShouldSerializecomms_parties() => __pbn__comms_parties != null;
+        public void Resetcomms_parties() => __pbn__comms_parties = null;
+        private uint? __pbn__comms_parties;
 
     }
 

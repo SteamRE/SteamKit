@@ -5538,6 +5538,65 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CSOAccountSeasonalOperation : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint season_value
+        {
+            get { return __pbn__season_value.GetValueOrDefault(); }
+            set { __pbn__season_value = value; }
+        }
+        public bool ShouldSerializeseason_value() => __pbn__season_value != null;
+        public void Resetseason_value() => __pbn__season_value = null;
+        private uint? __pbn__season_value;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint tier_unlocked
+        {
+            get { return __pbn__tier_unlocked.GetValueOrDefault(); }
+            set { __pbn__tier_unlocked = value; }
+        }
+        public bool ShouldSerializetier_unlocked() => __pbn__tier_unlocked != null;
+        public void Resettier_unlocked() => __pbn__tier_unlocked = null;
+        private uint? __pbn__tier_unlocked;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint premium_tiers
+        {
+            get { return __pbn__premium_tiers.GetValueOrDefault(); }
+            set { __pbn__premium_tiers = value; }
+        }
+        public bool ShouldSerializepremium_tiers() => __pbn__premium_tiers != null;
+        public void Resetpremium_tiers() => __pbn__premium_tiers = null;
+        private uint? __pbn__premium_tiers;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint mission_id
+        {
+            get { return __pbn__mission_id.GetValueOrDefault(); }
+            set { __pbn__mission_id = value; }
+        }
+        public bool ShouldSerializemission_id() => __pbn__mission_id != null;
+        public void Resetmission_id() => __pbn__mission_id = null;
+        private uint? __pbn__mission_id;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint missions_completed
+        {
+            get { return __pbn__missions_completed.GetValueOrDefault(); }
+            set { __pbn__missions_completed = value; }
+        }
+        public bool ShouldSerializemissions_completed() => __pbn__missions_completed != null;
+        public void Resetmissions_completed() => __pbn__missions_completed = null;
+        private uint? __pbn__missions_completed;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CSOPersonaDataPublic : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;

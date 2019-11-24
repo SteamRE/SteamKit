@@ -38,6 +38,28 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgIPAddressBucket : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgIPAddress original_ip_address { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong bucket
+        {
+            get { return __pbn__bucket.GetValueOrDefault(); }
+            set { __pbn__bucket = value; }
+        }
+        public bool ShouldSerializebucket() => __pbn__bucket != null;
+        public void Resetbucket() => __pbn__bucket = null;
+        private ulong? __pbn__bucket;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgProtoBufHeader : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;

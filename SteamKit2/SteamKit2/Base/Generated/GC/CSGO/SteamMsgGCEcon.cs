@@ -315,6 +315,7 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EGCItemCustomizationNotification_ApplySticker = 1086,
         k_EGCItemCustomizationNotification_StatTrakSwap = 1088,
         k_EGCItemCustomizationNotification_ActivateFanToken = 9178,
+        k_EGCItemCustomizationNotification_ActivateOperationCoin = 9179,
         k_EGCItemCustomizationNotification_GraffitiUnseal = 9185,
         k_EGCItemCustomizationNotification_GenerateSouvenir = 9204,
     }

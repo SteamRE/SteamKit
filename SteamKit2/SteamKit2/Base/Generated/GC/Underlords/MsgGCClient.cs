@@ -4172,6 +4172,56 @@ namespace SteamKit2.GC.Underlords.Internal
             k_eNotUnlocked = 4,
             k_eInCooldown = 5,
             k_eNameTooLong = 6,
+            k_eCommunityBanned = 7,
+            k_eGameBanned = 8,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCModifyGACFlags : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong set_flags
+        {
+            get { return __pbn__set_flags.GetValueOrDefault(); }
+            set { __pbn__set_flags = value; }
+        }
+        public bool ShouldSerializeset_flags() => __pbn__set_flags != null;
+        public void Resetset_flags() => __pbn__set_flags = null;
+        private ulong? __pbn__set_flags;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCModifyGACFlagsResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse result
+        {
+            get { return __pbn__result ?? EResponse.k_eInternalError; }
+            set { __pbn__result = value; }
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResponse? __pbn__result;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eDisabled = 2,
+            k_eTooBusy = 3,
         }
 
     }
@@ -4269,6 +4319,8 @@ namespace SteamKit2.GC.Underlords.Internal
         k_EMsgClientToGCAckSupportCreditsResponse = 9206,
         k_EMsgClientToGCSetTeamName = 9207,
         k_EMsgClientToGCSetTeamNameResponse = 9208,
+        k_EMsgClientToGCModifyGACFlags = 9209,
+        k_EMsgClientToGCModifyGACFlagsResponse = 9211,
     }
 
     [global::ProtoBuf.ProtoContract()]
