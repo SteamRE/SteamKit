@@ -15,10 +15,10 @@ typedef bool(__cdecl *SymmetricEncryptChosenIVFn)(const uint8*, uint32, const ui
 struct MsgInfo_t
 {
 	EMsg eMsg;
-	const char* pchMsgName;
+	uint32 nUnk1;
 	int nFlags;
 	EServerType k_EServerTarget;
-	uint32 nUnk1;
+    const char *pchMsgName;
 };
 
 typedef std::map<EMsg, MsgInfo_t*> MsgList;

@@ -16,10 +16,10 @@ bool (__cdecl *GetMessageFn)( int * ) = nullptr;
 
 static_assert(sizeof(MsgInfo_t) == 20, "Wrong size of MsgInfo_t");
 static_assert(offsetof(MsgInfo_t, eMsg) == 0, "Wrong offset of MsgInfo_t::eMsg");
-static_assert(offsetof(MsgInfo_t, pchMsgName) == 4, "Wrong offset of MsgInfo_t::pchMsgName");
+static_assert(offsetof(MsgInfo_t, pchMsgName) == 16, "Wrong offset of MsgInfo_t::pchMsgName");
 static_assert(offsetof(MsgInfo_t, nFlags) == 8, "Wrong offset of MsgInfo_t::nFlags");
 static_assert(offsetof(MsgInfo_t, k_EServerTarget) == 12, "Wrong offset of MsgInfo_t::k_EServerTarget");
-static_assert(offsetof(MsgInfo_t, nUnk1) == 16, "Wrong offset of MsgInfo_t::uUnk1");
+static_assert(offsetof(MsgInfo_t, nUnk1) == 4, "Wrong offset of MsgInfo_t::uUnk1");
 
 typedef std::pair<EMsg, MsgInfo_t *> MsgPair;
 
@@ -41,52 +41,40 @@ CCrypto::CCrypto() noexcept
 
 	g_pLogger->LogConsole( "CCrypto::SymmetricEncryptChosenIV = 0x%x\n", Encrypt_Orig );
 
-	char *pGetMessageList = nullptr;
+	char *pMessageList = nullptr;
 	const bool bGetMessageList = steamClientScan.FindFunction(
-		"\xA1\x00\x00\x00\x00\xA8\x01\x75\x29\x68\x00\x00\x00\x00\x83\xC8\x01\xB9\x00\x00\x00\x00\x68\x00\x00\x00\x00\xA3\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x68\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x83\xC4\x04\xB8\x00\x00\x00\x00\xC3",
-		"x????xxxxx????xxxx????x????x????x????x????x????xxxx????x",
-		(void **)&pGetMessageList
+		"\xE8\x00\x00\x00\x00\x8D\x8B\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x8D\x8B\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x8B\x35\x00\x00\x00\x00\xBF\x00\x00\x00\x00\x66\xC7\x83\x00\x00\x00\x00\x00\x00\x8D\x64\x24\x00",
+		"x????xx????x????xx????x????xx????x????xxx??????xxx?",
+		(void **)&pMessageList
 	);
 
 	if (bGetMessageList)
 	{
-		constexpr uint32 uMessageListStartPtrOffset = 23;
-		constexpr uint32 uMessageListCountPtrOffset = 10;
+        constexpr uint32 uMessageListStartPtrOffset = 34;
+		constexpr uint32 uMessageListCountPtrOffset = 277;
 
-		MsgInfo_t *pInfos = *(MsgInfo_t **)( pGetMessageList + uMessageListStartPtrOffset );
-		const uint32 uNumMessages = *(uint32 *)( pGetMessageList + uMessageListCountPtrOffset );
+		MsgInfo_t *pInfos = *(MsgInfo_t **)( pMessageList + uMessageListStartPtrOffset );
+		MsgInfo_t *pInfoLast = *(MsgInfo_t **)( pMessageList + uMessageListCountPtrOffset );
 
-		g_pLogger->LogConsole( "pGetMessageList = 0x%x\npInfos = 0x%x\nnumMessages = %d\n", pGetMessageList, pInfos, uNumMessages );
+        const uint32 uNumMessages = ((uint32)pInfoLast - (uint32)pInfos) / sizeof(MsgInfo_t);
+
+		g_pLogger->LogConsole( "pGetMessageList = 0x%x\npInfos = 0x%x\nnumMessages = %d\n", pMessageList, pInfos, uNumMessages );
 		
-		HMODULE sc = GetModuleHandle("steamclient.dll");
-		assert(sc != nullptr);
-		MODULEINFO modInfo;
-		GetModuleInformation(GetCurrentProcess(), sc, &modInfo, sizeof(modInfo));
-
-		const uintptr_t uSteamAddrMin = (uintptr_t)modInfo.lpBaseOfDll;
-		const uintptr_t uSteamAddrMax = (uintptr_t)modInfo.lpBaseOfDll + modInfo.SizeOfImage;
-
 		for ( uint16 x = 0 ; x < uNumMessages; x++ )
 		{
-			const uintptr_t uMsgNameAddr = (uintptr_t)pInfos->pchMsgName;
-			if (uMsgNameAddr < uSteamAddrMin || uMsgNameAddr >= uSteamAddrMax)
-			{
-				g_pLogger->LogConsole("Found bad emsg name. Check size and layout of MsgInfo_t. Aborting emsg lookup.\n");
-				break;
-			}
 			eMsgList.insert( MsgPair( pInfos->eMsg, pInfos ) );
 
 			pInfos++;
 		}
 
-		if ( eMsgList.size() != 0 )
+		if (!eMsgList.empty())
 		{
 			// should only delete our existing files if we have something new to dump
 			g_pLogger->DeleteFile( "emsg_list.txt", false );
 			g_pLogger->DeleteFile( "emsg_list_detailed.txt", false );
 
-			HANDLE hListFile = g_pLogger->OpenFile( "emsg_list.txt", false );
-			HANDLE hListDetailedFile = g_pLogger->OpenFile( "emsg_list_detailed.txt", false );
+			const HANDLE hListFile = g_pLogger->OpenFile( "emsg_list.txt", false );
+			const HANDLE hListDetailedFile = g_pLogger->OpenFile( "emsg_list_detailed.txt", false );
 
 			for ( MsgList::iterator iter = eMsgList.begin() ; iter != eMsgList.end() ; iter++ )
 			{
