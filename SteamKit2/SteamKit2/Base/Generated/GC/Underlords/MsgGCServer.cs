@@ -437,6 +437,20 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public global::System.Collections.Generic.List<CMsgTeamInfo> team_info { get; } = new global::System.Collections.Generic.List<CMsgTeamInfo>();
 
+        [global::ProtoBuf.ProtoMember(10)]
+        public CMsgGameModeSettings game_mode_settings { get; set; }
+
+        [global::ProtoBuf.ProtoMember(11)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string feature_controls
+        {
+            get { return __pbn__feature_controls ?? ""; }
+            set { __pbn__feature_controls = value; }
+        }
+        public bool ShouldSerializefeature_controls() => __pbn__feature_controls != null;
+        public void Resetfeature_controls() => __pbn__feature_controls = null;
+        private string __pbn__feature_controls;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Member : global::ProtoBuf.IExtensible
         {
@@ -1142,19 +1156,6 @@ namespace SteamKit2.GC.Underlords.Internal
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<uint> muted_by { get; } = new global::System.Collections.Generic.List<uint>();
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint chat_text_count
-        {
-            get { return __pbn__chat_text_count.GetValueOrDefault(); }
-            set { __pbn__chat_text_count = value; }
-        }
-        public bool ShouldSerializechat_text_count() => __pbn__chat_text_count != null;
-        public void Resetchat_text_count() => __pbn__chat_text_count = null;
-        private uint? __pbn__chat_text_count;
-
         [global::ProtoBuf.ProtoMember(3)]
         public uint yo_count
         {
@@ -1174,6 +1175,16 @@ namespace SteamKit2.GC.Underlords.Internal
         public bool ShouldSerializechat_line_count() => __pbn__chat_line_count != null;
         public void Resetchat_line_count() => __pbn__chat_line_count = null;
         private uint? __pbn__chat_line_count;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint combat_line_count
+        {
+            get { return __pbn__combat_line_count.GetValueOrDefault(); }
+            set { __pbn__combat_line_count = value; }
+        }
+        public bool ShouldSerializecombat_line_count() => __pbn__combat_line_count != null;
+        public void Resetcombat_line_count() => __pbn__combat_line_count = null;
+        private uint? __pbn__combat_line_count;
 
     }
 
@@ -1362,6 +1373,16 @@ namespace SteamKit2.GC.Underlords.Internal
             public bool ShouldSerializesurvival_round() => __pbn__survival_round != null;
             public void Resetsurvival_round() => __pbn__survival_round = null;
             private uint? __pbn__survival_round;
+
+            [global::ProtoBuf.ProtoMember(9)]
+            public uint underlord_id
+            {
+                get { return __pbn__underlord_id.GetValueOrDefault(); }
+                set { __pbn__underlord_id = value; }
+            }
+            public bool ShouldSerializeunderlord_id() => __pbn__underlord_id != null;
+            public void Resetunderlord_id() => __pbn__underlord_id = null;
+            private uint? __pbn__underlord_id;
 
         }
 

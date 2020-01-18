@@ -615,6 +615,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resethigh_priority_state() => __pbn__high_priority_state = null;
         private EHighPriorityMMState? __pbn__high_priority_state;
 
+        [global::ProtoBuf.ProtoMember(69)]
+        public bool lane_selections_enabled
+        {
+            get { return __pbn__lane_selections_enabled.GetValueOrDefault(); }
+            set { __pbn__lane_selections_enabled = value; }
+        }
+        public bool ShouldSerializelane_selections_enabled() => __pbn__lane_selections_enabled != null;
+        public void Resetlane_selections_enabled() => __pbn__lane_selections_enabled = null;
+        private bool? __pbn__lane_selections_enabled;
+
         [global::ProtoBuf.ProtoContract()]
         public enum State
         {

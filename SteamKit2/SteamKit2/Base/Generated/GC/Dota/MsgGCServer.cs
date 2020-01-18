@@ -2897,167 +2897,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMatchSignoutExtraMsgCommunicationSummary : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<PlayerCommunication> players { get; } = new global::System.Collections.Generic.List<PlayerCommunication>();
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class PlayerCommunication : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint account_id
-            {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
-            }
-            public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
-            public void Resetaccount_id() => __pbn__account_id = null;
-            private uint? __pbn__account_id;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public uint pings
-            {
-                get { return __pbn__pings.GetValueOrDefault(); }
-                set { __pbn__pings = value; }
-            }
-            public bool ShouldSerializepings() => __pbn__pings != null;
-            public void Resetpings() => __pbn__pings = null;
-            private uint? __pbn__pings;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public uint max_pings_per_interval
-            {
-                get { return __pbn__max_pings_per_interval.GetValueOrDefault(); }
-                set { __pbn__max_pings_per_interval = value; }
-            }
-            public bool ShouldSerializemax_pings_per_interval() => __pbn__max_pings_per_interval != null;
-            public void Resetmax_pings_per_interval() => __pbn__max_pings_per_interval = null;
-            private uint? __pbn__max_pings_per_interval;
-
-            [global::ProtoBuf.ProtoMember(4)]
-            public uint teammate_pings
-            {
-                get { return __pbn__teammate_pings.GetValueOrDefault(); }
-                set { __pbn__teammate_pings = value; }
-            }
-            public bool ShouldSerializeteammate_pings() => __pbn__teammate_pings != null;
-            public void Resetteammate_pings() => __pbn__teammate_pings = null;
-            private uint? __pbn__teammate_pings;
-
-            [global::ProtoBuf.ProtoMember(5)]
-            public uint max_teammate_pings_per_interval
-            {
-                get { return __pbn__max_teammate_pings_per_interval.GetValueOrDefault(); }
-                set { __pbn__max_teammate_pings_per_interval = value; }
-            }
-            public bool ShouldSerializemax_teammate_pings_per_interval() => __pbn__max_teammate_pings_per_interval != null;
-            public void Resetmax_teammate_pings_per_interval() => __pbn__max_teammate_pings_per_interval = null;
-            private uint? __pbn__max_teammate_pings_per_interval;
-
-            [global::ProtoBuf.ProtoMember(6)]
-            public uint team_chat_messages
-            {
-                get { return __pbn__team_chat_messages.GetValueOrDefault(); }
-                set { __pbn__team_chat_messages = value; }
-            }
-            public bool ShouldSerializeteam_chat_messages() => __pbn__team_chat_messages != null;
-            public void Resetteam_chat_messages() => __pbn__team_chat_messages = null;
-            private uint? __pbn__team_chat_messages;
-
-            [global::ProtoBuf.ProtoMember(7)]
-            public uint all_chat_messages
-            {
-                get { return __pbn__all_chat_messages.GetValueOrDefault(); }
-                set { __pbn__all_chat_messages = value; }
-            }
-            public bool ShouldSerializeall_chat_messages() => __pbn__all_chat_messages != null;
-            public void Resetall_chat_messages() => __pbn__all_chat_messages = null;
-            private uint? __pbn__all_chat_messages;
-
-            [global::ProtoBuf.ProtoMember(8)]
-            public uint chat_wheel_messages
-            {
-                get { return __pbn__chat_wheel_messages.GetValueOrDefault(); }
-                set { __pbn__chat_wheel_messages = value; }
-            }
-            public bool ShouldSerializechat_wheel_messages() => __pbn__chat_wheel_messages != null;
-            public void Resetchat_wheel_messages() => __pbn__chat_wheel_messages = null;
-            private uint? __pbn__chat_wheel_messages;
-
-            [global::ProtoBuf.ProtoMember(9)]
-            public uint pauses
-            {
-                get { return __pbn__pauses.GetValueOrDefault(); }
-                set { __pbn__pauses = value; }
-            }
-            public bool ShouldSerializepauses() => __pbn__pauses != null;
-            public void Resetpauses() => __pbn__pauses = null;
-            private uint? __pbn__pauses;
-
-            [global::ProtoBuf.ProtoMember(10)]
-            public uint unpauses
-            {
-                get { return __pbn__unpauses.GetValueOrDefault(); }
-                set { __pbn__unpauses = value; }
-            }
-            public bool ShouldSerializeunpauses() => __pbn__unpauses != null;
-            public void Resetunpauses() => __pbn__unpauses = null;
-            private uint? __pbn__unpauses;
-
-            [global::ProtoBuf.ProtoMember(11)]
-            public uint lines_drawn
-            {
-                get { return __pbn__lines_drawn.GetValueOrDefault(); }
-                set { __pbn__lines_drawn = value; }
-            }
-            public bool ShouldSerializelines_drawn() => __pbn__lines_drawn != null;
-            public void Resetlines_drawn() => __pbn__lines_drawn = null;
-            private uint? __pbn__lines_drawn;
-
-            [global::ProtoBuf.ProtoMember(12)]
-            public uint voice_chat_seconds
-            {
-                get { return __pbn__voice_chat_seconds.GetValueOrDefault(); }
-                set { __pbn__voice_chat_seconds = value; }
-            }
-            public bool ShouldSerializevoice_chat_seconds() => __pbn__voice_chat_seconds != null;
-            public void Resetvoice_chat_seconds() => __pbn__voice_chat_seconds = null;
-            private uint? __pbn__voice_chat_seconds;
-
-            [global::ProtoBuf.ProtoMember(13)]
-            public uint chat_mutes
-            {
-                get { return __pbn__chat_mutes.GetValueOrDefault(); }
-                set { __pbn__chat_mutes = value; }
-            }
-            public bool ShouldSerializechat_mutes() => __pbn__chat_mutes != null;
-            public void Resetchat_mutes() => __pbn__chat_mutes = null;
-            private uint? __pbn__chat_mutes;
-
-            [global::ProtoBuf.ProtoMember(14)]
-            public uint voice_mutes
-            {
-                get { return __pbn__voice_mutes.GetValueOrDefault(); }
-                set { __pbn__voice_mutes = value; }
-            }
-            public bool ShouldSerializevoice_mutes() => __pbn__voice_mutes != null;
-            public void Resetvoice_mutes() => __pbn__voice_mutes = null;
-            private uint? __pbn__voice_mutes;
-
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgDOTALiveScoreboardUpdate : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -3599,6 +3438,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetlow_priority() => __pbn__low_priority = null;
         private bool? __pbn__low_priority;
 
+        [global::ProtoBuf.ProtoMember(8)]
+        public bool is_new_player
+        {
+            get { return __pbn__is_new_player.GetValueOrDefault(); }
+            set { __pbn__is_new_player = value; }
+        }
+        public bool ShouldSerializeis_new_player() => __pbn__is_new_player != null;
+        public void Resetis_new_player() => __pbn__is_new_player = null;
+        private bool? __pbn__is_new_player;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -3692,6 +3541,16 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializelow_priority() => __pbn__low_priority != null;
             public void Resetlow_priority() => __pbn__low_priority = null;
             private bool? __pbn__low_priority;
+
+            [global::ProtoBuf.ProtoMember(7)]
+            public bool is_new_player
+            {
+                get { return __pbn__is_new_player.GetValueOrDefault(); }
+                set { __pbn__is_new_player = value; }
+            }
+            public bool ShouldSerializeis_new_player() => __pbn__is_new_player != null;
+            public void Resetis_new_player() => __pbn__is_new_player = null;
+            private bool? __pbn__is_new_player;
 
         }
 
@@ -7410,12 +7269,6 @@ namespace SteamKit2.GC.Dota.Internal
         k_EPoorNetworkConditions_Unknown = 1,
         k_EPoorNetworkConditions_MassDisconnect = 2,
         k_EPoorNetworkConditions_ExcessBadQosIntervals = 3,
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public enum MatchSignoutExtraMsgs
-    {
-        k_EMatchSignoutExtraMsgCommunicationSummary = 0,
     }
 
     [global::ProtoBuf.ProtoContract()]

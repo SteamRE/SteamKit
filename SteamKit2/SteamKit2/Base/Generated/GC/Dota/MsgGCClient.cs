@@ -4703,6 +4703,7 @@ namespace SteamKit2.GC.Dota.Internal
             SUCCESS = 0,
             ERROR_UNSPECIFIED = 1,
             ERROR_INFO_LOCKED = 2,
+            ERROR_NOT_MEMBER_OF_TEAM = 3,
         }
 
     }

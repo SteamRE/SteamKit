@@ -1681,6 +1681,26 @@ namespace SteamKit2.Unified.Internal
         public void Resetseconds_today() => __pbn__seconds_today = null;
         private int? __pbn__seconds_today;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool is_steamchina_account
+        {
+            get { return __pbn__is_steamchina_account.GetValueOrDefault(); }
+            set { __pbn__is_steamchina_account = value; }
+        }
+        public bool ShouldSerializeis_steamchina_account() => __pbn__is_steamchina_account != null;
+        public void Resetis_steamchina_account() => __pbn__is_steamchina_account = null;
+        private bool? __pbn__is_steamchina_account;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public bool is_age_verified
+        {
+            get { return __pbn__is_age_verified.GetValueOrDefault(); }
+            set { __pbn__is_age_verified = value; }
+        }
+        public bool ShouldSerializeis_age_verified() => __pbn__is_age_verified != null;
+        public void Resetis_age_verified() => __pbn__is_age_verified = null;
+        private bool? __pbn__is_age_verified;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

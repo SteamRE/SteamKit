@@ -852,6 +852,9 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGCSubmitPlayerAvoidRequest = 8637,
         k_EMsgGCSubmitPlayerAvoidRequestResponse = 8638,
         k_EMsgGCToClientNotificationsUpdated = 8639,
+        k_EMsgGCtoGCAssociatedExploiterAccountInfo = 8640,
+        k_EMsgGCtoGCAssociatedExploiterAccountInfoResponse = 8641,
+        k_EMsgGCtoGCRequestRecalibrationCheck = 8642,
     }
 
 }

@@ -704,6 +704,87 @@ namespace SteamKit2.Unified.Internal
 
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAccountHardware_RegisterValveIndexComponent_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string serial_number
+        {
+            get { return __pbn__serial_number ?? ""; }
+            set { __pbn__serial_number = value; }
+        }
+        public bool ShouldSerializeserial_number() => __pbn__serial_number != null;
+        public void Resetserial_number() => __pbn__serial_number = null;
+        private string __pbn__serial_number;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string manufacturer_serial_number
+        {
+            get { return __pbn__manufacturer_serial_number ?? ""; }
+            set { __pbn__manufacturer_serial_number = value; }
+        }
+        public bool ShouldSerializemanufacturer_serial_number() => __pbn__manufacturer_serial_number != null;
+        public void Resetmanufacturer_serial_number() => __pbn__manufacturer_serial_number = null;
+        private string __pbn__manufacturer_serial_number;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string component_code
+        {
+            get { return __pbn__component_code ?? ""; }
+            set { __pbn__component_code = value; }
+        }
+        public bool ShouldSerializecomponent_code() => __pbn__component_code != null;
+        public void Resetcomponent_code() => __pbn__component_code = null;
+        private string __pbn__component_code;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(EValveIndexComponent.k_EValveIndexComponentUnknown)]
+        public EValveIndexComponent component_type
+        {
+            get { return __pbn__component_type ?? EValveIndexComponent.k_EValveIndexComponentUnknown; }
+            set { __pbn__component_type = value; }
+        }
+        public bool ShouldSerializecomponent_type() => __pbn__component_type != null;
+        public void Resetcomponent_type() => __pbn__component_type = null;
+        private EValveIndexComponent? __pbn__component_type;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public int estimated_time_registered
+        {
+            get { return __pbn__estimated_time_registered.GetValueOrDefault(); }
+            set { __pbn__estimated_time_registered = value; }
+        }
+        public bool ShouldSerializeestimated_time_registered() => __pbn__estimated_time_registered != null;
+        public void Resetestimated_time_registered() => __pbn__estimated_time_registered = null;
+        private int? __pbn__estimated_time_registered;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAccountHardware_RegisterValveIndexComponent_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EValveIndexComponent
+    {
+        k_EValveIndexComponentUnknown = 0,
+        k_EValveIndexComponentHMD = 1,
+        k_EValveIndexComponentLeftKnuckle = 2,
+        k_EValveIndexComponentRightKnuckle = 3,
+    }
+
     public interface IAccountHardware
     {
         CAccountHardware_RegisterSteamController_Response RegisterSteamController(CAccountHardware_RegisterSteamController_Request request);
@@ -715,6 +796,7 @@ namespace SteamKit2.Unified.Internal
         CAccountHardware_SetPersonalizationFile_Response SetControllerPersonalizationFile(CAccountHardware_SetPersonalizationFile_Request request);
         CAccountHardware_GetPersonalizationFile_Response GetControllerPersonalizationFile(CAccountHardware_GetPersonalizationFile_Request request);
         CAccountHardware_VRCompatibilityCheck_Response VRCompatibilityCheck(CAccountHardware_VRCompatibilityCheck_Request request);
+        CAccountHardware_RegisterValveIndexComponent_Response RegisterValveIndexComponent(CAccountHardware_RegisterValveIndexComponent_Request request);
     }
 
 }
