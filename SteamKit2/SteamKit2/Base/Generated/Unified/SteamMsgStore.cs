@@ -325,6 +325,24 @@ namespace SteamKit2.Unified.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_StorePreferencesChanged_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CStore_UserPreferences preferences { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CStore_UserTagPreferences tag_preferences { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public CStore_UserContentDescriptorPreferences content_descriptor_preferences { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EUserReviewScorePreference
     {
         k_EUserReviewScorePreference_Unset = 0,
@@ -336,6 +354,11 @@ namespace SteamKit2.Unified.Internal
     {
         CStore_GetLocalizedNameForTags_Response GetLocalizedNameForTags(CStore_GetLocalizedNameForTags_Request request);
         CStore_GetStorePreferences_Response GetStorePreferences(CStore_GetStorePreferences_Request request);
+    }
+
+    public interface IStoreClient
+    {
+        NoResponse NotifyStorePreferencesChanged(CStore_StorePreferencesChanged_Notification request);
     }
 
 }

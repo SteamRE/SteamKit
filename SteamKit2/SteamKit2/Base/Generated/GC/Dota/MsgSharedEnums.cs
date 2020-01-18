@@ -1147,7 +1147,9 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_FROSTIVUS_2018 = 23,
         EVENT_ID_NEW_BLOOM_2019 = 24,
         EVENT_ID_INTERNATIONAL_2019 = 25,
-        EVENT_ID_COUNT = 26,
+        EVENT_ID_NEW_PLAYER_EXPERIENCE = 26,
+        EVENT_ID_FROSTIVUS_2019 = 27,
+        EVENT_ID_COUNT = 28,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1365,6 +1367,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_EDOTAPlayerMMRType_SoloSeasonalRanked = 7,
         k_EDOTAPlayerMMRType_Competitive_Core = 8,
         k_EDOTAPlayerMMRType_Competitive_Support = 9,
+        k_EDOTAPlayerMMRType_Competitive_Classic = 10,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1531,6 +1534,7 @@ namespace SteamKit2.GC.Dota.Internal
         LEAGUE_TIER_MINOR = 3,
         LEAGUE_TIER_MAJOR = 4,
         LEAGUE_TIER_INTERNATIONAL = 5,
+        LEAGUE_TIER_DPC_QUALIFIER = 6,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1615,6 +1619,8 @@ namespace SteamKit2.GC.Dota.Internal
         LEAGUE_AUDIT_ACTION_NODEGROUP_EDIT = 105,
         LEAGUE_AUDIT_ACTION_NODEGROUP_POPULATE = 106,
         LEAGUE_AUDIT_ACTION_NODEGROUP_COMPLETED = 107,
+        LEAGUE_AUDIT_ACTION_NODEGROUP_SET_SECONDARY_ADVANCING = 108,
+        LEAGUE_AUDIT_ACTION_NODEGROUP_SET_TERTIARY_ADVANCING = 109,
         LEAGUE_AUDIT_ACTION_NODE_CREATE = 200,
         LEAGUE_AUDIT_ACTION_NODE_DESTROY = 201,
         LEAGUE_AUDIT_ACTION_NODE_AUTOCREATE = 202,

@@ -2824,6 +2824,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_EStartFindingMatchResult_CoachesChallengeRequirementsNotMet = 124,
         k_EStartFindingMatchResult_InvalidRoleSelections = 125,
         k_EStartFindingMatchResult_PhoneNumberDiscrepancy = 126,
+        k_EStartFindingMatchResult_NoQueuePoints = 127,
     }
 
 }

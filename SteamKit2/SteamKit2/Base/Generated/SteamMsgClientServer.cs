@@ -1134,6 +1134,17 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(23)]
             public CMsgIPAddress game_ip_address { get; set; }
 
+            [global::ProtoBuf.ProtoMember(24)]
+            [global::System.ComponentModel.DefaultValue(0)]
+            public uint controller_connection_type
+            {
+                get { return __pbn__controller_connection_type ?? 0; }
+                set { __pbn__controller_connection_type = value; }
+            }
+            public bool ShouldSerializecontroller_connection_type() => __pbn__controller_connection_type != null;
+            public void Resetcontroller_connection_type() => __pbn__controller_connection_type = null;
+            private uint? __pbn__controller_connection_type;
+
         }
 
     }

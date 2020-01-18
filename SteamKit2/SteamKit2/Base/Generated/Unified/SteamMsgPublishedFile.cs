@@ -1779,6 +1779,9 @@ namespace SteamKit2.Unified.Internal
         public void Resetlanguage() => __pbn__language = null;
         private int? __pbn__language;
 
+        [global::ProtoBuf.ProtoMember(34)]
+        public global::System.Collections.Generic.List<TagGroup> taggroups { get; } = new global::System.Collections.Generic.List<TagGroup>();
+
         [global::ProtoBuf.ProtoMember(17)]
         public bool totalonly
         {
@@ -1942,6 +1945,18 @@ namespace SteamKit2.Unified.Internal
             public bool ShouldSerializevalue() => __pbn__value != null;
             public void Resetvalue() => __pbn__value = null;
             private string __pbn__value;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class TagGroup : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public global::System.Collections.Generic.List<string> tags { get; } = new global::System.Collections.Generic.List<string>();
 
         }
 
@@ -2675,6 +2690,9 @@ namespace SteamKit2.Unified.Internal
         [global::ProtoBuf.ProtoMember(34)]
         public global::System.Collections.Generic.List<KVTag> required_kv_tags { get; } = new global::System.Collections.Generic.List<KVTag>();
 
+        [global::ProtoBuf.ProtoMember(42)]
+        public global::System.Collections.Generic.List<TagGroup> taggroups { get; } = new global::System.Collections.Generic.List<TagGroup>();
+
         [global::ProtoBuf.ProtoMember(16)]
         public bool totalonly
         {
@@ -2845,6 +2863,18 @@ namespace SteamKit2.Unified.Internal
             public bool ShouldSerializevalue() => __pbn__value != null;
             public void Resetvalue() => __pbn__value = null;
             private string __pbn__value;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class TagGroup : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public global::System.Collections.Generic.List<string> tags { get; } = new global::System.Collections.Generic.List<string>();
 
         }
 

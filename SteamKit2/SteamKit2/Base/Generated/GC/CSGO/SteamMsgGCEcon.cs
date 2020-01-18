@@ -90,6 +90,35 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgCasketItem : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong casket_item_id
+        {
+            get { return __pbn__casket_item_id.GetValueOrDefault(); }
+            set { __pbn__casket_item_id = value; }
+        }
+        public bool ShouldSerializecasket_item_id() => __pbn__casket_item_id != null;
+        public void Resetcasket_item_id() => __pbn__casket_item_id = null;
+        private ulong? __pbn__casket_item_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong item_item_id
+        {
+            get { return __pbn__item_item_id.GetValueOrDefault(); }
+            set { __pbn__item_item_id = value; }
+        }
+        public bool ShouldSerializeitem_item_id() => __pbn__item_item_id != null;
+        public void Resetitem_item_id() => __pbn__item_item_id = null;
+        private ulong? __pbn__item_item_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgGCUserTrackTimePlayedConsecutively : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -216,6 +245,9 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCUserTrackTimePlayedConsecutively = 1089,
         k_EMsgGCItemCustomizationNotification = 1090,
         k_EMsgGCModifyItemAttribute = 1091,
+        k_EMsgGCCasketItemAdd = 1092,
+        k_EMsgGCCasketItemExtract = 1093,
+        k_EMsgGCCasketItemLoadContents = 1094,
         k_EMsgGCTradingBase = 1500,
         k_EMsgGCTrading_InitiateTradeRequest = 1501,
         k_EMsgGCTrading_InitiateTradeResponse = 1502,
@@ -309,6 +341,11 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EGCItemCustomizationNotification_UnlockCrate = 1007,
         k_EGCItemCustomizationNotification_XRayItemReveal = 1008,
         k_EGCItemCustomizationNotification_XRayItemClaim = 1009,
+        k_EGCItemCustomizationNotification_CasketTooFull = 1011,
+        k_EGCItemCustomizationNotification_CasketContents = 1012,
+        k_EGCItemCustomizationNotification_CasketAdded = 1013,
+        k_EGCItemCustomizationNotification_CasketRemoved = 1014,
+        k_EGCItemCustomizationNotification_CasketInvFull = 1015,
         k_EGCItemCustomizationNotification_NameBaseItem = 1019,
         k_EGCItemCustomizationNotification_RemoveItemName = 1030,
         k_EGCItemCustomizationNotification_RemoveSticker = 1053,

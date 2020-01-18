@@ -6175,6 +6175,16 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetitem_8() => __pbn__item_8 = null;
             private uint? __pbn__item_8;
 
+            [global::ProtoBuf.ProtoMember(76)]
+            public uint item_9
+            {
+                get { return __pbn__item_9.GetValueOrDefault(); }
+                set { __pbn__item_9 = value; }
+            }
+            public bool ShouldSerializeitem_9() => __pbn__item_9 != null;
+            public void Resetitem_9() => __pbn__item_9 = null;
+            private uint? __pbn__item_9;
+
             [global::ProtoBuf.ProtoMember(10)]
             public float expected_team_contribution
             {
@@ -8686,6 +8696,126 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializevote_count() => __pbn__vote_count != null;
         public void Resetvote_count() => __pbn__vote_count = null;
         private uint? __pbn__vote_count;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCtoGCAssociatedExploiterAccountInfo : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint account_id
+        {
+            get { return __pbn__account_id.GetValueOrDefault(); }
+            set { __pbn__account_id = value; }
+        }
+        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+        public void Resetaccount_id() => __pbn__account_id = null;
+        private uint? __pbn__account_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint num_matches_to_search
+        {
+            get { return __pbn__num_matches_to_search.GetValueOrDefault(); }
+            set { __pbn__num_matches_to_search = value; }
+        }
+        public bool ShouldSerializenum_matches_to_search() => __pbn__num_matches_to_search != null;
+        public void Resetnum_matches_to_search() => __pbn__num_matches_to_search = null;
+        private uint? __pbn__num_matches_to_search;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint min_shared_match_count
+        {
+            get { return __pbn__min_shared_match_count.GetValueOrDefault(); }
+            set { __pbn__min_shared_match_count = value; }
+        }
+        public bool ShouldSerializemin_shared_match_count() => __pbn__min_shared_match_count != null;
+        public void Resetmin_shared_match_count() => __pbn__min_shared_match_count = null;
+        private uint? __pbn__min_shared_match_count;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint num_additional_players
+        {
+            get { return __pbn__num_additional_players.GetValueOrDefault(); }
+            set { __pbn__num_additional_players = value; }
+        }
+        public bool ShouldSerializenum_additional_players() => __pbn__num_additional_players != null;
+        public void Resetnum_additional_players() => __pbn__num_additional_players = null;
+        private uint? __pbn__num_additional_players;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCtoGCAssociatedExploiterAccountInfoResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<Account> accounts { get; } = new global::System.Collections.Generic.List<Account>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Account : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint account_id
+            {
+                get { return __pbn__account_id.GetValueOrDefault(); }
+                set { __pbn__account_id = value; }
+            }
+            public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+            public void Resetaccount_id() => __pbn__account_id = null;
+            private uint? __pbn__account_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint num_common_matches
+            {
+                get { return __pbn__num_common_matches.GetValueOrDefault(); }
+                set { __pbn__num_common_matches = value; }
+            }
+            public bool ShouldSerializenum_common_matches() => __pbn__num_common_matches != null;
+            public void Resetnum_common_matches() => __pbn__num_common_matches = null;
+            private uint? __pbn__num_common_matches;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint earliest_common_match
+            {
+                get { return __pbn__earliest_common_match.GetValueOrDefault(); }
+                set { __pbn__earliest_common_match = value; }
+            }
+            public bool ShouldSerializeearliest_common_match() => __pbn__earliest_common_match != null;
+            public void Resetearliest_common_match() => __pbn__earliest_common_match = null;
+            private uint? __pbn__earliest_common_match;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public uint latest_common_match
+            {
+                get { return __pbn__latest_common_match.GetValueOrDefault(); }
+                set { __pbn__latest_common_match = value; }
+            }
+            public bool ShouldSerializelatest_common_match() => __pbn__latest_common_match != null;
+            public void Resetlatest_common_match() => __pbn__latest_common_match = null;
+            private uint? __pbn__latest_common_match;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public uint generation
+            {
+                get { return __pbn__generation.GetValueOrDefault(); }
+                set { __pbn__generation = value; }
+            }
+            public bool ShouldSerializegeneration() => __pbn__generation != null;
+            public void Resetgeneration() => __pbn__generation = null;
+            private uint? __pbn__generation;
+
+        }
 
     }
 

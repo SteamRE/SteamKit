@@ -15,9 +15,6 @@ namespace SteamKit2.GC.Underlords.Internal
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, IsPacked = true)]
-        public global::System.Collections.Generic.List<uint> banned_game_ids { get; } = new global::System.Collections.Generic.List<uint>();
-
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -892,6 +889,7 @@ namespace SteamKit2.GC.Underlords.Internal
             k_eBotDifficulty_Medium = 2,
             k_eBotDifficulty_Hard = 3,
             k_eBotDifficulty_Nightmare = 4,
+            k_eBotDifficulty_ML = 5,
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -900,6 +898,45 @@ namespace SteamKit2.GC.Underlords.Internal
             k_eTeamFlags_CanRename = 1,
             k_eTeamFlags_RenameCooldown = 2,
         }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CSOAccountSyncStorage : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint account_id
+        {
+            get { return __pbn__account_id.GetValueOrDefault(); }
+            set { __pbn__account_id = value; }
+        }
+        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+        public void Resetaccount_id() => __pbn__account_id = null;
+        private uint? __pbn__account_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint id
+        {
+            get { return __pbn__id.GetValueOrDefault(); }
+            set { __pbn__id = value; }
+        }
+        public bool ShouldSerializeid() => __pbn__id != null;
+        public void Resetid() => __pbn__id = null;
+        private uint? __pbn__id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint value
+        {
+            get { return __pbn__value.GetValueOrDefault(); }
+            set { __pbn__value = value; }
+        }
+        public bool ShouldSerializevalue() => __pbn__value != null;
+        public void Resetvalue() => __pbn__value = null;
+        private uint? __pbn__value;
 
     }
 
@@ -1030,6 +1067,85 @@ namespace SteamKit2.GC.Underlords.Internal
         public void Resetcredits() => __pbn__credits = null;
         private uint? __pbn__credits;
 
+        [global::ProtoBuf.ProtoMember(14)]
+        public uint turbo_mmr_level
+        {
+            get { return __pbn__turbo_mmr_level.GetValueOrDefault(); }
+            set { __pbn__turbo_mmr_level = value; }
+        }
+        public bool ShouldSerializeturbo_mmr_level() => __pbn__turbo_mmr_level != null;
+        public void Resetturbo_mmr_level() => __pbn__turbo_mmr_level = null;
+        private uint? __pbn__turbo_mmr_level;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public uint turbo_mmr_leaderboard
+        {
+            get { return __pbn__turbo_mmr_leaderboard.GetValueOrDefault(); }
+            set { __pbn__turbo_mmr_leaderboard = value; }
+        }
+        public bool ShouldSerializeturbo_mmr_leaderboard() => __pbn__turbo_mmr_leaderboard != null;
+        public void Resetturbo_mmr_leaderboard() => __pbn__turbo_mmr_leaderboard = null;
+        private uint? __pbn__turbo_mmr_leaderboard;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public float turbo_mmr_level_partial_progress
+        {
+            get { return __pbn__turbo_mmr_level_partial_progress.GetValueOrDefault(); }
+            set { __pbn__turbo_mmr_level_partial_progress = value; }
+        }
+        public bool ShouldSerializeturbo_mmr_level_partial_progress() => __pbn__turbo_mmr_level_partial_progress != null;
+        public void Resetturbo_mmr_level_partial_progress() => __pbn__turbo_mmr_level_partial_progress = null;
+        private float? __pbn__turbo_mmr_level_partial_progress;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public uint turbo_mmr_level_score
+        {
+            get { return __pbn__turbo_mmr_level_score.GetValueOrDefault(); }
+            set { __pbn__turbo_mmr_level_score = value; }
+        }
+        public bool ShouldSerializeturbo_mmr_level_score() => __pbn__turbo_mmr_level_score != null;
+        public void Resetturbo_mmr_level_score() => __pbn__turbo_mmr_level_score = null;
+        private uint? __pbn__turbo_mmr_level_score;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGameModeSettings : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint puzzle_id
+        {
+            get { return __pbn__settings.Is(1) ? __pbn__settings.UInt32 : default(uint); }
+            set { __pbn__settings = new global::ProtoBuf.DiscriminatedUnion32Object(1, value); }
+        }
+        public bool ShouldSerializepuzzle_id() => __pbn__settings.Is(1);
+        public void Resetpuzzle_id() => global::ProtoBuf.DiscriminatedUnion32Object.Reset(ref __pbn__settings, 1);
+
+        private global::ProtoBuf.DiscriminatedUnion32Object __pbn__settings;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint tutorial_phase
+        {
+            get { return __pbn__settings.Is(2) ? __pbn__settings.UInt32 : default(uint); }
+            set { __pbn__settings = new global::ProtoBuf.DiscriminatedUnion32Object(2, value); }
+        }
+        public bool ShouldSerializetutorial_phase() => __pbn__settings.Is(2);
+        public void Resettutorial_phase() => global::ProtoBuf.DiscriminatedUnion32Object.Reset(ref __pbn__settings, 2);
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string sandbox_share_code
+        {
+            get { return __pbn__settings.Is(3) ? ((string)__pbn__settings.Object) : ""; }
+            set { __pbn__settings = new global::ProtoBuf.DiscriminatedUnion32Object(3, value); }
+        }
+        public bool ShouldSerializesandbox_share_code() => __pbn__settings.Is(3);
+        public void Resetsandbox_share_code() => global::ProtoBuf.DiscriminatedUnion32Object.Reset(ref __pbn__settings, 3);
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1113,6 +1229,9 @@ namespace SteamKit2.GC.Underlords.Internal
         public bool ShouldSerializeregion_mode() => __pbn__region_mode != null;
         public void Resetregion_mode() => __pbn__region_mode = null;
         private EDACRegionMode? __pbn__region_mode;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public CMsgGameModeSettings game_mode_settings { get; set; }
 
     }
 
@@ -1290,6 +1409,8 @@ namespace SteamKit2.GC.Underlords.Internal
         k_EDACGameMode_Duos = 3,
         k_EDACGameMode_TechPrototypeA = 4,
         k_EDACGameMode_Sandbox = 5,
+        k_EDACGameMode_Puzzle = 6,
+        k_EDACGameMode_Tutorial = 7,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1318,6 +1439,7 @@ namespace SteamKit2.GC.Underlords.Internal
         k_EDACAIType_Lvl6 = 6,
         k_EDACAIType_Lvl7 = 7,
         k_EDACAIType_Lvl8 = 8,
+        k_EDACAIType_ML = 19,
         k_EDACAIType_PB0 = 20,
         k_EDACAIType_PB1 = 21,
         k_EDACAIType_PB2 = 22,
@@ -1351,6 +1473,9 @@ namespace SteamKit2.GC.Underlords.Internal
         k_EDACAIType_PB30 = 50,
         k_EDACAIType_PB31 = 51,
         k_EDACAIType_PB32 = 52,
+        k_EDACAIType_PB33 = 53,
+        k_EDACAIType_PB34 = 54,
+        k_EDACAIType_PB35 = 55,
     }
 
     [global::ProtoBuf.ProtoContract()]
