@@ -324,7 +324,7 @@ namespace ProtobufDumper
                 sb.AppendLine();
             }
 
-            DumpExtensionDescriptor( proto, proto.extension, sb, string.Empty );
+            DumpExtensionDescriptors( proto, proto.extension, sb, 0 );
 
             foreach ( var field in proto.enum_type )
             {
@@ -528,11 +528,12 @@ namespace ProtobufDumper
 
         void DumpOptionsMatching( FileDescriptorProto source, string typeName, IExtensible options, Dictionary<string, string> optionsKv )
         {
-            var dep = protobufMap[ source.name ].AllPublicDependencies;
+            var dependencies = new HashSet<FileDescriptorProto>( protobufMap[ source.name ].AllPublicDependencies );
+            dependencies.Add( source );
 
             foreach ( var type in protobufTypeMap )
             {
-                if ( dep.Contains( type.Value.Proto ) && type.Value.Source is FieldDescriptorProto field )
+                if ( dependencies.Contains( type.Value.Proto ) && type.Value.Source is FieldDescriptorProto field )
                 {
                     if ( !string.IsNullOrEmpty( field.extendee ) && field.extendee == typeName )
                     {
@@ -542,8 +543,10 @@ namespace ProtobufDumper
             }
         }
 
-        void DumpExtensionDescriptor( FileDescriptorProto source, IEnumerable<FieldDescriptorProto> fields, StringBuilder sb, string levelspace )
+        void DumpExtensionDescriptors( FileDescriptorProto source, IEnumerable<FieldDescriptorProto> fields, StringBuilder sb, int level )
         {
+            var levelspace = new string( '\t', level );
+
             foreach ( var mapping in fields.GroupBy( x => x.extendee ) )
             {
                 if ( string.IsNullOrEmpty( mapping.Key ) )
@@ -572,6 +575,11 @@ namespace ProtobufDumper
             foreach ( var option in DumpOptions( source, proto.options ) )
             {
                 sb.AppendLine( $"{levelspace}\toption {option.Key} = {option.Value};" );
+            }
+
+            if ( proto.extension.Count > 0 )
+            {
+                DumpExtensionDescriptors( source, proto.extension, sb, level + 1 );
             }
 
             foreach ( var field in proto.nested_type )
