@@ -1,4 +1,19 @@
 ------------------------------------------------------------------------------
+v 2.3.0			Mar 12, 2020 (Beta 1)
+------------------------------------------------------------------------------
+* Added annotations for C#8 Nullable Reference Types.
+* Log messages now uniquely identify the related `SteamClient` object, where relevant.
+* Fixed Web API exceptions not including the numeric HTTP response code.
+* Updated Steam enums and protobufs.
+
+BREAKING CHANGES
+* Generated protobuf classes have changed slightly due to updating to a newer version of protobuf-net.
+    * Attributes vary slightly, particularly with regards to the `Name` property on `ProtoContractAttribute`, `ProtoMemberAttribute`, and `ProtoEnumAttribute`.
+	* For any given property, e.g. a propery named `Foo`, the corresponding property `FooSpecified` has been removed. Use `ShouldSerializeFoo()` instead.
+	* Protobuf classes are no longer marked with the `[Serializable]` attribute.
+* `CDNClient` no longer supports CS servers. Some public methods have had their signatures changed to accomodate this.
+
+------------------------------------------------------------------------------
 v 2.2.0 	 	Jun 27, 2019
 ------------------------------------------------------------------------------
 * Added an overload of `SteamDirectory.LoadAsync` that accepts a maximum number of servers to return.
