@@ -187,6 +187,7 @@ enum EPersonaStateFlag flags
 	HasRichPresence = 1;
 	InJoinableGame = 2;
 	Golden = 4;
+	RemotePlayTogether = 8;
 
 	OnlineUsingWeb = 256; removed "renamed to ClientTypeWeb"
 	ClientTypeWeb = 256;
@@ -628,8 +629,9 @@ enum EContentDownloadSourceType
 	SLS = 6;
 	SteamCache = 7;
 	OpenCache = 8;
+	LANCache = 9;
 
-	Max = 9;
+	Max = 10;
 };
 
 enum EPlatformType
@@ -710,6 +712,7 @@ enum EOSType
 	MacOS1012 = -85;
 	Macos1013 = -84;
 	Macos1014 = -83;
+	Macos1015 = -82;
 	MacOSMax = -1;
 
 	LinuxUnknown = -203;
@@ -892,8 +895,21 @@ enum EServerType
 	TimeMachine = 111;
 	VACDBMaster = 112;
 	ContentServerConfig = 113;
+	Minigame = 114;
+	MLTrain = 115;
+	VACTest = 116;
+	TaxService = 117;
+	MLInference = 118;
+	UGSAggregate = 119;
+	TURN = 120;
+	RemoteClient = 121;
+	BroadcastOrigin = 122;
+	BroadcastChannel = 123;
+	SteamAR = 124;
+	China = 125;
+	CrashDump = 126;
 
-	Max = 114;
+	Max = 127;
 };
  
 enum EBillingType
