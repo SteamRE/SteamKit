@@ -1,8 +1,15 @@
 ------------------------------------------------------------------------------
 v 2.3.0			Mar 12, 2020 (Beta 1)
 ------------------------------------------------------------------------------
+* Added `SteamMatchmaking` to manage matchmaking lobbies.
+* Added `ParentalSettings` to `LoggedOnCallback`.
 * Added annotations for C#8 Nullable Reference Types.
+* `SteamUser.LogOn` will now use the Cell ID specified in `SteamConfiguration` as a fallback.
+* SteamKit will now try skip a CM that responds to a logon attempt with `TryAnotherCM` or `ServiceUnavailable`.
+* Removed debug messages for each packet send/recieve event. This can be accomplished through `NetHookNetworkListener` or a customer `IDebugNetworkListener` instead.
 * Log messages now uniquely identify the related `SteamClient` object, where relevant.
+* Fixed incorrect Cell ID parameter in `ContentServerDirectoryService`.
+* Fixed a possible exception when calling `SteamApps` functions with duplicated inputs
 * Fixed Web API exceptions not including the numeric HTTP response code.
 * Updated Steam enums and protobufs.
 
@@ -11,7 +18,9 @@ BREAKING CHANGES
     * Attributes vary slightly, particularly with regards to the `Name` property on `ProtoContractAttribute`, `ProtoMemberAttribute`, and `ProtoEnumAttribute`.
 	* For any given property, e.g. a propery named `Foo`, the corresponding property `FooSpecified` has been removed. Use `ShouldSerializeFoo()` instead.
 	* Protobuf classes are no longer marked with the `[Serializable]` attribute.
+* The `appid` parameter in `SteamApps.GetDepotDecryptionKey` is no longer optional.
 * `CDNClient` no longer supports CS servers. Some public methods have had their signatures changed to accomodate this.
+
 
 ------------------------------------------------------------------------------
 v 2.2.0 	 	Jun 27, 2019
