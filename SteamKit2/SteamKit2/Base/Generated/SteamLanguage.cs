@@ -1346,6 +1346,8 @@ namespace SteamKit2
 		ClientChallengeRequest = 5623,
 		ClientChallengeResponse = 5624,
 		BadgeCraftedNotification = 5625,
+		ClientNetworkingMobileCertRequest = 5626,
+		ClientNetworkingMobileCertRequestResponse = 5627,
 		BaseMDS = 5800,
 		AMToMDSGetDepotDecryptionKey = 5812,
 		MDSToAMGetDepotDecryptionKeyResponse = 5813,
@@ -1430,6 +1432,7 @@ namespace SteamKit2
 		NonStdMsgSteam2Emulator = 6812,
 		NonStdMsgRTMPServer = 6813,
 		NonStdMsgWebSocket = 6814,
+		NonStdMsgRedis = 6815,
 		UDSBase = 7000,
 		ClientUDSP2PSessionStarted = 7001,
 		ClientUDSP2PSessionEnded = 7002,
@@ -1859,6 +1862,8 @@ namespace SteamKit2
 		AccountNotFriends = 111,
 		LimitedUserAccount = 112,
 		CantRemoveItem = 113,
+		AccountHasBeenDeleted = 114,
+		AccountHasAnExistingUserCancelledLicense = 115,
 	}
 	public enum EUniverse
 	{
@@ -2020,6 +2025,7 @@ namespace SteamKit2
 		HasRichPresence = 1,
 		InJoinableGame = 2,
 		Golden = 4,
+		RemotePlayTogether = 8,
 		ClientTypeWeb = 256,
 		ClientTypeMobile = 512,
 		ClientTypeTenfoot = 1024,
@@ -2422,7 +2428,8 @@ namespace SteamKit2
 		SLS = 6,
 		SteamCache = 7,
 		OpenCache = 8,
-		Max = 9,
+		LANCache = 9,
+		Max = 10,
 	}
 	public enum EPlatformType
 	{
@@ -2492,6 +2499,7 @@ namespace SteamKit2
 		MacOS1012 = -85,
 		Macos1013 = -84,
 		Macos1014 = -83,
+		Macos1015 = -82,
 		MacOSMax = -1,
 		LinuxUnknown = -203,
 		Linux22 = -202,
@@ -2649,7 +2657,20 @@ namespace SteamKit2
 		TimeMachine = 111,
 		VACDBMaster = 112,
 		ContentServerConfig = 113,
-		Max = 114,
+		Minigame = 114,
+		MLTrain = 115,
+		VACTest = 116,
+		TaxService = 117,
+		MLInference = 118,
+		UGSAggregate = 119,
+		TURN = 120,
+		RemoteClient = 121,
+		BroadcastOrigin = 122,
+		BroadcastChannel = 123,
+		SteamAR = 124,
+		China = 125,
+		CrashDump = 126,
+		Max = 127,
 	}
 	public enum EBillingType
 	{

@@ -1504,6 +1504,8 @@ enum EMsg
 	ClientChallengeRequest = 5623;
 	ClientChallengeResponse = 5624;
 	BadgeCraftedNotification = 5625;
+	ClientNetworkingMobileCertRequest = 5626;
+	ClientNetworkingMobileCertRequestResponse = 5627;
 
 	BaseMDS = 5800;
 	ClientMDSLoginRequest = 5801; removed
@@ -1625,6 +1627,7 @@ enum EMsg
 	NonStdMsgSteam2Emulator = 6812;
 	NonStdMsgRTMPServer = 6813;
 	NonStdMsgWebSocket = 6814;
+	NonStdMsgRedis = 6815;
 
 	UDSBase = 7000;
 	ClientUDSP2PSessionStarted = 7001;
@@ -1984,6 +1987,7 @@ enum EMsg
 	ClientVoiceCallPreAuthorizeResponse = 9801;
 	ClientServerTimestampRequest = 9802;
 	ClientServerTimestampResponse = 9803;
+
 	ClientLANP2PBase = 9900;
 	ClientLANP2PRequestChunk = 9900;
 	ClientLANP2PRequestChunkResponse = 9901;
