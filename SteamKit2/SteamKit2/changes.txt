@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
-v 2.3.0			Mar 12, 2020 (Beta 1)
+v 2.3.0			Mar 29, 2020 (Beta 1)
 ------------------------------------------------------------------------------
 * Added `SteamMatchmaking` to manage matchmaking lobbies.
 * Added `ParentalSettings` to `LoggedOnCallback`.
