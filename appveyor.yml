@@ -1,5 +1,5 @@
 environment:
-  CoreVersion: 2.2.0
+  CoreVersion: 2.3.0
 
 version: $(CoreVersion).{build}
 os: Visual Studio 2019
