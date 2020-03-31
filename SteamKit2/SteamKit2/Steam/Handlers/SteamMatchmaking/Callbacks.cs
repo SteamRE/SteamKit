@@ -24,8 +24,9 @@ namespace SteamKit2
             /// </summary>
             public List<Lobby> Lobbies { get; }
 
-            internal GetLobbyListCallback( uint appId, EResult res, List<Lobby> lobbies )
+            internal GetLobbyListCallback( JobID jobId, uint appId, EResult res, List<Lobby> lobbies )
             {
+                JobID = jobId;
                 AppID = appId;
                 Result = res;
                 Lobbies = lobbies;

@@ -515,6 +515,7 @@ namespace SteamKit2
             }
 
             Client.PostCallback( new GetLobbyListCallback(
+                lobbyListResponse.TargetJobID,
                 body.app_id,
                 ( EResult )body.eresult,
                 lobbyList
