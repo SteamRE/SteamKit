@@ -367,9 +367,9 @@ namespace SteamKit2
                 }
             }
 
-            internal static ReadOnlyDictionary<string, string> DecodeMetadata( byte[] buffer )
+            internal static ReadOnlyDictionary<string, string> DecodeMetadata( byte[]? buffer )
             {
-                if ( buffer.Length == 0 )
+                if ( buffer == null || buffer.Length == 0 )
                 {
                     return EmptyMetadata;
                 }
