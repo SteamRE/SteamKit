@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.Text;
 using ProtoBuf;
 using SteamKit2.Internal;
-using SteamKit2.Unified.Internal;
 
 namespace SteamKit2
 {

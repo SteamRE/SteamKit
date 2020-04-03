@@ -771,16 +771,6 @@ namespace SteamKit2.Internal
             public void Resetonline_session_instances() => __pbn__online_session_instances = null;
             private uint? __pbn__online_session_instances;
 
-            [global::ProtoBuf.ProtoMember(8)]
-            public uint published_instance_id
-            {
-                get { return __pbn__published_instance_id.GetValueOrDefault(); }
-                set { __pbn__published_instance_id = value; }
-            }
-            public bool ShouldSerializepublished_instance_id() => __pbn__published_instance_id != null;
-            public void Resetpublished_instance_id() => __pbn__published_instance_id = null;
-            private uint? __pbn__published_instance_id;
-
             [global::ProtoBuf.ProtoMember(10)]
             public bool persona_set_by_user
             {
@@ -1450,6 +1440,12 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public global::System.Collections.Generic.List<Emoticon> emoticons { get; } = new global::System.Collections.Generic.List<Emoticon>();
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<Sticker> stickers { get; } = new global::System.Collections.Generic.List<Sticker>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<Effect> effects { get; } = new global::System.Collections.Generic.List<Effect>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Emoticon : global::ProtoBuf.IExtensible
         {
@@ -1507,6 +1503,116 @@ namespace SteamKit2.Internal
             public bool ShouldSerializetime_received() => __pbn__time_received != null;
             public void Resettime_received() => __pbn__time_received = null;
             private uint? __pbn__time_received;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Sticker : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string name
+            {
+                get { return __pbn__name ?? ""; }
+                set { __pbn__name = value; }
+            }
+            public bool ShouldSerializename() => __pbn__name != null;
+            public void Resetname() => __pbn__name = null;
+            private string __pbn__name;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public int count
+            {
+                get { return __pbn__count.GetValueOrDefault(); }
+                set { __pbn__count = value; }
+            }
+            public bool ShouldSerializecount() => __pbn__count != null;
+            public void Resetcount() => __pbn__count = null;
+            private int? __pbn__count;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint time_received
+            {
+                get { return __pbn__time_received.GetValueOrDefault(); }
+                set { __pbn__time_received = value; }
+            }
+            public bool ShouldSerializetime_received() => __pbn__time_received != null;
+            public void Resettime_received() => __pbn__time_received = null;
+            private uint? __pbn__time_received;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public uint appid
+            {
+                get { return __pbn__appid.GetValueOrDefault(); }
+                set { __pbn__appid = value; }
+            }
+            public bool ShouldSerializeappid() => __pbn__appid != null;
+            public void Resetappid() => __pbn__appid = null;
+            private uint? __pbn__appid;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Effect : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string name
+            {
+                get { return __pbn__name ?? ""; }
+                set { __pbn__name = value; }
+            }
+            public bool ShouldSerializename() => __pbn__name != null;
+            public void Resetname() => __pbn__name = null;
+            private string __pbn__name;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public int count
+            {
+                get { return __pbn__count.GetValueOrDefault(); }
+                set { __pbn__count = value; }
+            }
+            public bool ShouldSerializecount() => __pbn__count != null;
+            public void Resetcount() => __pbn__count = null;
+            private int? __pbn__count;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint time_received
+            {
+                get { return __pbn__time_received.GetValueOrDefault(); }
+                set { __pbn__time_received = value; }
+            }
+            public bool ShouldSerializetime_received() => __pbn__time_received != null;
+            public void Resettime_received() => __pbn__time_received = null;
+            private uint? __pbn__time_received;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public bool infinite_use
+            {
+                get { return __pbn__infinite_use.GetValueOrDefault(); }
+                set { __pbn__infinite_use = value; }
+            }
+            public bool ShouldSerializeinfinite_use() => __pbn__infinite_use != null;
+            public void Resetinfinite_use() => __pbn__infinite_use = null;
+            private bool? __pbn__infinite_use;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public uint appid
+            {
+                get { return __pbn__appid.GetValueOrDefault(); }
+                set { __pbn__appid = value; }
+            }
+            public bool ShouldSerializeappid() => __pbn__appid != null;
+            public void Resetappid() => __pbn__appid = null;
+            private uint? __pbn__appid;
 
         }
 

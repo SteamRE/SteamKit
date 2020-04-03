@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 using ProtoBuf;
 using SteamKit2.Internal;
 
@@ -201,7 +200,7 @@ namespace SteamKit2
                 var serviceName = splitByDot[0];
                 var methodName = splitByHash[0];
 
-                var serviceInterfaceName = "SteamKit2.Unified.Internal.I" + serviceName;
+                var serviceInterfaceName = "SteamKit2.Internal.I" + serviceName;
                 var serviceInterfaceType = Type.GetType( serviceInterfaceName );
                 if (serviceInterfaceType != null)
                 {

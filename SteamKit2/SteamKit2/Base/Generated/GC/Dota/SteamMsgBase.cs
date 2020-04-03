@@ -3690,6 +3690,180 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CGCSystemMsg_ReportExternalPurchase_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get { return __pbn__appid.GetValueOrDefault(); }
+            set { __pbn__appid = value; }
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get { return __pbn__steamid.GetValueOrDefault(); }
+            set { __pbn__steamid = value; }
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(EMobilePaymentProvider.k_EMobilePaymentProvider_Invalid)]
+        public EMobilePaymentProvider provider
+        {
+            get { return __pbn__provider ?? EMobilePaymentProvider.k_EMobilePaymentProvider_Invalid; }
+            set { __pbn__provider = value; }
+        }
+        public bool ShouldSerializeprovider() => __pbn__provider != null;
+        public void Resetprovider() => __pbn__provider = null;
+        private EMobilePaymentProvider? __pbn__provider;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public ulong orderid
+        {
+            get { return __pbn__orderid.GetValueOrDefault(); }
+            set { __pbn__orderid = value; }
+        }
+        public bool ShouldSerializeorderid() => __pbn__orderid != null;
+        public void Resetorderid() => __pbn__orderid = null;
+        private ulong? __pbn__orderid;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string provider_orderid
+        {
+            get { return __pbn__provider_orderid ?? ""; }
+            set { __pbn__provider_orderid = value; }
+        }
+        public bool ShouldSerializeprovider_orderid() => __pbn__provider_orderid != null;
+        public void Resetprovider_orderid() => __pbn__provider_orderid = null;
+        private string __pbn__provider_orderid;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public long amount
+        {
+            get { return __pbn__amount.GetValueOrDefault(); }
+            set { __pbn__amount = value; }
+        }
+        public bool ShouldSerializeamount() => __pbn__amount != null;
+        public void Resetamount() => __pbn__amount = null;
+        private long? __pbn__amount;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string currency
+        {
+            get { return __pbn__currency ?? ""; }
+            set { __pbn__currency = value; }
+        }
+        public bool ShouldSerializecurrency() => __pbn__currency != null;
+        public void Resetcurrency() => __pbn__currency = null;
+        private string __pbn__currency;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public uint quantity
+        {
+            get { return __pbn__quantity.GetValueOrDefault(); }
+            set { __pbn__quantity = value; }
+        }
+        public bool ShouldSerializequantity() => __pbn__quantity != null;
+        public void Resetquantity() => __pbn__quantity = null;
+        private uint? __pbn__quantity;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public uint itemid
+        {
+            get { return __pbn__itemid.GetValueOrDefault(); }
+            set { __pbn__itemid = value; }
+        }
+        public bool ShouldSerializeitemid() => __pbn__itemid != null;
+        public void Resetitemid() => __pbn__itemid = null;
+        private uint? __pbn__itemid;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string item_description
+        {
+            get { return __pbn__item_description ?? ""; }
+            set { __pbn__item_description = value; }
+        }
+        public bool ShouldSerializeitem_description() => __pbn__item_description != null;
+        public void Resetitem_description() => __pbn__item_description = null;
+        private string __pbn__item_description;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string language
+        {
+            get { return __pbn__language ?? ""; }
+            set { __pbn__language = value; }
+        }
+        public bool ShouldSerializelanguage() => __pbn__language != null;
+        public void Resetlanguage() => __pbn__language = null;
+        private string __pbn__language;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string category
+        {
+            get { return __pbn__category ?? ""; }
+            set { __pbn__category = value; }
+        }
+        public bool ShouldSerializecategory() => __pbn__category != null;
+        public void Resetcategory() => __pbn__category = null;
+        private string __pbn__category;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public uint time_created
+        {
+            get { return __pbn__time_created.GetValueOrDefault(); }
+            set { __pbn__time_created = value; }
+        }
+        public bool ShouldSerializetime_created() => __pbn__time_created != null;
+        public void Resettime_created() => __pbn__time_created = null;
+        private uint? __pbn__time_created;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CGCSystemMsg_ReportExternalPurchase_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong transid
+        {
+            get { return __pbn__transid.GetValueOrDefault(); }
+            set { __pbn__transid = value; }
+        }
+        public bool ShouldSerializetransid() => __pbn__transid != null;
+        public void Resettransid() => __pbn__transid = null;
+        private ulong? __pbn__transid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong orderid
+        {
+            get { return __pbn__orderid.GetValueOrDefault(); }
+            set { __pbn__orderid = value; }
+        }
+        public bool ShouldSerializeorderid() => __pbn__orderid != null;
+        public void Resetorderid() => __pbn__orderid = null;
+        private ulong? __pbn__orderid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CWorkshop_AddSpecialPayment_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -3879,6 +4053,14 @@ namespace SteamKit2.GC.Dota.Internal
         GCProtoBufMsgSrc_FromGC = 3,
         GCProtoBufMsgSrc_ReplySystem = 4,
         GCProtoBufMsgSrc_SpoofedSteamID = 5,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EMobilePaymentProvider
+    {
+        k_EMobilePaymentProvider_Invalid = 0,
+        k_EMobilePaymentProvider_GooglePlay = 1,
+        k_EMobilePaymentProvider_AppleAppStore = 2,
     }
 
     [global::ProtoBuf.ProtoContract()]

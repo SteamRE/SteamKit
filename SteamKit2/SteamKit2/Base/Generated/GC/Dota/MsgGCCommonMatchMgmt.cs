@@ -361,19 +361,6 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(29)]
         public global::System.Collections.Generic.List<CSODOTAPartyMember> members { get; } = new global::System.Collections.Generic.List<CSODOTAPartyMember>();
 
-        [global::ProtoBuf.ProtoMember(30)]
-        public uint open_guild_id
-        {
-            get { return __pbn__open_guild_id.GetValueOrDefault(); }
-            set { __pbn__open_guild_id = value; }
-        }
-        public bool ShouldSerializeopen_guild_id() => __pbn__open_guild_id != null;
-        public void Resetopen_guild_id() => __pbn__open_guild_id = null;
-        private uint? __pbn__open_guild_id;
-
-        [global::ProtoBuf.ProtoMember(31)]
-        public global::System.Collections.Generic.List<uint> common_guilds { get; } = new global::System.Collections.Generic.List<uint>();
-
         [global::ProtoBuf.ProtoMember(35)]
         public uint low_priority_games_remaining
         {
@@ -1292,6 +1279,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetqueue_point_adjustment() => __pbn__queue_point_adjustment = null;
         private int? __pbn__queue_point_adjustment;
 
+        [global::ProtoBuf.ProtoMember(48)]
+        public int rank_tier
+        {
+            get { return __pbn__rank_tier.GetValueOrDefault(); }
+            set { __pbn__rank_tier = value; }
+        }
+        public bool ShouldSerializerank_tier() => __pbn__rank_tier != null;
+        public void Resetrank_tier() => __pbn__rank_tier = null;
+        private int? __pbn__rank_tier;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class CDOTALobbyMemberXPBonus : global::ProtoBuf.IExtensible
         {
@@ -1444,46 +1441,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeguild_tag() => __pbn__guild_tag != null;
         public void Resetguild_tag() => __pbn__guild_tag = null;
         private string __pbn__guild_tag;
-
-        [global::ProtoBuf.ProtoMember(11)]
-        public uint guild_id
-        {
-            get { return __pbn__guild_id.GetValueOrDefault(); }
-            set { __pbn__guild_id = value; }
-        }
-        public bool ShouldSerializeguild_id() => __pbn__guild_id != null;
-        public void Resetguild_id() => __pbn__guild_id = null;
-        private uint? __pbn__guild_id;
-
-        [global::ProtoBuf.ProtoMember(12)]
-        public ulong guild_logo
-        {
-            get { return __pbn__guild_logo.GetValueOrDefault(); }
-            set { __pbn__guild_logo = value; }
-        }
-        public bool ShouldSerializeguild_logo() => __pbn__guild_logo != null;
-        public void Resetguild_logo() => __pbn__guild_logo = null;
-        private ulong? __pbn__guild_logo;
-
-        [global::ProtoBuf.ProtoMember(13)]
-        public ulong guild_base_logo
-        {
-            get { return __pbn__guild_base_logo.GetValueOrDefault(); }
-            set { __pbn__guild_base_logo = value; }
-        }
-        public bool ShouldSerializeguild_base_logo() => __pbn__guild_base_logo != null;
-        public void Resetguild_base_logo() => __pbn__guild_base_logo = null;
-        private ulong? __pbn__guild_base_logo;
-
-        [global::ProtoBuf.ProtoMember(14)]
-        public ulong guild_banner_logo
-        {
-            get { return __pbn__guild_banner_logo.GetValueOrDefault(); }
-            set { __pbn__guild_banner_logo = value; }
-        }
-        public bool ShouldSerializeguild_banner_logo() => __pbn__guild_banner_logo != null;
-        public void Resetguild_banner_logo() => __pbn__guild_banner_logo = null;
-        private ulong? __pbn__guild_banner_logo;
 
         [global::ProtoBuf.ProtoMember(15)]
         public uint rank
@@ -2519,15 +2476,15 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetrecord_detailed_stats() => __pbn__record_detailed_stats = null;
         private bool? __pbn__record_detailed_stats;
 
-        [global::ProtoBuf.ProtoMember(115)]
-        public bool is_allstar_game
+        [global::ProtoBuf.ProtoMember(116)]
+        public bool experimental_gameplay_enabled
         {
-            get { return __pbn__is_allstar_game.GetValueOrDefault(); }
-            set { __pbn__is_allstar_game = value; }
+            get { return __pbn__experimental_gameplay_enabled.GetValueOrDefault(); }
+            set { __pbn__experimental_gameplay_enabled = value; }
         }
-        public bool ShouldSerializeis_allstar_game() => __pbn__is_allstar_game != null;
-        public void Resetis_allstar_game() => __pbn__is_allstar_game = null;
-        private bool? __pbn__is_allstar_game;
+        public bool ShouldSerializeexperimental_gameplay_enabled() => __pbn__experimental_gameplay_enabled != null;
+        public void Resetexperimental_gameplay_enabled() => __pbn__experimental_gameplay_enabled = null;
+        private bool? __pbn__experimental_gameplay_enabled;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class CExtraMsg : global::ProtoBuf.IExtensible
@@ -2786,6 +2743,64 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializebehavior_score_variance() => __pbn__behavior_score_variance != null;
         public void Resetbehavior_score_variance() => __pbn__behavior_score_variance = null;
         private EMatchBehaviorScoreVariance? __pbn__behavior_score_variance;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMvpData : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<MvpDatum> mvps { get; } = new global::System.Collections.Generic.List<MvpDatum>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class MvpDatum : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1, IsRequired = true)]
+            public uint slot { get; set; }
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public global::System.Collections.Generic.List<MvpAccolade> accolades { get; } = new global::System.Collections.Generic.List<MvpAccolade>();
+
+            [global::ProtoBuf.ProtoContract()]
+            public partial class MvpAccolade : global::ProtoBuf.IExtensible
+            {
+                private global::ProtoBuf.IExtension __pbn__extensionData;
+                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+                [global::ProtoBuf.ProtoMember(1, IsRequired = true)]
+                public MvpAccoladeType type { get; set; } = MvpAccoladeType.kills;
+
+                [global::ProtoBuf.ProtoMember(2, IsRequired = true)]
+                public float detail_value { get; set; }
+
+                [global::ProtoBuf.ProtoContract()]
+                public enum MvpAccoladeType
+                {
+                    kills = 1,
+                    deaths = 2,
+                    assists = 3,
+                    net_worth = 5,
+                    item_value = 6,
+                    support_gold_spent = 7,
+                    wards_placed = 8,
+                    dewards = 9,
+                    camps_stacked = 10,
+                    last_hits = 11,
+                    denies = 12,
+                }
+
+            }
+
+        }
 
     }
 

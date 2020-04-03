@@ -196,6 +196,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resethigh_priority_disabled() => __pbn__high_priority_disabled = null;
         private bool? __pbn__high_priority_disabled;
 
+        [global::ProtoBuf.ProtoMember(20)]
+        public bool disable_experimental_gameplay
+        {
+            get { return __pbn__disable_experimental_gameplay.GetValueOrDefault(); }
+            set { __pbn__disable_experimental_gameplay = value; }
+        }
+        public bool ShouldSerializedisable_experimental_gameplay() => __pbn__disable_experimental_gameplay != null;
+        public void Resetdisable_experimental_gameplay() => __pbn__disable_experimental_gameplay = null;
+        private bool? __pbn__disable_experimental_gameplay;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1239,26 +1249,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetleader_account_id() => __pbn__leader_account_id = null;
         private uint? __pbn__leader_account_id;
 
-        [global::ProtoBuf.ProtoMember(8)]
-        public uint guild_id
-        {
-            get { return __pbn__guild_id.GetValueOrDefault(); }
-            set { __pbn__guild_id = value; }
-        }
-        public bool ShouldSerializeguild_id() => __pbn__guild_id != null;
-        public void Resetguild_id() => __pbn__guild_id = null;
-        private uint? __pbn__guild_id;
-
-        [global::ProtoBuf.ProtoMember(9)]
-        public ulong guild_logo
-        {
-            get { return __pbn__guild_logo.GetValueOrDefault(); }
-            set { __pbn__guild_logo = value; }
-        }
-        public bool ShouldSerializeguild_logo() => __pbn__guild_logo != null;
-        public void Resetguild_logo() => __pbn__guild_logo = null;
-        private ulong? __pbn__guild_logo;
-
         [global::ProtoBuf.ProtoMember(10)]
         [global::System.ComponentModel.DefaultValue("")]
         public string name
@@ -1545,30 +1535,6 @@ namespace SteamKit2.GC.Dota.Internal
 
     [global::ProtoBuf.ProtoContract()]
     public partial class CMsgFriendPracticeLobbyListResponse : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<CMsgPracticeLobbyListResponseEntry> lobbies { get; } = new global::System.Collections.Generic.List<CMsgPracticeLobbyListResponseEntry>();
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGuildmatePracticeLobbyListRequest : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<uint> guilds { get; } = new global::System.Collections.Generic.List<uint>();
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGuildmatePracticeLobbyListResponse : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

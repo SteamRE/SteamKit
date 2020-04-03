@@ -2932,6 +2932,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetseconds() => __pbn__seconds = null;
         private uint? __pbn__seconds;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool communication_cooldown
+        {
+            get { return __pbn__communication_cooldown.GetValueOrDefault(); }
+            set { __pbn__communication_cooldown = value; }
+        }
+        public bool ShouldSerializecommunication_cooldown() => __pbn__communication_cooldown != null;
+        public void Resetcommunication_cooldown() => __pbn__communication_cooldown = null;
+        private bool? __pbn__communication_cooldown;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -3020,6 +3030,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
         private ulong? __pbn__match_id;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public bool report_from_demo
+        {
+            get { return __pbn__report_from_demo.GetValueOrDefault(); }
+            set { __pbn__report_from_demo = value; }
+        }
+        public bool ShouldSerializereport_from_demo() => __pbn__report_from_demo != null;
+        public void Resetreport_from_demo() => __pbn__report_from_demo = null;
+        private bool? __pbn__report_from_demo;
 
     }
 

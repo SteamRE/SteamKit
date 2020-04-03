@@ -1149,7 +1149,9 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_INTERNATIONAL_2019 = 25,
         EVENT_ID_NEW_PLAYER_EXPERIENCE = 26,
         EVENT_ID_FROSTIVUS_2019 = 27,
-        EVENT_ID_COUNT = 28,
+        EVENT_ID_NEW_BLOOM_2020 = 28,
+        EVENT_ID_INTERNATIONAL_2020 = 29,
+        EVENT_ID_COUNT = 30,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1221,7 +1223,6 @@ namespace SteamKit2.GC.Dota.Internal
         DOTAChannelType_Party = 2,
         DOTAChannelType_Lobby = 3,
         DOTAChannelType_Team = 4,
-        DOTAChannelType_Guild = 5,
         DOTAChannelType_Fantasy = 6,
         DOTAChannelType_Whisper = 7,
         DOTAChannelType_Console = 8,
@@ -1309,6 +1310,7 @@ namespace SteamKit2.GC.Dota.Internal
         DOTA_JOIN_RESULT_TIMEOUT = 11,
         DOTA_JOIN_RESULT_CUSTOM_GAME_COOLDOWN = 12,
         DOTA_JOIN_RESULT_BUSY = 13,
+        DOTA_JOIN_RESULT_NO_PLAYTIME = 14,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1360,7 +1362,7 @@ namespace SteamKit2.GC.Dota.Internal
     {
         k_EDOTAPlayerMMRType_Invalid = 0,
         k_EDOTAPlayerMMRType_GeneralHidden = 1,
-        k_EDOTAPlayerMMRType_GeneralCompetitive2019 = 3,
+        k_EDOTAPlayerMMRType_GeneralCompetitive = 3,
         k_EDOTAPlayerMMRType_SoloCompetitive2019 = 4,
         k_EDOTAPlayerMMRType_1v1Competitive_UNUSED = 5,
         k_EDOTAPlayerMMRType_GeneralSeasonalRanked = 6,
@@ -1477,6 +1479,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMatchOutcome_NotScored_ServerCrash = 66,
         k_EMatchOutcome_NotScored_NeverStarted = 67,
         k_EMatchOutcome_NotScored_Canceled = 68,
+        k_EMatchOutcome_NotScored_Suspicious = 69,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1572,19 +1575,6 @@ namespace SteamKit2.GC.Dota.Internal
         LEAGUE_PHASE_REGIONAL_QUALIFIER = 1,
         LEAGUE_PHASE_GROUP_STAGE = 2,
         LEAGUE_PHASE_MAIN_EVENT = 3,
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public enum ELeagueFantasyPhase
-    {
-        LEAGUE_FANTASY_PHASE_UNSET = 0,
-        LEAGUE_FANTASY_PHASE_MAIN = 1,
-        LEAGUE_FANTASY_PHASE_QUALIFIER_NA = 2,
-        LEAGUE_FANTASY_PHASE_QUALIFIER_SA = 3,
-        LEAGUE_FANTASY_PHASE_QUALIFIER_EUROPE = 4,
-        LEAGUE_FANTASY_PHASE_QUALIFIER_CIS = 5,
-        LEAGUE_FANTASY_PHASE_QUALIFIER_CHINA = 6,
-        LEAGUE_FANTASY_PHASE_QUALIFIER_SEA = 7,
     }
 
     [global::ProtoBuf.ProtoContract()]
