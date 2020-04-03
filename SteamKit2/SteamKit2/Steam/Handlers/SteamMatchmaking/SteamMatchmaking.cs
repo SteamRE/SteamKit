@@ -372,10 +372,10 @@ namespace SteamKit2
 
         void HandleCreateLobbyResponse( IPacketMsg packetMsg )
         {
-            var lobbyListResponse = new ClientMsgProtobuf<CMsgClientMMSCreateLobbyResponse>( packetMsg );
-            var body = lobbyListResponse.Body;
+            var createLobbyResponse = new ClientMsgProtobuf<CMsgClientMMSCreateLobbyResponse>( packetMsg );
+            var body = createLobbyResponse.Body;
 
-            if ( lobbyManipulationRequests.TryRemove( lobbyListResponse.TargetJobID, out var request ) )
+            if ( lobbyManipulationRequests.TryRemove( createLobbyResponse.TargetJobID, out var request ) )
             {
                 if ( body.eresult == ( int )EResult.OK && request != null )
                 {
@@ -401,7 +401,7 @@ namespace SteamKit2
             }
 
             Client.PostCallback( new CreateLobbyCallback(
-                lobbyListResponse.TargetJobID,
+                createLobbyResponse.TargetJobID,
                 body.app_id,
                 ( EResult )body.eresult,
                 body.steam_id_lobby
@@ -410,10 +410,10 @@ namespace SteamKit2
 
         void HandleSetLobbyDataResponse( IPacketMsg packetMsg )
         {
-            var lobbyListResponse = new ClientMsgProtobuf<CMsgClientMMSSetLobbyDataResponse>( packetMsg );
-            var body = lobbyListResponse.Body;
+            var setLobbyDataResponse = new ClientMsgProtobuf<CMsgClientMMSSetLobbyDataResponse>( packetMsg );
+            var body = setLobbyDataResponse.Body;
 
-            if ( lobbyManipulationRequests.TryRemove( lobbyListResponse.TargetJobID, out var request ) )
+            if ( lobbyManipulationRequests.TryRemove( setLobbyDataResponse.TargetJobID, out var request ) )
             {
                 if ( body.eresult == ( int )EResult.OK && request != null )
                 {
@@ -455,7 +455,7 @@ namespace SteamKit2
             }
 
             Client.PostCallback( new SetLobbyDataCallback(
-                lobbyListResponse.TargetJobID,
+                setLobbyDataResponse.TargetJobID,
                 body.app_id,
                 ( EResult )body.eresult,
                 body.steam_id_lobby
@@ -584,15 +584,15 @@ namespace SteamKit2
 
         void HandleLobbyData( IPacketMsg packetMsg )
         {
-            var lobbyListResponse = new ClientMsgProtobuf<CMsgClientMMSLobbyData>( packetMsg );
+            var lobbyDataResponse = new ClientMsgProtobuf<CMsgClientMMSLobbyData>( packetMsg );
 
-            var body = lobbyListResponse.Body;
+            var body = lobbyDataResponse.Body;
 
             var cachedLobby = lobbyCache.GetLobby( body.app_id, body.steam_id_lobby );
             DebugLog.Assert( cachedLobby != null, nameof( SteamMatchmaking ), "Got LobbyData without corresponding object in cache." );
 
             var members = body.members.Count == 0
-                ? cachedLobby.Members
+                ? cachedLobby?.Members
                 : body.members.ConvertAll( member => new Lobby.Member(
                     member.steam_id,
                     member.persona_name,
@@ -615,7 +615,7 @@ namespace SteamKit2
             lobbyCache.CacheLobby( body.app_id, updatedLobby );
 
             Client.PostCallback( new LobbyDataCallback(
-                lobbyListResponse.TargetJobID,
+                lobbyDataResponse.TargetJobID,
                 body.app_id,
                 updatedLobby
             ) );
