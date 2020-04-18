@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RollForward>LatestMajor</RollForward>
     <ProjectGuid>{5BF6D076-399B-41CA-BAE7-37CE1C40CA67}</ProjectGuid>
   </PropertyGroup>
 
