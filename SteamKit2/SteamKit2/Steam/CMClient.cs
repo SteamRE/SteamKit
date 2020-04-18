@@ -565,7 +565,10 @@ namespace SteamKit2.Internal
             }
             else if ( logonResult == EResult.TryAnotherCM || logonResult == EResult.ServiceUnavailable )
             {
-                Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Bad );
+                if ( connection?.CurrentEndPoint != null )
+                {
+                    Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Bad );
+                }
             }
         }
         void HandleLoggedOff( IPacketMsg packetMsg )
