@@ -567,6 +567,23 @@ namespace NetHookAnalyzer2
 					SetValueForDisplay(string.Format("\"{0}\"", kv.Value), kv.Value);
 				}
 			}
+			else if ( value is CMsgIPAddress msgIpAddr )
+			{
+				if ( msgIpAddr.ShouldSerializev4() )
+				{
+					byte[] addrBytes = BitConverter.GetBytes( msgIpAddr.v4 );
+					Array.Reverse( addrBytes );
+					SetValueForDisplay( new IPAddress( addrBytes ).ToString() );
+				}
+				else if ( msgIpAddr.ShouldSerializev6() )
+				{
+					SetValueForDisplay( new IPAddress( msgIpAddr.v6 ).ToString() );
+				}
+				else
+				{
+					SetValueForDisplay( "<null>" );
+				}
+			}
 			else if (objectType.IsDictionaryType())
 			{
 				var childNodes = new List<TreeNode>();
