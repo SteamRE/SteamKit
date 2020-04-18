@@ -80,7 +80,7 @@ namespace SteamKit2
 
             if ( details.GeoLocatedIP != null )
             {
-                query.Body.geo_location_ip = NetHelpers.GetIPAddress( details.GeoLocatedIP );
+                query.Body.geo_location_ip = NetHelpers.GetIPAddressAsUInt( details.GeoLocatedIP );
             }
 
             query.Body.filter_text = details.Filter;

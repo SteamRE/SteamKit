@@ -320,7 +320,7 @@ namespace SteamKit2
             }
             else
             {
-                logon.Body.obfuscated_private_ip = NetHelpers.ObfuscatePrivateIP( this.Client.LocalIP! );
+                logon.Body.obfuscated_private_ip = NetHelpers.GetMsgIPAddress( this.Client.LocalIP! ).ObfuscatePrivateIP();
             }
 
             // Legacy field, Steam client still sets it

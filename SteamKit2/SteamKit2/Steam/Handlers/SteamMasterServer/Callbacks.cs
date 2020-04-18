@@ -36,7 +36,7 @@ namespace SteamKit2
                 internal Server( CMsgGMSClientServerQueryResponse.Server server )
                 {
                     EndPoint = new IPEndPoint(
-                        NetHelpers.GetIPAddress( server.server_ip ),
+                        server.server_ip.GetIPAddress(),
                         ( int )server.server_port );
 
                     AuthedPlayers = server.auth_players;
