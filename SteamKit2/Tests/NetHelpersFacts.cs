@@ -37,6 +37,12 @@ namespace Tests
         public void ObfuscatePrivateIP()
         {
             Assert.Equal( 3316510732u, NetHelpers.GetMsgIPAddress( IPAddress.Loopback ).ObfuscatePrivateIP().v4 );
+            Assert.Equal( new byte[] {
+                0x0D, 0xF0, 0xAD, 0xBA,
+                0x0D, 0xF0, 0xAD, 0xBA,
+                0x0D, 0xF0, 0xAD, 0xBA,
+                0x0D, 0xF0, 0xAD, 1 ^ 0xBA
+            }, NetHelpers.GetMsgIPAddress( IPAddress.IPv6Loopback ).ObfuscatePrivateIP().v6 );
         }
 
         [Fact]
