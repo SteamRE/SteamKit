@@ -266,6 +266,7 @@ namespace SteamKit2
                 { EMsg.ClientSessionToken, HandleSessionToken },
                 { EMsg.ClientUpdateMachineAuth, HandleUpdateMachineAuth },
                 { EMsg.ClientAccountInfo, HandleAccountInfo },
+                { EMsg.ClientEmailAddrInfo, HandleEmailAddrInfo },
                 { EMsg.ClientWalletInfoUpdate, HandleWalletInfo },
                 { EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse, HandleWebAPIUserNonce },
                 { EMsg.ClientMarketingMessageUpdate2, HandleMarketingMessageUpdate },
@@ -569,6 +570,12 @@ namespace SteamKit2
 
             var callback = new AccountInfoCallback( accInfo.Body );
             this.Client.PostCallback( callback );
+        }
+        void HandleEmailAddrInfo(IPacketMsg packetMsg)
+        {
+            var emailAddrInfo = new ClientMsgProtobuf<CMsgClientEmailAddrInfo>(packetMsg);
+            var callback = new EmailAddrInfoCallback(emailAddrInfo.Body);
+            this.Client.PostCallback(callback);
         }
         void HandleWalletInfo( IPacketMsg packetMsg )
         {

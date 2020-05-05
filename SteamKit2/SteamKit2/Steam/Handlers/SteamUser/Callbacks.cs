@@ -294,6 +294,27 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// This callback is received when email information is recieved from the network.
+        /// </summary>
+        public sealed class EmailAddrInfoCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the email address of this account.
+            /// </summary>
+            public string EmailAddress { get; private set; }
+            /// <summary>
+            /// Gets a value indicating validated email or not.
+            /// </summary>
+            public bool IsValidated { get; private set; }
+
+            internal EmailAddrInfoCallback(CMsgClientEmailAddrInfo msg)
+            {
+                EmailAddress = msg.email_address;
+                IsValidated = msg.email_is_validated;
+            }
+        }
+
+        /// <summary>
         /// This callback is received when wallet info is recieved from the network.
         /// </summary>
         public sealed class WalletInfoCallback : CallbackMsg
