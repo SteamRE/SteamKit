@@ -153,9 +153,16 @@ namespace SteamKit2
 
         internal DepotManifest(byte[] data)
         {
-            Deserialize(data);
+            InternalDeserialize(data);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DepotManifest"/> class.
+        /// Depot manifests may come from the Steam CDN or from Steam/depotcache/ manifest files.
+        /// </summary>
+        /// <param name="data">Raw depot manifest data to deserialize.</param>
+        /// <exception cref="InvalidDataException">Thrown if the given data is not something recognizable.</exception>
+        public static DepotManifest Deserialize(byte[] data) => new DepotManifest(data);
 
         /// <summary>
         /// Attempts to decrypts file names with the given encryption key.
@@ -191,7 +198,7 @@ namespace SteamKit2
             return true;
         }
 
-        void Deserialize(byte[] data)
+        void InternalDeserialize(byte[] data)
         {
             ContentManifestPayload? payload = null;
             ContentManifestMetadata? metadata = null;
@@ -241,7 +248,7 @@ namespace SteamKit2
                             break;
 
                         default:
-                            throw new NotImplementedException( string.Format( "Unrecognized magic value {0:X} in depot manifest.", magic ) );
+                            throw new InvalidDataException( $"Unrecognized magic value {magic:X} in depot manifest." );
                     }
                 }
             }
