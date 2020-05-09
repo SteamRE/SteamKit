@@ -311,6 +311,17 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public global::System.Collections.Generic.List<DeltaChunk> deltaChunks { get; } = new global::System.Collections.Generic.List<DeltaChunk>();
 
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue(EContentDeltaChunkDataLocation.k_EContentDeltaChunkDataLocationInProtobuf)]
+        public EContentDeltaChunkDataLocation chunk_data_location
+        {
+            get { return __pbn__chunk_data_location ?? EContentDeltaChunkDataLocation.k_EContentDeltaChunkDataLocationInProtobuf; }
+            set { __pbn__chunk_data_location = value; }
+        }
+        public bool ShouldSerializechunk_data_location() => __pbn__chunk_data_location != null;
+        public void Resetchunk_data_location() => __pbn__chunk_data_location = null;
+        private EContentDeltaChunkDataLocation? __pbn__chunk_data_location;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class DeltaChunk : global::ProtoBuf.IExtensible
         {
@@ -368,8 +379,25 @@ namespace SteamKit2.Internal
             public void Resetchunk() => __pbn__chunk = null;
             private byte[] __pbn__chunk;
 
+            [global::ProtoBuf.ProtoMember(6)]
+            public uint size_delta
+            {
+                get { return __pbn__size_delta.GetValueOrDefault(); }
+                set { __pbn__size_delta = value; }
+            }
+            public bool ShouldSerializesize_delta() => __pbn__size_delta != null;
+            public void Resetsize_delta() => __pbn__size_delta = null;
+            private uint? __pbn__size_delta;
+
         }
 
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EContentDeltaChunkDataLocation
+    {
+        k_EContentDeltaChunkDataLocationInProtobuf = 0,
+        k_EContentDeltaChunkDataLocationAfterProtobuf = 1,
     }
 
 }

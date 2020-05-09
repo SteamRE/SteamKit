@@ -178,6 +178,7 @@ namespace SteamKit2
             /// Gets the published session ID.
             /// </summary>
             /// <value>The published session ID.</value>
+            [Obsolete("published_instance_id was removed")]
             public uint PublishedSessionID { get; private set; }
 
 
@@ -212,7 +213,6 @@ namespace SteamKit2
                 this.ClanTag = friend.clan_tag;
 
                 this.OnlineSessionInstances = friend.online_session_instances;
-                this.PublishedSessionID = friend.published_instance_id;
             }
         }
 

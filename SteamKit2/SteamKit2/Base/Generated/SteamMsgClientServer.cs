@@ -894,6 +894,16 @@ namespace SteamKit2.Internal
         public void Resetclient_os_type() => __pbn__client_os_type = null;
         private uint? __pbn__client_os_type;
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint cloud_gaming_platform
+        {
+            get { return __pbn__cloud_gaming_platform.GetValueOrDefault(); }
+            set { __pbn__cloud_gaming_platform = value; }
+        }
+        public bool ShouldSerializecloud_gaming_platform() => __pbn__cloud_gaming_platform != null;
+        public void Resetcloud_gaming_platform() => __pbn__cloud_gaming_platform = null;
+        private uint? __pbn__cloud_gaming_platform;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class GamePlayed : global::ProtoBuf.IExtensible
         {
@@ -1515,6 +1525,26 @@ namespace SteamKit2.Internal
             public bool ShouldSerializerenewal_time_unit() => __pbn__renewal_time_unit != null;
             public void Resetrenewal_time_unit() => __pbn__renewal_time_unit = null;
             private uint? __pbn__renewal_time_unit;
+
+            [global::ProtoBuf.ProtoMember(17)]
+            public ulong access_token
+            {
+                get { return __pbn__access_token.GetValueOrDefault(); }
+                set { __pbn__access_token = value; }
+            }
+            public bool ShouldSerializeaccess_token() => __pbn__access_token != null;
+            public void Resetaccess_token() => __pbn__access_token = null;
+            private ulong? __pbn__access_token;
+
+            [global::ProtoBuf.ProtoMember(18)]
+            public uint master_package_id
+            {
+                get { return __pbn__master_package_id.GetValueOrDefault(); }
+                set { __pbn__master_package_id = value; }
+            }
+            public bool ShouldSerializemaster_package_id() => __pbn__master_package_id != null;
+            public void Resetmaster_package_id() => __pbn__master_package_id = null;
+            private uint? __pbn__master_package_id;
 
         }
 
@@ -6770,6 +6800,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializenum_prev_failed() => __pbn__num_prev_failed != null;
         public void Resetnum_prev_failed() => __pbn__num_prev_failed = null;
         private uint? __pbn__num_prev_failed;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint supports_package_tokens
+        {
+            get { return __pbn__supports_package_tokens.GetValueOrDefault(); }
+            set { __pbn__supports_package_tokens = value; }
+        }
+        public bool ShouldSerializesupports_package_tokens() => __pbn__supports_package_tokens != null;
+        public void Resetsupports_package_tokens() => __pbn__supports_package_tokens = null;
+        private uint? __pbn__supports_package_tokens;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class AppInfo : global::ProtoBuf.IExtensible

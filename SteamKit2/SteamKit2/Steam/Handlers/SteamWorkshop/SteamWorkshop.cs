@@ -20,7 +20,6 @@ namespace SteamKit2
         {
             dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
-                { EMsg.CREEnumeratePublishedFilesResponse, HandleEnumPublishedFiles },
                 { EMsg.ClientUCMEnumerateUserPublishedFilesResponse, HandleEnumUserPublishedFiles },
                 { EMsg.ClientUCMEnumerateUserSubscribedFilesResponse, HandleEnumUserSubscribedFiles },
                 { EMsg.ClientUCMEnumeratePublishedFilesByUserActionResponse, HandleEnumPublishedFilesByAction },
@@ -145,104 +144,6 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Represents the details of an enumeration request for all published files.
-        /// </summary>
-        public sealed class EnumerationDetails
-        {
-            /// <summary>
-            /// Gets or sets the AppID of the workshop to enumerate.
-            /// </summary>
-            /// <value>
-            /// The AppID.
-            /// </value>
-            public uint AppID { get; set; }
-
-            /// <summary>
-            /// Gets or sets the type of the enumeration.
-            /// </summary>
-            /// <value>
-            /// The type.
-            /// </value>
-            public EWorkshopEnumerationType Type { get; set; }
-
-            /// <summary>
-            /// Gets or sets the start index.
-            /// </summary>
-            /// <value>
-            /// The start index.
-            /// </value>
-            public uint StartIndex { get; set; }
-
-            /// <summary>
-            /// Gets or sets the days.
-            /// </summary>
-            /// <value>
-            /// The days.
-            /// </value>
-            public uint Days { get; set; }
-            /// <summary>
-            /// Gets or sets the number of results to return.
-            /// </summary>
-            /// <value>
-            /// The number of results.
-            /// </value>
-            public uint Count { get; set; }
-
-            /// <summary>
-            /// Gets the list of tags to enumerate.
-            /// </summary>
-            public List<string> Tags { get; private set; }
-            /// <summary>
-            /// Gets the list of user tags to enumerate.
-            /// </summary>
-            public List<string> UserTags { get; private set; }
-
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="EnumerationDetails"/> class.
-            /// </summary>
-            public EnumerationDetails()
-            {
-                Tags = new List<string>();
-                UserTags = new List<string>();
-            }
-        }
-
-        /// <summary>
-        /// Enumerates the list of all published files on the Steam workshop.
-        /// Results are returned in a <see cref="PublishedFilesCallback"/>.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
-        /// </summary>
-        /// <param name="details">The specific details of the request.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PublishedFilesCallback"/>.</returns>
-        public AsyncJob<PublishedFilesCallback> EnumeratePublishedFiles( EnumerationDetails details )
-        {
-            if ( details == null )
-            {
-                throw new ArgumentNullException( nameof(details) );
-            }
-
-            var enumRequest = new ClientMsgProtobuf<CMsgCREEnumeratePublishedFiles>( EMsg.CREEnumeratePublishedFiles );
-            enumRequest.SourceJobID = Client.GetNextJobID();
-
-            enumRequest.Body.app_id = details.AppID;
-
-            enumRequest.Body.query_type = ( int )details.Type;
-
-            enumRequest.Body.start_index = details.StartIndex;
-
-            enumRequest.Body.days = details.Days;
-            enumRequest.Body.count = details.Count;
-
-            enumRequest.Body.tags.AddRange( details.Tags );
-            enumRequest.Body.user_tags.AddRange( details.UserTags );
-
-            Client.Send( enumRequest );
-
-            return new AsyncJob<PublishedFilesCallback>( this.Client, enumRequest.SourceJobID );
-        }
-
-        /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
         /// <param name="packetMsg">The packet message that contains the data.</param>
@@ -266,13 +167,6 @@ namespace SteamKit2
 
 
         #region ClientMsg Handlers
-        void HandleEnumPublishedFiles( IPacketMsg packetMsg )
-        {
-            var response = new ClientMsgProtobuf<CMsgCREEnumeratePublishedFilesResponse>( packetMsg );
-
-            var callback = new PublishedFilesCallback(response.TargetJobID, response.Body);
-            Client.PostCallback( callback );
-        }
         void HandleEnumUserPublishedFiles( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientUCMEnumerateUserPublishedFilesResponse>( packetMsg );

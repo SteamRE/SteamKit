@@ -95,6 +95,9 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public CMsgMatchMatchmakingStats matchmaking_stats { get; set; }
 
+        [global::ProtoBuf.ProtoMember(9)]
+        public CMvpData mvp_data { get; set; }
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Team : global::ProtoBuf.IExtensible
         {
@@ -729,6 +732,16 @@ namespace SteamKit2.GC.Dota.Internal
 
                 [global::ProtoBuf.ProtoMember(19)]
                 public global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.ActionGrant> actions_granted { get; } = new global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.ActionGrant>();
+
+                [global::ProtoBuf.ProtoMember(20)]
+                public uint cavern_crawl_map_variant
+                {
+                    get { return __pbn__cavern_crawl_map_variant.GetValueOrDefault(); }
+                    set { __pbn__cavern_crawl_map_variant = value; }
+                }
+                public bool ShouldSerializecavern_crawl_map_variant() => __pbn__cavern_crawl_map_variant != null;
+                public void Resetcavern_crawl_map_variant() => __pbn__cavern_crawl_map_variant = null;
+                private uint? __pbn__cavern_crawl_map_variant;
 
             }
 

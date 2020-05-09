@@ -4242,27 +4242,6 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public global::System.Collections.Generic.List<uint> day_timestamps { get; } = new global::System.Collections.Generic.List<uint>();
 
-            [global::ProtoBuf.ProtoMember(6)]
-            public bool is_qualifier
-            {
-                get { return __pbn__is_qualifier.GetValueOrDefault(); }
-                set { __pbn__is_qualifier = value; }
-            }
-            public bool ShouldSerializeis_qualifier() => __pbn__is_qualifier != null;
-            public void Resetis_qualifier() => __pbn__is_qualifier = null;
-            private bool? __pbn__is_qualifier;
-
-            [global::ProtoBuf.ProtoMember(7)]
-            [global::System.ComponentModel.DefaultValue(ELeagueFantasyPhase.LEAGUE_FANTASY_PHASE_UNSET)]
-            public ELeagueFantasyPhase phase
-            {
-                get { return __pbn__phase ?? ELeagueFantasyPhase.LEAGUE_FANTASY_PHASE_UNSET; }
-                set { __pbn__phase = value; }
-            }
-            public bool ShouldSerializephase() => __pbn__phase != null;
-            public void Resetphase() => __pbn__phase = null;
-            private ELeagueFantasyPhase? __pbn__phase;
-
             [global::ProtoBuf.ProtoMember(8)]
             [global::System.ComponentModel.DefaultValue(CMsgDOTAFantasyDPCLeagueStatus.ERosterStatus.UNSET)]
             public CMsgDOTAFantasyDPCLeagueStatus.ERosterStatus status

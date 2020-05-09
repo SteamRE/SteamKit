@@ -298,6 +298,17 @@ namespace SteamKit2.Internal
         public void Resetlauncher_type() => __pbn__launcher_type = null;
         private uint? __pbn__launcher_type;
 
+        [global::ProtoBuf.ProtoMember(32)]
+        [global::System.ComponentModel.DefaultValue(0)]
+        public uint realm
+        {
+            get { return __pbn__realm ?? 0; }
+            set { __pbn__realm = value; }
+        }
+        public bool ShouldSerializerealm() => __pbn__realm != null;
+        public void Resetrealm() => __pbn__realm = null;
+        private uint? __pbn__realm;
+
         [global::ProtoBuf.ProtoMember(15)]
         public uint ip
         {
@@ -1193,6 +1204,26 @@ namespace SteamKit2.Internal
         public void Resetevent_gid() => __pbn__event_gid = null;
         private ulong? __pbn__event_gid;
 
+        [global::ProtoBuf.ProtoMember(14)]
+        public int voteupcount
+        {
+            get { return __pbn__voteupcount.GetValueOrDefault(); }
+            set { __pbn__voteupcount = value; }
+        }
+        public bool ShouldSerializevoteupcount() => __pbn__voteupcount != null;
+        public void Resetvoteupcount() => __pbn__voteupcount = null;
+        private int? __pbn__voteupcount;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public int votedowncount
+        {
+            get { return __pbn__votedowncount.GetValueOrDefault(); }
+            set { __pbn__votedowncount = value; }
+        }
+        public bool ShouldSerializevotedowncount() => __pbn__votedowncount != null;
+        public void Resetvotedowncount() => __pbn__votedowncount = null;
+        private int? __pbn__votedowncount;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1440,6 +1471,124 @@ namespace SteamKit2.Internal
         public bool ShouldSerializertime32_last_modified() => __pbn__rtime32_last_modified != null;
         public void Resetrtime32_last_modified() => __pbn__rtime32_last_modified = null;
         private uint? __pbn__rtime32_last_modified;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CBilling_Address : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string first_name
+        {
+            get { return __pbn__first_name ?? ""; }
+            set { __pbn__first_name = value; }
+        }
+        public bool ShouldSerializefirst_name() => __pbn__first_name != null;
+        public void Resetfirst_name() => __pbn__first_name = null;
+        private string __pbn__first_name;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string last_name
+        {
+            get { return __pbn__last_name ?? ""; }
+            set { __pbn__last_name = value; }
+        }
+        public bool ShouldSerializelast_name() => __pbn__last_name != null;
+        public void Resetlast_name() => __pbn__last_name = null;
+        private string __pbn__last_name;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string address1
+        {
+            get { return __pbn__address1 ?? ""; }
+            set { __pbn__address1 = value; }
+        }
+        public bool ShouldSerializeaddress1() => __pbn__address1 != null;
+        public void Resetaddress1() => __pbn__address1 = null;
+        private string __pbn__address1;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string address2
+        {
+            get { return __pbn__address2 ?? ""; }
+            set { __pbn__address2 = value; }
+        }
+        public bool ShouldSerializeaddress2() => __pbn__address2 != null;
+        public void Resetaddress2() => __pbn__address2 = null;
+        private string __pbn__address2;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string city
+        {
+            get { return __pbn__city ?? ""; }
+            set { __pbn__city = value; }
+        }
+        public bool ShouldSerializecity() => __pbn__city != null;
+        public void Resetcity() => __pbn__city = null;
+        private string __pbn__city;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string us_state
+        {
+            get { return __pbn__us_state ?? ""; }
+            set { __pbn__us_state = value; }
+        }
+        public bool ShouldSerializeus_state() => __pbn__us_state != null;
+        public void Resetus_state() => __pbn__us_state = null;
+        private string __pbn__us_state;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string country_code
+        {
+            get { return __pbn__country_code ?? ""; }
+            set { __pbn__country_code = value; }
+        }
+        public bool ShouldSerializecountry_code() => __pbn__country_code != null;
+        public void Resetcountry_code() => __pbn__country_code = null;
+        private string __pbn__country_code;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string postcode
+        {
+            get { return __pbn__postcode ?? ""; }
+            set { __pbn__postcode = value; }
+        }
+        public bool ShouldSerializepostcode() => __pbn__postcode != null;
+        public void Resetpostcode() => __pbn__postcode = null;
+        private string __pbn__postcode;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public int zip_plus4
+        {
+            get { return __pbn__zip_plus4.GetValueOrDefault(); }
+            set { __pbn__zip_plus4 = value; }
+        }
+        public bool ShouldSerializezip_plus4() => __pbn__zip_plus4 != null;
+        public void Resetzip_plus4() => __pbn__zip_plus4 = null;
+        private int? __pbn__zip_plus4;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string phone
+        {
+            get { return __pbn__phone ?? ""; }
+            set { __pbn__phone = value; }
+        }
+        public bool ShouldSerializephone() => __pbn__phone != null;
+        public void Resetphone() => __pbn__phone = null;
+        private string __pbn__phone;
 
     }
 
