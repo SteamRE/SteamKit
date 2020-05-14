@@ -63,7 +63,7 @@ namespace SteamKit2
                     lobby_flags = lobbyFlags,
                     metadata = Lobby.EncodeMetadata( metadata ),
                     cell_id = Client.CellID.Value,
-                    deprecated_public_ip = NetHelpers.GetIPAddress( Client.PublicIP! ),
+                    public_ip = NetHelpers.GetMsgIPAddress( Client.PublicIP! ),
                     persona_name_owner = personaName
                 },
                 SourceJobID = Client.GetNextJobID()
@@ -187,7 +187,7 @@ namespace SteamKit2
                 {
                     app_id = appId,
                     cell_id = Client.CellID.Value,
-                    deprecated_public_ip = NetHelpers.GetIPAddress( Client.PublicIP! ),
+                    public_ip = NetHelpers.GetMsgIPAddress( Client.PublicIP! ),
                     num_lobbies_requested = maxLobbies
                 },
                 SourceJobID = Client.GetNextJobID()

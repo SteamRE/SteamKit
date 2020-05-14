@@ -316,12 +316,17 @@ namespace SteamKit2
 
             if ( details.LoginID.HasValue )
             {
-                logon.Body.deprecated_obfustucated_private_ip = details.LoginID.Value;
+                logon.Body.obfuscated_private_ip.v4 = details.LoginID.Value;
             }
             else
             {
-                uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP! );
-                logon.Body.deprecated_obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
+                logon.Body.obfuscated_private_ip = NetHelpers.GetMsgIPAddress( this.Client.LocalIP! ).ObfuscatePrivateIP();
+            }
+
+            // Legacy field, Steam client still sets it
+            if ( logon.Body.obfuscated_private_ip.ShouldSerializev4() )
+            {
+                logon.Body.deprecated_obfustucated_private_ip = logon.Body.obfuscated_private_ip.v4;
             }
 
             logon.ProtoHeader.client_sessionid = 0;
