@@ -210,24 +210,7 @@ namespace SteamKit2
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public Task<KeyValue> CallAsync( HttpMethod method, string func, int version = 1, Dictionary<string, object>? args = null )
-            {
-                var task = CallAsyncCore( method, func, version, args );
-
-                task.ContinueWith( t =>
-                {
-                    // we need to observe the exception in this OnlyOnFaulted continuation if our task throws an exception but we're not able to observe it
-                    // (such as when waiting for the task times out, and an exception is thrown later)
-                    // see: http://msdn.microsoft.com/en-us/library/dd997415.aspx
-
-                    DebugLog.WriteLine("WebAPI", "Threw an unobserved exception: {0}", t.Exception);
-
-                }, TaskContinuationOptions.OnlyOnFaulted );
-
-                return task;
-            }
-                
-            async Task<KeyValue> CallAsyncCore( HttpMethod method, string func, int version = 1, Dictionary<string, object>? args = null )
+            public async Task<KeyValue> CallAsync( HttpMethod method, string func, int version = 1, Dictionary<string, object>? args = null )
             {
                 if ( method == null )
                 {
