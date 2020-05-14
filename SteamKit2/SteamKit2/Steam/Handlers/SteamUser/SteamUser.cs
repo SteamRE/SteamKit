@@ -316,7 +316,11 @@ namespace SteamKit2
 
             if ( details.LoginID.HasValue )
             {
-                logon.Body.obfuscated_private_ip.v4 = details.LoginID.Value;
+                // TODO: Support IPv6 login ids?
+                logon.Body.obfuscated_private_ip = new CMsgIPAddress
+                {
+                    v4 = details.LoginID.Value
+                };
             }
             else
             {
