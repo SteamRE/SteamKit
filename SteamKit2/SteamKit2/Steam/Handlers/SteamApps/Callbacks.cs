@@ -88,6 +88,23 @@ namespace SteamKit2
                 /// <value>The territory code.</value>
                 public int TerritoryCode { get; private set; }
 
+                /// <summary>
+                /// Gets the owner account id of the license.
+                /// </summary>
+                /// <value>The owned account id.</value>
+                public uint OwnerAccountID { get; private set; }
+
+                /// <summary>
+                /// Gets the PICS access token for this package.
+                /// </summary>
+                /// <value>The access token.</value>
+                public ulong AccessToken { get; private set; }
+
+                /// <summary>
+                /// Gets the master package id.
+                /// </summary>
+                /// <value>The master package id.</value>
+                public uint MasterPackageID { get; private set; }
 
                 internal License( CMsgClientLicenseList.License license )
                 {
@@ -109,6 +126,10 @@ namespace SteamKit2
                     this.LicenseType = ( ELicenseType )license.license_type;
 
                     this.TerritoryCode = license.territory_code;
+
+                    this.AccessToken = license.access_token;
+                    this.OwnerAccountID = license.owner_id;
+                    this.MasterPackageID = license.master_package_id;
                 }
             }
 
