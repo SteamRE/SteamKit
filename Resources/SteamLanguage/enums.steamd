@@ -344,6 +344,7 @@ enum EPaymentMethod
 	MasterComp = 130;
 	StorePromotion = 131; removed "renamed to Promotional"
 	Promotional = 131;
+	MasterSubscription = 134;
 	OEMTicket = 256;
 	Split = 512;
 	Complimentary = 1024;

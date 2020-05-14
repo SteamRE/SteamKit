@@ -1864,6 +1864,7 @@ namespace SteamKit2
 		CantRemoveItem = 113,
 		AccountHasBeenDeleted = 114,
 		AccountHasAnExistingUserCancelledLicense = 115,
+		DeniedDueToCommunityCooldown = 116,
 	}
 	public enum EUniverse
 	{
@@ -1872,7 +1873,6 @@ namespace SteamKit2
 		Beta = 2,
 		Internal = 3,
 		Dev = 4,
-		Max = 5,
 	}
 	public enum EChatEntryType
 	{
@@ -1900,7 +1900,6 @@ namespace SteamKit2
 		LookingToTrade = 5,
 		LookingToPlay = 6,
 		Invisible = 7,
-		Max = 8,
 	}
 	public enum EAccountType
 	{
@@ -1915,7 +1914,6 @@ namespace SteamKit2
 		Chat = 8,
 		ConsoleUser = 9,
 		AnonUser = 10,
-		Max = 11,
 	}
 	public enum EFriendRelationship
 	{
@@ -1926,7 +1924,6 @@ namespace SteamKit2
 		RequestInitiator = 4,
 		Ignored = 5,
 		IgnoredFriend = 6,
-		Max = 8,
 	}
 	[Flags]
 	public enum EAccountFlags
@@ -2179,6 +2176,7 @@ namespace SteamKit2
 		Valve = 129,
 		MasterComp = 130,
 		Promotional = 131,
+		MasterSubscription = 134,
 		OEMTicket = 256,
 		Split = 512,
 		Complimentary = 1024,
@@ -2415,7 +2413,6 @@ namespace SteamKit2
 		Broadcastgamedata = 18,
 		Computed = 19,
 		Albummetadata = 20,
-		Max = 21,
 	}
 	public enum EContentDownloadSourceType
 	{
@@ -2429,7 +2426,6 @@ namespace SteamKit2
 		SteamCache = 7,
 		OpenCache = 8,
 		LANCache = 9,
-		Max = 10,
 	}
 	public enum EPlatformType
 	{
@@ -2440,7 +2436,6 @@ namespace SteamKit2
 		OSX = 4,
 		PS3 = 5,
 		Linux32 = 6,
-		Max = 7,
 	}
 	public enum EOSType
 	{
@@ -2539,7 +2534,6 @@ namespace SteamKit2
 		Windows10 = 16,
 		Win2016 = 17,
 		WinMAX = 18,
-		Max = 26,
 	}
 	public enum EServerType
 	{
@@ -2670,7 +2664,6 @@ namespace SteamKit2
 		SteamAR = 124,
 		China = 125,
 		CrashDump = 126,
-		Max = 127,
 	}
 	public enum EBillingType
 	{
@@ -2769,7 +2762,6 @@ namespace SteamKit2
 		QAR = 39,
 		CRC = 40,
 		UYU = 41,
-		Max = 42,
 	}
 	[Flags]
 	public enum EDepotFileFlag
@@ -2820,7 +2812,6 @@ namespace SteamKit2
 		SteamworksAccessInvite = 13,
 		SteamVideo = 14,
 		GameManagedItem = 15,
-		Max = 16,
 	}
 	public enum EWorkshopFileAction
 	{
@@ -2894,7 +2885,6 @@ namespace SteamKit2
 		GiftRevoked = 7,
 		SupportMessage = 8,
 		SupportMessageClearAlert = 9,
-		Max = 10,
 	}
 	[Flags]
 	public enum EChatFlags
@@ -2963,7 +2953,6 @@ namespace SteamKit2
 		P2PGameConnections = 2,
 		P2PVoiceConnections = 3,
 		BytesDownloaded = 4,
-		Max = 5,
 	}
 	public enum EClientStatAggregateMethod
 	{
