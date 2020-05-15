@@ -30,7 +30,7 @@ script:
 notifications:
     irc:
         channels:
-            - "irc.gamesurge.net#opensteamworks"
+            - "irc.freenode.net#steamkit"
         on_success: never
         on_failure: always
 
