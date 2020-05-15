@@ -29,6 +29,7 @@ namespace SteamLanguageParser
         public Symbol Type { get; set; }
         public List<Symbol> Default { get; set; }
         public string Obsolete { get; set; }
+        public string Removed { get; set; }
         public bool Emit { get; set; }
 
         public PropNode()
@@ -227,6 +228,7 @@ namespace SteamLanguageParser
                 Token obsolete = Optional( tokens, "identifier", "obsolete" );
                 if ( obsolete != null )
                 {
+                    // Obselete identifiers are output when generating the language, but include a warning
                     pnode.Obsolete = "";
 
                     Token obsoleteReason = Optional( tokens, "string" );
@@ -238,7 +240,16 @@ namespace SteamLanguageParser
                 Token removed = Optional( tokens, "identifier", "removed" );
                 if ( removed != null )
                 {
+                    // Removed identifiers are not output when generating the language
                     pnode.Emit = false;
+
+                    // Consume and record the removed reason so it's available in the node graph
+                    pnode.Removed = "";
+
+                    Token removedReason = Optional( tokens, "string" );
+
+                    if ( removedReason != null )
+                        pnode.Removed = removedReason.Value;
                 }
 
                 parent.childNodes.Add(pnode);
