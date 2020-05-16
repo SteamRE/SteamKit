@@ -1,4 +1,18 @@
 ------------------------------------------------------------------------------
+v 2.3.0			May 16, 2020 (Beta 2)
+------------------------------------------------------------------------------
+* Added initial support for an IPv6-aware Steam network.
+* Added `SteamUser.EmailAddrInfoCallback`.
+* Added `DepotManifest.Deserialize()`.
+* Added new `Licence` fields to `SteamApps` callbacks.
+* Added `CMClient.CurrentEndPoint` to expose currently connected remote server addess.
+* Fixed a possible exception when calling `SteamApps` functions with duplicated inputs.
+* Fixed a couple possible crashes.
+* Updated Steam enums and protobufs.
+* `WebAPI` no longer logs exceptions. Callers that want this information logged should log it themselves.
+
+
+------------------------------------------------------------------------------
 v 2.3.0			Mar 29, 2020 (Beta 1)
 ------------------------------------------------------------------------------
 * Added `SteamMatchmaking` to manage matchmaking lobbies.
@@ -9,7 +23,7 @@ v 2.3.0			Mar 29, 2020 (Beta 1)
 * Removed debug messages for each packet send/recieve event. This can be accomplished through `NetHookNetworkListener` or a customer `IDebugNetworkListener` instead.
 * Log messages now uniquely identify the related `SteamClient` object, where relevant.
 * Fixed incorrect Cell ID parameter in `ContentServerDirectoryService`.
-* Fixed a possible exception when calling `SteamApps` functions with duplicated inputs
+* Fixed a possible exception when calling `SteamApps` functions with duplicated inputs.
 * Fixed Web API exceptions not including the numeric HTTP response code.
 * Updated Steam enums and protobufs.
 
