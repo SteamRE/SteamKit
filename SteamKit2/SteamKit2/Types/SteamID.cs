@@ -459,10 +459,10 @@ namespace SteamKit2
         {
             get
             {
-                if ( this.AccountType <= EAccountType.Invalid || this.AccountType >= EAccountType.Max )
+                if ( this.AccountType <= EAccountType.Invalid || this.AccountType > EAccountType.AnonUser )
                     return false;
 
-                if ( this.AccountUniverse <= EUniverse.Invalid || this.AccountUniverse >= EUniverse.Max )
+                if ( this.AccountUniverse <= EUniverse.Invalid || this.AccountUniverse > EUniverse.Dev )
                     return false;
 
                 if ( this.AccountType == EAccountType.Individual )

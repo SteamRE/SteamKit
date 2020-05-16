@@ -125,4 +125,5 @@ enum EResult
 	CantRemoveItem = 113;
 	AccountHasBeenDeleted = 114;
 	AccountHasAnExistingUserCancelledLicense = 115;
+	DeniedDueToCommunityCooldown = 116;
 };
