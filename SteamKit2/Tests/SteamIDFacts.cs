@@ -451,5 +451,19 @@ namespace Tests
             sid.AccountUniverse = universe;
             Assert.False( sid.IsValid );
         }
+
+        [Fact]
+        public void EUniverseEnumHasNotChanged()
+        {
+            // If this enum has changed, update SteamID.IsValid
+            Assert.Equal( 5, Enum.GetValues( typeof( EUniverse ) ).Length );
+        }
+
+        [Fact]
+        public void EAccountTypeEnumHasNotChanged()
+        {
+            // If this enum has changed, update SteamID.IsValid
+            Assert.Equal( 11, Enum.GetValues( typeof( EAccountType ) ).Length );
+        }
     }
 }
