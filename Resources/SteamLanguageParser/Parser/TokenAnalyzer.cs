@@ -228,7 +228,7 @@ namespace SteamLanguageParser
                 Token obsolete = Optional( tokens, "identifier", "obsolete" );
                 if ( obsolete != null )
                 {
-                    // Obselete identifiers are output when generating the language, but include a warning
+                    // Obsolete identifiers are output when generating the language, but include a warning
                     pnode.Obsolete = "";
 
                     Token obsoleteReason = Optional( tokens, "string" );
