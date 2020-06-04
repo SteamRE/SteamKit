@@ -3846,6 +3846,16 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public global::System.Collections.Generic.List<OutputLine> msgs { get; } = new global::System.Collections.Generic.List<OutputLine>();
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool is_last_for_source_job
+        {
+            get { return __pbn__is_last_for_source_job.GetValueOrDefault(); }
+            set { __pbn__is_last_for_source_job = value; }
+        }
+        public bool ShouldSerializeis_last_for_source_job() => __pbn__is_last_for_source_job != null;
+        public void Resetis_last_for_source_job() => __pbn__is_last_for_source_job = null;
+        private bool? __pbn__is_last_for_source_job;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class OutputLine : global::ProtoBuf.IExtensible
         {

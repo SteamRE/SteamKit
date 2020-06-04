@@ -507,6 +507,17 @@ namespace SteamKit2.Internal
         public void Resetdesired_revision() => __pbn__desired_revision = null;
         private EPublishedFileRevision? __pbn__desired_revision;
 
+        [global::ProtoBuf.ProtoMember(17)]
+        [global::System.ComponentModel.DefaultValue(false)]
+        public bool includereactions
+        {
+            get { return __pbn__includereactions ?? false; }
+            set { __pbn__includereactions = value; }
+        }
+        public bool ShouldSerializeincludereactions() => __pbn__includereactions != null;
+        public void Resetincludereactions() => __pbn__includereactions = null;
+        private bool? __pbn__includereactions;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1145,6 +1156,9 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(69)]
         public global::System.Collections.Generic.List<EPublishedFileRevision> available_revisions { get; } = new global::System.Collections.Generic.List<EPublishedFileRevision>();
 
+        [global::ProtoBuf.ProtoMember(70)]
+        public global::System.Collections.Generic.List<Reaction> reactions { get; } = new global::System.Collections.Generic.List<Reaction>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Tag : global::ProtoBuf.IExtensible
         {
@@ -1473,6 +1487,35 @@ namespace SteamKit2.Internal
             public bool ShouldSerializenum_sessions() => __pbn__num_sessions != null;
             public void Resetnum_sessions() => __pbn__num_sessions = null;
             private ulong? __pbn__num_sessions;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Reaction : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint reactionid
+            {
+                get { return __pbn__reactionid.GetValueOrDefault(); }
+                set { __pbn__reactionid = value; }
+            }
+            public bool ShouldSerializereactionid() => __pbn__reactionid != null;
+            public void Resetreactionid() => __pbn__reactionid = null;
+            private uint? __pbn__reactionid;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint count
+            {
+                get { return __pbn__count.GetValueOrDefault(); }
+                set { __pbn__count = value; }
+            }
+            public bool ShouldSerializecount() => __pbn__count != null;
+            public void Resetcount() => __pbn__count = null;
+            private uint? __pbn__count;
 
         }
 
@@ -1905,6 +1948,17 @@ namespace SteamKit2.Internal
         public bool ShouldSerializestrip_description_bbcode() => __pbn__strip_description_bbcode != null;
         public void Resetstrip_description_bbcode() => __pbn__strip_description_bbcode = null;
         private bool? __pbn__strip_description_bbcode;
+
+        [global::ProtoBuf.ProtoMember(35)]
+        [global::System.ComponentModel.DefaultValue(false)]
+        public bool return_reactions
+        {
+            get { return __pbn__return_reactions ?? false; }
+            set { __pbn__return_reactions = value; }
+        }
+        public bool ShouldSerializereturn_reactions() => __pbn__return_reactions != null;
+        public void Resetreturn_reactions() => __pbn__return_reactions = null;
+        private bool? __pbn__return_reactions;
 
         [global::ProtoBuf.ProtoMember(33)]
         [global::System.ComponentModel.DefaultValue(EPublishedFileRevision.k_EPublishedFileRevision_Default)]
@@ -2834,6 +2888,17 @@ namespace SteamKit2.Internal
         public bool ShouldSerializedesired_revision() => __pbn__desired_revision != null;
         public void Resetdesired_revision() => __pbn__desired_revision = null;
         private EPublishedFileRevision? __pbn__desired_revision;
+
+        [global::ProtoBuf.ProtoMember(43)]
+        [global::System.ComponentModel.DefaultValue(false)]
+        public bool return_reactions
+        {
+            get { return __pbn__return_reactions ?? false; }
+            set { __pbn__return_reactions = value; }
+        }
+        public bool ShouldSerializereturn_reactions() => __pbn__return_reactions != null;
+        public void Resetreturn_reactions() => __pbn__return_reactions = null;
+        private bool? __pbn__return_reactions;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class KVTag : global::ProtoBuf.IExtensible

@@ -1119,6 +1119,57 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resettxn_country_code() => __pbn__txn_country_code = null;
         private string __pbn__txn_country_code;
 
+        [global::ProtoBuf.ProtoMember(11)]
+        public byte[] game_data2
+        {
+            get { return __pbn__game_data2; }
+            set { __pbn__game_data2 = value; }
+        }
+        public bool ShouldSerializegame_data2() => __pbn__game_data2 != null;
+        public void Resetgame_data2() => __pbn__game_data2 = null;
+        private byte[] __pbn__game_data2;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public uint rtime32_gc_welcome_timestamp
+        {
+            get { return __pbn__rtime32_gc_welcome_timestamp.GetValueOrDefault(); }
+            set { __pbn__rtime32_gc_welcome_timestamp = value; }
+        }
+        public bool ShouldSerializertime32_gc_welcome_timestamp() => __pbn__rtime32_gc_welcome_timestamp != null;
+        public void Resetrtime32_gc_welcome_timestamp() => __pbn__rtime32_gc_welcome_timestamp = null;
+        private uint? __pbn__rtime32_gc_welcome_timestamp;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public uint currency
+        {
+            get { return __pbn__currency.GetValueOrDefault(); }
+            set { __pbn__currency = value; }
+        }
+        public bool ShouldSerializecurrency() => __pbn__currency != null;
+        public void Resetcurrency() => __pbn__currency = null;
+        private uint? __pbn__currency;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public uint balance
+        {
+            get { return __pbn__balance.GetValueOrDefault(); }
+            set { __pbn__balance = value; }
+        }
+        public bool ShouldSerializebalance() => __pbn__balance != null;
+        public void Resetbalance() => __pbn__balance = null;
+        private uint? __pbn__balance;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string balance_url
+        {
+            get { return __pbn__balance_url ?? ""; }
+            set { __pbn__balance_url = value; }
+        }
+        public bool ShouldSerializebalance_url() => __pbn__balance_url != null;
+        public void Resetbalance_url() => __pbn__balance_url = null;
+        private string __pbn__balance_url;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Location : global::ProtoBuf.IExtensible
         {

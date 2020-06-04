@@ -52,6 +52,236 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetOwnedGames_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong steamid
+        {
+            get { return __pbn__steamid.GetValueOrDefault(); }
+            set { __pbn__steamid = value; }
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool include_appinfo
+        {
+            get { return __pbn__include_appinfo.GetValueOrDefault(); }
+            set { __pbn__include_appinfo = value; }
+        }
+        public bool ShouldSerializeinclude_appinfo() => __pbn__include_appinfo != null;
+        public void Resetinclude_appinfo() => __pbn__include_appinfo = null;
+        private bool? __pbn__include_appinfo;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool include_played_free_games
+        {
+            get { return __pbn__include_played_free_games.GetValueOrDefault(); }
+            set { __pbn__include_played_free_games = value; }
+        }
+        public bool ShouldSerializeinclude_played_free_games() => __pbn__include_played_free_games != null;
+        public void Resetinclude_played_free_games() => __pbn__include_played_free_games = null;
+        private bool? __pbn__include_played_free_games;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<uint> appids_filter { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public bool include_free_sub
+        {
+            get { return __pbn__include_free_sub.GetValueOrDefault(); }
+            set { __pbn__include_free_sub = value; }
+        }
+        public bool ShouldSerializeinclude_free_sub() => __pbn__include_free_sub != null;
+        public void Resetinclude_free_sub() => __pbn__include_free_sub = null;
+        private bool? __pbn__include_free_sub;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetOwnedGames_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint game_count
+        {
+            get { return __pbn__game_count.GetValueOrDefault(); }
+            set { __pbn__game_count = value; }
+        }
+        public bool ShouldSerializegame_count() => __pbn__game_count != null;
+        public void Resetgame_count() => __pbn__game_count = null;
+        private uint? __pbn__game_count;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<Game> games { get; } = new global::System.Collections.Generic.List<Game>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Game : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public int appid
+            {
+                get { return __pbn__appid.GetValueOrDefault(); }
+                set { __pbn__appid = value; }
+            }
+            public bool ShouldSerializeappid() => __pbn__appid != null;
+            public void Resetappid() => __pbn__appid = null;
+            private int? __pbn__appid;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string name
+            {
+                get { return __pbn__name ?? ""; }
+                set { __pbn__name = value; }
+            }
+            public bool ShouldSerializename() => __pbn__name != null;
+            public void Resetname() => __pbn__name = null;
+            private string __pbn__name;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public int playtime_2weeks
+            {
+                get { return __pbn__playtime_2weeks.GetValueOrDefault(); }
+                set { __pbn__playtime_2weeks = value; }
+            }
+            public bool ShouldSerializeplaytime_2weeks() => __pbn__playtime_2weeks != null;
+            public void Resetplaytime_2weeks() => __pbn__playtime_2weeks = null;
+            private int? __pbn__playtime_2weeks;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public int playtime_forever
+            {
+                get { return __pbn__playtime_forever.GetValueOrDefault(); }
+                set { __pbn__playtime_forever = value; }
+            }
+            public bool ShouldSerializeplaytime_forever() => __pbn__playtime_forever != null;
+            public void Resetplaytime_forever() => __pbn__playtime_forever = null;
+            private int? __pbn__playtime_forever;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string img_icon_url
+            {
+                get { return __pbn__img_icon_url ?? ""; }
+                set { __pbn__img_icon_url = value; }
+            }
+            public bool ShouldSerializeimg_icon_url() => __pbn__img_icon_url != null;
+            public void Resetimg_icon_url() => __pbn__img_icon_url = null;
+            private string __pbn__img_icon_url;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string img_logo_url
+            {
+                get { return __pbn__img_logo_url ?? ""; }
+                set { __pbn__img_logo_url = value; }
+            }
+            public bool ShouldSerializeimg_logo_url() => __pbn__img_logo_url != null;
+            public void Resetimg_logo_url() => __pbn__img_logo_url = null;
+            private string __pbn__img_logo_url;
+
+            [global::ProtoBuf.ProtoMember(7)]
+            public bool has_community_visible_stats
+            {
+                get { return __pbn__has_community_visible_stats.GetValueOrDefault(); }
+                set { __pbn__has_community_visible_stats = value; }
+            }
+            public bool ShouldSerializehas_community_visible_stats() => __pbn__has_community_visible_stats != null;
+            public void Resethas_community_visible_stats() => __pbn__has_community_visible_stats = null;
+            private bool? __pbn__has_community_visible_stats;
+
+            [global::ProtoBuf.ProtoMember(8)]
+            public int playtime_windows_forever
+            {
+                get { return __pbn__playtime_windows_forever.GetValueOrDefault(); }
+                set { __pbn__playtime_windows_forever = value; }
+            }
+            public bool ShouldSerializeplaytime_windows_forever() => __pbn__playtime_windows_forever != null;
+            public void Resetplaytime_windows_forever() => __pbn__playtime_windows_forever = null;
+            private int? __pbn__playtime_windows_forever;
+
+            [global::ProtoBuf.ProtoMember(9)]
+            public int playtime_mac_forever
+            {
+                get { return __pbn__playtime_mac_forever.GetValueOrDefault(); }
+                set { __pbn__playtime_mac_forever = value; }
+            }
+            public bool ShouldSerializeplaytime_mac_forever() => __pbn__playtime_mac_forever != null;
+            public void Resetplaytime_mac_forever() => __pbn__playtime_mac_forever = null;
+            private int? __pbn__playtime_mac_forever;
+
+            [global::ProtoBuf.ProtoMember(10)]
+            public int playtime_linux_forever
+            {
+                get { return __pbn__playtime_linux_forever.GetValueOrDefault(); }
+                set { __pbn__playtime_linux_forever = value; }
+            }
+            public bool ShouldSerializeplaytime_linux_forever() => __pbn__playtime_linux_forever != null;
+            public void Resetplaytime_linux_forever() => __pbn__playtime_linux_forever = null;
+            private int? __pbn__playtime_linux_forever;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetPlayNext_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint max_age_seconds
+        {
+            get { return __pbn__max_age_seconds.GetValueOrDefault(); }
+            set { __pbn__max_age_seconds = value; }
+        }
+        public bool ShouldSerializemax_age_seconds() => __pbn__max_age_seconds != null;
+        public void Resetmax_age_seconds() => __pbn__max_age_seconds = null;
+        private uint? __pbn__max_age_seconds;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<uint> ignore_appids { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetPlayNext_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint last_update_time
+        {
+            get { return __pbn__last_update_time.GetValueOrDefault(); }
+            set { __pbn__last_update_time = value; }
+        }
+        public bool ShouldSerializelast_update_time() => __pbn__last_update_time != null;
+        public void Resetlast_update_time() => __pbn__last_update_time = null;
+        private uint? __pbn__last_update_time;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<uint> appids { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CPlayer_GetFriendsGameplayInfo_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -437,6 +667,558 @@ namespace SteamKit2.Internal
             private uint? __pbn__border_color;
 
         }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetProfileBackground_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get { return __pbn__steamid.GetValueOrDefault(); }
+            set { __pbn__steamid = value; }
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string language
+        {
+            get { return __pbn__language ?? ""; }
+            set { __pbn__language = value; }
+        }
+        public bool ShouldSerializelanguage() => __pbn__language != null;
+        public void Resetlanguage() => __pbn__language = null;
+        private string __pbn__language;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class ProfileItem : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong communityitemid
+        {
+            get { return __pbn__communityitemid.GetValueOrDefault(); }
+            set { __pbn__communityitemid = value; }
+        }
+        public bool ShouldSerializecommunityitemid() => __pbn__communityitemid != null;
+        public void Resetcommunityitemid() => __pbn__communityitemid = null;
+        private ulong? __pbn__communityitemid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string image_small
+        {
+            get { return __pbn__image_small ?? ""; }
+            set { __pbn__image_small = value; }
+        }
+        public bool ShouldSerializeimage_small() => __pbn__image_small != null;
+        public void Resetimage_small() => __pbn__image_small = null;
+        private string __pbn__image_small;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string image_large
+        {
+            get { return __pbn__image_large ?? ""; }
+            set { __pbn__image_large = value; }
+        }
+        public bool ShouldSerializeimage_large() => __pbn__image_large != null;
+        public void Resetimage_large() => __pbn__image_large = null;
+        private string __pbn__image_large;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string name
+        {
+            get { return __pbn__name ?? ""; }
+            set { __pbn__name = value; }
+        }
+        public bool ShouldSerializename() => __pbn__name != null;
+        public void Resetname() => __pbn__name = null;
+        private string __pbn__name;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string item_title
+        {
+            get { return __pbn__item_title ?? ""; }
+            set { __pbn__item_title = value; }
+        }
+        public bool ShouldSerializeitem_title() => __pbn__item_title != null;
+        public void Resetitem_title() => __pbn__item_title = null;
+        private string __pbn__item_title;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string item_description
+        {
+            get { return __pbn__item_description ?? ""; }
+            set { __pbn__item_description = value; }
+        }
+        public bool ShouldSerializeitem_description() => __pbn__item_description != null;
+        public void Resetitem_description() => __pbn__item_description = null;
+        private string __pbn__item_description;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint appid
+        {
+            get { return __pbn__appid.GetValueOrDefault(); }
+            set { __pbn__appid = value; }
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public uint item_type
+        {
+            get { return __pbn__item_type.GetValueOrDefault(); }
+            set { __pbn__item_type = value; }
+        }
+        public bool ShouldSerializeitem_type() => __pbn__item_type != null;
+        public void Resetitem_type() => __pbn__item_type = null;
+        private uint? __pbn__item_type;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public uint item_class
+        {
+            get { return __pbn__item_class.GetValueOrDefault(); }
+            set { __pbn__item_class = value; }
+        }
+        public bool ShouldSerializeitem_class() => __pbn__item_class != null;
+        public void Resetitem_class() => __pbn__item_class = null;
+        private uint? __pbn__item_class;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string movie_webm
+        {
+            get { return __pbn__movie_webm ?? ""; }
+            set { __pbn__movie_webm = value; }
+        }
+        public bool ShouldSerializemovie_webm() => __pbn__movie_webm != null;
+        public void Resetmovie_webm() => __pbn__movie_webm = null;
+        private string __pbn__movie_webm;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string movie_mp4
+        {
+            get { return __pbn__movie_mp4 ?? ""; }
+            set { __pbn__movie_mp4 = value; }
+        }
+        public bool ShouldSerializemovie_mp4() => __pbn__movie_mp4 != null;
+        public void Resetmovie_mp4() => __pbn__movie_mp4 = null;
+        private string __pbn__movie_mp4;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public uint equipped_flags
+        {
+            get { return __pbn__equipped_flags.GetValueOrDefault(); }
+            set { __pbn__equipped_flags = value; }
+        }
+        public bool ShouldSerializeequipped_flags() => __pbn__equipped_flags != null;
+        public void Resetequipped_flags() => __pbn__equipped_flags = null;
+        private uint? __pbn__equipped_flags;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetProfileBackground_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ProfileItem profile_background { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_SetProfileBackground_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong communityitemid
+        {
+            get { return __pbn__communityitemid.GetValueOrDefault(); }
+            set { __pbn__communityitemid = value; }
+        }
+        public bool ShouldSerializecommunityitemid() => __pbn__communityitemid != null;
+        public void Resetcommunityitemid() => __pbn__communityitemid = null;
+        private ulong? __pbn__communityitemid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_SetProfileBackground_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetMiniProfileBackground_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get { return __pbn__steamid.GetValueOrDefault(); }
+            set { __pbn__steamid = value; }
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string language
+        {
+            get { return __pbn__language ?? ""; }
+            set { __pbn__language = value; }
+        }
+        public bool ShouldSerializelanguage() => __pbn__language != null;
+        public void Resetlanguage() => __pbn__language = null;
+        private string __pbn__language;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetMiniProfileBackground_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ProfileItem profile_background { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_SetMiniProfileBackground_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong communityitemid
+        {
+            get { return __pbn__communityitemid.GetValueOrDefault(); }
+            set { __pbn__communityitemid = value; }
+        }
+        public bool ShouldSerializecommunityitemid() => __pbn__communityitemid != null;
+        public void Resetcommunityitemid() => __pbn__communityitemid = null;
+        private ulong? __pbn__communityitemid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_SetMiniProfileBackground_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetAvatarFrame_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get { return __pbn__steamid.GetValueOrDefault(); }
+            set { __pbn__steamid = value; }
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string language
+        {
+            get { return __pbn__language ?? ""; }
+            set { __pbn__language = value; }
+        }
+        public bool ShouldSerializelanguage() => __pbn__language != null;
+        public void Resetlanguage() => __pbn__language = null;
+        private string __pbn__language;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetAvatarFrame_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ProfileItem avatar_frame { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_SetAvatarFrame_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong communityitemid
+        {
+            get { return __pbn__communityitemid.GetValueOrDefault(); }
+            set { __pbn__communityitemid = value; }
+        }
+        public bool ShouldSerializecommunityitemid() => __pbn__communityitemid != null;
+        public void Resetcommunityitemid() => __pbn__communityitemid = null;
+        private ulong? __pbn__communityitemid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_SetAvatarFrame_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetAnimatedAvatar_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get { return __pbn__steamid.GetValueOrDefault(); }
+            set { __pbn__steamid = value; }
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string language
+        {
+            get { return __pbn__language ?? ""; }
+            set { __pbn__language = value; }
+        }
+        public bool ShouldSerializelanguage() => __pbn__language != null;
+        public void Resetlanguage() => __pbn__language = null;
+        private string __pbn__language;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetAnimatedAvatar_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ProfileItem avatar { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_SetAnimatedAvatar_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong communityitemid
+        {
+            get { return __pbn__communityitemid.GetValueOrDefault(); }
+            set { __pbn__communityitemid = value; }
+        }
+        public bool ShouldSerializecommunityitemid() => __pbn__communityitemid != null;
+        public void Resetcommunityitemid() => __pbn__communityitemid = null;
+        private ulong? __pbn__communityitemid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_SetAnimatedAvatar_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetProfileItemsOwned_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string language
+        {
+            get { return __pbn__language ?? ""; }
+            set { __pbn__language = value; }
+        }
+        public bool ShouldSerializelanguage() => __pbn__language != null;
+        public void Resetlanguage() => __pbn__language = null;
+        private string __pbn__language;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetProfileItemsOwned_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<ProfileItem> profile_backgrounds { get; } = new global::System.Collections.Generic.List<ProfileItem>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<ProfileItem> mini_profile_backgrounds { get; } = new global::System.Collections.Generic.List<ProfileItem>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<ProfileItem> avatar_frames { get; } = new global::System.Collections.Generic.List<ProfileItem>();
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<ProfileItem> animated_avatars { get; } = new global::System.Collections.Generic.List<ProfileItem>();
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public global::System.Collections.Generic.List<ProfileItem> profile_modifiers { get; } = new global::System.Collections.Generic.List<ProfileItem>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetProfileItemsEquipped_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get { return __pbn__steamid.GetValueOrDefault(); }
+            set { __pbn__steamid = value; }
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string language
+        {
+            get { return __pbn__language ?? ""; }
+            set { __pbn__language = value; }
+        }
+        public bool ShouldSerializelanguage() => __pbn__language != null;
+        public void Resetlanguage() => __pbn__language = null;
+        private string __pbn__language;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetProfileItemsEquipped_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ProfileItem profile_background { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ProfileItem mini_profile_background { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ProfileItem avatar_frame { get; set; }
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public ProfileItem animated_avatar { get; set; }
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public ProfileItem profile_modifier { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_SetEquippedProfileItemFlags_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong communityitemid
+        {
+            get { return __pbn__communityitemid.GetValueOrDefault(); }
+            set { __pbn__communityitemid = value; }
+        }
+        public bool ShouldSerializecommunityitemid() => __pbn__communityitemid != null;
+        public void Resetcommunityitemid() => __pbn__communityitemid = null;
+        private ulong? __pbn__communityitemid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint flags
+        {
+            get { return __pbn__flags.GetValueOrDefault(); }
+            set { __pbn__flags = value; }
+        }
+        public bool ShouldSerializeflags() => __pbn__flags != null;
+        public void Resetflags() => __pbn__flags = null;
+        private uint? __pbn__flags;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_SetEquippedProfileItemFlags_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
     }
 
@@ -1711,6 +2493,16 @@ namespace SteamKit2.Internal
         public void Resetis_age_verified() => __pbn__is_age_verified = null;
         private bool? __pbn__is_age_verified;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint seconds_allowed_today
+        {
+            get { return __pbn__seconds_allowed_today.GetValueOrDefault(); }
+            set { __pbn__seconds_allowed_today = value; }
+        }
+        public bool ShouldSerializeseconds_allowed_today() => __pbn__seconds_allowed_today != null;
+        public void Resetseconds_allowed_today() => __pbn__seconds_allowed_today = null;
+        private uint? __pbn__seconds_allowed_today;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1762,6 +2554,25 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeis_echo_to_self() => __pbn__is_echo_to_self != null;
         public void Resetis_echo_to_self() => __pbn__is_echo_to_self = null;
         private bool? __pbn__is_echo_to_self;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_FriendEquippedProfileItemsChanged_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public uint accountid
+        {
+            get { return __pbn__accountid.GetValueOrDefault(); }
+            set { __pbn__accountid = value; }
+        }
+        public bool ShouldSerializeaccountid() => __pbn__accountid != null;
+        public void Resetaccountid() => __pbn__accountid = null;
+        private uint? __pbn__accountid;
 
     }
 
@@ -1883,9 +2694,22 @@ namespace SteamKit2.Internal
     public interface IPlayer
     {
         CPlayer_GetMutualFriendsForIncomingInvites_Response GetMutualFriendsForIncomingInvites(CPlayer_GetMutualFriendsForIncomingInvites_Request request);
+        CPlayer_GetOwnedGames_Response GetOwnedGames(CPlayer_GetOwnedGames_Request request);
+        CPlayer_GetPlayNext_Response GetPlayNext(CPlayer_GetPlayNext_Request request);
         CPlayer_GetFriendsGameplayInfo_Response GetFriendsGameplayInfo(CPlayer_GetFriendsGameplayInfo_Request request);
         CPlayer_GetFriendsAppsActivity_Response GetFriendsAppsActivity(CPlayer_GetFriendsAppsActivity_Request request);
         CPlayer_GetGameBadgeLevels_Response GetGameBadgeLevels(CPlayer_GetGameBadgeLevels_Request request);
+        CPlayer_GetProfileBackground_Response GetProfileBackground(CPlayer_GetProfileBackground_Request request);
+        CPlayer_SetProfileBackground_Response SetProfileBackground(CPlayer_SetProfileBackground_Request request);
+        CPlayer_GetMiniProfileBackground_Response GetMiniProfileBackground(CPlayer_GetMiniProfileBackground_Request request);
+        CPlayer_SetMiniProfileBackground_Response SetMiniProfileBackground(CPlayer_SetMiniProfileBackground_Request request);
+        CPlayer_GetAvatarFrame_Response GetAvatarFrame(CPlayer_GetAvatarFrame_Request request);
+        CPlayer_SetAvatarFrame_Response SetAvatarFrame(CPlayer_SetAvatarFrame_Request request);
+        CPlayer_GetAnimatedAvatar_Response GetAnimatedAvatar(CPlayer_GetAnimatedAvatar_Request request);
+        CPlayer_SetAnimatedAvatar_Response SetAnimatedAvatar(CPlayer_SetAnimatedAvatar_Request request);
+        CPlayer_GetProfileItemsOwned_Response GetProfileItemsOwned(CPlayer_GetProfileItemsOwned_Request request);
+        CPlayer_GetProfileItemsEquipped_Response GetProfileItemsEquipped(CPlayer_GetProfileItemsEquipped_Request request);
+        CPlayer_SetEquippedProfileItemFlags_Response SetEquippedProfileItemFlags(CPlayer_SetEquippedProfileItemFlags_Request request);
         CPlayer_GetEmoticonList_Response GetEmoticonList(CPlayer_GetEmoticonList_Request request);
         CPlayer_GetAchievementsProgress_Response GetAchievementsProgress(CPlayer_GetAchievementsProgress_Request request);
         CPlayer_PostStatusToFriends_Response PostStatusToFriends(CPlayer_PostStatusToFriends_Request request);
@@ -1911,6 +2735,7 @@ namespace SteamKit2.Internal
     {
         NoResponse NotifyLastPlayedTimes(CPlayer_LastPlayedTimes_Notification request);
         NoResponse NotifyFriendNicknameChanged(CPlayer_FriendNicknameChanged_Notification request);
+        NoResponse NotifyFriendEquippedProfileItemsChanged(CPlayer_FriendEquippedProfileItemsChanged_Notification request);
         NoResponse NotifyNewSteamAnnouncementState(CPlayer_NewSteamAnnouncementState_Notification request);
         NoResponse NotifyCommunityPreferencesChanged(CPlayer_CommunityPreferencesChanged_Notification request);
         NoResponse NotifyPerFriendPreferencesChanged(CPlayer_PerFriendPreferencesChanged_Notification request);

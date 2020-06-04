@@ -6791,6 +6791,217 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCCStrike15_v2_ClientPerfReport : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<Entry> entries { get; } = new global::System.Collections.Generic.List<Entry>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Entry : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint perfcounter
+            {
+                get { return __pbn__perfcounter.GetValueOrDefault(); }
+                set { __pbn__perfcounter = value; }
+            }
+            public bool ShouldSerializeperfcounter() => __pbn__perfcounter != null;
+            public void Resetperfcounter() => __pbn__perfcounter = null;
+            private uint? __pbn__perfcounter;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint length
+            {
+                get { return __pbn__length.GetValueOrDefault(); }
+                set { __pbn__length = value; }
+            }
+            public bool ShouldSerializelength() => __pbn__length != null;
+            public void Resetlength() => __pbn__length = null;
+            private uint? __pbn__length;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public byte[] reference
+            {
+                get { return __pbn__reference; }
+                set { __pbn__reference = value; }
+            }
+            public bool ShouldSerializereference() => __pbn__reference != null;
+            public void Resetreference() => __pbn__reference = null;
+            private byte[] __pbn__reference;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public byte[] actual
+            {
+                get { return __pbn__actual; }
+                set { __pbn__actual = value; }
+            }
+            public bool ShouldSerializeactual() => __pbn__actual != null;
+            public void Resetactual() => __pbn__actual = null;
+            private byte[] __pbn__actual;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public uint sourceid
+            {
+                get { return __pbn__sourceid.GetValueOrDefault(); }
+                set { __pbn__sourceid = value; }
+            }
+            public bool ShouldSerializesourceid() => __pbn__sourceid != null;
+            public void Resetsourceid() => __pbn__sourceid = null;
+            private uint? __pbn__sourceid;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public uint status
+            {
+                get { return __pbn__status.GetValueOrDefault(); }
+                set { __pbn__status = value; }
+            }
+            public bool ShouldSerializestatus() => __pbn__status != null;
+            public void Resetstatus() => __pbn__status = null;
+            private uint? __pbn__status;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCCStrike15_v2_ClientReportValidation : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string file_report
+        {
+            get { return __pbn__file_report ?? ""; }
+            set { __pbn__file_report = value; }
+        }
+        public bool ShouldSerializefile_report() => __pbn__file_report != null;
+        public void Resetfile_report() => __pbn__file_report = null;
+        private string __pbn__file_report;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string command_line
+        {
+            get { return __pbn__command_line ?? ""; }
+            set { __pbn__command_line = value; }
+        }
+        public bool ShouldSerializecommand_line() => __pbn__command_line != null;
+        public void Resetcommand_line() => __pbn__command_line = null;
+        private string __pbn__command_line;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint total_files
+        {
+            get { return __pbn__total_files.GetValueOrDefault(); }
+            set { __pbn__total_files = value; }
+        }
+        public bool ShouldSerializetotal_files() => __pbn__total_files != null;
+        public void Resettotal_files() => __pbn__total_files = null;
+        private uint? __pbn__total_files;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint internal_error
+        {
+            get { return __pbn__internal_error.GetValueOrDefault(); }
+            set { __pbn__internal_error = value; }
+        }
+        public bool ShouldSerializeinternal_error() => __pbn__internal_error != null;
+        public void Resetinternal_error() => __pbn__internal_error = null;
+        private uint? __pbn__internal_error;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint trust_time
+        {
+            get { return __pbn__trust_time.GetValueOrDefault(); }
+            set { __pbn__trust_time = value; }
+        }
+        public bool ShouldSerializetrust_time() => __pbn__trust_time != null;
+        public void Resettrust_time() => __pbn__trust_time = null;
+        private uint? __pbn__trust_time;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint count_pending
+        {
+            get { return __pbn__count_pending.GetValueOrDefault(); }
+            set { __pbn__count_pending = value; }
+        }
+        public bool ShouldSerializecount_pending() => __pbn__count_pending != null;
+        public void Resetcount_pending() => __pbn__count_pending = null;
+        private uint? __pbn__count_pending;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint count_completed
+        {
+            get { return __pbn__count_completed.GetValueOrDefault(); }
+            set { __pbn__count_completed = value; }
+        }
+        public bool ShouldSerializecount_completed() => __pbn__count_completed != null;
+        public void Resetcount_completed() => __pbn__count_completed = null;
+        private uint? __pbn__count_completed;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public uint process_id
+        {
+            get { return __pbn__process_id.GetValueOrDefault(); }
+            set { __pbn__process_id = value; }
+        }
+        public bool ShouldSerializeprocess_id() => __pbn__process_id != null;
+        public void Resetprocess_id() => __pbn__process_id = null;
+        private uint? __pbn__process_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCCStrike15_v2_GC2ClientRefuseSecureMode : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string file_report
+        {
+            get { return __pbn__file_report ?? ""; }
+            set { __pbn__file_report = value; }
+        }
+        public bool ShouldSerializefile_report() => __pbn__file_report != null;
+        public void Resetfile_report() => __pbn__file_report = null;
+        private string __pbn__file_report;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCCStrike15_v2_GC2ClientRequestValidation : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool full_report
+        {
+            get { return __pbn__full_report.GetValueOrDefault(); }
+            set { __pbn__full_report = value; }
+        }
+        public bool ShouldSerializefull_report() => __pbn__full_report != null;
+        public void Resetfull_report() => __pbn__full_report = null;
+        private bool? __pbn__full_report;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ECsgoGCMsg
     {
         k_EMsgGCCStrike15_v2_Base = 9100,
@@ -6890,8 +7101,12 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCCStrike15_v2_MatchmakingServerMatchEndPartial = 9199,
         k_EMsgGCCStrike15_v2_SetEventFavorite = 9200,
         k_EMsgGCCStrike15_v2_GetEventFavorites_Request = 9201,
+        k_EMsgGCCStrike15_v2_ClientPerfReport = 9202,
         k_EMsgGCCStrike15_v2_GetEventFavorites_Response = 9203,
         k_EMsgGCCStrike15_v2_ClientRequestSouvenir = 9204,
+        k_EMsgGCCStrike15_v2_ClientReportValidation = 9205,
+        k_EMsgGCCStrike15_v2_GC2ClientRefuseSecureMode = 9206,
+        k_EMsgGCCStrike15_v2_GC2ClientRequestValidation = 9207,
     }
 
     [global::ProtoBuf.ProtoContract()]
