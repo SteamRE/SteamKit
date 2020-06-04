@@ -751,6 +751,16 @@ namespace SteamKit2.Internal
         public void Resetbroadcast_live() => __pbn__broadcast_live = null;
         private bool? __pbn__broadcast_live;
 
+        [global::ProtoBuf.ProtoMember(16)]
+        public bool view_marketing_traffic
+        {
+            get { return __pbn__view_marketing_traffic.GetValueOrDefault(); }
+            set { __pbn__view_marketing_traffic = value; }
+        }
+        public bool ShouldSerializeview_marketing_traffic() => __pbn__view_marketing_traffic != null;
+        public void Resetview_marketing_traffic() => __pbn__view_marketing_traffic = null;
+        private bool? __pbn__view_marketing_traffic;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1471,6 +1481,26 @@ namespace SteamKit2.Internal
         public bool ShouldSerializertime32_last_modified() => __pbn__rtime32_last_modified != null;
         public void Resetrtime32_last_modified() => __pbn__rtime32_last_modified = null;
         private uint? __pbn__rtime32_last_modified;
+
+        [global::ProtoBuf.ProtoMember(25, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong news_post_gid
+        {
+            get { return __pbn__news_post_gid.GetValueOrDefault(); }
+            set { __pbn__news_post_gid = value; }
+        }
+        public bool ShouldSerializenews_post_gid() => __pbn__news_post_gid != null;
+        public void Resetnews_post_gid() => __pbn__news_post_gid = null;
+        private ulong? __pbn__news_post_gid;
+
+        [global::ProtoBuf.ProtoMember(26)]
+        public uint rtime_mod_reviewed
+        {
+            get { return __pbn__rtime_mod_reviewed.GetValueOrDefault(); }
+            set { __pbn__rtime_mod_reviewed = value; }
+        }
+        public bool ShouldSerializertime_mod_reviewed() => __pbn__rtime_mod_reviewed != null;
+        public void Resetrtime_mod_reviewed() => __pbn__rtime_mod_reviewed = null;
+        private uint? __pbn__rtime_mod_reviewed;
 
     }
 

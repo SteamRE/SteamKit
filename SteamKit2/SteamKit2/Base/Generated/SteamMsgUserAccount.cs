@@ -136,6 +136,27 @@ namespace SteamKit2.Internal
             public void Resetloyalty_reward_id() => __pbn__loyalty_reward_id = null;
             private int? __pbn__loyalty_reward_id;
 
+            [global::ProtoBuf.ProtoMember(10)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string localized_name_token
+            {
+                get { return __pbn__localized_name_token ?? ""; }
+                set { __pbn__localized_name_token = value; }
+            }
+            public bool ShouldSerializelocalized_name_token() => __pbn__localized_name_token != null;
+            public void Resetlocalized_name_token() => __pbn__localized_name_token = null;
+            private string __pbn__localized_name_token;
+
+            [global::ProtoBuf.ProtoMember(11)]
+            public int max_use_count
+            {
+                get { return __pbn__max_use_count.GetValueOrDefault(); }
+                set { __pbn__max_use_count = value; }
+            }
+            public bool ShouldSerializemax_use_count() => __pbn__max_use_count != null;
+            public void Resetmax_use_count() => __pbn__max_use_count = null;
+            private int? __pbn__max_use_count;
+
         }
 
     }
@@ -175,6 +196,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeidentity_verification() => __pbn__identity_verification != null;
         public void Resetidentity_verification() => __pbn__identity_verification = null;
         private uint? __pbn__identity_verification;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool performed_age_verification
+        {
+            get { return __pbn__performed_age_verification.GetValueOrDefault(); }
+            set { __pbn__performed_age_verification = value; }
+        }
+        public bool ShouldSerializeperformed_age_verification() => __pbn__performed_age_verification != null;
+        public void Resetperformed_age_verification() => __pbn__performed_age_verification = null;
+        private bool? __pbn__performed_age_verification;
 
     }
 

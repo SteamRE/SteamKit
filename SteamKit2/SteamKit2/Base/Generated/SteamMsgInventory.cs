@@ -563,6 +563,16 @@ namespace SteamKit2.Internal
         public void Resetquantity() => __pbn__quantity = null;
         private uint? __pbn__quantity;
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public ulong steamid
+        {
+            get { return __pbn__steamid.GetValueOrDefault(); }
+            set { __pbn__steamid = value; }
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -611,6 +621,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializequantity() => __pbn__quantity != null;
         public void Resetquantity() => __pbn__quantity = null;
         private uint? __pbn__quantity;
+
+        [global::ProtoBuf.ProtoMember(7, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get { return __pbn__steamid.GetValueOrDefault(); }
+            set { __pbn__steamid = value; }
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
 
     }
 

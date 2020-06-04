@@ -1151,7 +1151,8 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_FROSTIVUS_2019 = 27,
         EVENT_ID_NEW_BLOOM_2020 = 28,
         EVENT_ID_INTERNATIONAL_2020 = 29,
-        EVENT_ID_COUNT = 30,
+        EVENT_ID_TEAM_FANDOM = 30,
+        EVENT_ID_COUNT = 31,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1223,6 +1224,7 @@ namespace SteamKit2.GC.Dota.Internal
         DOTAChannelType_Party = 2,
         DOTAChannelType_Lobby = 3,
         DOTAChannelType_Team = 4,
+        DOTAChannelType_Guild = 5,
         DOTAChannelType_Fantasy = 6,
         DOTAChannelType_Whisper = 7,
         DOTAChannelType_Console = 8,
@@ -1396,6 +1398,7 @@ namespace SteamKit2.GC.Dota.Internal
         MATCH_TYPE_STEAM_GROUP = 10,
         MATCH_TYPE_MUTATION = 11,
         MATCH_TYPE_COACHES_CHALLENGE = 12,
+        MATCH_TYPE_GAUNTLET = 13,
     }
 
     [global::ProtoBuf.ProtoContract()]

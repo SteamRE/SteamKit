@@ -436,6 +436,17 @@ namespace SteamKit2.Internal
         public void Resetactive_minigame_id() => __pbn__active_minigame_id = null;
         private ulong? __pbn__active_minigame_id;
 
+        [global::ProtoBuf.ProtoMember(25)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string avatar_ugc_url
+        {
+            get { return __pbn__avatar_ugc_url ?? ""; }
+            set { __pbn__avatar_ugc_url = value; }
+        }
+        public bool ShouldSerializeavatar_ugc_url() => __pbn__avatar_ugc_url != null;
+        public void Resetavatar_ugc_url() => __pbn__avatar_ugc_url = null;
+        private string __pbn__avatar_ugc_url;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2642,6 +2653,17 @@ namespace SteamKit2.Internal
         public void Resetactive_minigame_id() => __pbn__active_minigame_id = null;
         private ulong? __pbn__active_minigame_id;
 
+        [global::ProtoBuf.ProtoMember(21)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string avatar_ugc_url
+        {
+            get { return __pbn__avatar_ugc_url ?? ""; }
+            set { __pbn__avatar_ugc_url = value; }
+        }
+        public bool ShouldSerializeavatar_ugc_url() => __pbn__avatar_ugc_url != null;
+        public void Resetavatar_ugc_url() => __pbn__avatar_ugc_url = null;
+        private string __pbn__avatar_ugc_url;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -4683,6 +4705,16 @@ namespace SteamKit2.Internal
             public bool ShouldSerializesign_into_friends() => __pbn__sign_into_friends != null;
             public void Resetsign_into_friends() => __pbn__sign_into_friends = null;
             private bool? __pbn__sign_into_friends;
+
+            [global::ProtoBuf.ProtoMember(25)]
+            public bool animated_avatars
+            {
+                get { return __pbn__animated_avatars.GetValueOrDefault(); }
+                set { __pbn__animated_avatars = value; }
+            }
+            public bool ShouldSerializeanimated_avatars() => __pbn__animated_avatars != null;
+            public void Resetanimated_avatars() => __pbn__animated_avatars = null;
+            private bool? __pbn__animated_avatars;
 
         }
 

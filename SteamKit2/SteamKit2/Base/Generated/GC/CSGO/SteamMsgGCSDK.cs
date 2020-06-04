@@ -801,6 +801,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetpartner_accountbalance() => __pbn__partner_accountbalance = null;
         private uint? __pbn__partner_accountbalance;
 
+        [global::ProtoBuf.ProtoMember(9)]
+        public uint steam_launcher
+        {
+            get { return __pbn__steam_launcher.GetValueOrDefault(); }
+            set { __pbn__steam_launcher = value; }
+        }
+        public bool ShouldSerializesteam_launcher() => __pbn__steam_launcher != null;
+        public void Resetsteam_launcher() => __pbn__steam_launcher = null;
+        private uint? __pbn__steam_launcher;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1515,6 +1525,101 @@ namespace SteamKit2.GC.CSGO.Internal
 
     [global::ProtoBuf.ProtoContract()]
     public partial class CWorkshop_AddSpecialPayment_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CProductInfo_SetRichPresenceLocalization_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get { return __pbn__appid.GetValueOrDefault(); }
+            set { __pbn__appid = value; }
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<LanguageSection> languages { get; } = new global::System.Collections.Generic.List<LanguageSection>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong steamid
+        {
+            get { return __pbn__steamid.GetValueOrDefault(); }
+            set { __pbn__steamid = value; }
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Token : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string token
+            {
+                get { return __pbn__token ?? ""; }
+                set { __pbn__token = value; }
+            }
+            public bool ShouldSerializetoken() => __pbn__token != null;
+            public void Resettoken() => __pbn__token = null;
+            private string __pbn__token;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string value
+            {
+                get { return __pbn__value ?? ""; }
+                set { __pbn__value = value; }
+            }
+            public bool ShouldSerializevalue() => __pbn__value != null;
+            public void Resetvalue() => __pbn__value = null;
+            private string __pbn__value;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class LanguageSection : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string language
+            {
+                get { return __pbn__language ?? ""; }
+                set { __pbn__language = value; }
+            }
+            public bool ShouldSerializelanguage() => __pbn__language != null;
+            public void Resetlanguage() => __pbn__language = null;
+            private string __pbn__language;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public global::System.Collections.Generic.List<CProductInfo_SetRichPresenceLocalization_Request.Token> tokens { get; } = new global::System.Collections.Generic.List<CProductInfo_SetRichPresenceLocalization_Request.Token>();
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CProductInfo_SetRichPresenceLocalization_Response : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
