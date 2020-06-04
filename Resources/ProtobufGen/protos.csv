@@ -2,6 +2,7 @@ ProtoDir,ProtoFileName,ClassFilePath,Namespace
 steam,content_manifest.proto,ContentManifest.cs,SteamKit2.Internal
 steam,encrypted_app_ticket.proto,SteamMsgAppTicket.cs,SteamKit2.Internal
 steam,steammessages_accounthardware.steamclient.proto,SteamMsgAccountHardware.cs,SteamKit2.Internal
+steam,steammessages_auth.steamclient.proto,SteamMsgAuth.cs,SteamKit2.Internal
 steam,steammessages_base.proto,SteamMsgBase.cs,SteamKit2.Internal
 steam,steammessages_broadcast.steamclient.proto,SteamMsgBroadcast.cs,SteamKit2.Internal
 steam,steammessages_chat.steamclient.proto,SteamMsgChat.cs,SteamKit2.Internal
@@ -33,6 +34,7 @@ steam,steammessages_shader.steamclient.proto,SteamMsgShader.cs,SteamKit2.Interna
 steam,steammessages_site_license.steamclient.proto,SteamMsgSiteLicense.cs,SteamKit2.Internal
 steam,steammessages_sitelicenseclient.proto,SteamMsgSiteLicenseClient.cs,SteamKit2.Internal
 steam,steammessages_store.steamclient.proto,SteamMsgStore.cs,SteamKit2.Internal
+steam,steammessages_timedtrial.steamclient.proto,SteamMsgTimedTrial.cs,SteamKit2.Internal
 steam,steammessages_twofactor.steamclient.proto,SteamMsgTwoFactor.cs,SteamKit2.Internal
 steam,steammessages_unified_base.steamclient.proto,SteamMsgUnifiedBase.cs,SteamKit2.Internal
 steam,steammessages_useraccount.steamclient.proto,SteamMsgUserAccount.cs,SteamKit2.Internal
