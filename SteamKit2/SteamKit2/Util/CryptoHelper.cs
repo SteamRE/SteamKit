@@ -198,7 +198,7 @@ namespace SteamKit2
                 aes.BlockSize = 128;
                 aes.KeySize = 256;
 
-                var cryptedIv = new byte[ 16 ];
+                byte[] cryptedIv;
                 
                 // encrypt iv using ECB and provided key
                 aes.Mode = CipherMode.ECB;
