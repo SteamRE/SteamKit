@@ -2827,6 +2827,39 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetnexonid() => __pbn__nexonid = null;
         private uint? __pbn__nexonid;
 
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(0)]
+        public int ageclass
+        {
+            get { return __pbn__ageclass ?? 0; }
+            set { __pbn__ageclass = value; }
+        }
+        public bool ShouldSerializeageclass() => __pbn__ageclass != null;
+        public void Resetageclass() => __pbn__ageclass = null;
+        private int? __pbn__ageclass;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(true)]
+        public bool id_verified
+        {
+            get { return __pbn__id_verified ?? true; }
+            set { __pbn__id_verified = value; }
+        }
+        public bool ShouldSerializeid_verified() => __pbn__id_verified != null;
+        public void Resetid_verified() => __pbn__id_verified = null;
+        private bool? __pbn__id_verified;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue(true)]
+        public bool is_adult
+        {
+            get { return __pbn__is_adult ?? true; }
+            set { __pbn__is_adult = value; }
+        }
+        public bool ShouldSerializeis_adult() => __pbn__is_adult != null;
+        public void Resetis_adult() => __pbn__is_adult = null;
+        private bool? __pbn__is_adult;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -1222,16 +1222,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetchannel() => __pbn__channel = null;
         private uint? __pbn__channel;
 
-        [global::ProtoBuf.ProtoMember(18)]
-        public uint prize_def_index
-        {
-            get { return __pbn__prize_def_index.GetValueOrDefault(); }
-            set { __pbn__prize_def_index = value; }
-        }
-        public bool ShouldSerializeprize_def_index() => __pbn__prize_def_index != null;
-        public void Resetprize_def_index() => __pbn__prize_def_index = null;
-        private uint? __pbn__prize_def_index;
-
         [global::ProtoBuf.ProtoMember(20)]
         public global::System.Collections.Generic.List<uint> disabled_hero_id { get; } = new global::System.Collections.Generic.List<uint>();
 
@@ -1322,16 +1312,6 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(31)]
         public global::System.Collections.Generic.List<uint> custom_game_product_ids { get; } = new global::System.Collections.Generic.List<uint>();
-
-        [global::ProtoBuf.ProtoMember(32)]
-        public uint lobby_mvp_vote_account_id
-        {
-            get { return __pbn__lobby_mvp_vote_account_id.GetValueOrDefault(); }
-            set { __pbn__lobby_mvp_vote_account_id = value; }
-        }
-        public bool ShouldSerializelobby_mvp_vote_account_id() => __pbn__lobby_mvp_vote_account_id != null;
-        public void Resetlobby_mvp_vote_account_id() => __pbn__lobby_mvp_vote_account_id = null;
-        private uint? __pbn__lobby_mvp_vote_account_id;
 
         [global::ProtoBuf.ProtoMember(33)]
         [global::System.ComponentModel.DefaultValue(MatchType.MATCH_TYPE_CASUAL)]
@@ -1452,9 +1432,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetrank_tier() => __pbn__rank_tier = null;
         private int? __pbn__rank_tier;
 
-        [global::ProtoBuf.ProtoMember(49)]
-        public global::System.Collections.Generic.List<CMsgLobbyMemberGuildInfo> guild_info { get; } = new global::System.Collections.Generic.List<CMsgLobbyMemberGuildInfo>();
-
         [global::ProtoBuf.ProtoMember(50)]
         public uint title
         {
@@ -1464,6 +1441,16 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializetitle() => __pbn__title != null;
         public void Resettitle() => __pbn__title = null;
         private uint? __pbn__title;
+
+        [global::ProtoBuf.ProtoMember(51)]
+        public uint guild_id
+        {
+            get { return __pbn__guild_id.GetValueOrDefault(); }
+            set { __pbn__guild_id = value; }
+        }
+        public bool ShouldSerializeguild_id() => __pbn__guild_id != null;
+        public void Resetguild_id() => __pbn__guild_id = null;
+        private uint? __pbn__guild_id;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class CDOTALobbyMemberXPBonus : global::ProtoBuf.IExtensible
@@ -1649,7 +1636,7 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CLobbyTeamGuildDetails : global::ProtoBuf.IExtensible
+    public partial class CLobbyGuildDetails : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1734,6 +1721,28 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeguild_flags() => __pbn__guild_flags != null;
         public void Resetguild_flags() => __pbn__guild_flags = null;
         private uint? __pbn__guild_flags;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        [global::System.ComponentModel.DefaultValue(DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS)]
+        public DOTA_GC_TEAM team_for_guild
+        {
+            get { return __pbn__team_for_guild ?? DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS; }
+            set { __pbn__team_for_guild = value; }
+        }
+        public bool ShouldSerializeteam_for_guild() => __pbn__team_for_guild != null;
+        public void Resetteam_for_guild() => __pbn__team_for_guild = null;
+        private DOTA_GC_TEAM? __pbn__team_for_guild;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string guild_tag
+        {
+            get { return __pbn__guild_tag ?? ""; }
+            set { __pbn__guild_tag = value; }
+        }
+        public bool ShouldSerializeguild_tag() => __pbn__guild_tag != null;
+        public void Resetguild_tag() => __pbn__guild_tag = null;
+        private string __pbn__guild_tag;
 
     }
 
@@ -2705,16 +2714,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetcurrent_primary_event() => __pbn__current_primary_event = null;
         private EEvent? __pbn__current_primary_event;
 
-        [global::ProtoBuf.ProtoMember(104)]
-        public bool lowpri_deprecated
-        {
-            get { return __pbn__lowpri_deprecated.GetValueOrDefault(); }
-            set { __pbn__lowpri_deprecated = value; }
-        }
-        public bool ShouldSerializelowpri_deprecated() => __pbn__lowpri_deprecated != null;
-        public void Resetlowpri_deprecated() => __pbn__lowpri_deprecated = null;
-        private bool? __pbn__lowpri_deprecated;
-
         [global::ProtoBuf.ProtoMember(105)]
         public global::System.Collections.Generic.List<uint> emergency_disabled_hero_ids { get; } = new global::System.Collections.Generic.List<uint>();
 
@@ -2737,9 +2736,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializecustom_game_penalties() => __pbn__custom_game_penalties != null;
         public void Resetcustom_game_penalties() => __pbn__custom_game_penalties = null;
         private bool? __pbn__custom_game_penalties;
-
-        [global::ProtoBuf.ProtoMember(108)]
-        public global::System.Collections.Generic.List<uint> mutations { get; } = new global::System.Collections.Generic.List<uint>();
 
         [global::ProtoBuf.ProtoMember(109)]
         [global::System.ComponentModel.DefaultValue("")]
@@ -2816,7 +2812,7 @@ namespace SteamKit2.GC.Dota.Internal
         public global::System.Collections.Generic.List<CLobbyGuildChallenge> guild_challenges { get; } = new global::System.Collections.Generic.List<CLobbyGuildChallenge>();
 
         [global::ProtoBuf.ProtoMember(118)]
-        public global::System.Collections.Generic.List<CLobbyTeamGuildDetails> guild_team_details { get; } = new global::System.Collections.Generic.List<CLobbyTeamGuildDetails>();
+        public global::System.Collections.Generic.List<CLobbyGuildDetails> guild_details { get; } = new global::System.Collections.Generic.List<CLobbyGuildDetails>();
 
         [global::ProtoBuf.ProtoContract()]
         public partial class CExtraMsg : global::ProtoBuf.IExtensible

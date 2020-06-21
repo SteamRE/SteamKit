@@ -2803,6 +2803,16 @@ namespace SteamKit2.GC.TF2.Internal
         public void Resetrank() => __pbn__rank = null;
         private uint? __pbn__rank;
 
+        [global::ProtoBuf.ProtoMember(23)]
+        public bool chat_suspension
+        {
+            get { return __pbn__chat_suspension.GetValueOrDefault(); }
+            set { __pbn__chat_suspension = value; }
+        }
+        public bool ShouldSerializechat_suspension() => __pbn__chat_suspension != null;
+        public void Resetchat_suspension() => __pbn__chat_suspension = null;
+        private bool? __pbn__chat_suspension;
+
         [global::ProtoBuf.ProtoContract()]
         public enum ConnectState
         {

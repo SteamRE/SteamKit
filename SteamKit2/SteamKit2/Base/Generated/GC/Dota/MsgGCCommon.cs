@@ -9517,6 +9517,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resettotal_gold() => __pbn__total_gold = null;
         private uint? __pbn__total_gold;
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public bool not_restorable
+        {
+            get { return __pbn__not_restorable.GetValueOrDefault(); }
+            set { __pbn__not_restorable = value; }
+        }
+        public bool ShouldSerializenot_restorable() => __pbn__not_restorable != null;
+        public void Resetnot_restorable() => __pbn__not_restorable = null;
+        private bool? __pbn__not_restorable;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class BenchSlot : global::ProtoBuf.IExtensible
         {

@@ -155,6 +155,26 @@ namespace SteamKit2.Internal
         public void Resetoffset_detection_blast_radius_post() => __pbn__offset_detection_blast_radius_post = null;
         private uint? __pbn__offset_detection_blast_radius_post;
 
+        [global::ProtoBuf.ProtoMember(10)]
+        public uint offset_detection_max_distance_pre
+        {
+            get { return __pbn__offset_detection_max_distance_pre.GetValueOrDefault(); }
+            set { __pbn__offset_detection_max_distance_pre = value; }
+        }
+        public bool ShouldSerializeoffset_detection_max_distance_pre() => __pbn__offset_detection_max_distance_pre != null;
+        public void Resetoffset_detection_max_distance_pre() => __pbn__offset_detection_max_distance_pre = null;
+        private uint? __pbn__offset_detection_max_distance_pre;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public uint offset_detection_max_distance_post
+        {
+            get { return __pbn__offset_detection_max_distance_post.GetValueOrDefault(); }
+            set { __pbn__offset_detection_max_distance_post = value; }
+        }
+        public bool ShouldSerializeoffset_detection_max_distance_post() => __pbn__offset_detection_max_distance_post != null;
+        public void Resetoffset_detection_max_distance_post() => __pbn__offset_detection_max_distance_post = null;
+        private uint? __pbn__offset_detection_max_distance_post;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
