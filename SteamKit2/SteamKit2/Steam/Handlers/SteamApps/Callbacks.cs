@@ -397,6 +397,14 @@ namespace SteamKit2
             /// </summary>
             public bool RequiresFullUpdate { get; private set; }
             /// <summary>
+            /// If this update requires a full update of the app information
+            /// </summary>
+            public bool RequiresFullAppUpdate { get; private set; }
+            /// <summary>
+            /// If this update requires a full update of the package information
+            /// </summary>
+            public bool RequiresFullPackageUpdate { get; private set; }
+            /// <summary>
             /// Dictionary containing requested package tokens
             /// </summary>
             public Dictionary<uint, PICSChangeData> PackageChanges { get; private set; }
@@ -413,6 +421,8 @@ namespace SteamKit2
                 LastChangeNumber = msg.since_change_number;
                 CurrentChangeNumber = msg.current_change_number;
                 RequiresFullUpdate = msg.force_full_update;
+                RequiresFullAppUpdate = msg.force_full_app_update;
+                RequiresFullPackageUpdate = msg.force_full_package_update;
                 PackageChanges = new Dictionary<uint, PICSChangeData>();
                 AppChanges = new Dictionary<uint, PICSChangeData>();
 

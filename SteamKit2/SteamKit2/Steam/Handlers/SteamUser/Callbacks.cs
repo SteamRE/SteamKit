@@ -86,11 +86,6 @@ namespace SteamKit2
             public byte[]? Steam2Ticket { get; private set; }
 
             /// <summary>
-            /// Gets a value indicating whether the client should use PICS.
-            /// </summary>
-            public bool UsePICS { get; private set; }
-
-            /// <summary>
             /// Gets the WebAPI authentication user nonce.
             /// </summary>
             public string? WebAPIUserNonce { get; private set; }
@@ -145,8 +140,6 @@ namespace SteamKit2
                 this.IPCountryCode = resp.ip_country_code;
 
                 this.WebAPIUserNonce = resp.webapi_authenticate_user_nonce;
-
-                this.UsePICS = resp.use_pics;
 
                 this.VanityURL = resp.vanity_url;
 
