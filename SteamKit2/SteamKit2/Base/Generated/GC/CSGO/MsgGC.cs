@@ -1709,6 +1709,9 @@ namespace SteamKit2.GC.CSGO.Internal
         [global::ProtoBuf.ProtoMember(17)]
         public global::System.Collections.Generic.List<uint> launcher_mismatch_sessions { get; } = new global::System.Collections.Generic.List<uint>();
 
+        [global::ProtoBuf.ProtoMember(18)]
+        public global::System.Collections.Generic.List<uint> insecure_account_id_sessions { get; } = new global::System.Collections.Generic.List<uint>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Note : global::ProtoBuf.IExtensible
         {
@@ -6960,6 +6963,27 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetprocess_id() => __pbn__process_id = null;
         private uint? __pbn__process_id;
 
+        [global::ProtoBuf.ProtoMember(9)]
+        public int osversion
+        {
+            get { return __pbn__osversion.GetValueOrDefault(); }
+            set { __pbn__osversion = value; }
+        }
+        public bool ShouldSerializeosversion() => __pbn__osversion != null;
+        public void Resetosversion() => __pbn__osversion = null;
+        private int? __pbn__osversion;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        [global::System.ComponentModel.DefaultValue(EClientReportingVersion.k_EClientReportingVersion_SupportsSecureMode)]
+        public EClientReportingVersion clientreportversion
+        {
+            get { return __pbn__clientreportversion ?? EClientReportingVersion.k_EClientReportingVersion_SupportsSecureMode; }
+            set { __pbn__clientreportversion = value; }
+        }
+        public bool ShouldSerializeclientreportversion() => __pbn__clientreportversion != null;
+        public void Resetclientreportversion() => __pbn__clientreportversion = null;
+        private EClientReportingVersion? __pbn__clientreportversion;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -6979,6 +7003,46 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializefile_report() => __pbn__file_report != null;
         public void Resetfile_report() => __pbn__file_report = null;
         private string __pbn__file_report;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool offer_insecure_mode
+        {
+            get { return __pbn__offer_insecure_mode.GetValueOrDefault(); }
+            set { __pbn__offer_insecure_mode = value; }
+        }
+        public bool ShouldSerializeoffer_insecure_mode() => __pbn__offer_insecure_mode != null;
+        public void Resetoffer_insecure_mode() => __pbn__offer_insecure_mode = null;
+        private bool? __pbn__offer_insecure_mode;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool offer_secure_mode
+        {
+            get { return __pbn__offer_secure_mode.GetValueOrDefault(); }
+            set { __pbn__offer_secure_mode = value; }
+        }
+        public bool ShouldSerializeoffer_secure_mode() => __pbn__offer_secure_mode != null;
+        public void Resetoffer_secure_mode() => __pbn__offer_secure_mode = null;
+        private bool? __pbn__offer_secure_mode;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool show_unsigned_ui
+        {
+            get { return __pbn__show_unsigned_ui.GetValueOrDefault(); }
+            set { __pbn__show_unsigned_ui = value; }
+        }
+        public bool ShouldSerializeshow_unsigned_ui() => __pbn__show_unsigned_ui != null;
+        public void Resetshow_unsigned_ui() => __pbn__show_unsigned_ui = null;
+        private bool? __pbn__show_unsigned_ui;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public bool kick_user
+        {
+            get { return __pbn__kick_user.GetValueOrDefault(); }
+            set { __pbn__kick_user = value; }
+        }
+        public bool ShouldSerializekick_user() => __pbn__kick_user != null;
+        public void Resetkick_user() => __pbn__kick_user = null;
+        private bool? __pbn__kick_user;
 
     }
 
@@ -7115,6 +7179,12 @@ namespace SteamKit2.GC.CSGO.Internal
         k_ECsgoSteamUserStat_XpEarnedGames = 1,
         k_ECsgoSteamUserStat_MatchWinsCompetitive = 2,
         k_ECsgoSteamUserStat_SurvivedDangerZone = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EClientReportingVersion
+    {
+        k_EClientReportingVersion_SupportsSecureMode = 1,
     }
 
 }

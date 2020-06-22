@@ -107,6 +107,16 @@ namespace SteamKit2.Internal
         public void Resetsysid() => __pbn__sysid = null;
         private uint? __pbn__sysid;
 
+        [global::ProtoBuf.ProtoMember(10)]
+        public bool allow_webrtc
+        {
+            get { return __pbn__allow_webrtc.GetValueOrDefault(); }
+            set { __pbn__allow_webrtc = value; }
+        }
+        public bool ShouldSerializeallow_webrtc() => __pbn__allow_webrtc != null;
+        public void Resetallow_webrtc() => __pbn__allow_webrtc = null;
+        private bool? __pbn__allow_webrtc;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

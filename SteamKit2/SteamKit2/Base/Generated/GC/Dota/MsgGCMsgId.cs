@@ -491,6 +491,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGCToClientPartySearchInvites = 7680,
         k_EMsgGCToClientRequestMMInfo = 7681,
         k_EMsgClientToGCMMInfo = 7682,
+        k_EMsgSignOutTextMuteInfo = 7683,
         k_EMsgGCDev_GrantWarKill = 8001,
         k_EMsgServerToGCLockCharmTrading = 8004,
         k_EMsgClientToGCPlayerStatsRequest = 8006,
@@ -917,6 +918,11 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgClientToGCSubmitDraftTriviaMatchAnswer = 8736,
         k_EMsgClientToGCSubmitDraftTriviaMatchAnswerResponse = 8737,
         k_EMsgGCToGCSignoutSpendBounty = 8738,
+        k_EMsgClientToGCApplyGauntletTicket = 8739,
+        k_EMsgClientToGCUnderDraftRollBackBench = 8740,
+        k_EMsgClientToGCUnderDraftRollBackBenchResponse = 8741,
+        k_EMsgServerToGCGetGuildContracts = 8744,
+        k_EMsgServerToGCGetGuildContractsResponse = 8745,
     }
 
 }

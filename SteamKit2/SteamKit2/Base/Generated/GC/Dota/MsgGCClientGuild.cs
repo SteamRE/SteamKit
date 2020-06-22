@@ -332,6 +332,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetmember_joined_timestamp() => __pbn__member_joined_timestamp = null;
         private uint? __pbn__member_joined_timestamp;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint member_last_active_timestamp
+        {
+            get { return __pbn__member_last_active_timestamp.GetValueOrDefault(); }
+            set { __pbn__member_last_active_timestamp = value; }
+        }
+        public bool ShouldSerializemember_last_active_timestamp() => __pbn__member_last_active_timestamp != null;
+        public void Resetmember_last_active_timestamp() => __pbn__member_last_active_timestamp = null;
+        private uint? __pbn__member_last_active_timestamp;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2145,6 +2155,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_EGuildAuditAction_GuildTagChanged = 23,
         k_EGuildAuditAction_AdminWhitelisted = 24,
         k_EGuildAuditAction_AdminBlacklisted = 25,
+        k_EGuildAuditAction_AdminBannedUser = 26,
     }
 
     [global::ProtoBuf.ProtoContract()]

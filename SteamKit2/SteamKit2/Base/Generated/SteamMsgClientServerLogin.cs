@@ -653,6 +653,16 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(105)]
         public CMsgClientSecret embedded_client_secret { get; set; }
 
+        [global::ProtoBuf.ProtoMember(106)]
+        public bool disable_partner_autogrants
+        {
+            get { return __pbn__disable_partner_autogrants.GetValueOrDefault(); }
+            set { __pbn__disable_partner_autogrants = value; }
+        }
+        public bool ShouldSerializedisable_partner_autogrants() => __pbn__disable_partner_autogrants != null;
+        public void Resetdisable_partner_autogrants() => __pbn__disable_partner_autogrants = null;
+        private bool? __pbn__disable_partner_autogrants;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -786,14 +796,14 @@ namespace SteamKit2.Internal
         private uint? __pbn__cell_id_ping_threshold;
 
         [global::ProtoBuf.ProtoMember(13)]
-        public bool use_pics
+        public bool deprecated_use_pics
         {
-            get { return __pbn__use_pics.GetValueOrDefault(); }
-            set { __pbn__use_pics = value; }
+            get { return __pbn__deprecated_use_pics.GetValueOrDefault(); }
+            set { __pbn__deprecated_use_pics = value; }
         }
-        public bool ShouldSerializeuse_pics() => __pbn__use_pics != null;
-        public void Resetuse_pics() => __pbn__use_pics = null;
-        private bool? __pbn__use_pics;
+        public bool ShouldSerializedeprecated_use_pics() => __pbn__deprecated_use_pics != null;
+        public void Resetdeprecated_use_pics() => __pbn__deprecated_use_pics = null;
+        private bool? __pbn__deprecated_use_pics;
 
         [global::ProtoBuf.ProtoMember(14)]
         [global::System.ComponentModel.DefaultValue("")]
