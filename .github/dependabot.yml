@@ -1,17 +1,7 @@
 version: 2
 updates:
 - package-ecosystem: nuget
-  directory: "/Resources/NetHookAnalyzer2"
-  schedule:
-    interval: daily
-  open-pull-requests-limit: 10
-- package-ecosystem: nuget
-  directory: "/Samples"
-  schedule:
-    interval: daily
-  open-pull-requests-limit: 10
-- package-ecosystem: nuget
-  directory: "/SteamKit2"
+  directory: "/"
   schedule:
     interval: daily
   open-pull-requests-limit: 10
