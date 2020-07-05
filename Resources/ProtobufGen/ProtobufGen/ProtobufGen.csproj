@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.5.0" />
-    <PackageReference Include="protobuf-net.Reflection" Version="3.0.0-alpha.91" />
+    <PackageReference Include="protobuf-net.Reflection" Version="3.0.21" />
   </ItemGroup>
 
 </Project>
