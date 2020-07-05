@@ -55,12 +55,14 @@ namespace SteamKit2
         /// <value>
         /// The <see cref="SteamID"/>.
         /// </value>
+#pragma warning disable CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
         [DisallowNull, NotNull]
         public override SteamID? SteamID
         {
             get => ProtoHeader.steamid;
             set => ProtoHeader.steamid = value ?? throw new ArgumentNullException( nameof(value) );
         }
+#pragma warning restore CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
 
         /// <summary>
         /// Gets or sets the target job id for this client message.
@@ -277,12 +279,14 @@ namespace SteamKit2
         /// <value>
         /// The <see cref="SteamID"/>.
         /// </value>
+#pragma warning disable CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
         [DisallowNull, NotNull]
         public override SteamID? SteamID
         {
             get => Header.SteamID;
             set => Header.SteamID = value ?? throw new ArgumentNullException( nameof(value) );
         }
+#pragma warning restore CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
 
         /// <summary>
         /// Gets or sets the target job id for this client message.
