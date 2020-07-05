@@ -1,39 +1,33 @@
 ------------------------------------------------------------------------------
-v 2.3.0			May 16, 2020 (Beta 2)
-------------------------------------------------------------------------------
-* Added initial support for an IPv6-aware Steam network.
-* Added `SteamUser.EmailAddrInfoCallback`.
-* Added `DepotManifest.Deserialize()`.
-* Added new `Licence` fields to `SteamApps` callbacks.
-* Added `CMClient.CurrentEndPoint` to expose currently connected remote server addess.
-* Fixed a possible exception when calling `SteamApps` functions with duplicated inputs.
-* Fixed a couple possible crashes.
-* Updated Steam enums and protobufs.
-* `WebAPI` no longer logs exceptions. Callers that want this information logged should log it themselves.
-
-
-------------------------------------------------------------------------------
-v 2.3.0			Mar 29, 2020 (Beta 1)
+v 2.3.0			July 05, 2020 
 ------------------------------------------------------------------------------
 * Added `SteamMatchmaking` to manage matchmaking lobbies.
 * Added `ParentalSettings` to `LoggedOnCallback`.
 * Added annotations for C#8 Nullable Reference Types.
+* Added initial support for an IPv6-aware Steam network.
+* Added `SteamUser.EmailAddrInfoCallback`.
+* Added `DepotManifest.Deserialize()`.
+* Added new `Licence` fields to `SteamApps` callbacks.
+* Added `CMClient.CurrentEndPoint` to expose currently connected remote server address.
+* Added full update fields to `PICSChangesCallback`.
 * `SteamUser.LogOn` will now use the Cell ID specified in `SteamConfiguration` as a fallback.
 * SteamKit will now try skip a CM that responds to a logon attempt with `TryAnotherCM` or `ServiceUnavailable`.
 * Removed debug messages for each packet send/recieve event. This can be accomplished through `NetHookNetworkListener` or a customer `IDebugNetworkListener` instead.
 * Log messages now uniquely identify the related `SteamClient` object, where relevant.
 * Fixed incorrect Cell ID parameter in `ContentServerDirectoryService`.
-* Fixed a possible exception when calling `SteamApps` functions with duplicated inputs.
+* Fixed a possible exception when calling `SteamApps` functions with duplicated inputs
 * Fixed Web API exceptions not including the numeric HTTP response code.
+* Fixed a couple possible crashes.
 * Updated Steam enums and protobufs.
 
 BREAKING CHANGES
 * Generated protobuf classes have changed slightly due to updating to a newer version of protobuf-net.
     * Attributes vary slightly, particularly with regards to the `Name` property on `ProtoContractAttribute`, `ProtoMemberAttribute`, and `ProtoEnumAttribute`.
-	* For any given property, e.g. a propery named `Foo`, the corresponding property `FooSpecified` has been removed. Use `ShouldSerializeFoo()` instead.
+	* For any given property, e.g. a property named `Foo`, the corresponding property `FooSpecified` has been removed. Use `ShouldSerializeFoo()` instead.
 	* Protobuf classes are no longer marked with the `[Serializable]` attribute.
 * The `appid` parameter in `SteamApps.GetDepotDecryptionKey` is no longer optional.
-* `CDNClient` no longer supports CS servers. Some public methods have had their signatures changed to accomodate this.
+* `CDNClient` no longer supports CS servers. Some public methods have had their signatures changed to accommodate this.
+* `WebAPI` no longer logs exceptions. Callers that want this information logged should log it themselves.
 * `SteamWorkshop.EnumeratePublishedFiles` has been removed. Use the unified API `IPublishedFile.QueryFiles` instead.
 * All classes in the `SteamKit2.Internal.Unified` namespace have moved to `SteamKit2.Internal`.
 
