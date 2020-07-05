@@ -118,7 +118,7 @@ namespace NetHookAnalyzer2
 
 			var outAllowed = inOutRadioButton.Checked || outRadioButton.Checked;
 			var inAllowed = inOutRadioButton.Checked || inRadioButton.Checked;
-			Predicate<NetHookItem> directionPredicate = nhi => ( nhi.Direction == NetHookItem.PacketDirection.Out && outAllowed ) || ( nhi.Direction == NetHookItem.PacketDirection.In && inAllowed );
+			bool directionPredicate( NetHookItem nhi ) => ( nhi.Direction == NetHookItem.PacketDirection.Out && outAllowed ) || ( nhi.Direction == NetHookItem.PacketDirection.In && inAllowed );
 
 			var searchTerm = searchTextBox.Text;
 			Predicate<NetHookItem> searchPredicate;
@@ -409,13 +409,12 @@ namespace NetHookAnalyzer2
 
 		void SelectLastItem()
 		{
-
 			if (itemsListView.Items.Count == 0)
 			{
 				return;
 			}
 
-			var lastItem = itemsListView.Items[itemsListView.Items.Count - 1];
+			var lastItem = itemsListView.Items[ ^1 ];
 			if (!lastItem.Selected)
 			{
 				lastItem.Selected = true;

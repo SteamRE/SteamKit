@@ -486,9 +486,9 @@ namespace NetHookAnalyzer2
 			{
 				SetValueForDisplay(value.ToString());
 			}
-			else if (value is string)
+			else if (value is string stringValue  )
 			{
-				SetValueForDisplay(string.Format("\"{0}\"", value), (string)value);
+				SetValueForDisplay(string.Format("\"{0}\"", value), stringValue );
 			}
 			else if (value is SteamID steamID)
 			{
