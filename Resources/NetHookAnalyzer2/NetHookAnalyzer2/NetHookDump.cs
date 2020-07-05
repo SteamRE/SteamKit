@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetHookAnalyzer2
 {
@@ -12,9 +9,11 @@ namespace NetHookAnalyzer2
 		public NetHookDump()
 		{
 			items = new List<NetHookItem>();
+			readOnlyView = items.AsReadOnly();
 		}
 
 		List<NetHookItem> items;
+		IReadOnlyList<NetHookItem> readOnlyView;
 
 		public void LoadFromDirectory(string directory)
 		{
@@ -32,10 +31,7 @@ namespace NetHookAnalyzer2
 			}
 		}
 
-		public IQueryable<NetHookItem> Items
-		{
-			get { return items.AsQueryable(); }
-		}
+		public IEnumerable<NetHookItem> Items => readOnlyView;
 
 		public NetHookItem AddItemFromPath(string path)
 		{
