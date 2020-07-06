@@ -39,6 +39,7 @@ build_script:
   - msbuild Resources\NetHookAnalyzer2\NetHookAnalyzer2.sln
   - dotnet build Samples\Samples.sln
   - dotnet build Resources\ProtobufGen\ProtobufGen.sln
+  - dotnet build Resources\SteamLanguageParser\SteamLanguageParser.csproj
 
 after_build:
   - '7z a NetHook2.zip .\Resources\NetHook2\%CONFIGURATION%\*.dll .\Resources\NetHook2\%CONFIGURATION%\*.pdb'
