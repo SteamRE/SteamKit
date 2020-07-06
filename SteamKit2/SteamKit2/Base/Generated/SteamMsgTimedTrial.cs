@@ -4,7 +4,8 @@
 //   Input: steammessages_timedtrial.steamclient.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.Internal
 {
 
@@ -18,8 +19,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -37,8 +38,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint seconds_played
         {
-            get { return __pbn__seconds_played.GetValueOrDefault(); }
-            set { __pbn__seconds_played = value; }
+            get => __pbn__seconds_played.GetValueOrDefault();
+            set => __pbn__seconds_played = value;
         }
         public bool ShouldSerializeseconds_played() => __pbn__seconds_played != null;
         public void Resetseconds_played() => __pbn__seconds_played = null;
@@ -47,8 +48,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint seconds_allowed
         {
-            get { return __pbn__seconds_allowed.GetValueOrDefault(); }
-            set { __pbn__seconds_allowed = value; }
+            get => __pbn__seconds_allowed.GetValueOrDefault();
+            set => __pbn__seconds_allowed = value;
         }
         public bool ShouldSerializeseconds_allowed() => __pbn__seconds_allowed != null;
         public void Resetseconds_allowed() => __pbn__seconds_allowed = null;
@@ -66,8 +67,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -76,8 +77,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint seconds_played
         {
-            get { return __pbn__seconds_played.GetValueOrDefault(); }
-            set { __pbn__seconds_played = value; }
+            get => __pbn__seconds_played.GetValueOrDefault();
+            set => __pbn__seconds_played = value;
         }
         public bool ShouldSerializeseconds_played() => __pbn__seconds_played != null;
         public void Resetseconds_played() => __pbn__seconds_played = null;
@@ -95,8 +96,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint seconds_played
         {
-            get { return __pbn__seconds_played.GetValueOrDefault(); }
-            set { __pbn__seconds_played = value; }
+            get => __pbn__seconds_played.GetValueOrDefault();
+            set => __pbn__seconds_played = value;
         }
         public bool ShouldSerializeseconds_played() => __pbn__seconds_played != null;
         public void Resetseconds_played() => __pbn__seconds_played = null;
@@ -105,8 +106,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint seconds_allowed
         {
-            get { return __pbn__seconds_allowed.GetValueOrDefault(); }
-            set { __pbn__seconds_allowed = value; }
+            get => __pbn__seconds_allowed.GetValueOrDefault();
+            set => __pbn__seconds_allowed = value;
         }
         public bool ShouldSerializeseconds_allowed() => __pbn__seconds_allowed != null;
         public void Resetseconds_allowed() => __pbn__seconds_allowed = null;
@@ -124,8 +125,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -143,8 +144,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint seconds_played
         {
-            get { return __pbn__seconds_played.GetValueOrDefault(); }
-            set { __pbn__seconds_played = value; }
+            get => __pbn__seconds_played.GetValueOrDefault();
+            set => __pbn__seconds_played = value;
         }
         public bool ShouldSerializeseconds_played() => __pbn__seconds_played != null;
         public void Resetseconds_played() => __pbn__seconds_played = null;
@@ -153,8 +154,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint seconds_allowed
         {
-            get { return __pbn__seconds_allowed.GetValueOrDefault(); }
-            set { __pbn__seconds_allowed = value; }
+            get => __pbn__seconds_allowed.GetValueOrDefault();
+            set => __pbn__seconds_allowed = value;
         }
         public bool ShouldSerializeseconds_allowed() => __pbn__seconds_allowed != null;
         public void Resetseconds_allowed() => __pbn__seconds_allowed = null;
@@ -171,4 +172,5 @@ namespace SteamKit2.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

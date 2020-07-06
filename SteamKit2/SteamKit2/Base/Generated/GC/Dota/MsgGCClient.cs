@@ -4,7 +4,8 @@
 //   Input: dota_gcmessages_client.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.GC.Dota.Internal
 {
 
@@ -18,8 +19,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint time_end
         {
-            get { return __pbn__time_end.GetValueOrDefault(); }
-            set { __pbn__time_end = value; }
+            get => __pbn__time_end.GetValueOrDefault();
+            set => __pbn__time_end = value;
         }
         public bool ShouldSerializetime_end() => __pbn__time_end != null;
         public void Resettime_end() => __pbn__time_end = null;
@@ -46,8 +47,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint initial_skill
         {
-            get { return __pbn__initial_skill.GetValueOrDefault(); }
-            set { __pbn__initial_skill = value; }
+            get => __pbn__initial_skill.GetValueOrDefault();
+            set => __pbn__initial_skill = value;
         }
         public bool ShouldSerializeinitial_skill() => __pbn__initial_skill != null;
         public void Resetinitial_skill() => __pbn__initial_skill = null;
@@ -80,8 +81,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong newest_match_id_at_last_query
         {
-            get { return __pbn__newest_match_id_at_last_query.GetValueOrDefault(); }
-            set { __pbn__newest_match_id_at_last_query = value; }
+            get => __pbn__newest_match_id_at_last_query.GetValueOrDefault();
+            set => __pbn__newest_match_id_at_last_query = value;
         }
         public bool ShouldSerializenewest_match_id_at_last_query() => __pbn__newest_match_id_at_last_query != null;
         public void Resetnewest_match_id_at_last_query() => __pbn__newest_match_id_at_last_query = null;
@@ -90,8 +91,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint time_last_query
         {
-            get { return __pbn__time_last_query.GetValueOrDefault(); }
-            set { __pbn__time_last_query = value; }
+            get => __pbn__time_last_query.GetValueOrDefault();
+            set => __pbn__time_last_query = value;
         }
         public bool ShouldSerializetime_last_query() => __pbn__time_last_query != null;
         public void Resettime_last_query() => __pbn__time_last_query = null;
@@ -109,8 +110,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -119,8 +120,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint game_mode
         {
-            get { return __pbn__game_mode.GetValueOrDefault(); }
-            set { __pbn__game_mode = value; }
+            get => __pbn__game_mode.GetValueOrDefault();
+            set => __pbn__game_mode = value;
         }
         public bool ShouldSerializegame_mode() => __pbn__game_mode != null;
         public void Resetgame_mode() => __pbn__game_mode = null;
@@ -129,8 +130,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(6, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint date_min
         {
-            get { return __pbn__date_min.GetValueOrDefault(); }
-            set { __pbn__date_min = value; }
+            get => __pbn__date_min.GetValueOrDefault();
+            set => __pbn__date_min = value;
         }
         public bool ShouldSerializedate_min() => __pbn__date_min != null;
         public void Resetdate_min() => __pbn__date_min = null;
@@ -139,8 +140,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(7, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint date_max
         {
-            get { return __pbn__date_max.GetValueOrDefault(); }
-            set { __pbn__date_max = value; }
+            get => __pbn__date_max.GetValueOrDefault();
+            set => __pbn__date_max = value;
         }
         public bool ShouldSerializedate_max() => __pbn__date_max != null;
         public void Resetdate_max() => __pbn__date_max = null;
@@ -149,8 +150,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public uint matches_requested
         {
-            get { return __pbn__matches_requested.GetValueOrDefault(); }
-            set { __pbn__matches_requested = value; }
+            get => __pbn__matches_requested.GetValueOrDefault();
+            set => __pbn__matches_requested = value;
         }
         public bool ShouldSerializematches_requested() => __pbn__matches_requested != null;
         public void Resetmatches_requested() => __pbn__matches_requested = null;
@@ -159,8 +160,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public ulong start_at_match_id
         {
-            get { return __pbn__start_at_match_id.GetValueOrDefault(); }
-            set { __pbn__start_at_match_id = value; }
+            get => __pbn__start_at_match_id.GetValueOrDefault();
+            set => __pbn__start_at_match_id = value;
         }
         public bool ShouldSerializestart_at_match_id() => __pbn__start_at_match_id != null;
         public void Resetstart_at_match_id() => __pbn__start_at_match_id = null;
@@ -169,8 +170,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(12, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint min_players
         {
-            get { return __pbn__min_players.GetValueOrDefault(); }
-            set { __pbn__min_players = value; }
+            get => __pbn__min_players.GetValueOrDefault();
+            set => __pbn__min_players = value;
         }
         public bool ShouldSerializemin_players() => __pbn__min_players != null;
         public void Resetmin_players() => __pbn__min_players = null;
@@ -179,8 +180,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(13)]
         public uint request_id
         {
-            get { return __pbn__request_id.GetValueOrDefault(); }
-            set { __pbn__request_id = value; }
+            get => __pbn__request_id.GetValueOrDefault();
+            set => __pbn__request_id = value;
         }
         public bool ShouldSerializerequest_id() => __pbn__request_id != null;
         public void Resetrequest_id() => __pbn__request_id = null;
@@ -189,8 +190,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -199,8 +200,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(16)]
         public uint league_id
         {
-            get { return __pbn__league_id.GetValueOrDefault(); }
-            set { __pbn__league_id = value; }
+            get => __pbn__league_id.GetValueOrDefault();
+            set => __pbn__league_id = value;
         }
         public bool ShouldSerializeleague_id() => __pbn__league_id != null;
         public void Resetleague_id() => __pbn__league_id = null;
@@ -210,8 +211,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(SkillLevel.Any)]
         public SkillLevel skill
         {
-            get { return __pbn__skill ?? SkillLevel.Any; }
-            set { __pbn__skill = value; }
+            get => __pbn__skill ?? SkillLevel.Any;
+            set => __pbn__skill = value;
         }
         public bool ShouldSerializeskill() => __pbn__skill != null;
         public void Resetskill() => __pbn__skill = null;
@@ -220,8 +221,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(18)]
         public uint team_id
         {
-            get { return __pbn__team_id.GetValueOrDefault(); }
-            set { __pbn__team_id = value; }
+            get => __pbn__team_id.GetValueOrDefault();
+            set => __pbn__team_id = value;
         }
         public bool ShouldSerializeteam_id() => __pbn__team_id != null;
         public void Resetteam_id() => __pbn__team_id = null;
@@ -230,8 +231,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(20)]
         public ulong custom_game_id
         {
-            get { return __pbn__custom_game_id.GetValueOrDefault(); }
-            set { __pbn__custom_game_id = value; }
+            get => __pbn__custom_game_id.GetValueOrDefault();
+            set => __pbn__custom_game_id = value;
         }
         public bool ShouldSerializecustom_game_id() => __pbn__custom_game_id != null;
         public void Resetcustom_game_id() => __pbn__custom_game_id = null;
@@ -264,8 +265,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint request_id
         {
-            get { return __pbn__request_id.GetValueOrDefault(); }
-            set { __pbn__request_id = value; }
+            get => __pbn__request_id.GetValueOrDefault();
+            set => __pbn__request_id = value;
         }
         public bool ShouldSerializerequest_id() => __pbn__request_id != null;
         public void Resetrequest_id() => __pbn__request_id = null;
@@ -274,8 +275,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint total_results
         {
-            get { return __pbn__total_results.GetValueOrDefault(); }
-            set { __pbn__total_results = value; }
+            get => __pbn__total_results.GetValueOrDefault();
+            set => __pbn__total_results = value;
         }
         public bool ShouldSerializetotal_results() => __pbn__total_results != null;
         public void Resettotal_results() => __pbn__total_results = null;
@@ -284,8 +285,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint results_remaining
         {
-            get { return __pbn__results_remaining.GetValueOrDefault(); }
-            set { __pbn__results_remaining = value; }
+            get => __pbn__results_remaining.GetValueOrDefault();
+            set => __pbn__results_remaining = value;
         }
         public bool ShouldSerializeresults_remaining() => __pbn__results_remaining != null;
         public void Resetresults_remaining() => __pbn__results_remaining = null;
@@ -304,8 +305,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint series_id
             {
-                get { return __pbn__series_id.GetValueOrDefault(); }
-                set { __pbn__series_id = value; }
+                get => __pbn__series_id.GetValueOrDefault();
+                set => __pbn__series_id = value;
             }
             public bool ShouldSerializeseries_id() => __pbn__series_id != null;
             public void Resetseries_id() => __pbn__series_id = null;
@@ -314,8 +315,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint series_type
             {
-                get { return __pbn__series_type.GetValueOrDefault(); }
-                set { __pbn__series_type = value; }
+                get => __pbn__series_type.GetValueOrDefault();
+                set => __pbn__series_type = value;
             }
             public bool ShouldSerializeseries_type() => __pbn__series_type != null;
             public void Resetseries_type() => __pbn__series_type = null;
@@ -345,8 +346,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint team_id
             {
-                get { return __pbn__team_id.GetValueOrDefault(); }
-                set { __pbn__team_id = value; }
+                get => __pbn__team_id.GetValueOrDefault();
+                set => __pbn__team_id = value;
             }
             public bool ShouldSerializeteam_id() => __pbn__team_id != null;
             public void Resetteam_id() => __pbn__team_id = null;
@@ -356,8 +357,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string team_name
             {
-                get { return __pbn__team_name ?? ""; }
-                set { __pbn__team_name = value; }
+                get => __pbn__team_name ?? "";
+                set => __pbn__team_name = value;
             }
             public bool ShouldSerializeteam_name() => __pbn__team_name != null;
             public void Resetteam_name() => __pbn__team_name = null;
@@ -366,8 +367,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint dpc_points
             {
-                get { return __pbn__dpc_points.GetValueOrDefault(); }
-                set { __pbn__dpc_points = value; }
+                get => __pbn__dpc_points.GetValueOrDefault();
+                set => __pbn__dpc_points = value;
             }
             public bool ShouldSerializedpc_points() => __pbn__dpc_points != null;
             public void Resetdpc_points() => __pbn__dpc_points = null;
@@ -377,8 +378,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string team_logo_url
             {
-                get { return __pbn__team_logo_url ?? ""; }
-                set { __pbn__team_logo_url = value; }
+                get => __pbn__team_logo_url ?? "";
+                set => __pbn__team_logo_url = value;
             }
             public bool ShouldSerializeteam_logo_url() => __pbn__team_logo_url != null;
             public void Resetteam_logo_url() => __pbn__team_logo_url = null;
@@ -388,8 +389,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue(CMsgDOTAGetDPCStandingsResponse.EStatus.DEFAULT)]
             public CMsgDOTAGetDPCStandingsResponse.EStatus status
             {
-                get { return __pbn__status ?? CMsgDOTAGetDPCStandingsResponse.EStatus.DEFAULT; }
-                set { __pbn__status = value; }
+                get => __pbn__status ?? CMsgDOTAGetDPCStandingsResponse.EStatus.DEFAULT;
+                set => __pbn__status = value;
             }
             public bool ShouldSerializestatus() => __pbn__status != null;
             public void Resetstatus() => __pbn__status = null;
@@ -418,8 +419,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(PopupID.NONE)]
         public PopupID id
         {
-            get { return __pbn__id ?? PopupID.NONE; }
-            set { __pbn__id = value; }
+            get => __pbn__id ?? PopupID.NONE;
+            set => __pbn__id = value;
         }
         public bool ShouldSerializeid() => __pbn__id != null;
         public void Resetid() => __pbn__id = null;
@@ -429,8 +430,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string custom_text
         {
-            get { return __pbn__custom_text ?? ""; }
-            set { __pbn__custom_text = value; }
+            get => __pbn__custom_text ?? "";
+            set => __pbn__custom_text = value;
         }
         public bool ShouldSerializecustom_text() => __pbn__custom_text != null;
         public void Resetcustom_text() => __pbn__custom_text = null;
@@ -439,8 +440,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
         public int int_data
         {
-            get { return __pbn__int_data.GetValueOrDefault(); }
-            set { __pbn__int_data = value; }
+            get => __pbn__int_data.GetValueOrDefault();
+            set => __pbn__int_data = value;
         }
         public bool ShouldSerializeint_data() => __pbn__int_data != null;
         public void Resetint_data() => __pbn__int_data = null;
@@ -449,8 +450,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public byte[] popup_data
         {
-            get { return __pbn__popup_data; }
-            set { __pbn__popup_data = value; }
+            get => __pbn__popup_data;
+            set => __pbn__popup_data = value;
         }
         public bool ShouldSerializepopup_data() => __pbn__popup_data != null;
         public void Resetpopup_data() => __pbn__popup_data = null;
@@ -460,8 +461,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string loc_token_header
         {
-            get { return __pbn__loc_token_header ?? ""; }
-            set { __pbn__loc_token_header = value; }
+            get => __pbn__loc_token_header ?? "";
+            set => __pbn__loc_token_header = value;
         }
         public bool ShouldSerializeloc_token_header() => __pbn__loc_token_header != null;
         public void Resetloc_token_header() => __pbn__loc_token_header = null;
@@ -471,8 +472,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string loc_token_msg
         {
-            get { return __pbn__loc_token_msg ?? ""; }
-            set { __pbn__loc_token_msg = value; }
+            get => __pbn__loc_token_msg ?? "";
+            set => __pbn__loc_token_msg = value;
         }
         public bool ShouldSerializeloc_token_msg() => __pbn__loc_token_msg != null;
         public void Resetloc_token_msg() => __pbn__loc_token_msg = null;
@@ -488,8 +489,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string debug_text
         {
-            get { return __pbn__debug_text ?? ""; }
-            set { __pbn__debug_text = value; }
+            get => __pbn__debug_text ?? "";
+            set => __pbn__debug_text = value;
         }
         public bool ShouldSerializedebug_text() => __pbn__debug_text != null;
         public void Resetdebug_text() => __pbn__debug_text = null;
@@ -582,8 +583,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint num_positive_reports_remaining
         {
-            get { return __pbn__num_positive_reports_remaining.GetValueOrDefault(); }
-            set { __pbn__num_positive_reports_remaining = value; }
+            get => __pbn__num_positive_reports_remaining.GetValueOrDefault();
+            set => __pbn__num_positive_reports_remaining = value;
         }
         public bool ShouldSerializenum_positive_reports_remaining() => __pbn__num_positive_reports_remaining != null;
         public void Resetnum_positive_reports_remaining() => __pbn__num_positive_reports_remaining = null;
@@ -592,8 +593,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint num_negative_reports_remaining
         {
-            get { return __pbn__num_negative_reports_remaining.GetValueOrDefault(); }
-            set { __pbn__num_negative_reports_remaining = value; }
+            get => __pbn__num_negative_reports_remaining.GetValueOrDefault();
+            set => __pbn__num_negative_reports_remaining = value;
         }
         public bool ShouldSerializenum_negative_reports_remaining() => __pbn__num_negative_reports_remaining != null;
         public void Resetnum_negative_reports_remaining() => __pbn__num_negative_reports_remaining = null;
@@ -602,8 +603,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint num_positive_reports_total
         {
-            get { return __pbn__num_positive_reports_total.GetValueOrDefault(); }
-            set { __pbn__num_positive_reports_total = value; }
+            get => __pbn__num_positive_reports_total.GetValueOrDefault();
+            set => __pbn__num_positive_reports_total = value;
         }
         public bool ShouldSerializenum_positive_reports_total() => __pbn__num_positive_reports_total != null;
         public void Resetnum_positive_reports_total() => __pbn__num_positive_reports_total = null;
@@ -612,8 +613,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint num_negative_reports_total
         {
-            get { return __pbn__num_negative_reports_total.GetValueOrDefault(); }
-            set { __pbn__num_negative_reports_total = value; }
+            get => __pbn__num_negative_reports_total.GetValueOrDefault();
+            set => __pbn__num_negative_reports_total = value;
         }
         public bool ShouldSerializenum_negative_reports_total() => __pbn__num_negative_reports_total != null;
         public void Resetnum_negative_reports_total() => __pbn__num_negative_reports_total = null;
@@ -631,8 +632,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint target_account_id
         {
-            get { return __pbn__target_account_id.GetValueOrDefault(); }
-            set { __pbn__target_account_id = value; }
+            get => __pbn__target_account_id.GetValueOrDefault();
+            set => __pbn__target_account_id = value;
         }
         public bool ShouldSerializetarget_account_id() => __pbn__target_account_id != null;
         public void Resettarget_account_id() => __pbn__target_account_id = null;
@@ -641,8 +642,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint report_flags
         {
-            get { return __pbn__report_flags.GetValueOrDefault(); }
-            set { __pbn__report_flags = value; }
+            get => __pbn__report_flags.GetValueOrDefault();
+            set => __pbn__report_flags = value;
         }
         public bool ShouldSerializereport_flags() => __pbn__report_flags != null;
         public void Resetreport_flags() => __pbn__report_flags = null;
@@ -651,8 +652,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public ulong lobby_id
         {
-            get { return __pbn__lobby_id.GetValueOrDefault(); }
-            set { __pbn__lobby_id = value; }
+            get => __pbn__lobby_id.GetValueOrDefault();
+            set => __pbn__lobby_id = value;
         }
         public bool ShouldSerializelobby_id() => __pbn__lobby_id != null;
         public void Resetlobby_id() => __pbn__lobby_id = null;
@@ -662,8 +663,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string comment
         {
-            get { return __pbn__comment ?? ""; }
-            set { __pbn__comment = value; }
+            get => __pbn__comment ?? "";
+            set => __pbn__comment = value;
         }
         public bool ShouldSerializecomment() => __pbn__comment != null;
         public void Resetcomment() => __pbn__comment = null;
@@ -681,8 +682,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint target_account_id
         {
-            get { return __pbn__target_account_id.GetValueOrDefault(); }
-            set { __pbn__target_account_id = value; }
+            get => __pbn__target_account_id.GetValueOrDefault();
+            set => __pbn__target_account_id = value;
         }
         public bool ShouldSerializetarget_account_id() => __pbn__target_account_id != null;
         public void Resettarget_account_id() => __pbn__target_account_id = null;
@@ -691,8 +692,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint report_flags
         {
-            get { return __pbn__report_flags.GetValueOrDefault(); }
-            set { __pbn__report_flags = value; }
+            get => __pbn__report_flags.GetValueOrDefault();
+            set => __pbn__report_flags = value;
         }
         public bool ShouldSerializereport_flags() => __pbn__report_flags != null;
         public void Resetreport_flags() => __pbn__report_flags = null;
@@ -701,8 +702,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint result
         {
-            get { return __pbn__result.GetValueOrDefault(); }
-            set { __pbn__result = value; }
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -712,8 +713,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string debug_message
         {
-            get { return __pbn__debug_message ?? ""; }
-            set { __pbn__debug_message = value; }
+            get => __pbn__debug_message ?? "";
+            set => __pbn__debug_message = value;
         }
         public bool ShouldSerializedebug_message() => __pbn__debug_message != null;
         public void Resetdebug_message() => __pbn__debug_message = null;
@@ -731,8 +732,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint target_account_id
         {
-            get { return __pbn__target_account_id.GetValueOrDefault(); }
-            set { __pbn__target_account_id = value; }
+            get => __pbn__target_account_id.GetValueOrDefault();
+            set => __pbn__target_account_id = value;
         }
         public bool ShouldSerializetarget_account_id() => __pbn__target_account_id != null;
         public void Resettarget_account_id() => __pbn__target_account_id = null;
@@ -741,8 +742,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public ulong lobby_id
         {
-            get { return __pbn__lobby_id.GetValueOrDefault(); }
-            set { __pbn__lobby_id = value; }
+            get => __pbn__lobby_id.GetValueOrDefault();
+            set => __pbn__lobby_id = value;
         }
         public bool ShouldSerializelobby_id() => __pbn__lobby_id != null;
         public void Resetlobby_id() => __pbn__lobby_id = null;
@@ -760,8 +761,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint target_account_id
         {
-            get { return __pbn__target_account_id.GetValueOrDefault(); }
-            set { __pbn__target_account_id = value; }
+            get => __pbn__target_account_id.GetValueOrDefault();
+            set => __pbn__target_account_id = value;
         }
         public bool ShouldSerializetarget_account_id() => __pbn__target_account_id != null;
         public void Resettarget_account_id() => __pbn__target_account_id = null;
@@ -770,8 +771,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint result
         {
-            get { return __pbn__result.GetValueOrDefault(); }
-            set { __pbn__result = value; }
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -781,8 +782,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string debug_message
         {
-            get { return __pbn__debug_message ?? ""; }
-            set { __pbn__debug_message = value; }
+            get => __pbn__debug_message ?? "";
+            set => __pbn__debug_message = value;
         }
         public bool ShouldSerializedebug_message() => __pbn__debug_message != null;
         public void Resetdebug_message() => __pbn__debug_message = null;
@@ -800,8 +801,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint target_account_id
         {
-            get { return __pbn__target_account_id.GetValueOrDefault(); }
-            set { __pbn__target_account_id = value; }
+            get => __pbn__target_account_id.GetValueOrDefault();
+            set => __pbn__target_account_id = value;
         }
         public bool ShouldSerializetarget_account_id() => __pbn__target_account_id != null;
         public void Resettarget_account_id() => __pbn__target_account_id = null;
@@ -819,8 +820,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint target_account_id
         {
-            get { return __pbn__target_account_id.GetValueOrDefault(); }
-            set { __pbn__target_account_id = value; }
+            get => __pbn__target_account_id.GetValueOrDefault();
+            set => __pbn__target_account_id = value;
         }
         public bool ShouldSerializetarget_account_id() => __pbn__target_account_id != null;
         public void Resettarget_account_id() => __pbn__target_account_id = null;
@@ -829,8 +830,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint leadership_count
         {
-            get { return __pbn__leadership_count.GetValueOrDefault(); }
-            set { __pbn__leadership_count = value; }
+            get => __pbn__leadership_count.GetValueOrDefault();
+            set => __pbn__leadership_count = value;
         }
         public bool ShouldSerializeleadership_count() => __pbn__leadership_count != null;
         public void Resetleadership_count() => __pbn__leadership_count = null;
@@ -839,8 +840,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint teaching_count
         {
-            get { return __pbn__teaching_count.GetValueOrDefault(); }
-            set { __pbn__teaching_count = value; }
+            get => __pbn__teaching_count.GetValueOrDefault();
+            set => __pbn__teaching_count = value;
         }
         public bool ShouldSerializeteaching_count() => __pbn__teaching_count != null;
         public void Resetteaching_count() => __pbn__teaching_count = null;
@@ -849,8 +850,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint friendly_count
         {
-            get { return __pbn__friendly_count.GetValueOrDefault(); }
-            set { __pbn__friendly_count = value; }
+            get => __pbn__friendly_count.GetValueOrDefault();
+            set => __pbn__friendly_count = value;
         }
         public bool ShouldSerializefriendly_count() => __pbn__friendly_count != null;
         public void Resetfriendly_count() => __pbn__friendly_count = null;
@@ -859,8 +860,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint forgiving_count
         {
-            get { return __pbn__forgiving_count.GetValueOrDefault(); }
-            set { __pbn__forgiving_count = value; }
+            get => __pbn__forgiving_count.GetValueOrDefault();
+            set => __pbn__forgiving_count = value;
         }
         public bool ShouldSerializeforgiving_count() => __pbn__forgiving_count != null;
         public void Resetforgiving_count() => __pbn__forgiving_count = null;
@@ -878,8 +879,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint target_account_id
         {
-            get { return __pbn__target_account_id.GetValueOrDefault(); }
-            set { __pbn__target_account_id = value; }
+            get => __pbn__target_account_id.GetValueOrDefault();
+            set => __pbn__target_account_id = value;
         }
         public bool ShouldSerializetarget_account_id() => __pbn__target_account_id != null;
         public void Resettarget_account_id() => __pbn__target_account_id = null;
@@ -897,8 +898,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint target_account_id
         {
-            get { return __pbn__target_account_id.GetValueOrDefault(); }
-            set { __pbn__target_account_id = value; }
+            get => __pbn__target_account_id.GetValueOrDefault();
+            set => __pbn__target_account_id = value;
         }
         public bool ShouldSerializetarget_account_id() => __pbn__target_account_id != null;
         public void Resettarget_account_id() => __pbn__target_account_id = null;
@@ -907,8 +908,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint eresult
         {
-            get { return __pbn__eresult.GetValueOrDefault(); }
-            set { __pbn__eresult = value; }
+            get => __pbn__eresult.GetValueOrDefault();
+            set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
         public void Reseteresult() => __pbn__eresult = null;
@@ -926,8 +927,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint voter_account_id
         {
-            get { return __pbn__voter_account_id.GetValueOrDefault(); }
-            set { __pbn__voter_account_id = value; }
+            get => __pbn__voter_account_id.GetValueOrDefault();
+            set => __pbn__voter_account_id = value;
         }
         public bool ShouldSerializevoter_account_id() => __pbn__voter_account_id != null;
         public void Resetvoter_account_id() => __pbn__voter_account_id = null;
@@ -936,8 +937,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint recipient_account_id
         {
-            get { return __pbn__recipient_account_id.GetValueOrDefault(); }
-            set { __pbn__recipient_account_id = value; }
+            get => __pbn__recipient_account_id.GetValueOrDefault();
+            set => __pbn__recipient_account_id = value;
         }
         public bool ShouldSerializerecipient_account_id() => __pbn__recipient_account_id != null;
         public void Resetrecipient_account_id() => __pbn__recipient_account_id = null;
@@ -946,8 +947,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint num_votes
         {
-            get { return __pbn__num_votes.GetValueOrDefault(); }
-            set { __pbn__num_votes = value; }
+            get => __pbn__num_votes.GetValueOrDefault();
+            set => __pbn__num_votes = value;
         }
         public bool ShouldSerializenum_votes() => __pbn__num_votes != null;
         public void Resetnum_votes() => __pbn__num_votes = null;
@@ -965,8 +966,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -988,8 +989,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(MatchType.MATCH_TYPE_CASUAL)]
         public MatchType match_type
         {
-            get { return __pbn__match_type ?? MatchType.MATCH_TYPE_CASUAL; }
-            set { __pbn__match_type = value; }
+            get => __pbn__match_type ?? MatchType.MATCH_TYPE_CASUAL;
+            set => __pbn__match_type = value;
         }
         public bool ShouldSerializematch_type() => __pbn__match_type != null;
         public void Resetmatch_type() => __pbn__match_type = null;
@@ -1007,8 +1008,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint server_region
         {
-            get { return __pbn__server_region.GetValueOrDefault(); }
-            set { __pbn__server_region = value; }
+            get => __pbn__server_region.GetValueOrDefault();
+            set => __pbn__server_region = value;
         }
         public bool ShouldSerializeserver_region() => __pbn__server_region != null;
         public void Resetserver_region() => __pbn__server_region = null;
@@ -1026,8 +1027,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steam_id
         {
-            get { return __pbn__steam_id.GetValueOrDefault(); }
-            set { __pbn__steam_id = value; }
+            get => __pbn__steam_id.GetValueOrDefault();
+            set => __pbn__steam_id = value;
         }
         public bool ShouldSerializesteam_id() => __pbn__steam_id != null;
         public void Resetsteam_id() => __pbn__steam_id = null;
@@ -1048,8 +1049,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -1067,8 +1068,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint result
         {
-            get { return __pbn__result.GetValueOrDefault(); }
-            set { __pbn__result = value; }
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -1081,8 +1082,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(DOTAMatchVote.DOTAMatchVote_INVALID)]
         public DOTAMatchVote vote
         {
-            get { return __pbn__vote ?? DOTAMatchVote.DOTAMatchVote_INVALID; }
-            set { __pbn__vote = value; }
+            get => __pbn__vote ?? DOTAMatchVote.DOTAMatchVote_INVALID;
+            set => __pbn__vote = value;
         }
         public bool ShouldSerializevote() => __pbn__vote != null;
         public void Resetvote() => __pbn__vote = null;
@@ -1124,8 +1125,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint result
         {
-            get { return __pbn__result.GetValueOrDefault(); }
-            set { __pbn__result = value; }
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -1134,8 +1135,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -1154,8 +1155,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint league_id
             {
-                get { return __pbn__league_id.GetValueOrDefault(); }
-                set { __pbn__league_id = value; }
+                get => __pbn__league_id.GetValueOrDefault();
+                set => __pbn__league_id = value;
             }
             public bool ShouldSerializeleague_id() => __pbn__league_id != null;
             public void Resetleague_id() => __pbn__league_id = null;
@@ -1164,8 +1165,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint item_def
             {
-                get { return __pbn__item_def.GetValueOrDefault(); }
-                set { __pbn__item_def = value; }
+                get => __pbn__item_def.GetValueOrDefault();
+                set => __pbn__item_def = value;
             }
             public bool ShouldSerializeitem_def() => __pbn__item_def != null;
             public void Resetitem_def() => __pbn__item_def = null;
@@ -1185,8 +1186,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -1225,8 +1226,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint store_item_hash
         {
-            get { return __pbn__store_item_hash.GetValueOrDefault(); }
-            set { __pbn__store_item_hash = value; }
+            get => __pbn__store_item_hash.GetValueOrDefault();
+            set => __pbn__store_item_hash = value;
         }
         public bool ShouldSerializestore_item_hash() => __pbn__store_item_hash != null;
         public void Resetstore_item_hash() => __pbn__store_item_hash = null;
@@ -1235,8 +1236,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint timeplayedconsecutively
         {
-            get { return __pbn__timeplayedconsecutively.GetValueOrDefault(); }
-            set { __pbn__timeplayedconsecutively = value; }
+            get => __pbn__timeplayedconsecutively.GetValueOrDefault();
+            set => __pbn__timeplayedconsecutively = value;
         }
         public bool ShouldSerializetimeplayedconsecutively() => __pbn__timeplayedconsecutively != null;
         public void Resettimeplayedconsecutively() => __pbn__timeplayedconsecutively = null;
@@ -1245,8 +1246,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public bool allow_3rd_party_match_history
         {
-            get { return __pbn__allow_3rd_party_match_history.GetValueOrDefault(); }
-            set { __pbn__allow_3rd_party_match_history = value; }
+            get => __pbn__allow_3rd_party_match_history.GetValueOrDefault();
+            set => __pbn__allow_3rd_party_match_history = value;
         }
         public bool ShouldSerializeallow_3rd_party_match_history() => __pbn__allow_3rd_party_match_history != null;
         public void Resetallow_3rd_party_match_history() => __pbn__allow_3rd_party_match_history = null;
@@ -1256,8 +1257,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(PartnerAccountType.PARTNER_NONE)]
         public PartnerAccountType partner_account_type
         {
-            get { return __pbn__partner_account_type ?? PartnerAccountType.PARTNER_NONE; }
-            set { __pbn__partner_account_type = value; }
+            get => __pbn__partner_account_type ?? PartnerAccountType.PARTNER_NONE;
+            set => __pbn__partner_account_type = value;
         }
         public bool ShouldSerializepartner_account_type() => __pbn__partner_account_type != null;
         public void Resetpartner_account_type() => __pbn__partner_account_type = null;
@@ -1266,8 +1267,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public uint partner_account_state
         {
-            get { return __pbn__partner_account_state.GetValueOrDefault(); }
-            set { __pbn__partner_account_state = value; }
+            get => __pbn__partner_account_state.GetValueOrDefault();
+            set => __pbn__partner_account_state = value;
         }
         public bool ShouldSerializepartner_account_state() => __pbn__partner_account_state != null;
         public void Resetpartner_account_state() => __pbn__partner_account_state = null;
@@ -1276,8 +1277,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(12)]
         public uint last_time_played
         {
-            get { return __pbn__last_time_played.GetValueOrDefault(); }
-            set { __pbn__last_time_played = value; }
+            get => __pbn__last_time_played.GetValueOrDefault();
+            set => __pbn__last_time_played = value;
         }
         public bool ShouldSerializelast_time_played() => __pbn__last_time_played != null;
         public void Resetlast_time_played() => __pbn__last_time_played = null;
@@ -1286,8 +1287,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(13)]
         public uint last_ip_address
         {
-            get { return __pbn__last_ip_address.GetValueOrDefault(); }
-            set { __pbn__last_ip_address = value; }
+            get => __pbn__last_ip_address.GetValueOrDefault();
+            set => __pbn__last_ip_address = value;
         }
         public bool ShouldSerializelast_ip_address() => __pbn__last_ip_address != null;
         public void Resetlast_ip_address() => __pbn__last_ip_address = null;
@@ -1296,8 +1297,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public uint shutdownlawterminateminutes
         {
-            get { return __pbn__shutdownlawterminateminutes.GetValueOrDefault(); }
-            set { __pbn__shutdownlawterminateminutes = value; }
+            get => __pbn__shutdownlawterminateminutes.GetValueOrDefault();
+            set => __pbn__shutdownlawterminateminutes = value;
         }
         public bool ShouldSerializeshutdownlawterminateminutes() => __pbn__shutdownlawterminateminutes != null;
         public void Resetshutdownlawterminateminutes() => __pbn__shutdownlawterminateminutes = null;
@@ -1306,8 +1307,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(16)]
         public uint banned_word_list_version
         {
-            get { return __pbn__banned_word_list_version.GetValueOrDefault(); }
-            set { __pbn__banned_word_list_version = value; }
+            get => __pbn__banned_word_list_version.GetValueOrDefault();
+            set => __pbn__banned_word_list_version = value;
         }
         public bool ShouldSerializebanned_word_list_version() => __pbn__banned_word_list_version != null;
         public void Resetbanned_word_list_version() => __pbn__banned_word_list_version = null;
@@ -1316,8 +1317,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(17)]
         public bool profile_private
         {
-            get { return __pbn__profile_private.GetValueOrDefault(); }
-            set { __pbn__profile_private = value; }
+            get => __pbn__profile_private.GetValueOrDefault();
+            set => __pbn__profile_private = value;
         }
         public bool ShouldSerializeprofile_private() => __pbn__profile_private != null;
         public void Resetprofile_private() => __pbn__profile_private = null;
@@ -1326,8 +1327,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(18)]
         public uint currency
         {
-            get { return __pbn__currency.GetValueOrDefault(); }
-            set { __pbn__currency = value; }
+            get => __pbn__currency.GetValueOrDefault();
+            set => __pbn__currency = value;
         }
         public bool ShouldSerializecurrency() => __pbn__currency != null;
         public void Resetcurrency() => __pbn__currency = null;
@@ -1336,8 +1337,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(19)]
         public uint pwrd_cyber_cafe_id
         {
-            get { return __pbn__pwrd_cyber_cafe_id.GetValueOrDefault(); }
-            set { __pbn__pwrd_cyber_cafe_id = value; }
+            get => __pbn__pwrd_cyber_cafe_id.GetValueOrDefault();
+            set => __pbn__pwrd_cyber_cafe_id = value;
         }
         public bool ShouldSerializepwrd_cyber_cafe_id() => __pbn__pwrd_cyber_cafe_id != null;
         public void Resetpwrd_cyber_cafe_id() => __pbn__pwrd_cyber_cafe_id = null;
@@ -1346,8 +1347,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(20)]
         public bool should_request_player_origin
         {
-            get { return __pbn__should_request_player_origin.GetValueOrDefault(); }
-            set { __pbn__should_request_player_origin = value; }
+            get => __pbn__should_request_player_origin.GetValueOrDefault();
+            set => __pbn__should_request_player_origin = value;
         }
         public bool ShouldSerializeshould_request_player_origin() => __pbn__should_request_player_origin != null;
         public void Resetshould_request_player_origin() => __pbn__should_request_player_origin = null;
@@ -1356,8 +1357,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(22)]
         public uint gc_socache_file_version
         {
-            get { return __pbn__gc_socache_file_version.GetValueOrDefault(); }
-            set { __pbn__gc_socache_file_version = value; }
+            get => __pbn__gc_socache_file_version.GetValueOrDefault();
+            set => __pbn__gc_socache_file_version = value;
         }
         public bool ShouldSerializegc_socache_file_version() => __pbn__gc_socache_file_version != null;
         public void Resetgc_socache_file_version() => __pbn__gc_socache_file_version = null;
@@ -1366,8 +1367,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(24)]
         public bool is_perfect_world_test_account
         {
-            get { return __pbn__is_perfect_world_test_account.GetValueOrDefault(); }
-            set { __pbn__is_perfect_world_test_account = value; }
+            get => __pbn__is_perfect_world_test_account.GetValueOrDefault();
+            set => __pbn__is_perfect_world_test_account = value;
         }
         public bool ShouldSerializeis_perfect_world_test_account() => __pbn__is_perfect_world_test_account != null;
         public void Resetis_perfect_world_test_account() => __pbn__is_perfect_world_test_account = null;
@@ -1379,8 +1380,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(27)]
         public ulong minimum_recent_item_id
         {
-            get { return __pbn__minimum_recent_item_id.GetValueOrDefault(); }
-            set { __pbn__minimum_recent_item_id = value; }
+            get => __pbn__minimum_recent_item_id.GetValueOrDefault();
+            set => __pbn__minimum_recent_item_id = value;
         }
         public bool ShouldSerializeminimum_recent_item_id() => __pbn__minimum_recent_item_id != null;
         public void Resetminimum_recent_item_id() => __pbn__minimum_recent_item_id = null;
@@ -1390,8 +1391,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
         public EEvent active_event
         {
-            get { return __pbn__active_event ?? EEvent.EVENT_ID_NONE; }
-            set { __pbn__active_event = value; }
+            get => __pbn__active_event ?? EEvent.EVENT_ID_NONE;
+            set => __pbn__active_event = value;
         }
         public bool ShouldSerializeactive_event() => __pbn__active_event != null;
         public void Resetactive_event() => __pbn__active_event = null;
@@ -1400,8 +1401,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(29)]
         public uint additional_user_message
         {
-            get { return __pbn__additional_user_message.GetValueOrDefault(); }
-            set { __pbn__additional_user_message = value; }
+            get => __pbn__additional_user_message.GetValueOrDefault();
+            set => __pbn__additional_user_message = value;
         }
         public bool ShouldSerializeadditional_user_message() => __pbn__additional_user_message != null;
         public void Resetadditional_user_message() => __pbn__additional_user_message = null;
@@ -1410,8 +1411,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(30)]
         public uint custom_game_whitelist_version
         {
-            get { return __pbn__custom_game_whitelist_version.GetValueOrDefault(); }
-            set { __pbn__custom_game_whitelist_version = value; }
+            get => __pbn__custom_game_whitelist_version.GetValueOrDefault();
+            set => __pbn__custom_game_whitelist_version = value;
         }
         public bool ShouldSerializecustom_game_whitelist_version() => __pbn__custom_game_whitelist_version != null;
         public void Resetcustom_game_whitelist_version() => __pbn__custom_game_whitelist_version = null;
@@ -1424,8 +1425,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(-1)]
         public int remaining_playtime
         {
-            get { return __pbn__remaining_playtime ?? -1; }
-            set { __pbn__remaining_playtime = value; }
+            get => __pbn__remaining_playtime ?? -1;
+            set => __pbn__remaining_playtime = value;
         }
         public bool ShouldSerializeremaining_playtime() => __pbn__remaining_playtime != null;
         public void Resetremaining_playtime() => __pbn__remaining_playtime = null;
@@ -1434,8 +1435,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(33)]
         public bool disable_guild_persona_info
         {
-            get { return __pbn__disable_guild_persona_info.GetValueOrDefault(); }
-            set { __pbn__disable_guild_persona_info = value; }
+            get => __pbn__disable_guild_persona_info.GetValueOrDefault();
+            set => __pbn__disable_guild_persona_info = value;
         }
         public bool ShouldSerializedisable_guild_persona_info() => __pbn__disable_guild_persona_info != null;
         public void Resetdisable_guild_persona_info() => __pbn__disable_guild_persona_info = null;
@@ -1451,8 +1452,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint id
             {
-                get { return __pbn__id.GetValueOrDefault(); }
-                set { __pbn__id = value; }
+                get => __pbn__id.GetValueOrDefault();
+                set => __pbn__id = value;
             }
             public bool ShouldSerializeid() => __pbn__id != null;
             public void Resetid() => __pbn__id = null;
@@ -1461,8 +1462,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public byte[] contents
             {
-                get { return __pbn__contents; }
-                set { __pbn__contents = value; }
+                get => __pbn__contents;
+                set => __pbn__contents = value;
             }
             public bool ShouldSerializecontents() => __pbn__contents != null;
             public void Resetcontents() => __pbn__contents = null;
@@ -1482,8 +1483,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -1492,8 +1493,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -1511,8 +1512,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -1530,8 +1531,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -1549,8 +1550,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -1574,8 +1575,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -1594,8 +1595,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -1604,8 +1605,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint vote
             {
-                get { return __pbn__vote.GetValueOrDefault(); }
-                set { __pbn__vote = value; }
+                get => __pbn__vote.GetValueOrDefault();
+                set => __pbn__vote = value;
             }
             public bool ShouldSerializevote() => __pbn__vote != null;
             public void Resetvote() => __pbn__vote = null;
@@ -1625,8 +1626,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -1636,8 +1637,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(DOTAMatchVote.DOTAMatchVote_INVALID)]
         public DOTAMatchVote vote
         {
-            get { return __pbn__vote ?? DOTAMatchVote.DOTAMatchVote_INVALID; }
-            set { __pbn__vote = value; }
+            get => __pbn__vote ?? DOTAMatchVote.DOTAMatchVote_INVALID;
+            set => __pbn__vote = value;
         }
         public bool ShouldSerializevote() => __pbn__vote != null;
         public void Resetvote() => __pbn__vote = null;
@@ -1655,8 +1656,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -1665,8 +1666,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint incremental
         {
-            get { return __pbn__incremental.GetValueOrDefault(); }
-            set { __pbn__incremental = value; }
+            get => __pbn__incremental.GetValueOrDefault();
+            set => __pbn__incremental = value;
         }
         public bool ShouldSerializeincremental() => __pbn__incremental != null;
         public void Resetincremental() => __pbn__incremental = null;
@@ -1685,8 +1686,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(2)]
         public uint eresult
         {
-            get { return __pbn__eresult ?? 2; }
-            set { __pbn__eresult = value; }
+            get => __pbn__eresult ?? 2;
+            set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
         public void Reseteresult() => __pbn__eresult = null;
@@ -1696,8 +1697,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(DOTAMatchVote.DOTAMatchVote_INVALID)]
         public DOTAMatchVote vote
         {
-            get { return __pbn__vote ?? DOTAMatchVote.DOTAMatchVote_INVALID; }
-            set { __pbn__vote = value; }
+            get => __pbn__vote ?? DOTAMatchVote.DOTAMatchVote_INVALID;
+            set => __pbn__vote = value;
         }
         public bool ShouldSerializevote() => __pbn__vote != null;
         public void Resetvote() => __pbn__vote = null;
@@ -1706,8 +1707,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint positive_votes
         {
-            get { return __pbn__positive_votes.GetValueOrDefault(); }
-            set { __pbn__positive_votes = value; }
+            get => __pbn__positive_votes.GetValueOrDefault();
+            set => __pbn__positive_votes = value;
         }
         public bool ShouldSerializepositive_votes() => __pbn__positive_votes != null;
         public void Resetpositive_votes() => __pbn__positive_votes = null;
@@ -1716,8 +1717,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint negative_votes
         {
-            get { return __pbn__negative_votes.GetValueOrDefault(); }
-            set { __pbn__negative_votes = value; }
+            get => __pbn__negative_votes.GetValueOrDefault();
+            set => __pbn__negative_votes = value;
         }
         public bool ShouldSerializenegative_votes() => __pbn__negative_votes != null;
         public void Resetnegative_votes() => __pbn__negative_votes = null;
@@ -1735,8 +1736,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint week
         {
-            get { return __pbn__week.GetValueOrDefault(); }
-            set { __pbn__week = value; }
+            get => __pbn__week.GetValueOrDefault();
+            set => __pbn__week = value;
         }
         public bool ShouldSerializeweek() => __pbn__week != null;
         public void Resetweek() => __pbn__week = null;
@@ -1758,8 +1759,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -1768,8 +1769,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint hero_id
             {
-                get { return __pbn__hero_id.GetValueOrDefault(); }
-                set { __pbn__hero_id = value; }
+                get => __pbn__hero_id.GetValueOrDefault();
+                set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
@@ -1778,8 +1779,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public float average_scaled_metric
             {
-                get { return __pbn__average_scaled_metric.GetValueOrDefault(); }
-                set { __pbn__average_scaled_metric = value; }
+                get => __pbn__average_scaled_metric.GetValueOrDefault();
+                set => __pbn__average_scaled_metric = value;
             }
             public bool ShouldSerializeaverage_scaled_metric() => __pbn__average_scaled_metric != null;
             public void Resetaverage_scaled_metric() => __pbn__average_scaled_metric = null;
@@ -1788,8 +1789,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint num_games
             {
-                get { return __pbn__num_games.GetValueOrDefault(); }
-                set { __pbn__num_games = value; }
+                get => __pbn__num_games.GetValueOrDefault();
+                set => __pbn__num_games = value;
             }
             public bool ShouldSerializenum_games() => __pbn__num_games != null;
             public void Resetnum_games() => __pbn__num_games = null;
@@ -1807,8 +1808,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -1817,8 +1818,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint hero_id
             {
-                get { return __pbn__hero_id.GetValueOrDefault(); }
-                set { __pbn__hero_id = value; }
+                get => __pbn__hero_id.GetValueOrDefault();
+                set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
@@ -1827,8 +1828,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint gold_per_min
             {
-                get { return __pbn__gold_per_min.GetValueOrDefault(); }
-                set { __pbn__gold_per_min = value; }
+                get => __pbn__gold_per_min.GetValueOrDefault();
+                set => __pbn__gold_per_min = value;
             }
             public bool ShouldSerializegold_per_min() => __pbn__gold_per_min != null;
             public void Resetgold_per_min() => __pbn__gold_per_min = null;
@@ -1837,8 +1838,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public ulong match_id
             {
-                get { return __pbn__match_id.GetValueOrDefault(); }
-                set { __pbn__match_id = value; }
+                get => __pbn__match_id.GetValueOrDefault();
+                set => __pbn__match_id = value;
             }
             public bool ShouldSerializematch_id() => __pbn__match_id != null;
             public void Resetmatch_id() => __pbn__match_id = null;
@@ -1858,8 +1859,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint week
         {
-            get { return __pbn__week.GetValueOrDefault(); }
-            set { __pbn__week = value; }
+            get => __pbn__week.GetValueOrDefault();
+            set => __pbn__week = value;
         }
         public bool ShouldSerializeweek() => __pbn__week != null;
         public void Resetweek() => __pbn__week = null;
@@ -1881,8 +1882,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(2)]
         public uint eresult
         {
-            get { return __pbn__eresult ?? 2; }
-            set { __pbn__eresult = value; }
+            get => __pbn__eresult ?? 2;
+            set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
         public void Reseteresult() => __pbn__eresult = null;
@@ -1901,8 +1902,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(-1)]
         public int round
         {
-            get { return __pbn__round ?? -1; }
-            set { __pbn__round = value; }
+            get => __pbn__round ?? -1;
+            set => __pbn__round = value;
         }
         public bool ShouldSerializeround() => __pbn__round != null;
         public void Resetround() => __pbn__round = null;
@@ -1920,8 +1921,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint score
         {
-            get { return __pbn__score.GetValueOrDefault(); }
-            set { __pbn__score = value; }
+            get => __pbn__score.GetValueOrDefault();
+            set => __pbn__score = value;
         }
         public bool ShouldSerializescore() => __pbn__score != null;
         public void Resetscore() => __pbn__score = null;
@@ -1933,8 +1934,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint eresult
         {
-            get { return __pbn__eresult.GetValueOrDefault(); }
-            set { __pbn__eresult = value; }
+            get => __pbn__eresult.GetValueOrDefault();
+            set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
         public void Reseteresult() => __pbn__eresult = null;
@@ -1943,8 +1944,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public int round
         {
-            get { return __pbn__round.GetValueOrDefault(); }
-            set { __pbn__round = value; }
+            get => __pbn__round.GetValueOrDefault();
+            set => __pbn__round = value;
         }
         public bool ShouldSerializeround() => __pbn__round != null;
         public void Resetround() => __pbn__round = null;
@@ -1962,8 +1963,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint version_seen
         {
-            get { return __pbn__version_seen.GetValueOrDefault(); }
-            set { __pbn__version_seen = value; }
+            get => __pbn__version_seen.GetValueOrDefault();
+            set => __pbn__version_seen = value;
         }
         public bool ShouldSerializeversion_seen() => __pbn__version_seen != null;
         public void Resetversion_seen() => __pbn__version_seen = null;
@@ -1991,8 +1992,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint promo_id
             {
-                get { return __pbn__promo_id.GetValueOrDefault(); }
-                set { __pbn__promo_id = value; }
+                get => __pbn__promo_id.GetValueOrDefault();
+                set => __pbn__promo_id = value;
             }
             public bool ShouldSerializepromo_id() => __pbn__promo_id != null;
             public void Resetpromo_id() => __pbn__promo_id = null;
@@ -2002,8 +2003,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string title
             {
-                get { return __pbn__title ?? ""; }
-                set { __pbn__title = value; }
+                get => __pbn__title ?? "";
+                set => __pbn__title = value;
             }
             public bool ShouldSerializetitle() => __pbn__title != null;
             public void Resettitle() => __pbn__title = null;
@@ -2013,8 +2014,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string url
             {
-                get { return __pbn__url ?? ""; }
-                set { __pbn__url = value; }
+                get => __pbn__url ?? "";
+                set => __pbn__url = value;
             }
             public bool ShouldSerializeurl() => __pbn__url != null;
             public void Reseturl() => __pbn__url = null;
@@ -2034,8 +2035,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint players_searching
         {
-            get { return __pbn__players_searching.GetValueOrDefault(); }
-            set { __pbn__players_searching = value; }
+            get => __pbn__players_searching.GetValueOrDefault();
+            set => __pbn__players_searching = value;
         }
         public bool ShouldSerializeplayers_searching() => __pbn__players_searching != null;
         public void Resetplayers_searching() => __pbn__players_searching = null;
@@ -2044,8 +2045,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
         public int auto_region_select_ping_penalty
         {
-            get { return __pbn__auto_region_select_ping_penalty.GetValueOrDefault(); }
-            set { __pbn__auto_region_select_ping_penalty = value; }
+            get => __pbn__auto_region_select_ping_penalty.GetValueOrDefault();
+            set => __pbn__auto_region_select_ping_penalty = value;
         }
         public bool ShouldSerializeauto_region_select_ping_penalty() => __pbn__auto_region_select_ping_penalty != null;
         public void Resetauto_region_select_ping_penalty() => __pbn__auto_region_select_ping_penalty = null;
@@ -2054,8 +2055,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4, DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
         public int auto_region_select_ping_penalty_custom
         {
-            get { return __pbn__auto_region_select_ping_penalty_custom.GetValueOrDefault(); }
-            set { __pbn__auto_region_select_ping_penalty_custom = value; }
+            get => __pbn__auto_region_select_ping_penalty_custom.GetValueOrDefault();
+            set => __pbn__auto_region_select_ping_penalty_custom = value;
         }
         public bool ShouldSerializeauto_region_select_ping_penalty_custom() => __pbn__auto_region_select_ping_penalty_custom != null;
         public void Resetauto_region_select_ping_penalty_custom() => __pbn__auto_region_select_ping_penalty_custom = null;
@@ -2065,8 +2066,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EMatchGroupServerStatus.k_EMatchGroupServerStatus_OK)]
         public EMatchGroupServerStatus status
         {
-            get { return __pbn__status ?? EMatchGroupServerStatus.k_EMatchGroupServerStatus_OK; }
-            set { __pbn__status = value; }
+            get => __pbn__status ?? EMatchGroupServerStatus.k_EMatchGroupServerStatus_OK;
+            set => __pbn__status = value;
         }
         public bool ShouldSerializestatus() => __pbn__status != null;
         public void Resetstatus() => __pbn__status = null;
@@ -2093,8 +2094,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint matchgroups_version
         {
-            get { return __pbn__matchgroups_version.GetValueOrDefault(); }
-            set { __pbn__matchgroups_version = value; }
+            get => __pbn__matchgroups_version.GetValueOrDefault();
+            set => __pbn__matchgroups_version = value;
         }
         public bool ShouldSerializematchgroups_version() => __pbn__matchgroups_version != null;
         public void Resetmatchgroups_version() => __pbn__matchgroups_version = null;
@@ -2142,8 +2143,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool allow_3rd_party_match_history
         {
-            get { return __pbn__allow_3rd_party_match_history.GetValueOrDefault(); }
-            set { __pbn__allow_3rd_party_match_history = value; }
+            get => __pbn__allow_3rd_party_match_history.GetValueOrDefault();
+            set => __pbn__allow_3rd_party_match_history = value;
         }
         public bool ShouldSerializeallow_3rd_party_match_history() => __pbn__allow_3rd_party_match_history != null;
         public void Resetallow_3rd_party_match_history() => __pbn__allow_3rd_party_match_history = null;
@@ -2162,8 +2163,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(2)]
         public uint eresult
         {
-            get { return __pbn__eresult ?? 2; }
-            set { __pbn__eresult = value; }
+            get => __pbn__eresult ?? 2;
+            set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
         public void Reseteresult() => __pbn__eresult = null;
@@ -2181,8 +2182,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint accountid
         {
-            get { return __pbn__accountid.GetValueOrDefault(); }
-            set { __pbn__accountid = value; }
+            get => __pbn__accountid.GetValueOrDefault();
+            set => __pbn__accountid = value;
         }
         public bool ShouldSerializeaccountid() => __pbn__accountid != null;
         public void Resetaccountid() => __pbn__accountid = null;
@@ -2191,8 +2192,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint account_flags
         {
-            get { return __pbn__account_flags.GetValueOrDefault(); }
-            set { __pbn__account_flags = value; }
+            get => __pbn__account_flags.GetValueOrDefault();
+            set => __pbn__account_flags = value;
         }
         public bool ShouldSerializeaccount_flags() => __pbn__account_flags != null;
         public void Resetaccount_flags() => __pbn__account_flags = null;
@@ -2210,8 +2211,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool profile_private
         {
-            get { return __pbn__profile_private.GetValueOrDefault(); }
-            set { __pbn__profile_private = value; }
+            get => __pbn__profile_private.GetValueOrDefault();
+            set => __pbn__profile_private = value;
         }
         public bool ShouldSerializeprofile_private() => __pbn__profile_private != null;
         public void Resetprofile_private() => __pbn__profile_private = null;
@@ -2229,8 +2230,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint eresult
         {
-            get { return __pbn__eresult.GetValueOrDefault(); }
-            set { __pbn__eresult = value; }
+            get => __pbn__eresult.GetValueOrDefault();
+            set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
         public void Reseteresult() => __pbn__eresult = null;
@@ -2248,8 +2249,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -2258,8 +2259,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint league_id
         {
-            get { return __pbn__league_id.GetValueOrDefault(); }
-            set { __pbn__league_id = value; }
+            get => __pbn__league_id.GetValueOrDefault();
+            set => __pbn__league_id = value;
         }
         public bool ShouldSerializeleague_id() => __pbn__league_id != null;
         public void Resetleague_id() => __pbn__league_id = null;
@@ -2286,8 +2287,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -2297,8 +2298,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(DOTA_WatchReplayType.DOTA_WATCH_REPLAY_NORMAL)]
         public DOTA_WatchReplayType watch_type
         {
-            get { return __pbn__watch_type ?? DOTA_WatchReplayType.DOTA_WATCH_REPLAY_NORMAL; }
-            set { __pbn__watch_type = value; }
+            get => __pbn__watch_type ?? DOTA_WatchReplayType.DOTA_WATCH_REPLAY_NORMAL;
+            set => __pbn__watch_type = value;
         }
         public bool ShouldSerializewatch_type() => __pbn__watch_type != null;
         public void Resetwatch_type() => __pbn__watch_type = null;
@@ -2316,8 +2317,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public int location_id
         {
-            get { return __pbn__location_id.GetValueOrDefault(); }
-            set { __pbn__location_id = value; }
+            get => __pbn__location_id.GetValueOrDefault();
+            set => __pbn__location_id = value;
         }
         public bool ShouldSerializelocation_id() => __pbn__location_id != null;
         public void Resetlocation_id() => __pbn__location_id = null;
@@ -2326,8 +2327,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public bool completed
         {
-            get { return __pbn__completed.GetValueOrDefault(); }
-            set { __pbn__completed = value; }
+            get => __pbn__completed.GetValueOrDefault();
+            set => __pbn__completed = value;
         }
         public bool ShouldSerializecompleted() => __pbn__completed != null;
         public void Resetcompleted() => __pbn__completed = null;
@@ -2346,8 +2347,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(2)]
         public uint eresult
         {
-            get { return __pbn__eresult ?? 2; }
-            set { __pbn__eresult = value; }
+            get => __pbn__eresult ?? 2;
+            set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
         public void Reseteresult() => __pbn__eresult = null;
@@ -2375,8 +2376,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(2)]
         public uint eresult
         {
-            get { return __pbn__eresult ?? 2; }
-            set { __pbn__eresult = value; }
+            get => __pbn__eresult ?? 2;
+            set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
         public void Reseteresult() => __pbn__eresult = null;
@@ -2394,8 +2395,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public int partner_type
         {
-            get { return __pbn__partner_type.GetValueOrDefault(); }
-            set { __pbn__partner_type = value; }
+            get => __pbn__partner_type.GetValueOrDefault();
+            set => __pbn__partner_type = value;
         }
         public bool ShouldSerializepartner_type() => __pbn__partner_type != null;
         public void Resetpartner_type() => __pbn__partner_type = null;
@@ -2447,8 +2448,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResult.SUCCESS)]
         public EResult result
         {
-            get { return __pbn__result ?? EResult.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EResult.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -2470,8 +2471,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -2480,8 +2481,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint status
             {
-                get { return __pbn__status.GetValueOrDefault(); }
-                set { __pbn__status = value; }
+                get => __pbn__status.GetValueOrDefault();
+                set => __pbn__status = value;
             }
             public bool ShouldSerializestatus() => __pbn__status != null;
             public void Resetstatus() => __pbn__status = null;
@@ -2490,8 +2491,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint levels_earned
             {
-                get { return __pbn__levels_earned.GetValueOrDefault(); }
-                set { __pbn__levels_earned = value; }
+                get => __pbn__levels_earned.GetValueOrDefault();
+                set => __pbn__levels_earned = value;
             }
             public bool ShouldSerializelevels_earned() => __pbn__levels_earned != null;
             public void Resetlevels_earned() => __pbn__levels_earned = null;
@@ -2500,8 +2501,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public bool bonus
             {
-                get { return __pbn__bonus.GetValueOrDefault(); }
-                set { __pbn__bonus = value; }
+                get => __pbn__bonus.GetValueOrDefault();
+                set => __pbn__bonus = value;
             }
             public bool ShouldSerializebonus() => __pbn__bonus != null;
             public void Resetbonus() => __pbn__bonus = null;
@@ -2528,8 +2529,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool accepted
         {
-            get { return __pbn__accepted.GetValueOrDefault(); }
-            set { __pbn__accepted = value; }
+            get => __pbn__accepted.GetValueOrDefault();
+            set => __pbn__accepted = value;
         }
         public bool ShouldSerializeaccepted() => __pbn__accepted != null;
         public void Resetaccepted() => __pbn__accepted = null;
@@ -2538,8 +2539,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -2557,8 +2558,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint league_id
         {
-            get { return __pbn__league_id.GetValueOrDefault(); }
-            set { __pbn__league_id = value; }
+            get => __pbn__league_id.GetValueOrDefault();
+            set => __pbn__league_id = value;
         }
         public bool ShouldSerializeleague_id() => __pbn__league_id != null;
         public void Resetleague_id() => __pbn__league_id = null;
@@ -2576,8 +2577,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint league_id
         {
-            get { return __pbn__league_id.GetValueOrDefault(); }
-            set { __pbn__league_id = value; }
+            get => __pbn__league_id.GetValueOrDefault();
+            set => __pbn__league_id = value;
         }
         public bool ShouldSerializeleague_id() => __pbn__league_id != null;
         public void Resetleague_id() => __pbn__league_id = null;
@@ -2586,8 +2587,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint prize_pool
         {
-            get { return __pbn__prize_pool.GetValueOrDefault(); }
-            set { __pbn__prize_pool = value; }
+            get => __pbn__prize_pool.GetValueOrDefault();
+            set => __pbn__prize_pool = value;
         }
         public bool ShouldSerializeprize_pool() => __pbn__prize_pool != null;
         public void Resetprize_pool() => __pbn__prize_pool = null;
@@ -2624,8 +2625,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint hero_id
             {
-                get { return __pbn__hero_id.GetValueOrDefault(); }
-                set { __pbn__hero_id = value; }
+                get => __pbn__hero_id.GetValueOrDefault();
+                set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
@@ -2634,8 +2635,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint wins
             {
-                get { return __pbn__wins.GetValueOrDefault(); }
-                set { __pbn__wins = value; }
+                get => __pbn__wins.GetValueOrDefault();
+                set => __pbn__wins = value;
             }
             public bool ShouldSerializewins() => __pbn__wins != null;
             public void Resetwins() => __pbn__wins = null;
@@ -2644,8 +2645,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint losses
             {
-                get { return __pbn__losses.GetValueOrDefault(); }
-                set { __pbn__losses = value; }
+                get => __pbn__losses.GetValueOrDefault();
+                set => __pbn__losses = value;
             }
             public bool ShouldSerializelosses() => __pbn__losses != null;
             public void Resetlosses() => __pbn__losses = null;
@@ -2654,8 +2655,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint win_streak
             {
-                get { return __pbn__win_streak.GetValueOrDefault(); }
-                set { __pbn__win_streak = value; }
+                get => __pbn__win_streak.GetValueOrDefault();
+                set => __pbn__win_streak = value;
             }
             public bool ShouldSerializewin_streak() => __pbn__win_streak != null;
             public void Resetwin_streak() => __pbn__win_streak = null;
@@ -2664,8 +2665,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint best_win_streak
             {
-                get { return __pbn__best_win_streak.GetValueOrDefault(); }
-                set { __pbn__best_win_streak = value; }
+                get => __pbn__best_win_streak.GetValueOrDefault();
+                set => __pbn__best_win_streak = value;
             }
             public bool ShouldSerializebest_win_streak() => __pbn__best_win_streak != null;
             public void Resetbest_win_streak() => __pbn__best_win_streak = null;
@@ -2674,8 +2675,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(6)]
             public float avg_kills
             {
-                get { return __pbn__avg_kills.GetValueOrDefault(); }
-                set { __pbn__avg_kills = value; }
+                get => __pbn__avg_kills.GetValueOrDefault();
+                set => __pbn__avg_kills = value;
             }
             public bool ShouldSerializeavg_kills() => __pbn__avg_kills != null;
             public void Resetavg_kills() => __pbn__avg_kills = null;
@@ -2684,8 +2685,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(7)]
             public float avg_deaths
             {
-                get { return __pbn__avg_deaths.GetValueOrDefault(); }
-                set { __pbn__avg_deaths = value; }
+                get => __pbn__avg_deaths.GetValueOrDefault();
+                set => __pbn__avg_deaths = value;
             }
             public bool ShouldSerializeavg_deaths() => __pbn__avg_deaths != null;
             public void Resetavg_deaths() => __pbn__avg_deaths = null;
@@ -2694,8 +2695,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(8)]
             public float avg_assists
             {
-                get { return __pbn__avg_assists.GetValueOrDefault(); }
-                set { __pbn__avg_assists = value; }
+                get => __pbn__avg_assists.GetValueOrDefault();
+                set => __pbn__avg_assists = value;
             }
             public bool ShouldSerializeavg_assists() => __pbn__avg_assists != null;
             public void Resetavg_assists() => __pbn__avg_assists = null;
@@ -2704,8 +2705,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(9)]
             public float avg_gpm
             {
-                get { return __pbn__avg_gpm.GetValueOrDefault(); }
-                set { __pbn__avg_gpm = value; }
+                get => __pbn__avg_gpm.GetValueOrDefault();
+                set => __pbn__avg_gpm = value;
             }
             public bool ShouldSerializeavg_gpm() => __pbn__avg_gpm != null;
             public void Resetavg_gpm() => __pbn__avg_gpm = null;
@@ -2714,8 +2715,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(10)]
             public float avg_xpm
             {
-                get { return __pbn__avg_xpm.GetValueOrDefault(); }
-                set { __pbn__avg_xpm = value; }
+                get => __pbn__avg_xpm.GetValueOrDefault();
+                set => __pbn__avg_xpm = value;
             }
             public bool ShouldSerializeavg_xpm() => __pbn__avg_xpm != null;
             public void Resetavg_xpm() => __pbn__avg_xpm = null;
@@ -2724,8 +2725,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(11)]
             public uint best_kills
             {
-                get { return __pbn__best_kills.GetValueOrDefault(); }
-                set { __pbn__best_kills = value; }
+                get => __pbn__best_kills.GetValueOrDefault();
+                set => __pbn__best_kills = value;
             }
             public bool ShouldSerializebest_kills() => __pbn__best_kills != null;
             public void Resetbest_kills() => __pbn__best_kills = null;
@@ -2734,8 +2735,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(12)]
             public uint best_assists
             {
-                get { return __pbn__best_assists.GetValueOrDefault(); }
-                set { __pbn__best_assists = value; }
+                get => __pbn__best_assists.GetValueOrDefault();
+                set => __pbn__best_assists = value;
             }
             public bool ShouldSerializebest_assists() => __pbn__best_assists != null;
             public void Resetbest_assists() => __pbn__best_assists = null;
@@ -2744,8 +2745,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(13)]
             public uint best_gpm
             {
-                get { return __pbn__best_gpm.GetValueOrDefault(); }
-                set { __pbn__best_gpm = value; }
+                get => __pbn__best_gpm.GetValueOrDefault();
+                set => __pbn__best_gpm = value;
             }
             public bool ShouldSerializebest_gpm() => __pbn__best_gpm != null;
             public void Resetbest_gpm() => __pbn__best_gpm = null;
@@ -2754,8 +2755,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(14)]
             public uint best_xpm
             {
-                get { return __pbn__best_xpm.GetValueOrDefault(); }
-                set { __pbn__best_xpm = value; }
+                get => __pbn__best_xpm.GetValueOrDefault();
+                set => __pbn__best_xpm = value;
             }
             public bool ShouldSerializebest_xpm() => __pbn__best_xpm != null;
             public void Resetbest_xpm() => __pbn__best_xpm = null;
@@ -2764,8 +2765,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(15)]
             public float performance
             {
-                get { return __pbn__performance.GetValueOrDefault(); }
-                set { __pbn__performance = value; }
+                get => __pbn__performance.GetValueOrDefault();
+                set => __pbn__performance = value;
             }
             public bool ShouldSerializeperformance() => __pbn__performance != null;
             public void Resetperformance() => __pbn__performance = null;
@@ -2774,8 +2775,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(16)]
             public uint wins_with_ally
             {
-                get { return __pbn__wins_with_ally.GetValueOrDefault(); }
-                set { __pbn__wins_with_ally = value; }
+                get => __pbn__wins_with_ally.GetValueOrDefault();
+                set => __pbn__wins_with_ally = value;
             }
             public bool ShouldSerializewins_with_ally() => __pbn__wins_with_ally != null;
             public void Resetwins_with_ally() => __pbn__wins_with_ally = null;
@@ -2784,8 +2785,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(17)]
             public uint losses_with_ally
             {
-                get { return __pbn__losses_with_ally.GetValueOrDefault(); }
-                set { __pbn__losses_with_ally = value; }
+                get => __pbn__losses_with_ally.GetValueOrDefault();
+                set => __pbn__losses_with_ally = value;
             }
             public bool ShouldSerializelosses_with_ally() => __pbn__losses_with_ally != null;
             public void Resetlosses_with_ally() => __pbn__losses_with_ally = null;
@@ -2794,8 +2795,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(18)]
             public uint wins_against_enemy
             {
-                get { return __pbn__wins_against_enemy.GetValueOrDefault(); }
-                set { __pbn__wins_against_enemy = value; }
+                get => __pbn__wins_against_enemy.GetValueOrDefault();
+                set => __pbn__wins_against_enemy = value;
             }
             public bool ShouldSerializewins_against_enemy() => __pbn__wins_against_enemy != null;
             public void Resetwins_against_enemy() => __pbn__wins_against_enemy = null;
@@ -2804,8 +2805,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(19)]
             public uint losses_against_enemy
             {
-                get { return __pbn__losses_against_enemy.GetValueOrDefault(); }
-                set { __pbn__losses_against_enemy = value; }
+                get => __pbn__losses_against_enemy.GetValueOrDefault();
+                set => __pbn__losses_against_enemy = value;
             }
             public bool ShouldSerializelosses_against_enemy() => __pbn__losses_against_enemy != null;
             public void Resetlosses_against_enemy() => __pbn__losses_against_enemy = null;
@@ -2814,8 +2815,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(20)]
             public uint networth_peak
             {
-                get { return __pbn__networth_peak.GetValueOrDefault(); }
-                set { __pbn__networth_peak = value; }
+                get => __pbn__networth_peak.GetValueOrDefault();
+                set => __pbn__networth_peak = value;
             }
             public bool ShouldSerializenetworth_peak() => __pbn__networth_peak != null;
             public void Resetnetworth_peak() => __pbn__networth_peak = null;
@@ -2824,8 +2825,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(21)]
             public uint lasthit_peak
             {
-                get { return __pbn__lasthit_peak.GetValueOrDefault(); }
-                set { __pbn__lasthit_peak = value; }
+                get => __pbn__lasthit_peak.GetValueOrDefault();
+                set => __pbn__lasthit_peak = value;
             }
             public bool ShouldSerializelasthit_peak() => __pbn__lasthit_peak != null;
             public void Resetlasthit_peak() => __pbn__lasthit_peak = null;
@@ -2834,8 +2835,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(22)]
             public uint deny_peak
             {
-                get { return __pbn__deny_peak.GetValueOrDefault(); }
-                set { __pbn__deny_peak = value; }
+                get => __pbn__deny_peak.GetValueOrDefault();
+                set => __pbn__deny_peak = value;
             }
             public bool ShouldSerializedeny_peak() => __pbn__deny_peak != null;
             public void Resetdeny_peak() => __pbn__deny_peak = null;
@@ -2844,8 +2845,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(23)]
             public uint damage_peak
             {
-                get { return __pbn__damage_peak.GetValueOrDefault(); }
-                set { __pbn__damage_peak = value; }
+                get => __pbn__damage_peak.GetValueOrDefault();
+                set => __pbn__damage_peak = value;
             }
             public bool ShouldSerializedamage_peak() => __pbn__damage_peak != null;
             public void Resetdamage_peak() => __pbn__damage_peak = null;
@@ -2854,8 +2855,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(24)]
             public uint longest_game_peak
             {
-                get { return __pbn__longest_game_peak.GetValueOrDefault(); }
-                set { __pbn__longest_game_peak = value; }
+                get => __pbn__longest_game_peak.GetValueOrDefault();
+                set => __pbn__longest_game_peak = value;
             }
             public bool ShouldSerializelongest_game_peak() => __pbn__longest_game_peak != null;
             public void Resetlongest_game_peak() => __pbn__longest_game_peak = null;
@@ -2864,8 +2865,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(25)]
             public uint healing_peak
             {
-                get { return __pbn__healing_peak.GetValueOrDefault(); }
-                set { __pbn__healing_peak = value; }
+                get => __pbn__healing_peak.GetValueOrDefault();
+                set => __pbn__healing_peak = value;
             }
             public bool ShouldSerializehealing_peak() => __pbn__healing_peak != null;
             public void Resethealing_peak() => __pbn__healing_peak = null;
@@ -2874,8 +2875,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(26)]
             public float avg_lasthits
             {
-                get { return __pbn__avg_lasthits.GetValueOrDefault(); }
-                set { __pbn__avg_lasthits = value; }
+                get => __pbn__avg_lasthits.GetValueOrDefault();
+                set => __pbn__avg_lasthits = value;
             }
             public bool ShouldSerializeavg_lasthits() => __pbn__avg_lasthits != null;
             public void Resetavg_lasthits() => __pbn__avg_lasthits = null;
@@ -2884,8 +2885,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(27)]
             public float avg_denies
             {
-                get { return __pbn__avg_denies.GetValueOrDefault(); }
-                set { __pbn__avg_denies = value; }
+                get => __pbn__avg_denies.GetValueOrDefault();
+                set => __pbn__avg_denies = value;
             }
             public bool ShouldSerializeavg_denies() => __pbn__avg_denies != null;
             public void Resetavg_denies() => __pbn__avg_denies = null;
@@ -2905,8 +2906,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -2924,8 +2925,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public float kills
         {
-            get { return __pbn__kills.GetValueOrDefault(); }
-            set { __pbn__kills = value; }
+            get => __pbn__kills.GetValueOrDefault();
+            set => __pbn__kills = value;
         }
         public bool ShouldSerializekills() => __pbn__kills != null;
         public void Resetkills() => __pbn__kills = null;
@@ -2934,8 +2935,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public float deaths
         {
-            get { return __pbn__deaths.GetValueOrDefault(); }
-            set { __pbn__deaths = value; }
+            get => __pbn__deaths.GetValueOrDefault();
+            set => __pbn__deaths = value;
         }
         public bool ShouldSerializedeaths() => __pbn__deaths != null;
         public void Resetdeaths() => __pbn__deaths = null;
@@ -2944,8 +2945,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public float assists
         {
-            get { return __pbn__assists.GetValueOrDefault(); }
-            set { __pbn__assists = value; }
+            get => __pbn__assists.GetValueOrDefault();
+            set => __pbn__assists = value;
         }
         public bool ShouldSerializeassists() => __pbn__assists != null;
         public void Resetassists() => __pbn__assists = null;
@@ -2954,8 +2955,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public float net_worth
         {
-            get { return __pbn__net_worth.GetValueOrDefault(); }
-            set { __pbn__net_worth = value; }
+            get => __pbn__net_worth.GetValueOrDefault();
+            set => __pbn__net_worth = value;
         }
         public bool ShouldSerializenet_worth() => __pbn__net_worth != null;
         public void Resetnet_worth() => __pbn__net_worth = null;
@@ -2964,8 +2965,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public float last_hits
         {
-            get { return __pbn__last_hits.GetValueOrDefault(); }
-            set { __pbn__last_hits = value; }
+            get => __pbn__last_hits.GetValueOrDefault();
+            set => __pbn__last_hits = value;
         }
         public bool ShouldSerializelast_hits() => __pbn__last_hits != null;
         public void Resetlast_hits() => __pbn__last_hits = null;
@@ -2974,8 +2975,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public float denies
         {
-            get { return __pbn__denies.GetValueOrDefault(); }
-            set { __pbn__denies = value; }
+            get => __pbn__denies.GetValueOrDefault();
+            set => __pbn__denies = value;
         }
         public bool ShouldSerializedenies() => __pbn__denies != null;
         public void Resetdenies() => __pbn__denies = null;
@@ -2984,8 +2985,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public float item_value
         {
-            get { return __pbn__item_value.GetValueOrDefault(); }
-            set { __pbn__item_value = value; }
+            get => __pbn__item_value.GetValueOrDefault();
+            set => __pbn__item_value = value;
         }
         public bool ShouldSerializeitem_value() => __pbn__item_value != null;
         public void Resetitem_value() => __pbn__item_value = null;
@@ -2994,8 +2995,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public float support_gold_spent
         {
-            get { return __pbn__support_gold_spent.GetValueOrDefault(); }
-            set { __pbn__support_gold_spent = value; }
+            get => __pbn__support_gold_spent.GetValueOrDefault();
+            set => __pbn__support_gold_spent = value;
         }
         public bool ShouldSerializesupport_gold_spent() => __pbn__support_gold_spent != null;
         public void Resetsupport_gold_spent() => __pbn__support_gold_spent = null;
@@ -3004,8 +3005,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public float camps_stacked
         {
-            get { return __pbn__camps_stacked.GetValueOrDefault(); }
-            set { __pbn__camps_stacked = value; }
+            get => __pbn__camps_stacked.GetValueOrDefault();
+            set => __pbn__camps_stacked = value;
         }
         public bool ShouldSerializecamps_stacked() => __pbn__camps_stacked != null;
         public void Resetcamps_stacked() => __pbn__camps_stacked = null;
@@ -3014,8 +3015,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public float wards_placed
         {
-            get { return __pbn__wards_placed.GetValueOrDefault(); }
-            set { __pbn__wards_placed = value; }
+            get => __pbn__wards_placed.GetValueOrDefault();
+            set => __pbn__wards_placed = value;
         }
         public bool ShouldSerializewards_placed() => __pbn__wards_placed != null;
         public void Resetwards_placed() => __pbn__wards_placed = null;
@@ -3024,8 +3025,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(12)]
         public float dewards
         {
-            get { return __pbn__dewards.GetValueOrDefault(); }
-            set { __pbn__dewards = value; }
+            get => __pbn__dewards.GetValueOrDefault();
+            set => __pbn__dewards = value;
         }
         public bool ShouldSerializedewards() => __pbn__dewards != null;
         public void Resetdewards() => __pbn__dewards = null;
@@ -3034,8 +3035,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(13)]
         public float triple_kills
         {
-            get { return __pbn__triple_kills.GetValueOrDefault(); }
-            set { __pbn__triple_kills = value; }
+            get => __pbn__triple_kills.GetValueOrDefault();
+            set => __pbn__triple_kills = value;
         }
         public bool ShouldSerializetriple_kills() => __pbn__triple_kills != null;
         public void Resettriple_kills() => __pbn__triple_kills = null;
@@ -3044,8 +3045,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(14)]
         public float rampages
         {
-            get { return __pbn__rampages.GetValueOrDefault(); }
-            set { __pbn__rampages = value; }
+            get => __pbn__rampages.GetValueOrDefault();
+            set => __pbn__rampages = value;
         }
         public bool ShouldSerializerampages() => __pbn__rampages != null;
         public void Resetrampages() => __pbn__rampages = null;
@@ -3064,8 +3065,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(1)]
         public float kills
         {
-            get { return __pbn__kills ?? 1; }
-            set { __pbn__kills = value; }
+            get => __pbn__kills ?? 1;
+            set => __pbn__kills = value;
         }
         public bool ShouldSerializekills() => __pbn__kills != null;
         public void Resetkills() => __pbn__kills = null;
@@ -3075,8 +3076,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(1)]
         public float deaths
         {
-            get { return __pbn__deaths ?? 1; }
-            set { __pbn__deaths = value; }
+            get => __pbn__deaths ?? 1;
+            set => __pbn__deaths = value;
         }
         public bool ShouldSerializedeaths() => __pbn__deaths != null;
         public void Resetdeaths() => __pbn__deaths = null;
@@ -3086,8 +3087,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(1)]
         public float assists
         {
-            get { return __pbn__assists ?? 1; }
-            set { __pbn__assists = value; }
+            get => __pbn__assists ?? 1;
+            set => __pbn__assists = value;
         }
         public bool ShouldSerializeassists() => __pbn__assists != null;
         public void Resetassists() => __pbn__assists = null;
@@ -3097,8 +3098,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(1)]
         public float net_worth
         {
-            get { return __pbn__net_worth ?? 1; }
-            set { __pbn__net_worth = value; }
+            get => __pbn__net_worth ?? 1;
+            set => __pbn__net_worth = value;
         }
         public bool ShouldSerializenet_worth() => __pbn__net_worth != null;
         public void Resetnet_worth() => __pbn__net_worth = null;
@@ -3108,8 +3109,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(1)]
         public float last_hits
         {
-            get { return __pbn__last_hits ?? 1; }
-            set { __pbn__last_hits = value; }
+            get => __pbn__last_hits ?? 1;
+            set => __pbn__last_hits = value;
         }
         public bool ShouldSerializelast_hits() => __pbn__last_hits != null;
         public void Resetlast_hits() => __pbn__last_hits = null;
@@ -3119,8 +3120,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(1)]
         public float denies
         {
-            get { return __pbn__denies ?? 1; }
-            set { __pbn__denies = value; }
+            get => __pbn__denies ?? 1;
+            set => __pbn__denies = value;
         }
         public bool ShouldSerializedenies() => __pbn__denies != null;
         public void Resetdenies() => __pbn__denies = null;
@@ -3130,8 +3131,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(1)]
         public float item_value
         {
-            get { return __pbn__item_value ?? 1; }
-            set { __pbn__item_value = value; }
+            get => __pbn__item_value ?? 1;
+            set => __pbn__item_value = value;
         }
         public bool ShouldSerializeitem_value() => __pbn__item_value != null;
         public void Resetitem_value() => __pbn__item_value = null;
@@ -3141,8 +3142,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(1)]
         public float support_gold_spent
         {
-            get { return __pbn__support_gold_spent ?? 1; }
-            set { __pbn__support_gold_spent = value; }
+            get => __pbn__support_gold_spent ?? 1;
+            set => __pbn__support_gold_spent = value;
         }
         public bool ShouldSerializesupport_gold_spent() => __pbn__support_gold_spent != null;
         public void Resetsupport_gold_spent() => __pbn__support_gold_spent = null;
@@ -3152,8 +3153,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(1)]
         public float camps_stacked
         {
-            get { return __pbn__camps_stacked ?? 1; }
-            set { __pbn__camps_stacked = value; }
+            get => __pbn__camps_stacked ?? 1;
+            set => __pbn__camps_stacked = value;
         }
         public bool ShouldSerializecamps_stacked() => __pbn__camps_stacked != null;
         public void Resetcamps_stacked() => __pbn__camps_stacked = null;
@@ -3163,8 +3164,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(1)]
         public float wards_placed
         {
-            get { return __pbn__wards_placed ?? 1; }
-            set { __pbn__wards_placed = value; }
+            get => __pbn__wards_placed ?? 1;
+            set => __pbn__wards_placed = value;
         }
         public bool ShouldSerializewards_placed() => __pbn__wards_placed != null;
         public void Resetwards_placed() => __pbn__wards_placed = null;
@@ -3174,8 +3175,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(1)]
         public float dewards
         {
-            get { return __pbn__dewards ?? 1; }
-            set { __pbn__dewards = value; }
+            get => __pbn__dewards ?? 1;
+            set => __pbn__dewards = value;
         }
         public bool ShouldSerializedewards() => __pbn__dewards != null;
         public void Resetdewards() => __pbn__dewards = null;
@@ -3185,8 +3186,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(1)]
         public float triple_kills
         {
-            get { return __pbn__triple_kills ?? 1; }
-            set { __pbn__triple_kills = value; }
+            get => __pbn__triple_kills ?? 1;
+            set => __pbn__triple_kills = value;
         }
         public bool ShouldSerializetriple_kills() => __pbn__triple_kills != null;
         public void Resettriple_kills() => __pbn__triple_kills = null;
@@ -3196,8 +3197,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(1)]
         public float rampages
         {
-            get { return __pbn__rampages ?? 1; }
-            set { __pbn__rampages = value; }
+            get => __pbn__rampages ?? 1;
+            set => __pbn__rampages = value;
         }
         public bool ShouldSerializerampages() => __pbn__rampages != null;
         public void Resetrampages() => __pbn__rampages = null;
@@ -3215,8 +3216,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -3235,8 +3236,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint time
             {
-                get { return __pbn__time.GetValueOrDefault(); }
-                set { __pbn__time = value; }
+                get => __pbn__time.GetValueOrDefault();
+                set => __pbn__time = value;
             }
             public bool ShouldSerializetime() => __pbn__time != null;
             public void Resettime() => __pbn__time = null;
@@ -3269,8 +3270,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint rank_chunk
             {
-                get { return __pbn__rank_chunk.GetValueOrDefault(); }
-                set { __pbn__rank_chunk = value; }
+                get => __pbn__rank_chunk.GetValueOrDefault();
+                set => __pbn__rank_chunk = value;
             }
             public bool ShouldSerializerank_chunk() => __pbn__rank_chunk != null;
             public void Resetrank_chunk() => __pbn__rank_chunk = null;
@@ -3302,8 +3303,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint def_index
         {
-            get { return __pbn__def_index.GetValueOrDefault(); }
-            set { __pbn__def_index = value; }
+            get => __pbn__def_index.GetValueOrDefault();
+            set => __pbn__def_index = value;
         }
         public bool ShouldSerializedef_index() => __pbn__def_index != null;
         public void Resetdef_index() => __pbn__def_index = null;
@@ -3313,8 +3314,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string name
         {
-            get { return __pbn__name ?? ""; }
-            set { __pbn__name = value; }
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
         }
         public bool ShouldSerializename() => __pbn__name != null;
         public void Resetname() => __pbn__name = null;
@@ -3344,8 +3345,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint def_index
         {
-            get { return __pbn__def_index.GetValueOrDefault(); }
-            set { __pbn__def_index = value; }
+            get => __pbn__def_index.GetValueOrDefault();
+            set => __pbn__def_index = value;
         }
         public bool ShouldSerializedef_index() => __pbn__def_index != null;
         public void Resetdef_index() => __pbn__def_index = null;
@@ -3355,8 +3356,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string username
         {
-            get { return __pbn__username ?? ""; }
-            set { __pbn__username = value; }
+            get => __pbn__username ?? "";
+            set => __pbn__username = value;
         }
         public bool ShouldSerializeusername() => __pbn__username != null;
         public void Resetusername() => __pbn__username = null;
@@ -3374,8 +3375,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint def_index
         {
-            get { return __pbn__def_index.GetValueOrDefault(); }
-            set { __pbn__def_index = value; }
+            get => __pbn__def_index.GetValueOrDefault();
+            set => __pbn__def_index = value;
         }
         public bool ShouldSerializedef_index() => __pbn__def_index != null;
         public void Resetdef_index() => __pbn__def_index = null;
@@ -3385,8 +3386,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string username
         {
-            get { return __pbn__username ?? ""; }
-            set { __pbn__username = value; }
+            get => __pbn__username ?? "";
+            set => __pbn__username = value;
         }
         public bool ShouldSerializeusername() => __pbn__username != null;
         public void Resetusername() => __pbn__username = null;
@@ -3395,8 +3396,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint result
         {
-            get { return __pbn__result.GetValueOrDefault(); }
-            set { __pbn__result = value; }
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -3414,8 +3415,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint def_index
         {
-            get { return __pbn__def_index.GetValueOrDefault(); }
-            set { __pbn__def_index = value; }
+            get => __pbn__def_index.GetValueOrDefault();
+            set => __pbn__def_index = value;
         }
         public bool ShouldSerializedef_index() => __pbn__def_index != null;
         public void Resetdef_index() => __pbn__def_index = null;
@@ -3425,8 +3426,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string username
         {
-            get { return __pbn__username ?? ""; }
-            set { __pbn__username = value; }
+            get => __pbn__username ?? "";
+            set => __pbn__username = value;
         }
         public bool ShouldSerializeusername() => __pbn__username != null;
         public void Resetusername() => __pbn__username = null;
@@ -3444,8 +3445,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint def_index
         {
-            get { return __pbn__def_index.GetValueOrDefault(); }
-            set { __pbn__def_index = value; }
+            get => __pbn__def_index.GetValueOrDefault();
+            set => __pbn__def_index = value;
         }
         public bool ShouldSerializedef_index() => __pbn__def_index != null;
         public void Resetdef_index() => __pbn__def_index = null;
@@ -3454,8 +3455,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public bool released
         {
-            get { return __pbn__released.GetValueOrDefault(); }
-            set { __pbn__released = value; }
+            get => __pbn__released.GetValueOrDefault();
+            set => __pbn__released = value;
         }
         public bool ShouldSerializereleased() => __pbn__released != null;
         public void Resetreleased() => __pbn__released = null;
@@ -3473,8 +3474,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint location_id
         {
-            get { return __pbn__location_id.GetValueOrDefault(); }
-            set { __pbn__location_id = value; }
+            get => __pbn__location_id.GetValueOrDefault();
+            set => __pbn__location_id = value;
         }
         public bool ShouldSerializelocation_id() => __pbn__location_id != null;
         public void Resetlocation_id() => __pbn__location_id = null;
@@ -3483,8 +3484,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public bool tracking_only
         {
-            get { return __pbn__tracking_only.GetValueOrDefault(); }
-            set { __pbn__tracking_only = value; }
+            get => __pbn__tracking_only.GetValueOrDefault();
+            set => __pbn__tracking_only = value;
         }
         public bool ShouldSerializetracking_only() => __pbn__tracking_only != null;
         public void Resettracking_only() => __pbn__tracking_only = null;
@@ -3502,8 +3503,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -3512,8 +3513,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint high_score
         {
-            get { return __pbn__high_score.GetValueOrDefault(); }
-            set { __pbn__high_score = value; }
+            get => __pbn__high_score.GetValueOrDefault();
+            set => __pbn__high_score = value;
         }
         public bool ShouldSerializehigh_score() => __pbn__high_score != null;
         public void Resethigh_score() => __pbn__high_score = null;
@@ -3531,8 +3532,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -3550,8 +3551,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint score
         {
-            get { return __pbn__score.GetValueOrDefault(); }
-            set { __pbn__score = value; }
+            get => __pbn__score.GetValueOrDefault();
+            set => __pbn__score = value;
         }
         public bool ShouldSerializescore() => __pbn__score != null;
         public void Resetscore() => __pbn__score = null;
@@ -3560,8 +3561,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint eresult
         {
-            get { return __pbn__eresult.GetValueOrDefault(); }
-            set { __pbn__eresult = value; }
+            get => __pbn__eresult.GetValueOrDefault();
+            set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
         public void Reseteresult() => __pbn__eresult = null;
@@ -3597,8 +3598,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint channel_id
         {
-            get { return __pbn__channel_id.GetValueOrDefault(); }
-            set { __pbn__channel_id = value; }
+            get => __pbn__channel_id.GetValueOrDefault();
+            set => __pbn__channel_id = value;
         }
         public bool ShouldSerializechannel_id() => __pbn__channel_id != null;
         public void Resetchannel_id() => __pbn__channel_id = null;
@@ -3608,8 +3609,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string country_code
         {
-            get { return __pbn__country_code ?? ""; }
-            set { __pbn__country_code = value; }
+            get => __pbn__country_code ?? "";
+            set => __pbn__country_code = value;
         }
         public bool ShouldSerializecountry_code() => __pbn__country_code != null;
         public void Resetcountry_code() => __pbn__country_code = null;
@@ -3619,8 +3620,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string description
         {
-            get { return __pbn__description ?? ""; }
-            set { __pbn__description = value; }
+            get => __pbn__description ?? "";
+            set => __pbn__description = value;
         }
         public bool ShouldSerializedescription() => __pbn__description != null;
         public void Resetdescription() => __pbn__description = null;
@@ -3630,8 +3631,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string language_code
         {
-            get { return __pbn__language_code ?? ""; }
-            set { __pbn__language_code = value; }
+            get => __pbn__language_code ?? "";
+            set => __pbn__language_code = value;
         }
         public bool ShouldSerializelanguage_code() => __pbn__language_code != null;
         public void Resetlanguage_code() => __pbn__language_code = null;
@@ -3659,8 +3660,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint give_to_account_id
             {
-                get { return __pbn__give_to_account_id.GetValueOrDefault(); }
-                set { __pbn__give_to_account_id = value; }
+                get => __pbn__give_to_account_id.GetValueOrDefault();
+                set => __pbn__give_to_account_id = value;
             }
             public bool ShouldSerializegive_to_account_id() => __pbn__give_to_account_id != null;
             public void Resetgive_to_account_id() => __pbn__give_to_account_id = null;
@@ -3670,8 +3671,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string gift_message
             {
-                get { return __pbn__gift_message ?? ""; }
-                set { __pbn__gift_message = value; }
+                get => __pbn__gift_message ?? "";
+                set => __pbn__gift_message = value;
             }
             public bool ShouldSerializegift_message() => __pbn__gift_message != null;
             public void Resetgift_message() => __pbn__gift_message = null;
@@ -3691,8 +3692,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -3701,8 +3702,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint action_id
         {
-            get { return __pbn__action_id.GetValueOrDefault(); }
-            set { __pbn__action_id = value; }
+            get => __pbn__action_id.GetValueOrDefault();
+            set => __pbn__action_id = value;
         }
         public bool ShouldSerializeaction_id() => __pbn__action_id != null;
         public void Resetaction_id() => __pbn__action_id = null;
@@ -3711,8 +3712,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint quantity
         {
-            get { return __pbn__quantity.GetValueOrDefault(); }
-            set { __pbn__quantity = value; }
+            get => __pbn__quantity.GetValueOrDefault();
+            set => __pbn__quantity = value;
         }
         public bool ShouldSerializequantity() => __pbn__quantity != null;
         public void Resetquantity() => __pbn__quantity = null;
@@ -3734,8 +3735,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(ResultCode.Success)]
         public ResultCode result
         {
-            get { return __pbn__result ?? ResultCode.Success; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? ResultCode.Success;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -3754,8 +3755,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint item_def
             {
-                get { return __pbn__item_def.GetValueOrDefault(); }
-                set { __pbn__item_def = value; }
+                get => __pbn__item_def.GetValueOrDefault();
+                set => __pbn__item_def = value;
             }
             public bool ShouldSerializeitem_def() => __pbn__item_def != null;
             public void Resetitem_def() => __pbn__item_def = null;
@@ -3764,8 +3765,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint item_category
             {
-                get { return __pbn__item_category.GetValueOrDefault(); }
-                set { __pbn__item_category = value; }
+                get => __pbn__item_category.GetValueOrDefault();
+                set => __pbn__item_category = value;
             }
             public bool ShouldSerializeitem_category() => __pbn__item_category != null;
             public void Resetitem_category() => __pbn__item_category = null;
@@ -3795,8 +3796,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint grant_index
             {
-                get { return __pbn__grant_index.GetValueOrDefault(); }
-                set { __pbn__grant_index = value; }
+                get => __pbn__grant_index.GetValueOrDefault();
+                set => __pbn__grant_index = value;
             }
             public bool ShouldSerializegrant_index() => __pbn__grant_index != null;
             public void Resetgrant_index() => __pbn__grant_index = null;
@@ -3805,8 +3806,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint score_index
             {
-                get { return __pbn__score_index.GetValueOrDefault(); }
-                set { __pbn__score_index = value; }
+                get => __pbn__score_index.GetValueOrDefault();
+                set => __pbn__score_index = value;
             }
             public bool ShouldSerializescore_index() => __pbn__score_index != null;
             public void Resetscore_index() => __pbn__score_index = null;
@@ -3815,8 +3816,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint reward_index
             {
-                get { return __pbn__reward_index.GetValueOrDefault(); }
-                set { __pbn__reward_index = value; }
+                get => __pbn__reward_index.GetValueOrDefault();
+                set => __pbn__reward_index = value;
             }
             public bool ShouldSerializereward_index() => __pbn__reward_index != null;
             public void Resetreward_index() => __pbn__reward_index = null;
@@ -3825,8 +3826,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public byte[] reward_data
             {
-                get { return __pbn__reward_data; }
-                set { __pbn__reward_data = value; }
+                get => __pbn__reward_data;
+                set => __pbn__reward_data = value;
             }
             public bool ShouldSerializereward_data() => __pbn__reward_data != null;
             public void Resetreward_data() => __pbn__reward_data = null;
@@ -3866,8 +3867,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -3876,8 +3877,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint action_id
         {
-            get { return __pbn__action_id.GetValueOrDefault(); }
-            set { __pbn__action_id = value; }
+            get => __pbn__action_id.GetValueOrDefault();
+            set => __pbn__action_id = value;
         }
         public bool ShouldSerializeaction_id() => __pbn__action_id != null;
         public void Resetaction_id() => __pbn__action_id = null;
@@ -3886,8 +3887,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong item_id
         {
-            get { return __pbn__item_id.GetValueOrDefault(); }
-            set { __pbn__item_id = value; }
+            get => __pbn__item_id.GetValueOrDefault();
+            set => __pbn__item_id = value;
         }
         public bool ShouldSerializeitem_id() => __pbn__item_id != null;
         public void Resetitem_id() => __pbn__item_id = null;
@@ -3896,8 +3897,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint quantity
         {
-            get { return __pbn__quantity.GetValueOrDefault(); }
-            set { __pbn__quantity = value; }
+            get => __pbn__quantity.GetValueOrDefault();
+            set => __pbn__quantity = value;
         }
         public bool ShouldSerializequantity() => __pbn__quantity != null;
         public void Resetquantity() => __pbn__quantity = null;
@@ -3927,8 +3928,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong item_id
         {
-            get { return __pbn__item_id.GetValueOrDefault(); }
-            set { __pbn__item_id = value; }
+            get => __pbn__item_id.GetValueOrDefault();
+            set => __pbn__item_id = value;
         }
         public bool ShouldSerializeitem_id() => __pbn__item_id != null;
         public void Resetitem_id() => __pbn__item_id = null;
@@ -3949,8 +3950,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -3959,8 +3960,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -3978,8 +3979,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint total_points
         {
-            get { return __pbn__total_points.GetValueOrDefault(); }
-            set { __pbn__total_points = value; }
+            get => __pbn__total_points.GetValueOrDefault();
+            set => __pbn__total_points = value;
         }
         public bool ShouldSerializetotal_points() => __pbn__total_points != null;
         public void Resettotal_points() => __pbn__total_points = null;
@@ -3988,8 +3989,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint total_premium_points
         {
-            get { return __pbn__total_premium_points.GetValueOrDefault(); }
-            set { __pbn__total_premium_points = value; }
+            get => __pbn__total_premium_points.GetValueOrDefault();
+            set => __pbn__total_premium_points = value;
         }
         public bool ShouldSerializetotal_premium_points() => __pbn__total_premium_points != null;
         public void Resettotal_premium_points() => __pbn__total_premium_points = null;
@@ -3998,8 +3999,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -4008,8 +4009,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint points
         {
-            get { return __pbn__points.GetValueOrDefault(); }
-            set { __pbn__points = value; }
+            get => __pbn__points.GetValueOrDefault();
+            set => __pbn__points = value;
         }
         public bool ShouldSerializepoints() => __pbn__points != null;
         public void Resetpoints() => __pbn__points = null;
@@ -4018,8 +4019,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint premium_points
         {
-            get { return __pbn__premium_points.GetValueOrDefault(); }
-            set { __pbn__premium_points = value; }
+            get => __pbn__premium_points.GetValueOrDefault();
+            set => __pbn__premium_points = value;
         }
         public bool ShouldSerializepremium_points() => __pbn__premium_points != null;
         public void Resetpremium_points() => __pbn__premium_points = null;
@@ -4031,8 +4032,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -4041,8 +4042,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public bool owned
         {
-            get { return __pbn__owned.GetValueOrDefault(); }
-            set { __pbn__owned = value; }
+            get => __pbn__owned.GetValueOrDefault();
+            set => __pbn__owned = value;
         }
         public bool ShouldSerializeowned() => __pbn__owned != null;
         public void Resetowned() => __pbn__owned = null;
@@ -4051,8 +4052,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public uint audit_action
         {
-            get { return __pbn__audit_action.GetValueOrDefault(); }
-            set { __pbn__audit_action = value; }
+            get => __pbn__audit_action.GetValueOrDefault();
+            set => __pbn__audit_action = value;
         }
         public bool ShouldSerializeaudit_action() => __pbn__audit_action != null;
         public void Resetaudit_action() => __pbn__audit_action = null;
@@ -4068,8 +4069,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint action_id
             {
-                get { return __pbn__action_id.GetValueOrDefault(); }
-                set { __pbn__action_id = value; }
+                get => __pbn__action_id.GetValueOrDefault();
+                set => __pbn__action_id = value;
             }
             public bool ShouldSerializeaction_id() => __pbn__action_id != null;
             public void Resetaction_id() => __pbn__action_id = null;
@@ -4079,8 +4080,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue(1)]
             public uint times_completed
             {
-                get { return __pbn__times_completed ?? 1; }
-                set { __pbn__times_completed = value; }
+                get => __pbn__times_completed ?? 1;
+                set => __pbn__times_completed = value;
             }
             public bool ShouldSerializetimes_completed() => __pbn__times_completed != null;
             public void Resettimes_completed() => __pbn__times_completed = null;
@@ -4100,8 +4101,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -4110,8 +4111,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint periodic_resource_id
         {
-            get { return __pbn__periodic_resource_id.GetValueOrDefault(); }
-            set { __pbn__periodic_resource_id = value; }
+            get => __pbn__periodic_resource_id.GetValueOrDefault();
+            set => __pbn__periodic_resource_id = value;
         }
         public bool ShouldSerializeperiodic_resource_id() => __pbn__periodic_resource_id != null;
         public void Resetperiodic_resource_id() => __pbn__periodic_resource_id = null;
@@ -4120,8 +4121,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint timestamp
         {
-            get { return __pbn__timestamp.GetValueOrDefault(); }
-            set { __pbn__timestamp = value; }
+            get => __pbn__timestamp.GetValueOrDefault();
+            set => __pbn__timestamp = value;
         }
         public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
         public void Resettimestamp() => __pbn__timestamp = null;
@@ -4139,8 +4140,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint periodic_resource_max
         {
-            get { return __pbn__periodic_resource_max.GetValueOrDefault(); }
-            set { __pbn__periodic_resource_max = value; }
+            get => __pbn__periodic_resource_max.GetValueOrDefault();
+            set => __pbn__periodic_resource_max = value;
         }
         public bool ShouldSerializeperiodic_resource_max() => __pbn__periodic_resource_max != null;
         public void Resetperiodic_resource_max() => __pbn__periodic_resource_max = null;
@@ -4149,8 +4150,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint periodic_resource_used
         {
-            get { return __pbn__periodic_resource_used.GetValueOrDefault(); }
-            set { __pbn__periodic_resource_used = value; }
+            get => __pbn__periodic_resource_used.GetValueOrDefault();
+            set => __pbn__periodic_resource_used = value;
         }
         public bool ShouldSerializeperiodic_resource_used() => __pbn__periodic_resource_used != null;
         public void Resetperiodic_resource_used() => __pbn__periodic_resource_used = null;
@@ -4183,8 +4184,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint live_league_games
         {
-            get { return __pbn__live_league_games.GetValueOrDefault(); }
-            set { __pbn__live_league_games = value; }
+            get => __pbn__live_league_games.GetValueOrDefault();
+            set => __pbn__live_league_games = value;
         }
         public bool ShouldSerializelive_league_games() => __pbn__live_league_games != null;
         public void Resetlive_league_games() => __pbn__live_league_games = null;
@@ -4202,8 +4203,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint selection_index
         {
-            get { return __pbn__selection_index.GetValueOrDefault(); }
-            set { __pbn__selection_index = value; }
+            get => __pbn__selection_index.GetValueOrDefault();
+            set => __pbn__selection_index = value;
         }
         public bool ShouldSerializeselection_index() => __pbn__selection_index != null;
         public void Resetselection_index() => __pbn__selection_index = null;
@@ -4212,8 +4213,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint selection
         {
-            get { return __pbn__selection.GetValueOrDefault(); }
-            set { __pbn__selection = value; }
+            get => __pbn__selection.GetValueOrDefault();
+            set => __pbn__selection = value;
         }
         public bool ShouldSerializeselection() => __pbn__selection != null;
         public void Resetselection() => __pbn__selection = null;
@@ -4222,8 +4223,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint leagueid
         {
-            get { return __pbn__leagueid.GetValueOrDefault(); }
-            set { __pbn__leagueid = value; }
+            get => __pbn__leagueid.GetValueOrDefault();
+            set => __pbn__leagueid = value;
         }
         public bool ShouldSerializeleagueid() => __pbn__leagueid != null;
         public void Resetleagueid() => __pbn__leagueid = null;
@@ -4242,8 +4243,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(2)]
         public uint eresult
         {
-            get { return __pbn__eresult ?? 2; }
-            set { __pbn__eresult = value; }
+            get => __pbn__eresult ?? 2;
+            set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
         public void Reseteresult() => __pbn__eresult = null;
@@ -4273,8 +4274,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -4283,8 +4284,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint leagueid
         {
-            get { return __pbn__leagueid.GetValueOrDefault(); }
-            set { __pbn__leagueid = value; }
+            get => __pbn__leagueid.GetValueOrDefault();
+            set => __pbn__leagueid = value;
         }
         public bool ShouldSerializeleagueid() => __pbn__leagueid != null;
         public void Resetleagueid() => __pbn__leagueid = null;
@@ -4302,8 +4303,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -4312,8 +4313,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint leagueid
         {
-            get { return __pbn__leagueid.GetValueOrDefault(); }
-            set { __pbn__leagueid = value; }
+            get => __pbn__leagueid.GetValueOrDefault();
+            set => __pbn__leagueid = value;
         }
         public bool ShouldSerializeleagueid() => __pbn__leagueid != null;
         public void Resetleagueid() => __pbn__leagueid = null;
@@ -4323,8 +4324,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(2)]
         public uint result
         {
-            get { return __pbn__result ?? 2; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? 2;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -4345,8 +4346,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -4355,8 +4356,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong start_at_match_id
         {
-            get { return __pbn__start_at_match_id.GetValueOrDefault(); }
-            set { __pbn__start_at_match_id = value; }
+            get => __pbn__start_at_match_id.GetValueOrDefault();
+            set => __pbn__start_at_match_id = value;
         }
         public bool ShouldSerializestart_at_match_id() => __pbn__start_at_match_id != null;
         public void Resetstart_at_match_id() => __pbn__start_at_match_id = null;
@@ -4365,8 +4366,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint matches_requested
         {
-            get { return __pbn__matches_requested.GetValueOrDefault(); }
-            set { __pbn__matches_requested = value; }
+            get => __pbn__matches_requested.GetValueOrDefault();
+            set => __pbn__matches_requested = value;
         }
         public bool ShouldSerializematches_requested() => __pbn__matches_requested != null;
         public void Resetmatches_requested() => __pbn__matches_requested = null;
@@ -4375,8 +4376,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -4385,8 +4386,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint request_id
         {
-            get { return __pbn__request_id.GetValueOrDefault(); }
-            set { __pbn__request_id = value; }
+            get => __pbn__request_id.GetValueOrDefault();
+            set => __pbn__request_id = value;
         }
         public bool ShouldSerializerequest_id() => __pbn__request_id != null;
         public void Resetrequest_id() => __pbn__request_id = null;
@@ -4395,8 +4396,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public bool include_practice_matches
         {
-            get { return __pbn__include_practice_matches.GetValueOrDefault(); }
-            set { __pbn__include_practice_matches = value; }
+            get => __pbn__include_practice_matches.GetValueOrDefault();
+            set => __pbn__include_practice_matches = value;
         }
         public bool ShouldSerializeinclude_practice_matches() => __pbn__include_practice_matches != null;
         public void Resetinclude_practice_matches() => __pbn__include_practice_matches = null;
@@ -4405,8 +4406,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public bool include_custom_games
         {
-            get { return __pbn__include_custom_games.GetValueOrDefault(); }
-            set { __pbn__include_custom_games = value; }
+            get => __pbn__include_custom_games.GetValueOrDefault();
+            set => __pbn__include_custom_games = value;
         }
         public bool ShouldSerializeinclude_custom_games() => __pbn__include_custom_games != null;
         public void Resetinclude_custom_games() => __pbn__include_custom_games = null;
@@ -4415,8 +4416,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public bool include_event_games
         {
-            get { return __pbn__include_event_games.GetValueOrDefault(); }
-            set { __pbn__include_event_games = value; }
+            get => __pbn__include_event_games.GetValueOrDefault();
+            set => __pbn__include_event_games = value;
         }
         public bool ShouldSerializeinclude_event_games() => __pbn__include_event_games != null;
         public void Resetinclude_event_games() => __pbn__include_event_games = null;
@@ -4437,8 +4438,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint request_id
         {
-            get { return __pbn__request_id.GetValueOrDefault(); }
-            set { __pbn__request_id = value; }
+            get => __pbn__request_id.GetValueOrDefault();
+            set => __pbn__request_id = value;
         }
         public bool ShouldSerializerequest_id() => __pbn__request_id != null;
         public void Resetrequest_id() => __pbn__request_id = null;
@@ -4454,8 +4455,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public ulong match_id
             {
-                get { return __pbn__match_id.GetValueOrDefault(); }
-                set { __pbn__match_id = value; }
+                get => __pbn__match_id.GetValueOrDefault();
+                set => __pbn__match_id = value;
             }
             public bool ShouldSerializematch_id() => __pbn__match_id != null;
             public void Resetmatch_id() => __pbn__match_id = null;
@@ -4464,8 +4465,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint start_time
             {
-                get { return __pbn__start_time.GetValueOrDefault(); }
-                set { __pbn__start_time = value; }
+                get => __pbn__start_time.GetValueOrDefault();
+                set => __pbn__start_time = value;
             }
             public bool ShouldSerializestart_time() => __pbn__start_time != null;
             public void Resetstart_time() => __pbn__start_time = null;
@@ -4474,8 +4475,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint hero_id
             {
-                get { return __pbn__hero_id.GetValueOrDefault(); }
-                set { __pbn__hero_id = value; }
+                get => __pbn__hero_id.GetValueOrDefault();
+                set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
@@ -4484,8 +4485,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public bool winner
             {
-                get { return __pbn__winner.GetValueOrDefault(); }
-                set { __pbn__winner = value; }
+                get => __pbn__winner.GetValueOrDefault();
+                set => __pbn__winner = value;
             }
             public bool ShouldSerializewinner() => __pbn__winner != null;
             public void Resetwinner() => __pbn__winner = null;
@@ -4494,8 +4495,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint game_mode
             {
-                get { return __pbn__game_mode.GetValueOrDefault(); }
-                set { __pbn__game_mode = value; }
+                get => __pbn__game_mode.GetValueOrDefault();
+                set => __pbn__game_mode = value;
             }
             public bool ShouldSerializegame_mode() => __pbn__game_mode != null;
             public void Resetgame_mode() => __pbn__game_mode = null;
@@ -4504,8 +4505,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(6)]
             public int rank_change
             {
-                get { return __pbn__rank_change.GetValueOrDefault(); }
-                set { __pbn__rank_change = value; }
+                get => __pbn__rank_change.GetValueOrDefault();
+                set => __pbn__rank_change = value;
             }
             public bool ShouldSerializerank_change() => __pbn__rank_change != null;
             public void Resetrank_change() => __pbn__rank_change = null;
@@ -4514,8 +4515,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(7)]
             public uint previous_rank
             {
-                get { return __pbn__previous_rank.GetValueOrDefault(); }
-                set { __pbn__previous_rank = value; }
+                get => __pbn__previous_rank.GetValueOrDefault();
+                set => __pbn__previous_rank = value;
             }
             public bool ShouldSerializeprevious_rank() => __pbn__previous_rank != null;
             public void Resetprevious_rank() => __pbn__previous_rank = null;
@@ -4524,8 +4525,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(8)]
             public uint lobby_type
             {
-                get { return __pbn__lobby_type.GetValueOrDefault(); }
-                set { __pbn__lobby_type = value; }
+                get => __pbn__lobby_type.GetValueOrDefault();
+                set => __pbn__lobby_type = value;
             }
             public bool ShouldSerializelobby_type() => __pbn__lobby_type != null;
             public void Resetlobby_type() => __pbn__lobby_type = null;
@@ -4534,8 +4535,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(9)]
             public bool solo_rank
             {
-                get { return __pbn__solo_rank.GetValueOrDefault(); }
-                set { __pbn__solo_rank = value; }
+                get => __pbn__solo_rank.GetValueOrDefault();
+                set => __pbn__solo_rank = value;
             }
             public bool ShouldSerializesolo_rank() => __pbn__solo_rank != null;
             public void Resetsolo_rank() => __pbn__solo_rank = null;
@@ -4544,8 +4545,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(10)]
             public bool abandon
             {
-                get { return __pbn__abandon.GetValueOrDefault(); }
-                set { __pbn__abandon = value; }
+                get => __pbn__abandon.GetValueOrDefault();
+                set => __pbn__abandon = value;
             }
             public bool ShouldSerializeabandon() => __pbn__abandon != null;
             public void Resetabandon() => __pbn__abandon = null;
@@ -4554,8 +4555,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(11)]
             public uint duration
             {
-                get { return __pbn__duration.GetValueOrDefault(); }
-                set { __pbn__duration = value; }
+                get => __pbn__duration.GetValueOrDefault();
+                set => __pbn__duration = value;
             }
             public bool ShouldSerializeduration() => __pbn__duration != null;
             public void Resetduration() => __pbn__duration = null;
@@ -4564,8 +4565,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(12)]
             public uint engine
             {
-                get { return __pbn__engine.GetValueOrDefault(); }
-                set { __pbn__engine = value; }
+                get => __pbn__engine.GetValueOrDefault();
+                set => __pbn__engine = value;
             }
             public bool ShouldSerializeengine() => __pbn__engine != null;
             public void Resetengine() => __pbn__engine = null;
@@ -4574,8 +4575,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(13)]
             public bool active_plus_subscription
             {
-                get { return __pbn__active_plus_subscription.GetValueOrDefault(); }
-                set { __pbn__active_plus_subscription = value; }
+                get => __pbn__active_plus_subscription.GetValueOrDefault();
+                set => __pbn__active_plus_subscription = value;
             }
             public bool ShouldSerializeactive_plus_subscription() => __pbn__active_plus_subscription != null;
             public void Resetactive_plus_subscription() => __pbn__active_plus_subscription = null;
@@ -4584,8 +4585,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(14)]
             public bool seasonal_rank
             {
-                get { return __pbn__seasonal_rank.GetValueOrDefault(); }
-                set { __pbn__seasonal_rank = value; }
+                get => __pbn__seasonal_rank.GetValueOrDefault();
+                set => __pbn__seasonal_rank = value;
             }
             public bool ShouldSerializeseasonal_rank() => __pbn__seasonal_rank != null;
             public void Resetseasonal_rank() => __pbn__seasonal_rank = null;
@@ -4594,8 +4595,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(15)]
             public uint tourney_id
             {
-                get { return __pbn__tourney_id.GetValueOrDefault(); }
-                set { __pbn__tourney_id = value; }
+                get => __pbn__tourney_id.GetValueOrDefault();
+                set => __pbn__tourney_id = value;
             }
             public bool ShouldSerializetourney_id() => __pbn__tourney_id != null;
             public void Resettourney_id() => __pbn__tourney_id = null;
@@ -4604,8 +4605,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(16)]
             public uint tourney_round
             {
-                get { return __pbn__tourney_round.GetValueOrDefault(); }
-                set { __pbn__tourney_round = value; }
+                get => __pbn__tourney_round.GetValueOrDefault();
+                set => __pbn__tourney_round = value;
             }
             public bool ShouldSerializetourney_round() => __pbn__tourney_round != null;
             public void Resettourney_round() => __pbn__tourney_round = null;
@@ -4614,8 +4615,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(17)]
             public uint tourney_tier
             {
-                get { return __pbn__tourney_tier.GetValueOrDefault(); }
-                set { __pbn__tourney_tier = value; }
+                get => __pbn__tourney_tier.GetValueOrDefault();
+                set => __pbn__tourney_tier = value;
             }
             public bool ShouldSerializetourney_tier() => __pbn__tourney_tier != null;
             public void Resettourney_tier() => __pbn__tourney_tier = null;
@@ -4624,8 +4625,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(18)]
             public uint tourney_division
             {
-                get { return __pbn__tourney_division.GetValueOrDefault(); }
-                set { __pbn__tourney_division = value; }
+                get => __pbn__tourney_division.GetValueOrDefault();
+                set => __pbn__tourney_division = value;
             }
             public bool ShouldSerializetourney_division() => __pbn__tourney_division != null;
             public void Resettourney_division() => __pbn__tourney_division = null;
@@ -4634,8 +4635,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(19)]
             public uint team_id
             {
-                get { return __pbn__team_id.GetValueOrDefault(); }
-                set { __pbn__team_id = value; }
+                get => __pbn__team_id.GetValueOrDefault();
+                set => __pbn__team_id = value;
             }
             public bool ShouldSerializeteam_id() => __pbn__team_id != null;
             public void Resetteam_id() => __pbn__team_id = null;
@@ -4645,8 +4646,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string team_name
             {
-                get { return __pbn__team_name ?? ""; }
-                set { __pbn__team_name = value; }
+                get => __pbn__team_name ?? "";
+                set => __pbn__team_name = value;
             }
             public bool ShouldSerializeteam_name() => __pbn__team_name != null;
             public void Resetteam_name() => __pbn__team_name = null;
@@ -4655,8 +4656,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(21)]
             public ulong ugc_team_ui_logo
             {
-                get { return __pbn__ugc_team_ui_logo.GetValueOrDefault(); }
-                set { __pbn__ugc_team_ui_logo = value; }
+                get => __pbn__ugc_team_ui_logo.GetValueOrDefault();
+                set => __pbn__ugc_team_ui_logo = value;
             }
             public bool ShouldSerializeugc_team_ui_logo() => __pbn__ugc_team_ui_logo != null;
             public void Resetugc_team_ui_logo() => __pbn__ugc_team_ui_logo = null;
@@ -4695,8 +4696,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResult.SUCCESS)]
         public EResult result
         {
-            get { return __pbn__result ?? EResult.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EResult.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -4715,8 +4716,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public ulong id
             {
-                get { return __pbn__id.GetValueOrDefault(); }
-                set { __pbn__id = value; }
+                get => __pbn__id.GetValueOrDefault();
+                set => __pbn__id = value;
             }
             public bool ShouldSerializeid() => __pbn__id != null;
             public void Resetid() => __pbn__id = null;
@@ -4725,8 +4726,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint type
             {
-                get { return __pbn__type.GetValueOrDefault(); }
-                set { __pbn__type = value; }
+                get => __pbn__type.GetValueOrDefault();
+                set => __pbn__type = value;
             }
             public bool ShouldSerializetype() => __pbn__type != null;
             public void Resettype() => __pbn__type = null;
@@ -4735,8 +4736,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint timestamp
             {
-                get { return __pbn__timestamp.GetValueOrDefault(); }
-                set { __pbn__timestamp = value; }
+                get => __pbn__timestamp.GetValueOrDefault();
+                set => __pbn__timestamp = value;
             }
             public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
             public void Resettimestamp() => __pbn__timestamp = null;
@@ -4745,8 +4746,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint reference_a
             {
-                get { return __pbn__reference_a.GetValueOrDefault(); }
-                set { __pbn__reference_a = value; }
+                get => __pbn__reference_a.GetValueOrDefault();
+                set => __pbn__reference_a = value;
             }
             public bool ShouldSerializereference_a() => __pbn__reference_a != null;
             public void Resetreference_a() => __pbn__reference_a = null;
@@ -4755,8 +4756,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint reference_b
             {
-                get { return __pbn__reference_b.GetValueOrDefault(); }
-                set { __pbn__reference_b = value; }
+                get => __pbn__reference_b.GetValueOrDefault();
+                set => __pbn__reference_b = value;
             }
             public bool ShouldSerializereference_b() => __pbn__reference_b != null;
             public void Resetreference_b() => __pbn__reference_b = null;
@@ -4765,8 +4766,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(6)]
             public uint reference_c
             {
-                get { return __pbn__reference_c.GetValueOrDefault(); }
-                set { __pbn__reference_c = value; }
+                get => __pbn__reference_c.GetValueOrDefault();
+                set => __pbn__reference_c = value;
             }
             public bool ShouldSerializereference_c() => __pbn__reference_c != null;
             public void Resetreference_c() => __pbn__reference_c = null;
@@ -4776,8 +4777,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string message
             {
-                get { return __pbn__message ?? ""; }
-                set { __pbn__message = value; }
+                get => __pbn__message ?? "";
+                set => __pbn__message = value;
             }
             public bool ShouldSerializemessage() => __pbn__message != null;
             public void Resetmessage() => __pbn__message = null;
@@ -4786,8 +4787,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(8)]
             public bool unread
             {
-                get { return __pbn__unread.GetValueOrDefault(); }
-                set { __pbn__unread = value; }
+                get => __pbn__unread.GetValueOrDefault();
+                set => __pbn__unread = value;
             }
             public bool ShouldSerializeunread() => __pbn__unread != null;
             public void Resetunread() => __pbn__unread = null;
@@ -4845,8 +4846,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -4855,8 +4856,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint timestamp
             {
-                get { return __pbn__timestamp.GetValueOrDefault(); }
-                set { __pbn__timestamp = value; }
+                get => __pbn__timestamp.GetValueOrDefault();
+                set => __pbn__timestamp = value;
             }
             public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
             public void Resettimestamp() => __pbn__timestamp = null;
@@ -4877,8 +4878,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string name
         {
-            get { return __pbn__name ?? ""; }
-            set { __pbn__name = value; }
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
         }
         public bool ShouldSerializename() => __pbn__name != null;
         public void Resetname() => __pbn__name = null;
@@ -4888,8 +4889,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string country_code
         {
-            get { return __pbn__country_code ?? ""; }
-            set { __pbn__country_code = value; }
+            get => __pbn__country_code ?? "";
+            set => __pbn__country_code = value;
         }
         public bool ShouldSerializecountry_code() => __pbn__country_code != null;
         public void Resetcountry_code() => __pbn__country_code = null;
@@ -4898,8 +4899,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint fantasy_role
         {
-            get { return __pbn__fantasy_role.GetValueOrDefault(); }
-            set { __pbn__fantasy_role = value; }
+            get => __pbn__fantasy_role.GetValueOrDefault();
+            set => __pbn__fantasy_role = value;
         }
         public bool ShouldSerializefantasy_role() => __pbn__fantasy_role != null;
         public void Resetfantasy_role() => __pbn__fantasy_role = null;
@@ -4908,8 +4909,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint team_id
         {
-            get { return __pbn__team_id.GetValueOrDefault(); }
-            set { __pbn__team_id = value; }
+            get => __pbn__team_id.GetValueOrDefault();
+            set => __pbn__team_id = value;
         }
         public bool ShouldSerializeteam_id() => __pbn__team_id != null;
         public void Resetteam_id() => __pbn__team_id = null;
@@ -4919,8 +4920,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string sponsor
         {
-            get { return __pbn__sponsor ?? ""; }
-            set { __pbn__sponsor = value; }
+            get => __pbn__sponsor ?? "";
+            set => __pbn__sponsor = value;
         }
         public bool ShouldSerializesponsor() => __pbn__sponsor != null;
         public void Resetsponsor() => __pbn__sponsor = null;
@@ -4939,8 +4940,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResult.SUCCESS)]
         public EResult result
         {
-            get { return __pbn__result ?? EResult.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EResult.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -4970,8 +4971,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong survey_key
         {
-            get { return __pbn__survey_key.GetValueOrDefault(); }
-            set { __pbn__survey_key = value; }
+            get => __pbn__survey_key.GetValueOrDefault();
+            set => __pbn__survey_key = value;
         }
         public bool ShouldSerializesurvey_key() => __pbn__survey_key != null;
         public void Resetsurvey_key() => __pbn__survey_key = null;
@@ -4987,8 +4988,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint question_id
             {
-                get { return __pbn__question_id.GetValueOrDefault(); }
-                set { __pbn__question_id = value; }
+                get => __pbn__question_id.GetValueOrDefault();
+                set => __pbn__question_id = value;
             }
             public bool ShouldSerializequestion_id() => __pbn__question_id != null;
             public void Resetquestion_id() => __pbn__question_id = null;
@@ -4997,8 +4998,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint survey_value
             {
-                get { return __pbn__survey_value.GetValueOrDefault(); }
-                set { __pbn__survey_value = value; }
+                get => __pbn__survey_value.GetValueOrDefault();
+                set => __pbn__survey_value = value;
             }
             public bool ShouldSerializesurvey_value() => __pbn__survey_value != null;
             public void Resetsurvey_value() => __pbn__survey_value = null;
@@ -5018,8 +5019,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -5028,8 +5029,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public byte[] unlocked_emoticons
         {
-            get { return __pbn__unlocked_emoticons; }
-            set { __pbn__unlocked_emoticons = value; }
+            get => __pbn__unlocked_emoticons;
+            set => __pbn__unlocked_emoticons = value;
         }
         public bool ShouldSerializeunlocked_emoticons() => __pbn__unlocked_emoticons != null;
         public void Resetunlocked_emoticons() => __pbn__unlocked_emoticons = null;
@@ -5068,8 +5069,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint dialog_id
         {
-            get { return __pbn__dialog_id.GetValueOrDefault(); }
-            set { __pbn__dialog_id = value; }
+            get => __pbn__dialog_id.GetValueOrDefault();
+            set => __pbn__dialog_id = value;
         }
         public bool ShouldSerializedialog_id() => __pbn__dialog_id != null;
         public void Resetdialog_id() => __pbn__dialog_id = null;
@@ -5078,8 +5079,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint value
         {
-            get { return __pbn__value.GetValueOrDefault(); }
-            set { __pbn__value = value; }
+            get => __pbn__value.GetValueOrDefault();
+            set => __pbn__value = value;
         }
         public bool ShouldSerializevalue() => __pbn__value != null;
         public void Resetvalue() => __pbn__value = null;
@@ -5097,8 +5098,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint item_def
         {
-            get { return __pbn__item_def.GetValueOrDefault(); }
-            set { __pbn__item_def = value; }
+            get => __pbn__item_def.GetValueOrDefault();
+            set => __pbn__item_def = value;
         }
         public bool ShouldSerializeitem_def() => __pbn__item_def != null;
         public void Resetitem_def() => __pbn__item_def = null;
@@ -5107,8 +5108,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint event_type
         {
-            get { return __pbn__event_type.GetValueOrDefault(); }
-            set { __pbn__event_type = value; }
+            get => __pbn__event_type.GetValueOrDefault();
+            set => __pbn__event_type = value;
         }
         public bool ShouldSerializeevent_type() => __pbn__event_type != null;
         public void Resetevent_type() => __pbn__event_type = null;
@@ -5189,8 +5190,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -5208,8 +5209,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -5218,8 +5219,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint curr_hero_id
         {
-            get { return __pbn__curr_hero_id.GetValueOrDefault(); }
-            set { __pbn__curr_hero_id = value; }
+            get => __pbn__curr_hero_id.GetValueOrDefault();
+            set => __pbn__curr_hero_id = value;
         }
         public bool ShouldSerializecurr_hero_id() => __pbn__curr_hero_id != null;
         public void Resetcurr_hero_id() => __pbn__curr_hero_id = null;
@@ -5228,8 +5229,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint laps_completed
         {
-            get { return __pbn__laps_completed.GetValueOrDefault(); }
-            set { __pbn__laps_completed = value; }
+            get => __pbn__laps_completed.GetValueOrDefault();
+            set => __pbn__laps_completed = value;
         }
         public bool ShouldSerializelaps_completed() => __pbn__laps_completed != null;
         public void Resetlaps_completed() => __pbn__laps_completed = null;
@@ -5238,8 +5239,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint curr_hero_games
         {
-            get { return __pbn__curr_hero_games.GetValueOrDefault(); }
-            set { __pbn__curr_hero_games = value; }
+            get => __pbn__curr_hero_games.GetValueOrDefault();
+            set => __pbn__curr_hero_games = value;
         }
         public bool ShouldSerializecurr_hero_games() => __pbn__curr_hero_games != null;
         public void Resetcurr_hero_games() => __pbn__curr_hero_games = null;
@@ -5248,8 +5249,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint curr_lap_time_started
         {
-            get { return __pbn__curr_lap_time_started.GetValueOrDefault(); }
-            set { __pbn__curr_lap_time_started = value; }
+            get => __pbn__curr_lap_time_started.GetValueOrDefault();
+            set => __pbn__curr_lap_time_started = value;
         }
         public bool ShouldSerializecurr_lap_time_started() => __pbn__curr_lap_time_started != null;
         public void Resetcurr_lap_time_started() => __pbn__curr_lap_time_started = null;
@@ -5258,8 +5259,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint curr_lap_games
         {
-            get { return __pbn__curr_lap_games.GetValueOrDefault(); }
-            set { __pbn__curr_lap_games = value; }
+            get => __pbn__curr_lap_games.GetValueOrDefault();
+            set => __pbn__curr_lap_games = value;
         }
         public bool ShouldSerializecurr_lap_games() => __pbn__curr_lap_games != null;
         public void Resetcurr_lap_games() => __pbn__curr_lap_games = null;
@@ -5268,8 +5269,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint best_lap_games
         {
-            get { return __pbn__best_lap_games.GetValueOrDefault(); }
-            set { __pbn__best_lap_games = value; }
+            get => __pbn__best_lap_games.GetValueOrDefault();
+            set => __pbn__best_lap_games = value;
         }
         public bool ShouldSerializebest_lap_games() => __pbn__best_lap_games != null;
         public void Resetbest_lap_games() => __pbn__best_lap_games = null;
@@ -5278,8 +5279,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint best_lap_time
         {
-            get { return __pbn__best_lap_time.GetValueOrDefault(); }
-            set { __pbn__best_lap_time = value; }
+            get => __pbn__best_lap_time.GetValueOrDefault();
+            set => __pbn__best_lap_time = value;
         }
         public bool ShouldSerializebest_lap_time() => __pbn__best_lap_time != null;
         public void Resetbest_lap_time() => __pbn__best_lap_time = null;
@@ -5288,8 +5289,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public uint lap_heroes_completed
         {
-            get { return __pbn__lap_heroes_completed.GetValueOrDefault(); }
-            set { __pbn__lap_heroes_completed = value; }
+            get => __pbn__lap_heroes_completed.GetValueOrDefault();
+            set => __pbn__lap_heroes_completed = value;
         }
         public bool ShouldSerializelap_heroes_completed() => __pbn__lap_heroes_completed != null;
         public void Resetlap_heroes_completed() => __pbn__lap_heroes_completed = null;
@@ -5298,8 +5299,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public uint lap_heroes_remaining
         {
-            get { return __pbn__lap_heroes_remaining.GetValueOrDefault(); }
-            set { __pbn__lap_heroes_remaining = value; }
+            get => __pbn__lap_heroes_remaining.GetValueOrDefault();
+            set => __pbn__lap_heroes_remaining = value;
         }
         public bool ShouldSerializelap_heroes_remaining() => __pbn__lap_heroes_remaining != null;
         public void Resetlap_heroes_remaining() => __pbn__lap_heroes_remaining = null;
@@ -5308,8 +5309,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public uint next_hero_id
         {
-            get { return __pbn__next_hero_id.GetValueOrDefault(); }
-            set { __pbn__next_hero_id = value; }
+            get => __pbn__next_hero_id.GetValueOrDefault();
+            set => __pbn__next_hero_id = value;
         }
         public bool ShouldSerializenext_hero_id() => __pbn__next_hero_id != null;
         public void Resetnext_hero_id() => __pbn__next_hero_id = null;
@@ -5318,8 +5319,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(12)]
         public uint prev_hero_id
         {
-            get { return __pbn__prev_hero_id.GetValueOrDefault(); }
-            set { __pbn__prev_hero_id = value; }
+            get => __pbn__prev_hero_id.GetValueOrDefault();
+            set => __pbn__prev_hero_id = value;
         }
         public bool ShouldSerializeprev_hero_id() => __pbn__prev_hero_id != null;
         public void Resetprev_hero_id() => __pbn__prev_hero_id = null;
@@ -5328,8 +5329,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(13)]
         public uint prev_hero_games
         {
-            get { return __pbn__prev_hero_games.GetValueOrDefault(); }
-            set { __pbn__prev_hero_games = value; }
+            get => __pbn__prev_hero_games.GetValueOrDefault();
+            set => __pbn__prev_hero_games = value;
         }
         public bool ShouldSerializeprev_hero_games() => __pbn__prev_hero_games != null;
         public void Resetprev_hero_games() => __pbn__prev_hero_games = null;
@@ -5338,8 +5339,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(14)]
         public float prev_avg_tries
         {
-            get { return __pbn__prev_avg_tries.GetValueOrDefault(); }
-            set { __pbn__prev_avg_tries = value; }
+            get => __pbn__prev_avg_tries.GetValueOrDefault();
+            set => __pbn__prev_avg_tries = value;
         }
         public bool ShouldSerializeprev_avg_tries() => __pbn__prev_avg_tries != null;
         public void Resetprev_avg_tries() => __pbn__prev_avg_tries = null;
@@ -5348,8 +5349,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public float curr_avg_tries
         {
-            get { return __pbn__curr_avg_tries.GetValueOrDefault(); }
-            set { __pbn__curr_avg_tries = value; }
+            get => __pbn__curr_avg_tries.GetValueOrDefault();
+            set => __pbn__curr_avg_tries = value;
         }
         public bool ShouldSerializecurr_avg_tries() => __pbn__curr_avg_tries != null;
         public void Resetcurr_avg_tries() => __pbn__curr_avg_tries = null;
@@ -5358,8 +5359,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(16)]
         public float next_avg_tries
         {
-            get { return __pbn__next_avg_tries.GetValueOrDefault(); }
-            set { __pbn__next_avg_tries = value; }
+            get => __pbn__next_avg_tries.GetValueOrDefault();
+            set => __pbn__next_avg_tries = value;
         }
         public bool ShouldSerializenext_avg_tries() => __pbn__next_avg_tries != null;
         public void Resetnext_avg_tries() => __pbn__next_avg_tries = null;
@@ -5368,8 +5369,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(17)]
         public float full_lap_avg_tries
         {
-            get { return __pbn__full_lap_avg_tries.GetValueOrDefault(); }
-            set { __pbn__full_lap_avg_tries = value; }
+            get => __pbn__full_lap_avg_tries.GetValueOrDefault();
+            set => __pbn__full_lap_avg_tries = value;
         }
         public bool ShouldSerializefull_lap_avg_tries() => __pbn__full_lap_avg_tries != null;
         public void Resetfull_lap_avg_tries() => __pbn__full_lap_avg_tries = null;
@@ -5378,8 +5379,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(18)]
         public float curr_lap_avg_tries
         {
-            get { return __pbn__curr_lap_avg_tries.GetValueOrDefault(); }
-            set { __pbn__curr_lap_avg_tries = value; }
+            get => __pbn__curr_lap_avg_tries.GetValueOrDefault();
+            set => __pbn__curr_lap_avg_tries = value;
         }
         public bool ShouldSerializecurr_lap_avg_tries() => __pbn__curr_lap_avg_tries != null;
         public void Resetcurr_lap_avg_tries() => __pbn__curr_lap_avg_tries = null;
@@ -5389,8 +5390,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string profile_name
         {
-            get { return __pbn__profile_name ?? ""; }
-            set { __pbn__profile_name = value; }
+            get => __pbn__profile_name ?? "";
+            set => __pbn__profile_name = value;
         }
         public bool ShouldSerializeprofile_name() => __pbn__profile_name != null;
         public void Resetprofile_name() => __pbn__profile_name = null;
@@ -5399,8 +5400,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(20)]
         public uint start_hero_id
         {
-            get { return __pbn__start_hero_id.GetValueOrDefault(); }
-            set { __pbn__start_hero_id = value; }
+            get => __pbn__start_hero_id.GetValueOrDefault();
+            set => __pbn__start_hero_id = value;
         }
         public bool ShouldSerializestart_hero_id() => __pbn__start_hero_id != null;
         public void Resetstart_hero_id() => __pbn__start_hero_id = null;
@@ -5418,8 +5419,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -5437,8 +5438,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -5451,8 +5452,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string profile_name
         {
-            get { return __pbn__profile_name ?? ""; }
-            set { __pbn__profile_name = value; }
+            get => __pbn__profile_name ?? "";
+            set => __pbn__profile_name = value;
         }
         public bool ShouldSerializeprofile_name() => __pbn__profile_name != null;
         public void Resetprofile_name() => __pbn__profile_name = null;
@@ -5468,8 +5469,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint trophy_id
             {
-                get { return __pbn__trophy_id.GetValueOrDefault(); }
-                set { __pbn__trophy_id = value; }
+                get => __pbn__trophy_id.GetValueOrDefault();
+                set => __pbn__trophy_id = value;
             }
             public bool ShouldSerializetrophy_id() => __pbn__trophy_id != null;
             public void Resettrophy_id() => __pbn__trophy_id = null;
@@ -5478,8 +5479,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint trophy_score
             {
-                get { return __pbn__trophy_score.GetValueOrDefault(); }
-                set { __pbn__trophy_score = value; }
+                get => __pbn__trophy_score.GetValueOrDefault();
+                set => __pbn__trophy_score = value;
             }
             public bool ShouldSerializetrophy_score() => __pbn__trophy_score != null;
             public void Resettrophy_score() => __pbn__trophy_score = null;
@@ -5488,8 +5489,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint last_updated
             {
-                get { return __pbn__last_updated.GetValueOrDefault(); }
-                set { __pbn__last_updated = value; }
+                get => __pbn__last_updated.GetValueOrDefault();
+                set => __pbn__last_updated = value;
             }
             public bool ShouldSerializelast_updated() => __pbn__last_updated != null;
             public void Resetlast_updated() => __pbn__last_updated = null;
@@ -5509,8 +5510,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint trophy_id
         {
-            get { return __pbn__trophy_id.GetValueOrDefault(); }
-            set { __pbn__trophy_id = value; }
+            get => __pbn__trophy_id.GetValueOrDefault();
+            set => __pbn__trophy_id = value;
         }
         public bool ShouldSerializetrophy_id() => __pbn__trophy_id != null;
         public void Resettrophy_id() => __pbn__trophy_id = null;
@@ -5519,8 +5520,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint trophy_score
         {
-            get { return __pbn__trophy_score.GetValueOrDefault(); }
-            set { __pbn__trophy_score = value; }
+            get => __pbn__trophy_score.GetValueOrDefault();
+            set => __pbn__trophy_score = value;
         }
         public bool ShouldSerializetrophy_score() => __pbn__trophy_score != null;
         public void Resettrophy_score() => __pbn__trophy_score = null;
@@ -5529,8 +5530,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint trophy_old_score
         {
-            get { return __pbn__trophy_old_score.GetValueOrDefault(); }
-            set { __pbn__trophy_old_score = value; }
+            get => __pbn__trophy_old_score.GetValueOrDefault();
+            set => __pbn__trophy_old_score = value;
         }
         public bool ShouldSerializetrophy_old_score() => __pbn__trophy_old_score != null;
         public void Resettrophy_old_score() => __pbn__trophy_old_score = null;
@@ -5539,8 +5540,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint last_updated
         {
-            get { return __pbn__last_updated.GetValueOrDefault(); }
-            set { __pbn__last_updated = value; }
+            get => __pbn__last_updated.GetValueOrDefault();
+            set => __pbn__last_updated = value;
         }
         public bool ShouldSerializelast_updated() => __pbn__last_updated != null;
         public void Resetlast_updated() => __pbn__last_updated = null;
@@ -5558,8 +5559,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -5587,8 +5588,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint slot_id
             {
-                get { return __pbn__slot_id.GetValueOrDefault(); }
-                set { __pbn__slot_id = value; }
+                get => __pbn__slot_id.GetValueOrDefault();
+                set => __pbn__slot_id = value;
             }
             public bool ShouldSerializeslot_id() => __pbn__slot_id != null;
             public void Resetslot_id() => __pbn__slot_id = null;
@@ -5598,8 +5599,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue(EProfileCardSlotType.k_EProfileCardSlotType_Empty)]
             public EProfileCardSlotType slot_type
             {
-                get { return __pbn__slot_type ?? EProfileCardSlotType.k_EProfileCardSlotType_Empty; }
-                set { __pbn__slot_type = value; }
+                get => __pbn__slot_type ?? EProfileCardSlotType.k_EProfileCardSlotType_Empty;
+                set => __pbn__slot_type = value;
             }
             public bool ShouldSerializeslot_type() => __pbn__slot_type != null;
             public void Resetslot_type() => __pbn__slot_type = null;
@@ -5608,8 +5609,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public ulong slot_value
             {
-                get { return __pbn__slot_value.GetValueOrDefault(); }
-                set { __pbn__slot_value = value; }
+                get => __pbn__slot_value.GetValueOrDefault();
+                set => __pbn__slot_value = value;
             }
             public bool ShouldSerializeslot_value() => __pbn__slot_value != null;
             public void Resetslot_value() => __pbn__slot_value = null;
@@ -5638,8 +5639,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong source_item
         {
-            get { return __pbn__source_item.GetValueOrDefault(); }
-            set { __pbn__source_item = value; }
+            get => __pbn__source_item.GetValueOrDefault();
+            set => __pbn__source_item = value;
         }
         public bool ShouldSerializesource_item() => __pbn__source_item != null;
         public void Resetsource_item() => __pbn__source_item = null;
@@ -5648,8 +5649,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -5659,8 +5660,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string sequence_name
         {
-            get { return __pbn__sequence_name ?? ""; }
-            set { __pbn__sequence_name = value; }
+            get => __pbn__sequence_name ?? "";
+            set => __pbn__sequence_name = value;
         }
         public bool ShouldSerializesequence_name() => __pbn__sequence_name != null;
         public void Resetsequence_name() => __pbn__sequence_name = null;
@@ -5669,8 +5670,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public float cycle
         {
-            get { return __pbn__cycle.GetValueOrDefault(); }
-            set { __pbn__cycle = value; }
+            get => __pbn__cycle.GetValueOrDefault();
+            set => __pbn__cycle = value;
         }
         public bool ShouldSerializecycle() => __pbn__cycle != null;
         public void Resetcycle() => __pbn__cycle = null;
@@ -5683,8 +5684,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string inscription
         {
-            get { return __pbn__inscription ?? ""; }
-            set { __pbn__inscription = value; }
+            get => __pbn__inscription ?? "";
+            set => __pbn__inscription = value;
         }
         public bool ShouldSerializeinscription() => __pbn__inscription != null;
         public void Resetinscription() => __pbn__inscription = null;
@@ -5696,8 +5697,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public ulong reforger_item
         {
-            get { return __pbn__reforger_item.GetValueOrDefault(); }
-            set { __pbn__reforger_item = value; }
+            get => __pbn__reforger_item.GetValueOrDefault();
+            set => __pbn__reforger_item = value;
         }
         public bool ShouldSerializereforger_item() => __pbn__reforger_item != null;
         public void Resetreforger_item() => __pbn__reforger_item = null;
@@ -5706,8 +5707,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public bool tournament_drop
         {
-            get { return __pbn__tournament_drop.GetValueOrDefault(); }
-            set { __pbn__tournament_drop = value; }
+            get => __pbn__tournament_drop.GetValueOrDefault();
+            set => __pbn__tournament_drop = value;
         }
         public bool ShouldSerializetournament_drop() => __pbn__tournament_drop != null;
         public void Resettournament_drop() => __pbn__tournament_drop = null;
@@ -5725,8 +5726,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong resulting_item
         {
-            get { return __pbn__resulting_item.GetValueOrDefault(); }
-            set { __pbn__resulting_item = value; }
+            get => __pbn__resulting_item.GetValueOrDefault();
+            set => __pbn__resulting_item = value;
         }
         public bool ShouldSerializeresulting_item() => __pbn__resulting_item != null;
         public void Resetresulting_item() => __pbn__resulting_item = null;
@@ -5745,8 +5746,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
         public EEvent active_event
         {
-            get { return __pbn__active_event ?? EEvent.EVENT_ID_NONE; }
-            set { __pbn__active_event = value; }
+            get => __pbn__active_event ?? EEvent.EVENT_ID_NONE;
+            set => __pbn__active_event = value;
         }
         public bool ShouldSerializeactive_event() => __pbn__active_event != null;
         public void Resetactive_event() => __pbn__active_event = null;
@@ -5764,8 +5765,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -5783,8 +5784,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -5796,8 +5797,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint match_count
         {
-            get { return __pbn__match_count.GetValueOrDefault(); }
-            set { __pbn__match_count = value; }
+            get => __pbn__match_count.GetValueOrDefault();
+            set => __pbn__match_count = value;
         }
         public bool ShouldSerializematch_count() => __pbn__match_count != null;
         public void Resetmatch_count() => __pbn__match_count = null;
@@ -5806,8 +5807,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public float mean_gpm
         {
-            get { return __pbn__mean_gpm.GetValueOrDefault(); }
-            set { __pbn__mean_gpm = value; }
+            get => __pbn__mean_gpm.GetValueOrDefault();
+            set => __pbn__mean_gpm = value;
         }
         public bool ShouldSerializemean_gpm() => __pbn__mean_gpm != null;
         public void Resetmean_gpm() => __pbn__mean_gpm = null;
@@ -5816,8 +5817,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public float mean_xppm
         {
-            get { return __pbn__mean_xppm.GetValueOrDefault(); }
-            set { __pbn__mean_xppm = value; }
+            get => __pbn__mean_xppm.GetValueOrDefault();
+            set => __pbn__mean_xppm = value;
         }
         public bool ShouldSerializemean_xppm() => __pbn__mean_xppm != null;
         public void Resetmean_xppm() => __pbn__mean_xppm = null;
@@ -5826,8 +5827,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public float mean_lasthits
         {
-            get { return __pbn__mean_lasthits.GetValueOrDefault(); }
-            set { __pbn__mean_lasthits = value; }
+            get => __pbn__mean_lasthits.GetValueOrDefault();
+            set => __pbn__mean_lasthits = value;
         }
         public bool ShouldSerializemean_lasthits() => __pbn__mean_lasthits != null;
         public void Resetmean_lasthits() => __pbn__mean_lasthits = null;
@@ -5836,8 +5837,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint rampages
         {
-            get { return __pbn__rampages.GetValueOrDefault(); }
-            set { __pbn__rampages = value; }
+            get => __pbn__rampages.GetValueOrDefault();
+            set => __pbn__rampages = value;
         }
         public bool ShouldSerializerampages() => __pbn__rampages != null;
         public void Resetrampages() => __pbn__rampages = null;
@@ -5846,8 +5847,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint triple_kills
         {
-            get { return __pbn__triple_kills.GetValueOrDefault(); }
-            set { __pbn__triple_kills = value; }
+            get => __pbn__triple_kills.GetValueOrDefault();
+            set => __pbn__triple_kills = value;
         }
         public bool ShouldSerializetriple_kills() => __pbn__triple_kills != null;
         public void Resettriple_kills() => __pbn__triple_kills = null;
@@ -5856,8 +5857,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public uint first_blood_claimed
         {
-            get { return __pbn__first_blood_claimed.GetValueOrDefault(); }
-            set { __pbn__first_blood_claimed = value; }
+            get => __pbn__first_blood_claimed.GetValueOrDefault();
+            set => __pbn__first_blood_claimed = value;
         }
         public bool ShouldSerializefirst_blood_claimed() => __pbn__first_blood_claimed != null;
         public void Resetfirst_blood_claimed() => __pbn__first_blood_claimed = null;
@@ -5866,8 +5867,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public uint first_blood_given
         {
-            get { return __pbn__first_blood_given.GetValueOrDefault(); }
-            set { __pbn__first_blood_given = value; }
+            get => __pbn__first_blood_given.GetValueOrDefault();
+            set => __pbn__first_blood_given = value;
         }
         public bool ShouldSerializefirst_blood_given() => __pbn__first_blood_given != null;
         public void Resetfirst_blood_given() => __pbn__first_blood_given = null;
@@ -5876,8 +5877,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public uint couriers_killed
         {
-            get { return __pbn__couriers_killed.GetValueOrDefault(); }
-            set { __pbn__couriers_killed = value; }
+            get => __pbn__couriers_killed.GetValueOrDefault();
+            set => __pbn__couriers_killed = value;
         }
         public bool ShouldSerializecouriers_killed() => __pbn__couriers_killed != null;
         public void Resetcouriers_killed() => __pbn__couriers_killed = null;
@@ -5886,8 +5887,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(12)]
         public uint aegises_snatched
         {
-            get { return __pbn__aegises_snatched.GetValueOrDefault(); }
-            set { __pbn__aegises_snatched = value; }
+            get => __pbn__aegises_snatched.GetValueOrDefault();
+            set => __pbn__aegises_snatched = value;
         }
         public bool ShouldSerializeaegises_snatched() => __pbn__aegises_snatched != null;
         public void Resetaegises_snatched() => __pbn__aegises_snatched = null;
@@ -5896,8 +5897,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(13)]
         public uint cheeses_eaten
         {
-            get { return __pbn__cheeses_eaten.GetValueOrDefault(); }
-            set { __pbn__cheeses_eaten = value; }
+            get => __pbn__cheeses_eaten.GetValueOrDefault();
+            set => __pbn__cheeses_eaten = value;
         }
         public bool ShouldSerializecheeses_eaten() => __pbn__cheeses_eaten != null;
         public void Resetcheeses_eaten() => __pbn__cheeses_eaten = null;
@@ -5906,8 +5907,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(14)]
         public uint creeps_stacked
         {
-            get { return __pbn__creeps_stacked.GetValueOrDefault(); }
-            set { __pbn__creeps_stacked = value; }
+            get => __pbn__creeps_stacked.GetValueOrDefault();
+            set => __pbn__creeps_stacked = value;
         }
         public bool ShouldSerializecreeps_stacked() => __pbn__creeps_stacked != null;
         public void Resetcreeps_stacked() => __pbn__creeps_stacked = null;
@@ -5916,8 +5917,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public float fight_score
         {
-            get { return __pbn__fight_score.GetValueOrDefault(); }
-            set { __pbn__fight_score = value; }
+            get => __pbn__fight_score.GetValueOrDefault();
+            set => __pbn__fight_score = value;
         }
         public bool ShouldSerializefight_score() => __pbn__fight_score != null;
         public void Resetfight_score() => __pbn__fight_score = null;
@@ -5926,8 +5927,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(16)]
         public float farm_score
         {
-            get { return __pbn__farm_score.GetValueOrDefault(); }
-            set { __pbn__farm_score = value; }
+            get => __pbn__farm_score.GetValueOrDefault();
+            set => __pbn__farm_score = value;
         }
         public bool ShouldSerializefarm_score() => __pbn__farm_score != null;
         public void Resetfarm_score() => __pbn__farm_score = null;
@@ -5936,8 +5937,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(17)]
         public float support_score
         {
-            get { return __pbn__support_score.GetValueOrDefault(); }
-            set { __pbn__support_score = value; }
+            get => __pbn__support_score.GetValueOrDefault();
+            set => __pbn__support_score = value;
         }
         public bool ShouldSerializesupport_score() => __pbn__support_score != null;
         public void Resetsupport_score() => __pbn__support_score = null;
@@ -5946,8 +5947,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(18)]
         public float push_score
         {
-            get { return __pbn__push_score.GetValueOrDefault(); }
-            set { __pbn__push_score = value; }
+            get => __pbn__push_score.GetValueOrDefault();
+            set => __pbn__push_score = value;
         }
         public bool ShouldSerializepush_score() => __pbn__push_score != null;
         public void Resetpush_score() => __pbn__push_score = null;
@@ -5956,8 +5957,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(19)]
         public float versatility_score
         {
-            get { return __pbn__versatility_score.GetValueOrDefault(); }
-            set { __pbn__versatility_score = value; }
+            get => __pbn__versatility_score.GetValueOrDefault();
+            set => __pbn__versatility_score = value;
         }
         public bool ShouldSerializeversatility_score() => __pbn__versatility_score != null;
         public void Resetversatility_score() => __pbn__versatility_score = null;
@@ -5966,8 +5967,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(20)]
         public float mean_networth
         {
-            get { return __pbn__mean_networth.GetValueOrDefault(); }
-            set { __pbn__mean_networth = value; }
+            get => __pbn__mean_networth.GetValueOrDefault();
+            set => __pbn__mean_networth = value;
         }
         public bool ShouldSerializemean_networth() => __pbn__mean_networth != null;
         public void Resetmean_networth() => __pbn__mean_networth = null;
@@ -5976,8 +5977,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(21)]
         public float mean_damage
         {
-            get { return __pbn__mean_damage.GetValueOrDefault(); }
-            set { __pbn__mean_damage = value; }
+            get => __pbn__mean_damage.GetValueOrDefault();
+            set => __pbn__mean_damage = value;
         }
         public bool ShouldSerializemean_damage() => __pbn__mean_damage != null;
         public void Resetmean_damage() => __pbn__mean_damage = null;
@@ -5986,8 +5987,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(22)]
         public float mean_heals
         {
-            get { return __pbn__mean_heals.GetValueOrDefault(); }
-            set { __pbn__mean_heals = value; }
+            get => __pbn__mean_heals.GetValueOrDefault();
+            set => __pbn__mean_heals = value;
         }
         public bool ShouldSerializemean_heals() => __pbn__mean_heals != null;
         public void Resetmean_heals() => __pbn__mean_heals = null;
@@ -5996,8 +5997,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(23)]
         public uint rapiers_purchased
         {
-            get { return __pbn__rapiers_purchased.GetValueOrDefault(); }
-            set { __pbn__rapiers_purchased = value; }
+            get => __pbn__rapiers_purchased.GetValueOrDefault();
+            set => __pbn__rapiers_purchased = value;
         }
         public bool ShouldSerializerapiers_purchased() => __pbn__rapiers_purchased != null;
         public void Resetrapiers_purchased() => __pbn__rapiers_purchased = null;
@@ -6015,8 +6016,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong custom_game_id
         {
-            get { return __pbn__custom_game_id.GetValueOrDefault(); }
-            set { __pbn__custom_game_id = value; }
+            get => __pbn__custom_game_id.GetValueOrDefault();
+            set => __pbn__custom_game_id = value;
         }
         public bool ShouldSerializecustom_game_id() => __pbn__custom_game_id != null;
         public void Resetcustom_game_id() => __pbn__custom_game_id = null;
@@ -6034,8 +6035,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong custom_game_id
         {
-            get { return __pbn__custom_game_id.GetValueOrDefault(); }
-            set { __pbn__custom_game_id = value; }
+            get => __pbn__custom_game_id.GetValueOrDefault();
+            set => __pbn__custom_game_id = value;
         }
         public bool ShouldSerializecustom_game_id() => __pbn__custom_game_id != null;
         public void Resetcustom_game_id() => __pbn__custom_game_id = null;
@@ -6044,8 +6045,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong player_count
         {
-            get { return __pbn__player_count.GetValueOrDefault(); }
-            set { __pbn__player_count = value; }
+            get => __pbn__player_count.GetValueOrDefault();
+            set => __pbn__player_count = value;
         }
         public bool ShouldSerializeplayer_count() => __pbn__player_count != null;
         public void Resetplayer_count() => __pbn__player_count = null;
@@ -6054,8 +6055,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong spectator_count
         {
-            get { return __pbn__spectator_count.GetValueOrDefault(); }
-            set { __pbn__spectator_count = value; }
+            get => __pbn__spectator_count.GetValueOrDefault();
+            set => __pbn__spectator_count = value;
         }
         public bool ShouldSerializespectator_count() => __pbn__spectator_count != null;
         public void Resetspectator_count() => __pbn__spectator_count = null;
@@ -6082,8 +6083,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -6102,8 +6103,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public ulong custom_game_id
             {
-                get { return __pbn__custom_game_id.GetValueOrDefault(); }
-                set { __pbn__custom_game_id = value; }
+                get => __pbn__custom_game_id.GetValueOrDefault();
+                set => __pbn__custom_game_id = value;
             }
             public bool ShouldSerializecustom_game_id() => __pbn__custom_game_id != null;
             public void Resetcustom_game_id() => __pbn__custom_game_id = null;
@@ -6126,8 +6127,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -6137,8 +6138,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string comment
         {
-            get { return __pbn__comment ?? ""; }
-            set { __pbn__comment = value; }
+            get => __pbn__comment ?? "";
+            set => __pbn__comment = value;
         }
         public bool ShouldSerializecomment() => __pbn__comment != null;
         public void Resetcomment() => __pbn__comment = null;
@@ -6156,8 +6157,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool success
         {
-            get { return __pbn__success.GetValueOrDefault(); }
-            set { __pbn__success = value; }
+            get => __pbn__success.GetValueOrDefault();
+            set => __pbn__success = value;
         }
         public bool ShouldSerializesuccess() => __pbn__success != null;
         public void Resetsuccess() => __pbn__success = null;
@@ -6176,8 +6177,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string message
         {
-            get { return __pbn__message ?? ""; }
-            set { __pbn__message = value; }
+            get => __pbn__message ?? "";
+            set => __pbn__message = value;
         }
         public bool ShouldSerializemessage() => __pbn__message != null;
         public void Resetmessage() => __pbn__message = null;
@@ -6186,8 +6187,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -6196,8 +6197,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint match_timestamp
         {
-            get { return __pbn__match_timestamp.GetValueOrDefault(); }
-            set { __pbn__match_timestamp = value; }
+            get => __pbn__match_timestamp.GetValueOrDefault();
+            set => __pbn__match_timestamp = value;
         }
         public bool ShouldSerializematch_timestamp() => __pbn__match_timestamp != null;
         public void Resetmatch_timestamp() => __pbn__match_timestamp = null;
@@ -6215,8 +6216,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool success
         {
-            get { return __pbn__success.GetValueOrDefault(); }
-            set { __pbn__success = value; }
+            get => __pbn__success.GetValueOrDefault();
+            set => __pbn__success = value;
         }
         public bool ShouldSerializesuccess() => __pbn__success != null;
         public void Resetsuccess() => __pbn__success = null;
@@ -6234,8 +6235,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong custom_game_id
         {
-            get { return __pbn__custom_game_id.GetValueOrDefault(); }
-            set { __pbn__custom_game_id = value; }
+            get => __pbn__custom_game_id.GetValueOrDefault();
+            set => __pbn__custom_game_id = value;
         }
         public bool ShouldSerializecustom_game_id() => __pbn__custom_game_id != null;
         public void Resetcustom_game_id() => __pbn__custom_game_id = null;
@@ -6253,8 +6254,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong custom_game_id
         {
-            get { return __pbn__custom_game_id.GetValueOrDefault(); }
-            set { __pbn__custom_game_id = value; }
+            get => __pbn__custom_game_id.GetValueOrDefault();
+            set => __pbn__custom_game_id = value;
         }
         public bool ShouldSerializecustom_game_id() => __pbn__custom_game_id != null;
         public void Resetcustom_game_id() => __pbn__custom_game_id = null;
@@ -6275,8 +6276,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -6286,8 +6287,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string comment
         {
-            get { return __pbn__comment ?? ""; }
-            set { __pbn__comment = value; }
+            get => __pbn__comment ?? "";
+            set => __pbn__comment = value;
         }
         public bool ShouldSerializecomment() => __pbn__comment != null;
         public void Resetcomment() => __pbn__comment = null;
@@ -6305,8 +6306,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool success
         {
-            get { return __pbn__success.GetValueOrDefault(); }
-            set { __pbn__success = value; }
+            get => __pbn__success.GetValueOrDefault();
+            set => __pbn__success = value;
         }
         public bool ShouldSerializesuccess() => __pbn__success != null;
         public void Resetsuccess() => __pbn__success = null;
@@ -6324,8 +6325,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -6334,8 +6335,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint pagination_timestamp
         {
-            get { return __pbn__pagination_timestamp.GetValueOrDefault(); }
-            set { __pbn__pagination_timestamp = value; }
+            get => __pbn__pagination_timestamp.GetValueOrDefault();
+            set => __pbn__pagination_timestamp = value;
         }
         public bool ShouldSerializepagination_timestamp() => __pbn__pagination_timestamp != null;
         public void Resetpagination_timestamp() => __pbn__pagination_timestamp = null;
@@ -6353,8 +6354,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool success
         {
-            get { return __pbn__success.GetValueOrDefault(); }
-            set { __pbn__success = value; }
+            get => __pbn__success.GetValueOrDefault();
+            set => __pbn__success = value;
         }
         public bool ShouldSerializesuccess() => __pbn__success != null;
         public void Resetsuccess() => __pbn__success = null;
@@ -6373,8 +6374,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -6384,8 +6385,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string persona_name
             {
-                get { return __pbn__persona_name ?? ""; }
-                set { __pbn__persona_name = value; }
+                get => __pbn__persona_name ?? "";
+                set => __pbn__persona_name = value;
             }
             public bool ShouldSerializepersona_name() => __pbn__persona_name != null;
             public void Resetpersona_name() => __pbn__persona_name = null;
@@ -6394,8 +6395,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint timestamp
             {
-                get { return __pbn__timestamp.GetValueOrDefault(); }
-                set { __pbn__timestamp = value; }
+                get => __pbn__timestamp.GetValueOrDefault();
+                set => __pbn__timestamp = value;
             }
             public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
             public void Resettimestamp() => __pbn__timestamp = null;
@@ -6405,8 +6406,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string comment
             {
-                get { return __pbn__comment ?? ""; }
-                set { __pbn__comment = value; }
+                get => __pbn__comment ?? "";
+                set => __pbn__comment = value;
             }
             public bool ShouldSerializecomment() => __pbn__comment != null;
             public void Resetcomment() => __pbn__comment = null;
@@ -6426,8 +6427,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong party_id
         {
-            get { return __pbn__party_id.GetValueOrDefault(); }
-            set { __pbn__party_id = value; }
+            get => __pbn__party_id.GetValueOrDefault();
+            set => __pbn__party_id = value;
         }
         public bool ShouldSerializeparty_id() => __pbn__party_id != null;
         public void Resetparty_id() => __pbn__party_id = null;
@@ -6437,8 +6438,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(CSODOTAParty.State.UI)]
         public CSODOTAParty.State party_state
         {
-            get { return __pbn__party_state ?? CSODOTAParty.State.UI; }
-            set { __pbn__party_state = value; }
+            get => __pbn__party_state ?? CSODOTAParty.State.UI;
+            set => __pbn__party_state = value;
         }
         public bool ShouldSerializeparty_state() => __pbn__party_state != null;
         public void Resetparty_state() => __pbn__party_state = null;
@@ -6447,8 +6448,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public bool open
         {
-            get { return __pbn__open.GetValueOrDefault(); }
-            set { __pbn__open = value; }
+            get => __pbn__open.GetValueOrDefault();
+            set => __pbn__open = value;
         }
         public bool ShouldSerializeopen() => __pbn__open != null;
         public void Resetopen() => __pbn__open = null;
@@ -6457,8 +6458,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public bool low_priority
         {
-            get { return __pbn__low_priority.GetValueOrDefault(); }
-            set { __pbn__low_priority = value; }
+            get => __pbn__low_priority.GetValueOrDefault();
+            set => __pbn__low_priority = value;
         }
         public bool ShouldSerializelow_priority() => __pbn__low_priority != null;
         public void Resetlow_priority() => __pbn__low_priority = null;
@@ -6467,8 +6468,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint team_id
         {
-            get { return __pbn__team_id.GetValueOrDefault(); }
-            set { __pbn__team_id = value; }
+            get => __pbn__team_id.GetValueOrDefault();
+            set => __pbn__team_id = value;
         }
         public bool ShouldSerializeteam_id() => __pbn__team_id != null;
         public void Resetteam_id() => __pbn__team_id = null;
@@ -6478,8 +6479,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string team_name
         {
-            get { return __pbn__team_name ?? ""; }
-            set { __pbn__team_name = value; }
+            get => __pbn__team_name ?? "";
+            set => __pbn__team_name = value;
         }
         public bool ShouldSerializeteam_name() => __pbn__team_name != null;
         public void Resetteam_name() => __pbn__team_name = null;
@@ -6488,8 +6489,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public ulong ugc_team_ui_logo
         {
-            get { return __pbn__ugc_team_ui_logo.GetValueOrDefault(); }
-            set { __pbn__ugc_team_ui_logo = value; }
+            get => __pbn__ugc_team_ui_logo.GetValueOrDefault();
+            set => __pbn__ugc_team_ui_logo = value;
         }
         public bool ShouldSerializeugc_team_ui_logo() => __pbn__ugc_team_ui_logo != null;
         public void Resetugc_team_ui_logo() => __pbn__ugc_team_ui_logo = null;
@@ -6511,8 +6512,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public ulong steam_id
             {
-                get { return __pbn__steam_id.GetValueOrDefault(); }
-                set { __pbn__steam_id = value; }
+                get => __pbn__steam_id.GetValueOrDefault();
+                set => __pbn__steam_id = value;
             }
             public bool ShouldSerializesteam_id() => __pbn__steam_id != null;
             public void Resetsteam_id() => __pbn__steam_id = null;
@@ -6521,8 +6522,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public bool coach
             {
-                get { return __pbn__coach.GetValueOrDefault(); }
-                set { __pbn__coach = value; }
+                get => __pbn__coach.GetValueOrDefault();
+                set => __pbn__coach = value;
             }
             public bool ShouldSerializecoach() => __pbn__coach != null;
             public void Resetcoach() => __pbn__coach = null;
@@ -6540,8 +6541,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint division
             {
-                get { return __pbn__division.GetValueOrDefault(); }
-                set { __pbn__division = value; }
+                get => __pbn__division.GetValueOrDefault();
+                set => __pbn__division = value;
             }
             public bool ShouldSerializedivision() => __pbn__division != null;
             public void Resetdivision() => __pbn__division = null;
@@ -6550,8 +6551,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint skill_level
             {
-                get { return __pbn__skill_level.GetValueOrDefault(); }
-                set { __pbn__skill_level = value; }
+                get => __pbn__skill_level.GetValueOrDefault();
+                set => __pbn__skill_level = value;
             }
             public bool ShouldSerializeskill_level() => __pbn__skill_level != null;
             public void Resetskill_level() => __pbn__skill_level = null;
@@ -6560,8 +6561,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint round
             {
-                get { return __pbn__round.GetValueOrDefault(); }
-                set { __pbn__round = value; }
+                get => __pbn__round.GetValueOrDefault();
+                set => __pbn__round = value;
             }
             public bool ShouldSerializeround() => __pbn__round != null;
             public void Resetround() => __pbn__round = null;
@@ -6570,8 +6571,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint tournament_id
             {
-                get { return __pbn__tournament_id.GetValueOrDefault(); }
-                set { __pbn__tournament_id = value; }
+                get => __pbn__tournament_id.GetValueOrDefault();
+                set => __pbn__tournament_id = value;
             }
             public bool ShouldSerializetournament_id() => __pbn__tournament_id != null;
             public void Resettournament_id() => __pbn__tournament_id = null;
@@ -6580,8 +6581,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint state_seq_num
             {
-                get { return __pbn__state_seq_num.GetValueOrDefault(); }
-                set { __pbn__state_seq_num = value; }
+                get => __pbn__state_seq_num.GetValueOrDefault();
+                set => __pbn__state_seq_num = value;
             }
             public bool ShouldSerializestate_seq_num() => __pbn__state_seq_num != null;
             public void Resetstate_seq_num() => __pbn__state_seq_num = null;
@@ -6591,8 +6592,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue(EWeekendTourneyRichPresenceEvent.k_EWeekendTourneyRichPresenceEvent_None)]
             public EWeekendTourneyRichPresenceEvent @event
             {
-                get { return __pbn__event ?? EWeekendTourneyRichPresenceEvent.k_EWeekendTourneyRichPresenceEvent_None; }
-                set { __pbn__event = value; }
+                get => __pbn__event ?? EWeekendTourneyRichPresenceEvent.k_EWeekendTourneyRichPresenceEvent_None;
+                set => __pbn__event = value;
             }
             public bool ShouldSerializeevent() => __pbn__event != null;
             public void Resetevent() => __pbn__event = null;
@@ -6601,8 +6602,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(7)]
             public uint event_round
             {
-                get { return __pbn__event_round.GetValueOrDefault(); }
-                set { __pbn__event_round = value; }
+                get => __pbn__event_round.GetValueOrDefault();
+                set => __pbn__event_round = value;
             }
             public bool ShouldSerializeevent_round() => __pbn__event_round != null;
             public void Resetevent_round() => __pbn__event_round = null;
@@ -6622,8 +6623,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong lobby_id
         {
-            get { return __pbn__lobby_id.GetValueOrDefault(); }
-            set { __pbn__lobby_id = value; }
+            get => __pbn__lobby_id.GetValueOrDefault();
+            set => __pbn__lobby_id = value;
         }
         public bool ShouldSerializelobby_id() => __pbn__lobby_id != null;
         public void Resetlobby_id() => __pbn__lobby_id = null;
@@ -6633,8 +6634,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(CSODOTALobby.State.UI)]
         public CSODOTALobby.State lobby_state
         {
-            get { return __pbn__lobby_state ?? CSODOTALobby.State.UI; }
-            set { __pbn__lobby_state = value; }
+            get => __pbn__lobby_state ?? CSODOTALobby.State.UI;
+            set => __pbn__lobby_state = value;
         }
         public bool ShouldSerializelobby_state() => __pbn__lobby_state != null;
         public void Resetlobby_state() => __pbn__lobby_state = null;
@@ -6643,8 +6644,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public bool password
         {
-            get { return __pbn__password.GetValueOrDefault(); }
-            set { __pbn__password = value; }
+            get => __pbn__password.GetValueOrDefault();
+            set => __pbn__password = value;
         }
         public bool ShouldSerializepassword() => __pbn__password != null;
         public void Resetpassword() => __pbn__password = null;
@@ -6654,8 +6655,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(DOTA_GameMode.DOTA_GAMEMODE_NONE)]
         public DOTA_GameMode game_mode
         {
-            get { return __pbn__game_mode ?? DOTA_GameMode.DOTA_GAMEMODE_NONE; }
-            set { __pbn__game_mode = value; }
+            get => __pbn__game_mode ?? DOTA_GameMode.DOTA_GAMEMODE_NONE;
+            set => __pbn__game_mode = value;
         }
         public bool ShouldSerializegame_mode() => __pbn__game_mode != null;
         public void Resetgame_mode() => __pbn__game_mode = null;
@@ -6664,8 +6665,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint member_count
         {
-            get { return __pbn__member_count.GetValueOrDefault(); }
-            set { __pbn__member_count = value; }
+            get => __pbn__member_count.GetValueOrDefault();
+            set => __pbn__member_count = value;
         }
         public bool ShouldSerializemember_count() => __pbn__member_count != null;
         public void Resetmember_count() => __pbn__member_count = null;
@@ -6674,8 +6675,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint max_member_count
         {
-            get { return __pbn__max_member_count.GetValueOrDefault(); }
-            set { __pbn__max_member_count = value; }
+            get => __pbn__max_member_count.GetValueOrDefault();
+            set => __pbn__max_member_count = value;
         }
         public bool ShouldSerializemax_member_count() => __pbn__max_member_count != null;
         public void Resetmax_member_count() => __pbn__max_member_count = null;
@@ -6684,8 +6685,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(7, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong custom_game_id
         {
-            get { return __pbn__custom_game_id.GetValueOrDefault(); }
-            set { __pbn__custom_game_id = value; }
+            get => __pbn__custom_game_id.GetValueOrDefault();
+            set => __pbn__custom_game_id = value;
         }
         public bool ShouldSerializecustom_game_id() => __pbn__custom_game_id != null;
         public void Resetcustom_game_id() => __pbn__custom_game_id = null;
@@ -6695,8 +6696,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string name
         {
-            get { return __pbn__name ?? ""; }
-            set { __pbn__name = value; }
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
         }
         public bool ShouldSerializename() => __pbn__name != null;
         public void Resetname() => __pbn__name = null;
@@ -6705,8 +6706,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public uint lobby_type
         {
-            get { return __pbn__lobby_type.GetValueOrDefault(); }
-            set { __pbn__lobby_type = value; }
+            get => __pbn__lobby_type.GetValueOrDefault();
+            set => __pbn__lobby_type = value;
         }
         public bool ShouldSerializelobby_type() => __pbn__lobby_type != null;
         public void Resetlobby_type() => __pbn__lobby_type = null;
@@ -6724,8 +6725,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong lobby_id
         {
-            get { return __pbn__lobby_id.GetValueOrDefault(); }
-            set { __pbn__lobby_id = value; }
+            get => __pbn__lobby_id.GetValueOrDefault();
+            set => __pbn__lobby_id = value;
         }
         public bool ShouldSerializelobby_id() => __pbn__lobby_id != null;
         public void Resetlobby_id() => __pbn__lobby_id = null;
@@ -6734,8 +6735,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong custom_game_id
         {
-            get { return __pbn__custom_game_id.GetValueOrDefault(); }
-            set { __pbn__custom_game_id = value; }
+            get => __pbn__custom_game_id.GetValueOrDefault();
+            set => __pbn__custom_game_id = value;
         }
         public bool ShouldSerializecustom_game_id() => __pbn__custom_game_id != null;
         public void Resetcustom_game_id() => __pbn__custom_game_id = null;
@@ -6747,8 +6748,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint start_time
         {
-            get { return __pbn__start_time.GetValueOrDefault(); }
-            set { __pbn__start_time = value; }
+            get => __pbn__start_time.GetValueOrDefault();
+            set => __pbn__start_time = value;
         }
         public bool ShouldSerializestart_time() => __pbn__start_time != null;
         public void Resetstart_time() => __pbn__start_time = null;
@@ -6766,8 +6767,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong lobby_id
         {
-            get { return __pbn__lobby_id.GetValueOrDefault(); }
-            set { __pbn__lobby_id = value; }
+            get => __pbn__lobby_id.GetValueOrDefault();
+            set => __pbn__lobby_id = value;
         }
         public bool ShouldSerializelobby_id() => __pbn__lobby_id != null;
         public void Resetlobby_id() => __pbn__lobby_id = null;
@@ -6776,8 +6777,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint loading_duration
         {
-            get { return __pbn__loading_duration.GetValueOrDefault(); }
-            set { __pbn__loading_duration = value; }
+            get => __pbn__loading_duration.GetValueOrDefault();
+            set => __pbn__loading_duration = value;
         }
         public bool ShouldSerializeloading_duration() => __pbn__loading_duration != null;
         public void Resetloading_duration() => __pbn__loading_duration = null;
@@ -6786,8 +6787,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
         public int result_code
         {
-            get { return __pbn__result_code.GetValueOrDefault(); }
-            set { __pbn__result_code = value; }
+            get => __pbn__result_code.GetValueOrDefault();
+            set => __pbn__result_code = value;
         }
         public bool ShouldSerializeresult_code() => __pbn__result_code != null;
         public void Resetresult_code() => __pbn__result_code = null;
@@ -6797,8 +6798,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string result_string
         {
-            get { return __pbn__result_string ?? ""; }
-            set { __pbn__result_string = value; }
+            get => __pbn__result_string ?? "";
+            set => __pbn__result_string = value;
         }
         public bool ShouldSerializeresult_string() => __pbn__result_string != null;
         public void Resetresult_string() => __pbn__result_string = null;
@@ -6807,8 +6808,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint signon_states
         {
-            get { return __pbn__signon_states.GetValueOrDefault(); }
-            set { __pbn__signon_states = value; }
+            get => __pbn__signon_states.GetValueOrDefault();
+            set => __pbn__signon_states = value;
         }
         public bool ShouldSerializesignon_states() => __pbn__signon_states != null;
         public void Resetsignon_states() => __pbn__signon_states = null;
@@ -6818,8 +6819,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string comment
         {
-            get { return __pbn__comment ?? ""; }
-            set { __pbn__comment = value; }
+            get => __pbn__comment ?? "";
+            set => __pbn__comment = value;
         }
         public bool ShouldSerializecomment() => __pbn__comment != null;
         public void Resetcomment() => __pbn__comment = null;
@@ -6837,8 +6838,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong item_id_1
         {
-            get { return __pbn__item_id_1.GetValueOrDefault(); }
-            set { __pbn__item_id_1 = value; }
+            get => __pbn__item_id_1.GetValueOrDefault();
+            set => __pbn__item_id_1 = value;
         }
         public bool ShouldSerializeitem_id_1() => __pbn__item_id_1 != null;
         public void Resetitem_id_1() => __pbn__item_id_1 = null;
@@ -6847,8 +6848,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong item_id_2
         {
-            get { return __pbn__item_id_2.GetValueOrDefault(); }
-            set { __pbn__item_id_2 = value; }
+            get => __pbn__item_id_2.GetValueOrDefault();
+            set => __pbn__item_id_2 = value;
         }
         public bool ShouldSerializeitem_id_2() => __pbn__item_id_2 != null;
         public void Resetitem_id_2() => __pbn__item_id_2 = null;
@@ -6896,8 +6897,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool success
         {
-            get { return __pbn__success.GetValueOrDefault(); }
-            set { __pbn__success = value; }
+            get => __pbn__success.GetValueOrDefault();
+            set => __pbn__success = value;
         }
         public bool ShouldSerializesuccess() => __pbn__success != null;
         public void Resetsuccess() => __pbn__success = null;
@@ -6916,8 +6917,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint challenge_id
             {
-                get { return __pbn__challenge_id.GetValueOrDefault(); }
-                set { __pbn__challenge_id = value; }
+                get => __pbn__challenge_id.GetValueOrDefault();
+                set => __pbn__challenge_id = value;
             }
             public bool ShouldSerializechallenge_id() => __pbn__challenge_id != null;
             public void Resetchallenge_id() => __pbn__challenge_id = null;
@@ -6926,8 +6927,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint time_completed
             {
-                get { return __pbn__time_completed.GetValueOrDefault(); }
-                set { __pbn__time_completed = value; }
+                get => __pbn__time_completed.GetValueOrDefault();
+                set => __pbn__time_completed = value;
             }
             public bool ShouldSerializetime_completed() => __pbn__time_completed != null;
             public void Resettime_completed() => __pbn__time_completed = null;
@@ -6936,8 +6937,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint attempts
             {
-                get { return __pbn__attempts.GetValueOrDefault(); }
-                set { __pbn__attempts = value; }
+                get => __pbn__attempts.GetValueOrDefault();
+                set => __pbn__attempts = value;
             }
             public bool ShouldSerializeattempts() => __pbn__attempts != null;
             public void Resetattempts() => __pbn__attempts = null;
@@ -6946,8 +6947,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint hero_id
             {
-                get { return __pbn__hero_id.GetValueOrDefault(); }
-                set { __pbn__hero_id = value; }
+                get => __pbn__hero_id.GetValueOrDefault();
+                set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
@@ -6956,8 +6957,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint template_id
             {
-                get { return __pbn__template_id.GetValueOrDefault(); }
-                set { __pbn__template_id = value; }
+                get => __pbn__template_id.GetValueOrDefault();
+                set => __pbn__template_id = value;
             }
             public bool ShouldSerializetemplate_id() => __pbn__template_id != null;
             public void Resettemplate_id() => __pbn__template_id = null;
@@ -6966,8 +6967,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(6)]
             public uint quest_rank
             {
-                get { return __pbn__quest_rank.GetValueOrDefault(); }
-                set { __pbn__quest_rank = value; }
+                get => __pbn__quest_rank.GetValueOrDefault();
+                set => __pbn__quest_rank = value;
             }
             public bool ShouldSerializequest_rank() => __pbn__quest_rank != null;
             public void Resetquest_rank() => __pbn__quest_rank = null;
@@ -6985,8 +6986,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint quest_id
             {
-                get { return __pbn__quest_id.GetValueOrDefault(); }
-                set { __pbn__quest_id = value; }
+                get => __pbn__quest_id.GetValueOrDefault();
+                set => __pbn__quest_id = value;
             }
             public bool ShouldSerializequest_id() => __pbn__quest_id != null;
             public void Resetquest_id() => __pbn__quest_id = null;
@@ -7009,8 +7010,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -7028,8 +7029,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -7047,8 +7048,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -7078,8 +7079,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -7088,8 +7089,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -7098,8 +7099,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint seq_num
         {
-            get { return __pbn__seq_num.GetValueOrDefault(); }
-            set { __pbn__seq_num = value; }
+            get => __pbn__seq_num.GetValueOrDefault();
+            set => __pbn__seq_num = value;
         }
         public bool ShouldSerializeseq_num() => __pbn__seq_num != null;
         public void Resetseq_num() => __pbn__seq_num = null;
@@ -7108,8 +7109,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint reasons
         {
-            get { return __pbn__reasons.GetValueOrDefault(); }
-            set { __pbn__reasons = value; }
+            get => __pbn__reasons.GetValueOrDefault();
+            set => __pbn__reasons = value;
         }
         public bool ShouldSerializereasons() => __pbn__reasons != null;
         public void Resetreasons() => __pbn__reasons = null;
@@ -7118,8 +7119,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint matches_in_report
         {
-            get { return __pbn__matches_in_report.GetValueOrDefault(); }
-            set { __pbn__matches_in_report = value; }
+            get => __pbn__matches_in_report.GetValueOrDefault();
+            set => __pbn__matches_in_report = value;
         }
         public bool ShouldSerializematches_in_report() => __pbn__matches_in_report != null;
         public void Resetmatches_in_report() => __pbn__matches_in_report = null;
@@ -7128,8 +7129,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint matches_clean
         {
-            get { return __pbn__matches_clean.GetValueOrDefault(); }
-            set { __pbn__matches_clean = value; }
+            get => __pbn__matches_clean.GetValueOrDefault();
+            set => __pbn__matches_clean = value;
         }
         public bool ShouldSerializematches_clean() => __pbn__matches_clean != null;
         public void Resetmatches_clean() => __pbn__matches_clean = null;
@@ -7138,8 +7139,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint matches_reported
         {
-            get { return __pbn__matches_reported.GetValueOrDefault(); }
-            set { __pbn__matches_reported = value; }
+            get => __pbn__matches_reported.GetValueOrDefault();
+            set => __pbn__matches_reported = value;
         }
         public bool ShouldSerializematches_reported() => __pbn__matches_reported != null;
         public void Resetmatches_reported() => __pbn__matches_reported = null;
@@ -7148,8 +7149,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint matches_abandoned
         {
-            get { return __pbn__matches_abandoned.GetValueOrDefault(); }
-            set { __pbn__matches_abandoned = value; }
+            get => __pbn__matches_abandoned.GetValueOrDefault();
+            set => __pbn__matches_abandoned = value;
         }
         public bool ShouldSerializematches_abandoned() => __pbn__matches_abandoned != null;
         public void Resetmatches_abandoned() => __pbn__matches_abandoned = null;
@@ -7158,8 +7159,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public uint reports_count
         {
-            get { return __pbn__reports_count.GetValueOrDefault(); }
-            set { __pbn__reports_count = value; }
+            get => __pbn__reports_count.GetValueOrDefault();
+            set => __pbn__reports_count = value;
         }
         public bool ShouldSerializereports_count() => __pbn__reports_count != null;
         public void Resetreports_count() => __pbn__reports_count = null;
@@ -7168,8 +7169,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public uint reports_parties
         {
-            get { return __pbn__reports_parties.GetValueOrDefault(); }
-            set { __pbn__reports_parties = value; }
+            get => __pbn__reports_parties.GetValueOrDefault();
+            set => __pbn__reports_parties = value;
         }
         public bool ShouldSerializereports_parties() => __pbn__reports_parties != null;
         public void Resetreports_parties() => __pbn__reports_parties = null;
@@ -7178,8 +7179,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public uint commend_count
         {
-            get { return __pbn__commend_count.GetValueOrDefault(); }
-            set { __pbn__commend_count = value; }
+            get => __pbn__commend_count.GetValueOrDefault();
+            set => __pbn__commend_count = value;
         }
         public bool ShouldSerializecommend_count() => __pbn__commend_count != null;
         public void Resetcommend_count() => __pbn__commend_count = null;
@@ -7188,8 +7189,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(14)]
         public uint date
         {
-            get { return __pbn__date.GetValueOrDefault(); }
-            set { __pbn__date = value; }
+            get => __pbn__date.GetValueOrDefault();
+            set => __pbn__date = value;
         }
         public bool ShouldSerializedate() => __pbn__date != null;
         public void Resetdate() => __pbn__date = null;
@@ -7198,8 +7199,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public uint behavior_grade
         {
-            get { return __pbn__behavior_grade.GetValueOrDefault(); }
-            set { __pbn__behavior_grade = value; }
+            get => __pbn__behavior_grade.GetValueOrDefault();
+            set => __pbn__behavior_grade = value;
         }
         public bool ShouldSerializebehavior_grade() => __pbn__behavior_grade != null;
         public void Resetbehavior_grade() => __pbn__behavior_grade = null;
@@ -7208,8 +7209,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(17)]
         public uint raw_behavior_score
         {
-            get { return __pbn__raw_behavior_score.GetValueOrDefault(); }
-            set { __pbn__raw_behavior_score = value; }
+            get => __pbn__raw_behavior_score.GetValueOrDefault();
+            set => __pbn__raw_behavior_score = value;
         }
         public bool ShouldSerializeraw_behavior_score() => __pbn__raw_behavior_score != null;
         public void Resetraw_behavior_score() => __pbn__raw_behavior_score = null;
@@ -7218,8 +7219,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(18)]
         public uint old_raw_behavior_score
         {
-            get { return __pbn__old_raw_behavior_score.GetValueOrDefault(); }
-            set { __pbn__old_raw_behavior_score = value; }
+            get => __pbn__old_raw_behavior_score.GetValueOrDefault();
+            set => __pbn__old_raw_behavior_score = value;
         }
         public bool ShouldSerializeold_raw_behavior_score() => __pbn__old_raw_behavior_score != null;
         public void Resetold_raw_behavior_score() => __pbn__old_raw_behavior_score = null;
@@ -7228,8 +7229,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(19)]
         public uint comms_reports
         {
-            get { return __pbn__comms_reports.GetValueOrDefault(); }
-            set { __pbn__comms_reports = value; }
+            get => __pbn__comms_reports.GetValueOrDefault();
+            set => __pbn__comms_reports = value;
         }
         public bool ShouldSerializecomms_reports() => __pbn__comms_reports != null;
         public void Resetcomms_reports() => __pbn__comms_reports = null;
@@ -7238,8 +7239,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(20)]
         public uint comms_parties
         {
-            get { return __pbn__comms_parties.GetValueOrDefault(); }
-            set { __pbn__comms_parties = value; }
+            get => __pbn__comms_parties.GetValueOrDefault();
+            set => __pbn__comms_parties = value;
         }
         public bool ShouldSerializecomms_parties() => __pbn__comms_parties != null;
         public void Resetcomms_parties() => __pbn__comms_parties = null;
@@ -7257,8 +7258,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -7276,8 +7277,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint coins_remaining
         {
-            get { return __pbn__coins_remaining.GetValueOrDefault(); }
-            set { __pbn__coins_remaining = value; }
+            get => __pbn__coins_remaining.GetValueOrDefault();
+            set => __pbn__coins_remaining = value;
         }
         public bool ShouldSerializecoins_remaining() => __pbn__coins_remaining != null;
         public void Resetcoins_remaining() => __pbn__coins_remaining = null;
@@ -7286,8 +7287,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint total_points_won
         {
-            get { return __pbn__total_points_won.GetValueOrDefault(); }
-            set { __pbn__total_points_won = value; }
+            get => __pbn__total_points_won.GetValueOrDefault();
+            set => __pbn__total_points_won = value;
         }
         public bool ShouldSerializetotal_points_won() => __pbn__total_points_won != null;
         public void Resettotal_points_won() => __pbn__total_points_won = null;
@@ -7296,8 +7297,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint total_points_wagered
         {
-            get { return __pbn__total_points_wagered.GetValueOrDefault(); }
-            set { __pbn__total_points_wagered = value; }
+            get => __pbn__total_points_wagered.GetValueOrDefault();
+            set => __pbn__total_points_wagered = value;
         }
         public bool ShouldSerializetotal_points_wagered() => __pbn__total_points_wagered != null;
         public void Resettotal_points_wagered() => __pbn__total_points_wagered = null;
@@ -7306,8 +7307,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint total_points_tipped
         {
-            get { return __pbn__total_points_tipped.GetValueOrDefault(); }
-            set { __pbn__total_points_tipped = value; }
+            get => __pbn__total_points_tipped.GetValueOrDefault();
+            set => __pbn__total_points_tipped = value;
         }
         public bool ShouldSerializetotal_points_tipped() => __pbn__total_points_tipped != null;
         public void Resettotal_points_tipped() => __pbn__total_points_tipped = null;
@@ -7316,8 +7317,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint success_rate
         {
-            get { return __pbn__success_rate.GetValueOrDefault(); }
-            set { __pbn__success_rate = value; }
+            get => __pbn__success_rate.GetValueOrDefault();
+            set => __pbn__success_rate = value;
         }
         public bool ShouldSerializesuccess_rate() => __pbn__success_rate != null;
         public void Resetsuccess_rate() => __pbn__success_rate = null;
@@ -7326,8 +7327,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint total_games_wagered
         {
-            get { return __pbn__total_games_wagered.GetValueOrDefault(); }
-            set { __pbn__total_games_wagered = value; }
+            get => __pbn__total_games_wagered.GetValueOrDefault();
+            set => __pbn__total_games_wagered = value;
         }
         public bool ShouldSerializetotal_games_wagered() => __pbn__total_games_wagered != null;
         public void Resettotal_games_wagered() => __pbn__total_games_wagered = null;
@@ -7336,8 +7337,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint coins_max
         {
-            get { return __pbn__coins_max.GetValueOrDefault(); }
-            set { __pbn__coins_max = value; }
+            get => __pbn__coins_max.GetValueOrDefault();
+            set => __pbn__coins_max = value;
         }
         public bool ShouldSerializecoins_max() => __pbn__coins_max != null;
         public void Resetcoins_max() => __pbn__coins_max = null;
@@ -7346,8 +7347,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint rank_wagers_remaining
         {
-            get { return __pbn__rank_wagers_remaining.GetValueOrDefault(); }
-            set { __pbn__rank_wagers_remaining = value; }
+            get => __pbn__rank_wagers_remaining.GetValueOrDefault();
+            set => __pbn__rank_wagers_remaining = value;
         }
         public bool ShouldSerializerank_wagers_remaining() => __pbn__rank_wagers_remaining != null;
         public void Resetrank_wagers_remaining() => __pbn__rank_wagers_remaining = null;
@@ -7356,8 +7357,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public uint rank_wagers_max
         {
-            get { return __pbn__rank_wagers_max.GetValueOrDefault(); }
-            set { __pbn__rank_wagers_max = value; }
+            get => __pbn__rank_wagers_max.GetValueOrDefault();
+            set => __pbn__rank_wagers_max = value;
         }
         public bool ShouldSerializerank_wagers_max() => __pbn__rank_wagers_max != null;
         public void Resetrank_wagers_max() => __pbn__rank_wagers_max = null;
@@ -7366,8 +7367,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public uint prediction_tokens_remaining
         {
-            get { return __pbn__prediction_tokens_remaining.GetValueOrDefault(); }
-            set { __pbn__prediction_tokens_remaining = value; }
+            get => __pbn__prediction_tokens_remaining.GetValueOrDefault();
+            set => __pbn__prediction_tokens_remaining = value;
         }
         public bool ShouldSerializeprediction_tokens_remaining() => __pbn__prediction_tokens_remaining != null;
         public void Resetprediction_tokens_remaining() => __pbn__prediction_tokens_remaining = null;
@@ -7376,8 +7377,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public uint prediction_tokens_max
         {
-            get { return __pbn__prediction_tokens_max.GetValueOrDefault(); }
-            set { __pbn__prediction_tokens_max = value; }
+            get => __pbn__prediction_tokens_max.GetValueOrDefault();
+            set => __pbn__prediction_tokens_max = value;
         }
         public bool ShouldSerializeprediction_tokens_max() => __pbn__prediction_tokens_max != null;
         public void Resetprediction_tokens_max() => __pbn__prediction_tokens_max = null;
@@ -7386,8 +7387,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(12)]
         public uint bounties_remaining
         {
-            get { return __pbn__bounties_remaining.GetValueOrDefault(); }
-            set { __pbn__bounties_remaining = value; }
+            get => __pbn__bounties_remaining.GetValueOrDefault();
+            set => __pbn__bounties_remaining = value;
         }
         public bool ShouldSerializebounties_remaining() => __pbn__bounties_remaining != null;
         public void Resetbounties_remaining() => __pbn__bounties_remaining = null;
@@ -7396,8 +7397,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(13)]
         public uint bounties_max
         {
-            get { return __pbn__bounties_max.GetValueOrDefault(); }
-            set { __pbn__bounties_max = value; }
+            get => __pbn__bounties_max.GetValueOrDefault();
+            set => __pbn__bounties_max = value;
         }
         public bool ShouldSerializebounties_max() => __pbn__bounties_max != null;
         public void Resetbounties_max() => __pbn__bounties_max = null;
@@ -7415,8 +7416,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -7437,8 +7438,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -7482,8 +7483,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
             public EEvent event_id
             {
-                get { return __pbn__event_id ?? EEvent.EVENT_ID_NONE; }
-                set { __pbn__event_id = value; }
+                get => __pbn__event_id ?? EEvent.EVENT_ID_NONE;
+                set => __pbn__event_id = value;
             }
             public bool ShouldSerializeevent_id() => __pbn__event_id != null;
             public void Resetevent_id() => __pbn__event_id = null;
@@ -7492,8 +7493,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint goal_id
             {
-                get { return __pbn__goal_id.GetValueOrDefault(); }
-                set { __pbn__goal_id = value; }
+                get => __pbn__goal_id.GetValueOrDefault();
+                set => __pbn__goal_id = value;
             }
             public bool ShouldSerializegoal_id() => __pbn__goal_id != null;
             public void Resetgoal_id() => __pbn__goal_id = null;
@@ -7502,8 +7503,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public ulong value
             {
-                get { return __pbn__value.GetValueOrDefault(); }
-                set { __pbn__value = value; }
+                get => __pbn__value.GetValueOrDefault();
+                set => __pbn__value = value;
             }
             public bool ShouldSerializevalue() => __pbn__value != null;
             public void Resetvalue() => __pbn__value = null;
@@ -7523,8 +7524,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint league_id
         {
-            get { return __pbn__league_id.GetValueOrDefault(); }
-            set { __pbn__league_id = value; }
+            get => __pbn__league_id.GetValueOrDefault();
+            set => __pbn__league_id = value;
         }
         public bool ShouldSerializeleague_id() => __pbn__league_id != null;
         public void Resetleague_id() => __pbn__league_id = null;
@@ -7552,8 +7553,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint answer_id
             {
-                get { return __pbn__answer_id.GetValueOrDefault(); }
-                set { __pbn__answer_id = value; }
+                get => __pbn__answer_id.GetValueOrDefault();
+                set => __pbn__answer_id = value;
             }
             public bool ShouldSerializeanswer_id() => __pbn__answer_id != null;
             public void Resetanswer_id() => __pbn__answer_id = null;
@@ -7563,8 +7564,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string answer_name
             {
-                get { return __pbn__answer_name ?? ""; }
-                set { __pbn__answer_name = value; }
+                get => __pbn__answer_name ?? "";
+                set => __pbn__answer_name = value;
             }
             public bool ShouldSerializeanswer_name() => __pbn__answer_name != null;
             public void Resetanswer_name() => __pbn__answer_name = null;
@@ -7573,8 +7574,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public ulong answer_logo
             {
-                get { return __pbn__answer_logo.GetValueOrDefault(); }
-                set { __pbn__answer_logo = value; }
+                get => __pbn__answer_logo.GetValueOrDefault();
+                set => __pbn__answer_logo = value;
             }
             public bool ShouldSerializeanswer_logo() => __pbn__answer_logo != null;
             public void Resetanswer_logo() => __pbn__answer_logo = null;
@@ -7583,8 +7584,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public float answer_value
             {
-                get { return __pbn__answer_value.GetValueOrDefault(); }
-                set { __pbn__answer_value = value; }
+                get => __pbn__answer_value.GetValueOrDefault();
+                set => __pbn__answer_value = value;
             }
             public bool ShouldSerializeanswer_value() => __pbn__answer_value != null;
             public void Resetanswer_value() => __pbn__answer_value = null;
@@ -7602,8 +7603,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint selection_id
             {
-                get { return __pbn__selection_id.GetValueOrDefault(); }
-                set { __pbn__selection_id = value; }
+                get => __pbn__selection_id.GetValueOrDefault();
+                set => __pbn__selection_id = value;
             }
             public bool ShouldSerializeselection_id() => __pbn__selection_id != null;
             public void Resetselection_id() => __pbn__selection_id = null;
@@ -7636,8 +7637,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint answer_selection
             {
-                get { return __pbn__answer_selection.GetValueOrDefault(); }
-                set { __pbn__answer_selection = value; }
+                get => __pbn__answer_selection.GetValueOrDefault();
+                set => __pbn__answer_selection = value;
             }
             public bool ShouldSerializeanswer_selection() => __pbn__answer_selection != null;
             public void Resetanswer_selection() => __pbn__answer_selection = null;
@@ -7646,8 +7647,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public float answer_value
             {
-                get { return __pbn__answer_value.GetValueOrDefault(); }
-                set { __pbn__answer_value = value; }
+                get => __pbn__answer_value.GetValueOrDefault();
+                set => __pbn__answer_value = value;
             }
             public bool ShouldSerializeanswer_value() => __pbn__answer_value != null;
             public void Resetanswer_value() => __pbn__answer_value = null;
@@ -7665,8 +7666,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint selection_id
             {
-                get { return __pbn__selection_id.GetValueOrDefault(); }
-                set { __pbn__selection_id = value; }
+                get => __pbn__selection_id.GetValueOrDefault();
+                set => __pbn__selection_id = value;
             }
             public bool ShouldSerializeselection_id() => __pbn__selection_id != null;
             public void Resetselection_id() => __pbn__selection_id = null;
@@ -7689,8 +7690,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong app_data
         {
-            get { return __pbn__app_data.GetValueOrDefault(); }
-            set { __pbn__app_data = value; }
+            get => __pbn__app_data.GetValueOrDefault();
+            set => __pbn__app_data = value;
         }
         public bool ShouldSerializeapp_data() => __pbn__app_data != null;
         public void Resetapp_data() => __pbn__app_data = null;
@@ -7708,8 +7709,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -7727,8 +7728,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool result
         {
-            get { return __pbn__result.GetValueOrDefault(); }
-            set { __pbn__result = value; }
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -7746,8 +7747,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -7756,8 +7757,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -7775,8 +7776,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -7785,8 +7786,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -7804,8 +7805,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool result
         {
-            get { return __pbn__result.GetValueOrDefault(); }
-            set { __pbn__result = value; }
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -7823,8 +7824,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -7842,8 +7843,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool result
         {
-            get { return __pbn__result.GetValueOrDefault(); }
-            set { __pbn__result = value; }
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -7871,8 +7872,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -7881,8 +7882,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint vote_count
             {
-                get { return __pbn__vote_count.GetValueOrDefault(); }
-                set { __pbn__vote_count = value; }
+                get => __pbn__vote_count.GetValueOrDefault();
+                set => __pbn__vote_count = value;
             }
             public bool ShouldSerializevote_count() => __pbn__vote_count != null;
             public void Resetvote_count() => __pbn__vote_count = null;
@@ -7911,8 +7912,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool success
         {
-            get { return __pbn__success.GetValueOrDefault(); }
-            set { __pbn__success = value; }
+            get => __pbn__success.GetValueOrDefault();
+            set => __pbn__success = value;
         }
         public bool ShouldSerializesuccess() => __pbn__success != null;
         public void Resetsuccess() => __pbn__success = null;
@@ -7931,8 +7932,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -7941,8 +7942,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint games
             {
-                get { return __pbn__games.GetValueOrDefault(); }
-                set { __pbn__games = value; }
+                get => __pbn__games.GetValueOrDefault();
+                set => __pbn__games = value;
             }
             public bool ShouldSerializegames() => __pbn__games != null;
             public void Resetgames() => __pbn__games = null;
@@ -7951,8 +7952,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint wins
             {
-                get { return __pbn__wins.GetValueOrDefault(); }
-                set { __pbn__wins = value; }
+                get => __pbn__wins.GetValueOrDefault();
+                set => __pbn__wins = value;
             }
             public bool ShouldSerializewins() => __pbn__wins != null;
             public void Resetwins() => __pbn__wins = null;
@@ -7961,8 +7962,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint most_recent_game_timestamp
             {
-                get { return __pbn__most_recent_game_timestamp.GetValueOrDefault(); }
-                set { __pbn__most_recent_game_timestamp = value; }
+                get => __pbn__most_recent_game_timestamp.GetValueOrDefault();
+                set => __pbn__most_recent_game_timestamp = value;
             }
             public bool ShouldSerializemost_recent_game_timestamp() => __pbn__most_recent_game_timestamp != null;
             public void Resetmost_recent_game_timestamp() => __pbn__most_recent_game_timestamp = null;
@@ -7971,8 +7972,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public ulong most_recent_game_match_id
             {
-                get { return __pbn__most_recent_game_match_id.GetValueOrDefault(); }
-                set { __pbn__most_recent_game_match_id = value; }
+                get => __pbn__most_recent_game_match_id.GetValueOrDefault();
+                set => __pbn__most_recent_game_match_id = value;
             }
             public bool ShouldSerializemost_recent_game_match_id() => __pbn__most_recent_game_match_id != null;
             public void Resetmost_recent_game_match_id() => __pbn__most_recent_game_match_id = null;
@@ -7981,8 +7982,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(100)]
             public float performance
             {
-                get { return __pbn__performance.GetValueOrDefault(); }
-                set { __pbn__performance = value; }
+                get => __pbn__performance.GetValueOrDefault();
+                set => __pbn__performance = value;
             }
             public bool ShouldSerializeperformance() => __pbn__performance != null;
             public void Resetperformance() => __pbn__performance = null;
@@ -8015,8 +8016,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCEEDED)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCEEDED; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCEEDED;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -8045,8 +8046,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint round_time_remaining
         {
-            get { return __pbn__round_time_remaining.GetValueOrDefault(); }
-            set { __pbn__round_time_remaining = value; }
+            get => __pbn__round_time_remaining.GetValueOrDefault();
+            set => __pbn__round_time_remaining = value;
         }
         public bool ShouldSerializeround_time_remaining() => __pbn__round_time_remaining != null;
         public void Resetround_time_remaining() => __pbn__round_time_remaining = null;
@@ -8055,8 +8056,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint round_number
         {
-            get { return __pbn__round_number.GetValueOrDefault(); }
-            set { __pbn__round_number = value; }
+            get => __pbn__round_number.GetValueOrDefault();
+            set => __pbn__round_number = value;
         }
         public bool ShouldSerializeround_number() => __pbn__round_number != null;
         public void Resetround_number() => __pbn__round_number = null;
@@ -8065,8 +8066,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint voting_state
         {
-            get { return __pbn__voting_state.GetValueOrDefault(); }
-            set { __pbn__voting_state = value; }
+            get => __pbn__voting_state.GetValueOrDefault();
+            set => __pbn__voting_state = value;
         }
         public bool ShouldSerializevoting_state() => __pbn__voting_state != null;
         public void Resetvoting_state() => __pbn__voting_state = null;
@@ -8075,8 +8076,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public bool is_current_round_calibrating
         {
-            get { return __pbn__is_current_round_calibrating.GetValueOrDefault(); }
-            set { __pbn__is_current_round_calibrating = value; }
+            get => __pbn__is_current_round_calibrating.GetValueOrDefault();
+            set => __pbn__is_current_round_calibrating = value;
         }
         public bool ShouldSerializeis_current_round_calibrating() => __pbn__is_current_round_calibrating != null;
         public void Resetis_current_round_calibrating() => __pbn__is_current_round_calibrating = null;
@@ -8085,8 +8086,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint closest_active_match_id
         {
-            get { return __pbn__closest_active_match_id.GetValueOrDefault(); }
-            set { __pbn__closest_active_match_id = value; }
+            get => __pbn__closest_active_match_id.GetValueOrDefault();
+            set => __pbn__closest_active_match_id = value;
         }
         public bool ShouldSerializeclosest_active_match_id() => __pbn__closest_active_match_id != null;
         public void Resetclosest_active_match_id() => __pbn__closest_active_match_id = null;
@@ -8095,8 +8096,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -8105,8 +8106,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint voting_start_time
         {
-            get { return __pbn__voting_start_time.GetValueOrDefault(); }
-            set { __pbn__voting_start_time = value; }
+            get => __pbn__voting_start_time.GetValueOrDefault();
+            set => __pbn__voting_start_time = value;
         }
         public bool ShouldSerializevoting_start_time() => __pbn__voting_start_time != null;
         public void Resetvoting_start_time() => __pbn__voting_start_time = null;
@@ -8122,8 +8123,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint match_id
             {
-                get { return __pbn__match_id.GetValueOrDefault(); }
-                set { __pbn__match_id = value; }
+                get => __pbn__match_id.GetValueOrDefault();
+                set => __pbn__match_id = value;
             }
             public bool ShouldSerializematch_id() => __pbn__match_id != null;
             public void Resetmatch_id() => __pbn__match_id = null;
@@ -8132,8 +8133,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint hero_id_0
             {
-                get { return __pbn__hero_id_0.GetValueOrDefault(); }
-                set { __pbn__hero_id_0 = value; }
+                get => __pbn__hero_id_0.GetValueOrDefault();
+                set => __pbn__hero_id_0 = value;
             }
             public bool ShouldSerializehero_id_0() => __pbn__hero_id_0 != null;
             public void Resethero_id_0() => __pbn__hero_id_0 = null;
@@ -8142,8 +8143,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint hero_id_1
             {
-                get { return __pbn__hero_id_1.GetValueOrDefault(); }
-                set { __pbn__hero_id_1 = value; }
+                get => __pbn__hero_id_1.GetValueOrDefault();
+                set => __pbn__hero_id_1 = value;
             }
             public bool ShouldSerializehero_id_1() => __pbn__hero_id_1 != null;
             public void Resethero_id_1() => __pbn__hero_id_1 = null;
@@ -8152,8 +8153,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint hero_seeding_0
             {
-                get { return __pbn__hero_seeding_0.GetValueOrDefault(); }
-                set { __pbn__hero_seeding_0 = value; }
+                get => __pbn__hero_seeding_0.GetValueOrDefault();
+                set => __pbn__hero_seeding_0 = value;
             }
             public bool ShouldSerializehero_seeding_0() => __pbn__hero_seeding_0 != null;
             public void Resethero_seeding_0() => __pbn__hero_seeding_0 = null;
@@ -8162,8 +8163,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint hero_seeding_1
             {
-                get { return __pbn__hero_seeding_1.GetValueOrDefault(); }
-                set { __pbn__hero_seeding_1 = value; }
+                get => __pbn__hero_seeding_1.GetValueOrDefault();
+                set => __pbn__hero_seeding_1 = value;
             }
             public bool ShouldSerializehero_seeding_1() => __pbn__hero_seeding_1 != null;
             public void Resethero_seeding_1() => __pbn__hero_seeding_1 = null;
@@ -8172,8 +8173,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(6)]
             public uint vote_count_0
             {
-                get { return __pbn__vote_count_0.GetValueOrDefault(); }
-                set { __pbn__vote_count_0 = value; }
+                get => __pbn__vote_count_0.GetValueOrDefault();
+                set => __pbn__vote_count_0 = value;
             }
             public bool ShouldSerializevote_count_0() => __pbn__vote_count_0 != null;
             public void Resetvote_count_0() => __pbn__vote_count_0 = null;
@@ -8182,8 +8183,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(7)]
             public uint vote_count_1
             {
-                get { return __pbn__vote_count_1.GetValueOrDefault(); }
-                set { __pbn__vote_count_1 = value; }
+                get => __pbn__vote_count_1.GetValueOrDefault();
+                set => __pbn__vote_count_1 = value;
             }
             public bool ShouldSerializevote_count_1() => __pbn__vote_count_1 != null;
             public void Resetvote_count_1() => __pbn__vote_count_1 = null;
@@ -8192,8 +8193,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(8)]
             public uint voting_state
             {
-                get { return __pbn__voting_state.GetValueOrDefault(); }
-                set { __pbn__voting_state = value; }
+                get => __pbn__voting_state.GetValueOrDefault();
+                set => __pbn__voting_state = value;
             }
             public bool ShouldSerializevoting_state() => __pbn__voting_state != null;
             public void Resetvoting_state() => __pbn__voting_state = null;
@@ -8202,8 +8203,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(9)]
             public uint round_number
             {
-                get { return __pbn__round_number.GetValueOrDefault(); }
-                set { __pbn__round_number = value; }
+                get => __pbn__round_number.GetValueOrDefault();
+                set => __pbn__round_number = value;
             }
             public bool ShouldSerializeround_number() => __pbn__round_number != null;
             public void Resetround_number() => __pbn__round_number = null;
@@ -8212,8 +8213,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(10)]
             public bool is_votes_hidden
             {
-                get { return __pbn__is_votes_hidden.GetValueOrDefault(); }
-                set { __pbn__is_votes_hidden = value; }
+                get => __pbn__is_votes_hidden.GetValueOrDefault();
+                set => __pbn__is_votes_hidden = value;
             }
             public bool ShouldSerializeis_votes_hidden() => __pbn__is_votes_hidden != null;
             public void Resetis_votes_hidden() => __pbn__is_votes_hidden = null;
@@ -8222,8 +8223,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(11)]
             public uint calibration_time_remaining
             {
-                get { return __pbn__calibration_time_remaining.GetValueOrDefault(); }
-                set { __pbn__calibration_time_remaining = value; }
+                get => __pbn__calibration_time_remaining.GetValueOrDefault();
+                set => __pbn__calibration_time_remaining = value;
             }
             public bool ShouldSerializecalibration_time_remaining() => __pbn__calibration_time_remaining != null;
             public void Resetcalibration_time_remaining() => __pbn__calibration_time_remaining = null;
@@ -8260,8 +8261,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool result
         {
-            get { return __pbn__result.GetValueOrDefault(); }
-            set { __pbn__result = value; }
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -8270,8 +8271,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint votes_remaining
         {
-            get { return __pbn__votes_remaining.GetValueOrDefault(); }
-            set { __pbn__votes_remaining = value; }
+            get => __pbn__votes_remaining.GetValueOrDefault();
+            set => __pbn__votes_remaining = value;
         }
         public bool ShouldSerializevotes_remaining() => __pbn__votes_remaining != null;
         public void Resetvotes_remaining() => __pbn__votes_remaining = null;
@@ -8280,8 +8281,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint votes_total
         {
-            get { return __pbn__votes_total.GetValueOrDefault(); }
-            set { __pbn__votes_total = value; }
+            get => __pbn__votes_total.GetValueOrDefault();
+            set => __pbn__votes_total = value;
         }
         public bool ShouldSerializevotes_total() => __pbn__votes_total != null;
         public void Resetvotes_total() => __pbn__votes_total = null;
@@ -8302,8 +8303,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -8321,8 +8322,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool result
         {
-            get { return __pbn__result.GetValueOrDefault(); }
-            set { __pbn__result = value; }
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -8332,8 +8333,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
         public EEvent event_id
         {
-            get { return __pbn__event_id ?? EEvent.EVENT_ID_NONE; }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id ?? EEvent.EVENT_ID_NONE;
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -8352,8 +8353,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint timestamp
             {
-                get { return __pbn__timestamp.GetValueOrDefault(); }
-                set { __pbn__timestamp = value; }
+                get => __pbn__timestamp.GetValueOrDefault();
+                set => __pbn__timestamp = value;
             }
             public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
             public void Resettimestamp() => __pbn__timestamp = null;
@@ -8362,8 +8363,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint audit_action
             {
-                get { return __pbn__audit_action.GetValueOrDefault(); }
-                set { __pbn__audit_action = value; }
+                get => __pbn__audit_action.GetValueOrDefault();
+                set => __pbn__audit_action = value;
             }
             public bool ShouldSerializeaudit_action() => __pbn__audit_action != null;
             public void Resetaudit_action() => __pbn__audit_action = null;
@@ -8372,8 +8373,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public int event_points
             {
-                get { return __pbn__event_points.GetValueOrDefault(); }
-                set { __pbn__event_points = value; }
+                get => __pbn__event_points.GetValueOrDefault();
+                set => __pbn__event_points = value;
             }
             public bool ShouldSerializeevent_points() => __pbn__event_points != null;
             public void Resetevent_points() => __pbn__event_points = null;
@@ -8382,8 +8383,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public ulong audit_data
             {
-                get { return __pbn__audit_data.GetValueOrDefault(); }
-                set { __pbn__audit_data = value; }
+                get => __pbn__audit_data.GetValueOrDefault();
+                set => __pbn__audit_data = value;
             }
             public bool ShouldSerializeaudit_data() => __pbn__audit_data != null;
             public void Resetaudit_data() => __pbn__audit_data = null;
@@ -8403,8 +8404,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint user_stats_event
         {
-            get { return __pbn__user_stats_event.GetValueOrDefault(); }
-            set { __pbn__user_stats_event = value; }
+            get => __pbn__user_stats_event.GetValueOrDefault();
+            set => __pbn__user_stats_event = value;
         }
         public bool ShouldSerializeuser_stats_event() => __pbn__user_stats_event != null;
         public void Resetuser_stats_event() => __pbn__user_stats_event = null;
@@ -8413,8 +8414,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong reference_data
         {
-            get { return __pbn__reference_data.GetValueOrDefault(); }
-            set { __pbn__reference_data = value; }
+            get => __pbn__reference_data.GetValueOrDefault();
+            set => __pbn__reference_data = value;
         }
         public bool ShouldSerializereference_data() => __pbn__reference_data != null;
         public void Resetreference_data() => __pbn__reference_data = null;
@@ -8432,8 +8433,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint trees
         {
-            get { return __pbn__trees.GetValueOrDefault(); }
-            set { __pbn__trees = value; }
+            get => __pbn__trees.GetValueOrDefault();
+            set => __pbn__trees = value;
         }
         public bool ShouldSerializetrees() => __pbn__trees != null;
         public void Resettrees() => __pbn__trees = null;
@@ -8452,8 +8453,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
         public EEvent event_id
         {
-            get { return __pbn__event_id ?? EEvent.EVENT_ID_NONE; }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id ?? EEvent.EVENT_ID_NONE;
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -8462,8 +8463,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint slot_chosen
         {
-            get { return __pbn__slot_chosen.GetValueOrDefault(); }
-            set { __pbn__slot_chosen = value; }
+            get => __pbn__slot_chosen.GetValueOrDefault();
+            set => __pbn__slot_chosen = value;
         }
         public bool ShouldSerializeslot_chosen() => __pbn__slot_chosen != null;
         public void Resetslot_chosen() => __pbn__slot_chosen = null;
@@ -8472,8 +8473,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint week
         {
-            get { return __pbn__week.GetValueOrDefault(); }
-            set { __pbn__week = value; }
+            get => __pbn__week.GetValueOrDefault();
+            set => __pbn__week = value;
         }
         public bool ShouldSerializeweek() => __pbn__week != null;
         public void Resetweek() => __pbn__week = null;
@@ -8491,8 +8492,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint points_won
         {
-            get { return __pbn__points_won.GetValueOrDefault(); }
-            set { __pbn__points_won = value; }
+            get => __pbn__points_won.GetValueOrDefault();
+            set => __pbn__points_won = value;
         }
         public bool ShouldSerializepoints_won() => __pbn__points_won != null;
         public void Resetpoints_won() => __pbn__points_won = null;
@@ -8501,8 +8502,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public bool aura_won
         {
-            get { return __pbn__aura_won.GetValueOrDefault(); }
-            set { __pbn__aura_won = value; }
+            get => __pbn__aura_won.GetValueOrDefault();
+            set => __pbn__aura_won = value;
         }
         public bool ShouldSerializeaura_won() => __pbn__aura_won != null;
         public void Resetaura_won() => __pbn__aura_won = null;
@@ -8520,8 +8521,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint quest_id
         {
-            get { return __pbn__quest_id.GetValueOrDefault(); }
-            set { __pbn__quest_id = value; }
+            get => __pbn__quest_id.GetValueOrDefault();
+            set => __pbn__quest_id = value;
         }
         public bool ShouldSerializequest_id() => __pbn__quest_id != null;
         public void Resetquest_id() => __pbn__quest_id = null;
@@ -8540,8 +8541,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint challenge_id
             {
-                get { return __pbn__challenge_id.GetValueOrDefault(); }
-                set { __pbn__challenge_id = value; }
+                get => __pbn__challenge_id.GetValueOrDefault();
+                set => __pbn__challenge_id = value;
             }
             public bool ShouldSerializechallenge_id() => __pbn__challenge_id != null;
             public void Resetchallenge_id() => __pbn__challenge_id = null;
@@ -8550,8 +8551,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint time_completed
             {
-                get { return __pbn__time_completed.GetValueOrDefault(); }
-                set { __pbn__time_completed = value; }
+                get => __pbn__time_completed.GetValueOrDefault();
+                set => __pbn__time_completed = value;
             }
             public bool ShouldSerializetime_completed() => __pbn__time_completed != null;
             public void Resettime_completed() => __pbn__time_completed = null;
@@ -8560,8 +8561,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint attempts
             {
-                get { return __pbn__attempts.GetValueOrDefault(); }
-                set { __pbn__attempts = value; }
+                get => __pbn__attempts.GetValueOrDefault();
+                set => __pbn__attempts = value;
             }
             public bool ShouldSerializeattempts() => __pbn__attempts != null;
             public void Resetattempts() => __pbn__attempts = null;
@@ -8570,8 +8571,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint hero_id
             {
-                get { return __pbn__hero_id.GetValueOrDefault(); }
-                set { __pbn__hero_id = value; }
+                get => __pbn__hero_id.GetValueOrDefault();
+                set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
@@ -8580,8 +8581,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint template_id
             {
-                get { return __pbn__template_id.GetValueOrDefault(); }
-                set { __pbn__template_id = value; }
+                get => __pbn__template_id.GetValueOrDefault();
+                set => __pbn__template_id = value;
             }
             public bool ShouldSerializetemplate_id() => __pbn__template_id != null;
             public void Resettemplate_id() => __pbn__template_id = null;
@@ -8590,8 +8591,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(6)]
             public uint quest_rank
             {
-                get { return __pbn__quest_rank.GetValueOrDefault(); }
-                set { __pbn__quest_rank = value; }
+                get => __pbn__quest_rank.GetValueOrDefault();
+                set => __pbn__quest_rank = value;
             }
             public bool ShouldSerializequest_rank() => __pbn__quest_rank != null;
             public void Resetquest_rank() => __pbn__quest_rank = null;
@@ -8600,8 +8601,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(7)]
             public uint max_quest_rank
             {
-                get { return __pbn__max_quest_rank.GetValueOrDefault(); }
-                set { __pbn__max_quest_rank = value; }
+                get => __pbn__max_quest_rank.GetValueOrDefault();
+                set => __pbn__max_quest_rank = value;
             }
             public bool ShouldSerializemax_quest_rank() => __pbn__max_quest_rank != null;
             public void Resetmax_quest_rank() => __pbn__max_quest_rank = null;
@@ -8621,8 +8622,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong currency_id
         {
-            get { return __pbn__currency_id.GetValueOrDefault(); }
-            set { __pbn__currency_id = value; }
+            get => __pbn__currency_id.GetValueOrDefault();
+            set => __pbn__currency_id = value;
         }
         public bool ShouldSerializecurrency_id() => __pbn__currency_id != null;
         public void Resetcurrency_id() => __pbn__currency_id = null;
@@ -8631,8 +8632,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint purchase_def
         {
-            get { return __pbn__purchase_def.GetValueOrDefault(); }
-            set { __pbn__purchase_def = value; }
+            get => __pbn__purchase_def.GetValueOrDefault();
+            set => __pbn__purchase_def = value;
         }
         public bool ShouldSerializepurchase_def() => __pbn__purchase_def != null;
         public void Resetpurchase_def() => __pbn__purchase_def = null;
@@ -8651,8 +8652,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResultCode.k_Succeeded)]
         public EResultCode response
         {
-            get { return __pbn__response ?? EResultCode.k_Succeeded; }
-            set { __pbn__response = value; }
+            get => __pbn__response ?? EResultCode.k_Succeeded;
+            set => __pbn__response = value;
         }
         public bool ShouldSerializeresponse() => __pbn__response != null;
         public void Resetresponse() => __pbn__response = null;
@@ -8678,8 +8679,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string user_name
         {
-            get { return __pbn__user_name ?? ""; }
-            set { __pbn__user_name = value; }
+            get => __pbn__user_name ?? "";
+            set => __pbn__user_name = value;
         }
         public bool ShouldSerializeuser_name() => __pbn__user_name != null;
         public void Resetuser_name() => __pbn__user_name = null;
@@ -8698,8 +8699,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResultCode.SUCCESS_ACCOUNT_FOUND)]
         public EResultCode result_code
         {
-            get { return __pbn__result_code ?? EResultCode.SUCCESS_ACCOUNT_FOUND; }
-            set { __pbn__result_code = value; }
+            get => __pbn__result_code ?? EResultCode.SUCCESS_ACCOUNT_FOUND;
+            set => __pbn__result_code = value;
         }
         public bool ShouldSerializeresult_code() => __pbn__result_code != null;
         public void Resetresult_code() => __pbn__result_code = null;
@@ -8708,8 +8709,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -8737,8 +8738,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong item_id
         {
-            get { return __pbn__item_id.GetValueOrDefault(); }
-            set { __pbn__item_id = value; }
+            get => __pbn__item_id.GetValueOrDefault();
+            set => __pbn__item_id = value;
         }
         public bool ShouldSerializeitem_id() => __pbn__item_id != null;
         public void Resetitem_id() => __pbn__item_id = null;
@@ -8768,8 +8769,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public bool completed
         {
-            get { return __pbn__completed.GetValueOrDefault(); }
-            set { __pbn__completed = value; }
+            get => __pbn__completed.GetValueOrDefault();
+            set => __pbn__completed = value;
         }
         public bool ShouldSerializecompleted() => __pbn__completed != null;
         public void Resetcompleted() => __pbn__completed = null;
@@ -8785,8 +8786,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint def_index
             {
-                get { return __pbn__def_index.GetValueOrDefault(); }
-                set { __pbn__def_index = value; }
+                get => __pbn__def_index.GetValueOrDefault();
+                set => __pbn__def_index = value;
             }
             public bool ShouldSerializedef_index() => __pbn__def_index != null;
             public void Resetdef_index() => __pbn__def_index = null;
@@ -8795,8 +8796,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public ulong item_id
             {
-                get { return __pbn__item_id.GetValueOrDefault(); }
-                set { __pbn__item_id = value; }
+                get => __pbn__item_id.GetValueOrDefault();
+                set => __pbn__item_id = value;
             }
             public bool ShouldSerializeitem_id() => __pbn__item_id != null;
             public void Resetitem_id() => __pbn__item_id = null;
@@ -8817,8 +8818,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string persona
         {
-            get { return __pbn__persona ?? ""; }
-            set { __pbn__persona = value; }
+            get => __pbn__persona ?? "";
+            set => __pbn__persona = value;
         }
         public bool ShouldSerializepersona() => __pbn__persona != null;
         public void Resetpersona() => __pbn__persona = null;
@@ -8827,8 +8828,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint itemdef
         {
-            get { return __pbn__itemdef.GetValueOrDefault(); }
-            set { __pbn__itemdef = value; }
+            get => __pbn__itemdef.GetValueOrDefault();
+            set => __pbn__itemdef = value;
         }
         public bool ShouldSerializeitemdef() => __pbn__itemdef != null;
         public void Resetitemdef() => __pbn__itemdef = null;
@@ -8838,8 +8839,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string pcbangname
         {
-            get { return __pbn__pcbangname ?? ""; }
-            set { __pbn__pcbangname = value; }
+            get => __pbn__pcbangname ?? "";
+            set => __pbn__pcbangname = value;
         }
         public bool ShouldSerializepcbangname() => __pbn__pcbangname != null;
         public void Resetpcbangname() => __pbn__pcbangname = null;
@@ -8860,8 +8861,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint league_id
         {
-            get { return __pbn__league_id.GetValueOrDefault(); }
-            set { __pbn__league_id = value; }
+            get => __pbn__league_id.GetValueOrDefault();
+            set => __pbn__league_id = value;
         }
         public bool ShouldSerializeleague_id() => __pbn__league_id != null;
         public void Resetleague_id() => __pbn__league_id = null;
@@ -8870,8 +8871,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public bool predictions_closed
         {
-            get { return __pbn__predictions_closed.GetValueOrDefault(); }
-            set { __pbn__predictions_closed = value; }
+            get => __pbn__predictions_closed.GetValueOrDefault();
+            set => __pbn__predictions_closed = value;
         }
         public bool ShouldSerializepredictions_closed() => __pbn__predictions_closed != null;
         public void Resetpredictions_closed() => __pbn__predictions_closed = null;
@@ -8887,8 +8888,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint prediction_id
             {
-                get { return __pbn__prediction_id.GetValueOrDefault(); }
-                set { __pbn__prediction_id = value; }
+                get => __pbn__prediction_id.GetValueOrDefault();
+                set => __pbn__prediction_id = value;
             }
             public bool ShouldSerializeprediction_id() => __pbn__prediction_id != null;
             public void Resetprediction_id() => __pbn__prediction_id = null;
@@ -8897,8 +8898,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint prediction_value
             {
-                get { return __pbn__prediction_value.GetValueOrDefault(); }
-                set { __pbn__prediction_value = value; }
+                get => __pbn__prediction_value.GetValueOrDefault();
+                set => __pbn__prediction_value = value;
             }
             public bool ShouldSerializeprediction_value() => __pbn__prediction_value != null;
             public void Resetprediction_value() => __pbn__prediction_value = null;
@@ -8918,8 +8919,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -8931,8 +8932,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint league_id
         {
-            get { return __pbn__league_id.GetValueOrDefault(); }
-            set { __pbn__league_id = value; }
+            get => __pbn__league_id.GetValueOrDefault();
+            set => __pbn__league_id = value;
         }
         public bool ShouldSerializeleague_id() => __pbn__league_id != null;
         public void Resetleague_id() => __pbn__league_id = null;
@@ -8948,8 +8949,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint prediction_id
             {
-                get { return __pbn__prediction_id.GetValueOrDefault(); }
-                set { __pbn__prediction_id = value; }
+                get => __pbn__prediction_id.GetValueOrDefault();
+                set => __pbn__prediction_id = value;
             }
             public bool ShouldSerializeprediction_id() => __pbn__prediction_id != null;
             public void Resetprediction_id() => __pbn__prediction_id = null;
@@ -8958,8 +8959,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint prediction_value
             {
-                get { return __pbn__prediction_value.GetValueOrDefault(); }
-                set { __pbn__prediction_value = value; }
+                get => __pbn__prediction_value.GetValueOrDefault();
+                set => __pbn__prediction_value = value;
             }
             public bool ShouldSerializeprediction_value() => __pbn__prediction_value != null;
             public void Resetprediction_value() => __pbn__prediction_value = null;
@@ -8980,8 +8981,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResult.SUCCESS)]
         public EResult result
         {
-            get { return __pbn__result ?? EResult.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EResult.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -9008,8 +9009,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong player_card_pack_item_id
         {
-            get { return __pbn__player_card_pack_item_id.GetValueOrDefault(); }
-            set { __pbn__player_card_pack_item_id = value; }
+            get => __pbn__player_card_pack_item_id.GetValueOrDefault();
+            set => __pbn__player_card_pack_item_id = value;
         }
         public bool ShouldSerializeplayer_card_pack_item_id() => __pbn__player_card_pack_item_id != null;
         public void Resetplayer_card_pack_item_id() => __pbn__player_card_pack_item_id = null;
@@ -9028,8 +9029,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -9063,8 +9064,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -9083,8 +9084,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -9093,8 +9094,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint dust_amount
         {
-            get { return __pbn__dust_amount.GetValueOrDefault(); }
-            set { __pbn__dust_amount = value; }
+            get => __pbn__dust_amount.GetValueOrDefault();
+            set => __pbn__dust_amount = value;
         }
         public bool ShouldSerializedust_amount() => __pbn__dust_amount != null;
         public void Resetdust_amount() => __pbn__dust_amount = null;
@@ -9123,8 +9124,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong card_dust_item_id
         {
-            get { return __pbn__card_dust_item_id.GetValueOrDefault(); }
-            set { __pbn__card_dust_item_id = value; }
+            get => __pbn__card_dust_item_id.GetValueOrDefault();
+            set => __pbn__card_dust_item_id = value;
         }
         public bool ShouldSerializecard_dust_item_id() => __pbn__card_dust_item_id != null;
         public void Resetcard_dust_item_id() => __pbn__card_dust_item_id = null;
@@ -9133,8 +9134,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -9143,8 +9144,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public bool premium_pack
         {
-            get { return __pbn__premium_pack.GetValueOrDefault(); }
-            set { __pbn__premium_pack = value; }
+            get => __pbn__premium_pack.GetValueOrDefault();
+            set => __pbn__premium_pack = value;
         }
         public bool ShouldSerializepremium_pack() => __pbn__premium_pack != null;
         public void Resetpremium_pack() => __pbn__premium_pack = null;
@@ -9163,8 +9164,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -9192,8 +9193,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint battle_pass_level
         {
-            get { return __pbn__battle_pass_level.GetValueOrDefault(); }
-            set { __pbn__battle_pass_level = value; }
+            get => __pbn__battle_pass_level.GetValueOrDefault();
+            set => __pbn__battle_pass_level = value;
         }
         public bool ShouldSerializebattle_pass_level() => __pbn__battle_pass_level != null;
         public void Resetbattle_pass_level() => __pbn__battle_pass_level = null;
@@ -9234,8 +9235,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string name
             {
-                get { return __pbn__name ?? ""; }
-                set { __pbn__name = value; }
+                get => __pbn__name ?? "";
+                set => __pbn__name = value;
             }
             public bool ShouldSerializename() => __pbn__name != null;
             public void Resetname() => __pbn__name = null;
@@ -9244,8 +9245,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint onestar
             {
-                get { return __pbn__onestar.GetValueOrDefault(); }
-                set { __pbn__onestar = value; }
+                get => __pbn__onestar.GetValueOrDefault();
+                set => __pbn__onestar = value;
             }
             public bool ShouldSerializeonestar() => __pbn__onestar != null;
             public void Resetonestar() => __pbn__onestar = null;
@@ -9254,8 +9255,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint twostar
             {
-                get { return __pbn__twostar.GetValueOrDefault(); }
-                set { __pbn__twostar = value; }
+                get => __pbn__twostar.GetValueOrDefault();
+                set => __pbn__twostar = value;
             }
             public bool ShouldSerializetwostar() => __pbn__twostar != null;
             public void Resettwostar() => __pbn__twostar = null;
@@ -9264,8 +9265,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint threestar
             {
-                get { return __pbn__threestar.GetValueOrDefault(); }
-                set { __pbn__threestar = value; }
+                get => __pbn__threestar.GetValueOrDefault();
+                set => __pbn__threestar = value;
             }
             public bool ShouldSerializethreestar() => __pbn__threestar != null;
             public void Resetthreestar() => __pbn__threestar = null;
@@ -9274,8 +9275,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint total
             {
-                get { return __pbn__total.GetValueOrDefault(); }
-                set { __pbn__total = value; }
+                get => __pbn__total.GetValueOrDefault();
+                set => __pbn__total = value;
             }
             public bool ShouldSerializetotal() => __pbn__total != null;
             public void Resettotal() => __pbn__total = null;
@@ -9293,8 +9294,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint total_wagered
             {
-                get { return __pbn__total_wagered.GetValueOrDefault(); }
-                set { __pbn__total_wagered = value; }
+                get => __pbn__total_wagered.GetValueOrDefault();
+                set => __pbn__total_wagered = value;
             }
             public bool ShouldSerializetotal_wagered() => __pbn__total_wagered != null;
             public void Resettotal_wagered() => __pbn__total_wagered = null;
@@ -9303,8 +9304,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint total_won
             {
-                get { return __pbn__total_won.GetValueOrDefault(); }
-                set { __pbn__total_won = value; }
+                get => __pbn__total_won.GetValueOrDefault();
+                set => __pbn__total_won = value;
             }
             public bool ShouldSerializetotal_won() => __pbn__total_won != null;
             public void Resettotal_won() => __pbn__total_won = null;
@@ -9313,8 +9314,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint average_won
             {
-                get { return __pbn__average_won.GetValueOrDefault(); }
-                set { __pbn__average_won = value; }
+                get => __pbn__average_won.GetValueOrDefault();
+                set => __pbn__average_won = value;
             }
             public bool ShouldSerializeaverage_won() => __pbn__average_won != null;
             public void Resetaverage_won() => __pbn__average_won = null;
@@ -9323,8 +9324,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint success_rate
             {
-                get { return __pbn__success_rate.GetValueOrDefault(); }
-                set { __pbn__success_rate = value; }
+                get => __pbn__success_rate.GetValueOrDefault();
+                set => __pbn__success_rate = value;
             }
             public bool ShouldSerializesuccess_rate() => __pbn__success_rate != null;
             public void Resetsuccess_rate() => __pbn__success_rate = null;
@@ -9333,8 +9334,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint total_tips
             {
-                get { return __pbn__total_tips.GetValueOrDefault(); }
-                set { __pbn__total_tips = value; }
+                get => __pbn__total_tips.GetValueOrDefault();
+                set => __pbn__total_tips = value;
             }
             public bool ShouldSerializetotal_tips() => __pbn__total_tips != null;
             public void Resettotal_tips() => __pbn__total_tips = null;
@@ -9352,8 +9353,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint completed
             {
-                get { return __pbn__completed.GetValueOrDefault(); }
-                set { __pbn__completed = value; }
+                get => __pbn__completed.GetValueOrDefault();
+                set => __pbn__completed = value;
             }
             public bool ShouldSerializecompleted() => __pbn__completed != null;
             public void Resetcompleted() => __pbn__completed = null;
@@ -9362,8 +9363,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint total
             {
-                get { return __pbn__total.GetValueOrDefault(); }
-                set { __pbn__total = value; }
+                get => __pbn__total.GetValueOrDefault();
+                set => __pbn__total = value;
             }
             public bool ShouldSerializetotal() => __pbn__total != null;
             public void Resettotal() => __pbn__total = null;
@@ -9372,8 +9373,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint points
             {
-                get { return __pbn__points.GetValueOrDefault(); }
-                set { __pbn__points = value; }
+                get => __pbn__points.GetValueOrDefault();
+                set => __pbn__points = value;
             }
             public bool ShouldSerializepoints() => __pbn__points != null;
             public void Resetpoints() => __pbn__points = null;
@@ -9391,8 +9392,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint wins
             {
-                get { return __pbn__wins.GetValueOrDefault(); }
-                set { __pbn__wins = value; }
+                get => __pbn__wins.GetValueOrDefault();
+                set => __pbn__wins = value;
             }
             public bool ShouldSerializewins() => __pbn__wins != null;
             public void Resetwins() => __pbn__wins = null;
@@ -9401,8 +9402,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint score
             {
-                get { return __pbn__score.GetValueOrDefault(); }
-                set { __pbn__score = value; }
+                get => __pbn__score.GetValueOrDefault();
+                set => __pbn__score = value;
             }
             public bool ShouldSerializescore() => __pbn__score != null;
             public void Resetscore() => __pbn__score = null;
@@ -9420,8 +9421,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint correct
             {
-                get { return __pbn__correct.GetValueOrDefault(); }
-                set { __pbn__correct = value; }
+                get => __pbn__correct.GetValueOrDefault();
+                set => __pbn__correct = value;
             }
             public bool ShouldSerializecorrect() => __pbn__correct != null;
             public void Resetcorrect() => __pbn__correct = null;
@@ -9430,8 +9431,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint total
             {
-                get { return __pbn__total.GetValueOrDefault(); }
-                set { __pbn__total = value; }
+                get => __pbn__total.GetValueOrDefault();
+                set => __pbn__total = value;
             }
             public bool ShouldSerializetotal() => __pbn__total != null;
             public void Resettotal() => __pbn__total = null;
@@ -9440,8 +9441,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint points
             {
-                get { return __pbn__points.GetValueOrDefault(); }
-                set { __pbn__points = value; }
+                get => __pbn__points.GetValueOrDefault();
+                set => __pbn__points = value;
             }
             public bool ShouldSerializepoints() => __pbn__points != null;
             public void Resetpoints() => __pbn__points = null;
@@ -9459,8 +9460,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint correct
             {
-                get { return __pbn__correct.GetValueOrDefault(); }
-                set { __pbn__correct = value; }
+                get => __pbn__correct.GetValueOrDefault();
+                set => __pbn__correct = value;
             }
             public bool ShouldSerializecorrect() => __pbn__correct != null;
             public void Resetcorrect() => __pbn__correct = null;
@@ -9469,8 +9470,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint points
             {
-                get { return __pbn__points.GetValueOrDefault(); }
-                set { __pbn__points = value; }
+                get => __pbn__points.GetValueOrDefault();
+                set => __pbn__points = value;
             }
             public bool ShouldSerializepoints() => __pbn__points != null;
             public void Resetpoints() => __pbn__points = null;
@@ -9488,8 +9489,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -9498,8 +9499,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint quality
             {
-                get { return __pbn__quality.GetValueOrDefault(); }
-                set { __pbn__quality = value; }
+                get => __pbn__quality.GetValueOrDefault();
+                set => __pbn__quality = value;
             }
             public bool ShouldSerializequality() => __pbn__quality != null;
             public void Resetquality() => __pbn__quality = null;
@@ -9517,8 +9518,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public float total_score
             {
-                get { return __pbn__total_score.GetValueOrDefault(); }
-                set { __pbn__total_score = value; }
+                get => __pbn__total_score.GetValueOrDefault();
+                set => __pbn__total_score = value;
             }
             public bool ShouldSerializetotal_score() => __pbn__total_score != null;
             public void Resettotal_score() => __pbn__total_score = null;
@@ -9527,8 +9528,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public float percentile
             {
-                get { return __pbn__percentile.GetValueOrDefault(); }
-                set { __pbn__percentile = value; }
+                get => __pbn__percentile.GetValueOrDefault();
+                set => __pbn__percentile = value;
             }
             public bool ShouldSerializepercentile() => __pbn__percentile != null;
             public void Resetpercentile() => __pbn__percentile = null;
@@ -9548,8 +9549,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint battle_pass_level
         {
-            get { return __pbn__battle_pass_level.GetValueOrDefault(); }
-            set { __pbn__battle_pass_level = value; }
+            get => __pbn__battle_pass_level.GetValueOrDefault();
+            set => __pbn__battle_pass_level = value;
         }
         public bool ShouldSerializebattle_pass_level() => __pbn__battle_pass_level != null;
         public void Resetbattle_pass_level() => __pbn__battle_pass_level = null;
@@ -9590,8 +9591,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string name
             {
-                get { return __pbn__name ?? ""; }
-                set { __pbn__name = value; }
+                get => __pbn__name ?? "";
+                set => __pbn__name = value;
             }
             public bool ShouldSerializename() => __pbn__name != null;
             public void Resetname() => __pbn__name = null;
@@ -9600,8 +9601,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint onestar
             {
-                get { return __pbn__onestar.GetValueOrDefault(); }
-                set { __pbn__onestar = value; }
+                get => __pbn__onestar.GetValueOrDefault();
+                set => __pbn__onestar = value;
             }
             public bool ShouldSerializeonestar() => __pbn__onestar != null;
             public void Resetonestar() => __pbn__onestar = null;
@@ -9610,8 +9611,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint twostar
             {
-                get { return __pbn__twostar.GetValueOrDefault(); }
-                set { __pbn__twostar = value; }
+                get => __pbn__twostar.GetValueOrDefault();
+                set => __pbn__twostar = value;
             }
             public bool ShouldSerializetwostar() => __pbn__twostar != null;
             public void Resettwostar() => __pbn__twostar = null;
@@ -9620,8 +9621,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint threestar
             {
-                get { return __pbn__threestar.GetValueOrDefault(); }
-                set { __pbn__threestar = value; }
+                get => __pbn__threestar.GetValueOrDefault();
+                set => __pbn__threestar = value;
             }
             public bool ShouldSerializethreestar() => __pbn__threestar != null;
             public void Resetthreestar() => __pbn__threestar = null;
@@ -9630,8 +9631,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint total
             {
-                get { return __pbn__total.GetValueOrDefault(); }
-                set { __pbn__total = value; }
+                get => __pbn__total.GetValueOrDefault();
+                set => __pbn__total = value;
             }
             public bool ShouldSerializetotal() => __pbn__total != null;
             public void Resettotal() => __pbn__total = null;
@@ -9649,8 +9650,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint total_wagered
             {
-                get { return __pbn__total_wagered.GetValueOrDefault(); }
-                set { __pbn__total_wagered = value; }
+                get => __pbn__total_wagered.GetValueOrDefault();
+                set => __pbn__total_wagered = value;
             }
             public bool ShouldSerializetotal_wagered() => __pbn__total_wagered != null;
             public void Resettotal_wagered() => __pbn__total_wagered = null;
@@ -9659,8 +9660,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint total_won
             {
-                get { return __pbn__total_won.GetValueOrDefault(); }
-                set { __pbn__total_won = value; }
+                get => __pbn__total_won.GetValueOrDefault();
+                set => __pbn__total_won = value;
             }
             public bool ShouldSerializetotal_won() => __pbn__total_won != null;
             public void Resettotal_won() => __pbn__total_won = null;
@@ -9669,8 +9670,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint average_won
             {
-                get { return __pbn__average_won.GetValueOrDefault(); }
-                set { __pbn__average_won = value; }
+                get => __pbn__average_won.GetValueOrDefault();
+                set => __pbn__average_won = value;
             }
             public bool ShouldSerializeaverage_won() => __pbn__average_won != null;
             public void Resetaverage_won() => __pbn__average_won = null;
@@ -9679,8 +9680,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint success_rate
             {
-                get { return __pbn__success_rate.GetValueOrDefault(); }
-                set { __pbn__success_rate = value; }
+                get => __pbn__success_rate.GetValueOrDefault();
+                set => __pbn__success_rate = value;
             }
             public bool ShouldSerializesuccess_rate() => __pbn__success_rate != null;
             public void Resetsuccess_rate() => __pbn__success_rate = null;
@@ -9689,8 +9690,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint total_tips
             {
-                get { return __pbn__total_tips.GetValueOrDefault(); }
-                set { __pbn__total_tips = value; }
+                get => __pbn__total_tips.GetValueOrDefault();
+                set => __pbn__total_tips = value;
             }
             public bool ShouldSerializetotal_tips() => __pbn__total_tips != null;
             public void Resettotal_tips() => __pbn__total_tips = null;
@@ -9708,8 +9709,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint completed
             {
-                get { return __pbn__completed.GetValueOrDefault(); }
-                set { __pbn__completed = value; }
+                get => __pbn__completed.GetValueOrDefault();
+                set => __pbn__completed = value;
             }
             public bool ShouldSerializecompleted() => __pbn__completed != null;
             public void Resetcompleted() => __pbn__completed = null;
@@ -9718,8 +9719,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint total
             {
-                get { return __pbn__total.GetValueOrDefault(); }
-                set { __pbn__total = value; }
+                get => __pbn__total.GetValueOrDefault();
+                set => __pbn__total = value;
             }
             public bool ShouldSerializetotal() => __pbn__total != null;
             public void Resettotal() => __pbn__total = null;
@@ -9728,8 +9729,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint points
             {
-                get { return __pbn__points.GetValueOrDefault(); }
-                set { __pbn__points = value; }
+                get => __pbn__points.GetValueOrDefault();
+                set => __pbn__points = value;
             }
             public bool ShouldSerializepoints() => __pbn__points != null;
             public void Resetpoints() => __pbn__points = null;
@@ -9747,8 +9748,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint wins
             {
-                get { return __pbn__wins.GetValueOrDefault(); }
-                set { __pbn__wins = value; }
+                get => __pbn__wins.GetValueOrDefault();
+                set => __pbn__wins = value;
             }
             public bool ShouldSerializewins() => __pbn__wins != null;
             public void Resetwins() => __pbn__wins = null;
@@ -9757,8 +9758,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint score
             {
-                get { return __pbn__score.GetValueOrDefault(); }
-                set { __pbn__score = value; }
+                get => __pbn__score.GetValueOrDefault();
+                set => __pbn__score = value;
             }
             public bool ShouldSerializescore() => __pbn__score != null;
             public void Resetscore() => __pbn__score = null;
@@ -9776,8 +9777,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint correct
             {
-                get { return __pbn__correct.GetValueOrDefault(); }
-                set { __pbn__correct = value; }
+                get => __pbn__correct.GetValueOrDefault();
+                set => __pbn__correct = value;
             }
             public bool ShouldSerializecorrect() => __pbn__correct != null;
             public void Resetcorrect() => __pbn__correct = null;
@@ -9786,8 +9787,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint total
             {
-                get { return __pbn__total.GetValueOrDefault(); }
-                set { __pbn__total = value; }
+                get => __pbn__total.GetValueOrDefault();
+                set => __pbn__total = value;
             }
             public bool ShouldSerializetotal() => __pbn__total != null;
             public void Resettotal() => __pbn__total = null;
@@ -9796,8 +9797,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint points
             {
-                get { return __pbn__points.GetValueOrDefault(); }
-                set { __pbn__points = value; }
+                get => __pbn__points.GetValueOrDefault();
+                set => __pbn__points = value;
             }
             public bool ShouldSerializepoints() => __pbn__points != null;
             public void Resetpoints() => __pbn__points = null;
@@ -9815,8 +9816,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint correct
             {
-                get { return __pbn__correct.GetValueOrDefault(); }
-                set { __pbn__correct = value; }
+                get => __pbn__correct.GetValueOrDefault();
+                set => __pbn__correct = value;
             }
             public bool ShouldSerializecorrect() => __pbn__correct != null;
             public void Resetcorrect() => __pbn__correct = null;
@@ -9825,8 +9826,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint points
             {
-                get { return __pbn__points.GetValueOrDefault(); }
-                set { __pbn__points = value; }
+                get => __pbn__points.GetValueOrDefault();
+                set => __pbn__points = value;
             }
             public bool ShouldSerializepoints() => __pbn__points != null;
             public void Resetpoints() => __pbn__points = null;
@@ -9844,8 +9845,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -9854,8 +9855,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint quality
             {
-                get { return __pbn__quality.GetValueOrDefault(); }
-                set { __pbn__quality = value; }
+                get => __pbn__quality.GetValueOrDefault();
+                set => __pbn__quality = value;
             }
             public bool ShouldSerializequality() => __pbn__quality != null;
             public void Resetquality() => __pbn__quality = null;
@@ -9873,8 +9874,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public float total_score
             {
-                get { return __pbn__total_score.GetValueOrDefault(); }
-                set { __pbn__total_score = value; }
+                get => __pbn__total_score.GetValueOrDefault();
+                set => __pbn__total_score = value;
             }
             public bool ShouldSerializetotal_score() => __pbn__total_score != null;
             public void Resettotal_score() => __pbn__total_score = null;
@@ -9883,8 +9884,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public float percentile
             {
-                get { return __pbn__percentile.GetValueOrDefault(); }
-                set { __pbn__percentile = value; }
+                get => __pbn__percentile.GetValueOrDefault();
+                set => __pbn__percentile = value;
             }
             public bool ShouldSerializepercentile() => __pbn__percentile != null;
             public void Resetpercentile() => __pbn__percentile = null;
@@ -9904,8 +9905,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint battle_pass_level
         {
-            get { return __pbn__battle_pass_level.GetValueOrDefault(); }
-            set { __pbn__battle_pass_level = value; }
+            get => __pbn__battle_pass_level.GetValueOrDefault();
+            set => __pbn__battle_pass_level = value;
         }
         public bool ShouldSerializebattle_pass_level() => __pbn__battle_pass_level != null;
         public void Resetbattle_pass_level() => __pbn__battle_pass_level = null;
@@ -9946,8 +9947,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string name
             {
-                get { return __pbn__name ?? ""; }
-                set { __pbn__name = value; }
+                get => __pbn__name ?? "";
+                set => __pbn__name = value;
             }
             public bool ShouldSerializename() => __pbn__name != null;
             public void Resetname() => __pbn__name = null;
@@ -9956,8 +9957,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint onestar
             {
-                get { return __pbn__onestar.GetValueOrDefault(); }
-                set { __pbn__onestar = value; }
+                get => __pbn__onestar.GetValueOrDefault();
+                set => __pbn__onestar = value;
             }
             public bool ShouldSerializeonestar() => __pbn__onestar != null;
             public void Resetonestar() => __pbn__onestar = null;
@@ -9966,8 +9967,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint twostar
             {
-                get { return __pbn__twostar.GetValueOrDefault(); }
-                set { __pbn__twostar = value; }
+                get => __pbn__twostar.GetValueOrDefault();
+                set => __pbn__twostar = value;
             }
             public bool ShouldSerializetwostar() => __pbn__twostar != null;
             public void Resettwostar() => __pbn__twostar = null;
@@ -9976,8 +9977,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint threestar
             {
-                get { return __pbn__threestar.GetValueOrDefault(); }
-                set { __pbn__threestar = value; }
+                get => __pbn__threestar.GetValueOrDefault();
+                set => __pbn__threestar = value;
             }
             public bool ShouldSerializethreestar() => __pbn__threestar != null;
             public void Resetthreestar() => __pbn__threestar = null;
@@ -9986,8 +9987,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint total
             {
-                get { return __pbn__total.GetValueOrDefault(); }
-                set { __pbn__total = value; }
+                get => __pbn__total.GetValueOrDefault();
+                set => __pbn__total = value;
             }
             public bool ShouldSerializetotal() => __pbn__total != null;
             public void Resettotal() => __pbn__total = null;
@@ -10005,8 +10006,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint total_wagered
             {
-                get { return __pbn__total_wagered.GetValueOrDefault(); }
-                set { __pbn__total_wagered = value; }
+                get => __pbn__total_wagered.GetValueOrDefault();
+                set => __pbn__total_wagered = value;
             }
             public bool ShouldSerializetotal_wagered() => __pbn__total_wagered != null;
             public void Resettotal_wagered() => __pbn__total_wagered = null;
@@ -10015,8 +10016,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint total_won
             {
-                get { return __pbn__total_won.GetValueOrDefault(); }
-                set { __pbn__total_won = value; }
+                get => __pbn__total_won.GetValueOrDefault();
+                set => __pbn__total_won = value;
             }
             public bool ShouldSerializetotal_won() => __pbn__total_won != null;
             public void Resettotal_won() => __pbn__total_won = null;
@@ -10025,8 +10026,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint average_won
             {
-                get { return __pbn__average_won.GetValueOrDefault(); }
-                set { __pbn__average_won = value; }
+                get => __pbn__average_won.GetValueOrDefault();
+                set => __pbn__average_won = value;
             }
             public bool ShouldSerializeaverage_won() => __pbn__average_won != null;
             public void Resetaverage_won() => __pbn__average_won = null;
@@ -10035,8 +10036,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint success_rate
             {
-                get { return __pbn__success_rate.GetValueOrDefault(); }
-                set { __pbn__success_rate = value; }
+                get => __pbn__success_rate.GetValueOrDefault();
+                set => __pbn__success_rate = value;
             }
             public bool ShouldSerializesuccess_rate() => __pbn__success_rate != null;
             public void Resetsuccess_rate() => __pbn__success_rate = null;
@@ -10045,8 +10046,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint total_tips
             {
-                get { return __pbn__total_tips.GetValueOrDefault(); }
-                set { __pbn__total_tips = value; }
+                get => __pbn__total_tips.GetValueOrDefault();
+                set => __pbn__total_tips = value;
             }
             public bool ShouldSerializetotal_tips() => __pbn__total_tips != null;
             public void Resettotal_tips() => __pbn__total_tips = null;
@@ -10064,8 +10065,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint completed
             {
-                get { return __pbn__completed.GetValueOrDefault(); }
-                set { __pbn__completed = value; }
+                get => __pbn__completed.GetValueOrDefault();
+                set => __pbn__completed = value;
             }
             public bool ShouldSerializecompleted() => __pbn__completed != null;
             public void Resetcompleted() => __pbn__completed = null;
@@ -10074,8 +10075,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint total
             {
-                get { return __pbn__total.GetValueOrDefault(); }
-                set { __pbn__total = value; }
+                get => __pbn__total.GetValueOrDefault();
+                set => __pbn__total = value;
             }
             public bool ShouldSerializetotal() => __pbn__total != null;
             public void Resettotal() => __pbn__total = null;
@@ -10084,8 +10085,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint points
             {
-                get { return __pbn__points.GetValueOrDefault(); }
-                set { __pbn__points = value; }
+                get => __pbn__points.GetValueOrDefault();
+                set => __pbn__points = value;
             }
             public bool ShouldSerializepoints() => __pbn__points != null;
             public void Resetpoints() => __pbn__points = null;
@@ -10103,8 +10104,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint wins
             {
-                get { return __pbn__wins.GetValueOrDefault(); }
-                set { __pbn__wins = value; }
+                get => __pbn__wins.GetValueOrDefault();
+                set => __pbn__wins = value;
             }
             public bool ShouldSerializewins() => __pbn__wins != null;
             public void Resetwins() => __pbn__wins = null;
@@ -10113,8 +10114,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint score
             {
-                get { return __pbn__score.GetValueOrDefault(); }
-                set { __pbn__score = value; }
+                get => __pbn__score.GetValueOrDefault();
+                set => __pbn__score = value;
             }
             public bool ShouldSerializescore() => __pbn__score != null;
             public void Resetscore() => __pbn__score = null;
@@ -10132,8 +10133,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint correct
             {
-                get { return __pbn__correct.GetValueOrDefault(); }
-                set { __pbn__correct = value; }
+                get => __pbn__correct.GetValueOrDefault();
+                set => __pbn__correct = value;
             }
             public bool ShouldSerializecorrect() => __pbn__correct != null;
             public void Resetcorrect() => __pbn__correct = null;
@@ -10142,8 +10143,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint total
             {
-                get { return __pbn__total.GetValueOrDefault(); }
-                set { __pbn__total = value; }
+                get => __pbn__total.GetValueOrDefault();
+                set => __pbn__total = value;
             }
             public bool ShouldSerializetotal() => __pbn__total != null;
             public void Resettotal() => __pbn__total = null;
@@ -10152,8 +10153,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint points
             {
-                get { return __pbn__points.GetValueOrDefault(); }
-                set { __pbn__points = value; }
+                get => __pbn__points.GetValueOrDefault();
+                set => __pbn__points = value;
             }
             public bool ShouldSerializepoints() => __pbn__points != null;
             public void Resetpoints() => __pbn__points = null;
@@ -10171,8 +10172,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint correct
             {
-                get { return __pbn__correct.GetValueOrDefault(); }
-                set { __pbn__correct = value; }
+                get => __pbn__correct.GetValueOrDefault();
+                set => __pbn__correct = value;
             }
             public bool ShouldSerializecorrect() => __pbn__correct != null;
             public void Resetcorrect() => __pbn__correct = null;
@@ -10181,8 +10182,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint points
             {
-                get { return __pbn__points.GetValueOrDefault(); }
-                set { __pbn__points = value; }
+                get => __pbn__points.GetValueOrDefault();
+                set => __pbn__points = value;
             }
             public bool ShouldSerializepoints() => __pbn__points != null;
             public void Resetpoints() => __pbn__points = null;
@@ -10200,8 +10201,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -10210,8 +10211,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint quality
             {
-                get { return __pbn__quality.GetValueOrDefault(); }
-                set { __pbn__quality = value; }
+                get => __pbn__quality.GetValueOrDefault();
+                set => __pbn__quality = value;
             }
             public bool ShouldSerializequality() => __pbn__quality != null;
             public void Resetquality() => __pbn__quality = null;
@@ -10229,8 +10230,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public float total_score
             {
-                get { return __pbn__total_score.GetValueOrDefault(); }
-                set { __pbn__total_score = value; }
+                get => __pbn__total_score.GetValueOrDefault();
+                set => __pbn__total_score = value;
             }
             public bool ShouldSerializetotal_score() => __pbn__total_score != null;
             public void Resettotal_score() => __pbn__total_score = null;
@@ -10239,8 +10240,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public float percentile
             {
-                get { return __pbn__percentile.GetValueOrDefault(); }
-                set { __pbn__percentile = value; }
+                get => __pbn__percentile.GetValueOrDefault();
+                set => __pbn__percentile = value;
             }
             public bool ShouldSerializepercentile() => __pbn__percentile != null;
             public void Resetpercentile() => __pbn__percentile = null;
@@ -10260,8 +10261,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint battle_pass_level
         {
-            get { return __pbn__battle_pass_level.GetValueOrDefault(); }
-            set { __pbn__battle_pass_level = value; }
+            get => __pbn__battle_pass_level.GetValueOrDefault();
+            set => __pbn__battle_pass_level = value;
         }
         public bool ShouldSerializebattle_pass_level() => __pbn__battle_pass_level != null;
         public void Resetbattle_pass_level() => __pbn__battle_pass_level = null;
@@ -10302,8 +10303,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string name
             {
-                get { return __pbn__name ?? ""; }
-                set { __pbn__name = value; }
+                get => __pbn__name ?? "";
+                set => __pbn__name = value;
             }
             public bool ShouldSerializename() => __pbn__name != null;
             public void Resetname() => __pbn__name = null;
@@ -10312,8 +10313,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint onestar
             {
-                get { return __pbn__onestar.GetValueOrDefault(); }
-                set { __pbn__onestar = value; }
+                get => __pbn__onestar.GetValueOrDefault();
+                set => __pbn__onestar = value;
             }
             public bool ShouldSerializeonestar() => __pbn__onestar != null;
             public void Resetonestar() => __pbn__onestar = null;
@@ -10322,8 +10323,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint twostar
             {
-                get { return __pbn__twostar.GetValueOrDefault(); }
-                set { __pbn__twostar = value; }
+                get => __pbn__twostar.GetValueOrDefault();
+                set => __pbn__twostar = value;
             }
             public bool ShouldSerializetwostar() => __pbn__twostar != null;
             public void Resettwostar() => __pbn__twostar = null;
@@ -10332,8 +10333,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint threestar
             {
-                get { return __pbn__threestar.GetValueOrDefault(); }
-                set { __pbn__threestar = value; }
+                get => __pbn__threestar.GetValueOrDefault();
+                set => __pbn__threestar = value;
             }
             public bool ShouldSerializethreestar() => __pbn__threestar != null;
             public void Resetthreestar() => __pbn__threestar = null;
@@ -10342,8 +10343,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint total
             {
-                get { return __pbn__total.GetValueOrDefault(); }
-                set { __pbn__total = value; }
+                get => __pbn__total.GetValueOrDefault();
+                set => __pbn__total = value;
             }
             public bool ShouldSerializetotal() => __pbn__total != null;
             public void Resettotal() => __pbn__total = null;
@@ -10361,8 +10362,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint total_wagered
             {
-                get { return __pbn__total_wagered.GetValueOrDefault(); }
-                set { __pbn__total_wagered = value; }
+                get => __pbn__total_wagered.GetValueOrDefault();
+                set => __pbn__total_wagered = value;
             }
             public bool ShouldSerializetotal_wagered() => __pbn__total_wagered != null;
             public void Resettotal_wagered() => __pbn__total_wagered = null;
@@ -10371,8 +10372,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint total_won
             {
-                get { return __pbn__total_won.GetValueOrDefault(); }
-                set { __pbn__total_won = value; }
+                get => __pbn__total_won.GetValueOrDefault();
+                set => __pbn__total_won = value;
             }
             public bool ShouldSerializetotal_won() => __pbn__total_won != null;
             public void Resettotal_won() => __pbn__total_won = null;
@@ -10381,8 +10382,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint average_won
             {
-                get { return __pbn__average_won.GetValueOrDefault(); }
-                set { __pbn__average_won = value; }
+                get => __pbn__average_won.GetValueOrDefault();
+                set => __pbn__average_won = value;
             }
             public bool ShouldSerializeaverage_won() => __pbn__average_won != null;
             public void Resetaverage_won() => __pbn__average_won = null;
@@ -10391,8 +10392,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint success_rate
             {
-                get { return __pbn__success_rate.GetValueOrDefault(); }
-                set { __pbn__success_rate = value; }
+                get => __pbn__success_rate.GetValueOrDefault();
+                set => __pbn__success_rate = value;
             }
             public bool ShouldSerializesuccess_rate() => __pbn__success_rate != null;
             public void Resetsuccess_rate() => __pbn__success_rate = null;
@@ -10401,8 +10402,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint total_tips
             {
-                get { return __pbn__total_tips.GetValueOrDefault(); }
-                set { __pbn__total_tips = value; }
+                get => __pbn__total_tips.GetValueOrDefault();
+                set => __pbn__total_tips = value;
             }
             public bool ShouldSerializetotal_tips() => __pbn__total_tips != null;
             public void Resettotal_tips() => __pbn__total_tips = null;
@@ -10420,8 +10421,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint completed
             {
-                get { return __pbn__completed.GetValueOrDefault(); }
-                set { __pbn__completed = value; }
+                get => __pbn__completed.GetValueOrDefault();
+                set => __pbn__completed = value;
             }
             public bool ShouldSerializecompleted() => __pbn__completed != null;
             public void Resetcompleted() => __pbn__completed = null;
@@ -10430,8 +10431,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint total
             {
-                get { return __pbn__total.GetValueOrDefault(); }
-                set { __pbn__total = value; }
+                get => __pbn__total.GetValueOrDefault();
+                set => __pbn__total = value;
             }
             public bool ShouldSerializetotal() => __pbn__total != null;
             public void Resettotal() => __pbn__total = null;
@@ -10440,8 +10441,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint points
             {
-                get { return __pbn__points.GetValueOrDefault(); }
-                set { __pbn__points = value; }
+                get => __pbn__points.GetValueOrDefault();
+                set => __pbn__points = value;
             }
             public bool ShouldSerializepoints() => __pbn__points != null;
             public void Resetpoints() => __pbn__points = null;
@@ -10459,8 +10460,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint wins
             {
-                get { return __pbn__wins.GetValueOrDefault(); }
-                set { __pbn__wins = value; }
+                get => __pbn__wins.GetValueOrDefault();
+                set => __pbn__wins = value;
             }
             public bool ShouldSerializewins() => __pbn__wins != null;
             public void Resetwins() => __pbn__wins = null;
@@ -10469,8 +10470,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint score
             {
-                get { return __pbn__score.GetValueOrDefault(); }
-                set { __pbn__score = value; }
+                get => __pbn__score.GetValueOrDefault();
+                set => __pbn__score = value;
             }
             public bool ShouldSerializescore() => __pbn__score != null;
             public void Resetscore() => __pbn__score = null;
@@ -10488,8 +10489,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint correct
             {
-                get { return __pbn__correct.GetValueOrDefault(); }
-                set { __pbn__correct = value; }
+                get => __pbn__correct.GetValueOrDefault();
+                set => __pbn__correct = value;
             }
             public bool ShouldSerializecorrect() => __pbn__correct != null;
             public void Resetcorrect() => __pbn__correct = null;
@@ -10498,8 +10499,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint total
             {
-                get { return __pbn__total.GetValueOrDefault(); }
-                set { __pbn__total = value; }
+                get => __pbn__total.GetValueOrDefault();
+                set => __pbn__total = value;
             }
             public bool ShouldSerializetotal() => __pbn__total != null;
             public void Resettotal() => __pbn__total = null;
@@ -10508,8 +10509,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint points
             {
-                get { return __pbn__points.GetValueOrDefault(); }
-                set { __pbn__points = value; }
+                get => __pbn__points.GetValueOrDefault();
+                set => __pbn__points = value;
             }
             public bool ShouldSerializepoints() => __pbn__points != null;
             public void Resetpoints() => __pbn__points = null;
@@ -10527,8 +10528,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint correct
             {
-                get { return __pbn__correct.GetValueOrDefault(); }
-                set { __pbn__correct = value; }
+                get => __pbn__correct.GetValueOrDefault();
+                set => __pbn__correct = value;
             }
             public bool ShouldSerializecorrect() => __pbn__correct != null;
             public void Resetcorrect() => __pbn__correct = null;
@@ -10537,8 +10538,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint points
             {
-                get { return __pbn__points.GetValueOrDefault(); }
-                set { __pbn__points = value; }
+                get => __pbn__points.GetValueOrDefault();
+                set => __pbn__points = value;
             }
             public bool ShouldSerializepoints() => __pbn__points != null;
             public void Resetpoints() => __pbn__points = null;
@@ -10556,8 +10557,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -10566,8 +10567,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint quality
             {
-                get { return __pbn__quality.GetValueOrDefault(); }
-                set { __pbn__quality = value; }
+                get => __pbn__quality.GetValueOrDefault();
+                set => __pbn__quality = value;
             }
             public bool ShouldSerializequality() => __pbn__quality != null;
             public void Resetquality() => __pbn__quality = null;
@@ -10585,8 +10586,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public float total_score
             {
-                get { return __pbn__total_score.GetValueOrDefault(); }
-                set { __pbn__total_score = value; }
+                get => __pbn__total_score.GetValueOrDefault();
+                set => __pbn__total_score = value;
             }
             public bool ShouldSerializetotal_score() => __pbn__total_score != null;
             public void Resettotal_score() => __pbn__total_score = null;
@@ -10595,8 +10596,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public float percentile
             {
-                get { return __pbn__percentile.GetValueOrDefault(); }
-                set { __pbn__percentile = value; }
+                get => __pbn__percentile.GetValueOrDefault();
+                set => __pbn__percentile = value;
             }
             public bool ShouldSerializepercentile() => __pbn__percentile != null;
             public void Resetpercentile() => __pbn__percentile = null;
@@ -10616,8 +10617,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint battle_pass_level
         {
-            get { return __pbn__battle_pass_level.GetValueOrDefault(); }
-            set { __pbn__battle_pass_level = value; }
+            get => __pbn__battle_pass_level.GetValueOrDefault();
+            set => __pbn__battle_pass_level = value;
         }
         public bool ShouldSerializebattle_pass_level() => __pbn__battle_pass_level != null;
         public void Resetbattle_pass_level() => __pbn__battle_pass_level = null;
@@ -10654,8 +10655,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint rooms_cleared
             {
-                get { return __pbn__rooms_cleared.GetValueOrDefault(); }
-                set { __pbn__rooms_cleared = value; }
+                get => __pbn__rooms_cleared.GetValueOrDefault();
+                set => __pbn__rooms_cleared = value;
             }
             public bool ShouldSerializerooms_cleared() => __pbn__rooms_cleared != null;
             public void Resetrooms_cleared() => __pbn__rooms_cleared = null;
@@ -10664,8 +10665,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public bool carry_completed
             {
-                get { return __pbn__carry_completed.GetValueOrDefault(); }
-                set { __pbn__carry_completed = value; }
+                get => __pbn__carry_completed.GetValueOrDefault();
+                set => __pbn__carry_completed = value;
             }
             public bool ShouldSerializecarry_completed() => __pbn__carry_completed != null;
             public void Resetcarry_completed() => __pbn__carry_completed = null;
@@ -10674,8 +10675,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public bool support_completed
             {
-                get { return __pbn__support_completed.GetValueOrDefault(); }
-                set { __pbn__support_completed = value; }
+                get => __pbn__support_completed.GetValueOrDefault();
+                set => __pbn__support_completed = value;
             }
             public bool ShouldSerializesupport_completed() => __pbn__support_completed != null;
             public void Resetsupport_completed() => __pbn__support_completed = null;
@@ -10684,8 +10685,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public bool utility_completed
             {
-                get { return __pbn__utility_completed.GetValueOrDefault(); }
-                set { __pbn__utility_completed = value; }
+                get => __pbn__utility_completed.GetValueOrDefault();
+                set => __pbn__utility_completed = value;
             }
             public bool ShouldSerializeutility_completed() => __pbn__utility_completed != null;
             public void Resetutility_completed() => __pbn__utility_completed = null;
@@ -10703,8 +10704,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint total_wagered
             {
-                get { return __pbn__total_wagered.GetValueOrDefault(); }
-                set { __pbn__total_wagered = value; }
+                get => __pbn__total_wagered.GetValueOrDefault();
+                set => __pbn__total_wagered = value;
             }
             public bool ShouldSerializetotal_wagered() => __pbn__total_wagered != null;
             public void Resettotal_wagered() => __pbn__total_wagered = null;
@@ -10713,8 +10714,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint total_won
             {
-                get { return __pbn__total_won.GetValueOrDefault(); }
-                set { __pbn__total_won = value; }
+                get => __pbn__total_won.GetValueOrDefault();
+                set => __pbn__total_won = value;
             }
             public bool ShouldSerializetotal_won() => __pbn__total_won != null;
             public void Resettotal_won() => __pbn__total_won = null;
@@ -10723,8 +10724,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint average_won
             {
-                get { return __pbn__average_won.GetValueOrDefault(); }
-                set { __pbn__average_won = value; }
+                get => __pbn__average_won.GetValueOrDefault();
+                set => __pbn__average_won = value;
             }
             public bool ShouldSerializeaverage_won() => __pbn__average_won != null;
             public void Resetaverage_won() => __pbn__average_won = null;
@@ -10733,8 +10734,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint success_rate
             {
-                get { return __pbn__success_rate.GetValueOrDefault(); }
-                set { __pbn__success_rate = value; }
+                get => __pbn__success_rate.GetValueOrDefault();
+                set => __pbn__success_rate = value;
             }
             public bool ShouldSerializesuccess_rate() => __pbn__success_rate != null;
             public void Resetsuccess_rate() => __pbn__success_rate = null;
@@ -10743,8 +10744,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint total_tips
             {
-                get { return __pbn__total_tips.GetValueOrDefault(); }
-                set { __pbn__total_tips = value; }
+                get => __pbn__total_tips.GetValueOrDefault();
+                set => __pbn__total_tips = value;
             }
             public bool ShouldSerializetotal_tips() => __pbn__total_tips != null;
             public void Resettotal_tips() => __pbn__total_tips = null;
@@ -10762,8 +10763,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint completed
             {
-                get { return __pbn__completed.GetValueOrDefault(); }
-                set { __pbn__completed = value; }
+                get => __pbn__completed.GetValueOrDefault();
+                set => __pbn__completed = value;
             }
             public bool ShouldSerializecompleted() => __pbn__completed != null;
             public void Resetcompleted() => __pbn__completed = null;
@@ -10772,8 +10773,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint total
             {
-                get { return __pbn__total.GetValueOrDefault(); }
-                set { __pbn__total = value; }
+                get => __pbn__total.GetValueOrDefault();
+                set => __pbn__total = value;
             }
             public bool ShouldSerializetotal() => __pbn__total != null;
             public void Resettotal() => __pbn__total = null;
@@ -10782,8 +10783,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint points
             {
-                get { return __pbn__points.GetValueOrDefault(); }
-                set { __pbn__points = value; }
+                get => __pbn__points.GetValueOrDefault();
+                set => __pbn__points = value;
             }
             public bool ShouldSerializepoints() => __pbn__points != null;
             public void Resetpoints() => __pbn__points = null;
@@ -10801,8 +10802,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint correct
             {
-                get { return __pbn__correct.GetValueOrDefault(); }
-                set { __pbn__correct = value; }
+                get => __pbn__correct.GetValueOrDefault();
+                set => __pbn__correct = value;
             }
             public bool ShouldSerializecorrect() => __pbn__correct != null;
             public void Resetcorrect() => __pbn__correct = null;
@@ -10811,8 +10812,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint total
             {
-                get { return __pbn__total.GetValueOrDefault(); }
-                set { __pbn__total = value; }
+                get => __pbn__total.GetValueOrDefault();
+                set => __pbn__total = value;
             }
             public bool ShouldSerializetotal() => __pbn__total != null;
             public void Resettotal() => __pbn__total = null;
@@ -10821,8 +10822,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint points
             {
-                get { return __pbn__points.GetValueOrDefault(); }
-                set { __pbn__points = value; }
+                get => __pbn__points.GetValueOrDefault();
+                set => __pbn__points = value;
             }
             public bool ShouldSerializepoints() => __pbn__points != null;
             public void Resetpoints() => __pbn__points = null;
@@ -10840,8 +10841,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint correct
             {
-                get { return __pbn__correct.GetValueOrDefault(); }
-                set { __pbn__correct = value; }
+                get => __pbn__correct.GetValueOrDefault();
+                set => __pbn__correct = value;
             }
             public bool ShouldSerializecorrect() => __pbn__correct != null;
             public void Resetcorrect() => __pbn__correct = null;
@@ -10850,8 +10851,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint points
             {
-                get { return __pbn__points.GetValueOrDefault(); }
-                set { __pbn__points = value; }
+                get => __pbn__points.GetValueOrDefault();
+                set => __pbn__points = value;
             }
             public bool ShouldSerializepoints() => __pbn__points != null;
             public void Resetpoints() => __pbn__points = null;
@@ -10869,8 +10870,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -10879,8 +10880,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint quality
             {
-                get { return __pbn__quality.GetValueOrDefault(); }
-                set { __pbn__quality = value; }
+                get => __pbn__quality.GetValueOrDefault();
+                set => __pbn__quality = value;
             }
             public bool ShouldSerializequality() => __pbn__quality != null;
             public void Resetquality() => __pbn__quality = null;
@@ -10898,8 +10899,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public float total_score
             {
-                get { return __pbn__total_score.GetValueOrDefault(); }
-                set { __pbn__total_score = value; }
+                get => __pbn__total_score.GetValueOrDefault();
+                set => __pbn__total_score = value;
             }
             public bool ShouldSerializetotal_score() => __pbn__total_score != null;
             public void Resettotal_score() => __pbn__total_score = null;
@@ -10908,8 +10909,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public float percentile
             {
-                get { return __pbn__percentile.GetValueOrDefault(); }
-                set { __pbn__percentile = value; }
+                get => __pbn__percentile.GetValueOrDefault();
+                set => __pbn__percentile = value;
             }
             public bool ShouldSerializepercentile() => __pbn__percentile != null;
             public void Resetpercentile() => __pbn__percentile = null;
@@ -10929,8 +10930,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint battle_pass_level
         {
-            get { return __pbn__battle_pass_level.GetValueOrDefault(); }
-            set { __pbn__battle_pass_level = value; }
+            get => __pbn__battle_pass_level.GetValueOrDefault();
+            set => __pbn__battle_pass_level = value;
         }
         public bool ShouldSerializebattle_pass_level() => __pbn__battle_pass_level != null;
         public void Resetbattle_pass_level() => __pbn__battle_pass_level = null;
@@ -10948,8 +10949,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -10958,8 +10959,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -11004,8 +11005,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -11033,8 +11034,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint event_id
             {
-                get { return __pbn__event_id.GetValueOrDefault(); }
-                set { __pbn__event_id = value; }
+                get => __pbn__event_id.GetValueOrDefault();
+                set => __pbn__event_id = value;
             }
             public bool ShouldSerializeevent_id() => __pbn__event_id != null;
             public void Resetevent_id() => __pbn__event_id = null;
@@ -11043,8 +11044,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint level
             {
-                get { return __pbn__level.GetValueOrDefault(); }
-                set { __pbn__level = value; }
+                get => __pbn__level.GetValueOrDefault();
+                set => __pbn__level = value;
             }
             public bool ShouldSerializelevel() => __pbn__level != null;
             public void Resetlevel() => __pbn__level = null;
@@ -11064,8 +11065,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool is_party
         {
-            get { return __pbn__is_party.GetValueOrDefault(); }
-            set { __pbn__is_party = value; }
+            get => __pbn__is_party.GetValueOrDefault();
+            set => __pbn__is_party = value;
         }
         public bool ShouldSerializeis_party() => __pbn__is_party != null;
         public void Resetis_party() => __pbn__is_party = null;
@@ -11083,8 +11084,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool success
         {
-            get { return __pbn__success.GetValueOrDefault(); }
-            set { __pbn__success = value; }
+            get => __pbn__success.GetValueOrDefault();
+            set => __pbn__success = value;
         }
         public bool ShouldSerializesuccess() => __pbn__success != null;
         public void Resetsuccess() => __pbn__success = null;
@@ -11102,8 +11103,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool active
         {
-            get { return __pbn__active.GetValueOrDefault(); }
-            set { __pbn__active = value; }
+            get => __pbn__active.GetValueOrDefault();
+            set => __pbn__active = value;
         }
         public bool ShouldSerializeactive() => __pbn__active != null;
         public void Resetactive() => __pbn__active = null;
@@ -11121,8 +11122,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint client_version
         {
-            get { return __pbn__client_version.GetValueOrDefault(); }
-            set { __pbn__client_version = value; }
+            get => __pbn__client_version.GetValueOrDefault();
+            set => __pbn__client_version = value;
         }
         public bool ShouldSerializeclient_version() => __pbn__client_version != null;
         public void Resetclient_version() => __pbn__client_version = null;
@@ -11141,8 +11142,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string error
         {
-            get { return __pbn__error ?? ""; }
-            set { __pbn__error = value; }
+            get => __pbn__error ?? "";
+            set => __pbn__error = value;
         }
         public bool ShouldSerializeerror() => __pbn__error != null;
         public void Reseterror() => __pbn__error = null;
@@ -11160,8 +11161,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint team_id
         {
-            get { return __pbn__team_id.GetValueOrDefault(); }
-            set { __pbn__team_id = value; }
+            get => __pbn__team_id.GetValueOrDefault();
+            set => __pbn__team_id = value;
         }
         public bool ShouldSerializeteam_id() => __pbn__team_id != null;
         public void Resetteam_id() => __pbn__team_id = null;
@@ -11170,8 +11171,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -11192,8 +11193,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public bool trivia_enabled
         {
-            get { return __pbn__trivia_enabled.GetValueOrDefault(); }
-            set { __pbn__trivia_enabled = value; }
+            get => __pbn__trivia_enabled.GetValueOrDefault();
+            set => __pbn__trivia_enabled = value;
         }
         public bool ShouldSerializetrivia_enabled() => __pbn__trivia_enabled != null;
         public void Resettrivia_enabled() => __pbn__trivia_enabled = null;
@@ -11211,8 +11212,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint question_id
         {
-            get { return __pbn__question_id.GetValueOrDefault(); }
-            set { __pbn__question_id = value; }
+            get => __pbn__question_id.GetValueOrDefault();
+            set => __pbn__question_id = value;
         }
         public bool ShouldSerializequestion_id() => __pbn__question_id != null;
         public void Resetquestion_id() => __pbn__question_id = null;
@@ -11221,8 +11222,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint answer_index
         {
-            get { return __pbn__answer_index.GetValueOrDefault(); }
-            set { __pbn__answer_index = value; }
+            get => __pbn__answer_index.GetValueOrDefault();
+            set => __pbn__answer_index = value;
         }
         public bool ShouldSerializeanswer_index() => __pbn__answer_index != null;
         public void Resetanswer_index() => __pbn__answer_index = null;
@@ -11241,8 +11242,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EDOTATriviaAnswerResult.k_EDOTATriviaAnswerResult_Success)]
         public EDOTATriviaAnswerResult result
         {
-            get { return __pbn__result ?? EDOTATriviaAnswerResult.k_EDOTATriviaAnswerResult_Success; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EDOTATriviaAnswerResult.k_EDOTATriviaAnswerResult_Success;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -11269,8 +11270,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool trivia_enabled
         {
-            get { return __pbn__trivia_enabled.GetValueOrDefault(); }
-            set { __pbn__trivia_enabled = value; }
+            get => __pbn__trivia_enabled.GetValueOrDefault();
+            set => __pbn__trivia_enabled = value;
         }
         public bool ShouldSerializetrivia_enabled() => __pbn__trivia_enabled != null;
         public void Resettrivia_enabled() => __pbn__trivia_enabled = null;
@@ -11279,8 +11280,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint current_timestamp
         {
-            get { return __pbn__current_timestamp.GetValueOrDefault(); }
-            set { __pbn__current_timestamp = value; }
+            get => __pbn__current_timestamp.GetValueOrDefault();
+            set => __pbn__current_timestamp = value;
         }
         public bool ShouldSerializecurrent_timestamp() => __pbn__current_timestamp != null;
         public void Resetcurrent_timestamp() => __pbn__current_timestamp = null;
@@ -11298,8 +11299,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint recipient_account_id
         {
-            get { return __pbn__recipient_account_id.GetValueOrDefault(); }
-            set { __pbn__recipient_account_id = value; }
+            get => __pbn__recipient_account_id.GetValueOrDefault();
+            set => __pbn__recipient_account_id = value;
         }
         public bool ShouldSerializerecipient_account_id() => __pbn__recipient_account_id != null;
         public void Resetrecipient_account_id() => __pbn__recipient_account_id = null;
@@ -11308,8 +11309,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -11318,8 +11319,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -11338,8 +11339,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -11381,8 +11382,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -11421,8 +11422,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -11447,8 +11448,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint tipper_account_id
         {
-            get { return __pbn__tipper_account_id.GetValueOrDefault(); }
-            set { __pbn__tipper_account_id = value; }
+            get => __pbn__tipper_account_id.GetValueOrDefault();
+            set => __pbn__tipper_account_id = value;
         }
         public bool ShouldSerializetipper_account_id() => __pbn__tipper_account_id != null;
         public void Resettipper_account_id() => __pbn__tipper_account_id = null;
@@ -11458,8 +11459,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string tipper_name
         {
-            get { return __pbn__tipper_name ?? ""; }
-            set { __pbn__tipper_name = value; }
+            get => __pbn__tipper_name ?? "";
+            set => __pbn__tipper_name = value;
         }
         public bool ShouldSerializetipper_name() => __pbn__tipper_name != null;
         public void Resettipper_name() => __pbn__tipper_name = null;
@@ -11468,8 +11469,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint recipient_account_id
         {
-            get { return __pbn__recipient_account_id.GetValueOrDefault(); }
-            set { __pbn__recipient_account_id = value; }
+            get => __pbn__recipient_account_id.GetValueOrDefault();
+            set => __pbn__recipient_account_id = value;
         }
         public bool ShouldSerializerecipient_account_id() => __pbn__recipient_account_id != null;
         public void Resetrecipient_account_id() => __pbn__recipient_account_id = null;
@@ -11479,8 +11480,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string recipient_name
         {
-            get { return __pbn__recipient_name ?? ""; }
-            set { __pbn__recipient_name = value; }
+            get => __pbn__recipient_name ?? "";
+            set => __pbn__recipient_name = value;
         }
         public bool ShouldSerializerecipient_name() => __pbn__recipient_name != null;
         public void Resetrecipient_name() => __pbn__recipient_name = null;
@@ -11489,8 +11490,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -11508,8 +11509,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint commender_account_id
         {
-            get { return __pbn__commender_account_id.GetValueOrDefault(); }
-            set { __pbn__commender_account_id = value; }
+            get => __pbn__commender_account_id.GetValueOrDefault();
+            set => __pbn__commender_account_id = value;
         }
         public bool ShouldSerializecommender_account_id() => __pbn__commender_account_id != null;
         public void Resetcommender_account_id() => __pbn__commender_account_id = null;
@@ -11519,8 +11520,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string commender_name
         {
-            get { return __pbn__commender_name ?? ""; }
-            set { __pbn__commender_name = value; }
+            get => __pbn__commender_name ?? "";
+            set => __pbn__commender_name = value;
         }
         public bool ShouldSerializecommender_name() => __pbn__commender_name != null;
         public void Resetcommender_name() => __pbn__commender_name = null;
@@ -11529,8 +11530,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint flags
         {
-            get { return __pbn__flags.GetValueOrDefault(); }
-            set { __pbn__flags = value; }
+            get => __pbn__flags.GetValueOrDefault();
+            set => __pbn__flags = value;
         }
         public bool ShouldSerializeflags() => __pbn__flags != null;
         public void Resetflags() => __pbn__flags = null;
@@ -11548,8 +11549,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -11579,8 +11580,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -11602,8 +11603,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -11631,8 +11632,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint player_account_id
         {
-            get { return __pbn__player_account_id.GetValueOrDefault(); }
-            set { __pbn__player_account_id = value; }
+            get => __pbn__player_account_id.GetValueOrDefault();
+            set => __pbn__player_account_id = value;
         }
         public bool ShouldSerializeplayer_account_id() => __pbn__player_account_id != null;
         public void Resetplayer_account_id() => __pbn__player_account_id = null;
@@ -11641,8 +11642,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -11651,8 +11652,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint item_id
         {
-            get { return __pbn__item_id.GetValueOrDefault(); }
-            set { __pbn__item_id = value; }
+            get => __pbn__item_id.GetValueOrDefault();
+            set => __pbn__item_id = value;
         }
         public bool ShouldSerializeitem_id() => __pbn__item_id != null;
         public void Resetitem_id() => __pbn__item_id = null;
@@ -11661,8 +11662,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint league_id
         {
-            get { return __pbn__league_id.GetValueOrDefault(); }
-            set { __pbn__league_id = value; }
+            get => __pbn__league_id.GetValueOrDefault();
+            set => __pbn__league_id = value;
         }
         public bool ShouldSerializeleague_id() => __pbn__league_id != null;
         public void Resetleague_id() => __pbn__league_id = null;
@@ -11708,8 +11709,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public float win_percent
             {
-                get { return __pbn__win_percent.GetValueOrDefault(); }
-                set { __pbn__win_percent = value; }
+                get => __pbn__win_percent.GetValueOrDefault();
+                set => __pbn__win_percent = value;
             }
             public bool ShouldSerializewin_percent() => __pbn__win_percent != null;
             public void Resetwin_percent() => __pbn__win_percent = null;
@@ -11718,8 +11719,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public float pick_percent
             {
-                get { return __pbn__pick_percent.GetValueOrDefault(); }
-                set { __pbn__pick_percent = value; }
+                get => __pbn__pick_percent.GetValueOrDefault();
+                set => __pbn__pick_percent = value;
             }
             public bool ShouldSerializepick_percent() => __pbn__pick_percent != null;
             public void Resetpick_percent() => __pbn__pick_percent = null;
@@ -11728,8 +11729,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint win_count
             {
-                get { return __pbn__win_count.GetValueOrDefault(); }
-                set { __pbn__win_count = value; }
+                get => __pbn__win_count.GetValueOrDefault();
+                set => __pbn__win_count = value;
             }
             public bool ShouldSerializewin_count() => __pbn__win_count != null;
             public void Resetwin_count() => __pbn__win_count = null;
@@ -11738,8 +11739,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint pick_count
             {
-                get { return __pbn__pick_count.GetValueOrDefault(); }
-                set { __pbn__pick_count = value; }
+                get => __pbn__pick_count.GetValueOrDefault();
+                set => __pbn__pick_count = value;
             }
             public bool ShouldSerializepick_count() => __pbn__pick_count != null;
             public void Resetpick_count() => __pbn__pick_count = null;
@@ -11760,8 +11761,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(DOTASelectionPriorityChoice.k_DOTASelectionPriorityChoice_Invalid)]
         public DOTASelectionPriorityChoice choice
         {
-            get { return __pbn__choice ?? DOTASelectionPriorityChoice.k_DOTASelectionPriorityChoice_Invalid; }
-            set { __pbn__choice = value; }
+            get => __pbn__choice ?? DOTASelectionPriorityChoice.k_DOTASelectionPriorityChoice_Invalid;
+            set => __pbn__choice = value;
         }
         public bool ShouldSerializechoice() => __pbn__choice != null;
         public void Resetchoice() => __pbn__choice = null;
@@ -11780,8 +11781,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -11807,8 +11808,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string badge_id
         {
-            get { return __pbn__badge_id ?? ""; }
-            set { __pbn__badge_id = value; }
+            get => __pbn__badge_id ?? "";
+            set => __pbn__badge_id = value;
         }
         public bool ShouldSerializebadge_id() => __pbn__badge_id != null;
         public void Resetbadge_id() => __pbn__badge_id = null;
@@ -11827,8 +11828,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -11863,8 +11864,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -11910,8 +11911,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint item_def
         {
-            get { return __pbn__item_def.GetValueOrDefault(); }
-            set { __pbn__item_def = value; }
+            get => __pbn__item_def.GetValueOrDefault();
+            set => __pbn__item_def = value;
         }
         public bool ShouldSerializeitem_def() => __pbn__item_def != null;
         public void Resetitem_def() => __pbn__item_def = null;
@@ -11920,8 +11921,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint quantity
         {
-            get { return __pbn__quantity.GetValueOrDefault(); }
-            set { __pbn__quantity = value; }
+            get => __pbn__quantity.GetValueOrDefault();
+            set => __pbn__quantity = value;
         }
         public bool ShouldSerializequantity() => __pbn__quantity != null;
         public void Resetquantity() => __pbn__quantity = null;
@@ -11931,8 +11932,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
         public EEvent event_id
         {
-            get { return __pbn__event_id ?? EEvent.EVENT_ID_NONE; }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id ?? EEvent.EVENT_ID_NONE;
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -11941,8 +11942,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public bool use_premium_points
         {
-            get { return __pbn__use_premium_points.GetValueOrDefault(); }
-            set { __pbn__use_premium_points = value; }
+            get => __pbn__use_premium_points.GetValueOrDefault();
+            set => __pbn__use_premium_points = value;
         }
         public bool ShouldSerializeuse_premium_points() => __pbn__use_premium_points != null;
         public void Resetuse_premium_points() => __pbn__use_premium_points = null;
@@ -11961,8 +11962,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -11998,8 +11999,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint mmr
         {
-            get { return __pbn__mmr.GetValueOrDefault(); }
-            set { __pbn__mmr = value; }
+            get => __pbn__mmr.GetValueOrDefault();
+            set => __pbn__mmr = value;
         }
         public bool ShouldSerializemmr() => __pbn__mmr != null;
         public void Resetmmr() => __pbn__mmr = null;
@@ -12008,8 +12009,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -12027,8 +12028,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public int game_time
         {
-            get { return __pbn__game_time.GetValueOrDefault(); }
-            set { __pbn__game_time = value; }
+            get => __pbn__game_time.GetValueOrDefault();
+            set => __pbn__game_time = value;
         }
         public bool ShouldSerializegame_time() => __pbn__game_time != null;
         public void Resetgame_time() => __pbn__game_time = null;
@@ -12037,8 +12038,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint gold
         {
-            get { return __pbn__gold.GetValueOrDefault(); }
-            set { __pbn__gold = value; }
+            get => __pbn__gold.GetValueOrDefault();
+            set => __pbn__gold = value;
         }
         public bool ShouldSerializegold() => __pbn__gold != null;
         public void Resetgold() => __pbn__gold = null;
@@ -12047,8 +12048,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint net_worth
         {
-            get { return __pbn__net_worth.GetValueOrDefault(); }
-            set { __pbn__net_worth = value; }
+            get => __pbn__net_worth.GetValueOrDefault();
+            set => __pbn__net_worth = value;
         }
         public bool ShouldSerializenet_worth() => __pbn__net_worth != null;
         public void Resetnet_worth() => __pbn__net_worth = null;
@@ -12078,8 +12079,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint mmr
         {
-            get { return __pbn__mmr.GetValueOrDefault(); }
-            set { __pbn__mmr = value; }
+            get => __pbn__mmr.GetValueOrDefault();
+            set => __pbn__mmr = value;
         }
         public bool ShouldSerializemmr() => __pbn__mmr != null;
         public void Resetmmr() => __pbn__mmr = null;
@@ -12088,8 +12089,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -12126,8 +12127,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint ability_id
             {
-                get { return __pbn__ability_id.GetValueOrDefault(); }
-                set { __pbn__ability_id = value; }
+                get => __pbn__ability_id.GetValueOrDefault();
+                set => __pbn__ability_id = value;
             }
             public bool ShouldSerializeability_id() => __pbn__ability_id != null;
             public void Resetability_id() => __pbn__ability_id = null;
@@ -12136,8 +12137,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public float weight
             {
-                get { return __pbn__weight.GetValueOrDefault(); }
-                set { __pbn__weight = value; }
+                get => __pbn__weight.GetValueOrDefault();
+                set => __pbn__weight = value;
             }
             public bool ShouldSerializeweight() => __pbn__weight != null;
             public void Resetweight() => __pbn__weight = null;
@@ -12170,8 +12171,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -12180,8 +12181,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint dust_amount
         {
-            get { return __pbn__dust_amount.GetValueOrDefault(); }
-            set { __pbn__dust_amount = value; }
+            get => __pbn__dust_amount.GetValueOrDefault();
+            set => __pbn__dust_amount = value;
         }
         public bool ShouldSerializedust_amount() => __pbn__dust_amount != null;
         public void Resetdust_amount() => __pbn__dust_amount = null;
@@ -12209,8 +12210,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -12219,8 +12220,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint kill_eater_type
         {
-            get { return __pbn__kill_eater_type.GetValueOrDefault(); }
-            set { __pbn__kill_eater_type = value; }
+            get => __pbn__kill_eater_type.GetValueOrDefault();
+            set => __pbn__kill_eater_type = value;
         }
         public bool ShouldSerializekill_eater_type() => __pbn__kill_eater_type != null;
         public void Resetkill_eater_type() => __pbn__kill_eater_type = null;
@@ -12239,8 +12240,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EPurchaseHeroRelicResult.k_EPurchaseHeroRelicResult_Success)]
         public EPurchaseHeroRelicResult result
         {
-            get { return __pbn__result ?? EPurchaseHeroRelicResult.k_EPurchaseHeroRelicResult_Success; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EPurchaseHeroRelicResult.k_EPurchaseHeroRelicResult_Success;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -12258,8 +12259,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -12278,8 +12279,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EPurchaseHeroRelicResult.k_EPurchaseHeroRelicResult_Success)]
         public EPurchaseHeroRelicResult result
         {
-            get { return __pbn__result ?? EPurchaseHeroRelicResult.k_EPurchaseHeroRelicResult_Success; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EPurchaseHeroRelicResult.k_EPurchaseHeroRelicResult_Success;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -12288,8 +12289,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint kill_eater_type
         {
-            get { return __pbn__kill_eater_type.GetValueOrDefault(); }
-            set { __pbn__kill_eater_type = value; }
+            get => __pbn__kill_eater_type.GetValueOrDefault();
+            set => __pbn__kill_eater_type = value;
         }
         public bool ShouldSerializekill_eater_type() => __pbn__kill_eater_type != null;
         public void Resetkill_eater_type() => __pbn__kill_eater_type = null;
@@ -12308,8 +12309,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
         public EEvent event_id
         {
-            get { return __pbn__event_id ?? EEvent.EVENT_ID_NONE; }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id ?? EEvent.EVENT_ID_NONE;
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -12318,8 +12319,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint week
         {
-            get { return __pbn__week.GetValueOrDefault(); }
-            set { __pbn__week = value; }
+            get => __pbn__week.GetValueOrDefault();
+            set => __pbn__week = value;
         }
         public bool ShouldSerializeweek() => __pbn__week != null;
         public void Resetweek() => __pbn__week = null;
@@ -12346,8 +12347,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -12381,8 +12382,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
         public EResponse result
         {
-            get { return __pbn__result ?? EResponse.k_eInternalError; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EResponse.k_eInternalError;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -12398,8 +12399,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint hero_id
             {
-                get { return __pbn__hero_id.GetValueOrDefault(); }
-                set { __pbn__hero_id = value; }
+                get => __pbn__hero_id.GetValueOrDefault();
+                set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
@@ -12411,8 +12412,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public bool manually_set
             {
-                get { return __pbn__manually_set.GetValueOrDefault(); }
-                set { __pbn__manually_set = value; }
+                get => __pbn__manually_set.GetValueOrDefault();
+                set => __pbn__manually_set = value;
             }
             public bool ShouldSerializemanually_set() => __pbn__manually_set != null;
             public void Resetmanually_set() => __pbn__manually_set = null;
@@ -12421,8 +12422,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint plus_hero_xp
             {
-                get { return __pbn__plus_hero_xp.GetValueOrDefault(); }
-                set { __pbn__plus_hero_xp = value; }
+                get => __pbn__plus_hero_xp.GetValueOrDefault();
+                set => __pbn__plus_hero_xp = value;
             }
             public bool ShouldSerializeplus_hero_xp() => __pbn__plus_hero_xp != null;
             public void Resetplus_hero_xp() => __pbn__plus_hero_xp = null;
@@ -12443,8 +12444,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public ulong match_id
             {
-                get { return __pbn__match_id.GetValueOrDefault(); }
-                set { __pbn__match_id = value; }
+                get => __pbn__match_id.GetValueOrDefault();
+                set => __pbn__match_id = value;
             }
             public bool ShouldSerializematch_id() => __pbn__match_id != null;
             public void Resetmatch_id() => __pbn__match_id = null;
@@ -12453,8 +12454,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint match_timestamp
             {
-                get { return __pbn__match_timestamp.GetValueOrDefault(); }
-                set { __pbn__match_timestamp = value; }
+                get => __pbn__match_timestamp.GetValueOrDefault();
+                set => __pbn__match_timestamp = value;
             }
             public bool ShouldSerializematch_timestamp() => __pbn__match_timestamp != null;
             public void Resetmatch_timestamp() => __pbn__match_timestamp = null;
@@ -12463,8 +12464,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
             public int performance_rating
             {
-                get { return __pbn__performance_rating.GetValueOrDefault(); }
-                set { __pbn__performance_rating = value; }
+                get => __pbn__performance_rating.GetValueOrDefault();
+                set => __pbn__performance_rating = value;
             }
             public bool ShouldSerializeperformance_rating() => __pbn__performance_rating != null;
             public void Resetperformance_rating() => __pbn__performance_rating = null;
@@ -12473,8 +12474,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint hero_id
             {
-                get { return __pbn__hero_id.GetValueOrDefault(); }
-                set { __pbn__hero_id = value; }
+                get => __pbn__hero_id.GetValueOrDefault();
+                set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
@@ -12483,8 +12484,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public bool won_match
             {
-                get { return __pbn__won_match.GetValueOrDefault(); }
-                set { __pbn__won_match = value; }
+                get => __pbn__won_match.GetValueOrDefault();
+                set => __pbn__won_match = value;
             }
             public bool ShouldSerializewon_match() => __pbn__won_match != null;
             public void Resetwon_match() => __pbn__won_match = null;
@@ -12513,8 +12514,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong background_item_id
         {
-            get { return __pbn__background_item_id.GetValueOrDefault(); }
-            set { __pbn__background_item_id = value; }
+            get => __pbn__background_item_id.GetValueOrDefault();
+            set => __pbn__background_item_id = value;
         }
         public bool ShouldSerializebackground_item_id() => __pbn__background_item_id != null;
         public void Resetbackground_item_id() => __pbn__background_item_id = null;
@@ -12536,8 +12537,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -12562,8 +12563,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint last_run
         {
-            get { return __pbn__last_run.GetValueOrDefault(); }
-            set { __pbn__last_run = value; }
+            get => __pbn__last_run.GetValueOrDefault();
+            set => __pbn__last_run = value;
         }
         public bool ShouldSerializelast_run() => __pbn__last_run != null;
         public void Resetlast_run() => __pbn__last_run = null;
@@ -12572,8 +12573,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint ability_id
         {
-            get { return __pbn__ability_id.GetValueOrDefault(); }
-            set { __pbn__ability_id = value; }
+            get => __pbn__ability_id.GetValueOrDefault();
+            set => __pbn__ability_id = value;
         }
         public bool ShouldSerializeability_id() => __pbn__ability_id != null;
         public void Resetability_id() => __pbn__ability_id = null;
@@ -12582,8 +12583,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint game_count
         {
-            get { return __pbn__game_count.GetValueOrDefault(); }
-            set { __pbn__game_count = value; }
+            get => __pbn__game_count.GetValueOrDefault();
+            set => __pbn__game_count = value;
         }
         public bool ShouldSerializegame_count() => __pbn__game_count != null;
         public void Resetgame_count() => __pbn__game_count = null;
@@ -12592,8 +12593,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint win_count
         {
-            get { return __pbn__win_count.GetValueOrDefault(); }
-            set { __pbn__win_count = value; }
+            get => __pbn__win_count.GetValueOrDefault();
+            set => __pbn__win_count = value;
         }
         public bool ShouldSerializewin_count() => __pbn__win_count != null;
         public void Resetwin_count() => __pbn__win_count = null;
@@ -12611,8 +12612,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint last_run
         {
-            get { return __pbn__last_run.GetValueOrDefault(); }
-            set { __pbn__last_run = value; }
+            get => __pbn__last_run.GetValueOrDefault();
+            set => __pbn__last_run = value;
         }
         public bool ShouldSerializelast_run() => __pbn__last_run != null;
         public void Resetlast_run() => __pbn__last_run = null;
@@ -12621,8 +12622,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint avg_gold_per_min
         {
-            get { return __pbn__avg_gold_per_min.GetValueOrDefault(); }
-            set { __pbn__avg_gold_per_min = value; }
+            get => __pbn__avg_gold_per_min.GetValueOrDefault();
+            set => __pbn__avg_gold_per_min = value;
         }
         public bool ShouldSerializeavg_gold_per_min() => __pbn__avg_gold_per_min != null;
         public void Resetavg_gold_per_min() => __pbn__avg_gold_per_min = null;
@@ -12631,8 +12632,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint avg_xp_per_min
         {
-            get { return __pbn__avg_xp_per_min.GetValueOrDefault(); }
-            set { __pbn__avg_xp_per_min = value; }
+            get => __pbn__avg_xp_per_min.GetValueOrDefault();
+            set => __pbn__avg_xp_per_min = value;
         }
         public bool ShouldSerializeavg_xp_per_min() => __pbn__avg_xp_per_min != null;
         public void Resetavg_xp_per_min() => __pbn__avg_xp_per_min = null;
@@ -12641,8 +12642,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint avg_kills
         {
-            get { return __pbn__avg_kills.GetValueOrDefault(); }
-            set { __pbn__avg_kills = value; }
+            get => __pbn__avg_kills.GetValueOrDefault();
+            set => __pbn__avg_kills = value;
         }
         public bool ShouldSerializeavg_kills() => __pbn__avg_kills != null;
         public void Resetavg_kills() => __pbn__avg_kills = null;
@@ -12651,8 +12652,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint avg_deaths
         {
-            get { return __pbn__avg_deaths.GetValueOrDefault(); }
-            set { __pbn__avg_deaths = value; }
+            get => __pbn__avg_deaths.GetValueOrDefault();
+            set => __pbn__avg_deaths = value;
         }
         public bool ShouldSerializeavg_deaths() => __pbn__avg_deaths != null;
         public void Resetavg_deaths() => __pbn__avg_deaths = null;
@@ -12661,8 +12662,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint avg_assists
         {
-            get { return __pbn__avg_assists.GetValueOrDefault(); }
-            set { __pbn__avg_assists = value; }
+            get => __pbn__avg_assists.GetValueOrDefault();
+            set => __pbn__avg_assists = value;
         }
         public bool ShouldSerializeavg_assists() => __pbn__avg_assists != null;
         public void Resetavg_assists() => __pbn__avg_assists = null;
@@ -12671,8 +12672,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint avg_last_hits
         {
-            get { return __pbn__avg_last_hits.GetValueOrDefault(); }
-            set { __pbn__avg_last_hits = value; }
+            get => __pbn__avg_last_hits.GetValueOrDefault();
+            set => __pbn__avg_last_hits = value;
         }
         public bool ShouldSerializeavg_last_hits() => __pbn__avg_last_hits != null;
         public void Resetavg_last_hits() => __pbn__avg_last_hits = null;
@@ -12681,8 +12682,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public uint avg_denies
         {
-            get { return __pbn__avg_denies.GetValueOrDefault(); }
-            set { __pbn__avg_denies = value; }
+            get => __pbn__avg_denies.GetValueOrDefault();
+            set => __pbn__avg_denies = value;
         }
         public bool ShouldSerializeavg_denies() => __pbn__avg_denies != null;
         public void Resetavg_denies() => __pbn__avg_denies = null;
@@ -12691,8 +12692,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public uint avg_net_worth
         {
-            get { return __pbn__avg_net_worth.GetValueOrDefault(); }
-            set { __pbn__avg_net_worth = value; }
+            get => __pbn__avg_net_worth.GetValueOrDefault();
+            set => __pbn__avg_net_worth = value;
         }
         public bool ShouldSerializeavg_net_worth() => __pbn__avg_net_worth != null;
         public void Resetavg_net_worth() => __pbn__avg_net_worth = null;
@@ -12710,8 +12711,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -12729,8 +12730,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -12749,8 +12750,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint day
             {
-                get { return __pbn__day.GetValueOrDefault(); }
-                set { __pbn__day = value; }
+                get => __pbn__day.GetValueOrDefault();
+                set => __pbn__day = value;
             }
             public bool ShouldSerializeday() => __pbn__day != null;
             public void Resetday() => __pbn__day = null;
@@ -12759,8 +12760,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public float win_percent
             {
-                get { return __pbn__win_percent.GetValueOrDefault(); }
-                set { __pbn__win_percent = value; }
+                get => __pbn__win_percent.GetValueOrDefault();
+                set => __pbn__win_percent = value;
             }
             public bool ShouldSerializewin_percent() => __pbn__win_percent != null;
             public void Resetwin_percent() => __pbn__win_percent = null;
@@ -12769,8 +12770,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public float pick_percent
             {
-                get { return __pbn__pick_percent.GetValueOrDefault(); }
-                set { __pbn__pick_percent = value; }
+                get => __pbn__pick_percent.GetValueOrDefault();
+                set => __pbn__pick_percent = value;
             }
             public bool ShouldSerializepick_percent() => __pbn__pick_percent != null;
             public void Resetpick_percent() => __pbn__pick_percent = null;
@@ -12779,8 +12780,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public float ban_percent
             {
-                get { return __pbn__ban_percent.GetValueOrDefault(); }
-                set { __pbn__ban_percent = value; }
+                get => __pbn__ban_percent.GetValueOrDefault();
+                set => __pbn__ban_percent = value;
             }
             public bool ShouldSerializeban_percent() => __pbn__ban_percent != null;
             public void Resetban_percent() => __pbn__ban_percent = null;
@@ -12798,8 +12799,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint week
             {
-                get { return __pbn__week.GetValueOrDefault(); }
-                set { __pbn__week = value; }
+                get => __pbn__week.GetValueOrDefault();
+                set => __pbn__week = value;
             }
             public bool ShouldSerializeweek() => __pbn__week != null;
             public void Resetweek() => __pbn__week = null;
@@ -12808,8 +12809,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public float win_percent
             {
-                get { return __pbn__win_percent.GetValueOrDefault(); }
-                set { __pbn__win_percent = value; }
+                get => __pbn__win_percent.GetValueOrDefault();
+                set => __pbn__win_percent = value;
             }
             public bool ShouldSerializewin_percent() => __pbn__win_percent != null;
             public void Resetwin_percent() => __pbn__win_percent = null;
@@ -12818,8 +12819,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public float pick_percent
             {
-                get { return __pbn__pick_percent.GetValueOrDefault(); }
-                set { __pbn__pick_percent = value; }
+                get => __pbn__pick_percent.GetValueOrDefault();
+                set => __pbn__pick_percent = value;
             }
             public bool ShouldSerializepick_percent() => __pbn__pick_percent != null;
             public void Resetpick_percent() => __pbn__pick_percent = null;
@@ -12828,8 +12829,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public float ban_percent
             {
-                get { return __pbn__ban_percent.GetValueOrDefault(); }
-                set { __pbn__ban_percent = value; }
+                get => __pbn__ban_percent.GetValueOrDefault();
+                set => __pbn__ban_percent = value;
             }
             public bool ShouldSerializeban_percent() => __pbn__ban_percent != null;
             public void Resetban_percent() => __pbn__ban_percent = null;
@@ -12847,8 +12848,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint rank_chunk
             {
-                get { return __pbn__rank_chunk.GetValueOrDefault(); }
-                set { __pbn__rank_chunk = value; }
+                get => __pbn__rank_chunk.GetValueOrDefault();
+                set => __pbn__rank_chunk = value;
             }
             public bool ShouldSerializerank_chunk() => __pbn__rank_chunk != null;
             public void Resetrank_chunk() => __pbn__rank_chunk = null;
@@ -12902,8 +12903,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint hero_id
             {
-                get { return __pbn__hero_id.GetValueOrDefault(); }
-                set { __pbn__hero_id = value; }
+                get => __pbn__hero_id.GetValueOrDefault();
+                set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
@@ -12912,8 +12913,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint win_rate
             {
-                get { return __pbn__win_rate.GetValueOrDefault(); }
-                set { __pbn__win_rate = value; }
+                get => __pbn__win_rate.GetValueOrDefault();
+                set => __pbn__win_rate = value;
             }
             public bool ShouldSerializewin_rate() => __pbn__win_rate != null;
             public void Resetwin_rate() => __pbn__win_rate = null;
@@ -12922,8 +12923,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint first_other_hero_id
             {
-                get { return __pbn__first_other_hero_id.GetValueOrDefault(); }
-                set { __pbn__first_other_hero_id = value; }
+                get => __pbn__first_other_hero_id.GetValueOrDefault();
+                set => __pbn__first_other_hero_id = value;
             }
             public bool ShouldSerializefirst_other_hero_id() => __pbn__first_other_hero_id != null;
             public void Resetfirst_other_hero_id() => __pbn__first_other_hero_id = null;
@@ -12947,8 +12948,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint rank
             {
-                get { return __pbn__rank.GetValueOrDefault(); }
-                set { __pbn__rank = value; }
+                get => __pbn__rank.GetValueOrDefault();
+                set => __pbn__rank = value;
             }
             public bool ShouldSerializerank() => __pbn__rank != null;
             public void Resetrank() => __pbn__rank = null;
@@ -12971,8 +12972,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -12990,8 +12991,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint private_key
         {
-            get { return __pbn__private_key.GetValueOrDefault(); }
-            set { __pbn__private_key = value; }
+            get => __pbn__private_key.GetValueOrDefault();
+            set => __pbn__private_key = value;
         }
         public bool ShouldSerializeprivate_key() => __pbn__private_key != null;
         public void Resetprivate_key() => __pbn__private_key = null;
@@ -13019,8 +13020,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -13048,8 +13049,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -13058,8 +13059,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint hero_id_completed
         {
-            get { return __pbn__hero_id_completed.GetValueOrDefault(); }
-            set { __pbn__hero_id_completed = value; }
+            get => __pbn__hero_id_completed.GetValueOrDefault();
+            set => __pbn__hero_id_completed = value;
         }
         public bool ShouldSerializehero_id_completed() => __pbn__hero_id_completed != null;
         public void Resethero_id_completed() => __pbn__hero_id_completed = null;
@@ -13071,8 +13072,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint map_variant
         {
-            get { return __pbn__map_variant.GetValueOrDefault(); }
-            set { __pbn__map_variant = value; }
+            get => __pbn__map_variant.GetValueOrDefault();
+            set => __pbn__map_variant = value;
         }
         public bool ShouldSerializemap_variant() => __pbn__map_variant != null;
         public void Resetmap_variant() => __pbn__map_variant = null;
@@ -13088,8 +13089,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint path_id_completed
             {
-                get { return __pbn__path_id_completed.GetValueOrDefault(); }
-                set { __pbn__path_id_completed = value; }
+                get => __pbn__path_id_completed.GetValueOrDefault();
+                set => __pbn__path_id_completed = value;
             }
             public bool ShouldSerializepath_id_completed() => __pbn__path_id_completed != null;
             public void Resetpath_id_completed() => __pbn__path_id_completed = null;
@@ -13098,8 +13099,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public bool received_ultra_rare_reward
             {
-                get { return __pbn__received_ultra_rare_reward.GetValueOrDefault(); }
-                set { __pbn__received_ultra_rare_reward = value; }
+                get => __pbn__received_ultra_rare_reward.GetValueOrDefault();
+                set => __pbn__received_ultra_rare_reward = value;
             }
             public bool ShouldSerializereceived_ultra_rare_reward() => __pbn__received_ultra_rare_reward != null;
             public void Resetreceived_ultra_rare_reward() => __pbn__received_ultra_rare_reward = null;
@@ -13108,8 +13109,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public bool half_completed
             {
-                get { return __pbn__half_completed.GetValueOrDefault(); }
-                set { __pbn__half_completed = value; }
+                get => __pbn__half_completed.GetValueOrDefault();
+                set => __pbn__half_completed = value;
             }
             public bool ShouldSerializehalf_completed() => __pbn__half_completed != null;
             public void Resethalf_completed() => __pbn__half_completed = null;
@@ -13129,8 +13130,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -13148,8 +13149,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -13158,8 +13159,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint room_id
         {
-            get { return __pbn__room_id.GetValueOrDefault(); }
-            set { __pbn__room_id = value; }
+            get => __pbn__room_id.GetValueOrDefault();
+            set => __pbn__room_id = value;
         }
         public bool ShouldSerializeroom_id() => __pbn__room_id != null;
         public void Resetroom_id() => __pbn__room_id = null;
@@ -13168,8 +13169,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint map_variant
         {
-            get { return __pbn__map_variant.GetValueOrDefault(); }
-            set { __pbn__map_variant = value; }
+            get => __pbn__map_variant.GetValueOrDefault();
+            set => __pbn__map_variant = value;
         }
         public bool ShouldSerializemap_variant() => __pbn__map_variant != null;
         public void Resetmap_variant() => __pbn__map_variant = null;
@@ -13188,8 +13189,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -13215,8 +13216,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -13225,8 +13226,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint room_id
         {
-            get { return __pbn__room_id.GetValueOrDefault(); }
-            set { __pbn__room_id = value; }
+            get => __pbn__room_id.GetValueOrDefault();
+            set => __pbn__room_id = value;
         }
         public bool ShouldSerializeroom_id() => __pbn__room_id != null;
         public void Resetroom_id() => __pbn__room_id = null;
@@ -13235,8 +13236,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint item_type
         {
-            get { return __pbn__item_type.GetValueOrDefault(); }
-            set { __pbn__item_type = value; }
+            get => __pbn__item_type.GetValueOrDefault();
+            set => __pbn__item_type = value;
         }
         public bool ShouldSerializeitem_type() => __pbn__item_type != null;
         public void Resetitem_type() => __pbn__item_type = null;
@@ -13245,8 +13246,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint map_variant
         {
-            get { return __pbn__map_variant.GetValueOrDefault(); }
-            set { __pbn__map_variant = value; }
+            get => __pbn__map_variant.GetValueOrDefault();
+            set => __pbn__map_variant = value;
         }
         public bool ShouldSerializemap_variant() => __pbn__map_variant != null;
         public void Resetmap_variant() => __pbn__map_variant = null;
@@ -13265,8 +13266,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -13292,8 +13293,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -13302,8 +13303,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint path_id
         {
-            get { return __pbn__path_id.GetValueOrDefault(); }
-            set { __pbn__path_id = value; }
+            get => __pbn__path_id.GetValueOrDefault();
+            set => __pbn__path_id = value;
         }
         public bool ShouldSerializepath_id() => __pbn__path_id != null;
         public void Resetpath_id() => __pbn__path_id = null;
@@ -13312,8 +13313,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint item_type
         {
-            get { return __pbn__item_type.GetValueOrDefault(); }
-            set { __pbn__item_type = value; }
+            get => __pbn__item_type.GetValueOrDefault();
+            set => __pbn__item_type = value;
         }
         public bool ShouldSerializeitem_type() => __pbn__item_type != null;
         public void Resetitem_type() => __pbn__item_type = null;
@@ -13322,8 +13323,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint map_variant
         {
-            get { return __pbn__map_variant.GetValueOrDefault(); }
-            set { __pbn__map_variant = value; }
+            get => __pbn__map_variant.GetValueOrDefault();
+            set => __pbn__map_variant = value;
         }
         public bool ShouldSerializemap_variant() => __pbn__map_variant != null;
         public void Resetmap_variant() => __pbn__map_variant = null;
@@ -13342,8 +13343,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -13369,8 +13370,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -13389,8 +13390,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -13399,8 +13400,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint available_map_variants_mask
         {
-            get { return __pbn__available_map_variants_mask.GetValueOrDefault(); }
-            set { __pbn__available_map_variants_mask = value; }
+            get => __pbn__available_map_variants_mask.GetValueOrDefault();
+            set => __pbn__available_map_variants_mask = value;
         }
         public bool ShouldSerializeavailable_map_variants_mask() => __pbn__available_map_variants_mask != null;
         public void Resetavailable_map_variants_mask() => __pbn__available_map_variants_mask = null;
@@ -13422,8 +13423,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint path_id_1
             {
-                get { return __pbn__path_id_1.GetValueOrDefault(); }
-                set { __pbn__path_id_1 = value; }
+                get => __pbn__path_id_1.GetValueOrDefault();
+                set => __pbn__path_id_1 = value;
             }
             public bool ShouldSerializepath_id_1() => __pbn__path_id_1 != null;
             public void Resetpath_id_1() => __pbn__path_id_1 = null;
@@ -13432,8 +13433,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint path_id_2
             {
-                get { return __pbn__path_id_2.GetValueOrDefault(); }
-                set { __pbn__path_id_2 = value; }
+                get => __pbn__path_id_2.GetValueOrDefault();
+                set => __pbn__path_id_2 = value;
             }
             public bool ShouldSerializepath_id_2() => __pbn__path_id_2 != null;
             public void Resetpath_id_2() => __pbn__path_id_2 = null;
@@ -13451,8 +13452,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint item_type
             {
-                get { return __pbn__item_type.GetValueOrDefault(); }
-                set { __pbn__item_type = value; }
+                get => __pbn__item_type.GetValueOrDefault();
+                set => __pbn__item_type = value;
             }
             public bool ShouldSerializeitem_type() => __pbn__item_type != null;
             public void Resetitem_type() => __pbn__item_type = null;
@@ -13461,8 +13462,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint count
             {
-                get { return __pbn__count.GetValueOrDefault(); }
-                set { __pbn__count = value; }
+                get => __pbn__count.GetValueOrDefault();
+                set => __pbn__count = value;
             }
             public bool ShouldSerializecount() => __pbn__count != null;
             public void Resetcount() => __pbn__count = null;
@@ -13480,8 +13481,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint map_room_id
             {
-                get { return __pbn__map_room_id.GetValueOrDefault(); }
-                set { __pbn__map_room_id = value; }
+                get => __pbn__map_room_id.GetValueOrDefault();
+                set => __pbn__map_room_id = value;
             }
             public bool ShouldSerializemap_room_id() => __pbn__map_room_id != null;
             public void Resetmap_room_id() => __pbn__map_room_id = null;
@@ -13490,8 +13491,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint revealed_room_id
             {
-                get { return __pbn__revealed_room_id.GetValueOrDefault(); }
-                set { __pbn__revealed_room_id = value; }
+                get => __pbn__revealed_room_id.GetValueOrDefault();
+                set => __pbn__revealed_room_id = value;
             }
             public bool ShouldSerializerevealed_room_id() => __pbn__revealed_room_id != null;
             public void Resetrevealed_room_id() => __pbn__revealed_room_id = null;
@@ -13509,8 +13510,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint map_variant
             {
-                get { return __pbn__map_variant.GetValueOrDefault(); }
-                set { __pbn__map_variant = value; }
+                get => __pbn__map_variant.GetValueOrDefault();
+                set => __pbn__map_variant = value;
             }
             public bool ShouldSerializemap_variant() => __pbn__map_variant != null;
             public void Resetmap_variant() => __pbn__map_variant = null;
@@ -13519,8 +13520,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public ulong claimed_rooms_1
             {
-                get { return __pbn__claimed_rooms_1.GetValueOrDefault(); }
-                set { __pbn__claimed_rooms_1 = value; }
+                get => __pbn__claimed_rooms_1.GetValueOrDefault();
+                set => __pbn__claimed_rooms_1 = value;
             }
             public bool ShouldSerializeclaimed_rooms_1() => __pbn__claimed_rooms_1 != null;
             public void Resetclaimed_rooms_1() => __pbn__claimed_rooms_1 = null;
@@ -13529,8 +13530,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public ulong claimed_rooms_2
             {
-                get { return __pbn__claimed_rooms_2.GetValueOrDefault(); }
-                set { __pbn__claimed_rooms_2 = value; }
+                get => __pbn__claimed_rooms_2.GetValueOrDefault();
+                set => __pbn__claimed_rooms_2 = value;
             }
             public bool ShouldSerializeclaimed_rooms_2() => __pbn__claimed_rooms_2 != null;
             public void Resetclaimed_rooms_2() => __pbn__claimed_rooms_2 = null;
@@ -13539,8 +13540,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public ulong revealed_rooms_1
             {
-                get { return __pbn__revealed_rooms_1.GetValueOrDefault(); }
-                set { __pbn__revealed_rooms_1 = value; }
+                get => __pbn__revealed_rooms_1.GetValueOrDefault();
+                set => __pbn__revealed_rooms_1 = value;
             }
             public bool ShouldSerializerevealed_rooms_1() => __pbn__revealed_rooms_1 != null;
             public void Resetrevealed_rooms_1() => __pbn__revealed_rooms_1 = null;
@@ -13549,8 +13550,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public ulong revealed_rooms_2
             {
-                get { return __pbn__revealed_rooms_2.GetValueOrDefault(); }
-                set { __pbn__revealed_rooms_2 = value; }
+                get => __pbn__revealed_rooms_2.GetValueOrDefault();
+                set => __pbn__revealed_rooms_2 = value;
             }
             public bool ShouldSerializerevealed_rooms_2() => __pbn__revealed_rooms_2 != null;
             public void Resetrevealed_rooms_2() => __pbn__revealed_rooms_2 = null;
@@ -13559,8 +13560,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(6, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public ulong completed_paths_1
             {
-                get { return __pbn__completed_paths_1.GetValueOrDefault(); }
-                set { __pbn__completed_paths_1 = value; }
+                get => __pbn__completed_paths_1.GetValueOrDefault();
+                set => __pbn__completed_paths_1 = value;
             }
             public bool ShouldSerializecompleted_paths_1() => __pbn__completed_paths_1 != null;
             public void Resetcompleted_paths_1() => __pbn__completed_paths_1 = null;
@@ -13569,8 +13570,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(7, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public ulong completed_paths_2
             {
-                get { return __pbn__completed_paths_2.GetValueOrDefault(); }
-                set { __pbn__completed_paths_2 = value; }
+                get => __pbn__completed_paths_2.GetValueOrDefault();
+                set => __pbn__completed_paths_2 = value;
             }
             public bool ShouldSerializecompleted_paths_2() => __pbn__completed_paths_2 != null;
             public void Resetcompleted_paths_2() => __pbn__completed_paths_2 = null;
@@ -13579,8 +13580,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(8, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public ulong completed_paths_3
             {
-                get { return __pbn__completed_paths_3.GetValueOrDefault(); }
-                set { __pbn__completed_paths_3 = value; }
+                get => __pbn__completed_paths_3.GetValueOrDefault();
+                set => __pbn__completed_paths_3 = value;
             }
             public bool ShouldSerializecompleted_paths_3() => __pbn__completed_paths_3 != null;
             public void Resetcompleted_paths_3() => __pbn__completed_paths_3 = null;
@@ -13589,8 +13590,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(9, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public ulong completed_paths_4
             {
-                get { return __pbn__completed_paths_4.GetValueOrDefault(); }
-                set { __pbn__completed_paths_4 = value; }
+                get => __pbn__completed_paths_4.GetValueOrDefault();
+                set => __pbn__completed_paths_4 = value;
             }
             public bool ShouldSerializecompleted_paths_4() => __pbn__completed_paths_4 != null;
             public void Resetcompleted_paths_4() => __pbn__completed_paths_4 = null;
@@ -13599,8 +13600,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(10, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public ulong half_completed_paths_1
             {
-                get { return __pbn__half_completed_paths_1.GetValueOrDefault(); }
-                set { __pbn__half_completed_paths_1 = value; }
+                get => __pbn__half_completed_paths_1.GetValueOrDefault();
+                set => __pbn__half_completed_paths_1 = value;
             }
             public bool ShouldSerializehalf_completed_paths_1() => __pbn__half_completed_paths_1 != null;
             public void Resethalf_completed_paths_1() => __pbn__half_completed_paths_1 = null;
@@ -13609,8 +13610,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(11, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public ulong half_completed_paths_2
             {
-                get { return __pbn__half_completed_paths_2.GetValueOrDefault(); }
-                set { __pbn__half_completed_paths_2 = value; }
+                get => __pbn__half_completed_paths_2.GetValueOrDefault();
+                set => __pbn__half_completed_paths_2 = value;
             }
             public bool ShouldSerializehalf_completed_paths_2() => __pbn__half_completed_paths_2 != null;
             public void Resethalf_completed_paths_2() => __pbn__half_completed_paths_2 = null;
@@ -13619,8 +13620,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(12, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public ulong half_completed_paths_3
             {
-                get { return __pbn__half_completed_paths_3.GetValueOrDefault(); }
-                set { __pbn__half_completed_paths_3 = value; }
+                get => __pbn__half_completed_paths_3.GetValueOrDefault();
+                set => __pbn__half_completed_paths_3 = value;
             }
             public bool ShouldSerializehalf_completed_paths_3() => __pbn__half_completed_paths_3 != null;
             public void Resethalf_completed_paths_3() => __pbn__half_completed_paths_3 = null;
@@ -13629,8 +13630,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(13, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public ulong half_completed_paths_4
             {
-                get { return __pbn__half_completed_paths_4.GetValueOrDefault(); }
-                set { __pbn__half_completed_paths_4 = value; }
+                get => __pbn__half_completed_paths_4.GetValueOrDefault();
+                set => __pbn__half_completed_paths_4 = value;
             }
             public bool ShouldSerializehalf_completed_paths_4() => __pbn__half_completed_paths_4 != null;
             public void Resethalf_completed_paths_4() => __pbn__half_completed_paths_4 = null;
@@ -13642,8 +13643,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(15)]
             public uint ultra_rare_reward_room_number
             {
-                get { return __pbn__ultra_rare_reward_room_number.GetValueOrDefault(); }
-                set { __pbn__ultra_rare_reward_room_number = value; }
+                get => __pbn__ultra_rare_reward_room_number.GetValueOrDefault();
+                set => __pbn__ultra_rare_reward_room_number = value;
             }
             public bool ShouldSerializeultra_rare_reward_room_number() => __pbn__ultra_rare_reward_room_number != null;
             public void Resetultra_rare_reward_room_number() => __pbn__ultra_rare_reward_room_number = null;
@@ -13674,8 +13675,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -13694,8 +13695,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -13707,8 +13708,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint available_map_variants_mask
         {
-            get { return __pbn__available_map_variants_mask.GetValueOrDefault(); }
-            set { __pbn__available_map_variants_mask = value; }
+            get => __pbn__available_map_variants_mask.GetValueOrDefault();
+            set => __pbn__available_map_variants_mask = value;
         }
         public bool ShouldSerializeavailable_map_variants_mask() => __pbn__available_map_variants_mask != null;
         public void Resetavailable_map_variants_mask() => __pbn__available_map_variants_mask = null;
@@ -13724,8 +13725,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint map_variant
             {
-                get { return __pbn__map_variant.GetValueOrDefault(); }
-                set { __pbn__map_variant = value; }
+                get => __pbn__map_variant.GetValueOrDefault();
+                set => __pbn__map_variant = value;
             }
             public bool ShouldSerializemap_variant() => __pbn__map_variant != null;
             public void Resetmap_variant() => __pbn__map_variant = null;
@@ -13734,8 +13735,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint count
             {
-                get { return __pbn__count.GetValueOrDefault(); }
-                set { __pbn__count = value; }
+                get => __pbn__count.GetValueOrDefault();
+                set => __pbn__count = value;
             }
             public bool ShouldSerializecount() => __pbn__count != null;
             public void Resetcount() => __pbn__count = null;
@@ -13773,8 +13774,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint id
             {
-                get { return __pbn__id.GetValueOrDefault(); }
-                set { __pbn__id = value; }
+                get => __pbn__id.GetValueOrDefault();
+                set => __pbn__id = value;
             }
             public bool ShouldSerializeid() => __pbn__id != null;
             public void Resetid() => __pbn__id = null;
@@ -13784,8 +13785,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string name
             {
-                get { return __pbn__name ?? ""; }
-                set { __pbn__name = value; }
+                get => __pbn__name ?? "";
+                set => __pbn__name = value;
             }
             public bool ShouldSerializename() => __pbn__name != null;
             public void Resetname() => __pbn__name = null;
@@ -13795,8 +13796,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string description
             {
-                get { return __pbn__description ?? ""; }
-                set { __pbn__description = value; }
+                get => __pbn__description ?? "";
+                set => __pbn__description = value;
             }
             public bool ShouldSerializedescription() => __pbn__description != null;
             public void Resetdescription() => __pbn__description = null;
@@ -13817,8 +13818,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
         public EEvent event_id
         {
-            get { return __pbn__event_id ?? EEvent.EVENT_ID_NONE; }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id ?? EEvent.EVENT_ID_NONE;
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -13827,8 +13828,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -13846,8 +13847,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool result
         {
-            get { return __pbn__result.GetValueOrDefault(); }
-            set { __pbn__result = value; }
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -13866,8 +13867,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint tipper_account_id
             {
-                get { return __pbn__tipper_account_id.GetValueOrDefault(); }
-                set { __pbn__tipper_account_id = value; }
+                get => __pbn__tipper_account_id.GetValueOrDefault();
+                set => __pbn__tipper_account_id = value;
             }
             public bool ShouldSerializetipper_account_id() => __pbn__tipper_account_id != null;
             public void Resettipper_account_id() => __pbn__tipper_account_id = null;
@@ -13877,8 +13878,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue(1)]
             public uint tip_count
             {
-                get { return __pbn__tip_count ?? 1; }
-                set { __pbn__tip_count = value; }
+                get => __pbn__tip_count ?? 1;
+                set => __pbn__tip_count = value;
             }
             public bool ShouldSerializetip_count() => __pbn__tip_count != null;
             public void Resettip_count() => __pbn__tip_count = null;
@@ -13898,8 +13899,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -13908,8 +13909,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public bool self_only
         {
-            get { return __pbn__self_only.GetValueOrDefault(); }
-            set { __pbn__self_only = value; }
+            get => __pbn__self_only.GetValueOrDefault();
+            set => __pbn__self_only = value;
         }
         public bool ShouldSerializeself_only() => __pbn__self_only != null;
         public void Resetself_only() => __pbn__self_only = null;
@@ -13928,8 +13929,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -13948,8 +13949,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public ulong feed_event_id
             {
-                get { return __pbn__feed_event_id.GetValueOrDefault(); }
-                set { __pbn__feed_event_id = value; }
+                get => __pbn__feed_event_id.GetValueOrDefault();
+                set => __pbn__feed_event_id = value;
             }
             public bool ShouldSerializefeed_event_id() => __pbn__feed_event_id != null;
             public void Resetfeed_event_id() => __pbn__feed_event_id = null;
@@ -13958,8 +13959,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -13968,8 +13969,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint timestamp
             {
-                get { return __pbn__timestamp.GetValueOrDefault(); }
-                set { __pbn__timestamp = value; }
+                get => __pbn__timestamp.GetValueOrDefault();
+                set => __pbn__timestamp = value;
             }
             public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
             public void Resettimestamp() => __pbn__timestamp = null;
@@ -13978,8 +13979,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint comment_count
             {
-                get { return __pbn__comment_count.GetValueOrDefault(); }
-                set { __pbn__comment_count = value; }
+                get => __pbn__comment_count.GetValueOrDefault();
+                set => __pbn__comment_count = value;
             }
             public bool ShouldSerializecomment_count() => __pbn__comment_count != null;
             public void Resetcomment_count() => __pbn__comment_count = null;
@@ -13988,8 +13989,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint event_type
             {
-                get { return __pbn__event_type.GetValueOrDefault(); }
-                set { __pbn__event_type = value; }
+                get => __pbn__event_type.GetValueOrDefault();
+                set => __pbn__event_type = value;
             }
             public bool ShouldSerializeevent_type() => __pbn__event_type != null;
             public void Resetevent_type() => __pbn__event_type = null;
@@ -13998,8 +13999,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(6)]
             public uint event_sub_type
             {
-                get { return __pbn__event_sub_type.GetValueOrDefault(); }
-                set { __pbn__event_sub_type = value; }
+                get => __pbn__event_sub_type.GetValueOrDefault();
+                set => __pbn__event_sub_type = value;
             }
             public bool ShouldSerializeevent_sub_type() => __pbn__event_sub_type != null;
             public void Resetevent_sub_type() => __pbn__event_sub_type = null;
@@ -14008,8 +14009,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(7)]
             public ulong param_big_int_1
             {
-                get { return __pbn__param_big_int_1.GetValueOrDefault(); }
-                set { __pbn__param_big_int_1 = value; }
+                get => __pbn__param_big_int_1.GetValueOrDefault();
+                set => __pbn__param_big_int_1 = value;
             }
             public bool ShouldSerializeparam_big_int_1() => __pbn__param_big_int_1 != null;
             public void Resetparam_big_int_1() => __pbn__param_big_int_1 = null;
@@ -14018,8 +14019,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(8)]
             public uint param_int_1
             {
-                get { return __pbn__param_int_1.GetValueOrDefault(); }
-                set { __pbn__param_int_1 = value; }
+                get => __pbn__param_int_1.GetValueOrDefault();
+                set => __pbn__param_int_1 = value;
             }
             public bool ShouldSerializeparam_int_1() => __pbn__param_int_1 != null;
             public void Resetparam_int_1() => __pbn__param_int_1 = null;
@@ -14028,8 +14029,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(9)]
             public uint param_int_2
             {
-                get { return __pbn__param_int_2.GetValueOrDefault(); }
-                set { __pbn__param_int_2 = value; }
+                get => __pbn__param_int_2.GetValueOrDefault();
+                set => __pbn__param_int_2 = value;
             }
             public bool ShouldSerializeparam_int_2() => __pbn__param_int_2 != null;
             public void Resetparam_int_2() => __pbn__param_int_2 = null;
@@ -14038,8 +14039,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(10)]
             public uint param_int_3
             {
-                get { return __pbn__param_int_3.GetValueOrDefault(); }
-                set { __pbn__param_int_3 = value; }
+                get => __pbn__param_int_3.GetValueOrDefault();
+                set => __pbn__param_int_3 = value;
             }
             public bool ShouldSerializeparam_int_3() => __pbn__param_int_3 != null;
             public void Resetparam_int_3() => __pbn__param_int_3 = null;
@@ -14049,8 +14050,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string param_string
             {
-                get { return __pbn__param_string ?? ""; }
-                set { __pbn__param_string = value; }
+                get => __pbn__param_string ?? "";
+                set => __pbn__param_string = value;
             }
             public bool ShouldSerializeparam_string() => __pbn__param_string != null;
             public void Resetparam_string() => __pbn__param_string = null;
@@ -14081,8 +14082,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong feed_event_id
         {
-            get { return __pbn__feed_event_id.GetValueOrDefault(); }
-            set { __pbn__feed_event_id = value; }
+            get => __pbn__feed_event_id.GetValueOrDefault();
+            set => __pbn__feed_event_id = value;
         }
         public bool ShouldSerializefeed_event_id() => __pbn__feed_event_id != null;
         public void Resetfeed_event_id() => __pbn__feed_event_id = null;
@@ -14101,8 +14102,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -14121,8 +14122,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint commenter_account_id
             {
-                get { return __pbn__commenter_account_id.GetValueOrDefault(); }
-                set { __pbn__commenter_account_id = value; }
+                get => __pbn__commenter_account_id.GetValueOrDefault();
+                set => __pbn__commenter_account_id = value;
             }
             public bool ShouldSerializecommenter_account_id() => __pbn__commenter_account_id != null;
             public void Resetcommenter_account_id() => __pbn__commenter_account_id = null;
@@ -14131,8 +14132,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint timestamp
             {
-                get { return __pbn__timestamp.GetValueOrDefault(); }
-                set { __pbn__timestamp = value; }
+                get => __pbn__timestamp.GetValueOrDefault();
+                set => __pbn__timestamp = value;
             }
             public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
             public void Resettimestamp() => __pbn__timestamp = null;
@@ -14142,8 +14143,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string comment_text
             {
-                get { return __pbn__comment_text ?? ""; }
-                set { __pbn__comment_text = value; }
+                get => __pbn__comment_text ?? "";
+                set => __pbn__comment_text = value;
             }
             public bool ShouldSerializecomment_text() => __pbn__comment_text != null;
             public void Resetcomment_text() => __pbn__comment_text = null;
@@ -14171,8 +14172,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint player_account_id
         {
-            get { return __pbn__player_account_id.GetValueOrDefault(); }
-            set { __pbn__player_account_id = value; }
+            get => __pbn__player_account_id.GetValueOrDefault();
+            set => __pbn__player_account_id = value;
         }
         public bool ShouldSerializeplayer_account_id() => __pbn__player_account_id != null;
         public void Resetplayer_account_id() => __pbn__player_account_id = null;
@@ -14181,8 +14182,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -14191,8 +14192,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong card_dust_item_id
         {
-            get { return __pbn__card_dust_item_id.GetValueOrDefault(); }
-            set { __pbn__card_dust_item_id = value; }
+            get => __pbn__card_dust_item_id.GetValueOrDefault();
+            set => __pbn__card_dust_item_id = value;
         }
         public bool ShouldSerializecard_dust_item_id() => __pbn__card_dust_item_id != null;
         public void Resetcard_dust_item_id() => __pbn__card_dust_item_id = null;
@@ -14211,8 +14212,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -14221,8 +14222,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong item_id
         {
-            get { return __pbn__item_id.GetValueOrDefault(); }
-            set { __pbn__item_id = value; }
+            get => __pbn__item_id.GetValueOrDefault();
+            set => __pbn__item_id = value;
         }
         public bool ShouldSerializeitem_id() => __pbn__item_id != null;
         public void Resetitem_id() => __pbn__item_id = null;
@@ -14250,8 +14251,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint contest_id
         {
-            get { return __pbn__contest_id.GetValueOrDefault(); }
-            set { __pbn__contest_id = value; }
+            get => __pbn__contest_id.GetValueOrDefault();
+            set => __pbn__contest_id = value;
         }
         public bool ShouldSerializecontest_id() => __pbn__contest_id != null;
         public void Resetcontest_id() => __pbn__contest_id = null;
@@ -14270,8 +14271,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
         public EResponse result
         {
-            get { return __pbn__result ?? EResponse.k_eInternalError; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EResponse.k_eInternalError;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -14290,8 +14291,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public ulong contest_item_id
             {
-                get { return __pbn__contest_item_id.GetValueOrDefault(); }
-                set { __pbn__contest_item_id = value; }
+                get => __pbn__contest_item_id.GetValueOrDefault();
+                set => __pbn__contest_item_id = value;
             }
             public bool ShouldSerializecontest_item_id() => __pbn__contest_item_id != null;
             public void Resetcontest_item_id() => __pbn__contest_item_id = null;
@@ -14300,8 +14301,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public int vote
             {
-                get { return __pbn__vote.GetValueOrDefault(); }
-                set { __pbn__vote = value; }
+                get => __pbn__vote.GetValueOrDefault();
+                set => __pbn__vote = value;
             }
             public bool ShouldSerializevote() => __pbn__vote != null;
             public void Resetvote() => __pbn__vote = null;
@@ -14330,8 +14331,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint contest_id
         {
-            get { return __pbn__contest_id.GetValueOrDefault(); }
-            set { __pbn__contest_id = value; }
+            get => __pbn__contest_id.GetValueOrDefault();
+            set => __pbn__contest_id = value;
         }
         public bool ShouldSerializecontest_id() => __pbn__contest_id != null;
         public void Resetcontest_id() => __pbn__contest_id = null;
@@ -14340,8 +14341,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong contest_item_id
         {
-            get { return __pbn__contest_item_id.GetValueOrDefault(); }
-            set { __pbn__contest_item_id = value; }
+            get => __pbn__contest_item_id.GetValueOrDefault();
+            set => __pbn__contest_item_id = value;
         }
         public bool ShouldSerializecontest_item_id() => __pbn__contest_item_id != null;
         public void Resetcontest_item_id() => __pbn__contest_item_id = null;
@@ -14350,8 +14351,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public int vote
         {
-            get { return __pbn__vote.GetValueOrDefault(); }
-            set { __pbn__vote = value; }
+            get => __pbn__vote.GetValueOrDefault();
+            set => __pbn__vote = value;
         }
         public bool ShouldSerializevote() => __pbn__vote != null;
         public void Resetvote() => __pbn__vote = null;
@@ -14370,8 +14371,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResult.SUCCESS)]
         public EResult eresult
         {
-            get { return __pbn__eresult ?? EResult.SUCCESS; }
-            set { __pbn__eresult = value; }
+            get => __pbn__eresult ?? EResult.SUCCESS;
+            set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
         public void Reseteresult() => __pbn__eresult = null;
@@ -14411,8 +14412,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue(CMsgDOTADPCFeed.EFeedElementType.FEED_SERIES_RESULT)]
             public CMsgDOTADPCFeed.EFeedElementType type
             {
-                get { return __pbn__type ?? CMsgDOTADPCFeed.EFeedElementType.FEED_SERIES_RESULT; }
-                set { __pbn__type = value; }
+                get => __pbn__type ?? CMsgDOTADPCFeed.EFeedElementType.FEED_SERIES_RESULT;
+                set => __pbn__type = value;
             }
             public bool ShouldSerializetype() => __pbn__type != null;
             public void Resettype() => __pbn__type = null;
@@ -14421,8 +14422,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint timestamp
             {
-                get { return __pbn__timestamp.GetValueOrDefault(); }
-                set { __pbn__timestamp = value; }
+                get => __pbn__timestamp.GetValueOrDefault();
+                set => __pbn__timestamp = value;
             }
             public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
             public void Resettimestamp() => __pbn__timestamp = null;
@@ -14431,8 +14432,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint series_id
             {
-                get { return __pbn__series_id.GetValueOrDefault(); }
-                set { __pbn__series_id = value; }
+                get => __pbn__series_id.GetValueOrDefault();
+                set => __pbn__series_id = value;
             }
             public bool ShouldSerializeseries_id() => __pbn__series_id != null;
             public void Resetseries_id() => __pbn__series_id = null;
@@ -14441,8 +14442,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public ulong match_id
             {
-                get { return __pbn__match_id.GetValueOrDefault(); }
-                set { __pbn__match_id = value; }
+                get => __pbn__match_id.GetValueOrDefault();
+                set => __pbn__match_id = value;
             }
             public bool ShouldSerializematch_id() => __pbn__match_id != null;
             public void Resetmatch_id() => __pbn__match_id = null;
@@ -14451,8 +14452,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint team_id
             {
-                get { return __pbn__team_id.GetValueOrDefault(); }
-                set { __pbn__team_id = value; }
+                get => __pbn__team_id.GetValueOrDefault();
+                set => __pbn__team_id = value;
             }
             public bool ShouldSerializeteam_id() => __pbn__team_id != null;
             public void Resetteam_id() => __pbn__team_id = null;
@@ -14461,8 +14462,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(6)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -14471,8 +14472,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(7)]
             public uint league_id
             {
-                get { return __pbn__league_id.GetValueOrDefault(); }
-                set { __pbn__league_id = value; }
+                get => __pbn__league_id.GetValueOrDefault();
+                set => __pbn__league_id = value;
             }
             public bool ShouldSerializeleague_id() => __pbn__league_id != null;
             public void Resetleague_id() => __pbn__league_id = null;
@@ -14481,8 +14482,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(8)]
             public uint node_id
             {
-                get { return __pbn__node_id.GetValueOrDefault(); }
-                set { __pbn__node_id = value; }
+                get => __pbn__node_id.GetValueOrDefault();
+                set => __pbn__node_id = value;
             }
             public bool ShouldSerializenode_id() => __pbn__node_id != null;
             public void Resetnode_id() => __pbn__node_id = null;
@@ -14491,8 +14492,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(13)]
             public ulong server_steam_id
             {
-                get { return __pbn__server_steam_id.GetValueOrDefault(); }
-                set { __pbn__server_steam_id = value; }
+                get => __pbn__server_steam_id.GetValueOrDefault();
+                set => __pbn__server_steam_id = value;
             }
             public bool ShouldSerializeserver_steam_id() => __pbn__server_steam_id != null;
             public void Resetserver_steam_id() => __pbn__server_steam_id = null;
@@ -14501,8 +14502,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(9)]
             public uint data_1
             {
-                get { return __pbn__data_1.GetValueOrDefault(); }
-                set { __pbn__data_1 = value; }
+                get => __pbn__data_1.GetValueOrDefault();
+                set => __pbn__data_1 = value;
             }
             public bool ShouldSerializedata_1() => __pbn__data_1 != null;
             public void Resetdata_1() => __pbn__data_1 = null;
@@ -14511,8 +14512,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(10)]
             public uint data_2
             {
-                get { return __pbn__data_2.GetValueOrDefault(); }
-                set { __pbn__data_2 = value; }
+                get => __pbn__data_2.GetValueOrDefault();
+                set => __pbn__data_2 = value;
             }
             public bool ShouldSerializedata_2() => __pbn__data_2 != null;
             public void Resetdata_2() => __pbn__data_2 = null;
@@ -14521,8 +14522,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(11)]
             public uint data_3
             {
-                get { return __pbn__data_3.GetValueOrDefault(); }
-                set { __pbn__data_3 = value; }
+                get => __pbn__data_3.GetValueOrDefault();
+                set => __pbn__data_3 = value;
             }
             public bool ShouldSerializedata_3() => __pbn__data_3 != null;
             public void Resetdata_3() => __pbn__data_3 = null;
@@ -14531,8 +14532,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(12)]
             public uint data_4
             {
-                get { return __pbn__data_4.GetValueOrDefault(); }
-                set { __pbn__data_4 = value; }
+                get => __pbn__data_4.GetValueOrDefault();
+                set => __pbn__data_4 = value;
             }
             public bool ShouldSerializedata_4() => __pbn__data_4 != null;
             public void Resetdata_4() => __pbn__data_4 = null;
@@ -14571,8 +14572,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool is_plus_subscriber
         {
-            get { return __pbn__is_plus_subscriber.GetValueOrDefault(); }
-            set { __pbn__is_plus_subscriber = value; }
+            get => __pbn__is_plus_subscriber.GetValueOrDefault();
+            set => __pbn__is_plus_subscriber = value;
         }
         public bool ShouldSerializeis_plus_subscriber() => __pbn__is_plus_subscriber != null;
         public void Resetis_plus_subscriber() => __pbn__is_plus_subscriber = null;
@@ -14591,8 +14592,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
         public EEvent event_id
         {
-            get { return __pbn__event_id ?? EEvent.EVENT_ID_NONE; }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id ?? EEvent.EVENT_ID_NONE;
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -14601,8 +14602,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint event_points
         {
-            get { return __pbn__event_points.GetValueOrDefault(); }
-            set { __pbn__event_points = value; }
+            get => __pbn__event_points.GetValueOrDefault();
+            set => __pbn__event_points = value;
         }
         public bool ShouldSerializeevent_points() => __pbn__event_points != null;
         public void Resetevent_points() => __pbn__event_points = null;
@@ -14611,8 +14612,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint premium_points
         {
-            get { return __pbn__premium_points.GetValueOrDefault(); }
-            set { __pbn__premium_points = value; }
+            get => __pbn__premium_points.GetValueOrDefault();
+            set => __pbn__premium_points = value;
         }
         public bool ShouldSerializepremium_points() => __pbn__premium_points != null;
         public void Resetpremium_points() => __pbn__premium_points = null;
@@ -14631,8 +14632,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EDevEventRequestResult.k_EDevEventRequestResult_Success)]
         public EDevEventRequestResult result
         {
-            get { return __pbn__result ?? EDevEventRequestResult.k_EDevEventRequestResult_Success; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EDevEventRequestResult.k_EDevEventRequestResult_Success;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -14651,8 +14652,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
         public EEvent event_id
         {
-            get { return __pbn__event_id ?? EEvent.EVENT_ID_NONE; }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id ?? EEvent.EVENT_ID_NONE;
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -14661,8 +14662,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint action_id
         {
-            get { return __pbn__action_id.GetValueOrDefault(); }
-            set { __pbn__action_id = value; }
+            get => __pbn__action_id.GetValueOrDefault();
+            set => __pbn__action_id = value;
         }
         public bool ShouldSerializeaction_id() => __pbn__action_id != null;
         public void Resetaction_id() => __pbn__action_id = null;
@@ -14671,8 +14672,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint action_score
         {
-            get { return __pbn__action_score.GetValueOrDefault(); }
-            set { __pbn__action_score = value; }
+            get => __pbn__action_score.GetValueOrDefault();
+            set => __pbn__action_score = value;
         }
         public bool ShouldSerializeaction_score() => __pbn__action_score != null;
         public void Resetaction_score() => __pbn__action_score = null;
@@ -14691,8 +14692,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EDevEventRequestResult.k_EDevEventRequestResult_Success)]
         public EDevEventRequestResult result
         {
-            get { return __pbn__result ?? EDevEventRequestResult.k_EDevEventRequestResult_Success; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EDevEventRequestResult.k_EDevEventRequestResult_Success;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -14711,8 +14712,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
         public EEvent event_id
         {
-            get { return __pbn__event_id ?? EEvent.EVENT_ID_NONE; }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id ?? EEvent.EVENT_ID_NONE;
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -14721,8 +14722,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public bool remove_audit
         {
-            get { return __pbn__remove_audit.GetValueOrDefault(); }
-            set { __pbn__remove_audit = value; }
+            get => __pbn__remove_audit.GetValueOrDefault();
+            set => __pbn__remove_audit = value;
         }
         public bool ShouldSerializeremove_audit() => __pbn__remove_audit != null;
         public void Resetremove_audit() => __pbn__remove_audit = null;
@@ -14741,8 +14742,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EDevEventRequestResult.k_EDevEventRequestResult_Success)]
         public EDevEventRequestResult result
         {
-            get { return __pbn__result ?? EDevEventRequestResult.k_EDevEventRequestResult_Success; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EDevEventRequestResult.k_EDevEventRequestResult_Success;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -14760,8 +14761,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong item_id
         {
-            get { return __pbn__item_id.GetValueOrDefault(); }
-            set { __pbn__item_id = value; }
+            get => __pbn__item_id.GetValueOrDefault();
+            set => __pbn__item_id = value;
         }
         public bool ShouldSerializeitem_id() => __pbn__item_id != null;
         public void Resetitem_id() => __pbn__item_id = null;
@@ -14780,8 +14781,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(ESupportEventRequestResult.k_ESupportEventRequestResult_Success)]
         public ESupportEventRequestResult result
         {
-            get { return __pbn__result ?? ESupportEventRequestResult.k_ESupportEventRequestResult_Success; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? ESupportEventRequestResult.k_ESupportEventRequestResult_Success;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -14809,8 +14810,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -14829,8 +14830,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -14839,8 +14840,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public uint time_added
             {
-                get { return __pbn__time_added.GetValueOrDefault(); }
-                set { __pbn__time_added = value; }
+                get => __pbn__time_added.GetValueOrDefault();
+                set => __pbn__time_added = value;
             }
             public bool ShouldSerializetime_added() => __pbn__time_added != null;
             public void Resettime_added() => __pbn__time_added = null;
@@ -14849,8 +14850,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public uint time_expires
             {
-                get { return __pbn__time_expires.GetValueOrDefault(); }
-                set { __pbn__time_expires = value; }
+                get => __pbn__time_expires.GetValueOrDefault();
+                set => __pbn__time_expires = value;
             }
             public bool ShouldSerializetime_expires() => __pbn__time_expires != null;
             public void Resettime_expires() => __pbn__time_expires = null;
@@ -14877,8 +14878,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint account_id_to_remove
         {
-            get { return __pbn__account_id_to_remove.GetValueOrDefault(); }
-            set { __pbn__account_id_to_remove = value; }
+            get => __pbn__account_id_to_remove.GetValueOrDefault();
+            set => __pbn__account_id_to_remove = value;
         }
         public bool ShouldSerializeaccount_id_to_remove() => __pbn__account_id_to_remove != null;
         public void Resetaccount_id_to_remove() => __pbn__account_id_to_remove = null;
@@ -14897,8 +14898,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Result.SUCCESS)]
         public Result result
         {
-            get { return __pbn__result ?? Result.SUCCESS; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? Result.SUCCESS;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -14923,8 +14924,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -14933,8 +14934,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -14943,8 +14944,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint creation_time
         {
-            get { return __pbn__creation_time.GetValueOrDefault(); }
-            set { __pbn__creation_time = value; }
+            get => __pbn__creation_time.GetValueOrDefault();
+            set => __pbn__creation_time = value;
         }
         public bool ShouldSerializecreation_time() => __pbn__creation_time != null;
         public void Resetcreation_time() => __pbn__creation_time = null;
@@ -14974,8 +14975,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool beacon_added
         {
-            get { return __pbn__beacon_added.GetValueOrDefault(); }
-            set { __pbn__beacon_added = value; }
+            get => __pbn__beacon_added.GetValueOrDefault();
+            set => __pbn__beacon_added = value;
         }
         public bool ShouldSerializebeacon_added() => __pbn__beacon_added != null;
         public void Resetbeacon_added() => __pbn__beacon_added = null;
@@ -14984,8 +14985,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public int beacon_type
         {
-            get { return __pbn__beacon_type.GetValueOrDefault(); }
-            set { __pbn__beacon_type = value; }
+            get => __pbn__beacon_type.GetValueOrDefault();
+            set => __pbn__beacon_type = value;
         }
         public bool ShouldSerializebeacon_type() => __pbn__beacon_type != null;
         public void Resetbeacon_type() => __pbn__beacon_type = null;
@@ -14994,8 +14995,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -15014,8 +15015,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Action.ON)]
         public Action action
         {
-            get { return __pbn__action ?? Action.ON; }
-            set { __pbn__action = value; }
+            get => __pbn__action ?? Action.ON;
+            set => __pbn__action = value;
         }
         public bool ShouldSerializeaction() => __pbn__action != null;
         public void Resetaction() => __pbn__action = null;
@@ -15050,8 +15051,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResponse.SUCCESS)]
         public EResponse response
         {
-            get { return __pbn__response ?? EResponse.SUCCESS; }
-            set { __pbn__response = value; }
+            get => __pbn__response ?? EResponse.SUCCESS;
+            set => __pbn__response = value;
         }
         public bool ShouldSerializeresponse() => __pbn__response != null;
         public void Resetresponse() => __pbn__response = null;
@@ -15080,8 +15081,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong party_id
         {
-            get { return __pbn__party_id.GetValueOrDefault(); }
-            set { __pbn__party_id = value; }
+            get => __pbn__party_id.GetValueOrDefault();
+            set => __pbn__party_id = value;
         }
         public bool ShouldSerializeparty_id() => __pbn__party_id != null;
         public void Resetparty_id() => __pbn__party_id = null;
@@ -15090,8 +15091,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -15100,8 +15101,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public int beacon_type
         {
-            get { return __pbn__beacon_type.GetValueOrDefault(); }
-            set { __pbn__beacon_type = value; }
+            get => __pbn__beacon_type.GetValueOrDefault();
+            set => __pbn__beacon_type = value;
         }
         public bool ShouldSerializebeacon_type() => __pbn__beacon_type != null;
         public void Resetbeacon_type() => __pbn__beacon_type = null;
@@ -15120,8 +15121,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResponse.SUCCESS)]
         public EResponse response
         {
-            get { return __pbn__response ?? EResponse.SUCCESS; }
-            set { __pbn__response = value; }
+            get => __pbn__response ?? EResponse.SUCCESS;
+            set => __pbn__response = value;
         }
         public bool ShouldSerializeresponse() => __pbn__response != null;
         public void Resetresponse() => __pbn__response = null;
@@ -15149,8 +15150,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(Action.ADD)]
         public Action action
         {
-            get { return __pbn__action ?? Action.ADD; }
-            set { __pbn__action = value; }
+            get => __pbn__action ?? Action.ADD;
+            set => __pbn__action = value;
         }
         public bool ShouldSerializeaction() => __pbn__action != null;
         public void Resetaction() => __pbn__action = null;
@@ -15159,8 +15160,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -15170,8 +15171,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string favorite_name
         {
-            get { return __pbn__favorite_name ?? ""; }
-            set { __pbn__favorite_name = value; }
+            get => __pbn__favorite_name ?? "";
+            set => __pbn__favorite_name = value;
         }
         public bool ShouldSerializefavorite_name() => __pbn__favorite_name != null;
         public void Resetfavorite_name() => __pbn__favorite_name = null;
@@ -15180,8 +15181,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public bool invite_response
         {
-            get { return __pbn__invite_response.GetValueOrDefault(); }
-            set { __pbn__invite_response = value; }
+            get => __pbn__invite_response.GetValueOrDefault();
+            set => __pbn__invite_response = value;
         }
         public bool ShouldSerializeinvite_response() => __pbn__invite_response != null;
         public void Resetinvite_response() => __pbn__invite_response = null;
@@ -15190,8 +15191,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public bool from_friendlist
         {
-            get { return __pbn__from_friendlist.GetValueOrDefault(); }
-            set { __pbn__from_friendlist = value; }
+            get => __pbn__from_friendlist.GetValueOrDefault();
+            set => __pbn__from_friendlist = value;
         }
         public bool ShouldSerializefrom_friendlist() => __pbn__from_friendlist != null;
         public void Resetfrom_friendlist() => __pbn__from_friendlist = null;
@@ -15200,8 +15201,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(6, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong lobby_id
         {
-            get { return __pbn__lobby_id.GetValueOrDefault(); }
-            set { __pbn__lobby_id = value; }
+            get => __pbn__lobby_id.GetValueOrDefault();
+            set => __pbn__lobby_id = value;
         }
         public bool ShouldSerializelobby_id() => __pbn__lobby_id != null;
         public void Resetlobby_id() => __pbn__lobby_id = null;
@@ -15227,8 +15228,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResponse.SUCCESS)]
         public EResponse response
         {
-            get { return __pbn__response ?? EResponse.SUCCESS; }
-            set { __pbn__response = value; }
+            get => __pbn__response ?? EResponse.SUCCESS;
+            set => __pbn__response = value;
         }
         public bool ShouldSerializeresponse() => __pbn__response != null;
         public void Resetresponse() => __pbn__response = null;
@@ -15238,8 +15239,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string debug_message
         {
-            get { return __pbn__debug_message ?? ""; }
-            set { __pbn__debug_message = value; }
+            get => __pbn__debug_message ?? "";
+            set => __pbn__debug_message = value;
         }
         public bool ShouldSerializedebug_message() => __pbn__debug_message != null;
         public void Resetdebug_message() => __pbn__debug_message = null;
@@ -15271,8 +15272,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong pagination_key
         {
-            get { return __pbn__pagination_key.GetValueOrDefault(); }
-            set { __pbn__pagination_key = value; }
+            get => __pbn__pagination_key.GetValueOrDefault();
+            set => __pbn__pagination_key = value;
         }
         public bool ShouldSerializepagination_key() => __pbn__pagination_key != null;
         public void Resetpagination_key() => __pbn__pagination_key = null;
@@ -15281,8 +15282,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public int pagination_count
         {
-            get { return __pbn__pagination_count.GetValueOrDefault(); }
-            set { __pbn__pagination_count = value; }
+            get => __pbn__pagination_count.GetValueOrDefault();
+            set => __pbn__pagination_count = value;
         }
         public bool ShouldSerializepagination_count() => __pbn__pagination_count != null;
         public void Resetpagination_count() => __pbn__pagination_count = null;
@@ -15301,8 +15302,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResponse.SUCCESS)]
         public EResponse response
         {
-            get { return __pbn__response ?? EResponse.SUCCESS; }
-            set { __pbn__response = value; }
+            get => __pbn__response ?? EResponse.SUCCESS;
+            set => __pbn__response = value;
         }
         public bool ShouldSerializeresponse() => __pbn__response != null;
         public void Resetresponse() => __pbn__response = null;
@@ -15314,8 +15315,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong next_pagination_key
         {
-            get { return __pbn__next_pagination_key.GetValueOrDefault(); }
-            set { __pbn__next_pagination_key = value; }
+            get => __pbn__next_pagination_key.GetValueOrDefault();
+            set => __pbn__next_pagination_key = value;
         }
         public bool ShouldSerializenext_pagination_key() => __pbn__next_pagination_key != null;
         public void Resetnext_pagination_key() => __pbn__next_pagination_key = null;
@@ -15340,8 +15341,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -15384,8 +15385,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public bool is_favorite
             {
-                get { return __pbn__is_favorite.GetValueOrDefault(); }
-                set { __pbn__is_favorite = value; }
+                get => __pbn__is_favorite.GetValueOrDefault();
+                set => __pbn__is_favorite = value;
             }
             public bool ShouldSerializeis_favorite() => __pbn__is_favorite != null;
             public void Resetis_favorite() => __pbn__is_favorite = null;
@@ -15405,8 +15406,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -15425,8 +15426,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
         public EResponse result
         {
-            get { return __pbn__result ?? EResponse.k_eInternalError; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EResponse.k_eInternalError;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -15456,8 +15457,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -15466,8 +15467,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint hero_id
         {
-            get { return __pbn__hero_id.GetValueOrDefault(); }
-            set { __pbn__hero_id = value; }
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
@@ -15486,8 +15487,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
         public EResponse result
         {
-            get { return __pbn__result ?? EResponse.k_eInternalError; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EResponse.k_eInternalError;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -15517,8 +15518,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -15528,8 +15529,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EMatchOutcome.k_EMatchOutcome_Unknown)]
         public EMatchOutcome match_outcome
         {
-            get { return __pbn__match_outcome ?? EMatchOutcome.k_EMatchOutcome_Unknown; }
-            set { __pbn__match_outcome = value; }
+            get => __pbn__match_outcome ?? EMatchOutcome.k_EMatchOutcome_Unknown;
+            set => __pbn__match_outcome = value;
         }
         public bool ShouldSerializematch_outcome() => __pbn__match_outcome != null;
         public void Resetmatch_outcome() => __pbn__match_outcome = null;
@@ -15538,8 +15539,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint coached_team
         {
-            get { return __pbn__coached_team.GetValueOrDefault(); }
-            set { __pbn__coached_team = value; }
+            get => __pbn__coached_team.GetValueOrDefault();
+            set => __pbn__coached_team = value;
         }
         public bool ShouldSerializecoached_team() => __pbn__coached_team != null;
         public void Resetcoached_team() => __pbn__coached_team = null;
@@ -15548,8 +15549,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint start_time
         {
-            get { return __pbn__start_time.GetValueOrDefault(); }
-            set { __pbn__start_time = value; }
+            get => __pbn__start_time.GetValueOrDefault();
+            set => __pbn__start_time = value;
         }
         public bool ShouldSerializestart_time() => __pbn__start_time != null;
         public void Resetstart_time() => __pbn__start_time = null;
@@ -15558,8 +15559,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint duration
         {
-            get { return __pbn__duration.GetValueOrDefault(); }
-            set { __pbn__duration = value; }
+            get => __pbn__duration.GetValueOrDefault();
+            set => __pbn__duration = value;
         }
         public bool ShouldSerializeduration() => __pbn__duration != null;
         public void Resetduration() => __pbn__duration = null;
@@ -15571,8 +15572,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint coach_flags
         {
-            get { return __pbn__coach_flags.GetValueOrDefault(); }
-            set { __pbn__coach_flags = value; }
+            get => __pbn__coach_flags.GetValueOrDefault();
+            set => __pbn__coach_flags = value;
         }
         public bool ShouldSerializecoach_flags() => __pbn__coach_flags != null;
         public void Resetcoach_flags() => __pbn__coach_flags = null;
@@ -15600,8 +15601,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
         public EResponse result
         {
-            get { return __pbn__result ?? EResponse.k_eInternalError; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EResponse.k_eInternalError;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -15631,8 +15632,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -15651,8 +15652,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
         public EResponse result
         {
-            get { return __pbn__result ?? EResponse.k_eInternalError; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EResponse.k_eInternalError;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -15682,8 +15683,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -15692,8 +15693,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint coach_account_id
         {
-            get { return __pbn__coach_account_id.GetValueOrDefault(); }
-            set { __pbn__coach_account_id = value; }
+            get => __pbn__coach_account_id.GetValueOrDefault();
+            set => __pbn__coach_account_id = value;
         }
         public bool ShouldSerializecoach_account_id() => __pbn__coach_account_id != null;
         public void Resetcoach_account_id() => __pbn__coach_account_id = null;
@@ -15703,8 +15704,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(ECoachTeammateRating.k_ECoachTeammateRating_None)]
         public ECoachTeammateRating rating
         {
-            get { return __pbn__rating ?? ECoachTeammateRating.k_ECoachTeammateRating_None; }
-            set { __pbn__rating = value; }
+            get => __pbn__rating ?? ECoachTeammateRating.k_ECoachTeammateRating_None;
+            set => __pbn__rating = value;
         }
         public bool ShouldSerializerating() => __pbn__rating != null;
         public void Resetrating() => __pbn__rating = null;
@@ -15714,8 +15715,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string reason
         {
-            get { return __pbn__reason ?? ""; }
-            set { __pbn__reason = value; }
+            get => __pbn__reason ?? "";
+            set => __pbn__reason = value;
         }
         public bool ShouldSerializereason() => __pbn__reason != null;
         public void Resetreason() => __pbn__reason = null;
@@ -15734,8 +15735,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
         public EResponse result
         {
-            get { return __pbn__result ?? EResponse.k_eInternalError; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EResponse.k_eInternalError;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -15782,8 +15783,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -15792,8 +15793,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
         public int rating
         {
-            get { return __pbn__rating.GetValueOrDefault(); }
-            set { __pbn__rating = value; }
+            get => __pbn__rating.GetValueOrDefault();
+            set => __pbn__rating = value;
         }
         public bool ShouldSerializerating() => __pbn__rating != null;
         public void Resetrating() => __pbn__rating = null;
@@ -15802,8 +15803,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint flags
         {
-            get { return __pbn__flags.GetValueOrDefault(); }
-            set { __pbn__flags = value; }
+            get => __pbn__flags.GetValueOrDefault();
+            set => __pbn__flags = value;
         }
         public bool ShouldSerializeflags() => __pbn__flags != null;
         public void Resetflags() => __pbn__flags = null;
@@ -15822,8 +15823,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
         public EResponse eresult
         {
-            get { return __pbn__eresult ?? EResponse.k_eInternalError; }
-            set { __pbn__eresult = value; }
+            get => __pbn__eresult ?? EResponse.k_eInternalError;
+            set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
         public void Reseteresult() => __pbn__eresult = null;
@@ -15832,8 +15833,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -15884,8 +15885,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint ticket_pool_id
             {
-                get { return __pbn__ticket_pool_id.GetValueOrDefault(); }
-                set { __pbn__ticket_pool_id = value; }
+                get => __pbn__ticket_pool_id.GetValueOrDefault();
+                set => __pbn__ticket_pool_id = value;
             }
             public bool ShouldSerializeticket_pool_id() => __pbn__ticket_pool_id != null;
             public void Resetticket_pool_id() => __pbn__ticket_pool_id = null;
@@ -15895,8 +15896,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string code
             {
-                get { return __pbn__code ?? ""; }
-                set { __pbn__code = value; }
+                get => __pbn__code ?? "";
+                set => __pbn__code = value;
             }
             public bool ShouldSerializecode() => __pbn__code != null;
             public void Resetcode() => __pbn__code = null;
@@ -15905,8 +15906,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public bool account_disallowed
             {
-                get { return __pbn__account_disallowed.GetValueOrDefault(); }
-                set { __pbn__account_disallowed = value; }
+                get => __pbn__account_disallowed.GetValueOrDefault();
+                set => __pbn__account_disallowed = value;
             }
             public bool ShouldSerializeaccount_disallowed() => __pbn__account_disallowed != null;
             public void Resetaccount_disallowed() => __pbn__account_disallowed = null;
@@ -15926,8 +15927,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint player_id
         {
-            get { return __pbn__player_id.GetValueOrDefault(); }
-            set { __pbn__player_id = value; }
+            get => __pbn__player_id.GetValueOrDefault();
+            set => __pbn__player_id = value;
         }
         public bool ShouldSerializeplayer_id() => __pbn__player_id != null;
         public void Resetplayer_id() => __pbn__player_id = null;
@@ -15936,8 +15937,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -15956,8 +15957,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
         public EResponse result
         {
-            get { return __pbn__result ?? EResponse.k_eInternalError; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EResponse.k_eInternalError;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -15966,8 +15967,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint player_id
         {
-            get { return __pbn__player_id.GetValueOrDefault(); }
-            set { __pbn__player_id = value; }
+            get => __pbn__player_id.GetValueOrDefault();
+            set => __pbn__player_id = value;
         }
         public bool ShouldSerializeplayer_id() => __pbn__player_id != null;
         public void Resetplayer_id() => __pbn__player_id = null;
@@ -16008,8 +16009,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResponse.k_eSuccess)]
         public EResponse result
         {
-            get { return __pbn__result ?? EResponse.k_eSuccess; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EResponse.k_eSuccess;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -16018,8 +16019,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint player_id
         {
-            get { return __pbn__player_id.GetValueOrDefault(); }
-            set { __pbn__player_id = value; }
+            get => __pbn__player_id.GetValueOrDefault();
+            set => __pbn__player_id = value;
         }
         public bool ShouldSerializeplayer_id() => __pbn__player_id != null;
         public void Resetplayer_id() => __pbn__player_id = null;
@@ -16028,8 +16029,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint picking_allowed_until
         {
-            get { return __pbn__picking_allowed_until.GetValueOrDefault(); }
-            set { __pbn__picking_allowed_until = value; }
+            get => __pbn__picking_allowed_until.GetValueOrDefault();
+            set => __pbn__picking_allowed_until = value;
         }
         public bool ShouldSerializepicking_allowed_until() => __pbn__picking_allowed_until != null;
         public void Resetpicking_allowed_until() => __pbn__picking_allowed_until = null;
@@ -16038,8 +16039,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint earned_battle_points
         {
-            get { return __pbn__earned_battle_points.GetValueOrDefault(); }
-            set { __pbn__earned_battle_points = value; }
+            get => __pbn__earned_battle_points.GetValueOrDefault();
+            set => __pbn__earned_battle_points = value;
         }
         public bool ShouldSerializeearned_battle_points() => __pbn__earned_battle_points != null;
         public void Resetearned_battle_points() => __pbn__earned_battle_points = null;
@@ -16065,8 +16066,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint currency
         {
-            get { return __pbn__currency.GetValueOrDefault(); }
-            set { __pbn__currency = value; }
+            get => __pbn__currency.GetValueOrDefault();
+            set => __pbn__currency = value;
         }
         public bool ShouldSerializecurrency() => __pbn__currency != null;
         public void Resetcurrency() => __pbn__currency = null;
@@ -16075,8 +16076,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint additional_user_message
         {
-            get { return __pbn__additional_user_message.GetValueOrDefault(); }
-            set { __pbn__additional_user_message = value; }
+            get => __pbn__additional_user_message.GetValueOrDefault();
+            set => __pbn__additional_user_message = value;
         }
         public bool ShouldSerializeadditional_user_message() => __pbn__additional_user_message != null;
         public void Resetadditional_user_message() => __pbn__additional_user_message = null;
@@ -16085,8 +16086,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public byte[] acked
         {
-            get { return __pbn__acked; }
-            set { __pbn__acked = value; }
+            get => __pbn__acked;
+            set => __pbn__acked = value;
         }
         public bool ShouldSerializeacked() => __pbn__acked != null;
         public void Resetacked() => __pbn__acked = null;
@@ -16113,8 +16114,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -16123,8 +16124,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -16143,8 +16144,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EUnderDraftResponse.k_eInternalError)]
         public EUnderDraftResponse result
         {
-            get { return __pbn__result ?? EUnderDraftResponse.k_eInternalError; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EUnderDraftResponse.k_eInternalError;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -16153,8 +16154,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -16163,8 +16164,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -16185,8 +16186,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -16205,8 +16206,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EUnderDraftResponse.k_eInternalError)]
         public EUnderDraftResponse result
         {
-            get { return __pbn__result ?? EUnderDraftResponse.k_eInternalError; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EUnderDraftResponse.k_eInternalError;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -16215,8 +16216,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -16237,8 +16238,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -16247,8 +16248,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint slot_id
         {
-            get { return __pbn__slot_id.GetValueOrDefault(); }
-            set { __pbn__slot_id = value; }
+            get => __pbn__slot_id.GetValueOrDefault();
+            set => __pbn__slot_id = value;
         }
         public bool ShouldSerializeslot_id() => __pbn__slot_id != null;
         public void Resetslot_id() => __pbn__slot_id = null;
@@ -16266,8 +16267,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -16286,8 +16287,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EUnderDraftResponse.k_eInternalError)]
         public EUnderDraftResponse result
         {
-            get { return __pbn__result ?? EUnderDraftResponse.k_eInternalError; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EUnderDraftResponse.k_eInternalError;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -16296,8 +16297,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -16306,8 +16307,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint slot_id
         {
-            get { return __pbn__slot_id.GetValueOrDefault(); }
-            set { __pbn__slot_id = value; }
+            get => __pbn__slot_id.GetValueOrDefault();
+            set => __pbn__slot_id = value;
         }
         public bool ShouldSerializeslot_id() => __pbn__slot_id != null;
         public void Resetslot_id() => __pbn__slot_id = null;
@@ -16328,8 +16329,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -16348,8 +16349,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EUnderDraftResponse.k_eInternalError)]
         public EUnderDraftResponse result
         {
-            get { return __pbn__result ?? EUnderDraftResponse.k_eInternalError; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EUnderDraftResponse.k_eInternalError;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -16358,8 +16359,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -16380,8 +16381,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -16390,8 +16391,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint slot_id
         {
-            get { return __pbn__slot_id.GetValueOrDefault(); }
-            set { __pbn__slot_id = value; }
+            get => __pbn__slot_id.GetValueOrDefault();
+            set => __pbn__slot_id = value;
         }
         public bool ShouldSerializeslot_id() => __pbn__slot_id != null;
         public void Resetslot_id() => __pbn__slot_id = null;
@@ -16410,8 +16411,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EUnderDraftResponse.k_eInternalError)]
         public EUnderDraftResponse result
         {
-            get { return __pbn__result ?? EUnderDraftResponse.k_eInternalError; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EUnderDraftResponse.k_eInternalError;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -16420,8 +16421,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -16430,8 +16431,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint slot_id
         {
-            get { return __pbn__slot_id.GetValueOrDefault(); }
-            set { __pbn__slot_id = value; }
+            get => __pbn__slot_id.GetValueOrDefault();
+            set => __pbn__slot_id = value;
         }
         public bool ShouldSerializeslot_id() => __pbn__slot_id != null;
         public void Resetslot_id() => __pbn__slot_id = null;
@@ -16452,8 +16453,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -16462,8 +16463,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint action_id
         {
-            get { return __pbn__action_id.GetValueOrDefault(); }
-            set { __pbn__action_id = value; }
+            get => __pbn__action_id.GetValueOrDefault();
+            set => __pbn__action_id = value;
         }
         public bool ShouldSerializeaction_id() => __pbn__action_id != null;
         public void Resetaction_id() => __pbn__action_id = null;
@@ -16482,8 +16483,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EUnderDraftResponse.k_eInternalError)]
         public EUnderDraftResponse result
         {
-            get { return __pbn__result ?? EUnderDraftResponse.k_eInternalError; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EUnderDraftResponse.k_eInternalError;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -16501,8 +16502,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -16521,8 +16522,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EUnderDraftResponse.k_eInternalError)]
         public EUnderDraftResponse result
         {
-            get { return __pbn__result ?? EUnderDraftResponse.k_eInternalError; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EUnderDraftResponse.k_eInternalError;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -16551,8 +16552,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string name
             {
-                get { return __pbn__name ?? ""; }
-                set { __pbn__name = value; }
+                get => __pbn__name ?? "";
+                set => __pbn__name = value;
             }
             public bool ShouldSerializename() => __pbn__name != null;
             public void Resetname() => __pbn__name = null;
@@ -16561,8 +16562,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint team_id
             {
-                get { return __pbn__team_id.GetValueOrDefault(); }
-                set { __pbn__team_id = value; }
+                get => __pbn__team_id.GetValueOrDefault();
+                set => __pbn__team_id = value;
             }
             public bool ShouldSerializeteam_id() => __pbn__team_id != null;
             public void Resetteam_id() => __pbn__team_id = null;
@@ -16572,8 +16573,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string logo_url
             {
-                get { return __pbn__logo_url ?? ""; }
-                set { __pbn__logo_url = value; }
+                get => __pbn__logo_url ?? "";
+                set => __pbn__logo_url = value;
             }
             public bool ShouldSerializelogo_url() => __pbn__logo_url != null;
             public void Resetlogo_url() => __pbn__logo_url = null;
@@ -16583,8 +16584,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue(ETeamFanContentStatus.TEAM_FAN_CONTENT_STATUS_INVALID)]
             public ETeamFanContentStatus status
             {
-                get { return __pbn__status ?? ETeamFanContentStatus.TEAM_FAN_CONTENT_STATUS_INVALID; }
-                set { __pbn__status = value; }
+                get => __pbn__status ?? ETeamFanContentStatus.TEAM_FAN_CONTENT_STATUS_INVALID;
+                set => __pbn__status = value;
             }
             public bool ShouldSerializestatus() => __pbn__status != null;
             public void Resetstatus() => __pbn__status = null;
@@ -16593,8 +16594,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint timestamp
             {
-                get { return __pbn__timestamp.GetValueOrDefault(); }
-                set { __pbn__timestamp = value; }
+                get => __pbn__timestamp.GetValueOrDefault();
+                set => __pbn__timestamp = value;
             }
             public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
             public void Resettimestamp() => __pbn__timestamp = null;
@@ -16604,8 +16605,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string zip_url
             {
-                get { return __pbn__zip_url ?? ""; }
-                set { __pbn__zip_url = value; }
+                get => __pbn__zip_url ?? "";
+                set => __pbn__zip_url = value;
             }
             public bool ShouldSerializezip_url() => __pbn__zip_url != null;
             public void Resetzip_url() => __pbn__zip_url = null;
@@ -16614,8 +16615,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(7)]
             public ulong ugc_logo
             {
-                get { return __pbn__ugc_logo.GetValueOrDefault(); }
-                set { __pbn__ugc_logo = value; }
+                get => __pbn__ugc_logo.GetValueOrDefault();
+                set => __pbn__ugc_logo = value;
             }
             public bool ShouldSerializeugc_logo() => __pbn__ugc_logo != null;
             public void Resetugc_logo() => __pbn__ugc_logo = null;
@@ -16635,8 +16636,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint team_id
         {
-            get { return __pbn__team_id.GetValueOrDefault(); }
-            set { __pbn__team_id = value; }
+            get => __pbn__team_id.GetValueOrDefault();
+            set => __pbn__team_id = value;
         }
         public bool ShouldSerializeteam_id() => __pbn__team_id != null;
         public void Resetteam_id() => __pbn__team_id = null;
@@ -16646,8 +16647,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(ETeamFanContentStatus.TEAM_FAN_CONTENT_STATUS_INVALID)]
         public ETeamFanContentStatus status
         {
-            get { return __pbn__status ?? ETeamFanContentStatus.TEAM_FAN_CONTENT_STATUS_INVALID; }
-            set { __pbn__status = value; }
+            get => __pbn__status ?? ETeamFanContentStatus.TEAM_FAN_CONTENT_STATUS_INVALID;
+            set => __pbn__status = value;
         }
         public bool ShouldSerializestatus() => __pbn__status != null;
         public void Resetstatus() => __pbn__status = null;
@@ -16666,8 +16667,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EResult.k_eSuccess)]
         public EResult result
         {
-            get { return __pbn__result ?? EResult.k_eSuccess; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EResult.k_eSuccess;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -16692,8 +16693,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool has_valid_match
         {
-            get { return __pbn__has_valid_match.GetValueOrDefault(); }
-            set { __pbn__has_valid_match = value; }
+            get => __pbn__has_valid_match.GetValueOrDefault();
+            set => __pbn__has_valid_match = value;
         }
         public bool ShouldSerializehas_valid_match() => __pbn__has_valid_match != null;
         public void Resethas_valid_match() => __pbn__has_valid_match = null;
@@ -16705,8 +16706,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint match_rank_tier
         {
-            get { return __pbn__match_rank_tier.GetValueOrDefault(); }
-            set { __pbn__match_rank_tier = value; }
+            get => __pbn__match_rank_tier.GetValueOrDefault();
+            set => __pbn__match_rank_tier = value;
         }
         public bool ShouldSerializematch_rank_tier() => __pbn__match_rank_tier != null;
         public void Resetmatch_rank_tier() => __pbn__match_rank_tier = null;
@@ -16715,8 +16716,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint end_time
         {
-            get { return __pbn__end_time.GetValueOrDefault(); }
-            set { __pbn__end_time = value; }
+            get => __pbn__end_time.GetValueOrDefault();
+            set => __pbn__end_time = value;
         }
         public bool ShouldSerializeend_time() => __pbn__end_time != null;
         public void Resetend_time() => __pbn__end_time = null;
@@ -16725,8 +16726,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -16735,8 +16736,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public bool current_match_voted_radiant
         {
-            get { return __pbn__current_match_voted_radiant.GetValueOrDefault(); }
-            set { __pbn__current_match_voted_radiant = value; }
+            get => __pbn__current_match_voted_radiant.GetValueOrDefault();
+            set => __pbn__current_match_voted_radiant = value;
         }
         public bool ShouldSerializecurrent_match_voted_radiant() => __pbn__current_match_voted_radiant != null;
         public void Resetcurrent_match_voted_radiant() => __pbn__current_match_voted_radiant = null;
@@ -16748,8 +16749,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint current_streak
         {
-            get { return __pbn__current_streak.GetValueOrDefault(); }
-            set { __pbn__current_streak = value; }
+            get => __pbn__current_streak.GetValueOrDefault();
+            set => __pbn__current_streak = value;
         }
         public bool ShouldSerializecurrent_streak() => __pbn__current_streak != null;
         public void Resetcurrent_streak() => __pbn__current_streak = null;
@@ -16765,8 +16766,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint hero_id
             {
-                get { return __pbn__hero_id.GetValueOrDefault(); }
-                set { __pbn__hero_id = value; }
+                get => __pbn__hero_id.GetValueOrDefault();
+                set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
@@ -16775,8 +16776,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint role
             {
-                get { return __pbn__role.GetValueOrDefault(); }
-                set { __pbn__role = value; }
+                get => __pbn__role.GetValueOrDefault();
+                set => __pbn__role = value;
             }
             public bool ShouldSerializerole() => __pbn__role != null;
             public void Resetrole() => __pbn__role = null;
@@ -16809,8 +16810,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public bool voted_correctly
             {
-                get { return __pbn__voted_correctly.GetValueOrDefault(); }
-                set { __pbn__voted_correctly = value; }
+                get => __pbn__voted_correctly.GetValueOrDefault();
+                set => __pbn__voted_correctly = value;
             }
             public bool ShouldSerializevoted_correctly() => __pbn__voted_correctly != null;
             public void Resetvoted_correctly() => __pbn__voted_correctly = null;
@@ -16819,8 +16820,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public bool voted_radiant
             {
-                get { return __pbn__voted_radiant.GetValueOrDefault(); }
-                set { __pbn__voted_radiant = value; }
+                get => __pbn__voted_radiant.GetValueOrDefault();
+                set => __pbn__voted_radiant = value;
             }
             public bool ShouldSerializevoted_radiant() => __pbn__voted_radiant != null;
             public void Resetvoted_radiant() => __pbn__voted_radiant = null;
@@ -16832,8 +16833,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint match_rank_tier
             {
-                get { return __pbn__match_rank_tier.GetValueOrDefault(); }
-                set { __pbn__match_rank_tier = value; }
+                get => __pbn__match_rank_tier.GetValueOrDefault();
+                set => __pbn__match_rank_tier = value;
             }
             public bool ShouldSerializematch_rank_tier() => __pbn__match_rank_tier != null;
             public void Resetmatch_rank_tier() => __pbn__match_rank_tier = null;
@@ -16842,8 +16843,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint end_time
             {
-                get { return __pbn__end_time.GetValueOrDefault(); }
-                set { __pbn__end_time = value; }
+                get => __pbn__end_time.GetValueOrDefault();
+                set => __pbn__end_time = value;
             }
             public bool ShouldSerializeend_time() => __pbn__end_time != null;
             public void Resetend_time() => __pbn__end_time = null;
@@ -16852,8 +16853,8 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(6)]
             public ulong match_id
             {
-                get { return __pbn__match_id.GetValueOrDefault(); }
-                set { __pbn__match_id = value; }
+                get => __pbn__match_id.GetValueOrDefault();
+                set => __pbn__match_id = value;
             }
             public bool ShouldSerializematch_id() => __pbn__match_id != null;
             public void Resetmatch_id() => __pbn__match_id = null;
@@ -16873,8 +16874,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool chose_radiant_as_winner
         {
-            get { return __pbn__chose_radiant_as_winner.GetValueOrDefault(); }
-            set { __pbn__chose_radiant_as_winner = value; }
+            get => __pbn__chose_radiant_as_winner.GetValueOrDefault();
+            set => __pbn__chose_radiant_as_winner = value;
         }
         public bool ShouldSerializechose_radiant_as_winner() => __pbn__chose_radiant_as_winner != null;
         public void Resetchose_radiant_as_winner() => __pbn__chose_radiant_as_winner = null;
@@ -16883,8 +16884,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -16893,8 +16894,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint end_time
         {
-            get { return __pbn__end_time.GetValueOrDefault(); }
-            set { __pbn__end_time = value; }
+            get => __pbn__end_time.GetValueOrDefault();
+            set => __pbn__end_time = value;
         }
         public bool ShouldSerializeend_time() => __pbn__end_time != null;
         public void Resetend_time() => __pbn__end_time = null;
@@ -16913,8 +16914,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(EDOTADraftTriviaAnswerResult.k_EDOTADraftTriviaAnswerResult_Success)]
         public EDOTADraftTriviaAnswerResult result
         {
-            get { return __pbn__result ?? EDOTADraftTriviaAnswerResult.k_EDOTADraftTriviaAnswerResult_Success; }
-            set { __pbn__result = value; }
+            get => __pbn__result ?? EDOTADraftTriviaAnswerResult.k_EDOTADraftTriviaAnswerResult_Success;
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -16932,8 +16933,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint total_votes
         {
-            get { return __pbn__total_votes.GetValueOrDefault(); }
-            set { __pbn__total_votes = value; }
+            get => __pbn__total_votes.GetValueOrDefault();
+            set => __pbn__total_votes = value;
         }
         public bool ShouldSerializetotal_votes() => __pbn__total_votes != null;
         public void Resettotal_votes() => __pbn__total_votes = null;
@@ -16942,8 +16943,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint radiant_votes
         {
-            get { return __pbn__radiant_votes.GetValueOrDefault(); }
-            set { __pbn__radiant_votes = value; }
+            get => __pbn__radiant_votes.GetValueOrDefault();
+            set => __pbn__radiant_votes = value;
         }
         public bool ShouldSerializeradiant_votes() => __pbn__radiant_votes != null;
         public void Resetradiant_votes() => __pbn__radiant_votes = null;
@@ -16952,8 +16953,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint dire_votes
         {
-            get { return __pbn__dire_votes.GetValueOrDefault(); }
-            set { __pbn__dire_votes = value; }
+            get => __pbn__dire_votes.GetValueOrDefault();
+            set => __pbn__dire_votes = value;
         }
         public bool ShouldSerializedire_votes() => __pbn__dire_votes != null;
         public void Resetdire_votes() => __pbn__dire_votes = null;
@@ -17134,4 +17135,5 @@ namespace SteamKit2.GC.Dota.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

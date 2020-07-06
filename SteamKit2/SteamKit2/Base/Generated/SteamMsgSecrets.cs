@@ -4,7 +4,8 @@
 //   Input: steammessages_secrets.steamclient.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.Internal
 {
 
@@ -18,8 +19,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public byte[] rsa_oaep_sha_ticket
         {
-            get { return __pbn__rsa_oaep_sha_ticket; }
-            set { __pbn__rsa_oaep_sha_ticket = value; }
+            get => __pbn__rsa_oaep_sha_ticket;
+            set => __pbn__rsa_oaep_sha_ticket = value;
         }
         public bool ShouldSerializersa_oaep_sha_ticket() => __pbn__rsa_oaep_sha_ticket != null;
         public void Resetrsa_oaep_sha_ticket() => __pbn__rsa_oaep_sha_ticket = null;
@@ -28,8 +29,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public byte[] password
         {
-            get { return __pbn__password; }
-            set { __pbn__password = value; }
+            get => __pbn__password;
+            set => __pbn__password = value;
         }
         public bool ShouldSerializepassword() => __pbn__password != null;
         public void Resetpassword() => __pbn__password = null;
@@ -39,8 +40,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(EKeyEscrowUsage.k_EKeyEscrowUsageStreamingDevice)]
         public EKeyEscrowUsage usage
         {
-            get { return __pbn__usage ?? EKeyEscrowUsage.k_EKeyEscrowUsageStreamingDevice; }
-            set { __pbn__usage = value; }
+            get => __pbn__usage ?? EKeyEscrowUsage.k_EKeyEscrowUsageStreamingDevice;
+            set => __pbn__usage = value;
         }
         public bool ShouldSerializeusage() => __pbn__usage != null;
         public void Resetusage() => __pbn__usage = null;
@@ -50,8 +51,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string device_name
         {
-            get { return __pbn__device_name ?? ""; }
-            set { __pbn__device_name = value; }
+            get => __pbn__device_name ?? "";
+            set => __pbn__device_name = value;
         }
         public bool ShouldSerializedevice_name() => __pbn__device_name != null;
         public void Resetdevice_name() => __pbn__device_name = null;
@@ -69,8 +70,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public byte[] password
         {
-            get { return __pbn__password; }
-            set { __pbn__password = value; }
+            get => __pbn__password;
+            set => __pbn__password = value;
         }
         public bool ShouldSerializepassword() => __pbn__password != null;
         public void Resetpassword() => __pbn__password = null;
@@ -79,8 +80,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong identifier
         {
-            get { return __pbn__identifier.GetValueOrDefault(); }
-            set { __pbn__identifier = value; }
+            get => __pbn__identifier.GetValueOrDefault();
+            set => __pbn__identifier = value;
         }
         public bool ShouldSerializeidentifier() => __pbn__identifier != null;
         public void Resetidentifier() => __pbn__identifier = null;
@@ -89,8 +90,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public byte[] payload
         {
-            get { return __pbn__payload; }
-            set { __pbn__payload = value; }
+            get => __pbn__payload;
+            set => __pbn__payload = value;
         }
         public bool ShouldSerializepayload() => __pbn__payload != null;
         public void Resetpayload() => __pbn__payload = null;
@@ -99,8 +100,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint timestamp
         {
-            get { return __pbn__timestamp.GetValueOrDefault(); }
-            set { __pbn__timestamp = value; }
+            get => __pbn__timestamp.GetValueOrDefault();
+            set => __pbn__timestamp = value;
         }
         public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
         public void Resettimestamp() => __pbn__timestamp = null;
@@ -110,8 +111,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(EKeyEscrowUsage.k_EKeyEscrowUsageStreamingDevice)]
         public EKeyEscrowUsage usage
         {
-            get { return __pbn__usage ?? EKeyEscrowUsage.k_EKeyEscrowUsageStreamingDevice; }
-            set { __pbn__usage = value; }
+            get => __pbn__usage ?? EKeyEscrowUsage.k_EKeyEscrowUsageStreamingDevice;
+            set => __pbn__usage = value;
         }
         public bool ShouldSerializeusage() => __pbn__usage != null;
         public void Resetusage() => __pbn__usage = null;
@@ -121,8 +122,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string device_name
         {
-            get { return __pbn__device_name ?? ""; }
-            set { __pbn__device_name = value; }
+            get => __pbn__device_name ?? "";
+            set => __pbn__device_name = value;
         }
         public bool ShouldSerializedevice_name() => __pbn__device_name != null;
         public void Resetdevice_name() => __pbn__device_name = null;
@@ -132,8 +133,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string device_model
         {
-            get { return __pbn__device_model ?? ""; }
-            set { __pbn__device_model = value; }
+            get => __pbn__device_model ?? "";
+            set => __pbn__device_model = value;
         }
         public bool ShouldSerializedevice_model() => __pbn__device_model != null;
         public void Resetdevice_model() => __pbn__device_model = null;
@@ -143,8 +144,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string device_serial
         {
-            get { return __pbn__device_serial ?? ""; }
-            set { __pbn__device_serial = value; }
+            get => __pbn__device_serial ?? "";
+            set => __pbn__device_serial = value;
         }
         public bool ShouldSerializedevice_serial() => __pbn__device_serial != null;
         public void Resetdevice_serial() => __pbn__device_serial = null;
@@ -153,8 +154,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public uint device_provisioning_id
         {
-            get { return __pbn__device_provisioning_id.GetValueOrDefault(); }
-            set { __pbn__device_provisioning_id = value; }
+            get => __pbn__device_provisioning_id.GetValueOrDefault();
+            set => __pbn__device_provisioning_id = value;
         }
         public bool ShouldSerializedevice_provisioning_id() => __pbn__device_provisioning_id != null;
         public void Resetdevice_provisioning_id() => __pbn__device_provisioning_id = null;
@@ -187,4 +188,5 @@ namespace SteamKit2.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

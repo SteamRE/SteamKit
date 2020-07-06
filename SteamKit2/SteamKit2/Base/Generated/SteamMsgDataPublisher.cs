@@ -4,7 +4,8 @@
 //   Input: steammessages_datapublisher.steamclient.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.Internal
 {
 
@@ -18,8 +19,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -28,8 +29,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint depotid
         {
-            get { return __pbn__depotid.GetValueOrDefault(); }
-            set { __pbn__depotid = value; }
+            get => __pbn__depotid.GetValueOrDefault();
+            set => __pbn__depotid = value;
         }
         public bool ShouldSerializedepotid() => __pbn__depotid != null;
         public void Resetdepotid() => __pbn__depotid = null;
@@ -39,8 +40,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string download_source
         {
-            get { return __pbn__download_source ?? ""; }
-            set { __pbn__download_source = value; }
+            get => __pbn__download_source ?? "";
+            set => __pbn__download_source = value;
         }
         public bool ShouldSerializedownload_source() => __pbn__download_source != null;
         public void Resetdownload_source() => __pbn__download_source = null;
@@ -50,8 +51,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string objectid
         {
-            get { return __pbn__objectid ?? ""; }
-            set { __pbn__objectid = value; }
+            get => __pbn__objectid ?? "";
+            set => __pbn__objectid = value;
         }
         public bool ShouldSerializeobjectid() => __pbn__objectid != null;
         public void Resetobjectid() => __pbn__objectid = null;
@@ -60,8 +61,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint cellid
         {
-            get { return __pbn__cellid.GetValueOrDefault(); }
-            set { __pbn__cellid = value; }
+            get => __pbn__cellid.GetValueOrDefault();
+            set => __pbn__cellid = value;
         }
         public bool ShouldSerializecellid() => __pbn__cellid != null;
         public void Resetcellid() => __pbn__cellid = null;
@@ -70,8 +71,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public bool is_manifest
         {
-            get { return __pbn__is_manifest.GetValueOrDefault(); }
-            set { __pbn__is_manifest = value; }
+            get => __pbn__is_manifest.GetValueOrDefault();
+            set => __pbn__is_manifest = value;
         }
         public bool ShouldSerializeis_manifest() => __pbn__is_manifest != null;
         public void Resetis_manifest() => __pbn__is_manifest = null;
@@ -80,8 +81,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public ulong object_size
         {
-            get { return __pbn__object_size.GetValueOrDefault(); }
-            set { __pbn__object_size = value; }
+            get => __pbn__object_size.GetValueOrDefault();
+            set => __pbn__object_size = value;
         }
         public bool ShouldSerializeobject_size() => __pbn__object_size != null;
         public void Resetobject_size() => __pbn__object_size = null;
@@ -90,8 +91,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint corruption_type
         {
-            get { return __pbn__corruption_type.GetValueOrDefault(); }
-            set { __pbn__corruption_type = value; }
+            get => __pbn__corruption_type.GetValueOrDefault();
+            set => __pbn__corruption_type = value;
         }
         public bool ShouldSerializecorruption_type() => __pbn__corruption_type != null;
         public void Resetcorruption_type() => __pbn__corruption_type = null;
@@ -100,8 +101,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public bool used_https
         {
-            get { return __pbn__used_https.GetValueOrDefault(); }
-            set { __pbn__used_https = value; }
+            get => __pbn__used_https.GetValueOrDefault();
+            set => __pbn__used_https = value;
         }
         public bool ShouldSerializeused_https() => __pbn__used_https != null;
         public void Resetused_https() => __pbn__used_https = null;
@@ -110,8 +111,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public bool oc_proxy_detected
         {
-            get { return __pbn__oc_proxy_detected.GetValueOrDefault(); }
-            set { __pbn__oc_proxy_detected = value; }
+            get => __pbn__oc_proxy_detected.GetValueOrDefault();
+            set => __pbn__oc_proxy_detected = value;
         }
         public bool ShouldSerializeoc_proxy_detected() => __pbn__oc_proxy_detected != null;
         public void Resetoc_proxy_detected() => __pbn__oc_proxy_detected = null;
@@ -130,8 +131,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string surveydatetoken
         {
-            get { return __pbn__surveydatetoken ?? ""; }
-            set { __pbn__surveydatetoken = value; }
+            get => __pbn__surveydatetoken ?? "";
+            set => __pbn__surveydatetoken = value;
         }
         public bool ShouldSerializesurveydatetoken() => __pbn__surveydatetoken != null;
         public void Resetsurveydatetoken() => __pbn__surveydatetoken = null;
@@ -140,8 +141,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong surveydatetokenversion
         {
-            get { return __pbn__surveydatetokenversion.GetValueOrDefault(); }
-            set { __pbn__surveydatetokenversion = value; }
+            get => __pbn__surveydatetokenversion.GetValueOrDefault();
+            set => __pbn__surveydatetokenversion = value;
         }
         public bool ShouldSerializesurveydatetokenversion() => __pbn__surveydatetokenversion != null;
         public void Resetsurveydatetokenversion() => __pbn__surveydatetokenversion = null;
@@ -159,8 +160,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint surveydatetoken
         {
-            get { return __pbn__surveydatetoken.GetValueOrDefault(); }
-            set { __pbn__surveydatetoken = value; }
+            get => __pbn__surveydatetoken.GetValueOrDefault();
+            set => __pbn__surveydatetoken = value;
         }
         public bool ShouldSerializesurveydatetoken() => __pbn__surveydatetoken != null;
         public void Resetsurveydatetoken() => __pbn__surveydatetoken = null;
@@ -169,8 +170,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong surveydatetokenversion
         {
-            get { return __pbn__surveydatetokenversion.GetValueOrDefault(); }
-            set { __pbn__surveydatetokenversion = value; }
+            get => __pbn__surveydatetokenversion.GetValueOrDefault();
+            set => __pbn__surveydatetokenversion = value;
         }
         public bool ShouldSerializesurveydatetokenversion() => __pbn__surveydatetokenversion != null;
         public void Resetsurveydatetokenversion() => __pbn__surveydatetokenversion = null;
@@ -190,4 +191,5 @@ namespace SteamKit2.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

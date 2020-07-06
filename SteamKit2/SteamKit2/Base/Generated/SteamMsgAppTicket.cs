@@ -4,7 +4,8 @@
 //   Input: encrypted_app_ticket.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.Internal
 {
 
@@ -18,8 +19,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint ticket_version_no
         {
-            get { return __pbn__ticket_version_no.GetValueOrDefault(); }
-            set { __pbn__ticket_version_no = value; }
+            get => __pbn__ticket_version_no.GetValueOrDefault();
+            set => __pbn__ticket_version_no = value;
         }
         public bool ShouldSerializeticket_version_no() => __pbn__ticket_version_no != null;
         public void Resetticket_version_no() => __pbn__ticket_version_no = null;
@@ -28,8 +29,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint crc_encryptedticket
         {
-            get { return __pbn__crc_encryptedticket.GetValueOrDefault(); }
-            set { __pbn__crc_encryptedticket = value; }
+            get => __pbn__crc_encryptedticket.GetValueOrDefault();
+            set => __pbn__crc_encryptedticket = value;
         }
         public bool ShouldSerializecrc_encryptedticket() => __pbn__crc_encryptedticket != null;
         public void Resetcrc_encryptedticket() => __pbn__crc_encryptedticket = null;
@@ -38,8 +39,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint cb_encrypteduserdata
         {
-            get { return __pbn__cb_encrypteduserdata.GetValueOrDefault(); }
-            set { __pbn__cb_encrypteduserdata = value; }
+            get => __pbn__cb_encrypteduserdata.GetValueOrDefault();
+            set => __pbn__cb_encrypteduserdata = value;
         }
         public bool ShouldSerializecb_encrypteduserdata() => __pbn__cb_encrypteduserdata != null;
         public void Resetcb_encrypteduserdata() => __pbn__cb_encrypteduserdata = null;
@@ -48,8 +49,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint cb_encrypted_appownershipticket
         {
-            get { return __pbn__cb_encrypted_appownershipticket.GetValueOrDefault(); }
-            set { __pbn__cb_encrypted_appownershipticket = value; }
+            get => __pbn__cb_encrypted_appownershipticket.GetValueOrDefault();
+            set => __pbn__cb_encrypted_appownershipticket = value;
         }
         public bool ShouldSerializecb_encrypted_appownershipticket() => __pbn__cb_encrypted_appownershipticket != null;
         public void Resetcb_encrypted_appownershipticket() => __pbn__cb_encrypted_appownershipticket = null;
@@ -58,8 +59,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public byte[] encrypted_ticket
         {
-            get { return __pbn__encrypted_ticket; }
-            set { __pbn__encrypted_ticket = value; }
+            get => __pbn__encrypted_ticket;
+            set => __pbn__encrypted_ticket = value;
         }
         public bool ShouldSerializeencrypted_ticket() => __pbn__encrypted_ticket != null;
         public void Resetencrypted_ticket() => __pbn__encrypted_ticket = null;
@@ -69,4 +70,5 @@ namespace SteamKit2.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

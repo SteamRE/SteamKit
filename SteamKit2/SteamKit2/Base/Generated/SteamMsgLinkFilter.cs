@@ -4,7 +4,8 @@
 //   Input: steammessages_linkfilter.steamclient.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.Internal
 {
 
@@ -18,8 +19,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint hit_type
         {
-            get { return __pbn__hit_type.GetValueOrDefault(); }
-            set { __pbn__hit_type = value; }
+            get => __pbn__hit_type.GetValueOrDefault();
+            set => __pbn__hit_type = value;
         }
         public bool ShouldSerializehit_type() => __pbn__hit_type != null;
         public void Resethit_type() => __pbn__hit_type = null;
@@ -28,8 +29,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint count
         {
-            get { return __pbn__count.GetValueOrDefault(); }
-            set { __pbn__count = value; }
+            get => __pbn__count.GetValueOrDefault();
+            set => __pbn__count = value;
         }
         public bool ShouldSerializecount() => __pbn__count != null;
         public void Resetcount() => __pbn__count = null;
@@ -38,8 +39,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong start
         {
-            get { return __pbn__start.GetValueOrDefault(); }
-            set { __pbn__start = value; }
+            get => __pbn__start.GetValueOrDefault();
+            set => __pbn__start = value;
         }
         public bool ShouldSerializestart() => __pbn__start != null;
         public void Resetstart() => __pbn__start = null;
@@ -69,8 +70,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint hit_type
         {
-            get { return __pbn__hit_type.GetValueOrDefault(); }
-            set { __pbn__hit_type = value; }
+            get => __pbn__hit_type.GetValueOrDefault();
+            set => __pbn__hit_type = value;
         }
         public bool ShouldSerializehit_type() => __pbn__hit_type != null;
         public void Resethit_type() => __pbn__hit_type = null;
@@ -79,8 +80,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint count
         {
-            get { return __pbn__count.GetValueOrDefault(); }
-            set { __pbn__count = value; }
+            get => __pbn__count.GetValueOrDefault();
+            set => __pbn__count = value;
         }
         public bool ShouldSerializecount() => __pbn__count != null;
         public void Resetcount() => __pbn__count = null;
@@ -89,8 +90,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong start
         {
-            get { return __pbn__start.GetValueOrDefault(); }
-            set { __pbn__start = value; }
+            get => __pbn__start.GetValueOrDefault();
+            set => __pbn__start = value;
         }
         public bool ShouldSerializestart() => __pbn__start != null;
         public void Resetstart() => __pbn__start = null;
@@ -120,8 +121,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint hit_type
         {
-            get { return __pbn__hit_type.GetValueOrDefault(); }
-            set { __pbn__hit_type = value; }
+            get => __pbn__hit_type.GetValueOrDefault();
+            set => __pbn__hit_type = value;
         }
         public bool ShouldSerializehit_type() => __pbn__hit_type != null;
         public void Resethit_type() => __pbn__hit_type = null;
@@ -140,8 +141,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string version
         {
-            get { return __pbn__version ?? ""; }
-            set { __pbn__version = value; }
+            get => __pbn__version ?? "";
+            set => __pbn__version = value;
         }
         public bool ShouldSerializeversion() => __pbn__version != null;
         public void Resetversion() => __pbn__version = null;
@@ -150,8 +151,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong count
         {
-            get { return __pbn__count.GetValueOrDefault(); }
-            set { __pbn__count = value; }
+            get => __pbn__count.GetValueOrDefault();
+            set => __pbn__count = value;
         }
         public bool ShouldSerializecount() => __pbn__count != null;
         public void Resetcount() => __pbn__count = null;
@@ -168,4 +169,5 @@ namespace SteamKit2.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

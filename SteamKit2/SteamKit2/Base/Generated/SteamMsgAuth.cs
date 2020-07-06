@@ -4,7 +4,8 @@
 //   Input: steammessages_auth.steamclient.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.Internal
 {
 
@@ -19,8 +20,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string platform
         {
-            get { return __pbn__platform ?? ""; }
-            set { __pbn__platform = value; }
+            get => __pbn__platform ?? "";
+            set => __pbn__platform = value;
         }
         public bool ShouldSerializeplatform() => __pbn__platform != null;
         public void Resetplatform() => __pbn__platform = null;
@@ -29,8 +30,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -39,8 +40,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public bool request_trial
         {
-            get { return __pbn__request_trial.GetValueOrDefault(); }
-            set { __pbn__request_trial = value; }
+            get => __pbn__request_trial.GetValueOrDefault();
+            set => __pbn__request_trial = value;
         }
         public bool ShouldSerializerequest_trial() => __pbn__request_trial != null;
         public void Resetrequest_trial() => __pbn__request_trial = null;
@@ -59,8 +60,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string nonce
         {
-            get { return __pbn__nonce ?? ""; }
-            set { __pbn__nonce = value; }
+            get => __pbn__nonce ?? "";
+            set => __pbn__nonce = value;
         }
         public bool ShouldSerializenonce() => __pbn__nonce != null;
         public void Resetnonce() => __pbn__nonce = null;
@@ -69,8 +70,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint expiry
         {
-            get { return __pbn__expiry.GetValueOrDefault(); }
-            set { __pbn__expiry = value; }
+            get => __pbn__expiry.GetValueOrDefault();
+            set => __pbn__expiry = value;
         }
         public bool ShouldSerializeexpiry() => __pbn__expiry != null;
         public void Resetexpiry() => __pbn__expiry = null;
@@ -89,8 +90,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string platform
         {
-            get { return __pbn__platform ?? ""; }
-            set { __pbn__platform = value; }
+            get => __pbn__platform ?? "";
+            set => __pbn__platform = value;
         }
         public bool ShouldSerializeplatform() => __pbn__platform != null;
         public void Resetplatform() => __pbn__platform = null;
@@ -111,8 +112,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -121,8 +122,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint minutes_remaining
         {
-            get { return __pbn__minutes_remaining.GetValueOrDefault(); }
-            set { __pbn__minutes_remaining = value; }
+            get => __pbn__minutes_remaining.GetValueOrDefault();
+            set => __pbn__minutes_remaining = value;
         }
         public bool ShouldSerializeminutes_remaining() => __pbn__minutes_remaining != null;
         public void Resetminutes_remaining() => __pbn__minutes_remaining = null;
@@ -150,4 +151,5 @@ namespace SteamKit2.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

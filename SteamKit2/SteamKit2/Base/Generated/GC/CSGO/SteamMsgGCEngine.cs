@@ -4,7 +4,8 @@
 //   Input: engine_gcmessages.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.GC.CSGO.Internal
 {
 
@@ -18,8 +19,8 @@ namespace SteamKit2.GC.CSGO.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -28,8 +29,8 @@ namespace SteamKit2.GC.CSGO.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint instance_id
         {
-            get { return __pbn__instance_id.GetValueOrDefault(); }
-            set { __pbn__instance_id = value; }
+            get => __pbn__instance_id.GetValueOrDefault();
+            set => __pbn__instance_id = value;
         }
         public bool ShouldSerializeinstance_id() => __pbn__instance_id != null;
         public void Resetinstance_id() => __pbn__instance_id = null;
@@ -38,8 +39,8 @@ namespace SteamKit2.GC.CSGO.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint signupfragment
         {
-            get { return __pbn__signupfragment.GetValueOrDefault(); }
-            set { __pbn__signupfragment = value; }
+            get => __pbn__signupfragment.GetValueOrDefault();
+            set => __pbn__signupfragment = value;
         }
         public bool ShouldSerializesignupfragment() => __pbn__signupfragment != null;
         public void Resetsignupfragment() => __pbn__signupfragment = null;
@@ -48,8 +49,8 @@ namespace SteamKit2.GC.CSGO.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint currentfragment
         {
-            get { return __pbn__currentfragment.GetValueOrDefault(); }
-            set { __pbn__currentfragment = value; }
+            get => __pbn__currentfragment.GetValueOrDefault();
+            set => __pbn__currentfragment = value;
         }
         public bool ShouldSerializecurrentfragment() => __pbn__currentfragment != null;
         public void Resetcurrentfragment() => __pbn__currentfragment = null;
@@ -58,8 +59,8 @@ namespace SteamKit2.GC.CSGO.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public float tickrate
         {
-            get { return __pbn__tickrate.GetValueOrDefault(); }
-            set { __pbn__tickrate = value; }
+            get => __pbn__tickrate.GetValueOrDefault();
+            set => __pbn__tickrate = value;
         }
         public bool ShouldSerializetickrate() => __pbn__tickrate != null;
         public void Resettickrate() => __pbn__tickrate = null;
@@ -68,8 +69,8 @@ namespace SteamKit2.GC.CSGO.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint tick
         {
-            get { return __pbn__tick.GetValueOrDefault(); }
-            set { __pbn__tick = value; }
+            get => __pbn__tick.GetValueOrDefault();
+            set => __pbn__tick = value;
         }
         public bool ShouldSerializetick() => __pbn__tick != null;
         public void Resettick() => __pbn__tick = null;
@@ -78,8 +79,8 @@ namespace SteamKit2.GC.CSGO.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public float rtdelay
         {
-            get { return __pbn__rtdelay.GetValueOrDefault(); }
-            set { __pbn__rtdelay = value; }
+            get => __pbn__rtdelay.GetValueOrDefault();
+            set => __pbn__rtdelay = value;
         }
         public bool ShouldSerializertdelay() => __pbn__rtdelay != null;
         public void Resetrtdelay() => __pbn__rtdelay = null;
@@ -88,8 +89,8 @@ namespace SteamKit2.GC.CSGO.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public float rcvage
         {
-            get { return __pbn__rcvage.GetValueOrDefault(); }
-            set { __pbn__rcvage = value; }
+            get => __pbn__rcvage.GetValueOrDefault();
+            set => __pbn__rcvage = value;
         }
         public bool ShouldSerializercvage() => __pbn__rcvage != null;
         public void Resetrcvage() => __pbn__rcvage = null;
@@ -98,8 +99,8 @@ namespace SteamKit2.GC.CSGO.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public float keyframe_interval
         {
-            get { return __pbn__keyframe_interval.GetValueOrDefault(); }
-            set { __pbn__keyframe_interval = value; }
+            get => __pbn__keyframe_interval.GetValueOrDefault();
+            set => __pbn__keyframe_interval = value;
         }
         public bool ShouldSerializekeyframe_interval() => __pbn__keyframe_interval != null;
         public void Resetkeyframe_interval() => __pbn__keyframe_interval = null;
@@ -108,8 +109,8 @@ namespace SteamKit2.GC.CSGO.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public uint cdndelay
         {
-            get { return __pbn__cdndelay.GetValueOrDefault(); }
-            set { __pbn__cdndelay = value; }
+            get => __pbn__cdndelay.GetValueOrDefault();
+            set => __pbn__cdndelay = value;
         }
         public bool ShouldSerializecdndelay() => __pbn__cdndelay != null;
         public void Resetcdndelay() => __pbn__cdndelay = null;
@@ -119,4 +120,5 @@ namespace SteamKit2.GC.CSGO.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

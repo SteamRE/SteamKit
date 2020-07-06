@@ -4,7 +4,8 @@
 //   Input: steammessages_chat.steamclient.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.Internal
 {
 
@@ -36,8 +37,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steamid_partner
         {
-            get { return __pbn__steamid_partner.GetValueOrDefault(); }
-            set { __pbn__steamid_partner = value; }
+            get => __pbn__steamid_partner.GetValueOrDefault();
+            set => __pbn__steamid_partner = value;
         }
         public bool ShouldSerializesteamid_partner() => __pbn__steamid_partner != null;
         public void Resetsteamid_partner() => __pbn__steamid_partner = null;
@@ -46,8 +47,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steamid_invited
         {
-            get { return __pbn__steamid_invited.GetValueOrDefault(); }
-            set { __pbn__steamid_invited = value; }
+            get => __pbn__steamid_invited.GetValueOrDefault();
+            set => __pbn__steamid_invited = value;
         }
         public bool ShouldSerializesteamid_invited() => __pbn__steamid_invited != null;
         public void Resetsteamid_invited() => __pbn__steamid_invited = null;
@@ -57,8 +58,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string name
         {
-            get { return __pbn__name ?? ""; }
-            set { __pbn__name = value; }
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
         }
         public bool ShouldSerializename() => __pbn__name != null;
         public void Resetname() => __pbn__name = null;
@@ -70,8 +71,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint watching_broadcast_accountid
         {
-            get { return __pbn__watching_broadcast_accountid.GetValueOrDefault(); }
-            set { __pbn__watching_broadcast_accountid = value; }
+            get => __pbn__watching_broadcast_accountid.GetValueOrDefault();
+            set => __pbn__watching_broadcast_accountid = value;
         }
         public bool ShouldSerializewatching_broadcast_accountid() => __pbn__watching_broadcast_accountid != null;
         public void Resetwatching_broadcast_accountid() => __pbn__watching_broadcast_accountid = null;
@@ -80,8 +81,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public ulong watching_broadcast_channel_id
         {
-            get { return __pbn__watching_broadcast_channel_id.GetValueOrDefault(); }
-            set { __pbn__watching_broadcast_channel_id = value; }
+            get => __pbn__watching_broadcast_channel_id.GetValueOrDefault();
+            set => __pbn__watching_broadcast_channel_id = value;
         }
         public bool ShouldSerializewatching_broadcast_channel_id() => __pbn__watching_broadcast_channel_id != null;
         public void Resetwatching_broadcast_channel_id() => __pbn__watching_broadcast_channel_id = null;
@@ -99,8 +100,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong role_id
         {
-            get { return __pbn__role_id.GetValueOrDefault(); }
-            set { __pbn__role_id = value; }
+            get => __pbn__role_id.GetValueOrDefault();
+            set => __pbn__role_id = value;
         }
         public bool ShouldSerializerole_id() => __pbn__role_id != null;
         public void Resetrole_id() => __pbn__role_id = null;
@@ -110,8 +111,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string name
         {
-            get { return __pbn__name ?? ""; }
-            set { __pbn__name = value; }
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
         }
         public bool ShouldSerializename() => __pbn__name != null;
         public void Resetname() => __pbn__name = null;
@@ -120,8 +121,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint ordinal
         {
-            get { return __pbn__ordinal.GetValueOrDefault(); }
-            set { __pbn__ordinal = value; }
+            get => __pbn__ordinal.GetValueOrDefault();
+            set => __pbn__ordinal = value;
         }
         public bool ShouldSerializeordinal() => __pbn__ordinal != null;
         public void Resetordinal() => __pbn__ordinal = null;
@@ -139,8 +140,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong role_id
         {
-            get { return __pbn__role_id.GetValueOrDefault(); }
-            set { __pbn__role_id = value; }
+            get => __pbn__role_id.GetValueOrDefault();
+            set => __pbn__role_id = value;
         }
         public bool ShouldSerializerole_id() => __pbn__role_id != null;
         public void Resetrole_id() => __pbn__role_id = null;
@@ -149,8 +150,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public bool can_create_rename_delete_channel
         {
-            get { return __pbn__can_create_rename_delete_channel.GetValueOrDefault(); }
-            set { __pbn__can_create_rename_delete_channel = value; }
+            get => __pbn__can_create_rename_delete_channel.GetValueOrDefault();
+            set => __pbn__can_create_rename_delete_channel = value;
         }
         public bool ShouldSerializecan_create_rename_delete_channel() => __pbn__can_create_rename_delete_channel != null;
         public void Resetcan_create_rename_delete_channel() => __pbn__can_create_rename_delete_channel = null;
@@ -159,8 +160,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public bool can_kick
         {
-            get { return __pbn__can_kick.GetValueOrDefault(); }
-            set { __pbn__can_kick = value; }
+            get => __pbn__can_kick.GetValueOrDefault();
+            set => __pbn__can_kick = value;
         }
         public bool ShouldSerializecan_kick() => __pbn__can_kick != null;
         public void Resetcan_kick() => __pbn__can_kick = null;
@@ -169,8 +170,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public bool can_ban
         {
-            get { return __pbn__can_ban.GetValueOrDefault(); }
-            set { __pbn__can_ban = value; }
+            get => __pbn__can_ban.GetValueOrDefault();
+            set => __pbn__can_ban = value;
         }
         public bool ShouldSerializecan_ban() => __pbn__can_ban != null;
         public void Resetcan_ban() => __pbn__can_ban = null;
@@ -179,8 +180,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public bool can_invite
         {
-            get { return __pbn__can_invite.GetValueOrDefault(); }
-            set { __pbn__can_invite = value; }
+            get => __pbn__can_invite.GetValueOrDefault();
+            set => __pbn__can_invite = value;
         }
         public bool ShouldSerializecan_invite() => __pbn__can_invite != null;
         public void Resetcan_invite() => __pbn__can_invite = null;
@@ -189,8 +190,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public bool can_change_tagline_avatar_name
         {
-            get { return __pbn__can_change_tagline_avatar_name.GetValueOrDefault(); }
-            set { __pbn__can_change_tagline_avatar_name = value; }
+            get => __pbn__can_change_tagline_avatar_name.GetValueOrDefault();
+            set => __pbn__can_change_tagline_avatar_name = value;
         }
         public bool ShouldSerializecan_change_tagline_avatar_name() => __pbn__can_change_tagline_avatar_name != null;
         public void Resetcan_change_tagline_avatar_name() => __pbn__can_change_tagline_avatar_name = null;
@@ -199,8 +200,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public bool can_chat
         {
-            get { return __pbn__can_chat.GetValueOrDefault(); }
-            set { __pbn__can_chat = value; }
+            get => __pbn__can_chat.GetValueOrDefault();
+            set => __pbn__can_chat = value;
         }
         public bool ShouldSerializecan_chat() => __pbn__can_chat != null;
         public void Resetcan_chat() => __pbn__can_chat = null;
@@ -209,8 +210,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public bool can_view_history
         {
-            get { return __pbn__can_view_history.GetValueOrDefault(); }
-            set { __pbn__can_view_history = value; }
+            get => __pbn__can_view_history.GetValueOrDefault();
+            set => __pbn__can_view_history = value;
         }
         public bool ShouldSerializecan_view_history() => __pbn__can_view_history != null;
         public void Resetcan_view_history() => __pbn__can_view_history = null;
@@ -219,8 +220,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public bool can_change_group_roles
         {
-            get { return __pbn__can_change_group_roles.GetValueOrDefault(); }
-            set { __pbn__can_change_group_roles = value; }
+            get => __pbn__can_change_group_roles.GetValueOrDefault();
+            set => __pbn__can_change_group_roles = value;
         }
         public bool ShouldSerializecan_change_group_roles() => __pbn__can_change_group_roles != null;
         public void Resetcan_change_group_roles() => __pbn__can_change_group_roles = null;
@@ -229,8 +230,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public bool can_change_user_roles
         {
-            get { return __pbn__can_change_user_roles.GetValueOrDefault(); }
-            set { __pbn__can_change_user_roles = value; }
+            get => __pbn__can_change_user_roles.GetValueOrDefault();
+            set => __pbn__can_change_user_roles = value;
         }
         public bool ShouldSerializecan_change_user_roles() => __pbn__can_change_user_roles != null;
         public void Resetcan_change_user_roles() => __pbn__can_change_user_roles = null;
@@ -239,8 +240,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public bool can_mention_all
         {
-            get { return __pbn__can_mention_all.GetValueOrDefault(); }
-            set { __pbn__can_mention_all = value; }
+            get => __pbn__can_mention_all.GetValueOrDefault();
+            set => __pbn__can_mention_all = value;
         }
         public bool ShouldSerializecan_mention_all() => __pbn__can_mention_all != null;
         public void Resetcan_mention_all() => __pbn__can_mention_all = null;
@@ -249,8 +250,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(12)]
         public bool can_set_watching_broadcast
         {
-            get { return __pbn__can_set_watching_broadcast.GetValueOrDefault(); }
-            set { __pbn__can_set_watching_broadcast = value; }
+            get => __pbn__can_set_watching_broadcast.GetValueOrDefault();
+            set => __pbn__can_set_watching_broadcast = value;
         }
         public bool ShouldSerializecan_set_watching_broadcast() => __pbn__can_set_watching_broadcast != null;
         public void Resetcan_set_watching_broadcast() => __pbn__can_set_watching_broadcast = null;
@@ -268,8 +269,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint app_id
         {
-            get { return __pbn__app_id.GetValueOrDefault(); }
-            set { __pbn__app_id = value; }
+            get => __pbn__app_id.GetValueOrDefault();
+            set => __pbn__app_id = value;
         }
         public bool ShouldSerializeapp_id() => __pbn__app_id != null;
         public void Resetapp_id() => __pbn__app_id = null;
@@ -278,8 +279,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steamid_owner
         {
-            get { return __pbn__steamid_owner.GetValueOrDefault(); }
-            set { __pbn__steamid_owner = value; }
+            get => __pbn__steamid_owner.GetValueOrDefault();
+            set => __pbn__steamid_owner = value;
         }
         public bool ShouldSerializesteamid_owner() => __pbn__steamid_owner != null;
         public void Resetsteamid_owner() => __pbn__steamid_owner = null;
@@ -288,8 +289,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong beacon_id
         {
-            get { return __pbn__beacon_id.GetValueOrDefault(); }
-            set { __pbn__beacon_id = value; }
+            get => __pbn__beacon_id.GetValueOrDefault();
+            set => __pbn__beacon_id = value;
         }
         public bool ShouldSerializebeacon_id() => __pbn__beacon_id != null;
         public void Resetbeacon_id() => __pbn__beacon_id = null;
@@ -299,8 +300,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string game_metadata
         {
-            get { return __pbn__game_metadata ?? ""; }
-            set { __pbn__game_metadata = value; }
+            get => __pbn__game_metadata ?? "";
+            set => __pbn__game_metadata = value;
         }
         public bool ShouldSerializegame_metadata() => __pbn__game_metadata != null;
         public void Resetgame_metadata() => __pbn__game_metadata = null;
@@ -318,8 +319,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -329,8 +330,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string chat_name
         {
-            get { return __pbn__chat_name ?? ""; }
-            set { __pbn__chat_name = value; }
+            get => __pbn__chat_name ?? "";
+            set => __pbn__chat_name = value;
         }
         public bool ShouldSerializechat_name() => __pbn__chat_name != null;
         public void Resetchat_name() => __pbn__chat_name = null;
@@ -339,8 +340,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(13)]
         public uint clanid
         {
-            get { return __pbn__clanid.GetValueOrDefault(); }
-            set { __pbn__clanid = value; }
+            get => __pbn__clanid.GetValueOrDefault();
+            set => __pbn__clanid = value;
         }
         public bool ShouldSerializeclanid() => __pbn__clanid != null;
         public void Resetclanid() => __pbn__clanid = null;
@@ -349,8 +350,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(14)]
         public uint accountid_owner
         {
-            get { return __pbn__accountid_owner.GetValueOrDefault(); }
-            set { __pbn__accountid_owner = value; }
+            get => __pbn__accountid_owner.GetValueOrDefault();
+            set => __pbn__accountid_owner = value;
         }
         public bool ShouldSerializeaccountid_owner() => __pbn__accountid_owner != null;
         public void Resetaccountid_owner() => __pbn__accountid_owner = null;
@@ -359,8 +360,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(21)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -370,8 +371,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string tagline
         {
-            get { return __pbn__tagline ?? ""; }
-            set { __pbn__tagline = value; }
+            get => __pbn__tagline ?? "";
+            set => __pbn__tagline = value;
         }
         public bool ShouldSerializetagline() => __pbn__tagline != null;
         public void Resettagline() => __pbn__tagline = null;
@@ -380,8 +381,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(16)]
         public byte[] avatar_sha
         {
-            get { return __pbn__avatar_sha; }
-            set { __pbn__avatar_sha = value; }
+            get => __pbn__avatar_sha;
+            set => __pbn__avatar_sha = value;
         }
         public bool ShouldSerializeavatar_sha() => __pbn__avatar_sha != null;
         public void Resetavatar_sha() => __pbn__avatar_sha = null;
@@ -390,8 +391,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(17)]
         public ulong default_role_id
         {
-            get { return __pbn__default_role_id.GetValueOrDefault(); }
-            set { __pbn__default_role_id = value; }
+            get => __pbn__default_role_id.GetValueOrDefault();
+            set => __pbn__default_role_id = value;
         }
         public bool ShouldSerializedefault_role_id() => __pbn__default_role_id != null;
         public void Resetdefault_role_id() => __pbn__default_role_id = null;
@@ -406,8 +407,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(20)]
         public uint watching_broadcast_accountid
         {
-            get { return __pbn__watching_broadcast_accountid.GetValueOrDefault(); }
-            set { __pbn__watching_broadcast_accountid = value; }
+            get => __pbn__watching_broadcast_accountid.GetValueOrDefault();
+            set => __pbn__watching_broadcast_accountid = value;
         }
         public bool ShouldSerializewatching_broadcast_accountid() => __pbn__watching_broadcast_accountid != null;
         public void Resetwatching_broadcast_accountid() => __pbn__watching_broadcast_accountid = null;
@@ -419,8 +420,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(23)]
         public ulong watching_broadcast_channel_id
         {
-            get { return __pbn__watching_broadcast_channel_id.GetValueOrDefault(); }
-            set { __pbn__watching_broadcast_channel_id = value; }
+            get => __pbn__watching_broadcast_channel_id.GetValueOrDefault();
+            set => __pbn__watching_broadcast_channel_id = value;
         }
         public bool ShouldSerializewatching_broadcast_channel_id() => __pbn__watching_broadcast_channel_id != null;
         public void Resetwatching_broadcast_channel_id() => __pbn__watching_broadcast_channel_id = null;
@@ -429,8 +430,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(24)]
         public ulong active_minigame_id
         {
-            get { return __pbn__active_minigame_id.GetValueOrDefault(); }
-            set { __pbn__active_minigame_id = value; }
+            get => __pbn__active_minigame_id.GetValueOrDefault();
+            set => __pbn__active_minigame_id = value;
         }
         public bool ShouldSerializeactive_minigame_id() => __pbn__active_minigame_id != null;
         public void Resetactive_minigame_id() => __pbn__active_minigame_id = null;
@@ -440,8 +441,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string avatar_ugc_url
         {
-            get { return __pbn__avatar_ugc_url ?? ""; }
-            set { __pbn__avatar_ugc_url = value; }
+            get => __pbn__avatar_ugc_url ?? "";
+            set => __pbn__avatar_ugc_url = value;
         }
         public bool ShouldSerializeavatar_ugc_url() => __pbn__avatar_ugc_url != null;
         public void Resetavatar_ugc_url() => __pbn__avatar_ugc_url = null;
@@ -459,8 +460,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint accountid
         {
-            get { return __pbn__accountid.GetValueOrDefault(); }
-            set { __pbn__accountid = value; }
+            get => __pbn__accountid.GetValueOrDefault();
+            set => __pbn__accountid = value;
         }
         public bool ShouldSerializeaccountid() => __pbn__accountid != null;
         public void Resetaccountid() => __pbn__accountid = null;
@@ -470,8 +471,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(EChatRoomJoinState.k_EChatRoomJoinState_Default)]
         public EChatRoomJoinState state
         {
-            get { return __pbn__state ?? EChatRoomJoinState.k_EChatRoomJoinState_Default; }
-            set { __pbn__state = value; }
+            get => __pbn__state ?? EChatRoomJoinState.k_EChatRoomJoinState_Default;
+            set => __pbn__state = value;
         }
         public bool ShouldSerializestate() => __pbn__state != null;
         public void Resetstate() => __pbn__state = null;
@@ -481,8 +482,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(EChatRoomGroupRank.k_EChatRoomGroupRank_Default)]
         public EChatRoomGroupRank rank
         {
-            get { return __pbn__rank ?? EChatRoomGroupRank.k_EChatRoomGroupRank_Default; }
-            set { __pbn__rank = value; }
+            get => __pbn__rank ?? EChatRoomGroupRank.k_EChatRoomGroupRank_Default;
+            set => __pbn__rank = value;
         }
         public bool ShouldSerializerank() => __pbn__rank != null;
         public void Resetrank() => __pbn__rank = null;
@@ -491,8 +492,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint time_kick_expire
         {
-            get { return __pbn__time_kick_expire.GetValueOrDefault(); }
-            set { __pbn__time_kick_expire = value; }
+            get => __pbn__time_kick_expire.GetValueOrDefault();
+            set => __pbn__time_kick_expire = value;
         }
         public bool ShouldSerializetime_kick_expire() => __pbn__time_kick_expire != null;
         public void Resettime_kick_expire() => __pbn__time_kick_expire = null;
@@ -513,8 +514,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -524,8 +525,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string chat_name
         {
-            get { return __pbn__chat_name ?? ""; }
-            set { __pbn__chat_name = value; }
+            get => __pbn__chat_name ?? "";
+            set => __pbn__chat_name = value;
         }
         public bool ShouldSerializechat_name() => __pbn__chat_name != null;
         public void Resetchat_name() => __pbn__chat_name = null;
@@ -534,8 +535,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public bool voice_allowed
         {
-            get { return __pbn__voice_allowed.GetValueOrDefault(); }
-            set { __pbn__voice_allowed = value; }
+            get => __pbn__voice_allowed.GetValueOrDefault();
+            set => __pbn__voice_allowed = value;
         }
         public bool ShouldSerializevoice_allowed() => __pbn__voice_allowed != null;
         public void Resetvoice_allowed() => __pbn__voice_allowed = null;
@@ -547,8 +548,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint time_last_message
         {
-            get { return __pbn__time_last_message.GetValueOrDefault(); }
-            set { __pbn__time_last_message = value; }
+            get => __pbn__time_last_message.GetValueOrDefault();
+            set => __pbn__time_last_message = value;
         }
         public bool ShouldSerializetime_last_message() => __pbn__time_last_message != null;
         public void Resettime_last_message() => __pbn__time_last_message = null;
@@ -557,8 +558,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint sort_order
         {
-            get { return __pbn__sort_order.GetValueOrDefault(); }
-            set { __pbn__sort_order = value; }
+            get => __pbn__sort_order.GetValueOrDefault();
+            set => __pbn__sort_order = value;
         }
         public bool ShouldSerializesort_order() => __pbn__sort_order != null;
         public void Resetsort_order() => __pbn__sort_order = null;
@@ -568,8 +569,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string last_message
         {
-            get { return __pbn__last_message ?? ""; }
-            set { __pbn__last_message = value; }
+            get => __pbn__last_message ?? "";
+            set => __pbn__last_message = value;
         }
         public bool ShouldSerializelast_message() => __pbn__last_message != null;
         public void Resetlast_message() => __pbn__last_message = null;
@@ -578,8 +579,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint accountid_last_message
         {
-            get { return __pbn__accountid_last_message.GetValueOrDefault(); }
-            set { __pbn__accountid_last_message = value; }
+            get => __pbn__accountid_last_message.GetValueOrDefault();
+            set => __pbn__accountid_last_message = value;
         }
         public bool ShouldSerializeaccountid_last_message() => __pbn__accountid_last_message != null;
         public void Resetaccountid_last_message() => __pbn__accountid_last_message = null;
@@ -603,8 +604,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public ulong default_chat_id
         {
-            get { return __pbn__default_chat_id.GetValueOrDefault(); }
-            set { __pbn__default_chat_id = value; }
+            get => __pbn__default_chat_id.GetValueOrDefault();
+            set => __pbn__default_chat_id = value;
         }
         public bool ShouldSerializedefault_chat_id() => __pbn__default_chat_id != null;
         public void Resetdefault_chat_id() => __pbn__default_chat_id = null;
@@ -628,8 +629,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -638,8 +639,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint time_joined
         {
-            get { return __pbn__time_joined.GetValueOrDefault(); }
-            set { __pbn__time_joined = value; }
+            get => __pbn__time_joined.GetValueOrDefault();
+            set => __pbn__time_joined = value;
         }
         public bool ShouldSerializetime_joined() => __pbn__time_joined != null;
         public void Resettime_joined() => __pbn__time_joined = null;
@@ -648,8 +649,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint time_last_ack
         {
-            get { return __pbn__time_last_ack.GetValueOrDefault(); }
-            set { __pbn__time_last_ack = value; }
+            get => __pbn__time_last_ack.GetValueOrDefault();
+            set => __pbn__time_last_ack = value;
         }
         public bool ShouldSerializetime_last_ack() => __pbn__time_last_ack != null;
         public void Resettime_last_ack() => __pbn__time_last_ack = null;
@@ -659,8 +660,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid)]
         public EChatRoomNotificationLevel desktop_notification_level
         {
-            get { return __pbn__desktop_notification_level ?? EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid; }
-            set { __pbn__desktop_notification_level = value; }
+            get => __pbn__desktop_notification_level ?? EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid;
+            set => __pbn__desktop_notification_level = value;
         }
         public bool ShouldSerializedesktop_notification_level() => __pbn__desktop_notification_level != null;
         public void Resetdesktop_notification_level() => __pbn__desktop_notification_level = null;
@@ -670,8 +671,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid)]
         public EChatRoomNotificationLevel mobile_notification_level
         {
-            get { return __pbn__mobile_notification_level ?? EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid; }
-            set { __pbn__mobile_notification_level = value; }
+            get => __pbn__mobile_notification_level ?? EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid;
+            set => __pbn__mobile_notification_level = value;
         }
         public bool ShouldSerializemobile_notification_level() => __pbn__mobile_notification_level != null;
         public void Resetmobile_notification_level() => __pbn__mobile_notification_level = null;
@@ -680,8 +681,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint time_last_mention
         {
-            get { return __pbn__time_last_mention.GetValueOrDefault(); }
-            set { __pbn__time_last_mention = value; }
+            get => __pbn__time_last_mention.GetValueOrDefault();
+            set => __pbn__time_last_mention = value;
         }
         public bool ShouldSerializetime_last_mention() => __pbn__time_last_mention != null;
         public void Resettime_last_mention() => __pbn__time_last_mention = null;
@@ -691,8 +692,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(false)]
         public bool unread_indicator_muted
         {
-            get { return __pbn__unread_indicator_muted ?? false; }
-            set { __pbn__unread_indicator_muted = value; }
+            get => __pbn__unread_indicator_muted ?? false;
+            set => __pbn__unread_indicator_muted = value;
         }
         public bool ShouldSerializeunread_indicator_muted() => __pbn__unread_indicator_muted != null;
         public void Resetunread_indicator_muted() => __pbn__unread_indicator_muted = null;
@@ -701,8 +702,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint time_first_unread
         {
-            get { return __pbn__time_first_unread.GetValueOrDefault(); }
-            set { __pbn__time_first_unread = value; }
+            get => __pbn__time_first_unread.GetValueOrDefault();
+            set => __pbn__time_first_unread = value;
         }
         public bool ShouldSerializetime_first_unread() => __pbn__time_first_unread != null;
         public void Resettime_first_unread() => __pbn__time_first_unread = null;
@@ -720,8 +721,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -730,8 +731,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint time_joined
         {
-            get { return __pbn__time_joined.GetValueOrDefault(); }
-            set { __pbn__time_joined = value; }
+            get => __pbn__time_joined.GetValueOrDefault();
+            set => __pbn__time_joined = value;
         }
         public bool ShouldSerializetime_joined() => __pbn__time_joined != null;
         public void Resettime_joined() => __pbn__time_joined = null;
@@ -744,8 +745,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid)]
         public EChatRoomNotificationLevel desktop_notification_level
         {
-            get { return __pbn__desktop_notification_level ?? EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid; }
-            set { __pbn__desktop_notification_level = value; }
+            get => __pbn__desktop_notification_level ?? EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid;
+            set => __pbn__desktop_notification_level = value;
         }
         public bool ShouldSerializedesktop_notification_level() => __pbn__desktop_notification_level != null;
         public void Resetdesktop_notification_level() => __pbn__desktop_notification_level = null;
@@ -755,8 +756,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid)]
         public EChatRoomNotificationLevel mobile_notification_level
         {
-            get { return __pbn__mobile_notification_level ?? EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid; }
-            set { __pbn__mobile_notification_level = value; }
+            get => __pbn__mobile_notification_level ?? EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid;
+            set => __pbn__mobile_notification_level = value;
         }
         public bool ShouldSerializemobile_notification_level() => __pbn__mobile_notification_level != null;
         public void Resetmobile_notification_level() => __pbn__mobile_notification_level = null;
@@ -765,8 +766,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint time_last_group_ack
         {
-            get { return __pbn__time_last_group_ack.GetValueOrDefault(); }
-            set { __pbn__time_last_group_ack = value; }
+            get => __pbn__time_last_group_ack.GetValueOrDefault();
+            set => __pbn__time_last_group_ack = value;
         }
         public bool ShouldSerializetime_last_group_ack() => __pbn__time_last_group_ack != null;
         public void Resettime_last_group_ack() => __pbn__time_last_group_ack = null;
@@ -776,8 +777,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(false)]
         public bool unread_indicator_muted
         {
-            get { return __pbn__unread_indicator_muted ?? false; }
-            set { __pbn__unread_indicator_muted = value; }
+            get => __pbn__unread_indicator_muted ?? false;
+            set => __pbn__unread_indicator_muted = value;
         }
         public bool ShouldSerializeunread_indicator_muted() => __pbn__unread_indicator_muted != null;
         public void Resetunread_indicator_muted() => __pbn__unread_indicator_muted = null;
@@ -795,8 +796,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -820,8 +821,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -831,8 +832,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string name
         {
-            get { return __pbn__name ?? ""; }
-            set { __pbn__name = value; }
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
         }
         public bool ShouldSerializename() => __pbn__name != null;
         public void Resetname() => __pbn__name = null;
@@ -859,8 +860,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -870,8 +871,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string name
         {
-            get { return __pbn__name ?? ""; }
-            set { __pbn__name = value; }
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
         }
         public bool ShouldSerializename() => __pbn__name != null;
         public void Resetname() => __pbn__name = null;
@@ -890,8 +891,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string name
         {
-            get { return __pbn__name ?? ""; }
-            set { __pbn__name = value; }
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
         }
         public bool ShouldSerializename() => __pbn__name != null;
         public void Resetname() => __pbn__name = null;
@@ -909,8 +910,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -920,8 +921,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string tagline
         {
-            get { return __pbn__tagline ?? ""; }
-            set { __pbn__tagline = value; }
+            get => __pbn__tagline ?? "";
+            set => __pbn__tagline = value;
         }
         public bool ShouldSerializetagline() => __pbn__tagline != null;
         public void Resettagline() => __pbn__tagline = null;
@@ -948,8 +949,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -958,8 +959,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public byte[] avatar_sha
         {
-            get { return __pbn__avatar_sha; }
-            set { __pbn__avatar_sha = value; }
+            get => __pbn__avatar_sha;
+            set => __pbn__avatar_sha = value;
         }
         public bool ShouldSerializeavatar_sha() => __pbn__avatar_sha != null;
         public void Resetavatar_sha() => __pbn__avatar_sha = null;
@@ -986,8 +987,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -996,8 +997,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint watching_broadcast_accountid
         {
-            get { return __pbn__watching_broadcast_accountid.GetValueOrDefault(); }
-            set { __pbn__watching_broadcast_accountid = value; }
+            get => __pbn__watching_broadcast_accountid.GetValueOrDefault();
+            set => __pbn__watching_broadcast_accountid = value;
         }
         public bool ShouldSerializewatching_broadcast_accountid() => __pbn__watching_broadcast_accountid != null;
         public void Resetwatching_broadcast_accountid() => __pbn__watching_broadcast_accountid = null;
@@ -1006,8 +1007,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong watching_broadcast_channel_id
         {
-            get { return __pbn__watching_broadcast_channel_id.GetValueOrDefault(); }
-            set { __pbn__watching_broadcast_channel_id = value; }
+            get => __pbn__watching_broadcast_channel_id.GetValueOrDefault();
+            set => __pbn__watching_broadcast_channel_id = value;
         }
         public bool ShouldSerializewatching_broadcast_channel_id() => __pbn__watching_broadcast_channel_id != null;
         public void Resetwatching_broadcast_channel_id() => __pbn__watching_broadcast_channel_id = null;
@@ -1034,8 +1035,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1044,8 +1045,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -1063,8 +1064,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong minigame_id
         {
-            get { return __pbn__minigame_id.GetValueOrDefault(); }
-            set { __pbn__minigame_id = value; }
+            get => __pbn__minigame_id.GetValueOrDefault();
+            set => __pbn__minigame_id = value;
         }
         public bool ShouldSerializeminigame_id() => __pbn__minigame_id != null;
         public void Resetminigame_id() => __pbn__minigame_id = null;
@@ -1082,8 +1083,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1092,8 +1093,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -1102,8 +1103,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong minigame_id
         {
-            get { return __pbn__minigame_id.GetValueOrDefault(); }
-            set { __pbn__minigame_id = value; }
+            get => __pbn__minigame_id.GetValueOrDefault();
+            set => __pbn__minigame_id = value;
         }
         public bool ShouldSerializeminigame_id() => __pbn__minigame_id != null;
         public void Resetminigame_id() => __pbn__minigame_id = null;
@@ -1130,8 +1131,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1140,8 +1141,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steamid
         {
-            get { return __pbn__steamid.GetValueOrDefault(); }
-            set { __pbn__steamid = value; }
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
         }
         public bool ShouldSerializesteamid() => __pbn__steamid != null;
         public void Resetsteamid() => __pbn__steamid = null;
@@ -1150,8 +1151,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public int expiration
         {
-            get { return __pbn__expiration.GetValueOrDefault(); }
-            set { __pbn__expiration = value; }
+            get => __pbn__expiration.GetValueOrDefault();
+            set => __pbn__expiration = value;
         }
         public bool ShouldSerializeexpiration() => __pbn__expiration != null;
         public void Resetexpiration() => __pbn__expiration = null;
@@ -1178,8 +1179,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1188,8 +1189,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steamid
         {
-            get { return __pbn__steamid.GetValueOrDefault(); }
-            set { __pbn__steamid = value; }
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
         }
         public bool ShouldSerializesteamid() => __pbn__steamid != null;
         public void Resetsteamid() => __pbn__steamid = null;
@@ -1198,8 +1199,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public int expiration
         {
-            get { return __pbn__expiration.GetValueOrDefault(); }
-            set { __pbn__expiration = value; }
+            get => __pbn__expiration.GetValueOrDefault();
+            set => __pbn__expiration = value;
         }
         public bool ShouldSerializeexpiration() => __pbn__expiration != null;
         public void Resetexpiration() => __pbn__expiration = null;
@@ -1226,8 +1227,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1236,8 +1237,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steamid
         {
-            get { return __pbn__steamid.GetValueOrDefault(); }
-            set { __pbn__steamid = value; }
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
         }
         public bool ShouldSerializesteamid() => __pbn__steamid != null;
         public void Resetsteamid() => __pbn__steamid = null;
@@ -1246,8 +1247,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public bool ban_state
         {
-            get { return __pbn__ban_state.GetValueOrDefault(); }
-            set { __pbn__ban_state = value; }
+            get => __pbn__ban_state.GetValueOrDefault();
+            set => __pbn__ban_state = value;
         }
         public bool ShouldSerializeban_state() => __pbn__ban_state != null;
         public void Resetban_state() => __pbn__ban_state = null;
@@ -1274,8 +1275,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1284,8 +1285,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steamid
         {
-            get { return __pbn__steamid.GetValueOrDefault(); }
-            set { __pbn__steamid = value; }
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
         }
         public bool ShouldSerializesteamid() => __pbn__steamid != null;
         public void Resetsteamid() => __pbn__steamid = null;
@@ -1312,8 +1313,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1323,8 +1324,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string name
         {
-            get { return __pbn__name ?? ""; }
-            set { __pbn__name = value; }
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
         }
         public bool ShouldSerializename() => __pbn__name != null;
         public void Resetname() => __pbn__name = null;
@@ -1354,8 +1355,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1385,8 +1386,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1395,8 +1396,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong role_id
         {
-            get { return __pbn__role_id.GetValueOrDefault(); }
-            set { __pbn__role_id = value; }
+            get => __pbn__role_id.GetValueOrDefault();
+            set => __pbn__role_id = value;
         }
         public bool ShouldSerializerole_id() => __pbn__role_id != null;
         public void Resetrole_id() => __pbn__role_id = null;
@@ -1406,8 +1407,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string name
         {
-            get { return __pbn__name ?? ""; }
-            set { __pbn__name = value; }
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
         }
         public bool ShouldSerializename() => __pbn__name != null;
         public void Resetname() => __pbn__name = null;
@@ -1434,8 +1435,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1444,8 +1445,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong role_id
         {
-            get { return __pbn__role_id.GetValueOrDefault(); }
-            set { __pbn__role_id = value; }
+            get => __pbn__role_id.GetValueOrDefault();
+            set => __pbn__role_id = value;
         }
         public bool ShouldSerializerole_id() => __pbn__role_id != null;
         public void Resetrole_id() => __pbn__role_id = null;
@@ -1454,8 +1455,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint ordinal
         {
-            get { return __pbn__ordinal.GetValueOrDefault(); }
-            set { __pbn__ordinal = value; }
+            get => __pbn__ordinal.GetValueOrDefault();
+            set => __pbn__ordinal = value;
         }
         public bool ShouldSerializeordinal() => __pbn__ordinal != null;
         public void Resetordinal() => __pbn__ordinal = null;
@@ -1482,8 +1483,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1492,8 +1493,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong role_id
         {
-            get { return __pbn__role_id.GetValueOrDefault(); }
-            set { __pbn__role_id = value; }
+            get => __pbn__role_id.GetValueOrDefault();
+            set => __pbn__role_id = value;
         }
         public bool ShouldSerializerole_id() => __pbn__role_id != null;
         public void Resetrole_id() => __pbn__role_id = null;
@@ -1520,8 +1521,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1530,8 +1531,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong role_id
         {
-            get { return __pbn__role_id.GetValueOrDefault(); }
-            set { __pbn__role_id = value; }
+            get => __pbn__role_id.GetValueOrDefault();
+            set => __pbn__role_id = value;
         }
         public bool ShouldSerializerole_id() => __pbn__role_id != null;
         public void Resetrole_id() => __pbn__role_id = null;
@@ -1561,8 +1562,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1571,8 +1572,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong role_id
         {
-            get { return __pbn__role_id.GetValueOrDefault(); }
-            set { __pbn__role_id = value; }
+            get => __pbn__role_id.GetValueOrDefault();
+            set => __pbn__role_id = value;
         }
         public bool ShouldSerializerole_id() => __pbn__role_id != null;
         public void Resetrole_id() => __pbn__role_id = null;
@@ -1602,8 +1603,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1612,8 +1613,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong role_id
         {
-            get { return __pbn__role_id.GetValueOrDefault(); }
-            set { __pbn__role_id = value; }
+            get => __pbn__role_id.GetValueOrDefault();
+            set => __pbn__role_id = value;
         }
         public bool ShouldSerializerole_id() => __pbn__role_id != null;
         public void Resetrole_id() => __pbn__role_id = null;
@@ -1622,8 +1623,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steamid
         {
-            get { return __pbn__steamid.GetValueOrDefault(); }
-            set { __pbn__steamid = value; }
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
         }
         public bool ShouldSerializesteamid() => __pbn__steamid != null;
         public void Resetsteamid() => __pbn__steamid = null;
@@ -1650,8 +1651,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1660,8 +1661,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steamid
         {
-            get { return __pbn__steamid.GetValueOrDefault(); }
-            set { __pbn__steamid = value; }
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
         }
         public bool ShouldSerializesteamid() => __pbn__steamid != null;
         public void Resetsteamid() => __pbn__steamid = null;
@@ -1691,8 +1692,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1701,8 +1702,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong role_id
         {
-            get { return __pbn__role_id.GetValueOrDefault(); }
-            set { __pbn__role_id = value; }
+            get => __pbn__role_id.GetValueOrDefault();
+            set => __pbn__role_id = value;
         }
         public bool ShouldSerializerole_id() => __pbn__role_id != null;
         public void Resetrole_id() => __pbn__role_id = null;
@@ -1711,8 +1712,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steamid
         {
-            get { return __pbn__steamid.GetValueOrDefault(); }
-            set { __pbn__steamid = value; }
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
         }
         public bool ShouldSerializesteamid() => __pbn__steamid != null;
         public void Resetsteamid() => __pbn__steamid = null;
@@ -1739,8 +1740,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1750,8 +1751,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string invite_code
         {
-            get { return __pbn__invite_code ?? ""; }
-            set { __pbn__invite_code = value; }
+            get => __pbn__invite_code ?? "";
+            set => __pbn__invite_code = value;
         }
         public bool ShouldSerializeinvite_code() => __pbn__invite_code != null;
         public void Resetinvite_code() => __pbn__invite_code = null;
@@ -1760,8 +1761,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -1785,8 +1786,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public ulong join_chat_id
         {
-            get { return __pbn__join_chat_id.GetValueOrDefault(); }
-            set { __pbn__join_chat_id = value; }
+            get => __pbn__join_chat_id.GetValueOrDefault();
+            set => __pbn__join_chat_id = value;
         }
         public bool ShouldSerializejoin_chat_id() => __pbn__join_chat_id != null;
         public void Resetjoin_chat_id() => __pbn__join_chat_id = null;
@@ -1795,8 +1796,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint time_expire
         {
-            get { return __pbn__time_expire.GetValueOrDefault(); }
-            set { __pbn__time_expire = value; }
+            get => __pbn__time_expire.GetValueOrDefault();
+            set => __pbn__time_expire = value;
         }
         public bool ShouldSerializetime_expire() => __pbn__time_expire != null;
         public void Resettime_expire() => __pbn__time_expire = null;
@@ -1814,8 +1815,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1824,8 +1825,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steamid
         {
-            get { return __pbn__steamid.GetValueOrDefault(); }
-            set { __pbn__steamid = value; }
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
         }
         public bool ShouldSerializesteamid() => __pbn__steamid != null;
         public void Resetsteamid() => __pbn__steamid = null;
@@ -1834,8 +1835,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -1844,8 +1845,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public bool skip_friendsui_check
         {
-            get { return __pbn__skip_friendsui_check.GetValueOrDefault(); }
-            set { __pbn__skip_friendsui_check = value; }
+            get => __pbn__skip_friendsui_check.GetValueOrDefault();
+            set => __pbn__skip_friendsui_check = value;
         }
         public bool ShouldSerializeskip_friendsui_check() => __pbn__skip_friendsui_check != null;
         public void Resetskip_friendsui_check() => __pbn__skip_friendsui_check = null;
@@ -1872,8 +1873,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1900,8 +1901,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1911,8 +1912,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string name
         {
-            get { return __pbn__name ?? ""; }
-            set { __pbn__name = value; }
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
         }
         public bool ShouldSerializename() => __pbn__name != null;
         public void Resetname() => __pbn__name = null;
@@ -1921,8 +1922,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public bool allow_voice
         {
-            get { return __pbn__allow_voice.GetValueOrDefault(); }
-            set { __pbn__allow_voice = value; }
+            get => __pbn__allow_voice.GetValueOrDefault();
+            set => __pbn__allow_voice = value;
         }
         public bool ShouldSerializeallow_voice() => __pbn__allow_voice != null;
         public void Resetallow_voice() => __pbn__allow_voice = null;
@@ -1952,8 +1953,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -1962,8 +1963,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -1990,8 +1991,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -2000,8 +2001,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -2011,8 +2012,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string name
         {
-            get { return __pbn__name ?? ""; }
-            set { __pbn__name = value; }
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
         }
         public bool ShouldSerializename() => __pbn__name != null;
         public void Resetname() => __pbn__name = null;
@@ -2039,8 +2040,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -2049,8 +2050,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -2059,8 +2060,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong move_after_chat_id
         {
-            get { return __pbn__move_after_chat_id.GetValueOrDefault(); }
-            set { __pbn__move_after_chat_id = value; }
+            get => __pbn__move_after_chat_id.GetValueOrDefault();
+            set => __pbn__move_after_chat_id = value;
         }
         public bool ShouldSerializemove_after_chat_id() => __pbn__move_after_chat_id != null;
         public void Resetmove_after_chat_id() => __pbn__move_after_chat_id = null;
@@ -2087,8 +2088,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -2097,8 +2098,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -2108,8 +2109,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string message
         {
-            get { return __pbn__message ?? ""; }
-            set { __pbn__message = value; }
+            get => __pbn__message ?? "";
+            set => __pbn__message = value;
         }
         public bool ShouldSerializemessage() => __pbn__message != null;
         public void Resetmessage() => __pbn__message = null;
@@ -2118,8 +2119,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public bool echo_to_sender
         {
-            get { return __pbn__echo_to_sender.GetValueOrDefault(); }
-            set { __pbn__echo_to_sender = value; }
+            get => __pbn__echo_to_sender.GetValueOrDefault();
+            set => __pbn__echo_to_sender = value;
         }
         public bool ShouldSerializeecho_to_sender() => __pbn__echo_to_sender != null;
         public void Resetecho_to_sender() => __pbn__echo_to_sender = null;
@@ -2138,8 +2139,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string modified_message
         {
-            get { return __pbn__modified_message ?? ""; }
-            set { __pbn__modified_message = value; }
+            get => __pbn__modified_message ?? "";
+            set => __pbn__modified_message = value;
         }
         public bool ShouldSerializemodified_message() => __pbn__modified_message != null;
         public void Resetmodified_message() => __pbn__modified_message = null;
@@ -2148,8 +2149,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint server_timestamp
         {
-            get { return __pbn__server_timestamp.GetValueOrDefault(); }
-            set { __pbn__server_timestamp = value; }
+            get => __pbn__server_timestamp.GetValueOrDefault();
+            set => __pbn__server_timestamp = value;
         }
         public bool ShouldSerializeserver_timestamp() => __pbn__server_timestamp != null;
         public void Resetserver_timestamp() => __pbn__server_timestamp = null;
@@ -2158,8 +2159,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint ordinal
         {
-            get { return __pbn__ordinal.GetValueOrDefault(); }
-            set { __pbn__ordinal = value; }
+            get => __pbn__ordinal.GetValueOrDefault();
+            set => __pbn__ordinal = value;
         }
         public bool ShouldSerializeordinal() => __pbn__ordinal != null;
         public void Resetordinal() => __pbn__ordinal = null;
@@ -2169,8 +2170,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string message_without_bb_code
         {
-            get { return __pbn__message_without_bb_code ?? ""; }
-            set { __pbn__message_without_bb_code = value; }
+            get => __pbn__message_without_bb_code ?? "";
+            set => __pbn__message_without_bb_code = value;
         }
         public bool ShouldSerializemessage_without_bb_code() => __pbn__message_without_bb_code != null;
         public void Resetmessage_without_bb_code() => __pbn__message_without_bb_code = null;
@@ -2188,8 +2189,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -2198,8 +2199,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -2217,8 +2218,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong voice_chatid
         {
-            get { return __pbn__voice_chatid.GetValueOrDefault(); }
-            set { __pbn__voice_chatid = value; }
+            get => __pbn__voice_chatid.GetValueOrDefault();
+            set => __pbn__voice_chatid = value;
         }
         public bool ShouldSerializevoice_chatid() => __pbn__voice_chatid != null;
         public void Resetvoice_chatid() => __pbn__voice_chatid = null;
@@ -2236,8 +2237,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -2246,8 +2247,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -2274,8 +2275,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -2284,8 +2285,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -2294,8 +2295,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint last_time
         {
-            get { return __pbn__last_time.GetValueOrDefault(); }
-            set { __pbn__last_time = value; }
+            get => __pbn__last_time.GetValueOrDefault();
+            set => __pbn__last_time = value;
         }
         public bool ShouldSerializelast_time() => __pbn__last_time != null;
         public void Resetlast_time() => __pbn__last_time = null;
@@ -2304,8 +2305,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint last_ordinal
         {
-            get { return __pbn__last_ordinal.GetValueOrDefault(); }
-            set { __pbn__last_ordinal = value; }
+            get => __pbn__last_ordinal.GetValueOrDefault();
+            set => __pbn__last_ordinal = value;
         }
         public bool ShouldSerializelast_ordinal() => __pbn__last_ordinal != null;
         public void Resetlast_ordinal() => __pbn__last_ordinal = null;
@@ -2314,8 +2315,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint start_time
         {
-            get { return __pbn__start_time.GetValueOrDefault(); }
-            set { __pbn__start_time = value; }
+            get => __pbn__start_time.GetValueOrDefault();
+            set => __pbn__start_time = value;
         }
         public bool ShouldSerializestart_time() => __pbn__start_time != null;
         public void Resetstart_time() => __pbn__start_time = null;
@@ -2324,8 +2325,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint start_ordinal
         {
-            get { return __pbn__start_ordinal.GetValueOrDefault(); }
-            set { __pbn__start_ordinal = value; }
+            get => __pbn__start_ordinal.GetValueOrDefault();
+            set => __pbn__start_ordinal = value;
         }
         public bool ShouldSerializestart_ordinal() => __pbn__start_ordinal != null;
         public void Resetstart_ordinal() => __pbn__start_ordinal = null;
@@ -2334,8 +2335,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint max_count
         {
-            get { return __pbn__max_count.GetValueOrDefault(); }
-            set { __pbn__max_count = value; }
+            get => __pbn__max_count.GetValueOrDefault();
+            set => __pbn__max_count = value;
         }
         public bool ShouldSerializemax_count() => __pbn__max_count != null;
         public void Resetmax_count() => __pbn__max_count = null;
@@ -2354,8 +2355,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(EChatRoomServerMessage.k_EChatRoomServerMsg_Invalid)]
         public EChatRoomServerMessage message
         {
-            get { return __pbn__message ?? EChatRoomServerMessage.k_EChatRoomServerMsg_Invalid; }
-            set { __pbn__message = value; }
+            get => __pbn__message ?? EChatRoomServerMessage.k_EChatRoomServerMsg_Invalid;
+            set => __pbn__message = value;
         }
         public bool ShouldSerializemessage() => __pbn__message != null;
         public void Resetmessage() => __pbn__message = null;
@@ -2365,8 +2366,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string string_param
         {
-            get { return __pbn__string_param ?? ""; }
-            set { __pbn__string_param = value; }
+            get => __pbn__string_param ?? "";
+            set => __pbn__string_param = value;
         }
         public bool ShouldSerializestring_param() => __pbn__string_param != null;
         public void Resetstring_param() => __pbn__string_param = null;
@@ -2375,8 +2376,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint accountid_param
         {
-            get { return __pbn__accountid_param.GetValueOrDefault(); }
-            set { __pbn__accountid_param = value; }
+            get => __pbn__accountid_param.GetValueOrDefault();
+            set => __pbn__accountid_param = value;
         }
         public bool ShouldSerializeaccountid_param() => __pbn__accountid_param != null;
         public void Resetaccountid_param() => __pbn__accountid_param = null;
@@ -2397,8 +2398,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public bool more_available
         {
-            get { return __pbn__more_available.GetValueOrDefault(); }
-            set { __pbn__more_available = value; }
+            get => __pbn__more_available.GetValueOrDefault();
+            set => __pbn__more_available = value;
         }
         public bool ShouldSerializemore_available() => __pbn__more_available != null;
         public void Resetmore_available() => __pbn__more_available = null;
@@ -2414,8 +2415,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint sender
             {
-                get { return __pbn__sender.GetValueOrDefault(); }
-                set { __pbn__sender = value; }
+                get => __pbn__sender.GetValueOrDefault();
+                set => __pbn__sender = value;
             }
             public bool ShouldSerializesender() => __pbn__sender != null;
             public void Resetsender() => __pbn__sender = null;
@@ -2424,8 +2425,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint server_timestamp
             {
-                get { return __pbn__server_timestamp.GetValueOrDefault(); }
-                set { __pbn__server_timestamp = value; }
+                get => __pbn__server_timestamp.GetValueOrDefault();
+                set => __pbn__server_timestamp = value;
             }
             public bool ShouldSerializeserver_timestamp() => __pbn__server_timestamp != null;
             public void Resetserver_timestamp() => __pbn__server_timestamp = null;
@@ -2435,8 +2436,8 @@ namespace SteamKit2.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string message
             {
-                get { return __pbn__message ?? ""; }
-                set { __pbn__message = value; }
+                get => __pbn__message ?? "";
+                set => __pbn__message = value;
             }
             public bool ShouldSerializemessage() => __pbn__message != null;
             public void Resetmessage() => __pbn__message = null;
@@ -2445,8 +2446,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint ordinal
             {
-                get { return __pbn__ordinal.GetValueOrDefault(); }
-                set { __pbn__ordinal = value; }
+                get => __pbn__ordinal.GetValueOrDefault();
+                set => __pbn__ordinal = value;
             }
             public bool ShouldSerializeordinal() => __pbn__ordinal != null;
             public void Resetordinal() => __pbn__ordinal = null;
@@ -2458,8 +2459,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(6)]
             public bool deleted
             {
-                get { return __pbn__deleted.GetValueOrDefault(); }
-                set { __pbn__deleted = value; }
+                get => __pbn__deleted.GetValueOrDefault();
+                set => __pbn__deleted = value;
             }
             public bool ShouldSerializedeleted() => __pbn__deleted != null;
             public void Resetdeleted() => __pbn__deleted = null;
@@ -2488,8 +2489,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -2499,8 +2500,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string chat_group_name
         {
-            get { return __pbn__chat_group_name ?? ""; }
-            set { __pbn__chat_group_name = value; }
+            get => __pbn__chat_group_name ?? "";
+            set => __pbn__chat_group_name = value;
         }
         public bool ShouldSerializechat_group_name() => __pbn__chat_group_name != null;
         public void Resetchat_group_name() => __pbn__chat_group_name = null;
@@ -2509,8 +2510,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint active_member_count
         {
-            get { return __pbn__active_member_count.GetValueOrDefault(); }
-            set { __pbn__active_member_count = value; }
+            get => __pbn__active_member_count.GetValueOrDefault();
+            set => __pbn__active_member_count = value;
         }
         public bool ShouldSerializeactive_member_count() => __pbn__active_member_count != null;
         public void Resetactive_member_count() => __pbn__active_member_count = null;
@@ -2519,8 +2520,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint active_voice_member_count
         {
-            get { return __pbn__active_voice_member_count.GetValueOrDefault(); }
-            set { __pbn__active_voice_member_count = value; }
+            get => __pbn__active_voice_member_count.GetValueOrDefault();
+            set => __pbn__active_voice_member_count = value;
         }
         public bool ShouldSerializeactive_voice_member_count() => __pbn__active_voice_member_count != null;
         public void Resetactive_voice_member_count() => __pbn__active_voice_member_count = null;
@@ -2529,8 +2530,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public ulong default_chat_id
         {
-            get { return __pbn__default_chat_id.GetValueOrDefault(); }
-            set { __pbn__default_chat_id = value; }
+            get => __pbn__default_chat_id.GetValueOrDefault();
+            set => __pbn__default_chat_id = value;
         }
         public bool ShouldSerializedefault_chat_id() => __pbn__default_chat_id != null;
         public void Resetdefault_chat_id() => __pbn__default_chat_id = null;
@@ -2542,8 +2543,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint clanid
         {
-            get { return __pbn__clanid.GetValueOrDefault(); }
-            set { __pbn__clanid = value; }
+            get => __pbn__clanid.GetValueOrDefault();
+            set => __pbn__clanid = value;
         }
         public bool ShouldSerializeclanid() => __pbn__clanid != null;
         public void Resetclanid() => __pbn__clanid = null;
@@ -2553,8 +2554,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string chat_group_tagline
         {
-            get { return __pbn__chat_group_tagline ?? ""; }
-            set { __pbn__chat_group_tagline = value; }
+            get => __pbn__chat_group_tagline ?? "";
+            set => __pbn__chat_group_tagline = value;
         }
         public bool ShouldSerializechat_group_tagline() => __pbn__chat_group_tagline != null;
         public void Resetchat_group_tagline() => __pbn__chat_group_tagline = null;
@@ -2563,8 +2564,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public uint accountid_owner
         {
-            get { return __pbn__accountid_owner.GetValueOrDefault(); }
-            set { __pbn__accountid_owner = value; }
+            get => __pbn__accountid_owner.GetValueOrDefault();
+            set => __pbn__accountid_owner = value;
         }
         public bool ShouldSerializeaccountid_owner() => __pbn__accountid_owner != null;
         public void Resetaccountid_owner() => __pbn__accountid_owner = null;
@@ -2576,8 +2577,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public byte[] chat_group_avatar_sha
         {
-            get { return __pbn__chat_group_avatar_sha; }
-            set { __pbn__chat_group_avatar_sha = value; }
+            get => __pbn__chat_group_avatar_sha;
+            set => __pbn__chat_group_avatar_sha = value;
         }
         public bool ShouldSerializechat_group_avatar_sha() => __pbn__chat_group_avatar_sha != null;
         public void Resetchat_group_avatar_sha() => __pbn__chat_group_avatar_sha = null;
@@ -2587,8 +2588,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(EChatRoomGroupRank.k_EChatRoomGroupRank_Default)]
         public EChatRoomGroupRank rank
         {
-            get { return __pbn__rank ?? EChatRoomGroupRank.k_EChatRoomGroupRank_Default; }
-            set { __pbn__rank = value; }
+            get => __pbn__rank ?? EChatRoomGroupRank.k_EChatRoomGroupRank_Default;
+            set => __pbn__rank = value;
         }
         public bool ShouldSerializerank() => __pbn__rank != null;
         public void Resetrank() => __pbn__rank = null;
@@ -2597,8 +2598,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(13)]
         public ulong default_role_id
         {
-            get { return __pbn__default_role_id.GetValueOrDefault(); }
-            set { __pbn__default_role_id = value; }
+            get => __pbn__default_role_id.GetValueOrDefault();
+            set => __pbn__default_role_id = value;
         }
         public bool ShouldSerializedefault_role_id() => __pbn__default_role_id != null;
         public void Resetdefault_role_id() => __pbn__default_role_id = null;
@@ -2613,8 +2614,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(16)]
         public uint watching_broadcast_accountid
         {
-            get { return __pbn__watching_broadcast_accountid.GetValueOrDefault(); }
-            set { __pbn__watching_broadcast_accountid = value; }
+            get => __pbn__watching_broadcast_accountid.GetValueOrDefault();
+            set => __pbn__watching_broadcast_accountid = value;
         }
         public bool ShouldSerializewatching_broadcast_accountid() => __pbn__watching_broadcast_accountid != null;
         public void Resetwatching_broadcast_accountid() => __pbn__watching_broadcast_accountid = null;
@@ -2623,8 +2624,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(17)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -2636,8 +2637,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(19)]
         public ulong watching_broadcast_channel_id
         {
-            get { return __pbn__watching_broadcast_channel_id.GetValueOrDefault(); }
-            set { __pbn__watching_broadcast_channel_id = value; }
+            get => __pbn__watching_broadcast_channel_id.GetValueOrDefault();
+            set => __pbn__watching_broadcast_channel_id = value;
         }
         public bool ShouldSerializewatching_broadcast_channel_id() => __pbn__watching_broadcast_channel_id != null;
         public void Resetwatching_broadcast_channel_id() => __pbn__watching_broadcast_channel_id = null;
@@ -2646,8 +2647,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(20)]
         public ulong active_minigame_id
         {
-            get { return __pbn__active_minigame_id.GetValueOrDefault(); }
-            set { __pbn__active_minigame_id = value; }
+            get => __pbn__active_minigame_id.GetValueOrDefault();
+            set => __pbn__active_minigame_id = value;
         }
         public bool ShouldSerializeactive_minigame_id() => __pbn__active_minigame_id != null;
         public void Resetactive_minigame_id() => __pbn__active_minigame_id = null;
@@ -2657,8 +2658,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string avatar_ugc_url
         {
-            get { return __pbn__avatar_ugc_url ?? ""; }
-            set { __pbn__avatar_ugc_url = value; }
+            get => __pbn__avatar_ugc_url ?? "";
+            set => __pbn__avatar_ugc_url = value;
         }
         public bool ShouldSerializeavatar_ugc_url() => __pbn__avatar_ugc_url != null;
         public void Resetavatar_ugc_url() => __pbn__avatar_ugc_url = null;
@@ -2703,8 +2704,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -2734,8 +2735,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -2753,8 +2754,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -2763,8 +2764,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint requesting_app_id
         {
-            get { return __pbn__requesting_app_id.GetValueOrDefault(); }
-            set { __pbn__requesting_app_id = value; }
+            get => __pbn__requesting_app_id.GetValueOrDefault();
+            set => __pbn__requesting_app_id = value;
         }
         public bool ShouldSerializerequesting_app_id() => __pbn__requesting_app_id != null;
         public void Resetrequesting_app_id() => __pbn__requesting_app_id = null;
@@ -2782,8 +2783,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint result
         {
-            get { return __pbn__result.GetValueOrDefault(); }
-            set { __pbn__result = value; }
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -2804,8 +2805,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -2814,8 +2815,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint requesting_app_id
         {
-            get { return __pbn__requesting_app_id.GetValueOrDefault(); }
-            set { __pbn__requesting_app_id = value; }
+            get => __pbn__requesting_app_id.GetValueOrDefault();
+            set => __pbn__requesting_app_id = value;
         }
         public bool ShouldSerializerequesting_app_id() => __pbn__requesting_app_id != null;
         public void Resetrequesting_app_id() => __pbn__requesting_app_id = null;
@@ -2833,8 +2834,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -2843,8 +2844,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -2853,8 +2854,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint timestamp
         {
-            get { return __pbn__timestamp.GetValueOrDefault(); }
-            set { __pbn__timestamp = value; }
+            get => __pbn__timestamp.GetValueOrDefault();
+            set => __pbn__timestamp = value;
         }
         public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
         public void Resettimestamp() => __pbn__timestamp = null;
@@ -2872,8 +2873,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -2882,8 +2883,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint seconds_valid
         {
-            get { return __pbn__seconds_valid.GetValueOrDefault(); }
-            set { __pbn__seconds_valid = value; }
+            get => __pbn__seconds_valid.GetValueOrDefault();
+            set => __pbn__seconds_valid = value;
         }
         public bool ShouldSerializeseconds_valid() => __pbn__seconds_valid != null;
         public void Resetseconds_valid() => __pbn__seconds_valid = null;
@@ -2892,8 +2893,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -2912,8 +2913,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string invite_code
         {
-            get { return __pbn__invite_code ?? ""; }
-            set { __pbn__invite_code = value; }
+            get => __pbn__invite_code ?? "";
+            set => __pbn__invite_code = value;
         }
         public bool ShouldSerializeinvite_code() => __pbn__invite_code != null;
         public void Resetinvite_code() => __pbn__invite_code = null;
@@ -2922,8 +2923,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint seconds_valid
         {
-            get { return __pbn__seconds_valid.GetValueOrDefault(); }
-            set { __pbn__seconds_valid = value; }
+            get => __pbn__seconds_valid.GetValueOrDefault();
+            set => __pbn__seconds_valid = value;
         }
         public bool ShouldSerializeseconds_valid() => __pbn__seconds_valid != null;
         public void Resetseconds_valid() => __pbn__seconds_valid = null;
@@ -2942,8 +2943,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string invite_code
         {
-            get { return __pbn__invite_code ?? ""; }
-            set { __pbn__invite_code = value; }
+            get => __pbn__invite_code ?? "";
+            set => __pbn__invite_code = value;
         }
         public bool ShouldSerializeinvite_code() => __pbn__invite_code != null;
         public void Resetinvite_code() => __pbn__invite_code = null;
@@ -2961,8 +2962,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steamid_sender
         {
-            get { return __pbn__steamid_sender.GetValueOrDefault(); }
-            set { __pbn__steamid_sender = value; }
+            get => __pbn__steamid_sender.GetValueOrDefault();
+            set => __pbn__steamid_sender = value;
         }
         public bool ShouldSerializesteamid_sender() => __pbn__steamid_sender != null;
         public void Resetsteamid_sender() => __pbn__steamid_sender = null;
@@ -2971,8 +2972,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint time_expires
         {
-            get { return __pbn__time_expires.GetValueOrDefault(); }
-            set { __pbn__time_expires = value; }
+            get => __pbn__time_expires.GetValueOrDefault();
+            set => __pbn__time_expires = value;
         }
         public bool ShouldSerializetime_expires() => __pbn__time_expires != null;
         public void Resettime_expires() => __pbn__time_expires = null;
@@ -2981,8 +2982,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -2997,8 +2998,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public uint time_kick_expire
         {
-            get { return __pbn__time_kick_expire.GetValueOrDefault(); }
-            set { __pbn__time_kick_expire = value; }
+            get => __pbn__time_kick_expire.GetValueOrDefault();
+            set => __pbn__time_kick_expire = value;
         }
         public bool ShouldSerializetime_kick_expire() => __pbn__time_kick_expire != null;
         public void Resettime_kick_expire() => __pbn__time_kick_expire = null;
@@ -3007,8 +3008,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public bool banned
         {
-            get { return __pbn__banned.GetValueOrDefault(); }
-            set { __pbn__banned = value; }
+            get => __pbn__banned.GetValueOrDefault();
+            set => __pbn__banned = value;
         }
         public bool ShouldSerializebanned() => __pbn__banned != null;
         public void Resetbanned() => __pbn__banned = null;
@@ -3026,8 +3027,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steamid_invitee
         {
-            get { return __pbn__steamid_invitee.GetValueOrDefault(); }
-            set { __pbn__steamid_invitee = value; }
+            get => __pbn__steamid_invitee.GetValueOrDefault();
+            set => __pbn__steamid_invitee = value;
         }
         public bool ShouldSerializesteamid_invitee() => __pbn__steamid_invitee != null;
         public void Resetsteamid_invitee() => __pbn__steamid_invitee = null;
@@ -3036,8 +3037,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -3046,8 +3047,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -3057,8 +3058,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string invite_code
         {
-            get { return __pbn__invite_code ?? ""; }
-            set { __pbn__invite_code = value; }
+            get => __pbn__invite_code ?? "";
+            set => __pbn__invite_code = value;
         }
         public bool ShouldSerializeinvite_code() => __pbn__invite_code != null;
         public void Resetinvite_code() => __pbn__invite_code = null;
@@ -3079,8 +3080,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint time_kick_expire
         {
-            get { return __pbn__time_kick_expire.GetValueOrDefault(); }
-            set { __pbn__time_kick_expire = value; }
+            get => __pbn__time_kick_expire.GetValueOrDefault();
+            set => __pbn__time_kick_expire = value;
         }
         public bool ShouldSerializetime_kick_expire() => __pbn__time_kick_expire != null;
         public void Resettime_kick_expire() => __pbn__time_kick_expire = null;
@@ -3089,8 +3090,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public bool banned
         {
-            get { return __pbn__banned.GetValueOrDefault(); }
-            set { __pbn__banned = value; }
+            get => __pbn__banned.GetValueOrDefault();
+            set => __pbn__banned = value;
         }
         public bool ShouldSerializebanned() => __pbn__banned != null;
         public void Resetbanned() => __pbn__banned = null;
@@ -3108,8 +3109,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -3138,8 +3139,8 @@ namespace SteamKit2.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string invite_code
             {
-                get { return __pbn__invite_code ?? ""; }
-                set { __pbn__invite_code = value; }
+                get => __pbn__invite_code ?? "";
+                set => __pbn__invite_code = value;
             }
             public bool ShouldSerializeinvite_code() => __pbn__invite_code != null;
             public void Resetinvite_code() => __pbn__invite_code = null;
@@ -3148,8 +3149,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public ulong steamid_creator
             {
-                get { return __pbn__steamid_creator.GetValueOrDefault(); }
-                set { __pbn__steamid_creator = value; }
+                get => __pbn__steamid_creator.GetValueOrDefault();
+                set => __pbn__steamid_creator = value;
             }
             public bool ShouldSerializesteamid_creator() => __pbn__steamid_creator != null;
             public void Resetsteamid_creator() => __pbn__steamid_creator = null;
@@ -3158,8 +3159,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint time_expires
             {
-                get { return __pbn__time_expires.GetValueOrDefault(); }
-                set { __pbn__time_expires = value; }
+                get => __pbn__time_expires.GetValueOrDefault();
+                set => __pbn__time_expires = value;
             }
             public bool ShouldSerializetime_expires() => __pbn__time_expires != null;
             public void Resettime_expires() => __pbn__time_expires = null;
@@ -3168,8 +3169,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public ulong chat_id
             {
-                get { return __pbn__chat_id.GetValueOrDefault(); }
-                set { __pbn__chat_id = value; }
+                get => __pbn__chat_id.GetValueOrDefault();
+                set => __pbn__chat_id = value;
             }
             public bool ShouldSerializechat_id() => __pbn__chat_id != null;
             public void Resetchat_id() => __pbn__chat_id = null;
@@ -3189,8 +3190,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -3218,8 +3219,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint accountid
             {
-                get { return __pbn__accountid.GetValueOrDefault(); }
-                set { __pbn__accountid = value; }
+                get => __pbn__accountid.GetValueOrDefault();
+                set => __pbn__accountid = value;
             }
             public bool ShouldSerializeaccountid() => __pbn__accountid != null;
             public void Resetaccountid() => __pbn__accountid = null;
@@ -3228,8 +3229,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint accountid_actor
             {
-                get { return __pbn__accountid_actor.GetValueOrDefault(); }
-                set { __pbn__accountid_actor = value; }
+                get => __pbn__accountid_actor.GetValueOrDefault();
+                set => __pbn__accountid_actor = value;
             }
             public bool ShouldSerializeaccountid_actor() => __pbn__accountid_actor != null;
             public void Resetaccountid_actor() => __pbn__accountid_actor = null;
@@ -3238,8 +3239,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint time_banned
             {
-                get { return __pbn__time_banned.GetValueOrDefault(); }
-                set { __pbn__time_banned = value; }
+                get => __pbn__time_banned.GetValueOrDefault();
+                set => __pbn__time_banned = value;
             }
             public bool ShouldSerializetime_banned() => __pbn__time_banned != null;
             public void Resettime_banned() => __pbn__time_banned = null;
@@ -3249,8 +3250,8 @@ namespace SteamKit2.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string ban_reason
             {
-                get { return __pbn__ban_reason ?? ""; }
-                set { __pbn__ban_reason = value; }
+                get => __pbn__ban_reason ?? "";
+                set => __pbn__ban_reason = value;
             }
             public bool ShouldSerializeban_reason() => __pbn__ban_reason != null;
             public void Resetban_reason() => __pbn__ban_reason = null;
@@ -3270,8 +3271,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -3289,8 +3290,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint accountid
         {
-            get { return __pbn__accountid.GetValueOrDefault(); }
-            set { __pbn__accountid = value; }
+            get => __pbn__accountid.GetValueOrDefault();
+            set => __pbn__accountid = value;
         }
         public bool ShouldSerializeaccountid() => __pbn__accountid != null;
         public void Resetaccountid() => __pbn__accountid = null;
@@ -3299,8 +3300,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint accountid_actor
         {
-            get { return __pbn__accountid_actor.GetValueOrDefault(); }
-            set { __pbn__accountid_actor = value; }
+            get => __pbn__accountid_actor.GetValueOrDefault();
+            set => __pbn__accountid_actor = value;
         }
         public bool ShouldSerializeaccountid_actor() => __pbn__accountid_actor != null;
         public void Resetaccountid_actor() => __pbn__accountid_actor = null;
@@ -3309,8 +3310,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint time_invited
         {
-            get { return __pbn__time_invited.GetValueOrDefault(); }
-            set { __pbn__time_invited = value; }
+            get => __pbn__time_invited.GetValueOrDefault();
+            set => __pbn__time_invited = value;
         }
         public bool ShouldSerializetime_invited() => __pbn__time_invited != null;
         public void Resettime_invited() => __pbn__time_invited = null;
@@ -3340,8 +3341,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -3351,8 +3352,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string invite_code
         {
-            get { return __pbn__invite_code ?? ""; }
-            set { __pbn__invite_code = value; }
+            get => __pbn__invite_code ?? "";
+            set => __pbn__invite_code = value;
         }
         public bool ShouldSerializeinvite_code() => __pbn__invite_code != null;
         public void Resetinvite_code() => __pbn__invite_code = null;
@@ -3385,8 +3386,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public int virtualize_members_threshold
         {
-            get { return __pbn__virtualize_members_threshold.GetValueOrDefault(); }
-            set { __pbn__virtualize_members_threshold = value; }
+            get => __pbn__virtualize_members_threshold.GetValueOrDefault();
+            set => __pbn__virtualize_members_threshold = value;
         }
         public bool ShouldSerializevirtualize_members_threshold() => __pbn__virtualize_members_threshold != null;
         public void Resetvirtualize_members_threshold() => __pbn__virtualize_members_threshold = null;
@@ -3419,8 +3420,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -3443,8 +3444,8 @@ namespace SteamKit2.Internal
             [global::System.ComponentModel.DefaultValue(EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid)]
             public EChatRoomNotificationLevel desktop_notification_level
             {
-                get { return __pbn__desktop_notification_level ?? EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid; }
-                set { __pbn__desktop_notification_level = value; }
+                get => __pbn__desktop_notification_level ?? EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid;
+                set => __pbn__desktop_notification_level = value;
             }
             public bool ShouldSerializedesktop_notification_level() => __pbn__desktop_notification_level != null;
             public void Resetdesktop_notification_level() => __pbn__desktop_notification_level = null;
@@ -3454,8 +3455,8 @@ namespace SteamKit2.Internal
             [global::System.ComponentModel.DefaultValue(EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid)]
             public EChatRoomNotificationLevel mobile_notification_level
             {
-                get { return __pbn__mobile_notification_level ?? EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid; }
-                set { __pbn__mobile_notification_level = value; }
+                get => __pbn__mobile_notification_level ?? EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid;
+                set => __pbn__mobile_notification_level = value;
             }
             public bool ShouldSerializemobile_notification_level() => __pbn__mobile_notification_level != null;
             public void Resetmobile_notification_level() => __pbn__mobile_notification_level = null;
@@ -3464,8 +3465,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public bool unread_indicator_muted
             {
-                get { return __pbn__unread_indicator_muted.GetValueOrDefault(); }
-                set { __pbn__unread_indicator_muted = value; }
+                get => __pbn__unread_indicator_muted.GetValueOrDefault();
+                set => __pbn__unread_indicator_muted = value;
             }
             public bool ShouldSerializeunread_indicator_muted() => __pbn__unread_indicator_muted != null;
             public void Resetunread_indicator_muted() => __pbn__unread_indicator_muted = null;
@@ -3483,8 +3484,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public ulong chat_id
             {
-                get { return __pbn__chat_id.GetValueOrDefault(); }
-                set { __pbn__chat_id = value; }
+                get => __pbn__chat_id.GetValueOrDefault();
+                set => __pbn__chat_id = value;
             }
             public bool ShouldSerializechat_id() => __pbn__chat_id != null;
             public void Resetchat_id() => __pbn__chat_id = null;
@@ -3494,8 +3495,8 @@ namespace SteamKit2.Internal
             [global::System.ComponentModel.DefaultValue(EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid)]
             public EChatRoomNotificationLevel desktop_notification_level
             {
-                get { return __pbn__desktop_notification_level ?? EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid; }
-                set { __pbn__desktop_notification_level = value; }
+                get => __pbn__desktop_notification_level ?? EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid;
+                set => __pbn__desktop_notification_level = value;
             }
             public bool ShouldSerializedesktop_notification_level() => __pbn__desktop_notification_level != null;
             public void Resetdesktop_notification_level() => __pbn__desktop_notification_level = null;
@@ -3505,8 +3506,8 @@ namespace SteamKit2.Internal
             [global::System.ComponentModel.DefaultValue(EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid)]
             public EChatRoomNotificationLevel mobile_notification_level
             {
-                get { return __pbn__mobile_notification_level ?? EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid; }
-                set { __pbn__mobile_notification_level = value; }
+                get => __pbn__mobile_notification_level ?? EChatRoomNotificationLevel.k_EChatroomNotificationLevel_Invalid;
+                set => __pbn__mobile_notification_level = value;
             }
             public bool ShouldSerializemobile_notification_level() => __pbn__mobile_notification_level != null;
             public void Resetmobile_notification_level() => __pbn__mobile_notification_level = null;
@@ -3515,8 +3516,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public bool unread_indicator_muted
             {
-                get { return __pbn__unread_indicator_muted.GetValueOrDefault(); }
-                set { __pbn__unread_indicator_muted = value; }
+                get => __pbn__unread_indicator_muted.GetValueOrDefault();
+                set => __pbn__unread_indicator_muted = value;
             }
             public bool ShouldSerializeunread_indicator_muted() => __pbn__unread_indicator_muted != null;
             public void Resetunread_indicator_muted() => __pbn__unread_indicator_muted = null;
@@ -3545,8 +3546,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -3555,8 +3556,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -3575,8 +3576,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint server_timestamp
             {
-                get { return __pbn__server_timestamp.GetValueOrDefault(); }
-                set { __pbn__server_timestamp = value; }
+                get => __pbn__server_timestamp.GetValueOrDefault();
+                set => __pbn__server_timestamp = value;
             }
             public bool ShouldSerializeserver_timestamp() => __pbn__server_timestamp != null;
             public void Resetserver_timestamp() => __pbn__server_timestamp = null;
@@ -3585,8 +3586,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint ordinal
             {
-                get { return __pbn__ordinal.GetValueOrDefault(); }
-                set { __pbn__ordinal = value; }
+                get => __pbn__ordinal.GetValueOrDefault();
+                set => __pbn__ordinal = value;
             }
             public bool ShouldSerializeordinal() => __pbn__ordinal != null;
             public void Resetordinal() => __pbn__ordinal = null;
@@ -3615,8 +3616,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -3625,8 +3626,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong view_id
         {
-            get { return __pbn__view_id.GetValueOrDefault(); }
-            set { __pbn__view_id = value; }
+            get => __pbn__view_id.GetValueOrDefault();
+            set => __pbn__view_id = value;
         }
         public bool ShouldSerializeview_id() => __pbn__view_id != null;
         public void Resetview_id() => __pbn__view_id = null;
@@ -3635,8 +3636,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public int start
         {
-            get { return __pbn__start.GetValueOrDefault(); }
-            set { __pbn__start = value; }
+            get => __pbn__start.GetValueOrDefault();
+            set => __pbn__start = value;
         }
         public bool ShouldSerializestart() => __pbn__start != null;
         public void Resetstart() => __pbn__start = null;
@@ -3645,8 +3646,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public int end
         {
-            get { return __pbn__end.GetValueOrDefault(); }
-            set { __pbn__end = value; }
+            get => __pbn__end.GetValueOrDefault();
+            set => __pbn__end = value;
         }
         public bool ShouldSerializeend() => __pbn__end != null;
         public void Resetend() => __pbn__end = null;
@@ -3655,8 +3656,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public int client_changenumber
         {
-            get { return __pbn__client_changenumber.GetValueOrDefault(); }
-            set { __pbn__client_changenumber = value; }
+            get => __pbn__client_changenumber.GetValueOrDefault();
+            set => __pbn__client_changenumber = value;
         }
         public bool ShouldSerializeclient_changenumber() => __pbn__client_changenumber != null;
         public void Resetclient_changenumber() => __pbn__client_changenumber = null;
@@ -3665,8 +3666,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public bool delete_view
         {
-            get { return __pbn__delete_view.GetValueOrDefault(); }
-            set { __pbn__delete_view = value; }
+            get => __pbn__delete_view.GetValueOrDefault();
+            set => __pbn__delete_view = value;
         }
         public bool ShouldSerializedelete_view() => __pbn__delete_view != null;
         public void Resetdelete_view() => __pbn__delete_view = null;
@@ -3690,8 +3691,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -3700,8 +3701,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong search_id
         {
-            get { return __pbn__search_id.GetValueOrDefault(); }
-            set { __pbn__search_id = value; }
+            get => __pbn__search_id.GetValueOrDefault();
+            set => __pbn__search_id = value;
         }
         public bool ShouldSerializesearch_id() => __pbn__search_id != null;
         public void Resetsearch_id() => __pbn__search_id = null;
@@ -3711,8 +3712,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string search_text
         {
-            get { return __pbn__search_text ?? ""; }
-            set { __pbn__search_text = value; }
+            get => __pbn__search_text ?? "";
+            set => __pbn__search_text = value;
         }
         public bool ShouldSerializesearch_text() => __pbn__search_text != null;
         public void Resetsearch_text() => __pbn__search_text = null;
@@ -3721,8 +3722,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public int max_results
         {
-            get { return __pbn__max_results.GetValueOrDefault(); }
-            set { __pbn__max_results = value; }
+            get => __pbn__max_results.GetValueOrDefault();
+            set => __pbn__max_results = value;
         }
         public bool ShouldSerializemax_results() => __pbn__max_results != null;
         public void Resetmax_results() => __pbn__max_results = null;
@@ -3743,8 +3744,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint status_flags
         {
-            get { return __pbn__status_flags.GetValueOrDefault(); }
-            set { __pbn__status_flags = value; }
+            get => __pbn__status_flags.GetValueOrDefault();
+            set => __pbn__status_flags = value;
         }
         public bool ShouldSerializestatus_flags() => __pbn__status_flags != null;
         public void Resetstatus_flags() => __pbn__status_flags = null;
@@ -3760,8 +3761,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public int accountid
             {
-                get { return __pbn__accountid.GetValueOrDefault(); }
-                set { __pbn__accountid = value; }
+                get => __pbn__accountid.GetValueOrDefault();
+                set => __pbn__accountid = value;
             }
             public bool ShouldSerializeaccountid() => __pbn__accountid != null;
             public void Resetaccountid() => __pbn__accountid = null;
@@ -3784,8 +3785,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steamid
         {
-            get { return __pbn__steamid.GetValueOrDefault(); }
-            set { __pbn__steamid = value; }
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
         }
         public bool ShouldSerializesteamid() => __pbn__steamid != null;
         public void Resetsteamid() => __pbn__steamid = null;
@@ -3795,8 +3796,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(true)]
         public bool autocreate
         {
-            get { return __pbn__autocreate ?? true; }
-            set { __pbn__autocreate = value; }
+            get => __pbn__autocreate ?? true;
+            set => __pbn__autocreate = value;
         }
         public bool ShouldSerializeautocreate() => __pbn__autocreate != null;
         public void Resetautocreate() => __pbn__autocreate = null;
@@ -3826,8 +3827,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steamid
         {
-            get { return __pbn__steamid.GetValueOrDefault(); }
-            set { __pbn__steamid = value; }
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
         }
         public bool ShouldSerializesteamid() => __pbn__steamid != null;
         public void Resetsteamid() => __pbn__steamid = null;
@@ -3836,8 +3837,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public bool chat_room_private
         {
-            get { return __pbn__chat_room_private.GetValueOrDefault(); }
-            set { __pbn__chat_room_private = value; }
+            get => __pbn__chat_room_private.GetValueOrDefault();
+            set => __pbn__chat_room_private = value;
         }
         public bool ShouldSerializechat_room_private() => __pbn__chat_room_private != null;
         public void Resetchat_room_private() => __pbn__chat_room_private = null;
@@ -3855,8 +3856,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool chat_room_private
         {
-            get { return __pbn__chat_room_private.GetValueOrDefault(); }
-            set { __pbn__chat_room_private = value; }
+            get => __pbn__chat_room_private.GetValueOrDefault();
+            set => __pbn__chat_room_private = value;
         }
         public bool ShouldSerializechat_room_private() => __pbn__chat_room_private != null;
         public void Resetchat_room_private() => __pbn__chat_room_private = null;
@@ -3874,8 +3875,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool mention_all
         {
-            get { return __pbn__mention_all.GetValueOrDefault(); }
-            set { __pbn__mention_all = value; }
+            get => __pbn__mention_all.GetValueOrDefault();
+            set => __pbn__mention_all = value;
         }
         public bool ShouldSerializemention_all() => __pbn__mention_all != null;
         public void Resetmention_all() => __pbn__mention_all = null;
@@ -3884,8 +3885,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public bool mention_here
         {
-            get { return __pbn__mention_here.GetValueOrDefault(); }
-            set { __pbn__mention_here = value; }
+            get => __pbn__mention_here.GetValueOrDefault();
+            set => __pbn__mention_here = value;
         }
         public bool ShouldSerializemention_here() => __pbn__mention_here != null;
         public void Resetmention_here() => __pbn__mention_here = null;
@@ -3906,8 +3907,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -3916,8 +3917,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -3926,8 +3927,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steamid_sender
         {
-            get { return __pbn__steamid_sender.GetValueOrDefault(); }
-            set { __pbn__steamid_sender = value; }
+            get => __pbn__steamid_sender.GetValueOrDefault();
+            set => __pbn__steamid_sender = value;
         }
         public bool ShouldSerializesteamid_sender() => __pbn__steamid_sender != null;
         public void Resetsteamid_sender() => __pbn__steamid_sender = null;
@@ -3937,8 +3938,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string message
         {
-            get { return __pbn__message ?? ""; }
-            set { __pbn__message = value; }
+            get => __pbn__message ?? "";
+            set => __pbn__message = value;
         }
         public bool ShouldSerializemessage() => __pbn__message != null;
         public void Resetmessage() => __pbn__message = null;
@@ -3947,8 +3948,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint timestamp
         {
-            get { return __pbn__timestamp.GetValueOrDefault(); }
-            set { __pbn__timestamp = value; }
+            get => __pbn__timestamp.GetValueOrDefault();
+            set => __pbn__timestamp = value;
         }
         public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
         public void Resettimestamp() => __pbn__timestamp = null;
@@ -3960,8 +3961,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint ordinal
         {
-            get { return __pbn__ordinal.GetValueOrDefault(); }
-            set { __pbn__ordinal = value; }
+            get => __pbn__ordinal.GetValueOrDefault();
+            set => __pbn__ordinal = value;
         }
         public bool ShouldSerializeordinal() => __pbn__ordinal != null;
         public void Resetordinal() => __pbn__ordinal = null;
@@ -3974,8 +3975,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string message_no_bbcode
         {
-            get { return __pbn__message_no_bbcode ?? ""; }
-            set { __pbn__message_no_bbcode = value; }
+            get => __pbn__message_no_bbcode ?? "";
+            set => __pbn__message_no_bbcode = value;
         }
         public bool ShouldSerializemessage_no_bbcode() => __pbn__message_no_bbcode != null;
         public void Resetmessage_no_bbcode() => __pbn__message_no_bbcode = null;
@@ -3985,8 +3986,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string chat_name
         {
-            get { return __pbn__chat_name ?? ""; }
-            set { __pbn__chat_name = value; }
+            get => __pbn__chat_name ?? "";
+            set => __pbn__chat_name = value;
         }
         public bool ShouldSerializechat_name() => __pbn__chat_name != null;
         public void Resetchat_name() => __pbn__chat_name = null;
@@ -4004,8 +4005,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -4014,8 +4015,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -4034,8 +4035,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint server_timestamp
             {
-                get { return __pbn__server_timestamp.GetValueOrDefault(); }
-                set { __pbn__server_timestamp = value; }
+                get => __pbn__server_timestamp.GetValueOrDefault();
+                set => __pbn__server_timestamp = value;
             }
             public bool ShouldSerializeserver_timestamp() => __pbn__server_timestamp != null;
             public void Resetserver_timestamp() => __pbn__server_timestamp = null;
@@ -4044,8 +4045,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint ordinal
             {
-                get { return __pbn__ordinal.GetValueOrDefault(); }
-                set { __pbn__ordinal = value; }
+                get => __pbn__ordinal.GetValueOrDefault();
+                set => __pbn__ordinal = value;
             }
             public bool ShouldSerializeordinal() => __pbn__ordinal != null;
             public void Resetordinal() => __pbn__ordinal = null;
@@ -4054,8 +4055,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public bool deleted
             {
-                get { return __pbn__deleted.GetValueOrDefault(); }
-                set { __pbn__deleted = value; }
+                get => __pbn__deleted.GetValueOrDefault();
+                set => __pbn__deleted = value;
             }
             public bool ShouldSerializedeleted() => __pbn__deleted != null;
             public void Resetdeleted() => __pbn__deleted = null;
@@ -4075,8 +4076,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -4089,8 +4090,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(EChatRoomMemberStateChange.k_EChatRoomMemberStateChange_Invalid)]
         public EChatRoomMemberStateChange change
         {
-            get { return __pbn__change ?? EChatRoomMemberStateChange.k_EChatRoomMemberStateChange_Invalid; }
-            set { __pbn__change = value; }
+            get => __pbn__change ?? EChatRoomMemberStateChange.k_EChatRoomMemberStateChange_Invalid;
+            set => __pbn__change = value;
         }
         public bool ShouldSerializechange() => __pbn__change != null;
         public void Resetchange() => __pbn__change = null;
@@ -4120,8 +4121,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -4130,8 +4131,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong default_chat_id
         {
-            get { return __pbn__default_chat_id.GetValueOrDefault(); }
-            set { __pbn__default_chat_id = value; }
+            get => __pbn__default_chat_id.GetValueOrDefault();
+            set => __pbn__default_chat_id = value;
         }
         public bool ShouldSerializedefault_chat_id() => __pbn__default_chat_id != null;
         public void Resetdefault_chat_id() => __pbn__default_chat_id = null;
@@ -4152,8 +4153,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_id
         {
-            get { return __pbn__chat_id.GetValueOrDefault(); }
-            set { __pbn__chat_id = value; }
+            get => __pbn__chat_id.GetValueOrDefault();
+            set => __pbn__chat_id = value;
         }
         public bool ShouldSerializechat_id() => __pbn__chat_id != null;
         public void Resetchat_id() => __pbn__chat_id = null;
@@ -4162,8 +4163,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -4181,8 +4182,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -4198,8 +4199,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(EChatRoomMemberStateChange.k_EChatRoomMemberStateChange_Invalid)]
         public EChatRoomMemberStateChange user_action
         {
-            get { return __pbn__user_action ?? EChatRoomMemberStateChange.k_EChatRoomMemberStateChange_Invalid; }
-            set { __pbn__user_action = value; }
+            get => __pbn__user_action ?? EChatRoomMemberStateChange.k_EChatRoomMemberStateChange_Invalid;
+            set => __pbn__user_action = value;
         }
         public bool ShouldSerializeuser_action() => __pbn__user_action != null;
         public void Resetuser_action() => __pbn__user_action = null;
@@ -4229,8 +4230,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public int start
         {
-            get { return __pbn__start.GetValueOrDefault(); }
-            set { __pbn__start = value; }
+            get => __pbn__start.GetValueOrDefault();
+            set => __pbn__start = value;
         }
         public bool ShouldSerializestart() => __pbn__start != null;
         public void Resetstart() => __pbn__start = null;
@@ -4239,8 +4240,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public int end
         {
-            get { return __pbn__end.GetValueOrDefault(); }
-            set { __pbn__end = value; }
+            get => __pbn__end.GetValueOrDefault();
+            set => __pbn__end = value;
         }
         public bool ShouldSerializeend() => __pbn__end != null;
         public void Resetend() => __pbn__end = null;
@@ -4249,8 +4250,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public int total_count
         {
-            get { return __pbn__total_count.GetValueOrDefault(); }
-            set { __pbn__total_count = value; }
+            get => __pbn__total_count.GetValueOrDefault();
+            set => __pbn__total_count = value;
         }
         public bool ShouldSerializetotal_count() => __pbn__total_count != null;
         public void Resettotal_count() => __pbn__total_count = null;
@@ -4259,8 +4260,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public int client_changenumber
         {
-            get { return __pbn__client_changenumber.GetValueOrDefault(); }
-            set { __pbn__client_changenumber = value; }
+            get => __pbn__client_changenumber.GetValueOrDefault();
+            set => __pbn__client_changenumber = value;
         }
         public bool ShouldSerializeclient_changenumber() => __pbn__client_changenumber != null;
         public void Resetclient_changenumber() => __pbn__client_changenumber = null;
@@ -4269,8 +4270,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public int server_changenumber
         {
-            get { return __pbn__server_changenumber.GetValueOrDefault(); }
-            set { __pbn__server_changenumber = value; }
+            get => __pbn__server_changenumber.GetValueOrDefault();
+            set => __pbn__server_changenumber = value;
         }
         public bool ShouldSerializeserver_changenumber() => __pbn__server_changenumber != null;
         public void Resetserver_changenumber() => __pbn__server_changenumber = null;
@@ -4288,8 +4289,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public int ingame
         {
-            get { return __pbn__ingame.GetValueOrDefault(); }
-            set { __pbn__ingame = value; }
+            get => __pbn__ingame.GetValueOrDefault();
+            set => __pbn__ingame = value;
         }
         public bool ShouldSerializeingame() => __pbn__ingame != null;
         public void Resetingame() => __pbn__ingame = null;
@@ -4298,8 +4299,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public int online
         {
-            get { return __pbn__online.GetValueOrDefault(); }
-            set { __pbn__online = value; }
+            get => __pbn__online.GetValueOrDefault();
+            set => __pbn__online = value;
         }
         public bool ShouldSerializeonline() => __pbn__online != null;
         public void Resetonline() => __pbn__online = null;
@@ -4308,8 +4309,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public int offline
         {
-            get { return __pbn__offline.GetValueOrDefault(); }
-            set { __pbn__offline = value; }
+            get => __pbn__offline.GetValueOrDefault();
+            set => __pbn__offline = value;
         }
         public bool ShouldSerializeoffline() => __pbn__offline != null;
         public void Resetoffline() => __pbn__offline = null;
@@ -4327,8 +4328,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong chat_group_id
         {
-            get { return __pbn__chat_group_id.GetValueOrDefault(); }
-            set { __pbn__chat_group_id = value; }
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
         }
         public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
         public void Resetchat_group_id() => __pbn__chat_group_id = null;
@@ -4337,8 +4338,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong view_id
         {
-            get { return __pbn__view_id.GetValueOrDefault(); }
-            set { __pbn__view_id = value; }
+            get => __pbn__view_id.GetValueOrDefault();
+            set => __pbn__view_id = value;
         }
         public bool ShouldSerializeview_id() => __pbn__view_id != null;
         public void Resetview_id() => __pbn__view_id = null;
@@ -4353,8 +4354,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint status_flags
         {
-            get { return __pbn__status_flags.GetValueOrDefault(); }
-            set { __pbn__status_flags = value; }
+            get => __pbn__status_flags.GetValueOrDefault();
+            set => __pbn__status_flags = value;
         }
         public bool ShouldSerializestatus_flags() => __pbn__status_flags != null;
         public void Resetstatus_flags() => __pbn__status_flags = null;
@@ -4376,8 +4377,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public int rank
             {
-                get { return __pbn__rank.GetValueOrDefault(); }
-                set { __pbn__rank = value; }
+                get => __pbn__rank.GetValueOrDefault();
+                set => __pbn__rank = value;
             }
             public bool ShouldSerializerank() => __pbn__rank != null;
             public void Resetrank() => __pbn__rank = null;
@@ -4386,8 +4387,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint accountid
             {
-                get { return __pbn__accountid.GetValueOrDefault(); }
-                set { __pbn__accountid = value; }
+                get => __pbn__accountid.GetValueOrDefault();
+                set => __pbn__accountid = value;
             }
             public bool ShouldSerializeaccountid() => __pbn__accountid != null;
             public void Resetaccountid() => __pbn__accountid = null;
@@ -4410,8 +4411,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint metrics_run_id
         {
-            get { return __pbn__metrics_run_id.GetValueOrDefault(); }
-            set { __pbn__metrics_run_id = value; }
+            get => __pbn__metrics_run_id.GetValueOrDefault();
+            set => __pbn__metrics_run_id = value;
         }
         public bool ShouldSerializemetrics_run_id() => __pbn__metrics_run_id != null;
         public void Resetmetrics_run_id() => __pbn__metrics_run_id = null;
@@ -4420,8 +4421,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint client_build
         {
-            get { return __pbn__client_build.GetValueOrDefault(); }
-            set { __pbn__client_build = value; }
+            get => __pbn__client_build.GetValueOrDefault();
+            set => __pbn__client_build = value;
         }
         public bool ShouldSerializeclient_build() => __pbn__client_build != null;
         public void Resetclient_build() => __pbn__client_build = null;
@@ -4430,8 +4431,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint metrics_version
         {
-            get { return __pbn__metrics_version.GetValueOrDefault(); }
-            set { __pbn__metrics_version = value; }
+            get => __pbn__metrics_version.GetValueOrDefault();
+            set => __pbn__metrics_version = value;
         }
         public bool ShouldSerializemetrics_version() => __pbn__metrics_version != null;
         public void Resetmetrics_version() => __pbn__metrics_version = null;
@@ -4440,8 +4441,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public bool in_web
         {
-            get { return __pbn__in_web.GetValueOrDefault(); }
-            set { __pbn__in_web = value; }
+            get => __pbn__in_web.GetValueOrDefault();
+            set => __pbn__in_web = value;
         }
         public bool ShouldSerializein_web() => __pbn__in_web != null;
         public void Resetin_web() => __pbn__in_web = null;
@@ -4469,8 +4470,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public bool notifications_show_ingame
             {
-                get { return __pbn__notifications_show_ingame.GetValueOrDefault(); }
-                set { __pbn__notifications_show_ingame = value; }
+                get => __pbn__notifications_show_ingame.GetValueOrDefault();
+                set => __pbn__notifications_show_ingame = value;
             }
             public bool ShouldSerializenotifications_show_ingame() => __pbn__notifications_show_ingame != null;
             public void Resetnotifications_show_ingame() => __pbn__notifications_show_ingame = null;
@@ -4479,8 +4480,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public bool notifications_show_online
             {
-                get { return __pbn__notifications_show_online.GetValueOrDefault(); }
-                set { __pbn__notifications_show_online = value; }
+                get => __pbn__notifications_show_online.GetValueOrDefault();
+                set => __pbn__notifications_show_online = value;
             }
             public bool ShouldSerializenotifications_show_online() => __pbn__notifications_show_online != null;
             public void Resetnotifications_show_online() => __pbn__notifications_show_online = null;
@@ -4489,8 +4490,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public bool notifications_show_message
             {
-                get { return __pbn__notifications_show_message.GetValueOrDefault(); }
-                set { __pbn__notifications_show_message = value; }
+                get => __pbn__notifications_show_message.GetValueOrDefault();
+                set => __pbn__notifications_show_message = value;
             }
             public bool ShouldSerializenotifications_show_message() => __pbn__notifications_show_message != null;
             public void Resetnotifications_show_message() => __pbn__notifications_show_message = null;
@@ -4499,8 +4500,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public bool notifications_events_and_announcements
             {
-                get { return __pbn__notifications_events_and_announcements.GetValueOrDefault(); }
-                set { __pbn__notifications_events_and_announcements = value; }
+                get => __pbn__notifications_events_and_announcements.GetValueOrDefault();
+                set => __pbn__notifications_events_and_announcements = value;
             }
             public bool ShouldSerializenotifications_events_and_announcements() => __pbn__notifications_events_and_announcements != null;
             public void Resetnotifications_events_and_announcements() => __pbn__notifications_events_and_announcements = null;
@@ -4509,8 +4510,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public bool sounds_play_ingame
             {
-                get { return __pbn__sounds_play_ingame.GetValueOrDefault(); }
-                set { __pbn__sounds_play_ingame = value; }
+                get => __pbn__sounds_play_ingame.GetValueOrDefault();
+                set => __pbn__sounds_play_ingame = value;
             }
             public bool ShouldSerializesounds_play_ingame() => __pbn__sounds_play_ingame != null;
             public void Resetsounds_play_ingame() => __pbn__sounds_play_ingame = null;
@@ -4519,8 +4520,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(6)]
             public bool sounds_play_online
             {
-                get { return __pbn__sounds_play_online.GetValueOrDefault(); }
-                set { __pbn__sounds_play_online = value; }
+                get => __pbn__sounds_play_online.GetValueOrDefault();
+                set => __pbn__sounds_play_online = value;
             }
             public bool ShouldSerializesounds_play_online() => __pbn__sounds_play_online != null;
             public void Resetsounds_play_online() => __pbn__sounds_play_online = null;
@@ -4529,8 +4530,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(7)]
             public bool sounds_play_message
             {
-                get { return __pbn__sounds_play_message.GetValueOrDefault(); }
-                set { __pbn__sounds_play_message = value; }
+                get => __pbn__sounds_play_message.GetValueOrDefault();
+                set => __pbn__sounds_play_message = value;
             }
             public bool ShouldSerializesounds_play_message() => __pbn__sounds_play_message != null;
             public void Resetsounds_play_message() => __pbn__sounds_play_message = null;
@@ -4539,8 +4540,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(8)]
             public bool sounds_events_and_announcements
             {
-                get { return __pbn__sounds_events_and_announcements.GetValueOrDefault(); }
-                set { __pbn__sounds_events_and_announcements = value; }
+                get => __pbn__sounds_events_and_announcements.GetValueOrDefault();
+                set => __pbn__sounds_events_and_announcements = value;
             }
             public bool ShouldSerializesounds_events_and_announcements() => __pbn__sounds_events_and_announcements != null;
             public void Resetsounds_events_and_announcements() => __pbn__sounds_events_and_announcements = null;
@@ -4549,8 +4550,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(9)]
             public bool always_new_chat_window
             {
-                get { return __pbn__always_new_chat_window.GetValueOrDefault(); }
-                set { __pbn__always_new_chat_window = value; }
+                get => __pbn__always_new_chat_window.GetValueOrDefault();
+                set => __pbn__always_new_chat_window = value;
             }
             public bool ShouldSerializealways_new_chat_window() => __pbn__always_new_chat_window != null;
             public void Resetalways_new_chat_window() => __pbn__always_new_chat_window = null;
@@ -4559,8 +4560,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(10)]
             public bool force_alphabetic_friend_sorting
             {
-                get { return __pbn__force_alphabetic_friend_sorting.GetValueOrDefault(); }
-                set { __pbn__force_alphabetic_friend_sorting = value; }
+                get => __pbn__force_alphabetic_friend_sorting.GetValueOrDefault();
+                set => __pbn__force_alphabetic_friend_sorting = value;
             }
             public bool ShouldSerializeforce_alphabetic_friend_sorting() => __pbn__force_alphabetic_friend_sorting != null;
             public void Resetforce_alphabetic_friend_sorting() => __pbn__force_alphabetic_friend_sorting = null;
@@ -4569,8 +4570,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(11)]
             public int chat_flash_mode
             {
-                get { return __pbn__chat_flash_mode.GetValueOrDefault(); }
-                set { __pbn__chat_flash_mode = value; }
+                get => __pbn__chat_flash_mode.GetValueOrDefault();
+                set => __pbn__chat_flash_mode = value;
             }
             public bool ShouldSerializechat_flash_mode() => __pbn__chat_flash_mode != null;
             public void Resetchat_flash_mode() => __pbn__chat_flash_mode = null;
@@ -4579,8 +4580,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(12)]
             public bool remember_open_chats
             {
-                get { return __pbn__remember_open_chats.GetValueOrDefault(); }
-                set { __pbn__remember_open_chats = value; }
+                get => __pbn__remember_open_chats.GetValueOrDefault();
+                set => __pbn__remember_open_chats = value;
             }
             public bool ShouldSerializeremember_open_chats() => __pbn__remember_open_chats != null;
             public void Resetremember_open_chats() => __pbn__remember_open_chats = null;
@@ -4589,8 +4590,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(13)]
             public bool compact_quick_access
             {
-                get { return __pbn__compact_quick_access.GetValueOrDefault(); }
-                set { __pbn__compact_quick_access = value; }
+                get => __pbn__compact_quick_access.GetValueOrDefault();
+                set => __pbn__compact_quick_access = value;
             }
             public bool ShouldSerializecompact_quick_access() => __pbn__compact_quick_access != null;
             public void Resetcompact_quick_access() => __pbn__compact_quick_access = null;
@@ -4599,8 +4600,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(14)]
             public bool compact_friends_list
             {
-                get { return __pbn__compact_friends_list.GetValueOrDefault(); }
-                set { __pbn__compact_friends_list = value; }
+                get => __pbn__compact_friends_list.GetValueOrDefault();
+                set => __pbn__compact_friends_list = value;
             }
             public bool ShouldSerializecompact_friends_list() => __pbn__compact_friends_list != null;
             public void Resetcompact_friends_list() => __pbn__compact_friends_list = null;
@@ -4609,8 +4610,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(15)]
             public bool notifications_show_chat_room_notification
             {
-                get { return __pbn__notifications_show_chat_room_notification.GetValueOrDefault(); }
-                set { __pbn__notifications_show_chat_room_notification = value; }
+                get => __pbn__notifications_show_chat_room_notification.GetValueOrDefault();
+                set => __pbn__notifications_show_chat_room_notification = value;
             }
             public bool ShouldSerializenotifications_show_chat_room_notification() => __pbn__notifications_show_chat_room_notification != null;
             public void Resetnotifications_show_chat_room_notification() => __pbn__notifications_show_chat_room_notification = null;
@@ -4619,8 +4620,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(16)]
             public bool sounds_play_chat_room_notification
             {
-                get { return __pbn__sounds_play_chat_room_notification.GetValueOrDefault(); }
-                set { __pbn__sounds_play_chat_room_notification = value; }
+                get => __pbn__sounds_play_chat_room_notification.GetValueOrDefault();
+                set => __pbn__sounds_play_chat_room_notification = value;
             }
             public bool ShouldSerializesounds_play_chat_room_notification() => __pbn__sounds_play_chat_room_notification != null;
             public void Resetsounds_play_chat_room_notification() => __pbn__sounds_play_chat_room_notification = null;
@@ -4629,8 +4630,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(17)]
             public bool hide_offline_friends_in_tag_groups
             {
-                get { return __pbn__hide_offline_friends_in_tag_groups.GetValueOrDefault(); }
-                set { __pbn__hide_offline_friends_in_tag_groups = value; }
+                get => __pbn__hide_offline_friends_in_tag_groups.GetValueOrDefault();
+                set => __pbn__hide_offline_friends_in_tag_groups = value;
             }
             public bool ShouldSerializehide_offline_friends_in_tag_groups() => __pbn__hide_offline_friends_in_tag_groups != null;
             public void Resethide_offline_friends_in_tag_groups() => __pbn__hide_offline_friends_in_tag_groups = null;
@@ -4639,8 +4640,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(18)]
             public bool hide_categorized_friends
             {
-                get { return __pbn__hide_categorized_friends.GetValueOrDefault(); }
-                set { __pbn__hide_categorized_friends = value; }
+                get => __pbn__hide_categorized_friends.GetValueOrDefault();
+                set => __pbn__hide_categorized_friends = value;
             }
             public bool ShouldSerializehide_categorized_friends() => __pbn__hide_categorized_friends != null;
             public void Resethide_categorized_friends() => __pbn__hide_categorized_friends = null;
@@ -4649,8 +4650,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(19)]
             public bool categorize_in_game_friends_by_game
             {
-                get { return __pbn__categorize_in_game_friends_by_game.GetValueOrDefault(); }
-                set { __pbn__categorize_in_game_friends_by_game = value; }
+                get => __pbn__categorize_in_game_friends_by_game.GetValueOrDefault();
+                set => __pbn__categorize_in_game_friends_by_game = value;
             }
             public bool ShouldSerializecategorize_in_game_friends_by_game() => __pbn__categorize_in_game_friends_by_game != null;
             public void Resetcategorize_in_game_friends_by_game() => __pbn__categorize_in_game_friends_by_game = null;
@@ -4659,8 +4660,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(20)]
             public int chat_font_size
             {
-                get { return __pbn__chat_font_size.GetValueOrDefault(); }
-                set { __pbn__chat_font_size = value; }
+                get => __pbn__chat_font_size.GetValueOrDefault();
+                set => __pbn__chat_font_size = value;
             }
             public bool ShouldSerializechat_font_size() => __pbn__chat_font_size != null;
             public void Resetchat_font_size() => __pbn__chat_font_size = null;
@@ -4669,8 +4670,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(21)]
             public bool use24hour_clock
             {
-                get { return __pbn__use24hour_clock.GetValueOrDefault(); }
-                set { __pbn__use24hour_clock = value; }
+                get => __pbn__use24hour_clock.GetValueOrDefault();
+                set => __pbn__use24hour_clock = value;
             }
             public bool ShouldSerializeuse24hour_clock() => __pbn__use24hour_clock != null;
             public void Resetuse24hour_clock() => __pbn__use24hour_clock = null;
@@ -4679,8 +4680,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(22)]
             public bool do_not_disturb_mode
             {
-                get { return __pbn__do_not_disturb_mode.GetValueOrDefault(); }
-                set { __pbn__do_not_disturb_mode = value; }
+                get => __pbn__do_not_disturb_mode.GetValueOrDefault();
+                set => __pbn__do_not_disturb_mode = value;
             }
             public bool ShouldSerializedo_not_disturb_mode() => __pbn__do_not_disturb_mode != null;
             public void Resetdo_not_disturb_mode() => __pbn__do_not_disturb_mode = null;
@@ -4689,8 +4690,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(23)]
             public bool disable_embed_inlining
             {
-                get { return __pbn__disable_embed_inlining.GetValueOrDefault(); }
-                set { __pbn__disable_embed_inlining = value; }
+                get => __pbn__disable_embed_inlining.GetValueOrDefault();
+                set => __pbn__disable_embed_inlining = value;
             }
             public bool ShouldSerializedisable_embed_inlining() => __pbn__disable_embed_inlining != null;
             public void Resetdisable_embed_inlining() => __pbn__disable_embed_inlining = null;
@@ -4699,8 +4700,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(24)]
             public bool sign_into_friends
             {
-                get { return __pbn__sign_into_friends.GetValueOrDefault(); }
-                set { __pbn__sign_into_friends = value; }
+                get => __pbn__sign_into_friends.GetValueOrDefault();
+                set => __pbn__sign_into_friends = value;
             }
             public bool ShouldSerializesign_into_friends() => __pbn__sign_into_friends != null;
             public void Resetsign_into_friends() => __pbn__sign_into_friends = null;
@@ -4709,8 +4710,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(25)]
             public bool animated_avatars
             {
-                get { return __pbn__animated_avatars.GetValueOrDefault(); }
-                set { __pbn__animated_avatars = value; }
+                get => __pbn__animated_avatars.GetValueOrDefault();
+                set => __pbn__animated_avatars = value;
             }
             public bool ShouldSerializeanimated_avatars() => __pbn__animated_avatars != null;
             public void Resetanimated_avatars() => __pbn__animated_avatars = null;
@@ -4728,8 +4729,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public float voice_input_gain
             {
-                get { return __pbn__voice_input_gain.GetValueOrDefault(); }
-                set { __pbn__voice_input_gain = value; }
+                get => __pbn__voice_input_gain.GetValueOrDefault();
+                set => __pbn__voice_input_gain = value;
             }
             public bool ShouldSerializevoice_input_gain() => __pbn__voice_input_gain != null;
             public void Resetvoice_input_gain() => __pbn__voice_input_gain = null;
@@ -4738,8 +4739,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public float voice_output_gain
             {
-                get { return __pbn__voice_output_gain.GetValueOrDefault(); }
-                set { __pbn__voice_output_gain = value; }
+                get => __pbn__voice_output_gain.GetValueOrDefault();
+                set => __pbn__voice_output_gain = value;
             }
             public bool ShouldSerializevoice_output_gain() => __pbn__voice_output_gain != null;
             public void Resetvoice_output_gain() => __pbn__voice_output_gain = null;
@@ -4748,8 +4749,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public int noise_gate_level
             {
-                get { return __pbn__noise_gate_level.GetValueOrDefault(); }
-                set { __pbn__noise_gate_level = value; }
+                get => __pbn__noise_gate_level.GetValueOrDefault();
+                set => __pbn__noise_gate_level = value;
             }
             public bool ShouldSerializenoise_gate_level() => __pbn__noise_gate_level != null;
             public void Resetnoise_gate_level() => __pbn__noise_gate_level = null;
@@ -4758,8 +4759,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public bool voice_use_echo_cancellation
             {
-                get { return __pbn__voice_use_echo_cancellation.GetValueOrDefault(); }
-                set { __pbn__voice_use_echo_cancellation = value; }
+                get => __pbn__voice_use_echo_cancellation.GetValueOrDefault();
+                set => __pbn__voice_use_echo_cancellation = value;
             }
             public bool ShouldSerializevoice_use_echo_cancellation() => __pbn__voice_use_echo_cancellation != null;
             public void Resetvoice_use_echo_cancellation() => __pbn__voice_use_echo_cancellation = null;
@@ -4768,8 +4769,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public bool voice_use_noise_cancellation
             {
-                get { return __pbn__voice_use_noise_cancellation.GetValueOrDefault(); }
-                set { __pbn__voice_use_noise_cancellation = value; }
+                get => __pbn__voice_use_noise_cancellation.GetValueOrDefault();
+                set => __pbn__voice_use_noise_cancellation = value;
             }
             public bool ShouldSerializevoice_use_noise_cancellation() => __pbn__voice_use_noise_cancellation != null;
             public void Resetvoice_use_noise_cancellation() => __pbn__voice_use_noise_cancellation = null;
@@ -4778,8 +4779,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(6)]
             public bool voice_use_auto_gain_control
             {
-                get { return __pbn__voice_use_auto_gain_control.GetValueOrDefault(); }
-                set { __pbn__voice_use_auto_gain_control = value; }
+                get => __pbn__voice_use_auto_gain_control.GetValueOrDefault();
+                set => __pbn__voice_use_auto_gain_control = value;
             }
             public bool ShouldSerializevoice_use_auto_gain_control() => __pbn__voice_use_auto_gain_control != null;
             public void Resetvoice_use_auto_gain_control() => __pbn__voice_use_auto_gain_control = null;
@@ -4788,8 +4789,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(7)]
             public bool selected_non_default_mic
             {
-                get { return __pbn__selected_non_default_mic.GetValueOrDefault(); }
-                set { __pbn__selected_non_default_mic = value; }
+                get => __pbn__selected_non_default_mic.GetValueOrDefault();
+                set => __pbn__selected_non_default_mic = value;
             }
             public bool ShouldSerializeselected_non_default_mic() => __pbn__selected_non_default_mic != null;
             public void Resetselected_non_default_mic() => __pbn__selected_non_default_mic = null;
@@ -4798,8 +4799,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(8)]
             public bool selected_non_default_output
             {
-                get { return __pbn__selected_non_default_output.GetValueOrDefault(); }
-                set { __pbn__selected_non_default_output = value; }
+                get => __pbn__selected_non_default_output.GetValueOrDefault();
+                set => __pbn__selected_non_default_output = value;
             }
             public bool ShouldSerializeselected_non_default_output() => __pbn__selected_non_default_output != null;
             public void Resetselected_non_default_output() => __pbn__selected_non_default_output = null;
@@ -4808,8 +4809,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(9)]
             public bool push_to_talk_enabled
             {
-                get { return __pbn__push_to_talk_enabled.GetValueOrDefault(); }
-                set { __pbn__push_to_talk_enabled = value; }
+                get => __pbn__push_to_talk_enabled.GetValueOrDefault();
+                set => __pbn__push_to_talk_enabled = value;
             }
             public bool ShouldSerializepush_to_talk_enabled() => __pbn__push_to_talk_enabled != null;
             public void Resetpush_to_talk_enabled() => __pbn__push_to_talk_enabled = null;
@@ -4818,8 +4819,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(10)]
             public bool push_to_mute_enabled
             {
-                get { return __pbn__push_to_mute_enabled.GetValueOrDefault(); }
-                set { __pbn__push_to_mute_enabled = value; }
+                get => __pbn__push_to_mute_enabled.GetValueOrDefault();
+                set => __pbn__push_to_mute_enabled = value;
             }
             public bool ShouldSerializepush_to_mute_enabled() => __pbn__push_to_mute_enabled != null;
             public void Resetpush_to_mute_enabled() => __pbn__push_to_mute_enabled = null;
@@ -4828,8 +4829,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(11)]
             public bool play_ptt_sounds
             {
-                get { return __pbn__play_ptt_sounds.GetValueOrDefault(); }
-                set { __pbn__play_ptt_sounds = value; }
+                get => __pbn__play_ptt_sounds.GetValueOrDefault();
+                set => __pbn__play_ptt_sounds = value;
             }
             public bool ShouldSerializeplay_ptt_sounds() => __pbn__play_ptt_sounds != null;
             public void Resetplay_ptt_sounds() => __pbn__play_ptt_sounds = null;
@@ -4847,8 +4848,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public int friends_list_height
             {
-                get { return __pbn__friends_list_height.GetValueOrDefault(); }
-                set { __pbn__friends_list_height = value; }
+                get => __pbn__friends_list_height.GetValueOrDefault();
+                set => __pbn__friends_list_height = value;
             }
             public bool ShouldSerializefriends_list_height() => __pbn__friends_list_height != null;
             public void Resetfriends_list_height() => __pbn__friends_list_height = null;
@@ -4857,8 +4858,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public int friends_list_width
             {
-                get { return __pbn__friends_list_width.GetValueOrDefault(); }
-                set { __pbn__friends_list_width = value; }
+                get => __pbn__friends_list_width.GetValueOrDefault();
+                set => __pbn__friends_list_width = value;
             }
             public bool ShouldSerializefriends_list_width() => __pbn__friends_list_width != null;
             public void Resetfriends_list_width() => __pbn__friends_list_width = null;
@@ -4867,8 +4868,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public bool friends_list_docked
             {
-                get { return __pbn__friends_list_docked.GetValueOrDefault(); }
-                set { __pbn__friends_list_docked = value; }
+                get => __pbn__friends_list_docked.GetValueOrDefault();
+                set => __pbn__friends_list_docked = value;
             }
             public bool ShouldSerializefriends_list_docked() => __pbn__friends_list_docked != null;
             public void Resetfriends_list_docked() => __pbn__friends_list_docked = null;
@@ -4877,8 +4878,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public bool friends_list_collapsed
             {
-                get { return __pbn__friends_list_collapsed.GetValueOrDefault(); }
-                set { __pbn__friends_list_collapsed = value; }
+                get => __pbn__friends_list_collapsed.GetValueOrDefault();
+                set => __pbn__friends_list_collapsed = value;
             }
             public bool ShouldSerializefriends_list_collapsed() => __pbn__friends_list_collapsed != null;
             public void Resetfriends_list_collapsed() => __pbn__friends_list_collapsed = null;
@@ -4887,8 +4888,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public int friends_list_group_chats_height
             {
-                get { return __pbn__friends_list_group_chats_height.GetValueOrDefault(); }
-                set { __pbn__friends_list_group_chats_height = value; }
+                get => __pbn__friends_list_group_chats_height.GetValueOrDefault();
+                set => __pbn__friends_list_group_chats_height = value;
             }
             public bool ShouldSerializefriends_list_group_chats_height() => __pbn__friends_list_group_chats_height != null;
             public void Resetfriends_list_group_chats_height() => __pbn__friends_list_group_chats_height = null;
@@ -4897,8 +4898,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(6)]
             public bool friends_list_visible
             {
-                get { return __pbn__friends_list_visible.GetValueOrDefault(); }
-                set { __pbn__friends_list_visible = value; }
+                get => __pbn__friends_list_visible.GetValueOrDefault();
+                set => __pbn__friends_list_visible = value;
             }
             public bool ShouldSerializefriends_list_visible() => __pbn__friends_list_visible != null;
             public void Resetfriends_list_visible() => __pbn__friends_list_visible = null;
@@ -4907,8 +4908,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(7)]
             public int chat_popups_opened
             {
-                get { return __pbn__chat_popups_opened.GetValueOrDefault(); }
-                set { __pbn__chat_popups_opened = value; }
+                get => __pbn__chat_popups_opened.GetValueOrDefault();
+                set => __pbn__chat_popups_opened = value;
             }
             public bool ShouldSerializechat_popups_opened() => __pbn__chat_popups_opened != null;
             public void Resetchat_popups_opened() => __pbn__chat_popups_opened = null;
@@ -4917,8 +4918,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(8)]
             public int group_chat_tabs_opened
             {
-                get { return __pbn__group_chat_tabs_opened.GetValueOrDefault(); }
-                set { __pbn__group_chat_tabs_opened = value; }
+                get => __pbn__group_chat_tabs_opened.GetValueOrDefault();
+                set => __pbn__group_chat_tabs_opened = value;
             }
             public bool ShouldSerializegroup_chat_tabs_opened() => __pbn__group_chat_tabs_opened != null;
             public void Resetgroup_chat_tabs_opened() => __pbn__group_chat_tabs_opened = null;
@@ -4927,8 +4928,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(9)]
             public int friend_chat_tabs_opened
             {
-                get { return __pbn__friend_chat_tabs_opened.GetValueOrDefault(); }
-                set { __pbn__friend_chat_tabs_opened = value; }
+                get => __pbn__friend_chat_tabs_opened.GetValueOrDefault();
+                set => __pbn__friend_chat_tabs_opened = value;
             }
             public bool ShouldSerializefriend_chat_tabs_opened() => __pbn__friend_chat_tabs_opened != null;
             public void Resetfriend_chat_tabs_opened() => __pbn__friend_chat_tabs_opened = null;
@@ -4937,8 +4938,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(10)]
             public int chat_window_width
             {
-                get { return __pbn__chat_window_width.GetValueOrDefault(); }
-                set { __pbn__chat_window_width = value; }
+                get => __pbn__chat_window_width.GetValueOrDefault();
+                set => __pbn__chat_window_width = value;
             }
             public bool ShouldSerializechat_window_width() => __pbn__chat_window_width != null;
             public void Resetchat_window_width() => __pbn__chat_window_width = null;
@@ -4947,8 +4948,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(11)]
             public int chat_window_height
             {
-                get { return __pbn__chat_window_height.GetValueOrDefault(); }
-                set { __pbn__chat_window_height = value; }
+                get => __pbn__chat_window_height.GetValueOrDefault();
+                set => __pbn__chat_window_height = value;
             }
             public bool ShouldSerializechat_window_height() => __pbn__chat_window_height != null;
             public void Resetchat_window_height() => __pbn__chat_window_height = null;
@@ -4960,8 +4961,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(13)]
             public int group_chat_left_col_collapsed
             {
-                get { return __pbn__group_chat_left_col_collapsed.GetValueOrDefault(); }
-                set { __pbn__group_chat_left_col_collapsed = value; }
+                get => __pbn__group_chat_left_col_collapsed.GetValueOrDefault();
+                set => __pbn__group_chat_left_col_collapsed = value;
             }
             public bool ShouldSerializegroup_chat_left_col_collapsed() => __pbn__group_chat_left_col_collapsed != null;
             public void Resetgroup_chat_left_col_collapsed() => __pbn__group_chat_left_col_collapsed = null;
@@ -4970,8 +4971,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(14)]
             public int group_chat_right_col_collapsed
             {
-                get { return __pbn__group_chat_right_col_collapsed.GetValueOrDefault(); }
-                set { __pbn__group_chat_right_col_collapsed = value; }
+                get => __pbn__group_chat_right_col_collapsed.GetValueOrDefault();
+                set => __pbn__group_chat_right_col_collapsed = value;
             }
             public bool ShouldSerializegroup_chat_right_col_collapsed() => __pbn__group_chat_right_col_collapsed != null;
             public void Resetgroup_chat_right_col_collapsed() => __pbn__group_chat_right_col_collapsed = null;
@@ -4980,8 +4981,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(15)]
             public bool in_one_on_one_voice_chat
             {
-                get { return __pbn__in_one_on_one_voice_chat.GetValueOrDefault(); }
-                set { __pbn__in_one_on_one_voice_chat = value; }
+                get => __pbn__in_one_on_one_voice_chat.GetValueOrDefault();
+                set => __pbn__in_one_on_one_voice_chat = value;
             }
             public bool ShouldSerializein_one_on_one_voice_chat() => __pbn__in_one_on_one_voice_chat != null;
             public void Resetin_one_on_one_voice_chat() => __pbn__in_one_on_one_voice_chat = null;
@@ -4990,8 +4991,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(16)]
             public bool in_group_voice_chat
             {
-                get { return __pbn__in_group_voice_chat.GetValueOrDefault(); }
-                set { __pbn__in_group_voice_chat = value; }
+                get => __pbn__in_group_voice_chat.GetValueOrDefault();
+                set => __pbn__in_group_voice_chat = value;
             }
             public bool ShouldSerializein_group_voice_chat() => __pbn__in_group_voice_chat != null;
             public void Resetin_group_voice_chat() => __pbn__in_group_voice_chat = null;
@@ -5007,8 +5008,8 @@ namespace SteamKit2.Internal
                 [global::ProtoBuf.ProtoMember(1)]
                 public bool in_game_collapsed
                 {
-                    get { return __pbn__in_game_collapsed.GetValueOrDefault(); }
-                    set { __pbn__in_game_collapsed = value; }
+                    get => __pbn__in_game_collapsed.GetValueOrDefault();
+                    set => __pbn__in_game_collapsed = value;
                 }
                 public bool ShouldSerializein_game_collapsed() => __pbn__in_game_collapsed != null;
                 public void Resetin_game_collapsed() => __pbn__in_game_collapsed = null;
@@ -5017,8 +5018,8 @@ namespace SteamKit2.Internal
                 [global::ProtoBuf.ProtoMember(2)]
                 public bool online_collapsed
                 {
-                    get { return __pbn__online_collapsed.GetValueOrDefault(); }
-                    set { __pbn__online_collapsed = value; }
+                    get => __pbn__online_collapsed.GetValueOrDefault();
+                    set => __pbn__online_collapsed = value;
                 }
                 public bool ShouldSerializeonline_collapsed() => __pbn__online_collapsed != null;
                 public void Resetonline_collapsed() => __pbn__online_collapsed = null;
@@ -5027,8 +5028,8 @@ namespace SteamKit2.Internal
                 [global::ProtoBuf.ProtoMember(3)]
                 public bool offline_collapsed
                 {
-                    get { return __pbn__offline_collapsed.GetValueOrDefault(); }
-                    set { __pbn__offline_collapsed = value; }
+                    get => __pbn__offline_collapsed.GetValueOrDefault();
+                    set => __pbn__offline_collapsed = value;
                 }
                 public bool ShouldSerializeoffline_collapsed() => __pbn__offline_collapsed != null;
                 public void Resetoffline_collapsed() => __pbn__offline_collapsed = null;
@@ -5037,8 +5038,8 @@ namespace SteamKit2.Internal
                 [global::ProtoBuf.ProtoMember(4)]
                 public int game_groups_collapsed
                 {
-                    get { return __pbn__game_groups_collapsed.GetValueOrDefault(); }
-                    set { __pbn__game_groups_collapsed = value; }
+                    get => __pbn__game_groups_collapsed.GetValueOrDefault();
+                    set => __pbn__game_groups_collapsed = value;
                 }
                 public bool ShouldSerializegame_groups_collapsed() => __pbn__game_groups_collapsed != null;
                 public void Resetgame_groups_collapsed() => __pbn__game_groups_collapsed = null;
@@ -5047,8 +5048,8 @@ namespace SteamKit2.Internal
                 [global::ProtoBuf.ProtoMember(5)]
                 public int categories_collapsed
                 {
-                    get { return __pbn__categories_collapsed.GetValueOrDefault(); }
-                    set { __pbn__categories_collapsed = value; }
+                    get => __pbn__categories_collapsed.GetValueOrDefault();
+                    set => __pbn__categories_collapsed = value;
                 }
                 public bool ShouldSerializecategories_collapsed() => __pbn__categories_collapsed != null;
                 public void Resetcategories_collapsed() => __pbn__categories_collapsed = null;
@@ -5068,8 +5069,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public int friends_count
             {
-                get { return __pbn__friends_count.GetValueOrDefault(); }
-                set { __pbn__friends_count = value; }
+                get => __pbn__friends_count.GetValueOrDefault();
+                set => __pbn__friends_count = value;
             }
             public bool ShouldSerializefriends_count() => __pbn__friends_count != null;
             public void Resetfriends_count() => __pbn__friends_count = null;
@@ -5078,8 +5079,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public int friends_category_count
             {
-                get { return __pbn__friends_category_count.GetValueOrDefault(); }
-                set { __pbn__friends_category_count = value; }
+                get => __pbn__friends_category_count.GetValueOrDefault();
+                set => __pbn__friends_category_count = value;
             }
             public bool ShouldSerializefriends_category_count() => __pbn__friends_category_count != null;
             public void Resetfriends_category_count() => __pbn__friends_category_count = null;
@@ -5088,8 +5089,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public int friends_categorized_count
             {
-                get { return __pbn__friends_categorized_count.GetValueOrDefault(); }
-                set { __pbn__friends_categorized_count = value; }
+                get => __pbn__friends_categorized_count.GetValueOrDefault();
+                set => __pbn__friends_categorized_count = value;
             }
             public bool ShouldSerializefriends_categorized_count() => __pbn__friends_categorized_count != null;
             public void Resetfriends_categorized_count() => __pbn__friends_categorized_count = null;
@@ -5098,8 +5099,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public int friends_online_count
             {
-                get { return __pbn__friends_online_count.GetValueOrDefault(); }
-                set { __pbn__friends_online_count = value; }
+                get => __pbn__friends_online_count.GetValueOrDefault();
+                set => __pbn__friends_online_count = value;
             }
             public bool ShouldSerializefriends_online_count() => __pbn__friends_online_count != null;
             public void Resetfriends_online_count() => __pbn__friends_online_count = null;
@@ -5108,8 +5109,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public int friends_in_game_count
             {
-                get { return __pbn__friends_in_game_count.GetValueOrDefault(); }
-                set { __pbn__friends_in_game_count = value; }
+                get => __pbn__friends_in_game_count.GetValueOrDefault();
+                set => __pbn__friends_in_game_count = value;
             }
             public bool ShouldSerializefriends_in_game_count() => __pbn__friends_in_game_count != null;
             public void Resetfriends_in_game_count() => __pbn__friends_in_game_count = null;
@@ -5118,8 +5119,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(6)]
             public int friends_in_game_singleton_count
             {
-                get { return __pbn__friends_in_game_singleton_count.GetValueOrDefault(); }
-                set { __pbn__friends_in_game_singleton_count = value; }
+                get => __pbn__friends_in_game_singleton_count.GetValueOrDefault();
+                set => __pbn__friends_in_game_singleton_count = value;
             }
             public bool ShouldSerializefriends_in_game_singleton_count() => __pbn__friends_in_game_singleton_count != null;
             public void Resetfriends_in_game_singleton_count() => __pbn__friends_in_game_singleton_count = null;
@@ -5128,8 +5129,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(7)]
             public int game_group_count
             {
-                get { return __pbn__game_group_count.GetValueOrDefault(); }
-                set { __pbn__game_group_count = value; }
+                get => __pbn__game_group_count.GetValueOrDefault();
+                set => __pbn__game_group_count = value;
             }
             public bool ShouldSerializegame_group_count() => __pbn__game_group_count != null;
             public void Resetgame_group_count() => __pbn__game_group_count = null;
@@ -5138,8 +5139,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(8)]
             public int friends_favorite_count
             {
-                get { return __pbn__friends_favorite_count.GetValueOrDefault(); }
-                set { __pbn__friends_favorite_count = value; }
+                get => __pbn__friends_favorite_count.GetValueOrDefault();
+                set => __pbn__friends_favorite_count = value;
             }
             public bool ShouldSerializefriends_favorite_count() => __pbn__friends_favorite_count != null;
             public void Resetfriends_favorite_count() => __pbn__friends_favorite_count = null;
@@ -5148,8 +5149,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(9)]
             public int group_chat_count
             {
-                get { return __pbn__group_chat_count.GetValueOrDefault(); }
-                set { __pbn__group_chat_count = value; }
+                get => __pbn__group_chat_count.GetValueOrDefault();
+                set => __pbn__group_chat_count = value;
             }
             public bool ShouldSerializegroup_chat_count() => __pbn__group_chat_count != null;
             public void Resetgroup_chat_count() => __pbn__group_chat_count = null;
@@ -5158,8 +5159,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(10)]
             public int group_chat_favorite_count
             {
-                get { return __pbn__group_chat_favorite_count.GetValueOrDefault(); }
-                set { __pbn__group_chat_favorite_count = value; }
+                get => __pbn__group_chat_favorite_count.GetValueOrDefault();
+                set => __pbn__group_chat_favorite_count = value;
             }
             public bool ShouldSerializegroup_chat_favorite_count() => __pbn__group_chat_favorite_count != null;
             public void Resetgroup_chat_favorite_count() => __pbn__group_chat_favorite_count = null;
@@ -5179,8 +5180,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint metrics_run_id
         {
-            get { return __pbn__metrics_run_id.GetValueOrDefault(); }
-            set { __pbn__metrics_run_id = value; }
+            get => __pbn__metrics_run_id.GetValueOrDefault();
+            set => __pbn__metrics_run_id = value;
         }
         public bool ShouldSerializemetrics_run_id() => __pbn__metrics_run_id != null;
         public void Resetmetrics_run_id() => __pbn__metrics_run_id = null;
@@ -5342,4 +5343,5 @@ namespace SteamKit2.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

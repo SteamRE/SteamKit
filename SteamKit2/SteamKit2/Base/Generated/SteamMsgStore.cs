@@ -4,7 +4,8 @@
 //   Input: steammessages_store.steamclient.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.Internal
 {
 
@@ -19,8 +20,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string language
         {
-            get { return __pbn__language ?? ""; }
-            set { __pbn__language = value; }
+            get => __pbn__language ?? "";
+            set => __pbn__language = value;
         }
         public bool ShouldSerializelanguage() => __pbn__language != null;
         public void Resetlanguage() => __pbn__language = null;
@@ -51,8 +52,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint tagid
             {
-                get { return __pbn__tagid.GetValueOrDefault(); }
-                set { __pbn__tagid = value; }
+                get => __pbn__tagid.GetValueOrDefault();
+                set => __pbn__tagid = value;
             }
             public bool ShouldSerializetagid() => __pbn__tagid != null;
             public void Resettagid() => __pbn__tagid = null;
@@ -62,8 +63,8 @@ namespace SteamKit2.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string english_name
             {
-                get { return __pbn__english_name ?? ""; }
-                set { __pbn__english_name = value; }
+                get => __pbn__english_name ?? "";
+                set => __pbn__english_name = value;
             }
             public bool ShouldSerializeenglish_name() => __pbn__english_name != null;
             public void Resetenglish_name() => __pbn__english_name = null;
@@ -73,8 +74,8 @@ namespace SteamKit2.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string name
             {
-                get { return __pbn__name ?? ""; }
-                set { __pbn__name = value; }
+                get => __pbn__name ?? "";
+                set => __pbn__name = value;
             }
             public bool ShouldSerializename() => __pbn__name != null;
             public void Resetname() => __pbn__name = null;
@@ -103,8 +104,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint primary_language
         {
-            get { return __pbn__primary_language.GetValueOrDefault(); }
-            set { __pbn__primary_language = value; }
+            get => __pbn__primary_language.GetValueOrDefault();
+            set => __pbn__primary_language = value;
         }
         public bool ShouldSerializeprimary_language() => __pbn__primary_language != null;
         public void Resetprimary_language() => __pbn__primary_language = null;
@@ -113,8 +114,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint secondary_languages
         {
-            get { return __pbn__secondary_languages.GetValueOrDefault(); }
-            set { __pbn__secondary_languages = value; }
+            get => __pbn__secondary_languages.GetValueOrDefault();
+            set => __pbn__secondary_languages = value;
         }
         public bool ShouldSerializesecondary_languages() => __pbn__secondary_languages != null;
         public void Resetsecondary_languages() => __pbn__secondary_languages = null;
@@ -123,8 +124,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public bool platform_windows
         {
-            get { return __pbn__platform_windows.GetValueOrDefault(); }
-            set { __pbn__platform_windows = value; }
+            get => __pbn__platform_windows.GetValueOrDefault();
+            set => __pbn__platform_windows = value;
         }
         public bool ShouldSerializeplatform_windows() => __pbn__platform_windows != null;
         public void Resetplatform_windows() => __pbn__platform_windows = null;
@@ -133,8 +134,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public bool platform_mac
         {
-            get { return __pbn__platform_mac.GetValueOrDefault(); }
-            set { __pbn__platform_mac = value; }
+            get => __pbn__platform_mac.GetValueOrDefault();
+            set => __pbn__platform_mac = value;
         }
         public bool ShouldSerializeplatform_mac() => __pbn__platform_mac != null;
         public void Resetplatform_mac() => __pbn__platform_mac = null;
@@ -143,8 +144,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public bool platform_linux
         {
-            get { return __pbn__platform_linux.GetValueOrDefault(); }
-            set { __pbn__platform_linux = value; }
+            get => __pbn__platform_linux.GetValueOrDefault();
+            set => __pbn__platform_linux = value;
         }
         public bool ShouldSerializeplatform_linux() => __pbn__platform_linux != null;
         public void Resetplatform_linux() => __pbn__platform_linux = null;
@@ -153,8 +154,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public bool hide_adult_content_violence
         {
-            get { return __pbn__hide_adult_content_violence.GetValueOrDefault(); }
-            set { __pbn__hide_adult_content_violence = value; }
+            get => __pbn__hide_adult_content_violence.GetValueOrDefault();
+            set => __pbn__hide_adult_content_violence = value;
         }
         public bool ShouldSerializehide_adult_content_violence() => __pbn__hide_adult_content_violence != null;
         public void Resethide_adult_content_violence() => __pbn__hide_adult_content_violence = null;
@@ -163,8 +164,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public bool hide_adult_content_sex
         {
-            get { return __pbn__hide_adult_content_sex.GetValueOrDefault(); }
-            set { __pbn__hide_adult_content_sex = value; }
+            get => __pbn__hide_adult_content_sex.GetValueOrDefault();
+            set => __pbn__hide_adult_content_sex = value;
         }
         public bool ShouldSerializehide_adult_content_sex() => __pbn__hide_adult_content_sex != null;
         public void Resethide_adult_content_sex() => __pbn__hide_adult_content_sex = null;
@@ -173,8 +174,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint timestamp_updated
         {
-            get { return __pbn__timestamp_updated.GetValueOrDefault(); }
-            set { __pbn__timestamp_updated = value; }
+            get => __pbn__timestamp_updated.GetValueOrDefault();
+            set => __pbn__timestamp_updated = value;
         }
         public bool ShouldSerializetimestamp_updated() => __pbn__timestamp_updated != null;
         public void Resettimestamp_updated() => __pbn__timestamp_updated = null;
@@ -183,8 +184,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public bool hide_store_broadcast
         {
-            get { return __pbn__hide_store_broadcast.GetValueOrDefault(); }
-            set { __pbn__hide_store_broadcast = value; }
+            get => __pbn__hide_store_broadcast.GetValueOrDefault();
+            set => __pbn__hide_store_broadcast = value;
         }
         public bool ShouldSerializehide_store_broadcast() => __pbn__hide_store_broadcast != null;
         public void Resethide_store_broadcast() => __pbn__hide_store_broadcast = null;
@@ -194,8 +195,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(EUserReviewScorePreference.k_EUserReviewScorePreference_Unset)]
         public EUserReviewScorePreference review_score_preference
         {
-            get { return __pbn__review_score_preference ?? EUserReviewScorePreference.k_EUserReviewScorePreference_Unset; }
-            set { __pbn__review_score_preference = value; }
+            get => __pbn__review_score_preference ?? EUserReviewScorePreference.k_EUserReviewScorePreference_Unset;
+            set => __pbn__review_score_preference = value;
         }
         public bool ShouldSerializereview_score_preference() => __pbn__review_score_preference != null;
         public void Resetreview_score_preference() => __pbn__review_score_preference = null;
@@ -204,8 +205,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public int timestamp_content_descriptor_preferences_updated
         {
-            get { return __pbn__timestamp_content_descriptor_preferences_updated.GetValueOrDefault(); }
-            set { __pbn__timestamp_content_descriptor_preferences_updated = value; }
+            get => __pbn__timestamp_content_descriptor_preferences_updated.GetValueOrDefault();
+            set => __pbn__timestamp_content_descriptor_preferences_updated = value;
         }
         public bool ShouldSerializetimestamp_content_descriptor_preferences_updated() => __pbn__timestamp_content_descriptor_preferences_updated != null;
         public void Resettimestamp_content_descriptor_preferences_updated() => __pbn__timestamp_content_descriptor_preferences_updated = null;
@@ -233,8 +234,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint tagid
             {
-                get { return __pbn__tagid.GetValueOrDefault(); }
-                set { __pbn__tagid = value; }
+                get => __pbn__tagid.GetValueOrDefault();
+                set => __pbn__tagid = value;
             }
             public bool ShouldSerializetagid() => __pbn__tagid != null;
             public void Resettagid() => __pbn__tagid = null;
@@ -244,8 +245,8 @@ namespace SteamKit2.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string name
             {
-                get { return __pbn__name ?? ""; }
-                set { __pbn__name = value; }
+                get => __pbn__name ?? "";
+                set => __pbn__name = value;
             }
             public bool ShouldSerializename() => __pbn__name != null;
             public void Resetname() => __pbn__name = null;
@@ -254,8 +255,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint timestamp_added
             {
-                get { return __pbn__timestamp_added.GetValueOrDefault(); }
-                set { __pbn__timestamp_added = value; }
+                get => __pbn__timestamp_added.GetValueOrDefault();
+                set => __pbn__timestamp_added = value;
             }
             public bool ShouldSerializetimestamp_added() => __pbn__timestamp_added != null;
             public void Resettimestamp_added() => __pbn__timestamp_added = null;
@@ -285,8 +286,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint content_descriptorid
             {
-                get { return __pbn__content_descriptorid.GetValueOrDefault(); }
-                set { __pbn__content_descriptorid = value; }
+                get => __pbn__content_descriptorid.GetValueOrDefault();
+                set => __pbn__content_descriptorid = value;
             }
             public bool ShouldSerializecontent_descriptorid() => __pbn__content_descriptorid != null;
             public void Resetcontent_descriptorid() => __pbn__content_descriptorid = null;
@@ -295,8 +296,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint timestamp_added
             {
-                get { return __pbn__timestamp_added.GetValueOrDefault(); }
-                set { __pbn__timestamp_added = value; }
+                get => __pbn__timestamp_added.GetValueOrDefault();
+                set => __pbn__timestamp_added = value;
             }
             public bool ShouldSerializetimestamp_added() => __pbn__timestamp_added != null;
             public void Resettimestamp_added() => __pbn__timestamp_added = null;
@@ -363,4 +364,5 @@ namespace SteamKit2.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

@@ -4,7 +4,8 @@
 //   Input: econ_shared_enums.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.GC.Artifact.Internal
 {
 
@@ -19,8 +20,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue(2)]
         public uint eresult
         {
-            get { return __pbn__eresult ?? 2; }
-            set { __pbn__eresult = value; }
+            get => __pbn__eresult ?? 2;
+            set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
         public void Reseteresult() => __pbn__eresult = null;
@@ -30,8 +31,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string debug_message
         {
-            get { return __pbn__debug_message ?? ""; }
-            set { __pbn__debug_message = value; }
+            get => __pbn__debug_message ?? "";
+            set => __pbn__debug_message = value;
         }
         public bool ShouldSerializedebug_message() => __pbn__debug_message != null;
         public void Resetdebug_message() => __pbn__debug_message = null;
@@ -89,4 +90,5 @@ namespace SteamKit2.GC.Artifact.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

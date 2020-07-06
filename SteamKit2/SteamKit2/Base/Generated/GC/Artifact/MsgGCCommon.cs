@@ -4,7 +4,8 @@
 //   Input: dcg_gcmessages_common.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.GC.Artifact.Internal
 {
 
@@ -18,8 +19,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint msg_type
         {
-            get { return __pbn__msg_type.GetValueOrDefault(); }
-            set { __pbn__msg_type = value; }
+            get => __pbn__msg_type.GetValueOrDefault();
+            set => __pbn__msg_type = value;
         }
         public bool ShouldSerializemsg_type() => __pbn__msg_type != null;
         public void Resetmsg_type() => __pbn__msg_type = null;
@@ -28,8 +29,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public byte[] contents
         {
-            get { return __pbn__contents; }
-            set { __pbn__contents = value; }
+            get => __pbn__contents;
+            set => __pbn__contents = value;
         }
         public bool ShouldSerializecontents() => __pbn__contents != null;
         public void Resetcontents() => __pbn__contents = null;
@@ -38,8 +39,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong msg_key
         {
-            get { return __pbn__msg_key.GetValueOrDefault(); }
-            set { __pbn__msg_key = value; }
+            get => __pbn__msg_key.GetValueOrDefault();
+            set => __pbn__msg_key = value;
         }
         public bool ShouldSerializemsg_key() => __pbn__msg_key != null;
         public void Resetmsg_key() => __pbn__msg_key = null;
@@ -48,8 +49,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public bool is_compressed
         {
-            get { return __pbn__is_compressed.GetValueOrDefault(); }
-            set { __pbn__is_compressed = value; }
+            get => __pbn__is_compressed.GetValueOrDefault();
+            set => __pbn__is_compressed = value;
         }
         public bool ShouldSerializeis_compressed() => __pbn__is_compressed != null;
         public void Resetis_compressed() => __pbn__is_compressed = null;
@@ -73,8 +74,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong server_steam_id
         {
-            get { return __pbn__server_steam_id.GetValueOrDefault(); }
-            set { __pbn__server_steam_id = value; }
+            get => __pbn__server_steam_id.GetValueOrDefault();
+            set => __pbn__server_steam_id = value;
         }
         public bool ShouldSerializeserver_steam_id() => __pbn__server_steam_id != null;
         public void Resetserver_steam_id() => __pbn__server_steam_id = null;
@@ -83,8 +84,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public ulong lobby_id
         {
-            get { return __pbn__lobby_id.GetValueOrDefault(); }
-            set { __pbn__lobby_id = value; }
+            get => __pbn__lobby_id.GetValueOrDefault();
+            set => __pbn__lobby_id = value;
         }
         public bool ShouldSerializelobby_id() => __pbn__lobby_id != null;
         public void Resetlobby_id() => __pbn__lobby_id = null;
@@ -93,8 +94,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public ulong match_id
         {
-            get { return __pbn__match_id.GetValueOrDefault(); }
-            set { __pbn__match_id = value; }
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
@@ -103,8 +104,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint gauntlet_id
         {
-            get { return __pbn__gauntlet_id.GetValueOrDefault(); }
-            set { __pbn__gauntlet_id = value; }
+            get => __pbn__gauntlet_id.GetValueOrDefault();
+            set => __pbn__gauntlet_id = value;
         }
         public bool ShouldSerializegauntlet_id() => __pbn__gauntlet_id != null;
         public void Resetgauntlet_id() => __pbn__gauntlet_id = null;
@@ -114,8 +115,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue(ELobbyServerState.k_eLobbyServerState_Assign)]
         public ELobbyServerState server_state
         {
-            get { return __pbn__server_state ?? ELobbyServerState.k_eLobbyServerState_Assign; }
-            set { __pbn__server_state = value; }
+            get => __pbn__server_state ?? ELobbyServerState.k_eLobbyServerState_Assign;
+            set => __pbn__server_state = value;
         }
         public bool ShouldSerializeserver_state() => __pbn__server_state != null;
         public void Resetserver_state() => __pbn__server_state = null;
@@ -124,8 +125,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(9, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint replay_salt
         {
-            get { return __pbn__replay_salt.GetValueOrDefault(); }
-            set { __pbn__replay_salt = value; }
+            get => __pbn__replay_salt.GetValueOrDefault();
+            set => __pbn__replay_salt = value;
         }
         public bool ShouldSerializereplay_salt() => __pbn__replay_salt != null;
         public void Resetreplay_salt() => __pbn__replay_salt = null;
@@ -135,8 +136,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue(EDCGMatchMode.k_EDCGMatchMode_Unranked)]
         public EDCGMatchMode match_mode
         {
-            get { return __pbn__match_mode ?? EDCGMatchMode.k_EDCGMatchMode_Unranked; }
-            set { __pbn__match_mode = value; }
+            get => __pbn__match_mode ?? EDCGMatchMode.k_EDCGMatchMode_Unranked;
+            set => __pbn__match_mode = value;
         }
         public bool ShouldSerializematch_mode() => __pbn__match_mode != null;
         public void Resetmatch_mode() => __pbn__match_mode = null;
@@ -145,8 +146,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public uint udp_connect_ip
         {
-            get { return __pbn__udp_connect_ip.GetValueOrDefault(); }
-            set { __pbn__udp_connect_ip = value; }
+            get => __pbn__udp_connect_ip.GetValueOrDefault();
+            set => __pbn__udp_connect_ip = value;
         }
         public bool ShouldSerializeudp_connect_ip() => __pbn__udp_connect_ip != null;
         public void Resetudp_connect_ip() => __pbn__udp_connect_ip = null;
@@ -155,8 +156,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(12)]
         public uint udp_connect_port
         {
-            get { return __pbn__udp_connect_port.GetValueOrDefault(); }
-            set { __pbn__udp_connect_port = value; }
+            get => __pbn__udp_connect_port.GetValueOrDefault();
+            set => __pbn__udp_connect_port = value;
         }
         public bool ShouldSerializeudp_connect_port() => __pbn__udp_connect_port != null;
         public void Resetudp_connect_port() => __pbn__udp_connect_port = null;
@@ -165,8 +166,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(13)]
         public ulong tourney_id
         {
-            get { return __pbn__tourney_id.GetValueOrDefault(); }
-            set { __pbn__tourney_id = value; }
+            get => __pbn__tourney_id.GetValueOrDefault();
+            set => __pbn__tourney_id = value;
         }
         public bool ShouldSerializetourney_id() => __pbn__tourney_id != null;
         public void Resettourney_id() => __pbn__tourney_id = null;
@@ -175,8 +176,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(14)]
         public uint tourney_phase_id
         {
-            get { return __pbn__tourney_phase_id.GetValueOrDefault(); }
-            set { __pbn__tourney_phase_id = value; }
+            get => __pbn__tourney_phase_id.GetValueOrDefault();
+            set => __pbn__tourney_phase_id = value;
         }
         public bool ShouldSerializetourney_phase_id() => __pbn__tourney_phase_id != null;
         public void Resettourney_phase_id() => __pbn__tourney_phase_id = null;
@@ -185,8 +186,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public uint tourney_series_id
         {
-            get { return __pbn__tourney_series_id.GetValueOrDefault(); }
-            set { __pbn__tourney_series_id = value; }
+            get => __pbn__tourney_series_id.GetValueOrDefault();
+            set => __pbn__tourney_series_id = value;
         }
         public bool ShouldSerializetourney_series_id() => __pbn__tourney_series_id != null;
         public void Resettourney_series_id() => __pbn__tourney_series_id = null;
@@ -202,8 +203,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint wins
             {
-                get { return __pbn__wins.GetValueOrDefault(); }
-                set { __pbn__wins = value; }
+                get => __pbn__wins.GetValueOrDefault();
+                set => __pbn__wins = value;
             }
             public bool ShouldSerializewins() => __pbn__wins != null;
             public void Resetwins() => __pbn__wins = null;
@@ -212,8 +213,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint losses
             {
-                get { return __pbn__losses.GetValueOrDefault(); }
-                set { __pbn__losses = value; }
+                get => __pbn__losses.GetValueOrDefault();
+                set => __pbn__losses = value;
             }
             public bool ShouldSerializelosses() => __pbn__losses != null;
             public void Resetlosses() => __pbn__losses = null;
@@ -231,8 +232,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -242,8 +243,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string persona_name
             {
-                get { return __pbn__persona_name ?? ""; }
-                set { __pbn__persona_name = value; }
+                get => __pbn__persona_name ?? "";
+                set => __pbn__persona_name = value;
             }
             public bool ShouldSerializepersona_name() => __pbn__persona_name != null;
             public void Resetpersona_name() => __pbn__persona_name = null;
@@ -253,8 +254,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::System.ComponentModel.DefaultValue(EDCGLobbyTeam.k_EDCGLobbyTeam_Team0)]
             public EDCGLobbyTeam team
             {
-                get { return __pbn__team ?? EDCGLobbyTeam.k_EDCGLobbyTeam_Team0; }
-                set { __pbn__team = value; }
+                get => __pbn__team ?? EDCGLobbyTeam.k_EDCGLobbyTeam_Team0;
+                set => __pbn__team = value;
             }
             public bool ShouldSerializeteam() => __pbn__team != null;
             public void Resetteam() => __pbn__team = null;
@@ -263,8 +264,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public bool has_left
             {
-                get { return __pbn__has_left.GetValueOrDefault(); }
-                set { __pbn__has_left = value; }
+                get => __pbn__has_left.GetValueOrDefault();
+                set => __pbn__has_left = value;
             }
             public bool ShouldSerializehas_left() => __pbn__has_left != null;
             public void Resethas_left() => __pbn__has_left = null;
@@ -273,8 +274,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public bool is_anonymous
             {
-                get { return __pbn__is_anonymous.GetValueOrDefault(); }
-                set { __pbn__is_anonymous = value; }
+                get => __pbn__is_anonymous.GetValueOrDefault();
+                set => __pbn__is_anonymous = value;
             }
             public bool ShouldSerializeis_anonymous() => __pbn__is_anonymous != null;
             public void Resetis_anonymous() => __pbn__is_anonymous = null;
@@ -307,8 +308,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -317,8 +318,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint question_id
             {
-                get { return __pbn__question_id.GetValueOrDefault(); }
-                set { __pbn__question_id = value; }
+                get => __pbn__question_id.GetValueOrDefault();
+                set => __pbn__question_id = value;
             }
             public bool ShouldSerializequestion_id() => __pbn__question_id != null;
             public void Resetquestion_id() => __pbn__question_id = null;
@@ -338,8 +339,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -348,8 +349,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint flags
         {
-            get { return __pbn__flags.GetValueOrDefault(); }
-            set { __pbn__flags = value; }
+            get => __pbn__flags.GetValueOrDefault();
+            set => __pbn__flags = value;
         }
         public bool ShouldSerializeflags() => __pbn__flags != null;
         public void Resetflags() => __pbn__flags = null;
@@ -358,8 +359,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint initial_grant_ack_def
         {
-            get { return __pbn__initial_grant_ack_def.GetValueOrDefault(); }
-            set { __pbn__initial_grant_ack_def = value; }
+            get => __pbn__initial_grant_ack_def.GetValueOrDefault();
+            set => __pbn__initial_grant_ack_def = value;
         }
         public bool ShouldSerializeinitial_grant_ack_def() => __pbn__initial_grant_ack_def != null;
         public void Resetinitial_grant_ack_def() => __pbn__initial_grant_ack_def = null;
@@ -368,8 +369,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint recycling_progress
         {
-            get { return __pbn__recycling_progress.GetValueOrDefault(); }
-            set { __pbn__recycling_progress = value; }
+            get => __pbn__recycling_progress.GetValueOrDefault();
+            set => __pbn__recycling_progress = value;
         }
         public bool ShouldSerializerecycling_progress() => __pbn__recycling_progress != null;
         public void Resetrecycling_progress() => __pbn__recycling_progress = null;
@@ -378,8 +379,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint progress_level
         {
-            get { return __pbn__progress_level.GetValueOrDefault(); }
-            set { __pbn__progress_level = value; }
+            get => __pbn__progress_level.GetValueOrDefault();
+            set => __pbn__progress_level = value;
         }
         public bool ShouldSerializeprogress_level() => __pbn__progress_level != null;
         public void Resetprogress_level() => __pbn__progress_level = null;
@@ -388,8 +389,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint progress_xp
         {
-            get { return __pbn__progress_xp.GetValueOrDefault(); }
-            set { __pbn__progress_xp = value; }
+            get => __pbn__progress_xp.GetValueOrDefault();
+            set => __pbn__progress_xp = value;
         }
         public bool ShouldSerializeprogress_xp() => __pbn__progress_xp != null;
         public void Resetprogress_xp() => __pbn__progress_xp = null;
@@ -398,8 +399,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public uint constructed_mmr_level
         {
-            get { return __pbn__constructed_mmr_level.GetValueOrDefault(); }
-            set { __pbn__constructed_mmr_level = value; }
+            get => __pbn__constructed_mmr_level.GetValueOrDefault();
+            set => __pbn__constructed_mmr_level = value;
         }
         public bool ShouldSerializeconstructed_mmr_level() => __pbn__constructed_mmr_level != null;
         public void Resetconstructed_mmr_level() => __pbn__constructed_mmr_level = null;
@@ -408,8 +409,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public uint last_win_bounus_time
         {
-            get { return __pbn__last_win_bounus_time.GetValueOrDefault(); }
-            set { __pbn__last_win_bounus_time = value; }
+            get => __pbn__last_win_bounus_time.GetValueOrDefault();
+            set => __pbn__last_win_bounus_time = value;
         }
         public bool ShouldSerializelast_win_bounus_time() => __pbn__last_win_bounus_time != null;
         public void Resetlast_win_bounus_time() => __pbn__last_win_bounus_time = null;
@@ -418,8 +419,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public uint match_win_streak
         {
-            get { return __pbn__match_win_streak.GetValueOrDefault(); }
-            set { __pbn__match_win_streak = value; }
+            get => __pbn__match_win_streak.GetValueOrDefault();
+            set => __pbn__match_win_streak = value;
         }
         public bool ShouldSerializematch_win_streak() => __pbn__match_win_streak != null;
         public void Resetmatch_win_streak() => __pbn__match_win_streak = null;
@@ -428,8 +429,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(12)]
         public uint bonus_period_wins
         {
-            get { return __pbn__bonus_period_wins.GetValueOrDefault(); }
-            set { __pbn__bonus_period_wins = value; }
+            get => __pbn__bonus_period_wins.GetValueOrDefault();
+            set => __pbn__bonus_period_wins = value;
         }
         public bool ShouldSerializebonus_period_wins() => __pbn__bonus_period_wins != null;
         public void Resetbonus_period_wins() => __pbn__bonus_period_wins = null;
@@ -438,8 +439,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(13)]
         public uint player_badge
         {
-            get { return __pbn__player_badge.GetValueOrDefault(); }
-            set { __pbn__player_badge = value; }
+            get => __pbn__player_badge.GetValueOrDefault();
+            set => __pbn__player_badge = value;
         }
         public bool ShouldSerializeplayer_badge() => __pbn__player_badge != null;
         public void Resetplayer_badge() => __pbn__player_badge = null;
@@ -448,8 +449,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(14)]
         public uint draft_mmr_level
         {
-            get { return __pbn__draft_mmr_level.GetValueOrDefault(); }
-            set { __pbn__draft_mmr_level = value; }
+            get => __pbn__draft_mmr_level.GetValueOrDefault();
+            set => __pbn__draft_mmr_level = value;
         }
         public bool ShouldSerializedraft_mmr_level() => __pbn__draft_mmr_level != null;
         public void Resetdraft_mmr_level() => __pbn__draft_mmr_level = null;
@@ -473,8 +474,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -483,8 +484,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint gauntlet_id
         {
-            get { return __pbn__gauntlet_id.GetValueOrDefault(); }
-            set { __pbn__gauntlet_id = value; }
+            get => __pbn__gauntlet_id.GetValueOrDefault();
+            set => __pbn__gauntlet_id = value;
         }
         public bool ShouldSerializegauntlet_id() => __pbn__gauntlet_id != null;
         public void Resetgauntlet_id() => __pbn__gauntlet_id = null;
@@ -493,8 +494,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong active_lobby_id
         {
-            get { return __pbn__active_lobby_id.GetValueOrDefault(); }
-            set { __pbn__active_lobby_id = value; }
+            get => __pbn__active_lobby_id.GetValueOrDefault();
+            set => __pbn__active_lobby_id = value;
         }
         public bool ShouldSerializeactive_lobby_id() => __pbn__active_lobby_id != null;
         public void Resetactive_lobby_id() => __pbn__active_lobby_id = null;
@@ -503,8 +504,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint abandoned_time
         {
-            get { return __pbn__abandoned_time.GetValueOrDefault(); }
-            set { __pbn__abandoned_time = value; }
+            get => __pbn__abandoned_time.GetValueOrDefault();
+            set => __pbn__abandoned_time = value;
         }
         public bool ShouldSerializeabandoned_time() => __pbn__abandoned_time != null;
         public void Resetabandoned_time() => __pbn__abandoned_time = null;
@@ -513,8 +514,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public byte[] deck_bytes
         {
-            get { return __pbn__deck_bytes; }
-            set { __pbn__deck_bytes = value; }
+            get => __pbn__deck_bytes;
+            set => __pbn__deck_bytes = value;
         }
         public bool ShouldSerializedeck_bytes() => __pbn__deck_bytes != null;
         public void Resetdeck_bytes() => __pbn__deck_bytes = null;
@@ -523,8 +524,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public ulong gauntlet_instance
         {
-            get { return __pbn__gauntlet_instance.GetValueOrDefault(); }
-            set { __pbn__gauntlet_instance = value; }
+            get => __pbn__gauntlet_instance.GetValueOrDefault();
+            set => __pbn__gauntlet_instance = value;
         }
         public bool ShouldSerializegauntlet_instance() => __pbn__gauntlet_instance != null;
         public void Resetgauntlet_instance() => __pbn__gauntlet_instance = null;
@@ -533,8 +534,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public uint entry_type
         {
-            get { return __pbn__entry_type.GetValueOrDefault(); }
-            set { __pbn__entry_type = value; }
+            get => __pbn__entry_type.GetValueOrDefault();
+            set => __pbn__entry_type = value;
         }
         public bool ShouldSerializeentry_type() => __pbn__entry_type != null;
         public void Resetentry_type() => __pbn__entry_type = null;
@@ -543,8 +544,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public ulong limited_instance
         {
-            get { return __pbn__limited_instance.GetValueOrDefault(); }
-            set { __pbn__limited_instance = value; }
+            get => __pbn__limited_instance.GetValueOrDefault();
+            set => __pbn__limited_instance = value;
         }
         public bool ShouldSerializelimited_instance() => __pbn__limited_instance != null;
         public void Resetlimited_instance() => __pbn__limited_instance = null;
@@ -553,8 +554,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(12)]
         public uint wins
         {
-            get { return __pbn__wins.GetValueOrDefault(); }
-            set { __pbn__wins = value; }
+            get => __pbn__wins.GetValueOrDefault();
+            set => __pbn__wins = value;
         }
         public bool ShouldSerializewins() => __pbn__wins != null;
         public void Resetwins() => __pbn__wins = null;
@@ -563,8 +564,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(13)]
         public uint losses
         {
-            get { return __pbn__losses.GetValueOrDefault(); }
-            set { __pbn__losses = value; }
+            get => __pbn__losses.GetValueOrDefault();
+            set => __pbn__losses = value;
         }
         public bool ShouldSerializelosses() => __pbn__losses != null;
         public void Resetlosses() => __pbn__losses = null;
@@ -573,8 +574,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(14)]
         public ulong wins_mask
         {
-            get { return __pbn__wins_mask.GetValueOrDefault(); }
-            set { __pbn__wins_mask = value; }
+            get => __pbn__wins_mask.GetValueOrDefault();
+            set => __pbn__wins_mask = value;
         }
         public bool ShouldSerializewins_mask() => __pbn__wins_mask != null;
         public void Resetwins_mask() => __pbn__wins_mask = null;
@@ -583,8 +584,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public bool select_random_deck
         {
-            get { return __pbn__select_random_deck.GetValueOrDefault(); }
-            set { __pbn__select_random_deck = value; }
+            get => __pbn__select_random_deck.GetValueOrDefault();
+            set => __pbn__select_random_deck = value;
         }
         public bool ShouldSerializeselect_random_deck() => __pbn__select_random_deck != null;
         public void Resetselect_random_deck() => __pbn__select_random_deck = null;
@@ -602,8 +603,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -612,8 +613,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong limited_pool
         {
-            get { return __pbn__limited_pool.GetValueOrDefault(); }
-            set { __pbn__limited_pool = value; }
+            get => __pbn__limited_pool.GetValueOrDefault();
+            set => __pbn__limited_pool = value;
         }
         public bool ShouldSerializelimited_pool() => __pbn__limited_pool != null;
         public void Resetlimited_pool() => __pbn__limited_pool = null;
@@ -622,8 +623,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint def_index
         {
-            get { return __pbn__def_index.GetValueOrDefault(); }
-            set { __pbn__def_index = value; }
+            get => __pbn__def_index.GetValueOrDefault();
+            set => __pbn__def_index = value;
         }
         public bool ShouldSerializedef_index() => __pbn__def_index != null;
         public void Resetdef_index() => __pbn__def_index = null;
@@ -632,8 +633,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public ulong phantom_id
         {
-            get { return __pbn__phantom_id.GetValueOrDefault(); }
-            set { __pbn__phantom_id = value; }
+            get => __pbn__phantom_id.GetValueOrDefault();
+            set => __pbn__phantom_id = value;
         }
         public bool ShouldSerializephantom_id() => __pbn__phantom_id != null;
         public void Resetphantom_id() => __pbn__phantom_id = null;
@@ -651,8 +652,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -661,8 +662,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint achievement_id
         {
-            get { return __pbn__achievement_id.GetValueOrDefault(); }
-            set { __pbn__achievement_id = value; }
+            get => __pbn__achievement_id.GetValueOrDefault();
+            set => __pbn__achievement_id = value;
         }
         public bool ShouldSerializeachievement_id() => __pbn__achievement_id != null;
         public void Resetachievement_id() => __pbn__achievement_id = null;
@@ -671,8 +672,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint progress
         {
-            get { return __pbn__progress.GetValueOrDefault(); }
-            set { __pbn__progress = value; }
+            get => __pbn__progress.GetValueOrDefault();
+            set => __pbn__progress = value;
         }
         public bool ShouldSerializeprogress() => __pbn__progress != null;
         public void Resetprogress() => __pbn__progress = null;
@@ -690,8 +691,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -700,8 +701,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong limited_instance_id
         {
-            get { return __pbn__limited_instance_id.GetValueOrDefault(); }
-            set { __pbn__limited_instance_id = value; }
+            get => __pbn__limited_instance_id.GetValueOrDefault();
+            set => __pbn__limited_instance_id = value;
         }
         public bool ShouldSerializelimited_instance_id() => __pbn__limited_instance_id != null;
         public void Resetlimited_instance_id() => __pbn__limited_instance_id = null;
@@ -710,8 +711,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong limited_pool_id
         {
-            get { return __pbn__limited_pool_id.GetValueOrDefault(); }
-            set { __pbn__limited_pool_id = value; }
+            get => __pbn__limited_pool_id.GetValueOrDefault();
+            set => __pbn__limited_pool_id = value;
         }
         public bool ShouldSerializelimited_pool_id() => __pbn__limited_pool_id != null;
         public void Resetlimited_pool_id() => __pbn__limited_pool_id = null;
@@ -720,8 +721,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint limited_format
         {
-            get { return __pbn__limited_format.GetValueOrDefault(); }
-            set { __pbn__limited_format = value; }
+            get => __pbn__limited_format.GetValueOrDefault();
+            set => __pbn__limited_format = value;
         }
         public bool ShouldSerializelimited_format() => __pbn__limited_format != null;
         public void Resetlimited_format() => __pbn__limited_format = null;
@@ -730,8 +731,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint progress
         {
-            get { return __pbn__progress.GetValueOrDefault(); }
-            set { __pbn__progress = value; }
+            get => __pbn__progress.GetValueOrDefault();
+            set => __pbn__progress = value;
         }
         public bool ShouldSerializeprogress() => __pbn__progress != null;
         public void Resetprogress() => __pbn__progress = null;
@@ -740,8 +741,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint flags
         {
-            get { return __pbn__flags.GetValueOrDefault(); }
-            set { __pbn__flags = value; }
+            get => __pbn__flags.GetValueOrDefault();
+            set => __pbn__flags = value;
         }
         public bool ShouldSerializeflags() => __pbn__flags != null;
         public void Resetflags() => __pbn__flags = null;
@@ -759,8 +760,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -769,8 +770,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong tourney_id
         {
-            get { return __pbn__tourney_id.GetValueOrDefault(); }
-            set { __pbn__tourney_id = value; }
+            get => __pbn__tourney_id.GetValueOrDefault();
+            set => __pbn__tourney_id = value;
         }
         public bool ShouldSerializetourney_id() => __pbn__tourney_id != null;
         public void Resettourney_id() => __pbn__tourney_id = null;
@@ -779,8 +780,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint player_status
         {
-            get { return __pbn__player_status.GetValueOrDefault(); }
-            set { __pbn__player_status = value; }
+            get => __pbn__player_status.GetValueOrDefault();
+            set => __pbn__player_status = value;
         }
         public bool ShouldSerializeplayer_status() => __pbn__player_status != null;
         public void Resetplayer_status() => __pbn__player_status = null;
@@ -790,8 +791,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue(EStatus.k_eConfigure)]
         public EStatus tourney_status
         {
-            get { return __pbn__tourney_status ?? EStatus.k_eConfigure; }
-            set { __pbn__tourney_status = value; }
+            get => __pbn__tourney_status ?? EStatus.k_eConfigure;
+            set => __pbn__tourney_status = value;
         }
         public bool ShouldSerializetourney_status() => __pbn__tourney_status != null;
         public void Resettourney_status() => __pbn__tourney_status = null;
@@ -800,8 +801,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint joined_time
         {
-            get { return __pbn__joined_time.GetValueOrDefault(); }
-            set { __pbn__joined_time = value; }
+            get => __pbn__joined_time.GetValueOrDefault();
+            set => __pbn__joined_time = value;
         }
         public bool ShouldSerializejoined_time() => __pbn__joined_time != null;
         public void Resetjoined_time() => __pbn__joined_time = null;
@@ -810,8 +811,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint open_tourney
         {
-            get { return __pbn__open_tourney.GetValueOrDefault(); }
-            set { __pbn__open_tourney = value; }
+            get => __pbn__open_tourney.GetValueOrDefault();
+            set => __pbn__open_tourney = value;
         }
         public bool ShouldSerializeopen_tourney() => __pbn__open_tourney != null;
         public void Resetopen_tourney() => __pbn__open_tourney = null;
@@ -844,8 +845,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -854,8 +855,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong tourney_id
         {
-            get { return __pbn__tourney_id.GetValueOrDefault(); }
-            set { __pbn__tourney_id = value; }
+            get => __pbn__tourney_id.GetValueOrDefault();
+            set => __pbn__tourney_id = value;
         }
         public bool ShouldSerializetourney_id() => __pbn__tourney_id != null;
         public void Resettourney_id() => __pbn__tourney_id = null;
@@ -864,8 +865,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public bool is_full
         {
-            get { return __pbn__is_full.GetValueOrDefault(); }
-            set { __pbn__is_full = value; }
+            get => __pbn__is_full.GetValueOrDefault();
+            set => __pbn__is_full = value;
         }
         public bool ShouldSerializeis_full() => __pbn__is_full != null;
         public void Resetis_full() => __pbn__is_full = null;
@@ -874,8 +875,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint invited_by
         {
-            get { return __pbn__invited_by.GetValueOrDefault(); }
-            set { __pbn__invited_by = value; }
+            get => __pbn__invited_by.GetValueOrDefault();
+            set => __pbn__invited_by = value;
         }
         public bool ShouldSerializeinvited_by() => __pbn__invited_by != null;
         public void Resetinvited_by() => __pbn__invited_by = null;
@@ -884,8 +885,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint rights_flags
         {
-            get { return __pbn__rights_flags.GetValueOrDefault(); }
-            set { __pbn__rights_flags = value; }
+            get => __pbn__rights_flags.GetValueOrDefault();
+            set => __pbn__rights_flags = value;
         }
         public bool ShouldSerializerights_flags() => __pbn__rights_flags != null;
         public void Resetrights_flags() => __pbn__rights_flags = null;
@@ -903,8 +904,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint gauntlet_id
         {
-            get { return __pbn__gauntlet_id.GetValueOrDefault(); }
-            set { __pbn__gauntlet_id = value; }
+            get => __pbn__gauntlet_id.GetValueOrDefault();
+            set => __pbn__gauntlet_id = value;
         }
         public bool ShouldSerializegauntlet_id() => __pbn__gauntlet_id != null;
         public void Resetgauntlet_id() => __pbn__gauntlet_id = null;
@@ -914,8 +915,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string server_search_key
         {
-            get { return __pbn__server_search_key ?? ""; }
-            set { __pbn__server_search_key = value; }
+            get => __pbn__server_search_key ?? "";
+            set => __pbn__server_search_key = value;
         }
         public bool ShouldSerializeserver_search_key() => __pbn__server_search_key != null;
         public void Resetserver_search_key() => __pbn__server_search_key = null;
@@ -924,8 +925,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint client_version
         {
-            get { return __pbn__client_version.GetValueOrDefault(); }
-            set { __pbn__client_version = value; }
+            get => __pbn__client_version.GetValueOrDefault();
+            set => __pbn__client_version = value;
         }
         public bool ShouldSerializeclient_version() => __pbn__client_version != null;
         public void Resetclient_version() => __pbn__client_version = null;
@@ -935,8 +936,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue(EDCGMatchMode.k_EDCGMatchMode_Unranked)]
         public EDCGMatchMode match_mode
         {
-            get { return __pbn__match_mode ?? EDCGMatchMode.k_EDCGMatchMode_Unranked; }
-            set { __pbn__match_mode = value; }
+            get => __pbn__match_mode ?? EDCGMatchMode.k_EDCGMatchMode_Unranked;
+            set => __pbn__match_mode = value;
         }
         public bool ShouldSerializematch_mode() => __pbn__match_mode != null;
         public void Resetmatch_mode() => __pbn__match_mode = null;
@@ -945,8 +946,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public byte[] deck_data
         {
-            get { return __pbn__deck_data; }
-            set { __pbn__deck_data = value; }
+            get => __pbn__deck_data;
+            set => __pbn__deck_data = value;
         }
         public bool ShouldSerializedeck_data() => __pbn__deck_data != null;
         public void Resetdeck_data() => __pbn__deck_data = null;
@@ -955,8 +956,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public bool is_anonymous
         {
-            get { return __pbn__is_anonymous.GetValueOrDefault(); }
-            set { __pbn__is_anonymous = value; }
+            get => __pbn__is_anonymous.GetValueOrDefault();
+            set => __pbn__is_anonymous = value;
         }
         public bool ShouldSerializeis_anonymous() => __pbn__is_anonymous != null;
         public void Resetis_anonymous() => __pbn__is_anonymous = null;
@@ -975,8 +976,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue(DCG_COMBATLOG_TYPES.DCG_COMBATLOG_INVALID)]
         public DCG_COMBATLOG_TYPES type
         {
-            get { return __pbn__type ?? DCG_COMBATLOG_TYPES.DCG_COMBATLOG_INVALID; }
-            set { __pbn__type = value; }
+            get => __pbn__type ?? DCG_COMBATLOG_TYPES.DCG_COMBATLOG_INVALID;
+            set => __pbn__type = value;
         }
         public bool ShouldSerializetype() => __pbn__type != null;
         public void Resettype() => __pbn__type = null;
@@ -985,8 +986,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint target_card_id
         {
-            get { return __pbn__target_card_id.GetValueOrDefault(); }
-            set { __pbn__target_card_id = value; }
+            get => __pbn__target_card_id.GetValueOrDefault();
+            set => __pbn__target_card_id = value;
         }
         public bool ShouldSerializetarget_card_id() => __pbn__target_card_id != null;
         public void Resettarget_card_id() => __pbn__target_card_id = null;
@@ -995,8 +996,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint target_object_id
         {
-            get { return __pbn__target_object_id.GetValueOrDefault(); }
-            set { __pbn__target_object_id = value; }
+            get => __pbn__target_object_id.GetValueOrDefault();
+            set => __pbn__target_object_id = value;
         }
         public bool ShouldSerializetarget_object_id() => __pbn__target_object_id != null;
         public void Resettarget_object_id() => __pbn__target_object_id = null;
@@ -1005,8 +1006,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint target_owner
         {
-            get { return __pbn__target_owner.GetValueOrDefault(); }
-            set { __pbn__target_owner = value; }
+            get => __pbn__target_owner.GetValueOrDefault();
+            set => __pbn__target_owner = value;
         }
         public bool ShouldSerializetarget_owner() => __pbn__target_owner != null;
         public void Resettarget_owner() => __pbn__target_owner = null;
@@ -1015,8 +1016,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint source_card_id
         {
-            get { return __pbn__source_card_id.GetValueOrDefault(); }
-            set { __pbn__source_card_id = value; }
+            get => __pbn__source_card_id.GetValueOrDefault();
+            set => __pbn__source_card_id = value;
         }
         public bool ShouldSerializesource_card_id() => __pbn__source_card_id != null;
         public void Resetsource_card_id() => __pbn__source_card_id = null;
@@ -1025,8 +1026,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint source_object_id
         {
-            get { return __pbn__source_object_id.GetValueOrDefault(); }
-            set { __pbn__source_object_id = value; }
+            get => __pbn__source_object_id.GetValueOrDefault();
+            set => __pbn__source_object_id = value;
         }
         public bool ShouldSerializesource_object_id() => __pbn__source_object_id != null;
         public void Resetsource_object_id() => __pbn__source_object_id = null;
@@ -1035,8 +1036,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint source_owner
         {
-            get { return __pbn__source_owner.GetValueOrDefault(); }
-            set { __pbn__source_owner = value; }
+            get => __pbn__source_owner.GetValueOrDefault();
+            set => __pbn__source_owner = value;
         }
         public bool ShouldSerializesource_owner() => __pbn__source_owner != null;
         public void Resetsource_owner() => __pbn__source_owner = null;
@@ -1045,8 +1046,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint value
         {
-            get { return __pbn__value.GetValueOrDefault(); }
-            set { __pbn__value = value; }
+            get => __pbn__value.GetValueOrDefault();
+            set => __pbn__value = value;
         }
         public bool ShouldSerializevalue() => __pbn__value != null;
         public void Resetvalue() => __pbn__value = null;
@@ -1055,8 +1056,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public int target_attack
         {
-            get { return __pbn__target_attack.GetValueOrDefault(); }
-            set { __pbn__target_attack = value; }
+            get => __pbn__target_attack.GetValueOrDefault();
+            set => __pbn__target_attack = value;
         }
         public bool ShouldSerializetarget_attack() => __pbn__target_attack != null;
         public void Resettarget_attack() => __pbn__target_attack = null;
@@ -1065,8 +1066,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public int target_armor
         {
-            get { return __pbn__target_armor.GetValueOrDefault(); }
-            set { __pbn__target_armor = value; }
+            get => __pbn__target_armor.GetValueOrDefault();
+            set => __pbn__target_armor = value;
         }
         public bool ShouldSerializetarget_armor() => __pbn__target_armor != null;
         public void Resettarget_armor() => __pbn__target_armor = null;
@@ -1075,8 +1076,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public int target_health
         {
-            get { return __pbn__target_health.GetValueOrDefault(); }
-            set { __pbn__target_health = value; }
+            get => __pbn__target_health.GetValueOrDefault();
+            set => __pbn__target_health = value;
         }
         public bool ShouldSerializetarget_health() => __pbn__target_health != null;
         public void Resettarget_health() => __pbn__target_health = null;
@@ -1085,8 +1086,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(12)]
         public int source_attack
         {
-            get { return __pbn__source_attack.GetValueOrDefault(); }
-            set { __pbn__source_attack = value; }
+            get => __pbn__source_attack.GetValueOrDefault();
+            set => __pbn__source_attack = value;
         }
         public bool ShouldSerializesource_attack() => __pbn__source_attack != null;
         public void Resetsource_attack() => __pbn__source_attack = null;
@@ -1095,8 +1096,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(13)]
         public int source_armor
         {
-            get { return __pbn__source_armor.GetValueOrDefault(); }
-            set { __pbn__source_armor = value; }
+            get => __pbn__source_armor.GetValueOrDefault();
+            set => __pbn__source_armor = value;
         }
         public bool ShouldSerializesource_armor() => __pbn__source_armor != null;
         public void Resetsource_armor() => __pbn__source_armor = null;
@@ -1105,8 +1106,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(14)]
         public int source_health
         {
-            get { return __pbn__source_health.GetValueOrDefault(); }
-            set { __pbn__source_health = value; }
+            get => __pbn__source_health.GetValueOrDefault();
+            set => __pbn__source_health = value;
         }
         public bool ShouldSerializesource_health() => __pbn__source_health != null;
         public void Resetsource_health() => __pbn__source_health = null;
@@ -1115,8 +1116,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public uint turnstamp
         {
-            get { return __pbn__turnstamp.GetValueOrDefault(); }
-            set { __pbn__turnstamp = value; }
+            get => __pbn__turnstamp.GetValueOrDefault();
+            set => __pbn__turnstamp = value;
         }
         public bool ShouldSerializeturnstamp() => __pbn__turnstamp != null;
         public void Resetturnstamp() => __pbn__turnstamp = null;
@@ -1125,8 +1126,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(16)]
         public uint source_lane
         {
-            get { return __pbn__source_lane.GetValueOrDefault(); }
-            set { __pbn__source_lane = value; }
+            get => __pbn__source_lane.GetValueOrDefault();
+            set => __pbn__source_lane = value;
         }
         public bool ShouldSerializesource_lane() => __pbn__source_lane != null;
         public void Resetsource_lane() => __pbn__source_lane = null;
@@ -1135,8 +1136,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(17)]
         public uint target_lane
         {
-            get { return __pbn__target_lane.GetValueOrDefault(); }
-            set { __pbn__target_lane = value; }
+            get => __pbn__target_lane.GetValueOrDefault();
+            set => __pbn__target_lane = value;
         }
         public bool ShouldSerializetarget_lane() => __pbn__target_lane != null;
         public void Resettarget_lane() => __pbn__target_lane = null;
@@ -1145,8 +1146,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(18)]
         public uint source_parent_card_id
         {
-            get { return __pbn__source_parent_card_id.GetValueOrDefault(); }
-            set { __pbn__source_parent_card_id = value; }
+            get => __pbn__source_parent_card_id.GetValueOrDefault();
+            set => __pbn__source_parent_card_id = value;
         }
         public bool ShouldSerializesource_parent_card_id() => __pbn__source_parent_card_id != null;
         public void Resetsource_parent_card_id() => __pbn__source_parent_card_id = null;
@@ -1155,8 +1156,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(19)]
         public uint source_parent_object_id
         {
-            get { return __pbn__source_parent_object_id.GetValueOrDefault(); }
-            set { __pbn__source_parent_object_id = value; }
+            get => __pbn__source_parent_object_id.GetValueOrDefault();
+            set => __pbn__source_parent_object_id = value;
         }
         public bool ShouldSerializesource_parent_object_id() => __pbn__source_parent_object_id != null;
         public void Resetsource_parent_object_id() => __pbn__source_parent_object_id = null;
@@ -1165,8 +1166,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(20)]
         public uint modifier_type
         {
-            get { return __pbn__modifier_type.GetValueOrDefault(); }
-            set { __pbn__modifier_type = value; }
+            get => __pbn__modifier_type.GetValueOrDefault();
+            set => __pbn__modifier_type = value;
         }
         public bool ShouldSerializemodifier_type() => __pbn__modifier_type != null;
         public void Resetmodifier_type() => __pbn__modifier_type = null;
@@ -1175,8 +1176,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(21)]
         public bool piercing
         {
-            get { return __pbn__piercing.GetValueOrDefault(); }
-            set { __pbn__piercing = value; }
+            get => __pbn__piercing.GetValueOrDefault();
+            set => __pbn__piercing = value;
         }
         public bool ShouldSerializepiercing() => __pbn__piercing != null;
         public void Resetpiercing() => __pbn__piercing = null;
@@ -1186,8 +1187,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string effect_name
         {
-            get { return __pbn__effect_name ?? ""; }
-            set { __pbn__effect_name = value; }
+            get => __pbn__effect_name ?? "";
+            set => __pbn__effect_name = value;
         }
         public bool ShouldSerializeeffect_name() => __pbn__effect_name != null;
         public void Reseteffect_name() => __pbn__effect_name = null;
@@ -1196,8 +1197,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(23)]
         public uint target_combat_position
         {
-            get { return __pbn__target_combat_position.GetValueOrDefault(); }
-            set { __pbn__target_combat_position = value; }
+            get => __pbn__target_combat_position.GetValueOrDefault();
+            set => __pbn__target_combat_position = value;
         }
         public bool ShouldSerializetarget_combat_position() => __pbn__target_combat_position != null;
         public void Resettarget_combat_position() => __pbn__target_combat_position = null;
@@ -1215,8 +1216,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint version
         {
-            get { return __pbn__version.GetValueOrDefault(); }
-            set { __pbn__version = value; }
+            get => __pbn__version.GetValueOrDefault();
+            set => __pbn__version = value;
         }
         public bool ShouldSerializeversion() => __pbn__version != null;
         public void Resetversion() => __pbn__version = null;
@@ -1225,8 +1226,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public bool must_own_cards
         {
-            get { return __pbn__must_own_cards.GetValueOrDefault(); }
-            set { __pbn__must_own_cards = value; }
+            get => __pbn__must_own_cards.GetValueOrDefault();
+            set => __pbn__must_own_cards = value;
         }
         public bool ShouldSerializemust_own_cards() => __pbn__must_own_cards != null;
         public void Resetmust_own_cards() => __pbn__must_own_cards = null;
@@ -1238,8 +1239,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint main_min
         {
-            get { return __pbn__main_min.GetValueOrDefault(); }
-            set { __pbn__main_min = value; }
+            get => __pbn__main_min.GetValueOrDefault();
+            set => __pbn__main_min = value;
         }
         public bool ShouldSerializemain_min() => __pbn__main_min != null;
         public void Resetmain_min() => __pbn__main_min = null;
@@ -1248,8 +1249,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint main_max
         {
-            get { return __pbn__main_max.GetValueOrDefault(); }
-            set { __pbn__main_max = value; }
+            get => __pbn__main_max.GetValueOrDefault();
+            set => __pbn__main_max = value;
         }
         public bool ShouldSerializemain_max() => __pbn__main_max != null;
         public void Resetmain_max() => __pbn__main_max = null;
@@ -1258,8 +1259,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint items_min
         {
-            get { return __pbn__items_min.GetValueOrDefault(); }
-            set { __pbn__items_min = value; }
+            get => __pbn__items_min.GetValueOrDefault();
+            set => __pbn__items_min = value;
         }
         public bool ShouldSerializeitems_min() => __pbn__items_min != null;
         public void Resetitems_min() => __pbn__items_min = null;
@@ -1268,8 +1269,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint items_max
         {
-            get { return __pbn__items_max.GetValueOrDefault(); }
-            set { __pbn__items_max = value; }
+            get => __pbn__items_max.GetValueOrDefault();
+            set => __pbn__items_max = value;
         }
         public bool ShouldSerializeitems_max() => __pbn__items_max != null;
         public void Resetitems_max() => __pbn__items_max = null;
@@ -1278,8 +1279,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public uint main_max_instances
         {
-            get { return __pbn__main_max_instances.GetValueOrDefault(); }
-            set { __pbn__main_max_instances = value; }
+            get => __pbn__main_max_instances.GetValueOrDefault();
+            set => __pbn__main_max_instances = value;
         }
         public bool ShouldSerializemain_max_instances() => __pbn__main_max_instances != null;
         public void Resetmain_max_instances() => __pbn__main_max_instances = null;
@@ -1288,8 +1289,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public uint items_max_instances
         {
-            get { return __pbn__items_max_instances.GetValueOrDefault(); }
-            set { __pbn__items_max_instances = value; }
+            get => __pbn__items_max_instances.GetValueOrDefault();
+            set => __pbn__items_max_instances = value;
         }
         public bool ShouldSerializeitems_max_instances() => __pbn__items_max_instances != null;
         public void Resetitems_max_instances() => __pbn__items_max_instances = null;
@@ -1298,8 +1299,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public uint hero_max_instances
         {
-            get { return __pbn__hero_max_instances.GetValueOrDefault(); }
-            set { __pbn__hero_max_instances = value; }
+            get => __pbn__hero_max_instances.GetValueOrDefault();
+            set => __pbn__hero_max_instances = value;
         }
         public bool ShouldSerializehero_max_instances() => __pbn__hero_max_instances != null;
         public void Resethero_max_instances() => __pbn__hero_max_instances = null;
@@ -1314,8 +1315,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(14)]
         public bool include_active_sets
         {
-            get { return __pbn__include_active_sets.GetValueOrDefault(); }
-            set { __pbn__include_active_sets = value; }
+            get => __pbn__include_active_sets.GetValueOrDefault();
+            set => __pbn__include_active_sets = value;
         }
         public bool ShouldSerializeinclude_active_sets() => __pbn__include_active_sets != null;
         public void Resetinclude_active_sets() => __pbn__include_active_sets = null;
@@ -1327,8 +1328,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(16)]
         public uint min_deck_colors
         {
-            get { return __pbn__min_deck_colors.GetValueOrDefault(); }
-            set { __pbn__min_deck_colors = value; }
+            get => __pbn__min_deck_colors.GetValueOrDefault();
+            set => __pbn__min_deck_colors = value;
         }
         public bool ShouldSerializemin_deck_colors() => __pbn__min_deck_colors != null;
         public void Resetmin_deck_colors() => __pbn__min_deck_colors = null;
@@ -1337,8 +1338,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(17)]
         public uint max_deck_colors
         {
-            get { return __pbn__max_deck_colors.GetValueOrDefault(); }
-            set { __pbn__max_deck_colors = value; }
+            get => __pbn__max_deck_colors.GetValueOrDefault();
+            set => __pbn__max_deck_colors = value;
         }
         public bool ShouldSerializemax_deck_colors() => __pbn__max_deck_colors != null;
         public void Resetmax_deck_colors() => __pbn__max_deck_colors = null;
@@ -1350,8 +1351,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(19)]
         public bool random_decks
         {
-            get { return __pbn__random_decks.GetValueOrDefault(); }
-            set { __pbn__random_decks = value; }
+            get => __pbn__random_decks.GetValueOrDefault();
+            set => __pbn__random_decks = value;
         }
         public bool ShouldSerializerandom_decks() => __pbn__random_decks != null;
         public void Resetrandom_decks() => __pbn__random_decks = null;
@@ -1370,8 +1371,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public byte[] deck_bytes
             {
-                get { return __pbn__deck_bytes; }
-                set { __pbn__deck_bytes = value; }
+                get => __pbn__deck_bytes;
+                set => __pbn__deck_bytes = value;
             }
             public bool ShouldSerializedeck_bytes() => __pbn__deck_bytes != null;
             public void Resetdeck_bytes() => __pbn__deck_bytes = null;
@@ -1381,8 +1382,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string deck_name
             {
-                get { return __pbn__deck_name ?? ""; }
-                set { __pbn__deck_name = value; }
+                get => __pbn__deck_name ?? "";
+                set => __pbn__deck_name = value;
             }
             public bool ShouldSerializedeck_name() => __pbn__deck_name != null;
             public void Resetdeck_name() => __pbn__deck_name = null;
@@ -1391,8 +1392,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint deck_id
             {
-                get { return __pbn__deck_id.GetValueOrDefault(); }
-                set { __pbn__deck_id = value; }
+                get => __pbn__deck_id.GetValueOrDefault();
+                set => __pbn__deck_id = value;
             }
             public bool ShouldSerializedeck_id() => __pbn__deck_id != null;
             public void Resetdeck_id() => __pbn__deck_id = null;
@@ -1410,8 +1411,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint card_id
             {
-                get { return __pbn__card_id.GetValueOrDefault(); }
-                set { __pbn__card_id = value; }
+                get => __pbn__card_id.GetValueOrDefault();
+                set => __pbn__card_id = value;
             }
             public bool ShouldSerializecard_id() => __pbn__card_id != null;
             public void Resetcard_id() => __pbn__card_id = null;
@@ -1420,8 +1421,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint card_count
             {
-                get { return __pbn__card_count.GetValueOrDefault(); }
-                set { __pbn__card_count = value; }
+                get => __pbn__card_count.GetValueOrDefault();
+                set => __pbn__card_count = value;
             }
             public bool ShouldSerializecard_count() => __pbn__card_count != null;
             public void Resetcard_count() => __pbn__card_count = null;
@@ -1458,8 +1459,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint version
         {
-            get { return __pbn__version.GetValueOrDefault(); }
-            set { __pbn__version = value; }
+            get => __pbn__version.GetValueOrDefault();
+            set => __pbn__version = value;
         }
         public bool ShouldSerializeversion() => __pbn__version != null;
         public void Resetversion() => __pbn__version = null;
@@ -1479,8 +1480,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string filename
             {
-                get { return __pbn__filename ?? ""; }
-                set { __pbn__filename = value; }
+                get => __pbn__filename ?? "";
+                set => __pbn__filename = value;
             }
             public bool ShouldSerializefilename() => __pbn__filename != null;
             public void Resetfilename() => __pbn__filename = null;
@@ -1489,8 +1490,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint line_number
             {
-                get { return __pbn__line_number.GetValueOrDefault(); }
-                set { __pbn__line_number = value; }
+                get => __pbn__line_number.GetValueOrDefault();
+                set => __pbn__line_number = value;
             }
             public bool ShouldSerializeline_number() => __pbn__line_number != null;
             public void Resetline_number() => __pbn__line_number = null;
@@ -1500,8 +1501,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string sample_msg
             {
-                get { return __pbn__sample_msg ?? ""; }
-                set { __pbn__sample_msg = value; }
+                get => __pbn__sample_msg ?? "";
+                set => __pbn__sample_msg = value;
             }
             public bool ShouldSerializesample_msg() => __pbn__sample_msg != null;
             public void Resetsample_msg() => __pbn__sample_msg = null;
@@ -1511,8 +1512,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string sample_stack
             {
-                get { return __pbn__sample_stack ?? ""; }
-                set { __pbn__sample_stack = value; }
+                get => __pbn__sample_stack ?? "";
+                set => __pbn__sample_stack = value;
             }
             public bool ShouldSerializesample_stack() => __pbn__sample_stack != null;
             public void Resetsample_stack() => __pbn__sample_stack = null;
@@ -1521,8 +1522,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint times_fired
             {
-                get { return __pbn__times_fired.GetValueOrDefault(); }
-                set { __pbn__times_fired = value; }
+                get => __pbn__times_fired.GetValueOrDefault();
+                set => __pbn__times_fired = value;
             }
             public bool ShouldSerializetimes_fired() => __pbn__times_fired != null;
             public void Resettimes_fired() => __pbn__times_fired = null;
@@ -1532,8 +1533,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string function_name
             {
-                get { return __pbn__function_name ?? ""; }
-                set { __pbn__function_name = value; }
+                get => __pbn__function_name ?? "";
+                set => __pbn__function_name = value;
             }
             public bool ShouldSerializefunction_name() => __pbn__function_name != null;
             public void Resetfunction_name() => __pbn__function_name = null;
@@ -1543,8 +1544,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string condition
             {
-                get { return __pbn__condition ?? ""; }
-                set { __pbn__condition = value; }
+                get => __pbn__condition ?? "";
+                set => __pbn__condition = value;
             }
             public bool ShouldSerializecondition() => __pbn__condition != null;
             public void Resetcondition() => __pbn__condition = null;
@@ -1564,8 +1565,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool success
         {
-            get { return __pbn__success.GetValueOrDefault(); }
-            set { __pbn__success = value; }
+            get => __pbn__success.GetValueOrDefault();
+            set => __pbn__success = value;
         }
         public bool ShouldSerializesuccess() => __pbn__success != null;
         public void Resetsuccess() => __pbn__success = null;
@@ -1583,8 +1584,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint gauntlet_id
         {
-            get { return __pbn__gauntlet_id.GetValueOrDefault(); }
-            set { __pbn__gauntlet_id = value; }
+            get => __pbn__gauntlet_id.GetValueOrDefault();
+            set => __pbn__gauntlet_id = value;
         }
         public bool ShouldSerializegauntlet_id() => __pbn__gauntlet_id != null;
         public void Resetgauntlet_id() => __pbn__gauntlet_id = null;
@@ -1593,8 +1594,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint activate_time
         {
-            get { return __pbn__activate_time.GetValueOrDefault(); }
-            set { __pbn__activate_time = value; }
+            get => __pbn__activate_time.GetValueOrDefault();
+            set => __pbn__activate_time = value;
         }
         public bool ShouldSerializeactivate_time() => __pbn__activate_time != null;
         public void Resetactivate_time() => __pbn__activate_time = null;
@@ -1603,8 +1604,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint max_wins
         {
-            get { return __pbn__max_wins.GetValueOrDefault(); }
-            set { __pbn__max_wins = value; }
+            get => __pbn__max_wins.GetValueOrDefault();
+            set => __pbn__max_wins = value;
         }
         public bool ShouldSerializemax_wins() => __pbn__max_wins != null;
         public void Resetmax_wins() => __pbn__max_wins = null;
@@ -1613,8 +1614,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint max_losses
         {
-            get { return __pbn__max_losses.GetValueOrDefault(); }
-            set { __pbn__max_losses = value; }
+            get => __pbn__max_losses.GetValueOrDefault();
+            set => __pbn__max_losses = value;
         }
         public bool ShouldSerializemax_losses() => __pbn__max_losses != null;
         public void Resetmax_losses() => __pbn__max_losses = null;
@@ -1623,8 +1624,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint max_games
         {
-            get { return __pbn__max_games.GetValueOrDefault(); }
-            set { __pbn__max_games = value; }
+            get => __pbn__max_games.GetValueOrDefault();
+            set => __pbn__max_games = value;
         }
         public bool ShouldSerializemax_games() => __pbn__max_games != null;
         public void Resetmax_games() => __pbn__max_games = null;
@@ -1639,8 +1640,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public bool register_deck
         {
-            get { return __pbn__register_deck.GetValueOrDefault(); }
-            set { __pbn__register_deck = value; }
+            get => __pbn__register_deck.GetValueOrDefault();
+            set => __pbn__register_deck = value;
         }
         public bool ShouldSerializeregister_deck() => __pbn__register_deck != null;
         public void Resetregister_deck() => __pbn__register_deck = null;
@@ -1649,8 +1650,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(12)]
         public bool auto_populate_deck
         {
-            get { return __pbn__auto_populate_deck.GetValueOrDefault(); }
-            set { __pbn__auto_populate_deck = value; }
+            get => __pbn__auto_populate_deck.GetValueOrDefault();
+            set => __pbn__auto_populate_deck = value;
         }
         public bool ShouldSerializeauto_populate_deck() => __pbn__auto_populate_deck != null;
         public void Resetauto_populate_deck() => __pbn__auto_populate_deck = null;
@@ -1659,8 +1660,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(14)]
         public bool can_modify_deck
         {
-            get { return __pbn__can_modify_deck.GetValueOrDefault(); }
-            set { __pbn__can_modify_deck = value; }
+            get => __pbn__can_modify_deck.GetValueOrDefault();
+            set => __pbn__can_modify_deck = value;
         }
         public bool ShouldSerializecan_modify_deck() => __pbn__can_modify_deck != null;
         public void Resetcan_modify_deck() => __pbn__can_modify_deck = null;
@@ -1669,8 +1670,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public bool is_active
         {
-            get { return __pbn__is_active.GetValueOrDefault(); }
-            set { __pbn__is_active = value; }
+            get => __pbn__is_active.GetValueOrDefault();
+            set => __pbn__is_active = value;
         }
         public bool ShouldSerializeis_active() => __pbn__is_active != null;
         public void Resetis_active() => __pbn__is_active = null;
@@ -1679,8 +1680,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(16)]
         public bool is_featured
         {
-            get { return __pbn__is_featured.GetValueOrDefault(); }
-            set { __pbn__is_featured = value; }
+            get => __pbn__is_featured.GetValueOrDefault();
+            set => __pbn__is_featured = value;
         }
         public bool ShouldSerializeis_featured() => __pbn__is_featured != null;
         public void Resetis_featured() => __pbn__is_featured = null;
@@ -1692,8 +1693,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(18)]
         public uint limited_format
         {
-            get { return __pbn__limited_format.GetValueOrDefault(); }
-            set { __pbn__limited_format = value; }
+            get => __pbn__limited_format.GetValueOrDefault();
+            set => __pbn__limited_format = value;
         }
         public bool ShouldSerializelimited_format() => __pbn__limited_format != null;
         public void Resetlimited_format() => __pbn__limited_format = null;
@@ -1702,8 +1703,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(19)]
         public uint expiration_time
         {
-            get { return __pbn__expiration_time.GetValueOrDefault(); }
-            set { __pbn__expiration_time = value; }
+            get => __pbn__expiration_time.GetValueOrDefault();
+            set => __pbn__expiration_time = value;
         }
         public bool ShouldSerializeexpiration_time() => __pbn__expiration_time != null;
         public void Resetexpiration_time() => __pbn__expiration_time = null;
@@ -1712,8 +1713,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(20)]
         public uint close_join_time
         {
-            get { return __pbn__close_join_time.GetValueOrDefault(); }
-            set { __pbn__close_join_time = value; }
+            get => __pbn__close_join_time.GetValueOrDefault();
+            set => __pbn__close_join_time = value;
         }
         public bool ShouldSerializeclose_join_time() => __pbn__close_join_time != null;
         public void Resetclose_join_time() => __pbn__close_join_time = null;
@@ -1722,8 +1723,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(21)]
         public uint close_mm_time
         {
-            get { return __pbn__close_mm_time.GetValueOrDefault(); }
-            set { __pbn__close_mm_time = value; }
+            get => __pbn__close_mm_time.GetValueOrDefault();
+            set => __pbn__close_mm_time = value;
         }
         public bool ShouldSerializeclose_mm_time() => __pbn__close_mm_time != null;
         public void Resetclose_mm_time() => __pbn__close_mm_time = null;
@@ -1732,8 +1733,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(22)]
         public uint max_wins_trophy_id
         {
-            get { return __pbn__max_wins_trophy_id.GetValueOrDefault(); }
-            set { __pbn__max_wins_trophy_id = value; }
+            get => __pbn__max_wins_trophy_id.GetValueOrDefault();
+            set => __pbn__max_wins_trophy_id = value;
         }
         public bool ShouldSerializemax_wins_trophy_id() => __pbn__max_wins_trophy_id != null;
         public void Resetmax_wins_trophy_id() => __pbn__max_wins_trophy_id = null;
@@ -1742,8 +1743,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(23)]
         public uint cooldown_time
         {
-            get { return __pbn__cooldown_time.GetValueOrDefault(); }
-            set { __pbn__cooldown_time = value; }
+            get => __pbn__cooldown_time.GetValueOrDefault();
+            set => __pbn__cooldown_time = value;
         }
         public bool ShouldSerializecooldown_time() => __pbn__cooldown_time != null;
         public void Resetcooldown_time() => __pbn__cooldown_time = null;
@@ -1752,8 +1753,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(24)]
         public uint max_wins_per_deck_trophy_id
         {
-            get { return __pbn__max_wins_per_deck_trophy_id.GetValueOrDefault(); }
-            set { __pbn__max_wins_per_deck_trophy_id = value; }
+            get => __pbn__max_wins_per_deck_trophy_id.GetValueOrDefault();
+            set => __pbn__max_wins_per_deck_trophy_id = value;
         }
         public bool ShouldSerializemax_wins_per_deck_trophy_id() => __pbn__max_wins_per_deck_trophy_id != null;
         public void Resetmax_wins_per_deck_trophy_id() => __pbn__max_wins_per_deck_trophy_id = null;
@@ -1762,8 +1763,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(25)]
         public uint max_wins_random_mode_trophy_id
         {
-            get { return __pbn__max_wins_random_mode_trophy_id.GetValueOrDefault(); }
-            set { __pbn__max_wins_random_mode_trophy_id = value; }
+            get => __pbn__max_wins_random_mode_trophy_id.GetValueOrDefault();
+            set => __pbn__max_wins_random_mode_trophy_id = value;
         }
         public bool ShouldSerializemax_wins_random_mode_trophy_id() => __pbn__max_wins_random_mode_trophy_id != null;
         public void Resetmax_wins_random_mode_trophy_id() => __pbn__max_wins_random_mode_trophy_id = null;
@@ -1772,8 +1773,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(26)]
         public uint is_ai_gauntlet
         {
-            get { return __pbn__is_ai_gauntlet.GetValueOrDefault(); }
-            set { __pbn__is_ai_gauntlet = value; }
+            get => __pbn__is_ai_gauntlet.GetValueOrDefault();
+            set => __pbn__is_ai_gauntlet = value;
         }
         public bool ShouldSerializeis_ai_gauntlet() => __pbn__is_ai_gauntlet != null;
         public void Resetis_ai_gauntlet() => __pbn__is_ai_gauntlet = null;
@@ -1789,8 +1790,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string timer
         {
-            get { return __pbn__timer ?? ""; }
-            set { __pbn__timer = value; }
+            get => __pbn__timer ?? "";
+            set => __pbn__timer = value;
         }
         public bool ShouldSerializetimer() => __pbn__timer != null;
         public void Resettimer() => __pbn__timer = null;
@@ -1812,8 +1813,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint min_wins
             {
-                get { return __pbn__min_wins.GetValueOrDefault(); }
-                set { __pbn__min_wins = value; }
+                get => __pbn__min_wins.GetValueOrDefault();
+                set => __pbn__min_wins = value;
             }
             public bool ShouldSerializemin_wins() => __pbn__min_wins != null;
             public void Resetmin_wins() => __pbn__min_wins = null;
@@ -1832,8 +1833,8 @@ namespace SteamKit2.GC.Artifact.Internal
                 [global::ProtoBuf.ProtoMember(1)]
                 public uint grant_id
                 {
-                    get { return __pbn__grant_id.GetValueOrDefault(); }
-                    set { __pbn__grant_id = value; }
+                    get => __pbn__grant_id.GetValueOrDefault();
+                    set => __pbn__grant_id = value;
                 }
                 public bool ShouldSerializegrant_id() => __pbn__grant_id != null;
                 public void Resetgrant_id() => __pbn__grant_id = null;
@@ -1842,8 +1843,8 @@ namespace SteamKit2.GC.Artifact.Internal
                 [global::ProtoBuf.ProtoMember(2)]
                 public uint quantity
                 {
-                    get { return __pbn__quantity.GetValueOrDefault(); }
-                    set { __pbn__quantity = value; }
+                    get => __pbn__quantity.GetValueOrDefault();
+                    set => __pbn__quantity = value;
                 }
                 public bool ShouldSerializequantity() => __pbn__quantity != null;
                 public void Resetquantity() => __pbn__quantity = null;
@@ -1863,8 +1864,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint entry_id
             {
-                get { return __pbn__entry_id.GetValueOrDefault(); }
-                set { __pbn__entry_id = value; }
+                get => __pbn__entry_id.GetValueOrDefault();
+                set => __pbn__entry_id = value;
             }
             public bool ShouldSerializeentry_id() => __pbn__entry_id != null;
             public void Resetentry_id() => __pbn__entry_id = null;
@@ -1876,8 +1877,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint limited_format_overide
             {
-                get { return __pbn__limited_format_overide.GetValueOrDefault(); }
-                set { __pbn__limited_format_overide = value; }
+                get => __pbn__limited_format_overide.GetValueOrDefault();
+                set => __pbn__limited_format_overide = value;
             }
             public bool ShouldSerializelimited_format_overide() => __pbn__limited_format_overide != null;
             public void Resetlimited_format_overide() => __pbn__limited_format_overide = null;
@@ -1893,8 +1894,8 @@ namespace SteamKit2.GC.Artifact.Internal
                 [global::ProtoBuf.ProtoMember(1)]
                 public uint def_index
                 {
-                    get { return __pbn__def_index.GetValueOrDefault(); }
-                    set { __pbn__def_index = value; }
+                    get => __pbn__def_index.GetValueOrDefault();
+                    set => __pbn__def_index = value;
                 }
                 public bool ShouldSerializedef_index() => __pbn__def_index != null;
                 public void Resetdef_index() => __pbn__def_index = null;
@@ -1903,8 +1904,8 @@ namespace SteamKit2.GC.Artifact.Internal
                 [global::ProtoBuf.ProtoMember(2)]
                 public uint quantity
                 {
-                    get { return __pbn__quantity.GetValueOrDefault(); }
-                    set { __pbn__quantity = value; }
+                    get => __pbn__quantity.GetValueOrDefault();
+                    set => __pbn__quantity = value;
                 }
                 public bool ShouldSerializequantity() => __pbn__quantity != null;
                 public void Resetquantity() => __pbn__quantity = null;
@@ -1924,8 +1925,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint expiration_time
             {
-                get { return __pbn__expiration_time.GetValueOrDefault(); }
-                set { __pbn__expiration_time = value; }
+                get => __pbn__expiration_time.GetValueOrDefault();
+                set => __pbn__expiration_time = value;
             }
             public bool ShouldSerializeexpiration_time() => __pbn__expiration_time != null;
             public void Resetexpiration_time() => __pbn__expiration_time = null;
@@ -1945,8 +1946,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint limited_format_id
         {
-            get { return __pbn__limited_format_id.GetValueOrDefault(); }
-            set { __pbn__limited_format_id = value; }
+            get => __pbn__limited_format_id.GetValueOrDefault();
+            set => __pbn__limited_format_id = value;
         }
         public bool ShouldSerializelimited_format_id() => __pbn__limited_format_id != null;
         public void Resetlimited_format_id() => __pbn__limited_format_id = null;
@@ -1955,8 +1956,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint grant_stages
         {
-            get { return __pbn__grant_stages.GetValueOrDefault(); }
-            set { __pbn__grant_stages = value; }
+            get => __pbn__grant_stages.GetValueOrDefault();
+            set => __pbn__grant_stages = value;
         }
         public bool ShouldSerializegrant_stages() => __pbn__grant_stages != null;
         public void Resetgrant_stages() => __pbn__grant_stages = null;
@@ -1968,8 +1969,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public bool create_real_copies
         {
-            get { return __pbn__create_real_copies.GetValueOrDefault(); }
-            set { __pbn__create_real_copies = value; }
+            get => __pbn__create_real_copies.GetValueOrDefault();
+            set => __pbn__create_real_copies = value;
         }
         public bool ShouldSerializecreate_real_copies() => __pbn__create_real_copies != null;
         public void Resetcreate_real_copies() => __pbn__create_real_copies = null;
@@ -1986,8 +1987,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::System.ComponentModel.DefaultValue(CMsgLimitedFormat.EGrantType.kGrant_Unknown)]
             public CMsgLimitedFormat.EGrantType grant_type
             {
-                get { return __pbn__grant_type ?? CMsgLimitedFormat.EGrantType.kGrant_Unknown; }
-                set { __pbn__grant_type = value; }
+                get => __pbn__grant_type ?? CMsgLimitedFormat.EGrantType.kGrant_Unknown;
+                set => __pbn__grant_type = value;
             }
             public bool ShouldSerializegrant_type() => __pbn__grant_type != null;
             public void Resetgrant_type() => __pbn__grant_type = null;
@@ -1996,8 +1997,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint grant_count
             {
-                get { return __pbn__grant_count.GetValueOrDefault(); }
-                set { __pbn__grant_count = value; }
+                get => __pbn__grant_count.GetValueOrDefault();
+                set => __pbn__grant_count = value;
             }
             public bool ShouldSerializegrant_count() => __pbn__grant_count != null;
             public void Resetgrant_count() => __pbn__grant_count = null;
@@ -2006,8 +2007,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint repeat_count
             {
-                get { return __pbn__repeat_count.GetValueOrDefault(); }
-                set { __pbn__repeat_count = value; }
+                get => __pbn__repeat_count.GetValueOrDefault();
+                set => __pbn__repeat_count = value;
             }
             public bool ShouldSerializerepeat_count() => __pbn__repeat_count != null;
             public void Resetrepeat_count() => __pbn__repeat_count = null;
@@ -2017,8 +2018,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string display_msg
             {
-                get { return __pbn__display_msg ?? ""; }
-                set { __pbn__display_msg = value; }
+                get => __pbn__display_msg ?? "";
+                set => __pbn__display_msg = value;
             }
             public bool ShouldSerializedisplay_msg() => __pbn__display_msg != null;
             public void Resetdisplay_msg() => __pbn__display_msg = null;
@@ -2048,8 +2049,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong private_lobby_id
         {
-            get { return __pbn__private_lobby_id.GetValueOrDefault(); }
-            set { __pbn__private_lobby_id = value; }
+            get => __pbn__private_lobby_id.GetValueOrDefault();
+            set => __pbn__private_lobby_id = value;
         }
         public bool ShouldSerializeprivate_lobby_id() => __pbn__private_lobby_id != null;
         public void Resetprivate_lobby_id() => __pbn__private_lobby_id = null;
@@ -2067,8 +2068,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public bool in_match_making
         {
-            get { return __pbn__in_match_making.GetValueOrDefault(); }
-            set { __pbn__in_match_making = value; }
+            get => __pbn__in_match_making.GetValueOrDefault();
+            set => __pbn__in_match_making = value;
         }
         public bool ShouldSerializein_match_making() => __pbn__in_match_making != null;
         public void Resetin_match_making() => __pbn__in_match_making = null;
@@ -2078,8 +2079,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string server_search_key
         {
-            get { return __pbn__server_search_key ?? ""; }
-            set { __pbn__server_search_key = value; }
+            get => __pbn__server_search_key ?? "";
+            set => __pbn__server_search_key = value;
         }
         public bool ShouldSerializeserver_search_key() => __pbn__server_search_key != null;
         public void Resetserver_search_key() => __pbn__server_search_key = null;
@@ -2088,8 +2089,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public bool are_decks_visible
         {
-            get { return __pbn__are_decks_visible.GetValueOrDefault(); }
-            set { __pbn__are_decks_visible = value; }
+            get => __pbn__are_decks_visible.GetValueOrDefault();
+            set => __pbn__are_decks_visible = value;
         }
         public bool ShouldSerializeare_decks_visible() => __pbn__are_decks_visible != null;
         public void Resetare_decks_visible() => __pbn__are_decks_visible = null;
@@ -2102,8 +2103,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue(EDCGLobbyTimer.k_eDCGLobbyTimer_Unspecified)]
         public EDCGLobbyTimer timer_mode
         {
-            get { return __pbn__timer_mode ?? EDCGLobbyTimer.k_eDCGLobbyTimer_Unspecified; }
-            set { __pbn__timer_mode = value; }
+            get => __pbn__timer_mode ?? EDCGLobbyTimer.k_eDCGLobbyTimer_Unspecified;
+            set => __pbn__timer_mode = value;
         }
         public bool ShouldSerializetimer_mode() => __pbn__timer_mode != null;
         public void Resettimer_mode() => __pbn__timer_mode = null;
@@ -2112,8 +2113,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(10, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong match_lobby_id
         {
-            get { return __pbn__match_lobby_id.GetValueOrDefault(); }
-            set { __pbn__match_lobby_id = value; }
+            get => __pbn__match_lobby_id.GetValueOrDefault();
+            set => __pbn__match_lobby_id = value;
         }
         public bool ShouldSerializematch_lobby_id() => __pbn__match_lobby_id != null;
         public void Resetmatch_lobby_id() => __pbn__match_lobby_id = null;
@@ -2128,8 +2129,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public uint min_client_version
         {
-            get { return __pbn__min_client_version.GetValueOrDefault(); }
-            set { __pbn__min_client_version = value; }
+            get => __pbn__min_client_version.GetValueOrDefault();
+            set => __pbn__min_client_version = value;
         }
         public bool ShouldSerializemin_client_version() => __pbn__min_client_version != null;
         public void Resetmin_client_version() => __pbn__min_client_version = null;
@@ -2138,8 +2139,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(16)]
         public uint max_client_version
         {
-            get { return __pbn__max_client_version.GetValueOrDefault(); }
-            set { __pbn__max_client_version = value; }
+            get => __pbn__max_client_version.GetValueOrDefault();
+            set => __pbn__max_client_version = value;
         }
         public bool ShouldSerializemax_client_version() => __pbn__max_client_version != null;
         public void Resetmax_client_version() => __pbn__max_client_version = null;
@@ -2148,8 +2149,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(17)]
         public ulong steam_chat_group_id
         {
-            get { return __pbn__steam_chat_group_id.GetValueOrDefault(); }
-            set { __pbn__steam_chat_group_id = value; }
+            get => __pbn__steam_chat_group_id.GetValueOrDefault();
+            set => __pbn__steam_chat_group_id = value;
         }
         public bool ShouldSerializesteam_chat_group_id() => __pbn__steam_chat_group_id != null;
         public void Resetsteam_chat_group_id() => __pbn__steam_chat_group_id = null;
@@ -2158,8 +2159,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(18, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong lobby_salt
         {
-            get { return __pbn__lobby_salt.GetValueOrDefault(); }
-            set { __pbn__lobby_salt = value; }
+            get => __pbn__lobby_salt.GetValueOrDefault();
+            set => __pbn__lobby_salt = value;
         }
         public bool ShouldSerializelobby_salt() => __pbn__lobby_salt != null;
         public void Resetlobby_salt() => __pbn__lobby_salt = null;
@@ -2168,8 +2169,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(19)]
         public uint validator_id
         {
-            get { return __pbn__validator_id.GetValueOrDefault(); }
-            set { __pbn__validator_id = value; }
+            get => __pbn__validator_id.GetValueOrDefault();
+            set => __pbn__validator_id = value;
         }
         public bool ShouldSerializevalidator_id() => __pbn__validator_id != null;
         public void Resetvalidator_id() => __pbn__validator_id = null;
@@ -2185,8 +2186,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -2196,8 +2197,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string persona_name
             {
-                get { return __pbn__persona_name ?? ""; }
-                set { __pbn__persona_name = value; }
+                get => __pbn__persona_name ?? "";
+                set => __pbn__persona_name = value;
             }
             public bool ShouldSerializepersona_name() => __pbn__persona_name != null;
             public void Resetpersona_name() => __pbn__persona_name = null;
@@ -2207,8 +2208,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::System.ComponentModel.DefaultValue(EDCGLobbyTeam.k_EDCGLobbyTeam_Team0)]
             public EDCGLobbyTeam team
             {
-                get { return __pbn__team ?? EDCGLobbyTeam.k_EDCGLobbyTeam_Team0; }
-                set { __pbn__team = value; }
+                get => __pbn__team ?? EDCGLobbyTeam.k_EDCGLobbyTeam_Team0;
+                set => __pbn__team = value;
             }
             public bool ShouldSerializeteam() => __pbn__team != null;
             public void Resetteam() => __pbn__team = null;
@@ -2217,8 +2218,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public bool is_ready
             {
-                get { return __pbn__is_ready.GetValueOrDefault(); }
-                set { __pbn__is_ready = value; }
+                get => __pbn__is_ready.GetValueOrDefault();
+                set => __pbn__is_ready = value;
             }
             public bool ShouldSerializeis_ready() => __pbn__is_ready != null;
             public void Resetis_ready() => __pbn__is_ready = null;
@@ -2227,8 +2228,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public byte[] deck_bytes
             {
-                get { return __pbn__deck_bytes; }
-                set { __pbn__deck_bytes = value; }
+                get => __pbn__deck_bytes;
+                set => __pbn__deck_bytes = value;
             }
             public bool ShouldSerializedeck_bytes() => __pbn__deck_bytes != null;
             public void Resetdeck_bytes() => __pbn__deck_bytes = null;
@@ -2237,8 +2238,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(7)]
             public bool has_deck
             {
-                get { return __pbn__has_deck.GetValueOrDefault(); }
-                set { __pbn__has_deck = value; }
+                get => __pbn__has_deck.GetValueOrDefault();
+                set => __pbn__has_deck = value;
             }
             public bool ShouldSerializehas_deck() => __pbn__has_deck != null;
             public void Resethas_deck() => __pbn__has_deck = null;
@@ -2247,8 +2248,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(8)]
             public uint client_version
             {
-                get { return __pbn__client_version.GetValueOrDefault(); }
-                set { __pbn__client_version = value; }
+                get => __pbn__client_version.GetValueOrDefault();
+                set => __pbn__client_version = value;
             }
             public bool ShouldSerializeclient_version() => __pbn__client_version != null;
             public void Resetclient_version() => __pbn__client_version = null;
@@ -2269,8 +2270,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -2280,8 +2281,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string persona_name
             {
-                get { return __pbn__persona_name ?? ""; }
-                set { __pbn__persona_name = value; }
+                get => __pbn__persona_name ?? "";
+                set => __pbn__persona_name = value;
             }
             public bool ShouldSerializepersona_name() => __pbn__persona_name != null;
             public void Resetpersona_name() => __pbn__persona_name = null;
@@ -2290,8 +2291,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint invited_by
             {
-                get { return __pbn__invited_by.GetValueOrDefault(); }
-                set { __pbn__invited_by = value; }
+                get => __pbn__invited_by.GetValueOrDefault();
+                set => __pbn__invited_by = value;
             }
             public bool ShouldSerializeinvited_by() => __pbn__invited_by != null;
             public void Resetinvited_by() => __pbn__invited_by = null;
@@ -2309,8 +2310,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint shared_by_account_id
             {
-                get { return __pbn__shared_by_account_id.GetValueOrDefault(); }
-                set { __pbn__shared_by_account_id = value; }
+                get => __pbn__shared_by_account_id.GetValueOrDefault();
+                set => __pbn__shared_by_account_id = value;
             }
             public bool ShouldSerializeshared_by_account_id() => __pbn__shared_by_account_id != null;
             public void Resetshared_by_account_id() => __pbn__shared_by_account_id = null;
@@ -2319,8 +2320,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public byte[] deck_bytes
             {
-                get { return __pbn__deck_bytes; }
-                set { __pbn__deck_bytes = value; }
+                get => __pbn__deck_bytes;
+                set => __pbn__deck_bytes = value;
             }
             public bool ShouldSerializedeck_bytes() => __pbn__deck_bytes != null;
             public void Resetdeck_bytes() => __pbn__deck_bytes = null;
@@ -2330,8 +2331,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::System.ComponentModel.DefaultValue("")]
             public string deck_name
             {
-                get { return __pbn__deck_name ?? ""; }
-                set { __pbn__deck_name = value; }
+                get => __pbn__deck_name ?? "";
+                set => __pbn__deck_name = value;
             }
             public bool ShouldSerializedeck_name() => __pbn__deck_name != null;
             public void Resetdeck_name() => __pbn__deck_name = null;
@@ -2349,8 +2350,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public ulong match_id
             {
-                get { return __pbn__match_id.GetValueOrDefault(); }
-                set { __pbn__match_id = value; }
+                get => __pbn__match_id.GetValueOrDefault();
+                set => __pbn__match_id = value;
             }
             public bool ShouldSerializematch_id() => __pbn__match_id != null;
             public void Resetmatch_id() => __pbn__match_id = null;
@@ -2359,8 +2360,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint winning_account_id
             {
-                get { return __pbn__winning_account_id.GetValueOrDefault(); }
-                set { __pbn__winning_account_id = value; }
+                get => __pbn__winning_account_id.GetValueOrDefault();
+                set => __pbn__winning_account_id = value;
             }
             public bool ShouldSerializewinning_account_id() => __pbn__winning_account_id != null;
             public void Resetwinning_account_id() => __pbn__winning_account_id = null;
@@ -2380,8 +2381,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -2390,8 +2391,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong tourney_id
         {
-            get { return __pbn__tourney_id.GetValueOrDefault(); }
-            set { __pbn__tourney_id = value; }
+            get => __pbn__tourney_id.GetValueOrDefault();
+            set => __pbn__tourney_id = value;
         }
         public bool ShouldSerializetourney_id() => __pbn__tourney_id != null;
         public void Resettourney_id() => __pbn__tourney_id = null;
@@ -2400,8 +2401,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public bool is_full
         {
-            get { return __pbn__is_full.GetValueOrDefault(); }
-            set { __pbn__is_full = value; }
+            get => __pbn__is_full.GetValueOrDefault();
+            set => __pbn__is_full = value;
         }
         public bool ShouldSerializeis_full() => __pbn__is_full != null;
         public void Resetis_full() => __pbn__is_full = null;
@@ -2419,8 +2420,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -2429,8 +2430,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong tourney_id
         {
-            get { return __pbn__tourney_id.GetValueOrDefault(); }
-            set { __pbn__tourney_id = value; }
+            get => __pbn__tourney_id.GetValueOrDefault();
+            set => __pbn__tourney_id = value;
         }
         public bool ShouldSerializetourney_id() => __pbn__tourney_id != null;
         public void Resettourney_id() => __pbn__tourney_id = null;
@@ -2439,8 +2440,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint phase_id
         {
-            get { return __pbn__phase_id.GetValueOrDefault(); }
-            set { __pbn__phase_id = value; }
+            get => __pbn__phase_id.GetValueOrDefault();
+            set => __pbn__phase_id = value;
         }
         public bool ShouldSerializephase_id() => __pbn__phase_id != null;
         public void Resetphase_id() => __pbn__phase_id = null;
@@ -2449,8 +2450,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint series_id
         {
-            get { return __pbn__series_id.GetValueOrDefault(); }
-            set { __pbn__series_id = value; }
+            get => __pbn__series_id.GetValueOrDefault();
+            set => __pbn__series_id = value;
         }
         public bool ShouldSerializeseries_id() => __pbn__series_id != null;
         public void Resetseries_id() => __pbn__series_id = null;
@@ -2468,8 +2469,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong tourney_id
         {
-            get { return __pbn__tourney_id.GetValueOrDefault(); }
-            set { __pbn__tourney_id = value; }
+            get => __pbn__tourney_id.GetValueOrDefault();
+            set => __pbn__tourney_id = value;
         }
         public bool ShouldSerializetourney_id() => __pbn__tourney_id != null;
         public void Resettourney_id() => __pbn__tourney_id = null;
@@ -2479,8 +2480,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue(EStage.k_eStage_Configure)]
         public EStage stage
         {
-            get { return __pbn__stage ?? EStage.k_eStage_Configure; }
-            set { __pbn__stage = value; }
+            get => __pbn__stage ?? EStage.k_eStage_Configure;
+            set => __pbn__stage = value;
         }
         public bool ShouldSerializestage() => __pbn__stage != null;
         public void Resetstage() => __pbn__stage = null;
@@ -2492,8 +2493,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint stage_time
         {
-            get { return __pbn__stage_time.GetValueOrDefault(); }
-            set { __pbn__stage_time = value; }
+            get => __pbn__stage_time.GetValueOrDefault();
+            set => __pbn__stage_time = value;
         }
         public bool ShouldSerializestage_time() => __pbn__stage_time != null;
         public void Resetstage_time() => __pbn__stage_time = null;
@@ -2502,8 +2503,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint stats_salt
         {
-            get { return __pbn__stats_salt.GetValueOrDefault(); }
-            set { __pbn__stats_salt = value; }
+            get => __pbn__stats_salt.GetValueOrDefault();
+            set => __pbn__stats_salt = value;
         }
         public bool ShouldSerializestats_salt() => __pbn__stats_salt != null;
         public void Resetstats_salt() => __pbn__stats_salt = null;
@@ -2513,8 +2514,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string tourney_msg
         {
-            get { return __pbn__tourney_msg ?? ""; }
-            set { __pbn__tourney_msg = value; }
+            get => __pbn__tourney_msg ?? "";
+            set => __pbn__tourney_msg = value;
         }
         public bool ShouldSerializetourney_msg() => __pbn__tourney_msg != null;
         public void Resettourney_msg() => __pbn__tourney_msg = null;
@@ -2524,8 +2525,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string tourney_status
         {
-            get { return __pbn__tourney_status ?? ""; }
-            set { __pbn__tourney_status = value; }
+            get => __pbn__tourney_status ?? "";
+            set => __pbn__tourney_status = value;
         }
         public bool ShouldSerializetourney_status() => __pbn__tourney_status != null;
         public void Resettourney_status() => __pbn__tourney_status = null;
@@ -2547,8 +2548,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string tourney_name
         {
-            get { return __pbn__tourney_name ?? ""; }
-            set { __pbn__tourney_name = value; }
+            get => __pbn__tourney_name ?? "";
+            set => __pbn__tourney_name = value;
         }
         public bool ShouldSerializetourney_name() => __pbn__tourney_name != null;
         public void Resettourney_name() => __pbn__tourney_name = null;
@@ -2560,8 +2561,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(14)]
         public uint created_by
         {
-            get { return __pbn__created_by.GetValueOrDefault(); }
-            set { __pbn__created_by = value; }
+            get => __pbn__created_by.GetValueOrDefault();
+            set => __pbn__created_by = value;
         }
         public bool ShouldSerializecreated_by() => __pbn__created_by != null;
         public void Resetcreated_by() => __pbn__created_by = null;
@@ -2570,8 +2571,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public uint auto_close_time
         {
-            get { return __pbn__auto_close_time.GetValueOrDefault(); }
-            set { __pbn__auto_close_time = value; }
+            get => __pbn__auto_close_time.GetValueOrDefault();
+            set => __pbn__auto_close_time = value;
         }
         public bool ShouldSerializeauto_close_time() => __pbn__auto_close_time != null;
         public void Resetauto_close_time() => __pbn__auto_close_time = null;
@@ -2580,8 +2581,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(16)]
         public ulong steam_chat_room_id
         {
-            get { return __pbn__steam_chat_room_id.GetValueOrDefault(); }
-            set { __pbn__steam_chat_room_id = value; }
+            get => __pbn__steam_chat_room_id.GetValueOrDefault();
+            set => __pbn__steam_chat_room_id = value;
         }
         public bool ShouldSerializesteam_chat_room_id() => __pbn__steam_chat_room_id != null;
         public void Resetsteam_chat_room_id() => __pbn__steam_chat_room_id = null;
@@ -2596,8 +2597,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(19)]
         public uint created_time
         {
-            get { return __pbn__created_time.GetValueOrDefault(); }
-            set { __pbn__created_time = value; }
+            get => __pbn__created_time.GetValueOrDefault();
+            set => __pbn__created_time = value;
         }
         public bool ShouldSerializecreated_time() => __pbn__created_time != null;
         public void Resetcreated_time() => __pbn__created_time = null;
@@ -2613,8 +2614,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public ulong match_id
             {
-                get { return __pbn__match_id.GetValueOrDefault(); }
-                set { __pbn__match_id = value; }
+                get => __pbn__match_id.GetValueOrDefault();
+                set => __pbn__match_id = value;
             }
             public bool ShouldSerializematch_id() => __pbn__match_id != null;
             public void Resetmatch_id() => __pbn__match_id = null;
@@ -2632,8 +2633,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint series_id
             {
-                get { return __pbn__series_id.GetValueOrDefault(); }
-                set { __pbn__series_id = value; }
+                get => __pbn__series_id.GetValueOrDefault();
+                set => __pbn__series_id = value;
             }
             public bool ShouldSerializeseries_id() => __pbn__series_id != null;
             public void Resetseries_id() => __pbn__series_id = null;
@@ -2642,8 +2643,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint account_1
             {
-                get { return __pbn__account_1.GetValueOrDefault(); }
-                set { __pbn__account_1 = value; }
+                get => __pbn__account_1.GetValueOrDefault();
+                set => __pbn__account_1 = value;
             }
             public bool ShouldSerializeaccount_1() => __pbn__account_1 != null;
             public void Resetaccount_1() => __pbn__account_1 = null;
@@ -2652,8 +2653,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint wins_1
             {
-                get { return __pbn__wins_1.GetValueOrDefault(); }
-                set { __pbn__wins_1 = value; }
+                get => __pbn__wins_1.GetValueOrDefault();
+                set => __pbn__wins_1 = value;
             }
             public bool ShouldSerializewins_1() => __pbn__wins_1 != null;
             public void Resetwins_1() => __pbn__wins_1 = null;
@@ -2662,8 +2663,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint account_2
             {
-                get { return __pbn__account_2.GetValueOrDefault(); }
-                set { __pbn__account_2 = value; }
+                get => __pbn__account_2.GetValueOrDefault();
+                set => __pbn__account_2 = value;
             }
             public bool ShouldSerializeaccount_2() => __pbn__account_2 != null;
             public void Resetaccount_2() => __pbn__account_2 = null;
@@ -2672,8 +2673,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint wins_2
             {
-                get { return __pbn__wins_2.GetValueOrDefault(); }
-                set { __pbn__wins_2 = value; }
+                get => __pbn__wins_2.GetValueOrDefault();
+                set => __pbn__wins_2 = value;
             }
             public bool ShouldSerializewins_2() => __pbn__wins_2 != null;
             public void Resetwins_2() => __pbn__wins_2 = null;
@@ -2682,8 +2683,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(6)]
             public uint ties
             {
-                get { return __pbn__ties.GetValueOrDefault(); }
-                set { __pbn__ties = value; }
+                get => __pbn__ties.GetValueOrDefault();
+                set => __pbn__ties = value;
             }
             public bool ShouldSerializeties() => __pbn__ties != null;
             public void Resetties() => __pbn__ties = null;
@@ -2692,8 +2693,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(7)]
             public uint status
             {
-                get { return __pbn__status.GetValueOrDefault(); }
-                set { __pbn__status = value; }
+                get => __pbn__status.GetValueOrDefault();
+                set => __pbn__status = value;
             }
             public bool ShouldSerializestatus() => __pbn__status != null;
             public void Resetstatus() => __pbn__status = null;
@@ -2705,8 +2706,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(9, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             public ulong lobby_id
             {
-                get { return __pbn__lobby_id.GetValueOrDefault(); }
-                set { __pbn__lobby_id = value; }
+                get => __pbn__lobby_id.GetValueOrDefault();
+                set => __pbn__lobby_id = value;
             }
             public bool ShouldSerializelobby_id() => __pbn__lobby_id != null;
             public void Resetlobby_id() => __pbn__lobby_id = null;
@@ -2724,8 +2725,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint phase_id
             {
-                get { return __pbn__phase_id.GetValueOrDefault(); }
-                set { __pbn__phase_id = value; }
+                get => __pbn__phase_id.GetValueOrDefault();
+                set => __pbn__phase_id = value;
             }
             public bool ShouldSerializephase_id() => __pbn__phase_id != null;
             public void Resetphase_id() => __pbn__phase_id = null;
@@ -2735,8 +2736,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::System.ComponentModel.DefaultValue(CDCGTourney.EFormat.k_eFormat_Invalid)]
             public CDCGTourney.EFormat format
             {
-                get { return __pbn__format ?? CDCGTourney.EFormat.k_eFormat_Invalid; }
-                set { __pbn__format = value; }
+                get => __pbn__format ?? CDCGTourney.EFormat.k_eFormat_Invalid;
+                set => __pbn__format = value;
             }
             public bool ShouldSerializeformat() => __pbn__format != null;
             public void Resetformat() => __pbn__format = null;
@@ -2746,8 +2747,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::System.ComponentModel.DefaultValue(CDCGTourney.EPhaseStage.k_ePhaseStage_Pending)]
             public CDCGTourney.EPhaseStage stage
             {
-                get { return __pbn__stage ?? CDCGTourney.EPhaseStage.k_ePhaseStage_Pending; }
-                set { __pbn__stage = value; }
+                get => __pbn__stage ?? CDCGTourney.EPhaseStage.k_ePhaseStage_Pending;
+                set => __pbn__stage = value;
             }
             public bool ShouldSerializestage() => __pbn__stage != null;
             public void Resetstage() => __pbn__stage = null;
@@ -2759,8 +2760,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint limited_format
             {
-                get { return __pbn__limited_format.GetValueOrDefault(); }
-                set { __pbn__limited_format = value; }
+                get => __pbn__limited_format.GetValueOrDefault();
+                set => __pbn__limited_format = value;
             }
             public bool ShouldSerializelimited_format() => __pbn__limited_format != null;
             public void Resetlimited_format() => __pbn__limited_format = null;
@@ -2769,8 +2770,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(6)]
             public ulong limited_instance_id
             {
-                get { return __pbn__limited_instance_id.GetValueOrDefault(); }
-                set { __pbn__limited_instance_id = value; }
+                get => __pbn__limited_instance_id.GetValueOrDefault();
+                set => __pbn__limited_instance_id = value;
             }
             public bool ShouldSerializelimited_instance_id() => __pbn__limited_instance_id != null;
             public void Resetlimited_instance_id() => __pbn__limited_instance_id = null;
@@ -2779,8 +2780,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(7)]
             public ulong limited_pool_id
             {
-                get { return __pbn__limited_pool_id.GetValueOrDefault(); }
-                set { __pbn__limited_pool_id = value; }
+                get => __pbn__limited_pool_id.GetValueOrDefault();
+                set => __pbn__limited_pool_id = value;
             }
             public bool ShouldSerializelimited_pool_id() => __pbn__limited_pool_id != null;
             public void Resetlimited_pool_id() => __pbn__limited_pool_id = null;
@@ -2789,8 +2790,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(9)]
             public uint auto_advance_time
             {
-                get { return __pbn__auto_advance_time.GetValueOrDefault(); }
-                set { __pbn__auto_advance_time = value; }
+                get => __pbn__auto_advance_time.GetValueOrDefault();
+                set => __pbn__auto_advance_time = value;
             }
             public bool ShouldSerializeauto_advance_time() => __pbn__auto_advance_time != null;
             public void Resetauto_advance_time() => __pbn__auto_advance_time = null;
@@ -2808,8 +2809,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint deck_index
             {
-                get { return __pbn__deck_index.GetValueOrDefault(); }
-                set { __pbn__deck_index = value; }
+                get => __pbn__deck_index.GetValueOrDefault();
+                set => __pbn__deck_index = value;
             }
             public bool ShouldSerializedeck_index() => __pbn__deck_index != null;
             public void Resetdeck_index() => __pbn__deck_index = null;
@@ -2818,8 +2819,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public byte[] deck_bytes
             {
-                get { return __pbn__deck_bytes; }
-                set { __pbn__deck_bytes = value; }
+                get => __pbn__deck_bytes;
+                set => __pbn__deck_bytes = value;
             }
             public bool ShouldSerializedeck_bytes() => __pbn__deck_bytes != null;
             public void Resetdeck_bytes() => __pbn__deck_bytes = null;
@@ -2828,8 +2829,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint phase_id
             {
-                get { return __pbn__phase_id.GetValueOrDefault(); }
-                set { __pbn__phase_id = value; }
+                get => __pbn__phase_id.GetValueOrDefault();
+                set => __pbn__phase_id = value;
             }
             public bool ShouldSerializephase_id() => __pbn__phase_id != null;
             public void Resetphase_id() => __pbn__phase_id = null;
@@ -2838,8 +2839,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint shared_by
             {
-                get { return __pbn__shared_by.GetValueOrDefault(); }
-                set { __pbn__shared_by = value; }
+                get => __pbn__shared_by.GetValueOrDefault();
+                set => __pbn__shared_by = value;
             }
             public bool ShouldSerializeshared_by() => __pbn__shared_by != null;
             public void Resetshared_by() => __pbn__shared_by = null;
@@ -2857,8 +2858,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -2867,8 +2868,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint rights_flags
             {
-                get { return __pbn__rights_flags.GetValueOrDefault(); }
-                set { __pbn__rights_flags = value; }
+                get => __pbn__rights_flags.GetValueOrDefault();
+                set => __pbn__rights_flags = value;
             }
             public bool ShouldSerializerights_flags() => __pbn__rights_flags != null;
             public void Resetrights_flags() => __pbn__rights_flags = null;
@@ -2880,8 +2881,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint initial_seed
             {
-                get { return __pbn__initial_seed.GetValueOrDefault(); }
-                set { __pbn__initial_seed = value; }
+                get => __pbn__initial_seed.GetValueOrDefault();
+                set => __pbn__initial_seed = value;
             }
             public bool ShouldSerializeinitial_seed() => __pbn__initial_seed != null;
             public void Resetinitial_seed() => __pbn__initial_seed = null;
@@ -2890,8 +2891,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(5)]
             public uint initial_group
             {
-                get { return __pbn__initial_group.GetValueOrDefault(); }
-                set { __pbn__initial_group = value; }
+                get => __pbn__initial_group.GetValueOrDefault();
+                set => __pbn__initial_group = value;
             }
             public bool ShouldSerializeinitial_group() => __pbn__initial_group != null;
             public void Resetinitial_group() => __pbn__initial_group = null;
@@ -2909,8 +2910,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -2919,8 +2920,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint invited_by
             {
-                get { return __pbn__invited_by.GetValueOrDefault(); }
-                set { __pbn__invited_by = value; }
+                get => __pbn__invited_by.GetValueOrDefault();
+                set => __pbn__invited_by = value;
             }
             public bool ShouldSerializeinvited_by() => __pbn__invited_by != null;
             public void Resetinvited_by() => __pbn__invited_by = null;
@@ -2929,8 +2930,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint invite_time
             {
-                get { return __pbn__invite_time.GetValueOrDefault(); }
-                set { __pbn__invite_time = value; }
+                get => __pbn__invite_time.GetValueOrDefault();
+                set => __pbn__invite_time = value;
             }
             public bool ShouldSerializeinvite_time() => __pbn__invite_time != null;
             public void Resetinvite_time() => __pbn__invite_time = null;
@@ -2939,8 +2940,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(4)]
             public uint rights_flags
             {
-                get { return __pbn__rights_flags.GetValueOrDefault(); }
-                set { __pbn__rights_flags = value; }
+                get => __pbn__rights_flags.GetValueOrDefault();
+                set => __pbn__rights_flags = value;
             }
             public bool ShouldSerializerights_flags() => __pbn__rights_flags != null;
             public void Resetrights_flags() => __pbn__rights_flags = null;
@@ -2958,8 +2959,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint val_id
             {
-                get { return __pbn__val_id.GetValueOrDefault(); }
-                set { __pbn__val_id = value; }
+                get => __pbn__val_id.GetValueOrDefault();
+                set => __pbn__val_id = value;
             }
             public bool ShouldSerializeval_id() => __pbn__val_id != null;
             public void Resetval_id() => __pbn__val_id = null;
@@ -2968,8 +2969,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint phase_id
             {
-                get { return __pbn__phase_id.GetValueOrDefault(); }
-                set { __pbn__phase_id = value; }
+                get => __pbn__phase_id.GetValueOrDefault();
+                set => __pbn__phase_id = value;
             }
             public bool ShouldSerializephase_id() => __pbn__phase_id != null;
             public void Resetphase_id() => __pbn__phase_id = null;
@@ -2978,8 +2979,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint value
             {
-                get { return __pbn__value.GetValueOrDefault(); }
-                set { __pbn__value = value; }
+                get => __pbn__value.GetValueOrDefault();
+                set => __pbn__value = value;
             }
             public bool ShouldSerializevalue() => __pbn__value != null;
             public void Resetvalue() => __pbn__value = null;
@@ -2997,8 +2998,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint shared_by
             {
-                get { return __pbn__shared_by.GetValueOrDefault(); }
-                set { __pbn__shared_by = value; }
+                get => __pbn__shared_by.GetValueOrDefault();
+                set => __pbn__shared_by = value;
             }
             public bool ShouldSerializeshared_by() => __pbn__shared_by != null;
             public void Resetshared_by() => __pbn__shared_by = null;
@@ -3007,8 +3008,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public byte[] deck_bytes
             {
-                get { return __pbn__deck_bytes; }
-                set { __pbn__deck_bytes = value; }
+                get => __pbn__deck_bytes;
+                set => __pbn__deck_bytes = value;
             }
             public bool ShouldSerializedeck_bytes() => __pbn__deck_bytes != null;
             public void Resetdeck_bytes() => __pbn__deck_bytes = null;
@@ -3017,8 +3018,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint shared_slot
             {
-                get { return __pbn__shared_slot.GetValueOrDefault(); }
-                set { __pbn__shared_slot = value; }
+                get => __pbn__shared_slot.GetValueOrDefault();
+                set => __pbn__shared_slot = value;
             }
             public bool ShouldSerializeshared_slot() => __pbn__shared_slot != null;
             public void Resetshared_slot() => __pbn__shared_slot = null;
@@ -3036,8 +3037,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint def_index
             {
-                get { return __pbn__def_index.GetValueOrDefault(); }
-                set { __pbn__def_index = value; }
+                get => __pbn__def_index.GetValueOrDefault();
+                set => __pbn__def_index = value;
             }
             public bool ShouldSerializedef_index() => __pbn__def_index != null;
             public void Resetdef_index() => __pbn__def_index = null;
@@ -3046,8 +3047,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint quantity
             {
-                get { return __pbn__quantity.GetValueOrDefault(); }
-                set { __pbn__quantity = value; }
+                get => __pbn__quantity.GetValueOrDefault();
+                set => __pbn__quantity = value;
             }
             public bool ShouldSerializequantity() => __pbn__quantity != null;
             public void Resetquantity() => __pbn__quantity = null;
@@ -3056,8 +3057,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public bool per_member
             {
-                get { return __pbn__per_member.GetValueOrDefault(); }
-                set { __pbn__per_member = value; }
+                get => __pbn__per_member.GetValueOrDefault();
+                set => __pbn__per_member = value;
             }
             public bool ShouldSerializeper_member() => __pbn__per_member != null;
             public void Resetper_member() => __pbn__per_member = null;
@@ -3075,8 +3076,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint def_index
             {
-                get { return __pbn__def_index.GetValueOrDefault(); }
-                set { __pbn__def_index = value; }
+                get => __pbn__def_index.GetValueOrDefault();
+                set => __pbn__def_index = value;
             }
             public bool ShouldSerializedef_index() => __pbn__def_index != null;
             public void Resetdef_index() => __pbn__def_index = null;
@@ -3085,8 +3086,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint target_account_id
             {
-                get { return __pbn__target_account_id.GetValueOrDefault(); }
-                set { __pbn__target_account_id = value; }
+                get => __pbn__target_account_id.GetValueOrDefault();
+                set => __pbn__target_account_id = value;
             }
             public bool ShouldSerializetarget_account_id() => __pbn__target_account_id != null;
             public void Resettarget_account_id() => __pbn__target_account_id = null;
@@ -3095,8 +3096,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint owner_account_id
             {
-                get { return __pbn__owner_account_id.GetValueOrDefault(); }
-                set { __pbn__owner_account_id = value; }
+                get => __pbn__owner_account_id.GetValueOrDefault();
+                set => __pbn__owner_account_id = value;
             }
             public bool ShouldSerializeowner_account_id() => __pbn__owner_account_id != null;
             public void Resetowner_account_id() => __pbn__owner_account_id = null;
@@ -3114,8 +3115,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint phase_id
             {
-                get { return __pbn__phase_id.GetValueOrDefault(); }
-                set { __pbn__phase_id = value; }
+                get => __pbn__phase_id.GetValueOrDefault();
+                set => __pbn__phase_id = value;
             }
             public bool ShouldSerializephase_id() => __pbn__phase_id != null;
             public void Resetphase_id() => __pbn__phase_id = null;
@@ -3182,8 +3183,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint time_stamp
         {
-            get { return __pbn__time_stamp.GetValueOrDefault(); }
-            set { __pbn__time_stamp = value; }
+            get => __pbn__time_stamp.GetValueOrDefault();
+            set => __pbn__time_stamp = value;
         }
         public bool ShouldSerializetime_stamp() => __pbn__time_stamp != null;
         public void Resettime_stamp() => __pbn__time_stamp = null;
@@ -3192,8 +3193,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint currency_id
         {
-            get { return __pbn__currency_id.GetValueOrDefault(); }
-            set { __pbn__currency_id = value; }
+            get => __pbn__currency_id.GetValueOrDefault();
+            set => __pbn__currency_id = value;
         }
         public bool ShouldSerializecurrency_id() => __pbn__currency_id != null;
         public void Resetcurrency_id() => __pbn__currency_id = null;
@@ -3211,8 +3212,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public bool request_up_to_date
         {
-            get { return __pbn__request_up_to_date.GetValueOrDefault(); }
-            set { __pbn__request_up_to_date = value; }
+            get => __pbn__request_up_to_date.GetValueOrDefault();
+            set => __pbn__request_up_to_date = value;
         }
         public bool ShouldSerializerequest_up_to_date() => __pbn__request_up_to_date != null;
         public void Resetrequest_up_to_date() => __pbn__request_up_to_date = null;
@@ -3221,8 +3222,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint valid_through
         {
-            get { return __pbn__valid_through.GetValueOrDefault(); }
-            set { __pbn__valid_through = value; }
+            get => __pbn__valid_through.GetValueOrDefault();
+            set => __pbn__valid_through = value;
         }
         public bool ShouldSerializevalid_through() => __pbn__valid_through != null;
         public void Resetvalid_through() => __pbn__valid_through = null;
@@ -3240,8 +3241,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint match_duration_s
         {
-            get { return __pbn__match_duration_s.GetValueOrDefault(); }
-            set { __pbn__match_duration_s = value; }
+            get => __pbn__match_duration_s.GetValueOrDefault();
+            set => __pbn__match_duration_s = value;
         }
         public bool ShouldSerializematch_duration_s() => __pbn__match_duration_s != null;
         public void Resetmatch_duration_s() => __pbn__match_duration_s = null;
@@ -3250,8 +3251,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint game_turns
         {
-            get { return __pbn__game_turns.GetValueOrDefault(); }
-            set { __pbn__game_turns = value; }
+            get => __pbn__game_turns.GetValueOrDefault();
+            set => __pbn__game_turns = value;
         }
         public bool ShouldSerializegame_turns() => __pbn__game_turns != null;
         public void Resetgame_turns() => __pbn__game_turns = null;
@@ -3261,8 +3262,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue(EEndReason.k_EEndReason_TeamWin)]
         public EEndReason end_reason
         {
-            get { return __pbn__end_reason ?? EEndReason.k_EEndReason_TeamWin; }
-            set { __pbn__end_reason = value; }
+            get => __pbn__end_reason ?? EEndReason.k_EEndReason_TeamWin;
+            set => __pbn__end_reason = value;
         }
         public bool ShouldSerializeend_reason() => __pbn__end_reason != null;
         public void Resetend_reason() => __pbn__end_reason = null;
@@ -3272,8 +3273,8 @@ namespace SteamKit2.GC.Artifact.Internal
         [global::System.ComponentModel.DefaultValue(EDCGLobbyTeam.k_EDCGLobbyTeam_Team0)]
         public EDCGLobbyTeam winning_team
         {
-            get { return __pbn__winning_team ?? EDCGLobbyTeam.k_EDCGLobbyTeam_Team0; }
-            set { __pbn__winning_team = value; }
+            get => __pbn__winning_team ?? EDCGLobbyTeam.k_EDCGLobbyTeam_Team0;
+            set => __pbn__winning_team = value;
         }
         public bool ShouldSerializewinning_team() => __pbn__winning_team != null;
         public void Resetwinning_team() => __pbn__winning_team = null;
@@ -3292,8 +3293,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint account_id
             {
-                get { return __pbn__account_id.GetValueOrDefault(); }
-                set { __pbn__account_id = value; }
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
             }
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
@@ -3303,8 +3304,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::System.ComponentModel.DefaultValue(EDCGLobbyTeam.k_EDCGLobbyTeam_Team0)]
             public EDCGLobbyTeam team
             {
-                get { return __pbn__team ?? EDCGLobbyTeam.k_EDCGLobbyTeam_Team0; }
-                set { __pbn__team = value; }
+                get => __pbn__team ?? EDCGLobbyTeam.k_EDCGLobbyTeam_Team0;
+                set => __pbn__team = value;
             }
             public bool ShouldSerializeteam() => __pbn__team != null;
             public void Resetteam() => __pbn__team = null;
@@ -3313,8 +3314,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public uint player_slot
             {
-                get { return __pbn__player_slot.GetValueOrDefault(); }
-                set { __pbn__player_slot = value; }
+                get => __pbn__player_slot.GetValueOrDefault();
+                set => __pbn__player_slot = value;
             }
             public bool ShouldSerializeplayer_slot() => __pbn__player_slot != null;
             public void Resetplayer_slot() => __pbn__player_slot = null;
@@ -3329,8 +3330,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(6)]
             public uint ancient_health
             {
-                get { return __pbn__ancient_health.GetValueOrDefault(); }
-                set { __pbn__ancient_health = value; }
+                get => __pbn__ancient_health.GetValueOrDefault();
+                set => __pbn__ancient_health = value;
             }
             public bool ShouldSerializeancient_health() => __pbn__ancient_health != null;
             public void Resetancient_health() => __pbn__ancient_health = null;
@@ -3339,8 +3340,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(8)]
             public bool conceded
             {
-                get { return __pbn__conceded.GetValueOrDefault(); }
-                set { __pbn__conceded = value; }
+                get => __pbn__conceded.GetValueOrDefault();
+                set => __pbn__conceded = value;
             }
             public bool ShouldSerializeconceded() => __pbn__conceded != null;
             public void Resetconceded() => __pbn__conceded = null;
@@ -3349,8 +3350,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(9)]
             public uint game_clock
             {
-                get { return __pbn__game_clock.GetValueOrDefault(); }
-                set { __pbn__game_clock = value; }
+                get => __pbn__game_clock.GetValueOrDefault();
+                set => __pbn__game_clock = value;
             }
             public bool ShouldSerializegame_clock() => __pbn__game_clock != null;
             public void Resetgame_clock() => __pbn__game_clock = null;
@@ -3362,8 +3363,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(11)]
             public uint mmr
             {
-                get { return __pbn__mmr.GetValueOrDefault(); }
-                set { __pbn__mmr = value; }
+                get => __pbn__mmr.GetValueOrDefault();
+                set => __pbn__mmr = value;
             }
             public bool ShouldSerializemmr() => __pbn__mmr != null;
             public void Resetmmr() => __pbn__mmr = null;
@@ -3372,8 +3373,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(12)]
             public uint mmr_uncertainty
             {
-                get { return __pbn__mmr_uncertainty.GetValueOrDefault(); }
-                set { __pbn__mmr_uncertainty = value; }
+                get => __pbn__mmr_uncertainty.GetValueOrDefault();
+                set => __pbn__mmr_uncertainty = value;
             }
             public bool ShouldSerializemmr_uncertainty() => __pbn__mmr_uncertainty != null;
             public void Resetmmr_uncertainty() => __pbn__mmr_uncertainty = null;
@@ -3382,8 +3383,8 @@ namespace SteamKit2.GC.Artifact.Internal
             [global::ProtoBuf.ProtoMember(13)]
             public byte[] deck_bytes
             {
-                get { return __pbn__deck_bytes; }
-                set { __pbn__deck_bytes = value; }
+                get => __pbn__deck_bytes;
+                set => __pbn__deck_bytes = value;
             }
             public bool ShouldSerializedeck_bytes() => __pbn__deck_bytes != null;
             public void Resetdeck_bytes() => __pbn__deck_bytes = null;
@@ -3490,4 +3491,5 @@ namespace SteamKit2.GC.Artifact.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion
