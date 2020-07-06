@@ -343,27 +343,27 @@ namespace ProtobufDumper
             if ( options == null )
                 return optionsKv;
 
-            if ( options.deprecatedSpecified )
+            if ( options.ShouldSerializedeprecated() )
                 optionsKv.Add( "deprecated", options.deprecated ? "true" : "false" );
-            if ( options.optimize_forSpecified )
+            if ( options.ShouldSerializeoptimize_for() )
                 optionsKv.Add( "optimize_for", $"{options.optimize_for}" );
-            if ( options.cc_generic_servicesSpecified )
+            if ( options.ShouldSerializecc_generic_services() )
                 optionsKv.Add( "cc_generic_services", options.cc_generic_services ? "true" : "false" );
-            if ( options.go_packageSpecified )
+            if ( options.ShouldSerializego_package() )
                 optionsKv.Add( "go_package", $"\"{options.go_package}\"" );
-            if ( options.java_packageSpecified )
+            if ( options.ShouldSerializejava_package() )
                 optionsKv.Add( "java_package", $"\"{options.java_package}\"" );
-            if ( options.java_outer_classnameSpecified )
+            if ( options.ShouldSerializejava_outer_classname() )
                 optionsKv.Add( "java_outer_classname", $"\"{options.java_outer_classname}\"" );
-            if ( options.java_generate_equals_and_hashSpecified )
+            if ( options.ShouldSerializejava_generate_equals_and_hash() )
                 optionsKv.Add( "java_generate_equals_and_hash", options.java_generate_equals_and_hash ? "true" : "false" );
-            if ( options.java_generic_servicesSpecified )
+            if ( options.ShouldSerializejava_generic_services() )
                 optionsKv.Add( "java_generic_services", options.java_generic_services ? "true" : "false" );
-            if ( options.java_multiple_filesSpecified )
+            if ( options.ShouldSerializejava_multiple_files() )
                 optionsKv.Add( "java_multiple_files", options.java_multiple_files ? "true" : "false" );
-            if ( options.java_string_check_utf8Specified )
+            if ( options.ShouldSerializejava_string_check_utf8() )
                 optionsKv.Add( "java_string_check_utf8", options.java_string_check_utf8 ? "true" : "false" );
-            if ( options.py_generic_servicesSpecified )
+            if ( options.ShouldSerializepy_generic_services() )
                 optionsKv.Add( "py_generic_services", options.py_generic_services ? "true" : "false" );
 
             DumpOptionsMatching( source, ".google.protobuf.FileOptions", options, optionsKv );
@@ -378,17 +378,17 @@ namespace ProtobufDumper
             if ( options == null )
                 return optionsKv;
 
-            if ( options.ctypeSpecified )
+            if ( options.ShouldSerializectype() )
                 optionsKv.Add( "ctype", $"{options.ctype}" );
-            if ( options.deprecatedSpecified )
+            if ( options.ShouldSerializedeprecated() )
                 optionsKv.Add( "deprecated", options.deprecated ? "true" : "false" );
-            if ( options.lazySpecified )
+            if ( options.ShouldSerializelazy() )
                 optionsKv.Add( "lazy", options.lazy ? "true" : "false" );
-            if ( options.packedSpecified )
+            if ( options.ShouldSerializepacked() )
                 optionsKv.Add( "packed", options.packed ? "true" : "false" );
-            if ( options.weakSpecified )
+            if ( options.ShouldSerializeweak() )
                 optionsKv.Add( "weak", options.weak ? "true" : "false" );
-            if ( options.experimental_map_keySpecified )
+            if ( options.ShouldSerializeexperimental_map_key() )
                 optionsKv.Add( "experimental_map_key", $"\"{options.experimental_map_key}\"" );
 
             DumpOptionsMatching( source, ".google.protobuf.FieldOptions", options, optionsKv );
@@ -403,11 +403,11 @@ namespace ProtobufDumper
             if ( options == null )
                 return optionsKv;
 
-            if ( options.message_set_wire_formatSpecified )
+            if ( options.ShouldSerializemessage_set_wire_format() )
                 optionsKv.Add( "message_set_wire_format", options.message_set_wire_format ? "true" : "false" );
-            if ( options.no_standard_descriptor_accessorSpecified )
+            if ( options.ShouldSerializeno_standard_descriptor_accessor() )
                 optionsKv.Add( "no_standard_descriptor_accessor", options.no_standard_descriptor_accessor ? "true" : "false" );
-            if ( options.deprecatedSpecified )
+            if ( options.ShouldSerializedeprecated() )
                 optionsKv.Add( "deprecated", options.deprecated ? "true" : "false" );
 
             DumpOptionsMatching( source, ".google.protobuf.MessageOptions", options, optionsKv );
@@ -422,9 +422,9 @@ namespace ProtobufDumper
             if ( options == null )
                 return optionsKv;
 
-            if ( options.allow_aliasSpecified )
+            if ( options.ShouldSerializeallow_alias() )
                 optionsKv.Add( "allow_alias", options.allow_alias ? "true" : "false" );
-            if ( options.deprecatedSpecified )
+            if ( options.ShouldSerializedeprecated() )
                 optionsKv.Add( "deprecated", options.deprecated ? "true" : "false" );
 
             DumpOptionsMatching( source, ".google.protobuf.EnumOptions", options, optionsKv );
@@ -439,7 +439,7 @@ namespace ProtobufDumper
             if ( options == null )
                 return optionsKv;
 
-            if ( options.deprecatedSpecified )
+            if ( options.ShouldSerializedeprecated() )
                 optionsKv.Add( "deprecated", options.deprecated ? "true" : "false" );
 
             DumpOptionsMatching( source, ".google.protobuf.EnumValueOptions", options, optionsKv );
@@ -455,7 +455,7 @@ namespace ProtobufDumper
             if ( options == null )
                 return optionsKv;
 
-            if ( options.deprecatedSpecified )
+            if ( options.ShouldSerializedeprecated() )
                 optionsKv.Add( "deprecated", options.deprecated ? "true" : "false" );
 
             DumpOptionsMatching( source, ".google.protobuf.ServiceOptions", options, optionsKv );
@@ -470,7 +470,7 @@ namespace ProtobufDumper
             if ( options == null )
                 return optionsKv;
 
-            if ( options.deprecatedSpecified )
+            if ( options.ShouldSerializedeprecated() )
                 optionsKv.Add( "deprecated", options.deprecated ? "true" : "false" );
 
             DumpOptionsMatching( source, ".google.protobuf.MethodOptions", options, optionsKv );
@@ -594,7 +594,7 @@ namespace ProtobufDumper
                 DumpEnumDescriptor( source, field, sb, level + 1, ref innerMarker );
             }
 
-            var rootFields = proto.field.Where( x => !x.oneof_indexSpecified ).ToList();
+            var rootFields = proto.field.Where( x => !x.ShouldSerializeoneof_index() ).ToList();
 
             foreach ( var field in rootFields )
             {
@@ -610,7 +610,7 @@ namespace ProtobufDumper
             for ( var i = 0; i < proto.oneof_decl.Count; i++ )
             {
                 var oneof = proto.oneof_decl[ i ];
-                var fields = proto.field.Where( x => x.oneof_indexSpecified && x.oneof_index == i ).ToArray();
+                var fields = proto.field.Where( x => x.ShouldSerializeoneof_index() && x.oneof_index == i ).ToArray();
 
                 AppendHeadingSpace( sb, ref innerMarker );
                 sb.AppendLine( $"{levelspace}\toneof {oneof.name} {{" );
