@@ -85,6 +85,7 @@ tf2,gcsystemmsgs.proto,GC\TF2\SteamMsgGCSystem.cs,SteamKit2.GC.TF2.Internal
 tf2,steammessages.proto,GC\TF2\SteamMsgBase.cs,SteamKit2.GC.TF2.Internal
 tf2,tf_gcmessages.proto,GC\TF2\MsgGC.cs,SteamKit2.GC.TF2.Internal
 underlords,steammessages.proto,GC\Underlords\SteamMsgBase.cs,SteamKit2.GC.Underlords.Internal
+underlords,dac_gamemessages.proto,GC\Underlords\MsgDacGame.cs,SteamKit2.GC.Underlords.Internal
 underlords,dac_gcmessages_common.proto,GC\Underlords\MsgGCCommon.cs,SteamKit2.GC.Underlords.Internal
 underlords,dac_gcmessages_client.proto,GC\Underlords\MsgGCClient.cs,SteamKit2.GC.Underlords.Internal
 underlords,dac_gcmessages_server.proto,GC\Underlords\MsgGCServer.cs,SteamKit2.GC.Underlords.Internal
@@ -93,3 +94,6 @@ underlords,econ_gcmessages.proto,GC\Underlords\SteamMsgGCEcon.cs,SteamKit2.GC.Un
 underlords,econ_shared_enums.proto,GC\Underlords\SteamMsgGCEconSharedEnums.cs,SteamKit2.GC.Underlords.Internal
 underlords,gcsdk_gcmessages.proto,GC\Underlords\SteamMsgGCSDK.cs,SteamKit2.GC.Underlords.Internal
 underlords,gcsystemmsgs.proto,GC\Underlords\SteamMsgGCSystem.cs,SteamKit2.GC.Underlords.Internal
+underlords,network_connection.proto,GC\Underlords\NetworkConnection.cs,SteamKit2.GC.Underlords.Internal
+underlords,networkbasetypes.proto,GC\Underlords\NetworkBaseTypes.cs,SteamKit2.GC.Underlords.Internal
+underlords,usermessages.proto,GC\Underlords\UserMessages.cs,SteamKit2.GC.Underlords.Internal
