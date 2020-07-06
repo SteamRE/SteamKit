@@ -4,7 +4,8 @@
 //   Input: gc.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.GC.Internal
 {
 
@@ -18,8 +19,8 @@ namespace SteamKit2.GC.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong client_steam_id
         {
-            get { return __pbn__client_steam_id.GetValueOrDefault(); }
-            set { __pbn__client_steam_id = value; }
+            get => __pbn__client_steam_id.GetValueOrDefault();
+            set => __pbn__client_steam_id = value;
         }
         public bool ShouldSerializeclient_steam_id() => __pbn__client_steam_id != null;
         public void Resetclient_steam_id() => __pbn__client_steam_id = null;
@@ -28,8 +29,8 @@ namespace SteamKit2.GC.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public int client_session_id
         {
-            get { return __pbn__client_session_id.GetValueOrDefault(); }
-            set { __pbn__client_session_id = value; }
+            get => __pbn__client_session_id.GetValueOrDefault();
+            set => __pbn__client_session_id = value;
         }
         public bool ShouldSerializeclient_session_id() => __pbn__client_session_id != null;
         public void Resetclient_session_id() => __pbn__client_session_id = null;
@@ -38,8 +39,8 @@ namespace SteamKit2.GC.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint source_app_id
         {
-            get { return __pbn__source_app_id.GetValueOrDefault(); }
-            set { __pbn__source_app_id = value; }
+            get => __pbn__source_app_id.GetValueOrDefault();
+            set => __pbn__source_app_id = value;
         }
         public bool ShouldSerializesource_app_id() => __pbn__source_app_id != null;
         public void Resetsource_app_id() => __pbn__source_app_id = null;
@@ -49,8 +50,8 @@ namespace SteamKit2.GC.Internal
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
         public ulong job_id_source
         {
-            get { return __pbn__job_id_source ?? 18446744073709551615; }
-            set { __pbn__job_id_source = value; }
+            get => __pbn__job_id_source ?? 18446744073709551615;
+            set => __pbn__job_id_source = value;
         }
         public bool ShouldSerializejob_id_source() => __pbn__job_id_source != null;
         public void Resetjob_id_source() => __pbn__job_id_source = null;
@@ -60,8 +61,8 @@ namespace SteamKit2.GC.Internal
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
         public ulong job_id_target
         {
-            get { return __pbn__job_id_target ?? 18446744073709551615; }
-            set { __pbn__job_id_target = value; }
+            get => __pbn__job_id_target ?? 18446744073709551615;
+            set => __pbn__job_id_target = value;
         }
         public bool ShouldSerializejob_id_target() => __pbn__job_id_target != null;
         public void Resetjob_id_target() => __pbn__job_id_target = null;
@@ -71,8 +72,8 @@ namespace SteamKit2.GC.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string target_job_name
         {
-            get { return __pbn__target_job_name ?? ""; }
-            set { __pbn__target_job_name = value; }
+            get => __pbn__target_job_name ?? "";
+            set => __pbn__target_job_name = value;
         }
         public bool ShouldSerializetarget_job_name() => __pbn__target_job_name != null;
         public void Resettarget_job_name() => __pbn__target_job_name = null;
@@ -82,8 +83,8 @@ namespace SteamKit2.GC.Internal
         [global::System.ComponentModel.DefaultValue(2)]
         public int eresult
         {
-            get { return __pbn__eresult ?? 2; }
-            set { __pbn__eresult = value; }
+            get => __pbn__eresult ?? 2;
+            set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
         public void Reseteresult() => __pbn__eresult = null;
@@ -93,8 +94,8 @@ namespace SteamKit2.GC.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string error_message
         {
-            get { return __pbn__error_message ?? ""; }
-            set { __pbn__error_message = value; }
+            get => __pbn__error_message ?? "";
+            set => __pbn__error_message = value;
         }
         public bool ShouldSerializeerror_message() => __pbn__error_message != null;
         public void Reseterror_message() => __pbn__error_message = null;
@@ -103,8 +104,8 @@ namespace SteamKit2.GC.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public uint ip
         {
-            get { return __pbn__ip.GetValueOrDefault(); }
-            set { __pbn__ip = value; }
+            get => __pbn__ip.GetValueOrDefault();
+            set => __pbn__ip = value;
         }
         public bool ShouldSerializeip() => __pbn__ip != null;
         public void Resetip() => __pbn__ip = null;
@@ -114,8 +115,8 @@ namespace SteamKit2.GC.Internal
         [global::System.ComponentModel.DefaultValue(GCProtoBufMsgSrc.GCProtoBufMsgSrc_Unspecified)]
         public GCProtoBufMsgSrc gc_msg_src
         {
-            get { return __pbn__gc_msg_src ?? GCProtoBufMsgSrc.GCProtoBufMsgSrc_Unspecified; }
-            set { __pbn__gc_msg_src = value; }
+            get => __pbn__gc_msg_src ?? GCProtoBufMsgSrc.GCProtoBufMsgSrc_Unspecified;
+            set => __pbn__gc_msg_src = value;
         }
         public bool ShouldSerializegc_msg_src() => __pbn__gc_msg_src != null;
         public void Resetgc_msg_src() => __pbn__gc_msg_src = null;
@@ -124,8 +125,8 @@ namespace SteamKit2.GC.Internal
         [global::ProtoBuf.ProtoMember(201)]
         public uint gc_dir_index_source
         {
-            get { return __pbn__gc_dir_index_source.GetValueOrDefault(); }
-            set { __pbn__gc_dir_index_source = value; }
+            get => __pbn__gc_dir_index_source.GetValueOrDefault();
+            set => __pbn__gc_dir_index_source = value;
         }
         public bool ShouldSerializegc_dir_index_source() => __pbn__gc_dir_index_source != null;
         public void Resetgc_dir_index_source() => __pbn__gc_dir_index_source = null;
@@ -145,4 +146,5 @@ namespace SteamKit2.GC.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

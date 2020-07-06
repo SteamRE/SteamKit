@@ -4,7 +4,8 @@
 //   Input: steammessages_depotbuilder.steamclient.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.Internal
 {
 
@@ -18,8 +19,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -28,8 +29,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint depotid
         {
-            get { return __pbn__depotid.GetValueOrDefault(); }
-            set { __pbn__depotid = value; }
+            get => __pbn__depotid.GetValueOrDefault();
+            set => __pbn__depotid = value;
         }
         public bool ShouldSerializedepotid() => __pbn__depotid != null;
         public void Resetdepotid() => __pbn__depotid = null;
@@ -38,8 +39,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong workshop_itemid
         {
-            get { return __pbn__workshop_itemid.GetValueOrDefault(); }
-            set { __pbn__workshop_itemid = value; }
+            get => __pbn__workshop_itemid.GetValueOrDefault();
+            set => __pbn__workshop_itemid = value;
         }
         public bool ShouldSerializeworkshop_itemid() => __pbn__workshop_itemid != null;
         public void Resetworkshop_itemid() => __pbn__workshop_itemid = null;
@@ -48,8 +49,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public bool for_local_cs
         {
-            get { return __pbn__for_local_cs.GetValueOrDefault(); }
-            set { __pbn__for_local_cs = value; }
+            get => __pbn__for_local_cs.GetValueOrDefault();
+            set => __pbn__for_local_cs = value;
         }
         public bool ShouldSerializefor_local_cs() => __pbn__for_local_cs != null;
         public void Resetfor_local_cs() => __pbn__for_local_cs = null;
@@ -67,8 +68,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong baseline_manifestid
         {
-            get { return __pbn__baseline_manifestid.GetValueOrDefault(); }
-            set { __pbn__baseline_manifestid = value; }
+            get => __pbn__baseline_manifestid.GetValueOrDefault();
+            set => __pbn__baseline_manifestid = value;
         }
         public bool ShouldSerializebaseline_manifestid() => __pbn__baseline_manifestid != null;
         public void Resetbaseline_manifestid() => __pbn__baseline_manifestid = null;
@@ -77,8 +78,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint chunk_size
         {
-            get { return __pbn__chunk_size.GetValueOrDefault(); }
-            set { __pbn__chunk_size = value; }
+            get => __pbn__chunk_size.GetValueOrDefault();
+            set => __pbn__chunk_size = value;
         }
         public bool ShouldSerializechunk_size() => __pbn__chunk_size != null;
         public void Resetchunk_size() => __pbn__chunk_size = null;
@@ -87,8 +88,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public byte[] aes_key
         {
-            get { return __pbn__aes_key; }
-            set { __pbn__aes_key = value; }
+            get => __pbn__aes_key;
+            set => __pbn__aes_key = value;
         }
         public bool ShouldSerializeaes_key() => __pbn__aes_key != null;
         public void Resetaes_key() => __pbn__aes_key = null;
@@ -97,8 +98,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public byte[] rsa_key
         {
-            get { return __pbn__rsa_key; }
-            set { __pbn__rsa_key = value; }
+            get => __pbn__rsa_key;
+            set => __pbn__rsa_key = value;
         }
         public bool ShouldSerializersa_key() => __pbn__rsa_key != null;
         public void Resetrsa_key() => __pbn__rsa_key = null;
@@ -108,8 +109,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string url_host
         {
-            get { return __pbn__url_host ?? ""; }
-            set { __pbn__url_host = value; }
+            get => __pbn__url_host ?? "";
+            set => __pbn__url_host = value;
         }
         public bool ShouldSerializeurl_host() => __pbn__url_host != null;
         public void Reseturl_host() => __pbn__url_host = null;
@@ -118,8 +119,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public bool offset_detection_enabled
         {
-            get { return __pbn__offset_detection_enabled.GetValueOrDefault(); }
-            set { __pbn__offset_detection_enabled = value; }
+            get => __pbn__offset_detection_enabled.GetValueOrDefault();
+            set => __pbn__offset_detection_enabled = value;
         }
         public bool ShouldSerializeoffset_detection_enabled() => __pbn__offset_detection_enabled != null;
         public void Resetoffset_detection_enabled() => __pbn__offset_detection_enabled = null;
@@ -128,8 +129,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint offset_detection_min_clean_chunk
         {
-            get { return __pbn__offset_detection_min_clean_chunk.GetValueOrDefault(); }
-            set { __pbn__offset_detection_min_clean_chunk = value; }
+            get => __pbn__offset_detection_min_clean_chunk.GetValueOrDefault();
+            set => __pbn__offset_detection_min_clean_chunk = value;
         }
         public bool ShouldSerializeoffset_detection_min_clean_chunk() => __pbn__offset_detection_min_clean_chunk != null;
         public void Resetoffset_detection_min_clean_chunk() => __pbn__offset_detection_min_clean_chunk = null;
@@ -138,8 +139,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint offset_detection_blast_radius_pre
         {
-            get { return __pbn__offset_detection_blast_radius_pre.GetValueOrDefault(); }
-            set { __pbn__offset_detection_blast_radius_pre = value; }
+            get => __pbn__offset_detection_blast_radius_pre.GetValueOrDefault();
+            set => __pbn__offset_detection_blast_radius_pre = value;
         }
         public bool ShouldSerializeoffset_detection_blast_radius_pre() => __pbn__offset_detection_blast_radius_pre != null;
         public void Resetoffset_detection_blast_radius_pre() => __pbn__offset_detection_blast_radius_pre = null;
@@ -148,8 +149,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public uint offset_detection_blast_radius_post
         {
-            get { return __pbn__offset_detection_blast_radius_post.GetValueOrDefault(); }
-            set { __pbn__offset_detection_blast_radius_post = value; }
+            get => __pbn__offset_detection_blast_radius_post.GetValueOrDefault();
+            set => __pbn__offset_detection_blast_radius_post = value;
         }
         public bool ShouldSerializeoffset_detection_blast_radius_post() => __pbn__offset_detection_blast_radius_post != null;
         public void Resetoffset_detection_blast_radius_post() => __pbn__offset_detection_blast_radius_post = null;
@@ -158,8 +159,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public uint offset_detection_max_distance_pre
         {
-            get { return __pbn__offset_detection_max_distance_pre.GetValueOrDefault(); }
-            set { __pbn__offset_detection_max_distance_pre = value; }
+            get => __pbn__offset_detection_max_distance_pre.GetValueOrDefault();
+            set => __pbn__offset_detection_max_distance_pre = value;
         }
         public bool ShouldSerializeoffset_detection_max_distance_pre() => __pbn__offset_detection_max_distance_pre != null;
         public void Resetoffset_detection_max_distance_pre() => __pbn__offset_detection_max_distance_pre = null;
@@ -168,8 +169,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public uint offset_detection_max_distance_post
         {
-            get { return __pbn__offset_detection_max_distance_post.GetValueOrDefault(); }
-            set { __pbn__offset_detection_max_distance_post = value; }
+            get => __pbn__offset_detection_max_distance_post.GetValueOrDefault();
+            set => __pbn__offset_detection_max_distance_post = value;
         }
         public bool ShouldSerializeoffset_detection_max_distance_post() => __pbn__offset_detection_max_distance_post != null;
         public void Resetoffset_detection_max_distance_post() => __pbn__offset_detection_max_distance_post = null;
@@ -187,8 +188,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -197,8 +198,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint depotid
         {
-            get { return __pbn__depotid.GetValueOrDefault(); }
-            set { __pbn__depotid = value; }
+            get => __pbn__depotid.GetValueOrDefault();
+            set => __pbn__depotid = value;
         }
         public bool ShouldSerializedepotid() => __pbn__depotid != null;
         public void Resetdepotid() => __pbn__depotid = null;
@@ -207,8 +208,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong workshop_itemid
         {
-            get { return __pbn__workshop_itemid.GetValueOrDefault(); }
-            set { __pbn__workshop_itemid = value; }
+            get => __pbn__workshop_itemid.GetValueOrDefault();
+            set => __pbn__workshop_itemid = value;
         }
         public bool ShouldSerializeworkshop_itemid() => __pbn__workshop_itemid != null;
         public void Resetworkshop_itemid() => __pbn__workshop_itemid = null;
@@ -217,8 +218,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public bool for_local_cs
         {
-            get { return __pbn__for_local_cs.GetValueOrDefault(); }
-            set { __pbn__for_local_cs = value; }
+            get => __pbn__for_local_cs.GetValueOrDefault();
+            set => __pbn__for_local_cs = value;
         }
         public bool ShouldSerializefor_local_cs() => __pbn__for_local_cs != null;
         public void Resetfor_local_cs() => __pbn__for_local_cs = null;
@@ -227,8 +228,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public ulong baseline_manifestid
         {
-            get { return __pbn__baseline_manifestid.GetValueOrDefault(); }
-            set { __pbn__baseline_manifestid = value; }
+            get => __pbn__baseline_manifestid.GetValueOrDefault();
+            set => __pbn__baseline_manifestid = value;
         }
         public bool ShouldSerializebaseline_manifestid() => __pbn__baseline_manifestid != null;
         public void Resetbaseline_manifestid() => __pbn__baseline_manifestid = null;
@@ -237,8 +238,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint manifest_size
         {
-            get { return __pbn__manifest_size.GetValueOrDefault(); }
-            set { __pbn__manifest_size = value; }
+            get => __pbn__manifest_size.GetValueOrDefault();
+            set => __pbn__manifest_size = value;
         }
         public bool ShouldSerializemanifest_size() => __pbn__manifest_size != null;
         public void Resetmanifest_size() => __pbn__manifest_size = null;
@@ -256,8 +257,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong depot_build_handle
         {
-            get { return __pbn__depot_build_handle.GetValueOrDefault(); }
-            set { __pbn__depot_build_handle = value; }
+            get => __pbn__depot_build_handle.GetValueOrDefault();
+            set => __pbn__depot_build_handle = value;
         }
         public bool ShouldSerializedepot_build_handle() => __pbn__depot_build_handle != null;
         public void Resetdepot_build_handle() => __pbn__depot_build_handle = null;
@@ -275,8 +276,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -285,8 +286,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong depot_build_handle
         {
-            get { return __pbn__depot_build_handle.GetValueOrDefault(); }
-            set { __pbn__depot_build_handle = value; }
+            get => __pbn__depot_build_handle.GetValueOrDefault();
+            set => __pbn__depot_build_handle = value;
         }
         public bool ShouldSerializedepot_build_handle() => __pbn__depot_build_handle != null;
         public void Resetdepot_build_handle() => __pbn__depot_build_handle = null;
@@ -307,8 +308,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint total_missing_chunks
         {
-            get { return __pbn__total_missing_chunks.GetValueOrDefault(); }
-            set { __pbn__total_missing_chunks = value; }
+            get => __pbn__total_missing_chunks.GetValueOrDefault();
+            set => __pbn__total_missing_chunks = value;
         }
         public bool ShouldSerializetotal_missing_chunks() => __pbn__total_missing_chunks != null;
         public void Resettotal_missing_chunks() => __pbn__total_missing_chunks = null;
@@ -317,8 +318,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong total_missing_bytes
         {
-            get { return __pbn__total_missing_bytes.GetValueOrDefault(); }
-            set { __pbn__total_missing_bytes = value; }
+            get => __pbn__total_missing_bytes.GetValueOrDefault();
+            set => __pbn__total_missing_bytes = value;
         }
         public bool ShouldSerializetotal_missing_bytes() => __pbn__total_missing_bytes != null;
         public void Resettotal_missing_bytes() => __pbn__total_missing_bytes = null;
@@ -334,8 +335,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public byte[] sha
             {
-                get { return __pbn__sha; }
-                set { __pbn__sha = value; }
+                get => __pbn__sha;
+                set => __pbn__sha = value;
             }
             public bool ShouldSerializesha() => __pbn__sha != null;
             public void Resetsha() => __pbn__sha = null;
@@ -355,8 +356,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -365,8 +366,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong depot_build_handle
         {
-            get { return __pbn__depot_build_handle.GetValueOrDefault(); }
-            set { __pbn__depot_build_handle = value; }
+            get => __pbn__depot_build_handle.GetValueOrDefault();
+            set => __pbn__depot_build_handle = value;
         }
         public bool ShouldSerializedepot_build_handle() => __pbn__depot_build_handle != null;
         public void Resetdepot_build_handle() => __pbn__depot_build_handle = null;
@@ -384,8 +385,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong manifestid
         {
-            get { return __pbn__manifestid.GetValueOrDefault(); }
-            set { __pbn__manifestid = value; }
+            get => __pbn__manifestid.GetValueOrDefault();
+            set => __pbn__manifestid = value;
         }
         public bool ShouldSerializemanifestid() => __pbn__manifestid != null;
         public void Resetmanifestid() => __pbn__manifestid = null;
@@ -394,8 +395,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public bool prev_reused
         {
-            get { return __pbn__prev_reused.GetValueOrDefault(); }
-            set { __pbn__prev_reused = value; }
+            get => __pbn__prev_reused.GetValueOrDefault();
+            set => __pbn__prev_reused = value;
         }
         public bool ShouldSerializeprev_reused() => __pbn__prev_reused != null;
         public void Resetprev_reused() => __pbn__prev_reused = null;
@@ -413,8 +414,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -427,8 +428,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string build_notes
         {
-            get { return __pbn__build_notes ?? ""; }
-            set { __pbn__build_notes = value; }
+            get => __pbn__build_notes ?? "";
+            set => __pbn__build_notes = value;
         }
         public bool ShouldSerializebuild_notes() => __pbn__build_notes != null;
         public void Resetbuild_notes() => __pbn__build_notes = null;
@@ -438,8 +439,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string live_branch
         {
-            get { return __pbn__live_branch ?? ""; }
-            set { __pbn__live_branch = value; }
+            get => __pbn__live_branch ?? "";
+            set => __pbn__live_branch = value;
         }
         public bool ShouldSerializelive_branch() => __pbn__live_branch != null;
         public void Resetlive_branch() => __pbn__live_branch = null;
@@ -455,8 +456,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public uint depotid
             {
-                get { return __pbn__depotid.GetValueOrDefault(); }
-                set { __pbn__depotid = value; }
+                get => __pbn__depotid.GetValueOrDefault();
+                set => __pbn__depotid = value;
             }
             public bool ShouldSerializedepotid() => __pbn__depotid != null;
             public void Resetdepotid() => __pbn__depotid = null;
@@ -465,8 +466,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public ulong manifestid
             {
-                get { return __pbn__manifestid.GetValueOrDefault(); }
-                set { __pbn__manifestid = value; }
+                get => __pbn__manifestid.GetValueOrDefault();
+                set => __pbn__manifestid = value;
             }
             public bool ShouldSerializemanifestid() => __pbn__manifestid != null;
             public void Resetmanifestid() => __pbn__manifestid = null;
@@ -486,8 +487,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint buildid
         {
-            get { return __pbn__buildid.GetValueOrDefault(); }
-            set { __pbn__buildid = value; }
+            get => __pbn__buildid.GetValueOrDefault();
+            set => __pbn__buildid = value;
         }
         public bool ShouldSerializebuildid() => __pbn__buildid != null;
         public void Resetbuildid() => __pbn__buildid = null;
@@ -505,8 +506,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -515,8 +516,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint depotid
         {
-            get { return __pbn__depotid.GetValueOrDefault(); }
-            set { __pbn__depotid = value; }
+            get => __pbn__depotid.GetValueOrDefault();
+            set => __pbn__depotid = value;
         }
         public bool ShouldSerializedepotid() => __pbn__depotid != null;
         public void Resetdepotid() => __pbn__depotid = null;
@@ -526,8 +527,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string install_script
         {
-            get { return __pbn__install_script ?? ""; }
-            set { __pbn__install_script = value; }
+            get => __pbn__install_script ?? "";
+            set => __pbn__install_script = value;
         }
         public bool ShouldSerializeinstall_script() => __pbn__install_script != null;
         public void Resetinstall_script() => __pbn__install_script = null;
@@ -546,8 +547,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string signed_install_script
         {
-            get { return __pbn__signed_install_script ?? ""; }
-            set { __pbn__signed_install_script = value; }
+            get => __pbn__signed_install_script ?? "";
+            set => __pbn__signed_install_script = value;
         }
         public bool ShouldSerializesigned_install_script() => __pbn__signed_install_script != null;
         public void Resetsigned_install_script() => __pbn__signed_install_script = null;
@@ -567,4 +568,5 @@ namespace SteamKit2.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

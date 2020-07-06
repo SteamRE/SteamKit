@@ -4,7 +4,8 @@
 //   Input: steammessages_market.steamclient.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.Internal
 {
 
@@ -19,8 +20,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string webcookie
         {
-            get { return __pbn__webcookie ?? ""; }
-            set { __pbn__webcookie = value; }
+            get => __pbn__webcookie ?? "";
+            set => __pbn__webcookie = value;
         }
         public bool ShouldSerializewebcookie() => __pbn__webcookie != null;
         public void Resetwebcookie() => __pbn__webcookie = null;
@@ -38,8 +39,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool allowed
         {
-            get { return __pbn__allowed.GetValueOrDefault(); }
-            set { __pbn__allowed = value; }
+            get => __pbn__allowed.GetValueOrDefault();
+            set => __pbn__allowed = value;
         }
         public bool ShouldSerializeallowed() => __pbn__allowed != null;
         public void Resetallowed() => __pbn__allowed = null;
@@ -48,8 +49,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint reason
         {
-            get { return __pbn__reason.GetValueOrDefault(); }
-            set { __pbn__reason = value; }
+            get => __pbn__reason.GetValueOrDefault();
+            set => __pbn__reason = value;
         }
         public bool ShouldSerializereason() => __pbn__reason != null;
         public void Resetreason() => __pbn__reason = null;
@@ -58,8 +59,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint allowed_at_time
         {
-            get { return __pbn__allowed_at_time.GetValueOrDefault(); }
-            set { __pbn__allowed_at_time = value; }
+            get => __pbn__allowed_at_time.GetValueOrDefault();
+            set => __pbn__allowed_at_time = value;
         }
         public bool ShouldSerializeallowed_at_time() => __pbn__allowed_at_time != null;
         public void Resetallowed_at_time() => __pbn__allowed_at_time = null;
@@ -68,8 +69,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint steamguard_required_days
         {
-            get { return __pbn__steamguard_required_days.GetValueOrDefault(); }
-            set { __pbn__steamguard_required_days = value; }
+            get => __pbn__steamguard_required_days.GetValueOrDefault();
+            set => __pbn__steamguard_required_days = value;
         }
         public bool ShouldSerializesteamguard_required_days() => __pbn__steamguard_required_days != null;
         public void Resetsteamguard_required_days() => __pbn__steamguard_required_days = null;
@@ -78,8 +79,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public bool forms_requested
         {
-            get { return __pbn__forms_requested.GetValueOrDefault(); }
-            set { __pbn__forms_requested = value; }
+            get => __pbn__forms_requested.GetValueOrDefault();
+            set => __pbn__forms_requested = value;
         }
         public bool ShouldSerializeforms_requested() => __pbn__forms_requested != null;
         public void Resetforms_requested() => __pbn__forms_requested = null;
@@ -88,8 +89,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public bool forms_require_verification
         {
-            get { return __pbn__forms_require_verification.GetValueOrDefault(); }
-            set { __pbn__forms_require_verification = value; }
+            get => __pbn__forms_require_verification.GetValueOrDefault();
+            set => __pbn__forms_require_verification = value;
         }
         public bool ShouldSerializeforms_require_verification() => __pbn__forms_require_verification != null;
         public void Resetforms_require_verification() => __pbn__forms_require_verification = null;
@@ -98,8 +99,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public uint new_device_cooldown_days
         {
-            get { return __pbn__new_device_cooldown_days.GetValueOrDefault(); }
-            set { __pbn__new_device_cooldown_days = value; }
+            get => __pbn__new_device_cooldown_days.GetValueOrDefault();
+            set => __pbn__new_device_cooldown_days = value;
         }
         public bool ShouldSerializenew_device_cooldown_days() => __pbn__new_device_cooldown_days != null;
         public void Resetnew_device_cooldown_days() => __pbn__new_device_cooldown_days = null;
@@ -114,4 +115,5 @@ namespace SteamKit2.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

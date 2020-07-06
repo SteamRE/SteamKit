@@ -4,7 +4,8 @@
 //   Input: steammessages_shader.steamclient.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.Internal
 {
 
@@ -18,8 +19,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -29,8 +30,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string gpu_desc
         {
-            get { return __pbn__gpu_desc ?? ""; }
-            set { __pbn__gpu_desc = value; }
+            get => __pbn__gpu_desc ?? "";
+            set => __pbn__gpu_desc = value;
         }
         public bool ShouldSerializegpu_desc() => __pbn__gpu_desc != null;
         public void Resetgpu_desc() => __pbn__gpu_desc = null;
@@ -40,8 +41,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string driver_desc
         {
-            get { return __pbn__driver_desc ?? ""; }
-            set { __pbn__driver_desc = value; }
+            get => __pbn__driver_desc ?? "";
+            set => __pbn__driver_desc = value;
         }
         public bool ShouldSerializedriver_desc() => __pbn__driver_desc != null;
         public void Resetdriver_desc() => __pbn__driver_desc = null;
@@ -60,8 +61,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public byte[] cache_key_sha
             {
-                get { return __pbn__cache_key_sha; }
-                set { __pbn__cache_key_sha = value; }
+                get => __pbn__cache_key_sha;
+                set => __pbn__cache_key_sha = value;
             }
             public bool ShouldSerializecache_key_sha() => __pbn__cache_key_sha != null;
             public void Resetcache_key_sha() => __pbn__cache_key_sha = null;
@@ -70,8 +71,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public byte[] shader_code_sha
             {
-                get { return __pbn__shader_code_sha; }
-                set { __pbn__shader_code_sha = value; }
+                get => __pbn__shader_code_sha;
+                set => __pbn__shader_code_sha = value;
             }
             public bool ShouldSerializeshader_code_sha() => __pbn__shader_code_sha != null;
             public void Resetshader_code_sha() => __pbn__shader_code_sha = null;
@@ -103,8 +104,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -123,8 +124,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public byte[] shader_code_sha
             {
-                get { return __pbn__shader_code_sha; }
-                set { __pbn__shader_code_sha = value; }
+                get => __pbn__shader_code_sha;
+                set => __pbn__shader_code_sha = value;
             }
             public bool ShouldSerializeshader_code_sha() => __pbn__shader_code_sha != null;
             public void Resetshader_code_sha() => __pbn__shader_code_sha = null;
@@ -133,8 +134,8 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public byte[] shader_code
             {
-                get { return __pbn__shader_code; }
-                set { __pbn__shader_code = value; }
+                get => __pbn__shader_code;
+                set => __pbn__shader_code = value;
             }
             public bool ShouldSerializeshader_code() => __pbn__shader_code != null;
             public void Resetshader_code() => __pbn__shader_code = null;
@@ -163,8 +164,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -174,8 +175,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string gpu_desc
         {
-            get { return __pbn__gpu_desc ?? ""; }
-            set { __pbn__gpu_desc = value; }
+            get => __pbn__gpu_desc ?? "";
+            set => __pbn__gpu_desc = value;
         }
         public bool ShouldSerializegpu_desc() => __pbn__gpu_desc != null;
         public void Resetgpu_desc() => __pbn__gpu_desc = null;
@@ -185,8 +186,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string driver_desc
         {
-            get { return __pbn__driver_desc ?? ""; }
-            set { __pbn__driver_desc = value; }
+            get => __pbn__driver_desc ?? "";
+            set => __pbn__driver_desc = value;
         }
         public bool ShouldSerializedriver_desc() => __pbn__driver_desc != null;
         public void Resetdriver_desc() => __pbn__driver_desc = null;
@@ -204,8 +205,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong manifestid
         {
-            get { return __pbn__manifestid.GetValueOrDefault(); }
-            set { __pbn__manifestid = value; }
+            get => __pbn__manifestid.GetValueOrDefault();
+            set => __pbn__manifestid = value;
         }
         public bool ShouldSerializemanifestid() => __pbn__manifestid != null;
         public void Resetmanifestid() => __pbn__manifestid = null;
@@ -214,8 +215,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint depotsize
         {
-            get { return __pbn__depotsize.GetValueOrDefault(); }
-            set { __pbn__depotsize = value; }
+            get => __pbn__depotsize.GetValueOrDefault();
+            set => __pbn__depotsize = value;
         }
         public bool ShouldSerializedepotsize() => __pbn__depotsize != null;
         public void Resetdepotsize() => __pbn__depotsize = null;
@@ -224,8 +225,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong bucketid
         {
-            get { return __pbn__bucketid.GetValueOrDefault(); }
-            set { __pbn__bucketid = value; }
+            get => __pbn__bucketid.GetValueOrDefault();
+            set => __pbn__bucketid = value;
         }
         public bool ShouldSerializebucketid() => __pbn__bucketid != null;
         public void Resetbucketid() => __pbn__bucketid = null;
@@ -242,4 +243,5 @@ namespace SteamKit2.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

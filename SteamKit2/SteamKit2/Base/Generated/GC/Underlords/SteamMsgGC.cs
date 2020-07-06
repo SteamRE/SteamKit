@@ -4,7 +4,8 @@
 //   Input: base_gcmessages.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.GC.Underlords.Internal
 {
 
@@ -18,8 +19,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint item_def_id
         {
-            get { return __pbn__item_def_id.GetValueOrDefault(); }
-            set { __pbn__item_def_id = value; }
+            get => __pbn__item_def_id.GetValueOrDefault();
+            set => __pbn__item_def_id = value;
         }
         public bool ShouldSerializeitem_def_id() => __pbn__item_def_id != null;
         public void Resetitem_def_id() => __pbn__item_def_id = null;
@@ -28,8 +29,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint quantity
         {
-            get { return __pbn__quantity.GetValueOrDefault(); }
-            set { __pbn__quantity = value; }
+            get => __pbn__quantity.GetValueOrDefault();
+            set => __pbn__quantity = value;
         }
         public bool ShouldSerializequantity() => __pbn__quantity != null;
         public void Resetquantity() => __pbn__quantity = null;
@@ -38,8 +39,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint cost_in_local_currency
         {
-            get { return __pbn__cost_in_local_currency.GetValueOrDefault(); }
-            set { __pbn__cost_in_local_currency = value; }
+            get => __pbn__cost_in_local_currency.GetValueOrDefault();
+            set => __pbn__cost_in_local_currency = value;
         }
         public bool ShouldSerializecost_in_local_currency() => __pbn__cost_in_local_currency != null;
         public void Resetcost_in_local_currency() => __pbn__cost_in_local_currency = null;
@@ -48,8 +49,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint purchase_type
         {
-            get { return __pbn__purchase_type.GetValueOrDefault(); }
-            set { __pbn__purchase_type = value; }
+            get => __pbn__purchase_type.GetValueOrDefault();
+            set => __pbn__purchase_type = value;
         }
         public bool ShouldSerializepurchase_type() => __pbn__purchase_type != null;
         public void Resetpurchase_type() => __pbn__purchase_type = null;
@@ -58,8 +59,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public ulong source_reference_id
         {
-            get { return __pbn__source_reference_id.GetValueOrDefault(); }
-            set { __pbn__source_reference_id = value; }
+            get => __pbn__source_reference_id.GetValueOrDefault();
+            set => __pbn__source_reference_id = value;
         }
         public bool ShouldSerializesource_reference_id() => __pbn__source_reference_id != null;
         public void Resetsource_reference_id() => __pbn__source_reference_id = null;
@@ -78,8 +79,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string country
         {
-            get { return __pbn__country ?? ""; }
-            set { __pbn__country = value; }
+            get => __pbn__country ?? "";
+            set => __pbn__country = value;
         }
         public bool ShouldSerializecountry() => __pbn__country != null;
         public void Resetcountry() => __pbn__country = null;
@@ -88,8 +89,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public int language
         {
-            get { return __pbn__language.GetValueOrDefault(); }
-            set { __pbn__language = value; }
+            get => __pbn__language.GetValueOrDefault();
+            set => __pbn__language = value;
         }
         public bool ShouldSerializelanguage() => __pbn__language != null;
         public void Resetlanguage() => __pbn__language = null;
@@ -98,8 +99,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public int currency
         {
-            get { return __pbn__currency.GetValueOrDefault(); }
-            set { __pbn__currency = value; }
+            get => __pbn__currency.GetValueOrDefault();
+            set => __pbn__currency = value;
         }
         public bool ShouldSerializecurrency() => __pbn__currency != null;
         public void Resetcurrency() => __pbn__currency = null;
@@ -120,8 +121,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public int result
         {
-            get { return __pbn__result.GetValueOrDefault(); }
-            set { __pbn__result = value; }
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -130,8 +131,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong txn_id
         {
-            get { return __pbn__txn_id.GetValueOrDefault(); }
-            set { __pbn__txn_id = value; }
+            get => __pbn__txn_id.GetValueOrDefault();
+            set => __pbn__txn_id = value;
         }
         public bool ShouldSerializetxn_id() => __pbn__txn_id != null;
         public void Resettxn_id() => __pbn__txn_id = null;
@@ -150,8 +151,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string message
         {
-            get { return __pbn__message ?? ""; }
-            set { __pbn__message = value; }
+            get => __pbn__message ?? "";
+            set => __pbn__message = value;
         }
         public bool ShouldSerializemessage() => __pbn__message != null;
         public void Resetmessage() => __pbn__message = null;
@@ -181,8 +182,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public uint region_ping_failed_bitmask
         {
-            get { return __pbn__region_ping_failed_bitmask.GetValueOrDefault(); }
-            set { __pbn__region_ping_failed_bitmask = value; }
+            get => __pbn__region_ping_failed_bitmask.GetValueOrDefault();
+            set => __pbn__region_ping_failed_bitmask = value;
         }
         public bool ShouldSerializeregion_ping_failed_bitmask() => __pbn__region_ping_failed_bitmask != null;
         public void Resetregion_ping_failed_bitmask() => __pbn__region_ping_failed_bitmask = null;
@@ -200,8 +201,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steam_id
         {
-            get { return __pbn__steam_id.GetValueOrDefault(); }
-            set { __pbn__steam_id = value; }
+            get => __pbn__steam_id.GetValueOrDefault();
+            set => __pbn__steam_id = value;
         }
         public bool ShouldSerializesteam_id() => __pbn__steam_id != null;
         public void Resetsteam_id() => __pbn__steam_id = null;
@@ -210,8 +211,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint client_version
         {
-            get { return __pbn__client_version.GetValueOrDefault(); }
-            set { __pbn__client_version = value; }
+            get => __pbn__client_version.GetValueOrDefault();
+            set => __pbn__client_version = value;
         }
         public bool ShouldSerializeclient_version() => __pbn__client_version != null;
         public void Resetclient_version() => __pbn__client_version = null;
@@ -220,8 +221,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint team_id
         {
-            get { return __pbn__team_id.GetValueOrDefault(); }
-            set { __pbn__team_id = value; }
+            get => __pbn__team_id.GetValueOrDefault();
+            set => __pbn__team_id = value;
         }
         public bool ShouldSerializeteam_id() => __pbn__team_id != null;
         public void Resetteam_id() => __pbn__team_id = null;
@@ -230,8 +231,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public bool as_coach
         {
-            get { return __pbn__as_coach.GetValueOrDefault(); }
-            set { __pbn__as_coach = value; }
+            get => __pbn__as_coach.GetValueOrDefault();
+            set => __pbn__as_coach = value;
         }
         public bool ShouldSerializeas_coach() => __pbn__as_coach != null;
         public void Resetas_coach() => __pbn__as_coach = null;
@@ -252,8 +253,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steam_id
         {
-            get { return __pbn__steam_id.GetValueOrDefault(); }
-            set { __pbn__steam_id = value; }
+            get => __pbn__steam_id.GetValueOrDefault();
+            set => __pbn__steam_id = value;
         }
         public bool ShouldSerializesteam_id() => __pbn__steam_id != null;
         public void Resetsteam_id() => __pbn__steam_id = null;
@@ -262,8 +263,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint client_version
         {
-            get { return __pbn__client_version.GetValueOrDefault(); }
-            set { __pbn__client_version = value; }
+            get => __pbn__client_version.GetValueOrDefault();
+            set => __pbn__client_version = value;
         }
         public bool ShouldSerializeclient_version() => __pbn__client_version != null;
         public void Resetclient_version() => __pbn__client_version = null;
@@ -281,8 +282,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong group_id
         {
-            get { return __pbn__group_id.GetValueOrDefault(); }
-            set { __pbn__group_id = value; }
+            get => __pbn__group_id.GetValueOrDefault();
+            set => __pbn__group_id = value;
         }
         public bool ShouldSerializegroup_id() => __pbn__group_id != null;
         public void Resetgroup_id() => __pbn__group_id = null;
@@ -291,8 +292,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steam_id
         {
-            get { return __pbn__steam_id.GetValueOrDefault(); }
-            set { __pbn__steam_id = value; }
+            get => __pbn__steam_id.GetValueOrDefault();
+            set => __pbn__steam_id = value;
         }
         public bool ShouldSerializesteam_id() => __pbn__steam_id != null;
         public void Resetsteam_id() => __pbn__steam_id = null;
@@ -301,8 +302,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public bool user_offline
         {
-            get { return __pbn__user_offline.GetValueOrDefault(); }
-            set { __pbn__user_offline = value; }
+            get => __pbn__user_offline.GetValueOrDefault();
+            set => __pbn__user_offline = value;
         }
         public bool ShouldSerializeuser_offline() => __pbn__user_offline != null;
         public void Resetuser_offline() => __pbn__user_offline = null;
@@ -320,8 +321,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong party_id
         {
-            get { return __pbn__party_id.GetValueOrDefault(); }
-            set { __pbn__party_id = value; }
+            get => __pbn__party_id.GetValueOrDefault();
+            set => __pbn__party_id = value;
         }
         public bool ShouldSerializeparty_id() => __pbn__party_id != null;
         public void Resetparty_id() => __pbn__party_id = null;
@@ -330,8 +331,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public bool accept
         {
-            get { return __pbn__accept.GetValueOrDefault(); }
-            set { __pbn__accept = value; }
+            get => __pbn__accept.GetValueOrDefault();
+            set => __pbn__accept = value;
         }
         public bool ShouldSerializeaccept() => __pbn__accept != null;
         public void Resetaccept() => __pbn__accept = null;
@@ -340,8 +341,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint client_version
         {
-            get { return __pbn__client_version.GetValueOrDefault(); }
-            set { __pbn__client_version = value; }
+            get => __pbn__client_version.GetValueOrDefault();
+            set => __pbn__client_version = value;
         }
         public bool ShouldSerializeclient_version() => __pbn__client_version != null;
         public void Resetclient_version() => __pbn__client_version = null;
@@ -362,8 +363,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong lobby_id
         {
-            get { return __pbn__lobby_id.GetValueOrDefault(); }
-            set { __pbn__lobby_id = value; }
+            get => __pbn__lobby_id.GetValueOrDefault();
+            set => __pbn__lobby_id = value;
         }
         public bool ShouldSerializelobby_id() => __pbn__lobby_id != null;
         public void Resetlobby_id() => __pbn__lobby_id = null;
@@ -372,8 +373,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public bool accept
         {
-            get { return __pbn__accept.GetValueOrDefault(); }
-            set { __pbn__accept = value; }
+            get => __pbn__accept.GetValueOrDefault();
+            set => __pbn__accept = value;
         }
         public bool ShouldSerializeaccept() => __pbn__accept != null;
         public void Resetaccept() => __pbn__accept = null;
@@ -382,8 +383,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint client_version
         {
-            get { return __pbn__client_version.GetValueOrDefault(); }
-            set { __pbn__client_version = value; }
+            get => __pbn__client_version.GetValueOrDefault();
+            set => __pbn__client_version = value;
         }
         public bool ShouldSerializeclient_version() => __pbn__client_version != null;
         public void Resetclient_version() => __pbn__client_version = null;
@@ -392,8 +393,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(6, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong custom_game_crc
         {
-            get { return __pbn__custom_game_crc.GetValueOrDefault(); }
-            set { __pbn__custom_game_crc = value; }
+            get => __pbn__custom_game_crc.GetValueOrDefault();
+            set => __pbn__custom_game_crc = value;
         }
         public bool ShouldSerializecustom_game_crc() => __pbn__custom_game_crc != null;
         public void Resetcustom_game_crc() => __pbn__custom_game_crc = null;
@@ -402,8 +403,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(7, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint custom_game_timestamp
         {
-            get { return __pbn__custom_game_timestamp.GetValueOrDefault(); }
-            set { __pbn__custom_game_timestamp = value; }
+            get => __pbn__custom_game_timestamp.GetValueOrDefault();
+            set => __pbn__custom_game_timestamp = value;
         }
         public bool ShouldSerializecustom_game_timestamp() => __pbn__custom_game_timestamp != null;
         public void Resetcustom_game_timestamp() => __pbn__custom_game_timestamp = null;
@@ -421,8 +422,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steam_id
         {
-            get { return __pbn__steam_id.GetValueOrDefault(); }
-            set { __pbn__steam_id = value; }
+            get => __pbn__steam_id.GetValueOrDefault();
+            set => __pbn__steam_id = value;
         }
         public bool ShouldSerializesteam_id() => __pbn__steam_id != null;
         public void Resetsteam_id() => __pbn__steam_id = null;
@@ -450,8 +451,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(ECustomGameInstallStatus.k_ECustomGameInstallStatus_Unknown)]
         public ECustomGameInstallStatus status
         {
-            get { return __pbn__status ?? ECustomGameInstallStatus.k_ECustomGameInstallStatus_Unknown; }
-            set { __pbn__status = value; }
+            get => __pbn__status ?? ECustomGameInstallStatus.k_ECustomGameInstallStatus_Unknown;
+            set => __pbn__status = value;
         }
         public bool ShouldSerializestatus() => __pbn__status != null;
         public void Resetstatus() => __pbn__status = null;
@@ -461,8 +462,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string message
         {
-            get { return __pbn__message ?? ""; }
-            set { __pbn__message = value; }
+            get => __pbn__message ?? "";
+            set => __pbn__message = value;
         }
         public bool ShouldSerializemessage() => __pbn__message != null;
         public void Resetmessage() => __pbn__message = null;
@@ -471,8 +472,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint latest_timestamp_from_steam
         {
-            get { return __pbn__latest_timestamp_from_steam.GetValueOrDefault(); }
-            set { __pbn__latest_timestamp_from_steam = value; }
+            get => __pbn__latest_timestamp_from_steam.GetValueOrDefault();
+            set => __pbn__latest_timestamp_from_steam = value;
         }
         public bool ShouldSerializelatest_timestamp_from_steam() => __pbn__latest_timestamp_from_steam != null;
         public void Resetlatest_timestamp_from_steam() => __pbn__latest_timestamp_from_steam = null;
@@ -502,8 +503,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong lobby_id
         {
-            get { return __pbn__lobby_id.GetValueOrDefault(); }
-            set { __pbn__lobby_id = value; }
+            get => __pbn__lobby_id.GetValueOrDefault();
+            set => __pbn__lobby_id = value;
         }
         public bool ShouldSerializelobby_id() => __pbn__lobby_id != null;
         public void Resetlobby_id() => __pbn__lobby_id = null;
@@ -522,8 +523,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(0)]
         public uint additional_backpack_slots
         {
-            get { return __pbn__additional_backpack_slots ?? 0; }
-            set { __pbn__additional_backpack_slots = value; }
+            get => __pbn__additional_backpack_slots ?? 0;
+            set => __pbn__additional_backpack_slots = value;
         }
         public bool ShouldSerializeadditional_backpack_slots() => __pbn__additional_backpack_slots != null;
         public void Resetadditional_backpack_slots() => __pbn__additional_backpack_slots = null;
@@ -533,8 +534,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(false)]
         public bool trial_account
         {
-            get { return __pbn__trial_account ?? false; }
-            set { __pbn__trial_account = value; }
+            get => __pbn__trial_account ?? false;
+            set => __pbn__trial_account = value;
         }
         public bool ShouldSerializetrial_account() => __pbn__trial_account != null;
         public void Resettrial_account() => __pbn__trial_account = null;
@@ -544,8 +545,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(true)]
         public bool eligible_for_online_play
         {
-            get { return __pbn__eligible_for_online_play ?? true; }
-            set { __pbn__eligible_for_online_play = value; }
+            get => __pbn__eligible_for_online_play ?? true;
+            set => __pbn__eligible_for_online_play = value;
         }
         public bool ShouldSerializeeligible_for_online_play() => __pbn__eligible_for_online_play != null;
         public void Reseteligible_for_online_play() => __pbn__eligible_for_online_play = null;
@@ -554,8 +555,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public bool need_to_choose_most_helpful_friend
         {
-            get { return __pbn__need_to_choose_most_helpful_friend.GetValueOrDefault(); }
-            set { __pbn__need_to_choose_most_helpful_friend = value; }
+            get => __pbn__need_to_choose_most_helpful_friend.GetValueOrDefault();
+            set => __pbn__need_to_choose_most_helpful_friend = value;
         }
         public bool ShouldSerializeneed_to_choose_most_helpful_friend() => __pbn__need_to_choose_most_helpful_friend != null;
         public void Resetneed_to_choose_most_helpful_friend() => __pbn__need_to_choose_most_helpful_friend = null;
@@ -564,8 +565,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public bool in_coaches_list
         {
-            get { return __pbn__in_coaches_list.GetValueOrDefault(); }
-            set { __pbn__in_coaches_list = value; }
+            get => __pbn__in_coaches_list.GetValueOrDefault();
+            set => __pbn__in_coaches_list = value;
         }
         public bool ShouldSerializein_coaches_list() => __pbn__in_coaches_list != null;
         public void Resetin_coaches_list() => __pbn__in_coaches_list = null;
@@ -574,8 +575,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(6, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint trade_ban_expiration
         {
-            get { return __pbn__trade_ban_expiration.GetValueOrDefault(); }
-            set { __pbn__trade_ban_expiration = value; }
+            get => __pbn__trade_ban_expiration.GetValueOrDefault();
+            set => __pbn__trade_ban_expiration = value;
         }
         public bool ShouldSerializetrade_ban_expiration() => __pbn__trade_ban_expiration != null;
         public void Resettrade_ban_expiration() => __pbn__trade_ban_expiration = null;
@@ -584,8 +585,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(7, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint duel_ban_expiration
         {
-            get { return __pbn__duel_ban_expiration.GetValueOrDefault(); }
-            set { __pbn__duel_ban_expiration = value; }
+            get => __pbn__duel_ban_expiration.GetValueOrDefault();
+            set => __pbn__duel_ban_expiration = value;
         }
         public bool ShouldSerializeduel_ban_expiration() => __pbn__duel_ban_expiration != null;
         public void Resetduel_ban_expiration() => __pbn__duel_ban_expiration = null;
@@ -595,8 +596,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(false)]
         public bool made_first_purchase
         {
-            get { return __pbn__made_first_purchase ?? false; }
-            set { __pbn__made_first_purchase = value; }
+            get => __pbn__made_first_purchase ?? false;
+            set => __pbn__made_first_purchase = value;
         }
         public bool ShouldSerializemade_first_purchase() => __pbn__made_first_purchase != null;
         public void Resetmade_first_purchase() => __pbn__made_first_purchase = null;
@@ -614,8 +615,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public int op
         {
-            get { return __pbn__op.GetValueOrDefault(); }
-            set { __pbn__op = value; }
+            get => __pbn__op.GetValueOrDefault();
+            set => __pbn__op = value;
         }
         public bool ShouldSerializeop() => __pbn__op != null;
         public void Resetop() => __pbn__op = null;
@@ -625,8 +626,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string field
         {
-            get { return __pbn__field ?? ""; }
-            set { __pbn__field = value; }
+            get => __pbn__field ?? "";
+            set => __pbn__field = value;
         }
         public bool ShouldSerializefield() => __pbn__field != null;
         public void Resetfield() => __pbn__field = null;
@@ -635,8 +636,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public bool required
         {
-            get { return __pbn__required.GetValueOrDefault(); }
-            set { __pbn__required = value; }
+            get => __pbn__required.GetValueOrDefault();
+            set => __pbn__required = value;
         }
         public bool ShouldSerializerequired() => __pbn__required != null;
         public void Resetrequired() => __pbn__required = null;
@@ -645,8 +646,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public float float_value
         {
-            get { return __pbn__float_value.GetValueOrDefault(); }
-            set { __pbn__float_value = value; }
+            get => __pbn__float_value.GetValueOrDefault();
+            set => __pbn__float_value = value;
         }
         public bool ShouldSerializefloat_value() => __pbn__float_value != null;
         public void Resetfloat_value() => __pbn__float_value = null;
@@ -656,8 +657,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string string_value
         {
-            get { return __pbn__string_value ?? ""; }
-            set { __pbn__string_value = value; }
+            get => __pbn__string_value ?? "";
+            set => __pbn__string_value = value;
         }
         public bool ShouldSerializestring_value() => __pbn__string_value != null;
         public void Resetstring_value() => __pbn__string_value = null;
@@ -675,8 +676,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint item_level
         {
-            get { return __pbn__item_level.GetValueOrDefault(); }
-            set { __pbn__item_level = value; }
+            get => __pbn__item_level.GetValueOrDefault();
+            set => __pbn__item_level = value;
         }
         public bool ShouldSerializeitem_level() => __pbn__item_level != null;
         public void Resetitem_level() => __pbn__item_level = null;
@@ -685,8 +686,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public int item_quality
         {
-            get { return __pbn__item_quality.GetValueOrDefault(); }
-            set { __pbn__item_quality = value; }
+            get => __pbn__item_quality.GetValueOrDefault();
+            set => __pbn__item_quality = value;
         }
         public bool ShouldSerializeitem_quality() => __pbn__item_quality != null;
         public void Resetitem_quality() => __pbn__item_quality = null;
@@ -695,8 +696,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public bool item_level_set
         {
-            get { return __pbn__item_level_set.GetValueOrDefault(); }
-            set { __pbn__item_level_set = value; }
+            get => __pbn__item_level_set.GetValueOrDefault();
+            set => __pbn__item_level_set = value;
         }
         public bool ShouldSerializeitem_level_set() => __pbn__item_level_set != null;
         public void Resetitem_level_set() => __pbn__item_level_set = null;
@@ -705,8 +706,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public bool item_quality_set
         {
-            get { return __pbn__item_quality_set.GetValueOrDefault(); }
-            set { __pbn__item_quality_set = value; }
+            get => __pbn__item_quality_set.GetValueOrDefault();
+            set => __pbn__item_quality_set = value;
         }
         public bool ShouldSerializeitem_quality_set() => __pbn__item_quality_set != null;
         public void Resetitem_quality_set() => __pbn__item_quality_set = null;
@@ -715,8 +716,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint initial_inventory
         {
-            get { return __pbn__initial_inventory.GetValueOrDefault(); }
-            set { __pbn__initial_inventory = value; }
+            get => __pbn__initial_inventory.GetValueOrDefault();
+            set => __pbn__initial_inventory = value;
         }
         public bool ShouldSerializeinitial_inventory() => __pbn__initial_inventory != null;
         public void Resetinitial_inventory() => __pbn__initial_inventory = null;
@@ -725,8 +726,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint initial_quantity
         {
-            get { return __pbn__initial_quantity.GetValueOrDefault(); }
-            set { __pbn__initial_quantity = value; }
+            get => __pbn__initial_quantity.GetValueOrDefault();
+            set => __pbn__initial_quantity = value;
         }
         public bool ShouldSerializeinitial_quantity() => __pbn__initial_quantity != null;
         public void Resetinitial_quantity() => __pbn__initial_quantity = null;
@@ -735,8 +736,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public bool ignore_enabled_flag
         {
-            get { return __pbn__ignore_enabled_flag.GetValueOrDefault(); }
-            set { __pbn__ignore_enabled_flag = value; }
+            get => __pbn__ignore_enabled_flag.GetValueOrDefault();
+            set => __pbn__ignore_enabled_flag = value;
         }
         public bool ShouldSerializeignore_enabled_flag() => __pbn__ignore_enabled_flag != null;
         public void Resetignore_enabled_flag() => __pbn__ignore_enabled_flag = null;
@@ -748,8 +749,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public bool recent_only
         {
-            get { return __pbn__recent_only.GetValueOrDefault(); }
-            set { __pbn__recent_only = value; }
+            get => __pbn__recent_only.GetValueOrDefault();
+            set => __pbn__recent_only = value;
         }
         public bool ShouldSerializerecent_only() => __pbn__recent_only != null;
         public void Resetrecent_only() => __pbn__recent_only = null;
@@ -767,8 +768,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint def_index
         {
-            get { return __pbn__def_index.GetValueOrDefault(); }
-            set { __pbn__def_index = value; }
+            get => __pbn__def_index.GetValueOrDefault();
+            set => __pbn__def_index = value;
         }
         public bool ShouldSerializedef_index() => __pbn__def_index != null;
         public void Resetdef_index() => __pbn__def_index = null;
@@ -778,8 +779,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string name
         {
-            get { return __pbn__name ?? ""; }
-            set { __pbn__name = value; }
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
         }
         public bool ShouldSerializename() => __pbn__name != null;
         public void Resetname() => __pbn__name = null;
@@ -789,8 +790,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string n_a
         {
-            get { return __pbn__n_a ?? ""; }
-            set { __pbn__n_a = value; }
+            get => __pbn__n_a ?? "";
+            set => __pbn__n_a = value;
         }
         public bool ShouldSerializen_a() => __pbn__n_a != null;
         public void Resetn_a() => __pbn__n_a = null;
@@ -800,8 +801,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string desc_inputs
         {
-            get { return __pbn__desc_inputs ?? ""; }
-            set { __pbn__desc_inputs = value; }
+            get => __pbn__desc_inputs ?? "";
+            set => __pbn__desc_inputs = value;
         }
         public bool ShouldSerializedesc_inputs() => __pbn__desc_inputs != null;
         public void Resetdesc_inputs() => __pbn__desc_inputs = null;
@@ -811,8 +812,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string desc_outputs
         {
-            get { return __pbn__desc_outputs ?? ""; }
-            set { __pbn__desc_outputs = value; }
+            get => __pbn__desc_outputs ?? "";
+            set => __pbn__desc_outputs = value;
         }
         public bool ShouldSerializedesc_outputs() => __pbn__desc_outputs != null;
         public void Resetdesc_outputs() => __pbn__desc_outputs = null;
@@ -822,8 +823,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string di_a
         {
-            get { return __pbn__di_a ?? ""; }
-            set { __pbn__di_a = value; }
+            get => __pbn__di_a ?? "";
+            set => __pbn__di_a = value;
         }
         public bool ShouldSerializedi_a() => __pbn__di_a != null;
         public void Resetdi_a() => __pbn__di_a = null;
@@ -833,8 +834,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string di_b
         {
-            get { return __pbn__di_b ?? ""; }
-            set { __pbn__di_b = value; }
+            get => __pbn__di_b ?? "";
+            set => __pbn__di_b = value;
         }
         public bool ShouldSerializedi_b() => __pbn__di_b != null;
         public void Resetdi_b() => __pbn__di_b = null;
@@ -844,8 +845,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string di_c
         {
-            get { return __pbn__di_c ?? ""; }
-            set { __pbn__di_c = value; }
+            get => __pbn__di_c ?? "";
+            set => __pbn__di_c = value;
         }
         public bool ShouldSerializedi_c() => __pbn__di_c != null;
         public void Resetdi_c() => __pbn__di_c = null;
@@ -855,8 +856,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string do_a
         {
-            get { return __pbn__do_a ?? ""; }
-            set { __pbn__do_a = value; }
+            get => __pbn__do_a ?? "";
+            set => __pbn__do_a = value;
         }
         public bool ShouldSerializedo_a() => __pbn__do_a != null;
         public void Resetdo_a() => __pbn__do_a = null;
@@ -866,8 +867,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string do_b
         {
-            get { return __pbn__do_b ?? ""; }
-            set { __pbn__do_b = value; }
+            get => __pbn__do_b ?? "";
+            set => __pbn__do_b = value;
         }
         public bool ShouldSerializedo_b() => __pbn__do_b != null;
         public void Resetdo_b() => __pbn__do_b = null;
@@ -877,8 +878,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string do_c
         {
-            get { return __pbn__do_c ?? ""; }
-            set { __pbn__do_c = value; }
+            get => __pbn__do_c ?? "";
+            set => __pbn__do_c = value;
         }
         public bool ShouldSerializedo_c() => __pbn__do_c != null;
         public void Resetdo_c() => __pbn__do_c = null;
@@ -887,8 +888,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(12)]
         public bool requires_all_same_class
         {
-            get { return __pbn__requires_all_same_class.GetValueOrDefault(); }
-            set { __pbn__requires_all_same_class = value; }
+            get => __pbn__requires_all_same_class.GetValueOrDefault();
+            set => __pbn__requires_all_same_class = value;
         }
         public bool ShouldSerializerequires_all_same_class() => __pbn__requires_all_same_class != null;
         public void Resetrequires_all_same_class() => __pbn__requires_all_same_class = null;
@@ -897,8 +898,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(13)]
         public bool requires_all_same_slot
         {
-            get { return __pbn__requires_all_same_slot.GetValueOrDefault(); }
-            set { __pbn__requires_all_same_slot = value; }
+            get => __pbn__requires_all_same_slot.GetValueOrDefault();
+            set => __pbn__requires_all_same_slot = value;
         }
         public bool ShouldSerializerequires_all_same_slot() => __pbn__requires_all_same_slot != null;
         public void Resetrequires_all_same_slot() => __pbn__requires_all_same_slot = null;
@@ -907,8 +908,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(14)]
         public int class_usage_for_output
         {
-            get { return __pbn__class_usage_for_output.GetValueOrDefault(); }
-            set { __pbn__class_usage_for_output = value; }
+            get => __pbn__class_usage_for_output.GetValueOrDefault();
+            set => __pbn__class_usage_for_output = value;
         }
         public bool ShouldSerializeclass_usage_for_output() => __pbn__class_usage_for_output != null;
         public void Resetclass_usage_for_output() => __pbn__class_usage_for_output = null;
@@ -917,8 +918,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public int slot_usage_for_output
         {
-            get { return __pbn__slot_usage_for_output.GetValueOrDefault(); }
-            set { __pbn__slot_usage_for_output = value; }
+            get => __pbn__slot_usage_for_output.GetValueOrDefault();
+            set => __pbn__slot_usage_for_output = value;
         }
         public bool ShouldSerializeslot_usage_for_output() => __pbn__slot_usage_for_output != null;
         public void Resetslot_usage_for_output() => __pbn__slot_usage_for_output = null;
@@ -927,8 +928,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(16)]
         public int set_for_output
         {
-            get { return __pbn__set_for_output.GetValueOrDefault(); }
-            set { __pbn__set_for_output = value; }
+            get => __pbn__set_for_output.GetValueOrDefault();
+            set => __pbn__set_for_output = value;
         }
         public bool ShouldSerializeset_for_output() => __pbn__set_for_output != null;
         public void Resetset_for_output() => __pbn__set_for_output = null;
@@ -955,8 +956,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong strange_part_item_id
         {
-            get { return __pbn__strange_part_item_id.GetValueOrDefault(); }
-            set { __pbn__strange_part_item_id = value; }
+            get => __pbn__strange_part_item_id.GetValueOrDefault();
+            set => __pbn__strange_part_item_id = value;
         }
         public bool ShouldSerializestrange_part_item_id() => __pbn__strange_part_item_id != null;
         public void Resetstrange_part_item_id() => __pbn__strange_part_item_id = null;
@@ -965,8 +966,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong item_item_id
         {
-            get { return __pbn__item_item_id.GetValueOrDefault(); }
-            set { __pbn__item_item_id = value; }
+            get => __pbn__item_item_id.GetValueOrDefault();
+            set => __pbn__item_item_id = value;
         }
         public bool ShouldSerializeitem_item_id() => __pbn__item_item_id != null;
         public void Resetitem_item_id() => __pbn__item_item_id = null;
@@ -984,8 +985,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong upgrade_item_id
         {
-            get { return __pbn__upgrade_item_id.GetValueOrDefault(); }
-            set { __pbn__upgrade_item_id = value; }
+            get => __pbn__upgrade_item_id.GetValueOrDefault();
+            set => __pbn__upgrade_item_id = value;
         }
         public bool ShouldSerializeupgrade_item_id() => __pbn__upgrade_item_id != null;
         public void Resetupgrade_item_id() => __pbn__upgrade_item_id = null;
@@ -994,8 +995,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong pennant_item_id
         {
-            get { return __pbn__pennant_item_id.GetValueOrDefault(); }
-            set { __pbn__pennant_item_id = value; }
+            get => __pbn__pennant_item_id.GetValueOrDefault();
+            set => __pbn__pennant_item_id = value;
         }
         public bool ShouldSerializepennant_item_id() => __pbn__pennant_item_id != null;
         public void Resetpennant_item_id() => __pbn__pennant_item_id = null;
@@ -1013,8 +1014,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong essence_item_id
         {
-            get { return __pbn__essence_item_id.GetValueOrDefault(); }
-            set { __pbn__essence_item_id = value; }
+            get => __pbn__essence_item_id.GetValueOrDefault();
+            set => __pbn__essence_item_id = value;
         }
         public bool ShouldSerializeessence_item_id() => __pbn__essence_item_id != null;
         public void Resetessence_item_id() => __pbn__essence_item_id = null;
@@ -1023,8 +1024,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong egg_item_id
         {
-            get { return __pbn__egg_item_id.GetValueOrDefault(); }
-            set { __pbn__egg_item_id = value; }
+            get => __pbn__egg_item_id.GetValueOrDefault();
+            set => __pbn__egg_item_id = value;
         }
         public bool ShouldSerializeegg_item_id() => __pbn__egg_item_id != null;
         public void Resetegg_item_id() => __pbn__egg_item_id = null;
@@ -1042,8 +1043,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint def_index
         {
-            get { return __pbn__def_index.GetValueOrDefault(); }
-            set { __pbn__def_index = value; }
+            get => __pbn__def_index.GetValueOrDefault();
+            set => __pbn__def_index = value;
         }
         public bool ShouldSerializedef_index() => __pbn__def_index != null;
         public void Resetdef_index() => __pbn__def_index = null;
@@ -1052,8 +1053,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint value
         {
-            get { return __pbn__value.GetValueOrDefault(); }
-            set { __pbn__value = value; }
+            get => __pbn__value.GetValueOrDefault();
+            set => __pbn__value = value;
         }
         public bool ShouldSerializevalue() => __pbn__value != null;
         public void Resetvalue() => __pbn__value = null;
@@ -1062,8 +1063,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public byte[] value_bytes
         {
-            get { return __pbn__value_bytes; }
-            set { __pbn__value_bytes = value; }
+            get => __pbn__value_bytes;
+            set => __pbn__value_bytes = value;
         }
         public bool ShouldSerializevalue_bytes() => __pbn__value_bytes != null;
         public void Resetvalue_bytes() => __pbn__value_bytes = null;
@@ -1081,8 +1082,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint new_class
         {
-            get { return __pbn__new_class.GetValueOrDefault(); }
-            set { __pbn__new_class = value; }
+            get => __pbn__new_class.GetValueOrDefault();
+            set => __pbn__new_class = value;
         }
         public bool ShouldSerializenew_class() => __pbn__new_class != null;
         public void Resetnew_class() => __pbn__new_class = null;
@@ -1091,8 +1092,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint new_slot
         {
-            get { return __pbn__new_slot.GetValueOrDefault(); }
-            set { __pbn__new_slot = value; }
+            get => __pbn__new_slot.GetValueOrDefault();
+            set => __pbn__new_slot = value;
         }
         public bool ShouldSerializenew_slot() => __pbn__new_slot != null;
         public void Resetnew_slot() => __pbn__new_slot = null;
@@ -1110,8 +1111,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong id
         {
-            get { return __pbn__id.GetValueOrDefault(); }
-            set { __pbn__id = value; }
+            get => __pbn__id.GetValueOrDefault();
+            set => __pbn__id = value;
         }
         public bool ShouldSerializeid() => __pbn__id != null;
         public void Resetid() => __pbn__id = null;
@@ -1120,8 +1121,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -1130,8 +1131,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint inventory
         {
-            get { return __pbn__inventory.GetValueOrDefault(); }
-            set { __pbn__inventory = value; }
+            get => __pbn__inventory.GetValueOrDefault();
+            set => __pbn__inventory = value;
         }
         public bool ShouldSerializeinventory() => __pbn__inventory != null;
         public void Resetinventory() => __pbn__inventory = null;
@@ -1140,8 +1141,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint def_index
         {
-            get { return __pbn__def_index.GetValueOrDefault(); }
-            set { __pbn__def_index = value; }
+            get => __pbn__def_index.GetValueOrDefault();
+            set => __pbn__def_index = value;
         }
         public bool ShouldSerializedef_index() => __pbn__def_index != null;
         public void Resetdef_index() => __pbn__def_index = null;
@@ -1151,8 +1152,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(1)]
         public uint quantity
         {
-            get { return __pbn__quantity ?? 1; }
-            set { __pbn__quantity = value; }
+            get => __pbn__quantity ?? 1;
+            set => __pbn__quantity = value;
         }
         public bool ShouldSerializequantity() => __pbn__quantity != null;
         public void Resetquantity() => __pbn__quantity = null;
@@ -1162,8 +1163,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(1)]
         public uint level
         {
-            get { return __pbn__level ?? 1; }
-            set { __pbn__level = value; }
+            get => __pbn__level ?? 1;
+            set => __pbn__level = value;
         }
         public bool ShouldSerializelevel() => __pbn__level != null;
         public void Resetlevel() => __pbn__level = null;
@@ -1173,8 +1174,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(4)]
         public uint quality
         {
-            get { return __pbn__quality ?? 4; }
-            set { __pbn__quality = value; }
+            get => __pbn__quality ?? 4;
+            set => __pbn__quality = value;
         }
         public bool ShouldSerializequality() => __pbn__quality != null;
         public void Resetquality() => __pbn__quality = null;
@@ -1184,8 +1185,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(0)]
         public uint flags
         {
-            get { return __pbn__flags ?? 0; }
-            set { __pbn__flags = value; }
+            get => __pbn__flags ?? 0;
+            set => __pbn__flags = value;
         }
         public bool ShouldSerializeflags() => __pbn__flags != null;
         public void Resetflags() => __pbn__flags = null;
@@ -1195,8 +1196,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(0)]
         public uint origin
         {
-            get { return __pbn__origin ?? 0; }
-            set { __pbn__origin = value; }
+            get => __pbn__origin ?? 0;
+            set => __pbn__origin = value;
         }
         public bool ShouldSerializeorigin() => __pbn__origin != null;
         public void Resetorigin() => __pbn__origin = null;
@@ -1212,8 +1213,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(0)]
         public uint style
         {
-            get { return __pbn__style ?? 0; }
-            set { __pbn__style = value; }
+            get => __pbn__style ?? 0;
+            set => __pbn__style = value;
         }
         public bool ShouldSerializestyle() => __pbn__style != null;
         public void Resetstyle() => __pbn__style = null;
@@ -1223,8 +1224,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "0")]
         public ulong original_id
         {
-            get { return __pbn__original_id ?? 0; }
-            set { __pbn__original_id = value; }
+            get => __pbn__original_id ?? 0;
+            set => __pbn__original_id = value;
         }
         public bool ShouldSerializeoriginal_id() => __pbn__original_id != null;
         public void Resetoriginal_id() => __pbn__original_id = null;
@@ -1245,8 +1246,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint sort_type
         {
-            get { return __pbn__sort_type.GetValueOrDefault(); }
-            set { __pbn__sort_type = value; }
+            get => __pbn__sort_type.GetValueOrDefault();
+            set => __pbn__sort_type = value;
         }
         public bool ShouldSerializesort_type() => __pbn__sort_type != null;
         public void Resetsort_type() => __pbn__sort_type = null;
@@ -1264,8 +1265,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -1274,8 +1275,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint code_type
         {
-            get { return __pbn__code_type.GetValueOrDefault(); }
-            set { __pbn__code_type = value; }
+            get => __pbn__code_type.GetValueOrDefault();
+            set => __pbn__code_type = value;
         }
         public bool ShouldSerializecode_type() => __pbn__code_type != null;
         public void Resetcode_type() => __pbn__code_type = null;
@@ -1284,8 +1285,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint time_acquired
         {
-            get { return __pbn__time_acquired.GetValueOrDefault(); }
-            set { __pbn__time_acquired = value; }
+            get => __pbn__time_acquired.GetValueOrDefault();
+            set => __pbn__time_acquired = value;
         }
         public bool ShouldSerializetime_acquired() => __pbn__time_acquired != null;
         public void Resettime_acquired() => __pbn__time_acquired = null;
@@ -1295,8 +1296,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string code
         {
-            get { return __pbn__code ?? ""; }
-            set { __pbn__code = value; }
+            get => __pbn__code ?? "";
+            set => __pbn__code = value;
         }
         public bool ShouldSerializecode() => __pbn__code != null;
         public void Resetcode() => __pbn__code = null;
@@ -1314,8 +1315,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public byte[] items_game
         {
-            get { return __pbn__items_game; }
-            set { __pbn__items_game = value; }
+            get => __pbn__items_game;
+            set => __pbn__items_game = value;
         }
         public bool ShouldSerializeitems_game() => __pbn__items_game != null;
         public void Resetitems_game() => __pbn__items_game = null;
@@ -1324,8 +1325,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint item_schema_version
         {
-            get { return __pbn__item_schema_version.GetValueOrDefault(); }
-            set { __pbn__item_schema_version = value; }
+            get => __pbn__item_schema_version.GetValueOrDefault();
+            set => __pbn__item_schema_version = value;
         }
         public bool ShouldSerializeitem_schema_version() => __pbn__item_schema_version != null;
         public void Resetitem_schema_version() => __pbn__item_schema_version = null;
@@ -1335,8 +1336,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string items_game_url
         {
-            get { return __pbn__items_game_url ?? ""; }
-            set { __pbn__items_game_url = value; }
+            get => __pbn__items_game_url ?? "";
+            set => __pbn__items_game_url = value;
         }
         public bool ShouldSerializeitems_game_url() => __pbn__items_game_url != null;
         public void Resetitems_game_url() => __pbn__items_game_url = null;
@@ -1355,8 +1356,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string error_text
         {
-            get { return __pbn__error_text ?? ""; }
-            set { __pbn__error_text = value; }
+            get => __pbn__error_text ?? "";
+            set => __pbn__error_text = value;
         }
         public bool ShouldSerializeerror_text() => __pbn__error_text != null;
         public void Reseterror_text() => __pbn__error_text = null;
@@ -1384,8 +1385,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string name
         {
-            get { return __pbn__name ?? ""; }
-            set { __pbn__name = value; }
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
         }
         public bool ShouldSerializename() => __pbn__name != null;
         public void Resetname() => __pbn__name = null;
@@ -1395,8 +1396,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string value
         {
-            get { return __pbn__value ?? ""; }
-            set { __pbn__value = value; }
+            get => __pbn__value ?? "";
+            set => __pbn__value = value;
         }
         public bool ShouldSerializevalue() => __pbn__value != null;
         public void Resetvalue() => __pbn__value = null;
@@ -1426,8 +1427,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -1436,8 +1437,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint inventory
         {
-            get { return __pbn__inventory.GetValueOrDefault(); }
-            set { __pbn__inventory = value; }
+            get => __pbn__inventory.GetValueOrDefault();
+            set => __pbn__inventory = value;
         }
         public bool ShouldSerializeinventory() => __pbn__inventory != null;
         public void Resetinventory() => __pbn__inventory = null;
@@ -1446,8 +1447,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint def_index
         {
-            get { return __pbn__def_index.GetValueOrDefault(); }
-            set { __pbn__def_index = value; }
+            get => __pbn__def_index.GetValueOrDefault();
+            set => __pbn__def_index = value;
         }
         public bool ShouldSerializedef_index() => __pbn__def_index != null;
         public void Resetdef_index() => __pbn__def_index = null;
@@ -1456,8 +1457,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint quality
         {
-            get { return __pbn__quality.GetValueOrDefault(); }
-            set { __pbn__quality = value; }
+            get => __pbn__quality.GetValueOrDefault();
+            set => __pbn__quality = value;
         }
         public bool ShouldSerializequality() => __pbn__quality != null;
         public void Resetquality() => __pbn__quality = null;
@@ -1466,8 +1467,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint rarity
         {
-            get { return __pbn__rarity.GetValueOrDefault(); }
-            set { __pbn__rarity = value; }
+            get => __pbn__rarity.GetValueOrDefault();
+            set => __pbn__rarity = value;
         }
         public bool ShouldSerializerarity() => __pbn__rarity != null;
         public void Resetrarity() => __pbn__rarity = null;
@@ -1476,8 +1477,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint origin
         {
-            get { return __pbn__origin.GetValueOrDefault(); }
-            set { __pbn__origin = value; }
+            get => __pbn__origin.GetValueOrDefault();
+            set => __pbn__origin = value;
         }
         public bool ShouldSerializeorigin() => __pbn__origin != null;
         public void Resetorigin() => __pbn__origin = null;
@@ -1505,8 +1506,8 @@ namespace SteamKit2.GC.Underlords.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public ulong item_id
             {
-                get { return __pbn__item_id.GetValueOrDefault(); }
-                set { __pbn__item_id = value; }
+                get => __pbn__item_id.GetValueOrDefault();
+                set => __pbn__item_id = value;
             }
             public bool ShouldSerializeitem_id() => __pbn__item_id != null;
             public void Resetitem_id() => __pbn__item_id = null;
@@ -1515,8 +1516,8 @@ namespace SteamKit2.GC.Underlords.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public uint position
             {
-                get { return __pbn__position.GetValueOrDefault(); }
-                set { __pbn__position = value; }
+                get => __pbn__position.GetValueOrDefault();
+                set => __pbn__position = value;
             }
             public bool ShouldSerializeposition() => __pbn__position != null;
             public void Resetposition() => __pbn__position = null;
@@ -1536,8 +1537,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong player_steamid
         {
-            get { return __pbn__player_steamid.GetValueOrDefault(); }
-            set { __pbn__player_steamid = value; }
+            get => __pbn__player_steamid.GetValueOrDefault();
+            set => __pbn__player_steamid = value;
         }
         public bool ShouldSerializeplayer_steamid() => __pbn__player_steamid != null;
         public void Resetplayer_steamid() => __pbn__player_steamid = null;
@@ -1546,8 +1547,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint item_def_index
         {
-            get { return __pbn__item_def_index.GetValueOrDefault(); }
-            set { __pbn__item_def_index = value; }
+            get => __pbn__item_def_index.GetValueOrDefault();
+            set => __pbn__item_def_index = value;
         }
         public bool ShouldSerializeitem_def_index() => __pbn__item_def_index != null;
         public void Resetitem_def_index() => __pbn__item_def_index = null;
@@ -1557,8 +1558,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string item_name_custom
         {
-            get { return __pbn__item_name_custom ?? ""; }
-            set { __pbn__item_name_custom = value; }
+            get => __pbn__item_name_custom ?? "";
+            set => __pbn__item_name_custom = value;
         }
         public bool ShouldSerializeitem_name_custom() => __pbn__item_name_custom != null;
         public void Resetitem_name_custom() => __pbn__item_name_custom = null;
@@ -1577,8 +1578,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string notification_title_localization_key
         {
-            get { return __pbn__notification_title_localization_key ?? ""; }
-            set { __pbn__notification_title_localization_key = value; }
+            get => __pbn__notification_title_localization_key ?? "";
+            set => __pbn__notification_title_localization_key = value;
         }
         public bool ShouldSerializenotification_title_localization_key() => __pbn__notification_title_localization_key != null;
         public void Resetnotification_title_localization_key() => __pbn__notification_title_localization_key = null;
@@ -1588,8 +1589,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string notification_body_localization_key
         {
-            get { return __pbn__notification_body_localization_key ?? ""; }
-            set { __pbn__notification_body_localization_key = value; }
+            get => __pbn__notification_body_localization_key ?? "";
+            set => __pbn__notification_body_localization_key = value;
         }
         public bool ShouldSerializenotification_body_localization_key() => __pbn__notification_body_localization_key != null;
         public void Resetnotification_body_localization_key() => __pbn__notification_body_localization_key = null;
@@ -1613,8 +1614,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong player_steamid
         {
-            get { return __pbn__player_steamid.GetValueOrDefault(); }
-            set { __pbn__player_steamid = value; }
+            get => __pbn__player_steamid.GetValueOrDefault();
+            set => __pbn__player_steamid = value;
         }
         public bool ShouldSerializeplayer_steamid() => __pbn__player_steamid != null;
         public void Resetplayer_steamid() => __pbn__player_steamid = null;
@@ -1632,8 +1633,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint killer_account_id
         {
-            get { return __pbn__killer_account_id.GetValueOrDefault(); }
-            set { __pbn__killer_account_id = value; }
+            get => __pbn__killer_account_id.GetValueOrDefault();
+            set => __pbn__killer_account_id = value;
         }
         public bool ShouldSerializekiller_account_id() => __pbn__killer_account_id != null;
         public void Resetkiller_account_id() => __pbn__killer_account_id = null;
@@ -1642,8 +1643,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint num_kills
         {
-            get { return __pbn__num_kills.GetValueOrDefault(); }
-            set { __pbn__num_kills = value; }
+            get => __pbn__num_kills.GetValueOrDefault();
+            set => __pbn__num_kills = value;
         }
         public bool ShouldSerializenum_kills() => __pbn__num_kills != null;
         public void Resetnum_kills() => __pbn__num_kills = null;
@@ -1652,8 +1653,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint item_def
         {
-            get { return __pbn__item_def.GetValueOrDefault(); }
-            set { __pbn__item_def = value; }
+            get => __pbn__item_def.GetValueOrDefault();
+            set => __pbn__item_def = value;
         }
         public bool ShouldSerializeitem_def() => __pbn__item_def != null;
         public void Resetitem_def() => __pbn__item_def = null;
@@ -1662,8 +1663,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint level_type
         {
-            get { return __pbn__level_type.GetValueOrDefault(); }
-            set { __pbn__level_type = value; }
+            get => __pbn__level_type.GetValueOrDefault();
+            set => __pbn__level_type = value;
         }
         public bool ShouldSerializelevel_type() => __pbn__level_type != null;
         public void Resetlevel_type() => __pbn__level_type = null;
@@ -1681,8 +1682,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -1691,8 +1692,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint expiration_date
         {
-            get { return __pbn__expiration_date.GetValueOrDefault(); }
-            set { __pbn__expiration_date = value; }
+            get => __pbn__expiration_date.GetValueOrDefault();
+            set => __pbn__expiration_date = value;
         }
         public bool ShouldSerializeexpiration_date() => __pbn__expiration_date != null;
         public void Resetexpiration_date() => __pbn__expiration_date = null;
@@ -1701,8 +1702,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public float bonus
         {
-            get { return __pbn__bonus.GetValueOrDefault(); }
-            set { __pbn__bonus = value; }
+            get => __pbn__bonus.GetValueOrDefault();
+            set => __pbn__bonus = value;
         }
         public bool ShouldSerializebonus() => __pbn__bonus != null;
         public void Resetbonus() => __pbn__bonus = null;
@@ -1711,8 +1712,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint bonus_count
         {
-            get { return __pbn__bonus_count.GetValueOrDefault(); }
-            set { __pbn__bonus_count = value; }
+            get => __pbn__bonus_count.GetValueOrDefault();
+            set => __pbn__bonus_count = value;
         }
         public bool ShouldSerializebonus_count() => __pbn__bonus_count != null;
         public void Resetbonus_count() => __pbn__bonus_count = null;
@@ -1721,8 +1722,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public ulong item_id
         {
-            get { return __pbn__item_id.GetValueOrDefault(); }
-            set { __pbn__item_id = value; }
+            get => __pbn__item_id.GetValueOrDefault();
+            set => __pbn__item_id = value;
         }
         public bool ShouldSerializeitem_id() => __pbn__item_id != null;
         public void Resetitem_id() => __pbn__item_id = null;
@@ -1731,8 +1732,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint def_index
         {
-            get { return __pbn__def_index.GetValueOrDefault(); }
-            set { __pbn__def_index = value; }
+            get => __pbn__def_index.GetValueOrDefault();
+            set => __pbn__def_index = value;
         }
         public bool ShouldSerializedef_index() => __pbn__def_index != null;
         public void Resetdef_index() => __pbn__def_index = null;
@@ -1741,8 +1742,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint seconds_left
         {
-            get { return __pbn__seconds_left.GetValueOrDefault(); }
-            set { __pbn__seconds_left = value; }
+            get => __pbn__seconds_left.GetValueOrDefault();
+            set => __pbn__seconds_left = value;
         }
         public bool ShouldSerializeseconds_left() => __pbn__seconds_left != null;
         public void Resetseconds_left() => __pbn__seconds_left = null;
@@ -1751,8 +1752,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint booster_type
         {
-            get { return __pbn__booster_type.GetValueOrDefault(); }
-            set { __pbn__booster_type = value; }
+            get => __pbn__booster_type.GetValueOrDefault();
+            set => __pbn__booster_type = value;
         }
         public bool ShouldSerializebooster_type() => __pbn__booster_type != null;
         public void Resetbooster_type() => __pbn__booster_type = null;
@@ -1770,8 +1771,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -1780,8 +1781,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint league_id
         {
-            get { return __pbn__league_id.GetValueOrDefault(); }
-            set { __pbn__league_id = value; }
+            get => __pbn__league_id.GetValueOrDefault();
+            set => __pbn__league_id = value;
         }
         public bool ShouldSerializeleague_id() => __pbn__league_id != null;
         public void Resetleague_id() => __pbn__league_id = null;
@@ -1790,8 +1791,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint itemindex
         {
-            get { return __pbn__itemindex.GetValueOrDefault(); }
-            set { __pbn__itemindex = value; }
+            get => __pbn__itemindex.GetValueOrDefault();
+            set => __pbn__itemindex = value;
         }
         public bool ShouldSerializeitemindex() => __pbn__itemindex != null;
         public void Resetitemindex() => __pbn__itemindex = null;
@@ -1800,8 +1801,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint grant_reason
         {
-            get { return __pbn__grant_reason.GetValueOrDefault(); }
-            set { __pbn__grant_reason = value; }
+            get => __pbn__grant_reason.GetValueOrDefault();
+            set => __pbn__grant_reason = value;
         }
         public bool ShouldSerializegrant_reason() => __pbn__grant_reason != null;
         public void Resetgrant_reason() => __pbn__grant_reason = null;
@@ -1819,8 +1820,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -1829,8 +1830,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint event_id
         {
-            get { return __pbn__event_id.GetValueOrDefault(); }
-            set { __pbn__event_id = value; }
+            get => __pbn__event_id.GetValueOrDefault();
+            set => __pbn__event_id = value;
         }
         public bool ShouldSerializeevent_id() => __pbn__event_id != null;
         public void Resetevent_id() => __pbn__event_id = null;
@@ -1839,8 +1840,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong item_id
         {
-            get { return __pbn__item_id.GetValueOrDefault(); }
-            set { __pbn__item_id = value; }
+            get => __pbn__item_id.GetValueOrDefault();
+            set => __pbn__item_id = value;
         }
         public bool ShouldSerializeitem_id() => __pbn__item_id != null;
         public void Resetitem_id() => __pbn__item_id = null;
@@ -1858,8 +1859,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint account_id
         {
-            get { return __pbn__account_id.GetValueOrDefault(); }
-            set { __pbn__account_id = value; }
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
         public void Resetaccount_id() => __pbn__account_id = null;
@@ -1868,8 +1869,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint league_id
         {
-            get { return __pbn__league_id.GetValueOrDefault(); }
-            set { __pbn__league_id = value; }
+            get => __pbn__league_id.GetValueOrDefault();
+            set => __pbn__league_id = value;
         }
         public bool ShouldSerializeleague_id() => __pbn__league_id != null;
         public void Resetleague_id() => __pbn__league_id = null;
@@ -1878,8 +1879,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public ulong item_id
         {
-            get { return __pbn__item_id.GetValueOrDefault(); }
-            set { __pbn__item_id = value; }
+            get => __pbn__item_id.GetValueOrDefault();
+            set => __pbn__item_id = value;
         }
         public bool ShouldSerializeitem_id() => __pbn__item_id != null;
         public void Resetitem_id() => __pbn__item_id = null;
@@ -1888,8 +1889,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint original_purchaser_id
         {
-            get { return __pbn__original_purchaser_id.GetValueOrDefault(); }
-            set { __pbn__original_purchaser_id = value; }
+            get => __pbn__original_purchaser_id.GetValueOrDefault();
+            set => __pbn__original_purchaser_id = value;
         }
         public bool ShouldSerializeoriginal_purchaser_id() => __pbn__original_purchaser_id != null;
         public void Resetoriginal_purchaser_id() => __pbn__original_purchaser_id = null;
@@ -1898,8 +1899,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public uint passports_bought
         {
-            get { return __pbn__passports_bought.GetValueOrDefault(); }
-            set { __pbn__passports_bought = value; }
+            get => __pbn__passports_bought.GetValueOrDefault();
+            set => __pbn__passports_bought = value;
         }
         public bool ShouldSerializepassports_bought() => __pbn__passports_bought != null;
         public void Resetpassports_bought() => __pbn__passports_bought = null;
@@ -1908,8 +1909,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public uint version
         {
-            get { return __pbn__version.GetValueOrDefault(); }
-            set { __pbn__version = value; }
+            get => __pbn__version.GetValueOrDefault();
+            set => __pbn__version = value;
         }
         public bool ShouldSerializeversion() => __pbn__version != null;
         public void Resetversion() => __pbn__version = null;
@@ -1918,8 +1919,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public uint def_index
         {
-            get { return __pbn__def_index.GetValueOrDefault(); }
-            set { __pbn__def_index = value; }
+            get => __pbn__def_index.GetValueOrDefault();
+            set => __pbn__def_index = value;
         }
         public bool ShouldSerializedef_index() => __pbn__def_index != null;
         public void Resetdef_index() => __pbn__def_index = null;
@@ -1928,8 +1929,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public uint reward_flags
         {
-            get { return __pbn__reward_flags.GetValueOrDefault(); }
-            set { __pbn__reward_flags = value; }
+            get => __pbn__reward_flags.GetValueOrDefault();
+            set => __pbn__reward_flags = value;
         }
         public bool ShouldSerializereward_flags() => __pbn__reward_flags != null;
         public void Resetreward_flags() => __pbn__reward_flags = null;
@@ -1947,8 +1948,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong txn_id
         {
-            get { return __pbn__txn_id.GetValueOrDefault(); }
-            set { __pbn__txn_id = value; }
+            get => __pbn__txn_id.GetValueOrDefault();
+            set => __pbn__txn_id = value;
         }
         public bool ShouldSerializetxn_id() => __pbn__txn_id != null;
         public void Resettxn_id() => __pbn__txn_id = null;
@@ -1966,8 +1967,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint result
         {
-            get { return __pbn__result.GetValueOrDefault(); }
-            set { __pbn__result = value; }
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -1985,8 +1986,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong txn_id
         {
-            get { return __pbn__txn_id.GetValueOrDefault(); }
-            set { __pbn__txn_id = value; }
+            get => __pbn__txn_id.GetValueOrDefault();
+            set => __pbn__txn_id = value;
         }
         public bool ShouldSerializetxn_id() => __pbn__txn_id != null;
         public void Resettxn_id() => __pbn__txn_id = null;
@@ -2004,8 +2005,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint result
         {
-            get { return __pbn__result.GetValueOrDefault(); }
-            set { __pbn__result = value; }
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
@@ -2026,8 +2027,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint group_id
         {
-            get { return __pbn__group_id.GetValueOrDefault(); }
-            set { __pbn__group_id = value; }
+            get => __pbn__group_id.GetValueOrDefault();
+            set => __pbn__group_id = value;
         }
         public bool ShouldSerializegroup_id() => __pbn__group_id != null;
         public void Resetgroup_id() => __pbn__group_id = null;
@@ -2045,8 +2046,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint sdo_type
         {
-            get { return __pbn__sdo_type.GetValueOrDefault(); }
-            set { __pbn__sdo_type = value; }
+            get => __pbn__sdo_type.GetValueOrDefault();
+            set => __pbn__sdo_type = value;
         }
         public bool ShouldSerializesdo_type() => __pbn__sdo_type != null;
         public void Resetsdo_type() => __pbn__sdo_type = null;
@@ -2055,8 +2056,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong key_uint64
         {
-            get { return __pbn__key_uint64.GetValueOrDefault(); }
-            set { __pbn__key_uint64 = value; }
+            get => __pbn__key_uint64.GetValueOrDefault();
+            set => __pbn__key_uint64 = value;
         }
         public bool ShouldSerializekey_uint64() => __pbn__key_uint64 != null;
         public void Resetkey_uint64() => __pbn__key_uint64 = null;
@@ -2074,8 +2075,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint sdo_type
         {
-            get { return __pbn__sdo_type.GetValueOrDefault(); }
-            set { __pbn__sdo_type = value; }
+            get => __pbn__sdo_type.GetValueOrDefault();
+            set => __pbn__sdo_type = value;
         }
         public bool ShouldSerializesdo_type() => __pbn__sdo_type != null;
         public void Resetsdo_type() => __pbn__sdo_type = null;
@@ -2096,8 +2097,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint language
         {
-            get { return __pbn__language.GetValueOrDefault(); }
-            set { __pbn__language = value; }
+            get => __pbn__language.GetValueOrDefault();
+            set => __pbn__language = value;
         }
         public bool ShouldSerializelanguage() => __pbn__language != null;
         public void Resetlanguage() => __pbn__language = null;
@@ -2107,8 +2108,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string packed_diff
         {
-            get { return __pbn__packed_diff ?? ""; }
-            set { __pbn__packed_diff = value; }
+            get => __pbn__packed_diff ?? "";
+            set => __pbn__packed_diff = value;
         }
         public bool ShouldSerializepacked_diff() => __pbn__packed_diff != null;
         public void Resetpacked_diff() => __pbn__packed_diff = null;
@@ -2126,8 +2127,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool success
         {
-            get { return __pbn__success.GetValueOrDefault(); }
-            set { __pbn__success = value; }
+            get => __pbn__success.GetValueOrDefault();
+            set => __pbn__success = value;
         }
         public bool ShouldSerializesuccess() => __pbn__success != null;
         public void Resetsuccess() => __pbn__success = null;
@@ -2145,8 +2146,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong collection_item_id
         {
-            get { return __pbn__collection_item_id.GetValueOrDefault(); }
-            set { __pbn__collection_item_id = value; }
+            get => __pbn__collection_item_id.GetValueOrDefault();
+            set => __pbn__collection_item_id = value;
         }
         public bool ShouldSerializecollection_item_id() => __pbn__collection_item_id != null;
         public void Resetcollection_item_id() => __pbn__collection_item_id = null;
@@ -2155,8 +2156,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong subject_item_id
         {
-            get { return __pbn__subject_item_id.GetValueOrDefault(); }
-            set { __pbn__subject_item_id = value; }
+            get => __pbn__subject_item_id.GetValueOrDefault();
+            set => __pbn__subject_item_id = value;
         }
         public bool ShouldSerializesubject_item_id() => __pbn__subject_item_id != null;
         public void Resetsubject_item_id() => __pbn__subject_item_id = null;
@@ -2184,8 +2185,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string key_name
         {
-            get { return __pbn__key_name ?? ""; }
-            set { __pbn__key_name = value; }
+            get => __pbn__key_name ?? "";
+            set => __pbn__key_name = value;
         }
         public bool ShouldSerializekey_name() => __pbn__key_name != null;
         public void Resetkey_name() => __pbn__key_name = null;
@@ -2203,8 +2204,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint server_version
         {
-            get { return __pbn__server_version.GetValueOrDefault(); }
-            set { __pbn__server_version = value; }
+            get => __pbn__server_version.GetValueOrDefault();
+            set => __pbn__server_version = value;
         }
         public bool ShouldSerializeserver_version() => __pbn__server_version != null;
         public void Resetserver_version() => __pbn__server_version = null;
@@ -2222,8 +2223,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint client_version
         {
-            get { return __pbn__client_version.GetValueOrDefault(); }
-            set { __pbn__client_version = value; }
+            get => __pbn__client_version.GetValueOrDefault();
+            set => __pbn__client_version = value;
         }
         public bool ShouldSerializeclient_version() => __pbn__client_version != null;
         public void Resetclient_version() => __pbn__client_version = null;
@@ -2250,8 +2251,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong subject_item_id
         {
-            get { return __pbn__subject_item_id.GetValueOrDefault(); }
-            set { __pbn__subject_item_id = value; }
+            get => __pbn__subject_item_id.GetValueOrDefault();
+            set => __pbn__subject_item_id = value;
         }
         public bool ShouldSerializesubject_item_id() => __pbn__subject_item_id != null;
         public void Resetsubject_item_id() => __pbn__subject_item_id = null;
@@ -2260,8 +2261,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong attribute_index
         {
-            get { return __pbn__attribute_index.GetValueOrDefault(); }
-            set { __pbn__attribute_index = value; }
+            get => __pbn__attribute_index.GetValueOrDefault();
+            set => __pbn__attribute_index = value;
         }
         public bool ShouldSerializeattribute_index() => __pbn__attribute_index != null;
         public void Resetattribute_index() => __pbn__attribute_index = null;
@@ -2279,8 +2280,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong tool_item_id
         {
-            get { return __pbn__tool_item_id.GetValueOrDefault(); }
-            set { __pbn__tool_item_id = value; }
+            get => __pbn__tool_item_id.GetValueOrDefault();
+            set => __pbn__tool_item_id = value;
         }
         public bool ShouldSerializetool_item_id() => __pbn__tool_item_id != null;
         public void Resettool_item_id() => __pbn__tool_item_id = null;
@@ -2301,8 +2302,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint user_currency
         {
-            get { return __pbn__user_currency.GetValueOrDefault(); }
-            set { __pbn__user_currency = value; }
+            get => __pbn__user_currency.GetValueOrDefault();
+            set => __pbn__user_currency = value;
         }
         public bool ShouldSerializeuser_currency() => __pbn__user_currency != null;
         public void Resetuser_currency() => __pbn__user_currency = null;
@@ -2320,8 +2321,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint item_def_index
         {
-            get { return __pbn__item_def_index.GetValueOrDefault(); }
-            set { __pbn__item_def_index = value; }
+            get => __pbn__item_def_index.GetValueOrDefault();
+            set => __pbn__item_def_index = value;
         }
         public bool ShouldSerializeitem_def_index() => __pbn__item_def_index != null;
         public void Resetitem_def_index() => __pbn__item_def_index = null;
@@ -2330,8 +2331,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint item_quality
         {
-            get { return __pbn__item_quality.GetValueOrDefault(); }
-            set { __pbn__item_quality = value; }
+            get => __pbn__item_quality.GetValueOrDefault();
+            set => __pbn__item_quality = value;
         }
         public bool ShouldSerializeitem_quality() => __pbn__item_quality != null;
         public void Resetitem_quality() => __pbn__item_quality = null;
@@ -2340,8 +2341,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint item_sell_listings
         {
-            get { return __pbn__item_sell_listings.GetValueOrDefault(); }
-            set { __pbn__item_sell_listings = value; }
+            get => __pbn__item_sell_listings.GetValueOrDefault();
+            set => __pbn__item_sell_listings = value;
         }
         public bool ShouldSerializeitem_sell_listings() => __pbn__item_sell_listings != null;
         public void Resetitem_sell_listings() => __pbn__item_sell_listings = null;
@@ -2350,8 +2351,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public uint price_in_local_currency
         {
-            get { return __pbn__price_in_local_currency.GetValueOrDefault(); }
-            set { __pbn__price_in_local_currency = value; }
+            get => __pbn__price_in_local_currency.GetValueOrDefault();
+            set => __pbn__price_in_local_currency = value;
         }
         public bool ShouldSerializeprice_in_local_currency() => __pbn__price_in_local_currency != null;
         public void Resetprice_in_local_currency() => __pbn__price_in_local_currency = null;
@@ -2381,8 +2382,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong tool_item_id
         {
-            get { return __pbn__tool_item_id.GetValueOrDefault(); }
-            set { __pbn__tool_item_id = value; }
+            get => __pbn__tool_item_id.GetValueOrDefault();
+            set => __pbn__tool_item_id = value;
         }
         public bool ShouldSerializetool_item_id() => __pbn__tool_item_id != null;
         public void Resettool_item_id() => __pbn__tool_item_id = null;
@@ -2391,8 +2392,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong item_item_id
         {
-            get { return __pbn__item_item_id.GetValueOrDefault(); }
-            set { __pbn__item_item_id = value; }
+            get => __pbn__item_item_id.GetValueOrDefault();
+            set => __pbn__item_item_id = value;
         }
         public bool ShouldSerializeitem_item_id() => __pbn__item_item_id != null;
         public void Resetitem_item_id() => __pbn__item_item_id = null;
@@ -2402,8 +2403,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(65535)]
         public uint item_socket_id
         {
-            get { return __pbn__item_socket_id ?? 65535; }
-            set { __pbn__item_socket_id = value; }
+            get => __pbn__item_socket_id ?? 65535;
+            set => __pbn__item_socket_id = value;
         }
         public bool ShouldSerializeitem_socket_id() => __pbn__item_socket_id != null;
         public void Resetitem_socket_id() => __pbn__item_socket_id = null;
@@ -2421,8 +2422,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong item_id
         {
-            get { return __pbn__item_id.GetValueOrDefault(); }
-            set { __pbn__item_id = value; }
+            get => __pbn__item_id.GetValueOrDefault();
+            set => __pbn__item_id = value;
         }
         public bool ShouldSerializeitem_id() => __pbn__item_id != null;
         public void Resetitem_id() => __pbn__item_id = null;
@@ -2432,8 +2433,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(EExtractGems.k_ExtractGems_Succeeded)]
         public EExtractGems response
         {
-            get { return __pbn__response ?? EExtractGems.k_ExtractGems_Succeeded; }
-            set { __pbn__response = value; }
+            get => __pbn__response ?? EExtractGems.k_ExtractGems_Succeeded;
+            set => __pbn__response = value;
         }
         public bool ShouldSerializeresponse() => __pbn__response != null;
         public void Resetresponse() => __pbn__response = null;
@@ -2461,8 +2462,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong tool_item_id
         {
-            get { return __pbn__tool_item_id.GetValueOrDefault(); }
-            set { __pbn__tool_item_id = value; }
+            get => __pbn__tool_item_id.GetValueOrDefault();
+            set => __pbn__tool_item_id = value;
         }
         public bool ShouldSerializetool_item_id() => __pbn__tool_item_id != null;
         public void Resettool_item_id() => __pbn__tool_item_id = null;
@@ -2471,8 +2472,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong item_item_id
         {
-            get { return __pbn__item_item_id.GetValueOrDefault(); }
-            set { __pbn__item_item_id = value; }
+            get => __pbn__item_item_id.GetValueOrDefault();
+            set => __pbn__item_item_id = value;
         }
         public bool ShouldSerializeitem_item_id() => __pbn__item_item_id != null;
         public void Resetitem_item_id() => __pbn__item_item_id = null;
@@ -2481,8 +2482,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public bool unusual
         {
-            get { return __pbn__unusual.GetValueOrDefault(); }
-            set { __pbn__unusual = value; }
+            get => __pbn__unusual.GetValueOrDefault();
+            set => __pbn__unusual = value;
         }
         public bool ShouldSerializeunusual() => __pbn__unusual != null;
         public void Resetunusual() => __pbn__unusual = null;
@@ -2500,8 +2501,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong item_id
         {
-            get { return __pbn__item_id.GetValueOrDefault(); }
-            set { __pbn__item_id = value; }
+            get => __pbn__item_id.GetValueOrDefault();
+            set => __pbn__item_id = value;
         }
         public bool ShouldSerializeitem_id() => __pbn__item_id != null;
         public void Resetitem_id() => __pbn__item_id = null;
@@ -2514,8 +2515,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(EAddSocket.k_AddSocket_Succeeded)]
         public EAddSocket response
         {
-            get { return __pbn__response ?? EAddSocket.k_AddSocket_Succeeded; }
-            set { __pbn__response = value; }
+            get => __pbn__response ?? EAddSocket.k_AddSocket_Succeeded;
+            set => __pbn__response = value;
         }
         public bool ShouldSerializeresponse() => __pbn__response != null;
         public void Resetresponse() => __pbn__response = null;
@@ -2542,8 +2543,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong gem_item_id
         {
-            get { return __pbn__gem_item_id.GetValueOrDefault(); }
-            set { __pbn__gem_item_id = value; }
+            get => __pbn__gem_item_id.GetValueOrDefault();
+            set => __pbn__gem_item_id = value;
         }
         public bool ShouldSerializegem_item_id() => __pbn__gem_item_id != null;
         public void Resetgem_item_id() => __pbn__gem_item_id = null;
@@ -2552,8 +2553,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint socket_index
         {
-            get { return __pbn__socket_index.GetValueOrDefault(); }
-            set { __pbn__socket_index = value; }
+            get => __pbn__socket_index.GetValueOrDefault();
+            set => __pbn__socket_index = value;
         }
         public bool ShouldSerializesocket_index() => __pbn__socket_index != null;
         public void Resetsocket_index() => __pbn__socket_index = null;
@@ -2571,8 +2572,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong item_item_id
         {
-            get { return __pbn__item_item_id.GetValueOrDefault(); }
-            set { __pbn__item_item_id = value; }
+            get => __pbn__item_item_id.GetValueOrDefault();
+            set => __pbn__item_item_id = value;
         }
         public bool ShouldSerializeitem_item_id() => __pbn__item_item_id != null;
         public void Resetitem_item_id() => __pbn__item_item_id = null;
@@ -2593,8 +2594,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong item_item_id
         {
-            get { return __pbn__item_item_id.GetValueOrDefault(); }
-            set { __pbn__item_item_id = value; }
+            get => __pbn__item_item_id.GetValueOrDefault();
+            set => __pbn__item_item_id = value;
         }
         public bool ShouldSerializeitem_item_id() => __pbn__item_item_id != null;
         public void Resetitem_item_id() => __pbn__item_item_id = null;
@@ -2607,8 +2608,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(EAddGem.k_AddGem_Succeeded)]
         public EAddGem response
         {
-            get { return __pbn__response ?? EAddGem.k_AddGem_Succeeded; }
-            set { __pbn__response = value; }
+            get => __pbn__response ?? EAddGem.k_AddGem_Succeeded;
+            set => __pbn__response = value;
         }
         public bool ShouldSerializeresponse() => __pbn__response != null;
         public void Resetresponse() => __pbn__response = null;
@@ -2639,8 +2640,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong item_item_id
         {
-            get { return __pbn__item_item_id.GetValueOrDefault(); }
-            set { __pbn__item_item_id = value; }
+            get => __pbn__item_item_id.GetValueOrDefault();
+            set => __pbn__item_item_id = value;
         }
         public bool ShouldSerializeitem_item_id() => __pbn__item_item_id != null;
         public void Resetitem_item_id() => __pbn__item_item_id = null;
@@ -2649,8 +2650,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint socket_index
         {
-            get { return __pbn__socket_index.GetValueOrDefault(); }
-            set { __pbn__socket_index = value; }
+            get => __pbn__socket_index.GetValueOrDefault();
+            set => __pbn__socket_index = value;
         }
         public bool ShouldSerializesocket_index() => __pbn__socket_index != null;
         public void Resetsocket_index() => __pbn__socket_index = null;
@@ -2669,8 +2670,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(EResetGem.k_ResetGem_Succeeded)]
         public EResetGem response
         {
-            get { return __pbn__response ?? EResetGem.k_ResetGem_Succeeded; }
-            set { __pbn__response = value; }
+            get => __pbn__response ?? EResetGem.k_ResetGem_Succeeded;
+            set => __pbn__response = value;
         }
         public bool ShouldSerializeresponse() => __pbn__response != null;
         public void Resetresponse() => __pbn__response = null;
@@ -2699,8 +2700,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string file_name
         {
-            get { return __pbn__file_name ?? ""; }
-            set { __pbn__file_name = value; }
+            get => __pbn__file_name ?? "";
+            set => __pbn__file_name = value;
         }
         public bool ShouldSerializefile_name() => __pbn__file_name != null;
         public void Resetfile_name() => __pbn__file_name = null;
@@ -2709,8 +2710,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint client_version
         {
-            get { return __pbn__client_version.GetValueOrDefault(); }
-            set { __pbn__client_version = value; }
+            get => __pbn__client_version.GetValueOrDefault();
+            set => __pbn__client_version = value;
         }
         public bool ShouldSerializeclient_version() => __pbn__client_version != null;
         public void Resetclient_version() => __pbn__client_version = null;
@@ -2719,8 +2720,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint poll_id
         {
-            get { return __pbn__poll_id.GetValueOrDefault(); }
-            set { __pbn__poll_id = value; }
+            get => __pbn__poll_id.GetValueOrDefault();
+            set => __pbn__poll_id = value;
         }
         public bool ShouldSerializepoll_id() => __pbn__poll_id != null;
         public void Resetpoll_id() => __pbn__poll_id = null;
@@ -2738,8 +2739,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint poll_id
         {
-            get { return __pbn__poll_id.GetValueOrDefault(); }
-            set { __pbn__poll_id = value; }
+            get => __pbn__poll_id.GetValueOrDefault();
+            set => __pbn__poll_id = value;
         }
         public bool ShouldSerializepoll_id() => __pbn__poll_id != null;
         public void Resetpoll_id() => __pbn__poll_id = null;
@@ -2748,8 +2749,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint file_size
         {
-            get { return __pbn__file_size.GetValueOrDefault(); }
-            set { __pbn__file_size = value; }
+            get => __pbn__file_size.GetValueOrDefault();
+            set => __pbn__file_size = value;
         }
         public bool ShouldSerializefile_size() => __pbn__file_size != null;
         public void Resetfile_size() => __pbn__file_size = null;
@@ -2767,8 +2768,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong op_id
         {
-            get { return __pbn__op_id.GetValueOrDefault(); }
-            set { __pbn__op_id = value; }
+            get => __pbn__op_id.GetValueOrDefault();
+            set => __pbn__op_id = value;
         }
         public bool ShouldSerializeop_id() => __pbn__op_id != null;
         public void Resetop_id() => __pbn__op_id = null;
@@ -2777,8 +2778,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint group_code
         {
-            get { return __pbn__group_code.GetValueOrDefault(); }
-            set { __pbn__group_code = value; }
+            get => __pbn__group_code.GetValueOrDefault();
+            set => __pbn__group_code = value;
         }
         public bool ShouldSerializegroup_code() => __pbn__group_code != null;
         public void Resetgroup_code() => __pbn__group_code = null;
@@ -2796,8 +2797,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public bool success
         {
-            get { return __pbn__success.GetValueOrDefault(); }
-            set { __pbn__success = value; }
+            get => __pbn__success.GetValueOrDefault();
+            set => __pbn__success = value;
         }
         public bool ShouldSerializesuccess() => __pbn__success != null;
         public void Resetsuccess() => __pbn__success = null;
@@ -2806,8 +2807,8 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint source_gc
         {
-            get { return __pbn__source_gc.GetValueOrDefault(); }
-            set { __pbn__source_gc = value; }
+            get => __pbn__source_gc.GetValueOrDefault();
+            set => __pbn__source_gc = value;
         }
         public bool ShouldSerializesource_gc() => __pbn__source_gc != null;
         public void Resetsource_gc() => __pbn__source_gc = null;
@@ -2873,4 +2874,5 @@ namespace SteamKit2.GC.Underlords.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

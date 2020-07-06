@@ -4,7 +4,8 @@
 //   Input: steammessages_parties.steamclient.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.Internal
 {
 
@@ -18,8 +19,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steamid
         {
-            get { return __pbn__steamid.GetValueOrDefault(); }
-            set { __pbn__steamid = value; }
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
         }
         public bool ShouldSerializesteamid() => __pbn__steamid != null;
         public void Resetsteamid() => __pbn__steamid = null;
@@ -28,8 +29,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong beacon_id
         {
-            get { return __pbn__beacon_id.GetValueOrDefault(); }
-            set { __pbn__beacon_id = value; }
+            get => __pbn__beacon_id.GetValueOrDefault();
+            set => __pbn__beacon_id = value;
         }
         public bool ShouldSerializebeacon_id() => __pbn__beacon_id != null;
         public void Resetbeacon_id() => __pbn__beacon_id = null;
@@ -47,8 +48,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong beacon_id
         {
-            get { return __pbn__beacon_id.GetValueOrDefault(); }
-            set { __pbn__beacon_id = value; }
+            get => __pbn__beacon_id.GetValueOrDefault();
+            set => __pbn__beacon_id = value;
         }
         public bool ShouldSerializebeacon_id() => __pbn__beacon_id != null;
         public void Resetbeacon_id() => __pbn__beacon_id = null;
@@ -58,8 +59,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string connect_string
         {
-            get { return __pbn__connect_string ?? ""; }
-            set { __pbn__connect_string = value; }
+            get => __pbn__connect_string ?? "";
+            set => __pbn__connect_string = value;
         }
         public bool ShouldSerializeconnect_string() => __pbn__connect_string != null;
         public void Resetconnect_string() => __pbn__connect_string = null;
@@ -77,8 +78,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint location_type
         {
-            get { return __pbn__location_type.GetValueOrDefault(); }
-            set { __pbn__location_type = value; }
+            get => __pbn__location_type.GetValueOrDefault();
+            set => __pbn__location_type = value;
         }
         public bool ShouldSerializelocation_type() => __pbn__location_type != null;
         public void Resetlocation_type() => __pbn__location_type = null;
@@ -87,8 +88,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public ulong location_id
         {
-            get { return __pbn__location_id.GetValueOrDefault(); }
-            set { __pbn__location_id = value; }
+            get => __pbn__location_id.GetValueOrDefault();
+            set => __pbn__location_id = value;
         }
         public bool ShouldSerializelocation_id() => __pbn__location_id != null;
         public void Resetlocation_id() => __pbn__location_id = null;
@@ -106,8 +107,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint appid
         {
-            get { return __pbn__appid.GetValueOrDefault(); }
-            set { __pbn__appid = value; }
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
@@ -116,8 +117,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint num_open_slots
         {
-            get { return __pbn__num_open_slots.GetValueOrDefault(); }
-            set { __pbn__num_open_slots = value; }
+            get => __pbn__num_open_slots.GetValueOrDefault();
+            set => __pbn__num_open_slots = value;
         }
         public bool ShouldSerializenum_open_slots() => __pbn__num_open_slots != null;
         public void Resetnum_open_slots() => __pbn__num_open_slots = null;
@@ -130,8 +131,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string connect_string
         {
-            get { return __pbn__connect_string ?? ""; }
-            set { __pbn__connect_string = value; }
+            get => __pbn__connect_string ?? "";
+            set => __pbn__connect_string = value;
         }
         public bool ShouldSerializeconnect_string() => __pbn__connect_string != null;
         public void Resetconnect_string() => __pbn__connect_string = null;
@@ -141,8 +142,8 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue("")]
         public string metadata
         {
-            get { return __pbn__metadata ?? ""; }
-            set { __pbn__metadata = value; }
+            get => __pbn__metadata ?? "";
+            set => __pbn__metadata = value;
         }
         public bool ShouldSerializemetadata() => __pbn__metadata != null;
         public void Resetmetadata() => __pbn__metadata = null;
@@ -160,8 +161,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong beacon_id
         {
-            get { return __pbn__beacon_id.GetValueOrDefault(); }
-            set { __pbn__beacon_id = value; }
+            get => __pbn__beacon_id.GetValueOrDefault();
+            set => __pbn__beacon_id = value;
         }
         public bool ShouldSerializebeacon_id() => __pbn__beacon_id != null;
         public void Resetbeacon_id() => __pbn__beacon_id = null;
@@ -179,8 +180,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong beacon_id
         {
-            get { return __pbn__beacon_id.GetValueOrDefault(); }
-            set { __pbn__beacon_id = value; }
+            get => __pbn__beacon_id.GetValueOrDefault();
+            set => __pbn__beacon_id = value;
         }
         public bool ShouldSerializebeacon_id() => __pbn__beacon_id != null;
         public void Resetbeacon_id() => __pbn__beacon_id = null;
@@ -189,8 +190,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong user_steamid
         {
-            get { return __pbn__user_steamid.GetValueOrDefault(); }
-            set { __pbn__user_steamid = value; }
+            get => __pbn__user_steamid.GetValueOrDefault();
+            set => __pbn__user_steamid = value;
         }
         public bool ShouldSerializeuser_steamid() => __pbn__user_steamid != null;
         public void Resetuser_steamid() => __pbn__user_steamid = null;
@@ -208,8 +209,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong beacon_id
         {
-            get { return __pbn__beacon_id.GetValueOrDefault(); }
-            set { __pbn__beacon_id = value; }
+            get => __pbn__beacon_id.GetValueOrDefault();
+            set => __pbn__beacon_id = value;
         }
         public bool ShouldSerializebeacon_id() => __pbn__beacon_id != null;
         public void Resetbeacon_id() => __pbn__beacon_id = null;
@@ -227,8 +228,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong beacon_id
         {
-            get { return __pbn__beacon_id.GetValueOrDefault(); }
-            set { __pbn__beacon_id = value; }
+            get => __pbn__beacon_id.GetValueOrDefault();
+            set => __pbn__beacon_id = value;
         }
         public bool ShouldSerializebeacon_id() => __pbn__beacon_id != null;
         public void Resetbeacon_id() => __pbn__beacon_id = null;
@@ -237,8 +238,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong user_steamid
         {
-            get { return __pbn__user_steamid.GetValueOrDefault(); }
-            set { __pbn__user_steamid = value; }
+            get => __pbn__user_steamid.GetValueOrDefault();
+            set => __pbn__user_steamid = value;
         }
         public bool ShouldSerializeuser_steamid() => __pbn__user_steamid != null;
         public void Resetuser_steamid() => __pbn__user_steamid = null;
@@ -256,8 +257,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong beacon_id
         {
-            get { return __pbn__beacon_id.GetValueOrDefault(); }
-            set { __pbn__beacon_id = value; }
+            get => __pbn__beacon_id.GetValueOrDefault();
+            set => __pbn__beacon_id = value;
         }
         public bool ShouldSerializebeacon_id() => __pbn__beacon_id != null;
         public void Resetbeacon_id() => __pbn__beacon_id = null;
@@ -275,8 +276,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong beacon_id
         {
-            get { return __pbn__beacon_id.GetValueOrDefault(); }
-            set { __pbn__beacon_id = value; }
+            get => __pbn__beacon_id.GetValueOrDefault();
+            set => __pbn__beacon_id = value;
         }
         public bool ShouldSerializebeacon_id() => __pbn__beacon_id != null;
         public void Resetbeacon_id() => __pbn__beacon_id = null;
@@ -285,8 +286,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint num_open_slots
         {
-            get { return __pbn__num_open_slots.GetValueOrDefault(); }
-            set { __pbn__num_open_slots = value; }
+            get => __pbn__num_open_slots.GetValueOrDefault();
+            set => __pbn__num_open_slots = value;
         }
         public bool ShouldSerializenum_open_slots() => __pbn__num_open_slots != null;
         public void Resetnum_open_slots() => __pbn__num_open_slots = null;
@@ -304,8 +305,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong beacon_id
         {
-            get { return __pbn__beacon_id.GetValueOrDefault(); }
-            set { __pbn__beacon_id = value; }
+            get => __pbn__beacon_id.GetValueOrDefault();
+            set => __pbn__beacon_id = value;
         }
         public bool ShouldSerializebeacon_id() => __pbn__beacon_id != null;
         public void Resetbeacon_id() => __pbn__beacon_id = null;
@@ -323,8 +324,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong beacon_id
         {
-            get { return __pbn__beacon_id.GetValueOrDefault(); }
-            set { __pbn__beacon_id = value; }
+            get => __pbn__beacon_id.GetValueOrDefault();
+            set => __pbn__beacon_id = value;
         }
         public bool ShouldSerializebeacon_id() => __pbn__beacon_id != null;
         public void Resetbeacon_id() => __pbn__beacon_id = null;
@@ -342,8 +343,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public ulong beacon_id
         {
-            get { return __pbn__beacon_id.GetValueOrDefault(); }
-            set { __pbn__beacon_id = value; }
+            get => __pbn__beacon_id.GetValueOrDefault();
+            set => __pbn__beacon_id = value;
         }
         public bool ShouldSerializebeacon_id() => __pbn__beacon_id != null;
         public void Resetbeacon_id() => __pbn__beacon_id = null;
@@ -363,4 +364,5 @@ namespace SteamKit2.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

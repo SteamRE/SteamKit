@@ -4,7 +4,8 @@
 //   Input: steammessages_offline.steamclient.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.Internal
 {
 
@@ -18,8 +19,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint priority
         {
-            get { return __pbn__priority.GetValueOrDefault(); }
-            set { __pbn__priority = value; }
+            get => __pbn__priority.GetValueOrDefault();
+            set => __pbn__priority = value;
         }
         public bool ShouldSerializepriority() => __pbn__priority != null;
         public void Resetpriority() => __pbn__priority = null;
@@ -37,8 +38,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public byte[] serialized_ticket
         {
-            get { return __pbn__serialized_ticket; }
-            set { __pbn__serialized_ticket = value; }
+            get => __pbn__serialized_ticket;
+            set => __pbn__serialized_ticket = value;
         }
         public bool ShouldSerializeserialized_ticket() => __pbn__serialized_ticket != null;
         public void Resetserialized_ticket() => __pbn__serialized_ticket = null;
@@ -47,8 +48,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public byte[] signature
         {
-            get { return __pbn__signature; }
-            set { __pbn__signature = value; }
+            get => __pbn__signature;
+            set => __pbn__signature = value;
         }
         public bool ShouldSerializesignature() => __pbn__signature != null;
         public void Resetsignature() => __pbn__signature = null;
@@ -75,8 +76,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint accountid
         {
-            get { return __pbn__accountid.GetValueOrDefault(); }
-            set { __pbn__accountid = value; }
+            get => __pbn__accountid.GetValueOrDefault();
+            set => __pbn__accountid = value;
         }
         public bool ShouldSerializeaccountid() => __pbn__accountid != null;
         public void Resetaccountid() => __pbn__accountid = null;
@@ -85,8 +86,8 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public uint rtime32_creation_time
         {
-            get { return __pbn__rtime32_creation_time.GetValueOrDefault(); }
-            set { __pbn__rtime32_creation_time = value; }
+            get => __pbn__rtime32_creation_time.GetValueOrDefault();
+            set => __pbn__rtime32_creation_time = value;
         }
         public bool ShouldSerializertime32_creation_time() => __pbn__rtime32_creation_time != null;
         public void Resetrtime32_creation_time() => __pbn__rtime32_creation_time = null;
@@ -114,4 +115,5 @@ namespace SteamKit2.Internal
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion

@@ -4,7 +4,8 @@
 //   Input: steammessages_oauth.steamworkssdk.proto
 // </auto-generated>
 
-#pragma warning disable CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#region Designer generated code
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.Internal.Steamworks
 {
 
@@ -19,8 +20,8 @@ namespace SteamKit2.Internal.Steamworks
         [global::System.ComponentModel.DefaultValue("")]
         public string clientid
         {
-            get { return __pbn__clientid ?? ""; }
-            set { __pbn__clientid = value; }
+            get => __pbn__clientid ?? "";
+            set => __pbn__clientid = value;
         }
         public bool ShouldSerializeclientid() => __pbn__clientid != null;
         public void Resetclientid() => __pbn__clientid = null;
@@ -39,8 +40,8 @@ namespace SteamKit2.Internal.Steamworks
         [global::System.ComponentModel.DefaultValue("")]
         public string access_token
         {
-            get { return __pbn__access_token ?? ""; }
-            set { __pbn__access_token = value; }
+            get => __pbn__access_token ?? "";
+            set => __pbn__access_token = value;
         }
         public bool ShouldSerializeaccess_token() => __pbn__access_token != null;
         public void Resetaccess_token() => __pbn__access_token = null;
@@ -50,8 +51,8 @@ namespace SteamKit2.Internal.Steamworks
         [global::System.ComponentModel.DefaultValue("")]
         public string redirect_uri
         {
-            get { return __pbn__redirect_uri ?? ""; }
-            set { __pbn__redirect_uri = value; }
+            get => __pbn__redirect_uri ?? "";
+            set => __pbn__redirect_uri = value;
         }
         public bool ShouldSerializeredirect_uri() => __pbn__redirect_uri != null;
         public void Resetredirect_uri() => __pbn__redirect_uri = null;
@@ -66,4 +67,5 @@ namespace SteamKit2.Internal.Steamworks
 
 }
 
-#pragma warning restore CS0612, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#endregion
