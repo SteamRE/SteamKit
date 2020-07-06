@@ -30,12 +30,15 @@ before_build:
   - dotnet restore Samples\Samples.sln
   - nuget restore Resources\NetHookAnalyzer2\NetHookAnalyzer2.sln
   - Resources\NetHook2\SetupDependencies.cmd
+  - dotnet restore Resources\ProtobufGen\ProtobufGen.sln
 
 build_script:
   - dotnet build SteamKit2\SteamKit2.sln
   - dotnet build Samples\Samples.sln
   - msbuild Resources\NetHook2\NetHook2.sln
   - msbuild Resources\NetHookAnalyzer2\NetHookAnalyzer2.sln
+  - dotnet build Resources\ProtobufGen\ProtobufGen.sln
+  - dotnet build Resources\SteamLanguageParser\SteamLanguageParser.csproj
 
 after_build:
   - '7z a NetHook2.zip .\Resources\NetHook2\%CONFIGURATION%\*.dll .\Resources\NetHook2\%CONFIGURATION%\*.pdb'
