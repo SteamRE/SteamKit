@@ -37,7 +37,6 @@ build_script:
   - dotnet build Samples\Samples.sln
   - msbuild Resources\NetHook2\NetHook2.sln
   - msbuild Resources\NetHookAnalyzer2\NetHookAnalyzer2.sln
-  - dotnet build Samples\Samples.sln
   - dotnet build Resources\ProtobufGen\ProtobufGen.sln
   - dotnet build Resources\SteamLanguageParser\SteamLanguageParser.csproj
 
