@@ -52,7 +52,7 @@ jobs:
 
     - name: Upload NetHookAnalyzer2
       uses: actions/upload-artifact@v2
-      if: matrix.configuration == 'Release'
+      if: matrix.os == 'windows-latest' && matrix.configuration == 'Release'
       with:
         name: NetHookAnalyzer2 (${{ matrix.sdk }})
         path: 'Resources/NetHookAnalyzer2/NetHookAnalyzer2/bin/Release/netcoreapp3.0/win-x64/publish/*'
