@@ -8,7 +8,7 @@ on:
 
 jobs:
   steamkit2:
-    name: SteamKit2 on ${{ matrix.os }} - ${{ matrix.configuration }} (SDK {{ matrix.sdk }}) 
+    name: SteamKit2 on ${{ matrix.os }} - ${{ matrix.configuration }} (SDK ${{ matrix.sdk }}) 
 
     strategy:
       matrix:
