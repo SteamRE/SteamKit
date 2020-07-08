@@ -1,0 +1,35 @@
+name: NetHook2
+on:
+  push:
+    branches: [ master, gh-actions ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  nethook2:
+    name: NetHook2 - ${{ matrix.configuration }}
+    
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+
+    runs-on: windows-latest
+      
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.0
+
+    - name: Configure Dependencies
+      run: Resources/NetHook2/SetupDependencies.cmd
+
+    - name: Build NetHook2
+      run: msbuild /p:Configuration=${{ matrix.configuration }} Resources/NetHook2/NetHook2.sln
+
+    - name: Upload NetHook2
+      uses: actions/upload-artifact@v2
+      if: matrix.configuration == 'Release'
+      with:
+        name: NetHook2
+        path: 'Resources/NetHook2/Release/*.dll'
