@@ -6,6 +6,7 @@
     <RollForward>LatestMajor</RollForward>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <ProjectGuid>{CCAB4961-4C59-4400-978B-7D9552AE2296}</ProjectGuid>
+    <ApplicationIcon>..\Misc\steamkit.ico</ApplicationIcon>
   </PropertyGroup>
 
 </Project>
