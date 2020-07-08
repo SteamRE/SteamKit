@@ -46,6 +46,17 @@ jobs:
       run: dotnet test --no-restore --verbosity normal SteamKit2/Tests/Tests.csproj
       if: matrix.configuration == 'Debug'
 
+    - name: Publish NetHookAnalyzer2
+      run: dotnet publish --configuration ${{ matrix.configuration }} --runtime win-x64 Resources/NetHookAnalyzer2/NetHookAnalyzer2/NetHookAnalyzer2.csproj /p:PublishSingleFile=True /p:PublishTrimmed=True
+      if: matrix.os == 'windows-latest' && matrix.configuration == 'Release'
+
+    - name: Upload NetHookAnalyzer2
+      uses: actions/upload-artifact@v2
+      if: matrix.configuration == 'Release'
+      with:
+        name: NetHookAnalyzer2 (${{ matrix.sdk }})
+        path: 'Resources/NetHookAnalyzer2/NetHookAnalyzer2/bin/Release/netcoreapp3.0/win-x64/publish/*'
+
   nethook2:
     name: NetHook2 - ${{ matrix.configuration }}
     
