@@ -29,10 +29,6 @@ jobs:
     - name: Build SteamKit2
       run: dotnet build --configuration ${{ matrix.configuration }} SteamKit2/SteamKit2/SteamKit2.csproj
 
-    - name: Build SteamKit2 Tests
-      run: dotnet build --configuration ${{ matrix.configuration }} SteamKit2/Tests/Tests.csproj
-      if: matrix.configuration == 'Debug'
-
     - name: Build SteamLanguageParser
       run: dotnet build --configuration ${{ matrix.configuration }} Resources/SteamLanguageParser/SteamLanguageParser.csproj
 
