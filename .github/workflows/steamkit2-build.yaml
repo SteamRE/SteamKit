@@ -8,7 +8,7 @@ on:
 
 jobs:
   steamkit2:
-    name: SteamKit2 on ${{ matrix.os }} (SDK {{ matrix.sdk }}) - ${{ matrix.configuration }}
+    name: SteamKit2 on ${{ matrix.os }} - ${{ matrix.configuration }} (SDK {{ matrix.sdk }}) 
 
     strategy:
       matrix:
@@ -47,7 +47,7 @@ jobs:
       if: matrix.configuration == 'Debug'
 
   nethook2:
-    name: NetHook2 on ${{ matrix.configuration }}
+    name: NetHook2 - ${{ matrix.configuration }}
     
     strategy:
       matrix:
