@@ -1,0 +1,55 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [ master, gh-actions ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: .NET on ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+        sdk: [3.1.301, 5.0.100-preview.6.20318.15]
+        configuration: [Debug, Release]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ matrix.sdk }}
+    - name: Build SteamKit2
+      run: dotnet build --configuration ${{ matrix.configuration }} SteamKit2/SteamKit2/SteamKit2.csproj
+    - name: Build SteamKit2 Tests
+      run: dotnet build --configuration ${{ matrix.configuration }} SteamKit2/Tests/Tests.csproj
+    - name: Build SteamLanguageParser
+      run: dotnet build --configuration ${{ matrix.configuration }} Resources/SteamLanguageParser/SteamLanguageParser.csproj
+    - name: Build ProtobufGen
+      run: dotnet build --configuration ${{ matrix.configuration }} Resources/ProtobufGen/ProtobufGen.sln
+    - name: Build NetHook2
+      run: msbuild Resources/NetHook2/NetHook2.sln
+      if: matrix.os == 'windows-latest'
+    - name: Build NetHookAnalyzer2
+      run: dotnet build --configuration ${{ matrix.configuration }} Resources/NetHookAnalyzer2/NetHookAnalyzer2.sln
+      if: matrix.os == 'windows-latest'
+    - name: Build NetHook2
+      run: |
+        Resources/NetHook2/SetupDependencies.cmd
+        dotnet build --configuration ${{ matrix.configuration }} Samples/Samples.sln
+    - name: Run Tests
+      run: dotnet test --no-restore --verbosity normal SteamKit2/Tests/Tests.csproj
+      if: matrix.configuration == 'Debug'
+    
+    
+    - name: Upload NetHook2
+      uses: actions/upload-artifact@v2
+      if: matrix.os == 'windows-latest' && matrix.configuration == 'Release'
+      with:
+        name: NetHook2 (SDK ${{ matrix.sdk }})
+        path: 'Resources/NetHook2/Release/*.dll'
