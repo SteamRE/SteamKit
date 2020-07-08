@@ -62,6 +62,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.0
+
     - name: Configure Dependencies
       run: Resources/NetHook2/SetupDependencies.cmd
 
