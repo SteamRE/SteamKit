@@ -53,7 +53,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="4.7.0" />
-    <PackageReference Include="protobuf-net" Version="3.0.24" />
+    <PackageReference Include="protobuf-net" Version="3.0.29" />
   </ItemGroup>
 
 </Project>
