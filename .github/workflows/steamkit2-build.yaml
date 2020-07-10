@@ -60,7 +60,7 @@ jobs:
         dotnet-version: 3.1.301
         
     - name: Create NuGet Package
-      run: dotnet publish --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
+      run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
 
     - name: Upload NuGet Package
       uses: actions/upload-artifact@v2
