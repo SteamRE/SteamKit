@@ -8,6 +8,7 @@
     <RepositoryUrl>https://github.com/SteamRE/SteamKit</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <OutputType>Exe</OutputType>
+    <ApplicationIcon>..\..\Misc\steamkit.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
