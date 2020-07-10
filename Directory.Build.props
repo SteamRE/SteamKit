@@ -12,7 +12,7 @@
         <FileVersion>$(SteamKitVersion)</FileVersion>
         <Version>$(SteamKitVersion)</Version>
 
-        <GitHubActionsRef Condition="$(GITHUB_REF.StartsWith('refs/head/'))">$(GITHUB_REF.Substring(10))</GitHubActionsRef>
+        <GitHubActionsRef Condition="$(GITHUB_REF.StartsWith('refs/heads/'))">$(GITHUB_REF.Substring(11))</GitHubActionsRef>
         <GitHubActionsRef Condition="$(GitHubActionsRef) == ''">$(GITHUB_REF)</GitHubActionsRef>
         <InformationalVersion Condition=" '$(GitHubActionsRef)' == ''">$(SteamKitVersion) - Development</InformationalVersion>
         <InformationalVersion Condition=" '$(GitHubActionsRef)' != ''">$(SteamKitVersion) - CI (GitHub, ref: $(GitHubActionsRef))</InformationalVersion>
