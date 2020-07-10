@@ -10,6 +10,7 @@
 
         <AssemblyVersion>$(SteamKitBaseVersion)</AssemblyVersion>
         <FileVersion>$(SteamKitVersion)</FileVersion>
+        <Version>$(SteamKitVersion)</Version>
 
         <GitHubActionsRef Condition="$(GITHUB_REF.StartsWith('refs/head/'))">$(GITHUB_REF.Substring(10))</GitHubActionsRef>
         <GitHubActionsRef Condition="$(GitHubActionsRef) == ''">$(GITHUB_REF)</GitHubActionsRef>
