@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <SteamKitVersion Condition=" '$(GITHUB_RUN_ID)' != ''">$(SteamKitBaseVersion).$(BUILD_VERSION)</SteamKitVersion>
+        <SteamKitVersion Condition=" '$(GITHUB_RUN_ID)' != ''">$(SteamKitBaseVersion).$(GITHUB_RUN_ID)</SteamKitVersion>
         <SteamKitVersion Condition=" '$(GITHUB_RUN_ID)' == ''">$(SteamKitBaseVersion).0</SteamKitVersion>
 
         <AssemblyVersion>$(SteamKitBaseVersion)</AssemblyVersion>
