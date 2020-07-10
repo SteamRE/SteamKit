@@ -69,7 +69,7 @@ jobs:
         path: 'SteamKit2/SteamKit2/bin/Release/*.nupkg'
 
   nha2-artifacts:
-    name: Create NetHookAnalyzer2 Reelase
+    name: Create NetHookAnalyzer2 Release
 
     runs-on: windows-latest
 
