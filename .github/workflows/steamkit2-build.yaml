@@ -46,27 +46,49 @@ jobs:
       run: dotnet test --no-restore --verbosity normal SteamKit2/Tests/Tests.csproj
       if: matrix.configuration == 'Debug'
 
-    - name: Publish NetHookAnalyzer2
-      run: dotnet publish --configuration ${{ matrix.configuration }} --runtime win-x64 Resources/NetHookAnalyzer2/NetHookAnalyzer2/NetHookAnalyzer2.csproj /p:PublishSingleFile=True /p:PublishTrimmed=True
-      if: matrix.os == 'windows-latest' && matrix.configuration == 'Release'
+  steamkit2-artifacts:
+    name: Create NuGet Package
+      
+    runs-on: windows-latest
 
-    - name: Upload NetHookAnalyzer2
-      uses: actions/upload-artifact@v2
-      if: matrix.os == 'windows-latest' && matrix.configuration == 'Release'
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
       with:
-        name: NetHookAnalyzer2 (${{ matrix.sdk }})
-        path: 'Resources/NetHookAnalyzer2/NetHookAnalyzer2/bin/Release/netcoreapp3.0/win-x64/publish/*'
-
+        dotnet-version: 3.1.301
+        
     - name: Create NuGet Package
-      run: dotnet publish --configuration ${{ matrix.configuration }} SteamKit2/SteamKit2/SteamKit2.csproj
-      if: matrix.os == 'windows-latest' && matrix.configuration == 'Release'
+      run: dotnet publish --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
 
     - name: Upload NuGet Package
       uses: actions/upload-artifact@v2
-      if: matrix.os == 'windows-latest' && matrix.configuration == 'Release'
       with:
         name: SteamKit2.nupkg
-        path: 'SteamKit2/SteamKit2/bin/$(${{ matrix.configuration }}/*.nupkg'
+        path: 'SteamKit2/SteamKit2/bin/Release/*.nupkg'
+
+  nha2-artifacts:
+    name: Create NetHookAnalyzer2 Reelase
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+        
+    - name: Publish NetHookAnalyzer2
+      run: dotnet publish --configuration Release --runtime win-x64 Resources/NetHookAnalyzer2/NetHookAnalyzer2/NetHookAnalyzer2.csproj /p:PublishSingleFile=True /p:PublishTrimmed=True
+
+    - name: Upload NetHookAnalyzer2
+      uses: actions/upload-artifact@v2
+      with:
+        name: NetHookAnalyzer2
+        path: 'Resources/NetHookAnalyzer2/NetHookAnalyzer2/bin/Release/netcoreapp3.0/win-x64/publish/*'
 
   nethook2:
     name: NetHook2 - ${{ matrix.configuration }}
