@@ -42,9 +42,17 @@ jobs:
       run: dotnet build --configuration ${{ matrix.configuration }} Resources/NetHookAnalyzer2/NetHookAnalyzer2.sln
       if: matrix.os == 'windows-latest'
 
-    - name: Run Tests
+    - name: Run Tests (Windows)
+      if: matrix.configuration == 'Debug' && matrix.os == 'windows-latest'
+      run: |
+        nuget install OpenCover -Version 4.6.519 -OutputDirectory SteamKit2\packages
+        SteamKit2\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user "-target:%ProgramFiles%\dotnet\dotnet.exe" "-targetargs:test SteamKit2\Tests\Tests.csproj" -returntargetcode "-filter:+[SteamKit2]* -[SteamKit2]SteamKit2.Internal.* -[SteamKit2]SteamKit2.*.Internal.* -[SteamKit2]SevenZip*" "-excludebyattribute:*.ProtoContract*" -hideskipped:All -output:SteamKit2-code-coverage.xml -oldStyle
+        nuget install Codecov -Version 1.0.3 -OutputDirectory SteamKit2\packages
+        SteamKit2\packages\Codecov.1.0.3\tools\codecov.exe -f "SteamKit2-code-coverage.xml"
+
+    - name: Run Tests (*nix)
+      if: matrix.configuration == 'Debug' && matrix.os != 'windows-latest'
       run: dotnet test --no-restore --verbosity normal SteamKit2/Tests/Tests.csproj
-      if: matrix.configuration == 'Debug'
 
   steamkit2-artifacts:
     name: Create NuGet Package
