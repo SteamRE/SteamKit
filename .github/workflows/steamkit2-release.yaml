@@ -19,7 +19,7 @@ jobs:
         dotnet-version: 3.1.301
         
     - name: Create NuGet Package
-      run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj /p:Version=${{ github.event.release.tag_name }} /p:SteamKitBaseVersion=${{ github.event.release.tag_name }}
+      run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj /p:Version=${{ github.event.release.tag_name }}
 
     - name: Upload NuGet Package as Artifact
       uses: actions/upload-artifact@v2
