@@ -1,0 +1,119 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ master, gh-actions ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  steamkit2:
+    name: SteamKit2 on ${{ matrix.os }} - ${{ matrix.configuration }} (SDK ${{ matrix.sdk }}) 
+
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+        sdk: [3.1.301, 5.0.100-preview.6.20318.15]
+        configuration: [Debug, Release]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ matrix.sdk }}
+      
+    - name: Build SteamKit2
+      run: dotnet build --configuration ${{ matrix.configuration }} SteamKit2/SteamKit2/SteamKit2.csproj
+
+    - name: Build SteamLanguageParser
+      run: dotnet build --configuration ${{ matrix.configuration }} Resources/SteamLanguageParser/SteamLanguageParser.csproj
+
+    - name: Build ProtobufGen
+      run: dotnet build --configuration ${{ matrix.configuration }} Resources/ProtobufGen/ProtobufGen.sln
+
+    - name: Build Samples
+      run: dotnet build --configuration ${{ matrix.configuration }} Samples/Samples.sln
+
+    - name: Build NetHookAnalyzer2
+      run: dotnet build --configuration ${{ matrix.configuration }} Resources/NetHookAnalyzer2/NetHookAnalyzer2.sln
+      if: matrix.os == 'windows-latest'
+
+    - name: Run Tests
+      if: matrix.configuration == 'Debug'
+      run: dotnet test --no-restore --verbosity normal SteamKit2/Tests/Tests.csproj
+
+  steamkit2-artifacts:
+    name: Create NuGet Package
+      
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+        
+    - name: Create NuGet Package
+      run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
+
+    - name: Upload NuGet Package
+      uses: actions/upload-artifact@v2
+      with:
+        name: SteamKit2.nupkg
+        path: 'SteamKit2/SteamKit2/bin/Release/*.nupkg'
+
+  nha2-artifacts:
+    name: Create NetHookAnalyzer2 Release
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+        
+    - name: Publish NetHookAnalyzer2
+      run: dotnet publish --configuration Release --runtime win-x64 Resources/NetHookAnalyzer2/NetHookAnalyzer2/NetHookAnalyzer2.csproj /p:PublishSingleFile=True /p:PublishTrimmed=True
+
+    - name: Upload NetHookAnalyzer2
+      uses: actions/upload-artifact@v2
+      with:
+        name: NetHookAnalyzer2
+        path: 'Resources/NetHookAnalyzer2/NetHookAnalyzer2/bin/Release/netcoreapp3.0/win-x64/publish/*'
+
+  nethook2:
+    name: NetHook2 - ${{ matrix.configuration }}
+    
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+
+    runs-on: windows-latest
+      
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.0
+
+    - name: Configure Dependencies
+      run: Resources/NetHook2/SetupDependencies.cmd
+
+    - name: Build NetHook2
+      run: msbuild /p:Configuration=${{ matrix.configuration }} Resources/NetHook2/NetHook2.sln
+
+    - name: Upload NetHook2
+      uses: actions/upload-artifact@v2
+      if: matrix.configuration == 'Release'
+      with:
+        name: NetHook2
+        path: 'Resources/NetHook2/Release/*.dll'
