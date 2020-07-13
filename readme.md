@@ -1,7 +1,5 @@
 # SteamKit2
-
-[![Build Status (Linux)](https://img.shields.io/travis/SteamRE/SteamKit/master.svg?style=flat-square&label=Linux)](https://travis-ci.org/SteamRE/SteamKit)
-[![Build Status (Windows)](https://img.shields.io/appveyor/ci/SteamRE/SteamKit/master.svg?style=flat-square&label=Windows)](https://ci.appveyor.com/project/SteamRE/SteamKit)
+[![Build Status (CI/CD)](https://github.com/SteamRE/SteamKit/workflows/CI/CD/badge.svg?branch=master&event=push)](https://github.com/SteamRE/SteamKit/actions?query=workflow%3ACI%2FCD)
 [![NuGet](https://img.shields.io/nuget/v/SteamKit2.svg?style=flat-square)](https://www.nuget.org/packages/SteamKit2/)
 [![Code Coverage](https://img.shields.io/badge/Code-Coverage-007ec6.svg?style=flat-square)](https://codecov.io/github/SteamRE/SteamKit)
 
