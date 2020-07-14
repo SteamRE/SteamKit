@@ -7,6 +7,7 @@
 
 using System;
 using System.IO;
+using System.Reflection;
 using System.Threading;
 
 namespace SteamKit2
@@ -55,7 +56,16 @@ namespace SteamKit2
         {
             this.log = log ?? DebugLogContext.Instance;
 
-            var directory = Path.GetDirectoryName( new Uri( GetType().Assembly.CodeBase ).LocalPath );
+            string directory;
+            if ( Assembly.GetEntryAssembly() is { } entryAssembly )
+            {
+                directory = Path.GetDirectoryName( entryAssembly.Location );
+            }
+            else
+            {
+                directory = Directory.GetCurrentDirectory();
+            }
+
             LogDirectory = Path.Combine(
                 directory,
                 "nethook",
