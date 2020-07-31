@@ -21,42 +21,40 @@ namespace NetHookAnalyzer2.Specializations
 				yield break;
 			}
 
-			using (var ms = new MemoryStream(gameCoordinatorMessage.payload))
-			{
-				var header = ReadHeader(gameCoordinatorMessage.msgtype, ms);
-				var gcBody = ReadMessageBody(gameCoordinatorMessage.msgtype, ms, gameCoordinatorMessage.appid);
-				if (gcBody == null)
-				{
-					yield break;
-				}
+            using var ms = new MemoryStream( gameCoordinatorMessage.payload );
+            var header = ReadHeader( gameCoordinatorMessage.msgtype, ms );
+            var gcBody = ReadMessageBody( gameCoordinatorMessage.msgtype, ms, gameCoordinatorMessage.appid );
+            if ( gcBody == null )
+            {
+                yield break;
+            }
 
-				var gc = new
-				{
-					emsg = EMsgExtensions.GetGCMessageName(gameCoordinatorMessage.msgtype, gameCoordinatorMessage.appid),
-					header = header,
-					body = gcBody,
-				};
+            var gc = new
+            {
+                emsg = EMsgExtensions.GetGCMessageName( gameCoordinatorMessage.msgtype, gameCoordinatorMessage.appid ),
+                header = header,
+                body = gcBody,
+            };
 
-				var specializations = new List<TreeNode>();
+            var specializations = new List<TreeNode>();
 
-				yield return new KeyValuePair<string, object>("Game Coordinator Message", gc);
+            yield return new KeyValuePair<string, object>( "Game Coordinator Message", gc );
 
-				if (GameCoordinatorSpecializations != null)
-				{
-					foreach (var gameSpecificSpecialization in GameCoordinatorSpecializations)
-					{
-						foreach (var specializedObject in gameSpecificSpecialization.GetExtraObjects(gcBody, gameCoordinatorMessage.appid))
-						{
-							yield return specializedObject;
-						}
-					}
-				}
-			}
-		}
+            if ( GameCoordinatorSpecializations != null )
+            {
+                foreach ( var gameSpecificSpecialization in GameCoordinatorSpecializations )
+                {
+                    foreach ( var specializedObject in gameSpecificSpecialization.GetExtraObjects( gcBody, gameCoordinatorMessage.appid ) )
+                    {
+                        yield return specializedObject;
+                    }
+                }
+            }
+        }
 
 		static IGCSerializableHeader ReadHeader(uint rawEMsg, Stream stream)
 		{
-			IGCSerializableHeader header = null;
+			IGCSerializableHeader header;
 
 			if (MsgUtil.IsProtoBuf(rawEMsg))
 			{

@@ -1,0 +1,43 @@
+name: Publish Package Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-nupkg:
+    name: Publish NuGet Package
+      
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+        
+    - name: Create NuGet Package
+      run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj /p:Version=${{ github.event.release.tag_name }}
+
+    - name: Upload NuGet Package as Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: SteamKit2-${{ github.event.release.tag_name }}.nupkg
+        path: 'SteamKit2/SteamKit2/bin/Release/SteamKit2.${{ github.event.release.tag_name }}.nupkg'
+
+    - name: Upload NuGet Package to GitHub Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: 'SteamKit2/SteamKit2/bin/Release/SteamKit2.${{ github.event.release.tag_name }}.nupkg'
+        asset_name: SteamKit-${{ github.event.release.tag_name }}.nupkg
+        asset_content_type: application/zip
+
+    - name: Publish NuGet Package to NuGet Gallery
+      run: | 
+        nuget setapikey ${{ secrets.NUGET_API_KEY }}
+        nuget push SteamKit2/SteamKit2/bin/Release/SteamKit2.${{ github.event.release.tag_name }}.nupkg -Source https://api.nuget.org/v3/index.json

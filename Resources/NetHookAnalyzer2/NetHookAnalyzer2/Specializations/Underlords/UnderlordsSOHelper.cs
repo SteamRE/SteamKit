@@ -22,6 +22,7 @@ namespace NetHookAnalyzer2.Specializations
             {103, typeof(CSOGameAccountClient)},
             {104, typeof(CSODACParty)},
             {105, typeof(CSODACServerStaticLobby)},
+            {106, typeof(CSOAccountSyncStorage)},
         };
     }
 }

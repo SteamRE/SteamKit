@@ -1,31 +1,16 @@
-dist: xenial
-
+sudo: false
 language: csharp
-mono: none
-dotnet: 3.0
-
-git:
-    depth: false
-
-solution: SteamKit2/SteamKit2.sln
-
-before_install:
-    - sudo apt-get update
-    - sudo apt-get install -y dotnet-runtime-2.1
+solution: SteamKit2.sln
 
 install:
-    - dotnet restore SteamKit2/SteamKit2.sln
-    - dotnet restore Samples/Samples.sln
-
-before_script:
-    - export PATH="$PATH:/home/travis/.dotnet/tools"
+    - nuget restore SteamKit2.sln
+    - nuget restore Samples/Samples.sln
+    - nuget install xunit.runners -Version 1.9.1 -o packages
 
 script:
-    - dotnet build SteamKit2/SteamKit2/SteamKit2.csproj
-    - dotnet build SteamKit2/Tests/Tests.csproj
-    - dotnet build Resources/SteamLanguageParser/SteamLanguageParser.csproj
-    - dotnet build Samples/Samples.sln
-    - dotnet test SteamKit2/Tests/Tests.csproj
+    - xbuild /p:NoWarn=1584 SteamKit2.sln /target:SteamKit2 /target:Tests
+    - xbuild Samples/Samples.sln
+    - mono packages/xunit.runners.1.9.1/tools/xunit.console.exe Tests/bin/Debug/Tests.dll
 
 notifications:
     irc:
@@ -36,6 +21,4 @@ notifications:
 
 cache:
     directories:
-        - "~/.nuget/packages"
         - "~/.local/share/NuGet/Cache"
-        - "~/.sonar/cache"

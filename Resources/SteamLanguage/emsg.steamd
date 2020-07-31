@@ -474,6 +474,7 @@ enum EMsg
 	FBSBootstrapperGetPackageChunkResponse = 1131;
 	FBSBootstrapperPackageTransferProgress = 1132;
 	FBSRestartBootstrapper = 1133;
+	FBSPauseFrozenDumps = 1134;
 
 	BaseFileXfer = 1200;
 	FileXferRequest = 1200;
@@ -493,6 +494,8 @@ enum EMsg
 	BaseBS = 1400;
 	BSPurchaseStart = 1401;
 	BSPurchaseResponse = 1402;
+	BSAuthenticateCCTrans = 1403;
+	BSAuthenticateCCTransResponse = 1404;
 	BSSettleNOVA = 1404; removed
 	BSSettleComplete = 1406;
 	BSBannedRequest = 1407; removed
@@ -1217,6 +1220,8 @@ enum EMsg
 	AMFundedPayment = 4418;
 	AMFundedPaymentResponse = 4419;
 	AMRequestPersonaUpdateForChatServer = 4420;
+	AMPerfectWorldPayment = 4421;
+	AMPerfectWorldPaymentResponse = 4422;
 
 	BasePSRange = 5000;
 	PSCreateShoppingCart = 5001;
@@ -1498,6 +1503,9 @@ enum EMsg
 	ClientNetworkingCertRequestResponse = 5622;
 	ClientChallengeRequest = 5623;
 	ClientChallengeResponse = 5624;
+	BadgeCraftedNotification = 5625;
+	ClientNetworkingMobileCertRequest = 5626;
+	ClientNetworkingMobileCertRequestResponse = 5627;
 
 	BaseMDS = 5800;
 	ClientMDSLoginRequest = 5801; removed
@@ -1601,6 +1609,8 @@ enum EMsg
 	ClientMMSSetRatelimitPolicyOnClient = 6625;
 	ClientMMSGetLobbyStatus = 6626;
 	ClientMMSGetLobbyStatusResponse = 6627;
+	MMSGetLobbyList = 6628;
+	MMSGetLobbyListResponse = 6629;
 
 	NonStdMsgBase = 6800;
 	NonStdMsgMemcached = 6801;
@@ -1617,6 +1627,7 @@ enum EMsg
 	NonStdMsgSteam2Emulator = 6812;
 	NonStdMsgRTMPServer = 6813;
 	NonStdMsgWebSocket = 6814;
+	NonStdMsgRedis = 6815;
 
 	UDSBase = 7000;
 	ClientUDSP2PSessionStarted = 7001;
@@ -1976,6 +1987,7 @@ enum EMsg
 	ClientVoiceCallPreAuthorizeResponse = 9801;
 	ClientServerTimestampRequest = 9802;
 	ClientServerTimestampResponse = 9803;
+
 	ClientLANP2PBase = 9900;
 	ClientLANP2PRequestChunk = 9900;
 	ClientLANP2PRequestChunkResponse = 9901;

@@ -11,17 +11,16 @@
 #undef GetMessage
 
 typedef bool(__cdecl *SymmetricEncryptChosenIVFn)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32);
+typedef const char* (__cdecl * PchMsgNameFromEMsgFn)(EMsg);
 
 struct MsgInfo_t
 {
 	EMsg eMsg;
-	const char* pchMsgName;
 	int nFlags;
 	EServerType k_EServerTarget;
 	uint32 nUnk1;
+	const char* pchMsgName;
 };
-
-typedef std::map<EMsg, MsgInfo_t*> MsgList;
 
 class CCrypto
 {
@@ -35,8 +34,6 @@ public:
 	CSimpleDetour* Encrypt_Detour;
 
 	static bool __cdecl SymmetricEncryptChosenIV( const uint8 *pubPlaintextData, uint32 cubPlaintextData, const uint8* pIV, uint32 cubIV, uint8 *pubEncryptedData, uint32 *pcubEncryptedData, const uint8 *pubKey, uint32 cubKey );
-
-	MsgList eMsgList;
 };
 
 extern CCrypto* g_pCrypto;

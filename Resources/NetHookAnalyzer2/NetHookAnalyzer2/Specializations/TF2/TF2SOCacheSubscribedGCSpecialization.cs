@@ -40,12 +40,10 @@ namespace NetHookAnalyzer2.Specializations
         {
             try
             {
-                using (var ms = new MemoryStream(sharedObject))
+                using var ms = new MemoryStream( sharedObject );
+                if ( TF2SOHelper.SOTypes.TryGetValue( typeId, out var t ) )
                 {
-                    if (TF2SOHelper.SOTypes.TryGetValue(typeId, out var t))
-                    {
-                        return RuntimeTypeModel.Default.Deserialize(ms, null, t);
-                    }
+                    return RuntimeTypeModel.Default.Deserialize( ms, null, t );
                 }
             }
             catch (ProtoException ex)

@@ -295,50 +295,41 @@ namespace ProtobufDumper
                 marker = true;
             }
 
-            if ( marker )
-            {
-                sb.AppendLine();
-                marker = false;
-            }
-
             if ( !string.IsNullOrEmpty( proto.package ) )
             {
+                AppendHeadingSpace( sb, ref marker );
                 sb.AppendLine( $"package {proto.package};" );
                 marker = true;
             }
 
-            if ( marker )
+            var options = DumpOptions( proto, proto.options );
+
+            foreach ( var option in options )
             {
-                sb.AppendLine();
-                marker = false;
+                AppendHeadingSpace( sb, ref marker );
+                sb.AppendLine( $"option {option.Key} = {option.Value};" );
             }
 
-            foreach ( var option in DumpOptions( proto, proto.options ) )
+            if ( options.Count > 0 )
             {
-                sb.AppendLine( $"option {option.Key} = {option.Value};" );
                 marker = true;
             }
 
-            if ( marker )
-            {
-                sb.AppendLine();
-            }
-
-            DumpExtensionDescriptor( proto, proto.extension, sb, string.Empty );
+            DumpExtensionDescriptors( proto, proto.extension, sb, 0, ref marker );
 
             foreach ( var field in proto.enum_type )
             {
-                DumpEnumDescriptor( proto, field, sb, 0 );
+                DumpEnumDescriptor( proto, field, sb, 0, ref marker );
             }
 
             foreach ( var message in proto.message_type )
             {
-                DumpDescriptor( proto, message, sb, 0 );
+                DumpDescriptor( proto, message, sb, 0, ref marker );
             }
 
             foreach ( var service in proto.service )
             {
-                DumpService( proto, service, sb );
+                DumpService( proto, service, sb, ref marker );
             }
 
             if ( !string.IsNullOrEmpty( proto.package ) )
@@ -352,27 +343,27 @@ namespace ProtobufDumper
             if ( options == null )
                 return optionsKv;
 
-            if ( options.deprecatedSpecified )
+            if ( options.ShouldSerializedeprecated() )
                 optionsKv.Add( "deprecated", options.deprecated ? "true" : "false" );
-            if ( options.optimize_forSpecified )
+            if ( options.ShouldSerializeoptimize_for() )
                 optionsKv.Add( "optimize_for", $"{options.optimize_for}" );
-            if ( options.cc_generic_servicesSpecified )
+            if ( options.ShouldSerializecc_generic_services() )
                 optionsKv.Add( "cc_generic_services", options.cc_generic_services ? "true" : "false" );
-            if ( options.go_packageSpecified )
+            if ( options.ShouldSerializego_package() )
                 optionsKv.Add( "go_package", $"\"{options.go_package}\"" );
-            if ( options.java_packageSpecified )
+            if ( options.ShouldSerializejava_package() )
                 optionsKv.Add( "java_package", $"\"{options.java_package}\"" );
-            if ( options.java_outer_classnameSpecified )
+            if ( options.ShouldSerializejava_outer_classname() )
                 optionsKv.Add( "java_outer_classname", $"\"{options.java_outer_classname}\"" );
-            if ( options.java_generate_equals_and_hashSpecified )
+            if ( options.ShouldSerializejava_generate_equals_and_hash() )
                 optionsKv.Add( "java_generate_equals_and_hash", options.java_generate_equals_and_hash ? "true" : "false" );
-            if ( options.java_generic_servicesSpecified )
+            if ( options.ShouldSerializejava_generic_services() )
                 optionsKv.Add( "java_generic_services", options.java_generic_services ? "true" : "false" );
-            if ( options.java_multiple_filesSpecified )
+            if ( options.ShouldSerializejava_multiple_files() )
                 optionsKv.Add( "java_multiple_files", options.java_multiple_files ? "true" : "false" );
-            if ( options.java_string_check_utf8Specified )
+            if ( options.ShouldSerializejava_string_check_utf8() )
                 optionsKv.Add( "java_string_check_utf8", options.java_string_check_utf8 ? "true" : "false" );
-            if ( options.py_generic_servicesSpecified )
+            if ( options.ShouldSerializepy_generic_services() )
                 optionsKv.Add( "py_generic_services", options.py_generic_services ? "true" : "false" );
 
             DumpOptionsMatching( source, ".google.protobuf.FileOptions", options, optionsKv );
@@ -387,17 +378,17 @@ namespace ProtobufDumper
             if ( options == null )
                 return optionsKv;
 
-            if ( options.ctypeSpecified )
+            if ( options.ShouldSerializectype() )
                 optionsKv.Add( "ctype", $"{options.ctype}" );
-            if ( options.deprecatedSpecified )
+            if ( options.ShouldSerializedeprecated() )
                 optionsKv.Add( "deprecated", options.deprecated ? "true" : "false" );
-            if ( options.lazySpecified )
+            if ( options.ShouldSerializelazy() )
                 optionsKv.Add( "lazy", options.lazy ? "true" : "false" );
-            if ( options.packedSpecified )
+            if ( options.ShouldSerializepacked() )
                 optionsKv.Add( "packed", options.packed ? "true" : "false" );
-            if ( options.weakSpecified )
+            if ( options.ShouldSerializeweak() )
                 optionsKv.Add( "weak", options.weak ? "true" : "false" );
-            if ( options.experimental_map_keySpecified )
+            if ( options.ShouldSerializeexperimental_map_key() )
                 optionsKv.Add( "experimental_map_key", $"\"{options.experimental_map_key}\"" );
 
             DumpOptionsMatching( source, ".google.protobuf.FieldOptions", options, optionsKv );
@@ -412,11 +403,11 @@ namespace ProtobufDumper
             if ( options == null )
                 return optionsKv;
 
-            if ( options.message_set_wire_formatSpecified )
+            if ( options.ShouldSerializemessage_set_wire_format() )
                 optionsKv.Add( "message_set_wire_format", options.message_set_wire_format ? "true" : "false" );
-            if ( options.no_standard_descriptor_accessorSpecified )
+            if ( options.ShouldSerializeno_standard_descriptor_accessor() )
                 optionsKv.Add( "no_standard_descriptor_accessor", options.no_standard_descriptor_accessor ? "true" : "false" );
-            if ( options.deprecatedSpecified )
+            if ( options.ShouldSerializedeprecated() )
                 optionsKv.Add( "deprecated", options.deprecated ? "true" : "false" );
 
             DumpOptionsMatching( source, ".google.protobuf.MessageOptions", options, optionsKv );
@@ -431,9 +422,9 @@ namespace ProtobufDumper
             if ( options == null )
                 return optionsKv;
 
-            if ( options.allow_aliasSpecified )
+            if ( options.ShouldSerializeallow_alias() )
                 optionsKv.Add( "allow_alias", options.allow_alias ? "true" : "false" );
-            if ( options.deprecatedSpecified )
+            if ( options.ShouldSerializedeprecated() )
                 optionsKv.Add( "deprecated", options.deprecated ? "true" : "false" );
 
             DumpOptionsMatching( source, ".google.protobuf.EnumOptions", options, optionsKv );
@@ -448,7 +439,7 @@ namespace ProtobufDumper
             if ( options == null )
                 return optionsKv;
 
-            if ( options.deprecatedSpecified )
+            if ( options.ShouldSerializedeprecated() )
                 optionsKv.Add( "deprecated", options.deprecated ? "true" : "false" );
 
             DumpOptionsMatching( source, ".google.protobuf.EnumValueOptions", options, optionsKv );
@@ -464,7 +455,7 @@ namespace ProtobufDumper
             if ( options == null )
                 return optionsKv;
 
-            if ( options.deprecatedSpecified )
+            if ( options.ShouldSerializedeprecated() )
                 optionsKv.Add( "deprecated", options.deprecated ? "true" : "false" );
 
             DumpOptionsMatching( source, ".google.protobuf.ServiceOptions", options, optionsKv );
@@ -479,7 +470,7 @@ namespace ProtobufDumper
             if ( options == null )
                 return optionsKv;
 
-            if ( options.deprecatedSpecified )
+            if ( options.ShouldSerializedeprecated() )
                 optionsKv.Add( "deprecated", options.deprecated ? "true" : "false" );
 
             DumpOptionsMatching( source, ".google.protobuf.MethodOptions", options, optionsKv );
@@ -528,11 +519,12 @@ namespace ProtobufDumper
 
         void DumpOptionsMatching( FileDescriptorProto source, string typeName, IExtensible options, Dictionary<string, string> optionsKv )
         {
-            var dep = protobufMap[ source.name ].AllPublicDependencies;
+            var dependencies = new HashSet<FileDescriptorProto>( protobufMap[ source.name ].AllPublicDependencies );
+            dependencies.Add( source );
 
             foreach ( var type in protobufTypeMap )
             {
-                if ( dep.Contains( type.Value.Proto ) && type.Value.Source is FieldDescriptorProto field )
+                if ( dependencies.Contains( type.Value.Proto ) && type.Value.Source is FieldDescriptorProto field )
                 {
                     if ( !string.IsNullOrEmpty( field.extendee ) && field.extendee == typeName )
                     {
@@ -542,13 +534,16 @@ namespace ProtobufDumper
             }
         }
 
-        void DumpExtensionDescriptor( FileDescriptorProto source, IEnumerable<FieldDescriptorProto> fields, StringBuilder sb, string levelspace )
+        void DumpExtensionDescriptors( FileDescriptorProto source, IEnumerable<FieldDescriptorProto> fields, StringBuilder sb, int level, ref bool marker )
         {
+            var levelspace = new string( '\t', level );
+
             foreach ( var mapping in fields.GroupBy( x => x.extendee ) )
             {
                 if ( string.IsNullOrEmpty( mapping.Key ) )
                     throw new Exception( "Empty extendee in extension, this should not be possible" );
 
+                AppendHeadingSpace( sb, ref marker );
                 sb.AppendLine( $"{levelspace}extend {mapping.Key} {{" );
 
                 foreach ( var field in mapping )
@@ -557,43 +552,67 @@ namespace ProtobufDumper
                 }
 
                 sb.AppendLine( $"{levelspace}}}" );
-                sb.AppendLine();
+                marker = true;
             }
         }
 
-        void DumpDescriptor( FileDescriptorProto source, DescriptorProto proto, StringBuilder sb, int level )
+        void DumpDescriptor( FileDescriptorProto source, DescriptorProto proto, StringBuilder sb, int level, ref bool marker )
         {
             PushDescriptorName( proto );
 
             var levelspace = new string( '\t', level );
+            var innerMarker = false;
 
+            AppendHeadingSpace( sb, ref marker );
             sb.AppendLine( $"{levelspace}message {proto.name} {{" );
 
-            foreach ( var option in DumpOptions( source, proto.options ) )
+            var options = DumpOptions( source, proto.options );
+
+            foreach ( var option in options )
             {
+                AppendHeadingSpace( sb, ref innerMarker );
                 sb.AppendLine( $"{levelspace}\toption {option.Key} = {option.Value};" );
+            }
+
+            if ( options.Count > 0 )
+            {
+                innerMarker = true;
+            }
+
+            if ( proto.extension.Count > 0 )
+            {
+                DumpExtensionDescriptors( source, proto.extension, sb, level + 1, ref innerMarker );
             }
 
             foreach ( var field in proto.nested_type )
             {
-                DumpDescriptor( source, field, sb, level + 1 );
+                DumpDescriptor( source, field, sb, level + 1, ref innerMarker );
             }
 
             foreach ( var field in proto.enum_type )
             {
-                DumpEnumDescriptor( source, field, sb, level + 1 );
+                DumpEnumDescriptor( source, field, sb, level + 1, ref innerMarker );
             }
 
-            foreach ( var field in proto.field.Where( x => !x.oneof_indexSpecified ) )
+            var rootFields = proto.field.Where( x => !x.ShouldSerializeoneof_index() ).ToList();
+
+            foreach ( var field in rootFields )
             {
+                AppendHeadingSpace( sb, ref innerMarker );
                 sb.AppendLine( $"{levelspace}\t{BuildDescriptorDeclaration( source, field )}" );
+            }
+
+            if ( rootFields.Count > 0 )
+            {
+                innerMarker = true;
             }
 
             for ( var i = 0; i < proto.oneof_decl.Count; i++ )
             {
                 var oneof = proto.oneof_decl[ i ];
-                var fields = proto.field.Where( x => x.oneof_indexSpecified && x.oneof_index == i ).ToArray();
+                var fields = proto.field.Where( x => x.ShouldSerializeoneof_index() && x.oneof_index == i ).ToArray();
 
+                AppendHeadingSpace( sb, ref innerMarker );
                 sb.AppendLine( $"{levelspace}\toneof {oneof.name} {{" );
 
                 foreach ( var field in fields )
@@ -603,10 +622,8 @@ namespace ProtobufDumper
                 }
 
                 sb.AppendLine( $"{levelspace}\t}}" );
+                innerMarker = true;
             }
-
-            if ( proto.extension_range.Count > 0 )
-                sb.AppendLine();
 
             foreach ( var range in proto.extension_range )
             {
@@ -621,19 +638,21 @@ namespace ProtobufDumper
                     max = "max";
                 }
 
+                AppendHeadingSpace( sb, ref innerMarker );
                 sb.AppendLine( $"{levelspace}\textensions {range.start} to {max};" );
             }
 
             sb.AppendLine( $"{levelspace}}}" );
-            sb.AppendLine();
+            marker = true;
 
             PopDescriptorName();
         }
 
-        void DumpEnumDescriptor( FileDescriptorProto source, EnumDescriptorProto field, StringBuilder sb, int level )
+        void DumpEnumDescriptor( FileDescriptorProto source, EnumDescriptorProto field, StringBuilder sb, int level, ref bool marker )
         {
             var levelspace = new string( '\t', level );
 
+            AppendHeadingSpace( sb, ref marker );
             sb.AppendLine( $"{levelspace}enum {field.name} {{" );
 
             foreach ( var option in DumpOptions( source, field.options ) )
@@ -655,16 +674,26 @@ namespace ProtobufDumper
             }
 
             sb.AppendLine( $"{levelspace}}}" );
-            sb.AppendLine();
+            marker = true;
         }
 
-        void DumpService( FileDescriptorProto source, ServiceDescriptorProto service, StringBuilder sb )
+        void DumpService( FileDescriptorProto source, ServiceDescriptorProto service, StringBuilder sb, ref bool marker )
         {
+            var innerMarker = false;
+
+            AppendHeadingSpace( sb, ref marker );
             sb.AppendLine( $"service {service.name} {{" );
 
-            foreach ( var option in DumpOptions( source, service.options ) )
+            var rootOptions = DumpOptions( source, service.options );
+
+            foreach ( var option in rootOptions )
             {
                 sb.AppendLine( $"\toption {option.Key} = {option.Value};" );
+            }
+
+            if ( rootOptions.Count > 0 )
+            {
+                innerMarker = true;
             }
 
             foreach ( var method in service.method )
@@ -672,6 +701,8 @@ namespace ProtobufDumper
                 var declaration = $"\trpc {method.name} ({method.input_type}) returns ({method.output_type})";
 
                 var options = DumpOptions( source, method.options );
+
+                AppendHeadingSpace( sb, ref innerMarker );
 
                 if ( options.Count == 0 )
                 {
@@ -687,11 +718,12 @@ namespace ProtobufDumper
                     }
 
                     sb.AppendLine( "\t}" );
+                    innerMarker = true;
                 }
             }
 
             sb.AppendLine( "}" );
-            sb.AppendLine();
+            marker = true;
         }
 
         string BuildDescriptorDeclaration( FileDescriptorProto source, FieldDescriptorProto field, bool emitFieldLabel = true )
@@ -904,6 +936,15 @@ namespace ProtobufDumper
             }
 
             return GetType( field.type );
+        }
+
+        void AppendHeadingSpace( StringBuilder sb, ref bool marker )
+        {
+            if ( marker )
+            {
+                sb.AppendLine();
+                marker = false;
+            }
         }
 
         void PushDescriptorName( FileDescriptorProto file )

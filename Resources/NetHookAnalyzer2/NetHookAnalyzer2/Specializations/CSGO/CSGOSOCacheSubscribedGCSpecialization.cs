@@ -39,13 +39,10 @@ namespace NetHookAnalyzer2.Specializations
         {
             try
             {
-                using (var ms = new MemoryStream(sharedObject))
+                using var ms = new MemoryStream( sharedObject );
+                if ( CSGOSOHelper.SOTypes.TryGetValue( typeId, out var t ) )
                 {
-                    Type t;
-                    if (CSGOSOHelper.SOTypes.TryGetValue(typeId, out t))
-                    {
-                        return RuntimeTypeModel.Default.Deserialize(ms, null, t);
-                    }
+                    return RuntimeTypeModel.Default.Deserialize( ms, null, t );
                 }
             }
             catch (ProtoException ex)

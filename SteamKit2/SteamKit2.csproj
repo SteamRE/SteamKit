@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyOriginatorKeyFile>..\..\SteamKit.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <Description>.NET library that aims to interoperate with the Steam network.</Description>
+    <PackageReleaseNotes>Release notes are available at https://github.com/SteamRE/SteamKit/releases/tag/2.4.0-Alpha.1</PackageReleaseNotes>
+    <PackageIcon>steamkit_logo_128.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/SteamRE/SteamKit</PackageProjectUrl>
+    <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
+    <PackageTags>steamkit;sk2;steam;valve;dota;dota2;csgo</PackageTags>
+    <RepositoryUrl>https://github.com/SteamRE/SteamKit</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <ProjectGuid>{4B2B0365-DE37-4B65-B614-3E4E7C05147D}</ProjectGuid>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\SteamKit2.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(DebugType)' == 'portable'">
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="3rd party.txt" />
+    <None Remove="changes.txt" />
+    <None Remove="license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="3rd party.txt">
+        <Pack>true</Pack>
+        <PackagePath />
+    </Content>
+    <Content Include="changes.txt">
+        <Pack>true</Pack>
+        <PackagePath>readme.txt</PackagePath>
+    </Content>
+    <Content Include="license.txt">
+        <Pack>true</Pack>
+        <PackagePath />
+    </Content>
+    <None Include="..\..\Resources\Misc\steamkit_logo_128.png" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Win32.Registry" Version="4.7.0" />
+    <PackageReference Include="protobuf-net" Version="3.0.24" />
+  </ItemGroup>
+
+</Project>

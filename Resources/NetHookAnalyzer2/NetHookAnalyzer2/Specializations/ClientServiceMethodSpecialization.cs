@@ -9,7 +9,7 @@ namespace NetHookAnalyzer2.Specializations
 	{
 		public IEnumerable<KeyValuePair<string, object>> ReadExtraObjects(object messageObject)
 		{
-			var serviceMethodBody = messageObject as CMsgClientServiceMethod;
+			var serviceMethodBody = messageObject as CMsgClientServiceMethodLegacy;
 			if (serviceMethodBody == null)
 			{
 				yield break;

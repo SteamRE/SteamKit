@@ -60,16 +60,12 @@ namespace SteamLanguageParser
 
         public string EmitType(Symbol sym)
         {
-            if (sym is WeakSymbol)
+            if (sym is WeakSymbol wsym)
             {
-                WeakSymbol wsym = sym as WeakSymbol;
-
                 return CodeGenerator.GetUnsignedType(wsym.Identifier);
             }
-            else if (sym is StrongSymbol)
+            else if (sym is StrongSymbol ssym)
             {
-                StrongSymbol ssym = sym as StrongSymbol;
-
                 if (ssym.Prop == null)
                 {
                     return ssym.Class.Name;
@@ -324,7 +320,6 @@ namespace SteamLanguageParser
 
             foreach (PropNode prop in cnode.childNodes)
             {
-                string typestr = EmitType(prop.Type);
                 int size = CodeGenerator.GetTypeSize(prop);
 
                 if (size == 0)
@@ -377,8 +372,8 @@ namespace SteamLanguageParser
                 {
                     EnumNode enode = ((StrongSymbol)prop.Type).Class as EnumNode;
 
-                    if (enode.Type is WeakSymbol)
-                        typecast = "(" + ((WeakSymbol)enode.Type).Identifier + ")";
+                    if (enode.Type is WeakSymbol weakSymbol)
+                        typecast = "(" + weakSymbol.Identifier + ")";
                     else
                         typecast = "(int)";
 
@@ -394,7 +389,6 @@ namespace SteamLanguageParser
                 {
                     if (prop.Flags == "steamidmarshal")
                     {
-
                     }
                     else if (prop.Flags == "proto")
                     {

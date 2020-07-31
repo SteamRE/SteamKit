@@ -159,12 +159,6 @@ namespace SteamLanguageParser
                 }
                 else
                 {
-                    int temp;
-                    if (!String.IsNullOrEmpty(prop.FlagsOpt) && Int32.TryParse(prop.FlagsOpt, out temp))
-                    {
-                        typestr += "[]";
-                    }
-
                     sb.AppendLine(padding + "@synthesize " + propName + ";");
                 }
             }
@@ -207,9 +201,9 @@ namespace SteamLanguageParser
                     {
                         ctor = "nil";
                     }
-                    else if (prop.Type as StrongSymbol != null && ((StrongSymbol)prop.Type).Class.Name.StartsWith("E"))
+                    else if (prop.Type is StrongSymbol ssym && ssym.Class.Name.StartsWith("E"))
                     {
-                        ctor = "(" + ((StrongSymbol)prop.Type).Class.Name + ") 0";
+                        ctor = "(" + ssym.Class.Name + ") 0";
                     }
                     else
                     {
@@ -274,7 +268,6 @@ namespace SteamLanguageParser
 
             foreach (PropNode prop in cnode.childNodes)
             {
-                string typestr = EmitType(prop.Type);
                 int size = CodeGenerator.GetTypeSize(prop);
 
                 if (size == 0)
@@ -301,12 +294,12 @@ namespace SteamLanguageParser
                 string typecast = "";
                 string propName = GetUpperName(prop.Name);
 
-                if (prop.Type is StrongSymbol && ((StrongSymbol)prop.Type).Class is EnumNode)
+                if (prop.Type is StrongSymbol ssym && ssym.Class is EnumNode)
                 {
-                    EnumNode enode = ((StrongSymbol)prop.Type).Class as EnumNode;
+                    EnumNode enode = ssym.Class as EnumNode;
 
-                    if (enode.Type is WeakSymbol)
-                        typecast = "(" + ((WeakSymbol)enode.Type).Identifier + ")";
+                    if (enode.Type is WeakSymbol wsym)
+                        typecast = "(" + wsym.Identifier + ")";
                     else
                         typecast = "(int)";
                 }

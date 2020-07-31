@@ -7,8 +7,6 @@ enum EUniverse
 	Beta = 2;
 	Internal = 3;
 	Dev = 4;
-
-	Max = 5;
 };
 
 enum EChatEntryType
@@ -42,8 +40,6 @@ enum EPersonaState
 	LookingToTrade = 5;
 	LookingToPlay = 6;
 	Invisible = 7;
-
-	Max = 8;
 };
 
 enum EAccountType
@@ -60,8 +56,6 @@ enum EAccountType
 	Chat = 8;
 	ConsoleUser = 9;
 	AnonUser = 10;
-
-	Max = 11;
 };
 
 enum EFriendRelationship
@@ -75,8 +69,6 @@ enum EFriendRelationship
 	Ignored = 5;
 	IgnoredFriend = 6;
 	SuggestedFriend = 7; removed "was used by the original implementation of the facebook linking feature; but now unused."
-
-	Max = 8;
 };
 
 enum EAccountFlags flags
@@ -187,6 +179,7 @@ enum EPersonaStateFlag flags
 	HasRichPresence = 1;
 	InJoinableGame = 2;
 	Golden = 4;
+	RemotePlayTogether = 8;
 
 	OnlineUsingWeb = 256; removed "renamed to ClientTypeWeb"
 	ClientTypeWeb = 256;
@@ -351,6 +344,7 @@ enum EPaymentMethod
 	MasterComp = 130;
 	StorePromotion = 131; removed "renamed to Promotional"
 	Promotional = 131;
+	MasterSubscription = 134;
 	OEMTicket = 256;
 	Split = 512;
 	Complimentary = 1024;
@@ -426,6 +420,22 @@ enum EPurchaseResultDetail
 	PurchaseCannotBeReplayed = 65;
 	DelayedCompletion = 66;
 	BundleTypeCannotBeGifted = 67;
+	BlockedByUSGov = 68;
+	ItemsReservedForCommercialUse = 69;
+	GiftAlreadyOwned = 70;
+	GiftInvalidForRecipientRegion = 71;
+	GiftPricingImbalance = 72;
+	GiftRecipientNotSpecified = 73;
+	ItemsNotAllowedForCommercialUse = 74;
+	BusinessStoreCountryCodeMismatch = 75;
+	UserAssociatedWithManyCafes = 76;
+	UserNotAssociatedWithCafe = 77;
+	AddressInvalid = 78;
+	CreditCardNumberInvalid = 79;
+	CannotShipToMilitaryPostOffice = 80;
+	BillingNameInvalidResemblesCreditCard = 81;
+	PaymentMethodTemporarilyUnavailable = 82;
+	PaymentMethodNotSupportedForProduct = 83;
 };
 
 enum EIntroducerRouting
@@ -594,8 +604,8 @@ enum EAppInfoSection
 	Store = 16;
 	Localization = 17;
 	Broadcastgamedata = 18;
-
-	Max = 19;
+	Computed = 19;
+	Albummetadata = 20;
 };
 
 enum EContentDownloadSourceType
@@ -610,8 +620,7 @@ enum EContentDownloadSourceType
 	SLS = 6;
 	SteamCache = 7;
 	OpenCache = 8;
-
-	Max = 9;
+	LANCache = 9;
 };
 
 enum EPlatformType
@@ -625,8 +634,6 @@ enum EPlatformType
 	OSX = 4;
 	PS3 = 5;
 	Linux32 = 6;
-
-	Max = 7;
 };
 
 enum EOSType
@@ -692,6 +699,7 @@ enum EOSType
 	MacOS1012 = -85;
 	Macos1013 = -84;
 	Macos1014 = -83;
+	Macos1015 = -82;
 	MacOSMax = -1;
 
 	LinuxUnknown = -203;
@@ -739,8 +747,6 @@ enum EOSType
 	Win2016 = 17;
 
 	WinMAX = 18;
-
-	Max = 26;
 };
 
 enum EServerType
@@ -874,8 +880,19 @@ enum EServerType
 	TimeMachine = 111;
 	VACDBMaster = 112;
 	ContentServerConfig = 113;
-
-	Max = 114;
+	Minigame = 114;
+	MLTrain = 115;
+	VACTest = 116;
+	TaxService = 117;
+	MLInference = 118;
+	UGSAggregate = 119;
+	TURN = 120;
+	RemoteClient = 121;
+	BroadcastOrigin = 122;
+	BroadcastChannel = 123;
+	SteamAR = 124;
+	China = 125;
+	CrashDump = 126;
 };
  
 enum EBillingType
@@ -982,8 +999,6 @@ enum ECurrencyCode
 	QAR = 39;
 	CRC = 40;
 	UYU = 41;
-
-	Max = 42;
 };
 
 enum EDepotFileFlag flags
@@ -1038,8 +1053,6 @@ enum EWorkshopFileType
 	SteamworksAccessInvite = 13;
 	SteamVideo = 14;
 	GameManagedItem = 15;
-
-	Max = 16;
 };
 
 enum EWorkshopFileAction
@@ -1118,8 +1131,6 @@ enum ESystemIMType
 	GiftRevoked = 7;
 	SupportMessage = 8;
 	SupportMessageClearAlert = 9;
-
-	Max = 10;
 };
 
 enum EChatFlags flags
@@ -1138,7 +1149,7 @@ enum ERemoteStoragePlatform flags
 	OSX = 2;
 	PS3 = 4;
 	Linux = 8;
-	Reserved2 = 16;
+	Switch = 16;
 	Android = 32;
 	IPhoneOS = 64;
 
@@ -1196,8 +1207,6 @@ enum EClientStat
 	P2PGameConnections = 2;
 	P2PVoiceConnections = 3;
 	BytesDownloaded = 4;
-
-	Max = 5;
 };
 
 enum EClientStatAggregateMethod
@@ -1285,6 +1294,7 @@ enum EPublishedFileInappropriateResult
 {
 	NotScanned = 0;
 	VeryUnlikely = 1;
+	Unlikely = 30;
 	Possible = 50;
 	Likely = 75;
 	VeryLikely = 100;
@@ -1509,3 +1519,37 @@ public enum ELobbyDistanceFilter
     Far = 2;
     Worldwide = 3;
 };
+
+public enum ESteamIPv6ConnectivityProtocol
+{
+	Invalid = 0;
+	Http = 1;
+	Udp = 2;
+};
+
+public enum ESteamIPv6ConnectivityState
+{
+	Unknown = 0;
+	Good = 1;
+	Bad = 2;
+};
+
+public enum ESteamRealm
+{
+	Unknown = 0;
+	SteamGlobal = 1;
+	SteamChina = 2;
+};
+
+enum ELauncherType
+{
+	Default = 0;
+	PerfectWorld = 1;
+	Nexon = 2;
+	CmdLine = 3;
+	CSGO = 4;
+	ClientUI = 5;
+	Headless = 6;
+	SteamChina = 7;
+	SingleApp = 8;
+}

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using ProtoBuf;
 using ProtoBuf.Meta;
@@ -33,13 +32,10 @@ namespace NetHookAnalyzer2.Specializations
         {
             try
             {
-                using (var ms = new MemoryStream(sharedObject.object_data))
+                using var ms = new MemoryStream( sharedObject.object_data );
+                if ( TF2SOHelper.SOTypes.TryGetValue( sharedObject.type_id, out var t ) )
                 {
-                    Type t;
-                    if (TF2SOHelper.SOTypes.TryGetValue(sharedObject.type_id, out t))
-                    {
-                            return RuntimeTypeModel.Default.Deserialize(ms, null, t);
-                    }
+                    return RuntimeTypeModel.Default.Deserialize( ms, null, t );
                 }
             }
             catch (ProtoException ex)

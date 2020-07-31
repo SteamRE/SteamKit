@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Windows.Forms;
 using NetHookAnalyzer2.Specializations;
 using WinForms = System.Windows.Forms;
@@ -23,8 +22,13 @@ namespace NetHookAnalyzer2
 			specializations = LoadMessageObjectSpecializations();
 		}
 
+#pragma warning disable IDE0069 // Disposable fields should be disposed
+
 		IDisposable itemsListViewFirstColumnHiderDisposable;
 		FileSystemWatcher folderWatcher;
+
+#pragma warning restore IDE0069 // Disposable fields should be disposed
+
 		readonly ISpecialization[] specializations;
 
 		static ISpecialization[] LoadMessageObjectSpecializations()
@@ -49,9 +53,9 @@ namespace NetHookAnalyzer2
 						new ArtifactCacheSubscribedGCSpecialization(),
 						new ArtifactSOMultipleObjectsGCSpecialization(),
 						new ArtifactSOSingleObjectGCSpecialization(),
-                        new UnderlordsCacheSubscribedGCSpecialization(),
-                        new UnderlordsSOMultipleObjectsGCSpecialization(),
-                        new UnderlordsSOSingleObjectGCSpecialization(),
+						new UnderlordsCacheSubscribedGCSpecialization(),
+						new UnderlordsSOMultipleObjectsGCSpecialization(),
+						new UnderlordsSOSingleObjectGCSpecialization(),
 					}
 				}
 			};
@@ -109,25 +113,31 @@ namespace NetHookAnalyzer2
 			RepopulateTreeView();
 		}
 
-		void RepopulateListBox()
+		Func<NetHookItem, bool> GetFilterPredicate()
 		{
-			var searchTerm = searchTextBox.Text;
-			Expression<Func<NetHookItem, bool>> predicate;
-			if (searchTerm == SearchTextBoxPlaceholderText || string.IsNullOrWhiteSpace(searchTerm))
-			{
-				predicate = nhi => true;
-			}
-			else
-			{
-				predicate = nhi => (nhi.Name.IndexOf(searchTerm, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
-					(nhi.InnerMessageName != null && nhi.InnerMessageName.IndexOf(searchTerm, StringComparison.InvariantCultureIgnoreCase) >= 0);
-			}
 
 			var outAllowed = inOutRadioButton.Checked || outRadioButton.Checked;
 			var inAllowed = inOutRadioButton.Checked || inRadioButton.Checked;
-			Expression<Func<NetHookItem, bool>> directionPredicate = nhi => (nhi.Direction == NetHookItem.PacketDirection.Out && outAllowed) || (nhi.Direction == NetHookItem.PacketDirection.In && inAllowed);
+			bool directionPredicate( NetHookItem nhi ) => ( nhi.Direction == NetHookItem.PacketDirection.Out && outAllowed ) || ( nhi.Direction == NetHookItem.PacketDirection.In && inAllowed );
 
-			var listViewItems = Dump.Items.Where(directionPredicate).Where(predicate).Select(x => x.AsListViewItem());
+			var searchTerm = searchTextBox.Text;
+			Predicate<NetHookItem> searchPredicate;
+			if ( searchTerm == SearchTextBoxPlaceholderText || string.IsNullOrWhiteSpace( searchTerm ) )
+			{
+				searchPredicate = nhi => true;
+			}
+			else
+			{
+				searchPredicate = nhi => ( nhi.EMsg.ToString().IndexOf( searchTerm, StringComparison.InvariantCultureIgnoreCase ) >= 0 ) ||
+					( nhi.InnerMessageName != null && nhi.InnerMessageName.IndexOf( searchTerm, StringComparison.InvariantCultureIgnoreCase ) >= 0 );
+			}
+
+			return nhi => directionPredicate( nhi ) && searchPredicate( nhi );
+		}
+
+		void RepopulateListBox()
+		{
+			var listViewItems = Dump.Items.Where(GetFilterPredicate()).Select(x => x.AsListViewItem());
 
 			itemsListView.Items.Clear();
 			itemsListView.Items.AddRange(listViewItems.ToArray());
@@ -147,21 +157,27 @@ namespace NetHookAnalyzer2
 			Application.Exit();
 		}
 
-		void OnOpenToolStripMenuItemClick(object sender, EventArgs e)
+		void OnOpenToolStripMenuItemClick( object sender, EventArgs e )
 		{
-			var dialog = new FolderBrowserDialog { ShowNewFolderButton = false };
-			var latestNethookDir = GetLatestNethookDumpDirectory();
-			if (latestNethookDir != null)
-			{
-				dialog.SelectedPath = GetLatestNethookDumpDirectory();
-			}
+			string dumpDirectory;
 
-			if (dialog.ShowDialog() != WinForms.DialogResult.OK)
+			using ( var dialog = new FolderBrowserDialog() )
 			{
-				return;
-			}
+				dialog.ShowNewFolderButton = false;
 
-			var dumpDirectory = dialog.SelectedPath;
+				var latestNethookDir = GetLatestNethookDumpDirectory();
+				if ( latestNethookDir != null )
+				{
+					dialog.SelectedPath = GetLatestNethookDumpDirectory();
+				}
+
+				if ( dialog.ShowDialog() != WinForms.DialogResult.OK )
+				{
+					return;
+				}
+
+				dumpDirectory = dialog.SelectedPath;
+			}
 
 			var dump = new NetHookDump();
 			dump.LoadFromDirectory(dumpDirectory);
@@ -295,13 +311,21 @@ namespace NetHookAnalyzer2
 				return;
 			}
 
-			var listViewItem = item.AsListViewItem();
-			itemsListView.Items.Add(listViewItem);
-			
-			if (automaticallySelectNewItemsToolStripMenuItem.Checked)
+			itemsListView.Invoke( ( MethodInvoker ) delegate ()
 			{
-				SelectLastItem();
-			}
+				if (!GetFilterPredicate().Invoke(item))
+				{
+					return;
+				}
+
+				var listViewItem = item.AsListViewItem();
+				itemsListView.Items.Add( listViewItem );
+
+				if ( automaticallySelectNewItemsToolStripMenuItem.Checked )
+				{
+					SelectLastItem();
+				}
+			} );
 		}
 
 		void OnFolderWatcherCreated(object sender, FileSystemEventArgs e)
@@ -385,13 +409,12 @@ namespace NetHookAnalyzer2
 
 		void SelectLastItem()
 		{
-
 			if (itemsListView.Items.Count == 0)
 			{
 				return;
 			}
 
-			var lastItem = itemsListView.Items[itemsListView.Items.Count - 1];
+			var lastItem = itemsListView.Items[ ^1 ];
 			if (!lastItem.Selected)
 			{
 				lastItem.Selected = true;

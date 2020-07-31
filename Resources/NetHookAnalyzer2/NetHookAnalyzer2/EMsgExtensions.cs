@@ -44,7 +44,6 @@ namespace NetHookAnalyzer2
 					yield return typeof(Dota.EDOTAGCMsg);
 					yield return typeof(Dota.EGCBaseMsg);
 					yield return typeof(Dota.ESOMsg);
-					yield return typeof(Dota.EGCSystemMsg);
 					yield return typeof(Dota.EGCItemMsg);
 					yield return typeof(Dota.EGCBaseClientMsg);
 					break;

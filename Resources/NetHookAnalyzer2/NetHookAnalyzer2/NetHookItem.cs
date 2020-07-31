@@ -16,11 +16,10 @@ namespace NetHookAnalyzer2
 		}
 
 		static Regex NameRegex = new Regex(
-			@"(?<num>\d+)_(?<direction>in|out)_(?<emsg>\d+)_k_EMsg(?<name>[\w_<>]+)",
+			@"(?<num>\d+)_(?<direction>in|out)_(?<emsg>\d+)",
 			RegexOptions.Compiled | RegexOptions.IgnoreCase
 		);
 
-		public string Name { get; private set; }
 		public int Sequence { get; private set; }
 		public DateTime Timestamp { get; private set; }
 		public PacketDirection Direction { get; private set; }
@@ -48,8 +47,7 @@ namespace NetHookAnalyzer2
 				return false;
 			}
 
-			int sequence;
-			if (!int.TryParse(m.Groups["num"].Value, out sequence))
+			if (!int.TryParse(m.Groups["num"].Value, out var sequence))
 			{
 				return false;
 			}
@@ -57,14 +55,13 @@ namespace NetHookAnalyzer2
 			Timestamp = fileInfo.LastWriteTime;
 
 			var direction = m.Groups[ "direction" ].Value;
-			PacketDirection packetDirection;
-			if (!Enum.TryParse<PacketDirection>(direction, ignoreCase: true, result: out packetDirection))
+
+			if (!Enum.TryParse<PacketDirection>(direction, ignoreCase: true, result: out var packetDirection))
 			{
 				return false;
 			}
 
-			uint emsg;
-			if (!uint.TryParse(m.Groups["emsg"].Value, out emsg))
+			if (!uint.TryParse(m.Groups["emsg"].Value, out var emsg))
 			{
 				return false;
 			}
@@ -74,7 +71,6 @@ namespace NetHookAnalyzer2
 			Sequence = sequence;
 			Direction = packetDirection;
 			EMsg = (EMsg)emsg;
-			Name = m.Groups["name"].Value;
 
 			return true;
 		}
@@ -127,13 +123,13 @@ namespace NetHookAnalyzer2
 
 				case SteamKit2.EMsg.ClientServiceMethodLegacy:
 				{
-					var proto = ReadAsProtobufMsg<CMsgClientServiceMethod>();
+					var proto = ReadAsProtobufMsg<CMsgClientServiceMethodLegacy>();
 					return proto.Body.method_name;
 				}
 
 				case SteamKit2.EMsg.ClientServiceMethodLegacyResponse:
 				{
-					var proto = ReadAsProtobufMsg<CMsgClientServiceMethodResponse>();
+					var proto = ReadAsProtobufMsg<CMsgClientServiceMethodLegacyResponse>();
 					return proto.Body.method_name;
 				}
 

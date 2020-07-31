@@ -22,15 +22,6 @@ namespace NetHookAnalyzer2.Specializations
 				yield break;
 			}
 
-			foreach(var singleObject in updateMultiple.objects_added)
-			{
-				var extraNode = ReadExtraObject(singleObject);
-				if (extraNode != null)
-				{
-					yield return new KeyValuePair<string, object>(string.Format("New SO ({0})", extraNode.GetType().Name), extraNode);
-				}
-			}
-
 			foreach (var singleObject in updateMultiple.objects_modified)
 			{
 				var extraNode = ReadExtraObject(singleObject);
@@ -39,30 +30,18 @@ namespace NetHookAnalyzer2.Specializations
 					yield return new KeyValuePair<string, object>(string.Format("Modified SO ({0})", extraNode.GetType().Name), extraNode);
 				}
 			}
-
-			foreach (var singleObject in updateMultiple.objects_removed)
-			{
-				var extraNode = ReadExtraObject(singleObject);
-				if (extraNode != null)
-				{
-					yield return new KeyValuePair<string, object>(string.Format("Removed SO ({0})", extraNode.GetType().Name), extraNode);
-				}
-			}
 		}
 
 		object ReadExtraObject(CMsgSOMultipleObjects.SingleObject sharedObject)
 		{
 			try
 			{
-				using (var ms = new MemoryStream(sharedObject.object_data))
-				{
-					Type t;
-					if (CSGOSOHelper.SOTypes.TryGetValue(sharedObject.type_id, out t))
-					{
-						return RuntimeTypeModel.Default.Deserialize(ms, null, t);
-					}
-				}
-			}
+                using var ms = new MemoryStream( sharedObject.object_data );
+                if ( CSGOSOHelper.SOTypes.TryGetValue( sharedObject.type_id, out var t ) )
+                {
+                    return RuntimeTypeModel.Default.Deserialize( ms, null, t );
+                }
+            }
 			catch (ProtoException ex)
 			{
 				return "Error parsing SO data: " + ex.Message;
