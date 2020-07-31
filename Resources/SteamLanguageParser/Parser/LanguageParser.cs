@@ -42,9 +42,9 @@ namespace SteamLanguageParser
         public int EndColumnNumber { get; }
     }
     
-    class LanguageParser
+    static class LanguageParser
     {
-        public static string pattern =
+        public const string pattern =
         @"(?<whitespace>\s+)|" +
         @"(?<terminator>[;])|" +
 
@@ -58,7 +58,7 @@ namespace SteamLanguageParser
         @"(?<operator>[{}<>\]=|])|" +
         @"(?<invalid>[^\s]+)";
 
-        private static Regex regexPattern = new Regex( pattern, RegexOptions.Multiline | RegexOptions.Compiled );
+        private static readonly Regex regexPattern = new Regex( pattern, RegexOptions.Multiline | RegexOptions.Compiled );
 
         public static Queue<Token> TokenizeString( string buffer, string fileName = "" )
         {
@@ -115,7 +115,7 @@ namespace SteamLanguageParser
 
             if ( lineNumber == textLines.Length )
             {
-                throw new ArgumentOutOfRangeException( "index must be less than the full text length when re-joined." );
+                throw new ArgumentOutOfRangeException( nameof(index), "index must be less than the full text length when re-joined." );
             }
 
             lineNumber++; // Human line numbering starts from 1, even though it's the 0th line in the file programatically.

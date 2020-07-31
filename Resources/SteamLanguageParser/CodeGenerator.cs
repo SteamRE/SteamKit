@@ -63,7 +63,7 @@ namespace SteamLanguageParser
             {
                 if (weakTypeMap[key].Size == size)
                 {
-                    if (unsigned && weakTypeMap[key].Signed == false)
+                    if (unsigned && !weakTypeMap[key].Signed)
                         return key;
                     else if (weakTypeMap[key].Signed)
                         return key;
@@ -110,8 +110,8 @@ namespace SteamLanguageParser
                 {
                     EnumNode enode = ssym.Class as EnumNode;
 
-                    if (enode.Type is WeakSymbol)
-                        return weakTypeMap[((WeakSymbol)enode.Type).Identifier].Size;
+                    if (enode.Type is WeakSymbol weakSymbol)
+                        return weakTypeMap[weakSymbol.Identifier].Size;
                     else
                         return weakTypeMap[defaultType].Size;
                 }

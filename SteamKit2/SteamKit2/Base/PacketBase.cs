@@ -105,7 +105,7 @@ namespace SteamKit2
         public ulong SourceJobID { get; }
 
 
-        byte[] payload;
+        readonly byte[] payload;
 
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace SteamKit2
         /// </value>
         public ulong SourceJobID { get; }
 
-        byte[] payload;
+        readonly byte[] payload;
 
 
         /// <summary>
@@ -259,7 +259,7 @@ namespace SteamKit2
         /// </value>
         public ulong SourceJobID { get; }
 
-        byte[] payload;
+        readonly byte[] payload;
 
 
         /// <summary>

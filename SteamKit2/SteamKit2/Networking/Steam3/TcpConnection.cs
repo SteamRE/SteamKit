@@ -16,6 +16,7 @@ namespace SteamKit2
     {
         const uint MAGIC = 0x31305456; // "VT01"
 
+<<<<<<< HEAD
         private ILogContext log;
         private Socket? socket;
         private Thread? netThread;
@@ -25,6 +26,16 @@ namespace SteamKit2
 
         private CancellationTokenSource? cancellationToken;
         private object netLock;
+=======
+        private Socket socket;
+        private Thread netThread;
+        private NetworkStream netStream;
+        private BinaryReader netReader;
+        private BinaryWriter netWriter;
+
+        private CancellationTokenSource cancellationToken;
+        private readonly object netLock;
+>>>>>>> upstream/some-sonarqujbe
 
         public TcpConnection(ILogContext log)
         {

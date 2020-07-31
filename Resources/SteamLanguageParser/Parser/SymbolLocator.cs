@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace SteamLanguageParser
@@ -37,16 +34,16 @@ namespace SteamLanguageParser
         }
     }
 
-    public class SymbolLocator
+    public static class SymbolLocator
     {
-        public static string identifierPattern =
+        public const string identifierPattern =
             @"(?<identifier>[a-zA-Z0-9_:]*)";
 
-        public static string fullIdentPattern =
+        public const string fullIdentPattern =
             @"(?<class>[a-zA-Z0-9_]*?)::(?<name>[a-zA-Z0-9_]*)";
 
-        private static Regex identifierRegex = new Regex(identifierPattern, RegexOptions.Compiled);
-        private static Regex fullIdentRegex = new Regex(fullIdentPattern, RegexOptions.Compiled);
+        private static readonly Regex identifierRegex = new Regex(identifierPattern, RegexOptions.Compiled);
+        private static readonly Regex fullIdentRegex = new Regex(fullIdentPattern, RegexOptions.Compiled);
 
         // single level
         private static Node FindNode(Node tree, string symbol)
