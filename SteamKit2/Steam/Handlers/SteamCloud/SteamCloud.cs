@@ -38,11 +38,6 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="UGCDetailsCallback"/>.</returns>
         public AsyncJob<UGCDetailsCallback> RequestUGCDetails( UGCHandle ugcId )
         {
-            if ( ugcId == null )
-            {
-                throw new ArgumentNullException( nameof(ugcId) );
-            }
-
             var request = new ClientMsgProtobuf<CMsgClientUFSGetUGCDetails>( EMsg.ClientUFSGetUGCDetails );
             request.SourceJobID = Client.GetNextJobID();
 

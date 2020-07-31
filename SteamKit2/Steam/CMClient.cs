@@ -102,7 +102,11 @@ namespace SteamKit2.Internal
         /// This value will be <c>null</c> if the client is logged off of Steam.
         /// </summary>
         /// <value>The SteamID.</value>
+<<<<<<< HEAD:SteamKit2/Steam/CMClient.cs
         public SteamID? SteamID { get; private set; }
+=======
+        public SteamID SteamID { get; private set; } = 0;
+>>>>>>> upstream/experiment/struct-wrappers:SteamKit2/SteamKit2/Steam/CMClient.cs
 
         /// <summary>
         /// Gets or sets the connection timeout used when connecting to the Steam server.
@@ -440,7 +444,7 @@ namespace SteamKit2.Internal
             }
 
             SessionID = null;
-            SteamID = null;
+            SteamID = 0;
 
             connectionRelease.NetMsgReceived -= NetMsgReceived;
             connectionRelease.Connected -= Connected;
@@ -580,7 +584,7 @@ namespace SteamKit2.Internal
         void HandleLoggedOff( IPacketMsg packetMsg )
         {
             SessionID = null;
-            SteamID = null;
+            SteamID = 0;
 
             CellID = null;
             PublicIP = null;
