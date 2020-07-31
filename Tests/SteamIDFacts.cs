@@ -261,7 +261,7 @@ namespace Tests
             Assert.True( sid.Equals( ( object )sid2 ) );
 
             Assert.False( sid.Equals( new object() ) );
-            Assert.False( sid.Equals( ( SteamID )null ) );
+            Assert.False( sid.Equals( default(SteamID) ) );
             Assert.False( sid.Equals( ( object )null ) );
 
             SteamID sid3 = 12345;
@@ -377,8 +377,8 @@ namespace Tests
         public void TryGetClanIDReturnsFalseForAdHocChatRoom()
         {
             var chatID = new SteamID( 108093571196988453 );
-            Assert.False( chatID.TryGetClanID( out var groupID ), groupID?.Render() );
-            Assert.Null( groupID );
+            Assert.False( chatID.TryGetClanID( out var groupID ), groupID.Render() );
+            Assert.Equal( default(SteamID), groupID );
         }
 
         [Theory]
@@ -393,7 +393,7 @@ namespace Tests
         public void TryGetClanIDOnlySupportsClanChatRooms( EAccountType type )
         {
             var id = new SteamID( 4, ( uint )SteamID.ChatInstanceFlags.Clan, EUniverse.Public, type );
-            Assert.False( id.TryGetClanID( out var groupID ), groupID?.Render() );
+            Assert.False( id.TryGetClanID( out var groupID ), groupID.Render() );
             Assert.Null( groupID );
         }
 

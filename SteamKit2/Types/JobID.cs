@@ -16,28 +16,70 @@ namespace SteamKit2
     /// <summary>
     /// Represents an identifier of a network task known as a job.
     /// </summary>
-    public class JobID : GlobalID
+    public struct JobID
     {
         /// <summary>
         /// Represents an invalid JobID.
         /// </summary>
         public static readonly JobID Invalid = new JobID();
 
+        GlobalID gid;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="JobID"/> class.
-        /// </summary>
-        public JobID()
-            : base()
-        {
-        }
         /// <summary>
         /// Initializes a new instance of the <see cref="JobID"/> class.
         /// </summary>
         /// <param name="jobId">The Job ID to initialize this instance with.</param>
         public JobID( ulong jobId )
-            : base( jobId )
         {
+            gid = jobId;
+        }
+
+        /// <summary>
+        /// Gets or sets the sequential count for this GID.
+        /// </summary>
+        /// <value>
+        /// The sequential count.
+        /// </value>
+        public uint SequentialCount
+        {
+            get => gid.SequentialCount;
+            set => gid.SequentialCount = value;
+        }
+
+        /// <summary>
+        /// Gets or sets the start time of the server that generated this GID.
+        /// </summary>
+        /// <value>
+        /// The start time.
+        /// </value>
+        public DateTime StartTime
+        {
+            get => gid.StartTime;
+            set => gid.StartTime = value;
+        }
+
+        /// <summary>
+        /// Gets or sets the process ID of the server that generated this GID.
+        /// </summary>
+        /// <value>
+        /// The process ID.
+        /// </value>
+        public uint ProcessID
+        {
+            get => gid.ProcessID;
+            set => gid.ProcessID = value;
+        }
+
+        /// <summary>
+        /// Gets or sets the box ID of the server that generated this GID.
+        /// </summary>
+        /// <value>
+        /// The box ID.
+        /// </value>
+        public uint BoxID
+        {
+            get => gid.BoxID;
+            set => gid.BoxID = value;
         }
 
 
@@ -49,14 +91,7 @@ namespace SteamKit2
         /// The result of the conversion.
         /// </returns>
         public static implicit operator ulong ( JobID jobId )
-        {
-            if ( jobId == null )
-            {
-                throw new ArgumentNullException( nameof(jobId) );
-            }
-
-            return jobId.Value;
-        }
+            => jobId.gid.Value;
 
         /// <summary>
         /// Performs an implicit conversion from <see cref="System.UInt64"/> to <see cref="SteamKit2.JobID"/>.
@@ -118,11 +153,6 @@ namespace SteamKit2
             if ( client == null )
             {
                 throw new ArgumentNullException( nameof(client) );
-            }
-            
-            if ( jobId == null )
-            {
-                throw new ArgumentNullException( nameof(jobId) );
             }
 
             jobStart = DateTime.UtcNow;

@@ -14,13 +14,25 @@ using System.Text.RegularExpressions;
 
 namespace SteamKit2
 {
-    class BitVector64
+    struct BitVector64
     {
-        public ulong Data { get; set; }
+        bool initialized;
+        ulong data;
+
+        public ulong Data
+        {
+            get => initialized ? data : ulong.MaxValue;
+            set
+            {
+                data = value;
+                initialized = true;
+            }
+        }
 
         public BitVector64( ulong value )
         {
-            Data = value;
+            data = value;
+            initialized = true;
         }
 
         public ulong this[ uint bitoffset, ulong valuemask ]
@@ -34,9 +46,9 @@ namespace SteamKit2
     /// This 64-bit structure is used for identifying various objects on the Steam network.
     /// </summary>
     [DebuggerDisplay( "{Render()}, {ConvertToUInt64()}" )]
-    public class SteamID
+    public struct SteamID
     {
-        readonly BitVector64 steamid;
+        BitVector64 steamid;
 
         static readonly Regex Steam2Regex = new Regex(
             @"STEAM_(?<universe>[0-4]):(?<authserver>[0-1]):(?<accountid>\d+)",
@@ -111,15 +123,6 @@ namespace SteamKit2
             /// This flag is set for matchmaking lobby based chat <see cref="SteamID">SteamIDs</see>.
             /// </summary>
             MMSLobby = ( AccountInstanceMask + 1 ) >> 3,
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SteamID"/> class.
-        /// </summary>
-        public SteamID()
-            : this( 0 )
-        {
         }
 
         /// <inheritdoc />
@@ -571,9 +574,15 @@ namespace SteamKit2
         /// Converts this chat ID to a clan ID.
         /// This can be used to get the group that a group chat is associated with.
         /// </summary>
+<<<<<<< HEAD:SteamKit2/Types/SteamID.cs
         /// <returns><c>true</c> if this chat ID represents a group chat, <c>false</c> otherwise.</returns>\
         /// <param name="groupID">If the method returned <c>true</c>, then this is the group that this chat is associated with. Otherwise, this is <c>null</c>.</param>
         public bool TryGetClanID( [NotNullWhen(true)] out SteamID? groupID )
+=======
+        /// <returns><c>true</c> if this chat ID represents a group chat, <c>false</c> otherwise.</returns>
+        /// <param name="groupID">If the method returned <c>true</c>, then this is the group that this chat is associated with. Otherwise, this is <c>default</c>.</param>
+        public bool TryGetClanID( out SteamID groupID )
+>>>>>>> upstream/experiment/struct-wrappers:SteamKit2/SteamKit2/Types/SteamID.cs
         {
             if ( IsChatAccount && AccountInstance == (uint)ChatInstanceFlags.Clan )
             {
