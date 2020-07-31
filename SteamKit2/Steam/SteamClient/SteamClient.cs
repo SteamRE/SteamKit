@@ -33,6 +33,7 @@ namespace SteamKit2
 
         Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
 
+<<<<<<< HEAD:SteamKit2/Steam/SteamClient/SteamClient.cs
         internal AsyncJobManager jobManager;
 
         /// <summary>
@@ -61,6 +62,10 @@ namespace SteamKit2
             : this( configuration, Guid.NewGuid().ToString( "N" ) )
         {
         }
+=======
+        MessageHandler msgHandler;
+
+>>>>>>> upstream/experiment/callback-routing:SteamKit2/SteamKit2/Steam/SteamClient/SteamClient.cs
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SteamClient"/> class with a specific configuration and identifier
@@ -109,7 +114,11 @@ namespace SteamKit2
                 { EMsg.DestJobFailed, HandleJobFailed },
             };
 
+<<<<<<< HEAD:SteamKit2/Steam/SteamClient/SteamClient.cs
             jobManager = new AsyncJobManager();
+=======
+            msgHandler = new MessageHandler( this );
+>>>>>>> upstream/experiment/callback-routing:SteamKit2/SteamKit2/Steam/SteamClient/SteamClient.cs
         }
 
 
@@ -389,6 +398,7 @@ namespace SteamKit2
                 }
             }
 
+<<<<<<< HEAD:SteamKit2/Steam/SteamClient/SteamClient.cs
             return true;
         }
         /// <summary>
@@ -401,6 +411,11 @@ namespace SteamKit2
             jobManager.SetTimeoutsEnabled( true );
 
             PostCallback( new ConnectedCallback() );
+=======
+            // finally pass the message along to the message handler, which will pass the message along to
+            // interested callbackmsg objects and automatically post them to the callback queue
+            msgHandler.RouteToCallback( packetMsg );
+>>>>>>> upstream/experiment/callback-routing:SteamKit2/SteamKit2/Steam/SteamClient/SteamClient.cs
         }
         /// <summary>
         /// Called when the client is physically disconnected from Steam3.

@@ -166,6 +166,11 @@ namespace SteamKit2
         {
             return (T[])type.GetTypeInfo().GetCustomAttributes( typeof( T ), inherit );
         }
+        public static bool HasAttribute<T>( this Type type, bool inherit = false )
+            where T : Attribute
+        {
+            return type.GetAttributes<T>().Length > 0;
+        }
     }
 
     /// <summary>

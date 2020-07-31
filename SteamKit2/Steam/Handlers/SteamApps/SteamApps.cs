@@ -73,6 +73,7 @@ namespace SteamKit2
         }
 
 
+<<<<<<< HEAD:SteamKit2/Steam/Handlers/SteamApps/SteamApps.cs
         Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
 
         internal SteamApps()
@@ -95,6 +96,8 @@ namespace SteamKit2
         }
 
 
+=======
+>>>>>>> upstream/experiment/callback-routing:SteamKit2/SteamKit2/Steam/Handlers/SteamApps/SteamApps.cs
         /// <summary>
         /// Requests an app ownership ticket for the specified AppID.
         /// Results are returned in a <see cref="AppOwnershipTicketCallback"/> callback.
@@ -370,6 +373,7 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
+<<<<<<< HEAD:SteamKit2/Steam/Handlers/SteamApps/SteamApps.cs
             if ( packetMsg == null )
             {
                 throw new ArgumentNullException( nameof(packetMsg) );
@@ -477,5 +481,8 @@ namespace SteamKit2
         
         #endregion
 
+=======
+        }
+>>>>>>> upstream/experiment/callback-routing:SteamKit2/SteamKit2/Steam/Handlers/SteamApps/SteamApps.cs
     }
 }
