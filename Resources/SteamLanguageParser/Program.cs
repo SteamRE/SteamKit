@@ -32,7 +32,7 @@ namespace SteamLanguageParser
             Queue<Token> tokenList = LanguageParser.TokenizeString( File.ReadAllText( Path.Combine( languagePath, file ) ) );
 
             Node root = TokenAnalyzer.Analyze( tokenList );
-            
+
             Node rootEnumNode = new Node();
             Node rootMessageNode = new Node();
 

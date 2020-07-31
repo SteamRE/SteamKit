@@ -8,7 +8,7 @@
     <Description>SteamKite Sample 3: DebugLog</Description>
     <Copyright>Copyright © Ryan Stecker 2018</Copyright>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\..\SteamKit2\SteamKit2\SteamKit2.csproj" />
   </ItemGroup>
