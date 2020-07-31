@@ -418,6 +418,112 @@ namespace Tests
                 }
             };
 
+            var text = SaveToText( kv );
+
+            Assert.Equal( expected, text );
+        }
+
+        [Fact]
+        public void CanLoadUnicodeTextDocument()
+        {
+            var expected = "\"RootNode\"\n{\n\t\"key1\"\t\t\"value1\"\n\t\"key2\"\n\t{\n\t\t\"ChildKey\"\t\t\"ChildValue\"\n\t}\n}\n";
+            var kv = new KeyValue();
+
+            var temporaryFile = Path.GetTempFileName();
+            try
+            {
+                File.WriteAllText( temporaryFile, expected, Encoding.Unicode );
+                kv.ReadFileAsText( temporaryFile );
+            }
+            finally
+            {
+                File.Delete( temporaryFile );
+            }
+
+            Assert.Equal( "RootNode", kv.Name );
+            Assert.Equal( 2, kv.Children.Count );
+            Assert.Equal( "key1", kv.Children[0].Name );
+            Assert.Equal( "value1", kv.Children[0].Value );
+            Assert.Equal( "key2", kv.Children[1].Name );
+            Assert.Equal( 1, kv.Children[1].Children.Count );
+            Assert.Equal( "ChildKey", kv.Children[1].Children[0].Name );
+            Assert.Equal( "ChildValue", kv.Children[1].Children[0].Value );
+        }
+
+        [Fact]
+        public void CanLoadUnicodeTextStream()
+        {
+            var expected = "\"RootNode\"\n{\n\t\"key1\"\t\t\"value1\"\n\t\"key2\"\n\t{\n\t\t\"ChildKey\"\t\t\"ChildValue\"\n\t}\n}\n";
+            var kv = new KeyValue();
+
+            var temporaryFile = Path.GetTempFileName();
+            try
+            {
+                File.WriteAllText( temporaryFile, expected, Encoding.Unicode );
+
+                using ( var fs = File.OpenRead( temporaryFile ) )
+                { 
+                    kv.ReadAsText( fs );
+                }
+            }
+            finally
+            {
+                File.Delete( temporaryFile );
+            }
+
+            Assert.Equal( "RootNode", kv.Name );
+            Assert.Equal( 2, kv.Children.Count );
+            Assert.Equal( "key1", kv.Children[0].Name );
+            Assert.Equal( "value1", kv.Children[0].Value );
+            Assert.Equal( "key2", kv.Children[1].Name );
+            Assert.Equal( 1, kv.Children[1].Children.Count );
+            Assert.Equal( "ChildKey", kv.Children[1].Children[0].Name );
+            Assert.Equal( "ChildValue", kv.Children[1].Children[0].Value );
+        }
+
+        [Fact]
+        public void CanReadAndIgnoreConditionals()
+        {
+            var text = @"
+""Repro""
+{
+""Conditional""    ""You're not running Windows.""  [$!WIN32]          // DEPRECATED
+""EmptyThing""	""""
+}
+".Trim();
+
+            var kv = new KeyValue();
+            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(text)))
+            {
+                kv.ReadAsText(ms);
+            }
+
+            Assert.Equal( "Repro", kv.Name );
+            Assert.Equal( 2, kv.Children.Count );
+            Assert.Equal( "Conditional", kv.Children[0].Name );
+            Assert.Equal( "You're not running Windows.", kv.Children[0].Value );
+            Assert.Equal( "EmptyThing", kv.Children[1].Name );
+            Assert.Equal( "", kv.Children[1].Value );
+        }
+
+        [Fact]
+        public void WritesNewLineAsSlashN()
+        {
+            var kv = new KeyValue( "abc" );
+            kv.Children.Add( new KeyValue( "def", "ghi\njkl" ) );
+            var text = SaveToText( kv );
+            var expected = (@"
+""abc""
+{
+" + "\t" + @"""def""		""ghi\njkl""
+}
+").Trim().Replace("\r\n", "\n") + "\n";
+
+            Assert.Equal(expected, text);
+        }
+
+        static string SaveToText( KeyValue kv )
+        {
             string text;
             using ( var ms = new MemoryStream() )
             {
@@ -428,8 +534,7 @@ namespace Tests
                     text = reader.ReadToEnd();
                 }
             }
-
-            Assert.Equal( expected, text );
+            return text;
         }
 
         [Fact]
