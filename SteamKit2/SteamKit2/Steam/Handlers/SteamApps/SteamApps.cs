@@ -263,7 +263,7 @@ namespace SteamKit2
                 var appinfo = new CMsgClientPICSProductInfoRequest.AppInfo();
                 appinfo.access_token = app_request.AccessToken;
                 appinfo.appid = app_request.ID;
-                appinfo.only_public = app_request.Public;
+                appinfo.only_public_obsolete = app_request.Public;
 
                 request.Body.apps.Add( appinfo );
             }
