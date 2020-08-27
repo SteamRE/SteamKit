@@ -1255,6 +1255,29 @@ namespace SteamKit2.GC.CSGO.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public global::System.Collections.Generic.List<PartnerItemPaymentRule> partner_accounts { get; } = new global::System.Collections.Generic.List<PartnerItemPaymentRule>();
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public bool validate_only
+        {
+            get => __pbn__validate_only.GetValueOrDefault();
+            set => __pbn__validate_only = value;
+        }
+        public bool ShouldSerializevalidate_only() => __pbn__validate_only != null;
+        public void Resetvalidate_only() => __pbn__validate_only = null;
+        private bool? __pbn__validate_only;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool make_workshop_files_subscribable
+        {
+            get => __pbn__make_workshop_files_subscribable.GetValueOrDefault();
+            set => __pbn__make_workshop_files_subscribable = value;
+        }
+        public bool ShouldSerializemake_workshop_files_subscribable() => __pbn__make_workshop_files_subscribable != null;
+        public void Resetmake_workshop_files_subscribable() => __pbn__make_workshop_files_subscribable = null;
+        private bool? __pbn__make_workshop_files_subscribable;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public WorkshopDirectPaymentRule associated_workshop_file_for_direct_payments { get; set; }
+
         [global::ProtoBuf.ProtoContract()]
         public partial class WorkshopItemPaymentRule : global::ProtoBuf.IExtensible
         {
@@ -1303,6 +1326,36 @@ namespace SteamKit2.GC.CSGO.Internal
             public bool ShouldSerializerule_type() => __pbn__rule_type != null;
             public void Resetrule_type() => __pbn__rule_type = null;
             private uint? __pbn__rule_type;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class WorkshopDirectPaymentRule : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public ulong workshop_file_id
+            {
+                get => __pbn__workshop_file_id.GetValueOrDefault();
+                set => __pbn__workshop_file_id = value;
+            }
+            public bool ShouldSerializeworkshop_file_id() => __pbn__workshop_file_id != null;
+            public void Resetworkshop_file_id() => __pbn__workshop_file_id = null;
+            private ulong? __pbn__workshop_file_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string rule_description
+            {
+                get => __pbn__rule_description ?? "";
+                set => __pbn__rule_description = value;
+            }
+            public bool ShouldSerializerule_description() => __pbn__rule_description != null;
+            public void Resetrule_description() => __pbn__rule_description = null;
+            private string __pbn__rule_description;
 
         }
 
@@ -1643,16 +1696,6 @@ namespace SteamKit2.GC.CSGO.Internal
         GCConnectionStatus_NO_SESSION = 2,
         GCConnectionStatus_NO_SESSION_IN_LOGON_QUEUE = 3,
         GCConnectionStatus_NO_STEAM = 4,
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public enum ESteamPaymentRuleType
-    {
-        k_EPaymentRuleTypeComposite = 0,
-        k_EPaymentRuleTypeWorkshop = 1,
-        k_EPaymentRuleTypeServiceProvider = 2,
-        k_EPaymentRuleTypePartner = 3,
-        k_EPaymentRuleTypeSpecialPayment = 4,
     }
 
 }

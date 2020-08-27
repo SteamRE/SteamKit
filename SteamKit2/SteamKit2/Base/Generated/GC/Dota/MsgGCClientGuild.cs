@@ -814,6 +814,28 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToClientGuildMembersDataUpdated : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint guild_id
+        {
+            get => __pbn__guild_id.GetValueOrDefault();
+            set => __pbn__guild_id = value;
+        }
+        public bool ShouldSerializeguild_id() => __pbn__guild_id != null;
+        public void Resetguild_id() => __pbn__guild_id = null;
+        private uint? __pbn__guild_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<CMsgGuildMember> members_data { get; } = new global::System.Collections.Generic.List<CMsgGuildMember>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgClientToGCRequestGuildMembership : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2154,8 +2176,8 @@ namespace SteamKit2.GC.Dota.Internal
         k_EGuildAuditAction_AdminLock = 21,
         k_EGuildAuditAction_GuildNameChanged = 22,
         k_EGuildAuditAction_GuildTagChanged = 23,
-        k_EGuildAuditAction_AdminWhitelisted = 24,
-        k_EGuildAuditAction_AdminBlacklisted = 25,
+        k_EGuildAuditAction_AdminPermitted = 24,
+        k_EGuildAuditAction_AdminBlocked = 25,
         k_EGuildAuditAction_AdminBannedUser = 26,
     }
 

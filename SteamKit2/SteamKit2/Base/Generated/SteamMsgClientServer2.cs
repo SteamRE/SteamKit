@@ -3557,6 +3557,16 @@ namespace SteamKit2.Internal
         public void Resetthrottling_kbps() => __pbn__throttling_kbps = null;
         private uint? __pbn__throttling_kbps;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint steam_realm
+        {
+            get => __pbn__steam_realm.GetValueOrDefault();
+            set => __pbn__steam_realm = value;
+        }
+        public bool ShouldSerializesteam_realm() => __pbn__steam_realm != null;
+        public void Resetsteam_realm() => __pbn__steam_realm = null;
+        private uint? __pbn__steam_realm;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class StatsInfo : global::ProtoBuf.IExtensible
         {

@@ -4408,6 +4408,67 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCGetLimitedItemPurchaseQuantity : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint item_def
+        {
+            get => __pbn__item_def.GetValueOrDefault();
+            set => __pbn__item_def = value;
+        }
+        public bool ShouldSerializeitem_def() => __pbn__item_def != null;
+        public void Resetitem_def() => __pbn__item_def = null;
+        private uint? __pbn__item_def;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCGetLimitedItemPurchaseQuantityResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse result
+        {
+            get => __pbn__result ?? EResponse.k_eInternalError;
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResponse? __pbn__result;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint quantity_purchased
+        {
+            get => __pbn__quantity_purchased.GetValueOrDefault();
+            set => __pbn__quantity_purchased = value;
+        }
+        public bool ShouldSerializequantity_purchased() => __pbn__quantity_purchased != null;
+        public void Resetquantity_purchased() => __pbn__quantity_purchased = null;
+        private uint? __pbn__quantity_purchased;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTooBusy = 2,
+            k_eDisabled = 3,
+            k_eTimeout = 4,
+            k_eInvalidItemDef = 5,
+            k_eItemDefNotLimited = 6,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EGCItemMsg
     {
         k_EMsgGCBase = 1000,
@@ -4595,6 +4656,8 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGCToGCGetInfuxIntervalStats = 2606,
         k_EMsgGCToGCGetInfuxIntervalStatsResponse = 2607,
         k_EMsgGCToGCPurchaseSucceeded = 2608,
+        k_EMsgClientToGCGetLimitedItemPurchaseQuantity = 2609,
+        k_EMsgClientToGCGetLimitedItemPurchaseQuantityResponse = 2610,
     }
 
     [global::ProtoBuf.ProtoContract()]

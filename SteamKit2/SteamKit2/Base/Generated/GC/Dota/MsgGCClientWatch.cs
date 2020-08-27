@@ -311,6 +311,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetweekend_tourney_bracket_round() => __pbn__weekend_tourney_bracket_round = null;
         private uint? __pbn__weekend_tourney_bracket_round;
 
+        [global::ProtoBuf.ProtoMember(32)]
+        public uint custom_game_difficulty
+        {
+            get => __pbn__custom_game_difficulty.GetValueOrDefault();
+            set => __pbn__custom_game_difficulty = value;
+        }
+        public bool ShouldSerializecustom_game_difficulty() => __pbn__custom_game_difficulty != null;
+        public void Resetcustom_game_difficulty() => __pbn__custom_game_difficulty = null;
+        private uint? __pbn__custom_game_difficulty;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Player : global::ProtoBuf.IExtensible
         {

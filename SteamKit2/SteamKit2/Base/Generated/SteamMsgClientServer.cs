@@ -2017,57 +2017,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientAppMinutesPlayedData : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<AppMinutesPlayedData> minutes_played { get; } = new global::System.Collections.Generic.List<AppMinutesPlayedData>();
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class AppMinutesPlayedData : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint app_id
-            {
-                get => __pbn__app_id.GetValueOrDefault();
-                set => __pbn__app_id = value;
-            }
-            public bool ShouldSerializeapp_id() => __pbn__app_id != null;
-            public void Resetapp_id() => __pbn__app_id = null;
-            private uint? __pbn__app_id;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public int forever
-            {
-                get => __pbn__forever.GetValueOrDefault();
-                set => __pbn__forever = value;
-            }
-            public bool ShouldSerializeforever() => __pbn__forever != null;
-            public void Resetforever() => __pbn__forever = null;
-            private int? __pbn__forever;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public int last_two_weeks
-            {
-                get => __pbn__last_two_weeks.GetValueOrDefault();
-                set => __pbn__last_two_weeks = value;
-            }
-            public bool ShouldSerializelast_two_weeks() => __pbn__last_two_weeks != null;
-            public void Resetlast_two_weeks() => __pbn__last_two_weeks = null;
-            private int? __pbn__last_two_weeks;
-
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgClientIsLimitedAccount : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -6840,14 +6789,14 @@ namespace SteamKit2.Internal
             private ulong? __pbn__access_token;
 
             [global::ProtoBuf.ProtoMember(3)]
-            public bool only_public
+            public bool only_public_obsolete
             {
-                get => __pbn__only_public.GetValueOrDefault();
-                set => __pbn__only_public = value;
+                get => __pbn__only_public_obsolete.GetValueOrDefault();
+                set => __pbn__only_public_obsolete = value;
             }
-            public bool ShouldSerializeonly_public() => __pbn__only_public != null;
-            public void Resetonly_public() => __pbn__only_public = null;
-            private bool? __pbn__only_public;
+            public bool ShouldSerializeonly_public_obsolete() => __pbn__only_public_obsolete != null;
+            public void Resetonly_public_obsolete() => __pbn__only_public_obsolete = null;
+            private bool? __pbn__only_public_obsolete;
 
         }
 

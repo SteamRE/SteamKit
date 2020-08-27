@@ -721,6 +721,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetstarted_finding_match() => __pbn__started_finding_match = null;
         private bool? __pbn__started_finding_match;
 
+        [global::ProtoBuf.ProtoMember(36)]
+        public bool ctrl_is_down
+        {
+            get => __pbn__ctrl_is_down.GetValueOrDefault();
+            set => __pbn__ctrl_is_down = value;
+        }
+        public bool ShouldSerializectrl_is_down() => __pbn__ctrl_is_down != null;
+        public void Resetctrl_is_down() => __pbn__ctrl_is_down = null;
+        private bool? __pbn__ctrl_is_down;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class DiceRoll : global::ProtoBuf.IExtensible
         {
