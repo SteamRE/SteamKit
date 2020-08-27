@@ -2495,6 +2495,8 @@ namespace SteamKit2
 		Macos1013 = -84,
 		Macos1014 = -83,
 		Macos1015 = -82,
+		MacOS1016 = -81,
+		MacOS11 = -80,
 		MacOSMax = -1,
 		LinuxUnknown = -203,
 		Linux22 = -202,
@@ -2533,7 +2535,8 @@ namespace SteamKit2
 		Win2012R2 = 15,
 		Windows10 = 16,
 		Win2016 = 17,
-		WinMAX = 18,
+		Win2019 = 18,
+		WinMAX = 19,
 	}
 	public enum EServerType
 	{

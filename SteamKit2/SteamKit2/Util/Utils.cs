@@ -142,6 +142,18 @@ namespace SteamKit2
 
                                 case 16:
                                     return EOSType.MacOS1012; // Sierra
+                                    
+                                case 17:
+                                    return EOSType.Macos1013; // High Sierra
+
+                                case 18:
+                                    return EOSType.Macos1014; // Mojave
+
+                                case 19:
+                                    return EOSType.Macos1015; // Catalina
+                                
+                                case 20:
+                                    return EOSType.MacOS11; // Big Sur
 
                                 default:
                                     return EOSType.MacOSUnknown;
