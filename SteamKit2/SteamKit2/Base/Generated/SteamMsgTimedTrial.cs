@@ -55,6 +55,26 @@ namespace SteamKit2.Internal
         public void Resetseconds_allowed() => __pbn__seconds_allowed = null;
         private uint? __pbn__seconds_allowed;
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint packageid
+        {
+            get => __pbn__packageid.GetValueOrDefault();
+            set => __pbn__packageid = value;
+        }
+        public bool ShouldSerializepackageid() => __pbn__packageid != null;
+        public void Resetpackageid() => __pbn__packageid = null;
+        private uint? __pbn__packageid;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint mastersub_appid
+        {
+            get => __pbn__mastersub_appid.GetValueOrDefault();
+            set => __pbn__mastersub_appid = value;
+        }
+        public bool ShouldSerializemastersub_appid() => __pbn__mastersub_appid != null;
+        public void Resetmastersub_appid() => __pbn__mastersub_appid = null;
+        private uint? __pbn__mastersub_appid;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

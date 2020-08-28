@@ -512,10 +512,6 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgClientToGCFriendsPlayedCustomGameRequest = 8020,
         k_EMsgGCToClientFriendsPlayedCustomGameResponse = 8021,
         k_EMsgGCTopCustomGamesList = 8024,
-        k_EMsgClientToGCSocialMatchPostCommentRequest = 8025,
-        k_EMsgGCToClientSocialMatchPostCommentResponse = 8026,
-        k_EMsgClientToGCSocialMatchDetailsRequest = 8027,
-        k_EMsgGCToClientSocialMatchDetailsResponse = 8028,
         k_EMsgClientToGCSetPartyOpen = 8029,
         k_EMsgClientToGCMergePartyInvite = 8030,
         k_EMsgGCToClientMergeGroupInviteReply = 8031,
@@ -821,6 +817,8 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgClientToGCSubmitPlayerMatchSurveyResponse = 8362,
         k_EMsgSQLGCToGCGrantAllHeroProgressAccount = 8363,
         k_EMsgSQLGCToGCGrantAllHeroProgressVictory = 8364,
+        k_EMsgDevDeleteEventActions = 8365,
+        k_EMsgDevDeleteEventActionsResponse = 8366,
         k_eMsgGCToGCGetAllHeroCurrent = 8635,
         k_eMsgGCToGCGetAllHeroCurrentResponse = 8636,
         k_EMsgGCSubmitPlayerAvoidRequest = 8637,
@@ -922,8 +920,12 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgClientToGCApplyGauntletTicket = 8739,
         k_EMsgClientToGCUnderDraftRollBackBench = 8740,
         k_EMsgClientToGCUnderDraftRollBackBenchResponse = 8741,
+        k_EMsgGCToGCGetEventActionScore = 8742,
+        k_EMsgGCToGCGetEventActionScoreResponse = 8743,
         k_EMsgServerToGCGetGuildContracts = 8744,
         k_EMsgServerToGCGetGuildContractsResponse = 8745,
+        k_EMsgLobbyEventGameData = 8746,
+        k_EMsgGCToClientGuildMembersDataUpdated = 8747,
     }
 
 }

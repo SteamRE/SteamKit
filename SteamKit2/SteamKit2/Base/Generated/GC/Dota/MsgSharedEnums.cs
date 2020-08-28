@@ -1342,17 +1342,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public enum DOTA_LobbyMemberXPBonus
-    {
-        DOTA_LobbyMemberXPBonus_DEFAULT = 0,
-        DOTA_LobbyMemberXPBonus_BATTLE_BOOSTER = 1,
-        DOTA_LobbyMemberXPBonus_SHARE_BONUS = 2,
-        DOTA_LobbyMemberXPBonus_PARTY = 3,
-        DOTA_LobbyMemberXPBonus_RECRUITMENT = 4,
-        DOTA_LobbyMemberXPBonus_PCBANG = 5,
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public enum DOTALobbyVisibility
     {
         DOTALobbyVisibility_Public = 0,

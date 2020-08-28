@@ -1160,6 +1160,17 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(70)]
         public global::System.Collections.Generic.List<Reaction> reactions { get; } = new global::System.Collections.Generic.List<Reaction>();
 
+        [global::ProtoBuf.ProtoMember(71)]
+        [global::System.ComponentModel.DefaultValue(EBanContentCheckResult.k_EBanContentCheckResult_NotScanned)]
+        public EBanContentCheckResult ban_text_check_result
+        {
+            get => __pbn__ban_text_check_result ?? EBanContentCheckResult.k_EBanContentCheckResult_NotScanned;
+            set => __pbn__ban_text_check_result = value;
+        }
+        public bool ShouldSerializeban_text_check_result() => __pbn__ban_text_check_result != null;
+        public void Resetban_text_check_result() => __pbn__ban_text_check_result = null;
+        private EBanContentCheckResult? __pbn__ban_text_check_result;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Tag : global::ProtoBuf.IExtensible
         {

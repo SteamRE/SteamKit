@@ -1,4 +1,5 @@
 ProtoDir,ProtoFileName,ClassFilePath,Namespace
+steam,enums.proto,Enums.cs,SteamKit2.Internal
 steam,content_manifest.proto,ContentManifest.cs,SteamKit2.Internal
 steam,encrypted_app_ticket.proto,SteamMsgAppTicket.cs,SteamKit2.Internal
 steam,steammessages_accounthardware.steamclient.proto,SteamMsgAccountHardware.cs,SteamKit2.Internal

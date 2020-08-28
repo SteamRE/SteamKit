@@ -700,6 +700,8 @@ enum EOSType
 	Macos1013 = -84;
 	Macos1014 = -83;
 	Macos1015 = -82;
+	MacOS1016 = -81;
+	MacOS11 = -80;
 	MacOSMax = -1;
 
 	LinuxUnknown = -203;
@@ -745,8 +747,9 @@ enum EOSType
 	Win10 = 16; removed "renamed to Windows10"
 	Windows10 = 16;
 	Win2016 = 17;
+	Win2019 = 18;
 
-	WinMAX = 18;
+	WinMAX = 19;
 };
 
 enum EServerType

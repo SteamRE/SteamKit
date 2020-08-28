@@ -37,16 +37,6 @@ namespace SteamKit2.Internal
         public void Resetappid() => __pbn__appid = null;
         private uint? __pbn__appid;
 
-        [global::ProtoBuf.ProtoMember(3)]
-        public bool request_trial
-        {
-            get => __pbn__request_trial.GetValueOrDefault();
-            set => __pbn__request_trial = value;
-        }
-        public bool ShouldSerializerequest_trial() => __pbn__request_trial != null;
-        public void Resetrequest_trial() => __pbn__request_trial = null;
-        private bool? __pbn__request_trial;
-
     }
 
     [global::ProtoBuf.ProtoContract()]

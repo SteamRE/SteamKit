@@ -1503,6 +1503,16 @@ namespace SteamKit2.Internal
         public void Resetrtime_mod_reviewed() => __pbn__rtime_mod_reviewed = null;
         private uint? __pbn__rtime_mod_reviewed;
 
+        [global::ProtoBuf.ProtoMember(27)]
+        public uint featured_app_tagid
+        {
+            get => __pbn__featured_app_tagid.GetValueOrDefault();
+            set => __pbn__featured_app_tagid = value;
+        }
+        public bool ShouldSerializefeatured_app_tagid() => __pbn__featured_app_tagid != null;
+        public void Resetfeatured_app_tagid() => __pbn__featured_app_tagid = null;
+        private uint? __pbn__featured_app_tagid;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

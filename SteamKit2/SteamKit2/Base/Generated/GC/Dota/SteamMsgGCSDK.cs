@@ -1030,6 +1030,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetswap_height() => __pbn__swap_height = null;
         private uint? __pbn__swap_height;
 
+        [global::ProtoBuf.ProtoMember(21)]
+        public bool from_launcher
+        {
+            get => __pbn__from_launcher.GetValueOrDefault();
+            set => __pbn__from_launcher = value;
+        }
+        public bool ShouldSerializefrom_launcher() => __pbn__from_launcher != null;
+        public void Resetfrom_launcher() => __pbn__from_launcher = null;
+        private bool? __pbn__from_launcher;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1692,6 +1702,9 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetmake_workshop_files_subscribable() => __pbn__make_workshop_files_subscribable = null;
         private bool? __pbn__make_workshop_files_subscribable;
 
+        [global::ProtoBuf.ProtoMember(7)]
+        public WorkshopDirectPaymentRule associated_workshop_file_for_direct_payments { get; set; }
+
         [global::ProtoBuf.ProtoContract()]
         public partial class WorkshopItemPaymentRule : global::ProtoBuf.IExtensible
         {
@@ -1731,14 +1744,45 @@ namespace SteamKit2.GC.Dota.Internal
             private string __pbn__rule_description;
 
             [global::ProtoBuf.ProtoMember(4)]
+            [global::System.ComponentModel.DefaultValue(1)]
             public uint rule_type
             {
-                get => __pbn__rule_type.GetValueOrDefault();
+                get => __pbn__rule_type ?? 1;
                 set => __pbn__rule_type = value;
             }
             public bool ShouldSerializerule_type() => __pbn__rule_type != null;
             public void Resetrule_type() => __pbn__rule_type = null;
             private uint? __pbn__rule_type;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class WorkshopDirectPaymentRule : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public ulong workshop_file_id
+            {
+                get => __pbn__workshop_file_id.GetValueOrDefault();
+                set => __pbn__workshop_file_id = value;
+            }
+            public bool ShouldSerializeworkshop_file_id() => __pbn__workshop_file_id != null;
+            public void Resetworkshop_file_id() => __pbn__workshop_file_id = null;
+            private ulong? __pbn__workshop_file_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string rule_description
+            {
+                get => __pbn__rule_description ?? "";
+                set => __pbn__rule_description = value;
+            }
+            public bool ShouldSerializerule_description() => __pbn__rule_description != null;
+            public void Resetrule_description() => __pbn__rule_description = null;
+            private string __pbn__rule_description;
 
         }
 

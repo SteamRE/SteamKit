@@ -246,16 +246,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetfirst_blood_happened() => __pbn__first_blood_happened = null;
         private bool? __pbn__first_blood_happened;
 
-        [global::ProtoBuf.ProtoMember(9)]
-        public bool legacy_mass_disconnect
-        {
-            get => __pbn__legacy_mass_disconnect.GetValueOrDefault();
-            set => __pbn__legacy_mass_disconnect = value;
-        }
-        public bool ShouldSerializelegacy_mass_disconnect() => __pbn__legacy_mass_disconnect != null;
-        public void Resetlegacy_mass_disconnect() => __pbn__legacy_mass_disconnect = null;
-        private bool? __pbn__legacy_mass_disconnect;
-
         [global::ProtoBuf.ProtoMember(10)]
         public CMsgPoorNetworkConditions poor_network_conditions { get; set; }
 
@@ -671,6 +661,7 @@ namespace SteamKit2.GC.Dota.Internal
             TENSORFLOW = 3,
             DOTA_ONLY = 4,
             CUSTOM_GAME_ONLY = 5,
+            EVENT_GAME_ONLY = 6,
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -679,6 +670,7 @@ namespace SteamKit2.GC.Dota.Internal
             BOTH = 0,
             NONE = 1,
             ONLY = 2,
+            EVENT = 3,
         }
 
     }
@@ -1144,16 +1136,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeserver_version() => __pbn__server_version != null;
         public void Resetserver_version() => __pbn__server_version = null;
         private uint? __pbn__server_version;
-
-        [global::ProtoBuf.ProtoMember(21)]
-        public bool legacy_mass_disconnect
-        {
-            get => __pbn__legacy_mass_disconnect.GetValueOrDefault();
-            set => __pbn__legacy_mass_disconnect = value;
-        }
-        public bool ShouldSerializelegacy_mass_disconnect() => __pbn__legacy_mass_disconnect != null;
-        public void Resetlegacy_mass_disconnect() => __pbn__legacy_mass_disconnect = null;
-        private bool? __pbn__legacy_mass_disconnect;
 
         [global::ProtoBuf.ProtoMember(35)]
         public CMsgPoorNetworkConditions poor_network_conditions { get; set; }
@@ -2670,6 +2652,38 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetvoice_mutes() => __pbn__voice_mutes = null;
             private uint? __pbn__voice_mutes;
 
+            [global::ProtoBuf.ProtoMember(15)]
+            public global::System.Collections.Generic.List<PingDetail> ping_details { get; } = new global::System.Collections.Generic.List<PingDetail>();
+
+            [global::ProtoBuf.ProtoContract()]
+            public partial class PingDetail : global::ProtoBuf.IExtensible
+            {
+                private global::ProtoBuf.IExtension __pbn__extensionData;
+                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+                [global::ProtoBuf.ProtoMember(1)]
+                public uint type
+                {
+                    get => __pbn__type.GetValueOrDefault();
+                    set => __pbn__type = value;
+                }
+                public bool ShouldSerializetype() => __pbn__type != null;
+                public void Resettype() => __pbn__type = null;
+                private uint? __pbn__type;
+
+                [global::ProtoBuf.ProtoMember(2)]
+                public uint count
+                {
+                    get => __pbn__count.GetValueOrDefault();
+                    set => __pbn__count = value;
+                }
+                public bool ShouldSerializecount() => __pbn__count != null;
+                public void Resetcount() => __pbn__count = null;
+                private uint? __pbn__count;
+
+            }
+
         }
 
     }
@@ -2705,7 +2719,7 @@ namespace SteamKit2.GC.Dota.Internal
         public global::System.Collections.Generic.List<CLobbyTimedRewardDetails> timed_reward_details { get; } = new global::System.Collections.Generic.List<CLobbyTimedRewardDetails>();
 
         [global::ProtoBuf.ProtoMember(4)]
-        public global::System.Collections.Generic.List<CDOTALobbyMember> xp_reward_details { get; } = new global::System.Collections.Generic.List<CDOTALobbyMember>();
+        public global::System.Collections.Generic.List<CSODOTALobbyMember> xp_reward_details { get; } = new global::System.Collections.Generic.List<CSODOTALobbyMember>();
 
         [global::ProtoBuf.ProtoMember(5)]
         public uint leagueid

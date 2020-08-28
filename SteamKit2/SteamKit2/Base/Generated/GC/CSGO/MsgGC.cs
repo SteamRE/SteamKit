@@ -6876,6 +6876,56 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CVDiagnostic : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint id
+        {
+            get => __pbn__id.GetValueOrDefault();
+            set => __pbn__id = value;
+        }
+        public bool ShouldSerializeid() => __pbn__id != null;
+        public void Resetid() => __pbn__id = null;
+        private uint? __pbn__id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint extended
+        {
+            get => __pbn__extended.GetValueOrDefault();
+            set => __pbn__extended = value;
+        }
+        public bool ShouldSerializeextended() => __pbn__extended != null;
+        public void Resetextended() => __pbn__extended = null;
+        private uint? __pbn__extended;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong value
+        {
+            get => __pbn__value.GetValueOrDefault();
+            set => __pbn__value = value;
+        }
+        public bool ShouldSerializevalue() => __pbn__value != null;
+        public void Resetvalue() => __pbn__value = null;
+        private ulong? __pbn__value;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string string_value
+        {
+            get => __pbn__string_value ?? "";
+            set => __pbn__string_value = value;
+        }
+        public bool ShouldSerializestring_value() => __pbn__string_value != null;
+        public void Resetstring_value() => __pbn__string_value = null;
+        private string __pbn__string_value;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgGCCStrike15_v2_ClientReportValidation : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -6975,15 +7025,108 @@ namespace SteamKit2.GC.CSGO.Internal
         private int? __pbn__osversion;
 
         [global::ProtoBuf.ProtoMember(10)]
-        [global::System.ComponentModel.DefaultValue(EClientReportingVersion.k_EClientReportingVersion_SupportsSecureMode)]
-        public EClientReportingVersion clientreportversion
+        public uint clientreportversion
         {
-            get => __pbn__clientreportversion ?? EClientReportingVersion.k_EClientReportingVersion_SupportsSecureMode;
+            get => __pbn__clientreportversion.GetValueOrDefault();
             set => __pbn__clientreportversion = value;
         }
         public bool ShouldSerializeclientreportversion() => __pbn__clientreportversion != null;
         public void Resetclientreportversion() => __pbn__clientreportversion = null;
-        private EClientReportingVersion? __pbn__clientreportversion;
+        private uint? __pbn__clientreportversion;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public uint status_id
+        {
+            get => __pbn__status_id.GetValueOrDefault();
+            set => __pbn__status_id = value;
+        }
+        public bool ShouldSerializestatus_id() => __pbn__status_id != null;
+        public void Resetstatus_id() => __pbn__status_id = null;
+        private uint? __pbn__status_id;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public uint diagnostic1
+        {
+            get => __pbn__diagnostic1.GetValueOrDefault();
+            set => __pbn__diagnostic1 = value;
+        }
+        public bool ShouldSerializediagnostic1() => __pbn__diagnostic1 != null;
+        public void Resetdiagnostic1() => __pbn__diagnostic1 = null;
+        private uint? __pbn__diagnostic1;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public ulong diagnostic2
+        {
+            get => __pbn__diagnostic2.GetValueOrDefault();
+            set => __pbn__diagnostic2 = value;
+        }
+        public bool ShouldSerializediagnostic2() => __pbn__diagnostic2 != null;
+        public void Resetdiagnostic2() => __pbn__diagnostic2 = null;
+        private ulong? __pbn__diagnostic2;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public ulong diagnostic3
+        {
+            get => __pbn__diagnostic3.GetValueOrDefault();
+            set => __pbn__diagnostic3 = value;
+        }
+        public bool ShouldSerializediagnostic3() => __pbn__diagnostic3 != null;
+        public void Resetdiagnostic3() => __pbn__diagnostic3 = null;
+        private ulong? __pbn__diagnostic3;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string last_launch_data
+        {
+            get => __pbn__last_launch_data ?? "";
+            set => __pbn__last_launch_data = value;
+        }
+        public bool ShouldSerializelast_launch_data() => __pbn__last_launch_data != null;
+        public void Resetlast_launch_data() => __pbn__last_launch_data = null;
+        private string __pbn__last_launch_data;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public uint report_count
+        {
+            get => __pbn__report_count.GetValueOrDefault();
+            set => __pbn__report_count = value;
+        }
+        public bool ShouldSerializereport_count() => __pbn__report_count != null;
+        public void Resetreport_count() => __pbn__report_count = null;
+        private uint? __pbn__report_count;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public ulong client_time
+        {
+            get => __pbn__client_time.GetValueOrDefault();
+            set => __pbn__client_time = value;
+        }
+        public bool ShouldSerializeclient_time() => __pbn__client_time != null;
+        public void Resetclient_time() => __pbn__client_time = null;
+        private ulong? __pbn__client_time;
+
+        [global::ProtoBuf.ProtoMember(18)]
+        public ulong diagnostic4
+        {
+            get => __pbn__diagnostic4.GetValueOrDefault();
+            set => __pbn__diagnostic4 = value;
+        }
+        public bool ShouldSerializediagnostic4() => __pbn__diagnostic4 != null;
+        public void Resetdiagnostic4() => __pbn__diagnostic4 = null;
+        private ulong? __pbn__diagnostic4;
+
+        [global::ProtoBuf.ProtoMember(19)]
+        public ulong diagnostic5
+        {
+            get => __pbn__diagnostic5.GetValueOrDefault();
+            set => __pbn__diagnostic5 = value;
+        }
+        public bool ShouldSerializediagnostic5() => __pbn__diagnostic5 != null;
+        public void Resetdiagnostic5() => __pbn__diagnostic5 = null;
+        private ulong? __pbn__diagnostic5;
+
+        [global::ProtoBuf.ProtoMember(20)]
+        public global::System.Collections.Generic.List<CVDiagnostic> diagnostics { get; } = new global::System.Collections.Generic.List<CVDiagnostic>();
 
     }
 
@@ -7045,6 +7188,26 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetkick_user() => __pbn__kick_user = null;
         private bool? __pbn__kick_user;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool show_trusted_ui
+        {
+            get => __pbn__show_trusted_ui.GetValueOrDefault();
+            set => __pbn__show_trusted_ui = value;
+        }
+        public bool ShouldSerializeshow_trusted_ui() => __pbn__show_trusted_ui != null;
+        public void Resetshow_trusted_ui() => __pbn__show_trusted_ui = null;
+        private bool? __pbn__show_trusted_ui;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool show_warning_not_trusted
+        {
+            get => __pbn__show_warning_not_trusted.GetValueOrDefault();
+            set => __pbn__show_warning_not_trusted = value;
+        }
+        public bool ShouldSerializeshow_warning_not_trusted() => __pbn__show_warning_not_trusted != null;
+        public void Resetshow_warning_not_trusted() => __pbn__show_warning_not_trusted = null;
+        private bool? __pbn__show_warning_not_trusted;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -7063,6 +7226,17 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializefull_report() => __pbn__full_report != null;
         public void Resetfull_report() => __pbn__full_report = null;
         private bool? __pbn__full_report;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string module
+        {
+            get => __pbn__module ?? "";
+            set => __pbn__module = value;
+        }
+        public bool ShouldSerializemodule() => __pbn__module != null;
+        public void Resetmodule() => __pbn__module = null;
+        private string __pbn__module;
 
     }
 
@@ -7185,7 +7359,9 @@ namespace SteamKit2.GC.CSGO.Internal
     [global::ProtoBuf.ProtoContract()]
     public enum EClientReportingVersion
     {
-        k_EClientReportingVersion_SupportsSecureMode = 1,
+        k_EClientReportingVersion_OldVersion = 0,
+        k_EClientReportingVersion_BetaVersion = 1,
+        k_EClientReportingVersion_SupportsTrustedMode = 2,
     }
 
 }
