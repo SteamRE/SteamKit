@@ -85,9 +85,18 @@ namespace SteamKit2
     {
         public override byte[] GetMachineGuid()
         {
-            RegistryKey localKey = RegistryKey
-                .OpenBaseKey( Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry64 )
-                .OpenSubKey( @"SOFTWARE\Microsoft\Cryptography" );
+            RegistryKey? localKey;
+
+            try
+            {
+                localKey = RegistryKey
+                    .OpenBaseKey( RegistryHive.LocalMachine, RegistryView.Registry64 )
+                    .OpenSubKey( @"SOFTWARE\Microsoft\Cryptography" );
+            }
+            catch ( PlatformNotSupportedException )
+            {
+                return base.GetMachineGuid();
+            }
 
             if ( localKey == null )
             {
