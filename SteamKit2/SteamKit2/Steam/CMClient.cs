@@ -271,14 +271,18 @@ namespace SteamKit2.Internal
                 throw new ArgumentNullException( nameof(msg), "A value for 'msg' must be supplied" );
             }
 
-            if ( this.SessionID.HasValue )
+            var sessionID = this.SessionID;
+
+            if ( sessionID.HasValue )
             {
-                msg.SessionID = this.SessionID.Value;
+                msg.SessionID = sessionID.Value;
             }
 
-            if ( this.SteamID != null )
+            var steamID = this.SteamID;
+
+            if ( steamID != null )
             {
-                msg.SteamID = this.SteamID;
+                msg.SteamID = steamID;
             }
 
             try
