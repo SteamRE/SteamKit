@@ -94,7 +94,7 @@ namespace SteamKit2
             foreach ( var child in serverList.Children )
             {
                 var httpsSupport = child[ "https_support" ].AsString();
-                var protocol = ( httpsSupport == "optional" || httpsSupport == "mandatory" ) ? CDNClient.Server.ConnectionProtocol.HTTPS : CDNClient.Server.ConnectionProtocol.HTTP;
+                var protocol = ( httpsSupport == "mandatory" ) ? CDNClient.Server.ConnectionProtocol.HTTPS : CDNClient.Server.ConnectionProtocol.HTTP;
 
                 serverRecords.Add( new CDNClient.Server
                 {
