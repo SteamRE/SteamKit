@@ -35,7 +35,7 @@ namespace SteamKit2.Discovery
             {
                 try
                 {
-                    using (var fileStream = isolatedStorage.OpenFile(FileName, FileMode.Open, FileAccess.Read))
+                    using (var fileStream = isolatedStorage.OpenFile(FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                     {
                         return Serializer.DeserializeItems<BasicServerListProto>(fileStream, PrefixStyle.Base128, 1)
                             .Select(item =>
