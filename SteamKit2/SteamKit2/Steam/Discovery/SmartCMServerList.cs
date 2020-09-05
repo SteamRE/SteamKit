@@ -272,7 +272,7 @@ namespace SteamKit2.Discovery
                     return null;
                 }
 
-                DebugWrite( $"Next server candidiate: {result.EndPoint} ({result.Protocol})" );
+                DebugWrite( $"Next server candidate: {result.EndPoint} ({result.Protocol})" );
                 return new ServerRecord( result.EndPoint, result.Protocol );
             }
         }
