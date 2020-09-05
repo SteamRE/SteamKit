@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -96,6 +97,13 @@ namespace SteamKit2
                 var httpsSupport = child[ "https_support" ].AsString();
                 var protocol = ( httpsSupport == "mandatory" ) ? CDNClient.Server.ConnectionProtocol.HTTPS : CDNClient.Server.ConnectionProtocol.HTTP;
 
+                uint[]? allowedAppIds = null;
+                var allowedAppsNode = child[ "allowed_app_ids" ];
+                if ( allowedAppsNode != KeyValue.Invalid )
+                {
+                    allowedAppIds = allowedAppsNode.Children.Select( entry => entry.AsUnsignedInteger() ).ToArray();
+                }
+
                 serverRecords.Add( new CDNClient.Server
                 {
                     Protocol = protocol,
@@ -109,7 +117,13 @@ namespace SteamKit2
 
                     Load = child[ "load" ].AsInteger(),
                     WeightedLoad = child[ "weighted_load" ].AsInteger(),
-                    NumEntries = child[ "num_entries_in_client_list" ].AsInteger( 1 )
+                    NumEntries = child[ "num_entries_in_client_list" ].AsInteger( 1 ),
+                    PreferredServer = child[ "preferred_server" ].AsBoolean(),
+
+                    UseAsProxy = child[ "use_as_proxy" ].AsBoolean(),
+                    ProxyRequestPathTemplate = child[ "proxy_request_path_template" ].AsString(),
+
+                    AllowedAppIds = allowedAppIds
                 } 
                 );
             }

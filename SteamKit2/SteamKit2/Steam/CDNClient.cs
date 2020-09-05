@@ -83,6 +83,25 @@ namespace SteamKit2
             /// Gets the number of entries this server is worth.
             /// </summary>
             public int NumEntries { get; internal set; }
+            /// <summary>
+            /// Gets the preferred server status.
+            /// </summary>
+            public bool PreferredServer { get; internal set; }
+
+            /// <summary>
+            /// Gets the download proxy status.
+            /// </summary>
+            public bool UseAsProxy { get; internal set; }
+            /// <summary>
+            /// Gets the transformation template applied to request paths.
+            /// </summary>
+            public string? ProxyRequestPathTemplate { get; internal set; }
+
+
+            /// <summary>
+            /// Gets the list of app ids this server can be used with.
+            /// </summary>
+            public uint[]? AllowedAppIds { get; internal set; }
 
             /// <summary>
             /// Performs an implicit conversion from <see cref="System.Net.IPEndPoint"/> to <see cref="SteamKit2.CDNClient.Server"/>.
