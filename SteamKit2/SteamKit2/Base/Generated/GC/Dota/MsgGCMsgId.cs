@@ -926,6 +926,9 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgServerToGCGetGuildContractsResponse = 8745,
         k_EMsgLobbyEventGameData = 8746,
         k_EMsgGCToClientGuildMembersDataUpdated = 8747,
+        k_EMsgSignOutReportActivityMarkers = 8748,
+        k_EMsgSignOutDiretideCandy = 8749,
+        k_EMsgGCToClientPostGameItemAwardNotification = 8750,
     }
 
 }

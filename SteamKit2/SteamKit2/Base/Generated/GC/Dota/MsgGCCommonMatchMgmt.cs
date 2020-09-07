@@ -1761,10 +1761,22 @@ namespace SteamKit2.GC.Dota.Internal
         private ulong? __pbn__lobby_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<CSODOTALobbyMember> members { get; } = new global::System.Collections.Generic.List<CSODOTALobbyMember>();
+        public global::System.Collections.Generic.List<CSODOTALobbyMember> v2_members { get; } = new global::System.Collections.Generic.List<CSODOTALobbyMember>();
 
         [global::ProtoBuf.ProtoMember(7)]
-        public global::System.Collections.Generic.List<CSODOTALobbyMember> left_members { get; } = new global::System.Collections.Generic.List<CSODOTALobbyMember>();
+        public global::System.Collections.Generic.List<CSODOTALobbyMember> v2_left_members { get; } = new global::System.Collections.Generic.List<CSODOTALobbyMember>();
+
+        [global::ProtoBuf.ProtoMember(120)]
+        public global::System.Collections.Generic.List<CSODOTALobbyMember> all_members { get; } = new global::System.Collections.Generic.List<CSODOTALobbyMember>();
+
+        [global::ProtoBuf.ProtoMember(121)]
+        public global::System.Collections.Generic.List<uint> member_indices { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(122)]
+        public global::System.Collections.Generic.List<uint> left_member_indices { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(123)]
+        public global::System.Collections.Generic.List<uint> free_member_indices { get; } = new global::System.Collections.Generic.List<uint>();
 
         [global::ProtoBuf.ProtoMember(11, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong leader_id

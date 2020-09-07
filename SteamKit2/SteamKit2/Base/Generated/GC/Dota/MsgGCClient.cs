@@ -1443,6 +1443,9 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetdisable_guild_persona_info() => __pbn__disable_guild_persona_info = null;
         private bool? __pbn__disable_guild_persona_info;
 
+        [global::ProtoBuf.ProtoMember(34)]
+        public global::System.Collections.Generic.List<CExtraMsgBlock> extra_message_blocks { get; } = new global::System.Collections.Generic.List<CExtraMsgBlock>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class CExtraMsg : global::ProtoBuf.IExtensible
         {
@@ -16888,6 +16891,28 @@ namespace SteamKit2.GC.Dota.Internal
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgDOTAPostGameItemAwardNotification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint receiver_account_id
+        {
+            get => __pbn__receiver_account_id.GetValueOrDefault();
+            set => __pbn__receiver_account_id = value;
+        }
+        public bool ShouldSerializereceiver_account_id() => __pbn__receiver_account_id != null;
+        public void Resetreceiver_account_id() => __pbn__receiver_account_id = null;
+        private uint? __pbn__receiver_account_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<uint> item_def_index { get; } = new global::System.Collections.Generic.List<uint>();
 
     }
 

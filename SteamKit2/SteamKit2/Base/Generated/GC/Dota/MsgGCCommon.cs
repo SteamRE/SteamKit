@@ -8740,55 +8740,6 @@ namespace SteamKit2.GC.Dota.Internal
         public global::System.Collections.Generic.List<PlayerGrants> player_grants { get; } = new global::System.Collections.Generic.List<PlayerGrants>();
 
         [global::ProtoBuf.ProtoContract()]
-        public partial class Grant : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint event_id
-            {
-                get => __pbn__event_id.GetValueOrDefault();
-                set => __pbn__event_id = value;
-            }
-            public bool ShouldSerializeevent_id() => __pbn__event_id != null;
-            public void Resetevent_id() => __pbn__event_id = null;
-            private uint? __pbn__event_id;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public uint action_id
-            {
-                get => __pbn__action_id.GetValueOrDefault();
-                set => __pbn__action_id = value;
-            }
-            public bool ShouldSerializeaction_id() => __pbn__action_id != null;
-            public void Resetaction_id() => __pbn__action_id = null;
-            private uint? __pbn__action_id;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public uint audit
-            {
-                get => __pbn__audit.GetValueOrDefault();
-                set => __pbn__audit = value;
-            }
-            public bool ShouldSerializeaudit() => __pbn__audit != null;
-            public void Resetaudit() => __pbn__audit = null;
-            private uint? __pbn__audit;
-
-            [global::ProtoBuf.ProtoMember(4)]
-            public uint quantity
-            {
-                get => __pbn__quantity.GetValueOrDefault();
-                set => __pbn__quantity = value;
-            }
-            public bool ShouldSerializequantity() => __pbn__quantity != null;
-            public void Resetquantity() => __pbn__quantity = null;
-            private uint? __pbn__quantity;
-
-        }
-
-        [global::ProtoBuf.ProtoContract()]
         public partial class PlayerGrants : global::ProtoBuf.IExtensible
         {
             private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -8804,9 +8755,6 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
             private uint? __pbn__account_id;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public global::System.Collections.Generic.List<CMsgMatchEventActionGrants.Grant> actions_granted_old { get; } = new global::System.Collections.Generic.List<CMsgMatchEventActionGrants.Grant>();
 
             [global::ProtoBuf.ProtoMember(3)]
             public global::System.Collections.Generic.List<CMsgPendingEventAward> actions_granted { get; } = new global::System.Collections.Generic.List<CMsgPendingEventAward>();
@@ -9833,6 +9781,16 @@ namespace SteamKit2.GC.Dota.Internal
         k_EDOTATriviaQuestionCategory_ItemComponents = 12,
         k_EDOTATriviaQuestionCategory_ItemLore = 13,
         k_EDOTATriviaQuestionCategory_ItemPassives = 14,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EDOTAReportMarkerType
+    {
+        k_EDOTAReportMarkerType_Unknown = 0,
+        k_EDOTAReportMarkerType_Comms = 1,
+        k_EDOTAReportMarkerType_Scripting = 2,
+        k_EDOTAReportMarkerType_Feeding = 3,
+        k_EDOTAReportMarkerType_Suspicious = 4,
     }
 
 }

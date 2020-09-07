@@ -1153,7 +1153,8 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_NEW_BLOOM_2020 = 28,
         EVENT_ID_INTERNATIONAL_2020 = 29,
         EVENT_ID_TEAM_FANDOM = 30,
-        EVENT_ID_COUNT = 31,
+        EVENT_ID_DIRETIDE_2020 = 31,
+        EVENT_ID_COUNT = 32,
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -1009,6 +1009,79 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSignOutReportActivityMarkers : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<Marker> markers { get; } = new global::System.Collections.Generic.List<Marker>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Marker : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint game_time_s
+            {
+                get => __pbn__game_time_s.GetValueOrDefault();
+                set => __pbn__game_time_s = value;
+            }
+            public bool ShouldSerializegame_time_s() => __pbn__game_time_s != null;
+            public void Resetgame_time_s() => __pbn__game_time_s = null;
+            private uint? __pbn__game_time_s;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint target_account_id
+            {
+                get => __pbn__target_account_id.GetValueOrDefault();
+                set => __pbn__target_account_id = value;
+            }
+            public bool ShouldSerializetarget_account_id() => __pbn__target_account_id != null;
+            public void Resettarget_account_id() => __pbn__target_account_id = null;
+            private uint? __pbn__target_account_id;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint reporter_account_id
+            {
+                get => __pbn__reporter_account_id.GetValueOrDefault();
+                set => __pbn__reporter_account_id = value;
+            }
+            public bool ShouldSerializereporter_account_id() => __pbn__reporter_account_id != null;
+            public void Resetreporter_account_id() => __pbn__reporter_account_id = null;
+            private uint? __pbn__reporter_account_id;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            [global::System.ComponentModel.DefaultValue(EDOTAReportMarkerType.k_EDOTAReportMarkerType_Unknown)]
+            public EDOTAReportMarkerType marker_type
+            {
+                get => __pbn__marker_type ?? EDOTAReportMarkerType.k_EDOTAReportMarkerType_Unknown;
+                set => __pbn__marker_type = value;
+            }
+            public bool ShouldSerializemarker_type() => __pbn__marker_type != null;
+            public void Resetmarker_type() => __pbn__marker_type = null;
+            private EDOTAReportMarkerType? __pbn__marker_type;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string comment
+            {
+                get => __pbn__comment ?? "";
+                set => __pbn__comment = value;
+            }
+            public bool ShouldSerializecomment() => __pbn__comment != null;
+            public void Resetcomment() => __pbn__comment = null;
+            private string __pbn__comment;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgGameMatchSignOut : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -8320,6 +8393,58 @@ namespace SteamKit2.GC.Dota.Internal
 
             [global::ProtoBuf.ProtoMember(4)]
             public global::System.Collections.Generic.List<CMsgServerToGCGetGuildContractsResponse.ContractDetails> contracts { get; } = new global::System.Collections.Generic.List<CMsgServerToGCGetGuildContractsResponse.ContractDetails>();
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgMatchDiretideCandy : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<PlayerCandy> player_candy_data { get; } = new global::System.Collections.Generic.List<PlayerCandy>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
+        public EEvent event_id
+        {
+            get => __pbn__event_id ?? EEvent.EVENT_ID_NONE;
+            set => __pbn__event_id = value;
+        }
+        public bool ShouldSerializeevent_id() => __pbn__event_id != null;
+        public void Resetevent_id() => __pbn__event_id = null;
+        private EEvent? __pbn__event_id;
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class PlayerCandy : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint account_id
+            {
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
+            }
+            public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+            public void Resetaccount_id() => __pbn__account_id = null;
+            private uint? __pbn__account_id;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint candy_amount
+            {
+                get => __pbn__candy_amount.GetValueOrDefault();
+                set => __pbn__candy_amount = value;
+            }
+            public bool ShouldSerializecandy_amount() => __pbn__candy_amount != null;
+            public void Resetcandy_amount() => __pbn__candy_amount = null;
+            private uint? __pbn__candy_amount;
 
         }
 
