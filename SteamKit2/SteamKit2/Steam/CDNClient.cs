@@ -97,7 +97,6 @@ namespace SteamKit2
             /// </summary>
             public string? ProxyRequestPathTemplate { get; internal set; }
 
-
             /// <summary>
             /// Gets the list of app ids this server can be used with.
             /// </summary>
@@ -234,6 +233,7 @@ namespace SteamKit2
 
 
         HttpClient httpClient;
+        RequestTransformer uriTransformer;
 
         ConcurrentDictionary<uint, byte[]?> depotKeys;
         ConcurrentDictionary<uint, string?> depotCdnAuthKeys;
@@ -243,6 +243,12 @@ namespace SteamKit2
         /// </summary>
         public static TimeSpan RequestTimeout = TimeSpan.FromSeconds( 10 );
 
+        /// <summary>
+        /// Optional transformer for request URIs
+        /// </summary>
+        /// <param name="uriBuilder">URI</param>
+        /// <returns>Transformed URI</returns>
+        public delegate UriBuilder RequestTransformer( UriBuilder uriBuilder );
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CDNClient"/> class.
@@ -260,6 +266,18 @@ namespace SteamKit2
             this.httpClient = steamClient.Configuration.HttpClientFactory();
             this.depotKeys = new ConcurrentDictionary<uint, byte[]?>();
             this.depotCdnAuthKeys = new ConcurrentDictionary<uint, string?>();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CDNClient"/> class.
+        /// </summary>
+        /// <param name="steamClient">
+        /// The <see cref="SteamClient"/> this instance will be associated with.
+        /// The SteamClient instance must be connected and logged onto Steam.</param>
+        /// <param name="uriTransformer">A request transformer to be registered.</param>
+        public CDNClient(SteamClient steamClient, RequestTransformer uriTransformer) : this (steamClient)
+        {
+            this.uriTransformer = uriTransformer;
         }
 
 
@@ -530,7 +548,7 @@ namespace SteamKit2
             }
         }
 
-        static Uri BuildCommand( Server server, string command, string args )
+        Uri BuildCommand( Server server, string command, string args )
         {
             var uriBuilder = new UriBuilder
             {
@@ -540,6 +558,11 @@ namespace SteamKit2
                 Path = command,
                 Query = args
             };
+
+            if (uriTransformer != null)
+            {
+                uriBuilder = uriTransformer( uriBuilder );
+            }
 
             return uriBuilder.Uri;
         }
