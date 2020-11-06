@@ -233,7 +233,7 @@ namespace SteamKit2
 
 
         HttpClient httpClient;
-        RequestTransformer uriTransformer;
+        RequestTransformer? uriTransformer;
 
         ConcurrentDictionary<uint, byte[]?> depotKeys;
         ConcurrentDictionary<uint, string?> depotCdnAuthKeys;
