@@ -128,9 +128,17 @@ namespace SteamKit2
             jobStart = DateTime.UtcNow;
             JobID = jobId;
 
-            client.StartJob( this );
+            
         }
 
+        /// <summary>
+        /// Constructors are required to register this AsyncJob with the JobManager once initialized.
+        /// </summary>
+        /// <param name="client"></param>
+        internal void RegisterJob( SteamClient client )
+        {
+            client.StartJob( this );
+        }
 
         /// <summary>
         /// Adds a callback to the async job's result set.
@@ -178,6 +186,8 @@ namespace SteamKit2
             : base( client, jobId )
         {
             tcs = new TaskCompletionSource<T>( TaskCreationOptions.RunContinuationsAsynchronously );
+
+            RegisterJob( client );
         }
 
 
@@ -290,6 +300,8 @@ namespace SteamKit2
             tcs = new TaskCompletionSource<ResultSet>( TaskCreationOptions.RunContinuationsAsynchronously );
 
             this.finishCondition = finishCondition;
+
+            RegisterJob( client );
         }
 
 

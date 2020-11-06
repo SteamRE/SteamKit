@@ -28,6 +28,7 @@ namespace SteamKit2
         {
             asyncJobs.TryAdd( asyncJob, asyncJob );
         }
+
         /// <summary>
         /// Passes a callback to a pending async job.
         /// If the given callback completes the job, the job is removed from this manager.
