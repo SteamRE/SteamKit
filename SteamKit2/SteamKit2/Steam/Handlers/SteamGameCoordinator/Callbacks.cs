@@ -41,6 +41,7 @@ namespace SteamKit2
                 this.eMsg = gcMsg.msgtype;
                 this.AppID = gcMsg.appid;
                 this.Message = GetPacketGCMsg( gcMsg.msgtype, gcMsg.payload );
+                this.JobID = this.Message.TargetJobID;
             }
 
 
