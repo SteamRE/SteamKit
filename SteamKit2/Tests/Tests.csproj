@@ -6,6 +6,7 @@
     <ProjectGuid>{5BF6D076-399B-41CA-BAE7-37CE1C40CA67}</ProjectGuid>
     <AssemblyOriginatorKeyFile>..\..\SteamKit.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>
