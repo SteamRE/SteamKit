@@ -44,7 +44,7 @@ jobs:
 
     - name: Run Tests
       if: matrix.configuration == 'Debug'
-      run: dotnet test --no-restore --verbosity normal SteamKit2/Tests/Tests.csproj
+      run: dotnet test --verbosity normal SteamKit2/Tests/Tests.csproj
 
   steamkit2-artifacts:
     name: Create NuGet Package
@@ -103,7 +103,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.0
+      uses: microsoft/setup-msbuild@v1.0.2
 
     - name: Configure Dependencies
       run: Resources/NetHook2/SetupDependencies.cmd
