@@ -733,7 +733,7 @@ namespace SteamKit2
             // Only supported types ATM:
             // 1. KeyValue with children (no value itself)
             // 2. String KeyValue
-            if ( Children.Any() )
+            if ( Value == null )
             {
                 f.WriteByte( ( byte )Type.None );
                 f.WriteNullTermString( GetNameForSerialization(), Encoding.UTF8 );
@@ -747,7 +747,7 @@ namespace SteamKit2
             {
                 f.WriteByte( ( byte )Type.String );
                 f.WriteNullTermString( GetNameForSerialization(), Encoding.UTF8 );
-                f.WriteNullTermString( Value ?? string.Empty, Encoding.UTF8 );
+                f.WriteNullTermString( Value, Encoding.UTF8 );
             }
         }
 
