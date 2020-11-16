@@ -856,6 +856,9 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetleague_node_id() => __pbn__league_node_id = null;
         private uint? __pbn__league_node_id;
 
+        [global::ProtoBuf.ProtoMember(50)]
+        public global::System.Collections.Generic.List<uint> requested_hero_ids { get; } = new global::System.Collections.Generic.List<uint>();
+
     }
 
     [global::ProtoBuf.ProtoContract()]

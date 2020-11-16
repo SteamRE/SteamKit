@@ -345,6 +345,8 @@ enum EPaymentMethod
 	StorePromotion = 131; removed "renamed to Promotional"
 	Promotional = 131;
 	MasterSubscription = 134;
+	Payco = 135;
+	MobileWalletJapan = 136;
 	OEMTicket = 256;
 	Split = 512;
 	Complimentary = 1024;
@@ -722,6 +724,9 @@ enum EOSType
 	Linux414 = -188;
 	Linux419 = -187;
 	Linux5x = -186;
+	Linux54 = -185;
+	Linux6x = -184;
+	Linux7x = -183;
 	LinuxMax = -101;
 
 	WinUnknown = 0;

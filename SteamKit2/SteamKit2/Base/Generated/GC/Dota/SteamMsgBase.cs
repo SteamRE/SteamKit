@@ -2346,6 +2346,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resettxn_country_code() => __pbn__txn_country_code = null;
         private string __pbn__txn_country_code;
 
+        [global::ProtoBuf.ProtoMember(38)]
+        public bool has_accepted_china_ssa
+        {
+            get => __pbn__has_accepted_china_ssa.GetValueOrDefault();
+            set => __pbn__has_accepted_china_ssa = value;
+        }
+        public bool ShouldSerializehas_accepted_china_ssa() => __pbn__has_accepted_china_ssa != null;
+        public void Resethas_accepted_china_ssa() => __pbn__has_accepted_china_ssa = null;
+        private bool? __pbn__has_accepted_china_ssa;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

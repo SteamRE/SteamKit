@@ -56,6 +56,17 @@ namespace SteamKit2.Internal
         public void Resetfor_local_cs() => __pbn__for_local_cs = null;
         private bool? __pbn__for_local_cs;
 
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string target_branch
+        {
+            get => __pbn__target_branch ?? "";
+            set => __pbn__target_branch = value;
+        }
+        public bool ShouldSerializetarget_branch() => __pbn__target_branch != null;
+        public void Resettarget_branch() => __pbn__target_branch = null;
+        private string __pbn__target_branch;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

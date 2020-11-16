@@ -562,6 +562,35 @@ namespace SteamKit2.GC.Dota.Internal
             }
 
             [global::ProtoBuf.ProtoContract()]
+            public partial class CandyGrant : global::ProtoBuf.IExtensible
+            {
+                private global::ProtoBuf.IExtension __pbn__extensionData;
+                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+                [global::ProtoBuf.ProtoMember(1)]
+                public uint points
+                {
+                    get => __pbn__points.GetValueOrDefault();
+                    set => __pbn__points = value;
+                }
+                public bool ShouldSerializepoints() => __pbn__points != null;
+                public void Resetpoints() => __pbn__points = null;
+                private uint? __pbn__points;
+
+                [global::ProtoBuf.ProtoMember(2)]
+                public uint reason
+                {
+                    get => __pbn__reason.GetValueOrDefault();
+                    set => __pbn__reason = value;
+                }
+                public bool ShouldSerializereason() => __pbn__reason != null;
+                public void Resetreason() => __pbn__reason = null;
+                private uint? __pbn__reason;
+
+            }
+
+            [global::ProtoBuf.ProtoContract()]
             public partial class EventData : global::ProtoBuf.IExtensible
             {
                 private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -756,6 +785,9 @@ namespace SteamKit2.GC.Dota.Internal
                 public bool ShouldSerializewager_streak_pct() => __pbn__wager_streak_pct != null;
                 public void Resetwager_streak_pct() => __pbn__wager_streak_pct = null;
                 private uint? __pbn__wager_streak_pct;
+
+                [global::ProtoBuf.ProtoMember(23)]
+                public global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.CandyGrant> candy_points_granted { get; } = new global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.CandyGrant>();
 
             }
 
@@ -1174,6 +1206,9 @@ namespace SteamKit2.GC.Dota.Internal
 
                 [global::ProtoBuf.ProtoMember(48)]
                 public global::System.Collections.Generic.List<ContractProgress> contract_progress { get; } = new global::System.Collections.Generic.List<ContractProgress>();
+
+                [global::ProtoBuf.ProtoMember(49)]
+                public global::System.Collections.Generic.List<uint> guild_ids { get; } = new global::System.Collections.Generic.List<uint>();
 
                 [global::ProtoBuf.ProtoContract()]
                 public partial class ContractProgress : global::ProtoBuf.IExtensible

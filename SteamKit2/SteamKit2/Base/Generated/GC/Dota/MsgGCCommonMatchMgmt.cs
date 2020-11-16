@@ -1294,6 +1294,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetguild_id() => __pbn__guild_id = null;
         private uint? __pbn__guild_id;
 
+        [global::ProtoBuf.ProtoMember(52)]
+        public uint reports_available
+        {
+            get => __pbn__reports_available.GetValueOrDefault();
+            set => __pbn__reports_available = value;
+        }
+        public bool ShouldSerializereports_available() => __pbn__reports_available != null;
+        public void Resetreports_available() => __pbn__reports_available = null;
+        private uint? __pbn__reports_available;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1547,6 +1557,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetguild_tag() => __pbn__guild_tag = null;
         private string __pbn__guild_tag;
 
+        [global::ProtoBuf.ProtoMember(11)]
+        public uint guild_weekly_percentile
+        {
+            get => __pbn__guild_weekly_percentile.GetValueOrDefault();
+            set => __pbn__guild_weekly_percentile = value;
+        }
+        public bool ShouldSerializeguild_weekly_percentile() => __pbn__guild_weekly_percentile != null;
+        public void Resetguild_weekly_percentile() => __pbn__guild_weekly_percentile = null;
+        private uint? __pbn__guild_weekly_percentile;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1761,10 +1781,22 @@ namespace SteamKit2.GC.Dota.Internal
         private ulong? __pbn__lobby_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<CSODOTALobbyMember> members { get; } = new global::System.Collections.Generic.List<CSODOTALobbyMember>();
+        public global::System.Collections.Generic.List<CSODOTALobbyMember> v2_members { get; } = new global::System.Collections.Generic.List<CSODOTALobbyMember>();
 
         [global::ProtoBuf.ProtoMember(7)]
-        public global::System.Collections.Generic.List<CSODOTALobbyMember> left_members { get; } = new global::System.Collections.Generic.List<CSODOTALobbyMember>();
+        public global::System.Collections.Generic.List<CSODOTALobbyMember> v2_left_members { get; } = new global::System.Collections.Generic.List<CSODOTALobbyMember>();
+
+        [global::ProtoBuf.ProtoMember(120)]
+        public global::System.Collections.Generic.List<CSODOTALobbyMember> all_members { get; } = new global::System.Collections.Generic.List<CSODOTALobbyMember>();
+
+        [global::ProtoBuf.ProtoMember(121)]
+        public global::System.Collections.Generic.List<uint> member_indices { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(122)]
+        public global::System.Collections.Generic.List<uint> left_member_indices { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(123)]
+        public global::System.Collections.Generic.List<uint> free_member_indices { get; } = new global::System.Collections.Generic.List<uint>();
 
         [global::ProtoBuf.ProtoMember(11, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong leader_id
@@ -2620,6 +2652,9 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(119)]
         public global::System.Collections.Generic.List<CMsgLobbyEventPoints> lobby_event_points { get; } = new global::System.Collections.Generic.List<CMsgLobbyEventPoints>();
 
+        [global::ProtoBuf.ProtoMember(124)]
+        public global::System.Collections.Generic.List<uint> requested_hero_ids { get; } = new global::System.Collections.Generic.List<uint>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class CExtraMsg : global::ProtoBuf.IExtensible
         {
@@ -3279,6 +3314,7 @@ namespace SteamKit2.GC.Dota.Internal
         LobbyDotaTV_10 = 0,
         LobbyDotaTV_120 = 1,
         LobbyDotaTV_300 = 2,
+        LobbyDotaTV_900 = 3,
     }
 
     [global::ProtoBuf.ProtoContract()]

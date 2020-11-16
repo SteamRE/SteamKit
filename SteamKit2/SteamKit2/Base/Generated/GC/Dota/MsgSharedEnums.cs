@@ -1153,7 +1153,8 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_NEW_BLOOM_2020 = 28,
         EVENT_ID_INTERNATIONAL_2020 = 29,
         EVENT_ID_TEAM_FANDOM = 30,
-        EVENT_ID_COUNT = 31,
+        EVENT_ID_DIRETIDE_2020 = 31,
+        EVENT_ID_COUNT = 32,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1693,6 +1694,17 @@ namespace SteamKit2.GC.Dota.Internal
     {
         k_eEventActionScoreMode_Add = 0,
         k_eEventActionScoreMode_Min = 1,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EOverwatchReportReason
+    {
+        k_EOverwatchReportReason_Unknown = 0,
+        k_EOverwatchReportReason_Cheating = 1,
+        k_EOverwatchReportReason_Feeding = 2,
+        k_EOverwatchReportReason_Griefing = 3,
+        k_EOverwatchReportReason_Suspicious = 4,
+        k_EOverwatchReportReason_AbilityAbuse = 5,
     }
 
 }

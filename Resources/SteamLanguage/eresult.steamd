@@ -126,4 +126,7 @@ enum EResult
 	AccountHasBeenDeleted = 114;
 	AccountHasAnExistingUserCancelledLicense = 115;
 	DeniedDueToCommunityCooldown = 116;
+	NoLauncherSpecified = 117;
+	MustAgreeToSSA = 118;
+	ClientNoLongerSupported = 119;
 };

@@ -2822,6 +2822,48 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CProtoItemSocket_Strange_DESERIALIZE_FROM_STRING_ONLY : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CProtoItemSocket socket { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint strange_type
+        {
+            get => __pbn__strange_type.GetValueOrDefault();
+            set => __pbn__strange_type = value;
+        }
+        public bool ShouldSerializestrange_type() => __pbn__strange_type != null;
+        public void Resetstrange_type() => __pbn__strange_type = null;
+        private uint? __pbn__strange_type;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint strange_value
+        {
+            get => __pbn__strange_value.GetValueOrDefault();
+            set => __pbn__strange_value = value;
+        }
+        public bool ShouldSerializestrange_value() => __pbn__strange_value != null;
+        public void Resetstrange_value() => __pbn__strange_value = null;
+        private uint? __pbn__strange_value;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint ability_effect
+        {
+            get => __pbn__ability_effect.GetValueOrDefault();
+            set => __pbn__ability_effect = value;
+        }
+        public bool ShouldSerializeability_effect() => __pbn__ability_effect != null;
+        public void Resetability_effect() => __pbn__ability_effect = null;
+        private uint? __pbn__ability_effect;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CProtoItemSocket_Spectator : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -3702,6 +3744,16 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializereason_code() => __pbn__reason_code != null;
         public void Resetreason_code() => __pbn__reason_code = null;
         private uint? __pbn__reason_code;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint partner
+        {
+            get => __pbn__partner.GetValueOrDefault();
+            set => __pbn__partner = value;
+        }
+        public bool ShouldSerializepartner() => __pbn__partner != null;
+        public void Resetpartner() => __pbn__partner = null;
+        private uint? __pbn__partner;
 
     }
 

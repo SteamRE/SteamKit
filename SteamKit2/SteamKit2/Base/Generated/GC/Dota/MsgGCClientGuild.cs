@@ -242,6 +242,46 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetguild_points() => __pbn__guild_points = null;
             private uint? __pbn__guild_points;
 
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint guild_rank
+            {
+                get => __pbn__guild_rank.GetValueOrDefault();
+                set => __pbn__guild_rank = value;
+            }
+            public bool ShouldSerializeguild_rank() => __pbn__guild_rank != null;
+            public void Resetguild_rank() => __pbn__guild_rank = null;
+            private uint? __pbn__guild_rank;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public uint guild_weekly_rank
+            {
+                get => __pbn__guild_weekly_rank.GetValueOrDefault();
+                set => __pbn__guild_weekly_rank = value;
+            }
+            public bool ShouldSerializeguild_weekly_rank() => __pbn__guild_weekly_rank != null;
+            public void Resetguild_weekly_rank() => __pbn__guild_weekly_rank = null;
+            private uint? __pbn__guild_weekly_rank;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public uint guild_weekly_percentile
+            {
+                get => __pbn__guild_weekly_percentile.GetValueOrDefault();
+                set => __pbn__guild_weekly_percentile = value;
+            }
+            public bool ShouldSerializeguild_weekly_percentile() => __pbn__guild_weekly_percentile != null;
+            public void Resetguild_weekly_percentile() => __pbn__guild_weekly_percentile = null;
+            private uint? __pbn__guild_weekly_percentile;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public uint guild_current_percentile
+            {
+                get => __pbn__guild_current_percentile.GetValueOrDefault();
+                set => __pbn__guild_current_percentile = value;
+            }
+            public bool ShouldSerializeguild_current_percentile() => __pbn__guild_current_percentile != null;
+            public void Resetguild_current_percentile() => __pbn__guild_current_percentile = null;
+            private uint? __pbn__guild_current_percentile;
+
         }
 
     }

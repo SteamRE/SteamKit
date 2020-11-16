@@ -911,6 +911,17 @@ namespace SteamKit2.Internal
         public void Resetforce_client_update_check() => __pbn__force_client_update_check = null;
         private bool? __pbn__force_client_update_check;
 
+        [global::ProtoBuf.ProtoMember(29)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string agreement_session_url
+        {
+            get => __pbn__agreement_session_url ?? "";
+            set => __pbn__agreement_session_url = value;
+        }
+        public bool ShouldSerializeagreement_session_url() => __pbn__agreement_session_url != null;
+        public void Resetagreement_session_url() => __pbn__agreement_session_url = null;
+        private string __pbn__agreement_session_url;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
