@@ -85,7 +85,7 @@ namespace SteamKit2
     {
         public override byte[] GetMachineGuid()
         {
-            RegistryKey localKey = RegistryKey
+            var localKey = RegistryKey
                 .OpenBaseKey( Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry64 )
                 .OpenSubKey( @"SOFTWARE\Microsoft\Cryptography" );
 
@@ -94,7 +94,7 @@ namespace SteamKit2
                 return base.GetMachineGuid();
             }
 
-            object guid = localKey.GetValue( "MachineGuid" );
+            var guid = localKey.GetValue( "MachineGuid" );
 
             if ( guid == null )
             {
