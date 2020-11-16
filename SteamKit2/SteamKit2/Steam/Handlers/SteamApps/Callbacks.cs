@@ -463,7 +463,7 @@ namespace SteamKit2
                 /// <summary>
                 /// Gets the hash of the content
                 /// </summary>
-                public byte[] SHAHash { get; private set; }
+                public byte[]? SHAHash { get; private set; }
                 /// <summary>
                 /// Gets the KeyValue info
                 /// </summary>
