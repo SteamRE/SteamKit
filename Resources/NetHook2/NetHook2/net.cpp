@@ -24,8 +24,8 @@ CNet::CNet() noexcept
 
 	BBuildAndAsyncSendFrameFn pBuildFunc = nullptr;
 	const bool bFoundBuildFunc = steamClientScan.FindFunction(
-		"\x55\x8B\xEC\x83\xEC\x00\x53\x6A\x04\x6A\x00\x6A\x06\x8B\xD9\x8D\x4D\xEC\x6A\x00\x68",
-		"xxxxx?xxxxxxxxxxxxxxx",
+		"\x55\x8B\xEC\x83\xEC\x74\xA1\x00\x00\x00\x00\x53\x8B\xD9\x89\x5D\xEC\x83\x38",
+		"xxxxxxx????xxxxxxxx",
 		(void **)&pBuildFunc
 	);
 
