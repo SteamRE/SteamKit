@@ -37,7 +37,7 @@ namespace SteamKit2
                 {
                     EndPoint = new IPEndPoint(
                         server.server_ip.GetIPAddress(),
-                        ( int )server.server_port );
+                        ( int )server.query_port );
 
                     AuthedPlayers = server.auth_players;
                 }
