@@ -1865,6 +1865,9 @@ namespace SteamKit2
 		AccountHasBeenDeleted = 114,
 		AccountHasAnExistingUserCancelledLicense = 115,
 		DeniedDueToCommunityCooldown = 116,
+		NoLauncherSpecified = 117,
+		MustAgreeToSSA = 118,
+		ClientNoLongerSupported = 119,
 	}
 	public enum EUniverse
 	{
@@ -2177,6 +2180,8 @@ namespace SteamKit2
 		MasterComp = 130,
 		Promotional = 131,
 		MasterSubscription = 134,
+		Payco = 135,
+		MobileWalletJapan = 136,
 		OEMTicket = 256,
 		Split = 512,
 		Complimentary = 1024,
@@ -2516,6 +2521,9 @@ namespace SteamKit2
 		Linux414 = -188,
 		Linux419 = -187,
 		Linux5x = -186,
+		Linux54 = -185,
+		Linux6x = -184,
+		Linux7x = -183,
 		LinuxMax = -101,
 		WinUnknown = 0,
 		Win311 = 1,

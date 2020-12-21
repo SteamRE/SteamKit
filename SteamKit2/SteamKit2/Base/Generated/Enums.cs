@@ -90,6 +90,35 @@ namespace SteamKit2.Internal
         k_EBanContentCheckResult_VeryLikely = 100,
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public enum EProfileCustomizationType
+    {
+        k_EProfileCustomizationTypeInvalid = 0,
+        k_EProfileCustomizationTypeRareAchievementShowcase = 1,
+        k_EProfileCustomizationTypeGameCollector = 2,
+        k_EProfileCustomizationTypeItemShowcase = 3,
+        k_EProfileCustomizationTypeTradeShowcase = 4,
+        k_EProfileCustomizationTypeBadges = 5,
+        k_EProfileCustomizationTypeFavoriteGame = 6,
+        k_EProfileCustomizationTypeScreenshotShowcase = 7,
+        k_EProfileCustomizationTypeCustomText = 8,
+        k_EProfileCustomizationTypeFavoriteGroup = 9,
+        k_EProfileCustomizationTypeRecommendation = 10,
+        k_EProfileCustomizationTypeWorkshopItem = 11,
+        k_EProfileCustomizationTypeMyWorkshop = 12,
+        k_EProfileCustomizationTypeArtworkShowcase = 13,
+        k_EProfileCustomizationTypeVideoShowcase = 14,
+        k_EProfileCustomizationTypeGuides = 15,
+        k_EProfileCustomizationTypeMyGuides = 16,
+        k_EProfileCustomizationTypeAchievements = 17,
+        k_EProfileCustomizationTypeGreenlight = 18,
+        k_EProfileCustomizationTypeMyGreenlight = 19,
+        k_EProfileCustomizationTypeSalien = 20,
+        k_EProfileCustomizationTypeLoyaltyRewardReactions = 21,
+        k_EProfileCustomizationTypeSingleArtworkShowcase = 22,
+        k_EProfileCustomizationTypeAchievementsCompletionist = 23,
+    }
+
 }
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

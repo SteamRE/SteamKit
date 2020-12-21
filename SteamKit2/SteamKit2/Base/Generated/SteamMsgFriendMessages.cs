@@ -176,6 +176,43 @@ namespace SteamKit2.Internal
             public void Resetordinal() => __pbn__ordinal = null;
             private uint? __pbn__ordinal;
 
+            [global::ProtoBuf.ProtoMember(5)]
+            public global::System.Collections.Generic.List<MessageReaction> reactions { get; } = new global::System.Collections.Generic.List<MessageReaction>();
+
+            [global::ProtoBuf.ProtoContract()]
+            public partial class MessageReaction : global::ProtoBuf.IExtensible
+            {
+                private global::ProtoBuf.IExtension __pbn__extensionData;
+                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+                [global::ProtoBuf.ProtoMember(1)]
+                [global::System.ComponentModel.DefaultValue(EMessageReactionType.k_EMessageReactionType_Invalid)]
+                public EMessageReactionType reaction_type
+                {
+                    get => __pbn__reaction_type ?? EMessageReactionType.k_EMessageReactionType_Invalid;
+                    set => __pbn__reaction_type = value;
+                }
+                public bool ShouldSerializereaction_type() => __pbn__reaction_type != null;
+                public void Resetreaction_type() => __pbn__reaction_type = null;
+                private EMessageReactionType? __pbn__reaction_type;
+
+                [global::ProtoBuf.ProtoMember(2)]
+                [global::System.ComponentModel.DefaultValue("")]
+                public string reaction
+                {
+                    get => __pbn__reaction ?? "";
+                    set => __pbn__reaction = value;
+                }
+                public bool ShouldSerializereaction() => __pbn__reaction != null;
+                public void Resetreaction() => __pbn__reaction = null;
+                private string __pbn__reaction;
+
+                [global::ProtoBuf.ProtoMember(3)]
+                public global::System.Collections.Generic.List<uint> reactors { get; } = new global::System.Collections.Generic.List<uint>();
+
+            }
+
         }
 
     }
@@ -490,6 +527,89 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CFriendMessages_UpdateMessageReaction_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint server_timestamp
+        {
+            get => __pbn__server_timestamp.GetValueOrDefault();
+            set => __pbn__server_timestamp = value;
+        }
+        public bool ShouldSerializeserver_timestamp() => __pbn__server_timestamp != null;
+        public void Resetserver_timestamp() => __pbn__server_timestamp = null;
+        private uint? __pbn__server_timestamp;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint ordinal
+        {
+            get => __pbn__ordinal.GetValueOrDefault();
+            set => __pbn__ordinal = value;
+        }
+        public bool ShouldSerializeordinal() => __pbn__ordinal != null;
+        public void Resetordinal() => __pbn__ordinal = null;
+        private uint? __pbn__ordinal;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(EMessageReactionType.k_EMessageReactionType_Invalid)]
+        public EMessageReactionType reaction_type
+        {
+            get => __pbn__reaction_type ?? EMessageReactionType.k_EMessageReactionType_Invalid;
+            set => __pbn__reaction_type = value;
+        }
+        public bool ShouldSerializereaction_type() => __pbn__reaction_type != null;
+        public void Resetreaction_type() => __pbn__reaction_type = null;
+        private EMessageReactionType? __pbn__reaction_type;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string reaction
+        {
+            get => __pbn__reaction ?? "";
+            set => __pbn__reaction = value;
+        }
+        public bool ShouldSerializereaction() => __pbn__reaction != null;
+        public void Resetreaction() => __pbn__reaction = null;
+        private string __pbn__reaction;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool is_add
+        {
+            get => __pbn__is_add.GetValueOrDefault();
+            set => __pbn__is_add = value;
+        }
+        public bool ShouldSerializeis_add() => __pbn__is_add != null;
+        public void Resetis_add() => __pbn__is_add = null;
+        private bool? __pbn__is_add;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CFriendMessages_UpdateMessageReaction_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<uint> reactors { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CFriendMessages_IncomingMessage_Notification : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -590,6 +710,94 @@ namespace SteamKit2.Internal
 
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CFriendMessages_MessageReaction_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid_friend
+        {
+            get => __pbn__steamid_friend.GetValueOrDefault();
+            set => __pbn__steamid_friend = value;
+        }
+        public bool ShouldSerializesteamid_friend() => __pbn__steamid_friend != null;
+        public void Resetsteamid_friend() => __pbn__steamid_friend = null;
+        private ulong? __pbn__steamid_friend;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint server_timestamp
+        {
+            get => __pbn__server_timestamp.GetValueOrDefault();
+            set => __pbn__server_timestamp = value;
+        }
+        public bool ShouldSerializeserver_timestamp() => __pbn__server_timestamp != null;
+        public void Resetserver_timestamp() => __pbn__server_timestamp = null;
+        private uint? __pbn__server_timestamp;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint ordinal
+        {
+            get => __pbn__ordinal.GetValueOrDefault();
+            set => __pbn__ordinal = value;
+        }
+        public bool ShouldSerializeordinal() => __pbn__ordinal != null;
+        public void Resetordinal() => __pbn__ordinal = null;
+        private uint? __pbn__ordinal;
+
+        [global::ProtoBuf.ProtoMember(4, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong reactor
+        {
+            get => __pbn__reactor.GetValueOrDefault();
+            set => __pbn__reactor = value;
+        }
+        public bool ShouldSerializereactor() => __pbn__reactor != null;
+        public void Resetreactor() => __pbn__reactor = null;
+        private ulong? __pbn__reactor;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue(EMessageReactionType.k_EMessageReactionType_Invalid)]
+        public EMessageReactionType reaction_type
+        {
+            get => __pbn__reaction_type ?? EMessageReactionType.k_EMessageReactionType_Invalid;
+            set => __pbn__reaction_type = value;
+        }
+        public bool ShouldSerializereaction_type() => __pbn__reaction_type != null;
+        public void Resetreaction_type() => __pbn__reaction_type = null;
+        private EMessageReactionType? __pbn__reaction_type;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string reaction
+        {
+            get => __pbn__reaction ?? "";
+            set => __pbn__reaction = value;
+        }
+        public bool ShouldSerializereaction() => __pbn__reaction != null;
+        public void Resetreaction() => __pbn__reaction = null;
+        private string __pbn__reaction;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool is_add
+        {
+            get => __pbn__is_add.GetValueOrDefault();
+            set => __pbn__is_add = value;
+        }
+        public bool ShouldSerializeis_add() => __pbn__is_add != null;
+        public void Resetis_add() => __pbn__is_add = null;
+        private bool? __pbn__is_add;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EMessageReactionType
+    {
+        k_EMessageReactionType_Invalid = 0,
+        k_EMessageReactionType_Emoticon = 1,
+    }
+
     public interface IFriendMessages
     {
         CFriendMessages_GetRecentMessages_Response GetRecentMessages(CFriendMessages_GetRecentMessages_Request request);
@@ -597,12 +805,14 @@ namespace SteamKit2.Internal
         CFriendMessages_SendMessage_Response SendMessage(CFriendMessages_SendMessage_Request request);
         NoResponse AckMessage(CFriendMessages_AckMessage_Notification request);
         CFriendMessages_IsInFriendsUIBeta_Response IsInFriendsUIBeta(CFriendMessages_IsInFriendsUIBeta_Request request);
+        CFriendMessages_UpdateMessageReaction_Response UpdateMessageReaction(CFriendMessages_UpdateMessageReaction_Request request);
     }
 
     public interface IFriendMessagesClient
     {
         NoResponse IncomingMessage(CFriendMessages_IncomingMessage_Notification request);
         NoResponse NotifyAckMessageEcho(CFriendMessages_AckMessage_Notification request);
+        NoResponse MessageReaction(CFriendMessages_MessageReaction_Notification request);
     }
 
 }

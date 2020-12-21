@@ -351,14 +351,14 @@ namespace SteamKit2.Internal
         private byte[] __pbn__candidate;
 
         [global::ProtoBuf.ProtoMember(5, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong connection_id_src
+        public ulong legacy_connection_id_src
         {
-            get => __pbn__connection_id_src.GetValueOrDefault();
-            set => __pbn__connection_id_src = value;
+            get => __pbn__legacy_connection_id_src.GetValueOrDefault();
+            set => __pbn__legacy_connection_id_src = value;
         }
-        public bool ShouldSerializeconnection_id_src() => __pbn__connection_id_src != null;
-        public void Resetconnection_id_src() => __pbn__connection_id_src = null;
-        private ulong? __pbn__connection_id_src;
+        public bool ShouldSerializelegacy_connection_id_src() => __pbn__legacy_connection_id_src != null;
+        public void Resetlegacy_connection_id_src() => __pbn__legacy_connection_id_src = null;
+        private ulong? __pbn__legacy_connection_id_src;
 
         [global::ProtoBuf.ProtoMember(6)]
         public byte[] rendezvous

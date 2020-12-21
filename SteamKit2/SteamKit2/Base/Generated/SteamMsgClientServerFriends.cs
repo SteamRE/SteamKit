@@ -1505,6 +1505,16 @@ namespace SteamKit2.Internal
             public void Resettime_received() => __pbn__time_received = null;
             private uint? __pbn__time_received;
 
+            [global::ProtoBuf.ProtoMember(6)]
+            public uint appid
+            {
+                get => __pbn__appid.GetValueOrDefault();
+                set => __pbn__appid = value;
+            }
+            public bool ShouldSerializeappid() => __pbn__appid != null;
+            public void Resetappid() => __pbn__appid = null;
+            private uint? __pbn__appid;
+
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -1554,6 +1564,26 @@ namespace SteamKit2.Internal
             public bool ShouldSerializeappid() => __pbn__appid != null;
             public void Resetappid() => __pbn__appid = null;
             private uint? __pbn__appid;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public uint time_last_used
+            {
+                get => __pbn__time_last_used.GetValueOrDefault();
+                set => __pbn__time_last_used = value;
+            }
+            public bool ShouldSerializetime_last_used() => __pbn__time_last_used != null;
+            public void Resettime_last_used() => __pbn__time_last_used = null;
+            private uint? __pbn__time_last_used;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public uint use_count
+            {
+                get => __pbn__use_count.GetValueOrDefault();
+                set => __pbn__use_count = value;
+            }
+            public bool ShouldSerializeuse_count() => __pbn__use_count != null;
+            public void Resetuse_count() => __pbn__use_count = null;
+            private uint? __pbn__use_count;
 
         }
 

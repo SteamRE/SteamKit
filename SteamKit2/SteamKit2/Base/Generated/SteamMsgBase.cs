@@ -593,6 +593,16 @@ namespace SteamKit2.Internal
         public void Resethas_adult_content() => __pbn__has_adult_content = null;
         private bool? __pbn__has_adult_content;
 
+        [global::ProtoBuf.ProtoMember(13)]
+        public bool is_visible_in_steam_china
+        {
+            get => __pbn__is_visible_in_steam_china.GetValueOrDefault();
+            set => __pbn__is_visible_in_steam_china = value;
+        }
+        public bool ShouldSerializeis_visible_in_steam_china() => __pbn__is_visible_in_steam_china != null;
+        public void Resetis_visible_in_steam_china() => __pbn__is_visible_in_steam_china = null;
+        private bool? __pbn__is_visible_in_steam_china;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1513,6 +1523,9 @@ namespace SteamKit2.Internal
         public void Resetfeatured_app_tagid() => __pbn__featured_app_tagid = null;
         private uint? __pbn__featured_app_tagid;
 
+        [global::ProtoBuf.ProtoMember(28)]
+        public global::System.Collections.Generic.List<uint> referenced_appids { get; } = new global::System.Collections.Generic.List<uint>();
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1630,6 +1643,96 @@ namespace SteamKit2.Internal
         public bool ShouldSerializephone() => __pbn__phone != null;
         public void Resetphone() => __pbn__phone = null;
         private string __pbn__phone;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPackageReservationStatus : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint packageid
+        {
+            get => __pbn__packageid.GetValueOrDefault();
+            set => __pbn__packageid = value;
+        }
+        public bool ShouldSerializepackageid() => __pbn__packageid != null;
+        public void Resetpackageid() => __pbn__packageid = null;
+        private uint? __pbn__packageid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public int reservation_state
+        {
+            get => __pbn__reservation_state.GetValueOrDefault();
+            set => __pbn__reservation_state = value;
+        }
+        public bool ShouldSerializereservation_state() => __pbn__reservation_state != null;
+        public void Resetreservation_state() => __pbn__reservation_state = null;
+        private int? __pbn__reservation_state;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public int queue_position
+        {
+            get => __pbn__queue_position.GetValueOrDefault();
+            set => __pbn__queue_position = value;
+        }
+        public bool ShouldSerializequeue_position() => __pbn__queue_position != null;
+        public void Resetqueue_position() => __pbn__queue_position = null;
+        private int? __pbn__queue_position;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public int total_queue_size
+        {
+            get => __pbn__total_queue_size.GetValueOrDefault();
+            set => __pbn__total_queue_size = value;
+        }
+        public bool ShouldSerializetotal_queue_size() => __pbn__total_queue_size != null;
+        public void Resettotal_queue_size() => __pbn__total_queue_size = null;
+        private int? __pbn__total_queue_size;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string reservation_country_code
+        {
+            get => __pbn__reservation_country_code ?? "";
+            set => __pbn__reservation_country_code = value;
+        }
+        public bool ShouldSerializereservation_country_code() => __pbn__reservation_country_code != null;
+        public void Resetreservation_country_code() => __pbn__reservation_country_code = null;
+        private string __pbn__reservation_country_code;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool expired
+        {
+            get => __pbn__expired.GetValueOrDefault();
+            set => __pbn__expired = value;
+        }
+        public bool ShouldSerializeexpired() => __pbn__expired != null;
+        public void Resetexpired() => __pbn__expired = null;
+        private bool? __pbn__expired;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint time_expires
+        {
+            get => __pbn__time_expires.GetValueOrDefault();
+            set => __pbn__time_expires = value;
+        }
+        public bool ShouldSerializetime_expires() => __pbn__time_expires != null;
+        public void Resettime_expires() => __pbn__time_expires = null;
+        private uint? __pbn__time_expires;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public uint time_reserved
+        {
+            get => __pbn__time_reserved.GetValueOrDefault();
+            set => __pbn__time_reserved = value;
+        }
+        public bool ShouldSerializetime_reserved() => __pbn__time_reserved != null;
+        public void Resettime_reserved() => __pbn__time_reserved = null;
+        private uint? __pbn__time_reserved;
 
     }
 

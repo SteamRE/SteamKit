@@ -213,14 +213,14 @@ namespace SteamKit2.Internal
         private ulong? __pbn__manifestid;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public uint depotsize
+        public ulong depotsize
         {
             get => __pbn__depotsize.GetValueOrDefault();
             set => __pbn__depotsize = value;
         }
         public bool ShouldSerializedepotsize() => __pbn__depotsize != null;
         public void Resetdepotsize() => __pbn__depotsize = null;
-        private uint? __pbn__depotsize;
+        private ulong? __pbn__depotsize;
 
         [global::ProtoBuf.ProtoMember(3)]
         public ulong bucketid
@@ -374,6 +374,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializesource_driver_desc() => __pbn__source_driver_desc != null;
         public void Resetsource_driver_desc() => __pbn__source_driver_desc = null;
         private string __pbn__source_driver_desc;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public ulong depotsize
+        {
+            get => __pbn__depotsize.GetValueOrDefault();
+            set => __pbn__depotsize = value;
+        }
+        public bool ShouldSerializedepotsize() => __pbn__depotsize != null;
+        public void Resetdepotsize() => __pbn__depotsize = null;
+        private ulong? __pbn__depotsize;
 
     }
 

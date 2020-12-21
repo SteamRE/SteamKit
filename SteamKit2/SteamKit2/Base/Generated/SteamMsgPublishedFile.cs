@@ -1199,6 +1199,17 @@ namespace SteamKit2.Internal
             public void Resetadminonly() => __pbn__adminonly = null;
             private bool? __pbn__adminonly;
 
+            [global::ProtoBuf.ProtoMember(3)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string display_name
+            {
+                get => __pbn__display_name ?? "";
+                set => __pbn__display_name = value;
+            }
+            public bool ShouldSerializedisplay_name() => __pbn__display_name != null;
+            public void Resetdisplay_name() => __pbn__display_name = null;
+            private string __pbn__display_name;
+
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -1971,6 +1982,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializereturn_reactions() => __pbn__return_reactions != null;
         public void Resetreturn_reactions() => __pbn__return_reactions = null;
         private bool? __pbn__return_reactions;
+
+        [global::ProtoBuf.ProtoMember(25)]
+        public uint startindex_override
+        {
+            get => __pbn__startindex_override.GetValueOrDefault();
+            set => __pbn__startindex_override = value;
+        }
+        public bool ShouldSerializestartindex_override() => __pbn__startindex_override != null;
+        public void Resetstartindex_override() => __pbn__startindex_override = null;
+        private uint? __pbn__startindex_override;
 
         [global::ProtoBuf.ProtoMember(33)]
         [global::System.ComponentModel.DefaultValue(EPublishedFileRevision.k_EPublishedFileRevision_Default)]

@@ -1538,6 +1538,7 @@ namespace SteamKit2.GC.Underlords.Internal
         k_EDACGameMode_Puzzle = 6,
         k_EDACGameMode_Tutorial = 7,
         k_EDACGameMode_Streetfight = 8,
+        k_EDACGameMode_Classic = 11,
     }
 
     [global::ProtoBuf.ProtoContract()]
