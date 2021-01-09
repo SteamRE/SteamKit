@@ -5,7 +5,7 @@
 // </auto-generated>
 
 #region Designer generated code
-#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.GC.CSGO.Internal
 {
 
@@ -7647,6 +7647,7 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCCStrike15_v2_GC2ClientRequestValidation = 9207,
         k_EMsgGCCStrike15_v2_ClientRedeemMissionReward = 9209,
         k_EMsgGCCStrike15_ClientDeepStats = 9210,
+        k_EMsgGCCStrike15_StartAgreementSessionInGame = 9211,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -7667,5 +7668,5 @@ namespace SteamKit2.GC.CSGO.Internal
 
 }
 
-#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

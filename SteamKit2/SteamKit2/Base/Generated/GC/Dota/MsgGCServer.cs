@@ -5,7 +5,7 @@
 // </auto-generated>
 
 #region Designer generated code
-#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.GC.Dota.Internal
 {
 
@@ -3096,6 +3096,41 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializestart_time() => __pbn__start_time != null;
         public void Resetstart_time() => __pbn__start_time = null;
         private uint? __pbn__start_time;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGameMatchSignOutPerfData : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<float> average_frame_time { get; } = new global::System.Collections.Generic.List<float>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<float> max_frame_time { get; } = new global::System.Collections.Generic.List<float>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public float server_average_frame_time
+        {
+            get => __pbn__server_average_frame_time.GetValueOrDefault();
+            set => __pbn__server_average_frame_time = value;
+        }
+        public bool ShouldSerializeserver_average_frame_time() => __pbn__server_average_frame_time != null;
+        public void Resetserver_average_frame_time() => __pbn__server_average_frame_time = null;
+        private float? __pbn__server_average_frame_time;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public float server_max_frame_time
+        {
+            get => __pbn__server_max_frame_time.GetValueOrDefault();
+            set => __pbn__server_max_frame_time = value;
+        }
+        public bool ShouldSerializeserver_max_frame_time() => __pbn__server_max_frame_time != null;
+        public void Resetserver_max_frame_time() => __pbn__server_max_frame_time = null;
+        private float? __pbn__server_max_frame_time;
 
     }
 
@@ -8674,5 +8709,5 @@ namespace SteamKit2.GC.Dota.Internal
 
 }
 
-#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion
