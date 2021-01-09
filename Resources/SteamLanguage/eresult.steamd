@@ -128,5 +128,5 @@ enum EResult
 	DeniedDueToCommunityCooldown = 116;
 	NoLauncherSpecified = 117;
 	MustAgreeToSSA = 118;
-	ClientNoLongerSupported = 119;
+	LauncherMigrated = 119;
 };
