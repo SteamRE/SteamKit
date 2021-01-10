@@ -22,6 +22,14 @@ Usage
 ---
 NetHook is capable of self injecting and ejecting from running instances of Steam, so there's no requirement to use a separate loader such as winject. 
 
+#### Downloading pre-built binary
+
+As SteamKit2 releases can lag behind Steam changes, the current master branch may contain fixes to NetHook that are not released yet.
+
+You can download latest available build from [GitHub Actions here](https://github.com/SteamRE/SteamKit/actions).  
+Click on the latest commit and scroll all the way down to Artifacts section.
+There, you can download NetHook and NetHookAnalyzer.
+
 #### To begin dumping network packets
 
 1. Ensure Steam is running. Additionally, make sure you're prepared for the possibility for Steam to crash. Using NetHook2 isn't an exact science, and sometimes things break.
@@ -54,3 +62,10 @@ Simply execute `rundll32 "<Path To NetHook2.dll>",Eject`. The console window wil
 NetHook2 supports injecting into any other process that makes use of Steam's networking library. In particular, you can inject NetHook2 into `steamcmd.exe`, and `srcds.exe` to dump traffic from those processes.
 
 To do so, simply provide the ID or the name of the process on the command line when injecting. Ex: `rundll32 "<Path To NetHook2.dll>",Inject 1234` or `rundll32 "<Path To NetHook2.dll>",Inject srcds.exe`. When ejecting, be sure to provide the same process ID or name in the command as well.
+
+#### Viewing the dumped packets
+
+Packet dumps are written to `nethook/<timestamp>` folder inside of your Steam installation.  
+`<timestamp>` indicates the time NetHook was injected.
+
+Open `NetHookAnalyzer2.exe` and then File->Open, it should automatically default to the latest folder created by NetHook.
