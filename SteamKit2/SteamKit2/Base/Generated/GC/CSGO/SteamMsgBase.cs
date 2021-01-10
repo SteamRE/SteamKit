@@ -5,7 +5,7 @@
 // </auto-generated>
 
 #region Designer generated code
-#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.GC.CSGO.Internal
 {
 
@@ -3488,6 +3488,55 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CChinaAgreementSessions_StartAgreementSessionInGame_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CChinaAgreementSessions_StartAgreementSessionInGame_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string agreement_url
+        {
+            get => __pbn__agreement_url ?? "";
+            set => __pbn__agreement_url = value;
+        }
+        public bool ShouldSerializeagreement_url() => __pbn__agreement_url != null;
+        public void Resetagreement_url() => __pbn__agreement_url = null;
+        private string __pbn__agreement_url;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum GCProtoBufMsgSrc
     {
         GCProtoBufMsgSrc_Unspecified = 0,
@@ -3499,5 +3548,5 @@ namespace SteamKit2.GC.CSGO.Internal
 
 }
 
-#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

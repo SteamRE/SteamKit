@@ -1366,7 +1366,7 @@ enum EAppType flags
 	Beta = 65536;
 
 	Shortcut = 1073741824;
-	DepotOnly = -2147483648;
+	DepotOnly = -2147483648; obsolete
 };
 
 enum EChatRoomGroupType

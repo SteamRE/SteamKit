@@ -1867,7 +1867,7 @@ namespace SteamKit2
 		DeniedDueToCommunityCooldown = 116,
 		NoLauncherSpecified = 117,
 		MustAgreeToSSA = 118,
-		ClientNoLongerSupported = 119,
+		LauncherMigrated = 119,
 	}
 	public enum EUniverse
 	{
@@ -3102,6 +3102,7 @@ namespace SteamKit2
 		Comic = 32768,
 		Beta = 65536,
 		Shortcut = 1073741824,
+		[Obsolete]
 		DepotOnly = -2147483648,
 	}
 	public enum EChatRoomGroupType

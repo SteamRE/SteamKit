@@ -5,7 +5,7 @@
 // </auto-generated>
 
 #region Designer generated code
-#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.GC.Underlords.Internal
 {
 
@@ -2874,5 +2874,5 @@ namespace SteamKit2.GC.Underlords.Internal
 
 }
 
-#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion
