@@ -35,6 +35,9 @@ jobs:
     - name: Build ProtobufGen
       run: dotnet build --configuration ${{ matrix.configuration }} Resources/ProtobufGen/ProtobufGen.sln
 
+    - name: Build ProtobufDumper
+      run: dotnet build --configuration ${{ matrix.configuration }} Resources/ProtobufDumper/ProtobufDumper.sln
+
     - name: Build Samples
       run: dotnet build --configuration ${{ matrix.configuration }} Samples/Samples.sln
 
