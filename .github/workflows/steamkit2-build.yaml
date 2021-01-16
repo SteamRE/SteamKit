@@ -8,24 +8,24 @@ on:
 
 jobs:
   steamkit2:
-    name: SteamKit2 on ${{ matrix.os }} - ${{ matrix.configuration }} (SDK ${{ matrix.sdk }}) 
+    name: SteamKit2 on ${{ matrix.os }} - ${{ matrix.configuration }} (SDK ${{ matrix.sdk }})
 
     strategy:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
-        sdk: [3.1.301, 5.0.100-preview.8.20417.9]
+        sdk: [5.0.x]
         configuration: [Debug, Release]
 
     runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ matrix.sdk }}
-      
+
     - name: Build SteamKit2
       run: dotnet build --configuration ${{ matrix.configuration }} SteamKit2/SteamKit2/SteamKit2.csproj
 
@@ -34,6 +34,9 @@ jobs:
 
     - name: Build ProtobufGen
       run: dotnet build --configuration ${{ matrix.configuration }} Resources/ProtobufGen/ProtobufGen.sln
+
+    - name: Build ProtobufDumper
+      run: dotnet build --configuration ${{ matrix.configuration }} Resources/ProtobufDumper/ProtobufDumper.sln
 
     - name: Build Samples
       run: dotnet build --configuration ${{ matrix.configuration }} Samples/Samples.sln
@@ -48,17 +51,17 @@ jobs:
 
   steamkit2-artifacts:
     name: Create NuGet Package
-      
+
     runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.301
-        
+        dotnet-version: 5.0.x
+
     - name: Create NuGet Package
       run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
 
@@ -75,12 +78,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.301
-        
+        dotnet-version: 5.0.x
+
     - name: Publish NetHookAnalyzer2
       run: dotnet publish --configuration Release --runtime win-x64 Resources/NetHookAnalyzer2/NetHookAnalyzer2/NetHookAnalyzer2.csproj /p:PublishSingleFile=True /p:PublishTrimmed=True
 
@@ -88,17 +91,17 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: NetHookAnalyzer2
-        path: 'Resources/NetHookAnalyzer2/NetHookAnalyzer2/bin/Release/netcoreapp3.0/win-x64/publish/*'
+        path: 'Resources/NetHookAnalyzer2/NetHookAnalyzer2/bin/Release/win-x64/publish/*'
 
   nethook2:
     name: NetHook2 - ${{ matrix.configuration }}
-    
+
     strategy:
       matrix:
         configuration: [Debug, Release]
 
     runs-on: windows-latest
-      
+
     steps:
     - uses: actions/checkout@v2
 

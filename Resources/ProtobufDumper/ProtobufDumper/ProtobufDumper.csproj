@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PackageProjectUrl>https://github.com/SteamRE/SteamKit/tree/master/Resources/ProtobufDumper</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/SteamRE/SteamKit/blob/master/SteamKit2/SteamKit2/license.txt</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/SteamRE/SteamKit</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <OutputType>Exe</OutputType>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <ApplicationIcon>..\..\Misc\steamkit.ico</ApplicationIcon>
   </PropertyGroup>
 
