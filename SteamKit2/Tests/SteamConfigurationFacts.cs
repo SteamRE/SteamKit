@@ -65,7 +65,7 @@ namespace Tests
         [Fact]
         public void ServerListProviderIsNothingFancy()
         {
-            Assert.IsType<NullServerListProvider>(configuration.ServerListProvider);
+            Assert.IsType<MemoryServerListProvider>(configuration.ServerListProvider);
         }
 
         [Fact]
