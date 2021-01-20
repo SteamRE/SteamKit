@@ -241,6 +241,10 @@ namespace SteamKit2
         /// Default timeout to use when making requests
         /// </summary>
         public static TimeSpan RequestTimeout = TimeSpan.FromSeconds( 10 );
+        /// <summary>
+        /// Default timeout to use when reading the response body
+        /// </summary>
+        public static TimeSpan ResponseBodyTimeout = TimeSpan.FromSeconds( 60 );
 
 
         /// <summary>
@@ -515,15 +519,24 @@ namespace SteamKit2
 
                 try
                 {
-                    var response = await httpClient.SendAsync( request, cts.Token ).ConfigureAwait( false );
+                    using var response = await httpClient.SendAsync( request, HttpCompletionOption.ResponseHeadersRead, cts.Token ).ConfigureAwait( false );
 
                     if ( !response.IsSuccessStatusCode )
                     {
                         throw new SteamKitWebRequestException( $"Response status code does not indicate success: {response.StatusCode:D} ({response.ReasonPhrase}).", response );
                     }
 
-                    var responseData = await response.Content.ReadAsByteArrayAsync().ConfigureAwait( false );
-                    return responseData;
+                    // .NET 5.0 has an override of ReadAsByteArrayAsync that allows a CancellationTokenSource to be supplied
+                    cts.CancelAfter( ResponseBodyTimeout );
+
+                    var contentLength = response.Content.Headers.ContentLength;
+
+                    using var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait( false );
+                    using var ms = new MemoryStream( ( int )contentLength.GetValueOrDefault() );
+
+                    await responseStream.CopyToAsync( ms, 81920, cts.Token ).ConfigureAwait( false );
+                    
+                    return ms.ToArray();
                 }
                 catch ( Exception ex )
                 {
