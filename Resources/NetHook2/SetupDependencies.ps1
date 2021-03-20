@@ -1,4 +1,6 @@
-$NetHook2DependenciesTemporaryDirectory = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), "nethook2-dependencies")
+$ThisDirectory = Split-Path -Parent $PSCommandPath
+$NativeDependenciesDirectory = Join-Path $ThisDirectory 'native-dependencies'
+$NetHook2DependenciesTemporaryDirectory = Join-Path ([System.IO.Path]::GetTempPath()) 'nethook2-dependencies'
 $ZLibSourceZipUrl = "http://zlib.net/zlib1211.zip"
 $ZLibSourceFile = [System.IO.Path]::Combine($NetHook2DependenciesTemporaryDirectory, "zlib.zip")
 $ZLibSourceInnerFolderName = "zlib-1.2.11"
@@ -13,11 +15,16 @@ if (-Not (Test-Path $NetHook2DependenciesTemporaryDirectory))
     New-Item -Path $NetHook2DependenciesTemporaryDirectory -Type Directory | Out-Null
 }
 
+if (-Not (Test-Path $NativeDependenciesDirectory))
+{
+    New-Item -Path $NativeDependenciesDirectory -Type Directory | Out-Null
+}
+
 Write-Host Loading System.IO.Compression...
 [Reflection.Assembly]::LoadWithPartialName("System.IO.Compression")
 [Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.FileSystem")
 
-$ZLibFolderPath = [IO.Path]::Combine($NetHook2DependenciesTemporaryDirectory, $ZLibSourceInnerFolderName)
+$ZLibFolderPath = [IO.Path]::Combine($NativeDependenciesDirectory, $ZLibSourceInnerFolderName)
 if (-Not (Test-Path $ZLibFolderPath))
 {
     if (-Not (Test-Path $ZLibSourceFile))
@@ -28,14 +35,11 @@ if (-Not (Test-Path $ZLibFolderPath))
 
     Write-Host Extracting ZLib...
     $zip = [IO.Compression.ZipFile]::Open($ZLibSourceFile, [System.IO.Compression.ZipArchiveMode]::Read)
-    [IO.Compression.ZipFileExtensions]::ExtractToDirectory($zip, $NetHook2DependenciesTemporaryDirectory)
+    [IO.Compression.ZipFileExtensions]::ExtractToDirectory($zip, $NativeDependenciesDirectory)
     $zip.Dispose()
 }
 
-Write-Host Copying ZLib into place...
-Copy-Item $ZLibFolderPath "NetHook2\zlib" -Force -Recurse
-
-$ProtobufFolderPath = [IO.Path]::Combine($NetHook2DependenciesTemporaryDirectory, $ProtobufSourceInnerFolderName)
+$ProtobufFolderPath = [IO.Path]::Combine($NativeDependenciesDirectory, $ProtobufSourceInnerFolderName)
 if (-Not (Test-Path $ProtobufFolderPath))
 {
     if (-Not (Test-Path $ProtobufSourceFile))
@@ -46,10 +50,7 @@ if (-Not (Test-Path $ProtobufFolderPath))
 
     Write-Host Extracting Protobuf...
     $zip = [IO.Compression.ZipFile]::Open($ProtobufSourceFile, [System.IO.Compression.ZipArchiveMode]::Read)
-    [IO.Compression.ZipFileExtensions]::ExtractToDirectory($zip, $NetHook2DependenciesTemporaryDirectory)
+    [IO.Compression.ZipFileExtensions]::ExtractToDirectory($zip, $NativeDependenciesDirectory)
     $zip.Dispose()
 }
 
-Write-Host Copying Protobuf into place...
-$ProtobufFolderPath = [IO.Path]::Combine($NetHook2DependenciesTemporaryDirectory, $ProtobufSourceInnerFolderName, "src", "google")
-Copy-Item $ProtobufFolderPath "NetHook2\google" -Force -Recurse
