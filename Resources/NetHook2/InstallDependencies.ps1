@@ -2,10 +2,10 @@ $ThisDirectory = Split-Path -Parent $PSCommandPath
 $NativeDependenciesDirectory = Join-Path $ThisDirectory 'native-dependencies'
 $NetHook2DependenciesTemporaryDirectory = Join-Path ([System.IO.Path]::GetTempPath()) 'nethook2-dependencies'
 $ZLibSourceZipUrl = "http://zlib.net/zlib1211.zip"
-$ZLibSourceFile = [System.IO.Path]::Combine($NetHook2DependenciesTemporaryDirectory, "zlib.zip")
+$ZLibSourceFile = [System.IO.Path]::Combine($NetHook2DependenciesTemporaryDirectory, "zlib-1.2.11.zip")
 $ZLibSourceInnerFolderName = "zlib-1.2.11"
 $ProtobufSourceZipUrl = "https://github.com/google/protobuf/releases/download/v2.5.0/protobuf-2.5.0.zip"
-$ProtobufSourceFile = [System.IO.Path]::Combine($NetHook2DependenciesTemporaryDirectory, "protobuf.zip")
+$ProtobufSourceFile = [System.IO.Path]::Combine($NetHook2DependenciesTemporaryDirectory, "protobuf-2.5.0.zip")
 $ProtobufSourceInnerFolderName = "protobuf-2.5.0"
 
 Set-Location $PSScriptRoot
