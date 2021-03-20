@@ -58,7 +58,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>..\native-dependencies\protobuf-$(ProtobufVersion)\vsprojects\$(Configuration);..\native-dependencies\zlib-bins\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-        <AdditionalDependencies>libprotobuf.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+        <AdditionalDependencies>libprotobuf.lib;zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
