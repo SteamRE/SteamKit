@@ -50,7 +50,7 @@
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <ZLibVersion>1.2.11</ZLibVersion>
-    <ProtobufVersion>2.5.0</ProtobufVersion>
+    <ProtobufVersion>2.6.1</ProtobufVersion>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
