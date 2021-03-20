@@ -109,7 +109,9 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
 
     - name: Configure Dependencies
-      run: Resources/NetHook2/SetupDependencies.cmd
+      run: |
+        Resources/NetHook2/SetupDependencies.cmd
+        Resources/NetHook2/BuildDependencies.cmd
 
     - name: Build NetHook2
       run: msbuild /p:Configuration=${{ matrix.configuration }} Resources/NetHook2/NetHook2.sln
