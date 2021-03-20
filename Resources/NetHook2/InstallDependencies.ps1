@@ -29,7 +29,7 @@ if (-Not (Test-Path $ZLibFolderPath))
 {
     if (-Not (Test-Path $ZLibSourceFile))
     {
-        Write-Host Downloading ZLib headers...
+        Write-Host Downloading ZLib source...
         Invoke-WebRequest $ZLibSourceZipUrl -OutFile $ZLibSourceFile
     }
 
@@ -44,7 +44,7 @@ if (-Not (Test-Path $ProtobufFolderPath))
 {
     if (-Not (Test-Path $ProtobufSourceFile))
     {
-        Write-Host Downloading Google Protobuf Headers...
+        Write-Host Downloading Google Protobuf source...
         Invoke-WebRequest $ProtobufSourceZipUrl -OutFile $ProtobufSourceFile
     }
 
