@@ -2,7 +2,7 @@
 #include "zip.h"
 #include "logger.h"
 
-#include "zlib/zlib.h"
+#include "zlib.h"
 
 
 bool CZip::Inflate( const uint8 *pCompressed, uint32 cubCompressed, uint8 *pDecompressed, uint32 cubDecompressed )
