@@ -14,16 +14,12 @@ if not exist "native-dependencies\zlib-bins\ALL_BUILD.vcxproj" (
 
 msbuild native-dependencies\zlib-bins\ALL_BUILD.vcxproj /p:Configuration=Release
 
-if not exist "native-dependencies\protobuf-2.6.1\vsprojects\libprotobuf.vcxproj" (
-  devenv /upgrade native-dependencies\protobuf-2.6.1\vsprojects\protobuf.sln
+if not exist "native-dependencies\protobuf-bins\libprotobuf.vcxproj" (
+  cmake -S native-dependencies\protobuf-3.15.6\cmake -B native-dependencies\protobuf-bins -A Win32 -Dprotobuf_MSVC_STATIC_RUNTIME=OFF
 )
 
-if not exist "native-dependencies\protobuf-2.6.1\vsprojects\Directory.Build.props" (
-  copy protobuf-Directory.Build.props native-dependencies\protobuf-2.6.1\vsprojects\Directory.Build.props
-)
-
-msbuild native-dependencies\protobuf-2.6.1\vsprojects\libprotobuf.vcxproj /p:Configuration=Debug
-msbuild native-dependencies\protobuf-2.6.1\vsprojects\libprotobuf.vcxproj /p:Configuration=Release
+msbuild native-dependencies\protobuf-bins\libprotobuf.vcxproj /p:Configuration=Debug
+msbuild native-dependencies\protobuf-bins\libprotobuf.vcxproj /p:Configuration=Release
 
 rem todo: compile protoc and generate steammessages_base.pb.{h|cpp}
 

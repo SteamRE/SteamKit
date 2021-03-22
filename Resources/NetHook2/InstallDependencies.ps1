@@ -1,11 +1,13 @@
+$ProgressPreference = 'SilentlyContinue'
+
 $ThisDirectory = Split-Path -Parent $PSCommandPath
 $NativeDependenciesDirectory = Join-Path $ThisDirectory 'native-dependencies'
 $NetHook2DependenciesTemporaryDirectory = Join-Path ([System.IO.Path]::GetTempPath()) 'nethook2-dependencies'
 $ZLibSourceZipUrl = "http://zlib.net/zlib1211.zip"
 $ZLibSourceFile = [System.IO.Path]::Combine($NetHook2DependenciesTemporaryDirectory, "zlib-1.2.11.zip")
 $ZLibSourceInnerFolderName = "zlib-1.2.11"
-$ProtobufVersion = "2.6.1"
-$ProtobufSourceZipUrl = "https://github.com/google/protobuf/releases/download/v$ProtobufVersion/protobuf-$ProtobufVersion.zip"
+$ProtobufVersion = "3.15.6"
+$ProtobufSourceZipUrl = "https://github.com/protocolbuffers/protobuf/releases/download/v$ProtobufVersion/protobuf-cpp-$ProtobufVersion.zip"
 $ProtobufSourceFile = [System.IO.Path]::Combine($NetHook2DependenciesTemporaryDirectory, "protobuf-$ProtobufVersion.zip")
 $ProtobufSourceInnerFolderName = "protobuf-$ProtobufVersion"
 
