@@ -50,15 +50,17 @@
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <ZLibVersion>1.2.11</ZLibVersion>
-    <ProtobufVersion>2.6.1</ProtobufVersion>
+    <ProtobufVersion>3.15.6</ProtobufVersion>
+    <ProtobufLibraryName Condition="'$(Configuration)' == 'Debug'">libprotobufd.lib</ProtobufLibraryName>
+    <ProtobufLibraryName Condition="'$(ProtobufLibraryName)' == ''">libprotobuf.lib</ProtobufLibraryName>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>..\native-dependencies\protobuf-$(ProtobufVersion)\src;..\native-dependencies\zlib-bins;..\native-dependencies\zlib-$(ZLibVersion);.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>..\native-dependencies\protobuf-$(ProtobufVersion)\vsprojects\$(Configuration);..\native-dependencies\zlib-bins\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-        <AdditionalDependencies>libprotobuf.lib;zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\native-dependencies\protobuf-bins\$(Configuration);..\native-dependencies\zlib-bins\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(ProtobufLibraryName);zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
