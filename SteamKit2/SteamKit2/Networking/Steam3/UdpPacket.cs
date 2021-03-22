@@ -53,13 +53,17 @@ namespace SteamKit2
             }
             catch ( Exception )
             {
+                Payload = new MemoryStream();
                 return;
             }
 
             if ( this.Header.Magic != UdpHeader.MAGIC )
+            {
+                Payload = new MemoryStream();
                 return;
+            }
 
-            SetPayload(ms, Header.PayloadSize);
+            Payload = GetPayloadAndUpdateHeader( ms, Header.PayloadSize, Header );
         }
 
         /// <summary>
@@ -122,15 +126,21 @@ namespace SteamKit2
         /// <param name="length">The length.</param>
         public void SetPayload(MemoryStream ms, long length)
         {
+            Payload = GetPayloadAndUpdateHeader( ms, length, Header );
+        }
+
+        static MemoryStream GetPayloadAndUpdateHeader(MemoryStream ms, long length, UdpHeader header)
+        {
             if ( length > MAX_PAYLOAD )
-                throw new ArgumentException("Payload length exceeds 0x4DC maximum");
+                throw new ArgumentException( "Payload length exceeds 0x4DC maximum" );
 
-            byte[] buf = new byte[length];
-            ms.Read(buf, 0, buf.Length);
+            byte[] buf = new byte[ length ];
+            ms.Read( buf, 0, buf.Length );
 
-            Payload = new MemoryStream(buf);
-            Header.PayloadSize = (ushort) Payload.Length;
-            Header.MsgSize = (uint) Payload.Length;
+            var payload = new MemoryStream( buf );
+            header.PayloadSize = ( ushort )payload.Length;
+            header.MsgSize = ( uint )payload.Length;
+            return payload;
         }
 
         /// <summary>

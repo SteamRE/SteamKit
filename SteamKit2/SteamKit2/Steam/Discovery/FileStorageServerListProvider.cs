@@ -34,11 +34,11 @@ namespace SteamKit2.Discovery
                 {
                     using (FileStream fileStream = File.OpenRead(filename))
                     {
-                        return Serializer.DeserializeItems<BasicServerListProto>(fileStream, PrefixStyle.Base128, 1)
-                            .Select(item =>
-                            {
-                                return ServerRecord.CreateServer(item.Address, item.Port, item.Protocols);
-                            })
+                        return Serializer.DeserializeItems<BasicServerListProto>(fileStream, PrefixStyle.Base128, 1 )
+                            .Select( item => ServerRecord.CreateServer(
+                                 item.Address ?? throw new InvalidDataException( "Serialized server had null address" ),
+                                 item.Port,
+                                 item.Protocols ) )
                             .ToList();
                     }
                 }

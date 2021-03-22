@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -87,8 +86,8 @@ namespace SteamKit2
         /// </summary>
         private uint inSeqHandled;
 
-        [NotNull] private List<UdpPacket>? outPackets;
-        [NotNull] private Dictionary<uint, UdpPacket>? inPackets;
+        private List<UdpPacket> outPackets;
+        private Dictionary<uint, UdpPacket> inPackets;
 
         private ILogContext log;
 
@@ -102,6 +101,9 @@ namespace SteamKit2
             sock.Bind(localEndPoint);
 
             state = (int)State.Disconnected;
+
+            outPackets = new List<UdpPacket>();
+            inPackets = new Dictionary<uint, UdpPacket>();
         }
 
         public event EventHandler<NetMsgEventArgs>? NetMsgReceived;
@@ -121,8 +123,8 @@ namespace SteamKit2
         /// <param name="timeout">Timeout in milliseconds</param>
         public void Connect(EndPoint endPoint, int timeout)
         {
-            outPackets = new List<UdpPacket>();
-            inPackets = new Dictionary<uint, UdpPacket>();
+            outPackets.Clear();
+            inPackets.Clear();
 
             CurrentEndPoint = null;
             remoteConnId = 0;
