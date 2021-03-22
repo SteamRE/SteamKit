@@ -1,26 +1,25 @@
-NetHook2
----
+## NetHook2
 
 NetHook2 is a windows DLL that is injected into the address space of a running Steam.exe process in order to hook into the networking routines of the Steam client. After hooking, NetHook2 will proceed to dump any network messages sent to and received from the Steam server that the client is connected to.
 
 These messages are dumped to file, and can be analyzed further with NetHookAnalyzer, a hex editor, or your own purpose-built tools.
 
-Compiling
----
-
-#### Dependencies
-NetHook2 requires the following libraries to compile:
-* [zlib 1.2.8](http://zlib.net/zlib128.zip)
-* [Google protobuf 2.5.0](https://code.google.com/p/protobuf/downloads/detail?name=protobuf-2.5.0.zip&can=2&q=)
+## Compiling
 
 #### Building
-1. Execute `SetupDependencies.bat` to automatically acquire the zlib and protobuf headers and libraries. Alternatively, you can retrieve these dependencies yourself and tweak the include paths in Visual Studio.
+
+1. Execute `SetupDependencies.cmd` to automatically acquire the zlib and protobuf headers and libraries.
 2. Build with VS 2015 (the v140 toolset is required to link with libprotobuf correctly).
 3. Behold: a fresh new `NetHook2.dll` is born into this world. You can place this DLL wherever you like, or leave where you built it. You'll need its full file path later when injecting.
 
-Usage
----
-NetHook is capable of self injecting and ejecting from running instances of Steam, so there's no requirement to use a separate loader such as winject. 
+#### Updating steammessages_base
+
+1. Download `protoc` for the same version as specified in `SetupDependencies`.
+2. Run `.\protoc.exe .\steammessages_base.proto --cpp_out=build`
+
+## Usage
+
+NetHook is capable of self injecting and ejecting from running instances of Steam, so there's no requirement to use a separate loader such as winject.
 
 #### Downloading pre-built binary
 
@@ -33,9 +32,10 @@ There, you can download NetHook and NetHookAnalyzer.
 #### To begin dumping network packets
 
 1. Ensure Steam is running. Additionally, make sure you're prepared for the possibility for Steam to crash. Using NetHook2 isn't an exact science, and sometimes things break.
-2. Execute the following in an *elevated* command prompt: `rundll32 "<Path To NetHook2.dll>",Inject`
+2. Execute the following in an _elevated_ command prompt: `rundll32 "<Path To NetHook2.dll>",Inject`
 
 If all goes well, you should see a console window appear with output similar to the following:
+
 ```
 CCrypto::SymmetricEncryptWithIV = 0x384b84c0
 CCrypto::SymmetricDecrypt = 0x384b8290
