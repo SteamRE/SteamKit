@@ -816,6 +816,7 @@ namespace SteamKit2.GC.Dota.Internal
             ERROR_SPECTATOR_SWITCHED_TEAMS = 11,
             ERROR_FRIENDS_ON_BOTH_SIDES = 12,
             ERROR_SPECTATOR_IN_THIS_LOBBY = 13,
+            ERROR_LOBBY_IS_LEAGUE = 14,
         }
 
     }

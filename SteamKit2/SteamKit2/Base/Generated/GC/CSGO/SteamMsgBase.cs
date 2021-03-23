@@ -2292,6 +2292,26 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resettxn_country_code() => __pbn__txn_country_code = null;
         private string __pbn__txn_country_code;
 
+        [global::ProtoBuf.ProtoMember(38)]
+        public bool has_accepted_china_ssa
+        {
+            get => __pbn__has_accepted_china_ssa.GetValueOrDefault();
+            set => __pbn__has_accepted_china_ssa = value;
+        }
+        public bool ShouldSerializehas_accepted_china_ssa() => __pbn__has_accepted_china_ssa != null;
+        public void Resethas_accepted_china_ssa() => __pbn__has_accepted_china_ssa = null;
+        private bool? __pbn__has_accepted_china_ssa;
+
+        [global::ProtoBuf.ProtoMember(39)]
+        public bool is_banned_steam_china
+        {
+            get => __pbn__is_banned_steam_china.GetValueOrDefault();
+            set => __pbn__is_banned_steam_china = value;
+        }
+        public bool ShouldSerializeis_banned_steam_china() => __pbn__is_banned_steam_china != null;
+        public void Resetis_banned_steam_china() => __pbn__is_banned_steam_china = null;
+        private bool? __pbn__is_banned_steam_china;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -3513,6 +3533,17 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializesteamid() => __pbn__steamid != null;
         public void Resetsteamid() => __pbn__steamid = null;
         private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string client_ipaddress
+        {
+            get => __pbn__client_ipaddress ?? "";
+            set => __pbn__client_ipaddress = value;
+        }
+        public bool ShouldSerializeclient_ipaddress() => __pbn__client_ipaddress != null;
+        public void Resetclient_ipaddress() => __pbn__client_ipaddress = null;
+        private string __pbn__client_ipaddress;
 
     }
 

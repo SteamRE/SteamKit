@@ -1564,14 +1564,14 @@ namespace SteamKit2.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public uint app_id
+        public uint appid
         {
-            get => __pbn__app_id.GetValueOrDefault();
-            set => __pbn__app_id = value;
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
         }
-        public bool ShouldSerializeapp_id() => __pbn__app_id != null;
-        public void Resetapp_id() => __pbn__app_id = null;
-        private uint? __pbn__app_id;
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
 
         [global::ProtoBuf.ProtoMember(2)]
         public uint last_time_updated
@@ -3467,6 +3467,106 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CPublishedFile_GetItemChanges_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint last_time_updated
+        {
+            get => __pbn__last_time_updated.GetValueOrDefault();
+            set => __pbn__last_time_updated = value;
+        }
+        public bool ShouldSerializelast_time_updated() => __pbn__last_time_updated != null;
+        public void Resetlast_time_updated() => __pbn__last_time_updated = null;
+        private uint? __pbn__last_time_updated;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint num_items_max
+        {
+            get => __pbn__num_items_max.GetValueOrDefault();
+            set => __pbn__num_items_max = value;
+        }
+        public bool ShouldSerializenum_items_max() => __pbn__num_items_max != null;
+        public void Resetnum_items_max() => __pbn__num_items_max = null;
+        private uint? __pbn__num_items_max;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPublishedFile_GetItemChanges_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint update_time
+        {
+            get => __pbn__update_time.GetValueOrDefault();
+            set => __pbn__update_time = value;
+        }
+        public bool ShouldSerializeupdate_time() => __pbn__update_time != null;
+        public void Resetupdate_time() => __pbn__update_time = null;
+        private uint? __pbn__update_time;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<WorkshopItemInfo> workshop_items { get; } = new global::System.Collections.Generic.List<WorkshopItemInfo>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class WorkshopItemInfo : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+            public ulong published_file_id
+            {
+                get => __pbn__published_file_id.GetValueOrDefault();
+                set => __pbn__published_file_id = value;
+            }
+            public bool ShouldSerializepublished_file_id() => __pbn__published_file_id != null;
+            public void Resetpublished_file_id() => __pbn__published_file_id = null;
+            private ulong? __pbn__published_file_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint time_updated
+            {
+                get => __pbn__time_updated.GetValueOrDefault();
+                set => __pbn__time_updated = value;
+            }
+            public bool ShouldSerializetime_updated() => __pbn__time_updated != null;
+            public void Resettime_updated() => __pbn__time_updated = null;
+            private uint? __pbn__time_updated;
+
+            [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+            public ulong manifest_id
+            {
+                get => __pbn__manifest_id.GetValueOrDefault();
+                set => __pbn__manifest_id = value;
+            }
+            public bool ShouldSerializemanifest_id() => __pbn__manifest_id != null;
+            public void Resetmanifest_id() => __pbn__manifest_id = null;
+            private ulong? __pbn__manifest_id;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CPublishedFile_FileSubscribed_Notification : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -3693,6 +3793,7 @@ namespace SteamKit2.Internal
         CPublishedFile_AddChild_Response AddChild(CPublishedFile_AddChild_Request request);
         CPublishedFile_RemoveChild_Response RemoveChild(CPublishedFile_RemoveChild_Request request);
         CPublishedFile_GetUserVoteSummary_Response GetUserVoteSummary(CPublishedFile_GetUserVoteSummary_Request request);
+        CPublishedFile_GetItemChanges_Response GetItemChanges(CPublishedFile_GetItemChanges_Request request);
     }
 
     public interface IPublishedFileClient

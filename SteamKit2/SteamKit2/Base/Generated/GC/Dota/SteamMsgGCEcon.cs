@@ -4215,64 +4215,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CEcon_FlushInventoryCache_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public ulong steamid
-        {
-            get => __pbn__steamid.GetValueOrDefault();
-            set => __pbn__steamid = value;
-        }
-        public bool ShouldSerializesteamid() => __pbn__steamid != null;
-        public void Resetsteamid() => __pbn__steamid = null;
-        private ulong? __pbn__steamid;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint appid
-        {
-            get => __pbn__appid.GetValueOrDefault();
-            set => __pbn__appid = value;
-        }
-        public bool ShouldSerializeappid() => __pbn__appid != null;
-        public void Resetappid() => __pbn__appid = null;
-        private uint? __pbn__appid;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public ulong contextid
-        {
-            get => __pbn__contextid.GetValueOrDefault();
-            set => __pbn__contextid = value;
-        }
-        public bool ShouldSerializecontextid() => __pbn__contextid != null;
-        public void Resetcontextid() => __pbn__contextid = null;
-        private ulong? __pbn__contextid;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CEcon_FlushInventoryCache_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public bool success
-        {
-            get => __pbn__success.GetValueOrDefault();
-            set => __pbn__success = value;
-        }
-        public bool ShouldSerializesuccess() => __pbn__success != null;
-        public void Resetsuccess() => __pbn__success = null;
-        private bool? __pbn__success;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgGCToGCFlushSteamInventoryCache : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -4411,55 +4353,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CExtraMsgBlock : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint msg_type
-        {
-            get => __pbn__msg_type.GetValueOrDefault();
-            set => __pbn__msg_type = value;
-        }
-        public bool ShouldSerializemsg_type() => __pbn__msg_type != null;
-        public void Resetmsg_type() => __pbn__msg_type = null;
-        private uint? __pbn__msg_type;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public byte[] contents
-        {
-            get => __pbn__contents;
-            set => __pbn__contents = value;
-        }
-        public bool ShouldSerializecontents() => __pbn__contents != null;
-        public void Resetcontents() => __pbn__contents = null;
-        private byte[] __pbn__contents;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public ulong msg_key
-        {
-            get => __pbn__msg_key.GetValueOrDefault();
-            set => __pbn__msg_key = value;
-        }
-        public bool ShouldSerializemsg_key() => __pbn__msg_key != null;
-        public void Resetmsg_key() => __pbn__msg_key = null;
-        private ulong? __pbn__msg_key;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public bool is_compressed
-        {
-            get => __pbn__is_compressed.GetValueOrDefault();
-            set => __pbn__is_compressed = value;
-        }
-        public bool ShouldSerializeis_compressed() => __pbn__is_compressed != null;
-        public void Resetis_compressed() => __pbn__is_compressed = null;
-        private bool? __pbn__is_compressed;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgClientToGCGetLimitedItemPurchaseQuantity : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -4517,6 +4410,38 @@ namespace SteamKit2.GC.Dota.Internal
             k_eInvalidItemDef = 5,
             k_eItemDefNotLimited = 6,
         }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToGCUpdateWelcomeMsg : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool server
+        {
+            get => __pbn__server.GetValueOrDefault();
+            set => __pbn__server = value;
+        }
+        public bool ShouldSerializeserver() => __pbn__server != null;
+        public void Resetserver() => __pbn__server = null;
+        private bool? __pbn__server;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CExtraMsgBlock new_msg { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool broadcast
+        {
+            get => __pbn__broadcast.GetValueOrDefault();
+            set => __pbn__broadcast = value;
+        }
+        public bool ShouldSerializebroadcast() => __pbn__broadcast != null;
+        public void Resetbroadcast() => __pbn__broadcast = null;
+        private bool? __pbn__broadcast;
 
     }
 
@@ -4633,6 +4558,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGCApplyAutograph = 2523,
         k_EMsgGCToGCWebAPIAccountChanged = 2524,
         k_EMsgGCClientVersionUpdated = 2528,
+        k_EMsgGCToGCUpdateWelcomeMsg = 2529,
         k_EMsgGCItemPurgatory_FinalizePurchase = 2531,
         k_EMsgGCItemPurgatory_FinalizePurchaseResponse = 2532,
         k_EMsgGCItemPurgatory_RefundPurchase = 2533,

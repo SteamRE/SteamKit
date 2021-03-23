@@ -32,6 +32,7 @@ namespace SteamKit2.Internal
         k_PublishedFileQueryType_RankedByPlaytimeSessionsTrend = 17,
         k_PublishedFileQueryType_RankedByLifetimePlaytimeSessions = 18,
         k_PublishedFileQueryType_RankedByInappropriateContentRating = 19,
+        k_PublishedFileQueryType_RankedByBanContentCheck = 20,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -117,6 +118,23 @@ namespace SteamKit2.Internal
         k_EProfileCustomizationTypeLoyaltyRewardReactions = 21,
         k_EProfileCustomizationTypeSingleArtworkShowcase = 22,
         k_EProfileCustomizationTypeAchievementsCompletionist = 23,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EPublishedFileStorageSystem
+    {
+        k_EPublishedFileStorageSystemInvalid = 0,
+        k_EPublishedFileStorageSystemLegacyCloud = 1,
+        k_EPublishedFileStorageSystemDepot = 2,
+        k_EPublishedFileStorageSystemUGCCloud = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ECloudStoragePersistState
+    {
+        k_ECloudStoragePersistStatePersisted = 0,
+        k_ECloudStoragePersistStateForgotten = 1,
+        k_ECloudStoragePersistStateDeleted = 2,
     }
 
 }

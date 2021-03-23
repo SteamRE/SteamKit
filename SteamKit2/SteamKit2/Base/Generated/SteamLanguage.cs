@@ -1868,6 +1868,7 @@ namespace SteamKit2
 		NoLauncherSpecified = 117,
 		MustAgreeToSSA = 118,
 		LauncherMigrated = 119,
+		CurrentSteamRealmDoesNotMatch = 120,
 	}
 	public enum EUniverse
 	{
@@ -2502,6 +2503,7 @@ namespace SteamKit2
 		Macos1015 = -82,
 		MacOS1016 = -81,
 		MacOS11 = -80,
+		MacOS111 = -79,
 		MacOSMax = -1,
 		LinuxUnknown = -203,
 		Linux22 = -202,
