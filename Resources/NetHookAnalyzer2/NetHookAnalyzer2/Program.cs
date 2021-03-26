@@ -10,8 +10,8 @@ namespace NetHookAnalyzer2
 		/// </summary>
 		[STAThread]
 		static void Main()
-        {
-            Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
+		{
+			Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new MainForm());
