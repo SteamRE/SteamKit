@@ -59,14 +59,14 @@ namespace NetHookAnalyzer2
 					body = UnifiedMessagingHelpers.ReadServiceMethodBody(targetJobName.Value, stream, x => x.ReturnType);
 					break;
                 
-                case EMsg.ClientServiceMethodLegacy:
-                    var tempBody = (CMsgClientServiceMethodLegacy) RuntimeTypeModel.Default.Deserialize( stream, null, typeof(CMsgClientServiceMethodLegacy) );
-                    using ( var ms = new MemoryStream( tempBody.serialized_method ) )
-                    {
-                        body = UnifiedMessagingHelpers.ReadServiceMethodBody( tempBody.method_name, ms, x => x.GetParameters().First().ParameterType );
-                    }
+				case EMsg.ClientServiceMethodLegacy:
+					var tempBody = (CMsgClientServiceMethodLegacy) RuntimeTypeModel.Default.Deserialize( stream, null, typeof(CMsgClientServiceMethodLegacy) );
+					using ( var ms = new MemoryStream( tempBody.serialized_method ) )
+					{
+						body = UnifiedMessagingHelpers.ReadServiceMethodBody( tempBody.method_name, ms, x => x.GetParameters().First().ParameterType );
+					}
  
-                    break;
+					break;
 
 				default:
 					body = ReadMessageBody(rawEMsg, stream);
