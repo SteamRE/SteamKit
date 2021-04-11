@@ -15,6 +15,7 @@ jobs:
         os: [windows-latest, macos-latest, ubuntu-latest]
         sdk: [5.0.x]
         configuration: [Debug, Release]
+      fail-fast: false
 
     runs-on: ${{ matrix.os }}
 
@@ -99,6 +100,7 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug, Release]
+      fail-fast: false
 
     runs-on: windows-latest
 
