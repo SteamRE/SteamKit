@@ -26,15 +26,15 @@ BOOL IsRunDll32()
 
 void PrintVersionInfo()
 {
-    g_pLogger->LogConsole("Initializing NetHook2...\n");
-    g_pLogger->LogConsole("Built at %s from %s", g_szBuildDate, g_szBuiltFromCommitSha);
+	g_pLogger->LogConsole("Initializing NetHook2...\n");
+	g_pLogger->LogConsole("Built at %s from %s", g_szBuildDate, g_szBuiltFromCommitSha);
 
-    if (g_bBuiltFromDirty)
-    {
-        g_pLogger->LogConsole("/dirty");
-    }
+	if (g_bBuiltFromDirty)
+	{
+		g_pLogger->LogConsole("/dirty");
+	}
 
-    g_pLogger->LogConsole(" (%s)\n", g_szBuiltFromCommitDate);
+	g_pLogger->LogConsole(" (%s)\n", g_szBuiltFromCommitDate);
 }
 
 BOOL WINAPI DllMain( HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved )
