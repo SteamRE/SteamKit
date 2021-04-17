@@ -7,8 +7,8 @@ Function Test-GitAvailable {
         }
     }
     Catch {
-        return $false
     }
+    return $false
 }
 
 $buildDate = Get-Date -Format "yyyy-MM-dd HH:mm:ss K"
@@ -19,6 +19,8 @@ if (Test-GitAvailable) {
 
     git diff --quiet
     $dirty = [bool]($LASTEXITCODE)
+} else {
+    $dirty = $false
 }
 
 $versionFile = 'version.cpp'
