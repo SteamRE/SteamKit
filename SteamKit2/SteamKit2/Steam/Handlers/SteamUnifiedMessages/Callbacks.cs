@@ -110,7 +110,7 @@ namespace SteamKit2
             internal ServiceMethodNotification( Type messageType, IPacketMsg packetMsg )
             {
                 // Bounce into generic-land.
-                var setupMethod = GetType().GetMethod( nameof(Setup), BindingFlags.Instance | BindingFlags.NonPublic ).MakeGenericMethod( messageType );
+                var setupMethod = GetType().GetMethod( nameof(Setup), BindingFlags.Static | BindingFlags.NonPublic ).MakeGenericMethod( messageType );
                 (MethodName, Body) = ((string, object))setupMethod.Invoke( this, new[] { packetMsg } );
             }
 
