@@ -77,6 +77,9 @@
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalOptions>/SAFESEH:NO /ignore:4099 %(AdditionalOptions)</AdditionalOptions>
     </Link>
+    <PreBuildEvent>
+      <Command>powershell.exe -ExecutionPolicy Unrestricted ..\GenerateVersionInfo.ps1</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -96,6 +99,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
+    <PreBuildEvent>
+      <Command>powershell.exe -ExecutionPolicy Unrestricted ..\GenerateVersionInfo.ps1</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="binaryreader.cpp" />
@@ -110,6 +116,7 @@
     <ClCompile Include="sigscan.cpp" />
     <ClCompile Include="steammessages_base.pb.cc" />
     <ClCompile Include="string.cpp" />
+    <ClCompile Include="version.cpp" />
     <ClCompile Include="zip.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +137,7 @@
     <ClInclude Include="steam\steamtypes.h" />
     <ClInclude Include="steam\udppkt.h" />
     <ClInclude Include="nh2_string.h" />
+    <ClInclude Include="version.h" />
     <ClInclude Include="zip.h" />
   </ItemGroup>
   <ItemGroup>
