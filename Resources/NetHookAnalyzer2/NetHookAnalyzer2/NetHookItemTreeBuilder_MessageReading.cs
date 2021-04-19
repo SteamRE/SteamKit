@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using NetHookAnalyzer2.Specializations;
 using ProtoBuf;
 using ProtoBuf.Meta;
@@ -58,6 +57,15 @@ namespace NetHookAnalyzer2
 
 				case EMsg.ServiceMethodResponse:
 					body = UnifiedMessagingHelpers.ReadServiceMethodBody(targetJobName.Value, stream, x => x.ReturnType);
+					break;
+                
+				case EMsg.ClientServiceMethodLegacy:
+					var tempBody = (CMsgClientServiceMethodLegacy) RuntimeTypeModel.Default.Deserialize( stream, null, typeof(CMsgClientServiceMethodLegacy) );
+					using ( var ms = new MemoryStream( tempBody.serialized_method ) )
+					{
+						body = UnifiedMessagingHelpers.ReadServiceMethodBody( tempBody.method_name, ms, x => x.GetParameters().First().ParameterType );
+					}
+ 
 					break;
 
 				default:

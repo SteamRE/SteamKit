@@ -15,10 +15,11 @@ namespace NetHookAnalyzer2.Specializations
 			}
 
 			var name = serviceMethodBody.method_name;
-			object innerBody;
+			object innerBody = null;
 
-			using (var ms = new MemoryStream(serviceMethodBody.serialized_method_response))
+			if ( serviceMethodBody.serialized_method_response != null )
 			{
+				using var ms = new MemoryStream(serviceMethodBody.serialized_method_response);
 				innerBody = UnifiedMessagingHelpers.ReadServiceMethodBody(name, ms, x => x.ReturnType);
 			}
 

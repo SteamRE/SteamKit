@@ -158,12 +158,19 @@ namespace SevenZip.Compression.LZMA
 
 		uint m_PosStateMask;
 
+        bool m_AllowIllegalStreamStart;
+
 		public Decoder()
 		{
 			m_DictionarySize = 0xFFFFFFFF;
 			for (int i = 0; i < Base.kNumLenToPosStates; i++)
 				m_PosSlotDecoder[i] = new BitTreeDecoder(Base.kNumPosSlotBits);
 		}
+
+        public Decoder(bool allowIllegalStreamStart) : this()
+        {
+            m_AllowIllegalStreamStart = allowIllegalStreamStart;
+        }
 
 		void SetDictionarySize(uint dictionarySize)
 		{
@@ -239,7 +246,8 @@ namespace SevenZip.Compression.LZMA
 
 			UInt64 nowPos64 = 0;
 			UInt64 outSize64 = (UInt64)outSize;
-			if (nowPos64 < outSize64)
+            
+			if (nowPos64 < outSize64 && !m_AllowIllegalStreamStart)
 			{
 				if (m_IsMatchDecoders[state.Index << Base.kNumPosStatesBitsMax].Decode(m_RangeDecoder) != 0)
 					throw new DataErrorException();
