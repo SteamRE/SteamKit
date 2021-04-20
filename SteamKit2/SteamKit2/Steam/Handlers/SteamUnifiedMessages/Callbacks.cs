@@ -3,13 +3,11 @@
  * file 'license.txt', which is part of this source code package.
  */
 
-using ProtoBuf;
-using System.IO;
-using System.Linq;
-using SteamKit2.Internal;
 using System;
+using System.IO;
 using System.Reflection;
-using System.Diagnostics.CodeAnalysis;
+using ProtoBuf;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -101,30 +99,26 @@ namespace SteamKit2
             /// <summary>
             /// Gets the full name of the service method.
             /// </summary>
-            [DisallowNull, NotNull]
-            public string? MethodName { get; private set; }
+            public string MethodName { get; private set; }
 
             /// <summary>
             /// Gets the protobuf notification body.
             /// </summary>
-            [DisallowNull, NotNull]
-            public object? Body { get; private set; }
+            public object Body { get; private set; }
 
 
             internal ServiceMethodNotification( Type messageType, IPacketMsg packetMsg )
             {
                 // Bounce into generic-land.
-                var setupMethod = GetType().GetMethod( nameof(Setup), BindingFlags.Instance | BindingFlags.NonPublic ).MakeGenericMethod( messageType );
-                setupMethod.Invoke( this, new[] { packetMsg } );
+                var setupMethod = GetType().GetMethod( nameof(Setup), BindingFlags.Static | BindingFlags.NonPublic ).MakeGenericMethod( messageType );
+                (MethodName, Body) = ((string, object))setupMethod.Invoke( this, new[] { packetMsg } );
             }
 
-            void Setup<T>( IPacketMsg packetMsg )
+            static (string methodName, object body) Setup<T>( IPacketMsg packetMsg )
                 where T : IExtensible, new()
             {
                 var clientMsg = new ClientMsgProtobuf<T>( packetMsg );
-
-                MethodName = clientMsg.Header.Proto.target_job_name;
-                Body = clientMsg.Body;
+                return (clientMsg.Header.Proto.target_job_name, clientMsg.Body);
             }
         }
     }
