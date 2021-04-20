@@ -39,7 +39,7 @@ namespace SteamKit2.Discovery
                     {
                         return Serializer.DeserializeItems<BasicServerListProto>(fileStream, PrefixStyle.Base128, 1)
                             .Select(item => ServerRecord.CreateServer(
-                                item.Address ?? throw new InvalidDataException( "Serialized server had null address" ),
+                                item.Address,
                                 item.Port,
                                 item.Protocols ))
                             .ToList();
