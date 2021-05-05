@@ -925,6 +925,14 @@ enum EBillingType
 	NumBillingTypes = 16;
 };
 
+enum EPackageStatus
+{
+	Available = 0;
+	Preorder = 1;
+	Unavailable = 2;
+	Invalid = 3;
+};
+
 enum EActivationCodeClass<uint>
 {
 	WonCDKey = 0;
