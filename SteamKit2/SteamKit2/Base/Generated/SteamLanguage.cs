@@ -2696,6 +2696,13 @@ namespace SteamKit2
 		FreeCommercialLicense = 15,
 		NumBillingTypes = 16,
 	}
+	public enum EPackageStatus
+	{
+		Available = 0,
+		Preorder = 1,
+		Unavailable = 2,
+		Invalid = 3,
+	}
 	public enum EActivationCodeClass : uint
 	{
 		WonCDKey = 0,
