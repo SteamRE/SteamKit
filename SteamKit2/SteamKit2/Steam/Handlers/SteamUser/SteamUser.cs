@@ -101,6 +101,15 @@ namespace SteamKit2
             public bool RequestSteam2Ticket { get; set; }
 
             /// <summary>
+            /// Gets or sets a value indicating whether to disable
+            /// automatically granted partner licenses.
+            /// </summary>
+            /// <value>
+            ///   <c>true</c> if automatically granted partner licenses should be disabled; otherwise, <c>false</c>.
+            /// </value>
+            public bool DisablePartnerAutogrants { get; set; }
+
+            /// <summary>
             /// Gets or sets the client operating system type.
             /// </summary>
             /// <value>The client operating system type.</value>
@@ -346,6 +355,7 @@ namespace SteamKit2
             logon.Body.cell_id = details.CellID ?? Client.Configuration.CellID;
 
             logon.Body.steam2_ticket_request = details.RequestSteam2Ticket;
+            logon.Body.disable_partner_autogrants = details.DisablePartnerAutogrants;
 
             // we're now using the latest steamclient package version, this is required to get a proper sentry file for steam guard
             logon.Body.client_package_version = 1771; // todo: determine if this is still required
