@@ -53,5 +53,5 @@ Note: If you're using the NuGet package, the protobuf-net dependency _should_ be
 
 ## Contact
 
-IRC: irc.libera.chat / #steamre ([join via webchat](https://kiwiirc.com/nextclient/irc.libera.chat/steamre))
+IRC: irc.libera.chat / #steamre ([join via webchat](https://web.libera.chat/#steamre))
 
