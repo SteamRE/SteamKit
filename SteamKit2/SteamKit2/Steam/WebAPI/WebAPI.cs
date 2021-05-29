@@ -242,11 +242,11 @@ namespace SteamKit2
                     paramBuilder.Append( "/?" ); // start our GET params
                 }
 
-                args.Add( "format", "vdf" );
+                args[ "format" ] = "vdf";
 
                 if ( !string.IsNullOrEmpty( apiKey ) )
                 {
-                    args.Add( "key", apiKey );
+                    args[ "key" ] = apiKey;
                 }
 
                 // append any args
