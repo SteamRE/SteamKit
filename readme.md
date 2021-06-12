@@ -53,5 +53,5 @@ Note: If you're using the NuGet package, the protobuf-net dependency _should_ be
 
 ## Contact
 
-IRC: irc.freenode.net / #steamkit ([join via webchat](https://webchat.freenode.net/#steamkit?nick=steamkit-user))
+IRC: irc.libera.chat / #steamre ([join via webchat](https://web.libera.chat/#steamre))
 
