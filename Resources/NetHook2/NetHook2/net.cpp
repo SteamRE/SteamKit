@@ -24,9 +24,9 @@ CNet::CNet() noexcept
 
 	BBuildAndAsyncSendFrameFn pBuildFunc = nullptr;
 	const bool bFoundBuildFunc = steamClientScan.FindFunction(
-		"\x55\x8B\xEC\x83\xEC\x74\xA1\x00\x00\x00\x00\x53\x8B\xD9\x89\x5D\xEC\x83\x38",
-		"xxxxxxx????xxxxxxxx",
-		(void **)&pBuildFunc
+		"\x55\x8B\xEC\x83\xEC\x70\xA1\x2A\x2A\x2A\x2A\x53",
+		"xxxxxxx????x",
+		(void**)&pBuildFunc
 	);
 
 	BBuildAndAsyncSendFrame_Orig = pBuildFunc;
@@ -35,9 +35,9 @@ CNet::CNet() noexcept
 
 	RecvPktFn pRecvPktFunc = nullptr;
 	const bool bFoundRecvPktFunc = steamClientScan.FindFunction(
-		"\x55\x8B\xEC\x81\xEC\xB8\x0D\x00\x00\xA1\x00\x00\x00\x00\x53\x56",
-		"xxxxxxxxxx????xx",
-		(void **)&pRecvPktFunc
+		"\x55\x8B\xEC\x81\xEC\xA8\x05\x00\x00\xA1",
+		"xxxxxxxxxx",
+		(void**)&pRecvPktFunc
 	);
 
 	RecvPkt_Orig = pRecvPktFunc;
