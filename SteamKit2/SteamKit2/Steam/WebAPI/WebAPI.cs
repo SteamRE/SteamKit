@@ -222,20 +222,13 @@ namespace SteamKit2
                     throw new ArgumentNullException( nameof(func) );
                 }
 
-
-                if ( args == null )
-                {
-                    args = new Dictionary<string, object>();
-                }
-                else if ( args.TryGetValue( "format", out var format ) )
+                if ( args != null && args.TryGetValue( "format", out var format ) )
                 {
                     if ( !( format is string formatText ) || formatText != "vdf" )
                     {
                         throw new ArgumentException( $"{nameof( args )} include unsupported {nameof( format )}: {format}" );
                     }
                 }
-
-                args ??= new Dictionary<string, object>();
 
                 var paramBuilder = new StringBuilder();
 
@@ -249,7 +242,7 @@ namespace SteamKit2
                     urlBuilder.Append( "/?" );
                 }
 
-                if ( !string.IsNullOrEmpty( apiKey ) && !args.ContainsKey( "key" ) )
+                if ( !string.IsNullOrEmpty( apiKey ) && args != null && !args.ContainsKey( "key" ) )
                 {
                     paramBuilder.Append( "key=" );
                     paramBuilder.Append( Uri.EscapeDataString( apiKey ) );
@@ -257,24 +250,27 @@ namespace SteamKit2
 
                 paramBuilder.Append( "format=vdf" );
 
-                foreach (var (key, value) in args)
+                if ( args != null )
                 {
-                    paramBuilder.Append( '&' );
-                    paramBuilder.Append( Uri.EscapeDataString( key ) );
-                    paramBuilder.Append( '=' );
-
-                    switch (value)
+                    foreach ( var (key, value) in args )
                     {
-                        case null:
-                            break;
+                        paramBuilder.Append( '&' );
+                        paramBuilder.Append( Uri.EscapeDataString( key ) );
+                        paramBuilder.Append( '=' );
 
-                        case byte[] byteArrayValue:
-                            paramBuilder.Append( HttpUtility.UrlEncode( byteArrayValue ) );
-                            break;
+                        switch ( value )
+                        {
+                            case null:
+                                break;
 
-                        default:
-                            paramBuilder.Append( Uri.EscapeDataString( value.ToString() ) );
-                            break;
+                            case byte[] byteArrayValue:
+                                paramBuilder.Append( HttpUtility.UrlEncode( byteArrayValue ) );
+                                break;
+
+                            default:
+                                paramBuilder.Append( Uri.EscapeDataString( value.ToString() ) );
+                                break;
+                        }
                     }
                 }
                 
