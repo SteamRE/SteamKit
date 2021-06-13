@@ -13,6 +13,7 @@ TestResults
 *.user
 *.userprefs
 *.sln.docstates
+.idea/
 .vs/
 
 # Build results

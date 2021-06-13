@@ -49,6 +49,80 @@ namespace Tests
 
            await Assert.ThrowsAsync<WebAPIRequestException>(() => (Task)iface.PerformFooOperation());
         }
+        
+        [Fact]
+        public async Task ThrowsOnIncorrectFormatInArgsProvided()
+        {
+            var capturingHandler = new CaturingHttpMessageHandler();
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( capturingHandler ) ) );
+
+            WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var args = new Dictionary<string, object>
+            {
+                [ "f" ] = "foo",
+                [ "b" ] = "bar",
+                [ "format" ] = "json"
+            };
+            
+            await Assert.ThrowsAsync<ArgumentException>(() => iface.CallAsync( HttpMethod.Get, "GetFoo", args: args ));
+        }
+        
+        [Fact]
+        public async Task DoesntThrowWhenCorrectFormatInArgsProvided()
+        {
+            var capturingHandler = new CaturingHttpMessageHandler();
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( capturingHandler ) ) );
+
+            WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var args = new Dictionary<string, object>
+            {
+                [ "f" ] = "foo",
+                [ "b" ] = "bar",
+                [ "format" ] = "vdf"
+            };
+
+            await iface.CallAsync( HttpMethod.Get, "GetFoo", args: args );
+        }
+        
+        [Fact]
+        public async Task DoesntThrowWhenKeyInArgsProvided()
+        {
+            var capturingHandler = new CaturingHttpMessageHandler();
+            var configuration = SteamConfiguration.Create( c => c.WithWebAPIKey( "test1" ).WithHttpClientFactory( () => new HttpClient( capturingHandler ) ) );
+
+            WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var args = new Dictionary<string, object>
+            {
+                [ "f" ] = "foo",
+                [ "b" ] = "bar",
+                [ "key" ] = "test2"
+            };
+
+            await iface.CallAsync( HttpMethod.Get, "GetFoo", args: args );
+            
+            Assert.Equal( "test2", args["key"] );
+        }
+        
+        [Fact]
+        public async Task DoesntThrowOnArgumentsReuse()
+        {
+            var capturingHandler = new CaturingHttpMessageHandler();
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( capturingHandler ) ) );
+
+            WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var args = new Dictionary<string, object>
+            {
+                [ "f" ] = "foo",
+                [ "b" ] = "bar"
+            };
+
+            await iface.CallAsync( HttpMethod.Get, "GetFoo", args: args );
+            await iface.CallAsync( HttpMethod.Get, "GetFoo", args: args );
+        }
 
         [Fact]
         public async Task UsesSingleParameterArgumentsDictionary()

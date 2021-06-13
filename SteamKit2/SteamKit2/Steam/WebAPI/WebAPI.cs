@@ -242,9 +242,19 @@ namespace SteamKit2
                     paramBuilder.Append( "/?" ); // start our GET params
                 }
 
-                args.Add( "format", "vdf" );
+                if ( args.TryGetValue( "format", out var format ) )
+                {
+                    if ( !(format is string formatText) || formatText != "vdf" )
+                    {
+                        throw new ArgumentException( $"{nameof(args)} include unsupported {nameof(format)}: {format}" );
+                    }
+                }
+                else
+                {
+                    args.Add( "format", "vdf" );
+                }
 
-                if ( !string.IsNullOrEmpty( apiKey ) )
+                if ( !string.IsNullOrEmpty( apiKey ) && !args.ContainsKey( "key" ) )
                 {
                     args.Add( "key", apiKey );
                 }
