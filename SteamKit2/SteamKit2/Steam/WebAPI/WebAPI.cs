@@ -226,7 +226,7 @@ namespace SteamKit2
                 {
                     if ( !( format is string formatText ) || formatText != "vdf" )
                     {
-                        throw new ArgumentException( $"{nameof( args )} include unsupported {nameof( format )}: {format}" );
+                        throw new ArgumentException( $"Unsupported 'format' value '{format}'. Format must either be 'vdf' or omitted.", nameof(args) );
                     }
                 }
 
@@ -246,6 +246,7 @@ namespace SteamKit2
                 {
                     paramBuilder.Append( "key=" );
                     paramBuilder.Append( Uri.EscapeDataString( apiKey ) );
+                    paramBuilder.Append( "&" );
                 }
 
                 paramBuilder.Append( "format=vdf" );
