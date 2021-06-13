@@ -125,6 +125,34 @@ namespace Tests
         }
 
         [Fact]
+        public async Task UsesArgsAsQueryStringParams()
+        {
+            var capturingHandler = new CaturingHttpMessageHandler();
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( capturingHandler ) ) );
+
+            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var args = new Dictionary<string, object>
+            {
+                [ "f" ] = "foo",
+                [ "b" ] = "bar",
+            };
+
+            var response = await iface.PerformFooOperation2( args );
+
+            var request = capturingHandler.MostRecentRequest;
+            Assert.NotNull( request );
+            Assert.Equal( HttpMethod.Get, request.Method );
+            Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
+
+            var values =  request.RequestUri.ParseQueryString();
+            Assert.Equal( 3, values.Count );
+            Assert.Equal( "foo", values[ "f" ] );
+            Assert.Equal( "bar", values[ "b" ] );
+            Assert.Equal( "vdf", values[ "format" ] );
+        }
+
+        [Fact]
         public async Task UsesSingleParameterArgumentsDictionary()
         {
             var capturingHandler = new CaturingHttpMessageHandler();
