@@ -222,68 +222,65 @@ namespace SteamKit2
                     throw new ArgumentNullException( nameof(func) );
                 }
 
+
                 if ( args == null )
                 {
                     args = new Dictionary<string, object>();
                 }
-
-
-                var urlBuilder = new StringBuilder();
-                var paramBuilder = new StringBuilder();
-
-                urlBuilder.AppendFormat( "{0}/{1}/v{2}", iface, func, version );
-
-                var isGet = HttpMethod.Get.Equals( method );
-
-                if ( isGet )
+                else if ( args.TryGetValue( "format", out var format ) )
                 {
-                    // if we're doing a GET request, we'll build the params onto the url
-                    paramBuilder = urlBuilder;
-                    paramBuilder.Append( "/?" ); // start our GET params
-                }
-
-                if ( args.TryGetValue( "format", out var format ) )
-                {
-                    if ( !(format is string formatText) || formatText != "vdf" )
+                    if ( !( format is string formatText ) || formatText != "vdf" )
                     {
-                        throw new ArgumentException( $"{nameof(args)} include unsupported {nameof(format)}: {format}" );
+                        throw new ArgumentException( $"{nameof( args )} include unsupported {nameof( format )}: {format}" );
                     }
                 }
-                else
+
+                args ??= new Dictionary<string, object>();
+
+                var paramBuilder = new StringBuilder();
+
+                var paramsGoInQueryString = HttpMethod.Get.Equals( method );
+
+                var urlBuilder = paramsGoInQueryString ? paramBuilder : new StringBuilder();
+                urlBuilder.AppendFormat( "{0}/{1}/v{2}", iface, func, version );
+
+                if (paramsGoInQueryString)
                 {
-                    args.Add( "format", "vdf" );
+                    urlBuilder.Append( "/?" );
                 }
 
                 if ( !string.IsNullOrEmpty( apiKey ) && !args.ContainsKey( "key" ) )
                 {
-                    args.Add( "key", apiKey );
+                    paramBuilder.Append( "key=" );
+                    paramBuilder.Append( Uri.EscapeDataString( apiKey ) );
                 }
 
-                // append any args
-                paramBuilder.Append( string.Join( "&", args.Select( kvp =>
+                paramBuilder.Append( "format=vdf" );
+
+                foreach (var (key, value) in args)
                 {
-                    string key = HttpUtility.UrlEncode( kvp.Key );
-                    string value;
+                    paramBuilder.Append( '&' );
+                    paramBuilder.Append( Uri.EscapeDataString( key ) );
+                    paramBuilder.Append( '=' );
 
-                    if ( kvp.Value == null )
+                    switch (value)
                     {
-                        value = string.Empty;
-                    }
-                    else if ( kvp.Value is byte[] buffer )
-                    {
-                        value = HttpUtility.UrlEncode( buffer );
-                    }
-                    else
-                    {
-                        value = HttpUtility.UrlEncode( kvp.Value.ToString() );
-                    }
+                        case null:
+                            break;
 
-                    return string.Format( "{0}={1}", key, value );
-                } ) ) );
+                        case byte[] byteArrayValue:
+                            paramBuilder.Append( HttpUtility.UrlEncode( byteArrayValue ) );
+                            break;
+
+                        default:
+                            paramBuilder.Append( Uri.EscapeDataString( value.ToString() ) );
+                            break;
+                    }
+                }
                 
                 var request = new HttpRequestMessage( method, urlBuilder.ToString() );
 
-                if ( !isGet )
+                if ( !paramsGoInQueryString )
                 {
                     request.Content = new StringContent( paramBuilder.ToString() );
                     request.Content.Headers.ContentType = new MediaTypeHeaderValue( "application/x-www-form-urlencoded" );
