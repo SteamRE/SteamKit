@@ -40,9 +40,9 @@ CCrypto::CCrypto() noexcept
 	g_pLogger->LogConsole( "CCrypto::SymmetricEncryptChosenIV = 0x%x\n", Encrypt_Orig );
 
 	const bool bPchMsgNameFromEMsg = steamClientScan.FindFunction(
-		"\x55\x8B\xEC\xA1\x00\x00\x00\x00\x83\xEC\x08\xA8\x01\x75\x1F\x83\xC8\x01\xB9\x00\x00\x00\x00\xA3",
-		"xxxx????xxxxxxxxxxx????x",
-		(void **)&PchMsgNameFromEMsg
+		"\x55\x8B\xEC\x51\xA1\x00\x00\x00\x00\xA8\x01\x75\x1F",
+		"xxxxx????xxxx",
+		(void**)&PchMsgNameFromEMsg
 	);
 
 	if (bPchMsgNameFromEMsg)
