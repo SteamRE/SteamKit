@@ -368,6 +368,10 @@ namespace SteamKit2.Internal
                     HandleLoggedOff( packetMsg );
                     break;
 
+                case EMsg.ClientServerUnavailable:
+                    HandleServerUnavailable( packetMsg );
+                    break;
+                
                 case EMsg.ClientCMList:
                     HandleCMList( packetMsg );
                     break;
@@ -605,6 +609,16 @@ namespace SteamKit2.Internal
                 }
             }
         }
+        
+        void HandleServerUnavailable( IPacketMsg packetMsg )
+        {
+            var msgServerUnavailable = new ClientMsg<MsgClientServerUnavailable>( packetMsg );
+
+            LogDebug( "SteamClient", "A server of type '{0}' was not available for request: '{1}'",
+                msgServerUnavailable.Body.EServerTypeUnavailable, ( EMsg )msgServerUnavailable.Body.EMsgSent );
+            Disconnect( userInitiated: false );
+        }
+        
         void HandleCMList( IPacketMsg packetMsg )
         {
             var cmMsg = new ClientMsgProtobuf<CMsgClientCMList>( packetMsg );
