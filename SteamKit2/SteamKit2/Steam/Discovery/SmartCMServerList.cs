@@ -107,7 +107,11 @@ namespace SteamKit2.Discovery
             if ( endpointList.Count == 0 && configuration.AllowDirectoryFetch )
             {
                 DebugWrite( "Server list provider had no entries, will query SteamDirectory" );
-                endpointList = await SteamDirectory.LoadAsync( configuration ).ConfigureAwait( false );
+                var directoryEndpoints = await SteamDirectory.LoadAsync( configuration ).ConfigureAwait( false );
+
+                // The endpoint list provided by SteamDirectory is ordered. Shuffle this list so we try different CMs instead of the same CM sequentially.
+                var random = new Random();
+                endpointList = directoryEndpoints.OrderBy( a => random.Next() ).ToList();
             }
 
             if ( endpointList.Count == 0 && configuration.AllowDirectoryFetch )
