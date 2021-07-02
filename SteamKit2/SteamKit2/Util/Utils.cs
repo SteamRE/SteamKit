@@ -467,5 +467,20 @@ namespace SteamKit2
             endPoint = new IPEndPoint( address, port );
             return true;
         }
+
+        public static (string host, int port) ExtractEndpointHost( EndPoint endPoint )
+        {
+            switch ( endPoint )
+            {
+                case IPEndPoint ipep:
+                    return ( ipep.Address.ToString(), ipep.Port );
+
+                case DnsEndPoint dns:
+                    return ( dns.Host, dns.Port );
+
+                default:
+                    throw new InvalidOperationException( "Unknown endpoint type." );
+            }
+        }
     }
 }
