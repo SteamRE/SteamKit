@@ -56,6 +56,9 @@ namespace SteamKit2
         {
             this.log = log ?? DebugLogContext.Instance;
 
+#if NET5_0_OR_GREATER
+            var directory = AppContext.BaseDirectory;
+#else
             string directory;
             if ( Assembly.GetEntryAssembly() is { } entryAssembly )
             {
@@ -65,6 +68,7 @@ namespace SteamKit2
             {
                 directory = Directory.GetCurrentDirectory();
             }
+#endif
 
             LogDirectory = Path.Combine(
                 directory,

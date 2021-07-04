@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -19,6 +20,8 @@ namespace SteamKit2
     /// </summary>
     public partial class SteamUnifiedMessages : ClientMsgHandler
     {
+        internal const string TrimmingMessageOfShame = "SteamUnifiedMessages needs to be rewritten in order to become compatible with trimming.";
+
         /// <summary>
         /// This wrapper is used for expression-based RPC calls using Steam Unified Messaging.
         /// </summary>
@@ -40,7 +43,8 @@ namespace SteamKit2
             /// <param name="expr">RPC call expression, e.g. x => x.SomeMethodCall(message);</param>
             /// <param name="isNotification">Whether this message is a notification or not.</param>
             /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
-            public AsyncJob<ServiceMethodResponse> SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification = false )
+            [RequiresUnreferencedCode( SteamUnifiedMessages.TrimmingMessageOfShame )]
+            public AsyncJob<ServiceMethodResponse> SendMessage<[DynamicallyAccessedMembers( Trimming.ForProtobufNet )] TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification = false )
             {
                 if ( expr == null )
                 {
@@ -71,9 +75,9 @@ namespace SteamKit2
 
                 var rpcName = string.Format( "{0}.{1}#{2}", serviceName, methodName, version );
 
-                var method = typeof(SteamUnifiedMessages).GetMethod( nameof(SteamUnifiedMessages.SendMessage) ).MakeGenericMethod( message.GetType() );
+                var method = typeof(SteamUnifiedMessages).GetMethod( nameof(SteamUnifiedMessages.SendMessage) )!.MakeGenericMethod( message.GetType() );
                 var result = method.Invoke( this.steamUnifiedMessages, new[] { rpcName, message, isNotification } );
-                return ( AsyncJob<ServiceMethodResponse> )result;
+                return ( AsyncJob<ServiceMethodResponse> )result!;
             }
             
             static MethodCallExpression ExtractMethodCallExpression<TResponse>( Expression<Func<TService, TResponse>> expression, string paramName )
@@ -101,6 +105,7 @@ namespace SteamKit2
 
         Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
 
+        [RequiresUnreferencedCode( SteamUnifiedMessages.TrimmingMessageOfShame )]
         internal SteamUnifiedMessages()
         {
             dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
@@ -120,7 +125,7 @@ namespace SteamKit2
         /// <param name="message">The message to send.</param>
         /// <param name="isNotification">Whether this message is a notification or not.</param>
         /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
-        public AsyncJob<ServiceMethodResponse> SendMessage<TRequest>( string name, TRequest message, bool isNotification = false )
+        public AsyncJob<ServiceMethodResponse> SendMessage<[DynamicallyAccessedMembers( Trimming.ForProtobufNet )] TRequest>( string name, TRequest message, bool isNotification = false )
             where TRequest : IExtensible
         {
             if ( message == null )
@@ -167,15 +172,10 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(packetMsg) );
             }
 
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc );
-
-            if ( !haveFunc )
+            if ( dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
             {
-                // ignore messages that we don't have a handler function for
-                return;
+                handlerFunc( packetMsg );
             }
-
-            handlerFunc( packetMsg );
         }
 
 
@@ -187,6 +187,7 @@ namespace SteamKit2
             Client.PostCallback( callback );
         }
 
+        [RequiresUnreferencedCode( SteamUnifiedMessages.TrimmingMessageOfShame )]
         void HandleServiceMethod( IPacketMsg packetMsg )
         {
             var notification = new ClientMsgProtobuf( packetMsg );

@@ -117,6 +117,7 @@ namespace SteamKit2
             }
 
             log.LogDebug( "TcpConnection", "Connected to {0}", CurrentEndPoint);
+            DebugLog.Assert( socket != null, nameof( TcpConnection ), "Socket should be non-null after connecting." );
 
             try
             {
@@ -154,7 +155,9 @@ namespace SteamKit2
                 Release( userRequestedDisconnect: true );
                 return;
             }
-            
+
+            DebugLog.Assert( CurrentEndPoint != null, nameof( TcpConnection ), "CurrentEndPoint should be non-null when connecting." );
+
             var asyncResult = socket!.BeginConnect(CurrentEndPoint, null, null );
             if ( WaitHandle.WaitAny( new WaitHandle[] { asyncResult.AsyncWaitHandle, cancellationToken.Token.WaitHandle }, timeout ) == 0 )
             {
@@ -276,8 +279,8 @@ namespace SteamKit2
         {
             // the tcp packet header is considerably less complex than the udp one
             // it only consists of the packet length, followed by the "VT01" magic
-            uint packetLen = 0;
-            uint packetMagic = 0;
+            uint packetLen;
+            uint packetMagic;
 
             try
             {

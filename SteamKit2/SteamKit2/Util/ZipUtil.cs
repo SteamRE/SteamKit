@@ -25,73 +25,72 @@ namespace SteamKit2
 
         public static byte[] Decompress( byte[] buffer )
         {
-            using ( MemoryStream ms = new MemoryStream( buffer ) )
-            using ( BinaryReader reader = new BinaryReader( ms ) )
+            using MemoryStream ms = new MemoryStream( buffer );
+            using BinaryReader reader = new BinaryReader( ms );
+            if ( !PeekHeader( reader, LocalFileHeader ) )
             {
-                if ( !PeekHeader( reader, LocalFileHeader ) )
-                {
-                    throw new Exception( "Expecting LocalFileHeader at start of stream" );
-                }
-
-                string fileName;
-                UInt32 decompressedSize;
-                UInt16 compressionMethod;
-                uint crc;
-                byte[] compressedBuffer = ReadLocalFile( reader, out fileName, out decompressedSize, out compressionMethod, out crc );
-
-                if ( !PeekHeader( reader, CentralDirectoryHeader ) )
-                {
-                    throw new Exception( "Expecting CentralDirectoryHeader following filename" );
-                }
-
-                string cdrFileName;
-                /*Int32 relativeOffset =*/ ReadCentralDirectory( reader, out cdrFileName );
-
-                if ( !PeekHeader( reader, EndOfDirectoryHeader ) )
-                {
-                    throw new Exception( "Expecting EndOfDirectoryHeader following CentralDirectoryHeader" );
-                }
-
-                /*UInt32 count =*/ ReadEndOfDirectory( reader );
-
-                byte[] decompressed;
-
-                if ( compressionMethod == DeflateCompression )
-                    decompressed = InflateBuffer( compressedBuffer, decompressedSize );
-                else
-                    decompressed = compressedBuffer;
-
-                uint checkSum = Crc32.Compute( decompressed );
-
-                if ( checkSum != crc )
-                {
-                    throw new Exception( "Checksum validation failed for decompressed file" );
-                }
-
-                return decompressed;
+                throw new Exception( "Expecting LocalFileHeader at start of stream" );
             }
+
+            string fileName;
+            UInt32 decompressedSize;
+            UInt16 compressionMethod;
+            uint crc;
+            byte[] compressedBuffer = ReadLocalFile( reader, out fileName, out decompressedSize, out compressionMethod, out crc );
+
+            if ( !PeekHeader( reader, CentralDirectoryHeader ) )
+            {
+                throw new Exception( "Expecting CentralDirectoryHeader following filename" );
+            }
+
+            string cdrFileName;
+            /*Int32 relativeOffset =*/
+            ReadCentralDirectory( reader, out cdrFileName );
+
+            if ( !PeekHeader( reader, EndOfDirectoryHeader ) )
+            {
+                throw new Exception( "Expecting EndOfDirectoryHeader following CentralDirectoryHeader" );
+            }
+
+            /*UInt32 count =*/
+            ReadEndOfDirectory( reader );
+
+            byte[] decompressed;
+
+            if ( compressionMethod == DeflateCompression )
+                decompressed = InflateBuffer( compressedBuffer, decompressedSize );
+            else
+                decompressed = compressedBuffer;
+
+            uint checkSum = Crc32.Compute( decompressed );
+
+            if ( checkSum != crc )
+            {
+                throw new Exception( "Checksum validation failed for decompressed file" );
+            }
+
+            return decompressed;
         }
 
         public static byte[] Compress( byte[] buffer )
         {
-            using ( MemoryStream ms = new MemoryStream() )
-            using ( BinaryWriter writer = new BinaryWriter( ms ) )
-            {
-                uint checkSum = Crc32.Compute( buffer );
+            using MemoryStream ms = new MemoryStream();
+            using BinaryWriter writer = new BinaryWriter( ms );
+            uint checkSum = Crc32.Compute( buffer );
 
-                byte[] compressed = DeflateBuffer( buffer );
+            byte[] compressed = DeflateBuffer( buffer );
 
-                Int32 poslocal = WriteHeader( writer, LocalFileHeader );
-                WriteLocalFile( writer, "z", checkSum, ( UInt32 )buffer.Length, compressed );
+            Int32 poslocal = WriteHeader( writer, LocalFileHeader );
+            WriteLocalFile( writer, "z", checkSum, ( UInt32 )buffer.Length, compressed );
 
-                Int32 posCDR = WriteHeader( writer, CentralDirectoryHeader );
-                UInt32 CDRSize = WriteCentralDirectory( writer, "z", checkSum, ( UInt32 )compressed.Length, ( UInt32 )buffer.Length, poslocal );
+            Int32 posCDR = WriteHeader( writer, CentralDirectoryHeader );
+            UInt32 CDRSize = WriteCentralDirectory( writer, "z", checkSum, ( UInt32 )compressed.Length, ( UInt32 )buffer.Length, poslocal );
 
-                /*Int32 posEOD =*/ WriteHeader( writer, EndOfDirectoryHeader );
-                WriteEndOfDirectory( writer, 1, CDRSize, posCDR );
+            /*Int32 posEOD =*/
+            WriteHeader( writer, EndOfDirectoryHeader );
+            WriteEndOfDirectory( writer, 1, CDRSize, posCDR );
 
-                return ms.ToArray();
-            }
+            return ms.ToArray();
         }
 
 
@@ -261,27 +260,23 @@ namespace SteamKit2
 
         private static byte[] InflateBuffer( byte[] compressedBuffer, UInt32 decompressedSize )
         {
-            using ( MemoryStream ms = new MemoryStream( compressedBuffer ) )
-            using ( DeflateStream deflateStream = new DeflateStream( ms, CompressionMode.Decompress ) )
-            {
-                byte[] inflated = new byte[ decompressedSize ];
-                deflateStream.Read( inflated, 0, inflated.Length );
+            using MemoryStream ms = new MemoryStream( compressedBuffer );
+            using DeflateStream deflateStream = new DeflateStream( ms, CompressionMode.Decompress );
+            byte[] inflated = new byte[ decompressedSize ];
+            deflateStream.Read( inflated, 0, inflated.Length );
 
-                return inflated;
-            }
+            return inflated;
         }
 
         private static byte[] DeflateBuffer( byte[] uncompressedBuffer )
         {
-            using ( MemoryStream ms = new MemoryStream() )
+            using MemoryStream ms = new MemoryStream();
+            using ( DeflateStream deflateStream = new DeflateStream( ms, CompressionMode.Compress ) )
             {
-                using ( DeflateStream deflateStream = new DeflateStream( ms, CompressionMode.Compress ) )
-                {
-                    deflateStream.Write( uncompressedBuffer, 0, uncompressedBuffer.Length );
-                }
-
-                return ms.ToArray();
+                deflateStream.Write( uncompressedBuffer, 0, uncompressedBuffer.Length );
             }
+
+            return ms.ToArray();
         }
 
     }

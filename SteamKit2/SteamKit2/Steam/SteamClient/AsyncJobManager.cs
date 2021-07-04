@@ -51,7 +51,7 @@ namespace SteamKit2
             if ( jobFinished )
             {
                 // if the job is finished, we can stop tracking it
-                asyncJobs.TryRemove( jobId, out asyncJob );
+                asyncJobs.TryRemove( jobId, out _ );
             }
         }
 
@@ -132,9 +132,7 @@ namespace SteamKit2
                 if ( job.IsTimedout )
                 {
                     job.SetFailed( dueToRemoteFailure: false );
-
-                    AsyncJob ignored;
-                    asyncJobs.TryRemove( job, out ignored );
+                    asyncJobs.TryRemove( job, out _ );
                 }
             }
         }
@@ -148,8 +146,8 @@ namespace SteamKit2
         /// <returns></returns>
         AsyncJob? GetJob( JobID jobId, bool andRemove = false )
         {
-            AsyncJob asyncJob;
-            bool foundJob = false;
+            AsyncJob? asyncJob;
+            bool foundJob;
 
             if ( andRemove )
             {

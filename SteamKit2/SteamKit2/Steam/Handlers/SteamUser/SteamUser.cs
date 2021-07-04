@@ -505,22 +505,17 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(packetMsg) );
             }
 
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc );
-
-            if ( !haveFunc )
+            if ( dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
             {
-                // ignore messages that we don't have a handler function for
-                return;
+                handlerFunc( packetMsg );
             }
-
-            handlerFunc( packetMsg );
         }
 
         
         #region ClientMsg Handlers
         void HandleLoggedOff( IPacketMsg packetMsg )
         {
-            EResult result = EResult.Invalid;
+            EResult result;
 
             if ( packetMsg.IsProto )
             {

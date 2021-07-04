@@ -80,10 +80,8 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(input) );
             }
 
-            using ( var sha = SHA1.Create() )
-            {
-                return sha.ComputeHash( input );
-            }
+            using var sha = SHA1.Create();
+            return sha.ComputeHash( input );
         }
 
         /// <summary>
@@ -106,24 +104,20 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(iv) );
             }
 
-            using ( var aes = Aes.Create() )
-            {
-                aes.BlockSize = 128;
-                aes.KeySize = 128;
+            using var aes = Aes.Create();
+            aes.BlockSize = 128;
+            aes.KeySize = 128;
 
-                aes.Mode = CipherMode.CBC;
-                aes.Padding = PaddingMode.PKCS7;
+            aes.Mode = CipherMode.CBC;
+            aes.Padding = PaddingMode.PKCS7;
 
-                using ( var aesTransform = aes.CreateEncryptor( key, iv ) )
-                using ( var ms = new MemoryStream() )
-                using ( var cs = new CryptoStream( ms, aesTransform, CryptoStreamMode.Write ) )
-                {
-                    cs.Write( input, 0, input.Length );
-                    cs.FlushFinalBlock();
-                    
-                    return ms.ToArray();
-                }
-            }
+            using var aesTransform = aes.CreateEncryptor( key, iv );
+            using var ms = new MemoryStream();
+            using var cs = new CryptoStream( ms, aesTransform, CryptoStreamMode.Write );
+            cs.Write( input, 0, input.Length );
+            cs.FlushFinalBlock();
+
+            return ms.ToArray();
         }
 
         /// <summary>
@@ -146,29 +140,27 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(iv) );
             }
 
-            using ( var aes = Aes.Create() )
+            using var aes = Aes.Create();
+            aes.BlockSize = 128;
+            aes.KeySize = 128;
+
+            aes.Mode = CipherMode.CBC;
+            aes.Padding = PaddingMode.PKCS7;
+
+            byte[] plainText = new byte[ input.Length ];
+            int outLen = 0;
+
+            using ( var aesTransform = aes.CreateDecryptor( key, iv ) )
+            using ( var ms = new MemoryStream( input ) )
+            using ( var cs = new CryptoStream( ms, aesTransform, CryptoStreamMode.Read ) )
             {
-                aes.BlockSize = 128;
-                aes.KeySize = 128;
-
-                aes.Mode = CipherMode.CBC;
-                aes.Padding = PaddingMode.PKCS7;
-
-                byte[] plainText = new byte[ input.Length ];
-                int outLen = 0;
-
-                using ( var aesTransform = aes.CreateDecryptor( key, iv ) )
-                using ( var ms = new MemoryStream( input ) )
-                using ( var cs = new CryptoStream( ms, aesTransform, CryptoStreamMode.Read ) )
-                {
-                    outLen = cs.Read( plainText, 0, plainText.Length );
-                }
-
-                byte[] output = new byte[ outLen ];
-                Array.Copy( plainText, 0, output, 0, output.Length );
-
-                return output;
+                outLen = cs.Read( plainText, 0, plainText.Length );
             }
+
+            byte[] output = new byte[ outLen ];
+            Array.Copy( plainText, 0, output, 0, output.Length );
+
+            return output;
         }
 
         /// <summary>
@@ -193,43 +185,41 @@ namespace SteamKit2
 
             DebugLog.Assert( key.Length == 32, "CryptoHelper", "SymmetricEncrypt used with non 32 byte key!" );
 
-            using ( var aes = Aes.Create() )
+            using var aes = Aes.Create();
+            aes.BlockSize = 128;
+            aes.KeySize = 256;
+
+            byte[] cryptedIv;
+
+            // encrypt iv using ECB and provided key
+            aes.Mode = CipherMode.ECB;
+            aes.Padding = PaddingMode.None;
+
+            using ( var aesTransform = aes.CreateEncryptor( key, null ) )
             {
-                aes.BlockSize = 128;
-                aes.KeySize = 256;
+                cryptedIv = aesTransform.TransformFinalBlock( iv, 0, iv.Length );
+            }
 
-                byte[] cryptedIv;
-                
-                // encrypt iv using ECB and provided key
-                aes.Mode = CipherMode.ECB;
-                aes.Padding = PaddingMode.None;
+            // encrypt input plaintext with CBC using the generated (plaintext) IV and the provided key
+            aes.Mode = CipherMode.CBC;
+            aes.Padding = PaddingMode.PKCS7;
 
-                using ( var aesTransform = aes.CreateEncryptor( key, null ) )
-                {
-                    cryptedIv = aesTransform.TransformFinalBlock( iv, 0, iv.Length );
-                }
+            using ( var aesTransform = aes.CreateEncryptor( key, iv ) )
+            using ( var ms = new MemoryStream() )
+            using ( var cs = new CryptoStream( ms, aesTransform, CryptoStreamMode.Write ) )
+            {
+                cs.Write( input, 0, input.Length );
+                cs.FlushFinalBlock();
 
-                // encrypt input plaintext with CBC using the generated (plaintext) IV and the provided key
-                aes.Mode = CipherMode.CBC;
-                aes.Padding = PaddingMode.PKCS7;
+                var cipherText = ms.ToArray();
 
-                using ( var aesTransform = aes.CreateEncryptor( key, iv ) )
-                using ( var ms = new MemoryStream() )
-                using ( var cs = new CryptoStream( ms, aesTransform, CryptoStreamMode.Write ) )
-                {
-                    cs.Write( input, 0, input.Length );
-                    cs.FlushFinalBlock();
+                // final output is 16 byte ecb crypted IV + cbc crypted plaintext
+                var output = new byte[ cryptedIv.Length + cipherText.Length ];
 
-                    var cipherText = ms.ToArray();
+                Array.Copy( cryptedIv, 0, output, 0, cryptedIv.Length );
+                Array.Copy( cipherText, 0, output, cryptedIv.Length, cipherText.Length );
 
-                    // final output is 16 byte ecb crypted IV + cbc crypted plaintext
-                    var output = new byte[ cryptedIv.Length + cipherText.Length ];
-
-                    Array.Copy( cryptedIv, 0, output, 0, cryptedIv.Length );
-                    Array.Copy( cipherText, 0, output, cryptedIv.Length, cipherText.Length );
-
-                    return output;
-                }
+                return output;
             }
         }
 
@@ -372,47 +362,45 @@ namespace SteamKit2
 
             DebugLog.Assert( key.Length == 32, "CryptoHelper", "SymmetricDecrypt used with non 32 byte key!" );
 
-            using ( var aes = Aes.Create() )
+            using var aes = Aes.Create();
+            aes.BlockSize = 128;
+            aes.KeySize = 256;
+
+            // first 16 bytes of input is the ECB encrypted IV
+            byte[] cryptedIv = new byte[ 16 ];
+            iv = new byte[ cryptedIv.Length ];
+            Array.Copy( input, 0, cryptedIv, 0, cryptedIv.Length );
+
+            // the rest is ciphertext
+            byte[] cipherText = new byte[ input.Length - cryptedIv.Length ];
+            Array.Copy( input, cryptedIv.Length, cipherText, 0, cipherText.Length );
+
+            // decrypt the IV using ECB
+            aes.Mode = CipherMode.ECB;
+            aes.Padding = PaddingMode.None;
+
+            using ( var aesTransform = aes.CreateDecryptor( key, null ) )
             {
-                aes.BlockSize = 128;
-                aes.KeySize = 256;
+                iv = aesTransform.TransformFinalBlock( cryptedIv, 0, cryptedIv.Length );
+            }
 
-                // first 16 bytes of input is the ECB encrypted IV
-                byte[] cryptedIv = new byte[ 16 ];
-                iv = new byte[ cryptedIv.Length ];
-                Array.Copy( input, 0, cryptedIv, 0, cryptedIv.Length );
+            // decrypt the remaining ciphertext in cbc with the decrypted IV
+            aes.Mode = CipherMode.CBC;
+            aes.Padding = PaddingMode.PKCS7;
 
-                // the rest is ciphertext
-                byte[] cipherText = new byte[ input.Length - cryptedIv.Length ];
-                Array.Copy( input, cryptedIv.Length, cipherText, 0, cipherText.Length );
+            using ( var aesTransform = aes.CreateDecryptor( key, iv ) )
+            using ( var ms = new MemoryStream( cipherText ) )
+            using ( var cs = new CryptoStream( ms, aesTransform, CryptoStreamMode.Read ) )
+            {
+                // plaintext is never longer than ciphertext
+                byte[] plaintext = new byte[ cipherText.Length ];
 
-                // decrypt the IV using ECB
-                aes.Mode = CipherMode.ECB;
-                aes.Padding = PaddingMode.None;
+                int len = cs.Read( plaintext, 0, plaintext.Length );
 
-                using ( var aesTransform = aes.CreateDecryptor( key, null ) )
-                {
-                    iv = aesTransform.TransformFinalBlock( cryptedIv, 0, cryptedIv.Length );
-                }
+                byte[] output = new byte[ len ];
+                Array.Copy( plaintext, 0, output, 0, len );
 
-                // decrypt the remaining ciphertext in cbc with the decrypted IV
-                aes.Mode = CipherMode.CBC;
-                aes.Padding = PaddingMode.PKCS7;
-
-                using ( var aesTransform = aes.CreateDecryptor( key, iv ) )
-                using ( var ms = new MemoryStream( cipherText ) )
-                using ( var cs = new CryptoStream( ms, aesTransform, CryptoStreamMode.Read ) )
-                {
-                    // plaintext is never longer than ciphertext
-                    byte[] plaintext = new byte[ cipherText.Length ];
-
-                    int len = cs.Read( plaintext, 0, plaintext.Length );
-
-                    byte[] output = new byte[ len ];
-                    Array.Copy( plaintext, 0, output, 0, len );
-
-                    return output;
-                }
+                return output;
             }
         }
 
@@ -469,20 +457,16 @@ namespace SteamKit2
             
             DebugLog.Assert( key.Length == 32, "CryptoHelper", "SymmetricDecryptECB used with non 32 byte key!" );
 
-            using ( var aes = Aes.Create() )
-            {
-                aes.BlockSize = 128;
-                aes.KeySize = 256;
-                aes.Mode = CipherMode.ECB;
-                aes.Padding = PaddingMode.PKCS7;
+            using var aes = Aes.Create();
+            aes.BlockSize = 128;
+            aes.KeySize = 256;
+            aes.Mode = CipherMode.ECB;
+            aes.Padding = PaddingMode.PKCS7;
 
-                using ( var aesTransform = aes.CreateDecryptor( key, null ) )
-                {
-                    byte[] output = aesTransform.TransformFinalBlock( input, 0, input.Length );
+            using var aesTransform = aes.CreateDecryptor( key, null );
+            byte[] output = aesTransform.TransformFinalBlock( input, 0, input.Length );
 
-                    return output;
-                }
-            }
+            return output;
         }
 
         /// <summary>
@@ -495,13 +479,11 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(input) );
             }
 
-            using ( var crc = new Crc32() )
-            {
-                byte[] hash = crc.ComputeHash( input );
-                Array.Reverse( hash );
+            using var crc = new Crc32();
+            byte[] hash = crc.ComputeHash( input );
+            Array.Reverse( hash );
 
-                return hash;
-            }
+            return hash;
         }
 
         /// <summary>
@@ -528,14 +510,12 @@ namespace SteamKit2
         /// </summary>
         public static byte[] GenerateRandomBlock( int size )
         {
-            using ( var rng = RandomNumberGenerator.Create() )
-            {
-                var block = new byte[ size ];
+            using var rng = RandomNumberGenerator.Create();
+            var block = new byte[ size ];
 
-                rng.GetBytes( block );
+            rng.GetBytes( block );
 
-                return block;
-            }
+            return block;
         }
 
     }
