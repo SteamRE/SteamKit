@@ -615,14 +615,14 @@ namespace SteamKit2
         /// </summary>
         /// <param name="steamIdList">A list of SteamIDs to request the info of.</param>
         /// <param name="requestedInfo">The requested info flags. If none specified, this uses <see cref="SteamConfiguration.DefaultPersonaStateFlags"/>.</param>
-        public void RequestFriendInfo( IEnumerable<SteamID> steamIdList, EClientPersonaStateFlag requestedInfo = default(EClientPersonaStateFlag) )
+        public void RequestFriendInfo( IEnumerable<SteamID> steamIdList, EClientPersonaStateFlag requestedInfo = default )
         {
             if ( steamIdList == null )
             {
                 throw new ArgumentNullException( nameof(steamIdList) );
             }
 
-            if ( requestedInfo == default(EClientPersonaStateFlag) )
+            if ( requestedInfo == default )
             {
                 requestedInfo = Client.Configuration.DefaultPersonaStateFlags;
             }

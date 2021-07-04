@@ -486,7 +486,7 @@ namespace SteamKit2
             var chunkData = await DoRawCommandAsync( server, string.Format( "depot/{0}/chunk/{1}", depotId, chunkID ), cdnAuthToken, proxyServer ).ConfigureAwait( false );
 
             // assert that lengths match only if the chunk has a length assigned.
-            if ( chunk.CompressedLength != default( uint ) && chunkData.Length != chunk.CompressedLength )
+            if ( chunk.CompressedLength != default && chunkData.Length != chunk.CompressedLength )
             {
                 throw new InvalidDataException( $"Length mismatch after downloading depot chunk! (was {chunkData.Length}, but should be {chunk.CompressedLength})" );
             }
