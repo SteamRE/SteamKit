@@ -258,7 +258,11 @@ namespace SteamKit2
                 }
                 finally
                 {
+#pragma warning disable CA1806 // Do not ignore method results - There's nothing useful that we can do with the kern_return_t result.
+
                     IOObjectRelease( platformExpert );
+
+#pragma warning restore CA1806
                 }
             }
 
