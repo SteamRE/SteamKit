@@ -103,12 +103,12 @@ namespace SteamKit2
 
             var guid = localKey.GetValue( "MachineGuid" );
 
-            if ( guid == null )
+            if ( guid is { } && guid.ToString() is { } guidText )
             {
-                return base.GetMachineGuid();
+                return Encoding.UTF8.GetBytes( guidText );
             }
 
-            return Encoding.UTF8.GetBytes( guid.ToString() );
+            return base.GetMachineGuid();
         }
 
         public override byte[] GetDiskId()
@@ -178,11 +178,12 @@ namespace SteamKit2
                 }
             }
 
-            string[] diskUuids = GetDiskUUIDs();
+            var diskUuids = GetDiskUUIDs();
+            var firstDiskUuid = diskUuids.FirstOrDefault();
 
-            if ( diskUuids.Length > 0 )
+            if ( firstDiskUuid != null )
             {
-                return Encoding.UTF8.GetBytes( diskUuids.FirstOrDefault() );
+                return Encoding.UTF8.GetBytes( firstDiskUuid );
             }
 
             return base.GetDiskId();
