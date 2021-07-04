@@ -377,7 +377,7 @@ namespace SteamKit2
         /// <summary>
         /// Processes incoming packets, maintains connection consistency, and oversees outgoing packets.
         /// </summary>
-        private void NetLoop(object param)
+        private void NetLoop(object? param)
         {
             // Variables that will be used deeper in the function; locating them here avoids recreating
             // them since they don't need to be.
