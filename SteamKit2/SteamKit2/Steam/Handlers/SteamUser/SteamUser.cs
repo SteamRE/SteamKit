@@ -273,12 +273,6 @@ namespace SteamKit2
             };
         }
 
-        static SteamUser()
-        {
-            HardwareUtils.Init();
-        }
-
-
         /// <summary>
         /// Logs the client into the Steam3 network.
         /// The client should already have been connected at this point.

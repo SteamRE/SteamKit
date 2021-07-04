@@ -93,6 +93,8 @@ namespace SteamKit2
             this.AddHandler( new SteamMatchmaking() );
             this.AddHandler( new SteamNetworking() );
 
+            HardwareUtils.InitDefaultProvider();
+
             using ( var process = Process.GetCurrentProcess() )
             {
                 this.processStartTime = process.StartTime;

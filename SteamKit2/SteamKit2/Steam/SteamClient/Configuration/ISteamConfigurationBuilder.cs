@@ -5,7 +5,6 @@
 
 
 using System;
-using System.Net.Http;
 using SteamKit2.Discovery;
 
 namespace SteamKit2
