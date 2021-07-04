@@ -279,8 +279,8 @@ namespace SteamKit2
         {
             // the tcp packet header is considerably less complex than the udp one
             // it only consists of the packet length, followed by the "VT01" magic
-            uint packetLen = 0;
-            uint packetMagic = 0;
+            uint packetLen;
+            uint packetMagic;
 
             try
             {
