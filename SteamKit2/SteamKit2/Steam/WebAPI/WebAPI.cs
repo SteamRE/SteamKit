@@ -147,13 +147,13 @@ namespace SteamKit2
             /// <exception cref="ArgumentOutOfRangeException">
             /// The function version number specified was out of range.
             /// </exception>
-            public override bool TryInvokeMember( InvokeMemberBinder binder, object[] args, out object result )
+            public override bool TryInvokeMember( InvokeMemberBinder binder, object?[]? args, out object? result )
             {
                 bool success = asyncInterface.TryInvokeMember( binder, args, out result );
 
                 if ( success )
                 {
-                    var resultTask = ( Task<KeyValue> )result;
+                    var resultTask = ( Task<KeyValue> )result!;
                     result = resultTask.GetAwaiter().GetResult();
                 }
 
@@ -357,11 +357,12 @@ namespace SteamKit2
             /// <exception cref="ArgumentOutOfRangeException">
             /// The function version number specified was out of range.
             /// </exception>
-            public override bool TryInvokeMember( InvokeMemberBinder binder, object[] args, out object result )
+            public override bool TryInvokeMember( InvokeMemberBinder binder, object?[]? args, out object? result )
             {
-                IDictionary<string, object> methodArgs;
+                IDictionary<string, object?> methodArgs;
+                args ??= Array.Empty<object>();
 
-                if ( args.Length == 1 && binder.CallInfo.ArgumentNames.Count == 0 && args[ 0 ] is IDictionary<string, object> explicitArgs )
+                if ( args.Length == 1 && binder.CallInfo.ArgumentNames.Count == 0 && args[ 0 ] is IDictionary<string, object?> explicitArgs )
                 {
                     methodArgs = explicitArgs;
                 }
@@ -377,7 +378,7 @@ namespace SteamKit2
                             x => args[ x ] );
                 }
 
-                var apiArgs = new Dictionary<string, object>();
+                var apiArgs = new Dictionary<string, object?>();
                 var requestMethod = HttpMethod.Get;
 
                 foreach ( var ( argName, argValue ) in methodArgs )
@@ -385,10 +386,10 @@ namespace SteamKit2
                     // method is a reserved param for selecting the http request method
                     if ( argName.Equals( "method", StringComparison.OrdinalIgnoreCase ) )
                     {
-                        var methodText = argValue.ToString();
+                        var methodText = argValue?.ToString();
                         if (methodText is null)
                         {
-                            throw new ArgumentException( "Argument 'method' msut be non-null value." );
+                            throw new ArgumentException( "Argument 'method' must be non-null value." );
                         }
 
                         requestMethod = new HttpMethod( methodText );
