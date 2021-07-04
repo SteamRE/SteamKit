@@ -246,7 +246,7 @@ namespace SteamKit2
                 {
                     paramBuilder.Append( "key=" );
                     paramBuilder.Append( Uri.EscapeDataString( apiKey ) );
-                    paramBuilder.Append( "&" );
+                    paramBuilder.Append( '&' );
                 }
 
                 paramBuilder.Append( "format=vdf" );

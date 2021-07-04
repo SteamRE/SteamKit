@@ -240,11 +240,11 @@ namespace SteamKit2
         /// <summary>
         /// Default timeout to use when making requests
         /// </summary>
-        public static TimeSpan RequestTimeout = TimeSpan.FromSeconds( 10 );
+        public static TimeSpan RequestTimeout { get; set; } = TimeSpan.FromSeconds( 10 );
         /// <summary>
         /// Default timeout to use when reading the response body
         /// </summary>
-        public static TimeSpan ResponseBodyTimeout = TimeSpan.FromSeconds( 60 );
+        public static TimeSpan ResponseBodyTimeout { get; set; } = TimeSpan.FromSeconds( 60 );
 
 
         /// <summary>

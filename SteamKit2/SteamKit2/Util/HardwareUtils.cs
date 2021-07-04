@@ -189,7 +189,7 @@ namespace SteamKit2
         }
 
 
-        string[] GetBootOptions()
+        static string[] GetBootOptions()
         {
             string bootOptions;
 
@@ -199,12 +199,12 @@ namespace SteamKit2
             }
             catch
             {
-                return new string[0];
+                return Array.Empty<string>();
             }
 
             return bootOptions.Split( ' ' );
         }
-        string[] GetDiskUUIDs()
+        static string[] GetDiskUUIDs()
         {
             try
             {
@@ -218,12 +218,12 @@ namespace SteamKit2
             }
             catch
             {
-                return new string[0];
+                return Array.Empty<string>();
             }
         }
-        string? GetParamValue( string[] bootOptions, string param )
+        static string? GetParamValue( string[] bootOptions, string param )
         {
-            string paramString = bootOptions
+            var paramString = bootOptions
                 .FirstOrDefault( p => p.StartsWith( param, StringComparison.OrdinalIgnoreCase ) );
 
             if ( paramString == null )
