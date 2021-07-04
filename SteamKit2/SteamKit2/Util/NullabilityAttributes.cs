@@ -1,5 +1,6 @@
 ﻿namespace System.Diagnostics.CodeAnalysis
 {
+#if !NETCOREAPP3_0_OR_GREATER
     [AttributeUsage( AttributeTargets.Field |
                     AttributeTargets.Parameter |
                     AttributeTargets.Property )]
@@ -80,4 +81,5 @@
 
         public bool ParameterValue { get; }
     }
+#endif
 }
