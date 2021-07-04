@@ -52,14 +52,12 @@ namespace Tests
         [Fact]
         public void DefaultHttpClientFactory()
         {
-            using (var client = configuration.HttpClientFactory())
-            {
-                Assert.NotNull(client);
-                Assert.IsType<HttpClient>(client);
+            using var client = configuration.HttpClientFactory();
+            Assert.NotNull( client );
+            Assert.IsType<HttpClient>( client );
 
-                var steamKitAssemblyVersion = typeof( SteamClient ).Assembly.GetName().Version;
-                Assert.Equal("SteamKit/" + steamKitAssemblyVersion.ToString(fieldCount: 3), client.DefaultRequestHeaders.UserAgent.ToString());
-            }
+            var steamKitAssemblyVersion = typeof( SteamClient ).Assembly.GetName().Version;
+            Assert.Equal( "SteamKit/" + steamKitAssemblyVersion.ToString( fieldCount: 3 ), client.DefaultRequestHeaders.UserAgent.ToString() );
         }
 
         [Fact]
@@ -139,10 +137,8 @@ namespace Tests
         [Fact]
         public void HttpClientFactoryIsConfigured()
         {
-            using (var client = configuration.HttpClientFactory())
-            {
-                Assert.Equal("true", client.DefaultRequestHeaders.GetValues("X-SteamKit-Tests").FirstOrDefault());
-            }
+            using var client = configuration.HttpClientFactory();
+            Assert.Equal( "true", client.DefaultRequestHeaders.GetValues( "X-SteamKit-Tests" ).FirstOrDefault() );
         }
 
         [Fact]

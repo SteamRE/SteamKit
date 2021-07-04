@@ -112,14 +112,12 @@ namespace SteamKit2
 
             public AsnKeyParser(String pathname)
             {
-                using (var reader = new BinaryReader(
-                  new FileStream(pathname, FileMode.Open, FileAccess.Read)))
-                {
-                    var info = new FileInfo(pathname);
+            using var reader = new BinaryReader(
+              new FileStream( pathname, FileMode.Open, FileAccess.Read ) );
+            var info = new FileInfo( pathname );
 
-                    _parser = new AsnParser(reader.ReadBytes((int)info.Length));
-                }
-            }
+            _parser = new AsnParser( reader.ReadBytes( ( int )info.Length ) );
+        }
 
             public AsnKeyParser(ICollection<byte> contents)
             {

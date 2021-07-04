@@ -35,117 +35,113 @@ namespace SteamKit2.Util
 		static uint GetBootDiskNumber()
 		{
 			var volumeName = $@"\\.\{ GetBootDiskLogicalVolume() }";
-			using ( var handle = NativeMethods.CreateFile( volumeName, 0, NativeMethods.FILE_SHARE_READ | NativeMethods.FILE_SHARE_WRITE, IntPtr.Zero, NativeMethods.OPEN_EXISTING, 0, IntPtr.Zero ) )
-			{
-				if ( handle == null || handle.IsInvalid )
-				{
-					throw new FileNotFoundException( "Unable to open boot volume.", volumeName );
-				}
+            using var handle = NativeMethods.CreateFile( volumeName, 0, NativeMethods.FILE_SHARE_READ | NativeMethods.FILE_SHARE_WRITE, IntPtr.Zero, NativeMethods.OPEN_EXISTING, 0, IntPtr.Zero );
+            if ( handle == null || handle.IsInvalid )
+            {
+                throw new FileNotFoundException( "Unable to open boot volume.", volumeName );
+            }
 
-				var bufferSize = 0x20;
-				var pointer = Marshal.AllocHGlobal( bufferSize );
-				try
-				{
-					uint bytesReturned;
+            var bufferSize = 0x20;
+            var pointer = Marshal.AllocHGlobal( bufferSize );
+            try
+            {
+                uint bytesReturned;
 
-					if ( !NativeMethods.DeviceIoControl( handle, NativeMethods.IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS, IntPtr.Zero, 0, pointer, (uint)bufferSize, out bytesReturned, IntPtr.Zero ) )
-					{
-						throw new Win32Exception();
-					}
+                if ( !NativeMethods.DeviceIoControl( handle, NativeMethods.IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS, IntPtr.Zero, 0, pointer, ( uint )bufferSize, out bytesReturned, IntPtr.Zero ) )
+                {
+                    throw new Win32Exception();
+                }
 
-					var extents = Marshal.PtrToStructure<NativeMethods.VOLUME_DISK_EXTENTS>(pointer);
-					if ( extents.NumberOfDiskExtents != 1 )
-					{
-						throw new InvalidOperationException( "Unexpected number of disk extents" );
-					}
+                var extents = Marshal.PtrToStructure<NativeMethods.VOLUME_DISK_EXTENTS>( pointer );
+                if ( extents.NumberOfDiskExtents != 1 )
+                {
+                    throw new InvalidOperationException( "Unexpected number of disk extents" );
+                }
 
-					var diskID = extents.Extents[0].DiskNumber;
-					return diskID;
-				}
-				finally
-				{
-					Marshal.FreeHGlobal( pointer );
-				}
-			}
-		}
+                var diskID = extents.Extents[ 0 ].DiskNumber;
+                return diskID;
+            }
+            finally
+            {
+                Marshal.FreeHGlobal( pointer );
+            }
+        }
 
 		//
 		// Here Be Dragons
 		//
 		static string? GetPhysicalDriveSerialNumber( uint driveNumber )
 		{
-			using (var handle = NativeMethods.CreateFile( $@"\\.\PhysicalDrive{driveNumber}", 0, NativeMethods.FILE_SHARE_READ | NativeMethods.FILE_SHARE_WRITE, IntPtr.Zero, NativeMethods.OPEN_EXISTING, 0, IntPtr.Zero ) )
-			{
-				if ( handle == null || handle.IsInvalid )
-				{
-					return null;
-				}
+            using var handle = NativeMethods.CreateFile( $@"\\.\PhysicalDrive{driveNumber}", 0, NativeMethods.FILE_SHARE_READ | NativeMethods.FILE_SHARE_WRITE, IntPtr.Zero, NativeMethods.OPEN_EXISTING, 0, IntPtr.Zero );
+            if ( handle == null || handle.IsInvalid )
+            {
+                return null;
+            }
 
-				uint descriptorSize;
+            uint descriptorSize;
 
-				// 1. Call DeviceIoControl(STORAGE_PROPERTY_QUERY, out STORAGE_DESCRIPTOR_HEADER) to figure out how many bytes
-				// we need to allocate.
+            // 1. Call DeviceIoControl(STORAGE_PROPERTY_QUERY, out STORAGE_DESCRIPTOR_HEADER) to figure out how many bytes
+            // we need to allocate.
 
-				var querySize = Marshal.SizeOf<NativeMethods.STORAGE_PROPERTY_QUERY>();
-				var queryPtr = Marshal.AllocHGlobal( querySize );
-				try
-				{
-					var query = new NativeMethods.STORAGE_PROPERTY_QUERY();
-					query.PropertyId = NativeMethods.StorageDeviceProperty;
-					query.QueryType = NativeMethods.PropertyStandardQuery;
-					Marshal.StructureToPtr( query, queryPtr, fDeleteOld: false );
+            var querySize = Marshal.SizeOf<NativeMethods.STORAGE_PROPERTY_QUERY>();
+            var queryPtr = Marshal.AllocHGlobal( querySize );
+            try
+            {
+                var query = new NativeMethods.STORAGE_PROPERTY_QUERY();
+                query.PropertyId = NativeMethods.StorageDeviceProperty;
+                query.QueryType = NativeMethods.PropertyStandardQuery;
+                Marshal.StructureToPtr( query, queryPtr, fDeleteOld: false );
 
-					uint bytesReturned;
+                uint bytesReturned;
 
-					var headerSize = Marshal.SizeOf<NativeMethods.STORAGE_DESCRIPTOR_HEADER>();
-					var headerPtr = Marshal.AllocHGlobal( headerSize );
-					try
-					{
-						if ( !NativeMethods.DeviceIoControl( handle, NativeMethods.IOCTL_STORAGE_QUERY_PROPERTY, queryPtr, ( uint )querySize, headerPtr, ( uint )headerSize, out bytesReturned, IntPtr.Zero ) )
-						{
-							throw new Win32Exception();
-						}
+                var headerSize = Marshal.SizeOf<NativeMethods.STORAGE_DESCRIPTOR_HEADER>();
+                var headerPtr = Marshal.AllocHGlobal( headerSize );
+                try
+                {
+                    if ( !NativeMethods.DeviceIoControl( handle, NativeMethods.IOCTL_STORAGE_QUERY_PROPERTY, queryPtr, ( uint )querySize, headerPtr, ( uint )headerSize, out bytesReturned, IntPtr.Zero ) )
+                    {
+                        throw new Win32Exception();
+                    }
 
-						var header = Marshal.PtrToStructure<NativeMethods.STORAGE_DESCRIPTOR_HEADER>( headerPtr );
-						descriptorSize = header.Size;
-					}
-					finally
-					{
-						Marshal.FreeHGlobal( headerPtr);
-					}
+                    var header = Marshal.PtrToStructure<NativeMethods.STORAGE_DESCRIPTOR_HEADER>( headerPtr );
+                    descriptorSize = header.Size;
+                }
+                finally
+                {
+                    Marshal.FreeHGlobal( headerPtr );
+                }
 
-					// 2. Call DeviceIOControl(STORAGE_PROPERTY_QUERY, STORAGE_DEVICE_DESCRIPTOR) to get a bunch of device info with a header
-					// containing the offsets to each piece of information.
+                // 2. Call DeviceIOControl(STORAGE_PROPERTY_QUERY, STORAGE_DEVICE_DESCRIPTOR) to get a bunch of device info with a header
+                // containing the offsets to each piece of information.
 
-					var descriptorPtr = Marshal.AllocHGlobal( ( int ) descriptorSize );
-					try
-					{
-						if ( !NativeMethods.DeviceIoControl( handle, NativeMethods.IOCTL_STORAGE_QUERY_PROPERTY, queryPtr, ( uint )querySize, descriptorPtr, descriptorSize, out bytesReturned, IntPtr.Zero ) )
-						{
-							throw new Win32Exception();
-						}
+                var descriptorPtr = Marshal.AllocHGlobal( ( int )descriptorSize );
+                try
+                {
+                    if ( !NativeMethods.DeviceIoControl( handle, NativeMethods.IOCTL_STORAGE_QUERY_PROPERTY, queryPtr, ( uint )querySize, descriptorPtr, descriptorSize, out bytesReturned, IntPtr.Zero ) )
+                    {
+                        throw new Win32Exception();
+                    }
 
-						var descriptor = Marshal.PtrToStructure<NativeMethods.STORAGE_DEVICE_DESCRIPTOR>( descriptorPtr);
+                    var descriptor = Marshal.PtrToStructure<NativeMethods.STORAGE_DEVICE_DESCRIPTOR>( descriptorPtr );
 
-						// 3. Figure out where in the blob the serial number is
-						// and read it from there.
-						var serialNumberOffset = descriptor.SerialNumberOffset;
-						var serialNumberPtr = IntPtr.Add( descriptorPtr, ( int )serialNumberOffset );
+                    // 3. Figure out where in the blob the serial number is
+                    // and read it from there.
+                    var serialNumberOffset = descriptor.SerialNumberOffset;
+                    var serialNumberPtr = IntPtr.Add( descriptorPtr, ( int )serialNumberOffset );
 
-						var serialNumber = Marshal.PtrToStringAnsi( serialNumberPtr );
-						return serialNumber;
-					}
-					finally
-					{
-						Marshal.FreeHGlobal( descriptorPtr);
-					}
-				}
-				finally
-				{
-					Marshal.FreeHGlobal( queryPtr );
-				}
-			}
-		}
+                    var serialNumber = Marshal.PtrToStringAnsi( serialNumberPtr );
+                    return serialNumber;
+                }
+                finally
+                {
+                    Marshal.FreeHGlobal( descriptorPtr );
+                }
+            }
+            finally
+            {
+                Marshal.FreeHGlobal( queryPtr );
+            }
+        }
 
 		#endregion
 

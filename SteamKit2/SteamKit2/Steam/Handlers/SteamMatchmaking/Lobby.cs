@@ -360,11 +360,9 @@ namespace SteamKit2
                     }
                 }
 
-                using ( var ms = new MemoryStream() )
-                {
-                    keyValue.SaveToStream( ms, true );
-                    return ms.ToArray();
-                }
+                using var ms = new MemoryStream();
+                keyValue.SaveToStream( ms, true );
+                return ms.ToArray();
             }
 
             internal static ReadOnlyDictionary<string, string> DecodeMetadata( byte[]? buffer )

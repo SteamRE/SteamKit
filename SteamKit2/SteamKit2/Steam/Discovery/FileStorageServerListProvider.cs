@@ -32,12 +32,10 @@ namespace SteamKit2.Discovery
             {
                 try
                 {
-                    using (FileStream fileStream = File.OpenRead(filename))
-                    {
-                        return Serializer.DeserializeItems<BasicServerListProto>(fileStream, PrefixStyle.Base128, 1)
-                            .Select(item => ServerRecord.CreateServer(item.Address, item.Port, item.Protocols))
-                            .ToList();
-                    }
+                    using FileStream fileStream = File.OpenRead( filename );
+                    return Serializer.DeserializeItems<BasicServerListProto>( fileStream, PrefixStyle.Base128, 1 )
+                        .Select( item => ServerRecord.CreateServer( item.Address, item.Port, item.Protocols ) )
+                        .ToList();
                 }
                 catch (IOException ex)
                 {
@@ -63,20 +61,18 @@ namespace SteamKit2.Discovery
             {
                 try
                 {
-                    using (var fileStream = File.OpenWrite(filename))
-                    {
-                        Serializer.Serialize(fileStream,
-                            endpoints.Select(ep =>
+                    using var fileStream = File.OpenWrite( filename );
+                    Serializer.Serialize( fileStream,
+                        endpoints.Select( ep =>
+                         {
+                            return new BasicServerListProto
                             {
-                                return new BasicServerListProto
-                                {
-                                    Address = ep.GetHost(),
-                                    Port = ep.GetPort(),
-                                    Protocols = ep.ProtocolTypes
-                                };
-                            }));
-                        fileStream.SetLength(fileStream.Position);
-                    }
+                                Address = ep.GetHost(),
+                                Port = ep.GetPort(),
+                                Protocols = ep.ProtocolTypes
+                            };
+                        } ) );
+                    fileStream.SetLength( fileStream.Position );
                 }
                 catch (IOException ex)
                 {

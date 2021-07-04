@@ -364,9 +364,9 @@ namespace SteamKit2.Internal
 
 			Msg = (EMsg)MsgUtil.GetMsg( (uint)br.ReadInt32() );
 			HeaderLength = br.ReadInt32();
-			using( MemoryStream msProto = new MemoryStream( br.ReadBytes( HeaderLength ) ) )
-				Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.Internal.CMsgProtoBufHeader>( msProto );
-		}
+            using MemoryStream msProto = new MemoryStream( br.ReadBytes( HeaderLength ) );
+            Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.Internal.CMsgProtoBufHeader>( msProto );
+        }
 	}
 
 	[StructLayout( LayoutKind.Sequential )]
@@ -408,9 +408,9 @@ namespace SteamKit2.Internal
 
 			Msg = MsgUtil.GetGCMsg( (uint)br.ReadUInt32() );
 			HeaderLength = br.ReadInt32();
-			using( MemoryStream msProto = new MemoryStream( br.ReadBytes( HeaderLength ) ) )
-				Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.GC.Internal.CMsgProtoBufHeader>( msProto );
-		}
+            using MemoryStream msProto = new MemoryStream( br.ReadBytes( HeaderLength ) );
+            Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.GC.Internal.CMsgProtoBufHeader>( msProto );
+        }
 	}
 
 	[StructLayout( LayoutKind.Sequential )]

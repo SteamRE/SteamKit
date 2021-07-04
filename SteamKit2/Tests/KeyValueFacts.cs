@@ -423,10 +423,8 @@ namespace Tests
             {
                 kv.SaveToStream( ms, asBinary: false );
                 ms.Seek( 0, SeekOrigin.Begin );
-                using ( var reader = new StreamReader( ms ) )
-                {
-                    text = reader.ReadToEnd();
-                }
+                using var reader = new StreamReader( ms );
+                text = reader.ReadToEnd();
             }
 
             Assert.Equal( expected, text );
@@ -468,10 +466,8 @@ namespace Tests
             {
                 kv.SaveToStream( ms, asBinary: false );
                 ms.Seek( 0, SeekOrigin.Begin );
-                using ( var reader = new StreamReader( ms ) )
-                {
-                    text = reader.ReadToEnd();
-                }
+                using var reader = new StreamReader( ms );
+                text = reader.ReadToEnd();
             }
 
             var expectedValue = "\"key\"\n{\n\t\"slashes\"\t\t\"\\\\o/\"\n\t\"newline\"\t\t\"\\r\\n\"\n}\n";
@@ -490,10 +486,8 @@ namespace Tests
             {
                 kv.SaveToStream( ms, asBinary: false );
                 ms.Seek( 0, SeekOrigin.Begin );
-                using ( var reader = new StreamReader( ms ) )
-                {
-                    text = reader.ReadToEnd();
-                }
+                using var reader = new StreamReader( ms );
+                text = reader.ReadToEnd();
             }
 
             var expectedValue = "\"key\"\n{\n\t\"emptyObj\"\n\t{\n\t}\n\t\"emptyString\"\t\t\"\"\n}\n";

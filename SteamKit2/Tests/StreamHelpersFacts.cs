@@ -41,18 +41,16 @@ namespace Tests
             {
                 var threadNumber = (int)o;
 
-                using (var ms = new MemoryStream())
+                using var ms = new MemoryStream();
+                var bytes = BitConverter.GetBytes( threadNumber );
+                ms.Write( bytes, 0, bytes.Length );
+
+                for ( var i = 0; i < 1000; i++ )
                 {
-                    var bytes = BitConverter.GetBytes(threadNumber);
-                    ms.Write(bytes, 0, bytes.Length);
+                    ms.Seek( 0, SeekOrigin.Begin );
 
-                    for (var i = 0; i < 1000; i++)
-                    {
-                        ms.Seek(0, SeekOrigin.Begin);
-
-                        var value = ReadValue(threadNumber, ms).ToString(CultureInfo.InvariantCulture);
-                        Assert.Equal(threadNumber.ToString(CultureInfo.InvariantCulture), value);
-                    }
+                    var value = ReadValue( threadNumber, ms ).ToString( CultureInfo.InvariantCulture );
+                    Assert.Equal( threadNumber.ToString( CultureInfo.InvariantCulture ), value );
                 }
             }
             catch (Exception ex)
