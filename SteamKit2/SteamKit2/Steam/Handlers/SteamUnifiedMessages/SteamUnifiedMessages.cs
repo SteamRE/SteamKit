@@ -71,9 +71,9 @@ namespace SteamKit2
 
                 var rpcName = string.Format( "{0}.{1}#{2}", serviceName, methodName, version );
 
-                var method = typeof(SteamUnifiedMessages).GetMethod( nameof(SteamUnifiedMessages.SendMessage) ).MakeGenericMethod( message.GetType() );
+                var method = typeof(SteamUnifiedMessages).GetMethod( nameof(SteamUnifiedMessages.SendMessage) )!.MakeGenericMethod( message.GetType() );
                 var result = method.Invoke( this.steamUnifiedMessages, new[] { rpcName, message, isNotification } );
-                return ( AsyncJob<ServiceMethodResponse> )result;
+                return ( AsyncJob<ServiceMethodResponse> )result!;
             }
             
             static MethodCallExpression ExtractMethodCallExpression<TResponse>( Expression<Func<TService, TResponse>> expression, string paramName )

@@ -328,10 +328,8 @@ namespace SteamKit2
         /// <returns>Non-zero number of message parts if a message is ready to be handled, 0 otherwise</returns>
         private uint ReadyMessageParts()
         {
-            UdpPacket packet;
-
             // Make sure that the first packet of the next message to handle is present
-            if ( !inPackets.TryGetValue(inSeqHandled + 1, out packet) )
+            if ( !inPackets.TryGetValue(inSeqHandled + 1, out var packet) )
                 return 0;
 
             // ...and if relevant, all subparts of the message also
@@ -356,9 +354,10 @@ namespace SteamKit2
             MemoryStream payload = new MemoryStream();
             for ( uint i = 0; i < numPackets; i++ )
             {
-                UdpPacket packet;
+                var handled = inPackets.TryGetValue(++inSeqHandled, out var packet);
+                DebugLog.Assert( handled, nameof( UdpConnection ), "should have retrieved next packet details" );
+                DebugLog.Assert( packet != null, nameof( UdpConnection ), "next packet details should not be null" );
 
-                inPackets.TryGetValue(++inSeqHandled, out packet);
                 inPackets.Remove(inSeqHandled);
 
                 packet.Payload.WriteTo(payload);
