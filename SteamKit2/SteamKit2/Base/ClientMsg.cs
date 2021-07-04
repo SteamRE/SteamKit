@@ -144,7 +144,7 @@ namespace SteamKit2
     /// Represents a protobuf backed client message.
     /// </summary>
     /// <typeparam name="TBody">The body type of this message.</typeparam>
-    public sealed class ClientMsgProtobuf<TBody> : ClientMsgProtobuf
+    public sealed class ClientMsgProtobuf<[DynamicallyAccessedMembers( Trimming.ForProtobufNet )] TBody> : ClientMsgProtobuf
         where TBody : IExtensible, new()
     {
         /// <summary>
