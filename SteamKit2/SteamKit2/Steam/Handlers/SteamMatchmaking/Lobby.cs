@@ -255,7 +255,7 @@ namespace SteamKit2
                 /// </summary>
                 /// <param name="obj"></param>
                 /// <returns>true, if obj is <see cref="Member"/> with a matching SteamID. Otherwise, false.</returns>
-                public override bool Equals( object obj )
+                public override bool Equals( object? obj )
                 {
                     if ( obj is Member member )
                     {

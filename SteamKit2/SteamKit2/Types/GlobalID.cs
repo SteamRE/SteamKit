@@ -146,13 +146,8 @@ namespace SteamKit2
         /// <returns>
         ///   <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals( object obj )
+        public override bool Equals( object? obj )
         {
-            if ( obj == null )
-            {
-                return false;
-            }
-
             if ( !( obj is GlobalID gid ) )
             {
                 return false;
@@ -168,9 +163,9 @@ namespace SteamKit2
         /// <returns>
         ///   <c>true</c> if the specified <see cref="GlobalID"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public bool Equals( GlobalID gid )
+        public bool Equals( GlobalID? gid )
         {
-            if ( ( object )gid == null )
+            if ( gid is null )
             {
                 return false;
             }
