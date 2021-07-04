@@ -95,7 +95,9 @@ namespace SteamKit2
             }
         }
 
+#if NETSTANDARD
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+#endif
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
@@ -401,11 +403,7 @@ namespace SteamKit2
 
                 try
                 {
-#pragma warning disable 168
-#pragma warning disable 219
                     byte b = GetNextOctet();
-#pragma warning restore 219
-#pragma warning restore 168
 
                     int length = GetLength();
                     if (length > RemainingBytes())

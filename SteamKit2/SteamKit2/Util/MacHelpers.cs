@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Text;
@@ -43,6 +44,7 @@ namespace SteamKit2.Util.MacHelpers
 #if NET6_0_OR_GREATER
     [SupportedOSPlatform( "macos" )]
 #endif
+    [SuppressMessage( "Style", "IDE1006:Naming Styles", Justification = "Native struct name" )]
     struct statfs
     {
         const int MFSTYPENAMELEN = 16;
