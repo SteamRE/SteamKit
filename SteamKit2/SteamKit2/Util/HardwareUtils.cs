@@ -12,6 +12,8 @@ using static SteamKit2.Util.MacHelpers.LibC;
 using static SteamKit2.Util.MacHelpers.CoreFoundation;
 using static SteamKit2.Util.MacHelpers.DiskArbitration;
 using static SteamKit2.Util.MacHelpers.IOKit;
+using System.Runtime.Versioning;
+using System.Runtime.InteropServices;
 
 namespace SteamKit2
 {
@@ -19,24 +21,26 @@ namespace SteamKit2
     {
         public static MachineInfoProvider GetProvider()
         {
-            switch ( Environment.OSVersion.Platform )
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                case PlatformID.Win32NT:
-                case PlatformID.Win32Windows:
-                    return new WindowsInfoProvider();
-
-                case PlatformID.Unix:
-                    if ( Utils.IsMacOS() )
-                    {
-                        return new OSXInfoProvider();
-                    }
-                    else
-                    {
-                        return new LinuxInfoProvider();
-                    }
+                return new WindowsInfoProvider();
             }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+#pragma warning disable CA1416 // Validate platform compatibility - BUG: https://github.com/dotnet/roslyn-analyzers/issues/5205
 
-            return new DefaultInfoProvider();
+                return new OSXInfoProvider();
+
+#pragma warning restore CA1416
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                return new LinuxInfoProvider();
+            }
+            else
+            {
+                return new DefaultInfoProvider();
+            }
         }
 
         public abstract byte[] GetMachineGuid();
@@ -81,6 +85,9 @@ namespace SteamKit2
         }
     }
 
+#if NET6_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
     class WindowsInfoProvider : DefaultInfoProvider
     {
         public override byte[] GetMachineGuid()
@@ -117,6 +124,9 @@ namespace SteamKit2
         }
     }
 
+#if NET6_0_OR_GREATER
+    [SupportedOSPlatform("linux")]
+#endif
     class LinuxInfoProvider : DefaultInfoProvider
     {
         public override byte[] GetMachineGuid()
@@ -223,6 +233,9 @@ namespace SteamKit2
         }
     }
 
+#if NET6_0_OR_GREATER
+    [SupportedOSPlatform( "macos" )]
+#endif
     class OSXInfoProvider : DefaultInfoProvider
     {
         public override byte[] GetMachineGuid()
