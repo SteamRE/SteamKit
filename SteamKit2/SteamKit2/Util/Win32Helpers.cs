@@ -27,7 +27,7 @@ namespace SteamKit2.Util
 			}
 		}
 
-		static string GetBootDiskLogicalVolume()
+		static string? GetBootDiskLogicalVolume()
 		{
 			return Environment.GetEnvironmentVariable( "SystemDrive" );
 		}

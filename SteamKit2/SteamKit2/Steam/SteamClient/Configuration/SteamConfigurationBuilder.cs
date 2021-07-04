@@ -112,7 +112,7 @@ namespace SteamKit2
         {
             var client = new HttpClient();
 
-            var assemblyVersion = typeof(SteamConfiguration).Assembly.GetName().Version.ToString(fieldCount: 3);
+            var assemblyVersion = typeof(SteamConfiguration).Assembly.GetName().Version?.ToString(fieldCount: 3) ?? "vUnknown";
             client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("SteamKit", assemblyVersion));
             return client;
         }

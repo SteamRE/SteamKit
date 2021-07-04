@@ -269,7 +269,13 @@ namespace SteamKit2
                                 break;
 
                             default:
-                                paramBuilder.Append( Uri.EscapeDataString( value.ToString() ) );
+                                var valueText = value.ToString();
+                                if (valueText is null)
+                                {
+                                    break;
+                                }
+
+                                paramBuilder.Append( Uri.EscapeDataString( valueText ) );
                                 break;
                         }
                     }
@@ -379,7 +385,13 @@ namespace SteamKit2
                     // method is a reserved param for selecting the http request method
                     if ( argName.Equals( "method", StringComparison.OrdinalIgnoreCase ) )
                     {
-                        requestMethod = new HttpMethod( argValue.ToString() );
+                        var methodText = argValue.ToString();
+                        if (methodText is null)
+                        {
+                            throw new ArgumentException( "Argument 'method' msut be non-null value." );
+                        }
+
+                        requestMethod = new HttpMethod( methodText );
                         continue;
                     }
                     // flatten lists

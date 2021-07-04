@@ -257,6 +257,8 @@ namespace SteamKit2
 
             byte[] data = packet.GetData();
 
+            DebugLog.Assert( CurrentEndPoint != null, nameof( UdpConnection ), "CurrentEndPoint should not be null when connected." );
+
             try
             {
                 sock.SendTo( data, CurrentEndPoint );
