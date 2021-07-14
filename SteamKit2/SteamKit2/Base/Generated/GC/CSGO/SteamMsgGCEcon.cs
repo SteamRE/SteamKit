@@ -306,6 +306,7 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCRequestPassportItemGrant = 2527,
         k_EMsgGCClientVersionUpdated = 2528,
         k_EMsgGCAdjustItemEquippedStateMulti = 2529,
+        k_EMsgGCRecurringSubscriptionStatus = 2530,
     }
 
     [global::ProtoBuf.ProtoContract()]

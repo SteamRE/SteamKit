@@ -20,8 +20,6 @@ namespace SteamKit2
         {
             dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
-                { EMsg.ClientUCMEnumerateUserPublishedFilesResponse, HandleEnumUserPublishedFiles },
-                { EMsg.ClientUCMEnumerateUserSubscribedFilesResponse, HandleEnumUserSubscribedFiles },
                 { EMsg.ClientUCMEnumeratePublishedFilesByUserActionResponse, HandleEnumPublishedFilesByAction },
             };
         }
@@ -41,15 +39,6 @@ namespace SteamKit2
             public uint AppID { get; set; }
 
             /// <summary>
-            /// Gets or sets the sort order.
-            /// This value is only used by <see cref="SteamWorkshop.EnumerateUserPublishedFiles"/>.
-            /// </summary>
-            /// <value>
-            /// The sort order.
-            /// </value>
-            public uint SortOrder { get; set; }
-
-            /// <summary>
             /// Gets or sets the start index.
             /// </summary>
             /// <value>
@@ -66,57 +55,7 @@ namespace SteamKit2
             /// </value>
             public EWorkshopFileAction UserAction { get; set; }
         }
-
-        /// <summary>
-        /// Enumerates the list of published files for the current logged in user.
-        /// Results are returned in a <see cref="UserPublishedFilesCallback"/>.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
-        /// </summary>
-        /// <param name="details">The specific details of the request.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="UserPublishedFilesCallback"/>.</returns>
-        public AsyncJob<UserPublishedFilesCallback> EnumerateUserPublishedFiles( EnumerationUserDetails details )
-        {
-            if ( details == null )
-            {
-                throw new ArgumentNullException( nameof(details) );
-            }
-
-            var enumRequest = new ClientMsgProtobuf<CMsgClientUCMEnumerateUserPublishedFiles>( EMsg.ClientUCMEnumerateUserPublishedFiles );
-            enumRequest.SourceJobID = Client.GetNextJobID();
-
-            enumRequest.Body.app_id = details.AppID;
-            enumRequest.Body.sort_order = details.SortOrder;
-            enumRequest.Body.start_index = details.StartIndex;
-
-            Client.Send( enumRequest );
-
-            return new AsyncJob<UserPublishedFilesCallback>( this.Client, enumRequest.SourceJobID );
-        }
-        /// <summary>
-        /// Enumerates the list of subscribed files for the current logged in user.
-        /// Results are returned in a <see cref="UserSubscribedFilesCallback"/>.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
-        /// </summary>
-        /// <param name="details">The specific details of the request.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="UserSubscribedFilesCallback"/>.</returns>
-        public AsyncJob<UserSubscribedFilesCallback> EnumerateUserSubscribedFiles( EnumerationUserDetails details )
-        {
-            if ( details == null )
-            {
-                throw new ArgumentNullException( nameof(details) );
-            }
-
-            var enumRequest = new ClientMsgProtobuf<CMsgClientUCMEnumerateUserSubscribedFiles>( EMsg.ClientUCMEnumerateUserSubscribedFiles );
-            enumRequest.SourceJobID = Client.GetNextJobID();
-
-            enumRequest.Body.app_id = details.AppID;
-            enumRequest.Body.start_index = details.StartIndex;
-
-            Client.Send( enumRequest );
-
-            return new AsyncJob<UserSubscribedFilesCallback>( this.Client, enumRequest.SourceJobID );
-        }
-
+        
         /// <summary>
         /// Enumerates the list of published files for the current logged in user based on user action.
         /// Results are returned in a <see cref="UserActionPublishedFilesCallback"/>.
@@ -167,20 +106,6 @@ namespace SteamKit2
 
 
         #region ClientMsg Handlers
-        void HandleEnumUserPublishedFiles( IPacketMsg packetMsg )
-        {
-            var response = new ClientMsgProtobuf<CMsgClientUCMEnumerateUserPublishedFilesResponse>( packetMsg );
-
-            var callback = new UserPublishedFilesCallback(response.TargetJobID, response.Body);
-            Client.PostCallback( callback );
-        }
-        void HandleEnumUserSubscribedFiles( IPacketMsg packetMsg )
-        {
-            var response = new ClientMsgProtobuf<CMsgClientUCMEnumerateUserSubscribedFilesResponse>( packetMsg );
-
-            var callback = new UserSubscribedFilesCallback( response.TargetJobID, response.Body );
-            Client.PostCallback( callback );
-        }
         void HandleEnumPublishedFilesByAction( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientUCMEnumeratePublishedFilesByUserActionResponse>( packetMsg );

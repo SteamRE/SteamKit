@@ -323,6 +323,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetchannel_type() => __pbn__channel_type = null;
         private DOTAChatChannelType_t? __pbn__channel_type;
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public bool silent_rejection
+        {
+            get => __pbn__silent_rejection.GetValueOrDefault();
+            set => __pbn__silent_rejection = value;
+        }
+        public bool ShouldSerializesilent_rejection() => __pbn__silent_rejection != null;
+        public void Resetsilent_rejection() => __pbn__silent_rejection = null;
+        private bool? __pbn__silent_rejection;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -389,6 +399,45 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeignored_account_id() => __pbn__ignored_account_id != null;
         public void Resetignored_account_id() => __pbn__ignored_account_id = null;
         private uint? __pbn__ignored_account_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgDOTAChatModeratorBan : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong channel_id
+        {
+            get => __pbn__channel_id.GetValueOrDefault();
+            set => __pbn__channel_id = value;
+        }
+        public bool ShouldSerializechannel_id() => __pbn__channel_id != null;
+        public void Resetchannel_id() => __pbn__channel_id = null;
+        private ulong? __pbn__channel_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint account_id
+        {
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
+        }
+        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+        public void Resetaccount_id() => __pbn__account_id = null;
+        private uint? __pbn__account_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint duration
+        {
+            get => __pbn__duration.GetValueOrDefault();
+            set => __pbn__duration = value;
+        }
+        public bool ShouldSerializeduration() => __pbn__duration != null;
+        public void Resetduration() => __pbn__duration = null;
+        private uint? __pbn__duration;
 
     }
 
@@ -731,6 +780,26 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetctrl_is_down() => __pbn__ctrl_is_down = null;
         private bool? __pbn__ctrl_is_down;
 
+        [global::ProtoBuf.ProtoMember(37)]
+        public uint favorite_team_id
+        {
+            get => __pbn__favorite_team_id.GetValueOrDefault();
+            set => __pbn__favorite_team_id = value;
+        }
+        public bool ShouldSerializefavorite_team_id() => __pbn__favorite_team_id != null;
+        public void Resetfavorite_team_id() => __pbn__favorite_team_id = null;
+        private uint? __pbn__favorite_team_id;
+
+        [global::ProtoBuf.ProtoMember(38)]
+        public uint favorite_team_quality
+        {
+            get => __pbn__favorite_team_quality.GetValueOrDefault();
+            set => __pbn__favorite_team_quality = value;
+        }
+        public bool ShouldSerializefavorite_team_quality() => __pbn__favorite_team_quality != null;
+        public void Resetfavorite_team_quality() => __pbn__favorite_team_quality = null;
+        private uint? __pbn__favorite_team_quality;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class DiceRoll : global::ProtoBuf.IExtensible
         {
@@ -985,6 +1054,17 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetwelcome_message() => __pbn__welcome_message = null;
         private string __pbn__welcome_message;
 
+        [global::ProtoBuf.ProtoMember(11)]
+        [global::System.ComponentModel.DefaultValue(EChatSpecialPrivileges.k_EChatSpecialPrivileges_None)]
+        public EChatSpecialPrivileges special_privileges
+        {
+            get => __pbn__special_privileges ?? EChatSpecialPrivileges.k_EChatSpecialPrivileges_None;
+            set => __pbn__special_privileges = value;
+        }
+        public bool ShouldSerializespecial_privileges() => __pbn__special_privileges != null;
+        public void Resetspecial_privileges() => __pbn__special_privileges = null;
+        private EChatSpecialPrivileges? __pbn__special_privileges;
+
         [global::ProtoBuf.ProtoContract()]
         public enum Result
         {
@@ -1003,6 +1083,10 @@ namespace SteamKit2.GC.Dota.Internal
             PRIVATE_CHAT_CREATE_LOCK_FAILED = 12,
             PRIVATE_CHAT_KICKED = 13,
             USER_NOT_ALLOWED = 14,
+            ENSURE_SPECIAL_PRIVILEGES_FAILED = 15,
+            NEW_PLAYER_USER_NOT_ELIGIBLE = 16,
+            SILENT_ERROR = 17,
+            NEW_PLAYER_USER_BANNED = 18,
         }
 
     }

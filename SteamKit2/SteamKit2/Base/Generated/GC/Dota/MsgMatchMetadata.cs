@@ -559,6 +559,26 @@ namespace SteamKit2.GC.Dota.Internal
                 public void Resetaudit() => __pbn__audit = null;
                 private uint? __pbn__audit;
 
+                [global::ProtoBuf.ProtoMember(4)]
+                public bool requires_win
+                {
+                    get => __pbn__requires_win.GetValueOrDefault();
+                    set => __pbn__requires_win = value;
+                }
+                public bool ShouldSerializerequires_win() => __pbn__requires_win != null;
+                public void Resetrequires_win() => __pbn__requires_win = null;
+                private bool? __pbn__requires_win;
+
+                [global::ProtoBuf.ProtoMember(5)]
+                public ulong audit_data
+                {
+                    get => __pbn__audit_data.GetValueOrDefault();
+                    set => __pbn__audit_data = value;
+                }
+                public bool ShouldSerializeaudit_data() => __pbn__audit_data != null;
+                public void Resetaudit_data() => __pbn__audit_data = null;
+                private ulong? __pbn__audit_data;
+
             }
 
             [global::ProtoBuf.ProtoContract()]
@@ -788,6 +808,26 @@ namespace SteamKit2.GC.Dota.Internal
 
                 [global::ProtoBuf.ProtoMember(23)]
                 public global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.CandyGrant> candy_points_granted { get; } = new global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.CandyGrant>();
+
+                [global::ProtoBuf.ProtoMember(24)]
+                public uint active_season_id
+                {
+                    get => __pbn__active_season_id.GetValueOrDefault();
+                    set => __pbn__active_season_id = value;
+                }
+                public bool ShouldSerializeactive_season_id() => __pbn__active_season_id != null;
+                public void Resetactive_season_id() => __pbn__active_season_id = null;
+                private uint? __pbn__active_season_id;
+
+                [global::ProtoBuf.ProtoMember(25)]
+                public bool cavern_crawl_half_credit
+                {
+                    get => __pbn__cavern_crawl_half_credit.GetValueOrDefault();
+                    set => __pbn__cavern_crawl_half_credit = value;
+                }
+                public bool ShouldSerializecavern_crawl_half_credit() => __pbn__cavern_crawl_half_credit != null;
+                public void Resetcavern_crawl_half_credit() => __pbn__cavern_crawl_half_credit = null;
+                private bool? __pbn__cavern_crawl_half_credit;
 
             }
 

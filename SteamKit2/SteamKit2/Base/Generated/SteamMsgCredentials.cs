@@ -109,14 +109,17 @@ namespace SteamKit2.Internal
         private uint? __pbn__timestamp_minimum_wanted;
 
         [global::ProtoBuf.ProtoMember(4)]
-        public int ipaddress
+        public int deprecated_ipaddress
         {
-            get => __pbn__ipaddress.GetValueOrDefault();
-            set => __pbn__ipaddress = value;
+            get => __pbn__deprecated_ipaddress.GetValueOrDefault();
+            set => __pbn__deprecated_ipaddress = value;
         }
-        public bool ShouldSerializeipaddress() => __pbn__ipaddress != null;
-        public void Resetipaddress() => __pbn__ipaddress = null;
-        private int? __pbn__ipaddress;
+        public bool ShouldSerializedeprecated_ipaddress() => __pbn__deprecated_ipaddress != null;
+        public void Resetdeprecated_ipaddress() => __pbn__deprecated_ipaddress = null;
+        private int? __pbn__deprecated_ipaddress;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public CMsgIPAddress ip_address { get; set; }
 
     }
 
@@ -252,14 +255,14 @@ namespace SteamKit2.Internal
             private bool? __pbn__is_web_cookie;
 
             [global::ProtoBuf.ProtoMember(3)]
-            public int ipaddress
+            public int deprecated_ipaddress
             {
-                get => __pbn__ipaddress.GetValueOrDefault();
-                set => __pbn__ipaddress = value;
+                get => __pbn__deprecated_ipaddress.GetValueOrDefault();
+                set => __pbn__deprecated_ipaddress = value;
             }
-            public bool ShouldSerializeipaddress() => __pbn__ipaddress != null;
-            public void Resetipaddress() => __pbn__ipaddress = null;
-            private int? __pbn__ipaddress;
+            public bool ShouldSerializedeprecated_ipaddress() => __pbn__deprecated_ipaddress != null;
+            public void Resetdeprecated_ipaddress() => __pbn__deprecated_ipaddress = null;
+            private int? __pbn__deprecated_ipaddress;
 
             [global::ProtoBuf.ProtoMember(4)]
             [global::System.ComponentModel.DefaultValue("")]
@@ -302,6 +305,9 @@ namespace SteamKit2.Internal
             public bool ShouldSerializestatus() => __pbn__status != null;
             public void Resetstatus() => __pbn__status = null;
             private int? __pbn__status;
+
+            [global::ProtoBuf.ProtoMember(8)]
+            public CMsgIPAddress ip_address { get; set; }
 
         }
 

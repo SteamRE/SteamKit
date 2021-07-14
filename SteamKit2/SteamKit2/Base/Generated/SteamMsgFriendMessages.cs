@@ -796,6 +796,7 @@ namespace SteamKit2.Internal
     {
         k_EMessageReactionType_Invalid = 0,
         k_EMessageReactionType_Emoticon = 1,
+        k_EMessageReactionType_Sticker = 2,
     }
 
     public interface IFriendMessages

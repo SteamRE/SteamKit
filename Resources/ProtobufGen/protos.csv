@@ -10,6 +10,7 @@ steam,steammessages_chat.steamclient.proto,SteamMsgChat.cs,SteamKit2.Internal
 steam,steammessages_clientserver.proto,SteamMsgClientServer.cs,SteamKit2.Internal
 steam,steammessages_clientserver_2.proto,SteamMsgClientServer2.cs,SteamKit2.Internal
 steam,steammessages_clientserver_friends.proto,SteamMsgClientServerFriends.cs,SteamKit2.Internal
+steam,steammessages_clientserver_gameservers.proto,SteamMsgClientServerGameServers.cs,SteamKit2.Internal
 steam,steammessages_clientserver_login.proto,SteamMsgClientServerLogin.cs,SteamKit2.Internal
 steam,steammessages_cloud.steamclient.proto,SteamMsgCloud.cs,SteamKit2.Internal
 steam,steammessages_credentials.steamclient.proto,SteamMsgCredentials.cs,SteamKit2.Internal

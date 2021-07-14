@@ -1290,6 +1290,7 @@ namespace SteamKit2.GC.Dota.Internal
             k_eAlreadyInvited = 9,
             k_eNoInvitePermissions = 10,
             k_eTooManyInvites = 11,
+            k_eInvalidUser = 12,
         }
 
     }
@@ -2219,6 +2220,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_EGuildAuditAction_AdminPermitted = 24,
         k_EGuildAuditAction_AdminBlocked = 25,
         k_EGuildAuditAction_AdminBannedUser = 26,
+        k_EGuildAuditAction_AdminExonerated = 27,
     }
 
     [global::ProtoBuf.ProtoContract()]

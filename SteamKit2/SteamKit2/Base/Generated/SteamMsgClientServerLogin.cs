@@ -16,6 +16,16 @@ namespace SteamKit2.Internal
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool send_reply
+        {
+            get => __pbn__send_reply.GetValueOrDefault();
+            set => __pbn__send_reply = value;
+        }
+        public bool ShouldSerializesend_reply() => __pbn__send_reply != null;
+        public void Resetsend_reply() => __pbn__send_reply = null;
+        private bool? __pbn__send_reply;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

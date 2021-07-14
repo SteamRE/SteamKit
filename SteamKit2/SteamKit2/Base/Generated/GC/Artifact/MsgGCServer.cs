@@ -301,14 +301,24 @@ namespace SteamKit2.GC.Artifact.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public byte[] deck_data
+        public byte[] deck_code
         {
-            get => __pbn__deck_data;
-            set => __pbn__deck_data = value;
+            get => __pbn__deck_code;
+            set => __pbn__deck_code = value;
         }
-        public bool ShouldSerializedeck_data() => __pbn__deck_data != null;
-        public void Resetdeck_data() => __pbn__deck_data = null;
-        private byte[] __pbn__deck_data;
+        public bool ShouldSerializedeck_code() => __pbn__deck_code != null;
+        public void Resetdeck_code() => __pbn__deck_code = null;
+        private byte[] __pbn__deck_code;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public byte[] collection_code
+        {
+            get => __pbn__collection_code;
+            set => __pbn__collection_code = value;
+        }
+        public bool ShouldSerializecollection_code() => __pbn__collection_code != null;
+        public void Resetcollection_code() => __pbn__collection_code = null;
+        private byte[] __pbn__collection_code;
 
     }
 
