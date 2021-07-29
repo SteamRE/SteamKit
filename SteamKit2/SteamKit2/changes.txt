@@ -1,4 +1,13 @@
 ------------------------------------------------------------------------------
+v 2.4.0			July 29 2021 (Alpha 3)
+------------------------------------------------------------------------------
+* Fixed throwing an exception when calling WebAPI twice with the same arguments. 
+* Fixed WebAPI mutating the supplied arguments dictionary.
+* Fixed cryptographic errors in .NET 6 previews.
+* Updated C# nullability annotations.
+* Updated Steam enums and protobufs.
+
+------------------------------------------------------------------------------
 v 2.4.0			March 9, 2021 (Alpha 2)
 ------------------------------------------------------------------------------
 - CDN: Updated interface to capture `preferred_server`, `use_as_proxy`, `proxy_request_path` and `allowed_app_ids`.
