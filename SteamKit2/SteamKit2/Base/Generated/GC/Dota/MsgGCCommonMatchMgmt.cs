@@ -16,17 +16,6 @@ namespace SteamKit2.GC.Dota.Internal
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(PartnerAccountType.PARTNER_NONE)]
-        public PartnerAccountType partner_type
-        {
-            get => __pbn__partner_type ?? PartnerAccountType.PARTNER_NONE;
-            set => __pbn__partner_type = value;
-        }
-        public bool ShouldSerializepartner_type() => __pbn__partner_type != null;
-        public void Resetpartner_type() => __pbn__partner_type = null;
-        private PartnerAccountType? __pbn__partner_type;
-
         [global::ProtoBuf.ProtoMember(2)]
         public bool is_coach
         {
@@ -142,6 +131,16 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializejoined_from_partyfinder() => __pbn__joined_from_partyfinder != null;
         public void Resetjoined_from_partyfinder() => __pbn__joined_from_partyfinder = null;
         private bool? __pbn__joined_from_partyfinder;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public bool is_steam_china
+        {
+            get => __pbn__is_steam_china.GetValueOrDefault();
+            set => __pbn__is_steam_china = value;
+        }
+        public bool ShouldSerializeis_steam_china() => __pbn__is_steam_china != null;
+        public void Resetis_steam_china() => __pbn__is_steam_china = null;
+        private bool? __pbn__is_steam_china;
 
     }
 
@@ -622,6 +621,16 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializecustom_game_difficulty_mask() => __pbn__custom_game_difficulty_mask != null;
         public void Resetcustom_game_difficulty_mask() => __pbn__custom_game_difficulty_mask = null;
         private uint? __pbn__custom_game_difficulty_mask;
+
+        [global::ProtoBuf.ProtoMember(71)]
+        public bool is_steam_china
+        {
+            get => __pbn__is_steam_china.GetValueOrDefault();
+            set => __pbn__is_steam_china = value;
+        }
+        public bool ShouldSerializeis_steam_china() => __pbn__is_steam_china != null;
+        public void Resetis_steam_china() => __pbn__is_steam_china = null;
+        private bool? __pbn__is_steam_china;
 
         [global::ProtoBuf.ProtoContract()]
         public enum State
@@ -1113,17 +1122,6 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(20)]
         public global::System.Collections.Generic.List<uint> disabled_hero_id { get; } = new global::System.Collections.Generic.List<uint>();
 
-        [global::ProtoBuf.ProtoMember(21)]
-        [global::System.ComponentModel.DefaultValue(PartnerAccountType.PARTNER_NONE)]
-        public PartnerAccountType partner_account_type
-        {
-            get => __pbn__partner_account_type ?? PartnerAccountType.PARTNER_NONE;
-            set => __pbn__partner_account_type = value;
-        }
-        public bool ShouldSerializepartner_account_type() => __pbn__partner_account_type != null;
-        public void Resetpartner_account_type() => __pbn__partner_account_type = null;
-        private PartnerAccountType? __pbn__partner_account_type;
-
         [global::ProtoBuf.ProtoMember(22)]
         public global::System.Collections.Generic.List<uint> enabled_hero_id { get; } = new global::System.Collections.Generic.List<uint>();
 
@@ -1346,6 +1344,16 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializereports_available() => __pbn__reports_available != null;
         public void Resetreports_available() => __pbn__reports_available = null;
         private uint? __pbn__reports_available;
+
+        [global::ProtoBuf.ProtoMember(54)]
+        public bool is_steam_china
+        {
+            get => __pbn__is_steam_china.GetValueOrDefault();
+            set => __pbn__is_steam_china = value;
+        }
+        public bool ShouldSerializeis_steam_china() => __pbn__is_steam_china != null;
+        public void Resetis_steam_china() => __pbn__is_steam_china = null;
+        private bool? __pbn__is_steam_china;
 
     }
 
@@ -2359,17 +2367,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetcustom_max_players() => __pbn__custom_max_players = null;
         private uint? __pbn__custom_max_players;
 
-        [global::ProtoBuf.ProtoMember(73)]
-        [global::System.ComponentModel.DefaultValue(PartnerAccountType.PARTNER_NONE)]
-        public PartnerAccountType partner_type
-        {
-            get => __pbn__partner_type ?? PartnerAccountType.PARTNER_NONE;
-            set => __pbn__partner_type = value;
-        }
-        public bool ShouldSerializepartner_type() => __pbn__partner_type != null;
-        public void Resetpartner_type() => __pbn__partner_type = null;
-        private PartnerAccountType? __pbn__partner_type;
-
         [global::ProtoBuf.ProtoMember(75)]
         [global::System.ComponentModel.DefaultValue(DOTALobbyVisibility.DOTALobbyVisibility_Public)]
         public DOTALobbyVisibility visibility
@@ -2711,6 +2708,16 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(125)]
         public global::System.Collections.Generic.List<CMsgLobbyCoachFriendRequest> coach_friend_requests { get; } = new global::System.Collections.Generic.List<CMsgLobbyCoachFriendRequest>();
+
+        [global::ProtoBuf.ProtoMember(126)]
+        public bool is_in_steam_china
+        {
+            get => __pbn__is_in_steam_china.GetValueOrDefault();
+            set => __pbn__is_in_steam_china = value;
+        }
+        public bool ShouldSerializeis_in_steam_china() => __pbn__is_in_steam_china != null;
+        public void Resetis_in_steam_china() => __pbn__is_in_steam_china = null;
+        private bool? __pbn__is_in_steam_china;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class CExtraMsg : global::ProtoBuf.IExtensible

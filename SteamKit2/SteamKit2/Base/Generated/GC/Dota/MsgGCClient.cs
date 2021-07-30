@@ -1274,37 +1274,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetallow_3rd_party_match_history() => __pbn__allow_3rd_party_match_history = null;
         private bool? __pbn__allow_3rd_party_match_history;
 
-        [global::ProtoBuf.ProtoMember(8)]
-        [global::System.ComponentModel.DefaultValue(PartnerAccountType.PARTNER_NONE)]
-        public PartnerAccountType partner_account_type
-        {
-            get => __pbn__partner_account_type ?? PartnerAccountType.PARTNER_NONE;
-            set => __pbn__partner_account_type = value;
-        }
-        public bool ShouldSerializepartner_account_type() => __pbn__partner_account_type != null;
-        public void Resetpartner_account_type() => __pbn__partner_account_type = null;
-        private PartnerAccountType? __pbn__partner_account_type;
-
-        [global::ProtoBuf.ProtoMember(11)]
-        public uint partner_account_state
-        {
-            get => __pbn__partner_account_state.GetValueOrDefault();
-            set => __pbn__partner_account_state = value;
-        }
-        public bool ShouldSerializepartner_account_state() => __pbn__partner_account_state != null;
-        public void Resetpartner_account_state() => __pbn__partner_account_state = null;
-        private uint? __pbn__partner_account_state;
-
-        [global::ProtoBuf.ProtoMember(12)]
-        public uint last_time_played
-        {
-            get => __pbn__last_time_played.GetValueOrDefault();
-            set => __pbn__last_time_played = value;
-        }
-        public bool ShouldSerializelast_time_played() => __pbn__last_time_played != null;
-        public void Resetlast_time_played() => __pbn__last_time_played = null;
-        private uint? __pbn__last_time_played;
-
         [global::ProtoBuf.ProtoMember(13)]
         public uint last_ip_address
         {
@@ -1314,26 +1283,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializelast_ip_address() => __pbn__last_ip_address != null;
         public void Resetlast_ip_address() => __pbn__last_ip_address = null;
         private uint? __pbn__last_ip_address;
-
-        [global::ProtoBuf.ProtoMember(15)]
-        public uint shutdownlawterminateminutes
-        {
-            get => __pbn__shutdownlawterminateminutes.GetValueOrDefault();
-            set => __pbn__shutdownlawterminateminutes = value;
-        }
-        public bool ShouldSerializeshutdownlawterminateminutes() => __pbn__shutdownlawterminateminutes != null;
-        public void Resetshutdownlawterminateminutes() => __pbn__shutdownlawterminateminutes = null;
-        private uint? __pbn__shutdownlawterminateminutes;
-
-        [global::ProtoBuf.ProtoMember(16)]
-        public uint banned_word_list_version
-        {
-            get => __pbn__banned_word_list_version.GetValueOrDefault();
-            set => __pbn__banned_word_list_version = value;
-        }
-        public bool ShouldSerializebanned_word_list_version() => __pbn__banned_word_list_version != null;
-        public void Resetbanned_word_list_version() => __pbn__banned_word_list_version = null;
-        private uint? __pbn__banned_word_list_version;
 
         [global::ProtoBuf.ProtoMember(17)]
         public bool profile_private
@@ -1354,16 +1303,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializecurrency() => __pbn__currency != null;
         public void Resetcurrency() => __pbn__currency = null;
         private uint? __pbn__currency;
-
-        [global::ProtoBuf.ProtoMember(19)]
-        public uint pwrd_cyber_cafe_id
-        {
-            get => __pbn__pwrd_cyber_cafe_id.GetValueOrDefault();
-            set => __pbn__pwrd_cyber_cafe_id = value;
-        }
-        public bool ShouldSerializepwrd_cyber_cafe_id() => __pbn__pwrd_cyber_cafe_id != null;
-        public void Resetpwrd_cyber_cafe_id() => __pbn__pwrd_cyber_cafe_id = null;
-        private uint? __pbn__pwrd_cyber_cafe_id;
 
         [global::ProtoBuf.ProtoMember(20)]
         public bool should_request_player_origin
@@ -5282,48 +5221,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeevent_type() => __pbn__event_type != null;
         public void Resetevent_type() => __pbn__event_type = null;
         private uint? __pbn__event_type;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientToGCSetAdditionalEquips : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<CAdditionalEquipSlot> equips { get; } = new global::System.Collections.Generic.List<CAdditionalEquipSlot>();
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientToGCSetAdditionalEquipsResponse : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientToGCGetAdditionalEquips : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientToGCGetAdditionalEquipsResponse : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<CAdditionalEquipSlot> equips { get; } = new global::System.Collections.Generic.List<CAdditionalEquipSlot>();
 
     }
 
