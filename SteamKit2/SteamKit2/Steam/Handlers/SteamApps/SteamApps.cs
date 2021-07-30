@@ -185,6 +185,7 @@ namespace SteamKit2
         /// <param name="package">Package id requested.</param>
         /// <param name="metaDataOnly">Whether to send only meta data.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSProductInfoCallback"/>.</returns>
+        [Obsolete( "Use an overload that takes PICSRequest instead of uint. In SteamKit 2.3, this overload had four parameters, but onlyPublic was removed. Audit your code." )]
         public AsyncJobMultiple<PICSProductInfoCallback> PICSGetProductInfo(uint? app, uint? package, bool metaDataOnly = false)
         {
             List<uint> apps = new List<uint>();
@@ -225,6 +226,7 @@ namespace SteamKit2
         /// <param name="packages">List of package ids requested.</param>
         /// <param name="metaDataOnly">Whether to send only meta data.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSProductInfoCallback"/>.</returns>
+        [Obsolete( "Use an overload that takes PICSRequest instead of uint. In SteamKit 2.3, this overload had four parameters, but onlyPublic was removed. Audit your code." )]
         public AsyncJobMultiple<PICSProductInfoCallback> PICSGetProductInfo( IEnumerable<uint> apps, IEnumerable<uint> packages, bool metaDataOnly = false )
         {
             return PICSGetProductInfo( apps.Select( app => new PICSRequest( app ) ), packages.Select( package => new PICSRequest( package ) ), metaDataOnly );
