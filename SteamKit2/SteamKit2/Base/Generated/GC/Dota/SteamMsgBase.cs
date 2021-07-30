@@ -2356,6 +2356,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resethas_accepted_china_ssa() => __pbn__has_accepted_china_ssa = null;
         private bool? __pbn__has_accepted_china_ssa;
 
+        [global::ProtoBuf.ProtoMember(39)]
+        public bool is_banned_steam_china
+        {
+            get => __pbn__is_banned_steam_china.GetValueOrDefault();
+            set => __pbn__is_banned_steam_china = value;
+        }
+        public bool ShouldSerializeis_banned_steam_china() => __pbn__is_banned_steam_china != null;
+        public void Resetis_banned_steam_china() => __pbn__is_banned_steam_china = null;
+        private bool? __pbn__is_banned_steam_china;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -1884,6 +1884,25 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class ProfilePreferences : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool hide_profile_awards
+        {
+            get => __pbn__hide_profile_awards.GetValueOrDefault();
+            set => __pbn__hide_profile_awards = value;
+        }
+        public bool ShouldSerializehide_profile_awards() => __pbn__hide_profile_awards != null;
+        public void Resethide_profile_awards() => __pbn__hide_profile_awards = null;
+        private bool? __pbn__hide_profile_awards;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CPlayer_GetProfileCustomization_Response : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1908,6 +1927,9 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(4)]
         public global::System.Collections.Generic.List<PurchasedCustomization> purchased_customizations { get; } = new global::System.Collections.Generic.List<PurchasedCustomization>();
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public ProfilePreferences profile_preferences { get; set; }
 
         [global::ProtoBuf.ProtoContract()]
         public partial class PurchasedCustomization : global::ProtoBuf.IExtensible
@@ -2149,6 +2171,27 @@ namespace SteamKit2.Internal
 
     [global::ProtoBuf.ProtoContract()]
     public partial class CPlayer_SetProfileTheme_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_SetProfilePreferences_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ProfilePreferences profile_preferences { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_SetProfilePreferences_Response : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -2509,6 +2552,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeagreement_type() => __pbn__agreement_type != null;
         public void Resetagreement_type() => __pbn__agreement_type = null;
         private EAgreementType? __pbn__agreement_type;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint time_signed_utc
+        {
+            get => __pbn__time_signed_utc.GetValueOrDefault();
+            set => __pbn__time_signed_utc = value;
+        }
+        public bool ShouldSerializetime_signed_utc() => __pbn__time_signed_utc != null;
+        public void Resettime_signed_utc() => __pbn__time_signed_utc = null;
+        private uint? __pbn__time_signed_utc;
 
     }
 
@@ -3587,6 +3640,7 @@ namespace SteamKit2.Internal
         CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Response GetPurchasedAndUpgradedProfileCustomizations(CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Request request);
         CPlayer_GetProfileThemesAvailable_Response GetProfileThemesAvailable(CPlayer_GetProfileThemesAvailable_Request request);
         CPlayer_SetProfileTheme_Response SetProfileTheme(CPlayer_SetProfileTheme_Request request);
+        CPlayer_SetProfilePreferences_Response SetProfilePreferences(CPlayer_SetProfilePreferences_Request request);
         CPlayer_PostStatusToFriends_Response PostStatusToFriends(CPlayer_PostStatusToFriends_Request request);
         CPlayer_GetPostedStatus_Response GetPostedStatus(CPlayer_GetPostedStatus_Request request);
         CPlayer_DeletePostedStatus_Response DeletePostedStatus(CPlayer_DeletePostedStatus_Request request);

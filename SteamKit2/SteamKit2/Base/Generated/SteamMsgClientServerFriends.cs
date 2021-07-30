@@ -972,6 +972,36 @@ namespace SteamKit2.Internal
             public void Resetwatching_broadcast_title() => __pbn__watching_broadcast_title = null;
             private string __pbn__watching_broadcast_title;
 
+            [global::ProtoBuf.ProtoMember(78)]
+            public bool is_community_banned
+            {
+                get => __pbn__is_community_banned.GetValueOrDefault();
+                set => __pbn__is_community_banned = value;
+            }
+            public bool ShouldSerializeis_community_banned() => __pbn__is_community_banned != null;
+            public void Resetis_community_banned() => __pbn__is_community_banned = null;
+            private bool? __pbn__is_community_banned;
+
+            [global::ProtoBuf.ProtoMember(79)]
+            public bool player_name_pending_review
+            {
+                get => __pbn__player_name_pending_review.GetValueOrDefault();
+                set => __pbn__player_name_pending_review = value;
+            }
+            public bool ShouldSerializeplayer_name_pending_review() => __pbn__player_name_pending_review != null;
+            public void Resetplayer_name_pending_review() => __pbn__player_name_pending_review = null;
+            private bool? __pbn__player_name_pending_review;
+
+            [global::ProtoBuf.ProtoMember(80)]
+            public bool avatar_pending_review
+            {
+                get => __pbn__avatar_pending_review.GetValueOrDefault();
+                set => __pbn__avatar_pending_review = value;
+            }
+            public bool ShouldSerializeavatar_pending_review() => __pbn__avatar_pending_review != null;
+            public void Resetavatar_pending_review() => __pbn__avatar_pending_review = null;
+            private bool? __pbn__avatar_pending_review;
+
             [global::ProtoBuf.ProtoContract()]
             public partial class ClanData : global::ProtoBuf.IExtensible
             {

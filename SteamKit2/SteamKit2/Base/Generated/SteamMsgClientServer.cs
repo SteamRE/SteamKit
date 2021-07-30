@@ -661,221 +661,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGSServerType : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint app_id_served
-        {
-            get => __pbn__app_id_served.GetValueOrDefault();
-            set => __pbn__app_id_served = value;
-        }
-        public bool ShouldSerializeapp_id_served() => __pbn__app_id_served != null;
-        public void Resetapp_id_served() => __pbn__app_id_served = null;
-        private uint? __pbn__app_id_served;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint flags
-        {
-            get => __pbn__flags.GetValueOrDefault();
-            set => __pbn__flags = value;
-        }
-        public bool ShouldSerializeflags() => __pbn__flags != null;
-        public void Resetflags() => __pbn__flags = null;
-        private uint? __pbn__flags;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public uint deprecated_game_ip_address
-        {
-            get => __pbn__deprecated_game_ip_address.GetValueOrDefault();
-            set => __pbn__deprecated_game_ip_address = value;
-        }
-        public bool ShouldSerializedeprecated_game_ip_address() => __pbn__deprecated_game_ip_address != null;
-        public void Resetdeprecated_game_ip_address() => __pbn__deprecated_game_ip_address = null;
-        private uint? __pbn__deprecated_game_ip_address;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public uint game_port
-        {
-            get => __pbn__game_port.GetValueOrDefault();
-            set => __pbn__game_port = value;
-        }
-        public bool ShouldSerializegame_port() => __pbn__game_port != null;
-        public void Resetgame_port() => __pbn__game_port = null;
-        private uint? __pbn__game_port;
-
-        [global::ProtoBuf.ProtoMember(5)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string game_dir
-        {
-            get => __pbn__game_dir ?? "";
-            set => __pbn__game_dir = value;
-        }
-        public bool ShouldSerializegame_dir() => __pbn__game_dir != null;
-        public void Resetgame_dir() => __pbn__game_dir = null;
-        private string __pbn__game_dir;
-
-        [global::ProtoBuf.ProtoMember(6)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string game_version
-        {
-            get => __pbn__game_version ?? "";
-            set => __pbn__game_version = value;
-        }
-        public bool ShouldSerializegame_version() => __pbn__game_version != null;
-        public void Resetgame_version() => __pbn__game_version = null;
-        private string __pbn__game_version;
-
-        [global::ProtoBuf.ProtoMember(7)]
-        public uint game_query_port
-        {
-            get => __pbn__game_query_port.GetValueOrDefault();
-            set => __pbn__game_query_port = value;
-        }
-        public bool ShouldSerializegame_query_port() => __pbn__game_query_port != null;
-        public void Resetgame_query_port() => __pbn__game_query_port = null;
-        private uint? __pbn__game_query_port;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGSStatusReply : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public bool is_secure
-        {
-            get => __pbn__is_secure.GetValueOrDefault();
-            set => __pbn__is_secure = value;
-        }
-        public bool ShouldSerializeis_secure() => __pbn__is_secure != null;
-        public void Resetis_secure() => __pbn__is_secure = null;
-        private bool? __pbn__is_secure;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGSPlayerList : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<Player> players { get; } = new global::System.Collections.Generic.List<Player>();
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class Player : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public ulong steam_id
-            {
-                get => __pbn__steam_id.GetValueOrDefault();
-                set => __pbn__steam_id = value;
-            }
-            public bool ShouldSerializesteam_id() => __pbn__steam_id != null;
-            public void Resetsteam_id() => __pbn__steam_id = null;
-            private ulong? __pbn__steam_id;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public uint deprecated_public_ip
-            {
-                get => __pbn__deprecated_public_ip.GetValueOrDefault();
-                set => __pbn__deprecated_public_ip = value;
-            }
-            public bool ShouldSerializedeprecated_public_ip() => __pbn__deprecated_public_ip != null;
-            public void Resetdeprecated_public_ip() => __pbn__deprecated_public_ip = null;
-            private uint? __pbn__deprecated_public_ip;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public byte[] token
-            {
-                get => __pbn__token;
-                set => __pbn__token = value;
-            }
-            public bool ShouldSerializetoken() => __pbn__token != null;
-            public void Resettoken() => __pbn__token = null;
-            private byte[] __pbn__token;
-
-            [global::ProtoBuf.ProtoMember(4)]
-            public CMsgIPAddress public_ip { get; set; }
-
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGSUserPlaying : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong steam_id
-        {
-            get => __pbn__steam_id.GetValueOrDefault();
-            set => __pbn__steam_id = value;
-        }
-        public bool ShouldSerializesteam_id() => __pbn__steam_id != null;
-        public void Resetsteam_id() => __pbn__steam_id = null;
-        private ulong? __pbn__steam_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint deprecated_public_ip
-        {
-            get => __pbn__deprecated_public_ip.GetValueOrDefault();
-            set => __pbn__deprecated_public_ip = value;
-        }
-        public bool ShouldSerializedeprecated_public_ip() => __pbn__deprecated_public_ip != null;
-        public void Resetdeprecated_public_ip() => __pbn__deprecated_public_ip = null;
-        private uint? __pbn__deprecated_public_ip;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public byte[] token
-        {
-            get => __pbn__token;
-            set => __pbn__token = value;
-        }
-        public bool ShouldSerializetoken() => __pbn__token != null;
-        public void Resettoken() => __pbn__token = null;
-        private byte[] __pbn__token;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public CMsgIPAddress public_ip { get; set; }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGSDisconnectNotice : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong steam_id
-        {
-            get => __pbn__steam_id.GetValueOrDefault();
-            set => __pbn__steam_id = value;
-        }
-        public bool ShouldSerializesteam_id() => __pbn__steam_id != null;
-        public void Resetsteam_id() => __pbn__steam_id = null;
-        private ulong? __pbn__steam_id;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgClientGamesPlayed : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -6215,6 +6000,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializebalance64_delayed() => __pbn__balance64_delayed != null;
         public void Resetbalance64_delayed() => __pbn__balance64_delayed = null;
         private long? __pbn__balance64_delayed;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public int realm
+        {
+            get => __pbn__realm.GetValueOrDefault();
+            set => __pbn__realm = value;
+        }
+        public bool ShouldSerializerealm() => __pbn__realm != null;
+        public void Resetrealm() => __pbn__realm = null;
+        private int? __pbn__realm;
 
     }
 

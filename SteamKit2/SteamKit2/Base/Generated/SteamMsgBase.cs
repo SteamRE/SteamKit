@@ -1526,6 +1526,27 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(28)]
         public global::System.Collections.Generic.List<uint> referenced_appids { get; } = new global::System.Collections.Generic.List<uint>();
 
+        [global::ProtoBuf.ProtoMember(29)]
+        public uint build_id
+        {
+            get => __pbn__build_id.GetValueOrDefault();
+            set => __pbn__build_id = value;
+        }
+        public bool ShouldSerializebuild_id() => __pbn__build_id != null;
+        public void Resetbuild_id() => __pbn__build_id = null;
+        private uint? __pbn__build_id;
+
+        [global::ProtoBuf.ProtoMember(30)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string build_branch
+        {
+            get => __pbn__build_branch ?? "";
+            set => __pbn__build_branch = value;
+        }
+        public bool ShouldSerializebuild_branch() => __pbn__build_branch != null;
+        public void Resetbuild_branch() => __pbn__build_branch = null;
+        private string __pbn__build_branch;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
