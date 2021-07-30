@@ -197,6 +197,26 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Request product information for an app or package
+        /// Results are returned in a <see cref="PICSProductInfoCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
+        /// </summary>
+        /// <param name="app"><see cref="PICSRequest"/> request for an app.</param>
+        /// <param name="package"><see cref="PICSRequest"/> request for a package.</param>
+        /// <param name="metaDataOnly">Whether to send only meta data.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSProductInfoCallback"/>.</returns>
+        public AsyncJobMultiple<PICSProductInfoCallback> PICSGetProductInfo( PICSRequest? app, PICSRequest? package, bool metaDataOnly = false )
+        {
+            var apps = new List<PICSRequest>();
+            var packages = new List<PICSRequest>();
+
+            if ( app.HasValue ) apps.Add( app.Value );
+            if ( package.HasValue ) packages.Add( package.Value );
+
+            return PICSGetProductInfo( apps, packages, metaDataOnly );
+        }
+
+        /// <summary>
         /// Request product information for a list of apps or packages
         /// Results are returned in a <see cref="PICSProductInfoCallback"/> callback.
         /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
