@@ -7,6 +7,16 @@ v 2.4.0			July 29 2021 (Alpha 3)
 * Updated C# nullability annotations.
 * Updated Steam enums and protobufs.
 
+BREAKING CHANGES
+* `SteamWorkshop.EnumerateUserPublishedFiles` and its associated callback has been removed.
+* `SteamWorkshop.EnumerateUserSubscribedFiles` and its associated callback has been removed.
+* `SteamApps.PICSRequest` has been changed from a class to a struct, and `only_public` has been removed.
+* A non-final optional parameter has been removed from `SteamApps.PICSGetProductInfo`. For any caller that supplied
+  three unnamed arguments, this is a source-breaking change as the value for `onlyPublic` will now be passed to the
+  method parameter `metaDataOnly`. Please audit your code for any calls to `PICSGetProductInfo` as the compiler will
+  not warn you about this change.
+
+
 ------------------------------------------------------------------------------
 v 2.4.0			March 9, 2021 (Alpha 2)
 ------------------------------------------------------------------------------
@@ -22,11 +32,13 @@ Bug Fixes
 - Fixed a race in AsyncJob registration.
 - Fixed an issue opening files in IsolatedStorageServerListProvider.
 
+
 ------------------------------------------------------------------------------
 v 2.4.0			July 13, 2020 (Alpha 1)
 ------------------------------------------------------------------------------
 * Updated protobuf-net dependency to v3.0.
 * Updated Steam protobufs.
+
 
 ------------------------------------------------------------------------------
 v 2.3.0			July 05, 2020 
