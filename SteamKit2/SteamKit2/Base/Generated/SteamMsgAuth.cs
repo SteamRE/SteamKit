@@ -10,6 +10,442 @@ namespace SteamKit2.Internal
 {
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_BeginAuthSessionViaQR_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string device_friendly_name
+        {
+            get => __pbn__device_friendly_name ?? "";
+            set => __pbn__device_friendly_name = value;
+        }
+        public bool ShouldSerializedevice_friendly_name() => __pbn__device_friendly_name != null;
+        public void Resetdevice_friendly_name() => __pbn__device_friendly_name = null;
+        private string __pbn__device_friendly_name;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_BeginAuthSessionViaQR_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong client_id
+        {
+            get => __pbn__client_id.GetValueOrDefault();
+            set => __pbn__client_id = value;
+        }
+        public bool ShouldSerializeclient_id() => __pbn__client_id != null;
+        public void Resetclient_id() => __pbn__client_id = null;
+        private ulong? __pbn__client_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string challenge_url
+        {
+            get => __pbn__challenge_url ?? "";
+            set => __pbn__challenge_url = value;
+        }
+        public bool ShouldSerializechallenge_url() => __pbn__challenge_url != null;
+        public void Resetchallenge_url() => __pbn__challenge_url = null;
+        private string __pbn__challenge_url;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public byte[] request_id
+        {
+            get => __pbn__request_id;
+            set => __pbn__request_id = value;
+        }
+        public bool ShouldSerializerequest_id() => __pbn__request_id != null;
+        public void Resetrequest_id() => __pbn__request_id = null;
+        private byte[] __pbn__request_id;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public float interval
+        {
+            get => __pbn__interval.GetValueOrDefault();
+            set => __pbn__interval = value;
+        }
+        public bool ShouldSerializeinterval() => __pbn__interval != null;
+        public void Resetinterval() => __pbn__interval = null;
+        private float? __pbn__interval;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public global::System.Collections.Generic.List<EAuthSessionGuardType> allowed_confirmations { get; } = new global::System.Collections.Generic.List<EAuthSessionGuardType>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_BeginAuthSessionViaCredentials_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string device_friendly_name
+        {
+            get => __pbn__device_friendly_name ?? "";
+            set => __pbn__device_friendly_name = value;
+        }
+        public bool ShouldSerializedevice_friendly_name() => __pbn__device_friendly_name != null;
+        public void Resetdevice_friendly_name() => __pbn__device_friendly_name = null;
+        private string __pbn__device_friendly_name;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string account_name
+        {
+            get => __pbn__account_name ?? "";
+            set => __pbn__account_name = value;
+        }
+        public bool ShouldSerializeaccount_name() => __pbn__account_name != null;
+        public void Resetaccount_name() => __pbn__account_name = null;
+        private string __pbn__account_name;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string encrypted_password
+        {
+            get => __pbn__encrypted_password ?? "";
+            set => __pbn__encrypted_password = value;
+        }
+        public bool ShouldSerializeencrypted_password() => __pbn__encrypted_password != null;
+        public void Resetencrypted_password() => __pbn__encrypted_password = null;
+        private string __pbn__encrypted_password;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public ulong encryption_timestamp
+        {
+            get => __pbn__encryption_timestamp.GetValueOrDefault();
+            set => __pbn__encryption_timestamp = value;
+        }
+        public bool ShouldSerializeencryption_timestamp() => __pbn__encryption_timestamp != null;
+        public void Resetencryption_timestamp() => __pbn__encryption_timestamp = null;
+        private ulong? __pbn__encryption_timestamp;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public bool remember_login
+        {
+            get => __pbn__remember_login.GetValueOrDefault();
+            set => __pbn__remember_login = value;
+        }
+        public bool ShouldSerializeremember_login() => __pbn__remember_login != null;
+        public void Resetremember_login() => __pbn__remember_login = null;
+        private bool? __pbn__remember_login;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_BeginAuthSessionViaCredentials_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong client_id
+        {
+            get => __pbn__client_id.GetValueOrDefault();
+            set => __pbn__client_id = value;
+        }
+        public bool ShouldSerializeclient_id() => __pbn__client_id != null;
+        public void Resetclient_id() => __pbn__client_id = null;
+        private ulong? __pbn__client_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public byte[] request_id
+        {
+            get => __pbn__request_id;
+            set => __pbn__request_id = value;
+        }
+        public bool ShouldSerializerequest_id() => __pbn__request_id != null;
+        public void Resetrequest_id() => __pbn__request_id = null;
+        private byte[] __pbn__request_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public float interval
+        {
+            get => __pbn__interval.GetValueOrDefault();
+            set => __pbn__interval = value;
+        }
+        public bool ShouldSerializeinterval() => __pbn__interval != null;
+        public void Resetinterval() => __pbn__interval = null;
+        private float? __pbn__interval;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<EAuthSessionGuardType> allowed_confirmations { get; } = new global::System.Collections.Generic.List<EAuthSessionGuardType>();
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_PollAuthSessionStatus_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong client_id
+        {
+            get => __pbn__client_id.GetValueOrDefault();
+            set => __pbn__client_id = value;
+        }
+        public bool ShouldSerializeclient_id() => __pbn__client_id != null;
+        public void Resetclient_id() => __pbn__client_id = null;
+        private ulong? __pbn__client_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public byte[] request_id
+        {
+            get => __pbn__request_id;
+            set => __pbn__request_id = value;
+        }
+        public bool ShouldSerializerequest_id() => __pbn__request_id != null;
+        public void Resetrequest_id() => __pbn__request_id = null;
+        private byte[] __pbn__request_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_PollAuthSessionStatus_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong new_client_id
+        {
+            get => __pbn__new_client_id.GetValueOrDefault();
+            set => __pbn__new_client_id = value;
+        }
+        public bool ShouldSerializenew_client_id() => __pbn__new_client_id != null;
+        public void Resetnew_client_id() => __pbn__new_client_id = null;
+        private ulong? __pbn__new_client_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string new_challenge_url
+        {
+            get => __pbn__new_challenge_url ?? "";
+            set => __pbn__new_challenge_url = value;
+        }
+        public bool ShouldSerializenew_challenge_url() => __pbn__new_challenge_url != null;
+        public void Resetnew_challenge_url() => __pbn__new_challenge_url = null;
+        private string __pbn__new_challenge_url;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string refresh_token
+        {
+            get => __pbn__refresh_token ?? "";
+            set => __pbn__refresh_token = value;
+        }
+        public bool ShouldSerializerefresh_token() => __pbn__refresh_token != null;
+        public void Resetrefresh_token() => __pbn__refresh_token = null;
+        private string __pbn__refresh_token;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_GetAuthSessionInfo_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong client_id
+        {
+            get => __pbn__client_id.GetValueOrDefault();
+            set => __pbn__client_id = value;
+        }
+        public bool ShouldSerializeclient_id() => __pbn__client_id != null;
+        public void Resetclient_id() => __pbn__client_id = null;
+        private ulong? __pbn__client_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_GetAuthSessionInfo_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string ip
+        {
+            get => __pbn__ip ?? "";
+            set => __pbn__ip = value;
+        }
+        public bool ShouldSerializeip() => __pbn__ip != null;
+        public void Resetip() => __pbn__ip = null;
+        private string __pbn__ip;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string geoloc
+        {
+            get => __pbn__geoloc ?? "";
+            set => __pbn__geoloc = value;
+        }
+        public bool ShouldSerializegeoloc() => __pbn__geoloc != null;
+        public void Resetgeoloc() => __pbn__geoloc = null;
+        private string __pbn__geoloc;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int version
+        {
+            get => __pbn__version.GetValueOrDefault();
+            set => __pbn__version = value;
+        }
+        public bool ShouldSerializeversion() => __pbn__version != null;
+        public void Resetversion() => __pbn__version = null;
+        private int? __pbn__version;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong client_id
+        {
+            get => __pbn__client_id.GetValueOrDefault();
+            set => __pbn__client_id = value;
+        }
+        public bool ShouldSerializeclient_id() => __pbn__client_id != null;
+        public void Resetclient_id() => __pbn__client_id = null;
+        private ulong? __pbn__client_id;
+
+        [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public byte[] signature
+        {
+            get => __pbn__signature;
+            set => __pbn__signature = value;
+        }
+        public bool ShouldSerializesignature() => __pbn__signature != null;
+        public void Resetsignature() => __pbn__signature = null;
+        private byte[] __pbn__signature;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue(false)]
+        public bool confirm
+        {
+            get => __pbn__confirm ?? false;
+            set => __pbn__confirm = value;
+        }
+        public bool ShouldSerializeconfirm() => __pbn__confirm != null;
+        public void Resetconfirm() => __pbn__confirm = null;
+        private bool? __pbn__confirm;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong client_id
+        {
+            get => __pbn__client_id.GetValueOrDefault();
+            set => __pbn__client_id = value;
+        }
+        public bool ShouldSerializeclient_id() => __pbn__client_id != null;
+        public void Resetclient_id() => __pbn__client_id = null;
+        private ulong? __pbn__client_id;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string code
+        {
+            get => __pbn__code ?? "";
+            set => __pbn__code = value;
+        }
+        public bool ShouldSerializecode() => __pbn__code != null;
+        public void Resetcode() => __pbn__code = null;
+        private string __pbn__code;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(EAuthSessionGuardType.k_EAuthSessionGuardType_Unknown)]
+        public EAuthSessionGuardType code_type
+        {
+            get => __pbn__code_type ?? EAuthSessionGuardType.k_EAuthSessionGuardType_Unknown;
+            set => __pbn__code_type = value;
+        }
+        public bool ShouldSerializecode_type() => __pbn__code_type != null;
+        public void Resetcode_type() => __pbn__code_type = null;
+        private EAuthSessionGuardType? __pbn__code_type;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CCloudGaming_CreateNonce_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -131,6 +567,27 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<CCloudGaming_TimeRemaining> entries { get; } = new global::System.Collections.Generic.List<CCloudGaming_TimeRemaining>();
 
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EAuthSessionGuardType
+    {
+        k_EAuthSessionGuardType_Unknown = 0,
+        k_EAuthSessionGuardType_None = 1,
+        k_EAuthSessionGuardType_EmailCode = 2,
+        k_EAuthSessionGuardType_DeviceCode = 3,
+        k_EAuthSessionGuardType_DeviceConfirmation = 4,
+        k_EAuthSessionGuardType_EmailConfirmation = 5,
+    }
+
+    public interface IAuthentication
+    {
+        CAuthentication_BeginAuthSessionViaQR_Response BeginAuthSessionViaQR(CAuthentication_BeginAuthSessionViaQR_Request request);
+        CAuthentication_BeginAuthSessionViaCredentials_Response BeginAuthSessionViaCredentials(CAuthentication_BeginAuthSessionViaCredentials_Request request);
+        CAuthentication_PollAuthSessionStatus_Response PollAuthSessionStatus(CAuthentication_PollAuthSessionStatus_Request request);
+        CAuthentication_GetAuthSessionInfo_Response GetAuthSessionInfo(CAuthentication_GetAuthSessionInfo_Request request);
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response UpdateAuthSessionWithMobileConfirmation(CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request request);
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response UpdateAuthSessionWithSteamGuardCode(CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request request);
     }
 
     public interface ICloudGaming

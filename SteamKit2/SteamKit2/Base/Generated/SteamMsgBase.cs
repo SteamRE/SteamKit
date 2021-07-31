@@ -772,6 +772,16 @@ namespace SteamKit2.Internal
         public void Resetview_marketing_traffic() => __pbn__view_marketing_traffic = null;
         private bool? __pbn__view_marketing_traffic;
 
+        [global::ProtoBuf.ProtoMember(17)]
+        public bool edit_store_display_content
+        {
+            get => __pbn__edit_store_display_content.GetValueOrDefault();
+            set => __pbn__edit_store_display_content = value;
+        }
+        public bool ShouldSerializeedit_store_display_content() => __pbn__edit_store_display_content != null;
+        public void Resetedit_store_display_content() => __pbn__edit_store_display_content = null;
+        private bool? __pbn__edit_store_display_content;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -226,27 +226,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetmatch_disabled_count() => __pbn__match_disabled_count = null;
         private uint? __pbn__match_disabled_count;
 
-        [global::ProtoBuf.ProtoMember(44)]
-        [global::System.ComponentModel.DefaultValue(PartnerAccountType.PARTNER_NONE)]
-        public PartnerAccountType partner_account_type
-        {
-            get => __pbn__partner_account_type ?? PartnerAccountType.PARTNER_NONE;
-            set => __pbn__partner_account_type = value;
-        }
-        public bool ShouldSerializepartner_account_type() => __pbn__partner_account_type != null;
-        public void Resetpartner_account_type() => __pbn__partner_account_type = null;
-        private PartnerAccountType? __pbn__partner_account_type;
-
-        [global::ProtoBuf.ProtoMember(45)]
-        public uint partner_account_state
-        {
-            get => __pbn__partner_account_state.GetValueOrDefault();
-            set => __pbn__partner_account_state = value;
-        }
-        public bool ShouldSerializepartner_account_state() => __pbn__partner_account_state != null;
-        public void Resetpartner_account_state() => __pbn__partner_account_state = null;
-        private uint? __pbn__partner_account_state;
-
         [global::ProtoBuf.ProtoMember(47)]
         public uint shutdownlawterminatetimestamp
         {

@@ -116,6 +116,16 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public global::System.Collections.Generic.List<string> request_headers_values { get; } = new global::System.Collections.Generic.List<string>();
 
+        [global::ProtoBuf.ProtoMember(9)]
+        public ulong upload_batch_id
+        {
+            get => __pbn__upload_batch_id.GetValueOrDefault();
+            set => __pbn__upload_batch_id = value;
+        }
+        public bool ShouldSerializeupload_batch_id() => __pbn__upload_batch_id != null;
+        public void Resetupload_batch_id() => __pbn__upload_batch_id = null;
+        private ulong? __pbn__upload_batch_id;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -753,6 +763,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
         private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong upload_batch_id
+        {
+            get => __pbn__upload_batch_id.GetValueOrDefault();
+            set => __pbn__upload_batch_id = value;
+        }
+        public bool ShouldSerializeupload_batch_id() => __pbn__upload_batch_id != null;
+        public void Resetupload_batch_id() => __pbn__upload_batch_id = null;
+        private ulong? __pbn__upload_batch_id;
 
     }
 
@@ -1967,6 +1987,204 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_AppSessionSuspend_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong client_id
+        {
+            get => __pbn__client_id.GetValueOrDefault();
+            set => __pbn__client_id = value;
+        }
+        public bool ShouldSerializeclient_id() => __pbn__client_id != null;
+        public void Resetclient_id() => __pbn__client_id = null;
+        private ulong? __pbn__client_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string machine_name
+        {
+            get => __pbn__machine_name ?? "";
+            set => __pbn__machine_name = value;
+        }
+        public bool ShouldSerializemachine_name() => __pbn__machine_name != null;
+        public void Resetmachine_name() => __pbn__machine_name = null;
+        private string __pbn__machine_name;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool cloud_sync_completed
+        {
+            get => __pbn__cloud_sync_completed.GetValueOrDefault();
+            set => __pbn__cloud_sync_completed = value;
+        }
+        public bool ShouldSerializecloud_sync_completed() => __pbn__cloud_sync_completed != null;
+        public void Resetcloud_sync_completed() => __pbn__cloud_sync_completed = null;
+        private bool? __pbn__cloud_sync_completed;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_AppSessionSuspend_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_AppSessionResume_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong client_id
+        {
+            get => __pbn__client_id.GetValueOrDefault();
+            set => __pbn__client_id = value;
+        }
+        public bool ShouldSerializeclient_id() => __pbn__client_id != null;
+        public void Resetclient_id() => __pbn__client_id = null;
+        private ulong? __pbn__client_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_AppSessionResume_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_AppLaunchIntent_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong client_id
+        {
+            get => __pbn__client_id.GetValueOrDefault();
+            set => __pbn__client_id = value;
+        }
+        public bool ShouldSerializeclient_id() => __pbn__client_id != null;
+        public void Resetclient_id() => __pbn__client_id = null;
+        private ulong? __pbn__client_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string machine_name
+        {
+            get => __pbn__machine_name ?? "";
+            set => __pbn__machine_name = value;
+        }
+        public bool ShouldSerializemachine_name() => __pbn__machine_name != null;
+        public void Resetmachine_name() => __pbn__machine_name = null;
+        private string __pbn__machine_name;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool ignore_pending_operations
+        {
+            get => __pbn__ignore_pending_operations.GetValueOrDefault();
+            set => __pbn__ignore_pending_operations = value;
+        }
+        public bool ShouldSerializeignore_pending_operations() => __pbn__ignore_pending_operations != null;
+        public void Resetignore_pending_operations() => __pbn__ignore_pending_operations = null;
+        private bool? __pbn__ignore_pending_operations;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_AppLaunchIntent_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CCloud_PendingRemoteOperation> pending_remote_operations { get; } = new global::System.Collections.Generic.List<CCloud_PendingRemoteOperation>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_AppExitSyncDone_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong client_id
+        {
+            get => __pbn__client_id.GetValueOrDefault();
+            set => __pbn__client_id = value;
+        }
+        public bool ShouldSerializeclient_id() => __pbn__client_id != null;
+        public void Resetclient_id() => __pbn__client_id = null;
+        private ulong? __pbn__client_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool uploads_completed
+        {
+            get => __pbn__uploads_completed.GetValueOrDefault();
+            set => __pbn__uploads_completed = value;
+        }
+        public bool ShouldSerializeuploads_completed() => __pbn__uploads_completed != null;
+        public void Resetuploads_completed() => __pbn__uploads_completed = null;
+        private bool? __pbn__uploads_completed;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CCloud_AppCloudStateChange_Notification : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2017,6 +2235,10 @@ namespace SteamKit2.Internal
         NoResponse ClientConflictResolution(CCloud_ClientConflictResolution_Notification request);
         CCloud_EnumerateUserApps_Response EnumerateUserApps(CCloud_EnumerateUserApps_Request request);
         CCloud_GetAppFileChangelist_Response GetAppFileChangelist(CCloud_GetAppFileChangelist_Request request);
+        CCloud_AppSessionSuspend_Response SuspendAppSession(CCloud_AppSessionSuspend_Request request);
+        CCloud_AppSessionResume_Response ResumeAppSession(CCloud_AppSessionResume_Request request);
+        CCloud_AppLaunchIntent_Response SignalAppLaunchIntent(CCloud_AppLaunchIntent_Request request);
+        NoResponse SignalAppExitSyncDone(CCloud_AppExitSyncDone_Notification request);
     }
 
     public interface ICloudClient

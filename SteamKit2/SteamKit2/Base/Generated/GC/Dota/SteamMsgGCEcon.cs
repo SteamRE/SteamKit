@@ -3786,16 +3786,6 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public CMsgProcessTransactionOrder order { get; set; }
 
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint partner
-        {
-            get => __pbn__partner.GetValueOrDefault();
-            set => __pbn__partner = value;
-        }
-        public bool ShouldSerializepartner() => __pbn__partner != null;
-        public void Resetpartner() => __pbn__partner = null;
-        private uint? __pbn__partner;
-
     }
 
     [global::ProtoBuf.ProtoContract()]
