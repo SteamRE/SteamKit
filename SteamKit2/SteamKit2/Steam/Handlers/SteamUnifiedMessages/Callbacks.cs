@@ -77,7 +77,6 @@ namespace SteamKit2
         /// <summary>
         /// This callback represents a service notification recieved though <see cref="SteamUnifiedMessages"/>.
         /// </summary>
-        [RequiresUnreferencedCode( SteamUnifiedMessages.TrimmingMessageOfShame )]
         public class ServiceMethodNotification : CallbackMsg
         {
             /// <summary>
@@ -106,14 +105,18 @@ namespace SteamKit2
             /// </summary>
             public object Body { get; private set; }
 
-
-            [RequiresUnreferencedCode( SteamUnifiedMessages.TrimmingMessageOfShame )]
+#if NET5_0_OR_GREATER
+            [UnconditionalSuppressMessage( "ReflectionAnalysis", "IL2060", Justification = "Method should be kept available." )]
+#endif
             internal ServiceMethodNotification( [DynamicallyAccessedMembers(Trimming.ForProtobufNet)] Type messageType, IPacketMsg packetMsg )
             {
                 // Bounce into generic-land.
-                var setupMethod = GetType().GetMethod( nameof(Setup), BindingFlags.Static | BindingFlags.NonPublic )!.MakeGenericMethod( messageType )!;
+                var setupMethod = GetTypeWithPrivateMethods<ServiceMethodNotification>().GetMethod( nameof(Setup), BindingFlags.Static | BindingFlags.NonPublic )!.MakeGenericMethod( messageType )!;
                 (MethodName, Body) = ((string, object))setupMethod.Invoke( this, new[] { packetMsg } )!;
             }
+
+            [return: DynamicallyAccessedMembers( DynamicallyAccessedMemberTypes.NonPublicMethods )]
+            static Type GetTypeWithPrivateMethods< [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)] T>() => typeof( T );
 
             static (string methodName, object body) Setup< [DynamicallyAccessedMembers(Trimming.ForProtobufNet)] T>( IPacketMsg packetMsg )
                 where T : IExtensible, new()

@@ -5,6 +5,7 @@
 
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -20,12 +21,10 @@ namespace SteamKit2
     /// </summary>
     public partial class SteamUnifiedMessages : ClientMsgHandler
     {
-        internal const string TrimmingMessageOfShame = "SteamUnifiedMessages needs to be rewritten in order to become compatible with trimming.";
-
         /// <summary>
         /// This wrapper is used for expression-based RPC calls using Steam Unified Messaging.
         /// </summary>
-        public class UnifiedService<TService>
+        public class UnifiedService<[DynamicallyAccessedMembers( Trimming.ForProtobufNet )] TService>
         {
             internal UnifiedService( SteamUnifiedMessages steamUnifiedMessages )
             {
@@ -43,7 +42,7 @@ namespace SteamKit2
             /// <param name="expr">RPC call expression, e.g. x => x.SomeMethodCall(message);</param>
             /// <param name="isNotification">Whether this message is a notification or not.</param>
             /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
-            [RequiresUnreferencedCode( SteamUnifiedMessages.TrimmingMessageOfShame )]
+            [RequiresUnreferencedCode("Expressions require unreferenced code. Use the other overload instead.")]
             public AsyncJob<ServiceMethodResponse> SendMessage<[DynamicallyAccessedMembers( Trimming.ForProtobufNet )] TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification = false )
             {
                 if ( expr == null )
@@ -69,17 +68,34 @@ namespace SteamKit2
                     throw new NotSupportedException( "Unknown Expression type" );
                 }
 
-                var serviceName = typeof(TService).Name.Substring( 1 ); // IServiceName - remove 'I'
-                var methodName = methodInfo.Name;
-                var version = 1;
-
-                var rpcName = string.Format( "{0}.{1}#{2}", serviceName, methodName, version );
-
+                var rpcName = GetRpcName( methodInfo.Name );
                 var method = typeof(SteamUnifiedMessages).GetMethod( nameof(SteamUnifiedMessages.SendMessage) )!.MakeGenericMethod( message.GetType() );
                 var result = method.Invoke( this.steamUnifiedMessages, new[] { rpcName, message, isNotification } );
                 return ( AsyncJob<ServiceMethodResponse> )result!;
             }
-            
+
+            /// <summary>
+            /// Sends a message.
+            /// Results are returned in a <see cref="ServiceMethodResponse"/>.
+            /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
+            /// </summary>
+            /// <typeparam name="TRequest">The type of the protobuf object which is the request of the RPC call.</typeparam>
+            /// <param name="methodName">RPC call method name, e.g. nameof(ISomeService.SomeMethod)</param>
+            /// <param name="request">Request object</param>
+            /// <param name="isNotification">Whether this message is a notification or not.</param>
+            /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
+            public AsyncJob<ServiceMethodResponse> SendMessage<[DynamicallyAccessedMembers( Trimming.ForProtobufNet )] TRequest>( string methodName, TRequest request, bool isNotification = false )
+                where TRequest : IExtensible
+            {
+                if ( request == null )
+                {
+                    throw new ArgumentNullException( nameof( request ) );
+                }
+
+                var rpcName = GetRpcName( methodName );
+                return steamUnifiedMessages.SendMessage<TRequest>( rpcName, request, isNotification );
+            }
+
             static MethodCallExpression ExtractMethodCallExpression<TResponse>( Expression<Func<TService, TResponse>> expression, string paramName )
             {
                 switch ( expression.NodeType )
@@ -100,12 +116,14 @@ namespace SteamKit2
 
                 throw new ArgumentException( "Expression must be a method call.", paramName );
             }
+
+            static string GetRpcName( string methodName ) => SteamUnifiedMessages.GetRpcName( typeof( TService ), methodName );
+            static string GetRpcName( string methodName, int version ) => SteamUnifiedMessages.GetRpcName( typeof( TService ), methodName, version );
         }
 
-
+        readonly ConcurrentDictionary<string, Type> services;
         Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
 
-        [RequiresUnreferencedCode( SteamUnifiedMessages.TrimmingMessageOfShame )]
         internal SteamUnifiedMessages()
         {
             dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
@@ -113,7 +131,25 @@ namespace SteamKit2
                 { EMsg.ClientServiceMethodLegacyResponse, HandleClientServiceMethodResponse },
                 { EMsg.ServiceMethod, HandleServiceMethod },
             };
+
+            services = new ConcurrentDictionary<string, Type>();
         }
+
+        static string GetRpcName( Type serviceType, string methodName ) => GetRpcName( GetServiceName( serviceType ), methodName );
+        static string GetRpcName( Type serviceType, string methodName, int version ) => GetRpcName( GetServiceName( serviceType ), methodName, version );
+
+        static string GetServiceName( Type serviceType )
+        {
+            var serviceName = serviceType.Name;
+            if ( serviceName.Length > 0 && serviceName[ 0 ] == 'I' )
+            {
+                serviceName = serviceName.Substring( 1 );
+            }
+            return serviceName;
+        }
+
+        static string GetRpcName( string serviceName, string methodName ) => GetRpcName( serviceName, methodName, version: 1 );
+        static string GetRpcName( string serviceName, string methodName, int version ) => string.Format( "{0}.{1}#{2}", serviceName, methodName, version );
 
         /// <summary>
         /// Sends a message.
@@ -155,9 +191,27 @@ namespace SteamKit2
         /// </summary>
         /// <typeparam name="TService">The type of a service interface.</typeparam>
         /// <returns>The <see cref="UnifiedService&lt;TService&gt;"/> wrapper.</returns>
-        public UnifiedService<TService> CreateService<TService>()
+        public UnifiedService<TService> CreateService<[DynamicallyAccessedMembers( Trimming.ForProtobufNet )] TService>()
         {
+            RegisterService<TService>();
             return new UnifiedService<TService>( this );
+        }
+
+        /// <summary>
+        /// Registers a service type in order to recieve notifications. It is not neccesary to call this if
+        /// <see cref="CreateService{TService}"/> has been called with the same TService parameter.
+        /// </summary>
+        /// <typeparam name="TService">The type of a service interface.</typeparam>
+        public void RegisterService<[DynamicallyAccessedMembers( Trimming.ForProtobufNet )] TService>()
+        {
+            const string ServiceTypePrefix = "SteamKit2.Internal.I";
+            var serviceType = typeof( TService );
+            if ( serviceType.FullName is null || !serviceType.FullName.StartsWith( ServiceTypePrefix, StringComparison.Ordinal ) )
+            {
+                throw new InvalidOperationException( "Service type provided is not a generated SteamKit2 service interface." );
+            }
+            var serviceName = serviceType.FullName.Substring( ServiceTypePrefix.Length );
+            services.TryAdd( serviceName, typeof( TService ) );
         }
 
 
@@ -187,7 +241,14 @@ namespace SteamKit2
             Client.PostCallback( callback );
         }
 
-        [RequiresUnreferencedCode( SteamUnifiedMessages.TrimmingMessageOfShame )]
+        [return: DynamicallyAccessedMembers( Trimming.ForProtobufNet )]
+        Type? GetServiceInterfaceType( string serviceName )
+            => services.TryGetValue( serviceName, out var serviceInterfaceType ) ? serviceInterfaceType : null;
+
+#if NET5_0_OR_GREATER
+        [UnconditionalSuppressMessage( "ReflectionAnalysis", "IL2072: UnrecognizedReflectionPattern",
+            Justification = "Any properties of the notification type that the consumer is using will have to be preserved by the linker anyway." )]
+#endif
         void HandleServiceMethod( IPacketMsg packetMsg )
         {
             var notification = new ClientMsgProtobuf( packetMsg );
@@ -201,9 +262,7 @@ namespace SteamKit2
                 var serviceName = splitByDot[0];
                 var methodName = splitByHash[0];
 
-                var serviceInterfaceName = "SteamKit2.Internal.I" + serviceName;
-                var serviceInterfaceType = Type.GetType( serviceInterfaceName );
-                if (serviceInterfaceType != null)
+                if ( GetServiceInterfaceType( serviceName ) is { } serviceInterfaceType )
                 {
                     var method = serviceInterfaceType.GetMethod( methodName );
                     if ( method != null )

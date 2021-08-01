@@ -10,7 +10,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using ProtoBuf;
@@ -39,7 +38,6 @@ namespace SteamKit2
         /// <summary>
         /// Initializes a new instance of the <see cref="SteamClient"/> class with the default configuration.
         /// </summary>
-        [RequiresUnreferencedCode( SteamUnifiedMessages.TrimmingMessageOfShame )]
         public SteamClient()
             : this( SteamConfiguration.CreateDefault() )
         {
@@ -49,7 +47,6 @@ namespace SteamKit2
         /// Initializes a new instance of the <see cref="SteamClient"/> class a specific identifier.
         /// </summary>
         /// <param name="identifier">A specific identifier to be used to uniquely identify this instance.</param>
-        [RequiresUnreferencedCode( SteamUnifiedMessages.TrimmingMessageOfShame )]
         public SteamClient( string identifier )
             : this( SteamConfiguration.CreateDefault(), identifier )
         {
@@ -60,7 +57,6 @@ namespace SteamKit2
         /// </summary>
         /// <param name="configuration">The configuration to use for this client.</param>
         /// <exception cref="ArgumentNullException">The configuration object is <c>null</c></exception>
-        [RequiresUnreferencedCode( SteamUnifiedMessages.TrimmingMessageOfShame )]
         public SteamClient( SteamConfiguration configuration )
             : this( configuration, Guid.NewGuid().ToString( "N" ) )
         {
@@ -73,7 +69,6 @@ namespace SteamKit2
         /// <param name="identifier">A specific identifier to be used to uniquely identify this instance.</param>
         /// <exception cref="ArgumentNullException">The configuration object or identifier is <c>null</c></exception>
         /// <exception cref="ArgumentException">The identifier is an empty string</exception>
-        [RequiresUnreferencedCode( SteamUnifiedMessages.TrimmingMessageOfShame )]
         public SteamClient( SteamConfiguration configuration, string identifier )
             : base( configuration, identifier )
         {
@@ -384,7 +379,7 @@ namespace SteamKit2
                 }
                 catch ( Exception ex )
                 {
-                    LogDebug( "SteamClient", "Unhandled '{0}' exception from '{1}' handler: '{2}'", ex.GetType().Name, key.Name, ex.Message );
+                    LogDebug( "SteamClient", "Unhandled '{0}' exception from '{1}' handler: '{2}'", ex.GetType().Name, key.Name, ex );
                     Disconnect();
                     return false;
                 }
