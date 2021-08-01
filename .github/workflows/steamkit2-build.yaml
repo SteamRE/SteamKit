@@ -26,6 +26,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ matrix.sdk }}
+        include-prerelease: true
 
     - name: Build SteamKit2
       run: dotnet build --configuration ${{ matrix.configuration }} SteamKit2/SteamKit2/SteamKit2.csproj
