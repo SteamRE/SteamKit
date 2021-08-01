@@ -12,9 +12,9 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
-        sdk: [5.0.x]
-        configuration: [Debug, Release]
+        os: [ windows-latest, macos-latest, ubuntu-latest ]
+        sdk: [ 6.0.x ]
+        configuration: [ Debug, Release ]
       fail-fast: false
 
     runs-on: ${{ matrix.os }}
