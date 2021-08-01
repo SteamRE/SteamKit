@@ -263,7 +263,7 @@ namespace SteamKit2
             using MemoryStream ms = new MemoryStream( compressedBuffer );
             using DeflateStream deflateStream = new DeflateStream( ms, CompressionMode.Decompress );
             byte[] inflated = new byte[ decompressedSize ];
-            deflateStream.Read( inflated, 0, inflated.Length );
+            deflateStream.ReadAll( inflated );
 
             return inflated;
         }

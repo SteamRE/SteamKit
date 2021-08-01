@@ -2926,6 +2926,12 @@ namespace SteamKit2.GC.CSGO.Internal
         [global::ProtoBuf.ProtoMember(28)]
         public global::System.Collections.Generic.List<int> enemy_2ks { get; } = new global::System.Collections.Generic.List<int>();
 
+        [global::ProtoBuf.ProtoMember(29)]
+        public global::System.Collections.Generic.List<int> player_spawned { get; } = new global::System.Collections.Generic.List<int>();
+
+        [global::ProtoBuf.ProtoMember(30)]
+        public global::System.Collections.Generic.List<int> team_spawn_count { get; } = new global::System.Collections.Generic.List<int>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class DropInfo : global::ProtoBuf.IExtensible
         {
@@ -5591,6 +5597,9 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resettype() => __pbn__type = null;
         private uint? __pbn__type;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<uint> userdata { get; } = new global::System.Collections.Generic.List<uint>();
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -5927,6 +5936,35 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializeseason_pass_time() => __pbn__season_pass_time != null;
         public void Resetseason_pass_time() => __pbn__season_pass_time = null;
         private uint? __pbn__season_pass_time;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CSOAccountRecurringSubscription : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint time_next_cycle
+        {
+            get => __pbn__time_next_cycle.GetValueOrDefault();
+            set => __pbn__time_next_cycle = value;
+        }
+        public bool ShouldSerializetime_next_cycle() => __pbn__time_next_cycle != null;
+        public void Resettime_next_cycle() => __pbn__time_next_cycle = null;
+        private uint? __pbn__time_next_cycle;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint time_initiated
+        {
+            get => __pbn__time_initiated.GetValueOrDefault();
+            set => __pbn__time_initiated = value;
+        }
+        public bool ShouldSerializetime_initiated() => __pbn__time_initiated != null;
+        public void Resettime_initiated() => __pbn__time_initiated = null;
+        private uint? __pbn__time_initiated;
 
     }
 
@@ -7517,6 +7555,27 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializeshow_warning_not_trusted() => __pbn__show_warning_not_trusted != null;
         public void Resetshow_warning_not_trusted() => __pbn__show_warning_not_trusted = null;
         private bool? __pbn__show_warning_not_trusted;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public bool show_warning_not_trusted_2
+        {
+            get => __pbn__show_warning_not_trusted_2.GetValueOrDefault();
+            set => __pbn__show_warning_not_trusted_2 = value;
+        }
+        public bool ShouldSerializeshow_warning_not_trusted_2() => __pbn__show_warning_not_trusted_2 != null;
+        public void Resetshow_warning_not_trusted_2() => __pbn__show_warning_not_trusted_2 = null;
+        private bool? __pbn__show_warning_not_trusted_2;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string files_prevented_trusted
+        {
+            get => __pbn__files_prevented_trusted ?? "";
+            set => __pbn__files_prevented_trusted = value;
+        }
+        public bool ShouldSerializefiles_prevented_trusted() => __pbn__files_prevented_trusted != null;
+        public void Resetfiles_prevented_trusted() => __pbn__files_prevented_trusted = null;
+        private string __pbn__files_prevented_trusted;
 
     }
 

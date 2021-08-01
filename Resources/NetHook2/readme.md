@@ -8,8 +8,8 @@ These messages are dumped to file, and can be analyzed further with NetHookAnaly
 
 #### Building
 
-1. Execute `SetupDependencies.cmd` to automatically acquire the zlib and protobuf headers and libraries.
-2. Build with VS 2015 (the v140 toolset is required to link with libprotobuf correctly).
+1. Execute `SetupDependencies.cmd` to automatically acquire and build the zlib and protobuf headers and libraries. You will need CMake for this.
+2. Build `NetHook2.sln` with Visual Studio 2019.
 3. Behold: a fresh new `NetHook2.dll` is born into this world. You can place this DLL wherever you like, or leave where you built it. You'll need its full file path later when injecting.
 
 #### Updating steammessages_base

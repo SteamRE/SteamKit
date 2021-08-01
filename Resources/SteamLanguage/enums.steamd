@@ -704,6 +704,7 @@ enum EOSType
 	Macos1015 = -82;
 	MacOS1016 = -81;
 	MacOS11 = -80;
+	MacOS111 = -79;
 	MacOSMax = -1;
 
 	LinuxUnknown = -203;

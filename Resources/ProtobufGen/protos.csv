@@ -2,6 +2,7 @@ ProtoDir,ProtoFileName,ClassFilePath,Namespace
 steam,enums.proto,Enums.cs,SteamKit2.Internal
 steam,content_manifest.proto,ContentManifest.cs,SteamKit2.Internal
 steam,encrypted_app_ticket.proto,SteamMsgAppTicket.cs,SteamKit2.Internal
+steam,iclient_objects.proto,ClientObjects.cs,SteamKit2.Internal
 steam,steammessages_accounthardware.steamclient.proto,SteamMsgAccountHardware.cs,SteamKit2.Internal
 steam,steammessages_auth.steamclient.proto,SteamMsgAuth.cs,SteamKit2.Internal
 steam,steammessages_base.proto,SteamMsgBase.cs,SteamKit2.Internal
@@ -9,8 +10,17 @@ steam,steammessages_broadcast.steamclient.proto,SteamMsgBroadcast.cs,SteamKit2.I
 steam,steammessages_chat.steamclient.proto,SteamMsgChat.cs,SteamKit2.Internal
 steam,steammessages_clientserver.proto,SteamMsgClientServer.cs,SteamKit2.Internal
 steam,steammessages_clientserver_2.proto,SteamMsgClientServer2.cs,SteamKit2.Internal
+steam,steammessages_clientserver_appinfo.proto,SteamMsgClientServerAppInfo.cs,SteamKit2.Internal
 steam,steammessages_clientserver_friends.proto,SteamMsgClientServerFriends.cs,SteamKit2.Internal
+steam,steammessages_clientserver_gameservers.proto,SteamMsgClientServerGameServers.cs,SteamKit2.Internal
+steam,steammessages_clientserver_lbs.proto,SteamMsgClientServerLeaderboards.cs,SteamKit2.Internal
 steam,steammessages_clientserver_login.proto,SteamMsgClientServerLogin.cs,SteamKit2.Internal
+steam,steammessages_clientserver_mms.proto,SteamMsgClientServerMMS.cs,SteamKit2.Internal
+steam,steammessages_clientserver_ucm.proto,SteamMsgClientServerUCM.cs,SteamKit2.Internal
+steam,steammessages_clientserver_uds.proto,SteamMsgClientServerUDS.cs,SteamKit2.Internal
+steam,steammessages_clientserver_ufs.proto,SteamMsgClientServerUFS.cs,SteamKit2.Internal
+steam,steammessages_clientserver_userstats.proto,SteamMsgClientServerUserStats.cs,SteamKit2.Internal
+steam,steammessages_clientnotificationtypes.proto,SteamMsgClientNotificationTypes.cs,SteamKit2.Internal
 steam,steammessages_cloud.steamclient.proto,SteamMsgCloud.cs,SteamKit2.Internal
 steam,steammessages_credentials.steamclient.proto,SteamMsgCredentials.cs,SteamKit2.Internal
 steam,steammessages_datapublisher.steamclient.proto,SteamMsgDataPublisher.cs,SteamKit2.Internal

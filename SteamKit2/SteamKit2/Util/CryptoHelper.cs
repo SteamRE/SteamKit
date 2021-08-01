@@ -154,7 +154,7 @@ namespace SteamKit2
             using ( var ms = new MemoryStream( input ) )
             using ( var cs = new CryptoStream( ms, aesTransform, CryptoStreamMode.Read ) )
             {
-                outLen = cs.Read( plainText, 0, plainText.Length );
+                outLen = cs.ReadAll( plainText );
             }
 
             byte[] output = new byte[ outLen ];
@@ -395,7 +395,7 @@ namespace SteamKit2
                 // plaintext is never longer than ciphertext
                 byte[] plaintext = new byte[ cipherText.Length ];
 
-                int len = cs.Read( plaintext, 0, plaintext.Length );
+                int len = cs.ReadAll( plaintext );
 
                 byte[] output = new byte[ len ];
                 Array.Copy( plaintext, 0, output, 0, len );
@@ -517,6 +517,7 @@ namespace SteamKit2
 
             return block;
         }
+
 
     }
 }

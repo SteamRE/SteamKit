@@ -772,6 +772,16 @@ namespace SteamKit2.Internal
         public void Resetview_marketing_traffic() => __pbn__view_marketing_traffic = null;
         private bool? __pbn__view_marketing_traffic;
 
+        [global::ProtoBuf.ProtoMember(17)]
+        public bool edit_store_display_content
+        {
+            get => __pbn__edit_store_display_content.GetValueOrDefault();
+            set => __pbn__edit_store_display_content = value;
+        }
+        public bool ShouldSerializeedit_store_display_content() => __pbn__edit_store_display_content != null;
+        public void Resetedit_store_display_content() => __pbn__edit_store_display_content = null;
+        private bool? __pbn__edit_store_display_content;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1525,6 +1535,27 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(28)]
         public global::System.Collections.Generic.List<uint> referenced_appids { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(29)]
+        public uint build_id
+        {
+            get => __pbn__build_id.GetValueOrDefault();
+            set => __pbn__build_id = value;
+        }
+        public bool ShouldSerializebuild_id() => __pbn__build_id != null;
+        public void Resetbuild_id() => __pbn__build_id = null;
+        private uint? __pbn__build_id;
+
+        [global::ProtoBuf.ProtoMember(30)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string build_branch
+        {
+            get => __pbn__build_branch ?? "";
+            set => __pbn__build_branch = value;
+        }
+        public bool ShouldSerializebuild_branch() => __pbn__build_branch != null;
+        public void Resetbuild_branch() => __pbn__build_branch = null;
+        private string __pbn__build_branch;
 
     }
 

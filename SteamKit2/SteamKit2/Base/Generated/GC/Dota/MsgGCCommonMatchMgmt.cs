@@ -16,17 +16,6 @@ namespace SteamKit2.GC.Dota.Internal
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(PartnerAccountType.PARTNER_NONE)]
-        public PartnerAccountType partner_type
-        {
-            get => __pbn__partner_type ?? PartnerAccountType.PARTNER_NONE;
-            set => __pbn__partner_type = value;
-        }
-        public bool ShouldSerializepartner_type() => __pbn__partner_type != null;
-        public void Resetpartner_type() => __pbn__partner_type = null;
-        private PartnerAccountType? __pbn__partner_type;
-
         [global::ProtoBuf.ProtoMember(2)]
         public bool is_coach
         {
@@ -142,6 +131,16 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializejoined_from_partyfinder() => __pbn__joined_from_partyfinder != null;
         public void Resetjoined_from_partyfinder() => __pbn__joined_from_partyfinder = null;
         private bool? __pbn__joined_from_partyfinder;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public bool is_steam_china
+        {
+            get => __pbn__is_steam_china.GetValueOrDefault();
+            set => __pbn__is_steam_china = value;
+        }
+        public bool ShouldSerializeis_steam_china() => __pbn__is_steam_china != null;
+        public void Resetis_steam_china() => __pbn__is_steam_china = null;
+        private bool? __pbn__is_steam_china;
 
     }
 
@@ -623,6 +622,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetcustom_game_difficulty_mask() => __pbn__custom_game_difficulty_mask = null;
         private uint? __pbn__custom_game_difficulty_mask;
 
+        [global::ProtoBuf.ProtoMember(71)]
+        public bool is_steam_china
+        {
+            get => __pbn__is_steam_china.GetValueOrDefault();
+            set => __pbn__is_steam_china = value;
+        }
+        public bool ShouldSerializeis_steam_china() => __pbn__is_steam_china != null;
+        public void Resetis_steam_china() => __pbn__is_steam_china = null;
+        private bool? __pbn__is_steam_china;
+
         [global::ProtoBuf.ProtoContract()]
         public enum State
         {
@@ -940,6 +949,46 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgLobbyCoachFriendRequest : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint coach_account_id
+        {
+            get => __pbn__coach_account_id.GetValueOrDefault();
+            set => __pbn__coach_account_id = value;
+        }
+        public bool ShouldSerializecoach_account_id() => __pbn__coach_account_id != null;
+        public void Resetcoach_account_id() => __pbn__coach_account_id = null;
+        private uint? __pbn__coach_account_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint player_account_id
+        {
+            get => __pbn__player_account_id.GetValueOrDefault();
+            set => __pbn__player_account_id = value;
+        }
+        public bool ShouldSerializeplayer_account_id() => __pbn__player_account_id != null;
+        public void Resetplayer_account_id() => __pbn__player_account_id = null;
+        private uint? __pbn__player_account_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(ELobbyMemberCoachRequestState.k_eLobbyMemberCoachRequestState_None)]
+        public ELobbyMemberCoachRequestState request_state
+        {
+            get => __pbn__request_state ?? ELobbyMemberCoachRequestState.k_eLobbyMemberCoachRequestState_None;
+            set => __pbn__request_state = value;
+        }
+        public bool ShouldSerializerequest_state() => __pbn__request_state != null;
+        public void Resetrequest_state() => __pbn__request_state = null;
+        private ELobbyMemberCoachRequestState? __pbn__request_state;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CSODOTALobbyMember : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1073,17 +1122,6 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(20)]
         public global::System.Collections.Generic.List<uint> disabled_hero_id { get; } = new global::System.Collections.Generic.List<uint>();
 
-        [global::ProtoBuf.ProtoMember(21)]
-        [global::System.ComponentModel.DefaultValue(PartnerAccountType.PARTNER_NONE)]
-        public PartnerAccountType partner_account_type
-        {
-            get => __pbn__partner_account_type ?? PartnerAccountType.PARTNER_NONE;
-            set => __pbn__partner_account_type = value;
-        }
-        public bool ShouldSerializepartner_account_type() => __pbn__partner_account_type != null;
-        public void Resetpartner_account_type() => __pbn__partner_account_type = null;
-        private PartnerAccountType? __pbn__partner_account_type;
-
         [global::ProtoBuf.ProtoMember(22)]
         public global::System.Collections.Generic.List<uint> enabled_hero_id { get; } = new global::System.Collections.Generic.List<uint>();
 
@@ -1097,6 +1135,9 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializecoach_team() => __pbn__coach_team != null;
         public void Resetcoach_team() => __pbn__coach_team = null;
         private DOTA_GC_TEAM? __pbn__coach_team;
+
+        [global::ProtoBuf.ProtoMember(53)]
+        public global::System.Collections.Generic.List<uint> coached_account_ids { get; } = new global::System.Collections.Generic.List<uint>();
 
         [global::ProtoBuf.ProtoMember(42)]
         public uint coach_rating
@@ -1304,6 +1345,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetreports_available() => __pbn__reports_available = null;
         private uint? __pbn__reports_available;
 
+        [global::ProtoBuf.ProtoMember(54)]
+        public bool is_steam_china
+        {
+            get => __pbn__is_steam_china.GetValueOrDefault();
+            set => __pbn__is_steam_china = value;
+        }
+        public bool ShouldSerializeis_steam_china() => __pbn__is_steam_china != null;
+        public void Resetis_steam_china() => __pbn__is_steam_china = null;
+        private bool? __pbn__is_steam_china;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1445,6 +1496,17 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeteam_logo_url() => __pbn__team_logo_url != null;
         public void Resetteam_logo_url() => __pbn__team_logo_url = null;
         private string __pbn__team_logo_url;
+
+        [global::ProtoBuf.ProtoMember(21)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string team_abbreviation
+        {
+            get => __pbn__team_abbreviation ?? "";
+            set => __pbn__team_abbreviation = value;
+        }
+        public bool ShouldSerializeteam_abbreviation() => __pbn__team_abbreviation != null;
+        public void Resetteam_abbreviation() => __pbn__team_abbreviation = null;
+        private string __pbn__team_abbreviation;
 
     }
 
@@ -2305,17 +2367,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetcustom_max_players() => __pbn__custom_max_players = null;
         private uint? __pbn__custom_max_players;
 
-        [global::ProtoBuf.ProtoMember(73)]
-        [global::System.ComponentModel.DefaultValue(PartnerAccountType.PARTNER_NONE)]
-        public PartnerAccountType partner_type
-        {
-            get => __pbn__partner_type ?? PartnerAccountType.PARTNER_NONE;
-            set => __pbn__partner_type = value;
-        }
-        public bool ShouldSerializepartner_type() => __pbn__partner_type != null;
-        public void Resetpartner_type() => __pbn__partner_type = null;
-        private PartnerAccountType? __pbn__partner_type;
-
         [global::ProtoBuf.ProtoMember(75)]
         [global::System.ComponentModel.DefaultValue(DOTALobbyVisibility.DOTALobbyVisibility_Public)]
         public DOTALobbyVisibility visibility
@@ -2655,6 +2706,19 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(124)]
         public global::System.Collections.Generic.List<uint> requested_hero_ids { get; } = new global::System.Collections.Generic.List<uint>();
 
+        [global::ProtoBuf.ProtoMember(125)]
+        public global::System.Collections.Generic.List<CMsgLobbyCoachFriendRequest> coach_friend_requests { get; } = new global::System.Collections.Generic.List<CMsgLobbyCoachFriendRequest>();
+
+        [global::ProtoBuf.ProtoMember(126)]
+        public bool is_in_steam_china
+        {
+            get => __pbn__is_in_steam_china.GetValueOrDefault();
+            set => __pbn__is_in_steam_china = value;
+        }
+        public bool ShouldSerializeis_in_steam_china() => __pbn__is_in_steam_china != null;
+        public void Resetis_in_steam_china() => __pbn__is_in_steam_china = null;
+        private bool? __pbn__is_in_steam_china;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class CExtraMsg : global::ProtoBuf.IExtensible
         {
@@ -2712,6 +2776,7 @@ namespace SteamKit2.GC.Dota.Internal
             SPECTATOR = 11,
             EVENT_MATCH = 12,
             GAUNTLET = 13,
+            NEW_PLAYER_POOL = 14,
         }
 
     }
@@ -3211,7 +3276,7 @@ namespace SteamKit2.GC.Dota.Internal
                     kKillEaterEventType_Windrunner_ShackleFocusFireKills = 228,
                     kKillEaterEventType_VengefulSpirit_VengeanceAuraIllusionKills = 229,
                     kKillEaterEventType_Tusk_WalrusPunchKills = 230,
-                    kKillEaterEventType_Tinker_TripleHeroLasers = 231,
+                    kKillEaterEventType_Tinker_MultiHeroLasers = 231,
                     kKillEaterEventType_TemplarAssassin_MultiHeroPsiBlades = 232,
                     kKillEaterEventType_Sven_KillsDuringGodsStrength = 233,
                     kKillEaterEventType_Sniper_ThreeHeroShrapnels = 234,
@@ -3306,6 +3371,14 @@ namespace SteamKit2.GC.Dota.Internal
         k_EHighPriorityMM_UsingResource = 66,
         k_EHighPriorityMM_FiveStack = 67,
         k_EHighPriorityMM_HighDemand = 68,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ELobbyMemberCoachRequestState
+    {
+        k_eLobbyMemberCoachRequestState_None = 0,
+        k_eLobbyMemberCoachRequestState_Accepted = 1,
+        k_eLobbyMemberCoachRequestState_Rejected = 2,
     }
 
     [global::ProtoBuf.ProtoContract()]

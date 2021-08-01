@@ -460,6 +460,7 @@ namespace SteamKit2.GC.Artifact.Internal
         public enum EFlags
         {
             k_eDeveloper = 1,
+            k_eFreePlayer = 2,
         }
 
     }
@@ -944,16 +945,16 @@ namespace SteamKit2.GC.Artifact.Internal
         private EDCGMatchMode? __pbn__match_mode;
 
         [global::ProtoBuf.ProtoMember(5)]
-        public byte[] deck_data
+        public byte[] deck_code
         {
-            get => __pbn__deck_data;
-            set => __pbn__deck_data = value;
+            get => __pbn__deck_code;
+            set => __pbn__deck_code = value;
         }
-        public bool ShouldSerializedeck_data() => __pbn__deck_data != null;
-        public void Resetdeck_data() => __pbn__deck_data = null;
-        private byte[] __pbn__deck_data;
+        public bool ShouldSerializedeck_code() => __pbn__deck_code != null;
+        public void Resetdeck_code() => __pbn__deck_code = null;
+        private byte[] __pbn__deck_code;
 
-        [global::ProtoBuf.ProtoMember(6)]
+        [global::ProtoBuf.ProtoMember(7)]
         public bool is_anonymous
         {
             get => __pbn__is_anonymous.GetValueOrDefault();
@@ -962,6 +963,16 @@ namespace SteamKit2.GC.Artifact.Internal
         public bool ShouldSerializeis_anonymous() => __pbn__is_anonymous != null;
         public void Resetis_anonymous() => __pbn__is_anonymous = null;
         private bool? __pbn__is_anonymous;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public byte[] collection_code
+        {
+            get => __pbn__collection_code;
+            set => __pbn__collection_code = value;
+        }
+        public bool ShouldSerializecollection_code() => __pbn__collection_code != null;
+        public void Resetcollection_code() => __pbn__collection_code = null;
+        private byte[] __pbn__collection_code;
 
     }
 

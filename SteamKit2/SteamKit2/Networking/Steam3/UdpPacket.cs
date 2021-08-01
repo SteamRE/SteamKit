@@ -135,7 +135,7 @@ namespace SteamKit2
                 throw new ArgumentException( "Payload length exceeds 0x4DC maximum" );
 
             byte[] buf = new byte[ length ];
-            ms.Read( buf, 0, buf.Length );
+            ms.ReadAll( buf );
 
             var payload = new MemoryStream( buf );
             header.PayloadSize = ( ushort )payload.Length;
