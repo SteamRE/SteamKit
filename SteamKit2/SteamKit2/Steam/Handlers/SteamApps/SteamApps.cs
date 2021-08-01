@@ -16,16 +16,10 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamApps : ClientMsgHandler
     {
-
-        // Ambiguous reference in cref attribute: 'SteamApps.PICSGetProductInfo'. Assuming 'SteamKit2.SteamApps.PICSGetProductInfo(uint?, uint?, bool, bool)',
-        // but could have also matched other overloads including 'SteamKit2.SteamApps.PICSGetProductInfo(System.Collections.Generic.IEnumerable<SteamKit2.SteamApps.PICSRequest>, System.Collections.Generic.IEnumerable<SteamKit2.SteamApps.PICSRequest>, bool)'.
-#pragma warning disable 0419
-
         /// <summary>
-        /// Represents a PICS request used for <see cref="SteamApps.PICSGetProductInfo"/>
+        /// Represents a PICS request used for <see cref="o:SteamApps.PICSGetProductInfo"/>
         /// </summary>
         public struct PICSRequest
-#pragma warning restore 0419
         {
             /// <summary>
             /// Gets or sets the ID of the app or package being requested
@@ -181,33 +175,19 @@ namespace SteamKit2
         /// Results are returned in a <see cref="PICSProductInfoCallback"/> callback.
         /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
-        /// <param name="app">App id requested.</param>
-        /// <param name="package">Package id requested.</param>
+        /// <param name="app"><see cref="PICSRequest"/> request for an app.</param>
+        /// <param name="package"><see cref="PICSRequest"/> request for a package.</param>
         /// <param name="metaDataOnly">Whether to send only meta data.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSProductInfoCallback"/>.</returns>
-        public AsyncJobMultiple<PICSProductInfoCallback> PICSGetProductInfo(uint? app, uint? package, bool metaDataOnly = false)
+        public AsyncJobMultiple<PICSProductInfoCallback> PICSGetProductInfo( PICSRequest? app, PICSRequest? package, bool metaDataOnly = false )
         {
-            List<uint> apps = new List<uint>();
-            List<uint> packages = new List<uint>();
+            var apps = new List<PICSRequest>();
+            var packages = new List<PICSRequest>();
 
             if ( app.HasValue ) apps.Add( app.Value );
             if ( package.HasValue ) packages.Add( package.Value );
 
             return PICSGetProductInfo( apps, packages, metaDataOnly );
-        }
-
-        /// <summary>
-        /// Request product information for a list of apps or packages
-        /// Results are returned in a <see cref="PICSProductInfoCallback"/> callback.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
-        /// </summary>
-        /// <param name="apps">List of app ids requested.</param>
-        /// <param name="packages">List of package ids requested.</param>
-        /// <param name="metaDataOnly">Whether to send only meta data.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSProductInfoCallback"/>.</returns>
-        public AsyncJobMultiple<PICSProductInfoCallback> PICSGetProductInfo( IEnumerable<uint> apps, IEnumerable<uint> packages, bool metaDataOnly = false )
-        {
-            return PICSGetProductInfo( apps.Select( app => new PICSRequest( app ) ), packages.Select( package => new PICSRequest( package ) ), metaDataOnly );
         }
 
         /// <summary>
