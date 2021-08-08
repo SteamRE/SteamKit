@@ -448,6 +448,16 @@ namespace SteamKit2.Internal
         public void Resetavatar_ugc_url() => __pbn__avatar_ugc_url = null;
         private string __pbn__avatar_ugc_url;
 
+        [global::ProtoBuf.ProtoMember(26)]
+        public bool disabled
+        {
+            get => __pbn__disabled.GetValueOrDefault();
+            set => __pbn__disabled = value;
+        }
+        public bool ShouldSerializedisabled() => __pbn__disabled != null;
+        public void Resetdisabled() => __pbn__disabled = null;
+        private bool? __pbn__disabled;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2718,6 +2728,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeavatar_ugc_url() => __pbn__avatar_ugc_url != null;
         public void Resetavatar_ugc_url() => __pbn__avatar_ugc_url = null;
         private string __pbn__avatar_ugc_url;
+
+        [global::ProtoBuf.ProtoMember(22)]
+        public bool disabled
+        {
+            get => __pbn__disabled.GetValueOrDefault();
+            set => __pbn__disabled = value;
+        }
+        public bool ShouldSerializedisabled() => __pbn__disabled != null;
+        public void Resetdisabled() => __pbn__disabled = null;
+        private bool? __pbn__disabled;
 
     }
 
@@ -5579,6 +5599,7 @@ namespace SteamKit2.Internal
     {
         k_EChatRoomMessageReactionType_Invalid = 0,
         k_EChatRoomMessageReactionType_Emoticon = 1,
+        k_EChatRoomMessageReactionType_Sticker = 2,
     }
 
     [global::ProtoBuf.ProtoContract()]

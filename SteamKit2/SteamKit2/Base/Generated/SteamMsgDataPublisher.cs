@@ -121,6 +121,230 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CDataPublisher_ClientUpdateAppJob_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint app_id
+        {
+            get => __pbn__app_id.GetValueOrDefault();
+            set => __pbn__app_id = value;
+        }
+        public bool ShouldSerializeapp_id() => __pbn__app_id != null;
+        public void Resetapp_id() => __pbn__app_id = null;
+        private uint? __pbn__app_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<uint> depot_ids { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint app_state
+        {
+            get => __pbn__app_state.GetValueOrDefault();
+            set => __pbn__app_state = value;
+        }
+        public bool ShouldSerializeapp_state() => __pbn__app_state != null;
+        public void Resetapp_state() => __pbn__app_state = null;
+        private uint? __pbn__app_state;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint job_app_error
+        {
+            get => __pbn__job_app_error.GetValueOrDefault();
+            set => __pbn__job_app_error = value;
+        }
+        public bool ShouldSerializejob_app_error() => __pbn__job_app_error != null;
+        public void Resetjob_app_error() => __pbn__job_app_error = null;
+        private uint? __pbn__job_app_error;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string error_details
+        {
+            get => __pbn__error_details ?? "";
+            set => __pbn__error_details = value;
+        }
+        public bool ShouldSerializeerror_details() => __pbn__error_details != null;
+        public void Reseterror_details() => __pbn__error_details = null;
+        private string __pbn__error_details;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint job_duration
+        {
+            get => __pbn__job_duration.GetValueOrDefault();
+            set => __pbn__job_duration = value;
+        }
+        public bool ShouldSerializejob_duration() => __pbn__job_duration != null;
+        public void Resetjob_duration() => __pbn__job_duration = null;
+        private uint? __pbn__job_duration;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint files_validation_failed
+        {
+            get => __pbn__files_validation_failed.GetValueOrDefault();
+            set => __pbn__files_validation_failed = value;
+        }
+        public bool ShouldSerializefiles_validation_failed() => __pbn__files_validation_failed != null;
+        public void Resetfiles_validation_failed() => __pbn__files_validation_failed = null;
+        private uint? __pbn__files_validation_failed;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public ulong job_bytes_downloaded
+        {
+            get => __pbn__job_bytes_downloaded.GetValueOrDefault();
+            set => __pbn__job_bytes_downloaded = value;
+        }
+        public bool ShouldSerializejob_bytes_downloaded() => __pbn__job_bytes_downloaded != null;
+        public void Resetjob_bytes_downloaded() => __pbn__job_bytes_downloaded = null;
+        private ulong? __pbn__job_bytes_downloaded;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public ulong job_bytes_staged
+        {
+            get => __pbn__job_bytes_staged.GetValueOrDefault();
+            set => __pbn__job_bytes_staged = value;
+        }
+        public bool ShouldSerializejob_bytes_staged() => __pbn__job_bytes_staged != null;
+        public void Resetjob_bytes_staged() => __pbn__job_bytes_staged = null;
+        private ulong? __pbn__job_bytes_staged;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public ulong bytes_comitted
+        {
+            get => __pbn__bytes_comitted.GetValueOrDefault();
+            set => __pbn__bytes_comitted = value;
+        }
+        public bool ShouldSerializebytes_comitted() => __pbn__bytes_comitted != null;
+        public void Resetbytes_comitted() => __pbn__bytes_comitted = null;
+        private ulong? __pbn__bytes_comitted;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public uint start_app_state
+        {
+            get => __pbn__start_app_state.GetValueOrDefault();
+            set => __pbn__start_app_state = value;
+        }
+        public bool ShouldSerializestart_app_state() => __pbn__start_app_state != null;
+        public void Resetstart_app_state() => __pbn__start_app_state = null;
+        private uint? __pbn__start_app_state;
+
+        [global::ProtoBuf.ProtoMember(12, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong stats_machine_id
+        {
+            get => __pbn__stats_machine_id.GetValueOrDefault();
+            set => __pbn__stats_machine_id = value;
+        }
+        public bool ShouldSerializestats_machine_id() => __pbn__stats_machine_id != null;
+        public void Resetstats_machine_id() => __pbn__stats_machine_id = null;
+        private ulong? __pbn__stats_machine_id;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string branch_name
+        {
+            get => __pbn__branch_name ?? "";
+            set => __pbn__branch_name = value;
+        }
+        public bool ShouldSerializebranch_name() => __pbn__branch_name != null;
+        public void Resetbranch_name() => __pbn__branch_name = null;
+        private string __pbn__branch_name;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public ulong total_bytes_downloaded
+        {
+            get => __pbn__total_bytes_downloaded.GetValueOrDefault();
+            set => __pbn__total_bytes_downloaded = value;
+        }
+        public bool ShouldSerializetotal_bytes_downloaded() => __pbn__total_bytes_downloaded != null;
+        public void Resettotal_bytes_downloaded() => __pbn__total_bytes_downloaded = null;
+        private ulong? __pbn__total_bytes_downloaded;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public ulong total_bytes_staged
+        {
+            get => __pbn__total_bytes_staged.GetValueOrDefault();
+            set => __pbn__total_bytes_staged = value;
+        }
+        public bool ShouldSerializetotal_bytes_staged() => __pbn__total_bytes_staged != null;
+        public void Resettotal_bytes_staged() => __pbn__total_bytes_staged = null;
+        private ulong? __pbn__total_bytes_staged;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public ulong total_bytes_restored
+        {
+            get => __pbn__total_bytes_restored.GetValueOrDefault();
+            set => __pbn__total_bytes_restored = value;
+        }
+        public bool ShouldSerializetotal_bytes_restored() => __pbn__total_bytes_restored != null;
+        public void Resettotal_bytes_restored() => __pbn__total_bytes_restored = null;
+        private ulong? __pbn__total_bytes_restored;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public bool is_borrowed
+        {
+            get => __pbn__is_borrowed.GetValueOrDefault();
+            set => __pbn__is_borrowed = value;
+        }
+        public bool ShouldSerializeis_borrowed() => __pbn__is_borrowed != null;
+        public void Resetis_borrowed() => __pbn__is_borrowed = null;
+        private bool? __pbn__is_borrowed;
+
+        [global::ProtoBuf.ProtoMember(18)]
+        public bool is_free_weekend
+        {
+            get => __pbn__is_free_weekend.GetValueOrDefault();
+            set => __pbn__is_free_weekend = value;
+        }
+        public bool ShouldSerializeis_free_weekend() => __pbn__is_free_weekend != null;
+        public void Resetis_free_weekend() => __pbn__is_free_weekend = null;
+        private bool? __pbn__is_free_weekend;
+
+        [global::ProtoBuf.ProtoMember(19)]
+        public ulong total_bytes_legacy
+        {
+            get => __pbn__total_bytes_legacy.GetValueOrDefault();
+            set => __pbn__total_bytes_legacy = value;
+        }
+        public bool ShouldSerializetotal_bytes_legacy() => __pbn__total_bytes_legacy != null;
+        public void Resettotal_bytes_legacy() => __pbn__total_bytes_legacy = null;
+        private ulong? __pbn__total_bytes_legacy;
+
+        [global::ProtoBuf.ProtoMember(20)]
+        public ulong total_bytes_patched
+        {
+            get => __pbn__total_bytes_patched.GetValueOrDefault();
+            set => __pbn__total_bytes_patched = value;
+        }
+        public bool ShouldSerializetotal_bytes_patched() => __pbn__total_bytes_patched != null;
+        public void Resettotal_bytes_patched() => __pbn__total_bytes_patched = null;
+        private ulong? __pbn__total_bytes_patched;
+
+        [global::ProtoBuf.ProtoMember(21)]
+        public ulong total_bytes_saved
+        {
+            get => __pbn__total_bytes_saved.GetValueOrDefault();
+            set => __pbn__total_bytes_saved = value;
+        }
+        public bool ShouldSerializetotal_bytes_saved() => __pbn__total_bytes_saved != null;
+        public void Resettotal_bytes_saved() => __pbn__total_bytes_saved = null;
+        private ulong? __pbn__total_bytes_saved;
+
+        [global::ProtoBuf.ProtoMember(22)]
+        public uint cell_id
+        {
+            get => __pbn__cell_id.GetValueOrDefault();
+            set => __pbn__cell_id = value;
+        }
+        public bool ShouldSerializecell_id() => __pbn__cell_id != null;
+        public void Resetcell_id() => __pbn__cell_id = null;
+        private uint? __pbn__cell_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CValveHWSurvey_GetSurveySchedule_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -182,6 +406,7 @@ namespace SteamKit2.Internal
     public interface IDataPublisher
     {
         NoResponse ClientContentCorruptionReport(CDataPublisher_ClientContentCorruptionReport_Notification request);
+        NoResponse ClientUpdateAppJobReport(CDataPublisher_ClientUpdateAppJob_Notification request);
     }
 
     public interface IValveHWSurvey

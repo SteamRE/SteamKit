@@ -2826,6 +2826,116 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCAdditionalWelcomeMsgList : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CExtraMsgBlock> welcome_messages { get; } = new global::System.Collections.Generic.List<CExtraMsgBlock>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgApplyRemoteConVars : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<ConVar> con_vars { get; } = new global::System.Collections.Generic.List<ConVar>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class ConVar : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string name
+            {
+                get => __pbn__name ?? "";
+                set => __pbn__name = value;
+            }
+            public bool ShouldSerializename() => __pbn__name != null;
+            public void Resetname() => __pbn__name = null;
+            private string __pbn__name;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string value
+            {
+                get => __pbn__value ?? "";
+                set => __pbn__value = value;
+            }
+            public bool ShouldSerializevalue() => __pbn__value != null;
+            public void Resetvalue() => __pbn__value = null;
+            private string __pbn__value;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint version_min
+            {
+                get => __pbn__version_min.GetValueOrDefault();
+                set => __pbn__version_min = value;
+            }
+            public bool ShouldSerializeversion_min() => __pbn__version_min != null;
+            public void Resetversion_min() => __pbn__version_min = null;
+            private uint? __pbn__version_min;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public uint version_max
+            {
+                get => __pbn__version_max.GetValueOrDefault();
+                set => __pbn__version_max = value;
+            }
+            public bool ShouldSerializeversion_max() => __pbn__version_max != null;
+            public void Resetversion_max() => __pbn__version_max = null;
+            private uint? __pbn__version_max;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            [global::System.ComponentModel.DefaultValue(EDACPlatform.k_eDACPlatform_None)]
+            public EDACPlatform platform
+            {
+                get => __pbn__platform ?? EDACPlatform.k_eDACPlatform_None;
+                set => __pbn__platform = value;
+            }
+            public bool ShouldSerializeplatform() => __pbn__platform != null;
+            public void Resetplatform() => __pbn__platform = null;
+            private EDACPlatform? __pbn__platform;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToClientApplyRemoteConVars : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgApplyRemoteConVars msg { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToServerApplyRemoteConVars : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgApplyRemoteConVars msg { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EGCBaseMsg
     {
         k_EMsgGCSystemMessage = 4001,
@@ -2848,6 +2958,9 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGCToGCPerformManualOp = 4516,
         k_EMsgGCToGCPerformManualOpCompleted = 4517,
         k_EMsgGCToGCReloadServerRegionSettings = 4518,
+        k_EMsgGCAdditionalWelcomeMsgList = 4519,
+        k_EMsgGCToClientApplyRemoteConVars = 4520,
+        k_EMsgGCToServerApplyRemoteConVars = 4521,
     }
 
     [global::ProtoBuf.ProtoContract()]

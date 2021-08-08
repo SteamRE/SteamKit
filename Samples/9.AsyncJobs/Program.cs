@@ -122,10 +122,13 @@ namespace Sample9_AsyncJobs
                 return;
             }
 
-            // in this sample, we'll simply do a few async requests to acquire information about appid 440 (Team Fortress 2)
+            // in this sample, we'll simply do a few async requests to acquire information about Counter-Strike: Global Offensive
 
-            // first, we'll request a depot decryption key for TF2's client/server shared depot (441)
-            var depotJob = steamApps.GetDepotDecryptionKey( depotid: 441, appid: 440 );
+            uint appid = 730;
+            uint depotid = 731;
+
+            // first, we'll request a depot decryption key for CSGO's common files depot (731)
+            var depotJob = steamApps.GetDepotDecryptionKey( depotid, appid );
 
             // at this point, this request is now in-flight to the steam server, so we'll use te async/await pattern to wait for a response
             // the await pattern allows this code to resume once the Steam servers have replied to the request.
@@ -144,8 +147,20 @@ namespace Sample9_AsyncJobs
                 Console.WriteLine( "Unable to request depot key!" );
             }
 
-            // now request some product info for TF2
-            var productJob = steamApps.PICSGetProductInfo( 440, package: null );
+            // now request the access token
+            var accessTokenJob = steamApps.PICSGetAccessTokens( appid, package: null );
+            var accessTokenResult = await accessTokenJob;
+            ulong accessToken = 0;
+
+            // Get the access token, if the app is owned it may be a long value, or 0 if it is public.
+            // If the request was denied, the appid will be listed in AppTokensDenied.
+            accessTokenResult.AppTokens.TryGetValue( appid, out accessToken );
+
+            // create a request product info request struct
+            var request = new SteamApps.PICSRequest( appid, accessToken );
+
+            // now request some product info
+            var productJob = steamApps.PICSGetProductInfo( app: request, package: null, metaDataOnly: false );
 
             // note that with some requests, Steam can return multiple results, so these jobs don't return the callback object directly, but rather
             // a result set that could contain multiple callback objects if Steam gives us multiple results
@@ -168,7 +183,7 @@ namespace Sample9_AsyncJobs
                 // AsyncJobFailedException or TaskCanceledException will be thrown
 
                 // the result set might not have our data, so we need to test to see if we have results for our request
-                SteamApps.PICSProductInfoCallback productInfo = resultSet.Results.FirstOrDefault( prodCallback => prodCallback.Apps.ContainsKey( 440 ) );
+                SteamApps.PICSProductInfoCallback productInfo = resultSet.Results.FirstOrDefault( prodCallback => prodCallback.Apps.ContainsKey( appid ) );
 
                 if ( productInfo != null )
                 {
@@ -184,7 +199,7 @@ namespace Sample9_AsyncJobs
                 // the request partially completed, but then we timed out. essentially the same as the previous case, but Steam didn't explicitly fail.
 
                 // we still need to check our result set to see if we have our data
-                SteamApps.PICSProductInfoCallback productInfo = resultSet.Results.FirstOrDefault( prodCallback => prodCallback.Apps.ContainsKey( 440 ) );
+                SteamApps.PICSProductInfoCallback productInfo = resultSet.Results.FirstOrDefault( prodCallback => prodCallback.Apps.ContainsKey( appid ) );
 
                 if ( productInfo != null )
                 {
@@ -198,7 +213,7 @@ namespace Sample9_AsyncJobs
 
             // lastly, if you're unable to use the async/await pattern (older VS/compiler, etc) you can still directly access the TPL Task associated
             // with the async job by calling `ToTask()`
-            var depotTask = steamApps.GetDepotDecryptionKey( depotid: 441, appid: 440 ).ToTask();
+            var depotTask = steamApps.GetDepotDecryptionKey( depotid, appid ).ToTask();
 
             // set up a continuation for when this task completes
             var ignored = depotTask.ContinueWith( task =>
@@ -212,7 +227,6 @@ namespace Sample9_AsyncJobs
 
             }, TaskContinuationOptions.OnlyOnRanToCompletion );
         }
-        
 
         static void OnLoggedOff( SteamUser.LoggedOffCallback callback )
         {

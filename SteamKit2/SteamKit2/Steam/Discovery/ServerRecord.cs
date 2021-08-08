@@ -31,17 +31,7 @@ namespace SteamKit2.Discovery
         /// <returns>The <see cref="IPAddress"/> of the associated endpoint.</returns>
         public string GetHost()
         {
-            switch (EndPoint)
-            {
-                case IPEndPoint ipep:
-                    return ipep.Address.ToString();
-
-                case DnsEndPoint dns:
-                    return dns.Host;
-
-                default:
-                    throw new InvalidOperationException("Unknown endpoint type.");
-            }
+            return NetHelpers.ExtractEndpointHost( EndPoint ).host;
         }
 
         /// <summary>
@@ -50,17 +40,7 @@ namespace SteamKit2.Discovery
         /// <returns>The port numer of the associated endpoint.</returns>
         public int GetPort()
         {
-            switch (EndPoint)
-            {
-                case IPEndPoint ipep:
-                    return ipep.Port;
-
-                case DnsEndPoint dns:
-                    return dns.Port;
-
-                default:
-                    throw new InvalidOperationException("Unreachable code");
-            }
+            return NetHelpers.ExtractEndpointHost( EndPoint ).port;
         }
 
         /// <summary>

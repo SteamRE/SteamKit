@@ -16,16 +16,10 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamApps : ClientMsgHandler
     {
-
-        // Ambiguous reference in cref attribute: 'SteamApps.PICSGetProductInfo'. Assuming 'SteamKit2.SteamApps.PICSGetProductInfo(uint?, uint?, bool, bool)',
-        // but could have also matched other overloads including 'SteamKit2.SteamApps.PICSGetProductInfo(System.Collections.Generic.IEnumerable<SteamKit2.SteamApps.PICSRequest>, System.Collections.Generic.IEnumerable<SteamKit2.SteamApps.PICSRequest>, bool)'.
-#pragma warning disable 0419
-
         /// <summary>
-        /// Represents a PICS request used for <see cref="SteamApps.PICSGetProductInfo"/>
+        /// Represents a PICS request used for <see cref="o:SteamApps.PICSGetProductInfo"/>
         /// </summary>
-        public sealed class PICSRequest
-#pragma warning restore 0419
+        public struct PICSRequest
         {
             /// <summary>
             /// Gets or sets the ID of the app or package being requested
@@ -37,38 +31,16 @@ namespace SteamKit2
             /// </summary>
             /// <value>The access token</value>
             public ulong AccessToken { get; set; }
-            /// <summary>
-            /// Requests only public app info
-            /// </summary>
-            /// <value>The flag specifying if only public data is requested</value>
-            public bool Public { get; set; }
-
-            /// <summary>
-            /// Instantiate an empty PICS product info request
-            /// </summary>
-            public PICSRequest() : this( 0, 0, true )
-            {
-            }
-
-            /// <summary>
-            ///  Instantiate a PICS product info request for a given app or package id
-            /// </summary>
-            /// <param name="id">App or package ID</param>
-            public PICSRequest( uint id ) : this( id, 0, true )
-            {
-            }
 
             /// <summary>
             /// Instantiate a PICS product info request for a given app or package id and an access token
             /// </summary>
             /// <param name="id">App or package ID</param>
             /// <param name="access_token">PICS access token</param>
-            /// <param name="only_public">Get only public info</param>
-            public PICSRequest( uint id, ulong access_token, bool only_public )
+            public PICSRequest( uint id = 0, ulong access_token = 0 )
             {
                 ID = id;
                 AccessToken = access_token;
-                Public = only_public;
             }
         }
 
@@ -203,35 +175,19 @@ namespace SteamKit2
         /// Results are returned in a <see cref="PICSProductInfoCallback"/> callback.
         /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
-        /// <param name="app">App id requested.</param>
-        /// <param name="package">Package id requested.</param>
-        /// <param name="onlyPublic">Whether to send only public information.</param>
+        /// <param name="app"><see cref="PICSRequest"/> request for an app.</param>
+        /// <param name="package"><see cref="PICSRequest"/> request for a package.</param>
         /// <param name="metaDataOnly">Whether to send only meta data.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSProductInfoCallback"/>.</returns>
-        public AsyncJobMultiple<PICSProductInfoCallback> PICSGetProductInfo(uint? app, uint? package, bool onlyPublic = true, bool metaDataOnly = false)
+        public AsyncJobMultiple<PICSProductInfoCallback> PICSGetProductInfo( PICSRequest? app, PICSRequest? package, bool metaDataOnly = false )
         {
-            List<uint> apps = new List<uint>();
-            List<uint> packages = new List<uint>();
+            var apps = new List<PICSRequest>();
+            var packages = new List<PICSRequest>();
 
             if ( app.HasValue ) apps.Add( app.Value );
             if ( package.HasValue ) packages.Add( package.Value );
 
-            return PICSGetProductInfo( apps, packages, onlyPublic, metaDataOnly );
-        }
-
-        /// <summary>
-        /// Request product information for a list of apps or packages
-        /// Results are returned in a <see cref="PICSProductInfoCallback"/> callback.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
-        /// </summary>
-        /// <param name="apps">List of app ids requested.</param>
-        /// <param name="packages">List of package ids requested.</param>
-        /// <param name="onlyPublic">Whether to send only public information.</param>
-        /// <param name="metaDataOnly">Whether to send only meta data.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSProductInfoCallback"/>.</returns>
-        public AsyncJobMultiple<PICSProductInfoCallback> PICSGetProductInfo( IEnumerable<uint> apps, IEnumerable<uint> packages, bool onlyPublic = true, bool metaDataOnly = false )
-        {
-            return PICSGetProductInfo( apps.Select( app => new PICSRequest( app, 0, onlyPublic ) ), packages.Select( package => new PICSRequest( package ) ), metaDataOnly );
+            return PICSGetProductInfo( apps, packages, metaDataOnly );
         }
 
         /// <summary>
@@ -263,7 +219,7 @@ namespace SteamKit2
                 var appinfo = new CMsgClientPICSProductInfoRequest.AppInfo();
                 appinfo.access_token = app_request.AccessToken;
                 appinfo.appid = app_request.ID;
-                appinfo.only_public_obsolete = app_request.Public;
+                appinfo.only_public_obsolete = false;
 
                 request.Body.apps.Add( appinfo );
             }

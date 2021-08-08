@@ -129,4 +129,5 @@ enum EResult
 	NoLauncherSpecified = 117;
 	MustAgreeToSSA = 118;
 	LauncherMigrated = 119;
+	CurrentSteamRealmDoesNotMatch = 120;
 };

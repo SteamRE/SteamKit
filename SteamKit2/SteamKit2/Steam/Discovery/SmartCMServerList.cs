@@ -206,7 +206,19 @@ namespace SteamKit2.Discovery
         {
             lock ( listLock )
             {
-                var serverInfos = servers.Where( x => x.Record.EndPoint.Equals( endPoint ) && x.Protocol.HasFlagsFast( protocolTypes ) ).ToArray();
+                ServerInfo[] serverInfos;
+                
+                if ( quality == ServerQuality.Good )
+                {
+                    serverInfos = servers.Where( x => x.Record.EndPoint.Equals( endPoint ) && x.Protocol.HasFlagsFast( protocolTypes ) ).ToArray();
+                }
+                else
+                {
+                    // If we're marking this server for any failure, mark all endpoints for the host at the same time
+                    var host = NetHelpers.ExtractEndpointHost( endPoint ).host;
+                    serverInfos = servers.Where( x => x.Record.GetHost().Equals( host )).ToArray();
+                }
+
                 if ( serverInfos.Length == 0 )
                 {
                     return false;
@@ -216,6 +228,7 @@ namespace SteamKit2.Discovery
                 {
                     MarkServerCore( serverInfo, quality );
                 }
+                
                 return true;
             }
         }
