@@ -29,7 +29,7 @@ body:
       description: Please copy and paste the log output from the NetHook2 console window. This will be automatically formatted into code, so no need for backticks.
       render: plain
   - type: textarea
-    id: logs
+    id: code
     attributes:
       label: Example Code
       description: Please copy and paste any relevant code required to understand or reproduce the problem. This will be automatically formatted into code, so no need for backticks.
