@@ -30,6 +30,7 @@ body:
         - label: Linux
         - label: macOS
         - label: Windows
+        - label: Other
   - type: dropdown
     id: dotnet-runtime
     attributes:
@@ -54,6 +55,12 @@ body:
       label: Relevant log output
       description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
       render: shell
+  - type: textarea
+    id: logs
+    attributes:
+      label: Example Code
+      description: Please copy and paste any relevant code required to understand or reproduce the problem. This will be automatically formatted into code, so no need for backticks.
+      render: csharp
   - type: textarea
     id: additional-info
     attributes:
