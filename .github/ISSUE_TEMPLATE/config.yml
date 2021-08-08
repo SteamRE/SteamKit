@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Discussions
+    url: https://github.com/SteamRE/SteamKit/discussions/new
+    about: Please ask and answer questions here.
+  - name: IRC Chat Room
+    url: https://web.libera.chat/#steamre
+    about: For more real-time discussion
