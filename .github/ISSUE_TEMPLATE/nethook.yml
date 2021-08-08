@@ -1,13 +1,13 @@
 name: Bug Report
-description: File a bug report
-title: "[Bug]: "
+description: Problem with NetHook2
+title: "[NetHook2]: "
 labels: [bug, triage]
 assignees: []
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report!
+        Thanks for taking the time to fill out this bug report! Before you proceed, please ensure that you are running the latest NetHook2 code. You can get precompiled DLLs from [GitHub Actions](https://github.com/SteamRE/SteamKit/actions/workflows/steamkit2-build.yaml?query=branch%3Amaster+is%3Asuccess).
   - type: textarea
     id: what-should-have-happened
     attributes:
@@ -22,45 +22,18 @@ body:
       placeholder: ... but instead, what happened was...
     validations:
       required: true
-  - type: dropdown
-    id: operating-system
-    attributes:
-      label: Which operating system are you running on?
-      options:
-        - label: Linux
-        - label: macOS
-        - label: Windows
-        - label: Other
-  - type: dropdown
-    id: dotnet-runtime
-    attributes:
-      label: Which .NET Runtime are you running on?
-      options:
-        - label: .NET Framework
-        - label: .NET Core or .NET 5 or higher.
-        - label: Mono
-        - label: Other
-    validations:
-      required: true
-  - type: input
-    id: dotnet-version
-    attributes:
-      label: Version
-      description: What version of .NET are you running on?
-    validations:
-      required: true
   - type: textarea
     id: logs
     attributes:
       label: Relevant log output
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
-      render: shell
+      description: Please copy and paste the log output from the NetHook2 console window. This will be automatically formatted into code, so no need for backticks.
+      render: plain
   - type: textarea
     id: logs
     attributes:
       label: Example Code
       description: Please copy and paste any relevant code required to understand or reproduce the problem. This will be automatically formatted into code, so no need for backticks.
-      render: csharp
+      render: plain
   - type: textarea
     id: additional-info
     attributes:
