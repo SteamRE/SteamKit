@@ -27,19 +27,19 @@ body:
     attributes:
       label: Which operating system are you running on?
       options:
-        - label: Linux
-        - label: macOS
-        - label: Windows
-        - label: Other
+        - Linux
+        - macOS
+        - Windows
+        - Other
   - type: dropdown
     id: dotnet-runtime
     attributes:
       label: Which .NET Runtime are you running on?
       options:
-        - label: .NET Framework
-        - label: .NET Core or .NET 5 or higher.
-        - label: Mono
-        - label: Other
+        - .NET Framework
+        - .NET Core or .NET 5 or higher.
+        - Mono
+        - Other
     validations:
       required: true
   - type: input
