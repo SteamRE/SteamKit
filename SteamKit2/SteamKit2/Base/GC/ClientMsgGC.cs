@@ -5,6 +5,7 @@
 
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using ProtoBuf;
 using SteamKit2.Internal;
@@ -18,7 +19,7 @@ namespace SteamKit2.GC
     /// Represents a protobuf backed game coordinator message.
     /// </summary>
     /// <typeparam name="TBody">The body type of this message.</typeparam>
-    public sealed class ClientGCMsgProtobuf<TBody> : GCMsgBase<MsgGCHdrProtoBuf>
+    public sealed class ClientGCMsgProtobuf<[DynamicallyAccessedMembers(Trimming.ForProtobufNet)] TBody> : GCMsgBase<MsgGCHdrProtoBuf>
         where TBody : IExtensible, new()
     {
         /// <summary>
@@ -127,14 +128,12 @@ namespace SteamKit2.GC
         /// </returns>
         public override byte[] Serialize()
         {
-            using ( MemoryStream ms = new MemoryStream() )
-            {
-                Header.Serialize( ms );
-                Serializer.Serialize( ms, Body );
-                Payload.WriteTo( ms );
+            using MemoryStream ms = new MemoryStream();
+            Header.Serialize( ms );
+            Serializer.Serialize( ms, Body );
+            Payload.WriteTo( ms );
 
-                return ms.ToArray();
-            }
+            return ms.ToArray();
         }
         /// <summary>
         /// Initializes this gc message by deserializing the specified data.
@@ -147,17 +146,15 @@ namespace SteamKit2.GC
                 throw new ArgumentNullException( nameof(data) );
             }
 
-            using ( MemoryStream ms = new MemoryStream( data ) )
-            {
-                Header.Deserialize( ms );
-                Body = Serializer.Deserialize<TBody>( ms );
+            using MemoryStream ms = new MemoryStream( data );
+            Header.Deserialize( ms );
+            Body = Serializer.Deserialize<TBody>( ms );
 
-                // the rest of the data is the payload
-                int payloadOffset = ( int )ms.Position;
-                int payloadLen = ( int )( ms.Length - ms.Position );
+            // the rest of the data is the payload
+            int payloadOffset = ( int )ms.Position;
+            int payloadLen = ( int )( ms.Length - ms.Position );
 
-                Payload.Write( data, payloadOffset, payloadLen );
-            }
+            Payload.Write( data, payloadOffset, payloadLen );
         }
     }
 
@@ -273,14 +270,12 @@ namespace SteamKit2.GC
         /// </returns>
         public override byte[] Serialize()
         {
-            using ( MemoryStream ms = new MemoryStream() )
-            {
-                Header.Serialize( ms );
-                Body.Serialize( ms );
-                Payload.WriteTo( ms );
+            using MemoryStream ms = new MemoryStream();
+            Header.Serialize( ms );
+            Body.Serialize( ms );
+            Payload.WriteTo( ms );
 
-                return ms.ToArray();
-            }
+            return ms.ToArray();
         }
         /// <summary>
         /// Initializes this gc message by deserializing the specified data.
@@ -293,17 +288,15 @@ namespace SteamKit2.GC
                 throw new ArgumentNullException( nameof(data) );
             }
 
-            using ( MemoryStream ms = new MemoryStream( data ) )
-            {
-                Header.Deserialize( ms );
-                Body.Deserialize( ms );
+            using MemoryStream ms = new MemoryStream( data );
+            Header.Deserialize( ms );
+            Body.Deserialize( ms );
 
-                // the rest of the data is the payload
-                int payloadOffset = ( int )ms.Position;
-                int payloadLen = ( int )( ms.Length - ms.Position );
+            // the rest of the data is the payload
+            int payloadOffset = ( int )ms.Position;
+            int payloadLen = ( int )( ms.Length - ms.Position );
 
-                Payload.Write( data, payloadOffset, payloadLen );
-            }
+            Payload.Write( data, payloadOffset, payloadLen );
         }
     }
 }

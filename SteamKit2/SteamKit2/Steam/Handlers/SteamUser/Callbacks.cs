@@ -148,10 +148,8 @@ namespace SteamKit2
 
                 if ( resp.parental_settings != null )
                 {
-                    using ( var ms = new MemoryStream( resp.parental_settings ) )
-                    {
-                        this.ParentalSettings = Serializer.Deserialize<ParentalSettings>( ms );
-                    }
+                    using var ms = new MemoryStream( resp.parental_settings );
+                    this.ParentalSettings = Serializer.Deserialize<ParentalSettings>( ms );
                 }
             }
 
@@ -487,13 +485,11 @@ namespace SteamKit2
 
                 internal Message( byte[] data )
                 {
-                    using ( var ms = new MemoryStream( data ) )
-                    using ( var br = new BinaryReader( ms ) )
-                    {
-                        ID = br.ReadUInt64();
-                        URL = br.BaseStream.ReadNullTermString( Encoding.UTF8 );
-                        Flags = ( EMarketingMessageFlags )br.ReadUInt32();
-                    }
+                    using var ms = new MemoryStream( data );
+                    using var br = new BinaryReader( ms );
+                    ID = br.ReadUInt64();
+                    URL = br.BaseStream.ReadNullTermString( Encoding.UTF8 );
+                    Flags = ( EMarketingMessageFlags )br.ReadUInt32();
                 }
             }
 

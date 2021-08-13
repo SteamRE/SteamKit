@@ -12,9 +12,9 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
-        sdk: [5.0.x]
-        configuration: [Debug, Release]
+        os: [ windows-latest, macos-latest, ubuntu-latest ]
+        sdk: [ 6.0.x ]
+        configuration: [ Debug, Release ]
       fail-fast: false
 
     runs-on: ${{ matrix.os }}
@@ -26,6 +26,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ matrix.sdk }}
+        include-prerelease: true
 
     - name: Build SteamKit2
       run: dotnet build --configuration ${{ matrix.configuration }} SteamKit2/SteamKit2/SteamKit2.csproj
@@ -61,7 +62,8 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
+        include-prerelease: true
 
     - name: Create NuGet Package
       run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
@@ -83,7 +85,8 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
+        include-prerelease: true
 
     - name: Publish NetHookAnalyzer2
       run: dotnet publish --configuration Release --runtime win-x64 Resources/NetHookAnalyzer2/NetHookAnalyzer2/NetHookAnalyzer2.csproj /p:PublishSingleFile=True /p:PublishTrimmed=True
@@ -99,7 +102,7 @@ jobs:
 
     strategy:
       matrix:
-        configuration: [Debug, Release]
+        configuration: [ Debug, Release ]
       fail-fast: false
 
     runs-on: windows-latest

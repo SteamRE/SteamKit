@@ -68,7 +68,7 @@ namespace SteamKit2
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public KeyValue Call( string func, int version = 1, Dictionary<string, object>? args = null )
+            public KeyValue Call( string func, int version = 1, Dictionary<string, object?>? args = null )
                 => Call( HttpMethod.Get, func, version, args );
 
 
@@ -84,7 +84,7 @@ namespace SteamKit2
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public KeyValue Call( HttpMethod method, string func, int version = 1, Dictionary<string, object>? args = null )
+            public KeyValue Call( HttpMethod method, string func, int version = 1, Dictionary<string, object?>? args = null )
             {
                 var callTask = asyncInterface.CallAsync( method, func, version, args );
 
@@ -147,13 +147,13 @@ namespace SteamKit2
             /// <exception cref="ArgumentOutOfRangeException">
             /// The function version number specified was out of range.
             /// </exception>
-            public override bool TryInvokeMember( InvokeMemberBinder binder, object[] args, out object result )
+            public override bool TryInvokeMember( InvokeMemberBinder binder, object?[]? args, out object? result )
             {
                 bool success = asyncInterface.TryInvokeMember( binder, args, out result );
 
                 if ( success )
                 {
-                    var resultTask = ( Task<KeyValue> )result;
+                    var resultTask = ( Task<KeyValue> )result!;
                     result = resultTask.GetAwaiter().GetResult();
                 }
 
@@ -210,7 +210,7 @@ namespace SteamKit2
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public async Task<KeyValue> CallAsync( HttpMethod method, string func, int version = 1, Dictionary<string, object>? args = null )
+            public async Task<KeyValue> CallAsync( HttpMethod method, string func, int version = 1, Dictionary<string, object?>? args = null )
             {
                 if ( method == null )
                 {
@@ -246,7 +246,7 @@ namespace SteamKit2
                 {
                     paramBuilder.Append( "key=" );
                     paramBuilder.Append( Uri.EscapeDataString( apiKey ) );
-                    paramBuilder.Append( "&" );
+                    paramBuilder.Append( '&' );
                 }
 
                 paramBuilder.Append( "format=vdf" );
@@ -269,7 +269,13 @@ namespace SteamKit2
                                 break;
 
                             default:
-                                paramBuilder.Append( Uri.EscapeDataString( value.ToString() ) );
+                                var valueText = value.ToString();
+                                if (valueText is null)
+                                {
+                                    break;
+                                }
+
+                                paramBuilder.Append( Uri.EscapeDataString( valueText ) );
                                 break;
                         }
                     }
@@ -351,11 +357,12 @@ namespace SteamKit2
             /// <exception cref="ArgumentOutOfRangeException">
             /// The function version number specified was out of range.
             /// </exception>
-            public override bool TryInvokeMember( InvokeMemberBinder binder, object[] args, out object result )
+            public override bool TryInvokeMember( InvokeMemberBinder binder, object?[]? args, out object? result )
             {
-                IDictionary<string, object> methodArgs;
+                IDictionary<string, object?> methodArgs;
+                args ??= Array.Empty<object>();
 
-                if ( args.Length == 1 && binder.CallInfo.ArgumentNames.Count == 0 && args[ 0 ] is IDictionary<string, object> explicitArgs )
+                if ( args.Length == 1 && binder.CallInfo.ArgumentNames.Count == 0 && args[ 0 ] is IDictionary<string, object?> explicitArgs )
                 {
                     methodArgs = explicitArgs;
                 }
@@ -371,7 +378,7 @@ namespace SteamKit2
                             x => args[ x ] );
                 }
 
-                var apiArgs = new Dictionary<string, object>();
+                var apiArgs = new Dictionary<string, object?>();
                 var requestMethod = HttpMethod.Get;
 
                 foreach ( var ( argName, argValue ) in methodArgs )
@@ -379,7 +386,13 @@ namespace SteamKit2
                     // method is a reserved param for selecting the http request method
                     if ( argName.Equals( "method", StringComparison.OrdinalIgnoreCase ) )
                     {
-                        requestMethod = new HttpMethod( argValue.ToString() );
+                        var methodText = argValue?.ToString();
+                        if (methodText is null)
+                        {
+                            throw new ArgumentException( "Argument 'method' must be non-null value." );
+                        }
+
+                        requestMethod = new HttpMethod( methodText );
                         continue;
                     }
                     // flatten lists

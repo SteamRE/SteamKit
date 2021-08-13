@@ -4,6 +4,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using ProtoBuf;
@@ -65,13 +66,11 @@ namespace SteamKit2
             /// </summary>
             /// <typeparam name="T">Protobuf type of the response message.</typeparam>
             /// <returns>The response to the message sent through <see cref="SteamUnifiedMessages"/>.</returns>
-            public T GetDeserializedResponse<T>()
+            public T GetDeserializedResponse< [DynamicallyAccessedMembers(Trimming.ForProtobufNet)] T>()
                 where T : IExtensible
             {
-                using ( var ms = new MemoryStream( ResponseRaw ) )
-                {
-                    return Serializer.Deserialize<T>( ms );
-                }
+                using var ms = new MemoryStream( ResponseRaw );
+                return Serializer.Deserialize<T>( ms );
             }
         }
 
@@ -106,15 +105,20 @@ namespace SteamKit2
             /// </summary>
             public object Body { get; private set; }
 
-
-            internal ServiceMethodNotification( Type messageType, IPacketMsg packetMsg )
+#if NET5_0_OR_GREATER
+            [UnconditionalSuppressMessage( "ReflectionAnalysis", "IL2060", Justification = "Method should be kept available." )]
+#endif
+            internal ServiceMethodNotification( [DynamicallyAccessedMembers(Trimming.ForProtobufNet)] Type messageType, IPacketMsg packetMsg )
             {
                 // Bounce into generic-land.
-                var setupMethod = GetType().GetMethod( nameof(Setup), BindingFlags.Static | BindingFlags.NonPublic ).MakeGenericMethod( messageType );
-                (MethodName, Body) = ((string, object))setupMethod.Invoke( this, new[] { packetMsg } );
+                var setupMethod = GetTypeWithPrivateMethods<ServiceMethodNotification>().GetMethod( nameof(Setup), BindingFlags.Static | BindingFlags.NonPublic )!.MakeGenericMethod( messageType )!;
+                (MethodName, Body) = ((string, object))setupMethod.Invoke( this, new[] { packetMsg } )!;
             }
 
-            static (string methodName, object body) Setup<T>( IPacketMsg packetMsg )
+            [return: DynamicallyAccessedMembers( DynamicallyAccessedMemberTypes.NonPublicMethods )]
+            static Type GetTypeWithPrivateMethods< [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)] T>() => typeof( T );
+
+            static (string methodName, object body) Setup< [DynamicallyAccessedMembers(Trimming.ForProtobufNet)] T>( IPacketMsg packetMsg )
                 where T : IExtensible, new()
             {
                 var clientMsg = new ClientMsgProtobuf<T>( packetMsg );

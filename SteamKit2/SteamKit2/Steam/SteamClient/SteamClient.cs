@@ -355,9 +355,7 @@ namespace SteamKit2
                 return false;
             }
 
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc );
-
-            if ( haveFunc )
+            if ( dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
             {
                 // we want to handle some of the clientmsgs before we pass them along to registered handlers
                 handlerFunc( packetMsg );
@@ -367,7 +365,7 @@ namespace SteamKit2
             foreach ( DictionaryEntry kvp in handlers )
             {
                 var key = (Type) kvp.Key;
-                var value = (ClientMsgHandler) kvp.Value;
+                var value = (ClientMsgHandler) kvp.Value!;
 
                 try
                 {
@@ -381,7 +379,7 @@ namespace SteamKit2
                 }
                 catch ( Exception ex )
                 {
-                    LogDebug( "SteamClient", "Unhandled '{0}' exception from '{1}' handler: '{2}'", ex.GetType().Name, key.Name, ex.Message );
+                    LogDebug( "SteamClient", "Unhandled '{0}' exception from '{1}' handler: '{2}'", ex.GetType().Name, key.Name, ex );
                     Disconnect();
                     return false;
                 }

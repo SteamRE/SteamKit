@@ -83,16 +83,14 @@ namespace Tests
 			var steamClient = new SteamClient();
 			var jobID = steamClient.GetNextJobID();
 
-			using (var process = Process.GetCurrentProcess())
-			{
-				var processStartTime = process.StartTime;
+            using var process = Process.GetCurrentProcess();
+            var processStartTime = process.StartTime;
 
-				// Recreate the datetime to get rid of milliseconds etc. and only keep the important bits
-				var expectedProcessStartTime = new DateTime(processStartTime.Year, processStartTime.Month, processStartTime.Day, processStartTime.Hour, processStartTime.Minute, processStartTime.Second);
+            // Recreate the datetime to get rid of milliseconds etc. and only keep the important bits
+            var expectedProcessStartTime = new DateTime( processStartTime.Year, processStartTime.Month, processStartTime.Day, processStartTime.Hour, processStartTime.Minute, processStartTime.Second );
 
-				Assert.Equal(expectedProcessStartTime, jobID.StartTime);
-			}
-		}
+            Assert.Equal( expectedProcessStartTime, jobID.StartTime );
+        }
 
 		[Fact]
 		public void GetNextJobIDSetsBoxIDToZero()

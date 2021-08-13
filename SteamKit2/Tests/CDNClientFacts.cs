@@ -24,7 +24,13 @@ namespace Tests
             }
             catch (SteamKitWebRequestException ex)
             {
+#if NET5_0_OR_GREATER
+                Assert.Equal((HttpStatusCode)418, ((HttpRequestException)ex).StatusCode);
+#endif
+
+#pragma warning disable CS0618 // Type or member is obsolete
                 Assert.Equal((HttpStatusCode)418, ex.StatusCode);
+#pragma warning restore CS0618 // Type or member is obsolete
             }
         }
 

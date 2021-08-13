@@ -78,7 +78,7 @@ namespace SteamKit2.Discovery
         {
             if (!NetHelpers.TryParseIPEndPoint(address, out var endPoint))
             {
-                serverRecord = default(ServerRecord);
+                serverRecord = default;
                 return false;
             }
 

@@ -12,6 +12,8 @@ using static SteamKit2.Util.MacHelpers.LibC;
 using static SteamKit2.Util.MacHelpers.CoreFoundation;
 using static SteamKit2.Util.MacHelpers.DiskArbitration;
 using static SteamKit2.Util.MacHelpers.IOKit;
+using System.Runtime.Versioning;
+using System.Runtime.InteropServices;
 
 namespace SteamKit2
 {
@@ -19,24 +21,26 @@ namespace SteamKit2
     {
         public static MachineInfoProvider GetProvider()
         {
-            switch ( Environment.OSVersion.Platform )
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                case PlatformID.Win32NT:
-                case PlatformID.Win32Windows:
-                    return new WindowsInfoProvider();
-
-                case PlatformID.Unix:
-                    if ( Utils.IsMacOS() )
-                    {
-                        return new OSXInfoProvider();
-                    }
-                    else
-                    {
-                        return new LinuxInfoProvider();
-                    }
+                return new WindowsInfoProvider();
             }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+#pragma warning disable CA1416 // Validate platform compatibility - BUG: https://github.com/dotnet/roslyn-analyzers/issues/5205
 
-            return new DefaultInfoProvider();
+                return new OSXInfoProvider();
+
+#pragma warning restore CA1416
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                return new LinuxInfoProvider();
+            }
+            else
+            {
+                return new DefaultInfoProvider();
+            }
         }
 
         public abstract byte[] GetMachineGuid();
@@ -81,6 +85,9 @@ namespace SteamKit2
         }
     }
 
+#if NET6_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
     class WindowsInfoProvider : DefaultInfoProvider
     {
         public override byte[] GetMachineGuid()
@@ -96,12 +103,12 @@ namespace SteamKit2
 
             var guid = localKey.GetValue( "MachineGuid" );
 
-            if ( guid == null )
+            if ( guid is { } && guid.ToString() is { } guidText )
             {
-                return base.GetMachineGuid();
+                return Encoding.UTF8.GetBytes( guidText );
             }
 
-            return Encoding.UTF8.GetBytes( guid.ToString() );
+            return base.GetMachineGuid();
         }
 
         public override byte[] GetDiskId()
@@ -117,6 +124,9 @@ namespace SteamKit2
         }
     }
 
+#if NET6_0_OR_GREATER
+    [SupportedOSPlatform("linux")]
+#endif
     class LinuxInfoProvider : DefaultInfoProvider
     {
         public override byte[] GetMachineGuid()
@@ -168,18 +178,19 @@ namespace SteamKit2
                 }
             }
 
-            string[] diskUuids = GetDiskUUIDs();
+            var diskUuids = GetDiskUUIDs();
+            var firstDiskUuid = diskUuids.FirstOrDefault();
 
-            if ( diskUuids.Length > 0 )
+            if ( firstDiskUuid != null )
             {
-                return Encoding.UTF8.GetBytes( diskUuids.FirstOrDefault() );
+                return Encoding.UTF8.GetBytes( firstDiskUuid );
             }
 
             return base.GetDiskId();
         }
 
 
-        string[] GetBootOptions()
+        static string[] GetBootOptions()
         {
             string bootOptions;
 
@@ -189,12 +200,12 @@ namespace SteamKit2
             }
             catch
             {
-                return new string[0];
+                return Array.Empty<string>();
             }
 
             return bootOptions.Split( ' ' );
         }
-        string[] GetDiskUUIDs()
+        static string[] GetDiskUUIDs()
         {
             try
             {
@@ -208,12 +219,12 @@ namespace SteamKit2
             }
             catch
             {
-                return new string[0];
+                return Array.Empty<string>();
             }
         }
-        string? GetParamValue( string[] bootOptions, string param )
+        static string? GetParamValue( string[] bootOptions, string param )
         {
-            string paramString = bootOptions
+            var paramString = bootOptions
                 .FirstOrDefault( p => p.StartsWith( param, StringComparison.OrdinalIgnoreCase ) );
 
             if ( paramString == null )
@@ -223,6 +234,9 @@ namespace SteamKit2
         }
     }
 
+#if NET6_0_OR_GREATER
+    [SupportedOSPlatform( "macos" )]
+#endif
     class OSXInfoProvider : DefaultInfoProvider
     {
         public override byte[] GetMachineGuid()
@@ -232,19 +246,21 @@ namespace SteamKit2
             {
                 try
                 {
-                    using ( var serialNumberKey = CFStringCreateWithCString( CFTypeRef.None, kIOPlatformSerialNumberKey, CFStringEncoding.kCFStringEncodingASCII ) )
+                    using var serialNumberKey = CFStringCreateWithCString( CFTypeRef.None, kIOPlatformSerialNumberKey, CFStringEncoding.kCFStringEncodingASCII );
+                    var serialNumberAsString = IORegistryEntryCreateCFProperty( platformExpert, serialNumberKey, CFTypeRef.None, 0 );
+                    var sb = new StringBuilder( 64 );
+                    if ( CFStringGetCString( serialNumberAsString, sb, sb.Capacity, CFStringEncoding.kCFStringEncodingASCII ) )
                     {
-                        var serialNumberAsString = IORegistryEntryCreateCFProperty( platformExpert, serialNumberKey, CFTypeRef.None, 0 );
-                        var sb = new StringBuilder( 64 );
-                        if ( CFStringGetCString( serialNumberAsString, sb, sb.Capacity, CFStringEncoding.kCFStringEncodingASCII ) )
-                        {
-                            return Encoding.ASCII.GetBytes( sb.ToString() );
-                        }
+                        return Encoding.ASCII.GetBytes( sb.ToString() );
                     }
                 }
                 finally
                 {
+#pragma warning disable CA1806 // Do not ignore method results - There's nothing useful that we can do with the kern_return_t result.
+
                     IOObjectRelease( platformExpert );
+
+#pragma warning restore CA1806
                 }
             }
 
@@ -257,22 +273,18 @@ namespace SteamKit2
             var statted = statfs64( "/", ref stat );
             if ( statted == 0 )
             {
-                using ( var session = DASessionCreate( CFTypeRef.None ) )
-                using ( var disk = DADiskCreateFromBSDName( CFTypeRef.None, session, stat.f_mntfromname ) )
-                using ( var properties = DADiskCopyDescription( disk ) )
-                using ( var key = CFStringCreateWithCString( CFTypeRef.None, DiskArbitration.kDADiskDescriptionMediaUUIDKey, CFStringEncoding.kCFStringEncodingASCII ) )
+                using var session = DASessionCreate( CFTypeRef.None );
+                using var disk = DADiskCreateFromBSDName( CFTypeRef.None, session, stat.f_mntfromname );
+                using var properties = DADiskCopyDescription( disk );
+                using var key = CFStringCreateWithCString( CFTypeRef.None, DiskArbitration.kDADiskDescriptionMediaUUIDKey, CFStringEncoding.kCFStringEncodingASCII );
+                IntPtr cfuuid = IntPtr.Zero;
+                if ( CFDictionaryGetValueIfPresent( properties, key, out cfuuid ) )
                 {
-                    IntPtr cfuuid = IntPtr.Zero;
-                    if ( CFDictionaryGetValueIfPresent( properties, key, out cfuuid ) )
+                    using var uuidString = CFUUIDCreateString( CFTypeRef.None, cfuuid );
+                    var stringBuilder = new StringBuilder( 64 );
+                    if ( CFStringGetCString( uuidString, stringBuilder, stringBuilder.Capacity, CFStringEncoding.kCFStringEncodingASCII ) )
                     {
-                        using ( var uuidString = CFUUIDCreateString( CFTypeRef.None, cfuuid ) )
-                        {
-                            var stringBuilder = new StringBuilder( 64 );
-                            if ( CFStringGetCString( uuidString, stringBuilder, stringBuilder.Capacity, CFStringEncoding.kCFStringEncodingASCII ) )
-                            {
-                                return Encoding.ASCII.GetBytes( stringBuilder.ToString() );
-                            }
-                        }
+                        return Encoding.ASCII.GetBytes( stringBuilder.ToString() );
                     }
                 }
             }
@@ -342,12 +354,10 @@ namespace SteamKit2
 
             MachineID machineId = generateTask.Result;
 
-            using ( MemoryStream ms = new MemoryStream() )
-            {
-                machineId.WriteToStream( ms );
+            using MemoryStream ms = new MemoryStream();
+            machineId.WriteToStream( ms );
 
-                return ms.ToArray();
-            }
+            return ms.ToArray();
         }
 
 

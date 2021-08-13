@@ -54,12 +54,12 @@ namespace SteamKit2
             inner.Send( data );
         }
 
-        void OnConnected( object sender, EventArgs e )
+        void OnConnected( object? sender, EventArgs e )
         {
             state = EncryptionState.Connected;
         }
 
-        void OnDisconnected( object sender, DisconnectedEventArgs e )
+        void OnDisconnected( object? sender, DisconnectedEventArgs e )
         {
             state = EncryptionState.Disconnected;
             encryption = null;
@@ -67,7 +67,7 @@ namespace SteamKit2
             Disconnected?.Invoke( this, e );
         }
 
-        void OnNetMsgReceived( object sender, NetMsgEventArgs e )
+        void OnNetMsgReceived( object? sender, NetMsgEventArgs e )
         {
             if (state == EncryptionState.Encrypted)
             {

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Buffers;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 
@@ -9,6 +11,9 @@ namespace SteamKit2
         [ThreadStatic]
         static byte[]? data;
 
+#if NET5_0_OR_GREATER
+        [MemberNotNull(nameof(data))]
+#endif
         static void EnsureInitialized()
         {
             if ( data == null )
@@ -75,24 +80,22 @@ namespace SteamKit2
         {
             int characterSize = encoding.GetByteCount( "e" );
 
-            using ( MemoryStream ms = new MemoryStream() )
+            using MemoryStream ms = new MemoryStream();
+
+            while ( true )
             {
+                byte[] data = new byte[ characterSize ];
+                stream.Read( data, 0, characterSize );
 
-                while ( true )
+                if ( encoding.GetString( data, 0, characterSize ) == "\0" )
                 {
-                    byte[] data = new byte[ characterSize ];
-                    stream.Read( data, 0, characterSize );
-
-                    if ( encoding.GetString( data, 0, characterSize ) == "\0" )
-                    {
-                        break;
-                    }
-
-                    ms.Write( data, 0, data.Length );
+                    break;
                 }
 
-                return encoding.GetString( ms.GetBuffer(), 0, ( int )ms.Length );
+                ms.Write( data, 0, data.Length );
             }
+
+            return encoding.GetString( ms.GetBuffer(), 0, ( int )ms.Length );
         }
 
         public static void WriteNullTermString( this Stream stream, string value, Encoding encoding )

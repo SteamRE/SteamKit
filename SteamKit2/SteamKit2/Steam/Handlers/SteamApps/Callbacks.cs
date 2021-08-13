@@ -289,16 +289,14 @@ namespace SteamKit2
             {
                 var tempList = new List<uint>();
 
-                using ( var ms = new MemoryStream( payload ) )
-                using ( var br = new BinaryReader( ms ) )
+                using var ms = new MemoryStream( payload );
+                using var br = new BinaryReader( ms );
+                for ( int x = 0; x < msg.NumBans; x++ )
                 {
-                    for ( int x = 0 ; x < msg.NumBans ; x++ )
-                    {
-                        tempList.Add( br.ReadUInt32() );
-                    }
-
-                    BannedApps = new ReadOnlyCollection<uint>( tempList );
+                    tempList.Add( br.ReadUInt32() );
                 }
+
+                BannedApps = new ReadOnlyCollection<uint>( tempList );
             }
         }
 
@@ -493,10 +491,8 @@ namespace SteamKit2
                     if ( app_info.buffer != null && app_info.buffer.Length > 0 )
                     {
                         // we don't want to read the trailing null byte
-                        using ( var ms = new MemoryStream( app_info.buffer, 0, app_info.buffer.Length - 1 ) )
-                        {
-                            this.KeyValues.ReadAsText( ms );
-                        }
+                        using var ms = new MemoryStream( app_info.buffer, 0, app_info.buffer.Length - 1 );
+                        this.KeyValues.ReadAsText( ms );
                     }
 
                     this.OnlyPublic = app_info.only_public;
@@ -525,16 +521,14 @@ namespace SteamKit2
 
                     if ( package_info.buffer != null )
                     {
-                        using ( MemoryStream ms = new MemoryStream( package_info.buffer ) )
-                        using ( var br = new BinaryReader( ms ) )
-                        {
-                            // steamclient checks this value == 1 before it attempts to read the KV from the buffer
-                            // see: CPackageInfo::UpdateFromBuffer(CSHA const&,uint,CUtlBuffer &)
-                            // todo: we've apparently ignored this with zero ill effects, but perhaps we want to respect it?
-                            br.ReadUInt32();
-                            
-                            this.KeyValues.TryReadAsBinary( ms );
-                        }
+                        using MemoryStream ms = new MemoryStream( package_info.buffer );
+                        using var br = new BinaryReader( ms );
+                        // steamclient checks this value == 1 before it attempts to read the KV from the buffer
+                        // see: CPackageInfo::UpdateFromBuffer(CSHA const&,uint,CUtlBuffer &)
+                        // todo: we've apparently ignored this with zero ill effects, but perhaps we want to respect it?
+                        br.ReadUInt32();
+
+                        this.KeyValues.TryReadAsBinary( ms );
                     }
                 }
             }

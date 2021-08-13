@@ -95,7 +95,9 @@ namespace SteamKit2
             }
         }
 
+#if NETSTANDARD
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+#endif
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
@@ -110,14 +112,12 @@ namespace SteamKit2
 
             public AsnKeyParser(String pathname)
             {
-                using (var reader = new BinaryReader(
-                  new FileStream(pathname, FileMode.Open, FileAccess.Read)))
-                {
-                    var info = new FileInfo(pathname);
+            using var reader = new BinaryReader(
+              new FileStream( pathname, FileMode.Open, FileAccess.Read ) );
+            var info = new FileInfo( pathname );
 
-                    _parser = new AsnParser(reader.ReadBytes((int)info.Length));
-                }
-            }
+            _parser = new AsnParser( reader.ReadBytes( ( int )info.Length ) );
+        }
 
             public AsnKeyParser(ICollection<byte> contents)
             {
@@ -401,11 +401,7 @@ namespace SteamKit2
 
                 try
                 {
-#pragma warning disable 168
-#pragma warning disable 219
                     byte b = GetNextOctet();
-#pragma warning restore 219
-#pragma warning restore 168
 
                     int length = GetLength();
                     if (length > RemainingBytes())
