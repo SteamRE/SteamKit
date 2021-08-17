@@ -137,8 +137,10 @@ namespace SteamKit2
             inSeqAcked = 0;
             inSeqHandled = 0;
 
-            netThread = new Thread(NetLoop);
-            netThread.Name = "UdpConnection Thread";
+            netThread = new Thread( NetLoop )
+            {
+                Name = "SK2-UdpConn"
+            };
             netThread.Start(endPoint);
         }
 

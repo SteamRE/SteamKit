@@ -126,8 +126,10 @@ namespace SteamKit2
                     netReader = new BinaryReader(netStream);
                     netWriter = new BinaryWriter(netStream);
 
-                    netThread = new Thread(NetLoop);
-                    netThread.Name = "TcpConnection Thread";
+                    netThread = new Thread( NetLoop )
+                    {
+                        Name = "SK2-TcpConn"
+                    };
 
                     CurrentEndPoint = socket!.RemoteEndPoint;
                 }
