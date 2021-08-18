@@ -18,7 +18,10 @@ namespace Tests
             
             for ( var i = 0; i < threads.Length; i++)
             {
-                threads[i] = new Thread(ThreadStart);
+                threads[ i ] = new Thread( ThreadStart )
+                {
+                    Name = $"SK2-Test-{i}"
+                };
                 threads[i].Start(i);
             }
 
