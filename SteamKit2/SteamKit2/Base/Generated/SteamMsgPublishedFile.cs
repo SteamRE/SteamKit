@@ -2780,6 +2780,12 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(42)]
         public global::System.Collections.Generic.List<TagGroup> taggroups { get; } = new global::System.Collections.Generic.List<TagGroup>();
 
+        [global::ProtoBuf.ProtoMember(44)]
+        public DateRange date_range_created { get; set; }
+
+        [global::ProtoBuf.ProtoMember(45)]
+        public DateRange date_range_updated { get; set; }
+
         [global::ProtoBuf.ProtoMember(16)]
         public bool totalonly
         {
@@ -2973,6 +2979,35 @@ namespace SteamKit2.Internal
 
             [global::ProtoBuf.ProtoMember(1)]
             public global::System.Collections.Generic.List<string> tags { get; } = new global::System.Collections.Generic.List<string>();
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class DateRange : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint timestamp_start
+            {
+                get => __pbn__timestamp_start.GetValueOrDefault();
+                set => __pbn__timestamp_start = value;
+            }
+            public bool ShouldSerializetimestamp_start() => __pbn__timestamp_start != null;
+            public void Resettimestamp_start() => __pbn__timestamp_start = null;
+            private uint? __pbn__timestamp_start;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint timestamp_end
+            {
+                get => __pbn__timestamp_end.GetValueOrDefault();
+                set => __pbn__timestamp_end = value;
+            }
+            public bool ShouldSerializetimestamp_end() => __pbn__timestamp_end != null;
+            public void Resettimestamp_end() => __pbn__timestamp_end = null;
+            private uint? __pbn__timestamp_end;
 
         }
 

@@ -3744,6 +3744,79 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCHAppCheersReceived : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<CheerTarget> cheer_targets { get; } = new global::System.Collections.Generic.List<CheerTarget>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class CheerTypeAmount : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint cheer_type
+            {
+                get => __pbn__cheer_type.GetValueOrDefault();
+                set => __pbn__cheer_type = value;
+            }
+            public bool ShouldSerializecheer_type() => __pbn__cheer_type != null;
+            public void Resetcheer_type() => __pbn__cheer_type = null;
+            private uint? __pbn__cheer_type;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint cheer_amount
+            {
+                get => __pbn__cheer_amount.GetValueOrDefault();
+                set => __pbn__cheer_amount = value;
+            }
+            public bool ShouldSerializecheer_amount() => __pbn__cheer_amount != null;
+            public void Resetcheer_amount() => __pbn__cheer_amount = null;
+            private uint? __pbn__cheer_amount;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class CheerTarget : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public ulong cheer_target
+            {
+                get => __pbn__cheer_target.GetValueOrDefault();
+                set => __pbn__cheer_target = value;
+            }
+            public bool ShouldSerializecheer_target() => __pbn__cheer_target != null;
+            public void Resetcheer_target() => __pbn__cheer_target = null;
+            private ulong? __pbn__cheer_target;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public global::System.Collections.Generic.List<CMsgGCHAppCheersReceived.CheerTypeAmount> cheer_types { get; } = new global::System.Collections.Generic.List<CMsgGCHAppCheersReceived.CheerTypeAmount>();
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CGCSystemMsg_ReportExternalPurchase_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;

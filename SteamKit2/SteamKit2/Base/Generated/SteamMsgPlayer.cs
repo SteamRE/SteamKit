@@ -3384,6 +3384,26 @@ namespace SteamKit2.Internal
         public void Resetseconds_allowed_today() => __pbn__seconds_allowed_today = null;
         private uint? __pbn__seconds_allowed_today;
 
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool age_verification_pending
+        {
+            get => __pbn__age_verification_pending.GetValueOrDefault();
+            set => __pbn__age_verification_pending = value;
+        }
+        public bool ShouldSerializeage_verification_pending() => __pbn__age_verification_pending != null;
+        public void Resetage_verification_pending() => __pbn__age_verification_pending = null;
+        private bool? __pbn__age_verification_pending;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public bool block_minors
+        {
+            get => __pbn__block_minors.GetValueOrDefault();
+            set => __pbn__block_minors = value;
+        }
+        public bool ShouldSerializeblock_minors() => __pbn__block_minors != null;
+        public void Resetblock_minors() => __pbn__block_minors = null;
+        private bool? __pbn__block_minors;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

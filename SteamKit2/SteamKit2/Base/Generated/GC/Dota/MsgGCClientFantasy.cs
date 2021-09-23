@@ -160,6 +160,17 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(16)]
         public global::System.Collections.Generic.List<AuditEntry> audit_entries { get; } = new global::System.Collections.Generic.List<AuditEntry>();
 
+        [global::ProtoBuf.ProtoMember(17)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string team_abbreviation
+        {
+            get => __pbn__team_abbreviation ?? "";
+            set => __pbn__team_abbreviation = value;
+        }
+        public bool ShouldSerializeteam_abbreviation() => __pbn__team_abbreviation != null;
+        public void Resetteam_abbreviation() => __pbn__team_abbreviation = null;
+        private string __pbn__team_abbreviation;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Results : global::ProtoBuf.IExtensible
         {

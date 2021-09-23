@@ -1148,6 +1148,31 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToGCBetaDeleteItems : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint account_id
+        {
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
+        }
+        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+        public void Resetaccount_id() => __pbn__account_id = null;
+        private uint? __pbn__account_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<ulong> item_ids { get; } = new global::System.Collections.Generic.List<ulong>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<uint> item_defs { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgGCToGCGrantSelfMadeItemToAccount : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -4626,6 +4651,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGCToGCPurchaseSucceeded = 2608,
         k_EMsgClientToGCGetLimitedItemPurchaseQuantity = 2609,
         k_EMsgClientToGCGetLimitedItemPurchaseQuantityResponse = 2610,
+        k_EMsgGCToGCBetaDeleteItems = 2611,
     }
 
     [global::ProtoBuf.ProtoContract()]

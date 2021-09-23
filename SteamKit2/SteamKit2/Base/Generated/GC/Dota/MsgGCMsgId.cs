@@ -976,6 +976,10 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgServerToGCCompendiumChosenInGamePredictions = 8809,
         k_EMsgClientToGCCreateTeamPlayerCardPack = 8810,
         k_EMsgClientToGCCreateTeamPlayerCardPackResponse = 8811,
+        k_EMsgGCToServerSubmitCheerData = 8812,
+        k_EMsgGCToServerCheerConfig = 8813,
+        k_EMsgServerToGCGetCheerConfig = 8814,
+        k_EMsgServerToGCGetCheerConfigResponse = 8815,
     }
 
 }

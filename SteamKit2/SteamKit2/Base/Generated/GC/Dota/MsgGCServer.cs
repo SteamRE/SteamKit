@@ -8912,6 +8912,197 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToServerCheerData : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint radiant_cheers
+        {
+            get => __pbn__radiant_cheers.GetValueOrDefault();
+            set => __pbn__radiant_cheers = value;
+        }
+        public bool ShouldSerializeradiant_cheers() => __pbn__radiant_cheers != null;
+        public void Resetradiant_cheers() => __pbn__radiant_cheers = null;
+        private uint? __pbn__radiant_cheers;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint dire_cheers
+        {
+            get => __pbn__dire_cheers.GetValueOrDefault();
+            set => __pbn__dire_cheers = value;
+        }
+        public bool ShouldSerializedire_cheers() => __pbn__dire_cheers != null;
+        public void Resetdire_cheers() => __pbn__dire_cheers = null;
+        private uint? __pbn__dire_cheers;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint radiant_premium_cheers
+        {
+            get => __pbn__radiant_premium_cheers.GetValueOrDefault();
+            set => __pbn__radiant_premium_cheers = value;
+        }
+        public bool ShouldSerializeradiant_premium_cheers() => __pbn__radiant_premium_cheers != null;
+        public void Resetradiant_premium_cheers() => __pbn__radiant_premium_cheers = null;
+        private uint? __pbn__radiant_premium_cheers;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint dire_premium_cheers
+        {
+            get => __pbn__dire_premium_cheers.GetValueOrDefault();
+            set => __pbn__dire_premium_cheers = value;
+        }
+        public bool ShouldSerializedire_premium_cheers() => __pbn__dire_premium_cheers != null;
+        public void Resetdire_premium_cheers() => __pbn__dire_premium_cheers = null;
+        private uint? __pbn__dire_premium_cheers;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgCheerConfig : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool cheers_enabled
+        {
+            get => __pbn__cheers_enabled.GetValueOrDefault();
+            set => __pbn__cheers_enabled = value;
+        }
+        public bool ShouldSerializecheers_enabled() => __pbn__cheers_enabled != null;
+        public void Resetcheers_enabled() => __pbn__cheers_enabled = null;
+        private bool? __pbn__cheers_enabled;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool is_valid_league_id
+        {
+            get => __pbn__is_valid_league_id.GetValueOrDefault();
+            set => __pbn__is_valid_league_id = value;
+        }
+        public bool ShouldSerializeis_valid_league_id() => __pbn__is_valid_league_id != null;
+        public void Resetis_valid_league_id() => __pbn__is_valid_league_id = null;
+        private bool? __pbn__is_valid_league_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public float window_duration
+        {
+            get => __pbn__window_duration.GetValueOrDefault();
+            set => __pbn__window_duration = value;
+        }
+        public bool ShouldSerializewindow_duration() => __pbn__window_duration != null;
+        public void Resetwindow_duration() => __pbn__window_duration = null;
+        private float? __pbn__window_duration;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint window_bucket_count
+        {
+            get => __pbn__window_bucket_count.GetValueOrDefault();
+            set => __pbn__window_bucket_count = value;
+        }
+        public bool ShouldSerializewindow_bucket_count() => __pbn__window_bucket_count != null;
+        public void Resetwindow_bucket_count() => __pbn__window_bucket_count = null;
+        private uint? __pbn__window_bucket_count;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public float premium_value
+        {
+            get => __pbn__premium_value.GetValueOrDefault();
+            set => __pbn__premium_value = value;
+        }
+        public bool ShouldSerializepremium_value() => __pbn__premium_value != null;
+        public void Resetpremium_value() => __pbn__premium_value = null;
+        private float? __pbn__premium_value;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public float crowd_level_push_time
+        {
+            get => __pbn__crowd_level_push_time.GetValueOrDefault();
+            set => __pbn__crowd_level_push_time = value;
+        }
+        public bool ShouldSerializecrowd_level_push_time() => __pbn__crowd_level_push_time != null;
+        public void Resetcrowd_level_push_time() => __pbn__crowd_level_push_time = null;
+        private float? __pbn__crowd_level_push_time;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public float initial_high_crowd_level
+        {
+            get => __pbn__initial_high_crowd_level.GetValueOrDefault();
+            set => __pbn__initial_high_crowd_level = value;
+        }
+        public bool ShouldSerializeinitial_high_crowd_level() => __pbn__initial_high_crowd_level != null;
+        public void Resetinitial_high_crowd_level() => __pbn__initial_high_crowd_level = null;
+        private float? __pbn__initial_high_crowd_level;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public float minimum_high_crowd_level
+        {
+            get => __pbn__minimum_high_crowd_level.GetValueOrDefault();
+            set => __pbn__minimum_high_crowd_level = value;
+        }
+        public bool ShouldSerializeminimum_high_crowd_level() => __pbn__minimum_high_crowd_level != null;
+        public void Resetminimum_high_crowd_level() => __pbn__minimum_high_crowd_level = null;
+        private float? __pbn__minimum_high_crowd_level;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public float crowd_level_decay
+        {
+            get => __pbn__crowd_level_decay.GetValueOrDefault();
+            set => __pbn__crowd_level_decay = value;
+        }
+        public bool ShouldSerializecrowd_level_decay() => __pbn__crowd_level_decay != null;
+        public void Resetcrowd_level_decay() => __pbn__crowd_level_decay = null;
+        private float? __pbn__crowd_level_decay;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToServerCheerConfig : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgCheerConfig cheer_config { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgServerToGCGetCheerConfig : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint league_id
+        {
+            get => __pbn__league_id.GetValueOrDefault();
+            set => __pbn__league_id = value;
+        }
+        public bool ShouldSerializeleague_id() => __pbn__league_id != null;
+        public void Resetleague_id() => __pbn__league_id = null;
+        private uint? __pbn__league_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgServerToGCGetCheerConfigResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgCheerConfig cheer_config { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EPoorNetworkConditionsType
     {
         k_EPoorNetworkConditions_None = 0,
