@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using SteamKit2.Discovery;
 
 namespace SteamKit2
 {
@@ -78,53 +77,39 @@ namespace SteamKit2
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            var response = await directory.CallAsync( HttpMethod.Get, "GetServersForSteamPipe", version: 1, args: args ).ConfigureAwait( false );
-
-            var result = ( EResult )response[ "result" ].AsInteger( ( int )EResult.OK );
-            if ( result != EResult.OK || response["servers"] == KeyValue.Invalid )
-            {
-                throw new InvalidOperationException( string.Format( "Steam Web API returned EResult.{0}", result ) );
-            }
-
-            var serverList = response[ "servers" ];
+            var response = await directory.CallAsync<Internal.CContentServerDirectory_GetServersForSteamPipe_Response>( HttpMethod.Get, "GetServersForSteamPipe", version: 1, args: args ).ConfigureAwait( false );
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            var serverRecords = new List<CDNClient.Server>( capacity: serverList.Children.Count );
+            var serverRecords = new List<CDNClient.Server>( capacity: response.servers.Count );
 
-            foreach ( var child in serverList.Children )
+            foreach ( var child in response.servers )
             {
-                var httpsSupport = child[ "https_support" ].AsString();
+                var httpsSupport = child.https_support;
                 var protocol = httpsSupport == "mandatory" ? CDNClient.Server.ConnectionProtocol.HTTPS : CDNClient.Server.ConnectionProtocol.HTTP;
-
-                uint[]? allowedAppIds = null;
-                var allowedAppsNode = child[ "allowed_app_ids" ];
-                if ( allowedAppsNode != KeyValue.Invalid )
-                {
-                    allowedAppIds = allowedAppsNode.Children.Select( entry => entry.AsUnsignedInteger() ).ToArray();
-                }
 
                 serverRecords.Add( new CDNClient.Server
                 {
                     Protocol = protocol,
-                    Host = child[ "host" ].AsString(),
-                    VHost = child[ "vhost" ].AsString(),
+                    Host = child.host,
+                    VHost = child.vhost,
                     Port = protocol == CDNClient.Server.ConnectionProtocol.HTTPS ? 443 : 80,
 
-                    Type = child[ "type" ].AsString(),
-                    SourceID = child[ "source_id"].AsInteger(),
-                    CellID = (uint)child[ "cell_id" ].AsInteger(),
+                    Type = child.type,
+                    SourceID = child.source_id,
+                    CellID = ( uint )child.cell_id,
 
-                    Load = child[ "load" ].AsInteger(),
-                    WeightedLoad = child[ "weighted_load" ].AsInteger(),
-                    NumEntries = child[ "num_entries_in_client_list" ].AsInteger( 1 ),
-                    PreferredServer = child[ "preferred_server" ].AsBoolean(),
+                    Load = child.load,
+                    WeightedLoad = ( int )child.weighted_load, // TODO: it's a float
+                    NumEntries = child.num_entries_in_client_list,
+                    PreferredServer = child.preferred_server,
+                    SteamChinaOnly = child.steam_china_only,
 
-                    UseAsProxy = child[ "use_as_proxy" ].AsBoolean(),
-                    ProxyRequestPathTemplate = child[ "proxy_request_path_template" ].AsString(),
+                    UseAsProxy = child.use_as_proxy,
+                    ProxyRequestPathTemplate = child.proxy_request_path_template,
 
-                    AllowedAppIds = allowedAppIds
-                } 
+                    AllowedAppIds = child.allowed_app_ids.ToArray(),
+                }
                 );
             }
 
