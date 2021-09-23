@@ -73,6 +73,9 @@ namespace ProtobufGen
                     continue;
                 }
 
+                var dir = Path.GetDirectoryName( arguments.Output );
+                Directory.CreateDirectory( dir );
+
                 File.WriteAllText( arguments.Output, file.Text );
             }
 
