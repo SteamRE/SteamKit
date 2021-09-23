@@ -22,6 +22,7 @@ steam,steammessages_clientserver_ufs.proto,SteamMsgClientServerUFS.cs,SteamKit2.
 steam,steammessages_clientserver_userstats.proto,SteamMsgClientServerUserStats.cs,SteamKit2.Internal
 steam,steammessages_clientnotificationtypes.proto,SteamMsgClientNotificationTypes.cs,SteamKit2.Internal
 steam,steammessages_cloud.steamclient.proto,SteamMsgCloud.cs,SteamKit2.Internal
+steam,steammessages_contentsystem.steamclient.proto,SteamMsgContentSystem.cs,SteamKit2.Internal
 steam,steammessages_credentials.steamclient.proto,SteamMsgCredentials.cs,SteamKit2.Internal
 steam,steammessages_datapublisher.steamclient.proto,SteamMsgDataPublisher.cs,SteamKit2.Internal
 steam,steammessages_depotbuilder.steamclient.proto,SteamMsgDepotBuilder.cs,SteamKit2.Internal
