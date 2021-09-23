@@ -239,6 +239,207 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationSystemUpdate : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(ESystemUpdateNotificationType.k_ESystemUpdateNotificationType_Invalid)]
+        public ESystemUpdateNotificationType type
+        {
+            get => __pbn__type ?? ESystemUpdateNotificationType.k_ESystemUpdateNotificationType_Invalid;
+            set => __pbn__type = value;
+        }
+        public bool ShouldSerializetype() => __pbn__type != null;
+        public void Resettype() => __pbn__type = null;
+        private ESystemUpdateNotificationType? __pbn__type;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationFriendMessage : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string tag
+        {
+            get => __pbn__tag ?? "";
+            set => __pbn__tag = value;
+        }
+        public bool ShouldSerializetag() => __pbn__tag != null;
+        public void Resettag() => __pbn__tag = null;
+        private string __pbn__tag;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string steamid
+        {
+            get => __pbn__steamid ?? "";
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private string __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string title
+        {
+            get => __pbn__title ?? "";
+            set => __pbn__title = value;
+        }
+        public bool ShouldSerializetitle() => __pbn__title != null;
+        public void Resettitle() => __pbn__title = null;
+        private string __pbn__title;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string body
+        {
+            get => __pbn__body ?? "";
+            set => __pbn__body = value;
+        }
+        public bool ShouldSerializebody() => __pbn__body != null;
+        public void Resetbody() => __pbn__body = null;
+        private string __pbn__body;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string icon
+        {
+            get => __pbn__icon ?? "";
+            set => __pbn__icon = value;
+        }
+        public bool ShouldSerializeicon() => __pbn__icon != null;
+        public void Reseticon() => __pbn__icon = null;
+        private string __pbn__icon;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint notificationid
+        {
+            get => __pbn__notificationid.GetValueOrDefault();
+            set => __pbn__notificationid = value;
+        }
+        public bool ShouldSerializenotificationid() => __pbn__notificationid != null;
+        public void Resetnotificationid() => __pbn__notificationid = null;
+        private uint? __pbn__notificationid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationGroupChatMessage : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string tag
+        {
+            get => __pbn__tag ?? "";
+            set => __pbn__tag = value;
+        }
+        public bool ShouldSerializetag() => __pbn__tag != null;
+        public void Resettag() => __pbn__tag = null;
+        private string __pbn__tag;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string steamid_sender
+        {
+            get => __pbn__steamid_sender ?? "";
+            set => __pbn__steamid_sender = value;
+        }
+        public bool ShouldSerializesteamid_sender() => __pbn__steamid_sender != null;
+        public void Resetsteamid_sender() => __pbn__steamid_sender = null;
+        private string __pbn__steamid_sender;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string chat_group_id
+        {
+            get => __pbn__chat_group_id ?? "";
+            set => __pbn__chat_group_id = value;
+        }
+        public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
+        public void Resetchat_group_id() => __pbn__chat_group_id = null;
+        private string __pbn__chat_group_id;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string chat_id
+        {
+            get => __pbn__chat_id ?? "";
+            set => __pbn__chat_id = value;
+        }
+        public bool ShouldSerializechat_id() => __pbn__chat_id != null;
+        public void Resetchat_id() => __pbn__chat_id = null;
+        private string __pbn__chat_id;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string title
+        {
+            get => __pbn__title ?? "";
+            set => __pbn__title = value;
+        }
+        public bool ShouldSerializetitle() => __pbn__title != null;
+        public void Resettitle() => __pbn__title = null;
+        private string __pbn__title;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string body
+        {
+            get => __pbn__body ?? "";
+            set => __pbn__body = value;
+        }
+        public bool ShouldSerializebody() => __pbn__body != null;
+        public void Resetbody() => __pbn__body = null;
+        private string __pbn__body;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string rawbody
+        {
+            get => __pbn__rawbody ?? "";
+            set => __pbn__rawbody = value;
+        }
+        public bool ShouldSerializerawbody() => __pbn__rawbody != null;
+        public void Resetrawbody() => __pbn__rawbody = null;
+        private string __pbn__rawbody;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string icon
+        {
+            get => __pbn__icon ?? "";
+            set => __pbn__icon = value;
+        }
+        public bool ShouldSerializeicon() => __pbn__icon != null;
+        public void Reseticon() => __pbn__icon = null;
+        private string __pbn__icon;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public uint notificationid
+        {
+            get => __pbn__notificationid.GetValueOrDefault();
+            set => __pbn__notificationid = value;
+        }
+        public bool ShouldSerializenotificationid() => __pbn__notificationid != null;
+        public void Resetnotificationid() => __pbn__notificationid = null;
+        private uint? __pbn__notificationid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EClientNotificationType
     {
         k_EClientNotificationType_Invalid = 0,
@@ -248,6 +449,17 @@ namespace SteamKit2.Internal
         k_EClientNotificationType_FriendOnline = 4,
         k_EClientNotificationType_Achievement = 5,
         k_EClientNotificationType_LowBattery = 6,
+        k_EClientNotificationType_SystemUpdate = 7,
+        k_EClientNotificationType_FriendMessage = 8,
+        k_EClientNotificationType_GroupChatMessage = 9,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESystemUpdateNotificationType
+    {
+        k_ESystemUpdateNotificationType_Invalid = 0,
+        k_ESystemUpdateNotificationType_Available = 1,
+        k_ESystemUpdateNotificationType_NeedsRestart = 2,
     }
 
 }

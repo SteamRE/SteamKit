@@ -8021,6 +8021,25 @@ namespace SteamKit2.GC.TF2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSDRTicket : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public byte[] serialized_ticket
+        {
+            get => __pbn__serialized_ticket;
+            set => __pbn__serialized_ticket = value;
+        }
+        public bool ShouldSerializeserialized_ticket() => __pbn__serialized_ticket != null;
+        public void Resetserialized_ticket() => __pbn__serialized_ticket = null;
+        private byte[] __pbn__serialized_ticket;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ETFGCMsg
     {
         k_EMsgGCReportWarKill = 5001,
@@ -8184,6 +8203,7 @@ namespace SteamKit2.GC.TF2.Internal
         k_EMsgGCQuestStrangeEvent = 6577,
         k_EMsgGC_AcceptLobbyInvite = 6578,
         k_EMsgGC_AcceptLobbyInviteReply = 6579,
+        k_EMsgGC_SDRTicket = 6580,
         k_EMsgGC_ProcessMatchVoteKick = 6581,
         k_EMsgGC_ProcessMatchVoteKickResponse = 6582,
         k_EMsgGCDev_GrantWarKill = 10001,

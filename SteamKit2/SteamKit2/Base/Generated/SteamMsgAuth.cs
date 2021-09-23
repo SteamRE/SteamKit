@@ -10,6 +10,67 @@ namespace SteamKit2.Internal
 {
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_GetPasswordRSAPublicKey_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string account_name
+        {
+            get => __pbn__account_name ?? "";
+            set => __pbn__account_name = value;
+        }
+        public bool ShouldSerializeaccount_name() => __pbn__account_name != null;
+        public void Resetaccount_name() => __pbn__account_name = null;
+        private string __pbn__account_name;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_GetPasswordRSAPublicKey_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string publickey_mod
+        {
+            get => __pbn__publickey_mod ?? "";
+            set => __pbn__publickey_mod = value;
+        }
+        public bool ShouldSerializepublickey_mod() => __pbn__publickey_mod != null;
+        public void Resetpublickey_mod() => __pbn__publickey_mod = null;
+        private string __pbn__publickey_mod;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string publickey_exp
+        {
+            get => __pbn__publickey_exp ?? "";
+            set => __pbn__publickey_exp = value;
+        }
+        public bool ShouldSerializepublickey_exp() => __pbn__publickey_exp != null;
+        public void Resetpublickey_exp() => __pbn__publickey_exp = null;
+        private string __pbn__publickey_exp;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong timestamp
+        {
+            get => __pbn__timestamp.GetValueOrDefault();
+            set => __pbn__timestamp = value;
+        }
+        public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
+        public void Resettimestamp() => __pbn__timestamp = null;
+        private ulong? __pbn__timestamp;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CAuthentication_BeginAuthSessionViaQR_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -26,6 +87,48 @@ namespace SteamKit2.Internal
         public bool ShouldSerializedevice_friendly_name() => __pbn__device_friendly_name != null;
         public void Resetdevice_friendly_name() => __pbn__device_friendly_name = null;
         private string __pbn__device_friendly_name;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(EAuthTokenPlatformType.k_EAuthTokenPlatformType_Unknown)]
+        public EAuthTokenPlatformType platform_type
+        {
+            get => __pbn__platform_type ?? EAuthTokenPlatformType.k_EAuthTokenPlatformType_Unknown;
+            set => __pbn__platform_type = value;
+        }
+        public bool ShouldSerializeplatform_type() => __pbn__platform_type != null;
+        public void Resetplatform_type() => __pbn__platform_type = null;
+        private EAuthTokenPlatformType? __pbn__platform_type;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_AllowedConfirmation : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EAuthSessionGuardType.k_EAuthSessionGuardType_Unknown)]
+        public EAuthSessionGuardType confirmation_type
+        {
+            get => __pbn__confirmation_type ?? EAuthSessionGuardType.k_EAuthSessionGuardType_Unknown;
+            set => __pbn__confirmation_type = value;
+        }
+        public bool ShouldSerializeconfirmation_type() => __pbn__confirmation_type != null;
+        public void Resetconfirmation_type() => __pbn__confirmation_type = null;
+        private EAuthSessionGuardType? __pbn__confirmation_type;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string associated_message
+        {
+            get => __pbn__associated_message ?? "";
+            set => __pbn__associated_message = value;
+        }
+        public bool ShouldSerializeassociated_message() => __pbn__associated_message != null;
+        public void Resetassociated_message() => __pbn__associated_message = null;
+        private string __pbn__associated_message;
 
     }
 
@@ -78,7 +181,17 @@ namespace SteamKit2.Internal
         private float? __pbn__interval;
 
         [global::ProtoBuf.ProtoMember(5)]
-        public global::System.Collections.Generic.List<EAuthSessionGuardType> allowed_confirmations { get; } = new global::System.Collections.Generic.List<EAuthSessionGuardType>();
+        public global::System.Collections.Generic.List<CAuthentication_AllowedConfirmation> allowed_confirmations { get; } = new global::System.Collections.Generic.List<CAuthentication_AllowedConfirmation>();
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public int version
+        {
+            get => __pbn__version.GetValueOrDefault();
+            set => __pbn__version = value;
+        }
+        public bool ShouldSerializeversion() => __pbn__version != null;
+        public void Resetversion() => __pbn__version = null;
+        private int? __pbn__version;
 
     }
 
@@ -142,6 +255,17 @@ namespace SteamKit2.Internal
         public void Resetremember_login() => __pbn__remember_login = null;
         private bool? __pbn__remember_login;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue(EAuthTokenPlatformType.k_EAuthTokenPlatformType_Unknown)]
+        public EAuthTokenPlatformType platform_type
+        {
+            get => __pbn__platform_type ?? EAuthTokenPlatformType.k_EAuthTokenPlatformType_Unknown;
+            set => __pbn__platform_type = value;
+        }
+        public bool ShouldSerializeplatform_type() => __pbn__platform_type != null;
+        public void Resetplatform_type() => __pbn__platform_type = null;
+        private EAuthTokenPlatformType? __pbn__platform_type;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -182,7 +306,7 @@ namespace SteamKit2.Internal
         private float? __pbn__interval;
 
         [global::ProtoBuf.ProtoMember(4)]
-        public global::System.Collections.Generic.List<EAuthSessionGuardType> allowed_confirmations { get; } = new global::System.Collections.Generic.List<EAuthSessionGuardType>();
+        public global::System.Collections.Generic.List<CAuthentication_AllowedConfirmation> allowed_confirmations { get; } = new global::System.Collections.Generic.List<CAuthentication_AllowedConfirmation>();
 
         [global::ProtoBuf.ProtoMember(5)]
         public ulong steamid
@@ -264,6 +388,17 @@ namespace SteamKit2.Internal
         public void Resetrefresh_token() => __pbn__refresh_token = null;
         private string __pbn__refresh_token;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string access_token
+        {
+            get => __pbn__access_token ?? "";
+            set => __pbn__access_token = value;
+        }
+        public bool ShouldSerializeaccess_token() => __pbn__access_token != null;
+        public void Resetaccess_token() => __pbn__access_token = null;
+        private string __pbn__access_token;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -313,6 +448,61 @@ namespace SteamKit2.Internal
         public bool ShouldSerializegeoloc() => __pbn__geoloc != null;
         public void Resetgeoloc() => __pbn__geoloc = null;
         private string __pbn__geoloc;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string city
+        {
+            get => __pbn__city ?? "";
+            set => __pbn__city = value;
+        }
+        public bool ShouldSerializecity() => __pbn__city != null;
+        public void Resetcity() => __pbn__city = null;
+        private string __pbn__city;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string state
+        {
+            get => __pbn__state ?? "";
+            set => __pbn__state = value;
+        }
+        public bool ShouldSerializestate() => __pbn__state != null;
+        public void Resetstate() => __pbn__state = null;
+        private string __pbn__state;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string country
+        {
+            get => __pbn__country ?? "";
+            set => __pbn__country = value;
+        }
+        public bool ShouldSerializecountry() => __pbn__country != null;
+        public void Resetcountry() => __pbn__country = null;
+        private string __pbn__country;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue(EAuthTokenPlatformType.k_EAuthTokenPlatformType_Unknown)]
+        public EAuthTokenPlatformType platform_type
+        {
+            get => __pbn__platform_type ?? EAuthTokenPlatformType.k_EAuthTokenPlatformType_Unknown;
+            set => __pbn__platform_type = value;
+        }
+        public bool ShouldSerializeplatform_type() => __pbn__platform_type != null;
+        public void Resetplatform_type() => __pbn__platform_type = null;
+        private EAuthTokenPlatformType? __pbn__platform_type;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string device_friendly_name
+        {
+            get => __pbn__device_friendly_name ?? "";
+            set => __pbn__device_friendly_name = value;
+        }
+        public bool ShouldSerializedevice_friendly_name() => __pbn__device_friendly_name != null;
+        public void Resetdevice_friendly_name() => __pbn__device_friendly_name = null;
+        private string __pbn__device_friendly_name;
 
     }
 
@@ -570,6 +760,15 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public enum EAuthTokenPlatformType
+    {
+        k_EAuthTokenPlatformType_Unknown = 0,
+        k_EAuthTokenPlatformType_SteamClient = 1,
+        k_EAuthTokenPlatformType_WebBrowser = 2,
+        k_EAuthTokenPlatformType_MobileApp = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EAuthSessionGuardType
     {
         k_EAuthSessionGuardType_Unknown = 0,
@@ -582,6 +781,7 @@ namespace SteamKit2.Internal
 
     public interface IAuthentication
     {
+        CAuthentication_GetPasswordRSAPublicKey_Response GetPasswordRSAPublicKey(CAuthentication_GetPasswordRSAPublicKey_Request request);
         CAuthentication_BeginAuthSessionViaQR_Response BeginAuthSessionViaQR(CAuthentication_BeginAuthSessionViaQR_Request request);
         CAuthentication_BeginAuthSessionViaCredentials_Response BeginAuthSessionViaCredentials(CAuthentication_BeginAuthSessionViaCredentials_Request request);
         CAuthentication_PollAuthSessionStatus_Response PollAuthSessionStatus(CAuthentication_PollAuthSessionStatus_Request request);

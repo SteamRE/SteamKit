@@ -1115,7 +1115,8 @@ namespace SteamKit2.GC.Dota.Internal
         DOTA_GAMERULES_STATE_TEAM_SHOWCASE = 8,
         DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP = 9,
         DOTA_GAMERULES_STATE_WAIT_FOR_MAP_TO_LOAD = 10,
-        DOTA_GAMERULES_STATE_LAST = 11,
+        DOTA_GAMERULES_STATE_SCENARIO_SETUP = 11,
+        DOTA_GAMERULES_STATE_LAST = 12,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1165,7 +1166,8 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_TEAM_FANDOM = 30,
         EVENT_ID_DIRETIDE_2020 = 31,
         EVENT_ID_SPRING_2021 = 32,
-        EVENT_ID_COUNT = 33,
+        EVENT_ID_FALL_2021 = 33,
+        EVENT_ID_COUNT = 34,
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -1149,6 +1149,54 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_CompleteAppUploadBatch_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong batch_id
+        {
+            get => __pbn__batch_id.GetValueOrDefault();
+            set => __pbn__batch_id = value;
+        }
+        public bool ShouldSerializebatch_id() => __pbn__batch_id != null;
+        public void Resetbatch_id() => __pbn__batch_id = null;
+        private ulong? __pbn__batch_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint batch_eresult
+        {
+            get => __pbn__batch_eresult.GetValueOrDefault();
+            set => __pbn__batch_eresult = value;
+        }
+        public bool ShouldSerializebatch_eresult() => __pbn__batch_eresult != null;
+        public void Resetbatch_eresult() => __pbn__batch_eresult = null;
+        private uint? __pbn__batch_eresult;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_CompleteAppUploadBatch_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CCloud_ClientBeginFileUpload_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2228,6 +2276,7 @@ namespace SteamKit2.Internal
         NoResponse ExternalStorageTransferReport(CCloud_ExternalStorageTransferReport_Notification request);
         CCloud_BeginAppUploadBatch_Response BeginAppUploadBatch(CCloud_BeginAppUploadBatch_Request request);
         NoResponse CompleteAppUploadBatch(CCloud_CompleteAppUploadBatch_Notification request);
+        CCloud_CompleteAppUploadBatch_Response CompleteAppUploadBatchBlocking(CCloud_CompleteAppUploadBatch_Request request);
         CCloud_ClientBeginFileUpload_Response ClientBeginFileUpload(CCloud_ClientBeginFileUpload_Request request);
         CCloud_ClientCommitFileUpload_Response ClientCommitFileUpload(CCloud_ClientCommitFileUpload_Request request);
         CCloud_ClientFileDownload_Response ClientFileDownload(CCloud_ClientFileDownload_Request request);

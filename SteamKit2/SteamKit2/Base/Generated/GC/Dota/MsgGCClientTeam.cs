@@ -961,6 +961,28 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetpro_name() => __pbn__pro_name = null;
             private string __pbn__pro_name;
 
+            [global::ProtoBuf.ProtoMember(8)]
+            [global::System.ComponentModel.DefaultValue(Fantasy_Roles.FANTASY_ROLE_UNDEFINED)]
+            public Fantasy_Roles role
+            {
+                get => __pbn__role ?? Fantasy_Roles.FANTASY_ROLE_UNDEFINED;
+                set => __pbn__role = value;
+            }
+            public bool ShouldSerializerole() => __pbn__role != null;
+            public void Resetrole() => __pbn__role = null;
+            private Fantasy_Roles? __pbn__role;
+
+            [global::ProtoBuf.ProtoMember(9)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string real_name
+            {
+                get => __pbn__real_name ?? "";
+                set => __pbn__real_name = value;
+            }
+            public bool ShouldSerializereal_name() => __pbn__real_name != null;
+            public void Resetreal_name() => __pbn__real_name = null;
+            private string __pbn__real_name;
+
         }
 
         [global::ProtoBuf.ProtoContract()]

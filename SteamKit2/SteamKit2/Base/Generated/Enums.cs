@@ -33,6 +33,7 @@ namespace SteamKit2.Internal
         k_PublishedFileQueryType_RankedByLifetimePlaytimeSessions = 18,
         k_PublishedFileQueryType_RankedByInappropriateContentRating = 19,
         k_PublishedFileQueryType_RankedByBanContentCheck = 20,
+        k_PublishedFileQueryType_RankedByLastUpdatedDate = 21,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -152,6 +153,25 @@ namespace SteamKit2.Internal
         k_BluetoothDeviceType_Joystick = 9,
         k_BluetoothDeviceType_Gamepad = 10,
         k_BluetoothDeviceType_Keyboard = 11,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EStorageBlockContentType
+    {
+        k_EStorageBlockContentType_Invalid = 0,
+        k_EStorageBlockContentType_Unknown = 1,
+        k_EStorageBlockContentType_FileSystem = 2,
+        k_EStorageBlockContentType_Crypto = 3,
+        k_EStorageBlockContentType_Raid = 4,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EStorageBlockFileSystemType
+    {
+        k_EStorageBlockFileSystemType_Invalid = 0,
+        k_EStorageBlockFileSystemType_Unknown = 1,
+        k_EStorageBlockFileSystemType_VFat = 2,
+        k_EStorageBlockFileSystemType_Ext4 = 3,
     }
 
 }
