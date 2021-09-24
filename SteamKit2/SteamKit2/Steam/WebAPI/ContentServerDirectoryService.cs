@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -77,7 +78,7 @@ namespace SteamKit2
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            var response = await directory.CallAsync<Internal.CContentServerDirectory_GetServersForSteamPipe_Response>( HttpMethod.Get, "GetServersForSteamPipe", version: 1, args: args ).ConfigureAwait( false );
+            var response = await directory.CallAsync<CContentServerDirectory_GetServersForSteamPipe_Response>( HttpMethod.Get, nameof( IContentServerDirectory.GetServersForSteamPipe ), version: 1, args: args ).ConfigureAwait( false );
 
             cancellationToken.ThrowIfCancellationRequested();
 

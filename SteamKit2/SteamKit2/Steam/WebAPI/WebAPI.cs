@@ -214,8 +214,6 @@ namespace SteamKit2
             {
                 var response = await CallAsyncInternal( method, func, version, args, "protobuf_raw" );
 
-                var t = await response.Content.ReadAsStringAsync().ConfigureAwait( false );
-
                 using var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait( false );
 
                 var body = Serializer.Deserialize<T>( stream );
