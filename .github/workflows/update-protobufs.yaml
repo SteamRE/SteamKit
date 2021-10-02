@@ -3,8 +3,8 @@ on:
   push:
     branches:
     - yaakov/auto-protos # temporary trigger during development
-  schedule:
-  - cron: '0 17 * * SUN'
+  #schedule:
+  #- cron: '0 17 * * SUN'
 
 jobs:
   update-protobufs:
@@ -27,12 +27,12 @@ jobs:
 
     # TODO: We need a new GitHub Machine Account (or maybe an existing one?) to generate a PAT that we can use as the token here
     # otherwise, our new changes will not trigger further Actions (on:push or on:pull_request, i.e. CI/CD builds).
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v3.10.1
-      with:
-          #token: ${{ secrets.PAT }}
-          commit-message: Update protobufs
-          title: Update protobufs
-          body: |
-            - Update protobufs
-          branch: auto/protobufs
+    #- name: Create Pull Request
+    #  uses: peter-evans/create-pull-request@v3.10.1
+    #  with:
+    #      #token: ${{ secrets.PAT }}
+    #      commit-message: Update protobufs
+    #      title: Update protobufs
+    #      body: |
+    #        - Update protobufs
+    #      branch: auto/protobufs
