@@ -1,4 +1,4 @@
-name: Update Dependencies
+name: Update Protobufs
 on:
   push:
     branches:
