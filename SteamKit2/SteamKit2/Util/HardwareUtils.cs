@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -370,8 +370,8 @@ namespace SteamKit2
 
             // Custom implementations can fail for any particular field, in which case we fall back to DefaultMachineInfoProvider.
             machineId.SetBB3( GetHexString( provider.GetMachineGuid() ?? DefaultMachineInfoProvider.Instance.GetMachineGuid() ) );
-            machineId.SetFF2( GetHexString( provider.GetMacAddress() ?? DefaultMachineInfoProvider.Instance.GetMachineGuid() ) );
-            machineId.Set3B3( GetHexString( provider.GetDiskId() ?? DefaultMachineInfoProvider.Instance.GetMachineGuid() ) );
+            machineId.SetFF2( GetHexString( provider.GetMacAddress() ?? DefaultMachineInfoProvider.Instance.GetMacAddress() ) );
+            machineId.Set3B3( GetHexString( provider.GetDiskId() ?? DefaultMachineInfoProvider.Instance.GetDiskId() ) );
 
             // 333 is some sort of user supplied data and is currently unused
 
