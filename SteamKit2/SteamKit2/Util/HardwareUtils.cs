@@ -18,7 +18,7 @@ namespace SteamKit2
 {
     static class MachineInfoProvider
     {
-        public static IMachineInfoProvider GetProvider()
+        public static IMachineInfoProvider GetDefaultProvider()
         {
             switch ( Environment.OSVersion.Platform )
             {

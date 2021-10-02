@@ -32,8 +32,8 @@ namespace SteamKit2
                     EClientPersonaStateFlag.LastSeen,
 
                 HttpClientFactory = DefaultHttpClientFactory,
-                
-                MachineInfoProvider = DefaultMachineInfoProvider.Instance,
+
+                MachineInfoProvider = MachineInfoProvider.GetDefaultProvider(),
 
                 ProtocolTypes = ProtocolTypes.Tcp,
 
