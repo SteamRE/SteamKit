@@ -37,18 +37,21 @@ SteamKit2 is released under the [LGPL-2.1 license](http://www.tldrlegal.com/lice
 In order to use SteamKit2 at runtime, the following dependencies are required:
 
   - A [.NET Standard 2.0](https://github.com/dotnet/standard/blob/master/docs/versions.md)-compatible runtime. At the time of writing, this is:
-      - .NET Framework 4.6.1
-      - .NET Core 2.0
-      - [Mono ≥5.4](http://mono-project.com)
+      - .NET Framework 4.6.1 or higher required, .NET Framework 4.7.2 or higher recommended.
+      - .NET Core 2.0 or higher
+      - [Mono 5.4](http://mono-project.com) or higher
+  - [protobuf-net](http://code.google.com/p/protobuf-net/) ([NuGet package](http://nuget.org/packages/protobuf-net))
+
+Note: If you're using the SteamKit2 NuGet package, the protobuf-net dependency should be resolved for you. See the [Installation Guide](https://github.com/SteamRE/SteamKit/wiki/Installation) for more information.
+
 
 To compile SteamKit2, the following is required:
 
-  - C# 8.0 compiler &mdash; [.NET Core 3.0 SDK](https://dot.net/).
-      - On Windows, [Visual Studio 2019 (≥16.3)](https://www.visualstudio.com/vs/whatsnew/) is optional but recommended.
-      - On macOS, [Visual Studio for Mac (≥8.3)](https://www.visualstudio.com/vs/visual-studio-mac/) is optional but recommended.
-  - [protobuf-net](http://code.google.com/p/protobuf-net/) ([NuGet package](http://nuget.org/packages/protobuf-net))
-
-Note: If you're using the NuGet package, the protobuf-net dependency _should_ be resolved for you. See the [Installation Guide](https://github.com/SteamRE/SteamKit/wiki/Installation) for more information.
+  - C# 8.0 compiler &mdash; [.NET Core 3.0 SDK](https://dot.net/) or higher.
+  - A C# IDE is optional but recommended:
+      - [Visual Studio 2019 (≥16.3)](https://www.visualstudio.com/vs/whatsnew/) (on Windows)
+      - [Visual Studio for Mac (≥8.3)](https://www.visualstudio.com/vs/visual-studio-mac/) (on macOS)
+      - [Visual Studio Code](https://code.visualstudio.com) with [the C#/OmniSharp extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) (on Windows, macOS, and Linux)
 
 
 ## Contact
