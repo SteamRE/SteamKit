@@ -17,6 +17,7 @@ jobs:
     - name: Run Update Script
       shell: pwsh
       run: |
+        git submodule init
         Resources/ProtobufGen/update.ps1
 
     # TODO: We need a new GitHub Machine Account (or maybe an existing one?) to generate a PAT that we can use as the token here
