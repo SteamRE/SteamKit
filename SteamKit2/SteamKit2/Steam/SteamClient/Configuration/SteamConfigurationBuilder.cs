@@ -32,6 +32,8 @@ namespace SteamKit2
                     EClientPersonaStateFlag.LastSeen,
 
                 HttpClientFactory = DefaultHttpClientFactory,
+                
+                MachineInfoProvider = DefaultMachineInfoProvider.Instance,
 
                 ProtocolTypes = ProtocolTypes.Tcp,
 
@@ -75,6 +77,12 @@ namespace SteamKit2
         public ISteamConfigurationBuilder WithHttpClientFactory(HttpClientFactory factoryFunction)
         {
             state.HttpClientFactory = factoryFunction;
+            return this;
+        }
+
+        public ISteamConfigurationBuilder WithMachineInfoProvider(IMachineInfoProvider machineInfoProvider)
+        {
+            state.MachineInfoProvider = machineInfoProvider;
             return this;
         }
 

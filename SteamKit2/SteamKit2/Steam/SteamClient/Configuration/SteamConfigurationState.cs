@@ -16,6 +16,7 @@ namespace SteamKit2
         public TimeSpan ConnectionTimeout;
         public EClientPersonaStateFlag DefaultPersonaStateFlags;
         public HttpClientFactory HttpClientFactory;
+        public IMachineInfoProvider MachineInfoProvider;
         public ProtocolTypes ProtocolTypes;
         public IServerListProvider ServerListProvider;
         public EUniverse Universe;

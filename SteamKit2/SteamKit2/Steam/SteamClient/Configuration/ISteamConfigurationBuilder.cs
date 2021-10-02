@@ -53,6 +53,13 @@ namespace SteamKit2
         ISteamConfigurationBuilder WithHttpClientFactory(HttpClientFactory factoryFunction);
 
         /// <summary>
+        /// Configures this <see cref="SteamConfiguration" /> with custom machine information.
+        /// </summary>
+        /// <param name="machineInfoProvider">A custom machine information provider.</param>
+        /// <returns>A builder with modified configuration.</returns>
+        ISteamConfigurationBuilder WithMachineInfoProvider(IMachineInfoProvider machineInfoProvider);
+
+        /// <summary>
         /// Configures how this <see cref="SteamConfiguration" /> will be used to connect to Steam.
         /// </summary>
         /// <param name="protocolTypes">The supported protocol types to use when attempting to connect to Steam.</param>
