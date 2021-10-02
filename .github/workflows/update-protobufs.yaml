@@ -1,0 +1,37 @@
+name: Update Dependencies
+on:
+  push:
+    branches:
+    - yaakov/auto-protos # temporary trigger during development
+  schedule:
+  - cron: '0 17 * * SUN'
+
+jobs:
+  update-protobufs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2.3.4
+      submodules: true
+
+    - name: Fetch latest protobufs
+      run: |
+        git submodule foreach git pull origin master
+
+    - name: Regenerate C# Code
+      shell: pwsh
+      run: |
+        Resources/ProtobufGen/generate-all.ps1
+
+    # TODO: We need a new GitHub Machine Account (or maybe an existing one?) to generate a PAT that we can use as the token here
+    # otherwise, our new changes will not trigger further Actions (on:push or on:pull_request, i.e. CI/CD builds).
+    #- name: Create Pull Request
+    #  uses: peter-evans/create-pull-request@v3.10.1
+    #  with:
+    #      token: ${{ secrets.PAT }}
+    #      commit-message: Update protobufs
+    #      title: Update protobufs
+    #      body: |
+    #        - Update protobufs
+    #      branch: auto/protobufs
