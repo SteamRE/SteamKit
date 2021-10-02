@@ -14,16 +14,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2.3.4
 
-    - name: Fetch latest protobufs
-      run: |
-        git config pull.ff only
-        git submodule update --init --recursive
-        ( cd Resources/Protobufs && git pull origin master )
-
-    - name: Regenerate C# Code
+    - name: Run Update Script
       shell: pwsh
       run: |
-        Resources/ProtobufGen/generate-all.ps1
+        Resources/ProtobufGen/update.ps1
 
     # TODO: We need a new GitHub Machine Account (or maybe an existing one?) to generate a PAT that we can use as the token here
     # otherwise, our new changes will not trigger further Actions (on:push or on:pull_request, i.e. CI/CD builds).
