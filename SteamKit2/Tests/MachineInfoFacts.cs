@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Text;
 using System.Threading;
 using SteamKit2;
 using Xunit;
@@ -105,6 +107,25 @@ namespace Tests
             Assert.Equal(3, provider.TotalInvocations);
         }
 
+        [Fact]
+        public void GeneratesMessageObject()
+        {
+            var provider = new StaticMachineInfoProvider();
+            HardwareUtils.Init(provider);
+            var messageObjectData = HardwareUtils.GetMachineID(provider);
+            
+            var kv = new KeyValue();
+            using (var ms = new MemoryStream(messageObjectData))
+            {
+                Assert.True(kv.TryReadAsBinary(ms));
+            }
+
+            Assert.Equal("MessageObject", kv.Name);
+            Assert.Equal("3018ba91fc5a72f8b3f74501af6dd6da331b6cbc", kv["BB3"].AsString());
+            Assert.Equal("5d7e7734714b64bd6d88fef3ddbbf7ab4a749c5e", kv["FF2"].AsString());
+            Assert.Equal("a1807176456746ba2a3f5574bf47677a919dab49", kv["3B3"].AsString());
+        }
+
         sealed class CountingMachineInfoProvider : IMachineInfoProvider
         {
             public int TotalInvocations { get; private set; }
@@ -161,6 +182,13 @@ namespace Tests
                     throw new InvalidOperationException("Operation must not be run on rejected thread.");
                 }
             }
+        }
+
+        sealed class StaticMachineInfoProvider : IMachineInfoProvider
+        {
+            public byte[] GetDiskId() => Encoding.UTF8.GetBytes("DiskId");
+            public byte[] GetMacAddress() => Encoding.UTF8.GetBytes("MacAddress");
+            public byte[] GetMachineGuid() => Encoding.UTF8.GetBytes("MachineGuid");
         }
     }
 }
