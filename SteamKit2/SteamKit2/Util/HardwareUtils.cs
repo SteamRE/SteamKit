@@ -326,7 +326,10 @@ namespace SteamKit2
 
         public static void Init(IMachineInfoProvider machineInfoProvider)
         {
+            lock (machineInfoProvider)
+            {
             _ = generationTable.GetValue(machineInfoProvider, p => Task.Factory.StartNew( GenerateMachineID, state: p ));
+        }
         }
 
         public static byte[]? GetMachineID(IMachineInfoProvider machineInfoProvider)

@@ -76,6 +76,35 @@ namespace Tests
             Assert.False(provider.IsAlive);
         }
 
+        [Fact]
+        public void GenerationIsThreadSafe()
+        {
+            var provider = new CountingMachineInfoProvider();
+            var trigger = new ManualResetEventSlim();
+
+            var threads = new Thread[100];
+            for (var i = 0; i < threads.Length; i++)
+            {
+                threads[i] = new Thread(state =>
+                {
+                   var provider = (IMachineInfoProvider)state;
+                   trigger.Wait();
+                   HardwareUtils.Init(provider);
+                   HardwareUtils.GetMachineID(provider);
+                });
+                threads[i].Start(provider);
+            }
+
+            trigger.Set();
+
+            for (var i = 0; i < threads.Length; i++)
+            {
+                threads[i].Join();
+            }
+
+            Assert.Equal(3, provider.TotalInvocations);
+        }
+
         sealed class CountingMachineInfoProvider : IMachineInfoProvider
         {
             public int TotalInvocations { get; private set; }
