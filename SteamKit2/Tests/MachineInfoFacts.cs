@@ -126,6 +126,16 @@ namespace Tests
             Assert.Equal("a1807176456746ba2a3f5574bf47677a919dab49", kv["3B3"].AsString());
         }
 
+        [Fact]
+        public void ExceptionBubblesUp()
+        {
+            var provider = new ThrowingMachineInfoProvider();
+            HardwareUtils.Init(provider);
+
+            var exception = Assert.Throws<InvalidOperationException>(() => HardwareUtils.GetMachineID(provider));
+            Assert.Equal("This provider only throws.", exception.Message);
+        }
+
         sealed class CountingMachineInfoProvider : IMachineInfoProvider
         {
             public int TotalInvocations { get; private set; }
@@ -189,6 +199,13 @@ namespace Tests
             public byte[] GetDiskId() => Encoding.UTF8.GetBytes("DiskId");
             public byte[] GetMacAddress() => Encoding.UTF8.GetBytes("MacAddress");
             public byte[] GetMachineGuid() => Encoding.UTF8.GetBytes("MachineGuid");
+        }
+
+        sealed class ThrowingMachineInfoProvider : IMachineInfoProvider
+        {
+            public byte[] GetDiskId() => throw new InvalidOperationException("This provider only throws.");
+            public byte[] GetMacAddress() => throw new InvalidOperationException("This provider only throws.");
+            public byte[] GetMachineGuid() => throw new InvalidOperationException("This provider only throws.");
         }
     }
 }

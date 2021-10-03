@@ -3,6 +3,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
+using System.Runtime.CompilerServices;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using SteamKit2.Util;
 using SteamKit2.Util.MacHelpers;
@@ -342,12 +344,20 @@ namespace SteamKit2
 
             DebugLog.Assert(generateTask != null, nameof( HardwareUtils ), "GetMachineID() found null task - should be impossible.");
 
+            try
+            {
             bool didComplete = generateTask.Wait( TimeSpan.FromSeconds( 30 ) );
 
             if ( !didComplete )
             {
                 DebugLog.WriteLine( nameof( HardwareUtils ), "Unable to generate machine_id in a timely fashion, logons may fail" );
                 return null;
+                }
+            }
+            catch (AggregateException ex) when (ex.InnerException != null && generateTask.IsFaulted)
+            {
+                // Rethrow the original exception rather than a wrapped AggregateException.
+                ExceptionDispatchInfo.Capture(ex.InnerException).Throw();
             }
 
             MachineID machineId = generateTask.Result;
