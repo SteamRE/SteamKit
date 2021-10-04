@@ -329,8 +329,8 @@ namespace SteamKit2
         {
             lock (machineInfoProvider)
             {
-            _ = generationTable.GetValue(machineInfoProvider, p => Task.Factory.StartNew( GenerateMachineID, state: p ));
-        }
+                _ = generationTable.GetValue(machineInfoProvider, p => Task.Factory.StartNew( GenerateMachineID, state: p ));
+            }
         }
 
         public static byte[]? GetMachineID(IMachineInfoProvider machineInfoProvider)
@@ -345,12 +345,12 @@ namespace SteamKit2
 
             try
             {
-            bool didComplete = generateTask.Wait( TimeSpan.FromSeconds( 30 ) );
+                bool didComplete = generateTask.Wait( TimeSpan.FromSeconds( 30 ) );
 
-            if ( !didComplete )
-            {
-                DebugLog.WriteLine( nameof( HardwareUtils ), "Unable to generate machine_id in a timely fashion, logons may fail" );
-                return null;
+                if ( !didComplete )
+                {
+                    DebugLog.WriteLine( nameof( HardwareUtils ), "Unable to generate machine_id in a timely fashion, logons may fail" );
+                    return null;
                 }
             }
             catch (AggregateException ex) when (ex.InnerException != null && generateTask.IsFaulted)
