@@ -201,6 +201,7 @@ namespace SteamKit2
             /// <summary>
             /// Manually calls the specified Web API function with the provided details.
             /// </summary>
+            /// <typeparam name="T">Protobuf type of the response message.</typeparam>
             /// <param name="func">The function name to call.</param>
             /// <param name="version">The version of the function to call.</param>
             /// <param name="args">A dictionary of string key value pairs representing arguments to be passed to the API.</param>
@@ -210,7 +211,7 @@ namespace SteamKit2
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="ProtoException">An error occured when parsing the response from the WebAPI.</exception>
-            public async Task<T> CallAsync<T>( HttpMethod method, string func, int version = 1, Dictionary<string, object>? args = null )
+            public async Task<T> CallProtobufAsync<T>( HttpMethod method, string func, int version = 1, Dictionary<string, object>? args = null )
             {
                 var response = await CallAsyncInternal( method, func, version, args, "protobuf_raw" );
 

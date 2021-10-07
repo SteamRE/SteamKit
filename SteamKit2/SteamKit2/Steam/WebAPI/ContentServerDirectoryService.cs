@@ -78,7 +78,12 @@ namespace SteamKit2
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            var response = await directory.CallAsync<CContentServerDirectory_GetServersForSteamPipe_Response>( HttpMethod.Get, nameof( IContentServerDirectory.GetServersForSteamPipe ), version: 1, args: args ).ConfigureAwait( false );
+            var response = await directory.CallProtobufAsync<CContentServerDirectory_GetServersForSteamPipe_Response>(
+                HttpMethod.Get,
+                nameof( IContentServerDirectory.GetServersForSteamPipe ),
+                version: 1,
+                args: args
+            ).ConfigureAwait( false );
 
             cancellationToken.ThrowIfCancellationRequested();
 
