@@ -33,6 +33,8 @@ namespace SteamKit2
 
                 HttpClientFactory = DefaultHttpClientFactory,
 
+                MachineInfoProvider = MachineInfoProvider.GetDefaultProvider(),
+
                 ProtocolTypes = ProtocolTypes.Tcp,
 
                 ServerListProvider = new MemoryServerListProvider(),
@@ -75,6 +77,12 @@ namespace SteamKit2
         public ISteamConfigurationBuilder WithHttpClientFactory(HttpClientFactory factoryFunction)
         {
             state.HttpClientFactory = factoryFunction;
+            return this;
+        }
+
+        public ISteamConfigurationBuilder WithMachineInfoProvider(IMachineInfoProvider machineInfoProvider)
+        {
+            state.MachineInfoProvider = machineInfoProvider;
             return this;
         }
 

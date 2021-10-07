@@ -76,6 +76,9 @@ namespace SteamKit2
 
             this.handlers = new OrderedDictionary();
 
+            // Start calculating machine info so that it is (hopefully) ready by the time we get to logging in.
+            HardwareUtils.Init( configuration.MachineInfoProvider );
+
             // add this library's handlers
             // notice: SteamFriends should be added before SteamUser due to AccountInfoCallback
             this.AddHandler( new SteamFriends() );

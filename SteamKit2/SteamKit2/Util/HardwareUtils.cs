@@ -1,8 +1,10 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
+using System.Runtime.CompilerServices;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using SteamKit2.Util;
 using SteamKit2.Util.MacHelpers;
@@ -15,43 +17,41 @@ using static SteamKit2.Util.MacHelpers.IOKit;
 
 namespace SteamKit2
 {
-    abstract class MachineInfoProvider
+    static class MachineInfoProvider
     {
-        public static MachineInfoProvider GetProvider()
+        public static IMachineInfoProvider GetDefaultProvider()
         {
             switch ( Environment.OSVersion.Platform )
             {
                 case PlatformID.Win32NT:
                 case PlatformID.Win32Windows:
-                    return new WindowsInfoProvider();
+                    return new WindowsMachineInfoProvider();
 
                 case PlatformID.Unix:
                     if ( Utils.IsMacOS() )
                     {
-                        return new OSXInfoProvider();
+                        return new MacOSMachineInfoProvider();
                     }
                     else
                     {
-                        return new LinuxInfoProvider();
+                        return new LinuxMachineInfoProvider();
                     }
             }
 
-            return new DefaultInfoProvider();
+            return new DefaultMachineInfoProvider();
         }
-
-        public abstract byte[] GetMachineGuid();
-        public abstract byte[] GetMacAddress();
-        public abstract byte[] GetDiskId();
     }
 
-    class DefaultInfoProvider : MachineInfoProvider
+    sealed class DefaultMachineInfoProvider : IMachineInfoProvider
     {
-        public override byte[] GetMachineGuid()
+        public static DefaultMachineInfoProvider Instance { get; } = new DefaultMachineInfoProvider();
+
+        public byte[] GetMachineGuid()
         {
             return Encoding.UTF8.GetBytes( Environment.MachineName + "-SteamKit" );
         }
 
-        public override byte[] GetMacAddress()
+        public byte[] GetMacAddress()
         {
             // mono seems to have a pretty solid implementation of NetworkInterface for our platforms
             // if it turns out to be buggy we can always roll our own and poke into /sys/class/net on nix
@@ -75,15 +75,15 @@ namespace SteamKit2
             return Encoding.UTF8.GetBytes( "SteamKit-MacAddress" );
         }
 
-        public override byte[] GetDiskId()
+        public byte[] GetDiskId()
         {
             return Encoding.UTF8.GetBytes( "SteamKit-DiskId" );
         }
     }
 
-    class WindowsInfoProvider : DefaultInfoProvider
+    sealed class WindowsMachineInfoProvider : IMachineInfoProvider
     {
-        public override byte[] GetMachineGuid()
+        public byte[]? GetMachineGuid()
         {
             var localKey = RegistryKey
                 .OpenBaseKey( Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry64 )
@@ -91,35 +91,37 @@ namespace SteamKit2
 
             if ( localKey == null )
             {
-                return base.GetMachineGuid();
+                return null;
             }
 
             var guid = localKey.GetValue( "MachineGuid" );
 
             if ( guid == null )
             {
-                return base.GetMachineGuid();
+                return null;
             }
 
             return Encoding.UTF8.GetBytes( guid.ToString() );
         }
 
-        public override byte[] GetDiskId()
+        public byte[]? GetMacAddress() => null;
+
+        public byte[]? GetDiskId()
         {
             var serialNumber = Win32Helpers.GetBootDiskSerialNumber();
 
             if ( string.IsNullOrEmpty( serialNumber ) )
             {
-                return base.GetDiskId();
+                return null;
             }
 
             return Encoding.UTF8.GetBytes( serialNumber );
         }
     }
 
-    class LinuxInfoProvider : DefaultInfoProvider
+    sealed class LinuxMachineInfoProvider : IMachineInfoProvider
     {
-        public override byte[] GetMachineGuid()
+        public byte[]? GetMachineGuid()
         {
             string[] machineFiles =
             {
@@ -145,10 +147,12 @@ namespace SteamKit2
                 }
             }
 
-            return base.GetMachineGuid();
+            return null;
         }
 
-        public override byte[] GetDiskId()
+        public byte[]? GetMacAddress() => null;
+
+        public byte[]? GetDiskId()
         {
             string[] bootParams = GetBootOptions();
 
@@ -175,7 +179,7 @@ namespace SteamKit2
                 return Encoding.UTF8.GetBytes( diskUuids.FirstOrDefault() );
             }
 
-            return base.GetDiskId();
+            return null;
         }
 
 
@@ -194,6 +198,7 @@ namespace SteamKit2
 
             return bootOptions.Split( ' ' );
         }
+
         string[] GetDiskUUIDs()
         {
             try
@@ -211,6 +216,7 @@ namespace SteamKit2
                 return new string[0];
             }
         }
+
         string? GetParamValue( string[] bootOptions, string param )
         {
             string paramString = bootOptions
@@ -223,9 +229,9 @@ namespace SteamKit2
         }
     }
 
-    class OSXInfoProvider : DefaultInfoProvider
+    sealed class MacOSMachineInfoProvider : IMachineInfoProvider
     {
-        public override byte[] GetMachineGuid()
+        public byte[]? GetMachineGuid()
         {
             uint platformExpert = IOServiceGetMatchingService( kIOMasterPortDefault, IOServiceMatching( "IOPlatformExpertDevice" ) );
             if ( platformExpert != 0 )
@@ -248,10 +254,12 @@ namespace SteamKit2
                 }
             }
 
-            return base.GetMachineGuid();
+            return null;
         }
 
-        public override byte[] GetDiskId()
+        public byte[]? GetMacAddress() => null;
+
+        public byte[]? GetDiskId()
         {
             var stat = new statfs();
             var statted = statfs64( "/", ref stat );
@@ -277,7 +285,7 @@ namespace SteamKit2
                 }
             }
 
-            return base.GetDiskId();
+            return null;
         }
     }
 
@@ -315,29 +323,40 @@ namespace SteamKit2
             }
         }
 
+        static ConditionalWeakTable<IMachineInfoProvider, Task<MachineID>> generationTable = new ConditionalWeakTable<IMachineInfoProvider, Task<MachineID>>();
 
-        static Task<MachineID>? generateTask;
-
-
-        public static void Init()
+        public static void Init(IMachineInfoProvider machineInfoProvider)
         {
-            generateTask = Task.Factory.StartNew( GenerateMachineID );
+            lock (machineInfoProvider)
+            {
+                _ = generationTable.GetValue(machineInfoProvider, p => Task.Factory.StartNew( GenerateMachineID, state: p ));
+            }
         }
 
-        public static byte[]? GetMachineID()
+        public static byte[]? GetMachineID(IMachineInfoProvider machineInfoProvider)
         {
-            if ( generateTask is null )
+            if (!generationTable.TryGetValue(machineInfoProvider, out var generateTask))
             {
                 DebugLog.WriteLine( nameof( HardwareUtils ), "GetMachineID() called before Init()" );
                 return null;
             }
 
-            bool didComplete = generateTask.Wait( TimeSpan.FromSeconds( 30 ) );
+            DebugLog.Assert(generateTask != null, nameof( HardwareUtils ), "GetMachineID() found null task - should be impossible.");
 
-            if ( !didComplete )
+            try
             {
-                DebugLog.WriteLine( nameof( HardwareUtils ), "Unable to generate machine_id in a timely fashion, logons may fail" );
-                return null;
+                bool didComplete = generateTask.Wait( TimeSpan.FromSeconds( 30 ) );
+
+                if ( !didComplete )
+                {
+                    DebugLog.WriteLine( nameof( HardwareUtils ), "Unable to generate machine_id in a timely fashion, logons may fail" );
+                    return null;
+                }
+            }
+            catch (AggregateException ex) when (ex.InnerException != null && generateTask.IsFaulted)
+            {
+                // Rethrow the original exception rather than a wrapped AggregateException.
+                ExceptionDispatchInfo.Capture(ex.InnerException).Throw();
             }
 
             MachineID machineId = generateTask.Result;
@@ -351,19 +370,20 @@ namespace SteamKit2
         }
 
 
-        static MachineID GenerateMachineID()
+        static MachineID GenerateMachineID(object state)
         {
             // the aug 25th 2015 CM update made well-formed machine MessageObjects required for logon
             // this was flipped off shortly after the update rolled out, likely due to linux steamclients running on distros without a way to build a machineid
             // so while a valid MO isn't currently (as of aug 25th) required, they could be in the future and we'll abide by The Valve Law now
 
+            var provider = (IMachineInfoProvider)state;
+
             var machineId = new MachineID();
 
-            MachineInfoProvider provider = MachineInfoProvider.GetProvider();
-
-            machineId.SetBB3( GetHexString( provider.GetMachineGuid() ) );
-            machineId.SetFF2( GetHexString( provider.GetMacAddress() ) );
-            machineId.Set3B3( GetHexString( provider.GetDiskId() ) );
+            // Custom implementations can fail for any particular field, in which case we fall back to DefaultMachineInfoProvider.
+            machineId.SetBB3( GetHexString( provider.GetMachineGuid() ?? DefaultMachineInfoProvider.Instance.GetMachineGuid() ) );
+            machineId.SetFF2( GetHexString( provider.GetMacAddress() ?? DefaultMachineInfoProvider.Instance.GetMacAddress() ) );
+            machineId.Set3B3( GetHexString( provider.GetDiskId() ?? DefaultMachineInfoProvider.Instance.GetDiskId() ) );
 
             // 333 is some sort of user supplied data and is currently unused
 

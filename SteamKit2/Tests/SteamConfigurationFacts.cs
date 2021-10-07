@@ -63,6 +63,13 @@ namespace Tests
         }
 
         [Fact]
+        public void DefaultMachineInfoProvider()
+        {
+            Assert.NotNull(configuration.MachineInfoProvider);
+            Assert.IsNotType<DefaultMachineInfoProvider>(configuration.MachineInfoProvider);
+        }
+
+        [Fact]
         public void ServerListProviderIsNothingFancy()
         {
             Assert.IsType<MemoryServerListProvider>(configuration.ServerListProvider);
@@ -109,6 +116,7 @@ namespace Tests
                  .WithConnectionTimeout(TimeSpan.FromMinutes(1))
                  .WithDefaultPersonaStateFlags(EClientPersonaStateFlag.SourceID)
                  .WithHttpClientFactory(() => { var c = new HttpClient(); c.DefaultRequestHeaders.Add("X-SteamKit-Tests", "true"); return c; })
+                 .WithMachineInfoProvider(new CustomMachineInfoProvider())
                  .WithProtocolTypes(ProtocolTypes.WebSocket | ProtocolTypes.Udp)
                  .WithServerListProvider(new CustomServerListProvider())
                  .WithUniverse(EUniverse.Internal)
@@ -143,6 +151,13 @@ namespace Tests
             {
                 Assert.Equal("true", client.DefaultRequestHeaders.GetValues("X-SteamKit-Tests").FirstOrDefault());
             }
+        }
+
+        [Fact]
+        public void MachineInfoProviderIsConfigured()
+        {
+            Assert.IsType<CustomMachineInfoProvider>(configuration.MachineInfoProvider);
+            Assert.Same(configuration.MachineInfoProvider, configuration.MachineInfoProvider);
         }
 
         [Fact]
@@ -185,6 +200,16 @@ namespace Tests
         public void NoWebAPIKey()
         {
             Assert.Equal("T0PS3kR1t", configuration.WebAPIKey);
+        }
+
+        class CustomMachineInfoProvider : IMachineInfoProvider
+        {
+            byte[] IMachineInfoProvider.GetDiskId()
+                => throw new NotImplementedException();
+            byte[] IMachineInfoProvider.GetMacAddress()
+                => throw new NotImplementedException();
+            byte[] IMachineInfoProvider.GetMachineGuid()
+                => throw new NotImplementedException();
         }
 
         class CustomServerListProvider : IServerListProvider
