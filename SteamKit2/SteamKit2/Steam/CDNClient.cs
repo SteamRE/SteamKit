@@ -87,7 +87,10 @@ namespace SteamKit2
             /// Gets the preferred server status.
             /// </summary>
             public bool PreferredServer { get; internal set; }
-
+            /// <summary>
+            /// Gets the flag whether this server is for Steam China only.
+            /// </summary>
+            public bool SteamChinaOnly { get; internal set; }
             /// <summary>
             /// Gets the download proxy status.
             /// </summary>
