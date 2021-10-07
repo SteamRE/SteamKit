@@ -66,7 +66,7 @@ namespace SteamKit2.CDN
         /// <summary>
         /// Gets the weighted load.
         /// </summary>
-        public int WeightedLoad { get; internal set; }
+        public float WeightedLoad { get; internal set; }
         /// <summary>
         /// Gets the number of entries this server is worth.
         /// </summary>

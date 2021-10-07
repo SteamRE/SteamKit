@@ -106,7 +106,7 @@ namespace SteamKit2
                     CellID = ( uint )child.cell_id,
 
                     Load = child.load,
-                    WeightedLoad = ( int )child.weighted_load, // TODO: it's a float
+                    WeightedLoad = child.weighted_load,
                     NumEntries = child.num_entries_in_client_list,
                     PreferredServer = child.preferred_server,
                     SteamChinaOnly = child.steam_china_only,
