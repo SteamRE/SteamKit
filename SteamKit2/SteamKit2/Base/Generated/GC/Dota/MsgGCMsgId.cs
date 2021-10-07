@@ -980,6 +980,8 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGCToServerCheerConfig = 8813,
         k_EMsgServerToGCGetCheerConfig = 8814,
         k_EMsgServerToGCGetCheerConfigResponse = 8815,
+        k_EMsgGCToGCGrantAutographByID = 8816,
+        k_EMsgGCToServerCheerScalesOverride = 8817,
     }
 
 }

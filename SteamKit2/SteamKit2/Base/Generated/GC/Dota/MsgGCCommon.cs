@@ -1050,6 +1050,16 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetactive_event_season_id() => __pbn__active_event_season_id = null;
             private uint? __pbn__active_event_season_id;
 
+            [global::ProtoBuf.ProtoMember(28)]
+            public uint teleport_fx_level
+            {
+                get => __pbn__teleport_fx_level.GetValueOrDefault();
+                set => __pbn__teleport_fx_level = value;
+            }
+            public bool ShouldSerializeteleport_fx_level() => __pbn__teleport_fx_level != null;
+            public void Resetteleport_fx_level() => __pbn__teleport_fx_level = null;
+            private uint? __pbn__teleport_fx_level;
+
         }
 
     }
@@ -1306,6 +1316,16 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(7)]
         public CMsgLocalServerGuildData guild_info { get; set; }
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public uint teleport_fx_level
+        {
+            get => __pbn__teleport_fx_level.GetValueOrDefault();
+            set => __pbn__teleport_fx_level = value;
+        }
+        public bool ShouldSerializeteleport_fx_level() => __pbn__teleport_fx_level != null;
+        public void Resetteleport_fx_level() => __pbn__teleport_fx_level = null;
+        private uint? __pbn__teleport_fx_level;
 
     }
 

@@ -6189,6 +6189,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resethltv_delay() => __pbn__hltv_delay = null;
         private uint? __pbn__hltv_delay;
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint league_id
+        {
+            get => __pbn__league_id.GetValueOrDefault();
+            set => __pbn__league_id = value;
+        }
+        public bool ShouldSerializeleague_id() => __pbn__league_id != null;
+        public void Resetleague_id() => __pbn__league_id = null;
+        private uint? __pbn__league_id;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -6310,6 +6320,16 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<Prediction> predictions_chosen { get; } = new global::System.Collections.Generic.List<Prediction>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint league_id
+        {
+            get => __pbn__league_id.GetValueOrDefault();
+            set => __pbn__league_id = value;
+        }
+        public bool ShouldSerializeleague_id() => __pbn__league_id != null;
+        public void Resetleague_id() => __pbn__league_id = null;
+        private uint? __pbn__league_id;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class Prediction : global::ProtoBuf.IExtensible
@@ -8919,6 +8939,9 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CheerTypeCount> cheer_types { get; } = new global::System.Collections.Generic.List<CheerTypeCount>();
+
+        [global::ProtoBuf.ProtoMember(2)]
         public uint radiant_cheers
         {
             get => __pbn__radiant_cheers.GetValueOrDefault();
@@ -8928,7 +8951,7 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetradiant_cheers() => __pbn__radiant_cheers = null;
         private uint? __pbn__radiant_cheers;
 
-        [global::ProtoBuf.ProtoMember(2)]
+        [global::ProtoBuf.ProtoMember(3)]
         public uint dire_cheers
         {
             get => __pbn__dire_cheers.GetValueOrDefault();
@@ -8938,7 +8961,7 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetdire_cheers() => __pbn__dire_cheers = null;
         private uint? __pbn__dire_cheers;
 
-        [global::ProtoBuf.ProtoMember(3)]
+        [global::ProtoBuf.ProtoMember(4)]
         public uint radiant_premium_cheers
         {
             get => __pbn__radiant_premium_cheers.GetValueOrDefault();
@@ -8948,7 +8971,7 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetradiant_premium_cheers() => __pbn__radiant_premium_cheers = null;
         private uint? __pbn__radiant_premium_cheers;
 
-        [global::ProtoBuf.ProtoMember(4)]
+        [global::ProtoBuf.ProtoMember(5)]
         public uint dire_premium_cheers
         {
             get => __pbn__dire_premium_cheers.GetValueOrDefault();
@@ -8957,6 +8980,35 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializedire_premium_cheers() => __pbn__dire_premium_cheers != null;
         public void Resetdire_premium_cheers() => __pbn__dire_premium_cheers = null;
         private uint? __pbn__dire_premium_cheers;
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class CheerTypeCount : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint cheer_type
+            {
+                get => __pbn__cheer_type.GetValueOrDefault();
+                set => __pbn__cheer_type = value;
+            }
+            public bool ShouldSerializecheer_type() => __pbn__cheer_type != null;
+            public void Resetcheer_type() => __pbn__cheer_type = null;
+            private uint? __pbn__cheer_type;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint cheer_count
+            {
+                get => __pbn__cheer_count.GetValueOrDefault();
+                set => __pbn__cheer_count = value;
+            }
+            public bool ShouldSerializecheer_count() => __pbn__cheer_count != null;
+            public void Resetcheer_count() => __pbn__cheer_count = null;
+            private uint? __pbn__cheer_count;
+
+        }
 
     }
 
@@ -9006,16 +9058,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializewindow_bucket_count() => __pbn__window_bucket_count != null;
         public void Resetwindow_bucket_count() => __pbn__window_bucket_count = null;
         private uint? __pbn__window_bucket_count;
-
-        [global::ProtoBuf.ProtoMember(5)]
-        public float premium_value
-        {
-            get => __pbn__premium_value.GetValueOrDefault();
-            set => __pbn__premium_value = value;
-        }
-        public bool ShouldSerializepremium_value() => __pbn__premium_value != null;
-        public void Resetpremium_value() => __pbn__premium_value = null;
-        private float? __pbn__premium_value;
 
         [global::ProtoBuf.ProtoMember(6)]
         public float crowd_level_push_time
@@ -9099,6 +9141,18 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(2)]
         public CMsgCheerConfig cheer_config { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToServerCheerScalesOverride : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<float> scales { get; } = new global::System.Collections.Generic.List<float>();
 
     }
 
