@@ -4,6 +4,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using SteamKit2.Internal;
 
@@ -14,6 +15,41 @@ namespace SteamKit2
     /// </summary>
     public sealed class SteamContent : ClientMsgHandler
     {
+        /// <summary>
+        /// Load a list of servers from the Content Server Directory Service.
+        /// This is an alternative to <see cref="o:ContentServerDirectoryService.LoadAsync"></see>.
+        /// </summary>
+        /// <param name="cellId">Preferred steam cell id</param>
+        /// <param name="maxNumServers">Max number of servers to return.</param>
+        /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="CDN.Server"/>s.</returns>
+        public async Task<IReadOnlyCollection<CDN.Server>> GetServersForSteamPipe( uint? cellId, uint? maxNumServers )
+        {
+            var request = new CContentServerDirectory_GetServersForSteamPipe_Request();
+
+            if ( cellId.HasValue )
+            {
+                request.cell_id = cellId.Value;
+            }
+            else
+            {
+                request.cell_id = this.Client.CellID ?? 0;
+            }
+
+            if ( maxNumServers.HasValue )
+            {
+                request.max_servers = maxNumServers.Value;
+            }
+
+            // SendMessage is an AsyncJob, but we want to deserialize it
+            // can't really do HandleMsg because it requires parsing the service like its done in HandleServiceMethod
+            var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
+            var contentService = unifiedMessages.CreateService<IContentServerDirectory>();
+            var message = await contentService.SendMessage( api => api.GetServersForSteamPipe( request ) );
+            var response = message.GetDeserializedResponse<CContentServerDirectory_GetServersForSteamPipe_Response>();
+
+            return ContentServerDirectoryService.ConvertServerList( response );
+        }
+
         /// <summary>
         /// Request the manifest request code for the specified arguments.
         /// </summary>

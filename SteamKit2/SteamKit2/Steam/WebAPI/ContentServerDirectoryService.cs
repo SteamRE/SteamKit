@@ -43,6 +43,7 @@ namespace SteamKit2
 
         /// <summary>
         /// Load a list of servers from the Content Server Directory Service.
+        /// You can use <see cref="SteamContent.GetServersForSteamPipe"></see> instead to go over a CM connection.
         /// </summary>
         /// <param name="configuration">Configuration Object</param>
         /// <param name="cellId">Preferred steam cell id</param>
@@ -87,6 +88,11 @@ namespace SteamKit2
 
             cancellationToken.ThrowIfCancellationRequested();
 
+            return ConvertServerList( response );
+        }
+
+        internal static IReadOnlyCollection<CDN.Server> ConvertServerList( CContentServerDirectory_GetServersForSteamPipe_Response response )
+        {
             var serverRecords = new List<CDN.Server>( capacity: response.servers.Count );
 
             foreach ( var child in response.servers )
