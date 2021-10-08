@@ -53,6 +53,8 @@ namespace SteamKit2
             {
                 { EMsg.ClientLicenseList, HandleLicenseList },
                 { EMsg.ClientRequestFreeLicenseResponse, HandleFreeLicense },
+                { EMsg.ClientPurchaseResponse, HandlePurchaseResponse },
+                { EMsg.ClientRedeemGuestPassResponse, HandleRedeemGuestPassResponse },
                 { EMsg.ClientGameConnectTokens, HandleGameConnectTokens },
                 { EMsg.ClientVACBanStatus, HandleVACBanStatus },
                 { EMsg.ClientGetAppOwnershipTicketResponse, HandleAppOwnershipTicketResponse },
@@ -377,6 +379,20 @@ namespace SteamKit2
             var grantedLicenses = new ClientMsgProtobuf<CMsgClientRequestFreeLicenseResponse>( packetMsg );
 
             var callback = new FreeLicenseCallback( grantedLicenses.TargetJobID, grantedLicenses.Body );
+            this.Client.PostCallback( callback );
+        }
+        void HandlePurchaseResponse( IPacketMsg packetMsg )
+        {
+            var purchaseResponse = new ClientMsgProtobuf<CMsgClientPurchaseResponse>( packetMsg );
+
+            var callback = new PurchaseResponseCallback( purchaseResponse.TargetJobID, purchaseResponse.Body );
+            this.Client.PostCallback( callback );
+        }
+        void HandleRedeemGuestPassResponse( IPacketMsg packetMsg )
+        {
+            var redeemedGuestPass = new ClientMsgProtobuf<CMsgClientRedeemGuestPassResponse>( packetMsg );
+
+            var callback = new RedeemGuestPassResponseCallback( redeemedGuestPass.TargetJobID, redeemedGuestPass.Body );
             this.Client.PostCallback( callback );
         }
         void HandleVACBanStatus( IPacketMsg packetMsg )
