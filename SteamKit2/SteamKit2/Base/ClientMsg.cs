@@ -150,7 +150,7 @@ namespace SteamKit2
         /// <summary>
         /// Gets the body structure of this message.
         /// </summary>
-        public TBody Body { get; private set; }
+        public TBody Body { get; internal set; }
 
 
         /// <summary>

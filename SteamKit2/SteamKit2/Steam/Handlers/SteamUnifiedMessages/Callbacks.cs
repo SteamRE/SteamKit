@@ -24,9 +24,9 @@ namespace SteamKit2
             public EResult Result { get; private set; }
 
             /// <summary>
-            /// Gets the raw binary response.
+            /// Gets the packet.
             /// </summary>
-            public byte[] ResponseRaw { get; private set; }
+            public IPacketMsg PacketMsg { get; private set; }
 
             /// <summary>
             /// Gets the name of the Service.
@@ -50,13 +50,13 @@ namespace SteamKit2
             public string MethodName { get; private set; }
 
 
-            internal ServiceMethodResponse( JobID jobID, EResult result, CMsgClientServiceMethodLegacyResponse resp )
+            internal ServiceMethodResponse( JobID jobID, EResult result, ClientMsgProtobuf response, IPacketMsg packetMsg )
             {
                 JobID = jobID;
 
                 Result = result;
-                ResponseRaw = resp.serialized_method_response;
-                MethodName = resp.method_name ?? string.Empty;
+                PacketMsg = packetMsg;
+                MethodName = response.ProtoHeader.target_job_name;
             }
 
 
@@ -66,10 +66,10 @@ namespace SteamKit2
             /// <typeparam name="T">Protobuf type of the response message.</typeparam>
             /// <returns>The response to the message sent through <see cref="SteamUnifiedMessages"/>.</returns>
             public T GetDeserializedResponse<T>()
-                where T : IExtensible
+                where T : IExtensible, new()
             {
-                using var ms = new MemoryStream( ResponseRaw );
-                return Serializer.Deserialize<T>( ms );
+                var msg = new ClientMsgProtobuf<T>( PacketMsg );
+                return msg.Body;
             }
         }
 
