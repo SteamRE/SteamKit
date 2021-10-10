@@ -7,11 +7,12 @@ namespace SteamKit2
 {
     class EnvelopeEncryptedConnection : IConnection
     {
-        public EnvelopeEncryptedConnection( IConnection inner, EUniverse universe, ILogContext log )
+        public EnvelopeEncryptedConnection( IConnection inner, EUniverse universe, ILogContext log, IDebugNetworkListener? debugNetworkListener )
         {
             this.inner = inner ?? throw new ArgumentNullException( nameof(inner) );
             this.universe = universe;
             this.log = log ?? throw new ArgumentNullException( nameof( log ) );
+            this.debugNetworkListener = debugNetworkListener;
 
             inner.NetMsgReceived += OnNetMsgReceived;
             inner.Connected += OnConnected;
@@ -23,6 +24,7 @@ namespace SteamKit2
         readonly ILogContext log;
         EncryptionState state;
         INetFilterEncryption? encryption;
+        IDebugNetworkListener? debugNetworkListener;
 
         public EndPoint? CurrentEndPoint => inner.CurrentEndPoint;
 
@@ -84,7 +86,17 @@ namespace SteamKit2
                 Disconnect( userInitiated: false );
                 return;
             }
-            else if ( !IsExpectedEMsg( packetMsg.MsgType ) )
+
+            try
+            {
+                debugNetworkListener?.OnIncomingNetworkMessage( packetMsg.MsgType, packetMsg.GetData() );
+            }
+            catch ( Exception ex )
+            {
+                log.LogDebug( nameof( EnvelopeEncryptedConnection ), "DebugNetworkListener threw an exception: {0}", ex );
+            }
+
+            if ( !IsExpectedEMsg( packetMsg.MsgType ) )
             {
                 log.LogDebug( nameof(EnvelopeEncryptedConnection), "Rejected EMsg: {0} during channel setup", packetMsg.MsgType );
                 return;
@@ -169,8 +181,19 @@ namespace SteamKit2
                 encryption = new NetFilterEncryption( tempSessionKey, log );
             }
 
+            var serialized = response.Serialize();
+
+            try
+            {
+                debugNetworkListener?.OnOutgoingNetworkMessage( response.MsgType, serialized );
+            }
+            catch ( Exception e )
+            {
+                log.LogDebug( nameof( EnvelopeEncryptedConnection ), "DebugNetworkListener threw an exception: {0}", e );
+            }
+
             state = EncryptionState.Challenged;
-            Send( response.Serialize() );
+            Send( serialized );
         }
 
         void HandleEncryptResult( IPacketMsg packetMsg )

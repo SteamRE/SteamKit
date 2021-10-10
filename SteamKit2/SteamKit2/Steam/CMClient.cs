@@ -285,9 +285,11 @@ namespace SteamKit2.Internal
                 msg.SteamID = steamID;
             }
 
+            var serialized = msg.Serialize();
+
             try
             {
-                DebugNetworkListener?.OnOutgoingNetworkMessage(msg.MsgType, msg.Serialize());
+                DebugNetworkListener?.OnOutgoingNetworkMessage( msg.MsgType, serialized );
             }
             catch ( Exception e )
             {
@@ -300,7 +302,7 @@ namespace SteamKit2.Internal
 
             try
             {
-                connection?.Send( msg.Serialize() );
+                connection?.Send( serialized );
             }
             catch ( IOException )
             {
@@ -404,11 +406,11 @@ namespace SteamKit2.Internal
             }
             else if ( protocol.HasFlagsFast( ProtocolTypes.Tcp ) )
             {
-                return new EnvelopeEncryptedConnection( new TcpConnection(this), Universe, this );
+                return new EnvelopeEncryptedConnection( new TcpConnection(this), Universe, this, DebugNetworkListener );
             }
             else if ( protocol.HasFlagsFast( ProtocolTypes.Udp ) )
             {
-                return new EnvelopeEncryptedConnection( new UdpConnection(this), Universe, this );
+                return new EnvelopeEncryptedConnection( new UdpConnection(this), Universe, this, DebugNetworkListener );
             }
 
             throw new ArgumentOutOfRangeException( nameof(protocol), protocol, "Protocol bitmask has no supported protocols set." );
