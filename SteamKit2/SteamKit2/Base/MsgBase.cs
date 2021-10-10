@@ -65,11 +65,6 @@ namespace SteamKit2
         /// </summary>
         /// <returns>Data representing a client message.</returns>
         byte[] Serialize();
-        /// <summary>
-        /// Initializes this client message by deserializing the specified data.
-        /// </summary>
-        /// <param name="data">The data representing a client message.</param>
-        void Deserialize( byte[] data );
     }
 
     /// <summary>
@@ -513,11 +508,5 @@ namespace SteamKit2
         /// Data representing a client message.
         /// </returns>
         public abstract byte[] Serialize();
-        /// <summary>
-        /// Initializes this client message by deserializing the specified data.
-        /// </summary>
-        /// <param name="data">The data representing a client message.</param>
-        public abstract void Deserialize( byte[] data );
-
     }
 }

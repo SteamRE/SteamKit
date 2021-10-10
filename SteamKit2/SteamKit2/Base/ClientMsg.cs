@@ -126,21 +126,6 @@ namespace SteamKit2
         {
             throw new NotSupportedException( "ClientMsgProtobuf is for reading only. Use ClientMsgProtobuf<T> for serializing messages." );
         }
-
-        /// <summary>
-        /// Initializes this client message by deserializing the specified data.
-        /// </summary>
-        /// <param name="data">The data representing a client message.</param>
-        public override void Deserialize( byte[] data )
-        {
-            if ( data == null )
-            {
-                throw new ArgumentNullException( nameof(data) );
-            }
-
-            using MemoryStream ms = new MemoryStream( data );
-            Header.Deserialize( ms );
-        }
     }
 
     /// <summary>
@@ -235,30 +220,6 @@ namespace SteamKit2
             Payload.WriteTo( ms );
 
             return ms.ToArray();
-        }
-        /// <summary>
-        /// Initializes this client message by deserializing the specified data.
-        /// </summary>
-        /// <param name="data">The data representing a client message.</param>
-        public override void Deserialize( byte[] data )
-        {
-            if ( data == null )
-            {
-                throw new ArgumentNullException( nameof(data) );
-            }
-
-            using MemoryStream ms = new MemoryStream( data );
-            Header.Deserialize( ms );
-            Body = Serializer.Deserialize<TBody>( ms );
-
-            // the rest of the data is the payload
-            int payloadLen = ( int )( ms.Length - ms.Position );
-
-            if ( payloadLen > 0 )
-            {
-                ms.CopyTo( Payload, payloadLen );
-                Payload.Seek( 0, SeekOrigin.Begin );
-            }
         }
     }
 
@@ -422,28 +383,6 @@ namespace SteamKit2
 
             return ms.ToArray();
         }
-        /// <summary>
-        /// Initializes this client message by deserializing the specified data.
-        /// </summary>
-        /// <param name="data">The data representing a client message.</param>
-        public override void Deserialize( byte[] data )
-        {
-            if ( data == null )
-            {
-                throw new ArgumentNullException( nameof(data) );
-            }
-
-            using MemoryStream ms = new MemoryStream( data );
-            Header.Deserialize( ms );
-            Body.Deserialize( ms );
-
-            // the rest of the data is the payload
-            int payloadOffset = ( int )ms.Position;
-            int payloadLen = ( int )( ms.Length - ms.Position );
-
-            Payload.Write( data, payloadOffset, payloadLen );
-            Payload.Seek( 0, SeekOrigin.Begin );
-        }
     }
 
     /// <summary>
@@ -598,28 +537,5 @@ namespace SteamKit2
 
             return ms.ToArray();
         }
-        /// <summary>
-        /// Initializes this client message by deserializing the specified data.
-        /// </summary>
-        /// <param name="data">The data representing a client message.</param>
-        public override void Deserialize( byte[] data )
-        {
-            if ( data == null )
-            {
-                throw new ArgumentNullException( nameof(data) );
-            }
-
-            using MemoryStream ms = new MemoryStream( data );
-            Header.Deserialize( ms );
-            Body.Deserialize( ms );
-
-            // the rest of the data is the payload
-            int payloadOffset = ( int )ms.Position;
-            int payloadLen = ( int )( ms.Length - ms.Position );
-
-            Payload.Write( data, payloadOffset, payloadLen );
-            Payload.Seek( 0, SeekOrigin.Begin );
-        }
-
     }
 }
