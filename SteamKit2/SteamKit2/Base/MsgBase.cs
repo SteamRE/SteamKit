@@ -492,7 +492,7 @@ namespace SteamKit2
         /// <summary>
         /// Gets the header for this message type. 
         /// </summary>
-        public THeader Header { get; }
+        public THeader Header { get; internal set; }
 
 
         /// <summary>

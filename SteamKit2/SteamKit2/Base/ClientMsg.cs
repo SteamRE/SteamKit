@@ -109,9 +109,12 @@ namespace SteamKit2
         public ClientMsgProtobuf( IPacketMsg msg )
             : this( msg.GetMsgTypeWithNullCheck( nameof(msg) ) )
         {
-            DebugLog.Assert(msg.IsProto, "ClientMsgProtobuf", "ClientMsgProtobuf used for non-proto message!");
+            if ( !( msg is PacketClientMsgProtobuf packetMsgProto ) )
+            {
+                throw new InvalidDataException( "ClientMsgProtobuf used for non-proto message!" );
+            }
 
-            Deserialize( msg.GetData() );
+            Header = packetMsgProto.Header;
         }
 
 
@@ -147,10 +150,16 @@ namespace SteamKit2
     public sealed class ClientMsgProtobuf<TBody> : ClientMsgProtobuf
         where TBody : IExtensible, new()
     {
+        private TBody _body;
+
         /// <summary>
         /// Gets the body structure of this message.
         /// </summary>
-        public TBody Body { get; set; }
+        public TBody Body
+        {
+            get => _body;
+            set => _body = value ?? throw new ArgumentNullException( nameof( value ) );
+        }
 
 
         /// <summary>
@@ -162,7 +171,7 @@ namespace SteamKit2
         public ClientMsgProtobuf( EMsg eMsg, int payloadReserve = 64 )
             : base( payloadReserve )
         {
-            Body = new TBody();
+            _body = new TBody();
 
             // set our emsg
             Header.Msg = eMsg;
@@ -195,10 +204,7 @@ namespace SteamKit2
                 throw new InvalidDataException( $"ClientMsgProtobuf<{typeof(TBody).FullName}> used for non-proto message!" );
             }
 
-            // PacketClientMsgProtobuf already contains the deserialized header
-            Header.Msg = packetMsgProto.Header.Msg;
-            Header.HeaderLength = packetMsgProto.Header.HeaderLength;
-            Header.Proto = packetMsgProto.Header.Proto;
+            Header = packetMsgProto.Header;
 
             using ( MemoryStream ms = new MemoryStream( msg.GetData() ) )
             {

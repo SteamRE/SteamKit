@@ -104,10 +104,10 @@ namespace SteamKit2
         /// </value>
         public ulong SourceJobID { get; }
         /// <summary>
-        /// Gets the source job id for this packet message.
+        /// Gets the header for this packet message.
         /// </summary>
         /// <value>
-        /// The source job id.
+        /// The header.
         /// </value>
         public MsgHdrProtoBuf Header { get; }
         /// <summary>
