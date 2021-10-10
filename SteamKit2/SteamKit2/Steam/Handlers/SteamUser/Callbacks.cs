@@ -460,6 +460,24 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// This callback is received when users' vanity url changes.
+        /// </summary>
+        public sealed class VanityURLChangedCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the new vanity url.
+            /// </summary>
+            public string VanityURL { get; private set; }
+
+
+            internal VanityURLChangedCallback( JobID jobID, CMsgClientVanityURLChangedNotification body )
+            {
+                this.JobID = jobID;
+                this.VanityURL = body.vanity_url;
+            }
+        }
+
+        /// <summary>
         /// This callback is fired when the client receives a marketing message update.
         /// </summary>
         public sealed class MarketingMessageCallback : CallbackMsg

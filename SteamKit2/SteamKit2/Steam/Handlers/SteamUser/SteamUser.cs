@@ -269,6 +269,7 @@ namespace SteamKit2
                 { EMsg.ClientEmailAddrInfo, HandleEmailAddrInfo },
                 { EMsg.ClientWalletInfoUpdate, HandleWalletInfo },
                 { EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse, HandleWebAPIUserNonce },
+                { EMsg.ClientVanityURLChangedNotification, HandleVanityURLChangedNotification },
                 { EMsg.ClientMarketingMessageUpdate2, HandleMarketingMessageUpdate },
             };
         }
@@ -592,6 +593,12 @@ namespace SteamKit2
         {
             var userNonce = new ClientMsgProtobuf<CMsgClientRequestWebAPIAuthenticateUserNonceResponse>( packetMsg );
             var callback = new WebAPIUserNonceCallback(userNonce.TargetJobID, userNonce.Body);
+            this.Client.PostCallback( callback );
+        }
+        void HandleVanityURLChangedNotification( IPacketMsg packetMsg )
+        {
+            var vanityUrl = new ClientMsgProtobuf<CMsgClientVanityURLChangedNotification>( packetMsg );
+            var callback = new VanityURLChangedCallback( vanityUrl.TargetJobID, vanityUrl.Body );
             this.Client.PostCallback( callback );
         }
         void HandleMarketingMessageUpdate( IPacketMsg packetMsg )
