@@ -47,6 +47,13 @@ namespace SteamKit2
         /// The source job id.
         /// </value>
         ulong SourceJobID { get; }
+        /// <summary>
+        /// Gets the offset in payload to the body after the header.
+        /// </summary>
+        /// <value>
+        /// The offset in payload after the header.
+        /// </value>
+        long BodyOffset { get; }
 
         /// <summary>
         /// Gets the underlying data that represents this client message.
@@ -195,6 +202,20 @@ namespace SteamKit2
         /// The source job id.
         /// </value>
         public ulong SourceJobID { get; }
+        /// <summary>
+        /// Gets the header for this packet message.
+        /// </summary>
+        /// <value>
+        /// The header.
+        /// </value>
+        public ExtendedClientMsgHdr Header { get; }
+        /// <summary>
+        /// Gets the offset in payload to the body after the header.
+        /// </summary>
+        /// <value>
+        /// The offset in payload after the header.
+        /// </value>
+        public long BodyOffset { get; }
 
         byte[] payload;
 
@@ -214,16 +235,17 @@ namespace SteamKit2
             MsgType = eMsg;
             payload = data;
 
-            ExtendedClientMsgHdr extendedHdr = new ExtendedClientMsgHdr();
+            Header = new ExtendedClientMsgHdr();
 
             // deserialize the extended header to get our hands on the job ids
             using ( MemoryStream ms = new MemoryStream( data ) )
             {
-                extendedHdr.Deserialize( ms );
+                Header.Deserialize( ms );
+                BodyOffset = ms.Position;
             }
 
-            TargetJobID = extendedHdr.TargetJobID;
-            SourceJobID = extendedHdr.SourceJobID;
+            TargetJobID = Header.TargetJobID;
+            SourceJobID = Header.SourceJobID;
         }
 
 
@@ -272,6 +294,20 @@ namespace SteamKit2
         /// The source job id.
         /// </value>
         public ulong SourceJobID { get; }
+        /// <summary>
+        /// Gets the header for this packet message.
+        /// </summary>
+        /// <value>
+        /// The header.
+        /// </value>
+        public MsgHdr Header { get; }
+        /// <summary>
+        /// Gets the offset in payload to the body after the header.
+        /// </summary>
+        /// <value>
+        /// The offset in payload after the header.
+        /// </value>
+        public long BodyOffset { get; }
 
         byte[] payload;
 
@@ -291,16 +327,17 @@ namespace SteamKit2
             MsgType = eMsg;
             payload = data;
 
-            MsgHdr msgHdr = new MsgHdr();
+            Header = new MsgHdr();
 
             // deserialize the header to get our hands on the job ids
             using ( MemoryStream ms = new MemoryStream( data ) )
             {
-                msgHdr.Deserialize( ms );
+                Header.Deserialize( ms );
+                BodyOffset = ms.Position;
             }
 
-            TargetJobID = msgHdr.TargetJobID;
-            SourceJobID = msgHdr.SourceJobID;
+            TargetJobID = Header.TargetJobID;
+            SourceJobID = Header.SourceJobID;
         }
 
 

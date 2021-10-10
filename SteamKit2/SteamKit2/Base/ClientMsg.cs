@@ -199,27 +199,25 @@ namespace SteamKit2
         public ClientMsgProtobuf( IPacketMsg msg )
             : this( msg.GetMsgTypeWithNullCheck( nameof(msg) ) )
         {
-            if ( !( msg is PacketClientMsgProtobuf packetMsgProto ) )
+            if ( !( msg is PacketClientMsgProtobuf packetMsg ) )
             {
                 throw new InvalidDataException( $"ClientMsgProtobuf<{typeof(TBody).FullName}> used for non-proto message!" );
             }
 
-            Header = packetMsgProto.Header;
+            Header = packetMsg.Header;
 
-            using ( MemoryStream ms = new MemoryStream( msg.GetData() ) )
+            using MemoryStream ms = new MemoryStream( packetMsg.GetData() );
+            ms.Seek( packetMsg.BodyOffset, SeekOrigin.Begin );
+
+            Body = Serializer.Deserialize<TBody>( ms );
+
+            // the rest of the data is the payload
+            int payloadLen = ( int )( ms.Length - ms.Position );
+
+            if ( payloadLen > 0 )
             {
-                ms.Seek( packetMsgProto.BodyOffset, SeekOrigin.Begin );
-
-                Body = Serializer.Deserialize<TBody>( ms );
-
-                // the rest of the data is the payload
-                int payloadLen = ( int )( ms.Length - ms.Position );
-
-                if ( payloadLen > 0 )
-                {
-                    ms.CopyTo( Payload, payloadLen );
-                    Payload.Seek( 0, SeekOrigin.Begin );
-                }
+                ms.CopyTo( Payload, payloadLen );
+                Payload.Seek( 0, SeekOrigin.Begin );
             }
         }
 
@@ -387,9 +385,26 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(msg) );
             }
 
-            DebugLog.Assert( !msg.IsProto, "ClientMsg", $"ClientMsg<{typeof(TBody).FullName}> used for proto message!" );
+            if ( !( msg is PacketClientMsg packetMsg ) )
+            {
+                throw new InvalidDataException( $"ClientMsg<{typeof( TBody ).FullName}> used for proto message!" );
+            }
 
-            Deserialize( msg.GetData() );
+            Header = packetMsg.Header;
+
+            using MemoryStream ms = new MemoryStream( packetMsg.GetData() );
+            ms.Seek( packetMsg.BodyOffset, SeekOrigin.Begin );
+
+            Body.Deserialize( ms );
+
+            // the rest of the data is the payload
+            int payloadLen = ( int )( ms.Length - ms.Position );
+
+            if ( payloadLen > 0 )
+            {
+                ms.CopyTo( Payload, payloadLen );
+                Payload.Seek( 0, SeekOrigin.Begin );
+            }
         }
 
         /// <summary>
@@ -545,7 +560,26 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(msg) );
             }
 
-            Deserialize( msg.GetData() );
+            if ( !( msg is PacketMsg packetMsg ) )
+            {
+                throw new InvalidDataException( $"ClientMsg<{typeof( TBody ).FullName}> used for proto message!" );
+            }
+
+            Header = packetMsg.Header;
+
+            using MemoryStream ms = new MemoryStream( packetMsg.GetData() );
+            ms.Seek( packetMsg.BodyOffset, SeekOrigin.Begin );
+
+            Body.Deserialize( ms );
+
+            // the rest of the data is the payload
+            int payloadLen = ( int )( ms.Length - ms.Position );
+
+            if ( payloadLen > 0 )
+            {
+                ms.CopyTo( Payload, payloadLen );
+                Payload.Seek( 0, SeekOrigin.Begin );
+            }
         }
 
 
