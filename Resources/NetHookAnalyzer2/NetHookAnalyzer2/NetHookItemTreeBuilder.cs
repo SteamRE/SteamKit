@@ -61,7 +61,7 @@ namespace NetHookAnalyzer2
 			{
 				var rawEMsg = PeekUInt(stream);
 
-				node.Nodes.Add(BuildInfoNode(rawEMsg, configuration));
+				node.Nodes.Add(BuildInfoNode(rawEMsg));
 
 				var header = ReadHeader(rawEMsg, stream);
 				node.Nodes.Add(new TreeNodeObjectExplorer("Header", header, configuration).TreeNode);
@@ -102,17 +102,17 @@ namespace NetHookAnalyzer2
 			return node;
 		}
 
-		static TreeNode BuildInfoNode(uint rawEMsg, TreeNodeObjectExplorerConfiguration configuration)
+		static TreeNode BuildInfoNode(uint rawEMsg)
 		{
-			var eMsg = MsgUtil.GetMsg(rawEMsg);
+			var eMsg = MsgUtil.GetMsg( rawEMsg );
+			var eMsgName = $"EMsg {eMsg} ({(int)eMsg})";
 
-			var eMsgExplorer = new TreeNodeObjectExplorer("EMsg", eMsg, configuration);
-
-			return new TreeNode("Info", new[] 
+			if( MsgUtil.IsProtoBuf( rawEMsg ) )
 			{
-				eMsgExplorer.TreeNode,
-				new TreeNodeObjectExplorer("Is Protobuf", MsgUtil.IsProtoBuf(rawEMsg), configuration).TreeNode
-			});
+				return new TreeNode( eMsgName );
+			}
+
+			return new TreeNode( $"{eMsgName} (Non ProtoBuf)" );
 		}
 	}
 }
