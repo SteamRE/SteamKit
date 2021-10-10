@@ -150,7 +150,7 @@ namespace SteamKit2
         /// <summary>
         /// Gets the body structure of this message.
         /// </summary>
-        public TBody Body { get; internal set; }
+        public TBody Body { get; set; }
 
 
         /// <summary>
@@ -190,9 +190,31 @@ namespace SteamKit2
         public ClientMsgProtobuf( IPacketMsg msg )
             : this( msg.GetMsgTypeWithNullCheck( nameof(msg) ) )
         {
-            DebugLog.Assert( msg.IsProto, "ClientMsgProtobuf<>", $"ClientMsgProtobuf<{typeof(TBody).FullName}> used for non-proto message!" );
+            if ( !( msg is PacketClientMsgProtobuf packetMsgProto ) )
+            {
+                throw new InvalidDataException( $"ClientMsgProtobuf<{typeof(TBody).FullName}> used for non-proto message!" );
+            }
 
-            Deserialize( msg.GetData() );
+            // PacketClientMsgProtobuf already contains the deserialized header
+            Header.Msg = packetMsgProto.Header.Msg;
+            Header.HeaderLength = packetMsgProto.Header.HeaderLength;
+            Header.Proto = packetMsgProto.Header.Proto;
+
+            using ( MemoryStream ms = new MemoryStream( msg.GetData() ) )
+            {
+                ms.Seek( packetMsgProto.BodyOffset, SeekOrigin.Begin );
+
+                Body = Serializer.Deserialize<TBody>( ms );
+
+                // the rest of the data is the payload
+                int payloadLen = ( int )( ms.Length - ms.Position );
+
+                if ( payloadLen > 0 )
+                {
+                    ms.CopyTo( Payload, payloadLen );
+                    Payload.Seek( 0, SeekOrigin.Begin );
+                }
+            }
         }
 
         /// <summary>
@@ -226,11 +248,13 @@ namespace SteamKit2
             Body = Serializer.Deserialize<TBody>( ms );
 
             // the rest of the data is the payload
-            int payloadOffset = ( int )ms.Position;
             int payloadLen = ( int )( ms.Length - ms.Position );
 
-            Payload.Write( data, payloadOffset, payloadLen );
-            Payload.Seek( 0, SeekOrigin.Begin );
+            if ( payloadLen > 0 )
+            {
+                ms.CopyTo( Payload, payloadLen );
+                Payload.Seek( 0, SeekOrigin.Begin );
+            }
         }
     }
 

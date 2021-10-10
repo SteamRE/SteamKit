@@ -4,10 +4,8 @@
  */
 
 using System;
-using System.IO;
 using System.Reflection;
 using ProtoBuf;
-using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -24,16 +22,11 @@ namespace SteamKit2
             public EResult Result { get; private set; }
 
             /// <summary>
-            /// Gets the packet.
-            /// </summary>
-            public IPacketMsg PacketMsg { get; private set; }
-
-            /// <summary>
             /// Gets the name of the Service.
             /// </summary>
             public string ServiceName
             {
-                get { return MethodName.Split( '.' )[0]; }
+                get { return MethodName.Split( '.' )[ 0 ]; }
             }
 
             /// <summary>
@@ -41,7 +34,7 @@ namespace SteamKit2
             /// </summary>
             public string RpcName
             {
-                get { return MethodName.Substring( ServiceName.Length + 1 ).Split( '#' )[0]; }
+                get { return MethodName.Substring( ServiceName.Length + 1 ).Split( '#' )[ 0 ]; }
             }
 
             /// <summary>
@@ -49,14 +42,15 @@ namespace SteamKit2
             /// </summary>
             public string MethodName { get; private set; }
 
+            private PacketClientMsgProtobuf PacketMsg;
 
-            internal ServiceMethodResponse( JobID jobID, EResult result, ClientMsgProtobuf response, IPacketMsg packetMsg )
+            internal ServiceMethodResponse( PacketClientMsgProtobuf packetMsg )
             {
-                JobID = jobID;
-
-                Result = result;
+                var protoHeader = packetMsg.Header.Proto;
+                JobID = protoHeader.jobid_target;
+                Result = ( EResult )protoHeader.eresult;
+                MethodName = protoHeader.target_job_name;
                 PacketMsg = packetMsg;
-                MethodName = response.ProtoHeader.target_job_name;
             }
 
 
@@ -83,7 +77,7 @@ namespace SteamKit2
             /// </summary>
             public string ServiceName
             {
-                get { return MethodName.Split( '.' )[0]; }
+                get { return MethodName.Split( '.' )[ 0 ]; }
             }
 
             /// <summary>
@@ -91,7 +85,7 @@ namespace SteamKit2
             /// </summary>
             public string RpcName
             {
-                get { return MethodName.Substring( ServiceName.Length + 1 ).Split( '#' )[0]; }
+                get { return MethodName.Substring( ServiceName.Length + 1 ).Split( '#' )[ 0 ]; }
             }
 
             /// <summary>

@@ -10,7 +10,6 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using ProtoBuf;
-using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -172,16 +171,23 @@ namespace SteamKit2
         #region ClientMsg Handlers
         void HandleServiceMethodResponse( IPacketMsg packetMsg )
         {
-            var response = new ClientMsgProtobuf( packetMsg );
-            var callback = new ServiceMethodResponse( response.TargetJobID, (EResult)response.ProtoHeader.eresult, response, packetMsg );
+            if ( !( packetMsg is PacketClientMsgProtobuf packetMsgProto ) )
+            {
+                throw new InvalidDataException( "Packet message is expected to be protobuf." );
+            }
+
+            var callback = new ServiceMethodResponse( packetMsgProto );
             Client.PostCallback( callback );
         }
 
         void HandleServiceMethod( IPacketMsg packetMsg )
         {
-            var notification = new ClientMsgProtobuf( packetMsg );
+            if ( !( packetMsg is PacketClientMsgProtobuf packetMsgProto ) )
+            {
+                throw new InvalidDataException( "Packet message is expected to be protobuf." );
+            }
 
-            var jobName = notification.Header.Proto.target_job_name;
+            var jobName = packetMsgProto.Header.Proto.target_job_name;
             if ( !string.IsNullOrEmpty( jobName ) )
             {
                 var splitByDot = jobName.Split( '.' );

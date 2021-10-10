@@ -103,7 +103,20 @@ namespace SteamKit2
         /// The source job id.
         /// </value>
         public ulong SourceJobID { get; }
-
+        /// <summary>
+        /// Gets the source job id for this packet message.
+        /// </summary>
+        /// <value>
+        /// The source job id.
+        /// </value>
+        public MsgHdrProtoBuf Header { get; }
+        /// <summary>
+        /// Gets the offset in payload to the body after the header.
+        /// </summary>
+        /// <value>
+        /// The offset in payload after the header.
+        /// </value>
+        public long BodyOffset { get; }
 
         byte[] payload;
 
@@ -123,16 +136,17 @@ namespace SteamKit2
             MsgType = eMsg;
             payload = data;
 
-            MsgHdrProtoBuf protobufHeader = new MsgHdrProtoBuf();
+            Header = new MsgHdrProtoBuf();
 
             // we need to pull out the job ids, so we deserialize the protobuf header
             using ( MemoryStream ms = new MemoryStream( data ) )
             {
-                protobufHeader.Deserialize( ms );
+                Header.Deserialize( ms );
+                BodyOffset = ms.Position;
             }
 
-            TargetJobID = protobufHeader.Proto.jobid_target;
-            SourceJobID = protobufHeader.Proto.jobid_source;
+            TargetJobID = Header.Proto.jobid_target;
+            SourceJobID = Header.Proto.jobid_source;
         }
 
 
