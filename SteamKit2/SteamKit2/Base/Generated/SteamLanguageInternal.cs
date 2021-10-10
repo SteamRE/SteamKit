@@ -596,67 +596,6 @@ namespace SteamKit2.Internal
 		}
 	}
 
-	public class MsgClientNewLoginKey : ISteamSerializableMessage
-	{
-		public EMsg GetEMsg() { return EMsg.ClientNewLoginKey; }
-
-		// Static size: 4
-		public uint UniqueID { get; set; }
-		// Static size: 20
-		public byte[] LoginKey { get; set; }
-
-		public MsgClientNewLoginKey()
-		{
-			UniqueID = 0;
-			LoginKey = new byte[20];
-		}
-
-		public void Serialize(Stream stream)
-		{
-			BinaryWriter bw = new BinaryWriter( stream );
-
-			bw.Write( UniqueID );
-			bw.Write( LoginKey );
-
-		}
-
-		public void Deserialize( Stream stream )
-		{
-			BinaryReader br = new BinaryReader( stream );
-
-			UniqueID = br.ReadUInt32();
-			LoginKey = br.ReadBytes( 20 );
-		}
-	}
-
-	public class MsgClientNewLoginKeyAccepted : ISteamSerializableMessage
-	{
-		public EMsg GetEMsg() { return EMsg.ClientNewLoginKeyAccepted; }
-
-		// Static size: 4
-		public uint UniqueID { get; set; }
-
-		public MsgClientNewLoginKeyAccepted()
-		{
-			UniqueID = 0;
-		}
-
-		public void Serialize(Stream stream)
-		{
-			BinaryWriter bw = new BinaryWriter( stream );
-
-			bw.Write( UniqueID );
-
-		}
-
-		public void Deserialize( Stream stream )
-		{
-			BinaryReader br = new BinaryReader( stream );
-
-			UniqueID = br.ReadUInt32();
-		}
-	}
-
 	public class MsgClientLogon : ISteamSerializableMessage
 	{
 		public EMsg GetEMsg() { return EMsg.ClientLogon; }
@@ -772,45 +711,6 @@ namespace SteamKit2.Internal
 		}
 	}
 
-	public class MsgClientEmailAddrInfo : ISteamSerializableMessage
-	{
-		public EMsg GetEMsg() { return EMsg.ClientEmailAddrInfo; }
-
-		// Static size: 4
-		public uint PasswordStrength { get; set; }
-		// Static size: 4
-		public uint FlagsAccountSecurityPolicy { get; set; }
-		// Static size: 1
-		private byte validated;
-		public bool Validated { get { return ( validated == 1 ); } set { validated = ( byte )( value ? 1 : 0 ); } }
-
-		public MsgClientEmailAddrInfo()
-		{
-			PasswordStrength = 0;
-			FlagsAccountSecurityPolicy = 0;
-			validated = 0;
-		}
-
-		public void Serialize(Stream stream)
-		{
-			BinaryWriter bw = new BinaryWriter( stream );
-
-			bw.Write( PasswordStrength );
-			bw.Write( FlagsAccountSecurityPolicy );
-			bw.Write( validated );
-
-		}
-
-		public void Deserialize( Stream stream )
-		{
-			BinaryReader br = new BinaryReader( stream );
-
-			PasswordStrength = br.ReadUInt32();
-			FlagsAccountSecurityPolicy = br.ReadUInt32();
-			validated = br.ReadByte();
-		}
-	}
-
 	public class MsgClientUpdateGuestPassesList : ISteamSerializableMessage
 	{
 		public EMsg GetEMsg() { return EMsg.ClientUpdateGuestPassesList; }
@@ -846,34 +746,6 @@ namespace SteamKit2.Internal
 			Result = (EResult)br.ReadInt32();
 			CountGuestPassesToGive = br.ReadInt32();
 			CountGuestPassesToRedeem = br.ReadInt32();
-		}
-	}
-
-	public class MsgClientRequestedClientStats : ISteamSerializableMessage
-	{
-		public EMsg GetEMsg() { return EMsg.ClientRequestedClientStats; }
-
-		// Static size: 4
-		public int CountStats { get; set; }
-
-		public MsgClientRequestedClientStats()
-		{
-			CountStats = 0;
-		}
-
-		public void Serialize(Stream stream)
-		{
-			BinaryWriter bw = new BinaryWriter( stream );
-
-			bw.Write( CountStats );
-
-		}
-
-		public void Deserialize( Stream stream )
-		{
-			BinaryReader br = new BinaryReader( stream );
-
-			CountStats = br.ReadInt32();
 		}
 	}
 
