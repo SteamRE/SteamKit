@@ -104,7 +104,6 @@ namespace SteamKit2
                     connection.DisconnectCore(userInitiated: false, specificContext: this);
                     return;
                 }
-                connection.log.LogDebug( nameof(WebSocketContext), "Sent {0} bytes.", data.Length);
             }
 
             public void Dispose()
@@ -154,7 +153,6 @@ namespace SteamKit2
                     {
                         case WebSocketMessageType.Binary:
                             ms.Write( buffer, 0, result.Count );
-                            connection.log.LogDebug( nameof( WebSocketContext ), "Recieved {0} bytes.", result.Count );
                             break;
 
                         case WebSocketMessageType.Text:
