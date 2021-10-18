@@ -388,7 +388,7 @@ namespace NetHookAnalyzer2
 			}
 
 			itemExplorerTreeView.Nodes.Clear();
-			itemExplorerTreeView.Nodes.AddRange(BuildTree(item).Nodes.Cast<TreeNode>().ToArray());
+			itemExplorerTreeView.Nodes.Add(BuildTree(item));
 			itemExplorerTreeView.Nodes[0].EnsureVisible(); // Scroll to top
 		}
 
