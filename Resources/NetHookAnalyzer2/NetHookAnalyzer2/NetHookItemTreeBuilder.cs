@@ -105,14 +105,14 @@ namespace NetHookAnalyzer2
 		static TreeNode BuildInfoNode(uint rawEMsg)
 		{
 			var eMsg = MsgUtil.GetMsg( rawEMsg );
-			var eMsgName = $"EMsg {eMsg} ({(int)eMsg})";
+			var eMsgName = $"EMsg {eMsg:G} ({eMsg:D})";
 
 			if( MsgUtil.IsProtoBuf( rawEMsg ) )
 			{
 				return new TreeNode( eMsgName );
 			}
 
-			return new TreeNode( $"{eMsgName} (Non ProtoBuf)" );
+			return new TreeNode( $"{eMsgName} (Non-Protobuf)" );
 		}
 	}
 }
