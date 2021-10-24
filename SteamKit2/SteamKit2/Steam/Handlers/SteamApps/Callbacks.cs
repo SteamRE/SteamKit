@@ -292,7 +292,7 @@ namespace SteamKit2
                 using ( var ms = new MemoryStream( payload ) )
                 using ( var br = new BinaryReader( ms ) )
                 {
-                    for ( int x = 0 ; x < msg.NumBans ; x++ )
+                    for ( int x = 0; x < msg.NumBans; x++ )
                     {
                         tempList.Add( br.ReadUInt32() );
                     }
@@ -481,7 +481,7 @@ namespace SteamKit2
                 /// </summary>
                 public Uri? HttpUri { get; private set; }
 
-                internal PICSProductInfo( CMsgClientPICSProductInfoResponse parentResponse, CMsgClientPICSProductInfoResponse.AppInfo app_info)
+                internal PICSProductInfo( CMsgClientPICSProductInfoResponse parentResponse, CMsgClientPICSProductInfoResponse.AppInfo app_info )
                 {
                     this.ID = app_info.appid;
                     this.ChangeNumber = app_info.change_number;
@@ -502,13 +502,13 @@ namespace SteamKit2
                     this.OnlyPublic = app_info.only_public;
 
                     // We should have all these fields set for the response to a metadata-only request, but guard here just in case.
-                    if (this.SHAHash != null && this.SHAHash.Length > 0 && !string.IsNullOrEmpty(parentResponse.http_host))
+                    if ( this.SHAHash != null && this.SHAHash.Length > 0 && !string.IsNullOrEmpty( parentResponse.http_host ) )
                     {
-                        var shaString = BitConverter.ToString(this.SHAHash)
-                            .Replace("-", string.Empty)
+                        var shaString = BitConverter.ToString( this.SHAHash )
+                            .Replace( "-", string.Empty )
                             .ToLower();
-                        var uriString = string.Format("http://{0}/appinfo/{1}/sha/{2}.txt.gz", parentResponse.http_host, this.ID, shaString);
-                        this.HttpUri = new Uri(uriString);
+                        var uriString = string.Format( "http://{0}/appinfo/{1}/sha/{2}.txt.gz", parentResponse.http_host, this.ID, shaString );
+                        this.HttpUri = new Uri( uriString );
                     }
 
                     this.UseHttp = this.HttpUri != null && app_info.size >= parentResponse.http_min_size;
@@ -532,7 +532,7 @@ namespace SteamKit2
                             // see: CPackageInfo::UpdateFromBuffer(CSHA const&,uint,CUtlBuffer &)
                             // todo: we've apparently ignored this with zero ill effects, but perhaps we want to respect it?
                             br.ReadUInt32();
-                            
+
                             this.KeyValues.TryReadAsBinary( ms );
                         }
                     }
@@ -624,6 +624,70 @@ namespace SteamKit2
                     kv.TryReadAsBinary( payload );
                     GuestPasses.Add( kv );
                 }
+            }
+        }
+
+        /// <summary>
+        /// This callback is received in response to activating a guest pass or a gift.
+        /// </summary>
+        public sealed class RedeemGuestPassResponseCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Result of the operation
+            /// </summary>
+            public EResult Result { get; set; }
+            /// <summary>
+            /// Package ID which was activated.
+            /// </summary>
+            public uint PackageID { get; set; }
+            /// <summary>
+            /// App ID which must be owned to activate this guest pass.
+            /// </summary>
+            public uint MustOwnAppID { get; set; }
+
+
+            internal RedeemGuestPassResponseCallback( JobID jobID, CMsgClientRedeemGuestPassResponse msg )
+            {
+                JobID = jobID;
+                Result = ( EResult )msg.eresult;
+                PackageID = msg.package_id;
+                MustOwnAppID = msg.must_own_appid;
+            }
+        }
+
+        /// <summary>
+        /// This callback is received in a response to activating a Steam key.
+        /// </summary>
+        public sealed class PurchaseResponseCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Result of the operation
+            /// </summary>
+            public EResult Result { get; set; }
+            /// <summary>
+            /// Purchase result of the operation
+            /// </summary>
+            public EPurchaseResultDetail PurchaseResultDetail { get; set; }
+            /// <summary>
+            /// Purchase receipt of the operation
+            /// </summary>
+            public KeyValue PurchaseReceiptInfo { get; set; }
+
+
+            internal PurchaseResponseCallback( JobID jobID, CMsgClientPurchaseResponse msg )
+            {
+                JobID = jobID;
+                Result = ( EResult )msg.eresult;
+                PurchaseResultDetail = ( EPurchaseResultDetail )msg.purchase_result_details;
+                PurchaseReceiptInfo = new KeyValue();
+
+                if ( msg.purchase_receipt_info == null )
+                {
+                    return;
+                }
+
+                using var ms = new MemoryStream( msg.purchase_receipt_info );
+                PurchaseReceiptInfo.TryReadAsBinary( ms );
             }
         }
 
