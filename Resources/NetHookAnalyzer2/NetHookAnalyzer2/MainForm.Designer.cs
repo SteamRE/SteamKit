@@ -300,6 +300,7 @@
 			this.itemExplorerTreeView.Name = "itemExplorerTreeView";
 			this.itemExplorerTreeView.Size = new System.Drawing.Size(455, 426);
 			this.itemExplorerTreeView.TabIndex = 0;
+			this.itemExplorerTreeView.ShowRootLines = false;
 			// 
 			// timestampColumnHeader
 			// 
