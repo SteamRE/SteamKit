@@ -30,13 +30,13 @@ class MsgChannelEncryptResult<EMsg::ChannelEncryptResult>
 	EResult result = EResult::Invalid;
 };
 
-class MsgClientNewLoginKey<EMsg::ClientNewLoginKey>
+class MsgClientNewLoginKey<EMsg::ClientNewLoginKey> removed
 {
 	uint uniqueID;
 	byte<20> loginKey;
 };
 
-class MsgClientNewLoginKeyAccepted<EMsg::ClientNewLoginKeyAccepted>
+class MsgClientNewLoginKeyAccepted<EMsg::ClientNewLoginKeyAccepted> removed
 {
 	uint uniqueID;
 };
@@ -86,7 +86,7 @@ class MsgClientAppUsageEvent<EMsg::ClientAppUsageEvent>
 	ushort offline;
 };
 
-class MsgClientEmailAddrInfo<EMsg::ClientEmailAddrInfo>
+class MsgClientEmailAddrInfo<EMsg::ClientEmailAddrInfo> removed
 {
 	uint passwordStrength;
 	uint flagsAccountSecurityPolicy;
@@ -100,7 +100,7 @@ class MsgClientUpdateGuestPassesList<EMsg::ClientUpdateGuestPassesList>
 	int countGuestPassesToRedeem;
 };
 
-class MsgClientRequestedClientStats<EMsg::ClientRequestedClientStats>
+class MsgClientRequestedClientStats<EMsg::ClientRequestedClientStats> removed
 {
 	int countStats;
 };
