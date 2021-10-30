@@ -95,6 +95,7 @@ namespace SteamKit2
             this.AddHandler( new SteamScreenshots() );
             this.AddHandler( new SteamMatchmaking() );
             this.AddHandler( new SteamNetworking() );
+            this.AddHandler( new SteamAuthTicket() );
 
             using ( var process = Process.GetCurrentProcess() )
             {
