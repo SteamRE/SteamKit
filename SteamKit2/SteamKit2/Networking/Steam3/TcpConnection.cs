@@ -104,19 +104,19 @@ namespace SteamKit2
             // If we have no cancellation token source, we were already Release()'ed
             if (cancellationToken?.IsCancellationRequested ?? true)
             {
-                log.LogDebug("TcpConnection", "Connection request to {0} was cancelled", CurrentEndPoint);
+                log.LogDebug( nameof( TcpConnection ), "Connection request to {0} was cancelled", CurrentEndPoint );
                 if (success) Shutdown();
                 Release( userRequestedDisconnect: true );
                 return;
             }
             else if (!success)
             {
-                log.LogDebug( "TcpConnection", "Timed out while connecting to {0}", CurrentEndPoint);
+                log.LogDebug( nameof( TcpConnection ), "Failed connecting to {0}", CurrentEndPoint );
                 Release( userRequestedDisconnect: false );
                 return;
             }
 
-            log.LogDebug( "TcpConnection", "Connected to {0}", CurrentEndPoint);
+            log.LogDebug( nameof( TcpConnection ), "Connected to {0}", CurrentEndPoint );
 
             try
             {
@@ -140,7 +140,7 @@ namespace SteamKit2
             }
             catch (Exception ex)
             {
-                log.LogDebug( "TcpConnection", "Exception while setting up connection to {0}: {1}", CurrentEndPoint, ex);
+                log.LogDebug( nameof( TcpConnection ), "Exception while setting up connection to {0}: {1}", CurrentEndPoint, ex );
                 Release( userRequestedDisconnect: false );
             }
         }
@@ -152,12 +152,24 @@ namespace SteamKit2
             int timeout = (int)sender;
             if (cancellationToken.IsCancellationRequested)
             {
-                log.LogDebug( "TcpConnection", "Connection to {0} cancelled by user", CurrentEndPoint);
+                log.LogDebug( nameof( TcpConnection ), "Connection to {0} cancelled by user", CurrentEndPoint );
                 Release( userRequestedDisconnect: true );
                 return;
             }
-            
-            var asyncResult = socket!.BeginConnect(CurrentEndPoint, null, null );
+
+            IAsyncResult asyncResult;
+
+            try
+            {
+                asyncResult = socket!.BeginConnect( CurrentEndPoint, null, null );
+            }
+            catch ( Exception ex )
+            {
+                log.LogDebug( nameof( TcpConnection ), "Exception while beginning connection request to {0}: {1}", CurrentEndPoint, ex );
+                ConnectCompleted( false );
+                return;
+            }
+
             if ( WaitHandle.WaitAny( new WaitHandle[] { asyncResult.AsyncWaitHandle, cancellationToken.Token.WaitHandle }, timeout ) == 0 )
             {
                 try
@@ -167,7 +179,7 @@ namespace SteamKit2
                 }
                 catch ( Exception ex )
                 {
-                    log.LogDebug( "TcpConnection", "Socket exception while completing connection request to {0}: {1}", CurrentEndPoint, ex );
+                    log.LogDebug( nameof( TcpConnection ), "Exception while completing connection request to {0}: {1}", CurrentEndPoint, ex );
                     ConnectCompleted( false );
                 }
             }
@@ -194,7 +206,7 @@ namespace SteamKit2
                 socket.SendTimeout = timeout;
 
                 CurrentEndPoint = endPoint;
-                log.LogDebug( "TcpConnection", "Connecting to {0}...", CurrentEndPoint);
+                log.LogDebug( nameof( TcpConnection ), "Connecting to {0}...", CurrentEndPoint );
                 TryConnect( timeout );
             }
 
@@ -231,7 +243,7 @@ namespace SteamKit2
                 }
                 catch (SocketException ex)
                 {
-                    log.LogDebug( "TcpConnection", "Socket exception while polling: {0}", ex);
+                    log.LogDebug( nameof( TcpConnection ), "Socket exception while polling: {0}", ex );
                     break;
                 }
 
@@ -250,7 +262,7 @@ namespace SteamKit2
                 }
                 catch (IOException ex)
                 {
-                    log.LogDebug("TcpConnection", "Socket exception occurred while reading packet: {0}", ex);
+                    log.LogDebug( nameof( TcpConnection ), "Socket exception occurred while reading packet: {0}", ex );
                     break;
                 }
 
@@ -260,7 +272,7 @@ namespace SteamKit2
                 }
                 catch (Exception ex)
                 {
-                    log.LogDebug( "TcpConnection", "Unexpected exception propogated back to NetLoop: {0}", ex);
+                    log.LogDebug( nameof( TcpConnection ), "Unexpected exception propogated back to NetLoop: {0}", ex );
                 }
             }
 
@@ -313,7 +325,7 @@ namespace SteamKit2
             {
                 if (socket == null || netStream == null)
                 {
-                    log.LogDebug( "TcpConnection", "Attempting to send client data when not connected.");
+                    log.LogDebug( nameof( TcpConnection ), "Attempting to send client data when not connected." );
                     return;
                 }
 
@@ -325,7 +337,7 @@ namespace SteamKit2
                 }
                 catch (IOException ex)
                 {
-                    log.LogDebug( "TcpConnection", "Socket exception while writing data: {0}", ex);
+                    log.LogDebug( nameof( TcpConnection ), "Socket exception while writing data: {0}", ex );
                 }
             }
         }
@@ -345,7 +357,7 @@ namespace SteamKit2
                 }
                 catch (Exception ex)
                 {
-                    log.LogDebug( "TcpConnection", "Socket exception trying to read bound IP: {0}", ex);
+                    log.LogDebug( nameof( TcpConnection ), "Socket exception trying to read bound IP: {0}", ex );
                     return IPAddress.None;
                 }
             }
