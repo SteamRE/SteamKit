@@ -98,7 +98,7 @@ namespace SteamKit2
         {
             if ( details == null )
             {
-                throw new ArgumentNullException( "details" );
+                throw new ArgumentNullException( nameof(details) );
             }
 
             if ( string.IsNullOrEmpty( details.Token ) )

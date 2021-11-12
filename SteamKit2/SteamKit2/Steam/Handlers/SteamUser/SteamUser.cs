@@ -514,7 +514,7 @@ namespace SteamKit2
         #region ClientMsg Handlers
         void HandleLoggedOff( IPacketMsg packetMsg )
         {
-            EResult result = EResult.Invalid;
+            EResult result;
 
             if ( packetMsg.IsProto )
             {

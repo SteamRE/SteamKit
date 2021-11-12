@@ -51,7 +51,7 @@ namespace SteamKit2
             if ( jobFinished )
             {
                 // if the job is finished, we can stop tracking it
-                asyncJobs.TryRemove( jobId, out asyncJob );
+                asyncJobs.TryRemove( jobId, out _ );
             }
         }
 

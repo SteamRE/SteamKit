@@ -584,7 +584,7 @@ namespace SteamKit2
             }
             else
             {
-                groupID = default( SteamID );
+                groupID = default;
                 return false;
             }
         }

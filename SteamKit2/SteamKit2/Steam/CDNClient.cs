@@ -245,11 +245,11 @@ namespace SteamKit2
         /// <summary>
         /// Default timeout to use when making requests
         /// </summary>
-        public static TimeSpan RequestTimeout = TimeSpan.FromSeconds( 10 );
+        public static TimeSpan RequestTimeout { get; set; } = TimeSpan.FromSeconds( 10 );
         /// <summary>
         /// Default timeout to use when reading the response body
         /// </summary>
-        public static TimeSpan ResponseBodyTimeout = TimeSpan.FromSeconds( 60 );
+        public static TimeSpan ResponseBodyTimeout { get; set; } = TimeSpan.FromSeconds( 60 );
 
 
         /// <summary>
@@ -489,7 +489,7 @@ namespace SteamKit2
             var chunkData = await DoRawCommandAsync( server, string.Format( "depot/{0}/chunk/{1}", depotId, chunkID ), cdnAuthToken, proxyServer ).ConfigureAwait( false );
 
             // assert that lengths match only if the chunk has a length assigned.
-            if ( chunk.CompressedLength != default( uint ) && chunkData.Length != chunk.CompressedLength )
+            if ( chunk.CompressedLength > 0 && chunkData.Length != chunk.CompressedLength )
             {
                 throw new InvalidDataException( $"Length mismatch after downloading depot chunk! (was {chunkData.Length}, but should be {chunk.CompressedLength})" );
             }
