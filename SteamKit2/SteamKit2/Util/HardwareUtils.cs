@@ -101,7 +101,7 @@ namespace SteamKit2
                 return null;
             }
 
-            return Encoding.UTF8.GetBytes( guid.ToString() );
+            return Encoding.UTF8.GetBytes( guid.ToString()! );
         }
 
         public byte[]? GetMacAddress() => null;
@@ -176,7 +176,7 @@ namespace SteamKit2
 
             if ( diskUuids.Length > 0 )
             {
-                return Encoding.UTF8.GetBytes( diskUuids.FirstOrDefault() );
+                return Encoding.UTF8.GetBytes( diskUuids[0] );
             }
 
             return null;
@@ -219,7 +219,7 @@ namespace SteamKit2
 
         string? GetParamValue( string[] bootOptions, string param )
         {
-            string paramString = bootOptions
+            var paramString = bootOptions
                 .FirstOrDefault( p => p.StartsWith( param, StringComparison.OrdinalIgnoreCase ) );
 
             if ( paramString == null )
@@ -370,13 +370,13 @@ namespace SteamKit2
         }
 
 
-        static MachineID GenerateMachineID(object state)
+        static MachineID GenerateMachineID(object? state)
         {
             // the aug 25th 2015 CM update made well-formed machine MessageObjects required for logon
             // this was flipped off shortly after the update rolled out, likely due to linux steamclients running on distros without a way to build a machineid
             // so while a valid MO isn't currently (as of aug 25th) required, they could be in the future and we'll abide by The Valve Law now
 
-            var provider = (IMachineInfoProvider)state;
+            var provider = (IMachineInfoProvider)state!;
 
             var machineId = new MachineID();
 

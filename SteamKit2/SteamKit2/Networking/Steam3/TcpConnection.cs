@@ -117,6 +117,7 @@ namespace SteamKit2
             }
 
             log.LogDebug( nameof( TcpConnection ), "Connected to {0}", CurrentEndPoint );
+            DebugLog.Assert( socket != null, nameof( TcpConnection ), "Socket should be non-null after connecting." );
 
             try
             {
@@ -157,11 +158,13 @@ namespace SteamKit2
                 return;
             }
 
+            DebugLog.Assert( CurrentEndPoint != null, nameof( TcpConnection ), "CurrentEndPoint should be non-null when connecting." );
+
             IAsyncResult asyncResult;
 
             try
             {
-                asyncResult = socket!.BeginConnect( CurrentEndPoint, null, null );
+                asyncResult = socket!.BeginConnect( CurrentEndPoint!, null, null );
             }
             catch ( Exception ex )
             {

@@ -133,8 +133,7 @@ namespace SteamKit2
                 {
                     job.SetFailed( dueToRemoteFailure: false );
 
-                    AsyncJob ignored;
-                    asyncJobs.TryRemove( job, out ignored );
+                    asyncJobs.TryRemove( job, out _);
                 }
             }
         }
@@ -148,8 +147,8 @@ namespace SteamKit2
         /// <returns></returns>
         AsyncJob? GetJob( JobID jobId, bool andRemove = false )
         {
-            AsyncJob asyncJob;
-            bool foundJob = false;
+            AsyncJob? asyncJob;
+            bool foundJob;
 
             if ( andRemove )
             {

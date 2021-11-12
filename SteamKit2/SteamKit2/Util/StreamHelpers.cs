@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 
@@ -9,10 +10,12 @@ namespace SteamKit2
         [ThreadStatic]
         static byte[]? data;
 
+#if NET5_0_OR_GREATER
+        [MemberNotNull(nameof(data))]
+#endif
         static void EnsureInitialized()
         {
-            if ( data == null )
-                data = new byte[ 8 ];
+            data ??= new byte[ 8 ];
         }
 
         public static Int16 ReadInt16(this Stream stream)

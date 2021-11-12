@@ -25,12 +25,19 @@ namespace SteamKit2.Util
 
 		static string GetBootDiskLogicalVolume()
 		{
-			return Environment.GetEnvironmentVariable( "SystemDrive" );
+			var volume = Environment.GetEnvironmentVariable( "SystemDrive" );
+
+            if (string.IsNullOrEmpty(volume))
+            {
+                throw new InvalidOperationException("Could not determine system drive letter from 'SystemDrive' environment variable.");
+            }
+
+            return volume;
 		}
 
 		static uint GetBootDiskNumber()
-		{
-			var volumeName = $@"\\.\{ GetBootDiskLogicalVolume() }";
+        {
+            var volumeName = $@"\\.\{ GetBootDiskLogicalVolume() }";
             using var handle = NativeMethods.CreateFile( volumeName, 0, NativeMethods.FILE_SHARE_READ | NativeMethods.FILE_SHARE_WRITE, IntPtr.Zero, NativeMethods.OPEN_EXISTING, 0, IntPtr.Zero );
             if ( handle == null || handle.IsInvalid )
             {

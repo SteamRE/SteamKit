@@ -226,6 +226,8 @@ namespace SteamKit2
 
                 byte[] dataCrc = CryptoHelper.AdlerHash( processedData );
 
+                DebugLog.Assert( ChunkInfo.Checksum != null, nameof( DepotChunk ), "Expected data chunk to have a checksum." );
+
                 if ( !dataCrc.SequenceEqual( ChunkInfo.Checksum ) )
                     throw new InvalidDataException( "Processed data checksum is incorrect! Downloaded depot chunk is corrupt or invalid/wrong depot key?" );
 

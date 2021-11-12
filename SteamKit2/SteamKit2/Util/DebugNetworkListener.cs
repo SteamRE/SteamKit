@@ -56,15 +56,13 @@ namespace SteamKit2
         {
             this.log = log ?? DebugLogContext.Instance;
 
-            string directory;
+            string? directory = null;
             if ( Assembly.GetEntryAssembly() is { } entryAssembly )
             {
                 directory = Path.GetDirectoryName( entryAssembly.Location );
             }
-            else
-            {
-                directory = Directory.GetCurrentDirectory();
-            }
+
+            directory ??= Directory.GetCurrentDirectory();
 
             LogDirectory = Path.Combine(
                 directory,

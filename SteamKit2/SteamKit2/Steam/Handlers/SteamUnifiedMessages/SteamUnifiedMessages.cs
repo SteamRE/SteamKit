@@ -71,8 +71,8 @@ namespace SteamKit2
 
                 var rpcName = string.Format( "{0}.{1}#{2}", serviceName, methodName, version );
 
-                var method = typeof(SteamUnifiedMessages).GetMethod( nameof(SteamUnifiedMessages.SendMessage) ).MakeGenericMethod( message.GetType() );
-                var result = method.Invoke( this.steamUnifiedMessages, new[] { rpcName, message, isNotification } );
+                var method = typeof(SteamUnifiedMessages).GetMethod( nameof(SteamUnifiedMessages.SendMessage) )!.MakeGenericMethod( message.GetType() );
+                var result = method.Invoke( this.steamUnifiedMessages, new[] { rpcName, message, isNotification } )!;
                 return ( AsyncJob<ServiceMethodResponse> )result;
             }
             
@@ -167,9 +167,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(packetMsg) );
             }
 
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc );
-
-            if ( !haveFunc )
+            if ( !dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
             {
                 // ignore messages that we don't have a handler function for
                 return;

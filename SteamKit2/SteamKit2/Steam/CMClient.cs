@@ -417,12 +417,12 @@ namespace SteamKit2.Internal
         }
 
 
-        void NetMsgReceived( object sender, NetMsgEventArgs e )
+        void NetMsgReceived( object? sender, NetMsgEventArgs e )
         {
             OnClientMsgReceived( GetPacketMsg( e.Data, this ) );
         }
 
-        void Connected( object sender, EventArgs e )
+        void Connected( object? sender, EventArgs e )
         {
             DebugLog.Assert( connection != null, nameof( CMClient ), "No connection object after connecting." );
             DebugLog.Assert( connection.CurrentEndPoint != null, nameof( CMClient ), "No connection endpoint after connecting - cannot update server list" );
@@ -433,7 +433,7 @@ namespace SteamKit2.Internal
             OnClientConnected();
         }
 
-        void Disconnected( object sender, DisconnectedEventArgs e )
+        void Disconnected( object? sender, DisconnectedEventArgs e )
         {
             var connectionRelease = Interlocked.Exchange( ref connection, null );
             if ( connectionRelease == null )

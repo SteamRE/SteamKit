@@ -122,6 +122,11 @@ namespace SteamKit2
         /// <exception cref="InvalidOperationException">A handler of that type is already registered.</exception>
         public void AddHandler( ClientMsgHandler handler )
         {
+            if ( handler is null )
+            {
+                throw new ArgumentNullException( nameof( handler ) );
+            }
+
             if ( handlers.Contains( handler.GetType() ) )
             {
                 throw new InvalidOperationException( string.Format( "A handler of type \"{0}\" is already registered.", handler.GetType() ) );
@@ -358,9 +363,7 @@ namespace SteamKit2
                 return false;
             }
 
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc );
-
-            if ( haveFunc )
+            if ( dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
             {
                 // we want to handle some of the clientmsgs before we pass them along to registered handlers
                 handlerFunc( packetMsg );
@@ -370,7 +373,7 @@ namespace SteamKit2
             foreach ( DictionaryEntry kvp in handlers )
             {
                 var key = (Type) kvp.Key;
-                var value = (ClientMsgHandler) kvp.Value;
+                var value = (ClientMsgHandler) kvp.Value!;
 
                 try
                 {
