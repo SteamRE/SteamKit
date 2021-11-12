@@ -1,9 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RollForward>LatestMajor</RollForward>
-    <ProjectGuid>{5BF6D076-399B-41CA-BAE7-37CE1C40CA67}</ProjectGuid>
     <AssemblyOriginatorKeyFile>..\..\SteamKit.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <IsTestProject>true</IsTestProject>
