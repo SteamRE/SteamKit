@@ -519,13 +519,11 @@ namespace SteamKit2.Internal
             {
                 try
                 {
-                    using ( var compressedStream = new MemoryStream( payload ) )
-                    using ( var gzipStream = new GZipStream( compressedStream, CompressionMode.Decompress ) )
-                    using ( var decompressedStream = new MemoryStream() )
-                    {
-                        gzipStream.CopyTo( decompressedStream );
-                        payload = decompressedStream.ToArray();
-                    }
+                    using var compressedStream = new MemoryStream( payload );
+                    using var gzipStream = new GZipStream( compressedStream, CompressionMode.Decompress );
+                    using var decompressedStream = new MemoryStream();
+                    gzipStream.CopyTo( decompressedStream );
+                    payload = decompressedStream.ToArray();
                 }
                 catch ( Exception ex )
                 {
@@ -534,18 +532,16 @@ namespace SteamKit2.Internal
                 }
             }
 
-            using ( var ms = new MemoryStream( payload ) )
-            using ( var br = new BinaryReader( ms ) )
+            using var ms = new MemoryStream( payload );
+            using var br = new BinaryReader( ms );
+            while ( ( ms.Length - ms.Position ) != 0 )
             {
-                while ( ( ms.Length - ms.Position ) != 0 )
-                {
-                    int subSize = br.ReadInt32();
-                    byte[] subData = br.ReadBytes( subSize );
+                int subSize = br.ReadInt32();
+                byte[] subData = br.ReadBytes( subSize );
 
-                    if ( !OnClientMsgReceived( GetPacketMsg( subData, this ) ) )
-                    {
-                        break;
-                    }
+                if ( !OnClientMsgReceived( GetPacketMsg( subData, this ) ) )
+                {
+                    break;
                 }
             }
 

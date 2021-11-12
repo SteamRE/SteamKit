@@ -217,23 +217,14 @@ namespace SteamKit2
 
         bool IsExpectedEMsg( EMsg msg )
         {
-            switch ( state )
+            return state switch
             {
-                case EncryptionState.Disconnected:
-                    return false;
-
-                case EncryptionState.Connected:
-                    return msg == EMsg.ChannelEncryptRequest;
-
-                case EncryptionState.Challenged:
-                    return msg == EMsg.ChannelEncryptResult;
-
-                case EncryptionState.Encrypted:
-                    return true;
-
-                default:
-                    throw new InvalidOperationException( "Unreachable - landed up in undefined state." );
-            }
+                EncryptionState.Disconnected => false,
+                EncryptionState.Connected => msg == EMsg.ChannelEncryptRequest,
+                EncryptionState.Challenged => msg == EMsg.ChannelEncryptResult,
+                EncryptionState.Encrypted => true,
+                _ => throw new InvalidOperationException( "Unreachable - landed up in undefined state." ),
+            };
         }
 
         enum EncryptionState

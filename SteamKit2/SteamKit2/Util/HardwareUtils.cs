@@ -247,14 +247,12 @@ namespace SteamKit2
             {
                 try
                 {
-                    using ( var serialNumberKey = CFStringCreateWithCString( CFTypeRef.None, kIOPlatformSerialNumberKey, CFStringEncoding.kCFStringEncodingASCII ) )
+                    using var serialNumberKey = CFStringCreateWithCString( CFTypeRef.None, kIOPlatformSerialNumberKey, CFStringEncoding.kCFStringEncodingASCII );
+                    var serialNumberAsString = IORegistryEntryCreateCFProperty( platformExpert, serialNumberKey, CFTypeRef.None, 0 );
+                    var sb = new StringBuilder( 64 );
+                    if ( CFStringGetCString( serialNumberAsString, sb, sb.Capacity, CFStringEncoding.kCFStringEncodingASCII ) )
                     {
-                        var serialNumberAsString = IORegistryEntryCreateCFProperty( platformExpert, serialNumberKey, CFTypeRef.None, 0 );
-                        var sb = new StringBuilder( 64 );
-                        if ( CFStringGetCString( serialNumberAsString, sb, sb.Capacity, CFStringEncoding.kCFStringEncodingASCII ) )
-                        {
-                            return Encoding.ASCII.GetBytes( sb.ToString() );
-                        }
+                        return Encoding.ASCII.GetBytes( sb.ToString() );
                     }
                 }
                 finally
@@ -274,22 +272,18 @@ namespace SteamKit2
             var statted = statfs64( "/", ref stat );
             if ( statted == 0 )
             {
-                using ( var session = DASessionCreate( CFTypeRef.None ) )
-                using ( var disk = DADiskCreateFromBSDName( CFTypeRef.None, session, stat.f_mntfromname ) )
-                using ( var properties = DADiskCopyDescription( disk ) )
-                using ( var key = CFStringCreateWithCString( CFTypeRef.None, DiskArbitration.kDADiskDescriptionMediaUUIDKey, CFStringEncoding.kCFStringEncodingASCII ) )
+                using var session = DASessionCreate( CFTypeRef.None );
+                using var disk = DADiskCreateFromBSDName( CFTypeRef.None, session, stat.f_mntfromname );
+                using var properties = DADiskCopyDescription( disk );
+                using var key = CFStringCreateWithCString( CFTypeRef.None, DiskArbitration.kDADiskDescriptionMediaUUIDKey, CFStringEncoding.kCFStringEncodingASCII );
+                IntPtr cfuuid = IntPtr.Zero;
+                if ( CFDictionaryGetValueIfPresent( properties, key, out cfuuid ) )
                 {
-                    IntPtr cfuuid = IntPtr.Zero;
-                    if ( CFDictionaryGetValueIfPresent( properties, key, out cfuuid ) )
+                    using var uuidString = CFUUIDCreateString( CFTypeRef.None, cfuuid );
+                    var stringBuilder = new StringBuilder( 64 );
+                    if ( CFStringGetCString( uuidString, stringBuilder, stringBuilder.Capacity, CFStringEncoding.kCFStringEncodingASCII ) )
                     {
-                        using ( var uuidString = CFUUIDCreateString( CFTypeRef.None, cfuuid ) )
-                        {
-                            var stringBuilder = new StringBuilder( 64 );
-                            if ( CFStringGetCString( uuidString, stringBuilder, stringBuilder.Capacity, CFStringEncoding.kCFStringEncodingASCII ) )
-                            {
-                                return Encoding.ASCII.GetBytes( stringBuilder.ToString() );
-                            }
-                        }
+                        return Encoding.ASCII.GetBytes( stringBuilder.ToString() );
                     }
                 }
             }
@@ -370,12 +364,9 @@ namespace SteamKit2
 
             MachineID machineId = generateTask.Result;
 
-            using ( MemoryStream ms = new MemoryStream() )
-            {
-                machineId.WriteToStream( ms );
-
-                return ms.ToArray();
-            }
+            using MemoryStream ms = new MemoryStream();
+            machineId.WriteToStream( ms );
+            return ms.ToArray();
         }
 
 

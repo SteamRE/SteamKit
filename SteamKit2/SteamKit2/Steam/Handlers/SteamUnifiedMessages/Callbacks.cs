@@ -68,10 +68,8 @@ namespace SteamKit2
             public T GetDeserializedResponse<T>()
                 where T : IExtensible
             {
-                using ( var ms = new MemoryStream( ResponseRaw ) )
-                {
-                    return Serializer.Deserialize<T>( ms );
-                }
+                using var ms = new MemoryStream( ResponseRaw );
+                return Serializer.Deserialize<T>( ms );
             }
         }
 
