@@ -29,7 +29,7 @@ namespace Tests
 
     public class DebugLogFacts
     {
-        [Fact, DebugLogSetupTeardownAttribute]
+        [Fact, DebugLogSetupTeardown]
         public void DebugLogActionListenerLogsMessage()
         {
             DebugLog.Enabled = true;
@@ -43,7 +43,7 @@ namespace Tests
             DebugLog.WriteLine( "category", "msg" );
         }
 
-        [Fact, DebugLogSetupTeardownAttribute]
+        [Fact, DebugLogSetupTeardown]
         public void DebugLogDebugListenerLogsMessage()
         {
             DebugLog.Enabled = true;
@@ -53,7 +53,7 @@ namespace Tests
             DebugLog.WriteLine( "category", "msg" );
         }
 
-        [Fact, DebugLogSetupTeardownAttribute]
+        [Fact, DebugLogSetupTeardown]
         public void DebugLogDoesntLogWhenDisabled()
         {
             DebugLog.Enabled = false;
@@ -66,7 +66,7 @@ namespace Tests
             DebugLog.WriteLine( "category", "msg" );
         }
 
-        [Fact, DebugLogSetupTeardownAttribute]
+        [Fact, DebugLogSetupTeardown]
         public void DebugLogAddsAndRemovesListener()
         {
             var testListener = new TestListener();
