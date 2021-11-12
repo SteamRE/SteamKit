@@ -24,145 +24,127 @@ using SteamKit2;
 // Sample 1, the console output becomes very verbose
 //
 
-namespace Sample3_DebugLog
+// install our debug listeners for this example
+
+// install an instance of our custom listener
+// see the bottom of this file for how it is defined.
+DebugLog.AddListener( new MyListener() );
+
+// install a listener as an anonymous method
+// this call is commented as it would be redundant to install a second listener that also displays messages to the console
+// DebugLog.AddListener( ( category, msg ) => Console.WriteLine( "AnonymousMethod - {0}: {1}", category, msg ) );
+
+// Enable DebugLog in release builds
+DebugLog.Enabled = true;
+
+if ( args.Length < 2 )
 {
-    // define our debuglog listener
-    class MyListener : IDebugListener
+    Console.WriteLine( "Sample3: No username and password specified!" );
+    return;
+}
+
+// save our logon details
+var user = args[ 0 ];
+var pass = args[ 1 ];
+
+// create our steamclient instance
+var steamClient = new SteamClient();
+
+// uncomment this if you'd like to dump raw sent and received packets
+// that can be opened for analysis in NetHookAnalyzer
+// NOTE: dumps may contain sensitive data (such as your Steam password)
+//steamClient.DebugNetworkListener = new NetHookNetworkListener();
+
+// create the callback manager which will route callbacks to function calls
+var manager = new CallbackManager( steamClient );
+
+// get the steamuser handler, which is used for logging on after successfully connecting
+var steamUser = steamClient.GetHandler<SteamUser>();
+
+// register a few callbacks we're interested in
+// these are registered upon creation to a callback manager, which will then route the callbacks
+// to the functions specified
+manager.Subscribe<SteamClient.ConnectedCallback>( OnConnected );
+manager.Subscribe<SteamClient.DisconnectedCallback>( OnDisconnected );
+
+manager.Subscribe<SteamUser.LoggedOnCallback>( OnLoggedOn );
+manager.Subscribe<SteamUser.LoggedOffCallback>( OnLoggedOff );
+
+var isRunning = true;
+
+Console.WriteLine( "Connecting to Steam..." );
+
+// initiate the connection
+steamClient.Connect();
+
+// create our callback handling loop
+while ( isRunning )
+{
+    // in order for the callbacks to get routed, they need to be handled by the manager
+    manager.RunWaitCallbacks( TimeSpan.FromSeconds( 1 ) );
+}
+
+void OnConnected( SteamClient.ConnectedCallback callback )
+{
+    Console.WriteLine( "Connected to Steam! Logging in '{0}'...", user );
+
+    steamUser.LogOn( new SteamUser.LogOnDetails
     {
-        public void WriteLine( string category, string msg )
-        {
-            // this function will be called when internal steamkit components write to the debuglog
+        Username = user,
+        Password = pass,
+    } );
+}
 
-            // for this example, we'll print the output to the console
-            Console.WriteLine( "MyListener - {0}: {1}", category, msg );
-        }
-    }
+void OnDisconnected( SteamClient.DisconnectedCallback callback )
+{
+    Console.WriteLine( "Disconnected from Steam" );
 
-    class Program
+    isRunning = false;
+}
+
+void OnLoggedOn( SteamUser.LoggedOnCallback callback )
+{
+    if ( callback.Result != EResult.OK )
     {
-        static SteamClient steamClient;
-        static CallbackManager manager;
-
-        static SteamUser steamUser;
-
-        static bool isRunning;
-
-        static string user, pass;
-
-
-        static void Main( string[] args )
+        if ( callback.Result == EResult.AccountLogonDenied )
         {
-            // install our debug listeners for this example
+            // if we recieve AccountLogonDenied or one of it's flavors (AccountLogonDeniedNoMailSent, etc)
+            // then the account we're logging into is SteamGuard protected
+            // see sample 5 for how SteamGuard can be handled
 
-            // install an instance of our custom listener
-            DebugLog.AddListener( new MyListener() );
-
-            // install a listener as an anonymous method
-            // this call is commented as it would be redundant to install a second listener that also displays messages to the console
-            // DebugLog.AddListener( ( category, msg ) => Console.WriteLine( "AnonymousMethod - {0}: {1}", category, msg ) );
-            
-            // Enable DebugLog in release builds
-            DebugLog.Enabled = true;
-
-            if ( args.Length < 2 )
-            {
-                Console.WriteLine( "Sample3: No username and password specified!" );
-                return;
-            }
-
-            // save our logon details
-            user = args[ 0 ];
-            pass = args[ 1 ];
-
-            // create our steamclient instance
-            steamClient = new SteamClient();
-
-            // uncomment this if you'd like to dump raw sent and received packets
-            // that can be opened for analysis in NetHookAnalyzer
-            // NOTE: dumps may contain sensitive data (such as your Steam password)
-            //steamClient.DebugNetworkListener = new NetHookNetworkListener();
-
-            // create the callback manager which will route callbacks to function calls
-            manager = new CallbackManager( steamClient );
-
-            // get the steamuser handler, which is used for logging on after successfully connecting
-            steamUser = steamClient.GetHandler<SteamUser>();
-
-            // register a few callbacks we're interested in
-            // these are registered upon creation to a callback manager, which will then route the callbacks
-            // to the functions specified
-            manager.Subscribe<SteamClient.ConnectedCallback>( OnConnected );
-            manager.Subscribe<SteamClient.DisconnectedCallback>( OnDisconnected );
-
-            manager.Subscribe<SteamUser.LoggedOnCallback>( OnLoggedOn );
-            manager.Subscribe<SteamUser.LoggedOffCallback>( OnLoggedOff );
-
-            isRunning = true;
-
-            Console.WriteLine( "Connecting to Steam..." );
-
-            // initiate the connection
-            steamClient.Connect();
-
-            // create our callback handling loop
-            while ( isRunning )
-            {
-                // in order for the callbacks to get routed, they need to be handled by the manager
-                manager.RunWaitCallbacks( TimeSpan.FromSeconds( 1 ) );
-            }
-        }
-
-        static void OnConnected( SteamClient.ConnectedCallback callback )
-        {
-            Console.WriteLine( "Connected to Steam! Logging in '{0}'...", user );
-
-            steamUser.LogOn( new SteamUser.LogOnDetails
-            {
-                Username = user,
-                Password = pass,
-            } );
-        }
-
-        static void OnDisconnected( SteamClient.DisconnectedCallback callback )
-        {
-            Console.WriteLine( "Disconnected from Steam" );
+            Console.WriteLine( "Unable to logon to Steam: This account is SteamGuard protected." );
 
             isRunning = false;
+            return;
         }
 
-        static void OnLoggedOn( SteamUser.LoggedOnCallback callback )
-        {
-            if ( callback.Result != EResult.OK )
-            {
-                if ( callback.Result == EResult.AccountLogonDenied )
-                {
-                    // if we recieve AccountLogonDenied or one of it's flavors (AccountLogonDeniedNoMailSent, etc)
-                    // then the account we're logging into is SteamGuard protected
-                    // see sample 5 for how SteamGuard can be handled
+        Console.WriteLine( "Unable to logon to Steam: {0} / {1}", callback.Result, callback.ExtendedResult );
 
-                    Console.WriteLine( "Unable to logon to Steam: This account is SteamGuard protected." );
+        isRunning = false;
+        return;
+    }
 
-                    isRunning = false;
-                    return;
-                }
+    Console.WriteLine( "Successfully logged on!" );
 
-                Console.WriteLine( "Unable to logon to Steam: {0} / {1}", callback.Result, callback.ExtendedResult );
+    // at this point, we'd be able to perform actions on Steam
 
-                isRunning = false;
-                return;
-            }
+    // for this sample we'll just log off
+    steamUser.LogOff();
+}
 
-            Console.WriteLine( "Successfully logged on!" );
+static void OnLoggedOff( SteamUser.LoggedOffCallback callback )
+{
+    Console.WriteLine( "Logged off of Steam: {0}", callback.Result );
+}
 
-            // at this point, we'd be able to perform actions on Steam
+// define our debuglog listener
+class MyListener : IDebugListener
+{
+    public void WriteLine( string category, string msg )
+    {
+        // this function will be called when internal steamkit components write to the debuglog
 
-            // for this sample we'll just log off
-            steamUser.LogOff();
-        }
-
-        static void OnLoggedOff( SteamUser.LoggedOffCallback callback )
-        {
-            Console.WriteLine( "Logged off of Steam: {0}", callback.Result );
-        }
+        // for this example, we'll print the output to the console
+        Console.WriteLine( "MyListener - {0}: {1}", category, msg );
     }
 }
