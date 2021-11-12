@@ -359,10 +359,10 @@ namespace SteamKit2
             for ( uint i = 0; i < numPackets; i++ )
             {
                 var handled = inPackets.TryGetValue(++inSeqHandled, out var packet);
-                DebugLog.Assert( CurrentEndPoint != null, nameof( UdpConnection ), "CurrentEndPoint should not be null when connected." );
+                DebugLog.Assert( handled, nameof( UdpConnection ), "Should have retrieved next packet info." );
                 inPackets.Remove(inSeqHandled);
 
-                packet.Payload.WriteTo(payload);
+                packet!.Payload.WriteTo(payload);
             }
 
             byte[] data = payload.ToArray();
