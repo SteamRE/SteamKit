@@ -86,7 +86,7 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Publish NetHookAnalyzer2
-      run: dotnet publish --configuration Release --runtime win-x64 Resources/NetHookAnalyzer2/NetHookAnalyzer2/NetHookAnalyzer2.csproj /p:PublishSingleFile=True /p:PublishTrimmed=True
+      run: dotnet publish --configuration Release --runtime win-x64 Resources/NetHookAnalyzer2/NetHookAnalyzer2/NetHookAnalyzer2.csproj /p:PublishSingleFile=True
 
     - name: Upload NetHookAnalyzer2
       uses: actions/upload-artifact@v2
