@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
     <AssemblyOriginatorKeyFile>..\..\SteamKit.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <Description>.NET library that aims to interoperate with the Steam network.</Description>
@@ -48,7 +48,7 @@
         <Pack>true</Pack>
         <PackagePath />
     </Content>
-    <None Include="..\..\Resources\Misc\steamkit_logo_128.png" Pack="true" PackagePath="\"/>
+    <None Include="..\..\Resources\Misc\steamkit_logo_128.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>

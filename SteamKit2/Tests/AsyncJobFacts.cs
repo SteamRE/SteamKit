@@ -373,10 +373,10 @@ namespace Tests
             var continuationThreadID = -1;
             var continuation = asyncTask.ContinueWith( t =>
             {
-                continuationThreadID = Thread.CurrentThread.ManagedThreadId;
+                continuationThreadID = Environment.CurrentManagedThreadId;
             }, TaskContinuationOptions.ExecuteSynchronously );
 
-            var completionThreadID = Thread.CurrentThread.ManagedThreadId;
+            var completionThreadID = Environment.CurrentManagedThreadId;
             asyncJob.AddResult( new Callback { JobID = 123 } );
 
             await continuation;
@@ -396,10 +396,10 @@ namespace Tests
             var continuationThreadID = -1;
             var continuation = asyncTask.ContinueWith( t =>
             {
-                continuationThreadID = Thread.CurrentThread.ManagedThreadId;
+                continuationThreadID = Environment.CurrentManagedThreadId;
             }, TaskContinuationOptions.ExecuteSynchronously );
 
-            var completionThreadID = Thread.CurrentThread.ManagedThreadId;
+            var completionThreadID = Environment.CurrentManagedThreadId;
             asyncJob.AddResult( new Callback { JobID = 123 } );
 
             await continuation;
