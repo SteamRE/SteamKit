@@ -2,10 +2,14 @@
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace SteamKit2.Util
 {
-	static class Win32Helpers
+#if NET6_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
+    static class Win32Helpers
 	{
 		#region Boot Disk Serial Number
 

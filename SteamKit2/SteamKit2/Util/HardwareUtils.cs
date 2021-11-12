@@ -14,6 +14,8 @@ using static SteamKit2.Util.MacHelpers.LibC;
 using static SteamKit2.Util.MacHelpers.CoreFoundation;
 using static SteamKit2.Util.MacHelpers.DiskArbitration;
 using static SteamKit2.Util.MacHelpers.IOKit;
+using System.Runtime.Versioning;
+using System.Runtime.InteropServices;
 
 namespace SteamKit2
 {
@@ -21,21 +23,19 @@ namespace SteamKit2
     {
         public static IMachineInfoProvider GetDefaultProvider()
         {
-            switch ( Environment.OSVersion.Platform )
+            if ( RuntimeInformation.IsOSPlatform( OSPlatform.Windows ) )
             {
-                case PlatformID.Win32NT:
-                case PlatformID.Win32Windows:
-                    return new WindowsMachineInfoProvider();
+                return new WindowsMachineInfoProvider();
+            }
 
-                case PlatformID.Unix:
-                    if ( Utils.IsMacOS() )
-                    {
-                        return new MacOSMachineInfoProvider();
-                    }
-                    else
-                    {
-                        return new LinuxMachineInfoProvider();
-                    }
+            if ( RuntimeInformation.IsOSPlatform( OSPlatform.OSX ) )
+            {
+                return new MacOSMachineInfoProvider();
+            }
+
+            if ( RuntimeInformation.IsOSPlatform( OSPlatform.Linux ) )
+            {
+                return new LinuxMachineInfoProvider();
             }
 
             return new DefaultMachineInfoProvider();
@@ -81,6 +81,9 @@ namespace SteamKit2
         }
     }
 
+#if NET6_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
     sealed class WindowsMachineInfoProvider : IMachineInfoProvider
     {
         public byte[]? GetMachineGuid()
@@ -119,6 +122,9 @@ namespace SteamKit2
         }
     }
 
+#if NET6_0_OR_GREATER
+    [SupportedOSPlatform( "linux" )]
+#endif
     sealed class LinuxMachineInfoProvider : IMachineInfoProvider
     {
         public byte[]? GetMachineGuid()
@@ -229,6 +235,9 @@ namespace SteamKit2
         }
     }
 
+#if NET6_0_OR_GREATER
+    [SupportedOSPlatform( "macos" )]
+#endif
     sealed class MacOSMachineInfoProvider : IMachineInfoProvider
     {
         public byte[]? GetMachineGuid()
