@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ windows-2022, macos-latest, ubuntu-latest ]
+        os: [ windows-latest, macos-latest, ubuntu-latest ]
         sdk: [ 6.0.x ]
         configuration: [ Debug, Release ]
       fail-fast: false

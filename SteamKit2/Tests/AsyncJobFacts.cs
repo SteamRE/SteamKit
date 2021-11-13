@@ -363,7 +363,7 @@ namespace Tests
         }
 
         [Fact]
-        public async Task AsyncJobContinuesAsynchronously()
+        public void AsyncJobContinuesAsynchronously()
         {
             SteamClient client = new SteamClient();
 
@@ -379,14 +379,14 @@ namespace Tests
             var completionThreadID = Environment.CurrentManagedThreadId;
             asyncJob.AddResult( new Callback { JobID = 123 } );
 
-            await continuation;
+            continuation.Wait();
 
             Assert.NotEqual( -1, continuationThreadID );
             Assert.NotEqual( completionThreadID, continuationThreadID );
         }
 
         [Fact]
-        public async Task AsyncJobMultipleContinuesAsynchronously()
+        public void AsyncJobMultipleContinuesAsynchronously()
         {
             SteamClient client = new SteamClient();
 
@@ -402,7 +402,7 @@ namespace Tests
             var completionThreadID = Environment.CurrentManagedThreadId;
             asyncJob.AddResult( new Callback { JobID = 123 } );
 
-            await continuation;
+            continuation.Wait();
 
             Assert.NotEqual( -1, continuationThreadID );
             Assert.NotEqual( completionThreadID, continuationThreadID );
