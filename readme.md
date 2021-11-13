@@ -47,10 +47,10 @@ Note: If you're using the SteamKit2 NuGet package, the protobuf-net dependency s
 
 To compile SteamKit2, the following is required:
 
-  - C# 8.0 compiler &mdash; [.NET Core 3.0 SDK](https://dot.net/) or higher.
+  - [.NET 6.0 SDK](https://dot.net/) or higher.
   - A C# IDE is optional but recommended:
-      - [Visual Studio 2019 (≥16.3)](https://www.visualstudio.com/vs/whatsnew/) (on Windows)
-      - [Visual Studio for Mac (≥8.3)](https://www.visualstudio.com/vs/visual-studio-mac/) (on macOS)
+      - [Visual Studio 2022](https://www.visualstudio.com/vs/whatsnew/) (on Windows)
+      - [Visual Studio 2022 for Mac (≥ Preview 3)](https://www.visualstudio.com/vs/visual-studio-mac/) (on macOS)
       - [Visual Studio Code](https://code.visualstudio.com) with [the C#/OmniSharp extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) (on Windows, macOS, and Linux)
 
 
