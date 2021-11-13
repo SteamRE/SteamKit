@@ -43,9 +43,9 @@ In order to use SteamKit2 at runtime, the following dependencies are required:
 
 To compile SteamKit2, the following is required:
 
-  - C# 8.0 compiler &mdash; [.NET Core 3.0 SDK](https://dot.net/).
-      - On Windows, [Visual Studio 2019 (≥16.3)](https://www.visualstudio.com/vs/whatsnew/) is optional but recommended.
-      - On macOS, [Visual Studio for Mac (≥8.3)](https://www.visualstudio.com/vs/visual-studio-mac/) is optional but recommended.
+  - [.NET 6 SDK](https://dot.net/).
+      - On Windows, [Visual Studio 2022 (≥17.0)](https://www.visualstudio.com/vs/whatsnew/) is optional but recommended.
+      - On macOS, [Visual Studio 2022 for Mac](https://www.visualstudio.com/vs/visual-studio-mac/) may be helpful.
   - [protobuf-net](http://code.google.com/p/protobuf-net/) ([NuGet package](http://nuget.org/packages/protobuf-net))
 
 Note: If you're using the NuGet package, the protobuf-net dependency _should_ be resolved for you. See the [Installation Guide](https://github.com/SteamRE/SteamKit/wiki/Installation) for more information.
