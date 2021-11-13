@@ -12,9 +12,9 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
-        sdk: [5.0.x]
-        configuration: [Debug, Release]
+        os: [ windows-latest, macos-latest, ubuntu-latest ]
+        sdk: [ 6.0.x ]
+        configuration: [ Debug, Release ]
       fail-fast: false
 
     runs-on: ${{ matrix.os }}
@@ -48,7 +48,11 @@ jobs:
 
     - name: Run Tests
       if: matrix.configuration == 'Debug'
-      run: dotnet test --verbosity normal SteamKit2/Tests/Tests.csproj
+      run: dotnet test --verbosity normal --framework net6.0 SteamKit2/Tests/Tests.csproj
+
+    - name: Run Tests (.NET Framework)
+      if: matrix.configuration == 'Debug' && startsWith(matrix.os, 'windows-')
+      run: dotnet test --verbosity normal --framework net48 SteamKit2/Tests/Tests.csproj
 
   steamkit2-artifacts:
     name: Create NuGet Package
@@ -61,7 +65,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
 
     - name: Create NuGet Package
       run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
@@ -83,10 +87,10 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
 
     - name: Publish NetHookAnalyzer2
-      run: dotnet publish --configuration Release --runtime win-x64 Resources/NetHookAnalyzer2/NetHookAnalyzer2/NetHookAnalyzer2.csproj /p:PublishSingleFile=True /p:PublishTrimmed=True
+      run: dotnet publish --configuration Release --runtime win-x64 --self-contained Resources/NetHookAnalyzer2/NetHookAnalyzer2/NetHookAnalyzer2.csproj /p:PublishSingleFile=True
 
     - name: Upload NetHookAnalyzer2
       uses: actions/upload-artifact@v2
@@ -99,7 +103,7 @@ jobs:
 
     strategy:
       matrix:
-        configuration: [Debug, Release]
+        configuration: [ Debug, Release ]
       fail-fast: false
 
     runs-on: windows-latest

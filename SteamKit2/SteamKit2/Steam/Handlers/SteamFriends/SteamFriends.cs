@@ -615,14 +615,14 @@ namespace SteamKit2
         /// </summary>
         /// <param name="steamIdList">A list of SteamIDs to request the info of.</param>
         /// <param name="requestedInfo">The requested info flags. If none specified, this uses <see cref="SteamConfiguration.DefaultPersonaStateFlags"/>.</param>
-        public void RequestFriendInfo( IEnumerable<SteamID> steamIdList, EClientPersonaStateFlag requestedInfo = default(EClientPersonaStateFlag) )
+        public void RequestFriendInfo( IEnumerable<SteamID> steamIdList, EClientPersonaStateFlag requestedInfo = default )
         {
             if ( steamIdList == null )
             {
                 throw new ArgumentNullException( nameof(steamIdList) );
             }
 
-            if ( requestedInfo == default(EClientPersonaStateFlag) )
+            if ( requestedInfo == default )
             {
                 requestedInfo = Client.Configuration.DefaultPersonaStateFlags;
             }
@@ -745,9 +745,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(packetMsg) );
             }
 
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc );
-
-            if ( !haveFunc )
+            if ( !dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
             {
                 // ignore messages that we don't have a handler function for
                 return;

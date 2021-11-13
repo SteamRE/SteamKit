@@ -140,7 +140,7 @@ namespace SteamKit2.Internal
             Configuration = configuration ?? throw new ArgumentNullException( nameof( configuration ) );
 
             if ( identifier is null ) throw new ArgumentNullException( nameof( identifier ) );
-            if ( identifier.Length == 0 ) throw new ArgumentException( nameof( identifier ) );
+            if ( identifier.Length == 0 ) throw new ArgumentException( "Identifer must not be empty.", nameof( identifier ) );
 
             ID = identifier;
 
@@ -417,12 +417,12 @@ namespace SteamKit2.Internal
         }
 
 
-        void NetMsgReceived( object sender, NetMsgEventArgs e )
+        void NetMsgReceived( object? sender, NetMsgEventArgs e )
         {
             OnClientMsgReceived( GetPacketMsg( e.Data, this ) );
         }
 
-        void Connected( object sender, EventArgs e )
+        void Connected( object? sender, EventArgs e )
         {
             DebugLog.Assert( connection != null, nameof( CMClient ), "No connection object after connecting." );
             DebugLog.Assert( connection.CurrentEndPoint != null, nameof( CMClient ), "No connection endpoint after connecting - cannot update server list" );
@@ -433,7 +433,7 @@ namespace SteamKit2.Internal
             OnClientConnected();
         }
 
-        void Disconnected( object sender, DisconnectedEventArgs e )
+        void Disconnected( object? sender, DisconnectedEventArgs e )
         {
             var connectionRelease = Interlocked.Exchange( ref connection, null );
             if ( connectionRelease == null )
@@ -519,13 +519,11 @@ namespace SteamKit2.Internal
             {
                 try
                 {
-                    using ( var compressedStream = new MemoryStream( payload ) )
-                    using ( var gzipStream = new GZipStream( compressedStream, CompressionMode.Decompress ) )
-                    using ( var decompressedStream = new MemoryStream() )
-                    {
-                        gzipStream.CopyTo( decompressedStream );
-                        payload = decompressedStream.ToArray();
-                    }
+                    using var compressedStream = new MemoryStream( payload );
+                    using var gzipStream = new GZipStream( compressedStream, CompressionMode.Decompress );
+                    using var decompressedStream = new MemoryStream();
+                    gzipStream.CopyTo( decompressedStream );
+                    payload = decompressedStream.ToArray();
                 }
                 catch ( Exception ex )
                 {
@@ -534,18 +532,16 @@ namespace SteamKit2.Internal
                 }
             }
 
-            using ( var ms = new MemoryStream( payload ) )
-            using ( var br = new BinaryReader( ms ) )
+            using var ms = new MemoryStream( payload );
+            using var br = new BinaryReader( ms );
+            while ( ( ms.Length - ms.Position ) != 0 )
             {
-                while ( ( ms.Length - ms.Position ) != 0 )
-                {
-                    int subSize = br.ReadInt32();
-                    byte[] subData = br.ReadBytes( subSize );
+                int subSize = br.ReadInt32();
+                byte[] subData = br.ReadBytes( subSize );
 
-                    if ( !OnClientMsgReceived( GetPacketMsg( subData, this ) ) )
-                    {
-                        break;
-                    }
+                if ( !OnClientMsgReceived( GetPacketMsg( subData, this ) ) )
+                {
+                    break;
                 }
             }
 

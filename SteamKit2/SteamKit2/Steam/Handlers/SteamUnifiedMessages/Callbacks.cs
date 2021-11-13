@@ -68,10 +68,8 @@ namespace SteamKit2
             public T GetDeserializedResponse<T>()
                 where T : IExtensible
             {
-                using ( var ms = new MemoryStream( ResponseRaw ) )
-                {
-                    return Serializer.Deserialize<T>( ms );
-                }
+                using var ms = new MemoryStream( ResponseRaw );
+                return Serializer.Deserialize<T>( ms );
             }
         }
 
@@ -110,8 +108,8 @@ namespace SteamKit2
             internal ServiceMethodNotification( Type messageType, IPacketMsg packetMsg )
             {
                 // Bounce into generic-land.
-                var setupMethod = GetType().GetMethod( nameof(Setup), BindingFlags.Static | BindingFlags.NonPublic ).MakeGenericMethod( messageType );
-                (MethodName, Body) = ((string, object))setupMethod.Invoke( this, new[] { packetMsg } );
+                var setupMethod = GetType().GetMethod( nameof(Setup), BindingFlags.Static | BindingFlags.NonPublic )!.MakeGenericMethod( messageType );
+                (MethodName, Body) = ((string, object))setupMethod.Invoke( this, new[] { packetMsg } )!;
             }
 
             static (string methodName, object body) Setup<T>( IPacketMsg packetMsg )

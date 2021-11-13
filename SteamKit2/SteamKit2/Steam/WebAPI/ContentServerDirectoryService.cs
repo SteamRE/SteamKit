@@ -60,7 +60,7 @@ namespace SteamKit2
             }
 
             var directory = configuration.GetAsyncWebAPIInterface( "IContentServerDirectoryService" );
-            var args = new Dictionary<string, object>();
+            var args = new Dictionary<string, object?>();
 
             if ( cellId.HasValue )
             {

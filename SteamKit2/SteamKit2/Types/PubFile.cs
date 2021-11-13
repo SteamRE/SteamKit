@@ -86,9 +86,9 @@ namespace SteamKit2
         /// <returns>
         /// true if the current object is equal to the other parameter; otherwise, false.
         /// </returns>
-        public bool Equals( UInt64Handle other )
+        public bool Equals( UInt64Handle? other )
         {
-            if ( ( object )other == null )
+            if ( other is null )
             {
                 return false;
             }

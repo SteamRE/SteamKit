@@ -255,7 +255,7 @@ namespace SteamKit2
                 /// </summary>
                 /// <param name="obj"></param>
                 /// <returns>true, if obj is <see cref="Member"/> with a matching SteamID. Otherwise, false.</returns>
-                public override bool Equals( object obj )
+                public override bool Equals( object? obj )
                 {
                     if ( obj is Member member )
                     {
@@ -360,11 +360,9 @@ namespace SteamKit2
                     }
                 }
 
-                using ( var ms = new MemoryStream() )
-                {
-                    keyValue.SaveToStream( ms, true );
-                    return ms.ToArray();
-                }
+                using var ms = new MemoryStream();
+                keyValue.SaveToStream( ms, true );
+                return ms.ToArray();
             }
 
             internal static ReadOnlyDictionary<string, string> DecodeMetadata( byte[]? buffer )

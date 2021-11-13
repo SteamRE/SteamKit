@@ -226,6 +226,8 @@ namespace SteamKit2
 
                 byte[] dataCrc = CryptoHelper.AdlerHash( processedData );
 
+                DebugLog.Assert( ChunkInfo.Checksum != null, nameof( DepotChunk ), "Expected data chunk to have a checksum." );
+
                 if ( !dataCrc.SequenceEqual( ChunkInfo.Checksum ) )
                     throw new InvalidDataException( "Processed data checksum is incorrect! Downloaded depot chunk is corrupt or invalid/wrong depot key?" );
 
@@ -243,11 +245,11 @@ namespace SteamKit2
         /// <summary>
         /// Default timeout to use when making requests
         /// </summary>
-        public static TimeSpan RequestTimeout = TimeSpan.FromSeconds( 10 );
+        public static TimeSpan RequestTimeout { get; set; } = TimeSpan.FromSeconds( 10 );
         /// <summary>
         /// Default timeout to use when reading the response body
         /// </summary>
-        public static TimeSpan ResponseBodyTimeout = TimeSpan.FromSeconds( 60 );
+        public static TimeSpan ResponseBodyTimeout { get; set; } = TimeSpan.FromSeconds( 60 );
 
 
         /// <summary>
@@ -487,7 +489,7 @@ namespace SteamKit2
             var chunkData = await DoRawCommandAsync( server, string.Format( "depot/{0}/chunk/{1}", depotId, chunkID ), cdnAuthToken, proxyServer ).ConfigureAwait( false );
 
             // assert that lengths match only if the chunk has a length assigned.
-            if ( chunk.CompressedLength != default( uint ) && chunkData.Length != chunk.CompressedLength )
+            if ( chunk.CompressedLength > 0 && chunkData.Length != chunk.CompressedLength )
             {
                 throw new InvalidDataException( $"Length mismatch after downloading depot chunk! (was {chunkData.Length}, but should be {chunk.CompressedLength})" );
             }
@@ -516,36 +518,34 @@ namespace SteamKit2
             var url = BuildCommand( server, command, args ?? string.Empty, proxyServer );
             using var request = new HttpRequestMessage( HttpMethod.Get, url );
 
-            using ( var cts = new CancellationTokenSource() )
+            using var cts = new CancellationTokenSource();
+            cts.CancelAfter( RequestTimeout );
+
+            try
             {
-                cts.CancelAfter( RequestTimeout );
+                using var response = await httpClient.SendAsync( request, HttpCompletionOption.ResponseHeadersRead, cts.Token ).ConfigureAwait( false );
 
-                try
+                if ( !response.IsSuccessStatusCode )
                 {
-                    using var response = await httpClient.SendAsync( request, HttpCompletionOption.ResponseHeadersRead, cts.Token ).ConfigureAwait( false );
-
-                    if ( !response.IsSuccessStatusCode )
-                    {
-                        throw new SteamKitWebRequestException( $"Response status code does not indicate success: {response.StatusCode:D} ({response.ReasonPhrase}).", response );
-                    }
-
-                    // .NET 5.0 has an override of ReadAsByteArrayAsync that allows a CancellationTokenSource to be supplied
-                    cts.CancelAfter( ResponseBodyTimeout );
-
-                    var contentLength = response.Content.Headers.ContentLength;
-
-                    using var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait( false );
-                    using var ms = new MemoryStream( ( int )contentLength.GetValueOrDefault() );
-
-                    await responseStream.CopyToAsync( ms, 81920, cts.Token ).ConfigureAwait( false );
-                    
-                    return ms.ToArray();
+                    throw new SteamKitWebRequestException( $"Response status code does not indicate success: {response.StatusCode:D} ({response.ReasonPhrase}).", response );
                 }
-                catch ( Exception ex )
-                {
-                    DebugLog.WriteLine( "CDNClient", "Failed to complete web request to {0}: {1}", url, ex.Message );
-                    throw;
-                }
+
+                // .NET 5.0 has an override of ReadAsByteArrayAsync that allows a CancellationTokenSource to be supplied
+                cts.CancelAfter( ResponseBodyTimeout );
+
+                var contentLength = response.Content.Headers.ContentLength;
+
+                using var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait( false );
+                using var ms = new MemoryStream( ( int )contentLength.GetValueOrDefault() );
+
+                await responseStream.CopyToAsync( ms, 81920, cts.Token ).ConfigureAwait( false );
+
+                return ms.ToArray();
+            }
+            catch ( Exception ex )
+            {
+                DebugLog.WriteLine( "CDNClient", "Failed to complete web request to {0}: {1}", url, ex.Message );
+                throw;
             }
         }
 

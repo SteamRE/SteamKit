@@ -259,6 +259,8 @@ namespace SteamKit2
 
             byte[] data = packet.GetData();
 
+            DebugLog.Assert( CurrentEndPoint != null, nameof( UdpConnection ), "CurrentEndPoint should not be null when connected." );
+
             try
             {
                 sock.SendTo( data, CurrentEndPoint );
@@ -330,10 +332,8 @@ namespace SteamKit2
         /// <returns>Non-zero number of message parts if a message is ready to be handled, 0 otherwise</returns>
         private uint ReadyMessageParts()
         {
-            UdpPacket packet;
-
             // Make sure that the first packet of the next message to handle is present
-            if ( !inPackets.TryGetValue(inSeqHandled + 1, out packet) )
+            if ( !inPackets.TryGetValue(inSeqHandled + 1, out var packet) )
                 return 0;
 
             // ...and if relevant, all subparts of the message also
@@ -358,12 +358,11 @@ namespace SteamKit2
             MemoryStream payload = new MemoryStream();
             for ( uint i = 0; i < numPackets; i++ )
             {
-                UdpPacket packet;
-
-                inPackets.TryGetValue(++inSeqHandled, out packet);
+                var handled = inPackets.TryGetValue(++inSeqHandled, out var packet);
+                DebugLog.Assert( handled, nameof( UdpConnection ), "Should have retrieved next packet info." );
                 inPackets.Remove(inSeqHandled);
 
-                packet.Payload.WriteTo(payload);
+                packet!.Payload.WriteTo(payload);
             }
 
             byte[] data = payload.ToArray();
@@ -378,7 +377,7 @@ namespace SteamKit2
         /// <summary>
         /// Processes incoming packets, maintains connection consistency, and oversees outgoing packets.
         /// </summary>
-        private void NetLoop(object param)
+        private void NetLoop(object? param)
         {
             // Variables that will be used deeper in the function; locating them here avoids recreating
             // them since they don't need to be.

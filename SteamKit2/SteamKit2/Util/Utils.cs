@@ -112,7 +112,7 @@ namespace SteamKit2
                                 goto default;
 
                             case 10:
-                                return EOSType.Windows10;
+                                return EOSType.Windows10; // Also Windows 11, Server 2016, Server 2019
 
                             default:
                                 return EOSType.WinUnknown;
@@ -121,7 +121,7 @@ namespace SteamKit2
 
                 case PlatformID.Unix:
                     {
-                        if ( IsMacOS() )
+                        if ( RuntimeInformation.IsOSPlatform( OSPlatform.OSX ) )
                         {
                             switch ( ver.Major )
                             {
@@ -169,9 +169,6 @@ namespace SteamKit2
                     return EOSType.Unknown;
             }
         }
-
-        public static bool IsMacOS()
-            => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
 
         public static T[] GetAttributes<T>( this Type type, bool inherit = false )
             where T : Attribute

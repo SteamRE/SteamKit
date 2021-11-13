@@ -53,8 +53,8 @@ namespace Tests
         [Fact]
         public async Task ThrowsOnIncorrectFormatInArgsProvided()
         {
-            var capturingHandler = new CaturingHttpMessageHandler();
-            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( capturingHandler ) ) );
+            var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
 
             WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
@@ -71,8 +71,8 @@ namespace Tests
         [Fact]
         public async Task DoesntThrowWhenCorrectFormatInArgsProvided()
         {
-            var capturingHandler = new CaturingHttpMessageHandler();
-            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( capturingHandler ) ) );
+            var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
 
             WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
@@ -89,8 +89,8 @@ namespace Tests
         [Fact]
         public async Task DoesntThrowWhenKeyInArgsProvided()
         {
-            var capturingHandler = new CaturingHttpMessageHandler();
-            var configuration = SteamConfiguration.Create( c => c.WithWebAPIKey( "test1" ).WithHttpClientFactory( () => new HttpClient( capturingHandler ) ) );
+            var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c.WithWebAPIKey( "test1" ).WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
 
             WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
@@ -109,8 +109,8 @@ namespace Tests
         [Fact]
         public async Task DoesntThrowOnArgumentsReuse()
         {
-            var capturingHandler = new CaturingHttpMessageHandler();
-            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( capturingHandler ) ) );
+            var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
 
             WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
@@ -127,10 +127,27 @@ namespace Tests
         [Fact]
         public async Task UsesArgsAsQueryStringParams()
         {
-            var capturingHandler = new CaturingHttpMessageHandler();
-            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( capturingHandler ) ) );
+            var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
 
             dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var handlerCalled = false;
+            hookableHandler.OnRequest = request =>
+            {
+                Assert.NotNull( request );
+                Assert.Equal( HttpMethod.Get, request.Method );
+                Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
+
+                var values = request.RequestUri.ParseQueryString();
+                Assert.Equal( 3, values.Count );
+                Assert.Equal( "foo", values[ "f" ] );
+                Assert.Equal( "bar", values[ "b" ] );
+                Assert.Equal( "vdf", values[ "format" ] );
+
+                handlerCalled = true;
+                return Task.CompletedTask;
+            };
 
             var args = new Dictionary<string, object>
             {
@@ -139,45 +156,42 @@ namespace Tests
             };
 
             var response = await iface.PerformFooOperation2( args );
-
-            var request = capturingHandler.MostRecentRequest;
-            Assert.NotNull( request );
-            Assert.Equal( HttpMethod.Get, request.Method );
-            Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
-
-            var values =  request.RequestUri.ParseQueryString();
-            Assert.Equal( 3, values.Count );
-            Assert.Equal( "foo", values[ "f" ] );
-            Assert.Equal( "bar", values[ "b" ] );
-            Assert.Equal( "vdf", values[ "format" ] );
+            Assert.True( handlerCalled );
         }
 
         [Fact]
         public async Task SupportsNullArgsDictionary()
         {
-            var capturingHandler = new CaturingHttpMessageHandler();
-            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( capturingHandler ) ) );
+            var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
 
             dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
+            var handlerCalled = false;
+            hookableHandler.OnRequest = request =>
+            {
+                Assert.NotNull( request );
+                Assert.Equal( HttpMethod.Get, request.Method );
+                Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
+
+                var values = request.RequestUri.ParseQueryString();
+                Assert.Single( values );
+                Assert.Equal( "vdf", values[ "format" ] );
+
+                handlerCalled = true;
+                return Task.CompletedTask;
+            };
+
             var args = default( Dictionary<string, object> );
             var response = await iface.CallAsync( HttpMethod.Get, "PerformFooOperation", 2, args );
-
-            var request = capturingHandler.MostRecentRequest;
-            Assert.NotNull( request );
-            Assert.Equal( HttpMethod.Get, request.Method );
-            Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
-
-            var values = request.RequestUri.ParseQueryString();
-            Assert.Single( values);
-            Assert.Equal( "vdf", values[ "format" ] );
+            Assert.True( handlerCalled );
         }
 
         [Fact]
         public async Task UsesSingleParameterArgumentsDictionary()
         {
-            var capturingHandler = new CaturingHttpMessageHandler();
-            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( capturingHandler ) ) );
+            var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
 
             dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
@@ -188,26 +202,32 @@ namespace Tests
                 [ "method" ] = "PUT"
             };
 
+            var handlerCalled = false;
+            hookableHandler.OnRequest = async request =>
+            {
+                Assert.NotNull( request );
+                Assert.Equal( "/IFooService/PerformFooOperation/v2", request.RequestUri.AbsolutePath );
+                Assert.Equal( HttpMethod.Put, request.Method );
+
+                var formData = await request.Content.ReadAsFormDataAsync();
+                Assert.Equal( 3, formData.Count );
+                Assert.Equal( "foo", formData[ "f" ] );
+                Assert.Equal( "bar", formData[ "b" ] );
+                Assert.Equal( "vdf", formData[ "format" ] );
+
+                handlerCalled = true;
+            };
+
             var response = await iface.PerformFooOperation2( args );
-
-            var request = capturingHandler.MostRecentRequest;
-            Assert.NotNull( request );
-            Assert.Equal( "/IFooService/PerformFooOperation/v2", request.RequestUri.AbsolutePath );
-            Assert.Equal( HttpMethod.Put, request.Method );
-
-            var formData = await request.Content.ReadAsFormDataAsync();
-            Assert.Equal( 3, formData.Count );
-            Assert.Equal( "foo", formData[ "f" ] );
-            Assert.Equal( "bar", formData[ "b" ] );
-            Assert.Equal( "vdf", formData[ "format" ] );
+            Assert.True( handlerCalled );
         }
 
         [Fact]
         public async Task IncludesApiKeyInParams()
         {
-            var capturingHandler = new CaturingHttpMessageHandler();
+            var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c
-                .WithHttpClientFactory( () => new HttpClient( capturingHandler ) )
+                .WithHttpClientFactory( () => new HttpClient( hookableHandler ) )
                 .WithWebAPIKey("MySecretApiKey") );
 
             dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
@@ -218,19 +238,26 @@ namespace Tests
                 [ "b" ] = "bar",
             };
 
+            var handlerCalled = false;
+            hookableHandler.OnRequest = request =>
+            {
+                Assert.NotNull( request );
+                Assert.Equal( HttpMethod.Get, request.Method );
+                Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
+
+                var values = request.RequestUri.ParseQueryString();
+                Assert.Equal( 4, values.Count );
+                Assert.Equal( "MySecretApiKey", values[ "key" ] );
+                Assert.Equal( "foo", values[ "f" ] );
+                Assert.Equal( "bar", values[ "b" ] );
+                Assert.Equal( "vdf", values[ "format" ] );
+
+                handlerCalled = true;
+                return Task.CompletedTask;
+            };
+
             var response = await iface.PerformFooOperation2( args );
-
-            var request = capturingHandler.MostRecentRequest;
-            Assert.NotNull( request );
-            Assert.Equal( HttpMethod.Get, request.Method );
-            Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
-
-            var values = request.RequestUri.ParseQueryString();
-            Assert.Equal( 4, values.Count );
-            Assert.Equal( "MySecretApiKey", values[ "key" ] );
-            Assert.Equal( "foo", values[ "f" ] );
-            Assert.Equal( "bar", values[ "b" ] );
-            Assert.Equal( "vdf", values[ "format" ] );
+            Assert.True( handlerCalled );
         }
 
         sealed class ServiceUnavailableHttpMessageHandler : HttpMessageHandler
@@ -239,18 +266,21 @@ namespace Tests
                 => Task.FromResult( new HttpResponseMessage( HttpStatusCode.ServiceUnavailable ) );
         }
 
-        sealed class CaturingHttpMessageHandler : HttpMessageHandler
+        sealed class HookableHandler : HttpMessageHandler
         {
-            public HttpRequestMessage MostRecentRequest { get; private set; }
+            public Func<HttpRequestMessage, Task> OnRequest { get; set; }
 
-            protected override Task<HttpResponseMessage> SendAsync( HttpRequestMessage request, CancellationToken cancellationToken )
+            protected override async Task<HttpResponseMessage> SendAsync( HttpRequestMessage request, CancellationToken cancellationToken )
             {
-                MostRecentRequest = request;
+                if ( OnRequest is { } handler )
+                {
+                    await handler( request );
+                }
 
-                return Task.FromResult( new HttpResponseMessage( HttpStatusCode.OK )
+                return new HttpResponseMessage( HttpStatusCode.OK )
                 {
                     Content = new ByteArrayContent( Array.Empty<byte>() )
-                });
+                };
             }
         }
     }
