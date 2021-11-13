@@ -379,7 +379,7 @@ namespace Tests
             var completionThreadID = Environment.CurrentManagedThreadId;
             asyncJob.AddResult( new Callback { JobID = 123 } );
 
-            continuation.Wait();
+            WaitForTaskWithoutRunningInline( continuation );
 
             Assert.NotEqual( -1, continuationThreadID );
             Assert.NotEqual( completionThreadID, continuationThreadID );
@@ -402,10 +402,21 @@ namespace Tests
             var completionThreadID = Environment.CurrentManagedThreadId;
             asyncJob.AddResult( new Callback { JobID = 123 } );
 
-            continuation.Wait();
+            WaitForTaskWithoutRunningInline( continuation );
 
             Assert.NotEqual( -1, continuationThreadID );
             Assert.NotEqual( completionThreadID, continuationThreadID );
+        }
+
+        static void WaitForTaskWithoutRunningInline( Task task )
+        {
+            // If we await the task, our Thread can go back to the scheduler and come eligible to
+            // run task continuations. If we call .Wait with an infinite timeout / no cancellation token, then
+            // the .NET runtime will attempt to run the task inline... on the current thread.
+            // To avoid that we need to supply a cancellable-but-never-cancelled token, or do other hackery
+            // with IAsyncResult or mutexes. This appears to be the simplest.
+            using var cts = new CancellationTokenSource();
+            task.Wait( cts.Token );
         }
     }
 }
