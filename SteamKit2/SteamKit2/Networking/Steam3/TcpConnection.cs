@@ -145,11 +145,10 @@ namespace SteamKit2
             }
         }
 
-        private void TryConnect(object sender)
+        private void TryConnect(int timeout)
         {
             DebugLog.Assert( cancellationToken != null, nameof( TcpConnection ), "null CancellationToken in TryConnect" );
 
-            int timeout = (int)sender;
             if (cancellationToken.IsCancellationRequested)
             {
                 log.LogDebug( nameof( TcpConnection ), "Connection to {0} cancelled by user", CurrentEndPoint );
@@ -157,36 +156,29 @@ namespace SteamKit2
                 return;
             }
 
-            IAsyncResult asyncResult;
+            DebugLog.Assert( socket != null, nameof( TcpConnection ), "socket should not be null when connecting (we hold the net lock)" );
 
             try
             {
-                asyncResult = socket!.BeginConnect( CurrentEndPoint, null, null );
+                using var timeoutTokenSource = new CancellationTokenSource( timeout );
+                using var connectCancellation = CancellationTokenSource.CreateLinkedTokenSource( cancellationToken.Token, timeoutTokenSource.Token );
+
+                using ( connectCancellation.Token.Register( s => ( ( Socket )s ).Dispose(), socket ) )
+                {
+                    socket.Connect( CurrentEndPoint );
+                }
+            }
+            catch ( SocketException ) when ( cancellationToken.IsCancellationRequested )
+            {
+                // Ignore, this will be handled by ConnectCompleted.
             }
             catch ( Exception ex )
             {
-                log.LogDebug( nameof( TcpConnection ), "Exception while beginning connection request to {0}: {1}", CurrentEndPoint, ex );
-                ConnectCompleted( false );
-                return;
+                log.LogDebug( nameof( TcpConnection ), "Exception while connecting to {0}: {1}", CurrentEndPoint, ex );
+
             }
 
-            if ( WaitHandle.WaitAny( new WaitHandle[] { asyncResult.AsyncWaitHandle, cancellationToken.Token.WaitHandle }, timeout ) == 0 )
-            {
-                try
-                {
-                    socket.EndConnect( asyncResult );
-                    ConnectCompleted( true );
-                }
-                catch ( Exception ex )
-                {
-                    log.LogDebug( nameof( TcpConnection ), "Exception while completing connection request to {0}: {1}", CurrentEndPoint, ex );
-                    ConnectCompleted( false );
-                }
-            }
-            else
-            {
-                ConnectCompleted( false );
-            }
+            ConnectCompleted( socket.Connected );
         }
 
         /// <summary>
