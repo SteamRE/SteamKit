@@ -159,7 +159,10 @@ namespace SteamKit2
 
             try
             {
-                using ( cancellationToken.Token.Register( s => ( ( Socket )s ).Dispose(), socket ) )
+                using var timeoutTokenSource = new CancellationTokenSource( timeout );
+                using var connectCancellation = CancellationTokenSource.CreateLinkedTokenSource( cancellationToken.Token, timeoutTokenSource.Token );
+
+                using ( connectCancellation.Token.Register( s => ( ( Socket )s ).Dispose(), socket ) )
                 {
                     socket!.Connect( CurrentEndPoint );
                 }
@@ -167,12 +170,16 @@ namespace SteamKit2
             catch ( SocketException ) when ( cancellationToken.IsCancellationRequested )
             {
                 ConnectCompleted( false );
+                return;
             }
             catch ( Exception ex )
             {
                 log.LogDebug( nameof( TcpConnection ), "Exception while beginning connection request to {0}: {1}", CurrentEndPoint, ex );
                 ConnectCompleted( false );
+                return;
             }
+
+            ConnectCompleted( true );
         }
 
         /// <summary>
