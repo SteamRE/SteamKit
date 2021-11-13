@@ -52,7 +52,7 @@ jobs:
 
     - name: Run Tests (.NET Framework)
       if: matrix.configuration == 'Debug' && startsWith(matrix.os, 'windows-')
-      run: dotnet test --verbosity normal --framework net6.0 SteamKit2/Tests/Tests.csproj
+      run: dotnet test --verbosity normal --framework net48 SteamKit2/Tests/Tests.csproj
 
   steamkit2-artifacts:
     name: Create NuGet Package
