@@ -157,34 +157,20 @@ namespace SteamKit2
                 return;
             }
 
-            IAsyncResult asyncResult;
-
             try
             {
-                asyncResult = socket!.BeginConnect( CurrentEndPoint, null, null );
+                using ( cancellationToken.Token.Register( s => ( ( Socket )s ).Dispose(), socket ) )
+                {
+                    socket!.Connect( CurrentEndPoint );
+                }
+            }
+            catch ( SocketException ) when ( cancellationToken.IsCancellationRequested )
+            {
+                ConnectCompleted( false );
             }
             catch ( Exception ex )
             {
                 log.LogDebug( nameof( TcpConnection ), "Exception while beginning connection request to {0}: {1}", CurrentEndPoint, ex );
-                ConnectCompleted( false );
-                return;
-            }
-
-            if ( WaitHandle.WaitAny( new WaitHandle[] { asyncResult.AsyncWaitHandle, cancellationToken.Token.WaitHandle }, timeout ) == 0 )
-            {
-                try
-                {
-                    socket.EndConnect( asyncResult );
-                    ConnectCompleted( true );
-                }
-                catch ( Exception ex )
-                {
-                    log.LogDebug( nameof( TcpConnection ), "Exception while completing connection request to {0}: {1}", CurrentEndPoint, ex );
-                    ConnectCompleted( false );
-                }
-            }
-            else
-            {
                 ConnectCompleted( false );
             }
         }
