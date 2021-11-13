@@ -157,6 +157,8 @@ namespace SteamKit2
                 return;
             }
 
+            DebugLog.Assert( socket != null, nameof( TcpConnection ), "socket should not be null when connecting (we hold the net lock)" );
+
             try
             {
                 using var timeoutTokenSource = new CancellationTokenSource( timeout );
@@ -164,22 +166,19 @@ namespace SteamKit2
 
                 using ( connectCancellation.Token.Register( s => ( ( Socket )s ).Dispose(), socket ) )
                 {
-                    socket!.Connect( CurrentEndPoint );
+                    socket.Connect( CurrentEndPoint );
                 }
             }
             catch ( SocketException ) when ( cancellationToken.IsCancellationRequested )
             {
-                ConnectCompleted( false );
-                return;
+                // Ignore, this will be handled by ConnectCompleted.
             }
             catch ( Exception ex )
             {
                 log.LogDebug( nameof( TcpConnection ), "Exception while beginning connection request to {0}: {1}", CurrentEndPoint, ex );
-                ConnectCompleted( false );
-                return;
             }
 
-            ConnectCompleted( true );
+            ConnectCompleted( socket.Connected );
         }
 
         /// <summary>
