@@ -174,7 +174,8 @@ namespace SteamKit2
             }
             catch ( Exception ex )
             {
-                log.LogDebug( nameof( TcpConnection ), "Exception while beginning connection request to {0}: {1}", CurrentEndPoint, ex );
+                log.LogDebug( nameof( TcpConnection ), "Exception while connecting to {0}: {1}", CurrentEndPoint, ex );
+
             }
 
             ConnectCompleted( socket.Connected );
