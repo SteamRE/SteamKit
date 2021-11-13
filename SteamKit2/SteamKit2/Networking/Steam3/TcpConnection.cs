@@ -145,11 +145,10 @@ namespace SteamKit2
             }
         }
 
-        private void TryConnect(object sender)
+        private void TryConnect(int timeout)
         {
             DebugLog.Assert( cancellationToken != null, nameof( TcpConnection ), "null CancellationToken in TryConnect" );
 
-            int timeout = (int)sender;
             if (cancellationToken.IsCancellationRequested)
             {
                 log.LogDebug( nameof( TcpConnection ), "Connection to {0} cancelled by user", CurrentEndPoint );
