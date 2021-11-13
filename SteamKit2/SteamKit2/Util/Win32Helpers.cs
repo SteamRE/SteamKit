@@ -6,7 +6,7 @@ using System.Runtime.Versioning;
 
 namespace SteamKit2.Util
 {
-#if NET6_0_OR_GREATER
+#if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
     static class Win32Helpers

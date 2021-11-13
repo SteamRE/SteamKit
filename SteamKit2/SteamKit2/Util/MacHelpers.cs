@@ -8,7 +8,7 @@ namespace SteamKit2.Util.MacHelpers
 {
 #pragma warning disable CA2101 // Specify marshaling for P/Invoke string arguments. All the APIs in this file deal with regular UTF-8 strings (char *). With CharSet.Unicode, SK2 just crashes.
 
-#if NET6_0_OR_GREATER
+#if NET5_0_OR_GREATER
     [SupportedOSPlatform( "macos" )]
 #endif
     class CFTypeRef : SafeHandle
@@ -41,7 +41,7 @@ namespace SteamKit2.Util.MacHelpers
     }
 
     // Taken from <sys/mount.h>
-#if NET6_0_OR_GREATER
+#if NET5_0_OR_GREATER
     [SupportedOSPlatform( "macos" )]
 #endif
     [SuppressMessage( "Style", "IDE1006:Naming Styles", Justification = "Original name of interop type." )]
@@ -78,7 +78,7 @@ namespace SteamKit2.Util.MacHelpers
         public uint[]  f_reserved;  /* For future use */
     }
 
-#if NET6_0_OR_GREATER
+#if NET5_0_OR_GREATER
     [SupportedOSPlatform( "macos" )]
 #endif
     static class LibC
@@ -89,7 +89,7 @@ namespace SteamKit2.Util.MacHelpers
         public static extern int statfs64(string path, ref statfs buf);
     }
 
-#if NET6_0_OR_GREATER
+#if NET5_0_OR_GREATER
     [SupportedOSPlatform( "macos" )]
 #endif
     static class CoreFoundation
@@ -119,7 +119,7 @@ namespace SteamKit2.Util.MacHelpers
         public static extern CFTypeRef CFUUIDCreateString(CFTypeRef allocator, IntPtr uuid);
     }
 
-#if NET6_0_OR_GREATER
+#if NET5_0_OR_GREATER
     [SupportedOSPlatform( "macos" )]
 #endif
     static class DiskArbitration
@@ -137,7 +137,7 @@ namespace SteamKit2.Util.MacHelpers
         public static extern CFTypeRef DADiskCopyDescription(CFTypeRef disk);
     }
 
-#if NET6_0_OR_GREATER
+#if NET5_0_OR_GREATER
     [SupportedOSPlatform( "macos" )]
 #endif
     static class IOKit
