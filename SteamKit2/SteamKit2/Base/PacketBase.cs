@@ -47,13 +47,6 @@ namespace SteamKit2
         /// The source job id.
         /// </value>
         ulong SourceJobID { get; }
-        /// <summary>
-        /// Gets the offset in payload to the body after the header.
-        /// </summary>
-        /// <value>
-        /// The offset in payload after the header.
-        /// </value>
-        long BodyOffset { get; }
 
         /// <summary>
         /// Gets the underlying data that represents this client message.
@@ -87,7 +80,7 @@ namespace SteamKit2
         /// <value>
         /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
         /// </value>
-        public bool IsProto { get { return true; } }
+        public bool IsProto => true;
         /// <summary>
         /// Gets the network message type of this packet message.
         /// </summary>
@@ -116,14 +109,14 @@ namespace SteamKit2
         /// <value>
         /// The header.
         /// </value>
-        public MsgHdrProtoBuf Header { get; }
+        internal MsgHdrProtoBuf Header;
         /// <summary>
         /// Gets the offset in payload to the body after the header.
         /// </summary>
         /// <value>
         /// The offset in payload after the header.
         /// </value>
-        public long BodyOffset { get; }
+        internal long BodyOffset;
 
         byte[] payload;
 
@@ -203,14 +196,14 @@ namespace SteamKit2
         /// <value>
         /// The header.
         /// </value>
-        public ExtendedClientMsgHdr Header { get; }
+        internal ExtendedClientMsgHdr Header;
         /// <summary>
         /// Gets the offset in payload to the body after the header.
         /// </summary>
         /// <value>
         /// The offset in payload after the header.
         /// </value>
-        public long BodyOffset { get; }
+        internal long BodyOffset;
 
         byte[] payload;
 
@@ -290,14 +283,14 @@ namespace SteamKit2
         /// <value>
         /// The header.
         /// </value>
-        public MsgHdr Header { get; }
+        internal MsgHdr Header;
         /// <summary>
         /// Gets the offset in payload to the body after the header.
         /// </summary>
         /// <value>
         /// The offset in payload after the header.
         /// </value>
-        public long BodyOffset { get; }
+        internal long BodyOffset;
 
         byte[] payload;
 
