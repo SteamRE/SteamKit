@@ -167,7 +167,7 @@ namespace SteamKit2.Internal
         {
             lock ( connectionLock )
             {
-                this.Disconnect();
+                Disconnect( userInitiated: true );
                 Debug.Assert( connection == null );
 
                 Debug.Assert( connectionCancellation == null );
@@ -233,7 +233,7 @@ namespace SteamKit2.Internal
         /// </summary>
         public void Disconnect() => Disconnect( userInitiated: true ); 
 
-        void Disconnect( bool userInitiated)
+        internal void Disconnect( bool userInitiated )
         {
             lock ( connectionLock )
             {
@@ -339,7 +339,7 @@ namespace SteamKit2.Internal
             if ( packetMsg == null )
             {
                 LogDebug( "CMClient", "Packet message failed to parse, shutting down connection" );
-                Disconnect();
+                Disconnect( userInitiated: false );
                 return false;
             }
 
