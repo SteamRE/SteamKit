@@ -10,7 +10,6 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using ProtoBuf;
-using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -105,7 +104,7 @@ namespace SteamKit2
         {
             dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
-                { EMsg.ClientServiceMethodLegacyResponse, HandleClientServiceMethodResponse },
+                { EMsg.ServiceMethodResponse, HandleServiceMethodResponse },
                 { EMsg.ServiceMethod, HandleServiceMethod },
             };
         }
@@ -121,25 +120,17 @@ namespace SteamKit2
         /// <param name="isNotification">Whether this message is a notification or not.</param>
         /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
         public AsyncJob<ServiceMethodResponse> SendMessage<TRequest>( string name, TRequest message, bool isNotification = false )
-            where TRequest : IExtensible
+            where TRequest : IExtensible, new()
         {
             if ( message == null )
             {
                 throw new ArgumentNullException( nameof(message) );
             }
 
-            var msg = new ClientMsgProtobuf<CMsgClientServiceMethodLegacy>( EMsg.ClientServiceMethodLegacy );
+            var msg = new ClientMsgProtobuf<TRequest>( isNotification ? EMsg.ServiceMethodSendToClient : EMsg.ServiceMethodCallFromClient );
             msg.SourceJobID = Client.GetNextJobID();
-
-            using ( var ms = new MemoryStream() )
-            {
-                Serializer.Serialize( ms, message );
-                msg.Body.serialized_method = ms.ToArray();
-            }
-
-            msg.Body.method_name = name;
-            msg.Body.is_notification = isNotification;
-
+            msg.Header.Proto.target_job_name = name;
+            msg.Body = message;
             Client.Send( msg );
 
             return new AsyncJob<ServiceMethodResponse>( this.Client, msg.SourceJobID );
@@ -178,18 +169,25 @@ namespace SteamKit2
 
 
         #region ClientMsg Handlers
-        void HandleClientServiceMethodResponse( IPacketMsg packetMsg )
+        void HandleServiceMethodResponse( IPacketMsg packetMsg )
         {
-            var response = new ClientMsgProtobuf<CMsgClientServiceMethodLegacyResponse>( packetMsg );
-            var callback = new ServiceMethodResponse(response.TargetJobID, (EResult)response.ProtoHeader.eresult, response.Body);
+            if ( !( packetMsg is PacketClientMsgProtobuf packetMsgProto ) )
+            {
+                throw new InvalidDataException( "Packet message is expected to be protobuf." );
+            }
+
+            var callback = new ServiceMethodResponse( packetMsgProto );
             Client.PostCallback( callback );
         }
 
         void HandleServiceMethod( IPacketMsg packetMsg )
         {
-            var notification = new ClientMsgProtobuf( packetMsg );
+            if ( !( packetMsg is PacketClientMsgProtobuf packetMsgProto ) )
+            {
+                throw new InvalidDataException( "Packet message is expected to be protobuf." );
+            }
 
-            var jobName = notification.Header.Proto.target_job_name;
+            var jobName = packetMsgProto.Header.Proto.target_job_name;
             if ( !string.IsNullOrEmpty( jobName ) )
             {
                 var splitByDot = jobName.Split( '.' );

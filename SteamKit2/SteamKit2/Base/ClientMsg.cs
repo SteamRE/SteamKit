@@ -109,9 +109,12 @@ namespace SteamKit2
         public ClientMsgProtobuf( IPacketMsg msg )
             : this( msg.GetMsgTypeWithNullCheck( nameof(msg) ) )
         {
-            DebugLog.Assert(msg.IsProto, "ClientMsgProtobuf", "ClientMsgProtobuf used for non-proto message!");
+            if ( !( msg is PacketClientMsgProtobuf packetMsgProto ) )
+            {
+                throw new InvalidDataException( "ClientMsgProtobuf used for non-proto message!" );
+            }
 
-            Deserialize( msg.GetData() );
+            Header = packetMsgProto.Header;
         }
 
 
@@ -123,21 +126,6 @@ namespace SteamKit2
         {
             throw new NotSupportedException( "ClientMsgProtobuf is for reading only. Use ClientMsgProtobuf<T> for serializing messages." );
         }
-
-        /// <summary>
-        /// Initializes this client message by deserializing the specified data.
-        /// </summary>
-        /// <param name="data">The data representing a client message.</param>
-        public override void Deserialize( byte[] data )
-        {
-            if ( data == null )
-            {
-                throw new ArgumentNullException( nameof(data) );
-            }
-
-            using MemoryStream ms = new MemoryStream( data );
-            Header.Deserialize( ms );
-        }
     }
 
     /// <summary>
@@ -147,10 +135,16 @@ namespace SteamKit2
     public sealed class ClientMsgProtobuf<TBody> : ClientMsgProtobuf
         where TBody : IExtensible, new()
     {
+        private TBody _body;
+
         /// <summary>
         /// Gets the body structure of this message.
         /// </summary>
-        public TBody Body { get; private set; }
+        public TBody Body
+        {
+            get => _body;
+            set => _body = value ?? throw new ArgumentNullException( nameof( value ) );
+        }
 
 
         /// <summary>
@@ -162,7 +156,7 @@ namespace SteamKit2
         public ClientMsgProtobuf( EMsg eMsg, int payloadReserve = 64 )
             : base( payloadReserve )
         {
-            Body = new TBody();
+            _body = new TBody();
 
             // set our emsg
             Header.Msg = eMsg;
@@ -190,9 +184,27 @@ namespace SteamKit2
         public ClientMsgProtobuf( IPacketMsg msg )
             : this( msg.GetMsgTypeWithNullCheck( nameof(msg) ) )
         {
-            DebugLog.Assert( msg.IsProto, "ClientMsgProtobuf<>", $"ClientMsgProtobuf<{typeof(TBody).FullName}> used for non-proto message!" );
+            if ( !( msg is PacketClientMsgProtobuf packetMsg ) )
+            {
+                throw new InvalidDataException( $"ClientMsgProtobuf<{typeof(TBody).FullName}> used for non-proto message!" );
+            }
 
-            Deserialize( msg.GetData() );
+            Header = packetMsg.Header;
+
+            var data = packetMsg.GetData();
+            var offset = (int)packetMsg.BodyOffset;
+            using MemoryStream ms = new MemoryStream( data, offset, data.Length - offset );
+
+            Body = Serializer.Deserialize<TBody>( ms );
+
+            // the rest of the data is the payload
+            int payloadLen = ( int )( ms.Length - ms.Position );
+
+            if ( payloadLen > 0 )
+            {
+                ms.CopyTo( Payload, payloadLen );
+                Payload.Seek( 0, SeekOrigin.Begin );
+            }
         }
 
         /// <summary>
@@ -209,28 +221,6 @@ namespace SteamKit2
             Payload.WriteTo( ms );
 
             return ms.ToArray();
-        }
-        /// <summary>
-        /// Initializes this client message by deserializing the specified data.
-        /// </summary>
-        /// <param name="data">The data representing a client message.</param>
-        public override void Deserialize( byte[] data )
-        {
-            if ( data == null )
-            {
-                throw new ArgumentNullException( nameof(data) );
-            }
-
-            using MemoryStream ms = new MemoryStream( data );
-            Header.Deserialize( ms );
-            Body = Serializer.Deserialize<TBody>( ms );
-
-            // the rest of the data is the payload
-            int payloadOffset = ( int )ms.Position;
-            int payloadLen = ( int )( ms.Length - ms.Position );
-
-            Payload.Write( data, payloadOffset, payloadLen );
-            Payload.Seek( 0, SeekOrigin.Begin );
         }
     }
 
@@ -357,9 +347,27 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(msg) );
             }
 
-            DebugLog.Assert( !msg.IsProto, "ClientMsg", $"ClientMsg<{typeof(TBody).FullName}> used for proto message!" );
+            if ( !( msg is PacketClientMsg packetMsg ) )
+            {
+                throw new InvalidDataException( $"ClientMsg<{typeof( TBody ).FullName}> used for proto message!" );
+            }
 
-            Deserialize( msg.GetData() );
+            Header = packetMsg.Header;
+
+            var data = packetMsg.GetData();
+            var offset = (int)packetMsg.BodyOffset;
+            using MemoryStream ms = new MemoryStream( data, offset, data.Length - offset );
+
+            Body.Deserialize( ms );
+
+            // the rest of the data is the payload
+            int payloadLen = ( int )( ms.Length - ms.Position );
+
+            if ( payloadLen > 0 )
+            {
+                ms.CopyTo( Payload, payloadLen );
+                Payload.Seek( 0, SeekOrigin.Begin );
+            }
         }
 
         /// <summary>
@@ -376,28 +384,6 @@ namespace SteamKit2
             Payload.WriteTo( ms );
 
             return ms.ToArray();
-        }
-        /// <summary>
-        /// Initializes this client message by deserializing the specified data.
-        /// </summary>
-        /// <param name="data">The data representing a client message.</param>
-        public override void Deserialize( byte[] data )
-        {
-            if ( data == null )
-            {
-                throw new ArgumentNullException( nameof(data) );
-            }
-
-            using MemoryStream ms = new MemoryStream( data );
-            Header.Deserialize( ms );
-            Body.Deserialize( ms );
-
-            // the rest of the data is the payload
-            int payloadOffset = ( int )ms.Position;
-            int payloadLen = ( int )( ms.Length - ms.Position );
-
-            Payload.Write( data, payloadOffset, payloadLen );
-            Payload.Seek( 0, SeekOrigin.Begin );
         }
     }
 
@@ -515,7 +501,27 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(msg) );
             }
 
-            Deserialize( msg.GetData() );
+            if ( !( msg is PacketMsg packetMsg ) )
+            {
+                throw new InvalidDataException( $"ClientMsg<{typeof( TBody ).FullName}> used for proto message!" );
+            }
+
+            Header = packetMsg.Header;
+
+            var data = packetMsg.GetData();
+            var offset = (int)packetMsg.BodyOffset;
+            using MemoryStream ms = new MemoryStream( data, offset, data.Length - offset );
+
+            Body.Deserialize( ms );
+
+            // the rest of the data is the payload
+            int payloadLen = ( int )( ms.Length - ms.Position );
+
+            if ( payloadLen > 0 )
+            {
+                ms.CopyTo( Payload, payloadLen );
+                Payload.Seek( 0, SeekOrigin.Begin );
+            }
         }
 
 
@@ -534,28 +540,5 @@ namespace SteamKit2
 
             return ms.ToArray();
         }
-        /// <summary>
-        /// Initializes this client message by deserializing the specified data.
-        /// </summary>
-        /// <param name="data">The data representing a client message.</param>
-        public override void Deserialize( byte[] data )
-        {
-            if ( data == null )
-            {
-                throw new ArgumentNullException( nameof(data) );
-            }
-
-            using MemoryStream ms = new MemoryStream( data );
-            Header.Deserialize( ms );
-            Body.Deserialize( ms );
-
-            // the rest of the data is the payload
-            int payloadOffset = ( int )ms.Position;
-            int payloadLen = ( int )( ms.Length - ms.Position );
-
-            Payload.Write( data, payloadOffset, payloadLen );
-            Payload.Seek( 0, SeekOrigin.Begin );
-        }
-
     }
 }
