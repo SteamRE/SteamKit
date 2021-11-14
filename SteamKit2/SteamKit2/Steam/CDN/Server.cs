@@ -3,6 +3,7 @@
  * file 'license.txt', which is part of this source code package.
  */
 
+using System;
 using System.Net;
 
 namespace SteamKit2.CDN
@@ -91,7 +92,7 @@ namespace SteamKit2.CDN
         /// <summary>
         /// Gets the list of app ids this server can be used with.
         /// </summary>
-        public uint[]? AllowedAppIds { get; internal set; }
+        public uint[] AllowedAppIds { get; internal set; } = Array.Empty<uint>();
 
         /// <summary>
         /// Performs an implicit conversion from <see cref="System.Net.IPEndPoint"/> to <see cref="Server"/>.
