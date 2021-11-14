@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace SteamKit2.CDN
 {
     /// <summary>
-    /// The CDNClient class is used for downloading game content from the Steam servers.
+    /// The <see cref="Client"/> class is used for downloading game content from the Steam servers.
     /// </summary>
     public sealed class Client : IDisposable
     {
@@ -180,9 +180,11 @@ namespace SteamKit2.CDN
                     throw new SteamKitWebRequestException( $"Response status code does not indicate success: {response.StatusCode:D} ({response.ReasonPhrase}).", response );
                 }
 
-                // .NET 5.0 has an override of ReadAsByteArrayAsync that allows a CancellationTokenSource to be supplied
                 cts.CancelAfter( ResponseBodyTimeout );
 
+#if NET5_0_OR_GREATER
+                return await response.Content.ReadAsByteArrayAsync( cts.Token ).ConfigureAwait( false );
+#else
                 var contentLength = response.Content.Headers.ContentLength;
 
                 using var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait( false );
@@ -191,10 +193,11 @@ namespace SteamKit2.CDN
                 await responseStream.CopyToAsync( ms, 81920, cts.Token ).ConfigureAwait( false );
 
                 return ms.ToArray();
+#endif
             }
             catch ( Exception ex )
             {
-                DebugLog.WriteLine( "CDNClient", "Failed to complete web request to {0}: {1}", url, ex.Message );
+                DebugLog.WriteLine( nameof( CDN ), "Failed to complete web request to {0}: {1}", url, ex.Message );
                 throw;
             }
         }
