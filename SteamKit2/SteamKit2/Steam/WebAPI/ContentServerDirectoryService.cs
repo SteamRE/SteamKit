@@ -18,8 +18,8 @@ namespace SteamKit2
         /// Load a list of servers from the Content Server Directory Service.
         /// </summary>
         /// <param name="configuration">Configuration Object</param>
-        /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="CDNClient.Server"/>s.</returns>
-        public static Task<IReadOnlyCollection<CDNClient.Server>> LoadAsync( SteamConfiguration configuration )
+        /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="CDN.Server"/>s.</returns>
+        public static Task<IReadOnlyCollection<CDN.Server>> LoadAsync( SteamConfiguration configuration )
             => LoadCoreAsync( configuration, null, null, CancellationToken.None );
 
         /// <summary>
@@ -27,8 +27,8 @@ namespace SteamKit2
         /// </summary>
         /// <param name="configuration">Configuration Object</param>
         /// <param name="cancellationToken">Cancellation Token</param>
-        /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="CDNClient.Server"/>s.</returns>
-        public static Task<IReadOnlyCollection<CDNClient.Server>> LoadAsync( SteamConfiguration configuration, CancellationToken cancellationToken )
+        /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="CDN.Server"/>s.</returns>
+        public static Task<IReadOnlyCollection<CDN.Server>> LoadAsync( SteamConfiguration configuration, CancellationToken cancellationToken )
             => LoadCoreAsync( configuration, null, null, cancellationToken );
 
         /// <summary>
@@ -37,22 +37,23 @@ namespace SteamKit2
         /// <param name="configuration">Configuration Object</param>
         /// <param name="cellId">Preferred steam cell id</param>
         /// <param name="cancellationToken">Cancellation Token</param>
-        /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="CDNClient.Server"/>s.</returns>
-        public static Task<IReadOnlyCollection<CDNClient.Server>> LoadAsync( SteamConfiguration configuration, int cellId, CancellationToken cancellationToken )
+        /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="CDN.Server"/>s.</returns>
+        public static Task<IReadOnlyCollection<CDN.Server>> LoadAsync( SteamConfiguration configuration, int cellId, CancellationToken cancellationToken )
             => LoadCoreAsync( configuration, cellId, null, cancellationToken );
 
         /// <summary>
         /// Load a list of servers from the Content Server Directory Service.
+        /// You can use <see cref="SteamContent.GetServersForSteamPipe"></see> instead to go over a CM connection.
         /// </summary>
         /// <param name="configuration">Configuration Object</param>
         /// <param name="cellId">Preferred steam cell id</param>
         /// <param name="maxNumServers">Max number of servers to return.</param>
         /// <param name="cancellationToken">Cancellation Token</param>
-        /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="CDNClient.Server"/>s.</returns>
-        public static Task<IReadOnlyCollection<CDNClient.Server>> LoadAsync( SteamConfiguration configuration, int cellId, int maxNumServers, CancellationToken cancellationToken )
+        /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="CDN.Server"/>s.</returns>
+        public static Task<IReadOnlyCollection<CDN.Server>> LoadAsync( SteamConfiguration configuration, int cellId, int maxNumServers, CancellationToken cancellationToken )
             => LoadCoreAsync( configuration, cellId, maxNumServers, cancellationToken );
 
-        static async Task<IReadOnlyCollection<CDNClient.Server>> LoadCoreAsync( SteamConfiguration configuration, int? cellId, int? maxNumServers, CancellationToken cancellationToken )
+        static async Task<IReadOnlyCollection<CDN.Server>> LoadCoreAsync( SteamConfiguration configuration, int? cellId, int? maxNumServers, CancellationToken cancellationToken )
         {
             if ( configuration == null )
             {
@@ -87,26 +88,31 @@ namespace SteamKit2
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            var serverRecords = new List<CDNClient.Server>( capacity: response.servers.Count );
+            return ConvertServerList( response );
+        }
+
+        internal static IReadOnlyCollection<CDN.Server> ConvertServerList( CContentServerDirectory_GetServersForSteamPipe_Response response )
+        {
+            var serverRecords = new List<CDN.Server>( capacity: response.servers.Count );
 
             foreach ( var child in response.servers )
             {
                 var httpsSupport = child.https_support;
-                var protocol = httpsSupport == "mandatory" ? CDNClient.Server.ConnectionProtocol.HTTPS : CDNClient.Server.ConnectionProtocol.HTTP;
+                var protocol = httpsSupport == "mandatory" ? CDN.Server.ConnectionProtocol.HTTPS : CDN.Server.ConnectionProtocol.HTTP;
 
-                serverRecords.Add( new CDNClient.Server
+                serverRecords.Add( new CDN.Server
                 {
                     Protocol = protocol,
                     Host = child.host,
                     VHost = child.vhost,
-                    Port = protocol == CDNClient.Server.ConnectionProtocol.HTTPS ? 443 : 80,
+                    Port = protocol == CDN.Server.ConnectionProtocol.HTTPS ? 443 : 80,
 
                     Type = child.type,
                     SourceID = child.source_id,
                     CellID = ( uint )child.cell_id,
 
                     Load = child.load,
-                    WeightedLoad = ( int )child.weighted_load, // TODO: it's a float
+                    WeightedLoad = child.weighted_load,
                     NumEntries = child.num_entries_in_client_list,
                     PreferredServer = child.preferred_server,
                     SteamChinaOnly = child.steam_china_only,
