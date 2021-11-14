@@ -191,8 +191,9 @@ namespace SteamKit2
 
             Header = packetMsg.Header;
 
-            using MemoryStream ms = new MemoryStream( packetMsg.GetData() );
-            ms.Seek( packetMsg.BodyOffset, SeekOrigin.Begin );
+            var data = packetMsg.GetData();
+            var offset = (int)packetMsg.BodyOffset;
+            using MemoryStream ms = new MemoryStream( data, offset, data.Length - offset );
 
             Body = Serializer.Deserialize<TBody>( ms );
 
@@ -353,8 +354,9 @@ namespace SteamKit2
 
             Header = packetMsg.Header;
 
-            using MemoryStream ms = new MemoryStream( packetMsg.GetData() );
-            ms.Seek( packetMsg.BodyOffset, SeekOrigin.Begin );
+            var data = packetMsg.GetData();
+            var offset = (int)packetMsg.BodyOffset;
+            using MemoryStream ms = new MemoryStream( data, offset, data.Length - offset );
 
             Body.Deserialize( ms );
 
@@ -506,8 +508,9 @@ namespace SteamKit2
 
             Header = packetMsg.Header;
 
-            using MemoryStream ms = new MemoryStream( packetMsg.GetData() );
-            ms.Seek( packetMsg.BodyOffset, SeekOrigin.Begin );
+            var data = packetMsg.GetData();
+            var offset = (int)packetMsg.BodyOffset;
+            using MemoryStream ms = new MemoryStream( data, offset, data.Length - offset );
 
             Body.Deserialize( ms );
 
