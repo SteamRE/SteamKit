@@ -233,7 +233,7 @@ namespace SteamKit2.Internal
         /// </summary>
         public void Disconnect() => Disconnect( userInitiated: true ); 
 
-        internal void Disconnect( bool userInitiated )
+        private protected void Disconnect( bool userInitiated )
         {
             lock ( connectionLock )
             {
