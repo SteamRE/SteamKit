@@ -189,12 +189,7 @@ namespace SteamKit2
                 {
                     case IPEndPoint ipep:
                         uri.Port = ipep.Port;
-                        uri.Host = ipep.AddressFamily switch
-                        {
-                            AddressFamily.InterNetwork => ipep.Address.ToString(),
-                            AddressFamily.InterNetworkV6 => FormattableString.Invariant($"[{ipep.Address}]"), // RFC 2732
-                            _ => throw new InvalidOperationException("Unsupported address family."),
-                        };
+                        uri.Host = ipep.Address.ToString();
                         break;
 
                     case DnsEndPoint dns:
