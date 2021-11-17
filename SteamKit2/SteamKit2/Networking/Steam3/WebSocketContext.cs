@@ -12,7 +12,7 @@ namespace SteamKit2
 {
     partial class WebSocketConnection : IConnection
     {
-        class WebSocketContext : IDisposable
+        internal class WebSocketContext : IDisposable
         {
             public WebSocketContext(WebSocketConnection connection, EndPoint endPoint)
             {
@@ -21,13 +21,13 @@ namespace SteamKit2
 
                 cts = new CancellationTokenSource();
                 socket = new ClientWebSocket();
-                hostAndPort = GetHostAndPort(endPoint);
+                connectionUri = ConstructUri(endPoint);
             }
 
             readonly WebSocketConnection connection;
             readonly CancellationTokenSource cts;
             readonly ClientWebSocket socket;
-            readonly string hostAndPort;
+            readonly Uri connectionUri;
             Task? runloopTask;
             int disposed;
 
@@ -40,8 +40,6 @@ namespace SteamKit2
 
             async Task RunCore(CancellationToken cancellationToken, TimeSpan connectionTimeout)
             {
-                var uri = new Uri(FormattableString.Invariant($"wss://{hostAndPort}/cmsocket/"));
-
                 using (var timeout = new CancellationTokenSource())
                 using (var combinedCancellation = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, timeout.Token))
                 {
@@ -49,11 +47,11 @@ namespace SteamKit2
 
                     try
                     {
-                        await socket.ConnectAsync(uri, combinedCancellation.Token).ConfigureAwait(false);
+                        await socket.ConnectAsync(connectionUri, combinedCancellation.Token).ConfigureAwait(false);
                     }
                     catch (TaskCanceledException) when (timeout.IsCancellationRequested)
                     {
-                        connection.log.LogDebug(nameof(WebSocketContext), "Time out connecting websocket {0} after {1}", uri, connectionTimeout);
+                        connection.log.LogDebug(nameof(WebSocketContext), "Time out connecting websocket {0} after {1}", connectionUri, connectionTimeout);
                         connection.DisconnectCore(userInitiated: false, specificContext: this);
                         return;
                     }
@@ -65,7 +63,7 @@ namespace SteamKit2
                     }
                 }
 
-                connection.log.LogDebug( nameof(WebSocketContext), "Connected to {0}", uri);
+                connection.log.LogDebug( nameof(WebSocketContext), "Connected to {0}", connectionUri);
                 connection.Connected?.Invoke(connection, EventArgs.Empty);
 
                 while (!cancellationToken.IsCancellationRequested && socket.State == WebSocketState.Open)
@@ -181,28 +179,29 @@ namespace SteamKit2
                 return ms.ToArray();
             }
 
-            static string GetHostAndPort(EndPoint endPoint)
+            internal static Uri ConstructUri(EndPoint endPoint)
             {
+                var uri = new UriBuilder();
+                uri.Scheme = "wss";
+                uri.Path = "/cmsocket/";
+
                 switch (endPoint)
                 {
                     case IPEndPoint ipep:
-                        switch (ipep.AddressFamily)
-                        {
-                            case AddressFamily.InterNetwork:
-                                return FormattableString.Invariant($"{ipep.Address}:{ipep.Port}");
-
-                            case AddressFamily.InterNetworkV6:
-                                // RFC 2732
-                                return FormattableString.Invariant($"[{ipep}]:{ipep.Port}");
-                        }
-
+                        uri.Port = ipep.Port;
+                        uri.Host = ipep.Address.ToString();
                         break;
 
                     case DnsEndPoint dns:
-                        return FormattableString.Invariant($"{dns.Host}:{dns.Port}");
+                        uri.Host = dns.Host;
+                        uri.Port = dns.Port;
+                        break;
+
+                    default:
+                        throw new InvalidOperationException("Unsupported endpoint type.");
                 }
 
-                throw new InvalidOperationException("Unsupported endpoint type.");
+                return uri.Uri;
             }
         }
     }
