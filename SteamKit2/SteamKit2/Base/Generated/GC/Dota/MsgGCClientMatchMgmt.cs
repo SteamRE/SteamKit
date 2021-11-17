@@ -433,6 +433,35 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgLobbyScenarioSave : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int version
+        {
+            get => __pbn__version.GetValueOrDefault();
+            set => __pbn__version = value;
+        }
+        public bool ShouldSerializeversion() => __pbn__version != null;
+        public void Resetversion() => __pbn__version = null;
+        private int? __pbn__version;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public byte[] data
+        {
+            get => __pbn__data;
+            set => __pbn__data = value;
+        }
+        public bool ShouldSerializedata() => __pbn__data != null;
+        public void Resetdata() => __pbn__data = null;
+        private byte[] __pbn__data;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgPracticeLobbySetDetails : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -858,6 +887,31 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(50)]
         public global::System.Collections.Generic.List<uint> requested_hero_ids { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(51)]
+        public CMsgLobbyScenarioSave scenario_save { get; set; }
+
+        [global::ProtoBuf.ProtoMember(52)]
+        public AbilityDraftSpecificDetails ability_draft_specific_details { get; set; }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class AbilityDraftSpecificDetails : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public bool shuffle_draft_order
+            {
+                get => __pbn__shuffle_draft_order.GetValueOrDefault();
+                set => __pbn__shuffle_draft_order = value;
+            }
+            public bool ShouldSerializeshuffle_draft_order() => __pbn__shuffle_draft_order != null;
+            public void Resetshuffle_draft_order() => __pbn__shuffle_draft_order = null;
+            private bool? __pbn__shuffle_draft_order;
+
+        }
 
     }
 

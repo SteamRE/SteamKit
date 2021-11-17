@@ -5272,6 +5272,28 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCCStrike15_v2_MatchListTournamentOperatorMgmt : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int eventid
+        {
+            get => __pbn__eventid.GetValueOrDefault();
+            set => __pbn__eventid = value;
+        }
+        public bool ShouldSerializeeventid() => __pbn__eventid != null;
+        public void Reseteventid() => __pbn__eventid = null;
+        private int? __pbn__eventid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<CDataGCCStrike15_v2_MatchInfo> matches { get; } = new global::System.Collections.Generic.List<CDataGCCStrike15_v2_MatchInfo>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgGCCStrike15_v2_Predictions : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -7719,6 +7741,26 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetmanifest() => __pbn__manifest = null;
         private string __pbn__manifest;
 
+        [global::ProtoBuf.ProtoMember(8)]
+        public byte[] system_package
+        {
+            get => __pbn__system_package;
+            set => __pbn__system_package = value;
+        }
+        public bool ShouldSerializesystem_package() => __pbn__system_package != null;
+        public void Resetsystem_package() => __pbn__system_package = null;
+        private byte[] __pbn__system_package;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public bool load_system
+        {
+            get => __pbn__load_system.GetValueOrDefault();
+            set => __pbn__load_system = value;
+        }
+        public bool ShouldSerializeload_system() => __pbn__load_system != null;
+        public void Resetload_system() => __pbn__load_system = null;
+        private bool? __pbn__load_system;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -7933,6 +7975,7 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCCStrike15_v2_GC2ClientInitSystem = 9212,
         k_EMsgGCCStrike15_v2_GC2ClientInitSystem_Response = 9213,
         k_EMsgGCCStrike15_v2_PrivateQueues = 9214,
+        k_EMsgGCCStrike15_v2_MatchListTournamentOperatorMgmt = 9215,
     }
 
     [global::ProtoBuf.ProtoContract()]

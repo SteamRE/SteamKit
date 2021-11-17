@@ -4477,6 +4477,16 @@ namespace SteamKit2.Internal
         public void Resetmax_outstanding_calls() => __pbn__max_outstanding_calls = null;
         private uint? __pbn__max_outstanding_calls;
 
+        [global::ProtoBuf.ProtoMember(11)]
+        public uint app_id
+        {
+            get => __pbn__app_id.GetValueOrDefault();
+            set => __pbn__app_id = value;
+        }
+        public bool ShouldSerializeapp_id() => __pbn__app_id != null;
+        public void Resetapp_id() => __pbn__app_id = null;
+        private uint? __pbn__app_id;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

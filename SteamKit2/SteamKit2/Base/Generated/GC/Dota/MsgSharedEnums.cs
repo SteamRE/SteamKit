@@ -1167,7 +1167,8 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_DIRETIDE_2020 = 31,
         EVENT_ID_SPRING_2021 = 32,
         EVENT_ID_FALL_2021 = 33,
-        EVENT_ID_COUNT = 34,
+        EVENT_ID_TEAM_FANDOM_FALL_2021 = 34,
+        EVENT_ID_COUNT = 35,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1518,6 +1519,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_EBadgeType_TI8_Midweek = 4,
         k_EBadgeType_TI8_Finals = 5,
         k_EBadgeType_TI8_AllEvent = 6,
+        k_EBadgeType_TI10 = 7,
     }
 
     [global::ProtoBuf.ProtoContract()]

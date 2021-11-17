@@ -401,6 +401,17 @@ namespace SteamKit2.Internal
         public void Resetserial_number() => __pbn__serial_number = null;
         private string __pbn__serial_number;
 
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue(false)]
+        public bool autosave
+        {
+            get => __pbn__autosave ?? false;
+            set => __pbn__autosave = value;
+        }
+        public bool ShouldSerializeautosave() => __pbn__autosave != null;
+        public void Resetautosave() => __pbn__autosave = null;
+        private bool? __pbn__autosave;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

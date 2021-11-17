@@ -3329,6 +3329,17 @@ namespace SteamKit2.GC.TF2.Internal
         public void Resetstrict() => __pbn__strict = null;
         private uint? __pbn__strict;
 
+        [global::ProtoBuf.ProtoMember(25)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string fake_ip
+        {
+            get => __pbn__fake_ip ?? "";
+            set => __pbn__fake_ip = value;
+        }
+        public bool ShouldSerializefake_ip() => __pbn__fake_ip != null;
+        public void Resetfake_ip() => __pbn__fake_ip = null;
+        private string __pbn__fake_ip;
+
         [global::ProtoBuf.ProtoMember(13)]
         public global::System.Collections.Generic.List<Player> players { get; } = new global::System.Collections.Generic.List<Player>();
 

@@ -803,6 +803,16 @@ namespace SteamKit2.Internal
             public void Resetcontroller_connection_type() => __pbn__controller_connection_type = null;
             private uint? __pbn__controller_connection_type;
 
+            [global::ProtoBuf.ProtoMember(25)]
+            public int game_os_platform
+            {
+                get => __pbn__game_os_platform.GetValueOrDefault();
+                set => __pbn__game_os_platform = value;
+            }
+            public bool ShouldSerializegame_os_platform() => __pbn__game_os_platform != null;
+            public void Resetgame_os_platform() => __pbn__game_os_platform = null;
+            private int? __pbn__game_os_platform;
+
         }
 
     }

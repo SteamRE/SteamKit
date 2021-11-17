@@ -1355,6 +1355,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetis_steam_china() => __pbn__is_steam_china = null;
         private bool? __pbn__is_steam_china;
 
+        [global::ProtoBuf.ProtoMember(55)]
+        public uint live_spectator_account_id
+        {
+            get => __pbn__live_spectator_account_id.GetValueOrDefault();
+            set => __pbn__live_spectator_account_id = value;
+        }
+        public bool ShouldSerializelive_spectator_account_id() => __pbn__live_spectator_account_id != null;
+        public void Resetlive_spectator_account_id() => __pbn__live_spectator_account_id = null;
+        private uint? __pbn__live_spectator_account_id;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2718,6 +2728,16 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeis_in_steam_china() => __pbn__is_in_steam_china != null;
         public void Resetis_in_steam_china() => __pbn__is_in_steam_china = null;
         private bool? __pbn__is_in_steam_china;
+
+        [global::ProtoBuf.ProtoMember(127)]
+        public bool with_scenario_save
+        {
+            get => __pbn__with_scenario_save.GetValueOrDefault();
+            set => __pbn__with_scenario_save = value;
+        }
+        public bool ShouldSerializewith_scenario_save() => __pbn__with_scenario_save != null;
+        public void Resetwith_scenario_save() => __pbn__with_scenario_save = null;
+        private bool? __pbn__with_scenario_save;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class CExtraMsg : global::ProtoBuf.IExtensible
