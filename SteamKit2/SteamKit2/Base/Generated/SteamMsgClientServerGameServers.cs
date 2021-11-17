@@ -88,6 +88,16 @@ namespace SteamKit2.Internal
         public void Resetgame_query_port() => __pbn__game_query_port = null;
         private uint? __pbn__game_query_port;
 
+        [global::ProtoBuf.ProtoMember(10)]
+        public uint game_port_local
+        {
+            get => __pbn__game_port_local.GetValueOrDefault();
+            set => __pbn__game_port_local = value;
+        }
+        public bool ShouldSerializegame_port_local() => __pbn__game_port_local != null;
+        public void Resetgame_port_local() => __pbn__game_port_local = null;
+        private uint? __pbn__game_port_local;
+
         [global::ProtoBuf.ProtoMember(8)]
         public byte[] sdr_logon
         {

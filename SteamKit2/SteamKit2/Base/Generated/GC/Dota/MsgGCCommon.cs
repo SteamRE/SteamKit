@@ -10672,6 +10672,25 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgLobbyAbilityDraftData : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool shuffle_draft_order
+        {
+            get => __pbn__shuffle_draft_order.GetValueOrDefault();
+            set => __pbn__shuffle_draft_order = value;
+        }
+        public bool ShouldSerializeshuffle_draft_order() => __pbn__shuffle_draft_order != null;
+        public void Resetshuffle_draft_order() => __pbn__shuffle_draft_order = null;
+        private bool? __pbn__shuffle_draft_order;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ESpecialPingValue
     {
         k_ESpecialPingValue_NoData = 16382,

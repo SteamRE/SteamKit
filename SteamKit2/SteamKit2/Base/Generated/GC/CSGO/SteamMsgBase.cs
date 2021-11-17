@@ -2532,6 +2532,17 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Reseteresult() => __pbn__eresult = null;
         private int? __pbn__eresult;
 
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string message
+        {
+            get => __pbn__message ?? "";
+            set => __pbn__message = value;
+        }
+        public bool ShouldSerializemessage() => __pbn__message != null;
+        public void Resetmessage() => __pbn__message = null;
+        private string __pbn__message;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

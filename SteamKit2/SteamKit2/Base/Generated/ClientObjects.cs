@@ -1136,6 +1136,76 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemPerfNetworkInterface : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string name
+        {
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
+        }
+        public bool ShouldSerializename() => __pbn__name != null;
+        public void Resetname() => __pbn__name = null;
+        private string __pbn__name;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public double timestamp
+        {
+            get => __pbn__timestamp.GetValueOrDefault();
+            set => __pbn__timestamp = value;
+        }
+        public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
+        public void Resettimestamp() => __pbn__timestamp = null;
+        private double? __pbn__timestamp;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public long tx_bytes_total
+        {
+            get => __pbn__tx_bytes_total.GetValueOrDefault();
+            set => __pbn__tx_bytes_total = value;
+        }
+        public bool ShouldSerializetx_bytes_total() => __pbn__tx_bytes_total != null;
+        public void Resettx_bytes_total() => __pbn__tx_bytes_total = null;
+        private long? __pbn__tx_bytes_total;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public long rx_bytes_total
+        {
+            get => __pbn__rx_bytes_total.GetValueOrDefault();
+            set => __pbn__rx_bytes_total = value;
+        }
+        public bool ShouldSerializerx_bytes_total() => __pbn__rx_bytes_total != null;
+        public void Resetrx_bytes_total() => __pbn__rx_bytes_total = null;
+        private long? __pbn__rx_bytes_total;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public int tx_bytes_per_sec
+        {
+            get => __pbn__tx_bytes_per_sec.GetValueOrDefault();
+            set => __pbn__tx_bytes_per_sec = value;
+        }
+        public bool ShouldSerializetx_bytes_per_sec() => __pbn__tx_bytes_per_sec != null;
+        public void Resettx_bytes_per_sec() => __pbn__tx_bytes_per_sec = null;
+        private int? __pbn__tx_bytes_per_sec;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public int rx_bytes_per_sec
+        {
+            get => __pbn__rx_bytes_per_sec.GetValueOrDefault();
+            set => __pbn__rx_bytes_per_sec = value;
+        }
+        public bool ShouldSerializerx_bytes_per_sec() => __pbn__rx_bytes_per_sec != null;
+        public void Resetrx_bytes_per_sec() => __pbn__rx_bytes_per_sec = null;
+        private int? __pbn__rx_bytes_per_sec;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgSystemPerfDiagnosticInfo : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1144,6 +1214,9 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(1)]
         public global::System.Collections.Generic.List<CMsgSystemPerfDiagnosticEntry> entries { get; } = new global::System.Collections.Generic.List<CMsgSystemPerfDiagnosticEntry>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<CMsgSystemPerfNetworkInterface> interfaces { get; } = new global::System.Collections.Generic.List<CMsgSystemPerfNetworkInterface>();
 
     }
 
@@ -1173,6 +1246,48 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeis_shark_mode() => __pbn__is_shark_mode != null;
         public void Resetis_shark_mode() => __pbn__is_shark_mode = null;
         private bool? __pbn__is_shark_mode;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgCellList : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<Cell> cells { get; } = new global::System.Collections.Generic.List<Cell>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Cell : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint cell_id
+            {
+                get => __pbn__cell_id.GetValueOrDefault();
+                set => __pbn__cell_id = value;
+            }
+            public bool ShouldSerializecell_id() => __pbn__cell_id != null;
+            public void Resetcell_id() => __pbn__cell_id = null;
+            private uint? __pbn__cell_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string loc_name
+            {
+                get => __pbn__loc_name ?? "";
+                set => __pbn__loc_name = value;
+            }
+            public bool ShouldSerializeloc_name() => __pbn__loc_name != null;
+            public void Resetloc_name() => __pbn__loc_name = null;
+            private string __pbn__loc_name;
+
+        }
 
     }
 
