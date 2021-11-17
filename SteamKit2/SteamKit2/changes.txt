@@ -7,6 +7,8 @@ v 2.4.0			November 17 2021 (Beta 1)
 * Added `SteamUser.VanityUrlChangedCallback`.
 * Added `SteamApps.PurchaseResponseCallback`.
 * Added `SteamApps.RedeemGuestPassResponseCallback`.
+* Added new `SteamContent` handler.
+* Added the ability to set `ClientMsgProtoBuf<T>.Body`.
 * SteamKit2 now ships a net6.0 assembly as well as a netstandard2.0 assembly.
 * Changed thread names to not get truncated on Linux.
 * Changed message handler exception handling to log the full `Exception` object rather than just the message.
@@ -25,7 +27,9 @@ BREAKING CHANGES
 * WebAPI will now throw an `ArgumentException` if the `method` parameter is `null`, rather than crashing on a `NullReferenceException`.
 * CDN timeouts options are now properties instead of fields.
 * `CDNClient` has been heavily refactored and is now `SteamKit2.CDN.Client`.
-
+* `ClientMsgProtobuf` can now only be constructed from a `PacketClientMsgProtobuf`.
+* Removed `IClientMsg.Deserialize(...)` and implementations.
+* Removed `ServiceMethodResponse.ResponseRaw`.
 
 ------------------------------------------------------------------------------
 v 2.4.0			July 29 2021 (Alpha 3)
