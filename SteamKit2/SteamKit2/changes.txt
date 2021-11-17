@@ -31,6 +31,8 @@ BREAKING CHANGES
 * `ClientMsgProtobuf` can now only be constructed from a `PacketClientMsgProtobuf`.
 * Removed `IClientMsg.Deserialize(...)` and implementations.
 * Removed `ServiceMethodResponse.ResponseRaw`.
+* `CDN.Server.AllowedAppIds` is now not-nullable. Check for empty instead.
+
 
 ------------------------------------------------------------------------------
 v 2.4.0			July 29 2021 (Alpha 3)
