@@ -22,7 +22,7 @@ namespace SteamKit2
         /// <param name="cellId">Preferred steam cell id</param>
         /// <param name="maxNumServers">Max number of servers to return.</param>
         /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="CDN.Server"/>s.</returns>
-        public async Task<IReadOnlyCollection<CDN.Server>> GetServersForSteamPipe( uint? cellId, uint? maxNumServers )
+        public async Task<IReadOnlyCollection<CDN.Server>> GetServersForSteamPipe( uint? cellId = null, uint? maxNumServers = null )
         {
             var request = new CContentServerDirectory_GetServersForSteamPipe_Request();
 
