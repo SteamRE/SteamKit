@@ -17,6 +17,7 @@ v 2.4.0			November 17 2021 (Beta 1)
 * Fixed a possible unhandled exception when opening a TCP connection.
 * Fixed the `UnobservedTaskException` event being triggered on .NET 6 if a TCP connection times out.
 * Fixed WebSocket connections constructing an incorrect IPv6 URI.
+* Fixed `DisconnectedCallback.UserInitiated` being true when a connection was terminated due to an internal error.
 * Removed some DebugLog spam from WebSocket connections.
 * Updated Protobufs.
 
