@@ -383,13 +383,13 @@ namespace SteamKit2
                 catch ( ProtoException ex )
                 {
                     LogDebug( nameof( SteamClient ), $"'{key.Name}' handler failed to (de)serialize a protobuf: {ex}" );
-                    Disconnect();
+                    Disconnect( userInitiated: false );
                     return false;
                 }
                 catch ( Exception ex )
                 {
                     LogDebug( nameof( SteamClient ), $"Unhandled exception from '{key.Name}' handler: {ex}" );
-                    Disconnect();
+                    Disconnect( userInitiated: false );
                     return false;
                 }
             }
