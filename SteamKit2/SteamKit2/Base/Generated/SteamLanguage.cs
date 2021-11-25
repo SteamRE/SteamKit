@@ -1862,13 +1862,16 @@ namespace SteamKit2
 		AccountNotFriends = 111,
 		LimitedUserAccount = 112,
 		CantRemoveItem = 113,
-		AccountHasBeenDeleted = 114,
-		AccountHasAnExistingUserCancelledLicense = 115,
-		DeniedDueToCommunityCooldown = 116,
+		AccountDeleted = 114,
+		ExistingUserCancelledLicense = 115,
+		CommunityCooldown = 116,
 		NoLauncherSpecified = 117,
 		MustAgreeToSSA = 118,
 		LauncherMigrated = 119,
-		CurrentSteamRealmDoesNotMatch = 120,
+		SteamRealmMismatch = 120,
+		InvalidSignature = 121,
+		ParseFailure = 122,
+		NoVerifiedPhone = 123,
 	}
 	public enum EUniverse
 	{

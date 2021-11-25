@@ -123,11 +123,18 @@ enum EResult
 	AccountNotFriends = 111;
 	LimitedUserAccount = 112;
 	CantRemoveItem = 113;
-	AccountHasBeenDeleted = 114;
-	AccountHasAnExistingUserCancelledLicense = 115;
-	DeniedDueToCommunityCooldown = 116;
+	AccountHasBeenDeleted = 114; removed "renamed to AccountDeleted"
+	AccountDeleted = 114;
+	AccountHasAnExistingUserCancelledLicense = 115; removed "renamed to ExistingUserCancelledLicense"
+	ExistingUserCancelledLicense = 115;
+	DeniedDueToCommunityCooldown = 116; removed "renamed to CommunityCooldown"
+	CommunityCooldown = 116;
 	NoLauncherSpecified = 117;
 	MustAgreeToSSA = 118;
 	LauncherMigrated = 119;
-	CurrentSteamRealmDoesNotMatch = 120;
+	CurrentSteamRealmDoesNotMatch = 120; removed "renamed to SteamRealmMismatch"
+	SteamRealmMismatch = 120;
+	InvalidSignature = 121;
+	ParseFailure = 122;
+	NoVerifiedPhone = 123;
 };
