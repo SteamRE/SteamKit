@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
+using System.Threading;
 using SteamKit2;
 using SteamKit2.Discovery;
 using Xunit;
@@ -181,6 +183,67 @@ namespace Tests
             Assert.Equal( ProtocolTypes.Tcp, endPoint.ProtocolTypes );
         }
 
+        [Fact]
+        public void GetNextServerCandidate_MarkIterateAllCandidates()
+        {
+            serverList.GetAllEndPoints();
+
+            var recordA = ServerRecord.CreateWebSocketServer( "10.0.0.1:27030" );
+            var recordB = ServerRecord.CreateWebSocketServer( "10.0.0.2:27030" );
+            var recordC = ServerRecord.CreateWebSocketServer( "10.0.0.3:27030" );
+
+            // Add all candidates
+            serverList.ReplaceList( new List<ServerRecord>() { recordA, recordB, recordC } );
+
+            var candidatesReturned = new HashSet<ServerRecord>();
+
+            void DequeueAndMarkCandidate()
+            {
+                var candidate = serverList.GetNextServerCandidate( ProtocolTypes.WebSocket );
+                Assert.True( candidatesReturned.Add( candidate ), $"Candidate {candidate.EndPoint} already seen" );
+                Thread.Sleep( TimeSpan.FromMilliseconds( 10 ) );
+                serverList.TryMark( candidate.EndPoint, ProtocolTypes.WebSocket, ServerQuality.Bad );
+            }
+
+            // We must dequeue all servers as they all get marked bad
+            DequeueAndMarkCandidate();
+            DequeueAndMarkCandidate();
+            DequeueAndMarkCandidate();
+            Assert.True( candidatesReturned.Count == 3, "All candidates returned" );
+        }
+
+        [Fact]
+        public void GetNextServerCandidate_MarkIterateAllBadCandidates()
+        {
+            serverList.GetAllEndPoints();
+
+            var recordA = ServerRecord.CreateWebSocketServer( "10.0.0.1:27030" );
+            var recordB = ServerRecord.CreateWebSocketServer( "10.0.0.2:27030" );
+            var recordC = ServerRecord.CreateWebSocketServer( "10.0.0.3:27030" );
+
+            // Add all candidates and mark them bad
+            serverList.ReplaceList( new List<ServerRecord>() { recordA, recordB, recordC } );
+            serverList.TryMark( recordA.EndPoint, ProtocolTypes.WebSocket, ServerQuality.Bad );
+            serverList.TryMark( recordB.EndPoint, ProtocolTypes.WebSocket, ServerQuality.Bad );
+            serverList.TryMark( recordC.EndPoint, ProtocolTypes.WebSocket, ServerQuality.Bad );
+
+            var candidatesReturned = new HashSet<ServerRecord>();
+
+            void DequeueAndMarkCandidate()
+            {
+                var candidate = serverList.GetNextServerCandidate( ProtocolTypes.WebSocket );
+                Assert.True( candidatesReturned.Add( candidate ), $"Candidate {candidate.EndPoint} already seen" );
+                Thread.Sleep( TimeSpan.FromMilliseconds( 10 ) );
+                serverList.TryMark( candidate.EndPoint, ProtocolTypes.WebSocket, ServerQuality.Bad );
+            }
+
+            // We must dequeue all candidates from a bad list
+            DequeueAndMarkCandidate();
+            DequeueAndMarkCandidate();
+            DequeueAndMarkCandidate();
+            Assert.True( candidatesReturned.Count == 3, "All candidates returned" );
+        }
+        
         [Fact]
         public void TryMark_ReturnsTrue_IfServerInList()
         {

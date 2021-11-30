@@ -275,8 +275,8 @@ namespace SteamKit2.Discovery
                     let server = o.server
                     let index = o.index
                     where server.Protocol.HasFlagsFast( supportedProtocolTypes )
-                    let lastBadConnectionTime = server.LastBadConnectionTimeUtc
-                    orderby lastBadConnectionTime.HasValue, index
+                    let lastBadConnectionTime = server.LastBadConnectionTimeUtc.GetValueOrDefault()
+                    orderby lastBadConnectionTime, index
                     select new { EndPoint = server.Record.EndPoint, Protocol = server.Protocol };
                 var result = query.FirstOrDefault();
                 
