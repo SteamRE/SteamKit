@@ -2,9 +2,6 @@
 v 2.4.0			December 4 2021
 ------------------------------------------------------------------------------
 * Updated protobuf-net dependency to v3.0.
-* CDN: Updated interface to capture `preferred_server`, `use_as_proxy`, `proxy_request_path` and `allowed_app_ids`.
-* CDN: CDNClient methods now accept an optional `proxyServer` parameter.
-* CDN: Separated the request timeout into configurable request/response timeouts.
 * Added a MemoryServerListProvider implementation.
 * Added `CallProtobufAsync<T>` method to WebAPI to deserialize response as Protobuf instead of KeyValues.
 * Added `SteamChinaOnly` flag to CDN server objects.
