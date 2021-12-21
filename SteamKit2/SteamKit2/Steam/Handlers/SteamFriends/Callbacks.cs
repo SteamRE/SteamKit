@@ -133,7 +133,7 @@ namespace SteamKit2
             /// Gets the game data blob.
             /// </summary>
             /// <value>The game data blob.</value>
-            public byte[] GameDataBlob { get; private set; }
+            public byte[]? GameDataBlob { get; private set; }
 
             /// <summary>
             /// Gets the name.
@@ -145,7 +145,7 @@ namespace SteamKit2
             /// Gets the avatar hash.
             /// </summary>
             /// <value>The avatar hash.</value>
-            public byte[] AvatarHash { get; private set; }
+            public byte[]? AvatarHash { get; private set; }
 
             /// <summary>
             /// Gets the last log off.
