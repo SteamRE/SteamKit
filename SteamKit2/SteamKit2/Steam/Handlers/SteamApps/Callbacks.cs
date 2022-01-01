@@ -253,6 +253,38 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// This callback is received in response to calling <see cref="SteamApps.GetLegacyGameKey"/>.
+        /// </summary>
+        public sealed class LegacyGameKeyCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the result of requesting this game key.
+            /// </summary>
+            public EResult Result { get; private set; }
+            /// <summary>
+            /// Gets the appid that this game key is for.
+            /// </summary>
+            public uint AppID { get; private set; }
+            /// <summary>
+            /// Gets the game key.
+            /// </summary>
+            public string? Key { get; private set; }
+
+            internal LegacyGameKeyCallback( JobID jobID, MsgClientGetLegacyGameKeyResponse msg, byte[] payload )
+            {
+                JobID = jobID;
+                AppID = msg.AppId;
+                Result = msg.Result;
+
+                if ( msg.Length > 0 )
+                {
+                    var length = ( int )msg.Length - 1;
+                    Key = System.Text.Encoding.ASCII.GetString( payload, 0, length );
+                }
+            }
+        }
+
+        /// <summary>
         /// This callback is fired when the client receives a list of game connect tokens.
         /// </summary>
         public sealed class GameConnectTokensCallback : CallbackMsg

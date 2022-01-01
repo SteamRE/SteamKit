@@ -358,3 +358,15 @@ class MsgClientMarketingMessageUpdate2<EMsg::ClientMarketingMessageUpdate2>
 	uint marketingMessageUpdateTime;
 	uint count;
 };
+
+class MsgClientGetLegacyGameKey<EMsg::ClientGetLegacyGameKey>
+{
+	uint appId;
+};
+
+class MsgClientGetLegacyGameKeyResponse<EMsg::ClientGetLegacyGameKeyResponse>
+{
+	uint appId;
+	EResult result;
+	uint length;
+};

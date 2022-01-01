@@ -2020,6 +2020,72 @@ namespace SteamKit2.Internal
 		}
 	}
 
+	public class MsgClientGetLegacyGameKey : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientGetLegacyGameKey; }
+
+		// Static size: 4
+		public uint AppId { get; set; }
+
+		public MsgClientGetLegacyGameKey()
+		{
+			AppId = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriter bw = new BinaryWriter( stream );
+
+			bw.Write( AppId );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReader br = new BinaryReader( stream );
+
+			AppId = br.ReadUInt32();
+		}
+	}
+
+	public class MsgClientGetLegacyGameKeyResponse : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientGetLegacyGameKeyResponse; }
+
+		// Static size: 4
+		public uint AppId { get; set; }
+		// Static size: 4
+		public EResult Result { get; set; }
+		// Static size: 4
+		public uint Length { get; set; }
+
+		public MsgClientGetLegacyGameKeyResponse()
+		{
+			AppId = 0;
+			Result = 0;
+			Length = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriter bw = new BinaryWriter( stream );
+
+			bw.Write( AppId );
+			bw.Write( (int)Result );
+			bw.Write( Length );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReader br = new BinaryReader( stream );
+
+			AppId = br.ReadUInt32();
+			Result = (EResult)br.ReadInt32();
+			Length = br.ReadUInt32();
+		}
+	}
+
 }
 #pragma warning restore 1591
 #pragma warning restore 0219
