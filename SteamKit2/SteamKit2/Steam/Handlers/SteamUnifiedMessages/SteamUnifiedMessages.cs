@@ -64,7 +64,7 @@ namespace SteamKit2
             /// <param name="isNotification">Whether this message is a notification or not.</param>
             /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
             [Obsolete( "Use SendNotification() instead of passing 'true' bool in SendMessage. SendMessage incorrectly returned AsyncJob for notifications, they have no response by design." )]
-            public AsyncJob<ServiceMethodResponse>? SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification = false )
+            public AsyncJob<ServiceMethodResponse>? SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification )
             {
                 return SendMessageOrNotification( expr, isNotification );
             }
@@ -205,7 +205,7 @@ namespace SteamKit2
         /// <param name="isNotification">Whether this message is a notification or not.</param>
         /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
         [Obsolete( "Use SendNotification() instead of passing 'true' bool in SendMessage. SendMessage incorrectly returned AsyncJob for notifications, they have no response by design." )]
-        public AsyncJob<ServiceMethodResponse>? SendMessage<TRequest>( string name, TRequest message, bool isNotification = false )
+        public AsyncJob<ServiceMethodResponse>? SendMessage<TRequest>( string name, TRequest message, bool isNotification )
             where TRequest : IExtensible, new()
         {
             if ( !isNotification )
