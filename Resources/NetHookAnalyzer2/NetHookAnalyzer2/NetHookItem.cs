@@ -9,7 +9,7 @@ namespace NetHookAnalyzer2
 {
 	class NetHookItem
 	{
-		public enum PacketDirection 
+		public enum PacketDirection
 		{
 			In,
 			Out
@@ -37,7 +37,7 @@ namespace NetHookAnalyzer2
 		{
 			return FileInfo.OpenRead();
 		}
-		
+
 		public bool LoadFromFile(FileInfo fileInfo)
 		{
 			Match m = NameRegex.Match( fileInfo.Name );
@@ -108,6 +108,7 @@ namespace NetHookAnalyzer2
 				}
 
 				case SteamKit2.EMsg.ServiceMethod:
+				case SteamKit2.EMsg.ServiceMethodSendToClient:
 				case SteamKit2.EMsg.ServiceMethodCallFromClient:
 				case SteamKit2.EMsg.ServiceMethodResponse:
 				{

@@ -51,6 +51,7 @@ namespace NetHookAnalyzer2
 			switch (eMsg)
 			{
 				case EMsg.ServiceMethod:
+				case EMsg.ServiceMethodSendToClient:
 				case EMsg.ServiceMethodCallFromClient:
 					body = UnifiedMessagingHelpers.ReadServiceMethodBody(targetJobName.Value, stream, x => x.GetParameters().First().ParameterType);
 					break;
@@ -58,14 +59,14 @@ namespace NetHookAnalyzer2
 				case EMsg.ServiceMethodResponse:
 					body = UnifiedMessagingHelpers.ReadServiceMethodBody(targetJobName.Value, stream, x => x.ReturnType);
 					break;
-                
+
 				case EMsg.ClientServiceMethodLegacy:
 					var tempBody = (CMsgClientServiceMethodLegacy) RuntimeTypeModel.Default.Deserialize( stream, null, typeof(CMsgClientServiceMethodLegacy) );
 					using ( var ms = new MemoryStream( tempBody.serialized_method ) )
 					{
 						body = UnifiedMessagingHelpers.ReadServiceMethodBody( tempBody.method_name, ms, x => x.GetParameters().First().ParameterType );
 					}
- 
+
 					break;
 
 				default:
