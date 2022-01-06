@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using ProtoBuf;
 
 namespace SteamKit2
@@ -37,16 +38,45 @@ namespace SteamKit2
             /// </summary>
             /// <typeparam name="TResponse">The type of the protobuf object which is the response to the RPC call.</typeparam>
             /// <param name="expr">RPC call expression, e.g. x => x.SomeMethodCall(message);</param>
+            /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
+            public AsyncJob<ServiceMethodResponse>? SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr )
+            {
+                return SendMessageOrNotification( expr, false );
+            }
+
+            /// <summary>
+            /// Sends a notification.
+            /// </summary>
+            /// <typeparam name="TResponse">The type of the protobuf object which is the response to the RPC call.</typeparam>
+            /// <param name="expr">RPC call expression, e.g. x => x.SomeMethodCall(message);</param>
+            public void SendNotification<TResponse>( Expression<Func<TService, TResponse>> expr )
+            {
+                SendMessageOrNotification( expr, true );
+            }
+
+            /// <summary>
+            /// Sends a message.
+            /// Results are returned in a <see cref="ServiceMethodResponse"/>.
+            /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
+            /// </summary>
+            /// <typeparam name="TResponse">The type of the protobuf object which is the response to the RPC call.</typeparam>
+            /// <param name="expr">RPC call expression, e.g. x => x.SomeMethodCall(message);</param>
             /// <param name="isNotification">Whether this message is a notification or not.</param>
             /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
-            public AsyncJob<ServiceMethodResponse> SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification = false )
+            [Obsolete( "Use SendNotification() instead of passing 'true' bool in SendMessage. SendMessage incorrectly returned AsyncJob for notifications, they have no response by design." )]
+            public AsyncJob<ServiceMethodResponse>? SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification = false )
+            {
+                return SendMessageOrNotification( expr, isNotification );
+            }
+
+            AsyncJob<ServiceMethodResponse>? SendMessageOrNotification<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification )
             {
                 if ( expr == null )
                 {
-                    throw new ArgumentNullException( nameof(expr) );
+                    throw new ArgumentNullException( nameof( expr ) );
                 }
 
-                var call = ExtractMethodCallExpression( expr, nameof(expr) );
+                var call = ExtractMethodCallExpression( expr, nameof( expr ) );
                 var methodInfo = call.Method;
 
                 var argument = call.Arguments.Single();
@@ -54,7 +84,7 @@ namespace SteamKit2
 
                 if ( argument.NodeType == ExpressionType.MemberAccess )
                 {
-                    var unary = Expression.Convert( argument, typeof(object) );
+                    var unary = Expression.Convert( argument, typeof( object ) );
                     var lambda = Expression.Lambda<Func<object>>( unary );
                     var getter = lambda.Compile();
                     message = getter();
@@ -64,14 +94,21 @@ namespace SteamKit2
                     throw new NotSupportedException( "Unknown Expression type" );
                 }
 
-                var serviceName = typeof(TService).Name.Substring( 1 ); // IServiceName - remove 'I'
+                var serviceName = typeof( TService ).Name.Substring( 1 ); // IServiceName - remove 'I'
                 var methodName = methodInfo.Name;
                 var version = 1;
 
                 var rpcName = string.Format( "{0}.{1}#{2}", serviceName, methodName, version );
 
-                var method = typeof(SteamUnifiedMessages).GetMethod( nameof(SteamUnifiedMessages.SendMessage) )!.MakeGenericMethod( message.GetType() );
-                var result = method.Invoke( this.steamUnifiedMessages, new[] { rpcName, message, isNotification } )!;
+                if( isNotification )
+                {
+                    var notification = typeof( SteamUnifiedMessages ).GetMethod( nameof( SteamUnifiedMessages.SendNotification ) )!.MakeGenericMethod( message.GetType() );
+                    notification.Invoke( this.steamUnifiedMessages, new[] { rpcName, message } );
+                    return null;
+                }
+
+                var method = typeof( SteamUnifiedMessages ).GetMethod( nameof( SteamUnifiedMessages.SendMessage ) )!.MakeGenericMethod( message.GetType() );
+                var result = method.Invoke( this.steamUnifiedMessages, new[] { rpcName, message } )!;
                 return ( AsyncJob<ServiceMethodResponse> )result;
             }
             
