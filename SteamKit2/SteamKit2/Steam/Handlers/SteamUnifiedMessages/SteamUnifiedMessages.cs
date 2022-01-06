@@ -39,9 +39,9 @@ namespace SteamKit2
             /// <typeparam name="TResponse">The type of the protobuf object which is the response to the RPC call.</typeparam>
             /// <param name="expr">RPC call expression, e.g. x => x.SomeMethodCall(message);</param>
             /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
-            public AsyncJob<ServiceMethodResponse>? SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr )
+            public AsyncJob<ServiceMethodResponse> SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr )
             {
-                return SendMessageOrNotification( expr, false );
+                return SendMessageOrNotification( expr, false )!;
             }
 
             /// <summary>
