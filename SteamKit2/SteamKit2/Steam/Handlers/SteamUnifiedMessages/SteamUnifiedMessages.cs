@@ -107,7 +107,10 @@ namespace SteamKit2
                     return null;
                 }
 
-                var method = typeof( SteamUnifiedMessages ).GetMethod( nameof( SteamUnifiedMessages.SendMessage ) )!.MakeGenericMethod( message.GetType() );
+                // When the obsolete overload is removed, then this code be used, instead of GetMethods().
+                // var method = typeof( SteamUnifiedMessages ).GetMethod( nameof( SteamUnifiedMessages.SendMessage ) )!.MakeGenericMethod( message.GetType() );
+
+                var method = typeof( SteamUnifiedMessages ).GetMethods().First( x => x.Name == nameof( SteamUnifiedMessages.SendMessage ) ).MakeGenericMethod( message.GetType() );
                 var result = method.Invoke( this.steamUnifiedMessages, new[] { rpcName, message } )!;
                 return ( AsyncJob<ServiceMethodResponse> )result;
             }
