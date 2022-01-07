@@ -24,6 +24,10 @@ namespace SteamKit2
         /// </summary>
         public class UnifiedService<TService>
         {
+            static readonly MethodInfo sendMessageMethod = typeof( SteamUnifiedMessages )
+                .GetMethods( BindingFlags.Public | BindingFlags.Instance )
+                .Single( m => m is { Name: nameof( SteamUnifiedMessages.SendMessage ) } && !Attribute.IsDefined( m, typeof( ObsoleteAttribute ) ) );
+
             internal UnifiedService( SteamUnifiedMessages steamUnifiedMessages )
             {
                 this.steamUnifiedMessages = steamUnifiedMessages;
@@ -100,21 +104,20 @@ namespace SteamKit2
 
                 var rpcName = string.Format( "{0}.{1}#{2}", serviceName, methodName, version );
 
-                if( isNotification )
+                if ( isNotification )
                 {
-                    var notification = typeof( SteamUnifiedMessages ).GetMethod( nameof( SteamUnifiedMessages.SendNotification ) )!.MakeGenericMethod( message.GetType() );
+                    var notification = typeof( SteamUnifiedMessages )
+                        .GetMethod( nameof( SteamUnifiedMessages.SendNotification ), BindingFlags.Public | BindingFlags.Instance )!
+                        .MakeGenericMethod( message.GetType() );
                     notification.Invoke( this.steamUnifiedMessages, new[] { rpcName, message } );
                     return null;
                 }
 
-                // When the obsolete overload is removed, then this code be used, instead of GetMethods().
-                // var method = typeof( SteamUnifiedMessages ).GetMethod( nameof( SteamUnifiedMessages.SendMessage ) )!.MakeGenericMethod( message.GetType() );
-
-                var method = typeof( SteamUnifiedMessages ).GetMethods().First( x => x.Name == nameof( SteamUnifiedMessages.SendMessage ) ).MakeGenericMethod( message.GetType() );
+                var method = sendMessageMethod.MakeGenericMethod( message.GetType() );
                 var result = method.Invoke( this.steamUnifiedMessages, new[] { rpcName, message } )!;
                 return ( AsyncJob<ServiceMethodResponse> )result;
             }
-            
+
             static MethodCallExpression ExtractMethodCallExpression<TResponse>( Expression<Func<TService, TResponse>> expression, string paramName )
             {
                 switch ( expression.NodeType )
@@ -240,7 +243,7 @@ namespace SteamKit2
         {
             if ( packetMsg == null )
             {
-                throw new ArgumentNullException( nameof(packetMsg) );
+                throw new ArgumentNullException( nameof( packetMsg ) );
             }
 
             if ( !dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
@@ -276,14 +279,14 @@ namespace SteamKit2
             if ( !string.IsNullOrEmpty( jobName ) )
             {
                 var splitByDot = jobName.Split( '.' );
-                var splitByHash = splitByDot[1].Split( '#' );
+                var splitByHash = splitByDot[ 1 ].Split( '#' );
 
-                var serviceName = splitByDot[0];
-                var methodName = splitByHash[0];
+                var serviceName = splitByDot[ 0 ];
+                var methodName = splitByHash[ 0 ];
 
                 var serviceInterfaceName = "SteamKit2.Internal.I" + serviceName;
                 var serviceInterfaceType = Type.GetType( serviceInterfaceName );
-                if (serviceInterfaceType != null)
+                if ( serviceInterfaceType != null )
                 {
                     var method = serviceInterfaceType.GetMethod( methodName );
                     if ( method != null )
