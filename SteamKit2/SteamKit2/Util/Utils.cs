@@ -58,46 +58,33 @@ namespace SteamKit2
                     };
 
                 case PlatformID.Win32NT:
-                    switch ( ver.Major )
+                    return ver.Major switch
                     {
-                        case 4:
-                            return EOSType.WinNT;
-
-                        case 5:
-                            return ver.Minor switch
-                            {
-                                0 => EOSType.Win2000,
-                                1 => EOSType.WinXP,
-                                // Assume nobody runs Windows XP Professional x64 Edition
-                                // It's an edition of Windows Server 2003 anyway.
-                                2 => EOSType.Win2003,
-                                _ => EOSType.WinUnknown,
-                            };
-
-                        case 6:
-                            return ver.Minor switch
-                            {
-                                0 => EOSType.WinVista, // Also Server 2008
-                                1 => EOSType.Windows7, // Also Server 2008 R2
-                                2 => EOSType.Windows8, // Also Server 2012
-                                // Note: The OSVersion property reports the same version number (6.2.0.0) for both Windows 8 and Windows 8.1.- http://msdn.microsoft.com/en-us/library/system.environment.osversion(v=vs.110).aspx
-                                // In practice, this will only get hit if the application targets Windows 8.1 in the app manifest.
-                                // See http://msdn.microsoft.com/en-us/library/windows/desktop/dn481241(v=vs.85).aspx for more info.
-                                3 => EOSType.Windows81, // Also Server 2012 R2
-                                _ => EOSType.WinUnknown,
-                            };
-
-                        case 10:
-                            if( ver.Build >= 22000 )
-                            {
-                                return EOSType.Win11;
-                            }
-
-                            return EOSType.Windows10; // Also Server 2016, Server 2019, Server 2022
-
-                        default:
-                            return EOSType.WinUnknown;
-                    }
+                        4 => EOSType.WinNT,
+                        5 => ver.Minor switch
+                        {
+                            0 => EOSType.Win2000,
+                            1 => EOSType.WinXP,
+                            // Assume nobody runs Windows XP Professional x64 Edition
+                            // It's an edition of Windows Server 2003 anyway.
+                            2 => EOSType.Win2003,
+                            _ => EOSType.WinUnknown,
+                        },
+                        6 => ver.Minor switch
+                        {
+                            0 => EOSType.WinVista, // Also Server 2008
+                            1 => EOSType.Windows7, // Also Server 2008 R2
+                            2 => EOSType.Windows8, // Also Server 2012
+                            // Note: The OSVersion property reports the same version number (6.2.0.0) for both Windows 8 and Windows 8.1.- http://msdn.microsoft.com/en-us/library/system.environment.osversion(v=vs.110).aspx
+                            // In practice, this will only get hit if the application targets Windows 8.1 in the app manifest.
+                            // See http://msdn.microsoft.com/en-us/library/windows/desktop/dn481241(v=vs.85).aspx for more info.
+                            3 => EOSType.Windows81, // Also Server 2012 R2
+                            _ => EOSType.WinUnknown,
+                        },
+                        10 when ver.Build >= 22000 => EOSType.Win11,
+                        10 => EOSType.Windows10,// Also Server 2016, Server 2019, Server 2022
+                        _ => EOSType.WinUnknown,
+                    };
 
                 case PlatformID.Unix:
                     {
