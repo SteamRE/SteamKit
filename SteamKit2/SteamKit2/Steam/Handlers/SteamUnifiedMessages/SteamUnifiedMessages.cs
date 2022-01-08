@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using ProtoBuf;
 
 namespace SteamKit2
@@ -23,6 +24,10 @@ namespace SteamKit2
         /// </summary>
         public class UnifiedService<TService>
         {
+            static readonly MethodInfo sendMessageMethod = typeof( SteamUnifiedMessages )
+                .GetMethods( BindingFlags.Public | BindingFlags.Instance )
+                .Single( m => m is { Name: nameof( SteamUnifiedMessages.SendMessage ) } && !Attribute.IsDefined( m, typeof( ObsoleteAttribute ) ) );
+
             internal UnifiedService( SteamUnifiedMessages steamUnifiedMessages )
             {
                 this.steamUnifiedMessages = steamUnifiedMessages;
@@ -37,16 +42,45 @@ namespace SteamKit2
             /// </summary>
             /// <typeparam name="TResponse">The type of the protobuf object which is the response to the RPC call.</typeparam>
             /// <param name="expr">RPC call expression, e.g. x => x.SomeMethodCall(message);</param>
+            /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
+            public AsyncJob<ServiceMethodResponse> SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr )
+            {
+                return SendMessageOrNotification( expr, false )!;
+            }
+
+            /// <summary>
+            /// Sends a notification.
+            /// </summary>
+            /// <typeparam name="TResponse">The type of the protobuf object which is the response to the RPC call.</typeparam>
+            /// <param name="expr">RPC call expression, e.g. x => x.SomeMethodCall(message);</param>
+            public void SendNotification<TResponse>( Expression<Func<TService, TResponse>> expr )
+            {
+                SendMessageOrNotification( expr, true );
+            }
+
+            /// <summary>
+            /// Sends a message.
+            /// Results are returned in a <see cref="ServiceMethodResponse"/>.
+            /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
+            /// </summary>
+            /// <typeparam name="TResponse">The type of the protobuf object which is the response to the RPC call.</typeparam>
+            /// <param name="expr">RPC call expression, e.g. x => x.SomeMethodCall(message);</param>
             /// <param name="isNotification">Whether this message is a notification or not.</param>
             /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
-            public AsyncJob<ServiceMethodResponse> SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification = false )
+            [Obsolete( "Use SendNotification() instead of passing 'true' bool in SendMessage. SendMessage incorrectly returned AsyncJob for notifications, they have no response by design." )]
+            public AsyncJob<ServiceMethodResponse>? SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification )
+            {
+                return SendMessageOrNotification( expr, isNotification );
+            }
+
+            AsyncJob<ServiceMethodResponse>? SendMessageOrNotification<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification )
             {
                 if ( expr == null )
                 {
-                    throw new ArgumentNullException( nameof(expr) );
+                    throw new ArgumentNullException( nameof( expr ) );
                 }
 
-                var call = ExtractMethodCallExpression( expr, nameof(expr) );
+                var call = ExtractMethodCallExpression( expr, nameof( expr ) );
                 var methodInfo = call.Method;
 
                 var argument = call.Arguments.Single();
@@ -54,7 +88,7 @@ namespace SteamKit2
 
                 if ( argument.NodeType == ExpressionType.MemberAccess )
                 {
-                    var unary = Expression.Convert( argument, typeof(object) );
+                    var unary = Expression.Convert( argument, typeof( object ) );
                     var lambda = Expression.Lambda<Func<object>>( unary );
                     var getter = lambda.Compile();
                     message = getter();
@@ -64,17 +98,26 @@ namespace SteamKit2
                     throw new NotSupportedException( "Unknown Expression type" );
                 }
 
-                var serviceName = typeof(TService).Name.Substring( 1 ); // IServiceName - remove 'I'
+                var serviceName = typeof( TService ).Name.Substring( 1 ); // IServiceName - remove 'I'
                 var methodName = methodInfo.Name;
                 var version = 1;
 
                 var rpcName = string.Format( "{0}.{1}#{2}", serviceName, methodName, version );
 
-                var method = typeof(SteamUnifiedMessages).GetMethod( nameof(SteamUnifiedMessages.SendMessage) )!.MakeGenericMethod( message.GetType() );
-                var result = method.Invoke( this.steamUnifiedMessages, new[] { rpcName, message, isNotification } )!;
+                if ( isNotification )
+                {
+                    var notification = typeof( SteamUnifiedMessages )
+                        .GetMethod( nameof( SteamUnifiedMessages.SendNotification ), BindingFlags.Public | BindingFlags.Instance )!
+                        .MakeGenericMethod( message.GetType() );
+                    notification.Invoke( this.steamUnifiedMessages, new[] { rpcName, message } );
+                    return null;
+                }
+
+                var method = sendMessageMethod.MakeGenericMethod( message.GetType() );
+                var result = method.Invoke( this.steamUnifiedMessages, new[] { rpcName, message } )!;
                 return ( AsyncJob<ServiceMethodResponse> )result;
             }
-            
+
             static MethodCallExpression ExtractMethodCallExpression<TResponse>( Expression<Func<TService, TResponse>> expression, string paramName )
             {
                 switch ( expression.NodeType )
@@ -117,23 +160,68 @@ namespace SteamKit2
         /// <typeparam name="TRequest">The type of a protobuf object.</typeparam>
         /// <param name="name">Name of the RPC endpoint. Takes the format ServiceName.RpcName</param>
         /// <param name="message">The message to send.</param>
-        /// <param name="isNotification">Whether this message is a notification or not.</param>
         /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
-        public AsyncJob<ServiceMethodResponse> SendMessage<TRequest>( string name, TRequest message, bool isNotification = false )
+        public AsyncJob<ServiceMethodResponse> SendMessage<TRequest>( string name, TRequest message )
             where TRequest : IExtensible, new()
         {
             if ( message == null )
             {
-                throw new ArgumentNullException( nameof(message) );
+                throw new ArgumentNullException( nameof( message ) );
             }
 
-            var msg = new ClientMsgProtobuf<TRequest>( isNotification ? EMsg.ServiceMethodSendToClient : EMsg.ServiceMethodCallFromClient );
+            var msg = new ClientMsgProtobuf<TRequest>( EMsg.ServiceMethodCallFromClient );
             msg.SourceJobID = Client.GetNextJobID();
             msg.Header.Proto.target_job_name = name;
             msg.Body = message;
             Client.Send( msg );
 
             return new AsyncJob<ServiceMethodResponse>( this.Client, msg.SourceJobID );
+        }
+
+        /// <summary>
+        /// Sends a notification.
+        /// </summary>
+        /// <typeparam name="TRequest">The type of a protobuf object.</typeparam>
+        /// <param name="name">Name of the RPC endpoint. Takes the format ServiceName.RpcName</param>
+        /// <param name="message">The message to send.</param>
+        public void SendNotification<TRequest>( string name, TRequest message )
+            where TRequest : IExtensible, new()
+        {
+            if ( message == null )
+            {
+                throw new ArgumentNullException( nameof( message ) );
+            }
+
+            // Notifications do not set source jobid, otherwise Steam server will actively reject this message
+            // if the method being used is a "Notification"
+            var msg = new ClientMsgProtobuf<TRequest>( EMsg.ServiceMethodCallFromClient );
+            msg.Header.Proto.target_job_name = name;
+            msg.Body = message;
+            Client.Send( msg );
+        }
+
+        /// <summary>
+        /// Sends a message.
+        /// Results are returned in a <see cref="ServiceMethodResponse"/>.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
+        /// </summary>
+        /// <typeparam name="TRequest">The type of a protobuf object.</typeparam>
+        /// <param name="name">Name of the RPC endpoint. Takes the format ServiceName.RpcName</param>
+        /// <param name="message">The message to send.</param>
+        /// <param name="isNotification">Whether this message is a notification or not.</param>
+        /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
+        [Obsolete( "Use SendNotification() instead of passing 'true' bool in SendMessage. SendMessage incorrectly returned AsyncJob for notifications, they have no response by design." )]
+        public AsyncJob<ServiceMethodResponse>? SendMessage<TRequest>( string name, TRequest message, bool isNotification )
+            where TRequest : IExtensible, new()
+        {
+            if ( !isNotification )
+            {
+                return SendMessage( name, message );
+            }
+
+            SendNotification( name, message );
+
+            return null;
         }
 
         /// <summary>
@@ -155,7 +243,7 @@ namespace SteamKit2
         {
             if ( packetMsg == null )
             {
-                throw new ArgumentNullException( nameof(packetMsg) );
+                throw new ArgumentNullException( nameof( packetMsg ) );
             }
 
             if ( !dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
@@ -191,14 +279,14 @@ namespace SteamKit2
             if ( !string.IsNullOrEmpty( jobName ) )
             {
                 var splitByDot = jobName.Split( '.' );
-                var splitByHash = splitByDot[1].Split( '#' );
+                var splitByHash = splitByDot[ 1 ].Split( '#' );
 
-                var serviceName = splitByDot[0];
-                var methodName = splitByHash[0];
+                var serviceName = splitByDot[ 0 ];
+                var methodName = splitByHash[ 0 ];
 
                 var serviceInterfaceName = "SteamKit2.Internal.I" + serviceName;
                 var serviceInterfaceType = Type.GetType( serviceInterfaceName );
-                if (serviceInterfaceType != null)
+                if ( serviceInterfaceType != null )
                 {
                     var method = serviceInterfaceType.GetMethod( methodName );
                     if ( method != null )
