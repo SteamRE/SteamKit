@@ -2,9 +2,9 @@ name: CI/CD
 
 on:
   push:
-    branches: [ master, gh-actions ]
+    branches: [ master, gh-actions, maintenance/** ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, maintenance/** ]
 
 jobs:
   steamkit2:
