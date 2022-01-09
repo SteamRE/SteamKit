@@ -4,6 +4,10 @@ v 2.4.1			January 9 2022
 * Fixed PersonaStateCallback nullability annotations
 * Fixed SteamUnifiedMessages sending invalid notifications.
 
+BREAKING CHANGES:
+* SteamUnifiedMessages.SendMessage(..., isNotification: true) will now return null rather than an AsyncJob, as notifications
+  do not have job semantics. This method is obsolete and SendNotification(...) should be used instead.
+
 
 ------------------------------------------------------------------------------
 v 2.4.0			December 4 2021
