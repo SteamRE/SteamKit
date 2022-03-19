@@ -59,6 +59,7 @@ namespace SteamKit2
                 { EMsg.ClientVACBanStatus, HandleVACBanStatus },
                 { EMsg.ClientGetAppOwnershipTicketResponse, HandleAppOwnershipTicketResponse },
                 { EMsg.ClientGetDepotDecryptionKeyResponse, HandleDepotKeyResponse },
+                { EMsg.ClientGetLegacyGameKeyResponse, HandleLegacyGameKeyResponse },
                 { EMsg.ClientPICSAccessTokenResponse, HandlePICSAccessTokenResponse },
                 { EMsg.ClientPICSChangesSinceResponse, HandlePICSChangesSinceResponse },
                 { EMsg.ClientPICSProductInfoResponse, HandlePICSProductInfoResponse },
@@ -323,6 +324,21 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Request the legacy CD game keys for the requested appid.
+        /// </summary>
+        /// <param name="appid">The AppID to request game keys for.</param>
+        public AsyncJob<LegacyGameKeyCallback> GetLegacyGameKey( uint appid )
+        {
+            var request = new ClientMsg<MsgClientGetLegacyGameKey>();
+            request.SourceJobID = Client.GetNextJobID();
+            request.Body.AppId = appid;
+
+            this.Client.Send( request );
+
+            return new AsyncJob<LegacyGameKeyCallback>( this.Client, request.SourceJobID );
+        }
+
+        /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
         /// <param name="packetMsg">The packet message that contains the data.</param>
@@ -342,7 +358,6 @@ namespace SteamKit2
             handlerFunc( packetMsg );
         }
 
-
         #region ClientMsg Handlers
         void HandleAppOwnershipTicketResponse( IPacketMsg packetMsg )
         {
@@ -356,6 +371,13 @@ namespace SteamKit2
             var keyResponse = new ClientMsgProtobuf<CMsgClientGetDepotDecryptionKeyResponse>( packetMsg );
 
             var callback = new DepotKeyCallback(keyResponse.TargetJobID, keyResponse.Body);
+            this.Client.PostCallback( callback );
+        }
+        void HandleLegacyGameKeyResponse( IPacketMsg packetMsg )
+        {
+            var keyResponse = new ClientMsg<MsgClientGetLegacyGameKeyResponse>( packetMsg );
+
+            var callback = new LegacyGameKeyCallback( keyResponse.TargetJobID, keyResponse.Body, keyResponse.Payload.ToArray() );
             this.Client.PostCallback( callback );
         }
         void HandleGameConnectTokens( IPacketMsg packetMsg )
