@@ -9,7 +9,7 @@ if exist "%InstallDir%\Common7\Tools\vsdevcmd.bat" (
 )
 
 if not exist "native-dependencies\zlib-bins\ALL_BUILD.vcxproj" (
-  cmake -S native-dependencies\zlib-1.2.11 -B native-dependencies\zlib-bins -A Win32
+  cmake -S native-dependencies\zlib-1.2.12 -B native-dependencies\zlib-bins -A Win32
 )
 
 msbuild native-dependencies\zlib-bins\ALL_BUILD.vcxproj /p:Configuration=Release
