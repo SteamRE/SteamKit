@@ -101,7 +101,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
             return TRUE;
         }
 
-        th2_Init();
+        nh2_Init();
     }
     else if (fdwReason == DLL_PROCESS_DETACH)
     {
