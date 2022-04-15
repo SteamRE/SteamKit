@@ -146,7 +146,7 @@ jobs:
     - name: Tar files (Linux)
       if: matrix.os == 'ubuntu-latest'
       working-directory: Resources/NetHook2/build/
-      run: tar -cvf NetHook2-Linux.tar inject.sh *.so
+      run: tar -cvf NetHook2-Linux.tar inject.sh tuxjector *.so
 
     - name: Upload NetHook2 (Linux)
       uses: actions/upload-artifact@v3
