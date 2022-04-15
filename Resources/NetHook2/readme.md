@@ -6,11 +6,20 @@ These messages are dumped to file, and can be analyzed further with NetHookAnaly
 
 ## Compiling
 
-#### Building
 
-1. Execute `SetupDependencies.cmd` to automatically acquire and build the zlib and protobuf headers and libraries. You will need CMake for this.
-2. Build `NetHook2.sln` with Visual Studio 2019.
-3. Behold: a fresh new `NetHook2.dll` is born into this world. You can place this DLL wherever you like, or leave where you built it. You'll need its full file path later when injecting.
+### Building
+
+#### Windows
+1. mkdir build && cd build
+2. cmake -G "Visual Studio 16 2019" -A Win32 ../
+3. cmake --build . --target deps --config Release
+4. cmake --build . --target NetHook2 --config Release
+
+#### Linux
+1. mkdir build && cd build
+2. cmake ../
+3. make deps
+4. make
 
 #### Updating steammessages_base
 
@@ -19,7 +28,11 @@ These messages are dumped to file, and can be analyzed further with NetHookAnaly
 
 ## Usage
 
+#### Windows
 NetHook is capable of self injecting and ejecting from running instances of Steam, so there's no requirement to use a separate loader such as winject.
+
+#### Linux
+Use supplied inject.sh script to inject NetHook into running Steam instance.
 
 #### Downloading pre-built binary
 
@@ -29,11 +42,11 @@ You can download latest available build from [GitHub Actions here](https://githu
 Click on the latest commit and scroll all the way down to Artifacts section.
 There, you can download NetHook and NetHookAnalyzer.
 
-#### Installing dependencies
+#### Installing dependencies (Windows)
 
 NetHook requires Microsoft Visual C++ Redistributable (x86) package for usage. There is a possibility that this dependency is already covered on your machine due to being installed by other software that you use, however, Windows doesn't come with it by default, so it's worthy to ensure that it's installed. For majority of use cases, installing latest `vc_redist` package from [here](https://aka.ms/vs/17/release/vc_redist.x86.exe) should be sufficient. If you're building NH2 manually with VS older than 2015, you may need a different version - read more about `vc_redist` on [MSDN](https://docs.microsoft.com/cpp/windows/latest-supported-vc-redist) page, which also has links for other versions. This step resolves common `rundll32` error of "the specified module could not be found".
 
-#### To begin dumping network packets
+#### To begin dumping network packets (Windows)
 
 1. Ensure Steam is running. Additionally, make sure you're prepared for the possibility for Steam to crash. Using NetHook2 isn't an exact science, and sometimes things break.
 2. Execute the following in an _elevated_ command prompt: `rundll32 "<Path To NetHook2.dll>",Inject`

@@ -1,35 +1,34 @@
-
+#include <cstdio>
 #include "csimpledetour.h"
 
 
 CSimpleDetour::CSimpleDetour(void **old, void *replacement) noexcept
 {
-	m_fnOld = old;
-	m_fnReplacement = replacement;
-	m_bAttached = false;
+    m_fnOld = old;
+    m_fnReplacement = replacement;
+    m_hFunchook = funchook_create();
+    m_bAttached = false;
 }
 
 void CSimpleDetour::Attach() noexcept
 {
-	DetourTransactionBegin();
-	DetourUpdateThread(GetCurrentThread());
+    if(funchook_prepare(m_hFunchook, m_fnOld, m_fnReplacement))
+    {
+        return;
+    }
 
-	DetourAttach(m_fnOld, m_fnReplacement);
+    if(funchook_install(m_hFunchook, 0))
+    {
+        return;
+    }
 
-	DetourTransactionCommit();
-	
-	m_bAttached = true;
+    m_bAttached = true;
 }
 
 void CSimpleDetour::Detach() noexcept
 {
-	if (!m_bAttached)
-		return;
+    if (!m_bAttached)
+        return;
 
-	DetourTransactionBegin();
-	DetourUpdateThread(GetCurrentThread());
-
-	DetourDetach(m_fnOld, m_fnReplacement);
-
-	DetourTransactionCommit();
+    funchook_uninstall(m_hFunchook, 0);
 }

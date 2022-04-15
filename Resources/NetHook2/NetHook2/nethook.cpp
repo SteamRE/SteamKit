@@ -1,85 +1,115 @@
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#ifdef _WIN32
+    #define WIN32_LEAN_AND_MEAN
+    #include <Windows.h>
+    #include "nh2_string.h"
+#elif __linux__
+    #include <dlfcn.h>
+#endif
 
-#include "logger.h"
+#include <iostream>
+#include <string>
+
+#include "clientmodule.h"
 #include "crypto.h"
 #include "net.h"
-
-#include "nh2_string.h"
-
 #include "steammessages_base.pb.h"
 #include "version.h"
+#include "utils.h"
+#include "logger.h"
 
-CLogger *g_pLogger = NULL;
-CCrypto* g_pCrypto = NULL;
-NetHook::CNet *g_pNet = NULL;
+NetHook::CLogger *g_pLogger = nullptr;
+NetHook::CCrypto *g_pCrypto = nullptr;
+NetHook::CNet *g_pNet = nullptr;
+NetHook::ClientModule *g_pClientModule = nullptr;
 
-BOOL g_bOwnsConsole = FALSE;
+#ifdef __linux__
+    extern "C" void nh2_Init();
+#endif
 
-BOOL IsRunDll32()
+#ifdef _WIN32
+    bool g_bOwnsConsole = false;
+
+    BOOL IsRunDll32()
+    {
+        char szMainModulePath[MAX_PATH];
+        DWORD dwMainModulePathLength = GetModuleFileNameA(NULL, szMainModulePath, sizeof(szMainModulePath));
+
+        return stringCaseInsensitiveEndsWith(szMainModulePath, "\\rundll32.exe");
+    }   
+#endif
+
+#ifdef __linux__
+    __attribute__((destructor))
+#endif
+static void detach()
 {
-	char szMainModulePath[MAX_PATH];
-	DWORD dwMainModulePathLength = GetModuleFileNameA(NULL, szMainModulePath, sizeof(szMainModulePath));
+    if(g_pCrypto)
+        delete g_pCrypto;
 
-	return stringCaseInsensitiveEndsWith(szMainModulePath, "\\rundll32.exe");
+    if(g_pNet)
+        delete g_pNet;
+
+    if(g_pClientModule)
+        delete g_pClientModule;
+
+    if(g_pLogger)
+        delete g_pLogger;
+
+#ifdef _WIN32
+    if (g_bOwnsConsole)
+        FreeConsole();
+#endif
 }
 
-void PrintVersionInfo()
+void nh2_Init()
 {
-	g_pLogger->LogConsole("Initializing NetHook2...\n");
+    GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-	if (*g_szBuiltFromCommitSha == '\0')
-	{
-		g_pLogger->LogConsole("Built at %s. No further build information available.\n", g_szBuildDate);
-	}
-	else
-	{
-		g_pLogger->LogConsole("Built at %s from %s", g_szBuildDate, g_szBuiltFromCommitSha);
+#ifdef _WIN32
+    g_bOwnsConsole = AllocConsole();
+#endif
+    g_pLogger = new NetHook::CLogger();
 
-		if (g_bBuiltFromDirty)
-		{
-			g_pLogger->LogConsole("/dirty");
-		}
+    NetHook::ModuleInfo steamClient;
+#ifdef __linux__
+    if(!NetHook::Utils::GetClientModule("steamclient.so", &steamClient))
+#elif _WIN32
+    if(!NetHook::Utils::GetClientModule("steamclient.dll", &steamClient))
+#endif
+    {
+        g_pLogger->LogConsole("steamclient not found!\n");
+        return;
+    }
+    g_pLogger->LogConsole("Found steamclient: %s @ 0x%08x\n", steamClient.m_modulePath.c_str(), (size_t)steamClient.m_base);
 
-		g_pLogger->LogConsole(" (%s)\n", g_szBuiltFromCommitDate);
-	}
+    g_pClientModule = new NetHook::ClientModule(steamClient);
+
+    g_pLogger->InitSessionLogDir();
+
+    g_pCrypto = new NetHook::CCrypto();
+    g_pNet = new NetHook::CNet();
 }
 
-BOOL WINAPI DllMain( HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved )
+
+#ifdef _WIN32
+BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
-	if (IsRunDll32())
-	{
-		return TRUE;
-	}
+    if (fdwReason == DLL_PROCESS_ATTACH)
+    {
+        if (IsRunDll32())
+        {
+            return TRUE;
+        }
 
-	if ( fdwReason == DLL_PROCESS_ATTACH )
-	{
-		GOOGLE_PROTOBUF_VERIFY_VERSION;
+        th2_Init();
+    }
+    else if (fdwReason == DLL_PROCESS_DETACH)
+    {
+        detach();
+    }
 
-		g_bOwnsConsole = AllocConsole();
-
-		LoadLibrary( "steamclient.dll" );
-
-		g_pLogger = new CLogger();
-
-		PrintVersionInfo();
-
-		g_pCrypto = new CCrypto();
-		g_pNet = new NetHook::CNet();
-
-	}
-	else if ( fdwReason == DLL_PROCESS_DETACH )
-	{
-		delete g_pNet;
-		delete g_pCrypto;
-
-		delete g_pLogger;
-
-		if (g_bOwnsConsole)
-		{
-			FreeConsole();
-		}
-	}
-
-	return TRUE;
+    return TRUE;
 }
+#endif
+
+

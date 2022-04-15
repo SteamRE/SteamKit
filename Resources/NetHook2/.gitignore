@@ -1,1 +1,4 @@
-native-dependencies/
+include/
+deps/
+build/
+CMakeLists.txt.user
