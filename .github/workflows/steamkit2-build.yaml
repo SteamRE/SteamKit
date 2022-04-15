@@ -99,30 +99,65 @@ jobs:
         path: 'Resources/NetHookAnalyzer2/NetHookAnalyzer2/bin/Release/win-x64/publish/*'
 
   nethook2:
-    name: NetHook2 - ${{ matrix.configuration }}
+    name: NetHook2 on ${{ matrix.os }}
 
     strategy:
       matrix:
-        configuration: [ Debug, Release ]
+        os: [ windows-latest, ubuntu-latest ]
       fail-fast: false
 
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
 
-    - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
+    - name: Setup developer command prompt (Windows)
+      if: matrix.os == 'windows-latest'
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: win32
 
-    - name: Configure Dependencies
-      run: Resources/NetHook2/SetupDependencies.cmd
+    - name: Install dependencies (Linux)
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt update
+        sudo apt install -y g++-multilib libc++-11-dev libc++abi-11-dev
+
+    - name: Create build directory
+      run: mkdir Resources/NetHook2/build
+
+    - name: Generate make file (Windows)
+      if: matrix.os == 'windows-latest'
+      working-directory: Resources/NetHook2/build/
+      run: cmake -A Win32 ../
+
+    - name: Generate make file (Linux)
+      if: matrix.os == 'ubuntu-latest'
+      working-directory: Resources/NetHook2/build/
+      run: cmake ../
 
     - name: Build NetHook2
-      run: msbuild /p:Configuration=${{ matrix.configuration }} Resources/NetHook2/NetHook2.sln
+      working-directory: Resources/NetHook2/build/
+      run: |
+        cmake --build . --target deps --config Release
+        cmake --build . --config Release
 
-    - name: Upload NetHook2
-      uses: actions/upload-artifact@v2
-      if: matrix.configuration == 'Release'
+    - name: Tar files (Linux)
+      if: matrix.os == 'ubuntu-latest'
+      working-directory: Resources/NetHook2/build/
+      run: tar -cvf NetHook2-Linux.tar inject.sh *.so
+
+    - name: Upload NetHook2 (Linux)
+      uses: actions/upload-artifact@v3
+      if: matrix.os == 'ubuntu-latest'
+      with:
+        name: NetHook2-Linux
+        path: Resources/NetHook2/build/NetHook2-Linux.tar
+
+    - name: Upload NetHook2 (Windows)
+      uses: actions/upload-artifact@v3
+      if: matrix.os == 'windows-latest'
       with:
         name: NetHook2
-        path: 'Resources/NetHook2/Release/*.dll'
+        path: 'Resources/NetHook2/build/Release/*.dll'
