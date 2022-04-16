@@ -3,7 +3,7 @@ BUILD_DATE=$(date +"%Y-%m-%d %H:%M:%S %z")
 COMMIT_DATE=$(git show -s --format="%ci" HEAD)
 COMMIT_SHA=$(git rev-parse --short HEAD)
 
-git diff --quiet && $?
+git diff --quiet
 DIRTY="false"
 if [ $? ] 
 	then 
