@@ -15,8 +15,8 @@ if(UNIX)
     set(CMAKE_C_FLAGS -m32)
     set(CMAKE_CXX_FLAGS -m32)
 elseif(WIN32)
-	set(CMAKE_C_FLAGS "/MD")
-	set(CMAKE_CXX_FLAGS "/MD")
+        set(CMAKE_C_FLAGS "/MD /EHsc")
+        set(CMAKE_CXX_FLAGS "/MD /EHsc")
 	
 	find_library(PSAPI psapi)
 	if(PSAPI MATCHES "PSAPI-NOTFOUND")
@@ -131,6 +131,7 @@ set(LIBSRC
     ${NetHook2_SRC}/signscan.cpp
     ${NetHook2_SRC}/zip.cpp
     ${NetHook2_SRC}/zip.h
+    ${NetHook2_SRC}/version.cpp
     ${NetHook2_SRC}/version.h
     ${NetHook2_SRC}/steammessages_base.pb.cc
     ${NetHook2_SRC}/logger.cpp
@@ -154,6 +155,7 @@ elseif(WIN32)
         ${NetHook2_SRC}/injector.cpp
     )
 endif()
+set_source_files_properties(${NetHook2_SRC}/version.cpp PROPERTIES GENERATED true)
 
 add_library(NetHook2 SHARED ${LIBSRC})
 set_property(TARGET NetHook2 PROPERTY POSITION_INDEPENDENT_CODE true)
@@ -161,10 +163,13 @@ target_include_directories(NetHook2 PUBLIC ${zlib_INCLUDE} ${protobuf_INCLUDE} $
 target_link_libraries(NetHook2 ${CMAKE_DL_LIBS} ${zlib_LIB} ${protobuf_LIB} ${funchook_LIB} ${funchook_DISTORM_LIB})
 if(WIN32)
         target_link_libraries(NetHook2 ${PSAPI})
+        add_custom_command(TARGET NetHook2 PRE_BUILD COMMAND powershell.exe -ExecutionPolicy Unrestricted ${NetHook2_ROOT}/GenerateVersionInfo.ps1 -srcRoot \"${NetHook2_SRC}\")
 endif()
 
 if(UNIX AND NOT APPLE)
+    add_custom_command(OUTPUT ${NetHook2_SRC}/version.cpp COMMAND ${NetHook2_ROOT}/GenerateVersionInfo.sh ${NetHook2_SRC})
     add_custom_command(TARGET NetHook2 POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_LIST_DIR}/inject.sh ${CMAKE_CURRENT_BINARY_DIR}/inject.sh)
+
     # tiny payload lib
     add_library(tuxhookldr SHARED ${NetHook2_SRC}/tuxhookldr.cpp)
     set_property(TARGET tuxhookldr PROPERTY POSITION_INDEPENDENT_CODE true)

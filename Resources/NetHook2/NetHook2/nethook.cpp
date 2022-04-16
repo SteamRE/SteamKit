@@ -61,6 +61,28 @@ static void detach()
 #endif
 }
 
+void PrintVersionInfo()
+{
+    g_pLogger->LogConsole("Initializing NetHook2...\n");
+
+    if (*g_szBuiltFromCommitSha == '\0')
+    {
+        g_pLogger->LogConsole("Built at %s. No further build information available.\n", g_szBuildDate);
+    }
+    else
+    {
+        g_pLogger->LogConsole("Built at %s from %s", g_szBuildDate, g_szBuiltFromCommitSha);
+
+        if (g_bBuiltFromDirty)
+        {
+            g_pLogger->LogConsole("/dirty");
+        }
+
+        g_pLogger->LogConsole(" (%s)\n", g_szBuiltFromCommitDate);
+    }
+}
+
+
 void nh2_Init()
 {
     GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -69,6 +91,8 @@ void nh2_Init()
     g_bOwnsConsole = AllocConsole();
 #endif
     g_pLogger = new NetHook::CLogger();
+
+    PrintVersionInfo();
 
     NetHook::ModuleInfo steamClient;
 #ifdef __linux__
