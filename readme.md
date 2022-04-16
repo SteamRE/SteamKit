@@ -3,7 +3,7 @@
 [![NuGet](https://img.shields.io/nuget/v/SteamKit2.svg)](https://www.nuget.org/packages/SteamKit2/)
 
 
-SteamKit2 is a .NET library designed to interoperate with Valve's [Steam network](http://store.steampowered.com/about). It aims to provide a simple, yet extensible, interface to perform various actions on the network.
+SteamKit2 is a .NET library designed to interoperate with Valve's [Steam network](https://store.steampowered.com/about). It aims to provide a simple, yet extensible, interface to perform various actions on the network.
 
 
 ## Getting Binaries
@@ -11,7 +11,7 @@ SteamKit2 is a .NET library designed to interoperate with Valve's [Steam network
 
 ### Visual Studio
 
-Starting with version 1.2.2, SteamKit2 is distributed as a [NuGet package](http://nuget.org/packages/steamkit2).
+Starting with version 1.2.2, SteamKit2 is distributed as a [NuGet package](https://www.nuget.org/packages/steamkit2).
 
 Simply install SteamKit2 using the package manager in Visual Studio, and NuGet will add all the required dependencies and references to your project.  
   
@@ -29,7 +29,7 @@ Documentation consists primarily of XML code documentation provided with the bin
 
 ## License
 
-SteamKit2 is released under the [LGPL-2.1 license](http://www.tldrlegal.com/license/gnu-lesser-general-public-license-v2.1-%28lgpl-2.1%29).
+SteamKit2 is released under the [LGPL-2.1 license](https://choosealicense.com/licenses/lgpl-2.1/).
 
 
 ## Dependencies
@@ -39,8 +39,8 @@ In order to use SteamKit2 at runtime, the following dependencies are required:
   - A [.NET Standard 2.0](https://github.com/dotnet/standard/blob/master/docs/versions.md)-compatible runtime. At the time of writing, this is:
       - .NET Framework 4.6.1 or higher required, .NET Framework 4.7.2 or higher recommended.
       - .NET Core 2.0 or higher
-      - [Mono 5.4](http://mono-project.com) or higher
-  - [protobuf-net](http://code.google.com/p/protobuf-net/) ([NuGet package](http://nuget.org/packages/protobuf-net))
+      - [Mono 5.4](https://mono-project.com) or higher
+  - [protobuf-net](https://github.com/protobuf-net/protobuf-net) ([NuGet package](https://www.nuget.org/packages/protobuf-net))
 
 Note: If you're using the SteamKit2 NuGet package, the protobuf-net dependency should be resolved for you. See the [Installation Guide](https://github.com/SteamRE/SteamKit/wiki/Installation) for more information.
 
