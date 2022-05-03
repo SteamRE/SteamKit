@@ -105,17 +105,17 @@ namespace SteamLanguageParser
                 }
             }
 
-            long maxlong = 0;
-
-            if (lastValue.StartsWith("0x"))
-                maxlong = Convert.ToInt64(lastValue.Substring(2, lastValue.Length - 2), 16);
-            else
-                maxlong = Int64.Parse(lastValue);
-
-            maxlong++;
-
             if (!hasMax && enode.Flags != "flags")
             {
+                long maxlong = 0;
+
+                if (lastValue.StartsWith("0x"))
+                    maxlong = Convert.ToInt64(lastValue.Substring(2, lastValue.Length - 2), 16);
+                else
+                    maxlong = Int64.Parse(lastValue);
+
+                maxlong++;
+
                 sb.AppendLine(padding + "\t" + enode.Name + "Max = " + maxlong + ",");
             }
             sb.AppendLine(padding + "};");
