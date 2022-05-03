@@ -19,8 +19,8 @@ namespace SteamLanguageParser
 
             ParseFile( projectPath, Path.Combine( "Resources", "SteamLanguage" ), "steammsg.steamd", "SteamKit2", Path.Combine( "SteamKit2", "SteamKit2", "Base", "Generated"), "SteamLanguage", true, new CSharpGen(), "cs" );
 
-            //ParseFile( projectPath, @"Resources\SteamLanguage", "steammsg.steamd", "SteamKit2", @"SteamKit2\ObjC\", "SteamLanguage", true, new ObjCInterfaceGen(), "h" );
-            //ParseFile( projectPath, @"Resources\SteamLanguage", "steammsg.steamd", "SteamKit2", @"SteamKit2\ObjC\", "SteamLanguage", true, new ObjCImplementationGen(), "m" );
+            //ParseFile( projectPath, Path.Combine("Resources", "SteamLanguage"), "steammsg.steamd", "SteamKit2", Path.Combine("SteamKit2", "ObjC"), "SteamLanguage", true, new ObjCInterfaceGen(), "h" );
+            //ParseFile( projectPath, Path.Combine("Resources", "SteamLanguage"), "steammsg.steamd", "SteamKit2", Path.Combine("SteamKit2", "ObjC"), "SteamLanguage", true, new ObjCImplementationGen(), "m" );
 
         }
 
@@ -51,8 +51,13 @@ namespace SteamLanguageParser
             string outputEnumFile = Path.Combine( outputPath, outFile + "." + fileNameSuffix );
             string outputMessageFile = Path.Combine( outputPath, outFile + "Internal." + fileNameSuffix );
 
-            File.WriteAllText( Path.Combine( projectPath, outputEnumFile ), enumBuilder.ToString() );
-            File.WriteAllText( Path.Combine( projectPath, outputMessageFile ), messageBuilder.ToString() );
+            string enumFilePath = Path.Combine( projectPath, outputEnumFile );
+            Directory.CreateDirectory( Path.GetDirectoryName( enumFilePath ) );
+            File.WriteAllText( enumFilePath, enumBuilder.ToString() );
+
+            string messageFilePath = Path.Combine( projectPath, outputMessageFile );
+            Directory.CreateDirectory( Path.GetDirectoryName( messageFilePath ) );
+            File.WriteAllText( messageFilePath, messageBuilder.ToString() );
         }
     }
 }
