@@ -201,7 +201,7 @@ namespace SteamKit2
             var result = new Msg<MsgChannelEncryptResult>( packetMsg );
 
             log.LogDebug( nameof(EnvelopeEncryptedConnection), "Encryption result: {0}", result.Body.Result );
-            Debug.Assert( encryption != null );
+            DebugLog.Assert( encryption != null, nameof( EnvelopeEncryptedConnection ), "Encryption is null" );
 
             if ( result.Body.Result == EResult.OK && encryption != null )
             {

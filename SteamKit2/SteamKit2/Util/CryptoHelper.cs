@@ -329,7 +329,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(hmacSecret) );
             }
 
-            Debug.Assert( key.Length >= 16 );
+            DebugLog.Assert( key.Length >= 16, "CryptoHelper", "SymmetricDecryptHMACIV used with a key smaller than 16 bytes." );
             var truncatedKeyForHmac = new byte[ 16 ];
             Array.Copy( key, 0, truncatedKeyForHmac, 0, truncatedKeyForHmac.Length );
 

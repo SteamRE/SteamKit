@@ -32,6 +32,9 @@ namespace Tests
             var steamClient = new SteamClient();
             steamClient.DebugNetworkListener = listener;
 
+            // Steam client has to be lied to because Send() has an assert for a connection
+            typeof( CMClient ).GetProperty( "IsConnected" ).SetValue( steamClient, true, null );
+
             var clientMsg = new ClientMsgProtobuf<CMsgClientGamesPlayed>(EMsg.ClientGamesPlayedNoDataBlob);
             steamClient.Send(clientMsg);
 
