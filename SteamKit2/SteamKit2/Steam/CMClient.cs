@@ -168,9 +168,9 @@ namespace SteamKit2.Internal
             lock ( connectionLock )
             {
                 Disconnect( userInitiated: true );
-                Debug.Assert( connection == null );
-                Debug.Assert( connectionSetupTask == null );
-                Debug.Assert( connectionCancellation == null );
+                DebugLog.Assert( connection == null, nameof( CMClient ), "Connection is not null" );
+                DebugLog.Assert( connectionSetupTask == null, nameof( CMClient ), "Connection setup task is not null" );
+                DebugLog.Assert( connectionCancellation == null, nameof( CMClient ), "Connection cancellation token is not null" );
 
                 connectionCancellation = new CancellationTokenSource();
                 var token = connectionCancellation.Token;
@@ -215,7 +215,7 @@ namespace SteamKit2.Internal
                     var newConnection = CreateConnection( record.ProtocolTypes & Configuration.ProtocolTypes );
 
                     var connectionRelease = Interlocked.Exchange( ref connection, newConnection );
-                    Debug.Assert( connectionRelease == null );
+                    DebugLog.Assert( connectionRelease == null, nameof( CMClient ), "Connection was set during a connect, did you call CMClient.Connect() on multiple threads?" );
 
                     newConnection.NetMsgReceived += NetMsgReceived;
                     newConnection.Connected += Connected;
@@ -261,7 +261,7 @@ namespace SteamKit2.Internal
 
                 // Connection implementations are required to issue the Disconnected callback before Disconnect() returns
                 connection?.Disconnect( userInitiated );
-                Debug.Assert( connection == null );
+                DebugLog.Assert( connection == null, nameof( CMClient ), "Connection was not released in disconnect." );
             }
         }
 
@@ -277,7 +277,7 @@ namespace SteamKit2.Internal
                 throw new ArgumentNullException( nameof( msg ), "A value for 'msg' must be supplied" );
             }
 
-            Debug.Assert( IsConnected );
+            DebugLog.Assert( IsConnected, nameof( CMClient ), "Send() was called while not connected to Steam." );
 
             var sessionID = this.SessionID;
 

@@ -192,7 +192,7 @@ namespace SteamKit2
         {
             lock ( netLock )
             {
-                Debug.Assert( cancellationToken == null );
+                DebugLog.Assert( cancellationToken == null, nameof( TcpConnection ), "Connection cancellation token is not null" );
                 cancellationToken = new CancellationTokenSource();
 
                 socket = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
