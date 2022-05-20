@@ -169,7 +169,7 @@ namespace SteamKit2.Internal
             {
                 Disconnect( userInitiated: true );
                 Debug.Assert( connection == null );
-
+                Debug.Assert( connectionSetupTask == null );
                 Debug.Assert( connectionCancellation == null );
 
                 connectionCancellation = new CancellationTokenSource();
@@ -185,7 +185,7 @@ namespace SteamKit2.Internal
                 }
                 else
                 {
-                    recordTask = Task.FromResult( (ServerRecord?)cmServer );
+                    recordTask = Task.FromResult( ( ServerRecord? )cmServer );
                 }
 
                 connectionSetupTask = recordTask.ContinueWith( t =>
@@ -212,18 +212,24 @@ namespace SteamKit2.Internal
                         return;
                     }
 
-                    connection = CreateConnection( record.ProtocolTypes & Configuration.ProtocolTypes );
-                    connection.NetMsgReceived += NetMsgReceived;
-                    connection.Connected += Connected;
-                    connection.Disconnected += Disconnected;
-                    connection.Connect( record.EndPoint, ( int )ConnectionTimeout.TotalMilliseconds );
+                    var newConnection = CreateConnection( record.ProtocolTypes & Configuration.ProtocolTypes );
+
+                    var connectionRelease = Interlocked.Exchange( ref connection, newConnection );
+                    Debug.Assert( connectionRelease == null );
+
+                    newConnection.NetMsgReceived += NetMsgReceived;
+                    newConnection.Connected += Connected;
+                    newConnection.Disconnected += Disconnected;
+                    newConnection.Connect( record.EndPoint, ( int )ConnectionTimeout.TotalMilliseconds );
                 }, TaskContinuationOptions.ExecuteSynchronously ).ContinueWith( t =>
-              {
+                {
                     if ( t.IsFaulted )
                     {
-                      LogDebug( nameof( CMClient ), "Unhandled exception when attempting to connect to Steam: {0}", t.Exception );
+                        LogDebug( nameof( CMClient ), "Unhandled exception when attempting to connect to Steam: {0}", t.Exception );
                         OnClientDisconnected( userInitiated: false );
                     }
+
+                    connectionSetupTask = null;
                 }, TaskContinuationOptions.ExecuteSynchronously );
             }
         }
@@ -231,7 +237,7 @@ namespace SteamKit2.Internal
         /// <summary>
         /// Disconnects this client.
         /// </summary>
-        public void Disconnect() => Disconnect( userInitiated: true ); 
+        public void Disconnect() => Disconnect( userInitiated: true );
 
         private protected void Disconnect( bool userInitiated )
         {
@@ -268,8 +274,10 @@ namespace SteamKit2.Internal
         {
             if ( msg == null )
             {
-                throw new ArgumentNullException( nameof(msg), "A value for 'msg' must be supplied" );
+                throw new ArgumentNullException( nameof( msg ), "A value for 'msg' must be supplied" );
             }
+
+            Debug.Assert( IsConnected );
 
             var sessionID = this.SessionID;
 
@@ -320,7 +328,7 @@ namespace SteamKit2.Internal
         /// <param name="args">An array containing zero or more objects to format.</param>
         public void LogDebug( string category, string message, params object?[]? args )
         {
-            if (!DebugLog.Enabled)
+            if ( !DebugLog.Enabled )
             {
                 return;
             }
@@ -334,7 +342,7 @@ namespace SteamKit2.Internal
         /// Called when a client message is received from the network.
         /// </summary>
         /// <param name="packetMsg">The packet message.</param>
-        protected virtual bool OnClientMsgReceived( [NotNullWhen(true)] IPacketMsg? packetMsg )
+        protected virtual bool OnClientMsgReceived( [NotNullWhen( true )] IPacketMsg? packetMsg )
         {
             if ( packetMsg == null )
             {
@@ -373,7 +381,7 @@ namespace SteamKit2.Internal
                 case EMsg.ClientServerUnavailable:
                     HandleServerUnavailable( packetMsg );
                     break;
-                
+
                 case EMsg.ClientCMList:
                     HandleCMList( packetMsg );
                     break;
@@ -406,14 +414,14 @@ namespace SteamKit2.Internal
             }
             else if ( protocol.HasFlagsFast( ProtocolTypes.Tcp ) )
             {
-                return new EnvelopeEncryptedConnection( new TcpConnection(this), Universe, this, DebugNetworkListener );
+                return new EnvelopeEncryptedConnection( new TcpConnection( this ), Universe, this, DebugNetworkListener );
             }
             else if ( protocol.HasFlagsFast( ProtocolTypes.Udp ) )
             {
-                return new EnvelopeEncryptedConnection( new UdpConnection(this), Universe, this, DebugNetworkListener );
+                return new EnvelopeEncryptedConnection( new UdpConnection( this ), Universe, this, DebugNetworkListener );
             }
 
-            throw new ArgumentOutOfRangeException( nameof(protocol), protocol, "Protocol bitmask has no supported protocols set." );
+            throw new ArgumentOutOfRangeException( nameof( protocol ), protocol, "Protocol bitmask has no supported protocols set." );
         }
 
 
@@ -465,7 +473,7 @@ namespace SteamKit2.Internal
         {
             if ( data.Length < sizeof( uint ) )
             {
-                log.LogDebug( nameof(CMClient), "PacketMsg too small to contain a message, was only {0} bytes. Message: 0x{1}", data.Length, BitConverter.ToString( data ).Replace( "-", string.Empty ) );
+                log.LogDebug( nameof( CMClient ), "PacketMsg too small to contain a message, was only {0} bytes. Message: 0x{1}", data.Length, BitConverter.ToString( data ).Replace( "-", string.Empty ) );
                 return null;
             }
 
@@ -483,18 +491,18 @@ namespace SteamKit2.Internal
 
             try
             {
-                if (MsgUtil.IsProtoBuf(rawEMsg))
+                if ( MsgUtil.IsProtoBuf( rawEMsg ) )
                 {
                     // if the emsg is flagged, we're a proto message
-                    return new PacketClientMsgProtobuf(eMsg, data);
+                    return new PacketClientMsgProtobuf( eMsg, data );
                 }
                 else
                 {
                     // otherwise we're a struct message
-                    return new PacketClientMsg(eMsg, data);
+                    return new PacketClientMsg( eMsg, data );
                 }
             }
-            catch (Exception ex)
+            catch ( Exception ex )
             {
                 log.LogDebug( "CMClient", "Exception deserializing emsg {0} ({1}).\n{2}", eMsg, MsgUtil.IsProtoBuf( rawEMsg ), ex.ToString() );
                 return null;
@@ -597,7 +605,7 @@ namespace SteamKit2.Internal
             if ( packetMsg.IsProto )
             {
                 var logoffMsg = new ClientMsgProtobuf<CMsgClientLoggedOff>( packetMsg );
-                var logoffResult = (EResult)logoffMsg.Body.eresult;
+                var logoffResult = ( EResult )logoffMsg.Body.eresult;
 
                 if ( logoffResult == EResult.TryAnotherCM || logoffResult == EResult.ServiceUnavailable )
                 {
@@ -607,7 +615,7 @@ namespace SteamKit2.Internal
                 }
             }
         }
-        
+
         void HandleServerUnavailable( IPacketMsg packetMsg )
         {
             var msgServerUnavailable = new ClientMsg<MsgClientServerUnavailable>( packetMsg );
@@ -616,14 +624,14 @@ namespace SteamKit2.Internal
                 msgServerUnavailable.Body.EServerTypeUnavailable, ( EMsg )msgServerUnavailable.Body.EMsgSent );
             Disconnect( userInitiated: false );
         }
-        
+
         void HandleCMList( IPacketMsg packetMsg )
         {
             var cmMsg = new ClientMsgProtobuf<CMsgClientCMList>( packetMsg );
             DebugLog.Assert( cmMsg.Body.cm_addresses.Count == cmMsg.Body.cm_ports.Count, "CMClient", "HandleCMList received malformed message" );
 
             var cmList = cmMsg.Body.cm_addresses
-                .Zip( cmMsg.Body.cm_ports, ( addr, port ) => ServerRecord.CreateSocketServer( new IPEndPoint( NetHelpers.GetIPAddress( addr ) , ( int )port ) ) );
+                .Zip( cmMsg.Body.cm_ports, ( addr, port ) => ServerRecord.CreateSocketServer( new IPEndPoint( NetHelpers.GetIPAddress( addr ), ( int )port ) ) );
 
             var webSocketList = cmMsg.Body.cm_websocket_addresses.Select( addr => ServerRecord.CreateWebSocketServer( addr ) );
 
