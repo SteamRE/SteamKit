@@ -252,11 +252,12 @@ namespace SteamKit2.Internal
                     connectionCancellation = null;
                 }
 
-                if ( connectionSetupTask != null )
+                var connectionSetupTaskToWait = Interlocked.Exchange( ref connectionSetupTask, null );
+
+                if ( connectionSetupTaskToWait != null )
                 {
                     // though it's ugly, we want to wait for the completion of this task and keep hold of the lock
-                    connectionSetupTask.GetAwaiter().GetResult();
-                    connectionSetupTask = null;
+                    connectionSetupTaskToWait.GetAwaiter().GetResult();
                 }
 
                 // Connection implementations are required to issue the Disconnected callback before Disconnect() returns
