@@ -271,6 +271,7 @@ namespace SteamKit2
                 { EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse, HandleWebAPIUserNonce },
                 { EMsg.ClientVanityURLChangedNotification, HandleVanityURLChangedNotification },
                 { EMsg.ClientMarketingMessageUpdate2, HandleMarketingMessageUpdate },
+                { EMsg.ClientPlayingSessionState, HandlePlayingSessionState },
             };
         }
 
@@ -287,7 +288,7 @@ namespace SteamKit2
         {
             if ( details == null )
             {
-                throw new ArgumentNullException( nameof(details) );
+                throw new ArgumentNullException( nameof( details ) );
             }
             if ( string.IsNullOrEmpty( details.Username ) || ( string.IsNullOrEmpty( details.Password ) && string.IsNullOrEmpty( details.LoginKey ) ) )
             {
@@ -380,7 +381,7 @@ namespace SteamKit2
         {
             if ( details == null )
             {
-                throw new ArgumentNullException( nameof(details) );
+                throw new ArgumentNullException( nameof( details ) );
             }
 
             if ( !this.Client.IsConnected )
@@ -427,7 +428,7 @@ namespace SteamKit2
         {
             if ( details == null )
             {
-                throw new ArgumentNullException( nameof(details) );
+                throw new ArgumentNullException( nameof( details ) );
             }
 
             var response = new ClientMsgProtobuf<CMsgClientUpdateMachineAuthResponse>( EMsg.ClientUpdateMachineAuthResponse );
@@ -481,7 +482,7 @@ namespace SteamKit2
         {
             if ( callback == null )
             {
-                throw new ArgumentNullException( nameof(callback) );
+                throw new ArgumentNullException( nameof( callback ) );
             }
 
             var acceptance = new ClientMsgProtobuf<CMsgClientNewLoginKeyAccepted>( EMsg.ClientNewLoginKeyAccepted );
@@ -498,7 +499,7 @@ namespace SteamKit2
         {
             if ( packetMsg == null )
             {
-                throw new ArgumentNullException( nameof(packetMsg) );
+                throw new ArgumentNullException( nameof( packetMsg ) );
             }
 
             if ( !dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
@@ -510,7 +511,7 @@ namespace SteamKit2
             handlerFunc( packetMsg );
         }
 
-        
+
         #region ClientMsg Handlers
         void HandleLoggedOff( IPacketMsg packetMsg )
         {
@@ -533,7 +534,7 @@ namespace SteamKit2
         {
             var machineAuth = new ClientMsgProtobuf<CMsgClientUpdateMachineAuth>( packetMsg );
 
-            var callback = new UpdateMachineAuthCallback(packetMsg.SourceJobID, machineAuth.Body);
+            var callback = new UpdateMachineAuthCallback( packetMsg.SourceJobID, machineAuth.Body );
             Client.PostCallback( callback );
         }
         void HandleSessionToken( IPacketMsg packetMsg )
@@ -574,11 +575,11 @@ namespace SteamKit2
             var callback = new AccountInfoCallback( accInfo.Body );
             this.Client.PostCallback( callback );
         }
-        void HandleEmailAddrInfo(IPacketMsg packetMsg)
+        void HandleEmailAddrInfo( IPacketMsg packetMsg )
         {
-            var emailAddrInfo = new ClientMsgProtobuf<CMsgClientEmailAddrInfo>(packetMsg);
-            var callback = new EmailAddrInfoCallback(emailAddrInfo.Body);
-            this.Client.PostCallback(callback);
+            var emailAddrInfo = new ClientMsgProtobuf<CMsgClientEmailAddrInfo>( packetMsg );
+            var callback = new EmailAddrInfoCallback( emailAddrInfo.Body );
+            this.Client.PostCallback( callback );
         }
         void HandleWalletInfo( IPacketMsg packetMsg )
         {
@@ -590,7 +591,7 @@ namespace SteamKit2
         void HandleWebAPIUserNonce( IPacketMsg packetMsg )
         {
             var userNonce = new ClientMsgProtobuf<CMsgClientRequestWebAPIAuthenticateUserNonceResponse>( packetMsg );
-            var callback = new WebAPIUserNonceCallback(userNonce.TargetJobID, userNonce.Body);
+            var callback = new WebAPIUserNonceCallback( userNonce.TargetJobID, userNonce.Body );
             this.Client.PostCallback( callback );
         }
         void HandleVanityURLChangedNotification( IPacketMsg packetMsg )
@@ -607,6 +608,12 @@ namespace SteamKit2
 
             var callback = new MarketingMessageCallback( marketingMessage.Body, payload );
             this.Client.PostCallback( callback );
+        }
+        void HandlePlayingSessionState( IPacketMsg packetMsg )
+        {
+            var playingSessionState = new ClientMsgProtobuf<CMsgClientPlayingSessionState>( packetMsg );
+
+            this.Client.PostCallback( new PlayingSessionStateCallback( packetMsg.TargetJobID, playingSessionState.Body ) );
         }
         #endregion
     }

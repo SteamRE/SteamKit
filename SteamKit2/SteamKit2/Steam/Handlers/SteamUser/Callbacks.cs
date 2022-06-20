@@ -268,7 +268,7 @@ namespace SteamKit2
             /// <summary>
             /// Gets the facebook name if this account is linked with facebook.
             /// </summary>
-            public string FacebookName { get; private set ;}
+            public string FacebookName { get; private set; }
 
 
             internal AccountInfoCallback( CMsgClientAccountInfo msg )
@@ -299,7 +299,7 @@ namespace SteamKit2
             /// </summary>
             public bool IsValidated { get; private set; }
 
-            internal EmailAddrInfoCallback(CMsgClientEmailAddrInfo msg)
+            internal EmailAddrInfoCallback( CMsgClientEmailAddrInfo msg )
             {
                 EmailAddress = msg.email_address;
                 IsValidated = msg.email_is_validated;
@@ -536,7 +536,7 @@ namespace SteamKit2
                 using ( var ms = new MemoryStream( payload ) )
                 using ( var br = new BinaryReader( ms ) )
                 {
-                    for ( int x = 0 ; x < body.Count ; ++x )
+                    for ( int x = 0; x < body.Count; ++x )
                     {
                         int dataLen = br.ReadInt32() - 4; // total length includes the 4 byte length
                         byte[] messageData = br.ReadBytes( dataLen );
@@ -546,6 +546,29 @@ namespace SteamKit2
                 }
 
                 Messages = new ReadOnlyCollection<Message>( msgList );
+            }
+        }
+
+        /// <summary>
+        /// This callback is received when another client starts or stops playing a game.
+        /// While blocked, sending ClientGamesPlayed message will log you off with LoggedInElsewhere result.
+        /// </summary>
+        public sealed class PlayingSessionStateCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Indicates whether playing is currently blocked by another client.
+            /// </summary>
+            public bool PlayingBlocked { get; private set; }
+            /// <summary>
+            /// When blocked, gets the appid which is currently being played.
+            /// </summary>
+            public uint PlayingAppID { get; private set; }
+
+            internal PlayingSessionStateCallback( JobID jobID, CMsgClientPlayingSessionState msg )
+            {
+                JobID = jobID;
+                PlayingBlocked = msg.playing_blocked;
+                PlayingAppID = msg.playing_app;
             }
         }
     }
