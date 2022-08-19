@@ -1872,6 +1872,10 @@ namespace SteamKit2
 		InvalidSignature = 121,
 		ParseFailure = 122,
 		NoVerifiedPhone = 123,
+		InsufficientBattery = 124,
+		ChargerRequired = 125,
+		CachedCredentialInvalid = 126,
+		PhoneNumberIsVOIP = 127,
 	}
 	public enum EUniverse
 	{
