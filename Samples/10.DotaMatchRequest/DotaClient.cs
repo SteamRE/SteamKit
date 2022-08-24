@@ -122,7 +122,7 @@ class DotaClient
         Thread.Sleep( 5000 );
 
         // inform the dota GC that we want a session
-        var clientHello = new ClientGCMsgProtobuf<CMsgClientHello>( ( uint )EGCBaseClientMsg.k_EMsgGCClientHello );
+        var clientHello = new ClientGCMsgProtobuf<SteamKit2.GC.Dota.Internal.CMsgClientHello>( ( uint )EGCBaseClientMsg.k_EMsgGCClientHello );
         clientHello.Body.engine = ESourceEngine.k_ESE_Source2;
         gameCoordinator.Send( clientHello, APPID );
     }
