@@ -2018,6 +2018,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resettv_control() => __pbn__tv_control = null;
         private uint? __pbn__tv_control;
 
+        [global::ProtoBuf.ProtoMember(8)]
+        public ulong lobby_id
+        {
+            get => __pbn__lobby_id.GetValueOrDefault();
+            set => __pbn__lobby_id = value;
+        }
+        public bool ShouldSerializelobby_id() => __pbn__lobby_id != null;
+        public void Resetlobby_id() => __pbn__lobby_id = null;
+        private ulong? __pbn__lobby_id;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

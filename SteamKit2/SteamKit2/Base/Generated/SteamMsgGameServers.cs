@@ -581,6 +581,17 @@ namespace SteamKit2.Internal
         public void Resetsdr_popid() => __pbn__sdr_popid = null;
         private uint? __pbn__sdr_popid;
 
+        [global::ProtoBuf.ProtoMember(21)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string sdr_location_string
+        {
+            get => __pbn__sdr_location_string ?? "";
+            set => __pbn__sdr_location_string = value;
+        }
+        public bool ShouldSerializesdr_location_string() => __pbn__sdr_location_string != null;
+        public void Resetsdr_location_string() => __pbn__sdr_location_string = null;
+        private string __pbn__sdr_location_string;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

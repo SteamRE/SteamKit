@@ -49,6 +49,17 @@ namespace SteamKit2.Internal
         public void Resetc() => __pbn__c = null;
         private EStorageBlockFileSystemType? __pbn__c;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(ESDCardFormatStage.k_ESDCardFormatStage_Invalid)]
+        public ESDCardFormatStage d
+        {
+            get => __pbn__d ?? ESDCardFormatStage.k_ESDCardFormatStage_Invalid;
+            set => __pbn__d = value;
+        }
+        public bool ShouldSerialized() => __pbn__d != null;
+        public void Resetd() => __pbn__d = null;
+        private ESDCardFormatStage? __pbn__d;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -639,6 +650,16 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<BlockDevice> block_devices { get; } = new global::System.Collections.Generic.List<BlockDevice>();
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool is_unmount_supported
+        {
+            get => __pbn__is_unmount_supported.GetValueOrDefault();
+            set => __pbn__is_unmount_supported = value;
+        }
+        public bool ShouldSerializeis_unmount_supported() => __pbn__is_unmount_supported != null;
+        public void Resetis_unmount_supported() => __pbn__is_unmount_supported = null;
+        private bool? __pbn__is_unmount_supported;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Drive : global::ProtoBuf.IExtensible
         {
@@ -927,6 +948,9 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<Device> devices { get; } = new global::System.Collections.Generic.List<Device>();
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public Manager manager { get; set; }
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Adapter : global::ProtoBuf.IExtensible
         {
@@ -1083,24 +1107,24 @@ namespace SteamKit2.Internal
 
         }
 
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgBluetoothSettings : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public bool is_enabled
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Manager : global::ProtoBuf.IExtensible
         {
-            get => __pbn__is_enabled.GetValueOrDefault();
-            set => __pbn__is_enabled = value;
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public bool is_bluetooth_enabled
+            {
+                get => __pbn__is_bluetooth_enabled.GetValueOrDefault();
+                set => __pbn__is_bluetooth_enabled = value;
+            }
+            public bool ShouldSerializeis_bluetooth_enabled() => __pbn__is_bluetooth_enabled != null;
+            public void Resetis_bluetooth_enabled() => __pbn__is_bluetooth_enabled = null;
+            private bool? __pbn__is_bluetooth_enabled;
+
         }
-        public bool ShouldSerializeis_enabled() => __pbn__is_enabled != null;
-        public void Resetis_enabled() => __pbn__is_enabled = null;
-        private bool? __pbn__is_enabled;
 
     }
 
@@ -1218,10 +1242,195 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<CMsgSystemPerfNetworkInterface> interfaces { get; } = new global::System.Collections.Generic.List<CMsgSystemPerfNetworkInterface>();
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public float battery_temp_c
+        {
+            get => __pbn__battery_temp_c.GetValueOrDefault();
+            set => __pbn__battery_temp_c = value;
+        }
+        public bool ShouldSerializebattery_temp_c() => __pbn__battery_temp_c != null;
+        public void Resetbattery_temp_c() => __pbn__battery_temp_c = null;
+        private float? __pbn__battery_temp_c;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgSystemPerfSettings : global::ProtoBuf.IExtensible
+    public partial class CMsgSystemPerfLimits : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int cpu_governor_manual_min_mhz
+        {
+            get => __pbn__cpu_governor_manual_min_mhz.GetValueOrDefault();
+            set => __pbn__cpu_governor_manual_min_mhz = value;
+        }
+        public bool ShouldSerializecpu_governor_manual_min_mhz() => __pbn__cpu_governor_manual_min_mhz != null;
+        public void Resetcpu_governor_manual_min_mhz() => __pbn__cpu_governor_manual_min_mhz = null;
+        private int? __pbn__cpu_governor_manual_min_mhz;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public int cpu_governor_manual_max_mhz
+        {
+            get => __pbn__cpu_governor_manual_max_mhz.GetValueOrDefault();
+            set => __pbn__cpu_governor_manual_max_mhz = value;
+        }
+        public bool ShouldSerializecpu_governor_manual_max_mhz() => __pbn__cpu_governor_manual_max_mhz != null;
+        public void Resetcpu_governor_manual_max_mhz() => __pbn__cpu_governor_manual_max_mhz = null;
+        private int? __pbn__cpu_governor_manual_max_mhz;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public int fsr_sharpness_min
+        {
+            get => __pbn__fsr_sharpness_min.GetValueOrDefault();
+            set => __pbn__fsr_sharpness_min = value;
+        }
+        public bool ShouldSerializefsr_sharpness_min() => __pbn__fsr_sharpness_min != null;
+        public void Resetfsr_sharpness_min() => __pbn__fsr_sharpness_min = null;
+        private int? __pbn__fsr_sharpness_min;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public int fsr_sharpness_max
+        {
+            get => __pbn__fsr_sharpness_max.GetValueOrDefault();
+            set => __pbn__fsr_sharpness_max = value;
+        }
+        public bool ShouldSerializefsr_sharpness_max() => __pbn__fsr_sharpness_max != null;
+        public void Resetfsr_sharpness_max() => __pbn__fsr_sharpness_max = null;
+        private int? __pbn__fsr_sharpness_max;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public int gpu_performance_manual_min_mhz
+        {
+            get => __pbn__gpu_performance_manual_min_mhz.GetValueOrDefault();
+            set => __pbn__gpu_performance_manual_min_mhz = value;
+        }
+        public bool ShouldSerializegpu_performance_manual_min_mhz() => __pbn__gpu_performance_manual_min_mhz != null;
+        public void Resetgpu_performance_manual_min_mhz() => __pbn__gpu_performance_manual_min_mhz = null;
+        private int? __pbn__gpu_performance_manual_min_mhz;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public int gpu_performance_manual_max_mhz
+        {
+            get => __pbn__gpu_performance_manual_max_mhz.GetValueOrDefault();
+            set => __pbn__gpu_performance_manual_max_mhz = value;
+        }
+        public bool ShouldSerializegpu_performance_manual_max_mhz() => __pbn__gpu_performance_manual_max_mhz != null;
+        public void Resetgpu_performance_manual_max_mhz() => __pbn__gpu_performance_manual_max_mhz = null;
+        private int? __pbn__gpu_performance_manual_max_mhz;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool perf_overlay_is_standalone
+        {
+            get => __pbn__perf_overlay_is_standalone.GetValueOrDefault();
+            set => __pbn__perf_overlay_is_standalone = value;
+        }
+        public bool ShouldSerializeperf_overlay_is_standalone() => __pbn__perf_overlay_is_standalone != null;
+        public void Resetperf_overlay_is_standalone() => __pbn__perf_overlay_is_standalone = null;
+        private bool? __pbn__perf_overlay_is_standalone;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public bool is_dynamic_vrs_available
+        {
+            get => __pbn__is_dynamic_vrs_available.GetValueOrDefault();
+            set => __pbn__is_dynamic_vrs_available = value;
+        }
+        public bool ShouldSerializeis_dynamic_vrs_available() => __pbn__is_dynamic_vrs_available != null;
+        public void Resetis_dynamic_vrs_available() => __pbn__is_dynamic_vrs_available = null;
+        private bool? __pbn__is_dynamic_vrs_available;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public bool is_manual_display_refresh_rate_available
+        {
+            get => __pbn__is_manual_display_refresh_rate_available.GetValueOrDefault();
+            set => __pbn__is_manual_display_refresh_rate_available = value;
+        }
+        public bool ShouldSerializeis_manual_display_refresh_rate_available() => __pbn__is_manual_display_refresh_rate_available != null;
+        public void Resetis_manual_display_refresh_rate_available() => __pbn__is_manual_display_refresh_rate_available = null;
+        private bool? __pbn__is_manual_display_refresh_rate_available;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public global::System.Collections.Generic.List<EGPUPerformanceLevel> gpu_performance_levels_available { get; } = new global::System.Collections.Generic.List<EGPUPerformanceLevel>();
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public int display_refresh_manual_hz_min
+        {
+            get => __pbn__display_refresh_manual_hz_min.GetValueOrDefault();
+            set => __pbn__display_refresh_manual_hz_min = value;
+        }
+        public bool ShouldSerializedisplay_refresh_manual_hz_min() => __pbn__display_refresh_manual_hz_min != null;
+        public void Resetdisplay_refresh_manual_hz_min() => __pbn__display_refresh_manual_hz_min = null;
+        private int? __pbn__display_refresh_manual_hz_min;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public int display_refresh_manual_hz_max
+        {
+            get => __pbn__display_refresh_manual_hz_max.GetValueOrDefault();
+            set => __pbn__display_refresh_manual_hz_max = value;
+        }
+        public bool ShouldSerializedisplay_refresh_manual_hz_max() => __pbn__display_refresh_manual_hz_max != null;
+        public void Resetdisplay_refresh_manual_hz_max() => __pbn__display_refresh_manual_hz_max = null;
+        private int? __pbn__display_refresh_manual_hz_max;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public global::System.Collections.Generic.List<int> fps_limit_options { get; } = new global::System.Collections.Generic.List<int>();
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public int tdp_limit_min
+        {
+            get => __pbn__tdp_limit_min.GetValueOrDefault();
+            set => __pbn__tdp_limit_min = value;
+        }
+        public bool ShouldSerializetdp_limit_min() => __pbn__tdp_limit_min != null;
+        public void Resettdp_limit_min() => __pbn__tdp_limit_min = null;
+        private int? __pbn__tdp_limit_min;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public int tdp_limit_max
+        {
+            get => __pbn__tdp_limit_max.GetValueOrDefault();
+            set => __pbn__tdp_limit_max = value;
+        }
+        public bool ShouldSerializetdp_limit_max() => __pbn__tdp_limit_max != null;
+        public void Resettdp_limit_max() => __pbn__tdp_limit_max = null;
+        private int? __pbn__tdp_limit_max;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public bool is_nis_supported
+        {
+            get => __pbn__is_nis_supported.GetValueOrDefault();
+            set => __pbn__is_nis_supported = value;
+        }
+        public bool ShouldSerializeis_nis_supported() => __pbn__is_nis_supported != null;
+        public void Resetis_nis_supported() => __pbn__is_nis_supported = null;
+        private bool? __pbn__is_nis_supported;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public int nis_sharpness_min
+        {
+            get => __pbn__nis_sharpness_min.GetValueOrDefault();
+            set => __pbn__nis_sharpness_min = value;
+        }
+        public bool ShouldSerializenis_sharpness_min() => __pbn__nis_sharpness_min != null;
+        public void Resetnis_sharpness_min() => __pbn__nis_sharpness_min = null;
+        private int? __pbn__nis_sharpness_min;
+
+        [global::ProtoBuf.ProtoMember(18)]
+        public int nis_sharpness_max
+        {
+            get => __pbn__nis_sharpness_max.GetValueOrDefault();
+            set => __pbn__nis_sharpness_max = value;
+        }
+        public bool ShouldSerializenis_sharpness_max() => __pbn__nis_sharpness_max != null;
+        public void Resetnis_sharpness_max() => __pbn__nis_sharpness_max = null;
+        private int? __pbn__nis_sharpness_max;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemPerfSettingsGlobal : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1238,14 +1447,1617 @@ namespace SteamKit2.Internal
         private float? __pbn__diagnostic_update_rate;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public bool is_shark_mode
+        [global::System.ComponentModel.DefaultValue(ESystemServiceState.k_ESystemServiceState_Unavailable)]
+        public ESystemServiceState system_trace_service_state
         {
-            get => __pbn__is_shark_mode.GetValueOrDefault();
-            set => __pbn__is_shark_mode = value;
+            get => __pbn__system_trace_service_state ?? ESystemServiceState.k_ESystemServiceState_Unavailable;
+            set => __pbn__system_trace_service_state = value;
         }
-        public bool ShouldSerializeis_shark_mode() => __pbn__is_shark_mode != null;
-        public void Resetis_shark_mode() => __pbn__is_shark_mode = null;
-        private bool? __pbn__is_shark_mode;
+        public bool ShouldSerializesystem_trace_service_state() => __pbn__system_trace_service_state != null;
+        public void Resetsystem_trace_service_state() => __pbn__system_trace_service_state = null;
+        private ESystemServiceState? __pbn__system_trace_service_state;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(ESystemServiceState.k_ESystemServiceState_Unavailable)]
+        public ESystemServiceState graphics_profiling_service_state
+        {
+            get => __pbn__graphics_profiling_service_state ?? ESystemServiceState.k_ESystemServiceState_Unavailable;
+            set => __pbn__graphics_profiling_service_state = value;
+        }
+        public bool ShouldSerializegraphics_profiling_service_state() => __pbn__graphics_profiling_service_state != null;
+        public void Resetgraphics_profiling_service_state() => __pbn__graphics_profiling_service_state = null;
+        private ESystemServiceState? __pbn__graphics_profiling_service_state;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(ESystemServiceState.k_ESystemServiceState_Unavailable)]
+        public ESystemServiceState perf_overlay_service_state
+        {
+            get => __pbn__perf_overlay_service_state ?? ESystemServiceState.k_ESystemServiceState_Unavailable;
+            set => __pbn__perf_overlay_service_state = value;
+        }
+        public bool ShouldSerializeperf_overlay_service_state() => __pbn__perf_overlay_service_state != null;
+        public void Resetperf_overlay_service_state() => __pbn__perf_overlay_service_state = null;
+        private ESystemServiceState? __pbn__perf_overlay_service_state;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue(EGraphicsPerfOverlayLevel.k_EGraphicsPerfOverlayLevel_Hidden)]
+        public EGraphicsPerfOverlayLevel perf_overlay_level
+        {
+            get => __pbn__perf_overlay_level ?? EGraphicsPerfOverlayLevel.k_EGraphicsPerfOverlayLevel_Hidden;
+            set => __pbn__perf_overlay_level = value;
+        }
+        public bool ShouldSerializeperf_overlay_level() => __pbn__perf_overlay_level != null;
+        public void Resetperf_overlay_level() => __pbn__perf_overlay_level = null;
+        private EGraphicsPerfOverlayLevel? __pbn__perf_overlay_level;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool is_show_perf_overlay_over_steam_enabled
+        {
+            get => __pbn__is_show_perf_overlay_over_steam_enabled.GetValueOrDefault();
+            set => __pbn__is_show_perf_overlay_over_steam_enabled = value;
+        }
+        public bool ShouldSerializeis_show_perf_overlay_over_steam_enabled() => __pbn__is_show_perf_overlay_over_steam_enabled != null;
+        public void Resetis_show_perf_overlay_over_steam_enabled() => __pbn__is_show_perf_overlay_over_steam_enabled = null;
+        private bool? __pbn__is_show_perf_overlay_over_steam_enabled;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool is_advanced_settings_enabled
+        {
+            get => __pbn__is_advanced_settings_enabled.GetValueOrDefault();
+            set => __pbn__is_advanced_settings_enabled = value;
+        }
+        public bool ShouldSerializeis_advanced_settings_enabled() => __pbn__is_advanced_settings_enabled != null;
+        public void Resetis_advanced_settings_enabled() => __pbn__is_advanced_settings_enabled = null;
+        private bool? __pbn__is_advanced_settings_enabled;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemPerfSettingsPerApp : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int gpu_performance_manual_mhz
+        {
+            get => __pbn__gpu_performance_manual_mhz.GetValueOrDefault();
+            set => __pbn__gpu_performance_manual_mhz = value;
+        }
+        public bool ShouldSerializegpu_performance_manual_mhz() => __pbn__gpu_performance_manual_mhz != null;
+        public void Resetgpu_performance_manual_mhz() => __pbn__gpu_performance_manual_mhz = null;
+        private int? __pbn__gpu_performance_manual_mhz;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public int fps_limit
+        {
+            get => __pbn__fps_limit.GetValueOrDefault();
+            set => __pbn__fps_limit = value;
+        }
+        public bool ShouldSerializefps_limit() => __pbn__fps_limit != null;
+        public void Resetfps_limit() => __pbn__fps_limit = null;
+        private int? __pbn__fps_limit;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool is_variable_resolution_enabled
+        {
+            get => __pbn__is_variable_resolution_enabled.GetValueOrDefault();
+            set => __pbn__is_variable_resolution_enabled = value;
+        }
+        public bool ShouldSerializeis_variable_resolution_enabled() => __pbn__is_variable_resolution_enabled != null;
+        public void Resetis_variable_resolution_enabled() => __pbn__is_variable_resolution_enabled = null;
+        private bool? __pbn__is_variable_resolution_enabled;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool is_dynamic_refresh_rate_enabled
+        {
+            get => __pbn__is_dynamic_refresh_rate_enabled.GetValueOrDefault();
+            set => __pbn__is_dynamic_refresh_rate_enabled = value;
+        }
+        public bool ShouldSerializeis_dynamic_refresh_rate_enabled() => __pbn__is_dynamic_refresh_rate_enabled != null;
+        public void Resetis_dynamic_refresh_rate_enabled() => __pbn__is_dynamic_refresh_rate_enabled = null;
+        private bool? __pbn__is_dynamic_refresh_rate_enabled;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public int tdp_limit
+        {
+            get => __pbn__tdp_limit.GetValueOrDefault();
+            set => __pbn__tdp_limit = value;
+        }
+        public bool ShouldSerializetdp_limit() => __pbn__tdp_limit != null;
+        public void Resettdp_limit() => __pbn__tdp_limit = null;
+        private int? __pbn__tdp_limit;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue(ECPUGovernor.k_ECPUGovernor_Invalid)]
+        public ECPUGovernor cpu_governor
+        {
+            get => __pbn__cpu_governor ?? ECPUGovernor.k_ECPUGovernor_Invalid;
+            set => __pbn__cpu_governor = value;
+        }
+        public bool ShouldSerializecpu_governor() => __pbn__cpu_governor != null;
+        public void Resetcpu_governor() => __pbn__cpu_governor = null;
+        private ECPUGovernor? __pbn__cpu_governor;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public int cpu_governor_manual_mhz
+        {
+            get => __pbn__cpu_governor_manual_mhz.GetValueOrDefault();
+            set => __pbn__cpu_governor_manual_mhz = value;
+        }
+        public bool ShouldSerializecpu_governor_manual_mhz() => __pbn__cpu_governor_manual_mhz != null;
+        public void Resetcpu_governor_manual_mhz() => __pbn__cpu_governor_manual_mhz = null;
+        private int? __pbn__cpu_governor_manual_mhz;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public int scaling_filter
+        {
+            get => __pbn__scaling_filter.GetValueOrDefault();
+            set => __pbn__scaling_filter = value;
+        }
+        public bool ShouldSerializescaling_filter() => __pbn__scaling_filter != null;
+        public void Resetscaling_filter() => __pbn__scaling_filter = null;
+        private int? __pbn__scaling_filter;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public int fsr_sharpness
+        {
+            get => __pbn__fsr_sharpness.GetValueOrDefault();
+            set => __pbn__fsr_sharpness = value;
+        }
+        public bool ShouldSerializefsr_sharpness() => __pbn__fsr_sharpness != null;
+        public void Resetfsr_sharpness() => __pbn__fsr_sharpness = null;
+        private int? __pbn__fsr_sharpness;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public bool is_fps_limit_enabled
+        {
+            get => __pbn__is_fps_limit_enabled.GetValueOrDefault();
+            set => __pbn__is_fps_limit_enabled = value;
+        }
+        public bool ShouldSerializeis_fps_limit_enabled() => __pbn__is_fps_limit_enabled != null;
+        public void Resetis_fps_limit_enabled() => __pbn__is_fps_limit_enabled = null;
+        private bool? __pbn__is_fps_limit_enabled;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public bool is_tdp_limit_enabled
+        {
+            get => __pbn__is_tdp_limit_enabled.GetValueOrDefault();
+            set => __pbn__is_tdp_limit_enabled = value;
+        }
+        public bool ShouldSerializeis_tdp_limit_enabled() => __pbn__is_tdp_limit_enabled != null;
+        public void Resetis_tdp_limit_enabled() => __pbn__is_tdp_limit_enabled = null;
+        private bool? __pbn__is_tdp_limit_enabled;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public bool is_low_latency_mode_enabled
+        {
+            get => __pbn__is_low_latency_mode_enabled.GetValueOrDefault();
+            set => __pbn__is_low_latency_mode_enabled = value;
+        }
+        public bool ShouldSerializeis_low_latency_mode_enabled() => __pbn__is_low_latency_mode_enabled != null;
+        public void Resetis_low_latency_mode_enabled() => __pbn__is_low_latency_mode_enabled = null;
+        private bool? __pbn__is_low_latency_mode_enabled;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public int display_refresh_manual_hz
+        {
+            get => __pbn__display_refresh_manual_hz.GetValueOrDefault();
+            set => __pbn__display_refresh_manual_hz = value;
+        }
+        public bool ShouldSerializedisplay_refresh_manual_hz() => __pbn__display_refresh_manual_hz != null;
+        public void Resetdisplay_refresh_manual_hz() => __pbn__display_refresh_manual_hz = null;
+        private int? __pbn__display_refresh_manual_hz;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public bool is_game_perf_profile_enabled
+        {
+            get => __pbn__is_game_perf_profile_enabled.GetValueOrDefault();
+            set => __pbn__is_game_perf_profile_enabled = value;
+        }
+        public bool ShouldSerializeis_game_perf_profile_enabled() => __pbn__is_game_perf_profile_enabled != null;
+        public void Resetis_game_perf_profile_enabled() => __pbn__is_game_perf_profile_enabled = null;
+        private bool? __pbn__is_game_perf_profile_enabled;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        [global::System.ComponentModel.DefaultValue(EGPUPerformanceLevel.k_EGPUPerformanceLevel_Invalid)]
+        public EGPUPerformanceLevel gpu_performance_level
+        {
+            get => __pbn__gpu_performance_level ?? EGPUPerformanceLevel.k_EGPUPerformanceLevel_Invalid;
+            set => __pbn__gpu_performance_level = value;
+        }
+        public bool ShouldSerializegpu_performance_level() => __pbn__gpu_performance_level != null;
+        public void Resetgpu_performance_level() => __pbn__gpu_performance_level = null;
+        private EGPUPerformanceLevel? __pbn__gpu_performance_level;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public int nis_sharpness
+        {
+            get => __pbn__nis_sharpness.GetValueOrDefault();
+            set => __pbn__nis_sharpness = value;
+        }
+        public bool ShouldSerializenis_sharpness() => __pbn__nis_sharpness != null;
+        public void Resetnis_sharpness() => __pbn__nis_sharpness = null;
+        private int? __pbn__nis_sharpness;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemPerfSettings : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgSystemPerfSettingsGlobal global { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgSystemPerfSettingsPerApp per_app { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemPerfSettingsV1 : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public float diagnostic_update_rate
+        {
+            get => __pbn__diagnostic_update_rate.GetValueOrDefault();
+            set => __pbn__diagnostic_update_rate = value;
+        }
+        public bool ShouldSerializediagnostic_update_rate() => __pbn__diagnostic_update_rate != null;
+        public void Resetdiagnostic_update_rate() => __pbn__diagnostic_update_rate = null;
+        private float? __pbn__diagnostic_update_rate;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(ESystemServiceState.k_ESystemServiceState_Unavailable)]
+        public ESystemServiceState system_trace_service_state
+        {
+            get => __pbn__system_trace_service_state ?? ESystemServiceState.k_ESystemServiceState_Unavailable;
+            set => __pbn__system_trace_service_state = value;
+        }
+        public bool ShouldSerializesystem_trace_service_state() => __pbn__system_trace_service_state != null;
+        public void Resetsystem_trace_service_state() => __pbn__system_trace_service_state = null;
+        private ESystemServiceState? __pbn__system_trace_service_state;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(ESystemServiceState.k_ESystemServiceState_Unavailable)]
+        public ESystemServiceState graphics_profiling_service_state
+        {
+            get => __pbn__graphics_profiling_service_state ?? ESystemServiceState.k_ESystemServiceState_Unavailable;
+            set => __pbn__graphics_profiling_service_state = value;
+        }
+        public bool ShouldSerializegraphics_profiling_service_state() => __pbn__graphics_profiling_service_state != null;
+        public void Resetgraphics_profiling_service_state() => __pbn__graphics_profiling_service_state = null;
+        private ESystemServiceState? __pbn__graphics_profiling_service_state;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(ESystemServiceState.k_ESystemServiceState_Unavailable)]
+        public ESystemServiceState perf_overlay_service_state
+        {
+            get => __pbn__perf_overlay_service_state ?? ESystemServiceState.k_ESystemServiceState_Unavailable;
+            set => __pbn__perf_overlay_service_state = value;
+        }
+        public bool ShouldSerializeperf_overlay_service_state() => __pbn__perf_overlay_service_state != null;
+        public void Resetperf_overlay_service_state() => __pbn__perf_overlay_service_state = null;
+        private ESystemServiceState? __pbn__perf_overlay_service_state;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue(EGraphicsPerfOverlayLevel.k_EGraphicsPerfOverlayLevel_Hidden)]
+        public EGraphicsPerfOverlayLevel perf_overlay_level
+        {
+            get => __pbn__perf_overlay_level ?? EGraphicsPerfOverlayLevel.k_EGraphicsPerfOverlayLevel_Hidden;
+            set => __pbn__perf_overlay_level = value;
+        }
+        public bool ShouldSerializeperf_overlay_level() => __pbn__perf_overlay_level != null;
+        public void Resetperf_overlay_level() => __pbn__perf_overlay_level = null;
+        private EGraphicsPerfOverlayLevel? __pbn__perf_overlay_level;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue(EGPUPerformanceLevel.k_EGPUPerformanceLevel_Invalid)]
+        public EGPUPerformanceLevel gpu_performance_level
+        {
+            get => __pbn__gpu_performance_level ?? EGPUPerformanceLevel.k_EGPUPerformanceLevel_Invalid;
+            set => __pbn__gpu_performance_level = value;
+        }
+        public bool ShouldSerializegpu_performance_level() => __pbn__gpu_performance_level != null;
+        public void Resetgpu_performance_level() => __pbn__gpu_performance_level = null;
+        private EGPUPerformanceLevel? __pbn__gpu_performance_level;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public int gpu_performance_manual_mhz
+        {
+            get => __pbn__gpu_performance_manual_mhz.GetValueOrDefault();
+            set => __pbn__gpu_performance_manual_mhz = value;
+        }
+        public bool ShouldSerializegpu_performance_manual_mhz() => __pbn__gpu_performance_manual_mhz != null;
+        public void Resetgpu_performance_manual_mhz() => __pbn__gpu_performance_manual_mhz = null;
+        private int? __pbn__gpu_performance_manual_mhz;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public int fps_limit
+        {
+            get => __pbn__fps_limit.GetValueOrDefault();
+            set => __pbn__fps_limit = value;
+        }
+        public bool ShouldSerializefps_limit() => __pbn__fps_limit != null;
+        public void Resetfps_limit() => __pbn__fps_limit = null;
+        private int? __pbn__fps_limit;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public bool is_variable_resolution_enabled
+        {
+            get => __pbn__is_variable_resolution_enabled.GetValueOrDefault();
+            set => __pbn__is_variable_resolution_enabled = value;
+        }
+        public bool ShouldSerializeis_variable_resolution_enabled() => __pbn__is_variable_resolution_enabled != null;
+        public void Resetis_variable_resolution_enabled() => __pbn__is_variable_resolution_enabled = null;
+        private bool? __pbn__is_variable_resolution_enabled;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public bool is_dynamic_refresh_rate_enabled
+        {
+            get => __pbn__is_dynamic_refresh_rate_enabled.GetValueOrDefault();
+            set => __pbn__is_dynamic_refresh_rate_enabled = value;
+        }
+        public bool ShouldSerializeis_dynamic_refresh_rate_enabled() => __pbn__is_dynamic_refresh_rate_enabled != null;
+        public void Resetis_dynamic_refresh_rate_enabled() => __pbn__is_dynamic_refresh_rate_enabled = null;
+        private bool? __pbn__is_dynamic_refresh_rate_enabled;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public int tdp_limit
+        {
+            get => __pbn__tdp_limit.GetValueOrDefault();
+            set => __pbn__tdp_limit = value;
+        }
+        public bool ShouldSerializetdp_limit() => __pbn__tdp_limit != null;
+        public void Resettdp_limit() => __pbn__tdp_limit = null;
+        private int? __pbn__tdp_limit;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        [global::System.ComponentModel.DefaultValue(ECPUGovernor.k_ECPUGovernor_Invalid)]
+        public ECPUGovernor cpu_governor
+        {
+            get => __pbn__cpu_governor ?? ECPUGovernor.k_ECPUGovernor_Invalid;
+            set => __pbn__cpu_governor = value;
+        }
+        public bool ShouldSerializecpu_governor() => __pbn__cpu_governor != null;
+        public void Resetcpu_governor() => __pbn__cpu_governor = null;
+        private ECPUGovernor? __pbn__cpu_governor;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public int cpu_governor_manual_mhz
+        {
+            get => __pbn__cpu_governor_manual_mhz.GetValueOrDefault();
+            set => __pbn__cpu_governor_manual_mhz = value;
+        }
+        public bool ShouldSerializecpu_governor_manual_mhz() => __pbn__cpu_governor_manual_mhz != null;
+        public void Resetcpu_governor_manual_mhz() => __pbn__cpu_governor_manual_mhz = null;
+        private int? __pbn__cpu_governor_manual_mhz;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public int scaling_filter
+        {
+            get => __pbn__scaling_filter.GetValueOrDefault();
+            set => __pbn__scaling_filter = value;
+        }
+        public bool ShouldSerializescaling_filter() => __pbn__scaling_filter != null;
+        public void Resetscaling_filter() => __pbn__scaling_filter = null;
+        private int? __pbn__scaling_filter;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public int fsr_sharpness
+        {
+            get => __pbn__fsr_sharpness.GetValueOrDefault();
+            set => __pbn__fsr_sharpness = value;
+        }
+        public bool ShouldSerializefsr_sharpness() => __pbn__fsr_sharpness != null;
+        public void Resetfsr_sharpness() => __pbn__fsr_sharpness = null;
+        private int? __pbn__fsr_sharpness;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public bool is_fps_limit_enabled
+        {
+            get => __pbn__is_fps_limit_enabled.GetValueOrDefault();
+            set => __pbn__is_fps_limit_enabled = value;
+        }
+        public bool ShouldSerializeis_fps_limit_enabled() => __pbn__is_fps_limit_enabled != null;
+        public void Resetis_fps_limit_enabled() => __pbn__is_fps_limit_enabled = null;
+        private bool? __pbn__is_fps_limit_enabled;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public bool is_tdp_limit_enabled
+        {
+            get => __pbn__is_tdp_limit_enabled.GetValueOrDefault();
+            set => __pbn__is_tdp_limit_enabled = value;
+        }
+        public bool ShouldSerializeis_tdp_limit_enabled() => __pbn__is_tdp_limit_enabled != null;
+        public void Resetis_tdp_limit_enabled() => __pbn__is_tdp_limit_enabled = null;
+        private bool? __pbn__is_tdp_limit_enabled;
+
+        [global::ProtoBuf.ProtoMember(18)]
+        public bool is_show_perf_overlay_over_steam_enabled
+        {
+            get => __pbn__is_show_perf_overlay_over_steam_enabled.GetValueOrDefault();
+            set => __pbn__is_show_perf_overlay_over_steam_enabled = value;
+        }
+        public bool ShouldSerializeis_show_perf_overlay_over_steam_enabled() => __pbn__is_show_perf_overlay_over_steam_enabled != null;
+        public void Resetis_show_perf_overlay_over_steam_enabled() => __pbn__is_show_perf_overlay_over_steam_enabled = null;
+        private bool? __pbn__is_show_perf_overlay_over_steam_enabled;
+
+        [global::ProtoBuf.ProtoMember(19)]
+        public bool is_low_latency_mode_enabled
+        {
+            get => __pbn__is_low_latency_mode_enabled.GetValueOrDefault();
+            set => __pbn__is_low_latency_mode_enabled = value;
+        }
+        public bool ShouldSerializeis_low_latency_mode_enabled() => __pbn__is_low_latency_mode_enabled != null;
+        public void Resetis_low_latency_mode_enabled() => __pbn__is_low_latency_mode_enabled = null;
+        private bool? __pbn__is_low_latency_mode_enabled;
+
+        [global::ProtoBuf.ProtoMember(20)]
+        public int display_refresh_manual_hz
+        {
+            get => __pbn__display_refresh_manual_hz.GetValueOrDefault();
+            set => __pbn__display_refresh_manual_hz = value;
+        }
+        public bool ShouldSerializedisplay_refresh_manual_hz() => __pbn__display_refresh_manual_hz != null;
+        public void Resetdisplay_refresh_manual_hz() => __pbn__display_refresh_manual_hz = null;
+        private int? __pbn__display_refresh_manual_hz;
+
+        [global::ProtoBuf.ProtoMember(21)]
+        public bool is_game_perf_profile_enabled
+        {
+            get => __pbn__is_game_perf_profile_enabled.GetValueOrDefault();
+            set => __pbn__is_game_perf_profile_enabled = value;
+        }
+        public bool ShouldSerializeis_game_perf_profile_enabled() => __pbn__is_game_perf_profile_enabled != null;
+        public void Resetis_game_perf_profile_enabled() => __pbn__is_game_perf_profile_enabled = null;
+        private bool? __pbn__is_game_perf_profile_enabled;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemPerfState : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgSystemPerfLimits limits { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgSystemPerfSettings settings { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong current_game_id
+        {
+            get => __pbn__current_game_id.GetValueOrDefault();
+            set => __pbn__current_game_id = value;
+        }
+        public bool ShouldSerializecurrent_game_id() => __pbn__current_game_id != null;
+        public void Resetcurrent_game_id() => __pbn__current_game_id = null;
+        private ulong? __pbn__current_game_id;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public ulong active_profile_game_id
+        {
+            get => __pbn__active_profile_game_id.GetValueOrDefault();
+            set => __pbn__active_profile_game_id = value;
+        }
+        public bool ShouldSerializeactive_profile_game_id() => __pbn__active_profile_game_id != null;
+        public void Resetactive_profile_game_id() => __pbn__active_profile_game_id = null;
+        private ulong? __pbn__active_profile_game_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemPerfUpdateSettings : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong gameid
+        {
+            get => __pbn__gameid.GetValueOrDefault();
+            set => __pbn__gameid = value;
+        }
+        public bool ShouldSerializegameid() => __pbn__gameid != null;
+        public void Resetgameid() => __pbn__gameid = null;
+        private ulong? __pbn__gameid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool reset_to_default
+        {
+            get => __pbn__update.Is(2) ? __pbn__update.Boolean : default(bool);
+            set => __pbn__update = new global::ProtoBuf.DiscriminatedUnion32Object(2, value);
+        }
+        public bool ShouldSerializereset_to_default() => __pbn__update.Is(2);
+        public void Resetreset_to_default() => global::ProtoBuf.DiscriminatedUnion32Object.Reset(ref __pbn__update, 2);
+
+        private global::ProtoBuf.DiscriminatedUnion32Object __pbn__update;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public CMsgSystemPerfSettings settings_delta
+        {
+            get => __pbn__update.Is(3) ? ((CMsgSystemPerfSettings)__pbn__update.Object) : default(CMsgSystemPerfSettings);
+            set => __pbn__update = new global::ProtoBuf.DiscriminatedUnion32Object(3, value);
+        }
+        public bool ShouldSerializesettings_delta() => __pbn__update.Is(3);
+        public void Resetsettings_delta() => global::ProtoBuf.DiscriminatedUnion32Object.Reset(ref __pbn__update, 3);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemDockUpdateState : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EUpdaterState.k_EUpdaterState_Invalid)]
+        public EUpdaterState state
+        {
+            get => __pbn__state ?? EUpdaterState.k_EUpdaterState_Invalid;
+            set => __pbn__state = value;
+        }
+        public bool ShouldSerializestate() => __pbn__state != null;
+        public void Resetstate() => __pbn__state = null;
+        private EUpdaterState? __pbn__state;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public uint rtime_last_checked
+        {
+            get => __pbn__rtime_last_checked.GetValueOrDefault();
+            set => __pbn__rtime_last_checked = value;
+        }
+        public bool ShouldSerializertime_last_checked() => __pbn__rtime_last_checked != null;
+        public void Resetrtime_last_checked() => __pbn__rtime_last_checked = null;
+        private uint? __pbn__rtime_last_checked;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string version_current
+        {
+            get => __pbn__version_current ?? "";
+            set => __pbn__version_current = value;
+        }
+        public bool ShouldSerializeversion_current() => __pbn__version_current != null;
+        public void Resetversion_current() => __pbn__version_current = null;
+        private string __pbn__version_current;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string version_available
+        {
+            get => __pbn__version_available ?? "";
+            set => __pbn__version_available = value;
+        }
+        public bool ShouldSerializeversion_available() => __pbn__version_available != null;
+        public void Resetversion_available() => __pbn__version_available = null;
+        private string __pbn__version_available;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public float stage_progress
+        {
+            get => __pbn__stage_progress.GetValueOrDefault();
+            set => __pbn__stage_progress = value;
+        }
+        public bool ShouldSerializestage_progress() => __pbn__stage_progress != null;
+        public void Resetstage_progress() => __pbn__stage_progress = null;
+        private float? __pbn__stage_progress;
+
+        [global::ProtoBuf.ProtoMember(6, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public uint rtime_estimated_completion
+        {
+            get => __pbn__rtime_estimated_completion.GetValueOrDefault();
+            set => __pbn__rtime_estimated_completion = value;
+        }
+        public bool ShouldSerializertime_estimated_completion() => __pbn__rtime_estimated_completion != null;
+        public void Resetrtime_estimated_completion() => __pbn__rtime_estimated_completion = null;
+        private uint? __pbn__rtime_estimated_completion;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemDockState : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgSystemDockUpdateState update_state { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemDockUpdateFirmware : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool check_only
+        {
+            get => __pbn__check_only.GetValueOrDefault();
+            set => __pbn__check_only = value;
+        }
+        public bool ShouldSerializecheck_only() => __pbn__check_only != null;
+        public void Resetcheck_only() => __pbn__check_only = null;
+        private bool? __pbn__check_only;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemAudioVolume : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<ChannelEntry> entries { get; } = new global::System.Collections.Generic.List<ChannelEntry>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool is_muted
+        {
+            get => __pbn__is_muted.GetValueOrDefault();
+            set => __pbn__is_muted = value;
+        }
+        public bool ShouldSerializeis_muted() => __pbn__is_muted != null;
+        public void Resetis_muted() => __pbn__is_muted = null;
+        private bool? __pbn__is_muted;
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class ChannelEntry : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue(ESystemAudioChannel.k_SystemAudioChannel_Invalid)]
+            public ESystemAudioChannel echannel
+            {
+                get => __pbn__echannel ?? ESystemAudioChannel.k_SystemAudioChannel_Invalid;
+                set => __pbn__echannel = value;
+            }
+            public bool ShouldSerializeechannel() => __pbn__echannel != null;
+            public void Resetechannel() => __pbn__echannel = null;
+            private ESystemAudioChannel? __pbn__echannel;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public float volume
+            {
+                get => __pbn__volume.GetValueOrDefault();
+                set => __pbn__volume = value;
+            }
+            public bool ShouldSerializevolume() => __pbn__volume != null;
+            public void Resetvolume() => __pbn__volume = null;
+            private float? __pbn__volume;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemAudioManagerObject : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint id
+        {
+            get => __pbn__id.GetValueOrDefault();
+            set => __pbn__id = value;
+        }
+        public bool ShouldSerializeid() => __pbn__id != null;
+        public void Resetid() => __pbn__id = null;
+        private uint? __pbn__id;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public uint rtime_last_update
+        {
+            get => __pbn__rtime_last_update.GetValueOrDefault();
+            set => __pbn__rtime_last_update = value;
+        }
+        public bool ShouldSerializertime_last_update() => __pbn__rtime_last_update != null;
+        public void Resetrtime_last_update() => __pbn__rtime_last_update = null;
+        private uint? __pbn__rtime_last_update;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemAudioManagerDevice : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgSystemAudioManagerObject @base { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string name
+        {
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
+        }
+        public bool ShouldSerializename() => __pbn__name != null;
+        public void Resetname() => __pbn__name = null;
+        private string __pbn__name;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string nick
+        {
+            get => __pbn__nick ?? "";
+            set => __pbn__nick = value;
+        }
+        public bool ShouldSerializenick() => __pbn__nick != null;
+        public void Resetnick() => __pbn__nick = null;
+        private string __pbn__nick;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string description
+        {
+            get => __pbn__description ?? "";
+            set => __pbn__description = value;
+        }
+        public bool ShouldSerializedescription() => __pbn__description != null;
+        public void Resetdescription() => __pbn__description = null;
+        private string __pbn__description;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string api
+        {
+            get => __pbn__api ?? "";
+            set => __pbn__api = value;
+        }
+        public bool ShouldSerializeapi() => __pbn__api != null;
+        public void Resetapi() => __pbn__api = null;
+        private string __pbn__api;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemAudioManagerNode : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgSystemAudioManagerObject @base { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint device_id
+        {
+            get => __pbn__device_id.GetValueOrDefault();
+            set => __pbn__device_id = value;
+        }
+        public bool ShouldSerializedevice_id() => __pbn__device_id != null;
+        public void Resetdevice_id() => __pbn__device_id = null;
+        private uint? __pbn__device_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string name
+        {
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
+        }
+        public bool ShouldSerializename() => __pbn__name != null;
+        public void Resetname() => __pbn__name = null;
+        private string __pbn__name;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string nick
+        {
+            get => __pbn__nick ?? "";
+            set => __pbn__nick = value;
+        }
+        public bool ShouldSerializenick() => __pbn__nick != null;
+        public void Resetnick() => __pbn__nick = null;
+        private string __pbn__nick;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string description
+        {
+            get => __pbn__description ?? "";
+            set => __pbn__description = value;
+        }
+        public bool ShouldSerializedescription() => __pbn__description != null;
+        public void Resetdescription() => __pbn__description = null;
+        private string __pbn__description;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue(ESystemAudioDirection.k_SystemAudioDirection_Invalid)]
+        public ESystemAudioDirection edirection
+        {
+            get => __pbn__edirection ?? ESystemAudioDirection.k_SystemAudioDirection_Invalid;
+            set => __pbn__edirection = value;
+        }
+        public bool ShouldSerializeedirection() => __pbn__edirection != null;
+        public void Resetedirection() => __pbn__edirection = null;
+        private ESystemAudioDirection? __pbn__edirection;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public CMsgSystemAudioVolume volume { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemAudioManagerPort : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgSystemAudioManagerObject @base { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint node_id
+        {
+            get => __pbn__node_id.GetValueOrDefault();
+            set => __pbn__node_id = value;
+        }
+        public bool ShouldSerializenode_id() => __pbn__node_id != null;
+        public void Resetnode_id() => __pbn__node_id = null;
+        private uint? __pbn__node_id;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string name
+        {
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
+        }
+        public bool ShouldSerializename() => __pbn__name != null;
+        public void Resetname() => __pbn__name = null;
+        private string __pbn__name;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string alias
+        {
+            get => __pbn__alias ?? "";
+            set => __pbn__alias = value;
+        }
+        public bool ShouldSerializealias() => __pbn__alias != null;
+        public void Resetalias() => __pbn__alias = null;
+        private string __pbn__alias;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue(ESystemAudioPortType.k_SystemAudioPortType_Invalid)]
+        public ESystemAudioPortType etype
+        {
+            get => __pbn__etype ?? ESystemAudioPortType.k_SystemAudioPortType_Invalid;
+            set => __pbn__etype = value;
+        }
+        public bool ShouldSerializeetype() => __pbn__etype != null;
+        public void Resetetype() => __pbn__etype = null;
+        private ESystemAudioPortType? __pbn__etype;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue(ESystemAudioPortDirection.k_SystemAudioPortDirection_Invalid)]
+        public ESystemAudioPortDirection edirection
+        {
+            get => __pbn__edirection ?? ESystemAudioPortDirection.k_SystemAudioPortDirection_Invalid;
+            set => __pbn__edirection = value;
+        }
+        public bool ShouldSerializeedirection() => __pbn__edirection != null;
+        public void Resetedirection() => __pbn__edirection = null;
+        private ESystemAudioPortDirection? __pbn__edirection;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public bool is_physical
+        {
+            get => __pbn__is_physical.GetValueOrDefault();
+            set => __pbn__is_physical = value;
+        }
+        public bool ShouldSerializeis_physical() => __pbn__is_physical != null;
+        public void Resetis_physical() => __pbn__is_physical = null;
+        private bool? __pbn__is_physical;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public bool is_terminal
+        {
+            get => __pbn__is_terminal.GetValueOrDefault();
+            set => __pbn__is_terminal = value;
+        }
+        public bool ShouldSerializeis_terminal() => __pbn__is_terminal != null;
+        public void Resetis_terminal() => __pbn__is_terminal = null;
+        private bool? __pbn__is_terminal;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public bool is_control
+        {
+            get => __pbn__is_control.GetValueOrDefault();
+            set => __pbn__is_control = value;
+        }
+        public bool ShouldSerializeis_control() => __pbn__is_control != null;
+        public void Resetis_control() => __pbn__is_control = null;
+        private bool? __pbn__is_control;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public bool is_monitor
+        {
+            get => __pbn__is_monitor.GetValueOrDefault();
+            set => __pbn__is_monitor = value;
+        }
+        public bool ShouldSerializeis_monitor() => __pbn__is_monitor != null;
+        public void Resetis_monitor() => __pbn__is_monitor = null;
+        private bool? __pbn__is_monitor;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemAudioManagerLink : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgSystemAudioManagerObject @base { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint output_node_id
+        {
+            get => __pbn__output_node_id.GetValueOrDefault();
+            set => __pbn__output_node_id = value;
+        }
+        public bool ShouldSerializeoutput_node_id() => __pbn__output_node_id != null;
+        public void Resetoutput_node_id() => __pbn__output_node_id = null;
+        private uint? __pbn__output_node_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint output_port_id
+        {
+            get => __pbn__output_port_id.GetValueOrDefault();
+            set => __pbn__output_port_id = value;
+        }
+        public bool ShouldSerializeoutput_port_id() => __pbn__output_port_id != null;
+        public void Resetoutput_port_id() => __pbn__output_port_id = null;
+        private uint? __pbn__output_port_id;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint input_node_id
+        {
+            get => __pbn__input_node_id.GetValueOrDefault();
+            set => __pbn__input_node_id = value;
+        }
+        public bool ShouldSerializeinput_node_id() => __pbn__input_node_id != null;
+        public void Resetinput_node_id() => __pbn__input_node_id = null;
+        private uint? __pbn__input_node_id;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint input_port_id
+        {
+            get => __pbn__input_port_id.GetValueOrDefault();
+            set => __pbn__input_port_id = value;
+        }
+        public bool ShouldSerializeinput_port_id() => __pbn__input_port_id != null;
+        public void Resetinput_port_id() => __pbn__input_port_id = null;
+        private uint? __pbn__input_port_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemAudioManagerStateHW : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CMsgSystemAudioManagerDevice> devices { get; } = new global::System.Collections.Generic.List<CMsgSystemAudioManagerDevice>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<CMsgSystemAudioManagerNode> nodes { get; } = new global::System.Collections.Generic.List<CMsgSystemAudioManagerNode>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<CMsgSystemAudioManagerPort> ports { get; } = new global::System.Collections.Generic.List<CMsgSystemAudioManagerPort>();
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<CMsgSystemAudioManagerLink> links { get; } = new global::System.Collections.Generic.List<CMsgSystemAudioManagerLink>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemAudioManagerState : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public uint rtime_filter
+        {
+            get => __pbn__rtime_filter.GetValueOrDefault();
+            set => __pbn__rtime_filter = value;
+        }
+        public bool ShouldSerializertime_filter() => __pbn__rtime_filter != null;
+        public void Resetrtime_filter() => __pbn__rtime_filter = null;
+        private uint? __pbn__rtime_filter;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public int counter
+        {
+            get => __pbn__counter.GetValueOrDefault();
+            set => __pbn__counter = value;
+        }
+        public bool ShouldSerializecounter() => __pbn__counter != null;
+        public void Resetcounter() => __pbn__counter = null;
+        private int? __pbn__counter;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public CMsgSystemAudioManagerStateHW hw { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemAudioManagerUpdateSomething : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int counter
+        {
+            get => __pbn__counter.GetValueOrDefault();
+            set => __pbn__counter = value;
+        }
+        public bool ShouldSerializecounter() => __pbn__counter != null;
+        public void Resetcounter() => __pbn__counter = null;
+        private int? __pbn__counter;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemManagerSettings : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public float idle_backlight_dim_battery_seconds
+        {
+            get => __pbn__idle_backlight_dim_battery_seconds.GetValueOrDefault();
+            set => __pbn__idle_backlight_dim_battery_seconds = value;
+        }
+        public bool ShouldSerializeidle_backlight_dim_battery_seconds() => __pbn__idle_backlight_dim_battery_seconds != null;
+        public void Resetidle_backlight_dim_battery_seconds() => __pbn__idle_backlight_dim_battery_seconds = null;
+        private float? __pbn__idle_backlight_dim_battery_seconds;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public float idle_backlight_dim_ac_seconds
+        {
+            get => __pbn__idle_backlight_dim_ac_seconds.GetValueOrDefault();
+            set => __pbn__idle_backlight_dim_ac_seconds = value;
+        }
+        public bool ShouldSerializeidle_backlight_dim_ac_seconds() => __pbn__idle_backlight_dim_ac_seconds != null;
+        public void Resetidle_backlight_dim_ac_seconds() => __pbn__idle_backlight_dim_ac_seconds = null;
+        private float? __pbn__idle_backlight_dim_ac_seconds;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public float idle_suspend_battery_seconds
+        {
+            get => __pbn__idle_suspend_battery_seconds.GetValueOrDefault();
+            set => __pbn__idle_suspend_battery_seconds = value;
+        }
+        public bool ShouldSerializeidle_suspend_battery_seconds() => __pbn__idle_suspend_battery_seconds != null;
+        public void Resetidle_suspend_battery_seconds() => __pbn__idle_suspend_battery_seconds = null;
+        private float? __pbn__idle_suspend_battery_seconds;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public float idle_suspend_ac_seconds
+        {
+            get => __pbn__idle_suspend_ac_seconds.GetValueOrDefault();
+            set => __pbn__idle_suspend_ac_seconds = value;
+        }
+        public bool ShouldSerializeidle_suspend_ac_seconds() => __pbn__idle_suspend_ac_seconds != null;
+        public void Resetidle_suspend_ac_seconds() => __pbn__idle_suspend_ac_seconds = null;
+        private float? __pbn__idle_suspend_ac_seconds;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public bool idle_suspend_supressed
+        {
+            get => __pbn__idle_suspend_supressed.GetValueOrDefault();
+            set => __pbn__idle_suspend_supressed = value;
+        }
+        public bool ShouldSerializeidle_suspend_supressed() => __pbn__idle_suspend_supressed != null;
+        public void Resetidle_suspend_supressed() => __pbn__idle_suspend_supressed = null;
+        private bool? __pbn__idle_suspend_supressed;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool is_adaptive_brightness_available
+        {
+            get => __pbn__is_adaptive_brightness_available.GetValueOrDefault();
+            set => __pbn__is_adaptive_brightness_available = value;
+        }
+        public bool ShouldSerializeis_adaptive_brightness_available() => __pbn__is_adaptive_brightness_available != null;
+        public void Resetis_adaptive_brightness_available() => __pbn__is_adaptive_brightness_available = null;
+        private bool? __pbn__is_adaptive_brightness_available;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool display_adaptive_brightness_enabled
+        {
+            get => __pbn__display_adaptive_brightness_enabled.GetValueOrDefault();
+            set => __pbn__display_adaptive_brightness_enabled = value;
+        }
+        public bool ShouldSerializedisplay_adaptive_brightness_enabled() => __pbn__display_adaptive_brightness_enabled != null;
+        public void Resetdisplay_adaptive_brightness_enabled() => __pbn__display_adaptive_brightness_enabled = null;
+        private bool? __pbn__display_adaptive_brightness_enabled;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public bool is_display_colorprofile_available
+        {
+            get => __pbn__is_display_colorprofile_available.GetValueOrDefault();
+            set => __pbn__is_display_colorprofile_available = value;
+        }
+        public bool ShouldSerializeis_display_colorprofile_available() => __pbn__is_display_colorprofile_available != null;
+        public void Resetis_display_colorprofile_available() => __pbn__is_display_colorprofile_available = null;
+        private bool? __pbn__is_display_colorprofile_available;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        [global::System.ComponentModel.DefaultValue(EColorProfile.k_EColorProfile_Invalid)]
+        public EColorProfile display_colorprofile
+        {
+            get => __pbn__display_colorprofile ?? EColorProfile.k_EColorProfile_Invalid;
+            set => __pbn__display_colorprofile = value;
+        }
+        public bool ShouldSerializedisplay_colorprofile() => __pbn__display_colorprofile != null;
+        public void Resetdisplay_colorprofile() => __pbn__display_colorprofile = null;
+        private EColorProfile? __pbn__display_colorprofile;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public bool display_nightmode_enabled
+        {
+            get => __pbn__display_nightmode_enabled.GetValueOrDefault();
+            set => __pbn__display_nightmode_enabled = value;
+        }
+        public bool ShouldSerializedisplay_nightmode_enabled() => __pbn__display_nightmode_enabled != null;
+        public void Resetdisplay_nightmode_enabled() => __pbn__display_nightmode_enabled = null;
+        private bool? __pbn__display_nightmode_enabled;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public float display_nightmode_tintstrength
+        {
+            get => __pbn__display_nightmode_tintstrength.GetValueOrDefault();
+            set => __pbn__display_nightmode_tintstrength = value;
+        }
+        public bool ShouldSerializedisplay_nightmode_tintstrength() => __pbn__display_nightmode_tintstrength != null;
+        public void Resetdisplay_nightmode_tintstrength() => __pbn__display_nightmode_tintstrength = null;
+        private float? __pbn__display_nightmode_tintstrength;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public float display_nightmode_maxhue
+        {
+            get => __pbn__display_nightmode_maxhue.GetValueOrDefault();
+            set => __pbn__display_nightmode_maxhue = value;
+        }
+        public bool ShouldSerializedisplay_nightmode_maxhue() => __pbn__display_nightmode_maxhue != null;
+        public void Resetdisplay_nightmode_maxhue() => __pbn__display_nightmode_maxhue = null;
+        private float? __pbn__display_nightmode_maxhue;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public float display_nightmode_maxsat
+        {
+            get => __pbn__display_nightmode_maxsat.GetValueOrDefault();
+            set => __pbn__display_nightmode_maxsat = value;
+        }
+        public bool ShouldSerializedisplay_nightmode_maxsat() => __pbn__display_nightmode_maxsat != null;
+        public void Resetdisplay_nightmode_maxsat() => __pbn__display_nightmode_maxsat = null;
+        private float? __pbn__display_nightmode_maxsat;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public float display_nightmode_uiexp
+        {
+            get => __pbn__display_nightmode_uiexp.GetValueOrDefault();
+            set => __pbn__display_nightmode_uiexp = value;
+        }
+        public bool ShouldSerializedisplay_nightmode_uiexp() => __pbn__display_nightmode_uiexp != null;
+        public void Resetdisplay_nightmode_uiexp() => __pbn__display_nightmode_uiexp = null;
+        private float? __pbn__display_nightmode_uiexp;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public float display_nightmode_blend
+        {
+            get => __pbn__display_nightmode_blend.GetValueOrDefault();
+            set => __pbn__display_nightmode_blend = value;
+        }
+        public bool ShouldSerializedisplay_nightmode_blend() => __pbn__display_nightmode_blend != null;
+        public void Resetdisplay_nightmode_blend() => __pbn__display_nightmode_blend = null;
+        private float? __pbn__display_nightmode_blend;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public bool display_nightmode_reset
+        {
+            get => __pbn__display_nightmode_reset.GetValueOrDefault();
+            set => __pbn__display_nightmode_reset = value;
+        }
+        public bool ShouldSerializedisplay_nightmode_reset() => __pbn__display_nightmode_reset != null;
+        public void Resetdisplay_nightmode_reset() => __pbn__display_nightmode_reset = null;
+        private bool? __pbn__display_nightmode_reset;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public bool display_nightmode_schedule_enabled
+        {
+            get => __pbn__display_nightmode_schedule_enabled.GetValueOrDefault();
+            set => __pbn__display_nightmode_schedule_enabled = value;
+        }
+        public bool ShouldSerializedisplay_nightmode_schedule_enabled() => __pbn__display_nightmode_schedule_enabled != null;
+        public void Resetdisplay_nightmode_schedule_enabled() => __pbn__display_nightmode_schedule_enabled = null;
+        private bool? __pbn__display_nightmode_schedule_enabled;
+
+        [global::ProtoBuf.ProtoMember(18)]
+        public float display_nightmode_schedule_starttime
+        {
+            get => __pbn__display_nightmode_schedule_starttime.GetValueOrDefault();
+            set => __pbn__display_nightmode_schedule_starttime = value;
+        }
+        public bool ShouldSerializedisplay_nightmode_schedule_starttime() => __pbn__display_nightmode_schedule_starttime != null;
+        public void Resetdisplay_nightmode_schedule_starttime() => __pbn__display_nightmode_schedule_starttime = null;
+        private float? __pbn__display_nightmode_schedule_starttime;
+
+        [global::ProtoBuf.ProtoMember(19)]
+        public float display_nightmode_schedule_endtime
+        {
+            get => __pbn__display_nightmode_schedule_endtime.GetValueOrDefault();
+            set => __pbn__display_nightmode_schedule_endtime = value;
+        }
+        public bool ShouldSerializedisplay_nightmode_schedule_endtime() => __pbn__display_nightmode_schedule_endtime != null;
+        public void Resetdisplay_nightmode_schedule_endtime() => __pbn__display_nightmode_schedule_endtime = null;
+        private float? __pbn__display_nightmode_schedule_endtime;
+
+        [global::ProtoBuf.ProtoMember(20)]
+        public bool display_diagnostics_enabled
+        {
+            get => __pbn__display_diagnostics_enabled.GetValueOrDefault();
+            set => __pbn__display_diagnostics_enabled = value;
+        }
+        public bool ShouldSerializedisplay_diagnostics_enabled() => __pbn__display_diagnostics_enabled != null;
+        public void Resetdisplay_diagnostics_enabled() => __pbn__display_diagnostics_enabled = null;
+        private bool? __pbn__display_diagnostics_enabled;
+
+        [global::ProtoBuf.ProtoMember(21)]
+        public float als_lux_latest
+        {
+            get => __pbn__als_lux_latest.GetValueOrDefault();
+            set => __pbn__als_lux_latest = value;
+        }
+        public bool ShouldSerializeals_lux_latest() => __pbn__als_lux_latest != null;
+        public void Resetals_lux_latest() => __pbn__als_lux_latest = null;
+        private float? __pbn__als_lux_latest;
+
+        [global::ProtoBuf.ProtoMember(22)]
+        public float als_lux_median
+        {
+            get => __pbn__als_lux_median.GetValueOrDefault();
+            set => __pbn__als_lux_median = value;
+        }
+        public bool ShouldSerializeals_lux_median() => __pbn__als_lux_median != null;
+        public void Resetals_lux_median() => __pbn__als_lux_median = null;
+        private float? __pbn__als_lux_median;
+
+        [global::ProtoBuf.ProtoMember(23)]
+        public float display_brightness_linear
+        {
+            get => __pbn__display_brightness_linear.GetValueOrDefault();
+            set => __pbn__display_brightness_linear = value;
+        }
+        public bool ShouldSerializedisplay_brightness_linear() => __pbn__display_brightness_linear != null;
+        public void Resetdisplay_brightness_linear() => __pbn__display_brightness_linear = null;
+        private float? __pbn__display_brightness_linear;
+
+        [global::ProtoBuf.ProtoMember(24)]
+        public float display_brightness_adaptivemin
+        {
+            get => __pbn__display_brightness_adaptivemin.GetValueOrDefault();
+            set => __pbn__display_brightness_adaptivemin = value;
+        }
+        public bool ShouldSerializedisplay_brightness_adaptivemin() => __pbn__display_brightness_adaptivemin != null;
+        public void Resetdisplay_brightness_adaptivemin() => __pbn__display_brightness_adaptivemin = null;
+        private float? __pbn__display_brightness_adaptivemin;
+
+        [global::ProtoBuf.ProtoMember(25)]
+        public float display_brightness_adaptivemax
+        {
+            get => __pbn__display_brightness_adaptivemax.GetValueOrDefault();
+            set => __pbn__display_brightness_adaptivemax = value;
+        }
+        public bool ShouldSerializedisplay_brightness_adaptivemax() => __pbn__display_brightness_adaptivemax != null;
+        public void Resetdisplay_brightness_adaptivemax() => __pbn__display_brightness_adaptivemax = null;
+        private float? __pbn__display_brightness_adaptivemax;
+
+        [global::ProtoBuf.ProtoMember(26)]
+        public bool is_wifi_powersave_enabled
+        {
+            get => __pbn__is_wifi_powersave_enabled.GetValueOrDefault();
+            set => __pbn__is_wifi_powersave_enabled = value;
+        }
+        public bool ShouldSerializeis_wifi_powersave_enabled() => __pbn__is_wifi_powersave_enabled != null;
+        public void Resetis_wifi_powersave_enabled() => __pbn__is_wifi_powersave_enabled = null;
+        private bool? __pbn__is_wifi_powersave_enabled;
+
+        [global::ProtoBuf.ProtoMember(27)]
+        public bool is_fan_control_available
+        {
+            get => __pbn__is_fan_control_available.GetValueOrDefault();
+            set => __pbn__is_fan_control_available = value;
+        }
+        public bool ShouldSerializeis_fan_control_available() => __pbn__is_fan_control_available != null;
+        public void Resetis_fan_control_available() => __pbn__is_fan_control_available = null;
+        private bool? __pbn__is_fan_control_available;
+
+        [global::ProtoBuf.ProtoMember(28)]
+        [global::System.ComponentModel.DefaultValue(ESystemFanControlMode.k_SystemFanControlMode_Invalid)]
+        public ESystemFanControlMode fan_control_mode
+        {
+            get => __pbn__fan_control_mode ?? ESystemFanControlMode.k_SystemFanControlMode_Invalid;
+            set => __pbn__fan_control_mode = value;
+        }
+        public bool ShouldSerializefan_control_mode() => __pbn__fan_control_mode != null;
+        public void Resetfan_control_mode() => __pbn__fan_control_mode = null;
+        private ESystemFanControlMode? __pbn__fan_control_mode;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSelectOSBranchParams : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EOSBranch.k_EOSBranch_Unknown)]
+        public EOSBranch branch
+        {
+            get => __pbn__branch ?? EOSBranch.k_EOSBranch_Unknown;
+            set => __pbn__branch = value;
+        }
+        public bool ShouldSerializebranch() => __pbn__branch != null;
+        public void Resetbranch() => __pbn__branch = null;
+        private EOSBranch? __pbn__branch;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemUpdateProgress : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public float stage_progress
+        {
+            get => __pbn__stage_progress.GetValueOrDefault();
+            set => __pbn__stage_progress = value;
+        }
+        public bool ShouldSerializestage_progress() => __pbn__stage_progress != null;
+        public void Resetstage_progress() => __pbn__stage_progress = null;
+        private float? __pbn__stage_progress;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public long stage_size_bytes
+        {
+            get => __pbn__stage_size_bytes.GetValueOrDefault();
+            set => __pbn__stage_size_bytes = value;
+        }
+        public bool ShouldSerializestage_size_bytes() => __pbn__stage_size_bytes != null;
+        public void Resetstage_size_bytes() => __pbn__stage_size_bytes = null;
+        private long? __pbn__stage_size_bytes;
+
+        [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public uint rtime_estimated_completion
+        {
+            get => __pbn__rtime_estimated_completion.GetValueOrDefault();
+            set => __pbn__rtime_estimated_completion = value;
+        }
+        public bool ShouldSerializertime_estimated_completion() => __pbn__rtime_estimated_completion != null;
+        public void Resetrtime_estimated_completion() => __pbn__rtime_estimated_completion = null;
+        private uint? __pbn__rtime_estimated_completion;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemUpdateCheckResult : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EUpdaterType.k_EUpdaterType_Invalid)]
+        public EUpdaterType type
+        {
+            get => __pbn__type ?? EUpdaterType.k_EUpdaterType_Invalid;
+            set => __pbn__type = value;
+        }
+        public bool ShouldSerializetype() => __pbn__type != null;
+        public void Resettype() => __pbn__type = null;
+        private EUpdaterType? __pbn__type;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(2)]
+        public uint eresult
+        {
+            get => __pbn__eresult ?? 2;
+            set => __pbn__eresult = value;
+        }
+        public bool ShouldSerializeeresult() => __pbn__eresult != null;
+        public void Reseteresult() => __pbn__eresult = null;
+        private uint? __pbn__eresult;
+
+        [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public uint rtime_checked
+        {
+            get => __pbn__rtime_checked.GetValueOrDefault();
+            set => __pbn__rtime_checked = value;
+        }
+        public bool ShouldSerializertime_checked() => __pbn__rtime_checked != null;
+        public void Resetrtime_checked() => __pbn__rtime_checked = null;
+        private uint? __pbn__rtime_checked;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool available
+        {
+            get => __pbn__available.GetValueOrDefault();
+            set => __pbn__available = value;
+        }
+        public bool ShouldSerializeavailable() => __pbn__available != null;
+        public void Resetavailable() => __pbn__available = null;
+        private bool? __pbn__available;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string version
+        {
+            get => __pbn__version ?? "";
+            set => __pbn__version = value;
+        }
+        public bool ShouldSerializeversion() => __pbn__version != null;
+        public void Resetversion() => __pbn__version = null;
+        private string __pbn__version;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemUpdateApplyParams : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<EUpdaterType> apply_types { get; } = new global::System.Collections.Generic.List<EUpdaterType>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemUpdateApplyResult : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EUpdaterType.k_EUpdaterType_Invalid)]
+        public EUpdaterType type
+        {
+            get => __pbn__type ?? EUpdaterType.k_EUpdaterType_Invalid;
+            set => __pbn__type = value;
+        }
+        public bool ShouldSerializetype() => __pbn__type != null;
+        public void Resettype() => __pbn__type = null;
+        private EUpdaterType? __pbn__type;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(2)]
+        public uint eresult
+        {
+            get => __pbn__eresult ?? 2;
+            set => __pbn__eresult = value;
+        }
+        public bool ShouldSerializeeresult() => __pbn__eresult != null;
+        public void Reseteresult() => __pbn__eresult = null;
+        private uint? __pbn__eresult;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(false)]
+        public bool requires_client_restart
+        {
+            get => __pbn__requires_client_restart ?? false;
+            set => __pbn__requires_client_restart = value;
+        }
+        public bool ShouldSerializerequires_client_restart() => __pbn__requires_client_restart != null;
+        public void Resetrequires_client_restart() => __pbn__requires_client_restart = null;
+        private bool? __pbn__requires_client_restart;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(false)]
+        public bool requires_system_restart
+        {
+            get => __pbn__requires_system_restart ?? false;
+            set => __pbn__requires_system_restart = value;
+        }
+        public bool ShouldSerializerequires_system_restart() => __pbn__requires_system_restart != null;
+        public void Resetrequires_system_restart() => __pbn__requires_system_restart = null;
+        private bool? __pbn__requires_system_restart;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemUpdateState : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EUpdaterState.k_EUpdaterState_Invalid)]
+        public EUpdaterState state
+        {
+            get => __pbn__state ?? EUpdaterState.k_EUpdaterState_Invalid;
+            set => __pbn__state = value;
+        }
+        public bool ShouldSerializestate() => __pbn__state != null;
+        public void Resetstate() => __pbn__state = null;
+        private EUpdaterState? __pbn__state;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgSystemUpdateProgress progress { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<CMsgSystemUpdateCheckResult> update_check_results { get; } = new global::System.Collections.Generic.List<CMsgSystemUpdateCheckResult>();
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<CMsgSystemUpdateApplyResult> update_apply_results { get; } = new global::System.Collections.Generic.List<CMsgSystemUpdateApplyResult>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgAchievementChange : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
 
     }
 
@@ -1292,6 +3104,218 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgShortcutInfo : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string exe
+        {
+            get => __pbn__exe ?? "";
+            set => __pbn__exe = value;
+        }
+        public bool ShouldSerializeexe() => __pbn__exe != null;
+        public void Resetexe() => __pbn__exe = null;
+        private string __pbn__exe;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string start_dir
+        {
+            get => __pbn__start_dir ?? "";
+            set => __pbn__start_dir = value;
+        }
+        public bool ShouldSerializestart_dir() => __pbn__start_dir != null;
+        public void Resetstart_dir() => __pbn__start_dir = null;
+        private string __pbn__start_dir;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string icon
+        {
+            get => __pbn__icon ?? "";
+            set => __pbn__icon = value;
+        }
+        public bool ShouldSerializeicon() => __pbn__icon != null;
+        public void Reseticon() => __pbn__icon = null;
+        private string __pbn__icon;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string path
+        {
+            get => __pbn__path ?? "";
+            set => __pbn__path = value;
+        }
+        public bool ShouldSerializepath() => __pbn__path != null;
+        public void Resetpath() => __pbn__path = null;
+        private string __pbn__path;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string args
+        {
+            get => __pbn__args ?? "";
+            set => __pbn__args = value;
+        }
+        public bool ShouldSerializeargs() => __pbn__args != null;
+        public void Resetargs() => __pbn__args = null;
+        private string __pbn__args;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string app_name
+        {
+            get => __pbn__app_name ?? "";
+            set => __pbn__app_name = value;
+        }
+        public bool ShouldSerializeapp_name() => __pbn__app_name != null;
+        public void Resetapp_name() => __pbn__app_name = null;
+        private string __pbn__app_name;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public uint override_appid
+        {
+            get => __pbn__override_appid.GetValueOrDefault();
+            set => __pbn__override_appid = value;
+        }
+        public bool ShouldSerializeoverride_appid() => __pbn__override_appid != null;
+        public void Resetoverride_appid() => __pbn__override_appid = null;
+        private uint? __pbn__override_appid;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string flatpak_appid
+        {
+            get => __pbn__flatpak_appid ?? "";
+            set => __pbn__flatpak_appid = value;
+        }
+        public bool ShouldSerializeflatpak_appid() => __pbn__flatpak_appid != null;
+        public void Resetflatpak_appid() => __pbn__flatpak_appid = null;
+        private string __pbn__flatpak_appid;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public global::System.Collections.Generic.List<string> tags { get; } = new global::System.Collections.Generic.List<string>();
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public bool is_remote
+        {
+            get => __pbn__is_remote.GetValueOrDefault();
+            set => __pbn__is_remote = value;
+        }
+        public bool ShouldSerializeis_remote() => __pbn__is_remote != null;
+        public void Resetis_remote() => __pbn__is_remote = null;
+        private bool? __pbn__is_remote;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public bool is_hidden
+        {
+            get => __pbn__is_hidden.GetValueOrDefault();
+            set => __pbn__is_hidden = value;
+        }
+        public bool ShouldSerializeis_hidden() => __pbn__is_hidden != null;
+        public void Resetis_hidden() => __pbn__is_hidden = null;
+        private bool? __pbn__is_hidden;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public bool is_temporary
+        {
+            get => __pbn__is_temporary.GetValueOrDefault();
+            set => __pbn__is_temporary = value;
+        }
+        public bool ShouldSerializeis_temporary() => __pbn__is_temporary != null;
+        public void Resetis_temporary() => __pbn__is_temporary = null;
+        private bool? __pbn__is_temporary;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public bool is_openvr
+        {
+            get => __pbn__is_openvr.GetValueOrDefault();
+            set => __pbn__is_openvr = value;
+        }
+        public bool ShouldSerializeis_openvr() => __pbn__is_openvr != null;
+        public void Resetis_openvr() => __pbn__is_openvr = null;
+        private bool? __pbn__is_openvr;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public bool allow_desktop_config
+        {
+            get => __pbn__allow_desktop_config.GetValueOrDefault();
+            set => __pbn__allow_desktop_config = value;
+        }
+        public bool ShouldSerializeallow_desktop_config() => __pbn__allow_desktop_config != null;
+        public void Resetallow_desktop_config() => __pbn__allow_desktop_config = null;
+        private bool? __pbn__allow_desktop_config;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public bool allow_overlay
+        {
+            get => __pbn__allow_overlay.GetValueOrDefault();
+            set => __pbn__allow_overlay = value;
+        }
+        public bool ShouldSerializeallow_overlay() => __pbn__allow_overlay != null;
+        public void Resetallow_overlay() => __pbn__allow_overlay = null;
+        private bool? __pbn__allow_overlay;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public uint rt_last_played_time
+        {
+            get => __pbn__rt_last_played_time.GetValueOrDefault();
+            set => __pbn__rt_last_played_time = value;
+        }
+        public bool ShouldSerializert_last_played_time() => __pbn__rt_last_played_time != null;
+        public void Resetrt_last_played_time() => __pbn__rt_last_played_time = null;
+        private uint? __pbn__rt_last_played_time;
+
+        [global::ProtoBuf.ProtoMember(18)]
+        public bool is_devkit_shortcut
+        {
+            get => __pbn__is_devkit_shortcut.GetValueOrDefault();
+            set => __pbn__is_devkit_shortcut = value;
+        }
+        public bool ShouldSerializeis_devkit_shortcut() => __pbn__is_devkit_shortcut != null;
+        public void Resetis_devkit_shortcut() => __pbn__is_devkit_shortcut = null;
+        private bool? __pbn__is_devkit_shortcut;
+
+        [global::ProtoBuf.ProtoMember(19)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string devkit_gameid
+        {
+            get => __pbn__devkit_gameid ?? "";
+            set => __pbn__devkit_gameid = value;
+        }
+        public bool ShouldSerializedevkit_gameid() => __pbn__devkit_gameid != null;
+        public void Resetdevkit_gameid() => __pbn__devkit_gameid = null;
+        private string __pbn__devkit_gameid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgShortcutAppIds : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<uint> appids { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ECloudPendingRemoteOperation
     {
         k_ECloudPendingRemoteOperationNone = 0,
@@ -1299,6 +3323,46 @@ namespace SteamKit2.Internal
         k_ECloudPendingRemoteOperationUploadInProgress = 2,
         k_ECloudPendingRemoteOperationUploadPending = 3,
         k_ECloudPendingRemoteOperationAppSessionSuspended = 4,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESteamDeckKeyboardLayout
+    {
+        k_ESteamDeckKeyboardLayout_QWERTY = 0,
+        k_ESteamDeckKeyboardLayout_Bulgarian = 1,
+        k_ESteamDeckKeyboardLayout_Chinese_Simplified = 2,
+        k_ESteamDeckKeyboardLayout_Chinese_Traditional = 3,
+        k_ESteamDeckKeyboardLayout_Czech = 4,
+        k_ESteamDeckKeyboardLayout_Danish = 5,
+        k_ESteamDeckKeyboardLayout_Finnish = 6,
+        k_ESteamDeckKeyboardLayout_French = 7,
+        k_ESteamDeckKeyboardLayout_German = 8,
+        k_ESteamDeckKeyboardLayout_Greek = 9,
+        k_ESteamDeckKeyboardLayout_Hungarian = 10,
+        k_ESteamDeckKeyboardLayout_Italian = 11,
+        k_ESteamDeckKeyboardLayout_Japanese = 12,
+        k_ESteamDeckKeyboardLayout_Korean = 13,
+        k_ESteamDeckKeyboardLayout_Norwegian = 14,
+        k_ESteamDeckKeyboardLayout_Polish = 15,
+        k_ESteamDeckKeyboardLayout_Portuguese = 16,
+        k_ESteamDeckKeyboardLayout_Romanian = 17,
+        k_ESteamDeckKeyboardLayout_Russian = 18,
+        k_ESteamDeckKeyboardLayout_Spanish = 19,
+        k_ESteamDeckKeyboardLayout_Swedish = 20,
+        k_ESteamDeckKeyboardLayout_Thai = 21,
+        k_ESteamDeckKeyboardLayout_Turkish_F = 22,
+        k_ESteamDeckKeyboardLayout_Turkish_Q = 23,
+        k_ESteamDeckKeyboardLayout_Ukrainian = 24,
+        k_ESteamDeckKeyboardLayout_Vietnamese = 25,
+        k_ESteamDeckKeyboardLayout_QWERTY_International = 26,
+        k_ESteamDeckKeyboardLayout_Dvorak = 27,
+        k_ESteamDeckKeyboardLayout_Colemak = 28,
+        k_ESteamDeckKeyboardLayout_Bulgarian_Phonetic_Traditional = 29,
+        k_ESteamDeckKeyboardLayout_Bulgarian_Phonetic = 30,
+        k_ESteamDeckKeyboardLayout_Chinese_Traditional_Bopomofo = 31,
+        k_ESteamDeckKeyboardLayout_Chinese_Traditional_Cangjie = 32,
+        k_ESteamDeckKeyboardLayout_Japanese_Kana = 33,
+        k_ESteamDeckKeyboardLayout_Chinese_Traditional_Quick = 34,
     }
 
 }

@@ -154,24 +154,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgSHA1Digest : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize, IsRequired = true)]
-        public ulong block1 { get; set; }
-
-        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize, IsRequired = true)]
-        public ulong block2 { get; set; }
-
-        [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize, IsRequired = true)]
-        public uint block3 { get; set; }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgSOIDOwner : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -565,14 +547,14 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public uint dir_index
+        public int dir_index
         {
             get => __pbn__dir_index.GetValueOrDefault();
             set => __pbn__dir_index = value;
         }
         public bool ShouldSerializedir_index() => __pbn__dir_index != null;
         public void Resetdir_index() => __pbn__dir_index = null;
-        private uint? __pbn__dir_index;
+        private int? __pbn__dir_index;
 
     }
 
@@ -584,14 +566,14 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public uint dir_index
+        public int dir_index
         {
             get => __pbn__dir_index.GetValueOrDefault();
             set => __pbn__dir_index = value;
         }
         public bool ShouldSerializedir_index() => __pbn__dir_index != null;
         public void Resetdir_index() => __pbn__dir_index = null;
-        private uint? __pbn__dir_index;
+        private int? __pbn__dir_index;
 
         [global::ProtoBuf.ProtoMember(3)]
         [global::System.ComponentModel.DefaultValue("")]
@@ -626,14 +608,14 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            public uint dir_index
+            public int dir_index
             {
                 get => __pbn__dir_index.GetValueOrDefault();
                 set => __pbn__dir_index = value;
             }
             public bool ShouldSerializedir_index() => __pbn__dir_index != null;
             public void Resetdir_index() => __pbn__dir_index = null;
-            private uint? __pbn__dir_index;
+            private int? __pbn__dir_index;
 
             [global::ProtoBuf.ProtoMember(2)]
             public global::System.Collections.Generic.List<uint> type_instances { get; } = new global::System.Collections.Generic.List<uint>();
@@ -718,14 +700,14 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            public uint dir_index
+            public int dir_index
             {
                 get => __pbn__dir_index.GetValueOrDefault();
                 set => __pbn__dir_index = value;
             }
             public bool ShouldSerializedir_index() => __pbn__dir_index != null;
             public void Resetdir_index() => __pbn__dir_index = null;
-            private uint? __pbn__dir_index;
+            private int? __pbn__dir_index;
 
             [global::ProtoBuf.ProtoMember(2)]
             [global::System.ComponentModel.DefaultValue("")]
@@ -1252,27 +1234,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializesave_game_key() => __pbn__save_game_key != null;
         public void Resetsave_game_key() => __pbn__save_game_key = null;
         private byte[] __pbn__save_game_key;
-
-        [global::ProtoBuf.ProtoMember(7, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public uint item_schema_crc
-        {
-            get => __pbn__item_schema_crc.GetValueOrDefault();
-            set => __pbn__item_schema_crc = value;
-        }
-        public bool ShouldSerializeitem_schema_crc() => __pbn__item_schema_crc != null;
-        public void Resetitem_schema_crc() => __pbn__item_schema_crc = null;
-        private uint? __pbn__item_schema_crc;
-
-        [global::ProtoBuf.ProtoMember(8)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string items_game_url
-        {
-            get => __pbn__items_game_url ?? "";
-            set => __pbn__items_game_url = value;
-        }
-        public bool ShouldSerializeitems_game_url() => __pbn__items_game_url != null;
-        public void Resetitems_game_url() => __pbn__items_game_url = null;
-        private string __pbn__items_game_url;
 
         [global::ProtoBuf.ProtoMember(9)]
         public uint gc_socache_file_version

@@ -26,6 +26,16 @@ namespace SteamKit2.Internal
         public void Resetpriority() => __pbn__priority = null;
         private uint? __pbn__priority;
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool perform_encryption
+        {
+            get => __pbn__perform_encryption.GetValueOrDefault();
+            set => __pbn__perform_encryption = value;
+        }
+        public bool ShouldSerializeperform_encryption() => __pbn__perform_encryption != null;
+        public void Resetperform_encryption() => __pbn__perform_encryption = null;
+        private bool? __pbn__perform_encryption;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -54,6 +64,9 @@ namespace SteamKit2.Internal
         public bool ShouldSerializesignature() => __pbn__signature != null;
         public void Resetsignature() => __pbn__signature = null;
         private byte[] __pbn__signature;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public Offline_Ticket encrypted_ticket { get; set; }
 
     }
 

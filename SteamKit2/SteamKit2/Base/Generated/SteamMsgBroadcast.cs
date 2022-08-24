@@ -1986,6 +1986,16 @@ namespace SteamKit2.Internal
         public void Resetenable_replay() => __pbn__enable_replay = null;
         private bool? __pbn__enable_replay;
 
+        [global::ProtoBuf.ProtoMember(11)]
+        public bool is_partner_chat_only
+        {
+            get => __pbn__is_partner_chat_only.GetValueOrDefault();
+            set => __pbn__is_partner_chat_only = value;
+        }
+        public bool ShouldSerializeis_partner_chat_only() => __pbn__is_partner_chat_only != null;
+        public void Resetis_partner_chat_only() => __pbn__is_partner_chat_only = null;
+        private bool? __pbn__is_partner_chat_only;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2145,6 +2155,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeenable_replay() => __pbn__enable_replay != null;
         public void Resetenable_replay() => __pbn__enable_replay = null;
         private bool? __pbn__enable_replay;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public bool is_partner_chat_only
+        {
+            get => __pbn__is_partner_chat_only.GetValueOrDefault();
+            set => __pbn__is_partner_chat_only = value;
+        }
+        public bool ShouldSerializeis_partner_chat_only() => __pbn__is_partner_chat_only != null;
+        public void Resetis_partner_chat_only() => __pbn__is_partner_chat_only = null;
+        private bool? __pbn__is_partner_chat_only;
 
     }
 

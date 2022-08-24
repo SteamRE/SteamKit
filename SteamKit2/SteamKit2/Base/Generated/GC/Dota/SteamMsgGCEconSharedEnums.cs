@@ -61,15 +61,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public enum EGCPartnerRequestResponse
-    {
-        k_EPartnerRequestOK = 1,
-        k_EPartnerRequestBadAccount = 2,
-        k_EPartnerRequestNotLinked = 3,
-        k_EPartnerRequestUnsupportedPartnerType = 4,
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public enum EGCMsgUseItemResponse
     {
         k_EGCMsgUseItemResponse_ItemUsed = 0,

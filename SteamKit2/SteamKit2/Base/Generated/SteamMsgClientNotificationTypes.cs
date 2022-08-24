@@ -10,6 +10,86 @@ namespace SteamKit2.Internal
 {
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationCloudSyncFailure : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationCloudSyncConflict : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationScreenshot : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string screenshot_handle
+        {
+            get => __pbn__screenshot_handle ?? "";
+            set => __pbn__screenshot_handle = value;
+        }
+        public bool ShouldSerializescreenshot_handle() => __pbn__screenshot_handle != null;
+        public void Resetscreenshot_handle() => __pbn__screenshot_handle = null;
+        private string __pbn__screenshot_handle;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string description
+        {
+            get => __pbn__description ?? "";
+            set => __pbn__description = value;
+        }
+        public bool ShouldSerializedescription() => __pbn__description != null;
+        public void Resetdescription() => __pbn__description = null;
+        private string __pbn__description;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string local_url
+        {
+            get => __pbn__local_url ?? "";
+            set => __pbn__local_url = value;
+        }
+        public bool ShouldSerializelocal_url() => __pbn__local_url != null;
+        public void Resetlocal_url() => __pbn__local_url = null;
+        private string __pbn__local_url;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CClientNotificationDownloadCompleted : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -44,6 +124,25 @@ namespace SteamKit2.Internal
         public bool ShouldSerializesteamid() => __pbn__steamid != null;
         public void Resetsteamid() => __pbn__steamid = null;
         private ulong? __pbn__steamid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationFriendInviteRollup : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint new_invite_count
+        {
+            get => __pbn__new_invite_count.GetValueOrDefault();
+            set => __pbn__new_invite_count = value;
+        }
+        public bool ShouldSerializenew_invite_count() => __pbn__new_invite_count != null;
+        public void Resetnew_invite_count() => __pbn__new_invite_count = null;
+        private uint? __pbn__new_invite_count;
 
     }
 
@@ -440,6 +539,247 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationFamilySharingDeviceAuthorizationChanged : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint accountid_owner
+        {
+            get => __pbn__accountid_owner.GetValueOrDefault();
+            set => __pbn__accountid_owner = value;
+        }
+        public bool ShouldSerializeaccountid_owner() => __pbn__accountid_owner != null;
+        public void Resetaccountid_owner() => __pbn__accountid_owner = null;
+        private uint? __pbn__accountid_owner;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool authorized
+        {
+            get => __pbn__authorized.GetValueOrDefault();
+            set => __pbn__authorized = value;
+        }
+        public bool ShouldSerializeauthorized() => __pbn__authorized != null;
+        public void Resetauthorized() => __pbn__authorized = null;
+        private bool? __pbn__authorized;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationFamilySharingStopPlaying : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint accountid_owner
+        {
+            get => __pbn__accountid_owner.GetValueOrDefault();
+            set => __pbn__accountid_owner = value;
+        }
+        public bool ShouldSerializeaccountid_owner() => __pbn__accountid_owner != null;
+        public void Resetaccountid_owner() => __pbn__accountid_owner = null;
+        private uint? __pbn__accountid_owner;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint seconds_remaining
+        {
+            get => __pbn__seconds_remaining.GetValueOrDefault();
+            set => __pbn__seconds_remaining = value;
+        }
+        public bool ShouldSerializeseconds_remaining() => __pbn__seconds_remaining != null;
+        public void Resetseconds_remaining() => __pbn__seconds_remaining = null;
+        private uint? __pbn__seconds_remaining;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationFamilySharingLibraryAvailable : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint accountid_owner
+        {
+            get => __pbn__accountid_owner.GetValueOrDefault();
+            set => __pbn__accountid_owner = value;
+        }
+        public bool ShouldSerializeaccountid_owner() => __pbn__accountid_owner != null;
+        public void Resetaccountid_owner() => __pbn__accountid_owner = null;
+        private uint? __pbn__accountid_owner;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationIncomingVoiceChat : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationClaimSteamDeckRewards : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationGiftReceived : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string sender_name
+        {
+            get => __pbn__sender_name ?? "";
+            set => __pbn__sender_name = value;
+        }
+        public bool ShouldSerializesender_name() => __pbn__sender_name != null;
+        public void Resetsender_name() => __pbn__sender_name = null;
+        private string __pbn__sender_name;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationItemAnnouncement : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint new_item_count
+        {
+            get => __pbn__new_item_count.GetValueOrDefault();
+            set => __pbn__new_item_count = value;
+        }
+        public bool ShouldSerializenew_item_count() => __pbn__new_item_count != null;
+        public void Resetnew_item_count() => __pbn__new_item_count = null;
+        private uint? __pbn__new_item_count;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool new_backpack_items
+        {
+            get => __pbn__new_backpack_items.GetValueOrDefault();
+            set => __pbn__new_backpack_items = value;
+        }
+        public bool ShouldSerializenew_backpack_items() => __pbn__new_backpack_items != null;
+        public void Resetnew_backpack_items() => __pbn__new_backpack_items = null;
+        private bool? __pbn__new_backpack_items;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationInboxStats : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint friend_invite_count
+        {
+            get => __pbn__friend_invite_count.GetValueOrDefault();
+            set => __pbn__friend_invite_count = value;
+        }
+        public bool ShouldSerializefriend_invite_count() => __pbn__friend_invite_count != null;
+        public void Resetfriend_invite_count() => __pbn__friend_invite_count = null;
+        private uint? __pbn__friend_invite_count;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint new_comment_count
+        {
+            get => __pbn__new_comment_count.GetValueOrDefault();
+            set => __pbn__new_comment_count = value;
+        }
+        public bool ShouldSerializenew_comment_count() => __pbn__new_comment_count != null;
+        public void Resetnew_comment_count() => __pbn__new_comment_count = null;
+        private uint? __pbn__new_comment_count;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationHardwareSurveyPending : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationLowDiskSpace : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint folder_index
+        {
+            get => __pbn__folder_index.GetValueOrDefault();
+            set => __pbn__folder_index = value;
+        }
+        public bool ShouldSerializefolder_index() => __pbn__folder_index != null;
+        public void Resetfolder_index() => __pbn__folder_index = null;
+        private uint? __pbn__folder_index;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationBatteryTemperature : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint temperature
+        {
+            get => __pbn__temperature.GetValueOrDefault();
+            set => __pbn__temperature = value;
+        }
+        public bool ShouldSerializetemperature() => __pbn__temperature != null;
+        public void Resettemperature() => __pbn__temperature = null;
+        private uint? __pbn__temperature;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string notification_type
+        {
+            get => __pbn__notification_type ?? "";
+            set => __pbn__notification_type = value;
+        }
+        public bool ShouldSerializenotification_type() => __pbn__notification_type != null;
+        public void Resetnotification_type() => __pbn__notification_type = null;
+        private string __pbn__notification_type;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EClientNotificationType
     {
         k_EClientNotificationType_Invalid = 0,
@@ -452,6 +792,20 @@ namespace SteamKit2.Internal
         k_EClientNotificationType_SystemUpdate = 7,
         k_EClientNotificationType_FriendMessage = 8,
         k_EClientNotificationType_GroupChatMessage = 9,
+        k_EClientNotificationType_FriendInviteRollup = 10,
+        k_EClientNotificationType_FamilySharingDeviceAuthorizationChanged = 11,
+        k_EClientNotificationType_FamilySharingStopPlaying = 12,
+        k_EClientNotificationType_FamilySharingLibraryAvailable = 13,
+        k_EClientNotificationType_Screenshot = 14,
+        k_EClientNotificationType_CloudSyncFailure = 15,
+        k_EClientNotificationType_CloudSyncConflict = 16,
+        k_EClientNotificationType_IncomingVoiceChat = 17,
+        k_EClientNotificationType_ClaimSteamDeckRewards = 18,
+        k_EClientNotificationType_GiftReceived = 19,
+        k_EClientNotificationType_ItemAnnouncement = 20,
+        k_EClientNotificationType_HardwareSurvey = 21,
+        k_EClientNotificationType_LowDiskSpace = 22,
+        k_EClientNotificationType_BatteryTemperature = 23,
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -10,6 +10,54 @@ namespace SteamKit2.Internal
 {
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_ClientLogUploadCheck_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong client_id
+        {
+            get => __pbn__client_id.GetValueOrDefault();
+            set => __pbn__client_id = value;
+        }
+        public bool ShouldSerializeclient_id() => __pbn__client_id != null;
+        public void Resetclient_id() => __pbn__client_id = null;
+        private ulong? __pbn__client_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_ClientLogUploadComplete_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong client_id
+        {
+            get => __pbn__client_id.GetValueOrDefault();
+            set => __pbn__client_id = value;
+        }
+        public bool ShouldSerializeclient_id() => __pbn__client_id != null;
+        public void Resetclient_id() => __pbn__client_id = null;
+        private ulong? __pbn__client_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong request_id
+        {
+            get => __pbn__request_id.GetValueOrDefault();
+            set => __pbn__request_id = value;
+        }
+        public bool ShouldSerializerequest_id() => __pbn__request_id != null;
+        public void Resetrequest_id() => __pbn__request_id = null;
+        private ulong? __pbn__request_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CCloud_GetUploadServerInfo_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1032,6 +1080,46 @@ namespace SteamKit2.Internal
         public void Resetipv6_remote() => __pbn__ipv6_remote = null;
         private bool? __pbn__ipv6_remote;
 
+        [global::ProtoBuf.ProtoMember(13)]
+        public uint time_to_connect_ms
+        {
+            get => __pbn__time_to_connect_ms.GetValueOrDefault();
+            set => __pbn__time_to_connect_ms = value;
+        }
+        public bool ShouldSerializetime_to_connect_ms() => __pbn__time_to_connect_ms != null;
+        public void Resettime_to_connect_ms() => __pbn__time_to_connect_ms = null;
+        private uint? __pbn__time_to_connect_ms;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public uint time_to_send_req_ms
+        {
+            get => __pbn__time_to_send_req_ms.GetValueOrDefault();
+            set => __pbn__time_to_send_req_ms = value;
+        }
+        public bool ShouldSerializetime_to_send_req_ms() => __pbn__time_to_send_req_ms != null;
+        public void Resettime_to_send_req_ms() => __pbn__time_to_send_req_ms = null;
+        private uint? __pbn__time_to_send_req_ms;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public uint time_to_first_byte_ms
+        {
+            get => __pbn__time_to_first_byte_ms.GetValueOrDefault();
+            set => __pbn__time_to_first_byte_ms = value;
+        }
+        public bool ShouldSerializetime_to_first_byte_ms() => __pbn__time_to_first_byte_ms != null;
+        public void Resettime_to_first_byte_ms() => __pbn__time_to_first_byte_ms = null;
+        private uint? __pbn__time_to_first_byte_ms;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public uint time_to_last_byte_ms
+        {
+            get => __pbn__time_to_last_byte_ms.GetValueOrDefault();
+            set => __pbn__time_to_last_byte_ms = value;
+        }
+        public bool ShouldSerializetime_to_last_byte_ms() => __pbn__time_to_last_byte_ms != null;
+        public void Resettime_to_last_byte_ms() => __pbn__time_to_last_byte_ms = null;
+        private uint? __pbn__time_to_last_byte_ms;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1077,6 +1165,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeclient_id() => __pbn__client_id != null;
         public void Resetclient_id() => __pbn__client_id = null;
         private ulong? __pbn__client_id;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public ulong app_build_id
+        {
+            get => __pbn__app_build_id.GetValueOrDefault();
+            set => __pbn__app_build_id = value;
+        }
+        public bool ShouldSerializeapp_build_id() => __pbn__app_build_id != null;
+        public void Resetapp_build_id() => __pbn__app_build_id = null;
+        private ulong? __pbn__app_build_id;
 
     }
 
@@ -2032,6 +2130,16 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public global::System.Collections.Generic.List<string> machine_names { get; } = new global::System.Collections.Generic.List<string>();
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public ulong app_buildid_hwm
+        {
+            get => __pbn__app_buildid_hwm.GetValueOrDefault();
+            set => __pbn__app_buildid_hwm = value;
+        }
+        public bool ShouldSerializeapp_buildid_hwm() => __pbn__app_buildid_hwm != null;
+        public void Resetapp_buildid_hwm() => __pbn__app_buildid_hwm = null;
+        private ulong? __pbn__app_buildid_hwm;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2230,6 +2338,84 @@ namespace SteamKit2.Internal
         public void Resetuploads_completed() => __pbn__uploads_completed = null;
         private bool? __pbn__uploads_completed;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool uploads_required
+        {
+            get => __pbn__uploads_required.GetValueOrDefault();
+            set => __pbn__uploads_required = value;
+        }
+        public bool ShouldSerializeuploads_required() => __pbn__uploads_required != null;
+        public void Resetuploads_required() => __pbn__uploads_required = null;
+        private bool? __pbn__uploads_required;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_ClientGetAppQuotaUsage_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_ClientGetAppQuotaUsage_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint existing_files
+        {
+            get => __pbn__existing_files.GetValueOrDefault();
+            set => __pbn__existing_files = value;
+        }
+        public bool ShouldSerializeexisting_files() => __pbn__existing_files != null;
+        public void Resetexisting_files() => __pbn__existing_files = null;
+        private uint? __pbn__existing_files;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong existing_bytes
+        {
+            get => __pbn__existing_bytes.GetValueOrDefault();
+            set => __pbn__existing_bytes = value;
+        }
+        public bool ShouldSerializeexisting_bytes() => __pbn__existing_bytes != null;
+        public void Resetexisting_bytes() => __pbn__existing_bytes = null;
+        private ulong? __pbn__existing_bytes;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint max_num_files
+        {
+            get => __pbn__max_num_files.GetValueOrDefault();
+            set => __pbn__max_num_files = value;
+        }
+        public bool ShouldSerializemax_num_files() => __pbn__max_num_files != null;
+        public void Resetmax_num_files() => __pbn__max_num_files = null;
+        private uint? __pbn__max_num_files;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public ulong max_num_bytes
+        {
+            get => __pbn__max_num_bytes.GetValueOrDefault();
+            set => __pbn__max_num_bytes = value;
+        }
+        public bool ShouldSerializemax_num_bytes() => __pbn__max_num_bytes != null;
+        public void Resetmax_num_bytes() => __pbn__max_num_bytes = null;
+        private ulong? __pbn__max_num_bytes;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2261,8 +2447,29 @@ namespace SteamKit2.Internal
 
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_ClientLogUploadRequest_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong request_id
+        {
+            get => __pbn__request_id.GetValueOrDefault();
+            set => __pbn__request_id = value;
+        }
+        public bool ShouldSerializerequest_id() => __pbn__request_id != null;
+        public void Resetrequest_id() => __pbn__request_id = null;
+        private ulong? __pbn__request_id;
+
+    }
+
     public interface ICloud
     {
+        NoResponse ClientLogUploadCheck(CCloud_ClientLogUploadCheck_Notification request);
+        NoResponse ClientLogUploadComplete(CCloud_ClientLogUploadComplete_Notification request);
         CCloud_GetUploadServerInfo_Response GetUploadServerInfo(CCloud_GetUploadServerInfo_Request request);
         CCloud_BeginHTTPUpload_Response BeginHTTPUpload(CCloud_BeginHTTPUpload_Request request);
         CCloud_CommitHTTPUpload_Response CommitHTTPUpload(CCloud_CommitHTTPUpload_Request request);
@@ -2288,11 +2495,13 @@ namespace SteamKit2.Internal
         CCloud_AppSessionResume_Response ResumeAppSession(CCloud_AppSessionResume_Request request);
         CCloud_AppLaunchIntent_Response SignalAppLaunchIntent(CCloud_AppLaunchIntent_Request request);
         NoResponse SignalAppExitSyncDone(CCloud_AppExitSyncDone_Notification request);
+        CCloud_ClientGetAppQuotaUsage_Response ClientGetAppQuotaUsage(CCloud_ClientGetAppQuotaUsage_Request request);
     }
 
     public interface ICloudClient
     {
         NoResponse NotifyAppStateChange(CCloud_AppCloudStateChange_Notification request);
+        NoResponse ClientLogUploadRequest(CCloud_ClientLogUploadRequest_Notification request);
     }
 
 }

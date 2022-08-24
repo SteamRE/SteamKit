@@ -163,6 +163,192 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CUserAccount_GetClientWalletDetails_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool include_balance_in_usd
+        {
+            get => __pbn__include_balance_in_usd.GetValueOrDefault();
+            set => __pbn__include_balance_in_usd = value;
+        }
+        public bool ShouldSerializeinclude_balance_in_usd() => __pbn__include_balance_in_usd != null;
+        public void Resetinclude_balance_in_usd() => __pbn__include_balance_in_usd = null;
+        private bool? __pbn__include_balance_in_usd;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(1)]
+        public int wallet_region
+        {
+            get => __pbn__wallet_region ?? 1;
+            set => __pbn__wallet_region = value;
+        }
+        public bool ShouldSerializewallet_region() => __pbn__wallet_region != null;
+        public void Resetwallet_region() => __pbn__wallet_region = null;
+        private int? __pbn__wallet_region;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool include_formatted_balance
+        {
+            get => __pbn__include_formatted_balance.GetValueOrDefault();
+            set => __pbn__include_formatted_balance = value;
+        }
+        public bool ShouldSerializeinclude_formatted_balance() => __pbn__include_formatted_balance != null;
+        public void Resetinclude_formatted_balance() => __pbn__include_formatted_balance = null;
+        private bool? __pbn__include_formatted_balance;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CUserAccount_GetWalletDetails_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool has_wallet
+        {
+            get => __pbn__has_wallet.GetValueOrDefault();
+            set => __pbn__has_wallet = value;
+        }
+        public bool ShouldSerializehas_wallet() => __pbn__has_wallet != null;
+        public void Resethas_wallet() => __pbn__has_wallet = null;
+        private bool? __pbn__has_wallet;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string user_country_code
+        {
+            get => __pbn__user_country_code ?? "";
+            set => __pbn__user_country_code = value;
+        }
+        public bool ShouldSerializeuser_country_code() => __pbn__user_country_code != null;
+        public void Resetuser_country_code() => __pbn__user_country_code = null;
+        private string __pbn__user_country_code;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string wallet_country_code
+        {
+            get => __pbn__wallet_country_code ?? "";
+            set => __pbn__wallet_country_code = value;
+        }
+        public bool ShouldSerializewallet_country_code() => __pbn__wallet_country_code != null;
+        public void Resetwallet_country_code() => __pbn__wallet_country_code = null;
+        private string __pbn__wallet_country_code;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string wallet_state
+        {
+            get => __pbn__wallet_state ?? "";
+            set => __pbn__wallet_state = value;
+        }
+        public bool ShouldSerializewallet_state() => __pbn__wallet_state != null;
+        public void Resetwallet_state() => __pbn__wallet_state = null;
+        private string __pbn__wallet_state;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public long balance
+        {
+            get => __pbn__balance.GetValueOrDefault();
+            set => __pbn__balance = value;
+        }
+        public bool ShouldSerializebalance() => __pbn__balance != null;
+        public void Resetbalance() => __pbn__balance = null;
+        private long? __pbn__balance;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public long delayed_balance
+        {
+            get => __pbn__delayed_balance.GetValueOrDefault();
+            set => __pbn__delayed_balance = value;
+        }
+        public bool ShouldSerializedelayed_balance() => __pbn__delayed_balance != null;
+        public void Resetdelayed_balance() => __pbn__delayed_balance = null;
+        private long? __pbn__delayed_balance;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public int currency_code
+        {
+            get => __pbn__currency_code.GetValueOrDefault();
+            set => __pbn__currency_code = value;
+        }
+        public bool ShouldSerializecurrency_code() => __pbn__currency_code != null;
+        public void Resetcurrency_code() => __pbn__currency_code = null;
+        private int? __pbn__currency_code;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public uint time_most_recent_txn
+        {
+            get => __pbn__time_most_recent_txn.GetValueOrDefault();
+            set => __pbn__time_most_recent_txn = value;
+        }
+        public bool ShouldSerializetime_most_recent_txn() => __pbn__time_most_recent_txn != null;
+        public void Resettime_most_recent_txn() => __pbn__time_most_recent_txn = null;
+        private uint? __pbn__time_most_recent_txn;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public ulong most_recent_txnid
+        {
+            get => __pbn__most_recent_txnid.GetValueOrDefault();
+            set => __pbn__most_recent_txnid = value;
+        }
+        public bool ShouldSerializemost_recent_txnid() => __pbn__most_recent_txnid != null;
+        public void Resetmost_recent_txnid() => __pbn__most_recent_txnid = null;
+        private ulong? __pbn__most_recent_txnid;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public long balance_in_usd
+        {
+            get => __pbn__balance_in_usd.GetValueOrDefault();
+            set => __pbn__balance_in_usd = value;
+        }
+        public bool ShouldSerializebalance_in_usd() => __pbn__balance_in_usd != null;
+        public void Resetbalance_in_usd() => __pbn__balance_in_usd = null;
+        private long? __pbn__balance_in_usd;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public long delayed_balance_in_usd
+        {
+            get => __pbn__delayed_balance_in_usd.GetValueOrDefault();
+            set => __pbn__delayed_balance_in_usd = value;
+        }
+        public bool ShouldSerializedelayed_balance_in_usd() => __pbn__delayed_balance_in_usd != null;
+        public void Resetdelayed_balance_in_usd() => __pbn__delayed_balance_in_usd = null;
+        private long? __pbn__delayed_balance_in_usd;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public bool has_wallet_in_other_regions
+        {
+            get => __pbn__has_wallet_in_other_regions.GetValueOrDefault();
+            set => __pbn__has_wallet_in_other_regions = value;
+        }
+        public bool ShouldSerializehas_wallet_in_other_regions() => __pbn__has_wallet_in_other_regions != null;
+        public void Resethas_wallet_in_other_regions() => __pbn__has_wallet_in_other_regions = null;
+        private bool? __pbn__has_wallet_in_other_regions;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public global::System.Collections.Generic.List<int> other_regions { get; } = new global::System.Collections.Generic.List<int>();
+
+        [global::ProtoBuf.ProtoMember(14)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string formatted_balance
+        {
+            get => __pbn__formatted_balance ?? "";
+            set => __pbn__formatted_balance = value;
+        }
+        public bool ShouldSerializeformatted_balance() => __pbn__formatted_balance != null;
+        public void Resetformatted_balance() => __pbn__formatted_balance = null;
+        private string __pbn__formatted_balance;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CUserAccount_GetAccountLinkStatus_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -235,6 +421,45 @@ namespace SteamKit2.Internal
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CUserAccount_GetUserCountry_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CUserAccount_GetUserCountry_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string country
+        {
+            get => __pbn__country ?? "";
+            set => __pbn__country = value;
+        }
+        public bool ShouldSerializecountry() => __pbn__country != null;
+        public void Resetcountry() => __pbn__country = null;
+        private string __pbn__country;
 
     }
 
@@ -818,8 +1043,10 @@ namespace SteamKit2.Internal
     public interface IUserAccount
     {
         CUserAccount_GetAvailableValveDiscountPromotions_Response GetAvailableValveDiscountPromotions(CUserAccount_GetAvailableValveDiscountPromotions_Request request);
+        CUserAccount_GetWalletDetails_Response GetClientWalletDetails(CUserAccount_GetClientWalletDetails_Request request);
         CUserAccount_GetAccountLinkStatus_Response GetAccountLinkStatus(CUserAccount_GetAccountLinkStatus_Request request);
         CUserAccount_CancelLicenseForApp_Response CancelLicenseForApp(CUserAccount_CancelLicenseForApp_Request request);
+        CUserAccount_GetUserCountry_Response GetUserCountry(CUserAccount_GetUserCountry_Request request);
         CUserAccount_CreateFriendInviteToken_Response CreateFriendInviteToken(CUserAccount_CreateFriendInviteToken_Request request);
         CUserAccount_GetFriendInviteTokens_Response GetFriendInviteTokens(CUserAccount_GetFriendInviteTokens_Request request);
         CUserAccount_ViewFriendInviteToken_Response ViewFriendInviteToken(CUserAccount_ViewFriendInviteToken_Request request);
