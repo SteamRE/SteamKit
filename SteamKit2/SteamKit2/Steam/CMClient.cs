@@ -574,7 +574,7 @@ namespace SteamKit2.Internal
                 PublicIP = logonResp.Body.public_ip.GetIPAddress();
                 IPCountryCode = logonResp.Body.ip_country_code;
 
-                int hbDelay = logonResp.Body.out_of_game_heartbeat_seconds;
+                int hbDelay = logonResp.Body.legacy_out_of_game_heartbeat_seconds;
 
                 // restart heartbeat
                 heartBeatFunc.Stop();
