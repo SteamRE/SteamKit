@@ -80,19 +80,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public enum EBanContentCheckResult
-    {
-        k_EBanContentCheckResult_NotScanned = 0,
-        k_EBanContentCheckResult_Reset = 1,
-        k_EBanContentCheckResult_NeedsChecking = 2,
-        k_EBanContentCheckResult_VeryUnlikely = 5,
-        k_EBanContentCheckResult_Unlikely = 30,
-        k_EBanContentCheckResult_Possible = 50,
-        k_EBanContentCheckResult_Likely = 75,
-        k_EBanContentCheckResult_VeryLikely = 100,
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public enum EProfileCustomizationType
     {
         k_EProfileCustomizationTypeInvalid = 0,
@@ -139,6 +126,34 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public enum ESDCardFormatStage
+    {
+        k_ESDCardFormatStage_Invalid = 0,
+        k_ESDCardFormatStage_Starting = 1,
+        k_ESDCardFormatStage_Testing = 2,
+        k_ESDCardFormatStage_Rescuing = 3,
+        k_ESDCardFormatStage_Formatting = 4,
+        k_ESDCardFormatStage_Finalizing = 5,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESystemFanControlMode
+    {
+        k_SystemFanControlMode_Invalid = 0,
+        k_SystemFanControlMode_Disabled = 1,
+        k_SystemFanControlMode_Default = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EColorProfile
+    {
+        k_EColorProfile_Invalid = 0,
+        k_EColorProfile_Native = 1,
+        k_EColorProfile_Standard = 2,
+        k_EColorProfile_Vivid = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EBluetoothDeviceType
     {
         k_BluetoothDeviceType_Invalid = 0,
@@ -153,6 +168,121 @@ namespace SteamKit2.Internal
         k_BluetoothDeviceType_Joystick = 9,
         k_BluetoothDeviceType_Gamepad = 10,
         k_BluetoothDeviceType_Keyboard = 11,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESystemAudioDirection
+    {
+        k_SystemAudioDirection_Invalid = 0,
+        k_SystemAudioDirection_Input = 1,
+        k_SystemAudioDirection_Output = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESystemAudioChannel
+    {
+        k_SystemAudioChannel_Invalid = 0,
+        k_SystemAudioChannel_Aggregated = 1,
+        k_SystemAudioChannel_FrontLeft = 2,
+        k_SystemAudioChannel_FrontRight = 3,
+        k_SystemAudioChannel_LFE = 4,
+        k_SystemAudioChannel_BackLeft = 5,
+        k_SystemAudioChannel_BackRight = 6,
+        k_SystemAudioChannel_FrontCenter = 7,
+        k_SystemAudioChannel_Unknown = 8,
+        k_SystemAudioChannel_Mono = 9,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESystemAudioPortType
+    {
+        k_SystemAudioPortType_Invalid = 0,
+        k_SystemAudioPortType_Unknown = 1,
+        k_SystemAudioPortType_Audio32f = 2,
+        k_SystemAudioPortType_Midi8b = 3,
+        k_SystemAudioPortType_Video32RGBA = 4,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESystemAudioPortDirection
+    {
+        k_SystemAudioPortDirection_Invalid = 0,
+        k_SystemAudioPortDirection_Input = 1,
+        k_SystemAudioPortDirection_Output = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESystemServiceState
+    {
+        k_ESystemServiceState_Unavailable = 0,
+        k_ESystemServiceState_Disabled = 1,
+        k_ESystemServiceState_Enabled = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EGraphicsPerfOverlayLevel
+    {
+        k_EGraphicsPerfOverlayLevel_Hidden = 0,
+        k_EGraphicsPerfOverlayLevel_Basic = 1,
+        k_EGraphicsPerfOverlayLevel_Medium = 2,
+        k_EGraphicsPerfOverlayLevel_Full = 3,
+        k_EGraphicsPerfOverlayLevel_Minimal = 4,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EGPUPerformanceLevel
+    {
+        k_EGPUPerformanceLevel_Invalid = 0,
+        k_EGPUPerformanceLevel_Auto = 1,
+        k_EGPUPerformanceLevel_Manual = 2,
+        k_EGPUPerformanceLevel_Low = 3,
+        k_EGPUPerformanceLevel_High = 4,
+        k_EGPUPerformanceLevel_Profiling = 5,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EScalingFilter
+    {
+        k_EScalingFilter_Invalid = 0,
+        k_EScalingFilter_FSR = 1,
+        k_EScalingFilter_Nearest = 2,
+        k_EScalingFilter_Integer = 3,
+        k_EScalingFilter_Linear = 4,
+        k_EScalingFilter_NIS = 5,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ECPUGovernor
+    {
+        k_ECPUGovernor_Invalid = 0,
+        k_ECPUGovernor_Perf = 1,
+        k_ECPUGovernor_Powersave = 2,
+        k_ECPUGovernor_Manual = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EUpdaterType
+    {
+        k_EUpdaterType_Invalid = 0,
+        k_EUpdaterType_Client = 1,
+        k_EUpdaterType_OS = 2,
+        k_EUpdaterType_BIOS = 3,
+        k_EUpdaterType_Aggregated = 4,
+        k_EUpdaterType_Test1 = 5,
+        k_EUpdaterType_Test2 = 6,
+        k_EUpdaterType_Dummy = 7,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EUpdaterState
+    {
+        k_EUpdaterState_Invalid = 0,
+        k_EUpdaterState_UpToDate = 2,
+        k_EUpdaterState_Checking = 3,
+        k_EUpdaterState_Available = 4,
+        k_EUpdaterState_Applying = 5,
+        k_EUpdaterState_ClientRestartPending = 6,
+        k_EUpdaterState_SystemRestartPending = 7,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -172,6 +302,120 @@ namespace SteamKit2.Internal
         k_EStorageBlockFileSystemType_Unknown = 1,
         k_EStorageBlockFileSystemType_VFat = 2,
         k_EStorageBlockFileSystemType_Ext4 = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESteamDeckCompatibilityCategory
+    {
+        k_ESteamDeckCompatibilityCategory_Unknown = 0,
+        k_ESteamDeckCompatibilityCategory_Unsupported = 1,
+        k_ESteamDeckCompatibilityCategory_Playable = 2,
+        k_ESteamDeckCompatibilityCategory_Verified = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESteamDeckCompatibilityResultDisplayType
+    {
+        k_ESteamDeckCompatibilityResultDisplayType_Invisible = 0,
+        k_ESteamDeckCompatibilityResultDisplayType_Informational = 1,
+        k_ESteamDeckCompatibilityResultDisplayType_Unsupported = 2,
+        k_ESteamDeckCompatibilityResultDisplayType_Playable = 3,
+        k_ESteamDeckCompatibilityResultDisplayType_Verified = 4,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EACState
+    {
+        k_EACState_Unknown = 0,
+        k_EACState_Disconnected = 1,
+        k_EACState_Connected = 2,
+        k_EACState_ConnectedSlow = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EBatteryState
+    {
+        k_EBatteryState_Unknown = 0,
+        k_EBatteryState_Discharging = 1,
+        k_EBatteryState_Charging = 2,
+        k_EBatteryState_Full = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EOSBranch
+    {
+        k_EOSBranch_Unknown = 0,
+        k_EOSBranch_Release = 1,
+        k_EOSBranch_ReleaseCandidate = 2,
+        k_EOSBranch_Beta = 3,
+        k_EOSBranch_BetaCandidate = 4,
+        k_EOSBranch_Main = 5,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ECommunityItemClass
+    {
+        k_ECommunityItemClass_Invalid = 0,
+        k_ECommunityItemClass_Badge = 1,
+        k_ECommunityItemClass_GameCard = 2,
+        k_ECommunityItemClass_ProfileBackground = 3,
+        k_ECommunityItemClass_Emoticon = 4,
+        k_ECommunityItemClass_BoosterPack = 5,
+        k_ECommunityItemClass_Consumable = 6,
+        k_ECommunityItemClass_GameGoo = 7,
+        k_ECommunityItemClass_ProfileModifier = 8,
+        k_ECommunityItemClass_Scene = 9,
+        k_ECommunityItemClass_SalienItem = 10,
+        k_ECommunityItemClass_Sticker = 11,
+        k_ECommunityItemClass_ChatEffect = 12,
+        k_ECommunityItemClass_MiniProfileBackground = 13,
+        k_ECommunityItemClass_AvatarFrame = 14,
+        k_ECommunityItemClass_AnimatedAvatar = 15,
+        k_ECommunityItemClass_SteamDeckKeyboardSkin = 16,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESteamDeckCompatibilityFeedback
+    {
+        k_ESteamDeckCompatibilityFeedback_Unset = 0,
+        k_ESteamDeckCompatibilityFeedback_Agree = 1,
+        k_ESteamDeckCompatibilityFeedback_Disagree = 2,
+        k_ESteamDeckCompatibilityFeedback_Ignore = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EProvideDeckFeedbackPreference
+    {
+        k_EProvideDeckFeedbackPreference_Unset = 0,
+        k_EProvideDeckFeedbackPreference_Yes = 1,
+        k_EProvideDeckFeedbackPreference_No = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ETouchGesture
+    {
+        k_ETouchGestureNone = 0,
+        k_ETouchGestureTouch = 1,
+        k_ETouchGestureTap = 2,
+        k_ETouchGestureDoubleTap = 3,
+        k_ETouchGestureShortPress = 4,
+        k_ETouchGestureLongPress = 5,
+        k_ETouchGestureLongTap = 6,
+        k_ETouchGestureTwoFingerTap = 7,
+        k_ETouchGestureTapCancelled = 8,
+        k_ETouchGesturePinchBegin = 9,
+        k_ETouchGesturePinchUpdate = 10,
+        k_ETouchGesturePinchEnd = 11,
+        k_ETouchGestureFlingStart = 12,
+        k_ETouchGestureFlingCancelled = 13,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESessionPersistence
+    {
+        k_ESessionPersistence_Invalid = -1,
+        k_ESessionPersistence_Ephemeral = 0,
+        k_ESessionPersistence_Persistent = 1,
     }
 
 }

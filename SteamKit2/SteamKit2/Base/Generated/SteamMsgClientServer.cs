@@ -552,6 +552,16 @@ namespace SteamKit2.Internal
         public void Resetcloud_gaming_platform() => __pbn__cloud_gaming_platform = null;
         private uint? __pbn__cloud_gaming_platform;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool recent_reauthentication
+        {
+            get => __pbn__recent_reauthentication.GetValueOrDefault();
+            set => __pbn__recent_reauthentication = value;
+        }
+        public bool ShouldSerializerecent_reauthentication() => __pbn__recent_reauthentication != null;
+        public void Resetrecent_reauthentication() => __pbn__recent_reauthentication = null;
+        private bool? __pbn__recent_reauthentication;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class GamePlayed : global::ProtoBuf.IExtensible
         {
@@ -812,6 +822,69 @@ namespace SteamKit2.Internal
             public bool ShouldSerializegame_os_platform() => __pbn__game_os_platform != null;
             public void Resetgame_os_platform() => __pbn__game_os_platform = null;
             private int? __pbn__game_os_platform;
+
+            [global::ProtoBuf.ProtoMember(26)]
+            public uint game_build_id
+            {
+                get => __pbn__game_build_id.GetValueOrDefault();
+                set => __pbn__game_build_id = value;
+            }
+            public bool ShouldSerializegame_build_id() => __pbn__game_build_id != null;
+            public void Resetgame_build_id() => __pbn__game_build_id = null;
+            private uint? __pbn__game_build_id;
+
+            [global::ProtoBuf.ProtoMember(27)]
+            [global::System.ComponentModel.DefaultValue(0)]
+            public uint compat_tool_id
+            {
+                get => __pbn__compat_tool_id ?? 0;
+                set => __pbn__compat_tool_id = value;
+            }
+            public bool ShouldSerializecompat_tool_id() => __pbn__compat_tool_id != null;
+            public void Resetcompat_tool_id() => __pbn__compat_tool_id = null;
+            private uint? __pbn__compat_tool_id;
+
+            [global::ProtoBuf.ProtoMember(28)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string compat_tool_cmd
+            {
+                get => __pbn__compat_tool_cmd ?? "";
+                set => __pbn__compat_tool_cmd = value;
+            }
+            public bool ShouldSerializecompat_tool_cmd() => __pbn__compat_tool_cmd != null;
+            public void Resetcompat_tool_cmd() => __pbn__compat_tool_cmd = null;
+            private string __pbn__compat_tool_cmd;
+
+            [global::ProtoBuf.ProtoMember(29)]
+            public uint compat_tool_build_id
+            {
+                get => __pbn__compat_tool_build_id.GetValueOrDefault();
+                set => __pbn__compat_tool_build_id = value;
+            }
+            public bool ShouldSerializecompat_tool_build_id() => __pbn__compat_tool_build_id != null;
+            public void Resetcompat_tool_build_id() => __pbn__compat_tool_build_id = null;
+            private uint? __pbn__compat_tool_build_id;
+
+            [global::ProtoBuf.ProtoMember(30)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string beta_name
+            {
+                get => __pbn__beta_name ?? "";
+                set => __pbn__beta_name = value;
+            }
+            public bool ShouldSerializebeta_name() => __pbn__beta_name != null;
+            public void Resetbeta_name() => __pbn__beta_name = null;
+            private string __pbn__beta_name;
+
+            [global::ProtoBuf.ProtoMember(31)]
+            public uint dlc_context
+            {
+                get => __pbn__dlc_context.GetValueOrDefault();
+                set => __pbn__dlc_context = value;
+            }
+            public bool ShouldSerializedlc_context() => __pbn__dlc_context != null;
+            public void Resetdlc_context() => __pbn__dlc_context = null;
+            private uint? __pbn__dlc_context;
 
         }
 
@@ -1599,6 +1672,46 @@ namespace SteamKit2.Internal
             public bool ShouldSerializecount_bad_cms() => __pbn__count_bad_cms != null;
             public void Resetcount_bad_cms() => __pbn__count_bad_cms = null;
             private uint? __pbn__count_bad_cms;
+
+            [global::ProtoBuf.ProtoMember(8)]
+            public bool no_udp_connectivity
+            {
+                get => __pbn__no_udp_connectivity.GetValueOrDefault();
+                set => __pbn__no_udp_connectivity = value;
+            }
+            public bool ShouldSerializeno_udp_connectivity() => __pbn__no_udp_connectivity != null;
+            public void Resetno_udp_connectivity() => __pbn__no_udp_connectivity = null;
+            private bool? __pbn__no_udp_connectivity;
+
+            [global::ProtoBuf.ProtoMember(9)]
+            public bool no_tcp_connectivity
+            {
+                get => __pbn__no_tcp_connectivity.GetValueOrDefault();
+                set => __pbn__no_tcp_connectivity = value;
+            }
+            public bool ShouldSerializeno_tcp_connectivity() => __pbn__no_tcp_connectivity != null;
+            public void Resetno_tcp_connectivity() => __pbn__no_tcp_connectivity = null;
+            private bool? __pbn__no_tcp_connectivity;
+
+            [global::ProtoBuf.ProtoMember(10)]
+            public bool no_websocket_443_connectivity
+            {
+                get => __pbn__no_websocket_443_connectivity.GetValueOrDefault();
+                set => __pbn__no_websocket_443_connectivity = value;
+            }
+            public bool ShouldSerializeno_websocket_443_connectivity() => __pbn__no_websocket_443_connectivity != null;
+            public void Resetno_websocket_443_connectivity() => __pbn__no_websocket_443_connectivity = null;
+            private bool? __pbn__no_websocket_443_connectivity;
+
+            [global::ProtoBuf.ProtoMember(11)]
+            public bool no_websocket_non_443_connectivity
+            {
+                get => __pbn__no_websocket_non_443_connectivity.GetValueOrDefault();
+                set => __pbn__no_websocket_non_443_connectivity = value;
+            }
+            public bool ShouldSerializeno_websocket_non_443_connectivity() => __pbn__no_websocket_non_443_connectivity != null;
+            public void Resetno_websocket_non_443_connectivity() => __pbn__no_websocket_non_443_connectivity = null;
+            private bool? __pbn__no_websocket_non_443_connectivity;
 
         }
 

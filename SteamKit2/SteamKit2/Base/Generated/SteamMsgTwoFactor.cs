@@ -242,6 +242,17 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public global::System.Collections.Generic.List<string> http_headers { get; } = new global::System.Collections.Generic.List<string>();
 
+        [global::ProtoBuf.ProtoMember(8)]
+        [global::System.ComponentModel.DefaultValue(1)]
+        public uint version
+        {
+            get => __pbn__version ?? 1;
+            set => __pbn__version = value;
+        }
+        public bool ShouldSerializeversion() => __pbn__version != null;
+        public void Resetversion() => __pbn__version = null;
+        private uint? __pbn__version;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -355,6 +366,17 @@ namespace SteamKit2.Internal
         public void Resetstatus() => __pbn__status = null;
         private int? __pbn__status;
 
+        [global::ProtoBuf.ProtoMember(11)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string phone_number_hint
+        {
+            get => __pbn__phone_number_hint ?? "";
+            set => __pbn__phone_number_hint = value;
+        }
+        public bool ShouldSerializephone_number_hint() => __pbn__phone_number_hint != null;
+        public void Resetphone_number_hint() => __pbn__phone_number_hint = null;
+        private string __pbn__phone_number_hint;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -457,6 +479,16 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public global::System.Collections.Generic.List<string> http_headers { get; } = new global::System.Collections.Generic.List<string>();
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool validate_sms_code
+        {
+            get => __pbn__validate_sms_code.GetValueOrDefault();
+            set => __pbn__validate_sms_code = value;
+        }
+        public bool ShouldSerializevalidate_sms_code() => __pbn__validate_sms_code != null;
+        public void Resetvalidate_sms_code() => __pbn__validate_sms_code = null;
+        private bool? __pbn__validate_sms_code;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -505,6 +537,54 @@ namespace SteamKit2.Internal
         public bool ShouldSerializestatus() => __pbn__status != null;
         public void Resetstatus() => __pbn__status = null;
         private int? __pbn__status;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CTwoFactor_UpdateTokenVersion_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint version
+        {
+            get => __pbn__version.GetValueOrDefault();
+            set => __pbn__version = value;
+        }
+        public bool ShouldSerializeversion() => __pbn__version != null;
+        public void Resetversion() => __pbn__version = null;
+        private uint? __pbn__version;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public byte[] signature
+        {
+            get => __pbn__signature;
+            set => __pbn__signature = value;
+        }
+        public bool ShouldSerializesignature() => __pbn__signature != null;
+        public void Resetsignature() => __pbn__signature = null;
+        private byte[] __pbn__signature;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CTwoFactor_UpdateTokenVersion_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
     }
 
@@ -696,16 +776,232 @@ namespace SteamKit2.Internal
 
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool success
+        {
+            get => __pbn__success.GetValueOrDefault();
+            set => __pbn__success = value;
+        }
+        public bool ShouldSerializesuccess() => __pbn__success != null;
+        public void Resetsuccess() => __pbn__success = null;
+        private bool? __pbn__success;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string sms_code
+        {
+            get => __pbn__sms_code ?? "";
+            set => __pbn__sms_code = value;
+        }
+        public bool ShouldSerializesms_code() => __pbn__sms_code != null;
+        public void Resetsms_code() => __pbn__sms_code = null;
+        private string __pbn__sms_code;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool generate_new_token
+        {
+            get => __pbn__generate_new_token.GetValueOrDefault();
+            set => __pbn__generate_new_token = value;
+        }
+        public bool ShouldSerializegenerate_new_token() => __pbn__generate_new_token != null;
+        public void Resetgenerate_new_token() => __pbn__generate_new_token = null;
+        private bool? __pbn__generate_new_token;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CRemoveAuthenticatorViaChallengeContinue_Replacement_Token : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public byte[] shared_secret
+        {
+            get => __pbn__shared_secret;
+            set => __pbn__shared_secret = value;
+        }
+        public bool ShouldSerializeshared_secret() => __pbn__shared_secret != null;
+        public void Resetshared_secret() => __pbn__shared_secret = null;
+        private byte[] __pbn__shared_secret;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong serial_number
+        {
+            get => __pbn__serial_number.GetValueOrDefault();
+            set => __pbn__serial_number = value;
+        }
+        public bool ShouldSerializeserial_number() => __pbn__serial_number != null;
+        public void Resetserial_number() => __pbn__serial_number = null;
+        private ulong? __pbn__serial_number;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string revocation_code
+        {
+            get => __pbn__revocation_code ?? "";
+            set => __pbn__revocation_code = value;
+        }
+        public bool ShouldSerializerevocation_code() => __pbn__revocation_code != null;
+        public void Resetrevocation_code() => __pbn__revocation_code = null;
+        private string __pbn__revocation_code;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string uri
+        {
+            get => __pbn__uri ?? "";
+            set => __pbn__uri = value;
+        }
+        public bool ShouldSerializeuri() => __pbn__uri != null;
+        public void Reseturi() => __pbn__uri = null;
+        private string __pbn__uri;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public ulong server_time
+        {
+            get => __pbn__server_time.GetValueOrDefault();
+            set => __pbn__server_time = value;
+        }
+        public bool ShouldSerializeserver_time() => __pbn__server_time != null;
+        public void Resetserver_time() => __pbn__server_time = null;
+        private ulong? __pbn__server_time;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string account_name
+        {
+            get => __pbn__account_name ?? "";
+            set => __pbn__account_name = value;
+        }
+        public bool ShouldSerializeaccount_name() => __pbn__account_name != null;
+        public void Resetaccount_name() => __pbn__account_name = null;
+        private string __pbn__account_name;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string token_gid
+        {
+            get => __pbn__token_gid ?? "";
+            set => __pbn__token_gid = value;
+        }
+        public bool ShouldSerializetoken_gid() => __pbn__token_gid != null;
+        public void Resettoken_gid() => __pbn__token_gid = null;
+        private string __pbn__token_gid;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public byte[] identity_secret
+        {
+            get => __pbn__identity_secret;
+            set => __pbn__identity_secret = value;
+        }
+        public bool ShouldSerializeidentity_secret() => __pbn__identity_secret != null;
+        public void Resetidentity_secret() => __pbn__identity_secret = null;
+        private byte[] __pbn__identity_secret;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public byte[] secret_1
+        {
+            get => __pbn__secret_1;
+            set => __pbn__secret_1 = value;
+        }
+        public bool ShouldSerializesecret_1() => __pbn__secret_1 != null;
+        public void Resetsecret_1() => __pbn__secret_1 = null;
+        private byte[] __pbn__secret_1;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public int status
+        {
+            get => __pbn__status.GetValueOrDefault();
+            set => __pbn__status = value;
+        }
+        public bool ShouldSerializestatus() => __pbn__status != null;
+        public void Resetstatus() => __pbn__status = null;
+        private int? __pbn__status;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public uint steamguard_scheme
+        {
+            get => __pbn__steamguard_scheme.GetValueOrDefault();
+            set => __pbn__steamguard_scheme = value;
+        }
+        public bool ShouldSerializesteamguard_scheme() => __pbn__steamguard_scheme != null;
+        public void Resetsteamguard_scheme() => __pbn__steamguard_scheme = null;
+        private uint? __pbn__steamguard_scheme;
+
+        [global::ProtoBuf.ProtoMember(12, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool success
+        {
+            get => __pbn__success.GetValueOrDefault();
+            set => __pbn__success = value;
+        }
+        public bool ShouldSerializesuccess() => __pbn__success != null;
+        public void Resetsuccess() => __pbn__success = null;
+        private bool? __pbn__success;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CRemoveAuthenticatorViaChallengeContinue_Replacement_Token replacement_token { get; set; }
+
+    }
+
     public interface ITwoFactor
     {
         CTwoFactor_Status_Response QueryStatus(CTwoFactor_Status_Request request);
         CTwoFactor_AddAuthenticator_Response AddAuthenticator(CTwoFactor_AddAuthenticator_Request request);
         CTwoFactor_SendEmail_Response SendEmail(CTwoFactor_SendEmail_Request request);
         CTwoFactor_FinalizeAddAuthenticator_Response FinalizeAddAuthenticator(CTwoFactor_FinalizeAddAuthenticator_Request request);
+        CTwoFactor_UpdateTokenVersion_Response UpdateTokenVersion(CTwoFactor_UpdateTokenVersion_Request request);
         CTwoFactor_RemoveAuthenticator_Response RemoveAuthenticator(CTwoFactor_RemoveAuthenticator_Request request);
         CTwoFactor_CreateEmergencyCodes_Response CreateEmergencyCodes(CTwoFactor_CreateEmergencyCodes_Request request);
         CTwoFactor_DestroyEmergencyCodes_Response DestroyEmergencyCodes(CTwoFactor_DestroyEmergencyCodes_Request request);
         CTwoFactor_ValidateToken_Response ValidateToken(CTwoFactor_ValidateToken_Request request);
+        CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response RemoveAuthenticatorViaChallengeStart(CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request request);
+        CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response RemoveAuthenticatorViaChallengeContinue(CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request request);
     }
 
 }

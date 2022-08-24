@@ -302,6 +302,38 @@ namespace SteamKit2.Internal
         public void Resetmanifestid() => __pbn__manifestid = null;
         private ulong? __pbn__manifestid;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string gpu_desc
+        {
+            get => __pbn__gpu_desc ?? "";
+            set => __pbn__gpu_desc = value;
+        }
+        public bool ShouldSerializegpu_desc() => __pbn__gpu_desc != null;
+        public void Resetgpu_desc() => __pbn__gpu_desc = null;
+        private string __pbn__gpu_desc;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string driver_desc
+        {
+            get => __pbn__driver_desc ?? "";
+            set => __pbn__driver_desc = value;
+        }
+        public bool ShouldSerializedriver_desc() => __pbn__driver_desc != null;
+        public void Resetdriver_desc() => __pbn__driver_desc = null;
+        private string __pbn__driver_desc;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public byte[] depot_encryption_key
+        {
+            get => __pbn__depot_encryption_key;
+            set => __pbn__depot_encryption_key = value;
+        }
+        public bool ShouldSerializedepot_encryption_key() => __pbn__depot_encryption_key != null;
+        public void Resetdepot_encryption_key() => __pbn__depot_encryption_key = null;
+        private byte[] __pbn__depot_encryption_key;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -192,109 +192,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientToGCPrivateChatInfoRequest : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string private_chat_channel_name
-        {
-            get => __pbn__private_chat_channel_name ?? "";
-            set => __pbn__private_chat_channel_name = value;
-        }
-        public bool ShouldSerializeprivate_chat_channel_name() => __pbn__private_chat_channel_name != null;
-        public void Resetprivate_chat_channel_name() => __pbn__private_chat_channel_name = null;
-        private string __pbn__private_chat_channel_name;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGCToClientPrivateChatInfoResponse : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string private_chat_channel_name
-        {
-            get => __pbn__private_chat_channel_name ?? "";
-            set => __pbn__private_chat_channel_name = value;
-        }
-        public bool ShouldSerializeprivate_chat_channel_name() => __pbn__private_chat_channel_name != null;
-        public void Resetprivate_chat_channel_name() => __pbn__private_chat_channel_name = null;
-        private string __pbn__private_chat_channel_name;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<Member> members { get; } = new global::System.Collections.Generic.List<Member>();
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public uint creator
-        {
-            get => __pbn__creator.GetValueOrDefault();
-            set => __pbn__creator = value;
-        }
-        public bool ShouldSerializecreator() => __pbn__creator != null;
-        public void Resetcreator() => __pbn__creator = null;
-        private uint? __pbn__creator;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public uint creation_date
-        {
-            get => __pbn__creation_date.GetValueOrDefault();
-            set => __pbn__creation_date = value;
-        }
-        public bool ShouldSerializecreation_date() => __pbn__creation_date != null;
-        public void Resetcreation_date() => __pbn__creation_date = null;
-        private uint? __pbn__creation_date;
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class Member : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint account_id
-            {
-                get => __pbn__account_id.GetValueOrDefault();
-                set => __pbn__account_id = value;
-            }
-            public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
-            public void Resetaccount_id() => __pbn__account_id = null;
-            private uint? __pbn__account_id;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string name
-            {
-                get => __pbn__name ?? "";
-                set => __pbn__name = value;
-            }
-            public bool ShouldSerializename() => __pbn__name != null;
-            public void Resetname() => __pbn__name = null;
-            private string __pbn__name;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public uint status
-            {
-                get => __pbn__status.GetValueOrDefault();
-                set => __pbn__status = value;
-            }
-            public bool ShouldSerializestatus() => __pbn__status != null;
-            public void Resetstatus() => __pbn__status = null;
-            private uint? __pbn__status;
-
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgDOTAJoinChatChannel : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -380,25 +277,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializechannel_user_id() => __pbn__channel_user_id != null;
         public void Resetchannel_user_id() => __pbn__channel_user_id = null;
         private uint? __pbn__channel_user_id;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgDOTAClientIgnoredUser : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint ignored_account_id
-        {
-            get => __pbn__ignored_account_id.GetValueOrDefault();
-            set => __pbn__ignored_account_id = value;
-        }
-        public bool ShouldSerializeignored_account_id() => __pbn__ignored_account_id != null;
-        public void Resetignored_account_id() => __pbn__ignored_account_id = null;
-        private uint? __pbn__ignored_account_id;
 
     }
 
@@ -1092,28 +970,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgDOTAChatChannelFullUpdate : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong channel_id
-        {
-            get => __pbn__channel_id.GetValueOrDefault();
-            set => __pbn__channel_id = value;
-        }
-        public bool ShouldSerializechannel_id() => __pbn__channel_id != null;
-        public void Resetchannel_id() => __pbn__channel_id = null;
-        private ulong? __pbn__channel_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<CMsgDOTAChatMember> members { get; } = new global::System.Collections.Generic.List<CMsgDOTAChatMember>();
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgDOTAOtherJoinedChatChannel : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1213,81 +1069,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgDOTAChatChannelMemberUpdate : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong channel_id
-        {
-            get => __pbn__channel_id.GetValueOrDefault();
-            set => __pbn__channel_id = value;
-        }
-        public bool ShouldSerializechannel_id() => __pbn__channel_id != null;
-        public void Resetchannel_id() => __pbn__channel_id = null;
-        private ulong? __pbn__channel_id;
-
-        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public global::System.Collections.Generic.List<ulong> left_steam_ids { get; } = new global::System.Collections.Generic.List<ulong>();
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public global::System.Collections.Generic.List<JoinedMember> joined_members { get; } = new global::System.Collections.Generic.List<JoinedMember>();
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class JoinedMember : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-            public ulong steam_id
-            {
-                get => __pbn__steam_id.GetValueOrDefault();
-                set => __pbn__steam_id = value;
-            }
-            public bool ShouldSerializesteam_id() => __pbn__steam_id != null;
-            public void Resetsteam_id() => __pbn__steam_id = null;
-            private ulong? __pbn__steam_id;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string persona_name
-            {
-                get => __pbn__persona_name ?? "";
-                set => __pbn__persona_name = value;
-            }
-            public bool ShouldSerializepersona_name() => __pbn__persona_name != null;
-            public void Resetpersona_name() => __pbn__persona_name = null;
-            private string __pbn__persona_name;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public uint channel_user_id
-            {
-                get => __pbn__channel_user_id.GetValueOrDefault();
-                set => __pbn__channel_user_id = value;
-            }
-            public bool ShouldSerializechannel_user_id() => __pbn__channel_user_id != null;
-            public void Resetchannel_user_id() => __pbn__channel_user_id = null;
-            private uint? __pbn__channel_user_id;
-
-            [global::ProtoBuf.ProtoMember(4)]
-            public uint status
-            {
-                get => __pbn__status.GetValueOrDefault();
-                set => __pbn__status = value;
-            }
-            public bool ShouldSerializestatus() => __pbn__status != null;
-            public void Resetstatus() => __pbn__status = null;
-            private uint? __pbn__status;
-
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgDOTARequestChatChannelList : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1346,25 +1127,6 @@ namespace SteamKit2.GC.Dota.Internal
             private DOTAChatChannelType_t? __pbn__channel_type;
 
         }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgDOTAChatGetUserList : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong channel_id
-        {
-            get => __pbn__channel_id.GetValueOrDefault();
-            set => __pbn__channel_id = value;
-        }
-        public bool ShouldSerializechannel_id() => __pbn__channel_id != null;
-        public void Resetchannel_id() => __pbn__channel_id = null;
-        private ulong? __pbn__channel_id;
 
     }
 

@@ -271,16 +271,6 @@ namespace SteamKit2.Internal
         public void Resetrevision() => __pbn__revision = null;
         private uint? __pbn__revision;
 
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong steam_id_gs
-        {
-            get => __pbn__steam_id_gs.GetValueOrDefault();
-            set => __pbn__steam_id_gs = value;
-        }
-        public bool ShouldSerializesteam_id_gs() => __pbn__steam_id_gs != null;
-        public void Resetsteam_id_gs() => __pbn__steam_id_gs = null;
-        private ulong? __pbn__steam_id_gs;
-
         [global::ProtoBuf.ProtoMember(3)]
         public uint query_port
         {
@@ -353,6 +343,17 @@ namespace SteamKit2.Internal
         public bool ShouldSerializefake_ip() => __pbn__fake_ip != null;
         public void Resetfake_ip() => __pbn__fake_ip = null;
         private uint? __pbn__fake_ip;
+
+        [global::ProtoBuf.ProtoMember(30)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string sdr_ping_location
+        {
+            get => __pbn__sdr_ping_location ?? "";
+            set => __pbn__sdr_ping_location = value;
+        }
+        public bool ShouldSerializesdr_ping_location() => __pbn__sdr_ping_location != null;
+        public void Resetsdr_ping_location() => __pbn__sdr_ping_location = null;
+        private string __pbn__sdr_ping_location;
 
         [global::ProtoBuf.ProtoMember(6)]
         public uint app_id
@@ -731,6 +732,17 @@ namespace SteamKit2.Internal
             public bool ShouldSerializesdr_popid() => __pbn__sdr_popid != null;
             public void Resetsdr_popid() => __pbn__sdr_popid = null;
             private uint? __pbn__sdr_popid;
+
+            [global::ProtoBuf.ProtoMember(32)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string sdr_ping_location
+            {
+                get => __pbn__sdr_ping_location ?? "";
+                set => __pbn__sdr_ping_location = value;
+            }
+            public bool ShouldSerializesdr_ping_location() => __pbn__sdr_ping_location != null;
+            public void Resetsdr_ping_location() => __pbn__sdr_ping_location = null;
+            private string __pbn__sdr_ping_location;
 
             [global::ProtoBuf.ProtoMember(11)]
             public uint flags
