@@ -119,8 +119,8 @@ namespace SteamKit2
                 this.Result = ( EResult )resp.eresult;
                 this.ExtendedResult = ( EResult )resp.eresult_extended;
 
-                this.OutOfGameSecsPerHeartbeat = resp.out_of_game_heartbeat_seconds;
-                this.InGameSecsPerHeartbeat = resp.in_game_heartbeat_seconds;
+                this.OutOfGameSecsPerHeartbeat = resp.legacy_out_of_game_heartbeat_seconds;
+                this.InGameSecsPerHeartbeat = resp.heartbeat_seconds;
 
                 this.PublicIP = resp.public_ip?.GetIPAddress();
 
