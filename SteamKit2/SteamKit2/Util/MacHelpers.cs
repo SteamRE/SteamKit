@@ -99,7 +99,7 @@ namespace SteamKit2.Util.MacHelpers
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern CFTypeRef CFStringCreateWithCString(CFTypeRef allocator, string cStr, CFStringEncoding encoding);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         [return:MarshalAs(UnmanagedType.U1)]
         public static extern bool CFStringGetCString(CFTypeRef theString, StringBuilder buffer, long bufferSize, CFStringEncoding encoding);
 
