@@ -169,7 +169,8 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof( message ) );
             }
 
-            var msg = new ClientMsgProtobuf<TRequest>( EMsg.ServiceMethodCallFromClient );
+            var eMsg = Client.SteamID == null ? EMsg.ServiceMethodCallFromClientNonAuthed : EMsg.ServiceMethodCallFromClient;
+            var msg = new ClientMsgProtobuf<TRequest>( eMsg );
             msg.SourceJobID = Client.GetNextJobID();
             msg.Header.Proto.target_job_name = name;
             msg.Body = message;
@@ -194,7 +195,8 @@ namespace SteamKit2
 
             // Notifications do not set source jobid, otherwise Steam server will actively reject this message
             // if the method being used is a "Notification"
-            var msg = new ClientMsgProtobuf<TRequest>( EMsg.ServiceMethodCallFromClient );
+            var eMsg = Client.SteamID == null ? EMsg.ServiceMethodCallFromClientNonAuthed : EMsg.ServiceMethodCallFromClient;
+            var msg = new ClientMsgProtobuf<TRequest>( eMsg );
             msg.Header.Proto.target_job_name = name;
             msg.Body = message;
             Client.Send( msg );
