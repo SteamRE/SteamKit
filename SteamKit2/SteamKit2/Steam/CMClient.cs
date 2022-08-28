@@ -396,6 +396,10 @@ namespace SteamKit2.Internal
         /// </summary>
         protected virtual void OnClientConnected()
         {
+            var request = new ClientMsgProtobuf<CMsgClientHello>( EMsg.ClientHello );
+            request.Body.protocol_version = MsgClientLogon.CurrentProtocol;
+
+            Send( request );
         }
         /// <summary>
         /// Called when the client is physically disconnected from Steam3.
