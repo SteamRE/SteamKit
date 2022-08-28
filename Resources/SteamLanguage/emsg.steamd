@@ -70,6 +70,7 @@ enum EMsg
 	UpdateScheduledTaskEnableState_TEST = 244;
 	UpdateScheduledTaskEnableStateResponse_TEST = 245;
 	ContentDescriptionDeltaUpdate = 246;
+	GMShellAndServerAddressUpdates = 247;
 
 	BaseGM = 300;
 	Heartbeat = 300;
@@ -100,6 +101,7 @@ enum EMsg
 	GMTestNextBuildSchemaConversionResponse = 335;
 	ExpectShellRestart = 336;
 	HotFixProgress = 337;
+	GMStatsForwardToAdminConnections = 338;
 
 	BaseAIS = 400;
 	AISRefreshContentDescription = 401; removed
@@ -705,6 +707,12 @@ enum EMsg
 	GCHAccountPhoneNumberChange = 2236;
 	GCHAccountTwoFactorChange = 2237;
 	GCHInviteUserToLobby = 2238;
+	GCHUpdateMultipleSessions = 2239;
+	GCHMarkAppSessionsAuthoritative = 2240;
+	GCHRecurringSubscriptionStatusChange = 2241;
+	GCHAppCheersReceived = 2242;
+	GCHAppCheersGetAllowedTypes = 2243;
+	GCHAppCheersGetAllowedTypesResponse = 2244;
 
 	BaseP2P = 2500;
 	P2PIntroducerMessage = 2502;
@@ -1222,6 +1230,8 @@ enum EMsg
 	AMRequestPersonaUpdateForChatServer = 4420;
 	AMPerfectWorldPayment = 4421;
 	AMPerfectWorldPaymentResponse = 4422;
+	AMECommPayPayment = 4423;
+	AMECommPayPaymentResponse = 4424;
 
 	BasePSRange = 5000;
 	PSCreateShoppingCart = 5001;
@@ -1987,6 +1997,8 @@ enum EMsg
 	ClientVoiceCallPreAuthorizeResponse = 9801;
 	ClientServerTimestampRequest = 9802;
 	ClientServerTimestampResponse = 9803;
+	ServiceMethodCallFromClientNonAuthed = 9804;
+	ClientHello = 9805;
 
 	ClientLANP2PBase = 9900;
 	ClientLANP2PRequestChunk = 9900;
