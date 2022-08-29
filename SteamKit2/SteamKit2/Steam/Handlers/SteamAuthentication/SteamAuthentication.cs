@@ -78,6 +78,13 @@ namespace SteamKit2
             public string? WebsiteID { get; set; }
         }
 
+        public class AuthComplete
+        {
+            public string AccountName { get; set; }
+            public string RefreshToken { get; set; }
+            public string AccessToken { get; set; }
+        }
+
         public class BeginAuthSessionResponse
         {
             public ulong ClientID { get; set; }
@@ -96,7 +103,7 @@ namespace SteamKit2
             public SteamID SteamID { get; set; }
         }
 
-        public async Task StartPolling( BeginAuthSessionResponse baseResponse )
+        public async Task<AuthComplete> StartPolling( BeginAuthSessionResponse baseResponse )
         {
             // TODO: Sort by preferred methods?
             foreach ( var allowedConfirmation in baseResponse.AllowedConfirmations )
@@ -139,7 +146,16 @@ namespace SteamKit2
                 await Task.Delay( baseResponse.PollingInterval );
 
                 var pollResponse = await PollAuthSessionStatus( baseResponse );
-                var k = 1;
+
+                if ( pollResponse.refresh_token.Length > 0 )
+                {
+                    return new AuthComplete
+                    {
+                        AccessToken = pollResponse.access_token,
+                        RefreshToken = pollResponse.refresh_token,
+                        AccountName = pollResponse.account_name,
+                    };
+                }
             }
         }
 
@@ -157,6 +173,16 @@ namespace SteamKit2
             var response = message.GetDeserializedResponse<CAuthentication_PollAuthSessionStatus_Response>();
 
             // eresult can be Expired, FileNotFound, Fail
+
+            if ( response.new_client_id > 0 )
+            {
+                baseResponse.ClientID = response.new_client_id;
+            }
+
+            if ( baseResponse is QrBeginAuthSessionResponse qrResponse && response.new_challenge_url.Length > 0 )
+            {
+                qrResponse.ChallengeURL = response.new_challenge_url;
+            }
 
             return response;
         }
