@@ -74,6 +74,11 @@ namespace SteamKit2
             /// </summary>
             /// <value>The sentry file hash.</value>
             public byte[]? SentryFileHash { get; set; }
+            /// <summary>
+            /// Gets or sets the access token used to login. This a token that has been provided after a successful login using <see cref="SteamAuthentication"/>.
+            /// </summary>
+            /// <value>The access token.</value>
+            public string? AccessToken { get; set; }
 
             /// <summary>
             /// Gets or sets the account instance. 1 for the PC instance or 2 for the Console (PS3) instance.
@@ -295,7 +300,7 @@ namespace SteamKit2
             {
                 throw new ArgumentNullException( nameof( details ) );
             }
-            if ( string.IsNullOrEmpty( details.Username ) || ( string.IsNullOrEmpty( details.Password ) && string.IsNullOrEmpty( details.LoginKey ) ) )
+            if ( string.IsNullOrEmpty( details.Username ) || ( string.IsNullOrEmpty( details.Password ) && string.IsNullOrEmpty( details.LoginKey ) && string.IsNullOrEmpty( details.AccessToken ) ) )
             {
                 throw new ArgumentException( "LogOn requires a username and password to be set in 'details'." );
             }
@@ -360,6 +365,7 @@ namespace SteamKit2
             logon.Body.two_factor_code = details.TwoFactorCode;
 
             logon.Body.login_key = details.LoginKey;
+            logon.Body.access_token = details.AccessToken;
 
             logon.Body.sha_sentryfile = details.SentryFileHash;
             logon.Body.eresult_sentryfile = ( int )( details.SentryFileHash != null ? EResult.OK : EResult.FileNotFound );
