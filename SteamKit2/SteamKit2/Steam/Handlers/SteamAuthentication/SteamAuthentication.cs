@@ -76,6 +76,11 @@ namespace SteamKit2
             /// </summary>
             /// <value>The website id.</value>
             public string? WebsiteID { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            public IAuthenticator? Authenticator { get; set; }
         }
 
         public class AuthComplete
@@ -88,6 +93,7 @@ namespace SteamKit2
         public class AuthSession
         {
             public SteamClient Client { get; internal set; }
+            public IAuthenticator? Authenticator { get; set; }
             public ulong ClientID { get; set; }
             public byte[] RequestID { get; set; }
             public List<CAuthentication_AllowedConfirmation> AllowedConfirmations { get; set; }
@@ -106,13 +112,33 @@ namespace SteamKit2
                             break;
 
                         case EAuthSessionGuardType.k_EAuthSessionGuardType_EmailCode:
-                            // sent steam guard email at allowedConfirmation.associated_message
-                            // use SendSteamGuardCode
-                            break;
-
                         case EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceCode:
-                            // totp code from mobile app
-                            // use SendSteamGuardCode
+                            if( !( this is CredentialsAuthSession credentialsAuthSession ) )
+                            {
+                                throw new InvalidOperationException( $"Got {allowedConfirmation.confirmation_type} confirmation type in a session that is not {nameof(CredentialsAuthSession)}." );
+                            }
+
+                            if ( Authenticator == null )
+                            {
+                                throw new InvalidOperationException( $"This account requires an authenticator for login, but none was provided in {nameof( AuthSessionDetails )}." );
+                            }
+
+                            var task = allowedConfirmation.confirmation_type switch
+                            {
+                                EAuthSessionGuardType.k_EAuthSessionGuardType_EmailCode => Authenticator.ProvideEmailCode( allowedConfirmation.associated_message ),
+                                EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceCode => Authenticator.ProvideDeviceCode(),
+                                _ => throw new NotImplementedException(),
+                            };
+
+                            var code = await task;
+
+                            if ( string.IsNullOrEmpty( code ) )
+                            {
+                                throw new InvalidOperationException( "No code was provided by the authenticator." );
+                            }
+
+                            await credentialsAuthSession.SendSteamGuardCode( code, allowedConfirmation.confirmation_type );
+
                             break;
 
                         case EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceConfirmation:
@@ -132,6 +158,7 @@ namespace SteamKit2
 
                 while ( true )
                 {
+                    // TODO: Realistically we only need to poll for confirmation-based (like qr, or device confirm) types
                     // TODO: For guard type none we don't need delay
                     await Task.Delay( PollingInterval );
 
@@ -328,6 +355,7 @@ namespace SteamKit2
             var authResponse = new CredentialsAuthSession
             {
                 Client = Client,
+                Authenticator = details.Authenticator,
                 ClientID = response.client_id,
                 RequestID = response.request_id,
                 AllowedConfirmations = response.allowed_confirmations,
