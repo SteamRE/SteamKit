@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,7 +84,7 @@ namespace SteamKit2
             public IAuthenticator? Authenticator { get; set; }
         }
 
-        public class AuthComplete
+        public class AuthPollResult
         {
             public string AccountName { get; set; }
             public string RefreshToken { get; set; }
@@ -99,61 +100,80 @@ namespace SteamKit2
             public List<CAuthentication_AllowedConfirmation> AllowedConfirmations { get; set; }
             public TimeSpan PollingInterval { get; set; }
 
-            public async Task<AuthComplete> StartPolling()
+            public async Task<AuthPollResult> StartPolling()
             {
-                // TODO: Sort by preferred methods?
-                foreach ( var allowedConfirmation in AllowedConfirmations )
+                var pollLoop = false;
+                var preferredConfirmation = AllowedConfirmations.FirstOrDefault();
+
+                if ( preferredConfirmation == null || preferredConfirmation.confirmation_type == EAuthSessionGuardType.k_EAuthSessionGuardType_Unknown )
                 {
-                    switch ( allowedConfirmation.confirmation_type )
+                    throw new InvalidOperationException( "There are no allowed confirmations" );
+                }
+
+                switch ( preferredConfirmation.confirmation_type )
+                {
+                    case EAuthSessionGuardType.k_EAuthSessionGuardType_None:
+                        // no steam guard
+                        break;
+
+                    case EAuthSessionGuardType.k_EAuthSessionGuardType_EmailCode:
+                    case EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceCode:
+                        if ( !( this is CredentialsAuthSession credentialsAuthSession ) )
+                        {
+                            throw new InvalidOperationException( $"Got {preferredConfirmation.confirmation_type} confirmation type in a session that is not {nameof( CredentialsAuthSession )}." );
+                        }
+
+                        if ( Authenticator == null )
+                        {
+                            throw new InvalidOperationException( $"This account requires an authenticator for login, but none was provided in {nameof( AuthSessionDetails )}." );
+                        }
+
+                        var task = preferredConfirmation.confirmation_type switch
+                        {
+                            EAuthSessionGuardType.k_EAuthSessionGuardType_EmailCode => Authenticator.ProvideEmailCode( preferredConfirmation.associated_message ),
+                            EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceCode => Authenticator.ProvideDeviceCode(),
+                            _ => throw new NotImplementedException(),
+                        };
+
+                        var code = await task;
+
+                        if ( string.IsNullOrEmpty( code ) )
+                        {
+                            throw new InvalidOperationException( "No code was provided by the authenticator." );
+                        }
+
+                        await credentialsAuthSession.SendSteamGuardCode( code, preferredConfirmation.confirmation_type );
+
+                        break;
+
+                    case EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceConfirmation:
+                        // TODO: is this accept prompt that automatically appears in the mobile app?
+                        pollLoop = true;
+                        break;
+
+                    case EAuthSessionGuardType.k_EAuthSessionGuardType_EmailConfirmation:
+                        // TODO: what is this?
+                        pollLoop = true;
+                        break;
+
+                    case EAuthSessionGuardType.k_EAuthSessionGuardType_MachineToken:
+                        // ${u.De.LOGIN_BASE_URL}jwt/checkdevice - with steam machine guard cookie set
+                        throw new NotImplementedException( $"Machine token confirmation is not supported by SteamKit at the moment." );
+
+                    default:
+                        throw new NotImplementedException( $"Unsupported confirmation type {preferredConfirmation.confirmation_type}." );
+                }
+
+                if ( !pollLoop )
+                {
+                    var pollResponse = await PollAuthSessionStatus();
+
+                    if ( pollResponse == null )
                     {
-                        case EAuthSessionGuardType.k_EAuthSessionGuardType_None:
-                            // no steam guard
-                            // if we poll now we will get access token in response and send login to the cm
-                            break;
-
-                        case EAuthSessionGuardType.k_EAuthSessionGuardType_EmailCode:
-                        case EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceCode:
-                            if( !( this is CredentialsAuthSession credentialsAuthSession ) )
-                            {
-                                throw new InvalidOperationException( $"Got {allowedConfirmation.confirmation_type} confirmation type in a session that is not {nameof(CredentialsAuthSession)}." );
-                            }
-
-                            if ( Authenticator == null )
-                            {
-                                throw new InvalidOperationException( $"This account requires an authenticator for login, but none was provided in {nameof( AuthSessionDetails )}." );
-                            }
-
-                            var task = allowedConfirmation.confirmation_type switch
-                            {
-                                EAuthSessionGuardType.k_EAuthSessionGuardType_EmailCode => Authenticator.ProvideEmailCode( allowedConfirmation.associated_message ),
-                                EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceCode => Authenticator.ProvideDeviceCode(),
-                                _ => throw new NotImplementedException(),
-                            };
-
-                            var code = await task;
-
-                            if ( string.IsNullOrEmpty( code ) )
-                            {
-                                throw new InvalidOperationException( "No code was provided by the authenticator." );
-                            }
-
-                            await credentialsAuthSession.SendSteamGuardCode( code, allowedConfirmation.confirmation_type );
-
-                            break;
-
-                        case EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceConfirmation:
-                            // TODO: is this accept prompt that automatically appears in the mobile app?
-                            break;
-
-                        case EAuthSessionGuardType.k_EAuthSessionGuardType_EmailConfirmation:
-                            // TODO: what is this?
-                            break;
-
-                        case EAuthSessionGuardType.k_EAuthSessionGuardType_MachineToken:
-                            // ${u.De.LOGIN_BASE_URL}jwt/checkdevice - with steam machine guard cookie set
-                            break;
-
+                        throw new Exception( "Auth failed" );
                     }
+
+                    return pollResponse;
                 }
 
                 while ( true )
@@ -164,19 +184,14 @@ namespace SteamKit2
 
                     var pollResponse = await PollAuthSessionStatus();
 
-                    if ( pollResponse.refresh_token.Length > 0 )
+                    if( pollResponse != null )
                     {
-                        return new AuthComplete
-                        {
-                            AccessToken = pollResponse.access_token,
-                            RefreshToken = pollResponse.refresh_token,
-                            AccountName = pollResponse.account_name,
-                        };
+                        return pollResponse;
                     }
                 }
             }
 
-            public async Task<CAuthentication_PollAuthSessionStatus_Response> PollAuthSessionStatus()
+            public async Task<AuthPollResult?> PollAuthSessionStatus()
             {
                 var request = new CAuthentication_PollAuthSessionStatus_Request
                 {
@@ -187,9 +202,14 @@ namespace SteamKit2
                 var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
                 var contentService = unifiedMessages.CreateService<IAuthentication>();
                 var message = await contentService.SendMessage( api => api.PollAuthSessionStatus( request ) );
-                var response = message.GetDeserializedResponse<CAuthentication_PollAuthSessionStatus_Response>();
 
                 // eresult can be Expired, FileNotFound, Fail
+                if ( message.Result != EResult.OK )
+                {
+                    throw new Exception( $"Failed to poll with result {message.Result}" );
+                }
+
+                var response = message.GetDeserializedResponse<CAuthentication_PollAuthSessionStatus_Response>();
 
                 if ( response.new_client_id > 0 )
                 {
@@ -201,7 +221,17 @@ namespace SteamKit2
                     qrResponse.ChallengeURL = response.new_challenge_url;
                 }
 
-                return response;
+                if ( response.refresh_token.Length > 0 )
+                {
+                    return new AuthPollResult
+                    {
+                        AccessToken = response.access_token,
+                        RefreshToken = response.refresh_token,
+                        AccountName = response.account_name,
+                    };
+                }
+
+                return null;
             }
         }
 
@@ -290,7 +320,7 @@ namespace SteamKit2
                 Client = Client,
                 ClientID = response.client_id,
                 RequestID = response.request_id,
-                AllowedConfirmations = response.allowed_confirmations,
+                AllowedConfirmations = SortConfirmations( response.allowed_confirmations ),
                 PollingInterval = TimeSpan.FromSeconds( ( double )response.interval ),
                 ChallengeURL = response.challenge_url,
             };
@@ -358,7 +388,7 @@ namespace SteamKit2
                 Authenticator = details.Authenticator,
                 ClientID = response.client_id,
                 RequestID = response.request_id,
-                AllowedConfirmations = response.allowed_confirmations,
+                AllowedConfirmations = SortConfirmations( response.allowed_confirmations ),
                 PollingInterval = TimeSpan.FromSeconds( ( double )response.interval ),
                 SteamID = new SteamID( response.steamid ),
             };
@@ -373,6 +403,41 @@ namespace SteamKit2
         public override void HandleMsg( IPacketMsg packetMsg )
         {
             // not used
+        }
+
+        private static List<CAuthentication_AllowedConfirmation> SortConfirmations( List<CAuthentication_AllowedConfirmation> confirmations )
+        {
+            /*
+            valve's preferred order:
+            0. k_EAuthSessionGuardType_DeviceConfirmation = 4, poll
+            1. k_EAuthSessionGuardType_DeviceCode = 3, no poll
+            2. k_EAuthSessionGuardType_EmailCode = 2, no poll
+            3. k_EAuthSessionGuardType_None = 1, instant poll
+            4. k_EAuthSessionGuardType_Unknown = 0,
+            5. k_EAuthSessionGuardType_EmailConfirmation = 5, poll
+            k_EAuthSessionGuardType_MachineToken = 6, checkdevice then instant poll
+            */
+            var preferredConfirmationTypes = new EAuthSessionGuardType[]
+            {
+                EAuthSessionGuardType.k_EAuthSessionGuardType_None,
+                EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceConfirmation,
+                EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceCode,
+                EAuthSessionGuardType.k_EAuthSessionGuardType_EmailCode,
+                EAuthSessionGuardType.k_EAuthSessionGuardType_EmailConfirmation,
+                EAuthSessionGuardType.k_EAuthSessionGuardType_MachineToken,
+                EAuthSessionGuardType.k_EAuthSessionGuardType_Unknown,
+            };
+            var sortOrder = Enumerable.Range( 0, preferredConfirmationTypes.Length ).ToDictionary( x => preferredConfirmationTypes[ x ], x => x );
+
+            return confirmations.OrderBy( x =>
+            {
+                if( sortOrder.TryGetValue( x.confirmation_type, out var sortIndex ) )
+                {
+                    return sortIndex;
+                }
+
+                return int.MaxValue;
+            } ).ToList();
         }
     }
 }
