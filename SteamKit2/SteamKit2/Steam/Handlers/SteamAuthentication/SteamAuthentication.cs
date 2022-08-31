@@ -170,7 +170,7 @@ namespace SteamKit2
 
                     if ( pollResponse == null )
                     {
-                        throw new Exception( "Auth failed" );
+                        throw new AuthenticationException( "Auth failed", EResult.Fail );
                     }
 
                     return pollResponse;
@@ -184,7 +184,7 @@ namespace SteamKit2
 
                     var pollResponse = await PollAuthSessionStatus();
 
-                    if( pollResponse != null )
+                    if ( pollResponse != null )
                     {
                         return pollResponse;
                     }
@@ -206,7 +206,7 @@ namespace SteamKit2
                 // eresult can be Expired, FileNotFound, Fail
                 if ( message.Result != EResult.OK )
                 {
-                    throw new Exception( $"Failed to poll with result {message.Result}" );
+                    throw new AuthenticationException( "Failed to poll status", message.Result );
                 }
 
                 var response = message.GetDeserializedResponse<CAuthentication_PollAuthSessionStatus_Response>();
@@ -262,7 +262,7 @@ namespace SteamKit2
                 // can be InvalidLoginAuthCode, TwoFactorCodeMismatch, Expired
                 if ( message.Result != EResult.OK )
                 {
-                    throw new Exception( $"Failed to send steam guard code with result {message.Result}" );
+                    throw new AuthenticationException( "Failed to send steam guard code", message.Result );
                 }
             }
         }
@@ -284,7 +284,7 @@ namespace SteamKit2
 
             if ( message.Result != EResult.OK )
             {
-                throw new Exception( $"Failed to get password public key with result {message.Result}" );
+                throw new AuthenticationException( "Failed to get password public key", message.Result );
             }
 
             var response = message.GetDeserializedResponse<CAuthentication_GetPasswordRSAPublicKey_Response>();
@@ -310,7 +310,7 @@ namespace SteamKit2
 
             if ( message.Result != EResult.OK )
             {
-                throw new Exception( $"Failed to begin QR auth session with result {message.Result}" );
+                throw new AuthenticationException( "Failed to begin QR auth session", message.Result );
             }
 
             var response = message.GetDeserializedResponse<CAuthentication_BeginAuthSessionViaQR_Response>();
@@ -377,7 +377,7 @@ namespace SteamKit2
             // eresult can be InvalidPassword, ServiceUnavailable
             if ( message.Result != EResult.OK )
             {
-                throw new Exception( $"Authentication failed with result {message.Result}" );
+                throw new AuthenticationException( "Authentication failed", message.Result );
             }
 
             var response = message.GetDeserializedResponse<CAuthentication_BeginAuthSessionViaCredentials_Response>();
@@ -431,7 +431,7 @@ namespace SteamKit2
 
             return confirmations.OrderBy( x =>
             {
-                if( sortOrder.TryGetValue( x.confirmation_type, out var sortIndex ) )
+                if ( sortOrder.TryGetValue( x.confirmation_type, out var sortIndex ) )
                 {
                     return sortIndex;
                 }
