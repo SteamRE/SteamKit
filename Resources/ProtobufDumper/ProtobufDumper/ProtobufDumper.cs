@@ -738,7 +738,7 @@ namespace ProtobufDumper
                 var defaultValue = field.default_value;
 
                 if ( field.type == FieldDescriptorProto.Type.TYPE_STRING )
-                    defaultValue = $"\"{defaultValue}\"";
+                    defaultValue = Util.ToLiteral( defaultValue );
 
                 options.Add( "default", defaultValue );
             }
@@ -887,7 +887,7 @@ namespace ProtobufDumper
                 case FieldDescriptorProto.Type.TYPE_STRING:
                     if ( Extensible.TryGetValue( data, field.number, out string str ) )
                     {
-                        value = $"\"{str}\"";
+                        value = Util.ToLiteral( str );
                         return true;
                     }
                     break;
