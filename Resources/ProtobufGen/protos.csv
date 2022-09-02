@@ -1,5 +1,6 @@
 ProtoDir,ProtoFileName,ClassFilePath,Namespace
 steam,enums.proto,Enums.cs,SteamKit2.Internal
+steam,enums_productinfo.proto,EnumsProductInfo.cs,SteamKit2.Internal
 steam,content_manifest.proto,ContentManifest.cs,SteamKit2.Internal
 steam,clientmetrics.proto,ClientMetrics.cs,SteamKit2.Internal
 steam,encrypted_app_ticket.proto,SteamMsgAppTicket.cs,SteamKit2.Internal
@@ -39,6 +40,7 @@ steam,steammessages_inventory.steamclient.proto,SteamMsgInventory.cs,SteamKit2.I
 steam,steammessages_linkfilter.steamclient.proto,SteamMsgLinkFilter.cs,SteamKit2.Internal
 steam,steammessages_lobbymatchmaking.steamclient.proto,SteamMsgLobbyMatchmaking.cs,SteamKit2.Internal
 steam,steammessages_market.steamclient.proto,SteamMsgMarket.cs,SteamKit2.Internal
+steam,steammessages_marketingmessages.steamclient.proto,SteamMsgMarketingMessages.cs,SteamKit2.Internal
 steam,steammessages_offline.steamclient.proto,SteamMsgOffline.cs,SteamKit2.Internal
 steam,steammessages_parental.steamclient.proto,SteamMsgParental.cs,SteamKit2.Internal
 steam,steammessages_parties.steamclient.proto,SteamMsgParties.cs,SteamKit2.Internal
@@ -53,6 +55,7 @@ steam,steammessages_sitelicenseclient.proto,SteamMsgSiteLicenseClient.cs,SteamKi
 steam,steammessages_star.steamclient.proto,SteamMsgStar.cs,SteamKit2.Internal
 steam,steammessages_steamtv.steamclient.proto,SteamMsgSteamTV.cs,SteamKit2.Internal
 steam,steammessages_store.steamclient.proto,SteamMsgStore.cs,SteamKit2.Internal
+steam,steammessages_storebrowse.steamclient.proto,SteamMsgStoreBrowse.cs,SteamKit2.Internal
 steam,steammessages_timedtrial.steamclient.proto,SteamMsgTimedTrial.cs,SteamKit2.Internal
 steam,steammessages_twofactor.steamclient.proto,SteamMsgTwoFactor.cs,SteamKit2.Internal
 steam,steammessages_unified_base.steamclient.proto,SteamMsgUnifiedBase.cs,SteamKit2.Internal

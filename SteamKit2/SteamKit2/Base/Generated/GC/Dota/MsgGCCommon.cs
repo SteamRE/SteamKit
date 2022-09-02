@@ -10021,6 +10021,196 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgStickerbookSticker : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint item_def_id
+        {
+            get => __pbn__item_def_id.GetValueOrDefault();
+            set => __pbn__item_def_id = value;
+        }
+        public bool ShouldSerializeitem_def_id() => __pbn__item_def_id != null;
+        public void Resetitem_def_id() => __pbn__item_def_id = null;
+        private uint? __pbn__item_def_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint sticker_num
+        {
+            get => __pbn__sticker_num.GetValueOrDefault();
+            set => __pbn__sticker_num = value;
+        }
+        public bool ShouldSerializesticker_num() => __pbn__sticker_num != null;
+        public void Resetsticker_num() => __pbn__sticker_num = null;
+        private uint? __pbn__sticker_num;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint quality
+        {
+            get => __pbn__quality.GetValueOrDefault();
+            set => __pbn__quality = value;
+        }
+        public bool ShouldSerializequality() => __pbn__quality != null;
+        public void Resetquality() => __pbn__quality = null;
+        private uint? __pbn__quality;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public float position_x
+        {
+            get => __pbn__position_x.GetValueOrDefault();
+            set => __pbn__position_x = value;
+        }
+        public bool ShouldSerializeposition_x() => __pbn__position_x != null;
+        public void Resetposition_x() => __pbn__position_x = null;
+        private float? __pbn__position_x;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public float position_y
+        {
+            get => __pbn__position_y.GetValueOrDefault();
+            set => __pbn__position_y = value;
+        }
+        public bool ShouldSerializeposition_y() => __pbn__position_y != null;
+        public void Resetposition_y() => __pbn__position_y = null;
+        private float? __pbn__position_y;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public float position_z
+        {
+            get => __pbn__position_z.GetValueOrDefault();
+            set => __pbn__position_z = value;
+        }
+        public bool ShouldSerializeposition_z() => __pbn__position_z != null;
+        public void Resetposition_z() => __pbn__position_z = null;
+        private float? __pbn__position_z;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public float rotation
+        {
+            get => __pbn__rotation.GetValueOrDefault();
+            set => __pbn__rotation = value;
+        }
+        public bool ShouldSerializerotation() => __pbn__rotation != null;
+        public void Resetrotation() => __pbn__rotation = null;
+        private float? __pbn__rotation;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public float scale
+        {
+            get => __pbn__scale.GetValueOrDefault();
+            set => __pbn__scale = value;
+        }
+        public bool ShouldSerializescale() => __pbn__scale != null;
+        public void Resetscale() => __pbn__scale = null;
+        private float? __pbn__scale;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public ulong source_item_id
+        {
+            get => __pbn__source_item_id.GetValueOrDefault();
+            set => __pbn__source_item_id = value;
+        }
+        public bool ShouldSerializesource_item_id() => __pbn__source_item_id != null;
+        public void Resetsource_item_id() => __pbn__source_item_id = null;
+        private ulong? __pbn__source_item_id;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public uint depth_bias
+        {
+            get => __pbn__depth_bias.GetValueOrDefault();
+            set => __pbn__depth_bias = value;
+        }
+        public bool ShouldSerializedepth_bias() => __pbn__depth_bias != null;
+        public void Resetdepth_bias() => __pbn__depth_bias = null;
+        private uint? __pbn__depth_bias;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgStickerbookPage : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint page_num
+        {
+            get => __pbn__page_num.GetValueOrDefault();
+            set => __pbn__page_num = value;
+        }
+        public bool ShouldSerializepage_num() => __pbn__page_num != null;
+        public void Resetpage_num() => __pbn__page_num = null;
+        private uint? __pbn__page_num;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
+        public EEvent event_id
+        {
+            get => __pbn__event_id ?? EEvent.EVENT_ID_NONE;
+            set => __pbn__event_id = value;
+        }
+        public bool ShouldSerializeevent_id() => __pbn__event_id != null;
+        public void Resetevent_id() => __pbn__event_id = null;
+        private EEvent? __pbn__event_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint team_id
+        {
+            get => __pbn__team_id.GetValueOrDefault();
+            set => __pbn__team_id = value;
+        }
+        public bool ShouldSerializeteam_id() => __pbn__team_id != null;
+        public void Resetteam_id() => __pbn__team_id = null;
+        private uint? __pbn__team_id;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<CMsgStickerbookSticker> stickers { get; } = new global::System.Collections.Generic.List<CMsgStickerbookSticker>();
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue(EStickerbookPageType.STICKER_PAGE_GENERIC)]
+        public EStickerbookPageType page_type
+        {
+            get => __pbn__page_type ?? EStickerbookPageType.STICKER_PAGE_GENERIC;
+            set => __pbn__page_type = value;
+        }
+        public bool ShouldSerializepage_type() => __pbn__page_type != null;
+        public void Resetpage_type() => __pbn__page_type = null;
+        private EStickerbookPageType? __pbn__page_type;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgStickerbookTeamPageOrderSequence : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<uint> page_numbers { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgStickerbook : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CMsgStickerbookPage> pages { get; } = new global::System.Collections.Generic.List<CMsgStickerbookPage>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgStickerbookTeamPageOrderSequence team_page_order_sequence { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ESpecialPingValue
     {
         k_ESpecialPingValue_NoData = 16382,
@@ -10123,6 +10313,23 @@ namespace SteamKit2.GC.Dota.Internal
         HERO_RELIC_RARITY_INVALID = -1,
         HERO_RELIC_RARITY_COMMON = 0,
         HERO_RELIC_RARITY_RARE = 1,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EStickerbookAuditAction
+    {
+        STICKERBOOK_AUDIT_CREATE_PAGE = 0,
+        STICKERBOOK_AUDIT_DELETE_PAGE = 1,
+        STICKERBOOK_AUDIT_STICK_STICKERS = 2,
+        STICKERBOOK_AUDIT_REPLACE_STICKERS = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EStickerbookPageType
+    {
+        STICKER_PAGE_GENERIC = 0,
+        STICKER_PAGE_TEAM = 1,
+        STICKER_PAGE_TALENT = 2,
     }
 
 }

@@ -198,7 +198,7 @@ namespace SteamKit2.GC.Dota.Internal
         }
 
         [global::ProtoBuf.ProtoContract()]
-        public partial class EventGameCustomActions : global::ProtoBuf.IExtensible
+        public partial class NetworkedEventAction : global::ProtoBuf.IExtensible
         {
             private global::ProtoBuf.IExtension __pbn__extensionData;
             global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -318,7 +318,7 @@ namespace SteamKit2.GC.Dota.Internal
             public CMsgLobbyEventPoints.PeriodicResourceValues bounties { get; set; }
 
             [global::ProtoBuf.ProtoMember(25)]
-            public global::System.Collections.Generic.List<CMsgLobbyEventPoints.EventGameCustomActions> event_game_custom_actions { get; } = new global::System.Collections.Generic.List<CMsgLobbyEventPoints.EventGameCustomActions>();
+            public global::System.Collections.Generic.List<CMsgLobbyEventPoints.NetworkedEventAction> event_game_custom_actions { get; } = new global::System.Collections.Generic.List<CMsgLobbyEventPoints.NetworkedEventAction>();
 
             [global::ProtoBuf.ProtoMember(26)]
             public uint tip_amount_index
@@ -352,6 +352,9 @@ namespace SteamKit2.GC.Dota.Internal
 
             [global::ProtoBuf.ProtoMember(29)]
             public CMsgLobbyEventPoints.PeriodicResourceValues arcana_event_periodic_resource { get; set; }
+
+            [global::ProtoBuf.ProtoMember(30)]
+            public global::System.Collections.Generic.List<CMsgLobbyEventPoints.NetworkedEventAction> networked_event_actions { get; } = new global::System.Collections.Generic.List<CMsgLobbyEventPoints.NetworkedEventAction>();
 
         }
 

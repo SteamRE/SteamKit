@@ -14396,6 +14396,428 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCGetStickerbookRequest : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint account_id
+        {
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
+        }
+        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+        public void Resetaccount_id() => __pbn__account_id = null;
+        private uint? __pbn__account_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCGetStickerbookResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse response
+        {
+            get => __pbn__response ?? EResponse.k_eInternalError;
+            set => __pbn__response = value;
+        }
+        public bool ShouldSerializeresponse() => __pbn__response != null;
+        public void Resetresponse() => __pbn__response = null;
+        private EResponse? __pbn__response;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgStickerbook stickerbook { get; set; }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTimeout = 2,
+            k_eNotAllowed = 3,
+            k_eTooBusy = 4,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCCreateStickerbookPageRequest : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint team_id
+        {
+            get => __pbn__team_id.GetValueOrDefault();
+            set => __pbn__team_id = value;
+        }
+        public bool ShouldSerializeteam_id() => __pbn__team_id != null;
+        public void Resetteam_id() => __pbn__team_id = null;
+        private uint? __pbn__team_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
+        public EEvent event_id
+        {
+            get => __pbn__event_id ?? EEvent.EVENT_ID_NONE;
+            set => __pbn__event_id = value;
+        }
+        public bool ShouldSerializeevent_id() => __pbn__event_id != null;
+        public void Resetevent_id() => __pbn__event_id = null;
+        private EEvent? __pbn__event_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(EStickerbookPageType.STICKER_PAGE_GENERIC)]
+        public EStickerbookPageType page_type
+        {
+            get => __pbn__page_type ?? EStickerbookPageType.STICKER_PAGE_GENERIC;
+            set => __pbn__page_type = value;
+        }
+        public bool ShouldSerializepage_type() => __pbn__page_type != null;
+        public void Resetpage_type() => __pbn__page_type = null;
+        private EStickerbookPageType? __pbn__page_type;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCCreateStickerbookPageResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse response
+        {
+            get => __pbn__response ?? EResponse.k_eInternalError;
+            set => __pbn__response = value;
+        }
+        public bool ShouldSerializeresponse() => __pbn__response != null;
+        public void Resetresponse() => __pbn__response = null;
+        private EResponse? __pbn__response;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint page_number
+        {
+            get => __pbn__page_number.GetValueOrDefault();
+            set => __pbn__page_number = value;
+        }
+        public bool ShouldSerializepage_number() => __pbn__page_number != null;
+        public void Resetpage_number() => __pbn__page_number = null;
+        private uint? __pbn__page_number;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTimeout = 2,
+            k_eTooManyPages = 3,
+            k_eTooBusy = 4,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCDeleteStickerbookPageRequest : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint page_num
+        {
+            get => __pbn__page_num.GetValueOrDefault();
+            set => __pbn__page_num = value;
+        }
+        public bool ShouldSerializepage_num() => __pbn__page_num != null;
+        public void Resetpage_num() => __pbn__page_num = null;
+        private uint? __pbn__page_num;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint sticker_count
+        {
+            get => __pbn__sticker_count.GetValueOrDefault();
+            set => __pbn__sticker_count = value;
+        }
+        public bool ShouldSerializesticker_count() => __pbn__sticker_count != null;
+        public void Resetsticker_count() => __pbn__sticker_count = null;
+        private uint? __pbn__sticker_count;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint sticker_max
+        {
+            get => __pbn__sticker_max.GetValueOrDefault();
+            set => __pbn__sticker_max = value;
+        }
+        public bool ShouldSerializesticker_max() => __pbn__sticker_max != null;
+        public void Resetsticker_max() => __pbn__sticker_max = null;
+        private uint? __pbn__sticker_max;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCDeleteStickerbookPageResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse response
+        {
+            get => __pbn__response ?? EResponse.k_eInternalError;
+            set => __pbn__response = value;
+        }
+        public bool ShouldSerializeresponse() => __pbn__response != null;
+        public void Resetresponse() => __pbn__response = null;
+        private EResponse? __pbn__response;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTimeout = 2,
+            k_eInvalidStickerCount = 3,
+            k_eTooBusy = 4,
+            k_eInvalidStickerMax = 5,
+            k_eInvalidPage = 6,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCPlaceStickersRequest : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<StickerItem> sticker_items { get; } = new global::System.Collections.Generic.List<StickerItem>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class StickerItem : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint page_num
+            {
+                get => __pbn__page_num.GetValueOrDefault();
+                set => __pbn__page_num = value;
+            }
+            public bool ShouldSerializepage_num() => __pbn__page_num != null;
+            public void Resetpage_num() => __pbn__page_num = null;
+            private uint? __pbn__page_num;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public CMsgStickerbookSticker sticker { get; set; }
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCPlaceStickersResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse response
+        {
+            get => __pbn__response ?? EResponse.k_eInternalError;
+            set => __pbn__response = value;
+        }
+        public bool ShouldSerializeresponse() => __pbn__response != null;
+        public void Resetresponse() => __pbn__response = null;
+        private EResponse? __pbn__response;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTimeout = 2,
+            k_eMissingItem = 3,
+            k_eTooBusy = 4,
+            k_eDuplicateItem = 5,
+            k_eInvalidPage = 6,
+            k_ePageTypeMismatch = 7,
+            k_eTooManyStickers = 8,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCPlaceCollectionStickersRequest : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<Slot> slots { get; } = new global::System.Collections.Generic.List<Slot>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Slot : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint page_num
+            {
+                get => __pbn__page_num.GetValueOrDefault();
+                set => __pbn__page_num = value;
+            }
+            public bool ShouldSerializepage_num() => __pbn__page_num != null;
+            public void Resetpage_num() => __pbn__page_num = null;
+            private uint? __pbn__page_num;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint slot
+            {
+                get => __pbn__slot.GetValueOrDefault();
+                set => __pbn__slot = value;
+            }
+            public bool ShouldSerializeslot() => __pbn__slot != null;
+            public void Resetslot() => __pbn__slot = null;
+            private uint? __pbn__slot;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public ulong new_item_id
+            {
+                get => __pbn__new_item_id.GetValueOrDefault();
+                set => __pbn__new_item_id = value;
+            }
+            public bool ShouldSerializenew_item_id() => __pbn__new_item_id != null;
+            public void Resetnew_item_id() => __pbn__new_item_id = null;
+            private ulong? __pbn__new_item_id;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public uint old_item_def_id
+            {
+                get => __pbn__old_item_def_id.GetValueOrDefault();
+                set => __pbn__old_item_def_id = value;
+            }
+            public bool ShouldSerializeold_item_def_id() => __pbn__old_item_def_id != null;
+            public void Resetold_item_def_id() => __pbn__old_item_def_id = null;
+            private uint? __pbn__old_item_def_id;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public uint old_quality
+            {
+                get => __pbn__old_quality.GetValueOrDefault();
+                set => __pbn__old_quality = value;
+            }
+            public bool ShouldSerializeold_quality() => __pbn__old_quality != null;
+            public void Resetold_quality() => __pbn__old_quality = null;
+            private uint? __pbn__old_quality;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCPlaceCollectionStickersResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse response
+        {
+            get => __pbn__response ?? EResponse.k_eInternalError;
+            set => __pbn__response = value;
+        }
+        public bool ShouldSerializeresponse() => __pbn__response != null;
+        public void Resetresponse() => __pbn__response = null;
+        private EResponse? __pbn__response;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTimeout = 2,
+            k_eMissingItem = 3,
+            k_eTooBusy = 4,
+            k_eDuplicateItem = 5,
+            k_eInvalidPage = 6,
+            k_ePageTypeMismatch = 7,
+            k_eOldItemMismatch = 8,
+            k_eInvalidSlot = 9,
+            k_eSlotTypeMismatch = 10,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCOrderStickerbookTeamPageRequest : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgStickerbookTeamPageOrderSequence page_order_sequence { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCOrderStickerbookTeamPageResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse response
+        {
+            get => __pbn__response ?? EResponse.k_eInternalError;
+            set => __pbn__response = value;
+        }
+        public bool ShouldSerializeresponse() => __pbn__response != null;
+        public void Resetresponse() => __pbn__response = null;
+        private EResponse? __pbn__response;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTimeout = 2,
+            k_eTooManyPages = 3,
+            k_eTooBusy = 4,
+            k_eInvalidPage = 5,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum CMsgDOTARequestMatches_SkillLevel
     {
         CMsgDOTARequestMatches_SkillLevel_Any = 0,
