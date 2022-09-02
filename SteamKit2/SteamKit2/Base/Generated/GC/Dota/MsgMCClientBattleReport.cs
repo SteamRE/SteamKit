@@ -468,6 +468,26 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetlobby_type() => __pbn__lobby_type = null;
         private uint? __pbn__lobby_type;
 
+        [global::ProtoBuf.ProtoMember(43)]
+        public float time_purchased_shard
+        {
+            get => __pbn__time_purchased_shard.GetValueOrDefault();
+            set => __pbn__time_purchased_shard = value;
+        }
+        public bool ShouldSerializetime_purchased_shard() => __pbn__time_purchased_shard != null;
+        public void Resettime_purchased_shard() => __pbn__time_purchased_shard = null;
+        private float? __pbn__time_purchased_shard;
+
+        [global::ProtoBuf.ProtoMember(44)]
+        public float time_purchased_scepter
+        {
+            get => __pbn__time_purchased_scepter.GetValueOrDefault();
+            set => __pbn__time_purchased_scepter = value;
+        }
+        public bool ShouldSerializetime_purchased_scepter() => __pbn__time_purchased_scepter != null;
+        public void Resettime_purchased_scepter() => __pbn__time_purchased_scepter = null;
+        private float? __pbn__time_purchased_scepter;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

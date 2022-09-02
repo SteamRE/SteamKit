@@ -606,10 +606,11 @@ namespace SteamKit2.GC.Dota.Internal
             k_eInvalidContractID = 9,
             k_eAlreadyAssigned = 10,
             k_eInvalidContractSlot = 11,
-            k_eContractSlotLocked = 12,
+            k_eContractSlotLockedGuild = 12,
             k_eContractSlotCooldown = 13,
             k_eContractDuplicate = 14,
             k_eContractSlotTimeError = 15,
+            k_eContractSlotLockedDotaPlus = 16,
         }
 
     }

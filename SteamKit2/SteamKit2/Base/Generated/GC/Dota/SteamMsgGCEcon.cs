@@ -1426,6 +1426,16 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public global::System.Collections.Generic.List<string> attr_value { get; } = new global::System.Collections.Generic.List<string>();
 
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint item_quality
+        {
+            get => __pbn__item_quality.GetValueOrDefault();
+            set => __pbn__item_quality = value;
+        }
+        public bool ShouldSerializeitem_quality() => __pbn__item_quality != null;
+        public void Resetitem_quality() => __pbn__item_quality = null;
+        private uint? __pbn__item_quality;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

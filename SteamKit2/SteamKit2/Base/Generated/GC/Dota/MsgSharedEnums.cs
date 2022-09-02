@@ -997,6 +997,36 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetattacker_has_scepter() => __pbn__attacker_has_scepter = null;
         private bool? __pbn__attacker_has_scepter;
 
+        [global::ProtoBuf.ProtoMember(76)]
+        public uint neutral_camp_team
+        {
+            get => __pbn__neutral_camp_team.GetValueOrDefault();
+            set => __pbn__neutral_camp_team = value;
+        }
+        public bool ShouldSerializeneutral_camp_team() => __pbn__neutral_camp_team != null;
+        public void Resetneutral_camp_team() => __pbn__neutral_camp_team = null;
+        private uint? __pbn__neutral_camp_team;
+
+        [global::ProtoBuf.ProtoMember(77)]
+        public float regenerated_health
+        {
+            get => __pbn__regenerated_health.GetValueOrDefault();
+            set => __pbn__regenerated_health = value;
+        }
+        public bool ShouldSerializeregenerated_health() => __pbn__regenerated_health != null;
+        public void Resetregenerated_health() => __pbn__regenerated_health = null;
+        private float? __pbn__regenerated_health;
+
+        [global::ProtoBuf.ProtoMember(78)]
+        public bool will_reincarnate
+        {
+            get => __pbn__will_reincarnate.GetValueOrDefault();
+            set => __pbn__will_reincarnate = value;
+        }
+        public bool ShouldSerializewill_reincarnate() => __pbn__will_reincarnate != null;
+        public void Resetwill_reincarnate() => __pbn__will_reincarnate = null;
+        private bool? __pbn__will_reincarnate;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1712,6 +1742,7 @@ namespace SteamKit2.GC.Dota.Internal
         DOTA_COMBATLOG_SPELL_ABSORB = 40,
         DOTA_COMBATLOG_UNIT_TELEPORTED = 41,
         DOTA_COMBATLOG_KILL_EATER_EVENT = 42,
+        DOTA_COMBATLOG_NEUTRAL_ITEM_EARNED = 43,
     }
 
     [global::ProtoBuf.ProtoContract()]
