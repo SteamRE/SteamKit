@@ -1,4 +1,5 @@
 $ProgressPreference = 'SilentlyContinue'
+$ErrorActionPreference = 'Stop'
 
 $ThisDirectory = Split-Path -Parent $PSCommandPath
 $NativeDependenciesDirectory = Join-Path $ThisDirectory 'native-dependencies'
