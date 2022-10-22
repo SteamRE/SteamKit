@@ -114,6 +114,13 @@ jobs:
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
 
+    - name: Cache Native Dependencies
+      id: cache-dependencies
+      uses: actions/cache@v3
+      with:
+        path: Resources/NetHook2/native-dependencies
+        key: native-dependencies-${{ hashFiles('Resources/NetHook2/InstallDependencies.ps1') }}
+
     - name: Configure Dependencies
       run: Resources/NetHook2/SetupDependencies.cmd
 
