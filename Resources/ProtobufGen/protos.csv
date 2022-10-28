@@ -48,6 +48,10 @@ steam,steammessages_partnerapps.steamclient.proto,SteamMsgPartnerApps.cs,SteamKi
 steam,steammessages_player.steamclient.proto,SteamMsgPlayer.cs,SteamKit2.Internal
 steam,steammessages_publishedfile.steamclient.proto,SteamMsgPublishedFile.cs,SteamKit2.Internal
 steam,steammessages_qms.steamclient.proto,SteamMsgQMS.cs,SteamKit2.Internal
+steam,steammessages_remoteclient.proto,SteamMsgRemoteClientBase.cs,SteamKit2.Internal
+steam,steammessages_remoteclient_discovery.proto,SteamMsgRemoteClientDiscovery.cs,SteamKit2.Internal
+steam,steammessages_remoteclient_service_messages.proto,SteamMsgRemoteClientMessages.cs,SteamKit2.Internal
+steam,steammessages_remoteclient_service.steamclient.proto,SteamMsgRemoteClient.cs,SteamKit2.Internal
 steam,steammessages_secrets.steamclient.proto,SteamMsgSecrets.cs,SteamKit2.Internal
 steam,steammessages_shader.steamclient.proto,SteamMsgShader.cs,SteamKit2.Internal
 steam,steammessages_site_license.steamclient.proto,SteamMsgSiteLicense.cs,SteamKit2.Internal
