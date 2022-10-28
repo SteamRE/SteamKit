@@ -16,13 +16,14 @@ namespace NetHookAnalyzer2.Specializations
 
 			var namespaces = new[]
 			{
-				"SteamKit2.Internal",
-				"SteamKit2.Internal.Steamworks"
+				("SteamKit2", "SteamKit2.Internal"),
+				("SteamKit2", "SteamKit2.Internal.Steamworks"),
+				("NetHookAnalyzer2", "NetHookAnalyzer2.Protobufs"),
 			};
 
-			foreach (var ns in namespaces)
+			foreach (var (assembly, ns) in namespaces)
 			{
-				var interfaceType = Type.GetType(ns + "." + interfaceName + ", SteamKit2");
+				var interfaceType = Type.GetType($"{ns}.{interfaceName}, {assembly}");
 				if (interfaceType != null)
 				{
 					var method = interfaceType.GetMethod(methodName);
