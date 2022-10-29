@@ -37,6 +37,7 @@ namespace NetHookAnalyzer2
 			{
 				new ClientServiceMethodSpecialization(),
 				new ClientServiceMethodResponseSpecialization(),
+				new RemoteClientSteamToSteamSpecialization(),
 				new GCGenericSpecialization()
 				{
 					GameCoordinatorSpecializations = new IGameCoordinatorSpecialization[]
@@ -105,7 +106,7 @@ namespace NetHookAnalyzer2
 			return Path.Combine(nethookDirectory, latestDump);
 		}
 
-		NetHookDump Dump { get; set; }
+		internal static NetHookDump Dump { get; private set; }
 
 		void RepopulateInterface()
 		{
@@ -338,7 +339,7 @@ namespace NetHookAnalyzer2
 
 		void HandleFileCreated(string fullPath)
 		{
-			var item = Dump.AddItemFromPath(fullPath);
+			var item = Dump.AddItemFromFile(new FileInfo(fullPath));
 			if (item == null)
 			{
 				return;
