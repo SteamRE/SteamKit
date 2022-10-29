@@ -1,16 +1,11 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using System.Windows.Forms;
-using SteamKit2.Internal;
+﻿using System.Windows.Forms;
 using System.Linq;
 using System;
-using ProtoBuf.Meta;
 using SteamKit2;
 
 namespace NetHookAnalyzer2
 {
-	partial class NetHookItemTreeBuilder
+	class NetHookItemTreeBuilder
 	{
 		public NetHookItemTreeBuilder(NetHookItem item)
 		{
@@ -47,7 +42,7 @@ namespace NetHookAnalyzer2
 			}
 			catch (Exception ex)
 			{
-				Node = new TreeNode(null, new[] { new TreeNode(string.Format("{0} encountered whilst parsing item: {1}", ex.GetType().Name, ex.Message)) });
+				Node = new TreeNode($"{ex.GetType().Name} encountered whilst parsing item: {ex.Message}");
 			}
 		}
 
@@ -55,20 +50,16 @@ namespace NetHookAnalyzer2
 		{
 			var configuration = new TreeNodeObjectExplorerConfiguration { ShowUnsetFields = displayUnsetFields };
 
-			using var stream = item.OpenStream();
+			var (rawEMsg, header, body, payload) = item.ReadFile();
 
-			var rawEMsg = PeekUInt(stream);
 			var node = BuildInfoNode(rawEMsg);
 			node.Expand();
 
-			var header = ReadHeader(rawEMsg, stream);
 			node.Nodes.Add(new TreeNodeObjectExplorer("Header", header, configuration).TreeNode);
 
-			var body = ReadBody(rawEMsg, stream, header);
 			var bodyNode = new TreeNodeObjectExplorer("Body", body, configuration).TreeNode;
 			node.Nodes.Add(bodyNode);
 
-			var payload = ReadPayload(stream);
 			if (payload != null && payload.Length > 0)
 			{
 				node.Nodes.Add(new TreeNodeObjectExplorer("Payload", payload, configuration).TreeNode);

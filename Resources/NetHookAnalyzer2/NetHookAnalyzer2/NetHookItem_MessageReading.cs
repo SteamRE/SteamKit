@@ -9,8 +9,24 @@ using SteamKit2.Internal;
 
 namespace NetHookAnalyzer2
 {
-	partial class NetHookItemTreeBuilder
+	partial class NetHookItem
 	{
+		public (uint EMsg, ISteamSerializableHeader Header, object Body, byte[] Payload) ReadFile()
+		{
+			using var stream = OpenStream();
+			return ReadFile( stream );
+		}
+
+		public static (uint EMsg, ISteamSerializableHeader Header, object Body, byte[] Payload) ReadFile(Stream stream)
+		{
+			var rawEMsg = PeekUInt( stream );
+			var header = ReadHeader( rawEMsg, stream );
+			var body = ReadBody( rawEMsg, stream, header );
+			var payload = ReadPayload( stream );
+
+			return (rawEMsg, header, body, payload);
+		}
+
 		static ISteamSerializableHeader ReadHeader(uint rawEMsg, Stream stream)
 		{
 			ISteamSerializableHeader header;

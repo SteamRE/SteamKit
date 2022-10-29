@@ -7,7 +7,7 @@ using SteamKit2.Internal;
 
 namespace NetHookAnalyzer2
 {
-	class NetHookItem
+	partial class NetHookItem
 	{
 		public enum PacketDirection
 		{
@@ -27,7 +27,7 @@ namespace NetHookAnalyzer2
 
 		public string InnerMessageName
 		{
-			get { return innerMessageName ?? (innerMessageName = ReadInnerMessageName()); }
+			get { return innerMessageName ??= ReadInnerMessageName(); }
 		}
 		string innerMessageName;
 
@@ -112,13 +112,9 @@ namespace NetHookAnalyzer2
 				case SteamKit2.EMsg.ServiceMethodCallFromClient:
 				case SteamKit2.EMsg.ServiceMethodResponse:
 				{
-					var fileData = File.ReadAllBytes(FileInfo.FullName);
+					using var stream = OpenStream();
 					var hdr = new MsgHdrProtoBuf();
-					using (var ms = new MemoryStream(fileData))
-					{
-						hdr.Deserialize(ms);
-					}
-
+					hdr.Deserialize(stream);
 					return hdr.Proto.target_job_name;
 				}
 
