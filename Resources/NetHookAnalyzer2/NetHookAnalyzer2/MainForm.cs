@@ -168,7 +168,7 @@ namespace NetHookAnalyzer2
 				var latestNethookDir = GetLatestNethookDumpDirectory();
 				if ( latestNethookDir != null )
 				{
-					dialog.SelectedPath = GetLatestNethookDumpDirectory();
+					dialog.SelectedPath = latestNethookDir;
 				}
 
 				if ( dialog.ShowDialog() != WinForms.DialogResult.OK )
@@ -179,24 +179,39 @@ namespace NetHookAnalyzer2
 				dumpDirectory = dialog.SelectedPath;
 			}
 
+			OpenDirectory( dumpDirectory );
+
+		}
+
+		void OnOpenLatestFolderToolStripMenuItemClick( object sender, EventArgs e )
+		{
+			var latestNethookDir = GetLatestNethookDumpDirectory();
+			if ( latestNethookDir != null )
+			{
+				OpenDirectory( latestNethookDir );
+			}
+		}
+
+		void OpenDirectory(string dumpDirectory)
+		{
 			var dump = new NetHookDump();
-			dump.LoadFromDirectory(dumpDirectory);
+			dump.LoadFromDirectory( dumpDirectory );
 			Dump = dump;
 
-			Text = string.Format("NetHook2 Dump Analyzer - [{0}]", dumpDirectory);
+			Text = string.Format( "NetHook2 Dump Analyzer - [{0}]", dumpDirectory );
 
 			selectedListViewItem = null;
 			RepopulateInterface();
 
-			if (itemsListView.Items.Count > 0)
+			if ( itemsListView.Items.Count > 0 )
 			{
 				itemsListView.Select();
-				itemsListView.Items[0].Selected = true;
+				itemsListView.Items[ 0 ].Selected = true;
 			}
 
-			InitializeFileSystemWatcher(dumpDirectory);
+			InitializeFileSystemWatcher( dumpDirectory );
 
-			if (automaticallySelectNewItemsToolStripMenuItem.Checked)
+			if ( automaticallySelectNewItemsToolStripMenuItem.Checked )
 			{
 				SelectLastItem();
 			}
