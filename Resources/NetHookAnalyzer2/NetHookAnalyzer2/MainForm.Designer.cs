@@ -39,6 +39,7 @@
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.openLatestFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.automaticallySelectNewItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -115,6 +116,7 @@
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
 			this.openToolStripMenuItem,
+			this.openLatestFolderToolStripMenuItem,
 			this.automaticallySelectNewItemsToolStripMenuItem,
 			this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -129,6 +131,13 @@
 			this.openToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
 			this.openToolStripMenuItem.Text = "&Open...";
 			this.openToolStripMenuItem.Click += new System.EventHandler(this.OnOpenToolStripMenuItemClick);
+			// 
+			// openLatestFolderToolStripMenuItem
+			// 
+			this.openLatestFolderToolStripMenuItem.Name = "openLatestFolderToolStripMenuItem";
+			this.openLatestFolderToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+			this.openLatestFolderToolStripMenuItem.Text = "Open latest folder";
+			this.openLatestFolderToolStripMenuItem.Click += new System.EventHandler(this.OnOpenLatestFolderToolStripMenuItemClick);
 			// 
 			// automaticallySelectNewItemsToolStripMenuItem
 			// 
@@ -368,6 +377,7 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.ToolStripMenuItem automaticallySelectNewItemsToolStripMenuItem;
 		private System.Windows.Forms.CheckBox showAllCheckBox;
+		private System.Windows.Forms.ToolStripMenuItem openLatestFolderToolStripMenuItem;
 	}
 }
 
