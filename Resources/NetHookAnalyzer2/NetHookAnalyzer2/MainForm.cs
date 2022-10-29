@@ -38,6 +38,7 @@ namespace NetHookAnalyzer2
 				new ClientServiceMethodSpecialization(),
 				new ClientServiceMethodResponseSpecialization(),
 				new RemoteClientSteamToSteamSpecialization(),
+				new RemoteClientSteamBroadcastSpecialization(),
 				new GCGenericSpecialization()
 				{
 					GameCoordinatorSpecializations = new IGameCoordinatorSpecialization[]
