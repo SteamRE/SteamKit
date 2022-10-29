@@ -34,8 +34,8 @@
 			System.Windows.Forms.ColumnHeader messageColumnHeader;
 			System.Windows.Forms.ColumnHeader innerMessageColumnHeader;
 			System.Windows.Forms.ColumnHeader itemNameColumnHeader;
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			System.Windows.Forms.ColumnHeader timestampColumnHeader;
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,12 +54,12 @@
 			this.listViewContainerPanel = new System.Windows.Forms.Panel();
 			this.itemsListView = new System.Windows.Forms.ListView();
 			this.itemExplorerTreeView = new System.Windows.Forms.TreeView();
-			sequenceColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			directionColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			messageColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			innerMessageColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			itemNameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			timestampColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			sequenceColumnHeader = new System.Windows.Forms.ColumnHeader();
+			directionColumnHeader = new System.Windows.Forms.ColumnHeader();
+			messageColumnHeader = new System.Windows.Forms.ColumnHeader();
+			innerMessageColumnHeader = new System.Windows.Forms.ColumnHeader();
+			itemNameColumnHeader = new System.Windows.Forms.ColumnHeader();
+			timestampColumnHeader = new System.Windows.Forms.ColumnHeader();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
 			this.splitContainer.Panel1.SuspendLayout();
@@ -95,22 +95,28 @@
 			itemNameColumnHeader.Text = "";
 			itemNameColumnHeader.Width = 0;
 			// 
+			// timestampColumnHeader
+			// 
+			timestampColumnHeader.Text = "Timestamp";
+			timestampColumnHeader.Width = 134;
+			// 
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+			this.fileToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(883, 24);
+			this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+			this.menuStrip1.Size = new System.Drawing.Size(1030, 24);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
 			// fileToolStripMenuItem
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.automaticallySelectNewItemsToolStripMenuItem,
-            this.exitToolStripMenuItem});
+			this.openToolStripMenuItem,
+			this.automaticallySelectNewItemsToolStripMenuItem,
+			this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
 			this.fileToolStripMenuItem.Text = "&File";
@@ -149,6 +155,7 @@
 			// 
 			this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.splitContainer.Location = new System.Drawing.Point(0, 24);
+			this.splitContainer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.splitContainer.Name = "splitContainer";
 			// 
 			// splitContainer.Panel1
@@ -160,9 +167,10 @@
 			// splitContainer.Panel2
 			// 
 			this.splitContainer.Panel2.Controls.Add(this.itemExplorerTreeView);
-			this.splitContainer.Panel2.Padding = new System.Windows.Forms.Padding(4);
-			this.splitContainer.Size = new System.Drawing.Size(883, 434);
-			this.splitContainer.SplitterDistance = 416;
+			this.splitContainer.Panel2.Padding = new System.Windows.Forms.Padding(5);
+			this.splitContainer.Size = new System.Drawing.Size(1030, 504);
+			this.splitContainer.SplitterDistance = 485;
+			this.splitContainer.SplitterWidth = 5;
 			this.splitContainer.TabIndex = 2;
 			// 
 			// filterContainerPanel
@@ -170,9 +178,10 @@
 			this.filterContainerPanel.Controls.Add(this.filterGroupBox);
 			this.filterContainerPanel.Dock = System.Windows.Forms.DockStyle.Top;
 			this.filterContainerPanel.Location = new System.Drawing.Point(0, 0);
+			this.filterContainerPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.filterContainerPanel.Name = "filterContainerPanel";
-			this.filterContainerPanel.Padding = new System.Windows.Forms.Padding(4, 4, 4, 0);
-			this.filterContainerPanel.Size = new System.Drawing.Size(416, 70);
+			this.filterContainerPanel.Padding = new System.Windows.Forms.Padding(5, 5, 5, 0);
+			this.filterContainerPanel.Size = new System.Drawing.Size(485, 81);
 			this.filterContainerPanel.TabIndex = 3;
 			// 
 			// filterGroupBox
@@ -184,9 +193,11 @@
 			this.filterGroupBox.Controls.Add(this.inRadioButton);
 			this.filterGroupBox.Controls.Add(this.inOutRadioButton);
 			this.filterGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.filterGroupBox.Location = new System.Drawing.Point(4, 4);
+			this.filterGroupBox.Location = new System.Drawing.Point(5, 5);
+			this.filterGroupBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.filterGroupBox.Name = "filterGroupBox";
-			this.filterGroupBox.Size = new System.Drawing.Size(408, 66);
+			this.filterGroupBox.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.filterGroupBox.Size = new System.Drawing.Size(475, 76);
 			this.filterGroupBox.TabIndex = 1;
 			this.filterGroupBox.TabStop = false;
 			this.filterGroupBox.Text = "Filter";
@@ -196,9 +207,10 @@
 			this.showAllCheckBox.AutoSize = true;
 			this.showAllCheckBox.Checked = true;
 			this.showAllCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.showAllCheckBox.Location = new System.Drawing.Point(277, 19);
+			this.showAllCheckBox.Location = new System.Drawing.Point(323, 22);
+			this.showAllCheckBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.showAllCheckBox.Name = "showAllCheckBox";
-			this.showAllCheckBox.Size = new System.Drawing.Size(125, 17);
+			this.showAllCheckBox.Size = new System.Drawing.Size(134, 19);
 			this.showAllCheckBox.TabIndex = 3;
 			this.showAllCheckBox.Text = "Show All Msg Values";
 			this.showAllCheckBox.UseVisualStyleBackColor = true;
@@ -207,9 +219,10 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(9, 19);
+			this.label1.Location = new System.Drawing.Point(10, 22);
+			this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(52, 13);
+			this.label1.Size = new System.Drawing.Size(58, 15);
 			this.label1.TabIndex = 2;
 			this.label1.Text = "Direction:";
 			// 
@@ -217,9 +230,10 @@
 			// 
 			this.searchTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.searchTextBox.ForeColor = System.Drawing.Color.LightGray;
-			this.searchTextBox.Location = new System.Drawing.Point(3, 43);
+			this.searchTextBox.Location = new System.Drawing.Point(4, 50);
+			this.searchTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.searchTextBox.Name = "searchTextBox";
-			this.searchTextBox.Size = new System.Drawing.Size(402, 20);
+			this.searchTextBox.Size = new System.Drawing.Size(467, 23);
 			this.searchTextBox.TabIndex = 1;
 			this.searchTextBox.Text = "Search...";
 			this.searchTextBox.TextChanged += new System.EventHandler(this.SearchTextBox_TextChanged);
@@ -229,9 +243,10 @@
 			// outRadioButton
 			// 
 			this.outRadioButton.AutoSize = true;
-			this.outRadioButton.Location = new System.Drawing.Point(169, 17);
+			this.outRadioButton.Location = new System.Drawing.Point(197, 20);
+			this.outRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.outRadioButton.Name = "outRadioButton";
-			this.outRadioButton.Size = new System.Drawing.Size(42, 17);
+			this.outRadioButton.Size = new System.Drawing.Size(45, 19);
 			this.outRadioButton.TabIndex = 0;
 			this.outRadioButton.Text = "Out";
 			this.outRadioButton.UseVisualStyleBackColor = true;
@@ -240,9 +255,10 @@
 			// inRadioButton
 			// 
 			this.inRadioButton.AutoSize = true;
-			this.inRadioButton.Location = new System.Drawing.Point(129, 17);
+			this.inRadioButton.Location = new System.Drawing.Point(150, 20);
+			this.inRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.inRadioButton.Name = "inRadioButton";
-			this.inRadioButton.Size = new System.Drawing.Size(34, 17);
+			this.inRadioButton.Size = new System.Drawing.Size(35, 19);
 			this.inRadioButton.TabIndex = 0;
 			this.inRadioButton.Text = "In";
 			this.inRadioButton.UseVisualStyleBackColor = true;
@@ -252,9 +268,10 @@
 			// 
 			this.inOutRadioButton.AutoSize = true;
 			this.inOutRadioButton.Checked = true;
-			this.inOutRadioButton.Location = new System.Drawing.Point(67, 17);
+			this.inOutRadioButton.Location = new System.Drawing.Point(78, 20);
+			this.inOutRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.inOutRadioButton.Name = "inOutRadioButton";
-			this.inOutRadioButton.Size = new System.Drawing.Size(56, 17);
+			this.inOutRadioButton.Size = new System.Drawing.Size(60, 19);
 			this.inOutRadioButton.TabIndex = 0;
 			this.inOutRadioButton.TabStop = true;
 			this.inOutRadioButton.Text = "In/Out";
@@ -266,28 +283,29 @@
 			this.listViewContainerPanel.Controls.Add(this.itemsListView);
 			this.listViewContainerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.listViewContainerPanel.Location = new System.Drawing.Point(0, 0);
+			this.listViewContainerPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.listViewContainerPanel.Name = "listViewContainerPanel";
-			this.listViewContainerPanel.Padding = new System.Windows.Forms.Padding(4, 74, 4, 4);
-			this.listViewContainerPanel.Size = new System.Drawing.Size(416, 434);
+			this.listViewContainerPanel.Padding = new System.Windows.Forms.Padding(5, 85, 5, 5);
+			this.listViewContainerPanel.Size = new System.Drawing.Size(485, 504);
 			this.listViewContainerPanel.TabIndex = 2;
 			// 
 			// itemsListView
 			// 
 			this.itemsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            itemNameColumnHeader,
-            sequenceColumnHeader,
-            timestampColumnHeader,
-            directionColumnHeader,
-            messageColumnHeader,
-            innerMessageColumnHeader});
+			itemNameColumnHeader,
+			sequenceColumnHeader,
+			timestampColumnHeader,
+			directionColumnHeader,
+			messageColumnHeader,
+			innerMessageColumnHeader});
 			this.itemsListView.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.itemsListView.FullRowSelect = true;
 			this.itemsListView.GridLines = true;
-			this.itemsListView.HideSelection = false;
-			this.itemsListView.Location = new System.Drawing.Point(4, 74);
+			this.itemsListView.Location = new System.Drawing.Point(5, 85);
+			this.itemsListView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.itemsListView.MultiSelect = false;
 			this.itemsListView.Name = "itemsListView";
-			this.itemsListView.Size = new System.Drawing.Size(408, 356);
+			this.itemsListView.Size = new System.Drawing.Size(475, 414);
 			this.itemsListView.TabIndex = 0;
 			this.itemsListView.UseCompatibleStateImageBehavior = false;
 			this.itemsListView.View = System.Windows.Forms.View.Details;
@@ -296,24 +314,22 @@
 			// itemExplorerTreeView
 			// 
 			this.itemExplorerTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.itemExplorerTreeView.Location = new System.Drawing.Point(4, 4);
+			this.itemExplorerTreeView.Location = new System.Drawing.Point(5, 5);
+			this.itemExplorerTreeView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.itemExplorerTreeView.Name = "itemExplorerTreeView";
-			this.itemExplorerTreeView.Size = new System.Drawing.Size(455, 426);
-			this.itemExplorerTreeView.TabIndex = 0;
 			this.itemExplorerTreeView.ShowRootLines = false;
-			// 
-			// timestampColumnHeader
-			// 
-			timestampColumnHeader.Text = "Timestamp";
-			timestampColumnHeader.Width = 134;
+			this.itemExplorerTreeView.Size = new System.Drawing.Size(530, 494);
+			this.itemExplorerTreeView.TabIndex = 0;
 			// 
 			// MainForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(883, 458);
+			this.ClientSize = new System.Drawing.Size(1030, 528);
 			this.Controls.Add(this.splitContainer);
 			this.Controls.Add(this.menuStrip1);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.Name = "MainForm";
 			this.Text = "NetHook2 Dump Analyzer";
 			this.Load += new System.EventHandler(this.OnFormLoad);
@@ -351,7 +367,7 @@
 		private System.Windows.Forms.RadioButton inOutRadioButton;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.ToolStripMenuItem automaticallySelectNewItemsToolStripMenuItem;
-        private System.Windows.Forms.CheckBox showAllCheckBox;
-    }
+		private System.Windows.Forms.CheckBox showAllCheckBox;
+	}
 }
 
