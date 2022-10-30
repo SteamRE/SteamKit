@@ -185,12 +185,30 @@ namespace NetHookAnalyzer2
 
 		void OnOpenLatestFolderToolStripMenuItemClick( object sender, EventArgs e )
 		{
-			var latestNethookDir = GetLatestNethookDumpDirectory();
-			if ( latestNethookDir != null )
-			{
-				OpenDirectory( latestNethookDir );
-			}
-		}
+            var steamDirectory = SteamUtils.GetSteamDirectory();
+            if ( steamDirectory == null )
+            {
+                MessageBox.Show( "Failed to find Steam directory.", nameof( NetHookAnalyzer2 ), MessageBoxButtons.OK, MessageBoxIcon.Warning );
+                return;
+            }
+
+            var nethookDirectory = Path.Combine( steamDirectory, "nethook" );
+            if ( !Directory.Exists( nethookDirectory ) )
+            {
+                MessageBox.Show( $"Directory '{nethookDirectory}' does not exist.", nameof( NetHookAnalyzer2 ), MessageBoxButtons.OK, MessageBoxIcon.Warning );
+                return;
+            }
+
+            var nethookDumpDirs = Directory.GetDirectories( nethookDirectory );
+            var latestDump = nethookDumpDirs.LastOrDefault();
+            if ( latestDump == null )
+            {
+                MessageBox.Show( $"There are no directories in '{nethookDirectory}'.", nameof( NetHookAnalyzer2 ), MessageBoxButtons.OK, MessageBoxIcon.Warning );
+                return;
+            }
+
+            OpenDirectory( Path.Combine( nethookDirectory, latestDump ) );
+        }
 
 		void OpenDirectory(string dumpDirectory)
 		{
