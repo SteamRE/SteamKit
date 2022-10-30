@@ -71,7 +71,7 @@ jobs:
       run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
 
     - name: Upload NuGet Package
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: SteamKit2.nupkg
         path: 'SteamKit2/SteamKit2/bin/Release/*.nupkg'
@@ -93,7 +93,7 @@ jobs:
       run: dotnet publish --configuration Release --runtime win-x64 --self-contained Resources/NetHookAnalyzer2/NetHookAnalyzer2/NetHookAnalyzer2.csproj /p:PublishSingleFile=True
 
     - name: Upload NetHookAnalyzer2
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: NetHookAnalyzer2
         path: 'Resources/NetHookAnalyzer2/NetHookAnalyzer2/bin/Release/win-x64/publish/*'
@@ -128,7 +128,7 @@ jobs:
       run: msbuild /p:Configuration=${{ matrix.configuration }} Resources/NetHook2/NetHook2.sln
 
     - name: Upload NetHook2
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       if: matrix.configuration == 'Release'
       with:
         name: NetHook2
