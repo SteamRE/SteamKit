@@ -53,7 +53,7 @@
 			this.inRadioButton = new System.Windows.Forms.RadioButton();
 			this.inOutRadioButton = new System.Windows.Forms.RadioButton();
 			this.listViewContainerPanel = new System.Windows.Forms.Panel();
-			this.itemsListView = new System.Windows.Forms.ListView();
+			this.itemsListView = new ListViewDoubleBuffered();
 			this.itemExplorerTreeView = new System.Windows.Forms.TreeView();
 			sequenceColumnHeader = new System.Windows.Forms.ColumnHeader();
 			directionColumnHeader = new System.Windows.Forms.ColumnHeader();
@@ -366,7 +366,7 @@
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 		private System.Windows.Forms.SplitContainer splitContainer;
 		private System.Windows.Forms.TextBox searchTextBox;
-		private System.Windows.Forms.ListView itemsListView;
+		private ListViewDoubleBuffered itemsListView;
 		private System.Windows.Forms.Panel listViewContainerPanel;
 		private System.Windows.Forms.Panel filterContainerPanel;
 		private System.Windows.Forms.TreeView itemExplorerTreeView;

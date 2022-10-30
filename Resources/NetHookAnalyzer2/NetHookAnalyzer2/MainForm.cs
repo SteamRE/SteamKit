@@ -141,8 +141,10 @@ namespace NetHookAnalyzer2
 		{
 			var listViewItems = Dump.Items.Where(GetFilterPredicate()).Select(x => x.AsListViewItem());
 
+			itemsListView.BeginUpdate();
 			itemsListView.Items.Clear();
 			itemsListView.Items.AddRange(listViewItems.ToArray());
+			itemsListView.EndUpdate();
 		}
 
 		#endregion
@@ -223,18 +225,17 @@ namespace NetHookAnalyzer2
 			selectedListViewItem = null;
 			RepopulateInterface();
 
-			if ( itemsListView.Items.Count > 0 )
+			if (automaticallySelectNewItemsToolStripMenuItem.Checked)
+			{
+				SelectLastItem();
+			}
+			else if (itemsListView.Items.Count > 0)
 			{
 				itemsListView.Select();
 				itemsListView.Items[ 0 ].Selected = true;
 			}
 
-			InitializeFileSystemWatcher( dumpDirectory );
-
-			if ( automaticallySelectNewItemsToolStripMenuItem.Checked )
-			{
-				SelectLastItem();
-			}
+			InitializeFileSystemWatcher(dumpDirectory);
 		}
 
 		void OnDirectionFilterCheckedChanged(object sender, EventArgs e)
@@ -354,12 +355,16 @@ namespace NetHookAnalyzer2
 				}
 
 				var listViewItem = item.AsListViewItem();
+
+				itemsListView.BeginUpdate();
 				itemsListView.Items.Add( listViewItem );
 
 				if ( automaticallySelectNewItemsToolStripMenuItem.Checked )
 				{
 					SelectLastItem();
 				}
+
+				itemsListView.EndUpdate();
 			} );
 		}
 
@@ -422,9 +427,11 @@ namespace NetHookAnalyzer2
 				return;
 			}
 
+			itemExplorerTreeView.BeginUpdate();
 			itemExplorerTreeView.Nodes.Clear();
 			itemExplorerTreeView.Nodes.Add(BuildTree(item));
 			itemExplorerTreeView.Nodes[0].EnsureVisible(); // Scroll to top
+			itemExplorerTreeView.EndUpdate();
 		}
 
 		TreeNode BuildTree(NetHookItem item)
