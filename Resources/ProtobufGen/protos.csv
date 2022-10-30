@@ -125,3 +125,10 @@ underlords,gcsystemmsgs.proto,GC\Underlords\SteamMsgGCSystem.cs,SteamKit2.GC.Und
 underlords,network_connection.proto,GC\Underlords\NetworkConnection.cs,SteamKit2.GC.Underlords.Internal
 underlords,networkbasetypes.proto,GC\Underlords\NetworkBaseTypes.cs,SteamKit2.GC.Underlords.Internal
 underlords,usermessages.proto,GC\Underlords\UserMessages.cs,SteamKit2.GC.Underlords.Internal
+webui,common_base.proto,..\..\..\..\Resources\NetHookAnalyzer2\NetHookAnalyzer2\Generated\SteamMsgCommonBase.cs,NetHookAnalyzer2.Protobufs
+webui,common.proto,..\..\..\..\Resources\NetHookAnalyzer2\NetHookAnalyzer2\Generated\SteamMsgCommon.cs,NetHookAnalyzer2.Protobufs
+webui,service_community.proto,..\..\..\..\Resources\NetHookAnalyzer2\NetHookAnalyzer2\Generated\SteamMsgCommunity.cs,NetHookAnalyzer2.Protobufs
+webui,service_friendslist.proto,..\..\..\..\Resources\NetHookAnalyzer2\NetHookAnalyzer2\Generated\SteamMsgFriendsList.cs,NetHookAnalyzer2.Protobufs
+webui,service_usergameactivity.proto,..\..\..\..\Resources\NetHookAnalyzer2\NetHookAnalyzer2\Generated\SteamMsgUserGameActivity.cs,NetHookAnalyzer2.Protobufs
+webui,service_usernews.proto,..\..\..\..\Resources\NetHookAnalyzer2\NetHookAnalyzer2\Generated\SteamMsgUserNews.cs,NetHookAnalyzer2.Protobufs
+webui,service_userreviews.proto,..\..\..\..\Resources\NetHookAnalyzer2\NetHookAnalyzer2\Generated\SteamMsgUserReviews.cs,NetHookAnalyzer2.Protobufs
