@@ -16,7 +16,7 @@ namespace NetHookAnalyzer2.Specializations
 				yield break;
 			}
 
-			var authSecret = MainForm.Dump.GetAccountAuthSecrets( ( int )notification.secretid );
+			var authSecret = NetHookDump.GetAccountAuthSecret( ( int )notification.secretid );
 
 			if ( authSecret == null )
 			{

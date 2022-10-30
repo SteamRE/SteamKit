@@ -107,7 +107,7 @@ namespace NetHookAnalyzer2
 			return Path.Combine(nethookDirectory, latestDump);
 		}
 
-		internal static NetHookDump Dump { get; private set; }
+		NetHookDump Dump;
 
 		void RepopulateInterface()
 		{
