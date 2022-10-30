@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ matrix.sdk }}
 
@@ -63,7 +63,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
 
@@ -85,7 +85,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
 
