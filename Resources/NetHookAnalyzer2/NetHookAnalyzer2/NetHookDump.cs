@@ -11,12 +11,11 @@ namespace NetHookAnalyzer2
 		{
 			items = new List<NetHookItem>();
 			readOnlyView = items.AsReadOnly();
-			accountAuthSecrets = new();
 		}
 
 		List<NetHookItem> items;
 		IReadOnlyList<NetHookItem> readOnlyView;
-		Dictionary<int, byte[]> accountAuthSecrets;
+		static Dictionary<int, byte[]> accountAuthSecrets = new();
 
 		public void LoadFromDirectory(string directory)
 		{
@@ -32,7 +31,7 @@ namespace NetHookAnalyzer2
 
 		public IEnumerable<NetHookItem> Items => readOnlyView;
 
-		public byte[] GetAccountAuthSecrets(int secretId) => accountAuthSecrets.GetValueOrDefault(secretId);
+		public static byte[] GetAccountAuthSecret(int secretId) => accountAuthSecrets.GetValueOrDefault(secretId);
 
 		public NetHookItem AddItemFromFile(FileInfo fileInfo)
 		{
