@@ -36,7 +36,7 @@ SteamKit2 is released under the [LGPL-2.1 license](https://choosealicense.com/li
 
 In order to use SteamKit2 at runtime, the following dependencies are required:
 
-  - A [.NET Standard 2.0](https://github.com/dotnet/standard/blob/master/docs/versions.md)-compatible runtime. At the time of writing, this is:
+  - A [.NET Standard 2.0](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-0)-compatible runtime. At the time of writing, this is:
       - .NET Framework 4.6.1 or higher required, .NET Framework 4.7.2 or higher recommended.
       - .NET Core 2.0 or higher
       - [Mono 5.4](https://mono-project.com) or higher
