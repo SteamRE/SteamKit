@@ -9,7 +9,6 @@ using System.Text;
 using SteamKit2.Util;
 using SteamKit2.Util.MacHelpers;
 using Microsoft.Win32;
-
 using static SteamKit2.Util.MacHelpers.LibC;
 using static SteamKit2.Util.MacHelpers.CoreFoundation;
 using static SteamKit2.Util.MacHelpers.DiskArbitration;
@@ -107,7 +106,37 @@ namespace SteamKit2
             return Encoding.UTF8.GetBytes( guid.ToString()! );
         }
 
-        public byte[]? GetMacAddress() => null;
+        // On windows, the steam client hashes the first 16 bytes of a struct of 4 uint,
+        // containing the mac address as the first field, in practice the second field is always zeroes
+        // So the hashed data ends up being (8bytes of mac address, 8 bytes of zeroes)
+        public byte[]? GetMacAddress()
+        {
+            // This part of the code finds the first *Physical* network interface
+            // based on : https://social.msdn.microsoft.com/Forums/en-US/46c86903-3698-41bc-b081-fcf444e8a127/get-the-ip-address-of-the-physical-network-card-?forum=winforms
+            NetworkInterface? goodAdapter = NetworkInterface.GetAllNetworkInterfaces()
+                .FirstOrDefault( adapter =>
+                {
+                    //Accessing the registry key corresponding to each adapter
+                    string fRegistryKey =
+                        $@"SYSTEM\CurrentControlSet\Control\Network\{{4D36E972-E325-11CE-BFC1-08002BE10318}}\{adapter.Id}\Connection";
+                    RegistryKey? rk = Registry.LocalMachine.OpenSubKey( fRegistryKey, false );
+                    if ( rk == null ) return false;
+
+                    string? pnpInstanceId = rk.GetValue( "PnpInstanceID", "" )?.ToString();
+
+                    return pnpInstanceId?.Length > 3 && pnpInstanceId.StartsWith( "PCI" );
+                } );
+            
+            
+            if ( goodAdapter == null ) return null;
+            byte[] macAddress = goodAdapter.GetPhysicalAddress().GetAddressBytes();
+
+            // we need to pad the mac address to 16 bytes
+            byte[] macAddressPadded = new byte[ 16 ];
+            Array.Copy( macAddress, macAddressPadded, macAddress.Length );
+
+            return macAddressPadded;
+        }
 
         public byte[]? GetDiskId()
         {
