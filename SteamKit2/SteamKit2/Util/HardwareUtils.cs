@@ -9,6 +9,7 @@ using System.Text;
 using SteamKit2.Util;
 using SteamKit2.Util.MacHelpers;
 using Microsoft.Win32;
+
 using static SteamKit2.Util.MacHelpers.LibC;
 using static SteamKit2.Util.MacHelpers.CoreFoundation;
 using static SteamKit2.Util.MacHelpers.DiskArbitration;
@@ -106,15 +107,16 @@ namespace SteamKit2
             return Encoding.UTF8.GetBytes( guid.ToString()! );
         }
 
-        // On windows, the steam client hashes the first 16 bytes of a struct of 4 uint,
-        // containing the mac address as the first field, in practice the second field is always zeroes
-        // So the hashed data ends up being (8bytes of mac address, 8 bytes of zeroes)
-        public byte[]? GetMacAddress()
+        // On windows, the steam client hashes a 16 bytes struct
+        // containing the mac address of the first *Physical* network adapter padded to 8 bytes (mac addresses are 6 bytes)
+        // and the mac address of the second *Physical* network adapter also padded to 8 bytes.
+        // So the hashed data ends up being (6bytes of mac address, 10 bytes of zeroes)
+        public byte[] GetMacAddress()
         {
-            // This part of the code finds the first *Physical* network interface
+            // This part of the code finds  *Physical* network interfaces
             // based on : https://social.msdn.microsoft.com/Forums/en-US/46c86903-3698-41bc-b081-fcf444e8a127/get-the-ip-address-of-the-physical-network-card-?forum=winforms
-            NetworkInterface? goodAdapter = NetworkInterface.GetAllNetworkInterfaces()
-                .FirstOrDefault( adapter =>
+            return NetworkInterface.GetAllNetworkInterfaces()
+                .Where( adapter =>
                 {
                     //Accessing the registry key corresponding to each adapter
                     string fRegistryKey =
@@ -122,20 +124,19 @@ namespace SteamKit2
                     RegistryKey? rk = Registry.LocalMachine.OpenSubKey( fRegistryKey, false );
                     if ( rk == null ) return false;
 
-                    string? pnpInstanceId = rk.GetValue( "PnpInstanceID", "" )?.ToString();
-
-                    return pnpInstanceId?.Length > 3 && pnpInstanceId.StartsWith( "PCI" );
-                } );
-            
-            
-            if ( goodAdapter == null ) return null;
-            byte[] macAddress = goodAdapter.GetPhysicalAddress().GetAddressBytes();
-
-            // we need to pad the mac address to 16 bytes
-            byte[] macAddressPadded = new byte[ 16 ];
-            Array.Copy( macAddress, macAddressPadded, macAddress.Length );
-
-            return macAddressPadded;
+                    return rk.GetValue( "PnpInstanceID", "" )?.ToString()?.Length > 3 && (rk.GetValue( "PnpInstanceID", "" )?.ToString()).StartsWith( "PCI" );
+                } )
+                .Select( networkInterface => networkInterface.GetPhysicalAddress().GetAddressBytes()
+                    //pad all found mac addresses to 8 bytes
+                    .Append( ( byte )0 )
+                    .Append( ( byte )0 ) 
+                )
+                //add fallbacks in case less than 2 adapters are found
+                .Append( Enumerable.Repeat( ( byte )0, 8 ))
+                .Append( Enumerable.Repeat( ( byte )0, 8 ))
+                .Take( 2 )
+                .SelectMany( b => b )
+                .ToArray();
         }
 
         public byte[]? GetDiskId()
