@@ -53,7 +53,7 @@
 			this.inRadioButton = new System.Windows.Forms.RadioButton();
 			this.inOutRadioButton = new System.Windows.Forms.RadioButton();
 			this.listViewContainerPanel = new System.Windows.Forms.Panel();
-			this.itemsListView = new ListViewDoubleBuffered();
+			this.itemsListView = new NetHookAnalyzer2.ListViewDoubleBuffered();
 			this.itemExplorerTreeView = new System.Windows.Forms.TreeView();
 			sequenceColumnHeader = new System.Windows.Forms.ColumnHeader();
 			directionColumnHeader = new System.Windows.Forms.ColumnHeader();
@@ -329,6 +329,7 @@
 			this.itemExplorerTreeView.ShowRootLines = false;
 			this.itemExplorerTreeView.Size = new System.Drawing.Size(530, 494);
 			this.itemExplorerTreeView.TabIndex = 0;
+			this.itemExplorerTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.OnItemExplorerTreeViewNodeMouseClick);
 			// 
 			// MainForm
 			// 
