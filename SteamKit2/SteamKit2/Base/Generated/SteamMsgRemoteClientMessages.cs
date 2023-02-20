@@ -304,6 +304,16 @@ namespace SteamKit2.Internal
         public void Resetsteamid() => __pbn__steamid = null;
         private ulong? __pbn__steamid;
 
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong remote_client_id
+        {
+            get => __pbn__remote_client_id.GetValueOrDefault();
+            set => __pbn__remote_client_id = value;
+        }
+        public bool ShouldSerializeremote_client_id() => __pbn__remote_client_id != null;
+        public void Resetremote_client_id() => __pbn__remote_client_id = null;
+        private ulong? __pbn__remote_client_id;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

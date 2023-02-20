@@ -1330,6 +1330,9 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(18)]
         public CExtraMsgBlock additional_welcome_msgs { get; set; }
 
+        [global::ProtoBuf.ProtoMember(19)]
+        public CMsgSteamLearnHMACKeys steam_learn_hmac_keys { get; set; }
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Location : global::ProtoBuf.IExtensible
         {

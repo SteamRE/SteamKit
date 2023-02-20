@@ -46,6 +46,26 @@ namespace SteamKit2.Internal
         public void Resetbundleid() => __pbn__bundleid = null;
         private uint? __pbn__bundleid;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint tagid
+        {
+            get => __pbn__tagid.GetValueOrDefault();
+            set => __pbn__tagid = value;
+        }
+        public bool ShouldSerializetagid() => __pbn__tagid != null;
+        public void Resettagid() => __pbn__tagid = null;
+        private uint? __pbn__tagid;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint creatorid
+        {
+            get => __pbn__creatorid.GetValueOrDefault();
+            set => __pbn__creatorid = value;
+        }
+        public bool ShouldSerializecreatorid() => __pbn__creatorid != null;
+        public void Resetcreatorid() => __pbn__creatorid = null;
+        private uint? __pbn__creatorid;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -514,6 +534,16 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(54)]
         public FreeWeekend free_weekend { get; set; }
+
+        [global::ProtoBuf.ProtoMember(55)]
+        public bool unlisted
+        {
+            get => __pbn__unlisted.GetValueOrDefault();
+            set => __pbn__unlisted = value;
+        }
+        public bool ShouldSerializeunlisted() => __pbn__unlisted != null;
+        public void Resetunlisted() => __pbn__unlisted = null;
+        private bool? __pbn__unlisted;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class RelatedItems : global::ProtoBuf.IExtensible
@@ -1706,6 +1736,240 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CStoreBrowse_GetDLCForApps_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public StoreBrowseContext context { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CStorePageFilter store_page_filter { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<StoreItemID> appids { get; } = new global::System.Collections.Generic.List<StoreItemID>();
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStoreBrowse_GetDLCForApps_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<DLCData> dlc_data { get; } = new global::System.Collections.Generic.List<DLCData>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<PlaytimeForApp> playtime { get; } = new global::System.Collections.Generic.List<PlaytimeForApp>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class DLCData : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint appid
+            {
+                get => __pbn__appid.GetValueOrDefault();
+                set => __pbn__appid = value;
+            }
+            public bool ShouldSerializeappid() => __pbn__appid != null;
+            public void Resetappid() => __pbn__appid = null;
+            private uint? __pbn__appid;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint parentappid
+            {
+                get => __pbn__parentappid.GetValueOrDefault();
+                set => __pbn__parentappid = value;
+            }
+            public bool ShouldSerializeparentappid() => __pbn__parentappid != null;
+            public void Resetparentappid() => __pbn__parentappid = null;
+            private uint? __pbn__parentappid;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint release_date
+            {
+                get => __pbn__release_date.GetValueOrDefault();
+                set => __pbn__release_date = value;
+            }
+            public bool ShouldSerializerelease_date() => __pbn__release_date != null;
+            public void Resetrelease_date() => __pbn__release_date = null;
+            private uint? __pbn__release_date;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public bool coming_soon
+            {
+                get => __pbn__coming_soon.GetValueOrDefault();
+                set => __pbn__coming_soon = value;
+            }
+            public bool ShouldSerializecoming_soon() => __pbn__coming_soon != null;
+            public void Resetcoming_soon() => __pbn__coming_soon = null;
+            private bool? __pbn__coming_soon;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public long price
+            {
+                get => __pbn__price.GetValueOrDefault();
+                set => __pbn__price = value;
+            }
+            public bool ShouldSerializeprice() => __pbn__price != null;
+            public void Resetprice() => __pbn__price = null;
+            private long? __pbn__price;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public uint discount
+            {
+                get => __pbn__discount.GetValueOrDefault();
+                set => __pbn__discount = value;
+            }
+            public bool ShouldSerializediscount() => __pbn__discount != null;
+            public void Resetdiscount() => __pbn__discount = null;
+            private uint? __pbn__discount;
+
+            [global::ProtoBuf.ProtoMember(7)]
+            public bool free
+            {
+                get => __pbn__free.GetValueOrDefault();
+                set => __pbn__free = value;
+            }
+            public bool ShouldSerializefree() => __pbn__free != null;
+            public void Resetfree() => __pbn__free = null;
+            private bool? __pbn__free;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class PlaytimeForApp : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint appid
+            {
+                get => __pbn__appid.GetValueOrDefault();
+                set => __pbn__appid = value;
+            }
+            public bool ShouldSerializeappid() => __pbn__appid != null;
+            public void Resetappid() => __pbn__appid = null;
+            private uint? __pbn__appid;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint playtime
+            {
+                get => __pbn__playtime.GetValueOrDefault();
+                set => __pbn__playtime = value;
+            }
+            public bool ShouldSerializeplaytime() => __pbn__playtime != null;
+            public void Resetplaytime() => __pbn__playtime = null;
+            private uint? __pbn__playtime;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint last_played
+            {
+                get => __pbn__last_played.GetValueOrDefault();
+                set => __pbn__last_played = value;
+            }
+            public bool ShouldSerializelast_played() => __pbn__last_played != null;
+            public void Resetlast_played() => __pbn__last_played = null;
+            private uint? __pbn__last_played;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStoreBrowse_GetDLCForAppsSolr_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public StoreBrowseContext context { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<uint> appids { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string flavor
+        {
+            get => __pbn__flavor ?? "";
+            set => __pbn__flavor = value;
+        }
+        public bool ShouldSerializeflavor() => __pbn__flavor != null;
+        public void Resetflavor() => __pbn__flavor = null;
+        private string __pbn__flavor;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint count
+        {
+            get => __pbn__count.GetValueOrDefault();
+            set => __pbn__count = value;
+        }
+        public bool ShouldSerializecount() => __pbn__count != null;
+        public void Resetcount() => __pbn__count = null;
+        private uint? __pbn__count;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public CStorePageFilter store_page_filter { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStoreBrowse_GetDLCForAppsSolr_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<DLCList> dlc_lists { get; } = new global::System.Collections.Generic.List<DLCList>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class DLCList : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint parent_appid
+            {
+                get => __pbn__parent_appid.GetValueOrDefault();
+                set => __pbn__parent_appid = value;
+            }
+            public bool ShouldSerializeparent_appid() => __pbn__parent_appid != null;
+            public void Resetparent_appid() => __pbn__parent_appid = null;
+            private uint? __pbn__parent_appid;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public global::System.Collections.Generic.List<uint> dlc_appids { get; } = new global::System.Collections.Generic.List<uint>();
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EStoreItemType
     {
         k_EStoreItemType_Invalid = -1,
@@ -1713,6 +1977,8 @@ namespace SteamKit2.Internal
         k_EStoreItemType_Package = 1,
         k_EStoreItemType_Bundle = 2,
         k_EStoreItemType_Mtx = 3,
+        k_EStoreItemType_Tag = 4,
+        k_EStoreItemType_Creator = 5,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1765,6 +2031,8 @@ namespace SteamKit2.Internal
     {
         CStoreBrowse_GetItems_Response GetItems(CStoreBrowse_GetItems_Request request);
         CStoreBrowse_GetStoreCategories_Response GetStoreCategories(CStoreBrowse_GetStoreCategories_Request request);
+        CStoreBrowse_GetDLCForApps_Response GetDLCForApps(CStoreBrowse_GetDLCForApps_Request request);
+        CStoreBrowse_GetDLCForAppsSolr_Response GetDLCForAppsSolr(CStoreBrowse_GetDLCForAppsSolr_Request request);
     }
 
 }

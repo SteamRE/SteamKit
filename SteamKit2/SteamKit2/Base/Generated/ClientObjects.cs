@@ -660,6 +660,26 @@ namespace SteamKit2.Internal
         public void Resetis_unmount_supported() => __pbn__is_unmount_supported = null;
         private bool? __pbn__is_unmount_supported;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool is_trim_supported
+        {
+            get => __pbn__is_trim_supported.GetValueOrDefault();
+            set => __pbn__is_trim_supported = value;
+        }
+        public bool ShouldSerializeis_trim_supported() => __pbn__is_trim_supported != null;
+        public void Resetis_trim_supported() => __pbn__is_trim_supported = null;
+        private bool? __pbn__is_trim_supported;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public bool is_trim_running
+        {
+            get => __pbn__is_trim_running.GetValueOrDefault();
+            set => __pbn__is_trim_running = value;
+        }
+        public bool ShouldSerializeis_trim_running() => __pbn__is_trim_running != null;
+        public void Resetis_trim_running() => __pbn__is_trim_running = null;
+        private bool? __pbn__is_trim_running;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Drive : global::ProtoBuf.IExtensible
         {
@@ -730,6 +750,17 @@ namespace SteamKit2.Internal
             public bool ShouldSerializesize_bytes() => __pbn__size_bytes != null;
             public void Resetsize_bytes() => __pbn__size_bytes = null;
             private ulong? __pbn__size_bytes;
+
+            [global::ProtoBuf.ProtoMember(7)]
+            [global::System.ComponentModel.DefaultValue(EStorageDriveMediaType.k_EStorageDriveMediaType_Invalid)]
+            public EStorageDriveMediaType media_type
+            {
+                get => __pbn__media_type ?? EStorageDriveMediaType.k_EStorageDriveMediaType_Invalid;
+                set => __pbn__media_type = value;
+            }
+            public bool ShouldSerializemedia_type() => __pbn__media_type != null;
+            public void Resetmedia_type() => __pbn__media_type = null;
+            private EStorageDriveMediaType? __pbn__media_type;
 
         }
 
@@ -1427,6 +1458,85 @@ namespace SteamKit2.Internal
         public void Resetnis_sharpness_max() => __pbn__nis_sharpness_max = null;
         private int? __pbn__nis_sharpness_max;
 
+        [global::ProtoBuf.ProtoMember(19)]
+        public int display_external_refresh_manual_hz_min
+        {
+            get => __pbn__display_external_refresh_manual_hz_min.GetValueOrDefault();
+            set => __pbn__display_external_refresh_manual_hz_min = value;
+        }
+        public bool ShouldSerializedisplay_external_refresh_manual_hz_min() => __pbn__display_external_refresh_manual_hz_min != null;
+        public void Resetdisplay_external_refresh_manual_hz_min() => __pbn__display_external_refresh_manual_hz_min = null;
+        private int? __pbn__display_external_refresh_manual_hz_min;
+
+        [global::ProtoBuf.ProtoMember(20)]
+        public int display_external_refresh_manual_hz_max
+        {
+            get => __pbn__display_external_refresh_manual_hz_max.GetValueOrDefault();
+            set => __pbn__display_external_refresh_manual_hz_max = value;
+        }
+        public bool ShouldSerializedisplay_external_refresh_manual_hz_max() => __pbn__display_external_refresh_manual_hz_max != null;
+        public void Resetdisplay_external_refresh_manual_hz_max() => __pbn__display_external_refresh_manual_hz_max = null;
+        private int? __pbn__display_external_refresh_manual_hz_max;
+
+        [global::ProtoBuf.ProtoMember(21)]
+        public global::System.Collections.Generic.List<int> fps_limit_options_external { get; } = new global::System.Collections.Generic.List<int>();
+
+        [global::ProtoBuf.ProtoMember(22)]
+        public bool is_tearing_supported
+        {
+            get => __pbn__is_tearing_supported.GetValueOrDefault();
+            set => __pbn__is_tearing_supported = value;
+        }
+        public bool ShouldSerializeis_tearing_supported() => __pbn__is_tearing_supported != null;
+        public void Resetis_tearing_supported() => __pbn__is_tearing_supported = null;
+        private bool? __pbn__is_tearing_supported;
+
+        [global::ProtoBuf.ProtoMember(23)]
+        public bool is_vrr_supported
+        {
+            get => __pbn__is_vrr_supported.GetValueOrDefault();
+            set => __pbn__is_vrr_supported = value;
+        }
+        public bool ShouldSerializeis_vrr_supported() => __pbn__is_vrr_supported != null;
+        public void Resetis_vrr_supported() => __pbn__is_vrr_supported = null;
+        private bool? __pbn__is_vrr_supported;
+
+        [global::ProtoBuf.ProtoMember(24)]
+        public bool is_dynamic_refresh_rate_in_steam_supported
+        {
+            get => __pbn__is_dynamic_refresh_rate_in_steam_supported.GetValueOrDefault();
+            set => __pbn__is_dynamic_refresh_rate_in_steam_supported = value;
+        }
+        public bool ShouldSerializeis_dynamic_refresh_rate_in_steam_supported() => __pbn__is_dynamic_refresh_rate_in_steam_supported != null;
+        public void Resetis_dynamic_refresh_rate_in_steam_supported() => __pbn__is_dynamic_refresh_rate_in_steam_supported = null;
+        private bool? __pbn__is_dynamic_refresh_rate_in_steam_supported;
+
+        [global::ProtoBuf.ProtoMember(25)]
+        public bool is_split_scaling_and_filtering_supported
+        {
+            get => __pbn__is_split_scaling_and_filtering_supported.GetValueOrDefault();
+            set => __pbn__is_split_scaling_and_filtering_supported = value;
+        }
+        public bool ShouldSerializeis_split_scaling_and_filtering_supported() => __pbn__is_split_scaling_and_filtering_supported != null;
+        public void Resetis_split_scaling_and_filtering_supported() => __pbn__is_split_scaling_and_filtering_supported = null;
+        private bool? __pbn__is_split_scaling_and_filtering_supported;
+
+        [global::ProtoBuf.ProtoMember(26)]
+        public global::System.Collections.Generic.List<ESplitScalingFilter> split_scaling_filters_available { get; } = new global::System.Collections.Generic.List<ESplitScalingFilter>();
+
+        [global::ProtoBuf.ProtoMember(27)]
+        public global::System.Collections.Generic.List<ESplitScalingScaler> split_scaling_scalers_available { get; } = new global::System.Collections.Generic.List<ESplitScalingScaler>();
+
+        [global::ProtoBuf.ProtoMember(28)]
+        public bool is_hdr_supported
+        {
+            get => __pbn__is_hdr_supported.GetValueOrDefault();
+            set => __pbn__is_hdr_supported = value;
+        }
+        public bool ShouldSerializeis_hdr_supported() => __pbn__is_hdr_supported != null;
+        public void Resetis_hdr_supported() => __pbn__is_hdr_supported = null;
+        private bool? __pbn__is_hdr_supported;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1509,6 +1619,77 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeis_advanced_settings_enabled() => __pbn__is_advanced_settings_enabled != null;
         public void Resetis_advanced_settings_enabled() => __pbn__is_advanced_settings_enabled = null;
         private bool? __pbn__is_advanced_settings_enabled;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public bool allow_external_display_refresh_control
+        {
+            get => __pbn__allow_external_display_refresh_control.GetValueOrDefault();
+            set => __pbn__allow_external_display_refresh_control = value;
+        }
+        public bool ShouldSerializeallow_external_display_refresh_control() => __pbn__allow_external_display_refresh_control != null;
+        public void Resetallow_external_display_refresh_control() => __pbn__allow_external_display_refresh_control = null;
+        private bool? __pbn__allow_external_display_refresh_control;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public bool is_hdr_enabled
+        {
+            get => __pbn__is_hdr_enabled.GetValueOrDefault();
+            set => __pbn__is_hdr_enabled = value;
+        }
+        public bool ShouldSerializeis_hdr_enabled() => __pbn__is_hdr_enabled != null;
+        public void Resetis_hdr_enabled() => __pbn__is_hdr_enabled = null;
+        private bool? __pbn__is_hdr_enabled;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public bool force_hdr_wide_gammut_for_sdr
+        {
+            get => __pbn__force_hdr_wide_gammut_for_sdr.GetValueOrDefault();
+            set => __pbn__force_hdr_wide_gammut_for_sdr = value;
+        }
+        public bool ShouldSerializeforce_hdr_wide_gammut_for_sdr() => __pbn__force_hdr_wide_gammut_for_sdr != null;
+        public void Resetforce_hdr_wide_gammut_for_sdr() => __pbn__force_hdr_wide_gammut_for_sdr = null;
+        private bool? __pbn__force_hdr_wide_gammut_for_sdr;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public bool force_hdr_10pq_output_debug
+        {
+            get => __pbn__force_hdr_10pq_output_debug.GetValueOrDefault();
+            set => __pbn__force_hdr_10pq_output_debug = value;
+        }
+        public bool ShouldSerializeforce_hdr_10pq_output_debug() => __pbn__force_hdr_10pq_output_debug != null;
+        public void Resetforce_hdr_10pq_output_debug() => __pbn__force_hdr_10pq_output_debug = null;
+        private bool? __pbn__force_hdr_10pq_output_debug;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        [global::System.ComponentModel.DefaultValue(EHDRToneMapOperator.k_EHDRToneMapOperator_Invalid)]
+        public EHDRToneMapOperator hdr_on_sdr_tonemap_operator
+        {
+            get => __pbn__hdr_on_sdr_tonemap_operator ?? EHDRToneMapOperator.k_EHDRToneMapOperator_Invalid;
+            set => __pbn__hdr_on_sdr_tonemap_operator = value;
+        }
+        public bool ShouldSerializehdr_on_sdr_tonemap_operator() => __pbn__hdr_on_sdr_tonemap_operator != null;
+        public void Resethdr_on_sdr_tonemap_operator() => __pbn__hdr_on_sdr_tonemap_operator = null;
+        private EHDRToneMapOperator? __pbn__hdr_on_sdr_tonemap_operator;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public bool is_hdr_debug_heatmap_enabled
+        {
+            get => __pbn__is_hdr_debug_heatmap_enabled.GetValueOrDefault();
+            set => __pbn__is_hdr_debug_heatmap_enabled = value;
+        }
+        public bool ShouldSerializeis_hdr_debug_heatmap_enabled() => __pbn__is_hdr_debug_heatmap_enabled != null;
+        public void Resetis_hdr_debug_heatmap_enabled() => __pbn__is_hdr_debug_heatmap_enabled = null;
+        private bool? __pbn__is_hdr_debug_heatmap_enabled;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public bool debug_force_hdr_support
+        {
+            get => __pbn__debug_force_hdr_support.GetValueOrDefault();
+            set => __pbn__debug_force_hdr_support = value;
+        }
+        public bool ShouldSerializedebug_force_hdr_support() => __pbn__debug_force_hdr_support != null;
+        public void Resetdebug_force_hdr_support() => __pbn__debug_force_hdr_support = null;
+        private bool? __pbn__debug_force_hdr_support;
 
     }
 
@@ -1680,6 +1861,98 @@ namespace SteamKit2.Internal
         public bool ShouldSerializenis_sharpness() => __pbn__nis_sharpness != null;
         public void Resetnis_sharpness() => __pbn__nis_sharpness = null;
         private int? __pbn__nis_sharpness;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public int display_external_refresh_manual_hz
+        {
+            get => __pbn__display_external_refresh_manual_hz.GetValueOrDefault();
+            set => __pbn__display_external_refresh_manual_hz = value;
+        }
+        public bool ShouldSerializedisplay_external_refresh_manual_hz() => __pbn__display_external_refresh_manual_hz != null;
+        public void Resetdisplay_external_refresh_manual_hz() => __pbn__display_external_refresh_manual_hz = null;
+        private int? __pbn__display_external_refresh_manual_hz;
+
+        [global::ProtoBuf.ProtoMember(18)]
+        public int fps_limit_external
+        {
+            get => __pbn__fps_limit_external.GetValueOrDefault();
+            set => __pbn__fps_limit_external = value;
+        }
+        public bool ShouldSerializefps_limit_external() => __pbn__fps_limit_external != null;
+        public void Resetfps_limit_external() => __pbn__fps_limit_external = null;
+        private int? __pbn__fps_limit_external;
+
+        [global::ProtoBuf.ProtoMember(19)]
+        public bool is_tearing_enabled
+        {
+            get => __pbn__is_tearing_enabled.GetValueOrDefault();
+            set => __pbn__is_tearing_enabled = value;
+        }
+        public bool ShouldSerializeis_tearing_enabled() => __pbn__is_tearing_enabled != null;
+        public void Resetis_tearing_enabled() => __pbn__is_tearing_enabled = null;
+        private bool? __pbn__is_tearing_enabled;
+
+        [global::ProtoBuf.ProtoMember(20)]
+        public bool is_vrr_enabled
+        {
+            get => __pbn__is_vrr_enabled.GetValueOrDefault();
+            set => __pbn__is_vrr_enabled = value;
+        }
+        public bool ShouldSerializeis_vrr_enabled() => __pbn__is_vrr_enabled != null;
+        public void Resetis_vrr_enabled() => __pbn__is_vrr_enabled = null;
+        private bool? __pbn__is_vrr_enabled;
+
+        [global::ProtoBuf.ProtoMember(21)]
+        public bool is_composite_debug_enabled
+        {
+            get => __pbn__is_composite_debug_enabled.GetValueOrDefault();
+            set => __pbn__is_composite_debug_enabled = value;
+        }
+        public bool ShouldSerializeis_composite_debug_enabled() => __pbn__is_composite_debug_enabled != null;
+        public void Resetis_composite_debug_enabled() => __pbn__is_composite_debug_enabled = null;
+        private bool? __pbn__is_composite_debug_enabled;
+
+        [global::ProtoBuf.ProtoMember(22)]
+        public bool force_composite
+        {
+            get => __pbn__force_composite.GetValueOrDefault();
+            set => __pbn__force_composite = value;
+        }
+        public bool ShouldSerializeforce_composite() => __pbn__force_composite != null;
+        public void Resetforce_composite() => __pbn__force_composite = null;
+        private bool? __pbn__force_composite;
+
+        [global::ProtoBuf.ProtoMember(23)]
+        public bool use_dynamic_refresh_rate_in_steam
+        {
+            get => __pbn__use_dynamic_refresh_rate_in_steam.GetValueOrDefault();
+            set => __pbn__use_dynamic_refresh_rate_in_steam = value;
+        }
+        public bool ShouldSerializeuse_dynamic_refresh_rate_in_steam() => __pbn__use_dynamic_refresh_rate_in_steam != null;
+        public void Resetuse_dynamic_refresh_rate_in_steam() => __pbn__use_dynamic_refresh_rate_in_steam = null;
+        private bool? __pbn__use_dynamic_refresh_rate_in_steam;
+
+        [global::ProtoBuf.ProtoMember(24)]
+        [global::System.ComponentModel.DefaultValue(ESplitScalingFilter.k_ESplitScalingFilter_Invalid)]
+        public ESplitScalingFilter split_scaling_filter
+        {
+            get => __pbn__split_scaling_filter ?? ESplitScalingFilter.k_ESplitScalingFilter_Invalid;
+            set => __pbn__split_scaling_filter = value;
+        }
+        public bool ShouldSerializesplit_scaling_filter() => __pbn__split_scaling_filter != null;
+        public void Resetsplit_scaling_filter() => __pbn__split_scaling_filter = null;
+        private ESplitScalingFilter? __pbn__split_scaling_filter;
+
+        [global::ProtoBuf.ProtoMember(25)]
+        [global::System.ComponentModel.DefaultValue(ESplitScalingScaler.k_ESplitScalingScaler_Invalid)]
+        public ESplitScalingScaler split_scaling_scaler
+        {
+            get => __pbn__split_scaling_scaler ?? ESplitScalingScaler.k_ESplitScalingScaler_Invalid;
+            set => __pbn__split_scaling_scaler = value;
+        }
+        public bool ShouldSerializesplit_scaling_scaler() => __pbn__split_scaling_scaler != null;
+        public void Resetsplit_scaling_scaler() => __pbn__split_scaling_scaler = null;
+        private ESplitScalingScaler? __pbn__split_scaling_scaler;
 
     }
 
@@ -2066,6 +2339,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializertime_estimated_completion() => __pbn__rtime_estimated_completion != null;
         public void Resetrtime_estimated_completion() => __pbn__rtime_estimated_completion = null;
         private uint? __pbn__rtime_estimated_completion;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public int old_fw_workaround
+        {
+            get => __pbn__old_fw_workaround.GetValueOrDefault();
+            set => __pbn__old_fw_workaround = value;
+        }
+        public bool ShouldSerializeold_fw_workaround() => __pbn__old_fw_workaround != null;
+        public void Resetold_fw_workaround() => __pbn__old_fw_workaround = null;
+        private int? __pbn__old_fw_workaround;
 
     }
 
@@ -2537,6 +2820,291 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemDisplayMode : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int id
+        {
+            get => __pbn__id.GetValueOrDefault();
+            set => __pbn__id = value;
+        }
+        public bool ShouldSerializeid() => __pbn__id != null;
+        public void Resetid() => __pbn__id = null;
+        private int? __pbn__id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public int width
+        {
+            get => __pbn__width.GetValueOrDefault();
+            set => __pbn__width = value;
+        }
+        public bool ShouldSerializewidth() => __pbn__width != null;
+        public void Resetwidth() => __pbn__width = null;
+        private int? __pbn__width;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public int height
+        {
+            get => __pbn__height.GetValueOrDefault();
+            set => __pbn__height = value;
+        }
+        public bool ShouldSerializeheight() => __pbn__height != null;
+        public void Resetheight() => __pbn__height = null;
+        private int? __pbn__height;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public int refresh_hz
+        {
+            get => __pbn__refresh_hz.GetValueOrDefault();
+            set => __pbn__refresh_hz = value;
+        }
+        public bool ShouldSerializerefresh_hz() => __pbn__refresh_hz != null;
+        public void Resetrefresh_hz() => __pbn__refresh_hz = null;
+        private int? __pbn__refresh_hz;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemDisplay : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int id
+        {
+            get => __pbn__id.GetValueOrDefault();
+            set => __pbn__id = value;
+        }
+        public bool ShouldSerializeid() => __pbn__id != null;
+        public void Resetid() => __pbn__id = null;
+        private int? __pbn__id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string name
+        {
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
+        }
+        public bool ShouldSerializename() => __pbn__name != null;
+        public void Resetname() => __pbn__name = null;
+        private string __pbn__name;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string description
+        {
+            get => __pbn__description ?? "";
+            set => __pbn__description = value;
+        }
+        public bool ShouldSerializedescription() => __pbn__description != null;
+        public void Resetdescription() => __pbn__description = null;
+        private string __pbn__description;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool is_primary
+        {
+            get => __pbn__is_primary.GetValueOrDefault();
+            set => __pbn__is_primary = value;
+        }
+        public bool ShouldSerializeis_primary() => __pbn__is_primary != null;
+        public void Resetis_primary() => __pbn__is_primary = null;
+        private bool? __pbn__is_primary;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public bool is_enabled
+        {
+            get => __pbn__is_enabled.GetValueOrDefault();
+            set => __pbn__is_enabled = value;
+        }
+        public bool ShouldSerializeis_enabled() => __pbn__is_enabled != null;
+        public void Resetis_enabled() => __pbn__is_enabled = null;
+        private bool? __pbn__is_enabled;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool is_internal
+        {
+            get => __pbn__is_internal.GetValueOrDefault();
+            set => __pbn__is_internal = value;
+        }
+        public bool ShouldSerializeis_internal() => __pbn__is_internal != null;
+        public void Resetis_internal() => __pbn__is_internal = null;
+        private bool? __pbn__is_internal;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool has_mode_override
+        {
+            get => __pbn__has_mode_override.GetValueOrDefault();
+            set => __pbn__has_mode_override = value;
+        }
+        public bool ShouldSerializehas_mode_override() => __pbn__has_mode_override != null;
+        public void Resethas_mode_override() => __pbn__has_mode_override = null;
+        private bool? __pbn__has_mode_override;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public int width_mm
+        {
+            get => __pbn__width_mm.GetValueOrDefault();
+            set => __pbn__width_mm = value;
+        }
+        public bool ShouldSerializewidth_mm() => __pbn__width_mm != null;
+        public void Resetwidth_mm() => __pbn__width_mm = null;
+        private int? __pbn__width_mm;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public int height_mm
+        {
+            get => __pbn__height_mm.GetValueOrDefault();
+            set => __pbn__height_mm = value;
+        }
+        public bool ShouldSerializeheight_mm() => __pbn__height_mm != null;
+        public void Resetheight_mm() => __pbn__height_mm = null;
+        private int? __pbn__height_mm;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public int current_mode_id
+        {
+            get => __pbn__current_mode_id.GetValueOrDefault();
+            set => __pbn__current_mode_id = value;
+        }
+        public bool ShouldSerializecurrent_mode_id() => __pbn__current_mode_id != null;
+        public void Resetcurrent_mode_id() => __pbn__current_mode_id = null;
+        private int? __pbn__current_mode_id;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public global::System.Collections.Generic.List<CMsgSystemDisplayMode> modes { get; } = new global::System.Collections.Generic.List<CMsgSystemDisplayMode>();
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public int refresh_rate_min
+        {
+            get => __pbn__refresh_rate_min.GetValueOrDefault();
+            set => __pbn__refresh_rate_min = value;
+        }
+        public bool ShouldSerializerefresh_rate_min() => __pbn__refresh_rate_min != null;
+        public void Resetrefresh_rate_min() => __pbn__refresh_rate_min = null;
+        private int? __pbn__refresh_rate_min;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public int refresh_rate_max
+        {
+            get => __pbn__refresh_rate_max.GetValueOrDefault();
+            set => __pbn__refresh_rate_max = value;
+        }
+        public bool ShouldSerializerefresh_rate_max() => __pbn__refresh_rate_max != null;
+        public void Resetrefresh_rate_max() => __pbn__refresh_rate_max = null;
+        private int? __pbn__refresh_rate_max;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public bool is_vrr_capable
+        {
+            get => __pbn__is_vrr_capable.GetValueOrDefault();
+            set => __pbn__is_vrr_capable = value;
+        }
+        public bool ShouldSerializeis_vrr_capable() => __pbn__is_vrr_capable != null;
+        public void Resetis_vrr_capable() => __pbn__is_vrr_capable = null;
+        private bool? __pbn__is_vrr_capable;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public bool is_vrr_enabled
+        {
+            get => __pbn__is_vrr_enabled.GetValueOrDefault();
+            set => __pbn__is_vrr_enabled = value;
+        }
+        public bool ShouldSerializeis_vrr_enabled() => __pbn__is_vrr_enabled != null;
+        public void Resetis_vrr_enabled() => __pbn__is_vrr_enabled = null;
+        private bool? __pbn__is_vrr_enabled;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public bool is_hdr_capable
+        {
+            get => __pbn__is_hdr_capable.GetValueOrDefault();
+            set => __pbn__is_hdr_capable = value;
+        }
+        public bool ShouldSerializeis_hdr_capable() => __pbn__is_hdr_capable != null;
+        public void Resetis_hdr_capable() => __pbn__is_hdr_capable = null;
+        private bool? __pbn__is_hdr_capable;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public bool is_hdr_enabled
+        {
+            get => __pbn__is_hdr_enabled.GetValueOrDefault();
+            set => __pbn__is_hdr_enabled = value;
+        }
+        public bool ShouldSerializeis_hdr_enabled() => __pbn__is_hdr_enabled != null;
+        public void Resetis_hdr_enabled() => __pbn__is_hdr_enabled = null;
+        private bool? __pbn__is_hdr_enabled;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemDisplayManagerState : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CMsgSystemDisplay> displays { get; } = new global::System.Collections.Generic.List<CMsgSystemDisplay>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool is_mode_switching_supported
+        {
+            get => __pbn__is_mode_switching_supported.GetValueOrDefault();
+            set => __pbn__is_mode_switching_supported = value;
+        }
+        public bool ShouldSerializeis_mode_switching_supported() => __pbn__is_mode_switching_supported != null;
+        public void Resetis_mode_switching_supported() => __pbn__is_mode_switching_supported = null;
+        private bool? __pbn__is_mode_switching_supported;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(ESystemDisplayCompatibilityMode.k_ESystemDisplayCompatibilityMode_Invalid)]
+        public ESystemDisplayCompatibilityMode compatibility_mode
+        {
+            get => __pbn__compatibility_mode ?? ESystemDisplayCompatibilityMode.k_ESystemDisplayCompatibilityMode_Invalid;
+            set => __pbn__compatibility_mode = value;
+        }
+        public bool ShouldSerializecompatibility_mode() => __pbn__compatibility_mode != null;
+        public void Resetcompatibility_mode() => __pbn__compatibility_mode = null;
+        private ESystemDisplayCompatibilityMode? __pbn__compatibility_mode;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSystemDisplayManagerSetMode : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int display_id
+        {
+            get => __pbn__display_id.GetValueOrDefault();
+            set => __pbn__display_id = value;
+        }
+        public bool ShouldSerializedisplay_id() => __pbn__display_id != null;
+        public void Resetdisplay_id() => __pbn__display_id = null;
+        private int? __pbn__display_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public int mode_id
+        {
+            get => __pbn__mode_id.GetValueOrDefault();
+            set => __pbn__mode_id = value;
+        }
+        public bool ShouldSerializemode_id() => __pbn__mode_id != null;
+        public void Resetmode_id() => __pbn__mode_id = null;
+        private int? __pbn__mode_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgSystemManagerSettings : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2845,6 +3413,17 @@ namespace SteamKit2.Internal
         public void Resetbranch() => __pbn__branch = null;
         private EOSBranch? __pbn__branch;
 
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string custom_branch
+        {
+            get => __pbn__custom_branch ?? "";
+            set => __pbn__custom_branch = value;
+        }
+        public bool ShouldSerializecustom_branch() => __pbn__custom_branch != null;
+        public void Resetcustom_branch() => __pbn__custom_branch = null;
+        private string __pbn__custom_branch;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -3039,6 +3618,16 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(4)]
         public global::System.Collections.Generic.List<CMsgSystemUpdateApplyResult> update_apply_results { get; } = new global::System.Collections.Generic.List<CMsgSystemUpdateApplyResult>();
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public bool supports_os_updates
+        {
+            get => __pbn__supports_os_updates.GetValueOrDefault();
+            set => __pbn__supports_os_updates = value;
+        }
+        public bool ShouldSerializesupports_os_updates() => __pbn__supports_os_updates != null;
+        public void Resetsupports_os_updates() => __pbn__supports_os_updates = null;
+        private bool? __pbn__supports_os_updates;
 
     }
 
@@ -3312,6 +3901,36 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(1)]
         public global::System.Collections.Generic.List<uint> appids { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgMonitorInfo : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, IsRequired = true)]
+        public string selected_display_name { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<MonitorInfo> monitors { get; } = new global::System.Collections.Generic.List<MonitorInfo>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class MonitorInfo : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1, IsRequired = true)]
+            public string monitor_device_name { get; set; }
+
+            [global::ProtoBuf.ProtoMember(2, IsRequired = true)]
+            public string monitor_display_name { get; set; }
+
+        }
 
     }
 

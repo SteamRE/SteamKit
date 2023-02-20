@@ -151,6 +151,16 @@ namespace NetHookAnalyzer2.Protobufs
         public void Resetappid() => __pbn__appid = null;
         private uint? __pbn__appid;
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool include_already_seen
+        {
+            get => __pbn__include_already_seen.GetValueOrDefault();
+            set => __pbn__include_already_seen = value;
+        }
+        public bool ShouldSerializeinclude_already_seen() => __pbn__include_already_seen != null;
+        public void Resetinclude_already_seen() => __pbn__include_already_seen = null;
+        private bool? __pbn__include_already_seen;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

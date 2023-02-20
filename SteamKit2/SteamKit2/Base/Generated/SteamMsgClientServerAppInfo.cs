@@ -126,188 +126,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientAppInfoResponse : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<App> apps { get; } = new global::System.Collections.Generic.List<App>();
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<uint> apps_unknown { get; } = new global::System.Collections.Generic.List<uint>();
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public uint apps_pending
-        {
-            get => __pbn__apps_pending.GetValueOrDefault();
-            set => __pbn__apps_pending = value;
-        }
-        public bool ShouldSerializeapps_pending() => __pbn__apps_pending != null;
-        public void Resetapps_pending() => __pbn__apps_pending = null;
-        private uint? __pbn__apps_pending;
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class App : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint app_id
-            {
-                get => __pbn__app_id.GetValueOrDefault();
-                set => __pbn__app_id = value;
-            }
-            public bool ShouldSerializeapp_id() => __pbn__app_id != null;
-            public void Resetapp_id() => __pbn__app_id = null;
-            private uint? __pbn__app_id;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public uint change_number
-            {
-                get => __pbn__change_number.GetValueOrDefault();
-                set => __pbn__change_number = value;
-            }
-            public bool ShouldSerializechange_number() => __pbn__change_number != null;
-            public void Resetchange_number() => __pbn__change_number = null;
-            private uint? __pbn__change_number;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public global::System.Collections.Generic.List<Section> sections { get; } = new global::System.Collections.Generic.List<Section>();
-
-            [global::ProtoBuf.ProtoContract()]
-            public partial class Section : global::ProtoBuf.IExtensible
-            {
-                private global::ProtoBuf.IExtension __pbn__extensionData;
-                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-                [global::ProtoBuf.ProtoMember(1)]
-                public uint section_id
-                {
-                    get => __pbn__section_id.GetValueOrDefault();
-                    set => __pbn__section_id = value;
-                }
-                public bool ShouldSerializesection_id() => __pbn__section_id != null;
-                public void Resetsection_id() => __pbn__section_id = null;
-                private uint? __pbn__section_id;
-
-                [global::ProtoBuf.ProtoMember(2)]
-                public byte[] section_kv
-                {
-                    get => __pbn__section_kv;
-                    set => __pbn__section_kv = value;
-                }
-                public bool ShouldSerializesection_kv() => __pbn__section_kv != null;
-                public void Resetsection_kv() => __pbn__section_kv = null;
-                private byte[] __pbn__section_kv;
-
-            }
-
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientPackageInfoRequest : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<uint> package_ids { get; } = new global::System.Collections.Generic.List<uint>();
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public bool meta_data_only
-        {
-            get => __pbn__meta_data_only.GetValueOrDefault();
-            set => __pbn__meta_data_only = value;
-        }
-        public bool ShouldSerializemeta_data_only() => __pbn__meta_data_only != null;
-        public void Resetmeta_data_only() => __pbn__meta_data_only = null;
-        private bool? __pbn__meta_data_only;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientPackageInfoResponse : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<Package> packages { get; } = new global::System.Collections.Generic.List<Package>();
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<uint> packages_unknown { get; } = new global::System.Collections.Generic.List<uint>();
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public uint packages_pending
-        {
-            get => __pbn__packages_pending.GetValueOrDefault();
-            set => __pbn__packages_pending = value;
-        }
-        public bool ShouldSerializepackages_pending() => __pbn__packages_pending != null;
-        public void Resetpackages_pending() => __pbn__packages_pending = null;
-        private uint? __pbn__packages_pending;
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class Package : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint package_id
-            {
-                get => __pbn__package_id.GetValueOrDefault();
-                set => __pbn__package_id = value;
-            }
-            public bool ShouldSerializepackage_id() => __pbn__package_id != null;
-            public void Resetpackage_id() => __pbn__package_id = null;
-            private uint? __pbn__package_id;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public uint change_number
-            {
-                get => __pbn__change_number.GetValueOrDefault();
-                set => __pbn__change_number = value;
-            }
-            public bool ShouldSerializechange_number() => __pbn__change_number != null;
-            public void Resetchange_number() => __pbn__change_number = null;
-            private uint? __pbn__change_number;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public byte[] sha
-            {
-                get => __pbn__sha;
-                set => __pbn__sha = value;
-            }
-            public bool ShouldSerializesha() => __pbn__sha != null;
-            public void Resetsha() => __pbn__sha = null;
-            private byte[] __pbn__sha;
-
-            [global::ProtoBuf.ProtoMember(4)]
-            public byte[] buffer
-            {
-                get => __pbn__buffer;
-                set => __pbn__buffer = value;
-            }
-            public bool ShouldSerializebuffer() => __pbn__buffer != null;
-            public void Resetbuffer() => __pbn__buffer = null;
-            private byte[] __pbn__buffer;
-
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgClientPICSChangesSinceRequest : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -543,14 +361,24 @@ namespace SteamKit2.Internal
         private uint? __pbn__num_prev_failed;
 
         [global::ProtoBuf.ProtoMember(5)]
-        public uint supports_package_tokens
+        public uint OBSOLETE_supports_package_tokens
         {
-            get => __pbn__supports_package_tokens.GetValueOrDefault();
-            set => __pbn__supports_package_tokens = value;
+            get => __pbn__OBSOLETE_supports_package_tokens.GetValueOrDefault();
+            set => __pbn__OBSOLETE_supports_package_tokens = value;
         }
-        public bool ShouldSerializesupports_package_tokens() => __pbn__supports_package_tokens != null;
-        public void Resetsupports_package_tokens() => __pbn__supports_package_tokens = null;
-        private uint? __pbn__supports_package_tokens;
+        public bool ShouldSerializeOBSOLETE_supports_package_tokens() => __pbn__OBSOLETE_supports_package_tokens != null;
+        public void ResetOBSOLETE_supports_package_tokens() => __pbn__OBSOLETE_supports_package_tokens = null;
+        private uint? __pbn__OBSOLETE_supports_package_tokens;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint sequence_number
+        {
+            get => __pbn__sequence_number.GetValueOrDefault();
+            set => __pbn__sequence_number = value;
+        }
+        public bool ShouldSerializesequence_number() => __pbn__sequence_number != null;
+        public void Resetsequence_number() => __pbn__sequence_number = null;
+        private uint? __pbn__sequence_number;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class AppInfo : global::ProtoBuf.IExtensible

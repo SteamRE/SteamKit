@@ -76,17 +76,6 @@ namespace SteamKit2.Internal
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(true)]
-        public bool include_new_authentications
-        {
-            get => __pbn__include_new_authentications ?? true;
-            set => __pbn__include_new_authentications = value;
-        }
-        public bool ShouldSerializeinclude_new_authentications() => __pbn__include_new_authentications != null;
-        public void Resetinclude_new_authentications() => __pbn__include_new_authentications = null;
-        private bool? __pbn__include_new_authentications;
-
         [global::ProtoBuf.ProtoMember(2)]
         [global::System.ComponentModel.DefaultValue("")]
         public string webcookie
@@ -149,9 +138,6 @@ namespace SteamKit2.Internal
         public bool ShouldSerializetimestamp_steamguard_enabled() => __pbn__timestamp_steamguard_enabled != null;
         public void Resettimestamp_steamguard_enabled() => __pbn__timestamp_steamguard_enabled = null;
         private uint? __pbn__timestamp_steamguard_enabled;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public global::System.Collections.Generic.List<NewAuthentication> deprecated_newauthentication { get; } = new global::System.Collections.Generic.List<NewAuthentication>();
 
         [global::ProtoBuf.ProtoMember(4)]
         [global::System.ComponentModel.DefaultValue("")]
@@ -228,90 +214,6 @@ namespace SteamKit2.Internal
         private bool? __pbn__is_phone_verified;
 
         [global::ProtoBuf.ProtoContract()]
-        public partial class NewAuthentication : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-            public uint timestamp_steamguard_enabled
-            {
-                get => __pbn__timestamp_steamguard_enabled.GetValueOrDefault();
-                set => __pbn__timestamp_steamguard_enabled = value;
-            }
-            public bool ShouldSerializetimestamp_steamguard_enabled() => __pbn__timestamp_steamguard_enabled != null;
-            public void Resettimestamp_steamguard_enabled() => __pbn__timestamp_steamguard_enabled = null;
-            private uint? __pbn__timestamp_steamguard_enabled;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public bool is_web_cookie
-            {
-                get => __pbn__is_web_cookie.GetValueOrDefault();
-                set => __pbn__is_web_cookie = value;
-            }
-            public bool ShouldSerializeis_web_cookie() => __pbn__is_web_cookie != null;
-            public void Resetis_web_cookie() => __pbn__is_web_cookie = null;
-            private bool? __pbn__is_web_cookie;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public int deprecated_ipaddress
-            {
-                get => __pbn__deprecated_ipaddress.GetValueOrDefault();
-                set => __pbn__deprecated_ipaddress = value;
-            }
-            public bool ShouldSerializedeprecated_ipaddress() => __pbn__deprecated_ipaddress != null;
-            public void Resetdeprecated_ipaddress() => __pbn__deprecated_ipaddress = null;
-            private int? __pbn__deprecated_ipaddress;
-
-            [global::ProtoBuf.ProtoMember(4)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string geoloc_info
-            {
-                get => __pbn__geoloc_info ?? "";
-                set => __pbn__geoloc_info = value;
-            }
-            public bool ShouldSerializegeoloc_info() => __pbn__geoloc_info != null;
-            public void Resetgeoloc_info() => __pbn__geoloc_info = null;
-            private string __pbn__geoloc_info;
-
-            [global::ProtoBuf.ProtoMember(5)]
-            public bool is_remembered
-            {
-                get => __pbn__is_remembered.GetValueOrDefault();
-                set => __pbn__is_remembered = value;
-            }
-            public bool ShouldSerializeis_remembered() => __pbn__is_remembered != null;
-            public void Resetis_remembered() => __pbn__is_remembered = null;
-            private bool? __pbn__is_remembered;
-
-            [global::ProtoBuf.ProtoMember(6)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string machine_name_user_supplied
-            {
-                get => __pbn__machine_name_user_supplied ?? "";
-                set => __pbn__machine_name_user_supplied = value;
-            }
-            public bool ShouldSerializemachine_name_user_supplied() => __pbn__machine_name_user_supplied != null;
-            public void Resetmachine_name_user_supplied() => __pbn__machine_name_user_supplied = null;
-            private string __pbn__machine_name_user_supplied;
-
-            [global::ProtoBuf.ProtoMember(7)]
-            public int status
-            {
-                get => __pbn__status.GetValueOrDefault();
-                set => __pbn__status = value;
-            }
-            public bool ShouldSerializestatus() => __pbn__status != null;
-            public void Resetstatus() => __pbn__status = null;
-            private int? __pbn__status;
-
-            [global::ProtoBuf.ProtoMember(8)]
-            public CMsgIPAddress ip_address { get; set; }
-
-        }
-
-        [global::ProtoBuf.ProtoContract()]
         public partial class SessionData : global::ProtoBuf.IExtensible
         {
             private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -359,9 +261,6 @@ namespace SteamKit2.Internal
             public void Resetauthentication_exists_from_geoloc_before_mintime() => __pbn__authentication_exists_from_geoloc_before_mintime = null;
             private bool? __pbn__authentication_exists_from_geoloc_before_mintime;
 
-            [global::ProtoBuf.ProtoMember(5)]
-            public global::System.Collections.Generic.List<CCredentials_GetSteamGuardDetails_Response.NewAuthentication> newauthentication { get; } = new global::System.Collections.Generic.List<CCredentials_GetSteamGuardDetails_Response.NewAuthentication>();
-
             [global::ProtoBuf.ProtoMember(6)]
             public bool authentication_exists_from_same_ip_before_mintime
             {
@@ -394,44 +293,6 @@ namespace SteamKit2.Internal
             private string __pbn__public_ip_address;
 
         }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CCredentials_NewMachineNotificationDialog_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public bool is_approved
-        {
-            get => __pbn__is_approved.GetValueOrDefault();
-            set => __pbn__is_approved = value;
-        }
-        public bool ShouldSerializeis_approved() => __pbn__is_approved != null;
-        public void Resetis_approved() => __pbn__is_approved = null;
-        private bool? __pbn__is_approved;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public bool is_wizard_complete
-        {
-            get => __pbn__is_wizard_complete.GetValueOrDefault();
-            set => __pbn__is_wizard_complete = value;
-        }
-        public bool ShouldSerializeis_wizard_complete() => __pbn__is_wizard_complete != null;
-        public void Resetis_wizard_complete() => __pbn__is_wizard_complete = null;
-        private bool? __pbn__is_wizard_complete;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CCredentials_NewMachineNotificationDialog_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
     }
 
@@ -713,7 +574,6 @@ namespace SteamKit2.Internal
     {
         CCredentials_TestAvailablePassword_Response TestAvailablePassword(CCredentials_TestAvailablePassword_Request request);
         CCredentials_GetSteamGuardDetails_Response GetSteamGuardDetails(CCredentials_GetSteamGuardDetails_Request request);
-        CCredentials_NewMachineNotificationDialog_Response NewMachineNotificationDialogResult(CCredentials_NewMachineNotificationDialog_Request request);
         CCredentials_ValidateEmailAddress_Response ValidateEmailAddress(CCredentials_ValidateEmailAddress_Request request);
         CCredentials_SteamGuardPhishingReport_Response SteamGuardPhishingReport(CCredentials_SteamGuardPhishingReport_Request request);
         CCredentials_LastCredentialChangeTime_Response GetCredentialChangeTimeDetails(CCredentials_LastCredentialChangeTime_Request request);

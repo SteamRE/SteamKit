@@ -106,6 +106,7 @@ namespace SteamKit2.Internal
         k_EProfileCustomizationTypeLoyaltyRewardReactions = 21,
         k_EProfileCustomizationTypeSingleArtworkShowcase = 22,
         k_EProfileCustomizationTypeAchievementsCompletionist = 23,
+        k_EProfileCustomizationTypeReplay = 24,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -252,6 +253,35 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public enum ESplitScalingFilter
+    {
+        k_ESplitScalingFilter_Invalid = 0,
+        k_ESplitScalingFilter_Linear = 1,
+        k_ESplitScalingFilter_Nearest = 2,
+        k_ESplitScalingFilter_FSR = 3,
+        k_ESplitScalingFilter_NIS = 4,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESplitScalingScaler
+    {
+        k_ESplitScalingScaler_Invalid = 0,
+        k_ESplitScalingScaler_Auto = 1,
+        k_ESplitScalingScaler_Integer = 2,
+        k_ESplitScalingScaler_Fit = 3,
+        k_ESplitScalingScaler_Fill = 4,
+        k_ESplitScalingScaler_Stretch = 5,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EHDRToneMapOperator
+    {
+        k_EHDRToneMapOperator_Invalid = 0,
+        k_EHDRToneMapOperator_Uncharted = 1,
+        k_EHDRToneMapOperator_Reinhard = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ECPUGovernor
     {
         k_ECPUGovernor_Invalid = 0,
@@ -305,6 +335,24 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public enum EStorageDriveMediaType
+    {
+        k_EStorageDriveMediaType_Invalid = 0,
+        k_EStorageDriveMediaType_Unknown = 1,
+        k_EStorageDriveMediaType_HDD = 2,
+        k_EStorageDriveMediaType_SSD = 3,
+        k_EStorageDriveMediaType_Removable = 4,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESystemDisplayCompatibilityMode
+    {
+        k_ESystemDisplayCompatibilityMode_Invalid = 0,
+        k_ESystemDisplayCompatibilityMode_None = 1,
+        k_ESystemDisplayCompatibilityMode_MinimalBandwith = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ESteamDeckCompatibilityCategory
     {
         k_ESteamDeckCompatibilityCategory_Unknown = 0,
@@ -350,6 +398,7 @@ namespace SteamKit2.Internal
         k_EOSBranch_Beta = 3,
         k_EOSBranch_BetaCandidate = 4,
         k_EOSBranch_Main = 5,
+        k_EOSBranch_Staging = 6,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -372,6 +421,7 @@ namespace SteamKit2.Internal
         k_ECommunityItemClass_AvatarFrame = 14,
         k_ECommunityItemClass_AnimatedAvatar = 15,
         k_ECommunityItemClass_SteamDeckKeyboardSkin = 16,
+        k_ECommunityItemClass_SteamDeckStartupMovie = 17,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -416,6 +466,15 @@ namespace SteamKit2.Internal
         k_ESessionPersistence_Invalid = -1,
         k_ESessionPersistence_Ephemeral = 0,
         k_ESessionPersistence_Persistent = 1,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ENewSteamAnnouncementState
+    {
+        k_ENewSteamAnnouncementState_Invalid = 0,
+        k_ENewSteamAnnouncementState_AllRead = 1,
+        k_ENewSteamAnnouncementState_NewAnnouncement = 2,
+        k_ENewSteamAnnouncementState_FeaturedAnnouncement = 3,
     }
 
 }

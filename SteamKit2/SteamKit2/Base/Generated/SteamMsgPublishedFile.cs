@@ -3402,6 +3402,101 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CPublishedFile_GetAppRelationshipsBatched_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<ulong> publishedfileids { get; } = new global::System.Collections.Generic.List<ulong>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint filter_relationship
+        {
+            get => __pbn__filter_relationship.GetValueOrDefault();
+            set => __pbn__filter_relationship = value;
+        }
+        public bool ShouldSerializefilter_relationship() => __pbn__filter_relationship != null;
+        public void Resetfilter_relationship() => __pbn__filter_relationship = null;
+        private uint? __pbn__filter_relationship;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPublishedFile_GetAppRelationshipsBatched_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<PublishedFileAppRelationship> relationships { get; } = new global::System.Collections.Generic.List<PublishedFileAppRelationship>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class AppRelationship : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint appid
+            {
+                get => __pbn__appid.GetValueOrDefault();
+                set => __pbn__appid = value;
+            }
+            public bool ShouldSerializeappid() => __pbn__appid != null;
+            public void Resetappid() => __pbn__appid = null;
+            private uint? __pbn__appid;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint relationship
+            {
+                get => __pbn__relationship.GetValueOrDefault();
+                set => __pbn__relationship = value;
+            }
+            public bool ShouldSerializerelationship() => __pbn__relationship != null;
+            public void Resetrelationship() => __pbn__relationship = null;
+            private uint? __pbn__relationship;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class PublishedFileAppRelationship : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public ulong publishedfileid
+            {
+                get => __pbn__publishedfileid.GetValueOrDefault();
+                set => __pbn__publishedfileid = value;
+            }
+            public bool ShouldSerializepublishedfileid() => __pbn__publishedfileid != null;
+            public void Resetpublishedfileid() => __pbn__publishedfileid = null;
+            private ulong? __pbn__publishedfileid;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint result
+            {
+                get => __pbn__result.GetValueOrDefault();
+                set => __pbn__result = value;
+            }
+            public bool ShouldSerializeresult() => __pbn__result != null;
+            public void Resetresult() => __pbn__result = null;
+            private uint? __pbn__result;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public global::System.Collections.Generic.List<CPublishedFile_GetAppRelationshipsBatched_Response.AppRelationship> app_relationships { get; } = new global::System.Collections.Generic.List<CPublishedFile_GetAppRelationshipsBatched_Response.AppRelationship>();
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CPublishedFile_StartPlaytimeTracking_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -4024,6 +4119,7 @@ namespace SteamKit2.Internal
         CPublishedFile_AddAppRelationship_Response AddAppRelationship(CPublishedFile_AddAppRelationship_Request request);
         CPublishedFile_RemoveAppRelationship_Response RemoveAppRelationship(CPublishedFile_RemoveAppRelationship_Request request);
         CPublishedFile_GetAppRelationships_Response GetAppRelationships(CPublishedFile_GetAppRelationships_Request request);
+        CPublishedFile_GetAppRelationshipsBatched_Response GetAppRelationshipsBatched(CPublishedFile_GetAppRelationshipsBatched_Request request);
         CPublishedFile_StartPlaytimeTracking_Response StartPlaytimeTracking(CPublishedFile_StartPlaytimeTracking_Request request);
         CPublishedFile_StopPlaytimeTracking_Response StopPlaytimeTracking(CPublishedFile_StopPlaytimeTracking_Request request);
         CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response StopPlaytimeTrackingForAllAppItems(CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request request);

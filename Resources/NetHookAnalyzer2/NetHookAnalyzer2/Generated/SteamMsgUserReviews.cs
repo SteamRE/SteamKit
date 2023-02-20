@@ -214,6 +214,16 @@ namespace NetHookAnalyzer2.Protobufs
         public void Resetcomments_disabled() => __pbn__comments_disabled = null;
         private bool? __pbn__comments_disabled;
 
+        [global::ProtoBuf.ProtoMember(9)]
+        public bool hide_in_steam_china
+        {
+            get => __pbn__hide_in_steam_china.GetValueOrDefault();
+            set => __pbn__hide_in_steam_china = value;
+        }
+        public bool ShouldSerializehide_in_steam_china() => __pbn__hide_in_steam_china != null;
+        public void Resethide_in_steam_china() => __pbn__hide_in_steam_china = null;
+        private bool? __pbn__hide_in_steam_china;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -639,6 +649,27 @@ namespace NetHookAnalyzer2.Protobufs
         public bool ShouldSerializeipaddress() => __pbn__ipaddress != null;
         public void Resetipaddress() => __pbn__ipaddress = null;
         private string __pbn__ipaddress;
+
+        [global::ProtoBuf.ProtoMember(42)]
+        public bool hidden_in_steam_china
+        {
+            get => __pbn__hidden_in_steam_china.GetValueOrDefault();
+            set => __pbn__hidden_in_steam_china = value;
+        }
+        public bool ShouldSerializehidden_in_steam_china() => __pbn__hidden_in_steam_china != null;
+        public void Resethidden_in_steam_china() => __pbn__hidden_in_steam_china = null;
+        private bool? __pbn__hidden_in_steam_china;
+
+        [global::ProtoBuf.ProtoMember(43)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string steam_china_location
+        {
+            get => __pbn__steam_china_location ?? "";
+            set => __pbn__steam_china_location = value;
+        }
+        public bool ShouldSerializesteam_china_location() => __pbn__steam_china_location != null;
+        public void Resetsteam_china_location() => __pbn__steam_china_location = null;
+        private string __pbn__steam_china_location;
 
     }
 

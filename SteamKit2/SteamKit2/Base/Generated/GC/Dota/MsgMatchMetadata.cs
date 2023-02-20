@@ -634,6 +634,45 @@ namespace SteamKit2.GC.Dota.Internal
             }
 
             [global::ProtoBuf.ProtoContract()]
+            public partial class PeriodicResourceData : global::ProtoBuf.IExtensible
+            {
+                private global::ProtoBuf.IExtension __pbn__extensionData;
+                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+                [global::ProtoBuf.ProtoMember(1)]
+                public uint periodic_resource_id
+                {
+                    get => __pbn__periodic_resource_id.GetValueOrDefault();
+                    set => __pbn__periodic_resource_id = value;
+                }
+                public bool ShouldSerializeperiodic_resource_id() => __pbn__periodic_resource_id != null;
+                public void Resetperiodic_resource_id() => __pbn__periodic_resource_id = null;
+                private uint? __pbn__periodic_resource_id;
+
+                [global::ProtoBuf.ProtoMember(2)]
+                public uint remaining
+                {
+                    get => __pbn__remaining.GetValueOrDefault();
+                    set => __pbn__remaining = value;
+                }
+                public bool ShouldSerializeremaining() => __pbn__remaining != null;
+                public void Resetremaining() => __pbn__remaining = null;
+                private uint? __pbn__remaining;
+
+                [global::ProtoBuf.ProtoMember(3)]
+                public uint max
+                {
+                    get => __pbn__max.GetValueOrDefault();
+                    set => __pbn__max = value;
+                }
+                public bool ShouldSerializemax() => __pbn__max != null;
+                public void Resetmax() => __pbn__max = null;
+                private uint? __pbn__max;
+
+            }
+
+            [global::ProtoBuf.ProtoContract()]
             public partial class EventData : global::ProtoBuf.IExtensible
             {
                 private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -851,6 +890,9 @@ namespace SteamKit2.GC.Dota.Internal
                 public bool ShouldSerializecavern_crawl_half_credit() => __pbn__cavern_crawl_half_credit != null;
                 public void Resetcavern_crawl_half_credit() => __pbn__cavern_crawl_half_credit = null;
                 private bool? __pbn__cavern_crawl_half_credit;
+
+                [global::ProtoBuf.ProtoMember(26)]
+                public global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.PeriodicResourceData> periodic_resources { get; } = new global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.PeriodicResourceData>();
 
             }
 
@@ -1338,6 +1380,26 @@ namespace SteamKit2.GC.Dota.Internal
 
                 [global::ProtoBuf.ProtoMember(53)]
                 public CDOTAMatchMetadata.Team.FeaturedGamemodeProgress featured_gamemode_progress { get; set; }
+
+                [global::ProtoBuf.ProtoMember(54)]
+                public uint featured_hero_sticker_index
+                {
+                    get => __pbn__featured_hero_sticker_index.GetValueOrDefault();
+                    set => __pbn__featured_hero_sticker_index = value;
+                }
+                public bool ShouldSerializefeatured_hero_sticker_index() => __pbn__featured_hero_sticker_index != null;
+                public void Resetfeatured_hero_sticker_index() => __pbn__featured_hero_sticker_index = null;
+                private uint? __pbn__featured_hero_sticker_index;
+
+                [global::ProtoBuf.ProtoMember(55)]
+                public uint featured_hero_sticker_quality
+                {
+                    get => __pbn__featured_hero_sticker_quality.GetValueOrDefault();
+                    set => __pbn__featured_hero_sticker_quality = value;
+                }
+                public bool ShouldSerializefeatured_hero_sticker_quality() => __pbn__featured_hero_sticker_quality != null;
+                public void Resetfeatured_hero_sticker_quality() => __pbn__featured_hero_sticker_quality = null;
+                private uint? __pbn__featured_hero_sticker_quality;
 
                 [global::ProtoBuf.ProtoContract()]
                 public partial class ContractProgress : global::ProtoBuf.IExtensible

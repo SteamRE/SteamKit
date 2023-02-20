@@ -1027,6 +1027,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetwill_reincarnate() => __pbn__will_reincarnate = null;
         private bool? __pbn__will_reincarnate;
 
+        [global::ProtoBuf.ProtoMember(79)]
+        public bool uses_charges
+        {
+            get => __pbn__uses_charges.GetValueOrDefault();
+            set => __pbn__uses_charges = value;
+        }
+        public bool ShouldSerializeuses_charges() => __pbn__uses_charges != null;
+        public void Resetuses_charges() => __pbn__uses_charges = null;
+        private bool? __pbn__uses_charges;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1089,14 +1099,14 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__audit_action;
 
         [global::ProtoBuf.ProtoMember(6)]
-        public uint audit_data
+        public ulong audit_data
         {
             get => __pbn__audit_data.GetValueOrDefault();
             set => __pbn__audit_data = value;
         }
         public bool ShouldSerializeaudit_data() => __pbn__audit_data != null;
         public void Resetaudit_data() => __pbn__audit_data = null;
-        private uint? __pbn__audit_data;
+        private ulong? __pbn__audit_data;
 
     }
 
@@ -1211,6 +1221,8 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_INTERNATIONAL_2022 = 36,
         EVENT_ID_TEAM_2021_2022_TOUR3 = 37,
         EVENT_ID_TEAM_INTERNATIONAL_2022 = 38,
+        EVENT_ID_PERMANENT_GRANTS = 39,
+        EVENT_ID_TEAM_2023_TOUR1 = 41,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1572,6 +1584,11 @@ namespace SteamKit2.GC.Dota.Internal
         k_EBadgeType_TI8_Finals = 5,
         k_EBadgeType_TI8_AllEvent = 6,
         k_EBadgeType_TI10 = 7,
+        k_EBadgeType_TI11_PlayoffsDay1 = 8,
+        k_EBadgeType_TI11_PlayoffsDay2 = 9,
+        k_EBadgeType_TI11_PlayoffsDay3 = 10,
+        k_EBadgeType_TI11_PlayoffsDay4 = 11,
+        k_EBadgeType_TI11_FinalsWeekend = 12,
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -680,9 +680,10 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(65535)]
         public uint def_index
         {
-            get => __pbn__def_index.GetValueOrDefault();
+            get => __pbn__def_index ?? 65535;
             set => __pbn__def_index = value;
         }
         public bool ShouldSerializedef_index() => __pbn__def_index != null;
@@ -1429,9 +1430,10 @@ namespace SteamKit2.GC.Dota.Internal
         private ulong? __pbn__gem_item_id;
 
         [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(65535)]
         public uint socket_index
         {
-            get => __pbn__socket_index.GetValueOrDefault();
+            get => __pbn__socket_index ?? 65535;
             set => __pbn__socket_index = value;
         }
         public bool ShouldSerializesocket_index() => __pbn__socket_index != null;
@@ -1526,9 +1528,10 @@ namespace SteamKit2.GC.Dota.Internal
         private ulong? __pbn__item_item_id;
 
         [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(65535)]
         public uint socket_index
         {
-            get => __pbn__socket_index.GetValueOrDefault();
+            get => __pbn__socket_index ?? 65535;
             set => __pbn__socket_index = value;
         }
         public bool ShouldSerializesocket_index() => __pbn__socket_index != null;
@@ -1907,6 +1910,67 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCAggregateMetrics : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<SingleMetric> metrics { get; } = new global::System.Collections.Generic.List<SingleMetric>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class SingleMetric : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string metric_name
+            {
+                get => __pbn__metric_name ?? "";
+                set => __pbn__metric_name = value;
+            }
+            public bool ShouldSerializemetric_name() => __pbn__metric_name != null;
+            public void Resetmetric_name() => __pbn__metric_name = null;
+            private string __pbn__metric_name;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint metric_count
+            {
+                get => __pbn__metric_count.GetValueOrDefault();
+                set => __pbn__metric_count = value;
+            }
+            public bool ShouldSerializemetric_count() => __pbn__metric_count != null;
+            public void Resetmetric_count() => __pbn__metric_count = null;
+            private uint? __pbn__metric_count;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToClientAggregateMetricsBackoff : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public float upload_rate_modifier
+        {
+            get => __pbn__upload_rate_modifier.GetValueOrDefault();
+            set => __pbn__upload_rate_modifier = value;
+        }
+        public bool ShouldSerializeupload_rate_modifier() => __pbn__upload_rate_modifier != null;
+        public void Resetupload_rate_modifier() => __pbn__upload_rate_modifier = null;
+        private float? __pbn__upload_rate_modifier;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EGCBaseMsg
     {
         k_EMsgGCReplicateConVars = 4002,
@@ -1931,6 +1995,8 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGCToClientApplyRemoteConVars = 4520,
         k_EMsgGCToServerApplyRemoteConVars = 4521,
         k_EMsgClientToGCIntegrityStatus = 4522,
+        k_EMsgClientToGCAggregateMetrics = 4523,
+        k_EMsgGCToClientAggregateMetricsBackoff = 4524,
     }
 
     [global::ProtoBuf.ProtoContract()]

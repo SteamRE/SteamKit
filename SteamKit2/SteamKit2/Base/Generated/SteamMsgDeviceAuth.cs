@@ -643,6 +643,26 @@ namespace SteamKit2.Internal
             public void Resetis_used() => __pbn__is_used = null;
             private bool? __pbn__is_used;
 
+            [global::ProtoBuf.ProtoMember(6)]
+            public uint time_removed
+            {
+                get => __pbn__time_removed.GetValueOrDefault();
+                set => __pbn__time_removed = value;
+            }
+            public bool ShouldSerializetime_removed() => __pbn__time_removed != null;
+            public void Resettime_removed() => __pbn__time_removed = null;
+            private uint? __pbn__time_removed;
+
+            [global::ProtoBuf.ProtoMember(7)]
+            public uint time_first
+            {
+                get => __pbn__time_first.GetValueOrDefault();
+                set => __pbn__time_first = value;
+            }
+            public bool ShouldSerializetime_first() => __pbn__time_first != null;
+            public void Resettime_first() => __pbn__time_first = null;
+            private uint? __pbn__time_first;
+
         }
 
     }
@@ -744,6 +764,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializesteamid() => __pbn__steamid != null;
         public void Resetsteamid() => __pbn__steamid = null;
         private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
 
     }
 

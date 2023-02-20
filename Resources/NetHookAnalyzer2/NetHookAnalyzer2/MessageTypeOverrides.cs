@@ -29,7 +29,7 @@ namespace NetHookAnalyzer2
 
             { EMsg.AMGameServerUpdate, typeof(CMsgGameServerData) },
 
-            { EMsg.ClientDPUpdateAppJobReport, typeof(CMsgClientUpdateAppJobReport) },
+            { EMsg.ClientDPUpdateAppJobReport, typeof(Protobufs.CMsgClientUpdateAppJobReport) },
 
             { EMsg.ClientPlayingSessionState, typeof(CMsgClientPlayingSessionState) },
 

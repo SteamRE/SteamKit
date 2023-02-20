@@ -563,6 +563,45 @@ namespace SteamKit2.Internal
         private bool? __pbn__recent_reauthentication;
 
         [global::ProtoBuf.ProtoContract()]
+        public partial class ProcessInfo : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint process_id
+            {
+                get => __pbn__process_id.GetValueOrDefault();
+                set => __pbn__process_id = value;
+            }
+            public bool ShouldSerializeprocess_id() => __pbn__process_id != null;
+            public void Resetprocess_id() => __pbn__process_id = null;
+            private uint? __pbn__process_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint process_id_parent
+            {
+                get => __pbn__process_id_parent.GetValueOrDefault();
+                set => __pbn__process_id_parent = value;
+            }
+            public bool ShouldSerializeprocess_id_parent() => __pbn__process_id_parent != null;
+            public void Resetprocess_id_parent() => __pbn__process_id_parent = null;
+            private uint? __pbn__process_id_parent;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public bool parent_is_steam
+            {
+                get => __pbn__parent_is_steam.GetValueOrDefault();
+                set => __pbn__parent_is_steam = value;
+            }
+            public bool ShouldSerializeparent_is_steam() => __pbn__parent_is_steam != null;
+            public void Resetparent_is_steam() => __pbn__parent_is_steam = null;
+            private bool? __pbn__parent_is_steam;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
         public partial class GamePlayed : global::ProtoBuf.IExtensible
         {
             private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -885,6 +924,9 @@ namespace SteamKit2.Internal
             public bool ShouldSerializedlc_context() => __pbn__dlc_context != null;
             public void Resetdlc_context() => __pbn__dlc_context = null;
             private uint? __pbn__dlc_context;
+
+            [global::ProtoBuf.ProtoMember(32)]
+            public global::System.Collections.Generic.List<CMsgClientGamesPlayed.ProcessInfo> process_id_list { get; } = new global::System.Collections.Generic.List<CMsgClientGamesPlayed.ProcessInfo>();
 
         }
 

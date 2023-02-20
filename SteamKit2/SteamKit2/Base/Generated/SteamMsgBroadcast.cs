@@ -1996,6 +1996,17 @@ namespace SteamKit2.Internal
         public void Resetis_partner_chat_only() => __pbn__is_partner_chat_only = null;
         private bool? __pbn__is_partner_chat_only;
 
+        [global::ProtoBuf.ProtoMember(12)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string wordban_list
+        {
+            get => __pbn__wordban_list ?? "";
+            set => __pbn__wordban_list = value;
+        }
+        public bool ShouldSerializewordban_list() => __pbn__wordban_list != null;
+        public void Resetwordban_list() => __pbn__wordban_list = null;
+        private string __pbn__wordban_list;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2165,6 +2176,17 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeis_partner_chat_only() => __pbn__is_partner_chat_only != null;
         public void Resetis_partner_chat_only() => __pbn__is_partner_chat_only = null;
         private bool? __pbn__is_partner_chat_only;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string wordban_list
+        {
+            get => __pbn__wordban_list ?? "";
+            set => __pbn__wordban_list = value;
+        }
+        public bool ShouldSerializewordban_list() => __pbn__wordban_list != null;
+        public void Resetwordban_list() => __pbn__wordban_list = null;
+        private string __pbn__wordban_list;
 
     }
 
