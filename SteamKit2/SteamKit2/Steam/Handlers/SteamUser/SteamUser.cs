@@ -110,6 +110,11 @@ namespace SteamKit2
             /// </summary>
             /// <value>The client language.</value>
             public string ClientLanguage { get; set; }
+            /// <summary>
+            /// Gets or sets the machine name.
+            /// </summary>
+            /// <value>The machine name.</value>
+            public string? MachineName { get; set; } = nameof( SteamKit2 );
 
             /// <summary>
             /// Initializes a new instance of the <see cref="LogOnDetails"/> class.
@@ -347,6 +352,7 @@ namespace SteamKit2
             // we're now using the latest steamclient package version, this is required to get a proper sentry file for steam guard
             logon.Body.client_package_version = 1771; // todo: determine if this is still required
             logon.Body.supports_rate_limit_response = true;
+            logon.Body.machine_name = details.MachineName;
             logon.Body.machine_id = HardwareUtils.GetMachineID( Client.Configuration.MachineInfoProvider );
 
             // steam guard 
