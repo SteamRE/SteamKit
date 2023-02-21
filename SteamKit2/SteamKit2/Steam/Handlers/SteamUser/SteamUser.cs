@@ -114,7 +114,7 @@ namespace SteamKit2
             /// Gets or sets the machine name.
             /// </summary>
             /// <value>The machine name.</value>
-            public string? MachineName { get; set; } = nameof( SteamKit2 );
+            public string? MachineName { get; set; } = $"{Environment.MachineName} (SteamKit2)";
 
             /// <summary>
             /// Initializes a new instance of the <see cref="LogOnDetails"/> class.
