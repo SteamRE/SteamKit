@@ -674,6 +674,9 @@ namespace SteamKit2.Internal
         public void Resetdebug_get_solr_query() => __pbn__debug_get_solr_query = null;
         private bool? __pbn__debug_get_solr_query;
 
+        [global::ProtoBuf.ProtoMember(12)]
+        public CStorePageFilter store_page_filter { get; set; }
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -761,6 +764,9 @@ namespace SteamKit2.Internal
         public void Resetqueue_type() => __pbn__queue_type = null;
         private EStoreDiscoveryQueueType? __pbn__queue_type;
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public CStorePageFilter store_page_filter { get; set; }
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -813,6 +819,9 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
         private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public CStorePageFilter store_page_filter { get; set; }
 
     }
 
@@ -1020,6 +1029,51 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_GetDiscoveryQueueSkippedApps_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(EStoreDiscoveryQueueType.k_EStoreDiscoveryQueueTypeNew)]
+        public EStoreDiscoveryQueueType queue_type
+        {
+            get => __pbn__queue_type ?? EStoreDiscoveryQueueType.k_EStoreDiscoveryQueueTypeNew;
+            set => __pbn__queue_type = value;
+        }
+        public bool ShouldSerializequeue_type() => __pbn__queue_type != null;
+        public void Resetqueue_type() => __pbn__queue_type = null;
+        private EStoreDiscoveryQueueType? __pbn__queue_type;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public CStorePageFilter store_page_filter { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_GetDiscoveryQueueSkippedApps_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<uint> appids { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CStore_GetStorePreferences_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1085,26 +1139,6 @@ namespace SteamKit2.Internal
         public void Resetplatform_linux() => __pbn__platform_linux = null;
         private bool? __pbn__platform_linux;
 
-        [global::ProtoBuf.ProtoMember(6)]
-        public bool hide_adult_content_violence
-        {
-            get => __pbn__hide_adult_content_violence.GetValueOrDefault();
-            set => __pbn__hide_adult_content_violence = value;
-        }
-        public bool ShouldSerializehide_adult_content_violence() => __pbn__hide_adult_content_violence != null;
-        public void Resethide_adult_content_violence() => __pbn__hide_adult_content_violence = null;
-        private bool? __pbn__hide_adult_content_violence;
-
-        [global::ProtoBuf.ProtoMember(7)]
-        public bool hide_adult_content_sex
-        {
-            get => __pbn__hide_adult_content_sex.GetValueOrDefault();
-            set => __pbn__hide_adult_content_sex = value;
-        }
-        public bool ShouldSerializehide_adult_content_sex() => __pbn__hide_adult_content_sex != null;
-        public void Resethide_adult_content_sex() => __pbn__hide_adult_content_sex = null;
-        private bool? __pbn__hide_adult_content_sex;
-
         [global::ProtoBuf.ProtoMember(8)]
         public uint timestamp_updated
         {
@@ -1156,6 +1190,17 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeprovide_deck_feedback() => __pbn__provide_deck_feedback != null;
         public void Resetprovide_deck_feedback() => __pbn__provide_deck_feedback = null;
         private EProvideDeckFeedbackPreference? __pbn__provide_deck_feedback;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string additional_languages
+        {
+            get => __pbn__additional_languages ?? "";
+            set => __pbn__additional_languages = value;
+        }
+        public bool ShouldSerializeadditional_languages() => __pbn__additional_languages != null;
+        public void Resetadditional_languages() => __pbn__additional_languages = null;
+        private string __pbn__additional_languages;
 
     }
 
@@ -1505,6 +1550,7 @@ namespace SteamKit2.Internal
         CStore_GetDiscoveryQueueSettings_Response GetDiscoveryQueueSettings(CStore_GetDiscoveryQueueSettings_Request request);
         CStore_SkipDiscoveryQueueItem_Response SkipDiscoveryQueueItem(CStore_SkipDiscoveryQueueItem_Request request);
         CStore_GetUserGameInterestState_Response GetUserGameInterestState(CStore_GetUserGameInterestState_Request request);
+        CStore_GetDiscoveryQueueSkippedApps_Response GetDiscoveryQueueSkippedApps(CStore_GetDiscoveryQueueSkippedApps_Request request);
         CStore_GetStorePreferences_Response GetStorePreferences(CStore_GetStorePreferences_Request request);
         CStore_GetTrendingAppsAmongFriends_Response GetTrendingAppsAmongFriends(CStore_GetTrendingAppsAmongFriends_Request request);
         CSteamDeckCompatibility_SetFeedback_Response SetCompatibilityFeedback(CSteamDeckCompatibility_SetFeedback_Request request);

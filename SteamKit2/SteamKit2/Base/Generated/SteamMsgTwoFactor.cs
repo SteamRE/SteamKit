@@ -168,6 +168,16 @@ namespace SteamKit2.Internal
         public void Resettime_transferred() => __pbn__time_transferred = null;
         private uint? __pbn__time_transferred;
 
+        [global::ProtoBuf.ProtoMember(14)]
+        public uint version
+        {
+            get => __pbn__version.GetValueOrDefault();
+            set => __pbn__version = value;
+        }
+        public bool ShouldSerializeversion() => __pbn__version != null;
+        public void Resetversion() => __pbn__version = null;
+        private uint? __pbn__version;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -831,6 +841,17 @@ namespace SteamKit2.Internal
         public bool ShouldSerializegenerate_new_token() => __pbn__generate_new_token != null;
         public void Resetgenerate_new_token() => __pbn__generate_new_token = null;
         private bool? __pbn__generate_new_token;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(1)]
+        public uint version
+        {
+            get => __pbn__version ?? 1;
+            set => __pbn__version = value;
+        }
+        public bool ShouldSerializeversion() => __pbn__version != null;
+        public void Resetversion() => __pbn__version = null;
+        private uint? __pbn__version;
 
     }
 

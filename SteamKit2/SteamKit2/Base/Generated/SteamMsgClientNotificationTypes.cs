@@ -429,6 +429,17 @@ namespace SteamKit2.Internal
         public void Resetnotificationid() => __pbn__notificationid = null;
         private uint? __pbn__notificationid;
 
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string response_steamurl
+        {
+            get => __pbn__response_steamurl ?? "";
+            set => __pbn__response_steamurl = value;
+        }
+        public bool ShouldSerializeresponse_steamurl() => __pbn__response_steamurl != null;
+        public void Resetresponse_steamurl() => __pbn__response_steamurl = null;
+        private string __pbn__response_steamurl;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -693,35 +704,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CClientNotificationInboxStats : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint friend_invite_count
-        {
-            get => __pbn__friend_invite_count.GetValueOrDefault();
-            set => __pbn__friend_invite_count = value;
-        }
-        public bool ShouldSerializefriend_invite_count() => __pbn__friend_invite_count != null;
-        public void Resetfriend_invite_count() => __pbn__friend_invite_count = null;
-        private uint? __pbn__friend_invite_count;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint new_comment_count
-        {
-            get => __pbn__new_comment_count.GetValueOrDefault();
-            set => __pbn__new_comment_count = value;
-        }
-        public bool ShouldSerializenew_comment_count() => __pbn__new_comment_count != null;
-        public void Resetnew_comment_count() => __pbn__new_comment_count = null;
-        private uint? __pbn__new_comment_count;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CClientNotificationHardwareSurveyPending : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -780,6 +762,64 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationDockUnsupportedFirmware : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationPeerContentUpload : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string peer_name
+        {
+            get => __pbn__peer_name ?? "";
+            set => __pbn__peer_name = value;
+        }
+        public bool ShouldSerializepeer_name() => __pbn__peer_name != null;
+        public void Resetpeer_name() => __pbn__peer_name = null;
+        private string __pbn__peer_name;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationCannotReadControllerGuideButton : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int controller_index
+        {
+            get => __pbn__controller_index.GetValueOrDefault();
+            set => __pbn__controller_index = value;
+        }
+        public bool ShouldSerializecontroller_index() => __pbn__controller_index != null;
+        public void Resetcontroller_index() => __pbn__controller_index = null;
+        private int? __pbn__controller_index;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EClientNotificationType
     {
         k_EClientNotificationType_Invalid = 0,
@@ -806,6 +846,9 @@ namespace SteamKit2.Internal
         k_EClientNotificationType_HardwareSurvey = 21,
         k_EClientNotificationType_LowDiskSpace = 22,
         k_EClientNotificationType_BatteryTemperature = 23,
+        k_EClientNotificationType_DockUnsupportedFirmware = 24,
+        k_EClientNotificationType_PeerContentUpload = 25,
+        k_EClientNotificationType_CannotReadControllerGuideButton = 26,
     }
 
     [global::ProtoBuf.ProtoContract()]

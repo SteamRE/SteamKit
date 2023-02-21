@@ -635,6 +635,56 @@ namespace SteamKit2.Internal
             public void Resetproxied() => __pbn__proxied = null;
             private bool? __pbn__proxied;
 
+            [global::ProtoBuf.ProtoMember(8)]
+            public bool used_http2
+            {
+                get => __pbn__used_http2.GetValueOrDefault();
+                set => __pbn__used_http2 = value;
+            }
+            public bool ShouldSerializeused_http2() => __pbn__used_http2 != null;
+            public void Resetused_http2() => __pbn__used_http2 = null;
+            private bool? __pbn__used_http2;
+
+            [global::ProtoBuf.ProtoMember(9)]
+            public uint cache_hits
+            {
+                get => __pbn__cache_hits.GetValueOrDefault();
+                set => __pbn__cache_hits = value;
+            }
+            public bool ShouldSerializecache_hits() => __pbn__cache_hits != null;
+            public void Resetcache_hits() => __pbn__cache_hits = null;
+            private uint? __pbn__cache_hits;
+
+            [global::ProtoBuf.ProtoMember(10)]
+            public uint cache_misses
+            {
+                get => __pbn__cache_misses.GetValueOrDefault();
+                set => __pbn__cache_misses = value;
+            }
+            public bool ShouldSerializecache_misses() => __pbn__cache_misses != null;
+            public void Resetcache_misses() => __pbn__cache_misses = null;
+            private uint? __pbn__cache_misses;
+
+            [global::ProtoBuf.ProtoMember(11)]
+            public ulong hit_bytes
+            {
+                get => __pbn__hit_bytes.GetValueOrDefault();
+                set => __pbn__hit_bytes = value;
+            }
+            public bool ShouldSerializehit_bytes() => __pbn__hit_bytes != null;
+            public void Resethit_bytes() => __pbn__hit_bytes = null;
+            private ulong? __pbn__hit_bytes;
+
+            [global::ProtoBuf.ProtoMember(12)]
+            public ulong miss_bytes
+            {
+                get => __pbn__miss_bytes.GetValueOrDefault();
+                set => __pbn__miss_bytes = value;
+            }
+            public bool ShouldSerializemiss_bytes() => __pbn__miss_bytes != null;
+            public void Resetmiss_bytes() => __pbn__miss_bytes = null;
+            private ulong? __pbn__miss_bytes;
+
         }
 
     }
@@ -990,6 +1040,98 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CClientMetrics_ReportClientArgs_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<string> client_args { get; } = new global::System.Collections.Generic.List<string>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool gpu_webview_regkey_disabled
+        {
+            get => __pbn__gpu_webview_regkey_disabled.GetValueOrDefault();
+            set => __pbn__gpu_webview_regkey_disabled = value;
+        }
+        public bool ShouldSerializegpu_webview_regkey_disabled() => __pbn__gpu_webview_regkey_disabled != null;
+        public void Resetgpu_webview_regkey_disabled() => __pbn__gpu_webview_regkey_disabled = null;
+        private bool? __pbn__gpu_webview_regkey_disabled;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool suppress_gpu_chrome
+        {
+            get => __pbn__suppress_gpu_chrome.GetValueOrDefault();
+            set => __pbn__suppress_gpu_chrome = value;
+        }
+        public bool ShouldSerializesuppress_gpu_chrome() => __pbn__suppress_gpu_chrome != null;
+        public void Resetsuppress_gpu_chrome() => __pbn__suppress_gpu_chrome = null;
+        private bool? __pbn__suppress_gpu_chrome;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool browser_not_supported
+        {
+            get => __pbn__browser_not_supported.GetValueOrDefault();
+            set => __pbn__browser_not_supported = value;
+        }
+        public bool ShouldSerializebrowser_not_supported() => __pbn__browser_not_supported != null;
+        public void Resetbrowser_not_supported() => __pbn__browser_not_supported = null;
+        private bool? __pbn__browser_not_supported;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public bool hw_accel_video_regkey_disabled
+        {
+            get => __pbn__hw_accel_video_regkey_disabled.GetValueOrDefault();
+            set => __pbn__hw_accel_video_regkey_disabled = value;
+        }
+        public bool ShouldSerializehw_accel_video_regkey_disabled() => __pbn__hw_accel_video_regkey_disabled != null;
+        public void Resethw_accel_video_regkey_disabled() => __pbn__hw_accel_video_regkey_disabled = null;
+        private bool? __pbn__hw_accel_video_regkey_disabled;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool mini_mode_enabled
+        {
+            get => __pbn__mini_mode_enabled.GetValueOrDefault();
+            set => __pbn__mini_mode_enabled = value;
+        }
+        public bool ShouldSerializemini_mode_enabled() => __pbn__mini_mode_enabled != null;
+        public void Resetmini_mode_enabled() => __pbn__mini_mode_enabled = null;
+        private bool? __pbn__mini_mode_enabled;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool fps_counter_enabled
+        {
+            get => __pbn__fps_counter_enabled.GetValueOrDefault();
+            set => __pbn__fps_counter_enabled = value;
+        }
+        public bool ShouldSerializefps_counter_enabled() => __pbn__fps_counter_enabled != null;
+        public void Resetfps_counter_enabled() => __pbn__fps_counter_enabled = null;
+        private bool? __pbn__fps_counter_enabled;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public bool library_low_bandwidth_mode_enabled
+        {
+            get => __pbn__library_low_bandwidth_mode_enabled.GetValueOrDefault();
+            set => __pbn__library_low_bandwidth_mode_enabled = value;
+        }
+        public bool ShouldSerializelibrary_low_bandwidth_mode_enabled() => __pbn__library_low_bandwidth_mode_enabled != null;
+        public void Resetlibrary_low_bandwidth_mode_enabled() => __pbn__library_low_bandwidth_mode_enabled = null;
+        private bool? __pbn__library_low_bandwidth_mode_enabled;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public bool library_low_perf_mode_enabled
+        {
+            get => __pbn__library_low_perf_mode_enabled.GetValueOrDefault();
+            set => __pbn__library_low_perf_mode_enabled = value;
+        }
+        public bool ShouldSerializelibrary_low_perf_mode_enabled() => __pbn__library_low_perf_mode_enabled != null;
+        public void Resetlibrary_low_perf_mode_enabled() => __pbn__library_low_perf_mode_enabled = null;
+        private bool? __pbn__library_low_perf_mode_enabled;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ESteamPipeWorkType
     {
         k_ESteamPipeClientWorkType_Invalid = 0,
@@ -1017,6 +1159,7 @@ namespace SteamKit2.Internal
         NoResponse ClientContentValidationReport(CClientMetrics_ContentValidation_Notification request);
         NoResponse ClientCloudAppSyncStats(CClientMetrics_CloudAppSyncStats_Notification request);
         NoResponse ClientDownloadResponseCodeCounts(CClientMetrics_ContentDownloadResponse_Counts_Notification request);
+        NoResponse ReportClientArgs(CClientMetrics_ReportClientArgs_Notification request);
     }
 
 }

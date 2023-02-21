@@ -302,16 +302,6 @@ namespace SteamKit2.Internal
         public void Resetis_free_weekend() => __pbn__is_free_weekend = null;
         private bool? __pbn__is_free_weekend;
 
-        [global::ProtoBuf.ProtoMember(19)]
-        public ulong total_bytes_legacy
-        {
-            get => __pbn__total_bytes_legacy.GetValueOrDefault();
-            set => __pbn__total_bytes_legacy = value;
-        }
-        public bool ShouldSerializetotal_bytes_legacy() => __pbn__total_bytes_legacy != null;
-        public void Resettotal_bytes_legacy() => __pbn__total_bytes_legacy = null;
-        private ulong? __pbn__total_bytes_legacy;
-
         [global::ProtoBuf.ProtoMember(20)]
         public ulong total_bytes_patched
         {

@@ -1008,6 +1008,7 @@ namespace SteamKit2.Internal
         k_ERemoteClientServiceGameStreaming = 2,
         k_ERemoteClientServiceSiteLicense = 4,
         k_ERemoteClientServiceContentCache = 8,
+        k_ERemoteClientServiceContentServer = 16,
     }
 
     [global::ProtoBuf.ProtoContract()]

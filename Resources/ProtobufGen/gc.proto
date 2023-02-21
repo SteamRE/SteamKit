@@ -4,6 +4,12 @@ enum GCProtoBufMsgSrc {
 	GCProtoBufMsgSrc_FromSteamID = 2;
 	GCProtoBufMsgSrc_FromGC = 3;
 	GCProtoBufMsgSrc_ReplySystem = 4;
+	GCProtoBufMsgSrc_SpoofedSteamID = 5;
+}
+
+message CMsgGCRoutingProtoBufHeader {
+	optional uint64 dst_gcid_queue = 1;
+	optional uint32 dst_gc_dir_index = 2;
 }
 
 message CMsgProtoBufHeader {
@@ -13,9 +19,33 @@ message CMsgProtoBufHeader {
 	optional fixed64 job_id_source = 10 [default = 18446744073709551615];
 	optional fixed64 job_id_target = 11 [default = 18446744073709551615];
 	optional string target_job_name = 12;
+	optional int32 seq_num = 24;
 	optional int32 eresult = 13 [default = 2];
 	optional string error_message = 14;
-	optional uint32 ip = 15;
+	optional uint32 auth_account_flags = 16;
+	optional uint32 token_source = 22;
+	optional bool admin_spoofing_user = 23;
+	optional int32 transport_error = 17 [default = 1];
+	optional uint64 messageid = 18 [default = 18446744073709551615];
+	optional uint32 publisher_group_id = 19;
+	optional uint32 sysid = 20;
+	optional uint64 trace_tag = 21;
+	optional uint32 webapi_key_id = 25;
+	optional bool is_from_external_source = 26;
+	repeated uint32 forward_to_sysid = 27;
+	optional uint32 cm_sysid = 28;
+	optional uint32 launcher_type = 31 [default = 0];
+	optional uint32 realm = 32 [default = 0];
+	optional int32 timeout_ms = 33 [default = -1];
+	optional string debug_source = 34;
+	optional uint32 debug_source_string_index = 35;
+	optional uint64 token_id = 36;
+	optional .CMsgGCRoutingProtoBufHeader routing_gc = 37;
 	optional .GCProtoBufMsgSrc gc_msg_src = 200 [default = GCProtoBufMsgSrc_Unspecified];
 	optional uint32 gc_dir_index_source = 201;
+
+	oneof ip_addr {
+		uint32 ip = 15;
+		bytes ip_v6 = 29;
+	}
 }

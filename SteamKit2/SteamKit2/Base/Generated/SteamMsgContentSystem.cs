@@ -460,12 +460,162 @@ namespace SteamKit2.Internal
 
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CContentServerDirectory_GetCDNAuthToken_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint depot_id
+        {
+            get => __pbn__depot_id.GetValueOrDefault();
+            set => __pbn__depot_id = value;
+        }
+        public bool ShouldSerializedepot_id() => __pbn__depot_id != null;
+        public void Resetdepot_id() => __pbn__depot_id = null;
+        private uint? __pbn__depot_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string host_name
+        {
+            get => __pbn__host_name ?? "";
+            set => __pbn__host_name = value;
+        }
+        public bool ShouldSerializehost_name() => __pbn__host_name != null;
+        public void Resethost_name() => __pbn__host_name = null;
+        private string __pbn__host_name;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint app_id
+        {
+            get => __pbn__app_id.GetValueOrDefault();
+            set => __pbn__app_id = value;
+        }
+        public bool ShouldSerializeapp_id() => __pbn__app_id != null;
+        public void Resetapp_id() => __pbn__app_id = null;
+        private uint? __pbn__app_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CContentServerDirectory_GetCDNAuthToken_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string token
+        {
+            get => __pbn__token ?? "";
+            set => __pbn__token = value;
+        }
+        public bool ShouldSerializetoken() => __pbn__token != null;
+        public void Resettoken() => __pbn__token = null;
+        private string __pbn__token;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint expiration_time
+        {
+            get => __pbn__expiration_time.GetValueOrDefault();
+            set => __pbn__expiration_time = value;
+        }
+        public bool ShouldSerializeexpiration_time() => __pbn__expiration_time != null;
+        public void Resetexpiration_time() => __pbn__expiration_time = null;
+        private uint? __pbn__expiration_time;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CContentServerDirectory_RequestPeerContentServer_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong remote_client_id
+        {
+            get => __pbn__remote_client_id.GetValueOrDefault();
+            set => __pbn__remote_client_id = value;
+        }
+        public bool ShouldSerializeremote_client_id() => __pbn__remote_client_id != null;
+        public void Resetremote_client_id() => __pbn__remote_client_id = null;
+        private ulong? __pbn__remote_client_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong server_remote_client_id
+        {
+            get => __pbn__server_remote_client_id.GetValueOrDefault();
+            set => __pbn__server_remote_client_id = value;
+        }
+        public bool ShouldSerializeserver_remote_client_id() => __pbn__server_remote_client_id != null;
+        public void Resetserver_remote_client_id() => __pbn__server_remote_client_id = null;
+        private ulong? __pbn__server_remote_client_id;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint app_id
+        {
+            get => __pbn__app_id.GetValueOrDefault();
+            set => __pbn__app_id = value;
+        }
+        public bool ShouldSerializeapp_id() => __pbn__app_id != null;
+        public void Resetapp_id() => __pbn__app_id = null;
+        private uint? __pbn__app_id;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint current_build_id
+        {
+            get => __pbn__current_build_id.GetValueOrDefault();
+            set => __pbn__current_build_id = value;
+        }
+        public bool ShouldSerializecurrent_build_id() => __pbn__current_build_id != null;
+        public void Resetcurrent_build_id() => __pbn__current_build_id = null;
+        private uint? __pbn__current_build_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CContentServerDirectory_RequestPeerContentServer_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint server_port
+        {
+            get => __pbn__server_port.GetValueOrDefault();
+            set => __pbn__server_port = value;
+        }
+        public bool ShouldSerializeserver_port() => __pbn__server_port != null;
+        public void Resetserver_port() => __pbn__server_port = null;
+        private uint? __pbn__server_port;
+
+    }
+
     public interface IContentServerDirectory
     {
         CContentServerDirectory_GetServersForSteamPipe_Response GetServersForSteamPipe(CContentServerDirectory_GetServersForSteamPipe_Request request);
         CContentServerDirectory_GetDepotPatchInfo_Response GetDepotPatchInfo(CContentServerDirectory_GetDepotPatchInfo_Request request);
         CContentServerDirectory_GetClientUpdateHosts_Response GetClientUpdateHosts(CContentServerDirectory_GetClientUpdateHosts_Request request);
         CContentServerDirectory_GetManifestRequestCode_Response GetManifestRequestCode(CContentServerDirectory_GetManifestRequestCode_Request request);
+        CContentServerDirectory_GetCDNAuthToken_Response GetCDNAuthToken(CContentServerDirectory_GetCDNAuthToken_Request request);
+        CContentServerDirectory_RequestPeerContentServer_Response RequestPeerContentServer(CContentServerDirectory_RequestPeerContentServer_Request request);
     }
 
 }

@@ -3,6 +3,7 @@ steam,enums.proto,Enums.cs,SteamKit2.Internal
 steam,enums_productinfo.proto,EnumsProductInfo.cs,SteamKit2.Internal
 steam,content_manifest.proto,ContentManifest.cs,SteamKit2.Internal
 steam,clientmetrics.proto,ClientMetrics.cs,SteamKit2.Internal
+steam,contenthubs.proto,SteamMsgContentHubs.cs,SteamKit2.Internal
 steam,encrypted_app_ticket.proto,SteamMsgAppTicket.cs,SteamKit2.Internal
 steam,offline_ticket.proto,OfflineTicket.cs,SteamKit2.Internal
 steam,steammessages_client_objects.proto,ClientObjects.cs,SteamKit2.Internal
@@ -109,6 +110,7 @@ dota2,gcsdk_gcmessages.proto,GC\Dota\SteamMsgGCSDK.cs,SteamKit2.GC.Dota.Internal
 dota2,gcsystemmsgs.proto,GC\Dota\SteamMsgGCSystem.cs,SteamKit2.GC.Dota.Internal
 dota2,network_connection.proto,GC\Dota\NetworkConnection.cs,SteamKit2.GC.Dota.Internal
 dota2,steammessages.proto,GC\Dota\SteamMsgBase.cs,SteamKit2.GC.Dota.Internal
+dota2,steammessages_steamlearn.steamworkssdk.proto,GC\Dota\SteamMsgSteamLearnSteamworks.cs,SteamKit2.GC.Dota.Internal
 dota2,steammessages_oauth.steamworkssdk.proto,Steamworks\SteamMsgOAuthSteamworks.cs,SteamKit2.Internal.Steamworks
 tf2,base_gcmessages.proto,GC\TF2\SteamMsgGC.cs,SteamKit2.GC.TF2.Internal
 tf2,econ_gcmessages.proto,GC\TF2\SteamMsgGCEcon.cs,SteamKit2.GC.TF2.Internal

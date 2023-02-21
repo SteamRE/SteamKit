@@ -102,6 +102,8 @@ enum EMsg
 	ExpectShellRestart = 336;
 	HotFixProgress = 337;
 	GMStatsForwardToAdminConnections = 338;
+	GMGetModifiedConVars = 339;
+	GMGetModifiedConVarsResponse = 340;
 
 	BaseAIS = 400;
 	AISRefreshContentDescription = 401; removed
@@ -713,6 +715,9 @@ enum EMsg
 	GCHAppCheersReceived = 2242;
 	GCHAppCheersGetAllowedTypes = 2243;
 	GCHAppCheersGetAllowedTypesResponse = 2244;
+	GCHRoutingRulesFromGCHtoGM = 2245;
+	GCHRoutingRulesToGCHfromGM = 2246;
+	UpdateCMMessageRateRules = 2247;
 
 	BaseP2P = 2500;
 	P2PIntroducerMessage = 2502;
@@ -1232,6 +1237,7 @@ enum EMsg
 	AMPerfectWorldPaymentResponse = 4422;
 	AMECommPayPayment = 4423;
 	AMECommPayPaymentResponse = 4424;
+	AMSetRemoteClientID = 4425;
 
 	BasePSRange = 5000;
 	PSCreateShoppingCart = 5001;
@@ -1382,6 +1388,8 @@ enum EMsg
 	ClientOGSWriteRow = 5494;
 	ClientDRMTest = 5495;
 	ClientDRMTestResult = 5496;
+	ClientStartPeerContentServer = 5497;
+	ClientStartPeerContentServerResponse = 5498;
 	ClientServerUnavailable = 5500;
 	ClientServersAvailable = 5501;
 	ClientRegisterAuthTicketWithCM = 5502;
@@ -1999,10 +2007,14 @@ enum EMsg
 	ClientServerTimestampResponse = 9803;
 	ServiceMethodCallFromClientNonAuthed = 9804;
 	ClientHello = 9805;
+	ClientEnableOrDisableDownloads = 9806;
+	ClientEnableOrDisableDownloadsResponse = 9807;
 
 	ClientLANP2PBase = 9900;
 	ClientLANP2PRequestChunk = 9900;
 	ClientLANP2PRequestChunkResponse = 9901;
+	ClientPeerChunkRequest = 9902;
+	ClientPeerChunkResponse = 9903;
 	ClientLANP2PMax = 9999;
 
 	BaseWatchdogServer = 10000;

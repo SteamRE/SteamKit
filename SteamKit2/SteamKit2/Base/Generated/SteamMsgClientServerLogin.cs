@@ -714,6 +714,26 @@ namespace SteamKit2.Internal
         public void Resetaccess_token() => __pbn__access_token = null;
         private string __pbn__access_token;
 
+        [global::ProtoBuf.ProtoMember(109)]
+        public bool is_chrome_os
+        {
+            get => __pbn__is_chrome_os.GetValueOrDefault();
+            set => __pbn__is_chrome_os = value;
+        }
+        public bool ShouldSerializeis_chrome_os() => __pbn__is_chrome_os != null;
+        public void Resetis_chrome_os() => __pbn__is_chrome_os = null;
+        private bool? __pbn__is_chrome_os;
+
+        [global::ProtoBuf.ProtoMember(110)]
+        public bool is_tesla
+        {
+            get => __pbn__is_tesla.GetValueOrDefault();
+            set => __pbn__is_tesla = value;
+        }
+        public bool ShouldSerializeis_tesla() => __pbn__is_tesla != null;
+        public void Resetis_tesla() => __pbn__is_tesla = null;
+        private bool? __pbn__is_tesla;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1193,16 +1213,6 @@ namespace SteamKit2.Internal
         public bool ShouldSerializefacebook_name() => __pbn__facebook_name != null;
         public void Resetfacebook_name() => __pbn__facebook_name = null;
         private string __pbn__facebook_name;
-
-        [global::ProtoBuf.ProtoMember(14)]
-        public bool steamguard_notify_newmachines
-        {
-            get => __pbn__steamguard_notify_newmachines.GetValueOrDefault();
-            set => __pbn__steamguard_notify_newmachines = value;
-        }
-        public bool ShouldSerializesteamguard_notify_newmachines() => __pbn__steamguard_notify_newmachines != null;
-        public void Resetsteamguard_notify_newmachines() => __pbn__steamguard_notify_newmachines = null;
-        private bool? __pbn__steamguard_notify_newmachines;
 
         [global::ProtoBuf.ProtoMember(15)]
         [global::System.ComponentModel.DefaultValue("")]

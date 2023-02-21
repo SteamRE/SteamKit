@@ -789,6 +789,57 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CAccountHardware_GetSteamDeckComponents_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string serial_number
+        {
+            get => __pbn__serial_number ?? "";
+            set => __pbn__serial_number = value;
+        }
+        public bool ShouldSerializeserial_number() => __pbn__serial_number != null;
+        public void Resetserial_number() => __pbn__serial_number = null;
+        private string __pbn__serial_number;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string controller_code
+        {
+            get => __pbn__controller_code ?? "";
+            set => __pbn__controller_code = value;
+        }
+        public bool ShouldSerializecontroller_code() => __pbn__controller_code != null;
+        public void Resetcontroller_code() => __pbn__controller_code = null;
+        private string __pbn__controller_code;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAccountHardware_GetSteamDeckComponents_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string json_components
+        {
+            get => __pbn__json_components ?? "";
+            set => __pbn__json_components = value;
+        }
+        public bool ShouldSerializejson_components() => __pbn__json_components != null;
+        public void Resetjson_components() => __pbn__json_components = null;
+        private string __pbn__json_components;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EValveIndexComponent
     {
         k_EValveIndexComponentUnknown = 0,
@@ -809,6 +860,7 @@ namespace SteamKit2.Internal
         CAccountHardware_GetPersonalizationFile_Response GetControllerPersonalizationFile(CAccountHardware_GetPersonalizationFile_Request request);
         CAccountHardware_VRCompatibilityCheck_Response VRCompatibilityCheck(CAccountHardware_VRCompatibilityCheck_Request request);
         CAccountHardware_RegisterValveIndexComponent_Response RegisterValveIndexComponent(CAccountHardware_RegisterValveIndexComponent_Request request);
+        CAccountHardware_GetSteamDeckComponents_Response GetSteamDeckComponents(CAccountHardware_GetSteamDeckComponents_Request request);
     }
 
 }

@@ -277,6 +277,28 @@ namespace SteamKit2.Internal
         public void Resetcreator_name() => __pbn__creator_name = null;
         private string __pbn__creator_name;
 
+        [global::ProtoBuf.ProtoMember(24)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string template_vars_json
+        {
+            get => __pbn__template_vars_json ?? "";
+            set => __pbn__template_vars_json = value;
+        }
+        public bool ShouldSerializetemplate_vars_json() => __pbn__template_vars_json != null;
+        public void Resettemplate_vars_json() => __pbn__template_vars_json = null;
+        private string __pbn__template_vars_json;
+
+        [global::ProtoBuf.ProtoMember(25)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string additional_restrictions_json
+        {
+            get => __pbn__additional_restrictions_json ?? "";
+            set => __pbn__additional_restrictions_json = value;
+        }
+        public bool ShouldSerializeadditional_restrictions_json() => __pbn__additional_restrictions_json != null;
+        public void Resetadditional_restrictions_json() => __pbn__additional_restrictions_json = null;
+        private string __pbn__additional_restrictions_json;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -482,6 +504,85 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_DoesUserHavePendingMarketingMessages_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string country_code
+        {
+            get => __pbn__country_code ?? "";
+            set => __pbn__country_code = value;
+        }
+        public bool ShouldSerializecountry_code() => __pbn__country_code != null;
+        public void Resetcountry_code() => __pbn__country_code = null;
+        private string __pbn__country_code;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public int elanguage
+        {
+            get => __pbn__elanguage.GetValueOrDefault();
+            set => __pbn__elanguage = value;
+        }
+        public bool ShouldSerializeelanguage() => __pbn__elanguage != null;
+        public void Resetelanguage() => __pbn__elanguage = null;
+        private int? __pbn__elanguage;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public int operating_system
+        {
+            get => __pbn__operating_system.GetValueOrDefault();
+            set => __pbn__operating_system = value;
+        }
+        public bool ShouldSerializeoperating_system() => __pbn__operating_system != null;
+        public void Resetoperating_system() => __pbn__operating_system = null;
+        private int? __pbn__operating_system;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public int client_package_version
+        {
+            get => __pbn__client_package_version.GetValueOrDefault();
+            set => __pbn__client_package_version = value;
+        }
+        public bool ShouldSerializeclient_package_version() => __pbn__client_package_version != null;
+        public void Resetclient_package_version() => __pbn__client_package_version = null;
+        private int? __pbn__client_package_version;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_DoesUserHavePendingMarketingMessages_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool has_pending_messages
+        {
+            get => __pbn__has_pending_messages.GetValueOrDefault();
+            set => __pbn__has_pending_messages = value;
+        }
+        public bool ShouldSerializehas_pending_messages() => __pbn__has_pending_messages != null;
+        public void Resethas_pending_messages() => __pbn__has_pending_messages = null;
+        private bool? __pbn__has_pending_messages;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public int pending_message_count
+        {
+            get => __pbn__pending_message_count.GetValueOrDefault();
+            set => __pbn__pending_message_count = value;
+        }
+        public bool ShouldSerializepending_message_count() => __pbn__pending_message_count != null;
+        public void Resetpending_message_count() => __pbn__pending_message_count = null;
+        private int? __pbn__pending_message_count;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMarketingMessages_GetDisplayMarketingMessage_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -578,6 +679,16 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public CMarketingMessageProto message { get; set; }
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool from_json
+        {
+            get => __pbn__from_json.GetValueOrDefault();
+            set => __pbn__from_json = value;
+        }
+        public bool ShouldSerializefrom_json() => __pbn__from_json != null;
+        public void Resetfrom_json() => __pbn__from_json = null;
+        private bool? __pbn__from_json;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -618,6 +729,16 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(2)]
         public CMarketingMessageProto message { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool from_json
+        {
+            get => __pbn__from_json.GetValueOrDefault();
+            set => __pbn__from_json = value;
+        }
+        public bool ShouldSerializefrom_json() => __pbn__from_json != null;
+        public void Resetfrom_json() => __pbn__from_json = null;
+        private bool? __pbn__from_json;
 
     }
 
@@ -772,7 +893,9 @@ namespace SteamKit2.Internal
     {
         CMarketingMessages_GetActiveMarketingMessages_Response GetActiveMarketingMessages(CMarketingMessages_GetActiveMarketingMessages_Request request);
         CMarketingMessages_GetMarketingMessagesForUser_Response GetMarketingMessagesForUser(CMarketingMessages_GetMarketingMessagesForUser_Request request);
+        CMarketingMessages_DoesUserHavePendingMarketingMessages_Response DoesUserHavePendingMarketingMessages(CMarketingMessages_DoesUserHavePendingMarketingMessages_Request request);
         CMarketingMessages_GetDisplayMarketingMessage_Response GetDisplayMarketingMessage(CMarketingMessages_GetDisplayMarketingMessage_Request request);
+        CMarketingMessages_GetDisplayMarketingMessage_Response GetDisplayMarketingMessageAdmin(CMarketingMessages_GetDisplayMarketingMessage_Request request);
         NoResponse MarkMessageSeen(CMarketingMessages_MarkMessageSeen_Notification request);
         CMarketingMessages_GetMarketingMessage_Response GetMarketingMessage(CMarketingMessages_GetMarketingMessage_Request request);
         CMarketingMessages_CreateMarketingMessage_Response CreateMarketingMessage(CMarketingMessages_CreateMarketingMessage_Request request);

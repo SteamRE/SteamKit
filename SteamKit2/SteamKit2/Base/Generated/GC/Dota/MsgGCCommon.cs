@@ -1705,14 +1705,14 @@ namespace SteamKit2.GC.Dota.Internal
         private ulong? __pbn__match_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public uint account_id
+        public uint player_account_id
         {
-            get => __pbn__account_id.GetValueOrDefault();
-            set => __pbn__account_id = value;
+            get => __pbn__player_account_id.GetValueOrDefault();
+            set => __pbn__player_account_id = value;
         }
-        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
-        public void Resetaccount_id() => __pbn__account_id = null;
-        private uint? __pbn__account_id;
+        public bool ShouldSerializeplayer_account_id() => __pbn__player_account_id != null;
+        public void Resetplayer_account_id() => __pbn__player_account_id = null;
+        private uint? __pbn__player_account_id;
 
         [global::ProtoBuf.ProtoMember(3)]
         public uint game_time_seconds
@@ -1765,6 +1765,16 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__ability_id;
 
         [global::ProtoBuf.ProtoMember(8)]
+        public uint camera_mode
+        {
+            get => __pbn__camera_mode.GetValueOrDefault();
+            set => __pbn__camera_mode = value;
+        }
+        public bool ShouldSerializecamera_mode() => __pbn__camera_mode != null;
+        public void Resetcamera_mode() => __pbn__camera_mode = null;
+        private uint? __pbn__camera_mode;
+
+        [global::ProtoBuf.ProtoMember(9)]
         [global::System.ComponentModel.DefaultValue("")]
         public string comment
         {
@@ -1774,55 +1784,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializecomment() => __pbn__comment != null;
         public void Resetcomment() => __pbn__comment = null;
         private string __pbn__comment;
-
-        [global::ProtoBuf.ProtoMember(9)]
-        public ClipDetails clip_details { get; set; }
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class ClipDetails : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            [global::System.ComponentModel.DefaultValue(CMatchClip.CameraType.INVALID)]
-            public CMatchClip.CameraType camera_type
-            {
-                get => __pbn__camera_type ?? CMatchClip.CameraType.INVALID;
-                set => __pbn__camera_type = value;
-            }
-            public bool ShouldSerializecamera_type() => __pbn__camera_type != null;
-            public void Resetcamera_type() => __pbn__camera_type = null;
-            private CMatchClip.CameraType? __pbn__camera_type;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public byte[] camera_data
-            {
-                get => __pbn__camera_data;
-                set => __pbn__camera_data = value;
-            }
-            public bool ShouldSerializecamera_data() => __pbn__camera_data != null;
-            public void Resetcamera_data() => __pbn__camera_data = null;
-            private byte[] __pbn__camera_data;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public global::System.Collections.Generic.List<string> video_host_links { get; } = new global::System.Collections.Generic.List<string>();
-
-            [global::ProtoBuf.ProtoMember(4)]
-            public global::System.Collections.Generic.List<string> social_media_links { get; } = new global::System.Collections.Generic.List<string>();
-
-        }
-
-        [global::ProtoBuf.ProtoContract()]
-        public enum CameraType
-        {
-            INVALID = 0,
-            PLAYER_PERSPECTIVE = 1,
-            HERO_CHASE = 2,
-            BROADCASTER = 3,
-            USER_CAMERA = 4,
-        }
 
     }
 
@@ -5113,6 +5074,7 @@ namespace SteamKit2.GC.Dota.Internal
                 Special = 4,
                 YesNo = 5,
                 QualifiersTeam = 6,
+                LastChanceTeam = 7,
             }
 
             [global::ProtoBuf.ProtoContract()]
@@ -10208,6 +10170,77 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public CMsgStickerbookTeamPageOrderSequence team_page_order_sequence { get; set; }
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint favorite_page_num
+        {
+            get => __pbn__favorite_page_num.GetValueOrDefault();
+            set => __pbn__favorite_page_num = value;
+        }
+        public bool ShouldSerializefavorite_page_num() => __pbn__favorite_page_num != null;
+        public void Resetfavorite_page_num() => __pbn__favorite_page_num = null;
+        private uint? __pbn__favorite_page_num;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgStickerHero : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint hero_id
+        {
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
+        }
+        public bool ShouldSerializehero_id() => __pbn__hero_id != null;
+        public void Resethero_id() => __pbn__hero_id = null;
+        private uint? __pbn__hero_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint item_def_id
+        {
+            get => __pbn__item_def_id.GetValueOrDefault();
+            set => __pbn__item_def_id = value;
+        }
+        public bool ShouldSerializeitem_def_id() => __pbn__item_def_id != null;
+        public void Resetitem_def_id() => __pbn__item_def_id = null;
+        private uint? __pbn__item_def_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint quality
+        {
+            get => __pbn__quality.GetValueOrDefault();
+            set => __pbn__quality = value;
+        }
+        public bool ShouldSerializequality() => __pbn__quality != null;
+        public void Resetquality() => __pbn__quality = null;
+        private uint? __pbn__quality;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public ulong source_item_id
+        {
+            get => __pbn__source_item_id.GetValueOrDefault();
+            set => __pbn__source_item_id = value;
+        }
+        public bool ShouldSerializesource_item_id() => __pbn__source_item_id != null;
+        public void Resetsource_item_id() => __pbn__source_item_id = null;
+        private ulong? __pbn__source_item_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgStickerHeroes : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CMsgStickerHero> heroes { get; } = new global::System.Collections.Generic.List<CMsgStickerHero>();
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -10322,6 +10355,7 @@ namespace SteamKit2.GC.Dota.Internal
         STICKERBOOK_AUDIT_DELETE_PAGE = 1,
         STICKERBOOK_AUDIT_STICK_STICKERS = 2,
         STICKERBOOK_AUDIT_REPLACE_STICKERS = 3,
+        STICKERBOOK_AUDIT_HERO_STICKER = 4,
     }
 
     [global::ProtoBuf.ProtoContract()]

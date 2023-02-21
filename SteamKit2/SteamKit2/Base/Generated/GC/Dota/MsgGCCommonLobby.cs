@@ -169,13 +169,23 @@ namespace SteamKit2.GC.Dota.Internal
         }
 
         [global::ProtoBuf.ProtoContract()]
-        public partial class PeriodicResourceValues : global::ProtoBuf.IExtensible
+        public partial class PeriodicResourceData : global::ProtoBuf.IExtensible
         {
             private global::ProtoBuf.IExtension __pbn__extensionData;
             global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
+            public uint periodic_resource_id
+            {
+                get => __pbn__periodic_resource_id.GetValueOrDefault();
+                set => __pbn__periodic_resource_id = value;
+            }
+            public bool ShouldSerializeperiodic_resource_id() => __pbn__periodic_resource_id != null;
+            public void Resetperiodic_resource_id() => __pbn__periodic_resource_id = null;
+            private uint? __pbn__periodic_resource_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
             public uint remaining
             {
                 get => __pbn__remaining.GetValueOrDefault();
@@ -185,7 +195,7 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetremaining() => __pbn__remaining = null;
             private uint? __pbn__remaining;
 
-            [global::ProtoBuf.ProtoMember(2)]
+            [global::ProtoBuf.ProtoMember(3)]
             public uint max
             {
                 get => __pbn__max.GetValueOrDefault();
@@ -289,18 +299,6 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(16)]
             public CMsgLobbyPlayerPlusSubscriptionData plus_subscription_data { get; set; }
 
-            [global::ProtoBuf.ProtoMember(17)]
-            public CMsgLobbyEventPoints.PeriodicResourceValues wager_tokens { get; set; }
-
-            [global::ProtoBuf.ProtoMember(18)]
-            public CMsgLobbyEventPoints.PeriodicResourceValues rank_wager_tokens { get; set; }
-
-            [global::ProtoBuf.ProtoMember(19)]
-            public CMsgLobbyEventPoints.PeriodicResourceValues tip_tokens { get; set; }
-
-            [global::ProtoBuf.ProtoMember(21)]
-            public CMsgLobbyEventPoints.PeriodicResourceValues periodic_point_adjustments { get; set; }
-
             [global::ProtoBuf.ProtoMember(22)]
             public global::System.Collections.Generic.List<CMsgLobbyEventPoints.PingWheelMessageRange> unlocked_ping_wheel_message_ranges { get; } = new global::System.Collections.Generic.List<CMsgLobbyEventPoints.PingWheelMessageRange>();
 
@@ -313,9 +311,6 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializewager_streak() => __pbn__wager_streak != null;
             public void Resetwager_streak() => __pbn__wager_streak = null;
             private uint? __pbn__wager_streak;
-
-            [global::ProtoBuf.ProtoMember(24)]
-            public CMsgLobbyEventPoints.PeriodicResourceValues bounties { get; set; }
 
             [global::ProtoBuf.ProtoMember(25)]
             public global::System.Collections.Generic.List<CMsgLobbyEventPoints.NetworkedEventAction> event_game_custom_actions { get; } = new global::System.Collections.Generic.List<CMsgLobbyEventPoints.NetworkedEventAction>();
@@ -350,11 +345,11 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetteleport_fx_level() => __pbn__teleport_fx_level = null;
             private uint? __pbn__teleport_fx_level;
 
-            [global::ProtoBuf.ProtoMember(29)]
-            public CMsgLobbyEventPoints.PeriodicResourceValues arcana_event_periodic_resource { get; set; }
-
             [global::ProtoBuf.ProtoMember(30)]
             public global::System.Collections.Generic.List<CMsgLobbyEventPoints.NetworkedEventAction> networked_event_actions { get; } = new global::System.Collections.Generic.List<CMsgLobbyEventPoints.NetworkedEventAction>();
+
+            [global::ProtoBuf.ProtoMember(31)]
+            public global::System.Collections.Generic.List<CMsgLobbyEventPoints.PeriodicResourceData> periodic_resources { get; } = new global::System.Collections.Generic.List<CMsgLobbyEventPoints.PeriodicResourceData>();
 
         }
 
