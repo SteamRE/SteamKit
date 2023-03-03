@@ -79,6 +79,12 @@ namespace SteamKit2
             public string? WebsiteID { get; set; }
 
             /// <summary>
+            /// Steam guard data for client login. Provide <see cref="AuthPollResult.NewGuardData"/> if available.
+            /// </summary>
+            /// <value>The guard data.</value>
+            public string? GuardData { get; set; }
+
+            /// <summary>
             /// 
             /// </summary>
             public IAuthenticator? Authenticator { get; set; }
@@ -86,18 +92,43 @@ namespace SteamKit2
 
         public class AuthPollResult
         {
+            /// <summary>
+            /// Account name of authenticating account.
+            /// </summary>
             public string AccountName { get; set; }
+            /// <summary>
+            /// New refresh token.
+            /// </summary>
             public string RefreshToken { get; set; }
+            /// <summary>
+            /// New token subordinate to refresh_token.
+            /// </summary>
             public string AccessToken { get; set; }
+            /// <summary>
+            /// May contain remembered machine ID for future login.
+            /// </summary>
+            public string? NewGuardData { get; set; }
         }
 
         public class AuthSession
         {
             public SteamClient Client { get; internal set; }
             public IAuthenticator? Authenticator { get; set; }
+            /// <summary>
+            /// Unique identifier of requestor, also used for routing, portion of QR code.
+            /// </summary>
             public ulong ClientID { get; set; }
+            /// <summary>
+            /// Unique request ID to be presented by requestor at poll time.
+            /// </summary>
             public byte[] RequestID { get; set; }
+            /// <summary>
+            /// Confirmation types that will be able to confirm the request.
+            /// </summary>
             public List<CAuthentication_AllowedConfirmation> AllowedConfirmations { get; set; }
+            /// <summary>
+            /// Refresh interval with which requestor should call PollAuthSessionStatus.
+            /// </summary>
             public TimeSpan PollingInterval { get; set; }
 
             public async Task<AuthPollResult> StartPolling()
@@ -228,6 +259,7 @@ namespace SteamKit2
                         AccessToken = response.access_token,
                         RefreshToken = response.refresh_token,
                         AccountName = response.account_name,
+                        NewGuardData = response.new_guard_data,
                     };
                 }
 
@@ -237,11 +269,17 @@ namespace SteamKit2
 
         public sealed class QrAuthSession : AuthSession
         {
+            /// <summary>
+            /// URL based on client ID, which can be rendered as QR code.
+            /// </summary>
             public string ChallengeURL { get; set; }
         }
 
         public sealed class CredentialsAuthSession : AuthSession
         {
+            /// <summary>
+            /// SteamID of the account logging in, will only be included if the credentials were correct.
+            /// </summary>
             public SteamID SteamID { get; set; }
 
             public async Task SendSteamGuardCode( string code, EAuthSessionGuardType codeType )
@@ -366,6 +404,7 @@ namespace SteamKit2
                 account_name = details.Username,
                 persistence = details.Persistence,
                 website_id = details.WebsiteID,
+                guard_data = details.GuardData,
                 encrypted_password = Convert.ToBase64String( encryptedPassword ),
                 encryption_timestamp = publicKey.timestamp,
             };
