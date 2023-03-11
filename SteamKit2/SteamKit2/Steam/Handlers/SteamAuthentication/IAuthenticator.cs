@@ -1,13 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace SteamKit2
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IAuthenticator
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Task<string> ProvideDeviceCode();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public Task<string> ProvideEmailCode(string email);
     }
 }

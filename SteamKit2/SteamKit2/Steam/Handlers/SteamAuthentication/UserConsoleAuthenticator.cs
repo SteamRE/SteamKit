@@ -3,8 +3,15 @@ using System.Threading.Tasks;
 
 namespace SteamKit2
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class UserConsoleAuthenticator : IAuthenticator
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Task<string> ProvideDeviceCode()
         {
             string? code;
@@ -19,6 +26,11 @@ namespace SteamKit2
             return Task.FromResult( code! );
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public Task<string> ProvideEmailCode( string email )
         {
             string? code;

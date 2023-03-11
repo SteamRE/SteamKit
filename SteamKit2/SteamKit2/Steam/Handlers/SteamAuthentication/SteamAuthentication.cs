@@ -90,6 +90,9 @@ namespace SteamKit2
             public IAuthenticator? Authenticator { get; set; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public class AuthPollResult
         {
             /// <summary>
@@ -110,9 +113,18 @@ namespace SteamKit2
             public string? NewGuardData { get; set; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public class AuthSession
         {
+            /// <summary>
+            /// 
+            /// </summary>
             public SteamClient Client { get; internal set; }
+            /// <summary>
+            /// 
+            /// </summary>
             public IAuthenticator? Authenticator { get; set; }
             /// <summary>
             /// Unique identifier of requestor, also used for routing, portion of QR code.
@@ -131,6 +143,13 @@ namespace SteamKit2
             /// </summary>
             public TimeSpan PollingInterval { get; set; }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <returns></returns>
+            /// <exception cref="InvalidOperationException"></exception>
+            /// <exception cref="NotImplementedException"></exception>
+            /// <exception cref="AuthenticationException"></exception>
             public async Task<AuthPollResult> StartPolling()
             {
                 var pollLoop = false;
@@ -222,6 +241,11 @@ namespace SteamKit2
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <returns></returns>
+            /// <exception cref="AuthenticationException"></exception>
             public async Task<AuthPollResult?> PollAuthSessionStatus()
             {
                 var request = new CAuthentication_PollAuthSessionStatus_Request
@@ -267,6 +291,9 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public sealed class QrAuthSession : AuthSession
         {
             /// <summary>
@@ -275,6 +302,9 @@ namespace SteamKit2
             public string ChallengeURL { get; set; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public sealed class CredentialsAuthSession : AuthSession
         {
             /// <summary>
@@ -282,6 +312,13 @@ namespace SteamKit2
             /// </summary>
             public SteamID SteamID { get; set; }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="code"></param>
+            /// <param name="codeType"></param>
+            /// <returns></returns>
+            /// <exception cref="AuthenticationException"></exception>
             public async Task SendSteamGuardCode( string code, EAuthSessionGuardType codeType )
             {
                 var request = new CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
