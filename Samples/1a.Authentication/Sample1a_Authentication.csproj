@@ -4,11 +4,11 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <Company>SteamRE</Company>
-    <Product>Sample1a_Authentication.csproj</Product>
+    <Product>Sample1a_Authentication</Product>
     <Authors />
     <Description>SteamKit Sample 1a: Authentication</Description>
     <Copyright>Copyright © Pavel Djundik 2023</Copyright>
-    <PackageId>Sample1a_Authentication.csproj</PackageId>
+    <PackageId>Sample1a_Authentication</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

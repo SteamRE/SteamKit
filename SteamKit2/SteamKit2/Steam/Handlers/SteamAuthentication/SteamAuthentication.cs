@@ -70,7 +70,7 @@ namespace SteamKit2
             /// Gets or sets the session persistence.
             /// </summary>
             /// <value>The persistence.</value>
-            public ESessionPersistence Persistence { get; set; } = ESessionPersistence.k_ESessionPersistence_Persistent;
+            public bool IsPersistentSession { get; set; } = true;
 
             /// <summary>
             /// Gets or sets the website id that the login will be performed for. (EMachineAuthWebDomain)
@@ -439,7 +439,7 @@ namespace SteamKit2
                 platform_type = details.PlatformType,
                 device_friendly_name = details.DeviceFriendlyName,
                 account_name = details.Username,
-                persistence = details.Persistence,
+                persistence = details.IsPersistentSession ? ESessionPersistence.k_ESessionPersistence_Persistent : ESessionPersistence.k_ESessionPersistence_Ephemeral,
                 website_id = details.WebsiteID,
                 guard_data = details.GuardData,
                 encrypted_password = Convert.ToBase64String( encryptedPassword ),
@@ -481,18 +481,11 @@ namespace SteamKit2
             // not used
         }
 
+        /// <summary>
+        /// Sort available guard confirmation methods by an order that we prefer to handle them in
+        /// </summary>
         private static List<CAuthentication_AllowedConfirmation> SortConfirmations( List<CAuthentication_AllowedConfirmation> confirmations )
         {
-            /*
-            valve's preferred order:
-            0. k_EAuthSessionGuardType_DeviceConfirmation = 4, poll
-            1. k_EAuthSessionGuardType_DeviceCode = 3, no poll
-            2. k_EAuthSessionGuardType_EmailCode = 2, no poll
-            3. k_EAuthSessionGuardType_None = 1, instant poll
-            4. k_EAuthSessionGuardType_Unknown = 0,
-            5. k_EAuthSessionGuardType_EmailConfirmation = 5, poll
-            k_EAuthSessionGuardType_MachineToken = 6, checkdevice then instant poll
-            */
             var preferredConfirmationTypes = new EAuthSessionGuardType[]
             {
                 EAuthSessionGuardType.k_EAuthSessionGuardType_None,

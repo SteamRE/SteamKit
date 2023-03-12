@@ -61,7 +61,7 @@ async void OnConnected( SteamClient.ConnectedCallback callback )
     {
         Username = user,
         Password = pass,
-        Persistence = SteamKit2.Internal.ESessionPersistence.k_ESessionPersistence_Ephemeral,
+        IsPersistentSession = true,
         WebsiteID = "Client",
         Authenticator = new UserConsoleAuthenticator(),
     } );
