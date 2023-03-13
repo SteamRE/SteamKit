@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using SteamKit2.Internal;
 
@@ -150,7 +151,7 @@ namespace SteamKit2
             /// <exception cref="InvalidOperationException"></exception>
             /// <exception cref="NotImplementedException"></exception>
             /// <exception cref="AuthenticationException"></exception>
-            public async Task<AuthPollResult> StartPolling()
+            public async Task<AuthPollResult> StartPolling( CancellationToken? cancellationToken = null)
             {
                 var pollLoop = false;
                 var preferredConfirmation = AllowedConfirmations.FirstOrDefault();
@@ -228,6 +229,8 @@ namespace SteamKit2
 
                 while ( true )
                 {
+                    cancellationToken?.ThrowIfCancellationRequested();
+
                     // TODO: Realistically we only need to poll for confirmation-based (like qr, or device confirm) types
                     // TODO: For guard type none we don't need delay
                     await Task.Delay( PollingInterval );
