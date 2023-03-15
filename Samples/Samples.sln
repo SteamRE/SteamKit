@@ -5,6 +5,10 @@ VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample1_Logon", "1.Logon\Sample1_Logon.csproj", "{CEF39496-576D-4A70-9A06-16112B84B79F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample1a_Authentication", "1a.Authentication\Sample1a_Authentication.csproj", "{C6FC3BF7-BF99-46FE-98F3-56C7C123BDC5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample1b_QrCodeAuthentication", "1b.QrCodeAuthentication\Sample1b_QrCodeAuthentication.csproj", "{EFC8F224-9441-48D0-8FEE-2FC9F948837C}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample2_Extending", "2.Extending\Sample2_Extending.csproj", "{B8D7F87B-DBAA-4FBE-8254-E1FE07D6C7DC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample3_DebugLog", "3.DebugLog\Sample3_DebugLog.csproj", "{808EAE9B-B9F6-4692-8F5A-9E2A703BF8CE}"
@@ -24,8 +28,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample10_DotaMatchRequest", "10.DotaMatchRequest\Sample10_DotaMatchRequest.csproj", "{734863D3-4EED-4758-B1E9-7B324C2D8D72}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SteamKit2", "..\SteamKit2\SteamKit2\SteamKit2.csproj", "{4B2B0365-DE37-4B65-B614-3E4E7C05147D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample1a_Authentication", "1a.Authentication\Sample1a_Authentication.csproj", "{C6FC3BF7-BF99-46FE-98F3-56C7C123BDC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -181,6 +183,18 @@ Global
 		{C6FC3BF7-BF99-46FE-98F3-56C7C123BDC5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C6FC3BF7-BF99-46FE-98F3-56C7C123BDC5}.Release|x86.ActiveCfg = Release|Any CPU
 		{C6FC3BF7-BF99-46FE-98F3-56C7C123BDC5}.Release|x86.Build.0 = Release|Any CPU
+		{EFC8F224-9441-48D0-8FEE-2FC9F948837C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFC8F224-9441-48D0-8FEE-2FC9F948837C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFC8F224-9441-48D0-8FEE-2FC9F948837C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{EFC8F224-9441-48D0-8FEE-2FC9F948837C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{EFC8F224-9441-48D0-8FEE-2FC9F948837C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EFC8F224-9441-48D0-8FEE-2FC9F948837C}.Debug|x86.Build.0 = Debug|Any CPU
+		{EFC8F224-9441-48D0-8FEE-2FC9F948837C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFC8F224-9441-48D0-8FEE-2FC9F948837C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFC8F224-9441-48D0-8FEE-2FC9F948837C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{EFC8F224-9441-48D0-8FEE-2FC9F948837C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{EFC8F224-9441-48D0-8FEE-2FC9F948837C}.Release|x86.ActiveCfg = Release|Any CPU
+		{EFC8F224-9441-48D0-8FEE-2FC9F948837C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

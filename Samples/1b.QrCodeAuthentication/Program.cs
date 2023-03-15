@@ -1,16 +1,6 @@
 ﻿using System;
-
+using QRCoder;
 using SteamKit2;
-
-if ( args.Length < 2 )
-{
-    Console.WriteLine( "Sample1: No username and password specified!" );
-    return;
-}
-
-// save our logon details
-var user = args[ 0 ];
-var pass = args[ 1 ];
 
 // create our steamclient instance
 var steamClient = new SteamClient();
@@ -48,20 +38,28 @@ while ( isRunning )
 
 async void OnConnected( SteamClient.ConnectedCallback callback )
 {
-    Console.WriteLine( "Connected to Steam! Logging in '{0}'...", user );
-
-    // Begin authenticating via credentials
-    var authSession = await auth.BeginAuthSessionViaCredentials( new SteamAuthentication.AuthSessionDetails
+    // Start an authentication session by requesting a link
+    var authSession = await auth.BeginAuthSessionViaQR( new SteamAuthentication.AuthSessionDetails
     {
-        Username = user,
-        Password = pass,
-        IsPersistentSession = false,
-        WebsiteID = "Client",
-        Authenticator = new UserConsoleAuthenticator(),
+        DeviceFriendlyName = "SteamKit Sample"
     } );
+
+    Console.WriteLine( $"QR Link: {authSession.ChallengeURL}" );
+    Console.WriteLine();
+
+    // Encode the link as a QR code
+    var qrGenerator = new QRCodeGenerator();
+    var qrCodeData = qrGenerator.CreateQrCode( authSession.ChallengeURL, QRCodeGenerator.ECCLevel.L );
+    var qrCode = new AsciiQRCode( qrCodeData );
+    var qrCodeAsAsciiArt = qrCode.GetGraphic( 1, drawQuietZones: false );
+
+    Console.WriteLine( "Use the Steam Mobile App to sign in via QR code:" );
+    Console.WriteLine( qrCodeAsAsciiArt );
 
     // Starting polling Steam for authentication response
     var pollResponse = await authSession.StartPolling();
+
+    Console.WriteLine( $"Logging in as '{pollResponse.AccountName}'..." );
 
     // Logon to Steam with the access token we have received
     steamUser.LogOn( new SteamUser.LogOnDetails
