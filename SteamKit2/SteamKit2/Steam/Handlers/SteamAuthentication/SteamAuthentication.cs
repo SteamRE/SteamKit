@@ -151,7 +151,7 @@ namespace SteamKit2
             /// <exception cref="InvalidOperationException"></exception>
             /// <exception cref="NotImplementedException"></exception>
             /// <exception cref="AuthenticationException"></exception>
-            public async Task<AuthPollResult> StartPolling( CancellationToken? cancellationToken = null)
+            public async Task<AuthPollResult> StartPolling( CancellationToken? cancellationToken = null )
             {
                 var pollLoop = false;
                 var preferredConfirmation = AllowedConfirmations.FirstOrDefault();
@@ -161,12 +161,30 @@ namespace SteamKit2
                     throw new InvalidOperationException( "There are no allowed confirmations" );
                 }
 
+                // If an authenticator is provided and we device confirmation is available, allow consumers to choose whether they want to
+                // simply poll until confirmation is accepted, or whether they want to fallback to the next preferred confirmation type.
+                if ( Authenticator != null && preferredConfirmation.confirmation_type == EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceConfirmation )
+                {
+                    var prefersToPollForConfirmation = await Authenticator.AcceptDeviceConfirmation();
+
+                    if ( !prefersToPollForConfirmation )
+                    {
+                        if ( AllowedConfirmations.Count <= 1 )
+                        {
+                            throw new InvalidOperationException( "AcceptDeviceConfirmation returned false which indicates a fallback to another confirmation type, but there are no other confirmation types available." );
+                        }
+
+                        preferredConfirmation = AllowedConfirmations[ 1 ];
+                    }
+                }
+
                 switch ( preferredConfirmation.confirmation_type )
                 {
+                    // No steam guard
                     case EAuthSessionGuardType.k_EAuthSessionGuardType_None:
-                        // no steam guard
                         break;
 
+                    // 2-factor code from the authenticator app or sent to an email
                     case EAuthSessionGuardType.k_EAuthSessionGuardType_EmailCode:
                     case EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceCode:
                         if ( !( this is CredentialsAuthSession credentialsAuthSession ) )
@@ -197,11 +215,12 @@ namespace SteamKit2
 
                         break;
 
+                    // This is a prompt that appears in the Steam mobile app
                     case EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceConfirmation:
-                        // TODO: is this accept prompt that automatically appears in the mobile app?
                         pollLoop = true;
                         break;
 
+                    /*
                     case EAuthSessionGuardType.k_EAuthSessionGuardType_EmailConfirmation:
                         // TODO: what is this?
                         pollLoop = true;
@@ -210,6 +229,7 @@ namespace SteamKit2
                     case EAuthSessionGuardType.k_EAuthSessionGuardType_MachineToken:
                         // ${u.De.LOGIN_BASE_URL}jwt/checkdevice - with steam machine guard cookie set
                         throw new NotImplementedException( $"Machine token confirmation is not supported by SteamKit at the moment." );
+                    */
 
                     default:
                         throw new NotImplementedException( $"Unsupported confirmation type {preferredConfirmation.confirmation_type}." );
@@ -217,6 +237,8 @@ namespace SteamKit2
 
                 if ( !pollLoop )
                 {
+                    cancellationToken?.ThrowIfCancellationRequested();
+
                     var pollResponse = await PollAuthSessionStatus();
 
                     if ( pollResponse == null )
@@ -231,9 +253,9 @@ namespace SteamKit2
                 {
                     cancellationToken?.ThrowIfCancellationRequested();
 
-                    // TODO: Realistically we only need to poll for confirmation-based (like qr, or device confirm) types
-                    // TODO: For guard type none we don't need delay
                     await Task.Delay( PollingInterval );
+
+                    cancellationToken?.ThrowIfCancellationRequested();
 
                     var pollResponse = await PollAuthSessionStatus();
 
