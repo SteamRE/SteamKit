@@ -19,26 +19,6 @@ namespace SteamKit2
     /// </summary>
     public sealed class SteamAuthentication : ClientMsgHandler
     {
-        /* EPasswordLoginSessionStatus
-            Unstarted: 0,
-            Starting: 1,
-            InvalidCredentials: 2,
-            WaitingForEmailCode: 3,
-            WaitingForEmailConfirmation: 4,
-            WaitingForDeviceCode: 5,
-            WaitingForDeviceConfirmation: 6,
-            StartMoveAuthenticator: 7,
-            WaitingForMoveCode: 8,
-            AuthenticatorMoved: 9,
-            InvalidEmailCode: 10,
-            InvalidDeviceCode: 11,
-            InvalidMoveCode: 12,
-            WaitingForToken: 13,
-            Success: 14,
-            Failure: 15,
-            Stopped: 16,
-        */
-
         /// <summary>
         /// Represents the details required to authenticate on Steam.
         /// </summary>
@@ -86,8 +66,10 @@ namespace SteamKit2
             public string? GuardData { get; set; }
 
             /// <summary>
-            /// 
+            /// Authenticator object which will be used to handle 2-factor authentication if necessary.
+            /// Use <see cref="UserConsoleAuthenticator"/> for a default implementation.
             /// </summary>
+            /// <value>The authenticator object.</value>
             public IAuthenticator? Authenticator { get; set; }
         }
 
@@ -115,7 +97,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// 
+        /// Represents an authentication sesssion which can be used to finish the authentication and get access tokens.
         /// </summary>
         public class AuthSession
         {
@@ -124,7 +106,7 @@ namespace SteamKit2
             /// </summary>
             public SteamClient Client { get; internal set; }
             /// <summary>
-            /// 
+            /// Authenticator object which will be used to handle 2-factor authentication if necessary.
             /// </summary>
             public IAuthenticator? Authenticator { get; set; }
             /// <summary>
@@ -145,12 +127,11 @@ namespace SteamKit2
             public TimeSpan PollingInterval { get; set; }
 
             /// <summary>
-            /// 
+            /// Handle any 2-factor authentication, and if necessary poll for updates until authentication succeeds.
             /// </summary>
-            /// <returns></returns>
-            /// <exception cref="InvalidOperationException"></exception>
-            /// <exception cref="NotImplementedException"></exception>
-            /// <exception cref="AuthenticationException"></exception>
+            /// <returns>An object containing tokens which can be used to login to Steam.</returns>
+            /// <exception cref="InvalidOperationException">Thrown when an invalid state occurs, such as no supported confirmation methods are available.</exception>
+            /// <exception cref="AuthenticationException">Thrown when polling fails.</exception>
             public async Task<AuthPollResult> StartPolling( CancellationToken? cancellationToken = null )
             {
                 var pollLoop = false;
@@ -243,7 +224,7 @@ namespace SteamKit2
 
                     if ( pollResponse == null )
                     {
-                        throw new AuthenticationException( "Auth failed", EResult.Fail );
+                        throw new AuthenticationException( "Authentication failed", EResult.Fail );
                     }
 
                     return pollResponse;
@@ -267,10 +248,10 @@ namespace SteamKit2
             }
 
             /// <summary>
-            /// 
+            /// Polls for authentication status once. Prefer using <see cref="StartPolling"/> instead.
             /// </summary>
-            /// <returns></returns>
-            /// <exception cref="AuthenticationException"></exception>
+            /// <returns>An object containing tokens which can be used to login to Steam, or null if not yet authenticated.</returns>
+            /// <exception cref="AuthenticationException">Thrown when polling fails.</exception>
             public async Task<AuthPollResult?> PollAuthSessionStatus()
             {
                 var request = new CAuthentication_PollAuthSessionStatus_Request
@@ -393,7 +374,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// 
+        /// Start the authentication process using QR codes.
         /// </summary>
         /// <param name="details">The details to use for logging on.</param>
         public async Task<QrAuthSession> BeginAuthSessionViaQR( AuthSessionDetails details )
@@ -429,7 +410,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// 
+        /// Start the authentication process by providing username and password.
         /// </summary>
         /// <param name="details">The details to use for logging on.</param>
         /// <exception cref="ArgumentNullException">No auth details were provided.</exception>
