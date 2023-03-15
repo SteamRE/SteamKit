@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SteamKit2
 {
-    internal class AuthenticationException : Exception
+    public class AuthenticationException : Exception
     {
         /// <summary>
         /// 
