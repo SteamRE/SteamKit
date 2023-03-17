@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Text.Json;
 using SteamKit2;
 
 if ( args.Length < 2 )
@@ -63,11 +63,16 @@ async void OnConnected( SteamClient.ConnectedCallback callback )
     var pollResponse = await authSession.StartPolling();
 
     // Logon to Steam with the access token we have received
+    // Note that we are using RefreshToken for logging on here
     steamUser.LogOn( new SteamUser.LogOnDetails
     {
         Username = pollResponse.AccountName,
         AccessToken = pollResponse.RefreshToken,
     } );
+
+    // This is not required, but it is possible to parse the JWT access token to see the scope and expiration date.
+    ParseJsonWebToken( pollResponse.AccessToken, nameof( pollResponse.AccessToken ) );
+    ParseJsonWebToken( pollResponse.RefreshToken, nameof( pollResponse.RefreshToken ) );
 }
 
 void OnDisconnected( SteamClient.DisconnectedCallback callback )
@@ -98,4 +103,34 @@ void OnLoggedOn( SteamUser.LoggedOnCallback callback )
 void OnLoggedOff( SteamUser.LoggedOffCallback callback )
 {
     Console.WriteLine( "Logged off of Steam: {0}", callback.Result );
+}
+
+
+
+// This is simply showing how to parse JWT, this is not required to login to Steam
+void ParseJsonWebToken( string token, string name )
+{
+    // You can use a JWT library to do the parsing for you
+    var tokenComponents = token.Split( '.' );
+
+    // Fix up base64url to normal base64
+    var base64 = tokenComponents[ 1 ].Replace( '-', '+' ).Replace( '_', '/' );
+
+    if ( base64.Length % 4 != 0 )
+    {
+        base64 += new string( '=', 4 - base64.Length % 4 );
+    }
+
+    var payloadBytes = Convert.FromBase64String( base64 );
+
+    // Payload can be parsed as JSON, and then fields such expiration date, scope, etc can be accessed
+    var payload = JsonDocument.Parse( payloadBytes );
+
+    // For brevity we will simply output formatted json to console
+    var formatted = JsonSerializer.Serialize( payload, new JsonSerializerOptions
+    {
+        WriteIndented = true,
+    } );
+    Console.WriteLine( $"{name}: {formatted}" );
+    Console.WriteLine();
 }
