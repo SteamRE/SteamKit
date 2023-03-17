@@ -200,21 +200,47 @@ namespace SteamKit2
                             throw new InvalidOperationException( $"This account requires an authenticator for login, but none was provided in {nameof( AuthSessionDetails )}." );
                         }
 
-                        var task = preferredConfirmation.confirmation_type switch
+                        var expectedInvalidCodeResult = preferredConfirmation.confirmation_type switch
                         {
-                            EAuthSessionGuardType.k_EAuthSessionGuardType_EmailCode => Authenticator.ProvideEmailCode( preferredConfirmation.associated_message ),
-                            EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceCode => Authenticator.ProvideDeviceCode(),
+                            EAuthSessionGuardType.k_EAuthSessionGuardType_EmailCode => EResult.InvalidLoginAuthCode,
+                            EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceCode => EResult.TwoFactorCodeMismatch,
                             _ => throw new NotImplementedException(),
                         };
+                        var previousCodeWasIncorrect = false;
+                        var waitingForValidCode = true;
 
-                        var code = await task;
-
-                        if ( string.IsNullOrEmpty( code ) )
+                        do
                         {
-                            throw new InvalidOperationException( "No code was provided by the authenticator." );
-                        }
+                            cancellationToken?.ThrowIfCancellationRequested();
 
-                        await credentialsAuthSession.SendSteamGuardCode( code, preferredConfirmation.confirmation_type );
+                            try
+                            {
+                                var task = preferredConfirmation.confirmation_type switch
+                                {
+                                    EAuthSessionGuardType.k_EAuthSessionGuardType_EmailCode => Authenticator.ProvideEmailCode( preferredConfirmation.associated_message, previousCodeWasIncorrect ),
+                                    EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceCode => Authenticator.ProvideDeviceCode( previousCodeWasIncorrect ),
+                                    _ => throw new NotImplementedException(),
+                                };
+
+                                var code = await task;
+
+                                cancellationToken?.ThrowIfCancellationRequested();
+
+                                if ( string.IsNullOrEmpty( code ) )
+                                {
+                                    throw new InvalidOperationException( "No code was provided by the authenticator." );
+                                }
+
+                                await credentialsAuthSession.SendSteamGuardCode( code, preferredConfirmation.confirmation_type );
+
+                                waitingForValidCode = false;
+                            }
+                            catch ( AuthenticationException e ) when ( e.Result == expectedInvalidCodeResult )
+                            {
+                                previousCodeWasIncorrect = true;
+                            }
+                        }
+                        while ( waitingForValidCode );
 
                         break;
 

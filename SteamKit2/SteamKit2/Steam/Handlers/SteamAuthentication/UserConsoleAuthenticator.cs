@@ -11,13 +11,18 @@ namespace SteamKit2
     public class UserConsoleAuthenticator : IAuthenticator
     {
         /// <inheritdoc />
-        public Task<string> ProvideDeviceCode()
+        public Task<string> ProvideDeviceCode( bool previousCodeWasIncorrect )
         {
+            if ( previousCodeWasIncorrect )
+            {
+                Console.Error.WriteLine( "The previous 2-factor auth code you have provided is incorrect." );
+            }
+
             string? code;
 
             do
             {
-                Console.Write( "STEAM GUARD! Please enter your 2 factor auth code from your authenticator app: " );
+                Console.Error.Write( "STEAM GUARD! Please enter your 2-factor auth code from your authenticator app: " );
                 code = Console.ReadLine()?.Trim();
             }
             while ( string.IsNullOrEmpty( code ) );
@@ -26,13 +31,18 @@ namespace SteamKit2
         }
 
         /// <inheritdoc />
-        public Task<string> ProvideEmailCode( string email )
+        public Task<string> ProvideEmailCode( string email, bool previousCodeWasIncorrect )
         {
+            if ( previousCodeWasIncorrect )
+            {
+                Console.Error.WriteLine( "The previous 2-factor auth code you have provided is incorrect." );
+            }
+
             string? code;
 
             do
             {
-                Console.Write( $"STEAM GUARD! Please enter the auth code sent to the email at {email}: " );
+                Console.Error.Write( $"STEAM GUARD! Please enter the auth code sent to the email at {email}: " );
                 code = Console.ReadLine()?.Trim();
             }
             while ( string.IsNullOrEmpty( code ) );
@@ -43,7 +53,7 @@ namespace SteamKit2
         /// <inheritdoc />
         public Task<bool> AcceptDeviceConfirmation()
         {
-            Console.WriteLine( "STEAM GUARD! Use the Steam Mobile App to confirm your sign in..." );
+            Console.Error.WriteLine( "STEAM GUARD! Use the Steam Mobile App to confirm your sign in..." );
 
             return Task.FromResult( true );
         }
