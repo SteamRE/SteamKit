@@ -22,6 +22,33 @@ namespace SteamKit2
     public sealed class WebAPI
     {
         /// <summary>
+        /// Represents a response to a WebAPI request.
+        /// </summary>
+        public class WebAPIResponse<TResponse>
+        {
+            /// <summary>
+            /// Gets the result of the request.
+            /// </summary>
+            public EResult Result { get; }
+
+            /// <summary>
+            /// Gets the body of the request.
+            /// </summary>
+            public TResponse Body { get; }
+
+            /// <summary>
+            /// Constructs <see cref="WebAPIResponse{TResponse}"/> object.
+            /// </summary>
+            /// <param name="body">The result.</param>
+            /// <param name="result">The body.</param>
+            internal WebAPIResponse( TResponse body, EResult result )
+            {
+                Result = result;
+                Body = body;
+            }
+        }
+
+        /// <summary>
         /// The default base address used for the Steam Web API.
         /// A different base address can be specified in a <see cref="SteamConfiguration"/> object, or
         /// as a function argument where overloads are available.
@@ -225,6 +252,49 @@ namespace SteamKit2
             /// <summary>
             /// Manually calls the specified Web API function with the provided details.
             /// </summary>
+            /// <typeparam name="TRequest">Protobuf type of the request message.</typeparam>
+            /// <typeparam name="TResponse">Protobuf type of the response message.</typeparam>
+            /// <param name="func">The function name to call.</param>
+            /// <param name="version">The version of the function to call.</param>
+            /// <param name="request">A protobuf object representing arguments to be passed to the API.</param>
+            /// <param name="method">The http request method. Either "POST" or "GET".</param>
+            /// <returns>A <see cref="Task{T}"/> that contains object representing the results of the Web API call.</returns>
+            /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
+            /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
+            /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
+            /// <exception cref="ProtoException">An error occured when parsing the response from the WebAPI.</exception>
+            public async Task<WebAPIResponse<TResponse>> CallProtobufAsync<TResponse, TRequest>( HttpMethod method, string func, TRequest request, int version = 1 )
+                where TResponse : IExtensible, new()
+                where TRequest : IExtensible, new()
+            {
+                using var input_payload = new MemoryStream();
+                Serializer.Serialize<TRequest>( input_payload, request );
+
+                var base64 = Convert.ToBase64String( input_payload.ToArray() );
+                var args = new Dictionary<string, object?>
+                {
+                    { "input_protobuf_encoded", base64 },
+                };
+
+                var response = await CallAsyncInternal( method, func, version, args, "protobuf_raw" );
+                var eresult = EResult.Invalid;
+
+                using var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait( false );
+
+                if ( response.Headers.TryGetValues( "x-eresult", out var result ) && int.TryParse( result.First(), out var resultInt ) )
+                {
+                    eresult = ( EResult )resultInt;
+                }
+
+                var body = Serializer.Deserialize<TResponse>( stream );
+                var api_response = new WebAPIResponse<TResponse>( body, eresult );
+
+                return api_response;
+            }
+
+            /// <summary>
+            /// Manually calls the specified Web API function with the provided details.
+            /// </summary>
             /// <param name="func">The function name to call.</param>
             /// <param name="version">The version of the function to call.</param>
             /// <param name="args">A dictionary of string key value pairs representing arguments to be passed to the API.</param>
@@ -419,7 +489,7 @@ namespace SteamKit2
                     // method is a reserved param for selecting the http request method
                     if ( argName.Equals( "method", StringComparison.OrdinalIgnoreCase ) )
                     {
-                        if (!(argValue?.ToString() is { } argValueString))
+                        if ( !( argValue?.ToString() is { } argValueString ) )
                         {
                             throw new ArgumentException( "The argument 'method' must not be null or have a null string representation." );
                         }
