@@ -56,7 +56,6 @@ async void OnConnected( SteamClient.ConnectedCallback callback )
         Username = user,
         Password = pass,
         IsPersistentSession = false,
-        WebsiteID = "Client",
         Authenticator = new UserConsoleAuthenticator(),
     } );
 
