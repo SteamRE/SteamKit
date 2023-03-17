@@ -69,6 +69,7 @@ namespace NetHookAnalyzer2
 				case EMsg.ServiceMethod:
 				case EMsg.ServiceMethodSendToClient:
 				case EMsg.ServiceMethodCallFromClient:
+				case EMsg.ServiceMethodCallFromClientNonAuthed:
 					body = UnifiedMessagingHelpers.ReadServiceMethodBody(targetJobName.Value, stream, x => x.GetParameters().First().ParameterType);
 					break;
 
