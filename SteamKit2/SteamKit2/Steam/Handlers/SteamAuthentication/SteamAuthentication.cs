@@ -61,7 +61,7 @@ namespace SteamKit2
 
             /// <summary>
             /// Gets or sets the website id that the login will be performed for.
-            /// Can be "Unknown", "Client", "Website", "Store", "Community"
+            /// Known values are "Unknown", "Client", "Mobile", "Website", "Store", "Community", "Partner".
             /// </summary>
             /// <value>The website id.</value>
             public string? WebsiteID { get; set; } = "Client";
