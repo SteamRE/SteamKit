@@ -63,6 +63,7 @@ namespace SteamKit2
             /// Gets or sets the login key used to login. This is a key that has been recieved in a previous Steam sesson by a <see cref="LoginKeyCallback"/>.
             /// </summary>
             /// <value>The login key.</value>
+            [Obsolete( "Steam no longer sends new login keys as of March 2023, use SteamAuthentication." )]
             public string? LoginKey { get; set; }
             /// <summary>
             /// Gets or sets the 'Should Remember Password' flag. This is used in combination with the login key and <see cref="LoginKeyCallback"/> for password-less login.
@@ -490,6 +491,7 @@ namespace SteamKit2
         /// Accepts the new Login Key provided by a <see cref="LoginKeyCallback"/>.
         /// </summary>
         /// <param name="callback">The callback containing the new Login Key.</param>
+        [Obsolete( "Steam no longer sends new login keys as of March 2023, use SteamAuthentication." )]
         public void AcceptNewLoginKey( LoginKeyCallback callback )
         {
             if ( callback == null )
