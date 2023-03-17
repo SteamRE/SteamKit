@@ -40,7 +40,7 @@ namespace SteamKit2
             /// Gets or sets the device name (or user agent).
             /// </summary>
             /// <value>The device name.</value>
-            public string? DeviceFriendlyName { get; set; }
+            public string? DeviceFriendlyName { get; set; } = $"{Environment.MachineName} (SteamKit2)";
 
             /// <summary>
             /// Gets or sets the platform type that the login will be performed for.
@@ -48,16 +48,23 @@ namespace SteamKit2
             public EAuthTokenPlatformType PlatformType { get; set; } = EAuthTokenPlatformType.k_EAuthTokenPlatformType_SteamClient;
 
             /// <summary>
+            /// Gets or sets the client operating system type.
+            /// </summary>
+            /// <value>The client operating system type.</value>
+            public EOSType ClientOSType { get; set; } = Utils.GetOSType();
+
+            /// <summary>
             /// Gets or sets the session persistence.
             /// </summary>
             /// <value>The persistence.</value>
-            public bool IsPersistentSession { get; set; } = true;
+            public bool IsPersistentSession { get; set; } = false;
 
             /// <summary>
-            /// Gets or sets the website id that the login will be performed for. (EMachineAuthWebDomain)
+            /// Gets or sets the website id that the login will be performed for.
+            /// Can be "Unknown", "Client", "Website", "Store", "Community"
             /// </summary>
             /// <value>The website id.</value>
-            public string? WebsiteID { get; set; }
+            public string? WebsiteID { get; set; } = "Client";
 
             /// <summary>
             /// Steam guard data for client login. Provide <see cref="AuthPollResult.NewGuardData"/> if available.
@@ -94,6 +101,14 @@ namespace SteamKit2
             /// May contain remembered machine ID for future login.
             /// </summary>
             public string? NewGuardData { get; set; }
+
+            internal AuthPollResult( CAuthentication_PollAuthSessionStatus_Response response )
+            {
+                AccessToken = response.access_token;
+                RefreshToken = response.refresh_token;
+                AccountName = response.account_name;
+                NewGuardData = response.new_guard_data;
+            }
         }
 
         /// <summary>
@@ -101,10 +116,7 @@ namespace SteamKit2
         /// </summary>
         public class AuthSession
         {
-            /// <summary>
-            /// 
-            /// </summary>
-            public SteamClient Client { get; internal set; }
+            internal SteamUnifiedMessages.UnifiedService<IAuthentication> AuthenticationService { get; private set; }
             /// <summary>
             /// Authenticator object which will be used to handle 2-factor authentication if necessary.
             /// </summary>
@@ -125,6 +137,16 @@ namespace SteamKit2
             /// Refresh interval with which requestor should call PollAuthSessionStatus.
             /// </summary>
             public TimeSpan PollingInterval { get; set; }
+
+            internal AuthSession( SteamUnifiedMessages.UnifiedService<IAuthentication> authenticationService, IAuthenticator? authenticator, ulong clientId, byte[] requestId, List<CAuthentication_AllowedConfirmation> allowedConfirmations, float pollingInterval )
+            {
+                AuthenticationService = authenticationService;
+                Authenticator = authenticator;
+                ClientID = clientId;
+                RequestID = requestId;
+                AllowedConfirmations = SortConfirmations( allowedConfirmations );
+                PollingInterval = TimeSpan.FromSeconds( ( double )pollingInterval );
+            }
 
             /// <summary>
             /// Handle any 2-factor authentication, and if necessary poll for updates until authentication succeeds.
@@ -260,9 +282,7 @@ namespace SteamKit2
                     request_id = RequestID,
                 };
 
-                var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
-                var contentService = unifiedMessages.CreateService<IAuthentication>();
-                var message = await contentService.SendMessage( api => api.PollAuthSessionStatus( request ) );
+                var message = await AuthenticationService.SendMessage( api => api.PollAuthSessionStatus( request ) );
 
                 // eresult can be Expired, FileNotFound, Fail
                 if ( message.Result != EResult.OK )
@@ -280,17 +300,12 @@ namespace SteamKit2
                 if ( this is QrAuthSession qrResponse && response.new_challenge_url.Length > 0 )
                 {
                     qrResponse.ChallengeURL = response.new_challenge_url;
+                    qrResponse.ChallengeURLChanged?.Invoke();
                 }
 
                 if ( response.refresh_token.Length > 0 )
                 {
-                    return new AuthPollResult
-                    {
-                        AccessToken = response.access_token,
-                        RefreshToken = response.refresh_token,
-                        AccountName = response.account_name,
-                        NewGuardData = response.new_guard_data,
-                    };
+                    return new AuthPollResult( response );
                 }
 
                 return null;
@@ -298,7 +313,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// 
+        /// QR code based authentication session.
         /// </summary>
         public sealed class QrAuthSession : AuthSession
         {
@@ -306,10 +321,21 @@ namespace SteamKit2
             /// URL based on client ID, which can be rendered as QR code.
             /// </summary>
             public string ChallengeURL { get; set; }
+
+            /// <summary>
+            /// Called whenever the challenge url is refreshed by Steam.
+            /// </summary>
+            public Action? ChallengeURLChanged { get; set; }
+
+            internal QrAuthSession( SteamUnifiedMessages.UnifiedService<IAuthentication> authenticationService, IAuthenticator? authenticator, CAuthentication_BeginAuthSessionViaQR_Response response )
+                : base( authenticationService, authenticator, response.client_id, response.request_id, response.allowed_confirmations, response.interval )
+            {
+                ChallengeURL = response.challenge_url;
+            }
         }
 
         /// <summary>
-        /// 
+        /// Credentials based authentication session.
         /// </summary>
         public sealed class CredentialsAuthSession : AuthSession
         {
@@ -318,11 +344,17 @@ namespace SteamKit2
             /// </summary>
             public SteamID SteamID { get; set; }
 
+            internal CredentialsAuthSession( SteamUnifiedMessages.UnifiedService<IAuthentication> authenticationService, IAuthenticator? authenticator, CAuthentication_BeginAuthSessionViaCredentials_Response response )
+                : base( authenticationService, authenticator, response.client_id, response.request_id, response.allowed_confirmations, response.interval )
+            {
+                SteamID = new SteamID( response.steamid );
+            }
+
             /// <summary>
-            /// 
+            /// Send Steam Guard code for this authentication session.
             /// </summary>
-            /// <param name="code"></param>
-            /// <param name="codeType"></param>
+            /// <param name="code">The code.</param>
+            /// <param name="codeType">Type of code.</param>
             /// <returns></returns>
             /// <exception cref="AuthenticationException"></exception>
             public async Task SendSteamGuardCode( string code, EAuthSessionGuardType codeType )
@@ -335,9 +367,7 @@ namespace SteamKit2
                     code_type = codeType,
                 };
 
-                var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
-                var contentService = unifiedMessages.CreateService<IAuthentication>();
-                var message = await contentService.SendMessage( api => api.UpdateAuthSessionWithSteamGuardCode( request ) );
+                var message = await AuthenticationService.SendMessage( api => api.UpdateAuthSessionWithSteamGuardCode( request ) );
                 var response = message.GetDeserializedResponse<CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response>();
 
                 // can be InvalidLoginAuthCode, TwoFactorCodeMismatch, Expired
@@ -345,6 +375,8 @@ namespace SteamKit2
                 {
                     throw new AuthenticationException( "Failed to send steam guard code", message.Result );
                 }
+
+                // response may contain agreement_session_url
             }
         }
 
@@ -352,16 +384,15 @@ namespace SteamKit2
         /// Gets public key for the provided account name which can be used to encrypt the account password.
         /// </summary>
         /// <param name="accountName">The account name to get RSA public key for.</param>
-        public async Task<CAuthentication_GetPasswordRSAPublicKey_Response> GetPasswordRSAPublicKey( string accountName )
+        /// <param name="authenticationService">IAuthentication unified service.</param>
+        private async Task<CAuthentication_GetPasswordRSAPublicKey_Response> GetPasswordRSAPublicKey( string accountName, SteamUnifiedMessages.UnifiedService<IAuthentication> authenticationService )
         {
             var request = new CAuthentication_GetPasswordRSAPublicKey_Request
             {
                 account_name = accountName
             };
 
-            var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
-            var contentService = unifiedMessages.CreateService<IAuthentication>();
-            var message = await contentService.SendMessage( api => api.GetPasswordRSAPublicKey( request ) );
+            var message = await authenticationService.SendMessage( api => api.GetPasswordRSAPublicKey( request ) );
 
             if ( message.Result != EResult.OK )
             {
@@ -381,13 +412,18 @@ namespace SteamKit2
         {
             var request = new CAuthentication_BeginAuthSessionViaQR_Request
             {
-                platform_type = details.PlatformType,
-                device_friendly_name = details.DeviceFriendlyName,
+                website_id = details.WebsiteID,
+                device_details = new CAuthentication_DeviceDetails
+                {
+                    device_friendly_name = details.DeviceFriendlyName,
+                    platform_type = details.PlatformType,
+                    os_type = ( int )details.ClientOSType,
+                }
             };
 
             var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
-            var contentService = unifiedMessages.CreateService<IAuthentication>();
-            var message = await contentService.SendMessage( api => api.BeginAuthSessionViaQR( request ) );
+            var authenticationService = unifiedMessages.CreateService<IAuthentication>();
+            var message = await authenticationService.SendMessage( api => api.BeginAuthSessionViaQR( request ) );
 
             if ( message.Result != EResult.OK )
             {
@@ -396,15 +432,7 @@ namespace SteamKit2
 
             var response = message.GetDeserializedResponse<CAuthentication_BeginAuthSessionViaQR_Response>();
 
-            var authResponse = new QrAuthSession
-            {
-                Client = Client,
-                ClientID = response.client_id,
-                RequestID = response.request_id,
-                AllowedConfirmations = SortConfirmations( response.allowed_confirmations ),
-                PollingInterval = TimeSpan.FromSeconds( ( double )response.interval ),
-                ChallengeURL = response.challenge_url,
-            };
+            var authResponse = new QrAuthSession( authenticationService, details.Authenticator, response );
 
             return authResponse;
         }
@@ -427,8 +455,11 @@ namespace SteamKit2
                 throw new ArgumentException( "BeginAuthSessionViaCredentials requires a username and password to be set in 'details'." );
             }
 
+            var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
+            var authenticationService = unifiedMessages.CreateService<IAuthentication>();
+
             // Encrypt the password
-            var publicKey = await GetPasswordRSAPublicKey( details.Username! );
+            var publicKey = await GetPasswordRSAPublicKey( details.Username!, authenticationService );
             var rsaParameters = new RSAParameters
             {
                 Modulus = Utils.DecodeHexString( publicKey.publickey_mod ),
@@ -442,21 +473,23 @@ namespace SteamKit2
             // Create request
             var request = new CAuthentication_BeginAuthSessionViaCredentials_Request
             {
-                platform_type = details.PlatformType,
-                device_friendly_name = details.DeviceFriendlyName,
                 account_name = details.Username,
                 persistence = details.IsPersistentSession ? ESessionPersistence.k_ESessionPersistence_Persistent : ESessionPersistence.k_ESessionPersistence_Ephemeral,
                 website_id = details.WebsiteID,
                 guard_data = details.GuardData,
                 encrypted_password = Convert.ToBase64String( encryptedPassword ),
                 encryption_timestamp = publicKey.timestamp,
+                device_details = new CAuthentication_DeviceDetails
+                {
+                    device_friendly_name = details.DeviceFriendlyName,
+                    platform_type = details.PlatformType,
+                    os_type = ( int )details.ClientOSType,
+                }
             };
 
-            var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
-            var contentService = unifiedMessages.CreateService<IAuthentication>();
-            var message = await contentService.SendMessage( api => api.BeginAuthSessionViaCredentials( request ) );
+            var message = await authenticationService.SendMessage( api => api.BeginAuthSessionViaCredentials( request ) );
 
-            // eresult can be InvalidPassword, ServiceUnavailable
+            // eresult can be InvalidPassword, ServiceUnavailable, InvalidParam, RateLimitExceeded
             if ( message.Result != EResult.OK )
             {
                 throw new AuthenticationException( "Authentication failed", message.Result );
@@ -464,16 +497,7 @@ namespace SteamKit2
 
             var response = message.GetDeserializedResponse<CAuthentication_BeginAuthSessionViaCredentials_Response>();
 
-            var authResponse = new CredentialsAuthSession
-            {
-                Client = Client,
-                Authenticator = details.Authenticator,
-                ClientID = response.client_id,
-                RequestID = response.request_id,
-                AllowedConfirmations = SortConfirmations( response.allowed_confirmations ),
-                PollingInterval = TimeSpan.FromSeconds( ( double )response.interval ),
-                SteamID = new SteamID( response.steamid ),
-            };
+            var authResponse = new CredentialsAuthSession( authenticationService, details.Authenticator, response );
 
             return authResponse;
         }
