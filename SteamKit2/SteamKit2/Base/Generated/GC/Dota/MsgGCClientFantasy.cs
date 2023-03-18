@@ -627,9 +627,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__league_id;
 
         [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(4294967295)]
         public uint fantasy_period
         {
-            get => __pbn__fantasy_period.GetValueOrDefault();
+            get => __pbn__fantasy_period ?? 4294967295;
             set => __pbn__fantasy_period = value;
         }
         public bool ShouldSerializefantasy_period() => __pbn__fantasy_period != null;
@@ -728,9 +729,10 @@ namespace SteamKit2.GC.Dota.Internal
             private uint? __pbn__league_id;
 
             [global::ProtoBuf.ProtoMember(3)]
+            [global::System.ComponentModel.DefaultValue(4294967295)]
             public uint fantasy_period
             {
-                get => __pbn__fantasy_period.GetValueOrDefault();
+                get => __pbn__fantasy_period ?? 4294967295;
                 set => __pbn__fantasy_period = value;
             }
             public bool ShouldSerializefantasy_period() => __pbn__fantasy_period != null;
@@ -823,9 +825,10 @@ namespace SteamKit2.GC.Dota.Internal
             private float? __pbn__percentile;
 
             [global::ProtoBuf.ProtoMember(8)]
+            [global::System.ComponentModel.DefaultValue(4294967295)]
             public uint fantasy_period
             {
-                get => __pbn__fantasy_period.GetValueOrDefault();
+                get => __pbn__fantasy_period ?? 4294967295;
                 set => __pbn__fantasy_period = value;
             }
             public bool ShouldSerializefantasy_period() => __pbn__fantasy_period != null;
@@ -903,9 +906,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__event_id;
 
         [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue(4294967295)]
         public uint fantasy_period
         {
-            get => __pbn__fantasy_period.GetValueOrDefault();
+            get => __pbn__fantasy_period ?? 4294967295;
             set => __pbn__fantasy_period = value;
         }
         public bool ShouldSerializefantasy_period() => __pbn__fantasy_period != null;

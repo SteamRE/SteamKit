@@ -573,17 +573,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetallow_spectating() => __pbn__allow_spectating = null;
         private bool? __pbn__allow_spectating;
 
-        [global::ProtoBuf.ProtoMember(14)]
-        [global::System.ComponentModel.DefaultValue(DOTAGameVersion.GAME_VERSION_CURRENT)]
-        public DOTAGameVersion game_version
-        {
-            get => __pbn__game_version ?? DOTAGameVersion.GAME_VERSION_CURRENT;
-            set => __pbn__game_version = value;
-        }
-        public bool ShouldSerializegame_version() => __pbn__game_version != null;
-        public void Resetgame_version() => __pbn__game_version = null;
-        private DOTAGameVersion? __pbn__game_version;
-
         [global::ProtoBuf.ProtoMember(15)]
         [global::System.ComponentModel.DefaultValue("")]
         public string pass_key

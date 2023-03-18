@@ -1640,16 +1640,6 @@ namespace SteamKit2.Internal
         public void Resetis_hdr_enabled() => __pbn__is_hdr_enabled = null;
         private bool? __pbn__is_hdr_enabled;
 
-        [global::ProtoBuf.ProtoMember(10)]
-        public bool force_hdr_wide_gammut_for_sdr
-        {
-            get => __pbn__force_hdr_wide_gammut_for_sdr.GetValueOrDefault();
-            set => __pbn__force_hdr_wide_gammut_for_sdr = value;
-        }
-        public bool ShouldSerializeforce_hdr_wide_gammut_for_sdr() => __pbn__force_hdr_wide_gammut_for_sdr != null;
-        public void Resetforce_hdr_wide_gammut_for_sdr() => __pbn__force_hdr_wide_gammut_for_sdr = null;
-        private bool? __pbn__force_hdr_wide_gammut_for_sdr;
-
         [global::ProtoBuf.ProtoMember(11)]
         public bool force_hdr_10pq_output_debug
         {
@@ -1690,6 +1680,37 @@ namespace SteamKit2.Internal
         public bool ShouldSerializedebug_force_hdr_support() => __pbn__debug_force_hdr_support != null;
         public void Resetdebug_force_hdr_support() => __pbn__debug_force_hdr_support = null;
         private bool? __pbn__debug_force_hdr_support;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        [global::System.ComponentModel.DefaultValue(true)]
+        public bool force_hdr_wide_gammut_for_sdr
+        {
+            get => __pbn__force_hdr_wide_gammut_for_sdr ?? true;
+            set => __pbn__force_hdr_wide_gammut_for_sdr = value;
+        }
+        public bool ShouldSerializeforce_hdr_wide_gammut_for_sdr() => __pbn__force_hdr_wide_gammut_for_sdr != null;
+        public void Resetforce_hdr_wide_gammut_for_sdr() => __pbn__force_hdr_wide_gammut_for_sdr = null;
+        private bool? __pbn__force_hdr_wide_gammut_for_sdr;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public bool allow_experimental_hdr
+        {
+            get => __pbn__allow_experimental_hdr.GetValueOrDefault();
+            set => __pbn__allow_experimental_hdr = value;
+        }
+        public bool ShouldSerializeallow_experimental_hdr() => __pbn__allow_experimental_hdr != null;
+        public void Resetallow_experimental_hdr() => __pbn__allow_experimental_hdr = null;
+        private bool? __pbn__allow_experimental_hdr;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public float sdr_to_hdr_brightness
+        {
+            get => __pbn__sdr_to_hdr_brightness.GetValueOrDefault();
+            set => __pbn__sdr_to_hdr_brightness = value;
+        }
+        public bool ShouldSerializesdr_to_hdr_brightness() => __pbn__sdr_to_hdr_brightness != null;
+        public void Resetsdr_to_hdr_brightness() => __pbn__sdr_to_hdr_brightness = null;
+        private float? __pbn__sdr_to_hdr_brightness;
 
     }
 
@@ -3524,6 +3545,17 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeversion() => __pbn__version != null;
         public void Resetversion() => __pbn__version = null;
         private string __pbn__version;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string auto_message
+        {
+            get => __pbn__auto_message ?? "";
+            set => __pbn__auto_message = value;
+        }
+        public bool ShouldSerializeauto_message() => __pbn__auto_message != null;
+        public void Resetauto_message() => __pbn__auto_message = null;
+        private string __pbn__auto_message;
 
     }
 

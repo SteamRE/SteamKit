@@ -705,6 +705,12 @@ namespace SteamKit2.Internal
         public void Resetremove_all_kvtags() => __pbn__remove_all_kvtags = null;
         private bool? __pbn__remove_all_kvtags;
 
+        [global::ProtoBuf.ProtoMember(29)]
+        public global::System.Collections.Generic.List<int> content_descriptors_to_add { get; } = new global::System.Collections.Generic.List<int>();
+
+        [global::ProtoBuf.ProtoMember(30)]
+        public global::System.Collections.Generic.List<int> content_descriptors_to_remove { get; } = new global::System.Collections.Generic.List<int>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class KeyValueTag : global::ProtoBuf.IExtensible
         {

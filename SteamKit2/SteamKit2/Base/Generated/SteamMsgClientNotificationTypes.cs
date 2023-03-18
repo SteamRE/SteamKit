@@ -849,6 +849,11 @@ namespace SteamKit2.Internal
         k_EClientNotificationType_DockUnsupportedFirmware = 24,
         k_EClientNotificationType_PeerContentUpload = 25,
         k_EClientNotificationType_CannotReadControllerGuideButton = 26,
+        k_EClientNotificationType_Comment = 27,
+        k_EClientNotificationType_Wishlist = 28,
+        k_EClientNotificationType_TradeOffer = 29,
+        k_EClientNotificationType_AsyncGame = 30,
+        k_EClientNotificationType_General = 31,
     }
 
     [global::ProtoBuf.ProtoContract()]

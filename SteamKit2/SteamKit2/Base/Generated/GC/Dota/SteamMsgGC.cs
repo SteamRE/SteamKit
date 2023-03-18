@@ -861,10 +861,9 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__style;
 
         [global::ProtoBuf.ProtoMember(16)]
-        [global::System.ComponentModel.DefaultValue(typeof(ulong), "0")]
         public ulong original_id
         {
-            get => __pbn__original_id ?? 0;
+            get => __pbn__original_id.GetValueOrDefault();
             set => __pbn__original_id = value;
         }
         public bool ShouldSerializeoriginal_id() => __pbn__original_id != null;
@@ -1696,9 +1695,10 @@ namespace SteamKit2.GC.Dota.Internal
         private bool? __pbn__success;
 
         [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(-1)]
         public int source_gc
         {
-            get => __pbn__source_gc.GetValueOrDefault();
+            get => __pbn__source_gc ?? -1;
             set => __pbn__source_gc = value;
         }
         public bool ShouldSerializesource_gc() => __pbn__source_gc != null;

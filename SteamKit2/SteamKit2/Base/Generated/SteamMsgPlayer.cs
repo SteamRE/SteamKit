@@ -3336,28 +3336,6 @@ namespace SteamKit2.Internal
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(true)]
-        public bool hide_adult_content_violence
-        {
-            get => __pbn__hide_adult_content_violence ?? true;
-            set => __pbn__hide_adult_content_violence = value;
-        }
-        public bool ShouldSerializehide_adult_content_violence() => __pbn__hide_adult_content_violence != null;
-        public void Resethide_adult_content_violence() => __pbn__hide_adult_content_violence = null;
-        private bool? __pbn__hide_adult_content_violence;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(true)]
-        public bool hide_adult_content_sex
-        {
-            get => __pbn__hide_adult_content_sex ?? true;
-            set => __pbn__hide_adult_content_sex = value;
-        }
-        public bool ShouldSerializehide_adult_content_sex() => __pbn__hide_adult_content_sex != null;
-        public void Resethide_adult_content_sex() => __pbn__hide_adult_content_sex = null;
-        private bool? __pbn__hide_adult_content_sex;
-
         [global::ProtoBuf.ProtoMember(4)]
         [global::System.ComponentModel.DefaultValue(false)]
         public bool parenthesize_nicknames

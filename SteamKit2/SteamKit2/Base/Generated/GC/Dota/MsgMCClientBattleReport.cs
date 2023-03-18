@@ -488,6 +488,72 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resettime_purchased_scepter() => __pbn__time_purchased_scepter = null;
         private float? __pbn__time_purchased_scepter;
 
+        [global::ProtoBuf.ProtoMember(45)]
+        [global::System.ComponentModel.DefaultValue(-1)]
+        public int item0
+        {
+            get => __pbn__item0 ?? -1;
+            set => __pbn__item0 = value;
+        }
+        public bool ShouldSerializeitem0() => __pbn__item0 != null;
+        public void Resetitem0() => __pbn__item0 = null;
+        private int? __pbn__item0;
+
+        [global::ProtoBuf.ProtoMember(46)]
+        [global::System.ComponentModel.DefaultValue(-1)]
+        public int item1
+        {
+            get => __pbn__item1 ?? -1;
+            set => __pbn__item1 = value;
+        }
+        public bool ShouldSerializeitem1() => __pbn__item1 != null;
+        public void Resetitem1() => __pbn__item1 = null;
+        private int? __pbn__item1;
+
+        [global::ProtoBuf.ProtoMember(47)]
+        [global::System.ComponentModel.DefaultValue(-1)]
+        public int item2
+        {
+            get => __pbn__item2 ?? -1;
+            set => __pbn__item2 = value;
+        }
+        public bool ShouldSerializeitem2() => __pbn__item2 != null;
+        public void Resetitem2() => __pbn__item2 = null;
+        private int? __pbn__item2;
+
+        [global::ProtoBuf.ProtoMember(48)]
+        [global::System.ComponentModel.DefaultValue(-1)]
+        public int item3
+        {
+            get => __pbn__item3 ?? -1;
+            set => __pbn__item3 = value;
+        }
+        public bool ShouldSerializeitem3() => __pbn__item3 != null;
+        public void Resetitem3() => __pbn__item3 = null;
+        private int? __pbn__item3;
+
+        [global::ProtoBuf.ProtoMember(49)]
+        [global::System.ComponentModel.DefaultValue(-1)]
+        public int item4
+        {
+            get => __pbn__item4 ?? -1;
+            set => __pbn__item4 = value;
+        }
+        public bool ShouldSerializeitem4() => __pbn__item4 != null;
+        public void Resetitem4() => __pbn__item4 = null;
+        private int? __pbn__item4;
+
+        [global::ProtoBuf.ProtoMember(50)]
+        [global::System.ComponentModel.DefaultValue(-1)]
+        public int item5
+        {
+            get => __pbn__item5 ?? -1;
+            set => __pbn__item5 = value;
+        }
+        public bool ShouldSerializeitem5() => __pbn__item5 != null;
+        public void Resetitem5() => __pbn__item5 = null;
+        private int? __pbn__item5;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -498,7 +564,7 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<CMsgBattleReport_Game> game { get; } = new global::System.Collections.Generic.List<CMsgBattleReport_Game>();
+        public global::System.Collections.Generic.List<CMsgBattleReport_Game> games { get; } = new global::System.Collections.Generic.List<CMsgBattleReport_Game>();
 
     }
 

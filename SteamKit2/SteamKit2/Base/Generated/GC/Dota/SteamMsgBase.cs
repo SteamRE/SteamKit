@@ -113,9 +113,10 @@ namespace SteamKit2.GC.Dota.Internal
         private GCProtoBufMsgSrc? __pbn__gc_msg_src;
 
         [global::ProtoBuf.ProtoMember(201)]
+        [global::System.ComponentModel.DefaultValue(-1)]
         public int gc_dir_index_source
         {
-            get => __pbn__gc_dir_index_source.GetValueOrDefault();
+            get => __pbn__gc_dir_index_source ?? -1;
             set => __pbn__gc_dir_index_source = value;
         }
         public bool ShouldSerializegc_dir_index_source() => __pbn__gc_dir_index_source != null;

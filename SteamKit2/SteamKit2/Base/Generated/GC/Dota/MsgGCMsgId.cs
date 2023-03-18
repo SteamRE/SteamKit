@@ -816,12 +816,16 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgClientToGCCandyShopDevShuffleExchangeResponse = 8866,
         k_EMsgClientToGCCandyShopDevGrantRerollCharges = 8867,
         k_EMsgClientToGCCandyShopDevGrantRerollChargesResponse = 8868,
+        k_EMsgLobbyAdditionalAccountData = 8869,
+        k_EMsgServerToGCLobbyInitialized = 8870,
         k_EMsgClientToGCCollectorsCacheAvailableDataRequest = 8871,
         k_EMsgGCToClientCollectorsCacheAvailableDataResponse = 8872,
         k_EMsgClientToGCUploadMatchClip = 8873,
         k_EMsgGCToClientUploadMatchClipResponse = 8874,
         k_EMsgGCToServerSetSteamLearnDisable = 8875,
         k_EMsgGCToServerSetSteamLearnKeysChanged = 8876,
+        k_EMsgSignOutMuertaMinigame = 8877,
+        k_EMsgGCToServerLobbyHeroRoleStats = 8878,
     }
 
 }

@@ -545,6 +545,16 @@ namespace SteamKit2.Internal
         public void Resetunlisted() => __pbn__unlisted = null;
         private bool? __pbn__unlisted;
 
+        [global::ProtoBuf.ProtoMember(56)]
+        public uint game_count
+        {
+            get => __pbn__game_count.GetValueOrDefault();
+            set => __pbn__game_count = value;
+        }
+        public bool ShouldSerializegame_count() => __pbn__game_count != null;
+        public void Resetgame_count() => __pbn__game_count = null;
+        private uint? __pbn__game_count;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class RelatedItems : global::ProtoBuf.IExtensible
         {
@@ -896,6 +906,17 @@ namespace SteamKit2.Internal
             public bool ShouldSerializecommunity_icon() => __pbn__community_icon != null;
             public void Resetcommunity_icon() => __pbn__community_icon = null;
             private string __pbn__community_icon;
+
+            [global::ProtoBuf.ProtoMember(14)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string clan_avatar
+            {
+                get => __pbn__clan_avatar ?? "";
+                set => __pbn__clan_avatar = value;
+            }
+            public bool ShouldSerializeclan_avatar() => __pbn__clan_avatar != null;
+            public void Resetclan_avatar() => __pbn__clan_avatar = null;
+            private string __pbn__clan_avatar;
 
         }
 

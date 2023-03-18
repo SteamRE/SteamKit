@@ -377,6 +377,17 @@ namespace SteamKit2.Internal
         public void Resetlanguage() => __pbn__language = null;
         private uint? __pbn__language;
 
+        [global::ProtoBuf.ProtoMember(12)]
+        [global::System.ComponentModel.DefaultValue(2)]
+        public int qos_level
+        {
+            get => __pbn__qos_level ?? 2;
+            set => __pbn__qos_level = value;
+        }
+        public bool ShouldSerializeqos_level() => __pbn__qos_level != null;
+        public void Resetqos_level() => __pbn__qos_level = null;
+        private int? __pbn__qos_level;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1821,6 +1832,7 @@ namespace SteamKit2.Internal
         k_EAuthSessionGuardType_DeviceConfirmation = 4,
         k_EAuthSessionGuardType_EmailConfirmation = 5,
         k_EAuthSessionGuardType_MachineToken = 6,
+        k_EAuthSessionGuardType_LegacyMachineAuth = 7,
     }
 
     [global::ProtoBuf.ProtoContract()]
