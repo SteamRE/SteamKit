@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.ExceptionServices;
@@ -24,7 +23,7 @@ namespace SteamKit2
         /// <summary>
         /// Represents a response to a WebAPI request.
         /// </summary>
-        public class WebAPIResponse<TResponse>
+        public sealed class WebAPIResponse<TResponse>
         {
             /// <summary>
             /// Gets the result of the request.
@@ -39,9 +38,9 @@ namespace SteamKit2
             /// <summary>
             /// Constructs <see cref="WebAPIResponse{TResponse}"/> object.
             /// </summary>
-            /// <param name="body">The result.</param>
-            /// <param name="result">The body.</param>
-            internal WebAPIResponse( TResponse body, EResult result )
+            /// <param name="body">The response body.</param>
+            /// <param name="result">The result.</param>
+            internal WebAPIResponse( EResult result, TResponse body )
             {
                 Result = result;
                 Body = body;
@@ -267,10 +266,25 @@ namespace SteamKit2
                 where TResponse : IExtensible, new()
                 where TRequest : IExtensible, new()
             {
-                using var input_payload = new MemoryStream();
-                Serializer.Serialize<TRequest>( input_payload, request );
+                if ( method == null )
+                {
+                    throw new ArgumentNullException( nameof( method ) );
+                }
 
-                var base64 = Convert.ToBase64String( input_payload.ToArray() );
+                if ( func == null )
+                {
+                    throw new ArgumentNullException( nameof( func ) );
+                }
+
+                if ( request == null )
+                {
+                    throw new ArgumentNullException( nameof( request ) );
+                }
+
+                using var inputPayload = new MemoryStream();
+                Serializer.Serialize<TRequest>( inputPayload, request );
+
+                var base64 = Convert.ToBase64String( inputPayload.ToArray() );
                 var args = new Dictionary<string, object?>
                 {
                     { "input_protobuf_encoded", base64 },
@@ -287,9 +301,9 @@ namespace SteamKit2
                 }
 
                 var body = Serializer.Deserialize<TResponse>( stream );
-                var api_response = new WebAPIResponse<TResponse>( body, eresult );
+                var apiResponse = new WebAPIResponse<TResponse>( eresult, body );
 
-                return api_response;
+                return apiResponse;
             }
 
             /// <summary>
