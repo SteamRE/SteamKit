@@ -1032,27 +1032,17 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            public uint slot
+            public uint player_slot
             {
-                get => __pbn__slot.GetValueOrDefault();
-                set => __pbn__slot = value;
+                get => __pbn__player_slot.GetValueOrDefault();
+                set => __pbn__player_slot = value;
             }
-            public bool ShouldSerializeslot() => __pbn__slot != null;
-            public void Resetslot() => __pbn__slot = null;
-            private uint? __pbn__slot;
+            public bool ShouldSerializeplayer_slot() => __pbn__player_slot != null;
+            public void Resetplayer_slot() => __pbn__player_slot = null;
+            private uint? __pbn__player_slot;
 
             [global::ProtoBuf.ProtoMember(2)]
             public global::System.Collections.Generic.List<MvpAccolade> accolades { get; } = new global::System.Collections.Generic.List<MvpAccolade>();
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public uint account_id
-            {
-                get => __pbn__account_id.GetValueOrDefault();
-                set => __pbn__account_id = value;
-            }
-            public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
-            public void Resetaccount_id() => __pbn__account_id = null;
-            private uint? __pbn__account_id;
 
             [global::ProtoBuf.ProtoContract()]
             public partial class MvpAccolade : global::ProtoBuf.IExtensible
@@ -1353,6 +1343,10 @@ namespace SteamKit2.GC.Dota.Internal
                     kKillEaterEventType_Snapfire_LizardBlobsKills = 272,
                     kKillEaterEventType_Snapfire_TwoHeroCookieStuns = 273,
                     Custom_KillStreak = 274,
+                    kKillEaterEventType_Muerta_DeadShotKills = 275,
+                    kKillEaterEventType_Muerta_PierceTheVeilKills = 276,
+                    kKillEaterEventType_Muerta_MultiHeroDeadShot = 277,
+                    kKillEaterEventType_Muerta_DeadShotsIntoTheCalling = 278,
                 }
 
             }
@@ -1378,9 +1372,9 @@ namespace SteamKit2.GC.Dota.Internal
         k_ELaneSelectionFlags_SAFELANE = 1,
         k_ELaneSelectionFlags_OFFLANE = 2,
         k_ELaneSelectionFlags_MIDLANE = 4,
-        k_ELaneSelectionFlags_CORE = 7,
         k_ELaneSelectionFlags_SUPPORT_SOFT = 8,
         k_ELaneSelectionFlags_SUPPORT_HARD = 16,
+        k_ELaneSelectionFlags_CORE = 7,
         k_ELaneSelectionFlags_SUPPORT = 24,
         k_ELaneSelectionFlags_ALL = 31,
     }

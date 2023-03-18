@@ -619,14 +619,15 @@ namespace SteamKit2.GC.Dota.Internal
         public TriviaAnswered trivia_answer { get; set; }
 
         [global::ProtoBuf.ProtoMember(33)]
-        public uint requested_ability_id
+        [global::System.ComponentModel.DefaultValue(-1)]
+        public int requested_ability_id
         {
-            get => __pbn__requested_ability_id.GetValueOrDefault();
+            get => __pbn__requested_ability_id ?? -1;
             set => __pbn__requested_ability_id = value;
         }
         public bool ShouldSerializerequested_ability_id() => __pbn__requested_ability_id != null;
         public void Resetrequested_ability_id() => __pbn__requested_ability_id = null;
-        private uint? __pbn__requested_ability_id;
+        private int? __pbn__requested_ability_id;
 
         [global::ProtoBuf.ProtoMember(34)]
         public uint chat_flags

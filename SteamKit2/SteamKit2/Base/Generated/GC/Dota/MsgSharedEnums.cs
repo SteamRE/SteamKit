@@ -1222,7 +1222,19 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_TEAM_2021_2022_TOUR3 = 37,
         EVENT_ID_TEAM_INTERNATIONAL_2022 = 38,
         EVENT_ID_PERMANENT_GRANTS = 39,
+        EVENT_ID_MUERTA_RELEASE_SPRING2023 = 40,
         EVENT_ID_TEAM_2023_TOUR1 = 41,
+        EVENT_ID_TEAM_2023_TOUR2 = 42,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ERankType
+    {
+        k_ERankType_Invalid = 0,
+        k_ERankType_Casual = 1,
+        k_ERankType_Ranked = 2,
+        k_ERankType_CasualLegacy = 3,
+        k_ERankType_RankedLegacy = 4,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1370,13 +1382,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public enum DOTAGameVersion
-    {
-        GAME_VERSION_CURRENT = 0,
-        GAME_VERSION_STABLE = 1,
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public enum DOTAJoinLobbyResult
     {
         DOTA_JOIN_RESULT_SUCCESS = 0,
@@ -1435,8 +1440,6 @@ namespace SteamKit2.GC.Dota.Internal
         k_EDOTAPlayerMMRType_Invalid = 0,
         k_EDOTAPlayerMMRType_GeneralHidden = 1,
         k_EDOTAPlayerMMRType_GeneralCompetitive = 3,
-        k_EDOTAPlayerMMRType_SoloCompetitive2019 = 4,
-        k_EDOTAPlayerMMRType_1v1Competitive_UNUSED = 5,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1452,18 +1455,10 @@ namespace SteamKit2.GC.Dota.Internal
     {
         MATCH_TYPE_CASUAL = 0,
         MATCH_TYPE_COOP_BOTS = 1,
-        MATCH_TYPE_LEGACY_TEAM_RANKED = 2,
-        MATCH_TYPE_LEGACY_SOLO_QUEUE = 3,
         MATCH_TYPE_COMPETITIVE = 4,
         MATCH_TYPE_WEEKEND_TOURNEY = 5,
-        MATCH_TYPE_CASUAL_1V1 = 6,
         MATCH_TYPE_EVENT = 7,
-        MATCH_TYPE_SEASONAL_RANKED = 8,
-        MATCH_TYPE_LOWPRI_DEPRECATED = 9,
-        MATCH_TYPE_STEAM_GROUP = 10,
-        MATCH_TYPE_MUTATION = 11,
         MATCH_TYPE_COACHES_CHALLENGE = 12,
-        MATCH_TYPE_GAUNTLET = 13,
         MATCH_TYPE_NEW_PLAYER_POOL = 14,
     }
 

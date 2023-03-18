@@ -547,9 +547,10 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(-1)]
         public int dir_index
         {
-            get => __pbn__dir_index.GetValueOrDefault();
+            get => __pbn__dir_index ?? -1;
             set => __pbn__dir_index = value;
         }
         public bool ShouldSerializedir_index() => __pbn__dir_index != null;
@@ -566,9 +567,10 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(-1)]
         public int dir_index
         {
-            get => __pbn__dir_index.GetValueOrDefault();
+            get => __pbn__dir_index ?? -1;
             set => __pbn__dir_index = value;
         }
         public bool ShouldSerializedir_index() => __pbn__dir_index != null;
@@ -608,9 +610,10 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue(-1)]
             public int dir_index
             {
-                get => __pbn__dir_index.GetValueOrDefault();
+                get => __pbn__dir_index ?? -1;
                 set => __pbn__dir_index = value;
             }
             public bool ShouldSerializedir_index() => __pbn__dir_index != null;
@@ -700,9 +703,10 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue(-1)]
             public int dir_index
             {
-                get => __pbn__dir_index.GetValueOrDefault();
+                get => __pbn__dir_index ?? -1;
                 set => __pbn__dir_index = value;
             }
             public bool ShouldSerializedir_index() => __pbn__dir_index != null;

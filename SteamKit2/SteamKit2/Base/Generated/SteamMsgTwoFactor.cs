@@ -10,6 +10,124 @@ namespace SteamKit2.Internal
 {
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CTwoFactor_Time_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong sender_time
+        {
+            get => __pbn__sender_time.GetValueOrDefault();
+            set => __pbn__sender_time = value;
+        }
+        public bool ShouldSerializesender_time() => __pbn__sender_time != null;
+        public void Resetsender_time() => __pbn__sender_time = null;
+        private ulong? __pbn__sender_time;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CTwoFactor_Time_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong server_time
+        {
+            get => __pbn__server_time.GetValueOrDefault();
+            set => __pbn__server_time = value;
+        }
+        public bool ShouldSerializeserver_time() => __pbn__server_time != null;
+        public void Resetserver_time() => __pbn__server_time = null;
+        private ulong? __pbn__server_time;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong skew_tolerance_seconds
+        {
+            get => __pbn__skew_tolerance_seconds.GetValueOrDefault();
+            set => __pbn__skew_tolerance_seconds = value;
+        }
+        public bool ShouldSerializeskew_tolerance_seconds() => __pbn__skew_tolerance_seconds != null;
+        public void Resetskew_tolerance_seconds() => __pbn__skew_tolerance_seconds = null;
+        private ulong? __pbn__skew_tolerance_seconds;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong large_time_jink
+        {
+            get => __pbn__large_time_jink.GetValueOrDefault();
+            set => __pbn__large_time_jink = value;
+        }
+        public bool ShouldSerializelarge_time_jink() => __pbn__large_time_jink != null;
+        public void Resetlarge_time_jink() => __pbn__large_time_jink = null;
+        private ulong? __pbn__large_time_jink;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint probe_frequency_seconds
+        {
+            get => __pbn__probe_frequency_seconds.GetValueOrDefault();
+            set => __pbn__probe_frequency_seconds = value;
+        }
+        public bool ShouldSerializeprobe_frequency_seconds() => __pbn__probe_frequency_seconds != null;
+        public void Resetprobe_frequency_seconds() => __pbn__probe_frequency_seconds = null;
+        private uint? __pbn__probe_frequency_seconds;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint adjusted_time_probe_frequency_seconds
+        {
+            get => __pbn__adjusted_time_probe_frequency_seconds.GetValueOrDefault();
+            set => __pbn__adjusted_time_probe_frequency_seconds = value;
+        }
+        public bool ShouldSerializeadjusted_time_probe_frequency_seconds() => __pbn__adjusted_time_probe_frequency_seconds != null;
+        public void Resetadjusted_time_probe_frequency_seconds() => __pbn__adjusted_time_probe_frequency_seconds = null;
+        private uint? __pbn__adjusted_time_probe_frequency_seconds;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint hint_probe_frequency_seconds
+        {
+            get => __pbn__hint_probe_frequency_seconds.GetValueOrDefault();
+            set => __pbn__hint_probe_frequency_seconds = value;
+        }
+        public bool ShouldSerializehint_probe_frequency_seconds() => __pbn__hint_probe_frequency_seconds != null;
+        public void Resethint_probe_frequency_seconds() => __pbn__hint_probe_frequency_seconds = null;
+        private uint? __pbn__hint_probe_frequency_seconds;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint sync_timeout
+        {
+            get => __pbn__sync_timeout.GetValueOrDefault();
+            set => __pbn__sync_timeout = value;
+        }
+        public bool ShouldSerializesync_timeout() => __pbn__sync_timeout != null;
+        public void Resetsync_timeout() => __pbn__sync_timeout = null;
+        private uint? __pbn__sync_timeout;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public uint try_again_seconds
+        {
+            get => __pbn__try_again_seconds.GetValueOrDefault();
+            set => __pbn__try_again_seconds = value;
+        }
+        public bool ShouldSerializetry_again_seconds() => __pbn__try_again_seconds != null;
+        public void Resettry_again_seconds() => __pbn__try_again_seconds = null;
+        private uint? __pbn__try_again_seconds;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public uint max_attempts
+        {
+            get => __pbn__max_attempts.GetValueOrDefault();
+            set => __pbn__max_attempts = value;
+        }
+        public bool ShouldSerializemax_attempts() => __pbn__max_attempts != null;
+        public void Resetmax_attempts() => __pbn__max_attempts = null;
+        private uint? __pbn__max_attempts;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CTwoFactor_Status_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -688,105 +806,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CTwoFactor_CreateEmergencyCodes_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string code
-        {
-            get => __pbn__code ?? "";
-            set => __pbn__code = value;
-        }
-        public bool ShouldSerializecode() => __pbn__code != null;
-        public void Resetcode() => __pbn__code = null;
-        private string __pbn__code;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CTwoFactor_CreateEmergencyCodes_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<string> codes { get; } = new global::System.Collections.Generic.List<string>();
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CTwoFactor_DestroyEmergencyCodes_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong steamid
-        {
-            get => __pbn__steamid.GetValueOrDefault();
-            set => __pbn__steamid = value;
-        }
-        public bool ShouldSerializesteamid() => __pbn__steamid != null;
-        public void Resetsteamid() => __pbn__steamid = null;
-        private ulong? __pbn__steamid;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CTwoFactor_DestroyEmergencyCodes_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CTwoFactor_ValidateToken_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string code
-        {
-            get => __pbn__code ?? "";
-            set => __pbn__code = value;
-        }
-        public bool ShouldSerializecode() => __pbn__code != null;
-        public void Resetcode() => __pbn__code = null;
-        private string __pbn__code;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CTwoFactor_ValidateToken_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public bool valid
-        {
-            get => __pbn__valid.GetValueOrDefault();
-            set => __pbn__valid = value;
-        }
-        public bool ShouldSerializevalid() => __pbn__valid != null;
-        public void Resetvalid() => __pbn__valid = null;
-        private bool? __pbn__valid;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1012,15 +1031,13 @@ namespace SteamKit2.Internal
 
     public interface ITwoFactor
     {
+        CTwoFactor_Time_Response QueryTime(CTwoFactor_Time_Request request);
         CTwoFactor_Status_Response QueryStatus(CTwoFactor_Status_Request request);
         CTwoFactor_AddAuthenticator_Response AddAuthenticator(CTwoFactor_AddAuthenticator_Request request);
         CTwoFactor_SendEmail_Response SendEmail(CTwoFactor_SendEmail_Request request);
         CTwoFactor_FinalizeAddAuthenticator_Response FinalizeAddAuthenticator(CTwoFactor_FinalizeAddAuthenticator_Request request);
         CTwoFactor_UpdateTokenVersion_Response UpdateTokenVersion(CTwoFactor_UpdateTokenVersion_Request request);
         CTwoFactor_RemoveAuthenticator_Response RemoveAuthenticator(CTwoFactor_RemoveAuthenticator_Request request);
-        CTwoFactor_CreateEmergencyCodes_Response CreateEmergencyCodes(CTwoFactor_CreateEmergencyCodes_Request request);
-        CTwoFactor_DestroyEmergencyCodes_Response DestroyEmergencyCodes(CTwoFactor_DestroyEmergencyCodes_Request request);
-        CTwoFactor_ValidateToken_Response ValidateToken(CTwoFactor_ValidateToken_Request request);
         CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response RemoveAuthenticatorViaChallengeStart(CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request request);
         CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response RemoveAuthenticatorViaChallengeContinue(CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request request);
     }

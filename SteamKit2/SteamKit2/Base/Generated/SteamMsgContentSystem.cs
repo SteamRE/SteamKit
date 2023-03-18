@@ -606,6 +606,60 @@ namespace SteamKit2.Internal
         public void Resetserver_port() => __pbn__server_port = null;
         private uint? __pbn__server_port;
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<uint> installed_depots { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CContentServerDirectory_GetPeerContentInfo_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong remote_client_id
+        {
+            get => __pbn__remote_client_id.GetValueOrDefault();
+            set => __pbn__remote_client_id = value;
+        }
+        public bool ShouldSerializeremote_client_id() => __pbn__remote_client_id != null;
+        public void Resetremote_client_id() => __pbn__remote_client_id = null;
+        private ulong? __pbn__remote_client_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong server_remote_client_id
+        {
+            get => __pbn__server_remote_client_id.GetValueOrDefault();
+            set => __pbn__server_remote_client_id = value;
+        }
+        public bool ShouldSerializeserver_remote_client_id() => __pbn__server_remote_client_id != null;
+        public void Resetserver_remote_client_id() => __pbn__server_remote_client_id = null;
+        private ulong? __pbn__server_remote_client_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CContentServerDirectory_GetPeerContentInfo_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<uint> appids { get; } = new global::System.Collections.Generic.List<uint>();
+
     }
 
     public interface IContentServerDirectory
@@ -616,6 +670,7 @@ namespace SteamKit2.Internal
         CContentServerDirectory_GetManifestRequestCode_Response GetManifestRequestCode(CContentServerDirectory_GetManifestRequestCode_Request request);
         CContentServerDirectory_GetCDNAuthToken_Response GetCDNAuthToken(CContentServerDirectory_GetCDNAuthToken_Request request);
         CContentServerDirectory_RequestPeerContentServer_Response RequestPeerContentServer(CContentServerDirectory_RequestPeerContentServer_Request request);
+        CContentServerDirectory_GetPeerContentInfo_Response GetPeerContentInfo(CContentServerDirectory_GetPeerContentInfo_Request request);
     }
 
 }
