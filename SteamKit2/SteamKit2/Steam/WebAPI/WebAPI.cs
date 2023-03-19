@@ -26,12 +26,12 @@ namespace SteamKit2
         public sealed class WebAPIResponse<TResponse>
         {
             /// <summary>
-            /// Gets the result of the request.
+            /// Gets the result of the response.
             /// </summary>
             public EResult Result { get; }
 
             /// <summary>
-            /// Gets the body of the request.
+            /// Gets the body of the response.
             /// </summary>
             public TResponse Body { get; }
 
