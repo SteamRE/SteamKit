@@ -448,10 +448,10 @@ namespace SteamKit2.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
@@ -507,10 +507,10 @@ namespace SteamKit2.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(10)]
+        [global::System.ComponentModel.DefaultValue(10u)]
         public uint max_tokens_to_keep
         {
-            get => __pbn__max_tokens_to_keep ?? 10;
+            get => __pbn__max_tokens_to_keep ?? 10u;
             set => __pbn__max_tokens_to_keep = value;
         }
         public bool ShouldSerializemax_tokens_to_keep() => __pbn__max_tokens_to_keep != null;
@@ -752,10 +752,10 @@ namespace SteamKit2.Internal
             private string __pbn__vr_hmd_model;
 
             [global::ProtoBuf.ProtoMember(15)]
-            [global::System.ComponentModel.DefaultValue(0)]
+            [global::System.ComponentModel.DefaultValue(0u)]
             public uint launch_option_type
             {
-                get => __pbn__launch_option_type ?? 0;
+                get => __pbn__launch_option_type ?? 0u;
                 set => __pbn__launch_option_type = value;
             }
             public bool ShouldSerializelaunch_option_type() => __pbn__launch_option_type != null;
@@ -785,10 +785,10 @@ namespace SteamKit2.Internal
             private string __pbn__primary_steam_controller_serial;
 
             [global::ProtoBuf.ProtoMember(18)]
-            [global::System.ComponentModel.DefaultValue(0)]
+            [global::System.ComponentModel.DefaultValue(0u)]
             public uint total_steam_controller_count
             {
-                get => __pbn__total_steam_controller_count ?? 0;
+                get => __pbn__total_steam_controller_count ?? 0u;
                 set => __pbn__total_steam_controller_count = value;
             }
             public bool ShouldSerializetotal_steam_controller_count() => __pbn__total_steam_controller_count != null;
@@ -796,10 +796,10 @@ namespace SteamKit2.Internal
             private uint? __pbn__total_steam_controller_count;
 
             [global::ProtoBuf.ProtoMember(19)]
-            [global::System.ComponentModel.DefaultValue(0)]
+            [global::System.ComponentModel.DefaultValue(0u)]
             public uint total_non_steam_controller_count
             {
-                get => __pbn__total_non_steam_controller_count ?? 0;
+                get => __pbn__total_non_steam_controller_count ?? 0u;
                 set => __pbn__total_non_steam_controller_count = value;
             }
             public bool ShouldSerializetotal_non_steam_controller_count() => __pbn__total_non_steam_controller_count != null;
@@ -810,7 +810,7 @@ namespace SteamKit2.Internal
             [global::System.ComponentModel.DefaultValue(typeof(ulong), "0")]
             public ulong controller_workshop_file_id
             {
-                get => __pbn__controller_workshop_file_id ?? 0;
+                get => __pbn__controller_workshop_file_id ?? 0ul;
                 set => __pbn__controller_workshop_file_id = value;
             }
             public bool ShouldSerializecontroller_workshop_file_id() => __pbn__controller_workshop_file_id != null;
@@ -818,10 +818,10 @@ namespace SteamKit2.Internal
             private ulong? __pbn__controller_workshop_file_id;
 
             [global::ProtoBuf.ProtoMember(21)]
-            [global::System.ComponentModel.DefaultValue(0)]
+            [global::System.ComponentModel.DefaultValue(0u)]
             public uint launch_source
             {
-                get => __pbn__launch_source ?? 0;
+                get => __pbn__launch_source ?? 0u;
                 set => __pbn__launch_source = value;
             }
             public bool ShouldSerializelaunch_source() => __pbn__launch_source != null;
@@ -842,10 +842,10 @@ namespace SteamKit2.Internal
             public CMsgIPAddress game_ip_address { get; set; }
 
             [global::ProtoBuf.ProtoMember(24)]
-            [global::System.ComponentModel.DefaultValue(0)]
+            [global::System.ComponentModel.DefaultValue(0u)]
             public uint controller_connection_type
             {
-                get => __pbn__controller_connection_type ?? 0;
+                get => __pbn__controller_connection_type ?? 0u;
                 set => __pbn__controller_connection_type = value;
             }
             public bool ShouldSerializecontroller_connection_type() => __pbn__controller_connection_type != null;
@@ -873,10 +873,10 @@ namespace SteamKit2.Internal
             private uint? __pbn__game_build_id;
 
             [global::ProtoBuf.ProtoMember(27)]
-            [global::System.ComponentModel.DefaultValue(0)]
+            [global::System.ComponentModel.DefaultValue(0u)]
             public uint compat_tool_id
             {
-                get => __pbn__compat_tool_id ?? 0;
+                get => __pbn__compat_tool_id ?? 0u;
                 set => __pbn__compat_tool_id = value;
             }
             public bool ShouldSerializecompat_tool_id() => __pbn__compat_tool_id != null;

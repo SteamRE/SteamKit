@@ -371,10 +371,10 @@ namespace SteamKit2.Internal
         public global::System.Collections.Generic.List<string> http_headers { get; } = new global::System.Collections.Generic.List<string>();
 
         [global::ProtoBuf.ProtoMember(8)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1u)]
         public uint version
         {
-            get => __pbn__version ?? 1;
+            get => __pbn__version ?? 1u;
             set => __pbn__version = value;
         }
         public bool ShouldSerializeversion() => __pbn__version != null;
@@ -862,10 +862,10 @@ namespace SteamKit2.Internal
         private bool? __pbn__generate_new_token;
 
         [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1u)]
         public uint version
         {
-            get => __pbn__version ?? 1;
+            get => __pbn__version ?? 1u;
             set => __pbn__version = value;
         }
         public bool ShouldSerializeversion() => __pbn__version != null;

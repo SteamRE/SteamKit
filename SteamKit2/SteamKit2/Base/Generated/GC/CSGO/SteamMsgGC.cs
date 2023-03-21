@@ -425,10 +425,10 @@ namespace SteamKit2.GC.CSGO.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint additional_backpack_slots
         {
-            get => __pbn__additional_backpack_slots ?? 0;
+            get => __pbn__additional_backpack_slots ?? 0u;
             set => __pbn__additional_backpack_slots = value;
         }
         public bool ShouldSerializeadditional_backpack_slots() => __pbn__additional_backpack_slots != null;
@@ -1289,10 +1289,10 @@ namespace SteamKit2.GC.CSGO.Internal
         private uint? __pbn__quality;
 
         [global::ProtoBuf.ProtoMember(8)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint flags
         {
-            get => __pbn__flags ?? 0;
+            get => __pbn__flags ?? 0u;
             set => __pbn__flags = value;
         }
         public bool ShouldSerializeflags() => __pbn__flags != null;
@@ -1349,10 +1349,10 @@ namespace SteamKit2.GC.CSGO.Internal
         private bool? __pbn__in_use;
 
         [global::ProtoBuf.ProtoMember(15)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint style
         {
-            get => __pbn__style ?? 0;
+            get => __pbn__style ?? 0u;
             set => __pbn__style = value;
         }
         public bool ShouldSerializestyle() => __pbn__style != null;
@@ -1363,7 +1363,7 @@ namespace SteamKit2.GC.CSGO.Internal
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "0")]
         public ulong original_id
         {
-            get => __pbn__original_id ?? 0;
+            get => __pbn__original_id ?? 0ul;
             set => __pbn__original_id = value;
         }
         public bool ShouldSerializeoriginal_id() => __pbn__original_id != null;

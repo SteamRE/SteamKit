@@ -149,10 +149,10 @@ namespace SteamKit2.GC.TF2.Internal
         private ETFMatchGroup? __pbn__event_match_group;
 
         [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint event_expire_time
         {
-            get => __pbn__event_expire_time ?? 0;
+            get => __pbn__event_expire_time ?? 0u;
             set => __pbn__event_expire_time = value;
         }
         public bool ShouldSerializeevent_expire_time() => __pbn__event_expire_time != null;
@@ -1914,10 +1914,10 @@ namespace SteamKit2.GC.TF2.Internal
         private bool? __pbn__late_join_ok;
 
         [global::ProtoBuf.ProtoMember(13)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint custom_ping_tolerance
         {
-            get => __pbn__custom_ping_tolerance ?? 0;
+            get => __pbn__custom_ping_tolerance ?? 0u;
             set => __pbn__custom_ping_tolerance = value;
         }
         public bool ShouldSerializecustom_ping_tolerance() => __pbn__custom_ping_tolerance != null;
@@ -2889,7 +2889,7 @@ namespace SteamKit2.GC.TF2.Internal
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "0")]
         public ulong server_id
         {
-            get => __pbn__server_id ?? 0;
+            get => __pbn__server_id ?? 0ul;
             set => __pbn__server_id = value;
         }
         public bool ShouldSerializeserver_id() => __pbn__server_id != null;
@@ -2986,7 +2986,7 @@ namespace SteamKit2.GC.TF2.Internal
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "0")]
         public ulong match_id
         {
-            get => __pbn__match_id ?? 0;
+            get => __pbn__match_id ?? 0ul;
             set => __pbn__match_id = value;
         }
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
@@ -3196,10 +3196,10 @@ namespace SteamKit2.GC.TF2.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(16)]
-        [global::System.ComponentModel.DefaultValue(1225)]
+        [global::System.ComponentModel.DefaultValue(1225u)]
         public uint server_version
         {
-            get => __pbn__server_version ?? 1225;
+            get => __pbn__server_version ?? 1225u;
             set => __pbn__server_version = value;
         }
         public bool ShouldSerializeserver_version() => __pbn__server_version != null;
@@ -5749,10 +5749,10 @@ namespace SteamKit2.GC.TF2.Internal
         private uint? __pbn__map_index;
 
         [global::ProtoBuf.ProtoMember(9)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint game_type
         {
-            get => __pbn__game_type ?? 0;
+            get => __pbn__game_type ?? 0u;
             set => __pbn__game_type = value;
         }
         public bool ShouldSerializegame_type() => __pbn__game_type != null;
@@ -7307,10 +7307,10 @@ namespace SteamKit2.GC.TF2.Internal
         private bool? __pbn__loot_claimed;
 
         [global::ProtoBuf.ProtoMember(10)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint selected_quest_def
         {
-            get => __pbn__selected_quest_def ?? 0;
+            get => __pbn__selected_quest_def ?? 0u;
             set => __pbn__selected_quest_def = value;
         }
         public bool ShouldSerializeselected_quest_def() => __pbn__selected_quest_def != null;

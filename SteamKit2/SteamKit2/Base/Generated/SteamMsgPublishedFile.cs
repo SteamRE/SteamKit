@@ -1884,10 +1884,10 @@ namespace SteamKit2.Internal
         private uint? __pbn__appid;
 
         [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1u)]
         public uint page
         {
-            get => __pbn__page ?? 1;
+            get => __pbn__page ?? 1u;
             set => __pbn__page = value;
         }
         public bool ShouldSerializepage() => __pbn__page != null;
@@ -1895,10 +1895,10 @@ namespace SteamKit2.Internal
         private uint? __pbn__page;
 
         [global::ProtoBuf.ProtoMember(5)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1u)]
         public uint numperpage
         {
-            get => __pbn__numperpage ?? 1;
+            get => __pbn__numperpage ?? 1u;
             set => __pbn__numperpage = value;
         }
         public bool ShouldSerializenumperpage() => __pbn__numperpage != null;
@@ -1978,10 +1978,10 @@ namespace SteamKit2.Internal
         private string __pbn__match_cloud_filename;
 
         [global::ProtoBuf.ProtoMember(27)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint cache_max_age_seconds
         {
-            get => __pbn__cache_max_age_seconds ?? 0;
+            get => __pbn__cache_max_age_seconds ?? 0u;
             set => __pbn__cache_max_age_seconds = value;
         }
         public bool ShouldSerializecache_max_age_seconds() => __pbn__cache_max_age_seconds != null;
@@ -2853,10 +2853,10 @@ namespace SteamKit2.Internal
         private string __pbn__cursor;
 
         [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1u)]
         public uint numperpage
         {
-            get => __pbn__numperpage ?? 1;
+            get => __pbn__numperpage ?? 1u;
             set => __pbn__numperpage = value;
         }
         public bool ShouldSerializenumperpage() => __pbn__numperpage != null;
@@ -2958,10 +2958,10 @@ namespace SteamKit2.Internal
         private bool? __pbn__include_recent_votes_only;
 
         [global::ProtoBuf.ProtoMember(31)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint cache_max_age_seconds
         {
-            get => __pbn__cache_max_age_seconds ?? 0;
+            get => __pbn__cache_max_age_seconds ?? 0u;
             set => __pbn__cache_max_age_seconds = value;
         }
         public bool ShouldSerializecache_max_age_seconds() => __pbn__cache_max_age_seconds != null;

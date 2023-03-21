@@ -500,10 +500,10 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint additional_backpack_slots
         {
-            get => __pbn__additional_backpack_slots ?? 0;
+            get => __pbn__additional_backpack_slots ?? 0u;
             set => __pbn__additional_backpack_slots = value;
         }
         public bool ShouldSerializeadditional_backpack_slots() => __pbn__additional_backpack_slots != null;
@@ -680,10 +680,10 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(65535)]
+        [global::System.ComponentModel.DefaultValue(65535u)]
         public uint def_index
         {
-            get => __pbn__def_index ?? 65535;
+            get => __pbn__def_index ?? 65535u;
             set => __pbn__def_index = value;
         }
         public bool ShouldSerializedef_index() => __pbn__def_index != null;
@@ -789,10 +789,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__def_index;
 
         [global::ProtoBuf.ProtoMember(5)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1u)]
         public uint quantity
         {
-            get => __pbn__quantity ?? 1;
+            get => __pbn__quantity ?? 1u;
             set => __pbn__quantity = value;
         }
         public bool ShouldSerializequantity() => __pbn__quantity != null;
@@ -800,10 +800,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__quantity;
 
         [global::ProtoBuf.ProtoMember(6)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1u)]
         public uint level
         {
-            get => __pbn__level ?? 1;
+            get => __pbn__level ?? 1u;
             set => __pbn__level = value;
         }
         public bool ShouldSerializelevel() => __pbn__level != null;
@@ -811,10 +811,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__level;
 
         [global::ProtoBuf.ProtoMember(7)]
-        [global::System.ComponentModel.DefaultValue(4)]
+        [global::System.ComponentModel.DefaultValue(4u)]
         public uint quality
         {
-            get => __pbn__quality ?? 4;
+            get => __pbn__quality ?? 4u;
             set => __pbn__quality = value;
         }
         public bool ShouldSerializequality() => __pbn__quality != null;
@@ -822,10 +822,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__quality;
 
         [global::ProtoBuf.ProtoMember(8)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint flags
         {
-            get => __pbn__flags ?? 0;
+            get => __pbn__flags ?? 0u;
             set => __pbn__flags = value;
         }
         public bool ShouldSerializeflags() => __pbn__flags != null;
@@ -833,10 +833,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__flags;
 
         [global::ProtoBuf.ProtoMember(9)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint origin
         {
-            get => __pbn__origin ?? 0;
+            get => __pbn__origin ?? 0u;
             set => __pbn__origin = value;
         }
         public bool ShouldSerializeorigin() => __pbn__origin != null;
@@ -850,10 +850,10 @@ namespace SteamKit2.GC.Dota.Internal
         public CSOEconItem interior_item { get; set; }
 
         [global::ProtoBuf.ProtoMember(15)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint style
         {
-            get => __pbn__style ?? 0;
+            get => __pbn__style ?? 0u;
             set => __pbn__style = value;
         }
         public bool ShouldSerializestyle() => __pbn__style != null;
@@ -1278,10 +1278,10 @@ namespace SteamKit2.GC.Dota.Internal
         private ulong? __pbn__item_item_id;
 
         [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue(65535)]
+        [global::System.ComponentModel.DefaultValue(65535u)]
         public uint item_socket_id
         {
-            get => __pbn__item_socket_id ?? 65535;
+            get => __pbn__item_socket_id ?? 65535u;
             set => __pbn__item_socket_id = value;
         }
         public bool ShouldSerializeitem_socket_id() => __pbn__item_socket_id != null;
@@ -1429,10 +1429,10 @@ namespace SteamKit2.GC.Dota.Internal
         private ulong? __pbn__gem_item_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(65535)]
+        [global::System.ComponentModel.DefaultValue(65535u)]
         public uint socket_index
         {
-            get => __pbn__socket_index ?? 65535;
+            get => __pbn__socket_index ?? 65535u;
             set => __pbn__socket_index = value;
         }
         public bool ShouldSerializesocket_index() => __pbn__socket_index != null;
@@ -1527,10 +1527,10 @@ namespace SteamKit2.GC.Dota.Internal
         private ulong? __pbn__item_item_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(65535)]
+        [global::System.ComponentModel.DefaultValue(65535u)]
         public uint socket_index
         {
-            get => __pbn__socket_index ?? 65535;
+            get => __pbn__socket_index ?? 65535u;
             set => __pbn__socket_index = value;
         }
         public bool ShouldSerializesocket_index() => __pbn__socket_index != null;

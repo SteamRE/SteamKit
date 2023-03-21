@@ -1363,10 +1363,10 @@ namespace SteamKit2.Internal
         private string __pbn__filename;
 
         [global::ProtoBuf.ProtoMember(7)]
-        [global::System.ComponentModel.DefaultValue(4294967295)]
+        [global::System.ComponentModel.DefaultValue(4294967295u)]
         public uint platforms_to_sync
         {
-            get => __pbn__platforms_to_sync ?? 4294967295;
+            get => __pbn__platforms_to_sync ?? 4294967295u;
             set => __pbn__platforms_to_sync = value;
         }
         public bool ShouldSerializeplatforms_to_sync() => __pbn__platforms_to_sync != null;

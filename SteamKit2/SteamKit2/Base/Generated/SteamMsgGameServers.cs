@@ -28,10 +28,10 @@ namespace SteamKit2.Internal
         private string __pbn__filter;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(100)]
+        [global::System.ComponentModel.DefaultValue(100u)]
         public uint limit
         {
-            get => __pbn__limit ?? 100;
+            get => __pbn__limit ?? 100u;
             set => __pbn__limit = value;
         }
         public bool ShouldSerializelimit() => __pbn__limit != null;

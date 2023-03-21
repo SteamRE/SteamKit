@@ -613,10 +613,10 @@ namespace SteamKit2.Internal
         private bool? __pbn__persona_set_by_user;
 
         [global::ProtoBuf.ProtoMember(6)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint persona_state_flags
         {
-            get => __pbn__persona_state_flags ?? 0;
+            get => __pbn__persona_state_flags ?? 0u;
             set => __pbn__persona_state_flags = value;
         }
         public bool ShouldSerializepersona_state_flags() => __pbn__persona_state_flags != null;

@@ -311,10 +311,10 @@ namespace SteamKit2.Internal
         private byte[] __pbn__machine_id;
 
         [global::ProtoBuf.ProtoMember(31)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint launcher_type
         {
-            get => __pbn__launcher_type ?? 0;
+            get => __pbn__launcher_type ?? 0u;
             set => __pbn__launcher_type = value;
         }
         public bool ShouldSerializelauncher_type() => __pbn__launcher_type != null;
@@ -322,10 +322,10 @@ namespace SteamKit2.Internal
         private uint? __pbn__launcher_type;
 
         [global::ProtoBuf.ProtoMember(32)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint ui_mode
         {
-            get => __pbn__ui_mode ?? 0;
+            get => __pbn__ui_mode ?? 0u;
             set => __pbn__ui_mode = value;
         }
         public bool ShouldSerializeui_mode() => __pbn__ui_mode != null;
@@ -333,10 +333,10 @@ namespace SteamKit2.Internal
         private uint? __pbn__ui_mode;
 
         [global::ProtoBuf.ProtoMember(33)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint chat_mode
         {
-            get => __pbn__chat_mode ?? 0;
+            get => __pbn__chat_mode ?? 0u;
             set => __pbn__chat_mode = value;
         }
         public bool ShouldSerializechat_mode() => __pbn__chat_mode != null;

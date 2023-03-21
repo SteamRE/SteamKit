@@ -27,10 +27,10 @@ namespace SteamKit2.Internal
         private uint? __pbn__cell_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(20)]
+        [global::System.ComponentModel.DefaultValue(20u)]
         public uint max_servers
         {
-            get => __pbn__max_servers ?? 20;
+            get => __pbn__max_servers ?? 20u;
             set => __pbn__max_servers = value;
         }
         public bool ShouldSerializemax_servers() => __pbn__max_servers != null;

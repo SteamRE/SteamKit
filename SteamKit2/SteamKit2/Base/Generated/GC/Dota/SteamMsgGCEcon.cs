@@ -76,10 +76,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__new_slot;
 
         [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue(255)]
+        [global::System.ComponentModel.DefaultValue(255u)]
         public uint style_index
         {
-            get => __pbn__style_index ?? 255;
+            get => __pbn__style_index ?? 255u;
             set => __pbn__style_index = value;
         }
         public bool ShouldSerializestyle_index() => __pbn__style_index != null;
@@ -1933,10 +1933,10 @@ namespace SteamKit2.GC.Dota.Internal
         private ulong? __pbn__item_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(255)]
+        [global::System.ComponentModel.DefaultValue(255u)]
         public uint style_index
         {
-            get => __pbn__style_index ?? 255;
+            get => __pbn__style_index ?? 255u;
             set => __pbn__style_index = value;
         }
         public bool ShouldSerializestyle_index() => __pbn__style_index != null;
@@ -1991,10 +1991,10 @@ namespace SteamKit2.GC.Dota.Internal
         private ulong? __pbn__item_to_unlock;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(255)]
+        [global::System.ComponentModel.DefaultValue(255u)]
         public uint style_index
         {
-            get => __pbn__style_index ?? 255;
+            get => __pbn__style_index ?? 255u;
             set => __pbn__style_index = value;
         }
         public bool ShouldSerializestyle_index() => __pbn__style_index != null;
@@ -2035,10 +2035,10 @@ namespace SteamKit2.GC.Dota.Internal
         private ulong? __pbn__item_id;
 
         [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue(255)]
+        [global::System.ComponentModel.DefaultValue(255u)]
         public uint style_index
         {
-            get => __pbn__style_index ?? 255;
+            get => __pbn__style_index ?? 255u;
             set => __pbn__style_index = value;
         }
         public bool ShouldSerializestyle_index() => __pbn__style_index != null;
@@ -2046,10 +2046,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__style_index;
 
         [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue(255)]
+        [global::System.ComponentModel.DefaultValue(255u)]
         public uint style_prereq
         {
-            get => __pbn__style_prereq ?? 255;
+            get => __pbn__style_prereq ?? 255u;
             set => __pbn__style_prereq = value;
         }
         public bool ShouldSerializestyle_prereq() => __pbn__style_prereq != null;

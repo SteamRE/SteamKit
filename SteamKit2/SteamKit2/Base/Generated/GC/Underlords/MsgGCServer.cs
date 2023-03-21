@@ -284,10 +284,10 @@ namespace SteamKit2.GC.Underlords.Internal
             private bool? __pbn__lords_elo_ignore;
 
             [global::ProtoBuf.ProtoMember(10)]
-            [global::System.ComponentModel.DefaultValue(1)]
+            [global::System.ComponentModel.DefaultValue(1f)]
             public float level_score_change_mult
             {
-                get => __pbn__level_score_change_mult ?? 1;
+                get => __pbn__level_score_change_mult ?? 1f;
                 set => __pbn__level_score_change_mult = value;
             }
             public bool ShouldSerializelevel_score_change_mult() => __pbn__level_score_change_mult != null;

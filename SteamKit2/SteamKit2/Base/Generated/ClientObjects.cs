@@ -263,10 +263,10 @@ namespace SteamKit2.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            [global::System.ComponentModel.DefaultValue(0)]
+            [global::System.ComponentModel.DefaultValue(0u)]
             public uint id
             {
-                get => __pbn__id ?? 0;
+                get => __pbn__id ?? 0u;
                 set => __pbn__id = value;
             }
             public bool ShouldSerializeid() => __pbn__id != null;
@@ -407,10 +407,10 @@ namespace SteamKit2.Internal
                         => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
                     [global::ProtoBuf.ProtoMember(1)]
-                    [global::System.ComponentModel.DefaultValue(0)]
+                    [global::System.ComponentModel.DefaultValue(0u)]
                     public uint id
                     {
-                        get => __pbn__id ?? 0;
+                        get => __pbn__id ?? 0u;
                         set => __pbn__id = value;
                     }
                     public bool ShouldSerializeid() => __pbn__id != null;
@@ -516,10 +516,10 @@ namespace SteamKit2.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint device_id
         {
-            get => __pbn__device_id ?? 0;
+            get => __pbn__device_id ?? 0u;
             set => __pbn__device_id = value;
         }
         public bool ShouldSerializedevice_id() => __pbn__device_id != null;
@@ -688,10 +688,10 @@ namespace SteamKit2.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            [global::System.ComponentModel.DefaultValue(0)]
+            [global::System.ComponentModel.DefaultValue(0u)]
             public uint id
             {
-                get => __pbn__id ?? 0;
+                get => __pbn__id ?? 0u;
                 set => __pbn__id = value;
             }
             public bool ShouldSerializeid() => __pbn__id != null;
@@ -772,10 +772,10 @@ namespace SteamKit2.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            [global::System.ComponentModel.DefaultValue(0)]
+            [global::System.ComponentModel.DefaultValue(0u)]
             public uint id
             {
-                get => __pbn__id ?? 0;
+                get => __pbn__id ?? 0u;
                 set => __pbn__id = value;
             }
             public bool ShouldSerializeid() => __pbn__id != null;
@@ -783,10 +783,10 @@ namespace SteamKit2.Internal
             private uint? __pbn__id;
 
             [global::ProtoBuf.ProtoMember(2)]
-            [global::System.ComponentModel.DefaultValue(0)]
+            [global::System.ComponentModel.DefaultValue(0u)]
             public uint drive_id
             {
-                get => __pbn__drive_id ?? 0;
+                get => __pbn__drive_id ?? 0u;
                 set => __pbn__drive_id = value;
             }
             public bool ShouldSerializedrive_id() => __pbn__drive_id != null;
@@ -990,10 +990,10 @@ namespace SteamKit2.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            [global::System.ComponentModel.DefaultValue(0)]
+            [global::System.ComponentModel.DefaultValue(0u)]
             public uint id
             {
-                get => __pbn__id ?? 0;
+                get => __pbn__id ?? 0u;
                 set => __pbn__id = value;
             }
             public bool ShouldSerializeid() => __pbn__id != null;
@@ -1052,10 +1052,10 @@ namespace SteamKit2.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            [global::System.ComponentModel.DefaultValue(0)]
+            [global::System.ComponentModel.DefaultValue(0u)]
             public uint id
             {
-                get => __pbn__id ?? 0;
+                get => __pbn__id ?? 0u;
                 set => __pbn__id = value;
             }
             public bool ShouldSerializeid() => __pbn__id != null;
@@ -1063,10 +1063,10 @@ namespace SteamKit2.Internal
             private uint? __pbn__id;
 
             [global::ProtoBuf.ProtoMember(2)]
-            [global::System.ComponentModel.DefaultValue(0)]
+            [global::System.ComponentModel.DefaultValue(0u)]
             public uint adapter_id
             {
-                get => __pbn__adapter_id ?? 0;
+                get => __pbn__adapter_id ?? 0u;
                 set => __pbn__adapter_id = value;
             }
             public bool ShouldSerializeadapter_id() => __pbn__adapter_id != null;
@@ -3505,10 +3505,10 @@ namespace SteamKit2.Internal
         private EUpdaterType? __pbn__type;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
@@ -3590,10 +3590,10 @@ namespace SteamKit2.Internal
         private EUpdaterType? __pbn__type;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;

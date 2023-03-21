@@ -551,10 +551,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__leaver_actions;
 
         [global::ProtoBuf.ProtoMember(17)]
-        [global::System.ComponentModel.DefaultValue(6)]
+        [global::System.ComponentModel.DefaultValue(6u)]
         public uint channel
         {
-            get => __pbn__channel ?? 6;
+            get => __pbn__channel ?? 6u;
             set => __pbn__channel = value;
         }
         public bool ShouldSerializechannel() => __pbn__channel != null;
@@ -1347,7 +1347,7 @@ namespace SteamKit2.GC.Dota.Internal
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "0")]
         public ulong server_id
         {
-            get => __pbn__server_id ?? 0;
+            get => __pbn__server_id ?? 0ul;
             set => __pbn__server_id = value;
         }
         public bool ShouldSerializeserver_id() => __pbn__server_id != null;
@@ -1475,10 +1475,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__tournament_game_id;
 
         [global::ProtoBuf.ProtoMember(21)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint server_region
         {
-            get => __pbn__server_region ?? 0;
+            get => __pbn__server_region ?? 0u;
             set => __pbn__server_region = value;
         }
         public bool ShouldSerializeserver_region() => __pbn__server_region != null;
@@ -1584,10 +1584,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__leagueid;
 
         [global::ProtoBuf.ProtoMember(43)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint penalty_level_radiant
         {
-            get => __pbn__penalty_level_radiant ?? 0;
+            get => __pbn__penalty_level_radiant ?? 0u;
             set => __pbn__penalty_level_radiant = value;
         }
         public bool ShouldSerializepenalty_level_radiant() => __pbn__penalty_level_radiant != null;
@@ -1595,10 +1595,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__penalty_level_radiant;
 
         [global::ProtoBuf.ProtoMember(44)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint penalty_level_dire
         {
-            get => __pbn__penalty_level_dire ?? 0;
+            get => __pbn__penalty_level_dire ?? 0u;
             set => __pbn__penalty_level_dire = value;
         }
         public bool ShouldSerializepenalty_level_dire() => __pbn__penalty_level_dire != null;
@@ -2314,10 +2314,10 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            [global::System.ComponentModel.DefaultValue(4294967295)]
+            [global::System.ComponentModel.DefaultValue(4294967295u)]
             public uint message_id_start
             {
-                get => __pbn__message_id_start ?? 4294967295;
+                get => __pbn__message_id_start ?? 4294967295u;
                 set => __pbn__message_id_start = value;
             }
             public bool ShouldSerializemessage_id_start() => __pbn__message_id_start != null;
@@ -2325,10 +2325,10 @@ namespace SteamKit2.GC.Dota.Internal
             private uint? __pbn__message_id_start;
 
             [global::ProtoBuf.ProtoMember(2)]
-            [global::System.ComponentModel.DefaultValue(4294967295)]
+            [global::System.ComponentModel.DefaultValue(4294967295u)]
             public uint message_id_end
             {
-                get => __pbn__message_id_end ?? 4294967295;
+                get => __pbn__message_id_end ?? 4294967295u;
                 set => __pbn__message_id_end = value;
             }
             public bool ShouldSerializemessage_id_end() => __pbn__message_id_end != null;
@@ -2345,10 +2345,10 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            [global::System.ComponentModel.DefaultValue(4294967295)]
+            [global::System.ComponentModel.DefaultValue(4294967295u)]
             public uint message_id_start
             {
-                get => __pbn__message_id_start ?? 4294967295;
+                get => __pbn__message_id_start ?? 4294967295u;
                 set => __pbn__message_id_start = value;
             }
             public bool ShouldSerializemessage_id_start() => __pbn__message_id_start != null;
@@ -2356,10 +2356,10 @@ namespace SteamKit2.GC.Dota.Internal
             private uint? __pbn__message_id_start;
 
             [global::ProtoBuf.ProtoMember(2)]
-            [global::System.ComponentModel.DefaultValue(4294967295)]
+            [global::System.ComponentModel.DefaultValue(4294967295u)]
             public uint message_id_end
             {
-                get => __pbn__message_id_end ?? 4294967295;
+                get => __pbn__message_id_end ?? 4294967295u;
                 set => __pbn__message_id_end = value;
             }
             public bool ShouldSerializemessage_id_end() => __pbn__message_id_end != null;

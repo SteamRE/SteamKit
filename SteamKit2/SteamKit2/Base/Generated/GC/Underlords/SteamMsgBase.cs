@@ -50,7 +50,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
         public ulong job_id_source
         {
-            get => __pbn__job_id_source ?? 18446744073709551615;
+            get => __pbn__job_id_source ?? 18446744073709551615ul;
             set => __pbn__job_id_source = value;
         }
         public bool ShouldSerializejob_id_source() => __pbn__job_id_source != null;
@@ -61,7 +61,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
         public ulong job_id_target
         {
-            get => __pbn__job_id_target ?? 18446744073709551615;
+            get => __pbn__job_id_target ?? 18446744073709551615ul;
             set => __pbn__job_id_target = value;
         }
         public bool ShouldSerializejob_id_target() => __pbn__job_id_target != null;
@@ -132,10 +132,10 @@ namespace SteamKit2.GC.Underlords.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(255)]
+        [global::System.ComponentModel.DefaultValue(255u)]
         public uint status
         {
-            get => __pbn__status ?? 255;
+            get => __pbn__status ?? 255u;
             set => __pbn__status = value;
         }
         public bool ShouldSerializestatus() => __pbn__status != null;
@@ -143,10 +143,10 @@ namespace SteamKit2.GC.Underlords.Internal
         private uint? __pbn__status;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint account_id
         {
-            get => __pbn__account_id ?? 0;
+            get => __pbn__account_id ?? 0u;
             set => __pbn__account_id = value;
         }
         public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
@@ -154,10 +154,10 @@ namespace SteamKit2.GC.Underlords.Internal
         private uint? __pbn__account_id;
 
         [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint publisher_group_id
         {
-            get => __pbn__publisher_group_id ?? 0;
+            get => __pbn__publisher_group_id ?? 0u;
             set => __pbn__publisher_group_id = value;
         }
         public bool ShouldSerializepublisher_group_id() => __pbn__publisher_group_id != null;
@@ -1763,10 +1763,10 @@ namespace SteamKit2.GC.Underlords.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
@@ -1832,10 +1832,10 @@ namespace SteamKit2.GC.Underlords.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
@@ -1992,10 +1992,10 @@ namespace SteamKit2.GC.Underlords.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult_deprecated
         {
-            get => __pbn__eresult_deprecated ?? 2;
+            get => __pbn__eresult_deprecated ?? 2u;
             set => __pbn__eresult_deprecated = value;
         }
         public bool ShouldSerializeeresult_deprecated() => __pbn__eresult_deprecated != null;
@@ -3527,10 +3527,10 @@ namespace SteamKit2.GC.Underlords.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;

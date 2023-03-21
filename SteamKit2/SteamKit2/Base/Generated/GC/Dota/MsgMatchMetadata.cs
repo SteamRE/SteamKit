@@ -127,10 +127,10 @@ namespace SteamKit2.GC.Dota.Internal
             private uint? __pbn__def_index;
 
             [global::ProtoBuf.ProtoMember(2)]
-            [global::System.ComponentModel.DefaultValue(4)]
+            [global::System.ComponentModel.DefaultValue(4u)]
             public uint quality
             {
-                get => __pbn__quality ?? 4;
+                get => __pbn__quality ?? 4u;
                 set => __pbn__quality = value;
             }
             public bool ShouldSerializequality() => __pbn__quality != null;
@@ -141,10 +141,10 @@ namespace SteamKit2.GC.Dota.Internal
             public global::System.Collections.Generic.List<CSOEconItemAttribute> attribute { get; } = new global::System.Collections.Generic.List<CSOEconItemAttribute>();
 
             [global::ProtoBuf.ProtoMember(4)]
-            [global::System.ComponentModel.DefaultValue(0)]
+            [global::System.ComponentModel.DefaultValue(0u)]
             public uint style
             {
-                get => __pbn__style ?? 0;
+                get => __pbn__style ?? 0u;
                 set => __pbn__style = value;
             }
             public bool ShouldSerializestyle() => __pbn__style != null;
@@ -565,10 +565,10 @@ namespace SteamKit2.GC.Dota.Internal
                     => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
                 [global::ProtoBuf.ProtoMember(1)]
-                [global::System.ComponentModel.DefaultValue(255)]
+                [global::System.ComponentModel.DefaultValue(255u)]
                 public uint completed_path_id
                 {
-                    get => __pbn__completed_path_id ?? 255;
+                    get => __pbn__completed_path_id ?? 255u;
                     set => __pbn__completed_path_id = value;
                 }
                 public bool ShouldSerializecompleted_path_id() => __pbn__completed_path_id != null;
@@ -576,10 +576,10 @@ namespace SteamKit2.GC.Dota.Internal
                 private uint? __pbn__completed_path_id;
 
                 [global::ProtoBuf.ProtoMember(2)]
-                [global::System.ComponentModel.DefaultValue(255)]
+                [global::System.ComponentModel.DefaultValue(255u)]
                 public uint claimed_room_id
                 {
-                    get => __pbn__claimed_room_id ?? 255;
+                    get => __pbn__claimed_room_id ?? 255u;
                     set => __pbn__claimed_room_id = value;
                 }
                 public bool ShouldSerializeclaimed_room_id() => __pbn__claimed_room_id != null;
@@ -882,10 +882,10 @@ namespace SteamKit2.GC.Dota.Internal
                 public global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.ActionGrant> actions_granted { get; } = new global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.ActionGrant>();
 
                 [global::ProtoBuf.ProtoMember(20)]
-                [global::System.ComponentModel.DefaultValue(255)]
+                [global::System.ComponentModel.DefaultValue(255u)]
                 public uint cavern_crawl_map_variant
                 {
-                    get => __pbn__cavern_crawl_map_variant ?? 255;
+                    get => __pbn__cavern_crawl_map_variant ?? 255u;
                     set => __pbn__cavern_crawl_map_variant = value;
                 }
                 public bool ShouldSerializecavern_crawl_map_variant() => __pbn__cavern_crawl_map_variant != null;

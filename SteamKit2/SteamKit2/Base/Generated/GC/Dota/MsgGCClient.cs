@@ -1216,10 +1216,10 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
@@ -1819,10 +1819,10 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1f)]
         public float kills
         {
-            get => __pbn__kills ?? 1;
+            get => __pbn__kills ?? 1f;
             set => __pbn__kills = value;
         }
         public bool ShouldSerializekills() => __pbn__kills != null;
@@ -1830,10 +1830,10 @@ namespace SteamKit2.GC.Dota.Internal
         private float? __pbn__kills;
 
         [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1f)]
         public float deaths
         {
-            get => __pbn__deaths ?? 1;
+            get => __pbn__deaths ?? 1f;
             set => __pbn__deaths = value;
         }
         public bool ShouldSerializedeaths() => __pbn__deaths != null;
@@ -1841,10 +1841,10 @@ namespace SteamKit2.GC.Dota.Internal
         private float? __pbn__deaths;
 
         [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1f)]
         public float assists
         {
-            get => __pbn__assists ?? 1;
+            get => __pbn__assists ?? 1f;
             set => __pbn__assists = value;
         }
         public bool ShouldSerializeassists() => __pbn__assists != null;
@@ -1852,10 +1852,10 @@ namespace SteamKit2.GC.Dota.Internal
         private float? __pbn__assists;
 
         [global::ProtoBuf.ProtoMember(5)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1f)]
         public float net_worth
         {
-            get => __pbn__net_worth ?? 1;
+            get => __pbn__net_worth ?? 1f;
             set => __pbn__net_worth = value;
         }
         public bool ShouldSerializenet_worth() => __pbn__net_worth != null;
@@ -1863,10 +1863,10 @@ namespace SteamKit2.GC.Dota.Internal
         private float? __pbn__net_worth;
 
         [global::ProtoBuf.ProtoMember(6)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1f)]
         public float last_hits
         {
-            get => __pbn__last_hits ?? 1;
+            get => __pbn__last_hits ?? 1f;
             set => __pbn__last_hits = value;
         }
         public bool ShouldSerializelast_hits() => __pbn__last_hits != null;
@@ -1874,10 +1874,10 @@ namespace SteamKit2.GC.Dota.Internal
         private float? __pbn__last_hits;
 
         [global::ProtoBuf.ProtoMember(7)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1f)]
         public float denies
         {
-            get => __pbn__denies ?? 1;
+            get => __pbn__denies ?? 1f;
             set => __pbn__denies = value;
         }
         public bool ShouldSerializedenies() => __pbn__denies != null;
@@ -1885,10 +1885,10 @@ namespace SteamKit2.GC.Dota.Internal
         private float? __pbn__denies;
 
         [global::ProtoBuf.ProtoMember(8)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1f)]
         public float item_value
         {
-            get => __pbn__item_value ?? 1;
+            get => __pbn__item_value ?? 1f;
             set => __pbn__item_value = value;
         }
         public bool ShouldSerializeitem_value() => __pbn__item_value != null;
@@ -1896,10 +1896,10 @@ namespace SteamKit2.GC.Dota.Internal
         private float? __pbn__item_value;
 
         [global::ProtoBuf.ProtoMember(9)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1f)]
         public float support_gold_spent
         {
-            get => __pbn__support_gold_spent ?? 1;
+            get => __pbn__support_gold_spent ?? 1f;
             set => __pbn__support_gold_spent = value;
         }
         public bool ShouldSerializesupport_gold_spent() => __pbn__support_gold_spent != null;
@@ -1907,10 +1907,10 @@ namespace SteamKit2.GC.Dota.Internal
         private float? __pbn__support_gold_spent;
 
         [global::ProtoBuf.ProtoMember(10)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1f)]
         public float camps_stacked
         {
-            get => __pbn__camps_stacked ?? 1;
+            get => __pbn__camps_stacked ?? 1f;
             set => __pbn__camps_stacked = value;
         }
         public bool ShouldSerializecamps_stacked() => __pbn__camps_stacked != null;
@@ -1918,10 +1918,10 @@ namespace SteamKit2.GC.Dota.Internal
         private float? __pbn__camps_stacked;
 
         [global::ProtoBuf.ProtoMember(11)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1f)]
         public float wards_placed
         {
-            get => __pbn__wards_placed ?? 1;
+            get => __pbn__wards_placed ?? 1f;
             set => __pbn__wards_placed = value;
         }
         public bool ShouldSerializewards_placed() => __pbn__wards_placed != null;
@@ -1929,10 +1929,10 @@ namespace SteamKit2.GC.Dota.Internal
         private float? __pbn__wards_placed;
 
         [global::ProtoBuf.ProtoMember(12)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1f)]
         public float dewards
         {
-            get => __pbn__dewards ?? 1;
+            get => __pbn__dewards ?? 1f;
             set => __pbn__dewards = value;
         }
         public bool ShouldSerializedewards() => __pbn__dewards != null;
@@ -1940,10 +1940,10 @@ namespace SteamKit2.GC.Dota.Internal
         private float? __pbn__dewards;
 
         [global::ProtoBuf.ProtoMember(13)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1f)]
         public float triple_kills
         {
-            get => __pbn__triple_kills ?? 1;
+            get => __pbn__triple_kills ?? 1f;
             set => __pbn__triple_kills = value;
         }
         public bool ShouldSerializetriple_kills() => __pbn__triple_kills != null;
@@ -1951,10 +1951,10 @@ namespace SteamKit2.GC.Dota.Internal
         private float? __pbn__triple_kills;
 
         [global::ProtoBuf.ProtoMember(14)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1f)]
         public float rampages
         {
-            get => __pbn__rampages ?? 1;
+            get => __pbn__rampages ?? 1f;
             set => __pbn__rampages = value;
         }
         public bool ShouldSerializerampages() => __pbn__rampages != null;
@@ -2787,10 +2787,10 @@ namespace SteamKit2.GC.Dota.Internal
             private uint? __pbn__action_id;
 
             [global::ProtoBuf.ProtoMember(2)]
-            [global::System.ComponentModel.DefaultValue(1)]
+            [global::System.ComponentModel.DefaultValue(1u)]
             public uint times_completed
             {
-                get => __pbn__times_completed ?? 1;
+                get => __pbn__times_completed ?? 1u;
                 set => __pbn__times_completed = value;
             }
             public bool ShouldSerializetimes_completed() => __pbn__times_completed != null;
@@ -2931,10 +2931,10 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
@@ -3012,10 +3012,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__leagueid;
 
         [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint result
         {
-            get => __pbn__result ?? 2;
+            get => __pbn__result ?? 2u;
             set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
@@ -10454,10 +10454,10 @@ namespace SteamKit2.GC.Dota.Internal
         public global::System.Collections.Generic.List<CompletedPathInfo> completed_paths { get; } = new global::System.Collections.Generic.List<CompletedPathInfo>();
 
         [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue(255)]
+        [global::System.ComponentModel.DefaultValue(255u)]
         public uint map_variant
         {
-            get => __pbn__map_variant ?? 255;
+            get => __pbn__map_variant ?? 255u;
             set => __pbn__map_variant = value;
         }
         public bool ShouldSerializemap_variant() => __pbn__map_variant != null;
@@ -10472,10 +10472,10 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            [global::System.ComponentModel.DefaultValue(255)]
+            [global::System.ComponentModel.DefaultValue(255u)]
             public uint path_id_completed
             {
-                get => __pbn__path_id_completed ?? 255;
+                get => __pbn__path_id_completed ?? 255u;
                 set => __pbn__path_id_completed = value;
             }
             public bool ShouldSerializepath_id_completed() => __pbn__path_id_completed != null;
@@ -10543,10 +10543,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__event_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(255)]
+        [global::System.ComponentModel.DefaultValue(255u)]
         public uint room_id
         {
-            get => __pbn__room_id ?? 255;
+            get => __pbn__room_id ?? 255u;
             set => __pbn__room_id = value;
         }
         public bool ShouldSerializeroom_id() => __pbn__room_id != null;
@@ -10554,10 +10554,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__room_id;
 
         [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue(255)]
+        [global::System.ComponentModel.DefaultValue(255u)]
         public uint map_variant
         {
-            get => __pbn__map_variant ?? 255;
+            get => __pbn__map_variant ?? 255u;
             set => __pbn__map_variant = value;
         }
         public bool ShouldSerializemap_variant() => __pbn__map_variant != null;
@@ -10612,10 +10612,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__event_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(255)]
+        [global::System.ComponentModel.DefaultValue(255u)]
         public uint room_id
         {
-            get => __pbn__room_id ?? 255;
+            get => __pbn__room_id ?? 255u;
             set => __pbn__room_id = value;
         }
         public bool ShouldSerializeroom_id() => __pbn__room_id != null;
@@ -10633,10 +10633,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__item_type;
 
         [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue(255)]
+        [global::System.ComponentModel.DefaultValue(255u)]
         public uint map_variant
         {
-            get => __pbn__map_variant ?? 255;
+            get => __pbn__map_variant ?? 255u;
             set => __pbn__map_variant = value;
         }
         public bool ShouldSerializemap_variant() => __pbn__map_variant != null;
@@ -10691,10 +10691,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__event_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(255)]
+        [global::System.ComponentModel.DefaultValue(255u)]
         public uint path_id
         {
-            get => __pbn__path_id ?? 255;
+            get => __pbn__path_id ?? 255u;
             set => __pbn__path_id = value;
         }
         public bool ShouldSerializepath_id() => __pbn__path_id != null;
@@ -10712,10 +10712,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__item_type;
 
         [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue(255)]
+        [global::System.ComponentModel.DefaultValue(255u)]
         public uint map_variant
         {
-            get => __pbn__map_variant ?? 255;
+            get => __pbn__map_variant ?? 255u;
             set => __pbn__map_variant = value;
         }
         public bool ShouldSerializemap_variant() => __pbn__map_variant != null;
@@ -10813,10 +10813,10 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            [global::System.ComponentModel.DefaultValue(255)]
+            [global::System.ComponentModel.DefaultValue(255u)]
             public uint path_id_1
             {
-                get => __pbn__path_id_1 ?? 255;
+                get => __pbn__path_id_1 ?? 255u;
                 set => __pbn__path_id_1 = value;
             }
             public bool ShouldSerializepath_id_1() => __pbn__path_id_1 != null;
@@ -10824,10 +10824,10 @@ namespace SteamKit2.GC.Dota.Internal
             private uint? __pbn__path_id_1;
 
             [global::ProtoBuf.ProtoMember(2)]
-            [global::System.ComponentModel.DefaultValue(255)]
+            [global::System.ComponentModel.DefaultValue(255u)]
             public uint path_id_2
             {
-                get => __pbn__path_id_2 ?? 255;
+                get => __pbn__path_id_2 ?? 255u;
                 set => __pbn__path_id_2 = value;
             }
             public bool ShouldSerializepath_id_2() => __pbn__path_id_2 != null;
@@ -10873,10 +10873,10 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            [global::System.ComponentModel.DefaultValue(255)]
+            [global::System.ComponentModel.DefaultValue(255u)]
             public uint map_room_id
             {
-                get => __pbn__map_room_id ?? 255;
+                get => __pbn__map_room_id ?? 255u;
                 set => __pbn__map_room_id = value;
             }
             public bool ShouldSerializemap_room_id() => __pbn__map_room_id != null;
@@ -10884,10 +10884,10 @@ namespace SteamKit2.GC.Dota.Internal
             private uint? __pbn__map_room_id;
 
             [global::ProtoBuf.ProtoMember(2)]
-            [global::System.ComponentModel.DefaultValue(255)]
+            [global::System.ComponentModel.DefaultValue(255u)]
             public uint revealed_room_id
             {
-                get => __pbn__revealed_room_id ?? 255;
+                get => __pbn__revealed_room_id ?? 255u;
                 set => __pbn__revealed_room_id = value;
             }
             public bool ShouldSerializerevealed_room_id() => __pbn__revealed_room_id != null;
@@ -10904,10 +10904,10 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            [global::System.ComponentModel.DefaultValue(255)]
+            [global::System.ComponentModel.DefaultValue(255u)]
             public uint map_variant
             {
-                get => __pbn__map_variant ?? 255;
+                get => __pbn__map_variant ?? 255u;
                 set => __pbn__map_variant = value;
             }
             public bool ShouldSerializemap_variant() => __pbn__map_variant != null;
@@ -11038,10 +11038,10 @@ namespace SteamKit2.GC.Dota.Internal
             public global::System.Collections.Generic.List<CMsgClientToGCCavernCrawlRequestMapStateResponse.SwappedChallenge> swapped_challenge { get; } = new global::System.Collections.Generic.List<CMsgClientToGCCavernCrawlRequestMapStateResponse.SwappedChallenge>();
 
             [global::ProtoBuf.ProtoMember(15)]
-            [global::System.ComponentModel.DefaultValue(255)]
+            [global::System.ComponentModel.DefaultValue(255u)]
             public uint ultra_rare_reward_room_number
             {
-                get => __pbn__ultra_rare_reward_room_number ?? 255;
+                get => __pbn__ultra_rare_reward_room_number ?? 255u;
                 set => __pbn__ultra_rare_reward_room_number = value;
             }
             public bool ShouldSerializeultra_rare_reward_room_number() => __pbn__ultra_rare_reward_room_number != null;
@@ -11121,10 +11121,10 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            [global::System.ComponentModel.DefaultValue(255)]
+            [global::System.ComponentModel.DefaultValue(255u)]
             public uint map_variant
             {
-                get => __pbn__map_variant ?? 255;
+                get => __pbn__map_variant ?? 255u;
                 set => __pbn__map_variant = value;
             }
             public bool ShouldSerializemap_variant() => __pbn__map_variant != null;
@@ -11274,10 +11274,10 @@ namespace SteamKit2.GC.Dota.Internal
             private uint? __pbn__tipper_account_id;
 
             [global::ProtoBuf.ProtoMember(2)]
-            [global::System.ComponentModel.DefaultValue(1)]
+            [global::System.ComponentModel.DefaultValue(1u)]
             public uint tip_count
             {
-                get => __pbn__tip_count ?? 1;
+                get => __pbn__tip_count ?? 1u;
                 set => __pbn__tip_count = value;
             }
             public bool ShouldSerializetip_count() => __pbn__tip_count != null;

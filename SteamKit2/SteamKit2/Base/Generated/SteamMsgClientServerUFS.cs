@@ -88,10 +88,10 @@ namespace SteamKit2.Internal
         private uint? __pbn__platforms_to_sync_deprecated;
 
         [global::ProtoBuf.ProtoMember(8)]
-        [global::System.ComponentModel.DefaultValue(4294967295)]
+        [global::System.ComponentModel.DefaultValue(4294967295u)]
         public uint platforms_to_sync
         {
-            get => __pbn__platforms_to_sync ?? 4294967295;
+            get => __pbn__platforms_to_sync ?? 4294967295u;
             set => __pbn__platforms_to_sync = value;
         }
         public bool ShouldSerializeplatforms_to_sync() => __pbn__platforms_to_sync != null;
@@ -858,7 +858,7 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
         public ulong hcontent
         {
-            get => __pbn__hcontent ?? 18446744073709551615;
+            get => __pbn__hcontent ?? 18446744073709551615ul;
             set => __pbn__hcontent = value;
         }
         public bool ShouldSerializehcontent() => __pbn__hcontent != null;
@@ -1134,7 +1134,7 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
         public ulong hcontent
         {
-            get => __pbn__hcontent ?? 18446744073709551615;
+            get => __pbn__hcontent ?? 18446744073709551615ul;
             set => __pbn__hcontent = value;
         }
         public bool ShouldSerializehcontent() => __pbn__hcontent != null;

@@ -130,7 +130,7 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
         public ulong jobid_source
         {
-            get => __pbn__jobid_source ?? 18446744073709551615;
+            get => __pbn__jobid_source ?? 18446744073709551615ul;
             set => __pbn__jobid_source = value;
         }
         public bool ShouldSerializejobid_source() => __pbn__jobid_source != null;
@@ -141,7 +141,7 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
         public ulong jobid_target
         {
-            get => __pbn__jobid_target ?? 18446744073709551615;
+            get => __pbn__jobid_target ?? 18446744073709551615ul;
             set => __pbn__jobid_target = value;
         }
         public bool ShouldSerializejobid_target() => __pbn__jobid_target != null;
@@ -236,7 +236,7 @@ namespace SteamKit2.Internal
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
         public ulong messageid
         {
-            get => __pbn__messageid ?? 18446744073709551615;
+            get => __pbn__messageid ?? 18446744073709551615ul;
             set => __pbn__messageid = value;
         }
         public bool ShouldSerializemessageid() => __pbn__messageid != null;
@@ -307,10 +307,10 @@ namespace SteamKit2.Internal
         private uint? __pbn__cm_sysid;
 
         [global::ProtoBuf.ProtoMember(31)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint launcher_type
         {
-            get => __pbn__launcher_type ?? 0;
+            get => __pbn__launcher_type ?? 0u;
             set => __pbn__launcher_type = value;
         }
         public bool ShouldSerializelauncher_type() => __pbn__launcher_type != null;
@@ -318,10 +318,10 @@ namespace SteamKit2.Internal
         private uint? __pbn__launcher_type;
 
         [global::ProtoBuf.ProtoMember(32)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint realm
         {
-            get => __pbn__realm ?? 0;
+            get => __pbn__realm ?? 0u;
             set => __pbn__realm = value;
         }
         public bool ShouldSerializerealm() => __pbn__realm != null;
@@ -461,10 +461,10 @@ namespace SteamKit2.Internal
         private uint? __pbn__estate;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;

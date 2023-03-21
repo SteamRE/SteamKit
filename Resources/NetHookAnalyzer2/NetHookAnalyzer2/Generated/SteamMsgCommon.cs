@@ -111,10 +111,10 @@ namespace NetHookAnalyzer2.Protobufs
         private uint? __pbn__mru_index;
 
         [global::ProtoBuf.ProtoMember(14)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint rt_recent_activity_time
         {
-            get => __pbn__rt_recent_activity_time ?? 0;
+            get => __pbn__rt_recent_activity_time ?? 0u;
             set => __pbn__rt_recent_activity_time = value;
         }
         public bool ShouldSerializert_recent_activity_time() => __pbn__rt_recent_activity_time != null;
@@ -122,10 +122,10 @@ namespace NetHookAnalyzer2.Protobufs
         private uint? __pbn__rt_recent_activity_time;
 
         [global::ProtoBuf.ProtoMember(16)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint minutes_playtime_forever
         {
-            get => __pbn__minutes_playtime_forever ?? 0;
+            get => __pbn__minutes_playtime_forever ?? 0u;
             set => __pbn__minutes_playtime_forever = value;
         }
         public bool ShouldSerializeminutes_playtime_forever() => __pbn__minutes_playtime_forever != null;
@@ -133,10 +133,10 @@ namespace NetHookAnalyzer2.Protobufs
         private uint? __pbn__minutes_playtime_forever;
 
         [global::ProtoBuf.ProtoMember(17)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint minutes_playtime_last_two_weeks
         {
-            get => __pbn__minutes_playtime_last_two_weeks ?? 0;
+            get => __pbn__minutes_playtime_last_two_weeks ?? 0u;
             set => __pbn__minutes_playtime_last_two_weeks = value;
         }
         public bool ShouldSerializeminutes_playtime_last_two_weeks() => __pbn__minutes_playtime_last_two_weeks != null;
@@ -144,10 +144,10 @@ namespace NetHookAnalyzer2.Protobufs
         private uint? __pbn__minutes_playtime_last_two_weeks;
 
         [global::ProtoBuf.ProtoMember(18)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint rt_last_time_played
         {
-            get => __pbn__rt_last_time_played ?? 0;
+            get => __pbn__rt_last_time_played ?? 0u;
             set => __pbn__rt_last_time_played = value;
         }
         public bool ShouldSerializert_last_time_played() => __pbn__rt_last_time_played != null;
@@ -164,10 +164,10 @@ namespace NetHookAnalyzer2.Protobufs
         public global::System.Collections.Generic.List<uint> store_category { get; } = new global::System.Collections.Generic.List<uint>();
 
         [global::ProtoBuf.ProtoMember(25)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint rt_original_release_date
         {
-            get => __pbn__rt_original_release_date ?? 0;
+            get => __pbn__rt_original_release_date ?? 0u;
             set => __pbn__rt_original_release_date = value;
         }
         public bool ShouldSerializert_original_release_date() => __pbn__rt_original_release_date != null;
@@ -175,10 +175,10 @@ namespace NetHookAnalyzer2.Protobufs
         private uint? __pbn__rt_original_release_date;
 
         [global::ProtoBuf.ProtoMember(26)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint rt_steam_release_date
         {
-            get => __pbn__rt_steam_release_date ?? 0;
+            get => __pbn__rt_steam_release_date ?? 0u;
             set => __pbn__rt_steam_release_date = value;
         }
         public bool ShouldSerializert_steam_release_date() => __pbn__rt_steam_release_date != null;
@@ -478,10 +478,10 @@ namespace NetHookAnalyzer2.Protobufs
         private string __pbn__mastersub_includedwith_logo;
 
         [global::ProtoBuf.ProtoMember(61)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint compat_allowlist_setting
         {
-            get => __pbn__compat_allowlist_setting ?? 0;
+            get => __pbn__compat_allowlist_setting ?? 0u;
             set => __pbn__compat_allowlist_setting = value;
         }
         public bool ShouldSerializecompat_allowlist_setting() => __pbn__compat_allowlist_setting != null;
@@ -656,10 +656,10 @@ namespace NetHookAnalyzer2.Protobufs
         private int? __pbn__display_status;
 
         [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint status_percentage
         {
-            get => __pbn__status_percentage ?? 0;
+            get => __pbn__status_percentage ?? 0u;
             set => __pbn__status_percentage = value;
         }
         public bool ShouldSerializestatus_percentage() => __pbn__status_percentage != null;
@@ -691,7 +691,7 @@ namespace NetHookAnalyzer2.Protobufs
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "0")]
         public ulong bytes_downloaded
         {
-            get => __pbn__bytes_downloaded ?? 0;
+            get => __pbn__bytes_downloaded ?? 0ul;
             set => __pbn__bytes_downloaded = value;
         }
         public bool ShouldSerializebytes_downloaded() => __pbn__bytes_downloaded != null;
@@ -702,7 +702,7 @@ namespace NetHookAnalyzer2.Protobufs
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "0")]
         public ulong bytes_total
         {
-            get => __pbn__bytes_total ?? 0;
+            get => __pbn__bytes_total ?? 0ul;
             set => __pbn__bytes_total = value;
         }
         public bool ShouldSerializebytes_total() => __pbn__bytes_total != null;
@@ -5655,10 +5655,10 @@ namespace NetHookAnalyzer2.Protobufs
         private uint? __pbn__estate;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
@@ -6756,10 +6756,10 @@ namespace NetHookAnalyzer2.Protobufs
         private bool? __pbn__persona_set_by_user;
 
         [global::ProtoBuf.ProtoMember(6)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint persona_state_flags
         {
-            get => __pbn__persona_state_flags ?? 0;
+            get => __pbn__persona_state_flags ?? 0u;
             set => __pbn__persona_state_flags = value;
         }
         public bool ShouldSerializepersona_state_flags() => __pbn__persona_state_flags != null;
@@ -8099,10 +8099,10 @@ namespace NetHookAnalyzer2.Protobufs
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eResult
         {
-            get => __pbn__eResult ?? 2;
+            get => __pbn__eResult ?? 2u;
             set => __pbn__eResult = value;
         }
         public bool ShouldSerializeeResult() => __pbn__eResult != null;
@@ -8280,10 +8280,10 @@ namespace NetHookAnalyzer2.Protobufs
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eResult
         {
-            get => __pbn__eResult ?? 2;
+            get => __pbn__eResult ?? 2u;
             set => __pbn__eResult = value;
         }
         public bool ShouldSerializeeResult() => __pbn__eResult != null;
@@ -9028,10 +9028,10 @@ namespace NetHookAnalyzer2.Protobufs
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(10)]
+        [global::System.ComponentModel.DefaultValue(10u)]
         public uint max_tokens_to_keep
         {
-            get => __pbn__max_tokens_to_keep ?? 10;
+            get => __pbn__max_tokens_to_keep ?? 10u;
             set => __pbn__max_tokens_to_keep = value;
         }
         public bool ShouldSerializemax_tokens_to_keep() => __pbn__max_tokens_to_keep != null;
@@ -9236,10 +9236,10 @@ namespace NetHookAnalyzer2.Protobufs
         private string __pbn__vr_hmd_model;
 
         [global::ProtoBuf.ProtoMember(15)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint launch_option_type
         {
-            get => __pbn__launch_option_type ?? 0;
+            get => __pbn__launch_option_type ?? 0u;
             set => __pbn__launch_option_type = value;
         }
         public bool ShouldSerializelaunch_option_type() => __pbn__launch_option_type != null;
@@ -9269,10 +9269,10 @@ namespace NetHookAnalyzer2.Protobufs
         private string __pbn__primary_steam_controller_serial;
 
         [global::ProtoBuf.ProtoMember(18)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint total_steam_controller_count
         {
-            get => __pbn__total_steam_controller_count ?? 0;
+            get => __pbn__total_steam_controller_count ?? 0u;
             set => __pbn__total_steam_controller_count = value;
         }
         public bool ShouldSerializetotal_steam_controller_count() => __pbn__total_steam_controller_count != null;
@@ -9280,10 +9280,10 @@ namespace NetHookAnalyzer2.Protobufs
         private uint? __pbn__total_steam_controller_count;
 
         [global::ProtoBuf.ProtoMember(19)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint total_non_steam_controller_count
         {
-            get => __pbn__total_non_steam_controller_count ?? 0;
+            get => __pbn__total_non_steam_controller_count ?? 0u;
             set => __pbn__total_non_steam_controller_count = value;
         }
         public bool ShouldSerializetotal_non_steam_controller_count() => __pbn__total_non_steam_controller_count != null;
@@ -9294,7 +9294,7 @@ namespace NetHookAnalyzer2.Protobufs
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "0")]
         public ulong controller_workshop_file_id
         {
-            get => __pbn__controller_workshop_file_id ?? 0;
+            get => __pbn__controller_workshop_file_id ?? 0ul;
             set => __pbn__controller_workshop_file_id = value;
         }
         public bool ShouldSerializecontroller_workshop_file_id() => __pbn__controller_workshop_file_id != null;
@@ -9302,10 +9302,10 @@ namespace NetHookAnalyzer2.Protobufs
         private ulong? __pbn__controller_workshop_file_id;
 
         [global::ProtoBuf.ProtoMember(21)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint launch_source
         {
-            get => __pbn__launch_source ?? 0;
+            get => __pbn__launch_source ?? 0u;
             set => __pbn__launch_source = value;
         }
         public bool ShouldSerializelaunch_source() => __pbn__launch_source != null;
@@ -9326,10 +9326,10 @@ namespace NetHookAnalyzer2.Protobufs
         public CMsgIPAddress game_ip_address { get; set; }
 
         [global::ProtoBuf.ProtoMember(24)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint controller_connection_type
         {
-            get => __pbn__controller_connection_type ?? 0;
+            get => __pbn__controller_connection_type ?? 0u;
             set => __pbn__controller_connection_type = value;
         }
         public bool ShouldSerializecontroller_connection_type() => __pbn__controller_connection_type != null;
@@ -9357,10 +9357,10 @@ namespace NetHookAnalyzer2.Protobufs
         private uint? __pbn__game_build_id;
 
         [global::ProtoBuf.ProtoMember(27)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint compat_tool_id
         {
-            get => __pbn__compat_tool_id ?? 0;
+            get => __pbn__compat_tool_id ?? 0u;
             set => __pbn__compat_tool_id = value;
         }
         public bool ShouldSerializecompat_tool_id() => __pbn__compat_tool_id != null;
@@ -9480,10 +9480,10 @@ namespace NetHookAnalyzer2.Protobufs
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
@@ -9662,10 +9662,10 @@ namespace NetHookAnalyzer2.Protobufs
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
@@ -9715,10 +9715,10 @@ namespace NetHookAnalyzer2.Protobufs
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
@@ -11609,10 +11609,10 @@ namespace NetHookAnalyzer2.Protobufs
         private byte[] __pbn__machine_id;
 
         [global::ProtoBuf.ProtoMember(31)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint launcher_type
         {
-            get => __pbn__launcher_type ?? 0;
+            get => __pbn__launcher_type ?? 0u;
             set => __pbn__launcher_type = value;
         }
         public bool ShouldSerializelauncher_type() => __pbn__launcher_type != null;
@@ -11620,10 +11620,10 @@ namespace NetHookAnalyzer2.Protobufs
         private uint? __pbn__launcher_type;
 
         [global::ProtoBuf.ProtoMember(32)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint ui_mode
         {
-            get => __pbn__ui_mode ?? 0;
+            get => __pbn__ui_mode ?? 0u;
             set => __pbn__ui_mode = value;
         }
         public bool ShouldSerializeui_mode() => __pbn__ui_mode != null;
@@ -11631,10 +11631,10 @@ namespace NetHookAnalyzer2.Protobufs
         private uint? __pbn__ui_mode;
 
         [global::ProtoBuf.ProtoMember(33)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint chat_mode
         {
-            get => __pbn__chat_mode ?? 0;
+            get => __pbn__chat_mode ?? 0u;
             set => __pbn__chat_mode = value;
         }
         public bool ShouldSerializechat_mode() => __pbn__chat_mode != null;
@@ -15736,10 +15736,10 @@ namespace NetHookAnalyzer2.Protobufs
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
@@ -16249,10 +16249,10 @@ namespace NetHookAnalyzer2.Protobufs
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
@@ -19107,7 +19107,7 @@ namespace NetHookAnalyzer2.Protobufs
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
         public ulong screenshotid
         {
-            get => __pbn__screenshotid ?? 18446744073709551615;
+            get => __pbn__screenshotid ?? 18446744073709551615ul;
             set => __pbn__screenshotid = value;
         }
         public bool ShouldSerializescreenshotid() => __pbn__screenshotid != null;
@@ -19176,7 +19176,7 @@ namespace NetHookAnalyzer2.Protobufs
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
         public ulong screenshotid
         {
-            get => __pbn__screenshotid ?? 18446744073709551615;
+            get => __pbn__screenshotid ?? 18446744073709551615ul;
             set => __pbn__screenshotid = value;
         }
         public bool ShouldSerializescreenshotid() => __pbn__screenshotid != null;
@@ -19295,10 +19295,10 @@ namespace NetHookAnalyzer2.Protobufs
         private ulong? __pbn__published_file_id;
 
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint rtime_time_stamp
         {
-            get => __pbn__rtime_time_stamp ?? 0;
+            get => __pbn__rtime_time_stamp ?? 0u;
             set => __pbn__rtime_time_stamp = value;
         }
         public bool ShouldSerializertime_time_stamp() => __pbn__rtime_time_stamp != null;
@@ -19426,10 +19426,10 @@ namespace NetHookAnalyzer2.Protobufs
         private uint? __pbn__start_index;
 
         [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue(1)]
+        [global::System.ComponentModel.DefaultValue(1u)]
         public uint list_type
         {
-            get => __pbn__list_type ?? 1;
+            get => __pbn__list_type ?? 1u;
             set => __pbn__list_type = value;
         }
         public bool ShouldSerializelist_type() => __pbn__list_type != null;
@@ -19437,10 +19437,10 @@ namespace NetHookAnalyzer2.Protobufs
         private uint? __pbn__list_type;
 
         [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint matching_file_type
         {
-            get => __pbn__matching_file_type ?? 0;
+            get => __pbn__matching_file_type ?? 0u;
             set => __pbn__matching_file_type = value;
         }
         public bool ShouldSerializematching_file_type() => __pbn__matching_file_type != null;
@@ -19448,10 +19448,10 @@ namespace NetHookAnalyzer2.Protobufs
         private uint? __pbn__matching_file_type;
 
         [global::ProtoBuf.ProtoMember(5)]
-        [global::System.ComponentModel.DefaultValue(50)]
+        [global::System.ComponentModel.DefaultValue(50u)]
         public uint count
         {
-            get => __pbn__count ?? 50;
+            get => __pbn__count ?? 50u;
             set => __pbn__count = value;
         }
         public bool ShouldSerializecount() => __pbn__count != null;
@@ -19511,10 +19511,10 @@ namespace NetHookAnalyzer2.Protobufs
         private ulong? __pbn__published_file_id;
 
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint rtime32_subscribed
         {
-            get => __pbn__rtime32_subscribed ?? 0;
+            get => __pbn__rtime32_subscribed ?? 0u;
             set => __pbn__rtime32_subscribed = value;
         }
         public bool ShouldSerializertime32_subscribed() => __pbn__rtime32_subscribed != null;
@@ -19561,10 +19561,10 @@ namespace NetHookAnalyzer2.Protobufs
         private uint? __pbn__start_time;
 
         [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint desired_revision
         {
-            get => __pbn__desired_revision ?? 0;
+            get => __pbn__desired_revision ?? 0u;
             set => __pbn__desired_revision = value;
         }
         public bool ShouldSerializedesired_revision() => __pbn__desired_revision != null;
@@ -19624,10 +19624,10 @@ namespace NetHookAnalyzer2.Protobufs
         private ulong? __pbn__published_file_id;
 
         [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint rtime32_subscribed
         {
-            get => __pbn__rtime32_subscribed ?? 0;
+            get => __pbn__rtime32_subscribed ?? 0u;
             set => __pbn__rtime32_subscribed = value;
         }
         public bool ShouldSerializertime32_subscribed() => __pbn__rtime32_subscribed != null;
@@ -20043,7 +20043,7 @@ namespace NetHookAnalyzer2.Protobufs
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
         public ulong published_file_id
         {
-            get => __pbn__published_file_id ?? 18446744073709551615;
+            get => __pbn__published_file_id ?? 18446744073709551615ul;
             set => __pbn__published_file_id = value;
         }
         public bool ShouldSerializepublished_file_id() => __pbn__published_file_id != null;
@@ -21188,7 +21188,7 @@ namespace NetHookAnalyzer2.Protobufs
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
         public ulong hcontent
         {
-            get => __pbn__hcontent ?? 18446744073709551615;
+            get => __pbn__hcontent ?? 18446744073709551615ul;
             set => __pbn__hcontent = value;
         }
         public bool ShouldSerializehcontent() => __pbn__hcontent != null;
@@ -21405,7 +21405,7 @@ namespace NetHookAnalyzer2.Protobufs
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
         public ulong hcontent
         {
-            get => __pbn__hcontent ?? 18446744073709551615;
+            get => __pbn__hcontent ?? 18446744073709551615ul;
             set => __pbn__hcontent = value;
         }
         public bool ShouldSerializehcontent() => __pbn__hcontent != null;
@@ -21657,10 +21657,10 @@ namespace NetHookAnalyzer2.Protobufs
         private uint? __pbn__platforms_to_sync_deprecated;
 
         [global::ProtoBuf.ProtoMember(8)]
-        [global::System.ComponentModel.DefaultValue(4294967295)]
+        [global::System.ComponentModel.DefaultValue(4294967295u)]
         public uint platforms_to_sync
         {
-            get => __pbn__platforms_to_sync ?? 4294967295;
+            get => __pbn__platforms_to_sync ?? 4294967295u;
             set => __pbn__platforms_to_sync = value;
         }
         public bool ShouldSerializeplatforms_to_sync() => __pbn__platforms_to_sync != null;
@@ -24610,10 +24610,10 @@ namespace NetHookAnalyzer2.Protobufs
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
@@ -24702,10 +24702,10 @@ namespace NetHookAnalyzer2.Protobufs
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eResult
         {
-            get => __pbn__eResult ?? 2;
+            get => __pbn__eResult ?? 2u;
             set => __pbn__eResult = value;
         }
         public bool ShouldSerializeeResult() => __pbn__eResult != null;
@@ -25679,10 +25679,10 @@ namespace NetHookAnalyzer2.Protobufs
         private ulong? __pbn__steam_id_clan;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
@@ -25728,10 +25728,10 @@ namespace NetHookAnalyzer2.Protobufs
         private ulong? __pbn__steam_id_candidate;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
@@ -26420,10 +26420,10 @@ namespace NetHookAnalyzer2.Protobufs
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint device_id
         {
-            get => __pbn__device_id ?? 0;
+            get => __pbn__device_id ?? 0u;
             set => __pbn__device_id = value;
         }
         public bool ShouldSerializedevice_id() => __pbn__device_id != null;
@@ -26730,10 +26730,10 @@ namespace NetHookAnalyzer2.Protobufs
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint id
         {
-            get => __pbn__id ?? 0;
+            get => __pbn__id ?? 0u;
             set => __pbn__id = value;
         }
         public bool ShouldSerializeid() => __pbn__id != null;
@@ -26878,10 +26878,10 @@ namespace NetHookAnalyzer2.Protobufs
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint id
         {
-            get => __pbn__id ?? 0;
+            get => __pbn__id ?? 0u;
             set => __pbn__id = value;
         }
         public bool ShouldSerializeid() => __pbn__id != null;
@@ -27044,7 +27044,7 @@ namespace NetHookAnalyzer2.Protobufs
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
         public ulong jobid_source
         {
-            get => __pbn__jobid_source ?? 18446744073709551615;
+            get => __pbn__jobid_source ?? 18446744073709551615ul;
             set => __pbn__jobid_source = value;
         }
         public bool ShouldSerializejobid_source() => __pbn__jobid_source != null;
@@ -27055,7 +27055,7 @@ namespace NetHookAnalyzer2.Protobufs
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
         public ulong jobid_target
         {
-            get => __pbn__jobid_target ?? 18446744073709551615;
+            get => __pbn__jobid_target ?? 18446744073709551615ul;
             set => __pbn__jobid_target = value;
         }
         public bool ShouldSerializejobid_target() => __pbn__jobid_target != null;
@@ -27130,7 +27130,7 @@ namespace NetHookAnalyzer2.Protobufs
         [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
         public ulong messageid
         {
-            get => __pbn__messageid ?? 18446744073709551615;
+            get => __pbn__messageid ?? 18446744073709551615ul;
             set => __pbn__messageid = value;
         }
         public bool ShouldSerializemessageid() => __pbn__messageid != null;
@@ -27252,10 +27252,10 @@ namespace NetHookAnalyzer2.Protobufs
         private string __pbn__wg_token;
 
         [global::ProtoBuf.ProtoMember(31)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint launcher_type
         {
-            get => __pbn__launcher_type ?? 0;
+            get => __pbn__launcher_type ?? 0u;
             set => __pbn__launcher_type = value;
         }
         public bool ShouldSerializelauncher_type() => __pbn__launcher_type != null;
@@ -27263,10 +27263,10 @@ namespace NetHookAnalyzer2.Protobufs
         private uint? __pbn__launcher_type;
 
         [global::ProtoBuf.ProtoMember(32)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint realm
         {
-            get => __pbn__realm ?? 0;
+            get => __pbn__realm ?? 0u;
             set => __pbn__realm = value;
         }
         public bool ShouldSerializerealm() => __pbn__realm != null;
@@ -30153,10 +30153,10 @@ namespace NetHookAnalyzer2.Protobufs
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint id
         {
-            get => __pbn__id ?? 0;
+            get => __pbn__id ?? 0u;
             set => __pbn__id = value;
         }
         public bool ShouldSerializeid() => __pbn__id != null;
@@ -30164,10 +30164,10 @@ namespace NetHookAnalyzer2.Protobufs
         private uint? __pbn__id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint drive_id
         {
-            get => __pbn__drive_id ?? 0;
+            get => __pbn__drive_id ?? 0u;
             set => __pbn__drive_id = value;
         }
         public bool ShouldSerializedrive_id() => __pbn__drive_id != null;
@@ -30288,10 +30288,10 @@ namespace NetHookAnalyzer2.Protobufs
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint id
         {
-            get => __pbn__id ?? 0;
+            get => __pbn__id ?? 0u;
             set => __pbn__id = value;
         }
         public bool ShouldSerializeid() => __pbn__id != null;
@@ -32494,10 +32494,10 @@ namespace NetHookAnalyzer2.Protobufs
         private int? __pbn__type;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;
@@ -32546,10 +32546,10 @@ namespace NetHookAnalyzer2.Protobufs
         private int? __pbn__type;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint eresult
         {
-            get => __pbn__eresult ?? 2;
+            get => __pbn__eresult ?? 2u;
             set => __pbn__eresult = value;
         }
         public bool ShouldSerializeeresult() => __pbn__eresult != null;

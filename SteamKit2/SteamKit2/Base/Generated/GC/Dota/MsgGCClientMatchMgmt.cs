@@ -28,10 +28,10 @@ namespace SteamKit2.GC.Dota.Internal
         private string __pbn__key;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(4294967295)]
+        [global::System.ComponentModel.DefaultValue(4294967295u)]
         public uint matchgroups
         {
-            get => __pbn__matchgroups ?? 4294967295;
+            get => __pbn__matchgroups ?? 4294967295u;
             set => __pbn__matchgroups = value;
         }
         public bool ShouldSerializematchgroups() => __pbn__matchgroups != null;
@@ -49,10 +49,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__client_version;
 
         [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue(4294967295)]
+        [global::System.ComponentModel.DefaultValue(4294967295u)]
         public uint game_modes
         {
-            get => __pbn__game_modes ?? 4294967295;
+            get => __pbn__game_modes ?? 4294967295u;
             set => __pbn__game_modes = value;
         }
         public bool ShouldSerializegame_modes() => __pbn__game_modes != null;
@@ -71,10 +71,10 @@ namespace SteamKit2.GC.Dota.Internal
         private MatchType? __pbn__match_type;
 
         [global::ProtoBuf.ProtoMember(7)]
-        [global::System.ComponentModel.DefaultValue(4294967295)]
+        [global::System.ComponentModel.DefaultValue(4294967295u)]
         public uint matchlanguages
         {
-            get => __pbn__matchlanguages ?? 4294967295;
+            get => __pbn__matchlanguages ?? 4294967295u;
             set => __pbn__matchlanguages = value;
         }
         public bool ShouldSerializematchlanguages() => __pbn__matchlanguages != null;
@@ -226,10 +226,10 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2)]
+        [global::System.ComponentModel.DefaultValue(2u)]
         public uint legacy_generic_eresult
         {
-            get => __pbn__legacy_generic_eresult ?? 2;
+            get => __pbn__legacy_generic_eresult ?? 2u;
             set => __pbn__legacy_generic_eresult = value;
         }
         public bool ShouldSerializelegacy_generic_eresult() => __pbn__legacy_generic_eresult != null;
@@ -1483,10 +1483,10 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [global::System.ComponentModel.DefaultValue(0u)]
         public uint server_region
         {
-            get => __pbn__server_region ?? 0;
+            get => __pbn__server_region ?? 0u;
             set => __pbn__server_region = value;
         }
         public bool ShouldSerializeserver_region() => __pbn__server_region != null;
