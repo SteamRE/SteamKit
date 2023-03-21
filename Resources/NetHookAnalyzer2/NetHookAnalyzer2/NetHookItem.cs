@@ -110,6 +110,7 @@ namespace NetHookAnalyzer2
 				case SteamKit2.EMsg.ServiceMethod:
 				case SteamKit2.EMsg.ServiceMethodSendToClient:
 				case SteamKit2.EMsg.ServiceMethodCallFromClient:
+				case SteamKit2.EMsg.ServiceMethodCallFromClientNonAuthed:
 				case SteamKit2.EMsg.ServiceMethodResponse:
 				{
 					using var stream = OpenStream();
