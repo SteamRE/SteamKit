@@ -5,48 +5,21 @@ using SteamKit2;
 
 namespace NetHookAnalyzer2
 {
-	class NetHookItemTreeBuilder
+	static class NetHookItemTreeBuilder
 	{
-		public NetHookItemTreeBuilder(NetHookItem item)
-		{
-			this.item = item;
-		}
-
-		readonly NetHookItem item;
-
-
-		public ISpecialization[] Specializations
-		{
-			get;
-			set;
-		}
-
-		TreeNode Node { get; set; }
-
-		public TreeNode BuildTree(bool displayUnsetFields)
-		{
-			if (Node != null)
-			{
-				return Node;
-			}
-
-			CreateTreeNode(displayUnsetFields);
-			return Node;
-		}
-
-		void CreateTreeNode(bool displayUnsetFields)
+		public static TreeNode BuildTree(NetHookItem item, ISpecialization[] specializations, bool displayUnsetFields)
 		{
 			try
 			{
-				Node = CreateTreeNodeCore(displayUnsetFields);
+				return CreateTreeNodeCore(item, specializations, displayUnsetFields);
 			}
 			catch (Exception ex)
 			{
-				Node = new TreeNode($"{ex.GetType().Name} encountered whilst parsing item: {ex.Message}");
+				return new TreeNode($"{ex.GetType().Name} encountered whilst parsing item: {ex.Message}");
 			}
 		}
 
-		TreeNode CreateTreeNodeCore(bool displayUnsetFields)
+		static TreeNode CreateTreeNodeCore(NetHookItem item, ISpecialization[] specializations, bool displayUnsetFields)
 		{
 			var configuration = new TreeNodeObjectExplorerConfiguration { ShowUnsetFields = displayUnsetFields };
 
@@ -55,35 +28,35 @@ namespace NetHookAnalyzer2
 			var node = BuildInfoNode(rawEMsg);
 			node.Expand();
 
-			node.Nodes.Add(new TreeNodeObjectExplorer("Header", header, configuration).TreeNode);
+			node.Nodes.Add(new TreeNodeObjectExplorer("Header", header, configuration));
 
-			var bodyNode = new TreeNodeObjectExplorer("Body", body, configuration).TreeNode;
+			var bodyNode = new TreeNodeObjectExplorer("Body", body, configuration);
 			node.Nodes.Add(bodyNode);
 
 			if (payload != null && payload.Length > 0)
 			{
-				node.Nodes.Add(new TreeNodeObjectExplorer("Payload", payload, configuration).TreeNode);
+				node.Nodes.Add(new TreeNodeObjectExplorer("Payload", payload, configuration));
 			}
 
-			if (Specializations != null)
+			if (specializations != null)
 			{
 				var objectsToSpecialize = new[] { body };
 				while (objectsToSpecialize.Any())
 				{
-					var specializations = objectsToSpecialize.SelectMany(o => Specializations.SelectMany(x => x.ReadExtraObjects(o)));
+					var extraSpecializations = objectsToSpecialize.SelectMany(o => specializations.SelectMany(x => x.ReadExtraObjects(o)));
 
-					if (!specializations.Any())
+					if (!extraSpecializations.Any())
 					{
 						break;
 					}
 
 					bodyNode.Collapse(ignoreChildren: true);
 
-					var extraNodes = specializations.Select(x => new TreeNodeObjectExplorer(x.Key, x.Value, configuration).TreeNode).ToArray();
+					var extraNodes = extraSpecializations.Select(x => new TreeNodeObjectExplorer(x.Key, x.Value, configuration)).ToArray();
 					node.Nodes.AddRange(extraNodes);
 
 					// Let the specializers examine any new message objects.
-					objectsToSpecialize = specializations.Select(x => x.Value).ToArray();
+					objectsToSpecialize = extraSpecializations.Select(x => x.Value).ToArray();
 				}
 			}
 

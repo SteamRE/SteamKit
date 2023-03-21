@@ -13,7 +13,7 @@ using SteamKit2.Internal;
 
 namespace NetHookAnalyzer2
 {
-	class TreeNodeObjectExplorer
+	class TreeNodeObjectExplorer : TreeNode
 	{
 		public TreeNodeObjectExplorer(string name, object value, TreeNodeObjectExplorerConfiguration configuration)
 		{
@@ -21,32 +21,33 @@ namespace NetHookAnalyzer2
 			this.value = value;
 			this.configuration = configuration;
 
-			this.treeNode = new TreeNode();
-
 			if (configuration.IsUnsetField)
 			{
-				treeNode.ForeColor = System.Drawing.Color.DarkGray;
+				ForeColor = System.Drawing.Color.DarkGray;
 			}
-			this.treeNode.ContextMenuStrip = new ContextMenuStrip();
-			this.treeNode.ContextMenuStrip.Opening += OnContextMenuStripOpening;
 
 			Initialize();
+		}
+
+		public void CreateContextMenu()
+		{
+			if (this.ContextMenuStrip != null)
+			{
+				return;
+			}
+
+			this.ContextMenuStrip = new ContextMenuStrip();
+			InitializeContextMenu();
 		}
 
 		readonly string name;
 		readonly object value;
 		TreeNodeObjectExplorerConfiguration configuration;
-		readonly TreeNode treeNode;
 		string clipboardCopyOverride;
-
-		public TreeNode TreeNode
-		{
-			get { return treeNode; }
-		}
 
 		ToolStripItemCollection ContextMenuItems
 		{
-			get { return TreeNode.ContextMenuStrip.Items; }
+			get { return this.ContextMenuStrip.Items; }
 		}
 
 		string ValueForDisplay
@@ -76,7 +77,7 @@ namespace NetHookAnalyzer2
 		}
 		void CopyNameAndValueToClipboard(object sender, EventArgs e)
 		{
-			Clipboard.SetText(TreeNode.Text, TextDataFormat.Text);
+			Clipboard.SetText(this.Text, TextDataFormat.Text);
 		}
 
 		#endregion
@@ -134,10 +135,10 @@ namespace NetHookAnalyzer2
 			}
 			else
 			{
-				SetValueForDisplay(null, childNodes: new[] { new TreeNodeObjectExplorer(kv.Name, kv, configuration).TreeNode });
+				SetValueForDisplay(null, childNodes: new[] { new TreeNodeObjectExplorer(kv.Name, kv, configuration) });
 			}
 
-			TreeNode.ExpandAll();
+			this.ExpandAll();
 		}
 
 		void DisplayDataAsProtobuf( object sender, EventArgs e )
@@ -149,14 +150,14 @@ namespace NetHookAnalyzer2
 				using var ms = new MemoryStream( data );
 				var dictionary = ProtoBufFieldReader.ReadProtobuf( ms );
 
-				SetValueForDisplay( null, childNodes: new[] { new TreeNodeObjectExplorer( "Protobuf", dictionary, configuration ).TreeNode } );
+				SetValueForDisplay( null, childNodes: new[] { new TreeNodeObjectExplorer( "Protobuf", dictionary, configuration ) } );
 			}
 			catch
 			{
 				SetValueForDisplay( "Not a valid Protobuf object!" );
 			}
 
-			TreeNode.ExpandAll();
+			this.ExpandAll();
 		}
 
 		#endregion
@@ -215,10 +216,10 @@ namespace NetHookAnalyzer2
 			var gid = new GlobalID((ulong)Convert.ChangeType(value, typeof(ulong)));
 			var children = new[]
 			{
-				new TreeNodeObjectExplorer("Box", gid.BoxID, configuration).TreeNode,
-				new TreeNodeObjectExplorer("Process ID", gid.ProcessID, configuration).TreeNode,
-				new TreeNodeObjectExplorer("Sequential Count", gid.SequentialCount, configuration).TreeNode,
-				new TreeNodeObjectExplorer("StartTime", gid.StartTime.ToString("yyyy-MM-dd HH:mm:ss"), configuration).TreeNode
+				new TreeNodeObjectExplorer("Box", gid.BoxID, configuration),
+				new TreeNodeObjectExplorer("Process ID", gid.ProcessID, configuration),
+				new TreeNodeObjectExplorer("Sequential Count", gid.SequentialCount, configuration),
+				new TreeNodeObjectExplorer("StartTime", gid.StartTime.ToString("yyyy-MM-dd HH:mm:ss"), configuration)
 			};
 
 			SetValueForDisplay(null, childNodes: children);
@@ -301,7 +302,7 @@ namespace NetHookAnalyzer2
 
 		#endregion
 
-		void OnContextMenuStripOpening(object sender, CancelEventArgs e )
+		void InitializeContextMenu()
 		{
 			if (ContextMenuItems.Count > 0)
 			{
@@ -429,8 +430,6 @@ namespace NetHookAnalyzer2
 					}
 				}
 			}
-
-			e.Cancel = false;
 		}
 
 		void SetValueForDisplay(string valueForDisplay, string clipboardOverrideValue = null, TreeNode[] childNodes = null)
@@ -438,19 +437,19 @@ namespace NetHookAnalyzer2
 			this.ValueForDisplay = valueForDisplay;
 			this.clipboardCopyOverride = clipboardOverrideValue;
 
-			TreeNode.Nodes.Clear();
+			this.Nodes.Clear();
 			if (childNodes != null)
 			{
-				TreeNode.Nodes.AddRange(childNodes);
+				this.Nodes.AddRange(childNodes);
 			}
 
 			if (childNodes != null && childNodes.Length > 100)
 			{
-				TreeNode.Collapse(ignoreChildren: true);
+				this.Collapse(ignoreChildren: true);
 			}
 			else
 			{
-				TreeNode.Expand();
+				this.Expand();
 			}
 		}
 
@@ -466,7 +465,7 @@ namespace NetHookAnalyzer2
 				textToDisplay = string.Format("{0}: {1}", name, ValueForDisplay);
 			}
 
-			TreeNode.Text = textToDisplay;
+			this.Text = textToDisplay;
 		}
 
 		void Initialize()
@@ -517,7 +516,7 @@ namespace NetHookAnalyzer2
 					var children = new List<TreeNode>();
 					foreach (var child in kv.Children)
 					{
-						children.Add(new TreeNodeObjectExplorer(child.Name, child, configuration).TreeNode);
+						children.Add(new TreeNodeObjectExplorer(child.Name, child, configuration));
 					}
 
 					SetValueForDisplay(null, childNodes: children.ToArray());
@@ -553,7 +552,7 @@ namespace NetHookAnalyzer2
 				{
 					var childName = string.Format("[ {0} ]", entry.Key.ToString());
 					var childObjectExplorer = new TreeNodeObjectExplorer(childName, entry.Value, configuration);
-					childNodes.Add(childObjectExplorer.TreeNode);
+					childNodes.Add(childObjectExplorer);
 				}
 
 				SetValueForDisplay(null, childNodes: childNodes.ToArray());
@@ -574,7 +573,7 @@ namespace NetHookAnalyzer2
 
 					var childName = string.Format("[ {0} ]", index);
 					var childObjectExplorer = new TreeNodeObjectExplorer(childName, childObject, configuration);
-					childNodes.Add(childObjectExplorer.TreeNode);
+					childNodes.Add(childObjectExplorer);
 
 					index++;
 				}
@@ -614,7 +613,7 @@ namespace NetHookAnalyzer2
 						childConfiguration.IsUnsetField = !valueIsSet;
 
 						var childObjectExplorer = new TreeNodeObjectExplorer(childName, childObject, childConfiguration);
-						childNodes.Add(childObjectExplorer.TreeNode);
+						childNodes.Add(childObjectExplorer);
 					}
 				}
 

@@ -436,7 +436,7 @@ namespace NetHookAnalyzer2
 
 		TreeNode BuildTree(NetHookItem item)
 		{
-			return new NetHookItemTreeBuilder(item) { Specializations = specializations }.BuildTree(showAllCheckBox.Checked);
+			return NetHookItemTreeBuilder.BuildTree( item, specializations, showAllCheckBox.Checked );
 		}
 
 		void OnAutomaticallySelectNewItemsCheckedChanged(object sender, EventArgs e)
@@ -462,6 +462,14 @@ namespace NetHookAnalyzer2
 				lastItem.Selected = true;
 				lastItem.Focused = true;
 				lastItem.EnsureVisible();
+			}
+		}
+
+		private void OnItemExplorerTreeViewNodeMouseClick( object sender, TreeNodeMouseClickEventArgs e )
+		{
+			if ( e.Button == MouseButtons.Right && e.Node is TreeNodeObjectExplorer objectExplorer )
+			{
+				objectExplorer.CreateContextMenu();
 			}
 		}
 	}
