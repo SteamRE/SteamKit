@@ -138,6 +138,7 @@ jobs:
 
   gh-packages:
     name: Publish to GitHub Packages
+    if: github.event_name != 'pull_request'
     permissions:
       packages: write
 
