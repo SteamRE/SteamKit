@@ -135,3 +135,27 @@ jobs:
       with:
         name: NetHook2
         path: 'Resources/NetHook2/Release/*.dll'
+
+  gh-packages:
+    name: Publish to GitHub Packages
+    permissions:
+      packages: write
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Create NuGet Package
+      run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
+
+    - name: Publish NuGet Package to GitHub Packages
+      run: |
+        dotnet nuget push SteamKit2/SteamKit2/bin/Release/SteamKit2.*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/SteamRE/index.json
