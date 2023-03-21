@@ -5,11 +5,11 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <SteamKitVersion Condition=" '$(GITHUB_RUN_NUMBER)' != ''">$(SteamKitBaseVersion).$(GITHUB_RUN_NUMBER)</SteamKitVersion>
-        <SteamKitVersion Condition=" '$(GITHUB_RUN_NUMBER)' == ''">$(SteamKitBaseVersion).0</SteamKitVersion>
+        <SteamKitVersion Condition=" '$(GITHUB_RUN_NUMBER)' != ''">$(SteamKitBaseVersion)-Alpha.$(GITHUB_RUN_NUMBER)</SteamKitVersion>
+        <SteamKitVersion Condition=" '$(GITHUB_RUN_NUMBER)' == ''">$(SteamKitBaseVersion)</SteamKitVersion>
 
         <AssemblyVersion>$(SteamKitBaseVersion)</AssemblyVersion>
-        <FileVersion>$(SteamKitVersion)</FileVersion>
+        <FileVersion>$(SteamKitBaseVersion)</FileVersion>
         <Version>$(SteamKitVersion)</Version>
 
         <GitHubActionsRef Condition="$(GITHUB_REF.StartsWith('refs/heads/'))">$(GITHUB_REF.Substring(11))</GitHubActionsRef>
