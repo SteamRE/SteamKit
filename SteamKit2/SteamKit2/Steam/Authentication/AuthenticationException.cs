@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SteamKit2
+namespace SteamKit2.Authentication
 {
     /// <summary>
     /// Thrown when <see cref="SteamAuthentication"/> fails to authenticate.

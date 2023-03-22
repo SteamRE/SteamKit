@@ -76,7 +76,7 @@ namespace SteamKit2
             /// <value>The sentry file hash.</value>
             public byte[]? SentryFileHash { get; set; }
             /// <summary>
-            /// Gets or sets the access token used to login. This a token that has been provided after a successful login using <see cref="SteamAuthentication"/>.
+            /// Gets or sets the access token used to login. This a token that has been provided after a successful login using <see cref="Authentication"/>.
             /// </summary>
             /// <value>The access token.</value>
             public string? AccessToken { get; set; }

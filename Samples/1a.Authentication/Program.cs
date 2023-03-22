@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.Json;
 using SteamKit2;
+using SteamKit2.Authentication;
 
 if ( args.Length < 2 )
 {
@@ -16,9 +17,6 @@ var pass = args[ 1 ];
 var steamClient = new SteamClient();
 // create the callback manager which will route callbacks to function calls
 var manager = new CallbackManager( steamClient );
-
-// get the authentication handler, which used for authenticating with Steam
-var auth = steamClient.GetHandler<SteamAuthentication>();
 
 // get the steamuser handler, which is used for logging on after successfully connecting
 var steamUser = steamClient.GetHandler<SteamUser>();
@@ -50,8 +48,11 @@ async void OnConnected( SteamClient.ConnectedCallback callback )
 {
     Console.WriteLine( "Connected to Steam! Logging in '{0}'...", user );
 
+    // get the authentication handler, which used for authenticating with Steam
+    var auth = new SteamAuthentication( steamClient );
+
     // Begin authenticating via credentials
-    var authSession = await auth.BeginAuthSessionViaCredentials( new SteamAuthentication.AuthSessionDetails
+    var authSession = await auth.BeginAuthSessionViaCredentialsAsync( new AuthSessionDetails
     {
         Username = user,
         Password = pass,

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace SteamKit2
+namespace SteamKit2.Authentication
 {
     /// <summary>
     /// This is a default implementation of <see cref="IAuthenticator"/> to ease of use.

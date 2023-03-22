@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace SteamKit2
+namespace SteamKit2.Authentication
 {
     /// <summary>
     /// Represents an authenticator to be used with <see cref="SteamAuthentication"/>.

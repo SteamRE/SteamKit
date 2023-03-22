@@ -1,14 +1,12 @@
 ﻿using System;
 using QRCoder;
 using SteamKit2;
+using SteamKit2.Authentication;
 
 // create our steamclient instance
 var steamClient = new SteamClient();
 // create the callback manager which will route callbacks to function calls
 var manager = new CallbackManager( steamClient );
-
-// get the authentication handler, which used for authenticating with Steam
-var auth = steamClient.GetHandler<SteamAuthentication>();
 
 // get the steamuser handler, which is used for logging on after successfully connecting
 var steamUser = steamClient.GetHandler<SteamUser>();
@@ -38,8 +36,11 @@ while ( isRunning )
 
 async void OnConnected( SteamClient.ConnectedCallback callback )
 {
+    // get the authentication handler, which used for authenticating with Steam
+    var auth = new SteamAuthentication( steamClient );
+
     // Start an authentication session by requesting a link
-    var authSession = await auth.BeginAuthSessionViaQR( new SteamAuthentication.AuthSessionDetails() );
+    var authSession = await auth.BeginAuthSessionViaQRAsync( new AuthSessionDetails() );
 
     // Steam will periodically refresh the challenge url, this callback allows you to draw a new qr code
     authSession.ChallengeURLChanged = () =>
@@ -97,7 +98,7 @@ void OnLoggedOff( SteamUser.LoggedOffCallback callback )
     Console.WriteLine( "Logged off of Steam: {0}", callback.Result );
 }
 
-void DrawQRCode( SteamAuthentication.QrAuthSession authSession )
+void DrawQRCode( QrAuthSession authSession )
 {
     Console.WriteLine( $"Challenge URL: {authSession.ChallengeURL}" );
     Console.WriteLine();
