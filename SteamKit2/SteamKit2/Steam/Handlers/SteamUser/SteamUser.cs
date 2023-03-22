@@ -301,10 +301,13 @@ namespace SteamKit2
             {
                 throw new ArgumentNullException( nameof( details ) );
             }
+
+#pragma warning disable CS0618 // LoginKey is obsolete
             if ( string.IsNullOrEmpty( details.Username ) || ( string.IsNullOrEmpty( details.Password ) && string.IsNullOrEmpty( details.LoginKey ) && string.IsNullOrEmpty( details.AccessToken ) ) )
             {
                 throw new ArgumentException( "LogOn requires a username and password to be set in 'details'." );
             }
+
             if ( !string.IsNullOrEmpty( details.LoginKey ) && !details.ShouldRememberPassword )
             {
                 // Prevent consumers from screwing this up.
@@ -312,6 +315,8 @@ namespace SteamKit2
                 // The inverse is not applicable (you can log in with should_remember_password and no login_key).
                 throw new ArgumentException( "ShouldRememberPassword is required to be set to true in order to use LoginKey." );
             }
+#pragma warning restore CS0618 // LoginKey is obsolete
+
             if ( !this.Client.IsConnected )
             {
                 this.Client.PostCallback( new LoggedOnCallback( EResult.NoConnection ) );
@@ -365,7 +370,10 @@ namespace SteamKit2
             logon.Body.auth_code = details.AuthCode;
             logon.Body.two_factor_code = details.TwoFactorCode;
 
+#pragma warning disable CS0618 // LoginKey is obsolete
             logon.Body.login_key = details.LoginKey;
+#pragma warning restore CS0618 // LoginKey is obsolete
+
             logon.Body.access_token = details.AccessToken;
 
             logon.Body.sha_sentryfile = details.SentryFileHash;
@@ -562,7 +570,9 @@ namespace SteamKit2
         {
             var loginKey = new ClientMsgProtobuf<CMsgClientNewLoginKey>( packetMsg );
 
+#pragma warning disable CS0618 // LoginKey is obsolete
             var callback = new LoginKeyCallback( loginKey.Body );
+#pragma warning restore CS0618 // LoginKey is obsolete
             this.Client.PostCallback( callback );
         }
         void HandleLogOnResponse( IPacketMsg packetMsg )
