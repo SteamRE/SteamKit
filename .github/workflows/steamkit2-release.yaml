@@ -4,6 +4,9 @@ on:
   release:
     types: [ published ]
 
+permissions:
+  packages: write
+
 jobs:
   publish-nupkg:
     name: Publish NuGet Package
@@ -12,6 +15,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        submodules: recursive
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3
@@ -41,3 +46,7 @@ jobs:
       run: |
         nuget setapikey ${{ secrets.NUGET_API_KEY }}
         nuget push SteamKit2/SteamKit2/bin/Release/SteamKit2.${{ github.event.release.tag_name }}.nupkg -Source https://api.nuget.org/v3/index.json
+
+    - name: Publish NuGet Package to GitHub Packages
+      run: |
+        dotnet nuget push SteamKit2/SteamKit2/bin/Release/SteamKit2.${{ github.event.release.tag_name }}.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/SteamRE/index.json
