@@ -11,7 +11,7 @@ namespace SteamKit2
     public class UserConsoleAuthenticator : IAuthenticator
     {
         /// <inheritdoc />
-        public Task<string> ProvideDeviceCode( bool previousCodeWasIncorrect )
+        public Task<string> GetDeviceCodeAsync( bool previousCodeWasIncorrect )
         {
             if ( previousCodeWasIncorrect )
             {
@@ -24,6 +24,11 @@ namespace SteamKit2
             {
                 Console.Error.Write( "STEAM GUARD! Please enter your 2-factor auth code from your authenticator app: " );
                 code = Console.ReadLine()?.Trim();
+
+                if( code == null )
+                {
+                    break;
+                }
             }
             while ( string.IsNullOrEmpty( code ) );
 
@@ -31,7 +36,7 @@ namespace SteamKit2
         }
 
         /// <inheritdoc />
-        public Task<string> ProvideEmailCode( string email, bool previousCodeWasIncorrect )
+        public Task<string> GetEmailCodeAsync( string email, bool previousCodeWasIncorrect )
         {
             if ( previousCodeWasIncorrect )
             {
@@ -44,6 +49,11 @@ namespace SteamKit2
             {
                 Console.Error.Write( $"STEAM GUARD! Please enter the auth code sent to the email at {email}: " );
                 code = Console.ReadLine()?.Trim();
+
+                if ( code == null )
+                {
+                    break;
+                }
             }
             while ( string.IsNullOrEmpty( code ) );
 
@@ -51,7 +61,7 @@ namespace SteamKit2
         }
 
         /// <inheritdoc />
-        public Task<bool> AcceptDeviceConfirmation()
+        public Task<bool> AcceptDeviceConfirmationAsync()
         {
             Console.Error.WriteLine( "STEAM GUARD! Use the Steam Mobile App to confirm your sign in..." );
 

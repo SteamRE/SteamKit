@@ -83,7 +83,6 @@ namespace SteamKit2
             // notice: SteamFriends should be added before SteamUser due to AccountInfoCallback
             this.AddHandler( new SteamFriends() );
             this.AddHandler( new SteamUser() );
-            this.AddHandler( new SteamAuthentication() );
             this.AddHandler( new SteamApps() );
             this.AddHandler( new SteamGameCoordinator() );
             this.AddHandler( new SteamGameServer() );
@@ -93,6 +92,7 @@ namespace SteamKit2
             this.AddHandler( new SteamWorkshop() );
             this.AddHandler( new SteamTrading() );
             this.AddHandler( new SteamUnifiedMessages() );
+            this.AddHandler( new SteamAuthentication() );
             this.AddHandler( new SteamScreenshots() );
             this.AddHandler( new SteamMatchmaking() );
             this.AddHandler( new SteamNetworking() );

@@ -5,12 +5,20 @@ namespace SteamKit2
     /// <summary>
     /// Thrown when <see cref="SteamAuthentication"/> fails to authenticate.
     /// </summary>
-    public class AuthenticationException : Exception
+    [Serializable]
+    public sealed class AuthenticationException : Exception
     {
         /// <summary>
         /// Gets the result of the authentication request.
         /// </summary>
-        public EResult Result { get; private set; }
+        public EResult Result { get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AuthenticationException"/> class.
+        /// </summary>
+        public AuthenticationException()
+        { 
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthenticationException"/> class.

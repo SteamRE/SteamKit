@@ -4,7 +4,7 @@ using SteamKit2;
 
 if ( args.Length < 2 )
 {
-    Console.WriteLine( "Sample1: No username and password specified!" );
+    Console.Error.WriteLine( "Sample1a: No username and password specified!" );
     return;
 }
 
@@ -60,7 +60,7 @@ async void OnConnected( SteamClient.ConnectedCallback callback )
     } );
 
     // Starting polling Steam for authentication response
-    var pollResponse = await authSession.StartPolling();
+    var pollResponse = await authSession.PollingWaitForResultAsync();
 
     // Logon to Steam with the access token we have received
     // Note that we are using RefreshToken for logging on here

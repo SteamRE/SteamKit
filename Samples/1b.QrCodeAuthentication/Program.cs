@@ -55,7 +55,7 @@ async void OnConnected( SteamClient.ConnectedCallback callback )
 
     // Starting polling Steam for authentication response
     // This response is later used to logon to Steam after connecting
-    var pollResponse = await authSession.StartPolling();
+    var pollResponse = await authSession.PollingWaitForResultAsync();
 
     Console.WriteLine( $"Logging in as '{pollResponse.AccountName}'..." );
 

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace SteamKit2
 {
     /// <summary>
-    /// 
+    /// Represents an authenticator to be used with <see cref="SteamAuthentication"/>.
     /// </summary>
     public interface IAuthenticator
     {
@@ -13,7 +13,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="previousCodeWasIncorrect">True when previously provided code was incorrect.</param>
         /// <returns>The 2-factor auth code used to login. This is the code that can be received from the authenticator app.</returns>
-        public Task<string> ProvideDeviceCode( bool previousCodeWasIncorrect );
+        public Task<string> GetDeviceCodeAsync( bool previousCodeWasIncorrect );
 
         /// <summary>
         /// This method is called when the account being logged into uses Steam Guard email authentication. This code is sent to the user's email.
@@ -21,7 +21,7 @@ namespace SteamKit2
         /// <param name="email">The email address that the Steam Guard email was sent to.</param>
         /// <param name="previousCodeWasIncorrect">True when previously provided code was incorrect.</param>
         /// <returns>The Steam Guard auth code used to login.</returns>
-        public Task<string> ProvideEmailCode( string email, bool previousCodeWasIncorrect );
+        public Task<string> GetEmailCodeAsync( string email, bool previousCodeWasIncorrect );
 
         /// <summary>
         /// This method is called when the account being logged has the Steam Mobile App and accepts authentication notification prompts.
@@ -29,6 +29,6 @@ namespace SteamKit2
         /// Return false if you want to fallback to entering a code instead.
         /// </summary>
         /// <returns>Return true to poll until the authentication is accepted, return false to fallback to entering a code.</returns>
-        public Task<bool> AcceptDeviceConfirmation();
+        public Task<bool> AcceptDeviceConfirmationAsync();
     }
 }
