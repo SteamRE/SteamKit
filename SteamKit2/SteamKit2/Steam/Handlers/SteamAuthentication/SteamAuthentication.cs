@@ -61,7 +61,7 @@ namespace SteamKit2
 
             /// <summary>
             /// Gets or sets the website id that the login will be performed for.
-            /// Known values are "Unknown", "Client", "Mobile", "Website", "Store", "Community", "Partner".
+            /// Known values are "Unknown", "Client", "Mobile", "Website", "Store", "Community", "Partner", "SteamStats".
             /// </summary>
             /// <value>The website id.</value>
             public string? WebsiteID { get; set; } = "Client";
@@ -98,7 +98,8 @@ namespace SteamKit2
             /// </summary>
             public string AccessToken { get; set; }
             /// <summary>
-            /// May contain remembered machine ID for future login.
+            /// May contain remembered machine ID for future login, usually when account uses email based Steam Guard.
+            /// Supply it in <see cref="AuthSessionDetails.GuardData"/> for future logins to avoid resending an email. This value should be stored per account.
             /// </summary>
             public string? NewGuardData { get; set; }
 
