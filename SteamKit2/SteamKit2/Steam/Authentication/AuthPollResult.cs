@@ -18,6 +18,7 @@ namespace SteamKit2.Authentication
         public string AccountName { get; }
         /// <summary>
         /// New refresh token.
+        /// This can be provided to <see cref="SteamUser.LogOnDetails.AccessToken"/>.
         /// </summary>
         public string RefreshToken { get; }
         /// <summary>

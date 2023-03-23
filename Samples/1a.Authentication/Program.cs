@@ -48,11 +48,8 @@ async void OnConnected( SteamClient.ConnectedCallback callback )
 {
     Console.WriteLine( "Connected to Steam! Logging in '{0}'...", user );
 
-    // get the authentication handler, which used for authenticating with Steam
-    var auth = new SteamAuthentication( steamClient );
-
     // Begin authenticating via credentials
-    var authSession = await auth.BeginAuthSessionViaCredentialsAsync( new AuthSessionDetails
+    var authSession = await steamClient.Authentication.BeginAuthSessionViaCredentialsAsync( new AuthSessionDetails
     {
         Username = user,
         Password = pass,

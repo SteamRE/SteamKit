@@ -36,11 +36,8 @@ while ( isRunning )
 
 async void OnConnected( SteamClient.ConnectedCallback callback )
 {
-    // get the authentication handler, which used for authenticating with Steam
-    var auth = new SteamAuthentication( steamClient );
-
     // Start an authentication session by requesting a link
-    var authSession = await auth.BeginAuthSessionViaQRAsync( new AuthSessionDetails() );
+    var authSession = await steamClient.Authentication.BeginAuthSessionViaQRAsync( new AuthSessionDetails() );
 
     // Steam will periodically refresh the challenge url, this callback allows you to draw a new qr code
     authSession.ChallengeURLChanged = () =>

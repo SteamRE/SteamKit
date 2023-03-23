@@ -23,7 +23,7 @@ namespace SteamKit2.Authentication
         /// Initializes a new instance of the <see cref="SteamAuthentication"/> class.
         /// </summary>
         /// <param name="steamClient">The <see cref="SteamClient"/> this instance will be associated with.</param>
-        public SteamAuthentication( SteamClient steamClient )
+        internal SteamAuthentication( SteamClient steamClient )
         {
             if ( steamClient == null )
             {
