@@ -17,12 +17,15 @@ namespace SteamKit2.Authentication
     /// </summary>
     public class AuthSession
     {
-        internal SteamAuthentication Authentication { get; }
+        /// <summary>
+        /// Instance of <see cref="SteamAuthentication"/> that created this authentication session.
+        /// </summary>
+        private protected SteamAuthentication Authentication { get; }
 
         /// <summary>
         /// Confirmation types that will be able to confirm the request.
         /// </summary>
-        internal List<CAuthentication_AllowedConfirmation> AllowedConfirmations { get; }
+        List<CAuthentication_AllowedConfirmation> AllowedConfirmations;
 
         /// <summary>
         /// Authenticator object which will be used to handle 2-factor authentication if necessary.
