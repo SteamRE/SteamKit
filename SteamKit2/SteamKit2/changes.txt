@@ -1,4 +1,21 @@
 ------------------------------------------------------------------------------
+v 2.5.0			March 23 2022
+------------------------------------------------------------------------------
+* Added `SteamApps.GetLegacyGameKey`.
+* Added `SteamUser. PlayingSessionStateCallback`.
+* Added ability to serialize depot manifests.
+* Added support for unauthenticated service methods.
+* Added `LogOnDetails.MachineName`.
+* Added support for new Steam authentication system.
+* Improved TCP connection reliability.
+* Update Steam enums and protobufs.
+
+Bug Fixes
+* Fixed nullability annotations on `PersonaStateCallback`.
+* Fixed sending service method notifications.
+
+
+------------------------------------------------------------------------------
 v 2.4.0			December 4 2021
 ------------------------------------------------------------------------------
 * Updated protobuf-net dependency to v3.0.
