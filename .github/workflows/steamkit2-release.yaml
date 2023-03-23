@@ -5,6 +5,7 @@ on:
     types: [ published ]
 
 permissions:
+  contents: write
   packages: write
 
 jobs:
