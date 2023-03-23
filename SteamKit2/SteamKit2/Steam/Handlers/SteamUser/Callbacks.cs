@@ -198,6 +198,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is returned some time after logging onto the network.
         /// </summary>
+        [Obsolete("Steam no longer sends new login keys as of March 2023, use SteamAuthentication.")]
         public sealed class LoginKeyCallback : CallbackMsg
         {
             /// <summary>

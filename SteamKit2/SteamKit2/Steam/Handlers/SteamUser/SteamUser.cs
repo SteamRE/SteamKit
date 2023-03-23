@@ -63,6 +63,7 @@ namespace SteamKit2
             /// Gets or sets the login key used to login. This is a key that has been recieved in a previous Steam sesson by a <see cref="LoginKeyCallback"/>.
             /// </summary>
             /// <value>The login key.</value>
+            [Obsolete( "Steam no longer sends new login keys as of March 2023, use SteamAuthentication." )]
             public string? LoginKey { get; set; }
             /// <summary>
             /// Gets or sets the 'Should Remember Password' flag. This is used in combination with the login key and <see cref="LoginKeyCallback"/> for password-less login.
@@ -74,6 +75,11 @@ namespace SteamKit2
             /// </summary>
             /// <value>The sentry file hash.</value>
             public byte[]? SentryFileHash { get; set; }
+            /// <summary>
+            /// Gets or sets the access token used to login. This a token that has been provided after a successful login using <see cref="Authentication"/>.
+            /// </summary>
+            /// <value>The access token.</value>
+            public string? AccessToken { get; set; }
 
             /// <summary>
             /// Gets or sets the account instance. 1 for the PC instance or 2 for the Console (PS3) instance.
@@ -295,10 +301,13 @@ namespace SteamKit2
             {
                 throw new ArgumentNullException( nameof( details ) );
             }
-            if ( string.IsNullOrEmpty( details.Username ) || ( string.IsNullOrEmpty( details.Password ) && string.IsNullOrEmpty( details.LoginKey ) ) )
+
+#pragma warning disable CS0618 // LoginKey is obsolete
+            if ( string.IsNullOrEmpty( details.Username ) || ( string.IsNullOrEmpty( details.Password ) && string.IsNullOrEmpty( details.LoginKey ) && string.IsNullOrEmpty( details.AccessToken ) ) )
             {
                 throw new ArgumentException( "LogOn requires a username and password to be set in 'details'." );
             }
+
             if ( !string.IsNullOrEmpty( details.LoginKey ) && !details.ShouldRememberPassword )
             {
                 // Prevent consumers from screwing this up.
@@ -306,6 +315,8 @@ namespace SteamKit2
                 // The inverse is not applicable (you can log in with should_remember_password and no login_key).
                 throw new ArgumentException( "ShouldRememberPassword is required to be set to true in order to use LoginKey." );
             }
+#pragma warning restore CS0618 // LoginKey is obsolete
+
             if ( !this.Client.IsConnected )
             {
                 this.Client.PostCallback( new LoggedOnCallback( EResult.NoConnection ) );
@@ -359,7 +370,11 @@ namespace SteamKit2
             logon.Body.auth_code = details.AuthCode;
             logon.Body.two_factor_code = details.TwoFactorCode;
 
+#pragma warning disable CS0618 // LoginKey is obsolete
             logon.Body.login_key = details.LoginKey;
+#pragma warning restore CS0618 // LoginKey is obsolete
+
+            logon.Body.access_token = details.AccessToken;
 
             logon.Body.sha_sentryfile = details.SentryFileHash;
             logon.Body.eresult_sentryfile = ( int )( details.SentryFileHash != null ? EResult.OK : EResult.FileNotFound );
@@ -484,6 +499,7 @@ namespace SteamKit2
         /// Accepts the new Login Key provided by a <see cref="LoginKeyCallback"/>.
         /// </summary>
         /// <param name="callback">The callback containing the new Login Key.</param>
+        [Obsolete( "Steam no longer sends new login keys as of March 2023, use SteamAuthentication." )]
         public void AcceptNewLoginKey( LoginKeyCallback callback )
         {
             if ( callback == null )
@@ -554,7 +570,9 @@ namespace SteamKit2
         {
             var loginKey = new ClientMsgProtobuf<CMsgClientNewLoginKey>( packetMsg );
 
+#pragma warning disable CS0618 // LoginKey is obsolete
             var callback = new LoginKeyCallback( loginKey.Body );
+#pragma warning restore CS0618 // LoginKey is obsolete
             this.Client.PostCallback( callback );
         }
         void HandleLogOnResponse( IPacketMsg packetMsg )
