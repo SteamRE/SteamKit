@@ -119,7 +119,7 @@ namespace SteamKit2.Authentication
             }
 
             // Encrypt the password
-            var publicKey = await GetPasswordRSAPublicKeyAsync( details.Username! );
+            var publicKey = await GetPasswordRSAPublicKeyAsync( details.Username! ).ConfigureAwait( false );
             var rsaParameters = new RSAParameters
             {
                 Modulus = Utils.DecodeHexString( publicKey.publickey_mod ),

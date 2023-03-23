@@ -29,7 +29,8 @@ namespace SteamKit2.Authentication
             ChallengeURL = response.challenge_url;
         }
 
-        internal override void HandlePollAuthSessionStatusResponse( CAuthentication_PollAuthSessionStatus_Response response )
+        /// <inheritdoc/>
+        protected override void HandlePollAuthSessionStatusResponse( CAuthentication_PollAuthSessionStatus_Response response )
         {
             base.HandlePollAuthSessionStatusResponse( response );
 

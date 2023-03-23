@@ -57,7 +57,7 @@ namespace SteamKit2.Authentication
         /// <returns>An object containing tokens which can be used to login to Steam.</returns>
         /// <exception cref="InvalidOperationException">Thrown when an invalid state occurs, such as no supported confirmation methods are available.</exception>
         /// <exception cref="AuthenticationException">Thrown when polling fails.</exception>
-        public async Task<AuthPollResult> PollingWaitForResultAsync( CancellationToken? cancellationToken = null )
+        public async Task<AuthPollResult> PollingWaitForResultAsync( CancellationToken cancellationToken = default )
         {
             var pollLoop = false;
             var preferredConfirmation = AllowedConfirmations.FirstOrDefault();
@@ -71,7 +71,7 @@ namespace SteamKit2.Authentication
             // simply poll until confirmation is accepted, or whether they want to fallback to the next preferred confirmation type.
             if ( Authenticator != null && preferredConfirmation.confirmation_type == EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceConfirmation )
             {
-                var prefersToPollForConfirmation = await Authenticator.AcceptDeviceConfirmationAsync();
+                var prefersToPollForConfirmation = await Authenticator.AcceptDeviceConfirmationAsync().ConfigureAwait( false );
 
                 if ( !prefersToPollForConfirmation )
                 {
@@ -114,7 +114,7 @@ namespace SteamKit2.Authentication
 
                     do
                     {
-                        cancellationToken?.ThrowIfCancellationRequested();
+                        cancellationToken.ThrowIfCancellationRequested();
 
                         try
                         {
@@ -125,16 +125,16 @@ namespace SteamKit2.Authentication
                                 _ => throw new NotImplementedException(),
                             };
 
-                            var code = await task;
+                            var code = await task.ConfigureAwait( false );
 
-                            cancellationToken?.ThrowIfCancellationRequested();
+                            cancellationToken.ThrowIfCancellationRequested();
 
                             if ( string.IsNullOrEmpty( code ) )
                             {
                                 throw new InvalidOperationException( "No code was provided by the authenticator." );
                             }
 
-                            await credentialsAuthSession.SendSteamGuardCodeAsync( code, preferredConfirmation.confirmation_type );
+                            await credentialsAuthSession.SendSteamGuardCodeAsync( code, preferredConfirmation.confirmation_type ).ConfigureAwait( false );
 
                             waitingForValidCode = false;
                         }
@@ -169,9 +169,9 @@ namespace SteamKit2.Authentication
 
             if ( !pollLoop )
             {
-                cancellationToken?.ThrowIfCancellationRequested();
+                cancellationToken.ThrowIfCancellationRequested();
 
-                var pollResponse = await PollAuthSessionStatusAsync();
+                var pollResponse = await PollAuthSessionStatusAsync().ConfigureAwait( false );
 
                 if ( pollResponse == null )
                 {
@@ -183,16 +183,9 @@ namespace SteamKit2.Authentication
 
             while ( true )
             {
-                if ( cancellationToken is CancellationToken nonNullCancellationToken )
-                {
-                    await Task.Delay( PollingInterval, nonNullCancellationToken );
-                }
-                else
-                {
-                    await Task.Delay( PollingInterval );
-                }
+                await Task.Delay( PollingInterval, cancellationToken ).ConfigureAwait( false );
 
-                var pollResponse = await PollAuthSessionStatusAsync();
+                var pollResponse = await PollAuthSessionStatusAsync().ConfigureAwait( false );
 
                 if ( pollResponse != null )
                 {
@@ -234,7 +227,11 @@ namespace SteamKit2.Authentication
             return null;
         }
 
-        internal virtual void HandlePollAuthSessionStatusResponse( CAuthentication_PollAuthSessionStatus_Response response )
+        /// <summary>
+        /// Handles poll authentication session status response.
+        /// </summary>
+        /// <param name="response">The response.</param>
+        protected virtual void HandlePollAuthSessionStatusResponse( CAuthentication_PollAuthSessionStatus_Response response )
         {
             if ( response.new_client_id != default )
             {
