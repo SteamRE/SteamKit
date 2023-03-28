@@ -181,7 +181,8 @@ namespace SteamKit2
             if ( state != (int)State.Connected )
                 return;
 
-            SendData( new MemoryStream( data ) );
+            using var ms = new MemoryStream( data );
+            SendData( ms );
         }
 
         /// <summary>
@@ -355,7 +356,7 @@ namespace SteamKit2
             if ( numPackets == 0 )
                 return false;
 
-            MemoryStream payload = new MemoryStream();
+            using MemoryStream payload = new MemoryStream();
             for ( uint i = 0; i < numPackets; i++ )
             {
                 var handled = inPackets.TryGetValue(++inSeqHandled, out var packet);
@@ -431,7 +432,7 @@ namespace SteamKit2
                         // Data from the desired server was received; delay timeout
                         timeOut = DateTime.Now.AddSeconds(TIMEOUT_DELAY);
 
-                        MemoryStream ms = new MemoryStream(buf, 0, length);
+                        using MemoryStream ms = new MemoryStream(buf, 0, length);
                         UdpPacket packet = new UdpPacket(ms);
 
                         ReceivePacket(packet);

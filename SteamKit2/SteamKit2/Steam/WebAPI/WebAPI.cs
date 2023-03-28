@@ -415,7 +415,7 @@ namespace SteamKit2
                     }
                 }
 
-                var request = new HttpRequestMessage( method, urlBuilder.ToString() );
+                using var request = new HttpRequestMessage( method, urlBuilder.ToString() );
 
                 if ( !paramsGoInQueryString )
                 {

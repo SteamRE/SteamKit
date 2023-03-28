@@ -63,3 +63,6 @@ dotnet_style_prefer_is_null_check_over_reference_equality_method = false:silent
 
 dotnet_style_predefined_type_for_locals_parameters_members = true:silent
 dotnet_style_predefined_type_for_member_access = true:silent
+
+# CA2000: Dispose objects before losing scope
+dotnet_diagnostic.CA2000.severity = suggestion
