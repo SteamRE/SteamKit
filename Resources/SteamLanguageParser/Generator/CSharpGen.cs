@@ -34,6 +34,7 @@ namespace SteamLanguageParser
                 sb.AppendLine("using System;");
                 sb.AppendLine("using System.IO;");
                 sb.AppendLine( "using System.Runtime.InteropServices;" );
+                sb.AppendLine( "using System.Text;" );
                 sb.AppendLine();
                 sb.AppendLine( string.Format( "namespace {0}", nspace ) );
                 sb.AppendLine("{");
@@ -459,7 +460,7 @@ namespace SteamLanguageParser
 
             //sb.AppendLine(padding + "\tBinaryWriterEx bw = new BinaryWriterEx( stream );");
             //sb.AppendLine();
-            sb.AppendLine(padding + "\tBinaryWriter bw = new BinaryWriter( stream );");
+            sb.AppendLine(padding + "\tusing BinaryWriter bw = new BinaryWriter( stream, Encoding.UTF8, leaveOpen: true );" );
             sb.AppendLine();
 
             if (cnode.Parent != null)
@@ -538,7 +539,7 @@ namespace SteamLanguageParser
 
             if (baseSize > 0)
             {
-                sb.AppendLine(padding + "\tBinaryReader br = new BinaryReader( stream );");
+                sb.AppendLine(padding + "\tusing BinaryReader br = new BinaryReader( stream, Encoding.UTF8, leaveOpen: true );" );
                 sb.AppendLine();
             }
 
