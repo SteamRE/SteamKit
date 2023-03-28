@@ -88,9 +88,8 @@ namespace SteamKit2
     {
         public byte[]? GetMachineGuid()
         {
-            var localKey = RegistryKey
-                .OpenBaseKey( Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry64 )
-                .OpenSubKey( @"SOFTWARE\Microsoft\Cryptography" );
+            using var baseKey = RegistryKey.OpenBaseKey( Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry64 );
+            using var localKey = baseKey.OpenSubKey( @"SOFTWARE\Microsoft\Cryptography" );
 
             if ( localKey == null )
             {

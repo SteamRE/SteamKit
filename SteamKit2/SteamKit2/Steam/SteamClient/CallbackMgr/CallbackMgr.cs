@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -112,7 +111,9 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(callbackFunc) );
             }
 
+#pragma warning disable CA2000 // Not implicitly disposed
             var callback = new Internal.Callback<TCallback>( callbackFunc, this, jobID );
+#pragma warning restore CA2000
             return new Subscription( callback, this );
         }
 

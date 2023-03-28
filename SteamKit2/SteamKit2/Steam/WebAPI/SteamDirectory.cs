@@ -47,7 +47,7 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(configuration) );
             }
 
-            var directory = configuration.GetAsyncWebAPIInterface( "ISteamDirectory" );
+            using var directory = configuration.GetAsyncWebAPIInterface( "ISteamDirectory" );
             var args = new Dictionary<string, object?>
             {
                 ["cellid"] = configuration.CellID.ToString( CultureInfo.InvariantCulture )

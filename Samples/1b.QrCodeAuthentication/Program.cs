@@ -101,9 +101,9 @@ void DrawQRCode( QrAuthSession authSession )
     Console.WriteLine();
 
     // Encode the link as a QR code
-    var qrGenerator = new QRCodeGenerator();
+    using var qrGenerator = new QRCodeGenerator();
     var qrCodeData = qrGenerator.CreateQrCode( authSession.ChallengeURL, QRCodeGenerator.ECCLevel.L );
-    var qrCode = new AsciiQRCode( qrCodeData );
+    using var qrCode = new AsciiQRCode( qrCodeData );
     var qrCodeAsAsciiArt = qrCode.GetGraphic( 1, drawQuietZones: false );
 
     Console.WriteLine( "Use the Steam Mobile App to sign in via QR code:" );
