@@ -15,6 +15,12 @@ using SteamKit2;
 // callback type to a function, whilst CallbackMgr routes the callback objects to the functions that
 // you have specified. a Callback<T> is bound to a specific callback manager.
 //
+//
+// WARNING!
+// This the old login flow, we keep this sample around because it still currently works
+// for simple cases where you do not need to remember password.
+// See Sample1a_Authentication for the new flow.
+//
 
 if ( args.Length < 2 )
 {
