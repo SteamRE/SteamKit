@@ -58,7 +58,7 @@ CNet::CNet() noexcept
 
 	if (bFoundBuildFunc)
 	{
-		BBuildAndAsyncSendFrameFn thisBuildFunc = CNet::BBuildAndAsyncSendFrame;
+		BBuildAndAsyncSendFrameFn thisBuildFunc = (BBuildAndAsyncSendFrameFn)CNet::BBuildAndAsyncSendFrame;
 
 		m_BuildDetour = new CSimpleDetour((void **)&BBuildAndAsyncSendFrame_Orig, (void *)thisBuildFunc);
 		m_BuildDetour->Attach();
@@ -72,7 +72,7 @@ CNet::CNet() noexcept
 
 	if (bFoundRecvPktFunc)
 	{
-		RecvPktFn thisRecvPktFunc = CNet::RecvPkt;
+		RecvPktFn thisRecvPktFunc = (RecvPktFn)CNet::RecvPkt;
 
 		m_RecvPktDetour = new CSimpleDetour((void **)&RecvPkt_Orig, (void *)thisRecvPktFunc);
 		m_RecvPktDetour->Attach();
