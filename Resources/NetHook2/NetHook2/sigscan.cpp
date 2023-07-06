@@ -70,7 +70,7 @@ bool CSigScan::GetDllMemInfo(void) noexcept {
     base_addr = (unsigned char*)mem.AllocationBase;
  
     const IMAGE_DOS_HEADER * dos = (IMAGE_DOS_HEADER*)mem.AllocationBase;
-    const IMAGE_NT_HEADERS * pe = (IMAGE_NT_HEADERS*)((unsigned long)dos+(unsigned long)dos->e_lfanew);
+    const IMAGE_NT_HEADERS * pe = (IMAGE_NT_HEADERS*)((uintptr_t)dos+(uintptr_t)dos->e_lfanew);
  
     if(pe->Signature != IMAGE_NT_SIGNATURE) {
         base_addr = nullptr;

@@ -6,6 +6,7 @@
 
 #include "nh2_string.h"
 #include "sedebug.h"
+#include "steamclient.h"
 
 typedef std::shared_ptr<void> SafeHandle;
 inline SafeHandle MakeSafeHandle(HANDLE hHandle)
@@ -52,10 +53,18 @@ BOOL InjectEjection(const HWND hWindow, const int iSteamProcessID, const char * 
 // rundll32.exe C:\Path\To\NetHook2.dll,Eject <process name>
 //
 
+#if __x86_64__
+#pragma comment(linker, "/EXPORT:Inject=?Inject@@YAXPEAUHWND__@@PEAUHINSTANCE__@@PEADH@Z")
+#else
 #pragma comment(linker, "/EXPORT:Inject=?Inject@@YGXPAUHWND__@@PAUHINSTANCE__@@PADH@Z")
+#endif
 __declspec(dllexport) void CALLBACK Inject(HWND hWindow, HINSTANCE hInstance, LPSTR lpszCommandLine, int nCmdShow);
 
+#if __x86_64__
+#pragma comment(linker, "/EXPORT:Eject=?Eject@@YAXPEAUHWND__@@PEAUHINSTANCE__@@PEADH@Z")
+#else
 #pragma comment(linker, "/EXPORT:Eject=?Eject@@YGXPAUHWND__@@PAUHINSTANCE__@@PADH@Z")
+#endif
 __declspec(dllexport) void CALLBACK Eject(HWND hWindow, HINSTANCE hInstance, LPSTR lpszCommandLine, int nCmdShow);
 
 typedef enum {
@@ -112,7 +121,7 @@ ESteamProcessSearchError GetSteamProcessID( HWND hWindow, LPSTR lpszCommandLine,
 		}
 	}
 	
-	if ( !ProcessHasModuleLoaded( *piSteamProcessID, "steamclient.dll", /* bPartialMatchFromEnd */ true ) )
+	if ( !ProcessHasModuleLoaded( *piSteamProcessID, STEAMCLIENT_DLL, /* bPartialMatchFromEnd */ true ) )
 	{
 		return k_ESteamProcessSearchErrorTargetProcessDoesNotHaveSteamClientDllLoaded;
 	}
