@@ -25,12 +25,14 @@ if not exist "native-dependencies\protobuf-bins\libprotobuf.vcxproj" (
 )
 
 msbuild native-dependencies\protobuf-bins\libprotobuf.vcxproj /p:Configuration=Debug
+msbuild native-dependencies\protobuf-bins\libprotobuf.vcxproj /p:Configuration=Release
 
 if not exist "native-dependencies\protobuf-bins-64\libprotobuf.vcxproj" (
   cmake -S native-dependencies\protobuf-3.15.6\cmake -B native-dependencies\protobuf-bins-64 -A x64 -Dprotobuf_MSVC_STATIC_RUNTIME=OFF
 )
 
 msbuild native-dependencies\protobuf-bins-64\libprotobuf.vcxproj /p:Configuration=Debug
+msbuild native-dependencies\protobuf-bins-64\libprotobuf.vcxproj /p:Configuration=Release
 
 rem todo: compile protoc and generate steammessages_base.pb.{h|cpp}
 
