@@ -2,6 +2,7 @@
 
 #include "logger.h"
 #include "csimplescan.h"
+#include "steamclient.h"
 
 #include <cstddef>
 
@@ -13,41 +14,53 @@
 SymmetricEncryptChosenIVFn Encrypt_Orig = nullptr;
 PchMsgNameFromEMsgFn PchMsgNameFromEMsg = nullptr;
 
+#ifndef __x86_64__
 static_assert(sizeof(MsgInfo_t) == 20, "Wrong size of MsgInfo_t");
 static_assert(offsetof(MsgInfo_t, eMsg) == 0, "Wrong offset of MsgInfo_t::eMsg");
 static_assert(offsetof(MsgInfo_t, nFlags) == 4, "Wrong offset of MsgInfo_t::nFlags");
 static_assert(offsetof(MsgInfo_t, k_EServerTarget) == 8, "Wrong offset of MsgInfo_t::k_EServerTarget");
 static_assert(offsetof(MsgInfo_t, nUnk1) == 12, "Wrong offset of MsgInfo_t::uUnk1");
 static_assert(offsetof(MsgInfo_t, pchMsgName) == 16, "Wrong offset of MsgInfo_t::pchMsgName");
+#endif
 
 typedef std::pair<EMsg, MsgInfo_t *> MsgPair;
 
 CCrypto::CCrypto() noexcept
 	: Encrypt_Detour( nullptr )
 {
-	CSimpleScan steamClientScan( "steamclient.dll" );
+	CSimpleScan steamClientScan( STEAMCLIENT_DLL );
 
 
 	SymmetricEncryptChosenIVFn pEncrypt = nullptr;
 	const bool bEncrypt = steamClientScan.FindFunction(
+#if __x86_64__
+		"\x48\x83\xEC\x58\x8B\x84\x24\xCC\xCC\xCC\xCC\xC6\x44\x24",
+		"xxxxxxx????xxx",
+#else
 		"\x55\x8B\xEC\x6A\x01\xFF\x75\x24",
 		"xxxxxxxx",
+#endif
 		(void **)&pEncrypt
 	);
 
 	Encrypt_Orig = pEncrypt;
 
-	g_pLogger->LogConsole( "CCrypto::SymmetricEncryptChosenIV = 0x%x\n", Encrypt_Orig );
+	g_pLogger->LogConsole( "CCrypto::SymmetricEncryptChosenIV = 0x%p\n", Encrypt_Orig );
 
 	const bool bPchMsgNameFromEMsg = steamClientScan.FindFunction(
+#if __x86_64__
+		"\x48\x89\x5C\x24\xCC\x57\x48\x83\xEC\x20\x8B\xD9\xE8",
+		"xxxx?xxxxxxxx",
+#else
 		"\x55\x8B\xEC\x51\x56\xE8\x00\x00\x00\x00\x8B\x00\x00\x00\x00\x00\x8B\xF0",
 		"xxxxxx????x?????xx",
+#endif
 		(void**)&PchMsgNameFromEMsg
 	);
 
 	if (bPchMsgNameFromEMsg)
 	{
-		g_pLogger->LogConsole( "PchMsgNameFromEMsg = 0x%x\n", PchMsgNameFromEMsg);
+		g_pLogger->LogConsole( "PchMsgNameFromEMsg = 0x%p\n", PchMsgNameFromEMsg);
 	}
 	else
 	{

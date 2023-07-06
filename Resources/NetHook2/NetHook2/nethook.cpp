@@ -4,6 +4,7 @@
 #include "logger.h"
 #include "crypto.h"
 #include "net.h"
+#include "steamclient.h"
 
 #include "nh2_string.h"
 
@@ -58,7 +59,7 @@ BOOL WINAPI DllMain( HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved )
 
 		g_bOwnsConsole = AllocConsole();
 
-		LoadLibrary( "steamclient.dll" );
+		LoadLibrary( STEAMCLIENT_DLL );
 
 		g_pLogger = new CLogger();
 
