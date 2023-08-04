@@ -111,6 +111,8 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGCToGCCanInviteUserToTeamResponse = 7235,
         k_EMsgGCToGCGetUserRank = 7236,
         k_EMsgGCToGCGetUserRankResponse = 7237,
+        k_EMsgGCToGCAdjustUserRank = 7238,
+        k_EMsgGCToGCAdjustUserRankResponse = 7239,
         k_EMsgGCToGCUpdateTeamStats = 7240,
         k_EMsgGCToGCValidateTeam = 7241,
         k_EMsgGCToGCValidateTeamResponse = 7242,
@@ -822,10 +824,16 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGCToClientCollectorsCacheAvailableDataResponse = 8872,
         k_EMsgClientToGCUploadMatchClip = 8873,
         k_EMsgGCToClientUploadMatchClipResponse = 8874,
-        k_EMsgGCToServerSetSteamLearnDisable = 8875,
         k_EMsgGCToServerSetSteamLearnKeysChanged = 8876,
         k_EMsgSignOutMuertaMinigame = 8877,
         k_EMsgGCToServerLobbyHeroRoleStats = 8878,
+        k_EMsgClientToGCRankRequest = 8879,
+        k_EMsgGCToClientRankResponse = 8880,
+        k_EMsgGCToClientRankUpdate = 8881,
+        k_EMsgSignOutMapStats = 8882,
+        k_EMsgClientToGCMapStatsRequest = 8883,
+        k_EMsgGCToClientMapStatsResponse = 8884,
+        k_EMsgGCToServerSetSteamLearnInferencing = 8885,
     }
 
 }

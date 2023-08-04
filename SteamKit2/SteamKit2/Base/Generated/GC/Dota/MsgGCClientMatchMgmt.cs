@@ -882,6 +882,16 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(52)]
         public AbilityDraftSpecificDetails ability_draft_specific_details { get; set; }
 
+        [global::ProtoBuf.ProtoMember(53)]
+        public bool do_player_draft
+        {
+            get => __pbn__do_player_draft.GetValueOrDefault();
+            set => __pbn__do_player_draft = value;
+        }
+        public bool ShouldSerializedo_player_draft() => __pbn__do_player_draft != null;
+        public void Resetdo_player_draft() => __pbn__do_player_draft = null;
+        private bool? __pbn__do_player_draft;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class AbilityDraftSpecificDetails : global::ProtoBuf.IExtensible
         {

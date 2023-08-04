@@ -196,6 +196,17 @@ namespace SteamKit2.Internal
         public void Resettool_name() => __pbn__tool_name = null;
         private string __pbn__tool_name;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue(false)]
+        public bool use_cloud
+        {
+            get => __pbn__use_cloud ?? false;
+            set => __pbn__use_cloud = value;
+        }
+        public bool ShouldSerializeuse_cloud() => __pbn__use_cloud != null;
+        public void Resetuse_cloud() => __pbn__use_cloud = null;
+        private bool? __pbn__use_cloud;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

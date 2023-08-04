@@ -817,6 +817,16 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public global::System.Collections.Generic.List<Class> classes { get; } = new global::System.Collections.Generic.List<Class>();
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool high_pri
+        {
+            get => __pbn__high_pri.GetValueOrDefault();
+            set => __pbn__high_pri = value;
+        }
+        public bool ShouldSerializehigh_pri() => __pbn__high_pri != null;
+        public void Resethigh_pri() => __pbn__high_pri = null;
+        private bool? __pbn__high_pri;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Class : global::ProtoBuf.IExtensible
         {

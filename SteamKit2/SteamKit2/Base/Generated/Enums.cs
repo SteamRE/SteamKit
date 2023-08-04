@@ -146,15 +146,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public enum EColorProfile
-    {
-        k_EColorProfile_Invalid = 0,
-        k_EColorProfile_Native = 1,
-        k_EColorProfile_Standard = 2,
-        k_EColorProfile_Vivid = 3,
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public enum EBluetoothDeviceType
     {
         k_BluetoothDeviceType_Invalid = 0,
@@ -475,6 +466,58 @@ namespace SteamKit2.Internal
         k_ENewSteamAnnouncementState_AllRead = 1,
         k_ENewSteamAnnouncementState_NewAnnouncement = 2,
         k_ENewSteamAnnouncementState_FeaturedAnnouncement = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ECommentThreadType
+    {
+        k_ECommentThreadTypeInvalid = 0,
+        k_ECommentThreadTypeScreenshot_Deprecated = 1,
+        k_ECommentThreadTypeWorkshopAccount_Developer = 2,
+        k_ECommentThreadTypeWorkshopAccount_Public = 3,
+        k_ECommentThreadTypePublishedFile_Developer = 4,
+        k_ECommentThreadTypePublishedFile_Public = 5,
+        k_ECommentThreadTypeTest = 6,
+        k_ECommentThreadTypeForumTopic = 7,
+        k_ECommentThreadTypeRecommendation = 8,
+        k_ECommentThreadTypeVideo_Deprecated = 9,
+        k_ECommentThreadTypeProfile = 10,
+        k_ECommentThreadTypeNewsPost = 11,
+        k_ECommentThreadTypeClan = 12,
+        k_ECommentThreadTypeClanAnnouncement = 13,
+        k_ECommentThreadTypeClanEvent = 14,
+        k_ECommentThreadTypeUserStatusPublished = 15,
+        k_ECommentThreadTypeUserReceivedNewGame = 16,
+        k_ECommentThreadTypePublishedFile_Announcement = 17,
+        k_ECommentThreadTypeModeratorMessage = 18,
+        k_ECommentThreadTypeClanCuratedApp = 19,
+        k_ECommentThreadTypeQAndASession = 20,
+        k_ECommentThreadTypeMax = 21,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EBroadcastPermission
+    {
+        k_EBroadcastPermissionDisabled = 0,
+        k_EBroadcastPermissionFriendsApprove = 1,
+        k_EBroadcastPermissionFriendsAllowed = 2,
+        k_EBroadcastPermissionPublic = 3,
+        k_EBroadcastPermissionSubscribers = 4,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EBroadcastEncoderSetting
+    {
+        k_EBroadcastEncoderBestQuality = 0,
+        k_EBroadcastEncoderBestPerformance = 1,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ECloudGamingPlatform
+    {
+        k_ECloudGamingPlatformNone = 0,
+        k_ECloudGamingPlatformValve = 1,
+        k_ECloudGamingPlatformNVIDIA = 2,
     }
 
 }

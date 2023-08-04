@@ -330,6 +330,16 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(18)]
             public global::System.Collections.Generic.List<uint> content_descriptorids { get; } = new global::System.Collections.Generic.List<uint>();
 
+            [global::ProtoBuf.ProtoMember(19)]
+            public int playtime_disconnected
+            {
+                get => __pbn__playtime_disconnected.GetValueOrDefault();
+                set => __pbn__playtime_disconnected = value;
+            }
+            public bool ShouldSerializeplaytime_disconnected() => __pbn__playtime_disconnected != null;
+            public void Resetplaytime_disconnected() => __pbn__playtime_disconnected = null;
+            private int? __pbn__playtime_disconnected;
+
         }
 
     }
@@ -2885,6 +2895,16 @@ namespace SteamKit2.Internal
             public void Resetlast_linux_playtime() => __pbn__last_linux_playtime = null;
             private uint? __pbn__last_linux_playtime;
 
+            [global::ProtoBuf.ProtoMember(15)]
+            public uint playtime_disconnected
+            {
+                get => __pbn__playtime_disconnected.GetValueOrDefault();
+                set => __pbn__playtime_disconnected = value;
+            }
+            public bool ShouldSerializeplaytime_disconnected() => __pbn__playtime_disconnected != null;
+            public void Resetplaytime_disconnected() => __pbn__playtime_disconnected = null;
+            private uint? __pbn__playtime_disconnected;
+
         }
 
     }
@@ -3400,6 +3420,9 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(1)]
         public CPlayer_CommunityPreferences preferences { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public UserContentDescriptorPreferences content_descriptor_preferences { get; set; }
 
     }
 
@@ -3999,6 +4022,9 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(1)]
         public CPlayer_CommunityPreferences preferences { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public UserContentDescriptorPreferences content_descriptor_preferences { get; set; }
 
     }
 

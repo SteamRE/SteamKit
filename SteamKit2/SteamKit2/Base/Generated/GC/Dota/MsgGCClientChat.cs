@@ -679,6 +679,20 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetfavorite_team_quality() => __pbn__favorite_team_quality = null;
         private uint? __pbn__favorite_team_quality;
 
+        [global::ProtoBuf.ProtoMember(39)]
+        [global::System.ComponentModel.DefaultValue(-1)]
+        public int suggest_player_draft_pick
+        {
+            get => __pbn__suggest_player_draft_pick ?? -1;
+            set => __pbn__suggest_player_draft_pick = value;
+        }
+        public bool ShouldSerializesuggest_player_draft_pick() => __pbn__suggest_player_draft_pick != null;
+        public void Resetsuggest_player_draft_pick() => __pbn__suggest_player_draft_pick = null;
+        private int? __pbn__suggest_player_draft_pick;
+
+        [global::ProtoBuf.ProtoMember(40)]
+        public PlayerDraftPick player_draft_pick { get; set; }
+
         [global::ProtoBuf.ProtoContract()]
         public partial class DiceRoll : global::ProtoBuf.IExtensible
         {
@@ -774,6 +788,36 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializeparty_trivia_points() => __pbn__party_trivia_points != null;
             public void Resetparty_trivia_points() => __pbn__party_trivia_points = null;
             private uint? __pbn__party_trivia_points;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class PlayerDraftPick : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue(-1)]
+            public int player_id
+            {
+                get => __pbn__player_id ?? -1;
+                set => __pbn__player_id = value;
+            }
+            public bool ShouldSerializeplayer_id() => __pbn__player_id != null;
+            public void Resetplayer_id() => __pbn__player_id = null;
+            private int? __pbn__player_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public int team
+            {
+                get => __pbn__team.GetValueOrDefault();
+                set => __pbn__team = value;
+            }
+            public bool ShouldSerializeteam() => __pbn__team != null;
+            public void Resetteam() => __pbn__team = null;
+            private int? __pbn__team;
 
         }
 

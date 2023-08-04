@@ -2266,6 +2266,16 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public global::System.Collections.Generic.List<CSODOTAStaticLobbyMember> all_members { get; } = new global::System.Collections.Generic.List<CSODOTAStaticLobbyMember>();
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool is_player_draft
+        {
+            get => __pbn__is_player_draft.GetValueOrDefault();
+            set => __pbn__is_player_draft = value;
+        }
+        public bool ShouldSerializeis_player_draft() => __pbn__is_player_draft != null;
+        public void Resetis_player_draft() => __pbn__is_player_draft = null;
+        private bool? __pbn__is_player_draft;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -4048,6 +4048,117 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCRankRequest : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(ERankType.k_ERankType_Invalid)]
+        public ERankType rank_type
+        {
+            get => __pbn__rank_type ?? ERankType.k_ERankType_Invalid;
+            set => __pbn__rank_type = value;
+        }
+        public bool ShouldSerializerank_type() => __pbn__rank_type != null;
+        public void Resetrank_type() => __pbn__rank_type = null;
+        private ERankType? __pbn__rank_type;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToClientRankResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResultCode.k_Succeeded)]
+        public EResultCode result
+        {
+            get => __pbn__result ?? EResultCode.k_Succeeded;
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResultCode? __pbn__result;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint rank_value
+        {
+            get => __pbn__rank_value.GetValueOrDefault();
+            set => __pbn__rank_value = value;
+        }
+        public bool ShouldSerializerank_value() => __pbn__rank_value != null;
+        public void Resetrank_value() => __pbn__rank_value = null;
+        private uint? __pbn__rank_value;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint rank_data1
+        {
+            get => __pbn__rank_data1.GetValueOrDefault();
+            set => __pbn__rank_data1 = value;
+        }
+        public bool ShouldSerializerank_data1() => __pbn__rank_data1 != null;
+        public void Resetrank_data1() => __pbn__rank_data1 = null;
+        private uint? __pbn__rank_data1;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint rank_data2
+        {
+            get => __pbn__rank_data2.GetValueOrDefault();
+            set => __pbn__rank_data2 = value;
+        }
+        public bool ShouldSerializerank_data2() => __pbn__rank_data2 != null;
+        public void Resetrank_data2() => __pbn__rank_data2 = null;
+        private uint? __pbn__rank_data2;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint rank_data3
+        {
+            get => __pbn__rank_data3.GetValueOrDefault();
+            set => __pbn__rank_data3 = value;
+        }
+        public bool ShouldSerializerank_data3() => __pbn__rank_data3 != null;
+        public void Resetrank_data3() => __pbn__rank_data3 = null;
+        private uint? __pbn__rank_data3;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResultCode
+        {
+            k_Succeeded = 0,
+            k_Failed = 1,
+            k_InvalidRankType = 2,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToClientRankUpdate : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(ERankType.k_ERankType_Invalid)]
+        public ERankType rank_type
+        {
+            get => __pbn__rank_type ?? ERankType.k_ERankType_Invalid;
+            set => __pbn__rank_type = value;
+        }
+        public bool ShouldSerializerank_type() => __pbn__rank_type != null;
+        public void Resetrank_type() => __pbn__rank_type = null;
+        private ERankType? __pbn__rank_type;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgGCToClientRankResponse rank_info { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgClientToGCGetProfileCard : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -15068,6 +15179,48 @@ namespace SteamKit2.GC.Dota.Internal
             k_eSuccess = 1,
             k_eTimeout = 2,
             k_eTooBusy = 4,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCMapStatsRequest : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToClientMapStatsResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse response
+        {
+            get => __pbn__response ?? EResponse.k_eInternalError;
+            set => __pbn__response = value;
+        }
+        public bool ShouldSerializeresponse() => __pbn__response != null;
+        public void Resetresponse() => __pbn__response = null;
+        private EResponse? __pbn__response;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgMapStatsSnapshot personal_stats { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public CMsgGlobalMapStats global_stats { get; set; }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
         }
 
     }

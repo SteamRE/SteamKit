@@ -59,6 +59,38 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSteamLearnServerInfo : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool enable_data_submission
+        {
+            get => __pbn__enable_data_submission.GetValueOrDefault();
+            set => __pbn__enable_data_submission = value;
+        }
+        public bool ShouldSerializeenable_data_submission() => __pbn__enable_data_submission != null;
+        public void Resetenable_data_submission() => __pbn__enable_data_submission = null;
+        private bool? __pbn__enable_data_submission;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool enable_inferencing
+        {
+            get => __pbn__enable_inferencing.GetValueOrDefault();
+            set => __pbn__enable_inferencing = value;
+        }
+        public bool ShouldSerializeenable_inferencing() => __pbn__enable_inferencing != null;
+        public void Resetenable_inferencing() => __pbn__enable_inferencing = null;
+        private bool? __pbn__enable_inferencing;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public CMsgSteamLearnHMACKeys hmac_keys { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgGCAssertJobData : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1334,8 +1366,8 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(18)]
         public CExtraMsgBlock additional_welcome_msgs { get; set; }
 
-        [global::ProtoBuf.ProtoMember(19)]
-        public CMsgSteamLearnHMACKeys steam_learn_hmac_keys { get; set; }
+        [global::ProtoBuf.ProtoMember(20)]
+        public CMsgSteamLearnServerInfo steam_learn_server_info { get; set; }
 
         [global::ProtoBuf.ProtoContract()]
         public partial class Location : global::ProtoBuf.IExtensible

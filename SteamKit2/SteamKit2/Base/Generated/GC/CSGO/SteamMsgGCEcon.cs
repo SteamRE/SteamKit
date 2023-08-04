@@ -161,6 +161,26 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CAttribute_String : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string value
+        {
+            get => __pbn__value ?? "";
+            set => __pbn__value = value;
+        }
+        public bool ShouldSerializevalue() => __pbn__value != null;
+        public void Resetvalue() => __pbn__value = null;
+        private string __pbn__value;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EGCItemMsg
     {
         k_EMsgGCBase = 1000,
@@ -299,7 +319,6 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCToGCIsTrustedServerResponse = 2520,
         k_EMsgGCToGCBroadcastConsoleCommand = 2521,
         k_EMsgGCServerVersionUpdated = 2522,
-        k_EMsgGCApplyAutograph = 2523,
         k_EMsgGCToGCWebAPIAccountChanged = 2524,
         k_EMsgGCRequestAnnouncements = 2525,
         k_EMsgGCRequestAnnouncementsResponse = 2526,
@@ -307,6 +326,7 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCClientVersionUpdated = 2528,
         k_EMsgGCAdjustItemEquippedStateMulti = 2529,
         k_EMsgGCRecurringSubscriptionStatus = 2530,
+        k_EMsgGCAdjustEquipSlots = 2531,
     }
 
     [global::ProtoBuf.ProtoContract()]

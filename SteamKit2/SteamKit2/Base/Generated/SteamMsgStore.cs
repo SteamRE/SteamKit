@@ -448,6 +448,90 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_GetTagList_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string language
+        {
+            get => __pbn__language ?? "";
+            set => __pbn__language = value;
+        }
+        public bool ShouldSerializelanguage() => __pbn__language != null;
+        public void Resetlanguage() => __pbn__language = null;
+        private string __pbn__language;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string have_version_hash
+        {
+            get => __pbn__have_version_hash ?? "";
+            set => __pbn__have_version_hash = value;
+        }
+        public bool ShouldSerializehave_version_hash() => __pbn__have_version_hash != null;
+        public void Resethave_version_hash() => __pbn__have_version_hash = null;
+        private string __pbn__have_version_hash;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_GetTagList_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string version_hash
+        {
+            get => __pbn__version_hash ?? "";
+            set => __pbn__version_hash = value;
+        }
+        public bool ShouldSerializeversion_hash() => __pbn__version_hash != null;
+        public void Resetversion_hash() => __pbn__version_hash = null;
+        private string __pbn__version_hash;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<Tag> tags { get; } = new global::System.Collections.Generic.List<Tag>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Tag : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint tagid
+            {
+                get => __pbn__tagid.GetValueOrDefault();
+                set => __pbn__tagid = value;
+            }
+            public bool ShouldSerializetagid() => __pbn__tagid != null;
+            public void Resettagid() => __pbn__tagid = null;
+            private uint? __pbn__tagid;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string name
+            {
+                get => __pbn__name ?? "";
+                set => __pbn__name = value;
+            }
+            public bool ShouldSerializename() => __pbn__name != null;
+            public void Resetname() => __pbn__name = null;
+            private string __pbn__name;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CStoreDiscoveryQueueSettings : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1257,47 +1341,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CStore_UserContentDescriptorPreferences : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<ContentDescriptor> content_descriptors_to_exclude { get; } = new global::System.Collections.Generic.List<ContentDescriptor>();
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class ContentDescriptor : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint content_descriptorid
-            {
-                get => __pbn__content_descriptorid.GetValueOrDefault();
-                set => __pbn__content_descriptorid = value;
-            }
-            public bool ShouldSerializecontent_descriptorid() => __pbn__content_descriptorid != null;
-            public void Resetcontent_descriptorid() => __pbn__content_descriptorid = null;
-            private uint? __pbn__content_descriptorid;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public uint timestamp_added
-            {
-                get => __pbn__timestamp_added.GetValueOrDefault();
-                set => __pbn__timestamp_added = value;
-            }
-            public bool ShouldSerializetimestamp_added() => __pbn__timestamp_added != null;
-            public void Resettimestamp_added() => __pbn__timestamp_added = null;
-            private uint? __pbn__timestamp_added;
-
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CStore_GetStorePreferences_Response : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1311,7 +1354,7 @@ namespace SteamKit2.Internal
         public CStore_UserTagPreferences tag_preferences { get; set; }
 
         [global::ProtoBuf.ProtoMember(3)]
-        public CStore_UserContentDescriptorPreferences content_descriptor_preferences { get; set; }
+        public UserContentDescriptorPreferences content_descriptor_preferences { get; set; }
 
     }
 
@@ -1500,7 +1543,7 @@ namespace SteamKit2.Internal
         public CStore_UserTagPreferences tag_preferences { get; set; }
 
         [global::ProtoBuf.ProtoMember(3)]
-        public CStore_UserContentDescriptorPreferences content_descriptor_preferences { get; set; }
+        public UserContentDescriptorPreferences content_descriptor_preferences { get; set; }
 
     }
 
@@ -1546,6 +1589,7 @@ namespace SteamKit2.Internal
         CStore_RegisterCDKey_Response RegisterCDKey(CStore_RegisterCDKey_Request request);
         CStore_GetMostPopularTags_Response GetMostPopularTags(CStore_GetMostPopularTags_Request request);
         CStore_GetLocalizedNameForTags_Response GetLocalizedNameForTags(CStore_GetLocalizedNameForTags_Request request);
+        CStore_GetTagList_Response GetTagList(CStore_GetTagList_Request request);
         CStore_GetDiscoveryQueue_Response GetDiscoveryQueue(CStore_GetDiscoveryQueue_Request request);
         CStore_GetDiscoveryQueueSettings_Response GetDiscoveryQueueSettings(CStore_GetDiscoveryQueueSettings_Request request);
         CStore_SkipDiscoveryQueueItem_Response SkipDiscoveryQueueItem(CStore_SkipDiscoveryQueueItem_Request request);

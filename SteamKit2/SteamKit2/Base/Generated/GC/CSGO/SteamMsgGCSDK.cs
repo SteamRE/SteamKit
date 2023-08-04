@@ -1682,6 +1682,134 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSerializedSOCache : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint file_version
+        {
+            get => __pbn__file_version.GetValueOrDefault();
+            set => __pbn__file_version = value;
+        }
+        public bool ShouldSerializefile_version() => __pbn__file_version != null;
+        public void Resetfile_version() => __pbn__file_version = null;
+        private uint? __pbn__file_version;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<Cache> caches { get; } = new global::System.Collections.Generic.List<Cache>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint gc_socache_file_version
+        {
+            get => __pbn__gc_socache_file_version.GetValueOrDefault();
+            set => __pbn__gc_socache_file_version = value;
+        }
+        public bool ShouldSerializegc_socache_file_version() => __pbn__gc_socache_file_version != null;
+        public void Resetgc_socache_file_version() => __pbn__gc_socache_file_version = null;
+        private uint? __pbn__gc_socache_file_version;
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class TypeCache : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint type
+            {
+                get => __pbn__type.GetValueOrDefault();
+                set => __pbn__type = value;
+            }
+            public bool ShouldSerializetype() => __pbn__type != null;
+            public void Resettype() => __pbn__type = null;
+            private uint? __pbn__type;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public global::System.Collections.Generic.List<byte[]> objects { get; } = new global::System.Collections.Generic.List<byte[]>();
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint service_id
+            {
+                get => __pbn__service_id.GetValueOrDefault();
+                set => __pbn__service_id = value;
+            }
+            public bool ShouldSerializeservice_id() => __pbn__service_id != null;
+            public void Resetservice_id() => __pbn__service_id = null;
+            private uint? __pbn__service_id;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Cache : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint type
+            {
+                get => __pbn__type.GetValueOrDefault();
+                set => __pbn__type = value;
+            }
+            public bool ShouldSerializetype() => __pbn__type != null;
+            public void Resettype() => __pbn__type = null;
+            private uint? __pbn__type;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public ulong id
+            {
+                get => __pbn__id.GetValueOrDefault();
+                set => __pbn__id = value;
+            }
+            public bool ShouldSerializeid() => __pbn__id != null;
+            public void Resetid() => __pbn__id = null;
+            private ulong? __pbn__id;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public global::System.Collections.Generic.List<Version> versions { get; } = new global::System.Collections.Generic.List<Version>();
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public global::System.Collections.Generic.List<CMsgSerializedSOCache.TypeCache> type_caches { get; } = new global::System.Collections.Generic.List<CMsgSerializedSOCache.TypeCache>();
+
+            [global::ProtoBuf.ProtoContract()]
+            public partial class Version : global::ProtoBuf.IExtensible
+            {
+                private global::ProtoBuf.IExtension __pbn__extensionData;
+                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+                [global::ProtoBuf.ProtoMember(1)]
+                public uint service
+                {
+                    get => __pbn__service.GetValueOrDefault();
+                    set => __pbn__service = value;
+                }
+                public bool ShouldSerializeservice() => __pbn__service != null;
+                public void Resetservice() => __pbn__service = null;
+                private uint? __pbn__service;
+
+                [global::ProtoBuf.ProtoMember(2)]
+                public ulong version
+                {
+                    get => __pbn__version.GetValueOrDefault();
+                    set => __pbn__version = value;
+                }
+                public bool ShouldSerializeversion() => __pbn__version != null;
+                public void Resetversion() => __pbn__version = null;
+                private ulong? __pbn__version;
+
+            }
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum GCClientLauncherType
     {
         GCClientLauncherType_DEFAULT = 0,

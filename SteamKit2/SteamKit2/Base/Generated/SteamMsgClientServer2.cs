@@ -4786,6 +4786,16 @@ namespace SteamKit2.Internal
         public void Resetclient_remote_id() => __pbn__client_remote_id = null;
         private ulong? __pbn__client_remote_id;
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool owned_games_visible
+        {
+            get => __pbn__owned_games_visible.GetValueOrDefault();
+            set => __pbn__owned_games_visible = value;
+        }
+        public bool ShouldSerializeowned_games_visible() => __pbn__owned_games_visible != null;
+        public void Resetowned_games_visible() => __pbn__owned_games_visible = null;
+        private bool? __pbn__owned_games_visible;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -4807,6 +4817,28 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<uint> apps { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientFeatureGroupInfo : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong groupid
+        {
+            get => __pbn__groupid.GetValueOrDefault();
+            set => __pbn__groupid = value;
+        }
+        public bool ShouldSerializegroupid() => __pbn__groupid != null;
+        public void Resetgroupid() => __pbn__groupid = null;
+        private ulong? __pbn__groupid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<uint> members { get; } = new global::System.Collections.Generic.List<uint>();
 
     }
 
