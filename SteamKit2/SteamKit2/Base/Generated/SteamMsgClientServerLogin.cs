@@ -890,6 +890,17 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public CMsgIPAddress public_ip { get; set; }
 
+        [global::ProtoBuf.ProtoMember(16)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string user_country
+        {
+            get => __pbn__user_country ?? "";
+            set => __pbn__user_country = value;
+        }
+        public bool ShouldSerializeuser_country() => __pbn__user_country != null;
+        public void Resetuser_country() => __pbn__user_country = null;
+        private string __pbn__user_country;
+
         [global::ProtoBuf.ProtoMember(20, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong client_supplied_steamid
         {

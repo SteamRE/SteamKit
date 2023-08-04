@@ -579,14 +579,14 @@ namespace NetHookAnalyzer2.Protobufs
         private ulong? __pbn__steamid;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public uint comment_thread_type
+        public int comment_thread_type
         {
             get => __pbn__comment_thread_type.GetValueOrDefault();
             set => __pbn__comment_thread_type = value;
         }
         public bool ShouldSerializecomment_thread_type() => __pbn__comment_thread_type != null;
         public void Resetcomment_thread_type() => __pbn__comment_thread_type = null;
-        private uint? __pbn__comment_thread_type;
+        private int? __pbn__comment_thread_type;
 
         [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong gidfeature
@@ -977,14 +977,14 @@ namespace NetHookAnalyzer2.Protobufs
         private ulong? __pbn__steamid;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public uint comment_thread_type
+        public int comment_thread_type
         {
             get => __pbn__comment_thread_type.GetValueOrDefault();
             set => __pbn__comment_thread_type = value;
         }
         public bool ShouldSerializecomment_thread_type() => __pbn__comment_thread_type != null;
         public void Resetcomment_thread_type() => __pbn__comment_thread_type = null;
-        private uint? __pbn__comment_thread_type;
+        private int? __pbn__comment_thread_type;
 
         [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong gidfeature
@@ -1847,14 +1847,14 @@ namespace NetHookAnalyzer2.Protobufs
         private ulong? __pbn__steamid;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public uint comment_thread_type
+        public int comment_thread_type
         {
             get => __pbn__comment_thread_type.GetValueOrDefault();
             set => __pbn__comment_thread_type = value;
         }
         public bool ShouldSerializecomment_thread_type() => __pbn__comment_thread_type != null;
         public void Resetcomment_thread_type() => __pbn__comment_thread_type = null;
-        private uint? __pbn__comment_thread_type;
+        private int? __pbn__comment_thread_type;
 
         [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong gidfeature

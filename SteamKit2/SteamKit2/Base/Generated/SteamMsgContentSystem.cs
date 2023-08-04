@@ -660,6 +660,17 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public global::System.Collections.Generic.List<uint> appids { get; } = new global::System.Collections.Generic.List<uint>();
 
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string ip_public
+        {
+            get => __pbn__ip_public ?? "";
+            set => __pbn__ip_public = value;
+        }
+        public bool ShouldSerializeip_public() => __pbn__ip_public != null;
+        public void Resetip_public() => __pbn__ip_public = null;
+        private string __pbn__ip_public;
+
     }
 
     public interface IContentServerDirectory

@@ -27,6 +27,16 @@ namespace SteamKit2.Internal
         public void Resetcountry() => __pbn__country = null;
         private string __pbn__country;
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool anonymous_user
+        {
+            get => __pbn__anonymous_user.GetValueOrDefault();
+            set => __pbn__anonymous_user = value;
+        }
+        public bool ShouldSerializeanonymous_user() => __pbn__anonymous_user != null;
+        public void Resetanonymous_user() => __pbn__anonymous_user = null;
+        private bool? __pbn__anonymous_user;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -636,6 +646,28 @@ namespace SteamKit2.Internal
         public void Resetgid() => __pbn__gid = null;
         private ulong? __pbn__gid;
 
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(0u)]
+        public uint display_index
+        {
+            get => __pbn__display_index ?? 0u;
+            set => __pbn__display_index = value;
+        }
+        public bool ShouldSerializedisplay_index() => __pbn__display_index != null;
+        public void Resetdisplay_index() => __pbn__display_index = null;
+        private uint? __pbn__display_index;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(EMarketingMessageTemplateType.k_EMarketingMessageTemplate_Unknown)]
+        public EMarketingMessageTemplateType template_type
+        {
+            get => __pbn__template_type ?? EMarketingMessageTemplateType.k_EMarketingMessageTemplate_Unknown;
+            set => __pbn__template_type = value;
+        }
+        public bool ShouldSerializetemplate_type() => __pbn__template_type != null;
+        public void Resettemplate_type() => __pbn__template_type = null;
+        private EMarketingMessageTemplateType? __pbn__template_type;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -847,6 +879,128 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_GetMarketingMessageViewerStats_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong gid
+        {
+            get => __pbn__gid.GetValueOrDefault();
+            set => __pbn__gid = value;
+        }
+        public bool ShouldSerializegid() => __pbn__gid != null;
+        public void Resetgid() => __pbn__gid = null;
+        private ulong? __pbn__gid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessageHourlyStats : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint rt_time_hour
+        {
+            get => __pbn__rt_time_hour.GetValueOrDefault();
+            set => __pbn__rt_time_hour = value;
+        }
+        public bool ShouldSerializert_time_hour() => __pbn__rt_time_hour != null;
+        public void Resetrt_time_hour() => __pbn__rt_time_hour = null;
+        private uint? __pbn__rt_time_hour;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint seen_count
+        {
+            get => __pbn__seen_count.GetValueOrDefault();
+            set => __pbn__seen_count = value;
+        }
+        public bool ShouldSerializeseen_count() => __pbn__seen_count != null;
+        public void Resetseen_count() => __pbn__seen_count = null;
+        private uint? __pbn__seen_count;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(EMarketingMessageTemplateType.k_EMarketingMessageTemplate_Unknown)]
+        public EMarketingMessageTemplateType template_type
+        {
+            get => __pbn__template_type ?? EMarketingMessageTemplateType.k_EMarketingMessageTemplate_Unknown;
+            set => __pbn__template_type = value;
+        }
+        public bool ShouldSerializetemplate_type() => __pbn__template_type != null;
+        public void Resettemplate_type() => __pbn__template_type = null;
+        private EMarketingMessageTemplateType? __pbn__template_type;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint display_index
+        {
+            get => __pbn__display_index.GetValueOrDefault();
+            set => __pbn__display_index = value;
+        }
+        public bool ShouldSerializedisplay_index() => __pbn__display_index != null;
+        public void Resetdisplay_index() => __pbn__display_index = null;
+        private uint? __pbn__display_index;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_GetMarketingMessageViewerStats_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CMarketingMessageHourlyStats> stats { get; } = new global::System.Collections.Generic.List<CMarketingMessageHourlyStats>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_GetMarketingMessagesViewerRangeStats_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint rt_start_time
+        {
+            get => __pbn__rt_start_time.GetValueOrDefault();
+            set => __pbn__rt_start_time = value;
+        }
+        public bool ShouldSerializert_start_time() => __pbn__rt_start_time != null;
+        public void Resetrt_start_time() => __pbn__rt_start_time = null;
+        private uint? __pbn__rt_start_time;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint rt_end_time
+        {
+            get => __pbn__rt_end_time.GetValueOrDefault();
+            set => __pbn__rt_end_time = value;
+        }
+        public bool ShouldSerializert_end_time() => __pbn__rt_end_time != null;
+        public void Resetrt_end_time() => __pbn__rt_end_time = null;
+        private uint? __pbn__rt_end_time;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_GetMarketingMessagesViewerRangeStats_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CMarketingMessageHourlyStats> stats { get; } = new global::System.Collections.Generic.List<CMarketingMessageHourlyStats>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EMarketingMessageType
     {
         k_EMarketingMessageInvalid = 0,
@@ -859,6 +1013,9 @@ namespace SteamKit2.Internal
         k_EMarketingMessageDemoQuit = 7,
         k_EMarketingMessageGifting = 8,
         k_EMarketingMessageEJsKorner = 9,
+        k_EMarketingMessageUpdate = 10,
+        k_EMarketingMessageMidweekDeal = 11,
+        k_EMarketingMessageDailyDeal = 12,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -877,6 +1034,18 @@ namespace SteamKit2.Internal
         k_EMarketingMessagePublisherAssociation = 3,
         k_EMarketingMessageGenreAssociation = 4,
         k_EMarketingMessageBundleAssociation = 5,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EMarketingMessageTemplateType
+    {
+        k_EMarketingMessageTemplate_Unknown = 0,
+        k_EMarketingMessageTemplate_Image = 1,
+        k_EMarketingMessageTemplate_Animated = 2,
+        k_EMarketingMessageTemplate_Featured_Video = 3,
+        k_EMarketingMessageTemplate_DLC_Override = 4,
+        k_EMarketingMessageTemplate_Replay = 5,
+        k_EMarketingMessageTemplate_MAX = 6,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -902,6 +1071,8 @@ namespace SteamKit2.Internal
         CMarketingMessages_UpdateMarketingMessage_Response UpdateMarketingMessage(CMarketingMessages_UpdateMarketingMessage_Request request);
         CMarketingMessages_DeleteMarketingMessage_Response DeleteMarketingMessage(CMarketingMessages_DeleteMarketingMessage_Request request);
         CMarketingMessages_FindMarketingMessages_Response FindMarketingMessages(CMarketingMessages_FindMarketingMessages_Request request);
+        CMarketingMessages_GetMarketingMessageViewerStats_Response GetMarketingMessageViewerStats(CMarketingMessages_GetMarketingMessageViewerStats_Request request);
+        CMarketingMessages_GetMarketingMessagesViewerRangeStats_Response GetMarketingMessagesViewerRangeStats(CMarketingMessages_GetMarketingMessagesViewerRangeStats_Request request);
     }
 
 }

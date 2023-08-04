@@ -76,6 +76,9 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetprefer_not_host() => __pbn__prefer_not_host = null;
         private bool? __pbn__prefer_not_host;
 
+        [global::ProtoBuf.ProtoMember(7)]
+        public global::System.Collections.Generic.List<uint> crc { get; } = new global::System.Collections.Generic.List<uint>();
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1156,7 +1159,8 @@ namespace SteamKit2.GC.Dota.Internal
         DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP = 9,
         DOTA_GAMERULES_STATE_WAIT_FOR_MAP_TO_LOAD = 10,
         DOTA_GAMERULES_STATE_SCENARIO_SETUP = 11,
-        DOTA_GAMERULES_STATE_LAST = 12,
+        DOTA_GAMERULES_STATE_PLAYER_DRAFT = 12,
+        DOTA_GAMERULES_STATE_LAST = 13,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1225,6 +1229,7 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_MUERTA_RELEASE_SPRING2023 = 40,
         EVENT_ID_TEAM_2023_TOUR1 = 41,
         EVENT_ID_TEAM_2023_TOUR2 = 42,
+        EVENT_ID_TEAM_2023_TOUR3 = 43,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1235,6 +1240,12 @@ namespace SteamKit2.GC.Dota.Internal
         k_ERankType_Ranked = 2,
         k_ERankType_CasualLegacy = 3,
         k_ERankType_RankedLegacy = 4,
+        k_ERankType_CasualGlicko = 5,
+        k_ERankType_RankedGlicko = 6,
+        k_ERankType_RankMax = 7,
+        k_ERankType_BehaviorPrivate = 100,
+        k_ERankType_BehaviorPublic = 101,
+        k_ERankType_Max = 102,
     }
 
     [global::ProtoBuf.ProtoContract()]

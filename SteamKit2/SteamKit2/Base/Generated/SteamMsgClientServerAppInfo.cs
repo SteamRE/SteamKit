@@ -380,6 +380,16 @@ namespace SteamKit2.Internal
         public void Resetsequence_number() => __pbn__sequence_number = null;
         private uint? __pbn__sequence_number;
 
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool single_response
+        {
+            get => __pbn__single_response.GetValueOrDefault();
+            set => __pbn__single_response = value;
+        }
+        public bool ShouldSerializesingle_response() => __pbn__single_response != null;
+        public void Resetsingle_response() => __pbn__single_response = null;
+        private bool? __pbn__single_response;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class AppInfo : global::ProtoBuf.IExtensible
         {

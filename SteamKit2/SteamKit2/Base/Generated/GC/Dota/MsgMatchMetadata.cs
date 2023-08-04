@@ -1393,6 +1393,17 @@ namespace SteamKit2.GC.Dota.Internal
                 [global::ProtoBuf.ProtoMember(56)]
                 public global::System.Collections.Generic.List<CDOTAMatchMetadata.EconItem> equipped_econ_items { get; } = new global::System.Collections.Generic.List<CDOTAMatchMetadata.EconItem>();
 
+                [global::ProtoBuf.ProtoMember(57)]
+                [global::System.ComponentModel.DefaultValue(-1)]
+                public int game_player_id
+                {
+                    get => __pbn__game_player_id ?? -1;
+                    set => __pbn__game_player_id = value;
+                }
+                public bool ShouldSerializegame_player_id() => __pbn__game_player_id != null;
+                public void Resetgame_player_id() => __pbn__game_player_id = null;
+                private int? __pbn__game_player_id;
+
                 [global::ProtoBuf.ProtoContract()]
                 public partial class ContractProgress : global::ProtoBuf.IExtensible
                 {

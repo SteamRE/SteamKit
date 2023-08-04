@@ -335,17 +335,6 @@ namespace SteamKit2.GC.CSGO.Internal
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string UNUSED_job_name
-        {
-            get => __pbn__UNUSED_job_name ?? "";
-            set => __pbn__UNUSED_job_name = value;
-        }
-        public bool ShouldSerializeUNUSED_job_name() => __pbn__UNUSED_job_name != null;
-        public void ResetUNUSED_job_name() => __pbn__UNUSED_job_name = null;
-        private string __pbn__UNUSED_job_name;
-
         [global::ProtoBuf.ProtoMember(2)]
         [global::System.ComponentModel.DefaultValue("")]
         public string interface_name

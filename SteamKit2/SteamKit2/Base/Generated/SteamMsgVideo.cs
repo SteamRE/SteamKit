@@ -206,6 +206,496 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CVideo_GameClipRepresentation : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string representation_name
+        {
+            get => __pbn__representation_name ?? "";
+            set => __pbn__representation_name = value;
+        }
+        public bool ShouldSerializerepresentation_name() => __pbn__representation_name != null;
+        public void Resetrepresentation_name() => __pbn__representation_name = null;
+        private string __pbn__representation_name;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint horizontal_resolution
+        {
+            get => __pbn__horizontal_resolution.GetValueOrDefault();
+            set => __pbn__horizontal_resolution = value;
+        }
+        public bool ShouldSerializehorizontal_resolution() => __pbn__horizontal_resolution != null;
+        public void Resethorizontal_resolution() => __pbn__horizontal_resolution = null;
+        private uint? __pbn__horizontal_resolution;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint vertical_resolution
+        {
+            get => __pbn__vertical_resolution.GetValueOrDefault();
+            set => __pbn__vertical_resolution = value;
+        }
+        public bool ShouldSerializevertical_resolution() => __pbn__vertical_resolution != null;
+        public void Resetvertical_resolution() => __pbn__vertical_resolution = null;
+        private uint? __pbn__vertical_resolution;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public double frame_rate
+        {
+            get => __pbn__frame_rate.GetValueOrDefault();
+            set => __pbn__frame_rate = value;
+        }
+        public bool ShouldSerializeframe_rate() => __pbn__frame_rate != null;
+        public void Resetframe_rate() => __pbn__frame_rate = null;
+        private double? __pbn__frame_rate;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint bandwidth
+        {
+            get => __pbn__bandwidth.GetValueOrDefault();
+            set => __pbn__bandwidth = value;
+        }
+        public bool ShouldSerializebandwidth() => __pbn__bandwidth != null;
+        public void Resetbandwidth() => __pbn__bandwidth = null;
+        private uint? __pbn__bandwidth;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint audio_sample_rate
+        {
+            get => __pbn__audio_sample_rate.GetValueOrDefault();
+            set => __pbn__audio_sample_rate = value;
+        }
+        public bool ShouldSerializeaudio_sample_rate() => __pbn__audio_sample_rate != null;
+        public void Resetaudio_sample_rate() => __pbn__audio_sample_rate = null;
+        private uint? __pbn__audio_sample_rate;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string frame_rate_string
+        {
+            get => __pbn__frame_rate_string ?? "";
+            set => __pbn__frame_rate_string = value;
+        }
+        public bool ShouldSerializeframe_rate_string() => __pbn__frame_rate_string != null;
+        public void Resetframe_rate_string() => __pbn__frame_rate_string = null;
+        private string __pbn__frame_rate_string;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string codec
+        {
+            get => __pbn__codec ?? "";
+            set => __pbn__codec = value;
+        }
+        public bool ShouldSerializecodec() => __pbn__codec != null;
+        public void Resetcodec() => __pbn__codec = null;
+        private string __pbn__codec;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public uint audio_channel_config
+        {
+            get => __pbn__audio_channel_config.GetValueOrDefault();
+            set => __pbn__audio_channel_config = value;
+        }
+        public bool ShouldSerializeaudio_channel_config() => __pbn__audio_channel_config != null;
+        public void Resetaudio_channel_config() => __pbn__audio_channel_config = null;
+        private uint? __pbn__audio_channel_config;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CVideo_GameClipComponent : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string component_name
+        {
+            get => __pbn__component_name ?? "";
+            set => __pbn__component_name = value;
+        }
+        public bool ShouldSerializecomponent_name() => __pbn__component_name != null;
+        public void Resetcomponent_name() => __pbn__component_name = null;
+        private string __pbn__component_name;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint contents
+        {
+            get => __pbn__contents.GetValueOrDefault();
+            set => __pbn__contents = value;
+        }
+        public bool ShouldSerializecontents() => __pbn__contents != null;
+        public void Resetcontents() => __pbn__contents = null;
+        private uint? __pbn__contents;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint segment_size
+        {
+            get => __pbn__segment_size.GetValueOrDefault();
+            set => __pbn__segment_size = value;
+        }
+        public bool ShouldSerializesegment_size() => __pbn__segment_size != null;
+        public void Resetsegment_size() => __pbn__segment_size = null;
+        private uint? __pbn__segment_size;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string file_type
+        {
+            get => __pbn__file_type ?? "";
+            set => __pbn__file_type = value;
+        }
+        public bool ShouldSerializefile_type() => __pbn__file_type != null;
+        public void Resetfile_type() => __pbn__file_type = null;
+        private string __pbn__file_type;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public global::System.Collections.Generic.List<CVideo_GameClipRepresentation> representations { get; } = new global::System.Collections.Generic.List<CVideo_GameClipRepresentation>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CVideo_CreateGameClip_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint app_id
+        {
+            get => __pbn__app_id.GetValueOrDefault();
+            set => __pbn__app_id = value;
+        }
+        public bool ShouldSerializeapp_id() => __pbn__app_id != null;
+        public void Resetapp_id() => __pbn__app_id = null;
+        private uint? __pbn__app_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint num_segments
+        {
+            get => __pbn__num_segments.GetValueOrDefault();
+            set => __pbn__num_segments = value;
+        }
+        public bool ShouldSerializenum_segments() => __pbn__num_segments != null;
+        public void Resetnum_segments() => __pbn__num_segments = null;
+        private uint? __pbn__num_segments;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint length_milliseconds
+        {
+            get => __pbn__length_milliseconds.GetValueOrDefault();
+            set => __pbn__length_milliseconds = value;
+        }
+        public bool ShouldSerializelength_milliseconds() => __pbn__length_milliseconds != null;
+        public void Resetlength_milliseconds() => __pbn__length_milliseconds = null;
+        private uint? __pbn__length_milliseconds;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint segment_duration_timescale
+        {
+            get => __pbn__segment_duration_timescale.GetValueOrDefault();
+            set => __pbn__segment_duration_timescale = value;
+        }
+        public bool ShouldSerializesegment_duration_timescale() => __pbn__segment_duration_timescale != null;
+        public void Resetsegment_duration_timescale() => __pbn__segment_duration_timescale = null;
+        private uint? __pbn__segment_duration_timescale;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint segment_duration
+        {
+            get => __pbn__segment_duration.GetValueOrDefault();
+            set => __pbn__segment_duration = value;
+        }
+        public bool ShouldSerializesegment_duration() => __pbn__segment_duration != null;
+        public void Resetsegment_duration() => __pbn__segment_duration = null;
+        private uint? __pbn__segment_duration;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public global::System.Collections.Generic.List<CVideo_GameClipComponent> components { get; } = new global::System.Collections.Generic.List<CVideo_GameClipComponent>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CVideo_CreateGameClip_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong clip_id
+        {
+            get => __pbn__clip_id.GetValueOrDefault();
+            set => __pbn__clip_id = value;
+        }
+        public bool ShouldSerializeclip_id() => __pbn__clip_id != null;
+        public void Resetclip_id() => __pbn__clip_id = null;
+        private ulong? __pbn__clip_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CVideo_GameClipSegmentInfo : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint segment_number
+        {
+            get => __pbn__segment_number.GetValueOrDefault();
+            set => __pbn__segment_number = value;
+        }
+        public bool ShouldSerializesegment_number() => __pbn__segment_number != null;
+        public void Resetsegment_number() => __pbn__segment_number = null;
+        private uint? __pbn__segment_number;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public ulong segment_size_bytes
+        {
+            get => __pbn__segment_size_bytes.GetValueOrDefault();
+            set => __pbn__segment_size_bytes = value;
+        }
+        public bool ShouldSerializesegment_size_bytes() => __pbn__segment_size_bytes != null;
+        public void Resetsegment_size_bytes() => __pbn__segment_size_bytes = null;
+        private ulong? __pbn__segment_size_bytes;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CVideo_BeginGameClipSegmentsUpload_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong clip_id
+        {
+            get => __pbn__clip_id.GetValueOrDefault();
+            set => __pbn__clip_id = value;
+        }
+        public bool ShouldSerializeclip_id() => __pbn__clip_id != null;
+        public void Resetclip_id() => __pbn__clip_id = null;
+        private ulong? __pbn__clip_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string component_name
+        {
+            get => __pbn__component_name ?? "";
+            set => __pbn__component_name = value;
+        }
+        public bool ShouldSerializecomponent_name() => __pbn__component_name != null;
+        public void Resetcomponent_name() => __pbn__component_name = null;
+        private string __pbn__component_name;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string representation_name
+        {
+            get => __pbn__representation_name ?? "";
+            set => __pbn__representation_name = value;
+        }
+        public bool ShouldSerializerepresentation_name() => __pbn__representation_name != null;
+        public void Resetrepresentation_name() => __pbn__representation_name = null;
+        private string __pbn__representation_name;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<CVideo_GameClipSegmentInfo> segments_to_store { get; } = new global::System.Collections.Generic.List<CVideo_GameClipSegmentInfo>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CVideo_GameClipSegmentUploadInfo : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CVideo_GameClipSegmentInfo segment_info { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string url_host
+        {
+            get => __pbn__url_host ?? "";
+            set => __pbn__url_host = value;
+        }
+        public bool ShouldSerializeurl_host() => __pbn__url_host != null;
+        public void Reseturl_host() => __pbn__url_host = null;
+        private string __pbn__url_host;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string url_path
+        {
+            get => __pbn__url_path ?? "";
+            set => __pbn__url_path = value;
+        }
+        public bool ShouldSerializeurl_path() => __pbn__url_path != null;
+        public void Reseturl_path() => __pbn__url_path = null;
+        private string __pbn__url_path;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool use_https
+        {
+            get => __pbn__use_https.GetValueOrDefault();
+            set => __pbn__use_https = value;
+        }
+        public bool ShouldSerializeuse_https() => __pbn__use_https != null;
+        public void Resetuse_https() => __pbn__use_https = null;
+        private bool? __pbn__use_https;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public global::System.Collections.Generic.List<HTTPHeaders> request_headers { get; } = new global::System.Collections.Generic.List<HTTPHeaders>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class HTTPHeaders : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string name
+            {
+                get => __pbn__name ?? "";
+                set => __pbn__name = value;
+            }
+            public bool ShouldSerializename() => __pbn__name != null;
+            public void Resetname() => __pbn__name = null;
+            private string __pbn__name;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string value
+            {
+                get => __pbn__value ?? "";
+                set => __pbn__value = value;
+            }
+            public bool ShouldSerializevalue() => __pbn__value != null;
+            public void Resetvalue() => __pbn__value = null;
+            private string __pbn__value;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CVideo_BeginGameClipSegmentsUpload_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CVideo_GameClipSegmentUploadInfo> segments_needed { get; } = new global::System.Collections.Generic.List<CVideo_GameClipSegmentUploadInfo>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool call_again
+        {
+            get => __pbn__call_again.GetValueOrDefault();
+            set => __pbn__call_again = value;
+        }
+        public bool ShouldSerializecall_again() => __pbn__call_again != null;
+        public void Resetcall_again() => __pbn__call_again = null;
+        private bool? __pbn__call_again;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CVideo_CommitGameClipSegmentsUpload_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong clip_id
+        {
+            get => __pbn__clip_id.GetValueOrDefault();
+            set => __pbn__clip_id = value;
+        }
+        public bool ShouldSerializeclip_id() => __pbn__clip_id != null;
+        public void Resetclip_id() => __pbn__clip_id = null;
+        private ulong? __pbn__clip_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string component_name
+        {
+            get => __pbn__component_name ?? "";
+            set => __pbn__component_name = value;
+        }
+        public bool ShouldSerializecomponent_name() => __pbn__component_name != null;
+        public void Resetcomponent_name() => __pbn__component_name = null;
+        private string __pbn__component_name;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string representation_name
+        {
+            get => __pbn__representation_name ?? "";
+            set => __pbn__representation_name = value;
+        }
+        public bool ShouldSerializerepresentation_name() => __pbn__representation_name != null;
+        public void Resetrepresentation_name() => __pbn__representation_name = null;
+        private string __pbn__representation_name;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint first_segment_number
+        {
+            get => __pbn__first_segment_number.GetValueOrDefault();
+            set => __pbn__first_segment_number = value;
+        }
+        public bool ShouldSerializefirst_segment_number() => __pbn__first_segment_number != null;
+        public void Resetfirst_segment_number() => __pbn__first_segment_number = null;
+        private uint? __pbn__first_segment_number;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint num_segments
+        {
+            get => __pbn__num_segments.GetValueOrDefault();
+            set => __pbn__num_segments = value;
+        }
+        public bool ShouldSerializenum_segments() => __pbn__num_segments != null;
+        public void Resetnum_segments() => __pbn__num_segments = null;
+        private uint? __pbn__num_segments;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint upload_result
+        {
+            get => __pbn__upload_result.GetValueOrDefault();
+            set => __pbn__upload_result = value;
+        }
+        public bool ShouldSerializeupload_result() => __pbn__upload_result != null;
+        public void Resetupload_result() => __pbn__upload_result = null;
+        private uint? __pbn__upload_result;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CVideo_CommitGameClipSegmentsUpload_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CVideo_UnlockedH264_Notification : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -288,6 +778,9 @@ namespace SteamKit2.Internal
         CVideo_ClientGetVideoURL_Response ClientGetVideoURL(CVideo_ClientGetVideoURL_Request request);
         NoResponse SetVideoBookmark(CVideo_SetVideoBookmark_Notification request);
         CVideo_GetVideoBookmarks_Response GetVideoBookmarks(CVideo_GetVideoBookmarks_Request request);
+        CVideo_CreateGameClip_Response CreateGameClip(CVideo_CreateGameClip_Request request);
+        CVideo_BeginGameClipSegmentsUpload_Response BeginGameClipSegmentsUpload(CVideo_BeginGameClipSegmentsUpload_Request request);
+        CVideo_CommitGameClipSegmentsUpload_Response CommitGameClipSegmentsUpload(CVideo_CommitGameClipSegmentsUpload_Request request);
     }
 
     public interface IVideoClient

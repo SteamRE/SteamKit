@@ -119,6 +119,26 @@ namespace SteamKit2.Internal
         public void Resetgaming_device_type() => __pbn__gaming_device_type = null;
         private uint? __pbn__gaming_device_type;
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint client_count
+        {
+            get => __pbn__client_count.GetValueOrDefault();
+            set => __pbn__client_count = value;
+        }
+        public bool ShouldSerializeclient_count() => __pbn__client_count != null;
+        public void Resetclient_count() => __pbn__client_count = null;
+        private uint? __pbn__client_count;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public byte[] machine_id
+        {
+            get => __pbn__machine_id;
+            set => __pbn__machine_id = value;
+        }
+        public bool ShouldSerializemachine_id() => __pbn__machine_id != null;
+        public void Resetmachine_id() => __pbn__machine_id = null;
+        private byte[] __pbn__machine_id;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -945,6 +965,17 @@ namespace SteamKit2.Internal
         public void Resetsteamid() => __pbn__steamid = null;
         private ulong? __pbn__steamid;
 
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(ETokenRenewalType.k_ETokenRenewalType_None)]
+        public ETokenRenewalType renewal_type
+        {
+            get => __pbn__renewal_type ?? ETokenRenewalType.k_ETokenRenewalType_None;
+            set => __pbn__renewal_type = value;
+        }
+        public bool ShouldSerializerenewal_type() => __pbn__renewal_type != null;
+        public void Resetrenewal_type() => __pbn__renewal_type = null;
+        private ETokenRenewalType? __pbn__renewal_type;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -964,6 +995,17 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeaccess_token() => __pbn__access_token != null;
         public void Resetaccess_token() => __pbn__access_token = null;
         private string __pbn__access_token;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string refresh_token
+        {
+            get => __pbn__refresh_token ?? "";
+            set => __pbn__refresh_token = value;
+        }
+        public bool ShouldSerializerefresh_token() => __pbn__refresh_token != null;
+        public void Resetrefresh_token() => __pbn__refresh_token = null;
+        private string __pbn__refresh_token;
 
     }
 
@@ -1261,6 +1303,46 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeaccess_token() => __pbn__access_token != null;
         public void Resetaccess_token() => __pbn__access_token = null;
         private string __pbn__access_token;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_Token_Revoke_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string token
+        {
+            get => __pbn__token ?? "";
+            set => __pbn__token = value;
+        }
+        public bool ShouldSerializetoken() => __pbn__token != null;
+        public void Resettoken() => __pbn__token = null;
+        private string __pbn__token;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(EAuthTokenRevokeAction.k_EAuthTokenRevokePermanent)]
+        public EAuthTokenRevokeAction revoke_action
+        {
+            get => __pbn__revoke_action ?? EAuthTokenRevokeAction.k_EAuthTokenRevokePermanent;
+            set => __pbn__revoke_action = value;
+        }
+        public bool ShouldSerializerevoke_action() => __pbn__revoke_action != null;
+        public void Resetrevoke_action() => __pbn__revoke_action = null;
+        private EAuthTokenRevokeAction? __pbn__revoke_action;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_Token_Revoke_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
     }
 
@@ -1844,6 +1926,13 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public enum ETokenRenewalType
+    {
+        k_ETokenRenewalType_None = 0,
+        k_ETokenRenewalType_Allow = 1,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EAuthTokenRevokeAction
     {
         k_EAuthTokenRevokeLogout = 0,
@@ -1851,6 +1940,9 @@ namespace SteamKit2.Internal
         k_EAuthTokenRevokeReplaced = 2,
         k_EAuthTokenRevokeSupport = 3,
         k_EAuthTokenRevokeConsume = 4,
+        k_EAuthTokenRevokeNonRememberedLogout = 5,
+        k_EAuthTokenRevokeNonRememberedPermanent = 6,
+        k_EAuthTokenRevokeAutomatic = 7,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1879,6 +1971,7 @@ namespace SteamKit2.Internal
         CAuthentication_RefreshToken_Enumerate_Response EnumerateTokens(CAuthentication_RefreshToken_Enumerate_Request request);
         CAuthentication_GetAuthSessionsForAccount_Response GetAuthSessionsForAccount(CAuthentication_GetAuthSessionsForAccount_Request request);
         CAuthentication_MigrateMobileSession_Response MigrateMobileSession(CAuthentication_MigrateMobileSession_Request request);
+        CAuthentication_Token_Revoke_Response RevokeToken(CAuthentication_Token_Revoke_Request request);
         CAuthentication_RefreshToken_Revoke_Response RevokeRefreshToken(CAuthentication_RefreshToken_Revoke_Request request);
     }
 

@@ -66,6 +66,16 @@ namespace SteamKit2.Internal
         public void Resetcreatorid() => __pbn__creatorid = null;
         private uint? __pbn__creatorid;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint hubcategoryid
+        {
+            get => __pbn__hubcategoryid.GetValueOrDefault();
+            set => __pbn__hubcategoryid = value;
+        }
+        public bool ShouldSerializehubcategoryid() => __pbn__hubcategoryid != null;
+        public void Resethubcategoryid() => __pbn__hubcategoryid = null;
+        private uint? __pbn__hubcategoryid;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -235,6 +245,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeinclude_supported_languages() => __pbn__include_supported_languages != null;
         public void Resetinclude_supported_languages() => __pbn__include_supported_languages = null;
         private bool? __pbn__include_supported_languages;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public bool include_full_description
+        {
+            get => __pbn__include_full_description.GetValueOrDefault();
+            set => __pbn__include_full_description = value;
+        }
+        public bool ShouldSerializeinclude_full_description() => __pbn__include_full_description != null;
+        public void Resetinclude_full_description() => __pbn__include_full_description = null;
+        private bool? __pbn__include_full_description;
 
     }
 
@@ -554,6 +574,28 @@ namespace SteamKit2.Internal
         public bool ShouldSerializegame_count() => __pbn__game_count != null;
         public void Resetgame_count() => __pbn__game_count = null;
         private uint? __pbn__game_count;
+
+        [global::ProtoBuf.ProtoMember(57)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string internal_name
+        {
+            get => __pbn__internal_name ?? "";
+            set => __pbn__internal_name = value;
+        }
+        public bool ShouldSerializeinternal_name() => __pbn__internal_name != null;
+        public void Resetinternal_name() => __pbn__internal_name = null;
+        private string __pbn__internal_name;
+
+        [global::ProtoBuf.ProtoMember(58)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string full_description
+        {
+            get => __pbn__full_description ?? "";
+            set => __pbn__full_description = value;
+        }
+        public bool ShouldSerializefull_description() => __pbn__full_description != null;
+        public void Resetfull_description() => __pbn__full_description = null;
+        private string __pbn__full_description;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class RelatedItems : global::ProtoBuf.IExtensible
@@ -1332,6 +1374,37 @@ namespace SteamKit2.Internal
             public void Resetshould_suppress_discount_pct() => __pbn__should_suppress_discount_pct = null;
             private bool? __pbn__should_suppress_discount_pct;
 
+            [global::ProtoBuf.ProtoMember(42)]
+            [global::System.ComponentModel.DefaultValue(false)]
+            public bool hide_discount_pct_for_compliance
+            {
+                get => __pbn__hide_discount_pct_for_compliance ?? false;
+                set => __pbn__hide_discount_pct_for_compliance = value;
+            }
+            public bool ShouldSerializehide_discount_pct_for_compliance() => __pbn__hide_discount_pct_for_compliance != null;
+            public void Resethide_discount_pct_for_compliance() => __pbn__hide_discount_pct_for_compliance = null;
+            private bool? __pbn__hide_discount_pct_for_compliance;
+
+            [global::ProtoBuf.ProtoMember(43)]
+            public int included_game_count
+            {
+                get => __pbn__included_game_count.GetValueOrDefault();
+                set => __pbn__included_game_count = value;
+            }
+            public bool ShouldSerializeincluded_game_count() => __pbn__included_game_count != null;
+            public void Resetincluded_game_count() => __pbn__included_game_count = null;
+            private int? __pbn__included_game_count;
+
+            [global::ProtoBuf.ProtoMember(44)]
+            public long lowest_recent_price_in_cents
+            {
+                get => __pbn__lowest_recent_price_in_cents.GetValueOrDefault();
+                set => __pbn__lowest_recent_price_in_cents = value;
+            }
+            public bool ShouldSerializelowest_recent_price_in_cents() => __pbn__lowest_recent_price_in_cents != null;
+            public void Resetlowest_recent_price_in_cents() => __pbn__lowest_recent_price_in_cents = null;
+            private long? __pbn__lowest_recent_price_in_cents;
+
             [global::ProtoBuf.ProtoContract()]
             public partial class Discount : global::ProtoBuf.IExtensible
             {
@@ -2000,6 +2073,7 @@ namespace SteamKit2.Internal
         k_EStoreItemType_Mtx = 3,
         k_EStoreItemType_Tag = 4,
         k_EStoreItemType_Creator = 5,
+        k_EStoreItemType_HubCategory = 6,
     }
 
     [global::ProtoBuf.ProtoContract()]

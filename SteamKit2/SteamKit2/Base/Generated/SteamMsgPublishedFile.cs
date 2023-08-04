@@ -1325,6 +1325,16 @@ namespace SteamKit2.Internal
         public void Resetban_text_check_result() => __pbn__ban_text_check_result = null;
         private EBanContentCheckResult? __pbn__ban_text_check_result;
 
+        [global::ProtoBuf.ProtoMember(73)]
+        public float search_score
+        {
+            get => __pbn__search_score.GetValueOrDefault();
+            set => __pbn__search_score = value;
+        }
+        public bool ShouldSerializesearch_score() => __pbn__search_score != null;
+        public void Resetsearch_score() => __pbn__search_score = null;
+        private float? __pbn__search_score;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Tag : global::ProtoBuf.IExtensible
         {
@@ -1882,6 +1892,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
         private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint shortcutid
+        {
+            get => __pbn__shortcutid.GetValueOrDefault();
+            set => __pbn__shortcutid = value;
+        }
+        public bool ShouldSerializeshortcutid() => __pbn__shortcutid != null;
+        public void Resetshortcutid() => __pbn__shortcutid = null;
+        private uint? __pbn__shortcutid;
 
         [global::ProtoBuf.ProtoMember(4)]
         [global::System.ComponentModel.DefaultValue(1u)]
@@ -3941,10 +3961,10 @@ namespace SteamKit2.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            [global::System.ComponentModel.DefaultValue(EContentDescriptorID.k_EContentDescriptor_FrequentNudityOrSexualContent)]
+            [global::System.ComponentModel.DefaultValue(EContentDescriptorID.k_EContentDescriptor_NudityOrSexualContent)]
             public EContentDescriptorID descriptorid
             {
-                get => __pbn__descriptorid ?? EContentDescriptorID.k_EContentDescriptor_FrequentNudityOrSexualContent;
+                get => __pbn__descriptorid ?? EContentDescriptorID.k_EContentDescriptor_NudityOrSexualContent;
                 set => __pbn__descriptorid = value;
             }
             public bool ShouldSerializedescriptorid() => __pbn__descriptorid != null;
@@ -4016,6 +4036,16 @@ namespace SteamKit2.Internal
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint timestamp_updated
+        {
+            get => __pbn__timestamp_updated.GetValueOrDefault();
+            set => __pbn__timestamp_updated = value;
+        }
+        public bool ShouldSerializetimestamp_updated() => __pbn__timestamp_updated != null;
+        public void Resettimestamp_updated() => __pbn__timestamp_updated = null;
+        private uint? __pbn__timestamp_updated;
 
     }
 

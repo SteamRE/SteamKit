@@ -820,6 +820,142 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationOverlaySplashScreen : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationBroadcastAvailableToWatch : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int broadcast_permission
+        {
+            get => __pbn__broadcast_permission.GetValueOrDefault();
+            set => __pbn__broadcast_permission = value;
+        }
+        public bool ShouldSerializebroadcast_permission() => __pbn__broadcast_permission != null;
+        public void Resetbroadcast_permission() => __pbn__broadcast_permission = null;
+        private int? __pbn__broadcast_permission;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationTimedTrialRemaining : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string icon
+        {
+            get => __pbn__icon ?? "";
+            set => __pbn__icon = value;
+        }
+        public bool ShouldSerializeicon() => __pbn__icon != null;
+        public void Reseticon() => __pbn__icon = null;
+        private string __pbn__icon;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool offline
+        {
+            get => __pbn__offline.GetValueOrDefault();
+            set => __pbn__offline = value;
+        }
+        public bool ShouldSerializeoffline() => __pbn__offline != null;
+        public void Resetoffline() => __pbn__offline = null;
+        private bool? __pbn__offline;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint allowed_seconds
+        {
+            get => __pbn__allowed_seconds.GetValueOrDefault();
+            set => __pbn__allowed_seconds = value;
+        }
+        public bool ShouldSerializeallowed_seconds() => __pbn__allowed_seconds != null;
+        public void Resetallowed_seconds() => __pbn__allowed_seconds = null;
+        private uint? __pbn__allowed_seconds;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint played_seconds
+        {
+            get => __pbn__played_seconds.GetValueOrDefault();
+            set => __pbn__played_seconds = value;
+        }
+        public bool ShouldSerializeplayed_seconds() => __pbn__played_seconds != null;
+        public void Resetplayed_seconds() => __pbn__played_seconds = null;
+        private uint? __pbn__played_seconds;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationLoginRefresh : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationTimerExpired : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationSteamInputActionSetChanged : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int controller_index
+        {
+            get => __pbn__controller_index.GetValueOrDefault();
+            set => __pbn__controller_index = value;
+        }
+        public bool ShouldSerializecontroller_index() => __pbn__controller_index != null;
+        public void Resetcontroller_index() => __pbn__controller_index = null;
+        private int? __pbn__controller_index;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string action_set_name
+        {
+            get => __pbn__action_set_name ?? "";
+            set => __pbn__action_set_name = value;
+        }
+        public bool ShouldSerializeaction_set_name() => __pbn__action_set_name != null;
+        public void Resetaction_set_name() => __pbn__action_set_name = null;
+        private string __pbn__action_set_name;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EClientNotificationType
     {
         k_EClientNotificationType_Invalid = 0,
@@ -854,6 +990,15 @@ namespace SteamKit2.Internal
         k_EClientNotificationType_TradeOffer = 29,
         k_EClientNotificationType_AsyncGame = 30,
         k_EClientNotificationType_General = 31,
+        k_EClientNotificationType_HelpRequest = 32,
+        k_EClientNotificationType_OverlaySplashScreen = 33,
+        k_EClientNotificationType_BroadcastAvailableToWatch = 34,
+        k_EClientNotificationType_TimedTrialRemaining = 35,
+        k_EClientNotificationType_LoginRefresh = 36,
+        k_EClientNotificationType_MajorSale = 37,
+        k_EClientNotificationType_TimerExpired = 38,
+        k_EClientNotificationType_ModeratorMsg = 39,
+        k_EClientNotificationType_SteamInputActionSetChanged = 40,
     }
 
     [global::ProtoBuf.ProtoContract()]

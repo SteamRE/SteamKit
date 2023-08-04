@@ -335,6 +335,248 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CDataPublisher_GetVRDeviceInfo_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint month_count
+        {
+            get => __pbn__month_count.GetValueOrDefault();
+            set => __pbn__month_count = value;
+        }
+        public bool ShouldSerializemonth_count() => __pbn__month_count != null;
+        public void Resetmonth_count() => __pbn__month_count = null;
+        private uint? __pbn__month_count;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CDataPublisher_GetVRDeviceInfo_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<Device> device { get; } = new global::System.Collections.Generic.List<Device>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Device : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string name
+            {
+                get => __pbn__name ?? "";
+                set => __pbn__name = value;
+            }
+            public bool ShouldSerializename() => __pbn__name != null;
+            public void Resetname() => __pbn__name = null;
+            private string __pbn__name;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint @ref
+            {
+                get => __pbn__ref.GetValueOrDefault();
+                set => __pbn__ref = value;
+            }
+            public bool ShouldSerializeref() => __pbn__ref != null;
+            public void Resetref() => __pbn__ref = null;
+            private uint? __pbn__ref;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint aggregation_ref
+            {
+                get => __pbn__aggregation_ref.GetValueOrDefault();
+                set => __pbn__aggregation_ref = value;
+            }
+            public bool ShouldSerializeaggregation_ref() => __pbn__aggregation_ref != null;
+            public void Resetaggregation_ref() => __pbn__aggregation_ref = null;
+            private uint? __pbn__aggregation_ref;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public uint total
+            {
+                get => __pbn__total.GetValueOrDefault();
+                set => __pbn__total = value;
+            }
+            public bool ShouldSerializetotal() => __pbn__total != null;
+            public void Resettotal() => __pbn__total = null;
+            private uint? __pbn__total;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string driver
+            {
+                get => __pbn__driver ?? "";
+                set => __pbn__driver = value;
+            }
+            public bool ShouldSerializedriver() => __pbn__driver != null;
+            public void Resetdriver() => __pbn__driver = null;
+            private string __pbn__driver;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public int device_class
+            {
+                get => __pbn__device_class.GetValueOrDefault();
+                set => __pbn__device_class = value;
+            }
+            public bool ShouldSerializedevice_class() => __pbn__device_class != null;
+            public void Resetdevice_class() => __pbn__device_class = null;
+            private int? __pbn__device_class;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CDataPublisher_SetVRDeviceInfoAggregationReference_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint @ref
+        {
+            get => __pbn__ref.GetValueOrDefault();
+            set => __pbn__ref = value;
+        }
+        public bool ShouldSerializeref() => __pbn__ref != null;
+        public void Resetref() => __pbn__ref = null;
+        private uint? __pbn__ref;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint aggregation_ref
+        {
+            get => __pbn__aggregation_ref.GetValueOrDefault();
+            set => __pbn__aggregation_ref = value;
+        }
+        public bool ShouldSerializeaggregation_ref() => __pbn__aggregation_ref != null;
+        public void Resetaggregation_ref() => __pbn__aggregation_ref = null;
+        private uint? __pbn__aggregation_ref;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CDataPublisher_SetVRDeviceInfoAggregationReference_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint result
+        {
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private uint? __pbn__result;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CDataPublisher_AddVRDeviceInfo_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string manufacturer
+        {
+            get => __pbn__manufacturer ?? "";
+            set => __pbn__manufacturer = value;
+        }
+        public bool ShouldSerializemanufacturer() => __pbn__manufacturer != null;
+        public void Resetmanufacturer() => __pbn__manufacturer = null;
+        private string __pbn__manufacturer;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string model
+        {
+            get => __pbn__model ?? "";
+            set => __pbn__model = value;
+        }
+        public bool ShouldSerializemodel() => __pbn__model != null;
+        public void Resetmodel() => __pbn__model = null;
+        private string __pbn__model;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string driver
+        {
+            get => __pbn__driver ?? "";
+            set => __pbn__driver = value;
+        }
+        public bool ShouldSerializedriver() => __pbn__driver != null;
+        public void Resetdriver() => __pbn__driver = null;
+        private string __pbn__driver;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string controller_type
+        {
+            get => __pbn__controller_type ?? "";
+            set => __pbn__controller_type = value;
+        }
+        public bool ShouldSerializecontroller_type() => __pbn__controller_type != null;
+        public void Resetcontroller_type() => __pbn__controller_type = null;
+        private string __pbn__controller_type;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public int device_class
+        {
+            get => __pbn__device_class.GetValueOrDefault();
+            set => __pbn__device_class = value;
+        }
+        public bool ShouldSerializedevice_class() => __pbn__device_class != null;
+        public void Resetdevice_class() => __pbn__device_class = null;
+        private int? __pbn__device_class;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CDataPublisher_AddVRDeviceInfo_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint result
+        {
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private uint? __pbn__result;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint @ref
+        {
+            get => __pbn__ref.GetValueOrDefault();
+            set => __pbn__ref = value;
+        }
+        public bool ShouldSerializeref() => __pbn__ref != null;
+        public void Resetref() => __pbn__ref = null;
+        private uint? __pbn__ref;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CValveHWSurvey_GetSurveySchedule_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -397,6 +639,9 @@ namespace SteamKit2.Internal
     {
         NoResponse ClientContentCorruptionReport(CDataPublisher_ClientContentCorruptionReport_Notification request);
         NoResponse ClientUpdateAppJobReport(CDataPublisher_ClientUpdateAppJob_Notification request);
+        CDataPublisher_GetVRDeviceInfo_Response GetVRDeviceInfo(CDataPublisher_GetVRDeviceInfo_Request request);
+        CDataPublisher_SetVRDeviceInfoAggregationReference_Response SetVRDeviceInfoAggregationReference(CDataPublisher_SetVRDeviceInfoAggregationReference_Request request);
+        CDataPublisher_AddVRDeviceInfo_Response AddVRDeviceInfo(CDataPublisher_AddVRDeviceInfo_Request request);
     }
 
     public interface IValveHWSurvey

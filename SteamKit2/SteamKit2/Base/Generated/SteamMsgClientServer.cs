@@ -1083,6 +1083,16 @@ namespace SteamKit2.Internal
         public void Resetmessage_sequence() => __pbn__message_sequence = null;
         private uint? __pbn__message_sequence;
 
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool filtered
+        {
+            get => __pbn__filtered.GetValueOrDefault();
+            set => __pbn__filtered = value;
+        }
+        public bool ShouldSerializefiltered() => __pbn__filtered != null;
+        public void Resetfiltered() => __pbn__filtered = null;
+        private bool? __pbn__filtered;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2005,16 +2015,6 @@ namespace SteamKit2.Internal
             public bool ShouldSerializemicro_sec_max_latency() => __pbn__micro_sec_max_latency != null;
             public void Resetmicro_sec_max_latency() => __pbn__micro_sec_max_latency = null;
             private uint? __pbn__micro_sec_max_latency;
-
-            [global::ProtoBuf.ProtoMember(20)]
-            public uint mem_pool_msg_in_use
-            {
-                get => __pbn__mem_pool_msg_in_use.GetValueOrDefault();
-                set => __pbn__mem_pool_msg_in_use = value;
-            }
-            public bool ShouldSerializemem_pool_msg_in_use() => __pbn__mem_pool_msg_in_use != null;
-            public void Resetmem_pool_msg_in_use() => __pbn__mem_pool_msg_in_use = null;
-            private uint? __pbn__mem_pool_msg_in_use;
 
         }
 

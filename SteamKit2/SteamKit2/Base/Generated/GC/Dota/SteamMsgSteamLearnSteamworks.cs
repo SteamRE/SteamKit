@@ -615,6 +615,639 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSteamLearn_Inference_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string access_token
+        {
+            get => __pbn__access_token ?? "";
+            set => __pbn__access_token = value;
+        }
+        public bool ShouldSerializeaccess_token() => __pbn__access_token != null;
+        public void Resetaccess_token() => __pbn__access_token = null;
+        private string __pbn__access_token;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgSteamLearn_AccessData access_data { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint project_id
+        {
+            get => __pbn__project_id.GetValueOrDefault();
+            set => __pbn__project_id = value;
+        }
+        public bool ShouldSerializeproject_id() => __pbn__project_id != null;
+        public void Resetproject_id() => __pbn__project_id = null;
+        private uint? __pbn__project_id;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint published_version
+        {
+            get => __pbn__published_version.GetValueOrDefault();
+            set => __pbn__published_version = value;
+        }
+        public bool ShouldSerializepublished_version() => __pbn__published_version != null;
+        public void Resetpublished_version() => __pbn__published_version = null;
+        private uint? __pbn__published_version;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint override_train_id
+        {
+            get => __pbn__override_train_id.GetValueOrDefault();
+            set => __pbn__override_train_id = value;
+        }
+        public bool ShouldSerializeoverride_train_id() => __pbn__override_train_id != null;
+        public void Resetoverride_train_id() => __pbn__override_train_id = null;
+        private uint? __pbn__override_train_id;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public CMsgSteamLearnDataList data { get; set; }
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public global::System.Collections.Generic.List<float> additional_data { get; } = new global::System.Collections.Generic.List<float>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSteamLearn_InferenceMetadata_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string access_token
+        {
+            get => __pbn__access_token ?? "";
+            set => __pbn__access_token = value;
+        }
+        public bool ShouldSerializeaccess_token() => __pbn__access_token != null;
+        public void Resetaccess_token() => __pbn__access_token = null;
+        private string __pbn__access_token;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgSteamLearn_AccessData access_data { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint project_id
+        {
+            get => __pbn__project_id.GetValueOrDefault();
+            set => __pbn__project_id = value;
+        }
+        public bool ShouldSerializeproject_id() => __pbn__project_id != null;
+        public void Resetproject_id() => __pbn__project_id = null;
+        private uint? __pbn__project_id;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint published_version
+        {
+            get => __pbn__published_version.GetValueOrDefault();
+            set => __pbn__published_version = value;
+        }
+        public bool ShouldSerializepublished_version() => __pbn__published_version != null;
+        public void Resetpublished_version() => __pbn__published_version = null;
+        private uint? __pbn__published_version;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint override_train_id
+        {
+            get => __pbn__override_train_id.GetValueOrDefault();
+            set => __pbn__override_train_id = value;
+        }
+        public bool ShouldSerializeoverride_train_id() => __pbn__override_train_id != null;
+        public void Resetoverride_train_id() => __pbn__override_train_id = null;
+        private uint? __pbn__override_train_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSteamLearn_InferenceMetadataBackend_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint project_id
+        {
+            get => __pbn__project_id.GetValueOrDefault();
+            set => __pbn__project_id = value;
+        }
+        public bool ShouldSerializeproject_id() => __pbn__project_id != null;
+        public void Resetproject_id() => __pbn__project_id = null;
+        private uint? __pbn__project_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint fetch_id
+        {
+            get => __pbn__fetch_id.GetValueOrDefault();
+            set => __pbn__fetch_id = value;
+        }
+        public bool ShouldSerializefetch_id() => __pbn__fetch_id != null;
+        public void Resetfetch_id() => __pbn__fetch_id = null;
+        private uint? __pbn__fetch_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSteamLearn_InferenceMetadata_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(ESteamLearnInferenceMetadataResult.STEAMLEARN_INFERENCE_METADATA_ERROR)]
+        public ESteamLearnInferenceMetadataResult inference_metadata_result
+        {
+            get => __pbn__inference_metadata_result ?? ESteamLearnInferenceMetadataResult.STEAMLEARN_INFERENCE_METADATA_ERROR;
+            set => __pbn__inference_metadata_result = value;
+        }
+        public bool ShouldSerializeinference_metadata_result() => __pbn__inference_metadata_result != null;
+        public void Resetinference_metadata_result() => __pbn__inference_metadata_result = null;
+        private ESteamLearnInferenceMetadataResult? __pbn__inference_metadata_result;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public RowRange row_range { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<Range> ranges { get; } = new global::System.Collections.Generic.List<Range>();
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<StdDev> std_devs { get; } = new global::System.Collections.Generic.List<StdDev>();
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public global::System.Collections.Generic.List<CompactTable> compact_tables { get; } = new global::System.Collections.Generic.List<CompactTable>();
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public global::System.Collections.Generic.List<KMeans> kmeans { get; } = new global::System.Collections.Generic.List<KMeans>();
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public SnapshotHistogram snapshot_histogram { get; set; }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class RowRange : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public ulong min_row
+            {
+                get => __pbn__min_row.GetValueOrDefault();
+                set => __pbn__min_row = value;
+            }
+            public bool ShouldSerializemin_row() => __pbn__min_row != null;
+            public void Resetmin_row() => __pbn__min_row = null;
+            private ulong? __pbn__min_row;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public ulong max_row
+            {
+                get => __pbn__max_row.GetValueOrDefault();
+                set => __pbn__max_row = value;
+            }
+            public bool ShouldSerializemax_row() => __pbn__max_row != null;
+            public void Resetmax_row() => __pbn__max_row = null;
+            private ulong? __pbn__max_row;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Range : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string data_element_path
+            {
+                get => __pbn__data_element_path ?? "";
+                set => __pbn__data_element_path = value;
+            }
+            public bool ShouldSerializedata_element_path() => __pbn__data_element_path != null;
+            public void Resetdata_element_path() => __pbn__data_element_path = null;
+            private string __pbn__data_element_path;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public int min_value
+            {
+                get => __pbn__min_value.GetValueOrDefault();
+                set => __pbn__min_value = value;
+            }
+            public bool ShouldSerializemin_value() => __pbn__min_value != null;
+            public void Resetmin_value() => __pbn__min_value = null;
+            private int? __pbn__min_value;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public int max_values
+            {
+                get => __pbn__max_values.GetValueOrDefault();
+                set => __pbn__max_values = value;
+            }
+            public bool ShouldSerializemax_values() => __pbn__max_values != null;
+            public void Resetmax_values() => __pbn__max_values = null;
+            private int? __pbn__max_values;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class StdDev : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string data_element_path
+            {
+                get => __pbn__data_element_path ?? "";
+                set => __pbn__data_element_path = value;
+            }
+            public bool ShouldSerializedata_element_path() => __pbn__data_element_path != null;
+            public void Resetdata_element_path() => __pbn__data_element_path = null;
+            private string __pbn__data_element_path;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public int mean
+            {
+                get => __pbn__mean.GetValueOrDefault();
+                set => __pbn__mean = value;
+            }
+            public bool ShouldSerializemean() => __pbn__mean != null;
+            public void Resetmean() => __pbn__mean = null;
+            private int? __pbn__mean;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint std_dev
+            {
+                get => __pbn__std_dev.GetValueOrDefault();
+                set => __pbn__std_dev = value;
+            }
+            public bool ShouldSerializestd_dev() => __pbn__std_dev != null;
+            public void Resetstd_dev() => __pbn__std_dev = null;
+            private uint? __pbn__std_dev;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class CompactTable : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string name
+            {
+                get => __pbn__name ?? "";
+                set => __pbn__name = value;
+            }
+            public bool ShouldSerializename() => __pbn__name != null;
+            public void Resetname() => __pbn__name = null;
+            private string __pbn__name;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public global::System.Collections.Generic.List<MapValuesEntry> map_values { get; } = new global::System.Collections.Generic.List<MapValuesEntry>();
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public global::System.Collections.Generic.List<MapMappingsEntry> map_mappings { get; } = new global::System.Collections.Generic.List<MapMappingsEntry>();
+
+            [global::ProtoBuf.ProtoContract()]
+            public partial class Entry : global::ProtoBuf.IExtensible
+            {
+                private global::ProtoBuf.IExtension __pbn__extensionData;
+                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+                [global::ProtoBuf.ProtoMember(1)]
+                public uint value
+                {
+                    get => __pbn__value.GetValueOrDefault();
+                    set => __pbn__value = value;
+                }
+                public bool ShouldSerializevalue() => __pbn__value != null;
+                public void Resetvalue() => __pbn__value = null;
+                private uint? __pbn__value;
+
+                [global::ProtoBuf.ProtoMember(2)]
+                public uint mapping
+                {
+                    get => __pbn__mapping.GetValueOrDefault();
+                    set => __pbn__mapping = value;
+                }
+                public bool ShouldSerializemapping() => __pbn__mapping != null;
+                public void Resetmapping() => __pbn__mapping = null;
+                private uint? __pbn__mapping;
+
+                [global::ProtoBuf.ProtoMember(3)]
+                public ulong count
+                {
+                    get => __pbn__count.GetValueOrDefault();
+                    set => __pbn__count = value;
+                }
+                public bool ShouldSerializecount() => __pbn__count != null;
+                public void Resetcount() => __pbn__count = null;
+                private ulong? __pbn__count;
+
+            }
+
+            [global::ProtoBuf.ProtoContract()]
+            public partial class MapValuesEntry : global::ProtoBuf.IExtensible
+            {
+                private global::ProtoBuf.IExtension __pbn__extensionData;
+                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+                [global::ProtoBuf.ProtoMember(1)]
+                public uint key
+                {
+                    get => __pbn__key.GetValueOrDefault();
+                    set => __pbn__key = value;
+                }
+                public bool ShouldSerializekey() => __pbn__key != null;
+                public void Resetkey() => __pbn__key = null;
+                private uint? __pbn__key;
+
+                [global::ProtoBuf.ProtoMember(2)]
+                public CMsgSteamLearn_InferenceMetadata_Response.CompactTable.Entry value { get; set; }
+
+            }
+
+            [global::ProtoBuf.ProtoContract()]
+            public partial class MapMappingsEntry : global::ProtoBuf.IExtensible
+            {
+                private global::ProtoBuf.IExtension __pbn__extensionData;
+                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+                [global::ProtoBuf.ProtoMember(1)]
+                public uint key
+                {
+                    get => __pbn__key.GetValueOrDefault();
+                    set => __pbn__key = value;
+                }
+                public bool ShouldSerializekey() => __pbn__key != null;
+                public void Resetkey() => __pbn__key = null;
+                private uint? __pbn__key;
+
+                [global::ProtoBuf.ProtoMember(2)]
+                public CMsgSteamLearn_InferenceMetadata_Response.CompactTable.Entry value { get; set; }
+
+            }
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class KMeans : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string name
+            {
+                get => __pbn__name ?? "";
+                set => __pbn__name = value;
+            }
+            public bool ShouldSerializename() => __pbn__name != null;
+            public void Resetname() => __pbn__name = null;
+            private string __pbn__name;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public global::System.Collections.Generic.List<Cluster> clusters { get; } = new global::System.Collections.Generic.List<Cluster>();
+
+            [global::ProtoBuf.ProtoContract()]
+            public partial class Cluster : global::ProtoBuf.IExtensible
+            {
+                private global::ProtoBuf.IExtension __pbn__extensionData;
+                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+                [global::ProtoBuf.ProtoMember(1)]
+                public float x
+                {
+                    get => __pbn__x.GetValueOrDefault();
+                    set => __pbn__x = value;
+                }
+                public bool ShouldSerializex() => __pbn__x != null;
+                public void Resetx() => __pbn__x = null;
+                private float? __pbn__x;
+
+                [global::ProtoBuf.ProtoMember(2)]
+                public float y
+                {
+                    get => __pbn__y.GetValueOrDefault();
+                    set => __pbn__y = value;
+                }
+                public bool ShouldSerializey() => __pbn__y != null;
+                public void Resety() => __pbn__y = null;
+                private float? __pbn__y;
+
+                [global::ProtoBuf.ProtoMember(3)]
+                public float radius
+                {
+                    get => __pbn__radius.GetValueOrDefault();
+                    set => __pbn__radius = value;
+                }
+                public bool ShouldSerializeradius() => __pbn__radius != null;
+                public void Resetradius() => __pbn__radius = null;
+                private float? __pbn__radius;
+
+                [global::ProtoBuf.ProtoMember(4)]
+                public float radius_80pct
+                {
+                    get => __pbn__radius_80pct.GetValueOrDefault();
+                    set => __pbn__radius_80pct = value;
+                }
+                public bool ShouldSerializeradius_80pct() => __pbn__radius_80pct != null;
+                public void Resetradius_80pct() => __pbn__radius_80pct = null;
+                private float? __pbn__radius_80pct;
+
+            }
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class SnapshotHistogram : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public float min_value
+            {
+                get => __pbn__min_value.GetValueOrDefault();
+                set => __pbn__min_value = value;
+            }
+            public bool ShouldSerializemin_value() => __pbn__min_value != null;
+            public void Resetmin_value() => __pbn__min_value = null;
+            private float? __pbn__min_value;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public float max_value
+            {
+                get => __pbn__max_value.GetValueOrDefault();
+                set => __pbn__max_value = value;
+            }
+            public bool ShouldSerializemax_value() => __pbn__max_value != null;
+            public void Resetmax_value() => __pbn__max_value = null;
+            private float? __pbn__max_value;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint num_buckets
+            {
+                get => __pbn__num_buckets.GetValueOrDefault();
+                set => __pbn__num_buckets = value;
+            }
+            public bool ShouldSerializenum_buckets() => __pbn__num_buckets != null;
+            public void Resetnum_buckets() => __pbn__num_buckets = null;
+            private uint? __pbn__num_buckets;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public global::System.Collections.Generic.List<uint> bucket_counts { get; } = new global::System.Collections.Generic.List<uint>();
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSteamLearn_InferenceBackend_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<Output> outputs { get; } = new global::System.Collections.Generic.List<Output>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class BinaryCrossEntropyOutput : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public float value
+            {
+                get => __pbn__value.GetValueOrDefault();
+                set => __pbn__value = value;
+            }
+            public bool ShouldSerializevalue() => __pbn__value != null;
+            public void Resetvalue() => __pbn__value = null;
+            private float? __pbn__value;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class MutliBinaryCrossEntropyOutput : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public global::System.Collections.Generic.List<float> weight { get; } = new global::System.Collections.Generic.List<float>();
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public global::System.Collections.Generic.List<float> value { get; } = new global::System.Collections.Generic.List<float>();
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class CategoricalCrossEntropyOutput : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public global::System.Collections.Generic.List<float> weight { get; } = new global::System.Collections.Generic.List<float>();
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public global::System.Collections.Generic.List<float> value { get; } = new global::System.Collections.Generic.List<float>();
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Output : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public CMsgSteamLearn_InferenceBackend_Response.BinaryCrossEntropyOutput binary_crossentropy
+            {
+                get => __pbn__ResponseType.Is(1) ? ((CMsgSteamLearn_InferenceBackend_Response.BinaryCrossEntropyOutput)__pbn__ResponseType.Object) : default(CMsgSteamLearn_InferenceBackend_Response.BinaryCrossEntropyOutput);
+                set => __pbn__ResponseType = new global::ProtoBuf.DiscriminatedUnionObject(1, value);
+            }
+            public bool ShouldSerializebinary_crossentropy() => __pbn__ResponseType.Is(1);
+            public void Resetbinary_crossentropy() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__ResponseType, 1);
+
+            private global::ProtoBuf.DiscriminatedUnionObject __pbn__ResponseType;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public CMsgSteamLearn_InferenceBackend_Response.CategoricalCrossEntropyOutput categorical_crossentropy
+            {
+                get => __pbn__ResponseType.Is(2) ? ((CMsgSteamLearn_InferenceBackend_Response.CategoricalCrossEntropyOutput)__pbn__ResponseType.Object) : default(CMsgSteamLearn_InferenceBackend_Response.CategoricalCrossEntropyOutput);
+                set => __pbn__ResponseType = new global::ProtoBuf.DiscriminatedUnionObject(2, value);
+            }
+            public bool ShouldSerializecategorical_crossentropy() => __pbn__ResponseType.Is(2);
+            public void Resetcategorical_crossentropy() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__ResponseType, 2);
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public CMsgSteamLearn_InferenceBackend_Response.MutliBinaryCrossEntropyOutput multi_binary_crossentropy
+            {
+                get => __pbn__ResponseType.Is(3) ? ((CMsgSteamLearn_InferenceBackend_Response.MutliBinaryCrossEntropyOutput)__pbn__ResponseType.Object) : default(CMsgSteamLearn_InferenceBackend_Response.MutliBinaryCrossEntropyOutput);
+                set => __pbn__ResponseType = new global::ProtoBuf.DiscriminatedUnionObject(3, value);
+            }
+            public bool ShouldSerializemulti_binary_crossentropy() => __pbn__ResponseType.Is(3);
+            public void Resetmulti_binary_crossentropy() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__ResponseType, 3);
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSteamLearn_Inference_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(ESteamLearnInferenceResult.STEAMLEARN_INFERENCE_ERROR)]
+        public ESteamLearnInferenceResult inference_result
+        {
+            get => __pbn__inference_result ?? ESteamLearnInferenceResult.STEAMLEARN_INFERENCE_ERROR;
+            set => __pbn__inference_result = value;
+        }
+        public bool ShouldSerializeinference_result() => __pbn__inference_result != null;
+        public void Resetinference_result() => __pbn__inference_result = null;
+        private ESteamLearnInferenceResult? __pbn__inference_result;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgSteamLearn_InferenceBackend_Response backend_response { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ESteamLearnDataType
     {
         STEAMLEARN_DATATYPE_INVALID = 0,
@@ -678,6 +1311,34 @@ namespace SteamKit2.GC.Dota.Internal
         STEAMLEARN_GET_HMAC_KEYS_SUCCESS = 0,
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESteamLearnInferenceResult
+    {
+        STEAMLEARN_INFERENCE_ERROR = 0,
+        STEAMLEARN_INFERENCE_SUCCESS = 1,
+        STEAMLEARN_INFERENCE_ERROR_INVALID_PROJECT_ID = 2,
+        STEAMLEARN_INFERENCE_ERROR_MISSING_CACHED_SCHEMA_DATA = 3,
+        STEAMLEARN_INFERENCE_ERROR_NO_PUBLISHED_CONFIG = 4,
+        STEAMLEARN_INFERENCE_ERROR_FORBIDDEN = 5,
+        STEAMLEARN_INFERENCE_ERROR_INVALID_TIMESTAMP = 6,
+        STEAMLEARN_INFERENCE_ERROR_INVALID_PUBLISHED_VERSION = 7,
+        STEAMLEARN_INFERENCE_ERROR_NO_FETCH_ID_FOUND = 8,
+        STEAMLEARN_INFERENCE_ERROR_TOO_BUSY = 9,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESteamLearnInferenceMetadataResult
+    {
+        STEAMLEARN_INFERENCE_METADATA_ERROR = 0,
+        STEAMLEARN_INFERENCE_METADATA_SUCCESS = 1,
+        STEAMLEARN_INFERENCE_METADATA_ERROR_INVALID_PROJECT_ID = 2,
+        STEAMLEARN_INFERENCE_METADATA_ERROR_NO_PUBLISHED_CONFIG = 3,
+        STEAMLEARN_INFERENCE_METADATA_ERROR_FORBIDDEN = 4,
+        STEAMLEARN_INFERENCE_METADATA_ERROR_INVALID_TIMESTAMP = 5,
+        STEAMLEARN_INFERENCE_METADATA_ERROR_INVALID_PUBLISHED_VERSION = 6,
+        STEAMLEARN_INFERENCE_METADATA_ERROR_NO_FETCH_ID_FOUND = 7,
+    }
+
     public interface ISteamLearn
     {
         CMsgSteamLearn_RegisterDataSource_Response RegisterDataSource(CMsgSteamLearn_RegisterDataSource_Request request);
@@ -685,6 +1346,8 @@ namespace SteamKit2.GC.Dota.Internal
         CMsgSteamLearn_SnapshotProject_Response SnapshotProject(CMsgSteamLearn_SnapshotProject_Request request);
         CMsgSteamLearn_BatchOperation_Response BatchOperation(CMsgSteamLearn_BatchOperation_Request request);
         CMsgSteamLearn_GetHMACKeys_Response GetHMACKeys(CMsgSteamLearn_GetHMACKeys_Request request);
+        CMsgSteamLearn_Inference_Response Inference(CMsgSteamLearn_Inference_Request request);
+        CMsgSteamLearn_InferenceMetadata_Response InferenceMetadata(CMsgSteamLearn_InferenceMetadata_Request request);
     }
 
 }

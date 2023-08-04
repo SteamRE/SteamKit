@@ -373,6 +373,39 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(37)]
         public CMsgGCRoutingProtoBufHeader routing_gc { get; set; }
 
+        [global::ProtoBuf.ProtoMember(38)]
+        [global::System.ComponentModel.DefaultValue(ESessionDisposition.k_ESessionDispositionNormal)]
+        public ESessionDisposition session_disposition
+        {
+            get => __pbn__session_disposition ?? ESessionDisposition.k_ESessionDispositionNormal;
+            set => __pbn__session_disposition = value;
+        }
+        public bool ShouldSerializesession_disposition() => __pbn__session_disposition != null;
+        public void Resetsession_disposition() => __pbn__session_disposition = null;
+        private ESessionDisposition? __pbn__session_disposition;
+
+        [global::ProtoBuf.ProtoMember(39)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string wg_token
+        {
+            get => __pbn__wg_token ?? "";
+            set => __pbn__wg_token = value;
+        }
+        public bool ShouldSerializewg_token() => __pbn__wg_token != null;
+        public void Resetwg_token() => __pbn__wg_token = null;
+        private string __pbn__wg_token;
+
+        [global::ProtoBuf.ProtoMember(40)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string webui_auth_key
+        {
+            get => __pbn__webui_auth_key ?? "";
+            set => __pbn__webui_auth_key = value;
+        }
+        public bool ShouldSerializewebui_auth_key() => __pbn__webui_auth_key != null;
+        public void Resetwebui_auth_key() => __pbn__webui_auth_key = null;
+        private string __pbn__webui_auth_key;
+
         [global::ProtoBuf.ProtoMember(15)]
         public uint ip
         {
@@ -392,6 +425,13 @@ namespace SteamKit2.Internal
         }
         public bool ShouldSerializeip_v6() => __pbn__ip_addr.Is(29);
         public void Resetip_v6() => global::ProtoBuf.DiscriminatedUnion32Object.Reset(ref __pbn__ip_addr, 29);
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum ESessionDisposition
+        {
+            k_ESessionDispositionNormal = 0,
+            k_ESessionDispositionDisconnect = 1,
+        }
 
     }
 
@@ -530,6 +570,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeserver_secret() => __pbn__server_secret != null;
         public void Resetserver_secret() => __pbn__server_secret = null;
         private byte[] __pbn__server_secret;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public uint ticket_type
+        {
+            get => __pbn__ticket_type.GetValueOrDefault();
+            set => __pbn__ticket_type = value;
+        }
+        public bool ShouldSerializeticket_type() => __pbn__ticket_type != null;
+        public void Resetticket_type() => __pbn__ticket_type = null;
+        private uint? __pbn__ticket_type;
 
     }
 
@@ -1912,6 +1962,47 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(1)]
         public global::System.Collections.Generic.List<CMsgKeyValuePair> pairs { get; } = new global::System.Collections.Generic.List<CMsgKeyValuePair>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class UserContentDescriptorPreferences : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<ContentDescriptor> content_descriptors_to_exclude { get; } = new global::System.Collections.Generic.List<ContentDescriptor>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class ContentDescriptor : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint content_descriptorid
+            {
+                get => __pbn__content_descriptorid.GetValueOrDefault();
+                set => __pbn__content_descriptorid = value;
+            }
+            public bool ShouldSerializecontent_descriptorid() => __pbn__content_descriptorid != null;
+            public void Resetcontent_descriptorid() => __pbn__content_descriptorid = null;
+            private uint? __pbn__content_descriptorid;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint timestamp_added
+            {
+                get => __pbn__timestamp_added.GetValueOrDefault();
+                set => __pbn__timestamp_added = value;
+            }
+            public bool ShouldSerializetimestamp_added() => __pbn__timestamp_added != null;
+            public void Resettimestamp_added() => __pbn__timestamp_added = null;
+            private uint? __pbn__timestamp_added;
+
+        }
 
     }
 

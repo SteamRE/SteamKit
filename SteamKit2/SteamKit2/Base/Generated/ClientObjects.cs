@@ -1537,6 +1537,16 @@ namespace SteamKit2.Internal
         public void Resetis_hdr_supported() => __pbn__is_hdr_supported = null;
         private bool? __pbn__is_hdr_supported;
 
+        [global::ProtoBuf.ProtoMember(29)]
+        public int display_refresh_manual_hz_oc_max
+        {
+            get => __pbn__display_refresh_manual_hz_oc_max.GetValueOrDefault();
+            set => __pbn__display_refresh_manual_hz_oc_max = value;
+        }
+        public bool ShouldSerializedisplay_refresh_manual_hz_oc_max() => __pbn__display_refresh_manual_hz_oc_max != null;
+        public void Resetdisplay_refresh_manual_hz_oc_max() => __pbn__display_refresh_manual_hz_oc_max = null;
+        private int? __pbn__display_refresh_manual_hz_oc_max;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1640,16 +1650,6 @@ namespace SteamKit2.Internal
         public void Resetis_hdr_enabled() => __pbn__is_hdr_enabled = null;
         private bool? __pbn__is_hdr_enabled;
 
-        [global::ProtoBuf.ProtoMember(11)]
-        public bool force_hdr_10pq_output_debug
-        {
-            get => __pbn__force_hdr_10pq_output_debug.GetValueOrDefault();
-            set => __pbn__force_hdr_10pq_output_debug = value;
-        }
-        public bool ShouldSerializeforce_hdr_10pq_output_debug() => __pbn__force_hdr_10pq_output_debug != null;
-        public void Resetforce_hdr_10pq_output_debug() => __pbn__force_hdr_10pq_output_debug = null;
-        private bool? __pbn__force_hdr_10pq_output_debug;
-
         [global::ProtoBuf.ProtoMember(12)]
         [global::System.ComponentModel.DefaultValue(EHDRToneMapOperator.k_EHDRToneMapOperator_Invalid)]
         public EHDRToneMapOperator hdr_on_sdr_tonemap_operator
@@ -1670,16 +1670,6 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeis_hdr_debug_heatmap_enabled() => __pbn__is_hdr_debug_heatmap_enabled != null;
         public void Resetis_hdr_debug_heatmap_enabled() => __pbn__is_hdr_debug_heatmap_enabled = null;
         private bool? __pbn__is_hdr_debug_heatmap_enabled;
-
-        [global::ProtoBuf.ProtoMember(14)]
-        public bool debug_force_hdr_support
-        {
-            get => __pbn__debug_force_hdr_support.GetValueOrDefault();
-            set => __pbn__debug_force_hdr_support = value;
-        }
-        public bool ShouldSerializedebug_force_hdr_support() => __pbn__debug_force_hdr_support != null;
-        public void Resetdebug_force_hdr_support() => __pbn__debug_force_hdr_support = null;
-        private bool? __pbn__debug_force_hdr_support;
 
         [global::ProtoBuf.ProtoMember(15)]
         [global::System.ComponentModel.DefaultValue(true)]
@@ -1711,6 +1701,46 @@ namespace SteamKit2.Internal
         public bool ShouldSerializesdr_to_hdr_brightness() => __pbn__sdr_to_hdr_brightness != null;
         public void Resetsdr_to_hdr_brightness() => __pbn__sdr_to_hdr_brightness = null;
         private float? __pbn__sdr_to_hdr_brightness;
+
+        [global::ProtoBuf.ProtoMember(18)]
+        public bool debug_force_hdr_support
+        {
+            get => __pbn__debug_force_hdr_support.GetValueOrDefault();
+            set => __pbn__debug_force_hdr_support = value;
+        }
+        public bool ShouldSerializedebug_force_hdr_support() => __pbn__debug_force_hdr_support != null;
+        public void Resetdebug_force_hdr_support() => __pbn__debug_force_hdr_support = null;
+        private bool? __pbn__debug_force_hdr_support;
+
+        [global::ProtoBuf.ProtoMember(19)]
+        public bool force_hdr_10pq_output_debug
+        {
+            get => __pbn__force_hdr_10pq_output_debug.GetValueOrDefault();
+            set => __pbn__force_hdr_10pq_output_debug = value;
+        }
+        public bool ShouldSerializeforce_hdr_10pq_output_debug() => __pbn__force_hdr_10pq_output_debug != null;
+        public void Resetforce_hdr_10pq_output_debug() => __pbn__force_hdr_10pq_output_debug = null;
+        private bool? __pbn__force_hdr_10pq_output_debug;
+
+        [global::ProtoBuf.ProtoMember(20)]
+        public bool is_display_oc_enabled
+        {
+            get => __pbn__is_display_oc_enabled.GetValueOrDefault();
+            set => __pbn__is_display_oc_enabled = value;
+        }
+        public bool ShouldSerializeis_display_oc_enabled() => __pbn__is_display_oc_enabled != null;
+        public void Resetis_display_oc_enabled() => __pbn__is_display_oc_enabled = null;
+        private bool? __pbn__is_display_oc_enabled;
+
+        [global::ProtoBuf.ProtoMember(21)]
+        public bool is_color_management_enabled
+        {
+            get => __pbn__is_color_management_enabled.GetValueOrDefault();
+            set => __pbn__is_color_management_enabled = value;
+        }
+        public bool ShouldSerializeis_color_management_enabled() => __pbn__is_color_management_enabled != null;
+        public void Resetis_color_management_enabled() => __pbn__is_color_management_enabled = null;
+        private bool? __pbn__is_color_management_enabled;
 
     }
 
@@ -2268,6 +2298,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializegameid() => __pbn__gameid != null;
         public void Resetgameid() => __pbn__gameid = null;
         private ulong? __pbn__gameid;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool skip_storage_update
+        {
+            get => __pbn__skip_storage_update.GetValueOrDefault();
+            set => __pbn__skip_storage_update = value;
+        }
+        public bool ShouldSerializeskip_storage_update() => __pbn__skip_storage_update != null;
+        public void Resetskip_storage_update() => __pbn__skip_storage_update = null;
+        private bool? __pbn__skip_storage_update;
 
         [global::ProtoBuf.ProtoMember(2)]
         public bool reset_to_default
@@ -3202,27 +3242,6 @@ namespace SteamKit2.Internal
         public void Resetdisplay_adaptive_brightness_enabled() => __pbn__display_adaptive_brightness_enabled = null;
         private bool? __pbn__display_adaptive_brightness_enabled;
 
-        [global::ProtoBuf.ProtoMember(8)]
-        public bool is_display_colorprofile_available
-        {
-            get => __pbn__is_display_colorprofile_available.GetValueOrDefault();
-            set => __pbn__is_display_colorprofile_available = value;
-        }
-        public bool ShouldSerializeis_display_colorprofile_available() => __pbn__is_display_colorprofile_available != null;
-        public void Resetis_display_colorprofile_available() => __pbn__is_display_colorprofile_available = null;
-        private bool? __pbn__is_display_colorprofile_available;
-
-        [global::ProtoBuf.ProtoMember(9)]
-        [global::System.ComponentModel.DefaultValue(EColorProfile.k_EColorProfile_Invalid)]
-        public EColorProfile display_colorprofile
-        {
-            get => __pbn__display_colorprofile ?? EColorProfile.k_EColorProfile_Invalid;
-            set => __pbn__display_colorprofile = value;
-        }
-        public bool ShouldSerializedisplay_colorprofile() => __pbn__display_colorprofile != null;
-        public void Resetdisplay_colorprofile() => __pbn__display_colorprofile = null;
-        private EColorProfile? __pbn__display_colorprofile;
-
         [global::ProtoBuf.ProtoMember(10)]
         public bool display_nightmode_enabled
         {
@@ -3354,14 +3373,14 @@ namespace SteamKit2.Internal
         private float? __pbn__als_lux_median;
 
         [global::ProtoBuf.ProtoMember(23)]
-        public float display_brightness_linear
+        public float display_backlight_raw
         {
-            get => __pbn__display_brightness_linear.GetValueOrDefault();
-            set => __pbn__display_brightness_linear = value;
+            get => __pbn__display_backlight_raw.GetValueOrDefault();
+            set => __pbn__display_backlight_raw = value;
         }
-        public bool ShouldSerializedisplay_brightness_linear() => __pbn__display_brightness_linear != null;
-        public void Resetdisplay_brightness_linear() => __pbn__display_brightness_linear = null;
-        private float? __pbn__display_brightness_linear;
+        public bool ShouldSerializedisplay_backlight_raw() => __pbn__display_backlight_raw != null;
+        public void Resetdisplay_backlight_raw() => __pbn__display_backlight_raw = null;
+        private float? __pbn__display_backlight_raw;
 
         [global::ProtoBuf.ProtoMember(24)]
         public float display_brightness_adaptivemin
@@ -3413,6 +3432,36 @@ namespace SteamKit2.Internal
         public bool ShouldSerializefan_control_mode() => __pbn__fan_control_mode != null;
         public void Resetfan_control_mode() => __pbn__fan_control_mode = null;
         private ESystemFanControlMode? __pbn__fan_control_mode;
+
+        [global::ProtoBuf.ProtoMember(29)]
+        public bool is_display_brightness_available
+        {
+            get => __pbn__is_display_brightness_available.GetValueOrDefault();
+            set => __pbn__is_display_brightness_available = value;
+        }
+        public bool ShouldSerializeis_display_brightness_available() => __pbn__is_display_brightness_available != null;
+        public void Resetis_display_brightness_available() => __pbn__is_display_brightness_available = null;
+        private bool? __pbn__is_display_brightness_available;
+
+        [global::ProtoBuf.ProtoMember(31)]
+        public bool is_display_colormanagement_available
+        {
+            get => __pbn__is_display_colormanagement_available.GetValueOrDefault();
+            set => __pbn__is_display_colormanagement_available = value;
+        }
+        public bool ShouldSerializeis_display_colormanagement_available() => __pbn__is_display_colormanagement_available != null;
+        public void Resetis_display_colormanagement_available() => __pbn__is_display_colormanagement_available = null;
+        private bool? __pbn__is_display_colormanagement_available;
+
+        [global::ProtoBuf.ProtoMember(32)]
+        public float display_colorgamut
+        {
+            get => __pbn__display_colorgamut.GetValueOrDefault();
+            set => __pbn__display_colorgamut = value;
+        }
+        public bool ShouldSerializedisplay_colorgamut() => __pbn__display_colorgamut != null;
+        public void Resetdisplay_colorgamut() => __pbn__display_colorgamut = null;
+        private float? __pbn__display_colorgamut;
 
     }
 
@@ -3963,6 +4012,56 @@ namespace SteamKit2.Internal
             public string monitor_display_name { get; set; }
 
         }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGenerateSystemReportReply : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string report_id
+        {
+            get => __pbn__report_id ?? "";
+            set => __pbn__report_id = value;
+        }
+        public bool ShouldSerializereport_id() => __pbn__report_id != null;
+        public void Resetreport_id() => __pbn__report_id = null;
+        private string __pbn__report_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgWebUITransportInfo : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint port
+        {
+            get => __pbn__port.GetValueOrDefault();
+            set => __pbn__port = value;
+        }
+        public bool ShouldSerializeport() => __pbn__port != null;
+        public void Resetport() => __pbn__port = null;
+        private uint? __pbn__port;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string auth_key
+        {
+            get => __pbn__auth_key ?? "";
+            set => __pbn__auth_key = value;
+        }
+        public bool ShouldSerializeauth_key() => __pbn__auth_key != null;
+        public void Resetauth_key() => __pbn__auth_key = null;
+        private string __pbn__auth_key;
 
     }
 
