@@ -331,10 +331,19 @@ namespace SteamKit2
             public int Balance { get; private set; }
 
             /// <summary>
+            /// Gets the delayed (pending) balance of the wallet as a 32-bit integer, in cents.
+            /// </summary>
+            public int BalanceDelayed { get; private set; }
+
+            /// <summary>
             /// Gets the balance of the wallet as a 64-bit integer, in cents.
             /// </summary>
             public long LongBalance { get; private set; }
 
+            /// <summary>
+            /// Gets the delayed (pending) balance of the wallet as a 64-bit integer, in cents.
+            /// </summary>
+            public long LongBalanceDelayed { get; private set; }
 
             internal WalletInfoCallback( CMsgClientWalletInfoUpdate wallet )
             {
@@ -342,7 +351,9 @@ namespace SteamKit2
 
                 Currency = ( ECurrencyCode )wallet.currency;
                 Balance = wallet.balance;
+                BalanceDelayed = wallet.balance_delayed;
                 LongBalance = wallet.balance64;
+                LongBalanceDelayed = wallet.balance64_delayed;
             }
         }
 
