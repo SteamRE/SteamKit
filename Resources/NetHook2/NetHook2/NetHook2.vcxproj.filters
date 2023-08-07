@@ -70,9 +70,6 @@
     <ClInclude Include="csimplescan.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="detours.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -117,6 +114,5 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="detours.lib" />
   </ItemGroup>
 </Project>
