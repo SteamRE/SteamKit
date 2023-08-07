@@ -9,7 +9,7 @@
 #include <Psapi.h>
 #include <assert.h>
 
-
+#undef GetMessage
 
 SymmetricEncryptChosenIVFn Encrypt_Orig = nullptr;
 PchMsgNameFromEMsgFn PchMsgNameFromEMsg = nullptr;

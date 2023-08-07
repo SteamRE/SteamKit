@@ -1,0 +1,15 @@
+{
+    "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+    "name": "nethook2",
+    "builtin-baseline": "78b61582c9e093fda56a01ebb654be15a0033897",
+    "dependencies": [
+      { "name": "detours" },
+      { "name": "protobuf" },
+      { "name": "zlib" }
+    ],
+    "overrides": [
+      { "name": "detours", "version": "4.0.1" },
+      { "name": "protobuf", "version": "3.15.8" },
+      { "name": "zlib", "version": "1.2.13" }
+    ]
+}
