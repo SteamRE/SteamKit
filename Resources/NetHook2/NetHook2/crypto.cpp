@@ -14,14 +14,16 @@
 SymmetricEncryptChosenIVFn Encrypt_Orig = nullptr;
 PchMsgNameFromEMsgFn PchMsgNameFromEMsg = nullptr;
 
-#ifndef __x86_64__
+#if __x86_64__
+static_assert(sizeof(MsgInfo_t) == 24, "Wrong size of MsgInfo_t");
+#else
 static_assert(sizeof(MsgInfo_t) == 20, "Wrong size of MsgInfo_t");
+#endif
 static_assert(offsetof(MsgInfo_t, eMsg) == 0, "Wrong offset of MsgInfo_t::eMsg");
 static_assert(offsetof(MsgInfo_t, nFlags) == 4, "Wrong offset of MsgInfo_t::nFlags");
 static_assert(offsetof(MsgInfo_t, k_EServerTarget) == 8, "Wrong offset of MsgInfo_t::k_EServerTarget");
 static_assert(offsetof(MsgInfo_t, nUnk1) == 12, "Wrong offset of MsgInfo_t::uUnk1");
 static_assert(offsetof(MsgInfo_t, pchMsgName) == 16, "Wrong offset of MsgInfo_t::pchMsgName");
-#endif
 
 typedef std::pair<EMsg, MsgInfo_t *> MsgPair;
 
