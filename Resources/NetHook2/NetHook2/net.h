@@ -30,7 +30,7 @@ public:
 	// CWebSocketConnection::BBuildAndAsyncSendFrame(EWebSocketOpCode, uchar const*, int)
 	static bool __fastcall BBuildAndAsyncSendFrame(
 		void *webSocketConnection,
-#ifndef __x86_64__
+#ifndef X64BITS
 		void *unused, 
 #endif
 		EWebSocketOpCode eWebSocketOpCode,
@@ -40,7 +40,7 @@ public:
 	// CCMInterface::RecvPkt(CNetPacket *)
 	static void __fastcall RecvPkt(
 		void *cmConnection,
-#ifndef __x86_64__
+#ifndef X64BITS
 		void *unused,
 #endif
 		CNetPacket *pPacket);

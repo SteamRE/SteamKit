@@ -53,14 +53,14 @@ BOOL InjectEjection(const HWND hWindow, const int iSteamProcessID, const char * 
 // rundll32.exe C:\Path\To\NetHook2.dll,Eject <process name>
 //
 
-#if __x86_64__
+#ifdef X64BITS
 #pragma comment(linker, "/EXPORT:Inject=?Inject@@YAXPEAUHWND__@@PEAUHINSTANCE__@@PEADH@Z")
 #else
 #pragma comment(linker, "/EXPORT:Inject=?Inject@@YGXPAUHWND__@@PAUHINSTANCE__@@PADH@Z")
 #endif
 __declspec(dllexport) void CALLBACK Inject(HWND hWindow, HINSTANCE hInstance, LPSTR lpszCommandLine, int nCmdShow);
 
-#if __x86_64__
+#ifdef X64BITS
 #pragma comment(linker, "/EXPORT:Eject=?Eject@@YAXPEAUHWND__@@PEAUHINSTANCE__@@PEADH@Z")
 #else
 #pragma comment(linker, "/EXPORT:Eject=?Eject@@YGXPAUHWND__@@PAUHINSTANCE__@@PADH@Z")
