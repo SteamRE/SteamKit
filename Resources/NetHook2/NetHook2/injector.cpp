@@ -37,6 +37,7 @@ EXTERN_C IMAGE_DOS_HEADER __ImageBase;
 
 int FindSteamProcessID();
 BOOL FindProcessByName(const char * szProcessName, int * piFirstProcessID, int * piNumProcesses);
+BOOL ProcessIsDifferentArchitecture(const int iProcessID);
 BOOL ProcessHasModuleLoaded(const int iProcessID, const char * szModuleName, bool bPartialMatchFromEnd);
 BOOL TryParseInt(const char * szStringIn, int * pIntOut);
 BOOL SelfInjectIntoSteam(const HWND hWindow, const int iSteamProcessID, const char * szNetHookDllPath);
@@ -73,6 +74,7 @@ typedef enum {
 	k_ESteamProcessSearchErrorCouldNotFindProcessWithSuppliedName,
 	k_ESteamProcessSearchErrorFoundMultipleProcessesWithSuppliedName,
 	k_ESteamProcessSearchErrorTargetProcessDoesNotHaveSteamClientDllLoaded,
+	k_ESteamProcessSearchErrorTargetDifferentArchitecture,
 
 	k_ESteamProcessSearchErrorMax,
 } ESteamProcessSearchError;
@@ -92,6 +94,9 @@ const char * NameFromESteamProcessSearchError( ESteamProcessSearchError eValue )
 
 		case k_ESteamProcessSearchErrorTargetProcessDoesNotHaveSteamClientDllLoaded:
 			return "Invalid process: Target process does not have steamclient.dll loaded.";
+
+		case k_ESteamProcessSearchErrorTargetDifferentArchitecture:
+			return "Invalid process: Target process is not the same architecture as NetHook2.";
 
 		default:
 			return "Unknown error.";
@@ -120,8 +125,12 @@ ESteamProcessSearchError GetSteamProcessID( HWND hWindow, LPSTR lpszCommandLine,
 			return k_ESteamProcessSearchErrorFoundMultipleProcessesWithSuppliedName;
 		}
 	}
-	
-	if ( !ProcessHasModuleLoaded( *piSteamProcessID, STEAMCLIENT_DLL, /* bPartialMatchFromEnd */ true ) )
+
+	if ( ProcessIsDifferentArchitecture( *piSteamProcessID ) )
+	{
+		return k_ESteamProcessSearchErrorTargetDifferentArchitecture;
+	}
+	else if ( !ProcessHasModuleLoaded( *piSteamProcessID, STEAMCLIENT_DLL, /* bPartialMatchFromEnd */ true ) )
 	{
 		return k_ESteamProcessSearchErrorTargetProcessDoesNotHaveSteamClientDllLoaded;
 	}
@@ -284,6 +293,20 @@ BOOL FindProcessByName(const char * szProcessName, int * piFirstProcessID, int *
 
 	*piNumProcesses = iNumProcessesFound;
 	return iNumProcessesFound > 0;
+}
+
+BOOL ProcessIsDifferentArchitecture(const int iProcessID)
+{
+	SafeHandle hProcess = MakeSafeHandle(OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, false, iProcessID));
+	if (hProcess != NULL)
+	{
+		USHORT processMachine, ownProcessMachine;
+
+		if (IsWow64Process2(hProcess.get(), &processMachine, NULL) && IsWow64Process2(GetCurrentProcess(), &ownProcessMachine, NULL)) {
+			return processMachine != ownProcessMachine;
+		}
+	}
+	return false;
 }
 
 BOOL ProcessHasModuleLoaded(const int iProcessID, const char * szModuleName, bool bPartialMatchFromEnd)
