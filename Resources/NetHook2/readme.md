@@ -8,7 +8,7 @@ These messages are dumped to file, and can be analyzed further with NetHookAnaly
 
 #### Building
 
-1. Execute `SetupDependencies.cmd` to set up vcpkg.
+1. Run `.\SetupDependencies.ps1` in a PowerShell prompt or `powershell -File SetupDependencies.ps1` to set up dependencies.
 2. Build `NetHook2.sln` with Visual Studio 2022.
 3. Behold: a fresh new `NetHook2.dll` is born into this world. You can place this DLL wherever you like, or leave where you built it. You'll need its full file path later when injecting.
 
