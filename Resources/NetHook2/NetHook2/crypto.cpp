@@ -14,10 +14,12 @@
 SymmetricEncryptChosenIVFn Encrypt_Orig = nullptr;
 PchMsgNameFromEMsgFn PchMsgNameFromEMsg = nullptr;
 
-#if __x86_64__
-static_assert(sizeof(MsgInfo_t) == 24, "Wrong size of MsgInfo_t");
+#ifdef X64BITS
+static_assert(sizeof(void*) == 8, "Unexpected pointer size on 64-bit");
+static_assert(sizeof(MsgInfo_t) == 24, "Wrong size of MsgInfo_t on 64-bit");
 #else
-static_assert(sizeof(MsgInfo_t) == 20, "Wrong size of MsgInfo_t");
+static_assert(sizeof(void*) == 4, "Unexpected pointer size on 32-bit");
+static_assert(sizeof(MsgInfo_t) == 20, "Wrong size of MsgInfo_t on 32-bit");
 #endif
 static_assert(offsetof(MsgInfo_t, eMsg) == 0, "Wrong offset of MsgInfo_t::eMsg");
 static_assert(offsetof(MsgInfo_t, nFlags) == 4, "Wrong offset of MsgInfo_t::nFlags");
@@ -35,7 +37,7 @@ CCrypto::CCrypto() noexcept
 
 	SymmetricEncryptChosenIVFn pEncrypt = nullptr;
 	const bool bEncrypt = steamClientScan.FindFunction(
-#if __x86_64__
+#ifdef X64BITS
 		"\x48\x83\xEC\x58\x8B\x84\x24\xCC\xCC\xCC\xCC\xC6\x44\x24",
 		"xxxxxxx????xxx",
 #else
@@ -50,7 +52,7 @@ CCrypto::CCrypto() noexcept
 	g_pLogger->LogConsole( "CCrypto::SymmetricEncryptChosenIV = 0x%p\n", Encrypt_Orig );
 
 	const bool bPchMsgNameFromEMsg = steamClientScan.FindFunction(
-#if __x86_64__
+#ifdef X64BITS
 		"\x48\x89\x5C\x24\xCC\x57\x48\x83\xEC\x20\x8B\xD9\xE8",
 		"xxxx?xxxxxxxx",
 #else

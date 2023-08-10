@@ -25,7 +25,7 @@ CNet::CNet() noexcept
 
 	BBuildAndAsyncSendFrameFn pBuildFunc = nullptr;
 	const bool bFoundBuildFunc = steamClientScan.FindFunction(
-#if __x86_64__
+#ifdef X64BITS
 		"\x48\x8B\xC4\x55\x53\x48\x8D\x68\xA1\x48\x81\xEC\xCC\xCC\xCC\xCC\x48\x89\x70\x10\x33",
 		"xxxxxxxxxxxx????xxxxx",
 #else
@@ -41,7 +41,7 @@ CNet::CNet() noexcept
 
 	RecvPktFn pRecvPktFunc = nullptr;
 	const bool bFoundRecvPktFunc = steamClientScan.FindFunction(
-#if __x86_64__
+#ifdef X64BITS
 		"\x48\x8B\xC4\x55\x48\x8D\xA8\xCC\xCC\xCC\xCC\x48\x81\xEC\xCC\xCC\xCC\xCC\x48\x89\x58\x08\x48\x8B",
 		"xxxxxxx????xxx????xxxxxx",
 #else
@@ -104,7 +104,7 @@ CNet::~CNet()
 
 bool CNet::BBuildAndAsyncSendFrame(
 	void *webSocketConnection,
-#ifndef __x86_64__
+#ifndef X64BITS
 	void *,
 #endif
 	EWebSocketOpCode eWebSocketOpCode, 
@@ -127,7 +127,7 @@ bool CNet::BBuildAndAsyncSendFrame(
 
 void CNet::RecvPkt(
 	void *cmConnection,
-#ifndef __x86_64__
+#ifndef X64BITS
 	void *,
 #endif
 	CNetPacket *pPacket)
