@@ -105,12 +105,12 @@ jobs:
         path: 'Resources/NetHookAnalyzer2/NetHookAnalyzer2/bin/Release/win-x64/publish/*'
 
   nethook2:
-    name: NetHook2 - ${{ matrix.configuration }}
+    name: NetHook2 - ${{ matrix.platform }} - ${{ matrix.configuration }}
 
     strategy:
       matrix:
         configuration: [ Debug, Release ]
-        platform: [ Win32 ]
+        platform: [ Win32, x64 ]
       fail-fast: false
 
     runs-on: windows-2022
@@ -134,7 +134,7 @@ jobs:
       run: pwsh -File Resources/NetHook2/SetupDependencies.ps1
 
     - name: Build NetHook2
-      run: msbuild /p:Configuration=${{ matrix.configuration }} Resources/NetHook2/NetHook2.sln
+      run: msbuild /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }} Resources/NetHook2/NetHook2.sln
 
     - name: Upload NetHook2
       uses: actions/upload-artifact@v3
