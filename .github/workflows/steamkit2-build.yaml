@@ -110,6 +110,7 @@ jobs:
     strategy:
       matrix:
         configuration: [ Debug, Release ]
+        platform: [ Win32 ]
       fail-fast: false
 
     runs-on: windows-2022
@@ -140,7 +141,7 @@ jobs:
       if: matrix.configuration == 'Release'
       with:
         name: NetHook2
-        path: 'Resources/NetHook2/Release/*.dll'
+        path: 'Resources/NetHook2/${{ matrix.platform }}/${{ matrix.configuration }}/*.dll'
 
   gh-packages:
     name: Publish to GitHub Packages
