@@ -114,3 +114,6 @@ UpgradeLog*.XML
 # misc
 Thumbs.db
 .DS_Store
+
+# Vcpkg
+Resources/NetHook2/NetHook2/vcpkg_installed
