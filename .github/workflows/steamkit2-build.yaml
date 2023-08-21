@@ -140,7 +140,7 @@ jobs:
       uses: actions/upload-artifact@v3
       if: matrix.configuration == 'Release'
       with:
-        name: NetHook2
+        name: NetHook2-${{ matrix.platform }}
         path: 'Resources/NetHook2/${{ matrix.platform }}/${{ matrix.configuration }}/*.dll'
 
   gh-packages:
