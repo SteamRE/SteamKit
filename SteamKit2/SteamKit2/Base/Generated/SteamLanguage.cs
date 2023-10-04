@@ -1990,7 +1990,7 @@ namespace SteamKit2
 		Lockdown = 8388608,
 		MasterAppEditor = 16777216,
 		BannedFromWebAPI = 33554432,
-		ClansOnlyFromFriends = 67108864,
+		PartnerMember = 67108864,
 		GlobalModerator = 134217728,
 		ParentalSettings = 268435456,
 		ThirdPartySupport = 536870912,
@@ -2537,7 +2537,12 @@ namespace SteamKit2
 		MacOS111 = -79,
 		MacOS1017 = -78,
 		MacOS12 = -77,
-		MacOS13 = -76,
+		MacOS1018 = -76,
+		MacOS13 = -75,
+		MacOS1019 = -74,
+		MacOS14 = -73,
+		MacOS1020 = -72,
+		MacOS15 = -71,
 		MacOSMax = -1,
 		LinuxUnknown = -203,
 		Linux22 = -202,
@@ -2669,7 +2674,7 @@ namespace SteamKit2
 		Steam2Emulator = 79,
 		PublicTest = 80,
 		SolrMgr = 81,
-		BroadcastRelay = 82,
+		BroadcastIngestor = 82,
 		BroadcastDirectory = 83,
 		VideoManager = 84,
 		TradeOffer = 85,
@@ -2819,6 +2824,12 @@ namespace SteamKit2
 		QAR = 39,
 		CRC = 40,
 		UYU = 41,
+		BGN = 42,
+		HRK = 43,
+		CZK = 44,
+		DKK = 45,
+		HUF = 46,
+		RON = 47,
 	}
 	[Flags]
 	public enum EDepotFileFlag
@@ -2849,6 +2860,7 @@ namespace SteamKit2
 		Public = 0,
 		FriendsOnly = 1,
 		Private = 2,
+		Unlisted = 3,
 	}
 	public enum EWorkshopFileType
 	{
@@ -3051,7 +3063,8 @@ namespace SteamKit2
 		Private = 2,
 		FriendsOnly = 4,
 		Public = 8,
-		All = Public | FriendsOnly | Private,
+		Unlisted = 16,
+		All = Public | FriendsOnly | Private | Unlisted,
 	}
 	public enum EPublishedFileQueryType
 	{
@@ -3125,6 +3138,11 @@ namespace SteamKit2
 		AvailToBorrow = 29,
 		AvailGuestPass = 30,
 		Purchase = 31,
+		Unavailable = 32,
+		NotLaunchable = 33,
+		CloudError = 34,
+		CloudOutOfDate = 35,
+		Terminating = 36,
 	}
 	[Flags]
 	public enum EAppType
@@ -3199,6 +3217,7 @@ namespace SteamKit2
 		Moderator = 30,
 		Officer = 40,
 		Owner = 50,
+		TestInvalid = 99,
 	}
 	[Flags]
 	public enum EChatRoomGroupPermissions
@@ -3230,6 +3249,7 @@ namespace SteamKit2
 		Default = 0,
 		None = 1,
 		Joined = 2,
+		TestInvalid = 99,
 	}
 	public enum EVoiceCallState
 	{
@@ -3325,6 +3345,7 @@ namespace SteamKit2
 		Headless = 6,
 		SteamChina = 7,
 		SingleApp = 8,
+		GameServer = 9,
 	}
 	public enum EUdpPacketType : byte
 	{
