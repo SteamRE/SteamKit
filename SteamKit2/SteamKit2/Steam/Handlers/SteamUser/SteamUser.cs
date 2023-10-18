@@ -170,6 +170,7 @@ namespace SteamKit2
         /// <summary>
         /// Represents details required to complete a machine auth request.
         /// </summary>
+        [Obsolete("Steam no longer sends machine auth as of 2023, use SteamAuthentication.")]
         public sealed class MachineAuthDetails
         {
             /// <summary>
@@ -445,6 +446,7 @@ namespace SteamKit2
         /// This should normally be used in response to a <see cref="UpdateMachineAuthCallback"/>.
         /// </summary>
         /// <param name="details">The details pertaining to the response.</param>
+        [Obsolete("Steam no longer sends machine auth as of 2023, use SteamAuthentication.")]
         public void SendMachineAuthResponse( MachineAuthDetails details )
         {
             if ( details == null )
@@ -556,7 +558,9 @@ namespace SteamKit2
         {
             var machineAuth = new ClientMsgProtobuf<CMsgClientUpdateMachineAuth>( packetMsg );
 
+#pragma warning disable CS0618 // Type or member is obsolete
             var callback = new UpdateMachineAuthCallback( packetMsg.SourceJobID, machineAuth.Body );
+#pragma warning restore CS0618 // Type or member is obsolete
             Client.PostCallback( callback );
         }
         void HandleSessionToken( IPacketMsg packetMsg )
