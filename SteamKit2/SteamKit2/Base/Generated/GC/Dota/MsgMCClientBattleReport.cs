@@ -1465,7 +1465,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_eSafelane = 0,
         k_eMidlane = 1,
         k_eOfflane = 2,
-        k_eSoftSupport = 3,
+        k_eSupport = 3,
         k_eHardSupport = 4,
     }
 

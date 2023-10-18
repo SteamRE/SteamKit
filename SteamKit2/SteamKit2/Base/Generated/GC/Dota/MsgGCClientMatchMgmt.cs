@@ -2791,6 +2791,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_EStartFindingMatchResult_MatchmakingBusy = 132,
         k_EStartFindingMatchResult_SteamChinaBanned = 133,
         k_EStartFindingMatchResult_SteamChinaInvalidMixedParty = 134,
+        k_EStartFindingMatchResult_RestrictedFromRanked = 135,
     }
 
 }

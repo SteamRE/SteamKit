@@ -5256,26 +5256,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetdire_team_complete() => __pbn__dire_team_complete = null;
         private uint? __pbn__dire_team_complete;
 
-        [global::ProtoBuf.ProtoMember(29)]
-        public uint positive_votes
-        {
-            get => __pbn__positive_votes.GetValueOrDefault();
-            set => __pbn__positive_votes = value;
-        }
-        public bool ShouldSerializepositive_votes() => __pbn__positive_votes != null;
-        public void Resetpositive_votes() => __pbn__positive_votes = null;
-        private uint? __pbn__positive_votes;
-
-        [global::ProtoBuf.ProtoMember(30)]
-        public uint negative_votes
-        {
-            get => __pbn__negative_votes.GetValueOrDefault();
-            set => __pbn__negative_votes = value;
-        }
-        public bool ShouldSerializenegative_votes() => __pbn__negative_votes != null;
-        public void Resetnegative_votes() => __pbn__negative_votes = null;
-        private uint? __pbn__negative_votes;
-
         [global::ProtoBuf.ProtoMember(31)]
         [global::System.ComponentModel.DefaultValue(DOTA_GameMode.DOTA_GAMEMODE_NONE)]
         public DOTA_GameMode game_mode
@@ -6763,6 +6743,16 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializecourier_kills() => __pbn__courier_kills != null;
         public void Resetcourier_kills() => __pbn__courier_kills = null;
         private uint? __pbn__courier_kills;
+
+        [global::ProtoBuf.ProtoMember(28, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong title_stats
+        {
+            get => __pbn__title_stats.GetValueOrDefault();
+            set => __pbn__title_stats = value;
+        }
+        public bool ShouldSerializetitle_stats() => __pbn__title_stats != null;
+        public void Resettitle_stats() => __pbn__title_stats = null;
+        private ulong? __pbn__title_stats;
 
     }
 
@@ -10374,6 +10364,35 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(3)]
         public CMsgMapStatsSnapshot window_end { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgTrackedStat : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint tracked_stat_id
+        {
+            get => __pbn__tracked_stat_id.GetValueOrDefault();
+            set => __pbn__tracked_stat_id = value;
+        }
+        public bool ShouldSerializetracked_stat_id() => __pbn__tracked_stat_id != null;
+        public void Resettracked_stat_id() => __pbn__tracked_stat_id = null;
+        private uint? __pbn__tracked_stat_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public int tracked_stat_value
+        {
+            get => __pbn__tracked_stat_value.GetValueOrDefault();
+            set => __pbn__tracked_stat_value = value;
+        }
+        public bool ShouldSerializetracked_stat_value() => __pbn__tracked_stat_value != null;
+        public void Resettracked_stat_value() => __pbn__tracked_stat_value = null;
+        private int? __pbn__tracked_stat_value;
 
     }
 

@@ -956,6 +956,138 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationRemoteClientConnection : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string machine
+        {
+            get => __pbn__machine ?? "";
+            set => __pbn__machine = value;
+        }
+        public bool ShouldSerializemachine() => __pbn__machine != null;
+        public void Resetmachine() => __pbn__machine = null;
+        private string __pbn__machine;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool connected
+        {
+            get => __pbn__connected.GetValueOrDefault();
+            set => __pbn__connected = value;
+        }
+        public bool ShouldSerializeconnected() => __pbn__connected != null;
+        public void Resetconnected() => __pbn__connected = null;
+        private bool? __pbn__connected;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationRemoteClientStartStream : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string machine
+        {
+            get => __pbn__machine ?? "";
+            set => __pbn__machine = value;
+        }
+        public bool ShouldSerializemachine() => __pbn__machine != null;
+        public void Resetmachine() => __pbn__machine = null;
+        private string __pbn__machine;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string game_name
+        {
+            get => __pbn__game_name ?? "";
+            set => __pbn__game_name = value;
+        }
+        public bool ShouldSerializegame_name() => __pbn__game_name != null;
+        public void Resetgame_name() => __pbn__game_name = null;
+        private string __pbn__game_name;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationStreamingClientConnection : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string hostname
+        {
+            get => __pbn__hostname ?? "";
+            set => __pbn__hostname = value;
+        }
+        public bool ShouldSerializehostname() => __pbn__hostname != null;
+        public void Resethostname() => __pbn__hostname = null;
+        private string __pbn__hostname;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string machine
+        {
+            get => __pbn__machine ?? "";
+            set => __pbn__machine = value;
+        }
+        public bool ShouldSerializemachine() => __pbn__machine != null;
+        public void Resetmachine() => __pbn__machine = null;
+        private string __pbn__machine;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool connected
+        {
+            get => __pbn__connected.GetValueOrDefault();
+            set => __pbn__connected = value;
+        }
+        public bool ShouldSerializeconnected() => __pbn__connected != null;
+        public void Resetconnected() => __pbn__connected = null;
+        private bool? __pbn__connected;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationPlaytimeWarning : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string type
+        {
+            get => __pbn__type ?? "";
+            set => __pbn__type = value;
+        }
+        public bool ShouldSerializetype() => __pbn__type != null;
+        public void Resettype() => __pbn__type = null;
+        private string __pbn__type;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint playtime_remaining
+        {
+            get => __pbn__playtime_remaining.GetValueOrDefault();
+            set => __pbn__playtime_remaining = value;
+        }
+        public bool ShouldSerializeplaytime_remaining() => __pbn__playtime_remaining != null;
+        public void Resetplaytime_remaining() => __pbn__playtime_remaining = null;
+        private uint? __pbn__playtime_remaining;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EClientNotificationType
     {
         k_EClientNotificationType_Invalid = 0,
@@ -999,6 +1131,11 @@ namespace SteamKit2.Internal
         k_EClientNotificationType_TimerExpired = 38,
         k_EClientNotificationType_ModeratorMsg = 39,
         k_EClientNotificationType_SteamInputActionSetChanged = 40,
+        k_EClientNotificationType_RemoteClientConnection = 41,
+        k_EClientNotificationType_RemoteClientStartStream = 42,
+        k_EClientNotificationType_StreamingClientConnection = 43,
+        k_EClientNotificationType_FamilyInvite = 44,
+        k_EClientNotificationType_PlaytimeWarning = 45,
     }
 
     [global::ProtoBuf.ProtoContract()]

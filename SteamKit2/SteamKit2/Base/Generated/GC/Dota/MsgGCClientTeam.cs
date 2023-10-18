@@ -723,6 +723,28 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgDOTATeamInfoCache : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint cache_timestamp
+        {
+            get => __pbn__cache_timestamp.GetValueOrDefault();
+            set => __pbn__cache_timestamp = value;
+        }
+        public bool ShouldSerializecache_timestamp() => __pbn__cache_timestamp != null;
+        public void Resetcache_timestamp() => __pbn__cache_timestamp = null;
+        private uint? __pbn__cache_timestamp;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgDOTATeamInfoList team_list { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgDOTAMyTeamInfoRequest : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;

@@ -2528,6 +2528,16 @@ namespace SteamKit2.Internal
         public void Resetimage_height() => __pbn__image_height = null;
         private uint? __pbn__image_height;
 
+        [global::ProtoBuf.ProtoMember(17)]
+        public int language
+        {
+            get => __pbn__language.GetValueOrDefault();
+            set => __pbn__language = value;
+        }
+        public bool ShouldSerializelanguage() => __pbn__language != null;
+        public void Resetlanguage() => __pbn__language = null;
+        private int? __pbn__language;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2555,6 +2565,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializepublishedfileid() => __pbn__publishedfileid != null;
         public void Resetpublishedfileid() => __pbn__publishedfileid = null;
         private ulong? __pbn__publishedfileid;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
 
     }
 

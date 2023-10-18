@@ -1230,6 +1230,8 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_TEAM_2023_TOUR1 = 41,
         EVENT_ID_TEAM_2023_TOUR2 = 42,
         EVENT_ID_TEAM_2023_TOUR3 = 43,
+        EVENT_ID_INTERNATIONAL_2023 = 45,
+        EVENT_ID_10TH_ANNIVERSARY = 46,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1285,6 +1287,31 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public enum Fantasy_Scoring
+    {
+        FANTASY_SCORING_KILLS = 0,
+        FANTASY_SCORING_DEATHS = 1,
+        FANTASY_SCORING_CS = 2,
+        FANTASY_SCORING_GPM = 3,
+        FANTASY_SCORING_TOWER_KILLS = 4,
+        FANTASY_SCORING_ROSHAN_KILLS = 5,
+        FANTASY_SCORING_TEAMFIGHT_PARTICIPATION = 6,
+        FANTASY_SCORING_WARDS_PLANTED = 7,
+        FANTASY_SCORING_CAMPS_STACKED = 8,
+        FANTASY_SCORING_RUNES_GRABBED = 9,
+        FANTASY_SCORING_FIRST_BLOOD = 10,
+        FANTASY_SCORING_STUNS = 11,
+        FANTASY_SCORING_SMOKES_USED = 12,
+        FANTASY_SCORING_NEUTRAL_TOKENS_FOUND = 13,
+        FANTASY_SCORING_WATCHERS_TAKEN = 14,
+        FANTASY_SCORING_LOTUSES_GAINED = 15,
+        FANTASY_SCORING_TORMENTOR_KILLS = 16,
+        FANTASY_SCORING_COURIER_KILLS = 17,
+        FANTASY_SCORING_TYPES = 18,
+        FANTASY_SCORING_INVALID = 19,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum Fantasy_Team_Slots
     {
         FANTASY_SLOT_NONE = 0,
@@ -1307,6 +1334,14 @@ namespace SteamKit2.GC.Dota.Internal
         FANTASY_SELECTION_DRAFTING = 7,
         FANTASY_SELECTION_REGULAR_SEASON = 8,
         FANTASY_SELECTION_CARD_BASED = 9,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum Fantasy_Gem_Type
+    {
+        FANTASY_GEM_TYPE_RUBY = 0,
+        FANTASY_GEM_TYPE_SAPPHIRE = 1,
+        FANTASY_GEM_TYPE_EMERALD = 2,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1345,6 +1380,47 @@ namespace SteamKit2.GC.Dota.Internal
         k_EChatSpecialPrivileges_None = 0,
         k_EChatSpecialPrivileges_Moderator = 1,
         k_EChatSpecialPrivileges_SuperModerator = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum DOTACommType_t
+    {
+        DOTA_COMM_TYPE_NONE = 0,
+        DOTA_COMM_TYPE_PING = 1,
+        DOTA_COMM_TYPE_CHATWHEEL = 2,
+        DOTA_COMM_TYPE_TIP = 3,
+        DOTA_COMM_TYPE_TEXT = 4,
+        DOTA_COMM_TYPE_SHOWCASE = 5,
+        DOTA_COMM_TYPE_VOICE = 6,
+        DOTA_COMM_TYPE_ALLY_ABILITY = 7,
+        DOTA_COMM_TYPE_PAUSE = 8,
+        DOTA_COMM_TYPE_COACHING = 9,
+        DOTA_COMM_TYPE_NOCOOLDOWN = 10,
+        DOTA_COMM_TYPE_RANKEDMATCHMAKE = 11,
+        DOTA_COMM_TYPE_DROPS = 12,
+        DOTA_COMM_TYPE_NEWPLAYER_EXPERT = 13,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum DOTACommLevel_t
+    {
+        DOTA_COMM_LEVEL_NONE = 0,
+        DOTA_COMM_LEVEL_COOLDOWN = 1,
+        DOTA_COMM_LEVEL_PINGS = 2,
+        DOTA_COMM_LEVEL_CHAT = 3,
+        DOTA_COMM_LEVEL_TIPPING = 4,
+        DOTA_COMM_LEVEL_VOICE = 5,
+        DOTA_COMM_LEVEL_ALLIED_ABILITY = 6,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum DOTABehaviorLevel_t
+    {
+        DOTA_BEHAVIOR_LEVEL_NONE = 0,
+        DOTA_BEHAVIOR_LEVEL_RANKED_ALLOWED = 1,
+        DOTA_BEHAVIOR_LEVEL_PAUSING = 2,
+        DOTA_BEHAVIOR_LEVEL_DROPS = 3,
+        DOTA_BEHAVIOR_LEVEL_COACHING = 4,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1583,6 +1659,7 @@ namespace SteamKit2.GC.Dota.Internal
     [global::ProtoBuf.ProtoContract()]
     public enum EBadgeType
     {
+        k_EBadgeType_Invalid = 0,
         k_EBadgeType_TI7_Midweek = 1,
         k_EBadgeType_TI7_Finals = 2,
         k_EBadgeType_TI7_AllEvent = 3,
@@ -1595,6 +1672,11 @@ namespace SteamKit2.GC.Dota.Internal
         k_EBadgeType_TI11_PlayoffsDay3 = 10,
         k_EBadgeType_TI11_PlayoffsDay4 = 11,
         k_EBadgeType_TI11_FinalsWeekend = 12,
+        k_EBadgeType_TI12_PlayoffsDay1 = 13,
+        k_EBadgeType_TI12_PlayoffsDay2 = 14,
+        k_EBadgeType_TI12_PlayoffsDay3 = 15,
+        k_EBadgeType_TI12_FinalsWeekend = 16,
+        k_EBadgeType_TI12_Special = 17,
     }
 
     [global::ProtoBuf.ProtoContract()]

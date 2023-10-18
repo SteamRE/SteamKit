@@ -1171,6 +1171,9 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetnormalized_win_probability_diff() => __pbn__normalized_win_probability_diff = null;
         private float? __pbn__normalized_win_probability_diff;
 
+        [global::ProtoBuf.ProtoMember(58)]
+        public global::System.Collections.Generic.List<CMsgTrackedStat> match_tracked_stats { get; } = new global::System.Collections.Generic.List<CMsgTrackedStat>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class CTeam : global::ProtoBuf.IExtensible
         {
@@ -1180,6 +1183,9 @@ namespace SteamKit2.GC.Dota.Internal
 
             [global::ProtoBuf.ProtoMember(1)]
             public global::System.Collections.Generic.List<CPlayer> players { get; } = new global::System.Collections.Generic.List<CPlayer>();
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public global::System.Collections.Generic.List<CMsgTrackedStat> team_tracked_stats { get; } = new global::System.Collections.Generic.List<CMsgTrackedStat>();
 
             [global::ProtoBuf.ProtoContract()]
             public partial class CPlayer : global::ProtoBuf.IExtensible
@@ -1810,6 +1816,9 @@ namespace SteamKit2.GC.Dota.Internal
 
                 [global::ProtoBuf.ProtoMember(79)]
                 public global::System.Collections.Generic.List<int> ability_draft_abilities { get; } = new global::System.Collections.Generic.List<int>();
+
+                [global::ProtoBuf.ProtoMember(80)]
+                public global::System.Collections.Generic.List<CMsgTrackedStat> player_tracked_stats { get; } = new global::System.Collections.Generic.List<CMsgTrackedStat>();
 
                 [global::ProtoBuf.ProtoContract()]
                 public partial class CCustomGameData : global::ProtoBuf.IExtensible
@@ -2794,6 +2803,9 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializecomms_blocks_mass() => __pbn__comms_blocks_mass != null;
             public void Resetcomms_blocks_mass() => __pbn__comms_blocks_mass = null;
             private uint? __pbn__comms_blocks_mass;
+
+            [global::ProtoBuf.ProtoMember(18)]
+            public global::System.Collections.Generic.List<string> chat_log { get; } = new global::System.Collections.Generic.List<string>();
 
             [global::ProtoBuf.ProtoContract()]
             public partial class PingDetail : global::ProtoBuf.IExtensible
@@ -3797,6 +3809,16 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4, IsPacked = true)]
         public global::System.Collections.Generic.List<uint> rank_types { get; } = new global::System.Collections.Generic.List<uint>();
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public int lobby_type
+        {
+            get => __pbn__lobby_type.GetValueOrDefault();
+            set => __pbn__lobby_type = value;
+        }
+        public bool ShouldSerializelobby_type() => __pbn__lobby_type != null;
+        public void Resetlobby_type() => __pbn__lobby_type = null;
+        private int? __pbn__lobby_type;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -3825,26 +3847,6 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
             public void Resetaccount_id() => __pbn__account_id = null;
             private uint? __pbn__account_id;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public bool prevent_text_chat
-            {
-                get => __pbn__prevent_text_chat.GetValueOrDefault();
-                set => __pbn__prevent_text_chat = value;
-            }
-            public bool ShouldSerializeprevent_text_chat() => __pbn__prevent_text_chat != null;
-            public void Resetprevent_text_chat() => __pbn__prevent_text_chat = null;
-            private bool? __pbn__prevent_text_chat;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public bool prevent_voice_chat
-            {
-                get => __pbn__prevent_voice_chat.GetValueOrDefault();
-                set => __pbn__prevent_voice_chat = value;
-            }
-            public bool ShouldSerializeprevent_voice_chat() => __pbn__prevent_voice_chat != null;
-            public void Resetprevent_voice_chat() => __pbn__prevent_voice_chat = null;
-            private bool? __pbn__prevent_voice_chat;
 
             [global::ProtoBuf.ProtoMember(4)]
             public uint rank
@@ -3895,6 +3897,26 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializeis_guide_player() => __pbn__is_guide_player != null;
             public void Resetis_guide_player() => __pbn__is_guide_player = null;
             private bool? __pbn__is_guide_player;
+
+            [global::ProtoBuf.ProtoMember(9)]
+            public int comm_level
+            {
+                get => __pbn__comm_level.GetValueOrDefault();
+                set => __pbn__comm_level = value;
+            }
+            public bool ShouldSerializecomm_level() => __pbn__comm_level != null;
+            public void Resetcomm_level() => __pbn__comm_level = null;
+            private int? __pbn__comm_level;
+
+            [global::ProtoBuf.ProtoMember(10)]
+            public int behavior_level
+            {
+                get => __pbn__behavior_level.GetValueOrDefault();
+                set => __pbn__behavior_level = value;
+            }
+            public bool ShouldSerializebehavior_level() => __pbn__behavior_level != null;
+            public void Resetbehavior_level() => __pbn__behavior_level = null;
+            private int? __pbn__behavior_level;
 
         }
 
@@ -4844,6 +4866,139 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeresponse() => __pbn__response != null;
         public void Resetresponse() => __pbn__response = null;
         private uint? __pbn__response;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToServerEvaluateToxicChat : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint target_account_id
+        {
+            get => __pbn__target_account_id.GetValueOrDefault();
+            set => __pbn__target_account_id = value;
+        }
+        public bool ShouldSerializetarget_account_id() => __pbn__target_account_id != null;
+        public void Resettarget_account_id() => __pbn__target_account_id = null;
+        private uint? __pbn__target_account_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint reporter_account_id
+        {
+            get => __pbn__reporter_account_id.GetValueOrDefault();
+            set => __pbn__reporter_account_id = value;
+        }
+        public bool ShouldSerializereporter_account_id() => __pbn__reporter_account_id != null;
+        public void Resetreporter_account_id() => __pbn__reporter_account_id = null;
+        private uint? __pbn__reporter_account_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgServerToGCEvaluateToxicChat : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint target_account_id
+        {
+            get => __pbn__target_account_id.GetValueOrDefault();
+            set => __pbn__target_account_id = value;
+        }
+        public bool ShouldSerializetarget_account_id() => __pbn__target_account_id != null;
+        public void Resettarget_account_id() => __pbn__target_account_id = null;
+        private uint? __pbn__target_account_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint reporter_account_id
+        {
+            get => __pbn__reporter_account_id.GetValueOrDefault();
+            set => __pbn__reporter_account_id = value;
+        }
+        public bool ShouldSerializereporter_account_id() => __pbn__reporter_account_id != null;
+        public void Resetreporter_account_id() => __pbn__reporter_account_id = null;
+        private uint? __pbn__reporter_account_id;
+
+        [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong match_id
+        {
+            get => __pbn__match_id.GetValueOrDefault();
+            set => __pbn__match_id = value;
+        }
+        public bool ShouldSerializematch_id() => __pbn__match_id != null;
+        public void Resetmatch_id() => __pbn__match_id = null;
+        private ulong? __pbn__match_id;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<uint> timestamp { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public global::System.Collections.Generic.List<string> line { get; } = new global::System.Collections.Generic.List<string>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgServerToGCEvaluateToxicChatResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint target_account_id
+        {
+            get => __pbn__target_account_id.GetValueOrDefault();
+            set => __pbn__target_account_id = value;
+        }
+        public bool ShouldSerializetarget_account_id() => __pbn__target_account_id != null;
+        public void Resettarget_account_id() => __pbn__target_account_id = null;
+        private uint? __pbn__target_account_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint reporter_account_id
+        {
+            get => __pbn__reporter_account_id.GetValueOrDefault();
+            set => __pbn__reporter_account_id = value;
+        }
+        public bool ShouldSerializereporter_account_id() => __pbn__reporter_account_id != null;
+        public void Resetreporter_account_id() => __pbn__reporter_account_id = null;
+        private uint? __pbn__reporter_account_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint ban_reason
+        {
+            get => __pbn__ban_reason.GetValueOrDefault();
+            set => __pbn__ban_reason = value;
+        }
+        public bool ShouldSerializeban_reason() => __pbn__ban_reason != null;
+        public void Resetban_reason() => __pbn__ban_reason = null;
+        private uint? __pbn__ban_reason;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint ban_duration
+        {
+            get => __pbn__ban_duration.GetValueOrDefault();
+            set => __pbn__ban_duration = value;
+        }
+        public bool ShouldSerializeban_duration() => __pbn__ban_duration != null;
+        public void Resetban_duration() => __pbn__ban_duration = null;
+        private uint? __pbn__ban_duration;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public float toxicity_score
+        {
+            get => __pbn__toxicity_score.GetValueOrDefault();
+            set => __pbn__toxicity_score = value;
+        }
+        public bool ShouldSerializetoxicity_score() => __pbn__toxicity_score != null;
+        public void Resettoxicity_score() => __pbn__toxicity_score = null;
+        private float? __pbn__toxicity_score;
 
     }
 

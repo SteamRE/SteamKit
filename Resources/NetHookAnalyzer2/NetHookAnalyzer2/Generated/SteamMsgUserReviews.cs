@@ -44,47 +44,6 @@ namespace NetHookAnalyzer2.Protobufs
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CUserReviews_GetIndividualRecommendations_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<CUserReviews_GetIndividualRecommendations_Request_RecommendationRequest> requests { get; } = new global::System.Collections.Generic.List<CUserReviews_GetIndividualRecommendations_Request_RecommendationRequest>();
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CUserReviews_GetIndividualRecommendations_Request_RecommendationRequest : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public ulong steamid
-        {
-            get => __pbn__steamid.GetValueOrDefault();
-            set => __pbn__steamid = value;
-        }
-        public bool ShouldSerializesteamid() => __pbn__steamid != null;
-        public void Resetsteamid() => __pbn__steamid = null;
-        private ulong? __pbn__steamid;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint appid
-        {
-            get => __pbn__appid.GetValueOrDefault();
-            set => __pbn__appid = value;
-        }
-        public bool ShouldSerializeappid() => __pbn__appid != null;
-        public void Resetappid() => __pbn__appid = null;
-        private uint? __pbn__appid;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CUserReviews_GetIndividualRecommendations_Response : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -122,107 +81,6 @@ namespace NetHookAnalyzer2.Protobufs
         public bool ShouldSerializecount() => __pbn__count != null;
         public void Resetcount() => __pbn__count = null;
         private uint? __pbn__count;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CUserReviews_Update_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public ulong recommendationid
-        {
-            get => __pbn__recommendationid.GetValueOrDefault();
-            set => __pbn__recommendationid = value;
-        }
-        public bool ShouldSerializerecommendationid() => __pbn__recommendationid != null;
-        public void Resetrecommendationid() => __pbn__recommendationid = null;
-        private ulong? __pbn__recommendationid;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string review_text
-        {
-            get => __pbn__review_text ?? "";
-            set => __pbn__review_text = value;
-        }
-        public bool ShouldSerializereview_text() => __pbn__review_text != null;
-        public void Resetreview_text() => __pbn__review_text = null;
-        private string __pbn__review_text;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public bool voted_up
-        {
-            get => __pbn__voted_up.GetValueOrDefault();
-            set => __pbn__voted_up = value;
-        }
-        public bool ShouldSerializevoted_up() => __pbn__voted_up != null;
-        public void Resetvoted_up() => __pbn__voted_up = null;
-        private bool? __pbn__voted_up;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public bool is_public
-        {
-            get => __pbn__is_public.GetValueOrDefault();
-            set => __pbn__is_public = value;
-        }
-        public bool ShouldSerializeis_public() => __pbn__is_public != null;
-        public void Resetis_public() => __pbn__is_public = null;
-        private bool? __pbn__is_public;
-
-        [global::ProtoBuf.ProtoMember(5)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string language
-        {
-            get => __pbn__language ?? "";
-            set => __pbn__language = value;
-        }
-        public bool ShouldSerializelanguage() => __pbn__language != null;
-        public void Resetlanguage() => __pbn__language = null;
-        private string __pbn__language;
-
-        [global::ProtoBuf.ProtoMember(6)]
-        public bool is_in_early_access
-        {
-            get => __pbn__is_in_early_access.GetValueOrDefault();
-            set => __pbn__is_in_early_access = value;
-        }
-        public bool ShouldSerializeis_in_early_access() => __pbn__is_in_early_access != null;
-        public void Resetis_in_early_access() => __pbn__is_in_early_access = null;
-        private bool? __pbn__is_in_early_access;
-
-        [global::ProtoBuf.ProtoMember(7)]
-        public bool received_compensation
-        {
-            get => __pbn__received_compensation.GetValueOrDefault();
-            set => __pbn__received_compensation = value;
-        }
-        public bool ShouldSerializereceived_compensation() => __pbn__received_compensation != null;
-        public void Resetreceived_compensation() => __pbn__received_compensation = null;
-        private bool? __pbn__received_compensation;
-
-        [global::ProtoBuf.ProtoMember(8)]
-        public bool comments_disabled
-        {
-            get => __pbn__comments_disabled.GetValueOrDefault();
-            set => __pbn__comments_disabled = value;
-        }
-        public bool ShouldSerializecomments_disabled() => __pbn__comments_disabled != null;
-        public void Resetcomments_disabled() => __pbn__comments_disabled = null;
-        private bool? __pbn__comments_disabled;
-
-        [global::ProtoBuf.ProtoMember(9)]
-        public bool hide_in_steam_china
-        {
-            get => __pbn__hide_in_steam_china.GetValueOrDefault();
-            set => __pbn__hide_in_steam_china = value;
-        }
-        public bool ShouldSerializehide_in_steam_china() => __pbn__hide_in_steam_china != null;
-        public void Resethide_in_steam_china() => __pbn__hide_in_steam_china = null;
-        private bool? __pbn__hide_in_steam_china;
 
     }
 
@@ -650,34 +508,13 @@ namespace NetHookAnalyzer2.Protobufs
         public void Resetipaddress() => __pbn__ipaddress = null;
         private string __pbn__ipaddress;
 
-        [global::ProtoBuf.ProtoMember(42)]
-        public bool hidden_in_steam_china
-        {
-            get => __pbn__hidden_in_steam_china.GetValueOrDefault();
-            set => __pbn__hidden_in_steam_china = value;
-        }
-        public bool ShouldSerializehidden_in_steam_china() => __pbn__hidden_in_steam_china != null;
-        public void Resethidden_in_steam_china() => __pbn__hidden_in_steam_china = null;
-        private bool? __pbn__hidden_in_steam_china;
-
-        [global::ProtoBuf.ProtoMember(43)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string steam_china_location
-        {
-            get => __pbn__steam_china_location ?? "";
-            set => __pbn__steam_china_location = value;
-        }
-        public bool ShouldSerializesteam_china_location() => __pbn__steam_china_location != null;
-        public void Resetsteam_china_location() => __pbn__steam_china_location = null;
-        private string __pbn__steam_china_location;
-
     }
 
     public interface IUserReviews
     {
         CUserReviews_GetFriendsRecommendedApp_Response GetFriendsRecommendedApp(CUserReviews_GetFriendsRecommendedApp_Request request);
-        CUserReviews_GetIndividualRecommendations_Response GetIndividualRecommendations(CUserReviews_GetIndividualRecommendations_Request request);
-        CUserReviews_Update_Response Update(CUserReviews_Update_Request request);
+        CUserReviews_GetIndividualRecommendations_Response GetIndividualRecommendations(NotImplemented request);
+        CUserReviews_Update_Response Update(NotImplemented request);
     }
 
 }

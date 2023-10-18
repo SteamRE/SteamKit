@@ -10,6 +10,47 @@ namespace SteamKit2.Internal
 {
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CContentServerDirectory_ConnectedSteamPipeServerInfo : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string type
+        {
+            get => __pbn__type ?? "";
+            set => __pbn__type = value;
+        }
+        public bool ShouldSerializetype() => __pbn__type != null;
+        public void Resettype() => __pbn__type = null;
+        private string __pbn__type;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public int source_id
+        {
+            get => __pbn__source_id.GetValueOrDefault();
+            set => __pbn__source_id = value;
+        }
+        public bool ShouldSerializesource_id() => __pbn__source_id != null;
+        public void Resetsource_id() => __pbn__source_id = null;
+        private int? __pbn__source_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string hostname
+        {
+            get => __pbn__hostname ?? "";
+            set => __pbn__hostname = value;
+        }
+        public bool ShouldSerializehostname() => __pbn__hostname != null;
+        public void Resethostname() => __pbn__hostname = null;
+        private string __pbn__hostname;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CContentServerDirectory_GetServersForSteamPipe_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -69,6 +110,9 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeipv6_public() => __pbn__ipv6_public != null;
         public void Resetipv6_public() => __pbn__ipv6_public = null;
         private string __pbn__ipv6_public;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public global::System.Collections.Generic.List<CContentServerDirectory_ConnectedSteamPipeServerInfo> current_connections { get; } = new global::System.Collections.Generic.List<CContentServerDirectory_ConnectedSteamPipeServerInfo>();
 
     }
 
@@ -228,6 +272,16 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(1)]
         public global::System.Collections.Generic.List<CContentServerDirectory_ServerInfo> servers { get; } = new global::System.Collections.Generic.List<CContentServerDirectory_ServerInfo>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool no_change
+        {
+            get => __pbn__no_change.GetValueOrDefault();
+            set => __pbn__no_change = value;
+        }
+        public bool ShouldSerializeno_change() => __pbn__no_change != null;
+        public void Resetno_change() => __pbn__no_change = null;
+        private bool? __pbn__no_change;
 
     }
 

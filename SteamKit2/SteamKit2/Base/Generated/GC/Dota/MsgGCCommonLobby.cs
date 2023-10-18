@@ -91,6 +91,74 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgEventActionData : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint action_id
+        {
+            get => __pbn__action_id.GetValueOrDefault();
+            set => __pbn__action_id = value;
+        }
+        public bool ShouldSerializeaction_id() => __pbn__action_id != null;
+        public void Resetaction_id() => __pbn__action_id = null;
+        private uint? __pbn__action_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint action_score
+        {
+            get => __pbn__action_score.GetValueOrDefault();
+            set => __pbn__action_score = value;
+        }
+        public bool ShouldSerializeaction_score() => __pbn__action_score != null;
+        public void Resetaction_score() => __pbn__action_score = null;
+        private uint? __pbn__action_score;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgPeriodicResourceData : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint periodic_resource_id
+        {
+            get => __pbn__periodic_resource_id.GetValueOrDefault();
+            set => __pbn__periodic_resource_id = value;
+        }
+        public bool ShouldSerializeperiodic_resource_id() => __pbn__periodic_resource_id != null;
+        public void Resetperiodic_resource_id() => __pbn__periodic_resource_id = null;
+        private uint? __pbn__periodic_resource_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint remaining
+        {
+            get => __pbn__remaining.GetValueOrDefault();
+            set => __pbn__remaining = value;
+        }
+        public bool ShouldSerializeremaining() => __pbn__remaining != null;
+        public void Resetremaining() => __pbn__remaining = null;
+        private uint? __pbn__remaining;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint max
+        {
+            get => __pbn__max.GetValueOrDefault();
+            set => __pbn__max = value;
+        }
+        public bool ShouldSerializemax() => __pbn__max != null;
+        public void Resetmax() => __pbn__max = null;
+        private uint? __pbn__max;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgLobbyEventPoints : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -109,74 +177,6 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<AccountPoints> account_points { get; } = new global::System.Collections.Generic.List<AccountPoints>();
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class PeriodicResourceData : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint periodic_resource_id
-            {
-                get => __pbn__periodic_resource_id.GetValueOrDefault();
-                set => __pbn__periodic_resource_id = value;
-            }
-            public bool ShouldSerializeperiodic_resource_id() => __pbn__periodic_resource_id != null;
-            public void Resetperiodic_resource_id() => __pbn__periodic_resource_id = null;
-            private uint? __pbn__periodic_resource_id;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public uint remaining
-            {
-                get => __pbn__remaining.GetValueOrDefault();
-                set => __pbn__remaining = value;
-            }
-            public bool ShouldSerializeremaining() => __pbn__remaining != null;
-            public void Resetremaining() => __pbn__remaining = null;
-            private uint? __pbn__remaining;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public uint max
-            {
-                get => __pbn__max.GetValueOrDefault();
-                set => __pbn__max = value;
-            }
-            public bool ShouldSerializemax() => __pbn__max != null;
-            public void Resetmax() => __pbn__max = null;
-            private uint? __pbn__max;
-
-        }
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class NetworkedEventAction : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint action_id
-            {
-                get => __pbn__action_id.GetValueOrDefault();
-                set => __pbn__action_id = value;
-            }
-            public bool ShouldSerializeaction_id() => __pbn__action_id != null;
-            public void Resetaction_id() => __pbn__action_id = null;
-            private uint? __pbn__action_id;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public uint times_granted
-            {
-                get => __pbn__times_granted.GetValueOrDefault();
-                set => __pbn__times_granted = value;
-            }
-            public bool ShouldSerializetimes_granted() => __pbn__times_granted != null;
-            public void Resettimes_granted() => __pbn__times_granted = null;
-            private uint? __pbn__times_granted;
-
-        }
 
         [global::ProtoBuf.ProtoContract()]
         public partial class AccountPoints : global::ProtoBuf.IExtensible
@@ -246,7 +246,7 @@ namespace SteamKit2.GC.Dota.Internal
             private uint? __pbn__wager_streak;
 
             [global::ProtoBuf.ProtoMember(25)]
-            public global::System.Collections.Generic.List<CMsgLobbyEventPoints.NetworkedEventAction> event_game_custom_actions { get; } = new global::System.Collections.Generic.List<CMsgLobbyEventPoints.NetworkedEventAction>();
+            public global::System.Collections.Generic.List<CMsgEventActionData> event_game_custom_actions { get; } = new global::System.Collections.Generic.List<CMsgEventActionData>();
 
             [global::ProtoBuf.ProtoMember(26)]
             public uint tip_amount_index
@@ -279,10 +279,13 @@ namespace SteamKit2.GC.Dota.Internal
             private uint? __pbn__teleport_fx_level;
 
             [global::ProtoBuf.ProtoMember(30)]
-            public global::System.Collections.Generic.List<CMsgLobbyEventPoints.NetworkedEventAction> networked_event_actions { get; } = new global::System.Collections.Generic.List<CMsgLobbyEventPoints.NetworkedEventAction>();
+            public global::System.Collections.Generic.List<CMsgEventActionData> networked_event_actions { get; } = new global::System.Collections.Generic.List<CMsgEventActionData>();
 
             [global::ProtoBuf.ProtoMember(31)]
-            public global::System.Collections.Generic.List<CMsgLobbyEventPoints.PeriodicResourceData> periodic_resources { get; } = new global::System.Collections.Generic.List<CMsgLobbyEventPoints.PeriodicResourceData>();
+            public global::System.Collections.Generic.List<CMsgPeriodicResourceData> periodic_resources { get; } = new global::System.Collections.Generic.List<CMsgPeriodicResourceData>();
+
+            [global::ProtoBuf.ProtoMember(32)]
+            public global::System.Collections.Generic.List<CExtraMsgBlock> extra_event_messages { get; } = new global::System.Collections.Generic.List<CExtraMsgBlock>();
 
         }
 
@@ -2275,6 +2278,16 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeis_player_draft() => __pbn__is_player_draft != null;
         public void Resetis_player_draft() => __pbn__is_player_draft = null;
         private bool? __pbn__is_player_draft;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool is_last_match_in_series
+        {
+            get => __pbn__is_last_match_in_series.GetValueOrDefault();
+            set => __pbn__is_last_match_in_series = value;
+        }
+        public bool ShouldSerializeis_last_match_in_series() => __pbn__is_last_match_in_series != null;
+        public void Resetis_last_match_in_series() => __pbn__is_last_match_in_series = null;
+        private bool? __pbn__is_last_match_in_series;
 
     }
 

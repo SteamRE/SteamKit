@@ -10,6 +10,44 @@ namespace SteamKit2.Internal
 {
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CShader_GetShaderReportingCadence_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CShader_GetShaderReportingCadence_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong rereport_time_threshold
+        {
+            get => __pbn__rereport_time_threshold.GetValueOrDefault();
+            set => __pbn__rereport_time_threshold = value;
+        }
+        public bool ShouldSerializerereport_time_threshold() => __pbn__rereport_time_threshold != null;
+        public void Resetrereport_time_threshold() => __pbn__rereport_time_threshold = null;
+        private ulong? __pbn__rereport_time_threshold;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint percent_to_rereport
+        {
+            get => __pbn__percent_to_rereport.GetValueOrDefault();
+            set => __pbn__percent_to_rereport = value;
+        }
+        public bool ShouldSerializepercent_to_rereport() => __pbn__percent_to_rereport != null;
+        public void Resetpercent_to_rereport() => __pbn__percent_to_rereport = null;
+        private uint? __pbn__percent_to_rereport;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CShader_RegisterShader_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -430,6 +468,7 @@ namespace SteamKit2.Internal
 
     public interface IShader
     {
+        CShader_GetShaderReportingCadence_Response GetShaderReportingCadence(CShader_GetShaderReportingCadence_Request request);
         CShader_RegisterShader_Response RegisterShader(CShader_RegisterShader_Request request);
         CShader_SendShader_Response SendShader(CShader_SendShader_Request request);
         CShader_GetBucketManifest_Response GetBucketManifest(CShader_GetBucketManifest_Request request);

@@ -4820,28 +4820,6 @@ namespace SteamKit2.Internal
 
     }
 
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientFeatureGroupInfo : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public ulong groupid
-        {
-            get => __pbn__groupid.GetValueOrDefault();
-            set => __pbn__groupid = value;
-        }
-        public bool ShouldSerializegroupid() => __pbn__groupid != null;
-        public void Resetgroupid() => __pbn__groupid = null;
-        private ulong? __pbn__groupid;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<uint> members { get; } = new global::System.Collections.Generic.List<uint>();
-
-    }
-
 }
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
