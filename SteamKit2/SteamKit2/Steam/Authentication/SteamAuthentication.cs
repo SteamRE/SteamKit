@@ -60,6 +60,32 @@ namespace SteamKit2.Authentication
         }
 
         /// <summary>
+        /// Given a refresh token for a client app audience (e.g. desktop client / mobile client), generate an access token.
+        /// </summary>
+        /// <param name="steamID">The SteamID this token belongs to.</param>
+        /// <param name="refreshToken">The refresh token.</param>
+        public async Task<AccessTokenGenerateResult> GenerateAccessTokenForAppAsync( SteamID steamID, string refreshToken )
+        {
+            var request = new CAuthentication_AccessToken_GenerateForApp_Request
+            {
+                refresh_token = refreshToken,
+                steamid = steamID.ConvertToUInt64(),
+                renewal_type = ETokenRenewalType.k_ETokenRenewalType_Allow,
+            };
+
+            var message = await AuthenticationService.SendMessage( api => api.GenerateAccessTokenForApp( request ) );
+
+            if ( message.Result != EResult.OK )
+            {
+                throw new AuthenticationException( "Failed to generate token", message.Result );
+            }
+
+            var response = message.GetDeserializedResponse<CAuthentication_AccessToken_GenerateForApp_Response>();
+
+            return new AccessTokenGenerateResult( response );
+        }
+
+        /// <summary>
         /// Start the authentication process using QR codes.
         /// </summary>
         /// <param name="details">The details to use for logging on.</param>
