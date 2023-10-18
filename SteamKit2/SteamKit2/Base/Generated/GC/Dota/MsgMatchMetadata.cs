@@ -109,6 +109,9 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(12)]
         public global::System.Collections.Generic.List<Tip> match_tips { get; } = new global::System.Collections.Generic.List<Tip>();
 
+        [global::ProtoBuf.ProtoMember(13)]
+        public global::System.Collections.Generic.List<CMsgTrackedStat> match_tracked_stats { get; } = new global::System.Collections.Generic.List<CMsgTrackedStat>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class EconItem : global::ProtoBuf.IExtensible
         {
@@ -215,6 +218,9 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializecm_penalty() => __pbn__cm_penalty != null;
             public void Resetcm_penalty() => __pbn__cm_penalty = null;
             private uint? __pbn__cm_penalty;
+
+            [global::ProtoBuf.ProtoMember(11)]
+            public global::System.Collections.Generic.List<CMsgTrackedStat> team_tracked_stats { get; } = new global::System.Collections.Generic.List<CMsgTrackedStat>();
 
             [global::ProtoBuf.ProtoContract()]
             public partial class PlayerKill : global::ProtoBuf.IExtensible
@@ -938,6 +944,9 @@ namespace SteamKit2.GC.Dota.Internal
                 [global::ProtoBuf.ProtoMember(26)]
                 public global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.PeriodicResourceData> periodic_resources { get; } = new global::System.Collections.Generic.List<CDOTAMatchMetadata.Team.PeriodicResourceData>();
 
+                [global::ProtoBuf.ProtoMember(27)]
+                public global::System.Collections.Generic.List<CExtraMsgBlock> extra_event_messages { get; } = new global::System.Collections.Generic.List<CExtraMsgBlock>();
+
             }
 
             [global::ProtoBuf.ProtoContract()]
@@ -1403,6 +1412,9 @@ namespace SteamKit2.GC.Dota.Internal
                 public bool ShouldSerializegame_player_id() => __pbn__game_player_id != null;
                 public void Resetgame_player_id() => __pbn__game_player_id = null;
                 private int? __pbn__game_player_id;
+
+                [global::ProtoBuf.ProtoMember(58)]
+                public global::System.Collections.Generic.List<CMsgTrackedStat> player_tracked_stats { get; } = new global::System.Collections.Generic.List<CMsgTrackedStat>();
 
                 [global::ProtoBuf.ProtoContract()]
                 public partial class ContractProgress : global::ProtoBuf.IExtensible

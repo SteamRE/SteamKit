@@ -14,7 +14,6 @@ namespace SteamKit2.Internal
         CRemoteClient_GetPairingInfo_Response GetPairingInfo(CRemoteClient_GetPairingInfo_Request request);
         NoResponse NotifyOnline(CRemoteClient_Online_Notification request);
         NoResponse NotifyReplyPacket(CRemoteClient_ReplyPacket_Notification request);
-        CRemoteClient_AllocateTURNServer_Response AllocateTURNServer(CRemoteClient_AllocateTURNServer_Request request);
         CRemoteClient_AllocateRelayServer_Response AllocateRelayServer(CRemoteClient_AllocateRelayServer_Request request);
         CRemoteClient_AllocateSDR_Response AllocateSDR(CRemoteClient_AllocateSDR_Request request);
         NoResponse SendSteamBroadcastPacket(CRemoteClient_SteamBroadcast_Notification request);

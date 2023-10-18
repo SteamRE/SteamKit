@@ -326,7 +326,8 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCClientVersionUpdated = 2528,
         k_EMsgGCAdjustItemEquippedStateMulti = 2529,
         k_EMsgGCRecurringSubscriptionStatus = 2530,
-        k_EMsgGCAdjustEquipSlots = 2531,
+        k_EMsgGCAdjustEquipSlotsManual = 2531,
+        k_EMsgGCAdjustEquipSlotsShuffle = 2532,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -380,6 +381,7 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EGCItemCustomizationNotification_GraffitiUnseal = 9185,
         k_EGCItemCustomizationNotification_GenerateSouvenir = 9204,
         k_EGCItemCustomizationNotification_ClientRedeemMissionReward = 9209,
+        k_EGCItemCustomizationNotification_ClientRedeemFreeReward = 9219,
     }
 
 }

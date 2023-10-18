@@ -1692,7 +1692,7 @@ namespace SteamKit2.Internal
         public void Resetallow_experimental_hdr() => __pbn__allow_experimental_hdr = null;
         private bool? __pbn__allow_experimental_hdr;
 
-        [global::ProtoBuf.ProtoMember(17)]
+        [global::ProtoBuf.ProtoMember(22)]
         public float sdr_to_hdr_brightness
         {
             get => __pbn__sdr_to_hdr_brightness.GetValueOrDefault();
@@ -3101,6 +3101,9 @@ namespace SteamKit2.Internal
         public void Resetis_hdr_enabled() => __pbn__is_hdr_enabled = null;
         private bool? __pbn__is_hdr_enabled;
 
+        [global::ProtoBuf.ProtoMember(18)]
+        public global::System.Collections.Generic.List<int> compatibility_params { get; } = new global::System.Collections.Generic.List<int>();
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -3353,14 +3356,14 @@ namespace SteamKit2.Internal
         private bool? __pbn__display_diagnostics_enabled;
 
         [global::ProtoBuf.ProtoMember(21)]
-        public float als_lux_latest
+        public float als_lux_primary
         {
-            get => __pbn__als_lux_latest.GetValueOrDefault();
-            set => __pbn__als_lux_latest = value;
+            get => __pbn__als_lux_primary.GetValueOrDefault();
+            set => __pbn__als_lux_primary = value;
         }
-        public bool ShouldSerializeals_lux_latest() => __pbn__als_lux_latest != null;
-        public void Resetals_lux_latest() => __pbn__als_lux_latest = null;
-        private float? __pbn__als_lux_latest;
+        public bool ShouldSerializeals_lux_primary() => __pbn__als_lux_primary != null;
+        public void Resetals_lux_primary() => __pbn__als_lux_primary = null;
+        private float? __pbn__als_lux_primary;
 
         [global::ProtoBuf.ProtoMember(22)]
         public float als_lux_median
@@ -3462,6 +3465,67 @@ namespace SteamKit2.Internal
         public bool ShouldSerializedisplay_colorgamut() => __pbn__display_colorgamut != null;
         public void Resetdisplay_colorgamut() => __pbn__display_colorgamut = null;
         private float? __pbn__display_colorgamut;
+
+        [global::ProtoBuf.ProtoMember(33)]
+        public float als_lux_alternate
+        {
+            get => __pbn__als_lux_alternate.GetValueOrDefault();
+            set => __pbn__als_lux_alternate = value;
+        }
+        public bool ShouldSerializeals_lux_alternate() => __pbn__als_lux_alternate != null;
+        public void Resetals_lux_alternate() => __pbn__als_lux_alternate = null;
+        private float? __pbn__als_lux_alternate;
+
+        [global::ProtoBuf.ProtoMember(34)]
+        public bool is_display_colortemp_available
+        {
+            get => __pbn__is_display_colortemp_available.GetValueOrDefault();
+            set => __pbn__is_display_colortemp_available = value;
+        }
+        public bool ShouldSerializeis_display_colortemp_available() => __pbn__is_display_colortemp_available != null;
+        public void Resetis_display_colortemp_available() => __pbn__is_display_colortemp_available = null;
+        private bool? __pbn__is_display_colortemp_available;
+
+        [global::ProtoBuf.ProtoMember(35)]
+        public float display_colortemp
+        {
+            get => __pbn__display_colortemp.GetValueOrDefault();
+            set => __pbn__display_colortemp = value;
+        }
+        public bool ShouldSerializedisplay_colortemp() => __pbn__display_colortemp != null;
+        public void Resetdisplay_colortemp() => __pbn__display_colortemp = null;
+        private float? __pbn__display_colortemp;
+
+        [global::ProtoBuf.ProtoMember(36)]
+        public float display_colortemp_default
+        {
+            get => __pbn__display_colortemp_default.GetValueOrDefault();
+            set => __pbn__display_colortemp_default = value;
+        }
+        public bool ShouldSerializedisplay_colortemp_default() => __pbn__display_colortemp_default != null;
+        public void Resetdisplay_colortemp_default() => __pbn__display_colortemp_default = null;
+        private float? __pbn__display_colortemp_default;
+
+        [global::ProtoBuf.ProtoMember(37)]
+        public bool display_colortemp_enabled
+        {
+            get => __pbn__display_colortemp_enabled.GetValueOrDefault();
+            set => __pbn__display_colortemp_enabled = value;
+        }
+        public bool ShouldSerializedisplay_colortemp_enabled() => __pbn__display_colortemp_enabled != null;
+        public void Resetdisplay_colortemp_enabled() => __pbn__display_colortemp_enabled = null;
+        private bool? __pbn__display_colortemp_enabled;
+
+        [global::ProtoBuf.ProtoMember(38)]
+        [global::System.ComponentModel.DefaultValue(EColorGamutLabelSet.k_ColorGamutLabelSet_Default)]
+        public EColorGamutLabelSet display_colorgamut_labelset
+        {
+            get => __pbn__display_colorgamut_labelset ?? EColorGamutLabelSet.k_ColorGamutLabelSet_Default;
+            set => __pbn__display_colorgamut_labelset = value;
+        }
+        public bool ShouldSerializedisplay_colorgamut_labelset() => __pbn__display_colorgamut_labelset != null;
+        public void Resetdisplay_colorgamut_labelset() => __pbn__display_colorgamut_labelset = null;
+        private EColorGamutLabelSet? __pbn__display_colorgamut_labelset;
 
     }
 
@@ -4066,6 +4130,57 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientShaderHitCacheEntry : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public byte[] key_sha
+        {
+            get => __pbn__key_sha;
+            set => __pbn__key_sha = value;
+        }
+        public bool ShouldSerializekey_sha() => __pbn__key_sha != null;
+        public void Resetkey_sha() => __pbn__key_sha = null;
+        private byte[] __pbn__key_sha;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public byte[] code_sha
+        {
+            get => __pbn__code_sha;
+            set => __pbn__code_sha = value;
+        }
+        public bool ShouldSerializecode_sha() => __pbn__code_sha != null;
+        public void Resetcode_sha() => __pbn__code_sha = null;
+        private byte[] __pbn__code_sha;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong time_last_reported
+        {
+            get => __pbn__time_last_reported.GetValueOrDefault();
+            set => __pbn__time_last_reported = value;
+        }
+        public bool ShouldSerializetime_last_reported() => __pbn__time_last_reported != null;
+        public void Resettime_last_reported() => __pbn__time_last_reported = null;
+        private ulong? __pbn__time_last_reported;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientShaderHitCache : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CMsgClientShaderHitCacheEntry> entries { get; } = new global::System.Collections.Generic.List<CMsgClientShaderHitCacheEntry>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ECloudPendingRemoteOperation
     {
         k_ECloudPendingRemoteOperationNone = 0,
@@ -4113,6 +4228,7 @@ namespace SteamKit2.Internal
         k_ESteamDeckKeyboardLayout_Chinese_Traditional_Cangjie = 32,
         k_ESteamDeckKeyboardLayout_Japanese_Kana = 33,
         k_ESteamDeckKeyboardLayout_Chinese_Traditional_Quick = 34,
+        k_ESteamDeckKeyboardLayout_Indonesian = 35,
     }
 
 }

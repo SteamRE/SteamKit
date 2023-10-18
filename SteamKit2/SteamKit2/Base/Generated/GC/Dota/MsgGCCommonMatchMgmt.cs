@@ -631,6 +631,26 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetbot_script_index_mask() => __pbn__bot_script_index_mask = null;
         private uint? __pbn__bot_script_index_mask;
 
+        [global::ProtoBuf.ProtoMember(74)]
+        public bool restricted_from_ranked
+        {
+            get => __pbn__restricted_from_ranked.GetValueOrDefault();
+            set => __pbn__restricted_from_ranked = value;
+        }
+        public bool ShouldSerializerestricted_from_ranked() => __pbn__restricted_from_ranked != null;
+        public void Resetrestricted_from_ranked() => __pbn__restricted_from_ranked = null;
+        private bool? __pbn__restricted_from_ranked;
+
+        [global::ProtoBuf.ProtoMember(75)]
+        public uint restricted_from_ranked_account_id
+        {
+            get => __pbn__restricted_from_ranked_account_id.GetValueOrDefault();
+            set => __pbn__restricted_from_ranked_account_id = value;
+        }
+        public bool ShouldSerializerestricted_from_ranked_account_id() => __pbn__restricted_from_ranked_account_id != null;
+        public void Resetrestricted_from_ranked_account_id() => __pbn__restricted_from_ranked_account_id = null;
+        private uint? __pbn__restricted_from_ranked_account_id;
+
         [global::ProtoBuf.ProtoContract()]
         public enum State
         {
@@ -1361,22 +1381,22 @@ namespace SteamKit2.GC.Dota.Internal
         k_ELaneSelection_SAFELANE = 0,
         k_ELaneSelection_OFFLANE = 1,
         k_ELaneSelection_MIDLANE = 2,
-        k_ELaneSelection_SUPPORT_SOFT = 3,
-        k_ELaneSelection_SUPPORT_HARD = 4,
+        k_ELaneSelection_SUPPORT = 3,
+        k_ELaneSelection_HARDSUPPORT = 4,
     }
 
     [global::ProtoBuf.ProtoContract()]
     public enum ELaneSelectionFlags
     {
-        k_ELaneSelectionFlags_None = 0,
         k_ELaneSelectionFlags_SAFELANE = 1,
         k_ELaneSelectionFlags_OFFLANE = 2,
         k_ELaneSelectionFlags_MIDLANE = 4,
-        k_ELaneSelectionFlags_SUPPORT_SOFT = 8,
-        k_ELaneSelectionFlags_SUPPORT_HARD = 16,
-        k_ELaneSelectionFlags_CORE = 7,
-        k_ELaneSelectionFlags_SUPPORT = 24,
-        k_ELaneSelectionFlags_ALL = 31,
+        k_ELaneSelectionFlags_SUPPORT = 8,
+        k_ELaneSelectionFlags_HARDSUPPORT = 16,
+        k_ELaneSelectionFlagGroup_None = 0,
+        k_ELaneSelectionFlagGroup_CORE = 7,
+        k_ELaneSelectionFlagGroup_SUPPORT = 24,
+        k_ELaneSelectionFlagGroup_ALL = 31,
     }
 
     [global::ProtoBuf.ProtoContract()]

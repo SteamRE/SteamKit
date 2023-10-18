@@ -256,6 +256,19 @@ namespace SteamKit2.Internal
         public void Resetinclude_full_description() => __pbn__include_full_description = null;
         private bool? __pbn__include_full_description;
 
+        [global::ProtoBuf.ProtoMember(13)]
+        public bool include_included_items
+        {
+            get => __pbn__include_included_items.GetValueOrDefault();
+            set => __pbn__include_included_items = value;
+        }
+        public bool ShouldSerializeinclude_included_items() => __pbn__include_included_items != null;
+        public void Resetinclude_included_items() => __pbn__include_included_items = null;
+        private bool? __pbn__include_included_items;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public StoreBrowseItemDataRequest included_item_data_request { get; set; }
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -273,93 +286,6 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(3)]
         public StoreBrowseItemDataRequest data_request { get; set; }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class StoreGameRating : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string type
-        {
-            get => __pbn__type ?? "";
-            set => __pbn__type = value;
-        }
-        public bool ShouldSerializetype() => __pbn__type != null;
-        public void Resettype() => __pbn__type = null;
-        private string __pbn__type;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string rating
-        {
-            get => __pbn__rating ?? "";
-            set => __pbn__rating = value;
-        }
-        public bool ShouldSerializerating() => __pbn__rating != null;
-        public void Resetrating() => __pbn__rating = null;
-        private string __pbn__rating;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public global::System.Collections.Generic.List<string> descriptors { get; } = new global::System.Collections.Generic.List<string>();
-
-        [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string interactive_elements
-        {
-            get => __pbn__interactive_elements ?? "";
-            set => __pbn__interactive_elements = value;
-        }
-        public bool ShouldSerializeinteractive_elements() => __pbn__interactive_elements != null;
-        public void Resetinteractive_elements() => __pbn__interactive_elements = null;
-        private string __pbn__interactive_elements;
-
-        [global::ProtoBuf.ProtoMember(10)]
-        public int required_age
-        {
-            get => __pbn__required_age.GetValueOrDefault();
-            set => __pbn__required_age = value;
-        }
-        public bool ShouldSerializerequired_age() => __pbn__required_age != null;
-        public void Resetrequired_age() => __pbn__required_age = null;
-        private int? __pbn__required_age;
-
-        [global::ProtoBuf.ProtoMember(11)]
-        public bool use_age_gate
-        {
-            get => __pbn__use_age_gate.GetValueOrDefault();
-            set => __pbn__use_age_gate = value;
-        }
-        public bool ShouldSerializeuse_age_gate() => __pbn__use_age_gate != null;
-        public void Resetuse_age_gate() => __pbn__use_age_gate = null;
-        private bool? __pbn__use_age_gate;
-
-        [global::ProtoBuf.ProtoMember(20)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string image_url
-        {
-            get => __pbn__image_url ?? "";
-            set => __pbn__image_url = value;
-        }
-        public bool ShouldSerializeimage_url() => __pbn__image_url != null;
-        public void Resetimage_url() => __pbn__image_url = null;
-        private string __pbn__image_url;
-
-        [global::ProtoBuf.ProtoMember(21)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string image_target
-        {
-            get => __pbn__image_target ?? "";
-            set => __pbn__image_target = value;
-        }
-        public bool ShouldSerializeimage_target() => __pbn__image_target != null;
-        public void Resetimage_target() => __pbn__image_target = null;
-        private string __pbn__image_target;
 
     }
 
@@ -493,6 +419,9 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public RelatedItems related_items { get; set; }
 
+        [global::ProtoBuf.ProtoMember(16)]
+        public IncludedItems included_items { get; set; }
+
         [global::ProtoBuf.ProtoMember(20)]
         public global::System.Collections.Generic.List<EContentDescriptorID> content_descriptorids { get; } = new global::System.Collections.Generic.List<EContentDescriptorID>();
 
@@ -613,6 +542,21 @@ namespace SteamKit2.Internal
             public bool ShouldSerializeparent_appid() => __pbn__parent_appid != null;
             public void Resetparent_appid() => __pbn__parent_appid = null;
             private uint? __pbn__parent_appid;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class IncludedItems : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public global::System.Collections.Generic.List<StoreItem> included_apps { get; } = new global::System.Collections.Generic.List<StoreItem>();
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public global::System.Collections.Generic.List<StoreItem> included_packages { get; } = new global::System.Collections.Generic.List<StoreItem>();
 
         }
 
@@ -1698,6 +1642,93 @@ namespace SteamKit2.Internal
             private string __pbn__text;
 
         }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class StoreGameRating : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string type
+        {
+            get => __pbn__type ?? "";
+            set => __pbn__type = value;
+        }
+        public bool ShouldSerializetype() => __pbn__type != null;
+        public void Resettype() => __pbn__type = null;
+        private string __pbn__type;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string rating
+        {
+            get => __pbn__rating ?? "";
+            set => __pbn__rating = value;
+        }
+        public bool ShouldSerializerating() => __pbn__rating != null;
+        public void Resetrating() => __pbn__rating = null;
+        private string __pbn__rating;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<string> descriptors { get; } = new global::System.Collections.Generic.List<string>();
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string interactive_elements
+        {
+            get => __pbn__interactive_elements ?? "";
+            set => __pbn__interactive_elements = value;
+        }
+        public bool ShouldSerializeinteractive_elements() => __pbn__interactive_elements != null;
+        public void Resetinteractive_elements() => __pbn__interactive_elements = null;
+        private string __pbn__interactive_elements;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public int required_age
+        {
+            get => __pbn__required_age.GetValueOrDefault();
+            set => __pbn__required_age = value;
+        }
+        public bool ShouldSerializerequired_age() => __pbn__required_age != null;
+        public void Resetrequired_age() => __pbn__required_age = null;
+        private int? __pbn__required_age;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public bool use_age_gate
+        {
+            get => __pbn__use_age_gate.GetValueOrDefault();
+            set => __pbn__use_age_gate = value;
+        }
+        public bool ShouldSerializeuse_age_gate() => __pbn__use_age_gate != null;
+        public void Resetuse_age_gate() => __pbn__use_age_gate = null;
+        private bool? __pbn__use_age_gate;
+
+        [global::ProtoBuf.ProtoMember(20)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string image_url
+        {
+            get => __pbn__image_url ?? "";
+            set => __pbn__image_url = value;
+        }
+        public bool ShouldSerializeimage_url() => __pbn__image_url != null;
+        public void Resetimage_url() => __pbn__image_url = null;
+        private string __pbn__image_url;
+
+        [global::ProtoBuf.ProtoMember(21)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string image_target
+        {
+            get => __pbn__image_target ?? "";
+            set => __pbn__image_target = value;
+        }
+        public bool ShouldSerializeimage_target() => __pbn__image_target != null;
+        public void Resetimage_target() => __pbn__image_target = null;
+        private string __pbn__image_target;
 
     }
 

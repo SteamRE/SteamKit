@@ -1432,6 +1432,46 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_MigratePartnerLinkTracking_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint accountid
+        {
+            get => __pbn__accountid.GetValueOrDefault();
+            set => __pbn__accountid = value;
+        }
+        public bool ShouldSerializeaccountid() => __pbn__accountid != null;
+        public void Resetaccountid() => __pbn__accountid = null;
+        private uint? __pbn__accountid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong browserid
+        {
+            get => __pbn__browserid.GetValueOrDefault();
+            set => __pbn__browserid = value;
+        }
+        public bool ShouldSerializebrowserid() => __pbn__browserid != null;
+        public void Resetbrowserid() => __pbn__browserid = null;
+        private ulong? __pbn__browserid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(EPartnerLinkTrackingBackfillSource.k_EPartnerLinkTrackingBackfillSource_None)]
+        public EPartnerLinkTrackingBackfillSource backfill_source
+        {
+            get => __pbn__backfill_source ?? EPartnerLinkTrackingBackfillSource.k_EPartnerLinkTrackingBackfillSource_None;
+            set => __pbn__backfill_source = value;
+        }
+        public bool ShouldSerializebackfill_source() => __pbn__backfill_source != null;
+        public void Resetbackfill_source() => __pbn__backfill_source = null;
+        private EPartnerLinkTrackingBackfillSource? __pbn__backfill_source;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CSteamDeckCompatibility_SetFeedback_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1584,6 +1624,15 @@ namespace SteamKit2.Internal
         k_EUserReviewScorePreference_ExcludeBombs = 2,
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public enum EPartnerLinkTrackingBackfillSource
+    {
+        k_EPartnerLinkTrackingBackfillSource_None = 0,
+        k_EPartnerLinkTrackingBackfillSource_Web = 1,
+        k_EPartnerLinkTrackingBackfillSource_Mobile = 2,
+        k_EPartnerLinkTrackingBackfillSource_Desktop = 3,
+    }
+
     public interface IStore
     {
         CStore_RegisterCDKey_Response RegisterCDKey(CStore_RegisterCDKey_Request request);
@@ -1597,6 +1646,7 @@ namespace SteamKit2.Internal
         CStore_GetDiscoveryQueueSkippedApps_Response GetDiscoveryQueueSkippedApps(CStore_GetDiscoveryQueueSkippedApps_Request request);
         CStore_GetStorePreferences_Response GetStorePreferences(CStore_GetStorePreferences_Request request);
         CStore_GetTrendingAppsAmongFriends_Response GetTrendingAppsAmongFriends(CStore_GetTrendingAppsAmongFriends_Request request);
+        NoResponse MigratePartnerLinkTracking(CStore_MigratePartnerLinkTracking_Notification request);
         CSteamDeckCompatibility_SetFeedback_Response SetCompatibilityFeedback(CSteamDeckCompatibility_SetFeedback_Request request);
         CSteamDeckCompatibility_ShouldPrompt_Response ShouldPromptForCompatibilityFeedback(CSteamDeckCompatibility_ShouldPrompt_Request request);
     }

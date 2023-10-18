@@ -1064,6 +1064,7 @@ namespace SteamKit2.Internal
         CMarketingMessages_GetMarketingMessagesForUser_Response GetMarketingMessagesForUser(CMarketingMessages_GetMarketingMessagesForUser_Request request);
         CMarketingMessages_DoesUserHavePendingMarketingMessages_Response DoesUserHavePendingMarketingMessages(CMarketingMessages_DoesUserHavePendingMarketingMessages_Request request);
         CMarketingMessages_GetDisplayMarketingMessage_Response GetDisplayMarketingMessage(CMarketingMessages_GetDisplayMarketingMessage_Request request);
+        CMarketingMessages_GetDisplayMarketingMessage_Response GetDisplayMarketingMessageForUser(CMarketingMessages_GetDisplayMarketingMessage_Request request);
         CMarketingMessages_GetDisplayMarketingMessage_Response GetDisplayMarketingMessageAdmin(CMarketingMessages_GetDisplayMarketingMessage_Request request);
         NoResponse MarkMessageSeen(CMarketingMessages_MarkMessageSeen_Notification request);
         CMarketingMessages_GetMarketingMessage_Response GetMarketingMessage(CMarketingMessages_GetMarketingMessage_Request request);

@@ -77,6 +77,7 @@ namespace SteamKit2.Internal
         k_EContentCheckProvider_Google = 1,
         k_EContentCheckProvider_Amazon = 2,
         k_EContentCheckProvider_Local = 3,
+        k_EContentCheckProvider_GoogleVertexAI = 4,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -138,11 +139,31 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public enum EStorageFormatStage
+    {
+        k_EStorageFormatStage_Invalid = 0,
+        k_EStorageFormatStage_NotRunning = 1,
+        k_EStorageFormatStage_Starting = 2,
+        k_EStorageFormatStage_Testing = 3,
+        k_EStorageFormatStage_Rescuing = 4,
+        k_EStorageFormatStage_Formatting = 5,
+        k_EStorageFormatStage_Finalizing = 6,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ESystemFanControlMode
     {
         k_SystemFanControlMode_Invalid = 0,
         k_SystemFanControlMode_Disabled = 1,
         k_SystemFanControlMode_Default = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EColorGamutLabelSet
+    {
+        k_ColorGamutLabelSet_Default = 0,
+        k_ColorGamutLabelSet_sRGB_Native = 1,
+        k_ColorGamutLabelSet_Native_sRGB_Boosted = 2,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -262,6 +283,14 @@ namespace SteamKit2.Internal
         k_ESplitScalingScaler_Fit = 3,
         k_ESplitScalingScaler_Fill = 4,
         k_ESplitScalingScaler_Stretch = 5,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EGamescopeBlurMode
+    {
+        k_EGamescopeBlurMode_Disabled = 0,
+        k_EGamescopeBlurMode_IfOccluded = 1,
+        k_EGamescopeBlurMode_Always = 2,
     }
 
     [global::ProtoBuf.ProtoContract()]

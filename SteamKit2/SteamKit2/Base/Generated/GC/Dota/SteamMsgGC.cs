@@ -895,49 +895,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgConVarValue : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string name
-        {
-            get => __pbn__name ?? "";
-            set => __pbn__name = value;
-        }
-        public bool ShouldSerializename() => __pbn__name != null;
-        public void Resetname() => __pbn__name = null;
-        private string __pbn__name;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string value
-        {
-            get => __pbn__value ?? "";
-            set => __pbn__value = value;
-        }
-        public bool ShouldSerializevalue() => __pbn__value != null;
-        public void Resetvalue() => __pbn__value = null;
-        private string __pbn__value;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgReplicateConVars : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<CMsgConVarValue> convars { get; } = new global::System.Collections.Generic.List<CMsgConVarValue>();
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgItemAcknowledged : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1973,8 +1930,6 @@ namespace SteamKit2.GC.Dota.Internal
     [global::ProtoBuf.ProtoContract()]
     public enum EGCBaseMsg
     {
-        k_EMsgGCReplicateConVars = 4002,
-        k_EMsgGCConVarUpdated = 4003,
         k_EMsgGCInviteToParty = 4501,
         k_EMsgGCInvitationCreated = 4502,
         k_EMsgGCPartyInviteResponse = 4503,

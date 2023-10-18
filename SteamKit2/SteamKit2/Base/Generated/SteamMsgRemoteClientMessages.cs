@@ -48,6 +48,25 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CRemoteClient_DeleteSession_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong session_id
+        {
+            get => __pbn__session_id.GetValueOrDefault();
+            set => __pbn__session_id = value;
+        }
+        public bool ShouldSerializesession_id() => __pbn__session_id != null;
+        public void Resetsession_id() => __pbn__session_id = null;
+        private ulong? __pbn__session_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CRemoteClient_StartPairing_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -412,56 +431,6 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(1)]
         public global::System.Collections.Generic.List<byte[]> payload { get; } = new global::System.Collections.Generic.List<byte[]>();
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CRemoteClient_AllocateTURNServer_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint cellid
-        {
-            get => __pbn__cellid.GetValueOrDefault();
-            set => __pbn__cellid = value;
-        }
-        public bool ShouldSerializecellid() => __pbn__cellid != null;
-        public void Resetcellid() => __pbn__cellid = null;
-        private uint? __pbn__cellid;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string credentials
-        {
-            get => __pbn__credentials ?? "";
-            set => __pbn__credentials = value;
-        }
-        public bool ShouldSerializecredentials() => __pbn__credentials != null;
-        public void Resetcredentials() => __pbn__credentials = null;
-        private string __pbn__credentials;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CRemoteClient_AllocateTURNServer_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string turn_server
-        {
-            get => __pbn__turn_server ?? "";
-            set => __pbn__turn_server = value;
-        }
-        public bool ShouldSerializeturn_server() => __pbn__turn_server != null;
-        public void Resetturn_server() => __pbn__turn_server = null;
-        private string __pbn__turn_server;
 
     }
 
@@ -1107,6 +1076,146 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeinvitation_url() => __pbn__invitation_url != null;
         public void Resetinvitation_url() => __pbn__invitation_url = null;
         private string __pbn__invitation_url;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCMRemoteClient_ClientMessage : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CRemoteClient_CreateSession_Request create_session_request
+        {
+            get => __pbn__Message.Is(1) ? ((CRemoteClient_CreateSession_Request)__pbn__Message.Object) : default(CRemoteClient_CreateSession_Request);
+            set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(1, value);
+        }
+        public bool ShouldSerializecreate_session_request() => __pbn__Message.Is(1);
+        public void Resetcreate_session_request() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__Message, 1);
+
+        private global::ProtoBuf.DiscriminatedUnionObject __pbn__Message;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CRemoteClient_StartPairing_Request start_pairing_request
+        {
+            get => __pbn__Message.Is(2) ? ((CRemoteClient_StartPairing_Request)__pbn__Message.Object) : default(CRemoteClient_StartPairing_Request);
+            set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(2, value);
+        }
+        public bool ShouldSerializestart_pairing_request() => __pbn__Message.Is(2);
+        public void Resetstart_pairing_request() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__Message, 2);
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public CRemoteClient_SetPairingInfo_Request set_pairing_info_request
+        {
+            get => __pbn__Message.Is(3) ? ((CRemoteClient_SetPairingInfo_Request)__pbn__Message.Object) : default(CRemoteClient_SetPairingInfo_Request);
+            set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(3, value);
+        }
+        public bool ShouldSerializeset_pairing_info_request() => __pbn__Message.Is(3);
+        public void Resetset_pairing_info_request() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__Message, 3);
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public CRemoteClient_CancelPairing_Request cancel_pairing_request
+        {
+            get => __pbn__Message.Is(4) ? ((CRemoteClient_CancelPairing_Request)__pbn__Message.Object) : default(CRemoteClient_CancelPairing_Request);
+            set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(4, value);
+        }
+        public bool ShouldSerializecancel_pairing_request() => __pbn__Message.Is(4);
+        public void Resetcancel_pairing_request() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__Message, 4);
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public CRemoteClient_RegisterStatusUpdate_Notification register_status_update
+        {
+            get => __pbn__Message.Is(5) ? ((CRemoteClient_RegisterStatusUpdate_Notification)__pbn__Message.Object) : default(CRemoteClient_RegisterStatusUpdate_Notification);
+            set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(5, value);
+        }
+        public bool ShouldSerializeregister_status_update() => __pbn__Message.Is(5);
+        public void Resetregister_status_update() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__Message, 5);
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public CRemoteClient_UnregisterStatusUpdate_Notification unregister_status_update
+        {
+            get => __pbn__Message.Is(6) ? ((CRemoteClient_UnregisterStatusUpdate_Notification)__pbn__Message.Object) : default(CRemoteClient_UnregisterStatusUpdate_Notification);
+            set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(6, value);
+        }
+        public bool ShouldSerializeunregister_status_update() => __pbn__Message.Is(6);
+        public void Resetunregister_status_update() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__Message, 6);
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public CRemoteClient_RemotePacket_Notification remote_packet
+        {
+            get => __pbn__Message.Is(7) ? ((CRemoteClient_RemotePacket_Notification)__pbn__Message.Object) : default(CRemoteClient_RemotePacket_Notification);
+            set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(7, value);
+        }
+        public bool ShouldSerializeremote_packet() => __pbn__Message.Is(7);
+        public void Resetremote_packet() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__Message, 7);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCMRemoteClient_ServerMessage : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int result
+        {
+            get => __pbn__result.GetValueOrDefault();
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private int? __pbn__result;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CRemoteClient_CreateSession_Response create_session_response
+        {
+            get => __pbn__Message.Is(2) ? ((CRemoteClient_CreateSession_Response)__pbn__Message.Object) : default(CRemoteClient_CreateSession_Response);
+            set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(2, value);
+        }
+        public bool ShouldSerializecreate_session_response() => __pbn__Message.Is(2);
+        public void Resetcreate_session_response() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__Message, 2);
+
+        private global::ProtoBuf.DiscriminatedUnionObject __pbn__Message;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public CRemoteClient_StartPairing_Response start_pairing_response
+        {
+            get => __pbn__Message.Is(3) ? ((CRemoteClient_StartPairing_Response)__pbn__Message.Object) : default(CRemoteClient_StartPairing_Response);
+            set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(3, value);
+        }
+        public bool ShouldSerializestart_pairing_response() => __pbn__Message.Is(3);
+        public void Resetstart_pairing_response() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__Message, 3);
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public CRemoteClient_SetPairingInfo_Response set_pairing_info_response
+        {
+            get => __pbn__Message.Is(4) ? ((CRemoteClient_SetPairingInfo_Response)__pbn__Message.Object) : default(CRemoteClient_SetPairingInfo_Response);
+            set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(4, value);
+        }
+        public bool ShouldSerializeset_pairing_info_response() => __pbn__Message.Is(4);
+        public void Resetset_pairing_info_response() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__Message, 4);
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public CRemoteClient_CancelPairing_Response cancel_pairing_response
+        {
+            get => __pbn__Message.Is(5) ? ((CRemoteClient_CancelPairing_Response)__pbn__Message.Object) : default(CRemoteClient_CancelPairing_Response);
+            set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(5, value);
+        }
+        public bool ShouldSerializecancel_pairing_response() => __pbn__Message.Is(5);
+        public void Resetcancel_pairing_response() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__Message, 5);
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public CRemoteClient_GetReplies_Response reply_packet
+        {
+            get => __pbn__Message.Is(6) ? ((CRemoteClient_GetReplies_Response)__pbn__Message.Object) : default(CRemoteClient_GetReplies_Response);
+            set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(6, value);
+        }
+        public bool ShouldSerializereply_packet() => __pbn__Message.Is(6);
+        public void Resetreply_packet() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__Message, 6);
 
     }
 

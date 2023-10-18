@@ -711,6 +711,17 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(30)]
         public global::System.Collections.Generic.List<int> content_descriptors_to_remove { get; } = new global::System.Collections.Generic.List<int>();
 
+        [global::ProtoBuf.ProtoMember(31)]
+        [global::System.ComponentModel.DefaultValue(false)]
+        public bool allow_admin_tags
+        {
+            get => __pbn__allow_admin_tags ?? false;
+            set => __pbn__allow_admin_tags = value;
+        }
+        public bool ShouldSerializeallow_admin_tags() => __pbn__allow_admin_tags != null;
+        public void Resetallow_admin_tags() => __pbn__allow_admin_tags = null;
+        private bool? __pbn__allow_admin_tags;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class KeyValueTag : global::ProtoBuf.IExtensible
         {

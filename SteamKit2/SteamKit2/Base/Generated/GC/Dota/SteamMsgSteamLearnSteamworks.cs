@@ -839,24 +839,24 @@ namespace SteamKit2.GC.Dota.Internal
             private string __pbn__data_element_path;
 
             [global::ProtoBuf.ProtoMember(2)]
-            public int min_value
+            public float min_value
             {
                 get => __pbn__min_value.GetValueOrDefault();
                 set => __pbn__min_value = value;
             }
             public bool ShouldSerializemin_value() => __pbn__min_value != null;
             public void Resetmin_value() => __pbn__min_value = null;
-            private int? __pbn__min_value;
+            private float? __pbn__min_value;
 
             [global::ProtoBuf.ProtoMember(3)]
-            public int max_values
+            public float max_value
             {
-                get => __pbn__max_values.GetValueOrDefault();
-                set => __pbn__max_values = value;
+                get => __pbn__max_value.GetValueOrDefault();
+                set => __pbn__max_value = value;
             }
-            public bool ShouldSerializemax_values() => __pbn__max_values != null;
-            public void Resetmax_values() => __pbn__max_values = null;
-            private int? __pbn__max_values;
+            public bool ShouldSerializemax_value() => __pbn__max_value != null;
+            public void Resetmax_value() => __pbn__max_value = null;
+            private float? __pbn__max_value;
 
         }
 
@@ -879,24 +879,24 @@ namespace SteamKit2.GC.Dota.Internal
             private string __pbn__data_element_path;
 
             [global::ProtoBuf.ProtoMember(2)]
-            public int mean
+            public float mean
             {
                 get => __pbn__mean.GetValueOrDefault();
                 set => __pbn__mean = value;
             }
             public bool ShouldSerializemean() => __pbn__mean != null;
             public void Resetmean() => __pbn__mean = null;
-            private int? __pbn__mean;
+            private float? __pbn__mean;
 
             [global::ProtoBuf.ProtoMember(3)]
-            public uint std_dev
+            public float std_dev
             {
                 get => __pbn__std_dev.GetValueOrDefault();
                 set => __pbn__std_dev = value;
             }
             public bool ShouldSerializestd_dev() => __pbn__std_dev != null;
             public void Resetstd_dev() => __pbn__std_dev = null;
-            private uint? __pbn__std_dev;
+            private float? __pbn__std_dev;
 
         }
 
@@ -1068,14 +1068,34 @@ namespace SteamKit2.GC.Dota.Internal
                 private float? __pbn__radius;
 
                 [global::ProtoBuf.ProtoMember(4)]
-                public float radius_80pct
+                public float radius_75pct
                 {
-                    get => __pbn__radius_80pct.GetValueOrDefault();
-                    set => __pbn__radius_80pct = value;
+                    get => __pbn__radius_75pct.GetValueOrDefault();
+                    set => __pbn__radius_75pct = value;
                 }
-                public bool ShouldSerializeradius_80pct() => __pbn__radius_80pct != null;
-                public void Resetradius_80pct() => __pbn__radius_80pct = null;
-                private float? __pbn__radius_80pct;
+                public bool ShouldSerializeradius_75pct() => __pbn__radius_75pct != null;
+                public void Resetradius_75pct() => __pbn__radius_75pct = null;
+                private float? __pbn__radius_75pct;
+
+                [global::ProtoBuf.ProtoMember(5)]
+                public float radius_50pct
+                {
+                    get => __pbn__radius_50pct.GetValueOrDefault();
+                    set => __pbn__radius_50pct = value;
+                }
+                public bool ShouldSerializeradius_50pct() => __pbn__radius_50pct != null;
+                public void Resetradius_50pct() => __pbn__radius_50pct = null;
+                private float? __pbn__radius_50pct;
+
+                [global::ProtoBuf.ProtoMember(6)]
+                public float radius_25pct
+                {
+                    get => __pbn__radius_25pct.GetValueOrDefault();
+                    set => __pbn__radius_25pct = value;
+                }
+                public bool ShouldSerializeradius_25pct() => __pbn__radius_25pct != null;
+                public void Resetradius_25pct() => __pbn__radius_25pct = null;
+                private float? __pbn__radius_25pct;
 
             }
 

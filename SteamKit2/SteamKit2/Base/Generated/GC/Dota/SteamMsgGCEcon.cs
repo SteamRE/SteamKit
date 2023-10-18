@@ -931,6 +931,16 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetinventory_token() => __pbn__inventory_token = null;
             private uint? __pbn__inventory_token;
 
+            [global::ProtoBuf.ProtoMember(8)]
+            public uint quality
+            {
+                get => __pbn__quality.GetValueOrDefault();
+                set => __pbn__quality = value;
+            }
+            public bool ShouldSerializequality() => __pbn__quality != null;
+            public void Resetquality() => __pbn__quality = null;
+            private uint? __pbn__quality;
+
             [global::ProtoBuf.ProtoContract()]
             public partial class DynamicAttribute : global::ProtoBuf.IExtensible
             {
@@ -1858,6 +1868,78 @@ namespace SteamKit2.GC.Dota.Internal
             k_UnpackBundle_Failed_ItemIsInvalid = 4,
             k_UnpackBundle_Failed_BadItemQuantity = 5,
             k_UnpackBundle_Failed_UnableToDeleteItem = 6,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCPackBundle : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<ulong> item_ids { get; } = new global::System.Collections.Generic.List<ulong>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint bundle_item_def_index
+        {
+            get => __pbn__bundle_item_def_index.GetValueOrDefault();
+            set => __pbn__bundle_item_def_index = value;
+        }
+        public bool ShouldSerializebundle_item_def_index() => __pbn__bundle_item_def_index != null;
+        public void Resetbundle_item_def_index() => __pbn__bundle_item_def_index = null;
+        private uint? __pbn__bundle_item_def_index;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCPackBundleResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong item_id
+        {
+            get => __pbn__item_id.GetValueOrDefault();
+            set => __pbn__item_id = value;
+        }
+        public bool ShouldSerializeitem_id() => __pbn__item_id != null;
+        public void Resetitem_id() => __pbn__item_id = null;
+        private ulong? __pbn__item_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(EPackBundle.k_PackBundle_Succeeded)]
+        public EPackBundle response
+        {
+            get => __pbn__response ?? EPackBundle.k_PackBundle_Succeeded;
+            set => __pbn__response = value;
+        }
+        public bool ShouldSerializeresponse() => __pbn__response != null;
+        public void Resetresponse() => __pbn__response = null;
+        private EPackBundle? __pbn__response;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EPackBundle
+        {
+            k_PackBundle_Succeeded = 0,
+            k_PackBundle_Failed_InternalError = 1,
+            k_PackBundle_Failed_ItemIsNotBundle = 2,
+            k_PackBundle_Failed_SOCacheError = 3,
+            k_PackBundle_Failed_ItemIsInvalid = 4,
+            k_PackBundle_Failed_BadItemQuantity = 5,
+            k_PackBundle_Failed_UnableToDeleteItem = 6,
+            k_PackBundle_Failed_BundleCannotBePacked = 7,
+            k_PackBundle_Failed_ItemIsUntradeable = 8,
+            k_PackBundle_Failed_ItemIsEquipped = 9,
+            k_PackBundle_Failed_ItemHasGems = 10,
+            k_PackBundle_Failed_ItemMixedQuality = 11,
+            k_PackBundle_Failed_ItemInvalidQuality = 12,
+            k_PackBundle_Failed_ItemIsNonEconomy = 13,
+            k_PackBundle_Failed_Disabled = 14,
         }
 
     }
@@ -4288,6 +4370,8 @@ namespace SteamKit2.GC.Dota.Internal
     {
         k_EMsgGCBase = 1000,
         k_EMsgGCSetItemPosition = 1001,
+        k_EMsgClientToGCPackBundle = 1002,
+        k_EMsgClientToGCPackBundleResponse = 1003,
         k_EMsgGCDelete = 1004,
         k_EMsgGCVerifyCacheSubscription = 1005,
         k_EMsgClientToGCNameItem = 1006,
