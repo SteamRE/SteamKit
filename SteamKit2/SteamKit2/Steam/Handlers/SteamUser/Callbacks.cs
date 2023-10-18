@@ -88,6 +88,7 @@ namespace SteamKit2
             /// <summary>
             /// Gets the WebAPI authentication user nonce.
             /// </summary>
+            [Obsolete("Steam no longer sends webapi nonce as of October 2023, use SteamAuthentication.")]
             public string? WebAPIUserNonce { get; private set; }
 
             /// <summary>
@@ -139,7 +140,9 @@ namespace SteamKit2
 
                 this.IPCountryCode = resp.ip_country_code;
 
+#pragma warning disable CS0618 // Type or member is obsolete
                 this.WebAPIUserNonce = resp.webapi_authenticate_user_nonce;
+#pragma warning restore CS0618 // Type or member is obsolete
 
                 this.VanityURL = resp.vanity_url;
 
@@ -360,6 +363,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is received when the backend wants the client to update it's local machine authentication data.
         /// </summary>
+        [Obsolete("Steam no longer sends machine auth as of 2023, use SteamAuthentication.")]
         public sealed class UpdateMachineAuthCallback : CallbackMsg
         {
             /// <summary>
