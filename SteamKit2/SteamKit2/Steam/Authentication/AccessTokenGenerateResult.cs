@@ -14,7 +14,8 @@ namespace SteamKit2.Authentication
     {
         /// <summary>
         /// New refresh token.
-        /// This can be provided to <see cref="SteamUser.LogOnDetails.AccessToken"/>.
+        /// This can be provided to <see cref="SteamUser.LogOnDetails.AccessToken"/> and <see cref="SteamAuthentication.GenerateAccessTokenForAppAsync"/>.
+        /// May be an empty string.
         /// </summary>
         public string RefreshToken { get; }
         /// <summary>
