@@ -487,6 +487,7 @@ namespace SteamKit2
         /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="WebAPIUserNonceCallback"/>.</returns>
+        [Obsolete( "Steam no longer uses web api nonces as of October 2023, use SteamAuthentication." )]
         public AsyncJob<WebAPIUserNonceCallback> RequestWebAPIUserNonce()
         {
             var reqMsg = new ClientMsgProtobuf<CMsgClientRequestWebAPIAuthenticateUserNonce>( EMsg.ClientRequestWebAPIAuthenticateUserNonce );
