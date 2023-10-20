@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -155,6 +156,29 @@ namespace NetHookAnalyzer2
 			catch
 			{
 				SetValueForDisplay( "Not a valid Protobuf object!" );
+			}
+
+			this.ExpandAll();
+		}
+
+		#endregion
+
+		#region JSON Web Token
+
+		void DisplayDataAsJWT( object sender, EventArgs e )
+		{
+			var data = ( string )value;
+
+			try
+			{
+				var handler = new JwtSecurityTokenHandler();
+				var token = handler.ReadJwtToken( data );
+
+				SetValueForDisplay( null, childNodes: new[] { new TreeNodeObjectExplorer( "JSON Web Token", token, configuration ) } );
+			}
+			catch
+			{
+				SetValueForDisplay( "Not a valid JWT object!" );
 			}
 
 			this.ExpandAll();
@@ -428,6 +452,19 @@ namespace NetHookAnalyzer2
 						ContextMenuItems.Add(new ToolStripMenuItem( "&Binary KeyValues (VDF)", null, DisplayDataAsBinaryKeyValues).AsRadioCheck());
 						ContextMenuItems.Add(new ToolStripMenuItem( "&Protobuf", null, DisplayDataAsProtobuf ).AsRadioCheck());
 					}
+				}
+
+				if ( objectType == typeof( string ) )
+				{
+					ContextMenuItems.Add( new ToolStripMenuItem( "Display &Raw Value", null, ( s, _ ) =>
+					{
+						Initialize();
+					} )
+					{
+						Checked = true
+					}
+					.AsRadioCheck() );
+					ContextMenuItems.Add( new ToolStripMenuItem( "&JSON Web Token", null, DisplayDataAsJWT ).AsRadioCheck() );
 				}
 			}
 		}
