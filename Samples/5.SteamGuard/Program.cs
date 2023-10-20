@@ -6,6 +6,14 @@ using System.Threading;
 using SteamKit2;
 
 //
+// WARNING!
+// This the old login flow, which may still work, but you will not receive machine auth.
+// See Sample1a_Authentication for the new flow.
+// This sample will be removed in the future. 
+//
+#pragma warning disable CS0618
+
+//
 // Sample 5: SteamGuard
 //
 // this sample goes into detail for how to handle steamguard protected accounts and how to login to them
