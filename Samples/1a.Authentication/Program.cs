@@ -66,6 +66,7 @@ async void OnConnected( SteamClient.ConnectedCallback callback )
     {
         Username = pollResponse.AccountName,
         AccessToken = pollResponse.RefreshToken,
+        ShouldRememberPassword = false, // If you set IsPersistentSession to true, this also must be set to true for it to work correctly
     } );
 
     // This is not required, but it is possible to parse the JWT access token to see the scope and expiration date.
