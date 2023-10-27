@@ -28,6 +28,8 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ matrix.sdk }}
+        cache: true
+        cache-dependency-path: '**/packages.lock.json'
 
     - name: Build SteamKit2
       run: dotnet build --configuration ${{ matrix.configuration }} SteamKit2/SteamKit2/SteamKit2.csproj
