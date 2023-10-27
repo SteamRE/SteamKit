@@ -60,9 +60,9 @@ namespace Tests
             client.jobManager.SetTimeoutsEnabled( true );
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
-            asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
+            asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
 
-            await Task.Delay( TimeSpan.FromSeconds( 5 ) );
+            await Task.Delay( TimeSpan.FromMilliseconds( 1500 ) );
 
             Assert.IsFalse( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should no longer contain jobid key after timeout" );
             Assert.IsFalse( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should no longer contain jobid key (as value type) after timeout" );
@@ -107,11 +107,11 @@ namespace Tests
             client.jobManager.SetTimeoutsEnabled( true );
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
-            asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
+            asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
 
             Task<Callback> asyncTask = asyncJob.ToTask();
 
-            await Task.Delay( TimeSpan.FromSeconds( 5 ) );
+            await Task.Delay( TimeSpan.FromMilliseconds( 1500 ) );
 
             Assert.IsTrue( asyncTask.IsCompleted, "Async job should be completed after 5 seconds of a 1 second job timeout" );
             Assert.IsTrue( asyncTask.IsCanceled, "Async job should be canceled after 5 seconds of a 1 second job timeout" );
@@ -206,9 +206,9 @@ namespace Tests
             client.jobManager.SetTimeoutsEnabled( true );
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, ccall => true );
-            asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
+            asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
 
-            await Task.Delay( TimeSpan.FromSeconds( 5 ) );
+            await Task.Delay( TimeSpan.FromMilliseconds( 1500 ) );
 
             Assert.IsFalse( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should no longer contain jobid key after timeout" );
             Assert.IsFalse( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should no longer contain jobid key (as value type) after timeout" );
@@ -221,12 +221,12 @@ namespace Tests
             client.jobManager.SetTimeoutsEnabled( true );
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
-            asyncJob.Timeout = TimeSpan.FromSeconds( 5 );
+            asyncJob.Timeout = TimeSpan.FromMilliseconds( 800 );
 
             Task<AsyncJobMultiple<Callback>.ResultSet> asyncTask = asyncJob.ToTask();
 
             // wait 3 seconds before we post any results to this job at all
-            await Task.Delay( TimeSpan.FromSeconds( 3 ) );
+            await Task.Delay( TimeSpan.FromMilliseconds( 300 ) );
 
             // we should not be completed or canceled yet
             Assert.IsFalse( asyncTask.IsCompleted, "AsyncJobMultiple should not be completed after 3 seconds of 5 second timeout" );
@@ -237,7 +237,7 @@ namespace Tests
             asyncJob.AddResult( new Callback { JobID = 123, IsFinished = false } );
 
             // delay for what the original timeout would have been
-            await Task.Delay( TimeSpan.FromSeconds( 5 ) );
+            await Task.Delay( TimeSpan.FromMilliseconds( 500 ) );
 
             // we still shouldn't be completed or canceled (timed out)
             Assert.IsFalse( asyncTask.IsCompleted, "AsyncJobMultiple should not be completed 5 seconds after a result was added (result should extend timeout)" );
@@ -259,11 +259,11 @@ namespace Tests
             client.jobManager.SetTimeoutsEnabled( true );
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => false );
-            asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
+            asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
 
             Task<AsyncJobMultiple<Callback>.ResultSet> asyncTask = asyncJob.ToTask();
 
-            await Task.Delay( TimeSpan.FromSeconds( 5 ) );
+            await Task.Delay( TimeSpan.FromMilliseconds( 1500 ) );
 
             Assert.IsTrue( asyncTask.IsCompleted, "AsyncJobMultiple should be completed after 5 seconds of a 1 second job timeout" );
             Assert.IsTrue( asyncTask.IsCanceled, "AsyncJobMultiple should be canceled after 5 seconds of a 1 second job timeout" );
@@ -279,7 +279,7 @@ namespace Tests
             client.jobManager.SetTimeoutsEnabled( true );
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
-            asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
+            asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
 
             Task<AsyncJobMultiple<Callback>.ResultSet> asyncTask = asyncJob.ToTask();
 
@@ -288,9 +288,9 @@ namespace Tests
             asyncJob.AddResult( onlyResult );
 
             // adding a result will extend the job's timeout, but we'll cheat here and decrease it
-            asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
+            asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
 
-            await Task.Delay( TimeSpan.FromSeconds( 5 ) );
+            await Task.Delay( TimeSpan.FromMilliseconds( 1500 ) );
 
             Assert.IsTrue( asyncTask.IsCompleted, "AsyncJobMultiple should be completed on partial (timed out) result set" );
             Assert.IsFalse( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled on partial (timed out) result set" );
@@ -311,7 +311,7 @@ namespace Tests
             client.jobManager.SetTimeoutsEnabled( true );
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
-            asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
+            asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
 
             Task<AsyncJobMultiple<Callback>.ResultSet> asyncTask = asyncJob.ToTask();
 
