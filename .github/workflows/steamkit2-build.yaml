@@ -31,32 +31,40 @@ jobs:
         cache: true
         cache-dependency-path: '**/packages.lock.json'
 
+    - name: Restore packages
+      run: |
+        dotnet restore --locked-mode SteamKit2/SteamKit2.sln
+        dotnet restore --locked-mode Samples/Samples.sln
+        dotnet restore --locked-mode Resources/ProtobufGen/ProtobufGen.sln
+        dotnet restore --locked-mode Resources/ProtobufDumper/ProtobufDumper.sln
+        dotnet restore --locked-mode Resources/NetHookAnalyzer2/NetHookAnalyzer2.sln
+
     - name: Build SteamKit2
-      run: dotnet build --configuration ${{ matrix.configuration }} SteamKit2/SteamKit2/SteamKit2.csproj
+      run: dotnet build --no-restore --configuration ${{ matrix.configuration }} SteamKit2/SteamKit2/SteamKit2.csproj
 
     - name: Build SteamLanguageParser
-      run: dotnet build --configuration ${{ matrix.configuration }} Resources/SteamLanguageParser/SteamLanguageParser.csproj
+      run: dotnet build --no-restore --configuration ${{ matrix.configuration }} Resources/SteamLanguageParser/SteamLanguageParser.csproj
 
     - name: Build ProtobufGen
-      run: dotnet build --configuration ${{ matrix.configuration }} Resources/ProtobufGen/ProtobufGen.sln
+      run: dotnet build --no-restore --configuration ${{ matrix.configuration }} Resources/ProtobufGen/ProtobufGen.sln
 
     - name: Build ProtobufDumper
-      run: dotnet build --configuration ${{ matrix.configuration }} Resources/ProtobufDumper/ProtobufDumper.sln
+      run: dotnet build --no-restore --configuration ${{ matrix.configuration }} Resources/ProtobufDumper/ProtobufDumper.sln
 
     - name: Build Samples
-      run: dotnet build --configuration ${{ matrix.configuration }} Samples/Samples.sln
+      run: dotnet build --no-restore --configuration ${{ matrix.configuration }} Samples/Samples.sln
 
     - name: Build NetHookAnalyzer2
-      run: dotnet build --configuration ${{ matrix.configuration }} Resources/NetHookAnalyzer2/NetHookAnalyzer2.sln
+      run: dotnet build --no-restore --configuration ${{ matrix.configuration }} Resources/NetHookAnalyzer2/NetHookAnalyzer2.sln
       if: matrix.os == 'windows-latest'
 
     - name: Run Tests
       if: matrix.configuration == 'Debug'
-      run: dotnet test --verbosity normal --framework net6.0 SteamKit2/Tests/Tests.csproj
+      run: dotnet test --no-restore --verbosity normal --framework net6.0 SteamKit2/Tests/Tests.csproj
 
     - name: Run Tests (.NET Framework)
       if: matrix.configuration == 'Debug' && startsWith(matrix.os, 'windows-')
-      run: dotnet test --verbosity normal --framework net48 SteamKit2/Tests/Tests.csproj
+      run: dotnet test --no-restore --verbosity normal --framework net48 SteamKit2/Tests/Tests.csproj
 
   steamkit2-artifacts:
     name: Create NuGet Package
@@ -72,9 +80,14 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
+        cache: true
+        cache-dependency-path: '**/packages.lock.json'
+
+    - name: Restore packages
+      run: dotnet restore --locked-mode SteamKit2/SteamKit2/SteamKit2.csproj
 
     - name: Create NuGet Package
-      run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
+      run: dotnet pack --no-restore --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
 
     - name: Upload NuGet Package
       uses: actions/upload-artifact@v3
@@ -96,9 +109,14 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
+        cache: true
+        cache-dependency-path: '**/packages.lock.json'
+
+    - name: Restore packages
+      run: dotnet restore --locked-mode Resources/NetHookAnalyzer2/NetHookAnalyzer2/NetHookAnalyzer2.csproj
 
     - name: Publish NetHookAnalyzer2
-      run: dotnet publish --configuration Release --runtime win-x64 --self-contained Resources/NetHookAnalyzer2/NetHookAnalyzer2/NetHookAnalyzer2.csproj /p:PublishSingleFile=True
+      run: dotnet publish --no-restore --configuration Release --runtime win-x64 --self-contained Resources/NetHookAnalyzer2/NetHookAnalyzer2/NetHookAnalyzer2.csproj /p:PublishSingleFile=True
 
     - name: Upload NetHookAnalyzer2
       uses: actions/upload-artifact@v3
@@ -162,9 +180,14 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
+        cache: true
+        cache-dependency-path: '**/packages.lock.json'
+
+    - name: Restore packages
+      run: dotnet restore --locked-mode SteamKit2/SteamKit2/SteamKit2.csproj
 
     - name: Create NuGet Package
-      run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
+      run: dotnet pack --no-restore --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
 
     - name: Publish NuGet Package to GitHub Packages
       run: |
