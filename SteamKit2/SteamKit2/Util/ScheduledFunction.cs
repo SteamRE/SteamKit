@@ -53,11 +53,6 @@ namespace SteamKit2
             bStarted = !timer.Change( TimeSpan.FromMilliseconds( -1 ), Delay );
         }
 
-        internal void ChangeDelay( TimeSpan delay )
-        {
-            timer.Change( TimeSpan.Zero, delay );
-        }
-
         void Tick( object? state )
         {
             func?.Invoke();
