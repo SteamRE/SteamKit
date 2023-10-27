@@ -38,6 +38,7 @@ jobs:
         dotnet restore --locked-mode Resources/ProtobufGen/ProtobufGen.sln
         dotnet restore --locked-mode Resources/ProtobufDumper/ProtobufDumper.sln
         dotnet restore --locked-mode Resources/NetHookAnalyzer2/NetHookAnalyzer2.sln
+        dotnet restore --locked-mode Resources/SteamLanguageParser/SteamLanguageParser.sln
 
     - name: Build SteamKit2
       run: dotnet build --no-restore --configuration ${{ matrix.configuration }} SteamKit2/SteamKit2/SteamKit2.csproj
