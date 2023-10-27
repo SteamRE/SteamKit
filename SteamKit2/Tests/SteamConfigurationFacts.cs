@@ -104,6 +104,7 @@ namespace Tests
         }
     }
 
+    [TestClass]
     public class SteamConfigurationConfiguredObjectFacts
     {
         public SteamConfigurationConfiguredObjectFacts()
