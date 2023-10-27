@@ -58,11 +58,12 @@ namespace Tests
         {
             SteamClient client = new SteamClient();
             client.jobManager.SetTimeoutsEnabled( true );
+            client.jobManager.jobTimeoutFunc.ChangeDelay( TimeSpan.FromMilliseconds( 50 ) );
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
             asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
 
-            await Task.Delay( TimeSpan.FromMilliseconds( 1500 ) );
+            await Task.Delay( TimeSpan.FromMilliseconds( 500 ) );
 
             Assert.IsFalse( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should no longer contain jobid key after timeout" );
             Assert.IsFalse( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should no longer contain jobid key (as value type) after timeout" );
@@ -77,7 +78,7 @@ namespace Tests
             Task<Callback> asyncTask = asyncJob.ToTask();
 
             asyncJob.SetFailed( dueToRemoteFailure: false );
-            
+
             Assert.IsTrue( asyncTask.IsCompleted, "Async job should be completed on message timeout" );
             Assert.IsTrue( asyncTask.IsCanceled, "Async job should be canceled on message timeout" );
             Assert.IsFalse( asyncTask.IsFaulted, "Async job should not be faulted on message timeout" );
@@ -105,13 +106,14 @@ namespace Tests
         {
             SteamClient client = new SteamClient();
             client.jobManager.SetTimeoutsEnabled( true );
+            client.jobManager.jobTimeoutFunc.ChangeDelay( TimeSpan.FromMilliseconds( 50 ) );
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
             asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
 
             Task<Callback> asyncTask = asyncJob.ToTask();
 
-            await Task.Delay( TimeSpan.FromMilliseconds( 1500 ) );
+            await Task.Delay( TimeSpan.FromMilliseconds( 500 ) );
 
             Assert.IsTrue( asyncTask.IsCompleted, "Async job should be completed after 5 seconds of a 1 second job timeout" );
             Assert.IsTrue( asyncTask.IsCanceled, "Async job should be canceled after 5 seconds of a 1 second job timeout" );
@@ -204,11 +206,12 @@ namespace Tests
         {
             SteamClient client = new SteamClient();
             client.jobManager.SetTimeoutsEnabled( true );
+            client.jobManager.jobTimeoutFunc.ChangeDelay( TimeSpan.FromMilliseconds( 50 ) );
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, ccall => true );
             asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
 
-            await Task.Delay( TimeSpan.FromMilliseconds( 1500 ) );
+            await Task.Delay( TimeSpan.FromMilliseconds( 500 ) );
 
             Assert.IsFalse( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should no longer contain jobid key after timeout" );
             Assert.IsFalse( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should no longer contain jobid key (as value type) after timeout" );
@@ -219,6 +222,7 @@ namespace Tests
         {
             SteamClient client = new SteamClient();
             client.jobManager.SetTimeoutsEnabled( true );
+            client.jobManager.jobTimeoutFunc.ChangeDelay( TimeSpan.FromMilliseconds( 50 ) );
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
             asyncJob.Timeout = TimeSpan.FromMilliseconds( 800 );
@@ -257,13 +261,14 @@ namespace Tests
         {
             SteamClient client = new SteamClient();
             client.jobManager.SetTimeoutsEnabled( true );
+            client.jobManager.jobTimeoutFunc.ChangeDelay( TimeSpan.FromMilliseconds( 50 ) );
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => false );
             asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
 
             Task<AsyncJobMultiple<Callback>.ResultSet> asyncTask = asyncJob.ToTask();
 
-            await Task.Delay( TimeSpan.FromMilliseconds( 1500 ) );
+            await Task.Delay( TimeSpan.FromMilliseconds( 500 ) );
 
             Assert.IsTrue( asyncTask.IsCompleted, "AsyncJobMultiple should be completed after 5 seconds of a 1 second job timeout" );
             Assert.IsTrue( asyncTask.IsCanceled, "AsyncJobMultiple should be canceled after 5 seconds of a 1 second job timeout" );
@@ -277,6 +282,7 @@ namespace Tests
         {
             SteamClient client = new SteamClient();
             client.jobManager.SetTimeoutsEnabled( true );
+            client.jobManager.jobTimeoutFunc.ChangeDelay( TimeSpan.FromMilliseconds( 50 ) );
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
             asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
@@ -290,7 +296,7 @@ namespace Tests
             // adding a result will extend the job's timeout, but we'll cheat here and decrease it
             asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
 
-            await Task.Delay( TimeSpan.FromMilliseconds( 1500 ) );
+            await Task.Delay( TimeSpan.FromMilliseconds( 500 ) );
 
             Assert.IsTrue( asyncTask.IsCompleted, "AsyncJobMultiple should be completed on partial (timed out) result set" );
             Assert.IsFalse( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled on partial (timed out) result set" );
@@ -309,6 +315,7 @@ namespace Tests
         {
             SteamClient client = new SteamClient();
             client.jobManager.SetTimeoutsEnabled( true );
+            client.jobManager.jobTimeoutFunc.ChangeDelay( TimeSpan.FromMilliseconds( 50 ) );
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
             asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
