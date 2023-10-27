@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamKit2;
 using SteamKit2.Discovery;
-using Xunit;
 
 namespace Tests
 {
+    [TestClass]
     public class IsolatedStorageServerListProviderFacts
     {
         public IsolatedStorageServerListProviderFacts()
@@ -17,7 +18,7 @@ namespace Tests
 
         readonly IsolatedStorageServerListProvider isolatedStorageProvider;
 
-        [Fact]
+        [TestMethod]
         public async Task ReadsUpdatedServerList()
         {
             await isolatedStorageProvider.UpdateServerListAsync(new List<ServerRecord>()
@@ -28,10 +29,10 @@ namespace Tests
 
             var servers = await isolatedStorageProvider.FetchServerListAsync();
 
-            Assert.Equal(2, servers.Count());
-            Assert.Equal(IPAddress.Any.ToString(), servers.First().GetHost());
-            Assert.Equal(1234, servers.First().GetPort());
-            Assert.Equal(ProtocolTypes.Tcp | ProtocolTypes.Udp, servers.First().ProtocolTypes);
+            Assert.AreEqual(2, servers.Count());
+            Assert.AreEqual(IPAddress.Any.ToString(), servers.First().GetHost());
+            Assert.AreEqual(1234, servers.First().GetPort());
+            Assert.AreEqual(ProtocolTypes.Tcp | ProtocolTypes.Udp, servers.First().ProtocolTypes);
 
             await isolatedStorageProvider.UpdateServerListAsync(new List<ServerRecord>());
         }

@@ -1,11 +1,12 @@
-﻿using SteamKit2;
-using Xunit;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SteamKit2;
 
 namespace Tests
 {
+    [TestClass]
     public class SteamGameServerFacts : HandlerTestBase<SteamGameServer>
     {
-        [Fact]
+        [TestMethod]
         public void LogOnPostsLoggedOnCallbackWhenNoConnection()
         {
             Handler.LogOn(new SteamGameServer.LogOnDetails
@@ -14,24 +15,24 @@ namespace Tests
             });
 
             var callback = SteamClient.GetCallback( freeLast: true );
-            Assert.NotNull( callback );
-            Assert.IsType<SteamUser.LoggedOnCallback>( callback );
+            Assert.IsNotNull( callback );
+            Assert.IsInstanceOfType<SteamUser.LoggedOnCallback>( callback );
 
             var loc = (SteamUser.LoggedOnCallback)callback;
-            Assert.Equal( EResult.NoConnection, loc.Result );
+            Assert.AreEqual( EResult.NoConnection, loc.Result );
         }
 
-        [Fact]
+        [TestMethod]
         public void LogOnAnonymousPostsLoggedOnCallbackWhenNoConnection()
         {
             Handler.LogOnAnonymous();
 
             var callback = SteamClient.GetCallback( freeLast: true );
-            Assert.NotNull( callback );
-            Assert.IsType<SteamUser.LoggedOnCallback>( callback );
+            Assert.IsNotNull( callback );
+            Assert.IsInstanceOfType<SteamUser.LoggedOnCallback>( callback );
 
             var loc = (SteamUser.LoggedOnCallback)callback;
-            Assert.Equal( EResult.NoConnection, loc.Result );
+            Assert.AreEqual( EResult.NoConnection, loc.Result );
         }
     }
 }

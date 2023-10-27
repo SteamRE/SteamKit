@@ -3,15 +3,16 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamKit2;
 using SteamKit2.CDN;
-using Xunit;
 
 namespace Tests
 {
+    [TestClass]
     public class CDNClientFacts
     {
-        [Fact]
+        [TestMethod]
         public async Task ThrowsSteamKitWebExceptionOnUnsuccessfulWebResponseForManifest()
         {
             var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( () => new HttpClient( new TeapotHttpMessageHandler() ) ) );
@@ -25,11 +26,11 @@ namespace Tests
                 Port = 80
             };
 
-            var ex = await Assert.ThrowsAsync<SteamKitWebRequestException>( () => client.DownloadManifestAsync( depotId: 0, manifestId: 0, manifestRequestCode: 0, server ) );
-            Assert.Equal( ( HttpStatusCode )418, ex.StatusCode );
+            var ex = await Assert.ThrowsExceptionAsync<SteamKitWebRequestException>( () => client.DownloadManifestAsync( depotId: 0, manifestId: 0, manifestRequestCode: 0, server ) );
+            Assert.AreEqual( ( HttpStatusCode )418, ex.StatusCode );
         }
 
-        [Fact]
+        [TestMethod]
         public async Task ThrowsSteamKitWebExceptionOnUnsuccessfulWebResponseForChunk()
         {
             var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( () => new HttpClient( new TeapotHttpMessageHandler() ) ) );
@@ -47,11 +48,11 @@ namespace Tests
                 ChunkID = new byte[] { 0xFF },
             };
 
-            var ex = await Assert.ThrowsAsync<SteamKitWebRequestException>( () => client.DownloadDepotChunkAsync( depotId: 0, chunk, server ) );
-            Assert.Equal( ( HttpStatusCode )418, ex.StatusCode );
+            var ex = await Assert.ThrowsExceptionAsync<SteamKitWebRequestException>( () => client.DownloadDepotChunkAsync( depotId: 0, chunk, server ) );
+            Assert.AreEqual( ( HttpStatusCode )418, ex.StatusCode );
         }
 
-        [Fact]
+        [TestMethod]
         public async Task ThrowsWhenNoChunkIDIsSet()
         {
             var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( () => new HttpClient( new TeapotHttpMessageHandler() ) ) );
@@ -66,8 +67,8 @@ namespace Tests
             };
             var chunk = new DepotManifest.ChunkData();
 
-            var ex = await Assert.ThrowsAsync<ArgumentException>( () => client.DownloadDepotChunkAsync( depotId: 0, chunk, server ) );
-            Assert.Equal( "chunk", ex.ParamName );
+            var ex = await Assert.ThrowsExceptionAsync<ArgumentException>( () => client.DownloadDepotChunkAsync( depotId: 0, chunk, server ) );
+            Assert.AreEqual( "chunk", ex.ParamName );
         }
 
         sealed class TeapotHttpMessageHandler : HttpMessageHandler

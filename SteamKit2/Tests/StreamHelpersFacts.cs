@@ -3,14 +3,15 @@ using System.Collections.Concurrent;
 using System.Globalization;
 using System.IO;
 using System.Threading;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamKit2;
-using Xunit;
 
 namespace Tests
 {
+    [TestClass]
     public class StreamHelpersFacts
     {
-        [Fact]
+        [TestMethod]
         public void IsThreadSafe()
         {
             const int NumConcurrentThreads = 200;
@@ -54,7 +55,7 @@ namespace Tests
                         ms.Seek(0, SeekOrigin.Begin);
 
                         var value = ReadValue(threadNumber, ms).ToString(CultureInfo.InvariantCulture);
-                        Assert.Equal(threadNumber.ToString(CultureInfo.InvariantCulture), value);
+                        Assert.AreEqual(threadNumber.ToString(CultureInfo.InvariantCulture), value);
                     }
                 }
             }

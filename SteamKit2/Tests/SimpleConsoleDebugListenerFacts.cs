@@ -1,39 +1,36 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamKit2;
-using Xunit;
 
 namespace Tests
 {
-    public class SimpleConsoleDebugListenerFacts : IDisposable
+    [DoNotParallelize]
+    [TestClass]
+    public class SimpleConsoleDebugListenerFacts
     {
-        public SimpleConsoleDebugListenerFacts()
-        {
-            originalOutWriter = Console.Out;
-            sb = new StringBuilder();
-            writer = new StringWriter(sb);
-            Console.SetOut(writer);
-        }
-
-        readonly StringBuilder sb;
-        readonly StringWriter writer;
-        readonly TextWriter originalOutWriter;
-
-        [Fact]
+        [TestMethod]
         public void WritesOutputToConsole()
         {
-            var listener = new SimpleConsoleDebugListener();
-            listener.WriteLine("some cat", "a message");
-            writer.Flush();
+            var originalOutWriter = Console.Out;
 
-            Assert.Equal("[some cat]: a message", sb.ToString().TrimEnd());
-        }
+            try
+            {
+                var sb = new StringBuilder();
+                using var writer = new StringWriter( sb );
+                Console.SetOut( writer );
 
-        public void Dispose()
-        {
-            Console.SetOut(originalOutWriter);
-            writer.Dispose();
+                var listener = new SimpleConsoleDebugListener();
+                listener.WriteLine( "some cat", "a message" );
+                writer.Flush();
+
+                Assert.AreEqual( "[some cat]: a message", sb.ToString().TrimEnd() );
+            }
+            finally
+            {
+                Console.SetOut( originalOutWriter );
+            }
         }
     }
 }

@@ -4,30 +4,31 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamKit2;
-using Xunit;
 
 namespace Tests
 {
+    [TestClass]
     public class WebAPIFacts
     {
-        [Fact]
+        [TestMethod]
         public void WebAPIHasDefaultTimeout()
         {
             var iface = WebAPI.GetInterface( new Uri("https://whatever/"), "ISteamWhatever" );
 
-            Assert.Equal( iface.Timeout, TimeSpan.FromSeconds( 100 ) );
+            Assert.AreEqual( iface.Timeout, TimeSpan.FromSeconds( 100 ) );
         }
 
-        [Fact]
+        [TestMethod]
         public void WebAPIAsyncHasDefaultTimeout()
         {
             var iface = WebAPI.GetAsyncInterface( new Uri("https://whatever/"), "ISteamWhatever" );
 
-            Assert.Equal( iface.Timeout, TimeSpan.FromSeconds( 100 ) );
+            Assert.AreEqual( iface.Timeout, TimeSpan.FromSeconds( 100 ) );
         }
 
-        [Fact]
+        [TestMethod]
         public void SteamConfigWebAPIInterface()
         {
             var config = SteamConfiguration.Create(b =>
@@ -36,21 +37,21 @@ namespace Tests
 
             var iface = config.GetAsyncWebAPIInterface("TestInterface");
 
-            Assert.Equal("TestInterface", iface.iface);
-            Assert.Equal("hello world", iface.apiKey);
-            Assert.Equal(new Uri("http://example.com"), iface.httpClient.BaseAddress);
+            Assert.AreEqual("TestInterface", iface.iface);
+            Assert.AreEqual("hello world", iface.apiKey);
+            Assert.AreEqual(new Uri("http://example.com"), iface.httpClient.BaseAddress);
         }
 
-        [Fact]
+        [TestMethod]
         public async Task ThrowsWebAPIRequestExceptionIfRequestUnsuccessful()
         {
             var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( new ServiceUnavailableHttpMessageHandler() ) ) );
             dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" ); 
 
-           await Assert.ThrowsAsync<WebAPIRequestException>(() => (Task)iface.PerformFooOperation());
+           await Assert.ThrowsExceptionAsync<WebAPIRequestException>(() => (Task)iface.PerformFooOperation());
         }
         
-        [Fact]
+        [TestMethod]
         public async Task ThrowsOnIncorrectFormatInArgsProvided()
         {
             var hookableHandler = new HookableHandler();
@@ -65,10 +66,10 @@ namespace Tests
                 [ "format" ] = "json"
             };
             
-            await Assert.ThrowsAsync<ArgumentException>(() => iface.CallAsync( HttpMethod.Get, "GetFoo", args: args ));
+            await Assert.ThrowsExceptionAsync<ArgumentException>(() => iface.CallAsync( HttpMethod.Get, "GetFoo", args: args ));
         }
         
-        [Fact]
+        [TestMethod]
         public async Task DoesntThrowWhenCorrectFormatInArgsProvided()
         {
             var hookableHandler = new HookableHandler();
@@ -86,7 +87,7 @@ namespace Tests
             await iface.CallAsync( HttpMethod.Get, "GetFoo", args: args );
         }
         
-        [Fact]
+        [TestMethod]
         public async Task DoesntThrowWhenKeyInArgsProvided()
         {
             var hookableHandler = new HookableHandler();
@@ -103,10 +104,10 @@ namespace Tests
 
             await iface.CallAsync( HttpMethod.Get, "GetFoo", args: args );
             
-            Assert.Equal( "test2", args["key"] );
+            Assert.AreEqual( "test2", args["key"] );
         }
         
-        [Fact]
+        [TestMethod]
         public async Task DoesntThrowOnArgumentsReuse()
         {
             var hookableHandler = new HookableHandler();
@@ -124,7 +125,7 @@ namespace Tests
             await iface.CallAsync( HttpMethod.Get, "GetFoo", args: args );
         }
 
-        [Fact]
+        [TestMethod]
         public async Task UsesArgsAsQueryStringParams()
         {
             var hookableHandler = new HookableHandler();
@@ -135,15 +136,15 @@ namespace Tests
             var handlerCalled = false;
             hookableHandler.OnRequest = request =>
             {
-                Assert.NotNull( request );
-                Assert.Equal( HttpMethod.Get, request.Method );
-                Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
+                Assert.IsNotNull( request );
+                Assert.AreEqual( HttpMethod.Get, request.Method );
+                Assert.AreEqual( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
 
                 var values = request.RequestUri.ParseQueryString();
-                Assert.Equal( 3, values.Count );
-                Assert.Equal( "foo", values[ "f" ] );
-                Assert.Equal( "bar", values[ "b" ] );
-                Assert.Equal( "vdf", values[ "format" ] );
+                Assert.AreEqual( 3, values.Count );
+                Assert.AreEqual( "foo", values[ "f" ] );
+                Assert.AreEqual( "bar", values[ "b" ] );
+                Assert.AreEqual( "vdf", values[ "format" ] );
 
                 handlerCalled = true;
                 return Task.CompletedTask;
@@ -156,10 +157,10 @@ namespace Tests
             };
 
             var response = await iface.PerformFooOperation2( args );
-            Assert.True( handlerCalled );
+            Assert.IsTrue( handlerCalled );
         }
 
-        [Fact]
+        [TestMethod]
         public async Task SupportsNullArgsDictionary()
         {
             var hookableHandler = new HookableHandler();
@@ -170,13 +171,13 @@ namespace Tests
             var handlerCalled = false;
             hookableHandler.OnRequest = request =>
             {
-                Assert.NotNull( request );
-                Assert.Equal( HttpMethod.Get, request.Method );
-                Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
+                Assert.IsNotNull( request );
+                Assert.AreEqual( HttpMethod.Get, request.Method );
+                Assert.AreEqual( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
 
                 var values = request.RequestUri.ParseQueryString();
-                Assert.Single( values );
-                Assert.Equal( "vdf", values[ "format" ] );
+                Assert.IsTrue( values.Count == 1 );
+                Assert.AreEqual( "vdf", values[ "format" ] );
 
                 handlerCalled = true;
                 return Task.CompletedTask;
@@ -184,10 +185,10 @@ namespace Tests
 
             var args = default( Dictionary<string, object> );
             var response = await iface.CallAsync( HttpMethod.Get, "PerformFooOperation", 2, args );
-            Assert.True( handlerCalled );
+            Assert.IsTrue( handlerCalled );
         }
 
-        [Fact]
+        [TestMethod]
         public async Task UsesSingleParameterArgumentsDictionary()
         {
             var hookableHandler = new HookableHandler();
@@ -205,24 +206,24 @@ namespace Tests
             var handlerCalled = false;
             hookableHandler.OnRequest = async request =>
             {
-                Assert.NotNull( request );
-                Assert.Equal( "/IFooService/PerformFooOperation/v2", request.RequestUri.AbsolutePath );
-                Assert.Equal( HttpMethod.Put, request.Method );
+                Assert.IsNotNull( request );
+                Assert.AreEqual( "/IFooService/PerformFooOperation/v2", request.RequestUri.AbsolutePath );
+                Assert.AreEqual( HttpMethod.Put, request.Method );
 
                 var formData = await request.Content.ReadAsFormDataAsync();
-                Assert.Equal( 3, formData.Count );
-                Assert.Equal( "foo", formData[ "f" ] );
-                Assert.Equal( "bar", formData[ "b" ] );
-                Assert.Equal( "vdf", formData[ "format" ] );
+                Assert.AreEqual( 3, formData.Count );
+                Assert.AreEqual( "foo", formData[ "f" ] );
+                Assert.AreEqual( "bar", formData[ "b" ] );
+                Assert.AreEqual( "vdf", formData[ "format" ] );
 
                 handlerCalled = true;
             };
 
             var response = await iface.PerformFooOperation2( args );
-            Assert.True( handlerCalled );
+            Assert.IsTrue( handlerCalled );
         }
 
-        [Fact]
+        [TestMethod]
         public async Task IncludesApiKeyInParams()
         {
             var hookableHandler = new HookableHandler();
@@ -241,23 +242,23 @@ namespace Tests
             var handlerCalled = false;
             hookableHandler.OnRequest = request =>
             {
-                Assert.NotNull( request );
-                Assert.Equal( HttpMethod.Get, request.Method );
-                Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
+                Assert.IsNotNull( request );
+                Assert.AreEqual( HttpMethod.Get, request.Method );
+                Assert.AreEqual( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
 
                 var values = request.RequestUri.ParseQueryString();
-                Assert.Equal( 4, values.Count );
-                Assert.Equal( "MySecretApiKey", values[ "key" ] );
-                Assert.Equal( "foo", values[ "f" ] );
-                Assert.Equal( "bar", values[ "b" ] );
-                Assert.Equal( "vdf", values[ "format" ] );
+                Assert.AreEqual( 4, values.Count );
+                Assert.AreEqual( "MySecretApiKey", values[ "key" ] );
+                Assert.AreEqual( "foo", values[ "f" ] );
+                Assert.AreEqual( "bar", values[ "b" ] );
+                Assert.AreEqual( "vdf", values[ "format" ] );
 
                 handlerCalled = true;
                 return Task.CompletedTask;
             };
 
             var response = await iface.PerformFooOperation2( args );
-            Assert.True( handlerCalled );
+            Assert.IsTrue( handlerCalled );
         }
 
         sealed class ServiceUnavailableHttpMessageHandler : HttpMessageHandler

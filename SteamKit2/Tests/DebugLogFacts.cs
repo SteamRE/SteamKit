@@ -1,6 +1,5 @@
-﻿using Xunit;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamKit2;
-using Xunit.Sdk;
 
 namespace Tests
 {
@@ -8,42 +7,43 @@ namespace Tests
     {
         public void WriteLine( string category, string msg )
         {
-            Assert.Equal( "category", category );
-            Assert.Equal( "msg", msg );
+            Assert.AreEqual( "category", category );
+            Assert.AreEqual( "msg", msg );
         }
     }
 
-    class DebugLogSetupTeardownAttribute : BeforeAfterTestAttribute
+    [DoNotParallelize]
+    [TestClass]
+    public class DebugLogFacts
     {
-        public override void Before( System.Reflection.MethodInfo methodUnderTest )
+        [TestInitialize]
+        public void Startup()
         {
             DebugLog.ClearListeners();
         }
 
-        public override void After( System.Reflection.MethodInfo methodUnderTest )
+        [TestCleanup]
+        public void Cleanup()
         {
             DebugLog.Enabled = false;
             DebugLog.ClearListeners();
         }
-    }
 
-    public class DebugLogFacts
-    {
-        [Fact, DebugLogSetupTeardown]
+        [TestMethod]
         public void DebugLogActionListenerLogsMessage()
         {
             DebugLog.Enabled = true;
 
             DebugLog.AddListener( ( category, msg ) =>
             {
-                Assert.Equal( "category", category );
-                Assert.Equal( "msg", msg );
+                Assert.AreEqual( "category", category );
+                Assert.AreEqual( "msg", msg );
             } );
 
             DebugLog.WriteLine( "category", "msg" );
         }
 
-        [Fact, DebugLogSetupTeardown]
+        [TestMethod]
         public void DebugLogDebugListenerLogsMessage()
         {
             DebugLog.Enabled = true;
@@ -53,68 +53,68 @@ namespace Tests
             DebugLog.WriteLine( "category", "msg" );
         }
 
-        [Fact, DebugLogSetupTeardown]
+        [TestMethod]
         public void DebugLogDoesntLogWhenDisabled()
         {
             DebugLog.Enabled = false;
 
             DebugLog.AddListener( ( category, msg ) =>
             {
-                Assert.True( false, "Listener action called when it shouldn't have been" );
+                Assert.Fail( "Listener action called when it shouldn't have been" );
             } );
 
             DebugLog.WriteLine( "category", "msg" );
         }
 
-        [Fact, DebugLogSetupTeardown]
+        [TestMethod]
         public void DebugLogAddsAndRemovesListener()
         {
             var testListener = new TestListener();
 
             DebugLog.AddListener( testListener );
 
-            Assert.Contains( testListener, DebugLog.listeners );
+            Assert.IsTrue( DebugLog.listeners.Contains( testListener ) );
 
             DebugLog.RemoveListener( testListener );
 
-            Assert.DoesNotContain( testListener, DebugLog.listeners );
+            Assert.IsFalse( DebugLog.listeners.Contains( testListener ) );
         }
 
-        [Fact, DebugLogSetupTeardown]
+        [TestMethod]
         public void DebugLogClearsListeners()
         {
             var testListener = new TestListener();
 
             DebugLog.AddListener( testListener );
 
-            Assert.Contains( testListener, DebugLog.listeners );
+            Assert.IsTrue( DebugLog.listeners.Contains( testListener ) );
 
             DebugLog.ClearListeners();
 
-            Assert.DoesNotContain( testListener, DebugLog.listeners );
+            Assert.IsFalse( DebugLog.listeners.Contains( testListener ) );
         }
 
-        [Fact, DebugLogSetupTeardown]
+        [TestMethod]
         public void DebugLogCanWriteSafelyWithoutParams()
         {
             DebugLog.Enabled = true;
             DebugLog.AddListener( ( category, msg ) =>
             {
-                Assert.Equal( "category", category );
-                Assert.Equal( "msg{0}msg", msg );
+                Assert.AreEqual( "category", category );
+                Assert.AreEqual( "msg{0}msg", msg );
             } );
 
             DebugLog.WriteLine( "category", "msg{0}msg" );
         }
 
-        [Fact, DebugLogSetupTeardown]
+        [TestMethod]
         public void DebugLogFormatsParams()
         {
             DebugLog.Enabled = true;
             DebugLog.AddListener( ( category, msg ) =>
             {
-                Assert.Equal( "category", category );
-                Assert.Equal( "msg1msg2", msg );
+                Assert.AreEqual( "category", category );
+                Assert.AreEqual( "msg1msg2", msg );
             } );
 
             var msgText = "msg";
@@ -122,7 +122,7 @@ namespace Tests
             DebugLog.WriteLine( "category", "msg{0}{1}{2}", 1, msgText, integer );
         }
 
-        [Fact, DebugLogSetupTeardown]
+        [TestMethod]
         public void GeneratedCMClientIDPrefixed()
         {
             DebugLog.Enabled = true;
@@ -138,11 +138,11 @@ namespace Tests
 
             var client = new SteamClient();
             client.LogDebug( "MyCategory", "My {0}st message", 1 );
-            Assert.Equal( client.ID + "/MyCategory", category );
-            Assert.Equal( "My 1st message", message );
+            Assert.AreEqual( client.ID + "/MyCategory", category );
+            Assert.AreEqual( "My 1st message", message );
         }
 
-        [Fact, DebugLogSetupTeardown]
+        [TestMethod]
         public void CustomCMClientIDPrefixed()
         {
             DebugLog.Enabled = true;
@@ -158,8 +158,8 @@ namespace Tests
 
             var client = new SteamClient("My Custom Client");
             client.LogDebug( "MyCategory", "My {0}st message", 1 );
-            Assert.Equal( "My Custom Client/MyCategory", category );
-            Assert.Equal( "My 1st message", message );
+            Assert.AreEqual( "My Custom Client/MyCategory", category );
+            Assert.AreEqual( "My 1st message", message );
         }
     }
 }

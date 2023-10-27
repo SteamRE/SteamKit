@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamKit2;
-using Xunit;
 
 namespace Tests
 {
+    [TestClass]
     public class CryptoHelperFacts
     {
-        [Fact]
+        [TestMethod]
         public void TestSymmetricEncryption()
         {
             const string decryptedExpected = "this is a 24 byte string";
@@ -26,7 +26,7 @@ namespace Tests
             decryptedData = CryptoHelper.SymmetricDecrypt( decryptedData, key );
             var decryptedString = Encoding.UTF8.GetString( decryptedData );
 
-            Assert.Equal( decryptedExpected, decryptedString );
+            Assert.AreEqual( decryptedExpected, decryptedString );
         }
     }
 }

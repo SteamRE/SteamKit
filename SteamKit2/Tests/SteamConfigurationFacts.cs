@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamKit2;
 using SteamKit2.Discovery;
-using Xunit;
 
 namespace Tests
 {
+    [TestClass]
     public class SteamConfigurationDefaultFacts
     {
         public SteamConfigurationDefaultFacts()
@@ -21,88 +19,88 @@ namespace Tests
 
         readonly SteamConfiguration configuration;
 
-        [Fact]
+        [TestMethod]
         public void AllowsDirectoryFetch()
         {
-            Assert.True(configuration.AllowDirectoryFetch);
+            Assert.IsTrue(configuration.AllowDirectoryFetch);
         }
 
-        [Fact]
+        [TestMethod]
         public void CellIDIsZero()
         {
-            Assert.Equal(0u, configuration.CellID);
+            Assert.AreEqual(0u, configuration.CellID);
         }
 
-        [Fact]
+        [TestMethod]
         public void ConnectionTimeoutIsFiveSeconds()
         {
-            Assert.Equal(TimeSpan.FromSeconds(5), configuration.ConnectionTimeout);
+            Assert.AreEqual(TimeSpan.FromSeconds(5), configuration.ConnectionTimeout);
         }
 
-        [Fact]
+        [TestMethod]
         public void DefaultPersonaStateFlags()
         {
             var expected = EClientPersonaStateFlag.PlayerName | EClientPersonaStateFlag.Presence |
                     EClientPersonaStateFlag.SourceID | EClientPersonaStateFlag.GameExtraInfo |
                     EClientPersonaStateFlag.LastSeen;
 
-            Assert.Equal(expected, configuration.DefaultPersonaStateFlags);
+            Assert.AreEqual(expected, configuration.DefaultPersonaStateFlags);
         }
 
-        [Fact]
+        [TestMethod]
         public void DefaultHttpClientFactory()
         {
             using (var client = configuration.HttpClientFactory())
             {
-                Assert.NotNull(client);
-                Assert.IsType<HttpClient>(client);
+                Assert.IsNotNull(client);
+                Assert.IsInstanceOfType<HttpClient>(client);
 
                 var steamKitAssemblyVersion = typeof( SteamClient ).Assembly.GetName().Version;
-                Assert.Equal("SteamKit/" + steamKitAssemblyVersion.ToString(fieldCount: 3), client.DefaultRequestHeaders.UserAgent.ToString());
+                Assert.AreEqual("SteamKit/" + steamKitAssemblyVersion.ToString(fieldCount: 3), client.DefaultRequestHeaders.UserAgent.ToString());
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void DefaultMachineInfoProvider()
         {
-            Assert.NotNull(configuration.MachineInfoProvider);
-            Assert.IsNotType<DefaultMachineInfoProvider>(configuration.MachineInfoProvider);
+            Assert.IsNotNull(configuration.MachineInfoProvider);
+            Assert.IsNotInstanceOfType<DefaultMachineInfoProvider>(configuration.MachineInfoProvider);
         }
 
-        [Fact]
+        [TestMethod]
         public void ServerListProviderIsNothingFancy()
         {
-            Assert.IsType<MemoryServerListProvider>(configuration.ServerListProvider);
+            Assert.IsInstanceOfType<MemoryServerListProvider>(configuration.ServerListProvider);
         }
 
-        [Fact]
+        [TestMethod]
         public void ServerListIsNotNull()
         {
-            Assert.NotNull(configuration.ServerList);
+            Assert.IsNotNull(configuration.ServerList);
         }
 
-        [Fact]
+        [TestMethod]
         public void DefaultProtocols()
         {
-            Assert.Equal(ProtocolTypes.Tcp, configuration.ProtocolTypes);
+            Assert.AreEqual(ProtocolTypes.Tcp, configuration.ProtocolTypes);
         }
 
-        [Fact]
+        [TestMethod]
         public void PublicUniverse()
         {
-            Assert.Equal(EUniverse.Public, configuration.Universe);
+            Assert.AreEqual(EUniverse.Public, configuration.Universe);
         }
 
-        [Fact]
+        [TestMethod]
         public void WebAPIAddress()
         {
-            Assert.Equal("https://api.steampowered.com/", configuration.WebAPIBaseAddress?.AbsoluteUri);
+            Assert.AreEqual("https://api.steampowered.com/", configuration.WebAPIBaseAddress?.AbsoluteUri);
         }
 
-        [Fact]
+        [TestMethod]
         public void NoWebAPIKey()
         {
-            Assert.Null(configuration.WebAPIKey);
+            Assert.IsNull(configuration.WebAPIKey);
         }
     }
 
@@ -126,80 +124,80 @@ namespace Tests
 
         readonly SteamConfiguration configuration;
 
-        [Fact]
+        [TestMethod]
         public void DirectoryFetchIsConfigured()
         {
-            Assert.False(configuration.AllowDirectoryFetch);
+            Assert.IsFalse(configuration.AllowDirectoryFetch);
         }
 
-        [Fact]
+        [TestMethod]
         public void CellIDIsConfigured()
         {
-            Assert.Equal(123u, configuration.CellID);
+            Assert.AreEqual(123u, configuration.CellID);
         }
 
-        [Fact]
+        [TestMethod]
         public void ConnectionTimeoutIsConfigured()
         {
-            Assert.Equal(TimeSpan.FromMinutes(1), configuration.ConnectionTimeout);
+            Assert.AreEqual(TimeSpan.FromMinutes(1), configuration.ConnectionTimeout);
         }
 
-        [Fact]
+        [TestMethod]
         public void HttpClientFactoryIsConfigured()
         {
             using (var client = configuration.HttpClientFactory())
             {
-                Assert.Equal("true", client.DefaultRequestHeaders.GetValues("X-SteamKit-Tests").FirstOrDefault());
+                Assert.AreEqual("true", client.DefaultRequestHeaders.GetValues("X-SteamKit-Tests").FirstOrDefault());
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void MachineInfoProviderIsConfigured()
         {
-            Assert.IsType<CustomMachineInfoProvider>(configuration.MachineInfoProvider);
-            Assert.Same(configuration.MachineInfoProvider, configuration.MachineInfoProvider);
+            Assert.IsInstanceOfType<CustomMachineInfoProvider>(configuration.MachineInfoProvider);
+            Assert.AreSame(configuration.MachineInfoProvider, configuration.MachineInfoProvider);
         }
 
-        [Fact]
+        [TestMethod]
         public void PersonaStateFlagsIsConfigured()
         {
-            Assert.Equal(EClientPersonaStateFlag.SourceID, configuration.DefaultPersonaStateFlags);
+            Assert.AreEqual(EClientPersonaStateFlag.SourceID, configuration.DefaultPersonaStateFlags);
         }
 
-        [Fact]
+        [TestMethod]
         public void ServerListProviderIsConfigured()
         {
-            Assert.IsType<CustomServerListProvider>(configuration.ServerListProvider);
+            Assert.IsInstanceOfType<CustomServerListProvider>(configuration.ServerListProvider);
         }
 
-        [Fact]
+        [TestMethod]
         public void ServerListIsNotNull()
         {
-            Assert.NotNull(configuration.ServerList);
+            Assert.IsNotNull(configuration.ServerList);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProtocolsAreConfigured()
         {
-            Assert.Equal(ProtocolTypes.WebSocket | ProtocolTypes.Udp, configuration.ProtocolTypes);
+            Assert.AreEqual(ProtocolTypes.WebSocket | ProtocolTypes.Udp, configuration.ProtocolTypes);
         }
 
-        [Fact]
+        [TestMethod]
         public void UniverseIsConfigured()
         {
-            Assert.Equal(EUniverse.Internal, configuration.Universe);
+            Assert.AreEqual(EUniverse.Internal, configuration.Universe);
         }
 
-        [Fact]
+        [TestMethod]
         public void WebAPIAddress()
         {
-            Assert.Equal("http://foo.bar.com/api/", configuration.WebAPIBaseAddress?.AbsoluteUri);
+            Assert.AreEqual("http://foo.bar.com/api/", configuration.WebAPIBaseAddress?.AbsoluteUri);
         }
 
-        [Fact]
+        [TestMethod]
         public void NoWebAPIKey()
         {
-            Assert.Equal("T0PS3kR1t", configuration.WebAPIKey);
+            Assert.AreEqual("T0PS3kR1t", configuration.WebAPIKey);
         }
 
         class CustomMachineInfoProvider : IMachineInfoProvider

@@ -1,58 +1,59 @@
-﻿using System;
+﻿using System.Linq;
 using System.Net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamKit2;
-using Xunit;
 
 namespace Tests
 {
+    [TestClass]
     public class NetHelpersFacts
     {
-        [Fact]
+        [TestMethod]
         public void GetMsgIPAddress()
         {
-            Assert.Equal( 2130706433u, NetHelpers.GetMsgIPAddress( IPAddress.Loopback ).v4 );
-            Assert.Equal( new byte[] {
+            Assert.AreEqual( 2130706433u, NetHelpers.GetMsgIPAddress( IPAddress.Loopback ).v4 );
+            Assert.IsTrue( NetHelpers.GetMsgIPAddress( IPAddress.IPv6Loopback ).v6.SequenceEqual( new byte[] {
                 0, 0, 0, 0,
                 0, 0, 0, 0,
                 0, 0, 0, 0,
                 0, 0, 0, 1
-            }, NetHelpers.GetMsgIPAddress( IPAddress.IPv6Loopback ).v6 );
+            } ) );
         }
 
-        [Fact]
+        [TestMethod]
         public void GetIPAddressFromMsg()
         {
-            Assert.Equal( IPAddress.Loopback, NetHelpers.GetMsgIPAddress( IPAddress.Loopback ).GetIPAddress() );
-            Assert.Equal( IPAddress.IPv6Loopback, NetHelpers.GetMsgIPAddress( IPAddress.IPv6Loopback ).GetIPAddress() );
+            Assert.AreEqual( IPAddress.Loopback, NetHelpers.GetMsgIPAddress( IPAddress.Loopback ).GetIPAddress() );
+            Assert.AreEqual( IPAddress.IPv6Loopback, NetHelpers.GetMsgIPAddress( IPAddress.IPv6Loopback ).GetIPAddress() );
         }
 
-        [Fact]
+        [TestMethod]
         public void GetIPAddress()
         {
-            Assert.Equal( IPAddress.Loopback, NetHelpers.GetIPAddress( 2130706433 ) );
-            Assert.Equal( 2130706433u, NetHelpers.GetIPAddressAsUInt( IPAddress.Loopback ) );
+            Assert.AreEqual( IPAddress.Loopback, NetHelpers.GetIPAddress( 2130706433 ) );
+            Assert.AreEqual( 2130706433u, NetHelpers.GetIPAddressAsUInt( IPAddress.Loopback ) );
         }
 
-        [Fact]
+        [TestMethod]
         public void ObfuscatePrivateIP()
         {
-            Assert.Equal( 3316510732u, NetHelpers.GetMsgIPAddress( IPAddress.Loopback ).ObfuscatePrivateIP().v4 );
-            Assert.Equal( new byte[] {
+            Assert.AreEqual( 3316510732u, NetHelpers.GetMsgIPAddress( IPAddress.Loopback ).ObfuscatePrivateIP().v4 );
+            Assert.IsTrue( NetHelpers.GetMsgIPAddress( IPAddress.IPv6Loopback ).ObfuscatePrivateIP().v6.SequenceEqual( new byte[] {
                 0x0D, 0xF0, 0xAD, 0xBA,
                 0x0D, 0xF0, 0xAD, 0xBA,
                 0x0D, 0xF0, 0xAD, 0xBA,
                 0x0D, 0xF0, 0xAD, 1 ^ 0xBA
-            }, NetHelpers.GetMsgIPAddress( IPAddress.IPv6Loopback ).ObfuscatePrivateIP().v6 );
+            } ) );
         }
 
-        [Fact]
+        [TestMethod]
         public void TryParseIPEndPoint()
         {
-            Assert.True( NetHelpers.TryParseIPEndPoint( "127.0.0.1:1337", out var parsedIp ) );
-            Assert.Equal( new IPEndPoint( IPAddress.Loopback, 1337 ), parsedIp );
+            Assert.IsTrue( NetHelpers.TryParseIPEndPoint( "127.0.0.1:1337", out var parsedIp ) );
+            Assert.AreEqual( new IPEndPoint( IPAddress.Loopback, 1337 ), parsedIp );
 
-            Assert.True( NetHelpers.TryParseIPEndPoint( "[::1]:1337", out var parsedIpv6 ) );
-            Assert.Equal( new IPEndPoint( IPAddress.IPv6Loopback, 1337 ), parsedIpv6 );
+            Assert.IsTrue( NetHelpers.TryParseIPEndPoint( "[::1]:1337", out var parsedIpv6 ) );
+            Assert.AreEqual( new IPEndPoint( IPAddress.IPv6Loopback, 1337 ), parsedIpv6 );
         }
     }
 }

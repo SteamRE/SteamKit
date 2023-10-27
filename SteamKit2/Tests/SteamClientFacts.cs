@@ -1,63 +1,61 @@
-﻿using SteamKit2;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SteamKit2;
 
 namespace Tests
 {
-	public class SteamClientFacts
+    [TestClass]
+    public class SteamClientFacts
 	{
-		[Fact]
+		[TestMethod]
 		public void ConstructorSetsInitialHandlers()
 		{
 			var steamClient = new SteamClient();
-			Assert.NotNull(steamClient.GetHandler<SteamUser>());
-			Assert.NotNull(steamClient.GetHandler<SteamFriends>());
-			Assert.NotNull(steamClient.GetHandler<SteamApps>());
-			Assert.NotNull(steamClient.GetHandler<SteamGameCoordinator>());
-			Assert.NotNull(steamClient.GetHandler<SteamGameServer>());
-			Assert.NotNull(steamClient.GetHandler<SteamUserStats>());
-			Assert.NotNull(steamClient.GetHandler<SteamMasterServer>());
-			Assert.NotNull(steamClient.GetHandler<SteamCloud>());
-			Assert.NotNull(steamClient.GetHandler<SteamWorkshop>());
-			Assert.NotNull(steamClient.GetHandler<SteamTrading>());
-			Assert.NotNull(steamClient.GetHandler<SteamUnifiedMessages>());
-			Assert.NotNull(steamClient.GetHandler<SteamScreenshots>());
+			Assert.IsNotNull(steamClient.GetHandler<SteamUser>());
+			Assert.IsNotNull(steamClient.GetHandler<SteamFriends>());
+			Assert.IsNotNull(steamClient.GetHandler<SteamApps>());
+			Assert.IsNotNull(steamClient.GetHandler<SteamGameCoordinator>());
+			Assert.IsNotNull(steamClient.GetHandler<SteamGameServer>());
+			Assert.IsNotNull(steamClient.GetHandler<SteamUserStats>());
+			Assert.IsNotNull(steamClient.GetHandler<SteamMasterServer>());
+			Assert.IsNotNull(steamClient.GetHandler<SteamCloud>());
+			Assert.IsNotNull(steamClient.GetHandler<SteamWorkshop>());
+			Assert.IsNotNull(steamClient.GetHandler<SteamTrading>());
+			Assert.IsNotNull(steamClient.GetHandler<SteamUnifiedMessages>());
+			Assert.IsNotNull(steamClient.GetHandler<SteamScreenshots>());
 		}
 
-		[Fact]
+		[TestMethod]
 		public void AddHandlerAddsHandler()
 		{
 			var steamClient = new SteamClient();
 			var handler = new TestMsgHandler();
-			Assert.Null(steamClient.GetHandler<TestMsgHandler>());
+			Assert.IsNull(steamClient.GetHandler<TestMsgHandler>());
 
 			steamClient.AddHandler(handler);
-			Assert.Equal(handler, steamClient.GetHandler<TestMsgHandler>());
+			Assert.AreEqual(handler, steamClient.GetHandler<TestMsgHandler>());
 		}
 
-		[Fact]
+		[TestMethod]
 		public void RemoveHandlerRemovesHandler()
 		{
 			var steamClient = new SteamClient();
 			steamClient.AddHandler(new TestMsgHandler());
-			Assert.NotNull(steamClient.GetHandler<TestMsgHandler>());
+			Assert.IsNotNull(steamClient.GetHandler<TestMsgHandler>());
 
 			steamClient.RemoveHandler(typeof(TestMsgHandler));
-			Assert.Null(steamClient.GetHandler<TestMsgHandler>());
+			Assert.IsNull(steamClient.GetHandler<TestMsgHandler>());
 		}
 
-		[Fact]
+		[TestMethod]
 		public void GetNextJobIDIsThreadsafe()
 		{
 			var steamClient = new SteamClient();
 			var jobID = steamClient.GetNextJobID();
 
-			Assert.Equal(1u, jobID.SequentialCount);
+			Assert.AreEqual(1u, jobID.SequentialCount);
 
 			Parallel.For(0, 1000, x =>
 			{
@@ -65,19 +63,19 @@ namespace Tests
 			});
 
 			jobID = steamClient.GetNextJobID();
-			Assert.Equal(1002u, jobID.SequentialCount);
+			Assert.AreEqual(1002u, jobID.SequentialCount);
 		}
 
-		[Fact]
+		[TestMethod]
 		public void GetNextJobIDSetsProcessIDToZero()
 		{
 			var steamClient = new SteamClient();
 			var jobID = steamClient.GetNextJobID();
 
-			Assert.Equal(0u, jobID.ProcessID);
+			Assert.AreEqual(0u, jobID.ProcessID);
 		}
 
-		[Fact]
+		[TestMethod]
 		public void GetNextJobIDFillsProcessStartTime()
 		{
 			var steamClient = new SteamClient();
@@ -90,17 +88,17 @@ namespace Tests
 				// Recreate the datetime to get rid of milliseconds etc. and only keep the important bits
 				var expectedProcessStartTime = new DateTime(processStartTime.Year, processStartTime.Month, processStartTime.Day, processStartTime.Hour, processStartTime.Minute, processStartTime.Second);
 
-				Assert.Equal(expectedProcessStartTime, jobID.StartTime);
+				Assert.AreEqual(expectedProcessStartTime, jobID.StartTime);
 			}
 		}
 
-		[Fact]
+		[TestMethod]
 		public void GetNextJobIDSetsBoxIDToZero()
 		{
 			var steamClient = new SteamClient();
 			var jobID = steamClient.GetNextJobID();
 
-			Assert.Equal(0u, jobID.BoxID);
+			Assert.AreEqual(0u, jobID.BoxID);
 		}
 
 		class TestMsgHandler : ClientMsgHandler

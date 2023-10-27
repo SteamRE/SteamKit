@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamKit2;
 using SteamKit2.Discovery;
-using Xunit;
 
 namespace Tests
 {
+    [TestClass]
     public class SmartCMServerListFacts
     {
         public SmartCMServerListFacts()
@@ -18,7 +19,7 @@ namespace Tests
 
         readonly SmartCMServerList serverList;
         
-        [Fact]
+        [TestMethod]
         public void TryMergeWithList_AddsToHead_AndMovesExisting()
         {
             serverList.GetAllEndPoints();
@@ -31,7 +32,7 @@ namespace Tests
                 ServerRecord.CreateSocketServer(new IPEndPoint( IPAddress.Loopback, 27105 )),
             };
             serverList.ReplaceList( seedList );
-            Assert.Equal( 4, seedList.Length );
+            Assert.AreEqual( 4, seedList.Length );
 
             var listToReplace = new[]
             {
@@ -43,20 +44,20 @@ namespace Tests
             serverList.ReplaceList( listToReplace );
 
             var addresses = serverList.GetAllEndPoints();
-            Assert.Equal( 3, addresses.Length );
-            Assert.Equal( listToReplace[ 0 ], addresses[ 0 ] );
-            Assert.Equal( listToReplace[ 1 ], addresses[ 1 ] );
-            Assert.Equal( listToReplace[ 2 ], addresses[ 2 ] );
+            Assert.AreEqual( 3, addresses.Length );
+            Assert.AreEqual( listToReplace[ 0 ], addresses[ 0 ] );
+            Assert.AreEqual( listToReplace[ 1 ], addresses[ 1 ] );
+            Assert.AreEqual( listToReplace[ 2 ], addresses[ 2 ] );
         }
 
-        [Fact]
+        [TestMethod]
         public void GetNextServerCandidate_ReturnsNull_IfListIsEmpty()
         {
             var endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
-            Assert.Null( endPoint );
+            Assert.IsNull( endPoint );
         }
 
-        [Fact]
+        [TestMethod]
         public void GetNextServerCandidate_ReturnsServer_IfListHasServers()
         {
             serverList.GetAllEndPoints();
@@ -65,11 +66,11 @@ namespace Tests
             serverList.ReplaceList( new List<ServerRecord>() { record } );
 
             var nextRecord = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
-            Assert.Equal( record.EndPoint, nextRecord.EndPoint );
-            Assert.Equal( ProtocolTypes.Tcp, nextRecord.ProtocolTypes );
+            Assert.AreEqual( record.EndPoint, nextRecord.EndPoint );
+            Assert.AreEqual( ProtocolTypes.Tcp, nextRecord.ProtocolTypes );
         }
 
-        [Fact]
+        [TestMethod]
         public void GetNextServerCandidate_ReturnsServer_IfListHasServers_EvenIfAllServersAreBad()
         {
             serverList.GetAllEndPoints();
@@ -79,11 +80,11 @@ namespace Tests
             serverList.TryMark( record.EndPoint, record.ProtocolTypes, ServerQuality.Bad );
 
             var nextRecord = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
-            Assert.Equal( record.EndPoint, nextRecord.EndPoint );
-            Assert.Equal( ProtocolTypes.Tcp, nextRecord.ProtocolTypes );
+            Assert.AreEqual( record.EndPoint, nextRecord.EndPoint );
+            Assert.AreEqual( ProtocolTypes.Tcp, nextRecord.ProtocolTypes );
         }
 
-        [Fact]
+        [TestMethod]
         public void GetNextServerCandidate_IsBiasedTowardsServerOrdering()
         {
             serverList.GetAllEndPoints();
@@ -103,19 +104,19 @@ namespace Tests
             
             // Server A's endpoints were all marked bad, with goodRecord being recovered
             var nextRecord = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
-            Assert.Equal( goodRecord.EndPoint, nextRecord.EndPoint );
-            Assert.Equal( ProtocolTypes.Tcp, nextRecord.ProtocolTypes );
+            Assert.AreEqual( goodRecord.EndPoint, nextRecord.EndPoint );
+            Assert.AreEqual( ProtocolTypes.Tcp, nextRecord.ProtocolTypes );
 
             serverList.TryMark( badRecord.EndPoint, badRecord.ProtocolTypes, ServerQuality.Good);
             
             // Server A's bad record is now at the front, having been marked good
             nextRecord = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
-            Assert.Equal( badRecord.EndPoint, nextRecord.EndPoint );
-            Assert.Equal( ProtocolTypes.Tcp, nextRecord.ProtocolTypes );
+            Assert.AreEqual( badRecord.EndPoint, nextRecord.EndPoint );
+            Assert.AreEqual( ProtocolTypes.Tcp, nextRecord.ProtocolTypes );
         }
 
         
-        [Fact]
+        [TestMethod]
         public void GetNextServerCandidate_AllEndpointsByHostAreBad()
         {
             serverList.GetAllEndPoints();
@@ -135,55 +136,55 @@ namespace Tests
 
             // Server A's endpoints are all bad. Server B is our next candidate.
             var nextRecord = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
-            Assert.Equal( serverBRecord.EndPoint, nextRecord.EndPoint );
-            Assert.Equal( ProtocolTypes.Tcp, nextRecord.ProtocolTypes );
+            Assert.AreEqual( serverBRecord.EndPoint, nextRecord.EndPoint );
+            Assert.AreEqual( ProtocolTypes.Tcp, nextRecord.ProtocolTypes );
         }
         
-        [Fact]
+        [TestMethod]
         public void GetNextServerCandidate_OnlyReturnsMatchingServerOfType()
         {
             var record = ServerRecord.CreateWebSocketServer( "localhost:443" );
             serverList.ReplaceList( new List<ServerRecord>() { record } );
 
             var endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
-            Assert.Null( endPoint );
+            Assert.IsNull( endPoint );
             endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Udp );
-            Assert.Null( endPoint );
+            Assert.IsNull( endPoint );
             endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp | ProtocolTypes.Udp);
-            Assert.Null( endPoint );
+            Assert.IsNull( endPoint );
 
             endPoint = serverList.GetNextServerCandidate( ProtocolTypes.WebSocket );
-            Assert.Equal( record.EndPoint, endPoint.EndPoint );
-            Assert.Equal( ProtocolTypes.WebSocket, endPoint.ProtocolTypes );
+            Assert.AreEqual( record.EndPoint, endPoint.EndPoint );
+            Assert.AreEqual( ProtocolTypes.WebSocket, endPoint.ProtocolTypes );
 
             endPoint = serverList.GetNextServerCandidate( ProtocolTypes.All );
-            Assert.Equal( record.EndPoint, endPoint.EndPoint );
-            Assert.Equal( ProtocolTypes.WebSocket, endPoint.ProtocolTypes );
+            Assert.AreEqual( record.EndPoint, endPoint.EndPoint );
+            Assert.AreEqual( ProtocolTypes.WebSocket, endPoint.ProtocolTypes );
 
             record = ServerRecord.CreateSocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
             serverList.ReplaceList( new List<ServerRecord>() { record } );
 
             endPoint = serverList.GetNextServerCandidate( ProtocolTypes.WebSocket );
-            Assert.Null( endPoint );
+            Assert.IsNull( endPoint );
 
             endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
-            Assert.Equal( record.EndPoint, endPoint.EndPoint );
-            Assert.Equal( ProtocolTypes.Tcp, endPoint.ProtocolTypes );
+            Assert.AreEqual( record.EndPoint, endPoint.EndPoint );
+            Assert.AreEqual( ProtocolTypes.Tcp, endPoint.ProtocolTypes );
 
             endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Udp);
-            Assert.Equal( record.EndPoint, endPoint.EndPoint );
-            Assert.Equal( ProtocolTypes.Udp, endPoint.ProtocolTypes );
+            Assert.AreEqual( record.EndPoint, endPoint.EndPoint );
+            Assert.AreEqual( ProtocolTypes.Udp, endPoint.ProtocolTypes );
 
             endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp | ProtocolTypes.Udp );
-            Assert.Equal( record.EndPoint, endPoint.EndPoint );
-            Assert.Equal( ProtocolTypes.Tcp, endPoint.ProtocolTypes );
+            Assert.AreEqual( record.EndPoint, endPoint.EndPoint );
+            Assert.AreEqual( ProtocolTypes.Tcp, endPoint.ProtocolTypes );
 
             endPoint = serverList.GetNextServerCandidate( ProtocolTypes.All );
-            Assert.Equal( record.EndPoint, endPoint.EndPoint );
-            Assert.Equal( ProtocolTypes.Tcp, endPoint.ProtocolTypes );
+            Assert.AreEqual( record.EndPoint, endPoint.EndPoint );
+            Assert.AreEqual( ProtocolTypes.Tcp, endPoint.ProtocolTypes );
         }
 
-        [Fact]
+        [TestMethod]
         public void GetNextServerCandidate_MarkIterateAllCandidates()
         {
             serverList.GetAllEndPoints();
@@ -200,7 +201,7 @@ namespace Tests
             void DequeueAndMarkCandidate()
             {
                 var candidate = serverList.GetNextServerCandidate( ProtocolTypes.WebSocket );
-                Assert.True( candidatesReturned.Add( candidate ), $"Candidate {candidate.EndPoint} already seen" );
+                Assert.IsTrue( candidatesReturned.Add( candidate ), $"Candidate {candidate.EndPoint} already seen" );
                 Thread.Sleep( TimeSpan.FromMilliseconds( 10 ) );
                 serverList.TryMark( candidate.EndPoint, ProtocolTypes.WebSocket, ServerQuality.Bad );
             }
@@ -209,10 +210,10 @@ namespace Tests
             DequeueAndMarkCandidate();
             DequeueAndMarkCandidate();
             DequeueAndMarkCandidate();
-            Assert.True( candidatesReturned.Count == 3, "All candidates returned" );
+            Assert.IsTrue( candidatesReturned.Count == 3, "All candidates returned" );
         }
 
-        [Fact]
+        [TestMethod]
         public void GetNextServerCandidate_MarkIterateAllBadCandidates()
         {
             serverList.GetAllEndPoints();
@@ -232,7 +233,7 @@ namespace Tests
             void DequeueAndMarkCandidate()
             {
                 var candidate = serverList.GetNextServerCandidate( ProtocolTypes.WebSocket );
-                Assert.True( candidatesReturned.Add( candidate ), $"Candidate {candidate.EndPoint} already seen" );
+                Assert.IsTrue( candidatesReturned.Add( candidate ), $"Candidate {candidate.EndPoint} already seen" );
                 Thread.Sleep( TimeSpan.FromMilliseconds( 10 ) );
                 serverList.TryMark( candidate.EndPoint, ProtocolTypes.WebSocket, ServerQuality.Bad );
             }
@@ -241,27 +242,27 @@ namespace Tests
             DequeueAndMarkCandidate();
             DequeueAndMarkCandidate();
             DequeueAndMarkCandidate();
-            Assert.True( candidatesReturned.Count == 3, "All candidates returned" );
+            Assert.IsTrue( candidatesReturned.Count == 3, "All candidates returned" );
         }
         
-        [Fact]
+        [TestMethod]
         public void TryMark_ReturnsTrue_IfServerInList()
         {
             var record = ServerRecord.CreateSocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ));
             serverList.ReplaceList( new List<ServerRecord>() { record } );
 
             var marked = serverList.TryMark( record.EndPoint, record.ProtocolTypes, ServerQuality.Good );
-            Assert.True( marked );
+            Assert.IsTrue( marked );
         }
 
-        [Fact]
+        [TestMethod]
         public void TryMark_ReturnsFalse_IfServerNotInList()
         {
             var record = ServerRecord.CreateSocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
             serverList.ReplaceList( new List<ServerRecord>() { record } );
 
             var marked = serverList.TryMark( new IPEndPoint( IPAddress.Loopback, 27016 ), record.ProtocolTypes, ServerQuality.Good );
-            Assert.False( marked );
+            Assert.IsFalse( marked );
         }
     }
 }

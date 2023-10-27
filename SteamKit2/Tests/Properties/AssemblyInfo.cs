@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
-using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -22,4 +22,4 @@ using Xunit;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("dcef76fb-0139-4e17-a8cd-973a7d9bd856")]
 
-[assembly: CollectionBehavior(DisableTestParallelization = true)]
+[assembly: Parallelize(Scope = ExecutionScope.MethodLevel, Workers = 6)]

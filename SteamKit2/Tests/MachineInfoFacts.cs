@@ -2,14 +2,15 @@ using System;
 using System.IO;
 using System.Text;
 using System.Threading;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamKit2;
-using Xunit;
 
 namespace Tests
 {
+    [TestClass]
     public class MachineInfoFacts
     {
-        [Fact]
+        [TestMethod]
         public void ResultIsCached()
         {
             var provider = new CountingMachineInfoProvider();
@@ -25,10 +26,10 @@ namespace Tests
                 HardwareUtils.GetMachineID(provider);
             }
 
-            Assert.Equal(invocations, provider.TotalInvocations);
+            Assert.AreEqual(invocations, provider.TotalInvocations);
         }
 
-        [Fact]
+        [TestMethod]
         public void ResultIsCachedByInstance()
         {
             var provider = new CountingMachineInfoProvider();
@@ -40,19 +41,19 @@ namespace Tests
             for (var i = 0; i < 100; i++)
             {
                 var newProvider = new CountingMachineInfoProvider();
-                Assert.Equal(0, newProvider.TotalInvocations);
+                Assert.AreEqual(0, newProvider.TotalInvocations);
 
                 HardwareUtils.Init(newProvider);
                 HardwareUtils.GetMachineID(newProvider);
 
-                Assert.Equal(invocations, newProvider.TotalInvocations);
-                Assert.Equal(invocations, provider.TotalInvocations);
+                Assert.AreEqual(invocations, newProvider.TotalInvocations);
+                Assert.AreEqual(invocations, provider.TotalInvocations);
             }
 
-            Assert.Equal(invocations, provider.TotalInvocations);
+            Assert.AreEqual(invocations, provider.TotalInvocations);
         }
 
-        [Fact]
+        [TestMethod]
         public void MachineInfoIsProcessedInBackground()
         {
             var provider = new ThreadRejectingMachineInfoProvider(Thread.CurrentThread.ManagedThreadId);
@@ -62,7 +63,7 @@ namespace Tests
             HardwareUtils.GetMachineID(provider);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProviderIsNotRetained()
         {
             WeakReference Setup()
@@ -75,10 +76,10 @@ namespace Tests
 
             var provider = Setup();
             GC.Collect();
-            Assert.False(provider.IsAlive);
+            Assert.IsFalse(provider.IsAlive);
         }
 
-        [Fact]
+        [TestMethod]
         public void GenerationIsThreadSafe()
         {
             var provider = new CountingMachineInfoProvider();
@@ -104,10 +105,10 @@ namespace Tests
                 threads[i].Join();
             }
 
-            Assert.Equal(3, provider.TotalInvocations);
+            Assert.AreEqual(3, provider.TotalInvocations);
         }
 
-        [Fact]
+        [TestMethod]
         public void GeneratesMessageObject()
         {
             var provider = new StaticMachineInfoProvider();
@@ -117,23 +118,23 @@ namespace Tests
             var kv = new KeyValue();
             using (var ms = new MemoryStream(messageObjectData))
             {
-                Assert.True(kv.TryReadAsBinary(ms));
+                Assert.IsTrue(kv.TryReadAsBinary(ms));
             }
 
-            Assert.Equal("MessageObject", kv.Name);
-            Assert.Equal("3018ba91fc5a72f8b3f74501af6dd6da331b6cbc", kv["BB3"].AsString());
-            Assert.Equal("5d7e7734714b64bd6d88fef3ddbbf7ab4a749c5e", kv["FF2"].AsString());
-            Assert.Equal("a1807176456746ba2a3f5574bf47677a919dab49", kv["3B3"].AsString());
+            Assert.AreEqual("MessageObject", kv.Name);
+            Assert.AreEqual("3018ba91fc5a72f8b3f74501af6dd6da331b6cbc", kv["BB3"].AsString());
+            Assert.AreEqual("5d7e7734714b64bd6d88fef3ddbbf7ab4a749c5e", kv["FF2"].AsString());
+            Assert.AreEqual("a1807176456746ba2a3f5574bf47677a919dab49", kv["3B3"].AsString());
         }
 
-        [Fact]
+        [TestMethod]
         public void ExceptionBubblesUp()
         {
             var provider = new ThrowingMachineInfoProvider();
             HardwareUtils.Init(provider);
 
-            var exception = Assert.Throws<InvalidOperationException>(() => HardwareUtils.GetMachineID(provider));
-            Assert.Equal("This provider only throws.", exception.Message);
+            var exception = Assert.ThrowsException<InvalidOperationException>(() => HardwareUtils.GetMachineID(provider));
+            Assert.AreEqual("This provider only throws.", exception.Message);
         }
 
         sealed class CountingMachineInfoProvider : IMachineInfoProvider

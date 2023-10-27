@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamKit2;
-using Xunit;
 
 namespace Tests
 {
+    [TestClass]
     public class AsyncJobFacts
     {
         class Callback : CallbackMsg
@@ -16,18 +14,18 @@ namespace Tests
             public bool IsFinished { get; set; }
         }
 
-        [Fact]
+        [TestMethod]
         public void AsyncJobCtorRegistersJob()
         {
             SteamClient client = new SteamClient();
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
 
-            Assert.True( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should contain the jobid key" );
-            Assert.True( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should contain jobid key as a value type" );
+            Assert.IsTrue( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should contain the jobid key" );
+            Assert.IsTrue( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should contain jobid key as a value type" );
         }
 
-        [Fact]
+        [TestMethod]
         public void AysncJobCompletesOnCallback()
         {
             SteamClient client = new SteamClient();
@@ -37,12 +35,12 @@ namespace Tests
 
             client.PostCallback( new Callback { JobID = 123 } );
 
-            Assert.True( asyncTask.IsCompleted, "Async job should be completed after callback is posted" );
-            Assert.False( asyncTask.IsCanceled, "Async job should not be canceled after callback is posted" );
-            Assert.False( asyncTask.IsFaulted, "Async job should not be faulted after callback is posted" );
+            Assert.IsTrue( asyncTask.IsCompleted, "Async job should be completed after callback is posted" );
+            Assert.IsFalse( asyncTask.IsCanceled, "Async job should not be canceled after callback is posted" );
+            Assert.IsFalse( asyncTask.IsFaulted, "Async job should not be faulted after callback is posted" );
         }
 
-        [Fact]
+        [TestMethod]
         public void AsyncJobClearsOnCompletion()
         {
             SteamClient client = new SteamClient();
@@ -51,11 +49,11 @@ namespace Tests
 
             client.PostCallback( new Callback { JobID = 123 } );
 
-            Assert.False( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should no longer contain jobid key after callback is posted" );
-            Assert.False( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should no longer contain jobid key (as value type) after callback is posted" );
+            Assert.IsFalse( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should no longer contain jobid key after callback is posted" );
+            Assert.IsFalse( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should no longer contain jobid key (as value type) after callback is posted" );
         }
 
-        [Fact]
+        [TestMethod]
         public async Task AsyncJobClearsOnTimeout()
         {
             SteamClient client = new SteamClient();
@@ -66,11 +64,11 @@ namespace Tests
 
             await Task.Delay( TimeSpan.FromSeconds( 5 ) );
 
-            Assert.False( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should no longer contain jobid key after timeout" );
-            Assert.False( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should no longer contain jobid key (as value type) after timeout" );
+            Assert.IsFalse( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should no longer contain jobid key after timeout" );
+            Assert.IsFalse( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should no longer contain jobid key (as value type) after timeout" );
         }
 
-        [Fact]
+        [TestMethod]
         public async Task AsyncJobCancelsOnSetFailedTimeout()
         {
             SteamClient client = new SteamClient();
@@ -80,15 +78,15 @@ namespace Tests
 
             asyncJob.SetFailed( dueToRemoteFailure: false );
             
-            Assert.True( asyncTask.IsCompleted, "Async job should be completed on message timeout" );
-            Assert.True( asyncTask.IsCanceled, "Async job should be canceled on message timeout" );
-            Assert.False( asyncTask.IsFaulted, "Async job should not be faulted on message timeout" );
+            Assert.IsTrue( asyncTask.IsCompleted, "Async job should be completed on message timeout" );
+            Assert.IsTrue( asyncTask.IsCanceled, "Async job should be canceled on message timeout" );
+            Assert.IsFalse( asyncTask.IsFaulted, "Async job should not be faulted on message timeout" );
 
-            await Assert.ThrowsAsync<TaskCanceledException>( async () => await asyncTask );
+            await Assert.ThrowsExceptionAsync<TaskCanceledException>( async () => await asyncTask );
         }
 
-        [Fact]
-        public void AsyncJobGivesBackCallback()
+        [TestMethod]
+        public async Task AsyncJobGivesBackCallback()
         {
             SteamClient client = new SteamClient();
 
@@ -99,10 +97,10 @@ namespace Tests
 
             client.PostCallback( ourCallback );
 
-            Assert.Same( jobTask.Result, ourCallback );
+            Assert.AreSame( await jobTask, ourCallback );
         }
 
-        [Fact]
+        [TestMethod]
         public async Task AsyncJobTimesout()
         {
             SteamClient client = new SteamClient();
@@ -115,24 +113,24 @@ namespace Tests
 
             await Task.Delay( TimeSpan.FromSeconds( 5 ) );
 
-            Assert.True( asyncTask.IsCompleted, "Async job should be completed after 5 seconds of a 1 second job timeout" );
-            Assert.True( asyncTask.IsCanceled, "Async job should be canceled after 5 seconds of a 1 second job timeout" );
-            Assert.False( asyncTask.IsFaulted, "Async job should not be faulted after 5 seconds of a 1 second job timeout" );
+            Assert.IsTrue( asyncTask.IsCompleted, "Async job should be completed after 5 seconds of a 1 second job timeout" );
+            Assert.IsTrue( asyncTask.IsCanceled, "Async job should be canceled after 5 seconds of a 1 second job timeout" );
+            Assert.IsFalse( asyncTask.IsFaulted, "Async job should not be faulted after 5 seconds of a 1 second job timeout" );
 
-            await Assert.ThrowsAsync<TaskCanceledException>( async () => await asyncTask );
+            await Assert.ThrowsExceptionAsync<TaskCanceledException>( async () => await asyncTask );
         }
 
-        [Fact]
+        [TestMethod]
         public void AsyncJobThrowsExceptionOnNullCallback()
         {
             SteamClient client = new SteamClient();
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
 
-            Assert.Throws<ArgumentNullException>( () => asyncJob.AddResult( null ) );
+            Assert.ThrowsException<ArgumentNullException>( () => asyncJob.AddResult( null ) );
         }
 
-        [Fact]
+        [TestMethod]
         public async Task AsyncJobThrowsFailureExceptionOnFailure()
         {
             SteamClient client = new SteamClient();
@@ -142,14 +140,14 @@ namespace Tests
 
             asyncJob.SetFailed( dueToRemoteFailure: true );
 
-            Assert.True( asyncTask.IsCompleted, "Async job should be completed after job failure" );
-            Assert.False( asyncTask.IsCanceled, "Async job should not be canceled after job failure" );
-            Assert.True( asyncTask.IsFaulted, "Async job should be faulted after job failure" );
+            Assert.IsTrue( asyncTask.IsCompleted, "Async job should be completed after job failure" );
+            Assert.IsFalse( asyncTask.IsCanceled, "Async job should not be canceled after job failure" );
+            Assert.IsTrue( asyncTask.IsFaulted, "Async job should be faulted after job failure" );
 
-            await Assert.ThrowsAsync<AsyncJobFailedException>( async () => await asyncTask );
+            await Assert.ThrowsExceptionAsync<AsyncJobFailedException>( async () => await asyncTask );
         }
 
-        [Fact]
+        [TestMethod]
         public void AsyncJobMultipleFinishedOnEmptyPredicate()
         {
             SteamClient client = new SteamClient();
@@ -159,13 +157,13 @@ namespace Tests
 
             bool jobFinished = asyncJob.AddResult( new Callback { JobID = 123 } );
 
-            Assert.True( jobFinished, "Async job should inform that it is completed when completion predicate is always true and a result is given" );
-            Assert.True( asyncTask.IsCompleted, "Async job should be completed when empty predicate result is given" );
-            Assert.False( asyncTask.IsCanceled, "Async job should not be canceled when empty predicate result is given" );
-            Assert.False( asyncTask.IsFaulted, "Async job should not be faulted when empty predicate result is given" );
+            Assert.IsTrue( jobFinished, "Async job should inform that it is completed when completion predicate is always true and a result is given" );
+            Assert.IsTrue( asyncTask.IsCompleted, "Async job should be completed when empty predicate result is given" );
+            Assert.IsFalse( asyncTask.IsCanceled, "Async job should not be canceled when empty predicate result is given" );
+            Assert.IsFalse( asyncTask.IsFaulted, "Async job should not be faulted when empty predicate result is given" );
         }
 
-        [Fact]
+        [TestMethod]
         public void AsyncJobMultipleFinishedOnPredicate()
         {
             SteamClient client = new SteamClient();
@@ -175,20 +173,20 @@ namespace Tests
 
             bool jobFinished = asyncJob.AddResult( new Callback { JobID = 123, IsFinished = false } );
 
-            Assert.False( jobFinished, "Async job should not inform that it is finished when completion predicate is false after a result is given" );
-            Assert.False( asyncTask.IsCompleted, "Async job should not be completed when completion predicate is false" );
-            Assert.False( asyncTask.IsCanceled, "Async job should not be canceled when completion predicate is false" );
-            Assert.False( asyncTask.IsFaulted, "Async job should not be faulted when completion predicate is false" );
+            Assert.IsFalse( jobFinished, "Async job should not inform that it is finished when completion predicate is false after a result is given" );
+            Assert.IsFalse( asyncTask.IsCompleted, "Async job should not be completed when completion predicate is false" );
+            Assert.IsFalse( asyncTask.IsCanceled, "Async job should not be canceled when completion predicate is false" );
+            Assert.IsFalse( asyncTask.IsFaulted, "Async job should not be faulted when completion predicate is false" );
 
             jobFinished = asyncJob.AddResult( new Callback { JobID = 123, IsFinished = true } );
 
-            Assert.True( jobFinished, "Async job should inform completion when completion predicat is passed after a result is given" );
-            Assert.True( asyncTask.IsCompleted, "Async job should be completed when completion predicate is true" );
-            Assert.False( asyncTask.IsCanceled, "Async job should not be canceled when completion predicate is true" );
-            Assert.False( asyncTask.IsFaulted, "Async job should not be faulted when completion predicate is true" );
+            Assert.IsTrue( jobFinished, "Async job should inform completion when completion predicat is passed after a result is given" );
+            Assert.IsTrue( asyncTask.IsCompleted, "Async job should be completed when completion predicate is true" );
+            Assert.IsFalse( asyncTask.IsCanceled, "Async job should not be canceled when completion predicate is true" );
+            Assert.IsFalse( asyncTask.IsFaulted, "Async job should not be faulted when completion predicate is true" );
         }
 
-        [Fact]
+        [TestMethod]
         public void AsyncJobMultipleClearsOnCompletion()
         {
             SteamClient client = new SteamClient();
@@ -197,11 +195,11 @@ namespace Tests
 
             client.PostCallback( new Callback { JobID = 123, IsFinished = true } );
 
-            Assert.False( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should not contain jobid key for AsyncJobMultiple on completion" );
-            Assert.False( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should not contain jobid key (as value type) for AsyncJobMultiple on completion" );
+            Assert.IsFalse( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should not contain jobid key for AsyncJobMultiple on completion" );
+            Assert.IsFalse( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should not contain jobid key (as value type) for AsyncJobMultiple on completion" );
         }
 
-        [Fact]
+        [TestMethod]
         public async Task AsyncJobMultipleClearsOnTimeout()
         {
             SteamClient client = new SteamClient();
@@ -212,11 +210,11 @@ namespace Tests
 
             await Task.Delay( TimeSpan.FromSeconds( 5 ) );
 
-            Assert.False( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should no longer contain jobid key after timeout" );
-            Assert.False( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should no longer contain jobid key (as value type) after timeout" );
+            Assert.IsFalse( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should no longer contain jobid key after timeout" );
+            Assert.IsFalse( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should no longer contain jobid key (as value type) after timeout" );
         }
 
-        [Fact]
+        [TestMethod]
         public async Task AsyncJobMultipleExtendsTimeoutOnMessage()
         {
             SteamClient client = new SteamClient();
@@ -231,9 +229,9 @@ namespace Tests
             await Task.Delay( TimeSpan.FromSeconds( 3 ) );
 
             // we should not be completed or canceled yet
-            Assert.False( asyncTask.IsCompleted, "AsyncJobMultiple should not be completed after 3 seconds of 5 second timeout" );
-            Assert.False( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled after 3 seconds of 5 second timeout" );
-            Assert.False( asyncTask.IsFaulted, "AsyncJobMultiple should not be faulted after 3 econds of 5 second timeout" );
+            Assert.IsFalse( asyncTask.IsCompleted, "AsyncJobMultiple should not be completed after 3 seconds of 5 second timeout" );
+            Assert.IsFalse( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled after 3 seconds of 5 second timeout" );
+            Assert.IsFalse( asyncTask.IsFaulted, "AsyncJobMultiple should not be faulted after 3 econds of 5 second timeout" );
 
             // give result 1 of 2
             asyncJob.AddResult( new Callback { JobID = 123, IsFinished = false } );
@@ -242,19 +240,19 @@ namespace Tests
             await Task.Delay( TimeSpan.FromSeconds( 5 ) );
 
             // we still shouldn't be completed or canceled (timed out)
-            Assert.False( asyncTask.IsCompleted, "AsyncJobMultiple should not be completed 5 seconds after a result was added (result should extend timeout)" );
-            Assert.False( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled 5 seconds after a result was added (result should extend timeout)" );
-            Assert.False( asyncTask.IsFaulted, "AsyncJobMultiple should not be faulted 5 seconds aftr a result was added (result should extend timeout)" );
+            Assert.IsFalse( asyncTask.IsCompleted, "AsyncJobMultiple should not be completed 5 seconds after a result was added (result should extend timeout)" );
+            Assert.IsFalse( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled 5 seconds after a result was added (result should extend timeout)" );
+            Assert.IsFalse( asyncTask.IsFaulted, "AsyncJobMultiple should not be faulted 5 seconds aftr a result was added (result should extend timeout)" );
 
             asyncJob.AddResult( new Callback { JobID = 123, IsFinished = true } );
 
             // we should be completed but not canceled or faulted
-            Assert.True( asyncTask.IsCompleted, "AsyncJobMultiple should be completed when final result is added to set" );
-            Assert.False( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled when final result is added to set" );
-            Assert.False( asyncTask.IsFaulted, "AsyncJobMultiple should not be faulted when final result is added to set" );
+            Assert.IsTrue( asyncTask.IsCompleted, "AsyncJobMultiple should be completed when final result is added to set" );
+            Assert.IsFalse( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled when final result is added to set" );
+            Assert.IsFalse( asyncTask.IsFaulted, "AsyncJobMultiple should not be faulted when final result is added to set" );
         }
 
-        [Fact]
+        [TestMethod]
         public async Task AsyncJobMultipleTimesout()
         {
             SteamClient client = new SteamClient();
@@ -267,14 +265,14 @@ namespace Tests
 
             await Task.Delay( TimeSpan.FromSeconds( 5 ) );
 
-            Assert.True( asyncTask.IsCompleted, "AsyncJobMultiple should be completed after 5 seconds of a 1 second job timeout" );
-            Assert.True( asyncTask.IsCanceled, "AsyncJobMultiple should be canceled after 5 seconds of a 1 second job timeout" );
-            Assert.False( asyncTask.IsFaulted, "AsyncJobMultiple should not be faulted after 5 seconds of a 1 second job timeout" );
+            Assert.IsTrue( asyncTask.IsCompleted, "AsyncJobMultiple should be completed after 5 seconds of a 1 second job timeout" );
+            Assert.IsTrue( asyncTask.IsCanceled, "AsyncJobMultiple should be canceled after 5 seconds of a 1 second job timeout" );
+            Assert.IsFalse( asyncTask.IsFaulted, "AsyncJobMultiple should not be faulted after 5 seconds of a 1 second job timeout" );
 
-            await Assert.ThrowsAsync<TaskCanceledException>( async () => await asyncTask );
+            await Assert.ThrowsExceptionAsync<TaskCanceledException>( async () => await asyncTask );
         }
 
-        [Fact]
+        [TestMethod]
         public async Task AsyncJobMultipleCompletesOnIncompleteResult()
         {
             SteamClient client = new SteamClient();
@@ -294,20 +292,20 @@ namespace Tests
 
             await Task.Delay( TimeSpan.FromSeconds( 5 ) );
 
-            Assert.True( asyncTask.IsCompleted, "AsyncJobMultiple should be completed on partial (timed out) result set" );
-            Assert.False( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled on partial (timed out) result set" );
-            Assert.False( asyncTask.IsFaulted, "AsyncJobMultiple should not be faulted on a partial (failed) result set" );
+            Assert.IsTrue( asyncTask.IsCompleted, "AsyncJobMultiple should be completed on partial (timed out) result set" );
+            Assert.IsFalse( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled on partial (timed out) result set" );
+            Assert.IsFalse( asyncTask.IsFaulted, "AsyncJobMultiple should not be faulted on a partial (failed) result set" );
 
-            AsyncJobMultiple<Callback>.ResultSet result = asyncTask.Result;
+            AsyncJobMultiple<Callback>.ResultSet result = await asyncTask;
 
-            Assert.False( result.Complete, "ResultSet should be incomplete" );
-            Assert.False( result.Failed, "ResultSet should not be failed" );
-            Assert.Single( result.Results );
-            Assert.Contains( onlyResult, result.Results );
+            Assert.IsFalse( result.Complete, "ResultSet should be incomplete" );
+            Assert.IsFalse( result.Failed, "ResultSet should not be failed" );
+            Assert.IsTrue( result.Results.Count == 1 );
+            Assert.IsTrue( result.Results.Contains( onlyResult ) );
         }
 
-        [Fact]
-        public void AsyncJobMultipleCompletesOnIncompleteResultAndFailure()
+        [TestMethod]
+        public async Task AsyncJobMultipleCompletesOnIncompleteResultAndFailure()
         {
             SteamClient client = new SteamClient();
             client.jobManager.SetTimeoutsEnabled( true );
@@ -323,29 +321,29 @@ namespace Tests
 
             asyncJob.SetFailed( dueToRemoteFailure: true );
 
-            Assert.True( asyncTask.IsCompleted, "AsyncJobMultiple should be completed on partial (failed) result set" );
-            Assert.False( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled on partial (failed) result set" );
-            Assert.False( asyncTask.IsFaulted, "AsyncJobMultiple should not be faulted on a partial (failed) result set" );
+            Assert.IsTrue( asyncTask.IsCompleted, "AsyncJobMultiple should be completed on partial (failed) result set" );
+            Assert.IsFalse( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled on partial (failed) result set" );
+            Assert.IsFalse( asyncTask.IsFaulted, "AsyncJobMultiple should not be faulted on a partial (failed) result set" );
 
-            AsyncJobMultiple<Callback>.ResultSet result = asyncTask.Result;
+            AsyncJobMultiple<Callback>.ResultSet result = await asyncTask;
 
-            Assert.False( result.Complete, "ResultSet should be incomplete" );
-            Assert.True( result.Failed, "ResultSet should be failed" );
-            Assert.Single( result.Results );
-            Assert.Contains( onlyResult, result.Results );
+            Assert.IsFalse( result.Complete, "ResultSet should be incomplete" );
+            Assert.IsTrue( result.Failed, "ResultSet should be failed" );
+            Assert.IsTrue( result.Results.Count == 1 );
+            Assert.IsTrue( result.Results.Contains( onlyResult ) );
         }
 
-        [Fact]
+        [TestMethod]
         public void AsyncJobMultipleThrowsExceptionOnNullCallback()
         {
             SteamClient client = new SteamClient();
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => true );
 
-            Assert.Throws<ArgumentNullException>( () => asyncJob.AddResult( null ) );
+            Assert.ThrowsException<ArgumentNullException>( () => asyncJob.AddResult( null ) );
         }
 
-        [Fact]
+        [TestMethod]
         public async Task AsyncJobMultipleThrowsFailureExceptionOnFailure()
         {
             SteamClient client = new SteamClient();
@@ -355,14 +353,14 @@ namespace Tests
 
             asyncJob.SetFailed( dueToRemoteFailure: true );
 
-            Assert.True( asyncTask.IsCompleted, "AsyncJobMultiple should be completed after job failure" );
-            Assert.False( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled after job failure" );
-            Assert.True( asyncTask.IsFaulted, "AsyncJobMultiple should be faulted after job failure" );
+            Assert.IsTrue( asyncTask.IsCompleted, "AsyncJobMultiple should be completed after job failure" );
+            Assert.IsFalse( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled after job failure" );
+            Assert.IsTrue( asyncTask.IsFaulted, "AsyncJobMultiple should be faulted after job failure" );
 
-            await Assert.ThrowsAsync<AsyncJobFailedException>( async () => await asyncTask );
+            await Assert.ThrowsExceptionAsync<AsyncJobFailedException>( async () => await asyncTask );
         }
 
-        [Fact]
+        [TestMethod]
         public void AsyncJobContinuesAsynchronously()
         {
             SteamClient client = new SteamClient();
@@ -381,11 +379,11 @@ namespace Tests
 
             WaitForTaskWithoutRunningInline( continuation );
 
-            Assert.NotEqual( -1, continuationThreadID );
-            Assert.NotEqual( completionThreadID, continuationThreadID );
+            Assert.AreNotEqual( -1, continuationThreadID );
+            Assert.AreNotEqual( completionThreadID, continuationThreadID );
         }
 
-        [Fact]
+        [TestMethod]
         public void AsyncJobMultipleContinuesAsynchronously()
         {
             SteamClient client = new SteamClient();
@@ -404,8 +402,8 @@ namespace Tests
 
             WaitForTaskWithoutRunningInline( continuation );
 
-            Assert.NotEqual( -1, continuationThreadID );
-            Assert.NotEqual( completionThreadID, continuationThreadID );
+            Assert.AreNotEqual( -1, continuationThreadID );
+            Assert.AreNotEqual( completionThreadID, continuationThreadID );
         }
 
         static void WaitForTaskWithoutRunningInline( Task task )

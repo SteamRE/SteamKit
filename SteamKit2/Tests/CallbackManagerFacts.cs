@@ -1,9 +1,10 @@
 ﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamKit2;
-using Xunit;
 
 namespace Tests
 {
+    [TestClass]
     public class CallbackManagerFacts
     {
         public class CallbackForTest : CallbackMsg
@@ -20,7 +21,7 @@ namespace Tests
         readonly SteamClient client;
         readonly CallbackManager mgr;
 
-        [Fact]
+        [TestMethod]
         public void PostedCallbackTriggersAction()
         {
             var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
@@ -28,7 +29,7 @@ namespace Tests
             var didCall = false;
             Action<CallbackForTest> action = delegate(CallbackForTest cb)
             {
-                Assert.Equal(callback.UniqueID, cb.UniqueID);
+                Assert.AreEqual(callback.UniqueID, cb.UniqueID);
                 didCall = true;
             };
 
@@ -37,10 +38,10 @@ namespace Tests
                 PostAndRunCallback(callback);
             }
 
-            Assert.True(didCall);
+            Assert.IsTrue(didCall);
         }
 
-        [Fact]
+        [TestMethod]
         public void PostedCallbackTriggersAction_CatchAll()
         {
             var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
@@ -48,9 +49,9 @@ namespace Tests
             var didCall = false;
             Action<CallbackMsg> action = delegate(CallbackMsg cb)
             {
-                Assert.IsType<CallbackForTest>(cb);
+                Assert.IsInstanceOfType<CallbackForTest>(cb);
                 var cft = (CallbackForTest)cb;
-                Assert.Equal(callback.UniqueID, cft.UniqueID);
+                Assert.AreEqual(callback.UniqueID, cft.UniqueID);
                 didCall = true;
             };
 
@@ -59,10 +60,10 @@ namespace Tests
                 PostAndRunCallback(callback);
             }
 
-            Assert.True(didCall);
+            Assert.IsTrue(didCall);
         }
 
-        [Fact]
+        [TestMethod]
         public void PostedCallbackTriggersActionForExplicitJobIDInvalid()
         {
             var jobID = new JobID(123456);
@@ -71,8 +72,8 @@ namespace Tests
             var didCall = false;
             Action<CallbackForTest> action = delegate(CallbackForTest cb)
             {
-                Assert.Equal(callback.UniqueID, cb.UniqueID);
-                Assert.Equal(jobID, cb.JobID);
+                Assert.AreEqual(callback.UniqueID, cb.UniqueID);
+                Assert.AreEqual(jobID, cb.JobID);
                 didCall = true;
             };
 
@@ -81,10 +82,10 @@ namespace Tests
                 PostAndRunCallback(callback);
             }
 
-            Assert.True(didCall);
+            Assert.IsTrue(didCall);
         }
 
-        [Fact]
+        [TestMethod]
         public void PostedCallbackWithJobIDTriggersActionWhenNoJobIDSpecified()
         {
             var jobID = new JobID(123456);
@@ -93,8 +94,8 @@ namespace Tests
             var didCall = false;
             Action<CallbackForTest> action = delegate(CallbackForTest cb)
             {
-                Assert.Equal(callback.UniqueID, cb.UniqueID);
-                Assert.Equal(jobID, cb.JobID);
+                Assert.AreEqual(callback.UniqueID, cb.UniqueID);
+                Assert.AreEqual(jobID, cb.JobID);
                 didCall = true;
             };
 
@@ -103,10 +104,10 @@ namespace Tests
                 PostAndRunCallback(callback);
             }
 
-            Assert.True(didCall);
+            Assert.IsTrue(didCall);
         }
 
-        [Fact]
+        [TestMethod]
         public void PostedCallbackDoesNotTriggerActionForWrongJobID()
         {
             var jobID = new JobID(123456);
@@ -123,10 +124,10 @@ namespace Tests
                 PostAndRunCallback(callback);
             }
 
-            Assert.False(didCall);
+            Assert.IsFalse(didCall);
         }
 
-        [Fact]
+        [TestMethod]
         public void PostedCallbackWithJobIDTriggersCallbackForJobID()
         {
             var jobID = new JobID(123456);
@@ -135,8 +136,8 @@ namespace Tests
             var didCall = false;
             Action<CallbackForTest> action = delegate(CallbackForTest cb)
             {
-                Assert.Equal(callback.UniqueID, cb.UniqueID);
-                Assert.Equal(jobID, cb.JobID);
+                Assert.AreEqual(callback.UniqueID, cb.UniqueID);
+                Assert.AreEqual(jobID, cb.JobID);
                 didCall = true;
             };
 
@@ -145,10 +146,10 @@ namespace Tests
                 PostAndRunCallback(callback);
             }
 
-            Assert.True(didCall);
+            Assert.IsTrue(didCall);
         }
 
-        [Fact]
+        [TestMethod]
         public void SubscribedFunctionDoesNotRunWhenSubscriptionIsDisposed()
         {
             var callback = new CallbackForTest();
@@ -165,10 +166,10 @@ namespace Tests
             }
             PostAndRunCallback(callback);
 
-            Assert.Equal(1, callCount);
+            Assert.AreEqual(1, callCount);
         }
 
-        [Fact]
+        [TestMethod]
         public void PostedCallbacksTriggerActions()
         {
             var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
@@ -176,7 +177,7 @@ namespace Tests
             var numCallbacksRun = 0;
             Action<CallbackForTest> action = delegate (CallbackForTest cb)
             {
-                Assert.Equal(callback.UniqueID, cb.UniqueID);
+                Assert.AreEqual(callback.UniqueID, cb.UniqueID);
                 numCallbacksRun++;
             };
 
@@ -188,11 +189,11 @@ namespace Tests
                 }
 
                 mgr.RunWaitAllCallbacks(TimeSpan.Zero);
-                Assert.Equal(10, numCallbacksRun);
+                Assert.AreEqual(10, numCallbacksRun);
 
                 // Callbacks should have been freed.
                 mgr.RunWaitAllCallbacks(TimeSpan.Zero);
-                Assert.Equal(10, numCallbacksRun);
+                Assert.AreEqual(10, numCallbacksRun);
             }
         }
 

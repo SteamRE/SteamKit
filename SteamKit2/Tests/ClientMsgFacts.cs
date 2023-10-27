@@ -1,9 +1,10 @@
-﻿using SteamKit2;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SteamKit2;
 using SteamKit2.Internal;
-using Xunit;
 
 namespace Tests
 {
+    [TestClass]
     public class ClientMsgFacts
     {
         // this test vector is a packet meant for a ClientMsg<MsgClientChatEnter>
@@ -34,32 +35,32 @@ namespace Tests
             0x00,
         };
 
-        [Fact]
+        [TestMethod]
         public void PayloadReaderReadsNullTermString()
         {
             var msg = new ClientMsg<MsgClientChatEnter>( BuildStructMsg() );
 
             string chatName = msg.ReadNullTermString();
 
-            Assert.Equal( "Saxton Hell", chatName );
+            Assert.AreEqual( "Saxton Hell", chatName );
         }
 
-        [Fact]
+        [TestMethod]
         public void PayloadReaderDoesNotOverflowPastNullTermString()
         {
             var msg = new ClientMsg<MsgClientChatEnter>( BuildStructMsg() );
 
             string chatName = msg.ReadNullTermString();
 
-            Assert.Equal( "Saxton Hell", chatName );
+            Assert.AreEqual( "Saxton Hell", chatName );
 
             byte nextByte = msg.ReadByte();
             char mByte = (char)msg.ReadByte();
 
             // next byte should be a null
-            Assert.Equal( 0, nextByte );
+            Assert.AreEqual( 0, nextByte );
             // and the one after should be the beginning of a MessageObject
-            Assert.Equal( 'M', mByte );
+            Assert.AreEqual( 'M', mByte );
         }
 
         static IPacketMsg BuildStructMsg()

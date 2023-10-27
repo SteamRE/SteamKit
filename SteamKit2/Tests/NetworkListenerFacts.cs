@@ -1,4 +1,4 @@
-﻿using Xunit;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamKit2;
 using SteamKit2.Internal;
 
@@ -17,14 +17,16 @@ namespace Tests
         {
             LastOutgoingMessage = msgType;
 
-            Assert.NotNull(data);
-            Assert.NotEmpty(data);
+            Assert.IsNotNull(data);
+            Assert.IsTrue( data.Length > 0 );
         }
     }
-    
+
+
+    [TestClass]
     public class NetworkListenerFacts
     {
-        [Fact]
+        [TestMethod]
         public void NetworkListenerCallsOnOutgoingMessage()
         {
             var listener = new TestNetworkListener();
@@ -38,7 +40,7 @@ namespace Tests
             var clientMsg = new ClientMsgProtobuf<CMsgClientGamesPlayed>(EMsg.ClientGamesPlayedNoDataBlob);
             steamClient.Send(clientMsg);
 
-            Assert.Equal(EMsg.ClientGamesPlayedNoDataBlob, listener.LastOutgoingMessage);
+            Assert.AreEqual(EMsg.ClientGamesPlayedNoDataBlob, listener.LastOutgoingMessage);
         }
     }
 }

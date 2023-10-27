@@ -1,14 +1,15 @@
 ﻿using System;
 using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamKit2;
 using SteamKit2.Internal;
-using Xunit;
 
 namespace Tests
 {
+    [TestClass]
     public class CMClientFacts
     {
-        [Fact]
+        [TestMethod]
         public void GetPacketMsgReturnsPacketMsgForCryptoHandshake()
         {
             var messages = new[]
@@ -25,11 +26,11 @@ namespace Tests
                 var data = Serialize(msgHdr);
 
                 var packetMsg = CMClient.GetPacketMsg(data, DebugLogContext.Instance);
-                Assert.IsAssignableFrom<PacketMsg>(packetMsg);
+                Assert.IsInstanceOfType<PacketMsg>(packetMsg);
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void GetPacketMsgReturnsPacketClientMsgProtobufForMessagesWithProtomask()
         {
             var msg = MsgUtil.MakeMsg(EMsg.ClientLogOnResponse, protobuf: true);
@@ -37,10 +38,10 @@ namespace Tests
 
             var data = Serialize(msgHdr);
             var packetMsg = CMClient.GetPacketMsg(data, DebugLogContext.Instance);
-            Assert.IsAssignableFrom<PacketClientMsgProtobuf>(packetMsg);
+            Assert.IsInstanceOfType<PacketClientMsgProtobuf>( packetMsg );
         }
 
-        [Fact]
+        [TestMethod]
         public void GetPacketMsgReturnsPacketClientMsgForOtherMessages()
         {
             var msg = MsgUtil.MakeMsg(EMsg.ClientLogOnResponse, protobuf: false);
@@ -48,10 +49,10 @@ namespace Tests
 
             var data = Serialize(msgHdr);
             var packetMsg = CMClient.GetPacketMsg(data, DebugLogContext.Instance);
-            Assert.IsAssignableFrom<PacketClientMsg>(packetMsg);
+            Assert.IsInstanceOfType<PacketClientMsg>( packetMsg );
         }
 
-        [Fact]
+        [TestMethod]
         public void GetPacketMsgFailsWithNull()
         {
             var msg = MsgUtil.MakeMsg(EMsg.ClientLogOnResponse, protobuf: true);
@@ -60,15 +61,15 @@ namespace Tests
             var data = Serialize(msgHdr);
             Array.Copy(BitConverter.GetBytes(-1), 0, data, 4, 4);
             var packetMsg = CMClient.GetPacketMsg(data, DebugLogContext.Instance);
-            Assert.Null(packetMsg);
+            Assert.IsNull(packetMsg);
         }
 
-        [Fact]
+        [TestMethod]
         public void GetPacketMsgFailsWithTinyArray()
         {
             var data = new byte[3];
             var packetMsg = CMClient.GetPacketMsg(data, DebugLogContext.Instance);
-            Assert.Null(packetMsg);
+            Assert.IsNull(packetMsg);
         }
 
         static byte[] Serialize(ISteamSerializableHeader hdr)
