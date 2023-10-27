@@ -59,11 +59,8 @@ namespace Tests
             SteamClient client = new SteamClient();
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
-            asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
-
-            client.jobManager.CancelTimedoutJobs();
-
-            await Task.Delay( TimeSpan.FromMilliseconds( 200 ) );
+            asyncJob.Timeout = TimeSpan.FromMilliseconds( 50 );
+            await Task.Delay( asyncJob.Timeout );
 
             client.jobManager.CancelTimedoutJobs();
 
@@ -109,13 +106,11 @@ namespace Tests
             SteamClient client = new SteamClient();
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
-            asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
+            asyncJob.Timeout = TimeSpan.FromMilliseconds( 50 );
 
             Task<Callback> asyncTask = asyncJob.ToTask();
 
-            client.jobManager.CancelTimedoutJobs();
-
-            await Task.Delay( TimeSpan.FromMilliseconds( 200 ) );
+            await Task.Delay( asyncJob.Timeout );
 
             client.jobManager.CancelTimedoutJobs();
 
@@ -211,11 +206,9 @@ namespace Tests
             SteamClient client = new SteamClient();
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, ccall => true );
-            asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
+            asyncJob.Timeout = TimeSpan.FromMilliseconds( 50 );
 
-            client.jobManager.CancelTimedoutJobs();
-
-            await Task.Delay( TimeSpan.FromMilliseconds( 200 ) );
+            await Task.Delay( asyncJob.Timeout );
 
             client.jobManager.CancelTimedoutJobs();
 
@@ -228,15 +221,12 @@ namespace Tests
         {
             SteamClient client = new SteamClient();
 
+            var initialJobTimeout = TimeSpan.FromMilliseconds( 100 );
+
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
-            asyncJob.Timeout = TimeSpan.FromMilliseconds( 500 );
+            asyncJob.Timeout = initialJobTimeout;
 
             Task<AsyncJobMultiple<Callback>.ResultSet> asyncTask = asyncJob.ToTask();
-
-            client.jobManager.CancelTimedoutJobs();
-
-            // wait before we post any results to this job at all
-            await Task.Delay( TimeSpan.FromMilliseconds( 200 ) );
 
             client.jobManager.CancelTimedoutJobs();
 
@@ -250,7 +240,10 @@ namespace Tests
             asyncJob.AddResult( new Callback { JobID = 123, IsFinished = false } );
 
             // delay for what the original timeout would have been
-            await Task.Delay( TimeSpan.FromMilliseconds( 300 ) );
+            // Use Thread.Sleep to hopefully avoid timing issues with Task.Delay,
+            // because this test relies on the delay to yield before the asyncJob.Timeout elapses,
+            // which may not happen if the CI system is under load
+            Thread.Sleep( initialJobTimeout );
 
             client.jobManager.CancelTimedoutJobs();
 
@@ -274,11 +267,11 @@ namespace Tests
             SteamClient client = new SteamClient();
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => false );
-            asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
+            asyncJob.Timeout = TimeSpan.FromMilliseconds( 50 );
 
             Task<AsyncJobMultiple<Callback>.ResultSet> asyncTask = asyncJob.ToTask();
 
-            await Task.Delay( TimeSpan.FromMilliseconds( 200 ) );
+            await Task.Delay( asyncJob.Timeout );
 
             client.jobManager.CancelTimedoutJobs();
 
@@ -294,10 +287,8 @@ namespace Tests
         public async Task AsyncJobMultipleCompletesOnIncompleteResult()
         {
             SteamClient client = new SteamClient();
-            client.jobManager.SetTimeoutsEnabled( true );
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
-            asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
 
             Task<AsyncJobMultiple<Callback>.ResultSet> asyncTask = asyncJob.ToTask();
 
@@ -306,9 +297,9 @@ namespace Tests
             asyncJob.AddResult( onlyResult );
 
             // adding a result will extend the job's timeout, but we'll cheat here and decrease it
-            asyncJob.Timeout = TimeSpan.FromMilliseconds( 100 );
+            asyncJob.Timeout = TimeSpan.FromMilliseconds( 50 );
 
-            await Task.Delay( TimeSpan.FromMilliseconds( 200 ) );
+            await Task.Delay( asyncJob.Timeout );
 
             client.jobManager.CancelTimedoutJobs();
 
