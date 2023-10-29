@@ -123,7 +123,7 @@ namespace SteamKit2
         /// <summary>
         /// This is called periodically to cancel and clear out any jobs that have timed out (no response from Steam).
         /// </summary>
-        void CancelTimedoutJobs()
+        internal void CancelTimedoutJobs()
         {
             // ConcurrentDictionary.Values performs a full copy, so this iteration is safe
             // see: http://referencesource.microsoft.com/#mscorlib/system/Collections/Concurrent/ConcurrentDictionary.cs,fe55c11912af21d2
