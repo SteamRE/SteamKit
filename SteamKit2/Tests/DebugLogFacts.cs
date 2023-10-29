@@ -27,6 +27,7 @@ namespace Tests
         }
     }
 
+    [CollectionDefinition( nameof( DebugLogFacts ), DisableParallelization = true )]
     public class DebugLogFacts
     {
         [Fact, DebugLogSetupTeardown]
