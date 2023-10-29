@@ -60,7 +60,7 @@ namespace Tests
 
             DebugLog.AddListener( ( category, msg ) =>
             {
-                Assert.True( false, "Listener action called when it shouldn't have been" );
+                Assert.Fail( "Listener action called when it shouldn't have been" );
             } );
 
             DebugLog.WriteLine( "category", "msg" );
