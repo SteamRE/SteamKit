@@ -88,7 +88,7 @@ namespace Tests
         }
 
         [Fact]
-        public void AsyncJobGivesBackCallback()
+        public async Task AsyncJobGivesBackCallback()
         {
             SteamClient client = new SteamClient();
 
@@ -99,7 +99,7 @@ namespace Tests
 
             client.PostCallback( ourCallback );
 
-            Assert.Same( jobTask.Result, ourCallback );
+            Assert.Same( await jobTask, ourCallback );
         }
 
         [Fact]
@@ -298,7 +298,7 @@ namespace Tests
             Assert.False( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled on partial (timed out) result set" );
             Assert.False( asyncTask.IsFaulted, "AsyncJobMultiple should not be faulted on a partial (failed) result set" );
 
-            AsyncJobMultiple<Callback>.ResultSet result = asyncTask.Result;
+            AsyncJobMultiple<Callback>.ResultSet result = await asyncTask;
 
             Assert.False( result.Complete, "ResultSet should be incomplete" );
             Assert.False( result.Failed, "ResultSet should not be failed" );
@@ -307,7 +307,7 @@ namespace Tests
         }
 
         [Fact]
-        public void AsyncJobMultipleCompletesOnIncompleteResultAndFailure()
+        public async Task AsyncJobMultipleCompletesOnIncompleteResultAndFailure()
         {
             SteamClient client = new SteamClient();
             client.jobManager.SetTimeoutsEnabled( true );
@@ -327,7 +327,7 @@ namespace Tests
             Assert.False( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled on partial (failed) result set" );
             Assert.False( asyncTask.IsFaulted, "AsyncJobMultiple should not be faulted on a partial (failed) result set" );
 
-            AsyncJobMultiple<Callback>.ResultSet result = asyncTask.Result;
+            AsyncJobMultiple<Callback>.ResultSet result = await asyncTask;
 
             Assert.False( result.Complete, "ResultSet should be incomplete" );
             Assert.True( result.Failed, "ResultSet should be failed" );
