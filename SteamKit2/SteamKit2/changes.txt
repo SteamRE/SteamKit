@@ -1,18 +1,23 @@
 ------------------------------------------------------------------------------
-v 2.5.0			March 23 2022
+v 2.5.0			October 30 2023
 ------------------------------------------------------------------------------
 * Added `SteamApps.GetLegacyGameKey`.
-* Added `SteamUser. PlayingSessionStateCallback`.
+* Added `SteamUser.PlayingSessionStateCallback`.
 * Added ability to serialize depot manifests.
 * Added support for unauthenticated service methods.
 * Added `LogOnDetails.MachineName`.
 * Added support for new Steam authentication system.
 * Improved TCP connection reliability.
 * Update Steam enums and protobufs.
+* Added `BalanceDelayed` and `LongBalanceDelayed` in `WalletInfoCallback`
+* Deprecated `WebAPIUserNonce`, `RequestWebAPIUserNonce`, `SendMachineAuthResponse`, `UpdateMachineAuthCallback`
 
 Bug Fixes
 * Fixed nullability annotations on `PersonaStateCallback`.
 * Fixed sending service method notifications.
+* Fixed `machine_id` on Windows to be consistent with the Steam client.
+* Fixed SteamLanguageParser to generate BinaryWriter/Reader that gets disposed.
+* Fixed async jobs to use high precision timer for timeouts instead of wall clock..
 
 
 ------------------------------------------------------------------------------
