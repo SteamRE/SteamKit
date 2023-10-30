@@ -378,8 +378,10 @@ namespace SteamKit2
 
             logon.Body.access_token = details.AccessToken;
 
+#pragma warning disable CS0618 // SentryFileHash is obsolete
             logon.Body.sha_sentryfile = details.SentryFileHash;
             logon.Body.eresult_sentryfile = ( int )( details.SentryFileHash != null ? EResult.OK : EResult.FileNotFound );
+#pragma warning restore CS0618 // SentryFileHash is obsolete
 
 
             this.Client.Send( logon );
