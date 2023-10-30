@@ -74,6 +74,7 @@ namespace SteamKit2
             /// Gets or sets the sentry file hash for this logon attempt, or null if no sentry file is available.
             /// </summary>
             /// <value>The sentry file hash.</value>
+            [Obsolete( "Steam no longer accepts machine auth as of 2023, use SteamAuthentication." )]
             public byte[]? SentryFileHash { get; set; }
             /// <summary>
             /// Gets or sets the access token used to login. This a token that has been provided after a successful login using <see cref="Authentication"/>.
