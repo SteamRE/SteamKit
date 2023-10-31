@@ -11,7 +11,7 @@ SteamKit2 is a .NET library designed to interoperate with Valve's [Steam network
 
 ### Visual Studio
 
-Starting with version 1.2.2, SteamKit2 is distributed as a [NuGet package](https://www.nuget.org/packages/steamkit2).
+SteamKit2 is distributed as a [NuGet package](https://www.nuget.org/packages/steamkit2).
 
 Simply install SteamKit2 using the package manager in Visual Studio, and NuGet will add all the required dependencies and references to your project.  
   
@@ -34,25 +34,11 @@ SteamKit2 is released under the [LGPL-2.1 license](https://choosealicense.com/li
 
 ## Dependencies
 
-In order to use SteamKit2 at runtime, the following dependencies are required:
+In order to use SteamKit2 at runtime, [.NET 8.0 Runtime](https://dot.net/) or higher is required.
 
-  - A [.NET Standard 2.0](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-0#select-net-standard-version)-compatible runtime. At the time of writing, this is:
-      - .NET Framework 4.6.1 or higher required, .NET Framework 4.7.2 or higher recommended.
-      - .NET Core 2.0 or higher
-      - [Mono 5.4](https://mono-project.com) or higher
-  - [protobuf-net](https://github.com/protobuf-net/protobuf-net) ([NuGet package](https://www.nuget.org/packages/protobuf-net))
+If you're using the SteamKit2 NuGet package, dependencies should be resolved for you. See the [Installation Guide](https://github.com/SteamRE/SteamKit/wiki/Installation) for more information.
 
-Note: If you're using the SteamKit2 NuGet package, the protobuf-net dependency should be resolved for you. See the [Installation Guide](https://github.com/SteamRE/SteamKit/wiki/Installation) for more information.
-
-
-To compile SteamKit2, the following is required:
-
-  - [.NET 6.0 SDK](https://dot.net/) or higher.
-  - A C# IDE is optional but recommended:
-      - [Visual Studio 2022](https://www.visualstudio.com/vs/whatsnew/) (on Windows)
-      - [Visual Studio 2022 for Mac (≥ Preview 3)](https://www.visualstudio.com/vs/visual-studio-mac/) (on macOS)
-      - [Visual Studio Code](https://code.visualstudio.com) with [the C#/OmniSharp extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) (on Windows, macOS, and Linux)
-
+To compile SteamKit2, [.NET 8.0 SDK](https://dot.net/) is required.
 
 ## Contact
 

@@ -1,12 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net48;net6.0</TargetFrameworks>
+    <TargetFramework>net8.0</TargetFramework>
     <RollForward>LatestMajor</RollForward>
     <AssemblyOriginatorKeyFile>..\..\SteamKit.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <IsTestProject>true</IsTestProject>
-    <LangVersion Condition="'$(TargetFramework)' == 'net48'">8.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,10 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SteamKit2\SteamKit2.csproj" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Reference Include="Microsoft.CSharp" Condition="'$(TargetFramework)' == 'net48'" />
   </ItemGroup>
 
   <ItemGroup>

@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [ windows-latest, macos-latest, ubuntu-latest ]
-        sdk: [ 6.0.x ]
+        sdk: [ 8.0.x ]
         configuration: [ Debug, Release ]
       fail-fast: false
 
@@ -50,11 +50,7 @@ jobs:
 
     - name: Run Tests
       if: matrix.configuration == 'Debug'
-      run: dotnet test --verbosity normal --framework net6.0 SteamKit2/Tests/Tests.csproj
-
-    - name: Run Tests (.NET Framework)
-      if: matrix.configuration == 'Debug' && startsWith(matrix.os, 'windows-')
-      run: dotnet test --verbosity normal --framework net48 SteamKit2/Tests/Tests.csproj
+      run: dotnet test --verbosity normal SteamKit2/Tests/Tests.csproj
 
   steamkit2-artifacts:
     name: Create NuGet Package
@@ -69,7 +65,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 8.0.x
 
     - name: Create NuGet Package
       run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
@@ -93,7 +89,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 8.0.x
 
     - name: Publish NetHookAnalyzer2
       run: dotnet publish --configuration Release --runtime win-x64 --self-contained Resources/NetHookAnalyzer2/NetHookAnalyzer2/NetHookAnalyzer2.csproj /p:PublishSingleFile=True
@@ -159,7 +155,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 8.0.x
 
     - name: Create NuGet Package
       run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
