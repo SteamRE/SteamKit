@@ -23,7 +23,6 @@ enum EMsg
 	WebAPIJobResponse = 134;
 	ClientSessionStart = 135;
 	ClientSessionEnd = 136;
-	ClientSessionUpdateAuthTicket = 137; removed "renamed to ClientSessionUpdate"
 	ClientSessionUpdate = 137;
 	StatsDeprecated = 138; removed
 	Ping = 139;
@@ -109,7 +108,6 @@ enum EMsg
 	AISRefreshContentDescription = 401; removed
 	AISRequestContentDescription = 402;
 	AISUpdateAppInfo = 403;
-	AISUpdatePackageInfo = 404; removed "renamed to AISUpdatePackageCosts"
 	AISUpdatePackageCosts = 404; obsolete
 	AISGetPackageChangeNumber = 405;
 	AISGetPackageChangeNumberResponse = 406;
@@ -181,7 +179,6 @@ enum EMsg
 	AllowUserToPlayResponse = 551;
 	AMVerfiyUser = 552;
 	AMClientNotPlaying = 553;
-	ClientRequestFriendship = 554; obsolete "Renamed to AMClientRequestFriendship"
 	AMClientRequestFriendship = 554;
 	AMRelayPublishStatus = 555;
 	AMResetCommunityContent = 556; removed
@@ -690,9 +687,7 @@ enum EMsg
 	GCInterAppMessage = 2219;
 	GCGetEmailTemplate = 2220;
 	GCGetEmailTemplateResponse = 2221;
-	ISRelayToGCH = 2222; removed "renamed to GCHRelay"
 	GCHRelay = 2222;
-	GCHRelayClientToIS = 2223; removed "renamed to GCHRelayToClient"
 	GCHRelayToClient = 2223;
 	GCHUpdateSession = 2224;
 	GCHRequestUpdateSession = 2225;
@@ -836,16 +831,13 @@ enum EMsg
 	AMSetProfileURL = 4005;
 	AMGetAccountEmailAddress = 4006;
 	AMGetAccountEmailAddressResponse = 4007;
-	AMRequestFriendData = 4008; removed "renamed to AMRequestClanData"
 	AMRequestClanData = 4008;
 	AMRouteToClients = 4009;
 	AMLeaveClan = 4010;
 	AMClanPermissions = 4011;
 	AMClanPermissionsResponse = 4012;
-	AMCreateClanEvent = 4013; obsolete "renamed to AMCreateClanEventDummyForRateLimiting"
 	AMCreateClanEventDummyForRateLimiting = 4013;
 	AMCreateClanEventResponse = 4014; obsolete
-	AMUpdateClanEvent = 4015; obsolete "renamed to AMUpdateClanEventDummyForRateLimiting"
 	AMUpdateClanEventDummyForRateLimiting = 4015;
 	AMUpdateClanEventResponse = 4016; obsolete
 	AMGetClanEvents = 4017; obsolete
@@ -904,9 +896,7 @@ enum EMsg
 	AMGetAccountLinksResponse = 4070;
 	AMSetAccountLinks = 4071;
 	AMSetAccountLinksResponse = 4072;
-	AMGetUserGameStats = 4073; obsolete "renamed to UGSGetUserGameStats"
 	UGSGetUserGameStats = 4073;
-	AMGetUserGameStatsResponse = 4074; obsolete "renamed to UGSGetUserGameStatsResponse"
 	UGSGetUserGameStatsResponse = 4074;
 	AMCheckClanMembership = 4075;
 	AMGetClanMembers = 4076;
@@ -952,7 +942,6 @@ enum EMsg
 	AMGetCommunityPrivacyState = 4116;
 	AMGetCommunityPrivacyStateResponse = 4117;
 	AMCheckClanInviteRateLimiting = 4118;
-	AMGetUserAchievementStatus = 4119; obsolete "renamed to UGSGetUserAchievementStatus"
 	UGSGetUserAchievementStatus = 4119;
 	AMGetIgnored = 4120;
 	AMGetIgnoredResponse = 4121;
@@ -1036,12 +1025,10 @@ enum EMsg
 	AMGetPurchaseStatus = 4206;
 	AMSupportIsAccountEnabled = 4209;
 	AMSupportIsAccountEnabledResponse = 4210;
-	AMGetUserStats = 4211; obsolete "renamed to UGSGetUserStats"
 	UGSGetUserStats = 4211;
 	AMSupportKickSession = 4212;
 	AMGSSearch = 4213;
 	MarketingMessageUpdate = 4216;
-	AMRouteFriendMsg = 4219; obsolete "renamed to ChatServerRouteFriendMsg"
 	ChatServerRouteFriendMsg = 4219;
 	AMTicketAuthRequestOrResponse = 4220;
 	AMVerifyDepotManagementRights = 4222;
@@ -1054,7 +1041,6 @@ enum EMsg
 	AMValidateEmailLink = 4231;
 	AMValidateEmailLinkResponse = 4232;
 	AMAddUsersToMarketingTreatment = 4234; removed
-	AMStoreUserStats = 4236; obsolete "renamed to UGSStoreUserStats"
 	UGSStoreUserStats = 4236;
 	AMGetUserGameplayInfo = 4237; removed
 	AMGetUserGameplayInfoResponse = 4238; removed
@@ -1083,7 +1069,6 @@ enum EMsg
 	AMCreateDispute = 4262;
 	AMCreateDisputeResponse = 4263; obsolete
 	AMClearDispute = 4264;
-	AMClearDisputeResponse = 4265; obsolete "renamed to AMCreateFinancialAdjustment"
 	AMCreateFinancialAdjustment = 4265;
 	AMPlayerNicknameList = 4266;
 	AMPlayerNicknameListResponse = 4267;
@@ -1097,7 +1082,6 @@ enum EMsg
 	AMGetGameMembersResponse = 4277;
 	AMGetSteamIDForMicroTxn = 4278;
 	AMGetSteamIDForMicroTxnResponse = 4279;
-	AMAddPublisherUser = 4280; obsolete "renamed to AMSetPartnerMember"
 	AMSetPartnerMember = 4280;
 	AMRemovePublisherUser = 4281;
 	AMGetUserLicenseList = 4282;
@@ -1128,7 +1112,6 @@ enum EMsg
 	AMIsAccountInCaptchaGracePeriodResponse = 4309;
 	AMAccountPS3Unlink = 4310;
 	AMAccountPS3UnlinkResponse = 4311;
-	AMStoreUserStatsResponse = 4312; obsolete "renamed to UGSStoreUserStatsResponse"
 	UGSStoreUserStatsResponse = 4312;
 	AMGetAccountPSNInfo = 4313;
 	AMGetAccountPSNInfoResponse = 4314;
@@ -1299,9 +1282,7 @@ enum EMsg
 	UFSDownloadFinishRequest = 5248;
 	UFSDownloadFinishResponse = 5249;
 	UFSFlushURLCache = 5250;
-	UFSUploadCommit = 5251; obsolete "renamed to ClientUFSUploadCommit"
 	ClientUFSUploadCommit = 5251;
-	UFSUploadCommitResponse = 5252; obsolete "renamed to ClientUFSUploadCommitResponse"
 	ClientUFSUploadCommitResponse = 5252;
 	UFSMigrateFileAppID = 5253;
 	UFSMigrateFileAppIDResponse = 5254;
@@ -1453,9 +1434,7 @@ enum EMsg
 	AMClientCreateFriendsGroupResponse = 5561;
 	AMClientDeleteFriendsGroup = 5562;
 	AMClientDeleteFriendsGroupResponse = 5563;
-	AMClientRenameFriendsGroup = 5564; obsolete "renamed to AMClientManageFriendsGroup"
 	AMClientManageFriendsGroup = 5564;
-	AMClientRenameFriendsGroupResponse = 5565; obsolete "renamed to AMClientManageFriendsGroupResponse"
 	AMClientManageFriendsGroupResponse = 5565;
 	AMClientAddFriendToGroup = 5566;
 	AMClientAddFriendToGroupResponse = 5567;
@@ -1487,9 +1466,7 @@ enum EMsg
 	ClientCreateAccountProtoResponse = 5591; obsolete
 	ClientGetNumberOfCurrentPlayersDP = 5592;
 	ClientGetNumberOfCurrentPlayersDPResponse = 5593;
-	ClientServiceMethod = 5594; obsolete "renamed to ClientServiceMethodLegacy"
 	ClientServiceMethodLegacy = 5594;
-	ClientServiceMethodResponse = 5595; obsolete "renamed to ClientServiceMethodLegacyResponse"
 	ClientServiceMethodLegacyResponse = 5595;
 	ClientFriendUserStatusPublished = 5596;
 	ClientCurrentUIMode = 5597;
@@ -1652,11 +1629,8 @@ enum EMsg
 	ClientUDSP2PSessionEnded = 7002;
 	UDSRenderUserAuth = 7003;
 	UDSRenderUserAuthResponse = 7004;
-	ClientUDSInviteToGame = 7005; obsolete "renamed to ClientInviteToGame"
 	ClientInviteToGame = 7005;
-	UDSFindSession = 7006; removed "renamed to UDSHasSession"
 	UDSHasSession = 7006;
-	UDSFindSessionResponse = 7007; removed "renamed to UDSHasSessionResponse"
 	UDSHasSessionResponse = 7007;
 
 	MPASBase = 7100;
@@ -1751,7 +1725,6 @@ enum EMsg
 	ClientUCMEnumerateUserSubscribedFilesWithUpdates = 7378;
 	ClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse = 7379;
 	UCMPublishedFileContentUpdated = 7380;
-	UCMPublishedFileUpdated = 7381; obsolete "renamed to ClientUCMPublishedFileUpdated"
 	ClientUCMPublishedFileUpdated = 7381;
 	ClientWorkshopItemChangesRequest = 7382;
 	ClientWorkshopItemChangesResponse = 7383;
@@ -1781,11 +1754,6 @@ enum EMsg
 	ClientFSEnumerateFollowingListResponse = 7520;
 	FSGetPendingNotificationCount = 7521;
 	FSGetPendingNotificationCountResponse = 7522;
-	ClientFSOfflineMessageNotification = 7523; obsolete "Renamed to ClientChatOfflineMessageNotification"
-	ClientFSRequestOfflineMessageCount = 7524; obsolete "Renamed to ClientChatRequestOfflineMessageCount"
-	ClientFSGetFriendMessageHistory = 7525; obsolete "Renamed to ClientChatGetFriendMessageHistory"
-	ClientFSGetFriendMessageHistoryResponse = 7526; obsolete "Renamed to ClientChatGetFriendMessageHistoryResponse"
-	ClientFSGetFriendMessageHistoryForOfflineMessages = 7527; obsolete "Renamed to ClientChatGetFriendMessageHistoryForOfflineMessages"
 	ClientChatOfflineMessageNotification = 7523;
 	ClientChatRequestOfflineMessageCount = 7524;
 	ClientChatGetFriendMessageHistory = 7525;
@@ -1793,7 +1761,6 @@ enum EMsg
 	ClientChatGetFriendMessageHistoryForOfflineMessages = 7527;
 	ClientFSGetFriendsSteamLevels = 7528;
 	ClientFSGetFriendsSteamLevelsResponse = 7529;
-	FSRequestFriendData = 7530; obsolete "renamed to AMRequestFriendData"
 	AMRequestFriendData = 7530;
 
 	DRMRange2 = 7600;
@@ -1957,7 +1924,6 @@ enum EMsg
 	ClientGetEmoticonList = 9330;
 	ClientEmoticonList = 9331;
 
-	ClientSharedLibraryBase = 9400; removed "renamed to SLCBase"
 	SLCBase = 9400;
 	SLCUserSessionStatus = 9400;
 	SLCRequestUserSessionStatus = 9401;
@@ -1981,7 +1947,6 @@ enum EMsg
 	ClientUnlockStreamingResponse = 9508;
 	RemoteClientAcceptEULA = 9509;
 	RemoteClientGetControllerConfig = 9510;
-	RemoteClientGetControllerConfigResposne = 9511; obsolete "renamed to RemoteClientGetControllerConfigResponse"
 	RemoteClientGetControllerConfigResponse = 9511;
 	RemoteClientStreamingEnabled = 9512;
 	ClientUnlockHEVC = 9513;

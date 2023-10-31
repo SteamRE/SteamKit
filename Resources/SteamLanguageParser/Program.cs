@@ -12,11 +12,15 @@ namespace SteamLanguageParser
         {
             string projectPath = Environment.GetEnvironmentVariable( "SteamRE" ) ?? args.SingleOrDefault();
 
+            projectPath = Path.GetFullPath( projectPath );
+
             if ( !Directory.Exists( projectPath ))
             {
                 throw new Exception( "Unable to find SteamRE project path, please specify the `SteamRE` environment variable" );
             }
 
+            Console.WriteLine( $"Generating to '{projectPath}'" );
+                
             ParseFile( projectPath, Path.Combine( "Resources", "SteamLanguage" ), "steammsg.steamd", "SteamKit2", Path.Combine( "SteamKit2", "SteamKit2", "Base", "Generated"), "SteamLanguage", true, new CSharpGen(), "cs" );
 
             //ParseFile( projectPath, Path.Combine("Resources", "SteamLanguage"), "steammsg.steamd", "SteamKit2", Path.Combine("SteamKit2", "ObjC"), "SteamLanguage", true, new ObjCInterfaceGen(), "h" );
