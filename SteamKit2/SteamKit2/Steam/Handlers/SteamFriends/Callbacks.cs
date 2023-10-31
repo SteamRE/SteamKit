@@ -174,12 +174,6 @@ namespace SteamKit2
             /// </summary>
             /// <value>The online session instances.</value>
             public uint OnlineSessionInstances { get; private set; }
-            /// <summary>
-            /// Gets the published session ID.
-            /// </summary>
-            /// <value>The published session ID.</value>
-            [Obsolete("published_instance_id was removed")]
-            public uint PublishedSessionID { get; private set; }
 
 
             internal PersonaStateCallback( CMsgClientPersonaState.Friend friend )

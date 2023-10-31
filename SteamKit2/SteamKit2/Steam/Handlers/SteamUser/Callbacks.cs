@@ -86,12 +86,6 @@ namespace SteamKit2
             public byte[]? Steam2Ticket { get; private set; }
 
             /// <summary>
-            /// Gets the WebAPI authentication user nonce.
-            /// </summary>
-            [Obsolete("Steam no longer sends webapi nonce as of October 2023, use SteamAuthentication.")]
-            public string? WebAPIUserNonce { get; private set; }
-
-            /// <summary>
             /// Gets the IP country code.
             /// </summary>
             public string? IPCountryCode { get; private set; }
@@ -139,10 +133,6 @@ namespace SteamKit2
                 this.Steam2Ticket = resp.steam2_ticket;
 
                 this.IPCountryCode = resp.ip_country_code;
-
-#pragma warning disable CS0618 // Type or member is obsolete
-                this.WebAPIUserNonce = resp.webapi_authenticate_user_nonce;
-#pragma warning restore CS0618 // Type or member is obsolete
 
                 this.VanityURL = resp.vanity_url;
 
@@ -195,31 +185,6 @@ namespace SteamKit2
             internal LoggedOffCallback( EResult result )
             {
                 this.Result = result;
-            }
-        }
-
-        /// <summary>
-        /// This callback is returned some time after logging onto the network.
-        /// </summary>
-        [Obsolete("Steam no longer sends new login keys as of March 2023, use SteamAuthentication.")]
-        public sealed class LoginKeyCallback : CallbackMsg
-        {
-            /// <summary>
-            /// Gets the login key.
-            /// </summary>
-            /// <value>The login key.</value>
-            public string LoginKey { get; private set; }
-            /// <summary>
-            /// Gets the unique ID.
-            /// </summary>
-            /// <value>The unique ID.</value>
-            public uint UniqueID { get; private set; }
-
-
-            internal LoginKeyCallback( CMsgClientNewLoginKey logKey )
-            {
-                this.LoginKey = logKey.login_key;
-                this.UniqueID = logKey.unique_id;
             }
         }
 
@@ -357,96 +322,6 @@ namespace SteamKit2
                 BalanceDelayed = wallet.balance_delayed;
                 LongBalance = wallet.balance64;
                 LongBalanceDelayed = wallet.balance64_delayed;
-            }
-        }
-
-        /// <summary>
-        /// This callback is received when the backend wants the client to update it's local machine authentication data.
-        /// </summary>
-        [Obsolete("Steam no longer sends machine auth as of 2023, use SteamAuthentication.")]
-        public sealed class UpdateMachineAuthCallback : CallbackMsg
-        {
-            /// <summary>
-            /// Represents various one-time-password details.
-            /// </summary>
-            public sealed class OTPDetails
-            {
-                /// <summary>
-                /// Gets the OTP type.
-                /// </summary>
-                public uint Type { get; internal set; }
-                /// <summary>
-                /// Gets the OTP identifier.
-                /// </summary>
-                public string? Identifier { get; internal set; }
-                /// <summary>
-                /// Gets the OTP shared secret.
-                /// </summary>
-                public byte[]? SharedSecret { get; internal set; }
-                /// <summary>
-                /// Gets the OTP time drift.
-                /// </summary>
-                public uint TimeDrift { get; internal set; }
-
-
-                /// <summary>
-                /// Implicitly converts <see cref="UpdateMachineAuthCallback.OTPDetails"/> into <see cref="MachineAuthDetails.OTPDetails"/>.
-                /// </summary>
-                /// <param name="otp">The details to convert.</param>
-                /// <returns></returns>
-                public static implicit operator MachineAuthDetails.OTPDetails( OTPDetails otp )
-                {
-                    return new MachineAuthDetails.OTPDetails
-                    {
-                        Identifier = otp.Identifier,
-                        Type = otp.Type,
-                    };
-                }
-            }
-
-            /// <summary>
-            /// Gets the sentry file data that should be written.
-            /// </summary>
-            public byte[] Data { get; private set; }
-
-            /// <summary>
-            /// Gets the number of bytes to write.
-            /// </summary>
-            public int BytesToWrite { get; private set; }
-            /// <summary>
-            /// Gets the offset to write to.
-            /// </summary>
-            public int Offset { get; private set; }
-
-            /// <summary>
-            /// Gets the name of the sentry file to write.
-            /// </summary>
-            public string FileName { get; private set; }
-
-            /// <summary>
-            /// Gets the one-time-password details.
-            /// </summary>
-            public OTPDetails OneTimePassword { get; private set; }
-
-
-            internal UpdateMachineAuthCallback( JobID jobID, CMsgClientUpdateMachineAuth msg )
-            {
-                JobID = jobID;
-
-                Data = msg.bytes;
-
-                BytesToWrite = ( int )msg.cubtowrite;
-                Offset = ( int )msg.offset;
-
-                FileName = msg.filename;
-
-                OneTimePassword = new OTPDetails
-                {
-                    Type = msg.otp_type,
-                    Identifier = msg.otp_identifier,
-                    SharedSecret = msg.otp_sharedsecret,
-                    TimeDrift = msg.otp_timedrift,
-                };
             }
         }
 

@@ -58,21 +58,6 @@ namespace SteamKit2
                 SendMessageOrNotification( expr, true );
             }
 
-            /// <summary>
-            /// Sends a message.
-            /// Results are returned in a <see cref="ServiceMethodResponse"/>.
-            /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
-            /// </summary>
-            /// <typeparam name="TResponse">The type of the protobuf object which is the response to the RPC call.</typeparam>
-            /// <param name="expr">RPC call expression, e.g. x => x.SomeMethodCall(message);</param>
-            /// <param name="isNotification">Whether this message is a notification or not.</param>
-            /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
-            [Obsolete( "Use SendNotification() instead of passing 'true' bool in SendMessage. SendMessage incorrectly returned AsyncJob for notifications, they have no response by design." )]
-            public AsyncJob<ServiceMethodResponse>? SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification )
-            {
-                return SendMessageOrNotification( expr, isNotification );
-            }
-
             AsyncJob<ServiceMethodResponse>? SendMessageOrNotification<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification )
             {
                 if ( expr == null )
@@ -200,30 +185,6 @@ namespace SteamKit2
             msg.Header.Proto.target_job_name = name;
             msg.Body = message;
             Client.Send( msg );
-        }
-
-        /// <summary>
-        /// Sends a message.
-        /// Results are returned in a <see cref="ServiceMethodResponse"/>.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
-        /// </summary>
-        /// <typeparam name="TRequest">The type of a protobuf object.</typeparam>
-        /// <param name="name">Name of the RPC endpoint. Takes the format ServiceName.RpcName</param>
-        /// <param name="message">The message to send.</param>
-        /// <param name="isNotification">Whether this message is a notification or not.</param>
-        /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
-        [Obsolete( "Use SendNotification() instead of passing 'true' bool in SendMessage. SendMessage incorrectly returned AsyncJob for notifications, they have no response by design." )]
-        public AsyncJob<ServiceMethodResponse>? SendMessage<TRequest>( string name, TRequest message, bool isNotification )
-            where TRequest : IExtensible, new()
-        {
-            if ( !isNotification )
-            {
-                return SendMessage( name, message );
-            }
-
-            SendNotification( name, message );
-
-            return null;
         }
 
         /// <summary>
