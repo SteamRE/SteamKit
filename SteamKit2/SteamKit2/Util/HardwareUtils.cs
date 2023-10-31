@@ -81,9 +81,7 @@ namespace SteamKit2
         }
     }
 
-#if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
-#endif
     sealed class WindowsMachineInfoProvider : IMachineInfoProvider
     {
         public byte[]? GetMachineGuid()
@@ -152,9 +150,7 @@ namespace SteamKit2
         }
     }
 
-#if NET5_0_OR_GREATER
     [SupportedOSPlatform( "linux" )]
-#endif
     sealed class LinuxMachineInfoProvider : IMachineInfoProvider
     {
         public byte[]? GetMachineGuid()
@@ -265,9 +261,7 @@ namespace SteamKit2
         }
     }
 
-#if NET5_0_OR_GREATER
     [SupportedOSPlatform( "macos" )]
-#endif
     sealed class MacOSMachineInfoProvider : IMachineInfoProvider
     {
         public byte[]? GetMachineGuid()

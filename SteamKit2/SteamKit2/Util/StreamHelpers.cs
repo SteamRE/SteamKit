@@ -10,9 +10,7 @@ namespace SteamKit2
         [ThreadStatic]
         static byte[]? data;
 
-#if NET5_0_OR_GREATER
         [MemberNotNull(nameof(data))]
-#endif
         static void EnsureInitialized()
         {
             data ??= new byte[ 8 ];
