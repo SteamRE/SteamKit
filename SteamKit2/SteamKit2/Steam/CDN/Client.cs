@@ -182,18 +182,7 @@ namespace SteamKit2.CDN
 
                 cts.CancelAfter( ResponseBodyTimeout );
 
-#if NET5_0_OR_GREATER
                 return await response.Content.ReadAsByteArrayAsync( cts.Token ).ConfigureAwait( false );
-#else
-                var contentLength = response.Content.Headers.ContentLength;
-
-                using var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait( false );
-                using var ms = new MemoryStream( ( int )contentLength.GetValueOrDefault() );
-
-                await responseStream.CopyToAsync( ms, 81920, cts.Token ).ConfigureAwait( false );
-
-                return ms.ToArray();
-#endif
             }
             catch ( Exception ex )
             {
