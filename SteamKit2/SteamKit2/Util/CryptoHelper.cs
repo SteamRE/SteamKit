@@ -35,10 +35,8 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof(key) );
             }
 
-            AsnKeyParser keyParser = new AsnKeyParser( key );
-
             rsa = RSA.Create();
-            rsa.ImportParameters( keyParser.ParseRSAPublicKey() );
+            rsa.ImportSubjectPublicKeyInfo( key, out _ );
         }
 
         /// <summary>
