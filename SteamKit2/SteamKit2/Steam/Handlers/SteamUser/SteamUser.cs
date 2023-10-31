@@ -60,22 +60,11 @@ namespace SteamKit2
             /// <value>The two factor auth code.</value>
             public string? TwoFactorCode { get; set; }
             /// <summary>
-            /// Gets or sets the login key used to login. This is a key that has been recieved in a previous Steam sesson by a <see cref="LoginKeyCallback"/>.
-            /// </summary>
-            /// <value>The login key.</value>
-            [Obsolete( "Steam no longer sends new login keys as of March 2023, use SteamAuthentication." )]
-            public string? LoginKey { get; set; }
-            /// <summary>
-            /// Gets or sets the 'Should Remember Password' flag. This is used in combination with the login key and <see cref="LoginKeyCallback"/> for password-less login.
+            /// Gets or sets the 'Should Remember Password' flag. This is used in combination with the <see cref="AccessToken"/> for password-less login.
+            /// Set this to true when <see cref="Authentication.AuthSessionDetails.IsPersistentSession"/> is set to true.
             /// </summary>
             /// <value>The 'Should Remember Password' flag.</value>
             public bool ShouldRememberPassword { get; set; }
-            /// <summary>
-            /// Gets or sets the sentry file hash for this logon attempt, or null if no sentry file is available.
-            /// </summary>
-            /// <value>The sentry file hash.</value>
-            [Obsolete( "Steam no longer accepts machine auth as of 2023, use SteamAuthentication." )]
-            public byte[]? SentryFileHash { get; set; }
             /// <summary>
             /// Gets or sets the access token used to login. This a token that has been provided after a successful login using <see cref="Authentication"/>.
             /// </summary>
@@ -169,95 +158,6 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Represents details required to complete a machine auth request.
-        /// </summary>
-        [Obsolete("Steam no longer sends machine auth as of 2023, use SteamAuthentication.")]
-        public sealed class MachineAuthDetails
-        {
-            /// <summary>
-            /// The One-Time-Password details for this response.
-            /// </summary>
-            public sealed class OTPDetails
-            {
-                /// <summary>
-                /// Gets or sets the one-time-password type.
-                /// </summary>
-                public uint Type { get; set; }
-                /// <summary>
-                /// Gets or sets the one-time-password identifier.
-                /// </summary>
-                public string? Identifier { get; set; }
-                /// <summary>
-                /// Gets or sets the one-time-password value.
-                /// </summary>
-                public uint Value { get; set; }
-            }
-
-            /// <summary>
-            /// Gets or sets the target Job ID for the request.
-            /// This is provided in the <see cref="Callback&lt;T&gt;"/> for a <see cref="UpdateMachineAuthCallback"/>.
-            /// </summary>
-            /// <value>The Job ID.</value>
-            public JobID? JobID { get; set; }
-
-            /// <summary>
-            /// Gets or sets the result of updating the machine auth.
-            /// </summary>
-            /// <value>The result.</value>
-            public EResult Result { get; set; }
-
-            /// <summary>
-            /// Gets or sets the number of bytes written for the sentry file.
-            /// </summary>
-            /// <value>The number of bytes written.</value>
-            public int BytesWritten { get; set; }
-            /// <summary>
-            /// Gets or sets the offset within the sentry file that was written.
-            /// </summary>
-            /// <value>The offset.</value>
-            public int Offset { get; set; }
-
-            /// <summary>
-            /// Gets or sets the filename of the sentry file that was written.
-            /// </summary>
-            /// <value>The name of the sentry file.</value>
-            public string? FileName { get; set; }
-            /// <summary>
-            /// Gets or sets the size of the sentry file.
-            /// </summary>
-            /// <value>/ The size of the sentry file.</value>
-            public int FileSize { get; set; }
-
-            /// <summary>
-            /// Gets or sets the last error that occurred while writing the sentry file, or 0 if no error occurred.
-            /// </summary>
-            /// <value>The last error.</value>
-            public int LastError { get; set; }
-
-            /// <summary>
-            /// Gets or sets the SHA-1 hash of the sentry file.
-            /// </summary>
-            /// <value>The sentry file hash.</value>
-            public byte[]? SentryFileHash { get; set; }
-
-            /// <summary>
-            /// Gets or sets the one-time-password details.
-            /// </summary>
-            /// <value>The one time password details.</value>
-            public OTPDetails OneTimePassword { get; set; }
-
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="MachineAuthDetails"/> class.
-            /// </summary>
-            public MachineAuthDetails()
-            {
-                OneTimePassword = new OTPDetails();
-            }
-        }
-
-
-        /// <summary>
         /// Gets the SteamID of this client. This value is assigned after a logon attempt has succeeded.
         /// </summary>
         /// <value>The SteamID.</value>
@@ -275,9 +175,7 @@ namespace SteamKit2
             {
                 { EMsg.ClientLogOnResponse, HandleLogOnResponse },
                 { EMsg.ClientLoggedOff, HandleLoggedOff },
-                { EMsg.ClientNewLoginKey, HandleLoginKey },
                 { EMsg.ClientSessionToken, HandleSessionToken },
-                { EMsg.ClientUpdateMachineAuth, HandleUpdateMachineAuth },
                 { EMsg.ClientAccountInfo, HandleAccountInfo },
                 { EMsg.ClientEmailAddrInfo, HandleEmailAddrInfo },
                 { EMsg.ClientWalletInfoUpdate, HandleWalletInfo },
@@ -304,20 +202,10 @@ namespace SteamKit2
                 throw new ArgumentNullException( nameof( details ) );
             }
 
-#pragma warning disable CS0618 // LoginKey is obsolete
-            if ( string.IsNullOrEmpty( details.Username ) || ( string.IsNullOrEmpty( details.Password ) && string.IsNullOrEmpty( details.LoginKey ) && string.IsNullOrEmpty( details.AccessToken ) ) )
+            if ( string.IsNullOrEmpty( details.Username ) || ( string.IsNullOrEmpty( details.Password ) && string.IsNullOrEmpty( details.AccessToken ) ) )
             {
-                throw new ArgumentException( "LogOn requires a username and password to be set in 'details'." );
+                throw new ArgumentException( "LogOn requires a username and password or access token to be set in 'details'." );
             }
-
-            if ( !string.IsNullOrEmpty( details.LoginKey ) && !details.ShouldRememberPassword )
-            {
-                // Prevent consumers from screwing this up.
-                // If should_remember_password is false, the login_key is ignored server-side.
-                // The inverse is not applicable (you can log in with should_remember_password and no login_key).
-                throw new ArgumentException( "ShouldRememberPassword is required to be set to true in order to use LoginKey." );
-            }
-#pragma warning restore CS0618 // LoginKey is obsolete
 
             if ( !this.Client.IsConnected )
             {
@@ -372,17 +260,7 @@ namespace SteamKit2
             logon.Body.auth_code = details.AuthCode;
             logon.Body.two_factor_code = details.TwoFactorCode;
 
-#pragma warning disable CS0618 // LoginKey is obsolete
-            logon.Body.login_key = details.LoginKey;
-#pragma warning restore CS0618 // LoginKey is obsolete
-
             logon.Body.access_token = details.AccessToken;
-
-#pragma warning disable CS0618 // SentryFileHash is obsolete
-            logon.Body.sha_sentryfile = details.SentryFileHash;
-            logon.Body.eresult_sentryfile = ( int )( details.SentryFileHash != null ? EResult.OK : EResult.FileNotFound );
-#pragma warning restore CS0618 // SentryFileHash is obsolete
-
 
             this.Client.Send( logon );
         }
@@ -445,81 +323,6 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Sends a machine auth response.
-        /// This should normally be used in response to a <see cref="UpdateMachineAuthCallback"/>.
-        /// </summary>
-        /// <param name="details">The details pertaining to the response.</param>
-        [Obsolete("Steam no longer sends machine auth as of 2023, use SteamAuthentication.")]
-        public void SendMachineAuthResponse( MachineAuthDetails details )
-        {
-            if ( details == null )
-            {
-                throw new ArgumentNullException( nameof( details ) );
-            }
-
-            var response = new ClientMsgProtobuf<CMsgClientUpdateMachineAuthResponse>( EMsg.ClientUpdateMachineAuthResponse );
-
-            // so we respond to the correct message
-            if ( details.JobID != null )
-            {
-                response.ProtoHeader.jobid_target = details.JobID;
-            }
-
-            response.Body.cubwrote = ( uint )details.BytesWritten;
-            response.Body.eresult = ( uint )details.Result;
-
-            response.Body.filename = details.FileName;
-            response.Body.filesize = ( uint )details.FileSize;
-
-            response.Body.getlasterror = ( uint )details.LastError;
-            response.Body.offset = ( uint )details.Offset;
-
-            response.Body.sha_file = details.SentryFileHash;
-
-            response.Body.otp_identifier = details.OneTimePassword.Identifier;
-            response.Body.otp_type = ( int )details.OneTimePassword.Type;
-            response.Body.otp_value = details.OneTimePassword.Value;
-
-            this.Client.Send( response );
-
-        }
-
-        /// <summary>
-        /// Requests a new WebAPI authentication user nonce.
-        /// Results are returned in a <see cref="WebAPIUserNonceCallback"/>.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
-        /// </summary>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="WebAPIUserNonceCallback"/>.</returns>
-        [Obsolete( "Steam no longer uses web api nonces as of October 2023, use SteamAuthentication." )]
-        public AsyncJob<WebAPIUserNonceCallback> RequestWebAPIUserNonce()
-        {
-            var reqMsg = new ClientMsgProtobuf<CMsgClientRequestWebAPIAuthenticateUserNonce>( EMsg.ClientRequestWebAPIAuthenticateUserNonce );
-            reqMsg.SourceJobID = Client.GetNextJobID();
-
-            this.Client.Send( reqMsg );
-
-            return new AsyncJob<WebAPIUserNonceCallback>( this.Client, reqMsg.SourceJobID );
-        }
-
-        /// <summary>
-        /// Accepts the new Login Key provided by a <see cref="LoginKeyCallback"/>.
-        /// </summary>
-        /// <param name="callback">The callback containing the new Login Key.</param>
-        [Obsolete( "Steam no longer sends new login keys as of March 2023, use SteamAuthentication." )]
-        public void AcceptNewLoginKey( LoginKeyCallback callback )
-        {
-            if ( callback == null )
-            {
-                throw new ArgumentNullException( nameof( callback ) );
-            }
-
-            var acceptance = new ClientMsgProtobuf<CMsgClientNewLoginKeyAccepted>( EMsg.ClientNewLoginKeyAccepted );
-            acceptance.Body.unique_id = callback.UniqueID;
-
-            this.Client.Send( acceptance );
-        }
-
-        /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
         /// <param name="packetMsg">The packet message that contains the data.</param>
@@ -558,29 +361,11 @@ namespace SteamKit2
 
             this.Client.PostCallback( new LoggedOffCallback( result ) );
         }
-        void HandleUpdateMachineAuth( IPacketMsg packetMsg )
-        {
-            var machineAuth = new ClientMsgProtobuf<CMsgClientUpdateMachineAuth>( packetMsg );
-
-#pragma warning disable CS0618 // Type or member is obsolete
-            var callback = new UpdateMachineAuthCallback( packetMsg.SourceJobID, machineAuth.Body );
-#pragma warning restore CS0618 // Type or member is obsolete
-            Client.PostCallback( callback );
-        }
         void HandleSessionToken( IPacketMsg packetMsg )
         {
             var sessToken = new ClientMsgProtobuf<CMsgClientSessionToken>( packetMsg );
 
             var callback = new SessionTokenCallback( sessToken.Body );
-            this.Client.PostCallback( callback );
-        }
-        void HandleLoginKey( IPacketMsg packetMsg )
-        {
-            var loginKey = new ClientMsgProtobuf<CMsgClientNewLoginKey>( packetMsg );
-
-#pragma warning disable CS0618 // LoginKey is obsolete
-            var callback = new LoginKeyCallback( loginKey.Body );
-#pragma warning restore CS0618 // LoginKey is obsolete
             this.Client.PostCallback( callback );
         }
         void HandleLogOnResponse( IPacketMsg packetMsg )

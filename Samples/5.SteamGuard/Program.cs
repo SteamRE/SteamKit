@@ -11,7 +11,6 @@ using SteamKit2;
 // See Sample1a_Authentication for the new flow.
 // This sample will be removed in the future. 
 //
-#pragma warning disable CS0618
 
 //
 // Sample 5: SteamGuard
@@ -71,9 +70,6 @@ manager.Subscribe<SteamClient.DisconnectedCallback>( OnDisconnected );
 manager.Subscribe<SteamUser.LoggedOnCallback>( OnLoggedOn );
 manager.Subscribe<SteamUser.LoggedOffCallback>( OnLoggedOff );
 
-// this callback is triggered when the steam servers wish for the client to store the sentry file
-manager.Subscribe<SteamUser.UpdateMachineAuthCallback>( OnMachineAuth );
-
 var isRunning = true;
 
 Console.WriteLine( "Connecting to Steam..." );
@@ -112,10 +108,6 @@ void OnConnected( SteamClient.ConnectedCallback callback )
         // if the account is using 2-factor auth, we'll provide the two factor code instead
         // this will also be null on our first logon attempt
         TwoFactorCode = twoFactorAuth,
-
-        // our subsequent logons use the hash of the sentry file as proof of ownership of the file
-        // this will also be null for our first (no authcode) and second (authcode only) logon attempts
-        SentryFileHash = sentryHash,
     } );
 }
 
@@ -170,48 +162,4 @@ void OnLoggedOn( SteamUser.LoggedOnCallback callback )
 void OnLoggedOff( SteamUser.LoggedOffCallback callback )
 {
     Console.WriteLine( "Logged off of Steam: {0}", callback.Result );
-}
-
-void OnMachineAuth( SteamUser.UpdateMachineAuthCallback callback )
-{
-    Console.WriteLine( "Updating sentryfile..." );
-
-    // write out our sentry file
-    // ideally we'd want to write to the filename specified in the callback
-    // but then this sample would require more code to find the correct sentry file to read during logon
-    // for the sake of simplicity, we'll just use "sentry.bin"
-
-    int fileSize;
-    byte[] sentryHash;
-    using ( var fs = File.Open( "sentry.bin", FileMode.OpenOrCreate, FileAccess.ReadWrite ) )
-    {
-        fs.Seek( callback.Offset, SeekOrigin.Begin );
-        fs.Write( callback.Data, 0, callback.BytesToWrite );
-        fileSize = ( int )fs.Length;
-
-        fs.Seek( 0, SeekOrigin.Begin );
-        using var sha = SHA1.Create();
-        sentryHash = sha.ComputeHash( fs );
-    }
-
-    // inform the steam servers that we're accepting this sentry file
-    steamUser.SendMachineAuthResponse( new SteamUser.MachineAuthDetails
-    {
-        JobID = callback.JobID,
-
-        FileName = callback.FileName,
-
-        BytesWritten = callback.BytesToWrite,
-        FileSize = fileSize,
-        Offset = callback.Offset,
-
-        Result = EResult.OK,
-        LastError = 0,
-
-        OneTimePassword = callback.OneTimePassword,
-
-        SentryFileHash = sentryHash,
-    } );
-
-    Console.WriteLine( "Done!" );
 }
