@@ -3,6 +3,7 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace SteamKit2
 {
@@ -180,8 +181,6 @@ namespace SteamKit2
 		AllowUserToPlayResponse = 551,
 		AMVerfiyUser = 552,
 		AMClientNotPlaying = 553,
-		[Obsolete( "Renamed to AMClientRequestFriendship" )]
-		ClientRequestFriendship = 554,
 		AMClientRequestFriendship = 554,
 		AMRelayPublishStatus = 555,
 		AMInitPurchaseResponse = 560,
@@ -720,13 +719,9 @@ namespace SteamKit2
 		AMLeaveClan = 4010,
 		AMClanPermissions = 4011,
 		AMClanPermissionsResponse = 4012,
-		[Obsolete( "renamed to AMCreateClanEventDummyForRateLimiting" )]
-		AMCreateClanEvent = 4013,
 		AMCreateClanEventDummyForRateLimiting = 4013,
 		[Obsolete]
 		AMCreateClanEventResponse = 4014,
-		[Obsolete( "renamed to AMUpdateClanEventDummyForRateLimiting" )]
-		AMUpdateClanEvent = 4015,
 		AMUpdateClanEventDummyForRateLimiting = 4015,
 		[Obsolete]
 		AMUpdateClanEventResponse = 4016,
@@ -780,11 +775,7 @@ namespace SteamKit2
 		AMGetAccountLinksResponse = 4070,
 		AMSetAccountLinks = 4071,
 		AMSetAccountLinksResponse = 4072,
-		[Obsolete( "renamed to UGSGetUserGameStats" )]
-		AMGetUserGameStats = 4073,
 		UGSGetUserGameStats = 4073,
-		[Obsolete( "renamed to UGSGetUserGameStatsResponse" )]
-		AMGetUserGameStatsResponse = 4074,
 		UGSGetUserGameStatsResponse = 4074,
 		AMCheckClanMembership = 4075,
 		AMGetClanMembers = 4076,
@@ -830,8 +821,6 @@ namespace SteamKit2
 		AMGetCommunityPrivacyState = 4116,
 		AMGetCommunityPrivacyStateResponse = 4117,
 		AMCheckClanInviteRateLimiting = 4118,
-		[Obsolete( "renamed to UGSGetUserAchievementStatus" )]
-		AMGetUserAchievementStatus = 4119,
 		UGSGetUserAchievementStatus = 4119,
 		AMGetIgnored = 4120,
 		AMGetIgnoredResponse = 4121,
@@ -893,14 +882,10 @@ namespace SteamKit2
 		AMGetPurchaseStatus = 4206,
 		AMSupportIsAccountEnabled = 4209,
 		AMSupportIsAccountEnabledResponse = 4210,
-		[Obsolete( "renamed to UGSGetUserStats" )]
-		AMGetUserStats = 4211,
 		UGSGetUserStats = 4211,
 		AMSupportKickSession = 4212,
 		AMGSSearch = 4213,
 		MarketingMessageUpdate = 4216,
-		[Obsolete( "renamed to ChatServerRouteFriendMsg" )]
-		AMRouteFriendMsg = 4219,
 		ChatServerRouteFriendMsg = 4219,
 		AMTicketAuthRequestOrResponse = 4220,
 		AMVerifyDepotManagementRights = 4222,
@@ -908,8 +893,6 @@ namespace SteamKit2
 		AMAddFreeLicense = 4224,
 		AMValidateEmailLink = 4231,
 		AMValidateEmailLinkResponse = 4232,
-		[Obsolete( "renamed to UGSStoreUserStats" )]
-		AMStoreUserStats = 4236,
 		UGSStoreUserStats = 4236,
 		AMDeleteStoredCard = 4241,
 		AMRevokeLegacyGameKeys = 4242,
@@ -934,8 +917,6 @@ namespace SteamKit2
 		[Obsolete]
 		AMCreateDisputeResponse = 4263,
 		AMClearDispute = 4264,
-		[Obsolete( "renamed to AMCreateFinancialAdjustment" )]
-		AMClearDisputeResponse = 4265,
 		AMCreateFinancialAdjustment = 4265,
 		AMPlayerNicknameList = 4266,
 		AMPlayerNicknameListResponse = 4267,
@@ -948,8 +929,6 @@ namespace SteamKit2
 		AMGetGameMembersResponse = 4277,
 		AMGetSteamIDForMicroTxn = 4278,
 		AMGetSteamIDForMicroTxnResponse = 4279,
-		[Obsolete( "renamed to AMSetPartnerMember" )]
-		AMAddPublisherUser = 4280,
 		AMSetPartnerMember = 4280,
 		AMRemovePublisherUser = 4281,
 		AMGetUserLicenseList = 4282,
@@ -974,8 +953,6 @@ namespace SteamKit2
 		AMIsAccountInCaptchaGracePeriodResponse = 4309,
 		AMAccountPS3Unlink = 4310,
 		AMAccountPS3UnlinkResponse = 4311,
-		[Obsolete( "renamed to UGSStoreUserStatsResponse" )]
-		AMStoreUserStatsResponse = 4312,
 		UGSStoreUserStatsResponse = 4312,
 		AMGetAccountPSNInfo = 4313,
 		AMGetAccountPSNInfoResponse = 4314,
@@ -1147,11 +1124,7 @@ namespace SteamKit2
 		UFSDownloadFinishRequest = 5248,
 		UFSDownloadFinishResponse = 5249,
 		UFSFlushURLCache = 5250,
-		[Obsolete( "renamed to ClientUFSUploadCommit" )]
-		UFSUploadCommit = 5251,
 		ClientUFSUploadCommit = 5251,
-		[Obsolete( "renamed to ClientUFSUploadCommitResponse" )]
-		UFSUploadCommitResponse = 5252,
 		ClientUFSUploadCommitResponse = 5252,
 		UFSMigrateFileAppID = 5253,
 		UFSMigrateFileAppIDResponse = 5254,
@@ -1294,11 +1267,7 @@ namespace SteamKit2
 		AMClientCreateFriendsGroupResponse = 5561,
 		AMClientDeleteFriendsGroup = 5562,
 		AMClientDeleteFriendsGroupResponse = 5563,
-		[Obsolete( "renamed to AMClientManageFriendsGroup" )]
-		AMClientRenameFriendsGroup = 5564,
 		AMClientManageFriendsGroup = 5564,
-		[Obsolete( "renamed to AMClientManageFriendsGroupResponse" )]
-		AMClientRenameFriendsGroupResponse = 5565,
 		AMClientManageFriendsGroupResponse = 5565,
 		AMClientAddFriendToGroup = 5566,
 		AMClientAddFriendToGroupResponse = 5567,
@@ -1328,11 +1297,7 @@ namespace SteamKit2
 		ClientCreateAccountProtoResponse = 5591,
 		ClientGetNumberOfCurrentPlayersDP = 5592,
 		ClientGetNumberOfCurrentPlayersDPResponse = 5593,
-		[Obsolete( "renamed to ClientServiceMethodLegacy" )]
-		ClientServiceMethod = 5594,
 		ClientServiceMethodLegacy = 5594,
-		[Obsolete( "renamed to ClientServiceMethodLegacyResponse" )]
-		ClientServiceMethodResponse = 5595,
 		ClientServiceMethodLegacyResponse = 5595,
 		ClientFriendUserStatusPublished = 5596,
 		ClientCurrentUIMode = 5597,
@@ -1456,8 +1421,6 @@ namespace SteamKit2
 		ClientUDSP2PSessionEnded = 7002,
 		UDSRenderUserAuth = 7003,
 		UDSRenderUserAuthResponse = 7004,
-		[Obsolete( "renamed to ClientInviteToGame" )]
-		ClientUDSInviteToGame = 7005,
 		ClientInviteToGame = 7005,
 		UDSHasSession = 7006,
 		UDSHasSessionResponse = 7007,
@@ -1523,8 +1486,6 @@ namespace SteamKit2
 		ClientUCMEnumerateUserSubscribedFilesWithUpdates = 7378,
 		ClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse = 7379,
 		UCMPublishedFileContentUpdated = 7380,
-		[Obsolete( "renamed to ClientUCMPublishedFileUpdated" )]
-		UCMPublishedFileUpdated = 7381,
 		ClientUCMPublishedFileUpdated = 7381,
 		ClientWorkshopItemChangesRequest = 7382,
 		ClientWorkshopItemChangesResponse = 7383,
@@ -1554,16 +1515,6 @@ namespace SteamKit2
 		ClientFSEnumerateFollowingListResponse = 7520,
 		FSGetPendingNotificationCount = 7521,
 		FSGetPendingNotificationCountResponse = 7522,
-		[Obsolete( "Renamed to ClientChatOfflineMessageNotification" )]
-		ClientFSOfflineMessageNotification = 7523,
-		[Obsolete( "Renamed to ClientChatRequestOfflineMessageCount" )]
-		ClientFSRequestOfflineMessageCount = 7524,
-		[Obsolete( "Renamed to ClientChatGetFriendMessageHistory" )]
-		ClientFSGetFriendMessageHistory = 7525,
-		[Obsolete( "Renamed to ClientChatGetFriendMessageHistoryResponse" )]
-		ClientFSGetFriendMessageHistoryResponse = 7526,
-		[Obsolete( "Renamed to ClientChatGetFriendMessageHistoryForOfflineMessages" )]
-		ClientFSGetFriendMessageHistoryForOfflineMessages = 7527,
 		ClientChatOfflineMessageNotification = 7523,
 		ClientChatRequestOfflineMessageCount = 7524,
 		ClientChatGetFriendMessageHistory = 7525,
@@ -1571,8 +1522,6 @@ namespace SteamKit2
 		ClientChatGetFriendMessageHistoryForOfflineMessages = 7527,
 		ClientFSGetFriendsSteamLevels = 7528,
 		ClientFSGetFriendsSteamLevelsResponse = 7529,
-		[Obsolete( "renamed to AMRequestFriendData" )]
-		FSRequestFriendData = 7530,
 		AMRequestFriendData = 7530,
 		DRMRange2 = 7600,
 		CEGVersionSetEnableDisableRequest = 7600,
@@ -1723,8 +1672,6 @@ namespace SteamKit2
 		ClientUnlockStreamingResponse = 9508,
 		RemoteClientAcceptEULA = 9509,
 		RemoteClientGetControllerConfig = 9510,
-		[Obsolete( "renamed to RemoteClientGetControllerConfigResponse" )]
-		RemoteClientGetControllerConfigResposne = 9511,
 		RemoteClientGetControllerConfigResponse = 9511,
 		RemoteClientStreamingEnabled = 9512,
 		ClientUnlockHEVC = 9513,
@@ -2074,13 +2021,9 @@ namespace SteamKit2
 		SourceID = 8,
 		Presence = 16,
 		LastSeen = 64,
-		[Obsolete( "renamed to UserClanRank" )]
-		ClanInfo = 128,
 		UserClanRank = 128,
 		GameExtraInfo = 256,
 		GameDataBlob = 512,
-		[Obsolete( "renamed to ClanData" )]
-		ClanTag = 1024,
 		ClanData = 1024,
 		Facebook = 2048,
 		RichPresence = 4096,
