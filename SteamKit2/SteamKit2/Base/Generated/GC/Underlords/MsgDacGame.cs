@@ -585,7 +585,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint opponent_player_slot
         {
-            get => __pbn__opponent.Is(2) ? __pbn__opponent.UInt32 : default(uint);
+            get => __pbn__opponent.Is(2) ? __pbn__opponent.UInt32 : default;
             set => __pbn__opponent = new global::ProtoBuf.DiscriminatedUnion32(2, value);
         }
         public bool ShouldSerializeopponent_player_slot() => __pbn__opponent.Is(2);
@@ -596,7 +596,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public uint opponent_neutral_wave
         {
-            get => __pbn__opponent.Is(3) ? __pbn__opponent.UInt32 : default(uint);
+            get => __pbn__opponent.Is(3) ? __pbn__opponent.UInt32 : default;
             set => __pbn__opponent = new global::ProtoBuf.DiscriminatedUnion32(3, value);
         }
         public bool ShouldSerializeopponent_neutral_wave() => __pbn__opponent.Is(3);
@@ -1763,7 +1763,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(24)]
         public uint opponent_player_slot
         {
-            get => __pbn__opponent.Is(24) ? __pbn__opponent.UInt32 : default(uint);
+            get => __pbn__opponent.Is(24) ? __pbn__opponent.UInt32 : default;
             set => __pbn__opponent = new global::ProtoBuf.DiscriminatedUnion32(24, value);
         }
         public bool ShouldSerializeopponent_player_slot() => __pbn__opponent.Is(24);
@@ -1774,7 +1774,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(25)]
         public uint opponent_neutral_wave
         {
-            get => __pbn__opponent.Is(25) ? __pbn__opponent.UInt32 : default(uint);
+            get => __pbn__opponent.Is(25) ? __pbn__opponent.UInt32 : default;
             set => __pbn__opponent = new global::ProtoBuf.DiscriminatedUnion32(25, value);
         }
         public bool ShouldSerializeopponent_neutral_wave() => __pbn__opponent.Is(25);
@@ -3294,7 +3294,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public CMsgGameModeState_Normal details_normal
         {
-            get => __pbn__details.Is(1) ? ((CMsgGameModeState_Normal)__pbn__details.Object) : default(CMsgGameModeState_Normal);
+            get => __pbn__details.Is(1) ? ((CMsgGameModeState_Normal)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(1, value);
         }
         public bool ShouldSerializedetails_normal() => __pbn__details.Is(1);
@@ -3305,7 +3305,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public CMsgGameModeState_Turbo details_turbo
         {
-            get => __pbn__details.Is(2) ? ((CMsgGameModeState_Turbo)__pbn__details.Object) : default(CMsgGameModeState_Turbo);
+            get => __pbn__details.Is(2) ? ((CMsgGameModeState_Turbo)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(2, value);
         }
         public bool ShouldSerializedetails_turbo() => __pbn__details.Is(2);
@@ -3314,7 +3314,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public CMsgGameModeState_Duos details_duos
         {
-            get => __pbn__details.Is(3) ? ((CMsgGameModeState_Duos)__pbn__details.Object) : default(CMsgGameModeState_Duos);
+            get => __pbn__details.Is(3) ? ((CMsgGameModeState_Duos)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(3, value);
         }
         public bool ShouldSerializedetails_duos() => __pbn__details.Is(3);
@@ -3323,7 +3323,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public CMsgGameModeState_TechPrototypeA details_tech_prototype_a
         {
-            get => __pbn__details.Is(4) ? ((CMsgGameModeState_TechPrototypeA)__pbn__details.Object) : default(CMsgGameModeState_TechPrototypeA);
+            get => __pbn__details.Is(4) ? ((CMsgGameModeState_TechPrototypeA)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(4, value);
         }
         public bool ShouldSerializedetails_tech_prototype_a() => __pbn__details.Is(4);
@@ -3332,7 +3332,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public CMsgGameModeState_Sandbox details_sandbox
         {
-            get => __pbn__details.Is(5) ? ((CMsgGameModeState_Sandbox)__pbn__details.Object) : default(CMsgGameModeState_Sandbox);
+            get => __pbn__details.Is(5) ? ((CMsgGameModeState_Sandbox)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(5, value);
         }
         public bool ShouldSerializedetails_sandbox() => __pbn__details.Is(5);
@@ -3341,7 +3341,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public CMsgGameModeState_Puzzle details_puzzle
         {
-            get => __pbn__details.Is(6) ? ((CMsgGameModeState_Puzzle)__pbn__details.Object) : default(CMsgGameModeState_Puzzle);
+            get => __pbn__details.Is(6) ? ((CMsgGameModeState_Puzzle)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(6, value);
         }
         public bool ShouldSerializedetails_puzzle() => __pbn__details.Is(6);
@@ -3350,7 +3350,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public CMsgGameModeState_Tutorial details_tutorial
         {
-            get => __pbn__details.Is(7) ? ((CMsgGameModeState_Tutorial)__pbn__details.Object) : default(CMsgGameModeState_Tutorial);
+            get => __pbn__details.Is(7) ? ((CMsgGameModeState_Tutorial)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(7, value);
         }
         public bool ShouldSerializedetails_tutorial() => __pbn__details.Is(7);
@@ -3359,7 +3359,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public CMsgGameModeState_Streetfight details_streetfight
         {
-            get => __pbn__details.Is(8) ? ((CMsgGameModeState_Streetfight)__pbn__details.Object) : default(CMsgGameModeState_Streetfight);
+            get => __pbn__details.Is(8) ? ((CMsgGameModeState_Streetfight)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(8, value);
         }
         public bool ShouldSerializedetails_streetfight() => __pbn__details.Is(8);
@@ -3368,7 +3368,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public CMsgGameModeState_Dungeon details_dungeon
         {
-            get => __pbn__details.Is(9) ? ((CMsgGameModeState_Dungeon)__pbn__details.Object) : default(CMsgGameModeState_Dungeon);
+            get => __pbn__details.Is(9) ? ((CMsgGameModeState_Dungeon)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(9, value);
         }
         public bool ShouldSerializedetails_dungeon() => __pbn__details.Is(9);
@@ -4525,7 +4525,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public CMsgCombatEvent_Attack details_attack
         {
-            get => __pbn__details.Is(4) ? ((CMsgCombatEvent_Attack)__pbn__details.Object) : default(CMsgCombatEvent_Attack);
+            get => __pbn__details.Is(4) ? ((CMsgCombatEvent_Attack)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(4, value);
         }
         public bool ShouldSerializedetails_attack() => __pbn__details.Is(4);
@@ -4536,7 +4536,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public CMsgCombatEvent_Damage details_damage
         {
-            get => __pbn__details.Is(5) ? ((CMsgCombatEvent_Damage)__pbn__details.Object) : default(CMsgCombatEvent_Damage);
+            get => __pbn__details.Is(5) ? ((CMsgCombatEvent_Damage)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(5, value);
         }
         public bool ShouldSerializedetails_damage() => __pbn__details.Is(5);
@@ -4545,7 +4545,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public CMsgCombatEvent_Death details_death
         {
-            get => __pbn__details.Is(6) ? ((CMsgCombatEvent_Death)__pbn__details.Object) : default(CMsgCombatEvent_Death);
+            get => __pbn__details.Is(6) ? ((CMsgCombatEvent_Death)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(6, value);
         }
         public bool ShouldSerializedetails_death() => __pbn__details.Is(6);
@@ -4554,7 +4554,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public CMsgCombatEvent_StartAttack details_start_attack
         {
-            get => __pbn__details.Is(7) ? ((CMsgCombatEvent_StartAttack)__pbn__details.Object) : default(CMsgCombatEvent_StartAttack);
+            get => __pbn__details.Is(7) ? ((CMsgCombatEvent_StartAttack)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(7, value);
         }
         public bool ShouldSerializedetails_start_attack() => __pbn__details.Is(7);
@@ -4563,7 +4563,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(8)]
         public CMsgCombatEvent_SoundEvent details_sound_event
         {
-            get => __pbn__details.Is(8) ? ((CMsgCombatEvent_SoundEvent)__pbn__details.Object) : default(CMsgCombatEvent_SoundEvent);
+            get => __pbn__details.Is(8) ? ((CMsgCombatEvent_SoundEvent)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(8, value);
         }
         public bool ShouldSerializedetails_sound_event() => __pbn__details.Is(8);
@@ -4572,7 +4572,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public CUserMsg_ParticleManager details_particle_event
         {
-            get => __pbn__details.Is(9) ? ((CUserMsg_ParticleManager)__pbn__details.Object) : default(CUserMsg_ParticleManager);
+            get => __pbn__details.Is(9) ? ((CUserMsg_ParticleManager)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(9, value);
         }
         public bool ShouldSerializedetails_particle_event() => __pbn__details.Is(9);
@@ -4581,7 +4581,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public CMsgCombatEvent_ModifierCreate details_modifier_create
         {
-            get => __pbn__details.Is(10) ? ((CMsgCombatEvent_ModifierCreate)__pbn__details.Object) : default(CMsgCombatEvent_ModifierCreate);
+            get => __pbn__details.Is(10) ? ((CMsgCombatEvent_ModifierCreate)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(10, value);
         }
         public bool ShouldSerializedetails_modifier_create() => __pbn__details.Is(10);
@@ -4590,7 +4590,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public CMsgCombatEvent_ModifierDestroy details_modifier_destroy
         {
-            get => __pbn__details.Is(11) ? ((CMsgCombatEvent_ModifierDestroy)__pbn__details.Object) : default(CMsgCombatEvent_ModifierDestroy);
+            get => __pbn__details.Is(11) ? ((CMsgCombatEvent_ModifierDestroy)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(11, value);
         }
         public bool ShouldSerializedetails_modifier_destroy() => __pbn__details.Is(11);
@@ -4599,7 +4599,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(12)]
         public CMsgCombatEvent_StartGesture details_start_gesture
         {
-            get => __pbn__details.Is(12) ? ((CMsgCombatEvent_StartGesture)__pbn__details.Object) : default(CMsgCombatEvent_StartGesture);
+            get => __pbn__details.Is(12) ? ((CMsgCombatEvent_StartGesture)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(12, value);
         }
         public bool ShouldSerializedetails_start_gesture() => __pbn__details.Is(12);
@@ -4608,7 +4608,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(13)]
         public CMsgCombatEvent_CancelAttack details_cancel_attack
         {
-            get => __pbn__details.Is(13) ? ((CMsgCombatEvent_CancelAttack)__pbn__details.Object) : default(CMsgCombatEvent_CancelAttack);
+            get => __pbn__details.Is(13) ? ((CMsgCombatEvent_CancelAttack)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(13, value);
         }
         public bool ShouldSerializedetails_cancel_attack() => __pbn__details.Is(13);
@@ -4617,7 +4617,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(14)]
         public CMsgCombatEvent_CombatEnded details_combat_ended
         {
-            get => __pbn__details.Is(14) ? ((CMsgCombatEvent_CombatEnded)__pbn__details.Object) : default(CMsgCombatEvent_CombatEnded);
+            get => __pbn__details.Is(14) ? ((CMsgCombatEvent_CombatEnded)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(14, value);
         }
         public bool ShouldSerializedetails_combat_ended() => __pbn__details.Is(14);
@@ -4626,7 +4626,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public CMsgCombatEvent_AttackMissed details_attack_missed
         {
-            get => __pbn__details.Is(15) ? ((CMsgCombatEvent_AttackMissed)__pbn__details.Object) : default(CMsgCombatEvent_AttackMissed);
+            get => __pbn__details.Is(15) ? ((CMsgCombatEvent_AttackMissed)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(15, value);
         }
         public bool ShouldSerializedetails_attack_missed() => __pbn__details.Is(15);
@@ -4635,7 +4635,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(16)]
         public CMsgCombatEvent_AttackEvaded details_attack_evaded
         {
-            get => __pbn__details.Is(16) ? ((CMsgCombatEvent_AttackEvaded)__pbn__details.Object) : default(CMsgCombatEvent_AttackEvaded);
+            get => __pbn__details.Is(16) ? ((CMsgCombatEvent_AttackEvaded)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(16, value);
         }
         public bool ShouldSerializedetails_attack_evaded() => __pbn__details.Is(16);
@@ -4644,7 +4644,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(17)]
         public CMsgCombatEvent_AttackBlocked details_attack_blocked
         {
-            get => __pbn__details.Is(17) ? ((CMsgCombatEvent_AttackBlocked)__pbn__details.Object) : default(CMsgCombatEvent_AttackBlocked);
+            get => __pbn__details.Is(17) ? ((CMsgCombatEvent_AttackBlocked)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(17, value);
         }
         public bool ShouldSerializedetails_attack_blocked() => __pbn__details.Is(17);
@@ -4653,7 +4653,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(18)]
         public CMsgCombatEvent_Resurrect details_resurrect
         {
-            get => __pbn__details.Is(18) ? ((CMsgCombatEvent_Resurrect)__pbn__details.Object) : default(CMsgCombatEvent_Resurrect);
+            get => __pbn__details.Is(18) ? ((CMsgCombatEvent_Resurrect)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(18, value);
         }
         public bool ShouldSerializedetails_resurrect() => __pbn__details.Is(18);
@@ -4662,7 +4662,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(19)]
         public CMsgCombatEvent_SpeechEvent details_speech_event
         {
-            get => __pbn__details.Is(19) ? ((CMsgCombatEvent_SpeechEvent)__pbn__details.Object) : default(CMsgCombatEvent_SpeechEvent);
+            get => __pbn__details.Is(19) ? ((CMsgCombatEvent_SpeechEvent)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(19, value);
         }
         public bool ShouldSerializedetails_speech_event() => __pbn__details.Is(19);
@@ -4671,7 +4671,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(20)]
         public CMsgCombatEvent_CastAbility details_cast_ability
         {
-            get => __pbn__details.Is(20) ? ((CMsgCombatEvent_CastAbility)__pbn__details.Object) : default(CMsgCombatEvent_CastAbility);
+            get => __pbn__details.Is(20) ? ((CMsgCombatEvent_CastAbility)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(20, value);
         }
         public bool ShouldSerializedetails_cast_ability() => __pbn__details.Is(20);
@@ -4680,7 +4680,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(21)]
         public CMsgCombatEvent_StopGesture details_stop_gesture
         {
-            get => __pbn__details.Is(21) ? ((CMsgCombatEvent_StopGesture)__pbn__details.Object) : default(CMsgCombatEvent_StopGesture);
+            get => __pbn__details.Is(21) ? ((CMsgCombatEvent_StopGesture)__pbn__details.Object) : default;
             set => __pbn__details = new global::ProtoBuf.DiscriminatedUnionObject(21, value);
         }
         public bool ShouldSerializedetails_stop_gesture() => __pbn__details.Is(21);
@@ -4843,7 +4843,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(9)]
         public uint opponent_player_slot
         {
-            get => __pbn__opponent.Is(9) ? __pbn__opponent.UInt32 : default(uint);
+            get => __pbn__opponent.Is(9) ? __pbn__opponent.UInt32 : default;
             set => __pbn__opponent = new global::ProtoBuf.DiscriminatedUnion32(9, value);
         }
         public bool ShouldSerializeopponent_player_slot() => __pbn__opponent.Is(9);
@@ -4854,7 +4854,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(10)]
         public uint opponent_neutral_wave
         {
-            get => __pbn__opponent.Is(10) ? __pbn__opponent.UInt32 : default(uint);
+            get => __pbn__opponent.Is(10) ? __pbn__opponent.UInt32 : default;
             set => __pbn__opponent = new global::ProtoBuf.DiscriminatedUnion32(10, value);
         }
         public bool ShouldSerializeopponent_neutral_wave() => __pbn__opponent.Is(10);

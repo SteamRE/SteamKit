@@ -538,7 +538,7 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public KnownAP ap_known
         {
-            get => __pbn__ap_info.Is(2) ? ((KnownAP)__pbn__ap_info.Object) : default(KnownAP);
+            get => __pbn__ap_info.Is(2) ? ((KnownAP)__pbn__ap_info.Object) : default;
             set => __pbn__ap_info = new global::ProtoBuf.DiscriminatedUnionObject(2, value);
         }
         public bool ShouldSerializeap_known() => __pbn__ap_info.Is(2);
@@ -549,7 +549,7 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public CustomAP ap_custom
         {
-            get => __pbn__ap_info.Is(3) ? ((CustomAP)__pbn__ap_info.Object) : default(CustomAP);
+            get => __pbn__ap_info.Is(3) ? ((CustomAP)__pbn__ap_info.Object) : default;
             set => __pbn__ap_info = new global::ProtoBuf.DiscriminatedUnionObject(3, value);
         }
         public bool ShouldSerializeap_custom() => __pbn__ap_info.Is(3);
@@ -2312,7 +2312,7 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public bool reset_to_default
         {
-            get => __pbn__update.Is(2) ? __pbn__update.Boolean : default(bool);
+            get => __pbn__update.Is(2) ? __pbn__update.Boolean : default;
             set => __pbn__update = new global::ProtoBuf.DiscriminatedUnion32Object(2, value);
         }
         public bool ShouldSerializereset_to_default() => __pbn__update.Is(2);
@@ -2323,7 +2323,7 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public CMsgSystemPerfSettings settings_delta
         {
-            get => __pbn__update.Is(3) ? ((CMsgSystemPerfSettings)__pbn__update.Object) : default(CMsgSystemPerfSettings);
+            get => __pbn__update.Is(3) ? ((CMsgSystemPerfSettings)__pbn__update.Object) : default;
             set => __pbn__update = new global::ProtoBuf.DiscriminatedUnion32Object(3, value);
         }
         public bool ShouldSerializesettings_delta() => __pbn__update.Is(3);

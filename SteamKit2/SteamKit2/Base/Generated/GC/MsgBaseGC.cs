@@ -346,7 +346,7 @@ namespace SteamKit2.GC.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public uint ip
         {
-            get => __pbn__ip_addr.Is(15) ? __pbn__ip_addr.UInt32 : default(uint);
+            get => __pbn__ip_addr.Is(15) ? __pbn__ip_addr.UInt32 : default;
             set => __pbn__ip_addr = new global::ProtoBuf.DiscriminatedUnion32Object(15, value);
         }
         public bool ShouldSerializeip() => __pbn__ip_addr.Is(15);
@@ -357,7 +357,7 @@ namespace SteamKit2.GC.Internal
         [global::ProtoBuf.ProtoMember(29)]
         public byte[] ip_v6
         {
-            get => __pbn__ip_addr.Is(29) ? ((byte[])__pbn__ip_addr.Object) : default(byte[]);
+            get => __pbn__ip_addr.Is(29) ? ((byte[])__pbn__ip_addr.Object) : default;
             set => __pbn__ip_addr = new global::ProtoBuf.DiscriminatedUnion32Object(29, value);
         }
         public bool ShouldSerializeip_v6() => __pbn__ip_addr.Is(29);
