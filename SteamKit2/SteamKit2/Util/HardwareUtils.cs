@@ -292,7 +292,7 @@ namespace SteamKit2
 
         public byte[]? GetDiskId()
         {
-            var stat = new statfs();
+            var stat = new StatFS();
             var statted = statfs64( "/", ref stat );
             if ( statted == 0 )
             {

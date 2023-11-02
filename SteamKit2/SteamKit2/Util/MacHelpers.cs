@@ -38,10 +38,9 @@ namespace SteamKit2.Util.MacHelpers
         }
     }
 
-    // Taken from <sys/mount.h>
+    // Taken from <sys/mount.h>, original name "statfs"
     [SupportedOSPlatform( "macos" )]
-    [SuppressMessage( "Style", "IDE1006:Naming Styles", Justification = "Original name of interop type." )]
-    struct statfs
+    struct StatFS
     {
         const int MFSTYPENAMELEN = 16;
         const int PATH_MAX = 1024;
@@ -80,7 +79,7 @@ namespace SteamKit2.Util.MacHelpers
         const string LibraryName = "libc";
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int statfs64(string path, ref statfs buf);
+        public static extern int statfs64(string path, ref StatFS buf);
     }
 
     [SupportedOSPlatform( "macos" )]
