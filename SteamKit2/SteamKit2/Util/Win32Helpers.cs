@@ -201,7 +201,7 @@ namespace SteamKit2.Util
 			{
 				public uint NumberOfDiskExtents;
 
-				[MarshalAs( UnmanagedType.ByValArray )]
+				[MarshalAs( UnmanagedType.ByValArray, SizeConst = 1 )]
 				public DISK_EXTENT[] Extents;
 			}
 
