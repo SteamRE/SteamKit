@@ -58,7 +58,7 @@ namespace ProtobufGen
 
             var options = new Dictionary<string, string>
             {
-                [ "langver" ] = "7.0",
+                [ "langver" ] = "11.0",
                 [ "names" ] = "original",
                 [ "services" ] = "1",
             };

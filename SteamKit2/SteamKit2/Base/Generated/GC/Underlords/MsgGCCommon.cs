@@ -1161,7 +1161,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public uint puzzle_id
         {
-            get => __pbn__settings.Is(1) ? __pbn__settings.UInt32 : default(uint);
+            get => __pbn__settings.Is(1) ? __pbn__settings.UInt32 : default;
             set => __pbn__settings = new global::ProtoBuf.DiscriminatedUnion32Object(1, value);
         }
         public bool ShouldSerializepuzzle_id() => __pbn__settings.Is(1);
@@ -1172,7 +1172,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public uint tutorial_phase
         {
-            get => __pbn__settings.Is(2) ? __pbn__settings.UInt32 : default(uint);
+            get => __pbn__settings.Is(2) ? __pbn__settings.UInt32 : default;
             set => __pbn__settings = new global::ProtoBuf.DiscriminatedUnion32Object(2, value);
         }
         public bool ShouldSerializetutorial_phase() => __pbn__settings.Is(2);
@@ -1191,7 +1191,7 @@ namespace SteamKit2.GC.Underlords.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public CMsgStreetfightSettings streetfight_settings
         {
-            get => __pbn__settings.Is(4) ? ((CMsgStreetfightSettings)__pbn__settings.Object) : default(CMsgStreetfightSettings);
+            get => __pbn__settings.Is(4) ? ((CMsgStreetfightSettings)__pbn__settings.Object) : default;
             set => __pbn__settings = new global::ProtoBuf.DiscriminatedUnion32Object(4, value);
         }
         public bool ShouldSerializestreetfight_settings() => __pbn__settings.Is(4);

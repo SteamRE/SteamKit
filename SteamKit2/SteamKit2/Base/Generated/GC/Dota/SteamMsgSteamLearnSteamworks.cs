@@ -1214,7 +1214,7 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(1)]
             public CMsgSteamLearn_InferenceBackend_Response.BinaryCrossEntropyOutput binary_crossentropy
             {
-                get => __pbn__ResponseType.Is(1) ? ((CMsgSteamLearn_InferenceBackend_Response.BinaryCrossEntropyOutput)__pbn__ResponseType.Object) : default(CMsgSteamLearn_InferenceBackend_Response.BinaryCrossEntropyOutput);
+                get => __pbn__ResponseType.Is(1) ? ((CMsgSteamLearn_InferenceBackend_Response.BinaryCrossEntropyOutput)__pbn__ResponseType.Object) : default;
                 set => __pbn__ResponseType = new global::ProtoBuf.DiscriminatedUnionObject(1, value);
             }
             public bool ShouldSerializebinary_crossentropy() => __pbn__ResponseType.Is(1);
@@ -1225,7 +1225,7 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public CMsgSteamLearn_InferenceBackend_Response.CategoricalCrossEntropyOutput categorical_crossentropy
             {
-                get => __pbn__ResponseType.Is(2) ? ((CMsgSteamLearn_InferenceBackend_Response.CategoricalCrossEntropyOutput)__pbn__ResponseType.Object) : default(CMsgSteamLearn_InferenceBackend_Response.CategoricalCrossEntropyOutput);
+                get => __pbn__ResponseType.Is(2) ? ((CMsgSteamLearn_InferenceBackend_Response.CategoricalCrossEntropyOutput)__pbn__ResponseType.Object) : default;
                 set => __pbn__ResponseType = new global::ProtoBuf.DiscriminatedUnionObject(2, value);
             }
             public bool ShouldSerializecategorical_crossentropy() => __pbn__ResponseType.Is(2);
@@ -1234,7 +1234,7 @@ namespace SteamKit2.GC.Dota.Internal
             [global::ProtoBuf.ProtoMember(3)]
             public CMsgSteamLearn_InferenceBackend_Response.MutliBinaryCrossEntropyOutput multi_binary_crossentropy
             {
-                get => __pbn__ResponseType.Is(3) ? ((CMsgSteamLearn_InferenceBackend_Response.MutliBinaryCrossEntropyOutput)__pbn__ResponseType.Object) : default(CMsgSteamLearn_InferenceBackend_Response.MutliBinaryCrossEntropyOutput);
+                get => __pbn__ResponseType.Is(3) ? ((CMsgSteamLearn_InferenceBackend_Response.MutliBinaryCrossEntropyOutput)__pbn__ResponseType.Object) : default;
                 set => __pbn__ResponseType = new global::ProtoBuf.DiscriminatedUnionObject(3, value);
             }
             public bool ShouldSerializemulti_binary_crossentropy() => __pbn__ResponseType.Is(3);

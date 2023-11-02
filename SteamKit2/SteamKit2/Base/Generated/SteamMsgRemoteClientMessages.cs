@@ -1089,7 +1089,7 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public CRemoteClient_CreateSession_Request create_session_request
         {
-            get => __pbn__Message.Is(1) ? ((CRemoteClient_CreateSession_Request)__pbn__Message.Object) : default(CRemoteClient_CreateSession_Request);
+            get => __pbn__Message.Is(1) ? ((CRemoteClient_CreateSession_Request)__pbn__Message.Object) : default;
             set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(1, value);
         }
         public bool ShouldSerializecreate_session_request() => __pbn__Message.Is(1);
@@ -1100,7 +1100,7 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public CRemoteClient_StartPairing_Request start_pairing_request
         {
-            get => __pbn__Message.Is(2) ? ((CRemoteClient_StartPairing_Request)__pbn__Message.Object) : default(CRemoteClient_StartPairing_Request);
+            get => __pbn__Message.Is(2) ? ((CRemoteClient_StartPairing_Request)__pbn__Message.Object) : default;
             set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(2, value);
         }
         public bool ShouldSerializestart_pairing_request() => __pbn__Message.Is(2);
@@ -1109,7 +1109,7 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public CRemoteClient_SetPairingInfo_Request set_pairing_info_request
         {
-            get => __pbn__Message.Is(3) ? ((CRemoteClient_SetPairingInfo_Request)__pbn__Message.Object) : default(CRemoteClient_SetPairingInfo_Request);
+            get => __pbn__Message.Is(3) ? ((CRemoteClient_SetPairingInfo_Request)__pbn__Message.Object) : default;
             set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(3, value);
         }
         public bool ShouldSerializeset_pairing_info_request() => __pbn__Message.Is(3);
@@ -1118,7 +1118,7 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public CRemoteClient_CancelPairing_Request cancel_pairing_request
         {
-            get => __pbn__Message.Is(4) ? ((CRemoteClient_CancelPairing_Request)__pbn__Message.Object) : default(CRemoteClient_CancelPairing_Request);
+            get => __pbn__Message.Is(4) ? ((CRemoteClient_CancelPairing_Request)__pbn__Message.Object) : default;
             set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(4, value);
         }
         public bool ShouldSerializecancel_pairing_request() => __pbn__Message.Is(4);
@@ -1127,7 +1127,7 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public CRemoteClient_RegisterStatusUpdate_Notification register_status_update
         {
-            get => __pbn__Message.Is(5) ? ((CRemoteClient_RegisterStatusUpdate_Notification)__pbn__Message.Object) : default(CRemoteClient_RegisterStatusUpdate_Notification);
+            get => __pbn__Message.Is(5) ? ((CRemoteClient_RegisterStatusUpdate_Notification)__pbn__Message.Object) : default;
             set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(5, value);
         }
         public bool ShouldSerializeregister_status_update() => __pbn__Message.Is(5);
@@ -1136,7 +1136,7 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public CRemoteClient_UnregisterStatusUpdate_Notification unregister_status_update
         {
-            get => __pbn__Message.Is(6) ? ((CRemoteClient_UnregisterStatusUpdate_Notification)__pbn__Message.Object) : default(CRemoteClient_UnregisterStatusUpdate_Notification);
+            get => __pbn__Message.Is(6) ? ((CRemoteClient_UnregisterStatusUpdate_Notification)__pbn__Message.Object) : default;
             set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(6, value);
         }
         public bool ShouldSerializeunregister_status_update() => __pbn__Message.Is(6);
@@ -1145,7 +1145,7 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(7)]
         public CRemoteClient_RemotePacket_Notification remote_packet
         {
-            get => __pbn__Message.Is(7) ? ((CRemoteClient_RemotePacket_Notification)__pbn__Message.Object) : default(CRemoteClient_RemotePacket_Notification);
+            get => __pbn__Message.Is(7) ? ((CRemoteClient_RemotePacket_Notification)__pbn__Message.Object) : default;
             set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(7, value);
         }
         public bool ShouldSerializeremote_packet() => __pbn__Message.Is(7);
@@ -1173,7 +1173,7 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public CRemoteClient_CreateSession_Response create_session_response
         {
-            get => __pbn__Message.Is(2) ? ((CRemoteClient_CreateSession_Response)__pbn__Message.Object) : default(CRemoteClient_CreateSession_Response);
+            get => __pbn__Message.Is(2) ? ((CRemoteClient_CreateSession_Response)__pbn__Message.Object) : default;
             set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(2, value);
         }
         public bool ShouldSerializecreate_session_response() => __pbn__Message.Is(2);
@@ -1184,7 +1184,7 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public CRemoteClient_StartPairing_Response start_pairing_response
         {
-            get => __pbn__Message.Is(3) ? ((CRemoteClient_StartPairing_Response)__pbn__Message.Object) : default(CRemoteClient_StartPairing_Response);
+            get => __pbn__Message.Is(3) ? ((CRemoteClient_StartPairing_Response)__pbn__Message.Object) : default;
             set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(3, value);
         }
         public bool ShouldSerializestart_pairing_response() => __pbn__Message.Is(3);
@@ -1193,7 +1193,7 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public CRemoteClient_SetPairingInfo_Response set_pairing_info_response
         {
-            get => __pbn__Message.Is(4) ? ((CRemoteClient_SetPairingInfo_Response)__pbn__Message.Object) : default(CRemoteClient_SetPairingInfo_Response);
+            get => __pbn__Message.Is(4) ? ((CRemoteClient_SetPairingInfo_Response)__pbn__Message.Object) : default;
             set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(4, value);
         }
         public bool ShouldSerializeset_pairing_info_response() => __pbn__Message.Is(4);
@@ -1202,7 +1202,7 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public CRemoteClient_CancelPairing_Response cancel_pairing_response
         {
-            get => __pbn__Message.Is(5) ? ((CRemoteClient_CancelPairing_Response)__pbn__Message.Object) : default(CRemoteClient_CancelPairing_Response);
+            get => __pbn__Message.Is(5) ? ((CRemoteClient_CancelPairing_Response)__pbn__Message.Object) : default;
             set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(5, value);
         }
         public bool ShouldSerializecancel_pairing_response() => __pbn__Message.Is(5);
@@ -1211,7 +1211,7 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public CRemoteClient_GetReplies_Response reply_packet
         {
-            get => __pbn__Message.Is(6) ? ((CRemoteClient_GetReplies_Response)__pbn__Message.Object) : default(CRemoteClient_GetReplies_Response);
+            get => __pbn__Message.Is(6) ? ((CRemoteClient_GetReplies_Response)__pbn__Message.Object) : default;
             set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(6, value);
         }
         public bool ShouldSerializereply_packet() => __pbn__Message.Is(6);
