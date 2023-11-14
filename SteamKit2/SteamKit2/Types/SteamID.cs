@@ -34,21 +34,18 @@ namespace SteamKit2
     /// This 64-bit structure is used for identifying various objects on the Steam network.
     /// </summary>
     [DebuggerDisplay( "{Render()}, {ConvertToUInt64()}" )]
-    public class SteamID
+    public partial class SteamID
     {
         readonly BitVector64 steamid;
 
-        static readonly Regex Steam2Regex = new Regex(
-            @"STEAM_(?<universe>[0-4]):(?<authserver>[0-1]):(?<accountid>\d+)",
-            RegexOptions.Compiled | RegexOptions.IgnoreCase );
+        [GeneratedRegex( @"STEAM_(?<universe>[0-4]):(?<authserver>[0-1]):(?<accountid>[0-9]+)", RegexOptions.IgnoreCase )]
+        private static partial Regex Steam2Regex();
 
-        static readonly Regex Steam3Regex = new Regex(
-            @"\[(?<type>[AGMPCgcLTIUai]):(?<universe>[0-4]):(?<account>\d+)(:(?<instance>\d+))?\]",
-            RegexOptions.Compiled );
+        [GeneratedRegex( @"\[(?<type>[AGMPCgcLTIUai]):(?<universe>[0-4]):(?<account>[0-9]+)(:(?<instance>[0-9]+))?\]" )]
+        private static partial Regex Steam3Regex();
 
-        static readonly Regex Steam3FallbackRegex = new Regex(
-            @"\[(?<type>[AGMPCgcLTIUai]):(?<universe>[0-4]):(?<account>\d+)(\((?<instance>\d+)\))?\]",
-            RegexOptions.Compiled );
+        [GeneratedRegex( @"\[(?<type>[AGMPCgcLTIUai]):(?<universe>[0-4]):(?<account>[0-9]+)(\((?<instance>[0-9]+)\))?\]" )]
+        private static partial Regex Steam3FallbackRegex();
 
         static readonly Dictionary<EAccountType, char> AccountTypeChars = new Dictionary<EAccountType, char>
         {
@@ -222,7 +219,7 @@ namespace SteamKit2
                 return false;
             }
 
-            Match m = Steam2Regex.Match( steamId );
+            Match m = Steam2Regex().Match( steamId );
 
             if ( !m.Success )
             {
@@ -255,11 +252,11 @@ namespace SteamKit2
                 return false;
             }
 
-            Match m = Steam3Regex.Match( steamId );
+            Match m = Steam3Regex().Match( steamId );
 
             if ( !m.Success )
             {
-                m = Steam3FallbackRegex.Match( steamId );
+                m = Steam3FallbackRegex().Match( steamId );
 
                 if ( !m.Success )
                 {
@@ -762,6 +759,5 @@ namespace SteamKit2
         {
             return steamid.Data.GetHashCode();
         }
-
     }
 }
