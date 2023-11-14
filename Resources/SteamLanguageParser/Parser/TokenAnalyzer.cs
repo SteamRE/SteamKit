@@ -6,12 +6,12 @@ namespace SteamLanguageParser
 {
     public class Node
     {
-        public List<Node> childNodes { get; private set; }
+        public List<Node> ChildNodes { get; private set; }
         public string Name { get; set; }
 
         public Node()
         {
-            childNodes = new List<Node>();
+            ChildNodes = [];
         }
     }
 
@@ -34,7 +34,7 @@ namespace SteamLanguageParser
 
         public PropNode()
         {
-            Default = new List<Symbol>();
+            Default = [];
             Emit = true;
         }
     }
@@ -47,7 +47,7 @@ namespace SteamLanguageParser
 
     class TokenAnalyzer
     {
-        public static Node Analyze( Queue<Token> tokens )
+        public static Node Analyze(Queue<Token> tokens)
         {
             Node root = new Node();
 
@@ -64,13 +64,13 @@ namespace SteamLanguageParser
 
                         if (cur.Value == "import")
                         {
-                            Queue<Token> parentTokens = LanguageParser.TokenizeString( File.ReadAllText( text.Value ), text.Value );
+                            Queue<Token> parentTokens = LanguageParser.TokenizeString(File.ReadAllText(text.Value), text.Value);
 
-                            Node newRoot = Analyze( parentTokens );
+                            Node newRoot = Analyze(parentTokens);
 
-                            foreach (Node child in newRoot.childNodes)
+                            foreach (Node child in newRoot.ChildNodes)
                             {
-                                root.childNodes.Add(child);
+                                root.ChildNodes.Add(child);
                             }
                         }
                         break;
@@ -86,7 +86,7 @@ namespace SteamLanguageParser
                                     if (op1 != null)
                                     {
                                         ident = Expect(tokens, "identifier");
-                                        Token op2 = Expect(tokens, "operator", ">");
+                                        Expect(tokens, "operator", ">");
                                     }
 
                                     Token expect = Optional(tokens, "identifier", "expects");
@@ -97,8 +97,10 @@ namespace SteamLanguageParser
 
                                     Token removed = Optional(tokens, "identifier", "removed");
 
-                                    ClassNode cnode = new ClassNode();
-                                    cnode.Name = name.Value;
+                                    ClassNode cnode = new ClassNode
+                                    {
+                                        Name = name.Value
+                                    };
 
                                     if (ident != null)
                                     {
@@ -119,7 +121,7 @@ namespace SteamLanguageParser
                                         cnode.Emit = true;
                                     }
 
-                                    root.childNodes.Add(cnode);
+                                    root.ChildNodes.Add(cnode);
                                     ParseInnerScope(tokens, cnode, root);
                                 }
                                 break;
@@ -132,15 +134,17 @@ namespace SteamLanguageParser
                                     if (op1 != null)
                                     {
                                         datatype = Expect(tokens, "identifier");
-                                        Token op2 = Expect(tokens, "operator", ">");
+                                        Expect(tokens, "operator", ">");
                                     }
 
-                                    Token flag = Optional( tokens, "identifier", "flags" );
+                                    Token flag = Optional(tokens, "identifier", "flags");
 
-                                    EnumNode enode = new EnumNode();
-                                    enode.Name = name.Value;
+                                    EnumNode enode = new EnumNode
+                                    {
+                                        Name = name.Value
+                                    };
 
-                                    if ( flag != null )
+                                    if (flag != null)
                                     {
                                         enode.Flags = flag.Value;
                                     }
@@ -151,7 +155,7 @@ namespace SteamLanguageParser
                                     }
 
 
-                                    root.childNodes.Add(enode);
+                                    root.ChildNodes.Add(enode);
                                     ParseInnerScope(tokens, enode, root);
                                 }
                                 break;
@@ -165,7 +169,7 @@ namespace SteamLanguageParser
 
         private static void ParseInnerScope(Queue<Token> tokens, Node parent, Node root)
         {
-            Token scope1 = Expect(tokens, "operator", "{");
+            Expect(tokens, "operator", "{");
             Token scope2 = Optional(tokens, "operator", "}");
 
             while (scope2 == null)
@@ -175,12 +179,11 @@ namespace SteamLanguageParser
                 Token t1 = tokens.Dequeue();
 
                 Token t1op1 = Optional(tokens, "operator", "<");
-                Token flagop = null;
 
                 if (t1op1 != null)
                 {
-                    flagop = Expect(tokens, "identifier");
-                    Token t1op2 = Expect(tokens, "operator", ">");
+                    var flagop = Expect(tokens, "identifier");
+                    Expect(tokens, "operator", ">");
 
                     pnode.FlagsOpt = flagop.Value;
                 }
@@ -206,39 +209,43 @@ namespace SteamLanguageParser
 
                 Token defop = Optional(tokens, "operator", "=");
 
-                if ( defop != null )
+                if (defop != null)
                 {
-                    while ( true )
+                    while (true)
                     {
                         Token value = tokens.Dequeue();
-                        pnode.Default.Add( SymbolLocator.LookupSymbol( root, value.Value, false ) );
+                        pnode.Default.Add(SymbolLocator.LookupSymbol(root, value.Value, false));
 
-                        if ( Optional( tokens, "operator", "|" ) != null )
+                        if (Optional(tokens, "operator", "|") != null)
+                        {
                             continue;
+                        }
 
-                        Expect( tokens, "terminator", ";" );
+                        Expect(tokens, "terminator", ";");
                         break;
                     }
                 }
                 else
                 {
-                    Expect( tokens, "terminator", ";" );
+                    Expect(tokens, "terminator", ";");
                 }
 
-                Token obsolete = Optional( tokens, "identifier", "obsolete" );
-                if ( obsolete != null )
+                Token obsolete = Optional(tokens, "identifier", "obsolete");
+                if (obsolete != null)
                 {
                     // Obsolete identifiers are output when generating the language, but include a warning
                     pnode.Obsolete = "";
 
-                    Token obsoleteReason = Optional( tokens, "string" );
+                    Token obsoleteReason = Optional(tokens, "string");
 
-                    if ( obsoleteReason != null )
+                    if (obsoleteReason != null)
+                    {
                         pnode.Obsolete = obsoleteReason.Value;
+                    }
                 }
 
-                Token removed = Optional( tokens, "identifier", "removed" );
-                if ( removed != null )
+                Token removed = Optional(tokens, "identifier", "removed");
+                if (removed != null)
                 {
                     // Removed identifiers are not output when generating the language
                     pnode.Emit = false;
@@ -246,13 +253,15 @@ namespace SteamLanguageParser
                     // Consume and record the removed reason so it's available in the node graph
                     pnode.Removed = "";
 
-                    Token removedReason = Optional( tokens, "string" );
+                    Token removedReason = Optional(tokens, "string");
 
-                    if ( removedReason != null )
+                    if (removedReason != null)
+                    {
                         pnode.Removed = removedReason.Value;
+                    }
                 }
 
-                parent.childNodes.Add(pnode);
+                parent.ChildNodes.Add(pnode);
 
                 scope2 = Optional(tokens, "operator", "}");
             }
@@ -267,7 +276,7 @@ namespace SteamLanguageParser
                 return new Token("EOF", "");
             }
 
-            if(peek.Name != name)
+            if (peek.Name != name)
             {
                 throw new Exception("Expecting " + name);
             }
@@ -289,7 +298,7 @@ namespace SteamLanguageParser
                 if (peek.Source.HasValue)
                 {
                     var source = peek.Source.Value;
-                    throw new Exception( $"Expecting {name} '{value}', but got '{peek.Value}' at {source.FileName} {source.StartLineNumber},{source.StartColumnNumber}-{source.EndLineNumber},{source.EndColumnNumber}" );
+                    throw new Exception($"Expecting {name} '{value}', but got '{peek.Value}' at {source.FileName} {source.StartLineNumber},{source.StartColumnNumber}-{source.EndLineNumber},{source.EndColumnNumber}");
                 }
                 else
                 {

@@ -7,7 +7,7 @@ namespace SteamLanguageParser
 {
     class CSharpGen : ICodeGen
     {
-        private static Dictionary<String, String> readerTypeMap = new Dictionary<String, String>
+        private static readonly Dictionary<string, string> readerTypeMap = new()
         {
             {"byte", "Byte"},
             {"short", "Int16"},
@@ -24,26 +24,26 @@ namespace SteamLanguageParser
             if (end)
             {
                 sb.AppendLine("}");
-                sb.AppendLine( "#pragma warning restore 1591" );
-                sb.AppendLine( "#pragma warning restore 0219" );
+                sb.AppendLine("#pragma warning restore 1591");
+                sb.AppendLine("#pragma warning restore 0219");
             }
             else
             {
-                sb.AppendLine( "#pragma warning disable 1591" ); // this will hide "Missing XML comment for publicly visible type or member 'Type_or_Member'"
-                sb.AppendLine( "#pragma warning disable 0219" ); // Warning CS0219: The variable `(variable)' is assigned but its value is never used
+                sb.AppendLine("#pragma warning disable 1591"); // this will hide "Missing XML comment for publicly visible type or member 'Type_or_Member'"
+                sb.AppendLine("#pragma warning disable 0219"); // Warning CS0219: The variable `(variable)' is assigned but its value is never used
                 sb.AppendLine("using System;");
                 sb.AppendLine("using System.IO;");
-                sb.AppendLine( "using System.Runtime.InteropServices;" );
-                sb.AppendLine( "using System.Text;" );
+                sb.AppendLine("using System.Runtime.InteropServices;");
+                sb.AppendLine("using System.Text;");
                 sb.AppendLine();
-                sb.AppendLine( string.Format( "namespace {0}", nspace ) );
+                sb.AppendLine(string.Format("namespace {0}", nspace));
                 sb.AppendLine("{");
             }
         }
 
         public void EmitSerialBase(StringBuilder sb, int level, bool supportsGC)
         {
-            string padding = new String('\t', level);
+            string padding = new string('\t', level);
 
             sb.AppendLine(padding + "public interface ISteamSerializable");
             sb.AppendLine(padding + "{");
@@ -61,23 +61,23 @@ namespace SteamLanguageParser
             sb.AppendLine(padding + "\tEMsg GetEMsg();");
             sb.AppendLine(padding + "}");
 
-            if ( supportsGC )
+            if (supportsGC)
             {
-                sb.AppendLine( padding + "public interface IGCSerializableHeader : ISteamSerializable" );
-                sb.AppendLine( padding + "{" );
-                sb.AppendLine( padding + "\tvoid SetEMsg( uint msg );" );
-                sb.AppendLine( padding + "}" );
+                sb.AppendLine(padding + "public interface IGCSerializableHeader : ISteamSerializable");
+                sb.AppendLine(padding + "{");
+                sb.AppendLine(padding + "\tvoid SetEMsg( uint msg );");
+                sb.AppendLine(padding + "}");
 
-                sb.AppendLine( padding + "public interface IGCSerializableMessage : ISteamSerializable" );
-                sb.AppendLine( padding + "{" );
-                sb.AppendLine( padding + "\tuint GetEMsg();" );
-                sb.AppendLine( padding + "}" );
+                sb.AppendLine(padding + "public interface IGCSerializableMessage : ISteamSerializable");
+                sb.AppendLine(padding + "{");
+                sb.AppendLine(padding + "\tuint GetEMsg();");
+                sb.AppendLine(padding + "}");
             }
 
             sb.AppendLine();
         }
 
-        public string EmitType(Symbol sym)
+        public static string EmitType(Symbol sym)
         {
             if (sym is WeakSymbol)
             {
@@ -101,15 +101,15 @@ namespace SteamLanguageParser
 
             return "INVALID";
         }
-        public string EmitMultipleTypes( List<Symbol> syms, string operation = "|" )
+        public static string EmitMultipleTypes(List<Symbol> syms, string operation = "|")
         {
-            var identList = syms.OfType<WeakSymbol>().Select( wsym => wsym.Identifier );
-            return string.Join( " " + operation + " ", identList );
+            var identList = syms.OfType<WeakSymbol>().Select(wsym => wsym.Identifier);
+            return string.Join(" " + operation + " ", identList);
         }
 
-        public string GetUpperName(string name)
+        public static string GetUpperName(string name)
         {
-            return name.Substring(0, 1).ToUpper() + name.Remove(0, 1);
+            return name[..1].ToUpperInvariant() + name.Remove(0, 1);
         }
 
         public void EmitNode(Node n, StringBuilder sb, int level)
@@ -127,41 +127,44 @@ namespace SteamLanguageParser
             }
         }
 
-        private void EmitEnumNode(EnumNode enode, StringBuilder sb, int level)
+        private static void EmitEnumNode(EnumNode enode, StringBuilder sb, int level)
         {
-            string padding = new String('\t', level);
+            string padding = new string('\t', level);
 
-            if ( enode.Flags == "flags" )
-                sb.AppendLine( padding + "[Flags]" );
-
-            if ( enode.Type != null )
+            if (enode.Flags == "flags")
             {
-                sb.AppendLine( padding + "public enum " + enode.Name + " : " + EmitType( enode.Type ) );
+                sb.AppendLine(padding + "[Flags]");
+            }
+
+            if (enode.Type != null)
+            {
+                sb.AppendLine(padding + "public enum " + enode.Name + " : " + EmitType(enode.Type));
             }
             else
             {
-                sb.AppendLine( padding + "public enum " + enode.Name );
+                sb.AppendLine(padding + "public enum " + enode.Name);
             }
 
-            sb.AppendLine( padding + "{" );
+            sb.AppendLine(padding + "{");
 
-            string lastValue = "0";
-
-            foreach (PropNode prop in enode.childNodes)
+            foreach (PropNode prop in enode.ChildNodes.Cast<PropNode>())
             {
                 if (!prop.Emit)
                 {
                     continue;
                 }
 
-                lastValue = EmitMultipleTypes(prop.Default);
-
-                if ( prop.Obsolete != null )
+                var lastValue = EmitMultipleTypes(prop.Default);
+                if (prop.Obsolete != null)
                 {
-                    if ( prop.Obsolete.Length > 0 )
-                        sb.AppendLine( padding + "\t[Obsolete( \"" + prop.Obsolete + "\" )]" );
+                    if (prop.Obsolete.Length > 0)
+                    {
+                        sb.AppendLine(padding + "\t[Obsolete( \"" + prop.Obsolete + "\" )]");
+                    }
                     else
-                        sb.AppendLine( padding + "\t[Obsolete]" );
+                    {
+                        sb.AppendLine(padding + "\t[Obsolete]");
+                    }
                 }
                 sb.AppendLine(padding + "\t" + prop.Name + " = " + lastValue + ",");
             }
@@ -184,9 +187,9 @@ namespace SteamLanguageParser
             EmitClassDef(cnode, sb, level, true);
         }
 
-        private void EmitClassDef(ClassNode cnode, StringBuilder sb, int level, bool end)
+        private static void EmitClassDef(ClassNode cnode, StringBuilder sb, int level, bool end)
         {
-            string padding = new String('\t', level);
+            string padding = new string('\t', level);
 
             if (end)
             {
@@ -199,7 +202,7 @@ namespace SteamLanguageParser
 
             if (cnode.Ident != null)
             {
-                if ( cnode.Name.Contains( "MsgGC" ) )
+                if (cnode.Name.Contains("MsgGC"))
                 {
                     parent = "IGCSerializableMessage";
                 }
@@ -210,34 +213,36 @@ namespace SteamLanguageParser
             }
             else if (cnode.Name.Contains("Hdr"))
             {
-                if ( cnode.Name.Contains( "MsgGC" ) )
+                if (cnode.Name.Contains("MsgGC"))
+                {
                     parent = "IGCSerializableHeader";
+                }
                 else
+                {
                     parent = "ISteamSerializableHeader";
+                }
             }
 
-            if ( cnode.Name.Contains( "Hdr" ) )
+            if (cnode.Name.Contains("Hdr"))
             {
-                sb.AppendLine( padding + "[StructLayout( LayoutKind.Sequential )]" );
+                sb.AppendLine(padding + "[StructLayout( LayoutKind.Sequential )]");
             }
 
             sb.AppendLine(padding + "public class " + cnode.Name + " : " + parent);
             sb.AppendLine(padding + "{");
         }
 
-        private void EmitClassIdentity(ClassNode cnode, StringBuilder sb, int level)
+        private static void EmitClassIdentity(ClassNode cnode, StringBuilder sb, int level)
         {
-            string padding = new String('\t', level);
+            string padding = new string('\t', level);
 
             if (cnode.Ident != null)
             {
-                var cnodeIdentAsStrongSymbol = cnode.Ident as StrongSymbol;
                 var supressObsoletionWarning = false;
 
-                if (cnodeIdentAsStrongSymbol != null)
+                if (cnode.Ident is StrongSymbol strongSymbol)
                 {
-                    var propNode = cnodeIdentAsStrongSymbol.Prop as PropNode;
-                    if (propNode != null && propNode.Obsolete != null)
+                    if (strongSymbol.Prop is PropNode propNode && propNode.Obsolete != null)
                     {
                         supressObsoletionWarning = true;
                     }
@@ -245,16 +250,16 @@ namespace SteamLanguageParser
 
                 if (supressObsoletionWarning)
                 {
-                    sb.AppendLine( padding + "#pragma warning disable 0612" );
+                    sb.AppendLine(padding + "#pragma warning disable 0612");
                 }
 
-                if ( cnode.Name.Contains( "MsgGC" ) )
+                if (cnode.Name.Contains("MsgGC"))
                 {
-                    sb.AppendLine( padding + "public uint GetEMsg() { return " + EmitType( cnode.Ident ) + "; }" );
+                    sb.AppendLine(padding + "public uint GetEMsg() { return " + EmitType(cnode.Ident) + "; }");
                 }
                 else
                 {
-                    sb.AppendLine( padding + "public EMsg GetEMsg() { return " + EmitType( cnode.Ident ) + "; }" );
+                    sb.AppendLine(padding + "public EMsg GetEMsg() { return " + EmitType(cnode.Ident) + "; }");
                 }
 
                 if (supressObsoletionWarning)
@@ -266,31 +271,31 @@ namespace SteamLanguageParser
             }
             else if (cnode.Name.Contains("Hdr"))
             {
-                if ( cnode.Name.Contains( "MsgGC" ) )
+                if (cnode.Name.Contains("MsgGC"))
                 {
-                    if ( cnode.childNodes.Find( node => node.Name == "msg" ) != null )
+                    if (cnode.ChildNodes.Find(node => node.Name == "msg") != null)
                     {
-                        sb.AppendLine( padding + "public void SetEMsg( uint msg ) { this.Msg = msg; }" );
+                        sb.AppendLine(padding + "public void SetEMsg( uint msg ) { this.Msg = msg; }");
                         sb.AppendLine();
                     }
                     else
                     {
                         // this is required for a gc header which doesn't have an emsg
-                        sb.AppendLine( padding + "public void SetEMsg( uint msg ) { }" );
+                        sb.AppendLine(padding + "public void SetEMsg( uint msg ) { }");
                         sb.AppendLine();
                     }
                 }
                 else
                 {
-                    sb.AppendLine( padding + "public void SetEMsg( EMsg msg ) { this.Msg = msg; }" );
+                    sb.AppendLine(padding + "public void SetEMsg( EMsg msg ) { this.Msg = msg; }");
                     sb.AppendLine();
                 }
             }
         }
 
-        private int EmitClassProperties(ClassNode cnode, StringBuilder sb, int level)
+        private static int EmitClassProperties(ClassNode cnode, StringBuilder sb, int level)
         {
-            string padding = new String('\t', level);
+            string padding = new string('\t', level);
             int baseClassSize = 0;
 
             if (cnode.Parent != null)
@@ -298,7 +303,7 @@ namespace SteamLanguageParser
                 sb.AppendLine(padding + "public " + EmitType(cnode.Parent) + " Header { get; set; }");
             }
 
-            foreach (PropNode prop in cnode.childNodes)
+            foreach (PropNode prop in cnode.ChildNodes.Cast<PropNode>())
             {
                 string typestr = EmitType(prop.Type);
                 string propName = GetUpperName(prop.Name);
@@ -312,32 +317,31 @@ namespace SteamLanguageParser
                 int size = CodeGenerator.GetTypeSize(prop);
                 baseClassSize += size;
 
-                sb.AppendLine( padding + "// Static size: " + size);
+                sb.AppendLine(padding + "// Static size: " + size);
 
                 if (prop.Flags != null && prop.Flags == "steamidmarshal" && typestr == "ulong")
                 {
-                    sb.AppendLine( padding + string.Format( "private {0} {1};", typestr, prop.Name ) );
-                    sb.AppendLine( padding + "public SteamID " + propName + " { get { return new SteamID( " + prop.Name + " ); } set { " + prop.Name + " = value.ConvertToUInt64(); } }");
+                    sb.AppendLine(padding + string.Format("private {0} {1};", typestr, prop.Name));
+                    sb.AppendLine(padding + "public SteamID " + propName + " { get { return new SteamID( " + prop.Name + " ); } set { " + prop.Name + " = value.ConvertToUInt64(); } }");
                 }
-                else if ( prop.Flags != null && prop.Flags == "boolmarshal" && typestr == "byte" )
+                else if (prop.Flags != null && prop.Flags == "boolmarshal" && typestr == "byte")
                 {
-                    sb.AppendLine( padding + string.Format( "private {0} {1};", typestr, prop.Name ) );
-                    sb.AppendLine( padding + "public bool " + propName + " { get { return ( " + prop.Name + " == 1 ); } set { " + prop.Name + " = ( byte )( value ? 1 : 0 ); } }" );
+                    sb.AppendLine(padding + string.Format("private {0} {1};", typestr, prop.Name));
+                    sb.AppendLine(padding + "public bool " + propName + " { get { return ( " + prop.Name + " == 1 ); } set { " + prop.Name + " = ( byte )( value ? 1 : 0 ); } }");
                 }
-                else if ( prop.Flags != null && prop.Flags == "gameidmarshal" && typestr == "ulong" )
+                else if (prop.Flags != null && prop.Flags == "gameidmarshal" && typestr == "ulong")
                 {
-                    sb.AppendLine( padding + string.Format( "private {0} {1};", typestr, prop.Name ) );
-                    sb.AppendLine( padding + "public GameID " + propName + " { get { return new GameID( " + prop.Name + " ); } set { " + prop.Name + " = value.ToUInt64(); } }" );
+                    sb.AppendLine(padding + string.Format("private {0} {1};", typestr, prop.Name));
+                    sb.AppendLine(padding + "public GameID " + propName + " { get { return new GameID( " + prop.Name + " ); } set { " + prop.Name + " = value.ToUInt64(); } }");
                 }
                 else
                 {
-                    int temp;
-                    if ( !String.IsNullOrEmpty( prop.FlagsOpt ) && Int32.TryParse( prop.FlagsOpt, out temp ) )
+                    if (!string.IsNullOrEmpty(prop.FlagsOpt) && int.TryParse(prop.FlagsOpt, out _))
                     {
                         typestr += "[]";
                     }
 
-                    sb.AppendLine( padding + "public " + typestr + " " + propName + " { get; set; }" );
+                    sb.AppendLine(padding + "public " + typestr + " " + propName + " { get; set; }");
                 }
             }
 
@@ -346,9 +350,9 @@ namespace SteamLanguageParser
             return baseClassSize;
         }
 
-        private void EmitClassConstructor(ClassNode cnode, StringBuilder sb, int level)
+        private static void EmitClassConstructor(ClassNode cnode, StringBuilder sb, int level)
         {
-            string padding = new String('\t', level);
+            string padding = new string('\t', level);
 
             sb.AppendLine(padding + "public " + cnode.Name + "()");
             sb.AppendLine(padding + "{");
@@ -359,7 +363,7 @@ namespace SteamLanguageParser
                 sb.AppendLine(padding + "\tHeader.Msg = GetEMsg();");
             }
 
-            foreach (PropNode prop in cnode.childNodes)
+            foreach (PropNode prop in cnode.ChildNodes.Cast<PropNode>())
             {
                 Symbol defsym = prop.Default.FirstOrDefault();
                 string defflags = prop.Flags;
@@ -373,21 +377,21 @@ namespace SteamLanguageParser
                 }
                 else if (defsym == null)
                 {
-                    if ( !String.IsNullOrEmpty( prop.FlagsOpt ) )
+                    if (!string.IsNullOrEmpty(prop.FlagsOpt))
                     {
-                        ctor = "new " + EmitType( prop.Type ) + "[" + CodeGenerator.GetTypeSize( prop ) + "]";
+                        ctor = "new " + EmitType(prop.Type) + "[" + CodeGenerator.GetTypeSize(prop) + "]";
                     }
                     else
                     {
                         ctor = "0";
                     }
                 }
-                if (defflags != null && ( defflags == "steamidmarshal" || defflags == "gameidmarshal" || defflags == "boolmarshal" ))
+                if (defflags != null && (defflags == "steamidmarshal" || defflags == "gameidmarshal" || defflags == "boolmarshal"))
                 {
                     symname = prop.Name;
                 }
 
-                else if ( defflags != null && defflags == "const" )
+                else if (defflags != null && defflags == "const")
                 {
                     continue;
                 }
@@ -400,7 +404,7 @@ namespace SteamLanguageParser
 
         private void EmitClassSerializer(ClassNode cnode, StringBuilder sb, int level, int baseSize)
         {
-            string padding = new String('\t', level);
+            string padding = new string('\t', level);
 
             sb.AppendLine();
             sb.AppendLine(padding + "public void Serialize(Stream stream)");
@@ -408,8 +412,8 @@ namespace SteamLanguageParser
 
 
             // first emit variable length members
-            List<String> varLengthProps = new List<String>();
-            List<String> openedStreams = new List<String>();
+            List<string> varLengthProps = [];
+            List<string> openedStreams = [];
             varLengthProps.Add(baseSize.ToString());
 
             if (cnode.Parent != null)
@@ -421,7 +425,7 @@ namespace SteamLanguageParser
                 sb.AppendLine();
             }
 
-            foreach (PropNode prop in cnode.childNodes)
+            foreach (PropNode prop in cnode.ChildNodes.Cast<PropNode>())
             {
                 string typestr = EmitType(prop.Type);
                 int size = CodeGenerator.GetTypeSize(prop);
@@ -440,7 +444,7 @@ namespace SteamLanguageParser
 
                         sb.AppendLine(padding + "\tMemoryStream ms" + GetUpperName(prop.Name) + " = new MemoryStream();");
                         sb.AppendLine(padding + "\tProtoBuf.Serializer.Serialize<" + typestr + ">(ms" + GetUpperName(prop.Name) + ", " + GetUpperName(prop.Name) + ");");
-  
+
                         if (prop.FlagsOpt != null)
                         {
                             sb.AppendLine(padding + "\t" + GetUpperName(prop.FlagsOpt) + " = (int)ms" + GetUpperName(prop.Name) + ".Length;");
@@ -453,14 +457,14 @@ namespace SteamLanguageParser
                         sb.AppendLine(padding + "\tMemoryStream ms" + GetUpperName(prop.Name) + " = " + GetUpperName(prop.Name) + ".serialize();");
                     }
 
-                    varLengthProps.Add( "(int)ms" + GetUpperName(prop.Name) + ".Length" );
-                    openedStreams.Add( "ms" + GetUpperName(prop.Name) );
+                    varLengthProps.Add("(int)ms" + GetUpperName(prop.Name) + ".Length");
+                    openedStreams.Add("ms" + GetUpperName(prop.Name));
                 }
             }
 
             //sb.AppendLine(padding + "\tBinaryWriterEx bw = new BinaryWriterEx( stream );");
             //sb.AppendLine();
-            sb.AppendLine(padding + "\tusing BinaryWriter bw = new BinaryWriter( stream, Encoding.UTF8, leaveOpen: true );" );
+            sb.AppendLine(padding + "\tusing BinaryWriter bw = new BinaryWriter( stream, Encoding.UTF8, leaveOpen: true );");
             sb.AppendLine();
 
             if (cnode.Parent != null)
@@ -469,33 +473,35 @@ namespace SteamLanguageParser
             }
 
             // next emit writers
-            foreach (PropNode prop in cnode.childNodes)
+            foreach (PropNode prop in cnode.ChildNodes.Cast<PropNode>())
             {
                 string typecast = "";
                 string propName = GetUpperName(prop.Name);
 
-                if (prop.Type is StrongSymbol && ((StrongSymbol)prop.Type).Class is EnumNode)
+                if (prop.Type is StrongSymbol strongSymbol && strongSymbol.Class is EnumNode enode)
                 {
-                    EnumNode enode = ((StrongSymbol)prop.Type).Class as EnumNode;
-
-                    if (enode.Type is WeakSymbol)
-                        typecast = "(" + ((WeakSymbol)enode.Type).Identifier + ")";
+                    if (enode.Type is WeakSymbol weakSymbol)
+                    {
+                        typecast = "(" + weakSymbol.Identifier + ")";
+                    }
                     else
+                    {
                         typecast = "(int)";
+                    }
                 }
 
                 if (prop.Flags != null)
                 {
-                    if ( prop.Flags == "steamidmarshal" || prop.Flags == "gameidmarshal" || prop.Flags == "boolmarshal" )
+                    if (prop.Flags == "steamidmarshal" || prop.Flags == "gameidmarshal" || prop.Flags == "boolmarshal")
                     {
                         propName = prop.Name;
                     }
-                    else if ( prop.Flags == "proto" )
+                    else if (prop.Flags == "proto")
                     {
-                        sb.AppendLine( padding + "\tbw.Write( ms" + propName + ".ToArray() );" );
+                        sb.AppendLine(padding + "\tbw.Write( ms" + propName + ".ToArray() );");
                         continue;
                     }
-                    else if ( prop.Flags == "const" )
+                    else if (prop.Flags == "const")
                     {
                         continue;
                     }
@@ -505,7 +511,7 @@ namespace SteamLanguageParser
                 {
                     propName = "MsgUtil.MakeMsg( " + propName + ", true )";
                 }
-                else if ( prop.Flags == "protomaskgc" )
+                else if (prop.Flags == "protomaskgc")
                 {
                     propName = "MsgUtil.MakeGCMsg( " + propName + ", true )";
                 }
@@ -515,7 +521,7 @@ namespace SteamLanguageParser
 
             sb.AppendLine();
 
-            foreach (String stream in openedStreams)
+            foreach (string stream in openedStreams)
             {
                 sb.AppendLine(padding + "\t" + stream + ".Dispose();");
             }
@@ -525,13 +531,9 @@ namespace SteamLanguageParser
             sb.AppendLine(padding + "}");
         }
 
-        private void EmitClassSize( ClassNode cnode, StringBuilder sb, int level )
-        {
-        }
-
         private void EmitClassDeserializer(ClassNode cnode, StringBuilder sb, int level, int baseSize)
         {
-            string padding = new String('\t', level);
+            string padding = new string('\t', level);
 
             sb.AppendLine();
             sb.AppendLine(padding + "public void Deserialize( Stream stream )");
@@ -539,7 +541,7 @@ namespace SteamLanguageParser
 
             if (baseSize > 0)
             {
-                sb.AppendLine(padding + "\tusing BinaryReader br = new BinaryReader( stream, Encoding.UTF8, leaveOpen: true );" );
+                sb.AppendLine(padding + "\tusing BinaryReader br = new BinaryReader( stream, Encoding.UTF8, leaveOpen: true );");
                 sb.AppendLine();
             }
 
@@ -548,7 +550,7 @@ namespace SteamLanguageParser
                 sb.AppendLine(padding + "\tHeader.Deserialize( stream );");
             }
 
-            foreach (PropNode prop in cnode.childNodes)
+            foreach (PropNode prop in cnode.ChildNodes.Cast<PropNode>())
             {
                 string typestr = EmitType(prop.Type);
                 int size = CodeGenerator.GetTypeSize(prop);
@@ -556,11 +558,11 @@ namespace SteamLanguageParser
                 string defflags = prop.Flags;
                 string symname = GetUpperName(prop.Name);
 
-                if ( defflags != null && ( defflags == "steamidmarshal" || defflags == "gameidmarshal" || defflags == "boolmarshal" ) )
+                if (defflags != null && (defflags == "steamidmarshal" || defflags == "gameidmarshal" || defflags == "boolmarshal"))
                 {
                     symname = prop.Name;
                 }
-                else if ( defflags != null && defflags == "const" )
+                else if (defflags != null && defflags == "const")
                 {
                     continue;
                 }
@@ -595,7 +597,7 @@ namespace SteamLanguageParser
 
                     string call = "br.Read" + readerTypeMap[typestr] + "()";
 
-                    if (!String.IsNullOrEmpty(prop.FlagsOpt))
+                    if (!string.IsNullOrEmpty(prop.FlagsOpt))
                     {
                         call = "br.Read" + readerTypeMap[typestr] + "s( " + prop.FlagsOpt + " )";
                     }
@@ -604,7 +606,7 @@ namespace SteamLanguageParser
                     {
                         call = "MsgUtil.GetMsg( (uint)" + call + " )";
                     }
-                    else if ( prop.Flags == "protomaskgc" )
+                    else if (prop.Flags == "protomaskgc")
                     {
                         call = "MsgUtil.GetGCMsg( (uint)" + call + " )";
                     }
