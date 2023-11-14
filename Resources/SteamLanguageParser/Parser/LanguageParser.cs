@@ -1,95 +1,83 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace SteamLanguageParser
 {
-    class Token
+    class Token(string name, string value)
     {
-        public string Name { get; }
-        public string Value { get; }
+        public string Name { get; } = name;
+        public string Value { get; } = value;
 
         public TokenSourceInfo? Source { get; }
 
-        public Token( string name, string value )
-        {
-            Name = name;
-            Value = value;
-        }
-
-        public Token( string name, string value, TokenSourceInfo source )
-            : this( name, value )
+        public Token(string name, string value, TokenSourceInfo source)
+            : this(name, value)
         {
             Source = source;
         }
     }
 
-    struct TokenSourceInfo
+    readonly struct TokenSourceInfo(string fileName, int startLineNumber, int startColumnNumber, int endLineNumber, int endColumnNumber)
     {
-        public TokenSourceInfo(string fileName, int startLineNumber, int startColumnNumber, int endLineNumber, int endColumnNumber)
-        {
-            FileName = fileName;
-            StartLineNumber = startLineNumber;
-            StartColumnNumber = startColumnNumber;
-            EndLineNumber = endLineNumber;
-            EndColumnNumber = endColumnNumber;
-        }
-
-        public string FileName { get; }
-        public int StartLineNumber { get; }
-        public int StartColumnNumber { get; }
-        public int EndLineNumber { get; }
-        public int EndColumnNumber { get; }
+        public string FileName { get; } = fileName;
+        public int StartLineNumber { get; } = startLineNumber;
+        public int StartColumnNumber { get; } = startColumnNumber;
+        public int EndLineNumber { get; } = endLineNumber;
+        public int EndColumnNumber { get; } = endColumnNumber;
     }
-    
-    class LanguageParser
+
+    partial class LanguageParser
     {
-        public static string pattern =
-        @"(?<whitespace>\s+)|" +
-        @"(?<terminator>[;])|" +
+        [GeneratedRegex(
+            @"(?<whitespace>\s+)|" +
+            @"(?<terminator>[;])|" +
 
-        "[\"](?<string>.+?)[\"]|" + 
+            "[\"](?<string>.+?)[\"]|" +
 
-        @"\/\/(?<comment>.*)$|" +
+            @"\/\/(?<comment>.*)$|" +
 
-        @"(?<identifier>-?[a-zA-Z_0-9][a-zA-Z0-9_:.]*)|" +
-        @"[#](?<preprocess>[a-zA-Z]*)|" + 
+            @"(?<identifier>-?[a-zA-Z_0-9][a-zA-Z0-9_:.]*)|" +
+            @"[#](?<preprocess>[a-zA-Z]*)|" +
 
-        @"(?<operator>[{}<>\]=|])|" +
-        @"(?<invalid>[^\s]+)";
+            @"(?<operator>[{}<>\]=|])|" +
+            @"(?<invalid>[^\s]+)",
+            RegexOptions.Multiline)]
+        private static partial Regex RegexPattern();
 
-        private static Regex regexPattern = new Regex( pattern, RegexOptions.Multiline | RegexOptions.Compiled );
-
-        public static Queue<Token> TokenizeString( string buffer, string fileName = "" )
+        public static Queue<Token> TokenizeString(string buffer, string fileName = "")
         {
-            var bufferLines = buffer.Split( new[] { Environment.NewLine }, StringSplitOptions.None );
+            var regexPattern = RegexPattern();
+            var bufferLines = buffer.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
-            MatchCollection matches = regexPattern.Matches( buffer );
+            MatchCollection matches = regexPattern.Matches(buffer);
 
             Queue<Token> tokenList = new Queue<Token>();
-            foreach ( Match match in matches )
+            foreach (Match match in matches.Cast<Match>())
             {
                 int i = 0;
-                foreach ( Group group in match.Groups )
+                foreach (Group group in match.Groups.Cast<Group>())
                 {
                     string matchValue = group.Value;
                     bool success = group.Success;
 
-                    if ( success && i > 1 )
+                    if (success && i > 1)
                     {
-                        string groupName = regexPattern.GroupNameFromNumber( i );
+                        string groupName = regexPattern.GroupNameFromNumber(i);
 
-                        if ( groupName == "comment" )
+                        if (groupName == "comment")
+                        {
                             continue; // don't create tokens for comments
+                        }
 
-                        int startLineNumber, startColumnNumber, endLineNumber, endColumnNumber;
-                        CalculateTextOffset( bufferLines, match.Index, out startLineNumber, out startColumnNumber);
-                        CalculateTextOffset( bufferLines, match.Index + match.Length, out endLineNumber, out endColumnNumber);
+                        CalculateTextOffset(bufferLines, match.Index, out var startLineNumber, out var startColumnNumber);
+                        CalculateTextOffset(bufferLines, match.Index + match.Length, out var endLineNumber, out var endColumnNumber);
 
-                        var tokenSource = new TokenSourceInfo( fileName, startLineNumber, startColumnNumber, endLineNumber, endColumnNumber );
-                        var token = new Token( groupName, matchValue, tokenSource );
+                        var tokenSource = new TokenSourceInfo(fileName, startLineNumber, startColumnNumber, endLineNumber, endColumnNumber);
+                        var token = new Token(groupName, matchValue, tokenSource);
 
-                        tokenList.Enqueue( token );
+                        tokenList.Enqueue(token);
                     }
                     i++;
                 }
@@ -99,13 +87,13 @@ namespace SteamLanguageParser
             return tokenList;
         }
 
-        static void CalculateTextOffset( string[] textLines, int index, out int lineNumber, out int columnNumber )
+        static void CalculateTextOffset(string[] textLines, int index, out int lineNumber, out int columnNumber)
         {
             int offset = 0;
-            for ( lineNumber = 0; lineNumber < textLines.Length; lineNumber++ )
+            for (lineNumber = 0; lineNumber < textLines.Length; lineNumber++)
             {
-                var currentLineLength = textLines[ lineNumber ].Length;
-                if ( offset + currentLineLength >= index )
+                var currentLineLength = textLines[lineNumber].Length;
+                if (offset + currentLineLength >= index)
                 {
                     break;
                 }
@@ -113,10 +101,7 @@ namespace SteamLanguageParser
                 offset += currentLineLength + Environment.NewLine.Length;
             }
 
-            if ( lineNumber == textLines.Length )
-            {
-                throw new ArgumentOutOfRangeException( "index must be less than the full text length when re-joined." );
-            }
+            ArgumentOutOfRangeException.ThrowIfEqual(lineNumber, textLines.Length);
 
             lineNumber++; // Human line numbering starts from 1, even though it's the 0th line in the file programatically.
             columnNumber = index - offset + 1;

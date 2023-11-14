@@ -37,8 +37,8 @@ namespace SteamLanguageParser
             }
         }
 
-        private static string defaultType = "uint";
-        private static Dictionary<String, TypeInfo> weakTypeMap = new Dictionary<String, TypeInfo>
+        private static readonly string defaultType = "uint";
+        private static readonly Dictionary<string, TypeInfo> weakTypeMap = new()
         {
             {"byte", new TypeInfo(1)},
             {"short", new TypeInfo(2)},
@@ -51,8 +51,10 @@ namespace SteamLanguageParser
 
         public static string GetUnsignedType(string type)
         {
-            if (weakTypeMap.ContainsKey(type) && !weakTypeMap[type].Signed)
-                return weakTypeMap[type].SignedType;
+            if (weakTypeMap.TryGetValue(type, out var value) && !value.Signed)
+            {
+                return value.SignedType;
+            }
 
             return type;
         }
@@ -64,11 +66,17 @@ namespace SteamLanguageParser
                 if (weakTypeMap[key].Size == size)
                 {
                     if (unsigned && weakTypeMap[key].Signed == false)
+                    {
                         return key;
+                    }
                     else if (weakTypeMap[key].Signed)
+                    {
                         return key;
+                    }
                     else if (!weakTypeMap[key].Signed)
+                    {
                         return weakTypeMap[key].SignedType;
+                    }
                 }
             }
 
@@ -95,9 +103,9 @@ namespace SteamLanguageParser
                     key = defaultType;
                 }
 
-                if (!String.IsNullOrEmpty(prop.FlagsOpt))
+                if (!string.IsNullOrEmpty(prop.FlagsOpt))
                 {
-                    return Int32.Parse(prop.FlagsOpt);
+                    return int.Parse(prop.FlagsOpt);
                 }
 
                 return weakTypeMap[key].Size;
@@ -110,28 +118,36 @@ namespace SteamLanguageParser
                 {
                     EnumNode enode = ssym.Class as EnumNode;
 
-                    if (enode.Type is WeakSymbol)
-                        return weakTypeMap[((WeakSymbol)enode.Type).Identifier].Size;
+                    if (enode.Type is WeakSymbol weakSymbol)
+                    {
+                        return weakTypeMap[weakSymbol.Identifier].Size;
+                    }
                     else
+                    {
                         return weakTypeMap[defaultType].Size;
+                    }
                 }
             }
 
             return 0;
         }
 
-        public static void EmitCode(Node root, ICodeGen gen, StringBuilder sb, string nspace, bool supportsGC, bool internalFile )
+        public static void EmitCode(Node root, ICodeGen gen, StringBuilder sb, string nspace, bool supportsGC, bool internalFile)
         {
             gen.EmitNamespace(sb, false, nspace);
 
             int level = 0;
             if (gen.SupportsNamespace())
+            {
                 level = 1;
+            }
 
-            if ( internalFile )
-                gen.EmitSerialBase( sb, level, supportsGC );
+            if (internalFile)
+            {
+                gen.EmitSerialBase(sb, level, supportsGC);
+            }
 
-            foreach (Node n in root.childNodes)
+            foreach (Node n in root.ChildNodes)
             {
                 gen.EmitNode(n, sb, level);
             }

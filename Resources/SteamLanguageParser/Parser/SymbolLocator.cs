@@ -27,31 +27,23 @@ namespace SteamLanguageParser
         }
     }
 
-    public class WeakSymbol : Symbol
+    public class WeakSymbol(string ident) : Symbol
     {
-        public string Identifier { get; set; }
-
-        public WeakSymbol(string ident)
-        {
-            Identifier = ident;
-        }
+        public string Identifier { get; set; } = ident;
     }
 
-    public class SymbolLocator
+    public partial class SymbolLocator
     {
-        public static string identifierPattern =
+        public const string identifierPattern =
             @"(?<identifier>[a-zA-Z0-9_:]*)";
 
-        public static string fullIdentPattern =
+        public const string fullIdentPattern =
             @"(?<class>[a-zA-Z0-9_]*?)::(?<name>[a-zA-Z0-9_]*)";
-
-        private static Regex identifierRegex = new Regex(identifierPattern, RegexOptions.Compiled);
-        private static Regex fullIdentRegex = new Regex(fullIdentPattern, RegexOptions.Compiled);
 
         // single level
         private static Node FindNode(Node tree, string symbol)
         {
-            foreach (Node child in tree.childNodes)
+            foreach (Node child in tree.ChildNodes)
             {
                 if (child.Name == symbol)
                 {
@@ -64,7 +56,7 @@ namespace SteamLanguageParser
 
         public static Symbol LookupSymbol(Node tree, string identifier, bool strongonly)
         {
-            Match ident = identifierRegex.Match(identifier);
+            Match ident = IdentifierRegex().Match(identifier);
 
             if (!ident.Success)
             {
@@ -93,32 +85,26 @@ namespace SteamLanguageParser
             }
             else
             {
-                ident = fullIdentRegex.Match(identifier);
+                ident = FullIdentRegex().Match(identifier);
 
                 if (!ident.Success)
                 {
                     throw new Exception("Couldn't parse full identifier");
                 }
 
-                Node classNode = FindNode(tree, ident.Groups["class"].Value);
-
-                if (classNode == null)
-                {
-                    throw new Exception("Invalid class in identifier " + identifier);
-                }
-
-                Node propNode = FindNode(classNode, ident.Groups["name"].Value);
-
-                if (propNode == null)
-                {
-                    throw new Exception("Invalid property in identifier " + identifier);
-                }
+                Node classNode = FindNode(tree, ident.Groups["class"].Value) ?? throw new Exception("Invalid class in identifier " + identifier);
+                Node propNode = FindNode(classNode, ident.Groups["name"].Value) ?? throw new Exception("Invalid property in identifier " + identifier);
 
                 return new StrongSymbol(classNode, propNode);
             }
-            
+
             throw new Exception("Invalid symbol");
         }
- 
+
+        [GeneratedRegex(identifierPattern, RegexOptions.Compiled)]
+        private static partial Regex IdentifierRegex();
+
+        [GeneratedRegex(fullIdentPattern, RegexOptions.Compiled)]
+        private static partial Regex FullIdentRegex();
     }
 }
