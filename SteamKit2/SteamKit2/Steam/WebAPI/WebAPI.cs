@@ -18,7 +18,7 @@ namespace SteamKit2
     /// <summary>
     /// Utility class for interacting with the Steam Web API.
     /// </summary>
-    public sealed class WebAPI
+    public sealed partial class WebAPI
     {
         /// <summary>
         /// Represents a response to a WebAPI request.
@@ -193,12 +193,15 @@ namespace SteamKit2
         /// This is a dynamic object that allows function calls to interfaces with minimal code.
         /// This version of the <see cref="Interface"/> class makes use of TPL Tasks to provide an asynchronous API.
         /// </summary>
-        public sealed class AsyncInterface : DynamicObject, IDisposable
+        public sealed partial class AsyncInterface : DynamicObject, IDisposable
         {
             internal readonly HttpClient httpClient;
 
             internal readonly string iface;
             internal readonly string apiKey;
+
+            [GeneratedRegex( @"(?<name>[a-zA-Z]+)(?<version>[0-9]*)" )]
+            private static partial Regex FuncNameRegex();
 
             /// <summary>
             /// Gets or sets the timeout value in milliseconds for any web requests made to the WebAPI.
@@ -211,11 +214,6 @@ namespace SteamKit2
                 get => httpClient.Timeout;
                 set => httpClient.Timeout = value;
             }
-
-            static Regex funcNameRegex = new Regex(
-                @"(?<name>[a-zA-Z]+)(?<version>\d*)",
-                RegexOptions.Compiled | RegexOptions.IgnoreCase
-            );
 
             internal AsyncInterface( HttpClient httpClient, string iface, string apiKey )
             {
@@ -528,7 +526,7 @@ namespace SteamKit2
                     apiArgs.Add( argName, argValue );
                 }
 
-                Match match = funcNameRegex.Match( binder.Name );
+                Match match = FuncNameRegex().Match( binder.Name );
 
                 if ( !match.Success )
                 {
