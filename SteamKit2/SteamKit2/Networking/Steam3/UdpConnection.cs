@@ -102,8 +102,8 @@ namespace SteamKit2
 
             state = (int)State.Disconnected;
 
-            outPackets = new List<UdpPacket>();
-            inPackets = new Dictionary<uint, UdpPacket>();
+            outPackets = [];
+            inPackets = [];
         }
 
         public event EventHandler<NetMsgEventArgs>? NetMsgReceived;
@@ -475,10 +475,7 @@ namespace SteamKit2
                 }
             }
 
-            if ( sock != null )
-            {
-                sock.Dispose();
-            }
+            sock?.Dispose();
 
             log.LogDebug("UdpConnection", "Calling OnDisconnected");
             Disconnected?.Invoke( this, new DisconnectedEventArgs( userRequestedDisconnect ) );

@@ -120,8 +120,8 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSTokensCallback"/>.</returns>
         public AsyncJob<PICSTokensCallback> PICSGetAccessTokens( uint? app, uint? package )
         {
-            List<uint> apps = new List<uint>();
-            List<uint> packages = new List<uint>();
+            List<uint> apps = [];
+            List<uint> packages = [];
 
             if ( app.HasValue ) apps.Add( app.Value );
             if ( package.HasValue ) packages.Add( package.Value );

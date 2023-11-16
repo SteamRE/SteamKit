@@ -109,7 +109,7 @@ namespace SteamKit2
         public ClientMsgProtobuf( IPacketMsg msg )
             : this( msg.GetMsgTypeWithNullCheck( nameof(msg) ) )
         {
-            if ( !( msg is PacketClientMsgProtobuf packetMsgProto ) )
+            if ( msg is not PacketClientMsgProtobuf packetMsgProto )
             {
                 throw new InvalidDataException( "ClientMsgProtobuf used for non-proto message!" );
             }
@@ -184,7 +184,7 @@ namespace SteamKit2
         public ClientMsgProtobuf( IPacketMsg msg )
             : this( msg.GetMsgTypeWithNullCheck( nameof(msg) ) )
         {
-            if ( !( msg is PacketClientMsgProtobuf packetMsg ) )
+            if ( msg is not PacketClientMsgProtobuf packetMsg )
             {
                 throw new InvalidDataException( $"ClientMsgProtobuf<{typeof(TBody).FullName}> used for non-proto message!" );
             }
@@ -341,7 +341,7 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( msg );
 
-            if ( !( msg is PacketClientMsg packetMsg ) )
+            if ( msg is not PacketClientMsg packetMsg )
             {
                 throw new InvalidDataException( $"ClientMsg<{typeof( TBody ).FullName}> used for proto message!" );
             }
@@ -489,7 +489,7 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( msg );
 
-            if ( !( msg is PacketMsg packetMsg ) )
+            if ( msg is not PacketMsg packetMsg )
             {
                 throw new InvalidDataException( $"ClientMsg<{typeof( TBody ).FullName}> used for proto message!" );
             }

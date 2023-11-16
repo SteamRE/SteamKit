@@ -85,7 +85,7 @@ namespace SteamKit2
                 Int32 numFastBytes = 128;
 
                 SevenZip.CoderPropID[] propIDs = 
-                {
+                [
                     SevenZip.CoderPropID.DictionarySize,
                     SevenZip.CoderPropID.PosStateBits,
                     SevenZip.CoderPropID.LitContextBits,
@@ -94,10 +94,10 @@ namespace SteamKit2
                     SevenZip.CoderPropID.NumFastBytes,
                     SevenZip.CoderPropID.MatchFinder,
                     SevenZip.CoderPropID.EndMarker
-                };
+                ];
 
                 object[] properties = 
-                {
+                [
                     (Int32)(dictionary),
                     (Int32)(posStateBits),
                     (Int32)(litContextBits),
@@ -106,7 +106,7 @@ namespace SteamKit2
                     (Int32)(numFastBytes),
                     "bt4",
                     false
-                };
+                ];
 
                 SevenZip.Compression.LZMA.Encoder encoder = new SevenZip.Compression.LZMA.Encoder();
                 encoder.SetCoderProperties(propIDs, properties);

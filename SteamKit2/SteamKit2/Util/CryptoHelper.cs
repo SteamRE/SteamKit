@@ -6,10 +6,8 @@
 
 
 using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.IO.Hashing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -54,7 +52,7 @@ namespace SteamKit2
         /// </summary>
         public void Dispose()
         {
-            ( ( IDisposable )rsa ).Dispose();
+            rsa.Dispose();
         }
     }
 
@@ -63,19 +61,6 @@ namespace SteamKit2
     /// </summary>
     public static class CryptoHelper
     {
-        /// <summary>
-        /// Performs an SHA1 hash of an input byte array
-        /// </summary>
-        public static byte[] SHAHash( byte[] input )
-        {
-            ArgumentNullException.ThrowIfNull( input );
-
-            using ( var sha = SHA1.Create() )
-            {
-                return sha.ComputeHash( input );
-            }
-        }
-
         /// <summary>
         /// Encrypts using AES/CBC/PKCS7 an input byte array with a given key and IV
         /// </summary>
@@ -353,12 +338,10 @@ namespace SteamKit2
             ArgumentNullException.ThrowIfNull( password );
 
             byte[] key, hash;
-            using( var sha256 = SHA256.Create() )
-            {
-                byte[] password_bytes = Encoding.UTF8.GetBytes( password );
-                key = sha256.ComputeHash( password_bytes );
-            }
-            using( HMACSHA1 hmac = new HMACSHA1(key) )
+            byte[] password_bytes = Encoding.UTF8.GetBytes( password );
+            key = SHA256.HashData( password_bytes );
+
+            using ( HMACSHA1 hmac = new HMACSHA1( key ) )
             {
                 hash = hmac.ComputeHash( input, 0, 32 );
             }

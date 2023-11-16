@@ -69,7 +69,7 @@ namespace SteamKit2
 
             if ( branchPasswordHash != null && branch == null )
             {
-                throw new ArgumentNullException( "Branch name may not be null if password is provided.", nameof( branch ) );
+                throw new ArgumentNullException( nameof( branch ), "Branch name may not be null if password is provided." );
             }
 
             var request = new CContentServerDirectory_GetManifestRequestCode_Request

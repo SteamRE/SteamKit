@@ -16,6 +16,7 @@ using static SteamKit2.Util.MacHelpers.DiskArbitration;
 using static SteamKit2.Util.MacHelpers.IOKit;
 using System.Runtime.Versioning;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 
 namespace SteamKit2
 {
@@ -156,7 +157,7 @@ namespace SteamKit2
         public byte[]? GetMachineGuid()
         {
             string[] machineFiles =
-            {
+            [
                 "/etc/machine-id", // present on at least some gentoo systems
                 "/var/lib/dbus/machine-id",
                 "/sys/class/net/eth0/address",
@@ -164,7 +165,7 @@ namespace SteamKit2
                 "/sys/class/net/eth2/address",
                 "/sys/class/net/eth3/address",
                 "/etc/hostname",
-            };
+            ];
 
             foreach ( var fileName in machineFiles )
             {
@@ -189,10 +190,10 @@ namespace SteamKit2
             string[] bootParams = GetBootOptions();
 
             string[] paramsToCheck =
-            {
+            [
                 "root=UUID=",
                 "root=PARTUUID=",
-            };
+            ];
 
             foreach ( string param in paramsToCheck )
             {
@@ -225,7 +226,7 @@ namespace SteamKit2
             }
             catch
             {
-                return Array.Empty<string>();
+                return [];
             }
 
             return bootOptions.Split( ' ' );
@@ -245,7 +246,7 @@ namespace SteamKit2
             }
             catch
             {
-                return Array.Empty<string>();
+                return [];
             }
         }
 
@@ -257,7 +258,7 @@ namespace SteamKit2
             if ( paramString == null )
                 return null;
 
-            return paramString.Substring( param.Length );
+            return paramString[ param.Length.. ];
         }
     }
 
@@ -350,7 +351,7 @@ namespace SteamKit2
             }
         }
 
-        static ConditionalWeakTable<IMachineInfoProvider, Task<MachineID>> generationTable = new();
+        static ConditionalWeakTable<IMachineInfoProvider, Task<MachineID>> generationTable = [];
 
         public static void Init(IMachineInfoProvider machineInfoProvider)
         {
@@ -416,7 +417,7 @@ namespace SteamKit2
 
         static string GetHexString( byte[] data )
         {
-            data = CryptoHelper.SHAHash( data );
+            data = SHA1.HashData( data );
 
             return BitConverter.ToString( data )
                 .Replace( "-", "" )

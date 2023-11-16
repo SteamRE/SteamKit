@@ -82,7 +82,7 @@ namespace SteamKit2
         {
             callbackQueue = new Queue<ICallbackMsg>();
 
-            this.handlers = new OrderedDictionary();
+            this.handlers = [];
 
             // Start calculating machine info so that it is (hopefully) ready by the time we get to logging in.
             HardwareUtils.Init( configuration.MachineInfoProvider );

@@ -32,7 +32,7 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( client );
 
-            registeredCallbacks = new List<CallbackBase>();
+            registeredCallbacks = [];
 
             this.client = client;
         }

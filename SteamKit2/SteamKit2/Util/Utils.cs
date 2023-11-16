@@ -26,7 +26,7 @@ namespace SteamKit2
                       ).ToString();
         }
 
-        [return: NotNullIfNotNull("hex")]
+        [return: NotNullIfNotNull( nameof( hex ) )]
         public static byte[]? DecodeHexString(string? hex)
         {
             if (hex == null)
@@ -277,15 +277,11 @@ namespace SteamKit2
                 return true;
             }
 
-            switch ( ch )
+            return ch switch
             {
-                case '-':
-                case '.':
-                case '_':
-                    return true;
-            }
-
-            return false;
+                '-' or '.' or '_' => true,
+                _ => false,
+            };
         }
 
         public static string UrlEncode( string input )
@@ -423,13 +419,13 @@ namespace SteamKit2
                 return false;
             }
 
-            if ( !IPAddress.TryParse( stringValue.Substring( 0, colonPosition ), out var address ) )
+            if ( !IPAddress.TryParse( stringValue.AsSpan( 0, colonPosition ), out var address ) )
             {
                 endPoint = null;
                 return false;
             }
 
-            if ( !ushort.TryParse( stringValue.Substring( colonPosition + 1 ), out var port ) )
+            if ( !ushort.TryParse( stringValue.AsSpan( colonPosition + 1 ), out var port ) )
             {
                 endPoint = null;
                 return false;
@@ -441,17 +437,12 @@ namespace SteamKit2
 
         public static (string host, int port) ExtractEndpointHost( EndPoint endPoint )
         {
-            switch ( endPoint )
+            return endPoint switch
             {
-                case IPEndPoint ipep:
-                    return ( ipep.Address.ToString(), ipep.Port );
-
-                case DnsEndPoint dns:
-                    return ( dns.Host, dns.Port );
-
-                default:
-                    throw new InvalidOperationException( "Unknown endpoint type." );
-            }
+                IPEndPoint ipep => (ipep.Address.ToString(), ipep.Port),
+                DnsEndPoint dns => (dns.Host, dns.Port),
+                _ => throw new InvalidOperationException( "Unknown endpoint type." ),
+            };
         }
     }
 }

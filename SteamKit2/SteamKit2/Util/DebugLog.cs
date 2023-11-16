@@ -55,7 +55,7 @@ namespace SteamKit2
         /// </value>
         public static bool Enabled { get; set; }
 
-        internal static List<IDebugListener> listeners = new();
+        internal static List<IDebugListener> listeners = [];
 
 
         /// <summary>

@@ -363,8 +363,8 @@ namespace SteamKit2
 
                 PackageTokensDenied = new ReadOnlyCollection<uint>( msg.package_denied_tokens );
                 AppTokensDenied = new ReadOnlyCollection<uint>( msg.app_denied_tokens );
-                PackageTokens = new Dictionary<uint, ulong>();
-                AppTokens = new Dictionary<uint, ulong>();
+                PackageTokens = [];
+                AppTokens = [];
 
                 foreach ( var package_token in msg.package_access_tokens )
                 {
@@ -455,8 +455,8 @@ namespace SteamKit2
                 RequiresFullUpdate = msg.force_full_update;
                 RequiresFullAppUpdate = msg.force_full_app_update;
                 RequiresFullPackageUpdate = msg.force_full_package_update;
-                PackageChanges = new Dictionary<uint, PICSChangeData>();
-                AppChanges = new Dictionary<uint, PICSChangeData>();
+                PackageChanges = [];
+                AppChanges = [];
 
                 foreach ( var package_change in msg.package_changes )
                 {
@@ -605,8 +605,8 @@ namespace SteamKit2
                 ResponsePending = msg.response_pending;
                 UnknownPackages = new ReadOnlyCollection<uint>( msg.unknown_packageids );
                 UnknownApps = new ReadOnlyCollection<uint>( msg.unknown_appids );
-                Packages = new Dictionary<uint, PICSProductInfo>();
-                Apps = new Dictionary<uint, PICSProductInfo>();
+                Packages = [];
+                Apps = [];
 
                 foreach ( var package_info in msg.packages )
                 {
@@ -649,7 +649,7 @@ namespace SteamKit2
                 CountGuestPassesToGive = msg.CountGuestPassesToGive;
                 CountGuestPassesToRedeem = msg.CountGuestPassesToRedeem;
 
-                GuestPasses = new List<KeyValue>();
+                GuestPasses = [];
                 for ( int i = 0; i < CountGuestPassesToGive + CountGuestPassesToRedeem; i++ )
                 {
                     var kv = new KeyValue();
@@ -770,7 +770,7 @@ namespace SteamKit2
                 JobID = jobID;
 
                 Result = ( EResult )msg.eresult;
-                BetaPasswords = new Dictionary<string, byte[]>();
+                BetaPasswords = [];
 
                 foreach ( var password in msg.betapasswords )
                 {

@@ -343,7 +343,7 @@ namespace SteamKit2
                 {
                     formatProvided = true;
 
-                    if ( !( format is string formatText ) || formatText != "vdf" )
+                    if ( format is not string formatText  || formatText != "vdf" )
                     {
                         throw new ArgumentException( $"Unsupported 'format' value '{format}'. Format must either be '{expectedFormat}' or omitted.", nameof( args ) );
                     }
@@ -463,7 +463,7 @@ namespace SteamKit2
             public override bool TryInvokeMember( InvokeMemberBinder binder, object?[]? args, out object result )
             {
                 IDictionary<string, object?> methodArgs;
-                args ??= Array.Empty<object?>();
+                args ??= [];
 
                 if ( args.Length == 1 && binder.CallInfo.ArgumentNames.Count == 0 && args[ 0 ] is IDictionary<string, object?> explicitArgs )
                 {
