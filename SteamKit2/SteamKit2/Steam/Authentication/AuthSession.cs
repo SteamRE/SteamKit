@@ -96,7 +96,7 @@ namespace SteamKit2.Authentication
                 // 2-factor code from the authenticator app or sent to an email
                 case EAuthSessionGuardType.k_EAuthSessionGuardType_EmailCode:
                 case EAuthSessionGuardType.k_EAuthSessionGuardType_DeviceCode:
-                    if ( !( this is CredentialsAuthSession credentialsAuthSession ) )
+                    if ( this is not CredentialsAuthSession credentialsAuthSession )
                     {
                         throw new InvalidOperationException( $"Got {preferredConfirmation.confirmation_type} confirmation type in a session that is not {nameof( CredentialsAuthSession )}." );
                     }
@@ -174,13 +174,7 @@ namespace SteamKit2.Authentication
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var pollResponse = await PollAuthSessionStatusAsync().ConfigureAwait( false );
-
-                if ( pollResponse == null )
-                {
-                    throw new AuthenticationException( "Authentication failed", EResult.Fail );
-                }
-
+                var pollResponse = await PollAuthSessionStatusAsync().ConfigureAwait( false ) ?? throw new AuthenticationException( "Authentication failed", EResult.Fail );
                 return pollResponse;
             }
 

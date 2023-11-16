@@ -60,7 +60,7 @@ namespace SteamKit2
                     s = ReadToken( out wasQuoted, out wasConditional );
                 }
 
-                if ( s != null && s.StartsWith( "{" ) && !wasQuoted )
+                if ( s != null && s.StartsWith( '{' ) && !wasQuoted )
                 {
                     // header is valid so load the file
                     currentKey.RecursiveLoadFromBuffer( this );
@@ -242,7 +242,7 @@ namespace SteamKit2
             this.Name = name;
             this.Value = value;
 
-            Children = new List<KeyValue>();
+            Children = [];
         }
 
         /// <summary>
@@ -592,7 +592,7 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( input );
 
-            this.Children = new List<KeyValue>();
+            this.Children = [];
 
             using var _ = new KVTextReader( this, input );
 
@@ -630,13 +630,13 @@ namespace SteamKit2
                     throw new InvalidDataException( "RecursiveLoadFromBuffer: got EOF or empty keyname" );
                 }
 
-                if ( name.StartsWith( "}" ) && !wasQuoted )	// top level closed, stop reading
+                if ( name.StartsWith( '}' ) && !wasQuoted ) // top level closed, stop reading
                 {
                     break;
                 }
 
                 KeyValue dat = new KeyValue( name );
-                dat.Children = new List<KeyValue>();
+                dat.Children = [];
                 this.Children.Add( dat );
 
                 // get the value
@@ -653,12 +653,12 @@ namespace SteamKit2
                     throw new Exception( "RecursiveLoadFromBuffer:  got NULL key" );
                 }
 
-                if ( value.StartsWith( "}" ) && !wasQuoted )
+                if ( value.StartsWith( '}' ) && !wasQuoted )
                 {
                     throw new Exception( "RecursiveLoadFromBuffer:  got } in key" );
                 }
 
-                if ( value.StartsWith( "{" ) && !wasQuoted )
+                if ( value.StartsWith( '{' ) && !wasQuoted )
                 {
                     dat.RecursiveLoadFromBuffer( kvr );
                 }
@@ -778,7 +778,7 @@ namespace SteamKit2
             return value;
         }
 
-        void WriteIndents( Stream stream, int indentLevel )
+        static void WriteIndents( Stream stream, int indentLevel )
         {
             WriteString( stream, new string( '\t', indentLevel ) );
         }
@@ -803,7 +803,7 @@ namespace SteamKit2
 
         static bool TryReadAsBinaryCore( Stream input, KeyValue current, KeyValue? parent )
         {
-            current.Children = new List<KeyValue>();
+            current.Children = [];
 
             while ( true )
             {
@@ -873,10 +873,7 @@ namespace SteamKit2
                         }
                 }
 
-                if (parent != null)
-                {
-                    parent.Children.Add(current);
-                }
+                parent?.Children.Add(current);
                 current = new KeyValue();
             }
 

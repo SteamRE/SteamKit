@@ -101,8 +101,8 @@ namespace SteamKit2.Discovery
             var indexOfColon = address.IndexOf(':');
             if (indexOfColon >= 0)
             {
-                var hostname = address.Substring(0, indexOfColon);
-                var portNumber = address.Substring(indexOfColon + 1);
+                var hostname = address[ ..indexOfColon ];
+                var portNumber = address[ ( indexOfColon + 1 ).. ];
 
                 if (!int.TryParse(portNumber, out var port))
                 {

@@ -80,7 +80,7 @@ namespace SteamKit2
                     throw new NotSupportedException( "Unknown Expression type" );
                 }
 
-                var serviceName = typeof( TService ).Name.Substring( 1 ); // IServiceName - remove 'I'
+                var serviceName = typeof( TService ).Name[ 1.. ]; // IServiceName - remove 'I'
                 var methodName = methodInfo.Name;
                 var version = 1;
 
@@ -216,7 +216,7 @@ namespace SteamKit2
         #region ClientMsg Handlers
         void HandleServiceMethodResponse( IPacketMsg packetMsg )
         {
-            if ( !( packetMsg is PacketClientMsgProtobuf packetMsgProto ) )
+            if ( packetMsg is not PacketClientMsgProtobuf packetMsgProto )
             {
                 throw new InvalidDataException( "Packet message is expected to be protobuf." );
             }
@@ -227,7 +227,7 @@ namespace SteamKit2
 
         void HandleServiceMethod( IPacketMsg packetMsg )
         {
-            if ( !( packetMsg is PacketClientMsgProtobuf packetMsgProto ) )
+            if ( packetMsg is not PacketClientMsgProtobuf packetMsgProto )
             {
                 throw new InvalidDataException( "Packet message is expected to be protobuf." );
             }

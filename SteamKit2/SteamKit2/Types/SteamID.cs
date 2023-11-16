@@ -290,19 +290,11 @@ namespace SteamKit2
             }
             else
             {
-                switch ( type )
+                instance = type switch
                 {
-                    case 'g':
-                    case 'T':
-                    case 'c':
-                    case 'L':
-                        instance = 0;
-                        break;
-
-                    default:
-                        instance = 1;
-                        break;
-                }
+                    'g' or 'T' or 'c' or 'L' => 0,
+                    _ => 1,
+                };
             }
 
             if ( type == 'c' )
@@ -685,7 +677,7 @@ namespace SteamKit2
                 return false;
             }
 
-            if ( !( obj is SteamID sid ) )
+            if ( obj is not SteamID sid )
             {
                 return false;
             }

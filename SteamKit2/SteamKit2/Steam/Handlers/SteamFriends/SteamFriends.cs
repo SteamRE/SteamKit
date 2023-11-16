@@ -28,8 +28,8 @@ namespace SteamKit2
 
         internal SteamFriends()
         {
-            friendList = new List<SteamID>();
-            clanList = new List<SteamID>();
+            friendList = [];
+            clanList = [];
 
             cache = new AccountCache();
 
@@ -714,8 +714,8 @@ namespace SteamKit2
 
             lock ( listLock )
             {
-                List<SteamID> friendsToRemove = new List<SteamID>();
-                List<SteamID> clansToRemove = new List<SteamID>();
+                List<SteamID> friendsToRemove = [];
+                List<SteamID> clansToRemove = [];
 
                 foreach ( var friendObj in list.Body.friends )
                 {

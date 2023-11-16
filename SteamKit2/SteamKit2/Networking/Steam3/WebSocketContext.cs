@@ -35,10 +35,10 @@ namespace SteamKit2
 
             public void Start(TimeSpan connectionTimeout)
             {
-                runloopTask = RunCore(cts.Token, connectionTimeout).IgnoringCancellation(cts.Token);
+                runloopTask = RunCore(connectionTimeout, cts.Token).IgnoringCancellation(cts.Token);
             }
 
-            async Task RunCore(CancellationToken cancellationToken, TimeSpan connectionTimeout)
+            async Task RunCore(TimeSpan connectionTimeout, CancellationToken cancellationToken)
             {
                 using (var timeout = new CancellationTokenSource())
                 using (var combinedCancellation = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, timeout.Token))

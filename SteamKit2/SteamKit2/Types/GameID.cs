@@ -260,7 +260,7 @@ namespace SteamKit2
         /// </returns>
         public override bool Equals( object? obj )
         {
-            if ( !( obj is GameID gid ) )
+            if ( obj is not GameID gid )
             {
                 return false;
             }

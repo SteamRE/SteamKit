@@ -34,7 +34,7 @@ namespace SteamKit2
             /// </summary>
             public string RpcName
             {
-                get { return MethodName.Substring( ServiceName.Length + 1 ).Split( '#' )[ 0 ]; }
+                get { return MethodName[ ( ServiceName.Length + 1 ).. ].Split( '#' )[ 0 ]; }
             }
 
             /// <summary>
@@ -85,7 +85,7 @@ namespace SteamKit2
             /// </summary>
             public string RpcName
             {
-                get { return MethodName.Substring( ServiceName.Length + 1 ).Split( '#' )[ 0 ]; }
+                get { return MethodName[ ( ServiceName.Length + 1 ).. ].Split( '#' )[ 0 ]; }
             }
 
             /// <summary>

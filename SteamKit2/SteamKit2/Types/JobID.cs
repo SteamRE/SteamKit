@@ -267,7 +267,7 @@ namespace SteamKit2
         TaskCompletionSource<ResultSet> tcs;
         Predicate<T> finishCondition;
 
-        List<T> results = new();
+        List<T> results = [];
 
 
         /// <summary>

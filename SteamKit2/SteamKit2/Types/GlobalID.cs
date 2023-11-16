@@ -150,7 +150,7 @@ namespace SteamKit2
                 return false;
             }
 
-            if ( !( obj is GlobalID gid ) )
+            if ( obj is not GlobalID gid )
             {
                 return false;
             }
