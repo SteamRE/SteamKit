@@ -47,7 +47,7 @@ namespace SteamKit2
         [GeneratedRegex( @"\[(?<type>[AGMPCgcLTIUai]):(?<universe>[0-4]):(?<account>[0-9]+)(\((?<instance>[0-9]+)\))?\]" )]
         private static partial Regex Steam3FallbackRegex();
 
-        static readonly Dictionary<EAccountType, char> AccountTypeChars = new Dictionary<EAccountType, char>
+        static readonly Dictionary<EAccountType, char> AccountTypeChars = new()
         {
             { EAccountType.AnonGameServer, 'A' },
             { EAccountType.GameServer, 'G' },
@@ -669,7 +669,7 @@ namespace SteamKit2
         /// <returns>
         /// The result of the conversion.
         /// </returns>
-        public static implicit operator SteamID( ulong id ) => new SteamID( id );
+        public static implicit operator SteamID( ulong id ) => new( id );
 
         /// <summary>
         /// Determines whether the specified <see cref="object"/> is equal to this instance.

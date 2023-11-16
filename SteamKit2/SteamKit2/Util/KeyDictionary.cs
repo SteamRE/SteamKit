@@ -15,7 +15,7 @@ namespace SteamKit2
     /// </summary>
     public static class KeyDictionary
     {
-        static Dictionary<EUniverse, byte[]?> keys = new Dictionary<EUniverse, byte[]?>
+        static Dictionary<EUniverse, byte[]?> keys = new()
         {
             [ EUniverse.Invalid ] = null,
 

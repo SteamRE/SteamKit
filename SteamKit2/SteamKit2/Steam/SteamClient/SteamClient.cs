@@ -29,7 +29,7 @@ namespace SteamKit2
         long currentJobId = 0;
         DateTime processStartTime;
 
-        object callbackLock = new object();
+        object callbackLock = new();
         Queue<ICallbackMsg> callbackQueue;
 
         Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;

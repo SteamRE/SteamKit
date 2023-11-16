@@ -121,7 +121,7 @@ namespace SteamKit2.Internal
         internal bool ExpectDisconnection { get; set; }
 
         // connection lock around the setup and tear down of the connection task
-        object connectionLock = new object();
+        object connectionLock = new();
         CancellationTokenSource? connectionCancellation;
         Task? connectionSetupTask;
         volatile IConnection? connection;

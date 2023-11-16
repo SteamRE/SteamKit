@@ -25,7 +25,7 @@ namespace SteamKit2
         }
 
         public NetMsgEventArgs WithData( byte[] data )
-            => new NetMsgEventArgs( data, EndPoint );
+            => new( data, EndPoint );
     }
 
 }

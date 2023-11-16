@@ -66,7 +66,7 @@ namespace SteamKit2.Discovery
         /// <param name="endPoint">The IP address and port of the server.</param>
         /// <returns>A new <see cref="ServerRecord"/> instance</returns>
         public static ServerRecord CreateSocketServer(IPEndPoint endPoint)
-            => new ServerRecord(endPoint, ProtocolTypes.Tcp | ProtocolTypes.Udp);
+            => new(endPoint, ProtocolTypes.Tcp | ProtocolTypes.Udp);
 
         /// <summary>
         /// Creates a Socket server given an IP endpoint.
@@ -78,7 +78,7 @@ namespace SteamKit2.Discovery
         {
             if (!NetHelpers.TryParseIPEndPoint(address, out var endPoint))
             {
-                serverRecord = default(ServerRecord);
+                serverRecord = default;
                 return false;
             }
 

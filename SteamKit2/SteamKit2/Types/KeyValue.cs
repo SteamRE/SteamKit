@@ -15,7 +15,7 @@ namespace SteamKit2
 {
     class KVTextReader : StreamReader
     {
-        internal static Dictionary<char, char> escapedMapping = new Dictionary<char, char>
+        internal static Dictionary<char, char> escapedMapping = new()
         {
             { '\\', '\\' },
             { 'n', '\n' },
@@ -248,7 +248,7 @@ namespace SteamKit2
         /// <summary>
         /// Represents an invalid <see cref="KeyValue"/> given when a searched for child does not exist.
         /// </summary>
-        public readonly static KeyValue Invalid = new KeyValue();
+        public readonly static KeyValue Invalid = new();
 
         /// <summary>
         /// Gets or sets the name of this instance.
@@ -320,7 +320,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="defaultValue">The default value to return if the conversion is invalid.</param>
         /// <returns>The value of this instance as an unsigned byte.</returns>
-        public byte AsUnsignedByte( byte defaultValue = default( byte ) )
+        public byte AsUnsignedByte( byte defaultValue = default )
         {
             byte value;
 
@@ -338,7 +338,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="defaultValue">The default value to return if the conversion is invalid.</param>
         /// <returns>The value of this instance as an unsigned short.</returns>
-        public ushort AsUnsignedShort( ushort defaultValue = default( ushort ) )
+        public ushort AsUnsignedShort( ushort defaultValue = default )
         {
             ushort value;
 
@@ -356,7 +356,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="defaultValue">The default value to return if the conversion is invalid.</param>
         /// <returns>The value of this instance as an integer.</returns>
-        public int AsInteger( int defaultValue = default( int ) )
+        public int AsInteger( int defaultValue = default )
         {
             int value;
 
@@ -374,7 +374,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="defaultValue">The default value to return if the conversion is invalid.</param>
         /// <returns>The value of this instance as an unsigned integer.</returns>
-        public uint AsUnsignedInteger( uint defaultValue = default( uint ) )
+        public uint AsUnsignedInteger( uint defaultValue = default )
         {
             uint value;
 
@@ -392,7 +392,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="defaultValue">The default value to return if the conversion is invalid.</param>
         /// <returns>The value of this instance as a long.</returns>
-        public long AsLong( long defaultValue = default( long ) )
+        public long AsLong( long defaultValue = default )
         {
             long value;
 
@@ -410,7 +410,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="defaultValue">The default value to return if the conversion is invalid.</param>
         /// <returns>The value of this instance as an unsigned long.</returns>
-        public ulong AsUnsignedLong( ulong defaultValue = default( ulong ) )
+        public ulong AsUnsignedLong( ulong defaultValue = default )
         {
             ulong value;
 
@@ -428,7 +428,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="defaultValue">The default value to return if the conversion is invalid.</param>
         /// <returns>The value of this instance as a float.</returns>
-        public float AsFloat( float defaultValue = default( float ) )
+        public float AsFloat( float defaultValue = default )
         {
             float value;
 
@@ -446,7 +446,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="defaultValue">The default value to return if the conversion is invalid.</param>
         /// <returns>The value of this instance as a boolean.</returns>
-        public bool AsBoolean( bool defaultValue = default( bool ) )
+        public bool AsBoolean( bool defaultValue = default )
         {
             int value;
 
@@ -464,7 +464,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="defaultValue">The default value to return if the conversion is invalid.</param>
         /// <returns>The value of this instance as an enum.</returns>
-        public T AsEnum<T>( T defaultValue = default( T ) )
+        public T AsEnum<T>( T defaultValue = default )
             where T : struct
         {
             T value;

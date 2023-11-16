@@ -178,7 +178,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="data">Raw depot manifest data to deserialize.</param>
         /// <exception cref="InvalidDataException">Thrown if the given data is not something recognizable.</exception>
-        public static DepotManifest Deserialize(byte[] data) => new DepotManifest(data);
+        public static DepotManifest Deserialize(byte[] data) => new(data);
 
         /// <summary>
         /// Attempts to decrypts file names with the given encryption key.

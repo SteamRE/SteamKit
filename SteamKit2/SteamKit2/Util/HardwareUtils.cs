@@ -350,7 +350,7 @@ namespace SteamKit2
             }
         }
 
-        static ConditionalWeakTable<IMachineInfoProvider, Task<MachineID>> generationTable = new ConditionalWeakTable<IMachineInfoProvider, Task<MachineID>>();
+        static ConditionalWeakTable<IMachineInfoProvider, Task<MachineID>> generationTable = new();
 
         public static void Init(IMachineInfoProvider machineInfoProvider)
         {

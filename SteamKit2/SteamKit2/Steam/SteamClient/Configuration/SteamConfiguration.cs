@@ -47,7 +47,7 @@ namespace SteamKit2
         }
 
         internal static SteamConfiguration CreateDefault()
-            => new SteamConfiguration(SteamConfigurationBuilder.CreateDefaultState());
+            => new(SteamConfigurationBuilder.CreateDefaultState());
 
         readonly SteamConfigurationState state;
 

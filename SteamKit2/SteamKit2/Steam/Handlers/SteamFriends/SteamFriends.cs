@@ -18,7 +18,7 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamFriends : ClientMsgHandler
     {
-        object listLock = new object();
+        object listLock = new();
         List<SteamID> friendList;
         List<SteamID> clanList;
 

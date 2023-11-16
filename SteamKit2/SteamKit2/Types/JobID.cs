@@ -20,7 +20,7 @@ namespace SteamKit2
         /// <summary>
         /// Represents an invalid JobID.
         /// </summary>
-        public static readonly JobID Invalid = new JobID();
+        public static readonly JobID Invalid = new();
 
 
         /// <summary>
@@ -267,7 +267,7 @@ namespace SteamKit2
         TaskCompletionSource<ResultSet> tcs;
         Predicate<T> finishCondition;
 
-        List<T> results = new List<T>();
+        List<T> results = new();
 
 
         /// <summary>

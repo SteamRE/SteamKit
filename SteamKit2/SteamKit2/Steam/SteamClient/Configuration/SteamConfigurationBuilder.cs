@@ -48,7 +48,7 @@ namespace SteamKit2
         SteamConfigurationState state;
 
         public SteamConfiguration Build()
-            => new SteamConfiguration(state);
+            => new(state);
 
         public ISteamConfigurationBuilder WithCellID(uint cellID)
         {
