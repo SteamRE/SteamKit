@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Threading;
@@ -72,7 +73,7 @@ namespace Tests
                     4 => s.ReadUInt32(),
                     5 => s.ReadInt64(),
                     6 => s.ReadUInt64(),
-                    _ => throw new Exception( "Unreachable" ),
+                    _ => throw new UnreachableException(),
                 };
             }
         }

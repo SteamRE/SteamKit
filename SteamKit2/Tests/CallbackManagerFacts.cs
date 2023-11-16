@@ -32,7 +32,7 @@ namespace Tests
                 didCall = true;
             }
 
-            using (mgr.Subscribe( ( Action<CallbackForTest> )action ))
+            using (mgr.Subscribe<CallbackForTest>( action ))
             {
                 PostAndRunCallback(callback);
             }
@@ -54,7 +54,7 @@ namespace Tests
                 didCall = true;
             }
 
-            using (mgr.Subscribe( ( Action<CallbackMsg> )action ))
+            using ( mgr.Subscribe<CallbackMsg>( action ) )
             {
                 PostAndRunCallback(callback);
             }
@@ -76,7 +76,7 @@ namespace Tests
                 didCall = true;
             }
 
-            using (mgr.Subscribe(JobID.Invalid, ( Action<CallbackForTest> )action ))
+            using ( mgr.Subscribe<CallbackForTest>( JobID.Invalid, action ) )
             {
                 PostAndRunCallback(callback);
             }
@@ -98,7 +98,7 @@ namespace Tests
                 didCall = true;
             }
 
-            using (mgr.Subscribe( ( Action<CallbackForTest> )action ))
+            using ( mgr.Subscribe<CallbackForTest>( action ) )
             {
                 PostAndRunCallback(callback);
             }
@@ -118,7 +118,7 @@ namespace Tests
                 didCall = true;
             }
 
-            using (mgr.Subscribe(123, ( Action<CallbackForTest> )action ))
+            using ( mgr.Subscribe<CallbackForTest>( 123, action ) )
             {
                 PostAndRunCallback(callback);
             }
@@ -140,7 +140,7 @@ namespace Tests
                 didCall = true;
             }
 
-            using (mgr.Subscribe(123456, ( Action<CallbackForTest> )action ))
+            using ( mgr.Subscribe<CallbackForTest>( 123456, action ) )
             {
                 PostAndRunCallback(callback);
             }
@@ -159,7 +159,7 @@ namespace Tests
                 callCount++;
             }
 
-            using (mgr.Subscribe( ( Action<CallbackForTest> )action ))
+            using ( mgr.Subscribe<CallbackForTest>( action ) )
             {
                 PostAndRunCallback(callback);
             }
@@ -180,7 +180,7 @@ namespace Tests
                 numCallbacksRun++;
             }
 
-            using (mgr.Subscribe( ( Action<CallbackForTest> )action ))
+            using ( mgr.Subscribe<CallbackForTest>( action ) )
             {
                 for (var i = 0; i < 10; i++)
                 {
