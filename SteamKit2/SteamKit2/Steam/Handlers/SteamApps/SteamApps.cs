@@ -6,7 +6,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using SteamKit2.Internal;
 
 namespace SteamKit2

@@ -2,7 +2,6 @@
 using System.IO;
 using SteamKit2;
 using Xunit;
-using System.Text;
 
 namespace Tests
 {

@@ -1,6 +1,6 @@
-﻿using SteamKit2.Internal;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {
