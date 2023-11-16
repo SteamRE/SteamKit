@@ -3,7 +3,6 @@
  * file 'license.txt', which is part of this source code package.
  */
 
-using System;
 using System.Net;
 
 namespace SteamKit2.CDN

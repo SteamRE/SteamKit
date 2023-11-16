@@ -1,6 +1,6 @@
-﻿using Xunit;
-using SteamKit2;
+﻿using SteamKit2;
 using SteamKit2.Internal;
+using Xunit;
 
 namespace Tests
 {

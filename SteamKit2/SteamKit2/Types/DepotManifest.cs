@@ -3,15 +3,15 @@
  * file 'license.txt', which is part of this source code package.
  */
 
-using ProtoBuf;
-using SteamKit2.Internal;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Linq;
 using System.IO.Hashing;
+using System.Linq;
 using System.Security.Cryptography;
+using System.Text;
+using ProtoBuf;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {

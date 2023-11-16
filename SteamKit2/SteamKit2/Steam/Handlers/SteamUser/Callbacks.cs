@@ -5,10 +5,10 @@
 
 
 using System;
-using System.Net;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Collections.Generic;
+using System.Net;
 using System.Text;
 using ProtoBuf;
 using SteamKit2.Internal;

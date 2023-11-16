@@ -1,22 +1,21 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
 using System.Runtime.ExceptionServices;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
+using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Win32;
 using SteamKit2.Util;
 using SteamKit2.Util.MacHelpers;
-using Microsoft.Win32;
-
-using static SteamKit2.Util.MacHelpers.LibC;
 using static SteamKit2.Util.MacHelpers.CoreFoundation;
 using static SteamKit2.Util.MacHelpers.DiskArbitration;
 using static SteamKit2.Util.MacHelpers.IOKit;
-using System.Runtime.Versioning;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
+using static SteamKit2.Util.MacHelpers.LibC;
 
 namespace SteamKit2
 {

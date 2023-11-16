@@ -1,5 +1,4 @@
-﻿using System;
-using SteamKit2.GC;
+﻿using SteamKit2.GC;
 using SteamKit2.Internal;
 
 namespace SteamKit2
