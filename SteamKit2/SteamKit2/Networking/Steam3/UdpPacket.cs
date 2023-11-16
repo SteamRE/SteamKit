@@ -149,15 +149,13 @@ namespace SteamKit2
         /// <returns>The serialized packet.</returns>
         public byte[] GetData()
         {
-            using ( MemoryStream ms = new MemoryStream() )
-            {
-                Header.Serialize( ms );
+            using MemoryStream ms = new MemoryStream();
+            Header.Serialize( ms );
 
-                Payload.Seek( 0, SeekOrigin.Begin );
-                Payload.WriteTo( ms );
+            Payload.Seek( 0, SeekOrigin.Begin );
+            Payload.WriteTo( ms );
 
-                return ms.ToArray();
-            }
+            return ms.ToArray();
         }
 
     }
