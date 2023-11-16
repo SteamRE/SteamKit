@@ -131,10 +131,7 @@ namespace SteamKit2
         /// <exception cref="InvalidOperationException">A handler of that type is already registered.</exception>
         public void AddHandler( ClientMsgHandler handler )
         {
-            if ( handler is null )
-            {
-                throw new ArgumentNullException( nameof( handler ) );
-            }
+            ArgumentNullException.ThrowIfNull( handler );
 
             if ( handlers.Contains( handler.GetType() ) )
             {

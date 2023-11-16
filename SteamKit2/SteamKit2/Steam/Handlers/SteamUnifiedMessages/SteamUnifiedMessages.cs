@@ -60,10 +60,7 @@ namespace SteamKit2
 
             AsyncJob<ServiceMethodResponse>? SendMessageOrNotification<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification )
             {
-                if ( expr == null )
-                {
-                    throw new ArgumentNullException( nameof( expr ) );
-                }
+                ArgumentNullException.ThrowIfNull( expr );
 
                 var call = ExtractMethodCallExpression( expr, nameof( expr ) );
                 var methodInfo = call.Method;
@@ -204,10 +201,7 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            if ( packetMsg == null )
-            {
-                throw new ArgumentNullException( nameof( packetMsg ) );
-            }
+            ArgumentNullException.ThrowIfNull( packetMsg );
 
             if ( !dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
             {

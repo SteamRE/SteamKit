@@ -324,10 +324,7 @@ namespace SteamKit2
         /// <param name="appId">The ID of the app this message pertains to.</param>
         public void Send( ClientMsgProtobuf msg, uint appId )
         {
-            if ( msg == null )
-            {
-                throw new ArgumentNullException( nameof(msg) );
-            }
+            ArgumentNullException.ThrowIfNull( msg );
 
             msg.ProtoHeader.routing_appid = appId;
             Client.Send( msg );
@@ -339,10 +336,7 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            if ( packetMsg == null )
-            {
-                throw new ArgumentNullException( nameof(packetMsg) );
-            }
+            ArgumentNullException.ThrowIfNull( packetMsg );
 
             if ( dispatchMap.TryGetValue( packetMsg.MsgType, out var handler ) )
             {

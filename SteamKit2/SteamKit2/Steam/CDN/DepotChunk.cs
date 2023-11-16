@@ -39,15 +39,9 @@ namespace SteamKit2.CDN
         /// <param name="data">The underlying data for this chunk.</param>
         public DepotChunk( DepotManifest.ChunkData info, byte[] data )
         {
-            if ( info is null )
-            {
-                throw new ArgumentNullException( nameof( info ) );
-            }
+            ArgumentNullException.ThrowIfNull( info );
 
-            if ( data is null )
-            {
-                throw new ArgumentNullException( nameof( data ) );
-            }
+            ArgumentNullException.ThrowIfNull( data );
 
             ChunkInfo = info;
             Data = data;
@@ -61,10 +55,7 @@ namespace SteamKit2.CDN
         /// <exception cref="System.IO.InvalidDataException">Thrown if the processed data does not match the expected checksum given in it's chunk information.</exception>
         public void Process( byte[] depotKey )
         {
-            if ( depotKey == null )
-            {
-                throw new ArgumentNullException( nameof( depotKey ) );
-            }
+            ArgumentNullException.ThrowIfNull( depotKey );
 
             if ( IsProcessed )
             {

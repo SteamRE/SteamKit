@@ -48,10 +48,7 @@ namespace SteamKit2
         /// </returns>
         public static implicit operator ulong( GlobalID gid )
         {
-            if ( gid == null )
-            {
-                throw new ArgumentNullException( nameof(gid) );
-            }
+            ArgumentNullException.ThrowIfNull( gid );
 
             return gid.gidBits.Data;
         }
@@ -269,10 +266,7 @@ namespace SteamKit2
         /// </returns>
         public static implicit operator ulong( UGCHandle handle )
         {
-            if ( handle == null )
-            {
-                throw new ArgumentNullException( nameof(handle) );
-            }
+            ArgumentNullException.ThrowIfNull( handle );
 
             return handle.Value;
         }

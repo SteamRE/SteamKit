@@ -93,10 +93,7 @@ namespace SteamKit2.Discovery
         /// <returns>A new <see cref="ServerRecord"/> instance</returns>
         public static ServerRecord CreateWebSocketServer(string address)
         {
-            if (address == null)
-            {
-                throw new ArgumentNullException(nameof(address));
-            }
+            ArgumentNullException.ThrowIfNull( address );
 
             EndPoint endPoint;
             const int DefaultPort = 443;

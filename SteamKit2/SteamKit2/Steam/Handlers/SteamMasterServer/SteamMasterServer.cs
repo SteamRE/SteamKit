@@ -68,10 +68,7 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="QueryCallback"/>.</returns>
         public AsyncJob<QueryCallback> ServerQuery( QueryDetails details )
         {
-            if ( details == null )
-            {
-                throw new ArgumentNullException( nameof(details) );
-            }
+            ArgumentNullException.ThrowIfNull( details );
 
             var query = new ClientMsgProtobuf<CMsgClientGMSServerQuery>( EMsg.ClientGMSServerQuery );
             query.SourceJobID = Client.GetNextJobID();
@@ -100,10 +97,7 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            if ( packetMsg == null )
-            {
-                throw new ArgumentNullException( nameof(packetMsg) );
-            }
+            ArgumentNullException.ThrowIfNull( packetMsg );
 
             if ( !dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
             {

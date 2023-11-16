@@ -49,10 +49,7 @@ namespace SteamKit2
         /// </returns>
         public static implicit operator ulong ( JobID jobId )
         {
-            if ( jobId == null )
-            {
-                throw new ArgumentNullException( nameof(jobId) );
-            }
+            ArgumentNullException.ThrowIfNull( jobId );
 
             return jobId.Value;
         }
@@ -78,10 +75,7 @@ namespace SteamKit2
         /// </returns>
         public static implicit operator JobID( AsyncJob asyncJob )
         {
-            if ( asyncJob == null )
-            {
-                throw new ArgumentNullException( nameof(asyncJob) );
-            }
+            ArgumentNullException.ThrowIfNull( asyncJob );
 
             return asyncJob.JobID;
         }
@@ -114,15 +108,9 @@ namespace SteamKit2
 
         internal AsyncJob( SteamClient client, JobID jobId )
         {
-            if ( client == null )
-            {
-                throw new ArgumentNullException( nameof(client) );
-            }
-            
-            if ( jobId == null )
-            {
-                throw new ArgumentNullException( nameof(jobId) );
-            }
+            ArgumentNullException.ThrowIfNull( client );
+
+            ArgumentNullException.ThrowIfNull( jobId );
 
             jobStart = ValueStopwatch.StartNew();
             JobID = jobId;
@@ -213,10 +201,7 @@ namespace SteamKit2
         /// <returns>Always <c>true</c>.</returns>
         internal override bool AddResult( CallbackMsg callback )
         {
-            if ( callback == null )
-            {
-                throw new ArgumentNullException( nameof( callback ) );
-            }
+            ArgumentNullException.ThrowIfNull( callback );
 
             // we're complete with just this callback
             tcs.TrySetResult( (T)callback );
@@ -327,10 +312,7 @@ namespace SteamKit2
         /// <returns><c>true</c> if this result completes the set; otherwise, <c>false</c>.</returns>
         internal override bool AddResult( CallbackMsg callback )
         {
-            if ( callback == null )
-            {
-                throw new ArgumentNullException( nameof( callback ) );
-            }
+            ArgumentNullException.ThrowIfNull( callback );
 
             T callbackMsg = (T)callback;
 

@@ -96,10 +96,7 @@ namespace SteamKit2
         /// <exception cref="System.ArgumentException">Username or password are not set within <paramref name="details"/>.</exception>
         public void LogOn( LogOnDetails details )
         {
-            if ( details == null )
-            {
-                throw new ArgumentNullException( nameof(details) );
-            }
+            ArgumentNullException.ThrowIfNull( details );
 
             if ( string.IsNullOrEmpty( details.Token ) )
             {
@@ -183,10 +180,7 @@ namespace SteamKit2
         /// <param name="details">A <see cref="SteamGameServer.StatusDetails"/> object containing the server's status.</param>
         public void SendStatus(StatusDetails details)
         {
-            if (details == null)
-            {
-                throw new ArgumentNullException( nameof(details) );
-            }
+            ArgumentNullException.ThrowIfNull( details );
 
             if (details.Address != null && details.Address.AddressFamily != AddressFamily.InterNetwork)
             {
@@ -215,10 +209,7 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            if ( packetMsg == null )
-            {
-                throw new ArgumentNullException( nameof(packetMsg) );
-            }
+            ArgumentNullException.ThrowIfNull( packetMsg );
 
             if ( !dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
             {

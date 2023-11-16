@@ -126,10 +126,7 @@ namespace SteamKit2
         /// </returns>
         public static implicit operator ulong( PublishedFileID? file )
         {
-            if ( file is null )
-            {
-                throw new ArgumentNullException( nameof(file) );
-            }
+            ArgumentNullException.ThrowIfNull( file );
 
             return file.Value;
         }

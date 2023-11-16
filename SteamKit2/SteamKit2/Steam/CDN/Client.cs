@@ -36,10 +36,7 @@ namespace SteamKit2.CDN
         /// The SteamClient instance must be connected and logged onto Steam.</param>
         public Client( SteamClient steamClient )
         {
-            if ( steamClient == null )
-            {
-                throw new ArgumentNullException( nameof( steamClient ) );
-            }
+            ArgumentNullException.ThrowIfNull( steamClient );
 
             this.httpClient = steamClient.Configuration.HttpClientFactory();
         }
@@ -70,10 +67,7 @@ namespace SteamKit2.CDN
         /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
         public async Task<DepotManifest> DownloadManifestAsync( uint depotId, ulong manifestId, ulong manifestRequestCode, Server server, byte[]? depotKey = null, Server? proxyServer = null )
         {
-            if ( server == null )
-            {
-                throw new ArgumentNullException( nameof( server ) );
-            }
+            ArgumentNullException.ThrowIfNull( server );
 
             const uint MANIFEST_VERSION = 5;
             string url;
@@ -127,15 +121,9 @@ namespace SteamKit2.CDN
         /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
         public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk, Server server, byte[]? depotKey = null, Server? proxyServer = null )
         {
-            if ( server == null )
-            {
-                throw new ArgumentNullException( nameof( server ) );
-            }
+            ArgumentNullException.ThrowIfNull( server );
 
-            if ( chunk == null )
-            {
-                throw new ArgumentNullException( nameof( chunk ) );
-            }
+            ArgumentNullException.ThrowIfNull( chunk );
 
             if ( chunk.ChunkID == null )
             {

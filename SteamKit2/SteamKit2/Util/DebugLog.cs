@@ -76,11 +76,8 @@ namespace SteamKit2
         /// <param name="listener">The listener.</param>
         public static void AddListener( IDebugListener listener )
         {
-            if ( listener == null )
-            {
-                throw new ArgumentNullException( nameof(listener) );
-            }
-            
+            ArgumentNullException.ThrowIfNull( listener );
+
             listeners.Add( listener );
         }
         /// <summary>

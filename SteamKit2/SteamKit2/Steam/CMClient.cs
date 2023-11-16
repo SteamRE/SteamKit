@@ -139,7 +139,7 @@ namespace SteamKit2.Internal
         {
             Configuration = configuration ?? throw new ArgumentNullException( nameof( configuration ) );
 
-            if ( identifier is null ) throw new ArgumentNullException( nameof( identifier ) );
+            ArgumentNullException.ThrowIfNull( identifier );
             if ( identifier.Length == 0 ) throw new ArgumentException( "Identifer must not be empty.", nameof( identifier ) );
 
             ID = identifier;

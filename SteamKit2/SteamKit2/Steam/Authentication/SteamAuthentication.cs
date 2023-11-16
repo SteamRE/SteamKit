@@ -25,10 +25,7 @@ namespace SteamKit2.Authentication
         /// <param name="steamClient">The <see cref="SteamClient"/> this instance will be associated with.</param>
         internal SteamAuthentication( SteamClient steamClient )
         {
-            if ( steamClient == null )
-            {
-                throw new ArgumentNullException( nameof( steamClient ) );
-            }
+            ArgumentNullException.ThrowIfNull( steamClient );
 
             Client = steamClient;
 
@@ -134,10 +131,7 @@ namespace SteamKit2.Authentication
         /// <exception cref="ArgumentException">Username or password are not set within <paramref name="details"/>.</exception>
         public async Task<CredentialsAuthSession> BeginAuthSessionViaCredentialsAsync( AuthSessionDetails details )
         {
-            if ( details == null )
-            {
-                throw new ArgumentNullException( nameof( details ) );
-            }
+            ArgumentNullException.ThrowIfNull( details );
 
             if ( string.IsNullOrEmpty( details.Username ) || string.IsNullOrEmpty( details.Password ) )
             {

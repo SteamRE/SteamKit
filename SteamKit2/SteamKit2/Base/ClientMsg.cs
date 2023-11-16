@@ -325,10 +325,7 @@ namespace SteamKit2
         public ClientMsg( MsgBase<ExtendedClientMsgHdr> msg, int payloadReserve = 64 )
             : this( payloadReserve )
         {
-            if ( msg == null )
-            {
-                throw new ArgumentNullException( nameof(msg) );
-            }
+            ArgumentNullException.ThrowIfNull( msg );
 
             // our target is where the message came from
             Header.TargetJobID = msg.Header.SourceJobID;
@@ -342,10 +339,7 @@ namespace SteamKit2
         public ClientMsg( IPacketMsg msg )
             : this()
         {
-            if ( msg == null )
-            {
-                throw new ArgumentNullException( nameof(msg) );
-            }
+            ArgumentNullException.ThrowIfNull( msg );
 
             if ( !( msg is PacketClientMsg packetMsg ) )
             {
@@ -479,10 +473,7 @@ namespace SteamKit2
         public Msg( MsgBase<MsgHdr> msg, int payloadReserve = 0 )
             : this( payloadReserve )
         {
-            if ( msg == null )
-            {
-                throw new ArgumentNullException( nameof(msg) );
-            }
+            ArgumentNullException.ThrowIfNull( msg );
 
             // our target is where the message came from
             Header.TargetJobID = msg.Header.SourceJobID;
@@ -496,10 +487,7 @@ namespace SteamKit2
         public Msg( IPacketMsg msg )
             : this()
         {
-            if ( msg == null )
-            {
-                throw new ArgumentNullException( nameof(msg) );
-            }
+            ArgumentNullException.ThrowIfNull( msg );
 
             if ( !( msg is PacketMsg packetMsg ) )
             {

@@ -122,10 +122,7 @@ namespace SteamKit2
         /// </returns>
         public static implicit operator string( GameID? gid )
         {
-            if ( gid is null )
-            {
-                throw new ArgumentNullException( nameof(gid) );
-            }
+            ArgumentNullException.ThrowIfNull( gid );
 
             return gid.gameid.Data.ToString();
         }
@@ -139,10 +136,7 @@ namespace SteamKit2
         /// </returns>
         public static implicit operator UInt64( GameID? gid )
         {
-            if ( gid is null )
-            {
-                throw new ArgumentNullException( nameof(gid) );
-            }
+            ArgumentNullException.ThrowIfNull( gid );
 
             return gid.gameid.Data;
         }

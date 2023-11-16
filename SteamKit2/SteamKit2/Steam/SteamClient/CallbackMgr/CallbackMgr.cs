@@ -30,10 +30,7 @@ namespace SteamKit2
         /// <param name="client">The <see cref="SteamClient"/> instance to handle the callbacks of.</param>
         public CallbackManager( SteamClient client )
         {
-            if ( client == null )
-            {
-                throw new ArgumentNullException( nameof(client) );
-            }
+            ArgumentNullException.ThrowIfNull( client );
 
             registeredCallbacks = new List<CallbackBase>();
 
@@ -101,15 +98,9 @@ namespace SteamKit2
         public IDisposable Subscribe<TCallback>( JobID jobID, Action<TCallback> callbackFunc )
             where TCallback : class, ICallbackMsg
         {
-            if ( jobID == null )
-            {
-                throw new ArgumentNullException( nameof(jobID) );
-            }
+            ArgumentNullException.ThrowIfNull( jobID );
 
-            if ( callbackFunc == null )
-            {
-                throw new ArgumentNullException( nameof(callbackFunc) );
-            }
+            ArgumentNullException.ThrowIfNull( callbackFunc );
 
 #pragma warning disable CA2000 // Not implicitly disposed
             var callback = new Internal.Callback<TCallback>( callbackFunc, this, jobID );

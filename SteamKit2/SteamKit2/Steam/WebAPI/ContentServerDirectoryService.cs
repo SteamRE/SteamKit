@@ -55,10 +55,7 @@ namespace SteamKit2
 
         static async Task<IReadOnlyCollection<CDN.Server>> LoadCoreAsync( SteamConfiguration configuration, int? cellId, int? maxNumServers, CancellationToken cancellationToken )
         {
-            if ( configuration == null )
-            {
-                throw new ArgumentNullException( nameof( configuration ) );
-            }
+            ArgumentNullException.ThrowIfNull( configuration );
 
             using var directory = configuration.GetAsyncWebAPIInterface( "IContentServerDirectoryService" );
             var args = new Dictionary<string, object?>();

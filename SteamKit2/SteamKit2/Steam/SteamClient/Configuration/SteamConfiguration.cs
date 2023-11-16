@@ -39,10 +39,7 @@ namespace SteamKit2
         /// <returns>A configuration object.</returns>
         public static SteamConfiguration Create(Action<ISteamConfigurationBuilder> configurator)
         {
-            if (configurator == null)
-            {
-                throw new ArgumentNullException(nameof(configurator));
-            }
+            ArgumentNullException.ThrowIfNull( configurator );
 
             var builder = new SteamConfigurationBuilder();
             configurator(builder);

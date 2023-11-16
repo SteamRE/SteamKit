@@ -273,10 +273,7 @@ namespace SteamKit2
         {
             get
             {
-                if ( key == null )
-                {
-                    throw new ArgumentNullException( nameof(key) );
-                }
+                ArgumentNullException.ThrowIfNull( key );
 
                 var child = this.Children
                     .FirstOrDefault( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
@@ -290,10 +287,7 @@ namespace SteamKit2
             }
             set
             {
-                if ( key == null )
-                {
-                    throw new ArgumentNullException( nameof(key) );
-                }
+                ArgumentNullException.ThrowIfNull( key );
 
                 var existingChild = this.Children
                     .FirstOrDefault( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
@@ -567,10 +561,7 @@ namespace SteamKit2
         /// </remarks>
         public static KeyValue? LoadFromString( string input )
         {
-            if ( input == null )
-            {
-                throw new ArgumentNullException( nameof(input) );
-            }
+            ArgumentNullException.ThrowIfNull( input );
 
             byte[] bytes = Encoding.UTF8.GetBytes( input );
 
@@ -599,10 +590,7 @@ namespace SteamKit2
         /// <returns><c>true</c> if the read was successful; otherwise, <c>false</c>.</returns>
         public bool ReadAsText( Stream input )
         {
-            if ( input == null )
-            {
-                throw new ArgumentNullException( nameof(input) );
-            }
+            ArgumentNullException.ThrowIfNull( input );
 
             this.Children = new List<KeyValue>();
 
@@ -707,10 +695,7 @@ namespace SteamKit2
         /// <param name="asBinary">If set to <c>true</c>, saves this instance as binary.</param>
         public void SaveToStream( Stream stream, bool asBinary )
         {
-            if ( stream == null )
-            {
-                throw new ArgumentNullException( nameof(stream) );
-            }
+            ArgumentNullException.ThrowIfNull( stream );
 
             if (asBinary)
             {
@@ -811,11 +796,8 @@ namespace SteamKit2
         /// <returns><c>true</c> if the read was successful; otherwise, <c>false</c>.</returns>
         public bool TryReadAsBinary( Stream input )
         {
-            if ( input == null )
-            {
-                throw new ArgumentNullException( nameof(input) );
-            }
-            
+            ArgumentNullException.ThrowIfNull( input );
+
             return TryReadAsBinaryCore( input, this, null );
         }
 
