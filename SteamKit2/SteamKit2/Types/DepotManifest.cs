@@ -226,15 +226,13 @@ namespace SteamKit2
         /// <returns><c>true</c> if serialization was successful; otherwise, <c>false</c>.</returns>
         public bool SaveToFile( string filename )
         {
-            using ( var fs = File.Open( filename, FileMode.Create ) )
-            using ( var bw = new BinaryWriter( fs ) )
+            using var fs = File.Open( filename, FileMode.Create );
+            using var bw = new BinaryWriter( fs );
+            var data = Serialize();
+            if ( data != null )
             {
-                var data = Serialize();
-                if ( data != null )
-                {
-                    bw.Write( data );
-                    return true;
-                }
+                bw.Write( data );
+                return true;
             }
 
             return false;
@@ -250,12 +248,10 @@ namespace SteamKit2
             if ( !File.Exists( filename ) )
                 return null;
 
-            using ( var fs = File.Open( filename, FileMode.Open ) )
-            using ( var ms = new MemoryStream() )
-            {
-                fs.CopyTo( ms );
-                return Deserialize( ms.ToArray() );
-            }
+            using var fs = File.Open( filename, FileMode.Open );
+            using var ms = new MemoryStream();
+            fs.CopyTo( ms );
+            return Deserialize( ms.ToArray() );
         }
 
         void InternalDeserialize(byte[] data)
