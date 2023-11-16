@@ -93,7 +93,7 @@ void OnConnected( SteamClient.ConnectedCallback callback )
     {
         // if we have a saved sentry file, read and sha-1 hash it
         byte[] sentryFile = File.ReadAllBytes( "sentry.bin" );
-        sentryHash = CryptoHelper.SHAHash( sentryFile );
+        sentryHash = SHA1.HashData( sentryFile );
     }
 
     steamUser.LogOn( new SteamUser.LogOnDetails
