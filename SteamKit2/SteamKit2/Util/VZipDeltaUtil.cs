@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.IO.Hashing;
 
 namespace SteamKit2
 {
@@ -53,7 +54,7 @@ namespace SteamKit2
                     decoder.Code( inputStream, outStream, deltaBuffer.Length, sizeDecompressed, null );
 
                     var outData = outStream.ToArray();
-                    if ( Crc32.Compute( outData ) != outputCRC )
+                    if ( Crc32.HashToUInt32( outData ) != outputCRC )
                     {
                         throw new InvalidDataException( "CRC does not match decompressed data. VZip data may be corrupted." );
                     }

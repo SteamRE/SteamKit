@@ -9,6 +9,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.IO.Hashing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -396,22 +397,6 @@ namespace SteamKit2
 
                     return output;
                 }
-            }
-        }
-
-        /// <summary>
-        /// Performs CRC32 on an input byte array using the CrcStandard.Crc32Bit parameters
-        /// </summary>
-        public static byte[] CRCHash( byte[] input )
-        {
-            ArgumentNullException.ThrowIfNull( input );
-
-            using ( var crc = new Crc32() )
-            {
-                byte[] hash = crc.ComputeHash( input );
-                Array.Reverse( hash );
-
-                return hash;
             }
         }
 

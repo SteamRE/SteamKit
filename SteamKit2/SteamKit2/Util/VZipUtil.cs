@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Hashing;
 using System.Linq;
 using System.Text;
 
@@ -55,7 +56,7 @@ namespace SteamKit2
                     decoder.Code(inputStream, outStream, compressedBuffer.Length, sizeDecompressed, null);
 
                     var outData = outStream.ToArray();
-                    if (Crc32.Compute(outData) != outputCRC)
+                    if (Crc32.HashToUInt32(outData) != outputCRC)
                     {
                         throw new InvalidDataException("CRC does not match decompressed data. VZip data may be corrupted.");
                     }
@@ -70,7 +71,7 @@ namespace SteamKit2
             using (MemoryStream ms = new MemoryStream())
             using (BinaryWriter writer = new BinaryWriter(ms))
             {
-                byte[] crc = CryptoHelper.CRCHash(buffer);
+                byte[] crc = Crc32.Hash(buffer);
 
                 writer.Write(VZipHeader);
                 writer.Write((byte)Version);

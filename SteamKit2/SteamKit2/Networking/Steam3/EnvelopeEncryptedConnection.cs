@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO.Hashing;
 using System.Net;
 using SteamKit2.Internal;
 
@@ -166,7 +167,7 @@ namespace SteamKit2
                 }
             }
 
-            var keyCrc = CryptoHelper.CRCHash( encryptedHandshakeBlob );
+            var keyCrc = Crc32.Hash( encryptedHandshakeBlob );
 
             response.Write( encryptedHandshakeBlob );
             response.Write( keyCrc );
