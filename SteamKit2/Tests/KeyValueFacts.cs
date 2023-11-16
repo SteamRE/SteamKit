@@ -328,7 +328,7 @@ namespace Tests
             // Test every possible truncation boundary we have.
             for ( int i = 0; i < TestObjectHex.Length; i += 2 )
             {
-                var binary = Utils.DecodeHexString( TestObjectHex.Substring( 0, i ) );
+                var binary = Utils.DecodeHexString( TestObjectHex[ ..i ] );
                 var kv = new KeyValue();
                 bool success;
                 using ( var ms = new MemoryStream( binary ) )
@@ -423,10 +423,8 @@ namespace Tests
             {
                 kv.SaveToStream( ms, asBinary: false );
                 ms.Seek( 0, SeekOrigin.Begin );
-                using ( var reader = new StreamReader( ms ) )
-                {
-                    text = reader.ReadToEnd();
-                }
+                using var reader = new StreamReader( ms );
+                text = reader.ReadToEnd();
             }
 
             Assert.Equal( expected, text );
@@ -468,10 +466,8 @@ namespace Tests
             {
                 kv.SaveToStream( ms, asBinary: false );
                 ms.Seek( 0, SeekOrigin.Begin );
-                using ( var reader = new StreamReader( ms ) )
-                {
-                    text = reader.ReadToEnd();
-                }
+                using var reader = new StreamReader( ms );
+                text = reader.ReadToEnd();
             }
 
             var expectedValue = "\"key\"\n{\n\t\"slashes\"\t\t\"\\\\o/\"\n\t\"newline\"\t\t\"\\r\\n\"\n}\n";
@@ -490,10 +486,8 @@ namespace Tests
             {
                 kv.SaveToStream( ms, asBinary: false );
                 ms.Seek( 0, SeekOrigin.Begin );
-                using ( var reader = new StreamReader( ms ) )
-                {
-                    text = reader.ReadToEnd();
-                }
+                using var reader = new StreamReader( ms );
+                text = reader.ReadToEnd();
             }
 
             var expectedValue = "\"key\"\n{\n\t\"emptyObj\"\n\t{\n\t}\n\t\"emptyString\"\t\t\"\"\n}\n";

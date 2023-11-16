@@ -16,7 +16,7 @@ namespace Tests
         {
             var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( () => new HttpClient( new TeapotHttpMessageHandler() ) ) );
             var steam = new SteamClient( configuration );
-            var client = new Client( steam );
+            using var client = new Client( steam );
             var server = new Server
             {
                 Protocol = Server.ConnectionProtocol.HTTP,
@@ -34,7 +34,7 @@ namespace Tests
         {
             var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( () => new HttpClient( new TeapotHttpMessageHandler() ) ) );
             var steam = new SteamClient( configuration );
-            var client = new Client( steam );
+            using var client = new Client( steam );
             var server = new Server
             {
                 Protocol = Server.ConnectionProtocol.HTTP,
@@ -44,7 +44,7 @@ namespace Tests
             };
             var chunk = new DepotManifest.ChunkData
             {
-                ChunkID = new byte[] { 0xFF },
+                ChunkID = [0xFF],
             };
 
             var ex = await Assert.ThrowsAsync<SteamKitWebRequestException>( () => client.DownloadDepotChunkAsync( depotId: 0, chunk, server ) );
@@ -56,7 +56,7 @@ namespace Tests
         {
             var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( () => new HttpClient( new TeapotHttpMessageHandler() ) ) );
             var steam = new SteamClient( configuration );
-            var client = new Client( steam );
+            using var client = new Client( steam );
             var server = new Server
             {
                 Protocol = Server.ConnectionProtocol.HTTP,

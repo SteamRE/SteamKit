@@ -73,11 +73,9 @@ namespace Tests
 
         static byte[] Serialize(ISteamSerializableHeader hdr)
         {
-            using (var ms = new MemoryStream())
-            {
-                hdr.Serialize(ms);
-                return ms.ToArray();
-            }
+            using var ms = new MemoryStream();
+            hdr.Serialize( ms );
+            return ms.ToArray();
         }
 
         class DummyCMClient : CMClient

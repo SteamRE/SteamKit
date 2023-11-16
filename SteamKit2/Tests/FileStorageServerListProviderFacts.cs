@@ -20,7 +20,7 @@ namespace Tests
         [Fact]
         public async Task ReadsUpdatedServerList()
         {
-            var initialServers = await fileStorageProvider.FetchServerListAsync();
+            await fileStorageProvider.FetchServerListAsync();
 
             await fileStorageProvider.UpdateServerListAsync(new List<ServerRecord>()
             {

@@ -34,6 +34,7 @@ namespace Tests
         {
             Console.SetOut(originalOutWriter);
             writer.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }
