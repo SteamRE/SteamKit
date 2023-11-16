@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.IO.Compression;
+using System.IO.Hashing;
 using System.Text;
 
 namespace SteamKit2
@@ -61,7 +62,7 @@ namespace SteamKit2
                 else
                     decompressed = compressedBuffer;
 
-                uint checkSum = Crc32.Compute( decompressed );
+                uint checkSum = Crc32.HashToUInt32( decompressed );
 
                 if ( checkSum != crc )
                 {
@@ -77,7 +78,7 @@ namespace SteamKit2
             using ( MemoryStream ms = new MemoryStream() )
             using ( BinaryWriter writer = new BinaryWriter( ms ) )
             {
-                uint checkSum = Crc32.Compute( buffer );
+                uint checkSum = Crc32.HashToUInt32( buffer );
 
                 byte[] compressed = DeflateBuffer( buffer );
 

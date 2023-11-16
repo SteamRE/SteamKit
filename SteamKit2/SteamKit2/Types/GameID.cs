@@ -7,6 +7,7 @@
 
 using System;
 using System.Diagnostics;
+using System.IO.Hashing;
 
 namespace SteamKit2
 {
@@ -74,7 +75,7 @@ namespace SteamKit2
         {
             AppID = nAppID;
             AppType = GameType.GameMod;
-            ModID = Crc32.Compute(System.Text.Encoding.UTF8.GetBytes(modPath));
+            ModID = Crc32.HashToUInt32(System.Text.Encoding.UTF8.GetBytes(modPath));
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="GameID"/> class.
@@ -92,7 +93,7 @@ namespace SteamKit2
 
             AppID = 0;
             AppType = GameType.Shortcut;
-            ModID = Crc32.Compute(System.Text.Encoding.UTF8.GetBytes(combined));
+            ModID = Crc32.HashToUInt32(System.Text.Encoding.UTF8.GetBytes(combined));
         }
 
 
