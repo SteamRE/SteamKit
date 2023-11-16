@@ -55,7 +55,7 @@ namespace Tests
         [Fact]
         public void MachineInfoIsProcessedInBackground()
         {
-            var provider = new ThreadRejectingMachineInfoProvider(Thread.CurrentThread.ManagedThreadId);
+            var provider = new ThreadRejectingMachineInfoProvider( Environment.CurrentManagedThreadId );
             HardwareUtils.Init(provider);
 
             // Should not throw
@@ -65,7 +65,7 @@ namespace Tests
         [Fact]
         public void ProviderIsNotRetained()
         {
-            WeakReference Setup()
+            static WeakReference Setup()
             {
                 var provider = new CountingMachineInfoProvider();
                 HardwareUtils.Init(provider);
@@ -82,7 +82,7 @@ namespace Tests
         public void GenerationIsThreadSafe()
         {
             var provider = new CountingMachineInfoProvider();
-            var trigger = new ManualResetEventSlim();
+            using var trigger = new ManualResetEventSlim();
 
             var threads = new Thread[100];
             for (var i = 0; i < threads.Length; i++)
@@ -143,51 +143,44 @@ namespace Tests
             public byte[] GetDiskId()
             {
                 TotalInvocations++;
-                return Array.Empty<byte>();
+                return [];
             }
 
             public byte[] GetMacAddress()
             {
                 TotalInvocations++;
-                return Array.Empty<byte>();
+                return [];
             }
             public byte[] GetMachineGuid()
             {
                 TotalInvocations++;
-                return Array.Empty<byte>();
+                return [];
             }
         }
 
-        sealed class ThreadRejectingMachineInfoProvider : IMachineInfoProvider
+        sealed class ThreadRejectingMachineInfoProvider( int ThreadIdToReject ) : IMachineInfoProvider
         {
-            public ThreadRejectingMachineInfoProvider(int threadId)
-            {
-                ThreadIdToReject = threadId;
-            }
-
-            public int ThreadIdToReject { get; }
-
             public byte[] GetDiskId()
             {
                 EnsureNotOnRejectedThread();
-                return Array.Empty<byte>();
+                return [];
             }
 
             public byte[] GetMacAddress()
             {
                 EnsureNotOnRejectedThread();
-                return Array.Empty<byte>();
+                return [];
             }
 
             public byte[] GetMachineGuid()
             {
                 EnsureNotOnRejectedThread();
-                return Array.Empty<byte>();
+                return [];
             }
 
             void EnsureNotOnRejectedThread()
             {
-                if (Thread.CurrentThread.ManagedThreadId == ThreadIdToReject)
+                if ( Environment.CurrentManagedThreadId == ThreadIdToReject )
                 {
                     throw new InvalidOperationException("Operation must not be run on rejected thread.");
                 }

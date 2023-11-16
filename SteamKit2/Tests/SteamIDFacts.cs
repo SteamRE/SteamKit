@@ -365,7 +365,7 @@ namespace Tests
         public void TryGetClanIDDoesNotModifySelf()
         {
             var clanID = new SteamID(4, (uint)SteamID.ChatInstanceFlags.Clan, EUniverse.Public, EAccountType.Chat );
-            Assert.True( clanID.TryGetClanID( out var groupID ) );
+            Assert.True( clanID.TryGetClanID( out _ ) );
 
             Assert.Equal( EUniverse.Public, clanID.AccountUniverse );
             Assert.Equal( EAccountType.Chat, clanID.AccountType );

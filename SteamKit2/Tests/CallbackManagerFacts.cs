@@ -26,13 +26,13 @@ namespace Tests
             var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
 
             var didCall = false;
-            Action<CallbackForTest> action = delegate(CallbackForTest cb)
+            void action( CallbackForTest cb )
             {
-                Assert.Equal(callback.UniqueID, cb.UniqueID);
+                Assert.Equal( callback.UniqueID, cb.UniqueID );
                 didCall = true;
-            };
+            }
 
-            using (mgr.Subscribe(action))
+            using (mgr.Subscribe( ( Action<CallbackForTest> )action ))
             {
                 PostAndRunCallback(callback);
             }
@@ -46,15 +46,15 @@ namespace Tests
             var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
 
             var didCall = false;
-            Action<CallbackMsg> action = delegate(CallbackMsg cb)
+            void action( CallbackMsg cb )
             {
-                Assert.IsType<CallbackForTest>(cb);
-                var cft = (CallbackForTest)cb;
-                Assert.Equal(callback.UniqueID, cft.UniqueID);
+                Assert.IsType<CallbackForTest>( cb );
+                var cft = ( CallbackForTest )cb;
+                Assert.Equal( callback.UniqueID, cft.UniqueID );
                 didCall = true;
-            };
+            }
 
-            using (mgr.Subscribe(action))
+            using (mgr.Subscribe( ( Action<CallbackMsg> )action ))
             {
                 PostAndRunCallback(callback);
             }
@@ -69,14 +69,14 @@ namespace Tests
             var callback = new CallbackForTest { JobID = jobID, UniqueID = Guid.NewGuid() };
 
             var didCall = false;
-            Action<CallbackForTest> action = delegate(CallbackForTest cb)
+            void action( CallbackForTest cb )
             {
-                Assert.Equal(callback.UniqueID, cb.UniqueID);
-                Assert.Equal(jobID, cb.JobID);
+                Assert.Equal( callback.UniqueID, cb.UniqueID );
+                Assert.Equal( jobID, cb.JobID );
                 didCall = true;
-            };
+            }
 
-            using (mgr.Subscribe(JobID.Invalid, action))
+            using (mgr.Subscribe(JobID.Invalid, ( Action<CallbackForTest> )action ))
             {
                 PostAndRunCallback(callback);
             }
@@ -91,14 +91,14 @@ namespace Tests
             var callback = new CallbackForTest { JobID = jobID, UniqueID = Guid.NewGuid() };
 
             var didCall = false;
-            Action<CallbackForTest> action = delegate(CallbackForTest cb)
+            void action( CallbackForTest cb )
             {
-                Assert.Equal(callback.UniqueID, cb.UniqueID);
-                Assert.Equal(jobID, cb.JobID);
+                Assert.Equal( callback.UniqueID, cb.UniqueID );
+                Assert.Equal( jobID, cb.JobID );
                 didCall = true;
-            };
+            }
 
-            using (mgr.Subscribe(action))
+            using (mgr.Subscribe( ( Action<CallbackForTest> )action ))
             {
                 PostAndRunCallback(callback);
             }
@@ -113,12 +113,12 @@ namespace Tests
             var callback = new CallbackForTest { JobID = jobID, UniqueID = Guid.NewGuid() };
 
             var didCall = false;
-            Action<CallbackForTest> action = delegate(CallbackForTest cb)
+            void action( CallbackForTest cb )
             {
                 didCall = true;
-            };
+            }
 
-            using (mgr.Subscribe(123, action))
+            using (mgr.Subscribe(123, ( Action<CallbackForTest> )action ))
             {
                 PostAndRunCallback(callback);
             }
@@ -133,14 +133,14 @@ namespace Tests
             var callback = new CallbackForTest { JobID = jobID, UniqueID = Guid.NewGuid() };
 
             var didCall = false;
-            Action<CallbackForTest> action = delegate(CallbackForTest cb)
+            void action( CallbackForTest cb )
             {
-                Assert.Equal(callback.UniqueID, cb.UniqueID);
-                Assert.Equal(jobID, cb.JobID);
+                Assert.Equal( callback.UniqueID, cb.UniqueID );
+                Assert.Equal( jobID, cb.JobID );
                 didCall = true;
-            };
+            }
 
-            using (mgr.Subscribe(123456, action))
+            using (mgr.Subscribe(123456, ( Action<CallbackForTest> )action ))
             {
                 PostAndRunCallback(callback);
             }
@@ -154,12 +154,12 @@ namespace Tests
             var callback = new CallbackForTest();
 
             var callCount = 0;
-            Action<CallbackForTest> action = delegate (CallbackForTest cb)
+            void action( CallbackForTest cb )
             {
                 callCount++;
-            };
+            }
 
-            using (mgr.Subscribe(action))
+            using (mgr.Subscribe( ( Action<CallbackForTest> )action ))
             {
                 PostAndRunCallback(callback);
             }
@@ -174,13 +174,13 @@ namespace Tests
             var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
 
             var numCallbacksRun = 0;
-            Action<CallbackForTest> action = delegate (CallbackForTest cb)
+            void action( CallbackForTest cb )
             {
-                Assert.Equal(callback.UniqueID, cb.UniqueID);
+                Assert.Equal( callback.UniqueID, cb.UniqueID );
                 numCallbacksRun++;
-            };
+            }
 
-            using (mgr.Subscribe(action))
+            using (mgr.Subscribe( ( Action<CallbackForTest> )action ))
             {
                 for (var i = 0; i < 10; i++)
                 {

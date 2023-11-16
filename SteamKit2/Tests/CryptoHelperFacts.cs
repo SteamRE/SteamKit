@@ -15,8 +15,7 @@ namespace Tests
             const string decryptedExpected = "this is a 24 byte string";
             const string encryptionKey = "encryption key";
 
-            using var sha256 = SHA256.Create();
-            var key = sha256.ComputeHash( Encoding.UTF8.GetBytes( encryptionKey ) );
+            var key = SHA256.HashData( Encoding.UTF8.GetBytes( encryptionKey ) );
 
             var encryptedData = Encoding.UTF8.GetBytes( decryptedExpected );
             encryptedData = CryptoHelper.SymmetricEncrypt( encryptedData, key );

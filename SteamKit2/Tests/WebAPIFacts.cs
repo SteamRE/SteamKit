@@ -53,7 +53,7 @@ namespace Tests
         [Fact]
         public async Task ThrowsOnIncorrectFormatInArgsProvided()
         {
-            var hookableHandler = new HookableHandler();
+            using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
 
             WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
@@ -71,7 +71,7 @@ namespace Tests
         [Fact]
         public async Task DoesntThrowWhenCorrectFormatInArgsProvided()
         {
-            var hookableHandler = new HookableHandler();
+            using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
 
             WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
@@ -89,7 +89,7 @@ namespace Tests
         [Fact]
         public async Task DoesntThrowWhenKeyInArgsProvided()
         {
-            var hookableHandler = new HookableHandler();
+            using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c.WithWebAPIKey( "test1" ).WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
 
             WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
@@ -109,7 +109,7 @@ namespace Tests
         [Fact]
         public async Task DoesntThrowOnArgumentsReuse()
         {
-            var hookableHandler = new HookableHandler();
+            using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
 
             WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
@@ -127,7 +127,7 @@ namespace Tests
         [Fact]
         public async Task UsesArgsAsQueryStringParams()
         {
-            var hookableHandler = new HookableHandler();
+            using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
 
             dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
@@ -162,7 +162,7 @@ namespace Tests
         [Fact]
         public async Task SupportsNullArgsDictionary()
         {
-            var hookableHandler = new HookableHandler();
+            using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
 
             dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
@@ -190,7 +190,7 @@ namespace Tests
         [Fact]
         public async Task UsesSingleParameterArgumentsDictionary()
         {
-            var hookableHandler = new HookableHandler();
+            using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
 
             dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
@@ -225,7 +225,7 @@ namespace Tests
         [Fact]
         public async Task IncludesApiKeyInParams()
         {
-            var hookableHandler = new HookableHandler();
+            using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c
                 .WithHttpClientFactory( () => new HttpClient( hookableHandler ) )
                 .WithWebAPIKey("MySecretApiKey") );
@@ -279,7 +279,7 @@ namespace Tests
 
                 return new HttpResponseMessage( HttpStatusCode.OK )
                 {
-                    Content = new ByteArrayContent( Array.Empty<byte>() )
+                    Content = new ByteArrayContent( [] )
                 };
             }
         }

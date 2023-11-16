@@ -11,12 +11,12 @@ namespace Tests
         public void GetMsgIPAddress()
         {
             Assert.Equal( 2130706433u, NetHelpers.GetMsgIPAddress( IPAddress.Loopback ).v4 );
-            Assert.Equal( new byte[] {
+            Assert.Equal( [
                 0, 0, 0, 0,
                 0, 0, 0, 0,
                 0, 0, 0, 0,
                 0, 0, 0, 1
-            }, NetHelpers.GetMsgIPAddress( IPAddress.IPv6Loopback ).v6 );
+            ], NetHelpers.GetMsgIPAddress( IPAddress.IPv6Loopback ).v6 );
         }
 
         [Fact]
@@ -37,12 +37,12 @@ namespace Tests
         public void ObfuscatePrivateIP()
         {
             Assert.Equal( 3316510732u, NetHelpers.GetMsgIPAddress( IPAddress.Loopback ).ObfuscatePrivateIP().v4 );
-            Assert.Equal( new byte[] {
+            Assert.Equal( [
                 0x0D, 0xF0, 0xAD, 0xBA,
                 0x0D, 0xF0, 0xAD, 0xBA,
                 0x0D, 0xF0, 0xAD, 0xBA,
                 0x0D, 0xF0, 0xAD, 1 ^ 0xBA
-            }, NetHelpers.GetMsgIPAddress( IPAddress.IPv6Loopback ).ObfuscatePrivateIP().v6 );
+            ], NetHelpers.GetMsgIPAddress( IPAddress.IPv6Loopback ).ObfuscatePrivateIP().v6 );
         }
 
         [Fact]
