@@ -437,7 +437,7 @@ namespace SteamKit2
                 if ( msg.message != null )
                 {
                     this.Message = Encoding.UTF8.GetString( msg.message );
-                    this.Message = this.Message.TrimEnd( ['\0'] ); // trim any extra null chars from the end
+                    this.Message = this.Message.TrimEnd( '\0' ); // trim any extra null chars from the end
                 }
             }
         }
@@ -481,7 +481,7 @@ namespace SteamKit2
                 if ( msg.message != null )
                 {
                     this.Message = Encoding.UTF8.GetString( msg.message );
-                    this.Message = this.Message.TrimEnd( ['\0'] ); // trim any extra null chars from the end
+                    this.Message = this.Message.TrimEnd( '\0' ); // trim any extra null chars from the end
                 }
             }
         }
@@ -728,7 +728,7 @@ namespace SteamKit2
                 this.ChatMsgType = msg.ChatMsgType;
 
                 this.Message = Encoding.UTF8.GetString( payload );
-                this.Message = this.Message.TrimEnd( ['\0'] ); // trim any extra null chars from the end
+                this.Message = this.Message.TrimEnd( '\0' ); // trim any extra null chars from the end
             }
         }
 

@@ -53,7 +53,7 @@ namespace SteamKit2
         /// Initializes a new instance of the <see cref="GameID"/> class.
         /// </summary>
         /// <param name="id">The 64bit integer to assign this GameID from.</param>
-        public GameID( UInt64 id )
+        public GameID( ulong id )
         {
             gameid = new BitVector64( id );
         }
@@ -61,8 +61,8 @@ namespace SteamKit2
         /// Initializes a new instance of the <see cref="GameID"/> class.
         /// </summary>
         /// <param name="nAppID">The 32bit app id to assign this GameID from.</param>
-        public GameID( Int32 nAppID )
-            : this( ( UInt64 )nAppID )
+        public GameID( int nAppID )
+            : this( ( ulong )nAppID )
         {
         }
         /// <summary>
@@ -70,7 +70,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="nAppID">The base app id of the mod.</param>
         /// <param name="modPath">The game folder name of the mod.</param>
-        public GameID( UInt32 nAppID, string modPath )
+        public GameID( uint nAppID, string modPath )
             : this(0)
         {
             AppID = nAppID;
@@ -115,7 +115,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="SteamKit2.GameID"/> to <see cref="System.String"/>.
+        /// Performs an implicit conversion from <see cref="SteamKit2.GameID"/> to <see cref="string"/>.
         /// </summary>
         /// <param name="gid">The GameID to convert..</param>
         /// <returns>
@@ -129,13 +129,13 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="SteamKit2.GameID"/> to <see cref="System.UInt64"/>.
+        /// Performs an implicit conversion from <see cref="SteamKit2.GameID"/> to <see cref="ulong"/>.
         /// </summary>
         /// <param name="gid">The GameId to convert.</param>
         /// <returns>
         /// The result of the conversion.
         /// </returns>
-        public static implicit operator UInt64( GameID? gid )
+        public static implicit operator ulong( GameID? gid )
         {
             ArgumentNullException.ThrowIfNull( gid );
 
@@ -143,13 +143,13 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="System.UInt64"/> to <see cref="SteamKit2.GameID"/>.
+        /// Performs an implicit conversion from <see cref="ulong"/> to <see cref="SteamKit2.GameID"/>.
         /// </summary>
         /// <param name="id">The 64bit integer representing a GameID to convert.</param>
         /// <returns>
         /// The result of the conversion.
         /// </returns>
-        public static implicit operator GameID( UInt64 id )
+        public static implicit operator GameID( ulong id )
         {
             return new GameID( id );
         }
@@ -161,15 +161,15 @@ namespace SteamKit2
         /// <value>
         /// The app IDid
         /// </value>
-        public UInt32 AppID
+        public uint AppID
         {
             get
             {
-                return ( UInt32 )gameid[ 0, 0xFFFFFF ];
+                return ( uint )gameid[ 0, 0xFFFFFF ];
             }
             set
             {
-                gameid[ 0, 0xFFFFFF ] = ( UInt64 )value;
+                gameid[ 0, 0xFFFFFF ] = ( ulong )value;
             }
         }
         /// <summary>
@@ -186,7 +186,7 @@ namespace SteamKit2
             }
             set
             {
-                gameid[ 24, 0xFF ] = ( UInt64 )value;
+                gameid[ 24, 0xFF ] = ( ulong )value;
             }
         }
         /// <summary>
@@ -195,15 +195,15 @@ namespace SteamKit2
         /// <value>
         /// The mod ID.
         /// </value>
-        public UInt32 ModID
+        public uint ModID
         {
             get
             {
-                return ( UInt32 )gameid[ 32, 0xFFFFFFFF ];
+                return ( uint )gameid[ 32, 0xFFFFFFFF ];
             }
             set
             {
-                gameid[ 32, 0xFFFFFFFF ] = ( UInt64 )value;
+                gameid[ 32, 0xFFFFFFFF ] = ( ulong )value;
                 gameid[ 63, 0xFF ] = 1;
             }
         }
@@ -252,11 +252,11 @@ namespace SteamKit2
 
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
+        /// Determines whether the specified <see cref="object"/> is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
+        /// <param name="obj">The <see cref="object"/> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref="object"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals( object? obj )
         {
@@ -333,10 +333,10 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// Returns a <see cref="string"/> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
+        /// A <see cref="string"/> that represents this instance.
         /// </returns>
         public override string ToString()
         {

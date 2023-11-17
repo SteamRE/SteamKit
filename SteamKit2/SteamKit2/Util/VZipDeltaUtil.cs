@@ -6,8 +6,8 @@ namespace SteamKit2
 {
     class VZipDeltaUtil
     {
-        private static UInt16 VZipHeader = 0x5A56;
-        private static UInt16 VZipFooter = 0x767A;
+        private static ushort VZipHeader = 0x5A56;
+        private static ushort VZipFooter = 0x767A;
         private static int HeaderLength = 7;
         private static int FooterLength = 10;
 
@@ -29,8 +29,7 @@ namespace SteamKit2
             }
 
             // This is also the CRC of the chunk
-            /* uint secondaryCRC = */
-            reader.ReadUInt32();
+            /* uint secondaryCRC = */ reader.ReadUInt32();
 
             byte[] properties = reader.ReadBytes( 5 );
             byte[] deltaBuffer = reader.ReadBytes( ( int )ms.Length - HeaderLength - FooterLength - 5 );
