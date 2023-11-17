@@ -79,7 +79,7 @@ namespace SteamKit2
         {
             while ( !EndOfStream )
             {
-                if ( !Char.IsWhiteSpace( ( char )Peek() ) )
+                if ( !char.IsWhiteSpace( ( char )Peek() ) )
                 {
                     break;
                 }
@@ -194,7 +194,7 @@ namespace SteamKit2
                 if ( next == ']' && bConditionalStart )
                     wasConditional = true;
 
-                if ( Char.IsWhiteSpace( next ) )
+                if ( char.IsWhiteSpace( next ) )
                     break;
 
                 if ( count < 1023 )
@@ -478,10 +478,10 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// Returns a <see cref="string"/> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
+        /// A <see cref="string"/> that represents this instance.
         /// </returns>
         public override string ToString()
         {

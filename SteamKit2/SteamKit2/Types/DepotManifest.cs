@@ -208,7 +208,7 @@ namespace SteamKit2
                     return false;
                 }
 
-                file.FileName = Encoding.UTF8.GetString( filename ).TrimEnd( ['\0'] ).Replace(altDirChar, Path.DirectorySeparatorChar);
+                file.FileName = Encoding.UTF8.GetString( filename ).TrimEnd( '\0' ).Replace(altDirChar, Path.DirectorySeparatorChar);
             }
 
             // Sort file entries alphabetically because that's what Steam does

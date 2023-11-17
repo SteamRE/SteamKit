@@ -6,8 +6,8 @@ namespace SteamKit2
 {
     class VZipUtil
     {
-        private static UInt16 VZipHeader = 0x5A56;
-        private static UInt16 VZipFooter = 0x767A;
+        private static ushort VZipHeader = 0x5A56;
+        private static ushort VZipFooter = 0x767A;
         private static int HeaderLength = 7;
         private static int FooterLength = 10;
 
@@ -30,8 +30,7 @@ namespace SteamKit2
 
             // Sometimes this is a creation timestamp (e.g. for Steam Client VZips).
             // Sometimes this is a CRC32 (e.g. for depot chunks).
-            /* uint creationTimestampOrSecondaryCRC = */
-            reader.ReadUInt32();
+            /* uint creationTimestampOrSecondaryCRC = */ reader.ReadUInt32();
 
             byte[] properties = reader.ReadBytes( 5 );
             byte[] compressedBuffer = reader.ReadBytes( ( int )ms.Length - HeaderLength - FooterLength - 5 );
@@ -70,12 +69,12 @@ namespace SteamKit2
             writer.Write( ( byte )Version );
             writer.Write( crc );
 
-            Int32 dictionary = 1 << 23;
-            Int32 posStateBits = 2;
-            Int32 litContextBits = 3;
-            Int32 litPosBits = 0;
-            Int32 algorithm = 2;
-            Int32 numFastBytes = 128;
+            int dictionary = 1 << 23;
+            int posStateBits = 2;
+            int litContextBits = 3;
+            int litPosBits = 0;
+            int algorithm = 2;
+            int numFastBytes = 128;
 
             SevenZip.CoderPropID[] propIDs =
             [
@@ -91,12 +90,12 @@ namespace SteamKit2
 
             object[] properties =
             [
-                ( Int32 )( dictionary ),
-                ( Int32 )( posStateBits ),
-                ( Int32 )( litContextBits ),
-                ( Int32 )( litPosBits ),
-                ( Int32 )( algorithm ),
-                ( Int32 )( numFastBytes ),
+                dictionary,
+                posStateBits,
+                litContextBits,
+                litPosBits,
+                algorithm,
+                numFastBytes,
                 "bt4",
                 false
             ];

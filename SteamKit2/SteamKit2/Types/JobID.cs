@@ -41,7 +41,7 @@ namespace SteamKit2
 
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="SteamKit2.JobID"/> to <see cref="System.UInt64"/>.
+        /// Performs an implicit conversion from <see cref="SteamKit2.JobID"/> to <see cref="ulong"/>.
         /// </summary>
         /// <param name="jobId">The Job ID.</param>
         /// <returns>
@@ -55,7 +55,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="System.UInt64"/> to <see cref="SteamKit2.JobID"/>.
+        /// Performs an implicit conversion from <see cref="ulong"/> to <see cref="SteamKit2.JobID"/>.
         /// </summary>
         /// <param name="jobId">The Job ID.</param>
         /// <returns>

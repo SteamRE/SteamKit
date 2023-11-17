@@ -15,14 +15,14 @@ namespace SteamKit2
 {
     static class ZipUtil
     {
-        private static UInt32 LocalFileHeader = 0x04034b50;
-        private static UInt32 CentralDirectoryHeader = 0x02014b50;
-        private static UInt32 EndOfDirectoryHeader = 0x06054b50;
+        private static uint LocalFileHeader = 0x04034b50;
+        private static uint CentralDirectoryHeader = 0x02014b50;
+        private static uint EndOfDirectoryHeader = 0x06054b50;
 
-        private static UInt16 DeflateCompression = 8;
-        private static UInt16 StoreCompression = 0;
+        private static ushort DeflateCompression = 8;
+        private static ushort StoreCompression = 0;
 
-        private static UInt16 Version = 20;
+        private static ushort Version = 20;
 
         public static byte[] Decompress( byte[] buffer )
         {
@@ -34,8 +34,8 @@ namespace SteamKit2
             }
 
             string fileName;
-            UInt32 decompressedSize;
-            UInt16 compressionMethod;
+            uint decompressedSize;
+            ushort compressionMethod;
             uint crc;
             byte[] compressedBuffer = ReadLocalFile( reader, out fileName, out decompressedSize, out compressionMethod, out crc );
 
@@ -45,16 +45,14 @@ namespace SteamKit2
             }
 
             string cdrFileName;
-            /*Int32 relativeOffset =*/
-            ReadCentralDirectory( reader, out cdrFileName );
+            /*Int32 relativeOffset =*/ ReadCentralDirectory( reader, out cdrFileName );
 
             if ( !PeekHeader( reader, EndOfDirectoryHeader ) )
             {
                 throw new Exception( "Expecting EndOfDirectoryHeader following CentralDirectoryHeader" );
             }
 
-            /*UInt32 count =*/
-            ReadEndOfDirectory( reader );
+            /*UInt32 count =*/ ReadEndOfDirectory( reader );
 
             byte[] decompressed;
 
@@ -81,123 +79,122 @@ namespace SteamKit2
 
             byte[] compressed = DeflateBuffer( buffer );
 
-            Int32 poslocal = WriteHeader( writer, LocalFileHeader );
-            WriteLocalFile( writer, "z", checkSum, ( UInt32 )buffer.Length, compressed );
+            int poslocal = WriteHeader( writer, LocalFileHeader );
+            WriteLocalFile( writer, "z", checkSum, ( uint )buffer.Length, compressed );
 
-            Int32 posCDR = WriteHeader( writer, CentralDirectoryHeader );
-            UInt32 CDRSize = WriteCentralDirectory( writer, "z", checkSum, ( UInt32 )compressed.Length, ( UInt32 )buffer.Length, poslocal );
+            int posCDR = WriteHeader( writer, CentralDirectoryHeader );
+            uint CDRSize = WriteCentralDirectory( writer, "z", checkSum, ( uint )compressed.Length, ( uint )buffer.Length, poslocal );
 
-            /*Int32 posEOD =*/
-            WriteHeader( writer, EndOfDirectoryHeader );
+            /*Int32 posEOD =*/ WriteHeader( writer, EndOfDirectoryHeader );
             WriteEndOfDirectory( writer, 1, CDRSize, posCDR );
 
             return ms.ToArray();
         }
 
 
-        private static Int32 WriteHeader( BinaryWriter writer, UInt32 header )
+        private static int WriteHeader( BinaryWriter writer, uint header )
         {
-            Int32 position = ( Int32 )writer.BaseStream.Position;
+            int position = ( int )writer.BaseStream.Position;
 
             writer.Write( header );
 
             return position;
         }
 
-        private static void WriteEndOfDirectory( BinaryWriter writer, UInt32 count, UInt32 CDRSize, Int32 CDROffset )
+        private static void WriteEndOfDirectory( BinaryWriter writer, uint count, uint CDRSize, int CDROffset )
         {
-            writer.Write( ( UInt16 )0 ); // diskNumber
-            writer.Write( ( UInt16 )0 ); // CDRDisk
-            writer.Write( ( UInt16 )count ); // CDRCount
-            writer.Write( ( UInt16 )1 ); // CDRTotal
+            writer.Write( ( ushort )0 ); // diskNumber
+            writer.Write( ( ushort )0 ); // CDRDisk
+            writer.Write( ( ushort )count ); // CDRCount
+            writer.Write( ( ushort )1 ); // CDRTotal
 
-            writer.Write( ( UInt32 )CDRSize ); // CDRSize
-            writer.Write( ( Int32 )CDROffset ); // CDROffset
+            writer.Write( ( uint )CDRSize ); // CDRSize
+            writer.Write( ( int )CDROffset ); // CDROffset
 
-            writer.Write( ( UInt16 )0 ); // commentLength
+            writer.Write( ( ushort )0 ); // commentLength
         }
 
-        private static UInt32 WriteCentralDirectory( BinaryWriter writer, string fileName, UInt32 CRC, UInt32 compressedSize, UInt32 decompressedSize, Int32 localHeaderOffset )
+        private static uint WriteCentralDirectory( BinaryWriter writer, string fileName, uint CRC, uint compressedSize, uint decompressedSize, int localHeaderOffset )
         {
-            UInt32 pos = ( UInt32 )writer.BaseStream.Position;
+            uint pos = ( uint )writer.BaseStream.Position;
 
             writer.Write( Version ); // versionGenerator
             writer.Write( Version ); // versionExtract
-            writer.Write( ( UInt16 )0 ); // bitflags
+            writer.Write( ( ushort )0 ); // bitflags
             writer.Write( DeflateCompression ); // compression
 
-            writer.Write( ( UInt16 )0 ); // modTime
-            writer.Write( ( UInt16 )0 ); // createTime
+            writer.Write( ( ushort )0 ); // modTime
+            writer.Write( ( ushort )0 ); // createTime
             writer.Write( CRC ); // CRC
 
             writer.Write( compressedSize ); // compressedSize
             writer.Write( decompressedSize ); // decompressedSize
 
-            writer.Write( ( UInt16 )Encoding.UTF8.GetByteCount( fileName ) ); // nameLength
-            writer.Write( ( UInt16 )0 ); // fieldLength
-            writer.Write( ( UInt16 )0 ); // commentLength
+            writer.Write( ( ushort )Encoding.UTF8.GetByteCount( fileName ) ); // nameLength
+            writer.Write( ( ushort )0 ); // fieldLength
+            writer.Write( ( ushort )0 ); // commentLength
 
-            writer.Write( ( UInt16 )0 ); // diskNumber
-            writer.Write( ( UInt16 )1 ); // internalAttributes
-            writer.Write( ( UInt32 )32 ); // externalAttributes
+            writer.Write( ( ushort )0 ); // diskNumber
+            writer.Write( ( ushort )1 ); // internalAttributes
+            writer.Write( ( uint )32 ); // externalAttributes
 
             writer.Write( localHeaderOffset ); // relativeOffset
 
             writer.Write( Encoding.UTF8.GetBytes( fileName ) ); // filename
 
-            return ( ( UInt32 )writer.BaseStream.Position - pos ) + 4;
+            return ( ( uint )writer.BaseStream.Position - pos ) + 4;
         }
 
-        private static void WriteLocalFile( BinaryWriter writer, string fileName, UInt32 CRC, UInt32 decompressedSize, byte[] processedBuffer )
+        private static void WriteLocalFile( BinaryWriter writer, string fileName, uint CRC, uint decompressedSize, byte[] processedBuffer )
         {
             writer.Write( Version ); // version
-            writer.Write( ( UInt16 )0 ); // bitflags
+            writer.Write( ( ushort )0 ); // bitflags
             writer.Write( DeflateCompression ); // compression
 
-            writer.Write( ( UInt16 )0 ); // modTime
-            writer.Write( ( UInt16 )0 ); // createTime
+            writer.Write( ( ushort )0 ); // modTime
+            writer.Write( ( ushort )0 ); // createTime
             writer.Write( CRC ); // CRC
 
             writer.Write( processedBuffer.Length ); // compressedSize
             writer.Write( decompressedSize ); // decompressedSize
 
-            writer.Write( ( UInt16 )Encoding.UTF8.GetByteCount( fileName ) ); // nameLength
-            writer.Write( ( UInt16 )0 ); // fieldLength
+            writer.Write( ( ushort )Encoding.UTF8.GetByteCount( fileName ) ); // nameLength
+            writer.Write( ( ushort )0 ); // fieldLength
 
             writer.Write( Encoding.UTF8.GetBytes( fileName ) ); // filename
             writer.Write( processedBuffer ); // contents
         }
 
 
-        private static bool PeekHeader( BinaryReader reader, UInt32 expecting )
+        private static bool PeekHeader( BinaryReader reader, uint expecting )
         {
-            UInt32 header = reader.ReadUInt32();
+            uint header = reader.ReadUInt32();
 
             return header == expecting;
         }
 
-        private static UInt32 ReadEndOfDirectory( BinaryReader reader )
+        private static uint ReadEndOfDirectory( BinaryReader reader )
         {
             /*UInt16 diskNumber =*/ reader.ReadUInt16();
             /*UInt16 CDRDisk =*/ reader.ReadUInt16();
-            UInt16 CDRCount = reader.ReadUInt16();
+            ushort CDRCount = reader.ReadUInt16();
             /*UInt16 CDRTotal =*/ reader.ReadUInt16();
 
             /*UInt32 CDRSize =*/ reader.ReadUInt32();
             /*Int32 CDROffset =*/ reader.ReadInt32();
 
-            UInt16 commentLength = reader.ReadUInt16();
+            ushort commentLength = reader.ReadUInt16();
             /*byte[] comment =*/ reader.ReadBytes( commentLength );
 
             return CDRCount;
         }
 
-        private static Int32 ReadCentralDirectory( BinaryReader reader, out String fileName )
+        private static int ReadCentralDirectory( BinaryReader reader, out string fileName )
         {
             /*UInt16 versionGenerator =*/ reader.ReadUInt16();
             /*UInt16 versionExtract =*/ reader.ReadUInt16();
             /*UInt16 bitflags =*/ reader.ReadUInt16();
-            UInt16 compression = reader.ReadUInt16();
+            ushort compression = reader.ReadUInt16();
 
             if ( compression != DeflateCompression && compression != StoreCompression )
             {
@@ -211,15 +208,15 @@ namespace SteamKit2
             /*UInt32 compressedSize =*/ reader.ReadUInt32();
             /*UInt32 decompressedSize =*/ reader.ReadUInt32();
 
-            UInt16 nameLength = reader.ReadUInt16();
-            UInt16 fieldLength = reader.ReadUInt16();
-            UInt16 commentLength = reader.ReadUInt16();
+            ushort nameLength = reader.ReadUInt16();
+            ushort fieldLength = reader.ReadUInt16();
+            ushort commentLength = reader.ReadUInt16();
 
             /*UInt16 diskNumber =*/ reader.ReadUInt16();
             /*UInt16 internalAttributes =*/ reader.ReadUInt16();
             /*UInt32 externalAttributes =*/ reader.ReadUInt32();
 
-            Int32 relativeOffset = reader.ReadInt32();
+            int relativeOffset = reader.ReadInt32();
 
             byte[] name = reader.ReadBytes( nameLength );
             /*byte[] fields =*/ reader.ReadBytes( fieldLength );
@@ -229,7 +226,7 @@ namespace SteamKit2
             return relativeOffset;
         }
 
-        private static byte[] ReadLocalFile( BinaryReader reader, out String fileName, out UInt32 decompressedSize, out UInt16 compressionMethod, out UInt32 crc )
+        private static byte[] ReadLocalFile( BinaryReader reader, out string fileName, out uint decompressedSize, out ushort compressionMethod, out uint crc )
         {
             /*UInt16 version =*/ reader.ReadUInt16();
             /*UInt16 bitflags =*/ reader.ReadUInt16();
@@ -244,11 +241,11 @@ namespace SteamKit2
             /*UInt16 createtime =*/ reader.ReadUInt16();
             crc = reader.ReadUInt32();
 
-            UInt32 compressedSize = reader.ReadUInt32();
+            uint compressedSize = reader.ReadUInt32();
             decompressedSize = reader.ReadUInt32();
 
-            UInt16 nameLength = reader.ReadUInt16();
-            UInt16 fieldLength = reader.ReadUInt16();
+            ushort nameLength = reader.ReadUInt16();
+            ushort fieldLength = reader.ReadUInt16();
 
             byte[] name = reader.ReadBytes( nameLength );
             /*byte[] fields =*/ reader.ReadBytes( fieldLength );
@@ -259,7 +256,7 @@ namespace SteamKit2
         }
 
 
-        private static byte[] InflateBuffer( byte[] compressedBuffer, UInt32 decompressedSize )
+        private static byte[] InflateBuffer( byte[] compressedBuffer, uint decompressedSize )
         {
             using MemoryStream ms = new MemoryStream( compressedBuffer );
             using DeflateStream deflateStream = new DeflateStream( ms, CompressionMode.Decompress );
