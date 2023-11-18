@@ -7,6 +7,7 @@
 
 using System;
 using System.Net;
+using Org.Mentalis.Network;
 
 namespace SteamKit2
 {
@@ -38,7 +39,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="endPoint">The end point to connect to.</param>
         /// <param name="timeout">Timeout in milliseconds</param>
-       void Connect( EndPoint endPoint, int timeout = 5000 );
+        void Connect( EndPoint endPoint, Proxy? proxy = null, int timeout = 5000 );
         /// <summary>
         /// Disconnects this instance.
         /// </summary>

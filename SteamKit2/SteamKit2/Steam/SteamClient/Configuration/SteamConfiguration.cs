@@ -6,6 +6,7 @@
 
 using System;
 using System.Net.Http;
+using Org.Mentalis.Network;
 using SteamKit2.Discovery;
 
 namespace SteamKit2
@@ -23,6 +24,7 @@ namespace SteamKit2
     /// </summary>
     public sealed class SteamConfiguration
     {
+        public Proxy? Proxy => state.Proxy;
         /// <summary>
         /// Do not use directly - create a SteamConfiguration object by using a builder or helper method.
         /// </summary>

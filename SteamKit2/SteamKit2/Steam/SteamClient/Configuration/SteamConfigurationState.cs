@@ -5,6 +5,7 @@
 
 
 using System;
+using Org.Mentalis.Network;
 using SteamKit2.Discovery;
 
 namespace SteamKit2
@@ -22,5 +23,6 @@ namespace SteamKit2
         public EUniverse Universe;
         public Uri WebAPIBaseAddress;
         public string WebAPIKey;
+        public Proxy? Proxy;
     }
 }
