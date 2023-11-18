@@ -56,4 +56,9 @@
     <PackageReference Include="System.IO.Hashing" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Org.Mentalis">
+      <HintPath>..\Org.Mentalis.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>
