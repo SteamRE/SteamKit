@@ -21,9 +21,7 @@ namespace SteamKit2
     {
         public static string EncodeHexString(byte[] input)
         {
-            return input.Aggregate(new StringBuilder(),
-                       (sb, v) => sb.Append(v.ToString("x2"))
-                      ).ToString();
+            return Convert.ToHexString(input).ToLower();
         }
 
         [return: NotNullIfNotNull( nameof( hex ) )]
@@ -32,13 +30,7 @@ namespace SteamKit2
             if (hex == null)
                 return null;
 
-            int chars = hex.Length;
-            byte[] bytes = new byte[chars / 2];
-
-            for (int i = 0; i < chars; i += 2)
-                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
-
-            return bytes;
+            return Convert.FromHexString( hex );
         }
 
         public static EOSType GetOSType()
@@ -165,8 +157,7 @@ namespace SteamKit2
         /// <returns>DateTime representation</returns>
         public static DateTime DateTimeFromUnixTime(ulong unixTime)
         {
-            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            return origin.AddSeconds(unixTime);
+            return DateTimeOffset.FromUnixTimeSeconds( (long)unixTime ).DateTime;
         }
         /// <summary>
         /// Converts a given DateTime into a unix timestamp representing seconds since the unix epoch.
@@ -175,8 +166,7 @@ namespace SteamKit2
         /// <returns>64-bit wide representation</returns>
         public static ulong DateTimeToUnixTime(DateTime time)
         {
-            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            return (ulong)(time - origin).TotalSeconds;
+            return (ulong)new DateTimeOffset( time ).ToUnixTimeSeconds();
         }
     }
 
