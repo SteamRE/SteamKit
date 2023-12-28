@@ -202,14 +202,13 @@ namespace SteamKit2
             var random = GenerateRandomBlock( 3 );
             Array.Copy( random, 0, iv, iv.Length - random.Length, random.Length );
 
-            using ( var hmac = new HMACSHA1( hmacSecret ) )
-            using ( var ms = new MemoryStream() )
+            using ( var ms = new MemoryStream( random.Length + input.Length ) )
             {
                 ms.Write( random, 0, random.Length );
                 ms.Write( input, 0, input.Length );
                 ms.Seek( 0, SeekOrigin.Begin );
 
-                var hash = hmac.ComputeHash( ms );
+                var hash = HMACSHA1.HashData( hmacSecret, ms );
                 Array.Copy( hash, iv, iv.Length - random.Length );
             }
             
@@ -247,19 +246,18 @@ namespace SteamKit2
 
             // validate HMAC
             byte[] hmacBytes;
-            using ( var hmac = new HMACSHA1( hmacSecret ) )
-            using ( var ms = new MemoryStream() )
+            using ( var ms = new MemoryStream( plaintextData.Length + 3 ) )
             {
                 ms.Write( iv, iv.Length - 3, 3 );
                 ms.Write( plaintextData, 0, plaintextData.Length );
                 ms.Seek( 0, SeekOrigin.Begin );
 
-                hmacBytes = hmac.ComputeHash( ms );
+                hmacBytes = HMACSHA1.HashData( hmacSecret, ms );
             }
 
-            if ( !hmacBytes.Take( iv.Length - 3 ).SequenceEqual( iv.Take( iv.Length - 3 ) ) )
+            if ( !hmacBytes.AsSpan( 0, iv.Length - 3 ).SequenceEqual( iv.AsSpan( 0, iv.Length - 3 ) ) )
             {
-                throw new CryptographicException( string.Format( CultureInfo.InvariantCulture, "{0} was unable to decrypt packet: HMAC from server did not match computed HMAC.", nameof(NetFilterEncryption) ) );
+                throw new CryptographicException( string.Format( CultureInfo.InvariantCulture, "{0} was unable to decrypt packet: HMAC from server did not match computed HMAC.", nameof( NetFilterEncryption ) ) );
             }
 
             return plaintextData;
@@ -282,12 +280,10 @@ namespace SteamKit2
 
             // first 16 bytes of input is the ECB encrypted IV
             byte[] cryptedIv = new byte[ 16 ];
-            iv = new byte[ cryptedIv.Length ];
             Array.Copy( input, 0, cryptedIv, 0, cryptedIv.Length );
 
-            // the rest is ciphertext
-            byte[] cipherText = new byte[ input.Length - cryptedIv.Length ];
-            Array.Copy( input, cryptedIv.Length, cipherText, 0, cipherText.Length );
+            // ciphertext length
+            int cipherTextLength = input.Length - cryptedIv.Length;
 
             // decrypt the IV using ECB
             aes.Mode = CipherMode.ECB;
@@ -301,21 +297,11 @@ namespace SteamKit2
             // decrypt the remaining ciphertext in cbc with the decrypted IV
             aes.Mode = CipherMode.CBC;
             aes.Padding = PaddingMode.PKCS7;
+            aes.Key = key;
 
-            using ( var aesTransform = aes.CreateDecryptor( key, iv ) )
-            using ( var ms = new MemoryStream( cipherText ) )
-            using ( var cs = new CryptoStream( ms, aesTransform, CryptoStreamMode.Read ) )
-            {
-                // plaintext is never longer than ciphertext
-                byte[] plaintext = new byte[ cipherText.Length ];
+            var output = aes.DecryptCbc( input.AsSpan( start: cryptedIv.Length ), iv, PaddingMode.PKCS7 );
 
-                int len = cs.ReadAll( plaintext );
-
-                byte[] output = new byte[ len ];
-                Array.Copy( plaintext, 0, output, 0, len );
-
-                return output;
-            }
+            return output;
         }
 
         /// <summary>
@@ -331,10 +317,7 @@ namespace SteamKit2
             byte[] password_bytes = Encoding.UTF8.GetBytes( password );
             key = SHA256.HashData( password_bytes );
 
-            using ( HMACSHA1 hmac = new HMACSHA1( key ) )
-            {
-                hash = hmac.ComputeHash( input, 0, 32 );
-            }
+            hash = HMACSHA1.HashData( key, input.AsSpan( 0, 32 ) );
 
             for ( int i = 32; i < input.Length; i++ )
                 if ( input[ i ] != hash[ i % 32 ] )

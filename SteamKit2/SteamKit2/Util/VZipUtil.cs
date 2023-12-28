@@ -33,7 +33,10 @@ namespace SteamKit2
             /* uint creationTimestampOrSecondaryCRC = */ reader.ReadUInt32();
 
             byte[] properties = reader.ReadBytes( 5 );
-            byte[] compressedBuffer = reader.ReadBytes( ( int )ms.Length - HeaderLength - FooterLength - 5 );
+            var compressedPosition = ms.Position;
+            var compressedLength = ( int )ms.Length - HeaderLength - FooterLength - 5;
+            //byte[] compressedBuffer = reader.ReadBytes( ( int )ms.Length - HeaderLength - FooterLength - 5 );
+            ms.Position += compressedLength;
 
             uint outputCRC = reader.ReadUInt32();
             uint sizeDecompressed = reader.ReadUInt32();
@@ -46,11 +49,21 @@ namespace SteamKit2
             SevenZip.Compression.LZMA.Decoder decoder = new SevenZip.Compression.LZMA.Decoder();
             decoder.SetDecoderProperties( properties );
 
-            using MemoryStream inputStream = new MemoryStream( compressedBuffer );
+            //using MemoryStream inputStream = new MemoryStream( compressedBuffer );
             using MemoryStream outStream = new MemoryStream( ( int )sizeDecompressed );
-            decoder.Code( inputStream, outStream, compressedBuffer.Length, sizeDecompressed, null );
+            ms.Position = compressedPosition; // Redirect the location of compressed data,  decoder.Code does not read the last 10 bytes
+            decoder.Code( ms, outStream, compressedLength, sizeDecompressed, null );
 
-            var outData = outStream.ToArray();
+            byte[] outData;
+            if ( sizeDecompressed == outStream.Position && sizeDecompressed == outStream.Capacity && sizeDecompressed  == outStream.Length)
+            {
+                outData = outStream.GetBuffer(); // After specifying sizeDecompressed, MemoryStream will not be expanded. Use GetBuffer to reduce copying.
+                                                 // At this time, sizeDecompressed == Position == Length == Capacity
+            }
+            else
+            {
+                outData = outStream.ToArray();
+            }
             if ( Crc32.HashToUInt32( outData ) != outputCRC )
             {
                 throw new InvalidDataException( "CRC does not match decompressed data. VZip data may be corrupted." );
