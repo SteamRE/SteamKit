@@ -211,7 +211,7 @@ namespace SteamKit2
                 var hash = HMACSHA1.HashData( hmacSecret, ms );
                 Array.Copy( hash, iv, iv.Length - random.Length );
             }
-            
+
             return SymmetricEncryptWithIV( input, key, iv );
         }
 
@@ -288,7 +288,7 @@ namespace SteamKit2
             // decrypt the IV using ECB
             aes.Mode = CipherMode.ECB;
             aes.Padding = PaddingMode.None;
-
+            
             using ( var aesTransform = aes.CreateDecryptor( key, null ) )
             {
                 iv = aesTransform.TransformFinalBlock( cryptedIv, 0, cryptedIv.Length );
@@ -358,7 +358,7 @@ namespace SteamKit2
         public static byte[] AdlerHash( byte[] input )
         {
             ArgumentNullException.ThrowIfNull( input );
-
+            
             uint a = 0, b = 0;
             for ( int i = 0 ; i < input.Length ; i++ )
             {
@@ -373,12 +373,7 @@ namespace SteamKit2
         /// </summary>
         public static byte[] GenerateRandomBlock( int size )
         {
-            using var rng = RandomNumberGenerator.Create();
-            var block = new byte[ size ];
-
-            rng.GetBytes( block );
-
-            return block;
+            return RandomNumberGenerator.GetBytes(size);
         }
     }
 }
