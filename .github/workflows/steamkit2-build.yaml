@@ -121,7 +121,7 @@ jobs:
 
     - name: Cache vcpkg
       id: cache-dependencies
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: Resources/NetHook2/NetHook2/vcpkg_installed
         key: vcpkg-${{ matrix.platform }}-${{ matrix.configuration }}-${{ hashFiles('Resources/NetHook2/NetHook2/vcpkg.json') }}
