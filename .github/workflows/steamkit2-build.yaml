@@ -117,7 +117,7 @@ jobs:
         submodules: recursive
 
     - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1
+      uses: microsoft/setup-msbuild@v2
 
     - name: Cache vcpkg
       id: cache-dependencies
