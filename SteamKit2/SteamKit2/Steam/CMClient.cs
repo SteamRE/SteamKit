@@ -529,7 +529,7 @@ namespace SteamKit2.Internal
                 {
                     using var compressedStream = new MemoryStream( payload );
                     using var gzipStream = new GZipStream( compressedStream, CompressionMode.Decompress );
-                    using var decompressedStream = new MemoryStream();
+                    using var decompressedStream = new MemoryStream( capacity: ( int )msgMulti.Body.size_unzipped );
                     gzipStream.CopyTo( decompressedStream );
                     payload = decompressedStream.ToArray();
                 }
