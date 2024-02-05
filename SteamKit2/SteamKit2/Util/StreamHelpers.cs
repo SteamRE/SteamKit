@@ -110,9 +110,9 @@ namespace SteamKit2
 
                 do
                 {
-                    var b = ( byte )stream.ReadByte();
+                    var b = stream.ReadByte();
 
-                    if ( b == 0x00 )
+                    if ( b <= 0 ) // null byte or stream ended
                     {
                         break;
                     }
@@ -125,7 +125,7 @@ namespace SteamKit2
                         buffer = newBuffer;
                     }
 
-                    buffer[ position++ ] = b;
+                    buffer[ position++ ] = (byte)b;
                 }
                 while ( true );
 
