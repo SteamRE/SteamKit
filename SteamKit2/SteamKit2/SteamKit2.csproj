@@ -56,4 +56,8 @@
     <PackageReference Include="System.IO.Hashing" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Base\Generated\GC\CSGO\" />
+  </ItemGroup>
+
 </Project>
