@@ -21,7 +21,7 @@ class DotaClient
     string userName;
     string password;
 
-    uint matchId;
+    ulong matchId;
 
     bool gotMatch;
 
@@ -33,7 +33,7 @@ class DotaClient
     const int APPID = 570;
 
 
-    public DotaClient( string userName, string password, uint matchId )
+    public DotaClient( string userName, string password, ulong matchId )
     {
         this.userName = userName;
         this.password = password;
