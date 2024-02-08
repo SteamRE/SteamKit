@@ -13,8 +13,8 @@ if ( args.Length < 3 )
 string username = args[ 0 ];
 string password = args[ 1 ];
 
-uint matchId;
-if ( !uint.TryParse( args[ 2 ], out matchId ) )
+ulong matchId;
+if ( !ulong.TryParse( args[ 2 ], out matchId ) )
 {
     Console.WriteLine( "Invalid Match ID!" );
     return;
