@@ -371,12 +371,30 @@ namespace SteamKit2
             EncryptedCRC = metadata.crc_encrypted;
         }
 
+        class ChunkIdComparer : IEqualityComparer<byte[]>
+        {
+            public bool Equals( byte[]? x, byte[]? y )
+            {
+                if ( ReferenceEquals( x, y ) ) return true;
+                if ( x == null || y == null ) return false;
+                return x.SequenceEqual( y );
+            }
+
+            public int GetHashCode( byte[] obj )
+            {
+                ArgumentNullException.ThrowIfNull( obj );
+
+                // ChunkID is SHA-1, so we can just use the first 4 bytes
+                return BitConverter.ToInt32( obj, 0 );
+            }
+        }
+
         byte[]? Serialize()
         {
             DebugLog.Assert( Files != null, nameof( DepotManifest ), "Files was null when attempting to serialize manifest." );
 
             var payload = new ContentManifestPayload();
-            var uniqueChunks = new List<byte[]>();
+            var uniqueChunks = new HashSet<byte[]>( new ChunkIdComparer() );
 
             foreach ( var file in Files )
             {
@@ -409,10 +427,7 @@ namespace SteamKit2
                     protochunk.cb_compressed = chunk.CompressedLength;
 
                     protofile.chunks.Add( protochunk );
-                    if ( !uniqueChunks.Exists( x => x.SequenceEqual( chunk.ChunkID! ) ) )
-                    {
-                        uniqueChunks.Add( chunk.ChunkID! );
-                    }
+                    uniqueChunks.Add( chunk.ChunkID! );
                 }
 
                 payload.mappings.Add( protofile );
