@@ -389,7 +389,11 @@ namespace SteamKit2
             }
         }
 
-        byte[]? Serialize()
+        /// <summary>
+        /// Serializes the depot manifest into a byte array.
+        /// </summary>
+        /// <returns>A byte array containing the serialized depot manifest. Returns <c>null</c> if serialization fails.</returns>
+        public byte[]? Serialize()
         {
             DebugLog.Assert( Files != null, nameof( DepotManifest ), "Files was null when attempting to serialize manifest." );
 
