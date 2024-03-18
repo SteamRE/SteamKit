@@ -1232,6 +1232,8 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_TEAM_2023_TOUR3 = 43,
         EVENT_ID_INTERNATIONAL_2023 = 45,
         EVENT_ID_10TH_ANNIVERSARY = 46,
+        EVENT_ID_CROWNFALL = 47,
+        EVENT_ID_FROSTIVUS_2023 = 48,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1399,6 +1401,8 @@ namespace SteamKit2.GC.Dota.Internal
         DOTA_COMM_TYPE_RANKEDMATCHMAKE = 11,
         DOTA_COMM_TYPE_DROPS = 12,
         DOTA_COMM_TYPE_NEWPLAYER_EXPERT = 13,
+        DOTA_COMM_TYPE_COACHED = 14,
+        DOTA_COMM_TYPE_MAPDRAWING = 15,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1407,10 +1411,11 @@ namespace SteamKit2.GC.Dota.Internal
         DOTA_COMM_LEVEL_NONE = 0,
         DOTA_COMM_LEVEL_COOLDOWN = 1,
         DOTA_COMM_LEVEL_PINGS = 2,
-        DOTA_COMM_LEVEL_CHAT = 3,
-        DOTA_COMM_LEVEL_TIPPING = 4,
-        DOTA_COMM_LEVEL_VOICE = 5,
-        DOTA_COMM_LEVEL_ALLIED_ABILITY = 6,
+        DOTA_COMM_LEVEL_MAPDRAWING = 3,
+        DOTA_COMM_LEVEL_CHAT = 4,
+        DOTA_COMM_LEVEL_TIPPING = 5,
+        DOTA_COMM_LEVEL_VOICE = 6,
+        DOTA_COMM_LEVEL_ALLIED_ABILITY = 7,
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -9491,6 +9491,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetflags() => __pbn__flags = null;
         private uint? __pbn__flags;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint commender_hero_id
+        {
+            get => __pbn__commender_hero_id.GetValueOrDefault();
+            set => __pbn__commender_hero_id = value;
+        }
+        public bool ShouldSerializecommender_hero_id() => __pbn__commender_hero_id != null;
+        public void Resetcommender_hero_id() => __pbn__commender_hero_id = null;
+        private uint? __pbn__commender_hero_id;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -15816,6 +15826,61 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializequest_number() => __pbn__quest_number != null;
         public void Resetquest_number() => __pbn__quest_number = null;
         private uint? __pbn__quest_number;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCNewBloomGift : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint defindex
+        {
+            get => __pbn__defindex.GetValueOrDefault();
+            set => __pbn__defindex = value;
+        }
+        public bool ShouldSerializedefindex() => __pbn__defindex != null;
+        public void Resetdefindex() => __pbn__defindex = null;
+        private uint? __pbn__defindex;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong lobby_id
+        {
+            get => __pbn__lobby_id.GetValueOrDefault();
+            set => __pbn__lobby_id = value;
+        }
+        public bool ShouldSerializelobby_id() => __pbn__lobby_id != null;
+        public void Resetlobby_id() => __pbn__lobby_id = null;
+        private ulong? __pbn__lobby_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<uint> target_account_ids { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCNewBloomGiftResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(ENewBloomGiftingResponse.kENewBloomGifting_UnknownFailure)]
+        public ENewBloomGiftingResponse result
+        {
+            get => __pbn__result ?? ENewBloomGiftingResponse.kENewBloomGifting_UnknownFailure;
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private ENewBloomGiftingResponse? __pbn__result;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<uint> received_account_ids { get; } = new global::System.Collections.Generic.List<uint>();
 
     }
 

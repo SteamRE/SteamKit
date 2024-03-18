@@ -356,17 +356,6 @@ namespace SteamKit2.Internal
         public void Resetdevice_identifier() => __pbn__device_identifier = null;
         private string __pbn__device_identifier;
 
-        [global::ProtoBuf.ProtoMember(6)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string sms_phone_id
-        {
-            get => __pbn__sms_phone_id ?? "";
-            set => __pbn__sms_phone_id = value;
-        }
-        public bool ShouldSerializesms_phone_id() => __pbn__sms_phone_id != null;
-        public void Resetsms_phone_id() => __pbn__sms_phone_id = null;
-        private string __pbn__sms_phone_id;
-
         [global::ProtoBuf.ProtoMember(7)]
         public global::System.Collections.Generic.List<string> http_headers { get; } = new global::System.Collections.Generic.List<string>();
 
@@ -505,6 +494,16 @@ namespace SteamKit2.Internal
         public void Resetphone_number_hint() => __pbn__phone_number_hint = null;
         private string __pbn__phone_number_hint;
 
+        [global::ProtoBuf.ProtoMember(12)]
+        public int confirm_type
+        {
+            get => __pbn__confirm_type.GetValueOrDefault();
+            set => __pbn__confirm_type = value;
+        }
+        public bool ShouldSerializeconfirm_type() => __pbn__confirm_type != null;
+        public void Resetconfirm_type() => __pbn__confirm_type = null;
+        private int? __pbn__confirm_type;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -635,16 +634,6 @@ namespace SteamKit2.Internal
         public bool ShouldSerializesuccess() => __pbn__success != null;
         public void Resetsuccess() => __pbn__success = null;
         private bool? __pbn__success;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public bool want_more
-        {
-            get => __pbn__want_more.GetValueOrDefault();
-            set => __pbn__want_more = value;
-        }
-        public bool ShouldSerializewant_more() => __pbn__want_more != null;
-        public void Resetwant_more() => __pbn__want_more = null;
-        private bool? __pbn__want_more;
 
         [global::ProtoBuf.ProtoMember(3)]
         public ulong server_time

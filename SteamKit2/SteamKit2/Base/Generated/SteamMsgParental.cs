@@ -74,16 +74,6 @@ namespace SteamKit2.Internal
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1)]
-        public int tz_offset
-        {
-            get => __pbn__tz_offset.GetValueOrDefault();
-            set => __pbn__tz_offset = value;
-        }
-        public bool ShouldSerializetz_offset() => __pbn__tz_offset != null;
-        public void Resettz_offset() => __pbn__tz_offset = null;
-        private int? __pbn__tz_offset;
-
         [global::ProtoBuf.ProtoMember(2)]
         public bool apply_playtime_restrictions
         {
@@ -96,6 +86,28 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(15)]
         public global::System.Collections.Generic.List<ParentalPlaytimeDay> playtime_days { get; } = new global::System.Collections.Generic.List<ParentalPlaytimeDay>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class ParentalTemporaryPlaytimeRestrictions : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ParentalPlaytimeDay restrictions { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint rtime_expires
+        {
+            get => __pbn__rtime_expires.GetValueOrDefault();
+            set => __pbn__rtime_expires = value;
+        }
+        public bool ShouldSerializertime_expires() => __pbn__rtime_expires != null;
+        public void Resetrtime_expires() => __pbn__rtime_expires = null;
+        private uint? __pbn__rtime_expires;
 
     }
 
@@ -236,6 +248,15 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(15)]
         public ParentalPlaytimeRestrictions playtime_restrictions { get; set; }
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public ParentalTemporaryPlaytimeRestrictions temporary_playtime_restrictions { get; set; }
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public global::System.Collections.Generic.List<uint> excluded_store_content_descriptors { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(18)]
+        public global::System.Collections.Generic.List<uint> excluded_community_content_descriptors { get; } = new global::System.Collections.Generic.List<uint>();
 
     }
 
@@ -776,6 +797,384 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CParental_RequestPlaytime_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint time_expires
+        {
+            get => __pbn__time_expires.GetValueOrDefault();
+            set => __pbn__time_expires = value;
+        }
+        public bool ShouldSerializetime_expires() => __pbn__time_expires != null;
+        public void Resettime_expires() => __pbn__time_expires = null;
+        private uint? __pbn__time_expires;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ParentalPlaytimeDay current_playtime_restrictions { get; set; }
+
+        [global::ProtoBuf.ProtoMember(10, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CParental_RequestPlaytime_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong requestid
+        {
+            get => __pbn__requestid.GetValueOrDefault();
+            set => __pbn__requestid = value;
+        }
+        public bool ShouldSerializerequestid() => __pbn__requestid != null;
+        public void Resetrequestid() => __pbn__requestid = null;
+        private ulong? __pbn__requestid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CParental_ApprovePlaytime_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool approve
+        {
+            get => __pbn__approve.GetValueOrDefault();
+            set => __pbn__approve = value;
+        }
+        public bool ShouldSerializeapprove() => __pbn__approve != null;
+        public void Resetapprove() => __pbn__approve = null;
+        private bool? __pbn__approve;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong requestid
+        {
+            get => __pbn__requestid.GetValueOrDefault();
+            set => __pbn__requestid = value;
+        }
+        public bool ShouldSerializerequestid() => __pbn__requestid != null;
+        public void Resetrequestid() => __pbn__requestid = null;
+        private ulong? __pbn__requestid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ParentalTemporaryPlaytimeRestrictions restrictions_approved { get; set; }
+
+        [global::ProtoBuf.ProtoMember(10, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CParental_ApprovePlaytime_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CParental_GetRequests_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint rt_include_completed_since
+        {
+            get => __pbn__rt_include_completed_since.GetValueOrDefault();
+            set => __pbn__rt_include_completed_since = value;
+        }
+        public bool ShouldSerializert_include_completed_since() => __pbn__rt_include_completed_since != null;
+        public void Resetrt_include_completed_since() => __pbn__rt_include_completed_since = null;
+        private uint? __pbn__rt_include_completed_since;
+
+        [global::ProtoBuf.ProtoMember(10, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class ParentalFeatureRequest : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong requestid
+        {
+            get => __pbn__requestid.GetValueOrDefault();
+            set => __pbn__requestid = value;
+        }
+        public bool ShouldSerializerequestid() => __pbn__requestid != null;
+        public void Resetrequestid() => __pbn__requestid = null;
+        private ulong? __pbn__requestid;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong family_groupid
+        {
+            get => __pbn__family_groupid.GetValueOrDefault();
+            set => __pbn__family_groupid = value;
+        }
+        public bool ShouldSerializefamily_groupid() => __pbn__family_groupid != null;
+        public void Resetfamily_groupid() => __pbn__family_groupid = null;
+        private ulong? __pbn__family_groupid;
+
+        [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint features
+        {
+            get => __pbn__features.GetValueOrDefault();
+            set => __pbn__features = value;
+        }
+        public bool ShouldSerializefeatures() => __pbn__features != null;
+        public void Resetfeatures() => __pbn__features = null;
+        private uint? __pbn__features;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint time_requested
+        {
+            get => __pbn__time_requested.GetValueOrDefault();
+            set => __pbn__time_requested = value;
+        }
+        public bool ShouldSerializetime_requested() => __pbn__time_requested != null;
+        public void Resettime_requested() => __pbn__time_requested = null;
+        private uint? __pbn__time_requested;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool approved
+        {
+            get => __pbn__approved.GetValueOrDefault();
+            set => __pbn__approved = value;
+        }
+        public bool ShouldSerializeapproved() => __pbn__approved != null;
+        public void Resetapproved() => __pbn__approved = null;
+        private bool? __pbn__approved;
+
+        [global::ProtoBuf.ProtoMember(7, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid_responder
+        {
+            get => __pbn__steamid_responder.GetValueOrDefault();
+            set => __pbn__steamid_responder = value;
+        }
+        public bool ShouldSerializesteamid_responder() => __pbn__steamid_responder != null;
+        public void Resetsteamid_responder() => __pbn__steamid_responder = null;
+        private ulong? __pbn__steamid_responder;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public uint time_responded
+        {
+            get => __pbn__time_responded.GetValueOrDefault();
+            set => __pbn__time_responded = value;
+        }
+        public bool ShouldSerializetime_responded() => __pbn__time_responded != null;
+        public void Resettime_responded() => __pbn__time_responded = null;
+        private uint? __pbn__time_responded;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class ParentalPlaytimeRequest : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong requestid
+        {
+            get => __pbn__requestid.GetValueOrDefault();
+            set => __pbn__requestid = value;
+        }
+        public bool ShouldSerializerequestid() => __pbn__requestid != null;
+        public void Resetrequestid() => __pbn__requestid = null;
+        private ulong? __pbn__requestid;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong family_groupid
+        {
+            get => __pbn__family_groupid.GetValueOrDefault();
+            set => __pbn__family_groupid = value;
+        }
+        public bool ShouldSerializefamily_groupid() => __pbn__family_groupid != null;
+        public void Resetfamily_groupid() => __pbn__family_groupid = null;
+        private ulong? __pbn__family_groupid;
+
+        [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public ParentalPlaytimeDay current_playtime_restrictions { get; set; }
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint time_expires
+        {
+            get => __pbn__time_expires.GetValueOrDefault();
+            set => __pbn__time_expires = value;
+        }
+        public bool ShouldSerializetime_expires() => __pbn__time_expires != null;
+        public void Resettime_expires() => __pbn__time_expires = null;
+        private uint? __pbn__time_expires;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint time_requested
+        {
+            get => __pbn__time_requested.GetValueOrDefault();
+            set => __pbn__time_requested = value;
+        }
+        public bool ShouldSerializetime_requested() => __pbn__time_requested != null;
+        public void Resettime_requested() => __pbn__time_requested = null;
+        private uint? __pbn__time_requested;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool approved
+        {
+            get => __pbn__approved.GetValueOrDefault();
+            set => __pbn__approved = value;
+        }
+        public bool ShouldSerializeapproved() => __pbn__approved != null;
+        public void Resetapproved() => __pbn__approved = null;
+        private bool? __pbn__approved;
+
+        [global::ProtoBuf.ProtoMember(8, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid_responder
+        {
+            get => __pbn__steamid_responder.GetValueOrDefault();
+            set => __pbn__steamid_responder = value;
+        }
+        public bool ShouldSerializesteamid_responder() => __pbn__steamid_responder != null;
+        public void Resetsteamid_responder() => __pbn__steamid_responder = null;
+        private ulong? __pbn__steamid_responder;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public uint time_responded
+        {
+            get => __pbn__time_responded.GetValueOrDefault();
+            set => __pbn__time_responded = value;
+        }
+        public bool ShouldSerializetime_responded() => __pbn__time_responded != null;
+        public void Resettime_responded() => __pbn__time_responded = null;
+        private uint? __pbn__time_responded;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public ParentalTemporaryPlaytimeRestrictions restrictions_approved { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CParental_GetRequests_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<ParentalFeatureRequest> feature_requests { get; } = new global::System.Collections.Generic.List<ParentalFeatureRequest>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<ParentalPlaytimeRequest> playtime_requests { get; } = new global::System.Collections.Generic.List<ParentalPlaytimeRequest>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CParental_ReportPlaytimeAndNotify_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint day_of_week
+        {
+            get => __pbn__day_of_week.GetValueOrDefault();
+            set => __pbn__day_of_week = value;
+        }
+        public bool ShouldSerializeday_of_week() => __pbn__day_of_week != null;
+        public void Resetday_of_week() => __pbn__day_of_week = null;
+        private uint? __pbn__day_of_week;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint minutes_used
+        {
+            get => __pbn__minutes_used.GetValueOrDefault();
+            set => __pbn__minutes_used = value;
+        }
+        public bool ShouldSerializeminutes_used() => __pbn__minutes_used != null;
+        public void Resetminutes_used() => __pbn__minutes_used = null;
+        private uint? __pbn__minutes_used;
+
+        [global::ProtoBuf.ProtoMember(10, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CParental_ReportPlaytimeAndNotify_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CParental_ParentalSettingsChange_Notification : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -877,6 +1276,35 @@ namespace SteamKit2.Internal
 
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CParental_PlaytimeUsed_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint day_of_week
+        {
+            get => __pbn__day_of_week.GetValueOrDefault();
+            set => __pbn__day_of_week = value;
+        }
+        public bool ShouldSerializeday_of_week() => __pbn__day_of_week != null;
+        public void Resetday_of_week() => __pbn__day_of_week = null;
+        private uint? __pbn__day_of_week;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint minutes_used
+        {
+            get => __pbn__minutes_used.GetValueOrDefault();
+            set => __pbn__minutes_used = value;
+        }
+        public bool ShouldSerializeminutes_used() => __pbn__minutes_used != null;
+        public void Resetminutes_used() => __pbn__minutes_used = null;
+        private uint? __pbn__minutes_used;
+
+    }
+
     public interface IParental
     {
         CParental_EnableParentalSettings_Response EnableParentalSettings(CParental_EnableParentalSettings_Request request);
@@ -891,6 +1319,10 @@ namespace SteamKit2.Internal
         CParental_DisableWithRecoveryCode_Response DisableWithRecoveryCode(CParental_DisableWithRecoveryCode_Request request);
         CParental_RequestFeatureAccess_Response RequestFeatureAccess(CParental_RequestFeatureAccess_Request request);
         CParental_ApproveFeatureAccess_Response ApproveFeatureAccess(CParental_ApproveFeatureAccess_Request request);
+        CParental_RequestPlaytime_Response RequestPlaytime(CParental_RequestPlaytime_Request request);
+        CParental_ApprovePlaytime_Response ApprovePlaytime(CParental_ApprovePlaytime_Request request);
+        CParental_GetRequests_Response GetRequests(CParental_GetRequests_Request request);
+        CParental_ReportPlaytimeAndNotify_Response ReportPlaytimeAndNotify(CParental_ReportPlaytimeAndNotify_Request request);
     }
 
     public interface IParentalClient
@@ -898,6 +1330,7 @@ namespace SteamKit2.Internal
         NoResponse NotifySettingsChange(CParental_ParentalSettingsChange_Notification request);
         NoResponse NotifyUnlock(CParental_ParentalUnlock_Notification request);
         NoResponse NotifyLock(CParental_ParentalLock_Notification request);
+        NoResponse NotifyPlaytimeUsed(CParental_PlaytimeUsed_Notification request);
     }
 
 }

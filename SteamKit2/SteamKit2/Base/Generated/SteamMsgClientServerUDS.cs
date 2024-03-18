@@ -250,6 +250,9 @@ namespace SteamKit2.Internal
         public void Resetclientcomm_version() => __pbn__clientcomm_version = null;
         private uint? __pbn__clientcomm_version;
 
+        [global::ProtoBuf.ProtoMember(10)]
+        public global::System.Collections.Generic.List<uint> local_users { get; } = new global::System.Collections.Generic.List<uint>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Game : global::ProtoBuf.IExtensible
         {

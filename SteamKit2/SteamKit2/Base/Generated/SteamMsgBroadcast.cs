@@ -87,17 +87,6 @@ namespace SteamKit2.Internal
         public void Resetthumbnail_upload() => __pbn__thumbnail_upload = null;
         private bool? __pbn__thumbnail_upload;
 
-        [global::ProtoBuf.ProtoMember(8)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string client_beta
-        {
-            get => __pbn__client_beta ?? "";
-            set => __pbn__client_beta = value;
-        }
-        public bool ShouldSerializeclient_beta() => __pbn__client_beta != null;
-        public void Resetclient_beta() => __pbn__client_beta = null;
-        private string __pbn__client_beta;
-
         [global::ProtoBuf.ProtoMember(9)]
         public uint sysid
         {
@@ -690,6 +679,7 @@ namespace SteamKit2.Internal
             k_EWatchResponseClientOutOfDate = 10,
             k_EWatchResponsePoorUploadQuality = 11,
             k_EWatchResponseMissingSubscription = 12,
+            k_EWatchResponseTooManyViewers = 13,
         }
 
     }

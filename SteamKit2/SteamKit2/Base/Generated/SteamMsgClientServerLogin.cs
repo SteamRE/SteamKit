@@ -845,17 +845,6 @@ namespace SteamKit2.Internal
         public void Reseteresult_extended() => __pbn__eresult_extended = null;
         private int? __pbn__eresult_extended;
 
-        [global::ProtoBuf.ProtoMember(11)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string webapi_authenticate_user_nonce
-        {
-            get => __pbn__webapi_authenticate_user_nonce ?? "";
-            set => __pbn__webapi_authenticate_user_nonce = value;
-        }
-        public bool ShouldSerializewebapi_authenticate_user_nonce() => __pbn__webapi_authenticate_user_nonce != null;
-        public void Resetwebapi_authenticate_user_nonce() => __pbn__webapi_authenticate_user_nonce = null;
-        private string __pbn__webapi_authenticate_user_nonce;
-
         [global::ProtoBuf.ProtoMember(12)]
         public uint cell_id_ping_threshold
         {
@@ -1012,6 +1001,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializetoken_id() => __pbn__token_id != null;
         public void Resettoken_id() => __pbn__token_id = null;
         private ulong? __pbn__token_id;
+
+        [global::ProtoBuf.ProtoMember(31)]
+        public ulong family_group_id
+        {
+            get => __pbn__family_group_id.GetValueOrDefault();
+            set => __pbn__family_group_id = value;
+        }
+        public bool ShouldSerializefamily_group_id() => __pbn__family_group_id != null;
+        public void Resetfamily_group_id() => __pbn__family_group_id = null;
+        private ulong? __pbn__family_group_id;
 
     }
 

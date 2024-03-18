@@ -17,6 +17,7 @@ namespace SteamKit2.Internal
         k_EContentDescriptor_AdultOnlySexualContent = 3,
         k_EContentDescriptor_GratuitousSexualContent = 4,
         k_EContentDescriptor_AnyMatureContent = 5,
+        k_EContentDescriptorMAX = 6,
     }
 
 }

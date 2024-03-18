@@ -202,6 +202,16 @@ namespace SteamKit2.Internal
         public void Resetscreenshotid() => __pbn__screenshotid = null;
         private ulong? __pbn__screenshotid;
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong publishedfileid
+        {
+            get => __pbn__publishedfileid.GetValueOrDefault();
+            set => __pbn__publishedfileid = value;
+        }
+        public bool ShouldSerializepublishedfileid() => __pbn__publishedfileid != null;
+        public void Resetpublishedfileid() => __pbn__publishedfileid = null;
+        private ulong? __pbn__publishedfileid;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -721,6 +731,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeallow_admin_tags() => __pbn__allow_admin_tags != null;
         public void Resetallow_admin_tags() => __pbn__allow_admin_tags = null;
         private bool? __pbn__allow_admin_tags;
+
+        [global::ProtoBuf.ProtoMember(32)]
+        public ulong external_asset_id
+        {
+            get => __pbn__external_asset_id.GetValueOrDefault();
+            set => __pbn__external_asset_id = value;
+        }
+        public bool ShouldSerializeexternal_asset_id() => __pbn__external_asset_id != null;
+        public void Resetexternal_asset_id() => __pbn__external_asset_id = null;
+        private ulong? __pbn__external_asset_id;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class KeyValueTag : global::ProtoBuf.IExtensible

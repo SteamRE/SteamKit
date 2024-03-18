@@ -110,7 +110,6 @@ namespace SteamKit2
                     Load = child.load,
                     WeightedLoad = child.weighted_load,
                     NumEntries = child.num_entries_in_client_list,
-                    PreferredServer = child.preferred_server,
                     SteamChinaOnly = child.steam_china_only,
 
                     UseAsProxy = child.use_as_proxy,

@@ -221,14 +221,14 @@ namespace SteamKit2.Internal
 
             [global::ProtoBuf.ProtoMember(5)]
             [global::System.ComponentModel.DefaultValue(true)]
-            public bool launch_available
+            public bool vr_not_required
             {
-                get => __pbn__launch_available ?? true;
-                set => __pbn__launch_available = value;
+                get => __pbn__vr_not_required ?? true;
+                set => __pbn__vr_not_required = value;
             }
-            public bool ShouldSerializelaunch_available() => __pbn__launch_available != null;
-            public void Resetlaunch_available() => __pbn__launch_available = null;
-            private bool? __pbn__launch_available;
+            public bool ShouldSerializevr_not_required() => __pbn__vr_not_required != null;
+            public void Resetvr_not_required() => __pbn__vr_not_required = null;
+            private bool? __pbn__vr_not_required;
 
         }
 
@@ -476,6 +476,17 @@ namespace SteamKit2.Internal
         public bool ShouldSerializelaunch_tasks_total() => __pbn__launch_tasks_total != null;
         public void Resetlaunch_tasks_total() => __pbn__launch_tasks_total = null;
         private int? __pbn__launch_tasks_total;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string vr_connection_params
+        {
+            get => __pbn__vr_connection_params ?? "";
+            set => __pbn__vr_connection_params = value;
+        }
+        public bool ShouldSerializevr_connection_params() => __pbn__vr_connection_params != null;
+        public void Resetvr_connection_params() => __pbn__vr_connection_params = null;
+        private string __pbn__vr_connection_params;
 
     }
 

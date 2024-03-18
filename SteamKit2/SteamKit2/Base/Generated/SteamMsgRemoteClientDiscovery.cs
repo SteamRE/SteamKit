@@ -288,6 +288,17 @@ namespace SteamKit2.Internal
         public void Resetsteam_version() => __pbn__steam_version = null;
         private ulong? __pbn__steam_version;
 
+        [global::ProtoBuf.ProtoMember(26)]
+        [global::System.ComponentModel.DefaultValue(EVRLinkCaps.k_EVRLinkCapsUnknown)]
+        public EVRLinkCaps vr_link_caps
+        {
+            get => __pbn__vr_link_caps ?? EVRLinkCaps.k_EVRLinkCapsUnknown;
+            set => __pbn__vr_link_caps = value;
+        }
+        public bool ShouldSerializevr_link_caps() => __pbn__vr_link_caps != null;
+        public void Resetvr_link_caps() => __pbn__vr_link_caps = null;
+        private EVRLinkCaps? __pbn__vr_link_caps;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class User : global::ProtoBuf.IExtensible
         {
@@ -386,6 +397,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeauth_key() => __pbn__auth_key != null;
         public void Resetauth_key() => __pbn__auth_key = null;
         private byte[] __pbn__auth_key;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint request_id
+        {
+            get => __pbn__request_id.GetValueOrDefault();
+            set => __pbn__request_id = value;
+        }
+        public bool ShouldSerializerequest_id() => __pbn__request_id != null;
+        public void Resetrequest_id() => __pbn__request_id = null;
+        private uint? __pbn__request_id;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class CKeyEscrow_Ticket : global::ProtoBuf.IExtensible
@@ -1009,6 +1030,15 @@ namespace SteamKit2.Internal
         k_ERemoteClientServiceSiteLicense = 4,
         k_ERemoteClientServiceContentCache = 8,
         k_ERemoteClientServiceContentServer = 16,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EVRLinkCaps
+    {
+        k_EVRLinkCapsUnknown = 0,
+        k_EVRLinkCapsAvailable = 1,
+        k_EVRLinkCapsUnimplemented = 2,
+        k_EVRLinkCapsMissingHardwareEncoding = 3,
     }
 
     [global::ProtoBuf.ProtoContract()]

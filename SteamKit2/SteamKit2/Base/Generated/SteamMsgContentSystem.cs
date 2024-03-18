@@ -251,15 +251,18 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(13)]
         public global::System.Collections.Generic.List<uint> allowed_app_ids { get; } = new global::System.Collections.Generic.List<uint>();
 
-        [global::ProtoBuf.ProtoMember(14)]
-        public bool preferred_server
+        [global::ProtoBuf.ProtoMember(15)]
+        public uint priority_class
         {
-            get => __pbn__preferred_server.GetValueOrDefault();
-            set => __pbn__preferred_server = value;
+            get => __pbn__priority_class.GetValueOrDefault();
+            set => __pbn__priority_class = value;
         }
-        public bool ShouldSerializepreferred_server() => __pbn__preferred_server != null;
-        public void Resetpreferred_server() => __pbn__preferred_server = null;
-        private bool? __pbn__preferred_server;
+        public bool ShouldSerializepriority_class() => __pbn__priority_class != null;
+        public void Resetpriority_class() => __pbn__priority_class = null;
+        private uint? __pbn__priority_class;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public global::System.Collections.Generic.List<string> bypass_proxies_of_type { get; } = new global::System.Collections.Generic.List<string>();
 
     }
 
@@ -662,6 +665,16 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<uint> installed_depots { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong access_token
+        {
+            get => __pbn__access_token.GetValueOrDefault();
+            set => __pbn__access_token = value;
+        }
+        public bool ShouldSerializeaccess_token() => __pbn__access_token != null;
+        public void Resetaccess_token() => __pbn__access_token = null;
+        private ulong? __pbn__access_token;
 
     }
 

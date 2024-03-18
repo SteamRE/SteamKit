@@ -605,6 +605,16 @@ namespace SteamKit2.Internal
         public void Resetseconds_remaining() => __pbn__seconds_remaining = null;
         private uint? __pbn__seconds_remaining;
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1088,6 +1098,25 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationGRE : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong game_id
+        {
+            get => __pbn__game_id.GetValueOrDefault();
+            set => __pbn__game_id = value;
+        }
+        public bool ShouldSerializegame_id() => __pbn__game_id != null;
+        public void Resetgame_id() => __pbn__game_id = null;
+        private ulong? __pbn__game_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EClientNotificationType
     {
         k_EClientNotificationType_Invalid = 0,
@@ -1136,6 +1165,14 @@ namespace SteamKit2.Internal
         k_EClientNotificationType_StreamingClientConnection = 43,
         k_EClientNotificationType_FamilyInvite = 44,
         k_EClientNotificationType_PlaytimeWarning = 45,
+        k_EClientNotificationType_FamilyPurchaseRequest = 46,
+        k_EClientNotificationType_FamilyPurchaseRequestResponse = 47,
+        k_EClientNotificationType_ParentalFeatureRequest = 48,
+        k_EClientNotificationType_ParentalPlaytimeRequest = 49,
+        k_EClientNotificationType_GRE = 50,
+        k_EClientNotificationType_ParentalFeatureResponse = 51,
+        k_EClientNotificationType_ParentalPlaytimeResponse = 52,
+        k_EClientNotificationType_RequestedGameAdded = 53,
     }
 
     [global::ProtoBuf.ProtoContract()]

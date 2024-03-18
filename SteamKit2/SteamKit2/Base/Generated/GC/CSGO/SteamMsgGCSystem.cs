@@ -503,6 +503,17 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetcontinue_token() => __pbn__continue_token = null;
         private string __pbn__continue_token;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string continue_text
+        {
+            get => __pbn__continue_text ?? "";
+            set => __pbn__continue_text = value;
+        }
+        public bool ShouldSerializecontinue_text() => __pbn__continue_text != null;
+        public void Resetcontinue_text() => __pbn__continue_text = null;
+        private string __pbn__continue_text;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

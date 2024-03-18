@@ -56,6 +56,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetpurchase_type() => __pbn__purchase_type = null;
         private uint? __pbn__purchase_type;
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public ulong supplemental_data
+        {
+            get => __pbn__supplemental_data.GetValueOrDefault();
+            set => __pbn__supplemental_data = value;
+        }
+        public bool ShouldSerializesupplemental_data() => __pbn__supplemental_data != null;
+        public void Resetsupplemental_data() => __pbn__supplemental_data = null;
+        private ulong? __pbn__supplemental_data;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -976,6 +986,46 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetsticker_wear() => __pbn__sticker_wear = null;
         private float? __pbn__sticker_wear;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public float sticker_rotation
+        {
+            get => __pbn__sticker_rotation.GetValueOrDefault();
+            set => __pbn__sticker_rotation = value;
+        }
+        public bool ShouldSerializesticker_rotation() => __pbn__sticker_rotation != null;
+        public void Resetsticker_rotation() => __pbn__sticker_rotation = null;
+        private float? __pbn__sticker_rotation;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public float sticker_scale
+        {
+            get => __pbn__sticker_scale.GetValueOrDefault();
+            set => __pbn__sticker_scale = value;
+        }
+        public bool ShouldSerializesticker_scale() => __pbn__sticker_scale != null;
+        public void Resetsticker_scale() => __pbn__sticker_scale = null;
+        private float? __pbn__sticker_scale;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public float sticker_offset_x
+        {
+            get => __pbn__sticker_offset_x.GetValueOrDefault();
+            set => __pbn__sticker_offset_x = value;
+        }
+        public bool ShouldSerializesticker_offset_x() => __pbn__sticker_offset_x != null;
+        public void Resetsticker_offset_x() => __pbn__sticker_offset_x = null;
+        private float? __pbn__sticker_offset_x;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public float sticker_offset_y
+        {
+            get => __pbn__sticker_offset_y.GetValueOrDefault();
+            set => __pbn__sticker_offset_y = value;
+        }
+        public bool ShouldSerializesticker_offset_y() => __pbn__sticker_offset_y != null;
+        public void Resetsticker_offset_y() => __pbn__sticker_offset_y = null;
+        private float? __pbn__sticker_offset_y;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1636,17 +1686,6 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializeitem_schema_version() => __pbn__item_schema_version != null;
         public void Resetitem_schema_version() => __pbn__item_schema_version = null;
         private uint? __pbn__item_schema_version;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string items_game_url_DEPRECATED2013
-        {
-            get => __pbn__items_game_url_DEPRECATED2013 ?? "";
-            set => __pbn__items_game_url_DEPRECATED2013 = value;
-        }
-        public bool ShouldSerializeitems_game_url_DEPRECATED2013() => __pbn__items_game_url_DEPRECATED2013 != null;
-        public void Resetitems_game_url_DEPRECATED2013() => __pbn__items_game_url_DEPRECATED2013 = null;
-        private string __pbn__items_game_url_DEPRECATED2013;
 
         [global::ProtoBuf.ProtoMember(4)]
         [global::System.ComponentModel.DefaultValue("")]
@@ -3288,6 +3327,16 @@ namespace SteamKit2.GC.CSGO.Internal
 
         [global::ProtoBuf.ProtoMember(1)]
         public global::System.Collections.Generic.List<CMsgAdjustEquipSlot> slots { get; } = new global::System.Collections.Generic.List<CMsgAdjustEquipSlot>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint change_num
+        {
+            get => __pbn__change_num.GetValueOrDefault();
+            set => __pbn__change_num = value;
+        }
+        public bool ShouldSerializechange_num() => __pbn__change_num != null;
+        public void Resetchange_num() => __pbn__change_num = null;
+        private uint? __pbn__change_num;
 
     }
 

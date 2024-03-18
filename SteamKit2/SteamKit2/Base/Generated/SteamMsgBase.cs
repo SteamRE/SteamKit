@@ -406,6 +406,9 @@ namespace SteamKit2.Internal
         public void Resetwebui_auth_key() => __pbn__webui_auth_key = null;
         private string __pbn__webui_auth_key;
 
+        [global::ProtoBuf.ProtoMember(41)]
+        public global::System.Collections.Generic.List<int> exclude_client_sessionids { get; } = new global::System.Collections.Generic.List<int>();
+
         [global::ProtoBuf.ProtoMember(15)]
         public uint ip
         {
@@ -1919,6 +1922,27 @@ namespace SteamKit2.Internal
         public bool ShouldSerializetime_reserved() => __pbn__time_reserved != null;
         public void Resettime_reserved() => __pbn__time_reserved = null;
         private uint? __pbn__time_reserved;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public uint rtime_estimated_notification
+        {
+            get => __pbn__rtime_estimated_notification.GetValueOrDefault();
+            set => __pbn__rtime_estimated_notification = value;
+        }
+        public bool ShouldSerializertime_estimated_notification() => __pbn__rtime_estimated_notification != null;
+        public void Resetrtime_estimated_notification() => __pbn__rtime_estimated_notification = null;
+        private uint? __pbn__rtime_estimated_notification;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string notificaton_token
+        {
+            get => __pbn__notificaton_token ?? "";
+            set => __pbn__notificaton_token = value;
+        }
+        public bool ShouldSerializenotificaton_token() => __pbn__notificaton_token != null;
+        public void Resetnotificaton_token() => __pbn__notificaton_token = null;
+        private string __pbn__notificaton_token;
 
     }
 

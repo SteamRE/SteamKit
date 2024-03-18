@@ -2760,6 +2760,48 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCAddressMask : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public uint ipv4
+        {
+            get => __pbn__ipv4.GetValueOrDefault();
+            set => __pbn__ipv4 = value;
+        }
+        public bool ShouldSerializeipv4() => __pbn__ipv4 != null;
+        public void Resetipv4() => __pbn__ipv4 = null;
+        private uint? __pbn__ipv4;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(32u)]
+        public uint maskbits
+        {
+            get => __pbn__maskbits ?? 32u;
+            set => __pbn__maskbits = value;
+        }
+        public bool ShouldSerializemaskbits() => __pbn__maskbits != null;
+        public void Resetmaskbits() => __pbn__maskbits = null;
+        private uint? __pbn__maskbits;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCAddressMaskGroup : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CMsgGCAddressMask> addrs { get; } = new global::System.Collections.Generic.List<CMsgGCAddressMask>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgGCRoutingInfo : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2811,6 +2853,80 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializewebapi_param() => __pbn__webapi_param != null;
         public void Resetwebapi_param() => __pbn__webapi_param = null;
         private string __pbn__webapi_param;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public global::System.Collections.Generic.List<PolicyRule> policy_rules { get; } = new global::System.Collections.Generic.List<PolicyRule>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class TokenBucketConfiguration : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public int tokens_start
+            {
+                get => __pbn__tokens_start.GetValueOrDefault();
+                set => __pbn__tokens_start = value;
+            }
+            public bool ShouldSerializetokens_start() => __pbn__tokens_start != null;
+            public void Resettokens_start() => __pbn__tokens_start = null;
+            private int? __pbn__tokens_start;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public int tokens_grant
+            {
+                get => __pbn__tokens_grant.GetValueOrDefault();
+                set => __pbn__tokens_grant = value;
+            }
+            public bool ShouldSerializetokens_grant() => __pbn__tokens_grant != null;
+            public void Resettokens_grant() => __pbn__tokens_grant = null;
+            private int? __pbn__tokens_grant;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public int grant_seconds
+            {
+                get => __pbn__grant_seconds.GetValueOrDefault();
+                set => __pbn__grant_seconds = value;
+            }
+            public bool ShouldSerializegrant_seconds() => __pbn__grant_seconds != null;
+            public void Resetgrant_seconds() => __pbn__grant_seconds = null;
+            private int? __pbn__grant_seconds;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class PolicyRule : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public int account_type
+            {
+                get => __pbn__account_type.GetValueOrDefault();
+                set => __pbn__account_type = value;
+            }
+            public bool ShouldSerializeaccount_type() => __pbn__account_type != null;
+            public void Resetaccount_type() => __pbn__account_type = null;
+            private int? __pbn__account_type;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public int address_mask_group_id
+            {
+                get => __pbn__address_mask_group_id.GetValueOrDefault();
+                set => __pbn__address_mask_group_id = value;
+            }
+            public bool ShouldSerializeaddress_mask_group_id() => __pbn__address_mask_group_id != null;
+            public void Resetaddress_mask_group_id() => __pbn__address_mask_group_id = null;
+            private int? __pbn__address_mask_group_id;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public CMsgGCRoutingInfo.TokenBucketConfiguration token_bucket { get; set; }
+
+        }
 
         [global::ProtoBuf.ProtoContract()]
         public enum RoutingMethod
@@ -2879,6 +2995,9 @@ namespace SteamKit2.GC.CSGO.Internal
 
         [global::ProtoBuf.ProtoMember(1)]
         public global::System.Collections.Generic.List<Entry> entries { get; } = new global::System.Collections.Generic.List<Entry>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<CMsgGCAddressMaskGroup> address_mask_groups { get; } = new global::System.Collections.Generic.List<CMsgGCAddressMaskGroup>();
 
         [global::ProtoBuf.ProtoContract()]
         public partial class Entry : global::ProtoBuf.IExtensible

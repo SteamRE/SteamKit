@@ -224,45 +224,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgSteamLearn_AccessData : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint publisher_id
-        {
-            get => __pbn__publisher_id.GetValueOrDefault();
-            set => __pbn__publisher_id = value;
-        }
-        public bool ShouldSerializepublisher_id() => __pbn__publisher_id != null;
-        public void Resetpublisher_id() => __pbn__publisher_id = null;
-        private uint? __pbn__publisher_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint timestamp
-        {
-            get => __pbn__timestamp.GetValueOrDefault();
-            set => __pbn__timestamp = value;
-        }
-        public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
-        public void Resettimestamp() => __pbn__timestamp = null;
-        private uint? __pbn__timestamp;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public ulong random_value
-        {
-            get => __pbn__random_value.GetValueOrDefault();
-            set => __pbn__random_value = value;
-        }
-        public bool ShouldSerializerandom_value() => __pbn__random_value != null;
-        public void Resetrandom_value() => __pbn__random_value = null;
-        private ulong? __pbn__random_value;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgSteamLearn_RegisterDataSource_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -279,9 +240,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeaccess_token() => __pbn__access_token != null;
         public void Resetaccess_token() => __pbn__access_token = null;
         private string __pbn__access_token;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public CMsgSteamLearn_AccessData access_data { get; set; }
 
         [global::ProtoBuf.ProtoMember(3)]
         public CMsgSteamLearnDataSource data_source { get; set; }
@@ -329,9 +287,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetaccess_token() => __pbn__access_token = null;
         private string __pbn__access_token;
 
-        [global::ProtoBuf.ProtoMember(2)]
-        public CMsgSteamLearn_AccessData access_data { get; set; }
-
         [global::ProtoBuf.ProtoMember(3)]
         public CMsgSteamLearnData data { get; set; }
 
@@ -374,9 +329,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeaccess_token() => __pbn__access_token != null;
         public void Resetaccess_token() => __pbn__access_token = null;
         private string __pbn__access_token;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public CMsgSteamLearn_AccessData access_data { get; set; }
 
         [global::ProtoBuf.ProtoMember(3)]
         public uint project_id
@@ -449,6 +401,9 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<CMsgSteamLearn_SnapshotProject_Request> snapshot_requests { get; } = new global::System.Collections.Generic.List<CMsgSteamLearn_SnapshotProject_Request>();
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<CMsgSteamLearn_Inference_Request> inference_requests { get; } = new global::System.Collections.Generic.List<CMsgSteamLearn_Inference_Request>();
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -464,10 +419,13 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<CMsgSteamLearn_SnapshotProject_Response> snapshot_responses { get; } = new global::System.Collections.Generic.List<CMsgSteamLearn_SnapshotProject_Response>();
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<CMsgSteamLearn_Inference_Response> inference_responses { get; } = new global::System.Collections.Generic.List<CMsgSteamLearn_Inference_Response>();
+
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgSteamLearnHMACKeys : global::ProtoBuf.IExtensible
+    public partial class CMsgSteamLearnAccessTokens : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -475,23 +433,26 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(1)]
         [global::System.ComponentModel.DefaultValue("")]
-        public string register_data_source_key
+        public string register_data_source_access_token
         {
-            get => __pbn__register_data_source_key ?? "";
-            set => __pbn__register_data_source_key = value;
+            get => __pbn__register_data_source_access_token ?? "";
+            set => __pbn__register_data_source_access_token = value;
         }
-        public bool ShouldSerializeregister_data_source_key() => __pbn__register_data_source_key != null;
-        public void Resetregister_data_source_key() => __pbn__register_data_source_key = null;
-        private string __pbn__register_data_source_key;
+        public bool ShouldSerializeregister_data_source_access_token() => __pbn__register_data_source_access_token != null;
+        public void Resetregister_data_source_access_token() => __pbn__register_data_source_access_token = null;
+        private string __pbn__register_data_source_access_token;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<CacheDataKeys> cache_data_keys { get; } = new global::System.Collections.Generic.List<CacheDataKeys>();
+        public global::System.Collections.Generic.List<CacheDataAccessToken> cache_data_access_tokens { get; } = new global::System.Collections.Generic.List<CacheDataAccessToken>();
 
         [global::ProtoBuf.ProtoMember(3)]
-        public global::System.Collections.Generic.List<SnapshotProjectKeys> snapshot_project_keys { get; } = new global::System.Collections.Generic.List<SnapshotProjectKeys>();
+        public global::System.Collections.Generic.List<SnapshotProjectAccessToken> snapshot_project_access_tokens { get; } = new global::System.Collections.Generic.List<SnapshotProjectAccessToken>();
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<InferenceAccessToken> inference_access_tokens { get; } = new global::System.Collections.Generic.List<InferenceAccessToken>();
 
         [global::ProtoBuf.ProtoContract()]
-        public partial class CacheDataKeys : global::ProtoBuf.IExtensible
+        public partial class CacheDataAccessToken : global::ProtoBuf.IExtensible
         {
             private global::ProtoBuf.IExtension __pbn__extensionData;
             global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -507,31 +468,21 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetdata_source_id() => __pbn__data_source_id = null;
             private uint? __pbn__data_source_id;
 
-            [global::ProtoBuf.ProtoMember(3)]
-            public uint version
-            {
-                get => __pbn__version.GetValueOrDefault();
-                set => __pbn__version = value;
-            }
-            public bool ShouldSerializeversion() => __pbn__version != null;
-            public void Resetversion() => __pbn__version = null;
-            private uint? __pbn__version;
-
             [global::ProtoBuf.ProtoMember(2)]
             [global::System.ComponentModel.DefaultValue("")]
-            public string key
+            public string access_token
             {
-                get => __pbn__key ?? "";
-                set => __pbn__key = value;
+                get => __pbn__access_token ?? "";
+                set => __pbn__access_token = value;
             }
-            public bool ShouldSerializekey() => __pbn__key != null;
-            public void Resetkey() => __pbn__key = null;
-            private string __pbn__key;
+            public bool ShouldSerializeaccess_token() => __pbn__access_token != null;
+            public void Resetaccess_token() => __pbn__access_token = null;
+            private string __pbn__access_token;
 
         }
 
         [global::ProtoBuf.ProtoContract()]
-        public partial class SnapshotProjectKeys : global::ProtoBuf.IExtensible
+        public partial class SnapshotProjectAccessToken : global::ProtoBuf.IExtensible
         {
             private global::ProtoBuf.IExtension __pbn__extensionData;
             global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -547,33 +498,53 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetproject_id() => __pbn__project_id = null;
             private uint? __pbn__project_id;
 
-            [global::ProtoBuf.ProtoMember(3)]
-            public uint published_version
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string access_token
             {
-                get => __pbn__published_version.GetValueOrDefault();
-                set => __pbn__published_version = value;
+                get => __pbn__access_token ?? "";
+                set => __pbn__access_token = value;
             }
-            public bool ShouldSerializepublished_version() => __pbn__published_version != null;
-            public void Resetpublished_version() => __pbn__published_version = null;
-            private uint? __pbn__published_version;
+            public bool ShouldSerializeaccess_token() => __pbn__access_token != null;
+            public void Resetaccess_token() => __pbn__access_token = null;
+            private string __pbn__access_token;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class InferenceAccessToken : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint project_id
+            {
+                get => __pbn__project_id.GetValueOrDefault();
+                set => __pbn__project_id = value;
+            }
+            public bool ShouldSerializeproject_id() => __pbn__project_id != null;
+            public void Resetproject_id() => __pbn__project_id = null;
+            private uint? __pbn__project_id;
 
             [global::ProtoBuf.ProtoMember(2)]
             [global::System.ComponentModel.DefaultValue("")]
-            public string key
+            public string access_token
             {
-                get => __pbn__key ?? "";
-                set => __pbn__key = value;
+                get => __pbn__access_token ?? "";
+                set => __pbn__access_token = value;
             }
-            public bool ShouldSerializekey() => __pbn__key != null;
-            public void Resetkey() => __pbn__key = null;
-            private string __pbn__key;
+            public bool ShouldSerializeaccess_token() => __pbn__access_token != null;
+            public void Resetaccess_token() => __pbn__access_token = null;
+            private string __pbn__access_token;
 
         }
 
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgSteamLearn_GetHMACKeys_Request : global::ProtoBuf.IExtensible
+    public partial class CMsgSteamLearn_GetAccessTokens_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -592,25 +563,25 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgSteamLearn_GetHMACKeys_Response : global::ProtoBuf.IExtensible
+    public partial class CMsgSteamLearn_GetAccessTokens_Response : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(ESteamLearnGetHMACKeysResult.STEAMLEARN_GET_HMAC_KEYS_SUCCESS)]
-        public ESteamLearnGetHMACKeysResult result
+        [global::System.ComponentModel.DefaultValue(ESteamLearnGetAccessTokensResult.STEAMLEARN_GET_ACCESS_TOKENS_ERROR)]
+        public ESteamLearnGetAccessTokensResult result
         {
-            get => __pbn__result ?? ESteamLearnGetHMACKeysResult.STEAMLEARN_GET_HMAC_KEYS_SUCCESS;
+            get => __pbn__result ?? ESteamLearnGetAccessTokensResult.STEAMLEARN_GET_ACCESS_TOKENS_ERROR;
             set => __pbn__result = value;
         }
         public bool ShouldSerializeresult() => __pbn__result != null;
         public void Resetresult() => __pbn__result = null;
-        private ESteamLearnGetHMACKeysResult? __pbn__result;
+        private ESteamLearnGetAccessTokensResult? __pbn__result;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public CMsgSteamLearnHMACKeys keys { get; set; }
+        public CMsgSteamLearnAccessTokens access_tokens { get; set; }
 
     }
 
@@ -631,9 +602,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeaccess_token() => __pbn__access_token != null;
         public void Resetaccess_token() => __pbn__access_token = null;
         private string __pbn__access_token;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public CMsgSteamLearn_AccessData access_data { get; set; }
 
         [global::ProtoBuf.ProtoMember(3)]
         public uint project_id
@@ -690,9 +658,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeaccess_token() => __pbn__access_token != null;
         public void Resetaccess_token() => __pbn__access_token = null;
         private string __pbn__access_token;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public CMsgSteamLearn_AccessData access_data { get; set; }
 
         [global::ProtoBuf.ProtoMember(3)]
         public uint project_id
@@ -1156,6 +1121,25 @@ namespace SteamKit2.GC.Dota.Internal
         public global::System.Collections.Generic.List<Output> outputs { get; } = new global::System.Collections.Generic.List<Output>();
 
         [global::ProtoBuf.ProtoContract()]
+        public partial class RegressionOutput : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public float value
+            {
+                get => __pbn__value.GetValueOrDefault();
+                set => __pbn__value = value;
+            }
+            public bool ShouldSerializevalue() => __pbn__value != null;
+            public void Resetvalue() => __pbn__value = null;
+            private float? __pbn__value;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
         public partial class BinaryCrossEntropyOutput : global::ProtoBuf.IExtensible
         {
             private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1240,6 +1224,15 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializemulti_binary_crossentropy() => __pbn__ResponseType.Is(3);
             public void Resetmulti_binary_crossentropy() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__ResponseType, 3);
 
+            [global::ProtoBuf.ProtoMember(4)]
+            public CMsgSteamLearn_InferenceBackend_Response.RegressionOutput regression
+            {
+                get => __pbn__ResponseType.Is(4) ? ((CMsgSteamLearn_InferenceBackend_Response.RegressionOutput)__pbn__ResponseType.Object) : default;
+                set => __pbn__ResponseType = new global::ProtoBuf.DiscriminatedUnionObject(4, value);
+            }
+            public bool ShouldSerializeregression() => __pbn__ResponseType.Is(4);
+            public void Resetregression() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__ResponseType, 4);
+
         }
 
     }
@@ -1264,6 +1257,9 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(2)]
         public CMsgSteamLearn_InferenceBackend_Response backend_response { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<ulong> keys { get; } = new global::System.Collections.Generic.List<ulong>();
 
     }
 
@@ -1326,9 +1322,10 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public enum ESteamLearnGetHMACKeysResult
+    public enum ESteamLearnGetAccessTokensResult
     {
-        STEAMLEARN_GET_HMAC_KEYS_SUCCESS = 0,
+        STEAMLEARN_GET_ACCESS_TOKENS_ERROR = 0,
+        STEAMLEARN_GET_ACCESS_TOKENS_SUCCESS = 1,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1365,7 +1362,7 @@ namespace SteamKit2.GC.Dota.Internal
         CMsgSteamLearn_CacheData_Response CacheData(CMsgSteamLearn_CacheData_Request request);
         CMsgSteamLearn_SnapshotProject_Response SnapshotProject(CMsgSteamLearn_SnapshotProject_Request request);
         CMsgSteamLearn_BatchOperation_Response BatchOperation(CMsgSteamLearn_BatchOperation_Request request);
-        CMsgSteamLearn_GetHMACKeys_Response GetHMACKeys(CMsgSteamLearn_GetHMACKeys_Request request);
+        CMsgSteamLearn_GetAccessTokens_Response GetAccessTokens(CMsgSteamLearn_GetAccessTokens_Request request);
         CMsgSteamLearn_Inference_Response Inference(CMsgSteamLearn_Inference_Request request);
         CMsgSteamLearn_InferenceMetadata_Response InferenceMetadata(CMsgSteamLearn_InferenceMetadata_Request request);
     }

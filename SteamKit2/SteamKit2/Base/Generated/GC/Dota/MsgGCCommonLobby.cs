@@ -2109,16 +2109,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetleague_phase() => __pbn__league_phase = null;
         private uint? __pbn__league_phase;
 
-        [global::ProtoBuf.ProtoMember(114)]
-        public bool record_detailed_stats
-        {
-            get => __pbn__record_detailed_stats.GetValueOrDefault();
-            set => __pbn__record_detailed_stats = value;
-        }
-        public bool ShouldSerializerecord_detailed_stats() => __pbn__record_detailed_stats != null;
-        public void Resetrecord_detailed_stats() => __pbn__record_detailed_stats = null;
-        private bool? __pbn__record_detailed_stats;
-
         [global::ProtoBuf.ProtoMember(116)]
         public bool experimental_gameplay_enabled
         {

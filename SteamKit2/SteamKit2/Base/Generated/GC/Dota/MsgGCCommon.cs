@@ -680,6 +680,26 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CSODOTAChatWheel : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(4294967295u)]
+        public uint message_id
+        {
+            get => __pbn__message_id ?? 4294967295u;
+            set => __pbn__message_id = value;
+        }
+        public bool ShouldSerializemessage_id() => __pbn__message_id != null;
+        public void Resetmessage_id() => __pbn__message_id = null;
+        private uint? __pbn__message_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgLobbyFeaturedGamemodeProgress : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -3249,6 +3269,16 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resethas_ultimate_mana() => __pbn__has_ultimate_mana = null;
             private bool? __pbn__has_ultimate_mana;
 
+            [global::ProtoBuf.ProtoMember(50)]
+            public uint team_slot
+            {
+                get => __pbn__team_slot.GetValueOrDefault();
+                set => __pbn__team_slot = value;
+            }
+            public bool ShouldSerializeteam_slot() => __pbn__team_slot != null;
+            public void Resetteam_slot() => __pbn__team_slot = null;
+            private uint? __pbn__team_slot;
+
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -3972,6 +4002,16 @@ namespace SteamKit2.GC.Dota.Internal
 
             [global::ProtoBuf.ProtoMember(17)]
             public global::System.Collections.Generic.List<int> items { get; } = new global::System.Collections.Generic.List<int>();
+
+            [global::ProtoBuf.ProtoMember(18)]
+            public uint team_slot
+            {
+                get => __pbn__team_slot.GetValueOrDefault();
+                set => __pbn__team_slot = value;
+            }
+            public bool ShouldSerializeteam_slot() => __pbn__team_slot != null;
+            public void Resetteam_slot() => __pbn__team_slot = null;
+            private uint? __pbn__team_slot;
 
         }
 
@@ -10525,6 +10565,24 @@ namespace SteamKit2.GC.Dota.Internal
         STICKER_PAGE_GENERIC = 0,
         STICKER_PAGE_TEAM = 1,
         STICKER_PAGE_TALENT = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ENewBloomGiftingResponse
+    {
+        kENewBloomGifting_Success = 0,
+        kENewBloomGifting_UnknownFailure = 1,
+        kENewBloomGifting_MalformedRequest = 2,
+        kENewBloomGifting_FeatureDisabled = 3,
+        kENewBloomGifting_ItemNotFound = 4,
+        kENewBloomGifting_PlayerNotAllowedToGiveGifts = 5,
+        kENewBloomGifting_TargetNotAllowedToReceiveGifts = 6,
+        kENewBloomGifting_ServerNotAuthorized = 100,
+        kENewBloomGifting_PlayerNotInLobby = 101,
+        kENewBloomGifting_TargetNotInLobby = 102,
+        kENewBloomGifting_LobbyNotEligible = 103,
+        kENewBloomGifting_TargetNotFriend = 200,
+        kENewBloomGifting_TargetFriendDurationTooShort = 201,
     }
 
 }

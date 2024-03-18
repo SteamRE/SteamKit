@@ -1001,6 +1001,140 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_GetPartnerReadyToPublishMessages_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint partnerid
+        {
+            get => __pbn__partnerid.GetValueOrDefault();
+            set => __pbn__partnerid = value;
+        }
+        public bool ShouldSerializepartnerid() => __pbn__partnerid != null;
+        public void Resetpartnerid() => __pbn__partnerid = null;
+        private uint? __pbn__partnerid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_GetPartnerReadyToPublishMessages_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CDisplayMarketingMessage> messages { get; } = new global::System.Collections.Generic.List<CDisplayMarketingMessage>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_PartnerPublishMessage_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong gid
+        {
+            get => __pbn__gid.GetValueOrDefault();
+            set => __pbn__gid = value;
+        }
+        public bool ShouldSerializegid() => __pbn__gid != null;
+        public void Resetgid() => __pbn__gid = null;
+        private ulong? __pbn__gid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint partnerid
+        {
+            get => __pbn__partnerid.GetValueOrDefault();
+            set => __pbn__partnerid = value;
+        }
+        public bool ShouldSerializepartnerid() => __pbn__partnerid != null;
+        public void Resetpartnerid() => __pbn__partnerid = null;
+        private uint? __pbn__partnerid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_PartnerPublishMessage_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_GetPartnerMessagePreview_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong gid
+        {
+            get => __pbn__gid.GetValueOrDefault();
+            set => __pbn__gid = value;
+        }
+        public bool ShouldSerializegid() => __pbn__gid != null;
+        public void Resetgid() => __pbn__gid = null;
+        private ulong? __pbn__gid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint partnerid
+        {
+            get => __pbn__partnerid.GetValueOrDefault();
+            set => __pbn__partnerid = value;
+        }
+        public bool ShouldSerializepartnerid() => __pbn__partnerid != null;
+        public void Resetpartnerid() => __pbn__partnerid = null;
+        private uint? __pbn__partnerid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_GetPartnerMessagePreview_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMarketingMessageProto message { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessage_GetMarketingMessagesForApps_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<uint> appids { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessage_GetMarketingMessagesForApps_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CMarketingMessageProto> messages { get; } = new global::System.Collections.Generic.List<CMarketingMessageProto>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EMarketingMessageType
     {
         k_EMarketingMessageInvalid = 0,
@@ -1023,6 +1157,7 @@ namespace SteamKit2.Internal
     {
         k_EMarketingMessageVisibleBeta = 1,
         k_EMarketingMessageVisiblePublic = 2,
+        k_EMarketingMessageVisibleApprovedForPublish = 3,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1074,6 +1209,10 @@ namespace SteamKit2.Internal
         CMarketingMessages_FindMarketingMessages_Response FindMarketingMessages(CMarketingMessages_FindMarketingMessages_Request request);
         CMarketingMessages_GetMarketingMessageViewerStats_Response GetMarketingMessageViewerStats(CMarketingMessages_GetMarketingMessageViewerStats_Request request);
         CMarketingMessages_GetMarketingMessagesViewerRangeStats_Response GetMarketingMessagesViewerRangeStats(CMarketingMessages_GetMarketingMessagesViewerRangeStats_Request request);
+        CMarketingMessages_GetPartnerReadyToPublishMessages_Response GetPartnerReadyToPublishMessages(CMarketingMessages_GetPartnerReadyToPublishMessages_Request request);
+        CMarketingMessages_PartnerPublishMessage_Response PublishPartnerMessage(CMarketingMessages_PartnerPublishMessage_Request request);
+        CMarketingMessages_GetPartnerMessagePreview_Response GetPartnerMessagePreview(CMarketingMessages_GetPartnerMessagePreview_Request request);
+        CMarketingMessage_GetMarketingMessagesForApps_Response GetMarketingMessagesForApps(CMarketingMessage_GetMarketingMessagesForApps_Request request);
     }
 
 }

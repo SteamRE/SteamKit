@@ -1158,6 +1158,56 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_ReportApp_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(EAppReportType.k_EAppReportType_Invalid)]
+        public EAppReportType report_type
+        {
+            get => __pbn__report_type ?? EAppReportType.k_EAppReportType_Invalid;
+            set => __pbn__report_type = value;
+        }
+        public bool ShouldSerializereport_type() => __pbn__report_type != null;
+        public void Resetreport_type() => __pbn__report_type = null;
+        private EAppReportType? __pbn__report_type;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string report
+        {
+            get => __pbn__report ?? "";
+            set => __pbn__report = value;
+        }
+        public bool ShouldSerializereport() => __pbn__report != null;
+        public void Resetreport() => __pbn__report = null;
+        private string __pbn__report;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_ReportApp_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CStore_GetStorePreferences_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1472,6 +1522,225 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_UpdatePackageReservations_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<uint> packages_to_reserve { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<uint> packages_to_unreserve { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string country_code
+        {
+            get => __pbn__country_code ?? "";
+            set => __pbn__country_code = value;
+        }
+        public bool ShouldSerializecountry_code() => __pbn__country_code != null;
+        public void Resetcountry_code() => __pbn__country_code = null;
+        private string __pbn__country_code;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_UpdatePackageReservations_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CPackageReservationStatus> reservation_status { get; } = new global::System.Collections.Generic.List<CPackageReservationStatus>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CReservationPositionMessage : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint edistributor
+        {
+            get => __pbn__edistributor.GetValueOrDefault();
+            set => __pbn__edistributor = value;
+        }
+        public bool ShouldSerializeedistributor() => __pbn__edistributor != null;
+        public void Resetedistributor() => __pbn__edistributor = null;
+        private uint? __pbn__edistributor;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string product_identifier
+        {
+            get => __pbn__product_identifier ?? "";
+            set => __pbn__product_identifier = value;
+        }
+        public bool ShouldSerializeproduct_identifier() => __pbn__product_identifier != null;
+        public void Resetproduct_identifier() => __pbn__product_identifier = null;
+        private string __pbn__product_identifier;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint start_queue_position
+        {
+            get => __pbn__start_queue_position.GetValueOrDefault();
+            set => __pbn__start_queue_position = value;
+        }
+        public bool ShouldSerializestart_queue_position() => __pbn__start_queue_position != null;
+        public void Resetstart_queue_position() => __pbn__start_queue_position = null;
+        private uint? __pbn__start_queue_position;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint rtime_estimated_notification
+        {
+            get => __pbn__rtime_estimated_notification.GetValueOrDefault();
+            set => __pbn__rtime_estimated_notification = value;
+        }
+        public bool ShouldSerializertime_estimated_notification() => __pbn__rtime_estimated_notification != null;
+        public void Resetrtime_estimated_notification() => __pbn__rtime_estimated_notification = null;
+        private uint? __pbn__rtime_estimated_notification;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string localization_token
+        {
+            get => __pbn__localization_token ?? "";
+            set => __pbn__localization_token = value;
+        }
+        public bool ShouldSerializelocalization_token() => __pbn__localization_token != null;
+        public void Resetlocalization_token() => __pbn__localization_token = null;
+        private string __pbn__localization_token;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint accountid
+        {
+            get => __pbn__accountid.GetValueOrDefault();
+            set => __pbn__accountid = value;
+        }
+        public bool ShouldSerializeaccountid() => __pbn__accountid != null;
+        public void Resetaccountid() => __pbn__accountid = null;
+        private uint? __pbn__accountid;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint rtime_created
+        {
+            get => __pbn__rtime_created.GetValueOrDefault();
+            set => __pbn__rtime_created = value;
+        }
+        public bool ShouldSerializertime_created() => __pbn__rtime_created != null;
+        public void Resetrtime_created() => __pbn__rtime_created = null;
+        private uint? __pbn__rtime_created;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_SetReservationPositionMessage_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CReservationPositionMessage> settings { get; } = new global::System.Collections.Generic.List<CReservationPositionMessage>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_SetReservationPositionMessage_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_DeleteReservationPositionMessage_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint edistributor
+        {
+            get => __pbn__edistributor.GetValueOrDefault();
+            set => __pbn__edistributor = value;
+        }
+        public bool ShouldSerializeedistributor() => __pbn__edistributor != null;
+        public void Resetedistributor() => __pbn__edistributor = null;
+        private uint? __pbn__edistributor;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string product_identifier
+        {
+            get => __pbn__product_identifier ?? "";
+            set => __pbn__product_identifier = value;
+        }
+        public bool ShouldSerializeproduct_identifier() => __pbn__product_identifier != null;
+        public void Resetproduct_identifier() => __pbn__product_identifier = null;
+        private string __pbn__product_identifier;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint start_queue_position
+        {
+            get => __pbn__start_queue_position.GetValueOrDefault();
+            set => __pbn__start_queue_position = value;
+        }
+        public bool ShouldSerializestart_queue_position() => __pbn__start_queue_position != null;
+        public void Resetstart_queue_position() => __pbn__start_queue_position = null;
+        private uint? __pbn__start_queue_position;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_DeleteReservationPositionMessage_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_GetAllReservationPositionMessages_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_GetAllReservationPositionMessages_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CReservationPositionMessage> settings { get; } = new global::System.Collections.Generic.List<CReservationPositionMessage>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_ReloadAllReservationPositionMessages_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CSteamDeckCompatibility_SetFeedback_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1617,6 +1886,26 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public enum EAppReportType
+    {
+        k_EAppReportType_Invalid = 0,
+        k_EAppReportType_Scam = 1,
+        k_EAppReportType_Malware = 2,
+        k_EAppReportType_HateSpeech = 3,
+        k_EAppReportType_Pornography = 4,
+        k_EAppReportType_NonLabeledAdultContent = 5,
+        k_EAppReportType_Libelous = 6,
+        k_EAppReportType_Offensive = 7,
+        k_EAppReportType_ExploitsChildren = 8,
+        k_EAppReportType_MtxWithNonSteamWalletPaymentMethods = 9,
+        k_EAppReportType_CopyrightViolation = 10,
+        k_EAppReportType_ViolatesLaws = 11,
+        k_EAppReportType_Other = 12,
+        k_EAppReportType_Broken = 13,
+        k_EAppReportType_AIContentReport = 14,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EUserReviewScorePreference
     {
         k_EUserReviewScorePreference_Unset = 0,
@@ -1644,9 +1933,15 @@ namespace SteamKit2.Internal
         CStore_SkipDiscoveryQueueItem_Response SkipDiscoveryQueueItem(CStore_SkipDiscoveryQueueItem_Request request);
         CStore_GetUserGameInterestState_Response GetUserGameInterestState(CStore_GetUserGameInterestState_Request request);
         CStore_GetDiscoveryQueueSkippedApps_Response GetDiscoveryQueueSkippedApps(CStore_GetDiscoveryQueueSkippedApps_Request request);
+        CStore_ReportApp_Response ReportApp(CStore_ReportApp_Request request);
         CStore_GetStorePreferences_Response GetStorePreferences(CStore_GetStorePreferences_Request request);
         CStore_GetTrendingAppsAmongFriends_Response GetTrendingAppsAmongFriends(CStore_GetTrendingAppsAmongFriends_Request request);
         NoResponse MigratePartnerLinkTracking(CStore_MigratePartnerLinkTracking_Notification request);
+        CStore_UpdatePackageReservations_Response UpdatePackageReservations(CStore_UpdatePackageReservations_Request request);
+        CStore_SetReservationPositionMessage_Response SetReservationPositionMessage(CStore_SetReservationPositionMessage_Request request);
+        CStore_DeleteReservationPositionMessage_Response DeleteReservationPositionMessage(CStore_DeleteReservationPositionMessage_Request request);
+        CStore_GetAllReservationPositionMessages_Response GetAllReservationPositionMessages(CStore_GetAllReservationPositionMessages_Request request);
+        NoResponse ReloadAllReservationPositionMessages(CStore_ReloadAllReservationPositionMessages_Notification request);
         CSteamDeckCompatibility_SetFeedback_Response SetCompatibilityFeedback(CSteamDeckCompatibility_SetFeedback_Request request);
         CSteamDeckCompatibility_ShouldPrompt_Response ShouldPromptForCompatibilityFeedback(CSteamDeckCompatibility_ShouldPrompt_Request request);
     }

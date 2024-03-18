@@ -346,6 +346,47 @@ namespace SteamKit2.Internal
         public void Resetformatted_balance() => __pbn__formatted_balance = null;
         private string __pbn__formatted_balance;
 
+        [global::ProtoBuf.ProtoMember(15)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string formatted_delayed_balance
+        {
+            get => __pbn__formatted_delayed_balance ?? "";
+            set => __pbn__formatted_delayed_balance = value;
+        }
+        public bool ShouldSerializeformatted_delayed_balance() => __pbn__formatted_delayed_balance != null;
+        public void Resetformatted_delayed_balance() => __pbn__formatted_delayed_balance = null;
+        private string __pbn__formatted_delayed_balance;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public int delayed_balance_available_min_time
+        {
+            get => __pbn__delayed_balance_available_min_time.GetValueOrDefault();
+            set => __pbn__delayed_balance_available_min_time = value;
+        }
+        public bool ShouldSerializedelayed_balance_available_min_time() => __pbn__delayed_balance_available_min_time != null;
+        public void Resetdelayed_balance_available_min_time() => __pbn__delayed_balance_available_min_time = null;
+        private int? __pbn__delayed_balance_available_min_time;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public int delayed_balance_available_max_time
+        {
+            get => __pbn__delayed_balance_available_max_time.GetValueOrDefault();
+            set => __pbn__delayed_balance_available_max_time = value;
+        }
+        public bool ShouldSerializedelayed_balance_available_max_time() => __pbn__delayed_balance_available_max_time != null;
+        public void Resetdelayed_balance_available_max_time() => __pbn__delayed_balance_available_max_time = null;
+        private int? __pbn__delayed_balance_available_max_time;
+
+        [global::ProtoBuf.ProtoMember(18)]
+        public int delayed_balance_newest_source
+        {
+            get => __pbn__delayed_balance_newest_source.GetValueOrDefault();
+            set => __pbn__delayed_balance_newest_source = value;
+        }
+        public bool ShouldSerializedelayed_balance_newest_source() => __pbn__delayed_balance_newest_source != null;
+        public void Resetdelayed_balance_newest_source() => __pbn__delayed_balance_newest_source = null;
+        private int? __pbn__delayed_balance_newest_source;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

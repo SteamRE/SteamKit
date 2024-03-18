@@ -884,6 +884,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetsteamdatagram_login() => __pbn__steamdatagram_login = null;
         private byte[] __pbn__steamdatagram_login;
 
+        [global::ProtoBuf.ProtoMember(9)]
+        public uint socache_control
+        {
+            get => __pbn__socache_control.GetValueOrDefault();
+            set => __pbn__socache_control = value;
+        }
+        public bool ShouldSerializesocache_control() => __pbn__socache_control != null;
+        public void Resetsocache_control() => __pbn__socache_control = null;
+        private uint? __pbn__socache_control;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1815,6 +1825,7 @@ namespace SteamKit2.GC.CSGO.Internal
         GCClientLauncherType_DEFAULT = 0,
         GCClientLauncherType_PERFECTWORLD = 1,
         GCClientLauncherType_STEAMCHINA = 2,
+        GCClientLauncherType_SOURCE2 = 3,
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -1547,6 +1547,16 @@ namespace SteamKit2.Internal
         public void Resetdisplay_refresh_manual_hz_oc_max() => __pbn__display_refresh_manual_hz_oc_max = null;
         private int? __pbn__display_refresh_manual_hz_oc_max;
 
+        [global::ProtoBuf.ProtoMember(30)]
+        public bool disable_refresh_rate_management
+        {
+            get => __pbn__disable_refresh_rate_management.GetValueOrDefault();
+            set => __pbn__disable_refresh_rate_management = value;
+        }
+        public bool ShouldSerializedisable_refresh_rate_management() => __pbn__disable_refresh_rate_management != null;
+        public void Resetdisable_refresh_rate_management() => __pbn__disable_refresh_rate_management = null;
+        private bool? __pbn__disable_refresh_rate_management;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -3102,7 +3112,7 @@ namespace SteamKit2.Internal
         private bool? __pbn__is_hdr_enabled;
 
         [global::ProtoBuf.ProtoMember(18)]
-        public global::System.Collections.Generic.List<int> compatibility_params { get; } = new global::System.Collections.Generic.List<int>();
+        public global::System.Collections.Generic.List<int> supported_refresh_rates { get; } = new global::System.Collections.Generic.List<int>();
 
     }
 
@@ -3527,6 +3537,16 @@ namespace SteamKit2.Internal
         public void Resetdisplay_colorgamut_labelset() => __pbn__display_colorgamut_labelset = null;
         private EColorGamutLabelSet? __pbn__display_colorgamut_labelset;
 
+        [global::ProtoBuf.ProtoMember(39)]
+        public float display_brightness_overdrive_hdr_split
+        {
+            get => __pbn__display_brightness_overdrive_hdr_split.GetValueOrDefault();
+            set => __pbn__display_brightness_overdrive_hdr_split = value;
+        }
+        public bool ShouldSerializedisplay_brightness_overdrive_hdr_split() => __pbn__display_brightness_overdrive_hdr_split != null;
+        public void Resetdisplay_brightness_overdrive_hdr_split() => __pbn__display_brightness_overdrive_hdr_split = null;
+        private float? __pbn__display_brightness_overdrive_hdr_split;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -3669,6 +3689,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeauto_message() => __pbn__auto_message != null;
         public void Resetauto_message() => __pbn__auto_message = null;
         private string __pbn__auto_message;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool system_restart_pending
+        {
+            get => __pbn__system_restart_pending.GetValueOrDefault();
+            set => __pbn__system_restart_pending = value;
+        }
+        public bool ShouldSerializesystem_restart_pending() => __pbn__system_restart_pending != null;
+        public void Resetsystem_restart_pending() => __pbn__system_restart_pending = null;
+        private bool? __pbn__system_restart_pending;
 
     }
 

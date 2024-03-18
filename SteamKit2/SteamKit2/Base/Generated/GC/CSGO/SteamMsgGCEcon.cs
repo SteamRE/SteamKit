@@ -62,35 +62,6 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgApplyAutograph : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public ulong autograph_item_id
-        {
-            get => __pbn__autograph_item_id.GetValueOrDefault();
-            set => __pbn__autograph_item_id = value;
-        }
-        public bool ShouldSerializeautograph_item_id() => __pbn__autograph_item_id != null;
-        public void Resetautograph_item_id() => __pbn__autograph_item_id = null;
-        private ulong? __pbn__autograph_item_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public ulong item_item_id
-        {
-            get => __pbn__item_item_id.GetValueOrDefault();
-            set => __pbn__item_item_id = value;
-        }
-        public bool ShouldSerializeitem_item_id() => __pbn__item_item_id != null;
-        public void Resetitem_item_id() => __pbn__item_item_id = null;
-        private ulong? __pbn__item_item_id;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgCasketItem : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -157,26 +128,6 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializerequest() => __pbn__request != null;
         public void Resetrequest() => __pbn__request = null;
         private uint? __pbn__request;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CAttribute_String : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string value
-        {
-            get => __pbn__value ?? "";
-            set => __pbn__value = value;
-        }
-        public bool ShouldSerializevalue() => __pbn__value != null;
-        public void Resetvalue() => __pbn__value = null;
-        private string __pbn__value;
 
     }
 

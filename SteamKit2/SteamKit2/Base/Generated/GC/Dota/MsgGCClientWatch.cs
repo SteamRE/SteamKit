@@ -348,6 +348,26 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resethero_id() => __pbn__hero_id = null;
             private uint? __pbn__hero_id;
 
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint team_slot
+            {
+                get => __pbn__team_slot.GetValueOrDefault();
+                set => __pbn__team_slot = value;
+            }
+            public bool ShouldSerializeteam_slot() => __pbn__team_slot != null;
+            public void Resetteam_slot() => __pbn__team_slot = null;
+            private uint? __pbn__team_slot;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public uint team
+            {
+                get => __pbn__team.GetValueOrDefault();
+                set => __pbn__team = value;
+            }
+            public bool ShouldSerializeteam() => __pbn__team != null;
+            public void Resetteam() => __pbn__team = null;
+            private uint? __pbn__team;
+
         }
 
     }
