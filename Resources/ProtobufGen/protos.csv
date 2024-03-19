@@ -58,7 +58,6 @@ steam,steammessages_secrets.steamclient.proto,SteamMsgSecrets.cs,SteamKit2.Inter
 steam,steammessages_shader.steamclient.proto,SteamMsgShader.cs,SteamKit2.Internal
 steam,steammessages_site_license.steamclient.proto,SteamMsgSiteLicense.cs,SteamKit2.Internal
 steam,steammessages_sitelicenseclient.proto,SteamMsgSiteLicenseClient.cs,SteamKit2.Internal
-steam,steammessages_star.steamclient.proto,SteamMsgStar.cs,SteamKit2.Internal
 steam,steammessages_steamtv.steamclient.proto,SteamMsgSteamTV.cs,SteamKit2.Internal
 steam,steammessages_store.steamclient.proto,SteamMsgStore.cs,SteamKit2.Internal
 steam,steammessages_storebrowse.steamclient.proto,SteamMsgStoreBrowse.cs,SteamKit2.Internal
