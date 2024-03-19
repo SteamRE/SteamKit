@@ -648,6 +648,7 @@ enum EMsg
 	CMSetSecrets = 1704;
 	CMGetSecrets = 1705;
 	CMAppInfoResponseDeprecated = 1703; removed
+	CMRemotePlayReplyPacket = 1706;
 
 	BaseDSS = 1800; removed
 	DSSNewFile = 1801; removed
@@ -1235,6 +1236,8 @@ enum EMsg
 	PSGetShoppingCartContentsResponse = 5010;
 	PSAddWalletCreditToShoppingCart = 5011;
 	PSAddWalletCreditToShoppingCartResponse = 5012;
+	PSGetAccountCartContents = 5013;
+	PSGetAccountCartContentsResponse = 5014;
 
 	BaseUFSRange = 5200;
 	ClientUFSUploadFileRequest = 5202;
@@ -1974,6 +1977,7 @@ enum EMsg
 	ClientHello = 9805;
 	ClientEnableOrDisableDownloads = 9806;
 	ClientEnableOrDisableDownloadsResponse = 9807;
+	ClientFeatureGroupInfo = 9808;
 
 	ClientLANP2PBase = 9900;
 	ClientLANP2PRequestChunk = 9900;
@@ -2001,4 +2005,13 @@ enum EMsg
 	BaseSecretServer = 12100;
 	ServerSecretChanged = 12100;
 
+	BaseWG = 12200;
+	WGConnectionProtocolError = 12200;
+	WGConnectionValidateUserToken = 12201;
+	WGConnectionValidateUserTokenResponse = 12202;
+	WGConnectionLegacyWGRequest = 12203;
+	WGConnectionLegacyWGResponse = 12204;
+
+	ClientPendingGameLaunch = 12300;
+	ClientPendingGameLaunchResponse = 12301;
 };
