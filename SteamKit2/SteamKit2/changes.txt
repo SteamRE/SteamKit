@@ -1,4 +1,16 @@
 ------------------------------------------------------------------------------
+v 3.0.0			March 19 2024
+------------------------------------------------------------------------------
+
+* Added a dependency on `System.IO.Hashing`
+* Added `SteamKit2.WebUI.Internal` protobufs
+* Updated Steam enums and protobufs.
+
+BREAKING CHANGES
+* SteamKit now targets .NET 8
+* Removed obsolete methods and enum values
+
+------------------------------------------------------------------------------
 v 2.5.0			November 6 2023
 ------------------------------------------------------------------------------
 * Added `SteamApps.GetLegacyGameKey`.
