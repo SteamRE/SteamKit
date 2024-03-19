@@ -29,7 +29,7 @@ namespace NetHookAnalyzer2
 
             { EMsg.AMGameServerUpdate, typeof(CMsgGameServerData) },
 
-            { EMsg.ClientDPUpdateAppJobReport, typeof(Protobufs.CMsgClientUpdateAppJobReport) },
+            { EMsg.ClientDPUpdateAppJobReport, typeof(SteamKit2.WebUI.Internal.CMsgClientUpdateAppJobReport) },
 
             { EMsg.ClientPlayingSessionState, typeof(CMsgClientPlayingSessionState) },
 

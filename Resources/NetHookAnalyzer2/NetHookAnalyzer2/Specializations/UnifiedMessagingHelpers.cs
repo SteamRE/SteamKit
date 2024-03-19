@@ -18,7 +18,7 @@ namespace NetHookAnalyzer2.Specializations
 			{
 				("SteamKit2", "SteamKit2.Internal"),
 				("SteamKit2", "SteamKit2.Internal.Steamworks"),
-				("NetHookAnalyzer2", "NetHookAnalyzer2.Protobufs"),
+				("SteamKit2", "SteamKit2.WebUI.Internal"),
 			};
 
 			foreach (var (assembly, ns) in namespaces)
