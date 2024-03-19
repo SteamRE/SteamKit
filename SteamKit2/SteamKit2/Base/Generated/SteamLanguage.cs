@@ -1849,6 +1849,8 @@ namespace SteamKit2
 		ChargerRequired = 125,
 		CachedCredentialInvalid = 126,
 		PhoneNumberIsVOIP = 127,
+		NotSupported = 128,
+		FamilySizeLimitExceeded = 129,
 	}
 	public enum EUniverse
 	{

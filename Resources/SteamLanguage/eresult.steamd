@@ -128,4 +128,6 @@ enum EResult
 	ChargerRequired = 125;
 	CachedCredentialInvalid = 126;
 	PhoneNumberIsVOIP = 127;
+	NotSupported = 128;
+	FamilySizeLimitExceeded = 129;
 };
