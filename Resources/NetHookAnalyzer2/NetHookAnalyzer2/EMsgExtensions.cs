@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using SteamKit2;
 
-using Artifact = SteamKit2.GC.Artifact.Internal;
 using CSGO = SteamKit2.GC.CSGO.Internal;
 using Dota = SteamKit2.GC.Dota.Internal;
 using TF2 = SteamKit2.GC.TF2.Internal;
-using Underlords = SteamKit2.GC.Underlords.Internal;
 
 namespace NetHookAnalyzer2
 {
@@ -48,7 +46,7 @@ namespace NetHookAnalyzer2
 					yield return typeof(Dota.EGCBaseClientMsg);
 					break;
 
-				case WellKnownAppIDs.CounterStrikeGlobalOffensive:
+				case WellKnownAppIDs.CounterStrike2:
 					yield return typeof(CSGO.ECsgoGCMsg);
 					yield return typeof(CSGO.EGCBaseMsg);
 					yield return typeof(CSGO.ESOMsg);
@@ -56,26 +54,6 @@ namespace NetHookAnalyzer2
 					yield return typeof(CSGO.EGCItemMsg);
 					yield return typeof(CSGO.EGCBaseClientMsg);
 					break;
-
-				case WellKnownAppIDs.Artifact:
-					yield return typeof(Artifact.EGCBaseMsg);
-					yield return typeof(Artifact.ESOMsg);
-					yield return typeof(Artifact.EGCItemMsg);
-					yield return typeof(Artifact.EGCBaseClientMsg);
-					yield return typeof(Artifact.EGCDCGClientMessages);
-					yield return typeof(Artifact.EGCDCGCommonMessages);
-					yield return typeof(Artifact.EGCDCGServerMessages);
-					break;
-
-                case WellKnownAppIDs.Underlords:
-                    yield return typeof( Underlords.EGCBaseMsg );
-                    yield return typeof( Underlords.ESOMsg );
-                    yield return typeof( Underlords.EGCItemMsg );
-                    yield return typeof( Underlords.EGCBaseClientMsg );
-                    yield return typeof( Underlords.EGCDACClientMessages );
-                    yield return typeof( Underlords.EGCDACCommonMessages );
-                    yield return typeof( Underlords.EGCDACServerMessages );
-                    break;
             }
 		}
 	}
