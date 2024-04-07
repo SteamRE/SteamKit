@@ -126,17 +126,9 @@ namespace NetHookAnalyzer2
 					yield return "SteamKit2.GC.Dota.Internal.CMsg";
 					break;
 
-				case WellKnownAppIDs.CounterStrikeGlobalOffensive:
+				case WellKnownAppIDs.CounterStrike2:
 					yield return "SteamKit2.GC.CSGO.Internal.CMsg";
 					break;
-
-				case WellKnownAppIDs.Artifact:
-					yield return "SteamKit2.GC.Artifact.Internal.CMsg";
-					break;
-
-                case WellKnownAppIDs.Underlords:
-                    yield return "SteamKit2.GC.Underlords.Internal.CMsg";
-                    break;
             }
 		}
 	}
