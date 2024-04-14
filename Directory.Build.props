@@ -17,11 +17,17 @@
         <InformationalVersion Condition=" '$(GitHubActionsRef)' == ''">$(SteamKitVersion) - Development</InformationalVersion>
         <InformationalVersion Condition=" '$(GitHubActionsRef)' != ''">$(SteamKitVersion) - CI (GitHub, ref: $(GitHubActionsRef))</InformationalVersion>
     </PropertyGroup>
+
     <PropertyGroup>
         <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
         <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
         <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
         <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
         <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Deterministic>true</Deterministic>
+        <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
     </PropertyGroup>
 </Project>
