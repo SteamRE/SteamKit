@@ -16,6 +16,22 @@ namespace SteamKit2
     {
 
         /// <summary>
+        /// Represents the chat mode for logging into Steam.
+        /// </summary>
+        public enum ChatMode : uint
+        {
+            /// <summary>
+            /// The default chat mode.
+            /// </summary>
+            Default = 0,
+
+            /// <summary>
+            /// The chat mode for new Steam group chat.
+            /// </summary>
+            NewSteamChat = 2,
+        }
+
+        /// <summary>
         /// Represents the details required to log into Steam3 as a user.
         /// </summary>
         public sealed class LogOnDetails
@@ -116,7 +132,7 @@ namespace SteamKit2
             /// Setting this field to 2 enables support for new Steam group chat.
             /// </summary>
             /// <value>The chat mode.</value>
-            public uint ChatMode { get; set; } = 0;
+            public ChatMode ChatMode { get; set; } = ChatMode.Default;
 
             /// <summary>
             /// Initializes a new instance of the <see cref="LogOnDetails"/> class.
@@ -259,7 +275,7 @@ namespace SteamKit2
             logon.Body.machine_name = details.MachineName;
             logon.Body.machine_id = HardwareUtils.GetMachineID( Client.Configuration.MachineInfoProvider );
 
-            logon.Body.chat_mode = details.ChatMode;
+            logon.Body.chat_mode = ( uint )details.ChatMode;
 
             // steam guard 
             logon.Body.auth_code = details.AuthCode;
