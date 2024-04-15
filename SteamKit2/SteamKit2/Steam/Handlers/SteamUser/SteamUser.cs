@@ -111,6 +111,12 @@ namespace SteamKit2
             /// </summary>
             /// <value>The machine name.</value>
             public string? MachineName { get; set; } = $"{Environment.MachineName} (SteamKit2)";
+            /// <summary>
+            /// Gets or sets the chat mode.
+            /// Setting this field to 2 enables support for new Steam group chat.
+            /// </summary>
+            /// <value>The chat mode.</value>
+            public uint ChatMode { get; set; } = 0;
 
             /// <summary>
             /// Initializes a new instance of the <see cref="LogOnDetails"/> class.
@@ -252,6 +258,8 @@ namespace SteamKit2
             logon.Body.supports_rate_limit_response = true;
             logon.Body.machine_name = details.MachineName;
             logon.Body.machine_id = HardwareUtils.GetMachineID( Client.Configuration.MachineInfoProvider );
+
+            logon.Body.chat_mode = details.ChatMode;
 
             // steam guard 
             logon.Body.auth_code = details.AuthCode;
