@@ -226,16 +226,16 @@ namespace SteamKit2
         /// <returns><c>true</c> if serialization was successful; otherwise, <c>false</c>.</returns>
         public bool SaveToFile( string filename )
         {
-            using var fs = File.Open( filename, FileMode.Create );
-            using var bw = new BinaryWriter( fs );
-            var data = Serialize();
-            if ( data != null )
+            try
             {
-                bw.Write( data );
-                return true;
+                using var fs = File.Open( filename, FileMode.Create );
+                Serialize( fs ); // Directly pass the FileStream to the Serialize method
+                return true; // If serialization completes without throwing an exception, return true
             }
-
-            return false;
+            catch ( Exception )
+            {
+                return false; // Return false if an error occurs
+            }
         }
 
         /// <summary>
@@ -390,10 +390,10 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Serializes the depot manifest into a byte array.
+        /// Serializes the depot manifest into the provided output stream.
         /// </summary>
-        /// <returns>A byte array containing the serialized depot manifest. Returns <c>null</c> if serialization fails.</returns>
-        public byte[]? Serialize()
+        /// <param name="output">The stream to which the serialized depot manifest will be written.</param>
+        public void Serialize( Stream output )
         {
             DebugLog.Assert( Files != null, nameof( DepotManifest ), "Files was null when attempting to serialize manifest." );
 
@@ -469,8 +469,7 @@ namespace SteamKit2
                 }
             }
 
-            using var ms = new MemoryStream();
-            using var bw = new BinaryWriter( ms );
+            using var bw = new BinaryWriter( output, Encoding.Default, true );
 
             // Write Protobuf payload
             using ( var ms_payload = new MemoryStream() )
@@ -496,8 +495,6 @@ namespace SteamKit2
 
             // Write EOF marker
             bw.Write( DepotManifest.PROTOBUF_ENDOFMANIFEST_MAGIC );
-
-            return ms.ToArray();
         }
     }
 }
