@@ -7,69 +7,60 @@ namespace SteamKit2
 {
     internal static class StreamHelpers
     {
-        [ThreadStatic]
-        static byte[]? data;
-
-        [MemberNotNull(nameof(data))]
-        static void EnsureInitialized()
-        {
-            data ??= new byte[ 8 ];
-        }
-
         public static short ReadInt16(this Stream stream)
         {
-            EnsureInitialized();
+            Span<byte> data = stackalloc byte[2];
 
-            stream.Read( data, 0, 2 );
-            return BitConverter.ToInt16( data, 0 );
+            stream.Read( data );
+            return BitConverter.ToInt16( data );
         }
 
         public static ushort ReadUInt16(this Stream stream)
         {
-            EnsureInitialized();
+            Span<byte> data = stackalloc byte[2];
 
-            stream.Read( data, 0, 2 );
-            return BitConverter.ToUInt16( data, 0);
+            stream.Read( data );
+            return BitConverter.ToUInt16( data );
         }
 
         public static int ReadInt32(this Stream stream)
         {
-            EnsureInitialized();
+            Span<byte> data = stackalloc byte[4];
 
-            stream.Read( data, 0, 4 );
-            return BitConverter.ToInt32( data, 0 );
+            stream.Read( data );
+            return BitConverter.ToInt32( data );
         }
 
         public static long ReadInt64(this Stream stream)
         {
-            EnsureInitialized();
+            Span<byte> data = stackalloc byte[8];
 
-            stream.Read( data, 0, 8 );
-            return BitConverter.ToInt64( data, 0 );
+            stream.Read( data );
+            return BitConverter.ToInt64( data );
         }
 
         public static uint ReadUInt32(this Stream stream)
         {
-            EnsureInitialized();
+            Span<byte> data = stackalloc byte[4];
 
-            stream.Read(data, 0, 4);
-            return BitConverter.ToUInt32( data, 0);
+            stream.Read( data );
+            return BitConverter.ToUInt32( data );
         }
 
         public static ulong ReadUInt64(this Stream stream)
         {
-            EnsureInitialized();
+            Span<byte> data = stackalloc byte[8];
 
-            stream.Read( data, 0, 8 );
-            return BitConverter.ToUInt64( data, 0 );
+            stream.Read( data );
+            return BitConverter.ToUInt64( data );
         }
 
         public static float ReadFloat( this Stream stream )
         {
-            EnsureInitialized();
+            Span<byte> data = stackalloc byte[4];
 
-            stream.Read( data, 0, 4 );
-            return BitConverter.ToSingle( data, 0 );
+            stream.Read( data );
+            return BitConverter.ToSingle( data );
         }
 
         public static string ReadNullTermString( this Stream stream, Encoding encoding )
