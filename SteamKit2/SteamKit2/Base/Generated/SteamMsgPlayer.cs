@@ -722,6 +722,16 @@ namespace SteamKit2.Internal
             public void Resetplaytime_linux_forever() => __pbn__playtime_linux_forever = null;
             private int? __pbn__playtime_linux_forever;
 
+            [global::ProtoBuf.ProtoMember(20)]
+            public int playtime_deck_forever
+            {
+                get => __pbn__playtime_deck_forever.GetValueOrDefault();
+                set => __pbn__playtime_deck_forever = value;
+            }
+            public bool ShouldSerializeplaytime_deck_forever() => __pbn__playtime_deck_forever != null;
+            public void Resetplaytime_deck_forever() => __pbn__playtime_deck_forever = null;
+            private int? __pbn__playtime_deck_forever;
+
             [global::ProtoBuf.ProtoMember(11)]
             public uint rtime_last_played
             {
@@ -3372,6 +3382,16 @@ namespace SteamKit2.Internal
             public void Resetplaytime_linux_forever() => __pbn__playtime_linux_forever = null;
             private int? __pbn__playtime_linux_forever;
 
+            [global::ProtoBuf.ProtoMember(16)]
+            public int playtime_deck_forever
+            {
+                get => __pbn__playtime_deck_forever.GetValueOrDefault();
+                set => __pbn__playtime_deck_forever = value;
+            }
+            public bool ShouldSerializeplaytime_deck_forever() => __pbn__playtime_deck_forever != null;
+            public void Resetplaytime_deck_forever() => __pbn__playtime_deck_forever = null;
+            private int? __pbn__playtime_deck_forever;
+
             [global::ProtoBuf.ProtoMember(9)]
             public uint first_windows_playtime
             {
@@ -3402,6 +3422,16 @@ namespace SteamKit2.Internal
             public void Resetfirst_linux_playtime() => __pbn__first_linux_playtime = null;
             private uint? __pbn__first_linux_playtime;
 
+            [global::ProtoBuf.ProtoMember(17)]
+            public uint first_deck_playtime
+            {
+                get => __pbn__first_deck_playtime.GetValueOrDefault();
+                set => __pbn__first_deck_playtime = value;
+            }
+            public bool ShouldSerializefirst_deck_playtime() => __pbn__first_deck_playtime != null;
+            public void Resetfirst_deck_playtime() => __pbn__first_deck_playtime = null;
+            private uint? __pbn__first_deck_playtime;
+
             [global::ProtoBuf.ProtoMember(12)]
             public uint last_windows_playtime
             {
@@ -3431,6 +3461,16 @@ namespace SteamKit2.Internal
             public bool ShouldSerializelast_linux_playtime() => __pbn__last_linux_playtime != null;
             public void Resetlast_linux_playtime() => __pbn__last_linux_playtime = null;
             private uint? __pbn__last_linux_playtime;
+
+            [global::ProtoBuf.ProtoMember(18)]
+            public uint last_deck_playtime
+            {
+                get => __pbn__last_deck_playtime.GetValueOrDefault();
+                set => __pbn__last_deck_playtime = value;
+            }
+            public bool ShouldSerializelast_deck_playtime() => __pbn__last_deck_playtime != null;
+            public void Resetlast_deck_playtime() => __pbn__last_deck_playtime = null;
+            private uint? __pbn__last_deck_playtime;
 
             [global::ProtoBuf.ProtoMember(15)]
             public uint playtime_disconnected

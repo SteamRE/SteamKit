@@ -212,6 +212,9 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public global::System.Collections.Generic.List<string> itempropsjson { get; } = new global::System.Collections.Generic.List<string>();
 
+        [global::ProtoBuf.ProtoMember(9)]
+        public global::System.Collections.Generic.List<uint> itemquantity { get; } = new global::System.Collections.Generic.List<uint>();
+
         [global::ProtoBuf.ProtoMember(4)]
         public ulong steamid
         {

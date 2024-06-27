@@ -1129,6 +1129,214 @@ namespace SteamKit2.Internal
         public void Resetlibrary_low_perf_mode_enabled() => __pbn__library_low_perf_mode_enabled = null;
         private bool? __pbn__library_low_perf_mode_enabled;
 
+        [global::ProtoBuf.ProtoMember(10)]
+        public int gr_mode
+        {
+            get => __pbn__gr_mode.GetValueOrDefault();
+            set => __pbn__gr_mode = value;
+        }
+        public bool ShouldSerializegr_mode() => __pbn__gr_mode != null;
+        public void Resetgr_mode() => __pbn__gr_mode = null;
+        private int? __pbn__gr_mode;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientMetrics_ClipShare_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(2u)]
+        public uint eresult
+        {
+            get => __pbn__eresult ?? 2u;
+            set => __pbn__eresult = value;
+        }
+        public bool ShouldSerializeeresult() => __pbn__eresult != null;
+        public void Reseteresult() => __pbn__eresult = null;
+        private uint? __pbn__eresult;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(EClipShareMethod.k_EClipShareMethod_Chat)]
+        public EClipShareMethod share_method
+        {
+            get => __pbn__share_method ?? EClipShareMethod.k_EClipShareMethod_Chat;
+            set => __pbn__share_method = value;
+        }
+        public bool ShouldSerializeshare_method() => __pbn__share_method != null;
+        public void Resetshare_method() => __pbn__share_method = null;
+        private EClipShareMethod? __pbn__share_method;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public float seconds
+        {
+            get => __pbn__seconds.GetValueOrDefault();
+            set => __pbn__seconds = value;
+        }
+        public bool ShouldSerializeseconds() => __pbn__seconds != null;
+        public void Resetseconds() => __pbn__seconds = null;
+        private float? __pbn__seconds;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public ulong bytes
+        {
+            get => __pbn__bytes.GetValueOrDefault();
+            set => __pbn__bytes = value;
+        }
+        public bool ShouldSerializebytes() => __pbn__bytes != null;
+        public void Resetbytes() => __pbn__bytes = null;
+        private ulong? __pbn__bytes;
+
+        [global::ProtoBuf.ProtoMember(5, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong gameid
+        {
+            get => __pbn__gameid.GetValueOrDefault();
+            set => __pbn__gameid = value;
+        }
+        public bool ShouldSerializegameid() => __pbn__gameid != null;
+        public void Resetgameid() => __pbn__gameid = null;
+        private ulong? __pbn__gameid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientMetrics_ClipRange_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EClipRangeMethod.k_EClipRangeMethod_CreateClipButton)]
+        public EClipRangeMethod original_range_method
+        {
+            get => __pbn__original_range_method ?? EClipRangeMethod.k_EClipRangeMethod_CreateClipButton;
+            set => __pbn__original_range_method = value;
+        }
+        public bool ShouldSerializeoriginal_range_method() => __pbn__original_range_method != null;
+        public void Resetoriginal_range_method() => __pbn__original_range_method = null;
+        private EClipRangeMethod? __pbn__original_range_method;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public RelativeRangeEdge start { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public RelativeRangeEdge end { get; set; }
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public float seconds
+        {
+            get => __pbn__seconds.GetValueOrDefault();
+            set => __pbn__seconds = value;
+        }
+        public bool ShouldSerializeseconds() => __pbn__seconds != null;
+        public void Resetseconds() => __pbn__seconds = null;
+        private float? __pbn__seconds;
+
+        [global::ProtoBuf.ProtoMember(5, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong gameid
+        {
+            get => __pbn__gameid.GetValueOrDefault();
+            set => __pbn__gameid = value;
+        }
+        public bool ShouldSerializegameid() => __pbn__gameid != null;
+        public void Resetgameid() => __pbn__gameid = null;
+        private ulong? __pbn__gameid;
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class RelativeRangeEdge : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue(EClipRangeMethod.k_EClipRangeMethod_CreateClipButton)]
+            public EClipRangeMethod original_range_method
+            {
+                get => __pbn__original_range_method ?? EClipRangeMethod.k_EClipRangeMethod_CreateClipButton;
+                set => __pbn__original_range_method = value;
+            }
+            public bool ShouldSerializeoriginal_range_method() => __pbn__original_range_method != null;
+            public void Resetoriginal_range_method() => __pbn__original_range_method = null;
+            private EClipRangeMethod? __pbn__original_range_method;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue(EClipRangeMethod.k_EClipRangeMethod_CreateClipButton)]
+            public EClipRangeMethod latest_range_method
+            {
+                get => __pbn__latest_range_method ?? EClipRangeMethod.k_EClipRangeMethod_CreateClipButton;
+                set => __pbn__latest_range_method = value;
+            }
+            public bool ShouldSerializelatest_range_method() => __pbn__latest_range_method != null;
+            public void Resetlatest_range_method() => __pbn__latest_range_method = null;
+            private EClipRangeMethod? __pbn__latest_range_method;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public int delta_ms
+            {
+                get => __pbn__delta_ms.GetValueOrDefault();
+                set => __pbn__delta_ms = value;
+            }
+            public bool ShouldSerializedelta_ms() => __pbn__delta_ms != null;
+            public void Resetdelta_ms() => __pbn__delta_ms = null;
+            private int? __pbn__delta_ms;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientMetrics_EndGameRecording_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EGameRecordingType.k_EGameRecordingType_Unknown)]
+        public EGameRecordingType recording_type
+        {
+            get => __pbn__recording_type ?? EGameRecordingType.k_EGameRecordingType_Unknown;
+            set => __pbn__recording_type = value;
+        }
+        public bool ShouldSerializerecording_type() => __pbn__recording_type != null;
+        public void Resetrecording_type() => __pbn__recording_type = null;
+        private EGameRecordingType? __pbn__recording_type;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public float seconds
+        {
+            get => __pbn__seconds.GetValueOrDefault();
+            set => __pbn__seconds = value;
+        }
+        public bool ShouldSerializeseconds() => __pbn__seconds != null;
+        public void Resetseconds() => __pbn__seconds = null;
+        private float? __pbn__seconds;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong bytes
+        {
+            get => __pbn__bytes.GetValueOrDefault();
+            set => __pbn__bytes = value;
+        }
+        public bool ShouldSerializebytes() => __pbn__bytes != null;
+        public void Resetbytes() => __pbn__bytes = null;
+        private ulong? __pbn__bytes;
+
+        [global::ProtoBuf.ProtoMember(4, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong gameid
+        {
+            get => __pbn__gameid.GetValueOrDefault();
+            set => __pbn__gameid = value;
+        }
+        public bool ShouldSerializegameid() => __pbn__gameid != null;
+        public void Resetgameid() => __pbn__gameid = null;
+        private ulong? __pbn__gameid;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1147,6 +1355,28 @@ namespace SteamKit2.Internal
         k_ESteamPipeOperationType_DiskWrite = 3,
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public enum EClipShareMethod
+    {
+        k_EClipShareMethod_Chat = 1,
+        k_EClipShareMethod_Clipboard = 2,
+        k_EClipShareMethod_File = 3,
+        k_EClipShareMethod_SendClip = 4,
+        k_EClipShareMethod_SaveToMedia = 5,
+        k_EClipShareMethod_CreateLink = 6,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EClipRangeMethod
+    {
+        k_EClipRangeMethod_CreateClipButton = 1,
+        k_EClipRangeMethod_Highlight = 2,
+        k_EClipRangeMethod_BeginEndButtons = 3,
+        k_EClipRangeMethod_ContextMenu = 4,
+        k_EClipRangeMethod_Drag = 5,
+        k_EClipRangeMethod_EntireClip = 6,
+    }
+
     public interface IClientMetrics
     {
         NoResponse ClientAppInterfaceStatsReport(CClientMetrics_AppInterfaceStats_Notification request);
@@ -1160,6 +1390,9 @@ namespace SteamKit2.Internal
         NoResponse ClientCloudAppSyncStats(CClientMetrics_CloudAppSyncStats_Notification request);
         NoResponse ClientDownloadResponseCodeCounts(CClientMetrics_ContentDownloadResponse_Counts_Notification request);
         NoResponse ReportClientArgs(CClientMetrics_ReportClientArgs_Notification request);
+        NoResponse ReportClipShare(CClientMetrics_ClipShare_Notification request);
+        NoResponse ReportClipRange(CClientMetrics_ClipRange_Notification request);
+        NoResponse ReportEndGameRecording(CClientMetrics_EndGameRecording_Notification request);
     }
 
 }

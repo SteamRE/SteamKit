@@ -2349,35 +2349,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgDOTARewardTutorialPrizes : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint location_id
-        {
-            get => __pbn__location_id.GetValueOrDefault();
-            set => __pbn__location_id = value;
-        }
-        public bool ShouldSerializelocation_id() => __pbn__location_id != null;
-        public void Resetlocation_id() => __pbn__location_id = null;
-        private uint? __pbn__location_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public bool tracking_only
-        {
-            get => __pbn__tracking_only.GetValueOrDefault();
-            set => __pbn__tracking_only = value;
-        }
-        public bool ShouldSerializetracking_only() => __pbn__tracking_only != null;
-        public void Resettracking_only() => __pbn__tracking_only = null;
-        private bool? __pbn__tracking_only;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgFlipLobbyTeams : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2519,168 +2490,6 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(4)]
         public CMsgDOTAClaimEventActionData data { get; set; }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgDOTAClaimEventActionResponse : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(ResultCode.Success)]
-        public ResultCode result
-        {
-            get => __pbn__result ?? ResultCode.Success;
-            set => __pbn__result = value;
-        }
-        public bool ShouldSerializeresult() => __pbn__result != null;
-        public void Resetresult() => __pbn__result = null;
-        private ResultCode? __pbn__result;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<GrantedRewardData> reward_results { get; } = new global::System.Collections.Generic.List<GrantedRewardData>();
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class MysteryItemRewardData : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint item_def
-            {
-                get => __pbn__item_def.GetValueOrDefault();
-                set => __pbn__item_def = value;
-            }
-            public bool ShouldSerializeitem_def() => __pbn__item_def != null;
-            public void Resetitem_def() => __pbn__item_def = null;
-            private uint? __pbn__item_def;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public uint item_category
-            {
-                get => __pbn__item_category.GetValueOrDefault();
-                set => __pbn__item_category = value;
-            }
-            public bool ShouldSerializeitem_category() => __pbn__item_category != null;
-            public void Resetitem_category() => __pbn__item_category = null;
-            private uint? __pbn__item_category;
-
-        }
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class LootListRewardData : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public global::System.Collections.Generic.List<uint> item_def { get; } = new global::System.Collections.Generic.List<uint>();
-
-        }
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class ActionListRewardData : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint action_id
-            {
-                get => __pbn__action_id.GetValueOrDefault();
-                set => __pbn__action_id = value;
-            }
-            public bool ShouldSerializeaction_id() => __pbn__action_id != null;
-            public void Resetaction_id() => __pbn__action_id = null;
-            private uint? __pbn__action_id;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public byte[] result_reward_data
-            {
-                get => __pbn__result_reward_data;
-                set => __pbn__result_reward_data = value;
-            }
-            public bool ShouldSerializeresult_reward_data() => __pbn__result_reward_data != null;
-            public void Resetresult_reward_data() => __pbn__result_reward_data = null;
-            private byte[] __pbn__result_reward_data;
-
-        }
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class GrantedRewardData : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint grant_index
-            {
-                get => __pbn__grant_index.GetValueOrDefault();
-                set => __pbn__grant_index = value;
-            }
-            public bool ShouldSerializegrant_index() => __pbn__grant_index != null;
-            public void Resetgrant_index() => __pbn__grant_index = null;
-            private uint? __pbn__grant_index;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public uint score_index
-            {
-                get => __pbn__score_index.GetValueOrDefault();
-                set => __pbn__score_index = value;
-            }
-            public bool ShouldSerializescore_index() => __pbn__score_index != null;
-            public void Resetscore_index() => __pbn__score_index = null;
-            private uint? __pbn__score_index;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public uint reward_index
-            {
-                get => __pbn__reward_index.GetValueOrDefault();
-                set => __pbn__reward_index = value;
-            }
-            public bool ShouldSerializereward_index() => __pbn__reward_index != null;
-            public void Resetreward_index() => __pbn__reward_index = null;
-            private uint? __pbn__reward_index;
-
-            [global::ProtoBuf.ProtoMember(4)]
-            public byte[] reward_data
-            {
-                get => __pbn__reward_data;
-                set => __pbn__reward_data = value;
-            }
-            public bool ShouldSerializereward_data() => __pbn__reward_data != null;
-            public void Resetreward_data() => __pbn__reward_data = null;
-            private byte[] __pbn__reward_data;
-
-        }
-
-        [global::ProtoBuf.ProtoContract()]
-        public enum ResultCode
-        {
-            Success = 0,
-            InvalidEvent = 1,
-            EventNotActive = 2,
-            InvalidAction = 3,
-            ServerError = 4,
-            InsufficientPoints = 5,
-            InsufficentLevel = 6,
-            AlreadyClaimed = 7,
-            SDOLockFailure = 8,
-            SDOLoadFailure = 9,
-            EventNotOwned = 10,
-            Timeout = 11,
-            RequiresPlusSubscription = 12,
-            InvalidItem = 13,
-            AsyncRewards = 14,
-        }
 
     }
 
@@ -3480,6 +3289,16 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializeugc_team_ui_logo() => __pbn__ugc_team_ui_logo != null;
             public void Resetugc_team_ui_logo() => __pbn__ugc_team_ui_logo = null;
             private ulong? __pbn__ugc_team_ui_logo;
+
+            [global::ProtoBuf.ProtoMember(22)]
+            public uint selected_facet
+            {
+                get => __pbn__selected_facet.GetValueOrDefault();
+                set => __pbn__selected_facet = value;
+            }
+            public bool ShouldSerializeselected_facet() => __pbn__selected_facet != null;
+            public void Resetselected_facet() => __pbn__selected_facet = null;
+            private uint? __pbn__selected_facet;
 
         }
 
@@ -15885,6 +15704,112 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCSetBannedHeroes : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<uint> banned_hero_ids { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCUpdateComicBookStats : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint comic_id
+        {
+            get => __pbn__comic_id.GetValueOrDefault();
+            set => __pbn__comic_id = value;
+        }
+        public bool ShouldSerializecomic_id() => __pbn__comic_id != null;
+        public void Resetcomic_id() => __pbn__comic_id = null;
+        private uint? __pbn__comic_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<SingleStat> stats { get; } = new global::System.Collections.Generic.List<SingleStat>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public LanguageStats language_stats { get; set; }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class SingleStat : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue(CMsgClientToGCUpdateComicBookStat_Type.CMsgClientToGCUpdateComicBookStat_Type_HighestPageRead)]
+            public CMsgClientToGCUpdateComicBookStat_Type stat_type
+            {
+                get => __pbn__stat_type ?? CMsgClientToGCUpdateComicBookStat_Type.CMsgClientToGCUpdateComicBookStat_Type_HighestPageRead;
+                set => __pbn__stat_type = value;
+            }
+            public bool ShouldSerializestat_type() => __pbn__stat_type != null;
+            public void Resetstat_type() => __pbn__stat_type = null;
+            private CMsgClientToGCUpdateComicBookStat_Type? __pbn__stat_type;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint stat_value
+            {
+                get => __pbn__stat_value.GetValueOrDefault();
+                set => __pbn__stat_value = value;
+            }
+            public bool ShouldSerializestat_value() => __pbn__stat_value != null;
+            public void Resetstat_value() => __pbn__stat_value = null;
+            private uint? __pbn__stat_value;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class LanguageStats : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint comic_id
+            {
+                get => __pbn__comic_id.GetValueOrDefault();
+                set => __pbn__comic_id = value;
+            }
+            public bool ShouldSerializecomic_id() => __pbn__comic_id != null;
+            public void Resetcomic_id() => __pbn__comic_id = null;
+            private uint? __pbn__comic_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint client_language
+            {
+                get => __pbn__client_language.GetValueOrDefault();
+                set => __pbn__client_language = value;
+            }
+            public bool ShouldSerializeclient_language() => __pbn__client_language != null;
+            public void Resetclient_language() => __pbn__client_language = null;
+            private uint? __pbn__client_language;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint client_comic_language
+            {
+                get => __pbn__client_comic_language.GetValueOrDefault();
+                set => __pbn__client_comic_language = value;
+            }
+            public bool ShouldSerializeclient_comic_language() => __pbn__client_comic_language != null;
+            public void Resetclient_comic_language() => __pbn__client_comic_language = null;
+            private uint? __pbn__client_comic_language;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum CMsgDOTARequestMatches_SkillLevel
     {
         CMsgDOTARequestMatches_SkillLevel_Any = 0,
@@ -15999,6 +15924,14 @@ namespace SteamKit2.GC.Dota.Internal
         k_EDOTADraftTriviaAnswerResult_InternalError = 3,
         k_EDOTADraftTriviaAnswerResult_TriviaDisabled = 4,
         k_EDOTADraftTriviaAnswerResult_GCDown = 5,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum CMsgClientToGCUpdateComicBookStat_Type
+    {
+        CMsgClientToGCUpdateComicBookStat_Type_HighestPageRead = 1,
+        CMsgClientToGCUpdateComicBookStat_Type_SecondsSpentReading = 2,
+        CMsgClientToGCUpdateComicBookStat_Type_HighestPercentRead = 3,
     }
 
 }

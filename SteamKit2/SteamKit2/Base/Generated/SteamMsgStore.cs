@@ -1560,6 +1560,113 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_GetWishlistDemoEmailStatus_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint demo_appid
+        {
+            get => __pbn__demo_appid.GetValueOrDefault();
+            set => __pbn__demo_appid = value;
+        }
+        public bool ShouldSerializedemo_appid() => __pbn__demo_appid != null;
+        public void Resetdemo_appid() => __pbn__demo_appid = null;
+        private uint? __pbn__demo_appid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_GetWishlistDemoEmailStatus_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(false)]
+        public bool can_fire
+        {
+            get => __pbn__can_fire ?? false;
+            set => __pbn__can_fire = value;
+        }
+        public bool ShouldSerializecan_fire() => __pbn__can_fire != null;
+        public void Resetcan_fire() => __pbn__can_fire = null;
+        private bool? __pbn__can_fire;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint time_staged
+        {
+            get => __pbn__time_staged.GetValueOrDefault();
+            set => __pbn__time_staged = value;
+        }
+        public bool ShouldSerializetime_staged() => __pbn__time_staged != null;
+        public void Resettime_staged() => __pbn__time_staged = null;
+        private uint? __pbn__time_staged;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint demo_release_date
+        {
+            get => __pbn__demo_release_date.GetValueOrDefault();
+            set => __pbn__demo_release_date = value;
+        }
+        public bool ShouldSerializedemo_release_date() => __pbn__demo_release_date != null;
+        public void Resetdemo_release_date() => __pbn__demo_release_date = null;
+        private uint? __pbn__demo_release_date;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_QueueWishlistDemoEmailToFire_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint demo_appid
+        {
+            get => __pbn__demo_appid.GetValueOrDefault();
+            set => __pbn__demo_appid = value;
+        }
+        public bool ShouldSerializedemo_appid() => __pbn__demo_appid != null;
+        public void Resetdemo_appid() => __pbn__demo_appid = null;
+        private uint? __pbn__demo_appid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_QueueWishlistDemoEmailToFire_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CReservationPositionMessage : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1938,6 +2045,8 @@ namespace SteamKit2.Internal
         CStore_GetTrendingAppsAmongFriends_Response GetTrendingAppsAmongFriends(CStore_GetTrendingAppsAmongFriends_Request request);
         NoResponse MigratePartnerLinkTracking(CStore_MigratePartnerLinkTracking_Notification request);
         CStore_UpdatePackageReservations_Response UpdatePackageReservations(CStore_UpdatePackageReservations_Request request);
+        CStore_GetWishlistDemoEmailStatus_Response GetWishlistDemoEmailStatus(CStore_GetWishlistDemoEmailStatus_Request request);
+        CStore_QueueWishlistDemoEmailToFire_Response QueueWishlistDemoEmailToFire(CStore_QueueWishlistDemoEmailToFire_Request request);
         CStore_SetReservationPositionMessage_Response SetReservationPositionMessage(CStore_SetReservationPositionMessage_Request request);
         CStore_DeleteReservationPositionMessage_Response DeleteReservationPositionMessage(CStore_DeleteReservationPositionMessage_Request request);
         CStore_GetAllReservationPositionMessages_Response GetAllReservationPositionMessages(CStore_GetAllReservationPositionMessages_Request request);

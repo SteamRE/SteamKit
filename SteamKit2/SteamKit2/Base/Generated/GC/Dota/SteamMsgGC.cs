@@ -66,6 +66,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetsource_reference_id() => __pbn__source_reference_id = null;
         private ulong? __pbn__source_reference_id;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public int price_index
+        {
+            get => __pbn__price_index.GetValueOrDefault();
+            set => __pbn__price_index = value;
+        }
+        public bool ShouldSerializeprice_index() => __pbn__price_index != null;
+        public void Resetprice_index() => __pbn__price_index = null;
+        private int? __pbn__price_index;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

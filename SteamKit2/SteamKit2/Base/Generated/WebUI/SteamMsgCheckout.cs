@@ -129,6 +129,16 @@ namespace SteamKit2.WebUI.Internal
         public void Resetgidreplayoftransid() => __pbn__gidreplayoftransid = null;
         private ulong? __pbn__gidreplayoftransid;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool for_init_purchase
+        {
+            get => __pbn__for_init_purchase.GetValueOrDefault();
+            set => __pbn__for_init_purchase = value;
+        }
+        public bool ShouldSerializefor_init_purchase() => __pbn__for_init_purchase != null;
+        public void Resetfor_init_purchase() => __pbn__for_init_purchase = null;
+        private bool? __pbn__for_init_purchase;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -193,6 +203,26 @@ namespace SteamKit2.WebUI.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public CartAmount coupon_discount { get; set; }
 
+        [global::ProtoBuf.ProtoMember(12)]
+        public bool can_purchase_as_gift
+        {
+            get => __pbn__can_purchase_as_gift.GetValueOrDefault();
+            set => __pbn__can_purchase_as_gift = value;
+        }
+        public bool ShouldSerializecan_purchase_as_gift() => __pbn__can_purchase_as_gift != null;
+        public void Resetcan_purchase_as_gift() => __pbn__can_purchase_as_gift = null;
+        private bool? __pbn__can_purchase_as_gift;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public bool restrict_add_additional_to_cart
+        {
+            get => __pbn__restrict_add_additional_to_cart.GetValueOrDefault();
+            set => __pbn__restrict_add_additional_to_cart = value;
+        }
+        public bool ShouldSerializerestrict_add_additional_to_cart() => __pbn__restrict_add_additional_to_cart != null;
+        public void Resetrestrict_add_additional_to_cart() => __pbn__restrict_add_additional_to_cart = null;
+        private bool? __pbn__restrict_add_additional_to_cart;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -247,6 +277,49 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializecoupon_exclusive_promo() => __pbn__coupon_exclusive_promo != null;
         public void Resetcoupon_exclusive_promo() => __pbn__coupon_exclusive_promo = null;
         private bool? __pbn__coupon_exclusive_promo;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool cannot_purchase_as_gift
+        {
+            get => __pbn__cannot_purchase_as_gift.GetValueOrDefault();
+            set => __pbn__cannot_purchase_as_gift = value;
+        }
+        public bool ShouldSerializecannot_purchase_as_gift() => __pbn__cannot_purchase_as_gift != null;
+        public void Resetcannot_purchase_as_gift() => __pbn__cannot_purchase_as_gift = null;
+        private bool? __pbn__cannot_purchase_as_gift;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public bool invalid_item
+        {
+            get => __pbn__invalid_item.GetValueOrDefault();
+            set => __pbn__invalid_item = value;
+        }
+        public bool ShouldSerializeinvalid_item() => __pbn__invalid_item != null;
+        public void Resetinvalid_item() => __pbn__invalid_item = null;
+        private bool? __pbn__invalid_item;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public bool too_many_in_cart
+        {
+            get => __pbn__too_many_in_cart.GetValueOrDefault();
+            set => __pbn__too_many_in_cart = value;
+        }
+        public bool ShouldSerializetoo_many_in_cart() => __pbn__too_many_in_cart != null;
+        public void Resettoo_many_in_cart() => __pbn__too_many_in_cart = null;
+        private bool? __pbn__too_many_in_cart;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public bool has_existing_billing_agreement
+        {
+            get => __pbn__has_existing_billing_agreement.GetValueOrDefault();
+            set => __pbn__has_existing_billing_agreement = value;
+        }
+        public bool ShouldSerializehas_existing_billing_agreement() => __pbn__has_existing_billing_agreement != null;
+        public void Resethas_existing_billing_agreement() => __pbn__has_existing_billing_agreement = null;
+        private bool? __pbn__has_existing_billing_agreement;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public global::System.Collections.Generic.List<int> missing_must_own_appids { get; } = new global::System.Collections.Generic.List<int>();
 
     }
 

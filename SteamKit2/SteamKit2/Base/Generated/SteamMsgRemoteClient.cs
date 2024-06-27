@@ -13,6 +13,8 @@ namespace SteamKit2.Internal
     {
         CRemoteClient_GetPairingInfo_Response GetPairingInfo(CRemoteClient_GetPairingInfo_Request request);
         NoResponse NotifyOnline(CRemoteClient_Online_Notification request);
+        CRemoteClient_GetRecentClients_Response GetRecentClients(CRemoteClient_GetRecentClients_Request request);
+        CRemoteClient_MarkTaskComplete_Response MarkTaskComplete(CRemoteClient_MarkTaskComplete_Request request);
         NoResponse NotifyReplyPacket(CRemoteClient_ReplyPacket_Notification request);
         CRemoteClient_AllocateRelayServer_Response AllocateRelayServer(CRemoteClient_AllocateRelayServer_Request request);
         CRemoteClient_AllocateSDR_Response AllocateSDR(CRemoteClient_AllocateSDR_Request request);
@@ -33,6 +35,7 @@ namespace SteamKit2.Internal
         NoResponse NotifySteamBroadcastPacket(CRemoteClient_SteamBroadcast_Notification request);
         NoResponse NotifySteamToSteamPacket(CRemoteClient_SteamToSteam_Notification request);
         NoResponse NotifyRemotePlayTogetherPacket(CRemotePlayTogether_Notification request);
+        NoResponse NotifyTaskList(CRemoteClient_TaskList_Notification request);
     }
 
 }

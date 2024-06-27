@@ -44,6 +44,7 @@ steam,steammessages_lobbymatchmaking.steamclient.proto,SteamMsgLobbyMatchmaking.
 steam,steammessages_market.steamclient.proto,SteamMsgMarket.cs,SteamKit2.Internal
 steam,steammessages_marketingmessages.steamclient.proto,SteamMsgMarketingMessages.cs,SteamKit2.Internal
 steam,steammessages_offline.steamclient.proto,SteamMsgOffline.cs,SteamKit2.Internal
+steam,steammessages_parental_objects.proto,SteamMsgParentalObjects.cs,SteamKit2.Internal
 steam,steammessages_parental.steamclient.proto,SteamMsgParental.cs,SteamKit2.Internal
 steam,steammessages_parties.steamclient.proto,SteamMsgParties.cs,SteamKit2.Internal
 steam,steammessages_partnerapps.steamclient.proto,SteamMsgPartnerApps.cs,SteamKit2.Internal
@@ -91,6 +92,7 @@ dota2,dota_gcmessages_common.proto,GC\Dota\MsgGCCommon.cs,SteamKit2.GC.Dota.Inte
 dota2,dota_gcmessages_common_league.proto,GC\Dota\MsgGCCommonLeague.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_common_lobby.proto,GC\Dota\MsgGCCommonLobby.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_common_match_management.proto,GC\Dota\MsgGCCommonMatchMgmt.cs,SteamKit2.GC.Dota.Internal
+dota2,dota_gcmessages_common_overworld.proto,GC\Dota\MsgGCCommonOverworld.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_msgid.proto,GC\Dota\MsgGCMsgId.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_server.proto,GC\Dota\MsgGCServer.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_match_metadata.proto,GC\Dota\MsgMatchMetadata.cs,SteamKit2.GC.Dota.Internal

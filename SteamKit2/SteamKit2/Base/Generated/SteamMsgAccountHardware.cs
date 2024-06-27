@@ -846,6 +846,9 @@ namespace SteamKit2.Internal
         k_EValveIndexComponentHMD = 1,
         k_EValveIndexComponentLeftKnuckle = 2,
         k_EValveIndexComponentRightKnuckle = 3,
+        k_ETempDTst1 = 4,
+        k_ETempDTst2 = 5,
+        k_ETempDTst3 = 6,
     }
 
     public interface IAccountHardware

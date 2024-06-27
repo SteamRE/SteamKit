@@ -420,6 +420,23 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public global::System.Collections.Generic.List<uint> declined_ids { get; } = new global::System.Collections.Generic.List<uint>();
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<uint> accepted_indices { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public global::System.Collections.Generic.List<uint> declined_indices { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue(DOTALobbyReadyState.DOTALobbyReadyState_UNDECLARED)]
+        public DOTALobbyReadyState local_ready_state
+        {
+            get => __pbn__local_ready_state ?? DOTALobbyReadyState.DOTALobbyReadyState_UNDECLARED;
+            set => __pbn__local_ready_state = value;
+        }
+        public bool ShouldSerializelocal_ready_state() => __pbn__local_ready_state != null;
+        public void Resetlocal_ready_state() => __pbn__local_ready_state = null;
+        private DOTALobbyReadyState? __pbn__local_ready_state;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

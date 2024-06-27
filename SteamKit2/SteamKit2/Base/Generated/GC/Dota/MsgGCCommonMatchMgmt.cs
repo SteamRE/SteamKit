@@ -142,6 +142,9 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetis_steam_china() => __pbn__is_steam_china = null;
         private bool? __pbn__is_steam_china;
 
+        [global::ProtoBuf.ProtoMember(17)]
+        public global::System.Collections.Generic.List<uint> banned_hero_ids { get; } = new global::System.Collections.Generic.List<uint>();
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -650,6 +653,26 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializerestricted_from_ranked_account_id() => __pbn__restricted_from_ranked_account_id != null;
         public void Resetrestricted_from_ranked_account_id() => __pbn__restricted_from_ranked_account_id = null;
         private uint? __pbn__restricted_from_ranked_account_id;
+
+        [global::ProtoBuf.ProtoMember(76)]
+        public uint rank_spread_likert_scale
+        {
+            get => __pbn__rank_spread_likert_scale.GetValueOrDefault();
+            set => __pbn__rank_spread_likert_scale = value;
+        }
+        public bool ShouldSerializerank_spread_likert_scale() => __pbn__rank_spread_likert_scale != null;
+        public void Resetrank_spread_likert_scale() => __pbn__rank_spread_likert_scale = null;
+        private uint? __pbn__rank_spread_likert_scale;
+
+        [global::ProtoBuf.ProtoMember(77)]
+        public uint behavior_score_likert_scale
+        {
+            get => __pbn__behavior_score_likert_scale.GetValueOrDefault();
+            set => __pbn__behavior_score_likert_scale = value;
+        }
+        public bool ShouldSerializebehavior_score_likert_scale() => __pbn__behavior_score_likert_scale != null;
+        public void Resetbehavior_score_likert_scale() => __pbn__behavior_score_likert_scale = null;
+        private uint? __pbn__behavior_score_likert_scale;
 
         [global::ProtoBuf.ProtoContract()]
         public enum State

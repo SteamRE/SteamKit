@@ -3402,6 +3402,16 @@ namespace SteamKit2.GC.CSGO.Internal
         [global::ProtoBuf.ProtoMember(20)]
         public global::System.Collections.Generic.List<PlayerRankingInfo> rankings { get; } = new global::System.Collections.Generic.List<PlayerRankingInfo>();
 
+        [global::ProtoBuf.ProtoMember(21)]
+        public ulong owcaseid
+        {
+            get => __pbn__owcaseid.GetValueOrDefault();
+            set => __pbn__owcaseid = value;
+        }
+        public bool ShouldSerializeowcaseid() => __pbn__owcaseid != null;
+        public void Resetowcaseid() => __pbn__owcaseid = null;
+        private ulong? __pbn__owcaseid;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -5111,6 +5121,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializeentindex() => __pbn__entindex != null;
         public void Resetentindex() => __pbn__entindex = null;
         private int? __pbn__entindex;
+
+        [global::ProtoBuf.ProtoMember(19)]
+        public uint petindex
+        {
+            get => __pbn__petindex.GetValueOrDefault();
+            set => __pbn__petindex = value;
+        }
+        public bool ShouldSerializepetindex() => __pbn__petindex != null;
+        public void Resetpetindex() => __pbn__petindex = null;
+        private uint? __pbn__petindex;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class Sticker : global::ProtoBuf.IExtensible

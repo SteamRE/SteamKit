@@ -1679,6 +1679,16 @@ namespace SteamKit2.Internal
         public void Resetrealm() => __pbn__realm = null;
         private uint? __pbn__realm;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool force_proxy
+        {
+            get => __pbn__force_proxy.GetValueOrDefault();
+            set => __pbn__force_proxy = value;
+        }
+        public bool ShouldSerializeforce_proxy() => __pbn__force_proxy != null;
+        public void Resetforce_proxy() => __pbn__force_proxy = null;
+        private bool? __pbn__force_proxy;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

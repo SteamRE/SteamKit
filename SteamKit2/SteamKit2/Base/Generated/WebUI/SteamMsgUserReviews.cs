@@ -664,6 +664,56 @@ namespace SteamKit2.WebUI.Internal
         public void Resetsteam_china_location() => __pbn__steam_china_location = null;
         private string __pbn__steam_china_location;
 
+        [global::ProtoBuf.ProtoMember(44)]
+        public uint category_ascii_pct
+        {
+            get => __pbn__category_ascii_pct.GetValueOrDefault();
+            set => __pbn__category_ascii_pct = value;
+        }
+        public bool ShouldSerializecategory_ascii_pct() => __pbn__category_ascii_pct != null;
+        public void Resetcategory_ascii_pct() => __pbn__category_ascii_pct = null;
+        private uint? __pbn__category_ascii_pct;
+
+        [global::ProtoBuf.ProtoMember(45)]
+        public uint category_meme_pct
+        {
+            get => __pbn__category_meme_pct.GetValueOrDefault();
+            set => __pbn__category_meme_pct = value;
+        }
+        public bool ShouldSerializecategory_meme_pct() => __pbn__category_meme_pct != null;
+        public void Resetcategory_meme_pct() => __pbn__category_meme_pct = null;
+        private uint? __pbn__category_meme_pct;
+
+        [global::ProtoBuf.ProtoMember(46)]
+        public uint category_offtopic_pct
+        {
+            get => __pbn__category_offtopic_pct.GetValueOrDefault();
+            set => __pbn__category_offtopic_pct = value;
+        }
+        public bool ShouldSerializecategory_offtopic_pct() => __pbn__category_offtopic_pct != null;
+        public void Resetcategory_offtopic_pct() => __pbn__category_offtopic_pct = null;
+        private uint? __pbn__category_offtopic_pct;
+
+        [global::ProtoBuf.ProtoMember(47)]
+        public uint category_uninformative_pct
+        {
+            get => __pbn__category_uninformative_pct.GetValueOrDefault();
+            set => __pbn__category_uninformative_pct = value;
+        }
+        public bool ShouldSerializecategory_uninformative_pct() => __pbn__category_uninformative_pct != null;
+        public void Resetcategory_uninformative_pct() => __pbn__category_uninformative_pct = null;
+        private uint? __pbn__category_uninformative_pct;
+
+        [global::ProtoBuf.ProtoMember(48)]
+        public uint category_votefarming_pct
+        {
+            get => __pbn__category_votefarming_pct.GetValueOrDefault();
+            set => __pbn__category_votefarming_pct = value;
+        }
+        public bool ShouldSerializecategory_votefarming_pct() => __pbn__category_votefarming_pct != null;
+        public void Resetcategory_votefarming_pct() => __pbn__category_votefarming_pct = null;
+        private uint? __pbn__category_votefarming_pct;
+
     }
 
     public interface IUserReviews

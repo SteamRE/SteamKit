@@ -332,6 +332,26 @@ namespace SteamKit2.Internal
         public void Resetcell_id() => __pbn__cell_id = null;
         private uint? __pbn__cell_id;
 
+        [global::ProtoBuf.ProtoMember(23)]
+        public bool is_workshop
+        {
+            get => __pbn__is_workshop.GetValueOrDefault();
+            set => __pbn__is_workshop = value;
+        }
+        public bool ShouldSerializeis_workshop() => __pbn__is_workshop != null;
+        public void Resetis_workshop() => __pbn__is_workshop = null;
+        private bool? __pbn__is_workshop;
+
+        [global::ProtoBuf.ProtoMember(24)]
+        public bool is_shader
+        {
+            get => __pbn__is_shader.GetValueOrDefault();
+            set => __pbn__is_shader = value;
+        }
+        public bool ShouldSerializeis_shader() => __pbn__is_shader != null;
+        public void Resetis_shader() => __pbn__is_shader = null;
+        private bool? __pbn__is_shader;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

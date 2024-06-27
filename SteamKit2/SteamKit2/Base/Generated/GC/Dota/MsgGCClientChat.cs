@@ -439,16 +439,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetsuggest_invite_to_lobby() => __pbn__suggest_invite_to_lobby = null;
         private bool? __pbn__suggest_invite_to_lobby;
 
-        [global::ProtoBuf.ProtoMember(12)]
-        public uint event_points
-        {
-            get => __pbn__event_points.GetValueOrDefault();
-            set => __pbn__event_points = value;
-        }
-        public bool ShouldSerializeevent_points() => __pbn__event_points != null;
-        public void Resetevent_points() => __pbn__event_points = null;
-        private uint? __pbn__event_points;
-
         [global::ProtoBuf.ProtoMember(13)]
         public bool coin_flip
         {
@@ -695,6 +685,26 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(41)]
         public ChatWheelMessage chat_wheel_message { get; set; }
+
+        [global::ProtoBuf.ProtoMember(42)]
+        public uint event_level
+        {
+            get => __pbn__event_level.GetValueOrDefault();
+            set => __pbn__event_level = value;
+        }
+        public bool ShouldSerializeevent_level() => __pbn__event_level != null;
+        public void Resetevent_level() => __pbn__event_level = null;
+        private uint? __pbn__event_level;
+
+        [global::ProtoBuf.ProtoMember(43)]
+        public uint suggest_pick_hero_facet
+        {
+            get => __pbn__suggest_pick_hero_facet.GetValueOrDefault();
+            set => __pbn__suggest_pick_hero_facet = value;
+        }
+        public bool ShouldSerializesuggest_pick_hero_facet() => __pbn__suggest_pick_hero_facet != null;
+        public void Resetsuggest_pick_hero_facet() => __pbn__suggest_pick_hero_facet = null;
+        private uint? __pbn__suggest_pick_hero_facet;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class DiceRoll : global::ProtoBuf.IExtensible

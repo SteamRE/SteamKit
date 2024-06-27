@@ -4260,6 +4260,17 @@ namespace SteamKit2.Internal
         public void Resetchat_name() => __pbn__chat_name = null;
         private string __pbn__chat_name;
 
+        [global::ProtoBuf.ProtoMember(11)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string notification_key
+        {
+            get => __pbn__notification_key ?? "";
+            set => __pbn__notification_key = value;
+        }
+        public bool ShouldSerializenotification_key() => __pbn__notification_key != null;
+        public void Resetnotification_key() => __pbn__notification_key = null;
+        private string __pbn__notification_key;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

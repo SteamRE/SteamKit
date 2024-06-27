@@ -764,6 +764,86 @@ namespace SteamKit2.Internal
 
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientPICSPrivateBetaRequest : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong access_token
+        {
+            get => __pbn__access_token.GetValueOrDefault();
+            set => __pbn__access_token = value;
+        }
+        public bool ShouldSerializeaccess_token() => __pbn__access_token != null;
+        public void Resetaccess_token() => __pbn__access_token = null;
+        private ulong? __pbn__access_token;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string beta_name
+        {
+            get => __pbn__beta_name ?? "";
+            set => __pbn__beta_name = value;
+        }
+        public bool ShouldSerializebeta_name() => __pbn__beta_name != null;
+        public void Resetbeta_name() => __pbn__beta_name = null;
+        private string __pbn__beta_name;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public byte[] password_hash
+        {
+            get => __pbn__password_hash;
+            set => __pbn__password_hash = value;
+        }
+        public bool ShouldSerializepassword_hash() => __pbn__password_hash != null;
+        public void Resetpassword_hash() => __pbn__password_hash = null;
+        private byte[] __pbn__password_hash;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientPICSPrivateBetaResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(2)]
+        public int eresult
+        {
+            get => __pbn__eresult ?? 2;
+            set => __pbn__eresult = value;
+        }
+        public bool ShouldSerializeeresult() => __pbn__eresult != null;
+        public void Reseteresult() => __pbn__eresult = null;
+        private int? __pbn__eresult;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public byte[] depot_section
+        {
+            get => __pbn__depot_section;
+            set => __pbn__depot_section = value;
+        }
+        public bool ShouldSerializedepot_section() => __pbn__depot_section != null;
+        public void Resetdepot_section() => __pbn__depot_section = null;
+        private byte[] __pbn__depot_section;
+
+    }
+
 }
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

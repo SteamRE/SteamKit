@@ -8051,6 +8051,18 @@ namespace SteamKit2.GC.TF2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgAuthorizeServerItemRetrieval : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<ulong> item_id { get; } = new global::System.Collections.Generic.List<ulong>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ETFGCMsg
     {
         k_EMsgGCReportWarKill = 5001,

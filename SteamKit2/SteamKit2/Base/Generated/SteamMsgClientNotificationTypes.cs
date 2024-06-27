@@ -106,6 +106,16 @@ namespace SteamKit2.Internal
         public void Resetappid() => __pbn__appid = null;
         private uint? __pbn__appid;
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint dlc_appid
+        {
+            get => __pbn__dlc_appid.GetValueOrDefault();
+            set => __pbn__dlc_appid = value;
+        }
+        public bool ShouldSerializedlc_appid() => __pbn__dlc_appid != null;
+        public void Resetdlc_appid() => __pbn__dlc_appid = null;
+        private uint? __pbn__dlc_appid;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1098,7 +1108,86 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CClientNotificationGRE : global::ProtoBuf.IExtensible
+    public partial class CClientNotificationGameRecordingError : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong game_id
+        {
+            get => __pbn__game_id.GetValueOrDefault();
+            set => __pbn__game_id = value;
+        }
+        public bool ShouldSerializegame_id() => __pbn__game_id != null;
+        public void Resetgame_id() => __pbn__game_id = null;
+        private ulong? __pbn__game_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(EGameRecordingErrorType.k_EGameRecordingErrorGeneral)]
+        public EGameRecordingErrorType error_type
+        {
+            get => __pbn__error_type ?? EGameRecordingErrorType.k_EGameRecordingErrorGeneral;
+            set => __pbn__error_type = value;
+        }
+        public bool ShouldSerializeerror_type() => __pbn__error_type != null;
+        public void Reseterror_type() => __pbn__error_type = null;
+        private EGameRecordingErrorType? __pbn__error_type;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationGameRecordingStart : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong game_id
+        {
+            get => __pbn__game_id.GetValueOrDefault();
+            set => __pbn__game_id = value;
+        }
+        public bool ShouldSerializegame_id() => __pbn__game_id != null;
+        public void Resetgame_id() => __pbn__game_id = null;
+        private ulong? __pbn__game_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationGameRecordingStop : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong game_id
+        {
+            get => __pbn__game_id.GetValueOrDefault();
+            set => __pbn__game_id = value;
+        }
+        public bool ShouldSerializegame_id() => __pbn__game_id != null;
+        public void Resetgame_id() => __pbn__game_id = null;
+        private ulong? __pbn__game_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string clip_id
+        {
+            get => __pbn__clip_id ?? "";
+            set => __pbn__clip_id = value;
+        }
+        public bool ShouldSerializeclip_id() => __pbn__clip_id != null;
+        public void Resetclip_id() => __pbn__clip_id = null;
+        private string __pbn__clip_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationGameRecordingUserMarkerAdded : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1169,10 +1258,14 @@ namespace SteamKit2.Internal
         k_EClientNotificationType_FamilyPurchaseRequestResponse = 47,
         k_EClientNotificationType_ParentalFeatureRequest = 48,
         k_EClientNotificationType_ParentalPlaytimeRequest = 49,
-        k_EClientNotificationType_GRE = 50,
+        k_EClientNotificationType_GameRecordingError = 50,
         k_EClientNotificationType_ParentalFeatureResponse = 51,
         k_EClientNotificationType_ParentalPlaytimeResponse = 52,
         k_EClientNotificationType_RequestedGameAdded = 53,
+        k_EClientNotificationType_ClipDownloaded = 54,
+        k_EClientNotificationType_GameRecordingStart = 55,
+        k_EClientNotificationType_GameRecordingStop = 56,
+        k_EClientNotificationType_GameRecordingUserMarkerAdded = 57,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1181,6 +1274,13 @@ namespace SteamKit2.Internal
         k_ESystemUpdateNotificationType_Invalid = 0,
         k_ESystemUpdateNotificationType_Available = 1,
         k_ESystemUpdateNotificationType_NeedsRestart = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EGameRecordingErrorType
+    {
+        k_EGameRecordingErrorGeneral = 1,
+        k_EGameRecordingErrorLowDiskSpace = 2,
     }
 
 }

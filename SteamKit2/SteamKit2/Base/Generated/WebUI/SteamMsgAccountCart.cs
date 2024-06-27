@@ -251,76 +251,28 @@ namespace SteamKit2.WebUI.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public AccountCartContents cart { get; set; }
 
-    }
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<uint> replaced_packages { get; } = new global::System.Collections.Generic.List<uint>();
 
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CAccountCart_AddItemToCart_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint packageid
+        [global::ProtoBuf.ProtoMember(4)]
+        public ulong existing_billing_agreementid
         {
-            get => __pbn__packageid.GetValueOrDefault();
-            set => __pbn__packageid = value;
+            get => __pbn__existing_billing_agreementid.GetValueOrDefault();
+            set => __pbn__existing_billing_agreementid = value;
         }
-        public bool ShouldSerializepackageid() => __pbn__packageid != null;
-        public void Resetpackageid() => __pbn__packageid = null;
-        private uint? __pbn__packageid;
+        public bool ShouldSerializeexisting_billing_agreementid() => __pbn__existing_billing_agreementid != null;
+        public void Resetexisting_billing_agreementid() => __pbn__existing_billing_agreementid = null;
+        private ulong? __pbn__existing_billing_agreementid;
 
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint bundleid
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint new_billing_agreement_recurring_packageid
         {
-            get => __pbn__bundleid.GetValueOrDefault();
-            set => __pbn__bundleid = value;
+            get => __pbn__new_billing_agreement_recurring_packageid.GetValueOrDefault();
+            set => __pbn__new_billing_agreement_recurring_packageid = value;
         }
-        public bool ShouldSerializebundleid() => __pbn__bundleid != null;
-        public void Resetbundleid() => __pbn__bundleid = null;
-        private uint? __pbn__bundleid;
-
-        [global::ProtoBuf.ProtoMember(10)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string user_country
-        {
-            get => __pbn__user_country ?? "";
-            set => __pbn__user_country = value;
-        }
-        public bool ShouldSerializeuser_country() => __pbn__user_country != null;
-        public void Resetuser_country() => __pbn__user_country = null;
-        private string __pbn__user_country;
-
-        [global::ProtoBuf.ProtoMember(11)]
-        public CartGiftInfo gift_info { get; set; }
-
-        [global::ProtoBuf.ProtoMember(12)]
-        public AccountCartLineItemFlags flags { get; set; }
-
-        [global::ProtoBuf.ProtoMember(13)]
-        public CUserInterface_NavData navdata { get; set; }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CAccountCart_AddItemToCart_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public ulong line_item_id
-        {
-            get => __pbn__line_item_id.GetValueOrDefault();
-            set => __pbn__line_item_id = value;
-        }
-        public bool ShouldSerializeline_item_id() => __pbn__line_item_id != null;
-        public void Resetline_item_id() => __pbn__line_item_id = null;
-        private ulong? __pbn__line_item_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public AccountCartContents cart { get; set; }
+        public bool ShouldSerializenew_billing_agreement_recurring_packageid() => __pbn__new_billing_agreement_recurring_packageid != null;
+        public void Resetnew_billing_agreement_recurring_packageid() => __pbn__new_billing_agreement_recurring_packageid = null;
+        private uint? __pbn__new_billing_agreement_recurring_packageid;
 
     }
 
@@ -729,7 +681,6 @@ namespace SteamKit2.WebUI.Internal
     public interface IAccountCart
     {
         CAccountCart_AddItemsToCart_Response AddItemsToCart(CAccountCart_AddItemsToCart_Request request);
-        CAccountCart_AddItemToCart_Response AddItemToCart(CAccountCart_AddItemToCart_Request request);
         CAccountCart_DeleteCart_Response DeleteCart(CAccountCart_DeleteCart_Request request);
         CAccountCart_GetCart_Response GetCart(CAccountCart_GetCart_Request request);
         CAccountCart_GetRelevantCoupons_Response GetRelevantCoupons(CAccountCart_GetRelevantCoupons_Request request);

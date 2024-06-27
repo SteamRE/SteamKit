@@ -693,6 +693,57 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class PublishedFileAuthorSnapshot : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint timestamp
+        {
+            get => __pbn__timestamp.GetValueOrDefault();
+            set => __pbn__timestamp = value;
+        }
+        public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
+        public void Resettimestamp() => __pbn__timestamp = null;
+        private uint? __pbn__timestamp;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string game_branch_min
+        {
+            get => __pbn__game_branch_min ?? "";
+            set => __pbn__game_branch_min = value;
+        }
+        public bool ShouldSerializegame_branch_min() => __pbn__game_branch_min != null;
+        public void Resetgame_branch_min() => __pbn__game_branch_min = null;
+        private string __pbn__game_branch_min;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string game_branch_max
+        {
+            get => __pbn__game_branch_max ?? "";
+            set => __pbn__game_branch_max = value;
+        }
+        public bool ShouldSerializegame_branch_max() => __pbn__game_branch_max != null;
+        public void Resetgame_branch_max() => __pbn__game_branch_max = null;
+        private string __pbn__game_branch_max;
+
+        [global::ProtoBuf.ProtoMember(4, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong manifestid
+        {
+            get => __pbn__manifestid.GetValueOrDefault();
+            set => __pbn__manifestid = value;
+        }
+        public bool ShouldSerializemanifestid() => __pbn__manifestid != null;
+        public void Resetmanifestid() => __pbn__manifestid = null;
+        private ulong? __pbn__manifestid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class PublishedFileDetails : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1365,6 +1416,9 @@ namespace SteamKit2.Internal
         public void Resetexternal_asset_id() => __pbn__external_asset_id = null;
         private ulong? __pbn__external_asset_id;
 
+        [global::ProtoBuf.ProtoMember(75)]
+        public global::System.Collections.Generic.List<PublishedFileAuthorSnapshot> author_snapshots { get; } = new global::System.Collections.Generic.List<PublishedFileAuthorSnapshot>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Tag : global::ProtoBuf.IExtensible
         {
@@ -1891,6 +1945,20 @@ namespace SteamKit2.Internal
             public bool ShouldSerializeflags() => __pbn__flags != null;
             public void Resetflags() => __pbn__flags = null;
             private uint? __pbn__flags;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            [global::System.ComponentModel.DefaultValue(EPublishedFileRevision.k_EPublishedFileRevision_Default)]
+            public EPublishedFileRevision revision
+            {
+                get => __pbn__revision ?? EPublishedFileRevision.k_EPublishedFileRevision_Default;
+                set => __pbn__revision = value;
+            }
+            public bool ShouldSerializerevision() => __pbn__revision != null;
+            public void Resetrevision() => __pbn__revision = null;
+            private EPublishedFileRevision? __pbn__revision;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public global::System.Collections.Generic.List<PublishedFileAuthorSnapshot> author_snapshots { get; } = new global::System.Collections.Generic.List<PublishedFileAuthorSnapshot>();
 
         }
 
@@ -2694,6 +2762,48 @@ namespace SteamKit2.Internal
         public void Resetlanguage() => __pbn__language = null;
         private int? __pbn__language;
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool saved_snapshot
+        {
+            get => __pbn__saved_snapshot.GetValueOrDefault();
+            set => __pbn__saved_snapshot = value;
+        }
+        public bool ShouldSerializesaved_snapshot() => __pbn__saved_snapshot != null;
+        public void Resetsaved_snapshot() => __pbn__saved_snapshot = null;
+        private bool? __pbn__saved_snapshot;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string snapshot_game_branch_min
+        {
+            get => __pbn__snapshot_game_branch_min ?? "";
+            set => __pbn__snapshot_game_branch_min = value;
+        }
+        public bool ShouldSerializesnapshot_game_branch_min() => __pbn__snapshot_game_branch_min != null;
+        public void Resetsnapshot_game_branch_min() => __pbn__snapshot_game_branch_min = null;
+        private string __pbn__snapshot_game_branch_min;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string snapshot_game_branch_max
+        {
+            get => __pbn__snapshot_game_branch_max ?? "";
+            set => __pbn__snapshot_game_branch_max = value;
+        }
+        public bool ShouldSerializesnapshot_game_branch_max() => __pbn__snapshot_game_branch_max != null;
+        public void Resetsnapshot_game_branch_max() => __pbn__snapshot_game_branch_max = null;
+        private string __pbn__snapshot_game_branch_max;
+
+        [global::ProtoBuf.ProtoMember(6, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong manifest_id
+        {
+            get => __pbn__manifest_id.GetValueOrDefault();
+            set => __pbn__manifest_id = value;
+        }
+        public bool ShouldSerializemanifest_id() => __pbn__manifest_id != null;
+        public void Resetmanifest_id() => __pbn__manifest_id = null;
+        private ulong? __pbn__manifest_id;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2813,6 +2923,48 @@ namespace SteamKit2.Internal
             public bool ShouldSerializelanguage() => __pbn__language != null;
             public void Resetlanguage() => __pbn__language = null;
             private int? __pbn__language;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public bool saved_snapshot
+            {
+                get => __pbn__saved_snapshot.GetValueOrDefault();
+                set => __pbn__saved_snapshot = value;
+            }
+            public bool ShouldSerializesaved_snapshot() => __pbn__saved_snapshot != null;
+            public void Resetsaved_snapshot() => __pbn__saved_snapshot = null;
+            private bool? __pbn__saved_snapshot;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string snapshot_game_branch_min
+            {
+                get => __pbn__snapshot_game_branch_min ?? "";
+                set => __pbn__snapshot_game_branch_min = value;
+            }
+            public bool ShouldSerializesnapshot_game_branch_min() => __pbn__snapshot_game_branch_min != null;
+            public void Resetsnapshot_game_branch_min() => __pbn__snapshot_game_branch_min = null;
+            private string __pbn__snapshot_game_branch_min;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string snapshot_game_branch_max
+            {
+                get => __pbn__snapshot_game_branch_max ?? "";
+                set => __pbn__snapshot_game_branch_max = value;
+            }
+            public bool ShouldSerializesnapshot_game_branch_max() => __pbn__snapshot_game_branch_max != null;
+            public void Resetsnapshot_game_branch_max() => __pbn__snapshot_game_branch_max = null;
+            private string __pbn__snapshot_game_branch_max;
+
+            [global::ProtoBuf.ProtoMember(7, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+            public ulong manifest_id
+            {
+                get => __pbn__manifest_id.GetValueOrDefault();
+                set => __pbn__manifest_id = value;
+            }
+            public bool ShouldSerializemanifest_id() => __pbn__manifest_id != null;
+            public void Resetmanifest_id() => __pbn__manifest_id = null;
+            private ulong? __pbn__manifest_id;
 
         }
 
@@ -4030,6 +4182,17 @@ namespace SteamKit2.Internal
         public void Resetnum_items_max() => __pbn__num_items_max = null;
         private uint? __pbn__num_items_max;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(EPublishedFileRevision.k_EPublishedFileRevision_Default)]
+        public EPublishedFileRevision desired_revision
+        {
+            get => __pbn__desired_revision ?? EPublishedFileRevision.k_EPublishedFileRevision_Default;
+            set => __pbn__desired_revision = value;
+        }
+        public bool ShouldSerializedesired_revision() => __pbn__desired_revision != null;
+        public void Resetdesired_revision() => __pbn__desired_revision = null;
+        private EPublishedFileRevision? __pbn__desired_revision;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -4088,6 +4251,9 @@ namespace SteamKit2.Internal
             public bool ShouldSerializemanifest_id() => __pbn__manifest_id != null;
             public void Resetmanifest_id() => __pbn__manifest_id = null;
             private ulong? __pbn__manifest_id;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public global::System.Collections.Generic.List<PublishedFileAuthorSnapshot> author_snapshots { get; } = new global::System.Collections.Generic.List<PublishedFileAuthorSnapshot>();
 
         }
 
@@ -4295,6 +4461,17 @@ namespace SteamKit2.Internal
         public void Resetrtime_updated() => __pbn__rtime_updated = null;
         private uint? __pbn__rtime_updated;
 
+        [global::ProtoBuf.ProtoMember(9)]
+        [global::System.ComponentModel.DefaultValue(EPublishedFileRevision.k_EPublishedFileRevision_Default)]
+        public EPublishedFileRevision revision
+        {
+            get => __pbn__revision ?? EPublishedFileRevision.k_EPublishedFileRevision_Default;
+            set => __pbn__revision = value;
+        }
+        public bool ShouldSerializerevision() => __pbn__revision != null;
+        public void Resetrevision() => __pbn__revision = null;
+        private EPublishedFileRevision? __pbn__revision;
+
         [global::ProtoBuf.ProtoMember(8)]
         public global::System.Collections.Generic.List<RevisionData> revisions { get; } = new global::System.Collections.Generic.List<RevisionData>();
 
@@ -4335,6 +4512,28 @@ namespace SteamKit2.Internal
             public bool ShouldSerializertime_updated() => __pbn__rtime_updated != null;
             public void Resetrtime_updated() => __pbn__rtime_updated = null;
             private uint? __pbn__rtime_updated;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string game_branch_min
+            {
+                get => __pbn__game_branch_min ?? "";
+                set => __pbn__game_branch_min = value;
+            }
+            public bool ShouldSerializegame_branch_min() => __pbn__game_branch_min != null;
+            public void Resetgame_branch_min() => __pbn__game_branch_min = null;
+            private string __pbn__game_branch_min;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string game_branch_max
+            {
+                get => __pbn__game_branch_max ?? "";
+                set => __pbn__game_branch_max = value;
+            }
+            public bool ShouldSerializegame_branch_max() => __pbn__game_branch_max != null;
+            public void Resetgame_branch_max() => __pbn__game_branch_max = null;
+            private string __pbn__game_branch_max;
 
         }
 
@@ -4407,6 +4606,7 @@ namespace SteamKit2.Internal
         k_EPublishedFileRevision_ApprovedSnapshot_China = 3,
         k_EPublishedFileRevision_RejectedSnapshot = 4,
         k_EPublishedFileRevision_RejectedSnapshot_China = 5,
+        k_EPublishedFileRevision_AuthorSnapshot = 6,
     }
 
     [global::ProtoBuf.ProtoContract()]

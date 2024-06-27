@@ -1209,6 +1209,17 @@ namespace SteamKit2.Internal
             public void Resetos_type() => __pbn__os_type = null;
             private int? __pbn__os_type;
 
+            [global::ProtoBuf.ProtoMember(12)]
+            [global::System.ComponentModel.DefaultValue(EAuthenticationType.k_EAuthenticationType_Unknown)]
+            public EAuthenticationType authentication_type
+            {
+                get => __pbn__authentication_type ?? EAuthenticationType.k_EAuthenticationType_Unknown;
+                set => __pbn__authentication_type = value;
+            }
+            public bool ShouldSerializeauthentication_type() => __pbn__authentication_type != null;
+            public void Resetauthentication_type() => __pbn__authentication_type = null;
+            private EAuthenticationType? __pbn__authentication_type;
+
         }
 
     }
@@ -1930,6 +1941,16 @@ namespace SteamKit2.Internal
     {
         k_ETokenRenewalType_None = 0,
         k_ETokenRenewalType_Allow = 1,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EAuthenticationType
+    {
+        k_EAuthenticationType_Unknown = 0,
+        k_EAuthenticationType_Password = 1,
+        k_EAuthenticationType_QR = 2,
+        k_EAuthenticationType_AccountCreation = 3,
+        k_EAuthenticationType_GuestAccount = 4,
     }
 
     [global::ProtoBuf.ProtoContract()]
