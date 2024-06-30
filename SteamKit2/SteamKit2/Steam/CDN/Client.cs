@@ -81,7 +81,7 @@ namespace SteamKit2.CDN
                 url = $"depot/{depotId}/manifest/{manifestId}/{MANIFEST_VERSION}";
             }
 
-            var manifestData = await DoRawCommandAsync( server, url, proxyServer ).ConfigureAwait( false );
+            var manifestData = await DoRawCommandAsync( server, url, proxyServer, null ).ConfigureAwait( false );
 
             manifestData = ZipUtil.Decompress( manifestData );
 
@@ -119,7 +119,7 @@ namespace SteamKit2.CDN
         /// <exception cref="System.IO.InvalidDataException">Thrown if the downloaded data does not match the expected length.</exception>
         /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
         /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
-        public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk, Server server, byte[]? depotKey = null, Server? proxyServer = null )
+        public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk, Server server, byte[]? depotKey = null, Server? proxyServer = null, string auth = null )
         {
             ArgumentNullException.ThrowIfNull( server );
 
@@ -132,7 +132,7 @@ namespace SteamKit2.CDN
 
             var chunkID = Utils.EncodeHexString( chunk.ChunkID );
 
-            var chunkData = await DoRawCommandAsync( server, string.Format( "depot/{0}/chunk/{1}", depotId, chunkID ), proxyServer ).ConfigureAwait( false );
+            var chunkData = await DoRawCommandAsync( server, string.Format( "depot/{0}/chunk/{1}", depotId, chunkID, auth ), proxyServer ).ConfigureAwait( false );
 
             // assert that lengths match only if the chunk has a length assigned.
             if ( chunk.CompressedLength > 0 && chunkData.Length != chunk.CompressedLength )
@@ -151,9 +151,9 @@ namespace SteamKit2.CDN
             return depotChunk;
         }
 
-        async Task<byte[]> DoRawCommandAsync( Server server, string command, Server? proxyServer )
+        async Task<byte[]> DoRawCommandAsync( Server server, string command, Server? proxyServer, string auth )
         {
-            var url = BuildCommand( server, command, proxyServer );
+            var url = BuildCommand( server, command, proxyServer, auth );
             using var request = new HttpRequestMessage( HttpMethod.Get, url );
 
             using var cts = new CancellationTokenSource();
@@ -179,7 +179,7 @@ namespace SteamKit2.CDN
             }
         }
 
-        static Uri BuildCommand( Server server, string command, Server? proxyServer )
+        static Uri BuildCommand( Server server, string command, Server? proxyServer, string auth )
         {
             var uriBuilder = new UriBuilder
             {
@@ -187,6 +187,7 @@ namespace SteamKit2.CDN
                 Host = server.VHost,
                 Port = server.Port,
                 Path = command,
+                Query = auth,
             };
 
             if ( proxyServer != null && proxyServer.UseAsProxy && proxyServer.ProxyRequestPathTemplate != null )
