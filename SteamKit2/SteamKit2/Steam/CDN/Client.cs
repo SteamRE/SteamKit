@@ -65,7 +65,7 @@ namespace SteamKit2.CDN
         /// <exception cref="System.ArgumentNullException"><see ref="server"/> was null.</exception>
         /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
         /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
-        public async Task<DepotManifest> DownloadManifestAsync( uint depotId, ulong manifestId, ulong manifestRequestCode, Server server, byte[]? depotKey = null, Server? proxyServer = null )
+        public async Task<DepotManifest> DownloadManifestAsync( uint depotId, ulong manifestId, ulong manifestRequestCode, Server server, byte[]? depotKey = null, Server? proxyServer = null, string auth = null)
         {
             ArgumentNullException.ThrowIfNull( server );
 
@@ -81,7 +81,7 @@ namespace SteamKit2.CDN
                 url = $"depot/{depotId}/manifest/{manifestId}/{MANIFEST_VERSION}";
             }
 
-            var manifestData = await DoRawCommandAsync( server, url, proxyServer, null ).ConfigureAwait( false );
+            var manifestData = await DoRawCommandAsync( server, url, proxyServer, auth ).ConfigureAwait( false );
 
             manifestData = ZipUtil.Decompress( manifestData );
 
