@@ -1,4 +1,4 @@
-﻿/*
+/*
  * This file is subject to the terms and conditions defined in
  * file 'license.txt', which is part of this source code package.
  */
@@ -132,7 +132,7 @@ namespace SteamKit2.CDN
 
             var chunkID = Utils.EncodeHexString( chunk.ChunkID );
 
-            var chunkData = await DoRawCommandAsync( server, string.Format( "depot/{0}/chunk/{1}", depotId, chunkID, auth ), proxyServer ).ConfigureAwait( false );
+            var chunkData = await DoRawCommandAsync( server, string.Format( "depot/{0}/chunk/{1}", depotId, chunkID ), proxyServer, auth).ConfigureAwait( false );
 
             // assert that lengths match only if the chunk has a length assigned.
             if ( chunk.CompressedLength > 0 && chunkData.Length != chunk.CompressedLength )
