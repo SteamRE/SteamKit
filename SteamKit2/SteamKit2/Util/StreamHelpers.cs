@@ -9,7 +9,7 @@ namespace SteamKit2
     {
         public static short ReadInt16(this Stream stream)
         {
-            Span<byte> data = stackalloc byte[2];
+            Span<byte> data = stackalloc byte[sizeof(Int16)];
 
             stream.Read( data );
             return BitConverter.ToInt16( data );
@@ -17,7 +17,7 @@ namespace SteamKit2
 
         public static ushort ReadUInt16(this Stream stream)
         {
-            Span<byte> data = stackalloc byte[2];
+            Span<byte> data = stackalloc byte[sizeof(UInt16)];
 
             stream.Read( data );
             return BitConverter.ToUInt16( data );
@@ -25,7 +25,7 @@ namespace SteamKit2
 
         public static int ReadInt32(this Stream stream)
         {
-            Span<byte> data = stackalloc byte[4];
+            Span<byte> data = stackalloc byte[sizeof(Int32)];
 
             stream.Read( data );
             return BitConverter.ToInt32( data );
@@ -33,7 +33,7 @@ namespace SteamKit2
 
         public static long ReadInt64(this Stream stream)
         {
-            Span<byte> data = stackalloc byte[8];
+            Span<byte> data = stackalloc byte[sizeof(Int64)];
 
             stream.Read( data );
             return BitConverter.ToInt64( data );
@@ -41,7 +41,7 @@ namespace SteamKit2
 
         public static uint ReadUInt32(this Stream stream)
         {
-            Span<byte> data = stackalloc byte[4];
+            Span<byte> data = stackalloc byte[sizeof(UInt32)];
 
             stream.Read( data );
             return BitConverter.ToUInt32( data );
@@ -49,7 +49,7 @@ namespace SteamKit2
 
         public static ulong ReadUInt64(this Stream stream)
         {
-            Span<byte> data = stackalloc byte[8];
+            Span<byte> data = stackalloc byte[sizeof(UInt64)];
 
             stream.Read( data );
             return BitConverter.ToUInt64( data );
@@ -57,7 +57,7 @@ namespace SteamKit2
 
         public static float ReadFloat( this Stream stream )
         {
-            Span<byte> data = stackalloc byte[4];
+            Span<byte> data = stackalloc byte[sizeof(float)];
 
             stream.Read( data );
             return BitConverter.ToSingle( data );
