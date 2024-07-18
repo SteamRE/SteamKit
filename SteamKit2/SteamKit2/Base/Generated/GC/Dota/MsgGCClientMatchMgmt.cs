@@ -891,7 +891,7 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__league_node_id;
 
         [global::ProtoBuf.ProtoMember(50)]
-        public global::System.Collections.Generic.List<uint> requested_hero_ids { get; } = new global::System.Collections.Generic.List<uint>();
+        public global::System.Collections.Generic.List<int> requested_hero_ids { get; } = new global::System.Collections.Generic.List<int>();
 
         [global::ProtoBuf.ProtoMember(51)]
         public CMsgLobbyScenarioSave scenario_save { get; set; }

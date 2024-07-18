@@ -67,14 +67,14 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            public uint hero_id
+            public int hero_id
             {
                 get => __pbn__hero_id.GetValueOrDefault();
                 set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
-            private uint? __pbn__hero_id;
+            private int? __pbn__hero_id;
 
             [global::ProtoBuf.ProtoMember(2)]
             public uint hero_badge_xp
@@ -461,14 +461,14 @@ namespace SteamKit2.GC.Dota.Internal
         private ulong? __pbn__id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public uint hero_id
+        public int hero_id
         {
             get => __pbn__hero_id.GetValueOrDefault();
             set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
-        private uint? __pbn__hero_id;
+        private int? __pbn__hero_id;
 
         [global::ProtoBuf.ProtoMember(3)]
         [global::System.ComponentModel.DefaultValue(DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS)]
@@ -575,10 +575,10 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__channel;
 
         [global::ProtoBuf.ProtoMember(20)]
-        public global::System.Collections.Generic.List<uint> disabled_hero_id { get; } = new global::System.Collections.Generic.List<uint>();
+        public global::System.Collections.Generic.List<int> disabled_hero_id { get; } = new global::System.Collections.Generic.List<int>();
 
         [global::ProtoBuf.ProtoMember(22)]
-        public global::System.Collections.Generic.List<uint> enabled_hero_id { get; } = new global::System.Collections.Generic.List<uint>();
+        public global::System.Collections.Generic.List<int> enabled_hero_id { get; } = new global::System.Collections.Generic.List<int>();
 
         [global::ProtoBuf.ProtoMember(23)]
         [global::System.ComponentModel.DefaultValue(DOTA_GC_TEAM.DOTA_GC_TEAM_NOTEAM)]
@@ -821,7 +821,7 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__comms_reports_available;
 
         [global::ProtoBuf.ProtoMember(57)]
-        public global::System.Collections.Generic.List<uint> banned_hero_ids { get; } = new global::System.Collections.Generic.List<uint>();
+        public global::System.Collections.Generic.List<int> banned_hero_ids { get; } = new global::System.Collections.Generic.List<int>();
 
     }
 
@@ -2118,7 +2118,7 @@ namespace SteamKit2.GC.Dota.Internal
         private EEvent? __pbn__current_primary_event;
 
         [global::ProtoBuf.ProtoMember(105)]
-        public global::System.Collections.Generic.List<uint> emergency_disabled_hero_ids { get; } = new global::System.Collections.Generic.List<uint>();
+        public global::System.Collections.Generic.List<int> emergency_disabled_hero_ids { get; } = new global::System.Collections.Generic.List<int>();
 
         [global::ProtoBuf.ProtoMember(106, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong custom_game_private_key
@@ -2201,7 +2201,7 @@ namespace SteamKit2.GC.Dota.Internal
         public global::System.Collections.Generic.List<CMsgLobbyEventPoints> lobby_event_points { get; } = new global::System.Collections.Generic.List<CMsgLobbyEventPoints>();
 
         [global::ProtoBuf.ProtoMember(124)]
-        public global::System.Collections.Generic.List<uint> requested_hero_ids { get; } = new global::System.Collections.Generic.List<uint>();
+        public global::System.Collections.Generic.List<int> requested_hero_ids { get; } = new global::System.Collections.Generic.List<int>();
 
         [global::ProtoBuf.ProtoMember(125)]
         public global::System.Collections.Generic.List<CMsgLobbyCoachFriendRequest> coach_friend_requests { get; } = new global::System.Collections.Generic.List<CMsgLobbyCoachFriendRequest>();

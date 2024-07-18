@@ -56,14 +56,14 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public uint hero_id
+        public int hero_id
         {
             get => __pbn__hero_id.GetValueOrDefault();
             set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
-        private uint? __pbn__hero_id;
+        private int? __pbn__hero_id;
 
         [global::ProtoBuf.ProtoMember(2)]
         public uint kills
@@ -696,14 +696,14 @@ namespace SteamKit2.GC.Dota.Internal
             private float? __pbn__confidence;
 
             [global::ProtoBuf.ProtoMember(7)]
-            public uint hero_id
+            public int hero_id
             {
                 get => __pbn__hero_id.GetValueOrDefault();
                 set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
-            private uint? __pbn__hero_id;
+            private int? __pbn__hero_id;
 
             [global::ProtoBuf.ProtoMember(8)]
             [global::System.ComponentModel.DefaultValue(CMsgBattleReport_Role.k_eUnknownRole)]
@@ -779,14 +779,14 @@ namespace SteamKit2.GC.Dota.Internal
         private bool? __pbn__acknowledged;
 
         [global::ProtoBuf.ProtoMember(4)]
-        public uint featured_hero_id
+        public int featured_hero_id
         {
             get => __pbn__featured_hero_id.GetValueOrDefault();
             set => __pbn__featured_hero_id = value;
         }
         public bool ShouldSerializefeatured_hero_id() => __pbn__featured_hero_id != null;
         public void Resetfeatured_hero_id() => __pbn__featured_hero_id = null;
-        private uint? __pbn__featured_hero_id;
+        private int? __pbn__featured_hero_id;
 
         [global::ProtoBuf.ProtoMember(5)]
         public uint featured_position
@@ -884,14 +884,14 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            public uint hero_id
+            public int hero_id
             {
                 get => __pbn__hero_id.GetValueOrDefault();
                 set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
-            private uint? __pbn__hero_id;
+            private int? __pbn__hero_id;
 
             [global::ProtoBuf.ProtoMember(2)]
             public uint predicted_position
@@ -1118,14 +1118,14 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            public uint hero_id
+            public int hero_id
             {
                 get => __pbn__hero_id.GetValueOrDefault();
                 set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
-            private uint? __pbn__hero_id;
+            private int? __pbn__hero_id;
 
             [global::ProtoBuf.ProtoMember(2)]
             public uint predicted_position

@@ -370,6 +370,7 @@ namespace SteamKit2.Internal
         k_EUpdaterState_Applying = 5,
         k_EUpdaterState_ClientRestartPending = 6,
         k_EUpdaterState_SystemRestartPending = 7,
+        k_EUpdaterState_RollBack = 8,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -698,6 +699,7 @@ namespace SteamKit2.Internal
         k_EExternalSaleEventType_Showcase = 2,
         k_EExternalSaleEventType_Region = 3,
         k_EExternalSaleEventType_Theme = 4,
+        k_EExternalSaleEventType_Franchise = 5,
     }
 
 }

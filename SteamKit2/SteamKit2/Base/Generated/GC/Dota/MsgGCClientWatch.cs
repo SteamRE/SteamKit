@@ -339,14 +339,14 @@ namespace SteamKit2.GC.Dota.Internal
             private uint? __pbn__account_id;
 
             [global::ProtoBuf.ProtoMember(2)]
-            public uint hero_id
+            public int hero_id
             {
                 get => __pbn__hero_id.GetValueOrDefault();
                 set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
-            private uint? __pbn__hero_id;
+            private int? __pbn__hero_id;
 
             [global::ProtoBuf.ProtoMember(3)]
             public uint team_slot
@@ -401,14 +401,14 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__league_id;
 
         [global::ProtoBuf.ProtoMember(3)]
-        public uint hero_id
+        public int hero_id
         {
             get => __pbn__hero_id.GetValueOrDefault();
             set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
-        private uint? __pbn__hero_id;
+        private int? __pbn__hero_id;
 
         [global::ProtoBuf.ProtoMember(4)]
         public uint start_game
@@ -464,14 +464,14 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__league_id;
 
         [global::ProtoBuf.ProtoMember(3)]
-        public uint hero_id
+        public int hero_id
         {
             get => __pbn__hero_id.GetValueOrDefault();
             set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
-        private uint? __pbn__hero_id;
+        private int? __pbn__hero_id;
 
         [global::ProtoBuf.ProtoMember(4)]
         public uint start_game

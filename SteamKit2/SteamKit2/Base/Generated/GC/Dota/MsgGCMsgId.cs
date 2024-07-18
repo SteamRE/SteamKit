@@ -942,6 +942,14 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgOverworldEncounterPitFighterRewardData = 8987,
         k_EMsgClientToGCOverworldGetDynamicImage = 8988,
         k_EMsgClientToGCOverworldGetDynamicImageResponse = 8989,
+        k_EMsgClientToGCFightingGameChallengeFriend = 8990,
+        k_EMsgClientToGCFightingGameChallengeFriendResponse = 8991,
+        k_EMsgClientToGCFightingGameCancelChallengeFriend = 8992,
+        k_EMsgClientToGCFightingGameAnswerChallenge = 8993,
+        k_EMsgClientToGCFightingGameAnswerChallengeResponse = 8994,
+        k_EMsgGCToClientFightingGameChallenge = 8995,
+        k_EMsgGCToClientFightingGameStartMatch = 8996,
+        k_EMsgGCToClientFightingGameChallengeCanceled = 8997,
     }
 
 }

@@ -1146,14 +1146,14 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__account_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public uint hero_id
+        public int hero_id
         {
             get => __pbn__hero_id.GetValueOrDefault();
             set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
-        private uint? __pbn__hero_id;
+        private int? __pbn__hero_id;
 
     }
 
@@ -1526,14 +1526,14 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            public uint hero_id
+            public int hero_id
             {
                 get => __pbn__hero_id.GetValueOrDefault();
                 set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
-            private uint? __pbn__hero_id;
+            private int? __pbn__hero_id;
 
             [global::ProtoBuf.ProtoMember(2)]
             public uint wins
@@ -2098,14 +2098,14 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public uint hero_id
+        public int hero_id
         {
             get => __pbn__hero_id.GetValueOrDefault();
             set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
-        private uint? __pbn__hero_id;
+        private int? __pbn__hero_id;
 
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<RankChunkedStats> rank_chunked_stats { get; } = new global::System.Collections.Generic.List<RankChunkedStats>();
@@ -3001,14 +3001,14 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__matches_requested;
 
         [global::ProtoBuf.ProtoMember(4)]
-        public uint hero_id
+        public int hero_id
         {
             get => __pbn__hero_id.GetValueOrDefault();
             set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
-        private uint? __pbn__hero_id;
+        private int? __pbn__hero_id;
 
         [global::ProtoBuf.ProtoMember(5)]
         public uint request_id
@@ -3100,14 +3100,14 @@ namespace SteamKit2.GC.Dota.Internal
             private uint? __pbn__start_time;
 
             [global::ProtoBuf.ProtoMember(3)]
-            public uint hero_id
+            public int hero_id
             {
                 get => __pbn__hero_id.GetValueOrDefault();
                 set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
-            private uint? __pbn__hero_id;
+            private int? __pbn__hero_id;
 
             [global::ProtoBuf.ProtoMember(4)]
             public bool winner
@@ -3641,7 +3641,7 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<uint> hero_ids { get; } = new global::System.Collections.Generic.List<uint>();
+        public global::System.Collections.Generic.List<int> hero_ids { get; } = new global::System.Collections.Generic.List<int>();
 
     }
 
@@ -3682,14 +3682,14 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__account_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public uint curr_hero_id
+        public int curr_hero_id
         {
             get => __pbn__curr_hero_id.GetValueOrDefault();
             set => __pbn__curr_hero_id = value;
         }
         public bool ShouldSerializecurr_hero_id() => __pbn__curr_hero_id != null;
         public void Resetcurr_hero_id() => __pbn__curr_hero_id = null;
-        private uint? __pbn__curr_hero_id;
+        private int? __pbn__curr_hero_id;
 
         [global::ProtoBuf.ProtoMember(3)]
         public uint laps_completed
@@ -3772,24 +3772,24 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__lap_heroes_remaining;
 
         [global::ProtoBuf.ProtoMember(11)]
-        public uint next_hero_id
+        public int next_hero_id
         {
             get => __pbn__next_hero_id.GetValueOrDefault();
             set => __pbn__next_hero_id = value;
         }
         public bool ShouldSerializenext_hero_id() => __pbn__next_hero_id != null;
         public void Resetnext_hero_id() => __pbn__next_hero_id = null;
-        private uint? __pbn__next_hero_id;
+        private int? __pbn__next_hero_id;
 
         [global::ProtoBuf.ProtoMember(12)]
-        public uint prev_hero_id
+        public int prev_hero_id
         {
             get => __pbn__prev_hero_id.GetValueOrDefault();
             set => __pbn__prev_hero_id = value;
         }
         public bool ShouldSerializeprev_hero_id() => __pbn__prev_hero_id != null;
         public void Resetprev_hero_id() => __pbn__prev_hero_id = null;
-        private uint? __pbn__prev_hero_id;
+        private int? __pbn__prev_hero_id;
 
         [global::ProtoBuf.ProtoMember(13)]
         public uint prev_hero_games
@@ -3863,14 +3863,14 @@ namespace SteamKit2.GC.Dota.Internal
         private string __pbn__profile_name;
 
         [global::ProtoBuf.ProtoMember(20)]
-        public uint start_hero_id
+        public int start_hero_id
         {
             get => __pbn__start_hero_id.GetValueOrDefault();
             set => __pbn__start_hero_id = value;
         }
         public bool ShouldSerializestart_hero_id() => __pbn__start_hero_id != null;
         public void Resetstart_hero_id() => __pbn__start_hero_id = null;
-        private uint? __pbn__start_hero_id;
+        private int? __pbn__start_hero_id;
 
     }
 
@@ -4202,14 +4202,14 @@ namespace SteamKit2.GC.Dota.Internal
         private ulong? __pbn__source_item_id;
 
         [global::ProtoBuf.ProtoMember(3)]
-        public uint hero_id
+        public int hero_id
         {
             get => __pbn__hero_id.GetValueOrDefault();
             set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
-        private uint? __pbn__hero_id;
+        private int? __pbn__hero_id;
 
         [global::ProtoBuf.ProtoMember(4)]
         [global::System.ComponentModel.DefaultValue("")]
@@ -5262,14 +5262,14 @@ namespace SteamKit2.GC.Dota.Internal
             private uint? __pbn__attempts;
 
             [global::ProtoBuf.ProtoMember(4)]
-            public uint hero_id
+            public int hero_id
             {
                 get => __pbn__hero_id.GetValueOrDefault();
                 set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
-            private uint? __pbn__hero_id;
+            private int? __pbn__hero_id;
 
             [global::ProtoBuf.ProtoMember(5)]
             public uint template_id
@@ -5344,14 +5344,14 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public uint hero_id
+        public int hero_id
         {
             get => __pbn__hero_id.GetValueOrDefault();
             set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
-        private uint? __pbn__hero_id;
+        private int? __pbn__hero_id;
 
     }
 
@@ -5363,14 +5363,14 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public uint hero_id
+        public int hero_id
         {
             get => __pbn__hero_id.GetValueOrDefault();
             set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
-        private uint? __pbn__hero_id;
+        private int? __pbn__hero_id;
 
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<CMsgDOTASDOHeroStatsHistory> records { get; } = new global::System.Collections.Generic.List<CMsgDOTASDOHeroStatsHistory>();
@@ -6578,14 +6578,14 @@ namespace SteamKit2.GC.Dota.Internal
             private uint? __pbn__attempts;
 
             [global::ProtoBuf.ProtoMember(4)]
-            public uint hero_id
+            public int hero_id
             {
                 get => __pbn__hero_id.GetValueOrDefault();
                 set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
-            private uint? __pbn__hero_id;
+            private int? __pbn__hero_id;
 
             [global::ProtoBuf.ProtoMember(5)]
             public uint template_id
@@ -9311,14 +9311,14 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__flags;
 
         [global::ProtoBuf.ProtoMember(4)]
-        public uint commender_hero_id
+        public int commender_hero_id
         {
             get => __pbn__commender_hero_id.GetValueOrDefault();
             set => __pbn__commender_hero_id = value;
         }
         public bool ShouldSerializecommender_hero_id() => __pbn__commender_hero_id != null;
         public void Resetcommender_hero_id() => __pbn__commender_hero_id = null;
-        private uint? __pbn__commender_hero_id;
+        private int? __pbn__commender_hero_id;
 
     }
 
@@ -9340,14 +9340,14 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__player_account_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public uint hero_id
+        public int hero_id
         {
             get => __pbn__hero_id.GetValueOrDefault();
             set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
-        private uint? __pbn__hero_id;
+        private int? __pbn__hero_id;
 
         [global::ProtoBuf.ProtoMember(3)]
         [global::System.ComponentModel.DefaultValue(-1)]
@@ -9699,14 +9699,14 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public uint hero_id
+        public int hero_id
         {
             get => __pbn__hero_id.GetValueOrDefault();
             set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
-        private uint? __pbn__hero_id;
+        private int? __pbn__hero_id;
 
         [global::ProtoBuf.ProtoMember(2)]
         [global::System.ComponentModel.DefaultValue(EHeroRelicRarity.HERO_RELIC_RARITY_INVALID)]
@@ -9853,14 +9853,14 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            public uint hero_id
+            public int hero_id
             {
                 get => __pbn__hero_id.GetValueOrDefault();
                 set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
-            private uint? __pbn__hero_id;
+            private int? __pbn__hero_id;
 
             [global::ProtoBuf.ProtoMember(2)]
             public global::System.Collections.Generic.List<CSOEconItem> equipped_econ_items { get; } = new global::System.Collections.Generic.List<CSOEconItem>();
@@ -9928,14 +9928,14 @@ namespace SteamKit2.GC.Dota.Internal
             private int? __pbn__performance_rating;
 
             [global::ProtoBuf.ProtoMember(4)]
-            public uint hero_id
+            public int hero_id
             {
                 get => __pbn__hero_id.GetValueOrDefault();
                 set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
-            private uint? __pbn__hero_id;
+            private int? __pbn__hero_id;
 
             [global::ProtoBuf.ProtoMember(5)]
             public bool won_match
@@ -9978,7 +9978,7 @@ namespace SteamKit2.GC.Dota.Internal
         private ulong? __pbn__background_item_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<uint> featured_hero_ids { get; } = new global::System.Collections.Generic.List<uint>();
+        public global::System.Collections.Generic.List<int> featured_hero_ids { get; } = new global::System.Collections.Generic.List<int>();
 
     }
 
@@ -10169,14 +10169,14 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public uint hero_id
+        public int hero_id
         {
             get => __pbn__hero_id.GetValueOrDefault();
             set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
-        private uint? __pbn__hero_id;
+        private int? __pbn__hero_id;
 
     }
 
@@ -10188,14 +10188,14 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public uint hero_id
+        public int hero_id
         {
             get => __pbn__hero_id.GetValueOrDefault();
             set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
-        private uint? __pbn__hero_id;
+        private int? __pbn__hero_id;
 
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<HeroDataPerRankChunk> hero_data_per_chunk { get; } = new global::System.Collections.Generic.List<HeroDataPerRankChunk>();
@@ -10361,14 +10361,14 @@ namespace SteamKit2.GC.Dota.Internal
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            public uint hero_id
+            public int hero_id
             {
                 get => __pbn__hero_id.GetValueOrDefault();
                 set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
-            private uint? __pbn__hero_id;
+            private int? __pbn__hero_id;
 
             [global::ProtoBuf.ProtoMember(2)]
             public uint win_rate
@@ -10381,14 +10381,14 @@ namespace SteamKit2.GC.Dota.Internal
             private uint? __pbn__win_rate;
 
             [global::ProtoBuf.ProtoMember(3)]
-            public uint first_other_hero_id
+            public int first_other_hero_id
             {
                 get => __pbn__first_other_hero_id.GetValueOrDefault();
                 set => __pbn__first_other_hero_id = value;
             }
             public bool ShouldSerializefirst_other_hero_id() => __pbn__first_other_hero_id != null;
             public void Resetfirst_other_hero_id() => __pbn__first_other_hero_id = null;
-            private uint? __pbn__first_other_hero_id;
+            private int? __pbn__first_other_hero_id;
 
             [global::ProtoBuf.ProtoMember(5)]
             public global::System.Collections.Generic.List<uint> ally_win_rate { get; } = new global::System.Collections.Generic.List<uint>();
@@ -10508,14 +10508,14 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__event_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public uint hero_id_completed
+        public int hero_id_completed
         {
             get => __pbn__hero_id_completed.GetValueOrDefault();
             set => __pbn__hero_id_completed = value;
         }
         public bool ShouldSerializehero_id_completed() => __pbn__hero_id_completed != null;
         public void Resethero_id_completed() => __pbn__hero_id_completed = null;
-        private uint? __pbn__hero_id_completed;
+        private int? __pbn__hero_id_completed;
 
         [global::ProtoBuf.ProtoMember(3)]
         public global::System.Collections.Generic.List<CompletedPathInfo> completed_paths { get; } = new global::System.Collections.Generic.List<CompletedPathInfo>();
@@ -12979,14 +12979,14 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__account_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        public uint hero_id
+        public int hero_id
         {
             get => __pbn__hero_id.GetValueOrDefault();
             set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
-        private uint? __pbn__hero_id;
+        private int? __pbn__hero_id;
 
     }
 
@@ -13665,14 +13665,14 @@ namespace SteamKit2.GC.Dota.Internal
             private ulong? __pbn__match_id;
 
             [global::ProtoBuf.ProtoMember(2)]
-            public uint hero_id
+            public int hero_id
             {
                 get => __pbn__hero_id.GetValueOrDefault();
                 set => __pbn__hero_id = value;
             }
             public bool ShouldSerializehero_id() => __pbn__hero_id != null;
             public void Resethero_id() => __pbn__hero_id = null;
-            private uint? __pbn__hero_id;
+            private int? __pbn__hero_id;
 
             [global::ProtoBuf.ProtoMember(3)]
             public uint report_reason
@@ -13887,14 +13887,14 @@ namespace SteamKit2.GC.Dota.Internal
         private EOverwatchReportReason? __pbn__report_reason;
 
         [global::ProtoBuf.ProtoMember(9)]
-        public uint target_hero_id
+        public int target_hero_id
         {
             get => __pbn__target_hero_id.GetValueOrDefault();
             set => __pbn__target_hero_id = value;
         }
         public bool ShouldSerializetarget_hero_id() => __pbn__target_hero_id != null;
         public void Resettarget_hero_id() => __pbn__target_hero_id = null;
-        private uint? __pbn__target_hero_id;
+        private int? __pbn__target_hero_id;
 
         [global::ProtoBuf.ProtoMember(10)]
         public uint rank_tier
@@ -14917,14 +14917,14 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public uint hero_id
+        public int hero_id
         {
             get => __pbn__hero_id.GetValueOrDefault();
             set => __pbn__hero_id = value;
         }
         public bool ShouldSerializehero_id() => __pbn__hero_id != null;
         public void Resethero_id() => __pbn__hero_id = null;
-        private uint? __pbn__hero_id;
+        private int? __pbn__hero_id;
 
         [global::ProtoBuf.ProtoMember(2)]
         public ulong new_item_id
@@ -15711,7 +15711,7 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<uint> banned_hero_ids { get; } = new global::System.Collections.Generic.List<uint>();
+        public global::System.Collections.Generic.List<int> banned_hero_ids { get; } = new global::System.Collections.Generic.List<int>();
 
     }
 

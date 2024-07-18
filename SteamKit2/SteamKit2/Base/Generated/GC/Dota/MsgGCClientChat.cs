@@ -575,14 +575,14 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__badge_level;
 
         [global::ProtoBuf.ProtoMember(26)]
-        public uint suggest_pick_hero_id
+        public int suggest_pick_hero_id
         {
             get => __pbn__suggest_pick_hero_id.GetValueOrDefault();
             set => __pbn__suggest_pick_hero_id = value;
         }
         public bool ShouldSerializesuggest_pick_hero_id() => __pbn__suggest_pick_hero_id != null;
         public void Resetsuggest_pick_hero_id() => __pbn__suggest_pick_hero_id = null;
-        private uint? __pbn__suggest_pick_hero_id;
+        private int? __pbn__suggest_pick_hero_id;
 
         [global::ProtoBuf.ProtoMember(27)]
         [global::System.ComponentModel.DefaultValue("")]
@@ -596,14 +596,14 @@ namespace SteamKit2.GC.Dota.Internal
         private string __pbn__suggest_pick_hero_role;
 
         [global::ProtoBuf.ProtoMember(30)]
-        public uint suggest_ban_hero_id
+        public int suggest_ban_hero_id
         {
             get => __pbn__suggest_ban_hero_id.GetValueOrDefault();
             set => __pbn__suggest_ban_hero_id = value;
         }
         public bool ShouldSerializesuggest_ban_hero_id() => __pbn__suggest_ban_hero_id != null;
         public void Resetsuggest_ban_hero_id() => __pbn__suggest_ban_hero_id = null;
-        private uint? __pbn__suggest_ban_hero_id;
+        private int? __pbn__suggest_ban_hero_id;
 
         [global::ProtoBuf.ProtoMember(32)]
         public TriviaAnswered trivia_answer { get; set; }

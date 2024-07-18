@@ -132,6 +132,16 @@ namespace SteamKit2.WebUI.Internal
         [global::ProtoBuf.ProtoMember(13)]
         public global::System.Collections.Generic.List<uint> appids { get; } = new global::System.Collections.Generic.List<uint>();
 
+        [global::ProtoBuf.ProtoMember(14)]
+        public uint event_post_time
+        {
+            get => __pbn__event_post_time.GetValueOrDefault();
+            set => __pbn__event_post_time = value;
+        }
+        public bool ShouldSerializeevent_post_time() => __pbn__event_post_time != null;
+        public void Resetevent_post_time() => __pbn__event_post_time = null;
+        private uint? __pbn__event_post_time;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

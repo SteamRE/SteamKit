@@ -2033,6 +2033,16 @@ namespace SteamKit2.GC.CSGO.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public ScoreLeaderboardData missionlbsdata { get; set; }
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint flags
+        {
+            get => __pbn__flags.GetValueOrDefault();
+            set => __pbn__flags = value;
+        }
+        public bool ShouldSerializeflags() => __pbn__flags != null;
+        public void Resetflags() => __pbn__flags = null;
+        private uint? __pbn__flags;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -699,6 +699,26 @@ namespace SteamKit2.Internal
             public void Resetweight() => __pbn__weight = null;
             private long? __pbn__weight;
 
+            [global::ProtoBuf.ProtoMember(9)]
+            public int ping
+            {
+                get => __pbn__ping.GetValueOrDefault();
+                set => __pbn__ping = value;
+            }
+            public bool ShouldSerializeping() => __pbn__ping != null;
+            public void Resetping() => __pbn__ping = null;
+            private int? __pbn__ping;
+
+            [global::ProtoBuf.ProtoMember(10)]
+            public int missing_ping
+            {
+                get => __pbn__missing_ping.GetValueOrDefault();
+                set => __pbn__missing_ping = value;
+            }
+            public bool ShouldSerializemissing_ping() => __pbn__missing_ping != null;
+            public void Resetmissing_ping() => __pbn__missing_ping = null;
+            private int? __pbn__missing_ping;
+
         }
 
     }

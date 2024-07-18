@@ -1234,6 +1234,7 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_10TH_ANNIVERSARY = 46,
         EVENT_ID_CROWNFALL = 47,
         EVENT_ID_FROSTIVUS_2023 = 48,
+        EVENT_ID_INTERNATIONAL_2024 = 49,
     }
 
     [global::ProtoBuf.ProtoContract()]

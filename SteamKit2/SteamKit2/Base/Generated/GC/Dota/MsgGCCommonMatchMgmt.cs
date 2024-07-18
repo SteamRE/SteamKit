@@ -143,7 +143,7 @@ namespace SteamKit2.GC.Dota.Internal
         private bool? __pbn__is_steam_china;
 
         [global::ProtoBuf.ProtoMember(17)]
-        public global::System.Collections.Generic.List<uint> banned_hero_ids { get; } = new global::System.Collections.Generic.List<uint>();
+        public global::System.Collections.Generic.List<int> banned_hero_ids { get; } = new global::System.Collections.Generic.List<int>();
 
     }
 

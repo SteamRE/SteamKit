@@ -132,7 +132,7 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<uint> hero_ids { get; } = new global::System.Collections.Generic.List<uint>();
+        public global::System.Collections.Generic.List<int> hero_ids { get; } = new global::System.Collections.Generic.List<int>();
 
     }
 
@@ -765,15 +765,14 @@ namespace SteamKit2.GC.Dota.Internal
         public CMsgOverworldTokenQuantity token_request { get; set; }
 
         [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue(ETradeRecipe.k_eThreeToOneChosen)]
-        public ETradeRecipe recipe
+        public uint recipe
         {
-            get => __pbn__recipe ?? ETradeRecipe.k_eThreeToOneChosen;
+            get => __pbn__recipe.GetValueOrDefault();
             set => __pbn__recipe = value;
         }
         public bool ShouldSerializerecipe() => __pbn__recipe != null;
         public void Resetrecipe() => __pbn__recipe = null;
-        private ETradeRecipe? __pbn__recipe;
+        private uint? __pbn__recipe;
 
         [global::ProtoBuf.ProtoMember(5)]
         public uint encounter_id
@@ -784,15 +783,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeencounter_id() => __pbn__encounter_id != null;
         public void Resetencounter_id() => __pbn__encounter_id = null;
         private uint? __pbn__encounter_id;
-
-        [global::ProtoBuf.ProtoContract()]
-        public enum ETradeRecipe
-        {
-            k_eThreeToOneChosen = 1,
-            k_eFourToOneChosen = 2,
-            k_eThreeToTwoRandom = 3,
-            k_eSixScrapToOneChosen = 4,
-        }
 
     }
 
@@ -832,6 +822,7 @@ namespace SteamKit2.GC.Dota.Internal
             k_eNotEnoughTokens = 9,
             k_eInvalidNode = 10,
             k_eInvalidEncounter = 11,
+            k_eRewardDoesNotMatchRecipe = 12,
         }
 
     }

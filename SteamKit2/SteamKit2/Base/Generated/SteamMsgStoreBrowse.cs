@@ -289,6 +289,16 @@ namespace SteamKit2.Internal
         public void Resetapply_user_filters() => __pbn__apply_user_filters = null;
         private bool? __pbn__apply_user_filters;
 
+        [global::ProtoBuf.ProtoMember(17)]
+        public bool include_links
+        {
+            get => __pbn__include_links.GetValueOrDefault();
+            set => __pbn__include_links = value;
+        }
+        public bool ShouldSerializeinclude_links() => __pbn__include_links != null;
+        public void Resetinclude_links() => __pbn__include_links = null;
+        private bool? __pbn__include_links;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -564,6 +574,9 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(70)]
         public StoreBrowseFilterFailure user_filter_failure { get; set; }
+
+        [global::ProtoBuf.ProtoMember(71)]
+        public global::System.Collections.Generic.List<Link> links { get; } = new global::System.Collections.Generic.List<Link>();
 
         [global::ProtoBuf.ProtoContract()]
         public partial class RelatedItems : global::ProtoBuf.IExtensible
@@ -1756,6 +1769,37 @@ namespace SteamKit2.Internal
 
         }
 
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Link : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue(EStoreLinkType.k_EStoreLinkType_None)]
+            public EStoreLinkType link_type
+            {
+                get => __pbn__link_type ?? EStoreLinkType.k_EStoreLinkType_None;
+                set => __pbn__link_type = value;
+            }
+            public bool ShouldSerializelink_type() => __pbn__link_type != null;
+            public void Resetlink_type() => __pbn__link_type = null;
+            private EStoreLinkType? __pbn__link_type;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string url
+            {
+                get => __pbn__url ?? "";
+                set => __pbn__url = value;
+            }
+            public bool ShouldSerializeurl() => __pbn__url != null;
+            public void Reseturl() => __pbn__url = null;
+            private string __pbn__url;
+
+        }
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2576,6 +2620,18 @@ namespace SteamKit2.Internal
         k_EStoreBrowseFilterFailure_NotPreferred = 20,
         k_EStoreBrowseFilterFailure_NotInterested = 30,
         k_EStoreBrowseFilterFailure_UnwantedContent = 40,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EStoreLinkType
+    {
+        k_EStoreLinkType_None = 0,
+        k_EStoreLinkType_YouTube = 1,
+        k_EStoreLinkType_Facebook = 2,
+        k_EStoreLinkType_Twitter = 3,
+        k_EStoreLinkType_Twitch = 4,
+        k_EStoreLinkType_Discord = 5,
+        k_EStoreLinkType_MAX = 6,
     }
 
     [global::ProtoBuf.ProtoContract()]
