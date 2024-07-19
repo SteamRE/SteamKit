@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
@@ -65,6 +66,11 @@ namespace SteamKit2
 
         public static string ReadNullTermString( this Stream stream, Encoding encoding )
         {
+            if ( encoding == Encoding.UTF8 )
+            {
+                return ReadNullTermUtf8String( stream );
+            }
+
             int characterSize = encoding.GetByteCount( "e" );
 
             using MemoryStream ms = new MemoryStream();
@@ -83,6 +89,43 @@ namespace SteamKit2
             }
 
             return encoding.GetString( ms.GetBuffer(), 0, ( int )ms.Length );
+        }
+
+        private static string ReadNullTermUtf8String( Stream stream )
+        {
+            var buffer = ArrayPool<byte>.Shared.Rent( 32 );
+
+            try
+            {
+                var position = 0;
+
+                do
+                {
+                    var b = stream.ReadByte();
+
+                    if ( b <= 0 ) // null byte or stream ended
+                    {
+                        break;
+                    }
+
+                    if ( position >= buffer.Length )
+                    {
+                        var newBuffer = ArrayPool<byte>.Shared.Rent( buffer.Length * 2 );
+                        Buffer.BlockCopy( buffer, 0, newBuffer, 0, buffer.Length );
+                        ArrayPool<byte>.Shared.Return( buffer );
+                        buffer = newBuffer;
+                    }
+
+                    buffer[ position++ ] = (byte)b;
+                }
+                while ( true );
+
+                return Encoding.UTF8.GetString( buffer[ ..position ] );
+            }
+            finally
+            {
+                ArrayPool<byte>.Shared.Return( buffer );
+            }
         }
 
         public static void WriteNullTermString( this Stream stream, string value, Encoding encoding )
