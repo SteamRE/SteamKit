@@ -384,18 +384,5 @@ namespace SteamKit2
             }
             return BitConverter.GetBytes( a | ( b << 16 ) );
         }
-
-        /// <summary>
-        /// Generate an array of random bytes given the input length
-        /// </summary>
-        public static byte[] GenerateRandomBlock( int size )
-        {
-            using var rng = RandomNumberGenerator.Create();
-            var block = new byte[ size ];
-
-            rng.GetBytes( block );
-
-            return block;
-        }
     }
 }

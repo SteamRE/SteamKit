@@ -75,7 +75,7 @@ namespace SteamKit2.CDN
 
             DebugLog.Assert( ChunkInfo.Checksum != null, nameof( DepotChunk ), "Expected data chunk to have a checksum." );
 
-            byte[] dataCrc = CryptoHelper.AdlerHash( processedData );
+            byte[] dataCrc = Utils.AdlerHash( processedData );
 
             if ( !dataCrc.SequenceEqual( ChunkInfo.Checksum ) )
             {
