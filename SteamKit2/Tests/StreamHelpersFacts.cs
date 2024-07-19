@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Text;
 using System.Threading;
 using SteamKit2;
 using Xunit;
@@ -11,6 +12,36 @@ namespace Tests
 {
     public class StreamHelpersFacts
     {
+        [Fact]
+        public void ReadsNullTerminatedString()
+        {
+            Span<(Encoding Encoding, string String)> testCases = [
+                (Encoding.ASCII, "Hello, World!"),
+                (Encoding.UTF8, "Hello, 世界!"),
+                (Encoding.Unicode, "Hello, 世界!"),
+                (Encoding.GetEncoding( 0 ), "Whats this"),
+                (Encoding.Default, "Hello, World!"),
+            ];
+
+            foreach (var testCase in testCases)
+            {
+                var encodedBytes = testCase.Encoding.GetBytes(testCase.String);
+
+                // test eos
+                using var ms = new MemoryStream(encodedBytes);
+                var result = ms.ReadNullTermString(testCase.Encoding);
+                Assert.Equal(testCase.String, result);
+
+                // test null terminated
+                var encodedBytesNullTerm = new byte[encodedBytes.Length + 1];
+                encodedBytes.CopyTo(encodedBytesNullTerm, 0);
+
+                using var msNullTerm = new MemoryStream(encodedBytesNullTerm);
+                var resultNullTerm = msNullTerm.ReadNullTermString(testCase.Encoding);
+                Assert.Equal(testCase.String, resultNullTerm);
+            }
+        }
+
         [Fact]
         public void IsThreadSafe()
         {
