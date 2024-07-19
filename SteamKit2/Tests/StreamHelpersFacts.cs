@@ -40,6 +40,13 @@ namespace Tests
                 var resultNullTerm = msNullTerm.ReadNullTermString(testCase.Encoding);
                 Assert.Equal(testCase.String, resultNullTerm);
             }
+
+            // unicode case where first byte is null, but its not nullterm
+            using var msUnicode = new MemoryStream([64, 0, 0, 64]);
+            var resultStandardImplementation = Encoding.Unicode.GetString(msUnicode.ToArray());
+            var resultUnicode = msUnicode.ReadNullTermString(Encoding.Unicode);
+            Assert.Equal(2, resultStandardImplementation.Length);
+            Assert.Equal(2, resultUnicode.Length);
         }
 
         [Fact]
