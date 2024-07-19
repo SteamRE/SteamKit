@@ -150,20 +150,24 @@ namespace SteamKit2
             
             var tempSessionKey = RandomNumberGenerator.GetBytes( 32 );
             byte[] encryptedHandshakeBlob;
-            
-            using ( var rsa = new RSACrypto( publicKey ) )
+
+            using ( var rsa = RSA.Create() )
             {
+                rsa.ImportSubjectPublicKeyInfo( publicKey, out _ );
+
+                var padding = RSAEncryptionPadding.OaepSHA1;
+
                 if ( randomChallenge != null )
                 {
                     var blobToEncrypt = new byte[ tempSessionKey.Length + randomChallenge.Length ];
                     Array.Copy( tempSessionKey, blobToEncrypt, tempSessionKey.Length );
                     Array.Copy( randomChallenge, 0, blobToEncrypt, tempSessionKey.Length, randomChallenge.Length );
 
-                    encryptedHandshakeBlob = rsa.Encrypt( blobToEncrypt );
+                    encryptedHandshakeBlob = rsa.Encrypt( blobToEncrypt, padding );
                 }
                 else
                 {
-                    encryptedHandshakeBlob = rsa.Encrypt( tempSessionKey );
+                    encryptedHandshakeBlob = rsa.Encrypt( tempSessionKey, padding );
                 }
             }
 

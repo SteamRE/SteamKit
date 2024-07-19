@@ -14,48 +14,6 @@ using System.Text;
 
 namespace SteamKit2
 {
-
-    /// <summary>
-    /// Handles encrypting and decrypting using the RSA public key encryption
-    /// algorithm.
-    /// </summary>
-    public class RSACrypto : IDisposable
-    {
-        RSA rsa;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SteamKit2.RSACrypto"/> class.
-        /// </summary>
-        /// <param name="key">The public key to encrypt with.</param>
-        public RSACrypto( byte[] key )
-        {
-            ArgumentNullException.ThrowIfNull( key );
-
-            rsa = RSA.Create();
-            rsa.ImportSubjectPublicKeyInfo( key, out _ );
-        }
-
-        /// <summary>
-        /// Encrypt the specified input.
-        /// </summary>
-        /// <returns>The encrypted input.</returns>
-        /// <param name="input">The input to encrypt.</param>
-        public byte[] Encrypt( byte[] input )
-        {
-            ArgumentNullException.ThrowIfNull( input );
-
-            return rsa.Encrypt( input, RSAEncryptionPadding.OaepSHA1 );
-        }
-
-        /// <summary>
-        /// Disposes of this class.
-        /// </summary>
-        public void Dispose()
-        {
-            rsa.Dispose();
-        }
-    }
-
     /// <summary>
     /// Provides Crypto functions used in Steam protocols
     /// </summary>
