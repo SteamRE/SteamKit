@@ -4,7 +4,7 @@ using System.IO.Hashing;
 
 namespace SteamKit2
 {
-    class VZipDeltaUtil
+    static class VZipDeltaUtil
     {
         private static ushort VZipHeader = 0x5A56;
         private static ushort VZipFooter = 0x767A;

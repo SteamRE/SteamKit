@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO.Hashing;
 using System.Net;
+using System.Security.Cryptography;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -147,7 +148,7 @@ namespace SteamKit2
 
             var response = new Msg<MsgChannelEncryptResponse>();
             
-            var tempSessionKey = CryptoHelper.GenerateRandomBlock( 32 );
+            var tempSessionKey = RandomNumberGenerator.GetBytes( 32 );
             byte[] encryptedHandshakeBlob;
             
             using ( var rsa = new RSACrypto( publicKey ) )
