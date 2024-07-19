@@ -10,7 +10,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace SteamKit2
 {
@@ -19,67 +18,6 @@ namespace SteamKit2
     /// </summary>
     public static class CryptoHelper
     {
-        /// <summary>
-        /// Encrypts using AES/CBC/PKCS7 an input byte array with a given key and IV
-        /// </summary>
-        public static byte[] AESEncrypt( byte[] input, byte[] key, byte[] iv )
-        {
-            ArgumentNullException.ThrowIfNull( input );
-
-            ArgumentNullException.ThrowIfNull( key );
-
-            ArgumentNullException.ThrowIfNull( iv );
-
-            using var aes = Aes.Create();
-            aes.BlockSize = 128;
-            aes.KeySize = 128;
-
-            aes.Mode = CipherMode.CBC;
-            aes.Padding = PaddingMode.PKCS7;
-
-            using var aesTransform = aes.CreateEncryptor( key, iv );
-            using var ms = new MemoryStream();
-            using var cs = new CryptoStream( ms, aesTransform, CryptoStreamMode.Write );
-            cs.Write( input, 0, input.Length );
-            cs.FlushFinalBlock();
-
-            return ms.ToArray();
-        }
-
-        /// <summary>
-        /// Decrypts an input byte array using AES/CBC/PKCS7 with a given key and IV
-        /// </summary>
-        public static byte[] AESDecrypt( byte[] input, byte[] key, byte[] iv )
-        {
-            ArgumentNullException.ThrowIfNull( input );
-
-            ArgumentNullException.ThrowIfNull( key );
-
-            ArgumentNullException.ThrowIfNull( iv );
-
-            using var aes = Aes.Create();
-            aes.BlockSize = 128;
-            aes.KeySize = 128;
-
-            aes.Mode = CipherMode.CBC;
-            aes.Padding = PaddingMode.PKCS7;
-
-            byte[] plainText = new byte[ input.Length ];
-            int outLen = 0;
-
-            using ( var aesTransform = aes.CreateDecryptor( key, iv ) )
-            using ( var ms = new MemoryStream( input ) )
-            using ( var cs = new CryptoStream( ms, aesTransform, CryptoStreamMode.Read ) )
-            {
-                outLen = cs.ReadAll( plainText );
-            }
-
-            byte[] output = new byte[ outLen ];
-            Array.Copy( plainText, 0, output, 0, output.Length );
-
-            return output;
-        }
-
         /// <summary>
         /// Performs an encryption using AES/CBC/PKCS7 with an input byte array and key, with a random IV prepended using AES/ECB/None
         /// </summary>
@@ -274,73 +212,6 @@ namespace SteamKit2
 
                 return output;
             }
-        }
-
-        /// <summary>
-        /// Verifies and performs a symmetricdecrypt on the input using the given password as a key
-        /// </summary>
-        public static byte[]? VerifyAndDecryptPassword( byte[] input, string password )
-        {
-            ArgumentNullException.ThrowIfNull( input );
-
-            ArgumentNullException.ThrowIfNull( password );
-
-            byte[] key, hash;
-            byte[] password_bytes = Encoding.UTF8.GetBytes( password );
-            key = SHA256.HashData( password_bytes );
-
-            using ( HMACSHA1 hmac = new HMACSHA1( key ) )
-            {
-                hash = hmac.ComputeHash( input, 0, 32 );
-            }
-
-            for ( int i = 32; i < input.Length; i++ )
-                if ( input[ i ] != hash[ i % 32 ] )
-                    return null;
-
-            byte[] encrypted = new byte[ 32 ];
-            Array.Copy( input, encrypted, encrypted.Length );
-
-            return CryptoHelper.SymmetricDecrypt( encrypted, key );
-        }
-
-        /// <summary>
-        /// Decrypts using AES/ECB/PKCS7
-        /// </summary>
-        public static byte[] SymmetricDecryptECB( byte[] input, byte[] key )
-        {
-            ArgumentNullException.ThrowIfNull( input );
-
-            ArgumentNullException.ThrowIfNull( key );
-
-            DebugLog.Assert( key.Length == 32, "CryptoHelper", "SymmetricDecryptECB used with non 32 byte key!" );
-
-            using var aes = Aes.Create();
-            aes.BlockSize = 128;
-            aes.KeySize = 256;
-            aes.Mode = CipherMode.ECB;
-            aes.Padding = PaddingMode.PKCS7;
-
-            using var aesTransform = aes.CreateDecryptor( key, null );
-            byte[] output = aesTransform.TransformFinalBlock( input, 0, input.Length );
-
-            return output;
-        }
-
-        /// <summary>
-        /// Performs an Adler32 on the given input
-        /// </summary>
-        public static byte[] AdlerHash( byte[] input )
-        {
-            ArgumentNullException.ThrowIfNull( input );
-
-            uint a = 0, b = 0;
-            for ( int i = 0 ; i < input.Length ; i++ )
-            {
-                a = ( a + input[ i ] ) % 65521;
-                b = ( b + a ) % 65521;
-            }
-            return BitConverter.GetBytes( a | ( b << 16 ) );
         }
     }
 }
