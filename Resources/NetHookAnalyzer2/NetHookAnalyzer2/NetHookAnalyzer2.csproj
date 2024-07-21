@@ -10,6 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\..\SteamKit2\SteamKit2\Util\StreamHelpers.cs" Link="Util\StreamHelpers.cs" />
+    <Compile Include="..\..\..\SteamKit2\SteamKit2\Util\CryptoHelper.cs" Link="Util\CryptoHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.4.1" />
   </ItemGroup>
 
