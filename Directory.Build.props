@@ -11,6 +11,7 @@
         <AssemblyVersion>$(SteamKitBaseVersion)</AssemblyVersion>
         <FileVersion>$(SteamKitBaseVersion)</FileVersion>
         <Version>$(SteamKitVersion)</Version>
+        <AssemblyOriginatorKeyFile>$(SteamKitRootDir)/SteamKit.snk</AssemblyOriginatorKeyFile>
 
         <GitHubActionsRef Condition="$(GITHUB_REF.StartsWith('refs/heads/'))">$(GITHUB_REF.Substring(11))</GitHubActionsRef>
         <GitHubActionsRef Condition="$(GitHubActionsRef) == ''">$(GITHUB_REF)</GitHubActionsRef>
