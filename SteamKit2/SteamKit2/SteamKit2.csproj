@@ -8,6 +8,7 @@
     <PackageReleaseNotes>Release notes are available at https://github.com/SteamRE/SteamKit/releases/tag/3.0.0-Alpha.2</PackageReleaseNotes>
     <PackageIcon>steamkit_logo_128.png</PackageIcon>
     <PackageProjectUrl>https://github.com/SteamRE/SteamKit</PackageProjectUrl>
+    <PackageReadmeFile>description.md</PackageReadmeFile>
     <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
     <PackageTags>steamkit;sk2;steam;valve;dota;dota2;csgo</PackageTags>
     <RepositoryUrl>https://github.com/SteamRE/SteamKit</RepositoryUrl>
@@ -48,6 +49,7 @@
         <PackagePath />
     </Content>
     <None Include="..\..\Resources\Misc\steamkit_logo_128.png" Pack="true" PackagePath="\" />
+    <None Include="..\..\Resources\Misc\package_readme.md" Pack="true" PackagePath="\description.md" />
   </ItemGroup>
 
   <ItemGroup>
