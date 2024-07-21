@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <RollForward>LatestMajor</RollForward>
-    <AssemblyOriginatorKeyFile>..\..\SteamKit.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
