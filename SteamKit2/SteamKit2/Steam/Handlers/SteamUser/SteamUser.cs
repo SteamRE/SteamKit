@@ -32,6 +32,27 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Represents the ui mode for logging into Steam.
+        /// </summary>
+        public enum UiMode : uint
+        {
+            /// <summary>
+            /// The default ui mode.
+            /// </summary>
+            Default = 0,
+            
+            /// <summary>
+            /// Big Picture ui mode.
+            /// </summary>
+            BigPicture = 1,
+            
+            /// <summary>
+            /// Mobile (phone) ui mode.
+            /// </summary>
+            Mobile = 2
+        }
+
+        /// <summary>
         /// Represents the details required to log into Steam3 as a user.
         /// </summary>
         public sealed class LogOnDetails
@@ -132,6 +153,12 @@ namespace SteamKit2
             /// </summary>
             /// <value>The chat mode.</value>
             public ChatMode ChatMode { get; set; } = ChatMode.Default;
+            
+            /// <summary>
+            /// Gets or sets the ui mode.
+            /// </summary>
+            /// <value>The ui mode.</value>
+            public UiMode UiMode { get; set; } = UiMode.Default;
 
             /// <summary>
             /// Initializes a new instance of the <see cref="LogOnDetails"/> class.
@@ -277,6 +304,11 @@ namespace SteamKit2
             if ( details.ChatMode != ChatMode.Default )
             {
                 logon.Body.chat_mode = ( uint )details.ChatMode;
+            }
+            
+            if ( details.UiMode != UiMode.Default )
+            {
+                logon.Body.ui_mode = ( uint )details.UiMode;
             }
 
             // steam guard 
