@@ -3387,6 +3387,17 @@ namespace SteamKit2
 		SingleApp = 8,
 		GameServer = 9,
 	}
+	public enum EUIMode
+	{
+		Unknown = -1,
+		VGUI = 0,
+		Tenfoot = 1,
+		Mobile = 2,
+		Web = 3,
+		ClientUI = 4,
+		MobileChat = 5,
+		EmbeddedClient = 6,
+	}
 	public enum EUdpPacketType : byte
 	{
 		Invalid = 0,
