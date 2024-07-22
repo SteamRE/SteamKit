@@ -182,7 +182,7 @@ namespace SteamKit2
 
             ArgumentNullException.ThrowIfNull( key );
 
-            var iv = GenerateRandomBlock( 16 );
+            var iv = RandomNumberGenerator.GetBytes( 16 );
             return SymmetricEncryptWithIV( input, key, iv );
         }
 
@@ -199,7 +199,7 @@ namespace SteamKit2
 
             // IV is HMAC-SHA1(Random(3) + Plaintext) + Random(3). (Same random values for both)
             var iv = new byte[ 16 ];
-            var random = GenerateRandomBlock( 3 );
+            var random = RandomNumberGenerator.GetBytes( 3 );
             Array.Copy( random, 0, iv, iv.Length - random.Length, random.Length );
 
             using ( var hmac = new HMACSHA1( hmacSecret ) )
