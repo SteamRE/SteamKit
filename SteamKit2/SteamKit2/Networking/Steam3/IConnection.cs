@@ -38,7 +38,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="endPoint">The end point to connect to.</param>
         /// <param name="timeout">Timeout in milliseconds</param>
-       void Connect( EndPoint endPoint, int timeout = 5000 );
+        void Connect( EndPoint endPoint, int timeout = 5000 );
         /// <summary>
         /// Disconnects this instance.
         /// </summary>
@@ -49,7 +49,7 @@ namespace SteamKit2
         /// Sends the specified data packet.
         /// </summary>
         /// <param name="data">The data packet to send.</param>
-        void Send( byte[] data );
+        void Send( Memory<byte> data );
 
         /// <summary>
         /// Gets the local IP.

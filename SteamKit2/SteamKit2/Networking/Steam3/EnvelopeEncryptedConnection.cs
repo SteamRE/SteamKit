@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.IO.Hashing;
 using System.Net;
 using System.Security.Cryptography;
@@ -24,9 +25,7 @@ namespace SteamKit2
         readonly EUniverse universe;
         readonly ILogContext log;
         EncryptionState state;
-#pragma warning disable CA1859 // Use concrete types when possible for improved performance
-        INetFilterEncryption? encryption;
-#pragma warning restore CA1859
+        NetFilterEncryptionWithHMAC? encryption;
         IDebugNetworkListener? debugNetworkListener;
 
         public EndPoint? CurrentEndPoint => inner.CurrentEndPoint;
@@ -49,14 +48,26 @@ namespace SteamKit2
 
         public IPAddress? GetLocalIP() => inner.GetLocalIP();
 
-        public void Send( byte[] data )
+        public void Send( Memory<byte> data )
         {
-            if ( state == EncryptionState.Encrypted )
+            if ( state != EncryptionState.Encrypted )
             {
-                data = encryption!.ProcessOutgoing( data );
+                inner.Send( data );
+                return;
             }
 
-            inner.Send( data );
+            var buffer = ArrayPool<byte>.Shared.Rent( encryption!.CalculateMaxEncryptedDataLength( data.Length ) );
+            try
+            {
+                var length = encryption!.ProcessOutgoing( data.Span, buffer );
+                var segment = new Memory<byte>( buffer, 0, length );
+
+                inner.Send( segment );
+            }
+            finally
+            {
+                ArrayPool<byte>.Shared.Return( buffer );
+            }
         }
 
         void OnConnected( object? sender, EventArgs e )

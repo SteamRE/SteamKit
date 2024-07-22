@@ -312,7 +312,7 @@ namespace SteamKit2
             return packData;
         }
 
-        public void Send( byte[] data )
+        public void Send( Memory<byte> data )
         {
             lock ( netLock )
             {
@@ -326,7 +326,7 @@ namespace SteamKit2
                 {
                     netWriter!.Write((uint)data.Length);
                     netWriter.Write(MAGIC);
-                    netWriter.Write(data);
+                    netWriter.Write(data.Span);
                 }
                 catch (IOException ex)
                 {

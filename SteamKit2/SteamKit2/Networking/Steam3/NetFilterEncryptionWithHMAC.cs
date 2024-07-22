@@ -5,17 +5,21 @@
 
 
 using System;
+using System.Buffers;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 
 namespace SteamKit2
 {
-    class NetFilterEncryptionWithHMAC : INetFilterEncryption
+    class NetFilterEncryptionWithHMAC
     {
-        readonly byte[] sessionKey;
-        readonly byte[] hmacSecret;
+        const int InitializationVectorLength = 16;
+        const int InitializationVectorRandomLength = 3;
+
+        readonly Aes aes;
         readonly ILogContext log;
+        readonly byte[] hmacSecret;
 
         public NetFilterEncryptionWithHMAC( byte[] sessionKey, ILogContext log )
         {
@@ -23,10 +27,15 @@ namespace SteamKit2
 
             DebugLog.Assert( sessionKey.Length == 32, nameof( NetFilterEncryptionWithHMAC ), "AES session key was not 32 bytes!" );
 
-            this.sessionKey = sessionKey;
             this.log = log;
-            this.hmacSecret = new byte[ 16 ];
+
+            hmacSecret = new byte[ 16 ];
             Array.Copy( sessionKey, 0, hmacSecret, 0, hmacSecret.Length );
+
+            aes = Aes.Create();
+            aes.BlockSize = 128;
+            aes.KeySize = 256;
+            aes.Key = sessionKey;
         }
 
         public byte[] ProcessIncoming( byte[] data )
@@ -44,102 +53,104 @@ namespace SteamKit2
             }
         }
 
-        public byte[] ProcessOutgoing( byte[] data )
-        {
-            return SymmetricEncryptWithHMACIV( data );
-        }
+        public int ProcessOutgoing( Span<byte> data, byte[] output ) => SymmetricEncryptWithHMACIV( data, output );
 
         /// <summary>
         /// Decrypts using AES/CBC/PKCS7 with an input byte array and key, using the IV (comprised of random bytes and the HMAC-SHA1 of the random bytes and plaintext) prepended using AES/ECB/None
         /// </summary>
-        byte[] SymmetricDecryptHMACIV( byte[] input )
+        byte[] SymmetricDecryptHMACIV( Span<byte> input )
         {
-            ArgumentNullException.ThrowIfNull( input );
+            Span<byte> iv = stackalloc byte[ InitializationVectorLength ];
 
-            var truncatedKeyForHmac = new byte[ 16 ];
-            Array.Copy( sessionKey, 0, truncatedKeyForHmac, 0, truncatedKeyForHmac.Length );
+            aes.DecryptEcb( input[ ..iv.Length ], iv, PaddingMode.None );
+            byte[] plainText = aes.DecryptCbc( input[ iv.Length.. ], iv, PaddingMode.PKCS7 );
 
-            var plaintextData = CryptoHelper.SymmetricDecrypt( input, sessionKey, out var iv );
+            ValidateInitializationVector( plainText, iv );
 
-            // validate HMAC
-            byte[] hmacBytes;
-            using ( var hmac = new HMACSHA1( hmacSecret ) )
-            using ( var ms = new MemoryStream() )
-            {
-                ms.Write( iv, iv.Length - 3, 3 );
-                ms.Write( plaintextData, 0, plaintextData.Length );
-                ms.Seek( 0, SeekOrigin.Begin );
-
-                hmacBytes = hmac.ComputeHash( ms );
-            }
-
-            if ( !hmacBytes.Take( iv.Length - 3 ).SequenceEqual( iv.Take( iv.Length - 3 ) ) )
-            {
-                throw new CryptographicException( $"{nameof( SymmetricDecryptHMACIV )} was unable to decrypt packet: HMAC from server did not match computed HMAC." );
-            }
-
-            return plaintextData;
+            return plainText;
         }
 
         /// <summary>
         /// Performs an encryption using AES/CBC/PKCS7 with an input byte array and key, with a IV (comprised of random bytes and the HMAC-SHA1 of the random bytes and plaintext) prepended using AES/ECB/None
         /// </summary>
-        byte[] SymmetricEncryptWithHMACIV( byte[] input )
+        int SymmetricEncryptWithHMACIV( Span<byte> input, byte[] output )
         {
-            ArgumentNullException.ThrowIfNull( input );
-
             // IV is HMAC-SHA1(Random(3) + Plaintext) + Random(3). (Same random values for both)
-            var iv = new byte[ 16 ];
-            var random = RandomNumberGenerator.GetBytes( 3 );
-            Array.Copy( random, 0, iv, iv.Length - random.Length, random.Length );
+            Span<byte> iv = stackalloc byte[ InitializationVectorLength ];
 
-            using ( var hmac = new HMACSHA1( hmacSecret ) )
-            using ( var ms = new MemoryStream() )
+            GenerateInitializationVector( input, iv );
+
+            var outputSpan = output.AsSpan();
+
+            // final output is 16 byte ecb crypted IV + cbc crypted plaintext
+            var cryptedIvLength = aes.EncryptEcb( iv, outputSpan, PaddingMode.None );
+            var cipherTextLength = aes.EncryptCbc( input, iv, outputSpan[ cryptedIvLength.. ], PaddingMode.PKCS7 );
+
+            return cryptedIvLength + cipherTextLength;
+        }
+
+        void GenerateInitializationVector( Span<byte> plainText, Span<byte> iv )
+        {
+            var hashLength = InitializationVectorLength - InitializationVectorRandomLength;
+            RandomNumberGenerator.Fill( iv[ hashLength.. ] );
+
+            var hmacBufferLength = plainText.Length + InitializationVectorRandomLength;
+            var hmacBuffer = ArrayPool<byte>.Shared.Rent( hmacBufferLength );
+
+            try
             {
-                ms.Write( random, 0, random.Length );
-                ms.Write( input, 0, input.Length );
-                ms.Seek( 0, SeekOrigin.Begin );
+                var hmacBufferSpan = hmacBuffer.AsSpan()[ ..hmacBufferLength ];
 
-                var hash = hmac.ComputeHash( ms );
-                Array.Copy( hash, iv, iv.Length - random.Length );
+                // Random(3) + Plaintext
+                iv[ ^InitializationVectorRandomLength.. ].CopyTo( hmacBufferSpan[ ..InitializationVectorRandomLength ] );
+                plainText.CopyTo( hmacBufferSpan[ InitializationVectorRandomLength.. ] );
+
+                Span<byte> hashValue = stackalloc byte[ HMACSHA1.HashSizeInBytes ];
+
+                HMACSHA1.HashData( hmacSecret, hmacBufferSpan, hashValue );
+
+                hashValue[ ..hashLength ].CopyTo( iv );
             }
-
-            using var aes = Aes.Create();
-            aes.BlockSize = 128;
-            aes.KeySize = 256;
-
-            byte[] cryptedIv;
-
-            // encrypt iv using ECB and provided key
-            aes.Mode = CipherMode.ECB;
-            aes.Padding = PaddingMode.None;
-
-            using ( var aesTransform = aes.CreateEncryptor( sessionKey, null ) )
+            finally
             {
-                cryptedIv = aesTransform.TransformFinalBlock( iv, 0, iv.Length );
+                ArrayPool<byte>.Shared.Return( hmacBuffer );
             }
+        }
 
-            // encrypt input plaintext with CBC using the generated (plaintext) IV and the provided key
-            aes.Mode = CipherMode.CBC;
-            aes.Padding = PaddingMode.PKCS7;
+        void ValidateInitializationVector( Span<byte> plainText, Span<byte> iv )
+        {
+            var hashLength = InitializationVectorLength - InitializationVectorRandomLength;
+            var hmacBufferLength = plainText.Length + InitializationVectorRandomLength;
+            var hmacBuffer = ArrayPool<byte>.Shared.Rent( hmacBufferLength );
 
-            using ( var aesTransform = aes.CreateEncryptor( sessionKey, iv ) )
-            using ( var ms = new MemoryStream() )
-            using ( var cs = new CryptoStream( ms, aesTransform, CryptoStreamMode.Write ) )
+            try
             {
-                cs.Write( input, 0, input.Length );
-                cs.FlushFinalBlock();
+                var hmacBufferSpan = hmacBuffer.AsSpan()[ ..hmacBufferLength ];
 
-                var cipherText = ms.ToArray();
+                // Random(3) + Plaintext
+                iv[ ^InitializationVectorRandomLength.. ].CopyTo( hmacBufferSpan[ ..InitializationVectorRandomLength ] );
+                plainText.CopyTo( hmacBufferSpan[ InitializationVectorRandomLength.. ] );
 
-                // final output is 16 byte ecb crypted IV + cbc crypted plaintext
-                var output = new byte[ cryptedIv.Length + cipherText.Length ];
+                Span<byte> hashValue = stackalloc byte[ HMACSHA1.HashSizeInBytes ];
 
-                Array.Copy( cryptedIv, 0, output, 0, cryptedIv.Length );
-                Array.Copy( cipherText, 0, output, cryptedIv.Length, cipherText.Length );
+                HMACSHA1.HashData( hmacSecret, hmacBufferSpan, hashValue );
 
-                return output;
+                if ( !hashValue[ ..hashLength ].SequenceEqual( iv[ ..hashLength ] ) )
+                {
+                    throw new CryptographicException( "HMAC from server did not match computed HMAC." );
+                }
             }
+            finally
+            {
+                ArrayPool<byte>.Shared.Return( hmacBuffer );
+            }
+        }
+
+        public int CalculateMaxEncryptedDataLength( int plaintextDataLength )
+        {
+            int blockSize = aes.BlockSize / 8;
+            int cipherTextSize = ( plaintextDataLength + blockSize ) / blockSize * blockSize;
+            return InitializationVectorLength + cipherTextSize;
         }
     }
 }
