@@ -520,40 +520,33 @@ namespace SteamKit2.Internal
             }
 
             var msgMulti = new ClientMsgProtobuf<CMsgMulti>( packetMsg );
-
-            byte[] payload = msgMulti.Body.message_body;
+            using var payloadStream = new MemoryStream( msgMulti.Body.message_body );
+            Stream stream = payloadStream;
 
             if ( msgMulti.Body.size_unzipped > 0 )
             {
-                try
-                {
-                    using var compressedStream = new MemoryStream( payload );
-                    using var gzipStream = new GZipStream( compressedStream, CompressionMode.Decompress );
-                    using var decompressedStream = new MemoryStream( capacity: ( int )msgMulti.Body.size_unzipped );
-                    gzipStream.CopyTo( decompressedStream );
-                    payload = decompressedStream.ToArray();
-                }
-                catch ( Exception ex )
-                {
-                    LogDebug( "CMClient", "HandleMulti encountered an exception when decompressing.\n{0}", ex.ToString() );
-                    return;
-                }
+                stream = new GZipStream( payloadStream, CompressionMode.Decompress );
             }
 
-            using var ms = new MemoryStream( payload );
-            using var br = new BinaryReader( ms );
-            while ( ( ms.Length - ms.Position ) != 0 )
+            using ( stream )
             {
-                int subSize = br.ReadInt32();
-                byte[] subData = br.ReadBytes( subSize );
+                Span<byte> length = stackalloc byte[ sizeof( int ) ];
 
-                if ( !OnClientMsgReceived( GetPacketMsg( subData, this ) ) )
+                while ( stream.Read( length ) == length.Length )
                 {
-                    break;
+                    var subSize = BitConverter.ToInt32( length );
+                    var subData = new byte[ subSize ];
+
+                    var read = stream.ReadAll( subData );
+
+                    if ( !OnClientMsgReceived( GetPacketMsg( subData, this ) ) )
+                    {
+                        break;
+                    }
                 }
             }
-
         }
+
         void HandleLogOnResponse( IPacketMsg packetMsg )
         {
             if ( !packetMsg.IsProto )
