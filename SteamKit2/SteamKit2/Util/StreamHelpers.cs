@@ -65,11 +65,32 @@ namespace SteamKit2
 
         public static string ReadNullTermString( this Stream stream, Encoding encoding )
         {
-            var nullTermStride = encoding switch {
-                _ when encoding == Encoding.UTF8 => 1,
-                _ => encoding.GetByteCount( "e" ),
-            };
+            if ( encoding == Encoding.UTF8 )
+            {
+                return ReadNullTermUtf8String( stream );
+            }
 
+            int characterSize = encoding.GetByteCount( "e" );
+
+            using MemoryStream ms = new MemoryStream();
+
+            while ( true )
+            {
+                byte[] data = new byte[ characterSize ];
+                stream.Read( data, 0, characterSize );
+
+                if ( encoding.GetString( data, 0, characterSize ) == "\0" )
+                {
+                    break;
+                }
+                ms.Write( data, 0, data.Length );
+            }
+
+            return encoding.GetString( ms.GetBuffer(), 0, ( int )ms.Length );
+        }
+
+        private static string ReadNullTermUtf8String( Stream stream )
+        {
             var buffer = ArrayPool<byte>.Shared.Rent( 32 );
 
             try
@@ -80,15 +101,11 @@ namespace SteamKit2
                 {
                     var b = stream.ReadByte();
 
-                    if ( b == -1 )
+                    if ( b <= 0 ) // null byte or stream ended
                     {
                         break;
                     }
 
-                    if ( b == 0 && position % nullTermStride == 0 )
-                    {
-                        break;
-                    }
 
                     if ( position >= buffer.Length )
                     {
@@ -102,7 +119,7 @@ namespace SteamKit2
                 }
                 while ( true );
 
-                return encoding.GetString( buffer[ ..position ] );
+                return Encoding.UTF8.GetString( buffer[ ..position ] );
             }
             finally
             {
