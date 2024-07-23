@@ -70,20 +70,22 @@ namespace SteamKit2
                 return ReadNullTermUtf8String( stream );
             }
 
-            int characterSize = encoding.GetByteCount( "e" );
+            using MemoryStream ms = new MemoryStream( capacity: 32 );
 
-            using MemoryStream ms = new MemoryStream();
+            int characterSize = encoding.GetByteCount( "e" );
+            Span<byte> data = stackalloc byte[ characterSize ];
 
             while ( true )
             {
-                byte[] data = new byte[ characterSize ];
-                stream.Read( data, 0, characterSize );
+                data.Clear();
+                stream.Read( data );
 
-                if ( encoding.GetString( data, 0, characterSize ) == "\0" )
+                if ( encoding.GetString( data ) == "\0" )
                 {
                     break;
                 }
-                ms.Write( data, 0, data.Length );
+
+                ms.Write( data );
             }
 
             return encoding.GetString( ms.GetBuffer(), 0, ( int )ms.Length );

@@ -19,7 +19,7 @@ namespace Tests
                 (Encoding.ASCII, "Hello, World!"),
                 (Encoding.UTF8, "Hello, 世界!"),
                 (Encoding.Unicode, "Hello, 世界!"),
-                (Encoding.GetEncoding( 0 ), "Whats this"),
+                (Encoding.GetEncoding( 0 ), "System default encoding."),
                 (Encoding.Default, "Hello, World!"),
             ];
 
@@ -44,9 +44,9 @@ namespace Tests
             // unicode case where first byte is null, but its not nullterm
             using var msUnicode = new MemoryStream([64, 0, 0, 64]);
             var resultStandardImplementation = Encoding.Unicode.GetString(msUnicode.ToArray());
-            var resultUnicode = msUnicode.ReadNullTermString(Encoding.Unicode);
+            var resultSteamKitImplementation = msUnicode.ReadNullTermString(Encoding.Unicode);
             Assert.Equal(2, resultStandardImplementation.Length);
-            Assert.Equal(2, resultUnicode.Length);
+            Assert.Equal(2, resultSteamKitImplementation.Length);
         }
 
         [Fact]
