@@ -140,7 +140,7 @@ namespace SteamKit2
 
         public static int ReadAll( this Stream stream, Span<byte> buffer )
         {
-            return stream.ReadAtLeast( buffer, minimumBytes: 0, throwOnEndOfStream: false );
+            return stream.ReadAtLeast( buffer, minimumBytes: buffer.Length, throwOnEndOfStream: false );
         }
     }
 }
