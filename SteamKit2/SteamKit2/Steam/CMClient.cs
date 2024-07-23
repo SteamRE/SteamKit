@@ -532,12 +532,12 @@ namespace SteamKit2.Internal
             {
                 Span<byte> length = stackalloc byte[ sizeof( int ) ];
 
-                while ( stream.Read( length ) == length.Length )
+                while ( stream.ReadAll( length ) > 0 )
                 {
                     var subSize = BitConverter.ToInt32( length );
                     var subData = new byte[ subSize ];
 
-                    var read = stream.ReadAll( subData );
+                    stream.ReadAll( subData );
 
                     if ( !OnClientMsgReceived( GetPacketMsg( subData, this ) ) )
                     {
