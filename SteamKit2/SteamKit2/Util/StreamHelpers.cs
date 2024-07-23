@@ -113,12 +113,32 @@ namespace SteamKit2
 
         public static void WriteNullTermString( this Stream stream, string value, Encoding encoding )
         {
-            var dataLength = encoding.GetByteCount( value );
-            var data = new byte[ dataLength + 1 ];
-            encoding.GetBytes( value, 0, value.Length, data, 0 );
-            data[ dataLength ] = 0x00; // '\0'
+            const string NullTerm = "\0";
+            value ??= string.Empty;
 
-            stream.Write( data, 0, data.Length );
+            var stringByteCount = encoding.GetByteCount( value );
+            var nullTermByteCount = encoding.GetByteCount( NullTerm );
+            var totalByteCount = stringByteCount + nullTermByteCount;
+
+            var isLargeBuffer = totalByteCount > 256;
+            var rented = isLargeBuffer ? ArrayPool<byte>.Shared.Rent( totalByteCount ) : null;
+
+            try
+            {
+                Span<byte> byteSpan = isLargeBuffer ? rented.AsSpan( 0, totalByteCount ) : stackalloc byte[totalByteCount];
+
+                encoding.GetBytes( value.AsSpan(), byteSpan[ ..stringByteCount ] );
+                encoding.GetBytes( NullTerm.AsSpan(), byteSpan[ stringByteCount.. ] );
+
+                stream.Write( byteSpan );
+            }
+            finally
+            {
+                if ( rented != null )
+                {
+                    ArrayPool<byte>.Shared.Return( rented );
+                }
+            }
         }
 
         public static int ReadAll( this Stream stream, byte[] buffer )

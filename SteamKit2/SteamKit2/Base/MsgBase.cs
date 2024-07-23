@@ -237,8 +237,9 @@ namespace SteamKit2
         /// <param name="encoding">The encoding to use.</param>
         public void WriteNullTermString( string data, Encoding encoding )
         {
-            Write( data, encoding );
-            Write( encoding.GetBytes( "\0" ) );
+            ArgumentNullException.ThrowIfNull( encoding );
+
+            Payload.WriteNullTermString( data, encoding );
         }
 
         /// <summary>
