@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Buffers;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 
@@ -125,12 +124,12 @@ namespace SteamKit2
 
             try
             {
-                Span<byte> byteSpan = isLargeBuffer ? rented.AsSpan( 0, totalByteCount ) : stackalloc byte[totalByteCount];
+                Span<byte> encodedSpan = isLargeBuffer ? rented.AsSpan( 0, totalByteCount ) : stackalloc byte[ totalByteCount ];
 
-                encoding.GetBytes( value.AsSpan(), byteSpan[ ..stringByteCount ] );
-                encoding.GetBytes( NullTerm.AsSpan(), byteSpan[ stringByteCount.. ] );
+                encoding.GetBytes( value.AsSpan(), encodedSpan[ ..stringByteCount ] );
+                encoding.GetBytes( NullTerm.AsSpan(), encodedSpan[ stringByteCount.. ] );
 
-                stream.Write( byteSpan );
+                stream.Write( encodedSpan );
             }
             finally
             {
