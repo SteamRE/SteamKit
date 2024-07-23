@@ -509,7 +509,23 @@ namespace SteamKit2
                 /// <summary>
                 /// For an app metadata-only request, returns the Uri for HTTP appinfo requests.
                 /// </summary>
-                public Uri? HttpUri { get; private set; }
+                public Uri? HttpUri
+                {
+                    get
+                    {
+                        // We should have all these fields set for the response to a metadata-only request, but guard here just in case.
+                        if ( !this.HasValidHttpUri )
+                        {
+                            return null;
+                        }
+
+                        var shaString = Convert.ToHexString( this.SHAHash! ).ToLowerInvariant();
+                        var uriString = string.Format( "http://{0}/appinfo/{1}/sha/{2}.txt.gz", this.HttpHost, this.ID, shaString );
+                        return new Uri( uriString );
+                    }
+                }
+                private string? HttpHost;
+                private bool HasValidHttpUri => this.SHAHash != null && this.SHAHash.Length > 0 && !string.IsNullOrEmpty( HttpHost );
 
                 internal PICSProductInfo( CMsgClientPICSProductInfoResponse parentResponse, CMsgClientPICSProductInfoResponse.AppInfo app_info )
                 {
@@ -528,18 +544,8 @@ namespace SteamKit2
                     }
 
                     this.OnlyPublic = app_info.only_public;
-
-                    // We should have all these fields set for the response to a metadata-only request, but guard here just in case.
-                    if ( this.SHAHash != null && this.SHAHash.Length > 0 && !string.IsNullOrEmpty( parentResponse.http_host ) )
-                    {
-                        var shaString = BitConverter.ToString( this.SHAHash )
-                            .Replace( "-", string.Empty )
-                            .ToLower();
-                        var uriString = string.Format( "http://{0}/appinfo/{1}/sha/{2}.txt.gz", parentResponse.http_host, this.ID, shaString );
-                        this.HttpUri = new Uri( uriString );
-                    }
-
-                    this.UseHttp = this.HttpUri != null && app_info.size >= parentResponse.http_min_size;
+                    this.HttpHost = parentResponse.http_host;
+                    this.UseHttp = this.HasValidHttpUri && app_info.size >= parentResponse.http_min_size;
                 }
 
                 internal PICSProductInfo( CMsgClientPICSProductInfoResponse.PackageInfo package_info )
@@ -599,8 +605,8 @@ namespace SteamKit2
                 ResponsePending = msg.response_pending;
                 UnknownPackages = new ReadOnlyCollection<uint>( msg.unknown_packageids );
                 UnknownApps = new ReadOnlyCollection<uint>( msg.unknown_appids );
-                Packages = [];
-                Apps = [];
+                Packages = new( msg.packages.Count );
+                Apps = new( msg.apps.Count );
 
                 foreach ( var package_info in msg.packages )
                 {
