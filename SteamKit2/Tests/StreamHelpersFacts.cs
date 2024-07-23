@@ -13,7 +13,7 @@ namespace Tests
     public class StreamHelpersFacts
     {
         [Fact]
-        public void ReadsNullTerminatedString()
+        public void ReadsWritesNullTerminatedString()
         {
             Span<(Encoding Encoding, string String)> testCases = [
                 (Encoding.ASCII, "Hello, World!"),
@@ -41,12 +41,21 @@ namespace Tests
                 Assert.Equal(testCase.String, resultNullTerm);
             }
 
-            // unicode case where first byte is null, but its not nullterm
-            using var msUnicode = new MemoryStream([64, 0, 0, 64]);
-            var resultStandardImplementation = Encoding.Unicode.GetString(msUnicode.ToArray());
-            var resultSteamKitImplementation = msUnicode.ReadNullTermString(Encoding.Unicode);
+            // utf16 case where first character byte is null, but its not nullterm
+            var data = new byte[] { 64, 0, 0, 64 };
+            var resultStandardImplementation = Encoding.Unicode.GetString(data);
+            var resultSteamKitImplementation = new MemoryStream(data).ReadNullTermString(Encoding.Unicode);
             Assert.Equal(2, resultStandardImplementation.Length);
             Assert.Equal(2, resultSteamKitImplementation.Length);
+
+            // Test null term string write
+            using var writeMs = new MemoryStream();
+            writeMs.WriteNullTermString("A", Encoding.UTF8);
+            Assert.Equal(writeMs.ToArray(), [65, 0]);
+
+            writeMs.Position = 0;
+            writeMs.WriteNullTermString("A", Encoding.Unicode);
+            Assert.Equal(writeMs.ToArray(), [65, 0, 0, 0]);
         }
 
         [Fact]

@@ -63,6 +63,8 @@ namespace SteamKit2
             return BitConverter.ToSingle( data );
         }
 
+        const string NullTerminator = "\0";
+
         public static string ReadNullTermString( this Stream stream, Encoding encoding )
         {
             if ( encoding == Encoding.UTF8 )
@@ -80,7 +82,7 @@ namespace SteamKit2
                 data.Clear();
                 stream.Read( data );
 
-                if ( encoding.GetString( data ) == "\0" )
+                if ( encoding.GetString( data ) == NullTerminator )
                 {
                     break;
                 }
@@ -108,7 +110,6 @@ namespace SteamKit2
                         break;
                     }
 
-
                     if ( position >= buffer.Length )
                     {
                         var newBuffer = ArrayPool<byte>.Shared.Rent( buffer.Length * 2 );
@@ -131,11 +132,10 @@ namespace SteamKit2
 
         public static void WriteNullTermString( this Stream stream, string value, Encoding encoding )
         {
-            const string NullTerm = "\0";
             value ??= string.Empty;
 
             var stringByteCount = encoding.GetByteCount( value );
-            var nullTermByteCount = encoding.GetByteCount( NullTerm );
+            var nullTermByteCount = encoding.GetByteCount( NullTerminator );
             var totalByteCount = stringByteCount + nullTermByteCount;
 
             var isLargeBuffer = totalByteCount > 256;
@@ -146,7 +146,7 @@ namespace SteamKit2
                 Span<byte> encodedSpan = isLargeBuffer ? rented.AsSpan( 0, totalByteCount ) : stackalloc byte[ totalByteCount ];
 
                 encoding.GetBytes( value.AsSpan(), encodedSpan[ ..stringByteCount ] );
-                encoding.GetBytes( NullTerm.AsSpan(), encodedSpan[ stringByteCount.. ] );
+                encoding.GetBytes( NullTerminator.AsSpan(), encodedSpan[ stringByteCount.. ] );
 
                 stream.Write( encodedSpan );
             }
