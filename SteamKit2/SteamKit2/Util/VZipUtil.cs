@@ -6,13 +6,12 @@ namespace SteamKit2
 {
     static class VZipUtil
     {
-        private static ushort VZipHeader = 0x5A56;
-        private static ushort VZipFooter = 0x767A;
-        private static int HeaderLength = 7;
-        private static int FooterLength = 10;
+        private const ushort VZipHeader = 0x5A56;
+        private const ushort VZipFooter = 0x767A;
+        private const int HeaderLength = 7; // magic + version + timestamp/crc
+        private const int FooterLength = 10; // crc + decompressed size + magic
 
-        private static char Version = 'a';
-
+        private const char Version = 'a';
 
         public static byte[] Decompress(byte[] buffer)
         {
@@ -32,25 +31,31 @@ namespace SteamKit2
             // Sometimes this is a CRC32 (e.g. for depot chunks).
             /* uint creationTimestampOrSecondaryCRC = */ reader.ReadUInt32();
 
-            byte[] properties = reader.ReadBytes( 5 );
-            byte[] compressedBuffer = reader.ReadBytes( ( int )ms.Length - HeaderLength - FooterLength - 5 );
+            var properties = reader.ReadBytes( 5 );
+            var compressedBytesOffset = ms.Position;
 
-            uint outputCRC = reader.ReadUInt32();
-            uint sizeDecompressed = reader.ReadUInt32();
+            // jump to the end of the buffer to read the footer
+            ms.Seek( -FooterLength, SeekOrigin.End );
+            var sizeCompressed = ms.Position - compressedBytesOffset;
+            var outputCRC = reader.ReadUInt32();
+            var sizeDecompressed = reader.ReadInt32();
 
             if ( reader.ReadUInt16() != VZipFooter )
             {
                 throw new Exception( "Expecting VZipFooter at end of stream" );
             }
 
+            // jump back to the beginning of the compressed data
+            ms.Position = compressedBytesOffset;
+
             SevenZip.Compression.LZMA.Decoder decoder = new SevenZip.Compression.LZMA.Decoder();
+
             decoder.SetDecoderProperties( properties );
 
-            using MemoryStream inputStream = new MemoryStream( compressedBuffer );
-            using MemoryStream outStream = new MemoryStream( ( int )sizeDecompressed );
-            decoder.Code( inputStream, outStream, compressedBuffer.Length, sizeDecompressed, null );
+            var outData = new byte[ sizeDecompressed ];
+            using MemoryStream outStream = new MemoryStream( outData );
+            decoder.Code( ms, outStream, sizeCompressed, sizeDecompressed, null );
 
-            var outData = outStream.ToArray();
             if ( Crc32.HashToUInt32( outData ) != outputCRC )
             {
                 throw new InvalidDataException( "CRC does not match decompressed data. VZip data may be corrupted." );
