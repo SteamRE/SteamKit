@@ -73,11 +73,9 @@ namespace SteamKit2.CDN
                 processedData = ZipUtil.Decompress( processedData );
             }
 
-            DebugLog.Assert( ChunkInfo.Checksum != null, nameof( DepotChunk ), "Expected data chunk to have a checksum." );
+            var dataCrc = Utils.AdlerHash( processedData );
 
-            byte[] dataCrc = Utils.AdlerHash( processedData );
-
-            if ( !dataCrc.SequenceEqual( ChunkInfo.Checksum ) )
+            if ( dataCrc != ChunkInfo.Checksum )
             {
                 throw new InvalidDataException( "Processed data checksum is incorrect! Downloaded depot chunk is corrupt or invalid/wrong depot key?" );
             }

@@ -40,7 +40,7 @@ namespace SteamKit2
             /// <summary>
             /// Gets or sets the expected Adler32 checksum of this chunk.
             /// </summary>
-            public byte[]? Checksum { get; set; }
+            public uint Checksum { get; set; }
             /// <summary>
             /// Gets or sets the chunk offset.
             /// </summary>
@@ -63,7 +63,7 @@ namespace SteamKit2
             {
             }
 
-            internal ChunkData( byte[] id, byte[] checksum, ulong offset, uint comp_length, uint uncomp_length )
+            internal ChunkData( byte[] id, uint checksum, ulong offset, uint comp_length, uint uncomp_length )
             {
                 this.ChunkID = id;
                 this.Checksum = checksum;
@@ -317,7 +317,7 @@ namespace SteamKit2
 
                 foreach (var chunk in file_mapping.Chunks)
                 {
-                    filedata.Chunks.Add( new ChunkData( chunk.ChunkGID!, chunk.Checksum!, chunk.Offset, chunk.CompressedSize, chunk.DecompressedSize ) );
+                    filedata.Chunks.Add( new ChunkData( chunk.ChunkGID!, chunk.Checksum, chunk.Offset, chunk.CompressedSize, chunk.DecompressedSize ) );
                 }
 
                 Files.Add(filedata);
@@ -334,7 +334,7 @@ namespace SteamKit2
 
                 foreach (var chunk in file_mapping.chunks)
                 {
-                    filedata.Chunks.Add( new ChunkData( chunk.sha, BitConverter.GetBytes(chunk.crc), chunk.offset, chunk.cb_compressed, chunk.cb_original ) );
+                    filedata.Chunks.Add( new ChunkData( chunk.sha, chunk.crc, chunk.offset, chunk.cb_compressed, chunk.cb_original ) );
                 }
 
                 Files.Add(filedata);
@@ -406,7 +406,7 @@ namespace SteamKit2
                 {
                     var protochunk = new ContentManifestPayload.FileMapping.ChunkData();
                     protochunk.sha = chunk.ChunkID;
-                    protochunk.crc = BitConverter.ToUInt32( chunk.Checksum!, 0 );
+                    protochunk.crc = chunk.Checksum;
                     protochunk.offset = chunk.Offset;
                     protochunk.cb_original = chunk.UncompressedLength;
                     protochunk.cb_compressed = chunk.CompressedLength;
