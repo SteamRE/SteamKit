@@ -188,8 +188,7 @@ namespace SteamKit2
                                 {
                                     var frameBytes = new byte[ result.Count ];
                                     Array.Copy( readBuffer, 0, frameBytes, 0, result.Count );
-                                    var frameHexBytes = BitConverter.ToString( frameBytes ).Replace( "-", string.Empty );
-                                    connection.log.LogDebug( nameof( WebSocketContext ), "Recieved websocket text message: 0x{0}", frameHexBytes );
+                                    connection.log.LogDebug( nameof( WebSocketContext ), "Recieved websocket text message: 0x{0}", Utils.EncodeHexString( frameBytes ) );
                                 }
                                 break;
 
