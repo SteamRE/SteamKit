@@ -418,9 +418,7 @@ namespace SteamKit2
         {
             data = SHA1.HashData( data );
 
-            return BitConverter.ToString( data )
-                .Replace( "-", "" )
-                .ToLower();
+            return Utils.EncodeHexString( data );
         }
     }
 }

@@ -473,7 +473,7 @@ namespace SteamKit2.Internal
         {
             if ( data.Length < sizeof( uint ) )
             {
-                log.LogDebug( nameof( CMClient ), "PacketMsg too small to contain a message, was only {0} bytes. Message: 0x{1}", data.Length, BitConverter.ToString( data ).Replace( "-", string.Empty ) );
+                log.LogDebug( nameof( CMClient ), "PacketMsg too small to contain a message, was only {0} bytes. Message: 0x{1}", data.Length, Utils.EncodeHexString( data ) );
                 return null;
             }
 
