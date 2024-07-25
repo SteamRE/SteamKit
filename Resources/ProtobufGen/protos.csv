@@ -43,6 +43,7 @@ steam,steammessages_linkfilter.steamclient.proto,SteamMsgLinkFilter.cs,SteamKit2
 steam,steammessages_lobbymatchmaking.steamclient.proto,SteamMsgLobbyMatchmaking.cs,SteamKit2.Internal
 steam,steammessages_market.steamclient.proto,SteamMsgMarket.cs,SteamKit2.Internal
 steam,steammessages_marketingmessages.steamclient.proto,SteamMsgMarketingMessages.cs,SteamKit2.Internal
+steam,steammessages_notifications.steamclient.proto,SteamMsgNotifications.cs,SteamKit2.Internal
 steam,steammessages_offline.steamclient.proto,SteamMsgOffline.cs,SteamKit2.Internal
 steam,steammessages_parental_objects.proto,SteamMsgParentalObjects.cs,SteamKit2.Internal
 steam,steammessages_parental.steamclient.proto,SteamMsgParental.cs,SteamKit2.Internal
@@ -120,6 +121,7 @@ webui,service_cloudconfigstore.proto,WebUI\SteamMsgCloudConfigStore.cs,SteamKit2
 webui,service_community.proto,WebUI\SteamMsgCommunity.cs,SteamKit2.WebUI.Internal
 webui,service_friendslist.proto,WebUI\SteamMsgFriendsList.cs,SteamKit2.WebUI.Internal
 webui,service_loyaltyrewards.proto,WebUI\SteamMsgLoyaltyRewards.cs,SteamKit2.WebUI.Internal
+webui,service_steamnotification.proto,WebUI\SteamMsgSteamNotification.cs,SteamKit2.WebUI.Internal
 webui,service_storequery.proto,WebUI\SteamMsgStoreQuery.cs,SteamKit2.WebUI.Internal
 webui,service_usergameactivity.proto,WebUI\SteamMsgUserGameActivity.cs,SteamKit2.WebUI.Internal
 webui,service_usergamenotes.proto,WebUI\SteamMsgUserGameNotes.cs,SteamKit2.WebUI.Internal
