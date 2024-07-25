@@ -5193,108 +5193,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGCToServerPredictionResult : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint account_id
-        {
-            get => __pbn__account_id.GetValueOrDefault();
-            set => __pbn__account_id = value;
-        }
-        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
-        public void Resetaccount_id() => __pbn__account_id = null;
-        private uint? __pbn__account_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public ulong match_id
-        {
-            get => __pbn__match_id.GetValueOrDefault();
-            set => __pbn__match_id = value;
-        }
-        public bool ShouldSerializematch_id() => __pbn__match_id != null;
-        public void Resetmatch_id() => __pbn__match_id = null;
-        private ulong? __pbn__match_id;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public bool correct
-        {
-            get => __pbn__correct.GetValueOrDefault();
-            set => __pbn__correct = value;
-        }
-        public bool ShouldSerializecorrect() => __pbn__correct != null;
-        public void Resetcorrect() => __pbn__correct = null;
-        private bool? __pbn__correct;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public global::System.Collections.Generic.List<Prediction> predictions { get; } = new global::System.Collections.Generic.List<Prediction>();
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class Prediction : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint item_def
-            {
-                get => __pbn__item_def.GetValueOrDefault();
-                set => __pbn__item_def = value;
-            }
-            public bool ShouldSerializeitem_def() => __pbn__item_def != null;
-            public void Resetitem_def() => __pbn__item_def = null;
-            private uint? __pbn__item_def;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public uint num_correct
-            {
-                get => __pbn__num_correct.GetValueOrDefault();
-                set => __pbn__num_correct = value;
-            }
-            public bool ShouldSerializenum_correct() => __pbn__num_correct != null;
-            public void Resetnum_correct() => __pbn__num_correct = null;
-            private uint? __pbn__num_correct;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public uint num_fails
-            {
-                get => __pbn__num_fails.GetValueOrDefault();
-                set => __pbn__num_fails = value;
-            }
-            public bool ShouldSerializenum_fails() => __pbn__num_fails != null;
-            public void Resetnum_fails() => __pbn__num_fails = null;
-            private uint? __pbn__num_fails;
-
-            [global::ProtoBuf.ProtoMember(4)]
-            [global::System.ComponentModel.DefaultValue(EResult.k_eResult_ItemGranted)]
-            public EResult result
-            {
-                get => __pbn__result ?? EResult.k_eResult_ItemGranted;
-                set => __pbn__result = value;
-            }
-            public bool ShouldSerializeresult() => __pbn__result != null;
-            public void Resetresult() => __pbn__result = null;
-            private EResult? __pbn__result;
-
-            [global::ProtoBuf.ProtoMember(6)]
-            public global::System.Collections.Generic.List<uint> granted_item_defs { get; } = new global::System.Collections.Generic.List<uint>();
-
-            [global::ProtoBuf.ProtoContract()]
-            public enum EResult
-            {
-                k_eResult_ItemGranted = 1,
-                k_eResult_Destroyed = 2,
-            }
-
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgServerToGCLockCharmTrading : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -8342,6 +8240,25 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(1)]
         public CMsgSteamLearnAccessTokens access_tokens { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToServerSteamLearnUseHTTP : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool use_http
+        {
+            get => __pbn__use_http.GetValueOrDefault();
+            set => __pbn__use_http = value;
+        }
+        public bool ShouldSerializeuse_http() => __pbn__use_http != null;
+        public void Resetuse_http() => __pbn__use_http = null;
+        private bool? __pbn__use_http;
 
     }
 

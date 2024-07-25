@@ -120,6 +120,7 @@ webui,service_cloudconfigstore.proto,WebUI\SteamMsgCloudConfigStore.cs,SteamKit2
 webui,service_community.proto,WebUI\SteamMsgCommunity.cs,SteamKit2.WebUI.Internal
 webui,service_friendslist.proto,WebUI\SteamMsgFriendsList.cs,SteamKit2.WebUI.Internal
 webui,service_loyaltyrewards.proto,WebUI\SteamMsgLoyaltyRewards.cs,SteamKit2.WebUI.Internal
+webui,service_storequery.proto,WebUI\SteamMsgStoreQuery.cs,SteamKit2.WebUI.Internal
 webui,service_usergameactivity.proto,WebUI\SteamMsgUserGameActivity.cs,SteamKit2.WebUI.Internal
 webui,service_usergamenotes.proto,WebUI\SteamMsgUserGameNotes.cs,SteamKit2.WebUI.Internal
 webui,service_usernews.proto,WebUI\SteamMsgUserNews.cs,SteamKit2.WebUI.Internal

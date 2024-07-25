@@ -950,6 +950,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGCToClientFightingGameChallenge = 8995,
         k_EMsgGCToClientFightingGameStartMatch = 8996,
         k_EMsgGCToClientFightingGameChallengeCanceled = 8997,
+        k_EMsgGCToServerSteamLearnUseHTTP = 8998,
     }
 
 }
