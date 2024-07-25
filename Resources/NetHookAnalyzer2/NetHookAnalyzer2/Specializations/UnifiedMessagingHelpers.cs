@@ -10,6 +10,11 @@ namespace NetHookAnalyzer2.Specializations
 	{
 		public static MethodInfo FindMethodInfo(string serviceMethodName)
 		{
+			if ( string.IsNullOrEmpty( serviceMethodName ) )
+			{
+				return null;
+			}
+
 			var splitByDot = serviceMethodName.Split('.');
 			var interfaceName = "I" + splitByDot[0];
 			var methodName = splitByDot[1].Split('#').First();
