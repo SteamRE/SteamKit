@@ -50,7 +50,16 @@ jobs:
 
     - name: Run Tests
       if: matrix.configuration == 'Debug'
-      run: dotnet test --verbosity normal SteamKit2/Tests/Tests.csproj
+      run: dotnet test --verbosity normal SteamKit2/Tests/Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput='./Coverage/lcov.info' /p:Include="[SteamKit2]SteamKit*" /p:Exclude="[SteamKit2]SteamKit2*Internal*"
+
+    - name: Upload test coverage
+      uses: codecov/codecov-action@v4
+      if: matrix.configuration == 'Debug'
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./SteamKit2/Tests/Coverage/lcov.info
+        fail_ci_if_error: false
+        verbose: true
 
   steamkit2-artifacts:
     name: Create NuGet Package
