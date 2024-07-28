@@ -343,7 +343,7 @@ namespace SteamKit2
                 {
                     formatProvided = true;
 
-                    if ( format is not string formatText  || formatText != "vdf" )
+                    if ( format is not string formatText || formatText != "vdf" )
                     {
                         throw new ArgumentException( $"Unsupported 'format' value '{format}'. Format must either be '{expectedFormat}' or omitted.", nameof( args ) );
                     }
@@ -533,7 +533,7 @@ namespace SteamKit2
                     // the regex matches digits, but we should check for absurdly large numbers
                     if ( !int.TryParse( versionString, out version ) )
                     {
-                        throw new ArgumentOutOfRangeException( "version", "The function version number supplied was invalid or out of range." );
+                        throw new ArgumentOutOfRangeException( nameof( version ), "The function version number supplied was invalid or out of range." );
                     }
                 }
 
