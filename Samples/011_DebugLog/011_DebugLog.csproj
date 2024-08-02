@@ -5,13 +5,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Authors />
     <Company>SteamRE Team</Company>
-    <Description>SteamKit Sample 2: Extending</Description>
+    <Description>SteamKite Sample 3: DebugLog</Description>
     <Copyright>Copyright © Ryan Stecker 2018</Copyright>
-    <NoWarn>CA1822</NoWarn>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\SteamKit2\SteamKit2\SteamKit2.csproj" />
-  </ItemGroup>
 
 </Project>

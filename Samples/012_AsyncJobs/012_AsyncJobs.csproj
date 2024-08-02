@@ -5,12 +5,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Authors />
     <Company>SteamRE Team</Company>
-    <Description>SteamKite Sample 3: DebugLog</Description>
+    <Description>SteamKit Sample 9: AsyncJobs</Description>
     <Copyright>Copyright © Ryan Stecker 2018</Copyright>
   </PropertyGroup>
-  
-  <ItemGroup>
-    <ProjectReference Include="..\..\SteamKit2\SteamKit2\SteamKit2.csproj" />
-  </ItemGroup>
 
 </Project>

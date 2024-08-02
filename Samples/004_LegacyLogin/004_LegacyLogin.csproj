@@ -3,14 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
+    <Company>SteamRE</Company>
+    <Product>Sample1_Logon</Product>
     <Authors />
-    <Company>SteamRE Team</Company>
-    <Description>SteamKit Sample 5: SteamGuard</Description>
+    <Description>SteamKit Sample 1: Logon</Description>
     <Copyright>Copyright © Ryan Stecker 2018</Copyright>
+    <PackageId>Sample1_Logon</PackageId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\SteamKit2\SteamKit2\SteamKit2.csproj" />
-  </ItemGroup>
 
 </Project>
