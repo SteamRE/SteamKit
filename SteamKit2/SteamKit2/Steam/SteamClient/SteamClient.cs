@@ -358,6 +358,8 @@ namespace SteamKit2
                 return false;
             }
 
+            ArgumentNullException.ThrowIfNull( packetMsg );
+
             // we want to handle some of the clientmsgs before we pass them along to registered handlers
             switch ( packetMsg.MsgType )
             {

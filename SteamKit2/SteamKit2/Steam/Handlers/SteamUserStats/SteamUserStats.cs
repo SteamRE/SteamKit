@@ -131,8 +131,6 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            ArgumentNullException.ThrowIfNull( packetMsg );
-
             var callback = GetCallback( packetMsg );
 
             if ( callback == null )

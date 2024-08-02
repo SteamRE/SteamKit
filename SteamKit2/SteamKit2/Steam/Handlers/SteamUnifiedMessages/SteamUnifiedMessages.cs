@@ -189,8 +189,6 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            ArgumentNullException.ThrowIfNull( packetMsg );
-
             switch ( packetMsg.MsgType )
             {
                 case EMsg.ServiceMethodResponse:
