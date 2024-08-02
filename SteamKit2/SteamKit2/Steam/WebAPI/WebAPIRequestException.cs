@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 
 namespace SteamKit2
 {
@@ -14,6 +15,21 @@ namespace SteamKit2
         /// <param name="response">HTTP response message including the status code and data.</param>
         public WebAPIRequestException(string message, HttpResponseMessage response)
             : base(message, response)
+        {
+        }
+
+        /// <inheritdoc/>
+        public WebAPIRequestException()
+        {
+        }
+
+        /// <inheritdoc/>
+        public WebAPIRequestException( string message ) : base( message )
+        {
+        }
+
+        /// <inheritdoc/>
+        public WebAPIRequestException( string message, System.Exception innerException ) : base( message, innerException )
         {
         }
     }
