@@ -138,6 +138,12 @@ namespace SteamKit2
             /// </summary>
             /// <value>The ui mode.</value>
             public EUIMode UIMode { get; set; } = EUIMode.Unknown;
+            
+            /// <summary>
+            /// Gets or sets whether this is Steam Deck login.
+            /// </summary>
+            /// <value>The Steam Deck login value.</value>
+            public bool IsSteamDeck { get; set; }
 
             /// <summary>
             /// Initializes a new instance of the <see cref="LogOnDetails"/> class.
@@ -288,6 +294,11 @@ namespace SteamKit2
             if ( details.UIMode != EUIMode.Unknown )
             {
                 logon.Body.ui_mode = ( uint )details.UIMode;
+            }
+
+            if ( details.IsSteamDeck )
+            {
+                logon.Body.is_steam_deck = true;
             }
 
             // steam guard 
