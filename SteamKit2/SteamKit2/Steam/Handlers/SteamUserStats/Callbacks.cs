@@ -30,9 +30,12 @@ namespace SteamKit2
             public uint NumPlayers { get; private set; }
 
 
-            internal NumberOfPlayersCallback( JobID jobID, CMsgDPGetNumberOfCurrentPlayersResponse resp )
+            internal NumberOfPlayersCallback( IPacketMsg packetMsg )
             {
-                this.JobID = jobID;
+                var msg = new ClientMsgProtobuf<CMsgDPGetNumberOfCurrentPlayersResponse>( packetMsg );
+                var resp = msg.Body;
+
+                this.JobID = msg.TargetJobID;
                 this.Result = ( EResult )resp.eresult;
                 this.NumPlayers = ( uint )resp.player_count;
             }
@@ -65,9 +68,12 @@ namespace SteamKit2
             public ELeaderboardDisplayType DisplayType { get; private set; }
 
 
-            internal FindOrCreateLeaderboardCallback( JobID jobID, CMsgClientLBSFindOrCreateLBResponse resp )
+            internal FindOrCreateLeaderboardCallback( IPacketMsg packetMsg )
             {
-                this.JobID = jobID;
+                var msg = new ClientMsgProtobuf<CMsgClientLBSFindOrCreateLBResponse>( packetMsg );
+                var resp = msg.Body;
+
+                this.JobID = msg.TargetJobID;
 
                 this.Result = ( EResult )resp.eresult;
                 this.ID = resp.leaderboard_id;
@@ -145,9 +151,12 @@ namespace SteamKit2
             public ReadOnlyCollection<LeaderboardEntry> Entries { get; private set; }
 
 
-            internal LeaderboardEntriesCallback( JobID jobID, CMsgClientLBSGetLBEntriesResponse resp )
+            internal LeaderboardEntriesCallback( IPacketMsg packetMsg )
             {
-                this.JobID = jobID;
+                var msg = new ClientMsgProtobuf<CMsgClientLBSGetLBEntriesResponse>( packetMsg );
+                var resp = msg.Body;
+
+                this.JobID = msg.TargetJobID;
 
                 this.Result = ( EResult )resp.eresult;
                 this.EntryCount = resp.leaderboard_entry_count;

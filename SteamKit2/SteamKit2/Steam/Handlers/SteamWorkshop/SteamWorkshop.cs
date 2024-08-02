@@ -14,16 +14,11 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamWorkshop : ClientMsgHandler
     {
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
-
-        internal SteamWorkshop()
+        private static CallbackMsg? GetCallback( IPacketMsg packetMsg ) => packetMsg.MsgType switch
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.ClientUCMEnumeratePublishedFilesByUserActionResponse, HandleEnumPublishedFilesByAction },
-            };
-        }
-
+            EMsg.ClientUCMEnumeratePublishedFilesByUserActionResponse => new UserActionPublishedFilesCallback( packetMsg ),
+            _ => null,
+        };
 
         /// <summary>
         /// Represents the details of an enumeration request used for the local user's files.
@@ -87,25 +82,15 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( packetMsg );
 
-            if (!dispatchMap.TryGetValue(packetMsg.MsgType, out var handlerFunc))
+            var callback = GetCallback( packetMsg );
+
+            if ( callback == null )
             {
                 // ignore messages that we don't have a handler function for
                 return;
             }
 
-            handlerFunc( packetMsg );
+            this.Client.PostCallback( callback );
         }
-
-
-        #region ClientMsg Handlers
-        void HandleEnumPublishedFilesByAction( IPacketMsg packetMsg )
-        {
-            var response = new ClientMsgProtobuf<CMsgClientUCMEnumeratePublishedFilesByUserActionResponse>( packetMsg );
-
-            var callback = new UserActionPublishedFilesCallback(response.TargetJobID, response.Body);
-            Client.PostCallback( callback );
-        }
-        #endregion
-
     }
 }

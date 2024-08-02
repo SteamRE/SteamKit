@@ -73,18 +73,12 @@ namespace SteamKit2
             public string? Version { get; set; }
         }
 
-
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
-
-        internal SteamGameServer()
+        private static CallbackMsg? GetCallback( IPacketMsg packetMsg ) => packetMsg.MsgType switch
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.GSStatusReply, HandleStatusReply },
-                { EMsg.ClientTicketAuthComplete, HandleAuthComplete },
-            };
-        }
-
+            EMsg.GSStatusReply => new StatusReplyCallback( packetMsg ),
+            EMsg.ClientTicketAuthComplete => new TicketAuthCallback( packetMsg ),
+            _ => null,
+        };
 
         /// <summary>
         /// Logs onto the Steam network as a persistent game server.
@@ -211,31 +205,15 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( packetMsg );
 
-            if ( !dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
+            var callback = GetCallback( packetMsg );
+
+            if ( callback == null )
             {
                 // ignore messages that we don't have a handler function for
                 return;
             }
 
-            handlerFunc( packetMsg );
-        }
-
-
-        #region Handlers
-        void HandleStatusReply( IPacketMsg packetMsg )
-        {
-            var statusReply = new ClientMsgProtobuf<CMsgGSStatusReply>( packetMsg );
-
-            var callback = new StatusReplyCallback( statusReply.Body );
             this.Client.PostCallback( callback );
         }
-        void HandleAuthComplete( IPacketMsg packetMsg )
-        {
-            var authComplete = new ClientMsgProtobuf<CMsgClientTicketAuthComplete>( packetMsg );
-
-            var callback = new TicketAuthCallback( authComplete.Body );
-            this.Client.PostCallback( callback );
-        }
-        #endregion
     }
 }

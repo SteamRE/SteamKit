@@ -78,17 +78,11 @@ namespace SteamKit2
             }
         }
 
-
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
-
-        internal SteamScreenshots()
+        private static CallbackMsg? GetCallback( IPacketMsg packetMsg ) => packetMsg.MsgType switch
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.ClientUCMAddScreenshotResponse, HandleUCMAddScreenshot },
-            };
-        }
-
+            EMsg.ClientUCMAddScreenshotResponse => new ScreenshotAddedCallback( packetMsg ),
+            _ => null,
+        };
 
         /// <summary>
         /// Adds a screenshot to the user's screenshot library. The screenshot image and thumbnail must already exist on the UFS.
@@ -131,25 +125,15 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( packetMsg );
 
-            if ( !dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
+            var callback = GetCallback( packetMsg );
+
+            if ( callback == null )
             {
                 // ignore messages that we don't have a handler function for
                 return;
             }
 
-            handlerFunc( packetMsg );
+            this.Client.PostCallback( callback );
         }
-
-
-        #region ClientMsg Handlers
-        void HandleUCMAddScreenshot( IPacketMsg packetMsg )
-        {
-            var resp = new ClientMsgProtobuf<CMsgClientUCMAddScreenshotResponse>( packetMsg );
-
-            var callback = new ScreenshotAddedCallback(resp.TargetJobID, resp.Body);
-            Client.PostCallback( callback );
-        }
-        #endregion
-
     }
 }

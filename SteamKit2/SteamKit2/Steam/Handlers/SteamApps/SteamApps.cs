@@ -43,31 +43,25 @@ namespace SteamKit2
             }
         }
 
-
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
-
-        internal SteamApps()
+        private static CallbackMsg? GetCallback( IPacketMsg packetMsg ) => packetMsg.MsgType switch
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.ClientLicenseList, HandleLicenseList },
-                { EMsg.ClientRequestFreeLicenseResponse, HandleFreeLicense },
-                { EMsg.ClientPurchaseResponse, HandlePurchaseResponse },
-                { EMsg.ClientRedeemGuestPassResponse, HandleRedeemGuestPassResponse },
-                { EMsg.ClientGameConnectTokens, HandleGameConnectTokens },
-                { EMsg.ClientVACBanStatus, HandleVACBanStatus },
-                { EMsg.ClientGetAppOwnershipTicketResponse, HandleAppOwnershipTicketResponse },
-                { EMsg.ClientGetDepotDecryptionKeyResponse, HandleDepotKeyResponse },
-                { EMsg.ClientGetLegacyGameKeyResponse, HandleLegacyGameKeyResponse },
-                { EMsg.ClientPICSAccessTokenResponse, HandlePICSAccessTokenResponse },
-                { EMsg.ClientPICSChangesSinceResponse, HandlePICSChangesSinceResponse },
-                { EMsg.ClientPICSProductInfoResponse, HandlePICSProductInfoResponse },
-                { EMsg.ClientUpdateGuestPassesList, HandleGuestPassList },
-                { EMsg.ClientGetCDNAuthTokenResponse, HandleCDNAuthTokenResponse },
-                { EMsg.ClientCheckAppBetaPasswordResponse, HandleCheckAppBetaPasswordResponse }
-            };
-        }
-
+            EMsg.ClientLicenseList => new LicenseListCallback( packetMsg ),
+            EMsg.ClientRequestFreeLicenseResponse => new FreeLicenseCallback( packetMsg ),
+            EMsg.ClientPurchaseResponse => new PurchaseResponseCallback( packetMsg ),
+            EMsg.ClientRedeemGuestPassResponse => new RedeemGuestPassResponseCallback( packetMsg ),
+            EMsg.ClientGameConnectTokens => new GameConnectTokensCallback( packetMsg ),
+            EMsg.ClientVACBanStatus => new VACStatusCallback( packetMsg ),
+            EMsg.ClientGetAppOwnershipTicketResponse => new AppOwnershipTicketCallback( packetMsg ),
+            EMsg.ClientGetDepotDecryptionKeyResponse => new DepotKeyCallback( packetMsg ),
+            EMsg.ClientGetLegacyGameKeyResponse => new LegacyGameKeyCallback( packetMsg ),
+            EMsg.ClientPICSAccessTokenResponse => new PICSTokensCallback( packetMsg ),
+            EMsg.ClientPICSChangesSinceResponse => new PICSChangesCallback( packetMsg ),
+            EMsg.ClientPICSProductInfoResponse => new PICSProductInfoCallback( packetMsg ),
+            EMsg.ClientUpdateGuestPassesList => new GuestPassListCallback( packetMsg ),
+            EMsg.ClientGetCDNAuthTokenResponse => new CDNAuthTokenCallback( packetMsg ),
+            EMsg.ClientCheckAppBetaPasswordResponse => new CheckAppBetaPasswordCallback( packetMsg ),
+            _ => null,
+        };
 
         /// <summary>
         /// Requests an app ownership ticket for the specified AppID.
@@ -269,7 +263,7 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="FreeLicenseCallback"/>.</returns>
         public AsyncJob<FreeLicenseCallback> RequestFreeLicense( uint app )
         {
-            return RequestFreeLicense( new List<uint> { app } );
+            return RequestFreeLicense( [ app ] );
         }
         /// <summary>
         /// Request a free license for given appids, can be used for free on demand apps
@@ -336,125 +330,15 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( packetMsg );
 
-            if ( !dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
+            var callback = GetCallback( packetMsg );
+
+            if ( callback == null )
             {
                 // ignore messages that we don't have a handler function for
                 return;
             }
 
-            handlerFunc( packetMsg );
-        }
-
-        #region ClientMsg Handlers
-        void HandleAppOwnershipTicketResponse( IPacketMsg packetMsg )
-        {
-            var ticketResponse = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicketResponse>( packetMsg );
-
-            var callback = new AppOwnershipTicketCallback(ticketResponse.TargetJobID, ticketResponse.Body);
             this.Client.PostCallback( callback );
         }
-        void HandleDepotKeyResponse( IPacketMsg packetMsg )
-        {
-            var keyResponse = new ClientMsgProtobuf<CMsgClientGetDepotDecryptionKeyResponse>( packetMsg );
-
-            var callback = new DepotKeyCallback(keyResponse.TargetJobID, keyResponse.Body);
-            this.Client.PostCallback( callback );
-        }
-        void HandleLegacyGameKeyResponse( IPacketMsg packetMsg )
-        {
-            var keyResponse = new ClientMsg<MsgClientGetLegacyGameKeyResponse>( packetMsg );
-
-            var callback = new LegacyGameKeyCallback( keyResponse.TargetJobID, keyResponse.Body, keyResponse.Payload.ToArray() );
-            this.Client.PostCallback( callback );
-        }
-        void HandleGameConnectTokens( IPacketMsg packetMsg )
-        {
-            var gcTokens = new ClientMsgProtobuf<CMsgClientGameConnectTokens>( packetMsg );
-
-            var callback = new GameConnectTokensCallback( gcTokens.Body );
-            this.Client.PostCallback( callback );
-        }
-        void HandleLicenseList( IPacketMsg packetMsg )
-        {
-            var licenseList = new ClientMsgProtobuf<CMsgClientLicenseList>( packetMsg );
-
-            var callback = new LicenseListCallback( licenseList.Body );
-            this.Client.PostCallback( callback );
-        }
-        void HandleFreeLicense( IPacketMsg packetMsg )
-        {
-            var grantedLicenses = new ClientMsgProtobuf<CMsgClientRequestFreeLicenseResponse>( packetMsg );
-
-            var callback = new FreeLicenseCallback( grantedLicenses.TargetJobID, grantedLicenses.Body );
-            this.Client.PostCallback( callback );
-        }
-        void HandlePurchaseResponse( IPacketMsg packetMsg )
-        {
-            var purchaseResponse = new ClientMsgProtobuf<CMsgClientPurchaseResponse>( packetMsg );
-
-            var callback = new PurchaseResponseCallback( purchaseResponse.TargetJobID, purchaseResponse.Body );
-            this.Client.PostCallback( callback );
-        }
-        void HandleRedeemGuestPassResponse( IPacketMsg packetMsg )
-        {
-            var redeemedGuestPass = new ClientMsgProtobuf<CMsgClientRedeemGuestPassResponse>( packetMsg );
-
-            var callback = new RedeemGuestPassResponseCallback( redeemedGuestPass.TargetJobID, redeemedGuestPass.Body );
-            this.Client.PostCallback( callback );
-        }
-        void HandleVACBanStatus( IPacketMsg packetMsg )
-        {
-            var vacStatus = new ClientMsg<MsgClientVACBanStatus>( packetMsg );
-
-            var callback = new VACStatusCallback( vacStatus.Body, vacStatus.Payload.ToArray() );
-            this.Client.PostCallback( callback );
-        }
-        void HandlePICSAccessTokenResponse( IPacketMsg packetMsg )
-        {
-            var tokensResponse = new ClientMsgProtobuf<CMsgClientPICSAccessTokenResponse>( packetMsg );
-
-            var callback = new PICSTokensCallback(tokensResponse.TargetJobID, tokensResponse.Body);
-            this.Client.PostCallback( callback );
-        }
-        void HandlePICSChangesSinceResponse( IPacketMsg packetMsg )
-        {
-            var changesResponse = new ClientMsgProtobuf<CMsgClientPICSChangesSinceResponse>( packetMsg );
-
-            var callback = new PICSChangesCallback( changesResponse.TargetJobID, changesResponse.Body );
-            this.Client.PostCallback( callback );
-        }
-        void HandlePICSProductInfoResponse( IPacketMsg packetMsg )
-        {
-            var productResponse = new ClientMsgProtobuf<CMsgClientPICSProductInfoResponse>( packetMsg );
-
-            var callback = new PICSProductInfoCallback( productResponse.TargetJobID, productResponse.Body );
-            this.Client.PostCallback( callback );
-        }
-        void HandleGuestPassList( IPacketMsg packetMsg )
-        {
-            var guestPasses = new ClientMsg<MsgClientUpdateGuestPassesList>( packetMsg );
-
-            var callback = new GuestPassListCallback( guestPasses.Body, guestPasses.Payload );
-            this.Client.PostCallback( callback );
-        }
-
-        void HandleCDNAuthTokenResponse( IPacketMsg packetMsg )
-        {
-            var response = new ClientMsgProtobuf<CMsgClientGetCDNAuthTokenResponse>( packetMsg );
-
-            var callback = new CDNAuthTokenCallback( response.TargetJobID, response.Body );
-            this.Client.PostCallback( callback );
-        }
-
-        void HandleCheckAppBetaPasswordResponse(IPacketMsg packetMsg)
-        {
-            var response = new ClientMsgProtobuf<CMsgClientCheckAppBetaPasswordResponse>( packetMsg );
-
-            var callback = new CheckAppBetaPasswordCallback( response.TargetJobID, response.Body );
-            this.Client.PostCallback( callback );
-        }
-        
-        #endregion
-
     }
 }

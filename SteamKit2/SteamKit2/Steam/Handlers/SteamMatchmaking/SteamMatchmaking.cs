@@ -12,27 +12,23 @@ namespace SteamKit2
     /// </summary>
     public partial class SteamMatchmaking : ClientMsgHandler
     {
-        readonly Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
-
         readonly ConcurrentDictionary<JobID, ProtoBuf.IExtensible> lobbyManipulationRequests = new();
 
         readonly LobbyCache lobbyCache = new();
 
-        internal SteamMatchmaking()
+        private Action<IPacketMsg>? GetHandler( IPacketMsg packetMsg ) => packetMsg.MsgType switch
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.ClientMMSCreateLobbyResponse, HandleCreateLobbyResponse },
-                { EMsg.ClientMMSSetLobbyDataResponse, HandleSetLobbyDataResponse },
-                { EMsg.ClientMMSSetLobbyOwnerResponse, HandleSetLobbyOwnerResponse },
-                { EMsg.ClientMMSLobbyData, HandleLobbyData },
-                { EMsg.ClientMMSGetLobbyListResponse, HandleGetLobbyListResponse },
-                { EMsg.ClientMMSJoinLobbyResponse, HandleJoinLobbyResponse },
-                { EMsg.ClientMMSLeaveLobbyResponse, HandleLeaveLobbyResponse },
-                { EMsg.ClientMMSUserJoinedLobby, HandleUserJoinedLobby },
-                { EMsg.ClientMMSUserLeftLobby, HandleUserLeftLobby },
-            };
-        }
+            EMsg.ClientMMSCreateLobbyResponse => HandleCreateLobbyResponse,
+            EMsg.ClientMMSSetLobbyDataResponse => HandleSetLobbyDataResponse,
+            EMsg.ClientMMSSetLobbyOwnerResponse => HandleSetLobbyOwnerResponse,
+            EMsg.ClientMMSLobbyData => HandleLobbyData,
+            EMsg.ClientMMSGetLobbyListResponse => HandleGetLobbyListResponse,
+            EMsg.ClientMMSJoinLobbyResponse => HandleJoinLobbyResponse,
+            EMsg.ClientMMSLeaveLobbyResponse => HandleLeaveLobbyResponse,
+            EMsg.ClientMMSUserJoinedLobby => HandleUserJoinedLobby,
+            EMsg.ClientMMSUserLeftLobby => HandleUserLeftLobby,
+            _ => null,
+        };
 
         /// <summary>
         /// Sends a request to create a new lobby.
@@ -338,10 +334,9 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( packetMsg );
 
-            if ( dispatchMap.TryGetValue( packetMsg.MsgType, out var handler ) )
-            {
-                handler( packetMsg );
-            }
+            var handler = GetHandler( packetMsg );
+
+            handler?.Invoke( packetMsg );
         }
 
         internal void ClearLobbyCache()

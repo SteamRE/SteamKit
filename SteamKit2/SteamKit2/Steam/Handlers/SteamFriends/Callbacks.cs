@@ -312,8 +312,11 @@ namespace SteamKit2
             public ReadOnlyCollection<Event> Announcements { get; private set; }
 
 
-            internal ClanStateCallback( CMsgClientClanState msg )
+            internal ClanStateCallback( IPacketMsg packetMsg )
             {
+                var clanState = new ClientMsgProtobuf<CMsgClientClanState>( packetMsg );
+                var msg = clanState.Body;
+
                 ClanID = msg.steamid_clan;
 
                 AccountFlags = ( EAccountFlags )msg.clan_account_flags;
@@ -427,8 +430,11 @@ namespace SteamKit2
             public string? Message { get; private set; }
 
 
-            internal FriendMsgCallback( CMsgClientFriendMsgIncoming msg )
+            internal FriendMsgCallback( IPacketMsg packetMsg )
             {
+                var friendMsg = new ClientMsgProtobuf<CMsgClientFriendMsgIncoming>( packetMsg );
+                var msg = friendMsg.Body;
+
                 this.Sender = msg.steamid_from;
                 this.EntryType = ( EChatEntryType )msg.chat_entry_type;
 
@@ -471,8 +477,11 @@ namespace SteamKit2
             public string? Message { get; private set; }
 
 
-            internal FriendMsgEchoCallback( CMsgClientFriendMsgIncoming msg )
+            internal FriendMsgEchoCallback( IPacketMsg packetMsg )
             {
+                var friendEchoMsg = new ClientMsgProtobuf<CMsgClientFriendMsgIncoming>( packetMsg );
+                var msg = friendEchoMsg.Body;
+
                 this.Recipient = msg.steamid_from;
                 this.EntryType = ( EChatEntryType )msg.chat_entry_type;
 
@@ -587,8 +596,11 @@ namespace SteamKit2
             public string PersonaName { get; private set; }
 
 
-            internal FriendAddedCallback( CMsgClientAddFriendResponse msg )
+            internal FriendAddedCallback( IPacketMsg packetMsg )
             {
+                var friendResponse = new ClientMsgProtobuf<CMsgClientAddFriendResponse>( packetMsg );
+                var msg = friendResponse.Body;
+
                 this.Result = ( EResult )msg.eresult;
 
                 this.SteamID = msg.steam_id_added;
@@ -655,8 +667,11 @@ namespace SteamKit2
             public ReadOnlyCollection<ChatMemberInfo>? ChatMembers { get; private set; }
 
 
-            internal ChatEnterCallback( MsgClientChatEnter msg, byte[] payload )
+            internal ChatEnterCallback( IPacketMsg packetMsg )
             {
+                var chatEnter = new ClientMsg<MsgClientChatEnter>( packetMsg );
+                var msg = chatEnter.Body;
+
                 ChatID = msg.SteamIdChat;
                 FriendID = msg.SteamIdFriend;
 
@@ -671,7 +686,7 @@ namespace SteamKit2
 
                 NumChatMembers = msg.NumMembers;
 
-                using var ms = new MemoryStream( payload );
+                var ms = chatEnter.Payload;
                 // steamclient always attempts to read the chat room name, regardless of the enter response
                 ChatRoomName = ms.ReadNullTermString( Encoding.UTF8 );
 
@@ -720,13 +735,17 @@ namespace SteamKit2
             public string Message { get; private set; }
 
 
-            internal ChatMsgCallback( MsgClientChatMsg msg, byte[] payload )
+            internal ChatMsgCallback( IPacketMsg packetMsg )
             {
+                var chatMsg = new ClientMsg<MsgClientChatMsg>( packetMsg );
+                var msg = chatMsg.Body;
+
                 this.ChatterID = msg.SteamIdChatter;
                 this.ChatRoomID = msg.SteamIdChatRoom;
 
                 this.ChatMsgType = msg.ChatMsgType;
 
+                var payload = chatMsg.Payload.ToArray();
                 this.Message = Encoding.UTF8.GetString( payload );
                 this.Message = this.Message.TrimEnd( '\0' ); // trim any extra null chars from the end
             }
@@ -762,10 +781,9 @@ namespace SteamKit2
                 public ChatMemberInfo? MemberInfo { get; private set; }
 
 
-                internal StateChangeDetails( byte[] data )
+                internal StateChangeDetails( MemoryStream ms )
                 {
-                    using MemoryStream ms = new MemoryStream( data );
-                    using BinaryReader br = new BinaryReader( ms );
+                    using BinaryReader br = new BinaryReader( ms, Encoding.UTF8, leaveOpen: true );
                     ChatterActedOn = br.ReadUInt64();
                     StateChange = ( EChatMemberStateChange )br.ReadInt32();
                     ChatterActedBy = br.ReadUInt64();
@@ -794,15 +812,18 @@ namespace SteamKit2
             public StateChangeDetails? StateChangeInfo { get; private set; }
 
 
-            internal ChatMemberInfoCallback( MsgClientChatMemberInfo msg, byte[] payload )
+            internal ChatMemberInfoCallback( IPacketMsg packetMsg )
             {
+                var membInfo = new ClientMsg<MsgClientChatMemberInfo>( packetMsg );
+                var msg = membInfo.Body;
+
                 ChatRoomID = msg.SteamIdChat;
                 Type = msg.Type;
 
                 switch ( Type )
                 {
                     case EChatInfoType.StateChange:
-                        StateChangeInfo = new StateChangeDetails( payload );
+                        StateChangeInfo = new StateChangeDetails( membInfo.Payload );
                         break;
 
                     // todo: handle more types
@@ -829,8 +850,11 @@ namespace SteamKit2
             public EChatInfoType Type { get; private set; }
 
 
-            internal ChatRoomInfoCallback( MsgClientChatRoomInfo msg, byte[] payload )
+            internal ChatRoomInfoCallback( IPacketMsg packetMsg )
             {
+                var roomInfo = new ClientMsg<MsgClientChatRoomInfo>( packetMsg );
+                var msg = roomInfo.Body;
+
                 ChatRoomID = msg.SteamIdChat;
                 Type = msg.Type;
 
@@ -862,8 +886,11 @@ namespace SteamKit2
             public EChatActionResult Result { get; private set; }
 
 
-            internal ChatActionResultCallback( MsgClientChatActionResult result )
+            internal ChatActionResultCallback( IPacketMsg packetMsg )
             {
+                var actionResult = new ClientMsg<MsgClientChatActionResult>( packetMsg );
+                var result = actionResult.Body;
+
                 ChatRoomID = result.SteamIdChat;
                 ChatterID = result.SteamIdUserActedOn;
 
@@ -911,8 +938,11 @@ namespace SteamKit2
             public GameID GameID { get; private set; }
 
 
-            internal ChatInviteCallback( CMsgClientChatInvite invite )
+            internal ChatInviteCallback( IPacketMsg packetMsg )
             {
+                var chatInvite = new ClientMsgProtobuf<CMsgClientChatInvite>( packetMsg );
+                var invite = chatInvite.Body;
+
                 this.InvitedID = invite.steam_id_invited;
                 this.ChatRoomID = invite.steam_id_chat;
 
@@ -938,11 +968,13 @@ namespace SteamKit2
             public EResult Result { get; private set; }
 
 
-            internal IgnoreFriendCallback( JobID jobID, MsgClientSetIgnoreFriendResponse response )
+            internal IgnoreFriendCallback( IPacketMsg packetMsg )
             {
-                this.JobID = jobID;
+                var response = new ClientMsg<MsgClientSetIgnoreFriendResponse>( packetMsg );
 
-                this.Result = response.Result;
+                this.JobID = response.TargetJobID;
+
+                this.Result = response.Body.Result;
             }
         }
 
@@ -995,9 +1027,12 @@ namespace SteamKit2
             public string Summary { get; private set; }
 
 
-            internal ProfileInfoCallback( JobID jobID, CMsgClientFriendProfileInfoResponse response )
+            internal ProfileInfoCallback( IPacketMsg packetMsg )
             {
-                JobID = jobID;
+                var responseMsg = new ClientMsgProtobuf<CMsgClientFriendProfileInfoResponse>( packetMsg );
+                var response = responseMsg.Body;
+
+                JobID = packetMsg.TargetJobID;
 
                 Result = ( EResult )response.eresult;
 

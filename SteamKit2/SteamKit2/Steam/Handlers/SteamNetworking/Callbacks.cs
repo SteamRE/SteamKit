@@ -24,9 +24,12 @@ namespace SteamKit2
             /// </summary>
             public byte[] CASignature { get; private set; }
 
-            internal NetworkingCertificateCallback( JobID jobID, CMsgClientNetworkingCertReply msg )
+            internal NetworkingCertificateCallback( IPacketMsg packetMsg )
             {
-                JobID = jobID;
+                var resp = new ClientMsgProtobuf<CMsgClientNetworkingCertReply>( packetMsg );
+                var msg = resp.Body;
+
+                JobID = resp.TargetJobID;
 
                 Certificate = msg.cert;
                 CAKeyID = msg.ca_key_id;

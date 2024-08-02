@@ -23,9 +23,11 @@ namespace SteamKit2
             public bool IsSecure { get; private set; }
 
 
-            internal StatusReplyCallback( CMsgGSStatusReply reply )
+            internal StatusReplyCallback( IPacketMsg packetMsg )
             {
-                IsSecure = reply.is_secure;
+                var statusReply = new ClientMsgProtobuf<CMsgGSStatusReply>( packetMsg );
+
+                IsSecure = statusReply.Body.is_secure;
             }
         }
 
@@ -63,8 +65,11 @@ namespace SteamKit2
             public uint TicketSequence { get; private set; }
 
 
-            internal TicketAuthCallback( CMsgClientTicketAuthComplete tickAuth )
+            internal TicketAuthCallback( IPacketMsg packetMsg )
             {
+                var authComplete = new ClientMsgProtobuf<CMsgClientTicketAuthComplete>( packetMsg );
+                var tickAuth = authComplete.Body;
+
                 SteamID = tickAuth.steam_id;
                 GameID = tickAuth.game_id;
 

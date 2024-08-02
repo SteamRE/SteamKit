@@ -24,7 +24,22 @@ namespace SteamKit2
 
         AccountCache cache;
 
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+        private static CallbackMsg? GetCallback( IPacketMsg packetMsg ) => packetMsg.MsgType switch
+        {
+            EMsg.ClientClanState => new ClanStateCallback( packetMsg ),
+            EMsg.ClientFriendMsgIncoming => new FriendMsgCallback( packetMsg ),
+            EMsg.ClientFriendMsgEchoToSender => new FriendMsgEchoCallback( packetMsg ),
+            EMsg.ClientAddFriendResponse => new FriendAddedCallback( packetMsg ),
+            EMsg.ClientChatEnter => new ChatEnterCallback( packetMsg ),
+            EMsg.ClientChatMsg => new ChatMsgCallback( packetMsg ),
+            EMsg.ClientChatMemberInfo => new ChatMemberInfoCallback( packetMsg ),
+            EMsg.ClientChatRoomInfo => new ChatRoomInfoCallback( packetMsg ),
+            EMsg.ClientChatActionResult => new ChatActionResultCallback( packetMsg ),
+            EMsg.ClientChatInvite => new ChatInviteCallback( packetMsg ),
+            EMsg.ClientSetIgnoreFriendResponse => new IgnoreFriendCallback( packetMsg ),
+            EMsg.ClientFriendProfileInfoResponse => new ProfileInfoCallback( packetMsg ),
+            _ => null,
+        };
 
         internal SteamFriends()
         {
@@ -32,27 +47,6 @@ namespace SteamKit2
             clanList = [];
 
             cache = new AccountCache();
-
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.ClientPersonaState, HandlePersonaState },
-                { EMsg.ClientClanState, HandleClanState },
-                { EMsg.ClientFriendsList, HandleFriendsList },
-                { EMsg.ClientFriendMsgIncoming, HandleFriendMsg },
-                { EMsg.ClientFriendMsgEchoToSender, HandleFriendEchoMsg },
-                { EMsg.ClientChatGetFriendMessageHistoryResponse, HandleFriendMessageHistoryResponse },
-                { EMsg.ClientAccountInfo, HandleAccountInfo },
-                { EMsg.ClientAddFriendResponse, HandleFriendResponse },
-                { EMsg.ClientChatEnter, HandleChatEnter },
-                { EMsg.ClientChatMsg, HandleChatMsg },
-                { EMsg.ClientChatMemberInfo, HandleChatMemberInfo },
-                { EMsg.ClientChatRoomInfo, HandleChatRoomInfo },
-                { EMsg.ClientChatActionResult, HandleChatActionResult },
-                { EMsg.ClientChatInvite, HandleChatInvite },
-                { EMsg.ClientSetIgnoreFriendResponse, HandleIgnoreFriendResponse },
-                { EMsg.ClientFriendProfileInfoResponse, HandleProfileInfoResponse },
-                { EMsg.ClientPersonaChangeResponse, HandlePersonaChangeResponse },
-            };
         }
 
 
@@ -649,13 +643,38 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( packetMsg );
 
-            if ( !dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
+            var callback = GetCallback( packetMsg );
+
+            // ignore messages that we don't have a handler function for
+            if ( callback != null )
             {
-                // ignore messages that we don't have a handler function for
+                this.Client.PostCallback( callback );
                 return;
             }
 
-            handlerFunc( packetMsg );
+            // Special handling for some messages because they need access to client or post callbacks differently
+            switch ( packetMsg.MsgType )
+            {
+                case EMsg.ClientPersonaState:
+                    HandlePersonaState( packetMsg );
+                    return;
+
+                case EMsg.ClientFriendsList:
+                    HandleFriendsList( packetMsg );
+                    return;
+
+                case EMsg.ClientChatGetFriendMessageHistoryResponse:
+                    HandleFriendMessageHistoryResponse( packetMsg );
+                    return;
+
+                case EMsg.ClientAccountInfo:
+                    HandleAccountInfo( packetMsg );
+                    return;
+
+                case EMsg.ClientPersonaChangeResponse:
+                    HandlePersonaChangeResponse( packetMsg );
+                    return;
+            }
         }
 
 
@@ -666,21 +685,6 @@ namespace SteamKit2
 
             // cache off our local name
             cache.LocalUser.Name = accInfo.Body.persona_name;
-        }
-        void HandleFriendMsg( IPacketMsg packetMsg )
-        {
-            var friendMsg = new ClientMsgProtobuf<CMsgClientFriendMsgIncoming>( packetMsg );
-
-            var callback = new FriendMsgCallback( friendMsg.Body );
-            this.Client.PostCallback( callback );
-        }
-
-        void HandleFriendEchoMsg( IPacketMsg packetMsg )
-        {
-            var friendEchoMsg = new ClientMsgProtobuf<CMsgClientFriendMsgIncoming>( packetMsg );
-
-            var callback = new FriendMsgEchoCallback( friendEchoMsg.Body );
-            this.Client.PostCallback( callback );
         }
 
         private void HandleFriendMessageHistoryResponse( IPacketMsg packetMsg )
@@ -838,84 +842,6 @@ namespace SteamKit2
                 var callback = new PersonaStateCallback( friend );
                 this.Client.PostCallback( callback );
             }
-        }
-        void HandleClanState( IPacketMsg packetMsg )
-        {
-            var clanState = new ClientMsgProtobuf<CMsgClientClanState>( packetMsg );
-
-            var callback = new ClanStateCallback( clanState.Body );
-            this.Client.PostCallback( callback );
-        }
-        void HandleFriendResponse( IPacketMsg packetMsg )
-        {
-            var friendResponse = new ClientMsgProtobuf<CMsgClientAddFriendResponse>( packetMsg );
-
-            var callback = new FriendAddedCallback( friendResponse.Body );
-            this.Client.PostCallback( callback );
-        }
-        void HandleChatEnter( IPacketMsg packetMsg )
-        {
-            var chatEnter = new ClientMsg<MsgClientChatEnter>( packetMsg );
-
-            byte[] payload = chatEnter.Payload.ToArray();
-
-            var callback = new ChatEnterCallback( chatEnter.Body, payload );
-            this.Client.PostCallback( callback );
-        }
-        void HandleChatMsg( IPacketMsg packetMsg )
-        {
-            var chatMsg = new ClientMsg<MsgClientChatMsg>( packetMsg );
-
-            byte[] msgData = chatMsg.Payload.ToArray();
-
-            var callback = new ChatMsgCallback( chatMsg.Body, msgData );
-            this.Client.PostCallback( callback );
-        }
-        void HandleChatMemberInfo( IPacketMsg packetMsg )
-        {
-            var membInfo = new ClientMsg<MsgClientChatMemberInfo>( packetMsg );
-
-            byte[] payload = membInfo.Payload.ToArray();
-
-            var callback = new ChatMemberInfoCallback( membInfo.Body, payload );
-            this.Client.PostCallback( callback );
-        }
-        void HandleChatRoomInfo( IPacketMsg packetMsg )
-        {
-            var roomInfo = new ClientMsg<MsgClientChatRoomInfo>( packetMsg );
-
-            byte[] payload = roomInfo.Payload.ToArray();
-
-            var callback = new ChatRoomInfoCallback( roomInfo.Body, payload );
-            this.Client.PostCallback( callback );
-        }
-        void HandleChatActionResult( IPacketMsg packetMsg )
-        {
-            var actionResult = new ClientMsg<MsgClientChatActionResult>( packetMsg );
-
-            var callback = new ChatActionResultCallback( actionResult.Body );
-            this.Client.PostCallback( callback );
-        }
-        void HandleChatInvite( IPacketMsg packetMsg )
-        {
-            var chatInvite = new ClientMsgProtobuf<CMsgClientChatInvite>( packetMsg );
-
-            var callback = new ChatInviteCallback( chatInvite.Body );
-            this.Client.PostCallback( callback );
-        }
-        void HandleIgnoreFriendResponse( IPacketMsg packetMsg )
-        {
-            var response = new ClientMsg<MsgClientSetIgnoreFriendResponse>( packetMsg );
-
-            var callback = new IgnoreFriendCallback(response.TargetJobID, response.Body);
-            this.Client.PostCallback( callback );
-        }
-        void HandleProfileInfoResponse( IPacketMsg packetMsg )
-        {
-            var response = new ClientMsgProtobuf<CMsgClientFriendProfileInfoResponse>( packetMsg );
-
-            var callback = new ProfileInfoCallback( packetMsg.TargetJobID, response.Body );
-            Client.PostCallback( callback );
         }
         void HandlePersonaChangeResponse( IPacketMsg packetMsg )
         {

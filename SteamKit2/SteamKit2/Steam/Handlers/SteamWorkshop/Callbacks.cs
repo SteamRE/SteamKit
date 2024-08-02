@@ -58,9 +58,12 @@ namespace SteamKit2
             public int TotalResults { get; private set; }
 
 
-            internal UserActionPublishedFilesCallback( JobID jobID, CMsgClientUCMEnumeratePublishedFilesByUserActionResponse msg )
+            internal UserActionPublishedFilesCallback( IPacketMsg packetMsg )
             {
-                this.JobID = jobID;
+                var response = new ClientMsgProtobuf<CMsgClientUCMEnumeratePublishedFilesByUserActionResponse>( packetMsg );
+                var msg = response.Body;
+
+                this.JobID = response.TargetJobID;
 
                 this.Result = ( EResult )msg.eresult;
 

@@ -109,8 +109,17 @@ namespace SteamKit2
             /// </summary>
             public ParentalSettings? ParentalSettings { get; private set; }
 
-            internal LoggedOnCallback( CMsgClientLogonResponse resp )
+            internal LoggedOnCallback( IPacketMsg packetMsg )
             {
+                if ( !packetMsg.IsProto )
+                {
+                    HandleNonProtoLogon( packetMsg );
+                    return;
+                }
+
+                var logonResp = new ClientMsgProtobuf<CMsgClientLogonResponse>( packetMsg );
+                var resp = logonResp.Body;
+
                 this.Result = ( EResult )resp.eresult;
                 this.ExtendedResult = ( EResult )resp.eresult_extended;
 
@@ -147,8 +156,11 @@ namespace SteamKit2
             }
 
 
-            internal LoggedOnCallback( MsgClientLogOnResponse resp )
+            private void HandleNonProtoLogon( IPacketMsg packetMsg )
             {
+                var logonResp = new ClientMsg<MsgClientLogOnResponse>( packetMsg );
+                var resp = logonResp.Body;
+
                 this.Result = resp.Result;
 
                 this.OutOfGameSecsPerHeartbeat = resp.OutOfGameHeartbeatRateSec;
@@ -180,9 +192,18 @@ namespace SteamKit2
             public EResult Result { get; private set; }
 
 
-            internal LoggedOffCallback( EResult result )
+            internal LoggedOffCallback( IPacketMsg packetMsg )
             {
-                this.Result = result;
+                if ( packetMsg.IsProto )
+                {
+                    var loggedOff = new ClientMsgProtobuf<CMsgClientLoggedOff>( packetMsg );
+                    this.Result = ( EResult )loggedOff.Body.eresult;
+                }
+                else
+                {
+                    var loggedOff = new ClientMsg<MsgClientLoggedOff>( packetMsg );
+                    this.Result = loggedOff.Body.Result;
+                }
             }
         }
 
@@ -197,9 +218,11 @@ namespace SteamKit2
             public ulong SessionToken { get; private set; }
 
 
-            internal SessionTokenCallback( CMsgClientSessionToken msg )
+            internal SessionTokenCallback( IPacketMsg packetMsg )
             {
-                this.SessionToken = msg.token;
+                var sessToken = new ClientMsgProtobuf<CMsgClientSessionToken>( packetMsg );
+
+                this.SessionToken = sessToken.Body.token;
             }
         }
 
@@ -238,8 +261,11 @@ namespace SteamKit2
             public string FacebookName { get; private set; }
 
 
-            internal AccountInfoCallback( CMsgClientAccountInfo msg )
+            internal AccountInfoCallback( IPacketMsg packetMsg )
             {
+                var accInfo = new ClientMsgProtobuf<CMsgClientAccountInfo>( packetMsg );
+                var msg = accInfo.Body;
+
                 PersonaName = msg.persona_name;
                 Country = msg.ip_country;
 
@@ -266,8 +292,11 @@ namespace SteamKit2
             /// </summary>
             public bool IsValidated { get; private set; }
 
-            internal EmailAddrInfoCallback( CMsgClientEmailAddrInfo msg )
+            internal EmailAddrInfoCallback( IPacketMsg packetMsg )
             {
+                var emailAddrInfo = new ClientMsgProtobuf<CMsgClientEmailAddrInfo>( packetMsg );
+                var msg = emailAddrInfo.Body;
+
                 EmailAddress = msg.email_address;
                 IsValidated = msg.email_is_validated;
             }
@@ -311,8 +340,11 @@ namespace SteamKit2
             /// </summary>
             public long LongBalanceDelayed { get; private set; }
 
-            internal WalletInfoCallback( CMsgClientWalletInfoUpdate wallet )
+            internal WalletInfoCallback( IPacketMsg packetMsg )
             {
+                var walletInfo = new ClientMsgProtobuf<CMsgClientWalletInfoUpdate>( packetMsg );
+                var wallet = walletInfo.Body;
+
                 HasWallet = wallet.has_wallet;
 
                 Currency = ( ECurrencyCode )wallet.currency;
@@ -339,9 +371,12 @@ namespace SteamKit2
             public string Nonce { get; private set; }
 
 
-            internal WebAPIUserNonceCallback( JobID jobID, CMsgClientRequestWebAPIAuthenticateUserNonceResponse body )
+            internal WebAPIUserNonceCallback( IPacketMsg packetMsg )
             {
-                this.JobID = jobID;
+                var userNonce = new ClientMsgProtobuf<CMsgClientRequestWebAPIAuthenticateUserNonceResponse>( packetMsg );
+                var body = userNonce.Body;
+
+                this.JobID = userNonce.TargetJobID;
 
                 this.Result = ( EResult )body.eresult;
                 this.Nonce = body.webapi_authenticate_user_nonce;
@@ -359,10 +394,12 @@ namespace SteamKit2
             public string VanityURL { get; private set; }
 
 
-            internal VanityURLChangedCallback( JobID jobID, CMsgClientVanityURLChangedNotification body )
+            internal VanityURLChangedCallback( IPacketMsg packetMsg )
             {
-                this.JobID = jobID;
-                this.VanityURL = body.vanity_url;
+                var vanityUrl = new ClientMsgProtobuf<CMsgClientVanityURLChangedNotification>( packetMsg );
+                
+                this.JobID = vanityUrl.TargetJobID;
+                this.VanityURL = vanityUrl.Body.vanity_url;
             }
         }
 
@@ -414,14 +451,16 @@ namespace SteamKit2
             public ReadOnlyCollection<Message> Messages { get; private set; }
 
 
-            internal MarketingMessageCallback( MsgClientMarketingMessageUpdate2 body, byte[] payload )
+            internal MarketingMessageCallback( IPacketMsg packetMsg )
             {
+                var marketingMessage = new ClientMsg<MsgClientMarketingMessageUpdate2>( packetMsg );
+                var body = marketingMessage.Body;
+
                 UpdateTime = DateUtils.DateTimeFromUnixTime( body.MarketingMessageUpdateTime );
 
                 var msgList = new List<Message>();
 
-                using ( var ms = new MemoryStream( payload ) )
-                using ( var br = new BinaryReader( ms ) )
+                using ( var br = new BinaryReader( marketingMessage.Payload, Encoding.UTF8, leaveOpen: true ) )
                 {
                     for ( int x = 0; x < body.Count; ++x )
                     {
@@ -451,9 +490,12 @@ namespace SteamKit2
             /// </summary>
             public uint PlayingAppID { get; private set; }
 
-            internal PlayingSessionStateCallback( JobID jobID, CMsgClientPlayingSessionState msg )
+            internal PlayingSessionStateCallback( IPacketMsg packetMsg )
             {
-                JobID = jobID;
+                var playingSessionState = new ClientMsgProtobuf<CMsgClientPlayingSessionState>( packetMsg );
+                var msg = playingSessionState.Body;
+
+                JobID = packetMsg.TargetJobID;
                 PlayingBlocked = msg.playing_blocked;
                 PlayingAppID = msg.playing_app;
             }

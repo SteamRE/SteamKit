@@ -44,9 +44,12 @@ namespace SteamKit2
             public uint FileSize { get; private set; }
 
 
-            internal UGCDetailsCallback( JobID jobID, CMsgClientUFSGetUGCDetailsResponse msg )
+            internal UGCDetailsCallback( IPacketMsg packetMsg )
             {
-                JobID = jobID;
+                var infoResponse = new ClientMsgProtobuf<CMsgClientUFSGetUGCDetailsResponse>( packetMsg );
+                var msg = infoResponse.Body;
+
+                JobID = infoResponse.TargetJobID;
 
                 Result = ( EResult )msg.eresult;
 
@@ -98,9 +101,12 @@ namespace SteamKit2
             /// </summary>
             public bool IsExplicitDelete { get; private set; }
 
-            internal SingleFileInfoCallback(JobID jobID, CMsgClientUFSGetSingleFileInfoResponse msg)
+            internal SingleFileInfoCallback( IPacketMsg packetMsg )
             {
-                JobID = jobID;
+                var infoResponse = new ClientMsgProtobuf<CMsgClientUFSGetSingleFileInfoResponse>( packetMsg );
+                var msg = infoResponse.Body;
+
+                JobID = infoResponse.TargetJobID;
 
                 Result = (EResult)msg.eresult;
 
@@ -128,9 +134,12 @@ namespace SteamKit2
             /// </summary>
             public ulong UGCId { get; private set; }
 
-            internal ShareFileCallback(JobID jobID, CMsgClientUFSShareFileResponse msg)
+            internal ShareFileCallback( IPacketMsg packetMsg )
             {
-                JobID = jobID;
+                var shareResponse = new ClientMsgProtobuf<CMsgClientUFSShareFileResponse>( packetMsg );
+                var msg = shareResponse.Body;
+
+                JobID = shareResponse.TargetJobID;
 
                 Result = (EResult)msg.eresult;
 
