@@ -93,10 +93,6 @@ namespace SteamKit2
         public void RunWaitCallbacks()
         {
             var call = client.WaitForCallback();
-
-            if ( call == null )
-                return;
-
             Handle( call );
         }
         /// <summary>
@@ -106,10 +102,6 @@ namespace SteamKit2
         public async Task RunWaitCallbackAsync( CancellationToken cancellationToken = default )
         {
             var call = await client.WaitForCallbackAsync( cancellationToken );
-
-            if ( call == null )
-                return;
-
             Handle( call );
         }
 
