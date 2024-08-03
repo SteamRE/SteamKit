@@ -101,9 +101,9 @@ namespace SteamKit2
         }
         /// <summary>
         /// Blocks the current thread to run a single queued callback.
-        /// If no callback is queued, the method will block until one is posted.
+        /// If no callback is queued, the method will asynchronously await until one is posted.
         /// </summary>
-        public async Task RunWaitCallbacksAsync( CancellationToken cancellationToken = default )
+        public async Task RunWaitCallbackAsync( CancellationToken cancellationToken = default )
         {
             var call = await client.WaitForCallbackAsync( cancellationToken );
 
