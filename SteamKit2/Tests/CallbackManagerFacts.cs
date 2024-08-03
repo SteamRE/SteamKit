@@ -200,23 +200,27 @@ namespace Tests
         [Fact]
         public async Task PostedCallbacksTriggerActionsAsync()
         {
-            var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
+            var callbacks = new CallbackForTest[ 10 ];
 
             var numCallbacksRun = 0;
             void action( CallbackForTest cb )
             {
+                Assert.True( numCallbacksRun < callbacks.Length );
+                var callback = callbacks[ numCallbacksRun ];
                 Assert.Equal( callback.UniqueID, cb.UniqueID );
                 numCallbacksRun++;
             }
 
             using ( mgr.Subscribe<CallbackForTest>( action ) )
             {
-                for ( var i = 0; i < 10; i++ )
+                for ( var i = 0; i < callbacks.Length; i++ )
                 {
+                    var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
+                    callbacks[ i ] = callback;
                     client.PostCallback( callback );
                 }
 
-                for ( var i = 1; i <= 10; i++ )
+                for ( var i = 1; i <= callbacks.Length; i++ )
                 {
                     await mgr.RunWaitCallbackAsync();
                     Assert.Equal( i, numCallbacksRun );
