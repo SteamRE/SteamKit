@@ -44,7 +44,7 @@ namespace SteamKit2
         /// </summary>
         public void RunCallbacks()
         {
-            var call = client.GetCallback( true );
+            var call = client.GetCallback();
 
             if ( call == null )
                 return;
@@ -58,7 +58,7 @@ namespace SteamKit2
         /// <param name="timeout">The length of time to block.</param>
         public void RunWaitCallbacks( TimeSpan timeout )
         {
-            var call = client.WaitForCallback( true, timeout );
+            var call = client.WaitForCallback( timeout );
 
             if ( call == null )
                 return;
@@ -72,7 +72,7 @@ namespace SteamKit2
         /// <param name="timeout">The length of time to block.</param>
         public void RunWaitAllCallbacks( TimeSpan timeout )
         {
-            var calls = client.GetAllCallbacks( true, timeout );
+            var calls = client.GetAllCallbacks( timeout );
             foreach ( var call in calls )
             {
                 Handle( call );

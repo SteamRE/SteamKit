@@ -15,7 +15,7 @@ namespace Tests
                 Password = "lamepassword"
             });
 
-            var callback = SteamClient.GetCallback( freeLast: true );
+            var callback = SteamClient.GetCallback( );
             Assert.NotNull( callback );
             Assert.IsType<SteamUser.LoggedOnCallback>( callback );
 
@@ -104,7 +104,7 @@ namespace Tests
         {
             Handler.LogOnAnonymous();
 
-            var callback = SteamClient.GetCallback( freeLast: true );
+            var callback = SteamClient.GetCallback( );
             Assert.NotNull( callback );
             Assert.IsType<SteamUser.LoggedOnCallback>( callback );
 
