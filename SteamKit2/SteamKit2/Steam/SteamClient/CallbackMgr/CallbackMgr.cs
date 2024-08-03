@@ -129,10 +129,12 @@ namespace SteamKit2
 
         void Handle( ICallbackMsg call )
         {
+            var type = call.GetType();
+
             // find handlers interested in this callback
             foreach ( var callback in registeredCallbacks )
             {
-                if ( callback.CallbackType.IsAssignableFrom( call.GetType() ) )
+                if ( callback.CallbackType.IsAssignableFrom( type ) )
                 {
                     callback.Run( call );
                 }
