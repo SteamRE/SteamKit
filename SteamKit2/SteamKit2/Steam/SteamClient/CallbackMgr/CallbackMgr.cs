@@ -56,7 +56,7 @@ namespace SteamKit2
         }
         /// <summary>
         /// Blocks the current thread to run a single queued callback.
-        /// If no callback is queued, the method will block for the given timeout.
+        /// If no callback is queued, the method will block for the given timeout or until a callback becomes available.
         /// </summary>
         /// <param name="timeout">The length of time to block.</param>
         public bool RunWaitCallbacks( TimeSpan timeout )
@@ -71,7 +71,8 @@ namespace SteamKit2
         }
         /// <summary>
         /// Blocks the current thread to run all queued callbacks.
-        /// If no callback is queued, the method will block for the given timeout.
+        /// If no callback is queued, the method will block for the given timeout or until a callback becomes available.
+        /// This method returns once the queue has been emptied.
         /// </summary>
         /// <param name="timeout">The length of time to block.</param>
         public void RunWaitAllCallbacks( TimeSpan timeout )
@@ -88,7 +89,7 @@ namespace SteamKit2
         }
         /// <summary>
         /// Blocks the current thread to run a single queued callback.
-        /// If no callback is queued, the method will block until one is posted.
+        /// If no callback is queued, the method will block until one becomes available.
         /// </summary>
         public void RunWaitCallbacks()
         {
@@ -97,7 +98,7 @@ namespace SteamKit2
         }
         /// <summary>
         /// Blocks the current thread to run a single queued callback.
-        /// If no callback is queued, the method will asynchronously await until one is posted.
+        /// If no callback is queued, the method will asynchronously await until one becomes available.
         /// </summary>
         public async Task RunWaitCallbackAsync( CancellationToken cancellationToken = default )
         {
