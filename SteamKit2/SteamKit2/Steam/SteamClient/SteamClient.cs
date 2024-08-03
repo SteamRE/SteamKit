@@ -12,6 +12,8 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 using ProtoBuf;
 using SteamKit2.Authentication;
 using SteamKit2.Internal;
@@ -29,8 +31,7 @@ namespace SteamKit2
         long currentJobId = 0;
         DateTime processStartTime;
 
-        object callbackLock = new();
-        Queue<ICallbackMsg> callbackQueue;
+        BufferBlock<ICallbackMsg> callbackQueue = new();
 
         Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
 
@@ -80,8 +81,6 @@ namespace SteamKit2
         public SteamClient( SteamConfiguration configuration, string identifier )
             : base( configuration, identifier )
         {
-            callbackQueue = new Queue<ICallbackMsg>();
-
             this.handlers = [];
 
             // Start calculating machine info so that it is (hopefully) ready by the time we get to logging in.
@@ -189,12 +188,10 @@ namespace SteamKit2
         /// <returns>The next callback in the queue, or null if no callback is waiting.</returns>
         public ICallbackMsg? GetCallback()
         {
-            lock ( callbackLock )
+            if ( callbackQueue.TryReceive( out var msg ) )
             {
-                if ( callbackQueue.Count > 0 )
-                    return callbackQueue.Dequeue();
+                return msg;
             }
-
             return null;
         }
 
@@ -204,13 +201,7 @@ namespace SteamKit2
         /// <returns>The callback object from the queue.</returns>
         public ICallbackMsg WaitForCallback()
         {
-            lock ( callbackLock )
-            {
-                if ( callbackQueue.Count == 0 )
-                    Monitor.Wait( callbackLock );
-
-                return callbackQueue.Dequeue();
-            }
+            return callbackQueue.Receive();
         }
 
         /// <summary>
@@ -220,16 +211,15 @@ namespace SteamKit2
         /// <returns>A callback object from the queue if a callback has been posted, or null if the timeout has elapsed.</returns>
         public ICallbackMsg? WaitForCallback( TimeSpan timeout )
         {
-            lock ( callbackLock )
+            try
             {
-                if ( callbackQueue.Count == 0 )
-                {
-                    if ( !Monitor.Wait( callbackLock, timeout ) )
-                        return null;
-                }
-
-                return callbackQueue.Dequeue();
+                return callbackQueue.Receive( timeout );
             }
+            catch ( TimeoutException )
+            {
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -239,20 +229,25 @@ namespace SteamKit2
         /// <returns>All current callback objects in the queue.</returns>
         public IEnumerable<ICallbackMsg> GetAllCallbacks( TimeSpan timeout )
         {
-            IEnumerable<ICallbackMsg> callbacks;
+            ICallbackMsg msg;
 
-            lock ( callbackLock )
+            try
             {
-                if ( callbackQueue.Count == 0 )
-                {
-                    if ( !Monitor.Wait( callbackLock, timeout ) )
-                    {
-                        return Enumerable.Empty<ICallbackMsg>();
-                    }
-                }
+                msg = callbackQueue.Receive( timeout );
+            }
+            catch ( TimeoutException )
+            {
+                return [];
+            }
 
-                callbacks = callbackQueue.ToArray();
-                callbackQueue.Clear();
+            var callbacks = new List<ICallbackMsg>
+            {
+                msg
+            };
+
+            while ( callbackQueue.TryReceive( out msg! ) )
+            {
+                callbacks.Add( msg );
             }
 
             return callbacks;
@@ -267,12 +262,7 @@ namespace SteamKit2
             if ( msg == null )
                 return;
 
-            lock ( callbackLock )
-            {
-                callbackQueue.Enqueue( msg );
-                Monitor.Pulse( callbackLock );
-            }
-
+            callbackQueue.Post( msg );
             jobManager.TryCompleteJob( msg.JobID, msg );
         }
         #endregion

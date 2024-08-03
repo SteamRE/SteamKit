@@ -84,7 +84,12 @@ namespace SteamKit2
         /// </summary>
         public void RunWaitCallbacks()
         {
-            RunWaitCallbacks( TimeSpan.FromMilliseconds( -1 ) );
+            var call = client.WaitForCallback();
+
+            if ( call == null )
+                return;
+
+            Handle( call );
         }
 
         /// <summary>
