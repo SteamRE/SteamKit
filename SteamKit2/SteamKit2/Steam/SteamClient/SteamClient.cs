@@ -205,6 +205,15 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Asynchronously awaits until a callback object is posted to the queue, and removes it.
+        /// </summary>
+        /// <returns>The callback object from the queue.</returns>
+        public Task<ICallbackMsg> WaitForCallbackAsync( CancellationToken cancellationToken = default )
+        {
+            return callbackQueue.ReceiveAsync( cancellationToken );
+        }
+
+        /// <summary>
         /// Blocks the calling thread until a callback object is posted to the queue, and removes it.
         /// </summary>
         /// <param name="timeout">The length of time to block.</param>

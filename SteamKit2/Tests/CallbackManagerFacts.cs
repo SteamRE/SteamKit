@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using SteamKit2;
 using Xunit;
 
@@ -193,6 +194,37 @@ namespace Tests
                 // Callbacks should have been freed.
                 mgr.RunWaitAllCallbacks(TimeSpan.Zero);
                 Assert.Equal(10, numCallbacksRun);
+            }
+        }
+
+        [Fact]
+        public async Task PostedCallbacksTriggerActionsAsync()
+        {
+            var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
+
+            var numCallbacksRun = 0;
+            void action( CallbackForTest cb )
+            {
+                Assert.Equal( callback.UniqueID, cb.UniqueID );
+                numCallbacksRun++;
+            }
+
+            using ( mgr.Subscribe<CallbackForTest>( action ) )
+            {
+                for ( var i = 0; i < 10; i++ )
+                {
+                    client.PostCallback( callback );
+                }
+
+                for ( var i = 1; i <= 10; i++ )
+                {
+                    await mgr.RunWaitCallbacksAsync();
+                    Assert.Equal( i, numCallbacksRun );
+                }
+
+                // Callbacks should have been freed.
+                mgr.RunWaitAllCallbacks( TimeSpan.Zero );
+                Assert.Equal( 10, numCallbacksRun );
             }
         }
 

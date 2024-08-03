@@ -7,6 +7,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -91,6 +93,19 @@ namespace SteamKit2
         public void RunWaitCallbacks()
         {
             var call = client.WaitForCallback();
+
+            if ( call == null )
+                return;
+
+            Handle( call );
+        }
+        /// <summary>
+        /// Blocks the current thread to run a single queued callback.
+        /// If no callback is queued, the method will block until one is posted.
+        /// </summary>
+        public async Task RunWaitCallbacksAsync( CancellationToken cancellationToken = default )
+        {
+            var call = await client.WaitForCallbackAsync( cancellationToken );
 
             if ( call == null )
                 return;
