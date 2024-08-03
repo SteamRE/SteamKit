@@ -223,37 +223,6 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Blocks the calling thread until the queue contains a callback object. Returns all callbacks, and removes them.
-        /// </summary>
-        /// <param name="timeout">The length of time to block.</param>
-        /// <returns>All current callback objects in the queue.</returns>
-        public IEnumerable<ICallbackMsg> GetAllCallbacks( TimeSpan timeout )
-        {
-            ICallbackMsg msg;
-
-            try
-            {
-                msg = callbackQueue.Receive( timeout );
-            }
-            catch ( TimeoutException )
-            {
-                return [];
-            }
-
-            var callbacks = new List<ICallbackMsg>
-            {
-                msg
-            };
-
-            while ( callbackQueue.TryReceive( out msg! ) )
-            {
-                callbacks.Add( msg );
-            }
-
-            return callbacks;
-        }
-
-        /// <summary>
         /// Posts a callback to the queue. This is normally used directly by client message handlers.
         /// </summary>
         /// <param name="msg">The message.</param>
