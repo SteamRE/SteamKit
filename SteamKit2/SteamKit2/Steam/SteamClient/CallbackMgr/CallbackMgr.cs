@@ -44,6 +44,7 @@ namespace SteamKit2
         /// Runs a single queued callback.
         /// If no callback is queued, this method will instantly return.
         /// </summary>
+        /// <returns>Returns true if a callback has been run, false otherwise.</returns>
         public bool RunCallbacks()
         {
             var call = client.GetCallback();
@@ -59,6 +60,7 @@ namespace SteamKit2
         /// If no callback is queued, the method will block for the given timeout or until a callback becomes available.
         /// </summary>
         /// <param name="timeout">The length of time to block.</param>
+        /// <returns>Returns true if a callback has been run, false otherwise.</returns>
         public bool RunWaitCallbacks( TimeSpan timeout )
         {
             var call = client.WaitForCallback( timeout );
