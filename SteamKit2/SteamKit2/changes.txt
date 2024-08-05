@@ -4,8 +4,9 @@ v 3.0.0			July 18 2024
 
 * Added a dependency on `System.IO.Hashing`
 * Added `SteamKit2.WebUI.Internal` protobufs
-* Added `ChatMode` to `LogOnDetails`
+* Added `ChatMode`, `UIMode`, and `IsSteamDeck` to `LogOnDetails`
 * Added `DepotManifest.Serialize`
+* Added `SteamClient.WaitForCallbackAsync` and `CallbackManager.RunWaitCallbackAsync`
 * Updated Steam enums and protobufs.
 
 BREAKING CHANGES
