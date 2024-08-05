@@ -195,13 +195,13 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Writes the specified string to the message payload using default encoding.
+        /// Writes the specified string to the message payload using UTF-8 encoding.
         /// This function does not write a terminating null character.
         /// </summary>
         /// <param name="data">The string to write.</param>
         public void Write( string data )
         {
-            Write( data, Encoding.GetEncoding( 0 ) );
+            Write( data, Encoding.UTF8 );
         }
         /// <summary>
         /// Writes the specified string to the message payload using the specified encoding.
@@ -222,13 +222,14 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Writes the secified string and a null terminator to the message payload using default encoding.
+        /// Writes the secified string and a null terminator to the message payload using UTF-8 encoding.
         /// </summary>
         /// <param name="data">The string to write.</param>
         public void WriteNullTermString( string data )
         {
-            WriteNullTermString( data, Encoding.GetEncoding( 0 ) );
+            WriteNullTermString( data, Encoding.UTF8 );
         }
+
         /// <summary>
         /// Writes the specified string and a null terminator to the message payload using the specified encoding.
         /// </summary>
@@ -236,8 +237,9 @@ namespace SteamKit2
         /// <param name="encoding">The encoding to use.</param>
         public void WriteNullTermString( string data, Encoding encoding )
         {
-            Write( data, encoding );
-            Write( encoding.GetBytes( "\0" ) );
+            ArgumentNullException.ThrowIfNull( encoding );
+
+            Payload.WriteNullTermString( data, encoding );
         }
 
         /// <summary>
@@ -403,12 +405,12 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Reads a null terminated string from the message payload with the default encoding.
+        /// Reads a null terminated string from the message payload with UTF-8 encoding.
         /// </summary>
         /// <returns>The string.</returns>
         public string ReadNullTermString()
         {
-            return ReadNullTermString( Encoding.GetEncoding( 0 ) );
+            return ReadNullTermString( Encoding.UTF8 );
         }
         /// <summary>
         /// Reads a null terminated string from the message payload with the specified encoding.

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Buffers;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 
@@ -64,6 +63,8 @@ namespace SteamKit2
             return BitConverter.ToSingle( data );
         }
 
+        const string NullTerminator = "\0";
+
         public static string ReadNullTermString( this Stream stream, Encoding encoding )
         {
             if ( encoding == Encoding.UTF8 )
@@ -71,21 +72,22 @@ namespace SteamKit2
                 return ReadNullTermUtf8String( stream );
             }
 
-            int characterSize = encoding.GetByteCount( "e" );
+            using MemoryStream ms = new MemoryStream( capacity: 32 );
 
-            using MemoryStream ms = new MemoryStream();
+            int characterSize = encoding.GetByteCount( "e" );
+            Span<byte> data = stackalloc byte[ characterSize ];
 
             while ( true )
             {
-                byte[] data = new byte[ characterSize ];
-                stream.Read( data, 0, characterSize );
+                data.Clear();
+                stream.Read( data );
 
-                if ( encoding.GetString( data, 0, characterSize ) == "\0" )
+                if ( encoding.GetString( data ) == NullTerminator )
                 {
                     break;
                 }
 
-                ms.Write( data, 0, data.Length );
+                ms.Write( data );
             }
 
             return encoding.GetString( ms.GetBuffer(), 0, ( int )ms.Length );
@@ -130,12 +132,31 @@ namespace SteamKit2
 
         public static void WriteNullTermString( this Stream stream, string value, Encoding encoding )
         {
-            var dataLength = encoding.GetByteCount( value );
-            var data = new byte[ dataLength + 1 ];
-            encoding.GetBytes( value, 0, value.Length, data, 0 );
-            data[ dataLength ] = 0x00; // '\0'
+            value ??= string.Empty;
 
-            stream.Write( data, 0, data.Length );
+            var stringByteCount = encoding.GetByteCount( value );
+            var nullTermByteCount = encoding.GetByteCount( NullTerminator );
+            var totalByteCount = stringByteCount + nullTermByteCount;
+
+            var isLargeBuffer = totalByteCount > 256;
+            var rented = isLargeBuffer ? ArrayPool<byte>.Shared.Rent( totalByteCount ) : null;
+
+            try
+            {
+                Span<byte> encodedSpan = isLargeBuffer ? rented.AsSpan( 0, totalByteCount ) : stackalloc byte[ totalByteCount ];
+
+                encoding.GetBytes( value.AsSpan(), encodedSpan[ ..stringByteCount ] );
+                encoding.GetBytes( NullTerminator.AsSpan(), encodedSpan[ stringByteCount.. ] );
+
+                stream.Write( encodedSpan );
+            }
+            finally
+            {
+                if ( rented != null )
+                {
+                    ArrayPool<byte>.Shared.Return( rented );
+                }
+            }
         }
 
         public static int ReadAll( this Stream stream, byte[] buffer )
