@@ -10,8 +10,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 using ProtoBuf;
 using SteamKit2.Authentication;
 using SteamKit2.Internal;
@@ -29,8 +30,7 @@ namespace SteamKit2
         long currentJobId = 0;
         DateTime processStartTime;
 
-        object callbackLock = new();
-        Queue<ICallbackMsg> callbackQueue;
+        BufferBlock<ICallbackMsg> callbackQueue = new();
 
         Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
 
@@ -80,8 +80,6 @@ namespace SteamKit2
         public SteamClient( SteamConfiguration configuration, string identifier )
             : base( configuration, identifier )
         {
-            callbackQueue = new Queue<ICallbackMsg>();
-
             this.handlers = [];
 
             // Start calculating machine info so that it is (hopefully) ready by the time we get to logging in.
@@ -184,133 +182,52 @@ namespace SteamKit2
 
         #region Callbacks
         /// <summary>
-        /// Gets the next callback object in the queue.
-        /// This function does not dequeue the callback, you must call FreeLastCallback after processing it.
+        /// Gets the next callback object in the queue, and removes it.
         /// </summary>
         /// <returns>The next callback in the queue, or null if no callback is waiting.</returns>
         public ICallbackMsg? GetCallback()
         {
-            return GetCallback( false );
-        }
-        /// <summary>
-        /// Gets the next callback object in the queue, and optionally frees it.
-        /// </summary>
-        /// <param name="freeLast">if set to <c>true</c> this function also frees the last callback if one existed.</param>
-        /// <returns>The next callback in the queue, or null if no callback is waiting.</returns>
-        public ICallbackMsg? GetCallback( bool freeLast )
-        {
-            lock ( callbackLock )
+            if ( callbackQueue.TryReceive( out var msg ) )
             {
-                if ( callbackQueue.Count > 0 )
-                    return ( freeLast ? callbackQueue.Dequeue() : callbackQueue.Peek() );
+                return msg;
             }
-
             return null;
         }
 
         /// <summary>
-        /// Blocks the calling thread until a callback object is posted to the queue.
-        /// This function does not dequeue the callback, you must call FreeLastCallback after processing it.
+        /// Blocks the calling thread until a callback object is posted to the queue, and removes it.
         /// </summary>
         /// <returns>The callback object from the queue.</returns>
-        public ICallbackMsg? WaitForCallback()
+        public ICallbackMsg WaitForCallback()
         {
-            return WaitForCallback( false );
+            return callbackQueue.Receive();
         }
+
         /// <summary>
-        /// Blocks the calling thread until a callback object is posted to the queue, or null after the timeout has elapsed.
-        /// This function does not dequeue the callback, you must call FreeLastCallback after processing it.
+        /// Asynchronously awaits until a callback object is posted to the queue, and removes it.
+        /// </summary>
+        /// <returns>The callback object from the queue.</returns>
+        public Task<ICallbackMsg> WaitForCallbackAsync( CancellationToken cancellationToken = default )
+        {
+            return callbackQueue.ReceiveAsync( cancellationToken );
+        }
+
+        /// <summary>
+        /// Blocks the calling thread until a callback object is posted to the queue, and removes it.
         /// </summary>
         /// <param name="timeout">The length of time to block.</param>
         /// <returns>A callback object from the queue if a callback has been posted, or null if the timeout has elapsed.</returns>
         public ICallbackMsg? WaitForCallback( TimeSpan timeout )
         {
-            lock ( callbackLock )
+            try
             {
-                if ( callbackQueue.Count == 0 )
-                {
-                    if ( !Monitor.Wait( callbackLock, timeout ) )
-                        return null;
-                }
-
-                return callbackQueue.Peek();
+                return callbackQueue.Receive( timeout );
             }
-        }
-        /// <summary>
-        /// Blocks the calling thread until a callback object is posted to the queue, and optionally frees it.
-        /// </summary>
-        /// <param name="freeLast">if set to <c>true</c> this function also frees the last callback.</param>
-        /// <returns>The callback object from the queue.</returns>
-        public ICallbackMsg WaitForCallback( bool freeLast )
-        {
-            lock ( callbackLock )
+            catch ( TimeoutException )
             {
-                if ( callbackQueue.Count == 0 )
-                    Monitor.Wait( callbackLock );
-
-                return ( freeLast ? callbackQueue.Dequeue() : callbackQueue.Peek() );
-            }
-        }
-        /// <summary>
-        /// Blocks the calling thread until a callback object is posted to the queue, and optionally frees it.
-        /// </summary>
-        /// <param name="freeLast">if set to <c>true</c> this function also frees the last callback.</param>
-        /// <param name="timeout">The length of time to block.</param>
-        /// <returns>A callback object from the queue if a callback has been posted, or null if the timeout has elapsed.</returns>
-        public ICallbackMsg? WaitForCallback( bool freeLast, TimeSpan timeout )
-        {
-            lock ( callbackLock )
-            {
-                if ( callbackQueue.Count == 0 )
-                {
-                    if ( !Monitor.Wait( callbackLock, timeout ) )
-                        return null;
-                }
-
-                return ( freeLast ? callbackQueue.Dequeue() : callbackQueue.Peek() );
-            }
-        }
-        /// <summary>
-        /// Blocks the calling thread until the queue contains a callback object. Returns all callbacks, and optionally frees them.
-        /// </summary>
-        /// <param name="freeLast">if set to <c>true</c> this function also frees all callbacks.</param>
-        /// <param name="timeout">The length of time to block.</param>
-        /// <returns>All current callback objects in the queue.</returns>
-        public IEnumerable<ICallbackMsg> GetAllCallbacks( bool freeLast, TimeSpan timeout )
-        {
-            IEnumerable<ICallbackMsg> callbacks;
-
-            lock ( callbackLock )
-            {
-                if ( callbackQueue.Count == 0 )
-                {
-                    if ( !Monitor.Wait( callbackLock, timeout ) )
-                    {
-                        return Enumerable.Empty<ICallbackMsg>();
-                    }
-                }
-
-                callbacks = callbackQueue.ToArray();
-                if ( freeLast )
-                {
-                    callbackQueue.Clear();
-                }
             }
 
-            return callbacks;
-        }
-        /// <summary>
-        /// Frees the last callback in the queue.
-        /// </summary>
-        public void FreeLastCallback()
-        {
-            lock ( callbackLock )
-            {
-                if ( callbackQueue.Count == 0 )
-                    return;
-
-                callbackQueue.Dequeue();
-            }
+            return null;
         }
 
         /// <summary>
@@ -322,12 +239,7 @@ namespace SteamKit2
             if ( msg == null )
                 return;
 
-            lock ( callbackLock )
-            {
-                callbackQueue.Enqueue( msg );
-                Monitor.Pulse( callbackLock );
-            }
-
+            callbackQueue.Post( msg );
             jobManager.TryCompleteJob( msg.JobID, msg );
         }
         #endregion

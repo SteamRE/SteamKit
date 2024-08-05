@@ -10,6 +10,9 @@ v 3.0.0			July 18 2024
 
 BREAKING CHANGES
 * SteamKit now targets .NET 8
+* `SteamClient` callback queue is now backed by `BufferBlock`:
+  * `FreeLastCallback` and `GetAllCallbacks` have been removed
+  * Calling  `GetCallback` and `WaitForCallback` now always dequeues a callback, there is no more peek and "freeLast"
 * Removed obsolete methods and enum values
 * Removed Artifact and Underlords generated protobufs
 * Removed `DepotManifest.SaveToFile`

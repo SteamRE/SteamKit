@@ -7,6 +7,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -42,49 +44,68 @@ namespace SteamKit2
         /// Runs a single queued callback.
         /// If no callback is queued, this method will instantly return.
         /// </summary>
-        public void RunCallbacks()
+        /// <returns>Returns true if a callback has been run, false otherwise.</returns>
+        public bool RunCallbacks()
         {
-            var call = client.GetCallback( true );
+            var call = client.GetCallback();
 
             if ( call == null )
-                return;
+                return false;
 
             Handle( call );
+            return true;
         }
         /// <summary>
         /// Blocks the current thread to run a single queued callback.
-        /// If no callback is queued, the method will block for the given timeout.
+        /// If no callback is queued, the method will block for the given timeout or until a callback becomes available.
         /// </summary>
         /// <param name="timeout">The length of time to block.</param>
-        public void RunWaitCallbacks( TimeSpan timeout )
+        /// <returns>Returns true if a callback has been run, false otherwise.</returns>
+        public bool RunWaitCallbacks( TimeSpan timeout )
         {
-            var call = client.WaitForCallback( true, timeout );
+            var call = client.WaitForCallback( timeout );
 
             if ( call == null )
-                return;
+                return false;
 
             Handle( call );
+            return true;
         }
         /// <summary>
         /// Blocks the current thread to run all queued callbacks.
-        /// If no callback is queued, the method will block for the given timeout.
+        /// If no callback is queued, the method will block for the given timeout or until a callback becomes available.
+        /// This method returns once the queue has been emptied.
         /// </summary>
         /// <param name="timeout">The length of time to block.</param>
         public void RunWaitAllCallbacks( TimeSpan timeout )
         {
-            var calls = client.GetAllCallbacks( true, timeout );
-            foreach ( var call in calls )
+            if ( !RunWaitCallbacks( timeout ) )
             {
-                Handle( call );
+                return;
+            }
+
+            while ( RunCallbacks() )
+            {
+                //
             }
         }
         /// <summary>
         /// Blocks the current thread to run a single queued callback.
-        /// If no callback is queued, the method will block until one is posted.
+        /// If no callback is queued, the method will block until one becomes available.
         /// </summary>
         public void RunWaitCallbacks()
         {
-            RunWaitCallbacks( TimeSpan.FromMilliseconds( -1 ) );
+            var call = client.WaitForCallback();
+            Handle( call );
+        }
+        /// <summary>
+        /// Blocks the current thread to run a single queued callback.
+        /// If no callback is queued, the method will asynchronously await until one becomes available.
+        /// </summary>
+        public async Task RunWaitCallbackAsync( CancellationToken cancellationToken = default )
+        {
+            var call = await client.WaitForCallbackAsync( cancellationToken );
+            Handle( call );
         }
 
         /// <summary>
