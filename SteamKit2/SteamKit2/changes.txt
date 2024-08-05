@@ -2,23 +2,24 @@
 v 3.0.0			July 18 2024
 ------------------------------------------------------------------------------
 
-* Added a dependency on `System.IO.Hashing`
-* Added `SteamKit2.WebUI.Internal` protobufs
-* Added `ChatMode`, `UIMode`, and `IsSteamDeck` to `LogOnDetails`
-* Added `DepotManifest.Serialize`
-* Added `SteamClient.WaitForCallbackAsync` and `CallbackManager.RunWaitCallbackAsync`
+* Added a dependency on `System.IO.Hashing`.
+* Added `SteamKit2.WebUI.Internal` protobufs.
+* Added `ChatMode`, `UIMode`, and `IsSteamDeck` to `LogOnDetails`.
+* Added `DepotManifest.Serialize`.
+* Added `SteamClient.WaitForCallbackAsync` and `CallbackManager.RunWaitCallbackAsync`.
 * Updated Steam enums and protobufs.
 * Various performance and memory optimizations.
 
 BREAKING CHANGES
-* SteamKit now targets .NET 8
+* SteamKit now targets .NET 8.
 * `SteamClient` callback queue is now backed by `BufferBlock`:
-  * `FreeLastCallback` and `GetAllCallbacks` have been removed
-  * Calling  `GetCallback` and `WaitForCallback` now always dequeues a callback, there is no more peek and "freeLast"
-* `DepotManifest.ChunkData.Checksum` is now a `uint` instead of `byte[4]`
-* Removed obsolete methods and enum values
-* Removed Artifact and Underlords generated protobufs
-* Removed `DepotManifest.SaveToFile`
+  * `FreeLastCallback` and `GetAllCallbacks` have been removed.
+  * Calling  `GetCallback` and `WaitForCallback` now always dequeues a callback, there is no more peek and "freeLast".
+* `DepotManifest.ChunkData.Checksum` is now a `uint` instead of `byte[4]`.
+* Removed obsolete methods and enum values.
+* Removed Artifact and Underlords generated protobufs.
+* Removed `DepotManifest.SaveToFile`, use `DepotManifest.Serialize(stream)` instead.
+* Removed `SteamTrading` handler.
 
 ------------------------------------------------------------------------------
 v 2.5.0			November 6 2023
