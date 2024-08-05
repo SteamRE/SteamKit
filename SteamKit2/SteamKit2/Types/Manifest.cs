@@ -22,7 +22,7 @@ namespace SteamKit2
             {
                 public byte[]? ChunkGID { get; set; } // sha1 hash for this chunk
 
-                public byte[]? Checksum { get; set; }
+                public uint Checksum { get; set; }
                 public ulong Offset { get; set; }
 
                 public uint DecompressedSize { get; set; }
@@ -33,7 +33,7 @@ namespace SteamKit2
                 {
                     ChunkGID = ds.ReadBytes( 20 );
 
-                    Checksum = ds.ReadBytes( 4 );
+                    Checksum = ds.ReadUInt32();
 
                     Offset = ds.ReadUInt64();
 
