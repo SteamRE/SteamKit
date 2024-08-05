@@ -24,6 +24,8 @@ namespace SteamKit2
             // todo: any others?
         };
 
+        private StringBuilder sb = new( 128 );
+
         public KVTextReader( KeyValue kv, Stream input )
             : base( input )
         {
@@ -142,7 +144,7 @@ namespace SteamKit2
                 // "
                 Read();
 
-                var sb = new StringBuilder();
+                sb.Clear();
                 while ( !EndOfStream )
                 {
                     if ( Peek() == '\\' )
@@ -180,7 +182,7 @@ namespace SteamKit2
 
             bool bConditionalStart = false;
             int count = 0;
-            var ret = new StringBuilder();
+            sb.Clear();
             while ( !EndOfStream )
             {
                 next = ( char )Peek();
@@ -199,7 +201,7 @@ namespace SteamKit2
 
                 if ( count < 1023 )
                 {
-                    ret.Append( next );
+                    sb.Append( next );
                 }
                 else
                 {
@@ -209,7 +211,7 @@ namespace SteamKit2
                 Read();
             }
 
-            return ret.ToString();
+            return sb.ToString();
         }
     }
 
