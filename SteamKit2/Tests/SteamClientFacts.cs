@@ -21,9 +21,11 @@ namespace Tests
             Assert.NotNull(steamClient.GetHandler<SteamMasterServer>());
             Assert.NotNull(steamClient.GetHandler<SteamCloud>());
             Assert.NotNull(steamClient.GetHandler<SteamWorkshop>());
-            Assert.NotNull(steamClient.GetHandler<SteamTrading>());
             Assert.NotNull(steamClient.GetHandler<SteamUnifiedMessages>());
             Assert.NotNull(steamClient.GetHandler<SteamScreenshots>());
+            Assert.NotNull(steamClient.GetHandler<SteamMatchmaking>());
+            Assert.NotNull(steamClient.GetHandler<SteamNetworking>());
+            Assert.NotNull(steamClient.GetHandler<SteamContent>());
         }
 
         [Fact]
