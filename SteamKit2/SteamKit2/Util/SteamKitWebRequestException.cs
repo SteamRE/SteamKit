@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
@@ -28,6 +29,27 @@ namespace SteamKit2
             : base(message, null, response.StatusCode)
         {
             this.Headers = response.Headers;
+        }
+
+        /// <inheritdoc/>
+        public SteamKitWebRequestException()
+        {
+            using var response = new HttpResponseMessage();
+            Headers = response.Headers;
+        }
+
+        /// <inheritdoc/>
+        public SteamKitWebRequestException( string message ) : base( message )
+        {
+            using var response = new HttpResponseMessage();
+            Headers = response.Headers;
+        }
+
+        /// <inheritdoc/>
+        public SteamKitWebRequestException( string message, System.Exception innerException ) : base( message, innerException )
+        {
+            using var response = new HttpResponseMessage();
+            Headers = response.Headers;
         }
     }
 }
