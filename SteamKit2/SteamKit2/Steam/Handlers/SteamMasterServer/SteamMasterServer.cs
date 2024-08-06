@@ -47,17 +47,11 @@ namespace SteamKit2
             public uint MaxServers { get; set; }
         }
 
-
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
-
-        internal SteamMasterServer()
+        private static CallbackMsg? GetCallback( IPacketMsg packetMsg ) => packetMsg.MsgType switch
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.GMSClientServerQueryResponse, HandleServerQueryResponse },
-            };
-        }
-
+            EMsg.GMSClientServerQueryResponse => new QueryCallback( packetMsg ),
+            _ => null,
+        };
 
         /// <summary>
         /// Requests a list of servers from the Steam game master server.
@@ -90,34 +84,21 @@ namespace SteamKit2
             return new AsyncJob<QueryCallback>( this.Client, query.SourceJobID );
         }
 
-
         /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            ArgumentNullException.ThrowIfNull( packetMsg );
+            var callback = GetCallback( packetMsg );
 
-            if ( !dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
+            if ( callback == null )
             {
                 // ignore messages that we don't have a handler function for
                 return;
             }
 
-            handlerFunc( packetMsg );
+            this.Client.PostCallback( callback );
         }
-
-
-        #region ClientMsg Handlers
-        void HandleServerQueryResponse( IPacketMsg packetMsg )
-        {
-            var queryResponse = new ClientMsgProtobuf<CMsgGMSClientServerQueryResponse>( packetMsg );
-
-            var callback = new QueryCallback(queryResponse.TargetJobID, queryResponse.Body);
-            Client.PostCallback( callback );
-        }
-        #endregion
-
     }
 }

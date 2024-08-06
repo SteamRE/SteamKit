@@ -16,18 +16,13 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamCloud : ClientMsgHandler
     {
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
-
-        internal SteamCloud()
+        private static CallbackMsg? GetCallback( IPacketMsg packetMsg ) => packetMsg.MsgType switch
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.ClientUFSGetUGCDetailsResponse, HandleUGCDetailsResponse },
-                { EMsg.ClientUFSGetSingleFileInfoResponse, HandleSingleFileInfoResponse },
-                { EMsg.ClientUFSShareFileResponse, HandleShareFileResponse },
-            };
-        }
-
+            EMsg.ClientUFSGetUGCDetailsResponse => new UGCDetailsCallback( packetMsg ),
+            EMsg.ClientUFSGetSingleFileInfoResponse => new SingleFileInfoCallback( packetMsg ),
+            EMsg.ClientUFSShareFileResponse => new ShareFileCallback( packetMsg ),
+            _ => null,
+        };
 
         /// <summary>
         /// Requests details for a specific item of user generated content from the Steam servers.
@@ -98,43 +93,15 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            ArgumentNullException.ThrowIfNull( packetMsg );
+            var callback = GetCallback( packetMsg );
 
-            if ( !dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
+            if ( callback == null )
             {
                 // ignore messages that we don't have a handler function for
                 return;
             }
 
-            handlerFunc( packetMsg );
-        }
-
-
-        #region ClientMsg Handlers
-        void HandleUGCDetailsResponse( IPacketMsg packetMsg )
-        {
-            var infoResponse = new ClientMsgProtobuf<CMsgClientUFSGetUGCDetailsResponse>( packetMsg );
-
-            var callback = new UGCDetailsCallback(infoResponse.TargetJobID, infoResponse.Body);
             this.Client.PostCallback( callback );
         }
-
-        void HandleSingleFileInfoResponse(IPacketMsg packetMsg)
-        {
-            var infoResponse = new ClientMsgProtobuf<CMsgClientUFSGetSingleFileInfoResponse>( packetMsg );
-
-            var callback = new SingleFileInfoCallback(infoResponse.TargetJobID, infoResponse.Body);
-            this.Client.PostCallback(callback);
-        }
-
-        void HandleShareFileResponse(IPacketMsg packetMsg)
-        {
-            var shareResponse = new ClientMsgProtobuf<CMsgClientUFSShareFileResponse>(packetMsg);
-
-            var callback = new ShareFileCallback(shareResponse.TargetJobID, shareResponse.Body);
-            this.Client.PostCallback(callback);
-        }
-        #endregion
-
     }
 }

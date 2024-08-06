@@ -35,8 +35,11 @@ namespace SteamKit2
             public IPacketGCMsg Message { get; private set; }
 
 
-            internal MessageCallback( CMsgGCClient gcMsg )
+            internal MessageCallback( IPacketMsg packetMsg )
             {
+                var msg = new ClientMsgProtobuf<CMsgGCClient>( packetMsg );
+                var gcMsg = msg.Body;
+
                 this.eMsg = gcMsg.msgtype;
                 this.AppID = gcMsg.appid;
                 this.Message = GetPacketGCMsg( gcMsg.msgtype, gcMsg.payload );

@@ -30,8 +30,6 @@ namespace SteamKit2
 
         BufferBlock<ICallbackMsg> callbackQueue = new();
 
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
-
         internal AsyncJobManager jobManager;
 
         SteamAuthentication? _authentication = null;
@@ -107,15 +105,6 @@ namespace SteamKit2
             {
                 this.processStartTime = process.StartTime;
             }
-
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.ClientCMList, HandleCMList },
-
-                // to support asyncjob life time
-                { EMsg.JobHeartbeat, HandleJobHeartbeat },
-                { EMsg.DestJobFailed, HandleJobFailed },
-            };
 
             jobManager = new AsyncJobManager();
         }
@@ -289,10 +278,22 @@ namespace SteamKit2
                 return false;
             }
 
-            if ( dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
+            ArgumentNullException.ThrowIfNull( packetMsg );
+
+            // we want to handle some of the clientmsgs before we pass them along to registered handlers
+            switch ( packetMsg.MsgType )
             {
-                // we want to handle some of the clientmsgs before we pass them along to registered handlers
-                handlerFunc( packetMsg );
+                case EMsg.ClientCMList:
+                    HandleCMList( packetMsg );
+                    break;
+
+                case EMsg.JobHeartbeat:
+                    HandleJobHeartbeat( packetMsg );
+                    break;
+
+                case EMsg.DestJobFailed:
+                    HandleJobFailed( packetMsg );
+                    break;
             }
 
             // pass along the clientmsg to all registered handlers

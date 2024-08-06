@@ -199,26 +199,20 @@ namespace SteamKit2
             get { return this.Client.SteamID; }
         }
 
-
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
-
-        internal SteamUser()
+        private static CallbackMsg? GetCallback( IPacketMsg packetMsg ) => packetMsg.MsgType switch
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.ClientLogOnResponse, HandleLogOnResponse },
-                { EMsg.ClientLoggedOff, HandleLoggedOff },
-                { EMsg.ClientSessionToken, HandleSessionToken },
-                { EMsg.ClientAccountInfo, HandleAccountInfo },
-                { EMsg.ClientEmailAddrInfo, HandleEmailAddrInfo },
-                { EMsg.ClientWalletInfoUpdate, HandleWalletInfo },
-                { EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse, HandleWebAPIUserNonce },
-                { EMsg.ClientVanityURLChangedNotification, HandleVanityURLChangedNotification },
-                { EMsg.ClientMarketingMessageUpdate2, HandleMarketingMessageUpdate },
-                { EMsg.ClientPlayingSessionState, HandlePlayingSessionState },
-            };
-        }
-
+            EMsg.ClientLogOnResponse => new LoggedOnCallback( packetMsg ),
+            EMsg.ClientLoggedOff => new LoggedOffCallback( packetMsg ),
+            EMsg.ClientSessionToken => new SessionTokenCallback( packetMsg ),
+            EMsg.ClientAccountInfo => new AccountInfoCallback( packetMsg ),
+            EMsg.ClientEmailAddrInfo => new EmailAddrInfoCallback( packetMsg ),
+            EMsg.ClientWalletInfoUpdate => new WalletInfoCallback( packetMsg ),
+            EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse => new WebAPIUserNonceCallback( packetMsg ),
+            EMsg.ClientVanityURLChangedNotification => new VanityURLChangedCallback( packetMsg ),
+            EMsg.ClientMarketingMessageUpdate2 => new MarketingMessageCallback( packetMsg ),
+            EMsg.ClientPlayingSessionState => new PlayingSessionStateCallback( packetMsg ),
+            _ => null,
+        };
 
         /// <summary>
         /// Logs the client into the Steam3 network.
@@ -370,107 +364,15 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            ArgumentNullException.ThrowIfNull( packetMsg );
+            var callback = GetCallback( packetMsg );
 
-            if ( !dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
+            if ( callback == null )
             {
                 // ignore messages that we don't have a handler function for
                 return;
             }
 
-            handlerFunc( packetMsg );
-        }
-
-
-        #region ClientMsg Handlers
-        void HandleLoggedOff( IPacketMsg packetMsg )
-        {
-            EResult result;
-
-            if ( packetMsg.IsProto )
-            {
-                var loggedOff = new ClientMsgProtobuf<CMsgClientLoggedOff>( packetMsg );
-                result = ( EResult )loggedOff.Body.eresult;
-            }
-            else
-            {
-                var loggedOff = new ClientMsg<MsgClientLoggedOff>( packetMsg );
-                result = loggedOff.Body.Result;
-            }
-
-            this.Client.PostCallback( new LoggedOffCallback( result ) );
-        }
-        void HandleSessionToken( IPacketMsg packetMsg )
-        {
-            var sessToken = new ClientMsgProtobuf<CMsgClientSessionToken>( packetMsg );
-
-            var callback = new SessionTokenCallback( sessToken.Body );
             this.Client.PostCallback( callback );
         }
-        void HandleLogOnResponse( IPacketMsg packetMsg )
-        {
-            if ( packetMsg.IsProto )
-            {
-                var logonResp = new ClientMsgProtobuf<CMsgClientLogonResponse>( packetMsg );
-
-                var callback = new LoggedOnCallback( logonResp.Body );
-                this.Client.PostCallback( callback );
-            }
-            else
-            {
-                var logonResp = new ClientMsg<MsgClientLogOnResponse>( packetMsg );
-
-                var callback = new LoggedOnCallback( logonResp.Body );
-                this.Client.PostCallback( callback );
-            }
-        }
-        void HandleAccountInfo( IPacketMsg packetMsg )
-        {
-            var accInfo = new ClientMsgProtobuf<CMsgClientAccountInfo>( packetMsg );
-
-            var callback = new AccountInfoCallback( accInfo.Body );
-            this.Client.PostCallback( callback );
-        }
-        void HandleEmailAddrInfo( IPacketMsg packetMsg )
-        {
-            var emailAddrInfo = new ClientMsgProtobuf<CMsgClientEmailAddrInfo>( packetMsg );
-            var callback = new EmailAddrInfoCallback( emailAddrInfo.Body );
-            this.Client.PostCallback( callback );
-        }
-        void HandleWalletInfo( IPacketMsg packetMsg )
-        {
-            var walletInfo = new ClientMsgProtobuf<CMsgClientWalletInfoUpdate>( packetMsg );
-
-            var callback = new WalletInfoCallback( walletInfo.Body );
-            this.Client.PostCallback( callback );
-        }
-        void HandleWebAPIUserNonce( IPacketMsg packetMsg )
-        {
-            var userNonce = new ClientMsgProtobuf<CMsgClientRequestWebAPIAuthenticateUserNonceResponse>( packetMsg );
-            var callback = new WebAPIUserNonceCallback( userNonce.TargetJobID, userNonce.Body );
-            this.Client.PostCallback( callback );
-        }
-        void HandleVanityURLChangedNotification( IPacketMsg packetMsg )
-        {
-            var vanityUrl = new ClientMsgProtobuf<CMsgClientVanityURLChangedNotification>( packetMsg );
-            var callback = new VanityURLChangedCallback( vanityUrl.TargetJobID, vanityUrl.Body );
-            this.Client.PostCallback( callback );
-        }
-        void HandleMarketingMessageUpdate( IPacketMsg packetMsg )
-        {
-            var marketingMessage = new ClientMsg<MsgClientMarketingMessageUpdate2>( packetMsg );
-
-            byte[] payload = marketingMessage.Payload.ToArray();
-
-            var callback = new MarketingMessageCallback( marketingMessage.Body, payload );
-            this.Client.PostCallback( callback );
-        }
-        void HandlePlayingSessionState( IPacketMsg packetMsg )
-        {
-            var playingSessionState = new ClientMsgProtobuf<CMsgClientPlayingSessionState>( packetMsg );
-
-            this.Client.PostCallback( new PlayingSessionStateCallback( packetMsg.TargetJobID, playingSessionState.Body ) );
-        }
-        #endregion
     }
 }

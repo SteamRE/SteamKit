@@ -16,17 +16,13 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamUserStats : ClientMsgHandler
     {
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
-
-        internal SteamUserStats()
+        private static CallbackMsg? GetCallback( IPacketMsg packetMsg ) => packetMsg.MsgType switch
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.ClientGetNumberOfCurrentPlayersDPResponse, HandleNumberOfPlayersResponse },
-                { EMsg.ClientLBSFindOrCreateLBResponse, HandleFindOrCreateLBResponse },
-                { EMsg.ClientLBSGetLBEntriesResponse, HandleGetLBEntriesRespons },
-            };
-        }
+            EMsg.ClientGetNumberOfCurrentPlayersDPResponse => new NumberOfPlayersCallback( packetMsg ),
+            EMsg.ClientLBSFindOrCreateLBResponse => new FindOrCreateLeaderboardCallback( packetMsg ),
+            EMsg.ClientLBSGetLBEntriesResponse => new LeaderboardEntriesCallback( packetMsg ),
+            _ => null,
+        };
 
         /// <summary>
         /// Retrieves the number of current players for a given app id.
@@ -132,43 +128,18 @@ namespace SteamKit2
         /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
-        /// <param name="packetMsg">The <see cref="SteamKit2.IPacketMsg"/> instance containing the event data.</param>
+        /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            ArgumentNullException.ThrowIfNull( packetMsg );
+            var callback = GetCallback( packetMsg );
 
-            if (! dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
+            if ( callback == null )
             {
                 // ignore messages that we don't have a handler function for
                 return;
             }
 
-            handlerFunc( packetMsg );
+            this.Client.PostCallback( callback );
         }
-
-
-        #region ClientMsg Handlers
-        void HandleNumberOfPlayersResponse( IPacketMsg packetMsg )
-        {
-            var msg = new ClientMsgProtobuf<CMsgDPGetNumberOfCurrentPlayersResponse>( packetMsg );
-
-            var callback = new NumberOfPlayersCallback( msg.TargetJobID, msg.Body );
-            Client.PostCallback( callback );
-        }
-        void HandleFindOrCreateLBResponse( IPacketMsg packetMsg )
-        {
-            var msg = new ClientMsgProtobuf<CMsgClientLBSFindOrCreateLBResponse>( packetMsg );
-
-            var callback = new FindOrCreateLeaderboardCallback( msg.TargetJobID, msg.Body );
-            Client.PostCallback( callback );
-        }
-        void HandleGetLBEntriesRespons( IPacketMsg packetMsg )
-        {
-            var msg = new ClientMsgProtobuf<CMsgClientLBSGetLBEntriesResponse>( packetMsg );
-
-            var callback = new LeaderboardEntriesCallback( msg.TargetJobID, msg.Body );
-            Client.PostCallback( callback );
-        }
-        #endregion
     }
 }

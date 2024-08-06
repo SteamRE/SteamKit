@@ -5,7 +5,7 @@ namespace SteamKit2
 	public sealed partial class SteamScreenshots
 	{
 		/// <summary>
-		/// This callback is fired when this client receives a trade proposal.
+		/// This callback is fired when this client receives a new screenshot.
 		/// </summary>
 		public sealed class ScreenshotAddedCallback : CallbackMsg
 		{
@@ -19,9 +19,12 @@ namespace SteamKit2
 			/// </summary>
 			public UGCHandle ScreenshotID { get; private set; }
 
-			internal ScreenshotAddedCallback( JobID jobID, CMsgClientUCMAddScreenshotResponse msg )
+			internal ScreenshotAddedCallback( IPacketMsg packetMsg )
 			{
-				JobID = jobID;
+                var resp = new ClientMsgProtobuf<CMsgClientUCMAddScreenshotResponse>( packetMsg );
+                var msg = resp.Body;
+                
+                JobID = resp.TargetJobID;
 
 				Result = ( EResult )msg.eresult;
 				ScreenshotID = msg.screenshotid;

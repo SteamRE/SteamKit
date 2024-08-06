@@ -9,16 +9,11 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamNetworking : ClientMsgHandler
     {
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
-
-        internal SteamNetworking()
+        private static CallbackMsg? GetCallback( IPacketMsg packetMsg ) => packetMsg.MsgType switch
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.ClientNetworkingCertRequestResponse, HandleNetworkingCertRequestResponse },
-            };
-        }
-
+            EMsg.ClientNetworkingCertRequestResponse => new NetworkingCertificateCallback( packetMsg ),
+            _ => null,
+        };
 
         /// <summary>
         /// Request a signed networking certificate from Steam for your Ed25519 public key for the given app id.
@@ -49,27 +44,15 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            ArgumentNullException.ThrowIfNull( packetMsg );
+            var callback = GetCallback( packetMsg );
 
-            if ( !dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc ) )
+            if ( callback == null )
             {
                 // ignore messages that we don't have a handler function for
                 return;
             }
 
-            handlerFunc( packetMsg );
+            this.Client.PostCallback( callback );
         }
-
-
-        #region ClientMsg Handlers
-        void HandleNetworkingCertRequestResponse( IPacketMsg packetMsg )
-        {
-            var resp = new ClientMsgProtobuf<CMsgClientNetworkingCertReply>( packetMsg );
-
-            var callback = new NetworkingCertificateCallback( resp.TargetJobID, resp.Body );
-            Client.PostCallback( callback );
-        }
-        #endregion
-
     }
 }
