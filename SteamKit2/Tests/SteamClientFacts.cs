@@ -51,6 +51,18 @@ namespace Tests
         }
 
         [Fact]
+        public void RemoveHandlerRemovesHandlerByInstance()
+        {
+            var steamClient = new SteamClient();
+            var handler = new TestMsgHandler();
+            steamClient.AddHandler(handler);
+            Assert.NotNull(steamClient.GetHandler<TestMsgHandler>());
+
+            steamClient.RemoveHandler(handler);
+            Assert.Null(steamClient.GetHandler<TestMsgHandler>());
+        }
+
+        [Fact]
         public void GetNextJobIDIsThreadsafe()
         {
             var steamClient = new SteamClient();

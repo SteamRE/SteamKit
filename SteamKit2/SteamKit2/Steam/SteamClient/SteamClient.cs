@@ -6,9 +6,7 @@
 
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,7 +23,7 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamClient : CMClient
     {
-        OrderedDictionary handlers;
+        List<ClientMsgHandler> handlers;
 
         long currentJobId = 0;
         DateTime processStartTime;
@@ -80,27 +78,30 @@ namespace SteamKit2
         public SteamClient( SteamConfiguration configuration, string identifier )
             : base( configuration, identifier )
         {
-            this.handlers = [];
-
             // Start calculating machine info so that it is (hopefully) ready by the time we get to logging in.
             HardwareUtils.Init( configuration.MachineInfoProvider );
 
             // add this library's handlers
+            const int HANDLERS_COUNT = 14; // this number should match the amount of AddHandlerCore calls below
+            this.handlers = new( HANDLERS_COUNT );
+
             // notice: SteamFriends should be added before SteamUser due to AccountInfoCallback
-            this.AddHandler( new SteamFriends() );
-            this.AddHandler( new SteamUser() );
-            this.AddHandler( new SteamApps() );
-            this.AddHandler( new SteamGameCoordinator() );
-            this.AddHandler( new SteamGameServer() );
-            this.AddHandler( new SteamUserStats() );
-            this.AddHandler( new SteamMasterServer() );
-            this.AddHandler( new SteamCloud() );
-            this.AddHandler( new SteamWorkshop() );
-            this.AddHandler( new SteamUnifiedMessages() );
-            this.AddHandler( new SteamScreenshots() );
-            this.AddHandler( new SteamMatchmaking() );
-            this.AddHandler( new SteamNetworking() );
-            this.AddHandler( new SteamContent() );
+            this.AddHandlerCore( new SteamFriends() );
+            this.AddHandlerCore( new SteamUser() );
+            this.AddHandlerCore( new SteamApps() );
+            this.AddHandlerCore( new SteamGameCoordinator() );
+            this.AddHandlerCore( new SteamGameServer() );
+            this.AddHandlerCore( new SteamUserStats() );
+            this.AddHandlerCore( new SteamMasterServer() );
+            this.AddHandlerCore( new SteamCloud() );
+            this.AddHandlerCore( new SteamWorkshop() );
+            this.AddHandlerCore( new SteamUnifiedMessages() );
+            this.AddHandlerCore( new SteamScreenshots() );
+            this.AddHandlerCore( new SteamMatchmaking() );
+            this.AddHandlerCore( new SteamNetworking() );
+            this.AddHandlerCore( new SteamContent() );
+
+            Debug.Assert( this.handlers.Count == HANDLERS_COUNT );
 
             using ( var process = Process.GetCurrentProcess() )
             {
@@ -130,14 +131,21 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( handler );
 
-            if ( handlers.Contains( handler.GetType() ) )
+            var type = handler.GetType();
+            var msgIndex = handlers.FindIndex( h => h.GetType() == type );
+
+            if ( msgIndex > -1 )
             {
                 throw new InvalidOperationException( string.Format( "A handler of type \"{0}\" is already registered.", handler.GetType() ) );
-
             }
 
+            AddHandlerCore( handler );
+        }
+
+        private void AddHandlerCore( ClientMsgHandler handler )
+        {
             handler.Setup( this );
-            handlers[ handler.GetType() ] = handler;
+            handlers.Add( handler );
         }
 
         /// <summary>
@@ -146,15 +154,21 @@ namespace SteamKit2
         /// <param name="handler">The handler name to remove.</param>
         public void RemoveHandler( Type handler )
         {
-            handlers.Remove( handler );
+            var msgIndex = handlers.FindIndex( h => h.GetType() == handler );
+
+            if ( msgIndex > -1 )
+            {
+                handlers.RemoveAt( msgIndex );
+            }
         }
+
         /// <summary>
         /// Removes a registered handler.
         /// </summary>
         /// <param name="handler">The handler to remove.</param>
         public void RemoveHandler( ClientMsgHandler handler )
         {
-            this.RemoveHandler( handler.GetType() );
+            handlers.Remove( handler );
         }
 
         /// <summary>
@@ -169,12 +183,7 @@ namespace SteamKit2
         {
             Type type = typeof( T );
 
-            if ( handlers.Contains( type ) )
-            {
-                return handlers[ type ] as T;
-            }
-
-            return null;
+            return handlers.Find( h => h.GetType() == type ) as T;
         }
         #endregion
 
@@ -287,24 +296,21 @@ namespace SteamKit2
             }
 
             // pass along the clientmsg to all registered handlers
-            foreach ( DictionaryEntry kvp in handlers )
+            foreach ( var value in handlers )
             {
-                var key = (Type) kvp.Key;
-                var value = (ClientMsgHandler) kvp.Value!;
-
                 try
                 {
                     value.HandleMsg( packetMsg );
                 }
                 catch ( ProtoException ex )
                 {
-                    LogDebug( nameof( SteamClient ), $"'{key.Name}' handler failed to (de)serialize a protobuf: {ex}" );
+                    LogDebug( nameof( SteamClient ), $"'{value.GetType().Name}' handler failed to (de)serialize a protobuf: {ex}" );
                     Disconnect( userInitiated: false );
                     return false;
                 }
                 catch ( Exception ex )
                 {
-                    LogDebug( nameof( SteamClient ), $"Unhandled exception from '{key.Name}' handler: {ex}" );
+                    LogDebug( nameof( SteamClient ), $"Unhandled exception from '{value.GetType().Name}' handler: {ex}" );
                     Disconnect( userInitiated: false );
                     return false;
                 }
