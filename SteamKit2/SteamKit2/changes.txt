@@ -17,9 +17,11 @@ BREAKING CHANGES
   * Calling  `GetCallback` and `WaitForCallback` now always dequeues a callback, there is no more peek and "freeLast".
 * `DepotManifest.ChunkData.Checksum` is now a `uint` instead of `byte[4]`.
 * `DepotManifest.SaveToFile` now returns void.
+* `CallbackManager.RunCallbacks` now returns bool indicating whether a callback was handled.
 * Removed obsolete methods and enum values.
 * Removed Artifact and Underlords generated protobufs.
 * Removed `SteamTrading` handler.
+* Removed `RSACrypto` class.
 * Removed all methods from `CryptoHelper` except for `SymmetricDecrypt`.
 
 ------------------------------------------------------------------------------
