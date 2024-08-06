@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Buffers;
 using System.ComponentModel;
-using System.IO;
 using System.Net;
 using System.Net.WebSockets;
 using System.Text;
@@ -67,7 +67,19 @@ namespace SteamKit2
 
                 while (!cancellationToken.IsCancellationRequested && socket.State == WebSocketState.Open)
                 {
-                    var packet = await ReadMessageAsync(cancellationToken).ConfigureAwait(false);
+                    byte[]? packet = null;
+
+                    try
+                    {
+                        packet = await ReadMessageAsync( cancellationToken ).ConfigureAwait( false );
+                    }
+                    catch ( Exception ex )
+                    {
+                        connection.log.LogDebug( nameof( WebSocketContext ), "Exception reading from websocket: {0} - {1}", ex.GetType().FullName, ex.Message );
+                        connection.DisconnectCore( userInitiated: false, specificContext: this );
+                        return;
+                    }
+
                     if (packet != null && packet.Length > 0)
                     {
                         connection.NetMsgReceived?.Invoke(connection, new NetMsgEventArgs(packet, EndPoint));
@@ -116,65 +128,87 @@ namespace SteamKit2
                 socket.Dispose();
             }
 
-            async Task<byte[]?> ReadMessageAsync(CancellationToken cancellationToken)
+            async Task<byte[]?> ReadMessageAsync( CancellationToken cancellationToken )
             {
-                using var ms = new MemoryStream();
-                var buffer = new byte[ 1024 ];
-                var segment = new ArraySegment<byte>( buffer );
+                var outputBuffer = ArrayPool<byte>.Shared.Rent( 1024 );
+                var readBuffer = ArrayPool<byte>.Shared.Rent( 1024 );
+                var readMemory = readBuffer.AsMemory();
 
-                WebSocketReceiveResult result;
-                do
+                ValueWebSocketReceiveResult result;
+                var outputLength = 0;
+
+                try
                 {
-                    try
+                    do
                     {
-                        result = await socket.ReceiveAsync( segment, cancellationToken ).ConfigureAwait( false );
-                    }
-                    catch ( ObjectDisposedException )
-                    {
-                        connection.DisconnectCore( userInitiated: cancellationToken.IsCancellationRequested, specificContext: this );
-                        return null;
-                    }
-                    catch ( WebSocketException )
-                    {
-                        connection.DisconnectCore( userInitiated: false, specificContext: this );
-                        return null;
-                    }
-                    catch ( Win32Exception )
-                    {
-                        connection.DisconnectCore( userInitiated: false, specificContext: this );
-                        return null;
-                    }
-
-                    switch ( result.MessageType )
-                    {
-                        case WebSocketMessageType.Binary:
-                            ms.Write( buffer, 0, result.Count );
-                            break;
-
-                        case WebSocketMessageType.Text:
-                            try
-                            {
-                                var message = Encoding.UTF8.GetString( buffer, 0, result.Count );
-                                connection.log.LogDebug( nameof( WebSocketContext ), "Recieved websocket text message: \"{0}\"", message );
-                            }
-                            catch
-                            {
-                                var frameBytes = new byte[ result.Count ];
-                                Array.Copy( buffer, 0, frameBytes, 0, result.Count );
-                                var frameHexBytes = BitConverter.ToString( frameBytes ).Replace( "-", string.Empty );
-                                connection.log.LogDebug( nameof( WebSocketContext ), "Recieved websocket text message: 0x{0}", frameHexBytes );
-                            }
-                            break;
-
-                        case WebSocketMessageType.Close:
-                        default:
+                        try
+                        {
+                            result = await socket.ReceiveAsync( readMemory, cancellationToken ).ConfigureAwait( false );
+                        }
+                        catch ( ObjectDisposedException )
+                        {
+                            connection.DisconnectCore( userInitiated: cancellationToken.IsCancellationRequested, specificContext: this );
+                            return null;
+                        }
+                        catch ( WebSocketException )
+                        {
                             connection.DisconnectCore( userInitiated: false, specificContext: this );
                             return null;
-                    }
-                }
-                while ( !result.EndOfMessage );
+                        }
+                        catch ( Win32Exception )
+                        {
+                            connection.DisconnectCore( userInitiated: false, specificContext: this );
+                            return null;
+                        }
 
-                return ms.ToArray();
+                        switch ( result.MessageType )
+                        {
+                            case WebSocketMessageType.Binary:
+                                if ( outputLength + result.Count > outputBuffer.Length )
+                                {
+                                    var newBuffer = ArrayPool<byte>.Shared.Rent( outputBuffer.Length * 2 );
+                                    Buffer.BlockCopy( outputBuffer, 0, newBuffer, 0, outputLength );
+                                    ArrayPool<byte>.Shared.Return( outputBuffer );
+                                    outputBuffer = newBuffer;
+                                }
+
+                                Buffer.BlockCopy( readBuffer, 0, outputBuffer, outputLength, result.Count );
+                                outputLength += result.Count;
+
+                                break;
+
+                            case WebSocketMessageType.Text:
+                                try
+                                {
+                                    var message = Encoding.UTF8.GetString( readBuffer, 0, result.Count );
+                                    connection.log.LogDebug( nameof( WebSocketContext ), "Recieved websocket text message: \"{0}\"", message );
+                                }
+                                catch
+                                {
+                                    var frameBytes = new byte[ result.Count ];
+                                    Array.Copy( readBuffer, 0, frameBytes, 0, result.Count );
+                                    connection.log.LogDebug( nameof( WebSocketContext ), "Recieved websocket text message: 0x{0}", Utils.EncodeHexString( frameBytes ) );
+                                }
+                                break;
+
+                            case WebSocketMessageType.Close:
+                            default:
+                                connection.DisconnectCore( userInitiated: false, specificContext: this );
+                                return null;
+                        }
+                    }
+                    while ( !result.EndOfMessage );
+
+                    var output = new byte[ outputLength ];
+                    Buffer.BlockCopy( outputBuffer, 0, output, 0, output.Length );
+
+                    return output;
+                }
+                finally
+                {
+                    ArrayPool<byte>.Shared.Return( readBuffer );
+                    ArrayPool<byte>.Shared.Return( outputBuffer );
+                }
             }
 
             internal static Uri ConstructUri(EndPoint endPoint)
