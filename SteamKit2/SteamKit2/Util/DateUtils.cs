@@ -21,7 +21,7 @@ namespace SteamKit2
         /// <returns>DateTime representation</returns>
         public static DateTime DateTimeFromUnixTime(ulong unixTime)
         {
-            return DateTimeOffset.FromUnixTimeSeconds( (long)unixTime ).DateTime;
+            return DateTimeOffset.FromUnixTimeSeconds( (long)unixTime ).UtcDateTime;
         }
         /// <summary>
         /// Converts a given DateTime into a unix timestamp representing seconds since the unix epoch.
