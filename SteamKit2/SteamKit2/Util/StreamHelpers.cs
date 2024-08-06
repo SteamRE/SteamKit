@@ -159,15 +159,9 @@ namespace SteamKit2
             }
         }
 
-        public static int ReadAll( this Stream stream, byte[] buffer )
+        public static int ReadAll( this Stream stream, Span<byte> buffer )
         {
-            int bytesRead;
-            int totalRead = 0;
-            while ( ( bytesRead = stream.Read( buffer, totalRead, buffer.Length - totalRead ) ) != 0 )
-            {
-                totalRead += bytesRead;
-            }
-            return totalRead;
+            return stream.ReadAtLeast( buffer, minimumBytes: buffer.Length, throwOnEndOfStream: false );
         }
     }
 }
