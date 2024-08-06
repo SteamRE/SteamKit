@@ -322,23 +322,17 @@ namespace SteamKit2
 
                         case DepotManifest.PROTOBUF_PAYLOAD_MAGIC:
                             uint payload_length = br.ReadUInt32();
-                            byte[] payload_bytes = br.ReadBytes( (int)payload_length );
-                            using ( var ms_payload = new MemoryStream( payload_bytes ) ) 
-                                payload = Serializer.Deserialize<ContentManifestPayload>( ms_payload );
+                            payload = Serializer.Deserialize<ContentManifestPayload>( ms, length: payload_length );
                             break;
 
                         case DepotManifest.PROTOBUF_METADATA_MAGIC:
                             uint metadata_length = br.ReadUInt32();
-                            byte[] metadata_bytes = br.ReadBytes( (int)metadata_length );
-                            using ( var ms_metadata = new MemoryStream( metadata_bytes ) )
-                                metadata = Serializer.Deserialize<ContentManifestMetadata>( ms_metadata );
+                            metadata = Serializer.Deserialize<ContentManifestMetadata>( ms, length: metadata_length );
                             break;
 
                         case DepotManifest.PROTOBUF_SIGNATURE_MAGIC:
                             uint signature_length = br.ReadUInt32();
-                            byte[] signature_bytes = br.ReadBytes( (int)signature_length );
-                            using ( var ms_signature = new MemoryStream( signature_bytes ) )
-                                signature = Serializer.Deserialize<ContentManifestSignature>( ms_signature );
+                            signature = Serializer.Deserialize<ContentManifestSignature>( ms, length: signature_length );
                             break;
 
                         case DepotManifest.PROTOBUF_ENDOFMANIFEST_MAGIC:
