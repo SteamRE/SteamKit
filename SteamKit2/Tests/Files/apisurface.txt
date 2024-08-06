@@ -1,0 +1,2083 @@
+public class SteamKit2.AsyncJob
+{
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.JobID get_JobID();
+    public TimeSpan get_Timeout();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public void set_Timeout(TimeSpan value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.AsyncJob`1
+{
+    public .ctor(SteamKit2.SteamClient client, SteamKit2.JobID jobId);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.JobID get_JobID();
+    public TimeSpan get_Timeout();
+    public System.Runtime.CompilerServices.TaskAwaiter`1[[SteamKit2.T]] GetAwaiter();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public void set_Timeout(TimeSpan value);
+    public string ToString();
+    public System.Threading.Tasks.Task`1[[SteamKit2.T]] ToTask();
+}
+
+public class SteamKit2.AsyncJobFailedException
+{
+    public .ctor();
+    public .ctor(string message);
+    public .ctor(string message, Exception innerException);
+    protected void add_SerializeObjectState(EventHandler`1[[System.Runtime.Serialization.SafeSerializationEventArgs]] value);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public System.Collections.IDictionary get_Data();
+    public string get_HelpLink();
+    public int get_HResult();
+    public Exception get_InnerException();
+    public string get_Message();
+    public string get_Source();
+    public string get_StackTrace();
+    public System.Reflection.MethodBase get_TargetSite();
+    public Exception GetBaseException();
+    public int GetHashCode();
+    public void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);
+    public new Type GetType();
+    public Type GetType();
+    protected object MemberwiseClone();
+    protected void remove_SerializeObjectState(EventHandler`1[[System.Runtime.Serialization.SafeSerializationEventArgs]] value);
+    public void set_HelpLink(string value);
+    public void set_HResult(int value);
+    public void set_Source(string value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.AsyncJobMultiple`1
+{
+    public .ctor(SteamKit2.SteamClient client, SteamKit2.JobID jobId, Predicate`1[[SteamKit2.T]] finishCondition);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.JobID get_JobID();
+    public TimeSpan get_Timeout();
+    public System.Runtime.CompilerServices.TaskAwaiter`1[[SteamKit2.ResultSet[[SteamKit2.T]]]] GetAwaiter();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public void set_Timeout(TimeSpan value);
+    public string ToString();
+    public System.Threading.Tasks.Task`1[[SteamKit2.ResultSet[[SteamKit2.T]]]] ToTask();
+}
+
+public sealed class SteamKit2.CallbackManager
+{
+    public .ctor(SteamKit2.SteamClient client);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public void RunCallbacks();
+    public void RunWaitAllCallbacks(TimeSpan timeout);
+    public void RunWaitCallbacks();
+    public void RunWaitCallbacks(TimeSpan timeout);
+    public IDisposable Subscribe<SteamKit2.TCallback>(Action`1[[SteamKit2.TCallback]] callbackFunc);
+    public IDisposable Subscribe<SteamKit2.TCallback>(SteamKit2.JobID jobID, Action`1[[SteamKit2.TCallback]] callbackFunc);
+    public string ToString();
+}
+
+public class SteamKit2.CallbackMsg
+{
+    protected .ctor();
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.JobID get_JobID();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public void set_JobID(SteamKit2.JobID value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.ClientMsg`1
+{
+    public .ctor(int payloadReserve);
+    public .ctor(SteamKit2.IPacketMsg msg);
+    public .ctor(SteamKit2.MsgBase`1[[SteamKit2.Internal.ExtendedClientMsgHdr]] msg, int payloadReserve);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.TBody get_Body();
+    public SteamKit2.Internal.ExtendedClientMsgHdr get_Header();
+    public bool get_IsProto();
+    public SteamKit2.EMsg get_MsgType();
+    public System.IO.MemoryStream get_Payload();
+    public int get_SessionID();
+    public SteamKit2.JobID get_SourceJobID();
+    public SteamKit2.SteamID get_SteamID();
+    public SteamKit2.JobID get_TargetJobID();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public byte ReadByte();
+    public byte[] ReadBytes(int numBytes);
+    public double ReadDouble();
+    public float ReadFloat();
+    public int ReadInt();
+    public short ReadInt16();
+    public int ReadInt32();
+    public long ReadInt64();
+    public sbyte ReadInt8();
+    public long ReadLong();
+    public string ReadNullTermString();
+    public string ReadNullTermString(System.Text.Encoding encoding);
+    public sbyte ReadSByte();
+    public short ReadShort();
+    public float ReadSingle();
+    public uint ReadUInt();
+    public ushort ReadUInt16();
+    public uint ReadUInt32();
+    public ulong ReadUInt64();
+    public byte ReadUInt8();
+    public ulong ReadULong();
+    public ushort ReadUShort();
+    public long Seek(long offset, System.IO.SeekOrigin loc);
+    public byte[] Serialize();
+    public void set_SessionID(int value);
+    public void set_SourceJobID(SteamKit2.JobID value);
+    public void set_SteamID(SteamKit2.SteamID value);
+    public void set_TargetJobID(SteamKit2.JobID value);
+    public string ToString();
+    public void Write(byte data);
+    public void Write(byte[] data);
+    public void Write(double data);
+    public void Write(float data);
+    public void Write(int data);
+    public void Write(long data);
+    public void Write(sbyte data);
+    public void Write(short data);
+    public void Write(string data);
+    public void Write(string data, System.Text.Encoding encoding);
+    public void Write(uint data);
+    public void Write(ulong data);
+    public void Write(ushort data);
+    public void WriteNullTermString(string data);
+    public void WriteNullTermString(string data, System.Text.Encoding encoding);
+}
+
+public class SteamKit2.ClientMsgHandler
+{
+    public .ctor();
+    public bool Equals(object obj);
+    protected void Finalize();
+    protected SteamKit2.SteamClient get_Client();
+    protected bool get_ExpectDisconnection();
+    public int GetHashCode();
+    public Type GetType();
+    public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
+    protected object MemberwiseClone();
+    protected void set_ExpectDisconnection(bool value);
+    public string ToString();
+}
+
+public class SteamKit2.ClientMsgProtobuf
+{
+    public .ctor(SteamKit2.IPacketMsg msg);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.Internal.MsgHdrProtoBuf get_Header();
+    public bool get_IsProto();
+    public SteamKit2.EMsg get_MsgType();
+    public System.IO.MemoryStream get_Payload();
+    public SteamKit2.Internal.CMsgProtoBufHeader get_ProtoHeader();
+    public int get_SessionID();
+    public SteamKit2.JobID get_SourceJobID();
+    public SteamKit2.SteamID get_SteamID();
+    public SteamKit2.JobID get_TargetJobID();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public byte ReadByte();
+    public byte[] ReadBytes(int numBytes);
+    public double ReadDouble();
+    public float ReadFloat();
+    public int ReadInt();
+    public short ReadInt16();
+    public int ReadInt32();
+    public long ReadInt64();
+    public sbyte ReadInt8();
+    public long ReadLong();
+    public string ReadNullTermString();
+    public string ReadNullTermString(System.Text.Encoding encoding);
+    public sbyte ReadSByte();
+    public short ReadShort();
+    public float ReadSingle();
+    public uint ReadUInt();
+    public ushort ReadUInt16();
+    public uint ReadUInt32();
+    public ulong ReadUInt64();
+    public byte ReadUInt8();
+    public ulong ReadULong();
+    public ushort ReadUShort();
+    public long Seek(long offset, System.IO.SeekOrigin loc);
+    public byte[] Serialize();
+    public void set_SessionID(int value);
+    public void set_SourceJobID(SteamKit2.JobID value);
+    public void set_SteamID(SteamKit2.SteamID value);
+    public void set_TargetJobID(SteamKit2.JobID value);
+    public string ToString();
+    public void Write(byte data);
+    public void Write(byte[] data);
+    public void Write(double data);
+    public void Write(float data);
+    public void Write(int data);
+    public void Write(long data);
+    public void Write(sbyte data);
+    public void Write(short data);
+    public void Write(string data);
+    public void Write(string data, System.Text.Encoding encoding);
+    public void Write(uint data);
+    public void Write(ulong data);
+    public void Write(ushort data);
+    public void WriteNullTermString(string data);
+    public void WriteNullTermString(string data, System.Text.Encoding encoding);
+}
+
+public sealed class SteamKit2.ClientMsgProtobuf`1
+{
+    public .ctor(SteamKit2.EMsg eMsg, int payloadReserve);
+    public .ctor(SteamKit2.EMsg eMsg, SteamKit2.MsgBase`1[[SteamKit2.Internal.MsgHdrProtoBuf]] msg, int payloadReserve);
+    public .ctor(SteamKit2.IPacketMsg msg);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.TBody get_Body();
+    public SteamKit2.Internal.MsgHdrProtoBuf get_Header();
+    public bool get_IsProto();
+    public SteamKit2.EMsg get_MsgType();
+    public System.IO.MemoryStream get_Payload();
+    public SteamKit2.Internal.CMsgProtoBufHeader get_ProtoHeader();
+    public int get_SessionID();
+    public SteamKit2.JobID get_SourceJobID();
+    public SteamKit2.SteamID get_SteamID();
+    public SteamKit2.JobID get_TargetJobID();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public byte ReadByte();
+    public byte[] ReadBytes(int numBytes);
+    public double ReadDouble();
+    public float ReadFloat();
+    public int ReadInt();
+    public short ReadInt16();
+    public int ReadInt32();
+    public long ReadInt64();
+    public sbyte ReadInt8();
+    public long ReadLong();
+    public string ReadNullTermString();
+    public string ReadNullTermString(System.Text.Encoding encoding);
+    public sbyte ReadSByte();
+    public short ReadShort();
+    public float ReadSingle();
+    public uint ReadUInt();
+    public ushort ReadUInt16();
+    public uint ReadUInt32();
+    public ulong ReadUInt64();
+    public byte ReadUInt8();
+    public ulong ReadULong();
+    public ushort ReadUShort();
+    public long Seek(long offset, System.IO.SeekOrigin loc);
+    public byte[] Serialize();
+    public void set_Body(SteamKit2.TBody value);
+    public void set_SessionID(int value);
+    public void set_SourceJobID(SteamKit2.JobID value);
+    public void set_SteamID(SteamKit2.SteamID value);
+    public void set_TargetJobID(SteamKit2.JobID value);
+    public string ToString();
+    public void Write(byte data);
+    public void Write(byte[] data);
+    public void Write(double data);
+    public void Write(float data);
+    public void Write(int data);
+    public void Write(long data);
+    public void Write(sbyte data);
+    public void Write(short data);
+    public void Write(string data);
+    public void Write(string data, System.Text.Encoding encoding);
+    public void Write(uint data);
+    public void Write(ulong data);
+    public void Write(ushort data);
+    public void WriteNullTermString(string data);
+    public void WriteNullTermString(string data, System.Text.Encoding encoding);
+}
+
+public sealed class SteamKit2.ContentServerDirectoryService
+{
+    public bool Equals(object obj);
+    protected void Finalize();
+    public int GetHashCode();
+    public Type GetType();
+    public static System.Threading.Tasks.Task`1[[System.Collections.Generic.IReadOnlyCollection`1[[SteamKit2.CDN.Server]]]] LoadAsync(SteamKit2.SteamConfiguration configuration);
+    public static System.Threading.Tasks.Task`1[[System.Collections.Generic.IReadOnlyCollection`1[[SteamKit2.CDN.Server]]]] LoadAsync(SteamKit2.SteamConfiguration configuration, int cellId, int maxNumServers, System.Threading.CancellationToken cancellationToken);
+    public static System.Threading.Tasks.Task`1[[System.Collections.Generic.IReadOnlyCollection`1[[SteamKit2.CDN.Server]]]] LoadAsync(SteamKit2.SteamConfiguration configuration, int cellId, System.Threading.CancellationToken cancellationToken);
+    public static System.Threading.Tasks.Task`1[[System.Collections.Generic.IReadOnlyCollection`1[[SteamKit2.CDN.Server]]]] LoadAsync(SteamKit2.SteamConfiguration configuration, System.Threading.CancellationToken cancellationToken);
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
+public sealed class SteamKit2.CryptoHelper
+{
+    public static byte[] AdlerHash(byte[] input);
+    public static byte[] AESDecrypt(byte[] input, byte[] key, byte[] iv);
+    public static byte[] AESEncrypt(byte[] input, byte[] key, byte[] iv);
+    public static byte[] CRCHash(byte[] input);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public static byte[] GenerateRandomBlock(int size);
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public static byte[] SHAHash(byte[] input);
+    public static byte[] SymmetricDecrypt(byte[] input, byte[] key);
+    public static byte[] SymmetricDecryptECB(byte[] input, byte[] key);
+    public static byte[] SymmetricDecryptHMACIV(byte[] input, byte[] key, byte[] hmacSecret);
+    public static byte[] SymmetricEncrypt(byte[] input, byte[] key);
+    public static byte[] SymmetricEncryptWithHMACIV(byte[] input, byte[] key, byte[] hmacSecret);
+    public static byte[] SymmetricEncryptWithIV(byte[] input, byte[] key, byte[] iv);
+    public string ToString();
+    public static byte[] VerifyAndDecryptPassword(byte[] input, string password);
+}
+
+public sealed class SteamKit2.DateUtils
+{
+    public static DateTime DateTimeFromUnixTime(ulong unixTime);
+    public static ulong DateTimeToUnixTime(DateTime time);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
+public sealed class SteamKit2.DebugLog
+{
+    public static void AddListener(Action`2[[string, string]] listenerAction);
+    public static void AddListener(SteamKit2.IDebugListener listener);
+    public static void Assert(bool condition, string category, string message);
+    public static void ClearListeners();
+    public bool Equals(object obj);
+    protected void Finalize();
+    public static bool get_Enabled();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public static void RemoveListener(Action`2[[string, string]] listenerAction);
+    public static void RemoveListener(SteamKit2.IDebugListener listener);
+    public static void set_Enabled(bool value);
+    public string ToString();
+    public static void WriteLine(string category, string msg, object[] args);
+}
+
+public sealed class SteamKit2.DepotManifest
+{
+    public bool DecryptFilenames(byte[] encryptionKey);
+    public static SteamKit2.DepotManifest Deserialize(byte[] data);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public DateTime get_CreationTime();
+    public uint get_DepotID();
+    public uint get_EncryptedCRC();
+    public bool get_FilenamesEncrypted();
+    public System.Collections.Generic.List`1[[SteamKit2.FileData]] get_Files();
+    public ulong get_ManifestGID();
+    public ulong get_TotalCompressedSize();
+    public ulong get_TotalUncompressedSize();
+    public int GetHashCode();
+    public Type GetType();
+    public static SteamKit2.DepotManifest LoadFromFile(string filename);
+    protected object MemberwiseClone();
+    public bool SaveToFile(string filename);
+    public string ToString();
+}
+
+public class SteamKit2.GameID
+{
+    public .ctor();
+    public .ctor(int nAppID);
+    public .ctor(string exePath, string appName);
+    public .ctor(uint nAppID, string modPath);
+    public .ctor(ulong id);
+    public bool Equals(object obj);
+    public bool Equals(SteamKit2.GameID gid);
+    protected void Finalize();
+    public uint get_AppID();
+    public SteamKit2.GameType get_AppType();
+    public bool get_IsMod();
+    public bool get_IsP2PFile();
+    public bool get_IsShortcut();
+    public bool get_IsSteamApp();
+    public uint get_ModID();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public static bool op_Equality(SteamKit2.GameID a, SteamKit2.GameID b);
+    public static string op_Implicit(SteamKit2.GameID gid);
+    public static ulong op_Implicit(SteamKit2.GameID gid);
+    public static SteamKit2.GameID op_Implicit(ulong id);
+    public static bool op_Inequality(SteamKit2.GameID a, SteamKit2.GameID b);
+    public void Set(ulong gameId);
+    public void set_AppID(uint value);
+    public void set_AppType(SteamKit2.GameType value);
+    public void set_ModID(uint value);
+    public string ToString();
+    public ulong ToUInt64();
+}
+
+public class SteamKit2.GlobalID
+{
+    public .ctor();
+    public .ctor(ulong gid);
+    public bool Equals(object obj);
+    public bool Equals(SteamKit2.GlobalID gid);
+    protected void Finalize();
+    public uint get_BoxID();
+    public uint get_ProcessID();
+    public uint get_SequentialCount();
+    public DateTime get_StartTime();
+    public ulong get_Value();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public static bool op_Equality(SteamKit2.GlobalID a, SteamKit2.GlobalID b);
+    public static ulong op_Implicit(SteamKit2.GlobalID gid);
+    public static SteamKit2.GlobalID op_Implicit(ulong gid);
+    public static bool op_Inequality(SteamKit2.GlobalID a, SteamKit2.GlobalID b);
+    public void set_BoxID(uint value);
+    public void set_ProcessID(uint value);
+    public void set_SequentialCount(uint value);
+    public void set_StartTime(DateTime value);
+    public void set_Value(ulong value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.HttpClientFactory
+{
+    public .ctor(object object, IntPtr method);
+    public IAsyncResult BeginInvoke(AsyncCallback callback, object object);
+    public object Clone();
+    protected Delegate CombineImpl(Delegate follow);
+    public object DynamicInvoke(object[] args);
+    protected object DynamicInvokeImpl(object[] args);
+    public System.Net.Http.HttpClient EndInvoke(IAsyncResult result);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public System.Reflection.MethodInfo get_Method();
+    public object get_Target();
+    public int GetHashCode();
+    public Delegate[] GetInvocationList();
+    protected System.Reflection.MethodInfo GetMethodImpl();
+    public void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);
+    public Type GetType();
+    public System.Net.Http.HttpClient Invoke();
+    protected object MemberwiseClone();
+    protected Delegate RemoveImpl(Delegate value);
+    public string ToString();
+}
+
+public interface SteamKit2.ICallbackMsg
+{
+    public SteamKit2.JobID get_JobID();
+    public void set_JobID(SteamKit2.JobID value);
+}
+
+public interface SteamKit2.IClientMsg
+{
+    public bool get_IsProto();
+    public SteamKit2.EMsg get_MsgType();
+    public int get_SessionID();
+    public SteamKit2.JobID get_SourceJobID();
+    public SteamKit2.SteamID get_SteamID();
+    public SteamKit2.JobID get_TargetJobID();
+    public byte[] Serialize();
+    public void set_SessionID(int value);
+    public void set_SourceJobID(SteamKit2.JobID value);
+    public void set_SteamID(SteamKit2.SteamID value);
+    public void set_TargetJobID(SteamKit2.JobID value);
+}
+
+public interface SteamKit2.IDebugListener
+{
+    public void WriteLine(string category, string msg);
+}
+
+public interface SteamKit2.IDebugNetworkListener
+{
+    public void OnIncomingNetworkMessage(SteamKit2.EMsg msgType, byte[] data);
+    public void OnOutgoingNetworkMessage(SteamKit2.EMsg msgType, byte[] data);
+}
+
+public interface SteamKit2.ILogContext
+{
+    public void LogDebug(string category, string message, object[] args);
+}
+
+public interface SteamKit2.IMachineInfoProvider
+{
+    public byte[] GetDiskId();
+    public byte[] GetMacAddress();
+    public byte[] GetMachineGuid();
+}
+
+public interface SteamKit2.IPacketMsg
+{
+    public bool get_IsProto();
+    public SteamKit2.EMsg get_MsgType();
+    public ulong get_SourceJobID();
+    public ulong get_TargetJobID();
+    public byte[] GetData();
+}
+
+public interface SteamKit2.ISteamConfigurationBuilder
+{
+    public SteamKit2.ISteamConfigurationBuilder WithCellID(uint cellID);
+    public SteamKit2.ISteamConfigurationBuilder WithConnectionTimeout(TimeSpan connectionTimeout);
+    public SteamKit2.ISteamConfigurationBuilder WithDefaultPersonaStateFlags(SteamKit2.EClientPersonaStateFlag personaStateFlags);
+    public SteamKit2.ISteamConfigurationBuilder WithDirectoryFetch(bool allowDirectoryFetch);
+    public SteamKit2.ISteamConfigurationBuilder WithHttpClientFactory(SteamKit2.HttpClientFactory factoryFunction);
+    public SteamKit2.ISteamConfigurationBuilder WithMachineInfoProvider(SteamKit2.IMachineInfoProvider machineInfoProvider);
+    public SteamKit2.ISteamConfigurationBuilder WithProtocolTypes(SteamKit2.ProtocolTypes protocolTypes);
+    public SteamKit2.ISteamConfigurationBuilder WithServerListProvider(SteamKit2.Discovery.IServerListProvider provider);
+    public SteamKit2.ISteamConfigurationBuilder WithUniverse(SteamKit2.EUniverse universe);
+    public SteamKit2.ISteamConfigurationBuilder WithWebAPIBaseAddress(Uri baseAddress);
+    public SteamKit2.ISteamConfigurationBuilder WithWebAPIKey(string webApiKey);
+}
+
+public class SteamKit2.JobID
+{
+    public .ctor();
+    public .ctor(ulong jobId);
+    public bool Equals(object obj);
+    public bool Equals(SteamKit2.GlobalID gid);
+    protected void Finalize();
+    public uint get_BoxID();
+    public uint get_ProcessID();
+    public uint get_SequentialCount();
+    public DateTime get_StartTime();
+    public ulong get_Value();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public static SteamKit2.JobID op_Implicit(SteamKit2.AsyncJob asyncJob);
+    public static ulong op_Implicit(SteamKit2.JobID jobId);
+    public static SteamKit2.JobID op_Implicit(ulong jobId);
+    public void set_BoxID(uint value);
+    public void set_ProcessID(uint value);
+    public void set_SequentialCount(uint value);
+    public void set_StartTime(DateTime value);
+    public void set_Value(ulong value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.KeyDictionary
+{
+    public bool Equals(object obj);
+    protected void Finalize();
+    public int GetHashCode();
+    public static byte[] GetPublicKey(SteamKit2.EUniverse eUniverse);
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
+public class SteamKit2.KeyValue
+{
+    public .ctor(string name, string value);
+    public bool AsBoolean(bool defaultValue);
+    public SteamKit2.T AsEnum<SteamKit2.T>(SteamKit2.T defaultValue);
+    public float AsFloat(float defaultValue);
+    public int AsInteger(int defaultValue);
+    public long AsLong(long defaultValue);
+    public string AsString();
+    public byte AsUnsignedByte(byte defaultValue);
+    public uint AsUnsignedInteger(uint defaultValue);
+    public ulong AsUnsignedLong(ulong defaultValue);
+    public ushort AsUnsignedShort(ushort defaultValue);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public System.Collections.Generic.List`1[[SteamKit2.KeyValue]] get_Children();
+    public SteamKit2.KeyValue get_Item(string key);
+    public string get_Name();
+    public string get_Value();
+    public int GetHashCode();
+    public Type GetType();
+    public static SteamKit2.KeyValue LoadAsText(string path);
+    public static SteamKit2.KeyValue LoadFromString(string input);
+    protected object MemberwiseClone();
+    public bool ReadAsText(System.IO.Stream input);
+    public bool ReadFileAsText(string filename);
+    public void SaveToFile(string path, bool asBinary);
+    public void SaveToStream(System.IO.Stream stream, bool asBinary);
+    public void set_Item(string key, SteamKit2.KeyValue value);
+    public void set_Name(string value);
+    public void set_Value(string value);
+    public string ToString();
+    public static bool TryLoadAsBinary(string path, out SteamKit2.KeyValue& keyValue);
+    public bool TryReadAsBinary(System.IO.Stream input);
+}
+
+public class SteamKit2.MessageObject
+{
+    public .ctor();
+    public .ctor(SteamKit2.KeyValue keyValues);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.KeyValue get_KeyValues();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public bool ReadFromStream(System.IO.Stream stream);
+    public string ToString();
+    public void WriteToStream(System.IO.Stream stream);
+}
+
+public sealed class SteamKit2.Msg`1
+{
+    public .ctor(int payloadReserve);
+    public .ctor(SteamKit2.IPacketMsg msg);
+    public .ctor(SteamKit2.MsgBase`1[[SteamKit2.Internal.MsgHdr]] msg, int payloadReserve);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.TBody get_Body();
+    public SteamKit2.Internal.MsgHdr get_Header();
+    public bool get_IsProto();
+    public SteamKit2.EMsg get_MsgType();
+    public System.IO.MemoryStream get_Payload();
+    public int get_SessionID();
+    public SteamKit2.JobID get_SourceJobID();
+    public SteamKit2.SteamID get_SteamID();
+    public SteamKit2.JobID get_TargetJobID();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public byte ReadByte();
+    public byte[] ReadBytes(int numBytes);
+    public double ReadDouble();
+    public float ReadFloat();
+    public int ReadInt();
+    public short ReadInt16();
+    public int ReadInt32();
+    public long ReadInt64();
+    public sbyte ReadInt8();
+    public long ReadLong();
+    public string ReadNullTermString();
+    public string ReadNullTermString(System.Text.Encoding encoding);
+    public sbyte ReadSByte();
+    public short ReadShort();
+    public float ReadSingle();
+    public uint ReadUInt();
+    public ushort ReadUInt16();
+    public uint ReadUInt32();
+    public ulong ReadUInt64();
+    public byte ReadUInt8();
+    public ulong ReadULong();
+    public ushort ReadUShort();
+    public long Seek(long offset, System.IO.SeekOrigin loc);
+    public byte[] Serialize();
+    public void set_SessionID(int value);
+    public void set_SourceJobID(SteamKit2.JobID value);
+    public void set_SteamID(SteamKit2.SteamID value);
+    public void set_TargetJobID(SteamKit2.JobID value);
+    public string ToString();
+    public void Write(byte data);
+    public void Write(byte[] data);
+    public void Write(double data);
+    public void Write(float data);
+    public void Write(int data);
+    public void Write(long data);
+    public void Write(sbyte data);
+    public void Write(short data);
+    public void Write(string data);
+    public void Write(string data, System.Text.Encoding encoding);
+    public void Write(uint data);
+    public void Write(ulong data);
+    public void Write(ushort data);
+    public void WriteNullTermString(string data);
+    public void WriteNullTermString(string data, System.Text.Encoding encoding);
+}
+
+public class SteamKit2.MsgBase
+{
+    public .ctor(int payloadReserve);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public System.IO.MemoryStream get_Payload();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public byte ReadByte();
+    public byte[] ReadBytes(int numBytes);
+    public double ReadDouble();
+    public float ReadFloat();
+    public int ReadInt();
+    public short ReadInt16();
+    public int ReadInt32();
+    public long ReadInt64();
+    public sbyte ReadInt8();
+    public long ReadLong();
+    public string ReadNullTermString();
+    public string ReadNullTermString(System.Text.Encoding encoding);
+    public sbyte ReadSByte();
+    public short ReadShort();
+    public float ReadSingle();
+    public uint ReadUInt();
+    public ushort ReadUInt16();
+    public uint ReadUInt32();
+    public ulong ReadUInt64();
+    public byte ReadUInt8();
+    public ulong ReadULong();
+    public ushort ReadUShort();
+    public long Seek(long offset, System.IO.SeekOrigin loc);
+    public string ToString();
+    public void Write(byte data);
+    public void Write(byte[] data);
+    public void Write(double data);
+    public void Write(float data);
+    public void Write(int data);
+    public void Write(long data);
+    public void Write(sbyte data);
+    public void Write(short data);
+    public void Write(string data);
+    public void Write(string data, System.Text.Encoding encoding);
+    public void Write(uint data);
+    public void Write(ulong data);
+    public void Write(ushort data);
+    public void WriteNullTermString(string data);
+    public void WriteNullTermString(string data, System.Text.Encoding encoding);
+}
+
+public class SteamKit2.MsgBase`1
+{
+    public .ctor(int payloadReserve);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.THeader get_Header();
+    public bool get_IsProto();
+    public SteamKit2.EMsg get_MsgType();
+    public System.IO.MemoryStream get_Payload();
+    public int get_SessionID();
+    public SteamKit2.JobID get_SourceJobID();
+    public SteamKit2.SteamID get_SteamID();
+    public SteamKit2.JobID get_TargetJobID();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public byte ReadByte();
+    public byte[] ReadBytes(int numBytes);
+    public double ReadDouble();
+    public float ReadFloat();
+    public int ReadInt();
+    public short ReadInt16();
+    public int ReadInt32();
+    public long ReadInt64();
+    public sbyte ReadInt8();
+    public long ReadLong();
+    public string ReadNullTermString();
+    public string ReadNullTermString(System.Text.Encoding encoding);
+    public sbyte ReadSByte();
+    public short ReadShort();
+    public float ReadSingle();
+    public uint ReadUInt();
+    public ushort ReadUInt16();
+    public uint ReadUInt32();
+    public ulong ReadUInt64();
+    public byte ReadUInt8();
+    public ulong ReadULong();
+    public ushort ReadUShort();
+    public long Seek(long offset, System.IO.SeekOrigin loc);
+    public byte[] Serialize();
+    public void set_SessionID(int value);
+    public void set_SourceJobID(SteamKit2.JobID value);
+    public void set_SteamID(SteamKit2.SteamID value);
+    public void set_TargetJobID(SteamKit2.JobID value);
+    public string ToString();
+    public void Write(byte data);
+    public void Write(byte[] data);
+    public void Write(double data);
+    public void Write(float data);
+    public void Write(int data);
+    public void Write(long data);
+    public void Write(sbyte data);
+    public void Write(short data);
+    public void Write(string data);
+    public void Write(string data, System.Text.Encoding encoding);
+    public void Write(uint data);
+    public void Write(ulong data);
+    public void Write(ushort data);
+    public void WriteNullTermString(string data);
+    public void WriteNullTermString(string data, System.Text.Encoding encoding);
+}
+
+public sealed class SteamKit2.MsgUtil
+{
+    public bool Equals(object obj);
+    protected void Finalize();
+    public static uint GetGCMsg(uint msg);
+    public int GetHashCode();
+    public static SteamKit2.EMsg GetMsg(SteamKit2.EMsg msg);
+    public static SteamKit2.EMsg GetMsg(uint msg);
+    public Type GetType();
+    public static bool IsProtoBuf(SteamKit2.EMsg msg);
+    public static bool IsProtoBuf(uint msg);
+    public static uint MakeGCMsg(uint msg, bool protobuf);
+    public static SteamKit2.EMsg MakeMsg(SteamKit2.EMsg msg, bool protobuf);
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
+public class SteamKit2.NetHookNetworkListener
+{
+    public .ctor(SteamKit2.ILogContext log);
+    public .ctor(string path, SteamKit2.ILogContext log);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public void OnIncomingNetworkMessage(SteamKit2.EMsg msgType, byte[] data);
+    public void OnOutgoingNetworkMessage(SteamKit2.EMsg msgType, byte[] data);
+    public string ToString();
+}
+
+public sealed class SteamKit2.PacketClientMsg
+{
+    public .ctor(SteamKit2.EMsg eMsg, byte[] data);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public bool get_IsProto();
+    public SteamKit2.EMsg get_MsgType();
+    public ulong get_SourceJobID();
+    public ulong get_TargetJobID();
+    public byte[] GetData();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
+public sealed class SteamKit2.PacketClientMsgProtobuf
+{
+    public .ctor(SteamKit2.EMsg eMsg, byte[] data);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public bool get_IsProto();
+    public SteamKit2.EMsg get_MsgType();
+    public ulong get_SourceJobID();
+    public ulong get_TargetJobID();
+    public byte[] GetData();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
+public sealed class SteamKit2.PacketMsg
+{
+    public .ctor(SteamKit2.EMsg eMsg, byte[] data);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public bool get_IsProto();
+    public SteamKit2.EMsg get_MsgType();
+    public ulong get_SourceJobID();
+    public ulong get_TargetJobID();
+    public byte[] GetData();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
+public sealed class SteamKit2.PublishedFileID
+{
+    public .ctor(ulong fileId);
+    public bool Equals(object obj);
+    public bool Equals(SteamKit2.UInt64Handle other);
+    protected void Finalize();
+    protected ulong get_Value();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public static bool op_Equality(SteamKit2.PublishedFileID a, SteamKit2.PublishedFileID b);
+    public static ulong op_Implicit(SteamKit2.PublishedFileID file);
+    public static SteamKit2.PublishedFileID op_Implicit(ulong fileId);
+    public static bool op_Inequality(SteamKit2.PublishedFileID a, SteamKit2.PublishedFileID b);
+    protected void set_Value(ulong value);
+    public string ToString();
+}
+
+public class SteamKit2.RSACrypto
+{
+    public .ctor(byte[] key);
+    public void Dispose();
+    public byte[] Encrypt(byte[] input);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
+public sealed class SteamKit2.SimpleConsoleDebugListener
+{
+    public .ctor();
+    public bool Equals(object obj);
+    protected void Finalize();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+    public void WriteLine(string category, string msg);
+}
+
+public sealed class SteamKit2.SteamApps
+{
+    public SteamKit2.AsyncJob`1[[SteamKit2.CheckAppBetaPasswordCallback]] CheckAppBetaPassword(uint app, string password);
+    public bool Equals(object obj);
+    protected void Finalize();
+    protected SteamKit2.SteamClient get_Client();
+    protected bool get_ExpectDisconnection();
+    public SteamKit2.AsyncJob`1[[SteamKit2.AppOwnershipTicketCallback]] GetAppOwnershipTicket(uint appid);
+    public SteamKit2.AsyncJob`1[[SteamKit2.CDNAuthTokenCallback]] GetCDNAuthToken(uint app, uint depot, string host_name);
+    public SteamKit2.AsyncJob`1[[SteamKit2.DepotKeyCallback]] GetDepotDecryptionKey(uint depotid, uint appid);
+    public int GetHashCode();
+    public SteamKit2.AsyncJob`1[[SteamKit2.LegacyGameKeyCallback]] GetLegacyGameKey(uint appid);
+    public Type GetType();
+    public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
+    protected object MemberwiseClone();
+    public SteamKit2.AsyncJob`1[[SteamKit2.PICSTokensCallback]] PICSGetAccessTokens(Nullable`1[[uint]] app, Nullable`1[[uint]] package);
+    public SteamKit2.AsyncJob`1[[SteamKit2.PICSTokensCallback]] PICSGetAccessTokens(System.Collections.Generic.IEnumerable`1[[uint]] appIds, System.Collections.Generic.IEnumerable`1[[uint]] packageIds);
+    public SteamKit2.AsyncJob`1[[SteamKit2.PICSChangesCallback]] PICSGetChangesSince(uint lastChangeNumber, bool sendAppChangelist, bool sendPackageChangelist);
+    public SteamKit2.AsyncJobMultiple`1[[SteamKit2.PICSProductInfoCallback]] PICSGetProductInfo(Nullable`1[[SteamKit2.PICSRequest]] app, Nullable`1[[SteamKit2.PICSRequest]] package, bool metaDataOnly);
+    public SteamKit2.AsyncJobMultiple`1[[SteamKit2.PICSProductInfoCallback]] PICSGetProductInfo(System.Collections.Generic.IEnumerable`1[[SteamKit2.PICSRequest]] apps, System.Collections.Generic.IEnumerable`1[[SteamKit2.PICSRequest]] packages, bool metaDataOnly);
+    public SteamKit2.AsyncJob`1[[SteamKit2.FreeLicenseCallback]] RequestFreeLicense(System.Collections.Generic.IEnumerable`1[[uint]] apps);
+    public SteamKit2.AsyncJob`1[[SteamKit2.FreeLicenseCallback]] RequestFreeLicense(uint app);
+    protected void set_ExpectDisconnection(bool value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.SteamClient
+{
+    public .ctor();
+    public .ctor(SteamKit2.SteamConfiguration configuration);
+    public .ctor(SteamKit2.SteamConfiguration configuration, string identifier);
+    public .ctor(string identifier);
+    public void AddHandler(SteamKit2.ClientMsgHandler handler);
+    public void Connect(SteamKit2.Discovery.ServerRecord cmServer);
+    public void Disconnect();
+    public bool Equals(object obj);
+    protected void Finalize();
+    public void FreeLastCallback();
+    public SteamKit2.Authentication.SteamAuthentication get_Authentication();
+    public Nullable`1[[uint]] get_CellID();
+    public SteamKit2.SteamConfiguration get_Configuration();
+    public TimeSpan get_ConnectionTimeout();
+    public System.Net.EndPoint get_CurrentEndPoint();
+    public SteamKit2.IDebugNetworkListener get_DebugNetworkListener();
+    public string get_ID();
+    public string get_IPCountryCode();
+    public bool get_IsConnected();
+    public System.Net.IPAddress get_LocalIP();
+    public System.Net.IPAddress get_PublicIP();
+    public SteamKit2.Discovery.SmartCMServerList get_Servers();
+    public Nullable`1[[int]] get_SessionID();
+    public ulong get_SessionToken();
+    public SteamKit2.SteamID get_SteamID();
+    public SteamKit2.EUniverse get_Universe();
+    public System.Collections.Generic.IEnumerable`1[[SteamKit2.ICallbackMsg]] GetAllCallbacks(bool freeLast, TimeSpan timeout);
+    public SteamKit2.ICallbackMsg GetCallback();
+    public SteamKit2.ICallbackMsg GetCallback(bool freeLast);
+    public SteamKit2.T GetHandler<SteamKit2.T>();
+    public int GetHashCode();
+    public SteamKit2.JobID GetNextJobID();
+    public Type GetType();
+    public void LogDebug(string category, string message, object[] args);
+    protected object MemberwiseClone();
+    protected void OnClientConnected();
+    protected void OnClientDisconnected(bool userInitiated);
+    protected bool OnClientMsgReceived(SteamKit2.IPacketMsg packetMsg);
+    public void PostCallback(SteamKit2.CallbackMsg msg);
+    public void RemoveHandler(SteamKit2.ClientMsgHandler handler);
+    public void RemoveHandler(Type handler);
+    public void Send(SteamKit2.IClientMsg msg);
+    public void set_DebugNetworkListener(SteamKit2.IDebugNetworkListener value);
+    public string ToString();
+    public SteamKit2.ICallbackMsg WaitForCallback();
+    public SteamKit2.ICallbackMsg WaitForCallback(bool freeLast);
+    public SteamKit2.ICallbackMsg WaitForCallback(bool freeLast, TimeSpan timeout);
+    public SteamKit2.ICallbackMsg WaitForCallback(TimeSpan timeout);
+}
+
+public sealed class SteamKit2.SteamCloud
+{
+    public bool Equals(object obj);
+    protected void Finalize();
+    protected SteamKit2.SteamClient get_Client();
+    protected bool get_ExpectDisconnection();
+    public int GetHashCode();
+    public SteamKit2.AsyncJob`1[[SteamKit2.SingleFileInfoCallback]] GetSingleFileInfo(uint appid, string filename);
+    public Type GetType();
+    public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
+    protected object MemberwiseClone();
+    public SteamKit2.AsyncJob`1[[SteamKit2.UGCDetailsCallback]] RequestUGCDetails(SteamKit2.UGCHandle ugcId);
+    protected void set_ExpectDisconnection(bool value);
+    public SteamKit2.AsyncJob`1[[SteamKit2.ShareFileCallback]] ShareFile(uint appid, string filename);
+    public string ToString();
+}
+
+public sealed class SteamKit2.SteamConfiguration
+{
+    public static SteamKit2.SteamConfiguration Create(Action`1[[SteamKit2.ISteamConfigurationBuilder]] configurator);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public bool get_AllowDirectoryFetch();
+    public uint get_CellID();
+    public TimeSpan get_ConnectionTimeout();
+    public SteamKit2.EClientPersonaStateFlag get_DefaultPersonaStateFlags();
+    public SteamKit2.HttpClientFactory get_HttpClientFactory();
+    public SteamKit2.IMachineInfoProvider get_MachineInfoProvider();
+    public SteamKit2.ProtocolTypes get_ProtocolTypes();
+    public SteamKit2.Discovery.SmartCMServerList get_ServerList();
+    public SteamKit2.Discovery.IServerListProvider get_ServerListProvider();
+    public SteamKit2.EUniverse get_Universe();
+    public Uri get_WebAPIBaseAddress();
+    public string get_WebAPIKey();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
+public sealed class SteamKit2.SteamConfigurationWebAPIExtensions
+{
+    public bool Equals(object obj);
+    protected void Finalize();
+    public static SteamKit2.AsyncInterface GetAsyncWebAPIInterface(SteamKit2.SteamConfiguration config, string iface);
+    public int GetHashCode();
+    public Type GetType();
+    public static SteamKit2.Interface GetWebAPIInterface(SteamKit2.SteamConfiguration config, string iface);
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
+public sealed class SteamKit2.SteamContent
+{
+    public .ctor();
+    public bool Equals(object obj);
+    protected void Finalize();
+    protected SteamKit2.SteamClient get_Client();
+    protected bool get_ExpectDisconnection();
+    public int GetHashCode();
+    public System.Threading.Tasks.Task`1[[ulong]] GetManifestRequestCode(uint depotId, uint appId, ulong manifestId, string branch, string branchPasswordHash);
+    public System.Threading.Tasks.Task`1[[System.Collections.Generic.IReadOnlyCollection`1[[SteamKit2.CDN.Server]]]] GetServersForSteamPipe(Nullable`1[[uint]] cellId, Nullable`1[[uint]] maxNumServers);
+    public Type GetType();
+    public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
+    protected object MemberwiseClone();
+    protected void set_ExpectDisconnection(bool value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.SteamDirectory
+{
+    public bool Equals(object obj);
+    protected void Finalize();
+    public int GetHashCode();
+    public Type GetType();
+    public static System.Threading.Tasks.Task`1[[System.Collections.Generic.IReadOnlyCollection`1[[SteamKit2.Discovery.ServerRecord]]]] LoadAsync(SteamKit2.SteamConfiguration configuration);
+    public static System.Threading.Tasks.Task`1[[System.Collections.Generic.IReadOnlyCollection`1[[SteamKit2.Discovery.ServerRecord]]]] LoadAsync(SteamKit2.SteamConfiguration configuration, int maxNumServers, System.Threading.CancellationToken cancellationToken);
+    public static System.Threading.Tasks.Task`1[[System.Collections.Generic.IReadOnlyCollection`1[[SteamKit2.Discovery.ServerRecord]]]] LoadAsync(SteamKit2.SteamConfiguration configuration, System.Threading.CancellationToken cancellationToken);
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
+public sealed class SteamKit2.SteamFriends
+{
+    public void AddFriend(SteamKit2.SteamID steamId);
+    public void AddFriend(string accountNameOrEmail);
+    public void BanChatMember(SteamKit2.SteamID steamIdChat, SteamKit2.SteamID steamIdMember);
+    public bool Equals(object obj);
+    protected void Finalize();
+    protected SteamKit2.SteamClient get_Client();
+    protected bool get_ExpectDisconnection();
+    public byte[] GetClanAvatar(SteamKit2.SteamID steamId);
+    public SteamKit2.SteamID GetClanByIndex(int index);
+    public int GetClanCount();
+    public string GetClanName(SteamKit2.SteamID steamId);
+    public SteamKit2.EClanRelationship GetClanRelationship(SteamKit2.SteamID steamId);
+    public byte[] GetFriendAvatar(SteamKit2.SteamID steamId);
+    public SteamKit2.SteamID GetFriendByIndex(int index);
+    public int GetFriendCount();
+    public SteamKit2.GameID GetFriendGamePlayed(SteamKit2.SteamID steamId);
+    public string GetFriendGamePlayedName(SteamKit2.SteamID steamId);
+    public string GetFriendPersonaName(SteamKit2.SteamID steamId);
+    public SteamKit2.EPersonaState GetFriendPersonaState(SteamKit2.SteamID steamId);
+    public SteamKit2.EFriendRelationship GetFriendRelationship(SteamKit2.SteamID steamId);
+    public int GetHashCode();
+    public string GetPersonaName();
+    public SteamKit2.EPersonaState GetPersonaState();
+    public Type GetType();
+    public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
+    public SteamKit2.AsyncJob`1[[SteamKit2.IgnoreFriendCallback]] IgnoreFriend(SteamKit2.SteamID steamId, bool setIgnore);
+    public void InviteUserToChat(SteamKit2.SteamID steamIdUser, SteamKit2.SteamID steamIdChat);
+    public void JoinChat(SteamKit2.SteamID steamId);
+    public void KickChatMember(SteamKit2.SteamID steamIdChat, SteamKit2.SteamID steamIdMember);
+    public void LeaveChat(SteamKit2.SteamID steamId);
+    protected object MemberwiseClone();
+    public void RemoveFriend(SteamKit2.SteamID steamId);
+    public void RequestFriendInfo(SteamKit2.SteamID steamId, SteamKit2.EClientPersonaStateFlag requestedInfo);
+    public void RequestFriendInfo(System.Collections.Generic.IEnumerable`1[[SteamKit2.SteamID]] steamIdList, SteamKit2.EClientPersonaStateFlag requestedInfo);
+    public void RequestMessageHistory(SteamKit2.SteamID steamId);
+    public void RequestOfflineMessages();
+    public SteamKit2.AsyncJob`1[[SteamKit2.ProfileInfoCallback]] RequestProfileInfo(SteamKit2.SteamID steamId);
+    public void SendChatMessage(SteamKit2.SteamID target, SteamKit2.EChatEntryType type, string message);
+    public void SendChatRoomMessage(SteamKit2.SteamID steamIdChat, SteamKit2.EChatEntryType type, string message);
+    protected void set_ExpectDisconnection(bool value);
+    public void SetPersonaName(string name);
+    public void SetPersonaState(SteamKit2.EPersonaState state);
+    public string ToString();
+    public void UnbanChatMember(SteamKit2.SteamID steamIdChat, SteamKit2.SteamID steamIdMember);
+}
+
+public sealed class SteamKit2.SteamGameCoordinator
+{
+    public bool Equals(object obj);
+    protected void Finalize();
+    protected SteamKit2.SteamClient get_Client();
+    protected bool get_ExpectDisconnection();
+    public int GetHashCode();
+    public Type GetType();
+    public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
+    protected object MemberwiseClone();
+    public void Send(SteamKit2.GC.IClientGCMsg msg, uint appId);
+    protected void set_ExpectDisconnection(bool value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.SteamGameServer
+{
+    public bool Equals(object obj);
+    protected void Finalize();
+    protected SteamKit2.SteamClient get_Client();
+    protected bool get_ExpectDisconnection();
+    public int GetHashCode();
+    public Type GetType();
+    public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
+    public void LogOff();
+    public void LogOn(SteamKit2.LogOnDetails details);
+    public void LogOnAnonymous(uint appId);
+    protected object MemberwiseClone();
+    public void SendStatus(SteamKit2.StatusDetails details);
+    protected void set_ExpectDisconnection(bool value);
+    public string ToString();
+}
+
+public class SteamKit2.SteamID
+{
+    public .ctor();
+    public .ctor(string steamId);
+    public .ctor(string steamId, SteamKit2.EUniverse eUniverse);
+    public .ctor(uint unAccountID, SteamKit2.EUniverse eUniverse, SteamKit2.EAccountType eAccountType);
+    public .ctor(uint unAccountID, uint unInstance, SteamKit2.EUniverse eUniverse, SteamKit2.EAccountType eAccountType);
+    public .ctor(ulong id);
+    public ulong ConvertToUInt64();
+    public bool Equals(object obj);
+    public bool Equals(SteamKit2.SteamID sid);
+    protected void Finalize();
+    public uint get_AccountID();
+    public uint get_AccountInstance();
+    public SteamKit2.EAccountType get_AccountType();
+    public SteamKit2.EUniverse get_AccountUniverse();
+    public bool get_IsAnonAccount();
+    public bool get_IsAnonGameServerAccount();
+    public bool get_IsAnonUserAccount();
+    public bool get_IsBlankAnonAccount();
+    public bool get_IsChatAccount();
+    public bool get_IsClanAccount();
+    public bool get_IsConsoleUserAccount();
+    public bool get_IsContentServerAccount();
+    public bool get_IsGameServerAccount();
+    public bool get_IsIndividualAccount();
+    public bool get_IsLobby();
+    public bool get_IsPersistentGameServerAccount();
+    public bool get_IsValid();
+    public int GetHashCode();
+    public ulong GetStaticAccountKey();
+    public Type GetType();
+    public void InstancedSet(uint unAccountID, uint unInstance, SteamKit2.EUniverse eUniverse, SteamKit2.EAccountType eAccountType);
+    protected object MemberwiseClone();
+    public static bool op_Equality(SteamKit2.SteamID a, SteamKit2.SteamID b);
+    public static ulong op_Implicit(SteamKit2.SteamID sid);
+    public static SteamKit2.SteamID op_Implicit(ulong id);
+    public static bool op_Inequality(SteamKit2.SteamID a, SteamKit2.SteamID b);
+    public string Render(bool steam3);
+    public void Set(uint unAccountID, SteamKit2.EUniverse eUniverse, SteamKit2.EAccountType eAccountType);
+    public void set_AccountID(uint value);
+    public void set_AccountInstance(uint value);
+    public void set_AccountType(SteamKit2.EAccountType value);
+    public void set_AccountUniverse(SteamKit2.EUniverse value);
+    public bool SetFromSteam3String(string steamId);
+    public bool SetFromString(string steamId, SteamKit2.EUniverse eUniverse);
+    public void SetFromUInt64(ulong ulSteamID);
+    public SteamKit2.SteamID ToChatID();
+    public string ToString();
+    public bool TryGetClanID(out SteamKit2.SteamID& groupID);
+}
+
+public class SteamKit2.SteamKitWebRequestException
+{
+    public .ctor(string message, System.Net.Http.HttpResponseMessage response);
+    protected void add_SerializeObjectState(EventHandler`1[[System.Runtime.Serialization.SafeSerializationEventArgs]] value);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public System.Collections.IDictionary get_Data();
+    public System.Net.Http.Headers.HttpResponseHeaders get_Headers();
+    public string get_HelpLink();
+    public int get_HResult();
+    public System.Net.Http.HttpRequestError get_HttpRequestError();
+    public Exception get_InnerException();
+    public string get_Message();
+    public string get_Source();
+    public string get_StackTrace();
+    public new System.Net.HttpStatusCode get_StatusCode();
+    public Nullable`1[[System.Net.HttpStatusCode]] get_StatusCode();
+    public System.Reflection.MethodBase get_TargetSite();
+    public Exception GetBaseException();
+    public int GetHashCode();
+    public void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);
+    public new Type GetType();
+    public Type GetType();
+    protected object MemberwiseClone();
+    protected void remove_SerializeObjectState(EventHandler`1[[System.Runtime.Serialization.SafeSerializationEventArgs]] value);
+    public void set_HelpLink(string value);
+    public void set_HResult(int value);
+    public void set_Source(string value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.SteamMasterServer
+{
+    public bool Equals(object obj);
+    protected void Finalize();
+    protected SteamKit2.SteamClient get_Client();
+    protected bool get_ExpectDisconnection();
+    public int GetHashCode();
+    public Type GetType();
+    public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
+    protected object MemberwiseClone();
+    public SteamKit2.AsyncJob`1[[SteamKit2.QueryCallback]] ServerQuery(SteamKit2.QueryDetails details);
+    protected void set_ExpectDisconnection(bool value);
+    public string ToString();
+}
+
+public class SteamKit2.SteamMatchmaking
+{
+    public SteamKit2.AsyncJob`1[[SteamKit2.CreateLobbyCallback]] CreateLobby(uint appId, SteamKit2.ELobbyType lobbyType, int maxMembers, int lobbyFlags, System.Collections.Generic.IReadOnlyDictionary`2[[string, string]] metadata);
+    public bool Equals(object obj);
+    protected void Finalize();
+    protected SteamKit2.SteamClient get_Client();
+    protected bool get_ExpectDisconnection();
+    public int GetHashCode();
+    public SteamKit2.Lobby GetLobby(uint appId, SteamKit2.SteamID lobbySteamId);
+    public SteamKit2.AsyncJob`1[[SteamKit2.LobbyDataCallback]] GetLobbyData(uint appId, SteamKit2.SteamID lobbySteamId);
+    public SteamKit2.AsyncJob`1[[SteamKit2.GetLobbyListCallback]] GetLobbyList(uint appId, System.Collections.Generic.List`1[[SteamKit2.Filter]] filters, int maxLobbies);
+    public Type GetType();
+    public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
+    public void InviteToLobby(uint appId, SteamKit2.SteamID lobbySteamId, SteamKit2.SteamID userSteamId);
+    public SteamKit2.AsyncJob`1[[SteamKit2.JoinLobbyCallback]] JoinLobby(uint appId, SteamKit2.SteamID lobbySteamId);
+    public SteamKit2.AsyncJob`1[[SteamKit2.LeaveLobbyCallback]] LeaveLobby(uint appId, SteamKit2.SteamID lobbySteamId);
+    protected object MemberwiseClone();
+    public void Send(SteamKit2.ClientMsgProtobuf msg, uint appId);
+    protected void set_ExpectDisconnection(bool value);
+    public SteamKit2.AsyncJob`1[[SteamKit2.SetLobbyDataCallback]] SetLobbyData(uint appId, SteamKit2.SteamID lobbySteamId, SteamKit2.ELobbyType lobbyType, int maxMembers, int lobbyFlags, System.Collections.Generic.IReadOnlyDictionary`2[[string, string]] metadata);
+    public SteamKit2.AsyncJob`1[[SteamKit2.SetLobbyDataCallback]] SetLobbyMemberData(uint appId, SteamKit2.SteamID lobbySteamId, System.Collections.Generic.IReadOnlyDictionary`2[[string, string]] metadata);
+    public SteamKit2.AsyncJob`1[[SteamKit2.SetLobbyOwnerCallback]] SetLobbyOwner(uint appId, SteamKit2.SteamID lobbySteamId, SteamKit2.SteamID newOwner);
+    public string ToString();
+}
+
+public sealed class SteamKit2.SteamNetworking
+{
+    public bool Equals(object obj);
+    protected void Finalize();
+    protected SteamKit2.SteamClient get_Client();
+    protected bool get_ExpectDisconnection();
+    public int GetHashCode();
+    public Type GetType();
+    public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
+    protected object MemberwiseClone();
+    public SteamKit2.AsyncJob`1[[SteamKit2.NetworkingCertificateCallback]] RequestNetworkingCertificate(uint appId, byte[] publicKey);
+    protected void set_ExpectDisconnection(bool value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.SteamScreenshots
+{
+    public SteamKit2.AsyncJob`1[[SteamKit2.ScreenshotAddedCallback]] AddScreenshot(SteamKit2.ScreenshotDetails details);
+    public bool Equals(object obj);
+    protected void Finalize();
+    protected SteamKit2.SteamClient get_Client();
+    protected bool get_ExpectDisconnection();
+    public int GetHashCode();
+    public Type GetType();
+    public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
+    protected object MemberwiseClone();
+    protected void set_ExpectDisconnection(bool value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.SteamTrading
+{
+    public void CancelTrade(SteamKit2.SteamID user);
+    public bool Equals(object obj);
+    protected void Finalize();
+    protected SteamKit2.SteamClient get_Client();
+    protected bool get_ExpectDisconnection();
+    public int GetHashCode();
+    public Type GetType();
+    public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
+    protected object MemberwiseClone();
+    public void RespondToTrade(uint tradeId, bool acceptTrade);
+    protected void set_ExpectDisconnection(bool value);
+    public string ToString();
+    public void Trade(SteamKit2.SteamID user);
+}
+
+public class SteamKit2.SteamUnifiedMessages
+{
+    public SteamKit2.UnifiedService`1[[SteamKit2.TService]] CreateService<SteamKit2.TService>();
+    public bool Equals(object obj);
+    protected void Finalize();
+    protected SteamKit2.SteamClient get_Client();
+    protected bool get_ExpectDisconnection();
+    public int GetHashCode();
+    public Type GetType();
+    public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
+    protected object MemberwiseClone();
+    public SteamKit2.AsyncJob`1[[SteamKit2.ServiceMethodResponse]] SendMessage<SteamKit2.TRequest>(string name, SteamKit2.TRequest message);
+    public SteamKit2.AsyncJob`1[[SteamKit2.ServiceMethodResponse]] SendMessage<SteamKit2.TRequest>(string name, SteamKit2.TRequest message, bool isNotification);
+    public void SendNotification<SteamKit2.TRequest>(string name, SteamKit2.TRequest message);
+    protected void set_ExpectDisconnection(bool value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.SteamUser
+{
+    public void AcceptNewLoginKey(SteamKit2.LoginKeyCallback callback);
+    public bool Equals(object obj);
+    protected void Finalize();
+    protected SteamKit2.SteamClient get_Client();
+    protected bool get_ExpectDisconnection();
+    public SteamKit2.SteamID get_SteamID();
+    public int GetHashCode();
+    public Type GetType();
+    public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
+    public void LogOff();
+    public void LogOn(SteamKit2.LogOnDetails details);
+    public void LogOnAnonymous();
+    public void LogOnAnonymous(SteamKit2.AnonymousLogOnDetails details);
+    protected object MemberwiseClone();
+    public SteamKit2.AsyncJob`1[[SteamKit2.WebAPIUserNonceCallback]] RequestWebAPIUserNonce();
+    public void SendMachineAuthResponse(SteamKit2.MachineAuthDetails details);
+    protected void set_ExpectDisconnection(bool value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.SteamUserStats
+{
+    public SteamKit2.AsyncJob`1[[SteamKit2.FindOrCreateLeaderboardCallback]] CreateLeaderboard(uint appId, string name, SteamKit2.ELeaderboardSortMethod sortMethod, SteamKit2.ELeaderboardDisplayType displayType);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.AsyncJob`1[[SteamKit2.FindOrCreateLeaderboardCallback]] FindLeaderboard(uint appId, string name);
+    protected SteamKit2.SteamClient get_Client();
+    protected bool get_ExpectDisconnection();
+    public int GetHashCode();
+    public SteamKit2.AsyncJob`1[[SteamKit2.LeaderboardEntriesCallback]] GetLeaderboardEntries(uint appId, int id, int rangeStart, int rangeEnd, SteamKit2.ELeaderboardDataRequest dataRequest);
+    public SteamKit2.AsyncJob`1[[SteamKit2.NumberOfPlayersCallback]] GetNumberOfCurrentPlayers(uint appId);
+    public Type GetType();
+    public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
+    protected object MemberwiseClone();
+    protected void set_ExpectDisconnection(bool value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.SteamWorkshop
+{
+    public SteamKit2.AsyncJob`1[[SteamKit2.UserActionPublishedFilesCallback]] EnumeratePublishedFilesByUserAction(SteamKit2.EnumerationUserDetails details);
+    public bool Equals(object obj);
+    protected void Finalize();
+    protected SteamKit2.SteamClient get_Client();
+    protected bool get_ExpectDisconnection();
+    public int GetHashCode();
+    public Type GetType();
+    public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
+    protected object MemberwiseClone();
+    protected void set_ExpectDisconnection(bool value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.UGCHandle
+{
+    public .ctor();
+    public .ctor(ulong ugcId);
+    public bool Equals(object obj);
+    public bool Equals(SteamKit2.GlobalID gid);
+    protected void Finalize();
+    public uint get_BoxID();
+    public uint get_ProcessID();
+    public uint get_SequentialCount();
+    public DateTime get_StartTime();
+    public ulong get_Value();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public static ulong op_Implicit(SteamKit2.UGCHandle handle);
+    public static SteamKit2.UGCHandle op_Implicit(ulong ugcId);
+    public void set_BoxID(uint value);
+    public void set_ProcessID(uint value);
+    public void set_SequentialCount(uint value);
+    public void set_StartTime(DateTime value);
+    public void set_Value(ulong value);
+    public string ToString();
+}
+
+public class SteamKit2.UInt64Handle
+{
+    public .ctor();
+    protected .ctor(ulong value);
+    public bool Equals(object obj);
+    public bool Equals(SteamKit2.UInt64Handle other);
+    protected void Finalize();
+    protected ulong get_Value();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    protected void set_Value(ulong value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.WebAPI
+{
+    public .ctor();
+    public bool Equals(object obj);
+    protected void Finalize();
+    public static Uri get_DefaultBaseAddress();
+    public static SteamKit2.AsyncInterface GetAsyncInterface(string iface, string apiKey);
+    public static SteamKit2.AsyncInterface GetAsyncInterface(Uri baseAddress, string iface, string apiKey);
+    public int GetHashCode();
+    public static SteamKit2.Interface GetInterface(string iface, string apiKey);
+    public static SteamKit2.Interface GetInterface(Uri baseAddress, string iface, string apiKey);
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
+public sealed class SteamKit2.WebAPIRequestException
+{
+    public .ctor(string message, System.Net.Http.HttpResponseMessage response);
+    protected void add_SerializeObjectState(EventHandler`1[[System.Runtime.Serialization.SafeSerializationEventArgs]] value);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public System.Collections.IDictionary get_Data();
+    public System.Net.Http.Headers.HttpResponseHeaders get_Headers();
+    public string get_HelpLink();
+    public int get_HResult();
+    public System.Net.Http.HttpRequestError get_HttpRequestError();
+    public Exception get_InnerException();
+    public string get_Message();
+    public string get_Source();
+    public string get_StackTrace();
+    public new System.Net.HttpStatusCode get_StatusCode();
+    public Nullable`1[[System.Net.HttpStatusCode]] get_StatusCode();
+    public System.Reflection.MethodBase get_TargetSite();
+    public Exception GetBaseException();
+    public int GetHashCode();
+    public void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);
+    public new Type GetType();
+    public Type GetType();
+    protected object MemberwiseClone();
+    protected void remove_SerializeObjectState(EventHandler`1[[System.Runtime.Serialization.SafeSerializationEventArgs]] value);
+    public void set_HelpLink(string value);
+    public void set_HResult(int value);
+    public void set_Source(string value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.Authentication.AccessTokenGenerateResult
+{
+    public bool Equals(object obj);
+    protected void Finalize();
+    public string get_AccessToken();
+    public string get_RefreshToken();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
+public sealed class SteamKit2.Authentication.AuthenticationException
+{
+    public .ctor();
+    public .ctor(string message, SteamKit2.EResult result);
+    protected void add_SerializeObjectState(EventHandler`1[[System.Runtime.Serialization.SafeSerializationEventArgs]] value);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public System.Collections.IDictionary get_Data();
+    public string get_HelpLink();
+    public int get_HResult();
+    public Exception get_InnerException();
+    public string get_Message();
+    public SteamKit2.EResult get_Result();
+    public string get_Source();
+    public string get_StackTrace();
+    public System.Reflection.MethodBase get_TargetSite();
+    public Exception GetBaseException();
+    public int GetHashCode();
+    public void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);
+    public new Type GetType();
+    public Type GetType();
+    protected object MemberwiseClone();
+    protected void remove_SerializeObjectState(EventHandler`1[[System.Runtime.Serialization.SafeSerializationEventArgs]] value);
+    public void set_HelpLink(string value);
+    public void set_HResult(int value);
+    public void set_Source(string value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.Authentication.AuthPollResult
+{
+    public bool Equals(object obj);
+    protected void Finalize();
+    public string get_AccessToken();
+    public string get_AccountName();
+    public string get_NewGuardData();
+    public string get_RefreshToken();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
+public class SteamKit2.Authentication.AuthSession
+{
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.Authentication.IAuthenticator get_Authenticator();
+    public ulong get_ClientID();
+    public TimeSpan get_PollingInterval();
+    public byte[] get_RequestID();
+    public int GetHashCode();
+    public Type GetType();
+    protected void HandlePollAuthSessionStatusResponse(SteamKit2.Internal.CAuthentication_PollAuthSessionStatus_Response response);
+    protected object MemberwiseClone();
+    public System.Threading.Tasks.Task`1[[SteamKit2.Authentication.AuthPollResult]] PollAuthSessionStatusAsync();
+    public System.Threading.Tasks.Task`1[[SteamKit2.Authentication.AuthPollResult]] PollingWaitForResultAsync(System.Threading.CancellationToken cancellationToken);
+    public string ToString();
+}
+
+public sealed class SteamKit2.Authentication.AuthSessionDetails
+{
+    public .ctor();
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.Authentication.IAuthenticator get_Authenticator();
+    public SteamKit2.EOSType get_ClientOSType();
+    public string get_DeviceFriendlyName();
+    public string get_GuardData();
+    public bool get_IsPersistentSession();
+    public string get_Password();
+    public SteamKit2.Internal.EAuthTokenPlatformType get_PlatformType();
+    public string get_Username();
+    public string get_WebsiteID();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public void set_Authenticator(SteamKit2.Authentication.IAuthenticator value);
+    public void set_ClientOSType(SteamKit2.EOSType value);
+    public void set_DeviceFriendlyName(string value);
+    public void set_GuardData(string value);
+    public void set_IsPersistentSession(bool value);
+    public void set_Password(string value);
+    public void set_PlatformType(SteamKit2.Internal.EAuthTokenPlatformType value);
+    public void set_Username(string value);
+    public void set_WebsiteID(string value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.Authentication.CredentialsAuthSession
+{
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.Authentication.IAuthenticator get_Authenticator();
+    public ulong get_ClientID();
+    public TimeSpan get_PollingInterval();
+    public byte[] get_RequestID();
+    public SteamKit2.SteamID get_SteamID();
+    public int GetHashCode();
+    public Type GetType();
+    protected void HandlePollAuthSessionStatusResponse(SteamKit2.Internal.CAuthentication_PollAuthSessionStatus_Response response);
+    protected object MemberwiseClone();
+    public System.Threading.Tasks.Task`1[[SteamKit2.Authentication.AuthPollResult]] PollAuthSessionStatusAsync();
+    public System.Threading.Tasks.Task`1[[SteamKit2.Authentication.AuthPollResult]] PollingWaitForResultAsync(System.Threading.CancellationToken cancellationToken);
+    public System.Threading.Tasks.Task SendSteamGuardCodeAsync(string code, SteamKit2.Internal.EAuthSessionGuardType codeType);
+    public string ToString();
+}
+
+public interface SteamKit2.Authentication.IAuthenticator
+{
+    public System.Threading.Tasks.Task`1[[bool]] AcceptDeviceConfirmationAsync();
+    public System.Threading.Tasks.Task`1[[string]] GetDeviceCodeAsync(bool previousCodeWasIncorrect);
+    public System.Threading.Tasks.Task`1[[string]] GetEmailCodeAsync(string email, bool previousCodeWasIncorrect);
+}
+
+public sealed class SteamKit2.Authentication.QrAuthSession
+{
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.Authentication.IAuthenticator get_Authenticator();
+    public string get_ChallengeURL();
+    public Action get_ChallengeURLChanged();
+    public ulong get_ClientID();
+    public TimeSpan get_PollingInterval();
+    public byte[] get_RequestID();
+    public int GetHashCode();
+    public Type GetType();
+    protected void HandlePollAuthSessionStatusResponse(SteamKit2.Internal.CAuthentication_PollAuthSessionStatus_Response response);
+    protected object MemberwiseClone();
+    public System.Threading.Tasks.Task`1[[SteamKit2.Authentication.AuthPollResult]] PollAuthSessionStatusAsync();
+    public System.Threading.Tasks.Task`1[[SteamKit2.Authentication.AuthPollResult]] PollingWaitForResultAsync(System.Threading.CancellationToken cancellationToken);
+    public void set_ChallengeURLChanged(Action value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.Authentication.SteamAuthentication
+{
+    public System.Threading.Tasks.Task`1[[SteamKit2.Authentication.CredentialsAuthSession]] BeginAuthSessionViaCredentialsAsync(SteamKit2.Authentication.AuthSessionDetails details);
+    public System.Threading.Tasks.Task`1[[SteamKit2.Authentication.QrAuthSession]] BeginAuthSessionViaQRAsync(SteamKit2.Authentication.AuthSessionDetails details);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public System.Threading.Tasks.Task`1[[SteamKit2.Authentication.AccessTokenGenerateResult]] GenerateAccessTokenForAppAsync(SteamKit2.SteamID steamID, string refreshToken, bool allowRenewal);
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
+public class SteamKit2.Authentication.UserConsoleAuthenticator
+{
+    public .ctor();
+    public System.Threading.Tasks.Task`1[[bool]] AcceptDeviceConfirmationAsync();
+    public bool Equals(object obj);
+    protected void Finalize();
+    public System.Threading.Tasks.Task`1[[string]] GetDeviceCodeAsync(bool previousCodeWasIncorrect);
+    public System.Threading.Tasks.Task`1[[string]] GetEmailCodeAsync(string email, bool previousCodeWasIncorrect);
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
+public sealed class SteamKit2.CDN.Client
+{
+    public .ctor(SteamKit2.SteamClient steamClient);
+    public void Dispose();
+    public System.Threading.Tasks.Task`1[[SteamKit2.CDN.DepotChunk]] DownloadDepotChunkAsync(uint depotId, SteamKit2.ChunkData chunk, SteamKit2.CDN.Server server, byte[] depotKey, SteamKit2.CDN.Server proxyServer);
+    public System.Threading.Tasks.Task`1[[SteamKit2.DepotManifest]] DownloadManifestAsync(uint depotId, ulong manifestId, ulong manifestRequestCode, SteamKit2.CDN.Server server, byte[] depotKey, SteamKit2.CDN.Server proxyServer);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public static TimeSpan get_RequestTimeout();
+    public static TimeSpan get_ResponseBodyTimeout();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public static void set_RequestTimeout(TimeSpan value);
+    public static void set_ResponseBodyTimeout(TimeSpan value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.CDN.DepotChunk
+{
+    public .ctor(SteamKit2.ChunkData info, byte[] data);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.ChunkData get_ChunkInfo();
+    public byte[] get_Data();
+    public bool get_IsProcessed();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public void Process(byte[] depotKey);
+    public string ToString();
+}
+
+public sealed class SteamKit2.CDN.Server
+{
+    public .ctor();
+    public bool Equals(object obj);
+    protected void Finalize();
+    public uint[] get_AllowedAppIds();
+    public uint get_CellID();
+    public string get_Host();
+    public int get_Load();
+    public int get_NumEntries();
+    public int get_Port();
+    public bool get_PreferredServer();
+    public SteamKit2.CDN.ConnectionProtocol get_Protocol();
+    public string get_ProxyRequestPathTemplate();
+    public int get_SourceID();
+    public bool get_SteamChinaOnly();
+    public string get_Type();
+    public bool get_UseAsProxy();
+    public string get_VHost();
+    public float get_WeightedLoad();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public static SteamKit2.CDN.Server op_Implicit(System.Net.DnsEndPoint endPoint);
+    public static SteamKit2.CDN.Server op_Implicit(System.Net.IPEndPoint endPoint);
+    public string ToString();
+}
+
+public class SteamKit2.Discovery.FileStorageServerListProvider
+{
+    public .ctor(string filename);
+    public bool Equals(object obj);
+    public System.Threading.Tasks.Task`1[[System.Collections.Generic.IEnumerable`1[[SteamKit2.Discovery.ServerRecord]]]] FetchServerListAsync();
+    protected void Finalize();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+    public System.Threading.Tasks.Task UpdateServerListAsync(System.Collections.Generic.IEnumerable`1[[SteamKit2.Discovery.ServerRecord]] endpoints);
+}
+
+public interface SteamKit2.Discovery.IServerListProvider
+{
+    public System.Threading.Tasks.Task`1[[System.Collections.Generic.IEnumerable`1[[SteamKit2.Discovery.ServerRecord]]]] FetchServerListAsync();
+    public System.Threading.Tasks.Task UpdateServerListAsync(System.Collections.Generic.IEnumerable`1[[SteamKit2.Discovery.ServerRecord]] endpoints);
+}
+
+public class SteamKit2.Discovery.IsolatedStorageServerListProvider
+{
+    public .ctor();
+    public bool Equals(object obj);
+    public System.Threading.Tasks.Task`1[[System.Collections.Generic.IEnumerable`1[[SteamKit2.Discovery.ServerRecord]]]] FetchServerListAsync();
+    protected void Finalize();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+    public System.Threading.Tasks.Task UpdateServerListAsync(System.Collections.Generic.IEnumerable`1[[SteamKit2.Discovery.ServerRecord]] endpoints);
+}
+
+public class SteamKit2.Discovery.MemoryServerListProvider
+{
+    public .ctor();
+    public bool Equals(object obj);
+    public System.Threading.Tasks.Task`1[[System.Collections.Generic.IEnumerable`1[[SteamKit2.Discovery.ServerRecord]]]] FetchServerListAsync();
+    protected void Finalize();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+    public System.Threading.Tasks.Task UpdateServerListAsync(System.Collections.Generic.IEnumerable`1[[SteamKit2.Discovery.ServerRecord]] endpoints);
+}
+
+public class SteamKit2.Discovery.NullServerListProvider
+{
+    public .ctor();
+    public bool Equals(object obj);
+    public System.Threading.Tasks.Task`1[[System.Collections.Generic.IEnumerable`1[[SteamKit2.Discovery.ServerRecord]]]] FetchServerListAsync();
+    protected void Finalize();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+    public System.Threading.Tasks.Task UpdateServerListAsync(System.Collections.Generic.IEnumerable`1[[SteamKit2.Discovery.ServerRecord]] endpoints);
+}
+
+public class SteamKit2.Discovery.ServerRecord
+{
+    public static SteamKit2.Discovery.ServerRecord CreateServer(string host, int port, SteamKit2.ProtocolTypes protocolTypes);
+    public static SteamKit2.Discovery.ServerRecord CreateSocketServer(System.Net.IPEndPoint endPoint);
+    public static SteamKit2.Discovery.ServerRecord CreateWebSocketServer(string address);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public System.Net.EndPoint get_EndPoint();
+    public SteamKit2.ProtocolTypes get_ProtocolTypes();
+    public int GetHashCode();
+    public string GetHost();
+    public int GetPort();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public static bool op_Equality(SteamKit2.Discovery.ServerRecord left, SteamKit2.Discovery.ServerRecord right);
+    public static bool op_Inequality(SteamKit2.Discovery.ServerRecord left, SteamKit2.Discovery.ServerRecord right);
+    public string ToString();
+    public static bool TryCreateSocketServer(string address, out SteamKit2.Discovery.ServerRecord& serverRecord);
+}
+
+public class SteamKit2.Discovery.SmartCMServerList
+{
+    public .ctor(SteamKit2.SteamConfiguration configuration);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public TimeSpan get_BadConnectionMemoryTimeSpan();
+    public SteamKit2.Discovery.ServerRecord[] GetAllEndPoints();
+    public int GetHashCode();
+    public SteamKit2.Discovery.ServerRecord GetNextServerCandidate(SteamKit2.ProtocolTypes supportedProtocolTypes);
+    public System.Threading.Tasks.Task`1[[SteamKit2.Discovery.ServerRecord]] GetNextServerCandidateAsync(SteamKit2.ProtocolTypes supportedProtocolTypes);
+    public Type GetType();
+    protected object MemberwiseClone();
+    public void ReplaceList(System.Collections.Generic.IEnumerable`1[[SteamKit2.Discovery.ServerRecord]] endpointList);
+    public void ResetBadServers();
+    public void ResetOldScores();
+    public void set_BadConnectionMemoryTimeSpan(TimeSpan value);
+    public string ToString();
+}
+
+public sealed class SteamKit2.GC.ClientGCMsg`1
+{
+    public .ctor(int payloadReserve);
+    public .ctor(SteamKit2.GC.GCMsgBase`1[[SteamKit2.Internal.MsgGCHdr]] msg, int payloadReserve);
+    public .ctor(SteamKit2.GC.IPacketGCMsg msg);
+    public void Deserialize(byte[] data);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.GC.TBody get_Body();
+    public SteamKit2.Internal.MsgGCHdr get_Header();
+    public bool get_IsProto();
+    public uint get_MsgType();
+    public System.IO.MemoryStream get_Payload();
+    public SteamKit2.JobID get_SourceJobID();
+    public SteamKit2.JobID get_TargetJobID();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public byte ReadByte();
+    public byte[] ReadBytes(int numBytes);
+    public double ReadDouble();
+    public float ReadFloat();
+    public int ReadInt();
+    public short ReadInt16();
+    public int ReadInt32();
+    public long ReadInt64();
+    public sbyte ReadInt8();
+    public long ReadLong();
+    public string ReadNullTermString();
+    public string ReadNullTermString(System.Text.Encoding encoding);
+    public sbyte ReadSByte();
+    public short ReadShort();
+    public float ReadSingle();
+    public uint ReadUInt();
+    public ushort ReadUInt16();
+    public uint ReadUInt32();
+    public ulong ReadUInt64();
+    public byte ReadUInt8();
+    public ulong ReadULong();
+    public ushort ReadUShort();
+    public long Seek(long offset, System.IO.SeekOrigin loc);
+    public byte[] Serialize();
+    public void set_SourceJobID(SteamKit2.JobID value);
+    public void set_TargetJobID(SteamKit2.JobID value);
+    public string ToString();
+    public void Write(byte data);
+    public void Write(byte[] data);
+    public void Write(double data);
+    public void Write(float data);
+    public void Write(int data);
+    public void Write(long data);
+    public void Write(sbyte data);
+    public void Write(short data);
+    public void Write(string data);
+    public void Write(string data, System.Text.Encoding encoding);
+    public void Write(uint data);
+    public void Write(ulong data);
+    public void Write(ushort data);
+    public void WriteNullTermString(string data);
+    public void WriteNullTermString(string data, System.Text.Encoding encoding);
+}
+
+public sealed class SteamKit2.GC.ClientGCMsgProtobuf`1
+{
+    public .ctor(SteamKit2.GC.IPacketGCMsg msg);
+    public .ctor(uint eMsg, int payloadReserve);
+    public .ctor(uint eMsg, SteamKit2.GC.GCMsgBase`1[[SteamKit2.Internal.MsgGCHdrProtoBuf]] msg, int payloadReserve);
+    public void Deserialize(byte[] data);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.GC.TBody get_Body();
+    public SteamKit2.Internal.MsgGCHdrProtoBuf get_Header();
+    public bool get_IsProto();
+    public uint get_MsgType();
+    public System.IO.MemoryStream get_Payload();
+    public SteamKit2.GC.Internal.CMsgProtoBufHeader get_ProtoHeader();
+    public SteamKit2.JobID get_SourceJobID();
+    public SteamKit2.JobID get_TargetJobID();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public byte ReadByte();
+    public byte[] ReadBytes(int numBytes);
+    public double ReadDouble();
+    public float ReadFloat();
+    public int ReadInt();
+    public short ReadInt16();
+    public int ReadInt32();
+    public long ReadInt64();
+    public sbyte ReadInt8();
+    public long ReadLong();
+    public string ReadNullTermString();
+    public string ReadNullTermString(System.Text.Encoding encoding);
+    public sbyte ReadSByte();
+    public short ReadShort();
+    public float ReadSingle();
+    public uint ReadUInt();
+    public ushort ReadUInt16();
+    public uint ReadUInt32();
+    public ulong ReadUInt64();
+    public byte ReadUInt8();
+    public ulong ReadULong();
+    public ushort ReadUShort();
+    public long Seek(long offset, System.IO.SeekOrigin loc);
+    public byte[] Serialize();
+    public void set_SourceJobID(SteamKit2.JobID value);
+    public void set_TargetJobID(SteamKit2.JobID value);
+    public string ToString();
+    public void Write(byte data);
+    public void Write(byte[] data);
+    public void Write(double data);
+    public void Write(float data);
+    public void Write(int data);
+    public void Write(long data);
+    public void Write(sbyte data);
+    public void Write(short data);
+    public void Write(string data);
+    public void Write(string data, System.Text.Encoding encoding);
+    public void Write(uint data);
+    public void Write(ulong data);
+    public void Write(ushort data);
+    public void WriteNullTermString(string data);
+    public void WriteNullTermString(string data, System.Text.Encoding encoding);
+}
+
+public class SteamKit2.GC.GCMsgBase`1
+{
+    public .ctor(int payloadReserve);
+    public void Deserialize(byte[] data);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public SteamKit2.GC.THeader get_Header();
+    public bool get_IsProto();
+    public uint get_MsgType();
+    public System.IO.MemoryStream get_Payload();
+    public SteamKit2.JobID get_SourceJobID();
+    public SteamKit2.JobID get_TargetJobID();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public byte ReadByte();
+    public byte[] ReadBytes(int numBytes);
+    public double ReadDouble();
+    public float ReadFloat();
+    public int ReadInt();
+    public short ReadInt16();
+    public int ReadInt32();
+    public long ReadInt64();
+    public sbyte ReadInt8();
+    public long ReadLong();
+    public string ReadNullTermString();
+    public string ReadNullTermString(System.Text.Encoding encoding);
+    public sbyte ReadSByte();
+    public short ReadShort();
+    public float ReadSingle();
+    public uint ReadUInt();
+    public ushort ReadUInt16();
+    public uint ReadUInt32();
+    public ulong ReadUInt64();
+    public byte ReadUInt8();
+    public ulong ReadULong();
+    public ushort ReadUShort();
+    public long Seek(long offset, System.IO.SeekOrigin loc);
+    public byte[] Serialize();
+    public void set_SourceJobID(SteamKit2.JobID value);
+    public void set_TargetJobID(SteamKit2.JobID value);
+    public string ToString();
+    public void Write(byte data);
+    public void Write(byte[] data);
+    public void Write(double data);
+    public void Write(float data);
+    public void Write(int data);
+    public void Write(long data);
+    public void Write(sbyte data);
+    public void Write(short data);
+    public void Write(string data);
+    public void Write(string data, System.Text.Encoding encoding);
+    public void Write(uint data);
+    public void Write(ulong data);
+    public void Write(ushort data);
+    public void WriteNullTermString(string data);
+    public void WriteNullTermString(string data, System.Text.Encoding encoding);
+}
+
+public interface SteamKit2.GC.IClientGCMsg
+{
+    public void Deserialize(byte[] data);
+    public bool get_IsProto();
+    public uint get_MsgType();
+    public SteamKit2.JobID get_SourceJobID();
+    public SteamKit2.JobID get_TargetJobID();
+    public byte[] Serialize();
+    public void set_SourceJobID(SteamKit2.JobID value);
+    public void set_TargetJobID(SteamKit2.JobID value);
+}
+
+public interface SteamKit2.GC.IPacketGCMsg
+{
+    public bool get_IsProto();
+    public uint get_MsgType();
+    public SteamKit2.JobID get_SourceJobID();
+    public SteamKit2.JobID get_TargetJobID();
+    public byte[] GetData();
+}
+
+public sealed class SteamKit2.GC.PacketClientGCMsg
+{
+    public .ctor(uint eMsg, byte[] data);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public bool get_IsProto();
+    public uint get_MsgType();
+    public SteamKit2.JobID get_SourceJobID();
+    public SteamKit2.JobID get_TargetJobID();
+    public byte[] GetData();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
+public sealed class SteamKit2.GC.PacketClientGCMsgProtobuf
+{
+    public .ctor(uint eMsg, byte[] data);
+    public bool Equals(object obj);
+    protected void Finalize();
+    public bool get_IsProto();
+    public uint get_MsgType();
+    public SteamKit2.JobID get_SourceJobID();
+    public SteamKit2.JobID get_TargetJobID();
+    public byte[] GetData();
+    public int GetHashCode();
+    public Type GetType();
+    protected object MemberwiseClone();
+    public string ToString();
+}
+
