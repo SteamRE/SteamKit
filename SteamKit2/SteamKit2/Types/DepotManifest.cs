@@ -4,6 +4,7 @@
  */
 
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Hashing;
@@ -194,21 +195,70 @@ namespace SteamKit2
             }
 
             DebugLog.Assert( Files != null, nameof( DepotManifest ), "Files was null when attempting to decrypt filenames." );
+            DebugLog.Assert( encryptionKey.Length == 32, nameof( DepotManifest ), $"Decrypt filnames used with non 32 byte key!" );
 
-            foreach (var file in Files)
+            // This was copypasted from <see cref="CryptoHelper.SymmetricDecrypt"/> to avoid allocating Aes instance for every filename
+            using var aes = Aes.Create();
+            aes.BlockSize = 128;
+            aes.KeySize = 256;
+            aes.Key = encryptionKey;
+
+            Span<byte> iv = stackalloc byte[ 16 ];
+            var filenameLength = 0;
+            var bufferDecoded = ArrayPool<byte>.Shared.Rent( 256 );
+            var bufferDecrypted = ArrayPool<byte>.Shared.Rent( 256 );
+
+            try
             {
-                byte[] enc_filename = Convert.FromBase64String(file.FileName);
-                byte[] filename;
-                try
+                foreach ( var file in Files )
                 {
-                    filename = CryptoHelper.SymmetricDecrypt(enc_filename, encryptionKey);
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
+                    var decodedLength = file.FileName.Length / 4 * 3; // This may be higher due to padding
 
-                file.FileName = Encoding.UTF8.GetString( filename ).TrimEnd( '\0' ).Replace(altDirChar, Path.DirectorySeparatorChar);
+                    // Majority of filenames are short, even when they are encrypted and base64 encoded,
+                    // so this resize will be hit *very* rarely
+                    if ( decodedLength > bufferDecoded.Length )
+                    {
+                        ArrayPool<byte>.Shared.Return( bufferDecoded );
+                        bufferDecoded = ArrayPool<byte>.Shared.Rent( decodedLength );
+
+                        ArrayPool<byte>.Shared.Return( bufferDecrypted );
+                        bufferDecrypted = ArrayPool<byte>.Shared.Rent( decodedLength );
+                    }
+
+                    if ( !Convert.TryFromBase64Chars( file.FileName, bufferDecoded, out decodedLength ) )
+                    {
+                        DebugLog.Assert( false, nameof( DepotManifest ), "Failed to base64 decode the filename." );
+                        return false;
+                    }
+
+                    try
+                    {
+                        var encryptedFilename = bufferDecoded.AsSpan()[ ..decodedLength ];
+                        aes.DecryptEcb( encryptedFilename[ ..iv.Length ], iv, PaddingMode.None );
+                        filenameLength = aes.DecryptCbc( encryptedFilename[ iv.Length.. ], iv, bufferDecrypted, PaddingMode.PKCS7 );
+                    }
+                    catch ( Exception )
+                    {
+                        DebugLog.Assert( false, nameof( DepotManifest ), "Failed to decrypt the filename." );
+                        return false;
+                    }
+
+                    // Trim the ending null byte, safe for UTF-8
+                    if ( filenameLength > 0 && bufferDecrypted[ filenameLength ] == 0 )
+                    {
+                        filenameLength--;
+                    }
+
+                    // ASCII is subset of UTF-8, so it safe to replace the raw bytes here
+                    MemoryExtensions.Replace( bufferDecrypted.AsSpan(), ( byte )altDirChar, ( byte )Path.DirectorySeparatorChar );
+
+                    file.FileName = Encoding.UTF8.GetString( bufferDecrypted, 0, filenameLength );
+                }
+            }
+            finally
+            {
+                ArrayPool<byte>.Shared.Return( bufferDecoded );
+                ArrayPool<byte>.Shared.Return( bufferDecrypted );
             }
 
             // Sort file entries alphabetically because that's what Steam does
