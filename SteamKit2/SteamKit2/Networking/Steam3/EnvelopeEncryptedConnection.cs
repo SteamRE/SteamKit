@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.IO.Hashing;
 using System.Net;
 using System.Security.Cryptography;
@@ -10,7 +11,7 @@ namespace SteamKit2
     {
         public EnvelopeEncryptedConnection( IConnection inner, EUniverse universe, ILogContext log, IDebugNetworkListener? debugNetworkListener )
         {
-            this.inner = inner ?? throw new ArgumentNullException( nameof(inner) );
+            this.inner = inner ?? throw new ArgumentNullException( nameof( inner ) );
             this.universe = universe;
             this.log = log ?? throw new ArgumentNullException( nameof( log ) );
             this.debugNetworkListener = debugNetworkListener;
@@ -24,7 +25,7 @@ namespace SteamKit2
         readonly EUniverse universe;
         readonly ILogContext log;
         EncryptionState state;
-        INetFilterEncryption? encryption;
+        NetFilterEncryptionWithHMAC? encryption;
         IDebugNetworkListener? debugNetworkListener;
 
         public EndPoint? CurrentEndPoint => inner.CurrentEndPoint;
@@ -47,14 +48,26 @@ namespace SteamKit2
 
         public IPAddress? GetLocalIP() => inner.GetLocalIP();
 
-        public void Send( byte[] data )
+        public void Send( Memory<byte> data )
         {
-            if ( state == EncryptionState.Encrypted )
+            if ( state != EncryptionState.Encrypted )
             {
-                data = encryption!.ProcessOutgoing( data );
+                inner.Send( data );
+                return;
             }
 
-            inner.Send( data );
+            var buffer = ArrayPool<byte>.Shared.Rent( encryption!.CalculateMaxEncryptedDataLength( data.Length ) );
+            try
+            {
+                var length = encryption!.ProcessOutgoing( data.Span, buffer );
+                var segment = new Memory<byte>( buffer, 0, length );
+
+                inner.Send( segment );
+            }
+            finally
+            {
+                ArrayPool<byte>.Shared.Return( buffer );
+            }
         }
 
         void OnConnected( object? sender, EventArgs e )
@@ -72,18 +85,18 @@ namespace SteamKit2
 
         void OnNetMsgReceived( object? sender, NetMsgEventArgs e )
         {
-            if (state == EncryptionState.Encrypted)
+            if ( state == EncryptionState.Encrypted )
             {
                 var plaintextData = encryption!.ProcessIncoming( e.Data );
                 NetMsgReceived?.Invoke( this, e.WithData( plaintextData ) );
                 return;
             }
-            
+
             var packetMsg = CMClient.GetPacketMsg( e.Data, log );
 
             if ( packetMsg == null )
             {
-                log.LogDebug( nameof(EnvelopeEncryptedConnection), "Failed to parse message during channel setup, shutting down connection" );
+                log.LogDebug( nameof( EnvelopeEncryptedConnection ), "Failed to parse message during channel setup, shutting down connection" );
                 Disconnect( userInitiated: false );
                 return;
             }
@@ -99,7 +112,7 @@ namespace SteamKit2
 
             if ( !IsExpectedEMsg( packetMsg.MsgType ) )
             {
-                log.LogDebug( nameof(EnvelopeEncryptedConnection), "Rejected EMsg: {0} during channel setup", packetMsg.MsgType );
+                log.LogDebug( nameof( EnvelopeEncryptedConnection ), "Rejected EMsg: {0} during channel setup", packetMsg.MsgType );
                 return;
             }
 
@@ -114,7 +127,7 @@ namespace SteamKit2
                     break;
             }
         }
-        
+
         void HandleEncryptRequest( IPacketMsg packetMsg )
         {
             var request = new Msg<MsgChannelEncryptRequest>( packetMsg );
@@ -122,49 +135,37 @@ namespace SteamKit2
             var connectedUniverse = request.Body.Universe;
             var protoVersion = request.Body.ProtocolVersion;
 
-            log.LogDebug( nameof(EnvelopeEncryptedConnection), "Got encryption request. Universe: {0} Protocol ver: {1}", connectedUniverse, protoVersion );
-            DebugLog.Assert( protoVersion == 1, nameof(EnvelopeEncryptedConnection), "Encryption handshake protocol version mismatch!" );
-            DebugLog.Assert( connectedUniverse == universe, nameof(EnvelopeEncryptedConnection), FormattableString.Invariant( $"Expected universe {universe} but server reported universe {connectedUniverse}" ) );
+            log.LogDebug( nameof( EnvelopeEncryptedConnection ), "Got encryption request. Universe: {0} Protocol ver: {1}", connectedUniverse, protoVersion );
+            DebugLog.Assert( protoVersion == 1, nameof( EnvelopeEncryptedConnection ), "Encryption handshake protocol version mismatch!" );
+            DebugLog.Assert( connectedUniverse == universe, nameof( EnvelopeEncryptedConnection ), FormattableString.Invariant( $"Expected universe {universe} but server reported universe {connectedUniverse}" ) );
+            DebugLog.Assert( request.Payload.Length >= 16, nameof( EnvelopeEncryptedConnection ), "Encryption handshake has a payload that is less than 16 bytes" );
 
-            byte[]? randomChallenge;
-            if ( request.Payload.Length >= 16 )
-            {
-                randomChallenge = request.Payload.ToArray();
-            }
-            else
-            {
-                randomChallenge = null;
-            }
+            var randomChallenge = request.Payload.ToArray();
 
             var publicKey = KeyDictionary.GetPublicKey( connectedUniverse );
 
             if ( publicKey == null )
             {
-                log.LogDebug( nameof(EnvelopeEncryptedConnection), "HandleEncryptRequest got request for invalid universe! Universe: {0} Protocol ver: {1}", connectedUniverse, protoVersion );
+                log.LogDebug( nameof( EnvelopeEncryptedConnection ), "HandleEncryptRequest got request for invalid universe! Universe: {0} Protocol ver: {1}", connectedUniverse, protoVersion );
 
                 Disconnect( userInitiated: false );
                 return;
             }
 
             var response = new Msg<MsgChannelEncryptResponse>();
-            
+
             var tempSessionKey = RandomNumberGenerator.GetBytes( 32 );
             byte[] encryptedHandshakeBlob;
-            
-            using ( var rsa = new RSACrypto( publicKey ) )
-            {
-                if ( randomChallenge != null )
-                {
-                    var blobToEncrypt = new byte[ tempSessionKey.Length + randomChallenge.Length ];
-                    Array.Copy( tempSessionKey, blobToEncrypt, tempSessionKey.Length );
-                    Array.Copy( randomChallenge, 0, blobToEncrypt, tempSessionKey.Length, randomChallenge.Length );
 
-                    encryptedHandshakeBlob = rsa.Encrypt( blobToEncrypt );
-                }
-                else
-                {
-                    encryptedHandshakeBlob = rsa.Encrypt( tempSessionKey );
-                }
+            using ( var rsa = RSA.Create() )
+            {
+                rsa.ImportSubjectPublicKeyInfo( publicKey, out _ );
+
+                var blobToEncrypt = new byte[ tempSessionKey.Length + randomChallenge.Length ];
+                Array.Copy( tempSessionKey, blobToEncrypt, tempSessionKey.Length );
+                Array.Copy( randomChallenge, 0, blobToEncrypt, tempSessionKey.Length, randomChallenge.Length );
+
+                encryptedHandshakeBlob = rsa.Encrypt( blobToEncrypt, RSAEncryptionPadding.OaepSHA1 );
             }
 
             var keyCrc = Crc32.Hash( encryptedHandshakeBlob );
@@ -172,15 +173,8 @@ namespace SteamKit2
             response.Write( encryptedHandshakeBlob );
             response.Write( keyCrc );
             response.Write( ( uint )0 );
-            
-            if (randomChallenge != null)
-            {
-                encryption = new NetFilterEncryptionWithHMAC( tempSessionKey, log );
-            }
-            else
-            {
-                encryption = new NetFilterEncryption( tempSessionKey, log );
-            }
+
+            encryption = new NetFilterEncryptionWithHMAC( tempSessionKey, log );
 
             var serialized = response.Serialize();
 
@@ -201,7 +195,7 @@ namespace SteamKit2
         {
             var result = new Msg<MsgChannelEncryptResult>( packetMsg );
 
-            log.LogDebug( nameof(EnvelopeEncryptedConnection), "Encryption result: {0}", result.Body.Result );
+            log.LogDebug( nameof( EnvelopeEncryptedConnection ), "Encryption result: {0}", result.Body.Result );
             DebugLog.Assert( encryption != null, nameof( EnvelopeEncryptedConnection ), "Encryption is null" );
 
             if ( result.Body.Result == EResult.OK && encryption != null )
@@ -211,7 +205,7 @@ namespace SteamKit2
             }
             else
             {
-                log.LogDebug( nameof(EnvelopeEncryptedConnection), "Encryption channel setup failed" );
+                log.LogDebug( nameof( EnvelopeEncryptedConnection ), "Encryption channel setup failed" );
                 Disconnect( userInitiated: false );
             }
         }

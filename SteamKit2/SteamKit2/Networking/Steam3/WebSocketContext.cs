@@ -88,12 +88,11 @@ namespace SteamKit2
                 }
             }
 
-            public async Task SendAsync(byte[] data)
+            public async Task SendAsync(Memory<byte> data)
             {
-                var segment = new ArraySegment<byte>(data, 0, data.Length);
                 try
                 {
-                    await socket.SendAsync(segment, WebSocketMessageType.Binary, true, cts.Token).ConfigureAwait(false);
+                    await socket.SendAsync(data, WebSocketMessageType.Binary, true, cts.Token).ConfigureAwait(false);
                 }
                 catch (WebSocketException ex)
                 {

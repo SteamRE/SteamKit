@@ -176,12 +176,12 @@ namespace SteamKit2
         /// Serializes and sends the provided data to the server in as many packets as is necessary.
         /// </summary>
         /// <param name="data">The data to send to the server</param>
-        public void Send( byte[] data )
+        public void Send( Memory<byte> data )
         {
             if ( state != (int)State.Connected )
                 return;
 
-            using var ms = new MemoryStream( data );
+            using var ms = new MemoryStream( data.ToArray() ); // TODO: Remove memorystream
             SendData( ms );
         }
 
