@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using SteamKit2;
 using Xunit;
 
@@ -14,7 +15,7 @@ namespace Tests
         [Fact]
         public void WebAPIHasDefaultTimeout()
         {
-            var iface = WebAPI.GetInterface( new Uri("https://whatever/"), "ISteamWhatever" );
+            var iface = WebAPI.GetInterface( new Uri( "https://whatever/" ), "ISteamWhatever" );
 
             Assert.Equal( iface.Timeout, TimeSpan.FromSeconds( 100 ) );
         }
@@ -22,7 +23,7 @@ namespace Tests
         [Fact]
         public void WebAPIAsyncHasDefaultTimeout()
         {
-            var iface = WebAPI.GetAsyncInterface( new Uri("https://whatever/"), "ISteamWhatever" );
+            var iface = WebAPI.GetAsyncInterface( new Uri( "https://whatever/" ), "ISteamWhatever" );
 
             Assert.Equal( iface.Timeout, TimeSpan.FromSeconds( 100 ) );
         }
@@ -30,26 +31,26 @@ namespace Tests
         [Fact]
         public void SteamConfigWebAPIInterface()
         {
-            var config = SteamConfiguration.Create(b =>
-                b.WithWebAPIBaseAddress(new Uri("http://example.com"))
-                 .WithWebAPIKey("hello world"));
+            var config = SteamConfiguration.Create( b =>
+                b.WithWebAPIBaseAddress( new Uri( "http://example.com" ) )
+                 .WithWebAPIKey( "hello world" ) );
 
-            var iface = config.GetAsyncWebAPIInterface("TestInterface");
+            var iface = config.GetAsyncWebAPIInterface( "TestInterface" );
 
-            Assert.Equal("TestInterface", iface.iface);
-            Assert.Equal("hello world", iface.apiKey);
-            Assert.Equal(new Uri("http://example.com"), iface.httpClient.BaseAddress);
+            Assert.Equal( "TestInterface", iface.iface );
+            Assert.Equal( "hello world", iface.apiKey );
+            Assert.Equal( new Uri( "http://example.com" ), iface.httpClient.BaseAddress );
         }
 
         [Fact]
         public async Task ThrowsWebAPIRequestExceptionIfRequestUnsuccessful()
         {
             var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( new ServiceUnavailableHttpMessageHandler() ) ) );
-            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" ); 
+            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
-           await Assert.ThrowsAsync<WebAPIRequestException>(() => (Task)iface.PerformFooOperation());
+            await Assert.ThrowsAsync<WebAPIRequestException>( () => ( Task )iface.PerformFooOperation() );
         }
-        
+
         [Fact]
         public async Task ThrowsOnIncorrectFormatInArgsProvided()
         {
@@ -64,10 +65,10 @@ namespace Tests
                 [ "b" ] = "bar",
                 [ "format" ] = "json"
             };
-            
-            await Assert.ThrowsAsync<ArgumentException>(() => iface.CallAsync( HttpMethod.Get, "GetFoo", args: args ));
+
+            await Assert.ThrowsAsync<ArgumentException>( () => iface.CallAsync( HttpMethod.Get, "GetFoo", args: args ) );
         }
-        
+
         [Fact]
         public async Task DoesntThrowWhenCorrectFormatInArgsProvided()
         {
@@ -85,7 +86,7 @@ namespace Tests
 
             await iface.CallAsync( HttpMethod.Get, "GetFoo", args: args );
         }
-        
+
         [Fact]
         public async Task DoesntThrowWhenKeyInArgsProvided()
         {
@@ -102,10 +103,10 @@ namespace Tests
             };
 
             await iface.CallAsync( HttpMethod.Get, "GetFoo", args: args );
-            
-            Assert.Equal( "test2", args["key"] );
+
+            Assert.Equal( "test2", args[ "key" ] );
         }
-        
+
         [Fact]
         public async Task DoesntThrowOnArgumentsReuse()
         {
@@ -139,7 +140,7 @@ namespace Tests
                 Assert.Equal( HttpMethod.Get, request.Method );
                 Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
 
-                var values = request.RequestUri.ParseQueryString();
+                var values = HttpUtility.ParseQueryString( request.RequestUri.Query );
                 Assert.Equal( 3, values.Count );
                 Assert.Equal( "foo", values[ "f" ] );
                 Assert.Equal( "bar", values[ "b" ] );
@@ -174,7 +175,7 @@ namespace Tests
                 Assert.Equal( HttpMethod.Get, request.Method );
                 Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
 
-                var values = request.RequestUri.ParseQueryString();
+                var values = HttpUtility.ParseQueryString( request.RequestUri.Query );
                 Assert.Single( values );
                 Assert.Equal( "vdf", values[ "format" ] );
 
@@ -209,7 +210,8 @@ namespace Tests
                 Assert.Equal( "/IFooService/PerformFooOperation/v2", request.RequestUri.AbsolutePath );
                 Assert.Equal( HttpMethod.Put, request.Method );
 
-                var formData = await request.Content.ReadAsFormDataAsync();
+                var content = await request.Content.ReadAsStringAsync(); // This technically should be ReadAsFormDataAsync
+                var formData = HttpUtility.ParseQueryString( content );
                 Assert.Equal( 3, formData.Count );
                 Assert.Equal( "foo", formData[ "f" ] );
                 Assert.Equal( "bar", formData[ "b" ] );
@@ -228,7 +230,7 @@ namespace Tests
             using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c
                 .WithHttpClientFactory( () => new HttpClient( hookableHandler ) )
-                .WithWebAPIKey("MySecretApiKey") );
+                .WithWebAPIKey( "MySecretApiKey" ) );
 
             dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
@@ -245,7 +247,7 @@ namespace Tests
                 Assert.Equal( HttpMethod.Get, request.Method );
                 Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
 
-                var values = request.RequestUri.ParseQueryString();
+                var values = HttpUtility.ParseQueryString( request.RequestUri.Query );
                 Assert.Equal( 4, values.Count );
                 Assert.Equal( "MySecretApiKey", values[ "key" ] );
                 Assert.Equal( "foo", values[ "f" ] );
