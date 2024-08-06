@@ -438,16 +438,17 @@ namespace SteamKit2
             foreach ( var file in Files )
             {
                 var protofile = new ContentManifestPayload.FileMapping();
-                protofile.filename = file.FileName.Replace( '/', '\\' );
                 protofile.size = file.TotalSize;
                 protofile.flags = ( uint )file.Flags;
                 if ( FilenamesEncrypted )
                 {
                     // Assume the name is unmodified
+                    protofile.filename = file.FileName;
                     protofile.sha_filename = file.FileNameHash;
                 }
                 else
                 {
+                    protofile.filename = file.FileName.Replace( '/', '\\' );
                     protofile.sha_filename = SHA1.HashData( Encoding.UTF8.GetBytes( file.FileName.Replace( '/', '\\' ).ToLower() ) );
                 }
                 protofile.sha_content = file.FileHash;
@@ -512,7 +513,7 @@ namespace SteamKit2
                 Serializer.Serialize<ContentManifestPayload>( ms_payload, payload );
                 bw.Write( DepotManifest.PROTOBUF_PAYLOAD_MAGIC );
                 bw.Write( ( int )ms_payload.Length );
-                bw.Write( ms_payload.ToArray() );
+                bw.Write( ms_payload.GetBuffer().AsSpan( 0, ( int )ms_payload.Length ) );
             }
 
             // Write Protobuf metadata
@@ -521,7 +522,7 @@ namespace SteamKit2
                 Serializer.Serialize<ContentManifestMetadata>( ms_metadata, metadata );
                 bw.Write( DepotManifest.PROTOBUF_METADATA_MAGIC );
                 bw.Write( ( int )ms_metadata.Length );
-                bw.Write( ms_metadata.ToArray() );
+                bw.Write( ms_metadata.GetBuffer().AsSpan( 0, ( int )ms_metadata.Length ) );
             }
 
             // Write empty signature section
