@@ -80,10 +80,11 @@ public sealed class SteamKit2.CallbackManager
     public int GetHashCode();
     public Type GetType();
     protected object MemberwiseClone();
-    public void RunCallbacks();
+    public bool RunCallbacks();
     public void RunWaitAllCallbacks(TimeSpan timeout);
+    public System.Threading.Tasks.Task RunWaitCallbackAsync(System.Threading.CancellationToken cancellationToken);
     public void RunWaitCallbacks();
-    public void RunWaitCallbacks(TimeSpan timeout);
+    public bool RunWaitCallbacks(TimeSpan timeout);
     public IDisposable Subscribe<SteamKit2.TCallback>(Action`1[[SteamKit2.TCallback]] callbackFunc);
     public IDisposable Subscribe<SteamKit2.TCallback>(SteamKit2.JobID jobID, Action`1[[SteamKit2.TCallback]] callbackFunc);
     public string ToString();
@@ -328,25 +329,13 @@ public sealed class SteamKit2.ContentServerDirectoryService
 
 public sealed class SteamKit2.CryptoHelper
 {
-    public static byte[] AdlerHash(byte[] input);
-    public static byte[] AESDecrypt(byte[] input, byte[] key, byte[] iv);
-    public static byte[] AESEncrypt(byte[] input, byte[] key, byte[] iv);
-    public static byte[] CRCHash(byte[] input);
     public bool Equals(object obj);
     protected void Finalize();
-    public static byte[] GenerateRandomBlock(int size);
     public int GetHashCode();
     public Type GetType();
     protected object MemberwiseClone();
-    public static byte[] SHAHash(byte[] input);
     public static byte[] SymmetricDecrypt(byte[] input, byte[] key);
-    public static byte[] SymmetricDecryptECB(byte[] input, byte[] key);
-    public static byte[] SymmetricDecryptHMACIV(byte[] input, byte[] key, byte[] hmacSecret);
-    public static byte[] SymmetricEncrypt(byte[] input, byte[] key);
-    public static byte[] SymmetricEncryptWithHMACIV(byte[] input, byte[] key, byte[] hmacSecret);
-    public static byte[] SymmetricEncryptWithIV(byte[] input, byte[] key, byte[] iv);
     public string ToString();
-    public static byte[] VerifyAndDecryptPassword(byte[] input, string password);
 }
 
 public sealed class SteamKit2.DateUtils
@@ -398,7 +387,8 @@ public sealed class SteamKit2.DepotManifest
     public Type GetType();
     public static SteamKit2.DepotManifest LoadFromFile(string filename);
     protected object MemberwiseClone();
-    public bool SaveToFile(string filename);
+    public void SaveToFile(string filename);
+    public void Serialize(System.IO.Stream output);
     public string ToString();
 }
 
@@ -916,19 +906,6 @@ public sealed class SteamKit2.PublishedFileID
     public string ToString();
 }
 
-public class SteamKit2.RSACrypto
-{
-    public .ctor(byte[] key);
-    public void Dispose();
-    public byte[] Encrypt(byte[] input);
-    public bool Equals(object obj);
-    protected void Finalize();
-    public int GetHashCode();
-    public Type GetType();
-    protected object MemberwiseClone();
-    public string ToString();
-}
-
 public sealed class SteamKit2.SimpleConsoleDebugListener
 {
     public .ctor();
@@ -943,6 +920,7 @@ public sealed class SteamKit2.SimpleConsoleDebugListener
 
 public sealed class SteamKit2.SteamApps
 {
+    public .ctor();
     public SteamKit2.AsyncJob`1[[SteamKit2.CheckAppBetaPasswordCallback]] CheckAppBetaPassword(uint app, string password);
     public bool Equals(object obj);
     protected void Finalize();
@@ -978,7 +956,6 @@ public sealed class SteamKit2.SteamClient
     public void Disconnect();
     public bool Equals(object obj);
     protected void Finalize();
-    public void FreeLastCallback();
     public SteamKit2.Authentication.SteamAuthentication get_Authentication();
     public Nullable`1[[uint]] get_CellID();
     public SteamKit2.SteamConfiguration get_Configuration();
@@ -995,9 +972,7 @@ public sealed class SteamKit2.SteamClient
     public ulong get_SessionToken();
     public SteamKit2.SteamID get_SteamID();
     public SteamKit2.EUniverse get_Universe();
-    public System.Collections.Generic.IEnumerable`1[[SteamKit2.ICallbackMsg]] GetAllCallbacks(bool freeLast, TimeSpan timeout);
     public SteamKit2.ICallbackMsg GetCallback();
-    public SteamKit2.ICallbackMsg GetCallback(bool freeLast);
     public SteamKit2.T GetHandler<SteamKit2.T>();
     public int GetHashCode();
     public SteamKit2.JobID GetNextJobID();
@@ -1014,13 +989,13 @@ public sealed class SteamKit2.SteamClient
     public void set_DebugNetworkListener(SteamKit2.IDebugNetworkListener value);
     public string ToString();
     public SteamKit2.ICallbackMsg WaitForCallback();
-    public SteamKit2.ICallbackMsg WaitForCallback(bool freeLast);
-    public SteamKit2.ICallbackMsg WaitForCallback(bool freeLast, TimeSpan timeout);
     public SteamKit2.ICallbackMsg WaitForCallback(TimeSpan timeout);
+    public System.Threading.Tasks.Task`1[[SteamKit2.ICallbackMsg]] WaitForCallbackAsync(System.Threading.CancellationToken cancellationToken);
 }
 
 public sealed class SteamKit2.SteamCloud
 {
+    public .ctor();
     public bool Equals(object obj);
     protected void Finalize();
     protected SteamKit2.SteamClient get_Client();
@@ -1151,6 +1126,7 @@ public sealed class SteamKit2.SteamFriends
 
 public sealed class SteamKit2.SteamGameCoordinator
 {
+    public .ctor();
     public bool Equals(object obj);
     protected void Finalize();
     protected SteamKit2.SteamClient get_Client();
@@ -1166,6 +1142,7 @@ public sealed class SteamKit2.SteamGameCoordinator
 
 public sealed class SteamKit2.SteamGameServer
 {
+    public .ctor();
     public bool Equals(object obj);
     protected void Finalize();
     protected SteamKit2.SteamClient get_Client();
@@ -1236,6 +1213,9 @@ public class SteamKit2.SteamID
 
 public class SteamKit2.SteamKitWebRequestException
 {
+    public .ctor();
+    public .ctor(string message);
+    public .ctor(string message, Exception innerException);
     public .ctor(string message, System.Net.Http.HttpResponseMessage response);
     protected void add_SerializeObjectState(EventHandler`1[[System.Runtime.Serialization.SafeSerializationEventArgs]] value);
     public bool Equals(object obj);
@@ -1267,6 +1247,7 @@ public class SteamKit2.SteamKitWebRequestException
 
 public sealed class SteamKit2.SteamMasterServer
 {
+    public .ctor();
     public bool Equals(object obj);
     protected void Finalize();
     protected SteamKit2.SteamClient get_Client();
@@ -1282,6 +1263,7 @@ public sealed class SteamKit2.SteamMasterServer
 
 public class SteamKit2.SteamMatchmaking
 {
+    public .ctor();
     public SteamKit2.AsyncJob`1[[SteamKit2.CreateLobbyCallback]] CreateLobby(uint appId, SteamKit2.ELobbyType lobbyType, int maxMembers, int lobbyFlags, System.Collections.Generic.IReadOnlyDictionary`2[[string, string]] metadata);
     public bool Equals(object obj);
     protected void Finalize();
@@ -1307,6 +1289,7 @@ public class SteamKit2.SteamMatchmaking
 
 public sealed class SteamKit2.SteamNetworking
 {
+    public .ctor();
     public bool Equals(object obj);
     protected void Finalize();
     protected SteamKit2.SteamClient get_Client();
@@ -1322,6 +1305,7 @@ public sealed class SteamKit2.SteamNetworking
 
 public sealed class SteamKit2.SteamScreenshots
 {
+    public .ctor();
     public SteamKit2.AsyncJob`1[[SteamKit2.ScreenshotAddedCallback]] AddScreenshot(SteamKit2.ScreenshotDetails details);
     public bool Equals(object obj);
     protected void Finalize();
@@ -1335,25 +1319,9 @@ public sealed class SteamKit2.SteamScreenshots
     public string ToString();
 }
 
-public sealed class SteamKit2.SteamTrading
-{
-    public void CancelTrade(SteamKit2.SteamID user);
-    public bool Equals(object obj);
-    protected void Finalize();
-    protected SteamKit2.SteamClient get_Client();
-    protected bool get_ExpectDisconnection();
-    public int GetHashCode();
-    public Type GetType();
-    public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
-    protected object MemberwiseClone();
-    public void RespondToTrade(uint tradeId, bool acceptTrade);
-    protected void set_ExpectDisconnection(bool value);
-    public string ToString();
-    public void Trade(SteamKit2.SteamID user);
-}
-
 public class SteamKit2.SteamUnifiedMessages
 {
+    public .ctor();
     public SteamKit2.UnifiedService`1[[SteamKit2.TService]] CreateService<SteamKit2.TService>();
     public bool Equals(object obj);
     protected void Finalize();
@@ -1364,7 +1332,6 @@ public class SteamKit2.SteamUnifiedMessages
     public void HandleMsg(SteamKit2.IPacketMsg packetMsg);
     protected object MemberwiseClone();
     public SteamKit2.AsyncJob`1[[SteamKit2.ServiceMethodResponse]] SendMessage<SteamKit2.TRequest>(string name, SteamKit2.TRequest message);
-    public SteamKit2.AsyncJob`1[[SteamKit2.ServiceMethodResponse]] SendMessage<SteamKit2.TRequest>(string name, SteamKit2.TRequest message, bool isNotification);
     public void SendNotification<SteamKit2.TRequest>(string name, SteamKit2.TRequest message);
     protected void set_ExpectDisconnection(bool value);
     public string ToString();
@@ -1372,7 +1339,7 @@ public class SteamKit2.SteamUnifiedMessages
 
 public sealed class SteamKit2.SteamUser
 {
-    public void AcceptNewLoginKey(SteamKit2.LoginKeyCallback callback);
+    public .ctor();
     public bool Equals(object obj);
     protected void Finalize();
     protected SteamKit2.SteamClient get_Client();
@@ -1386,14 +1353,13 @@ public sealed class SteamKit2.SteamUser
     public void LogOnAnonymous();
     public void LogOnAnonymous(SteamKit2.AnonymousLogOnDetails details);
     protected object MemberwiseClone();
-    public SteamKit2.AsyncJob`1[[SteamKit2.WebAPIUserNonceCallback]] RequestWebAPIUserNonce();
-    public void SendMachineAuthResponse(SteamKit2.MachineAuthDetails details);
     protected void set_ExpectDisconnection(bool value);
     public string ToString();
 }
 
 public sealed class SteamKit2.SteamUserStats
 {
+    public .ctor();
     public SteamKit2.AsyncJob`1[[SteamKit2.FindOrCreateLeaderboardCallback]] CreateLeaderboard(uint appId, string name, SteamKit2.ELeaderboardSortMethod sortMethod, SteamKit2.ELeaderboardDisplayType displayType);
     public bool Equals(object obj);
     protected void Finalize();
@@ -1412,6 +1378,7 @@ public sealed class SteamKit2.SteamUserStats
 
 public sealed class SteamKit2.SteamWorkshop
 {
+    public .ctor();
     public SteamKit2.AsyncJob`1[[SteamKit2.UserActionPublishedFilesCallback]] EnumeratePublishedFilesByUserAction(SteamKit2.EnumerationUserDetails details);
     public bool Equals(object obj);
     protected void Finalize();
@@ -1483,6 +1450,9 @@ public sealed class SteamKit2.WebAPI
 
 public sealed class SteamKit2.WebAPIRequestException
 {
+    public .ctor();
+    public .ctor(string message);
+    public .ctor(string message, Exception innerException);
     public .ctor(string message, System.Net.Http.HttpResponseMessage response);
     protected void add_SerializeObjectState(EventHandler`1[[System.Runtime.Serialization.SafeSerializationEventArgs]] value);
     public bool Equals(object obj);
@@ -1527,6 +1497,8 @@ public sealed class SteamKit2.Authentication.AccessTokenGenerateResult
 public sealed class SteamKit2.Authentication.AuthenticationException
 {
     public .ctor();
+    public .ctor(string message);
+    public .ctor(string message, Exception innerException);
     public .ctor(string message, SteamKit2.EResult result);
     protected void add_SerializeObjectState(EventHandler`1[[System.Runtime.Serialization.SafeSerializationEventArgs]] value);
     public bool Equals(object obj);
