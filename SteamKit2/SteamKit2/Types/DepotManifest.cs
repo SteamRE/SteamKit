@@ -220,6 +220,16 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Serializes depot manifest and saves the output to a file.
+        /// </summary>
+        /// <param name="filename">Output file name.</param>
+        public void SaveToFile( string filename )
+        {
+            using var fs = File.Open( filename, FileMode.Create );
+            Serialize( fs );
+        }
+
+        /// <summary>
         /// Loads binary manifest from a file and deserializes it.
         /// </summary>
         /// <param name="filename">Input file name.</param>

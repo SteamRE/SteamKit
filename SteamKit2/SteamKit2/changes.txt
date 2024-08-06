@@ -16,9 +16,9 @@ BREAKING CHANGES
   * `FreeLastCallback` and `GetAllCallbacks` have been removed.
   * Calling  `GetCallback` and `WaitForCallback` now always dequeues a callback, there is no more peek and "freeLast".
 * `DepotManifest.ChunkData.Checksum` is now a `uint` instead of `byte[4]`.
+* `DepotManifest.SaveToFile` now returns void.
 * Removed obsolete methods and enum values.
 * Removed Artifact and Underlords generated protobufs.
-* Removed `DepotManifest.SaveToFile`, use `DepotManifest.Serialize(stream)` instead.
 * Removed `SteamTrading` handler.
 
 ------------------------------------------------------------------------------
