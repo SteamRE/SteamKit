@@ -20,6 +20,7 @@ BREAKING CHANGES
 * Removed obsolete methods and enum values.
 * Removed Artifact and Underlords generated protobufs.
 * Removed `SteamTrading` handler.
+* Removed all methods from `CryptoHelper` except for `SymmetricDecrypt`.
 
 ------------------------------------------------------------------------------
 v 2.5.0			November 6 2023
