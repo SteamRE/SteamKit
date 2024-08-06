@@ -596,10 +596,8 @@ namespace SteamKit2
 
             // If we receive a packet that we've already processed (e.g. it got resent due to a lost ack)
             // or that is already waiting to be processed, do nothing.
-            if ( packet.Header.SeqThis <= inSeqHandled || inPackets.ContainsKey(packet.Header.SeqThis) )
+            if ( packet.Header.SeqThis <= inSeqHandled || !inPackets.TryAdd( packet.Header.SeqThis, packet ) )
                 return;
-
-            inPackets.Add(packet.Header.SeqThis, packet);
 
             while ( DispatchMessage() ) ;
         }
