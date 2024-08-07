@@ -6,6 +6,7 @@
 
 
 using System;
+using System.Buffers.Binary;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Sockets;
@@ -15,7 +16,7 @@ namespace SteamKit2
 {
     static class NetHelpers
     {
-        public static IPAddress GetLocalIP(Socket activeSocket)
+        public static IPAddress GetLocalIP( Socket activeSocket )
         {
             var ipEndPoint = activeSocket.LocalEndPoint as IPEndPoint;
 
@@ -27,18 +28,18 @@ namespace SteamKit2
 
         public static IPAddress GetIPAddress( uint ipAddr )
         {
-            byte[] addrBytes = BitConverter.GetBytes( ipAddr );
-            Array.Reverse( addrBytes );
+            Span<byte> addrBytes = stackalloc byte[ 4 ];
+            BinaryPrimitives.WriteUInt32BigEndian( addrBytes, ipAddr );
 
             return new IPAddress( addrBytes );
         }
 
         public static uint GetIPAddressAsUInt( IPAddress ipAddr )
         {
-            byte[] addrBytes = ipAddr.GetAddressBytes();
-            Array.Reverse( addrBytes );
+            Span<byte> addrBytes = stackalloc byte[ 4 ];
+            ipAddr.TryWriteBytes( addrBytes, out _ );
 
-            return BitConverter.ToUInt32( addrBytes, 0 );
+            return BinaryPrimitives.ReadUInt32BigEndian( addrBytes );
         }
 
         public static IPAddress GetIPAddress( this CMsgIPAddress ipAddr )
@@ -56,17 +57,14 @@ namespace SteamKit2
         public static CMsgIPAddress GetMsgIPAddress( IPAddress ipAddr )
         {
             var msgIpAddress = new CMsgIPAddress();
-            byte[] addrBytes = ipAddr.GetAddressBytes();
 
             if ( ipAddr.AddressFamily == AddressFamily.InterNetworkV6 )
             {
-                msgIpAddress.v6 = addrBytes;
+                msgIpAddress.v6 = ipAddr.GetAddressBytes();
             }
             else
             {
-                Array.Reverse( addrBytes );
-
-                msgIpAddress.v4 = BitConverter.ToUInt32( addrBytes, 0 );
+                msgIpAddress.v4 = GetIPAddressAsUInt( ipAddr );
             }
 
             return msgIpAddress;
