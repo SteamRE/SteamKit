@@ -28,10 +28,7 @@ namespace SteamKit2
 
         public static IPAddress GetIPAddress( uint ipAddr )
         {
-            Span<byte> addrBytes = stackalloc byte[ 4 ];
-            BitConverter.TryWriteBytes( addrBytes, IPAddress.NetworkToHostOrder( Unsafe.BitCast<uint, int>( ipAddr ) ) );
-            
-            return new IPAddress( addrBytes );
+            return new IPAddress( IPAddress.NetworkToHostOrder( Unsafe.BitCast<uint, int>( ipAddr ) ) );
         }
 
         public static uint GetIPAddressAsUInt( IPAddress ipAddr )
