@@ -6,10 +6,10 @@
 
 
 using System;
-using System.Buffers.Binary;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -22,15 +22,15 @@ namespace SteamKit2
 
             if ( ipEndPoint == null || ipEndPoint.Address == IPAddress.Any )
                 throw new InvalidOperationException( "Socket not connected" );
-
+            
             return ipEndPoint.Address;
         }
 
         public static IPAddress GetIPAddress( uint ipAddr )
         {
             Span<byte> addrBytes = stackalloc byte[ 4 ];
-            BinaryPrimitives.WriteUInt32BigEndian( addrBytes, ipAddr );
-
+            BitConverter.TryWriteBytes( addrBytes, IPAddress.NetworkToHostOrder( Unsafe.BitCast<uint, int>( ipAddr ) ) );
+            
             return new IPAddress( addrBytes );
         }
 
@@ -38,8 +38,8 @@ namespace SteamKit2
         {
             Span<byte> addrBytes = stackalloc byte[ 4 ];
             ipAddr.TryWriteBytes( addrBytes, out _ );
-
-            return BinaryPrimitives.ReadUInt32BigEndian( addrBytes );
+            
+            return Unsafe.BitCast<int, uint>( IPAddress.NetworkToHostOrder( BitConverter.ToInt32( addrBytes ) ) );
         }
 
         public static IPAddress GetIPAddress( this CMsgIPAddress ipAddr )
