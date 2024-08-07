@@ -61,7 +61,7 @@ namespace SteamKit2
         /// <returns>Returns the manifest request code, it may be zero if it was not granted.</returns>
         public async Task<ulong> GetManifestRequestCode( uint depotId, uint appId, ulong manifestId, string? branch = null, string? branchPasswordHash = null )
         {
-            if ( string.Equals( branch, "public", StringComparison.InvariantCultureIgnoreCase ) )
+            if ( string.Equals( branch, "public", StringComparison.OrdinalIgnoreCase ) )
             {
                 branch = null;
                 branchPasswordHash = null;
