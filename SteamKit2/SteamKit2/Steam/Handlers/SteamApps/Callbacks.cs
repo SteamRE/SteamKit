@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Text;
 using SteamKit2.Internal;
 
@@ -154,9 +153,12 @@ namespace SteamKit2
 
                 this.Result = ( EResult )msg.eresult;
 
-                var list = msg.licenses
-                    .Select( l => new License( l ) )
-                    .ToList();
+                var list = new License[ msg.licenses.Count ];
+
+                for ( var i = 0; i < list.Length; i++ )
+                {
+                    list[ i ] = new License( msg.licenses[ i ] );
+                }
 
                 this.LicenseList = new ReadOnlyCollection<License>( list );
             }
