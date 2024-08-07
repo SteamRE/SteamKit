@@ -33,7 +33,7 @@ namespace SteamKit2
 
         public static string EncodeHexString(byte[] input)
         {
-            return Convert.ToHexString(input).ToLower();
+            return Convert.ToHexString(input).ToLowerInvariant();
         }
 
         [return: NotNullIfNotNull( nameof( hex ) )]
