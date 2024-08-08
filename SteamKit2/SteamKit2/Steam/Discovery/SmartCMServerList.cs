@@ -267,23 +267,21 @@ namespace SteamKit2.Discovery
                 // isn't a problem.
                 ResetOldScores();
 
-                var query = 
-                    from o in servers.Select((server, index) => new { server, index })
-                    let server = o.server
-                    let index = o.index
-                    where server.Protocol.HasFlagsFast( supportedProtocolTypes )
-                    let lastBadConnectionTime = server.LastBadConnectionTimeUtc.GetValueOrDefault()
-                    orderby lastBadConnectionTime, index
-                    select new { server.Record.EndPoint, server.Protocol };
-                var result = query.FirstOrDefault();
-                
+                var result = servers
+                    .Where( o => o.Protocol.HasFlagsFast( supportedProtocolTypes ) )
+                    .Select( static ( server, index ) => (Server: server, Index: index) )
+                    .OrderBy( static o => o.Server.LastBadConnectionTimeUtc.GetValueOrDefault() )
+                    .ThenBy( static o => o.Index )
+                    .Select( static o => o.Server )
+                    .FirstOrDefault();
+
                 if ( result == null )
                 {
                     return null;
                 }
 
-                DebugWrite( $"Next server candidate: {result.EndPoint} ({result.Protocol})" );
-                return new ServerRecord( result.EndPoint, result.Protocol );
+                DebugWrite( $"Next server candidate: {result.Record.EndPoint} ({result.Protocol})" );
+                return new ServerRecord( result.Record.EndPoint, result.Protocol );
             }
         }
 
