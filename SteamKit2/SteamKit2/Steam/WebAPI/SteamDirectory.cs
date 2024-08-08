@@ -72,16 +72,6 @@ namespace SteamKit2
 
             var serverRecords = new List<ServerRecord>( capacity: socketList.Children.Count + websocketList.Children.Count );
 
-                foreach ( var child in socketList.Children )
-                {
-                    if ( child.Value is null || !ServerRecord.TryCreateSocketServer( child.Value, out var record ))
-                    {
-                        continue;
-                    }
-
-                    serverRecords.Add( record );
-                }
-
             foreach ( var child in websocketList.Children )
             {
                 if ( child.Value is null )
@@ -90,6 +80,16 @@ namespace SteamKit2
                 }
 
                 serverRecords.Add( ServerRecord.CreateWebSocketServer( child.Value ) );
+            }
+
+            foreach ( var child in socketList.Children )
+            {
+                if ( child.Value is null || !ServerRecord.TryCreateSocketServer( child.Value, out var record ) )
+                {
+                    continue;
+                }
+
+                serverRecords.Add( record );
             }
 
             return serverRecords.AsReadOnly();
