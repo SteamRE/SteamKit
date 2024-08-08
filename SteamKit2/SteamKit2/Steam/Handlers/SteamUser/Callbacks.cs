@@ -495,7 +495,7 @@ namespace SteamKit2
                 var playingSessionState = new ClientMsgProtobuf<CMsgClientPlayingSessionState>( packetMsg );
                 var msg = playingSessionState.Body;
 
-                JobID = packetMsg.TargetJobID;
+                JobID = playingSessionState.TargetJobID;
                 PlayingBlocked = msg.playing_blocked;
                 PlayingAppID = msg.playing_app;
             }

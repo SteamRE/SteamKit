@@ -1032,7 +1032,7 @@ namespace SteamKit2
                 var responseMsg = new ClientMsgProtobuf<CMsgClientFriendProfileInfoResponse>( packetMsg );
                 var response = responseMsg.Body;
 
-                JobID = packetMsg.TargetJobID;
+                JobID = responseMsg.TargetJobID;
 
                 Result = ( EResult )response.eresult;
 

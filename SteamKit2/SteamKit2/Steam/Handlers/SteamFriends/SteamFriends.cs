@@ -848,7 +848,7 @@ namespace SteamKit2
             // update our cache to what steam says our name is
             cache.LocalUser.Name = response.Body.player_name;
 
-            var callback = new PersonaChangeCallback( packetMsg.TargetJobID, response.Body );
+            var callback = new PersonaChangeCallback( response.TargetJobID, response.Body );
             Client.PostCallback( callback );
         }
         #endregion
