@@ -22,6 +22,9 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Files\*" />
+    <None Update="Packets\*.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
