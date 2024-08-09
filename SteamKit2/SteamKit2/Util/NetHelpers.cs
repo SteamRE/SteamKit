@@ -9,36 +9,34 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using SteamKit2.Internal;
 
 namespace SteamKit2
 {
     static class NetHelpers
     {
-        public static IPAddress GetLocalIP(Socket activeSocket)
+        public static IPAddress GetLocalIP( Socket activeSocket )
         {
             var ipEndPoint = activeSocket.LocalEndPoint as IPEndPoint;
 
             if ( ipEndPoint == null || ipEndPoint.Address == IPAddress.Any )
                 throw new InvalidOperationException( "Socket not connected" );
-
+            
             return ipEndPoint.Address;
         }
 
         public static IPAddress GetIPAddress( uint ipAddr )
         {
-            byte[] addrBytes = BitConverter.GetBytes( ipAddr );
-            Array.Reverse( addrBytes );
-
-            return new IPAddress( addrBytes );
+            return new IPAddress( IPAddress.NetworkToHostOrder( Unsafe.BitCast<uint, int>( ipAddr ) ) );
         }
 
         public static uint GetIPAddressAsUInt( IPAddress ipAddr )
         {
-            byte[] addrBytes = ipAddr.GetAddressBytes();
-            Array.Reverse( addrBytes );
-
-            return BitConverter.ToUInt32( addrBytes, 0 );
+            Span<byte> addrBytes = stackalloc byte[ 4 ];
+            ipAddr.TryWriteBytes( addrBytes, out _ );
+            
+            return Unsafe.BitCast<int, uint>( IPAddress.NetworkToHostOrder( BitConverter.ToInt32( addrBytes ) ) );
         }
 
         public static IPAddress GetIPAddress( this CMsgIPAddress ipAddr )
@@ -56,17 +54,14 @@ namespace SteamKit2
         public static CMsgIPAddress GetMsgIPAddress( IPAddress ipAddr )
         {
             var msgIpAddress = new CMsgIPAddress();
-            byte[] addrBytes = ipAddr.GetAddressBytes();
 
             if ( ipAddr.AddressFamily == AddressFamily.InterNetworkV6 )
             {
-                msgIpAddress.v6 = addrBytes;
+                msgIpAddress.v6 = ipAddr.GetAddressBytes();
             }
             else
             {
-                Array.Reverse( addrBytes );
-
-                msgIpAddress.v4 = BitConverter.ToUInt32( addrBytes, 0 );
+                msgIpAddress.v4 = GetIPAddressAsUInt( ipAddr );
             }
 
             return msgIpAddress;
