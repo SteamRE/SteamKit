@@ -77,7 +77,7 @@ namespace ProtobufDumper
 
                     Console.Write( "{0}... ", name );
 
-                    var complete = collector.TryParseCandidate( name, buffer, out var result, out var error );
+                    var complete = collector.TryParseCandidate( buffer, out var result, out var error );
 
                     switch ( result )
                     {
@@ -110,12 +110,10 @@ namespace ProtobufDumper
 
                         try
                         {
-                            using ( var file = File.OpenWrite( fileName ) )
-                            {
-                                buffer.Seek( 0, SeekOrigin.Begin );
-                                file.SetLength( buffer.Length );
-                                buffer.CopyTo( file );
-                            }
+                            using var file = File.OpenWrite( fileName );
+                            buffer.Seek( 0, SeekOrigin.Begin );
+                            file.SetLength( buffer.Length );
+                            buffer.CopyTo( file );
                         }
                         catch ( Exception ex )
                         {

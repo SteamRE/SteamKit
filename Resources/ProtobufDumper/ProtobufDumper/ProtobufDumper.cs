@@ -51,8 +51,8 @@ namespace ProtobufDumper
         {
             this.protobufs = protobufs;
             messageNameStack = new Stack<string>();
-            protobufMap = new Dictionary<string, ProtoNode>();
-            protobufTypeMap = new Dictionary<string, ProtoTypeNode>();
+            protobufMap = [];
+            protobufTypeMap = [];
         }
 
         ProtoTypeNode GetOrCreateTypeNode( string name, FileDescriptorProto proto = null, object source = null )
@@ -89,9 +89,9 @@ namespace ProtobufDumper
                 {
                     Name = proto.name,
                     Proto = proto,
-                    Dependencies = new List<ProtoNode>(),
-                    AllPublicDependencies = new HashSet<FileDescriptorProto>(),
-                    Types = new List<ProtoTypeNode>(),
+                    Dependencies = [],
+                    AllPublicDependencies = [],
+                    Types = [],
                     Defined = true
                 };
 
@@ -159,9 +159,9 @@ namespace ProtobufDumper
                             {
                                 Name = dependency,
                                 Proto = null,
-                                Dependencies = new List<ProtoNode>(),
-                                AllPublicDependencies = new HashSet<FileDescriptorProto>(),
-                                Types = new List<ProtoTypeNode>(),
+                                Dependencies = [],
+                                AllPublicDependencies = [],
+                                Types = [],
                                 Defined = false
                             };
                             missingDependencies.Add( missing );
@@ -519,8 +519,10 @@ namespace ProtobufDumper
 
         void DumpOptionsMatching( FileDescriptorProto source, string typeName, IExtensible options, Dictionary<string, string> optionsKv )
         {
-            var dependencies = new HashSet<FileDescriptorProto>( protobufMap[ source.name ].AllPublicDependencies );
-            dependencies.Add( source );
+            var dependencies = new HashSet<FileDescriptorProto>( protobufMap[ source.name ].AllPublicDependencies )
+            {
+                source
+            };
 
             foreach ( var type in protobufTypeMap )
             {
@@ -768,7 +770,7 @@ namespace ProtobufDumper
             if ( emitFieldLabel )
             {
                 descriptorDeclarationBuilder.Append( GetLabel( field.label ) );
-                descriptorDeclarationBuilder.Append( " " );
+                descriptorDeclarationBuilder.Append( ' ' );
             }
 
             descriptorDeclarationBuilder.Append( $"{type} {field.name} = {field.number}{parameters};" );
@@ -789,61 +791,38 @@ namespace ProtobufDumper
 
         static string GetLabel( FieldDescriptorProto.Label label )
         {
-            switch ( label )
+            return label switch
             {
-                default:
-                case FieldDescriptorProto.Label.LABEL_OPTIONAL:
-                    return "optional";
-                case FieldDescriptorProto.Label.LABEL_REQUIRED:
-                    return "required";
-                case FieldDescriptorProto.Label.LABEL_REPEATED:
-                    return "repeated";
-            }
+                FieldDescriptorProto.Label.LABEL_REQUIRED => "required",
+                FieldDescriptorProto.Label.LABEL_REPEATED => "repeated",
+                _ => "optional",
+            };
         }
 
         static string GetType( FieldDescriptorProto.Type type )
         {
-            switch ( type )
+            return type switch
             {
-                case FieldDescriptorProto.Type.TYPE_INT32:
-                    return "int32";
-                case FieldDescriptorProto.Type.TYPE_INT64:
-                    return "int64";
-                case FieldDescriptorProto.Type.TYPE_SINT32:
-                    return "sint32";
-                case FieldDescriptorProto.Type.TYPE_SINT64:
-                    return "sint64";
-                case FieldDescriptorProto.Type.TYPE_UINT32:
-                    return "uint32";
-                case FieldDescriptorProto.Type.TYPE_UINT64:
-                    return "uint64";
-                case FieldDescriptorProto.Type.TYPE_STRING:
-                    return "string";
-                case FieldDescriptorProto.Type.TYPE_BOOL:
-                    return "bool";
-                case FieldDescriptorProto.Type.TYPE_BYTES:
-                    return "bytes";
-                case FieldDescriptorProto.Type.TYPE_DOUBLE:
-                    return "double";
-                case FieldDescriptorProto.Type.TYPE_ENUM:
-                    return "enum";
-                case FieldDescriptorProto.Type.TYPE_FLOAT:
-                    return "float";
-                case FieldDescriptorProto.Type.TYPE_GROUP:
-                    return "GROUP";
-                case FieldDescriptorProto.Type.TYPE_MESSAGE:
-                    return "message";
-                case FieldDescriptorProto.Type.TYPE_FIXED32:
-                    return "fixed32";
-                case FieldDescriptorProto.Type.TYPE_FIXED64:
-                    return "fixed64";
-                case FieldDescriptorProto.Type.TYPE_SFIXED32:
-                    return "sfixed32";
-                case FieldDescriptorProto.Type.TYPE_SFIXED64:
-                    return "sfixed64";
-                default:
-                    return type.ToString();
-            }
+                FieldDescriptorProto.Type.TYPE_INT32 => "int32",
+                FieldDescriptorProto.Type.TYPE_INT64 => "int64",
+                FieldDescriptorProto.Type.TYPE_SINT32 => "sint32",
+                FieldDescriptorProto.Type.TYPE_SINT64 => "sint64",
+                FieldDescriptorProto.Type.TYPE_UINT32 => "uint32",
+                FieldDescriptorProto.Type.TYPE_UINT64 => "uint64",
+                FieldDescriptorProto.Type.TYPE_STRING => "string",
+                FieldDescriptorProto.Type.TYPE_BOOL => "bool",
+                FieldDescriptorProto.Type.TYPE_BYTES => "bytes",
+                FieldDescriptorProto.Type.TYPE_DOUBLE => "double",
+                FieldDescriptorProto.Type.TYPE_ENUM => "enum",
+                FieldDescriptorProto.Type.TYPE_FLOAT => "float",
+                FieldDescriptorProto.Type.TYPE_GROUP => "GROUP",
+                FieldDescriptorProto.Type.TYPE_MESSAGE => "message",
+                FieldDescriptorProto.Type.TYPE_FIXED32 => "fixed32",
+                FieldDescriptorProto.Type.TYPE_FIXED64 => "fixed64",
+                FieldDescriptorProto.Type.TYPE_SFIXED32 => "sfixed32",
+                FieldDescriptorProto.Type.TYPE_SFIXED64 => "sfixed64",
+                _ => type.ToString(),
+            };
         }
 
         static bool ExtractType( IExtensible data, FieldDescriptorProto field, out string value )
@@ -938,7 +917,7 @@ namespace ProtobufDumper
             return GetType( field.type );
         }
 
-        void AppendHeadingSpace( StringBuilder sb, ref bool marker )
+        static void AppendHeadingSpace( StringBuilder sb, ref bool marker )
         {
             if ( marker )
             {
