@@ -98,7 +98,7 @@ namespace SteamKit2.Discovery
             EndPoint endPoint;
             const int DefaultPort = 443;
 
-            var indexOfColon = address.IndexOf(':');
+            var indexOfColon = address.IndexOf(':', StringComparison.Ordinal);
             if (indexOfColon >= 0)
             {
                 var hostname = address[ ..indexOfColon ];

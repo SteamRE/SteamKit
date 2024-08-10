@@ -766,7 +766,7 @@ namespace SteamKit2
             {
                 var textToReplace = new string( kvp.Value, 1 );
                 var escapedReplacement = @"\" + kvp.Key;
-                value = value.Replace( textToReplace, escapedReplacement );
+                value = value.Replace( textToReplace, escapedReplacement, StringComparison.Ordinal );
             }
 
             return value;
@@ -779,7 +779,7 @@ namespace SteamKit2
 
         static void WriteString( Stream stream, string str, bool quote = false )
         {
-            byte[] bytes = Encoding.UTF8.GetBytes( ( quote ? "\"" : "" ) + str.Replace( "\"", "\\\"" ) + ( quote ? "\"" : "" ) );
+            byte[] bytes = Encoding.UTF8.GetBytes( ( quote ? "\"" : "" ) + str.Replace( "\"", "\\\"", StringComparison.Ordinal ) + ( quote ? "\"" : "" ) );
             stream.Write( bytes, 0, bytes.Length );
         }
 

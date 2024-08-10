@@ -192,8 +192,8 @@ namespace SteamKit2.CDN
             if ( proxyServer != null && proxyServer.UseAsProxy && proxyServer.ProxyRequestPathTemplate != null )
             {
                 var pathTemplate = proxyServer.ProxyRequestPathTemplate;
-                pathTemplate = pathTemplate.Replace( "%host%", uriBuilder.Host );
-                pathTemplate = pathTemplate.Replace( "%path%", $"/{uriBuilder.Path}" );
+                pathTemplate = pathTemplate.Replace( "%host%", uriBuilder.Host, StringComparison.Ordinal );
+                pathTemplate = pathTemplate.Replace( "%path%", $"/{uriBuilder.Path}", StringComparison.Ordinal );
                 uriBuilder.Scheme = proxyServer.Protocol == Server.ConnectionProtocol.HTTP ? "http" : "https";
                 uriBuilder.Host = proxyServer.VHost;
                 uriBuilder.Port = proxyServer.Port;
