@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PackageProjectUrl>https://github.com/SteamRE/SteamKit/tree/master/Resources/ProtobufDumper</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/SteamRE/SteamKit/blob/master/SteamKit2/SteamKit2/license.txt</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/SteamRE/SteamKit</RepositoryUrl>
