@@ -22,12 +22,12 @@ namespace NetHookAnalyzer2
 			specializations = LoadMessageObjectSpecializations();
 		}
 
-#pragma warning disable IDE0069 // Disposable fields should be disposed
+#pragma warning disable CA2213, IDE0069 // Disposable fields should be disposed
 
 		IDisposable itemsListViewFirstColumnHiderDisposable;
 		FileSystemWatcher folderWatcher;
 
-#pragma warning restore IDE0069 // Disposable fields should be disposed
+#pragma warning restore CA2213, IDE0069 // Disposable fields should be disposed
 
 		readonly ISpecialization[] specializations;
 
@@ -77,7 +77,7 @@ namespace NetHookAnalyzer2
 
 		#region
 
-		string GetLatestNethookDumpDirectory()
+		static string GetLatestNethookDumpDirectory()
 		{
 			var steamDirectory = SteamUtils.GetSteamDirectory();
 			if (steamDirectory == null)

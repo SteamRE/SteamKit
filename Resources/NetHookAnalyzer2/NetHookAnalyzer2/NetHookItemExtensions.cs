@@ -24,11 +24,13 @@ namespace NetHookAnalyzer2
 				Text = item.Timestamp.ToString(CultureInfo.CurrentUICulture),
 			});
 
+#pragma warning disable CA1308 // Normalize strings to uppercase
 			lvi.SubItems.Add(new ListViewItem.ListViewSubItem
 			{
 				Name = "Direction",
 				Text = item.Direction.ToString().ToLowerInvariant(),
 			});
+#pragma warning restore CA1308 // Normalize strings to uppercase
 
 			lvi.SubItems.Add(new ListViewItem.ListViewSubItem
 			{

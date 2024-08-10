@@ -40,8 +40,8 @@ namespace NetHookAnalyzer2.Specializations
 
 			var typeName = header.msg_type
 				.ToString()
-				.Replace( "k_E", "CMsg" )
-				.Replace( "BroadcastMsg", "Broadcast" );
+				.Replace( "k_E", "CMsg", StringComparison.InvariantCulture )
+				.Replace( "BroadcastMsg", "Broadcast", StringComparison.InvariantCulture );
 
 			var bodyType = Type.GetType( $"SteamKit2.Internal.{typeName}, SteamKit2" );
 

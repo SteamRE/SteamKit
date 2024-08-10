@@ -102,13 +102,13 @@ namespace NetHookAnalyzer2
 		void DisplayDataAsAscii(object sender, EventArgs e)
 		{
 			var data = (byte[])value;
-			SetValueForDisplay(Encoding.ASCII.GetString(data).Replace("\0", "\\0"));
+			SetValueForDisplay(Encoding.ASCII.GetString(data).Replace("\0", "\\0", StringComparison.InvariantCulture) );
 		}
 
 		void DisplayDataAsUTF8(object sender, EventArgs e)
 		{
 			var data = (byte[])value;
-			SetValueForDisplay(Encoding.UTF8.GetString(data).Replace("\0", "\\0"));
+			SetValueForDisplay(Encoding.UTF8.GetString(data).Replace("\0", "\\0", StringComparison.InvariantCulture));
 		}
 
 		void DisplayDataAsHexadecimal(object sender, EventArgs e)
@@ -217,7 +217,7 @@ namespace NetHookAnalyzer2
 			SetValueForDisplay(steamID.Render(steam3: true));
 		}
 
-		SteamID ConvertToSteamID(object value)
+		static SteamID ConvertToSteamID(object value)
 		{
 			// first check if the given value is already a steamid
 			SteamID steamID = value as SteamID;
