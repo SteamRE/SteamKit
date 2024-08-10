@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -204,7 +205,7 @@ namespace SteamLanguageParser
 
             if (cnode.Ident != null)
             {
-                if (cnode.Name.Contains("MsgGC"))
+                if (cnode.Name.Contains("MsgGC", StringComparison.Ordinal))
                 {
                     parent = "IGCSerializableMessage";
                 }
@@ -213,9 +214,9 @@ namespace SteamLanguageParser
                     parent = "ISteamSerializableMessage";
                 }
             }
-            else if (cnode.Name.Contains("Hdr"))
+            else if (cnode.Name.Contains("Hdr", StringComparison.Ordinal))
             {
-                if (cnode.Name.Contains("MsgGC"))
+                if (cnode.Name.Contains("MsgGC", StringComparison.Ordinal))
                 {
                     parent = "IGCSerializableHeader";
                 }
@@ -225,7 +226,7 @@ namespace SteamLanguageParser
                 }
             }
 
-            if (cnode.Name.Contains("Hdr"))
+            if (cnode.Name.Contains("Hdr", StringComparison.Ordinal))
             {
                 sb.AppendLine(padding + "[StructLayout( LayoutKind.Sequential )]");
             }
@@ -255,7 +256,7 @@ namespace SteamLanguageParser
                     sb.AppendLine(padding + "#pragma warning disable 0612");
                 }
 
-                if (cnode.Name.Contains("MsgGC"))
+                if (cnode.Name.Contains("MsgGC", StringComparison.Ordinal))
                 {
                     sb.AppendLine(padding + "public uint GetEMsg() { return " + EmitType(cnode.Ident) + "; }");
                 }
@@ -271,9 +272,9 @@ namespace SteamLanguageParser
 
                 sb.AppendLine();
             }
-            else if (cnode.Name.Contains("Hdr"))
+            else if (cnode.Name.Contains("Hdr", StringComparison.Ordinal))
             {
-                if (cnode.Name.Contains("MsgGC"))
+                if (cnode.Name.Contains("MsgGC", StringComparison.Ordinal))
                 {
                     if (cnode.ChildNodes.Find(node => node.Name == "msg") != null)
                     {
@@ -404,7 +405,7 @@ namespace SteamLanguageParser
             sb.AppendLine(padding + "}");
         }
 
-        private void EmitClassSerializer(ClassNode cnode, StringBuilder sb, int level, int baseSize)
+        private static void EmitClassSerializer(ClassNode cnode, StringBuilder sb, int level, int baseSize)
         {
             string padding = new string('\t', level);
 

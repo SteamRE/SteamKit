@@ -3,11 +3,11 @@ using System.Text.RegularExpressions;
 
 namespace SteamLanguageParser
 {
-    public class Symbol
+    class Symbol
     {
     }
 
-    public class StrongSymbol : Symbol
+    class StrongSymbol : Symbol
     {
         public Node Class { get; private set; }
         public Node Prop { get; private set; }
@@ -24,12 +24,12 @@ namespace SteamLanguageParser
         }
     }
 
-    public class WeakSymbol(string ident) : Symbol
+    class WeakSymbol(string ident) : Symbol
     {
         public string Identifier { get; set; } = ident;
     }
 
-    public partial class SymbolLocator
+    static partial class SymbolLocator
     {
         public const string identifierPattern =
             @"(?<identifier>[a-zA-Z0-9_:]*)";
@@ -60,7 +60,7 @@ namespace SteamLanguageParser
                 throw new Exception("Invalid identifier specified " + identifier);
             }
 
-            if (!identifier.Contains("::"))
+            if (!identifier.Contains("::", StringComparison.Ordinal))
             {
                 Node classNode = FindNode(tree, ident.Captures[0].Value);
 

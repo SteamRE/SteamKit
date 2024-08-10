@@ -35,7 +35,7 @@ namespace SteamLanguageParser
             }
         }
 
-        private static readonly string defaultType = "uint";
+        private const string defaultType = "uint";
         private static readonly Dictionary<string, TypeInfo> weakTypeMap = new()
         {
             {"byte", new TypeInfo(1)},
