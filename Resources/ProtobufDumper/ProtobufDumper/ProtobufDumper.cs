@@ -7,6 +7,8 @@ using System.Text;
 using google.protobuf;
 using ProtoBuf;
 
+// Protobuf descriptor documentation: https://protobuf.com/docs/descriptors
+
 namespace ProtobufDumper
 {
     class ProtobufDumper
@@ -287,10 +289,27 @@ namespace ProtobufDumper
 
             var marker = false;
 
+            if ( !string.IsNullOrEmpty( proto.syntax ) )
+            {
+                AppendHeadingSpace( sb, ref marker );
+                sb.AppendLine( $"syntax = {Util.ToLiteral( proto.syntax )};" );
+                marker = true;
+            }
+
             for ( var i = 0; i < proto.dependency.Count; i++ )
             {
                 var dependency = proto.dependency[ i ];
-                var modifier = proto.public_dependency.Contains( i ) ? "public " : "";
+                var modifier = string.Empty;
+                    
+                if( proto.public_dependency.Contains( i ) )
+                {
+                    modifier = "public ";
+                }
+                else if ( proto.weak_dependency.Contains( i ) )
+                {
+                    modifier = "weak ";
+                }
+
                 sb.AppendLine( $"import {modifier}\"{dependency}\";" );
                 marker = true;
             }
@@ -349,12 +368,14 @@ namespace ProtobufDumper
                 optionsKv.Add( "optimize_for", $"{options.optimize_for}" );
             if ( options.ShouldSerializecc_generic_services() )
                 optionsKv.Add( "cc_generic_services", options.cc_generic_services ? "true" : "false" );
+            if ( options.ShouldSerializecc_enable_arenas() )
+                optionsKv.Add( "cc_enable_arenas", options.cc_enable_arenas ? "true" : "false" );
             if ( options.ShouldSerializego_package() )
-                optionsKv.Add( "go_package", $"\"{options.go_package}\"" );
+                optionsKv.Add( "go_package", Util.ToLiteral( options.go_package ) );
             if ( options.ShouldSerializejava_package() )
-                optionsKv.Add( "java_package", $"\"{options.java_package}\"" );
+                optionsKv.Add( "java_package", Util.ToLiteral( options.java_package ) );
             if ( options.ShouldSerializejava_outer_classname() )
-                optionsKv.Add( "java_outer_classname", $"\"{options.java_outer_classname}\"" );
+                optionsKv.Add( "java_outer_classname", Util.ToLiteral( options.java_outer_classname ) );
             if ( options.ShouldSerializejava_generate_equals_and_hash() )
                 optionsKv.Add( "java_generate_equals_and_hash", options.java_generate_equals_and_hash ? "true" : "false" );
             if ( options.ShouldSerializejava_generic_services() )
@@ -365,6 +386,22 @@ namespace ProtobufDumper
                 optionsKv.Add( "java_string_check_utf8", options.java_string_check_utf8 ? "true" : "false" );
             if ( options.ShouldSerializepy_generic_services() )
                 optionsKv.Add( "py_generic_services", options.py_generic_services ? "true" : "false" );
+            if ( options.ShouldSerializeruby_package() )
+                optionsKv.Add( "ruby_package", Util.ToLiteral( options.ruby_package ) );
+            if ( options.ShouldSerializeobjc_class_prefix() )
+                optionsKv.Add( "objc_class_prefix", Util.ToLiteral( options.objc_class_prefix ) );
+            if ( options.ShouldSerializecsharp_namespace() )
+                optionsKv.Add( "csharp_namespace", Util.ToLiteral( options.csharp_namespace ) );
+            if ( options.ShouldSerializeswift_prefix() )
+                optionsKv.Add( "swift_prefix", Util.ToLiteral( options.swift_prefix ) );
+            if ( options.ShouldSerializephp_generic_services() )
+                optionsKv.Add( "php_generic_services", options.php_generic_services ? "true" : "false" );
+            if ( options.ShouldSerializephp_class_prefix() )
+                optionsKv.Add( "php_class_prefix", Util.ToLiteral( options.php_class_prefix ) );
+            if ( options.ShouldSerializephp_namespace() )
+                optionsKv.Add( "php_namespace", Util.ToLiteral( options.php_namespace ) );
+            if ( options.ShouldSerializephp_metadata_namespace() )
+                optionsKv.Add( "php_metadata_namespace", Util.ToLiteral( options.php_metadata_namespace ) );
 
             DumpOptionsMatching( source, ".google.protobuf.FileOptions", options, optionsKv );
 
@@ -388,8 +425,8 @@ namespace ProtobufDumper
                 optionsKv.Add( "packed", options.packed ? "true" : "false" );
             if ( options.ShouldSerializeweak() )
                 optionsKv.Add( "weak", options.weak ? "true" : "false" );
-            if ( options.ShouldSerializeexperimental_map_key() )
-                optionsKv.Add( "experimental_map_key", $"\"{options.experimental_map_key}\"" );
+            if ( options.ShouldSerializejstype() )
+                optionsKv.Add( "jstype", $"{options.jstype}" );
 
             DumpOptionsMatching( source, ".google.protobuf.FieldOptions", options, optionsKv );
 
@@ -631,7 +668,7 @@ namespace ProtobufDumper
             {
                 var max = Convert.ToString( range.end );
 
-                // http://code.google.com/apis/protocolbuffers/docs/proto.html#extensions
+                // https://protobuf.dev/programming-guides/proto2/#defining-ranges
                 // If your numbering convention might involve extensions having very large numbers as tags, you can specify
                 // that your extension range goes up to the maximum possible field number using the max keyword:
                 // max is 2^29 - 1, or 536,870,911. 
@@ -643,6 +680,9 @@ namespace ProtobufDumper
                 AppendHeadingSpace( sb, ref innerMarker );
                 sb.AppendLine( $"{levelspace}\textensions {range.start} to {max};" );
             }
+
+            // TODO: proto.reserved_range
+            // TODO: proto.reserved_name
 
             sb.AppendLine( $"{levelspace}}}" );
             marker = true;
@@ -700,7 +740,7 @@ namespace ProtobufDumper
 
             foreach ( var method in service.method )
             {
-                var declaration = $"\trpc {method.name} ({method.input_type}) returns ({method.output_type})";
+                var declaration = $"\trpc {method.name} ({( method.client_streaming ? "stream " : "" )}{method.input_type}) returns ({( method.server_streaming ? "stream " : "" )}{method.output_type})";
 
                 var options = DumpOptions( source, method.options );
 
@@ -750,6 +790,11 @@ namespace ProtobufDumper
 
                 if ( lookup.Source is EnumDescriptorProto enumDescriptor && enumDescriptor.value.Count > 0 )
                     options.Add( "default", enumDescriptor.value[ 0 ].name );
+            }
+
+            if ( !string.IsNullOrEmpty( field.json_name ) )
+            {
+                options.Add( "json_name", Util.ToLiteral( field.json_name ) );
             }
 
             var fieldOptions = DumpOptions( source, field.options );

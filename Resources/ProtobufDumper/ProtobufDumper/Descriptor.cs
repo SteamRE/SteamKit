@@ -5,7 +5,7 @@
 // </auto-generated>
 
 #region Designer generated code
-#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace google.protobuf
 {
 
@@ -77,6 +77,17 @@ namespace google.protobuf
         [global::ProtoBuf.ProtoMember(9)]
         public SourceCodeInfo source_code_info { get; set; }
 
+        [global::ProtoBuf.ProtoMember(12)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string syntax
+        {
+            get => __pbn__syntax ?? "";
+            set => __pbn__syntax = value;
+        }
+        public bool ShouldSerializesyntax() => __pbn__syntax != null;
+        public void Resetsyntax() => __pbn__syntax = null;
+        private string __pbn__syntax;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -118,6 +129,12 @@ namespace google.protobuf
         [global::ProtoBuf.ProtoMember(7)]
         public MessageOptions options { get; set; }
 
+        [global::ProtoBuf.ProtoMember(9)]
+        public global::System.Collections.Generic.List<ReservedRange> reserved_range { get; } = new global::System.Collections.Generic.List<ReservedRange>();
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public global::System.Collections.Generic.List<string> reserved_name { get; } = new global::System.Collections.Generic.List<string>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class ExtensionRange : global::ProtoBuf.IExtensible
         {
@@ -145,7 +162,51 @@ namespace google.protobuf
             public void Resetend() => __pbn__end = null;
             private int? __pbn__end;
 
+            [global::ProtoBuf.ProtoMember(3)]
+            public ExtensionRangeOptions options { get; set; }
+
         }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class ReservedRange : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public int start
+            {
+                get => __pbn__start.GetValueOrDefault();
+                set => __pbn__start = value;
+            }
+            public bool ShouldSerializestart() => __pbn__start != null;
+            public void Resetstart() => __pbn__start = null;
+            private int? __pbn__start;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public int end
+            {
+                get => __pbn__end.GetValueOrDefault();
+                set => __pbn__end = value;
+            }
+            public bool ShouldSerializeend() => __pbn__end != null;
+            public void Resetend() => __pbn__end = null;
+            private int? __pbn__end;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class ExtensionRangeOptions : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(999)]
+        public global::System.Collections.Generic.List<UninterpretedOption> uninterpreted_option { get; } = new global::System.Collections.Generic.List<UninterpretedOption>();
 
     }
 
@@ -242,8 +303,29 @@ namespace google.protobuf
         public void Resetoneof_index() => __pbn__oneof_index = null;
         private int? __pbn__oneof_index;
 
+        [global::ProtoBuf.ProtoMember(10)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string json_name
+        {
+            get => __pbn__json_name ?? "";
+            set => __pbn__json_name = value;
+        }
+        public bool ShouldSerializejson_name() => __pbn__json_name != null;
+        public void Resetjson_name() => __pbn__json_name = null;
+        private string __pbn__json_name;
+
         [global::ProtoBuf.ProtoMember(8)]
         public FieldOptions options { get; set; }
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public bool proto3_optional
+        {
+            get => __pbn__proto3_optional.GetValueOrDefault();
+            set => __pbn__proto3_optional = value;
+        }
+        public bool ShouldSerializeproto3_optional() => __pbn__proto3_optional != null;
+        public void Resetproto3_optional() => __pbn__proto3_optional = null;
+        private bool? __pbn__proto3_optional;
 
         [global::ProtoBuf.ProtoContract()]
         public enum Type
@@ -296,6 +378,9 @@ namespace google.protobuf
         public void Resetname() => __pbn__name = null;
         private string __pbn__name;
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public OneofOptions options { get; set; }
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -321,6 +406,41 @@ namespace google.protobuf
 
         [global::ProtoBuf.ProtoMember(3)]
         public EnumOptions options { get; set; }
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<EnumReservedRange> reserved_range { get; } = new global::System.Collections.Generic.List<EnumReservedRange>();
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public global::System.Collections.Generic.List<string> reserved_name { get; } = new global::System.Collections.Generic.List<string>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class EnumReservedRange : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public int start
+            {
+                get => __pbn__start.GetValueOrDefault();
+                set => __pbn__start = value;
+            }
+            public bool ShouldSerializestart() => __pbn__start != null;
+            public void Resetstart() => __pbn__start = null;
+            private int? __pbn__start;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public int end
+            {
+                get => __pbn__end.GetValueOrDefault();
+                set => __pbn__end = value;
+            }
+            public bool ShouldSerializeend() => __pbn__end != null;
+            public void Resetend() => __pbn__end = null;
+            private int? __pbn__end;
+
+        }
 
     }
 
@@ -426,6 +546,28 @@ namespace google.protobuf
         [global::ProtoBuf.ProtoMember(4)]
         public MethodOptions options { get; set; }
 
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue(false)]
+        public bool client_streaming
+        {
+            get => __pbn__client_streaming ?? false;
+            set => __pbn__client_streaming = value;
+        }
+        public bool ShouldSerializeclient_streaming() => __pbn__client_streaming != null;
+        public void Resetclient_streaming() => __pbn__client_streaming = null;
+        private bool? __pbn__client_streaming;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue(false)]
+        public bool server_streaming
+        {
+            get => __pbn__server_streaming ?? false;
+            set => __pbn__server_streaming = value;
+        }
+        public bool ShouldSerializeserver_streaming() => __pbn__server_streaming != null;
+        public void Resetserver_streaming() => __pbn__server_streaming = null;
+        private bool? __pbn__server_streaming;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -469,10 +611,9 @@ namespace google.protobuf
         private bool? __pbn__java_multiple_files;
 
         [global::ProtoBuf.ProtoMember(20)]
-        [global::System.ComponentModel.DefaultValue(false)]
         public bool java_generate_equals_and_hash
         {
-            get => __pbn__java_generate_equals_and_hash ?? false;
+            get => __pbn__java_generate_equals_and_hash.GetValueOrDefault();
             set => __pbn__java_generate_equals_and_hash = value;
         }
         public bool ShouldSerializejava_generate_equals_and_hash() => __pbn__java_generate_equals_and_hash != null;
@@ -545,6 +686,17 @@ namespace google.protobuf
         public void Resetpy_generic_services() => __pbn__py_generic_services = null;
         private bool? __pbn__py_generic_services;
 
+        [global::ProtoBuf.ProtoMember(42)]
+        [global::System.ComponentModel.DefaultValue(false)]
+        public bool php_generic_services
+        {
+            get => __pbn__php_generic_services ?? false;
+            set => __pbn__php_generic_services = value;
+        }
+        public bool ShouldSerializephp_generic_services() => __pbn__php_generic_services != null;
+        public void Resetphp_generic_services() => __pbn__php_generic_services = null;
+        private bool? __pbn__php_generic_services;
+
         [global::ProtoBuf.ProtoMember(23)]
         [global::System.ComponentModel.DefaultValue(false)]
         public bool deprecated
@@ -555,6 +707,94 @@ namespace google.protobuf
         public bool ShouldSerializedeprecated() => __pbn__deprecated != null;
         public void Resetdeprecated() => __pbn__deprecated = null;
         private bool? __pbn__deprecated;
+
+        [global::ProtoBuf.ProtoMember(31)]
+        [global::System.ComponentModel.DefaultValue(true)]
+        public bool cc_enable_arenas
+        {
+            get => __pbn__cc_enable_arenas ?? true;
+            set => __pbn__cc_enable_arenas = value;
+        }
+        public bool ShouldSerializecc_enable_arenas() => __pbn__cc_enable_arenas != null;
+        public void Resetcc_enable_arenas() => __pbn__cc_enable_arenas = null;
+        private bool? __pbn__cc_enable_arenas;
+
+        [global::ProtoBuf.ProtoMember(36)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string objc_class_prefix
+        {
+            get => __pbn__objc_class_prefix ?? "";
+            set => __pbn__objc_class_prefix = value;
+        }
+        public bool ShouldSerializeobjc_class_prefix() => __pbn__objc_class_prefix != null;
+        public void Resetobjc_class_prefix() => __pbn__objc_class_prefix = null;
+        private string __pbn__objc_class_prefix;
+
+        [global::ProtoBuf.ProtoMember(37)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string csharp_namespace
+        {
+            get => __pbn__csharp_namespace ?? "";
+            set => __pbn__csharp_namespace = value;
+        }
+        public bool ShouldSerializecsharp_namespace() => __pbn__csharp_namespace != null;
+        public void Resetcsharp_namespace() => __pbn__csharp_namespace = null;
+        private string __pbn__csharp_namespace;
+
+        [global::ProtoBuf.ProtoMember(39)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string swift_prefix
+        {
+            get => __pbn__swift_prefix ?? "";
+            set => __pbn__swift_prefix = value;
+        }
+        public bool ShouldSerializeswift_prefix() => __pbn__swift_prefix != null;
+        public void Resetswift_prefix() => __pbn__swift_prefix = null;
+        private string __pbn__swift_prefix;
+
+        [global::ProtoBuf.ProtoMember(40)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string php_class_prefix
+        {
+            get => __pbn__php_class_prefix ?? "";
+            set => __pbn__php_class_prefix = value;
+        }
+        public bool ShouldSerializephp_class_prefix() => __pbn__php_class_prefix != null;
+        public void Resetphp_class_prefix() => __pbn__php_class_prefix = null;
+        private string __pbn__php_class_prefix;
+
+        [global::ProtoBuf.ProtoMember(41)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string php_namespace
+        {
+            get => __pbn__php_namespace ?? "";
+            set => __pbn__php_namespace = value;
+        }
+        public bool ShouldSerializephp_namespace() => __pbn__php_namespace != null;
+        public void Resetphp_namespace() => __pbn__php_namespace = null;
+        private string __pbn__php_namespace;
+
+        [global::ProtoBuf.ProtoMember(44)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string php_metadata_namespace
+        {
+            get => __pbn__php_metadata_namespace ?? "";
+            set => __pbn__php_metadata_namespace = value;
+        }
+        public bool ShouldSerializephp_metadata_namespace() => __pbn__php_metadata_namespace != null;
+        public void Resetphp_metadata_namespace() => __pbn__php_metadata_namespace = null;
+        private string __pbn__php_metadata_namespace;
+
+        [global::ProtoBuf.ProtoMember(45)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string ruby_package
+        {
+            get => __pbn__ruby_package ?? "";
+            set => __pbn__ruby_package = value;
+        }
+        public bool ShouldSerializeruby_package() => __pbn__ruby_package != null;
+        public void Resetruby_package() => __pbn__ruby_package = null;
+        private string __pbn__ruby_package;
 
         [global::ProtoBuf.ProtoMember(999)]
         public global::System.Collections.Generic.List<UninterpretedOption> uninterpreted_option { get; } = new global::System.Collections.Generic.List<UninterpretedOption>();
@@ -609,6 +849,16 @@ namespace google.protobuf
         public void Resetdeprecated() => __pbn__deprecated = null;
         private bool? __pbn__deprecated;
 
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool map_entry
+        {
+            get => __pbn__map_entry.GetValueOrDefault();
+            set => __pbn__map_entry = value;
+        }
+        public bool ShouldSerializemap_entry() => __pbn__map_entry != null;
+        public void Resetmap_entry() => __pbn__map_entry = null;
+        private bool? __pbn__map_entry;
+
         [global::ProtoBuf.ProtoMember(999)]
         public global::System.Collections.Generic.List<UninterpretedOption> uninterpreted_option { get; } = new global::System.Collections.Generic.List<UninterpretedOption>();
 
@@ -642,6 +892,17 @@ namespace google.protobuf
         public void Resetpacked() => __pbn__packed = null;
         private bool? __pbn__packed;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue(JSType.JS_NORMAL)]
+        public JSType jstype
+        {
+            get => __pbn__jstype ?? JSType.JS_NORMAL;
+            set => __pbn__jstype = value;
+        }
+        public bool ShouldSerializejstype() => __pbn__jstype != null;
+        public void Resetjstype() => __pbn__jstype = null;
+        private JSType? __pbn__jstype;
+
         [global::ProtoBuf.ProtoMember(5)]
         [global::System.ComponentModel.DefaultValue(false)]
         public bool lazy
@@ -664,17 +925,6 @@ namespace google.protobuf
         public void Resetdeprecated() => __pbn__deprecated = null;
         private bool? __pbn__deprecated;
 
-        [global::ProtoBuf.ProtoMember(9)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string experimental_map_key
-        {
-            get => __pbn__experimental_map_key ?? "";
-            set => __pbn__experimental_map_key = value;
-        }
-        public bool ShouldSerializeexperimental_map_key() => __pbn__experimental_map_key != null;
-        public void Resetexperimental_map_key() => __pbn__experimental_map_key = null;
-        private string __pbn__experimental_map_key;
-
         [global::ProtoBuf.ProtoMember(10)]
         [global::System.ComponentModel.DefaultValue(false)]
         public bool weak
@@ -696,6 +946,26 @@ namespace google.protobuf
             CORD = 1,
             STRING_PIECE = 2,
         }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum JSType
+        {
+            JS_NORMAL = 0,
+            JS_STRING = 1,
+            JS_NUMBER = 2,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class OneofOptions : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(999)]
+        public global::System.Collections.Generic.List<UninterpretedOption> uninterpreted_option { get; } = new global::System.Collections.Generic.List<UninterpretedOption>();
 
     }
 
@@ -796,8 +1066,27 @@ namespace google.protobuf
         public void Resetdeprecated() => __pbn__deprecated = null;
         private bool? __pbn__deprecated;
 
+        [global::ProtoBuf.ProtoMember(34)]
+        [global::System.ComponentModel.DefaultValue(IdempotencyLevel.IDEMPOTENCY_UNKNOWN)]
+        public IdempotencyLevel idempotency_level
+        {
+            get => __pbn__idempotency_level ?? IdempotencyLevel.IDEMPOTENCY_UNKNOWN;
+            set => __pbn__idempotency_level = value;
+        }
+        public bool ShouldSerializeidempotency_level() => __pbn__idempotency_level != null;
+        public void Resetidempotency_level() => __pbn__idempotency_level = null;
+        private IdempotencyLevel? __pbn__idempotency_level;
+
         [global::ProtoBuf.ProtoMember(999)]
         public global::System.Collections.Generic.List<UninterpretedOption> uninterpreted_option { get; } = new global::System.Collections.Generic.List<UninterpretedOption>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum IdempotencyLevel
+        {
+            IDEMPOTENCY_UNKNOWN = 0,
+            NO_SIDE_EFFECTS = 1,
+            IDEMPOTENT = 2,
+        }
 
     }
 
@@ -935,11 +1224,69 @@ namespace google.protobuf
             public void Resettrailing_comments() => __pbn__trailing_comments = null;
             private string __pbn__trailing_comments;
 
+            [global::ProtoBuf.ProtoMember(6)]
+            public global::System.Collections.Generic.List<string> leading_detached_comments { get; } = new global::System.Collections.Generic.List<string>();
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class GeneratedCodeInfo : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<Annotation> annotation { get; } = new global::System.Collections.Generic.List<Annotation>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Annotation : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1, IsPacked = true)]
+            public global::System.Collections.Generic.List<int> path { get; } = new global::System.Collections.Generic.List<int>();
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string source_file
+            {
+                get => __pbn__source_file ?? "";
+                set => __pbn__source_file = value;
+            }
+            public bool ShouldSerializesource_file() => __pbn__source_file != null;
+            public void Resetsource_file() => __pbn__source_file = null;
+            private string __pbn__source_file;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public int begin
+            {
+                get => __pbn__begin.GetValueOrDefault();
+                set => __pbn__begin = value;
+            }
+            public bool ShouldSerializebegin() => __pbn__begin != null;
+            public void Resetbegin() => __pbn__begin = null;
+            private int? __pbn__begin;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public int end
+            {
+                get => __pbn__end.GetValueOrDefault();
+                set => __pbn__end = value;
+            }
+            public bool ShouldSerializeend() => __pbn__end != null;
+            public void Resetend() => __pbn__end = null;
+            private int? __pbn__end;
+
         }
 
     }
 
 }
 
-#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

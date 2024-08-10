@@ -33,6 +33,15 @@ $params = $CommonParams + @(
 
 & dotnet $ProtoGenDll $params > $null
 
+# protobuf dumper descriptor
+Set-Location -LiteralPath (Join-Path $ProtoBase 'google\protobuf')
+$params = $CommonParams + @(
+    '--proto', "descriptor.proto",
+    '--output', (Join-Path $PSScriptRoot '..\ProtobufDumper\ProtobufDumper\Descriptor.cs'),
+    '--namespace', "google.protobuf"
+    )
+
+#& dotnet $ProtoGenDll $params > $null
 
 $protos | % {
     Set-Location -LiteralPath (Join-Path $ProtoBase $_.ProtoDir)
