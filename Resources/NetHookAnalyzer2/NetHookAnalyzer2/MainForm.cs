@@ -33,8 +33,8 @@ namespace NetHookAnalyzer2
 
 		static ISpecialization[] LoadMessageObjectSpecializations()
 		{
-			return new ISpecialization[]
-			{
+			return
+			[
 				new ClientServiceMethodSpecialization(),
 				new ClientServiceMethodResponseSpecialization(),
 				new RemoteClientSteamToSteamSpecialization(),
@@ -42,8 +42,8 @@ namespace NetHookAnalyzer2
 				new MultiPacketSpecialization(),
 				new GCGenericSpecialization()
 				{
-					GameCoordinatorSpecializations = new IGameCoordinatorSpecialization[]
-					{
+					GameCoordinatorSpecializations =
+					[
 						new CSGOCacheSubscribedGCSpecialization(),
 						new CSGOSOMultipleObjectsGCSpecialization(),
 						new CSGOSOSingleObjectGCSpecialization(),
@@ -53,9 +53,9 @@ namespace NetHookAnalyzer2
 						new TF2CacheSubscribedGCSpecialization(),
 						new TF2SOMultipleObjectsGCSpecialization(),
 						new TF2SOSingleObjectGCSpecialization(),
-					}
+					]
 				}
-			};
+			];
 		}
 
 		protected override void OnFormClosed(FormClosedEventArgs e)
@@ -125,8 +125,8 @@ namespace NetHookAnalyzer2
 			}
 			else
 			{
-				searchPredicate = nhi => ( nhi.EMsg.ToString().IndexOf( searchTerm, StringComparison.InvariantCultureIgnoreCase ) >= 0 ) ||
-					( nhi.InnerMessageName != null && nhi.InnerMessageName.IndexOf( searchTerm, StringComparison.InvariantCultureIgnoreCase ) >= 0 );
+				searchPredicate = nhi => ( nhi.EMsg.ToString().Contains( searchTerm, StringComparison.OrdinalIgnoreCase ) ) ||
+					( nhi.InnerMessageName != null && nhi.InnerMessageName.Contains( searchTerm, StringComparison.OrdinalIgnoreCase ) );
 			}
 
 			return nhi => directionPredicate( nhi ) && searchPredicate( nhi );

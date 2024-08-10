@@ -41,11 +41,11 @@ namespace NetHookAnalyzer2
 			if (specializations != null)
 			{
 				var objectsToSpecialize = new[] { body };
-				while (objectsToSpecialize.Any())
+				while ( objectsToSpecialize.Length > 0 )
 				{
-					var extraSpecializations = objectsToSpecialize.SelectMany(o => specializations.SelectMany(x => x.ReadExtraObjects(o)));
+					var extraSpecializations = objectsToSpecialize.SelectMany( o => specializations.SelectMany( x => x.ReadExtraObjects( o ) ) ).ToArray();
 
-					if (!extraSpecializations.Any())
+					if (extraSpecializations.Length == 0 )
 					{
 						break;
 					}

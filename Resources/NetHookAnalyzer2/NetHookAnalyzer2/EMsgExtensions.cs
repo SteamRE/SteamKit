@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using SteamKit2;
 
 using CSGO = SteamKit2.GC.CSGO.Internal;
@@ -22,7 +23,7 @@ namespace NetHookAnalyzer2
 					return Enum.GetName( enumType, ( int )eMsg );
 			}
 
-			return eMsg.ToString();
+			return eMsg.ToString( CultureInfo.InvariantCulture );
 		}
 
 		static IEnumerable<Type> GetGCEMsgEnums(uint appId)

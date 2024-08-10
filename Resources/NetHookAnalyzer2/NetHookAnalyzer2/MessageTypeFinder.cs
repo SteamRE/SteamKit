@@ -43,16 +43,16 @@ namespace NetHookAnalyzer2
 			var gcMsgName = EMsgExtensions.GetGCMessageName(rawEMsg, gcAppid);
 
 			var typeMsgName = gcMsgName
-				.Replace("k_", string.Empty)
-				.Replace("ESOMsg", string.Empty)
+				.Replace("k_", string.Empty, StringComparison.Ordinal)
+				.Replace("ESOMsg", string.Empty, StringComparison.Ordinal)
 				.TrimStart('_')
-				.Replace("EMsg", string.Empty)
+				.Replace("EMsg", string.Empty, StringComparison.Ordinal)
 				.TrimStart("GC");
 
 			var possibleTypes = from type in typeof(CMClient).Assembly.GetTypes()
 								from typePrefix in GetPossibleGCTypePrefixes(gcAppid)
 								where type.GetInterfaces().Contains(typeof(IExtensible))
-								where type.FullName.StartsWith(typePrefix) && type.FullName.EndsWith(typeMsgName)
+								where type.FullName.StartsWith(typePrefix, StringComparison.Ordinal) && type.FullName.EndsWith(typeMsgName, StringComparison.Ordinal)
 								select type;
 
 			return possibleTypes;

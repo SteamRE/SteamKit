@@ -15,7 +15,7 @@ namespace NetHookAnalyzer2
 			lvi.SubItems.Add(new ListViewItem.ListViewSubItem
 			{
 				Name = "#",
-				Text = item.Sequence.ToString(),
+				Text = item.Sequence.ToString( CultureInfo.InvariantCulture ),
 			});
 
 			lvi.SubItems.Add(new ListViewItem.ListViewSubItem

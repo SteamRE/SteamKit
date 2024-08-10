@@ -12,26 +12,20 @@ namespace NetHookAnalyzer2
 
 		public int Compare(object x, object y)
 		{
-			if (x == null)
-			{
-				throw new ArgumentNullException("x");
-			}
+			ArgumentNullException.ThrowIfNull( x );
 
-			if (y == null)
-			{
-				throw new ArgumentNullException("y");
-			}
+			ArgumentNullException.ThrowIfNull( y );
 
 			var firstItem = x as ListViewItem;
 			if (firstItem == null)
 			{
-				throw new ArgumentException("NetHookListViewItemSequentialComparer can only compare ListViewItems.", "x");
+				throw new ArgumentException( "NetHookListViewItemSequentialComparer can only compare ListViewItems.", nameof( x ) );
 			}
 
 			var secondItem = y as ListViewItem;
 			if (secondItem == null)
 			{
-				throw new ArgumentException("NetHookListViewItemSequentialComparer can only compare ListViewItems.", "y");
+				throw new ArgumentException( "NetHookListViewItemSequentialComparer can only compare ListViewItems.", nameof( y ) );
 			}
 
 			return Compare(firstItem, secondItem);
@@ -43,15 +37,9 @@ namespace NetHookAnalyzer2
 
 		public int Compare(ListViewItem x, ListViewItem y)
 		{
-			if (x == null)
-			{
-				throw new ArgumentNullException("x");
-			}
+			ArgumentNullException.ThrowIfNull( x );
 
-			if (y == null)
-			{
-				throw new ArgumentNullException("y");
-			}
+			ArgumentNullException.ThrowIfNull( y );
 
 			var firstItem = (NetHookItem)x.Tag;
 			var secondItem = (NetHookItem)y.Tag;

@@ -10,7 +10,7 @@ namespace NetHookAnalyzer2
 		public static Dictionary<int, List<object>> ReadProtobuf(Stream stream)
 		{
 			// try reading it as a protobuf
-			var reader = ProtoReader.State.Create( stream, null );
+			using var reader = ProtoReader.State.Create( stream, null );
 			var fields = new Dictionary<int, List<object>>();
 
 			while (true)
@@ -66,7 +66,7 @@ namespace NetHookAnalyzer2
 				}
 				else
 				{
-					values = new List<object> { fieldValue };
+					values = [fieldValue];
 					fields[ field ] = values;
 				}
 			}
