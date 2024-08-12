@@ -227,7 +227,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is received when account information is recieved from the network.
+        /// This callback is received when account information is received from the network.
         /// This generally happens after logon.
         /// </summary>
         public sealed class AccountInfoCallback : CallbackMsg
@@ -279,7 +279,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is received when email information is recieved from the network.
+        /// This callback is received when email information is received from the network.
         /// </summary>
         public sealed class EmailAddrInfoCallback : CallbackMsg
         {
@@ -303,7 +303,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is received when wallet info is recieved from the network.
+        /// This callback is received when wallet info is received from the network.
         /// </summary>
         public sealed class WalletInfoCallback : CallbackMsg
         {

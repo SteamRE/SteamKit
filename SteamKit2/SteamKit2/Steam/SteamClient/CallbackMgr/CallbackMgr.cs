@@ -112,7 +112,7 @@ namespace SteamKit2
         /// Registers the provided <see cref="Action{T}"/> to receive callbacks of type <typeparamref name="TCallback" />.
         /// </summary>
         /// <param name="jobID">The <see cref="JobID"/> of the callbacks that should be subscribed to.
-        ///		If this is <see cref="JobID.Invalid"/>, all callbacks of type <typeparamref name="TCallback" /> will be recieved.</param>
+        ///		If this is <see cref="JobID.Invalid"/>, all callbacks of type <typeparamref name="TCallback" /> will be received.</param>
         /// <param name="callbackFunc">The function to invoke with the callback.</param>
         /// <typeparam name="TCallback">The type of callback to subscribe to.</typeparam>
         /// <returns>An <see cref="IDisposable"/>. Disposing of the return value will unsubscribe the <paramref name="callbackFunc"/>.</returns>

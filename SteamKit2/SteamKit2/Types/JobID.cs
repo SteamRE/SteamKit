@@ -206,7 +206,7 @@ namespace SteamKit2
             // we're complete with just this callback
             tcs.TrySetResult( (T)callback );
 
-            // inform steamclient that this job wishes to be removed from tracking since we've recieved the single callback we were waiting for
+            // inform steamclient that this job wishes to be removed from tracking since we've received the single callback we were waiting for
             return true;
         }
 

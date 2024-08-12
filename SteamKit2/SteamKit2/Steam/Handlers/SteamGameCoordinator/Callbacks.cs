@@ -6,7 +6,7 @@ namespace SteamKit2
     public partial class SteamGameCoordinator
     {
         /// <summary>
-        /// This callback is fired when a game coordinator message is recieved from the network.
+        /// This callback is fired when a game coordinator message is received from the network.
         /// </summary>
         public class MessageCallback : CallbackMsg
         {

@@ -234,7 +234,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is recieved in response to calling <see cref="SteamApps.GetDepotDecryptionKey"/>.
+        /// This callback is received in response to calling <see cref="SteamApps.GetDepotDecryptionKey"/>.
         /// </summary>
         public sealed class DepotKeyCallback : CallbackMsg
         {
