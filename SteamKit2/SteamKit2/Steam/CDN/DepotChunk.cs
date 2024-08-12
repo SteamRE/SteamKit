@@ -4,8 +4,10 @@
  */
 
 using System;
+using System.Buffers;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace SteamKit2.CDN
 {
@@ -68,15 +70,39 @@ namespace SteamKit2.CDN
 
         static byte[] ProcessCore( DepotManifest.ChunkData info, Span<byte> data, byte[] depotKey )
         {
-            byte[] processedData = CryptoHelper.SymmetricDecrypt( data, depotKey );
+            DebugLog.Assert( depotKey.Length == 32, nameof( DepotChunk ), $"Tried to decrypt depot chunk with non 32 byte key!" );
 
-            if ( processedData.Length > 1 && processedData[ 0 ] == 'V' && processedData[ 1 ] == 'Z' )
+            using var aes = Aes.Create();
+            aes.BlockSize = 128;
+            aes.KeySize = 256;
+            aes.Key = depotKey;
+
+            // first 16 bytes of input is the ECB encrypted IV
+            Span<byte> iv = stackalloc byte[ 16 ];
+            aes.DecryptEcb( data[ ..iv.Length ], iv, PaddingMode.None );
+
+            byte[] processedData;
+
+            // With CBC and padding, the decrypted size will always be smaller
+            var buffer = ArrayPool<byte>.Shared.Rent( data.Length - iv.Length );
+
+            try
             {
-                processedData = VZipUtil.Decompress( processedData );
+                var written = aes.DecryptCbc( data[ iv.Length.. ], iv, buffer, PaddingMode.PKCS7 );
+                var decryptedStream = new MemoryStream( buffer, 0, written );
+
+                if ( buffer.Length > 1 && buffer[ 0 ] == 'V' && buffer[ 1 ] == 'Z' )
+                {
+                    processedData = VZipUtil.Decompress( decryptedStream );
+                }
+                else
+                {
+                    processedData = ZipUtil.Decompress( decryptedStream );
+                }
             }
-            else
+            finally
             {
-                processedData = ZipUtil.Decompress( processedData );
+                ArrayPool<byte>.Shared.Return( buffer );
             }
 
             var dataCrc = Utils.AdlerHash( processedData );

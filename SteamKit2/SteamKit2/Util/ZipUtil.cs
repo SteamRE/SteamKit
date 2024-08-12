@@ -17,6 +17,11 @@ namespace SteamKit2
         public static byte[] Decompress( byte[] buffer )
         {
             using var ms = new MemoryStream( buffer );
+            return Decompress( ms );
+        }
+
+        public static byte[] Decompress( MemoryStream ms )
+        {
             using var zip = new ZipArchive( ms );
             var entries = zip.Entries;
 

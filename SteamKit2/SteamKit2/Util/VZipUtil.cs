@@ -17,6 +17,11 @@ namespace SteamKit2
         public static byte[] Decompress(byte[] buffer)
         {
             using MemoryStream ms = new MemoryStream( buffer );
+            return Decompress( ms );
+        }
+
+        public static byte[] Decompress( MemoryStream ms )
+        {
             using BinaryReader reader = new BinaryReader( ms );
             if ( reader.ReadUInt16() != VZipHeader )
             {
