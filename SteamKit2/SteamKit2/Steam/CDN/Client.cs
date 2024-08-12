@@ -4,6 +4,7 @@
  */
 
 using System;
+using System.Buffers;
 using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
@@ -82,20 +83,59 @@ namespace SteamKit2.CDN
                 url = $"depot/{depotId}/manifest/{manifestId}/{MANIFEST_VERSION}";
             }
 
-            var manifestData = await DoRawCommandAsync( server, url, proxyServer ).ConfigureAwait( false );
+            using var request = new HttpRequestMessage( HttpMethod.Get, BuildCommand( server, url, proxyServer ) );
 
-            // Decompress the zipped manifest data
-            using var ms = new MemoryStream( manifestData );
-            using var zip = new ZipArchive( ms );
-            var entries = zip.Entries;
-
-            DebugLog.Assert( entries.Count == 1, nameof( Client ), "Expected the zip to contain only one file" );
+            using var cts = new CancellationTokenSource();
+            cts.CancelAfter( RequestTimeout );
 
             DepotManifest depotManifest;
 
-            using ( var zipEntryStream = entries[ 0 ].Open() )
+            try
             {
-                depotManifest = DepotManifest.Deserialize( zipEntryStream );
+                using var response = await httpClient.SendAsync( request, HttpCompletionOption.ResponseHeadersRead, cts.Token ).ConfigureAwait( false );
+
+                if ( !response.IsSuccessStatusCode )
+                {
+                    throw new SteamKitWebRequestException( $"Response status code does not indicate success: {response.StatusCode:D} ({response.ReasonPhrase}).", response );
+                }
+
+                if ( !response.Content.Headers.ContentLength.HasValue )
+                {
+                    throw new SteamKitWebRequestException( "Response does not have Content-Length", response );
+                }
+
+                cts.CancelAfter( ResponseBodyTimeout );
+
+                var contentLength = ( int )response.Content.Headers.ContentLength;
+                var buffer = ArrayPool<byte>.Shared.Rent( contentLength );
+
+                try
+                {
+                    using var ms = new MemoryStream( buffer, 0, contentLength );
+
+                    // Stream the http response into the rented buffer
+                    await response.Content.CopyToAsync( ms, cts.Token );
+
+                    ms.Position = 0;
+
+                    // Decompress the zipped manifest data
+                    using var zip = new ZipArchive( ms );
+                    var entries = zip.Entries;
+
+                    DebugLog.Assert( entries.Count == 1, nameof( CDN ), "Expected the zip to contain only one file" );
+
+                    using var zipEntryStream = entries[ 0 ].Open();
+                    depotManifest = DepotManifest.Deserialize( zipEntryStream );
+                }
+                finally
+                {
+                    ArrayPool<byte>.Shared.Return( buffer );
+                }
+            }
+            catch ( Exception ex )
+            {
+                DebugLog.WriteLine( nameof( CDN ), $"Failed to download manifest {request.RequestUri}: {ex.Message}" );
+                throw;
             }
 
             if ( depotKey != null )
