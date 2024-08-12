@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.IO;
 using System.IO.Hashing;
 
@@ -31,7 +32,9 @@ namespace SteamKit2
             // Sometimes this is a CRC32 (e.g. for depot chunks).
             /* uint creationTimestampOrSecondaryCRC = */ reader.ReadUInt32();
 
-            var properties = reader.ReadBytes( 5 );
+            // this is 5 bytes of LZMA properties
+            var propertyBits = reader.ReadByte();
+            var dictionarySize = reader.ReadUInt32();
             var compressedBytesOffset = ms.Position;
 
             // jump to the end of the buffer to read the footer
@@ -50,11 +53,23 @@ namespace SteamKit2
 
             SevenZip.Compression.LZMA.Decoder decoder = new SevenZip.Compression.LZMA.Decoder();
 
-            decoder.SetDecoderProperties( properties );
-
             var outData = new byte[ sizeDecompressed ];
-            using MemoryStream outStream = new MemoryStream( outData );
-            decoder.Code( ms, outStream, sizeCompressed, sizeDecompressed, null );
+
+            // If the value of dictionary size in properties is smaller than (1 << 12),
+            // the LZMA decoder must set the dictionary size variable to (1 << 12).
+            var windowBuffer = ArrayPool<byte>.Shared.Rent( Math.Max( 1 << 12, ( int )dictionarySize ) );
+
+            try
+            {
+                decoder.SteamKitSetDecoderProperties( propertyBits, dictionarySize, windowBuffer );
+
+                using MemoryStream outStream = new MemoryStream( outData );
+                decoder.Code( ms, outStream, sizeCompressed, sizeDecompressed, null );
+            }
+            finally
+            {
+                ArrayPool<byte>.Shared.Return( windowBuffer );
+            }
 
             if ( Crc32.HashToUInt32( outData ) != outputCRC )
             {

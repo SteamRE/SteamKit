@@ -374,6 +374,20 @@ namespace SevenZip.Compression.LZMA
 			SetPosBitsProperties(pb);
 		}
 
+		public void SteamKitSetDecoderProperties(byte bits, uint dictionarySize, byte[] buffer) // Added by SteamKit to avoid allocating the OutWindow
+		{
+			int lc = bits % 9;
+			int remainder = bits / 9;
+			int lp = remainder % 5;
+			int pb = remainder / 5;
+			if (pb > Base.kNumPosStatesBitsMax || dictionarySize < (1 << 12))
+				throw new InvalidParamException();
+			SetLiteralProperties(lp, lc);
+			SetPosBitsProperties(pb);
+			m_DictionarySize = m_DictionarySizeCheck = dictionarySize;
+			m_OutWindow.SteamKitSetBuffer(buffer, dictionarySize);
+		}
+
 		public bool Train(System.IO.Stream stream)
 		{
 			_solid = true;

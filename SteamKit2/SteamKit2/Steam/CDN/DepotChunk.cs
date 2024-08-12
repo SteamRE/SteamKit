@@ -62,7 +62,13 @@ namespace SteamKit2.CDN
                 return;
             }
 
-            byte[] processedData = CryptoHelper.SymmetricDecrypt( Data, depotKey );
+            Data = ProcessCore( ChunkInfo, Data, depotKey );
+            IsProcessed = true;
+        }
+
+        static byte[] ProcessCore( DepotManifest.ChunkData info, Span<byte> data, byte[] depotKey )
+        {
+            byte[] processedData = CryptoHelper.SymmetricDecrypt( data, depotKey );
 
             if ( processedData.Length > 1 && processedData[ 0 ] == 'V' && processedData[ 1 ] == 'Z' )
             {
@@ -75,13 +81,22 @@ namespace SteamKit2.CDN
 
             var dataCrc = Utils.AdlerHash( processedData );
 
-            if ( dataCrc != ChunkInfo.Checksum )
+            if ( dataCrc != info.Checksum )
             {
                 throw new InvalidDataException( "Processed data checksum is incorrect! Downloaded depot chunk is corrupt or invalid/wrong depot key?" );
             }
 
-            Data = processedData;
-            IsProcessed = true;
+            return processedData;
+        }
+
+        internal static DepotChunk ProcessFromData( DepotManifest.ChunkData info, Span<byte> data, byte[] depotKey )
+        {
+            var processedData = ProcessCore( info, data, depotKey );
+
+            return new DepotChunk( info, processedData )
+            {
+                IsProcessed = true
+            };
         }
     }
 }
