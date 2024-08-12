@@ -5,6 +5,7 @@
 
 using System;
 using System.IO;
+using System.IO.Compression;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -83,9 +84,19 @@ namespace SteamKit2.CDN
 
             var manifestData = await DoRawCommandAsync( server, url, proxyServer ).ConfigureAwait( false );
 
-            manifestData = ZipUtil.Decompress( manifestData );
+            // Decompress the zipped manifest data
+            using var ms = new MemoryStream( manifestData );
+            using var zip = new ZipArchive( ms );
+            var entries = zip.Entries;
 
-            var depotManifest = new DepotManifest( manifestData );
+            DebugLog.Assert( entries.Count == 1, nameof( ZipUtil ), "Expected the zip to contain only one file" );
+
+            DepotManifest depotManifest;
+
+            using ( var zipEntryStream = entries[ 0 ].Open() )
+            {
+                depotManifest = DepotManifest.Deserialize( zipEntryStream );
+            }
 
             if ( depotKey != null )
             {
