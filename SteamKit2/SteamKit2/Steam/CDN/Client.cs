@@ -89,7 +89,7 @@ namespace SteamKit2.CDN
             using var zip = new ZipArchive( ms );
             var entries = zip.Entries;
 
-            DebugLog.Assert( entries.Count == 1, nameof( ZipUtil ), "Expected the zip to contain only one file" );
+            DebugLog.Assert( entries.Count == 1, nameof( Client ), "Expected the zip to contain only one file" );
 
             DepotManifest depotManifest;
 
