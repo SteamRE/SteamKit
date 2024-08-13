@@ -14,13 +14,11 @@ namespace Tests
         public void ParsesAndDecryptsManifest()
         {
             var assembly = Assembly.GetExecutingAssembly();
-            using var stream = assembly.GetManifestResourceStream( "Tests.Files.depot_440_1118032470228587934.zip" );
+            using var stream = assembly.GetManifestResourceStream( "Tests.Files.depot_440_1118032470228587934.manifest" );
             using var ms = new MemoryStream();
             stream.CopyTo( ms );
 
             var manifestData = ms.ToArray();
-
-            manifestData = ZipUtil.Decompress( manifestData );
 
             var depotManifest = DepotManifest.Deserialize( manifestData );
 
@@ -55,13 +53,11 @@ namespace Tests
         public void RoundtripSerializesManifestEncryptedManifest()
         {
             var assembly = Assembly.GetExecutingAssembly();
-            using var stream = assembly.GetManifestResourceStream( "Tests.Files.depot_440_1118032470228587934.zip" );
+            using var stream = assembly.GetManifestResourceStream( "Tests.Files.depot_440_1118032470228587934.manifest" );
             using var ms = new MemoryStream();
             stream.CopyTo( ms );
 
             var manifestData = ms.ToArray();
-
-            manifestData = ZipUtil.Decompress( manifestData );
 
             var depotManifest = DepotManifest.Deserialize( manifestData );
 

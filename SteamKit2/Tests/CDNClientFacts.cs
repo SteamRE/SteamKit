@@ -44,10 +44,10 @@ namespace Tests
             };
             var chunk = new DepotManifest.ChunkData
             {
-                ChunkID = [0xFF],
+                ChunkID = [ 0xFF ],
             };
 
-            var ex = await Assert.ThrowsAsync<SteamKitWebRequestException>( () => client.DownloadDepotChunkAsync( depotId: 0, chunk, server ) );
+            var ex = await Assert.ThrowsAsync<SteamKitWebRequestException>( () => client.DownloadDepotChunkAsync( depotId: 0, chunk, server, [] ) );
             Assert.Equal( ( HttpStatusCode )418, ex.StatusCode );
         }
 
@@ -66,8 +66,56 @@ namespace Tests
             };
             var chunk = new DepotManifest.ChunkData();
 
-            var ex = await Assert.ThrowsAsync<ArgumentException>( () => client.DownloadDepotChunkAsync( depotId: 0, chunk, server ) );
+            var ex = await Assert.ThrowsAsync<ArgumentException>( () => client.DownloadDepotChunkAsync( depotId: 0, chunk, server, [] ) );
             Assert.Equal( "chunk", ex.ParamName );
+        }
+
+        [Fact]
+        public async Task ThrowsWhenDestinationBufferSmaller()
+        {
+            var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( () => new HttpClient( new TeapotHttpMessageHandler() ) ) );
+            var steam = new SteamClient( configuration );
+            using var client = new Client( steam );
+            var server = new Server
+            {
+                Protocol = Server.ConnectionProtocol.HTTP,
+                Host = "localhost",
+                VHost = "localhost",
+                Port = 80
+            };
+            var chunk = new DepotManifest.ChunkData
+            {
+                ChunkID = [ 0xFF ],
+                UncompressedLength = 64,
+                CompressedLength = 32,
+            };
+
+            var ex = await Assert.ThrowsAsync<ArgumentException>( () => client.DownloadDepotChunkAsync( depotId: 0, chunk, server, new byte[ 4 ] ) );
+            Assert.Equal( "destination", ex.ParamName );
+        }
+
+        [Fact]
+        public async Task ThrowsWhenDestinationBufferSmallerWithDepotKey()
+        {
+            var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( () => new HttpClient( new TeapotHttpMessageHandler() ) ) );
+            var steam = new SteamClient( configuration );
+            using var client = new Client( steam );
+            var server = new Server
+            {
+                Protocol = Server.ConnectionProtocol.HTTP,
+                Host = "localhost",
+                VHost = "localhost",
+                Port = 80
+            };
+            var chunk = new DepotManifest.ChunkData
+            {
+                ChunkID = [ 0xFF ],
+                UncompressedLength = 64,
+                CompressedLength = 32,
+            };
+
+            var ex = await Assert.ThrowsAsync<ArgumentException>( () => client.DownloadDepotChunkAsync( depotId: 0, chunk, server, new byte[ 4 ], depotKey: [] ) );
+            Assert.Equal( "destination", ex.ParamName );
         }
 
         sealed class TeapotHttpMessageHandler : HttpMessageHandler
