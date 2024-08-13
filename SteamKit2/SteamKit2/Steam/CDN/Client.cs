@@ -60,7 +60,7 @@ namespace SteamKit2.CDN
         /// <param name="server">The content server to connect to.</param>
         /// <param name="depotKey">
         /// The depot decryption key for the depot that will be downloaded.
-        /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
+        /// This is used for decrypting filenames (if needed) in depot manifests.
         /// </param>
         /// <param name="proxyServer">Optional content server marked as UseAsProxy which transforms the request.</param>
         /// <returns>A <see cref="DepotManifest"/> instance that contains information about the files present within a depot.</returns>
@@ -164,25 +164,45 @@ namespace SteamKit2.CDN
         /// A <see cref="DepotManifest.ChunkData"/> instance that represents the chunk to download.
         /// This value should come from a manifest downloaded with <see cref="o:DownloadManifestAsync"/>.
         /// </param>
-        /// <returns>A <see cref="DepotChunk"/> instance that contains the data for the given chunk.</returns>
+        /// <returns>The total number of bytes written to <paramref name="destination" />.</returns>
         /// <param name="server">The content server to connect to.</param>
+        /// <param name="destination">
+        /// The buffer to receive the chunk data. If <paramref name="depotKey"/> is provided, this will be the decompressed buffer.
+        /// Allocate or rent a buffer that is equal or longer than <see cref="DepotManifest.ChunkData.UncompressedLength"/>
+        /// </param>
         /// <param name="depotKey">
         /// The depot decryption key for the depot that will be downloaded.
-        /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
+        /// This is used to process the chunk data.
         /// </param>
         /// <param name="proxyServer">Optional content server marked as UseAsProxy which transforms the request.</param>
         /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
         /// <exception cref="System.IO.InvalidDataException">Thrown if the downloaded data does not match the expected length.</exception>
         /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
         /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
-        public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk, Server server, byte[]? depotKey = null, Server? proxyServer = null )
+        public async Task<int> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk, Server server, byte[] destination, byte[]? depotKey = null, Server? proxyServer = null )
         {
             ArgumentNullException.ThrowIfNull( server );
             ArgumentNullException.ThrowIfNull( chunk );
+            ArgumentNullException.ThrowIfNull( destination );
 
             if ( chunk.ChunkID == null )
             {
-                throw new ArgumentException( "Chunk must have a ChunkID.", nameof( chunk ) );
+                throw new ArgumentException( $"Chunk must have a {nameof( DepotManifest.ChunkData.ChunkID )}.", nameof( chunk ) );
+            }
+
+            if ( depotKey == null )
+            {
+                if ( destination.Length < chunk.CompressedLength )
+                {
+                    throw new ArgumentException( $"The destination buffer must be longer than the chunk {nameof( DepotManifest.ChunkData.CompressedLength )} (since no depot key was provided).", nameof( destination ) );
+                }
+            }
+            else
+            {
+                if ( destination.Length < chunk.UncompressedLength )
+                {
+                    throw new ArgumentException( $"The destination buffer must be longer than the chunk {nameof( DepotManifest.ChunkData.UncompressedLength )}.", nameof( destination ) );
+                }
             }
 
             var chunkID = Utils.EncodeHexString( chunk.ChunkID );
@@ -216,6 +236,24 @@ namespace SteamKit2.CDN
                 }
 
                 cts.CancelAfter( ResponseBodyTimeout );
+
+                // If no depot key is provided, stream into the destination buffer without renting
+                if ( depotKey == null )
+                {
+                    using var ms = new MemoryStream( destination, 0, contentLength );
+
+                    // Stream the http response into the provided destination
+                    await response.Content.CopyToAsync( ms, cts.Token );
+
+                    if ( ms.Position != contentLength )
+                    {
+                        throw new InvalidDataException( $"Length mismatch after downloading depot chunk! (was {ms.Position}, but should be {contentLength})" );
+                    }
+
+                    return contentLength;
+                }
+
+                // We have to stream into a temporary buffer because a decryption will need to be performed
                 var buffer = ArrayPool<byte>.Shared.Rent( contentLength );
 
                 try
@@ -230,16 +268,10 @@ namespace SteamKit2.CDN
                         throw new InvalidDataException( $"Length mismatch after downloading depot chunk! (was {ms.Position}, but should be {contentLength})" );
                     }
 
-                    if ( depotKey != null )
-                    {
-                        // if we have the depot key, we can process the chunk immediately
-                        return DepotChunk.ProcessFromData( chunk, buffer.AsSpan()[ ..contentLength ], depotKey );
-                    }
-                    else
-                    {
-                        // we have to perform a copy
-                        return new DepotChunk( chunk, ms.ToArray() );
-                    }
+                    // process the chunk immediately
+                    var writtenLength = DepotChunk.Process( chunk, buffer.AsSpan()[ ..contentLength ], destination, depotKey );
+
+                    return writtenLength;
                 }
                 finally
                 {
