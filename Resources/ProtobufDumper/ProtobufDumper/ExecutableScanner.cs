@@ -46,18 +46,16 @@ namespace ProtobufDumper
 
                 if ( !ProtoFileNameRegex.IsMatch( protoName ) ) continue;
 
-                using ( var buffer = new MemoryStream( data, i, length ) )
+                using var buffer = new MemoryStream( data, i, length );
+                if ( !processCandidate( protoName, buffer ) )
                 {
-                    if ( !processCandidate( protoName, buffer ) )
-                    {
-                        scanSkipOffset = length + 1;
-                        i -= 1;
-                    }
-                    else
-                    {
-                        i = y;
-                        scanSkipOffset = 0;
-                    }
+                    scanSkipOffset = length + 1;
+                    i -= 1;
+                }
+                else
+                {
+                    i = y;
+                    scanSkipOffset = 0;
                 }
             }
         }

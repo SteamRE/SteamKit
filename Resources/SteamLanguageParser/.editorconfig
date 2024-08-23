@@ -1,4 +1,0 @@
-root = true
-
-[*.cs]
-indent_style = space

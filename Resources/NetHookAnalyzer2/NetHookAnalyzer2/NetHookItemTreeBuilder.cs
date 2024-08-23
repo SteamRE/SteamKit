@@ -25,7 +25,7 @@ namespace NetHookAnalyzer2
 
 			var (rawEMsg, header, body, payload) = item.ReadFile();
 
-			var node = BuildInfoNode(rawEMsg);
+			var node = new TreeNode(EMsgToStringName(rawEMsg));
 			node.Expand();
 
 			node.Nodes.Add(new TreeNodeObjectExplorer("Header", header, configuration));
@@ -41,11 +41,11 @@ namespace NetHookAnalyzer2
 			if (specializations != null)
 			{
 				var objectsToSpecialize = new[] { body };
-				while (objectsToSpecialize.Any())
+				while ( objectsToSpecialize.Length > 0 )
 				{
-					var extraSpecializations = objectsToSpecialize.SelectMany(o => specializations.SelectMany(x => x.ReadExtraObjects(o)));
+					var extraSpecializations = objectsToSpecialize.SelectMany( o => specializations.SelectMany( x => x.ReadExtraObjects( o ) ) ).ToArray();
 
-					if (!extraSpecializations.Any())
+					if (extraSpecializations.Length == 0 )
 					{
 						break;
 					}
@@ -63,17 +63,17 @@ namespace NetHookAnalyzer2
 			return node;
 		}
 
-		static TreeNode BuildInfoNode(uint rawEMsg)
+		internal static string EMsgToStringName(uint rawEMsg)
 		{
 			var eMsg = MsgUtil.GetMsg( rawEMsg );
 			var eMsgName = $"EMsg {eMsg:G} ({eMsg:D})";
 
 			if( MsgUtil.IsProtoBuf( rawEMsg ) )
 			{
-				return new TreeNode( eMsgName );
+				return eMsgName;
 			}
 
-			return new TreeNode( $"{eMsgName} (Non-Protobuf)" );
+			return $"{eMsgName} (Non-Protobuf)";
 		}
 	}
 }

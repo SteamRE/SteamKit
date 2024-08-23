@@ -11,7 +11,7 @@ using SteamKit2.Internal;
 namespace SteamKit2.GC
 {
     /// <summary>
-    /// Represents a simple unified interface into game coordinator messages recieved from the network.
+    /// Represents a simple unified interface into game coordinator messages received from the network.
     /// This is contrasted with <see cref="IClientGCMsg"/> in that this interface is packet body agnostic
     /// and only allows simple access into the header. This interface is also immutable, and the underlying
     /// data cannot be modified.

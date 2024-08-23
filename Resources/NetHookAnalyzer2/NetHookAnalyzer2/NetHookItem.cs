@@ -15,10 +15,7 @@ namespace NetHookAnalyzer2
 			Out
 		}
 
-		static Regex NameRegex = new Regex(
-			@"(?<num>\d+)_(?<direction>in|out)_(?<emsg>\d+)",
-			RegexOptions.Compiled | RegexOptions.IgnoreCase
-		);
+		static Regex NameRegex = NameRegexGenerated();
 
 		public int Sequence { get; private set; }
 		public DateTime Timestamp { get; private set; }
@@ -99,9 +96,9 @@ namespace NetHookAnalyzer2
 					var gcName = EMsgExtensions.GetGCMessageName(gcEMsg, proto.Body.appid);
 
 					var headerToTrim = "k_EMsg";
-					if (gcName.StartsWith(headerToTrim))
+					if (gcName.StartsWith(headerToTrim, StringComparison.Ordinal))
 					{
-						gcName = gcName.Substring(headerToTrim.Length);
+						gcName = gcName[ headerToTrim.Length.. ];
 					}
 
 					return gcName;
@@ -145,5 +142,8 @@ namespace NetHookAnalyzer2
 			var proto = new ClientMsgProtobuf<T>(msg);
 			return proto;
 		}
+
+		[GeneratedRegex( @"(?<num>\d+)_(?<direction>in|out)_(?<emsg>\d+)", RegexOptions.IgnoreCase )]
+		private static partial Regex NameRegexGenerated();
 	}
 }

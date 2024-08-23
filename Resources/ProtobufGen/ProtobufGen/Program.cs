@@ -137,11 +137,11 @@ namespace ProtobufGen
                         numErrors++;
                     }
 
-                    if ( error.IsWarning && error.Message.StartsWith( "no syntax specified;" ) )
+                    if ( error.IsWarning && error.Message.StartsWith( "no syntax specified;", StringComparison.Ordinal ) )
                     {
                         reparse = true;
                     }
-                    else if ( !error.IsWarning || !error.Message.StartsWith( "import not used:" ) )
+                    else if ( !error.IsWarning || !error.Message.StartsWith( "import not used:", StringComparison.Ordinal ) )
                     {
                         Console.Error.WriteLine( $"{error.File} ({error.LineNumber}, {error.ColumnNumber}): {error.Message}" );
                     }

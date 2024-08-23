@@ -2,7 +2,7 @@
 
 namespace ProtobufDumper
 {
-    public class Util
+    static class Util
     {
         public static string ToLiteral( string input )
         {

@@ -122,7 +122,7 @@ namespace SteamKit2
                     if ( rk == null ) return false;
 
                     var instanceID = rk.GetValue( "PnpInstanceID", "" )?.ToString();
-                    return instanceID?.Length > 3 && instanceID.StartsWith( "PCI" );
+                    return instanceID?.Length > 3 && instanceID.StartsWith( "PCI", StringComparison.Ordinal );
                 } )
                 .Select( networkInterface => networkInterface.GetPhysicalAddress().GetAddressBytes()
                     //pad all found mac addresses to 8 bytes

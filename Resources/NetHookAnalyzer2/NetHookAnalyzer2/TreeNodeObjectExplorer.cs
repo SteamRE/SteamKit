@@ -102,13 +102,13 @@ namespace NetHookAnalyzer2
 		void DisplayDataAsAscii(object sender, EventArgs e)
 		{
 			var data = (byte[])value;
-			SetValueForDisplay(Encoding.ASCII.GetString(data).Replace("\0", "\\0"));
+			SetValueForDisplay(Encoding.ASCII.GetString(data).Replace("\0", "\\0", StringComparison.InvariantCulture) );
 		}
 
 		void DisplayDataAsUTF8(object sender, EventArgs e)
 		{
 			var data = (byte[])value;
-			SetValueForDisplay(Encoding.UTF8.GetString(data).Replace("\0", "\\0"));
+			SetValueForDisplay(Encoding.UTF8.GetString(data).Replace("\0", "\\0", StringComparison.InvariantCulture));
 		}
 
 		void DisplayDataAsHexadecimal(object sender, EventArgs e)
@@ -136,7 +136,7 @@ namespace NetHookAnalyzer2
 			}
 			else
 			{
-				SetValueForDisplay(null, childNodes: new[] { new TreeNodeObjectExplorer(kv.Name, kv, configuration) });
+				SetValueForDisplay(null, childNodes: [new TreeNodeObjectExplorer(kv.Name, kv, configuration)]);
 			}
 
 			this.ExpandAll();
@@ -151,7 +151,7 @@ namespace NetHookAnalyzer2
 				using var ms = new MemoryStream( data );
 				var dictionary = ProtoBufFieldReader.ReadProtobuf( ms );
 
-				SetValueForDisplay( null, childNodes: new[] { new TreeNodeObjectExplorer( "Protobuf", dictionary, configuration ) } );
+				SetValueForDisplay( null, childNodes: [new TreeNodeObjectExplorer( "Protobuf", dictionary, configuration )] );
 			}
 			catch
 			{
@@ -174,7 +174,7 @@ namespace NetHookAnalyzer2
 				var handler = new JwtSecurityTokenHandler();
 				var token = handler.ReadJwtToken( data );
 
-				SetValueForDisplay( null, childNodes: new[] { new TreeNodeObjectExplorer( "JSON Web Token", token, configuration ) } );
+				SetValueForDisplay( null, childNodes: [new TreeNodeObjectExplorer( "JSON Web Token", token, configuration )] );
 			}
 			catch
 			{
@@ -217,7 +217,7 @@ namespace NetHookAnalyzer2
 			SetValueForDisplay(steamID.Render(steam3: true));
 		}
 
-		SteamID ConvertToSteamID(object value)
+		static SteamID ConvertToSteamID(object value)
 		{
 			// first check if the given value is already a steamid
 			SteamID steamID = value as SteamID;
@@ -319,7 +319,7 @@ namespace NetHookAnalyzer2
 
 		static int ToolStripMenuItemComparisonByText( ToolStripMenuItem x, ToolStripMenuItem y )
 		{
-			return string.Compare(x.Text, y.Text);
+			return string.Compare( x.Text, y.Text, StringComparison.Ordinal );
 		}
 
 		#endregion
@@ -339,12 +339,11 @@ namespace NetHookAnalyzer2
 					new ToolStripMenuItem(
 						"&Copy",
 						null,
-						new[]
-						{
+						[
 							new ToolStripMenuItem("Copy &Name", null, CopyNameToClipboard),
 							new ToolStripMenuItem("Copy &Value", null, CopyValueToClipboard),
 							new ToolStripMenuItem("Copy Name &and Value", null, CopyNameAndValueToClipboard)
-						}));
+						]));
 			}
 			else
 			{
@@ -352,10 +351,9 @@ namespace NetHookAnalyzer2
 					new ToolStripMenuItem(
 						"&Copy",
 						null,
-						new[]
-						{
+						[
 							new ToolStripMenuItem("Copy &Name", null, CopyNameToClipboard),
-						}));
+						]));
 			}
 
 			if (value != null)
@@ -398,7 +396,7 @@ namespace NetHookAnalyzer2
 
 								foreach (var enumType in enumTypes)
 								{
-									var enumName = enumType.FullName.Substring(enumType.Namespace.Length + 1);
+									var enumName = enumType.FullName[ ( enumType.Namespace.Length + 1 ).. ];
 									var item = new ToolStripMenuItem( enumName, null, (s, _) =>
 									{
 										DisplayAsEnumMember(enumType);
@@ -419,11 +417,10 @@ namespace NetHookAnalyzer2
 							new ToolStripMenuItem(
 								"SteamID",
 								null,
-								new[]
-								{
+								[
 									new ToolStripMenuItem("Steam2", null, DisplayAsSteam2ID).AsRadioCheck(),
 									new ToolStripMenuItem("Steam3", null, DisplayAsSteam3ID).AsRadioCheck(),
-								} ));
+								] ));
 
 					}
 

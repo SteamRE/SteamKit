@@ -77,22 +77,5 @@ namespace Tests
             hdr.Serialize( ms );
             return ms.ToArray();
         }
-
-        class DummyCMClient : CMClient
-        {
-            public DummyCMClient()
-                : base( SteamConfiguration.CreateDefault(), "Dummy" )
-            {
-            }
-
-            public void DummyDisconnect()
-            {
-                Disconnect();
-                OnClientDisconnected( true );
-            }
-
-            public void HandleClientMsg( IClientMsg clientMsg )
-                => OnClientMsgReceived( GetPacketMsg( clientMsg.Serialize(), this ) );
-        }
     }
 }

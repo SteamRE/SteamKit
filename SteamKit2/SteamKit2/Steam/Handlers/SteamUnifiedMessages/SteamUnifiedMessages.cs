@@ -221,27 +221,35 @@ namespace SteamKit2
                 throw new InvalidDataException( "Packet message is expected to be protobuf." );
             }
 
-            var jobName = packetMsgProto.Header.Proto.target_job_name;
-            if ( !string.IsNullOrEmpty( jobName ) )
+            var jobNameStr = packetMsgProto.Header.Proto.target_job_name;
+            if ( string.IsNullOrEmpty( jobNameStr ) )
             {
-                var splitByDot = jobName.Split( '.' );
-                var splitByHash = splitByDot[ 1 ].Split( '#' );
+                return;
+            }
 
-                var serviceName = splitByDot[ 0 ];
-                var methodName = splitByHash[ 0 ];
+            // format: Service.Method#Version
+            var jobName = jobNameStr.AsSpan();
+            var dot = jobName.IndexOf( '.' );
+            var hash = jobName.LastIndexOf( '#' );
+            if ( dot < 0 || hash < 0 )
+            {
+                return;
+            }
 
-                var serviceInterfaceName = "SteamKit2.Internal.I" + serviceName;
-                var serviceInterfaceType = Type.GetType( serviceInterfaceName );
-                if ( serviceInterfaceType != null )
+            var serviceName = jobName[ ..dot ].ToString();
+            var methodName = jobName[ ( dot + 1 )..hash ].ToString();
+
+            var serviceInterfaceName = "SteamKit2.Internal.I" + serviceName;
+            var serviceInterfaceType = Type.GetType( serviceInterfaceName );
+            if ( serviceInterfaceType != null )
+            {
+                var method = serviceInterfaceType.GetMethod( methodName );
+                if ( method != null )
                 {
-                    var method = serviceInterfaceType.GetMethod( methodName );
-                    if ( method != null )
-                    {
-                        var argumentType = method.GetParameters().Single().ParameterType;
+                    var argumentType = method.GetParameters().Single().ParameterType;
 
-                        var callback = new ServiceMethodNotification( argumentType, packetMsg );
-                        Client.PostCallback( callback );
-                    }
+                    var callback = new ServiceMethodNotification( argumentType, packetMsg );
+                    Client.PostCallback( callback );
                 }
             }
         }

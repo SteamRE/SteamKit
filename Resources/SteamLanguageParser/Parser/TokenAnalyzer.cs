@@ -4,7 +4,7 @@ using System.IO;
 
 namespace SteamLanguageParser
 {
-    public class Node
+    class Node
     {
         public List<Node> ChildNodes { get; private set; }
         public string Name { get; set; }
@@ -15,14 +15,14 @@ namespace SteamLanguageParser
         }
     }
 
-    public class ClassNode : Node
+    class ClassNode : Node
     {
         public Symbol Ident { get; set; }
         public Symbol Parent { get; set; }
         public bool Emit { get; set; }
     }
 
-    public class PropNode : Node
+    class PropNode : Node
     {
         public string Flags { get; set; }
         public string FlagsOpt { get; set; }
@@ -39,7 +39,7 @@ namespace SteamLanguageParser
         }
     }
 
-    public class EnumNode : Node
+    class EnumNode : Node
     {
         public string Flags { get; set; }
         public Symbol Type { get; set; }

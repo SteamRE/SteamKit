@@ -181,13 +181,13 @@ namespace SteamKit2
                                 try
                                 {
                                     var message = Encoding.UTF8.GetString( readBuffer, 0, result.Count );
-                                    connection.log.LogDebug( nameof( WebSocketContext ), "Recieved websocket text message: \"{0}\"", message );
+                                    connection.log.LogDebug( nameof( WebSocketContext ), "Received websocket text message: \"{0}\"", message );
                                 }
                                 catch
                                 {
                                     var frameBytes = new byte[ result.Count ];
                                     Array.Copy( readBuffer, 0, frameBytes, 0, result.Count );
-                                    connection.log.LogDebug( nameof( WebSocketContext ), "Recieved websocket text message: 0x{0}", Utils.EncodeHexString( frameBytes ) );
+                                    connection.log.LogDebug( nameof( WebSocketContext ), "Received websocket text message: 0x{0}", Utils.EncodeHexString( frameBytes ) );
                                 }
                                 break;
 

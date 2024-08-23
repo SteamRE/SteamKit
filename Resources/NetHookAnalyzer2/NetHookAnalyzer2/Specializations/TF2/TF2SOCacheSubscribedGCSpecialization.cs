@@ -36,7 +36,7 @@ namespace NetHookAnalyzer2.Specializations
             }
         }
 
-        object ReadExtraObject(byte[] sharedObject, int typeId)
+        static object ReadExtraObject(byte[] sharedObject, int typeId)
         {
             try
             {

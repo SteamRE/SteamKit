@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Security.Cryptography;
 using System.Threading;
 
 using SteamKit2;
@@ -87,14 +85,6 @@ while ( isRunning )
 void OnConnected( SteamClient.ConnectedCallback callback )
 {
     Console.WriteLine( "Connected to Steam! Logging in '{0}'...", user );
-
-    byte[] sentryHash = null;
-    if ( File.Exists( "sentry.bin" ) )
-    {
-        // if we have a saved sentry file, read and sha-1 hash it
-        byte[] sentryFile = File.ReadAllBytes( "sentry.bin" );
-        sentryHash = SHA1.HashData( sentryFile );
-    }
 
     steamUser.LogOn( new SteamUser.LogOnDetails
     {

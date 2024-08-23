@@ -3,7 +3,7 @@ using ProtoBuf.Reflection;
 
 namespace ProtobufGen
 {
-    public class SteamKitCSharpCodeGenerator : CSharpCodeGenerator
+    class SteamKitCSharpCodeGenerator : CSharpCodeGenerator
     {
         public SteamKitCSharpCodeGenerator()
             : base()

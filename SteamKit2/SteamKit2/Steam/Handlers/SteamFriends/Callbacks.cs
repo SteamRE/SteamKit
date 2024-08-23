@@ -752,7 +752,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is fired in response to chat member info being recieved.
+        /// This callback is fired in response to chat member info being received.
         /// </summary>
         public sealed class ChatMemberInfoCallback : CallbackMsg
         {
@@ -836,7 +836,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is fired in response to chat room info being recieved.
+        /// This callback is fired in response to chat room info being received.
         /// </summary>
         public sealed class ChatRoomInfoCallback : CallbackMsg
         {
@@ -900,7 +900,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is fired when a chat invite is recieved.
+        /// This callback is fired when a chat invite is received.
         /// </summary>
         public sealed class ChatInviteCallback : CallbackMsg
         {
@@ -1032,7 +1032,7 @@ namespace SteamKit2
                 var responseMsg = new ClientMsgProtobuf<CMsgClientFriendProfileInfoResponse>( packetMsg );
                 var response = responseMsg.Body;
 
-                JobID = packetMsg.TargetJobID;
+                JobID = responseMsg.TargetJobID;
 
                 Result = ( EResult )response.eresult;
 

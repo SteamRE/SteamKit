@@ -68,7 +68,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback represents a service notification recieved though <see cref="SteamUnifiedMessages"/>.
+        /// This callback represents a service notification received though <see cref="SteamUnifiedMessages"/>.
         /// </summary>
         public class ServiceMethodNotification : CallbackMsg
         {

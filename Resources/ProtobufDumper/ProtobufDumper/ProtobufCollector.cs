@@ -19,10 +19,10 @@ namespace ProtobufDumper
 
         public ProtobufCollector()
         {
-            Candidates = new List<FileDescriptorProto>();
+            Candidates = [];
         }
 
-        public bool TryParseCandidate( string name, Stream data, out CandidateResult result, out Exception error )
+        public bool TryParseCandidate( Stream data, out CandidateResult result, out Exception error )
         {
             FileDescriptorProto candidate;
 

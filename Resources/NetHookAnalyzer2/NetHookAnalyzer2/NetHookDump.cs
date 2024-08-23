@@ -9,13 +9,13 @@ namespace NetHookAnalyzer2
 	{
 		public NetHookDump()
 		{
-			items = new List<NetHookItem>();
+			items = [];
 			readOnlyView = items.AsReadOnly();
 		}
 
 		List<NetHookItem> items;
 		IReadOnlyList<NetHookItem> readOnlyView;
-		static Dictionary<int, byte[]> accountAuthSecrets = new();
+		static Dictionary<int, byte[]> accountAuthSecrets = [];
 
 		public void LoadFromDirectory(string directory)
 		{

@@ -2,11 +2,11 @@
 {
 	static class StringExtensions
 	{
-		public static string TrimStart(this string baseString, string startToTrim)
+		public static string TrimStart( this string baseString, string startToTrim )
 		{
-			if (baseString.IndexOf(startToTrim) == 0)
+			if ( baseString.StartsWith( startToTrim, System.StringComparison.Ordinal ) )
 			{
-				return baseString.Substring(startToTrim.Length);
+				return baseString[ startToTrim.Length.. ];
 			}
 
 			return baseString;

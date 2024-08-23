@@ -5,7 +5,7 @@ namespace SteamKit2
     public sealed partial class SteamNetworking
     {
         /// <summary>
-        /// This callback is recieved in response to calling <see cref="RequestNetworkingCertificate"/>. This can be used to populate a CMsgSteamDatagramCertificateSigned for socket communication.
+        /// This callback is received in response to calling <see cref="RequestNetworkingCertificate"/>. This can be used to populate a CMsgSteamDatagramCertificateSigned for socket communication.
         /// </summary>
 		public sealed class NetworkingCertificateCallback : CallbackMsg
         {

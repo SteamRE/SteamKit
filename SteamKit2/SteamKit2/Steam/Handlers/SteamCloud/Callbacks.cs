@@ -11,7 +11,7 @@ namespace SteamKit2
     public sealed partial class SteamCloud
     {
         /// <summary>
-        /// This callback is recieved in response to calling <see cref="RequestUGCDetails"/>.
+        /// This callback is received in response to calling <see cref="RequestUGCDetails"/>.
         /// </summary>
         public sealed class UGCDetailsCallback : CallbackMsg
         {
@@ -64,7 +64,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is recieved in response to calling <see cref="GetSingleFileInfo"/>.
+        /// This callback is received in response to calling <see cref="GetSingleFileInfo"/>.
         /// </summary>
         public sealed class SingleFileInfoCallback : CallbackMsg
         {
@@ -120,7 +120,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is recieved in response to calling <see cref="ShareFile"/>.
+        /// This callback is received in response to calling <see cref="ShareFile"/>.
         /// </summary>
         public sealed class ShareFileCallback : CallbackMsg
         {

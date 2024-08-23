@@ -13,7 +13,7 @@ namespace SteamKit2
     interface IConnection
     {
         /// <summary>
-        /// Occurs when a net message is recieved over the network.
+        /// Occurs when a net message is received over the network.
         /// </summary>
         event EventHandler<NetMsgEventArgs> NetMsgReceived;
 

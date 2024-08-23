@@ -22,27 +22,28 @@ namespace NetHookAnalyzer2
 			specializations = LoadMessageObjectSpecializations();
 		}
 
-#pragma warning disable IDE0069 // Disposable fields should be disposed
+#pragma warning disable CA2213, IDE0069 // Disposable fields should be disposed
 
 		IDisposable itemsListViewFirstColumnHiderDisposable;
 		FileSystemWatcher folderWatcher;
 
-#pragma warning restore IDE0069 // Disposable fields should be disposed
+#pragma warning restore CA2213, IDE0069 // Disposable fields should be disposed
 
 		readonly ISpecialization[] specializations;
 
 		static ISpecialization[] LoadMessageObjectSpecializations()
 		{
-			return new ISpecialization[]
-			{
+			return
+			[
 				new ClientServiceMethodSpecialization(),
 				new ClientServiceMethodResponseSpecialization(),
 				new RemoteClientSteamToSteamSpecialization(),
 				new RemoteClientSteamBroadcastSpecialization(),
+				new MultiPacketSpecialization(),
 				new GCGenericSpecialization()
 				{
-					GameCoordinatorSpecializations = new IGameCoordinatorSpecialization[]
-					{
+					GameCoordinatorSpecializations =
+					[
 						new CSGOCacheSubscribedGCSpecialization(),
 						new CSGOSOMultipleObjectsGCSpecialization(),
 						new CSGOSOSingleObjectGCSpecialization(),
@@ -52,9 +53,9 @@ namespace NetHookAnalyzer2
 						new TF2CacheSubscribedGCSpecialization(),
 						new TF2SOMultipleObjectsGCSpecialization(),
 						new TF2SOSingleObjectGCSpecialization(),
-					}
+					]
 				}
-			};
+			];
 		}
 
 		protected override void OnFormClosed(FormClosedEventArgs e)
@@ -76,7 +77,7 @@ namespace NetHookAnalyzer2
 
 		#region
 
-		string GetLatestNethookDumpDirectory()
+		static string GetLatestNethookDumpDirectory()
 		{
 			var steamDirectory = SteamUtils.GetSteamDirectory();
 			if (steamDirectory == null)
@@ -124,8 +125,8 @@ namespace NetHookAnalyzer2
 			}
 			else
 			{
-				searchPredicate = nhi => ( nhi.EMsg.ToString().IndexOf( searchTerm, StringComparison.InvariantCultureIgnoreCase ) >= 0 ) ||
-					( nhi.InnerMessageName != null && nhi.InnerMessageName.IndexOf( searchTerm, StringComparison.InvariantCultureIgnoreCase ) >= 0 );
+				searchPredicate = nhi => ( nhi.EMsg.ToString().Contains( searchTerm, StringComparison.OrdinalIgnoreCase ) ) ||
+					( nhi.InnerMessageName != null && nhi.InnerMessageName.Contains( searchTerm, StringComparison.OrdinalIgnoreCase ) );
 			}
 
 			return nhi => directionPredicate( nhi ) && searchPredicate( nhi );

@@ -153,7 +153,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="eMsg">The network message type this client message represents.</param>
         /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
-        public ClientMsgProtobuf( EMsg eMsg, int payloadReserve = 64 )
+        public ClientMsgProtobuf( EMsg eMsg, int payloadReserve = 0 )
             : base( payloadReserve )
         {
             _body = new TBody();
@@ -169,7 +169,7 @@ namespace SteamKit2
         /// <param name="eMsg">The network message type this client message represents.</param>
         /// <param name="msg">The message that this instance is a reply for.</param>
         /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
-        public ClientMsgProtobuf( EMsg eMsg, MsgBase<MsgHdrProtoBuf> msg, int payloadReserve = 64 )
+        public ClientMsgProtobuf( EMsg eMsg, MsgBase<MsgHdrProtoBuf> msg, int payloadReserve = 0 )
             : this( eMsg, payloadReserve )
         {
             // our target is where the message came from
@@ -307,7 +307,7 @@ namespace SteamKit2
         /// This is a client send constructor.
         /// </summary>
         /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
-        public ClientMsg( int payloadReserve = 64 )
+        public ClientMsg( int payloadReserve = 0 )
             : base( payloadReserve )
         {
             Body = new TBody();
@@ -322,7 +322,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="msg">The message that this instance is a reply for.</param>
         /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
-        public ClientMsg( MsgBase<ExtendedClientMsgHdr> msg, int payloadReserve = 64 )
+        public ClientMsg( MsgBase<ExtendedClientMsgHdr> msg, int payloadReserve = 0 )
             : this( payloadReserve )
         {
             ArgumentNullException.ThrowIfNull( msg );

@@ -449,7 +449,7 @@ namespace SteamKit2
                 else
                 {
                     protofile.filename = file.FileName.Replace( '/', '\\' );
-                    protofile.sha_filename = SHA1.HashData( Encoding.UTF8.GetBytes( file.FileName.Replace( '/', '\\' ).ToLower() ) );
+                    protofile.sha_filename = SHA1.HashData( Encoding.UTF8.GetBytes( file.FileName.Replace( '/', '\\' ).ToLowerInvariant() ) );
                 }
                 protofile.sha_content = file.FileHash;
                 if ( !string.IsNullOrWhiteSpace( file.LinkTarget ) )

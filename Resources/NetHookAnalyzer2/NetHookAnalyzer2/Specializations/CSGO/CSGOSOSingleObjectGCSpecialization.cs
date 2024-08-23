@@ -29,7 +29,7 @@ namespace NetHookAnalyzer2.Specializations
             }
         }
 
-        object ReadExtraObject(CMsgSOSingleObject sharedObject)
+        static object ReadExtraObject(CMsgSOSingleObject sharedObject)
         {
             try
             {

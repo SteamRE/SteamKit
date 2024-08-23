@@ -126,8 +126,8 @@ namespace NetHookAnalyzer2
 			var msgType = MessageTypeFinder.GetNonProtobufMessageBodyType(eMsg);
 
 			var eMsgName = eMsg.ToString()
-				.Replace("Econ", "")
-				.Replace("AM", "");
+				.Replace("Econ", "", StringComparison.InvariantCulture)
+				.Replace("AM", "", StringComparison.InvariantCulture);
 
 			// check name
 			if (msgType == null)

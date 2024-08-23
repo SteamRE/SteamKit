@@ -29,7 +29,7 @@ namespace SteamKit2.Discovery
     /// </summary>
     public class SmartCMServerList
     {
-        [DebuggerDisplay("ServerInfo ({EndPoint}, {Protocol}, Bad: {LastBadConnectionDateTimeUtc.HasValue})")]
+        [DebuggerDisplay( "ServerInfo ({Record.EndPoint}, {Protocol}, Bad: {LastBadConnectionTimeUtc.HasValue})" )]
         class ServerInfo
         {
             public ServerInfo( ServerRecord record, ProtocolTypes protocolType )
@@ -204,7 +204,7 @@ namespace SteamKit2.Discovery
             lock ( listLock )
             {
                 ServerInfo[] serverInfos;
-                
+
                 if ( quality == ServerQuality.Good )
                 {
                     serverInfos = servers.Where( x => x.Record.EndPoint.Equals( endPoint ) && x.Protocol.HasFlagsFast( protocolTypes ) ).ToArray();
@@ -213,7 +213,7 @@ namespace SteamKit2.Discovery
                 {
                     // If we're marking this server for any failure, mark all endpoints for the host at the same time
                     var host = NetHelpers.ExtractEndpointHost( endPoint ).host;
-                    serverInfos = servers.Where( x => x.Record.GetHost().Equals( host )).ToArray();
+                    serverInfos = servers.Where( x => x.Record.GetHost().Equals( host, StringComparison.Ordinal ) ).ToArray();
                 }
 
                 if ( serverInfos.Length == 0 )
@@ -225,7 +225,7 @@ namespace SteamKit2.Discovery
                 {
                     MarkServerCore( serverInfo, quality );
                 }
-                
+
                 return true;
             }
         }
@@ -267,23 +267,21 @@ namespace SteamKit2.Discovery
                 // isn't a problem.
                 ResetOldScores();
 
-                var query = 
-                    from o in servers.Select((server, index) => new { server, index })
-                    let server = o.server
-                    let index = o.index
-                    where server.Protocol.HasFlagsFast( supportedProtocolTypes )
-                    let lastBadConnectionTime = server.LastBadConnectionTimeUtc.GetValueOrDefault()
-                    orderby lastBadConnectionTime, index
-                    select new { server.Record.EndPoint, server.Protocol };
-                var result = query.FirstOrDefault();
-                
+                var result = servers
+                    .Where( o => o.Protocol.HasFlagsFast( supportedProtocolTypes ) )
+                    .Select( static ( server, index ) => (Server: server, Index: index) )
+                    .OrderBy( static o => o.Server.LastBadConnectionTimeUtc.GetValueOrDefault() )
+                    .ThenBy( static o => o.Index )
+                    .Select( static o => o.Server )
+                    .FirstOrDefault();
+
                 if ( result == null )
                 {
                     return null;
                 }
 
-                DebugWrite( $"Next server candidate: {result.EndPoint} ({result.Protocol})" );
-                return new ServerRecord( result.EndPoint, result.Protocol );
+                DebugWrite( $"Next server candidate: {result.Record.EndPoint} ({result.Protocol})" );
+                return new ServerRecord( result.Record.EndPoint, result.Protocol );
             }
         }
 
