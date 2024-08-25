@@ -73,11 +73,6 @@ namespace SteamKit2.CDN
         /// </summary>
         public int NumEntries { get; internal set; }
         /// <summary>
-        /// Gets the preferred server status.
-        /// </summary>
-        [Obsolete("This flag is no longer set.")]
-        public bool PreferredServer { get; internal set; }
-        /// <summary>
         /// Gets the flag whether this server is for Steam China only.
         /// </summary>
         public bool SteamChinaOnly { get; internal set; }
