@@ -227,7 +227,7 @@ namespace SteamKit2
 
             this.Client.Send( request );
 
-            return new AsyncJobMultiple<PICSProductInfoCallback>( this.Client, request.SourceJobID, callback => !callback.ResponsePending );
+            return new AsyncJobMultiple<PICSProductInfoCallback>( this.Client, request.SourceJobID, static callback => !callback.ResponsePending );
         }
 
 
