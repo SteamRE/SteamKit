@@ -1,2 +1,6 @@
 [*.cs]
 indent_style = tab
+
+# CA2000: Dispose objects before losing scope
+# The code needs fixing
+dotnet_diagnostic.CA2000.severity = none
