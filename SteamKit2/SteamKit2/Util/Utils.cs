@@ -17,10 +17,8 @@ namespace SteamKit2
         /// <summary>
         /// Performs an Adler32 on the given input
         /// </summary>
-        public static uint AdlerHash( byte[] input )
+        public static uint AdlerHash( ReadOnlySpan<byte> input )
         {
-            ArgumentNullException.ThrowIfNull( input );
-
             uint a = 0, b = 0;
             for ( int i = 0; i < input.Length; i++ )
             {

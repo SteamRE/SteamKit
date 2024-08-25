@@ -14,6 +14,14 @@ namespace SevenZip.Compression.LZ
 
 		public uint TrainSize = 0;
 
+		internal void SteamKitSetBuffer(byte[] buffer, uint windowSize) // Added by SteamKit to avoid allocating a byte array
+		{
+			_buffer = buffer;
+			_windowSize = windowSize;
+			_pos = 0;
+			_streamPos = 0;
+		}
+
 		public void Create(uint windowSize)
 		{
 			if (_windowSize != windowSize)

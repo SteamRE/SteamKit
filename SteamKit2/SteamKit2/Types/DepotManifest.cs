@@ -168,10 +168,18 @@ namespace SteamKit2
         /// </summary>
         public uint EncryptedCRC { get; private set; }
 
-
-        internal DepotManifest(byte[] data)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DepotManifest"/> class.
+        /// Depot manifests may come from the Steam CDN or from Steam/depotcache/ manifest files.
+        /// </summary>
+        /// <param name="stream">Raw depot manifest stream to deserialize.</param>
+        /// <exception cref="InvalidDataException">Thrown if the given data is not something recognizable.</exception>
+        /// <exception cref="EndOfStreamException">Thrown if the given data is not complete.</exception>
+        public static DepotManifest Deserialize( Stream stream )
         {
-            InternalDeserialize(data);
+            var manifest = new DepotManifest();
+            manifest.InternalDeserialize( stream );
+            return manifest;
         }
 
         /// <summary>
@@ -180,7 +188,12 @@ namespace SteamKit2
         /// </summary>
         /// <param name="data">Raw depot manifest data to deserialize.</param>
         /// <exception cref="InvalidDataException">Thrown if the given data is not something recognizable.</exception>
-        public static DepotManifest Deserialize(byte[] data) => new(data);
+        /// <exception cref="EndOfStreamException">Thrown if the given data is not complete.</exception>
+        public static DepotManifest Deserialize( byte[] data )
+        {
+            using var ms = new MemoryStream( data );
+            return Deserialize( ms );
+        }
 
         /// <summary>
         /// Attempts to decrypts file names with the given encryption key.
@@ -284,63 +297,63 @@ namespace SteamKit2
         /// </summary>
         /// <param name="filename">Input file name.</param>
         /// <returns><c>DepotManifest</c> object if deserialization was successful; otherwise, <c>null</c>.</returns>
+        /// <exception cref="InvalidDataException">Thrown if the given data is not something recognizable.</exception>
+        /// <exception cref="EndOfStreamException">Thrown if the given data is not complete.</exception>
         public static DepotManifest? LoadFromFile( string filename )
         {
             if ( !File.Exists( filename ) )
                 return null;
 
             using var fs = File.Open( filename, FileMode.Open );
-            using var ms = new MemoryStream();
-            fs.CopyTo( ms );
-            return Deserialize( ms.ToArray() );
+            return Deserialize( fs );
         }
 
-        void InternalDeserialize(byte[] data)
+        void InternalDeserialize( Stream stream )
         {
             ContentManifestPayload? payload = null;
             ContentManifestMetadata? metadata = null;
             ContentManifestSignature? signature = null;
 
-            using ( var ms = new MemoryStream( data ) )
-            using ( var br = new BinaryReader( ms ) )
+            using var br = new BinaryReader( stream, Encoding.UTF8, leaveOpen: true );
+
+            while ( true )
             {
-                while ( ( ms.Length - ms.Position ) > 0 )
+                uint magic = br.ReadUInt32();
+
+                if ( magic == DepotManifest.PROTOBUF_ENDOFMANIFEST_MAGIC )
                 {
-                    uint magic = br.ReadUInt32();
+                    break;
+                }
 
-                    switch ( magic )
-                    {
-                        case Steam3Manifest.MAGIC:
-                            ms.Seek(-4, SeekOrigin.Current);
-                            Steam3Manifest binaryManifest = new Steam3Manifest( br );
-                            ParseBinaryManifest( binaryManifest );
+                switch ( magic )
+                {
+                    case Steam3Manifest.MAGIC:
+                        Steam3Manifest binaryManifest = new Steam3Manifest();
+                        binaryManifest.Deserialize( br );
+                        ParseBinaryManifest( binaryManifest );
 
-                            uint marker = br.ReadUInt32();
-                            if ( marker != magic )
-                                throw new InvalidDataException( "Unable to find end of message marker for depot manifest" );
-                            break;
+                        uint marker = br.ReadUInt32();
+                        if ( marker != magic )
+                            throw new InvalidDataException( "Unable to find end of message marker for depot manifest" );
+                        break;
 
-                        case DepotManifest.PROTOBUF_PAYLOAD_MAGIC:
-                            uint payload_length = br.ReadUInt32();
-                            payload = Serializer.Deserialize<ContentManifestPayload>( ms, length: payload_length );
-                            break;
+                    case DepotManifest.PROTOBUF_PAYLOAD_MAGIC:
+                        uint payload_length = br.ReadUInt32();
+                        payload = Serializer.Deserialize<ContentManifestPayload>( stream, length: payload_length );
+                        break;
 
-                        case DepotManifest.PROTOBUF_METADATA_MAGIC:
-                            uint metadata_length = br.ReadUInt32();
-                            metadata = Serializer.Deserialize<ContentManifestMetadata>( ms, length: metadata_length );
-                            break;
+                    case DepotManifest.PROTOBUF_METADATA_MAGIC:
+                        uint metadata_length = br.ReadUInt32();
+                        metadata = Serializer.Deserialize<ContentManifestMetadata>( stream, length: metadata_length );
+                        break;
 
-                        case DepotManifest.PROTOBUF_SIGNATURE_MAGIC:
-                            uint signature_length = br.ReadUInt32();
-                            signature = Serializer.Deserialize<ContentManifestSignature>( ms, length: signature_length );
-                            break;
+                    case DepotManifest.PROTOBUF_SIGNATURE_MAGIC:
+                        uint signature_length = br.ReadUInt32();
+                        signature = Serializer.Deserialize<ContentManifestSignature>( stream, length: signature_length );
+                        break;
 
-                        case DepotManifest.PROTOBUF_ENDOFMANIFEST_MAGIC:
-                            break;
-
-                        default:
-                            throw new InvalidDataException( $"Unrecognized magic value {magic:X} in depot manifest." );
-                    }
+                    default:
+                        throw new InvalidDataException( $"Unrecognized magic value {magic:X} in depot manifest." );
                 }
             }
 

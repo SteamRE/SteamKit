@@ -110,33 +110,17 @@ namespace SteamKit2
         [NotNull]
         public List<FileMapping>? Mapping { get; private set; }
 
-        public Steam3Manifest(byte[] data)
+        internal void Deserialize( BinaryReader ds )
         {
-            ArgumentNullException.ThrowIfNull( data );
-
-            Deserialize(data);
-        }
-
-        internal Steam3Manifest(BinaryReader data)
-        {
-            Deserialize(data);
-        }
-
-        void Deserialize(byte[] data)
-        {
-            using var ms = new MemoryStream( data );
-            using var br = new BinaryReader( ms );
-            Deserialize( br );
-        }
-
-        void Deserialize( BinaryReader ds )
-        {
+            /*
+            // The magic is verified by DepotManifest.InternalDeserialize, not checked here to avoid seeking
             Magic = ds.ReadUInt32();
 
             if (Magic != MAGIC)
             {
                 throw new InvalidDataException("data is not a valid steam3 manifest: incorrect magic.");
             }
+            */
 
             Version = ds.ReadUInt32();
 
