@@ -7,6 +7,7 @@ v 3.0.0			July 18 2024
 * Added `ChatMode`, `UIMode`, and `IsSteamDeck` to `LogOnDetails`.
 * Added `DepotManifest.Serialize`.
 * Added `SteamClient.WaitForCallbackAsync` and `CallbackManager.RunWaitCallbackAsync`.
+* Added `cdnAuthToken` parameter to `CDN.Client` method for country specific servers that still require it.
 * Updated Steam enums and protobufs.
 * Various performance and memory optimizations.
 
@@ -14,10 +15,14 @@ BREAKING CHANGES
 * SteamKit now targets .NET 8.
 * `SteamClient` callback queue is now backed by `BufferBlock`:
   * `FreeLastCallback` and `GetAllCallbacks` have been removed.
-  * Calling  `GetCallback` and `WaitForCallback` now always dequeues a callback, there is no more peek and "freeLast".
+  * Calling `GetCallback` and `WaitForCallback` now always dequeues a callback, there is no more peek and "freeLast".
+  * `CallbackManager.RunCallbacks` now returns bool indicating whether a callback was handled.
 * `DepotManifest.ChunkData.Checksum` is now a `uint` instead of `byte[4]`.
 * `DepotManifest.SaveToFile` now returns void.
-* `CallbackManager.RunCallbacks` now returns bool indicating whether a callback was handled.
+* `CDN.Client.DownloadDepotChunkAsync` now requires a mandatory destination buffer.
+  * Returns the number of written bytes to the destination.
+  * You can rent a buffer like `ArrayPool<byte>.Shared.Rent((int)chunk.UncompressedLength)`
+  * `DepotChunk` is now a static class that only contains a `Process` method.
 * Removed obsolete methods and enum values.
 * Removed Artifact and Underlords generated protobufs.
 * Removed `SteamTrading` handler.
