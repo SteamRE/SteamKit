@@ -63,11 +63,12 @@ namespace SteamKit2.CDN
         /// This is used for decrypting filenames (if needed) in depot manifests.
         /// </param>
         /// <param name="proxyServer">Optional content server marked as UseAsProxy which transforms the request.</param>
+        /// <param name="cdnAuthToken">CDN auth token for CDN content server endpoints if necessary. Get one with <see cref="SteamApps.GetCDNAuthToken"/>.</param>
         /// <returns>A <see cref="DepotManifest"/> instance that contains information about the files present within a depot.</returns>
         /// <exception cref="System.ArgumentNullException"><see ref="server"/> was null.</exception>
         /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
         /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
-        public async Task<DepotManifest> DownloadManifestAsync( uint depotId, ulong manifestId, ulong manifestRequestCode, Server server, byte[]? depotKey = null, Server? proxyServer = null )
+        public async Task<DepotManifest> DownloadManifestAsync( uint depotId, ulong manifestId, ulong manifestRequestCode, Server server, byte[]? depotKey = null, Server? proxyServer = null, string? cdnAuthToken = null )
         {
             ArgumentNullException.ThrowIfNull( server );
 
@@ -83,7 +84,7 @@ namespace SteamKit2.CDN
                 url = $"depot/{depotId}/manifest/{manifestId}/{MANIFEST_VERSION}";
             }
 
-            using var request = new HttpRequestMessage( HttpMethod.Get, BuildCommand( server, url, proxyServer ) );
+            using var request = new HttpRequestMessage( HttpMethod.Get, BuildCommand( server, url, cdnAuthToken, proxyServer ) );
 
             using var cts = new CancellationTokenSource();
             cts.CancelAfter( RequestTimeout );
@@ -175,11 +176,12 @@ namespace SteamKit2.CDN
         /// This is used to process the chunk data.
         /// </param>
         /// <param name="proxyServer">Optional content server marked as UseAsProxy which transforms the request.</param>
+        /// <param name="cdnAuthToken">CDN auth token for CDN content server endpoints if necessary. Get one with <see cref="SteamApps.GetCDNAuthToken"/>.</param>
         /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
         /// <exception cref="System.IO.InvalidDataException">Thrown if the downloaded data does not match the expected length.</exception>
         /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
         /// <exception cref="SteamKitWebRequestException">A network error occurred when performing the request.</exception>
-        public async Task<int> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk, Server server, byte[] destination, byte[]? depotKey = null, Server? proxyServer = null )
+        public async Task<int> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk, Server server, byte[] destination, byte[]? depotKey = null, Server? proxyServer = null, string? cdnAuthToken = null )
         {
             ArgumentNullException.ThrowIfNull( server );
             ArgumentNullException.ThrowIfNull( chunk );
@@ -208,7 +210,7 @@ namespace SteamKit2.CDN
             var chunkID = Utils.EncodeHexString( chunk.ChunkID );
             var url = $"depot/{depotId}/chunk/{chunkID}";
 
-            using var request = new HttpRequestMessage( HttpMethod.Get, BuildCommand( server, url, proxyServer ) );
+            using var request = new HttpRequestMessage( HttpMethod.Get, BuildCommand( server, url, cdnAuthToken, proxyServer ) );
 
             using var cts = new CancellationTokenSource();
             cts.CancelAfter( RequestTimeout );
@@ -285,7 +287,7 @@ namespace SteamKit2.CDN
             }
         }
 
-        static Uri BuildCommand( Server server, string command, Server? proxyServer )
+        static Uri BuildCommand( Server server, string command, string? query, Server? proxyServer )
         {
             var uriBuilder = new UriBuilder
             {
@@ -293,6 +295,7 @@ namespace SteamKit2.CDN
                 Host = server.VHost,
                 Port = server.Port,
                 Path = command,
+                Query = query ?? string.Empty,
             };
 
             if ( proxyServer != null && proxyServer.UseAsProxy && proxyServer.ProxyRequestPathTemplate != null )
