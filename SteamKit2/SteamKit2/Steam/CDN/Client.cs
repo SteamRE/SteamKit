@@ -100,29 +100,44 @@ namespace SteamKit2.CDN
                     throw new SteamKitWebRequestException( $"Response status code does not indicate success: {response.StatusCode:D} ({response.ReasonPhrase}).", response );
                 }
 
-                if ( !response.Content.Headers.ContentLength.HasValue )
-                {
-                    throw new SteamKitWebRequestException( "Response does not have Content-Length", response );
-                }
-
                 cts.CancelAfter( ResponseBodyTimeout );
 
-                var contentLength = ( int )response.Content.Headers.ContentLength;
-                var buffer = ArrayPool<byte>.Shared.Rent( contentLength );
+                var contentLength = -1;
+                byte[]? buffer = null;
+
+                if ( response.Content.Headers.ContentLength.HasValue )
+                {
+                    contentLength = ( int )response.Content.Headers.ContentLength;
+                    buffer = ArrayPool<byte>.Shared.Rent( contentLength );
+                }
+                else
+                {
+                    DebugLog.WriteLine( nameof( CDN ), $"Manifest response does not have Content-Length, falling back to unbuffered read." );
+                }
 
                 try
                 {
-                    using var ms = new MemoryStream( buffer, 0, contentLength );
+                    MemoryStream ms;
 
-                    // Stream the http response into the rented buffer
-                    await response.Content.CopyToAsync( ms, cts.Token );
-
-                    if ( ms.Position != contentLength )
+                    if ( buffer != null )
                     {
-                        throw new InvalidDataException( $"Length mismatch after downloading depot manifest! (was {ms.Position}, but should be {contentLength})" );
-                    }
+                        ms = new MemoryStream( buffer, 0, contentLength );
 
-                    ms.Position = 0;
+                        // Stream the http response into the rented buffer
+                        await response.Content.CopyToAsync( ms, cts.Token );
+
+                        if ( ms.Position != contentLength )
+                        {
+                            throw new InvalidDataException( $"Length mismatch after downloading depot manifest! (was {ms.Position}, but should be {contentLength})" );
+                        }
+
+                        ms.Position = 0;
+                    }
+                    else
+                    {
+                        var data = await response.Content.ReadAsByteArrayAsync();
+                        ms = new MemoryStream( data );
+                    }
 
                     // Decompress the zipped manifest data
                     using var zip = new ZipArchive( ms );
@@ -132,10 +147,15 @@ namespace SteamKit2.CDN
 
                     using var zipEntryStream = entries[ 0 ].Open();
                     depotManifest = DepotManifest.Deserialize( zipEntryStream );
+
+                    ms.Dispose();
                 }
                 finally
                 {
-                    ArrayPool<byte>.Shared.Return( buffer );
+                    if ( buffer != null )
+                    {
+                        ArrayPool<byte>.Shared.Return( buffer );
+                    }
                 }
             }
             catch ( Exception ex )
