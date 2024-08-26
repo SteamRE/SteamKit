@@ -1,10 +1,16 @@
 name: Update Protobufs
+
 on:
+  workflow_dispatch:
   push:
     branches:
     - yaakov/auto-protos # temporary trigger during development
   #schedule:
   #- cron: '0 17 * * SUN'
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   update-protobufs:
@@ -13,17 +19,17 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2.3.4
+      with:
+        submodules: true
 
-    - name: Run Update Script
+    - name: Run update script
       shell: pwsh
-      run: |
-        git submodule init
-        Resources/ProtobufGen/update.ps1
+      run: Resources/ProtobufGen/update.ps1
 
     # TODO: We need a new GitHub Machine Account (or maybe an existing one?) to generate a PAT that we can use as the token here
     # otherwise, our new changes will not trigger further Actions (on:push or on:pull_request, i.e. CI/CD builds).
     #- name: Create Pull Request
-    #  uses: peter-evans/create-pull-request@v3.10.1
+    #  uses: peter-evans/create-pull-request@v6
     #  with:
     #      #token: ${{ secrets.PAT }}
     #      commit-message: Update protobufs
