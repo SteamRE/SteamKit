@@ -224,17 +224,25 @@ namespace SteamKit2.CDN
                     throw new SteamKitWebRequestException( $"Response status code does not indicate success: {response.StatusCode:D} ({response.ReasonPhrase}).", response );
                 }
 
-                if ( !response.Content.Headers.ContentLength.HasValue )
+                var contentLength = ( int )chunk.CompressedLength;
+
+                if ( response.Content.Headers.ContentLength.HasValue )
                 {
-                    throw new SteamKitWebRequestException( "Response does not have Content-Length", response );
+                    contentLength = ( int )response.Content.Headers.ContentLength;
+
+                    // assert that lengths match only if the chunk has a length assigned.
+                    if ( chunk.CompressedLength > 0 && contentLength != chunk.CompressedLength )
+                    {
+                        throw new InvalidDataException( $"Content-Length mismatch for depot chunk! (was {contentLength}, but should be {chunk.CompressedLength})" );
+                    }
                 }
-
-                var contentLength = ( int )response.Content.Headers.ContentLength;
-
-                // assert that lengths match only if the chunk has a length assigned.
-                if ( chunk.CompressedLength > 0 && contentLength != chunk.CompressedLength )
+                else if ( contentLength > 0 )
                 {
-                    throw new InvalidDataException( $"Content-Length mismatch for depot chunk! (was {contentLength}, but should be {chunk.CompressedLength})" );
+                    DebugLog.WriteLine( nameof( CDN ), $"Response does not have Content-Length, falling back to chunk.CompressedLength." );
+                }
+                else
+                {
+                    throw new SteamKitWebRequestException( "Response does not have Content-Length and chunk.CompressedLength is not set.", response );
                 }
 
                 cts.CancelAfter( ResponseBodyTimeout );
