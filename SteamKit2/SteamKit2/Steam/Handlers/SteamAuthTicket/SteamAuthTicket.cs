@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Buffers;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Net;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
-using Force.Crc32;
+using System.IO.Hashing;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -17,12 +19,32 @@ namespace SteamKit2
     {
         private readonly DefaultAuthTicketBuilder AuthTicketBuilder;
 
-        internal uint PublicIP { get; private set; }
-        internal uint LocalIP { get; private set; }
-
         private readonly Dictionary<EMsg, Action<IPacketMsg>> DispatchMap;
         private readonly ConcurrentQueue<byte[]> GameConnectTokens = new();
         private readonly ConcurrentDictionary<uint, List<CMsgAuthTicket>> TicketsByGame = new();
+
+        /// <summary>
+        /// Writes random non zero bytes into user data space of the stream.
+        /// </summary>
+        private class RandomUserDataSerializer : IUserDataSerializer
+        {
+            static readonly RandomNumberGenerator _random = RandomNumberGenerator.Create();
+
+            /// <inheritdoc/>
+            public void Serialize( BinaryWriter writer )
+            {
+                var bytes = ArrayPool<byte>.Shared.Rent( 8 );
+                try
+                {
+                    _random.GetNonZeroBytes( bytes );
+                    writer.Write( bytes, 0, 8 );
+                }
+                finally
+                {
+                    ArrayPool<byte>.Shared.Return( bytes );
+                }
+            }
+        }
 
         /// <summary>
         /// Initializes all necessary callbacks and ticket builder.
@@ -34,7 +56,6 @@ namespace SteamKit2
                 { EMsg.ClientAuthListAck, HandleTicketAcknowledged },
                 { EMsg.ClientTicketAuthComplete, HandleTicketAuthComplete },
                 { EMsg.ClientGameConnectTokens, HandleGameConnectTokens },
-                { EMsg.ClientLogOnResponse, HandleLogOnResponse },
                 { EMsg.ClientLogOff, HandleLogOffResponse }
             };
             AuthTicketBuilder = new DefaultAuthTicketBuilder( new RandomUserDataSerializer() );
@@ -98,12 +119,13 @@ namespace SteamKit2
             authTicket.CopyTo( mem );
             MemoryMarshal.Write( mem[ authTicket.Length.. ], in len );
             appTicket.CopyTo( mem[ ( authTicket.Length + 4 ).. ] );
+
             return token;
         }
 
         private AsyncJob<TicketAcceptedCallback> VerifyTicket( uint appid, byte[] authToken, out uint crc )
         {
-            crc = Crc32Algorithm.Compute( authToken, 0, authToken.Length );
+            crc = BitConverter.ToUInt32( Crc32.Hash( authToken ), 0 );
             var items = TicketsByGame.GetOrAdd( appid, [] );
 
             // Add ticket to specified games list
@@ -113,6 +135,7 @@ namespace SteamKit2
                 ticket = authToken,
                 ticket_crc = crc
             } );
+
             return SendTickets();
         }
         private AsyncJob<TicketAcceptedCallback> SendTickets()
@@ -126,6 +149,7 @@ namespace SteamKit2
 
             auth.SourceJobID = Client.GetNextJobID();
             Client.Send( auth );
+
             return new AsyncJob<TicketAcceptedCallback>( Client, auth.SourceJobID );
         }
 
@@ -144,21 +168,10 @@ namespace SteamKit2
         }
 
         #region ClientMsg Handlers
-        private void HandleLogOnResponse( IPacketMsg packetMsg )
-        {
-            var logon = new ClientMsgProtobuf<CMsgClientLogonResponse>( packetMsg ).Body;
-            var ip = Client.LocalIP ?? IPAddress.Any;
-            var bytes = ip.MapToIPv4().GetAddressBytes();
-            LocalIP = MemoryMarshal.Read<uint>( bytes );
-            PublicIP = logon.public_ip.v4;
-        }
         private void HandleLogOffResponse( IPacketMsg packetMsg )
         {
             // Clear all game connect tokens on client log off
-            while ( GameConnectTokens.TryDequeue( out _ ) ) { }
-            // Reset IP addresses
-            PublicIP = 0;
-            LocalIP = 0;
+            GameConnectTokens.Clear();
         }
         private void HandleGameConnectTokens( IPacketMsg packetMsg )
         {

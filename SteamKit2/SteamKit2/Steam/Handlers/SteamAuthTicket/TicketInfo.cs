@@ -1,5 +1,5 @@
 ﻿using System;
-using Force.Crc32;
+using System.IO.Hashing;
 
 namespace SteamKit2
 {
@@ -23,7 +23,7 @@ namespace SteamKit2
             _handler = handler;
             AppID = appID;
             Ticket = ticket;
-            TicketCRC = Crc32Algorithm.Compute( ticket );
+            TicketCRC = BitConverter.ToUInt32( Crc32.Hash( ticket ), 0 );
         }
 
         /// <summary>
