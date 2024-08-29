@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using SteamKit2;
 using Xunit;
 
@@ -417,14 +418,106 @@ namespace Tests
                 }
             };
 
-            string text;
-            using ( var ms = new MemoryStream() )
+            var text = SaveToText( kv );
+
+            Assert.Equal( expected, text );
+        }
+
+        [Fact]
+        public void CanLoadUnicodeTextDocument()
+        {
+            var expected = "\"RootNode\"\n{\n\t\"key1\"\t\t\"value1\"\n\t\"key2\"\n\t{\n\t\t\"ChildKey\"\t\t\"ChildValue\"\n\t}\n}\n";
+            var kv = new KeyValue();
+
+            var temporaryFile = Path.GetTempFileName();
+            try
             {
-                kv.SaveToStream( ms, asBinary: false );
-                ms.Seek( 0, SeekOrigin.Begin );
-                using var reader = new StreamReader( ms );
-                text = reader.ReadToEnd();
+                File.WriteAllText( temporaryFile, expected, Encoding.Unicode );
+                kv.ReadFileAsText( temporaryFile );
             }
+            finally
+            {
+                File.Delete( temporaryFile );
+            }
+
+            Assert.Equal( "RootNode", kv.Name );
+            Assert.Equal( 2, kv.Children.Count );
+            Assert.Equal( "key1", kv.Children[ 0 ].Name );
+            Assert.Equal( "value1", kv.Children[ 0 ].Value );
+            Assert.Equal( "key2", kv.Children[ 1 ].Name );
+            Assert.Single( kv.Children[ 1 ].Children);
+            Assert.Equal( "ChildKey", kv.Children[ 1 ].Children[ 0 ].Name );
+            Assert.Equal( "ChildValue", kv.Children[ 1 ].Children[ 0 ].Value );
+        }
+
+        [Fact]
+        public void CanLoadUnicodeTextStream()
+        {
+            var expected = "\"RootNode\"\n{\n\t\"key1\"\t\t\"value1\"\n\t\"key2\"\n\t{\n\t\t\"ChildKey\"\t\t\"ChildValue\"\n\t}\n}\n";
+            var kv = new KeyValue();
+
+            var temporaryFile = Path.GetTempFileName();
+            try
+            {
+                File.WriteAllText( temporaryFile, expected, Encoding.Unicode );
+
+                using var fs = File.OpenRead( temporaryFile );
+                kv.ReadAsText( fs );
+            }
+            finally
+            {
+                File.Delete( temporaryFile );
+            }
+
+            Assert.Equal( "RootNode", kv.Name );
+            Assert.Equal( 2, kv.Children.Count );
+            Assert.Equal( "key1", kv.Children[ 0 ].Name );
+            Assert.Equal( "value1", kv.Children[ 0 ].Value );
+            Assert.Equal( "key2", kv.Children[ 1 ].Name );
+            Assert.Single( kv.Children[ 1 ].Children  );
+            Assert.Equal( "ChildKey", kv.Children[ 1 ].Children[ 0 ].Name );
+            Assert.Equal( "ChildValue", kv.Children[ 1 ].Children[ 0 ].Value );
+        }
+
+#if false
+        [Fact]
+        public void CanReadAndIgnoreConditionals()
+        {
+            var text = @"
+""Repro""
+{
+""Conditional""    ""You're not running Windows.""  [$!WIN32]          // DEPRECATED
+""EmptyThing""	""""
+}
+".Trim();
+
+            var kv = new KeyValue();
+            using ( var ms = new MemoryStream( Encoding.UTF8.GetBytes( text ) ) )
+            {
+                kv.ReadAsText( ms );
+            }
+
+            Assert.Equal( "Repro", kv.Name );
+            Assert.Equal( 2, kv.Children.Count );
+            Assert.Equal( "Conditional", kv.Children[ 0 ].Name );
+            Assert.Equal( "You're not running Windows.", kv.Children[ 0 ].Value );
+            Assert.Equal( "EmptyThing", kv.Children[ 1 ].Name );
+            Assert.Equal( "", kv.Children[ 1 ].Value );
+        }
+#endif
+
+        [Fact]
+        public void WritesNewLineAsSlashN()
+        {
+            var kv = new KeyValue( "abc" );
+            kv.Children.Add( new KeyValue( "def", "ghi\njkl" ) );
+            var text = SaveToText( kv );
+            var expected = ( @"
+""abc""
+{
+" + "\t" + @"""def""		""ghi\njkl""
+}
+" ).Trim().Replace( "\r\n", "\n" ) + "\n";
 
             Assert.Equal( expected, text );
         }
@@ -460,14 +553,7 @@ namespace Tests
             kv.Children.Add( new KeyValue( "slashes", @"\o/" ) );
             kv.Children.Add( new KeyValue( "newline", "\r\n" ) );
 
-            string text;
-            using ( var ms = new MemoryStream() )
-            {
-                kv.SaveToStream( ms, asBinary: false );
-                ms.Seek( 0, SeekOrigin.Begin );
-                using var reader = new StreamReader( ms );
-                text = reader.ReadToEnd();
-            }
+            var text = SaveToText( kv );
 
             var expectedValue = "\"key\"\n{\n\t\"slashes\"\t\t\"\\\\o/\"\n\t\"newline\"\t\t\"\\r\\n\"\n}\n";
             Assert.Equal( expectedValue, text );
@@ -480,14 +566,7 @@ namespace Tests
             kv.Children.Add( new KeyValue( "emptyObj" ) );
             kv.Children.Add( new KeyValue( "emptyString", string.Empty ) );
 
-            string text;
-            using ( var ms = new MemoryStream() )
-            {
-                kv.SaveToStream( ms, asBinary: false );
-                ms.Seek( 0, SeekOrigin.Begin );
-                using var reader = new StreamReader( ms );
-                text = reader.ReadToEnd();
-            }
+            var text = SaveToText( kv );
 
             var expectedValue = "\"key\"\n{\n\t\"emptyObj\"\n\t{\n\t}\n\t\"emptyString\"\t\t\"\"\n}\n";
             Assert.Equal( expectedValue, text );
@@ -533,6 +612,20 @@ namespace Tests
             }
 
             Assert.Equal( 0x0807060504030201, kv["key"].AsLong() );
+        }
+
+        static string SaveToText( KeyValue kv )
+        {
+            string text;
+            using ( var ms = new MemoryStream() )
+            {
+                kv.SaveToStream( ms, asBinary: false );
+                ms.Seek( 0, SeekOrigin.Begin );
+                using var reader = new StreamReader( ms );
+                text = reader.ReadToEnd();
+            }
+
+            return text;
         }
 
         const string TestObjectHex = "00546573744F626A65637400016B65790076616C7565000808";
