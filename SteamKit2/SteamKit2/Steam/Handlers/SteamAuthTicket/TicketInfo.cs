@@ -6,7 +6,7 @@ namespace SteamKit2
     /// <summary>
     /// Represents a valid authorized session ticket.
     /// </summary>
-    public class TicketInfo : IDisposable
+    public sealed partial class TicketInfo : IDisposable
     {
         /// <summary>
         /// Application the ticket was generated for.

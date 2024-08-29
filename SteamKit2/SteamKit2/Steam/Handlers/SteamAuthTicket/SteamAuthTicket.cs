@@ -9,6 +9,8 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.IO.Hashing;
 using SteamKit2.Internal;
+using System.Diagnostics;
+using System.Threading;
 
 namespace SteamKit2
 {
@@ -17,37 +19,14 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamAuthTicket : ClientMsgHandler
     {
-        private readonly DefaultAuthTicketBuilder AuthTicketBuilder;
-
         private readonly Dictionary<EMsg, Action<IPacketMsg>> DispatchMap;
-        private readonly ConcurrentQueue<byte[]> GameConnectTokens = new();
+        private readonly Queue<byte[]> GameConnectTokens = new();
         private readonly ConcurrentDictionary<uint, List<CMsgAuthTicket>> TicketsByGame = new();
+        private readonly object TicketChangeLock = new();
+        private static uint Sequence;
 
         /// <summary>
-        /// Writes random non zero bytes into user data space of the stream.
-        /// </summary>
-        private class RandomUserDataSerializer : IUserDataSerializer
-        {
-            static readonly RandomNumberGenerator _random = RandomNumberGenerator.Create();
-
-            /// <inheritdoc/>
-            public void Serialize( BinaryWriter writer )
-            {
-                var bytes = ArrayPool<byte>.Shared.Rent( 8 );
-                try
-                {
-                    _random.GetNonZeroBytes( bytes );
-                    writer.Write( bytes, 0, 8 );
-                }
-                finally
-                {
-                    ArrayPool<byte>.Shared.Return( bytes );
-                }
-            }
-        }
-
-        /// <summary>
-        /// Initializes all necessary callbacks and ticket builder.
+        /// Initializes all necessary callbacks.
         /// </summary>
         public SteamAuthTicket()
         {
@@ -58,7 +37,6 @@ namespace SteamKit2
                 { EMsg.ClientGameConnectTokens, HandleGameConnectTokens },
                 { EMsg.ClientLogOff, HandleLogOffResponse }
             };
-            AuthTicketBuilder = new DefaultAuthTicketBuilder( new RandomUserDataSerializer() );
         }
 
         /// <summary>
@@ -69,24 +47,22 @@ namespace SteamKit2
         /// object that provides details about the generated valid authentication session ticket.</returns>
         public async Task<TicketInfo> GetAuthSessionTicket( uint appid )
         {
-            // User not logged in
             if ( Client.CellID == null ) throw new Exception( "User not logged in." );
 
             var apps = Client.GetHandler<SteamApps>() ?? throw new Exception( "Steam Apps instance was null." );
             var appTicket = await apps.GetAppOwnershipTicket( appid );
 
-            // User doesn't own the game
-            if ( appTicket.Result != EResult.OK ) throw new Exception( "User doesn't own the game." );
+            if ( appTicket.Result != EResult.OK ) throw new Exception( $"Failed to obtain app ownership ticket. Result: {appTicket.Result}. The user may not own the game or there was an error." );
 
             if ( GameConnectTokens.TryDequeue( out var token ) )
             {
-                var authTicket = AuthTicketBuilder.Build( token );
+                var authTicket = BuildAuthTicket( token );
                 var ticket = await VerifyTicket( appid, authTicket, out var crc );
 
                 // Verify just in case
                 if ( ticket.ActiveTicketsCRC.Any( x => x == crc ) )
                 {
-                    var tok = BuildTicket( authTicket, appTicket.Ticket );
+                    var tok = CombineTickets( authTicket, appTicket.Ticket );
                     return new TicketInfo( this, appid, tok );
                 }
                 else
@@ -102,16 +78,18 @@ namespace SteamKit2
 
         internal void CancelAuthTicket( TicketInfo authTicket )
         {
-
-            if ( TicketsByGame.TryGetValue( authTicket.AppID, out var tickets ) )
+            lock ( TicketChangeLock )
             {
-                tickets.RemoveAll( x => x.ticket_crc == authTicket.TicketCRC );
+                if ( TicketsByGame.TryGetValue( authTicket.AppID, out var tickets ) )
+                {
+                    tickets.RemoveAll( x => x.ticket_crc == authTicket.TicketCRC );
+                }
             }
 
             SendTickets();
         }
 
-        private static byte[] BuildTicket( byte[] authTicket, byte[] appTicket )
+        private static byte[] CombineTickets( byte[] authTicket, byte[] appTicket )
         {
             var len = appTicket.Length;
             var token = new byte[ authTicket.Length + 4 + len ];
@@ -123,18 +101,78 @@ namespace SteamKit2
             return token;
         }
 
+        /// <summary>
+        /// Handles generation of auth ticket.
+        /// </summary>
+        private static byte[] BuildAuthTicket( byte[] gameConnectToken )
+        {
+            const int sessionSize =
+                4 + // unknown, always 1
+                4 + // unknown, always 2
+                4 + // public IP v4, optional
+                4 + // private IP v4, optional
+                4 + // timestamp & uint.MaxValue
+                4;  // sequence
+
+            using var stream = new MemoryStream( gameConnectToken.Length + 4 + sessionSize );
+            using ( var writer = new BinaryWriter( stream ) )
+            {
+                writer.Write( gameConnectToken.Length );
+                writer.Write( gameConnectToken );
+
+                writer.Write( sessionSize );
+                writer.Write( 1 );
+                writer.Write( 2 );
+
+                SerializeRandomUserData( writer );
+                writer.Write( ( uint )Stopwatch.GetTimestamp() );
+                // Use Interlocked to safely increment the sequence number
+                writer.Write( Interlocked.Increment( ref Sequence ) );
+            }
+            return stream.ToArray();
+        }
+
+        /// <summary>
+        /// Writes random non zero bytes into user data space of the stream.
+        /// </summary>
+        private static void SerializeRandomUserData( BinaryWriter writer )
+        {
+            var userData = GenerateRandomUserData();
+            writer.Write( userData );
+        }
+
+        private static byte[] GenerateRandomUserData()
+        {
+            byte[] bytes = ArrayPool<byte>.Shared.Rent( 8 );
+            try
+            {
+                using ( var rng = RandomNumberGenerator.Create() )
+                {
+                    rng.GetNonZeroBytes( bytes );
+                }
+                return bytes.Take( 8 ).ToArray();
+            }
+            finally
+            {
+                ArrayPool<byte>.Shared.Return( bytes );
+            }
+        }
+
         private AsyncJob<TicketAcceptedCallback> VerifyTicket( uint appid, byte[] authToken, out uint crc )
         {
             crc = BitConverter.ToUInt32( Crc32.Hash( authToken ), 0 );
-            var items = TicketsByGame.GetOrAdd( appid, [] );
-
-            // Add ticket to specified games list
-            items.Add( new CMsgAuthTicket
+            lock ( TicketChangeLock )
             {
-                gameid = appid,
-                ticket = authToken,
-                ticket_crc = crc
-            } );
+                var items = TicketsByGame.GetOrAdd( appid, [] );
+
+                // Add ticket to specified games list
+                items.Add( new CMsgAuthTicket
+                {
+                    gameid = appid,
+                    ticket = authToken,
+                    ticket_crc = crc
+                } );
+            }
 
             return SendTickets();
         }
@@ -143,9 +181,12 @@ namespace SteamKit2
             var auth = new ClientMsgProtobuf<CMsgClientAuthList>( EMsg.ClientAuthList );
             auth.Body.tokens_left = ( uint )GameConnectTokens.Count;
 
-            auth.Body.app_ids.AddRange( TicketsByGame.Keys );
-            // Flatten dictionary into ticket list
-            auth.Body.tickets.AddRange( TicketsByGame.Values.SelectMany( x => x ) );
+            lock ( TicketChangeLock )
+            {
+                auth.Body.app_ids.AddRange( TicketsByGame.Keys );
+                // Flatten dictionary into ticket list
+                auth.Body.tickets.AddRange( TicketsByGame.Values.SelectMany( x => x ) );
+            }
 
             auth.SourceJobID = Client.GetNextJobID();
             Client.Send( auth );
