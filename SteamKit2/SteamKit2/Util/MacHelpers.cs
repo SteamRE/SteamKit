@@ -5,8 +5,6 @@ using System.Text;
 
 namespace SteamKit2.Util.MacHelpers
 {
-#pragma warning disable CA2101 // Specify marshaling for P/Invoke string arguments. All the APIs in this file deal with regular UTF-8 strings (char *). With CharSet.Unicode, SK2 just crashes.
-
     [SupportedOSPlatform( "macos" )]
     class CFTypeRef : SafeHandle
     {
@@ -77,7 +75,7 @@ namespace SteamKit2.Util.MacHelpers
     {
         const string LibraryName = "libc";
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern int statfs64(string path, ref StatFS buf);
     }
 
@@ -98,10 +96,10 @@ namespace SteamKit2.Util.MacHelpers
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool CFDictionaryGetValueIfPresent(CFTypeRef theDict, CFTypeRef key, out IntPtr value);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern CFTypeRef CFStringCreateWithCString(CFTypeRef allocator, string cStr, CFStringEncoding encoding);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         [return:MarshalAs(UnmanagedType.U1)]
         public static extern bool CFStringGetCString(CFTypeRef theString, StringBuilder buffer, long bufferSize, CFStringEncoding encoding);
 
@@ -118,7 +116,7 @@ namespace SteamKit2.Util.MacHelpers
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CFTypeRef DASessionCreate(CFTypeRef allocator);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern CFTypeRef DADiskCreateFromBSDName(CFTypeRef allocator, CFTypeRef session, string name);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
@@ -139,12 +137,11 @@ namespace SteamKit2.Util.MacHelpers
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern uint IOServiceGetMatchingService(uint masterPort, IntPtr matching);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern IntPtr IOServiceMatching(string name);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int IOObjectRelease(uint @object);
     }
-#pragma warning restore CA2101 // Specify marshaling for P/Invoke string arguments
 }
 
