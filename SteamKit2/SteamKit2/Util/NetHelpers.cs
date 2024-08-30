@@ -22,7 +22,7 @@ namespace SteamKit2
 
             if ( ipEndPoint == null || ipEndPoint.Address == IPAddress.Any )
                 throw new InvalidOperationException( "Socket not connected" );
-            
+
             return ipEndPoint.Address;
         }
 
@@ -42,7 +42,7 @@ namespace SteamKit2
 
             Span<byte> addrBytes = stackalloc byte[ 4 ];
             ipAddr.TryWriteBytes( addrBytes, out _ );
-            
+
             return Unsafe.BitCast<int, uint>( IPAddress.NetworkToHostOrder( BitConverter.ToInt32( addrBytes ) ) );
         }
 
@@ -110,27 +110,17 @@ namespace SteamKit2
 
         public static bool TryParseIPEndPoint( string stringValue, [NotNullWhen( true )] out IPEndPoint? endPoint )
         {
-            var colonPosition = stringValue.LastIndexOf( ':' );
+            if ( !IPEndPoint.TryParse( stringValue, out endPoint ) )
+            {
+                return false;
+            }
 
-            if ( colonPosition == -1 )
+            if ( endPoint.Port == 0 )
             {
                 endPoint = null;
                 return false;
             }
 
-            if ( !IPAddress.TryParse( stringValue.AsSpan( 0, colonPosition ), out var address ) )
-            {
-                endPoint = null;
-                return false;
-            }
-
-            if ( !ushort.TryParse( stringValue.AsSpan( colonPosition + 1 ), out var port ) )
-            {
-                endPoint = null;
-                return false;
-            }
-
-            endPoint = new IPEndPoint( address, port );
             return true;
         }
 
