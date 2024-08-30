@@ -29,7 +29,20 @@ namespace Tests
         public void GetIPAddress()
         {
             Assert.Equal( IPAddress.Loopback, NetHelpers.GetIPAddress( 2130706433 ) );
+            Assert.Equal( IPAddress.Parse( "0.0.0.1" ), NetHelpers.GetIPAddress( 1 ) );
+            Assert.Equal( IPAddress.Parse( "255.255.255.255" ), NetHelpers.GetIPAddress( uint.MaxValue ) );
+            Assert.Equal( IPAddress.Any, NetHelpers.GetIPAddress( 0 ) );
+        }
+
+        [Fact]
+        public void GetIPAddressAsUInt()
+        {
             Assert.Equal( 2130706433u, NetHelpers.GetIPAddressAsUInt( IPAddress.Loopback ) );
+            Assert.Equal( 1u, NetHelpers.GetIPAddressAsUInt( IPAddress.Parse( "0.0.0.1" ) ) );
+            Assert.Equal( uint.MaxValue, NetHelpers.GetIPAddressAsUInt( IPAddress.Parse( "255.255.255.255" ) ) );
+            Assert.Equal( 3232235521u, NetHelpers.GetIPAddressAsUInt( IPAddress.Parse( "192.168.0.1" ) ) );
+            Assert.Equal( 167772161u, NetHelpers.GetIPAddressAsUInt( IPAddress.Parse( "10.0.0.1" ) ) );
+            Assert.Equal( 2886729729u, NetHelpers.GetIPAddressAsUInt( IPAddress.Parse( "172.16.0.1" ) ) );
         }
 
         [Fact]

@@ -28,11 +28,18 @@ namespace SteamKit2
 
         public static IPAddress GetIPAddress( uint ipAddr )
         {
-            return new IPAddress( IPAddress.NetworkToHostOrder( Unsafe.BitCast<uint, int>( ipAddr ) ) );
+            return new IPAddress(
+                ( ( ipAddr & 0xFF000000 ) >> 24 ) |
+                ( ( ipAddr & 0x00FF0000 ) >> 8 ) |
+                ( ( ipAddr & 0x0000FF00 ) << 8 ) |
+                ( ( ipAddr & 0x000000FF ) << 24 )
+            );
         }
 
         public static uint GetIPAddressAsUInt( IPAddress ipAddr )
         {
+            DebugLog.Assert( ipAddr.AddressFamily == AddressFamily.InterNetwork, nameof( NetHelpers ), "GetIPAddressAsUInt only works with IPv4 addresses." );
+
             Span<byte> addrBytes = stackalloc byte[ 4 ];
             ipAddr.TryWriteBytes( addrBytes, out _ );
             
