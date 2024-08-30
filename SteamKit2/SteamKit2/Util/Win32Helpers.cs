@@ -2,12 +2,13 @@
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.Marshalling;
 using System.Runtime.Versioning;
 
 namespace SteamKit2.Util
 {
 	[SupportedOSPlatform("windows")]
-	static class Win32Helpers
+	static partial class Win32Helpers
 	{
 		#region Boot Disk Serial Number
 
@@ -152,7 +153,7 @@ namespace SteamKit2.Util
 
 		sealed class FileSafeHandle : SafeHandle
 		{
-			FileSafeHandle()
+			public FileSafeHandle()
 				: base( IntPtr.Zero, ownsHandle: true )
 			{
 			}
@@ -165,7 +166,7 @@ namespace SteamKit2.Util
 			}
 		}
 
-		static class NativeMethods
+		static partial class NativeMethods
 		{
 			#region CreateFile
 
@@ -173,16 +174,17 @@ namespace SteamKit2.Util
 			public static uint FILE_SHARE_WRITE = 2;
 			public static uint OPEN_EXISTING = 3;
 
-			[DllImport( "kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode )]
-			public static extern FileSafeHandle CreateFile( string lpFileName, uint dwDesiredAccess, uint dwShareMode, IntPtr lpSecurityAttributes, uint dwCreationDisposition, uint dwFlagsAndAttributes, IntPtr hTemplateFile );
+			[LibraryImport( "kernel32.dll", EntryPoint = "CreateFileW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16 )]
+			[return: MarshalUsing( typeof( SafeHandleMarshaller<FileSafeHandle> ) )]
+			public static partial FileSafeHandle CreateFile( string lpFileName, uint dwDesiredAccess, uint dwShareMode, IntPtr lpSecurityAttributes, uint dwCreationDisposition, uint dwFlagsAndAttributes, IntPtr hTemplateFile );
 
 			#endregion
 
 			#region CloseHandle
 
-			[DllImport( "kernel32.dll", SetLastError = true )]
+			[LibraryImport( "kernel32.dll", SetLastError = true )]
 			[return: MarshalAs( UnmanagedType.Bool )]
-			public static extern bool CloseHandle( IntPtr hObject );
+			public static partial bool CloseHandle( IntPtr hObject );
 
 			#endregion
 
@@ -246,9 +248,9 @@ namespace SteamKit2.Util
 			public static int StorageDeviceProperty = 0;
 			public static int PropertyStandardQuery = 0;
 
-			[DllImport( "kernel32.dll", SetLastError = true )]
+			[LibraryImport( "kernel32.dll", SetLastError = true )]
 			[return: MarshalAs( UnmanagedType.Bool )]
-			public static extern bool DeviceIoControl( SafeHandle hDevice, uint dwIoControlCode, IntPtr lpInBuffer, uint nInBufferSize, IntPtr lpOutBuffer, uint nOutBufferSize, out uint lpBytesReturned, IntPtr lpOverlapped );
+			public static partial bool DeviceIoControl( SafeHandle hDevice, uint dwIoControlCode, IntPtr lpInBuffer, uint nInBufferSize, IntPtr lpOutBuffer, uint nOutBufferSize, out uint lpBytesReturned, IntPtr lpOverlapped );
 
 			#endregion
 		}

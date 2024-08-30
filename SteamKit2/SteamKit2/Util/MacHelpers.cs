@@ -80,7 +80,7 @@ namespace SteamKit2.Util.MacHelpers
     }
 
     [SupportedOSPlatform( "macos" )]
-    static class CoreFoundation
+    static partial class CoreFoundation
     {
         const string LibraryName = "CoreFoundation.framework/CoreFoundation";
 
@@ -89,12 +89,14 @@ namespace SteamKit2.Util.MacHelpers
             kCFStringEncodingASCII = 0x0600
         }
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void CFRelease(IntPtr cf);
+        [LibraryImport( LibraryName )]
+        [UnmanagedCallConv( CallConvs = [ typeof( System.Runtime.CompilerServices.CallConvCdecl ) ] )]
+        public static partial void CFRelease(IntPtr cf);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [LibraryImport( LibraryName )]
+        [UnmanagedCallConv( CallConvs = [ typeof( System.Runtime.CompilerServices.CallConvCdecl ) ] )]
         [return: MarshalAs(UnmanagedType.I1)]
-        public static extern bool CFDictionaryGetValueIfPresent(CFTypeRef theDict, CFTypeRef key, out IntPtr value);
+        public static partial bool CFDictionaryGetValueIfPresent(CFTypeRef theDict, CFTypeRef key, out IntPtr value);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern CFTypeRef CFStringCreateWithCString(CFTypeRef allocator, string cStr, CFStringEncoding encoding);
@@ -103,45 +105,50 @@ namespace SteamKit2.Util.MacHelpers
         [return:MarshalAs(UnmanagedType.U1)]
         public static extern bool CFStringGetCString(CFTypeRef theString, StringBuilder buffer, long bufferSize, CFStringEncoding encoding);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern CFTypeRef CFUUIDCreateString(CFTypeRef allocator, IntPtr uuid);
+        [LibraryImport( LibraryName )]
+        [UnmanagedCallConv( CallConvs = [ typeof( System.Runtime.CompilerServices.CallConvCdecl ) ] )]
+        public static partial CFTypeRef CFUUIDCreateString(CFTypeRef allocator, IntPtr uuid);
     }
 
     [SupportedOSPlatform( "macos" )]
-    static class DiskArbitration
+    static partial class DiskArbitration
     {
         const string LibraryName = "DiskArbitration.framework/DiskArbitration";
         public const string kDADiskDescriptionMediaUUIDKey = "DAMediaUUID";
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern CFTypeRef DASessionCreate(CFTypeRef allocator);
+        [LibraryImport( LibraryName )]
+        [UnmanagedCallConv( CallConvs = [ typeof( System.Runtime.CompilerServices.CallConvCdecl ) ] )]
+        public static partial CFTypeRef DASessionCreate(CFTypeRef allocator);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern CFTypeRef DADiskCreateFromBSDName(CFTypeRef allocator, CFTypeRef session, string name);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern CFTypeRef DADiskCopyDescription(CFTypeRef disk);
+        [LibraryImport( LibraryName )]
+        [UnmanagedCallConv( CallConvs = [ typeof( System.Runtime.CompilerServices.CallConvCdecl ) ] )]
+        public static partial CFTypeRef DADiskCopyDescription(CFTypeRef disk);
     }
 
     [SupportedOSPlatform( "macos" )]
-    static class IOKit
+    static partial class IOKit
     {
         const string LibraryName = "IOKit.framework/IOKit";
 
         public const uint kIOMasterPortDefault = 0;
         public const string kIOPlatformSerialNumberKey = "IOPlatformSerialNumber";
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern CFTypeRef IORegistryEntryCreateCFProperty(uint entry, CFTypeRef key, CFTypeRef allocator, uint options);
+        [LibraryImport( LibraryName )]
+        [UnmanagedCallConv( CallConvs = [ typeof( System.Runtime.CompilerServices.CallConvCdecl ) ] )]
+        public static partial CFTypeRef IORegistryEntryCreateCFProperty(uint entry, CFTypeRef key, CFTypeRef allocator, uint options);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint IOServiceGetMatchingService(uint masterPort, IntPtr matching);
+        [LibraryImport( LibraryName )]
+        [UnmanagedCallConv( CallConvs = [ typeof( System.Runtime.CompilerServices.CallConvCdecl ) ] )]
+        public static partial uint IOServiceGetMatchingService(uint masterPort, IntPtr matching);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern IntPtr IOServiceMatching(string name);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int IOObjectRelease(uint @object);
+        [LibraryImport( LibraryName )]
+        [UnmanagedCallConv( CallConvs = [ typeof( System.Runtime.CompilerServices.CallConvCdecl ) ] )]
+        public static partial int IOObjectRelease(uint @object);
     }
 }
-
