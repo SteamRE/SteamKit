@@ -31,7 +31,7 @@ namespace SteamKit2.Discovery
         /// <returns>The <see cref="IPAddress"/> of the associated endpoint.</returns>
         public string GetHost()
         {
-            return NetHelpers.ExtractEndpointHost( EndPoint ).host;
+            return NetHelpers.ExtractEndpointHost( EndPoint );
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace SteamKit2.Discovery
         /// <returns>The port numer of the associated endpoint.</returns>
         public int GetPort()
         {
-            return NetHelpers.ExtractEndpointHost( EndPoint ).port;
+            return NetHelpers.ExtractEndpointPort( EndPoint );
         }
 
         /// <summary>

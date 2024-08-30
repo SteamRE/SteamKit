@@ -212,7 +212,7 @@ namespace SteamKit2.Discovery
                 else
                 {
                     // If we're marking this server for any failure, mark all endpoints for the host at the same time
-                    var host = NetHelpers.ExtractEndpointHost( endPoint ).host;
+                    var host = NetHelpers.ExtractEndpointHost( endPoint );
                     serverInfos = servers.Where( x => x.Record.GetHost().Equals( host, StringComparison.Ordinal ) ).ToArray();
                 }
 
