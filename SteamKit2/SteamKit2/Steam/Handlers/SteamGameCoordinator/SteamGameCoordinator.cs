@@ -37,7 +37,7 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            if ( packetMsg.MsgType == EMsg.ClientToGC )
+            if ( packetMsg.MsgType == EMsg.ClientFromGC )
             {
                 var callback = new MessageCallback( packetMsg );
                 this.Client.PostCallback( callback );
