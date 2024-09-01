@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Text;
@@ -90,11 +91,11 @@ namespace SteamKit2.Util.MacHelpers
         }
 
         [LibraryImport( LibraryName )]
-        [UnmanagedCallConv( CallConvs = [ typeof( System.Runtime.CompilerServices.CallConvCdecl ) ] )]
+        [UnmanagedCallConv( CallConvs = [ typeof( CallConvCdecl ) ] )]
         public static partial void CFRelease(IntPtr cf);
 
         [LibraryImport( LibraryName )]
-        [UnmanagedCallConv( CallConvs = [ typeof( System.Runtime.CompilerServices.CallConvCdecl ) ] )]
+        [UnmanagedCallConv( CallConvs = [ typeof( CallConvCdecl ) ] )]
         [return: MarshalAs(UnmanagedType.I1)]
         public static partial bool CFDictionaryGetValueIfPresent(CFTypeRef theDict, CFTypeRef key, out IntPtr value);
 
@@ -106,7 +107,7 @@ namespace SteamKit2.Util.MacHelpers
         public static extern bool CFStringGetCString(CFTypeRef theString, StringBuilder buffer, long bufferSize, CFStringEncoding encoding);
 
         [LibraryImport( LibraryName )]
-        [UnmanagedCallConv( CallConvs = [ typeof( System.Runtime.CompilerServices.CallConvCdecl ) ] )]
+        [UnmanagedCallConv( CallConvs = [ typeof( CallConvCdecl ) ] )]
         public static partial CFTypeRef CFUUIDCreateString(CFTypeRef allocator, IntPtr uuid);
     }
 
@@ -117,14 +118,14 @@ namespace SteamKit2.Util.MacHelpers
         public const string kDADiskDescriptionMediaUUIDKey = "DAMediaUUID";
 
         [LibraryImport( LibraryName )]
-        [UnmanagedCallConv( CallConvs = [ typeof( System.Runtime.CompilerServices.CallConvCdecl ) ] )]
+        [UnmanagedCallConv( CallConvs = [ typeof( CallConvCdecl ) ] )]
         public static partial CFTypeRef DASessionCreate(CFTypeRef allocator);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern CFTypeRef DADiskCreateFromBSDName(CFTypeRef allocator, CFTypeRef session, string name);
 
         [LibraryImport( LibraryName )]
-        [UnmanagedCallConv( CallConvs = [ typeof( System.Runtime.CompilerServices.CallConvCdecl ) ] )]
+        [UnmanagedCallConv( CallConvs = [ typeof( CallConvCdecl ) ] )]
         public static partial CFTypeRef DADiskCopyDescription(CFTypeRef disk);
     }
 
@@ -137,18 +138,18 @@ namespace SteamKit2.Util.MacHelpers
         public const string kIOPlatformSerialNumberKey = "IOPlatformSerialNumber";
 
         [LibraryImport( LibraryName )]
-        [UnmanagedCallConv( CallConvs = [ typeof( System.Runtime.CompilerServices.CallConvCdecl ) ] )]
+        [UnmanagedCallConv( CallConvs = [ typeof( CallConvCdecl ) ] )]
         public static partial CFTypeRef IORegistryEntryCreateCFProperty(uint entry, CFTypeRef key, CFTypeRef allocator, uint options);
 
         [LibraryImport( LibraryName )]
-        [UnmanagedCallConv( CallConvs = [ typeof( System.Runtime.CompilerServices.CallConvCdecl ) ] )]
+        [UnmanagedCallConv( CallConvs = [ typeof( CallConvCdecl ) ] )]
         public static partial uint IOServiceGetMatchingService(uint masterPort, IntPtr matching);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern IntPtr IOServiceMatching(string name);
 
         [LibraryImport( LibraryName )]
-        [UnmanagedCallConv( CallConvs = [ typeof( System.Runtime.CompilerServices.CallConvCdecl ) ] )]
+        [UnmanagedCallConv( CallConvs = [ typeof( CallConvCdecl ) ] )]
         public static partial int IOObjectRelease(uint @object);
     }
 }
