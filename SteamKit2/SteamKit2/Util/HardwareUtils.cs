@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -83,7 +84,7 @@ namespace SteamKit2
 
         internal static byte[] GetCombinedMacAddress( IEnumerable<byte[]> addresses )
         {
-            return addresses
+            var result = addresses
                 .Select( static addr => addr
                     // pad all found mac addresses to 8 bytes
                     .Append( ( byte )0 )
@@ -95,6 +96,10 @@ namespace SteamKit2
                 .Take( 2 )
                 .SelectMany( static b => b )
                 .ToArray();
+
+            Debug.Assert( result.Length == 16 );
+
+            return result;
         }
     }
 
