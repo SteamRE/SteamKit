@@ -14,6 +14,7 @@
     <RepositoryType>git</RepositoryType>
     <ProjectGuid>{4B2B0365-DE37-4B65-B614-3E4E7C05147D}</ProjectGuid>
     <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -48,6 +49,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.106">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="protobuf-net" Version="3.2.30" />
     <PackageReference Include="System.IO.Hashing" Version="8.0.0" />
   </ItemGroup>
