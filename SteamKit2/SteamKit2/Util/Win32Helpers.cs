@@ -1,258 +1,168 @@
 ﻿using System;
-using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.Marshalling;
 using System.Runtime.Versioning;
+using Windows.Win32;
+using Windows.Win32.Storage.FileSystem;
+using Windows.Win32.System.Ioctl;
 
 namespace SteamKit2.Util
 {
-	[SupportedOSPlatform("windows")]
-	static partial class Win32Helpers
-	{
-		#region Boot Disk Serial Number
+    [SupportedOSPlatform( "windows5.1.2600" )]
+    static partial class Win32Helpers
+    {
+        public static string? GetBootDiskSerialNumber()
+        {
+            try
+            {
+                var bootDiskNumber = GetBootDiskNumber();
+                var serialNumber = GetPhysicalDriveSerialNumber( bootDiskNumber );
+                return serialNumber;
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
-		public static string? GetBootDiskSerialNumber()
-		{
-			try
-			{
-				var bootDiskNumber = GetBootDiskNumber();
-				var serialNumber = GetPhysicalDriveSerialNumber( bootDiskNumber );
-				return serialNumber;
-			}
-			catch
-			{
-				return null;
-			}
-		}
+        static string GetBootDiskLogicalVolume()
+        {
+            var volume = Path.GetPathRoot( Environment.SystemDirectory.AsSpan() ).TrimEnd( Path.DirectorySeparatorChar );
 
-		static string GetBootDiskLogicalVolume()
-		{
-			var volume = Environment.GetEnvironmentVariable( "SystemDrive" );
+            if ( volume.Length == 0 )
+            {
+                throw new InvalidOperationException( "Could not determine system drive letter." );
+            }
 
-			if (string.IsNullOrEmpty(volume))
-			{
-				throw new InvalidOperationException("Could not determine system drive letter from 'SystemDrive' environment variable.");
-			}
+            return volume.ToString();
+        }
 
-			return volume;
-		}
+        static unsafe uint GetBootDiskNumber()
+        {
+            using var handle = PInvoke.CreateFile(
+                $@"\\.\{GetBootDiskLogicalVolume()}",
+                0,
+                FILE_SHARE_MODE.FILE_SHARE_READ | FILE_SHARE_MODE.FILE_SHARE_WRITE,
+                null,
+                FILE_CREATION_DISPOSITION.OPEN_EXISTING,
+                FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL,
+                null
+            );
 
-		static uint GetBootDiskNumber()
-		{
-			var volumeName = $@"\\.\{ GetBootDiskLogicalVolume() }";
-			using var handle = NativeMethods.CreateFile( volumeName, 0, NativeMethods.FILE_SHARE_READ | NativeMethods.FILE_SHARE_WRITE, IntPtr.Zero, NativeMethods.OPEN_EXISTING, 0, IntPtr.Zero );
-			if ( handle == null || handle.IsInvalid )
-			{
-				throw new FileNotFoundException( "Unable to open boot volume.", volumeName );
-			}
+            if ( handle == null || handle.IsInvalid )
+            {
+                throw new FileNotFoundException( "Unable to open boot volume." );
+            }
 
-			var bufferSize = 0x20;
-			var pointer = Marshal.AllocHGlobal( bufferSize );
-			try
-			{
-				uint bytesReturned;
+            var extents = new VOLUME_DISK_EXTENTS();
 
-				if ( !NativeMethods.DeviceIoControl( handle, NativeMethods.IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS, IntPtr.Zero, 0, pointer, ( uint )bufferSize, out bytesReturned, IntPtr.Zero ) )
-				{
-					throw new Win32Exception();
-				}
+            if ( !PInvoke.DeviceIoControl(
+                handle,
+                PInvoke.IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS,
+                null,
+                0,
+                &extents,
+                ( uint )VOLUME_DISK_EXTENTS.SizeOf( 1 ),
+                null,
+                null
+            ) )
+            {
+                throw new InvalidOperationException( $"Failed to get volume disk extents: {Marshal.GetLastWin32Error()}" );
+            }
 
-				var extents = Marshal.PtrToStructure<NativeMethods.VOLUME_DISK_EXTENTS>( pointer );
-				if ( extents.NumberOfDiskExtents != 1 )
-				{
-					throw new InvalidOperationException( "Unexpected number of disk extents" );
-				}
+            if ( extents.NumberOfDiskExtents != 1 )
+            {
+                throw new InvalidOperationException( "Unexpected number of disk extents" );
+            }
 
-				var diskID = extents.Extents[ 0 ].DiskNumber;
-				return diskID;
-			}
-			finally
-			{
-				Marshal.FreeHGlobal( pointer );
-			}
-		}
+            var diskID = extents.Extents[ 0 ].DiskNumber;
+            return diskID;
+        }
 
-		//
-		// Here Be Dragons
-		//
-		static string? GetPhysicalDriveSerialNumber( uint driveNumber )
-		{
-			using var handle = NativeMethods.CreateFile( $@"\\.\PhysicalDrive{driveNumber}", 0, NativeMethods.FILE_SHARE_READ | NativeMethods.FILE_SHARE_WRITE, IntPtr.Zero, NativeMethods.OPEN_EXISTING, 0, IntPtr.Zero );
-			if ( handle == null || handle.IsInvalid )
-			{
-				return null;
-			}
+        static unsafe string? GetPhysicalDriveSerialNumber( uint driveNumber )
+        {
+            using var handle = PInvoke.CreateFile(
+                $@"\\.\PhysicalDrive{driveNumber}",
+                0,
+                FILE_SHARE_MODE.FILE_SHARE_READ | FILE_SHARE_MODE.FILE_SHARE_WRITE,
+                null,
+                FILE_CREATION_DISPOSITION.OPEN_EXISTING,
+                FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL,
+                null
+            );
 
-			uint descriptorSize;
+            if ( handle == null || handle.IsInvalid )
+            {
+                throw new FileNotFoundException( "Unable to open physical drive." );
+            }
 
-			// 1. Call DeviceIoControl(STORAGE_PROPERTY_QUERY, out STORAGE_DESCRIPTOR_HEADER) to figure out how many bytes
-			// we need to allocate.
+            var query = new STORAGE_PROPERTY_QUERY()
+            {
+                PropertyId = STORAGE_PROPERTY_ID.StorageDeviceProperty,
+                QueryType = STORAGE_QUERY_TYPE.PropertyStandardQuery,
+            };
 
-			var querySize = Marshal.SizeOf<NativeMethods.STORAGE_PROPERTY_QUERY>();
-			var queryPtr = Marshal.AllocHGlobal( querySize );
-			try
-			{
-				var query = new NativeMethods.STORAGE_PROPERTY_QUERY();
-				query.PropertyId = NativeMethods.StorageDeviceProperty;
-				query.QueryType = NativeMethods.PropertyStandardQuery;
-				Marshal.StructureToPtr( query, queryPtr, fDeleteOld: false );
+            // 1. Call DeviceIoControl(STORAGE_PROPERTY_QUERY, out STORAGE_DESCRIPTOR_HEADER) to figure out how many bytes
+            // we need to allocate.
 
-				uint bytesReturned;
+            var header = new STORAGE_DESCRIPTOR_HEADER();
 
-				var headerSize = Marshal.SizeOf<NativeMethods.STORAGE_DESCRIPTOR_HEADER>();
-				var headerPtr = Marshal.AllocHGlobal( headerSize );
-				try
-				{
-					if ( !NativeMethods.DeviceIoControl( handle, NativeMethods.IOCTL_STORAGE_QUERY_PROPERTY, queryPtr, ( uint )querySize, headerPtr, ( uint )headerSize, out bytesReturned, IntPtr.Zero ) )
-					{
-						throw new Win32Exception();
-					}
+            if ( !PInvoke.DeviceIoControl(
+                handle,
+                PInvoke.IOCTL_STORAGE_QUERY_PROPERTY,
+                &query,
+                ( uint )STORAGE_PROPERTY_QUERY.SizeOf( 1 ),
+                &header,
+                ( uint )sizeof( STORAGE_DESCRIPTOR_HEADER ),
+                null,
+                null
+            ) )
+            {
+                throw new InvalidOperationException( $"Failed to query physical drive: {Marshal.GetLastWin32Error()}" );
+            }
 
-					var header = Marshal.PtrToStructure<NativeMethods.STORAGE_DESCRIPTOR_HEADER>( headerPtr );
-					descriptorSize = header.Size;
-				}
-				finally
-				{
-					Marshal.FreeHGlobal( headerPtr );
-				}
+            // 2. Call DeviceIOControl(STORAGE_PROPERTY_QUERY, STORAGE_DEVICE_DESCRIPTOR) to get a bunch of device info with a header
+            // containing the offsets to each piece of information.
 
-				// 2. Call DeviceIOControl(STORAGE_PROPERTY_QUERY, STORAGE_DEVICE_DESCRIPTOR) to get a bunch of device info with a header
-				// containing the offsets to each piece of information.
+            var descriptorPtr = Marshal.AllocHGlobal( ( int )header.Size );
 
-				var descriptorPtr = Marshal.AllocHGlobal( ( int )descriptorSize );
-				try
-				{
-					if ( !NativeMethods.DeviceIoControl( handle, NativeMethods.IOCTL_STORAGE_QUERY_PROPERTY, queryPtr, ( uint )querySize, descriptorPtr, descriptorSize, out bytesReturned, IntPtr.Zero ) )
-					{
-						throw new Win32Exception();
-					}
+            try
+            {
+                if ( !PInvoke.DeviceIoControl(
+                        handle,
+                        PInvoke.IOCTL_STORAGE_QUERY_PROPERTY,
+                        &query,
+                        ( uint )STORAGE_PROPERTY_QUERY.SizeOf( 1 ),
+                        ( void* )descriptorPtr,
+                        header.Size,
+                        null,
+                        null
+                    ) )
+                {
+                    throw new InvalidOperationException( $"Failed to query physical drive: {Marshal.GetLastWin32Error()}" );
+                }
 
-					var descriptor = Marshal.PtrToStructure<NativeMethods.STORAGE_DEVICE_DESCRIPTOR>( descriptorPtr );
+                var descriptor = Marshal.PtrToStructure<STORAGE_DEVICE_DESCRIPTOR>( descriptorPtr );
 
-					// 3. Figure out where in the blob the serial number is
-					// and read it from there.
-					var serialNumberOffset = descriptor.SerialNumberOffset;
-					var serialNumberPtr = IntPtr.Add( descriptorPtr, ( int )serialNumberOffset );
+                // 3. Figure out where in the blob the serial number is
+                // and read it from there.
 
-					var serialNumber = Marshal.PtrToStringAnsi( serialNumberPtr );
-					return serialNumber;
-				}
-				finally
-				{
-					Marshal.FreeHGlobal( descriptorPtr );
-				}
-			}
-			finally
-			{
-				Marshal.FreeHGlobal( queryPtr );
-			}
-		}
+                var serialNumberOffset = descriptor.SerialNumberOffset;
 
-		#endregion
+                if ( serialNumberOffset == 0 )
+                {
+                    throw new InvalidOperationException( "Serial number offset is zero." );
+                }
 
-		sealed class FileSafeHandle : SafeHandle
-		{
-			public FileSafeHandle()
-				: base( IntPtr.Zero, ownsHandle: true )
-			{
-			}
+                var serialNumberPtr = IntPtr.Add( descriptorPtr, ( int )serialNumberOffset );
 
-			public override bool IsInvalid => handle == IntPtr.Zero;
-
-			protected override bool ReleaseHandle()
-			{
-				return NativeMethods.CloseHandle( handle );
-			}
-		}
-
-		static partial class NativeMethods
-		{
-			#region CreateFile
-
-			public static uint FILE_SHARE_READ = 1;
-			public static uint FILE_SHARE_WRITE = 2;
-			public static uint OPEN_EXISTING = 3;
-
-			[LibraryImport( "kernel32.dll", EntryPoint = "CreateFileW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16 )]
-			[return: MarshalUsing( typeof( SafeHandleMarshaller<FileSafeHandle> ) )]
-			public static partial FileSafeHandle CreateFile( string lpFileName, uint dwDesiredAccess, uint dwShareMode, IntPtr lpSecurityAttributes, uint dwCreationDisposition, uint dwFlagsAndAttributes, IntPtr hTemplateFile );
-
-			#endregion
-
-			#region CloseHandle
-
-			[LibraryImport( "kernel32.dll", SetLastError = true )]
-			[return: MarshalAs( UnmanagedType.Bool )]
-			public static partial bool CloseHandle( IntPtr hObject );
-
-			#endregion
-
-			#region DeviceIoControl
-
-#pragma warning disable 0649 // Field <field> is never assigned to, and will always have its default value <value>.
-
-			public struct DISK_EXTENT
-			{
-				public uint DiskNumber;
-				public ulong StartingOffset;
-				public ulong ExtentLength;
-			};
-
-			public struct VOLUME_DISK_EXTENTS
-			{
-				public uint NumberOfDiskExtents;
-
-				[MarshalAs( UnmanagedType.ByValArray, SizeConst = 1 )]
-				public DISK_EXTENT[] Extents;
-			}
-
-			public struct STORAGE_PROPERTY_QUERY
-			{
-				public int PropertyId;
-				public int QueryType;
-				[MarshalAs( UnmanagedType.ByValArray, SizeConst = 1 )]
-				public byte[] AdditionalParameters;
-			}
-
-			public struct STORAGE_DESCRIPTOR_HEADER
-			{
-				public uint Version;
-				public uint Size;
-			}
-
-			public struct STORAGE_DEVICE_DESCRIPTOR
-			{
-				public uint Version;
-				public uint Size;
-				public byte DeviceType;
-				public byte DeviceTypeModifier;
-				[MarshalAs(UnmanagedType.I1)]
-				public bool RemovableMedia;
-				[MarshalAs(UnmanagedType.I1)]
-				public bool CommandQueueing;
-				public uint VendorIdOffset;
-				public uint ProductIdOffset;
-				public uint ProductRevisionOffset;
-				public uint SerialNumberOffset;
-				public int StorageBusType;
-				public uint RawPropertiesLength;
-				[MarshalAs( UnmanagedType.ByValArray, SizeConst = 1 )]
-				public byte[] RawDeviceProperties;
-			}
-
-#pragma warning restore 0649
-
-			public static uint IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS = 0x00560000;
-			public static uint IOCTL_STORAGE_QUERY_PROPERTY = 0x002D1400;
-			public static int StorageDeviceProperty = 0;
-			public static int PropertyStandardQuery = 0;
-
-			[LibraryImport( "kernel32.dll", SetLastError = true )]
-			[return: MarshalAs( UnmanagedType.Bool )]
-			public static partial bool DeviceIoControl( SafeHandle hDevice, uint dwIoControlCode, IntPtr lpInBuffer, uint nInBufferSize, IntPtr lpOutBuffer, uint nOutBufferSize, out uint lpBytesReturned, IntPtr lpOverlapped );
-
-			#endregion
-		}
-	}
+                var serialNumber = Marshal.PtrToStringAnsi( serialNumberPtr );
+                return serialNumber;
+            }
+            finally
+            {
+                Marshal.FreeHGlobal( descriptorPtr );
+            }
+        }
+    }
 }

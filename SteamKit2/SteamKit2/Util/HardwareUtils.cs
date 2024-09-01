@@ -23,7 +23,7 @@ namespace SteamKit2
     {
         public static IMachineInfoProvider GetDefaultProvider()
         {
-            if ( RuntimeInformation.IsOSPlatform( OSPlatform.Windows ) )
+            if ( OperatingSystem.IsWindowsVersionAtLeast( 5, 1, 2600 ) )
             {
                 return new WindowsMachineInfoProvider();
             }
@@ -81,7 +81,7 @@ namespace SteamKit2
         }
     }
 
-    [SupportedOSPlatform("windows")]
+    [SupportedOSPlatform( "windows5.1.2600" )]
     sealed class WindowsMachineInfoProvider : IMachineInfoProvider
     {
         public byte[]? GetMachineGuid()
