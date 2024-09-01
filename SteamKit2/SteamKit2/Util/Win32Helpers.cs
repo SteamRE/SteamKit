@@ -1,10 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using Windows.Win32;
 using Windows.Win32.Storage.FileSystem;
 using Windows.Win32.System.Ioctl;
+using static Windows.Win32.PInvoke;
 
 namespace SteamKit2.Util
 {
@@ -19,8 +20,9 @@ namespace SteamKit2.Util
                 var serialNumber = GetPhysicalDriveSerialNumber( bootDiskNumber );
                 return serialNumber;
             }
-            catch
+            catch ( Exception e )
             {
+                DebugLog.WriteLine( nameof( Win32Helpers ), $"Failed to get boot disk serial number: {e}" );
                 return null;
             }
         }
@@ -39,7 +41,7 @@ namespace SteamKit2.Util
 
         static unsafe uint GetBootDiskNumber()
         {
-            using var handle = PInvoke.CreateFile(
+            using var handle = CreateFile(
                 $@"\\.\{GetBootDiskLogicalVolume()}",
                 0,
                 FILE_SHARE_MODE.FILE_SHARE_READ | FILE_SHARE_MODE.FILE_SHARE_WRITE,
@@ -51,14 +53,14 @@ namespace SteamKit2.Util
 
             if ( handle == null || handle.IsInvalid )
             {
-                throw new FileNotFoundException( "Unable to open boot volume." );
+                throw new Win32Exception();
             }
 
             var extents = new VOLUME_DISK_EXTENTS();
 
-            if ( !PInvoke.DeviceIoControl(
+            if ( !DeviceIoControl(
                 handle,
-                PInvoke.IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS,
+                IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS,
                 null,
                 0,
                 &extents,
@@ -67,7 +69,7 @@ namespace SteamKit2.Util
                 null
             ) )
             {
-                throw new InvalidOperationException( $"Failed to get volume disk extents: {Marshal.GetLastWin32Error()}" );
+                throw new Win32Exception();
             }
 
             if ( extents.NumberOfDiskExtents != 1 )
@@ -81,7 +83,7 @@ namespace SteamKit2.Util
 
         static unsafe string? GetPhysicalDriveSerialNumber( uint driveNumber )
         {
-            using var handle = PInvoke.CreateFile(
+            using var handle = CreateFile(
                 $@"\\.\PhysicalDrive{driveNumber}",
                 0,
                 FILE_SHARE_MODE.FILE_SHARE_READ | FILE_SHARE_MODE.FILE_SHARE_WRITE,
@@ -93,7 +95,7 @@ namespace SteamKit2.Util
 
             if ( handle == null || handle.IsInvalid )
             {
-                throw new FileNotFoundException( "Unable to open physical drive." );
+                throw new Win32Exception();
             }
 
             var query = new STORAGE_PROPERTY_QUERY()
@@ -107,9 +109,9 @@ namespace SteamKit2.Util
 
             var header = new STORAGE_DESCRIPTOR_HEADER();
 
-            if ( !PInvoke.DeviceIoControl(
+            if ( !DeviceIoControl(
                 handle,
-                PInvoke.IOCTL_STORAGE_QUERY_PROPERTY,
+                IOCTL_STORAGE_QUERY_PROPERTY,
                 &query,
                 ( uint )STORAGE_PROPERTY_QUERY.SizeOf( 1 ),
                 &header,
@@ -118,7 +120,7 @@ namespace SteamKit2.Util
                 null
             ) )
             {
-                throw new InvalidOperationException( $"Failed to query physical drive: {Marshal.GetLastWin32Error()}" );
+                throw new Win32Exception();
             }
 
             // 2. Call DeviceIOControl(STORAGE_PROPERTY_QUERY, STORAGE_DEVICE_DESCRIPTOR) to get a bunch of device info with a header
@@ -128,9 +130,9 @@ namespace SteamKit2.Util
 
             try
             {
-                if ( !PInvoke.DeviceIoControl(
+                if ( !DeviceIoControl(
                         handle,
-                        PInvoke.IOCTL_STORAGE_QUERY_PROPERTY,
+                        IOCTL_STORAGE_QUERY_PROPERTY,
                         &query,
                         ( uint )STORAGE_PROPERTY_QUERY.SizeOf( 1 ),
                         ( void* )descriptorPtr,
@@ -139,7 +141,7 @@ namespace SteamKit2.Util
                         null
                     ) )
                 {
-                    throw new InvalidOperationException( $"Failed to query physical drive: {Marshal.GetLastWin32Error()}" );
+                    throw new Win32Exception();
                 }
 
                 var descriptor = Marshal.PtrToStructure<STORAGE_DEVICE_DESCRIPTOR>( descriptorPtr );
