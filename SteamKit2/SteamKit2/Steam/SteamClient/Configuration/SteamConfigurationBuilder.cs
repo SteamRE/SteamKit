@@ -35,7 +35,7 @@ namespace SteamKit2
 
                 MachineInfoProvider = MachineInfoProvider.GetDefaultProvider(),
 
-                ProtocolTypes = ProtocolTypes.WebSocket,
+                ProtocolTypes = ProtocolTypes.Tcp | ProtocolTypes.WebSocket,
 
                 ServerListProvider = new MemoryServerListProvider(),
 
