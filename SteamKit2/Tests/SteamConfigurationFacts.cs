@@ -79,7 +79,7 @@ namespace Tests
         [Fact]
         public void DefaultProtocols()
         {
-            Assert.Equal(ProtocolTypes.Tcp, configuration.ProtocolTypes);
+            Assert.Equal(ProtocolTypes.Tcp | ProtocolTypes.WebSocket, configuration.ProtocolTypes);
         }
 
         [Fact]
