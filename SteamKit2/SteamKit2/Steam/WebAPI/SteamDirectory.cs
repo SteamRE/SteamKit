@@ -57,39 +57,40 @@ namespace SteamKit2
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            var response = await directory.CallAsync( HttpMethod.Get, "GetCMList", version: 1, args: args ).ConfigureAwait( false );
+            var response = await directory.CallAsync( HttpMethod.Get, "GetCMListForConnect", version: 1, args: args ).ConfigureAwait( false );
 
-            var result = ( EResult )response[ "result" ].AsInteger( ( int )EResult.Invalid );
-            if ( result != EResult.OK )
+            if ( !response[ "success" ].AsBoolean() )
             {
-                throw new InvalidOperationException( string.Format( "Steam Web API returned EResult.{0}", result ) );
+                throw new InvalidOperationException( $"Steam Web API returned failure - {response[ "message" ].AsString() ?? "unknown"}" );
             }
 
             var socketList = response[ "serverlist" ];
-            var websocketList = response[ "serverlist_websockets" ];
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            var serverRecords = new List<ServerRecord>( capacity: socketList.Children.Count + websocketList.Children.Count );
-
-            foreach ( var child in websocketList.Children )
-            {
-                if ( child.Value is null )
-                {
-                    continue;
-                }
-
-                serverRecords.Add( ServerRecord.CreateWebSocketServer( child.Value ) );
-            }
+            var serverRecords = new List<ServerRecord>( capacity: socketList.Children.Count );
 
             foreach ( var child in socketList.Children )
             {
-                if ( child.Value is null || !ServerRecord.TryCreateSocketServer( child.Value, out var record ) )
+                var endpoint = child[ "endpoint" ].Value;
+
+                if ( endpoint == null )
                 {
                     continue;
                 }
 
-                serverRecords.Add( record );
+                var record = child[ "type" ].Value switch
+                {
+                    "websockets" => ServerRecord.CreateWebSocketServer( endpoint ),
+                    "netfilter" => ServerRecord.CreateDnsSocketServer( endpoint ),
+                    // TODO: There's also "china" type which uses websocket
+                    _ => null,
+                };
+
+                if ( record != null )
+                {
+                    serverRecords.Add( record );
+                }
             }
 
             return serverRecords.AsReadOnly();
