@@ -3,12 +3,9 @@
  * file 'license.txt', which is part of this source code package.
  */
 
-using System;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Net.Sockets;
-using System.Threading.Tasks;
 
 namespace SteamKit2.Steam.CDN
 {
@@ -22,38 +19,19 @@ namespace SteamKit2.Steam.CDN
     {
         private static string TriggerDomain = "lancache.steamcontent.com";
 
-        public static async Task<bool> DetectLancacheServerAsync(HttpClient httpClient)
+        public static bool DetectLancacheServer()
         {
             // Gets a list of ipv4 addresses, Lancache cannot use ipv6 currently
-            var ipAddresses = (await Dns.GetHostAddressesAsync( TriggerDomain ) )
+            var ipAddresses = Dns.GetHostAddresses( TriggerDomain )
                 .Where(e => e.AddressFamily == AddressFamily.InterNetwork)
                 .ToArray();
 
             // If there are no private IPs, then there can't be a Lancache instance.  Lancache's IP must resolve to an RFC 1918 address
-            if (!ipAddresses.Any(e => e.IsPrivateAddress()))
+            if (ipAddresses.Any(e => IsPrivateAddress( e ) ))
             {
-                return false;
+                return true;
             }
 
-            // DNS hostnames can possibly resolve to more than one IP address (one-to-many), so we must check each one for a Lancache server
-            foreach (var ip in ipAddresses)
-            {
-                try
-                {
-                    // If the IP resolves to a private subnet, then we want to query the Lancache server to see if it is actually there.
-                    // Requests that are served from the cache will have an additional header.
-                    var response = await httpClient.GetAsync(new Uri($"http://{ip}/lancache-heartbeat"));
-                    if (response.Headers.Contains("X-LanCache-Processed-By"))
-                    {
-                        Console.WriteLine($"Enabling local content cache at '{ip}' from lookup of lancache.steamcontent.com.");
-                        return true;
-                    }
-                }
-                catch (Exception e) when (e is HttpRequestException | e is TaskCanceledException)
-                {
-                    // Target machine refused connection errors are to be expected if there is no Lancache at that IP address.
-                }
-            }
             return false;
         }
 
@@ -62,7 +40,7 @@ namespace SteamKit2.Steam.CDN
         /// </summary>
         /// <param name="toTest">The IP address that will be tested</param>
         /// <returns>Returns true if the IP is a private address, false if it isn't private</returns>
-        private static bool IsPrivateAddress( this IPAddress toTest )
+        private static bool IsPrivateAddress( IPAddress toTest )
         {
             if ( IPAddress.IsLoopback( toTest ) )
             {

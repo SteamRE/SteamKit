@@ -30,8 +30,6 @@ namespace SteamKit2.CDN
         /// </summary>
         public static TimeSpan ResponseBodyTimeout { get; set; } = TimeSpan.FromSeconds( 60 );
 
-        //TODO comment
-        private static readonly SemaphoreSlim _lancacheDetectionLock = new SemaphoreSlim( 1, 1 );
         private static bool CheckedForLancacheServer { get; set; }
         private static bool LancacheDetected { get; set; }
 
@@ -232,19 +230,12 @@ namespace SteamKit2.CDN
                 }
             }
 
-            await _lancacheDetectionLock.WaitAsync();
-            try
+            if ( !CheckedForLancacheServer )
             {
-                if ( !CheckedForLancacheServer )
-                {
-                    LancacheDetected = await LancacheDetector.DetectLancacheServerAsync(httpClient);
-                }
-            }
-            finally
-            {
+                LancacheDetected = LancacheDetector.DetectLancacheServer();
                 CheckedForLancacheServer = true;
-                _lancacheDetectionLock.Release();
             }
+
 
             var chunkID = Utils.EncodeHexString( chunk.ChunkID );
             var url = $"depot/{depotId}/chunk/{chunkID}";
