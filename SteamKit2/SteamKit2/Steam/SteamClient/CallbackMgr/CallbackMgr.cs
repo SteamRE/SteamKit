@@ -22,7 +22,7 @@ namespace SteamKit2
     {
         SteamClient client;
 
-        List<CallbackBase> registeredCallbacks;
+        CallbackBase[] registeredCallbacks = [];
 
 
 
@@ -33,8 +33,6 @@ namespace SteamKit2
         public CallbackManager( SteamClient client )
         {
             ArgumentNullException.ThrowIfNull( client );
-
-            registeredCallbacks = [];
 
             this.client = client;
         }
@@ -142,29 +140,48 @@ namespace SteamKit2
 
         void ICallbackMgrInternals.Register( CallbackBase call )
         {
-            if ( registeredCallbacks.Contains( call ) )
+            var oldCallbacks = registeredCallbacks;
+
+            if ( Array.IndexOf( oldCallbacks, call ) != -1 )
                 return;
 
-            registeredCallbacks.Add( call );
+            // Create a new array for Handle() to be thread safe
+            var newCallbacks = new CallbackBase[ oldCallbacks.Length + 1 ];
+            Array.Copy( oldCallbacks, newCallbacks, oldCallbacks.Length );
+            newCallbacks[ ^1 ] = call;
+
+            Interlocked.Exchange( ref registeredCallbacks, newCallbacks );
+        }
+
+        void ICallbackMgrInternals.Unregister( CallbackBase call )
+        {
+            var oldCallbacks = registeredCallbacks;
+            var oldIndex = Array.IndexOf( oldCallbacks, call );
+
+            if ( oldIndex < 0 )
+                return;
+
+            var newCallbacks = new CallbackBase[ oldCallbacks.Length - 1 ];
+
+            Array.Copy( oldCallbacks, 0, newCallbacks, 0, oldIndex );
+            Array.Copy( oldCallbacks, oldIndex + 1, newCallbacks, oldIndex, oldCallbacks.Length - oldIndex - 1 );
+
+            Interlocked.Exchange( ref registeredCallbacks, newCallbacks );
         }
 
         void Handle( ICallbackMsg call )
         {
+            var callbacks = registeredCallbacks;
             var type = call.GetType();
 
             // find handlers interested in this callback
-            foreach ( var callback in registeredCallbacks )
+            foreach ( var callback in callbacks )
             {
                 if ( callback.CallbackType.IsAssignableFrom( type ) )
                 {
                     callback.Run( call );
                 }
             }
-        }
-
-        void ICallbackMgrInternals.Unregister( CallbackBase call )
-        {
-            registeredCallbacks.Remove( call );
         }
 
         sealed class Subscription : IDisposable
