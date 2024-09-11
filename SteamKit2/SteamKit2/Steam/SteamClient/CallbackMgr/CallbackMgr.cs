@@ -140,33 +140,40 @@ namespace SteamKit2
 
         void ICallbackMgrInternals.Register( CallbackBase call )
         {
-            var oldCallbacks = registeredCallbacks;
+            lock ( registeredCallbacks )
+            {
+                if ( Array.IndexOf( registeredCallbacks, call ) != -1 )
+                {
+                    return;
+                }
 
-            if ( Array.IndexOf( oldCallbacks, call ) != -1 )
-                return;
+                // Create a new array for Handle() to be thread safe
+                var callbacks = new CallbackBase[ registeredCallbacks.Length + 1 ];
+                Array.Copy( registeredCallbacks, callbacks, registeredCallbacks.Length );
+                callbacks[ ^1 ] = call;
 
-            // Create a new array for Handle() to be thread safe
-            var newCallbacks = new CallbackBase[ oldCallbacks.Length + 1 ];
-            Array.Copy( oldCallbacks, newCallbacks, oldCallbacks.Length );
-            newCallbacks[ ^1 ] = call;
-
-            Interlocked.Exchange( ref registeredCallbacks, newCallbacks );
+                registeredCallbacks = callbacks;
+            }
         }
 
         void ICallbackMgrInternals.Unregister( CallbackBase call )
         {
-            var oldCallbacks = registeredCallbacks;
-            var oldIndex = Array.IndexOf( oldCallbacks, call );
+            lock ( registeredCallbacks )
+            {
+                var index = Array.IndexOf( registeredCallbacks, call );
 
-            if ( oldIndex < 0 )
-                return;
+                if ( index < 0 )
+                {
+                    return;
+                }
 
-            var newCallbacks = new CallbackBase[ oldCallbacks.Length - 1 ];
+                var callbacks = new CallbackBase[ registeredCallbacks.Length - 1 ];
 
-            Array.Copy( oldCallbacks, 0, newCallbacks, 0, oldIndex );
-            Array.Copy( oldCallbacks, oldIndex + 1, newCallbacks, oldIndex, oldCallbacks.Length - oldIndex - 1 );
+                Array.Copy( registeredCallbacks, 0, callbacks, 0, index );
+                Array.Copy( registeredCallbacks, index + 1, callbacks, index, registeredCallbacks.Length - index - 1 );
 
-            Interlocked.Exchange( ref registeredCallbacks, newCallbacks );
+                registeredCallbacks = callbacks;
+            }
         }
 
         void Handle( ICallbackMsg call )
