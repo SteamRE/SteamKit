@@ -21,7 +21,7 @@ namespace SteamKit2
     {
         private readonly Dictionary<EMsg, Action<IPacketMsg>> DispatchMap;
         private readonly Queue<byte[]> GameConnectTokens = new();
-        private readonly ConcurrentDictionary<uint, List<CMsgAuthTicket>> TicketsByGame = new();
+        private readonly Dictionary<uint, List<CMsgAuthTicket>> TicketsByGame = [];
         private readonly object TicketChangeLock = new();
         private static uint Sequence;
 
@@ -124,7 +124,9 @@ namespace SteamKit2
                 writer.Write( 1 );
                 writer.Write( 2 );
 
-                SerializeRandomUserData( writer );
+                Span<byte> randomBytes = stackalloc byte[ 8 ];
+                RandomNumberGenerator.Fill( randomBytes );
+                writer.Write( randomBytes );
                 writer.Write( ( uint )Stopwatch.GetTimestamp() );
                 // Use Interlocked to safely increment the sequence number
                 writer.Write( Interlocked.Increment( ref Sequence ) );
@@ -132,38 +134,16 @@ namespace SteamKit2
             return stream.ToArray();
         }
 
-        /// <summary>
-        /// Writes random non zero bytes into user data space of the stream.
-        /// </summary>
-        private static void SerializeRandomUserData( BinaryWriter writer )
-        {
-            var userData = GenerateRandomUserData();
-            writer.Write( userData );
-        }
-
-        private static byte[] GenerateRandomUserData()
-        {
-            byte[] bytes = ArrayPool<byte>.Shared.Rent( 8 );
-            try
-            {
-                using ( var rng = RandomNumberGenerator.Create() )
-                {
-                    rng.GetNonZeroBytes( bytes );
-                }
-                return bytes.Take( 8 ).ToArray();
-            }
-            finally
-            {
-                ArrayPool<byte>.Shared.Return( bytes );
-            }
-        }
-
         private AsyncJob<TicketAcceptedCallback> VerifyTicket( uint appid, byte[] authToken, out uint crc )
         {
             crc = BitConverter.ToUInt32( Crc32.Hash( authToken ), 0 );
             lock ( TicketChangeLock )
             {
-                var items = TicketsByGame.GetOrAdd( appid, [] );
+                if ( !TicketsByGame.TryGetValue( appid, out var items ) )
+                {
+                    items = [];
+                    TicketsByGame[ appid ] = items;
+                }
 
                 // Add ticket to specified games list
                 items.Add( new CMsgAuthTicket
