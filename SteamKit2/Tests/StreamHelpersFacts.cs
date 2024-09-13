@@ -93,7 +93,7 @@ namespace Tests
                 var threadNumber = (int)o;
 
                 using var ms = new MemoryStream();
-                var bytes = BitConverter.GetBytes( threadNumber );
+                var bytes = BitConverter.GetBytes( ( long )threadNumber );
                 ms.Write( bytes, 0, bytes.Length );
 
                 for ( var i = 0; i < 1000; i++ )
