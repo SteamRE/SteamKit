@@ -80,9 +80,10 @@ namespace SteamKit2
             while ( true )
             {
                 data.Clear();
-                stream.ReadExactly( data );
 
-                if ( encoding.GetString( data ) == NullTerminator )
+                var bytesRead = stream.ReadAtLeast( data, data.Length, throwOnEndOfStream: false );
+
+                if ( bytesRead == 0 || encoding.GetString( data ) == NullTerminator )
                 {
                     break;
                 }
