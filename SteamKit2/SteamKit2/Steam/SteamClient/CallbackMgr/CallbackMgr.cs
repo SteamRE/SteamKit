@@ -140,7 +140,7 @@ namespace SteamKit2
 
         void ICallbackMgrInternals.Register( CallbackBase call )
         {
-            lock ( registeredCallbacks )
+            lock ( this )
             {
                 if ( Array.IndexOf( registeredCallbacks, call ) != -1 )
                 {
@@ -158,7 +158,7 @@ namespace SteamKit2
 
         void ICallbackMgrInternals.Unregister( CallbackBase call )
         {
-            lock ( registeredCallbacks )
+            lock ( this )
             {
                 var index = Array.IndexOf( registeredCallbacks, call );
 
