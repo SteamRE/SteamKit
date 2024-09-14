@@ -11,7 +11,7 @@ namespace SteamKit2
         {
             Span<byte> data = stackalloc byte[sizeof(Int16)];
 
-            stream.Read( data );
+            stream.ReadExactly( data );
             return BitConverter.ToInt16( data );
         }
 
@@ -19,7 +19,7 @@ namespace SteamKit2
         {
             Span<byte> data = stackalloc byte[sizeof(UInt16)];
 
-            stream.Read( data );
+            stream.ReadExactly( data );
             return BitConverter.ToUInt16( data );
         }
 
@@ -27,7 +27,7 @@ namespace SteamKit2
         {
             Span<byte> data = stackalloc byte[sizeof(Int32)];
 
-            stream.Read( data );
+            stream.ReadExactly( data );
             return BitConverter.ToInt32( data );
         }
 
@@ -35,7 +35,7 @@ namespace SteamKit2
         {
             Span<byte> data = stackalloc byte[sizeof(Int64)];
 
-            stream.Read( data );
+            stream.ReadExactly( data );
             return BitConverter.ToInt64( data );
         }
 
@@ -43,7 +43,7 @@ namespace SteamKit2
         {
             Span<byte> data = stackalloc byte[sizeof(UInt32)];
 
-            stream.Read( data );
+            stream.ReadExactly( data );
             return BitConverter.ToUInt32( data );
         }
 
@@ -51,7 +51,7 @@ namespace SteamKit2
         {
             Span<byte> data = stackalloc byte[sizeof(UInt64)];
 
-            stream.Read( data );
+            stream.ReadExactly( data );
             return BitConverter.ToUInt64( data );
         }
 
@@ -59,7 +59,7 @@ namespace SteamKit2
         {
             Span<byte> data = stackalloc byte[sizeof(float)];
 
-            stream.Read( data );
+            stream.ReadExactly( data );
             return BitConverter.ToSingle( data );
         }
 
@@ -80,9 +80,10 @@ namespace SteamKit2
             while ( true )
             {
                 data.Clear();
-                stream.Read( data );
 
-                if ( encoding.GetString( data ) == NullTerminator )
+                var bytesRead = stream.ReadAtLeast( data, data.Length, throwOnEndOfStream: false );
+
+                if ( bytesRead == 0 || encoding.GetString( data ) == NullTerminator )
                 {
                     break;
                 }
