@@ -438,7 +438,16 @@ namespace SteamKit2.Internal
             Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Good );
 
             IsConnected = true;
-            OnClientConnected();
+
+            try
+            {
+                OnClientConnected();
+            }
+            catch ( Exception ex )
+            {
+                DebugLog.WriteLine( nameof(CMClient), "Unhandled exception after connecting: {0}", ex );
+                Disconnect(userInitiated: false);
+            }
         }
 
         void Disconnected( object? sender, DisconnectedEventArgs e )
