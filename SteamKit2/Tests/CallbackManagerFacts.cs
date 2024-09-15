@@ -232,6 +232,49 @@ namespace Tests
             }
         }
 
+        [Fact]
+        public void CorrectlyUnsubscribesFromInsideOfCallback()
+        {
+            static void nothing( CallbackForTest cb )
+            {
+                //
+            }
+
+            using var s1 = mgr.Subscribe<CallbackForTest>( nothing );
+
+            IDisposable subscription = null;
+
+            void unsubscribe( CallbackForTest cb )
+            {
+                Assert.NotNull( subscription );
+                subscription.Dispose();
+                subscription = null;
+            }
+
+            subscription = mgr.Subscribe<CallbackForTest>( unsubscribe );
+
+            PostAndRunCallback( new CallbackForTest { UniqueID = Guid.NewGuid() } );
+        }
+
+        [Fact]
+        public void CorrectlysubscribesFromInsideOfCallback()
+        {
+            static void nothing( CallbackForTest cb )
+            {
+                //
+            }
+
+            void subscribe( CallbackForTest cb )
+            {
+                using var s2 = mgr.Subscribe<CallbackForTest>( nothing );
+            }
+
+            using var s1 = mgr.Subscribe<CallbackForTest>( nothing );
+            using var se = mgr.Subscribe<CallbackForTest>( subscribe );
+
+            PostAndRunCallback( new CallbackForTest { UniqueID = Guid.NewGuid() } );
+        }
+
         void PostAndRunCallback(CallbackMsg callback)
         {
             client.PostCallback(callback);

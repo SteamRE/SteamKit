@@ -6,7 +6,7 @@
 
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
 using SteamKit2.Internal;
@@ -22,7 +22,7 @@ namespace SteamKit2
     {
         SteamClient client;
 
-        List<CallbackBase> registeredCallbacks;
+        ImmutableList<CallbackBase> registeredCallbacks = [];
 
 
 
@@ -33,8 +33,6 @@ namespace SteamKit2
         public CallbackManager( SteamClient client )
         {
             ArgumentNullException.ThrowIfNull( client );
-
-            registeredCallbacks = [];
 
             this.client = client;
         }
@@ -141,30 +139,24 @@ namespace SteamKit2
         }
 
         void ICallbackMgrInternals.Register( CallbackBase call )
-        {
-            if ( registeredCallbacks.Contains( call ) )
-                return;
+            => ImmutableInterlocked.Update( ref registeredCallbacks, static ( list, item ) => list.Add( item ), call );
 
-            registeredCallbacks.Add( call );
-        }
+        void ICallbackMgrInternals.Unregister( CallbackBase call )
+            => ImmutableInterlocked.Update( ref registeredCallbacks, static ( list, item ) => list.Remove( item ), call );
 
         void Handle( ICallbackMsg call )
         {
+            var callbacks = registeredCallbacks;
             var type = call.GetType();
 
             // find handlers interested in this callback
-            foreach ( var callback in registeredCallbacks )
+            foreach ( var callback in callbacks )
             {
                 if ( callback.CallbackType.IsAssignableFrom( type ) )
                 {
                     callback.Run( call );
                 }
             }
-        }
-
-        void ICallbackMgrInternals.Unregister( CallbackBase call )
-        {
-            registeredCallbacks.Remove( call );
         }
 
         sealed class Subscription : IDisposable
