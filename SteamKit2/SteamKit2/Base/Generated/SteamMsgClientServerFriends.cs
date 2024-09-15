@@ -1002,6 +1002,16 @@ namespace SteamKit2.Internal
             public void Resetavatar_pending_review() => __pbn__avatar_pending_review = null;
             private bool? __pbn__avatar_pending_review;
 
+            [global::ProtoBuf.ProtoMember(81)]
+            public bool on_steam_deck
+            {
+                get => __pbn__on_steam_deck.GetValueOrDefault();
+                set => __pbn__on_steam_deck = value;
+            }
+            public bool ShouldSerializeon_steam_deck() => __pbn__on_steam_deck != null;
+            public void Reseton_steam_deck() => __pbn__on_steam_deck = null;
+            private bool? __pbn__on_steam_deck;
+
             [global::ProtoBuf.ProtoContract()]
             public partial class ClanData : global::ProtoBuf.IExtensible
             {

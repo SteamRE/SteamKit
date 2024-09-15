@@ -5142,6 +5142,9 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetpetindex() => __pbn__petindex = null;
         private uint? __pbn__petindex;
 
+        [global::ProtoBuf.ProtoMember(20)]
+        public global::System.Collections.Generic.List<Sticker> keychains { get; } = new global::System.Collections.Generic.List<Sticker>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Sticker : global::ProtoBuf.IExtensible
         {

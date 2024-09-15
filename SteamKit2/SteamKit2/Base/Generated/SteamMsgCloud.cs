@@ -2297,6 +2297,26 @@ namespace SteamKit2.Internal
         public void Resetignore_pending_operations() => __pbn__ignore_pending_operations = null;
         private bool? __pbn__ignore_pending_operations;
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public int os_type
+        {
+            get => __pbn__os_type.GetValueOrDefault();
+            set => __pbn__os_type = value;
+        }
+        public bool ShouldSerializeos_type() => __pbn__os_type != null;
+        public void Resetos_type() => __pbn__os_type = null;
+        private int? __pbn__os_type;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public int device_type
+        {
+            get => __pbn__device_type.GetValueOrDefault();
+            set => __pbn__device_type = value;
+        }
+        public bool ShouldSerializedevice_type() => __pbn__device_type != null;
+        public void Resetdevice_type() => __pbn__device_type = null;
+        private int? __pbn__device_type;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

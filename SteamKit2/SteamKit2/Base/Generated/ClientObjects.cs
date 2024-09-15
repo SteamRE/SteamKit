@@ -952,6 +952,26 @@ namespace SteamKit2.Internal
         public void Resettime_last_updated() => __pbn__time_last_updated = null;
         private uint? __pbn__time_last_updated;
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public int os_type
+        {
+            get => __pbn__os_type.GetValueOrDefault();
+            set => __pbn__os_type = value;
+        }
+        public bool ShouldSerializeos_type() => __pbn__os_type != null;
+        public void Resetos_type() => __pbn__os_type = null;
+        private int? __pbn__os_type;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public int device_type
+        {
+            get => __pbn__device_type.GetValueOrDefault();
+            set => __pbn__device_type = value;
+        }
+        public bool ShouldSerializedevice_type() => __pbn__device_type != null;
+        public void Resetdevice_type() => __pbn__device_type = null;
+        private int? __pbn__device_type;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1982,26 +2002,6 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeis_vrr_enabled() => __pbn__is_vrr_enabled != null;
         public void Resetis_vrr_enabled() => __pbn__is_vrr_enabled = null;
         private bool? __pbn__is_vrr_enabled;
-
-        [global::ProtoBuf.ProtoMember(21)]
-        public bool is_composite_debug_enabled
-        {
-            get => __pbn__is_composite_debug_enabled.GetValueOrDefault();
-            set => __pbn__is_composite_debug_enabled = value;
-        }
-        public bool ShouldSerializeis_composite_debug_enabled() => __pbn__is_composite_debug_enabled != null;
-        public void Resetis_composite_debug_enabled() => __pbn__is_composite_debug_enabled = null;
-        private bool? __pbn__is_composite_debug_enabled;
-
-        [global::ProtoBuf.ProtoMember(22)]
-        public bool force_composite
-        {
-            get => __pbn__force_composite.GetValueOrDefault();
-            set => __pbn__force_composite = value;
-        }
-        public bool ShouldSerializeforce_composite() => __pbn__force_composite != null;
-        public void Resetforce_composite() => __pbn__force_composite = null;
-        private bool? __pbn__force_composite;
 
         [global::ProtoBuf.ProtoMember(23)]
         public bool use_dynamic_refresh_rate_in_steam

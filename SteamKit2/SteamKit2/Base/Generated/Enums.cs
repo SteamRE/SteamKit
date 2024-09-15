@@ -619,6 +619,7 @@ namespace SteamKit2.Internal
         k_ECompromiseDetectionType_None = 0,
         k_ECompromiseDetectionType_TradeEvent = 1,
         k_ECompromiseDetectionType_ApiCallRate = 2,
+        k_ECompromiseDetectionType_Manual = 3,
     }
 
     [global::ProtoBuf.ProtoContract()]

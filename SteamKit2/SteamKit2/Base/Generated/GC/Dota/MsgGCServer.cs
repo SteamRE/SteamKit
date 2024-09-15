@@ -2874,12 +2874,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetreplay_salt() => __pbn__replay_salt = null;
         private uint? __pbn__replay_salt;
 
-        [global::ProtoBuf.ProtoMember(3)]
-        public global::System.Collections.Generic.List<CLobbyTimedRewardDetails> timed_reward_details { get; } = new global::System.Collections.Generic.List<CLobbyTimedRewardDetails>();
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public global::System.Collections.Generic.List<CSODOTALobbyMember> xp_reward_details { get; } = new global::System.Collections.Generic.List<CSODOTALobbyMember>();
-
         [global::ProtoBuf.ProtoMember(5)]
         public uint leagueid
         {
@@ -3080,18 +3074,6 @@ namespace SteamKit2.GC.Dota.Internal
             private uint? __pbn__games_played;
 
         }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgTimedRewardContainer : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<CLobbyTimedRewardDetails> timed_reward_details { get; } = new global::System.Collections.Generic.List<CLobbyTimedRewardDetails>();
 
     }
 
@@ -4341,115 +4323,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializefanfare_badguys() => __pbn__fanfare_badguys != null;
         public void Resetfanfare_badguys() => __pbn__fanfare_badguys = null;
         private uint? __pbn__fanfare_badguys;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGameServerUploadSaveGame : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint game_time
-        {
-            get => __pbn__game_time.GetValueOrDefault();
-            set => __pbn__game_time = value;
-        }
-        public bool ShouldSerializegame_time() => __pbn__game_time != null;
-        public void Resetgame_time() => __pbn__game_time = null;
-        private uint? __pbn__game_time;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public byte[] save_game_data
-        {
-            get => __pbn__save_game_data;
-            set => __pbn__save_game_data = value;
-        }
-        public bool ShouldSerializesave_game_data() => __pbn__save_game_data != null;
-        public void Resetsave_game_data() => __pbn__save_game_data = null;
-        private byte[] __pbn__save_game_data;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public ulong lobby_id
-        {
-            get => __pbn__lobby_id.GetValueOrDefault();
-            set => __pbn__lobby_id = value;
-        }
-        public bool ShouldSerializelobby_id() => __pbn__lobby_id != null;
-        public void Resetlobby_id() => __pbn__lobby_id = null;
-        private ulong? __pbn__lobby_id;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public global::System.Collections.Generic.List<ulong> player_steam_ids { get; } = new global::System.Collections.Generic.List<ulong>();
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGameServerSaveGameResult : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(Result.SaveSuccessful)]
-        public Result result
-        {
-            get => __pbn__result ?? Result.SaveSuccessful;
-            set => __pbn__result = value;
-        }
-        public bool ShouldSerializeresult() => __pbn__result != null;
-        public void Resetresult() => __pbn__result = null;
-        private Result? __pbn__result;
-
-        [global::ProtoBuf.ProtoContract()]
-        public enum Result
-        {
-            SaveSuccessful = 0,
-            SessionNotFound = 1,
-            DatabaseError = 2,
-            TooBig = 3,
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGameServerGetLoadGame : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint save_id
-        {
-            get => __pbn__save_id.GetValueOrDefault();
-            set => __pbn__save_id = value;
-        }
-        public bool ShouldSerializesave_id() => __pbn__save_id != null;
-        public void Resetsave_id() => __pbn__save_id = null;
-        private uint? __pbn__save_id;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGameServerGetLoadGameResult : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public byte[] save_game_data
-        {
-            get => __pbn__save_game_data;
-            set => __pbn__save_game_data = value;
-        }
-        public bool ShouldSerializesave_game_data() => __pbn__save_game_data != null;
-        public void Resetsave_game_data() => __pbn__save_game_data = null;
-        private byte[] __pbn__save_game_data;
 
     }
 
@@ -9045,6 +8918,60 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeis_using_dota_plus() => __pbn__is_using_dota_plus != null;
         public void Resetis_using_dota_plus() => __pbn__is_using_dota_plus = null;
         private bool? __pbn__is_using_dota_plus;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSteamLearnEarlyGameItemPurchases : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<int> item_ids { get; } = new global::System.Collections.Generic.List<int>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSteamLearnEarlyGameItemPurchasesV2 : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<int> item_ids { get; } = new global::System.Collections.Generic.List<int>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<int> other_item_ids { get; } = new global::System.Collections.Generic.List<int>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSteamLearnLateGameItemPurchases : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<int> item_ids { get; } = new global::System.Collections.Generic.List<int>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSteamLearnLateGameItemPurchasesV2 : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<int> item_ids { get; } = new global::System.Collections.Generic.List<int>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<int> other_item_ids { get; } = new global::System.Collections.Generic.List<int>();
 
     }
 

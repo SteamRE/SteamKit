@@ -4210,10 +4210,10 @@ namespace SteamKit2.GC.TF2.Internal
         private ulong? __pbn__target_steam_id;
 
         [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue(TFVoteKickReason.TFVoteKickReason_Other)]
+        [global::System.ComponentModel.DefaultValue(TFVoteKickReason.TFVoteKickReason_Invalid)]
         public TFVoteKickReason reason
         {
-            get => __pbn__reason ?? TFVoteKickReason.TFVoteKickReason_Other;
+            get => __pbn__reason ?? TFVoteKickReason.TFVoteKickReason_Invalid;
             set => __pbn__reason = value;
         }
         public bool ShouldSerializereason() => __pbn__reason != null;
@@ -4280,15 +4280,6 @@ namespace SteamKit2.GC.TF2.Internal
         public bool ShouldSerializerip() => __pbn__rip != null;
         public void Resetrip() => __pbn__rip = null;
         private bool? __pbn__rip;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgPlayerVoteKickedAfterLeavingMatchResponse : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
     }
 
@@ -6457,10 +6448,10 @@ namespace SteamKit2.GC.TF2.Internal
         private ulong? __pbn__voter_id;
 
         [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue(TFVoteKickReason.TFVoteKickReason_Other)]
+        [global::System.ComponentModel.DefaultValue(TFVoteKickReason.TFVoteKickReason_Invalid)]
         public TFVoteKickReason reason
         {
-            get => __pbn__reason ?? TFVoteKickReason.TFVoteKickReason_Other;
+            get => __pbn__reason ?? TFVoteKickReason.TFVoteKickReason_Invalid;
             set => __pbn__reason = value;
         }
         public bool ShouldSerializereason() => __pbn__reason != null;
@@ -8063,6 +8054,57 @@ namespace SteamKit2.GC.TF2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToGCSendAccountBannedNotifications : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint banned_accountid
+        {
+            get => __pbn__banned_accountid.GetValueOrDefault();
+            set => __pbn__banned_accountid = value;
+        }
+        public bool ShouldSerializebanned_accountid() => __pbn__banned_accountid != null;
+        public void Resetbanned_accountid() => __pbn__banned_accountid = null;
+        private uint? __pbn__banned_accountid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint report_period_begin
+        {
+            get => __pbn__report_period_begin.GetValueOrDefault();
+            set => __pbn__report_period_begin = value;
+        }
+        public bool ShouldSerializereport_period_begin() => __pbn__report_period_begin != null;
+        public void Resetreport_period_begin() => __pbn__report_period_begin = null;
+        private uint? __pbn__report_period_begin;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint report_period_end
+        {
+            get => __pbn__report_period_end.GetValueOrDefault();
+            set => __pbn__report_period_end = value;
+        }
+        public bool ShouldSerializereport_period_end() => __pbn__report_period_end != null;
+        public void Resetreport_period_end() => __pbn__report_period_end = null;
+        private uint? __pbn__report_period_end;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToGCSendNotification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgGCNotification notification { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ETFGCMsg
     {
         k_EMsgGCReportWarKill = 5001,
@@ -8229,6 +8271,8 @@ namespace SteamKit2.GC.TF2.Internal
         k_EMsgGC_SDRTicket = 6580,
         k_EMsgGC_ProcessMatchVoteKick = 6581,
         k_EMsgGC_ProcessMatchVoteKickResponse = 6582,
+        k_EMsgGCToGC_SendAccountBannedNotifications = 6584,
+        k_EMsgGCToGC_SendNotification = 6585,
         k_EMsgGCDev_GrantWarKill = 10001,
     }
 
@@ -8327,6 +8371,7 @@ namespace SteamKit2.GC.TF2.Internal
     [global::ProtoBuf.ProtoContract()]
     public enum TFVoteKickReason
     {
+        TFVoteKickReason_Invalid = -1,
         TFVoteKickReason_Other = 0,
         TFVoteKickReason_Cheating = 1,
         TFVoteKickReason_Idle = 2,

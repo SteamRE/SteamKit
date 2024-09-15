@@ -1390,6 +1390,9 @@ namespace SteamKit2.GC.Dota.Internal
                     kKillEaterEventType_Muerta_PierceTheVeilKills = 276,
                     kKillEaterEventType_Muerta_MultiHeroDeadShot = 277,
                     kKillEaterEventType_Muerta_DeadShotsIntoTheCalling = 278,
+                    kKillEaterEventType_Ringmaster_LongRangeDaggerHits = 279,
+                    kKillEaterEventType_Ringmaster_MultiHeroWhips = 280,
+                    kKillEaterEventType_Ringmaster_MultiHeroMesmerizes = 281,
                 }
 
             }

@@ -714,6 +714,16 @@ namespace SteamKit2.WebUI.Internal
         public void Resetcategory_votefarming_pct() => __pbn__category_votefarming_pct = null;
         private uint? __pbn__category_votefarming_pct;
 
+        [global::ProtoBuf.ProtoMember(49)]
+        public int deck_playtime_at_review
+        {
+            get => __pbn__deck_playtime_at_review.GetValueOrDefault();
+            set => __pbn__deck_playtime_at_review = value;
+        }
+        public bool ShouldSerializedeck_playtime_at_review() => __pbn__deck_playtime_at_review != null;
+        public void Resetdeck_playtime_at_review() => __pbn__deck_playtime_at_review = null;
+        private int? __pbn__deck_playtime_at_review;
+
     }
 
     public interface IUserReviews

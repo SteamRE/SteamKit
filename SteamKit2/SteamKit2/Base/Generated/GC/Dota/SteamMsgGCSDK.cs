@@ -65,16 +65,6 @@ namespace SteamKit2.GC.Dota.Internal
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1)]
-        public bool enable_data_submission
-        {
-            get => __pbn__enable_data_submission.GetValueOrDefault();
-            set => __pbn__enable_data_submission = value;
-        }
-        public bool ShouldSerializeenable_data_submission() => __pbn__enable_data_submission != null;
-        public void Resetenable_data_submission() => __pbn__enable_data_submission = null;
-        private bool? __pbn__enable_data_submission;
-
         [global::ProtoBuf.ProtoMember(4)]
         public CMsgSteamLearnAccessTokens access_tokens { get; set; }
 
@@ -117,6 +107,26 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializeinference_published_version() => __pbn__inference_published_version != null;
             public void Resetinference_published_version() => __pbn__inference_published_version = null;
             private uint? __pbn__inference_published_version;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public uint snapshot_percentage
+            {
+                get => __pbn__snapshot_percentage.GetValueOrDefault();
+                set => __pbn__snapshot_percentage = value;
+            }
+            public bool ShouldSerializesnapshot_percentage() => __pbn__snapshot_percentage != null;
+            public void Resetsnapshot_percentage() => __pbn__snapshot_percentage = null;
+            private uint? __pbn__snapshot_percentage;
+
+            [global::ProtoBuf.ProtoMember(7)]
+            public bool snapshot_enabled
+            {
+                get => __pbn__snapshot_enabled.GetValueOrDefault();
+                set => __pbn__snapshot_enabled = value;
+            }
+            public bool ShouldSerializesnapshot_enabled() => __pbn__snapshot_enabled != null;
+            public void Resetsnapshot_enabled() => __pbn__snapshot_enabled = null;
+            private bool? __pbn__snapshot_enabled;
 
         }
 
@@ -1292,16 +1302,6 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(5)]
         public Location location { get; set; }
-
-        [global::ProtoBuf.ProtoMember(6)]
-        public byte[] save_game_key
-        {
-            get => __pbn__save_game_key;
-            set => __pbn__save_game_key = value;
-        }
-        public bool ShouldSerializesave_game_key() => __pbn__save_game_key != null;
-        public void Resetsave_game_key() => __pbn__save_game_key = null;
-        private byte[] __pbn__save_game_key;
 
         [global::ProtoBuf.ProtoMember(9)]
         public uint gc_socache_file_version

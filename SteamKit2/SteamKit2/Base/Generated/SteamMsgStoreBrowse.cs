@@ -1501,6 +1501,27 @@ namespace SteamKit2.Internal
                 public void Resetrenewal_time_period() => __pbn__renewal_time_period = null;
                 private int? __pbn__renewal_time_period;
 
+                [global::ProtoBuf.ProtoMember(5)]
+                public long renewal_price_in_cents
+                {
+                    get => __pbn__renewal_price_in_cents.GetValueOrDefault();
+                    set => __pbn__renewal_price_in_cents = value;
+                }
+                public bool ShouldSerializerenewal_price_in_cents() => __pbn__renewal_price_in_cents != null;
+                public void Resetrenewal_price_in_cents() => __pbn__renewal_price_in_cents = null;
+                private long? __pbn__renewal_price_in_cents;
+
+                [global::ProtoBuf.ProtoMember(6)]
+                [global::System.ComponentModel.DefaultValue("")]
+                public string formatted_renewal_price
+                {
+                    get => __pbn__formatted_renewal_price ?? "";
+                    set => __pbn__formatted_renewal_price = value;
+                }
+                public bool ShouldSerializeformatted_renewal_price() => __pbn__formatted_renewal_price != null;
+                public void Resetformatted_renewal_price() => __pbn__formatted_renewal_price = null;
+                private string __pbn__formatted_renewal_price;
+
             }
 
         }
@@ -2620,6 +2641,7 @@ namespace SteamKit2.Internal
         k_EStoreBrowseFilterFailure_NotPreferred = 20,
         k_EStoreBrowseFilterFailure_NotInterested = 30,
         k_EStoreBrowseFilterFailure_UnwantedContent = 40,
+        k_EStoreBrowseFilterFailure_Unavailable = 50,
     }
 
     [global::ProtoBuf.ProtoContract()]

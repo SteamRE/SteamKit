@@ -87,10 +87,6 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGC_TournamentItemEventResponse = 7151,
         k_EMsgTeamFanfare = 7156,
         k_EMsgResponseTeamFanfare = 7157,
-        k_EMsgGC_GameServerUploadSaveGame = 7158,
-        k_EMsgGC_GameServerSaveGameResult = 7159,
-        k_EMsgGC_GameServerGetLoadGame = 7160,
-        k_EMsgGC_GameServerGetLoadGameResult = 7161,
         k_EMsgGCEditTeamDetails = 7166,
         k_EMsgGCEditTeamDetailsResponse = 7167,
         k_EMsgGCReadyUpStatus = 7170,
@@ -951,6 +947,16 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGCToClientFightingGameStartMatch = 8996,
         k_EMsgGCToClientFightingGameChallengeCanceled = 8997,
         k_EMsgGCToServerSteamLearnUseHTTP = 8998,
+        k_EMsgClientToGCBingoShuffleCard = 8999,
+        k_EMsgClientToGCBingoShuffleCardResponse = 9000,
+        k_EMsgClientToGCBingoModifySquare = 9001,
+        k_EMsgClientToGCBingoModifySquareResponse = 9002,
+        k_EMsgClientToGCBingoDevAddTokens = 9003,
+        k_EMsgClientToGCBingoDevAddTokensResponse = 9004,
+        k_EMsgClientToGCBingoDevClearInventory = 9005,
+        k_EMsgClientToGCBingoDevClearInventoryResponse = 9006,
+        k_EMsgGCCompendiumRemoveAllSelections = 9007,
+        k_EMsgGCCompendiumRemoveAllSelectionsResponse = 9008,
     }
 
 }

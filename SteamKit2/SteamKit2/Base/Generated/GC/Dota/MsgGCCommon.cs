@@ -4910,6 +4910,16 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetreward_event() => __pbn__reward_event = null;
             private EEvent? __pbn__reward_event;
 
+            [global::ProtoBuf.ProtoMember(20)]
+            public uint league_node_id
+            {
+                get => __pbn__league_node_id.GetValueOrDefault();
+                set => __pbn__league_node_id = value;
+            }
+            public bool ShouldSerializeleague_node_id() => __pbn__league_node_id != null;
+            public void Resetleague_node_id() => __pbn__league_node_id = null;
+            private uint? __pbn__league_node_id;
+
             [global::ProtoBuf.ProtoContract()]
             public partial class Answers : global::ProtoBuf.IExtensible
             {
@@ -9866,6 +9876,51 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializeneutral_item_tier() => __pbn__neutral_item_tier != null;
             public void Resetneutral_item_tier() => __pbn__neutral_item_tier = null;
             private int? __pbn__neutral_item_tier;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public bool is_pregame_suggested
+            {
+                get => __pbn__is_pregame_suggested.GetValueOrDefault();
+                set => __pbn__is_pregame_suggested = value;
+            }
+            public bool ShouldSerializeis_pregame_suggested() => __pbn__is_pregame_suggested != null;
+            public void Resetis_pregame_suggested() => __pbn__is_pregame_suggested = null;
+            private bool? __pbn__is_pregame_suggested;
+
+            [global::ProtoBuf.ProtoMember(7)]
+            public bool is_earlygame_suggested
+            {
+                get => __pbn__is_earlygame_suggested.GetValueOrDefault();
+                set => __pbn__is_earlygame_suggested = value;
+            }
+            public bool ShouldSerializeis_earlygame_suggested() => __pbn__is_earlygame_suggested != null;
+            public void Resetis_earlygame_suggested() => __pbn__is_earlygame_suggested = null;
+            private bool? __pbn__is_earlygame_suggested;
+
+            [global::ProtoBuf.ProtoMember(8)]
+            public bool is_lategame_suggested
+            {
+                get => __pbn__is_lategame_suggested.GetValueOrDefault();
+                set => __pbn__is_lategame_suggested = value;
+            }
+            public bool ShouldSerializeis_lategame_suggested() => __pbn__is_lategame_suggested != null;
+            public void Resetis_lategame_suggested() => __pbn__is_lategame_suggested = null;
+            private bool? __pbn__is_lategame_suggested;
+
+            [global::ProtoBuf.ProtoMember(9)]
+            public global::System.Collections.Generic.List<Recipe> recipes { get; } = new global::System.Collections.Generic.List<Recipe>();
+
+            [global::ProtoBuf.ProtoContract()]
+            public partial class Recipe : global::ProtoBuf.IExtensible
+            {
+                private global::ProtoBuf.IExtension __pbn__extensionData;
+                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+                [global::ProtoBuf.ProtoMember(1)]
+                public global::System.Collections.Generic.List<int> items { get; } = new global::System.Collections.Generic.List<int>();
+
+            }
 
         }
 

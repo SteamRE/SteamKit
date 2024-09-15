@@ -557,6 +557,26 @@ namespace SteamKit2.Internal
         public void Resetthrottling_kbps() => __pbn__throttling_kbps = null;
         private uint? __pbn__throttling_kbps;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint os_type
+        {
+            get => __pbn__os_type.GetValueOrDefault();
+            set => __pbn__os_type = value;
+        }
+        public bool ShouldSerializeos_type() => __pbn__os_type != null;
+        public void Resetos_type() => __pbn__os_type = null;
+        private uint? __pbn__os_type;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint device_type
+        {
+            get => __pbn__device_type.GetValueOrDefault();
+            set => __pbn__device_type = value;
+        }
+        public bool ShouldSerializedevice_type() => __pbn__device_type != null;
+        public void Resetdevice_type() => __pbn__device_type = null;
+        private uint? __pbn__device_type;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class StatsInfo : global::ProtoBuf.IExtensible
         {
@@ -1336,6 +1356,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializegameid() => __pbn__gameid != null;
         public void Resetgameid() => __pbn__gameid = null;
         private ulong? __pbn__gameid;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public bool instant_clip
+        {
+            get => __pbn__instant_clip.GetValueOrDefault();
+            set => __pbn__instant_clip = value;
+        }
+        public bool ShouldSerializeinstant_clip() => __pbn__instant_clip != null;
+        public void Resetinstant_clip() => __pbn__instant_clip = null;
+        private bool? __pbn__instant_clip;
 
     }
 

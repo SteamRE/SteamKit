@@ -91,6 +91,16 @@ namespace SteamKit2.GC.CSGO.Internal
         private string __pbn__instance_name;
 
         [global::ProtoBuf.ProtoMember(3)]
+        public ulong context
+        {
+            get => __pbn__context.GetValueOrDefault();
+            set => __pbn__context = value;
+        }
+        public bool ShouldSerializecontext() => __pbn__context != null;
+        public void Resetcontext() => __pbn__context = null;
+        private ulong? __pbn__context;
+
+        [global::ProtoBuf.ProtoMember(4)]
         public ulong id
         {
             get => __pbn__id.GetValueOrDefault();

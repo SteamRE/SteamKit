@@ -3851,6 +3851,17 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetoutput_initiator() => __pbn__output_initiator = null;
         private string __pbn__output_initiator;
 
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string sender_source
+        {
+            get => __pbn__sender_source ?? "";
+            set => __pbn__sender_source = value;
+        }
+        public bool ShouldSerializesender_source() => __pbn__sender_source != null;
+        public void Resetsender_source() => __pbn__sender_source = null;
+        private string __pbn__sender_source;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
