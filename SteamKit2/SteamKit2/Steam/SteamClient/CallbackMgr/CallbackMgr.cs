@@ -6,7 +6,7 @@
 
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
 using SteamKit2.Internal;
@@ -22,7 +22,7 @@ namespace SteamKit2
     {
         SteamClient client;
 
-        CallbackBase[] registeredCallbacks = [];
+        ImmutableList<CallbackBase> registeredCallbacks = [];
 
 
 
@@ -139,42 +139,10 @@ namespace SteamKit2
         }
 
         void ICallbackMgrInternals.Register( CallbackBase call )
-        {
-            lock ( this )
-            {
-                if ( Array.IndexOf( registeredCallbacks, call ) != -1 )
-                {
-                    return;
-                }
-
-                // Create a new array for Handle() to be thread safe
-                var callbacks = new CallbackBase[ registeredCallbacks.Length + 1 ];
-                Array.Copy( registeredCallbacks, callbacks, registeredCallbacks.Length );
-                callbacks[ ^1 ] = call;
-
-                registeredCallbacks = callbacks;
-            }
-        }
+            => ImmutableInterlocked.Update( ref registeredCallbacks, static ( list, item ) => list.Add( item ), call );
 
         void ICallbackMgrInternals.Unregister( CallbackBase call )
-        {
-            lock ( this )
-            {
-                var index = Array.IndexOf( registeredCallbacks, call );
-
-                if ( index < 0 )
-                {
-                    return;
-                }
-
-                var callbacks = new CallbackBase[ registeredCallbacks.Length - 1 ];
-
-                Array.Copy( registeredCallbacks, 0, callbacks, 0, index );
-                Array.Copy( registeredCallbacks, index + 1, callbacks, index, registeredCallbacks.Length - index - 1 );
-
-                registeredCallbacks = callbacks;
-            }
-        }
+            => ImmutableInterlocked.Update( ref registeredCallbacks, static ( list, item ) => list.Remove( item ), call );
 
         void Handle( ICallbackMsg call )
         {
