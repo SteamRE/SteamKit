@@ -608,20 +608,100 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface IGameNotifications
+    public class GameNotifications : SteamUnifiedMessages.UnifiedService
     {
-        CGameNotifications_CreateSession_Response UserCreateSession(CGameNotifications_CreateSession_Request request);
-        CGameNotifications_DeleteSession_Response UserDeleteSession(CGameNotifications_DeleteSession_Request request);
-        CGameNotifications_UpdateSession_Response UserUpdateSession(CGameNotifications_UpdateSession_Request request);
-        CGameNotifications_EnumerateSessions_Response EnumerateSessions(CGameNotifications_EnumerateSessions_Request request);
-        CGameNotifications_GetSessionDetails_Response GetSessionDetails(CGameNotifications_GetSessionDetails_Request request);
-        CGameNotifications_UpdateNotificationSettings_Response UpdateNotificationSettings(CGameNotifications_UpdateNotificationSettings_Request request);
+
+        const string SERVICE_NAME = "GameNotifications";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNotifications_CreateSession_Response>> UserCreateSession(CGameNotifications_CreateSession_Request request)
+        {
+            return UnifiedMessages.SendMessage<CGameNotifications_CreateSession_Request, CGameNotifications_CreateSession_Response>( $"{SERVICE_NAME}.UserCreateSession#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNotifications_DeleteSession_Response>> UserDeleteSession(CGameNotifications_DeleteSession_Request request)
+        {
+            return UnifiedMessages.SendMessage<CGameNotifications_DeleteSession_Request, CGameNotifications_DeleteSession_Response>( $"{SERVICE_NAME}.UserDeleteSession#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNotifications_UpdateSession_Response>> UserUpdateSession(CGameNotifications_UpdateSession_Request request)
+        {
+            return UnifiedMessages.SendMessage<CGameNotifications_UpdateSession_Request, CGameNotifications_UpdateSession_Response>( $"{SERVICE_NAME}.UserUpdateSession#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNotifications_EnumerateSessions_Response>> EnumerateSessions(CGameNotifications_EnumerateSessions_Request request)
+        {
+            return UnifiedMessages.SendMessage<CGameNotifications_EnumerateSessions_Request, CGameNotifications_EnumerateSessions_Response>( $"{SERVICE_NAME}.EnumerateSessions#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNotifications_GetSessionDetails_Response>> GetSessionDetails(CGameNotifications_GetSessionDetails_Request request)
+        {
+            return UnifiedMessages.SendMessage<CGameNotifications_GetSessionDetails_Request, CGameNotifications_GetSessionDetails_Response>( $"{SERVICE_NAME}.GetSessionDetails#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNotifications_UpdateNotificationSettings_Response>> UpdateNotificationSettings(CGameNotifications_UpdateNotificationSettings_Request request)
+        {
+            return UnifiedMessages.SendMessage<CGameNotifications_UpdateNotificationSettings_Request, CGameNotifications_UpdateNotificationSettings_Response>( $"{SERVICE_NAME}.UpdateNotificationSettings#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "UserCreateSession":
+                    UnifiedMessages.HandleServiceMsg<CGameNotifications_CreateSession_Response>( packetMsg );
+                    break;
+                case "UserDeleteSession":
+                    UnifiedMessages.HandleServiceMsg<CGameNotifications_DeleteSession_Response>( packetMsg );
+                    break;
+                case "UserUpdateSession":
+                    UnifiedMessages.HandleServiceMsg<CGameNotifications_UpdateSession_Response>( packetMsg );
+                    break;
+                case "EnumerateSessions":
+                    UnifiedMessages.HandleServiceMsg<CGameNotifications_EnumerateSessions_Response>( packetMsg );
+                    break;
+                case "GetSessionDetails":
+                    UnifiedMessages.HandleServiceMsg<CGameNotifications_GetSessionDetails_Response>( packetMsg );
+                    break;
+                case "UpdateNotificationSettings":
+                    UnifiedMessages.HandleServiceMsg<CGameNotifications_UpdateNotificationSettings_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface IGameNotificationsClient
+    public class GameNotificationsClient : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse OnNotificationsRequested(CGameNotifications_OnNotificationsRequested_Notification request);
-        NoResponse OnUserStatusChanged(CGameNotifications_OnUserStatusChanged_Notification request);
+
+        const string SERVICE_NAME = "GameNotificationsClient";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> OnNotificationsRequested(CGameNotifications_OnNotificationsRequested_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CGameNotifications_OnNotificationsRequested_Notification, NoResponse>( $"{SERVICE_NAME}.OnNotificationsRequested#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> OnUserStatusChanged(CGameNotifications_OnUserStatusChanged_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CGameNotifications_OnUserStatusChanged_Notification, NoResponse>( $"{SERVICE_NAME}.OnUserStatusChanged#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "OnNotificationsRequested":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "OnUserStatusChanged":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

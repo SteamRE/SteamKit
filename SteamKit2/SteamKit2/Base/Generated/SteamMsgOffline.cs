@@ -120,10 +120,36 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface IOffline
+    public class Offline : SteamUnifiedMessages.UnifiedService
     {
-        COffline_GetOfflineLogonTicket_Response GetOfflineLogonTicket(COffline_GetOfflineLogonTicket_Request request);
-        COffline_GetUnsignedOfflineLogonTicket_Response GetUnsignedOfflineLogonTicket(COffline_GetUnsignedOfflineLogonTicket_Request request);
+
+        const string SERVICE_NAME = "Offline";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<COffline_GetOfflineLogonTicket_Response>> GetOfflineLogonTicket(COffline_GetOfflineLogonTicket_Request request)
+        {
+            return UnifiedMessages.SendMessage<COffline_GetOfflineLogonTicket_Request, COffline_GetOfflineLogonTicket_Response>( $"{SERVICE_NAME}.GetOfflineLogonTicket#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<COffline_GetUnsignedOfflineLogonTicket_Response>> GetUnsignedOfflineLogonTicket(COffline_GetUnsignedOfflineLogonTicket_Request request)
+        {
+            return UnifiedMessages.SendMessage<COffline_GetUnsignedOfflineLogonTicket_Request, COffline_GetUnsignedOfflineLogonTicket_Response>( $"{SERVICE_NAME}.GetUnsignedOfflineLogonTicket#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "GetOfflineLogonTicket":
+                    UnifiedMessages.HandleServiceMsg<COffline_GetOfflineLogonTicket_Response>( packetMsg );
+                    break;
+                case "GetUnsignedOfflineLogonTicket":
+                    UnifiedMessages.HandleServiceMsg<COffline_GetUnsignedOfflineLogonTicket_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

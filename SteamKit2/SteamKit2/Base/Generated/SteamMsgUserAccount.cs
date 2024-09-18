@@ -1081,29 +1081,156 @@ namespace SteamKit2.Internal
         k_EExternalFacebookPage = 7,
     }
 
-    public interface IUserAccount
+    public class UserAccount : SteamUnifiedMessages.UnifiedService
     {
-        CUserAccount_GetAvailableValveDiscountPromotions_Response GetAvailableValveDiscountPromotions(CUserAccount_GetAvailableValveDiscountPromotions_Request request);
-        CUserAccount_GetWalletDetails_Response GetClientWalletDetails(CUserAccount_GetClientWalletDetails_Request request);
-        CUserAccount_GetAccountLinkStatus_Response GetAccountLinkStatus(CUserAccount_GetAccountLinkStatus_Request request);
-        CUserAccount_CancelLicenseForApp_Response CancelLicenseForApp(CUserAccount_CancelLicenseForApp_Request request);
-        CUserAccount_GetUserCountry_Response GetUserCountry(CUserAccount_GetUserCountry_Request request);
-        CUserAccount_CreateFriendInviteToken_Response CreateFriendInviteToken(CUserAccount_CreateFriendInviteToken_Request request);
-        CUserAccount_GetFriendInviteTokens_Response GetFriendInviteTokens(CUserAccount_GetFriendInviteTokens_Request request);
-        CUserAccount_ViewFriendInviteToken_Response ViewFriendInviteToken(CUserAccount_ViewFriendInviteToken_Request request);
-        CUserAccount_RedeemFriendInviteToken_Response RedeemFriendInviteToken(CUserAccount_RedeemFriendInviteToken_Request request);
-        CUserAccount_RevokeFriendInviteToken_Response RevokeFriendInviteToken(CUserAccount_RevokeFriendInviteToken_Request request);
-        CUserAccount_RegisterCompatTool_Response RegisterCompatTool(CUserAccount_RegisterCompatTool_Request request);
+
+        const string SERVICE_NAME = "UserAccount";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserAccount_GetAvailableValveDiscountPromotions_Response>> GetAvailableValveDiscountPromotions(CUserAccount_GetAvailableValveDiscountPromotions_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserAccount_GetAvailableValveDiscountPromotions_Request, CUserAccount_GetAvailableValveDiscountPromotions_Response>( $"{SERVICE_NAME}.GetAvailableValveDiscountPromotions#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserAccount_GetWalletDetails_Response>> GetClientWalletDetails(CUserAccount_GetClientWalletDetails_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserAccount_GetClientWalletDetails_Request, CUserAccount_GetWalletDetails_Response>( $"{SERVICE_NAME}.GetClientWalletDetails#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserAccount_GetAccountLinkStatus_Response>> GetAccountLinkStatus(CUserAccount_GetAccountLinkStatus_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserAccount_GetAccountLinkStatus_Request, CUserAccount_GetAccountLinkStatus_Response>( $"{SERVICE_NAME}.GetAccountLinkStatus#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserAccount_CancelLicenseForApp_Response>> CancelLicenseForApp(CUserAccount_CancelLicenseForApp_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserAccount_CancelLicenseForApp_Request, CUserAccount_CancelLicenseForApp_Response>( $"{SERVICE_NAME}.CancelLicenseForApp#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserAccount_GetUserCountry_Response>> GetUserCountry(CUserAccount_GetUserCountry_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserAccount_GetUserCountry_Request, CUserAccount_GetUserCountry_Response>( $"{SERVICE_NAME}.GetUserCountry#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserAccount_CreateFriendInviteToken_Response>> CreateFriendInviteToken(CUserAccount_CreateFriendInviteToken_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserAccount_CreateFriendInviteToken_Request, CUserAccount_CreateFriendInviteToken_Response>( $"{SERVICE_NAME}.CreateFriendInviteToken#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserAccount_GetFriendInviteTokens_Response>> GetFriendInviteTokens(CUserAccount_GetFriendInviteTokens_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserAccount_GetFriendInviteTokens_Request, CUserAccount_GetFriendInviteTokens_Response>( $"{SERVICE_NAME}.GetFriendInviteTokens#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserAccount_ViewFriendInviteToken_Response>> ViewFriendInviteToken(CUserAccount_ViewFriendInviteToken_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserAccount_ViewFriendInviteToken_Request, CUserAccount_ViewFriendInviteToken_Response>( $"{SERVICE_NAME}.ViewFriendInviteToken#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserAccount_RedeemFriendInviteToken_Response>> RedeemFriendInviteToken(CUserAccount_RedeemFriendInviteToken_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserAccount_RedeemFriendInviteToken_Request, CUserAccount_RedeemFriendInviteToken_Response>( $"{SERVICE_NAME}.RedeemFriendInviteToken#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserAccount_RevokeFriendInviteToken_Response>> RevokeFriendInviteToken(CUserAccount_RevokeFriendInviteToken_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserAccount_RevokeFriendInviteToken_Request, CUserAccount_RevokeFriendInviteToken_Response>( $"{SERVICE_NAME}.RevokeFriendInviteToken#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserAccount_RegisterCompatTool_Response>> RegisterCompatTool(CUserAccount_RegisterCompatTool_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserAccount_RegisterCompatTool_Request, CUserAccount_RegisterCompatTool_Response>( $"{SERVICE_NAME}.RegisterCompatTool#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "GetAvailableValveDiscountPromotions":
+                    UnifiedMessages.HandleServiceMsg<CUserAccount_GetAvailableValveDiscountPromotions_Response>( packetMsg );
+                    break;
+                case "GetClientWalletDetails":
+                    UnifiedMessages.HandleServiceMsg<CUserAccount_GetWalletDetails_Response>( packetMsg );
+                    break;
+                case "GetAccountLinkStatus":
+                    UnifiedMessages.HandleServiceMsg<CUserAccount_GetAccountLinkStatus_Response>( packetMsg );
+                    break;
+                case "CancelLicenseForApp":
+                    UnifiedMessages.HandleServiceMsg<CUserAccount_CancelLicenseForApp_Response>( packetMsg );
+                    break;
+                case "GetUserCountry":
+                    UnifiedMessages.HandleServiceMsg<CUserAccount_GetUserCountry_Response>( packetMsg );
+                    break;
+                case "CreateFriendInviteToken":
+                    UnifiedMessages.HandleServiceMsg<CUserAccount_CreateFriendInviteToken_Response>( packetMsg );
+                    break;
+                case "GetFriendInviteTokens":
+                    UnifiedMessages.HandleServiceMsg<CUserAccount_GetFriendInviteTokens_Response>( packetMsg );
+                    break;
+                case "ViewFriendInviteToken":
+                    UnifiedMessages.HandleServiceMsg<CUserAccount_ViewFriendInviteToken_Response>( packetMsg );
+                    break;
+                case "RedeemFriendInviteToken":
+                    UnifiedMessages.HandleServiceMsg<CUserAccount_RedeemFriendInviteToken_Response>( packetMsg );
+                    break;
+                case "RevokeFriendInviteToken":
+                    UnifiedMessages.HandleServiceMsg<CUserAccount_RevokeFriendInviteToken_Response>( packetMsg );
+                    break;
+                case "RegisterCompatTool":
+                    UnifiedMessages.HandleServiceMsg<CUserAccount_RegisterCompatTool_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface IAccountLinking
+    public class AccountLinking : SteamUnifiedMessages.UnifiedService
     {
-        CAccountLinking_GetLinkedAccountInfo_Response GetLinkedAccountInfo(CAccountLinking_GetLinkedAccountInfo_Request request);
+
+        const string SERVICE_NAME = "AccountLinking";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountLinking_GetLinkedAccountInfo_Response>> GetLinkedAccountInfo(CAccountLinking_GetLinkedAccountInfo_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAccountLinking_GetLinkedAccountInfo_Request, CAccountLinking_GetLinkedAccountInfo_Response>( $"{SERVICE_NAME}.GetLinkedAccountInfo#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "GetLinkedAccountInfo":
+                    UnifiedMessages.HandleServiceMsg<CAccountLinking_GetLinkedAccountInfo_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface IEmbeddedClient
+    public class EmbeddedClient : SteamUnifiedMessages.UnifiedService
     {
-        CEmbeddedClient_AuthorizeDevice_Response AuthorizeCurrentDevice(CEmbeddedClient_AuthorizeCurrentDevice_Request request);
+
+        const string SERVICE_NAME = "EmbeddedClient";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CEmbeddedClient_AuthorizeDevice_Response>> AuthorizeCurrentDevice(CEmbeddedClient_AuthorizeCurrentDevice_Request request)
+        {
+            return UnifiedMessages.SendMessage<CEmbeddedClient_AuthorizeCurrentDevice_Request, CEmbeddedClient_AuthorizeDevice_Response>( $"{SERVICE_NAME}.AuthorizeCurrentDevice#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "AuthorizeCurrentDevice":
+                    UnifiedMessages.HandleServiceMsg<CEmbeddedClient_AuthorizeDevice_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

@@ -183,11 +183,44 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface ITimedTrial
+    public class TimedTrial : SteamUnifiedMessages.UnifiedService
     {
-        CTimedTrial_GetTimeRemaining_Response GetTimeRemaining(CTimedTrial_GetTimeRemaining_Request request);
-        CTimedTrial_RecordPlaytime_Response RecordPlaytime(CTimedTrial_RecordPlaytime_Request request);
-        CTimedTrial_ResetPlaytime_Response ResetPlaytime(CTimedTrial_ResetPlaytime_Request request);
+
+        const string SERVICE_NAME = "TimedTrial";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CTimedTrial_GetTimeRemaining_Response>> GetTimeRemaining(CTimedTrial_GetTimeRemaining_Request request)
+        {
+            return UnifiedMessages.SendMessage<CTimedTrial_GetTimeRemaining_Request, CTimedTrial_GetTimeRemaining_Response>( $"{SERVICE_NAME}.GetTimeRemaining#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CTimedTrial_RecordPlaytime_Response>> RecordPlaytime(CTimedTrial_RecordPlaytime_Request request)
+        {
+            return UnifiedMessages.SendMessage<CTimedTrial_RecordPlaytime_Request, CTimedTrial_RecordPlaytime_Response>( $"{SERVICE_NAME}.RecordPlaytime#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CTimedTrial_ResetPlaytime_Response>> ResetPlaytime(CTimedTrial_ResetPlaytime_Request request)
+        {
+            return UnifiedMessages.SendMessage<CTimedTrial_ResetPlaytime_Request, CTimedTrial_ResetPlaytime_Response>( $"{SERVICE_NAME}.ResetPlaytime#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "GetTimeRemaining":
+                    UnifiedMessages.HandleServiceMsg<CTimedTrial_GetTimeRemaining_Response>( packetMsg );
+                    break;
+                case "RecordPlaytime":
+                    UnifiedMessages.HandleServiceMsg<CTimedTrial_RecordPlaytime_Response>( packetMsg );
+                    break;
+                case "ResetPlaytime":
+                    UnifiedMessages.HandleServiceMsg<CTimedTrial_ResetPlaytime_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

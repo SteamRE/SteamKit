@@ -418,12 +418,52 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public interface IUserGameNotes
+    public class UserGameNotes : SteamUnifiedMessages.UnifiedService
     {
-        CUserGameNotes_DeleteNote_Response DeleteNote(CUserGameNotes_DeleteNote_Request request);
-        CUserGameNotes_GetGamesWithNotes_Response GetGamesWithNotes(CUserGameNotes_GetGamesWithNotes_Request request);
-        CUserGameNotes_GetNotesForGame_Response GetNotesForGame(CUserGameNotes_GetNotesForGame_Request request);
-        CUserGameNotes_SaveNote_Response SaveNote(CUserGameNotes_SaveNote_Request request);
+
+        const string SERVICE_NAME = "UserGameNotes";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserGameNotes_DeleteNote_Response>> DeleteNote(CUserGameNotes_DeleteNote_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserGameNotes_DeleteNote_Request, CUserGameNotes_DeleteNote_Response>( $"{SERVICE_NAME}.DeleteNote#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserGameNotes_GetGamesWithNotes_Response>> GetGamesWithNotes(CUserGameNotes_GetGamesWithNotes_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserGameNotes_GetGamesWithNotes_Request, CUserGameNotes_GetGamesWithNotes_Response>( $"{SERVICE_NAME}.GetGamesWithNotes#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserGameNotes_GetNotesForGame_Response>> GetNotesForGame(CUserGameNotes_GetNotesForGame_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserGameNotes_GetNotesForGame_Request, CUserGameNotes_GetNotesForGame_Response>( $"{SERVICE_NAME}.GetNotesForGame#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserGameNotes_SaveNote_Response>> SaveNote(CUserGameNotes_SaveNote_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserGameNotes_SaveNote_Request, CUserGameNotes_SaveNote_Response>( $"{SERVICE_NAME}.SaveNote#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "DeleteNote":
+                    UnifiedMessages.HandleServiceMsg<CUserGameNotes_DeleteNote_Response>( packetMsg );
+                    break;
+                case "GetGamesWithNotes":
+                    UnifiedMessages.HandleServiceMsg<CUserGameNotes_GetGamesWithNotes_Response>( packetMsg );
+                    break;
+                case "GetNotesForGame":
+                    UnifiedMessages.HandleServiceMsg<CUserGameNotes_GetNotesForGame_Response>( packetMsg );
+                    break;
+                case "SaveNote":
+                    UnifiedMessages.HandleServiceMsg<CUserGameNotes_SaveNote_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

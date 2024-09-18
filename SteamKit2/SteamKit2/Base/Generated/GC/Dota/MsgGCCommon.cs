@@ -9907,21 +9907,6 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetis_lategame_suggested() => __pbn__is_lategame_suggested = null;
             private bool? __pbn__is_lategame_suggested;
 
-            [global::ProtoBuf.ProtoMember(9)]
-            public global::System.Collections.Generic.List<Recipe> recipes { get; } = new global::System.Collections.Generic.List<Recipe>();
-
-            [global::ProtoBuf.ProtoContract()]
-            public partial class Recipe : global::ProtoBuf.IExtensible
-            {
-                private global::ProtoBuf.IExtension __pbn__extensionData;
-                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-                [global::ProtoBuf.ProtoMember(1)]
-                public global::System.Collections.Generic.List<int> items { get; } = new global::System.Collections.Generic.List<int>();
-
-            }
-
         }
 
     }

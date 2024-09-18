@@ -655,18 +655,84 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface IDataPublisher
+    public class DataPublisher : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse ClientContentCorruptionReport(CDataPublisher_ClientContentCorruptionReport_Notification request);
-        NoResponse ClientUpdateAppJobReport(CDataPublisher_ClientUpdateAppJob_Notification request);
-        CDataPublisher_GetVRDeviceInfo_Response GetVRDeviceInfo(CDataPublisher_GetVRDeviceInfo_Request request);
-        CDataPublisher_SetVRDeviceInfoAggregationReference_Response SetVRDeviceInfoAggregationReference(CDataPublisher_SetVRDeviceInfoAggregationReference_Request request);
-        CDataPublisher_AddVRDeviceInfo_Response AddVRDeviceInfo(CDataPublisher_AddVRDeviceInfo_Request request);
+
+        const string SERVICE_NAME = "DataPublisher";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientContentCorruptionReport(CDataPublisher_ClientContentCorruptionReport_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CDataPublisher_ClientContentCorruptionReport_Notification, NoResponse>( $"{SERVICE_NAME}.ClientContentCorruptionReport#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientUpdateAppJobReport(CDataPublisher_ClientUpdateAppJob_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CDataPublisher_ClientUpdateAppJob_Notification, NoResponse>( $"{SERVICE_NAME}.ClientUpdateAppJobReport#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CDataPublisher_GetVRDeviceInfo_Response>> GetVRDeviceInfo(CDataPublisher_GetVRDeviceInfo_Request request)
+        {
+            return UnifiedMessages.SendMessage<CDataPublisher_GetVRDeviceInfo_Request, CDataPublisher_GetVRDeviceInfo_Response>( $"{SERVICE_NAME}.GetVRDeviceInfo#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CDataPublisher_SetVRDeviceInfoAggregationReference_Response>> SetVRDeviceInfoAggregationReference(CDataPublisher_SetVRDeviceInfoAggregationReference_Request request)
+        {
+            return UnifiedMessages.SendMessage<CDataPublisher_SetVRDeviceInfoAggregationReference_Request, CDataPublisher_SetVRDeviceInfoAggregationReference_Response>( $"{SERVICE_NAME}.SetVRDeviceInfoAggregationReference#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CDataPublisher_AddVRDeviceInfo_Response>> AddVRDeviceInfo(CDataPublisher_AddVRDeviceInfo_Request request)
+        {
+            return UnifiedMessages.SendMessage<CDataPublisher_AddVRDeviceInfo_Request, CDataPublisher_AddVRDeviceInfo_Response>( $"{SERVICE_NAME}.AddVRDeviceInfo#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "ClientContentCorruptionReport":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "ClientUpdateAppJobReport":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "GetVRDeviceInfo":
+                    UnifiedMessages.HandleServiceMsg<CDataPublisher_GetVRDeviceInfo_Response>( packetMsg );
+                    break;
+                case "SetVRDeviceInfoAggregationReference":
+                    UnifiedMessages.HandleServiceMsg<CDataPublisher_SetVRDeviceInfoAggregationReference_Response>( packetMsg );
+                    break;
+                case "AddVRDeviceInfo":
+                    UnifiedMessages.HandleServiceMsg<CDataPublisher_AddVRDeviceInfo_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface IValveHWSurvey
+    public class ValveHWSurvey : SteamUnifiedMessages.UnifiedService
     {
-        CValveHWSurvey_GetSurveySchedule_Response GetSurveySchedule(CValveHWSurvey_GetSurveySchedule_Request request);
+
+        const string SERVICE_NAME = "ValveHWSurvey";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CValveHWSurvey_GetSurveySchedule_Response>> GetSurveySchedule(CValveHWSurvey_GetSurveySchedule_Request request)
+        {
+            return UnifiedMessages.SendMessage<CValveHWSurvey_GetSurveySchedule_Request, CValveHWSurvey_GetSurveySchedule_Response>( $"{SERVICE_NAME}.GetSurveySchedule#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "GetSurveySchedule":
+                    UnifiedMessages.HandleServiceMsg<CValveHWSurvey_GetSurveySchedule_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

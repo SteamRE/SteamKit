@@ -685,11 +685,44 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public interface IStoreQuery
+    public class StoreQuery : SteamUnifiedMessages.UnifiedService
     {
-        CStoreQuery_GetItemsByUserRecommendedTags_Response GetItemsByUserRecommendedTags(CStoreQuery_GetItemsByUserRecommendedTags_Request request);
-        CStoreQuery_Query_Response Query(CStoreQuery_Query_Request request);
-        CStoreQuery_SearchSuggestions_Response SearchSuggestions(CStoreQuery_SearchSuggestions_Request request);
+
+        const string SERVICE_NAME = "StoreQuery";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreQuery_GetItemsByUserRecommendedTags_Response>> GetItemsByUserRecommendedTags(CStoreQuery_GetItemsByUserRecommendedTags_Request request)
+        {
+            return UnifiedMessages.SendMessage<CStoreQuery_GetItemsByUserRecommendedTags_Request, CStoreQuery_GetItemsByUserRecommendedTags_Response>( $"{SERVICE_NAME}.GetItemsByUserRecommendedTags#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreQuery_Query_Response>> Query(CStoreQuery_Query_Request request)
+        {
+            return UnifiedMessages.SendMessage<CStoreQuery_Query_Request, CStoreQuery_Query_Response>( $"{SERVICE_NAME}.Query#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreQuery_SearchSuggestions_Response>> SearchSuggestions(CStoreQuery_SearchSuggestions_Request request)
+        {
+            return UnifiedMessages.SendMessage<CStoreQuery_SearchSuggestions_Request, CStoreQuery_SearchSuggestions_Response>( $"{SERVICE_NAME}.SearchSuggestions#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "GetItemsByUserRecommendedTags":
+                    UnifiedMessages.HandleServiceMsg<CStoreQuery_GetItemsByUserRecommendedTags_Response>( packetMsg );
+                    break;
+                case "Query":
+                    UnifiedMessages.HandleServiceMsg<CStoreQuery_Query_Response>( packetMsg );
+                    break;
+                case "SearchSuggestions":
+                    UnifiedMessages.HandleServiceMsg<CStoreQuery_SearchSuggestions_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

@@ -77,7 +77,7 @@ namespace SteamKit2
 
             var response = await directory.CallProtobufAsync<CContentServerDirectory_GetServersForSteamPipe_Response>(
                 HttpMethod.Get,
-                nameof( IContentServerDirectory.GetServersForSteamPipe ),
+                nameof( ContentServerDirectory.GetServersForSteamPipe ),
                 version: 1,
                 args: args
             ).ConfigureAwait( false );

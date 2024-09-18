@@ -160,11 +160,44 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface ICommunityLinkFilter
+    public class CommunityLinkFilter : SteamUnifiedMessages.UnifiedService
     {
-        CCommunity_GetLinkFilterHashPrefixes_Response GetLinkFilterHashPrefixes(CCommunity_GetLinkFilterHashPrefixes_Request request);
-        CCommunity_GetLinkFilterHashes_Response GetLinkFilterHashes(CCommunity_GetLinkFilterHashes_Request request);
-        CCommunity_GetLinkFilterListVersion_Response GetLinkFilterListVersion(CCommunity_GetLinkFilterListVersion_Request request);
+
+        const string SERVICE_NAME = "CommunityLinkFilter";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetLinkFilterHashPrefixes_Response>> GetLinkFilterHashPrefixes(CCommunity_GetLinkFilterHashPrefixes_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterHashPrefixes_Request, CCommunity_GetLinkFilterHashPrefixes_Response>( $"{SERVICE_NAME}.GetLinkFilterHashPrefixes#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetLinkFilterHashes_Response>> GetLinkFilterHashes(CCommunity_GetLinkFilterHashes_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterHashes_Request, CCommunity_GetLinkFilterHashes_Response>( $"{SERVICE_NAME}.GetLinkFilterHashes#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetLinkFilterListVersion_Response>> GetLinkFilterListVersion(CCommunity_GetLinkFilterListVersion_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterListVersion_Request, CCommunity_GetLinkFilterListVersion_Response>( $"{SERVICE_NAME}.GetLinkFilterListVersion#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "GetLinkFilterHashPrefixes":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_GetLinkFilterHashPrefixes_Response>( packetMsg );
+                    break;
+                case "GetLinkFilterHashes":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_GetLinkFilterHashes_Response>( packetMsg );
+                    break;
+                case "GetLinkFilterListVersion":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_GetLinkFilterListVersion_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

@@ -227,10 +227,36 @@ namespace SteamKit2.Internal
         k_ESteamNotificationType_PartnerEvent = 27,
     }
 
-    public interface ISteamNotificationClient
+    public class SteamNotificationClient : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request);
-        NoResponse PreferencesUpdated(CSteamNotification_PreferencesUpdated_Notification request);
+
+        const string SERVICE_NAME = "SteamNotificationClient";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CSteamNotification_NotificationsReceived_Notification, NoResponse>( $"{SERVICE_NAME}.NotificationsReceived#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> PreferencesUpdated(CSteamNotification_PreferencesUpdated_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CSteamNotification_PreferencesUpdated_Notification, NoResponse>( $"{SERVICE_NAME}.PreferencesUpdated#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "NotificationsReceived":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "PreferencesUpdated":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

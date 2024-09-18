@@ -1685,10 +1685,6 @@ namespace SteamKit2.GC.Dota.Internal
         k_EBadgeType_TI12_PlayoffsDay3 = 15,
         k_EBadgeType_TI12_FinalsWeekend = 16,
         k_EBadgeType_TI12_Special = 17,
-        k_EBadgeType_TI13_FinalsDay1 = 18,
-        k_EBadgeType_TI13_FinalsDay2 = 19,
-        k_EBadgeType_TI13_FinalsDay3 = 20,
-        k_EBadgeType_TI13_Special = 21,
     }
 
     [global::ProtoBuf.ProtoContract()]

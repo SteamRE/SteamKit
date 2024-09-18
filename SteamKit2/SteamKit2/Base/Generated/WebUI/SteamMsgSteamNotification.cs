@@ -371,17 +371,76 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public interface ISteamNotification
+    public class SteamNotification : SteamUnifiedMessages.UnifiedService
     {
-        CSteamNotification_GetPreferences_Response GetPreferences(CSteamNotification_GetPreferences_Request request);
-        CSteamNotification_GetSteamNotifications_Response GetSteamNotifications(CSteamNotification_GetSteamNotifications_Request request);
-        CSteamNotification_SetPreferences_Response SetPreferences(CSteamNotification_SetPreferences_Request request);
+
+        const string SERVICE_NAME = "SteamNotification";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSteamNotification_GetPreferences_Response>> GetPreferences(CSteamNotification_GetPreferences_Request request)
+        {
+            return UnifiedMessages.SendMessage<CSteamNotification_GetPreferences_Request, CSteamNotification_GetPreferences_Response>( $"{SERVICE_NAME}.GetPreferences#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSteamNotification_GetSteamNotifications_Response>> GetSteamNotifications(CSteamNotification_GetSteamNotifications_Request request)
+        {
+            return UnifiedMessages.SendMessage<CSteamNotification_GetSteamNotifications_Request, CSteamNotification_GetSteamNotifications_Response>( $"{SERVICE_NAME}.GetSteamNotifications#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSteamNotification_SetPreferences_Response>> SetPreferences(CSteamNotification_SetPreferences_Request request)
+        {
+            return UnifiedMessages.SendMessage<CSteamNotification_SetPreferences_Request, CSteamNotification_SetPreferences_Response>( $"{SERVICE_NAME}.SetPreferences#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "GetPreferences":
+                    UnifiedMessages.HandleServiceMsg<CSteamNotification_GetPreferences_Response>( packetMsg );
+                    break;
+                case "GetSteamNotifications":
+                    UnifiedMessages.HandleServiceMsg<CSteamNotification_GetSteamNotifications_Response>( packetMsg );
+                    break;
+                case "SetPreferences":
+                    UnifiedMessages.HandleServiceMsg<CSteamNotification_SetPreferences_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface ISteamNotificationClient
+    public class SteamNotificationClient : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request);
-        NoResponse PreferencesUpdated(CSteamNotification_PreferencesUpdated_Notification request);
+
+        const string SERVICE_NAME = "SteamNotificationClient";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CSteamNotification_NotificationsReceived_Notification, NoResponse>( $"{SERVICE_NAME}.NotificationsReceived#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> PreferencesUpdated(CSteamNotification_PreferencesUpdated_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CSteamNotification_PreferencesUpdated_Notification, NoResponse>( $"{SERVICE_NAME}.PreferencesUpdated#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "NotificationsReceived":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "PreferencesUpdated":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

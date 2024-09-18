@@ -466,14 +466,68 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface IShader
+    public class Shader : SteamUnifiedMessages.UnifiedService
     {
-        CShader_GetShaderReportingCadence_Response GetShaderReportingCadence(CShader_GetShaderReportingCadence_Request request);
-        CShader_RegisterShader_Response RegisterShader(CShader_RegisterShader_Request request);
-        CShader_SendShader_Response SendShader(CShader_SendShader_Request request);
-        CShader_GetBucketManifest_Response GetBucketManifest(CShader_GetBucketManifest_Request request);
-        CShader_GetStaleBucket_Response GetStaleBucket(CShader_GetStaleBucket_Request request);
-        CShader_ReportExternalBuild_Response ReportExternalBuild(CShader_ReportExternalBuild_Request request);
+
+        const string SERVICE_NAME = "Shader";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CShader_GetShaderReportingCadence_Response>> GetShaderReportingCadence(CShader_GetShaderReportingCadence_Request request)
+        {
+            return UnifiedMessages.SendMessage<CShader_GetShaderReportingCadence_Request, CShader_GetShaderReportingCadence_Response>( $"{SERVICE_NAME}.GetShaderReportingCadence#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CShader_RegisterShader_Response>> RegisterShader(CShader_RegisterShader_Request request)
+        {
+            return UnifiedMessages.SendMessage<CShader_RegisterShader_Request, CShader_RegisterShader_Response>( $"{SERVICE_NAME}.RegisterShader#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CShader_SendShader_Response>> SendShader(CShader_SendShader_Request request)
+        {
+            return UnifiedMessages.SendMessage<CShader_SendShader_Request, CShader_SendShader_Response>( $"{SERVICE_NAME}.SendShader#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CShader_GetBucketManifest_Response>> GetBucketManifest(CShader_GetBucketManifest_Request request)
+        {
+            return UnifiedMessages.SendMessage<CShader_GetBucketManifest_Request, CShader_GetBucketManifest_Response>( $"{SERVICE_NAME}.GetBucketManifest#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CShader_GetStaleBucket_Response>> GetStaleBucket(CShader_GetStaleBucket_Request request)
+        {
+            return UnifiedMessages.SendMessage<CShader_GetStaleBucket_Request, CShader_GetStaleBucket_Response>( $"{SERVICE_NAME}.GetStaleBucket#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CShader_ReportExternalBuild_Response>> ReportExternalBuild(CShader_ReportExternalBuild_Request request)
+        {
+            return UnifiedMessages.SendMessage<CShader_ReportExternalBuild_Request, CShader_ReportExternalBuild_Response>( $"{SERVICE_NAME}.ReportExternalBuild#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "GetShaderReportingCadence":
+                    UnifiedMessages.HandleServiceMsg<CShader_GetShaderReportingCadence_Response>( packetMsg );
+                    break;
+                case "RegisterShader":
+                    UnifiedMessages.HandleServiceMsg<CShader_RegisterShader_Response>( packetMsg );
+                    break;
+                case "SendShader":
+                    UnifiedMessages.HandleServiceMsg<CShader_SendShader_Response>( packetMsg );
+                    break;
+                case "GetBucketManifest":
+                    UnifiedMessages.HandleServiceMsg<CShader_GetBucketManifest_Response>( packetMsg );
+                    break;
+                case "GetStaleBucket":
+                    UnifiedMessages.HandleServiceMsg<CShader_GetStaleBucket_Response>( packetMsg );
+                    break;
+                case "ReportExternalBuild":
+                    UnifiedMessages.HandleServiceMsg<CShader_ReportExternalBuild_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

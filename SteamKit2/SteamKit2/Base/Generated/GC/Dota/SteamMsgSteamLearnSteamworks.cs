@@ -1356,15 +1356,76 @@ namespace SteamKit2.GC.Dota.Internal
         STEAMLEARN_INFERENCE_METADATA_ERROR_NO_FETCH_ID_FOUND = 7,
     }
 
-    public interface ISteamLearn
+    public class SteamLearn : SteamUnifiedMessages.UnifiedService
     {
-        CMsgSteamLearn_RegisterDataSource_Response RegisterDataSource(CMsgSteamLearn_RegisterDataSource_Request request);
-        CMsgSteamLearn_CacheData_Response CacheData(CMsgSteamLearn_CacheData_Request request);
-        CMsgSteamLearn_SnapshotProject_Response SnapshotProject(CMsgSteamLearn_SnapshotProject_Request request);
-        CMsgSteamLearn_BatchOperation_Response BatchOperation(CMsgSteamLearn_BatchOperation_Request request);
-        CMsgSteamLearn_GetAccessTokens_Response GetAccessTokens(CMsgSteamLearn_GetAccessTokens_Request request);
-        CMsgSteamLearn_Inference_Response Inference(CMsgSteamLearn_Inference_Request request);
-        CMsgSteamLearn_InferenceMetadata_Response InferenceMetadata(CMsgSteamLearn_InferenceMetadata_Request request);
+
+        const string SERVICE_NAME = "SteamLearn";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CMsgSteamLearn_RegisterDataSource_Response>> RegisterDataSource(CMsgSteamLearn_RegisterDataSource_Request request)
+        {
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_RegisterDataSource_Request, CMsgSteamLearn_RegisterDataSource_Response>( $"{SERVICE_NAME}.RegisterDataSource#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CMsgSteamLearn_CacheData_Response>> CacheData(CMsgSteamLearn_CacheData_Request request)
+        {
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_CacheData_Request, CMsgSteamLearn_CacheData_Response>( $"{SERVICE_NAME}.CacheData#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CMsgSteamLearn_SnapshotProject_Response>> SnapshotProject(CMsgSteamLearn_SnapshotProject_Request request)
+        {
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_SnapshotProject_Request, CMsgSteamLearn_SnapshotProject_Response>( $"{SERVICE_NAME}.SnapshotProject#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CMsgSteamLearn_BatchOperation_Response>> BatchOperation(CMsgSteamLearn_BatchOperation_Request request)
+        {
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_BatchOperation_Request, CMsgSteamLearn_BatchOperation_Response>( $"{SERVICE_NAME}.BatchOperation#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CMsgSteamLearn_GetAccessTokens_Response>> GetAccessTokens(CMsgSteamLearn_GetAccessTokens_Request request)
+        {
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_GetAccessTokens_Request, CMsgSteamLearn_GetAccessTokens_Response>( $"{SERVICE_NAME}.GetAccessTokens#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CMsgSteamLearn_Inference_Response>> Inference(CMsgSteamLearn_Inference_Request request)
+        {
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_Inference_Request, CMsgSteamLearn_Inference_Response>( $"{SERVICE_NAME}.Inference#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CMsgSteamLearn_InferenceMetadata_Response>> InferenceMetadata(CMsgSteamLearn_InferenceMetadata_Request request)
+        {
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_InferenceMetadata_Request, CMsgSteamLearn_InferenceMetadata_Response>( $"{SERVICE_NAME}.InferenceMetadata#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "RegisterDataSource":
+                    UnifiedMessages.HandleServiceMsg<CMsgSteamLearn_RegisterDataSource_Response>( packetMsg );
+                    break;
+                case "CacheData":
+                    UnifiedMessages.HandleServiceMsg<CMsgSteamLearn_CacheData_Response>( packetMsg );
+                    break;
+                case "SnapshotProject":
+                    UnifiedMessages.HandleServiceMsg<CMsgSteamLearn_SnapshotProject_Response>( packetMsg );
+                    break;
+                case "BatchOperation":
+                    UnifiedMessages.HandleServiceMsg<CMsgSteamLearn_BatchOperation_Response>( packetMsg );
+                    break;
+                case "GetAccessTokens":
+                    UnifiedMessages.HandleServiceMsg<CMsgSteamLearn_GetAccessTokens_Response>( packetMsg );
+                    break;
+                case "Inference":
+                    UnifiedMessages.HandleServiceMsg<CMsgSteamLearn_Inference_Response>( packetMsg );
+                    break;
+                case "InferenceMetadata":
+                    UnifiedMessages.HandleServiceMsg<CMsgSteamLearn_InferenceMetadata_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

@@ -523,20 +523,100 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface ISiteManagerClient
+    public class SiteManagerClient : SteamUnifiedMessages.UnifiedService
     {
-        CSiteManagerClient_IncomingClient_Response IncomingClient(CSiteManagerClient_IncomingClient_Request request);
-        NoResponse ClientSeatCheckoutNotification(CSiteLicense_ClientSeatCheckout_Notification request);
-        NoResponse TrackedPaymentsNotification(CSiteManagerClient_TrackedPayments_Notification request);
+
+        const string SERVICE_NAME = "SiteManagerClient";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteManagerClient_IncomingClient_Response>> IncomingClient(CSiteManagerClient_IncomingClient_Request request)
+        {
+            return UnifiedMessages.SendMessage<CSiteManagerClient_IncomingClient_Request, CSiteManagerClient_IncomingClient_Response>( $"{SERVICE_NAME}.IncomingClient#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientSeatCheckoutNotification(CSiteLicense_ClientSeatCheckout_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CSiteLicense_ClientSeatCheckout_Notification, NoResponse>( $"{SERVICE_NAME}.ClientSeatCheckoutNotification#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> TrackedPaymentsNotification(CSiteManagerClient_TrackedPayments_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CSiteManagerClient_TrackedPayments_Notification, NoResponse>( $"{SERVICE_NAME}.TrackedPaymentsNotification#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "IncomingClient":
+                    UnifiedMessages.HandleServiceMsg<CSiteManagerClient_IncomingClient_Response>( packetMsg );
+                    break;
+                case "ClientSeatCheckoutNotification":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "TrackedPaymentsNotification":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface ISiteLicense
+    public class SiteLicense : SteamUnifiedMessages.UnifiedService
     {
-        CSiteLicense_InitiateAssociation_Response InitiateAssociation(CSiteLicense_InitiateAssociation_Request request);
-        CSiteLicense_LCSAuthenticate_Response LCSAuthenticate(CSiteLicense_LCSAuthenticate_Request request);
-        CSiteLicense_LCSAssociateUser_Response LCSAssociateUser(CSiteLicense_LCSAssociateUser_Request request);
-        CSiteLicense_ClientSeatCheckout_Response ClientSeatCheckout(CSiteLicense_ClientSeatCheckout_Request request);
-        CSiteLicense_ClientGetAvailableSeats_Response ClientGetAvailableSeats(CSiteLicense_ClientGetAvailableSeats_Request request);
+
+        const string SERVICE_NAME = "SiteLicense";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteLicense_InitiateAssociation_Response>> InitiateAssociation(CSiteLicense_InitiateAssociation_Request request)
+        {
+            return UnifiedMessages.SendMessage<CSiteLicense_InitiateAssociation_Request, CSiteLicense_InitiateAssociation_Response>( $"{SERVICE_NAME}.InitiateAssociation#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteLicense_LCSAuthenticate_Response>> LCSAuthenticate(CSiteLicense_LCSAuthenticate_Request request)
+        {
+            return UnifiedMessages.SendMessage<CSiteLicense_LCSAuthenticate_Request, CSiteLicense_LCSAuthenticate_Response>( $"{SERVICE_NAME}.LCSAuthenticate#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteLicense_LCSAssociateUser_Response>> LCSAssociateUser(CSiteLicense_LCSAssociateUser_Request request)
+        {
+            return UnifiedMessages.SendMessage<CSiteLicense_LCSAssociateUser_Request, CSiteLicense_LCSAssociateUser_Response>( $"{SERVICE_NAME}.LCSAssociateUser#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteLicense_ClientSeatCheckout_Response>> ClientSeatCheckout(CSiteLicense_ClientSeatCheckout_Request request)
+        {
+            return UnifiedMessages.SendMessage<CSiteLicense_ClientSeatCheckout_Request, CSiteLicense_ClientSeatCheckout_Response>( $"{SERVICE_NAME}.ClientSeatCheckout#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteLicense_ClientGetAvailableSeats_Response>> ClientGetAvailableSeats(CSiteLicense_ClientGetAvailableSeats_Request request)
+        {
+            return UnifiedMessages.SendMessage<CSiteLicense_ClientGetAvailableSeats_Request, CSiteLicense_ClientGetAvailableSeats_Response>( $"{SERVICE_NAME}.ClientGetAvailableSeats#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "InitiateAssociation":
+                    UnifiedMessages.HandleServiceMsg<CSiteLicense_InitiateAssociation_Response>( packetMsg );
+                    break;
+                case "LCSAuthenticate":
+                    UnifiedMessages.HandleServiceMsg<CSiteLicense_LCSAuthenticate_Response>( packetMsg );
+                    break;
+                case "LCSAssociateUser":
+                    UnifiedMessages.HandleServiceMsg<CSiteLicense_LCSAssociateUser_Response>( packetMsg );
+                    break;
+                case "ClientSeatCheckout":
+                    UnifiedMessages.HandleServiceMsg<CSiteLicense_ClientSeatCheckout_Response>( packetMsg );
+                    break;
+                case "ClientGetAvailableSeats":
+                    UnifiedMessages.HandleServiceMsg<CSiteLicense_ClientGetAvailableSeats_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

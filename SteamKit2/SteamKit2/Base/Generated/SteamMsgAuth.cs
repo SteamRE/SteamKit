@@ -1979,35 +1979,204 @@ namespace SteamKit2.Internal
         k_EAuthTokenState_Revoked = 99,
     }
 
-    public interface IAuthentication
+    public class Authentication : SteamUnifiedMessages.UnifiedService
     {
-        CAuthentication_GetPasswordRSAPublicKey_Response GetPasswordRSAPublicKey(CAuthentication_GetPasswordRSAPublicKey_Request request);
-        CAuthentication_BeginAuthSessionViaQR_Response BeginAuthSessionViaQR(CAuthentication_BeginAuthSessionViaQR_Request request);
-        CAuthentication_BeginAuthSessionViaCredentials_Response BeginAuthSessionViaCredentials(CAuthentication_BeginAuthSessionViaCredentials_Request request);
-        CAuthentication_PollAuthSessionStatus_Response PollAuthSessionStatus(CAuthentication_PollAuthSessionStatus_Request request);
-        CAuthentication_GetAuthSessionInfo_Response GetAuthSessionInfo(CAuthentication_GetAuthSessionInfo_Request request);
-        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response UpdateAuthSessionWithMobileConfirmation(CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request request);
-        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response UpdateAuthSessionWithSteamGuardCode(CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request request);
-        CAuthentication_AccessToken_GenerateForApp_Response GenerateAccessTokenForApp(CAuthentication_AccessToken_GenerateForApp_Request request);
-        CAuthentication_RefreshToken_Enumerate_Response EnumerateTokens(CAuthentication_RefreshToken_Enumerate_Request request);
-        CAuthentication_GetAuthSessionsForAccount_Response GetAuthSessionsForAccount(CAuthentication_GetAuthSessionsForAccount_Request request);
-        CAuthentication_MigrateMobileSession_Response MigrateMobileSession(CAuthentication_MigrateMobileSession_Request request);
-        CAuthentication_Token_Revoke_Response RevokeToken(CAuthentication_Token_Revoke_Request request);
-        CAuthentication_RefreshToken_Revoke_Response RevokeRefreshToken(CAuthentication_RefreshToken_Revoke_Request request);
+
+        const string SERVICE_NAME = "Authentication";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthentication_GetPasswordRSAPublicKey_Response>> GetPasswordRSAPublicKey(CAuthentication_GetPasswordRSAPublicKey_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAuthentication_GetPasswordRSAPublicKey_Request, CAuthentication_GetPasswordRSAPublicKey_Response>( $"{SERVICE_NAME}.GetPasswordRSAPublicKey#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthentication_BeginAuthSessionViaQR_Response>> BeginAuthSessionViaQR(CAuthentication_BeginAuthSessionViaQR_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAuthentication_BeginAuthSessionViaQR_Request, CAuthentication_BeginAuthSessionViaQR_Response>( $"{SERVICE_NAME}.BeginAuthSessionViaQR#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthentication_BeginAuthSessionViaCredentials_Response>> BeginAuthSessionViaCredentials(CAuthentication_BeginAuthSessionViaCredentials_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAuthentication_BeginAuthSessionViaCredentials_Request, CAuthentication_BeginAuthSessionViaCredentials_Response>( $"{SERVICE_NAME}.BeginAuthSessionViaCredentials#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthentication_PollAuthSessionStatus_Response>> PollAuthSessionStatus(CAuthentication_PollAuthSessionStatus_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAuthentication_PollAuthSessionStatus_Request, CAuthentication_PollAuthSessionStatus_Response>( $"{SERVICE_NAME}.PollAuthSessionStatus#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthentication_GetAuthSessionInfo_Response>> GetAuthSessionInfo(CAuthentication_GetAuthSessionInfo_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAuthentication_GetAuthSessionInfo_Request, CAuthentication_GetAuthSessionInfo_Response>( $"{SERVICE_NAME}.GetAuthSessionInfo#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response>> UpdateAuthSessionWithMobileConfirmation(CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request, CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response>( $"{SERVICE_NAME}.UpdateAuthSessionWithMobileConfirmation#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response>> UpdateAuthSessionWithSteamGuardCode(CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request, CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response>( $"{SERVICE_NAME}.UpdateAuthSessionWithSteamGuardCode#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthentication_AccessToken_GenerateForApp_Response>> GenerateAccessTokenForApp(CAuthentication_AccessToken_GenerateForApp_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAuthentication_AccessToken_GenerateForApp_Request, CAuthentication_AccessToken_GenerateForApp_Response>( $"{SERVICE_NAME}.GenerateAccessTokenForApp#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthentication_RefreshToken_Enumerate_Response>> EnumerateTokens(CAuthentication_RefreshToken_Enumerate_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAuthentication_RefreshToken_Enumerate_Request, CAuthentication_RefreshToken_Enumerate_Response>( $"{SERVICE_NAME}.EnumerateTokens#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthentication_GetAuthSessionsForAccount_Response>> GetAuthSessionsForAccount(CAuthentication_GetAuthSessionsForAccount_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAuthentication_GetAuthSessionsForAccount_Request, CAuthentication_GetAuthSessionsForAccount_Response>( $"{SERVICE_NAME}.GetAuthSessionsForAccount#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthentication_MigrateMobileSession_Response>> MigrateMobileSession(CAuthentication_MigrateMobileSession_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAuthentication_MigrateMobileSession_Request, CAuthentication_MigrateMobileSession_Response>( $"{SERVICE_NAME}.MigrateMobileSession#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthentication_Token_Revoke_Response>> RevokeToken(CAuthentication_Token_Revoke_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAuthentication_Token_Revoke_Request, CAuthentication_Token_Revoke_Response>( $"{SERVICE_NAME}.RevokeToken#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthentication_RefreshToken_Revoke_Response>> RevokeRefreshToken(CAuthentication_RefreshToken_Revoke_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAuthentication_RefreshToken_Revoke_Request, CAuthentication_RefreshToken_Revoke_Response>( $"{SERVICE_NAME}.RevokeRefreshToken#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "GetPasswordRSAPublicKey":
+                    UnifiedMessages.HandleServiceMsg<CAuthentication_GetPasswordRSAPublicKey_Response>( packetMsg );
+                    break;
+                case "BeginAuthSessionViaQR":
+                    UnifiedMessages.HandleServiceMsg<CAuthentication_BeginAuthSessionViaQR_Response>( packetMsg );
+                    break;
+                case "BeginAuthSessionViaCredentials":
+                    UnifiedMessages.HandleServiceMsg<CAuthentication_BeginAuthSessionViaCredentials_Response>( packetMsg );
+                    break;
+                case "PollAuthSessionStatus":
+                    UnifiedMessages.HandleServiceMsg<CAuthentication_PollAuthSessionStatus_Response>( packetMsg );
+                    break;
+                case "GetAuthSessionInfo":
+                    UnifiedMessages.HandleServiceMsg<CAuthentication_GetAuthSessionInfo_Response>( packetMsg );
+                    break;
+                case "UpdateAuthSessionWithMobileConfirmation":
+                    UnifiedMessages.HandleServiceMsg<CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response>( packetMsg );
+                    break;
+                case "UpdateAuthSessionWithSteamGuardCode":
+                    UnifiedMessages.HandleServiceMsg<CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response>( packetMsg );
+                    break;
+                case "GenerateAccessTokenForApp":
+                    UnifiedMessages.HandleServiceMsg<CAuthentication_AccessToken_GenerateForApp_Response>( packetMsg );
+                    break;
+                case "EnumerateTokens":
+                    UnifiedMessages.HandleServiceMsg<CAuthentication_RefreshToken_Enumerate_Response>( packetMsg );
+                    break;
+                case "GetAuthSessionsForAccount":
+                    UnifiedMessages.HandleServiceMsg<CAuthentication_GetAuthSessionsForAccount_Response>( packetMsg );
+                    break;
+                case "MigrateMobileSession":
+                    UnifiedMessages.HandleServiceMsg<CAuthentication_MigrateMobileSession_Response>( packetMsg );
+                    break;
+                case "RevokeToken":
+                    UnifiedMessages.HandleServiceMsg<CAuthentication_Token_Revoke_Response>( packetMsg );
+                    break;
+                case "RevokeRefreshToken":
+                    UnifiedMessages.HandleServiceMsg<CAuthentication_RefreshToken_Revoke_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface IAuthenticationSupport
+    public class AuthenticationSupport : SteamUnifiedMessages.UnifiedService
     {
-        CAuthenticationSupport_QueryRefreshTokensByAccount_Response QueryRefreshTokensByAccount(CAuthenticationSupport_QueryRefreshTokensByAccount_Request request);
-        CAuthenticationSupport_QueryRefreshTokenByID_Response QueryRefreshTokenByID(CAuthenticationSupport_QueryRefreshTokenByID_Request request);
-        CAuthenticationSupport_RevokeToken_Response RevokeToken(CAuthenticationSupport_RevokeToken_Request request);
-        CAuthenticationSupport_GetTokenHistory_Response GetTokenHistory(CAuthenticationSupport_GetTokenHistory_Request request);
+
+        const string SERVICE_NAME = "AuthenticationSupport";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthenticationSupport_QueryRefreshTokensByAccount_Response>> QueryRefreshTokensByAccount(CAuthenticationSupport_QueryRefreshTokensByAccount_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAuthenticationSupport_QueryRefreshTokensByAccount_Request, CAuthenticationSupport_QueryRefreshTokensByAccount_Response>( $"{SERVICE_NAME}.QueryRefreshTokensByAccount#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthenticationSupport_QueryRefreshTokenByID_Response>> QueryRefreshTokenByID(CAuthenticationSupport_QueryRefreshTokenByID_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAuthenticationSupport_QueryRefreshTokenByID_Request, CAuthenticationSupport_QueryRefreshTokenByID_Response>( $"{SERVICE_NAME}.QueryRefreshTokenByID#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthenticationSupport_RevokeToken_Response>> RevokeToken(CAuthenticationSupport_RevokeToken_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAuthenticationSupport_RevokeToken_Request, CAuthenticationSupport_RevokeToken_Response>( $"{SERVICE_NAME}.RevokeToken#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthenticationSupport_GetTokenHistory_Response>> GetTokenHistory(CAuthenticationSupport_GetTokenHistory_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAuthenticationSupport_GetTokenHistory_Request, CAuthenticationSupport_GetTokenHistory_Response>( $"{SERVICE_NAME}.GetTokenHistory#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "QueryRefreshTokensByAccount":
+                    UnifiedMessages.HandleServiceMsg<CAuthenticationSupport_QueryRefreshTokensByAccount_Response>( packetMsg );
+                    break;
+                case "QueryRefreshTokenByID":
+                    UnifiedMessages.HandleServiceMsg<CAuthenticationSupport_QueryRefreshTokenByID_Response>( packetMsg );
+                    break;
+                case "RevokeToken":
+                    UnifiedMessages.HandleServiceMsg<CAuthenticationSupport_RevokeToken_Response>( packetMsg );
+                    break;
+                case "GetTokenHistory":
+                    UnifiedMessages.HandleServiceMsg<CAuthenticationSupport_GetTokenHistory_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface ICloudGaming
+    public class CloudGaming : SteamUnifiedMessages.UnifiedService
     {
-        CCloudGaming_CreateNonce_Response CreateNonce(CCloudGaming_CreateNonce_Request request);
-        CCloudGaming_GetTimeRemaining_Response GetTimeRemaining(CCloudGaming_GetTimeRemaining_Request request);
+
+        const string SERVICE_NAME = "CloudGaming";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCloudGaming_CreateNonce_Response>> CreateNonce(CCloudGaming_CreateNonce_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCloudGaming_CreateNonce_Request, CCloudGaming_CreateNonce_Response>( $"{SERVICE_NAME}.CreateNonce#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCloudGaming_GetTimeRemaining_Response>> GetTimeRemaining(CCloudGaming_GetTimeRemaining_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCloudGaming_GetTimeRemaining_Request, CCloudGaming_GetTimeRemaining_Response>( $"{SERVICE_NAME}.GetTimeRemaining#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "CreateNonce":
+                    UnifiedMessages.HandleServiceMsg<CCloudGaming_CreateNonce_Response>( packetMsg );
+                    break;
+                case "GetTimeRemaining":
+                    UnifiedMessages.HandleServiceMsg<CCloudGaming_GetTimeRemaining_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

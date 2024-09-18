@@ -9,33 +9,204 @@
 namespace SteamKit2.Internal
 {
 
-    public interface IRemoteClient
+    public class RemoteClient : SteamUnifiedMessages.UnifiedService
     {
-        CRemoteClient_GetPairingInfo_Response GetPairingInfo(CRemoteClient_GetPairingInfo_Request request);
-        NoResponse NotifyOnline(CRemoteClient_Online_Notification request);
-        CRemoteClient_GetRecentClients_Response GetRecentClients(CRemoteClient_GetRecentClients_Request request);
-        CRemoteClient_MarkTaskComplete_Response MarkTaskComplete(CRemoteClient_MarkTaskComplete_Request request);
-        NoResponse NotifyReplyPacket(CRemoteClient_ReplyPacket_Notification request);
-        CRemoteClient_AllocateRelayServer_Response AllocateRelayServer(CRemoteClient_AllocateRelayServer_Request request);
-        CRemoteClient_AllocateSDR_Response AllocateSDR(CRemoteClient_AllocateSDR_Request request);
-        NoResponse SendSteamBroadcastPacket(CRemoteClient_SteamBroadcast_Notification request);
-        NoResponse SendSteamToSteamPacket(CRemoteClient_SteamToSteam_Notification request);
-        CRemotePlay_SessionStarted_Response SendRemotePlaySessionStarted(CRemotePlay_SessionStarted_Request request);
-        NoResponse SendRemotePlaySessionStopped(CRemotePlay_SessionStopped_Notification request);
-        NoResponse SendRemotePlayTogetherPacket(CRemotePlayTogether_Notification request);
-        CRemoteClient_CreateRemotePlayTogetherInvitation_Response CreateRemotePlayTogetherInvitation(CRemoteClient_CreateRemotePlayTogetherInvitation_Request request);
-        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response DeleteRemotePlayTogetherInvitation(CRemoteClient_DeleteRemotePlayTogetherInvitation_Request request);
+
+        const string SERVICE_NAME = "RemoteClient";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CRemoteClient_GetPairingInfo_Response>> GetPairingInfo(CRemoteClient_GetPairingInfo_Request request)
+        {
+            return UnifiedMessages.SendMessage<CRemoteClient_GetPairingInfo_Request, CRemoteClient_GetPairingInfo_Response>( $"{SERVICE_NAME}.GetPairingInfo#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyOnline(CRemoteClient_Online_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CRemoteClient_Online_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyOnline#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CRemoteClient_GetRecentClients_Response>> GetRecentClients(CRemoteClient_GetRecentClients_Request request)
+        {
+            return UnifiedMessages.SendMessage<CRemoteClient_GetRecentClients_Request, CRemoteClient_GetRecentClients_Response>( $"{SERVICE_NAME}.GetRecentClients#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CRemoteClient_MarkTaskComplete_Response>> MarkTaskComplete(CRemoteClient_MarkTaskComplete_Request request)
+        {
+            return UnifiedMessages.SendMessage<CRemoteClient_MarkTaskComplete_Request, CRemoteClient_MarkTaskComplete_Response>( $"{SERVICE_NAME}.MarkTaskComplete#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyReplyPacket(CRemoteClient_ReplyPacket_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CRemoteClient_ReplyPacket_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyReplyPacket#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CRemoteClient_AllocateRelayServer_Response>> AllocateRelayServer(CRemoteClient_AllocateRelayServer_Request request)
+        {
+            return UnifiedMessages.SendMessage<CRemoteClient_AllocateRelayServer_Request, CRemoteClient_AllocateRelayServer_Response>( $"{SERVICE_NAME}.AllocateRelayServer#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CRemoteClient_AllocateSDR_Response>> AllocateSDR(CRemoteClient_AllocateSDR_Request request)
+        {
+            return UnifiedMessages.SendMessage<CRemoteClient_AllocateSDR_Request, CRemoteClient_AllocateSDR_Response>( $"{SERVICE_NAME}.AllocateSDR#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> SendSteamBroadcastPacket(CRemoteClient_SteamBroadcast_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CRemoteClient_SteamBroadcast_Notification, NoResponse>( $"{SERVICE_NAME}.SendSteamBroadcastPacket#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> SendSteamToSteamPacket(CRemoteClient_SteamToSteam_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CRemoteClient_SteamToSteam_Notification, NoResponse>( $"{SERVICE_NAME}.SendSteamToSteamPacket#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CRemotePlay_SessionStarted_Response>> SendRemotePlaySessionStarted(CRemotePlay_SessionStarted_Request request)
+        {
+            return UnifiedMessages.SendMessage<CRemotePlay_SessionStarted_Request, CRemotePlay_SessionStarted_Response>( $"{SERVICE_NAME}.SendRemotePlaySessionStarted#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> SendRemotePlaySessionStopped(CRemotePlay_SessionStopped_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CRemotePlay_SessionStopped_Notification, NoResponse>( $"{SERVICE_NAME}.SendRemotePlaySessionStopped#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> SendRemotePlayTogetherPacket(CRemotePlayTogether_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CRemotePlayTogether_Notification, NoResponse>( $"{SERVICE_NAME}.SendRemotePlayTogetherPacket#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CRemoteClient_CreateRemotePlayTogetherInvitation_Response>> CreateRemotePlayTogetherInvitation(CRemoteClient_CreateRemotePlayTogetherInvitation_Request request)
+        {
+            return UnifiedMessages.SendMessage<CRemoteClient_CreateRemotePlayTogetherInvitation_Request, CRemoteClient_CreateRemotePlayTogetherInvitation_Response>( $"{SERVICE_NAME}.CreateRemotePlayTogetherInvitation#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CRemoteClient_DeleteRemotePlayTogetherInvitation_Response>> DeleteRemotePlayTogetherInvitation(CRemoteClient_DeleteRemotePlayTogetherInvitation_Request request)
+        {
+            return UnifiedMessages.SendMessage<CRemoteClient_DeleteRemotePlayTogetherInvitation_Request, CRemoteClient_DeleteRemotePlayTogetherInvitation_Response>( $"{SERVICE_NAME}.DeleteRemotePlayTogetherInvitation#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "GetPairingInfo":
+                    UnifiedMessages.HandleServiceMsg<CRemoteClient_GetPairingInfo_Response>( packetMsg );
+                    break;
+                case "NotifyOnline":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "GetRecentClients":
+                    UnifiedMessages.HandleServiceMsg<CRemoteClient_GetRecentClients_Response>( packetMsg );
+                    break;
+                case "MarkTaskComplete":
+                    UnifiedMessages.HandleServiceMsg<CRemoteClient_MarkTaskComplete_Response>( packetMsg );
+                    break;
+                case "NotifyReplyPacket":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "AllocateRelayServer":
+                    UnifiedMessages.HandleServiceMsg<CRemoteClient_AllocateRelayServer_Response>( packetMsg );
+                    break;
+                case "AllocateSDR":
+                    UnifiedMessages.HandleServiceMsg<CRemoteClient_AllocateSDR_Response>( packetMsg );
+                    break;
+                case "SendSteamBroadcastPacket":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "SendSteamToSteamPacket":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "SendRemotePlaySessionStarted":
+                    UnifiedMessages.HandleServiceMsg<CRemotePlay_SessionStarted_Response>( packetMsg );
+                    break;
+                case "SendRemotePlaySessionStopped":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "SendRemotePlayTogetherPacket":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "CreateRemotePlayTogetherInvitation":
+                    UnifiedMessages.HandleServiceMsg<CRemoteClient_CreateRemotePlayTogetherInvitation_Response>( packetMsg );
+                    break;
+                case "DeleteRemotePlayTogetherInvitation":
+                    UnifiedMessages.HandleServiceMsg<CRemoteClient_DeleteRemotePlayTogetherInvitation_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface IRemoteClientSteamClient
+    public class RemoteClientSteamClient : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse NotifyRegisterStatusUpdate(CRemoteClient_RegisterStatusUpdate_Notification request);
-        NoResponse NotifyUnregisterStatusUpdate(CRemoteClient_UnregisterStatusUpdate_Notification request);
-        NoResponse NotifyRemotePacket(CRemoteClient_RemotePacket_Notification request);
-        NoResponse NotifySteamBroadcastPacket(CRemoteClient_SteamBroadcast_Notification request);
-        NoResponse NotifySteamToSteamPacket(CRemoteClient_SteamToSteam_Notification request);
-        NoResponse NotifyRemotePlayTogetherPacket(CRemotePlayTogether_Notification request);
-        NoResponse NotifyTaskList(CRemoteClient_TaskList_Notification request);
+
+        const string SERVICE_NAME = "RemoteClientSteamClient";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyRegisterStatusUpdate(CRemoteClient_RegisterStatusUpdate_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CRemoteClient_RegisterStatusUpdate_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyRegisterStatusUpdate#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyUnregisterStatusUpdate(CRemoteClient_UnregisterStatusUpdate_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CRemoteClient_UnregisterStatusUpdate_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyUnregisterStatusUpdate#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyRemotePacket(CRemoteClient_RemotePacket_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CRemoteClient_RemotePacket_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyRemotePacket#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifySteamBroadcastPacket(CRemoteClient_SteamBroadcast_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CRemoteClient_SteamBroadcast_Notification, NoResponse>( $"{SERVICE_NAME}.NotifySteamBroadcastPacket#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifySteamToSteamPacket(CRemoteClient_SteamToSteam_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CRemoteClient_SteamToSteam_Notification, NoResponse>( $"{SERVICE_NAME}.NotifySteamToSteamPacket#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyRemotePlayTogetherPacket(CRemotePlayTogether_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CRemotePlayTogether_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyRemotePlayTogetherPacket#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyTaskList(CRemoteClient_TaskList_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CRemoteClient_TaskList_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyTaskList#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "NotifyRegisterStatusUpdate":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "NotifyUnregisterStatusUpdate":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "NotifyRemotePacket":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "NotifySteamBroadcastPacket":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "NotifySteamToSteamPacket":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "NotifyRemotePlayTogetherPacket":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "NotifyTaskList":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

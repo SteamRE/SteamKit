@@ -352,14 +352,68 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface IParties
+    public class Parties : SteamUnifiedMessages.UnifiedService
     {
-        CParties_JoinParty_Response JoinParty(CParties_JoinParty_Request request);
-        CParties_CreateBeacon_Response CreateBeacon(CParties_CreateBeacon_Request request);
-        CParties_OnReservationCompleted_Response OnReservationCompleted(CParties_OnReservationCompleted_Request request);
-        CParties_CancelReservation_Response CancelReservation(CParties_CancelReservation_Request request);
-        CParties_ChangeNumOpenSlots_Response ChangeNumOpenSlots(CParties_ChangeNumOpenSlots_Request request);
-        CParties_DestroyBeacon_Response DestroyBeacon(CParties_DestroyBeacon_Request request);
+
+        const string SERVICE_NAME = "Parties";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CParties_JoinParty_Response>> JoinParty(CParties_JoinParty_Request request)
+        {
+            return UnifiedMessages.SendMessage<CParties_JoinParty_Request, CParties_JoinParty_Response>( $"{SERVICE_NAME}.JoinParty#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CParties_CreateBeacon_Response>> CreateBeacon(CParties_CreateBeacon_Request request)
+        {
+            return UnifiedMessages.SendMessage<CParties_CreateBeacon_Request, CParties_CreateBeacon_Response>( $"{SERVICE_NAME}.CreateBeacon#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CParties_OnReservationCompleted_Response>> OnReservationCompleted(CParties_OnReservationCompleted_Request request)
+        {
+            return UnifiedMessages.SendMessage<CParties_OnReservationCompleted_Request, CParties_OnReservationCompleted_Response>( $"{SERVICE_NAME}.OnReservationCompleted#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CParties_CancelReservation_Response>> CancelReservation(CParties_CancelReservation_Request request)
+        {
+            return UnifiedMessages.SendMessage<CParties_CancelReservation_Request, CParties_CancelReservation_Response>( $"{SERVICE_NAME}.CancelReservation#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CParties_ChangeNumOpenSlots_Response>> ChangeNumOpenSlots(CParties_ChangeNumOpenSlots_Request request)
+        {
+            return UnifiedMessages.SendMessage<CParties_ChangeNumOpenSlots_Request, CParties_ChangeNumOpenSlots_Response>( $"{SERVICE_NAME}.ChangeNumOpenSlots#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CParties_DestroyBeacon_Response>> DestroyBeacon(CParties_DestroyBeacon_Request request)
+        {
+            return UnifiedMessages.SendMessage<CParties_DestroyBeacon_Request, CParties_DestroyBeacon_Response>( $"{SERVICE_NAME}.DestroyBeacon#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "JoinParty":
+                    UnifiedMessages.HandleServiceMsg<CParties_JoinParty_Response>( packetMsg );
+                    break;
+                case "CreateBeacon":
+                    UnifiedMessages.HandleServiceMsg<CParties_CreateBeacon_Response>( packetMsg );
+                    break;
+                case "OnReservationCompleted":
+                    UnifiedMessages.HandleServiceMsg<CParties_OnReservationCompleted_Response>( packetMsg );
+                    break;
+                case "CancelReservation":
+                    UnifiedMessages.HandleServiceMsg<CParties_CancelReservation_Response>( packetMsg );
+                    break;
+                case "ChangeNumOpenSlots":
+                    UnifiedMessages.HandleServiceMsg<CParties_ChangeNumOpenSlots_Response>( packetMsg );
+                    break;
+                case "DestroyBeacon":
+                    UnifiedMessages.HandleServiceMsg<CParties_DestroyBeacon_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

@@ -955,8 +955,6 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgClientToGCBingoDevAddTokensResponse = 9004,
         k_EMsgClientToGCBingoDevClearInventory = 9005,
         k_EMsgClientToGCBingoDevClearInventoryResponse = 9006,
-        k_EMsgGCCompendiumRemoveAllSelections = 9007,
-        k_EMsgGCCompendiumRemoveAllSelectionsResponse = 9008,
     }
 
 }

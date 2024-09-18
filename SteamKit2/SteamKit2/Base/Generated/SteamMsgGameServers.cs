@@ -734,17 +734,76 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface IGameServers
+    public class GameServers : SteamUnifiedMessages.UnifiedService
     {
-        CGameServers_GetServerList_Response GetServerList(CGameServers_GetServerList_Request request);
-        CGameServers_IPsWithSteamIDs_Response GetServerSteamIDsByIP(CGameServers_GetServerSteamIDsByIP_Request request);
-        CGameServers_IPsWithSteamIDs_Response GetServerIPsBySteamID(CGameServers_GetServerIPsBySteamID_Request request);
-        CGameServers_GameServerQuery_Response QueryByFakeIP(CGameServers_QueryByFakeIP_Request request);
+
+        const string SERVICE_NAME = "GameServers";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameServers_GetServerList_Response>> GetServerList(CGameServers_GetServerList_Request request)
+        {
+            return UnifiedMessages.SendMessage<CGameServers_GetServerList_Request, CGameServers_GetServerList_Response>( $"{SERVICE_NAME}.GetServerList#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameServers_IPsWithSteamIDs_Response>> GetServerSteamIDsByIP(CGameServers_GetServerSteamIDsByIP_Request request)
+        {
+            return UnifiedMessages.SendMessage<CGameServers_GetServerSteamIDsByIP_Request, CGameServers_IPsWithSteamIDs_Response>( $"{SERVICE_NAME}.GetServerSteamIDsByIP#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameServers_IPsWithSteamIDs_Response>> GetServerIPsBySteamID(CGameServers_GetServerIPsBySteamID_Request request)
+        {
+            return UnifiedMessages.SendMessage<CGameServers_GetServerIPsBySteamID_Request, CGameServers_IPsWithSteamIDs_Response>( $"{SERVICE_NAME}.GetServerIPsBySteamID#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameServers_GameServerQuery_Response>> QueryByFakeIP(CGameServers_QueryByFakeIP_Request request)
+        {
+            return UnifiedMessages.SendMessage<CGameServers_QueryByFakeIP_Request, CGameServers_GameServerQuery_Response>( $"{SERVICE_NAME}.QueryByFakeIP#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "GetServerList":
+                    UnifiedMessages.HandleServiceMsg<CGameServers_GetServerList_Response>( packetMsg );
+                    break;
+                case "GetServerSteamIDsByIP":
+                    UnifiedMessages.HandleServiceMsg<CGameServers_IPsWithSteamIDs_Response>( packetMsg );
+                    break;
+                case "GetServerIPsBySteamID":
+                    UnifiedMessages.HandleServiceMsg<CGameServers_IPsWithSteamIDs_Response>( packetMsg );
+                    break;
+                case "QueryByFakeIP":
+                    UnifiedMessages.HandleServiceMsg<CGameServers_GameServerQuery_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface IGameServerClient
+    public class GameServerClient : SteamUnifiedMessages.UnifiedService
     {
-        GameServerClient_QueryServerData_Response QueryServerData(GameServerClient_QueryServerData_Request request);
+
+        const string SERVICE_NAME = "GameServerClient";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<GameServerClient_QueryServerData_Response>> QueryServerData(GameServerClient_QueryServerData_Request request)
+        {
+            return UnifiedMessages.SendMessage<GameServerClient_QueryServerData_Request, GameServerClient_QueryServerData_Response>( $"{SERVICE_NAME}.QueryServerData#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "QueryServerData":
+                    UnifiedMessages.HandleServiceMsg<GameServerClient_QueryServerData_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

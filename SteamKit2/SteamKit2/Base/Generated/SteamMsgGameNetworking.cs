@@ -92,10 +92,36 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface IGameNetworking
+    public class GameNetworking : SteamUnifiedMessages.UnifiedService
     {
-        CGameNetworking_AllocateFakeIP_Response AllocateFakeIP(CGameNetworking_AllocateFakeIP_Request request);
-        NoResponse NotifyReleaseFakeIP(CGameNetworking_ReleaseFakeIP_Notification request);
+
+        const string SERVICE_NAME = "GameNetworking";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNetworking_AllocateFakeIP_Response>> AllocateFakeIP(CGameNetworking_AllocateFakeIP_Request request)
+        {
+            return UnifiedMessages.SendMessage<CGameNetworking_AllocateFakeIP_Request, CGameNetworking_AllocateFakeIP_Response>( $"{SERVICE_NAME}.AllocateFakeIP#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyReleaseFakeIP(CGameNetworking_ReleaseFakeIP_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CGameNetworking_ReleaseFakeIP_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyReleaseFakeIP#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "AllocateFakeIP":
+                    UnifiedMessages.HandleServiceMsg<CGameNetworking_AllocateFakeIP_Response>( packetMsg );
+                    break;
+                case "NotifyReleaseFakeIP":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

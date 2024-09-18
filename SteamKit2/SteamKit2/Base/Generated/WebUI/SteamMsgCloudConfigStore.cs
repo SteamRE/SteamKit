@@ -201,15 +201,60 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public interface ICloudConfigStore
+    public class CloudConfigStore : SteamUnifiedMessages.UnifiedService
     {
-        CCloudConfigStore_Download_Response Download(CCloudConfigStore_Download_Request request);
-        CCloudConfigStore_Upload_Response Upload(CCloudConfigStore_Upload_Request request);
+
+        const string SERVICE_NAME = "CloudConfigStore";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCloudConfigStore_Download_Response>> Download(CCloudConfigStore_Download_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCloudConfigStore_Download_Request, CCloudConfigStore_Download_Response>( $"{SERVICE_NAME}.Download#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCloudConfigStore_Upload_Response>> Upload(CCloudConfigStore_Upload_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCloudConfigStore_Upload_Request, CCloudConfigStore_Upload_Response>( $"{SERVICE_NAME}.Upload#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "Download":
+                    UnifiedMessages.HandleServiceMsg<CCloudConfigStore_Download_Response>( packetMsg );
+                    break;
+                case "Upload":
+                    UnifiedMessages.HandleServiceMsg<CCloudConfigStore_Upload_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface ICloudConfigStoreClient
+    public class CloudConfigStoreClient : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse NotifyChange(CCloudConfigStore_Change_Notification request);
+
+        const string SERVICE_NAME = "CloudConfigStoreClient";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyChange(CCloudConfigStore_Change_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CCloudConfigStore_Change_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyChange#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "NotifyChange":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

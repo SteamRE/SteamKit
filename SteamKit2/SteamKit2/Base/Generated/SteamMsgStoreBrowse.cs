@@ -2667,13 +2667,60 @@ namespace SteamKit2.Internal
         k_EStoreCategoryType_MAX = 5,
     }
 
-    public interface IStoreBrowse
+    public class StoreBrowse : SteamUnifiedMessages.UnifiedService
     {
-        CStoreBrowse_GetItems_Response GetItems(CStoreBrowse_GetItems_Request request);
-        CStoreBrowse_GetStoreCategories_Response GetStoreCategories(CStoreBrowse_GetStoreCategories_Request request);
-        CStoreBrowse_GetDLCForApps_Response GetDLCForApps(CStoreBrowse_GetDLCForApps_Request request);
-        CStoreBrowse_GetDLCForAppsSolr_Response GetDLCForAppsSolr(CStoreBrowse_GetDLCForAppsSolr_Request request);
-        CStoreBrowse_GetHardwareItems_Response GetHardwareItems(CStoreBrowse_GetHardwareItems_Request request);
+
+        const string SERVICE_NAME = "StoreBrowse";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreBrowse_GetItems_Response>> GetItems(CStoreBrowse_GetItems_Request request)
+        {
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetItems_Request, CStoreBrowse_GetItems_Response>( $"{SERVICE_NAME}.GetItems#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreBrowse_GetStoreCategories_Response>> GetStoreCategories(CStoreBrowse_GetStoreCategories_Request request)
+        {
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetStoreCategories_Request, CStoreBrowse_GetStoreCategories_Response>( $"{SERVICE_NAME}.GetStoreCategories#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreBrowse_GetDLCForApps_Response>> GetDLCForApps(CStoreBrowse_GetDLCForApps_Request request)
+        {
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetDLCForApps_Request, CStoreBrowse_GetDLCForApps_Response>( $"{SERVICE_NAME}.GetDLCForApps#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreBrowse_GetDLCForAppsSolr_Response>> GetDLCForAppsSolr(CStoreBrowse_GetDLCForAppsSolr_Request request)
+        {
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetDLCForAppsSolr_Request, CStoreBrowse_GetDLCForAppsSolr_Response>( $"{SERVICE_NAME}.GetDLCForAppsSolr#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreBrowse_GetHardwareItems_Response>> GetHardwareItems(CStoreBrowse_GetHardwareItems_Request request)
+        {
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetHardwareItems_Request, CStoreBrowse_GetHardwareItems_Response>( $"{SERVICE_NAME}.GetHardwareItems#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "GetItems":
+                    UnifiedMessages.HandleServiceMsg<CStoreBrowse_GetItems_Response>( packetMsg );
+                    break;
+                case "GetStoreCategories":
+                    UnifiedMessages.HandleServiceMsg<CStoreBrowse_GetStoreCategories_Response>( packetMsg );
+                    break;
+                case "GetDLCForApps":
+                    UnifiedMessages.HandleServiceMsg<CStoreBrowse_GetDLCForApps_Response>( packetMsg );
+                    break;
+                case "GetDLCForAppsSolr":
+                    UnifiedMessages.HandleServiceMsg<CStoreBrowse_GetDLCForAppsSolr_Response>( packetMsg );
+                    break;
+                case "GetHardwareItems":
+                    UnifiedMessages.HandleServiceMsg<CStoreBrowse_GetHardwareItems_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

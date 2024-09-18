@@ -1357,16 +1357,6 @@ namespace SteamKit2.Internal
         public void Resetgameid() => __pbn__gameid = null;
         private ulong? __pbn__gameid;
 
-        [global::ProtoBuf.ProtoMember(5)]
-        public bool instant_clip
-        {
-            get => __pbn__instant_clip.GetValueOrDefault();
-            set => __pbn__instant_clip = value;
-        }
-        public bool ShouldSerializeinstant_clip() => __pbn__instant_clip != null;
-        public void Resetinstant_clip() => __pbn__instant_clip = null;
-        private bool? __pbn__instant_clip;
-
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1407,22 +1397,132 @@ namespace SteamKit2.Internal
         k_EClipRangeMethod_EntireClip = 6,
     }
 
-    public interface IClientMetrics
+    public class ClientMetrics : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse ClientAppInterfaceStatsReport(CClientMetrics_AppInterfaceStats_Notification request);
-        NoResponse ClientIPv6ConnectivityReport(CClientMetrics_IPv6Connectivity_Notification request);
-        NoResponse SteamPipeWorkStatsReport(CClientMetrics_SteamPipeWorkStats_Notification request);
-        NoResponse ReportReactUsage(CClientMetrics_ReportReactUsage_Notification request);
-        NoResponse ReportClientError(CClientMetrics_ReportClientError_Notification request);
-        NoResponse ClientBootstrapReport(CClientMetrics_ClientBootstrap_Notification request);
-        NoResponse ClientDownloadRatesReport(CClientMetrics_DownloadRates_Notification request);
-        NoResponse ClientContentValidationReport(CClientMetrics_ContentValidation_Notification request);
-        NoResponse ClientCloudAppSyncStats(CClientMetrics_CloudAppSyncStats_Notification request);
-        NoResponse ClientDownloadResponseCodeCounts(CClientMetrics_ContentDownloadResponse_Counts_Notification request);
-        NoResponse ReportClientArgs(CClientMetrics_ReportClientArgs_Notification request);
-        NoResponse ReportClipShare(CClientMetrics_ClipShare_Notification request);
-        NoResponse ReportClipRange(CClientMetrics_ClipRange_Notification request);
-        NoResponse ReportEndGameRecording(CClientMetrics_EndGameRecording_Notification request);
+
+        const string SERVICE_NAME = "ClientMetrics";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientAppInterfaceStatsReport(CClientMetrics_AppInterfaceStats_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CClientMetrics_AppInterfaceStats_Notification, NoResponse>( $"{SERVICE_NAME}.ClientAppInterfaceStatsReport#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientIPv6ConnectivityReport(CClientMetrics_IPv6Connectivity_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CClientMetrics_IPv6Connectivity_Notification, NoResponse>( $"{SERVICE_NAME}.ClientIPv6ConnectivityReport#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> SteamPipeWorkStatsReport(CClientMetrics_SteamPipeWorkStats_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CClientMetrics_SteamPipeWorkStats_Notification, NoResponse>( $"{SERVICE_NAME}.SteamPipeWorkStatsReport#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ReportReactUsage(CClientMetrics_ReportReactUsage_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CClientMetrics_ReportReactUsage_Notification, NoResponse>( $"{SERVICE_NAME}.ReportReactUsage#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ReportClientError(CClientMetrics_ReportClientError_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CClientMetrics_ReportClientError_Notification, NoResponse>( $"{SERVICE_NAME}.ReportClientError#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientBootstrapReport(CClientMetrics_ClientBootstrap_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CClientMetrics_ClientBootstrap_Notification, NoResponse>( $"{SERVICE_NAME}.ClientBootstrapReport#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientDownloadRatesReport(CClientMetrics_DownloadRates_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CClientMetrics_DownloadRates_Notification, NoResponse>( $"{SERVICE_NAME}.ClientDownloadRatesReport#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientContentValidationReport(CClientMetrics_ContentValidation_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CClientMetrics_ContentValidation_Notification, NoResponse>( $"{SERVICE_NAME}.ClientContentValidationReport#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientCloudAppSyncStats(CClientMetrics_CloudAppSyncStats_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CClientMetrics_CloudAppSyncStats_Notification, NoResponse>( $"{SERVICE_NAME}.ClientCloudAppSyncStats#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientDownloadResponseCodeCounts(CClientMetrics_ContentDownloadResponse_Counts_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CClientMetrics_ContentDownloadResponse_Counts_Notification, NoResponse>( $"{SERVICE_NAME}.ClientDownloadResponseCodeCounts#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ReportClientArgs(CClientMetrics_ReportClientArgs_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CClientMetrics_ReportClientArgs_Notification, NoResponse>( $"{SERVICE_NAME}.ReportClientArgs#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ReportClipShare(CClientMetrics_ClipShare_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CClientMetrics_ClipShare_Notification, NoResponse>( $"{SERVICE_NAME}.ReportClipShare#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ReportClipRange(CClientMetrics_ClipRange_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CClientMetrics_ClipRange_Notification, NoResponse>( $"{SERVICE_NAME}.ReportClipRange#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ReportEndGameRecording(CClientMetrics_EndGameRecording_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CClientMetrics_EndGameRecording_Notification, NoResponse>( $"{SERVICE_NAME}.ReportEndGameRecording#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "ClientAppInterfaceStatsReport":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "ClientIPv6ConnectivityReport":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "SteamPipeWorkStatsReport":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "ReportReactUsage":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "ReportClientError":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "ClientBootstrapReport":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "ClientDownloadRatesReport":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "ClientContentValidationReport":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "ClientCloudAppSyncStats":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "ClientDownloadResponseCodeCounts":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "ReportClientArgs":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "ReportClipShare":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "ReportClipRange":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+                case "ReportEndGameRecording":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

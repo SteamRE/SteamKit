@@ -2165,27 +2165,172 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public interface ICommunity
+    public class Community : SteamUnifiedMessages.UnifiedService
     {
-        CCommunity_ClearSinglePartnerEventsAppPriority_Response ClearSinglePartnerEventsAppPriority(CCommunity_ClearSinglePartnerEventsAppPriority_Request request);
-        CCommunity_ClearUserPartnerEventsAppPriorities_Response ClearUserPartnerEventsAppPriorities(CCommunity_ClearUserPartnerEventsAppPriorities_Request request);
-        CCommunity_DeleteCommentFromThread_Response DeleteCommentFromThread(CCommunity_DeleteCommentFromThread_Request request);
-        CCommunity_GetAppRichPresenceLocalization_Response GetAppRichPresenceLocalization(CCommunity_GetAppRichPresenceLocalization_Request request);
-        CCommunity_GetApps_Response GetApps(CCommunity_GetApps_Request request);
-        CCommunity_GetAvatarHistory_Response GetAvatarHistory(CCommunity_GetAvatarHistory_Request request);
-        CCommunity_GetBestEventsForUser_Response GetBestEventsForUser(CCommunity_GetBestEventsForUser_Request request);
-        CCommunity_GetClanAnnouncementVoteForUser_Response GetClanAnnouncementVoteForUser(CCommunity_GetClanAnnouncementVoteForUser_Request request);
-        CCommunity_GetCommentThread_Response GetCommentThread(CCommunity_GetCommentThread_Request request);
-        CCommunity_GetCommentThreadRatings_Response GetCommentThreadRatings(CCommunity_GetCommentThreadRatings_Request request);
-        CCommunity_GetUserPartnerEventNews_Response GetUserPartnerEventNews(CCommunity_GetUserPartnerEventNews_Request request);
-        CCommunity_GetUserPartnerEventsAppPriorities_Response GetUserPartnerEventsAppPriorities(CCommunity_GetUserPartnerEventsAppPriorities_Request request);
-        CCommunity_GetUserPartnerEventViewStatus_Response GetUserPartnerEventViewStatus(CCommunity_GetUserPartnerEventViewStatus_Request request);
-        CCommunity_MarkPartnerEventsForUser_Response MarkPartnerEventsForUser(CCommunity_MarkPartnerEventsForUser_Request request);
-        CCommunity_PartnerEventsShowLessForApp_Response PartnerEventsShowLessForApp(CCommunity_PartnerEventsShowLessForApp_Request request);
-        CCommunity_PartnerEventsShowMoreForApp_Response PartnerEventsShowMoreForApp(CCommunity_PartnerEventsShowMoreForApp_Request request);
-        CCommunity_PostCommentToThread_Response PostCommentToThread(CCommunity_PostCommentToThread_Request request);
-        CCommunity_RateClanAnnouncement_Response RateClanAnnouncement(CCommunity_RateClanAnnouncement_Request request);
-        CCommunity_RateCommentThread_Response RateCommentThread(CCommunity_RateCommentThread_Request request);
+
+        const string SERVICE_NAME = "Community";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_ClearSinglePartnerEventsAppPriority_Response>> ClearSinglePartnerEventsAppPriority(CCommunity_ClearSinglePartnerEventsAppPriority_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_ClearSinglePartnerEventsAppPriority_Request, CCommunity_ClearSinglePartnerEventsAppPriority_Response>( $"{SERVICE_NAME}.ClearSinglePartnerEventsAppPriority#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_ClearUserPartnerEventsAppPriorities_Response>> ClearUserPartnerEventsAppPriorities(CCommunity_ClearUserPartnerEventsAppPriorities_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_ClearUserPartnerEventsAppPriorities_Request, CCommunity_ClearUserPartnerEventsAppPriorities_Response>( $"{SERVICE_NAME}.ClearUserPartnerEventsAppPriorities#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_DeleteCommentFromThread_Response>> DeleteCommentFromThread(CCommunity_DeleteCommentFromThread_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_DeleteCommentFromThread_Request, CCommunity_DeleteCommentFromThread_Response>( $"{SERVICE_NAME}.DeleteCommentFromThread#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetAppRichPresenceLocalization_Response>> GetAppRichPresenceLocalization(CCommunity_GetAppRichPresenceLocalization_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_GetAppRichPresenceLocalization_Request, CCommunity_GetAppRichPresenceLocalization_Response>( $"{SERVICE_NAME}.GetAppRichPresenceLocalization#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetApps_Response>> GetApps(CCommunity_GetApps_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_GetApps_Request, CCommunity_GetApps_Response>( $"{SERVICE_NAME}.GetApps#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetAvatarHistory_Response>> GetAvatarHistory(CCommunity_GetAvatarHistory_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_GetAvatarHistory_Request, CCommunity_GetAvatarHistory_Response>( $"{SERVICE_NAME}.GetAvatarHistory#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetBestEventsForUser_Response>> GetBestEventsForUser(CCommunity_GetBestEventsForUser_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_GetBestEventsForUser_Request, CCommunity_GetBestEventsForUser_Response>( $"{SERVICE_NAME}.GetBestEventsForUser#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetClanAnnouncementVoteForUser_Response>> GetClanAnnouncementVoteForUser(CCommunity_GetClanAnnouncementVoteForUser_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_GetClanAnnouncementVoteForUser_Request, CCommunity_GetClanAnnouncementVoteForUser_Response>( $"{SERVICE_NAME}.GetClanAnnouncementVoteForUser#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetCommentThread_Response>> GetCommentThread(CCommunity_GetCommentThread_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_GetCommentThread_Request, CCommunity_GetCommentThread_Response>( $"{SERVICE_NAME}.GetCommentThread#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetCommentThreadRatings_Response>> GetCommentThreadRatings(CCommunity_GetCommentThreadRatings_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_GetCommentThreadRatings_Request, CCommunity_GetCommentThreadRatings_Response>( $"{SERVICE_NAME}.GetCommentThreadRatings#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetUserPartnerEventNews_Response>> GetUserPartnerEventNews(CCommunity_GetUserPartnerEventNews_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_GetUserPartnerEventNews_Request, CCommunity_GetUserPartnerEventNews_Response>( $"{SERVICE_NAME}.GetUserPartnerEventNews#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetUserPartnerEventsAppPriorities_Response>> GetUserPartnerEventsAppPriorities(CCommunity_GetUserPartnerEventsAppPriorities_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_GetUserPartnerEventsAppPriorities_Request, CCommunity_GetUserPartnerEventsAppPriorities_Response>( $"{SERVICE_NAME}.GetUserPartnerEventsAppPriorities#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetUserPartnerEventViewStatus_Response>> GetUserPartnerEventViewStatus(CCommunity_GetUserPartnerEventViewStatus_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_GetUserPartnerEventViewStatus_Request, CCommunity_GetUserPartnerEventViewStatus_Response>( $"{SERVICE_NAME}.GetUserPartnerEventViewStatus#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_MarkPartnerEventsForUser_Response>> MarkPartnerEventsForUser(CCommunity_MarkPartnerEventsForUser_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_MarkPartnerEventsForUser_Request, CCommunity_MarkPartnerEventsForUser_Response>( $"{SERVICE_NAME}.MarkPartnerEventsForUser#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_PartnerEventsShowLessForApp_Response>> PartnerEventsShowLessForApp(CCommunity_PartnerEventsShowLessForApp_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_PartnerEventsShowLessForApp_Request, CCommunity_PartnerEventsShowLessForApp_Response>( $"{SERVICE_NAME}.PartnerEventsShowLessForApp#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_PartnerEventsShowMoreForApp_Response>> PartnerEventsShowMoreForApp(CCommunity_PartnerEventsShowMoreForApp_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_PartnerEventsShowMoreForApp_Request, CCommunity_PartnerEventsShowMoreForApp_Response>( $"{SERVICE_NAME}.PartnerEventsShowMoreForApp#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_PostCommentToThread_Response>> PostCommentToThread(CCommunity_PostCommentToThread_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_PostCommentToThread_Request, CCommunity_PostCommentToThread_Response>( $"{SERVICE_NAME}.PostCommentToThread#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_RateClanAnnouncement_Response>> RateClanAnnouncement(CCommunity_RateClanAnnouncement_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_RateClanAnnouncement_Request, CCommunity_RateClanAnnouncement_Response>( $"{SERVICE_NAME}.RateClanAnnouncement#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_RateCommentThread_Response>> RateCommentThread(CCommunity_RateCommentThread_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCommunity_RateCommentThread_Request, CCommunity_RateCommentThread_Response>( $"{SERVICE_NAME}.RateCommentThread#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "ClearSinglePartnerEventsAppPriority":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_ClearSinglePartnerEventsAppPriority_Response>( packetMsg );
+                    break;
+                case "ClearUserPartnerEventsAppPriorities":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_ClearUserPartnerEventsAppPriorities_Response>( packetMsg );
+                    break;
+                case "DeleteCommentFromThread":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_DeleteCommentFromThread_Response>( packetMsg );
+                    break;
+                case "GetAppRichPresenceLocalization":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_GetAppRichPresenceLocalization_Response>( packetMsg );
+                    break;
+                case "GetApps":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_GetApps_Response>( packetMsg );
+                    break;
+                case "GetAvatarHistory":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_GetAvatarHistory_Response>( packetMsg );
+                    break;
+                case "GetBestEventsForUser":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_GetBestEventsForUser_Response>( packetMsg );
+                    break;
+                case "GetClanAnnouncementVoteForUser":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_GetClanAnnouncementVoteForUser_Response>( packetMsg );
+                    break;
+                case "GetCommentThread":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_GetCommentThread_Response>( packetMsg );
+                    break;
+                case "GetCommentThreadRatings":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_GetCommentThreadRatings_Response>( packetMsg );
+                    break;
+                case "GetUserPartnerEventNews":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_GetUserPartnerEventNews_Response>( packetMsg );
+                    break;
+                case "GetUserPartnerEventsAppPriorities":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_GetUserPartnerEventsAppPriorities_Response>( packetMsg );
+                    break;
+                case "GetUserPartnerEventViewStatus":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_GetUserPartnerEventViewStatus_Response>( packetMsg );
+                    break;
+                case "MarkPartnerEventsForUser":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_MarkPartnerEventsForUser_Response>( packetMsg );
+                    break;
+                case "PartnerEventsShowLessForApp":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_PartnerEventsShowLessForApp_Response>( packetMsg );
+                    break;
+                case "PartnerEventsShowMoreForApp":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_PartnerEventsShowMoreForApp_Response>( packetMsg );
+                    break;
+                case "PostCommentToThread":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_PostCommentToThread_Response>( packetMsg );
+                    break;
+                case "RateClanAnnouncement":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_RateClanAnnouncement_Response>( packetMsg );
+                    break;
+                case "RateCommentThread":
+                    UnifiedMessages.HandleServiceMsg<CCommunity_RateCommentThread_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

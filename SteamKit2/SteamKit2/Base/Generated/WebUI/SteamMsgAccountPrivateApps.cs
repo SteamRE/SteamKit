@@ -85,15 +85,60 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public interface IAccountPrivateApps
+    public class AccountPrivateApps : SteamUnifiedMessages.UnifiedService
     {
-        CAccountPrivateApps_GetPrivateAppList_Response GetPrivateAppList(CAccountPrivateApps_GetPrivateAppList_Request request);
-        CAccountPrivateApps_ToggleAppPrivacy_Response ToggleAppPrivacy(CAccountPrivateApps_ToggleAppPrivacy_Request request);
+
+        const string SERVICE_NAME = "AccountPrivateApps";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountPrivateApps_GetPrivateAppList_Response>> GetPrivateAppList(CAccountPrivateApps_GetPrivateAppList_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAccountPrivateApps_GetPrivateAppList_Request, CAccountPrivateApps_GetPrivateAppList_Response>( $"{SERVICE_NAME}.GetPrivateAppList#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountPrivateApps_ToggleAppPrivacy_Response>> ToggleAppPrivacy(CAccountPrivateApps_ToggleAppPrivacy_Request request)
+        {
+            return UnifiedMessages.SendMessage<CAccountPrivateApps_ToggleAppPrivacy_Request, CAccountPrivateApps_ToggleAppPrivacy_Response>( $"{SERVICE_NAME}.ToggleAppPrivacy#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "GetPrivateAppList":
+                    UnifiedMessages.HandleServiceMsg<CAccountPrivateApps_GetPrivateAppList_Response>( packetMsg );
+                    break;
+                case "ToggleAppPrivacy":
+                    UnifiedMessages.HandleServiceMsg<CAccountPrivateApps_ToggleAppPrivacy_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface IAccountPrivateAppsClient
+    public class AccountPrivateAppsClient : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse NotifyPrivateAppListChanged(CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification request);
+
+        const string SERVICE_NAME = "AccountPrivateAppsClient";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyPrivateAppListChanged(CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification request)
+        {
+            return UnifiedMessages.SendMessage<CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyPrivateAppListChanged#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "NotifyPrivateAppListChanged":
+                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

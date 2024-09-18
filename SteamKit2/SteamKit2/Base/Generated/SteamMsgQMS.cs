@@ -565,16 +565,68 @@ namespace SteamKit2.Internal
         k_EGameSearchResult_SearchCanceled = 6,
     }
 
-    public interface IQueuedMatchmaking
+    public class QueuedMatchmaking : SteamUnifiedMessages.UnifiedService
     {
-        CQueuedMatchmaking_SearchForGame_Response SearchForGame(CQueuedMatchmaking_SearchForGame_Request request);
+
+        const string SERVICE_NAME = "QueuedMatchmaking";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CQueuedMatchmaking_SearchForGame_Response>> SearchForGame(CQueuedMatchmaking_SearchForGame_Request request)
+        {
+            return UnifiedMessages.SendMessage<CQueuedMatchmaking_SearchForGame_Request, CQueuedMatchmaking_SearchForGame_Response>( $"{SERVICE_NAME}.SearchForGame#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "SearchForGame":
+                    UnifiedMessages.HandleServiceMsg<CQueuedMatchmaking_SearchForGame_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface IQueuedMatchmakingGameHost
+    public class QueuedMatchmakingGameHost : SteamUnifiedMessages.UnifiedService
     {
-        CQueuedMatchmakingGameHost_SearchForPlayers_Response SearchForPlayers(CQueuedMatchmakingGameHost_SearchForPlayers_Request request);
-        CQueuedMatchmakingGameHost_SubmitPlayerResult_Response SubmitPlayerResult(CQueuedMatchmakingGameHost_SubmitPlayerResult_Request request);
-        CQueuedMatchmakingGameHost_EndGame_Response EndGame(CQueuedMatchmakingGameHost_EndGame_Request request);
+
+        const string SERVICE_NAME = "QueuedMatchmakingGameHost";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CQueuedMatchmakingGameHost_SearchForPlayers_Response>> SearchForPlayers(CQueuedMatchmakingGameHost_SearchForPlayers_Request request)
+        {
+            return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_SearchForPlayers_Request, CQueuedMatchmakingGameHost_SearchForPlayers_Response>( $"{SERVICE_NAME}.SearchForPlayers#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CQueuedMatchmakingGameHost_SubmitPlayerResult_Response>> SubmitPlayerResult(CQueuedMatchmakingGameHost_SubmitPlayerResult_Request request)
+        {
+            return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_SubmitPlayerResult_Request, CQueuedMatchmakingGameHost_SubmitPlayerResult_Response>( $"{SERVICE_NAME}.SubmitPlayerResult#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CQueuedMatchmakingGameHost_EndGame_Response>> EndGame(CQueuedMatchmakingGameHost_EndGame_Request request)
+        {
+            return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_EndGame_Request, CQueuedMatchmakingGameHost_EndGame_Response>( $"{SERVICE_NAME}.EndGame#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "SearchForPlayers":
+                    UnifiedMessages.HandleServiceMsg<CQueuedMatchmakingGameHost_SearchForPlayers_Response>( packetMsg );
+                    break;
+                case "SubmitPlayerResult":
+                    UnifiedMessages.HandleServiceMsg<CQueuedMatchmakingGameHost_SubmitPlayerResult_Response>( packetMsg );
+                    break;
+                case "EndGame":
+                    UnifiedMessages.HandleServiceMsg<CQueuedMatchmakingGameHost_EndGame_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

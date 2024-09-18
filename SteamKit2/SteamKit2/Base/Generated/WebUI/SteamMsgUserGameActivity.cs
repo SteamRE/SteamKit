@@ -219,9 +219,28 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public interface IUserGameActivity
+    public class UserGameActivity : SteamUnifiedMessages.UnifiedService
     {
-        CUserGameActivity_GetActivity_Response GetActivity(CUserGameActivity_GetActivity_Request request);
+
+        const string SERVICE_NAME = "UserGameActivity";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserGameActivity_GetActivity_Response>> GetActivity(CUserGameActivity_GetActivity_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserGameActivity_GetActivity_Request, CUserGameActivity_GetActivity_Response>( $"{SERVICE_NAME}.GetActivity#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "GetActivity":
+                    UnifiedMessages.HandleServiceMsg<CUserGameActivity_GetActivity_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

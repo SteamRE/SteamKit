@@ -434,10 +434,36 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public interface IUserNews
+    public class UserNews : SteamUnifiedMessages.UnifiedService
     {
-        CUserNews_GetAppDetailsSpotlight_Response GetAppDetailsSpotlight(CUserNews_GetAppDetailsSpotlight_Request request);
-        CUserNews_GetUserNews_Response GetUserNews(CUserNews_GetUserNews_Request request);
+
+        const string SERVICE_NAME = "UserNews";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserNews_GetAppDetailsSpotlight_Response>> GetAppDetailsSpotlight(CUserNews_GetAppDetailsSpotlight_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserNews_GetAppDetailsSpotlight_Request, CUserNews_GetAppDetailsSpotlight_Response>( $"{SERVICE_NAME}.GetAppDetailsSpotlight#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserNews_GetUserNews_Response>> GetUserNews(CUserNews_GetUserNews_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserNews_GetUserNews_Request, CUserNews_GetUserNews_Response>( $"{SERVICE_NAME}.GetUserNews#1", request );
+        }
+
+        internal override void HandleMsg( IPacketMsg packetMsg )
+        {
+            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
+                return;
+
+            switch ( methodName )
+            {
+                case "GetAppDetailsSpotlight":
+                    UnifiedMessages.HandleServiceMsg<CUserNews_GetAppDetailsSpotlight_Response>( packetMsg );
+                    break;
+                case "GetUserNews":
+                    UnifiedMessages.HandleServiceMsg<CUserNews_GetUserNews_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }
