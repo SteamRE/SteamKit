@@ -7,21 +7,9 @@
 namespace SteamKit2
 {
     /// <summary>
-    /// A callback message
-    /// </summary>
-    public interface ICallbackMsg
-    {
-        /// <summary>
-        /// The <see cref="JobID"/> that this callback is associated with. If there is no job associated,
-        /// then this will be <see cref="P:JobID.Invalid"/>
-        /// </summary>
-        JobID JobID { get; set; }
-    }
-
-    /// <summary>
     /// Represents the base object all callbacks are based off.
     /// </summary>
-    public abstract class CallbackMsg : ICallbackMsg
+    public abstract class CallbackMsg
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CallbackMsg"/> class.
@@ -32,7 +20,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Gets or sets the job ID this callback refers to. If it is not a job callback, it will be <see cref="P:JobID.Invalid" />.
+        /// Gets or sets the job ID this callback refers to. If it is not a job callback, it will be <see cref="JobID.Invalid" />.
         /// </summary>
         public JobID JobID { get; set; }
     }

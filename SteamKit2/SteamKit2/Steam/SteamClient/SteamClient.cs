@@ -28,7 +28,7 @@ namespace SteamKit2
         long currentJobId = 0;
         DateTime processStartTime;
 
-        BufferBlock<ICallbackMsg> callbackQueue = new();
+        BufferBlock<CallbackMsg> callbackQueue = new();
 
         internal AsyncJobManager jobManager;
 
@@ -182,7 +182,7 @@ namespace SteamKit2
         /// Gets the next callback object in the queue, and removes it.
         /// </summary>
         /// <returns>The next callback in the queue, or null if no callback is waiting.</returns>
-        public ICallbackMsg? GetCallback()
+        public CallbackMsg? GetCallback()
         {
             if ( callbackQueue.TryReceive( out var msg ) )
             {
@@ -195,7 +195,7 @@ namespace SteamKit2
         /// Blocks the calling thread until a callback object is posted to the queue, and removes it.
         /// </summary>
         /// <returns>The callback object from the queue.</returns>
-        public ICallbackMsg WaitForCallback()
+        public CallbackMsg WaitForCallback()
         {
             return callbackQueue.Receive();
         }
@@ -204,7 +204,7 @@ namespace SteamKit2
         /// Asynchronously awaits until a callback object is posted to the queue, and removes it.
         /// </summary>
         /// <returns>The callback object from the queue.</returns>
-        public Task<ICallbackMsg> WaitForCallbackAsync( CancellationToken cancellationToken = default )
+        public Task<CallbackMsg> WaitForCallbackAsync( CancellationToken cancellationToken = default )
         {
             return callbackQueue.ReceiveAsync( cancellationToken );
         }
@@ -214,7 +214,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="timeout">The length of time to block.</param>
         /// <returns>A callback object from the queue if a callback has been posted, or null if the timeout has elapsed.</returns>
-        public ICallbackMsg? WaitForCallback( TimeSpan timeout )
+        public CallbackMsg? WaitForCallback( TimeSpan timeout )
         {
             try
             {
