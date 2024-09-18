@@ -5,11 +5,6 @@ namespace ProtobufGen
 {
     class SteamKitCSharpCodeGenerator : CSharpCodeGenerator
     {
-        public SteamKitCSharpCodeGenerator()
-            : base()
-        {
-        }
-
         protected override bool UseArray( FieldDescriptorProto field ) => false;
 
         protected override void WriteExtension( GeneratorContext ctx, FieldDescriptorProto field )
@@ -37,20 +32,54 @@ namespace ProtobufGen
         /// </summary>
         protected override void WriteServiceHeader( GeneratorContext ctx, ServiceDescriptorProto service, ref object state )
         {
-            ctx.WriteLine( $"{GetAccess( GetAccess( service ) )} interface I{Escape( service.Name )}" ).WriteLine( "{" ).Indent();
+            ctx.WriteLine( $"{GetAccess( GetAccess( service ) )} class {Escape( service.Name )} : SteamUnifiedMessages.UnifiedService" )
+                .WriteLine( "{" )
+                .Indent()
+                .WriteLine( $"const string SERVICE_NAME = \"{Escape( service.Name )}\";" )
+                .WriteLine();
         }
 
         protected override void WriteServiceFooter( GeneratorContext ctx, ServiceDescriptorProto service, ref object state )
         {
-            ctx.Outdent().WriteLine( "}" ).WriteLine();
+            ctx.WriteLine( "internal override void HandleMsg( IPacketMsg packetMsg )" )
+                .WriteLine( "{" )
+                .Indent()
+                .WriteLine( "if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))" )
+                .Indent()
+                .WriteLine( "return;" )
+                .Outdent()
+                .WriteLine()
+                .WriteLine( "switch ( methodName )" )
+                .WriteLine( "{" )
+                .Indent();
+
+            foreach ( var serviceMethod in service.Methods )
+            {
+                ctx.WriteLine( $"case \"{Escape( serviceMethod.Name )}\":" )
+                    .Indent()
+                    .WriteLine( $"UnifiedMessages.HandleServiceMsg<{Escape( serviceMethod.OutputType[ 1.. ] )}>( packetMsg );" )
+                    .WriteLine( "break;" )
+                    .Outdent();
+            }
+
+            ctx.Outdent()
+                .WriteLine( "}" )
+                .Outdent()
+                .WriteLine( "}" )
+                .Outdent()
+                .WriteLine( "}" )
+                .WriteLine();
         }
 
         protected override void WriteServiceMethod( GeneratorContext ctx, MethodDescriptorProto method, ref object state )
         {
-            var outputType = MakeRelativeName( ctx, method.OutputType );
-            var inputType = MakeRelativeName( ctx, method.InputType );
-
-            ctx.WriteLine( $"{Escape( outputType )} {Escape( method.Name )}({Escape( inputType )} request);" );
+            ctx.WriteLine( $"public AsyncJob<SteamUnifiedMessages.ServiceMsg<{Escape( method.OutputType[1..] )}>> {Escape( method.Name )}({Escape( MakeRelativeName( ctx, method.InputType ) )} request)" )
+                .WriteLine( "{" )
+                .Indent()
+                .WriteLine( $"return UnifiedMessages.SendMessage<{Escape( MakeRelativeName( ctx, method.InputType ) )}, {Escape( method.OutputType[1..] )}>( $\"{{SERVICE_NAME}}.{Escape( method.Name )}#1\", request );" )
+                .Outdent()
+                .WriteLine( "}" )
+                .WriteLine();
         }
     }
 }

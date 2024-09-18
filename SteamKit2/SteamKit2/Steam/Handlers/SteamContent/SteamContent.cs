@@ -43,11 +43,10 @@ namespace SteamKit2
             // SendMessage is an AsyncJob, but we want to deserialize it
             // can't really do HandleMsg because it requires parsing the service like its done in HandleServiceMethod
             var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
-            var contentService = unifiedMessages.CreateService<IContentServerDirectory>();
-            var message = await contentService.SendMessage( api => api.GetServersForSteamPipe( request ) );
-            var response = message.GetDeserializedResponse<CContentServerDirectory_GetServersForSteamPipe_Response>();
+            using var contentService = unifiedMessages.CreateService<ContentServerDirectory>();
+            var response = await contentService.GetServersForSteamPipe( request );
 
-            return ContentServerDirectoryService.ConvertServerList( response );
+            return ContentServerDirectoryService.ConvertServerList( response.PacketResult );
         }
 
         /// <summary>
@@ -84,11 +83,9 @@ namespace SteamKit2
             // SendMessage is an AsyncJob, but we want to deserialize it
             // can't really do HandleMsg because it requires parsing the service like its done in HandleServiceMethod
             var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
-            var contentService = unifiedMessages.CreateService<IContentServerDirectory>();
-            var message = await contentService.SendMessage( api => api.GetManifestRequestCode( request ) );
-            var response = message.GetDeserializedResponse<CContentServerDirectory_GetManifestRequestCode_Response>();
-
-            return response.manifest_request_code;
+            using var contentService = unifiedMessages.CreateService<ContentServerDirectory>();
+            var response = await contentService.GetManifestRequestCode( request );
+            return response.PacketResult.manifest_request_code;
         }
 
         /// <summary>

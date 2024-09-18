@@ -7,7 +7,6 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace SteamKit2
@@ -146,12 +145,6 @@ namespace SteamKit2
 
                 _ => EOSType.Unknown,
             };
-        }
-
-        public static T[] GetAttributes<T>( this Type type, bool inherit = false )
-            where T : Attribute
-        {
-            return (T[])type.GetTypeInfo().GetCustomAttributes( typeof( T ), inherit );
         }
     }
 }
