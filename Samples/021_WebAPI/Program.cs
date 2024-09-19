@@ -16,7 +16,7 @@ using SteamKit2;
 
 // in order to interact with the Web APIs, you must first acquire an interface
 // for a certain API
-using ( dynamic steamNews = WebAPI.GetInterface( "ISteamNews" ) )
+using ( var steamNews = WebAPI.GetInterface( "ISteamNews" ) )
 {
     // note the usage of c#'s dynamic feature, which can be used
     // to make the api a breeze to use
@@ -63,7 +63,7 @@ using ( dynamic steamNews = WebAPI.GetInterface( "ISteamNews" ) )
 }
 
 // for WebAPIs that require an API key, the key can be specified in the GetInterface function
-using ( dynamic steamUserAuth = WebAPI.GetInterface( "ISteamUserAuth", "APIKEYGOESHERE" ) )
+using ( var steamUserAuth = WebAPI.GetInterface( "ISteamUserAuth", "APIKEYGOESHERE" ) )
 {
     // as the interface functions are synchronous, it may be beneficial to specify a timeout for calls
     steamUserAuth.Timeout = TimeSpan.FromSeconds( 5 );
@@ -82,7 +82,7 @@ using ( dynamic steamUserAuth = WebAPI.GetInterface( "ISteamUserAuth", "APIKEYGO
 
 // if you are using a language that does not have dynamic object support, or you otherwise don't wish to use it
 // you can call interface functions through a Call method
-using ( WebAPI.Interface steamNews = WebAPI.GetInterface( "ISteamNews" ) )
+using ( var steamNews = WebAPI.GetInterface( "ISteamNews" ) )
 {
     var newsArgs = new Dictionary<string, object>
     {

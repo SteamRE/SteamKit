@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\SteamKit2\SteamKit2.Generator\SteamKit2.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\..\SteamKit2\SteamKit2\SteamKit2.csproj" />
   </ItemGroup>
 

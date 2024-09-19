@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Profile 1": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\..\\Samples\\021_WebAPI\\021_WebAPI.csproj"
+    }
+  }
+}
