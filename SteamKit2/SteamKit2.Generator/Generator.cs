@@ -10,17 +10,14 @@ namespace SteamKit2.Generator;
 [Generator( LanguageNames.CSharp )]
 public partial class WebApiGenerator : IIncrementalGenerator
 {
-    private static Regex FuncNameRegex = new( @"(?<name>[a-zA-Z]+)(?<version>[0-9]*)" );
-
+    private static Regex FuncNameRegex = new( @"^(?<name>[a-zA-Z]+)(?<version>[0-9]*)$" );
 
     public void Initialize( IncrementalGeneratorInitializationContext context )
     {
         var methodInvocations = context.SyntaxProvider.CreateSyntaxProvider(
-            predicate: static ( node, _ ) => node is InvocationExpressionSyntax invocation &&
-                                           invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
-                                           IsInterfaceMethodInvocation( memberAccess ),
-            transform: static ( context, _ ) => ExtractApiMethodInfo( context ) )
-            .Where( static methodInfo => methodInfo is not null );
+            predicate: static ( node, _ ) => IsRelevantMethod( node ),
+            transform: static ( context, _ ) => ExtractApiMethodInfo( context )
+        ).Where( static methodInfo => methodInfo is not null );
 
         context.RegisterSourceOutput( methodInvocations, static ( context, methodInfo ) =>
         {
@@ -32,18 +29,24 @@ public partial class WebApiGenerator : IIncrementalGenerator
         } );
     }
 
-    private static bool IsInterfaceMethodInvocation( MemberAccessExpressionSyntax memberAccess )
+    private static bool IsRelevantMethod( SyntaxNode node )
     {
-        return memberAccess.Expression is IdentifierNameSyntax;
+        if ( node is not InvocationExpressionSyntax invocation )
+            return false;
+
+        if ( invocation.Expression is not MemberAccessExpressionSyntax memberAccess )
+            return false;
+
+        if ( memberAccess.Expression is not IdentifierNameSyntax )
+            return false;
+
+        return true;
     }
 
     private static ApiMethodInfo? ExtractApiMethodInfo( GeneratorSyntaxContext context )
     {
         var invocation = ( InvocationExpressionSyntax )context.Node;
-        var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
-
-        if ( memberAccess == null )
-            return null;
+        var memberAccess = ( MemberAccessExpressionSyntax )invocation.Expression;
 
         var semanticModel = context.SemanticModel;
         var symbolInfo = semanticModel.GetSymbolInfo( memberAccess.Expression );
@@ -51,7 +54,7 @@ public partial class WebApiGenerator : IIncrementalGenerator
         if ( symbolInfo.Symbol is not ILocalSymbol typeSymbol )
             return null;
 
-        if ( typeSymbol == null || typeSymbol.Type.ToDisplayString() != "SteamKit2.WebAPI.Interface" )
+        if ( typeSymbol.Type.ToDisplayString() != "SteamKit2.WebAPI.Interface" )
             return null;
 
         if ( memberAccess.Name.Identifier.Text == "Call" )
@@ -82,7 +85,6 @@ public partial class WebApiGenerator : IIncrementalGenerator
     private static string GenerateMethodSource( ApiMethodInfo methodInfo )
     {
         var parameters = string.Join( ", ", methodInfo.Arguments.Select( arg => $"{arg.Type} {arg.Name}" ) );
-        var dictionaryEntries = string.Join( ", ", methodInfo.Arguments.Select( arg => $"{{ \"{arg.Name}\", {arg.Name} }}" ) );
 
         return $@"using System.Collections;
 using System.Collections.Generic;
@@ -97,10 +99,10 @@ public static class WebApiInterfaceExtensions{methodInfo.OriginalName} // todo
 {{
     public static KeyValue {methodInfo.OriginalName}(this WebAPI.Interface iface, {parameters})
     {{
-        var apiArgs = new Dictionary<string, object?>();
+        var apiArgs = new Dictionary<string, object?>({parameters.Length});
         var requestMethod = HttpMethod.Get;
 
-        {GenerateArgumentProcessingCode( methodInfo.Arguments )}
+{GenerateArgumentProcessingCode( methodInfo.Arguments )}
 
         return iface.Call(requestMethod, ""{methodInfo.MethodName}"", {methodInfo.Version}, apiArgs);
     }}
@@ -116,11 +118,11 @@ public static class WebApiInterfaceExtensions{methodInfo.OriginalName} // todo
         {
             if ( arg.Name.Equals( "method", StringComparison.OrdinalIgnoreCase ) )
             {
-                processingCode.AppendLine( $@"requestMethod = {arg.Name};" ); // TODO: Validate that it is HttpMethod
+                processingCode.AppendLine( $@"        requestMethod = {arg.Name};" ); // TODO: Validate that it is HttpMethod
             }
             else
             {
-                processingCode.AppendLine( $@"apiArgs.Add(""{arg.Name}"", {arg.Name});" );
+                processingCode.AppendLine( $@"        apiArgs.Add(""{arg.Name}"", {arg.Name});" );
                 /*
                 processingCode.Append( $@"
                 if ({arg.Name} is IEnumerable<object> listValue)
@@ -143,7 +145,7 @@ public static class WebApiInterfaceExtensions{methodInfo.OriginalName} // todo
         return processingCode.ToString();
     }
 
-    public class ApiMethodInfo( string originalName, string methodName, int version, List<ApiArgumentInfo> arguments )
+    private class ApiMethodInfo( string originalName, string methodName, int version, List<ApiArgumentInfo> arguments )
     {
         public string OriginalName { get; } = originalName;
         public string MethodName { get; } = methodName;
@@ -151,7 +153,7 @@ public static class WebApiInterfaceExtensions{methodInfo.OriginalName} // todo
         public List<ApiArgumentInfo> Arguments { get; } = arguments;
     }
 
-    public class ApiArgumentInfo( string name, string value, string type )
+    private class ApiArgumentInfo( string name, string value, string type )
     {
         public string Name { get; } = name;
         public string Value { get; } = value;
