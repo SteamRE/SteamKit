@@ -40,7 +40,10 @@ If you're using the SteamKit2 NuGet package, dependencies should be resolved for
 
 To compile SteamKit2, [.NET 8.0 SDK](https://dot.net/) is required.
 
-## Contact
+## Discussions
+
+If you have questions, [use the Github discussions](https://github.com/SteamRE/SteamKit/discussions) section,
+also try searching for an existing discussion.
 
 IRC: irc.libera.chat / #steamre ([join via webchat](https://web.libera.chat/#steamre))
 
