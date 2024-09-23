@@ -368,11 +368,11 @@ namespace SteamKit2
                 var paramsGoInQueryString = HttpMethod.Get.Equals( method );
 
                 var urlBuilder = paramsGoInQueryString ? paramBuilder : new StringBuilder();
-                urlBuilder.AppendFormat( "{0}/{1}/v{2}", iface, func, version );
+                urlBuilder.Append( $"{iface}/{func}/v{version}/" );
 
                 if ( paramsGoInQueryString )
                 {
-                    urlBuilder.Append( "/?" );
+                    urlBuilder.Append( '?' );
                 }
 
                 if ( !string.IsNullOrEmpty( apiKey ) && args != null && !args.ContainsKey( "key" ) )
