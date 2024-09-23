@@ -401,9 +401,16 @@ namespace SteamKit2
                             case null:
                                 break;
 
+                            case string stringValue:
+                                paramBuilder.Append( Uri.EscapeDataString( stringValue ) );
+                                break;
+
                             case byte[] byteArrayValue:
                                 paramBuilder.Append( HttpUtility.UrlEncode( byteArrayValue ) );
                                 break;
+
+                            case IEnumerable enumerable:
+                                throw new InvalidDataException( $"This API does not support IEnumerable parameters. (key={key})" );
 
                             default:
                                 if ( value.ToString() is { } valueString )
