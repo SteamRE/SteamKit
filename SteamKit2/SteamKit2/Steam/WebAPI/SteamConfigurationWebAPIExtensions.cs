@@ -9,11 +9,12 @@ namespace SteamKit2
     public static class SteamConfigurationWebAPIExtensions
     {
         /// <summary>
-        /// Retrieves a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// Retrieves a handler capable of interacting with the specified interface on the Web API.
+        /// Prefer using <see cref="GetAsyncWebAPIInterface"/> if possible.
         /// </summary>
         /// <param name="config">The configuration to use for this Web API interface.</param>
         /// <param name="iface">The interface to retrieve a handler for.</param>
-        /// <returns>A dynamic <see cref="WebAPI.Interface"/> object to interact with the Web API.</returns>
+        /// <returns>A <see cref="WebAPI.Interface"/> object to interact with the Web API.</returns>
         public static WebAPI.Interface GetWebAPIInterface(this SteamConfiguration config, string iface)
         {
             ArgumentNullException.ThrowIfNull( config );
@@ -22,11 +23,11 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Retrieves a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// Retrieves a handler capable of interacting with the specified interface on the Web API.
         /// </summary>
         /// <param name="config">The configuration to use for this Web API interface.</param>
         /// <param name="iface">The interface to retrieve a handler for.</param>
-        /// <returns>A dynamic <see cref="WebAPI.AsyncInterface"/> object to interact with the Web API.</returns>
+        /// <returns>A <see cref="WebAPI.AsyncInterface"/> object to interact with the Web API.</returns>
         public static WebAPI.AsyncInterface GetAsyncWebAPIInterface(this SteamConfiguration config, string iface)
         {
             ArgumentNullException.ThrowIfNull( config );

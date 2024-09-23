@@ -16,17 +16,15 @@ using SteamKit2;
 
 // in order to interact with the Web APIs, you must first acquire an interface
 // for a certain API
-using ( dynamic steamNews = WebAPI.GetInterface( "ISteamNews" ) )
+using ( var steamNews = WebAPI.GetInterface( "ISteamNews" ) )
 {
-    // note the usage of c#'s dynamic feature, which can be used
-    // to make the api a breeze to use
-
     // the ISteamNews WebAPI has only 1 function: GetNewsForApp,
     // so we'll be using that
 
-    // when making use of dynamic, we call the interface function directly
-    // and pass any parameters as named arguments
-    KeyValue kvNews = steamNews.GetNewsForApp( appid: 440 ); // get news for tf2
+    KeyValue kvNews = steamNews.Call( "GetNewsForApp", version: 1, new Dictionary<string, object>
+    {
+        { "appid", 440 }, // get news for tf2
+    } );
 
     // the return of every WebAPI call is a KeyValue class that contains the result data
 
@@ -36,25 +34,17 @@ using ( dynamic steamNews = WebAPI.GetInterface( "ISteamNews" ) )
         Console.WriteLine( "News: {0}", news[ "title" ].AsString() );
     }
 
-    // for functions with multiple versions, the version can be specified by
-    // adding a number after the function name when calling the API
-
-    kvNews = steamNews.GetNewsForApp2( appid: 570 );
-
-    // if a number is not specified, version 1 is assumed by default
-
-    // notice that the output of this version differs from the first version
-    foreach ( KeyValue news in kvNews[ "newsitems" ].Children )
-    {
-        Console.WriteLine( "News: {0}", news[ "title" ].AsString() );
-    }
-
     // note that the interface functions can throw WebExceptions when the API
     // is otherwise inaccessible (networking issues, server downtime, etc)
     // and these should be handled appropriately
     try
     {
-        kvNews = steamNews.GetNewsForApp002( appid: 730, maxlength: 100, count: 5 );
+        kvNews = steamNews.Call( "GetNewsForApp", version: 2, new Dictionary<string, object>
+        {
+            { "appid", 730 }, // get news for cs2
+            { "maxlength", 100 },
+            { "count", 5 }
+        } );
     }
     catch ( Exception ex )
     {
@@ -63,7 +53,7 @@ using ( dynamic steamNews = WebAPI.GetInterface( "ISteamNews" ) )
 }
 
 // for WebAPIs that require an API key, the key can be specified in the GetInterface function
-using ( dynamic steamUserAuth = WebAPI.GetInterface( "ISteamUserAuth", "APIKEYGOESHERE" ) )
+using ( var steamUserAuth = WebAPI.GetInterface( "ISteamUserAuth", "APIKEYGOESHERE" ) )
 {
     // as the interface functions are synchronous, it may be beneficial to specify a timeout for calls
     steamUserAuth.Timeout = TimeSpan.FromSeconds( 5 );
@@ -72,7 +62,10 @@ using ( dynamic steamUserAuth = WebAPI.GetInterface( "ISteamUserAuth", "APIKEYGO
     // you may specify with the "method" reserved parameter
     try
     {
-        steamUserAuth.AuthenticateUser( someParam: "someValue", method: HttpMethod.Post );
+        steamUserAuth.Call( HttpMethod.Post, "AuthenticateUser", version: 1, new Dictionary<string, object>
+        {
+            { "someParam", "someValue" }
+        } );
     }
     catch ( Exception ex )
     {
@@ -80,20 +73,18 @@ using ( dynamic steamUserAuth = WebAPI.GetInterface( "ISteamUserAuth", "APIKEYGO
     }
 }
 
-// if you are using a language that does not have dynamic object support, or you otherwise don't wish to use it
-// you can call interface functions through a Call method
-using ( WebAPI.Interface steamNews = WebAPI.GetInterface( "ISteamNews" ) )
+// async version is available
+using ( var steamNews = WebAPI.GetAsyncInterface( "ISteamNews" ) )
 {
     var newsArgs = new Dictionary<string, object>
     {
         [ "appid" ] = "440"
     };
 
-    KeyValue results = steamNews.Call( "GetNewsForApp", /* version */ 1, newsArgs );
+    KeyValue results = await steamNews.CallAsync( "GetNewsForApp", version: 1, newsArgs );
 
     foreach ( KeyValue news in results[ "newsitems" ][ "newsitem" ].Children )
     {
         Console.WriteLine( "News: {0}", news[ "title" ].AsString() );
     }
 }
-

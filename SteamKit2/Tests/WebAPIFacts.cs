@@ -46,9 +46,9 @@ namespace Tests
         public async Task ThrowsWebAPIRequestExceptionIfRequestUnsuccessful()
         {
             var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( new ServiceUnavailableHttpMessageHandler() ) ) );
-            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
-            await Assert.ThrowsAsync<WebAPIRequestException>( () => ( Task )iface.PerformFooOperation() );
+            await Assert.ThrowsAsync<WebAPIRequestException>( () => iface.CallAsync( "PerformFooOperation" ) );
         }
 
         [Fact]
@@ -131,7 +131,7 @@ namespace Tests
             using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
 
-            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
             var handlerCalled = false;
             hookableHandler.OnRequest = request =>
@@ -156,7 +156,7 @@ namespace Tests
                 [ "b" ] = "bar",
             };
 
-            var response = await iface.PerformFooOperation2( args );
+            var response = await iface.CallAsync( "PerformFooOperation", 2, args );
             Assert.True( handlerCalled );
         }
 
@@ -166,7 +166,7 @@ namespace Tests
             using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
 
-            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
             var handlerCalled = false;
             hookableHandler.OnRequest = request =>
@@ -194,13 +194,12 @@ namespace Tests
             using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
 
-            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
             var args = new Dictionary<string, object>
             {
                 [ "f" ] = "foo",
                 [ "b" ] = "bar",
-                [ "method" ] = "PUT"
             };
 
             var handlerCalled = false;
@@ -220,7 +219,7 @@ namespace Tests
                 handlerCalled = true;
             };
 
-            var response = await iface.PerformFooOperation2( args );
+            var response = await iface.CallAsync( HttpMethod.Put, "PerformFooOperation", 2, args );
             Assert.True( handlerCalled );
         }
 
@@ -232,7 +231,7 @@ namespace Tests
                 .WithHttpClientFactory( () => new HttpClient( hookableHandler ) )
                 .WithWebAPIKey( "MySecretApiKey" ) );
 
-            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
             var args = new Dictionary<string, object>
             {
@@ -258,7 +257,7 @@ namespace Tests
                 return Task.CompletedTask;
             };
 
-            var response = await iface.PerformFooOperation2( args );
+            var response = await iface.CallAsync( "PerformFooOperation", 2, args );
             Assert.True( handlerCalled );
         }
 
