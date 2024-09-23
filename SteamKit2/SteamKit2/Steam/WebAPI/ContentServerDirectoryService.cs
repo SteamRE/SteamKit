@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -37,7 +36,7 @@ namespace SteamKit2
         /// <param name="cellId">Preferred steam cell id</param>
         /// <param name="cancellationToken">Cancellation Token</param>
         /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="CDN.Server"/>s.</returns>
-        public static Task<IReadOnlyCollection<CDN.Server>> LoadAsync( SteamConfiguration configuration, int cellId, CancellationToken cancellationToken )
+        public static Task<IReadOnlyCollection<CDN.Server>> LoadAsync( SteamConfiguration configuration, uint cellId, CancellationToken cancellationToken )
             => LoadCoreAsync( configuration, cellId, null, cancellationToken );
 
         /// <summary>
@@ -49,42 +48,42 @@ namespace SteamKit2
         /// <param name="maxNumServers">Max number of servers to return.</param>
         /// <param name="cancellationToken">Cancellation Token</param>
         /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="CDN.Server"/>s.</returns>
-        public static Task<IReadOnlyCollection<CDN.Server>> LoadAsync( SteamConfiguration configuration, int cellId, int maxNumServers, CancellationToken cancellationToken )
+        public static Task<IReadOnlyCollection<CDN.Server>> LoadAsync( SteamConfiguration configuration, uint cellId, uint maxNumServers, CancellationToken cancellationToken )
             => LoadCoreAsync( configuration, cellId, maxNumServers, cancellationToken );
 
-        static async Task<IReadOnlyCollection<CDN.Server>> LoadCoreAsync( SteamConfiguration configuration, int? cellId, int? maxNumServers, CancellationToken cancellationToken )
+        static async Task<IReadOnlyCollection<CDN.Server>> LoadCoreAsync( SteamConfiguration configuration, uint? cellId, uint? maxNumServers, CancellationToken cancellationToken )
         {
             ArgumentNullException.ThrowIfNull( configuration );
 
             using var directory = configuration.GetAsyncWebAPIInterface( "IContentServerDirectoryService" );
-            var args = new Dictionary<string, object?>();
+            var request = new CContentServerDirectory_GetServersForSteamPipe_Request();
 
             if ( cellId.HasValue )
             {
-                args[ "cell_id" ] = cellId.Value.ToString( CultureInfo.InvariantCulture );
+                request.cell_id = cellId.Value;
             }
             else
             {
-                args[ "cell_id" ] = configuration.CellID.ToString( CultureInfo.InvariantCulture );
+                request.cell_id = configuration.CellID;
             }
 
             if ( maxNumServers.HasValue )
             {
-                args[ "max_servers" ] = maxNumServers.Value.ToString( CultureInfo.InvariantCulture );
+                request.max_servers = maxNumServers.Value;
             }
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            var response = await directory.CallProtobufAsync<CContentServerDirectory_GetServersForSteamPipe_Response>(
+            var response = await directory.CallProtobufAsync<CContentServerDirectory_GetServersForSteamPipe_Response, CContentServerDirectory_GetServersForSteamPipe_Request>(
                 HttpMethod.Get,
                 nameof( IContentServerDirectory.GetServersForSteamPipe ),
-                version: 1,
-                args: args
+                request,
+                version: 1
             ).ConfigureAwait( false );
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            return ConvertServerList( response );
+            return ConvertServerList( response.Body );
         }
 
         internal static IReadOnlyCollection<CDN.Server> ConvertServerList( CContentServerDirectory_GetServersForSteamPipe_Response response )
