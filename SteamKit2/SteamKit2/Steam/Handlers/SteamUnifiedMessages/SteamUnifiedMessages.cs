@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using ProtoBuf;
 
 namespace SteamKit2
@@ -15,7 +14,7 @@ namespace SteamKit2
     /// </summary>
     public partial class SteamUnifiedMessages : ClientMsgHandler
     {
-        private readonly List<UnifiedService> _handlers = [ ];
+        private readonly Dictionary<string, UnifiedService> _handlers = [ ];
 
         /// <summary>
         /// 
@@ -29,7 +28,7 @@ namespace SteamKit2
                 UnifiedMessages = this
             };
 
-            _handlers.Add( service);
+            _handlers.Add( service.ServiceName, service);
             return service;
         }
 
@@ -89,10 +88,26 @@ namespace SteamKit2
         /// <inheritdoc />
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            foreach ( var service in _handlers )
-            {
-                service.HandleMsg( packetMsg );
-            }
+            if (packetMsg is not PacketClientMsgProtobuf packetMsgProto)
+                return;
+
+            var jobName = packetMsgProto.Header.Proto.target_job_name.AsSpan();
+            if (jobName.IsEmpty)
+                return;
+
+            // format: Service.Method#Version
+            var dot = jobName.IndexOf( '.' );
+            var hash = jobName.LastIndexOf( '#' );
+            if ( dot < 0 || hash < 0 )
+                return;
+
+            var serviceName = jobName[ ..dot ].ToString();
+            if (!_handlers.TryGetValue( serviceName, out var handler ) )
+                return;
+
+            var methodName = jobName[ ( dot + 1 )..hash ].ToString();
+
+            handler.HandleMsg( methodName, packetMsg );
         }
 
         internal void HandleServiceMsg<TService>( IPacketMsg packetMsg )
@@ -102,52 +117,18 @@ namespace SteamKit2
             Client.PostCallback( callback );
         }
 
-        internal static bool CanHandleMsg( IPacketMsg packetMsg, string service, [NotNullWhen(true)] out string? methodName )
-        {
-            if (packetMsg is not PacketClientMsgProtobuf packetMsgProto)
-            {
-                methodName = null;
-                return false;
-            }
-
-            var jobNameStr = packetMsgProto.Header.Proto.target_job_name;
-            if ( string.IsNullOrEmpty( jobNameStr ) )
-            {
-                methodName = null;
-                return false;
-            }
-
-            // format: Service.Method#Version
-            var jobName = jobNameStr.AsSpan();
-            var dot = jobName.IndexOf( '.' );
-            var hash = jobName.LastIndexOf( '#' );
-            if ( dot < 0 || hash < 0 )
-            {
-                methodName = null;
-                return false;
-            }
-
-            var serviceName = jobName[ ..dot ].ToString();
-            if (serviceName != service)
-            {
-                methodName = null;
-                return false;
-            }
-
-            methodName = jobName[ ( dot + 1 )..hash ].ToString();
-            return true;
-        }
-
         public abstract class UnifiedService : IDisposable
         {
-            internal abstract void HandleMsg( IPacketMsg packetMsg );
+            internal abstract void HandleMsg( string methodName, IPacketMsg packetMsg );
 
-            internal SteamUnifiedMessages UnifiedMessages { get; set; }
+            internal abstract string ServiceName { get; }
+
+            internal SteamUnifiedMessages UnifiedMessages { get; init; }
 
             /// <inheritdoc />
             public void Dispose()
             {
-                UnifiedMessages._handlers.Remove( this );
+                UnifiedMessages._handlers.Remove( ServiceName );
             }
         }
     }

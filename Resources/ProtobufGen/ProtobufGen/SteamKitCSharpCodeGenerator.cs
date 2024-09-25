@@ -32,23 +32,19 @@ namespace ProtobufGen
         /// </summary>
         protected override void WriteServiceHeader( GeneratorContext ctx, ServiceDescriptorProto service, ref object state )
         {
+            state = service.Name;
             ctx.WriteLine( $"{GetAccess( GetAccess( service ) )} class {Escape( service.Name )} : SteamUnifiedMessages.UnifiedService" )
                 .WriteLine( "{" )
                 .Indent()
-                .WriteLine( $"const string SERVICE_NAME = \"{Escape( service.Name )}\";" )
+                .WriteLine( $"internal override string ServiceName {{ get; }} = \"{Escape( service.Name )}\";" )
                 .WriteLine();
         }
 
         protected override void WriteServiceFooter( GeneratorContext ctx, ServiceDescriptorProto service, ref object state )
         {
-            ctx.WriteLine( "internal override void HandleMsg( IPacketMsg packetMsg )" )
+            ctx.WriteLine( "internal override void HandleMsg( string methodName, IPacketMsg packetMsg )" )
                 .WriteLine( "{" )
                 .Indent()
-                .WriteLine( "if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))" )
-                .Indent()
-                .WriteLine( "return;" )
-                .Outdent()
-                .WriteLine()
                 .WriteLine( "switch ( methodName )" )
                 .WriteLine( "{" )
                 .Indent();
