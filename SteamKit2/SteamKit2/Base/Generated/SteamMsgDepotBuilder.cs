@@ -573,32 +573,32 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CContentBuilder_InitDepotBuild_Response>> InitDepotBuild(CContentBuilder_InitDepotBuild_Request request)
         {
-            return UnifiedMessages.SendMessage<CContentBuilder_InitDepotBuild_Request, CContentBuilder_InitDepotBuild_Response>( $"{SERVICE_NAME}.InitDepotBuild#1", request );
+            return UnifiedMessages.SendMessage<CContentBuilder_InitDepotBuild_Request, CContentBuilder_InitDepotBuild_Response>( $"ContentBuilder.InitDepotBuild#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CContentBuilder_StartDepotUpload_Response>> StartDepotUpload(CContentBuilder_StartDepotUpload_Request request)
         {
-            return UnifiedMessages.SendMessage<CContentBuilder_StartDepotUpload_Request, CContentBuilder_StartDepotUpload_Response>( $"{SERVICE_NAME}.StartDepotUpload#1", request );
+            return UnifiedMessages.SendMessage<CContentBuilder_StartDepotUpload_Request, CContentBuilder_StartDepotUpload_Response>( $"ContentBuilder.StartDepotUpload#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CContentBuilder_GetMissingDepotChunks_Response>> GetMissingDepotChunks(CContentBuilder_GetMissingDepotChunks_Request request)
         {
-            return UnifiedMessages.SendMessage<CContentBuilder_GetMissingDepotChunks_Request, CContentBuilder_GetMissingDepotChunks_Response>( $"{SERVICE_NAME}.GetMissingDepotChunks#1", request );
+            return UnifiedMessages.SendMessage<CContentBuilder_GetMissingDepotChunks_Request, CContentBuilder_GetMissingDepotChunks_Response>( $"ContentBuilder.GetMissingDepotChunks#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CContentBuilder_FinishDepotUpload_Response>> FinishDepotUpload(CContentBuilder_FinishDepotUpload_Request request)
         {
-            return UnifiedMessages.SendMessage<CContentBuilder_FinishDepotUpload_Request, CContentBuilder_FinishDepotUpload_Response>( $"{SERVICE_NAME}.FinishDepotUpload#1", request );
+            return UnifiedMessages.SendMessage<CContentBuilder_FinishDepotUpload_Request, CContentBuilder_FinishDepotUpload_Response>( $"ContentBuilder.FinishDepotUpload#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CContentBuilder_CommitAppBuild_Response>> CommitAppBuild(CContentBuilder_CommitAppBuild_Request request)
         {
-            return UnifiedMessages.SendMessage<CContentBuilder_CommitAppBuild_Request, CContentBuilder_CommitAppBuild_Response>( $"{SERVICE_NAME}.CommitAppBuild#1", request );
+            return UnifiedMessages.SendMessage<CContentBuilder_CommitAppBuild_Request, CContentBuilder_CommitAppBuild_Response>( $"ContentBuilder.CommitAppBuild#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CContentBuilder_SignInstallScript_Response>> SignInstallScript(CContentBuilder_SignInstallScript_Request request)
         {
-            return UnifiedMessages.SendMessage<CContentBuilder_SignInstallScript_Request, CContentBuilder_SignInstallScript_Response>( $"{SERVICE_NAME}.SignInstallScript#1", request );
+            return UnifiedMessages.SendMessage<CContentBuilder_SignInstallScript_Request, CContentBuilder_SignInstallScript_Response>( $"ContentBuilder.SignInstallScript#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

@@ -746,37 +746,37 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CContentServerDirectory_GetServersForSteamPipe_Response>> GetServersForSteamPipe(CContentServerDirectory_GetServersForSteamPipe_Request request)
         {
-            return UnifiedMessages.SendMessage<CContentServerDirectory_GetServersForSteamPipe_Request, CContentServerDirectory_GetServersForSteamPipe_Response>( $"{SERVICE_NAME}.GetServersForSteamPipe#1", request );
+            return UnifiedMessages.SendMessage<CContentServerDirectory_GetServersForSteamPipe_Request, CContentServerDirectory_GetServersForSteamPipe_Response>( $"ContentServerDirectory.GetServersForSteamPipe#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CContentServerDirectory_GetDepotPatchInfo_Response>> GetDepotPatchInfo(CContentServerDirectory_GetDepotPatchInfo_Request request)
         {
-            return UnifiedMessages.SendMessage<CContentServerDirectory_GetDepotPatchInfo_Request, CContentServerDirectory_GetDepotPatchInfo_Response>( $"{SERVICE_NAME}.GetDepotPatchInfo#1", request );
+            return UnifiedMessages.SendMessage<CContentServerDirectory_GetDepotPatchInfo_Request, CContentServerDirectory_GetDepotPatchInfo_Response>( $"ContentServerDirectory.GetDepotPatchInfo#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CContentServerDirectory_GetClientUpdateHosts_Response>> GetClientUpdateHosts(CContentServerDirectory_GetClientUpdateHosts_Request request)
         {
-            return UnifiedMessages.SendMessage<CContentServerDirectory_GetClientUpdateHosts_Request, CContentServerDirectory_GetClientUpdateHosts_Response>( $"{SERVICE_NAME}.GetClientUpdateHosts#1", request );
+            return UnifiedMessages.SendMessage<CContentServerDirectory_GetClientUpdateHosts_Request, CContentServerDirectory_GetClientUpdateHosts_Response>( $"ContentServerDirectory.GetClientUpdateHosts#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CContentServerDirectory_GetManifestRequestCode_Response>> GetManifestRequestCode(CContentServerDirectory_GetManifestRequestCode_Request request)
         {
-            return UnifiedMessages.SendMessage<CContentServerDirectory_GetManifestRequestCode_Request, CContentServerDirectory_GetManifestRequestCode_Response>( $"{SERVICE_NAME}.GetManifestRequestCode#1", request );
+            return UnifiedMessages.SendMessage<CContentServerDirectory_GetManifestRequestCode_Request, CContentServerDirectory_GetManifestRequestCode_Response>( $"ContentServerDirectory.GetManifestRequestCode#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CContentServerDirectory_GetCDNAuthToken_Response>> GetCDNAuthToken(CContentServerDirectory_GetCDNAuthToken_Request request)
         {
-            return UnifiedMessages.SendMessage<CContentServerDirectory_GetCDNAuthToken_Request, CContentServerDirectory_GetCDNAuthToken_Response>( $"{SERVICE_NAME}.GetCDNAuthToken#1", request );
+            return UnifiedMessages.SendMessage<CContentServerDirectory_GetCDNAuthToken_Request, CContentServerDirectory_GetCDNAuthToken_Response>( $"ContentServerDirectory.GetCDNAuthToken#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CContentServerDirectory_RequestPeerContentServer_Response>> RequestPeerContentServer(CContentServerDirectory_RequestPeerContentServer_Request request)
         {
-            return UnifiedMessages.SendMessage<CContentServerDirectory_RequestPeerContentServer_Request, CContentServerDirectory_RequestPeerContentServer_Response>( $"{SERVICE_NAME}.RequestPeerContentServer#1", request );
+            return UnifiedMessages.SendMessage<CContentServerDirectory_RequestPeerContentServer_Request, CContentServerDirectory_RequestPeerContentServer_Response>( $"ContentServerDirectory.RequestPeerContentServer#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CContentServerDirectory_GetPeerContentInfo_Response>> GetPeerContentInfo(CContentServerDirectory_GetPeerContentInfo_Request request)
         {
-            return UnifiedMessages.SendMessage<CContentServerDirectory_GetPeerContentInfo_Request, CContentServerDirectory_GetPeerContentInfo_Response>( $"{SERVICE_NAME}.GetPeerContentInfo#1", request );
+            return UnifiedMessages.SendMessage<CContentServerDirectory_GetPeerContentInfo_Request, CContentServerDirectory_GetPeerContentInfo_Response>( $"ContentServerDirectory.GetPeerContentInfo#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

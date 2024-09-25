@@ -417,12 +417,12 @@ namespace SteamKit2.WebUI.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCheckout_GetFriendOwnershipForGifting_Response>> GetFriendOwnershipForGifting(CCheckout_GetFriendOwnershipForGifting_Request request)
         {
-            return UnifiedMessages.SendMessage<CCheckout_GetFriendOwnershipForGifting_Request, CCheckout_GetFriendOwnershipForGifting_Response>( $"{SERVICE_NAME}.GetFriendOwnershipForGifting#1", request );
+            return UnifiedMessages.SendMessage<CCheckout_GetFriendOwnershipForGifting_Request, CCheckout_GetFriendOwnershipForGifting_Response>( $"Checkout.GetFriendOwnershipForGifting#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCheckout_ValidateCart_Response>> ValidateCart(CCheckout_ValidateCart_Request request)
         {
-            return UnifiedMessages.SendMessage<CCheckout_ValidateCart_Request, CCheckout_ValidateCart_Response>( $"{SERVICE_NAME}.ValidateCart#1", request );
+            return UnifiedMessages.SendMessage<CCheckout_ValidateCart_Request, CCheckout_ValidateCart_Response>( $"Checkout.ValidateCart#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

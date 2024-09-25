@@ -571,7 +571,7 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CQueuedMatchmaking_SearchForGame_Response>> SearchForGame(CQueuedMatchmaking_SearchForGame_Request request)
         {
-            return UnifiedMessages.SendMessage<CQueuedMatchmaking_SearchForGame_Request, CQueuedMatchmaking_SearchForGame_Response>( $"{SERVICE_NAME}.SearchForGame#1", request );
+            return UnifiedMessages.SendMessage<CQueuedMatchmaking_SearchForGame_Request, CQueuedMatchmaking_SearchForGame_Response>( $"QueuedMatchmaking.SearchForGame#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
@@ -591,17 +591,17 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CQueuedMatchmakingGameHost_SearchForPlayers_Response>> SearchForPlayers(CQueuedMatchmakingGameHost_SearchForPlayers_Request request)
         {
-            return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_SearchForPlayers_Request, CQueuedMatchmakingGameHost_SearchForPlayers_Response>( $"{SERVICE_NAME}.SearchForPlayers#1", request );
+            return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_SearchForPlayers_Request, CQueuedMatchmakingGameHost_SearchForPlayers_Response>( $"QueuedMatchmakingGameHost.SearchForPlayers#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CQueuedMatchmakingGameHost_SubmitPlayerResult_Response>> SubmitPlayerResult(CQueuedMatchmakingGameHost_SubmitPlayerResult_Request request)
         {
-            return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_SubmitPlayerResult_Request, CQueuedMatchmakingGameHost_SubmitPlayerResult_Response>( $"{SERVICE_NAME}.SubmitPlayerResult#1", request );
+            return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_SubmitPlayerResult_Request, CQueuedMatchmakingGameHost_SubmitPlayerResult_Response>( $"QueuedMatchmakingGameHost.SubmitPlayerResult#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CQueuedMatchmakingGameHost_EndGame_Response>> EndGame(CQueuedMatchmakingGameHost_EndGame_Request request)
         {
-            return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_EndGame_Request, CQueuedMatchmakingGameHost_EndGame_Response>( $"{SERVICE_NAME}.EndGame#1", request );
+            return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_EndGame_Request, CQueuedMatchmakingGameHost_EndGame_Response>( $"QueuedMatchmakingGameHost.EndGame#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

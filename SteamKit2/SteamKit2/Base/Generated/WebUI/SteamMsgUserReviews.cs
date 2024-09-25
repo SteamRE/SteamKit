@@ -732,17 +732,17 @@ namespace SteamKit2.WebUI.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserReviews_GetFriendsRecommendedApp_Response>> GetFriendsRecommendedApp(CUserReviews_GetFriendsRecommendedApp_Request request)
         {
-            return UnifiedMessages.SendMessage<CUserReviews_GetFriendsRecommendedApp_Request, CUserReviews_GetFriendsRecommendedApp_Response>( $"{SERVICE_NAME}.GetFriendsRecommendedApp#1", request );
+            return UnifiedMessages.SendMessage<CUserReviews_GetFriendsRecommendedApp_Request, CUserReviews_GetFriendsRecommendedApp_Response>( $"UserReviews.GetFriendsRecommendedApp#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserReviews_GetIndividualRecommendations_Response>> GetIndividualRecommendations(CUserReviews_GetIndividualRecommendations_Request request)
         {
-            return UnifiedMessages.SendMessage<CUserReviews_GetIndividualRecommendations_Request, CUserReviews_GetIndividualRecommendations_Response>( $"{SERVICE_NAME}.GetIndividualRecommendations#1", request );
+            return UnifiedMessages.SendMessage<CUserReviews_GetIndividualRecommendations_Request, CUserReviews_GetIndividualRecommendations_Response>( $"UserReviews.GetIndividualRecommendations#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserReviews_Update_Response>> Update(CUserReviews_Update_Request request)
         {
-            return UnifiedMessages.SendMessage<CUserReviews_Update_Request, CUserReviews_Update_Response>( $"{SERVICE_NAME}.Update#1", request );
+            return UnifiedMessages.SendMessage<CUserReviews_Update_Request, CUserReviews_Update_Response>( $"UserReviews.Update#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

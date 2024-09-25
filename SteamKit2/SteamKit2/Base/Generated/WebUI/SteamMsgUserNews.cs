@@ -440,12 +440,12 @@ namespace SteamKit2.WebUI.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserNews_GetAppDetailsSpotlight_Response>> GetAppDetailsSpotlight(CUserNews_GetAppDetailsSpotlight_Request request)
         {
-            return UnifiedMessages.SendMessage<CUserNews_GetAppDetailsSpotlight_Request, CUserNews_GetAppDetailsSpotlight_Response>( $"{SERVICE_NAME}.GetAppDetailsSpotlight#1", request );
+            return UnifiedMessages.SendMessage<CUserNews_GetAppDetailsSpotlight_Request, CUserNews_GetAppDetailsSpotlight_Response>( $"UserNews.GetAppDetailsSpotlight#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserNews_GetUserNews_Response>> GetUserNews(CUserNews_GetUserNews_Request request)
         {
-            return UnifiedMessages.SendMessage<CUserNews_GetUserNews_Request, CUserNews_GetUserNews_Response>( $"{SERVICE_NAME}.GetUserNews#1", request );
+            return UnifiedMessages.SendMessage<CUserNews_GetUserNews_Request, CUserNews_GetUserNews_Response>( $"UserNews.GetUserNews#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

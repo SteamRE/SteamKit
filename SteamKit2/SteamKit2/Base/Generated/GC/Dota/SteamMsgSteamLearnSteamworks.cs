@@ -1362,37 +1362,37 @@ namespace SteamKit2.GC.Dota.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CMsgSteamLearn_RegisterDataSource_Response>> RegisterDataSource(CMsgSteamLearn_RegisterDataSource_Request request)
         {
-            return UnifiedMessages.SendMessage<CMsgSteamLearn_RegisterDataSource_Request, CMsgSteamLearn_RegisterDataSource_Response>( $"{SERVICE_NAME}.RegisterDataSource#1", request );
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_RegisterDataSource_Request, CMsgSteamLearn_RegisterDataSource_Response>( $"SteamLearn.RegisterDataSource#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CMsgSteamLearn_CacheData_Response>> CacheData(CMsgSteamLearn_CacheData_Request request)
         {
-            return UnifiedMessages.SendMessage<CMsgSteamLearn_CacheData_Request, CMsgSteamLearn_CacheData_Response>( $"{SERVICE_NAME}.CacheData#1", request );
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_CacheData_Request, CMsgSteamLearn_CacheData_Response>( $"SteamLearn.CacheData#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CMsgSteamLearn_SnapshotProject_Response>> SnapshotProject(CMsgSteamLearn_SnapshotProject_Request request)
         {
-            return UnifiedMessages.SendMessage<CMsgSteamLearn_SnapshotProject_Request, CMsgSteamLearn_SnapshotProject_Response>( $"{SERVICE_NAME}.SnapshotProject#1", request );
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_SnapshotProject_Request, CMsgSteamLearn_SnapshotProject_Response>( $"SteamLearn.SnapshotProject#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CMsgSteamLearn_BatchOperation_Response>> BatchOperation(CMsgSteamLearn_BatchOperation_Request request)
         {
-            return UnifiedMessages.SendMessage<CMsgSteamLearn_BatchOperation_Request, CMsgSteamLearn_BatchOperation_Response>( $"{SERVICE_NAME}.BatchOperation#1", request );
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_BatchOperation_Request, CMsgSteamLearn_BatchOperation_Response>( $"SteamLearn.BatchOperation#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CMsgSteamLearn_GetAccessTokens_Response>> GetAccessTokens(CMsgSteamLearn_GetAccessTokens_Request request)
         {
-            return UnifiedMessages.SendMessage<CMsgSteamLearn_GetAccessTokens_Request, CMsgSteamLearn_GetAccessTokens_Response>( $"{SERVICE_NAME}.GetAccessTokens#1", request );
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_GetAccessTokens_Request, CMsgSteamLearn_GetAccessTokens_Response>( $"SteamLearn.GetAccessTokens#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CMsgSteamLearn_Inference_Response>> Inference(CMsgSteamLearn_Inference_Request request)
         {
-            return UnifiedMessages.SendMessage<CMsgSteamLearn_Inference_Request, CMsgSteamLearn_Inference_Response>( $"{SERVICE_NAME}.Inference#1", request );
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_Inference_Request, CMsgSteamLearn_Inference_Response>( $"SteamLearn.Inference#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CMsgSteamLearn_InferenceMetadata_Response>> InferenceMetadata(CMsgSteamLearn_InferenceMetadata_Request request)
         {
-            return UnifiedMessages.SendMessage<CMsgSteamLearn_InferenceMetadata_Request, CMsgSteamLearn_InferenceMetadata_Response>( $"{SERVICE_NAME}.InferenceMetadata#1", request );
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_InferenceMetadata_Request, CMsgSteamLearn_InferenceMetadata_Response>( $"SteamLearn.InferenceMetadata#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

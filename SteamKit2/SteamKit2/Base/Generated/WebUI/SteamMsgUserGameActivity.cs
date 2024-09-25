@@ -225,7 +225,7 @@ namespace SteamKit2.WebUI.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserGameActivity_GetActivity_Response>> GetActivity(CUserGameActivity_GetActivity_Request request)
         {
-            return UnifiedMessages.SendMessage<CUserGameActivity_GetActivity_Request, CUserGameActivity_GetActivity_Response>( $"{SERVICE_NAME}.GetActivity#1", request );
+            return UnifiedMessages.SendMessage<CUserGameActivity_GetActivity_Request, CUserGameActivity_GetActivity_Response>( $"UserGameActivity.GetActivity#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

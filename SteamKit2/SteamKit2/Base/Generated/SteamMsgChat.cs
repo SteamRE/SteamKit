@@ -5634,7 +5634,7 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChat_RequestFriendPersonaStates_Response>> RequestFriendPersonaStates(CChat_RequestFriendPersonaStates_Request request)
         {
-            return UnifiedMessages.SendMessage<CChat_RequestFriendPersonaStates_Request, CChat_RequestFriendPersonaStates_Response>( $"{SERVICE_NAME}.RequestFriendPersonaStates#1", request );
+            return UnifiedMessages.SendMessage<CChat_RequestFriendPersonaStates_Request, CChat_RequestFriendPersonaStates_Response>( $"Chat.RequestFriendPersonaStates#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
@@ -5654,267 +5654,267 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_CreateChatRoomGroup_Response>> CreateChatRoomGroup(CChatRoom_CreateChatRoomGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_CreateChatRoomGroup_Request, CChatRoom_CreateChatRoomGroup_Response>( $"{SERVICE_NAME}.CreateChatRoomGroup#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_CreateChatRoomGroup_Request, CChatRoom_CreateChatRoomGroup_Response>( $"ChatRoom.CreateChatRoomGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_SaveChatRoomGroup_Response>> SaveChatRoomGroup(CChatRoom_SaveChatRoomGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_SaveChatRoomGroup_Request, CChatRoom_SaveChatRoomGroup_Response>( $"{SERVICE_NAME}.SaveChatRoomGroup#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_SaveChatRoomGroup_Request, CChatRoom_SaveChatRoomGroup_Response>( $"ChatRoom.SaveChatRoomGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_RenameChatRoomGroup_Response>> RenameChatRoomGroup(CChatRoom_RenameChatRoomGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_RenameChatRoomGroup_Request, CChatRoom_RenameChatRoomGroup_Response>( $"{SERVICE_NAME}.RenameChatRoomGroup#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_RenameChatRoomGroup_Request, CChatRoom_RenameChatRoomGroup_Response>( $"ChatRoom.RenameChatRoomGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_SetChatRoomGroupTagline_Response>> SetChatRoomGroupTagline(CChatRoom_SetChatRoomGroupTagline_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_SetChatRoomGroupTagline_Request, CChatRoom_SetChatRoomGroupTagline_Response>( $"{SERVICE_NAME}.SetChatRoomGroupTagline#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_SetChatRoomGroupTagline_Request, CChatRoom_SetChatRoomGroupTagline_Response>( $"ChatRoom.SetChatRoomGroupTagline#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_SetChatRoomGroupAvatar_Response>> SetChatRoomGroupAvatar(CChatRoom_SetChatRoomGroupAvatar_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_SetChatRoomGroupAvatar_Request, CChatRoom_SetChatRoomGroupAvatar_Response>( $"{SERVICE_NAME}.SetChatRoomGroupAvatar#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_SetChatRoomGroupAvatar_Request, CChatRoom_SetChatRoomGroupAvatar_Response>( $"ChatRoom.SetChatRoomGroupAvatar#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_SetChatRoomGroupWatchingBroadcast_Response>> SetChatRoomGroupWatchingBroadcast(CChatRoom_SetChatRoomGroupWatchingBroadcast_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_SetChatRoomGroupWatchingBroadcast_Request, CChatRoom_SetChatRoomGroupWatchingBroadcast_Response>( $"{SERVICE_NAME}.SetChatRoomGroupWatchingBroadcast#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_SetChatRoomGroupWatchingBroadcast_Request, CChatRoom_SetChatRoomGroupWatchingBroadcast_Response>( $"ChatRoom.SetChatRoomGroupWatchingBroadcast#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_JoinMiniGameForChatRoomGroup_Response>> JoinMiniGameForChatRoomGroup(CChatRoom_JoinMiniGameForChatRoomGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_JoinMiniGameForChatRoomGroup_Request, CChatRoom_JoinMiniGameForChatRoomGroup_Response>( $"{SERVICE_NAME}.JoinMiniGameForChatRoomGroup#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_JoinMiniGameForChatRoomGroup_Request, CChatRoom_JoinMiniGameForChatRoomGroup_Response>( $"ChatRoom.JoinMiniGameForChatRoomGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_EndMiniGameForChatRoomGroup_Response>> EndMiniGameForChatRoomGroup(CChatRoom_EndMiniGameForChatRoomGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_EndMiniGameForChatRoomGroup_Request, CChatRoom_EndMiniGameForChatRoomGroup_Response>( $"{SERVICE_NAME}.EndMiniGameForChatRoomGroup#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_EndMiniGameForChatRoomGroup_Request, CChatRoom_EndMiniGameForChatRoomGroup_Response>( $"ChatRoom.EndMiniGameForChatRoomGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_MuteUser_Response>> MuteUserInGroup(CChatRoom_MuteUser_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_MuteUser_Request, CChatRoom_MuteUser_Response>( $"{SERVICE_NAME}.MuteUserInGroup#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_MuteUser_Request, CChatRoom_MuteUser_Response>( $"ChatRoom.MuteUserInGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_KickUser_Response>> KickUserFromGroup(CChatRoom_KickUser_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_KickUser_Request, CChatRoom_KickUser_Response>( $"{SERVICE_NAME}.KickUserFromGroup#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_KickUser_Request, CChatRoom_KickUser_Response>( $"ChatRoom.KickUserFromGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_SetUserBanState_Response>> SetUserBanState(CChatRoom_SetUserBanState_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_SetUserBanState_Request, CChatRoom_SetUserBanState_Response>( $"{SERVICE_NAME}.SetUserBanState#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_SetUserBanState_Request, CChatRoom_SetUserBanState_Response>( $"ChatRoom.SetUserBanState#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_RevokeInvite_Response>> RevokeInviteToGroup(CChatRoom_RevokeInvite_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_RevokeInvite_Request, CChatRoom_RevokeInvite_Response>( $"{SERVICE_NAME}.RevokeInviteToGroup#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_RevokeInvite_Request, CChatRoom_RevokeInvite_Response>( $"ChatRoom.RevokeInviteToGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_CreateRole_Response>> CreateRole(CChatRoom_CreateRole_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_CreateRole_Request, CChatRoom_CreateRole_Response>( $"{SERVICE_NAME}.CreateRole#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_CreateRole_Request, CChatRoom_CreateRole_Response>( $"ChatRoom.CreateRole#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_GetRoles_Response>> GetRoles(CChatRoom_GetRoles_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_GetRoles_Request, CChatRoom_GetRoles_Response>( $"{SERVICE_NAME}.GetRoles#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_GetRoles_Request, CChatRoom_GetRoles_Response>( $"ChatRoom.GetRoles#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_RenameRole_Response>> RenameRole(CChatRoom_RenameRole_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_RenameRole_Request, CChatRoom_RenameRole_Response>( $"{SERVICE_NAME}.RenameRole#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_RenameRole_Request, CChatRoom_RenameRole_Response>( $"ChatRoom.RenameRole#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_ReorderRole_Response>> ReorderRole(CChatRoom_ReorderRole_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_ReorderRole_Request, CChatRoom_ReorderRole_Response>( $"{SERVICE_NAME}.ReorderRole#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_ReorderRole_Request, CChatRoom_ReorderRole_Response>( $"ChatRoom.ReorderRole#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_DeleteRole_Response>> DeleteRole(CChatRoom_DeleteRole_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_DeleteRole_Request, CChatRoom_DeleteRole_Response>( $"{SERVICE_NAME}.DeleteRole#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_DeleteRole_Request, CChatRoom_DeleteRole_Response>( $"ChatRoom.DeleteRole#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_GetRoleActions_Response>> GetRoleActions(CChatRoom_GetRoleActions_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_GetRoleActions_Request, CChatRoom_GetRoleActions_Response>( $"{SERVICE_NAME}.GetRoleActions#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_GetRoleActions_Request, CChatRoom_GetRoleActions_Response>( $"ChatRoom.GetRoleActions#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_ReplaceRoleActions_Response>> ReplaceRoleActions(CChatRoom_ReplaceRoleActions_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_ReplaceRoleActions_Request, CChatRoom_ReplaceRoleActions_Response>( $"{SERVICE_NAME}.ReplaceRoleActions#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_ReplaceRoleActions_Request, CChatRoom_ReplaceRoleActions_Response>( $"ChatRoom.ReplaceRoleActions#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_AddRoleToUser_Response>> AddRoleToUser(CChatRoom_AddRoleToUser_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_AddRoleToUser_Request, CChatRoom_AddRoleToUser_Response>( $"{SERVICE_NAME}.AddRoleToUser#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_AddRoleToUser_Request, CChatRoom_AddRoleToUser_Response>( $"ChatRoom.AddRoleToUser#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_GetRolesForUser_Response>> GetRolesForUser(CChatRoom_GetRolesForUser_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_GetRolesForUser_Request, CChatRoom_GetRolesForUser_Response>( $"{SERVICE_NAME}.GetRolesForUser#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_GetRolesForUser_Request, CChatRoom_GetRolesForUser_Response>( $"ChatRoom.GetRolesForUser#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_DeleteRoleFromUser_Response>> DeleteRoleFromUser(CChatRoom_DeleteRoleFromUser_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_DeleteRoleFromUser_Request, CChatRoom_DeleteRoleFromUser_Response>( $"{SERVICE_NAME}.DeleteRoleFromUser#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_DeleteRoleFromUser_Request, CChatRoom_DeleteRoleFromUser_Response>( $"ChatRoom.DeleteRoleFromUser#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_JoinChatRoomGroup_Response>> JoinChatRoomGroup(CChatRoom_JoinChatRoomGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_JoinChatRoomGroup_Request, CChatRoom_JoinChatRoomGroup_Response>( $"{SERVICE_NAME}.JoinChatRoomGroup#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_JoinChatRoomGroup_Request, CChatRoom_JoinChatRoomGroup_Response>( $"ChatRoom.JoinChatRoomGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_InviteFriendToChatRoomGroup_Response>> InviteFriendToChatRoomGroup(CChatRoom_InviteFriendToChatRoomGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_InviteFriendToChatRoomGroup_Request, CChatRoom_InviteFriendToChatRoomGroup_Response>( $"{SERVICE_NAME}.InviteFriendToChatRoomGroup#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_InviteFriendToChatRoomGroup_Request, CChatRoom_InviteFriendToChatRoomGroup_Response>( $"ChatRoom.InviteFriendToChatRoomGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_LeaveChatRoomGroup_Response>> LeaveChatRoomGroup(CChatRoom_LeaveChatRoomGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_LeaveChatRoomGroup_Request, CChatRoom_LeaveChatRoomGroup_Response>( $"{SERVICE_NAME}.LeaveChatRoomGroup#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_LeaveChatRoomGroup_Request, CChatRoom_LeaveChatRoomGroup_Response>( $"ChatRoom.LeaveChatRoomGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_CreateChatRoom_Response>> CreateChatRoom(CChatRoom_CreateChatRoom_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_CreateChatRoom_Request, CChatRoom_CreateChatRoom_Response>( $"{SERVICE_NAME}.CreateChatRoom#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_CreateChatRoom_Request, CChatRoom_CreateChatRoom_Response>( $"ChatRoom.CreateChatRoom#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_DeleteChatRoom_Response>> DeleteChatRoom(CChatRoom_DeleteChatRoom_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_DeleteChatRoom_Request, CChatRoom_DeleteChatRoom_Response>( $"{SERVICE_NAME}.DeleteChatRoom#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_DeleteChatRoom_Request, CChatRoom_DeleteChatRoom_Response>( $"ChatRoom.DeleteChatRoom#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_RenameChatRoom_Response>> RenameChatRoom(CChatRoom_RenameChatRoom_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_RenameChatRoom_Request, CChatRoom_RenameChatRoom_Response>( $"{SERVICE_NAME}.RenameChatRoom#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_RenameChatRoom_Request, CChatRoom_RenameChatRoom_Response>( $"ChatRoom.RenameChatRoom#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_ReorderChatRoom_Response>> ReorderChatRoom(CChatRoom_ReorderChatRoom_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_ReorderChatRoom_Request, CChatRoom_ReorderChatRoom_Response>( $"{SERVICE_NAME}.ReorderChatRoom#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_ReorderChatRoom_Request, CChatRoom_ReorderChatRoom_Response>( $"ChatRoom.ReorderChatRoom#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_SendChatMessage_Response>> SendChatMessage(CChatRoom_SendChatMessage_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_SendChatMessage_Request, CChatRoom_SendChatMessage_Response>( $"{SERVICE_NAME}.SendChatMessage#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_SendChatMessage_Request, CChatRoom_SendChatMessage_Response>( $"ChatRoom.SendChatMessage#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_JoinVoiceChat_Response>> JoinVoiceChat(CChatRoom_JoinVoiceChat_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_JoinVoiceChat_Request, CChatRoom_JoinVoiceChat_Response>( $"{SERVICE_NAME}.JoinVoiceChat#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_JoinVoiceChat_Request, CChatRoom_JoinVoiceChat_Response>( $"ChatRoom.JoinVoiceChat#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_LeaveVoiceChat_Response>> LeaveVoiceChat(CChatRoom_LeaveVoiceChat_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_LeaveVoiceChat_Request, CChatRoom_LeaveVoiceChat_Response>( $"{SERVICE_NAME}.LeaveVoiceChat#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_LeaveVoiceChat_Request, CChatRoom_LeaveVoiceChat_Response>( $"ChatRoom.LeaveVoiceChat#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_GetMessageHistory_Response>> GetMessageHistory(CChatRoom_GetMessageHistory_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_GetMessageHistory_Request, CChatRoom_GetMessageHistory_Response>( $"{SERVICE_NAME}.GetMessageHistory#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_GetMessageHistory_Request, CChatRoom_GetMessageHistory_Response>( $"ChatRoom.GetMessageHistory#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_GetMyChatRoomGroups_Response>> GetMyChatRoomGroups(CChatRoom_GetMyChatRoomGroups_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_GetMyChatRoomGroups_Request, CChatRoom_GetMyChatRoomGroups_Response>( $"{SERVICE_NAME}.GetMyChatRoomGroups#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_GetMyChatRoomGroups_Request, CChatRoom_GetMyChatRoomGroups_Response>( $"ChatRoom.GetMyChatRoomGroups#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_GetChatRoomGroupState_Response>> GetChatRoomGroupState(CChatRoom_GetChatRoomGroupState_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_GetChatRoomGroupState_Request, CChatRoom_GetChatRoomGroupState_Response>( $"{SERVICE_NAME}.GetChatRoomGroupState#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_GetChatRoomGroupState_Request, CChatRoom_GetChatRoomGroupState_Response>( $"ChatRoom.GetChatRoomGroupState#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_GetChatRoomGroupSummary_Response>> GetChatRoomGroupSummary(CChatRoom_GetChatRoomGroupSummary_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_GetChatRoomGroupSummary_Request, CChatRoom_GetChatRoomGroupSummary_Response>( $"{SERVICE_NAME}.GetChatRoomGroupSummary#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_GetChatRoomGroupSummary_Request, CChatRoom_GetChatRoomGroupSummary_Response>( $"ChatRoom.GetChatRoomGroupSummary#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_SetAppChatRoomGroupForceActive_Response>> SetAppChatRoomGroupForceActive(CChatRoom_SetAppChatRoomGroupForceActive_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_SetAppChatRoomGroupForceActive_Request, CChatRoom_SetAppChatRoomGroupForceActive_Response>( $"{SERVICE_NAME}.SetAppChatRoomGroupForceActive#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_SetAppChatRoomGroupForceActive_Request, CChatRoom_SetAppChatRoomGroupForceActive_Response>( $"ChatRoom.SetAppChatRoomGroupForceActive#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> SetAppChatRoomGroupStopForceActive(CChatRoom_SetAppChatRoomGroupStopForceActive_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_SetAppChatRoomGroupStopForceActive_Notification, NoResponse>( $"{SERVICE_NAME}.SetAppChatRoomGroupStopForceActive#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_SetAppChatRoomGroupStopForceActive_Notification, NoResponse>( $"ChatRoom.SetAppChatRoomGroupStopForceActive#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> AckChatMessage(CChatRoom_AckChatMessage_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_AckChatMessage_Notification, NoResponse>( $"{SERVICE_NAME}.AckChatMessage#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_AckChatMessage_Notification, NoResponse>( $"ChatRoom.AckChatMessage#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_CreateInviteLink_Response>> CreateInviteLink(CChatRoom_CreateInviteLink_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_CreateInviteLink_Request, CChatRoom_CreateInviteLink_Response>( $"{SERVICE_NAME}.CreateInviteLink#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_CreateInviteLink_Request, CChatRoom_CreateInviteLink_Response>( $"ChatRoom.CreateInviteLink#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_GetInviteLinkInfo_Response>> GetInviteLinkInfo(CChatRoom_GetInviteLinkInfo_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_GetInviteLinkInfo_Request, CChatRoom_GetInviteLinkInfo_Response>( $"{SERVICE_NAME}.GetInviteLinkInfo#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_GetInviteLinkInfo_Request, CChatRoom_GetInviteLinkInfo_Response>( $"ChatRoom.GetInviteLinkInfo#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_GetInviteInfo_Response>> GetInviteInfo(CChatRoom_GetInviteInfo_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_GetInviteInfo_Request, CChatRoom_GetInviteInfo_Response>( $"{SERVICE_NAME}.GetInviteInfo#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_GetInviteInfo_Request, CChatRoom_GetInviteInfo_Response>( $"ChatRoom.GetInviteInfo#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_GetInviteLinksForGroup_Response>> GetInviteLinksForGroup(CChatRoom_GetInviteLinksForGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_GetInviteLinksForGroup_Request, CChatRoom_GetInviteLinksForGroup_Response>( $"{SERVICE_NAME}.GetInviteLinksForGroup#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_GetInviteLinksForGroup_Request, CChatRoom_GetInviteLinksForGroup_Response>( $"ChatRoom.GetInviteLinksForGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_GetBanList_Response>> GetBanList(CChatRoom_GetBanList_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_GetBanList_Request, CChatRoom_GetBanList_Response>( $"{SERVICE_NAME}.GetBanList#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_GetBanList_Request, CChatRoom_GetBanList_Response>( $"ChatRoom.GetBanList#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_GetInviteList_Response>> GetInviteList(CChatRoom_GetInviteList_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_GetInviteList_Request, CChatRoom_GetInviteList_Response>( $"{SERVICE_NAME}.GetInviteList#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_GetInviteList_Request, CChatRoom_GetInviteList_Response>( $"ChatRoom.GetInviteList#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_DeleteInviteLink_Response>> DeleteInviteLink(CChatRoom_DeleteInviteLink_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_DeleteInviteLink_Request, CChatRoom_DeleteInviteLink_Response>( $"{SERVICE_NAME}.DeleteInviteLink#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_DeleteInviteLink_Request, CChatRoom_DeleteInviteLink_Response>( $"ChatRoom.DeleteInviteLink#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_SetSessionActiveChatRoomGroups_Response>> SetSessionActiveChatRoomGroups(CChatRoom_SetSessionActiveChatRoomGroups_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_SetSessionActiveChatRoomGroups_Request, CChatRoom_SetSessionActiveChatRoomGroups_Response>( $"{SERVICE_NAME}.SetSessionActiveChatRoomGroups#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_SetSessionActiveChatRoomGroups_Request, CChatRoom_SetSessionActiveChatRoomGroups_Response>( $"ChatRoom.SetSessionActiveChatRoomGroups#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_SetUserChatGroupPreferences_Response>> SetUserChatGroupPreferences(CChatRoom_SetUserChatGroupPreferences_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_SetUserChatGroupPreferences_Request, CChatRoom_SetUserChatGroupPreferences_Response>( $"{SERVICE_NAME}.SetUserChatGroupPreferences#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_SetUserChatGroupPreferences_Request, CChatRoom_SetUserChatGroupPreferences_Response>( $"ChatRoom.SetUserChatGroupPreferences#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_DeleteChatMessages_Response>> DeleteChatMessages(CChatRoom_DeleteChatMessages_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_DeleteChatMessages_Request, CChatRoom_DeleteChatMessages_Response>( $"{SERVICE_NAME}.DeleteChatMessages#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_DeleteChatMessages_Request, CChatRoom_DeleteChatMessages_Response>( $"ChatRoom.DeleteChatMessages#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> UpdateMemberListView(CChatRoom_UpdateMemberListView_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_UpdateMemberListView_Notification, NoResponse>( $"{SERVICE_NAME}.UpdateMemberListView#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_UpdateMemberListView_Notification, NoResponse>( $"ChatRoom.UpdateMemberListView#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_SearchMembers_Response>> SearchMembers(CChatRoom_SearchMembers_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_SearchMembers_Request, CChatRoom_SearchMembers_Response>( $"{SERVICE_NAME}.SearchMembers#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_SearchMembers_Request, CChatRoom_SearchMembers_Response>( $"ChatRoom.SearchMembers#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_UpdateMessageReaction_Response>> UpdateMessageReaction(CChatRoom_UpdateMessageReaction_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_UpdateMessageReaction_Request, CChatRoom_UpdateMessageReaction_Response>( $"{SERVICE_NAME}.UpdateMessageReaction#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_UpdateMessageReaction_Request, CChatRoom_UpdateMessageReaction_Response>( $"ChatRoom.UpdateMessageReaction#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_GetMessageReactionReactors_Response>> GetMessageReactionReactors(CChatRoom_GetMessageReactionReactors_Request request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_GetMessageReactionReactors_Request, CChatRoom_GetMessageReactionReactors_Response>( $"{SERVICE_NAME}.GetMessageReactionReactors#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_GetMessageReactionReactors_Request, CChatRoom_GetMessageReactionReactors_Response>( $"ChatRoom.GetMessageReactionReactors#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
@@ -6090,12 +6090,12 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CClanChatRooms_GetClanChatRoomInfo_Response>> GetClanChatRoomInfo(CClanChatRooms_GetClanChatRoomInfo_Request request)
         {
-            return UnifiedMessages.SendMessage<CClanChatRooms_GetClanChatRoomInfo_Request, CClanChatRooms_GetClanChatRoomInfo_Response>( $"{SERVICE_NAME}.GetClanChatRoomInfo#1", request );
+            return UnifiedMessages.SendMessage<CClanChatRooms_GetClanChatRoomInfo_Request, CClanChatRooms_GetClanChatRoomInfo_Response>( $"ClanChatRooms.GetClanChatRoomInfo#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CClanChatRooms_SetClanChatRoomPrivate_Response>> SetClanChatRoomPrivate(CClanChatRooms_SetClanChatRoomPrivate_Request request)
         {
-            return UnifiedMessages.SendMessage<CClanChatRooms_SetClanChatRoomPrivate_Request, CClanChatRooms_SetClanChatRoomPrivate_Response>( $"{SERVICE_NAME}.SetClanChatRoomPrivate#1", request );
+            return UnifiedMessages.SendMessage<CClanChatRooms_SetClanChatRoomPrivate_Request, CClanChatRooms_SetClanChatRoomPrivate_Response>( $"ClanChatRooms.SetClanChatRoomPrivate#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
@@ -6118,57 +6118,57 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyIncomingChatMessage(CChatRoom_IncomingChatMessage_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_IncomingChatMessage_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyIncomingChatMessage#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_IncomingChatMessage_Notification, NoResponse>( $"ChatRoomClient.NotifyIncomingChatMessage#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyChatMessageModified(CChatRoom_ChatMessageModified_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_ChatMessageModified_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyChatMessageModified#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_ChatMessageModified_Notification, NoResponse>( $"ChatRoomClient.NotifyChatMessageModified#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyMemberStateChange(CChatRoom_MemberStateChange_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_MemberStateChange_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyMemberStateChange#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_MemberStateChange_Notification, NoResponse>( $"ChatRoomClient.NotifyMemberStateChange#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyChatRoomHeaderStateChange(CChatRoom_ChatRoomHeaderState_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_ChatRoomHeaderState_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyChatRoomHeaderStateChange#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_ChatRoomHeaderState_Notification, NoResponse>( $"ChatRoomClient.NotifyChatRoomHeaderStateChange#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyChatRoomGroupRoomsChange(CChatRoom_ChatRoomGroupRoomsChange_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_ChatRoomGroupRoomsChange_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyChatRoomGroupRoomsChange#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_ChatRoomGroupRoomsChange_Notification, NoResponse>( $"ChatRoomClient.NotifyChatRoomGroupRoomsChange#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyShouldRejoinChatRoomVoiceChat(CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyShouldRejoinChatRoomVoiceChat#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification, NoResponse>( $"ChatRoomClient.NotifyShouldRejoinChatRoomVoiceChat#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyChatGroupUserStateChanged(ChatRoomClient_NotifyChatGroupUserStateChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<ChatRoomClient_NotifyChatGroupUserStateChanged_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyChatGroupUserStateChanged#1", request );
+            return UnifiedMessages.SendMessage<ChatRoomClient_NotifyChatGroupUserStateChanged_Notification, NoResponse>( $"ChatRoomClient.NotifyChatGroupUserStateChanged#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyAckChatMessageEcho(CChatRoom_AckChatMessage_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_AckChatMessage_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyAckChatMessageEcho#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_AckChatMessage_Notification, NoResponse>( $"ChatRoomClient.NotifyAckChatMessageEcho#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyChatRoomDisconnect(ChatRoomClient_NotifyChatRoomDisconnect_Notification request)
         {
-            return UnifiedMessages.SendMessage<ChatRoomClient_NotifyChatRoomDisconnect_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyChatRoomDisconnect#1", request );
+            return UnifiedMessages.SendMessage<ChatRoomClient_NotifyChatRoomDisconnect_Notification, NoResponse>( $"ChatRoomClient.NotifyChatRoomDisconnect#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyMemberListViewUpdated(CChatRoomClient_MemberListViewUpdated_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoomClient_MemberListViewUpdated_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyMemberListViewUpdated#1", request );
+            return UnifiedMessages.SendMessage<CChatRoomClient_MemberListViewUpdated_Notification, NoResponse>( $"ChatRoomClient.NotifyMemberListViewUpdated#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyMessageReaction(CChatRoom_MessageReaction_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_MessageReaction_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyMessageReaction#1", request );
+            return UnifiedMessages.SendMessage<CChatRoom_MessageReaction_Notification, NoResponse>( $"ChatRoomClient.NotifyMessageReaction#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
@@ -6218,7 +6218,7 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyClientUsabilityMetrics(CChatUsability_ClientUsabilityMetrics_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatUsability_ClientUsabilityMetrics_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyClientUsabilityMetrics#1", request );
+            return UnifiedMessages.SendMessage<CChatUsability_ClientUsabilityMetrics_Notification, NoResponse>( $"ChatUsability.NotifyClientUsabilityMetrics#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
@@ -6238,7 +6238,7 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyRequestClientUsabilityMetrics(CChatUsability_RequestClientUsabilityMetrics_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatUsability_RequestClientUsabilityMetrics_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyRequestClientUsabilityMetrics#1", request );
+            return UnifiedMessages.SendMessage<CChatUsability_RequestClientUsabilityMetrics_Notification, NoResponse>( $"ChatUsabilityClient.NotifyRequestClientUsabilityMetrics#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

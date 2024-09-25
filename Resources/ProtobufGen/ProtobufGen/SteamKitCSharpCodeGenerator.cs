@@ -72,7 +72,7 @@ namespace ProtobufGen
             ctx.WriteLine( $"public AsyncJob<SteamUnifiedMessages.ServiceMsg<{Escape( method.OutputType[1..] )}>> {Escape( method.Name )}({Escape( MakeRelativeName( ctx, method.InputType ) )} request)" )
                 .WriteLine( "{" )
                 .Indent()
-                .WriteLine( $"return UnifiedMessages.SendMessage<{Escape( MakeRelativeName( ctx, method.InputType ) )}, {Escape( method.OutputType[1..] )}>( $\"{{SERVICE_NAME}}.{Escape( method.Name )}#1\", request );" )
+                .WriteLine( $"return UnifiedMessages.SendMessage<{Escape( MakeRelativeName( ctx, method.InputType ) )}, {Escape( method.OutputType[1..] )}>( $\"{state as string}.{Escape( method.Name )}#1\", request );" )
                 .Outdent()
                 .WriteLine( "}" )
                 .WriteLine();

@@ -114,7 +114,7 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CEconMarket_IsMarketplaceAllowed_Response>> IsMarketplaceAllowed(CEconMarket_IsMarketplaceAllowed_Request request)
         {
-            return UnifiedMessages.SendMessage<CEconMarket_IsMarketplaceAllowed_Request, CEconMarket_IsMarketplaceAllowed_Response>( $"{SERVICE_NAME}.IsMarketplaceAllowed#1", request );
+            return UnifiedMessages.SendMessage<CEconMarket_IsMarketplaceAllowed_Request, CEconMarket_IsMarketplaceAllowed_Response>( $"EconMarket.IsMarketplaceAllowed#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

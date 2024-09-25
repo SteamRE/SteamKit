@@ -876,22 +876,22 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CEcon_GetInventoryItemsWithDescriptions_Response>> GetInventoryItemsWithDescriptions(CEcon_GetInventoryItemsWithDescriptions_Request request)
         {
-            return UnifiedMessages.SendMessage<CEcon_GetInventoryItemsWithDescriptions_Request, CEcon_GetInventoryItemsWithDescriptions_Response>( $"{SERVICE_NAME}.GetInventoryItemsWithDescriptions#1", request );
+            return UnifiedMessages.SendMessage<CEcon_GetInventoryItemsWithDescriptions_Request, CEcon_GetInventoryItemsWithDescriptions_Response>( $"Econ.GetInventoryItemsWithDescriptions#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CEcon_GetTradeOfferAccessToken_Response>> GetTradeOfferAccessToken(CEcon_GetTradeOfferAccessToken_Request request)
         {
-            return UnifiedMessages.SendMessage<CEcon_GetTradeOfferAccessToken_Request, CEcon_GetTradeOfferAccessToken_Response>( $"{SERVICE_NAME}.GetTradeOfferAccessToken#1", request );
+            return UnifiedMessages.SendMessage<CEcon_GetTradeOfferAccessToken_Request, CEcon_GetTradeOfferAccessToken_Response>( $"Econ.GetTradeOfferAccessToken#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CEcon_ClientGetItemShopOverlayAuthURL_Response>> ClientGetItemShopOverlayAuthURL(CEcon_ClientGetItemShopOverlayAuthURL_Request request)
         {
-            return UnifiedMessages.SendMessage<CEcon_ClientGetItemShopOverlayAuthURL_Request, CEcon_ClientGetItemShopOverlayAuthURL_Response>( $"{SERVICE_NAME}.ClientGetItemShopOverlayAuthURL#1", request );
+            return UnifiedMessages.SendMessage<CEcon_ClientGetItemShopOverlayAuthURL_Request, CEcon_ClientGetItemShopOverlayAuthURL_Response>( $"Econ.ClientGetItemShopOverlayAuthURL#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CEcon_GetAssetClassInfo_Response>> GetAssetClassInfo(CEcon_GetAssetClassInfo_Request request)
         {
-            return UnifiedMessages.SendMessage<CEcon_GetAssetClassInfo_Request, CEcon_GetAssetClassInfo_Response>( $"{SERVICE_NAME}.GetAssetClassInfo#1", request );
+            return UnifiedMessages.SendMessage<CEcon_GetAssetClassInfo_Request, CEcon_GetAssetClassInfo_Response>( $"Econ.GetAssetClassInfo#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

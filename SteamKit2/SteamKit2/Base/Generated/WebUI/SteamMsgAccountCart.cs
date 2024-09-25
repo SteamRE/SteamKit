@@ -684,37 +684,37 @@ namespace SteamKit2.WebUI.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountCart_AddItemsToCart_Response>> AddItemsToCart(CAccountCart_AddItemsToCart_Request request)
         {
-            return UnifiedMessages.SendMessage<CAccountCart_AddItemsToCart_Request, CAccountCart_AddItemsToCart_Response>( $"{SERVICE_NAME}.AddItemsToCart#1", request );
+            return UnifiedMessages.SendMessage<CAccountCart_AddItemsToCart_Request, CAccountCart_AddItemsToCart_Response>( $"AccountCart.AddItemsToCart#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountCart_DeleteCart_Response>> DeleteCart(CAccountCart_DeleteCart_Request request)
         {
-            return UnifiedMessages.SendMessage<CAccountCart_DeleteCart_Request, CAccountCart_DeleteCart_Response>( $"{SERVICE_NAME}.DeleteCart#1", request );
+            return UnifiedMessages.SendMessage<CAccountCart_DeleteCart_Request, CAccountCart_DeleteCart_Response>( $"AccountCart.DeleteCart#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountCart_GetCart_Response>> GetCart(CAccountCart_GetCart_Request request)
         {
-            return UnifiedMessages.SendMessage<CAccountCart_GetCart_Request, CAccountCart_GetCart_Response>( $"{SERVICE_NAME}.GetCart#1", request );
+            return UnifiedMessages.SendMessage<CAccountCart_GetCart_Request, CAccountCart_GetCart_Response>( $"AccountCart.GetCart#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountCart_GetRelevantCoupons_Response>> GetRelevantCoupons(CAccountCart_GetRelevantCoupons_Request request)
         {
-            return UnifiedMessages.SendMessage<CAccountCart_GetRelevantCoupons_Request, CAccountCart_GetRelevantCoupons_Response>( $"{SERVICE_NAME}.GetRelevantCoupons#1", request );
+            return UnifiedMessages.SendMessage<CAccountCart_GetRelevantCoupons_Request, CAccountCart_GetRelevantCoupons_Response>( $"AccountCart.GetRelevantCoupons#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountCart_MergeShoppingCartContents_Response>> MergeShoppingCartContents(CAccountCart_MergeShoppingCartContents_Request request)
         {
-            return UnifiedMessages.SendMessage<CAccountCart_MergeShoppingCartContents_Request, CAccountCart_MergeShoppingCartContents_Response>( $"{SERVICE_NAME}.MergeShoppingCartContents#1", request );
+            return UnifiedMessages.SendMessage<CAccountCart_MergeShoppingCartContents_Request, CAccountCart_MergeShoppingCartContents_Response>( $"AccountCart.MergeShoppingCartContents#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountCart_ModifyLineItem_Response>> ModifyLineItem(CAccountCart_ModifyLineItem_Request request)
         {
-            return UnifiedMessages.SendMessage<CAccountCart_ModifyLineItem_Request, CAccountCart_ModifyLineItem_Response>( $"{SERVICE_NAME}.ModifyLineItem#1", request );
+            return UnifiedMessages.SendMessage<CAccountCart_ModifyLineItem_Request, CAccountCart_ModifyLineItem_Response>( $"AccountCart.ModifyLineItem#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountCart_RemoveItemFromCart_Response>> RemoveItemFromCart(CAccountCart_RemoveItemFromCart_Request request)
         {
-            return UnifiedMessages.SendMessage<CAccountCart_RemoveItemFromCart_Request, CAccountCart_RemoveItemFromCart_Response>( $"{SERVICE_NAME}.RemoveItemFromCart#1", request );
+            return UnifiedMessages.SendMessage<CAccountCart_RemoveItemFromCart_Request, CAccountCart_RemoveItemFromCart_Response>( $"AccountCart.RemoveItemFromCart#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

@@ -8,6 +8,7 @@ v 3.0.0			July 18 2024
 * Added `DepotManifest.Serialize`.
 * Added `SteamClient.WaitForCallbackAsync` and `CallbackManager.RunWaitCallbackAsync`.
 * Added `cdnAuthToken` parameter to `CDN.Client` method for country specific servers that still require it.
+* Added WebSocket as a default enabled protocol, switched to using GetCMListForConnect API.
 * Updated Steam enums and protobufs.
 * Various performance and memory optimizations.
 

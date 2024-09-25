@@ -166,17 +166,17 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetLinkFilterHashPrefixes_Response>> GetLinkFilterHashPrefixes(CCommunity_GetLinkFilterHashPrefixes_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterHashPrefixes_Request, CCommunity_GetLinkFilterHashPrefixes_Response>( $"{SERVICE_NAME}.GetLinkFilterHashPrefixes#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterHashPrefixes_Request, CCommunity_GetLinkFilterHashPrefixes_Response>( $"CommunityLinkFilter.GetLinkFilterHashPrefixes#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetLinkFilterHashes_Response>> GetLinkFilterHashes(CCommunity_GetLinkFilterHashes_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterHashes_Request, CCommunity_GetLinkFilterHashes_Response>( $"{SERVICE_NAME}.GetLinkFilterHashes#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterHashes_Request, CCommunity_GetLinkFilterHashes_Response>( $"CommunityLinkFilter.GetLinkFilterHashes#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetLinkFilterListVersion_Response>> GetLinkFilterListVersion(CCommunity_GetLinkFilterListVersion_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterListVersion_Request, CCommunity_GetLinkFilterListVersion_Response>( $"{SERVICE_NAME}.GetLinkFilterListVersion#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterListVersion_Request, CCommunity_GetLinkFilterListVersion_Response>( $"CommunityLinkFilter.GetLinkFilterListVersion#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

@@ -1024,47 +1024,47 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CTwoFactor_Time_Response>> QueryTime(CTwoFactor_Time_Request request)
         {
-            return UnifiedMessages.SendMessage<CTwoFactor_Time_Request, CTwoFactor_Time_Response>( $"{SERVICE_NAME}.QueryTime#1", request );
+            return UnifiedMessages.SendMessage<CTwoFactor_Time_Request, CTwoFactor_Time_Response>( $"TwoFactor.QueryTime#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CTwoFactor_Status_Response>> QueryStatus(CTwoFactor_Status_Request request)
         {
-            return UnifiedMessages.SendMessage<CTwoFactor_Status_Request, CTwoFactor_Status_Response>( $"{SERVICE_NAME}.QueryStatus#1", request );
+            return UnifiedMessages.SendMessage<CTwoFactor_Status_Request, CTwoFactor_Status_Response>( $"TwoFactor.QueryStatus#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CTwoFactor_AddAuthenticator_Response>> AddAuthenticator(CTwoFactor_AddAuthenticator_Request request)
         {
-            return UnifiedMessages.SendMessage<CTwoFactor_AddAuthenticator_Request, CTwoFactor_AddAuthenticator_Response>( $"{SERVICE_NAME}.AddAuthenticator#1", request );
+            return UnifiedMessages.SendMessage<CTwoFactor_AddAuthenticator_Request, CTwoFactor_AddAuthenticator_Response>( $"TwoFactor.AddAuthenticator#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CTwoFactor_SendEmail_Response>> SendEmail(CTwoFactor_SendEmail_Request request)
         {
-            return UnifiedMessages.SendMessage<CTwoFactor_SendEmail_Request, CTwoFactor_SendEmail_Response>( $"{SERVICE_NAME}.SendEmail#1", request );
+            return UnifiedMessages.SendMessage<CTwoFactor_SendEmail_Request, CTwoFactor_SendEmail_Response>( $"TwoFactor.SendEmail#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CTwoFactor_FinalizeAddAuthenticator_Response>> FinalizeAddAuthenticator(CTwoFactor_FinalizeAddAuthenticator_Request request)
         {
-            return UnifiedMessages.SendMessage<CTwoFactor_FinalizeAddAuthenticator_Request, CTwoFactor_FinalizeAddAuthenticator_Response>( $"{SERVICE_NAME}.FinalizeAddAuthenticator#1", request );
+            return UnifiedMessages.SendMessage<CTwoFactor_FinalizeAddAuthenticator_Request, CTwoFactor_FinalizeAddAuthenticator_Response>( $"TwoFactor.FinalizeAddAuthenticator#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CTwoFactor_UpdateTokenVersion_Response>> UpdateTokenVersion(CTwoFactor_UpdateTokenVersion_Request request)
         {
-            return UnifiedMessages.SendMessage<CTwoFactor_UpdateTokenVersion_Request, CTwoFactor_UpdateTokenVersion_Response>( $"{SERVICE_NAME}.UpdateTokenVersion#1", request );
+            return UnifiedMessages.SendMessage<CTwoFactor_UpdateTokenVersion_Request, CTwoFactor_UpdateTokenVersion_Response>( $"TwoFactor.UpdateTokenVersion#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CTwoFactor_RemoveAuthenticator_Response>> RemoveAuthenticator(CTwoFactor_RemoveAuthenticator_Request request)
         {
-            return UnifiedMessages.SendMessage<CTwoFactor_RemoveAuthenticator_Request, CTwoFactor_RemoveAuthenticator_Response>( $"{SERVICE_NAME}.RemoveAuthenticator#1", request );
+            return UnifiedMessages.SendMessage<CTwoFactor_RemoveAuthenticator_Request, CTwoFactor_RemoveAuthenticator_Response>( $"TwoFactor.RemoveAuthenticator#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response>> RemoveAuthenticatorViaChallengeStart(CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request request)
         {
-            return UnifiedMessages.SendMessage<CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request, CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response>( $"{SERVICE_NAME}.RemoveAuthenticatorViaChallengeStart#1", request );
+            return UnifiedMessages.SendMessage<CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request, CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response>( $"TwoFactor.RemoveAuthenticatorViaChallengeStart#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response>> RemoveAuthenticatorViaChallengeContinue(CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request request)
         {
-            return UnifiedMessages.SendMessage<CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request, CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response>( $"{SERVICE_NAME}.RemoveAuthenticatorViaChallengeContinue#1", request );
+            return UnifiedMessages.SendMessage<CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request, CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response>( $"TwoFactor.RemoveAuthenticatorViaChallengeContinue#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

@@ -207,7 +207,7 @@ namespace Tests
             hookableHandler.OnRequest = async request =>
             {
                 Assert.NotNull( request );
-                Assert.Equal( "/IFooService/PerformFooOperation/v2", request.RequestUri.AbsolutePath );
+                Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
                 Assert.Equal( HttpMethod.Put, request.Method );
 
                 var content = await request.Content.ReadAsStringAsync(); // This technically should be ReadAsFormDataAsync

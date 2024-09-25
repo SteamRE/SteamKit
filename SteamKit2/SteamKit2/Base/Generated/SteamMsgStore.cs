@@ -2035,112 +2035,112 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_RegisterCDKey_Response>> RegisterCDKey(CStore_RegisterCDKey_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_RegisterCDKey_Request, CStore_RegisterCDKey_Response>( $"{SERVICE_NAME}.RegisterCDKey#1", request );
+            return UnifiedMessages.SendMessage<CStore_RegisterCDKey_Request, CStore_RegisterCDKey_Response>( $"Store.RegisterCDKey#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_GetMostPopularTags_Response>> GetMostPopularTags(CStore_GetMostPopularTags_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_GetMostPopularTags_Request, CStore_GetMostPopularTags_Response>( $"{SERVICE_NAME}.GetMostPopularTags#1", request );
+            return UnifiedMessages.SendMessage<CStore_GetMostPopularTags_Request, CStore_GetMostPopularTags_Response>( $"Store.GetMostPopularTags#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_GetLocalizedNameForTags_Response>> GetLocalizedNameForTags(CStore_GetLocalizedNameForTags_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_GetLocalizedNameForTags_Request, CStore_GetLocalizedNameForTags_Response>( $"{SERVICE_NAME}.GetLocalizedNameForTags#1", request );
+            return UnifiedMessages.SendMessage<CStore_GetLocalizedNameForTags_Request, CStore_GetLocalizedNameForTags_Response>( $"Store.GetLocalizedNameForTags#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_GetTagList_Response>> GetTagList(CStore_GetTagList_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_GetTagList_Request, CStore_GetTagList_Response>( $"{SERVICE_NAME}.GetTagList#1", request );
+            return UnifiedMessages.SendMessage<CStore_GetTagList_Request, CStore_GetTagList_Response>( $"Store.GetTagList#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_GetDiscoveryQueue_Response>> GetDiscoveryQueue(CStore_GetDiscoveryQueue_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_GetDiscoveryQueue_Request, CStore_GetDiscoveryQueue_Response>( $"{SERVICE_NAME}.GetDiscoveryQueue#1", request );
+            return UnifiedMessages.SendMessage<CStore_GetDiscoveryQueue_Request, CStore_GetDiscoveryQueue_Response>( $"Store.GetDiscoveryQueue#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_GetDiscoveryQueueSettings_Response>> GetDiscoveryQueueSettings(CStore_GetDiscoveryQueueSettings_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_GetDiscoveryQueueSettings_Request, CStore_GetDiscoveryQueueSettings_Response>( $"{SERVICE_NAME}.GetDiscoveryQueueSettings#1", request );
+            return UnifiedMessages.SendMessage<CStore_GetDiscoveryQueueSettings_Request, CStore_GetDiscoveryQueueSettings_Response>( $"Store.GetDiscoveryQueueSettings#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_SkipDiscoveryQueueItem_Response>> SkipDiscoveryQueueItem(CStore_SkipDiscoveryQueueItem_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_SkipDiscoveryQueueItem_Request, CStore_SkipDiscoveryQueueItem_Response>( $"{SERVICE_NAME}.SkipDiscoveryQueueItem#1", request );
+            return UnifiedMessages.SendMessage<CStore_SkipDiscoveryQueueItem_Request, CStore_SkipDiscoveryQueueItem_Response>( $"Store.SkipDiscoveryQueueItem#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_GetUserGameInterestState_Response>> GetUserGameInterestState(CStore_GetUserGameInterestState_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_GetUserGameInterestState_Request, CStore_GetUserGameInterestState_Response>( $"{SERVICE_NAME}.GetUserGameInterestState#1", request );
+            return UnifiedMessages.SendMessage<CStore_GetUserGameInterestState_Request, CStore_GetUserGameInterestState_Response>( $"Store.GetUserGameInterestState#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_GetDiscoveryQueueSkippedApps_Response>> GetDiscoveryQueueSkippedApps(CStore_GetDiscoveryQueueSkippedApps_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_GetDiscoveryQueueSkippedApps_Request, CStore_GetDiscoveryQueueSkippedApps_Response>( $"{SERVICE_NAME}.GetDiscoveryQueueSkippedApps#1", request );
+            return UnifiedMessages.SendMessage<CStore_GetDiscoveryQueueSkippedApps_Request, CStore_GetDiscoveryQueueSkippedApps_Response>( $"Store.GetDiscoveryQueueSkippedApps#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_ReportApp_Response>> ReportApp(CStore_ReportApp_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_ReportApp_Request, CStore_ReportApp_Response>( $"{SERVICE_NAME}.ReportApp#1", request );
+            return UnifiedMessages.SendMessage<CStore_ReportApp_Request, CStore_ReportApp_Response>( $"Store.ReportApp#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_GetStorePreferences_Response>> GetStorePreferences(CStore_GetStorePreferences_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_GetStorePreferences_Request, CStore_GetStorePreferences_Response>( $"{SERVICE_NAME}.GetStorePreferences#1", request );
+            return UnifiedMessages.SendMessage<CStore_GetStorePreferences_Request, CStore_GetStorePreferences_Response>( $"Store.GetStorePreferences#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_GetTrendingAppsAmongFriends_Response>> GetTrendingAppsAmongFriends(CStore_GetTrendingAppsAmongFriends_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_GetTrendingAppsAmongFriends_Request, CStore_GetTrendingAppsAmongFriends_Response>( $"{SERVICE_NAME}.GetTrendingAppsAmongFriends#1", request );
+            return UnifiedMessages.SendMessage<CStore_GetTrendingAppsAmongFriends_Request, CStore_GetTrendingAppsAmongFriends_Response>( $"Store.GetTrendingAppsAmongFriends#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> MigratePartnerLinkTracking(CStore_MigratePartnerLinkTracking_Notification request)
         {
-            return UnifiedMessages.SendMessage<CStore_MigratePartnerLinkTracking_Notification, NoResponse>( $"{SERVICE_NAME}.MigratePartnerLinkTracking#1", request );
+            return UnifiedMessages.SendMessage<CStore_MigratePartnerLinkTracking_Notification, NoResponse>( $"Store.MigratePartnerLinkTracking#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_UpdatePackageReservations_Response>> UpdatePackageReservations(CStore_UpdatePackageReservations_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_UpdatePackageReservations_Request, CStore_UpdatePackageReservations_Response>( $"{SERVICE_NAME}.UpdatePackageReservations#1", request );
+            return UnifiedMessages.SendMessage<CStore_UpdatePackageReservations_Request, CStore_UpdatePackageReservations_Response>( $"Store.UpdatePackageReservations#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_GetWishlistDemoEmailStatus_Response>> GetWishlistDemoEmailStatus(CStore_GetWishlistDemoEmailStatus_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_GetWishlistDemoEmailStatus_Request, CStore_GetWishlistDemoEmailStatus_Response>( $"{SERVICE_NAME}.GetWishlistDemoEmailStatus#1", request );
+            return UnifiedMessages.SendMessage<CStore_GetWishlistDemoEmailStatus_Request, CStore_GetWishlistDemoEmailStatus_Response>( $"Store.GetWishlistDemoEmailStatus#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_QueueWishlistDemoEmailToFire_Response>> QueueWishlistDemoEmailToFire(CStore_QueueWishlistDemoEmailToFire_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_QueueWishlistDemoEmailToFire_Request, CStore_QueueWishlistDemoEmailToFire_Response>( $"{SERVICE_NAME}.QueueWishlistDemoEmailToFire#1", request );
+            return UnifiedMessages.SendMessage<CStore_QueueWishlistDemoEmailToFire_Request, CStore_QueueWishlistDemoEmailToFire_Response>( $"Store.QueueWishlistDemoEmailToFire#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_SetReservationPositionMessage_Response>> SetReservationPositionMessage(CStore_SetReservationPositionMessage_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_SetReservationPositionMessage_Request, CStore_SetReservationPositionMessage_Response>( $"{SERVICE_NAME}.SetReservationPositionMessage#1", request );
+            return UnifiedMessages.SendMessage<CStore_SetReservationPositionMessage_Request, CStore_SetReservationPositionMessage_Response>( $"Store.SetReservationPositionMessage#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_DeleteReservationPositionMessage_Response>> DeleteReservationPositionMessage(CStore_DeleteReservationPositionMessage_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_DeleteReservationPositionMessage_Request, CStore_DeleteReservationPositionMessage_Response>( $"{SERVICE_NAME}.DeleteReservationPositionMessage#1", request );
+            return UnifiedMessages.SendMessage<CStore_DeleteReservationPositionMessage_Request, CStore_DeleteReservationPositionMessage_Response>( $"Store.DeleteReservationPositionMessage#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_GetAllReservationPositionMessages_Response>> GetAllReservationPositionMessages(CStore_GetAllReservationPositionMessages_Request request)
         {
-            return UnifiedMessages.SendMessage<CStore_GetAllReservationPositionMessages_Request, CStore_GetAllReservationPositionMessages_Response>( $"{SERVICE_NAME}.GetAllReservationPositionMessages#1", request );
+            return UnifiedMessages.SendMessage<CStore_GetAllReservationPositionMessages_Request, CStore_GetAllReservationPositionMessages_Response>( $"Store.GetAllReservationPositionMessages#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ReloadAllReservationPositionMessages(CStore_ReloadAllReservationPositionMessages_Notification request)
         {
-            return UnifiedMessages.SendMessage<CStore_ReloadAllReservationPositionMessages_Notification, NoResponse>( $"{SERVICE_NAME}.ReloadAllReservationPositionMessages#1", request );
+            return UnifiedMessages.SendMessage<CStore_ReloadAllReservationPositionMessages_Notification, NoResponse>( $"Store.ReloadAllReservationPositionMessages#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSteamDeckCompatibility_SetFeedback_Response>> SetCompatibilityFeedback(CSteamDeckCompatibility_SetFeedback_Request request)
         {
-            return UnifiedMessages.SendMessage<CSteamDeckCompatibility_SetFeedback_Request, CSteamDeckCompatibility_SetFeedback_Response>( $"{SERVICE_NAME}.SetCompatibilityFeedback#1", request );
+            return UnifiedMessages.SendMessage<CSteamDeckCompatibility_SetFeedback_Request, CSteamDeckCompatibility_SetFeedback_Response>( $"Store.SetCompatibilityFeedback#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSteamDeckCompatibility_ShouldPrompt_Response>> ShouldPromptForCompatibilityFeedback(CSteamDeckCompatibility_ShouldPrompt_Request request)
         {
-            return UnifiedMessages.SendMessage<CSteamDeckCompatibility_ShouldPrompt_Request, CSteamDeckCompatibility_ShouldPrompt_Response>( $"{SERVICE_NAME}.ShouldPromptForCompatibilityFeedback#1", request );
+            return UnifiedMessages.SendMessage<CSteamDeckCompatibility_ShouldPrompt_Request, CSteamDeckCompatibility_ShouldPrompt_Response>( $"Store.ShouldPromptForCompatibilityFeedback#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
@@ -2223,7 +2223,7 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyStorePreferencesChanged(CStore_StorePreferencesChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<CStore_StorePreferencesChanged_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyStorePreferencesChanged#1", request );
+            return UnifiedMessages.SendMessage<CStore_StorePreferencesChanged_Notification, NoResponse>( $"StoreClient.NotifyStorePreferencesChanged#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

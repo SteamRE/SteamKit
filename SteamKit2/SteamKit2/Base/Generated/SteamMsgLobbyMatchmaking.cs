@@ -123,7 +123,7 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<LobbyMatchmakingLegacy_GetLobbyStatus_Response>> GetLobbyStatus(LobbyMatchmakingLegacy_GetLobbyStatus_Request request)
         {
-            return UnifiedMessages.SendMessage<LobbyMatchmakingLegacy_GetLobbyStatus_Request, LobbyMatchmakingLegacy_GetLobbyStatus_Response>( $"{SERVICE_NAME}.GetLobbyStatus#1", request );
+            return UnifiedMessages.SendMessage<LobbyMatchmakingLegacy_GetLobbyStatus_Request, LobbyMatchmakingLegacy_GetLobbyStatus_Response>( $"LobbyMatchmakingLegacy.GetLobbyStatus#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

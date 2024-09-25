@@ -2673,27 +2673,27 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreBrowse_GetItems_Response>> GetItems(CStoreBrowse_GetItems_Request request)
         {
-            return UnifiedMessages.SendMessage<CStoreBrowse_GetItems_Request, CStoreBrowse_GetItems_Response>( $"{SERVICE_NAME}.GetItems#1", request );
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetItems_Request, CStoreBrowse_GetItems_Response>( $"StoreBrowse.GetItems#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreBrowse_GetStoreCategories_Response>> GetStoreCategories(CStoreBrowse_GetStoreCategories_Request request)
         {
-            return UnifiedMessages.SendMessage<CStoreBrowse_GetStoreCategories_Request, CStoreBrowse_GetStoreCategories_Response>( $"{SERVICE_NAME}.GetStoreCategories#1", request );
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetStoreCategories_Request, CStoreBrowse_GetStoreCategories_Response>( $"StoreBrowse.GetStoreCategories#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreBrowse_GetDLCForApps_Response>> GetDLCForApps(CStoreBrowse_GetDLCForApps_Request request)
         {
-            return UnifiedMessages.SendMessage<CStoreBrowse_GetDLCForApps_Request, CStoreBrowse_GetDLCForApps_Response>( $"{SERVICE_NAME}.GetDLCForApps#1", request );
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetDLCForApps_Request, CStoreBrowse_GetDLCForApps_Response>( $"StoreBrowse.GetDLCForApps#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreBrowse_GetDLCForAppsSolr_Response>> GetDLCForAppsSolr(CStoreBrowse_GetDLCForAppsSolr_Request request)
         {
-            return UnifiedMessages.SendMessage<CStoreBrowse_GetDLCForAppsSolr_Request, CStoreBrowse_GetDLCForAppsSolr_Response>( $"{SERVICE_NAME}.GetDLCForAppsSolr#1", request );
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetDLCForAppsSolr_Request, CStoreBrowse_GetDLCForAppsSolr_Response>( $"StoreBrowse.GetDLCForAppsSolr#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreBrowse_GetHardwareItems_Response>> GetHardwareItems(CStoreBrowse_GetHardwareItems_Request request)
         {
-            return UnifiedMessages.SendMessage<CStoreBrowse_GetHardwareItems_Request, CStoreBrowse_GetHardwareItems_Response>( $"{SERVICE_NAME}.GetHardwareItems#1", request );
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetHardwareItems_Request, CStoreBrowse_GetHardwareItems_Response>( $"StoreBrowse.GetHardwareItems#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

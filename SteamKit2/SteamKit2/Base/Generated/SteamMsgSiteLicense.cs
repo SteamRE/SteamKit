@@ -529,17 +529,17 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteManagerClient_IncomingClient_Response>> IncomingClient(CSiteManagerClient_IncomingClient_Request request)
         {
-            return UnifiedMessages.SendMessage<CSiteManagerClient_IncomingClient_Request, CSiteManagerClient_IncomingClient_Response>( $"{SERVICE_NAME}.IncomingClient#1", request );
+            return UnifiedMessages.SendMessage<CSiteManagerClient_IncomingClient_Request, CSiteManagerClient_IncomingClient_Response>( $"SiteManagerClient.IncomingClient#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientSeatCheckoutNotification(CSiteLicense_ClientSeatCheckout_Notification request)
         {
-            return UnifiedMessages.SendMessage<CSiteLicense_ClientSeatCheckout_Notification, NoResponse>( $"{SERVICE_NAME}.ClientSeatCheckoutNotification#1", request );
+            return UnifiedMessages.SendMessage<CSiteLicense_ClientSeatCheckout_Notification, NoResponse>( $"SiteManagerClient.ClientSeatCheckoutNotification#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> TrackedPaymentsNotification(CSiteManagerClient_TrackedPayments_Notification request)
         {
-            return UnifiedMessages.SendMessage<CSiteManagerClient_TrackedPayments_Notification, NoResponse>( $"{SERVICE_NAME}.TrackedPaymentsNotification#1", request );
+            return UnifiedMessages.SendMessage<CSiteManagerClient_TrackedPayments_Notification, NoResponse>( $"SiteManagerClient.TrackedPaymentsNotification#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
@@ -565,27 +565,27 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteLicense_InitiateAssociation_Response>> InitiateAssociation(CSiteLicense_InitiateAssociation_Request request)
         {
-            return UnifiedMessages.SendMessage<CSiteLicense_InitiateAssociation_Request, CSiteLicense_InitiateAssociation_Response>( $"{SERVICE_NAME}.InitiateAssociation#1", request );
+            return UnifiedMessages.SendMessage<CSiteLicense_InitiateAssociation_Request, CSiteLicense_InitiateAssociation_Response>( $"SiteLicense.InitiateAssociation#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteLicense_LCSAuthenticate_Response>> LCSAuthenticate(CSiteLicense_LCSAuthenticate_Request request)
         {
-            return UnifiedMessages.SendMessage<CSiteLicense_LCSAuthenticate_Request, CSiteLicense_LCSAuthenticate_Response>( $"{SERVICE_NAME}.LCSAuthenticate#1", request );
+            return UnifiedMessages.SendMessage<CSiteLicense_LCSAuthenticate_Request, CSiteLicense_LCSAuthenticate_Response>( $"SiteLicense.LCSAuthenticate#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteLicense_LCSAssociateUser_Response>> LCSAssociateUser(CSiteLicense_LCSAssociateUser_Request request)
         {
-            return UnifiedMessages.SendMessage<CSiteLicense_LCSAssociateUser_Request, CSiteLicense_LCSAssociateUser_Response>( $"{SERVICE_NAME}.LCSAssociateUser#1", request );
+            return UnifiedMessages.SendMessage<CSiteLicense_LCSAssociateUser_Request, CSiteLicense_LCSAssociateUser_Response>( $"SiteLicense.LCSAssociateUser#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteLicense_ClientSeatCheckout_Response>> ClientSeatCheckout(CSiteLicense_ClientSeatCheckout_Request request)
         {
-            return UnifiedMessages.SendMessage<CSiteLicense_ClientSeatCheckout_Request, CSiteLicense_ClientSeatCheckout_Response>( $"{SERVICE_NAME}.ClientSeatCheckout#1", request );
+            return UnifiedMessages.SendMessage<CSiteLicense_ClientSeatCheckout_Request, CSiteLicense_ClientSeatCheckout_Response>( $"SiteLicense.ClientSeatCheckout#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteLicense_ClientGetAvailableSeats_Response>> ClientGetAvailableSeats(CSiteLicense_ClientGetAvailableSeats_Request request)
         {
-            return UnifiedMessages.SendMessage<CSiteLicense_ClientGetAvailableSeats_Request, CSiteLicense_ClientGetAvailableSeats_Response>( $"{SERVICE_NAME}.ClientGetAvailableSeats#1", request );
+            return UnifiedMessages.SendMessage<CSiteLicense_ClientGetAvailableSeats_Request, CSiteLicense_ClientGetAvailableSeats_Response>( $"SiteLicense.ClientGetAvailableSeats#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

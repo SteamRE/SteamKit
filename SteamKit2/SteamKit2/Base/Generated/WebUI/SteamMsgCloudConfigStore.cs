@@ -207,12 +207,12 @@ namespace SteamKit2.WebUI.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCloudConfigStore_Download_Response>> Download(CCloudConfigStore_Download_Request request)
         {
-            return UnifiedMessages.SendMessage<CCloudConfigStore_Download_Request, CCloudConfigStore_Download_Response>( $"{SERVICE_NAME}.Download#1", request );
+            return UnifiedMessages.SendMessage<CCloudConfigStore_Download_Request, CCloudConfigStore_Download_Response>( $"CloudConfigStore.Download#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCloudConfigStore_Upload_Response>> Upload(CCloudConfigStore_Upload_Request request)
         {
-            return UnifiedMessages.SendMessage<CCloudConfigStore_Upload_Request, CCloudConfigStore_Upload_Response>( $"{SERVICE_NAME}.Upload#1", request );
+            return UnifiedMessages.SendMessage<CCloudConfigStore_Upload_Request, CCloudConfigStore_Upload_Response>( $"CloudConfigStore.Upload#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
@@ -235,7 +235,7 @@ namespace SteamKit2.WebUI.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyChange(CCloudConfigStore_Change_Notification request)
         {
-            return UnifiedMessages.SendMessage<CCloudConfigStore_Change_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyChange#1", request );
+            return UnifiedMessages.SendMessage<CCloudConfigStore_Change_Notification, NoResponse>( $"CloudConfigStoreClient.NotifyChange#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

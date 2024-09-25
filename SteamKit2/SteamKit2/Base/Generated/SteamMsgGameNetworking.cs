@@ -98,12 +98,12 @@ namespace SteamKit2.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNetworking_AllocateFakeIP_Response>> AllocateFakeIP(CGameNetworking_AllocateFakeIP_Request request)
         {
-            return UnifiedMessages.SendMessage<CGameNetworking_AllocateFakeIP_Request, CGameNetworking_AllocateFakeIP_Response>( $"{SERVICE_NAME}.AllocateFakeIP#1", request );
+            return UnifiedMessages.SendMessage<CGameNetworking_AllocateFakeIP_Request, CGameNetworking_AllocateFakeIP_Response>( $"GameNetworking.AllocateFakeIP#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyReleaseFakeIP(CGameNetworking_ReleaseFakeIP_Notification request)
         {
-            return UnifiedMessages.SendMessage<CGameNetworking_ReleaseFakeIP_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyReleaseFakeIP#1", request );
+            return UnifiedMessages.SendMessage<CGameNetworking_ReleaseFakeIP_Notification, NoResponse>( $"GameNetworking.NotifyReleaseFakeIP#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

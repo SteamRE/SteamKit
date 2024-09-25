@@ -91,12 +91,12 @@ namespace SteamKit2.WebUI.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountPrivateApps_GetPrivateAppList_Response>> GetPrivateAppList(CAccountPrivateApps_GetPrivateAppList_Request request)
         {
-            return UnifiedMessages.SendMessage<CAccountPrivateApps_GetPrivateAppList_Request, CAccountPrivateApps_GetPrivateAppList_Response>( $"{SERVICE_NAME}.GetPrivateAppList#1", request );
+            return UnifiedMessages.SendMessage<CAccountPrivateApps_GetPrivateAppList_Request, CAccountPrivateApps_GetPrivateAppList_Response>( $"AccountPrivateApps.GetPrivateAppList#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountPrivateApps_ToggleAppPrivacy_Response>> ToggleAppPrivacy(CAccountPrivateApps_ToggleAppPrivacy_Request request)
         {
-            return UnifiedMessages.SendMessage<CAccountPrivateApps_ToggleAppPrivacy_Request, CAccountPrivateApps_ToggleAppPrivacy_Response>( $"{SERVICE_NAME}.ToggleAppPrivacy#1", request );
+            return UnifiedMessages.SendMessage<CAccountPrivateApps_ToggleAppPrivacy_Request, CAccountPrivateApps_ToggleAppPrivacy_Response>( $"AccountPrivateApps.ToggleAppPrivacy#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
@@ -119,7 +119,7 @@ namespace SteamKit2.WebUI.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyPrivateAppListChanged(CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyPrivateAppListChanged#1", request );
+            return UnifiedMessages.SendMessage<CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification, NoResponse>( $"AccountPrivateAppsClient.NotifyPrivateAppListChanged#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

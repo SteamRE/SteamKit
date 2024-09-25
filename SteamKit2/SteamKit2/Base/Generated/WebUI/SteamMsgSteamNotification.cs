@@ -377,17 +377,17 @@ namespace SteamKit2.WebUI.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSteamNotification_GetPreferences_Response>> GetPreferences(CSteamNotification_GetPreferences_Request request)
         {
-            return UnifiedMessages.SendMessage<CSteamNotification_GetPreferences_Request, CSteamNotification_GetPreferences_Response>( $"{SERVICE_NAME}.GetPreferences#1", request );
+            return UnifiedMessages.SendMessage<CSteamNotification_GetPreferences_Request, CSteamNotification_GetPreferences_Response>( $"SteamNotification.GetPreferences#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSteamNotification_GetSteamNotifications_Response>> GetSteamNotifications(CSteamNotification_GetSteamNotifications_Request request)
         {
-            return UnifiedMessages.SendMessage<CSteamNotification_GetSteamNotifications_Request, CSteamNotification_GetSteamNotifications_Response>( $"{SERVICE_NAME}.GetSteamNotifications#1", request );
+            return UnifiedMessages.SendMessage<CSteamNotification_GetSteamNotifications_Request, CSteamNotification_GetSteamNotifications_Response>( $"SteamNotification.GetSteamNotifications#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSteamNotification_SetPreferences_Response>> SetPreferences(CSteamNotification_SetPreferences_Request request)
         {
-            return UnifiedMessages.SendMessage<CSteamNotification_SetPreferences_Request, CSteamNotification_SetPreferences_Response>( $"{SERVICE_NAME}.SetPreferences#1", request );
+            return UnifiedMessages.SendMessage<CSteamNotification_SetPreferences_Request, CSteamNotification_SetPreferences_Response>( $"SteamNotification.SetPreferences#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
@@ -413,12 +413,12 @@ namespace SteamKit2.WebUI.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request)
         {
-            return UnifiedMessages.SendMessage<CSteamNotification_NotificationsReceived_Notification, NoResponse>( $"{SERVICE_NAME}.NotificationsReceived#1", request );
+            return UnifiedMessages.SendMessage<CSteamNotification_NotificationsReceived_Notification, NoResponse>( $"SteamNotificationClient.NotificationsReceived#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> PreferencesUpdated(CSteamNotification_PreferencesUpdated_Notification request)
         {
-            return UnifiedMessages.SendMessage<CSteamNotification_PreferencesUpdated_Notification, NoResponse>( $"{SERVICE_NAME}.PreferencesUpdated#1", request );
+            return UnifiedMessages.SendMessage<CSteamNotification_PreferencesUpdated_Notification, NoResponse>( $"SteamNotificationClient.PreferencesUpdated#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )

@@ -264,22 +264,22 @@ namespace SteamKit2.WebUI.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFriendsList_GetCategories_Response>> GetCategories(CFriendsList_GetCategories_Request request)
         {
-            return UnifiedMessages.SendMessage<CFriendsList_GetCategories_Request, CFriendsList_GetCategories_Response>( $"{SERVICE_NAME}.GetCategories#1", request );
+            return UnifiedMessages.SendMessage<CFriendsList_GetCategories_Request, CFriendsList_GetCategories_Response>( $"FriendsList.GetCategories#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFriendsList_GetFavorites_Response>> GetFavorites(CFriendsList_GetFavorites_Request request)
         {
-            return UnifiedMessages.SendMessage<CFriendsList_GetFavorites_Request, CFriendsList_GetFavorites_Response>( $"{SERVICE_NAME}.GetFavorites#1", request );
+            return UnifiedMessages.SendMessage<CFriendsList_GetFavorites_Request, CFriendsList_GetFavorites_Response>( $"FriendsList.GetFavorites#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFriendsList_GetFriendsList_Response>> GetFriendsList(CFriendsList_GetFriendsList_Request request)
         {
-            return UnifiedMessages.SendMessage<CFriendsList_GetFriendsList_Request, CFriendsList_GetFriendsList_Response>( $"{SERVICE_NAME}.GetFriendsList#1", request );
+            return UnifiedMessages.SendMessage<CFriendsList_GetFriendsList_Request, CFriendsList_GetFriendsList_Response>( $"FriendsList.GetFriendsList#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFriendsList_SetFavorites_Response>> SetFavorites(CFriendsList_SetFavorites_Request request)
         {
-            return UnifiedMessages.SendMessage<CFriendsList_SetFavorites_Request, CFriendsList_SetFavorites_Response>( $"{SERVICE_NAME}.SetFavorites#1", request );
+            return UnifiedMessages.SendMessage<CFriendsList_SetFavorites_Request, CFriendsList_SetFavorites_Response>( $"FriendsList.SetFavorites#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
@@ -308,7 +308,7 @@ namespace SteamKit2.WebUI.Internal
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> FavoritesChanged(CFriendsList_FavoritesChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<CFriendsList_FavoritesChanged_Notification, NoResponse>( $"{SERVICE_NAME}.FavoritesChanged#1", request );
+            return UnifiedMessages.SendMessage<CFriendsList_FavoritesChanged_Notification, NoResponse>( $"FriendsListClient.FavoritesChanged#1", request );
         }
 
         internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
