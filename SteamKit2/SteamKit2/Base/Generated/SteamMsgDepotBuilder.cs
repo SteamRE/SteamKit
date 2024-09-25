@@ -569,8 +569,7 @@ namespace SteamKit2.Internal
 
     public class ContentBuilder : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "ContentBuilder";
+        internal override string ServiceName { get; } = "ContentBuilder";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CContentBuilder_InitDepotBuild_Response>> InitDepotBuild(CContentBuilder_InitDepotBuild_Request request)
         {
@@ -602,11 +601,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CContentBuilder_SignInstallScript_Request, CContentBuilder_SignInstallScript_Response>( $"{SERVICE_NAME}.SignInstallScript#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "InitDepotBuild":

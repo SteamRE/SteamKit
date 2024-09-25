@@ -122,8 +122,7 @@ namespace SteamKit2.Internal
 
     public class Offline : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Offline";
+        internal override string ServiceName { get; } = "Offline";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<COffline_GetOfflineLogonTicket_Response>> GetOfflineLogonTicket(COffline_GetOfflineLogonTicket_Request request)
         {
@@ -135,11 +134,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<COffline_GetUnsignedOfflineLogonTicket_Request, COffline_GetUnsignedOfflineLogonTicket_Response>( $"{SERVICE_NAME}.GetUnsignedOfflineLogonTicket#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetOfflineLogonTicket":

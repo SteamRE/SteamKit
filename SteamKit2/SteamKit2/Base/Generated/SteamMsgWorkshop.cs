@@ -79,19 +79,15 @@ namespace SteamKit2.Internal
 
     public class Workshop : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Workshop";
+        internal override string ServiceName { get; } = "Workshop";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CWorkshop_GetEULAStatus_Response>> GetEULAStatus(CWorkshop_GetEULAStatus_Request request)
         {
             return UnifiedMessages.SendMessage<CWorkshop_GetEULAStatus_Request, CWorkshop_GetEULAStatus_Response>( $"{SERVICE_NAME}.GetEULAStatus#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetEULAStatus":

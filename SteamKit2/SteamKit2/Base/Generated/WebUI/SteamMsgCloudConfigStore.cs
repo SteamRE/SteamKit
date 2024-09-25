@@ -203,8 +203,7 @@ namespace SteamKit2.WebUI.Internal
 
     public class CloudConfigStore : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "CloudConfigStore";
+        internal override string ServiceName { get; } = "CloudConfigStore";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCloudConfigStore_Download_Response>> Download(CCloudConfigStore_Download_Request request)
         {
@@ -216,11 +215,8 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CCloudConfigStore_Upload_Request, CCloudConfigStore_Upload_Response>( $"{SERVICE_NAME}.Upload#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "Download":
@@ -235,19 +231,15 @@ namespace SteamKit2.WebUI.Internal
 
     public class CloudConfigStoreClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "CloudConfigStoreClient";
+        internal override string ServiceName { get; } = "CloudConfigStoreClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyChange(CCloudConfigStore_Change_Notification request)
         {
             return UnifiedMessages.SendMessage<CCloudConfigStore_Change_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyChange#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "NotifyChange":

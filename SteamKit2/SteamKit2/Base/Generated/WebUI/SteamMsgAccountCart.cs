@@ -680,8 +680,7 @@ namespace SteamKit2.WebUI.Internal
 
     public class AccountCart : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "AccountCart";
+        internal override string ServiceName { get; } = "AccountCart";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountCart_AddItemsToCart_Response>> AddItemsToCart(CAccountCart_AddItemsToCart_Request request)
         {
@@ -718,11 +717,8 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CAccountCart_RemoveItemFromCart_Request, CAccountCart_RemoveItemFromCart_Response>( $"{SERVICE_NAME}.RemoveItemFromCart#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "AddItemsToCart":

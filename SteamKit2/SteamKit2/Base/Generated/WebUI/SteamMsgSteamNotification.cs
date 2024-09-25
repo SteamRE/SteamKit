@@ -373,8 +373,7 @@ namespace SteamKit2.WebUI.Internal
 
     public class SteamNotification : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "SteamNotification";
+        internal override string ServiceName { get; } = "SteamNotification";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSteamNotification_GetPreferences_Response>> GetPreferences(CSteamNotification_GetPreferences_Request request)
         {
@@ -391,11 +390,8 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CSteamNotification_SetPreferences_Request, CSteamNotification_SetPreferences_Response>( $"{SERVICE_NAME}.SetPreferences#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetPreferences":
@@ -413,8 +409,7 @@ namespace SteamKit2.WebUI.Internal
 
     public class SteamNotificationClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "SteamNotificationClient";
+        internal override string ServiceName { get; } = "SteamNotificationClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request)
         {
@@ -426,11 +421,8 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CSteamNotification_PreferencesUpdated_Notification, NoResponse>( $"{SERVICE_NAME}.PreferencesUpdated#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "NotificationsReceived":

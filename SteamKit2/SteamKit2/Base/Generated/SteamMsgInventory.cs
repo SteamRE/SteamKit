@@ -908,8 +908,7 @@ namespace SteamKit2.Internal
 
     public class Inventory : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Inventory";
+        internal override string ServiceName { get; } = "Inventory";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CInventory_Response>> GetInventory(CInventory_GetInventory_Request request)
         {
@@ -991,11 +990,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CInventory_InspectItem_Request, CInventory_Response>( $"{SERVICE_NAME}.InspectItem#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetInventory":
@@ -1052,19 +1048,15 @@ namespace SteamKit2.Internal
 
     public class InventoryClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "InventoryClient";
+        internal override string ServiceName { get; } = "InventoryClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyNewItems(CInventoryClient_NewItems_Notification request)
         {
             return UnifiedMessages.SendMessage<CInventoryClient_NewItems_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyNewItems#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "NotifyNewItems":

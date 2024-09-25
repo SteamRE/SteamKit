@@ -11,8 +11,7 @@ namespace SteamKit2.Internal
 
     public class RemoteClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "RemoteClient";
+        internal override string ServiceName { get; } = "RemoteClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CRemoteClient_GetPairingInfo_Response>> GetPairingInfo(CRemoteClient_GetPairingInfo_Request request)
         {
@@ -84,11 +83,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CRemoteClient_DeleteRemotePlayTogetherInvitation_Request, CRemoteClient_DeleteRemotePlayTogetherInvitation_Response>( $"{SERVICE_NAME}.DeleteRemotePlayTogetherInvitation#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetPairingInfo":
@@ -139,8 +135,7 @@ namespace SteamKit2.Internal
 
     public class RemoteClientSteamClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "RemoteClientSteamClient";
+        internal override string ServiceName { get; } = "RemoteClientSteamClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyRegisterStatusUpdate(CRemoteClient_RegisterStatusUpdate_Notification request)
         {
@@ -177,11 +172,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CRemoteClient_TaskList_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyTaskList#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "NotifyRegisterStatusUpdate":

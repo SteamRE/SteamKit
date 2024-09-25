@@ -4719,8 +4719,7 @@ namespace SteamKit2.Internal
 
     public class Player : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Player";
+        internal override string ServiceName { get; } = "Player";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CPlayer_GetRecentPlaytimeSessionsForChild_Response>> GetRecentPlaytimeSessionsForChild(CPlayer_GetRecentPlaytimeSessionsForChild_Request request)
         {
@@ -4987,11 +4986,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CPlayer_RecordDisconnectedPlaytime_Request, CPlayer_RecordDisconnectedPlaytime_Response>( $"{SERVICE_NAME}.RecordDisconnectedPlaytime#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetRecentPlaytimeSessionsForChild":
@@ -5159,8 +5155,7 @@ namespace SteamKit2.Internal
 
     public class PlayerClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "PlayerClient";
+        internal override string ServiceName { get; } = "PlayerClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyLastPlayedTimes(CPlayer_LastPlayedTimes_Notification request)
         {
@@ -5202,11 +5197,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CPlayer_PrivacySettingsChanged_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyPrivacyPrivacySettingsChanged#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "NotifyLastPlayedTimes":

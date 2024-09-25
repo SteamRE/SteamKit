@@ -1185,8 +1185,7 @@ namespace SteamKit2.WebUI.Internal
 
     public class LoyaltyRewards : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "LoyaltyRewards";
+        internal override string ServiceName { get; } = "LoyaltyRewards";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_AddReaction_Response>> AddReaction(CLoyaltyRewards_AddReaction_Request request)
         {
@@ -1278,11 +1277,8 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CLoyaltyRewards_RegisterForSteamDeckRewards_Request, CLoyaltyRewards_RegisterForSteamDeckRewards_Response>( $"{SERVICE_NAME}.RegisterForSteamDeckRewards#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "AddReaction":

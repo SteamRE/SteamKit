@@ -567,19 +567,15 @@ namespace SteamKit2.Internal
 
     public class QueuedMatchmaking : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "QueuedMatchmaking";
+        internal override string ServiceName { get; } = "QueuedMatchmaking";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CQueuedMatchmaking_SearchForGame_Response>> SearchForGame(CQueuedMatchmaking_SearchForGame_Request request)
         {
             return UnifiedMessages.SendMessage<CQueuedMatchmaking_SearchForGame_Request, CQueuedMatchmaking_SearchForGame_Response>( $"{SERVICE_NAME}.SearchForGame#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "SearchForGame":
@@ -591,8 +587,7 @@ namespace SteamKit2.Internal
 
     public class QueuedMatchmakingGameHost : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "QueuedMatchmakingGameHost";
+        internal override string ServiceName { get; } = "QueuedMatchmakingGameHost";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CQueuedMatchmakingGameHost_SearchForPlayers_Response>> SearchForPlayers(CQueuedMatchmakingGameHost_SearchForPlayers_Request request)
         {
@@ -609,11 +604,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_EndGame_Request, CQueuedMatchmakingGameHost_EndGame_Response>( $"{SERVICE_NAME}.EndGame#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "SearchForPlayers":

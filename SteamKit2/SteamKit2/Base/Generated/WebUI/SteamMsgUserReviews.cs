@@ -728,8 +728,7 @@ namespace SteamKit2.WebUI.Internal
 
     public class UserReviews : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "UserReviews";
+        internal override string ServiceName { get; } = "UserReviews";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserReviews_GetFriendsRecommendedApp_Response>> GetFriendsRecommendedApp(CUserReviews_GetFriendsRecommendedApp_Request request)
         {
@@ -746,11 +745,8 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CUserReviews_Update_Request, CUserReviews_Update_Response>( $"{SERVICE_NAME}.Update#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetFriendsRecommendedApp":

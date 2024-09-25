@@ -2031,8 +2031,7 @@ namespace SteamKit2.Internal
 
     public class Store : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Store";
+        internal override string ServiceName { get; } = "Store";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_RegisterCDKey_Response>> RegisterCDKey(CStore_RegisterCDKey_Request request)
         {
@@ -2144,11 +2143,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CSteamDeckCompatibility_ShouldPrompt_Request, CSteamDeckCompatibility_ShouldPrompt_Response>( $"{SERVICE_NAME}.ShouldPromptForCompatibilityFeedback#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "RegisterCDKey":
@@ -2223,19 +2219,15 @@ namespace SteamKit2.Internal
 
     public class StoreClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "StoreClient";
+        internal override string ServiceName { get; } = "StoreClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyStorePreferencesChanged(CStore_StorePreferencesChanged_Notification request)
         {
             return UnifiedMessages.SendMessage<CStore_StorePreferencesChanged_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyStorePreferencesChanged#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "NotifyStorePreferencesChanged":

@@ -1227,8 +1227,7 @@ namespace SteamKit2.Internal
 
     public class MarketingMessages : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "MarketingMessages";
+        internal override string ServiceName { get; } = "MarketingMessages";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CMarketingMessages_GetActiveMarketingMessages_Response>> GetActiveMarketingMessages(CMarketingMessages_GetActiveMarketingMessages_Request request)
         {
@@ -1325,11 +1324,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CMarketingMessage_GetMarketingMessagesForApps_Request, CMarketingMessage_GetMarketingMessagesForApps_Response>( $"{SERVICE_NAME}.GetMarketingMessagesForApps#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetActiveMarketingMessages":

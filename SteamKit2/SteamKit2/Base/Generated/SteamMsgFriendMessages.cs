@@ -801,8 +801,7 @@ namespace SteamKit2.Internal
 
     public class FriendMessages : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "FriendMessages";
+        internal override string ServiceName { get; } = "FriendMessages";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFriendMessages_GetRecentMessages_Response>> GetRecentMessages(CFriendMessages_GetRecentMessages_Request request)
         {
@@ -834,11 +833,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CFriendMessages_UpdateMessageReaction_Request, CFriendMessages_UpdateMessageReaction_Response>( $"{SERVICE_NAME}.UpdateMessageReaction#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetRecentMessages":
@@ -865,8 +861,7 @@ namespace SteamKit2.Internal
 
     public class FriendMessagesClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "FriendMessagesClient";
+        internal override string ServiceName { get; } = "FriendMessagesClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> IncomingMessage(CFriendMessages_IncomingMessage_Notification request)
         {
@@ -883,11 +878,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CFriendMessages_MessageReaction_Notification, NoResponse>( $"{SERVICE_NAME}.MessageReaction#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "IncomingMessage":

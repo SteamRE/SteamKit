@@ -610,8 +610,7 @@ namespace SteamKit2.Internal
 
     public class GameNotifications : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "GameNotifications";
+        internal override string ServiceName { get; } = "GameNotifications";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNotifications_CreateSession_Response>> UserCreateSession(CGameNotifications_CreateSession_Request request)
         {
@@ -643,11 +642,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CGameNotifications_UpdateNotificationSettings_Request, CGameNotifications_UpdateNotificationSettings_Response>( $"{SERVICE_NAME}.UpdateNotificationSettings#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "UserCreateSession":
@@ -674,8 +670,7 @@ namespace SteamKit2.Internal
 
     public class GameNotificationsClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "GameNotificationsClient";
+        internal override string ServiceName { get; } = "GameNotificationsClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> OnNotificationsRequested(CGameNotifications_OnNotificationsRequested_Notification request)
         {
@@ -687,11 +682,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CGameNotifications_OnUserStatusChanged_Notification, NoResponse>( $"{SERVICE_NAME}.OnUserStatusChanged#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "OnNotificationsRequested":

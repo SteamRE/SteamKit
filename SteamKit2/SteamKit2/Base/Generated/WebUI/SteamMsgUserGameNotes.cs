@@ -420,8 +420,7 @@ namespace SteamKit2.WebUI.Internal
 
     public class UserGameNotes : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "UserGameNotes";
+        internal override string ServiceName { get; } = "UserGameNotes";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserGameNotes_DeleteNote_Response>> DeleteNote(CUserGameNotes_DeleteNote_Request request)
         {
@@ -443,11 +442,8 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CUserGameNotes_SaveNote_Request, CUserGameNotes_SaveNote_Response>( $"{SERVICE_NAME}.SaveNote#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "DeleteNote":

@@ -872,8 +872,7 @@ namespace SteamKit2.Internal
 
     public class Econ : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Econ";
+        internal override string ServiceName { get; } = "Econ";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CEcon_GetInventoryItemsWithDescriptions_Response>> GetInventoryItemsWithDescriptions(CEcon_GetInventoryItemsWithDescriptions_Request request)
         {
@@ -895,11 +894,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CEcon_GetAssetClassInfo_Request, CEcon_GetAssetClassInfo_Response>( $"{SERVICE_NAME}.GetAssetClassInfo#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetInventoryItemsWithDescriptions":

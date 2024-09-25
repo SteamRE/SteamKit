@@ -119,19 +119,15 @@ namespace SteamKit2.Internal
 
     public class LobbyMatchmakingLegacy : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "LobbyMatchmakingLegacy";
+        internal override string ServiceName { get; } = "LobbyMatchmakingLegacy";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<LobbyMatchmakingLegacy_GetLobbyStatus_Response>> GetLobbyStatus(LobbyMatchmakingLegacy_GetLobbyStatus_Request request)
         {
             return UnifiedMessages.SendMessage<LobbyMatchmakingLegacy_GetLobbyStatus_Request, LobbyMatchmakingLegacy_GetLobbyStatus_Response>( $"{SERVICE_NAME}.GetLobbyStatus#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetLobbyStatus":

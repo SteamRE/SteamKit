@@ -94,8 +94,7 @@ namespace SteamKit2.Internal
 
     public class GameNetworking : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "GameNetworking";
+        internal override string ServiceName { get; } = "GameNetworking";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNetworking_AllocateFakeIP_Response>> AllocateFakeIP(CGameNetworking_AllocateFakeIP_Request request)
         {
@@ -107,11 +106,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CGameNetworking_ReleaseFakeIP_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyReleaseFakeIP#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "AllocateFakeIP":

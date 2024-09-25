@@ -687,8 +687,7 @@ namespace SteamKit2.WebUI.Internal
 
     public class StoreQuery : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "StoreQuery";
+        internal override string ServiceName { get; } = "StoreQuery";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreQuery_GetItemsByUserRecommendedTags_Response>> GetItemsByUserRecommendedTags(CStoreQuery_GetItemsByUserRecommendedTags_Request request)
         {
@@ -705,11 +704,8 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CStoreQuery_SearchSuggestions_Request, CStoreQuery_SearchSuggestions_Response>( $"{SERVICE_NAME}.SearchSuggestions#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetItemsByUserRecommendedTags":

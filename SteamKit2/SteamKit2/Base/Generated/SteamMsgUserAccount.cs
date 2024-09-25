@@ -1083,8 +1083,7 @@ namespace SteamKit2.Internal
 
     public class UserAccount : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "UserAccount";
+        internal override string ServiceName { get; } = "UserAccount";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserAccount_GetAvailableValveDiscountPromotions_Response>> GetAvailableValveDiscountPromotions(CUserAccount_GetAvailableValveDiscountPromotions_Request request)
         {
@@ -1141,11 +1140,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CUserAccount_RegisterCompatTool_Request, CUserAccount_RegisterCompatTool_Response>( $"{SERVICE_NAME}.RegisterCompatTool#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetAvailableValveDiscountPromotions":
@@ -1187,19 +1183,15 @@ namespace SteamKit2.Internal
 
     public class AccountLinking : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "AccountLinking";
+        internal override string ServiceName { get; } = "AccountLinking";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountLinking_GetLinkedAccountInfo_Response>> GetLinkedAccountInfo(CAccountLinking_GetLinkedAccountInfo_Request request)
         {
             return UnifiedMessages.SendMessage<CAccountLinking_GetLinkedAccountInfo_Request, CAccountLinking_GetLinkedAccountInfo_Response>( $"{SERVICE_NAME}.GetLinkedAccountInfo#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetLinkedAccountInfo":
@@ -1211,19 +1203,15 @@ namespace SteamKit2.Internal
 
     public class EmbeddedClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "EmbeddedClient";
+        internal override string ServiceName { get; } = "EmbeddedClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CEmbeddedClient_AuthorizeDevice_Response>> AuthorizeCurrentDevice(CEmbeddedClient_AuthorizeCurrentDevice_Request request)
         {
             return UnifiedMessages.SendMessage<CEmbeddedClient_AuthorizeCurrentDevice_Request, CEmbeddedClient_AuthorizeDevice_Response>( $"{SERVICE_NAME}.AuthorizeCurrentDevice#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "AuthorizeCurrentDevice":

@@ -2692,8 +2692,7 @@ namespace SteamKit2.Internal
 
     public class SteamTV : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "SteamTV";
+        internal override string ServiceName { get; } = "SteamTV";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSteamTV_CreateBroadcastChannel_Response>> CreateBroadcastChannel(CSteamTV_CreateBroadcastChannel_Request request)
         {
@@ -2855,11 +2854,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CSteamTV_AppCheer_Request, CSteamTV_AppCheer_Response>( $"{SERVICE_NAME}.AppCheer#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "CreateBroadcastChannel":

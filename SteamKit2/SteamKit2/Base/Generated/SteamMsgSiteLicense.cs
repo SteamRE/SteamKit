@@ -525,8 +525,7 @@ namespace SteamKit2.Internal
 
     public class SiteManagerClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "SiteManagerClient";
+        internal override string ServiceName { get; } = "SiteManagerClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteManagerClient_IncomingClient_Response>> IncomingClient(CSiteManagerClient_IncomingClient_Request request)
         {
@@ -543,11 +542,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CSiteManagerClient_TrackedPayments_Notification, NoResponse>( $"{SERVICE_NAME}.TrackedPaymentsNotification#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "IncomingClient":
@@ -565,8 +561,7 @@ namespace SteamKit2.Internal
 
     public class SiteLicense : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "SiteLicense";
+        internal override string ServiceName { get; } = "SiteLicense";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteLicense_InitiateAssociation_Response>> InitiateAssociation(CSiteLicense_InitiateAssociation_Request request)
         {
@@ -593,11 +588,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CSiteLicense_ClientGetAvailableSeats_Request, CSiteLicense_ClientGetAvailableSeats_Response>( $"{SERVICE_NAME}.ClientGetAvailableSeats#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "InitiateAssociation":

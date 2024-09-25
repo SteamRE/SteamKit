@@ -468,8 +468,7 @@ namespace SteamKit2.Internal
 
     public class Shader : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Shader";
+        internal override string ServiceName { get; } = "Shader";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CShader_GetShaderReportingCadence_Response>> GetShaderReportingCadence(CShader_GetShaderReportingCadence_Request request)
         {
@@ -501,11 +500,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CShader_ReportExternalBuild_Request, CShader_ReportExternalBuild_Response>( $"{SERVICE_NAME}.ReportExternalBuild#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetShaderReportingCadence":

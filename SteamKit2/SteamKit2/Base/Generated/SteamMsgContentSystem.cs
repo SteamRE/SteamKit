@@ -742,8 +742,7 @@ namespace SteamKit2.Internal
 
     public class ContentServerDirectory : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "ContentServerDirectory";
+        internal override string ServiceName { get; } = "ContentServerDirectory";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CContentServerDirectory_GetServersForSteamPipe_Response>> GetServersForSteamPipe(CContentServerDirectory_GetServersForSteamPipe_Request request)
         {
@@ -780,11 +779,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CContentServerDirectory_GetPeerContentInfo_Request, CContentServerDirectory_GetPeerContentInfo_Response>( $"{SERVICE_NAME}.GetPeerContentInfo#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetServersForSteamPipe":

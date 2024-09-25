@@ -872,8 +872,7 @@ namespace SteamKit2.Internal
 
     public class Parental : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Parental";
+        internal override string ServiceName { get; } = "Parental";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CParental_EnableParentalSettings_Response>> EnableParentalSettings(CParental_EnableParentalSettings_Request request)
         {
@@ -955,11 +954,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CParental_ReportPlaytimeAndNotify_Request, CParental_ReportPlaytimeAndNotify_Response>( $"{SERVICE_NAME}.ReportPlaytimeAndNotify#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "EnableParentalSettings":
@@ -1016,8 +1012,7 @@ namespace SteamKit2.Internal
 
     public class ParentalClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "ParentalClient";
+        internal override string ServiceName { get; } = "ParentalClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifySettingsChange(CParental_ParentalSettingsChange_Notification request)
         {
@@ -1039,11 +1034,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CParental_PlaytimeUsed_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyPlaytimeUsed#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "NotifySettingsChange":

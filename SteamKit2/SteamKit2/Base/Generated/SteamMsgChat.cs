@@ -5630,19 +5630,15 @@ namespace SteamKit2.Internal
 
     public class Chat : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Chat";
+        internal override string ServiceName { get; } = "Chat";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChat_RequestFriendPersonaStates_Response>> RequestFriendPersonaStates(CChat_RequestFriendPersonaStates_Request request)
         {
             return UnifiedMessages.SendMessage<CChat_RequestFriendPersonaStates_Request, CChat_RequestFriendPersonaStates_Response>( $"{SERVICE_NAME}.RequestFriendPersonaStates#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "RequestFriendPersonaStates":
@@ -5654,8 +5650,7 @@ namespace SteamKit2.Internal
 
     public class ChatRoom : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "ChatRoom";
+        internal override string ServiceName { get; } = "ChatRoom";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_CreateChatRoomGroup_Response>> CreateChatRoomGroup(CChatRoom_CreateChatRoomGroup_Request request)
         {
@@ -5922,11 +5917,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CChatRoom_GetMessageReactionReactors_Request, CChatRoom_GetMessageReactionReactors_Response>( $"{SERVICE_NAME}.GetMessageReactionReactors#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "CreateChatRoomGroup":
@@ -6094,8 +6086,7 @@ namespace SteamKit2.Internal
 
     public class ClanChatRooms : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "ClanChatRooms";
+        internal override string ServiceName { get; } = "ClanChatRooms";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CClanChatRooms_GetClanChatRoomInfo_Response>> GetClanChatRoomInfo(CClanChatRooms_GetClanChatRoomInfo_Request request)
         {
@@ -6107,11 +6098,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CClanChatRooms_SetClanChatRoomPrivate_Request, CClanChatRooms_SetClanChatRoomPrivate_Response>( $"{SERVICE_NAME}.SetClanChatRoomPrivate#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetClanChatRoomInfo":
@@ -6126,8 +6114,7 @@ namespace SteamKit2.Internal
 
     public class ChatRoomClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "ChatRoomClient";
+        internal override string ServiceName { get; } = "ChatRoomClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyIncomingChatMessage(CChatRoom_IncomingChatMessage_Notification request)
         {
@@ -6184,11 +6171,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CChatRoom_MessageReaction_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyMessageReaction#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "NotifyIncomingChatMessage":
@@ -6230,19 +6214,15 @@ namespace SteamKit2.Internal
 
     public class ChatUsability : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "ChatUsability";
+        internal override string ServiceName { get; } = "ChatUsability";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyClientUsabilityMetrics(CChatUsability_ClientUsabilityMetrics_Notification request)
         {
             return UnifiedMessages.SendMessage<CChatUsability_ClientUsabilityMetrics_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyClientUsabilityMetrics#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "NotifyClientUsabilityMetrics":
@@ -6254,19 +6234,15 @@ namespace SteamKit2.Internal
 
     public class ChatUsabilityClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "ChatUsabilityClient";
+        internal override string ServiceName { get; } = "ChatUsabilityClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyRequestClientUsabilityMetrics(CChatUsability_RequestClientUsabilityMetrics_Notification request)
         {
             return UnifiedMessages.SendMessage<CChatUsability_RequestClientUsabilityMetrics_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyRequestClientUsabilityMetrics#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "NotifyRequestClientUsabilityMetrics":

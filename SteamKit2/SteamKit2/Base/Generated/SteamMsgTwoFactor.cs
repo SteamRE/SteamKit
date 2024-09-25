@@ -1020,8 +1020,7 @@ namespace SteamKit2.Internal
 
     public class TwoFactor : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "TwoFactor";
+        internal override string ServiceName { get; } = "TwoFactor";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CTwoFactor_Time_Response>> QueryTime(CTwoFactor_Time_Request request)
         {
@@ -1068,11 +1067,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request, CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response>( $"{SERVICE_NAME}.RemoveAuthenticatorViaChallengeContinue#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "QueryTime":

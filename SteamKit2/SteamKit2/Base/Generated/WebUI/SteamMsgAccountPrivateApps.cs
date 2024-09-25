@@ -87,8 +87,7 @@ namespace SteamKit2.WebUI.Internal
 
     public class AccountPrivateApps : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "AccountPrivateApps";
+        internal override string ServiceName { get; } = "AccountPrivateApps";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountPrivateApps_GetPrivateAppList_Response>> GetPrivateAppList(CAccountPrivateApps_GetPrivateAppList_Request request)
         {
@@ -100,11 +99,8 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CAccountPrivateApps_ToggleAppPrivacy_Request, CAccountPrivateApps_ToggleAppPrivacy_Response>( $"{SERVICE_NAME}.ToggleAppPrivacy#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetPrivateAppList":
@@ -119,19 +115,15 @@ namespace SteamKit2.WebUI.Internal
 
     public class AccountPrivateAppsClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "AccountPrivateAppsClient";
+        internal override string ServiceName { get; } = "AccountPrivateAppsClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyPrivateAppListChanged(CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification request)
         {
             return UnifiedMessages.SendMessage<CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyPrivateAppListChanged#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "NotifyPrivateAppListChanged":

@@ -285,8 +285,7 @@ namespace SteamKit2.Internal
 
     public class Video : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Video";
+        internal override string ServiceName { get; } = "Video";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CVideo_ClientGetVideoURL_Response>> ClientGetVideoURL(CVideo_ClientGetVideoURL_Request request)
         {
@@ -303,11 +302,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CVideo_GetVideoBookmarks_Request, CVideo_GetVideoBookmarks_Response>( $"{SERVICE_NAME}.GetVideoBookmarks#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "ClientGetVideoURL":
@@ -325,19 +321,15 @@ namespace SteamKit2.Internal
 
     public class VideoClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "VideoClient";
+        internal override string ServiceName { get; } = "VideoClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyUnlockedH264(CVideo_UnlockedH264_Notification request)
         {
             return UnifiedMessages.SendMessage<CVideo_UnlockedH264_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyUnlockedH264#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "NotifyUnlockedH264":
@@ -349,19 +341,15 @@ namespace SteamKit2.Internal
 
     public class FovasVideo : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "FovasVideo";
+        internal override string ServiceName { get; } = "FovasVideo";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFovasVideo_ClientGetOPFSettings_Response>> ClientGetOPFSettings(CFovasVideo_ClientGetOPFSettings_Request request)
         {
             return UnifiedMessages.SendMessage<CFovasVideo_ClientGetOPFSettings_Request, CFovasVideo_ClientGetOPFSettings_Response>( $"{SERVICE_NAME}.ClientGetOPFSettings#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "ClientGetOPFSettings":

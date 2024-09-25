@@ -2167,8 +2167,7 @@ namespace SteamKit2.WebUI.Internal
 
     public class Community : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Community";
+        internal override string ServiceName { get; } = "Community";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_ClearSinglePartnerEventsAppPriority_Response>> ClearSinglePartnerEventsAppPriority(CCommunity_ClearSinglePartnerEventsAppPriority_Request request)
         {
@@ -2265,11 +2264,8 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CCommunity_RateCommentThread_Request, CCommunity_RateCommentThread_Response>( $"{SERVICE_NAME}.RateCommentThread#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "ClearSinglePartnerEventsAppPriority":

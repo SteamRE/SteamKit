@@ -561,8 +561,7 @@ namespace SteamKit2.Internal
 
     public class PartnerApps : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "PartnerApps";
+        internal override string ServiceName { get; } = "PartnerApps";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CPartnerApps_RequestUploadToken_Response>> RequestKVSignUploadToken(CPartnerApps_RequestUploadToken_Request request)
         {
@@ -619,11 +618,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CPartnerApps_Download_Request, CPartnerApps_Download_Response>( $"{SERVICE_NAME}.Download#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "RequestKVSignUploadToken":

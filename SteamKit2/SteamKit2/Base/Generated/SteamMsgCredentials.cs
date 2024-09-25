@@ -572,8 +572,7 @@ namespace SteamKit2.Internal
 
     public class Credentials : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Credentials";
+        internal override string ServiceName { get; } = "Credentials";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCredentials_TestAvailablePassword_Response>> TestAvailablePassword(CCredentials_TestAvailablePassword_Request request)
         {
@@ -605,11 +604,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CCredentials_GetAccountAuthSecret_Request, CCredentials_GetAccountAuthSecret_Response>( $"{SERVICE_NAME}.GetAccountAuthSecret#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "TestAvailablePassword":

@@ -260,8 +260,7 @@ namespace SteamKit2.WebUI.Internal
 
     public class FriendsList : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "FriendsList";
+        internal override string ServiceName { get; } = "FriendsList";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFriendsList_GetCategories_Response>> GetCategories(CFriendsList_GetCategories_Request request)
         {
@@ -283,11 +282,8 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CFriendsList_SetFavorites_Request, CFriendsList_SetFavorites_Response>( $"{SERVICE_NAME}.SetFavorites#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetCategories":
@@ -308,19 +304,15 @@ namespace SteamKit2.WebUI.Internal
 
     public class FriendsListClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "FriendsListClient";
+        internal override string ServiceName { get; } = "FriendsListClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> FavoritesChanged(CFriendsList_FavoritesChanged_Notification request)
         {
             return UnifiedMessages.SendMessage<CFriendsList_FavoritesChanged_Notification, NoResponse>( $"{SERVICE_NAME}.FavoritesChanged#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "FavoritesChanged":

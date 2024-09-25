@@ -853,8 +853,7 @@ namespace SteamKit2.Internal
 
     public class AccountHardware : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "AccountHardware";
+        internal override string ServiceName { get; } = "AccountHardware";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountHardware_RegisterSteamController_Response>> RegisterSteamController(CAccountHardware_RegisterSteamController_Request request)
         {
@@ -911,11 +910,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CAccountHardware_GetSteamDeckComponents_Request, CAccountHardware_GetSteamDeckComponents_Response>( $"{SERVICE_NAME}.GetSteamDeckComponents#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "RegisterSteamController":

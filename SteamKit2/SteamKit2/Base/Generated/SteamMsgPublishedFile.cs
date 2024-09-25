@@ -4622,8 +4622,7 @@ namespace SteamKit2.Internal
 
     public class PublishedFile : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "PublishedFile";
+        internal override string ServiceName { get; } = "PublishedFile";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CPublishedFile_Vote_Response>> Vote(CPublishedFile_Vote_Request request)
         {
@@ -4790,11 +4789,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CPublishedFile_UpdateContentDescriptors_Request, CPublishedFile_UpdateContentDescriptors_Response>( $"{SERVICE_NAME}.UpdateContentDescriptors#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "Vote":
@@ -4902,8 +4898,7 @@ namespace SteamKit2.Internal
 
     public class PublishedFileClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "PublishedFileClient";
+        internal override string ServiceName { get; } = "PublishedFileClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyFileSubscribed(CPublishedFile_FileSubscribed_Notification request)
         {
@@ -4920,11 +4915,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CPublishedFile_FileDeleted_Client_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyFileDeleted#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "NotifyFileSubscribed":

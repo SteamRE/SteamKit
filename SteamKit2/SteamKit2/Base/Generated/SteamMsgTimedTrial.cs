@@ -185,8 +185,7 @@ namespace SteamKit2.Internal
 
     public class TimedTrial : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "TimedTrial";
+        internal override string ServiceName { get; } = "TimedTrial";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CTimedTrial_GetTimeRemaining_Response>> GetTimeRemaining(CTimedTrial_GetTimeRemaining_Request request)
         {
@@ -203,11 +202,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CTimedTrial_ResetPlaytime_Request, CTimedTrial_ResetPlaytime_Response>( $"{SERVICE_NAME}.ResetPlaytime#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetTimeRemaining":

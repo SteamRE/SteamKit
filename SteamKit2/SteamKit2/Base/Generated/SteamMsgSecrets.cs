@@ -183,19 +183,15 @@ namespace SteamKit2.Internal
 
     public class Secrets : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Secrets";
+        internal override string ServiceName { get; } = "Secrets";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CKeyEscrow_Response>> KeyEscrow(CKeyEscrow_Request request)
         {
             return UnifiedMessages.SendMessage<CKeyEscrow_Request, CKeyEscrow_Response>( $"{SERVICE_NAME}.KeyEscrow#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "KeyEscrow":

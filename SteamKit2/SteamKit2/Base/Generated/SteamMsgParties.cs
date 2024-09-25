@@ -354,8 +354,7 @@ namespace SteamKit2.Internal
 
     public class Parties : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Parties";
+        internal override string ServiceName { get; } = "Parties";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CParties_JoinParty_Response>> JoinParty(CParties_JoinParty_Request request)
         {
@@ -387,11 +386,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CParties_DestroyBeacon_Request, CParties_DestroyBeacon_Response>( $"{SERVICE_NAME}.DestroyBeacon#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "JoinParty":

@@ -162,8 +162,7 @@ namespace SteamKit2.Internal
 
     public class CommunityLinkFilter : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "CommunityLinkFilter";
+        internal override string ServiceName { get; } = "CommunityLinkFilter";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetLinkFilterHashPrefixes_Response>> GetLinkFilterHashPrefixes(CCommunity_GetLinkFilterHashPrefixes_Request request)
         {
@@ -180,11 +179,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterListVersion_Request, CCommunity_GetLinkFilterListVersion_Response>( $"{SERVICE_NAME}.GetLinkFilterListVersion#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetLinkFilterHashPrefixes":

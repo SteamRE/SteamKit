@@ -2498,8 +2498,7 @@ namespace SteamKit2.Internal
 
     public class Cloud : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Cloud";
+        internal override string ServiceName { get; } = "Cloud";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientLogUploadCheck(CCloud_ClientLogUploadCheck_Notification request)
         {
@@ -2641,11 +2640,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CCloud_ClientGetAppQuotaUsage_Request, CCloud_ClientGetAppQuotaUsage_Response>( $"{SERVICE_NAME}.ClientGetAppQuotaUsage#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "ClientLogUploadCheck":
@@ -2738,8 +2734,7 @@ namespace SteamKit2.Internal
 
     public class CloudClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "CloudClient";
+        internal override string ServiceName { get; } = "CloudClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyAppStateChange(CCloud_AppCloudStateChange_Notification request)
         {
@@ -2751,11 +2746,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CCloud_ClientLogUploadRequest_Notification, NoResponse>( $"{SERVICE_NAME}.ClientLogUploadRequest#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "NotifyAppStateChange":

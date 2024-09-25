@@ -657,8 +657,7 @@ namespace SteamKit2.Internal
 
     public class DataPublisher : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "DataPublisher";
+        internal override string ServiceName { get; } = "DataPublisher";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientContentCorruptionReport(CDataPublisher_ClientContentCorruptionReport_Notification request)
         {
@@ -685,11 +684,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CDataPublisher_AddVRDeviceInfo_Request, CDataPublisher_AddVRDeviceInfo_Response>( $"{SERVICE_NAME}.AddVRDeviceInfo#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "ClientContentCorruptionReport":
@@ -713,19 +709,15 @@ namespace SteamKit2.Internal
 
     public class ValveHWSurvey : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "ValveHWSurvey";
+        internal override string ServiceName { get; } = "ValveHWSurvey";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CValveHWSurvey_GetSurveySchedule_Response>> GetSurveySchedule(CValveHWSurvey_GetSurveySchedule_Request request)
         {
             return UnifiedMessages.SendMessage<CValveHWSurvey_GetSurveySchedule_Request, CValveHWSurvey_GetSurveySchedule_Response>( $"{SERVICE_NAME}.GetSurveySchedule#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetSurveySchedule":

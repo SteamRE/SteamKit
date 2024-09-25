@@ -436,8 +436,7 @@ namespace SteamKit2.WebUI.Internal
 
     public class UserNews : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "UserNews";
+        internal override string ServiceName { get; } = "UserNews";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CUserNews_GetAppDetailsSpotlight_Response>> GetAppDetailsSpotlight(CUserNews_GetAppDetailsSpotlight_Request request)
         {
@@ -449,11 +448,8 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CUserNews_GetUserNews_Request, CUserNews_GetUserNews_Response>( $"{SERVICE_NAME}.GetUserNews#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetAppDetailsSpotlight":

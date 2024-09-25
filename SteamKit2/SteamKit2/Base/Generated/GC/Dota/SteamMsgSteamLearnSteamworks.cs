@@ -1358,8 +1358,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     public class SteamLearn : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "SteamLearn";
+        internal override string ServiceName { get; } = "SteamLearn";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CMsgSteamLearn_RegisterDataSource_Response>> RegisterDataSource(CMsgSteamLearn_RegisterDataSource_Request request)
         {
@@ -1396,11 +1395,8 @@ namespace SteamKit2.GC.Dota.Internal
             return UnifiedMessages.SendMessage<CMsgSteamLearn_InferenceMetadata_Request, CMsgSteamLearn_InferenceMetadata_Response>( $"{SERVICE_NAME}.InferenceMetadata#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "RegisterDataSource":

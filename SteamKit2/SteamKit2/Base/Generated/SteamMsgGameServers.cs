@@ -736,8 +736,7 @@ namespace SteamKit2.Internal
 
     public class GameServers : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "GameServers";
+        internal override string ServiceName { get; } = "GameServers";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameServers_GetServerList_Response>> GetServerList(CGameServers_GetServerList_Request request)
         {
@@ -759,11 +758,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CGameServers_QueryByFakeIP_Request, CGameServers_GameServerQuery_Response>( $"{SERVICE_NAME}.QueryByFakeIP#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetServerList":
@@ -784,19 +780,15 @@ namespace SteamKit2.Internal
 
     public class GameServerClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "GameServerClient";
+        internal override string ServiceName { get; } = "GameServerClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<GameServerClient_QueryServerData_Response>> QueryServerData(GameServerClient_QueryServerData_Request request)
         {
             return UnifiedMessages.SendMessage<GameServerClient_QueryServerData_Request, GameServerClient_QueryServerData_Response>( $"{SERVICE_NAME}.QueryServerData#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "QueryServerData":

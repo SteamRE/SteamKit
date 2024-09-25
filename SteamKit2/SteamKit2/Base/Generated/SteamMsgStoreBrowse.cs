@@ -2669,8 +2669,7 @@ namespace SteamKit2.Internal
 
     public class StoreBrowse : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "StoreBrowse";
+        internal override string ServiceName { get; } = "StoreBrowse";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreBrowse_GetItems_Response>> GetItems(CStoreBrowse_GetItems_Request request)
         {
@@ -2697,11 +2696,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CStoreBrowse_GetHardwareItems_Request, CStoreBrowse_GetHardwareItems_Response>( $"{SERVICE_NAME}.GetHardwareItems#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetItems":

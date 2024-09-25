@@ -3492,8 +3492,7 @@ namespace SteamKit2.Internal
 
     public class Broadcast : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Broadcast";
+        internal override string ServiceName { get; } = "Broadcast";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_BeginBroadcastSession_Response>> BeginBroadcastSession(CBroadcast_BeginBroadcastSession_Request request)
         {
@@ -3665,11 +3664,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastViewerStats_Request, CBroadcast_GetBroadcastViewerStats_Response>( $"{SERVICE_NAME}.GetBroadcastViewerStats#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "BeginBroadcastSession":
@@ -3780,8 +3776,7 @@ namespace SteamKit2.Internal
 
     public class BroadcastClient : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "BroadcastClient";
+        internal override string ServiceName { get; } = "BroadcastClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyBroadcastViewerState(CBroadcast_BroadcastViewerState_Notification request)
         {
@@ -3848,11 +3843,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CBroadcast_WebRTCAddViewerCandidate_Notification, NoResponse>( $"{SERVICE_NAME}.NotifyWebRTCAddViewerCandidate#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "NotifyBroadcastViewerState":

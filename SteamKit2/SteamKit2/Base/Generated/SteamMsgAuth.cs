@@ -1981,8 +1981,7 @@ namespace SteamKit2.Internal
 
     public class Authentication : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Authentication";
+        internal override string ServiceName { get; } = "Authentication";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthentication_GetPasswordRSAPublicKey_Response>> GetPasswordRSAPublicKey(CAuthentication_GetPasswordRSAPublicKey_Request request)
         {
@@ -2049,11 +2048,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CAuthentication_RefreshToken_Revoke_Request, CAuthentication_RefreshToken_Revoke_Response>( $"{SERVICE_NAME}.RevokeRefreshToken#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetPasswordRSAPublicKey":
@@ -2101,8 +2097,7 @@ namespace SteamKit2.Internal
 
     public class AuthenticationSupport : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "AuthenticationSupport";
+        internal override string ServiceName { get; } = "AuthenticationSupport";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAuthenticationSupport_QueryRefreshTokensByAccount_Response>> QueryRefreshTokensByAccount(CAuthenticationSupport_QueryRefreshTokensByAccount_Request request)
         {
@@ -2124,11 +2119,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CAuthenticationSupport_GetTokenHistory_Request, CAuthenticationSupport_GetTokenHistory_Response>( $"{SERVICE_NAME}.GetTokenHistory#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "QueryRefreshTokensByAccount":
@@ -2149,8 +2141,7 @@ namespace SteamKit2.Internal
 
     public class CloudGaming : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "CloudGaming";
+        internal override string ServiceName { get; } = "CloudGaming";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCloudGaming_CreateNonce_Response>> CreateNonce(CCloudGaming_CreateNonce_Request request)
         {
@@ -2162,11 +2153,8 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CCloudGaming_GetTimeRemaining_Request, CCloudGaming_GetTimeRemaining_Response>( $"{SERVICE_NAME}.GetTimeRemaining#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "CreateNonce":

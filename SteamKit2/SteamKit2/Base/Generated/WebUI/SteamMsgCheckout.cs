@@ -413,8 +413,7 @@ namespace SteamKit2.WebUI.Internal
 
     public class Checkout : SteamUnifiedMessages.UnifiedService
     {
-
-        const string SERVICE_NAME = "Checkout";
+        internal override string ServiceName { get; } = "Checkout";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCheckout_GetFriendOwnershipForGifting_Response>> GetFriendOwnershipForGifting(CCheckout_GetFriendOwnershipForGifting_Request request)
         {
@@ -426,11 +425,8 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CCheckout_ValidateCart_Request, CCheckout_ValidateCart_Response>( $"{SERVICE_NAME}.ValidateCart#1", request );
         }
 
-        internal override void HandleMsg( IPacketMsg packetMsg )
+        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            if (!SteamUnifiedMessages.CanHandleMsg( packetMsg, SERVICE_NAME, out var methodName ))
-                return;
-
             switch ( methodName )
             {
                 case "GetFriendOwnershipForGifting":
