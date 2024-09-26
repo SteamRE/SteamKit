@@ -572,39 +572,39 @@ namespace SteamKit2.Internal
 
     public class Credentials : SteamUnifiedMessages.UnifiedService
     {
-        internal override string ServiceName { get; } = "Credentials";
+        public override string ServiceName { get; } = "Credentials";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCredentials_TestAvailablePassword_Response>> TestAvailablePassword(CCredentials_TestAvailablePassword_Request request)
         {
-            return UnifiedMessages.SendMessage<CCredentials_TestAvailablePassword_Request, CCredentials_TestAvailablePassword_Response>( $"Credentials.TestAvailablePassword#1", request );
+            return UnifiedMessages.SendMessage<CCredentials_TestAvailablePassword_Request, CCredentials_TestAvailablePassword_Response>( "Credentials.TestAvailablePassword#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCredentials_GetSteamGuardDetails_Response>> GetSteamGuardDetails(CCredentials_GetSteamGuardDetails_Request request)
         {
-            return UnifiedMessages.SendMessage<CCredentials_GetSteamGuardDetails_Request, CCredentials_GetSteamGuardDetails_Response>( $"Credentials.GetSteamGuardDetails#1", request );
+            return UnifiedMessages.SendMessage<CCredentials_GetSteamGuardDetails_Request, CCredentials_GetSteamGuardDetails_Response>( "Credentials.GetSteamGuardDetails#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCredentials_ValidateEmailAddress_Response>> ValidateEmailAddress(CCredentials_ValidateEmailAddress_Request request)
         {
-            return UnifiedMessages.SendMessage<CCredentials_ValidateEmailAddress_Request, CCredentials_ValidateEmailAddress_Response>( $"Credentials.ValidateEmailAddress#1", request );
+            return UnifiedMessages.SendMessage<CCredentials_ValidateEmailAddress_Request, CCredentials_ValidateEmailAddress_Response>( "Credentials.ValidateEmailAddress#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCredentials_SteamGuardPhishingReport_Response>> SteamGuardPhishingReport(CCredentials_SteamGuardPhishingReport_Request request)
         {
-            return UnifiedMessages.SendMessage<CCredentials_SteamGuardPhishingReport_Request, CCredentials_SteamGuardPhishingReport_Response>( $"Credentials.SteamGuardPhishingReport#1", request );
+            return UnifiedMessages.SendMessage<CCredentials_SteamGuardPhishingReport_Request, CCredentials_SteamGuardPhishingReport_Response>( "Credentials.SteamGuardPhishingReport#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCredentials_LastCredentialChangeTime_Response>> GetCredentialChangeTimeDetails(CCredentials_LastCredentialChangeTime_Request request)
         {
-            return UnifiedMessages.SendMessage<CCredentials_LastCredentialChangeTime_Request, CCredentials_LastCredentialChangeTime_Response>( $"Credentials.GetCredentialChangeTimeDetails#1", request );
+            return UnifiedMessages.SendMessage<CCredentials_LastCredentialChangeTime_Request, CCredentials_LastCredentialChangeTime_Response>( "Credentials.GetCredentialChangeTimeDetails#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCredentials_GetAccountAuthSecret_Response>> GetAccountAuthSecret(CCredentials_GetAccountAuthSecret_Request request)
         {
-            return UnifiedMessages.SendMessage<CCredentials_GetAccountAuthSecret_Request, CCredentials_GetAccountAuthSecret_Response>( $"Credentials.GetAccountAuthSecret#1", request );
+            return UnifiedMessages.SendMessage<CCredentials_GetAccountAuthSecret_Request, CCredentials_GetAccountAuthSecret_Response>( "Credentials.GetAccountAuthSecret#1", request );
         }
 
-        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {

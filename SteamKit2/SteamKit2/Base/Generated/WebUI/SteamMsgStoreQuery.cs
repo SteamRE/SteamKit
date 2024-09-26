@@ -687,24 +687,24 @@ namespace SteamKit2.WebUI.Internal
 
     public class StoreQuery : SteamUnifiedMessages.UnifiedService
     {
-        internal override string ServiceName { get; } = "StoreQuery";
+        public override string ServiceName { get; } = "StoreQuery";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreQuery_GetItemsByUserRecommendedTags_Response>> GetItemsByUserRecommendedTags(CStoreQuery_GetItemsByUserRecommendedTags_Request request)
         {
-            return UnifiedMessages.SendMessage<CStoreQuery_GetItemsByUserRecommendedTags_Request, CStoreQuery_GetItemsByUserRecommendedTags_Response>( $"StoreQuery.GetItemsByUserRecommendedTags#1", request );
+            return UnifiedMessages.SendMessage<CStoreQuery_GetItemsByUserRecommendedTags_Request, CStoreQuery_GetItemsByUserRecommendedTags_Response>( "StoreQuery.GetItemsByUserRecommendedTags#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreQuery_Query_Response>> Query(CStoreQuery_Query_Request request)
         {
-            return UnifiedMessages.SendMessage<CStoreQuery_Query_Request, CStoreQuery_Query_Response>( $"StoreQuery.Query#1", request );
+            return UnifiedMessages.SendMessage<CStoreQuery_Query_Request, CStoreQuery_Query_Response>( "StoreQuery.Query#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStoreQuery_SearchSuggestions_Response>> SearchSuggestions(CStoreQuery_SearchSuggestions_Request request)
         {
-            return UnifiedMessages.SendMessage<CStoreQuery_SearchSuggestions_Request, CStoreQuery_SearchSuggestions_Response>( $"StoreQuery.SearchSuggestions#1", request );
+            return UnifiedMessages.SendMessage<CStoreQuery_SearchSuggestions_Request, CStoreQuery_SearchSuggestions_Response>( "StoreQuery.SearchSuggestions#1", request );
         }
 
-        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {

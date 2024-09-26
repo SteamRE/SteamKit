@@ -2076,139 +2076,139 @@ namespace SteamKit2.Internal
 
     public class FamilyGroups : SteamUnifiedMessages.UnifiedService
     {
-        internal override string ServiceName { get; } = "FamilyGroups";
+        public override string ServiceName { get; } = "FamilyGroups";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_CreateFamilyGroup_Response>> CreateFamilyGroup(CFamilyGroups_CreateFamilyGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_CreateFamilyGroup_Request, CFamilyGroups_CreateFamilyGroup_Response>( $"FamilyGroups.CreateFamilyGroup#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_CreateFamilyGroup_Request, CFamilyGroups_CreateFamilyGroup_Response>( "FamilyGroups.CreateFamilyGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_GetFamilyGroup_Response>> GetFamilyGroup(CFamilyGroups_GetFamilyGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_GetFamilyGroup_Request, CFamilyGroups_GetFamilyGroup_Response>( $"FamilyGroups.GetFamilyGroup#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetFamilyGroup_Request, CFamilyGroups_GetFamilyGroup_Response>( "FamilyGroups.GetFamilyGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_GetFamilyGroupForUser_Response>> GetFamilyGroupForUser(CFamilyGroups_GetFamilyGroupForUser_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_GetFamilyGroupForUser_Request, CFamilyGroups_GetFamilyGroupForUser_Response>( $"FamilyGroups.GetFamilyGroupForUser#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetFamilyGroupForUser_Request, CFamilyGroups_GetFamilyGroupForUser_Response>( "FamilyGroups.GetFamilyGroupForUser#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_ModifyFamilyGroupDetails_Response>> ModifyFamilyGroupDetails(CFamilyGroups_ModifyFamilyGroupDetails_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_ModifyFamilyGroupDetails_Request, CFamilyGroups_ModifyFamilyGroupDetails_Response>( $"FamilyGroups.ModifyFamilyGroupDetails#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_ModifyFamilyGroupDetails_Request, CFamilyGroups_ModifyFamilyGroupDetails_Response>( "FamilyGroups.ModifyFamilyGroupDetails#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_InviteToFamilyGroup_Response>> InviteToFamilyGroup(CFamilyGroups_InviteToFamilyGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_InviteToFamilyGroup_Request, CFamilyGroups_InviteToFamilyGroup_Response>( $"FamilyGroups.InviteToFamilyGroup#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_InviteToFamilyGroup_Request, CFamilyGroups_InviteToFamilyGroup_Response>( "FamilyGroups.InviteToFamilyGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_ConfirmInviteToFamilyGroup_Response>> ConfirmInviteToFamilyGroup(CFamilyGroups_ConfirmInviteToFamilyGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_ConfirmInviteToFamilyGroup_Request, CFamilyGroups_ConfirmInviteToFamilyGroup_Response>( $"FamilyGroups.ConfirmInviteToFamilyGroup#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_ConfirmInviteToFamilyGroup_Request, CFamilyGroups_ConfirmInviteToFamilyGroup_Response>( "FamilyGroups.ConfirmInviteToFamilyGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_ResendInvitationToFamilyGroup_Response>> ResendInvitationToFamilyGroup(CFamilyGroups_ResendInvitationToFamilyGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_ResendInvitationToFamilyGroup_Request, CFamilyGroups_ResendInvitationToFamilyGroup_Response>( $"FamilyGroups.ResendInvitationToFamilyGroup#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_ResendInvitationToFamilyGroup_Request, CFamilyGroups_ResendInvitationToFamilyGroup_Response>( "FamilyGroups.ResendInvitationToFamilyGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_JoinFamilyGroup_Response>> JoinFamilyGroup(CFamilyGroups_JoinFamilyGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_JoinFamilyGroup_Request, CFamilyGroups_JoinFamilyGroup_Response>( $"FamilyGroups.JoinFamilyGroup#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_JoinFamilyGroup_Request, CFamilyGroups_JoinFamilyGroup_Response>( "FamilyGroups.JoinFamilyGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_ConfirmJoinFamilyGroup_Response>> ConfirmJoinFamilyGroup(CFamilyGroups_ConfirmJoinFamilyGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_ConfirmJoinFamilyGroup_Request, CFamilyGroups_ConfirmJoinFamilyGroup_Response>( $"FamilyGroups.ConfirmJoinFamilyGroup#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_ConfirmJoinFamilyGroup_Request, CFamilyGroups_ConfirmJoinFamilyGroup_Response>( "FamilyGroups.ConfirmJoinFamilyGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_RemoveFromFamilyGroup_Response>> RemoveFromFamilyGroup(CFamilyGroups_RemoveFromFamilyGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_RemoveFromFamilyGroup_Request, CFamilyGroups_RemoveFromFamilyGroup_Response>( $"FamilyGroups.RemoveFromFamilyGroup#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_RemoveFromFamilyGroup_Request, CFamilyGroups_RemoveFromFamilyGroup_Response>( "FamilyGroups.RemoveFromFamilyGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_CancelFamilyGroupInvite_Response>> CancelFamilyGroupInvite(CFamilyGroups_CancelFamilyGroupInvite_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_CancelFamilyGroupInvite_Request, CFamilyGroups_CancelFamilyGroupInvite_Response>( $"FamilyGroups.CancelFamilyGroupInvite#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_CancelFamilyGroupInvite_Request, CFamilyGroups_CancelFamilyGroupInvite_Response>( "FamilyGroups.CancelFamilyGroupInvite#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_GetUsersSharingDevice_Response>> GetUsersSharingDevice(CFamilyGroups_GetUsersSharingDevice_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_GetUsersSharingDevice_Request, CFamilyGroups_GetUsersSharingDevice_Response>( $"FamilyGroups.GetUsersSharingDevice#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetUsersSharingDevice_Request, CFamilyGroups_GetUsersSharingDevice_Response>( "FamilyGroups.GetUsersSharingDevice#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_DeleteFamilyGroup_Response>> DeleteFamilyGroup(CFamilyGroups_DeleteFamilyGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_DeleteFamilyGroup_Request, CFamilyGroups_DeleteFamilyGroup_Response>( $"FamilyGroups.DeleteFamilyGroup#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_DeleteFamilyGroup_Request, CFamilyGroups_DeleteFamilyGroup_Response>( "FamilyGroups.DeleteFamilyGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_UndeleteFamilyGroup_Response>> UndeleteFamilyGroup(CFamilyGroups_UndeleteFamilyGroup_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_UndeleteFamilyGroup_Request, CFamilyGroups_UndeleteFamilyGroup_Response>( $"FamilyGroups.UndeleteFamilyGroup#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_UndeleteFamilyGroup_Request, CFamilyGroups_UndeleteFamilyGroup_Response>( "FamilyGroups.UndeleteFamilyGroup#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_GetPlaytimeSummary_Response>> GetPlaytimeSummary(CFamilyGroups_GetPlaytimeSummary_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_GetPlaytimeSummary_Request, CFamilyGroups_GetPlaytimeSummary_Response>( $"FamilyGroups.GetPlaytimeSummary#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetPlaytimeSummary_Request, CFamilyGroups_GetPlaytimeSummary_Response>( "FamilyGroups.GetPlaytimeSummary#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_RequestPurchase_Response>> RequestPurchase(CFamilyGroups_RequestPurchase_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_RequestPurchase_Request, CFamilyGroups_RequestPurchase_Response>( $"FamilyGroups.RequestPurchase#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_RequestPurchase_Request, CFamilyGroups_RequestPurchase_Response>( "FamilyGroups.RequestPurchase#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_GetPurchaseRequests_Response>> GetPurchaseRequests(CFamilyGroups_GetPurchaseRequests_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_GetPurchaseRequests_Request, CFamilyGroups_GetPurchaseRequests_Response>( $"FamilyGroups.GetPurchaseRequests#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetPurchaseRequests_Request, CFamilyGroups_GetPurchaseRequests_Response>( "FamilyGroups.GetPurchaseRequests#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_RespondToRequestedPurchase_Response>> RespondToRequestedPurchase(CFamilyGroups_RespondToRequestedPurchase_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_RespondToRequestedPurchase_Request, CFamilyGroups_RespondToRequestedPurchase_Response>( $"FamilyGroups.RespondToRequestedPurchase#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_RespondToRequestedPurchase_Request, CFamilyGroups_RespondToRequestedPurchase_Response>( "FamilyGroups.RespondToRequestedPurchase#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_GetChangeLog_Response>> GetChangeLog(CFamilyGroups_GetChangeLog_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_GetChangeLog_Request, CFamilyGroups_GetChangeLog_Response>( $"FamilyGroups.GetChangeLog#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetChangeLog_Request, CFamilyGroups_GetChangeLog_Response>( "FamilyGroups.GetChangeLog#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_SetFamilyCooldownOverrides_Response>> SetFamilyCooldownOverrides(CFamilyGroups_SetFamilyCooldownOverrides_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_SetFamilyCooldownOverrides_Request, CFamilyGroups_SetFamilyCooldownOverrides_Response>( $"FamilyGroups.SetFamilyCooldownOverrides#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_SetFamilyCooldownOverrides_Request, CFamilyGroups_SetFamilyCooldownOverrides_Response>( "FamilyGroups.SetFamilyCooldownOverrides#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_GetSharedLibraryApps_Response>> GetSharedLibraryApps(CFamilyGroups_GetSharedLibraryApps_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_GetSharedLibraryApps_Request, CFamilyGroups_GetSharedLibraryApps_Response>( $"FamilyGroups.GetSharedLibraryApps#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetSharedLibraryApps_Request, CFamilyGroups_GetSharedLibraryApps_Response>( "FamilyGroups.GetSharedLibraryApps#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_SetPreferredLender_Response>> SetPreferredLender(CFamilyGroups_SetPreferredLender_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_SetPreferredLender_Request, CFamilyGroups_SetPreferredLender_Response>( $"FamilyGroups.SetPreferredLender#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_SetPreferredLender_Request, CFamilyGroups_SetPreferredLender_Response>( "FamilyGroups.SetPreferredLender#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_GetPreferredLenders_Response>> GetPreferredLenders(CFamilyGroups_GetPreferredLenders_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_GetPreferredLenders_Request, CFamilyGroups_GetPreferredLenders_Response>( $"FamilyGroups.GetPreferredLenders#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetPreferredLenders_Request, CFamilyGroups_GetPreferredLenders_Response>( "FamilyGroups.GetPreferredLenders#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_ForceAcceptInvite_Response>> ForceAcceptInvite(CFamilyGroups_ForceAcceptInvite_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_ForceAcceptInvite_Request, CFamilyGroups_ForceAcceptInvite_Response>( $"FamilyGroups.ForceAcceptInvite#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_ForceAcceptInvite_Request, CFamilyGroups_ForceAcceptInvite_Response>( "FamilyGroups.ForceAcceptInvite#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_GetInviteCheckResults_Response>> GetInviteCheckResults(CFamilyGroups_GetInviteCheckResults_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_GetInviteCheckResults_Request, CFamilyGroups_GetInviteCheckResults_Response>( $"FamilyGroups.GetInviteCheckResults#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetInviteCheckResults_Request, CFamilyGroups_GetInviteCheckResults_Response>( "FamilyGroups.GetInviteCheckResults#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFamilyGroups_ClearCooldownSkip_Response>> ClearCooldownSkip(CFamilyGroups_ClearCooldownSkip_Request request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroups_ClearCooldownSkip_Request, CFamilyGroups_ClearCooldownSkip_Response>( $"FamilyGroups.ClearCooldownSkip#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroups_ClearCooldownSkip_Request, CFamilyGroups_ClearCooldownSkip_Response>( "FamilyGroups.ClearCooldownSkip#1", request );
         }
 
-        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
@@ -2296,24 +2296,24 @@ namespace SteamKit2.Internal
 
     public class FamilyGroupsClient : SteamUnifiedMessages.UnifiedService
     {
-        internal override string ServiceName { get; } = "FamilyGroupsClient";
+        public override string ServiceName { get; } = "FamilyGroupsClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyRunningApps(CFamilyGroupsClient_NotifyRunningApps_Notification request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroupsClient_NotifyRunningApps_Notification, NoResponse>( $"FamilyGroupsClient.NotifyRunningApps#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroupsClient_NotifyRunningApps_Notification, NoResponse>( "FamilyGroupsClient.NotifyRunningApps#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyInviteStatus(CFamilyGroupsClient_InviteStatus_Notification request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroupsClient_InviteStatus_Notification, NoResponse>( $"FamilyGroupsClient.NotifyInviteStatus#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroupsClient_InviteStatus_Notification, NoResponse>( "FamilyGroupsClient.NotifyInviteStatus#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyGroupChanged(CFamilyGroupsClient_GroupChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroupsClient_GroupChanged_Notification, NoResponse>( $"FamilyGroupsClient.NotifyGroupChanged#1", request );
+            return UnifiedMessages.SendMessage<CFamilyGroupsClient_GroupChanged_Notification, NoResponse>( "FamilyGroupsClient.NotifyGroupChanged#1", request );
         }
 
-        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {

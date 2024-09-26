@@ -94,19 +94,19 @@ namespace SteamKit2.Internal
 
     public class GameNetworking : SteamUnifiedMessages.UnifiedService
     {
-        internal override string ServiceName { get; } = "GameNetworking";
+        public override string ServiceName { get; } = "GameNetworking";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNetworking_AllocateFakeIP_Response>> AllocateFakeIP(CGameNetworking_AllocateFakeIP_Request request)
         {
-            return UnifiedMessages.SendMessage<CGameNetworking_AllocateFakeIP_Request, CGameNetworking_AllocateFakeIP_Response>( $"GameNetworking.AllocateFakeIP#1", request );
+            return UnifiedMessages.SendMessage<CGameNetworking_AllocateFakeIP_Request, CGameNetworking_AllocateFakeIP_Response>( "GameNetworking.AllocateFakeIP#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyReleaseFakeIP(CGameNetworking_ReleaseFakeIP_Notification request)
         {
-            return UnifiedMessages.SendMessage<CGameNetworking_ReleaseFakeIP_Notification, NoResponse>( $"GameNetworking.NotifyReleaseFakeIP#1", request );
+            return UnifiedMessages.SendMessage<CGameNetworking_ReleaseFakeIP_Notification, NoResponse>( "GameNetworking.NotifyReleaseFakeIP#1", request );
         }
 
-        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {

@@ -2167,104 +2167,104 @@ namespace SteamKit2.WebUI.Internal
 
     public class Community : SteamUnifiedMessages.UnifiedService
     {
-        internal override string ServiceName { get; } = "Community";
+        public override string ServiceName { get; } = "Community";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_ClearSinglePartnerEventsAppPriority_Response>> ClearSinglePartnerEventsAppPriority(CCommunity_ClearSinglePartnerEventsAppPriority_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_ClearSinglePartnerEventsAppPriority_Request, CCommunity_ClearSinglePartnerEventsAppPriority_Response>( $"Community.ClearSinglePartnerEventsAppPriority#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_ClearSinglePartnerEventsAppPriority_Request, CCommunity_ClearSinglePartnerEventsAppPriority_Response>( "Community.ClearSinglePartnerEventsAppPriority#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_ClearUserPartnerEventsAppPriorities_Response>> ClearUserPartnerEventsAppPriorities(CCommunity_ClearUserPartnerEventsAppPriorities_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_ClearUserPartnerEventsAppPriorities_Request, CCommunity_ClearUserPartnerEventsAppPriorities_Response>( $"Community.ClearUserPartnerEventsAppPriorities#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_ClearUserPartnerEventsAppPriorities_Request, CCommunity_ClearUserPartnerEventsAppPriorities_Response>( "Community.ClearUserPartnerEventsAppPriorities#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_DeleteCommentFromThread_Response>> DeleteCommentFromThread(CCommunity_DeleteCommentFromThread_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_DeleteCommentFromThread_Request, CCommunity_DeleteCommentFromThread_Response>( $"Community.DeleteCommentFromThread#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_DeleteCommentFromThread_Request, CCommunity_DeleteCommentFromThread_Response>( "Community.DeleteCommentFromThread#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetAppRichPresenceLocalization_Response>> GetAppRichPresenceLocalization(CCommunity_GetAppRichPresenceLocalization_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetAppRichPresenceLocalization_Request, CCommunity_GetAppRichPresenceLocalization_Response>( $"Community.GetAppRichPresenceLocalization#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetAppRichPresenceLocalization_Request, CCommunity_GetAppRichPresenceLocalization_Response>( "Community.GetAppRichPresenceLocalization#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetApps_Response>> GetApps(CCommunity_GetApps_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetApps_Request, CCommunity_GetApps_Response>( $"Community.GetApps#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetApps_Request, CCommunity_GetApps_Response>( "Community.GetApps#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetAvatarHistory_Response>> GetAvatarHistory(CCommunity_GetAvatarHistory_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetAvatarHistory_Request, CCommunity_GetAvatarHistory_Response>( $"Community.GetAvatarHistory#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetAvatarHistory_Request, CCommunity_GetAvatarHistory_Response>( "Community.GetAvatarHistory#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetBestEventsForUser_Response>> GetBestEventsForUser(CCommunity_GetBestEventsForUser_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetBestEventsForUser_Request, CCommunity_GetBestEventsForUser_Response>( $"Community.GetBestEventsForUser#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetBestEventsForUser_Request, CCommunity_GetBestEventsForUser_Response>( "Community.GetBestEventsForUser#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetClanAnnouncementVoteForUser_Response>> GetClanAnnouncementVoteForUser(CCommunity_GetClanAnnouncementVoteForUser_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetClanAnnouncementVoteForUser_Request, CCommunity_GetClanAnnouncementVoteForUser_Response>( $"Community.GetClanAnnouncementVoteForUser#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetClanAnnouncementVoteForUser_Request, CCommunity_GetClanAnnouncementVoteForUser_Response>( "Community.GetClanAnnouncementVoteForUser#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetCommentThread_Response>> GetCommentThread(CCommunity_GetCommentThread_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetCommentThread_Request, CCommunity_GetCommentThread_Response>( $"Community.GetCommentThread#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetCommentThread_Request, CCommunity_GetCommentThread_Response>( "Community.GetCommentThread#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetCommentThreadRatings_Response>> GetCommentThreadRatings(CCommunity_GetCommentThreadRatings_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetCommentThreadRatings_Request, CCommunity_GetCommentThreadRatings_Response>( $"Community.GetCommentThreadRatings#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetCommentThreadRatings_Request, CCommunity_GetCommentThreadRatings_Response>( "Community.GetCommentThreadRatings#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetUserPartnerEventNews_Response>> GetUserPartnerEventNews(CCommunity_GetUserPartnerEventNews_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetUserPartnerEventNews_Request, CCommunity_GetUserPartnerEventNews_Response>( $"Community.GetUserPartnerEventNews#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetUserPartnerEventNews_Request, CCommunity_GetUserPartnerEventNews_Response>( "Community.GetUserPartnerEventNews#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetUserPartnerEventsAppPriorities_Response>> GetUserPartnerEventsAppPriorities(CCommunity_GetUserPartnerEventsAppPriorities_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetUserPartnerEventsAppPriorities_Request, CCommunity_GetUserPartnerEventsAppPriorities_Response>( $"Community.GetUserPartnerEventsAppPriorities#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetUserPartnerEventsAppPriorities_Request, CCommunity_GetUserPartnerEventsAppPriorities_Response>( "Community.GetUserPartnerEventsAppPriorities#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_GetUserPartnerEventViewStatus_Response>> GetUserPartnerEventViewStatus(CCommunity_GetUserPartnerEventViewStatus_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetUserPartnerEventViewStatus_Request, CCommunity_GetUserPartnerEventViewStatus_Response>( $"Community.GetUserPartnerEventViewStatus#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetUserPartnerEventViewStatus_Request, CCommunity_GetUserPartnerEventViewStatus_Response>( "Community.GetUserPartnerEventViewStatus#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_MarkPartnerEventsForUser_Response>> MarkPartnerEventsForUser(CCommunity_MarkPartnerEventsForUser_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_MarkPartnerEventsForUser_Request, CCommunity_MarkPartnerEventsForUser_Response>( $"Community.MarkPartnerEventsForUser#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_MarkPartnerEventsForUser_Request, CCommunity_MarkPartnerEventsForUser_Response>( "Community.MarkPartnerEventsForUser#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_PartnerEventsShowLessForApp_Response>> PartnerEventsShowLessForApp(CCommunity_PartnerEventsShowLessForApp_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_PartnerEventsShowLessForApp_Request, CCommunity_PartnerEventsShowLessForApp_Response>( $"Community.PartnerEventsShowLessForApp#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_PartnerEventsShowLessForApp_Request, CCommunity_PartnerEventsShowLessForApp_Response>( "Community.PartnerEventsShowLessForApp#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_PartnerEventsShowMoreForApp_Response>> PartnerEventsShowMoreForApp(CCommunity_PartnerEventsShowMoreForApp_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_PartnerEventsShowMoreForApp_Request, CCommunity_PartnerEventsShowMoreForApp_Response>( $"Community.PartnerEventsShowMoreForApp#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_PartnerEventsShowMoreForApp_Request, CCommunity_PartnerEventsShowMoreForApp_Response>( "Community.PartnerEventsShowMoreForApp#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_PostCommentToThread_Response>> PostCommentToThread(CCommunity_PostCommentToThread_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_PostCommentToThread_Request, CCommunity_PostCommentToThread_Response>( $"Community.PostCommentToThread#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_PostCommentToThread_Request, CCommunity_PostCommentToThread_Response>( "Community.PostCommentToThread#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_RateClanAnnouncement_Response>> RateClanAnnouncement(CCommunity_RateClanAnnouncement_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_RateClanAnnouncement_Request, CCommunity_RateClanAnnouncement_Response>( $"Community.RateClanAnnouncement#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_RateClanAnnouncement_Request, CCommunity_RateClanAnnouncement_Response>( "Community.RateClanAnnouncement#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCommunity_RateCommentThread_Response>> RateCommentThread(CCommunity_RateCommentThread_Request request)
         {
-            return UnifiedMessages.SendMessage<CCommunity_RateCommentThread_Request, CCommunity_RateCommentThread_Response>( $"Community.RateCommentThread#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_RateCommentThread_Request, CCommunity_RateCommentThread_Response>( "Community.RateCommentThread#1", request );
         }
 
-        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {

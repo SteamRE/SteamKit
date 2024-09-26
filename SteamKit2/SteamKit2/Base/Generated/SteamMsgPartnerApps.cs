@@ -561,64 +561,64 @@ namespace SteamKit2.Internal
 
     public class PartnerApps : SteamUnifiedMessages.UnifiedService
     {
-        internal override string ServiceName { get; } = "PartnerApps";
+        public override string ServiceName { get; } = "PartnerApps";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CPartnerApps_RequestUploadToken_Response>> RequestKVSignUploadToken(CPartnerApps_RequestUploadToken_Request request)
         {
-            return UnifiedMessages.SendMessage<CPartnerApps_RequestUploadToken_Request, CPartnerApps_RequestUploadToken_Response>( $"PartnerApps.RequestKVSignUploadToken#1", request );
+            return UnifiedMessages.SendMessage<CPartnerApps_RequestUploadToken_Request, CPartnerApps_RequestUploadToken_Response>( "PartnerApps.RequestKVSignUploadToken#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CPartnerApps_RequestUploadToken_Response>> RequestDRMUploadToken(CPartnerApps_RequestUploadToken_Request request)
         {
-            return UnifiedMessages.SendMessage<CPartnerApps_RequestUploadToken_Request, CPartnerApps_RequestUploadToken_Response>( $"PartnerApps.RequestDRMUploadToken#1", request );
+            return UnifiedMessages.SendMessage<CPartnerApps_RequestUploadToken_Request, CPartnerApps_RequestUploadToken_Response>( "PartnerApps.RequestDRMUploadToken#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CPartnerApps_RequestUploadToken_Response>> RequestCEGUploadToken(CPartnerApps_RequestUploadToken_Request request)
         {
-            return UnifiedMessages.SendMessage<CPartnerApps_RequestUploadToken_Request, CPartnerApps_RequestUploadToken_Response>( $"PartnerApps.RequestCEGUploadToken#1", request );
+            return UnifiedMessages.SendMessage<CPartnerApps_RequestUploadToken_Request, CPartnerApps_RequestUploadToken_Response>( "PartnerApps.RequestCEGUploadToken#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CPartnerApps_RequestUploadToken_Response>> RequestDepotUploadToken(CPartnerApps_RequestUploadToken_Request request)
         {
-            return UnifiedMessages.SendMessage<CPartnerApps_RequestUploadToken_Request, CPartnerApps_RequestUploadToken_Response>( $"PartnerApps.RequestDepotUploadToken#1", request );
+            return UnifiedMessages.SendMessage<CPartnerApps_RequestUploadToken_Request, CPartnerApps_RequestUploadToken_Response>( "PartnerApps.RequestDepotUploadToken#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CPartnerApps_FinishUploadKVSign_Response>> FinishUploadKVSign(CPartnerApps_FinishUpload_Request request)
         {
-            return UnifiedMessages.SendMessage<CPartnerApps_FinishUpload_Request, CPartnerApps_FinishUploadKVSign_Response>( $"PartnerApps.FinishUploadKVSign#1", request );
+            return UnifiedMessages.SendMessage<CPartnerApps_FinishUpload_Request, CPartnerApps_FinishUploadKVSign_Response>( "PartnerApps.FinishUploadKVSign#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CPartnerApps_FinishUploadLegacyDRM_Response>> FinishUploadDRMUpload(CPartnerApps_FinishUploadLegacyDRM_Request request)
         {
-            return UnifiedMessages.SendMessage<CPartnerApps_FinishUploadLegacyDRM_Request, CPartnerApps_FinishUploadLegacyDRM_Response>( $"PartnerApps.FinishUploadDRMUpload#1", request );
+            return UnifiedMessages.SendMessage<CPartnerApps_FinishUploadLegacyDRM_Request, CPartnerApps_FinishUploadLegacyDRM_Response>( "PartnerApps.FinishUploadDRMUpload#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CPartnerApps_FinishUpload_Response>> FinishUploadCEGUpload(CPartnerApps_FinishUpload_Request request)
         {
-            return UnifiedMessages.SendMessage<CPartnerApps_FinishUpload_Request, CPartnerApps_FinishUpload_Response>( $"PartnerApps.FinishUploadCEGUpload#1", request );
+            return UnifiedMessages.SendMessage<CPartnerApps_FinishUpload_Request, CPartnerApps_FinishUpload_Response>( "PartnerApps.FinishUploadCEGUpload#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CPartnerApps_FinishUploadDepot_Response>> FinishUploadDepotUpload(CPartnerApps_FinishUploadDepot_Request request)
         {
-            return UnifiedMessages.SendMessage<CPartnerApps_FinishUploadDepot_Request, CPartnerApps_FinishUploadDepot_Response>( $"PartnerApps.FinishUploadDepotUpload#1", request );
+            return UnifiedMessages.SendMessage<CPartnerApps_FinishUploadDepot_Request, CPartnerApps_FinishUploadDepot_Response>( "PartnerApps.FinishUploadDepotUpload#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CPartnerApps_GetDepotBuildResult_Response>> GetDepotBuildResult(CPartnerApps_GetDepotBuildResult_Request request)
         {
-            return UnifiedMessages.SendMessage<CPartnerApps_GetDepotBuildResult_Request, CPartnerApps_GetDepotBuildResult_Response>( $"PartnerApps.GetDepotBuildResult#1", request );
+            return UnifiedMessages.SendMessage<CPartnerApps_GetDepotBuildResult_Request, CPartnerApps_GetDepotBuildResult_Response>( "PartnerApps.GetDepotBuildResult#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CPartnerApps_FindDRMUploads_Response>> FindDRMUploads(CPartnerApps_FindDRMUploads_Request request)
         {
-            return UnifiedMessages.SendMessage<CPartnerApps_FindDRMUploads_Request, CPartnerApps_FindDRMUploads_Response>( $"PartnerApps.FindDRMUploads#1", request );
+            return UnifiedMessages.SendMessage<CPartnerApps_FindDRMUploads_Request, CPartnerApps_FindDRMUploads_Response>( "PartnerApps.FindDRMUploads#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CPartnerApps_Download_Response>> Download(CPartnerApps_Download_Request request)
         {
-            return UnifiedMessages.SendMessage<CPartnerApps_Download_Request, CPartnerApps_Download_Response>( $"PartnerApps.Download#1", request );
+            return UnifiedMessages.SendMessage<CPartnerApps_Download_Request, CPartnerApps_Download_Response>( "PartnerApps.Download#1", request );
         }
 
-        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {

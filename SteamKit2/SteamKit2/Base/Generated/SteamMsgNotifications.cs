@@ -229,19 +229,19 @@ namespace SteamKit2.Internal
 
     public class SteamNotificationClient : SteamUnifiedMessages.UnifiedService
     {
-        internal override string ServiceName { get; } = "SteamNotificationClient";
+        public override string ServiceName { get; } = "SteamNotificationClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request)
         {
-            return UnifiedMessages.SendMessage<CSteamNotification_NotificationsReceived_Notification, NoResponse>( $"SteamNotificationClient.NotificationsReceived#1", request );
+            return UnifiedMessages.SendMessage<CSteamNotification_NotificationsReceived_Notification, NoResponse>( "SteamNotificationClient.NotificationsReceived#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> PreferencesUpdated(CSteamNotification_PreferencesUpdated_Notification request)
         {
-            return UnifiedMessages.SendMessage<CSteamNotification_PreferencesUpdated_Notification, NoResponse>( $"SteamNotificationClient.PreferencesUpdated#1", request );
+            return UnifiedMessages.SendMessage<CSteamNotification_PreferencesUpdated_Notification, NoResponse>( "SteamNotificationClient.PreferencesUpdated#1", request );
         }
 
-        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {

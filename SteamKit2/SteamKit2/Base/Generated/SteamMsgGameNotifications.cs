@@ -610,39 +610,39 @@ namespace SteamKit2.Internal
 
     public class GameNotifications : SteamUnifiedMessages.UnifiedService
     {
-        internal override string ServiceName { get; } = "GameNotifications";
+        public override string ServiceName { get; } = "GameNotifications";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNotifications_CreateSession_Response>> UserCreateSession(CGameNotifications_CreateSession_Request request)
         {
-            return UnifiedMessages.SendMessage<CGameNotifications_CreateSession_Request, CGameNotifications_CreateSession_Response>( $"GameNotifications.UserCreateSession#1", request );
+            return UnifiedMessages.SendMessage<CGameNotifications_CreateSession_Request, CGameNotifications_CreateSession_Response>( "GameNotifications.UserCreateSession#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNotifications_DeleteSession_Response>> UserDeleteSession(CGameNotifications_DeleteSession_Request request)
         {
-            return UnifiedMessages.SendMessage<CGameNotifications_DeleteSession_Request, CGameNotifications_DeleteSession_Response>( $"GameNotifications.UserDeleteSession#1", request );
+            return UnifiedMessages.SendMessage<CGameNotifications_DeleteSession_Request, CGameNotifications_DeleteSession_Response>( "GameNotifications.UserDeleteSession#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNotifications_UpdateSession_Response>> UserUpdateSession(CGameNotifications_UpdateSession_Request request)
         {
-            return UnifiedMessages.SendMessage<CGameNotifications_UpdateSession_Request, CGameNotifications_UpdateSession_Response>( $"GameNotifications.UserUpdateSession#1", request );
+            return UnifiedMessages.SendMessage<CGameNotifications_UpdateSession_Request, CGameNotifications_UpdateSession_Response>( "GameNotifications.UserUpdateSession#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNotifications_EnumerateSessions_Response>> EnumerateSessions(CGameNotifications_EnumerateSessions_Request request)
         {
-            return UnifiedMessages.SendMessage<CGameNotifications_EnumerateSessions_Request, CGameNotifications_EnumerateSessions_Response>( $"GameNotifications.EnumerateSessions#1", request );
+            return UnifiedMessages.SendMessage<CGameNotifications_EnumerateSessions_Request, CGameNotifications_EnumerateSessions_Response>( "GameNotifications.EnumerateSessions#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNotifications_GetSessionDetails_Response>> GetSessionDetails(CGameNotifications_GetSessionDetails_Request request)
         {
-            return UnifiedMessages.SendMessage<CGameNotifications_GetSessionDetails_Request, CGameNotifications_GetSessionDetails_Response>( $"GameNotifications.GetSessionDetails#1", request );
+            return UnifiedMessages.SendMessage<CGameNotifications_GetSessionDetails_Request, CGameNotifications_GetSessionDetails_Response>( "GameNotifications.GetSessionDetails#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNotifications_UpdateNotificationSettings_Response>> UpdateNotificationSettings(CGameNotifications_UpdateNotificationSettings_Request request)
         {
-            return UnifiedMessages.SendMessage<CGameNotifications_UpdateNotificationSettings_Request, CGameNotifications_UpdateNotificationSettings_Response>( $"GameNotifications.UpdateNotificationSettings#1", request );
+            return UnifiedMessages.SendMessage<CGameNotifications_UpdateNotificationSettings_Request, CGameNotifications_UpdateNotificationSettings_Response>( "GameNotifications.UpdateNotificationSettings#1", request );
         }
 
-        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
@@ -670,19 +670,19 @@ namespace SteamKit2.Internal
 
     public class GameNotificationsClient : SteamUnifiedMessages.UnifiedService
     {
-        internal override string ServiceName { get; } = "GameNotificationsClient";
+        public override string ServiceName { get; } = "GameNotificationsClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> OnNotificationsRequested(CGameNotifications_OnNotificationsRequested_Notification request)
         {
-            return UnifiedMessages.SendMessage<CGameNotifications_OnNotificationsRequested_Notification, NoResponse>( $"GameNotificationsClient.OnNotificationsRequested#1", request );
+            return UnifiedMessages.SendMessage<CGameNotifications_OnNotificationsRequested_Notification, NoResponse>( "GameNotificationsClient.OnNotificationsRequested#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> OnUserStatusChanged(CGameNotifications_OnUserStatusChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<CGameNotifications_OnUserStatusChanged_Notification, NoResponse>( $"GameNotificationsClient.OnUserStatusChanged#1", request );
+            return UnifiedMessages.SendMessage<CGameNotifications_OnUserStatusChanged_Notification, NoResponse>( "GameNotificationsClient.OnUserStatusChanged#1", request );
         }
 
-        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {

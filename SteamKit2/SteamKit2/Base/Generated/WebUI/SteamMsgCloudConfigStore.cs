@@ -203,19 +203,19 @@ namespace SteamKit2.WebUI.Internal
 
     public class CloudConfigStore : SteamUnifiedMessages.UnifiedService
     {
-        internal override string ServiceName { get; } = "CloudConfigStore";
+        public override string ServiceName { get; } = "CloudConfigStore";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCloudConfigStore_Download_Response>> Download(CCloudConfigStore_Download_Request request)
         {
-            return UnifiedMessages.SendMessage<CCloudConfigStore_Download_Request, CCloudConfigStore_Download_Response>( $"CloudConfigStore.Download#1", request );
+            return UnifiedMessages.SendMessage<CCloudConfigStore_Download_Request, CCloudConfigStore_Download_Response>( "CloudConfigStore.Download#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCloudConfigStore_Upload_Response>> Upload(CCloudConfigStore_Upload_Request request)
         {
-            return UnifiedMessages.SendMessage<CCloudConfigStore_Upload_Request, CCloudConfigStore_Upload_Response>( $"CloudConfigStore.Upload#1", request );
+            return UnifiedMessages.SendMessage<CCloudConfigStore_Upload_Request, CCloudConfigStore_Upload_Response>( "CloudConfigStore.Upload#1", request );
         }
 
-        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
@@ -231,14 +231,14 @@ namespace SteamKit2.WebUI.Internal
 
     public class CloudConfigStoreClient : SteamUnifiedMessages.UnifiedService
     {
-        internal override string ServiceName { get; } = "CloudConfigStoreClient";
+        public override string ServiceName { get; } = "CloudConfigStoreClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyChange(CCloudConfigStore_Change_Notification request)
         {
-            return UnifiedMessages.SendMessage<CCloudConfigStore_Change_Notification, NoResponse>( $"CloudConfigStoreClient.NotifyChange#1", request );
+            return UnifiedMessages.SendMessage<CCloudConfigStore_Change_Notification, NoResponse>( "CloudConfigStoreClient.NotifyChange#1", request );
         }
 
-        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {

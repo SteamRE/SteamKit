@@ -3492,179 +3492,179 @@ namespace SteamKit2.Internal
 
     public class Broadcast : SteamUnifiedMessages.UnifiedService
     {
-        internal override string ServiceName { get; } = "Broadcast";
+        public override string ServiceName { get; } = "Broadcast";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_BeginBroadcastSession_Response>> BeginBroadcastSession(CBroadcast_BeginBroadcastSession_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_BeginBroadcastSession_Request, CBroadcast_BeginBroadcastSession_Response>( $"Broadcast.BeginBroadcastSession#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_BeginBroadcastSession_Request, CBroadcast_BeginBroadcastSession_Response>( "Broadcast.BeginBroadcastSession#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_EndBroadcastSession_Response>> EndBroadcastSession(CBroadcast_EndBroadcastSession_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_EndBroadcastSession_Request, CBroadcast_EndBroadcastSession_Response>( $"Broadcast.EndBroadcastSession#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_EndBroadcastSession_Request, CBroadcast_EndBroadcastSession_Response>( "Broadcast.EndBroadcastSession#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_StartBroadcastUpload_Response>> StartBroadcastUpload(CBroadcast_StartBroadcastUpload_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_StartBroadcastUpload_Request, CBroadcast_StartBroadcastUpload_Response>( $"Broadcast.StartBroadcastUpload#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_StartBroadcastUpload_Request, CBroadcast_StartBroadcastUpload_Response>( "Broadcast.StartBroadcastUpload#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyBroadcastUploadStop(CBroadcast_NotifyBroadcastUploadStop_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_NotifyBroadcastUploadStop_Notification, NoResponse>( $"Broadcast.NotifyBroadcastUploadStop#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_NotifyBroadcastUploadStop_Notification, NoResponse>( "Broadcast.NotifyBroadcastUploadStop#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_WatchBroadcast_Response>> WatchBroadcast(CBroadcast_WatchBroadcast_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WatchBroadcast_Request, CBroadcast_WatchBroadcast_Response>( $"Broadcast.WatchBroadcast#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_WatchBroadcast_Request, CBroadcast_WatchBroadcast_Response>( "Broadcast.WatchBroadcast#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> HeartbeatBroadcast(CBroadcast_HeartbeatBroadcast_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_HeartbeatBroadcast_Notification, NoResponse>( $"Broadcast.HeartbeatBroadcast#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_HeartbeatBroadcast_Notification, NoResponse>( "Broadcast.HeartbeatBroadcast#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> StopWatchingBroadcast(CBroadcast_StopWatchingBroadcast_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_StopWatchingBroadcast_Notification, NoResponse>( $"Broadcast.StopWatchingBroadcast#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_StopWatchingBroadcast_Notification, NoResponse>( "Broadcast.StopWatchingBroadcast#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_GetBroadcastStatus_Response>> GetBroadcastStatus(CBroadcast_GetBroadcastStatus_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastStatus_Request, CBroadcast_GetBroadcastStatus_Response>( $"Broadcast.GetBroadcastStatus#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastStatus_Request, CBroadcast_GetBroadcastStatus_Response>( "Broadcast.GetBroadcastStatus#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_GetBroadcastThumbnail_Response>> GetBroadcastThumbnail(CBroadcast_GetBroadcastThumbnail_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastThumbnail_Request, CBroadcast_GetBroadcastThumbnail_Response>( $"Broadcast.GetBroadcastThumbnail#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastThumbnail_Request, CBroadcast_GetBroadcastThumbnail_Response>( "Broadcast.GetBroadcastThumbnail#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_InviteToBroadcast_Response>> InviteToBroadcast(CBroadcast_InviteToBroadcast_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_InviteToBroadcast_Request, CBroadcast_InviteToBroadcast_Response>( $"Broadcast.InviteToBroadcast#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_InviteToBroadcast_Request, CBroadcast_InviteToBroadcast_Response>( "Broadcast.InviteToBroadcast#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_SendBroadcastStateToServer_Response>> SendBroadcastStateToServer(CBroadcast_SendBroadcastStateToServer_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_SendBroadcastStateToServer_Request, CBroadcast_SendBroadcastStateToServer_Response>( $"Broadcast.SendBroadcastStateToServer#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_SendBroadcastStateToServer_Request, CBroadcast_SendBroadcastStateToServer_Response>( "Broadcast.SendBroadcastStateToServer#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyBroadcastSessionHeartbeat(CBroadcast_NotifyBroadcastSessionHeartbeat_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_NotifyBroadcastSessionHeartbeat_Notification, NoResponse>( $"Broadcast.NotifyBroadcastSessionHeartbeat#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_NotifyBroadcastSessionHeartbeat_Notification, NoResponse>( "Broadcast.NotifyBroadcastSessionHeartbeat#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_GetBroadcastChatInfo_Response>> GetBroadcastChatInfo(CBroadcast_GetBroadcastChatInfo_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastChatInfo_Request, CBroadcast_GetBroadcastChatInfo_Response>( $"Broadcast.GetBroadcastChatInfo#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastChatInfo_Request, CBroadcast_GetBroadcastChatInfo_Response>( "Broadcast.GetBroadcastChatInfo#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_PostChatMessage_Response>> PostChatMessage(CBroadcast_PostChatMessage_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_PostChatMessage_Request, CBroadcast_PostChatMessage_Response>( $"Broadcast.PostChatMessage#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_PostChatMessage_Request, CBroadcast_PostChatMessage_Response>( "Broadcast.PostChatMessage#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_UpdateChatMessageFlair_Response>> UpdateChatMessageFlair(CBroadcast_UpdateChatMessageFlair_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_UpdateChatMessageFlair_Request, CBroadcast_UpdateChatMessageFlair_Response>( $"Broadcast.UpdateChatMessageFlair#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_UpdateChatMessageFlair_Request, CBroadcast_UpdateChatMessageFlair_Response>( "Broadcast.UpdateChatMessageFlair#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_MuteBroadcastChatUser_Response>> MuteBroadcastChatUser(CBroadcast_MuteBroadcastChatUser_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_MuteBroadcastChatUser_Request, CBroadcast_MuteBroadcastChatUser_Response>( $"Broadcast.MuteBroadcastChatUser#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_MuteBroadcastChatUser_Request, CBroadcast_MuteBroadcastChatUser_Response>( "Broadcast.MuteBroadcastChatUser#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_RemoveUserChatText_Response>> RemoveUserChatText(CBroadcast_RemoveUserChatText_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_RemoveUserChatText_Request, CBroadcast_RemoveUserChatText_Response>( $"Broadcast.RemoveUserChatText#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_RemoveUserChatText_Request, CBroadcast_RemoveUserChatText_Response>( "Broadcast.RemoveUserChatText#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_GetBroadcastChatUserNames_Response>> GetBroadcastChatUserNames(CBroadcast_GetBroadcastChatUserNames_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastChatUserNames_Request, CBroadcast_GetBroadcastChatUserNames_Response>( $"Broadcast.GetBroadcastChatUserNames#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastChatUserNames_Request, CBroadcast_GetBroadcastChatUserNames_Response>( "Broadcast.GetBroadcastChatUserNames#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_StartBuildClip_Response>> StartBuildClip(CBroadcast_StartBuildClip_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_StartBuildClip_Request, CBroadcast_StartBuildClip_Response>( $"Broadcast.StartBuildClip#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_StartBuildClip_Request, CBroadcast_StartBuildClip_Response>( "Broadcast.StartBuildClip#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_GetBuildClipStatus_Response>> GetBuildClipStatus(CBroadcast_GetBuildClipStatus_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_GetBuildClipStatus_Request, CBroadcast_GetBuildClipStatus_Response>( $"Broadcast.GetBuildClipStatus#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_GetBuildClipStatus_Request, CBroadcast_GetBuildClipStatus_Response>( "Broadcast.GetBuildClipStatus#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_SetClipDetails_Response>> SetClipDetails(CBroadcast_SetClipDetails_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_SetClipDetails_Request, CBroadcast_SetClipDetails_Response>( $"Broadcast.SetClipDetails#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_SetClipDetails_Request, CBroadcast_SetClipDetails_Response>( "Broadcast.SetClipDetails#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_GetClipDetails_Response>> GetClipDetails(CBroadcast_GetClipDetails_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_GetClipDetails_Request, CBroadcast_GetClipDetails_Response>( $"Broadcast.GetClipDetails#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_GetClipDetails_Request, CBroadcast_GetClipDetails_Response>( "Broadcast.GetClipDetails#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_SetRTMPInfo_Response>> SetRTMPInfo(CBroadcast_SetRTMPInfo_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_SetRTMPInfo_Request, CBroadcast_SetRTMPInfo_Response>( $"Broadcast.SetRTMPInfo#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_SetRTMPInfo_Request, CBroadcast_SetRTMPInfo_Response>( "Broadcast.SetRTMPInfo#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_GetRTMPInfo_Response>> GetRTMPInfo(CBroadcast_GetRTMPInfo_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_GetRTMPInfo_Request, CBroadcast_GetRTMPInfo_Response>( $"Broadcast.GetRTMPInfo#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_GetRTMPInfo_Request, CBroadcast_GetRTMPInfo_Response>( "Broadcast.GetRTMPInfo#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyWebRTCHaveTURNServer(CBroadcast_WebRTCHaveTURNServer_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WebRTCHaveTURNServer_Notification, NoResponse>( $"Broadcast.NotifyWebRTCHaveTURNServer#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCHaveTURNServer_Notification, NoResponse>( "Broadcast.NotifyWebRTCHaveTURNServer#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_WebRTCStartResult_Response>> WebRTCStartResult(CBroadcast_WebRTCStartResult_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WebRTCStartResult_Request, CBroadcast_WebRTCStartResult_Response>( $"Broadcast.WebRTCStartResult#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCStartResult_Request, CBroadcast_WebRTCStartResult_Response>( "Broadcast.WebRTCStartResult#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_WebRTCStopped_Response>> WebRTCStopped(CBroadcast_WebRTCStopped_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WebRTCStopped_Request, CBroadcast_WebRTCStopped_Response>( $"Broadcast.WebRTCStopped#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCStopped_Request, CBroadcast_WebRTCStopped_Response>( "Broadcast.WebRTCStopped#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_WebRTCSetAnswer_Response>> WebRTCSetAnswer(CBroadcast_WebRTCSetAnswer_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WebRTCSetAnswer_Request, CBroadcast_WebRTCSetAnswer_Response>( $"Broadcast.WebRTCSetAnswer#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCSetAnswer_Request, CBroadcast_WebRTCSetAnswer_Response>( "Broadcast.WebRTCSetAnswer#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_WebRTCLookupTURNServer_Response>> WebRTCLookupTURNServer(CBroadcast_WebRTCLookupTURNServer_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WebRTCLookupTURNServer_Request, CBroadcast_WebRTCLookupTURNServer_Response>( $"Broadcast.WebRTCLookupTURNServer#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCLookupTURNServer_Request, CBroadcast_WebRTCLookupTURNServer_Response>( "Broadcast.WebRTCLookupTURNServer#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_WebRTCAddHostCandidate_Response>> WebRTCAddHostCandidate(CBroadcast_WebRTCAddHostCandidate_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WebRTCAddHostCandidate_Request, CBroadcast_WebRTCAddHostCandidate_Response>( $"Broadcast.WebRTCAddHostCandidate#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCAddHostCandidate_Request, CBroadcast_WebRTCAddHostCandidate_Response>( "Broadcast.WebRTCAddHostCandidate#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_WebRTCAddViewerCandidate_Response>> WebRTCAddViewerCandidate(CBroadcast_WebRTCAddViewerCandidate_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WebRTCAddViewerCandidate_Request, CBroadcast_WebRTCAddViewerCandidate_Response>( $"Broadcast.WebRTCAddViewerCandidate#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCAddViewerCandidate_Request, CBroadcast_WebRTCAddViewerCandidate_Response>( "Broadcast.WebRTCAddViewerCandidate#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_WebRTCGetHostCandidates_Response>> WebRTCGetHostCandidates(CBroadcast_WebRTCGetHostCandidates_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WebRTCGetHostCandidates_Request, CBroadcast_WebRTCGetHostCandidates_Response>( $"Broadcast.WebRTCGetHostCandidates#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCGetHostCandidates_Request, CBroadcast_WebRTCGetHostCandidates_Response>( "Broadcast.WebRTCGetHostCandidates#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_GetBroadcastUploadStats_Response>> GetBroadcastUploadStats(CBroadcast_GetBroadcastUploadStats_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastUploadStats_Request, CBroadcast_GetBroadcastUploadStats_Response>( $"Broadcast.GetBroadcastUploadStats#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastUploadStats_Request, CBroadcast_GetBroadcastUploadStats_Response>( "Broadcast.GetBroadcastUploadStats#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_GetBroadcastViewerStats_Response>> GetBroadcastViewerStats(CBroadcast_GetBroadcastViewerStats_Request request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastViewerStats_Request, CBroadcast_GetBroadcastViewerStats_Response>( $"Broadcast.GetBroadcastViewerStats#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastViewerStats_Request, CBroadcast_GetBroadcastViewerStats_Response>( "Broadcast.GetBroadcastViewerStats#1", request );
         }
 
-        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
@@ -3776,74 +3776,74 @@ namespace SteamKit2.Internal
 
     public class BroadcastClient : SteamUnifiedMessages.UnifiedService
     {
-        internal override string ServiceName { get; } = "BroadcastClient";
+        public override string ServiceName { get; } = "BroadcastClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyBroadcastViewerState(CBroadcast_BroadcastViewerState_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_BroadcastViewerState_Notification, NoResponse>( $"BroadcastClient.NotifyBroadcastViewerState#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_BroadcastViewerState_Notification, NoResponse>( "BroadcastClient.NotifyBroadcastViewerState#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyWaitingBroadcastViewer(CBroadcast_WaitingBroadcastViewer_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WaitingBroadcastViewer_Notification, NoResponse>( $"BroadcastClient.NotifyWaitingBroadcastViewer#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_WaitingBroadcastViewer_Notification, NoResponse>( "BroadcastClient.NotifyWaitingBroadcastViewer#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyBroadcastUploadStarted(CBroadcast_BroadcastUploadStarted_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_BroadcastUploadStarted_Notification, NoResponse>( $"BroadcastClient.NotifyBroadcastUploadStarted#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_BroadcastUploadStarted_Notification, NoResponse>( "BroadcastClient.NotifyBroadcastUploadStarted#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyStopBroadcastUpload(CBroadcast_StopBroadcastUpload_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_StopBroadcastUpload_Notification, NoResponse>( $"BroadcastClient.NotifyStopBroadcastUpload#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_StopBroadcastUpload_Notification, NoResponse>( "BroadcastClient.NotifyStopBroadcastUpload#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifySessionClosed(CBroadcast_SessionClosed_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_SessionClosed_Notification, NoResponse>( $"BroadcastClient.NotifySessionClosed#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_SessionClosed_Notification, NoResponse>( "BroadcastClient.NotifySessionClosed#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyViewerBroadcastInvite(CBroadcast_ViewerBroadcastInvite_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_ViewerBroadcastInvite_Notification, NoResponse>( $"BroadcastClient.NotifyViewerBroadcastInvite#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_ViewerBroadcastInvite_Notification, NoResponse>( "BroadcastClient.NotifyViewerBroadcastInvite#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyBroadcastStatus(CBroadcast_BroadcastStatus_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_BroadcastStatus_Notification, NoResponse>( $"BroadcastClient.NotifyBroadcastStatus#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_BroadcastStatus_Notification, NoResponse>( "BroadcastClient.NotifyBroadcastStatus#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyBroadcastChannelLive(CBroadcast_BroadcastChannelLive_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_BroadcastChannelLive_Notification, NoResponse>( $"BroadcastClient.NotifyBroadcastChannelLive#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_BroadcastChannelLive_Notification, NoResponse>( "BroadcastClient.NotifyBroadcastChannelLive#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> SendThumbnailToRelay(CBroadcast_SendThumbnailToRelay_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_SendThumbnailToRelay_Notification, NoResponse>( $"BroadcastClient.SendThumbnailToRelay#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_SendThumbnailToRelay_Notification, NoResponse>( "BroadcastClient.SendThumbnailToRelay#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyWebRTCNeedTURNServer(CBroadcast_WebRTCNeedTURNServer_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WebRTCNeedTURNServer_Notification, NoResponse>( $"BroadcastClient.NotifyWebRTCNeedTURNServer#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCNeedTURNServer_Notification, NoResponse>( "BroadcastClient.NotifyWebRTCNeedTURNServer#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyWebRTCStart(CBroadcast_WebRTCStart_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WebRTCStart_Notification, NoResponse>( $"BroadcastClient.NotifyWebRTCStart#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCStart_Notification, NoResponse>( "BroadcastClient.NotifyWebRTCStart#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyWebRTCSetAnswer(CBroadcast_WebRTCSetAnswer_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WebRTCSetAnswer_Notification, NoResponse>( $"BroadcastClient.NotifyWebRTCSetAnswer#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCSetAnswer_Notification, NoResponse>( "BroadcastClient.NotifyWebRTCSetAnswer#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyWebRTCAddViewerCandidate(CBroadcast_WebRTCAddViewerCandidate_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WebRTCAddViewerCandidate_Notification, NoResponse>( $"BroadcastClient.NotifyWebRTCAddViewerCandidate#1", request );
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCAddViewerCandidate_Notification, NoResponse>( "BroadcastClient.NotifyWebRTCAddViewerCandidate#1", request );
         }
 
-        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {

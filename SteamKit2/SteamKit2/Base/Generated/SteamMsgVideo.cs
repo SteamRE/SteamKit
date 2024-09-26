@@ -285,24 +285,24 @@ namespace SteamKit2.Internal
 
     public class Video : SteamUnifiedMessages.UnifiedService
     {
-        internal override string ServiceName { get; } = "Video";
+        public override string ServiceName { get; } = "Video";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CVideo_ClientGetVideoURL_Response>> ClientGetVideoURL(CVideo_ClientGetVideoURL_Request request)
         {
-            return UnifiedMessages.SendMessage<CVideo_ClientGetVideoURL_Request, CVideo_ClientGetVideoURL_Response>( $"Video.ClientGetVideoURL#1", request );
+            return UnifiedMessages.SendMessage<CVideo_ClientGetVideoURL_Request, CVideo_ClientGetVideoURL_Response>( "Video.ClientGetVideoURL#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> SetVideoBookmark(CVideo_SetVideoBookmark_Notification request)
         {
-            return UnifiedMessages.SendMessage<CVideo_SetVideoBookmark_Notification, NoResponse>( $"Video.SetVideoBookmark#1", request );
+            return UnifiedMessages.SendMessage<CVideo_SetVideoBookmark_Notification, NoResponse>( "Video.SetVideoBookmark#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CVideo_GetVideoBookmarks_Response>> GetVideoBookmarks(CVideo_GetVideoBookmarks_Request request)
         {
-            return UnifiedMessages.SendMessage<CVideo_GetVideoBookmarks_Request, CVideo_GetVideoBookmarks_Response>( $"Video.GetVideoBookmarks#1", request );
+            return UnifiedMessages.SendMessage<CVideo_GetVideoBookmarks_Request, CVideo_GetVideoBookmarks_Response>( "Video.GetVideoBookmarks#1", request );
         }
 
-        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
@@ -321,14 +321,14 @@ namespace SteamKit2.Internal
 
     public class VideoClient : SteamUnifiedMessages.UnifiedService
     {
-        internal override string ServiceName { get; } = "VideoClient";
+        public override string ServiceName { get; } = "VideoClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyUnlockedH264(CVideo_UnlockedH264_Notification request)
         {
-            return UnifiedMessages.SendMessage<CVideo_UnlockedH264_Notification, NoResponse>( $"VideoClient.NotifyUnlockedH264#1", request );
+            return UnifiedMessages.SendMessage<CVideo_UnlockedH264_Notification, NoResponse>( "VideoClient.NotifyUnlockedH264#1", request );
         }
 
-        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
@@ -341,14 +341,14 @@ namespace SteamKit2.Internal
 
     public class FovasVideo : SteamUnifiedMessages.UnifiedService
     {
-        internal override string ServiceName { get; } = "FovasVideo";
+        public override string ServiceName { get; } = "FovasVideo";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFovasVideo_ClientGetOPFSettings_Response>> ClientGetOPFSettings(CFovasVideo_ClientGetOPFSettings_Request request)
         {
-            return UnifiedMessages.SendMessage<CFovasVideo_ClientGetOPFSettings_Request, CFovasVideo_ClientGetOPFSettings_Response>( $"FovasVideo.ClientGetOPFSettings#1", request );
+            return UnifiedMessages.SendMessage<CFovasVideo_ClientGetOPFSettings_Request, CFovasVideo_ClientGetOPFSettings_Response>( "FovasVideo.ClientGetOPFSettings#1", request );
         }
 
-        internal override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
