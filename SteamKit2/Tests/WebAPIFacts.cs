@@ -212,7 +212,7 @@ namespace Tests
                 Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
                 Assert.Equal( HttpMethod.Put, request.Method );
 
-                var content = await request.Content.ReadAsStringAsync(); // This technically should be ReadAsFormDataAsync
+                var content = await request.Content.ReadAsStringAsync( TestContext.Current.CancellationToken ); // This technically should be ReadAsFormDataAsync
                 var formData = HttpUtility.ParseQueryString( content );
                 Assert.Equal( 3, formData.Count );
                 Assert.Equal( "foo", formData[ "f" ] );

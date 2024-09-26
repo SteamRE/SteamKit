@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Tests
 {
+    [Collection( nameof( NotThreadSafeResourceCollection ) )]
     public class SmartCMServerListFacts
     {
         public SmartCMServerListFacts()

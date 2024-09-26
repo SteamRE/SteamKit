@@ -7,6 +7,7 @@ using Xunit;
 namespace Tests
 {
 #if DEBUG
+    [Collection( nameof( NotThreadSafeResourceCollection ) )]
     public class CMClientFacts
     {
         [Fact]

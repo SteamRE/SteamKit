@@ -91,7 +91,7 @@ namespace Tests
                 threads[i] = new Thread(state =>
                 {
                    var provider = (IMachineInfoProvider)state;
-                   trigger.Wait();
+                   trigger.Wait( TestContext.Current.CancellationToken );
                    HardwareUtils.Init(provider);
                    HardwareUtils.GetMachineID(provider);
                 });
