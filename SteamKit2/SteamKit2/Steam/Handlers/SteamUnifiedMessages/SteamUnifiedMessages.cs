@@ -117,13 +117,27 @@ namespace SteamKit2
             Client.PostCallback( callback );
         }
 
+        /// <summary>
+        /// Abstract definition of a steam unified messages service.
+        /// </summary>
         public abstract class UnifiedService : IDisposable
         {
-            internal abstract void HandleMsg( string methodName, IPacketMsg packetMsg );
+            /// <summary>
+            /// Handles a message for this service. This should not be called directly.
+            /// </summary>
+            /// <param name="methodName">The name of the method the service should handle</param>
+            /// <param name="packetMsg">he packet message that contains the data</param>
+            public abstract void HandleMsg( string methodName, IPacketMsg packetMsg );
 
-            internal abstract string ServiceName { get; }
+            /// <summary>
+            /// The name of the steam unified messages service.
+            /// </summary>
+            public abstract string ServiceName { get; }
 
-            internal SteamUnifiedMessages UnifiedMessages { get; init; }
+            /// <summary>
+            /// A reference to the <see cref="SteamUnifiedMessages"/> instance this service was created from.
+            /// </summary>
+            public SteamUnifiedMessages UnifiedMessages { get; init; }
 
             /// <inheritdoc />
             public void Dispose()
