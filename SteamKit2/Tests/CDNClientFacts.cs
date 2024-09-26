@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Tests
 {
+#if DEBUG
     public class CDNClientFacts
     {
         [Fact]
@@ -124,4 +125,5 @@ namespace Tests
                 => Task.FromResult( new HttpResponseMessage( ( HttpStatusCode )418 ) );
         }
     }
+#endif
 }

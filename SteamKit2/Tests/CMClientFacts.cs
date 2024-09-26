@@ -6,6 +6,7 @@ using Xunit;
 
 namespace Tests
 {
+#if DEBUG
     public class CMClientFacts
     {
         [Fact]
@@ -78,4 +79,5 @@ namespace Tests
             return ms.ToArray();
         }
     }
+#endif
 }

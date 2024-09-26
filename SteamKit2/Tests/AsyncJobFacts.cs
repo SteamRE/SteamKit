@@ -14,17 +14,6 @@ namespace Tests
         }
 
         [Fact]
-        public void AsyncJobCtorRegistersJob()
-        {
-            SteamClient client = new SteamClient();
-
-            AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
-
-            Assert.True( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should contain the jobid key" );
-            Assert.True( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should contain jobid key as a value type" );
-        }
-
-        [Fact]
         public void AysncJobCompletesOnCallback()
         {
             SteamClient client = new SteamClient();
@@ -37,6 +26,33 @@ namespace Tests
             Assert.True( asyncTask.IsCompleted, "Async job should be completed after callback is posted" );
             Assert.False( asyncTask.IsCanceled, "Async job should not be canceled after callback is posted" );
             Assert.False( asyncTask.IsFaulted, "Async job should not be faulted after callback is posted" );
+        }
+
+        [Fact]
+        public async Task AsyncJobGivesBackCallback()
+        {
+            SteamClient client = new SteamClient();
+
+            AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
+            Task<Callback> jobTask = asyncJob.ToTask();
+
+            Callback ourCallback = new Callback { JobID = 123 };
+
+            client.PostCallback( ourCallback );
+
+            Assert.Same( await jobTask, ourCallback );
+        }
+
+#if DEBUG
+        [Fact]
+        public void AsyncJobCtorRegistersJob()
+        {
+            SteamClient client = new SteamClient();
+
+            AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
+
+            Assert.True( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should contain the jobid key" );
+            Assert.True( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should contain jobid key as a value type" );
         }
 
         [Fact]
@@ -82,21 +98,6 @@ namespace Tests
             Assert.False( asyncTask.IsFaulted, "Async job should not be faulted on message timeout" );
 
             await Assert.ThrowsAsync<TaskCanceledException>( async () => await asyncTask );
-        }
-
-        [Fact]
-        public async Task AsyncJobGivesBackCallback()
-        {
-            SteamClient client = new SteamClient();
-
-            AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
-            Task<Callback> jobTask = asyncJob.ToTask();
-
-            Callback ourCallback = new Callback { JobID = 123 };
-
-            client.PostCallback( ourCallback );
-
-            Assert.Same( await jobTask, ourCallback );
         }
 
         [Fact]
@@ -412,5 +413,6 @@ namespace Tests
             using var cts = new CancellationTokenSource();
             task.Wait( cts.Token );
         }
+#endif
     }
 }

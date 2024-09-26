@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Tests
 {
+#if DEBUG
     public class MachineInfoFacts
     {
         [Fact]
@@ -201,4 +202,5 @@ namespace Tests
             public byte[] GetMachineGuid() => throw new InvalidOperationException("This provider only throws.");
         }
     }
+#endif
 }

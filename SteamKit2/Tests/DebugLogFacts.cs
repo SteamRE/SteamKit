@@ -4,6 +4,7 @@ using Xunit.Sdk;
 
 namespace Tests
 {
+#if DEBUG
     class TestListener : IDebugListener
     {
         public void WriteLine( string category, string msg )
@@ -163,4 +164,5 @@ namespace Tests
             Assert.Equal( "My 1st message", message );
         }
     }
+#endif
 }
