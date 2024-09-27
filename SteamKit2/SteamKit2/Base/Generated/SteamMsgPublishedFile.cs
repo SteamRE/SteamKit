@@ -4900,34 +4900,25 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "PublishedFileClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyFileSubscribed(CPublishedFile_FileSubscribed_Notification request)
+        public void NotifyFileSubscribed(CPublishedFile_FileSubscribed_Notification request)
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_FileSubscribed_Notification, NoResponse>( "PublishedFileClient.NotifyFileSubscribed#1", request );
+            UnifiedMessages.SendNotification<CPublishedFile_FileSubscribed_Notification>( "PublishedFileClient.NotifyFileSubscribed#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyFileUnsubscribed(CPublishedFile_FileUnsubscribed_Notification request)
+        public void NotifyFileUnsubscribed(CPublishedFile_FileUnsubscribed_Notification request)
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_FileUnsubscribed_Notification, NoResponse>( "PublishedFileClient.NotifyFileUnsubscribed#1", request );
+            UnifiedMessages.SendNotification<CPublishedFile_FileUnsubscribed_Notification>( "PublishedFileClient.NotifyFileUnsubscribed#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyFileDeleted(CPublishedFile_FileDeleted_Client_Notification request)
+        public void NotifyFileDeleted(CPublishedFile_FileDeleted_Client_Notification request)
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_FileDeleted_Client_Notification, NoResponse>( "PublishedFileClient.NotifyFileDeleted#1", request );
+            UnifiedMessages.SendNotification<CPublishedFile_FileDeleted_Client_Notification>( "PublishedFileClient.NotifyFileDeleted#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "NotifyFileSubscribed":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyFileUnsubscribed":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyFileDeleted":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }

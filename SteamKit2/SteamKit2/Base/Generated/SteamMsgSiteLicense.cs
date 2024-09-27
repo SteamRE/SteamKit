@@ -532,14 +532,14 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CSiteManagerClient_IncomingClient_Request, CSiteManagerClient_IncomingClient_Response>( "SiteManagerClient.IncomingClient#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientSeatCheckoutNotification(CSiteLicense_ClientSeatCheckout_Notification request)
+        public void ClientSeatCheckoutNotification(CSiteLicense_ClientSeatCheckout_Notification request)
         {
-            return UnifiedMessages.SendMessage<CSiteLicense_ClientSeatCheckout_Notification, NoResponse>( "SiteManagerClient.ClientSeatCheckoutNotification#1", request );
+            UnifiedMessages.SendNotification<CSiteLicense_ClientSeatCheckout_Notification>( "SiteManagerClient.ClientSeatCheckoutNotification#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> TrackedPaymentsNotification(CSiteManagerClient_TrackedPayments_Notification request)
+        public void TrackedPaymentsNotification(CSiteManagerClient_TrackedPayments_Notification request)
         {
-            return UnifiedMessages.SendMessage<CSiteManagerClient_TrackedPayments_Notification, NoResponse>( "SiteManagerClient.TrackedPaymentsNotification#1", request );
+            UnifiedMessages.SendNotification<CSiteManagerClient_TrackedPayments_Notification>( "SiteManagerClient.TrackedPaymentsNotification#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
@@ -548,12 +548,6 @@ namespace SteamKit2.Internal
             {
                 case "IncomingClient":
                     UnifiedMessages.HandleServiceMsg<CSiteManagerClient_IncomingClient_Response>( packetMsg );
-                    break;
-                case "ClientSeatCheckoutNotification":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "TrackedPaymentsNotification":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
                     break;
             }
         }

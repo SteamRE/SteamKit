@@ -306,18 +306,15 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "FriendsListClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> FavoritesChanged(CFriendsList_FavoritesChanged_Notification request)
+        public void FavoritesChanged(CFriendsList_FavoritesChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<CFriendsList_FavoritesChanged_Notification, NoResponse>( "FriendsListClient.FavoritesChanged#1", request );
+            UnifiedMessages.SendNotification<CFriendsList_FavoritesChanged_Notification>( "FriendsListClient.FavoritesChanged#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "FavoritesChanged":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }

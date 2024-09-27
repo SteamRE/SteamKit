@@ -672,26 +672,20 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "GameNotificationsClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> OnNotificationsRequested(CGameNotifications_OnNotificationsRequested_Notification request)
+        public void OnNotificationsRequested(CGameNotifications_OnNotificationsRequested_Notification request)
         {
-            return UnifiedMessages.SendMessage<CGameNotifications_OnNotificationsRequested_Notification, NoResponse>( "GameNotificationsClient.OnNotificationsRequested#1", request );
+            UnifiedMessages.SendNotification<CGameNotifications_OnNotificationsRequested_Notification>( "GameNotificationsClient.OnNotificationsRequested#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> OnUserStatusChanged(CGameNotifications_OnUserStatusChanged_Notification request)
+        public void OnUserStatusChanged(CGameNotifications_OnUserStatusChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<CGameNotifications_OnUserStatusChanged_Notification, NoResponse>( "GameNotificationsClient.OnUserStatusChanged#1", request );
+            UnifiedMessages.SendNotification<CGameNotifications_OnUserStatusChanged_Notification>( "GameNotificationsClient.OnUserStatusChanged#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "OnNotificationsRequested":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "OnUserStatusChanged":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }

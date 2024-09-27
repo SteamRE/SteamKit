@@ -292,9 +292,9 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CVideo_ClientGetVideoURL_Request, CVideo_ClientGetVideoURL_Response>( "Video.ClientGetVideoURL#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> SetVideoBookmark(CVideo_SetVideoBookmark_Notification request)
+        public void SetVideoBookmark(CVideo_SetVideoBookmark_Notification request)
         {
-            return UnifiedMessages.SendMessage<CVideo_SetVideoBookmark_Notification, NoResponse>( "Video.SetVideoBookmark#1", request );
+            UnifiedMessages.SendNotification<CVideo_SetVideoBookmark_Notification>( "Video.SetVideoBookmark#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CVideo_GetVideoBookmarks_Response>> GetVideoBookmarks(CVideo_GetVideoBookmarks_Request request)
@@ -309,9 +309,6 @@ namespace SteamKit2.Internal
                 case "ClientGetVideoURL":
                     UnifiedMessages.HandleServiceMsg<CVideo_ClientGetVideoURL_Response>( packetMsg );
                     break;
-                case "SetVideoBookmark":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
                 case "GetVideoBookmarks":
                     UnifiedMessages.HandleServiceMsg<CVideo_GetVideoBookmarks_Response>( packetMsg );
                     break;
@@ -323,18 +320,15 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "VideoClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyUnlockedH264(CVideo_UnlockedH264_Notification request)
+        public void NotifyUnlockedH264(CVideo_UnlockedH264_Notification request)
         {
-            return UnifiedMessages.SendMessage<CVideo_UnlockedH264_Notification, NoResponse>( "VideoClient.NotifyUnlockedH264#1", request );
+            UnifiedMessages.SendNotification<CVideo_UnlockedH264_Notification>( "VideoClient.NotifyUnlockedH264#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "NotifyUnlockedH264":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }

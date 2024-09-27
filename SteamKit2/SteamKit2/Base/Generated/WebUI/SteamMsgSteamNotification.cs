@@ -411,26 +411,20 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "SteamNotificationClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request)
+        public void NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request)
         {
-            return UnifiedMessages.SendMessage<CSteamNotification_NotificationsReceived_Notification, NoResponse>( "SteamNotificationClient.NotificationsReceived#1", request );
+            UnifiedMessages.SendNotification<CSteamNotification_NotificationsReceived_Notification>( "SteamNotificationClient.NotificationsReceived#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> PreferencesUpdated(CSteamNotification_PreferencesUpdated_Notification request)
+        public void PreferencesUpdated(CSteamNotification_PreferencesUpdated_Notification request)
         {
-            return UnifiedMessages.SendMessage<CSteamNotification_PreferencesUpdated_Notification, NoResponse>( "SteamNotificationClient.PreferencesUpdated#1", request );
+            UnifiedMessages.SendNotification<CSteamNotification_PreferencesUpdated_Notification>( "SteamNotificationClient.PreferencesUpdated#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "NotificationsReceived":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "PreferencesUpdated":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }

@@ -5837,14 +5837,14 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CChatRoom_SetAppChatRoomGroupForceActive_Request, CChatRoom_SetAppChatRoomGroupForceActive_Response>( "ChatRoom.SetAppChatRoomGroupForceActive#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> SetAppChatRoomGroupStopForceActive(CChatRoom_SetAppChatRoomGroupStopForceActive_Notification request)
+        public void SetAppChatRoomGroupStopForceActive(CChatRoom_SetAppChatRoomGroupStopForceActive_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_SetAppChatRoomGroupStopForceActive_Notification, NoResponse>( "ChatRoom.SetAppChatRoomGroupStopForceActive#1", request );
+            UnifiedMessages.SendNotification<CChatRoom_SetAppChatRoomGroupStopForceActive_Notification>( "ChatRoom.SetAppChatRoomGroupStopForceActive#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> AckChatMessage(CChatRoom_AckChatMessage_Notification request)
+        public void AckChatMessage(CChatRoom_AckChatMessage_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_AckChatMessage_Notification, NoResponse>( "ChatRoom.AckChatMessage#1", request );
+            UnifiedMessages.SendNotification<CChatRoom_AckChatMessage_Notification>( "ChatRoom.AckChatMessage#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_CreateInviteLink_Response>> CreateInviteLink(CChatRoom_CreateInviteLink_Request request)
@@ -5897,9 +5897,9 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CChatRoom_DeleteChatMessages_Request, CChatRoom_DeleteChatMessages_Response>( "ChatRoom.DeleteChatMessages#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> UpdateMemberListView(CChatRoom_UpdateMemberListView_Notification request)
+        public void UpdateMemberListView(CChatRoom_UpdateMemberListView_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_UpdateMemberListView_Notification, NoResponse>( "ChatRoom.UpdateMemberListView#1", request );
+            UnifiedMessages.SendNotification<CChatRoom_UpdateMemberListView_Notification>( "ChatRoom.UpdateMemberListView#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CChatRoom_SearchMembers_Response>> SearchMembers(CChatRoom_SearchMembers_Request request)
@@ -6032,12 +6032,6 @@ namespace SteamKit2.Internal
                 case "SetAppChatRoomGroupForceActive":
                     UnifiedMessages.HandleServiceMsg<CChatRoom_SetAppChatRoomGroupForceActive_Response>( packetMsg );
                     break;
-                case "SetAppChatRoomGroupStopForceActive":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "AckChatMessage":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
                 case "CreateInviteLink":
                     UnifiedMessages.HandleServiceMsg<CChatRoom_CreateInviteLink_Response>( packetMsg );
                     break;
@@ -6067,9 +6061,6 @@ namespace SteamKit2.Internal
                     break;
                 case "DeleteChatMessages":
                     UnifiedMessages.HandleServiceMsg<CChatRoom_DeleteChatMessages_Response>( packetMsg );
-                    break;
-                case "UpdateMemberListView":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
                     break;
                 case "SearchMembers":
                     UnifiedMessages.HandleServiceMsg<CChatRoom_SearchMembers_Response>( packetMsg );
@@ -6116,98 +6107,65 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "ChatRoomClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyIncomingChatMessage(CChatRoom_IncomingChatMessage_Notification request)
+        public void NotifyIncomingChatMessage(CChatRoom_IncomingChatMessage_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_IncomingChatMessage_Notification, NoResponse>( "ChatRoomClient.NotifyIncomingChatMessage#1", request );
+            UnifiedMessages.SendNotification<CChatRoom_IncomingChatMessage_Notification>( "ChatRoomClient.NotifyIncomingChatMessage#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyChatMessageModified(CChatRoom_ChatMessageModified_Notification request)
+        public void NotifyChatMessageModified(CChatRoom_ChatMessageModified_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_ChatMessageModified_Notification, NoResponse>( "ChatRoomClient.NotifyChatMessageModified#1", request );
+            UnifiedMessages.SendNotification<CChatRoom_ChatMessageModified_Notification>( "ChatRoomClient.NotifyChatMessageModified#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyMemberStateChange(CChatRoom_MemberStateChange_Notification request)
+        public void NotifyMemberStateChange(CChatRoom_MemberStateChange_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_MemberStateChange_Notification, NoResponse>( "ChatRoomClient.NotifyMemberStateChange#1", request );
+            UnifiedMessages.SendNotification<CChatRoom_MemberStateChange_Notification>( "ChatRoomClient.NotifyMemberStateChange#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyChatRoomHeaderStateChange(CChatRoom_ChatRoomHeaderState_Notification request)
+        public void NotifyChatRoomHeaderStateChange(CChatRoom_ChatRoomHeaderState_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_ChatRoomHeaderState_Notification, NoResponse>( "ChatRoomClient.NotifyChatRoomHeaderStateChange#1", request );
+            UnifiedMessages.SendNotification<CChatRoom_ChatRoomHeaderState_Notification>( "ChatRoomClient.NotifyChatRoomHeaderStateChange#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyChatRoomGroupRoomsChange(CChatRoom_ChatRoomGroupRoomsChange_Notification request)
+        public void NotifyChatRoomGroupRoomsChange(CChatRoom_ChatRoomGroupRoomsChange_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_ChatRoomGroupRoomsChange_Notification, NoResponse>( "ChatRoomClient.NotifyChatRoomGroupRoomsChange#1", request );
+            UnifiedMessages.SendNotification<CChatRoom_ChatRoomGroupRoomsChange_Notification>( "ChatRoomClient.NotifyChatRoomGroupRoomsChange#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyShouldRejoinChatRoomVoiceChat(CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification request)
+        public void NotifyShouldRejoinChatRoomVoiceChat(CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification, NoResponse>( "ChatRoomClient.NotifyShouldRejoinChatRoomVoiceChat#1", request );
+            UnifiedMessages.SendNotification<CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification>( "ChatRoomClient.NotifyShouldRejoinChatRoomVoiceChat#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyChatGroupUserStateChanged(ChatRoomClient_NotifyChatGroupUserStateChanged_Notification request)
+        public void NotifyChatGroupUserStateChanged(ChatRoomClient_NotifyChatGroupUserStateChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<ChatRoomClient_NotifyChatGroupUserStateChanged_Notification, NoResponse>( "ChatRoomClient.NotifyChatGroupUserStateChanged#1", request );
+            UnifiedMessages.SendNotification<ChatRoomClient_NotifyChatGroupUserStateChanged_Notification>( "ChatRoomClient.NotifyChatGroupUserStateChanged#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyAckChatMessageEcho(CChatRoom_AckChatMessage_Notification request)
+        public void NotifyAckChatMessageEcho(CChatRoom_AckChatMessage_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_AckChatMessage_Notification, NoResponse>( "ChatRoomClient.NotifyAckChatMessageEcho#1", request );
+            UnifiedMessages.SendNotification<CChatRoom_AckChatMessage_Notification>( "ChatRoomClient.NotifyAckChatMessageEcho#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyChatRoomDisconnect(ChatRoomClient_NotifyChatRoomDisconnect_Notification request)
+        public void NotifyChatRoomDisconnect(ChatRoomClient_NotifyChatRoomDisconnect_Notification request)
         {
-            return UnifiedMessages.SendMessage<ChatRoomClient_NotifyChatRoomDisconnect_Notification, NoResponse>( "ChatRoomClient.NotifyChatRoomDisconnect#1", request );
+            UnifiedMessages.SendNotification<ChatRoomClient_NotifyChatRoomDisconnect_Notification>( "ChatRoomClient.NotifyChatRoomDisconnect#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyMemberListViewUpdated(CChatRoomClient_MemberListViewUpdated_Notification request)
+        public void NotifyMemberListViewUpdated(CChatRoomClient_MemberListViewUpdated_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoomClient_MemberListViewUpdated_Notification, NoResponse>( "ChatRoomClient.NotifyMemberListViewUpdated#1", request );
+            UnifiedMessages.SendNotification<CChatRoomClient_MemberListViewUpdated_Notification>( "ChatRoomClient.NotifyMemberListViewUpdated#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyMessageReaction(CChatRoom_MessageReaction_Notification request)
+        public void NotifyMessageReaction(CChatRoom_MessageReaction_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatRoom_MessageReaction_Notification, NoResponse>( "ChatRoomClient.NotifyMessageReaction#1", request );
+            UnifiedMessages.SendNotification<CChatRoom_MessageReaction_Notification>( "ChatRoomClient.NotifyMessageReaction#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "NotifyIncomingChatMessage":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyChatMessageModified":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyMemberStateChange":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyChatRoomHeaderStateChange":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyChatRoomGroupRoomsChange":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyShouldRejoinChatRoomVoiceChat":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyChatGroupUserStateChanged":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyAckChatMessageEcho":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyChatRoomDisconnect":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyMemberListViewUpdated":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyMessageReaction":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }
@@ -6216,18 +6174,15 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "ChatUsability";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyClientUsabilityMetrics(CChatUsability_ClientUsabilityMetrics_Notification request)
+        public void NotifyClientUsabilityMetrics(CChatUsability_ClientUsabilityMetrics_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatUsability_ClientUsabilityMetrics_Notification, NoResponse>( "ChatUsability.NotifyClientUsabilityMetrics#1", request );
+            UnifiedMessages.SendNotification<CChatUsability_ClientUsabilityMetrics_Notification>( "ChatUsability.NotifyClientUsabilityMetrics#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "NotifyClientUsabilityMetrics":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }
@@ -6236,18 +6191,15 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "ChatUsabilityClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyRequestClientUsabilityMetrics(CChatUsability_RequestClientUsabilityMetrics_Notification request)
+        public void NotifyRequestClientUsabilityMetrics(CChatUsability_RequestClientUsabilityMetrics_Notification request)
         {
-            return UnifiedMessages.SendMessage<CChatUsability_RequestClientUsabilityMetrics_Notification, NoResponse>( "ChatUsabilityClient.NotifyRequestClientUsabilityMetrics#1", request );
+            UnifiedMessages.SendNotification<CChatUsability_RequestClientUsabilityMetrics_Notification>( "ChatUsabilityClient.NotifyRequestClientUsabilityMetrics#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "NotifyRequestClientUsabilityMetrics":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }

@@ -2298,34 +2298,25 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "FamilyGroupsClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyRunningApps(CFamilyGroupsClient_NotifyRunningApps_Notification request)
+        public void NotifyRunningApps(CFamilyGroupsClient_NotifyRunningApps_Notification request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroupsClient_NotifyRunningApps_Notification, NoResponse>( "FamilyGroupsClient.NotifyRunningApps#1", request );
+            UnifiedMessages.SendNotification<CFamilyGroupsClient_NotifyRunningApps_Notification>( "FamilyGroupsClient.NotifyRunningApps#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyInviteStatus(CFamilyGroupsClient_InviteStatus_Notification request)
+        public void NotifyInviteStatus(CFamilyGroupsClient_InviteStatus_Notification request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroupsClient_InviteStatus_Notification, NoResponse>( "FamilyGroupsClient.NotifyInviteStatus#1", request );
+            UnifiedMessages.SendNotification<CFamilyGroupsClient_InviteStatus_Notification>( "FamilyGroupsClient.NotifyInviteStatus#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyGroupChanged(CFamilyGroupsClient_GroupChanged_Notification request)
+        public void NotifyGroupChanged(CFamilyGroupsClient_GroupChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<CFamilyGroupsClient_GroupChanged_Notification, NoResponse>( "FamilyGroupsClient.NotifyGroupChanged#1", request );
+            UnifiedMessages.SendNotification<CFamilyGroupsClient_GroupChanged_Notification>( "FamilyGroupsClient.NotifyGroupChanged#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "NotifyRunningApps":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyInviteStatus":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyGroupChanged":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }

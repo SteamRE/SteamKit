@@ -2093,9 +2093,9 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CStore_GetTrendingAppsAmongFriends_Request, CStore_GetTrendingAppsAmongFriends_Response>( "Store.GetTrendingAppsAmongFriends#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> MigratePartnerLinkTracking(CStore_MigratePartnerLinkTracking_Notification request)
+        public void MigratePartnerLinkTracking(CStore_MigratePartnerLinkTracking_Notification request)
         {
-            return UnifiedMessages.SendMessage<CStore_MigratePartnerLinkTracking_Notification, NoResponse>( "Store.MigratePartnerLinkTracking#1", request );
+            UnifiedMessages.SendNotification<CStore_MigratePartnerLinkTracking_Notification>( "Store.MigratePartnerLinkTracking#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CStore_UpdatePackageReservations_Response>> UpdatePackageReservations(CStore_UpdatePackageReservations_Request request)
@@ -2128,9 +2128,9 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CStore_GetAllReservationPositionMessages_Request, CStore_GetAllReservationPositionMessages_Response>( "Store.GetAllReservationPositionMessages#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ReloadAllReservationPositionMessages(CStore_ReloadAllReservationPositionMessages_Notification request)
+        public void ReloadAllReservationPositionMessages(CStore_ReloadAllReservationPositionMessages_Notification request)
         {
-            return UnifiedMessages.SendMessage<CStore_ReloadAllReservationPositionMessages_Notification, NoResponse>( "Store.ReloadAllReservationPositionMessages#1", request );
+            UnifiedMessages.SendNotification<CStore_ReloadAllReservationPositionMessages_Notification>( "Store.ReloadAllReservationPositionMessages#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSteamDeckCompatibility_SetFeedback_Response>> SetCompatibilityFeedback(CSteamDeckCompatibility_SetFeedback_Request request)
@@ -2183,9 +2183,6 @@ namespace SteamKit2.Internal
                 case "GetTrendingAppsAmongFriends":
                     UnifiedMessages.HandleServiceMsg<CStore_GetTrendingAppsAmongFriends_Response>( packetMsg );
                     break;
-                case "MigratePartnerLinkTracking":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
                 case "UpdatePackageReservations":
                     UnifiedMessages.HandleServiceMsg<CStore_UpdatePackageReservations_Response>( packetMsg );
                     break;
@@ -2204,9 +2201,6 @@ namespace SteamKit2.Internal
                 case "GetAllReservationPositionMessages":
                     UnifiedMessages.HandleServiceMsg<CStore_GetAllReservationPositionMessages_Response>( packetMsg );
                     break;
-                case "ReloadAllReservationPositionMessages":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
                 case "SetCompatibilityFeedback":
                     UnifiedMessages.HandleServiceMsg<CSteamDeckCompatibility_SetFeedback_Response>( packetMsg );
                     break;
@@ -2221,18 +2215,15 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "StoreClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyStorePreferencesChanged(CStore_StorePreferencesChanged_Notification request)
+        public void NotifyStorePreferencesChanged(CStore_StorePreferencesChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<CStore_StorePreferencesChanged_Notification, NoResponse>( "StoreClient.NotifyStorePreferencesChanged#1", request );
+            UnifiedMessages.SendNotification<CStore_StorePreferencesChanged_Notification>( "StoreClient.NotifyStorePreferencesChanged#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "NotifyStorePreferencesChanged":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }

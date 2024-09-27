@@ -233,18 +233,15 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "CloudConfigStoreClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyChange(CCloudConfigStore_Change_Notification request)
+        public void NotifyChange(CCloudConfigStore_Change_Notification request)
         {
-            return UnifiedMessages.SendMessage<CCloudConfigStore_Change_Notification, NoResponse>( "CloudConfigStoreClient.NotifyChange#1", request );
+            UnifiedMessages.SendNotification<CCloudConfigStore_Change_Notification>( "CloudConfigStoreClient.NotifyChange#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "NotifyChange":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }

@@ -101,9 +101,9 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CGameNetworking_AllocateFakeIP_Request, CGameNetworking_AllocateFakeIP_Response>( "GameNetworking.AllocateFakeIP#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyReleaseFakeIP(CGameNetworking_ReleaseFakeIP_Notification request)
+        public void NotifyReleaseFakeIP(CGameNetworking_ReleaseFakeIP_Notification request)
         {
-            return UnifiedMessages.SendMessage<CGameNetworking_ReleaseFakeIP_Notification, NoResponse>( "GameNetworking.NotifyReleaseFakeIP#1", request );
+            UnifiedMessages.SendNotification<CGameNetworking_ReleaseFakeIP_Notification>( "GameNetworking.NotifyReleaseFakeIP#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
@@ -112,9 +112,6 @@ namespace SteamKit2.Internal
             {
                 case "AllocateFakeIP":
                     UnifiedMessages.HandleServiceMsg<CGameNetworking_AllocateFakeIP_Response>( packetMsg );
-                    break;
-                case "NotifyReleaseFakeIP":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
                     break;
             }
         }

@@ -5157,74 +5157,50 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "PlayerClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyLastPlayedTimes(CPlayer_LastPlayedTimes_Notification request)
+        public void NotifyLastPlayedTimes(CPlayer_LastPlayedTimes_Notification request)
         {
-            return UnifiedMessages.SendMessage<CPlayer_LastPlayedTimes_Notification, NoResponse>( "PlayerClient.NotifyLastPlayedTimes#1", request );
+            UnifiedMessages.SendNotification<CPlayer_LastPlayedTimes_Notification>( "PlayerClient.NotifyLastPlayedTimes#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyFriendNicknameChanged(CPlayer_FriendNicknameChanged_Notification request)
+        public void NotifyFriendNicknameChanged(CPlayer_FriendNicknameChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<CPlayer_FriendNicknameChanged_Notification, NoResponse>( "PlayerClient.NotifyFriendNicknameChanged#1", request );
+            UnifiedMessages.SendNotification<CPlayer_FriendNicknameChanged_Notification>( "PlayerClient.NotifyFriendNicknameChanged#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyFriendEquippedProfileItemsChanged(CPlayer_FriendEquippedProfileItemsChanged_Notification request)
+        public void NotifyFriendEquippedProfileItemsChanged(CPlayer_FriendEquippedProfileItemsChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<CPlayer_FriendEquippedProfileItemsChanged_Notification, NoResponse>( "PlayerClient.NotifyFriendEquippedProfileItemsChanged#1", request );
+            UnifiedMessages.SendNotification<CPlayer_FriendEquippedProfileItemsChanged_Notification>( "PlayerClient.NotifyFriendEquippedProfileItemsChanged#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyNewSteamAnnouncementState(CPlayer_NewSteamAnnouncementState_Notification request)
+        public void NotifyNewSteamAnnouncementState(CPlayer_NewSteamAnnouncementState_Notification request)
         {
-            return UnifiedMessages.SendMessage<CPlayer_NewSteamAnnouncementState_Notification, NoResponse>( "PlayerClient.NotifyNewSteamAnnouncementState#1", request );
+            UnifiedMessages.SendNotification<CPlayer_NewSteamAnnouncementState_Notification>( "PlayerClient.NotifyNewSteamAnnouncementState#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyCommunityPreferencesChanged(CPlayer_CommunityPreferencesChanged_Notification request)
+        public void NotifyCommunityPreferencesChanged(CPlayer_CommunityPreferencesChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<CPlayer_CommunityPreferencesChanged_Notification, NoResponse>( "PlayerClient.NotifyCommunityPreferencesChanged#1", request );
+            UnifiedMessages.SendNotification<CPlayer_CommunityPreferencesChanged_Notification>( "PlayerClient.NotifyCommunityPreferencesChanged#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyTextFilterWordsChanged(CPlayer_TextFilterWordsChanged_Notification request)
+        public void NotifyTextFilterWordsChanged(CPlayer_TextFilterWordsChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<CPlayer_TextFilterWordsChanged_Notification, NoResponse>( "PlayerClient.NotifyTextFilterWordsChanged#1", request );
+            UnifiedMessages.SendNotification<CPlayer_TextFilterWordsChanged_Notification>( "PlayerClient.NotifyTextFilterWordsChanged#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyPerFriendPreferencesChanged(CPlayer_PerFriendPreferencesChanged_Notification request)
+        public void NotifyPerFriendPreferencesChanged(CPlayer_PerFriendPreferencesChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<CPlayer_PerFriendPreferencesChanged_Notification, NoResponse>( "PlayerClient.NotifyPerFriendPreferencesChanged#1", request );
+            UnifiedMessages.SendNotification<CPlayer_PerFriendPreferencesChanged_Notification>( "PlayerClient.NotifyPerFriendPreferencesChanged#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyPrivacyPrivacySettingsChanged(CPlayer_PrivacySettingsChanged_Notification request)
+        public void NotifyPrivacyPrivacySettingsChanged(CPlayer_PrivacySettingsChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<CPlayer_PrivacySettingsChanged_Notification, NoResponse>( "PlayerClient.NotifyPrivacyPrivacySettingsChanged#1", request );
+            UnifiedMessages.SendNotification<CPlayer_PrivacySettingsChanged_Notification>( "PlayerClient.NotifyPrivacyPrivacySettingsChanged#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "NotifyLastPlayedTimes":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyFriendNicknameChanged":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyFriendEquippedProfileItemsChanged":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyNewSteamAnnouncementState":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyCommunityPreferencesChanged":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyTextFilterWordsChanged":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyPerFriendPreferencesChanged":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyPrivacyPrivacySettingsChanged":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }

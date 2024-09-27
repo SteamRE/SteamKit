@@ -1259,9 +1259,9 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CMarketingMessages_GetDisplayMarketingMessage_Request, CMarketingMessages_GetDisplayMarketingMessage_Response>( "MarketingMessages.GetDisplayMarketingMessageAdmin#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> MarkMessageSeen(CMarketingMessages_MarkMessageSeen_Notification request)
+        public void MarkMessageSeen(CMarketingMessages_MarkMessageSeen_Notification request)
         {
-            return UnifiedMessages.SendMessage<CMarketingMessages_MarkMessageSeen_Notification, NoResponse>( "MarketingMessages.MarkMessageSeen#1", request );
+            UnifiedMessages.SendNotification<CMarketingMessages_MarkMessageSeen_Notification>( "MarketingMessages.MarkMessageSeen#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CMarketingMessages_GetMarketingMessage_Response>> GetMarketingMessage(CMarketingMessages_GetMarketingMessage_Request request)
@@ -1345,9 +1345,6 @@ namespace SteamKit2.Internal
                     break;
                 case "GetDisplayMarketingMessageAdmin":
                     UnifiedMessages.HandleServiceMsg<CMarketingMessages_GetDisplayMarketingMessage_Response>( packetMsg );
-                    break;
-                case "MarkMessageSeen":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
                     break;
                 case "GetMarketingMessage":
                     UnifiedMessages.HandleServiceMsg<CMarketingMessages_GetMarketingMessage_Response>( packetMsg );

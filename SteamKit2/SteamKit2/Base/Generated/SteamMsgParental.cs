@@ -1014,42 +1014,30 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "ParentalClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifySettingsChange(CParental_ParentalSettingsChange_Notification request)
+        public void NotifySettingsChange(CParental_ParentalSettingsChange_Notification request)
         {
-            return UnifiedMessages.SendMessage<CParental_ParentalSettingsChange_Notification, NoResponse>( "ParentalClient.NotifySettingsChange#1", request );
+            UnifiedMessages.SendNotification<CParental_ParentalSettingsChange_Notification>( "ParentalClient.NotifySettingsChange#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyUnlock(CParental_ParentalUnlock_Notification request)
+        public void NotifyUnlock(CParental_ParentalUnlock_Notification request)
         {
-            return UnifiedMessages.SendMessage<CParental_ParentalUnlock_Notification, NoResponse>( "ParentalClient.NotifyUnlock#1", request );
+            UnifiedMessages.SendNotification<CParental_ParentalUnlock_Notification>( "ParentalClient.NotifyUnlock#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyLock(CParental_ParentalLock_Notification request)
+        public void NotifyLock(CParental_ParentalLock_Notification request)
         {
-            return UnifiedMessages.SendMessage<CParental_ParentalLock_Notification, NoResponse>( "ParentalClient.NotifyLock#1", request );
+            UnifiedMessages.SendNotification<CParental_ParentalLock_Notification>( "ParentalClient.NotifyLock#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyPlaytimeUsed(CParental_PlaytimeUsed_Notification request)
+        public void NotifyPlaytimeUsed(CParental_PlaytimeUsed_Notification request)
         {
-            return UnifiedMessages.SendMessage<CParental_PlaytimeUsed_Notification, NoResponse>( "ParentalClient.NotifyPlaytimeUsed#1", request );
+            UnifiedMessages.SendNotification<CParental_PlaytimeUsed_Notification>( "ParentalClient.NotifyPlaytimeUsed#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "NotifySettingsChange":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyUnlock":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyLock":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyPlaytimeUsed":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }

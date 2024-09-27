@@ -659,14 +659,14 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "DataPublisher";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientContentCorruptionReport(CDataPublisher_ClientContentCorruptionReport_Notification request)
+        public void ClientContentCorruptionReport(CDataPublisher_ClientContentCorruptionReport_Notification request)
         {
-            return UnifiedMessages.SendMessage<CDataPublisher_ClientContentCorruptionReport_Notification, NoResponse>( "DataPublisher.ClientContentCorruptionReport#1", request );
+            UnifiedMessages.SendNotification<CDataPublisher_ClientContentCorruptionReport_Notification>( "DataPublisher.ClientContentCorruptionReport#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientUpdateAppJobReport(CDataPublisher_ClientUpdateAppJob_Notification request)
+        public void ClientUpdateAppJobReport(CDataPublisher_ClientUpdateAppJob_Notification request)
         {
-            return UnifiedMessages.SendMessage<CDataPublisher_ClientUpdateAppJob_Notification, NoResponse>( "DataPublisher.ClientUpdateAppJobReport#1", request );
+            UnifiedMessages.SendNotification<CDataPublisher_ClientUpdateAppJob_Notification>( "DataPublisher.ClientUpdateAppJobReport#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CDataPublisher_GetVRDeviceInfo_Response>> GetVRDeviceInfo(CDataPublisher_GetVRDeviceInfo_Request request)
@@ -688,12 +688,6 @@ namespace SteamKit2.Internal
         {
             switch ( methodName )
             {
-                case "ClientContentCorruptionReport":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "ClientUpdateAppJobReport":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
                 case "GetVRDeviceInfo":
                     UnifiedMessages.HandleServiceMsg<CDataPublisher_GetVRDeviceInfo_Response>( packetMsg );
                     break;

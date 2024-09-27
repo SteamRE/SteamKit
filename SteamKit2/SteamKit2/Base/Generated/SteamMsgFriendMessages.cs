@@ -818,9 +818,9 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CFriendMessages_SendMessage_Request, CFriendMessages_SendMessage_Response>( "FriendMessages.SendMessage#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> AckMessage(CFriendMessages_AckMessage_Notification request)
+        public void AckMessage(CFriendMessages_AckMessage_Notification request)
         {
-            return UnifiedMessages.SendMessage<CFriendMessages_AckMessage_Notification, NoResponse>( "FriendMessages.AckMessage#1", request );
+            UnifiedMessages.SendNotification<CFriendMessages_AckMessage_Notification>( "FriendMessages.AckMessage#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFriendMessages_IsInFriendsUIBeta_Response>> IsInFriendsUIBeta(CFriendMessages_IsInFriendsUIBeta_Request request)
@@ -846,9 +846,6 @@ namespace SteamKit2.Internal
                 case "SendMessage":
                     UnifiedMessages.HandleServiceMsg<CFriendMessages_SendMessage_Response>( packetMsg );
                     break;
-                case "AckMessage":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
                 case "IsInFriendsUIBeta":
                     UnifiedMessages.HandleServiceMsg<CFriendMessages_IsInFriendsUIBeta_Response>( packetMsg );
                     break;
@@ -863,34 +860,25 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "FriendMessagesClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> IncomingMessage(CFriendMessages_IncomingMessage_Notification request)
+        public void IncomingMessage(CFriendMessages_IncomingMessage_Notification request)
         {
-            return UnifiedMessages.SendMessage<CFriendMessages_IncomingMessage_Notification, NoResponse>( "FriendMessagesClient.IncomingMessage#1", request );
+            UnifiedMessages.SendNotification<CFriendMessages_IncomingMessage_Notification>( "FriendMessagesClient.IncomingMessage#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyAckMessageEcho(CFriendMessages_AckMessage_Notification request)
+        public void NotifyAckMessageEcho(CFriendMessages_AckMessage_Notification request)
         {
-            return UnifiedMessages.SendMessage<CFriendMessages_AckMessage_Notification, NoResponse>( "FriendMessagesClient.NotifyAckMessageEcho#1", request );
+            UnifiedMessages.SendNotification<CFriendMessages_AckMessage_Notification>( "FriendMessagesClient.NotifyAckMessageEcho#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> MessageReaction(CFriendMessages_MessageReaction_Notification request)
+        public void MessageReaction(CFriendMessages_MessageReaction_Notification request)
         {
-            return UnifiedMessages.SendMessage<CFriendMessages_MessageReaction_Notification, NoResponse>( "FriendMessagesClient.MessageReaction#1", request );
+            UnifiedMessages.SendNotification<CFriendMessages_MessageReaction_Notification>( "FriendMessagesClient.MessageReaction#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "IncomingMessage":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyAckMessageEcho":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "MessageReaction":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }

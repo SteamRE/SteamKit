@@ -1050,18 +1050,15 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "InventoryClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyNewItems(CInventoryClient_NewItems_Notification request)
+        public void NotifyNewItems(CInventoryClient_NewItems_Notification request)
         {
-            return UnifiedMessages.SendMessage<CInventoryClient_NewItems_Notification, NoResponse>( "InventoryClient.NotifyNewItems#1", request );
+            UnifiedMessages.SendNotification<CInventoryClient_NewItems_Notification>( "InventoryClient.NotifyNewItems#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "NotifyNewItems":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }

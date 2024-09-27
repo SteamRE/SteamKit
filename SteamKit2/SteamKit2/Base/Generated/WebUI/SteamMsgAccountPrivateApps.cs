@@ -117,18 +117,15 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "AccountPrivateAppsClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyPrivateAppListChanged(CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification request)
+        public void NotifyPrivateAppListChanged(CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification request)
         {
-            return UnifiedMessages.SendMessage<CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification, NoResponse>( "AccountPrivateAppsClient.NotifyPrivateAppListChanged#1", request );
+            UnifiedMessages.SendNotification<CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification>( "AccountPrivateAppsClient.NotifyPrivateAppListChanged#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "NotifyPrivateAppListChanged":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }
