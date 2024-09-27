@@ -1,4 +1,5 @@
-﻿using Google.Protobuf.Reflection;
+﻿using System.Linq;
+using Google.Protobuf.Reflection;
 using ProtoBuf.Reflection;
 
 namespace ProtobufGen
@@ -49,7 +50,8 @@ namespace ProtobufGen
                 .WriteLine( "{" )
                 .Indent();
 
-            foreach ( var serviceMethod in service.Methods )
+            foreach (MethodDescriptorProto serviceMethod in service.Methods
+                         .Where( static serviceMethod => serviceMethod.OutputType[ 1.. ] != "NoResponse"))
             {
                 ctx.WriteLine( $"case \"{Escape( serviceMethod.Name )}\":" )
                     .Indent()
@@ -69,13 +71,26 @@ namespace ProtobufGen
 
         protected override void WriteServiceMethod( GeneratorContext ctx, MethodDescriptorProto method, ref object state )
         {
-            ctx.WriteLine( $"public AsyncJob<SteamUnifiedMessages.ServiceMsg<{Escape( method.OutputType[ 1.. ] )}>> {Escape( method.Name )}({Escape( MakeRelativeName( ctx, method.InputType ) )} request)" )
-                .WriteLine( "{" )
-                .Indent()
-                .WriteLine( $"return UnifiedMessages.SendMessage<{Escape( MakeRelativeName( ctx, method.InputType ) )}, {Escape( method.OutputType[1..] )}>( \"{Escape( state as string )}.{Escape( method.Name )}#1\", request );" )
-                .Outdent()
-                .WriteLine( "}" )
-                .WriteLine();
+            if ( method.OutputType[ 1.. ] == "NoResponse" )
+            {
+                ctx.WriteLine( $"public void {Escape( method.Name )}({Escape( MakeRelativeName( ctx, method.InputType ) )} request)" )
+                    .WriteLine( "{" )
+                    .Indent()
+                    .WriteLine( $"UnifiedMessages.SendNotification<{Escape( MakeRelativeName( ctx, method.InputType ) )}>( \"{Escape( state as string )}.{Escape( method.Name )}#1\", request );" )
+                    .Outdent()
+                    .WriteLine( "}" )
+                    .WriteLine();
+            }
+            else
+            {
+                ctx.WriteLine( $"public AsyncJob<SteamUnifiedMessages.ServiceMsg<{Escape( method.OutputType[ 1.. ] )}>> {Escape( method.Name )}({Escape( MakeRelativeName( ctx, method.InputType ) )} request)" )
+                    .WriteLine( "{" )
+                    .Indent()
+                    .WriteLine( $"return UnifiedMessages.SendMessage<{Escape( MakeRelativeName( ctx, method.InputType ) )}, {Escape( method.OutputType[1..] )}>( \"{Escape( state as string )}.{Escape( method.Name )}#1\", request );" )
+                    .Outdent()
+                    .WriteLine( "}" )
+                    .WriteLine();
+            }
         }
     }
 }
