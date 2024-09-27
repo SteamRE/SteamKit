@@ -3509,9 +3509,9 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CBroadcast_StartBroadcastUpload_Request, CBroadcast_StartBroadcastUpload_Response>( "Broadcast.StartBroadcastUpload#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyBroadcastUploadStop(CBroadcast_NotifyBroadcastUploadStop_Notification request)
+        public void NotifyBroadcastUploadStop(CBroadcast_NotifyBroadcastUploadStop_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_NotifyBroadcastUploadStop_Notification, NoResponse>( "Broadcast.NotifyBroadcastUploadStop#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_NotifyBroadcastUploadStop_Notification>( "Broadcast.NotifyBroadcastUploadStop#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_WatchBroadcast_Response>> WatchBroadcast(CBroadcast_WatchBroadcast_Request request)
@@ -3519,14 +3519,14 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CBroadcast_WatchBroadcast_Request, CBroadcast_WatchBroadcast_Response>( "Broadcast.WatchBroadcast#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> HeartbeatBroadcast(CBroadcast_HeartbeatBroadcast_Notification request)
+        public void HeartbeatBroadcast(CBroadcast_HeartbeatBroadcast_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_HeartbeatBroadcast_Notification, NoResponse>( "Broadcast.HeartbeatBroadcast#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_HeartbeatBroadcast_Notification>( "Broadcast.HeartbeatBroadcast#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> StopWatchingBroadcast(CBroadcast_StopWatchingBroadcast_Notification request)
+        public void StopWatchingBroadcast(CBroadcast_StopWatchingBroadcast_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_StopWatchingBroadcast_Notification, NoResponse>( "Broadcast.StopWatchingBroadcast#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_StopWatchingBroadcast_Notification>( "Broadcast.StopWatchingBroadcast#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_GetBroadcastStatus_Response>> GetBroadcastStatus(CBroadcast_GetBroadcastStatus_Request request)
@@ -3549,9 +3549,9 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CBroadcast_SendBroadcastStateToServer_Request, CBroadcast_SendBroadcastStateToServer_Response>( "Broadcast.SendBroadcastStateToServer#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyBroadcastSessionHeartbeat(CBroadcast_NotifyBroadcastSessionHeartbeat_Notification request)
+        public void NotifyBroadcastSessionHeartbeat(CBroadcast_NotifyBroadcastSessionHeartbeat_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_NotifyBroadcastSessionHeartbeat_Notification, NoResponse>( "Broadcast.NotifyBroadcastSessionHeartbeat#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_NotifyBroadcastSessionHeartbeat_Notification>( "Broadcast.NotifyBroadcastSessionHeartbeat#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_GetBroadcastChatInfo_Response>> GetBroadcastChatInfo(CBroadcast_GetBroadcastChatInfo_Request request)
@@ -3614,9 +3614,9 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CBroadcast_GetRTMPInfo_Request, CBroadcast_GetRTMPInfo_Response>( "Broadcast.GetRTMPInfo#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyWebRTCHaveTURNServer(CBroadcast_WebRTCHaveTURNServer_Notification request)
+        public void NotifyWebRTCHaveTURNServer(CBroadcast_WebRTCHaveTURNServer_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WebRTCHaveTURNServer_Notification, NoResponse>( "Broadcast.NotifyWebRTCHaveTURNServer#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_WebRTCHaveTURNServer_Notification>( "Broadcast.NotifyWebRTCHaveTURNServer#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CBroadcast_WebRTCStartResult_Response>> WebRTCStartResult(CBroadcast_WebRTCStartResult_Request request)
@@ -3677,17 +3677,8 @@ namespace SteamKit2.Internal
                 case "StartBroadcastUpload":
                     UnifiedMessages.HandleServiceMsg<CBroadcast_StartBroadcastUpload_Response>( packetMsg );
                     break;
-                case "NotifyBroadcastUploadStop":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
                 case "WatchBroadcast":
                     UnifiedMessages.HandleServiceMsg<CBroadcast_WatchBroadcast_Response>( packetMsg );
-                    break;
-                case "HeartbeatBroadcast":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "StopWatchingBroadcast":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
                     break;
                 case "GetBroadcastStatus":
                     UnifiedMessages.HandleServiceMsg<CBroadcast_GetBroadcastStatus_Response>( packetMsg );
@@ -3700,9 +3691,6 @@ namespace SteamKit2.Internal
                     break;
                 case "SendBroadcastStateToServer":
                     UnifiedMessages.HandleServiceMsg<CBroadcast_SendBroadcastStateToServer_Response>( packetMsg );
-                    break;
-                case "NotifyBroadcastSessionHeartbeat":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
                     break;
                 case "GetBroadcastChatInfo":
                     UnifiedMessages.HandleServiceMsg<CBroadcast_GetBroadcastChatInfo_Response>( packetMsg );
@@ -3740,9 +3728,6 @@ namespace SteamKit2.Internal
                 case "GetRTMPInfo":
                     UnifiedMessages.HandleServiceMsg<CBroadcast_GetRTMPInfo_Response>( packetMsg );
                     break;
-                case "NotifyWebRTCHaveTURNServer":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
                 case "WebRTCStartResult":
                     UnifiedMessages.HandleServiceMsg<CBroadcast_WebRTCStartResult_Response>( packetMsg );
                     break;
@@ -3778,114 +3763,75 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "BroadcastClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyBroadcastViewerState(CBroadcast_BroadcastViewerState_Notification request)
+        public void NotifyBroadcastViewerState(CBroadcast_BroadcastViewerState_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_BroadcastViewerState_Notification, NoResponse>( "BroadcastClient.NotifyBroadcastViewerState#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_BroadcastViewerState_Notification>( "BroadcastClient.NotifyBroadcastViewerState#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyWaitingBroadcastViewer(CBroadcast_WaitingBroadcastViewer_Notification request)
+        public void NotifyWaitingBroadcastViewer(CBroadcast_WaitingBroadcastViewer_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WaitingBroadcastViewer_Notification, NoResponse>( "BroadcastClient.NotifyWaitingBroadcastViewer#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_WaitingBroadcastViewer_Notification>( "BroadcastClient.NotifyWaitingBroadcastViewer#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyBroadcastUploadStarted(CBroadcast_BroadcastUploadStarted_Notification request)
+        public void NotifyBroadcastUploadStarted(CBroadcast_BroadcastUploadStarted_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_BroadcastUploadStarted_Notification, NoResponse>( "BroadcastClient.NotifyBroadcastUploadStarted#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_BroadcastUploadStarted_Notification>( "BroadcastClient.NotifyBroadcastUploadStarted#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyStopBroadcastUpload(CBroadcast_StopBroadcastUpload_Notification request)
+        public void NotifyStopBroadcastUpload(CBroadcast_StopBroadcastUpload_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_StopBroadcastUpload_Notification, NoResponse>( "BroadcastClient.NotifyStopBroadcastUpload#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_StopBroadcastUpload_Notification>( "BroadcastClient.NotifyStopBroadcastUpload#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifySessionClosed(CBroadcast_SessionClosed_Notification request)
+        public void NotifySessionClosed(CBroadcast_SessionClosed_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_SessionClosed_Notification, NoResponse>( "BroadcastClient.NotifySessionClosed#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_SessionClosed_Notification>( "BroadcastClient.NotifySessionClosed#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyViewerBroadcastInvite(CBroadcast_ViewerBroadcastInvite_Notification request)
+        public void NotifyViewerBroadcastInvite(CBroadcast_ViewerBroadcastInvite_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_ViewerBroadcastInvite_Notification, NoResponse>( "BroadcastClient.NotifyViewerBroadcastInvite#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_ViewerBroadcastInvite_Notification>( "BroadcastClient.NotifyViewerBroadcastInvite#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyBroadcastStatus(CBroadcast_BroadcastStatus_Notification request)
+        public void NotifyBroadcastStatus(CBroadcast_BroadcastStatus_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_BroadcastStatus_Notification, NoResponse>( "BroadcastClient.NotifyBroadcastStatus#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_BroadcastStatus_Notification>( "BroadcastClient.NotifyBroadcastStatus#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyBroadcastChannelLive(CBroadcast_BroadcastChannelLive_Notification request)
+        public void NotifyBroadcastChannelLive(CBroadcast_BroadcastChannelLive_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_BroadcastChannelLive_Notification, NoResponse>( "BroadcastClient.NotifyBroadcastChannelLive#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_BroadcastChannelLive_Notification>( "BroadcastClient.NotifyBroadcastChannelLive#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> SendThumbnailToRelay(CBroadcast_SendThumbnailToRelay_Notification request)
+        public void SendThumbnailToRelay(CBroadcast_SendThumbnailToRelay_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_SendThumbnailToRelay_Notification, NoResponse>( "BroadcastClient.SendThumbnailToRelay#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_SendThumbnailToRelay_Notification>( "BroadcastClient.SendThumbnailToRelay#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyWebRTCNeedTURNServer(CBroadcast_WebRTCNeedTURNServer_Notification request)
+        public void NotifyWebRTCNeedTURNServer(CBroadcast_WebRTCNeedTURNServer_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WebRTCNeedTURNServer_Notification, NoResponse>( "BroadcastClient.NotifyWebRTCNeedTURNServer#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_WebRTCNeedTURNServer_Notification>( "BroadcastClient.NotifyWebRTCNeedTURNServer#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyWebRTCStart(CBroadcast_WebRTCStart_Notification request)
+        public void NotifyWebRTCStart(CBroadcast_WebRTCStart_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WebRTCStart_Notification, NoResponse>( "BroadcastClient.NotifyWebRTCStart#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_WebRTCStart_Notification>( "BroadcastClient.NotifyWebRTCStart#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyWebRTCSetAnswer(CBroadcast_WebRTCSetAnswer_Notification request)
+        public void NotifyWebRTCSetAnswer(CBroadcast_WebRTCSetAnswer_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WebRTCSetAnswer_Notification, NoResponse>( "BroadcastClient.NotifyWebRTCSetAnswer#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_WebRTCSetAnswer_Notification>( "BroadcastClient.NotifyWebRTCSetAnswer#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyWebRTCAddViewerCandidate(CBroadcast_WebRTCAddViewerCandidate_Notification request)
+        public void NotifyWebRTCAddViewerCandidate(CBroadcast_WebRTCAddViewerCandidate_Notification request)
         {
-            return UnifiedMessages.SendMessage<CBroadcast_WebRTCAddViewerCandidate_Notification, NoResponse>( "BroadcastClient.NotifyWebRTCAddViewerCandidate#1", request );
+            UnifiedMessages.SendNotification<CBroadcast_WebRTCAddViewerCandidate_Notification>( "BroadcastClient.NotifyWebRTCAddViewerCandidate#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "NotifyBroadcastViewerState":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyWaitingBroadcastViewer":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyBroadcastUploadStarted":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyStopBroadcastUpload":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifySessionClosed":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyViewerBroadcastInvite":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyBroadcastStatus":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyBroadcastChannelLive":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "SendThumbnailToRelay":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyWebRTCNeedTURNServer":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyWebRTCStart":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyWebRTCSetAnswer":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "NotifyWebRTCAddViewerCandidate":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }

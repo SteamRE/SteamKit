@@ -2500,14 +2500,14 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Cloud";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientLogUploadCheck(CCloud_ClientLogUploadCheck_Notification request)
+        public void ClientLogUploadCheck(CCloud_ClientLogUploadCheck_Notification request)
         {
-            return UnifiedMessages.SendMessage<CCloud_ClientLogUploadCheck_Notification, NoResponse>( "Cloud.ClientLogUploadCheck#1", request );
+            UnifiedMessages.SendNotification<CCloud_ClientLogUploadCheck_Notification>( "Cloud.ClientLogUploadCheck#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientLogUploadComplete(CCloud_ClientLogUploadComplete_Notification request)
+        public void ClientLogUploadComplete(CCloud_ClientLogUploadComplete_Notification request)
         {
-            return UnifiedMessages.SendMessage<CCloud_ClientLogUploadComplete_Notification, NoResponse>( "Cloud.ClientLogUploadComplete#1", request );
+            UnifiedMessages.SendNotification<CCloud_ClientLogUploadComplete_Notification>( "Cloud.ClientLogUploadComplete#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCloud_GetUploadServerInfo_Response>> GetUploadServerInfo(CCloud_GetUploadServerInfo_Request request)
@@ -2555,14 +2555,14 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CCloud_GetClientEncryptionKey_Request, CCloud_GetClientEncryptionKey_Response>( "Cloud.GetClientEncryptionKey#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> CDNReport(CCloud_CDNReport_Notification request)
+        public void CDNReport(CCloud_CDNReport_Notification request)
         {
-            return UnifiedMessages.SendMessage<CCloud_CDNReport_Notification, NoResponse>( "Cloud.CDNReport#1", request );
+            UnifiedMessages.SendNotification<CCloud_CDNReport_Notification>( "Cloud.CDNReport#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ExternalStorageTransferReport(CCloud_ExternalStorageTransferReport_Notification request)
+        public void ExternalStorageTransferReport(CCloud_ExternalStorageTransferReport_Notification request)
         {
-            return UnifiedMessages.SendMessage<CCloud_ExternalStorageTransferReport_Notification, NoResponse>( "Cloud.ExternalStorageTransferReport#1", request );
+            UnifiedMessages.SendNotification<CCloud_ExternalStorageTransferReport_Notification>( "Cloud.ExternalStorageTransferReport#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCloud_BeginAppUploadBatch_Response>> BeginAppUploadBatch(CCloud_BeginAppUploadBatch_Request request)
@@ -2570,9 +2570,9 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CCloud_BeginAppUploadBatch_Request, CCloud_BeginAppUploadBatch_Response>( "Cloud.BeginAppUploadBatch#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> CompleteAppUploadBatch(CCloud_CompleteAppUploadBatch_Notification request)
+        public void CompleteAppUploadBatch(CCloud_CompleteAppUploadBatch_Notification request)
         {
-            return UnifiedMessages.SendMessage<CCloud_CompleteAppUploadBatch_Notification, NoResponse>( "Cloud.CompleteAppUploadBatch#1", request );
+            UnifiedMessages.SendNotification<CCloud_CompleteAppUploadBatch_Notification>( "Cloud.CompleteAppUploadBatch#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCloud_CompleteAppUploadBatch_Response>> CompleteAppUploadBatchBlocking(CCloud_CompleteAppUploadBatch_Request request)
@@ -2600,9 +2600,9 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CCloud_ClientDeleteFile_Request, CCloud_ClientDeleteFile_Response>( "Cloud.ClientDeleteFile#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientConflictResolution(CCloud_ClientConflictResolution_Notification request)
+        public void ClientConflictResolution(CCloud_ClientConflictResolution_Notification request)
         {
-            return UnifiedMessages.SendMessage<CCloud_ClientConflictResolution_Notification, NoResponse>( "Cloud.ClientConflictResolution#1", request );
+            UnifiedMessages.SendNotification<CCloud_ClientConflictResolution_Notification>( "Cloud.ClientConflictResolution#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCloud_EnumerateUserApps_Response>> EnumerateUserApps(CCloud_EnumerateUserApps_Request request)
@@ -2630,9 +2630,9 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CCloud_AppLaunchIntent_Request, CCloud_AppLaunchIntent_Response>( "Cloud.SignalAppLaunchIntent#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> SignalAppExitSyncDone(CCloud_AppExitSyncDone_Notification request)
+        public void SignalAppExitSyncDone(CCloud_AppExitSyncDone_Notification request)
         {
-            return UnifiedMessages.SendMessage<CCloud_AppExitSyncDone_Notification, NoResponse>( "Cloud.SignalAppExitSyncDone#1", request );
+            UnifiedMessages.SendNotification<CCloud_AppExitSyncDone_Notification>( "Cloud.SignalAppExitSyncDone#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCloud_ClientGetAppQuotaUsage_Response>> ClientGetAppQuotaUsage(CCloud_ClientGetAppQuotaUsage_Request request)
@@ -2644,12 +2644,6 @@ namespace SteamKit2.Internal
         {
             switch ( methodName )
             {
-                case "ClientLogUploadCheck":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "ClientLogUploadComplete":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
                 case "GetUploadServerInfo":
                     UnifiedMessages.HandleServiceMsg<CCloud_GetUploadServerInfo_Response>( packetMsg );
                     break;
@@ -2677,17 +2671,8 @@ namespace SteamKit2.Internal
                 case "GetClientEncryptionKey":
                     UnifiedMessages.HandleServiceMsg<CCloud_GetClientEncryptionKey_Response>( packetMsg );
                     break;
-                case "CDNReport":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "ExternalStorageTransferReport":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
                 case "BeginAppUploadBatch":
                     UnifiedMessages.HandleServiceMsg<CCloud_BeginAppUploadBatch_Response>( packetMsg );
-                    break;
-                case "CompleteAppUploadBatch":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
                     break;
                 case "CompleteAppUploadBatchBlocking":
                     UnifiedMessages.HandleServiceMsg<CCloud_CompleteAppUploadBatch_Response>( packetMsg );
@@ -2704,9 +2689,6 @@ namespace SteamKit2.Internal
                 case "ClientDeleteFile":
                     UnifiedMessages.HandleServiceMsg<CCloud_ClientDeleteFile_Response>( packetMsg );
                     break;
-                case "ClientConflictResolution":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
                 case "EnumerateUserApps":
                     UnifiedMessages.HandleServiceMsg<CCloud_EnumerateUserApps_Response>( packetMsg );
                     break;
@@ -2722,9 +2704,6 @@ namespace SteamKit2.Internal
                 case "SignalAppLaunchIntent":
                     UnifiedMessages.HandleServiceMsg<CCloud_AppLaunchIntent_Response>( packetMsg );
                     break;
-                case "SignalAppExitSyncDone":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
                 case "ClientGetAppQuotaUsage":
                     UnifiedMessages.HandleServiceMsg<CCloud_ClientGetAppQuotaUsage_Response>( packetMsg );
                     break;
@@ -2736,26 +2715,20 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "CloudClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> NotifyAppStateChange(CCloud_AppCloudStateChange_Notification request)
+        public void NotifyAppStateChange(CCloud_AppCloudStateChange_Notification request)
         {
-            return UnifiedMessages.SendMessage<CCloud_AppCloudStateChange_Notification, NoResponse>( "CloudClient.NotifyAppStateChange#1", request );
+            UnifiedMessages.SendNotification<CCloud_AppCloudStateChange_Notification>( "CloudClient.NotifyAppStateChange#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<NoResponse>> ClientLogUploadRequest(CCloud_ClientLogUploadRequest_Notification request)
+        public void ClientLogUploadRequest(CCloud_ClientLogUploadRequest_Notification request)
         {
-            return UnifiedMessages.SendMessage<CCloud_ClientLogUploadRequest_Notification, NoResponse>( "CloudClient.ClientLogUploadRequest#1", request );
+            UnifiedMessages.SendNotification<CCloud_ClientLogUploadRequest_Notification>( "CloudClient.ClientLogUploadRequest#1", request );
         }
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
             switch ( methodName )
             {
-                case "NotifyAppStateChange":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
-                case "ClientLogUploadRequest":
-                    UnifiedMessages.HandleServiceMsg<NoResponse>( packetMsg );
-                    break;
             }
         }
     }
