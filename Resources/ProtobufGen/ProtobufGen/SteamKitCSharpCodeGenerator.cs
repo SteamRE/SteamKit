@@ -44,29 +44,37 @@ namespace ProtobufGen
         protected override void WriteServiceFooter( GeneratorContext ctx, ServiceDescriptorProto service, ref object state )
         {
             ctx.WriteLine( "public override void HandleMsg( string methodName, IPacketMsg packetMsg )" )
-                .WriteLine( "{" )
-                .Indent()
-                .WriteLine( "switch ( methodName )" )
-                .WriteLine( "{" )
-                .Indent();
+                .WriteLine( "{" );
 
-            foreach (MethodDescriptorProto serviceMethod in service.Methods
-                         .Where( static serviceMethod => serviceMethod.OutputType[ 1.. ] != "NoResponse"))
-            {
-                ctx.WriteLine( $"case \"{Escape( serviceMethod.Name )}\":" )
-                    .Indent()
-                    .WriteLine( $"UnifiedMessages.HandleServiceMsg<{Escape( serviceMethod.OutputType[ 1.. ] )}>( packetMsg );" )
-                    .WriteLine( "break;" )
-                    .Outdent();
-            }
+                var methods = service.Methods
+                    .Where( static serviceMethod => serviceMethod.OutputType[ 1.. ] != "NoResponse")
+                    .ToList();
 
-            ctx.Outdent()
-                .WriteLine( "}" )
-                .Outdent()
-                .WriteLine( "}" )
-                .Outdent()
-                .WriteLine( "}" )
-                .WriteLine();
+                if ( methods.Count != 0 )
+                {
+                    ctx.Indent()
+                        .WriteLine( "switch ( methodName )" )
+                        .WriteLine( "{" )
+                        .Indent();
+
+                    foreach ( var serviceMethod in methods )
+                    {
+                        ctx.WriteLine( $"case \"{Escape( serviceMethod.Name )}\":" )
+                            .Indent()
+                            .WriteLine( $"UnifiedMessages.HandleServiceMsg<{Escape( serviceMethod.OutputType[ 1.. ] )}>( packetMsg );" )
+                            .WriteLine( "break;" )
+                            .Outdent();
+                    }
+
+                    ctx.Outdent()
+                        .WriteLine( "}" )
+                        .Outdent();
+                }
+
+                ctx.WriteLine( "}" )
+                    .Outdent()
+                    .WriteLine( "}" )
+                    .WriteLine();
         }
 
         protected override void WriteServiceMethod( GeneratorContext ctx, MethodDescriptorProto method, ref object state )
