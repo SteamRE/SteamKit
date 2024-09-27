@@ -10,17 +10,17 @@ using ProtoBuf;
 namespace SteamKit2
 {
     /// <summary>
-    /// This handler is used for interacting with Steamworks unified messaging
+    /// This handler is used for interacting with Steamworks unified messaging.
     /// </summary>
     public partial class SteamUnifiedMessages : ClientMsgHandler
     {
         private readonly Dictionary<string, UnifiedService> _handlers = [ ];
 
         /// <summary>
-        /// 
+        /// Creates a service that can be used to send messages via Steamworks unified messaging.
         /// </summary>
-        /// <typeparam name="TService"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="TService">The type of the service to create.</typeparam>
+        /// <returns>The instance to create requests.</returns>
         public TService CreateService<TService>() where TService : UnifiedService, new()
         {
             var service = new TService
@@ -38,6 +38,7 @@ namespace SteamKit2
         /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <typeparam name="TRequest">The type of a protobuf object.</typeparam>
+        /// <typeparam name="TResult">The type of the result of the request.</typeparam>
         /// <param name="name">Name of the RPC endpoint. Takes the format ServiceName.RpcName</param>
         /// <param name="message">The message to send.</param>
         /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMsg{TResult}"/>.</returns>
@@ -126,7 +127,7 @@ namespace SteamKit2
             /// Handles a message for this service. This should not be called directly.
             /// </summary>
             /// <param name="methodName">The name of the method the service should handle</param>
-            /// <param name="packetMsg">he packet message that contains the data</param>
+            /// <param name="packetMsg">The packet message that contains the data</param>
             public abstract void HandleMsg( string methodName, IPacketMsg packetMsg );
 
             /// <summary>
@@ -137,12 +138,12 @@ namespace SteamKit2
             /// <summary>
             /// A reference to the <see cref="SteamUnifiedMessages"/> instance this service was created from.
             /// </summary>
-            public SteamUnifiedMessages UnifiedMessages { get; init; }
+            public SteamUnifiedMessages? UnifiedMessages { get; init; }
 
             /// <inheritdoc />
             public void Dispose()
             {
-                UnifiedMessages._handlers.Remove( ServiceName );
+                UnifiedMessages!._handlers.Remove( ServiceName );
             }
         }
     }
