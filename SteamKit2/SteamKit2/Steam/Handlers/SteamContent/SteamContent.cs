@@ -46,7 +46,7 @@ namespace SteamKit2
             using var contentService = unifiedMessages.CreateService<ContentServerDirectory>();
             var response = await contentService.GetServersForSteamPipe( request );
 
-            return ContentServerDirectoryService.ConvertServerList( response.PacketResult );
+            return ContentServerDirectoryService.ConvertServerList( response.MessageBody );
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace SteamKit2
             var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
             using var contentService = unifiedMessages.CreateService<ContentServerDirectory>();
             var response = await contentService.GetManifestRequestCode( request );
-            return response.PacketResult.manifest_request_code;
+            return response.MessageBody.manifest_request_code;
         }
 
         /// <summary>

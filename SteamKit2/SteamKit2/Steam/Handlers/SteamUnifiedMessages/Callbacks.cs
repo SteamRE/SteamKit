@@ -20,18 +20,17 @@ namespace SteamKit2
             public EResult Result { get; private set; }
 
             /// <summary>
-            /// 
+            /// Gets the protobuf body.
             /// </summary>
-            public TResult PacketResult { get; private set; }
+            public TResult MessageBody { get; private set; }
 
             internal ServiceMsg( PacketClientMsgProtobuf packetMsg )
             {
                 var protoHeader = packetMsg.Header.Proto;
                 JobID = protoHeader.jobid_target;
                 Result = ( EResult )protoHeader.eresult;
-                PacketResult = new ClientMsgProtobuf<TResult>( packetMsg ).Body;
+                MessageBody = new ClientMsgProtobuf<TResult>( packetMsg ).Body;
             }
-
         }
     }
 }
