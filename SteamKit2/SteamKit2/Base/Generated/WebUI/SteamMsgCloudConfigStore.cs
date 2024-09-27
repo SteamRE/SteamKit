@@ -240,9 +240,6 @@ namespace SteamKit2.WebUI.Internal
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            switch ( methodName )
-            {
-            }
         }
     }
 

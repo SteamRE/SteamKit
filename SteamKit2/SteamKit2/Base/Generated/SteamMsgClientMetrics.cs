@@ -1473,9 +1473,6 @@ namespace SteamKit2.Internal
 
         public override void HandleMsg( string methodName, IPacketMsg packetMsg )
         {
-            switch ( methodName )
-            {
-            }
         }
     }
 
