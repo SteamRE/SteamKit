@@ -127,9 +127,9 @@ async void OnLoggedOn( SteamUser.LoggedOnCallback callback )
         return;
     }
 
-    Console.WriteLine( $"Our player level is {response.MessageBody.player_level}" );
+    Console.WriteLine( $"Our player level is {response.Body.player_level}" );
 
-    foreach ( var badge in response.MessageBody.badges )
+    foreach ( var badge in response.Body.badges )
     {
         Console.WriteLine( $"Badge series {badge.series} is level {badge.level}" );
     }
