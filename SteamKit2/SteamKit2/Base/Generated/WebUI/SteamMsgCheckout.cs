@@ -415,12 +415,12 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "Checkout";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCheckout_GetFriendOwnershipForGifting_Response>> GetFriendOwnershipForGifting(CCheckout_GetFriendOwnershipForGifting_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCheckout_GetFriendOwnershipForGifting_Response>> GetFriendOwnershipForGifting(CCheckout_GetFriendOwnershipForGifting_Request request)
         {
             return UnifiedMessages.SendMessage<CCheckout_GetFriendOwnershipForGifting_Request, CCheckout_GetFriendOwnershipForGifting_Response>( "Checkout.GetFriendOwnershipForGifting#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CCheckout_ValidateCart_Response>> ValidateCart(CCheckout_ValidateCart_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCheckout_ValidateCart_Response>> ValidateCart(CCheckout_ValidateCart_Request request)
         {
             return UnifiedMessages.SendMessage<CCheckout_ValidateCart_Request, CCheckout_ValidateCart_Response>( "Checkout.ValidateCart#1", request );
         }

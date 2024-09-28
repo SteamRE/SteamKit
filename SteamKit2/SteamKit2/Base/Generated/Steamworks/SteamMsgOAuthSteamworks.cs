@@ -64,7 +64,7 @@ namespace SteamKit2.Internal.Steamworks
     {
         public override string ServiceName { get; } = "OAuthToken";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<COAuthToken_ImplicitGrantNoPrompt_Response>> ImplicitGrantNoPrompt(COAuthToken_ImplicitGrantNoPrompt_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<COAuthToken_ImplicitGrantNoPrompt_Response>> ImplicitGrantNoPrompt(COAuthToken_ImplicitGrantNoPrompt_Request request)
         {
             return UnifiedMessages.SendMessage<COAuthToken_ImplicitGrantNoPrompt_Request, COAuthToken_ImplicitGrantNoPrompt_Response>( "OAuthToken.ImplicitGrantNoPrompt#1", request );
         }

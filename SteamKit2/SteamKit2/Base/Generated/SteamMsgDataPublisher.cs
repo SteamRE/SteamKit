@@ -669,17 +669,17 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CDataPublisher_ClientUpdateAppJob_Notification>( "DataPublisher.ClientUpdateAppJobReport#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CDataPublisher_GetVRDeviceInfo_Response>> GetVRDeviceInfo(CDataPublisher_GetVRDeviceInfo_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDataPublisher_GetVRDeviceInfo_Response>> GetVRDeviceInfo(CDataPublisher_GetVRDeviceInfo_Request request)
         {
             return UnifiedMessages.SendMessage<CDataPublisher_GetVRDeviceInfo_Request, CDataPublisher_GetVRDeviceInfo_Response>( "DataPublisher.GetVRDeviceInfo#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CDataPublisher_SetVRDeviceInfoAggregationReference_Response>> SetVRDeviceInfoAggregationReference(CDataPublisher_SetVRDeviceInfoAggregationReference_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDataPublisher_SetVRDeviceInfoAggregationReference_Response>> SetVRDeviceInfoAggregationReference(CDataPublisher_SetVRDeviceInfoAggregationReference_Request request)
         {
             return UnifiedMessages.SendMessage<CDataPublisher_SetVRDeviceInfoAggregationReference_Request, CDataPublisher_SetVRDeviceInfoAggregationReference_Response>( "DataPublisher.SetVRDeviceInfoAggregationReference#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CDataPublisher_AddVRDeviceInfo_Response>> AddVRDeviceInfo(CDataPublisher_AddVRDeviceInfo_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDataPublisher_AddVRDeviceInfo_Response>> AddVRDeviceInfo(CDataPublisher_AddVRDeviceInfo_Request request)
         {
             return UnifiedMessages.SendMessage<CDataPublisher_AddVRDeviceInfo_Request, CDataPublisher_AddVRDeviceInfo_Response>( "DataPublisher.AddVRDeviceInfo#1", request );
         }
@@ -705,7 +705,7 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "ValveHWSurvey";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CValveHWSurvey_GetSurveySchedule_Response>> GetSurveySchedule(CValveHWSurvey_GetSurveySchedule_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CValveHWSurvey_GetSurveySchedule_Response>> GetSurveySchedule(CValveHWSurvey_GetSurveySchedule_Request request)
         {
             return UnifiedMessages.SendMessage<CValveHWSurvey_GetSurveySchedule_Request, CValveHWSurvey_GetSurveySchedule_Response>( "ValveHWSurvey.GetSurveySchedule#1", request );
         }

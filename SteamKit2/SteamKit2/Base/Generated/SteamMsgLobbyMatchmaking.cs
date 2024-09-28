@@ -121,7 +121,7 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "LobbyMatchmakingLegacy";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<LobbyMatchmakingLegacy_GetLobbyStatus_Response>> GetLobbyStatus(LobbyMatchmakingLegacy_GetLobbyStatus_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<LobbyMatchmakingLegacy_GetLobbyStatus_Response>> GetLobbyStatus(LobbyMatchmakingLegacy_GetLobbyStatus_Request request)
         {
             return UnifiedMessages.SendMessage<LobbyMatchmakingLegacy_GetLobbyStatus_Request, LobbyMatchmakingLegacy_GetLobbyStatus_Response>( "LobbyMatchmakingLegacy.GetLobbyStatus#1", request );
         }

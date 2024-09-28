@@ -738,22 +738,22 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "GameServers";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameServers_GetServerList_Response>> GetServerList(CGameServers_GetServerList_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameServers_GetServerList_Response>> GetServerList(CGameServers_GetServerList_Request request)
         {
             return UnifiedMessages.SendMessage<CGameServers_GetServerList_Request, CGameServers_GetServerList_Response>( "GameServers.GetServerList#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameServers_IPsWithSteamIDs_Response>> GetServerSteamIDsByIP(CGameServers_GetServerSteamIDsByIP_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameServers_IPsWithSteamIDs_Response>> GetServerSteamIDsByIP(CGameServers_GetServerSteamIDsByIP_Request request)
         {
             return UnifiedMessages.SendMessage<CGameServers_GetServerSteamIDsByIP_Request, CGameServers_IPsWithSteamIDs_Response>( "GameServers.GetServerSteamIDsByIP#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameServers_IPsWithSteamIDs_Response>> GetServerIPsBySteamID(CGameServers_GetServerIPsBySteamID_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameServers_IPsWithSteamIDs_Response>> GetServerIPsBySteamID(CGameServers_GetServerIPsBySteamID_Request request)
         {
             return UnifiedMessages.SendMessage<CGameServers_GetServerIPsBySteamID_Request, CGameServers_IPsWithSteamIDs_Response>( "GameServers.GetServerIPsBySteamID#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameServers_GameServerQuery_Response>> QueryByFakeIP(CGameServers_QueryByFakeIP_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameServers_GameServerQuery_Response>> QueryByFakeIP(CGameServers_QueryByFakeIP_Request request)
         {
             return UnifiedMessages.SendMessage<CGameServers_QueryByFakeIP_Request, CGameServers_GameServerQuery_Response>( "GameServers.QueryByFakeIP#1", request );
         }
@@ -782,7 +782,7 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "GameServerClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<GameServerClient_QueryServerData_Response>> QueryServerData(GameServerClient_QueryServerData_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<GameServerClient_QueryServerData_Response>> QueryServerData(GameServerClient_QueryServerData_Request request)
         {
             return UnifiedMessages.SendMessage<GameServerClient_QueryServerData_Request, GameServerClient_QueryServerData_Response>( "GameServerClient.QueryServerData#1", request );
         }

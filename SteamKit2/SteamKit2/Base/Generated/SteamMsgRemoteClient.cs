@@ -13,7 +13,7 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "RemoteClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CRemoteClient_GetPairingInfo_Response>> GetPairingInfo(CRemoteClient_GetPairingInfo_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemoteClient_GetPairingInfo_Response>> GetPairingInfo(CRemoteClient_GetPairingInfo_Request request)
         {
             return UnifiedMessages.SendMessage<CRemoteClient_GetPairingInfo_Request, CRemoteClient_GetPairingInfo_Response>( "RemoteClient.GetPairingInfo#1", request );
         }
@@ -23,12 +23,12 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CRemoteClient_Online_Notification>( "RemoteClient.NotifyOnline#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CRemoteClient_GetRecentClients_Response>> GetRecentClients(CRemoteClient_GetRecentClients_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemoteClient_GetRecentClients_Response>> GetRecentClients(CRemoteClient_GetRecentClients_Request request)
         {
             return UnifiedMessages.SendMessage<CRemoteClient_GetRecentClients_Request, CRemoteClient_GetRecentClients_Response>( "RemoteClient.GetRecentClients#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CRemoteClient_MarkTaskComplete_Response>> MarkTaskComplete(CRemoteClient_MarkTaskComplete_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemoteClient_MarkTaskComplete_Response>> MarkTaskComplete(CRemoteClient_MarkTaskComplete_Request request)
         {
             return UnifiedMessages.SendMessage<CRemoteClient_MarkTaskComplete_Request, CRemoteClient_MarkTaskComplete_Response>( "RemoteClient.MarkTaskComplete#1", request );
         }
@@ -38,12 +38,12 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CRemoteClient_ReplyPacket_Notification>( "RemoteClient.NotifyReplyPacket#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CRemoteClient_AllocateRelayServer_Response>> AllocateRelayServer(CRemoteClient_AllocateRelayServer_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemoteClient_AllocateRelayServer_Response>> AllocateRelayServer(CRemoteClient_AllocateRelayServer_Request request)
         {
             return UnifiedMessages.SendMessage<CRemoteClient_AllocateRelayServer_Request, CRemoteClient_AllocateRelayServer_Response>( "RemoteClient.AllocateRelayServer#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CRemoteClient_AllocateSDR_Response>> AllocateSDR(CRemoteClient_AllocateSDR_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemoteClient_AllocateSDR_Response>> AllocateSDR(CRemoteClient_AllocateSDR_Request request)
         {
             return UnifiedMessages.SendMessage<CRemoteClient_AllocateSDR_Request, CRemoteClient_AllocateSDR_Response>( "RemoteClient.AllocateSDR#1", request );
         }
@@ -58,7 +58,7 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CRemoteClient_SteamToSteam_Notification>( "RemoteClient.SendSteamToSteamPacket#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CRemotePlay_SessionStarted_Response>> SendRemotePlaySessionStarted(CRemotePlay_SessionStarted_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemotePlay_SessionStarted_Response>> SendRemotePlaySessionStarted(CRemotePlay_SessionStarted_Request request)
         {
             return UnifiedMessages.SendMessage<CRemotePlay_SessionStarted_Request, CRemotePlay_SessionStarted_Response>( "RemoteClient.SendRemotePlaySessionStarted#1", request );
         }
@@ -73,12 +73,12 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CRemotePlayTogether_Notification>( "RemoteClient.SendRemotePlayTogetherPacket#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CRemoteClient_CreateRemotePlayTogetherInvitation_Response>> CreateRemotePlayTogetherInvitation(CRemoteClient_CreateRemotePlayTogetherInvitation_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemoteClient_CreateRemotePlayTogetherInvitation_Response>> CreateRemotePlayTogetherInvitation(CRemoteClient_CreateRemotePlayTogetherInvitation_Request request)
         {
             return UnifiedMessages.SendMessage<CRemoteClient_CreateRemotePlayTogetherInvitation_Request, CRemoteClient_CreateRemotePlayTogetherInvitation_Response>( "RemoteClient.CreateRemotePlayTogetherInvitation#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CRemoteClient_DeleteRemotePlayTogetherInvitation_Response>> DeleteRemotePlayTogetherInvitation(CRemoteClient_DeleteRemotePlayTogetherInvitation_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemoteClient_DeleteRemotePlayTogetherInvitation_Response>> DeleteRemotePlayTogetherInvitation(CRemoteClient_DeleteRemotePlayTogetherInvitation_Request request)
         {
             return UnifiedMessages.SendMessage<CRemoteClient_DeleteRemotePlayTogetherInvitation_Request, CRemoteClient_DeleteRemotePlayTogetherInvitation_Response>( "RemoteClient.DeleteRemotePlayTogetherInvitation#1", request );
         }

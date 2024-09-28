@@ -112,7 +112,7 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "EconMarket";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CEconMarket_IsMarketplaceAllowed_Response>> IsMarketplaceAllowed(CEconMarket_IsMarketplaceAllowed_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CEconMarket_IsMarketplaceAllowed_Response>> IsMarketplaceAllowed(CEconMarket_IsMarketplaceAllowed_Request request)
         {
             return UnifiedMessages.SendMessage<CEconMarket_IsMarketplaceAllowed_Request, CEconMarket_IsMarketplaceAllowed_Response>( "EconMarket.IsMarketplaceAllowed#1", request );
         }

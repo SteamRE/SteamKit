@@ -1187,92 +1187,92 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "LoyaltyRewards";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_AddReaction_Response>> AddReaction(CLoyaltyRewards_AddReaction_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_AddReaction_Response>> AddReaction(CLoyaltyRewards_AddReaction_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_AddReaction_Request, CLoyaltyRewards_AddReaction_Response>( "LoyaltyRewards.AddReaction#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_BatchedQueryRewardItems_Response>> BatchedQueryRewardItems(CLoyaltyRewards_BatchedQueryRewardItems_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_BatchedQueryRewardItems_Response>> BatchedQueryRewardItems(CLoyaltyRewards_BatchedQueryRewardItems_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_BatchedQueryRewardItems_Request, CLoyaltyRewards_BatchedQueryRewardItems_Response>( "LoyaltyRewards.BatchedQueryRewardItems#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_GetActivePurchaseBonuses_Response>> GetActivePurchaseBonuses(CLoyaltyRewards_GetActivePurchaseBonuses_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_GetActivePurchaseBonuses_Response>> GetActivePurchaseBonuses(CLoyaltyRewards_GetActivePurchaseBonuses_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_GetActivePurchaseBonuses_Request, CLoyaltyRewards_GetActivePurchaseBonuses_Response>( "LoyaltyRewards.GetActivePurchaseBonuses#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_GetEligibleApps_Response>> GetEligibleApps(CLoyaltyRewards_GetEligibleApps_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_GetEligibleApps_Response>> GetEligibleApps(CLoyaltyRewards_GetEligibleApps_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_GetEligibleApps_Request, CLoyaltyRewards_GetEligibleApps_Response>( "LoyaltyRewards.GetEligibleApps#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_GetEquippedProfileItems_Response>> GetEquippedProfileItems(CLoyaltyRewards_GetEquippedProfileItems_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_GetEquippedProfileItems_Response>> GetEquippedProfileItems(CLoyaltyRewards_GetEquippedProfileItems_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_GetEquippedProfileItems_Request, CLoyaltyRewards_GetEquippedProfileItems_Response>( "LoyaltyRewards.GetEquippedProfileItems#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_GetPointsForSpend_Response>> GetPointsForSpend(CLoyaltyRewards_GetPointsForSpend_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_GetPointsForSpend_Response>> GetPointsForSpend(CLoyaltyRewards_GetPointsForSpend_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_GetPointsForSpend_Request, CLoyaltyRewards_GetPointsForSpend_Response>( "LoyaltyRewards.GetPointsForSpend#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_GetProfileCustomizationsConfig_Response>> GetProfileCustomizationsConfig(CLoyaltyRewards_GetProfileCustomizationsConfig_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_GetProfileCustomizationsConfig_Response>> GetProfileCustomizationsConfig(CLoyaltyRewards_GetProfileCustomizationsConfig_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_GetProfileCustomizationsConfig_Request, CLoyaltyRewards_GetProfileCustomizationsConfig_Response>( "LoyaltyRewards.GetProfileCustomizationsConfig#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_GetReactionConfig_Response>> GetReactionConfig(CLoyaltyRewards_GetReactionConfig_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_GetReactionConfig_Response>> GetReactionConfig(CLoyaltyRewards_GetReactionConfig_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_GetReactionConfig_Request, CLoyaltyRewards_GetReactionConfig_Response>( "LoyaltyRewards.GetReactionConfig#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_GetReactions_Response>> GetReactions(CLoyaltyRewards_GetReactions_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_GetReactions_Response>> GetReactions(CLoyaltyRewards_GetReactions_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_GetReactions_Request, CLoyaltyRewards_GetReactions_Response>( "LoyaltyRewards.GetReactions#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_GetReactionsSummaryForUser_Response>> GetReactionsSummaryForUser(CLoyaltyRewards_GetReactionsSummaryForUser_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_GetReactionsSummaryForUser_Response>> GetReactionsSummaryForUser(CLoyaltyRewards_GetReactionsSummaryForUser_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_GetReactionsSummaryForUser_Request, CLoyaltyRewards_GetReactionsSummaryForUser_Response>( "LoyaltyRewards.GetReactionsSummaryForUser#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_GetSummary_Response>> GetSummary(CLoyaltyRewards_GetSummary_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_GetSummary_Response>> GetSummary(CLoyaltyRewards_GetSummary_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_GetSummary_Request, CLoyaltyRewards_GetSummary_Response>( "LoyaltyRewards.GetSummary#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_QueryRewardItems_Response>> QueryRewardItems(CLoyaltyRewards_QueryRewardItems_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_QueryRewardItems_Response>> QueryRewardItems(CLoyaltyRewards_QueryRewardItems_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_QueryRewardItems_Request, CLoyaltyRewards_QueryRewardItems_Response>( "LoyaltyRewards.QueryRewardItems#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_RedeemPoints_Response>> RedeemPoints(CLoyaltyRewards_RedeemPoints_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_RedeemPoints_Response>> RedeemPoints(CLoyaltyRewards_RedeemPoints_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_RedeemPoints_Request, CLoyaltyRewards_RedeemPoints_Response>( "LoyaltyRewards.RedeemPoints#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_RedeemPoints_Response>> RedeemPointsForBadgeLevel(CLoyaltyRewards_RedeemPointsForBadgeLevel_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_RedeemPoints_Response>> RedeemPointsForBadgeLevel(CLoyaltyRewards_RedeemPointsForBadgeLevel_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_RedeemPointsForBadgeLevel_Request, CLoyaltyRewards_RedeemPoints_Response>( "LoyaltyRewards.RedeemPointsForBadgeLevel#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_RedeemPointsForProfileCustomization_Response>> RedeemPointsForProfileCustomization(CLoyaltyRewards_RedeemPointsForProfileCustomization_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_RedeemPointsForProfileCustomization_Response>> RedeemPointsForProfileCustomization(CLoyaltyRewards_RedeemPointsForProfileCustomization_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_RedeemPointsForProfileCustomization_Request, CLoyaltyRewards_RedeemPointsForProfileCustomization_Response>( "LoyaltyRewards.RedeemPointsForProfileCustomization#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_RedeemPointsForProfileCustomizationUpgrade_Response>> RedeemPointsForProfileCustomizationUpgrade(CLoyaltyRewards_RedeemPointsForProfileCustomizationUpgrade_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_RedeemPointsForProfileCustomizationUpgrade_Response>> RedeemPointsForProfileCustomizationUpgrade(CLoyaltyRewards_RedeemPointsForProfileCustomizationUpgrade_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_RedeemPointsForProfileCustomizationUpgrade_Request, CLoyaltyRewards_RedeemPointsForProfileCustomizationUpgrade_Response>( "LoyaltyRewards.RedeemPointsForProfileCustomizationUpgrade#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_RedeemPoints_Response>> RedeemPointsToUpgradeItem(CLoyaltyRewards_RedeemPointsToUpgradeItem_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_RedeemPoints_Response>> RedeemPointsToUpgradeItem(CLoyaltyRewards_RedeemPointsToUpgradeItem_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_RedeemPointsToUpgradeItem_Request, CLoyaltyRewards_RedeemPoints_Response>( "LoyaltyRewards.RedeemPointsToUpgradeItem#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CLoyaltyRewards_RegisterForSteamDeckRewards_Response>> RegisterForSteamDeckRewards(CLoyaltyRewards_RegisterForSteamDeckRewards_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_RegisterForSteamDeckRewards_Response>> RegisterForSteamDeckRewards(CLoyaltyRewards_RegisterForSteamDeckRewards_Request request)
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_RegisterForSteamDeckRewards_Request, CLoyaltyRewards_RegisterForSteamDeckRewards_Response>( "LoyaltyRewards.RegisterForSteamDeckRewards#1", request );
         }

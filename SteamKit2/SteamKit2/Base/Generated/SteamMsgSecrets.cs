@@ -185,7 +185,7 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Secrets";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CKeyEscrow_Response>> KeyEscrow(CKeyEscrow_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CKeyEscrow_Response>> KeyEscrow(CKeyEscrow_Request request)
         {
             return UnifiedMessages.SendMessage<CKeyEscrow_Request, CKeyEscrow_Response>( "Secrets.KeyEscrow#1", request );
         }

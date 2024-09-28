@@ -803,17 +803,17 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "FriendMessages";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFriendMessages_GetRecentMessages_Response>> GetRecentMessages(CFriendMessages_GetRecentMessages_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendMessages_GetRecentMessages_Response>> GetRecentMessages(CFriendMessages_GetRecentMessages_Request request)
         {
             return UnifiedMessages.SendMessage<CFriendMessages_GetRecentMessages_Request, CFriendMessages_GetRecentMessages_Response>( "FriendMessages.GetRecentMessages#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFriendsMessages_GetActiveMessageSessions_Response>> GetActiveMessageSessions(CFriendsMessages_GetActiveMessageSessions_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendsMessages_GetActiveMessageSessions_Response>> GetActiveMessageSessions(CFriendsMessages_GetActiveMessageSessions_Request request)
         {
             return UnifiedMessages.SendMessage<CFriendsMessages_GetActiveMessageSessions_Request, CFriendsMessages_GetActiveMessageSessions_Response>( "FriendMessages.GetActiveMessageSessions#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFriendMessages_SendMessage_Response>> SendMessage(CFriendMessages_SendMessage_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendMessages_SendMessage_Response>> SendMessage(CFriendMessages_SendMessage_Request request)
         {
             return UnifiedMessages.SendMessage<CFriendMessages_SendMessage_Request, CFriendMessages_SendMessage_Response>( "FriendMessages.SendMessage#1", request );
         }
@@ -823,12 +823,12 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CFriendMessages_AckMessage_Notification>( "FriendMessages.AckMessage#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFriendMessages_IsInFriendsUIBeta_Response>> IsInFriendsUIBeta(CFriendMessages_IsInFriendsUIBeta_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendMessages_IsInFriendsUIBeta_Response>> IsInFriendsUIBeta(CFriendMessages_IsInFriendsUIBeta_Request request)
         {
             return UnifiedMessages.SendMessage<CFriendMessages_IsInFriendsUIBeta_Request, CFriendMessages_IsInFriendsUIBeta_Response>( "FriendMessages.IsInFriendsUIBeta#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFriendMessages_UpdateMessageReaction_Response>> UpdateMessageReaction(CFriendMessages_UpdateMessageReaction_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendMessages_UpdateMessageReaction_Response>> UpdateMessageReaction(CFriendMessages_UpdateMessageReaction_Request request)
         {
             return UnifiedMessages.SendMessage<CFriendMessages_UpdateMessageReaction_Request, CFriendMessages_UpdateMessageReaction_Response>( "FriendMessages.UpdateMessageReaction#1", request );
         }

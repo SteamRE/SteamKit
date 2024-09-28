@@ -470,32 +470,32 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Shader";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CShader_GetShaderReportingCadence_Response>> GetShaderReportingCadence(CShader_GetShaderReportingCadence_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CShader_GetShaderReportingCadence_Response>> GetShaderReportingCadence(CShader_GetShaderReportingCadence_Request request)
         {
             return UnifiedMessages.SendMessage<CShader_GetShaderReportingCadence_Request, CShader_GetShaderReportingCadence_Response>( "Shader.GetShaderReportingCadence#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CShader_RegisterShader_Response>> RegisterShader(CShader_RegisterShader_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CShader_RegisterShader_Response>> RegisterShader(CShader_RegisterShader_Request request)
         {
             return UnifiedMessages.SendMessage<CShader_RegisterShader_Request, CShader_RegisterShader_Response>( "Shader.RegisterShader#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CShader_SendShader_Response>> SendShader(CShader_SendShader_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CShader_SendShader_Response>> SendShader(CShader_SendShader_Request request)
         {
             return UnifiedMessages.SendMessage<CShader_SendShader_Request, CShader_SendShader_Response>( "Shader.SendShader#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CShader_GetBucketManifest_Response>> GetBucketManifest(CShader_GetBucketManifest_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CShader_GetBucketManifest_Response>> GetBucketManifest(CShader_GetBucketManifest_Request request)
         {
             return UnifiedMessages.SendMessage<CShader_GetBucketManifest_Request, CShader_GetBucketManifest_Response>( "Shader.GetBucketManifest#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CShader_GetStaleBucket_Response>> GetStaleBucket(CShader_GetStaleBucket_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CShader_GetStaleBucket_Response>> GetStaleBucket(CShader_GetStaleBucket_Request request)
         {
             return UnifiedMessages.SendMessage<CShader_GetStaleBucket_Request, CShader_GetStaleBucket_Response>( "Shader.GetStaleBucket#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CShader_ReportExternalBuild_Response>> ReportExternalBuild(CShader_ReportExternalBuild_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CShader_ReportExternalBuild_Response>> ReportExternalBuild(CShader_ReportExternalBuild_Request request)
         {
             return UnifiedMessages.SendMessage<CShader_ReportExternalBuild_Request, CShader_ReportExternalBuild_Response>( "Shader.ReportExternalBuild#1", request );
         }

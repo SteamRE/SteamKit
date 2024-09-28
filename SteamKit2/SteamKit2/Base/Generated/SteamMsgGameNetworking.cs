@@ -96,7 +96,7 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "GameNetworking";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CGameNetworking_AllocateFakeIP_Response>> AllocateFakeIP(CGameNetworking_AllocateFakeIP_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameNetworking_AllocateFakeIP_Response>> AllocateFakeIP(CGameNetworking_AllocateFakeIP_Request request)
         {
             return UnifiedMessages.SendMessage<CGameNetworking_AllocateFakeIP_Request, CGameNetworking_AllocateFakeIP_Response>( "GameNetworking.AllocateFakeIP#1", request );
         }

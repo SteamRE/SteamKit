@@ -89,12 +89,12 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "AccountPrivateApps";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountPrivateApps_GetPrivateAppList_Response>> GetPrivateAppList(CAccountPrivateApps_GetPrivateAppList_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountPrivateApps_GetPrivateAppList_Response>> GetPrivateAppList(CAccountPrivateApps_GetPrivateAppList_Request request)
         {
             return UnifiedMessages.SendMessage<CAccountPrivateApps_GetPrivateAppList_Request, CAccountPrivateApps_GetPrivateAppList_Response>( "AccountPrivateApps.GetPrivateAppList#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CAccountPrivateApps_ToggleAppPrivacy_Response>> ToggleAppPrivacy(CAccountPrivateApps_ToggleAppPrivacy_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountPrivateApps_ToggleAppPrivacy_Response>> ToggleAppPrivacy(CAccountPrivateApps_ToggleAppPrivacy_Request request)
         {
             return UnifiedMessages.SendMessage<CAccountPrivateApps_ToggleAppPrivacy_Request, CAccountPrivateApps_ToggleAppPrivacy_Response>( "AccountPrivateApps.ToggleAppPrivacy#1", request );
         }

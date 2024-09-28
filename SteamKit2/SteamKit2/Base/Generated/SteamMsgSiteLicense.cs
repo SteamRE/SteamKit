@@ -527,7 +527,7 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "SiteManagerClient";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteManagerClient_IncomingClient_Response>> IncomingClient(CSiteManagerClient_IncomingClient_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteManagerClient_IncomingClient_Response>> IncomingClient(CSiteManagerClient_IncomingClient_Request request)
         {
             return UnifiedMessages.SendMessage<CSiteManagerClient_IncomingClient_Request, CSiteManagerClient_IncomingClient_Response>( "SiteManagerClient.IncomingClient#1", request );
         }
@@ -557,27 +557,27 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "SiteLicense";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteLicense_InitiateAssociation_Response>> InitiateAssociation(CSiteLicense_InitiateAssociation_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteLicense_InitiateAssociation_Response>> InitiateAssociation(CSiteLicense_InitiateAssociation_Request request)
         {
             return UnifiedMessages.SendMessage<CSiteLicense_InitiateAssociation_Request, CSiteLicense_InitiateAssociation_Response>( "SiteLicense.InitiateAssociation#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteLicense_LCSAuthenticate_Response>> LCSAuthenticate(CSiteLicense_LCSAuthenticate_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteLicense_LCSAuthenticate_Response>> LCSAuthenticate(CSiteLicense_LCSAuthenticate_Request request)
         {
             return UnifiedMessages.SendMessage<CSiteLicense_LCSAuthenticate_Request, CSiteLicense_LCSAuthenticate_Response>( "SiteLicense.LCSAuthenticate#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteLicense_LCSAssociateUser_Response>> LCSAssociateUser(CSiteLicense_LCSAssociateUser_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteLicense_LCSAssociateUser_Response>> LCSAssociateUser(CSiteLicense_LCSAssociateUser_Request request)
         {
             return UnifiedMessages.SendMessage<CSiteLicense_LCSAssociateUser_Request, CSiteLicense_LCSAssociateUser_Response>( "SiteLicense.LCSAssociateUser#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteLicense_ClientSeatCheckout_Response>> ClientSeatCheckout(CSiteLicense_ClientSeatCheckout_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteLicense_ClientSeatCheckout_Response>> ClientSeatCheckout(CSiteLicense_ClientSeatCheckout_Request request)
         {
             return UnifiedMessages.SendMessage<CSiteLicense_ClientSeatCheckout_Request, CSiteLicense_ClientSeatCheckout_Response>( "SiteLicense.ClientSeatCheckout#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CSiteLicense_ClientGetAvailableSeats_Response>> ClientGetAvailableSeats(CSiteLicense_ClientGetAvailableSeats_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteLicense_ClientGetAvailableSeats_Response>> ClientGetAvailableSeats(CSiteLicense_ClientGetAvailableSeats_Request request)
         {
             return UnifiedMessages.SendMessage<CSiteLicense_ClientGetAvailableSeats_Request, CSiteLicense_ClientGetAvailableSeats_Response>( "SiteLicense.ClientGetAvailableSeats#1", request );
         }

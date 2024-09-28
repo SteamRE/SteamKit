@@ -910,82 +910,82 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Inventory";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CInventory_Response>> GetInventory(CInventory_GetInventory_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> GetInventory(CInventory_GetInventory_Request request)
         {
             return UnifiedMessages.SendMessage<CInventory_GetInventory_Request, CInventory_Response>( "Inventory.GetInventory#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CInventory_Response>> ExchangeItem(CInventory_ExchangeItem_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> ExchangeItem(CInventory_ExchangeItem_Request request)
         {
             return UnifiedMessages.SendMessage<CInventory_ExchangeItem_Request, CInventory_Response>( "Inventory.ExchangeItem#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CInventory_GetEligiblePromoItemDefIDs_Response>> GetEligiblePromoItemDefIDs(CInventory_GetEligiblePromoItemDefIDs_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_GetEligiblePromoItemDefIDs_Response>> GetEligiblePromoItemDefIDs(CInventory_GetEligiblePromoItemDefIDs_Request request)
         {
             return UnifiedMessages.SendMessage<CInventory_GetEligiblePromoItemDefIDs_Request, CInventory_GetEligiblePromoItemDefIDs_Response>( "Inventory.GetEligiblePromoItemDefIDs#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CInventory_Response>> AddPromoItem(CInventory_AddItem_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> AddPromoItem(CInventory_AddItem_Request request)
         {
             return UnifiedMessages.SendMessage<CInventory_AddItem_Request, CInventory_Response>( "Inventory.AddPromoItem#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CInventory_Response>> SafeModifyItems(CInventory_ModifyItems_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> SafeModifyItems(CInventory_ModifyItems_Request request)
         {
             return UnifiedMessages.SendMessage<CInventory_ModifyItems_Request, CInventory_Response>( "Inventory.SafeModifyItems#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CInventory_Response>> ConsumePlaytime(CInventory_ConsumePlaytime_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> ConsumePlaytime(CInventory_ConsumePlaytime_Request request)
         {
             return UnifiedMessages.SendMessage<CInventory_ConsumePlaytime_Request, CInventory_Response>( "Inventory.ConsumePlaytime#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CInventory_Response>> ConsumeItem(CInventory_ConsumeItem_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> ConsumeItem(CInventory_ConsumeItem_Request request)
         {
             return UnifiedMessages.SendMessage<CInventory_ConsumeItem_Request, CInventory_Response>( "Inventory.ConsumeItem#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CInventory_Response>> DevGenerateItem(CInventory_AddItem_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> DevGenerateItem(CInventory_AddItem_Request request)
         {
             return UnifiedMessages.SendMessage<CInventory_AddItem_Request, CInventory_Response>( "Inventory.DevGenerateItem#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CInventory_Response>> DevSetNextDrop(CInventory_DevSetNextDrop_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> DevSetNextDrop(CInventory_DevSetNextDrop_Request request)
         {
             return UnifiedMessages.SendMessage<CInventory_DevSetNextDrop_Request, CInventory_Response>( "Inventory.DevSetNextDrop#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CInventory_Response>> SplitItemStack(CInventory_SplitItemStack_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> SplitItemStack(CInventory_SplitItemStack_Request request)
         {
             return UnifiedMessages.SendMessage<CInventory_SplitItemStack_Request, CInventory_Response>( "Inventory.SplitItemStack#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CInventory_Response>> CombineItemStacks(CInventory_CombineItemStacks_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> CombineItemStacks(CInventory_CombineItemStacks_Request request)
         {
             return UnifiedMessages.SendMessage<CInventory_CombineItemStacks_Request, CInventory_Response>( "Inventory.CombineItemStacks#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CInventory_GetItemDefMeta_Response>> GetItemDefMeta(CInventory_GetItemDefMeta_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_GetItemDefMeta_Response>> GetItemDefMeta(CInventory_GetItemDefMeta_Request request)
         {
             return UnifiedMessages.SendMessage<CInventory_GetItemDefMeta_Request, CInventory_GetItemDefMeta_Response>( "Inventory.GetItemDefMeta#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CInventory_GetUserPurchaseInfo_Response>> GetUserPurchaseInfo(CInventory_GetUserPurchaseInfo_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_GetUserPurchaseInfo_Response>> GetUserPurchaseInfo(CInventory_GetUserPurchaseInfo_Request request)
         {
             return UnifiedMessages.SendMessage<CInventory_GetUserPurchaseInfo_Request, CInventory_GetUserPurchaseInfo_Response>( "Inventory.GetUserPurchaseInfo#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CInventory_PurchaseInit_Response>> PurchaseInit(CInventory_PurchaseInit_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_PurchaseInit_Response>> PurchaseInit(CInventory_PurchaseInit_Request request)
         {
             return UnifiedMessages.SendMessage<CInventory_PurchaseInit_Request, CInventory_PurchaseInit_Response>( "Inventory.PurchaseInit#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CInventory_Response>> PurchaseFinalize(CInventory_PurchaseFinalize_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> PurchaseFinalize(CInventory_PurchaseFinalize_Request request)
         {
             return UnifiedMessages.SendMessage<CInventory_PurchaseFinalize_Request, CInventory_Response>( "Inventory.PurchaseFinalize#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CInventory_Response>> InspectItem(CInventory_InspectItem_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> InspectItem(CInventory_InspectItem_Request request)
         {
             return UnifiedMessages.SendMessage<CInventory_InspectItem_Request, CInventory_Response>( "Inventory.InspectItem#1", request );
         }

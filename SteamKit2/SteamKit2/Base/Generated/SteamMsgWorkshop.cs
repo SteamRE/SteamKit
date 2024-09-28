@@ -81,7 +81,7 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Workshop";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CWorkshop_GetEULAStatus_Response>> GetEULAStatus(CWorkshop_GetEULAStatus_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CWorkshop_GetEULAStatus_Response>> GetEULAStatus(CWorkshop_GetEULAStatus_Request request)
         {
             return UnifiedMessages.SendMessage<CWorkshop_GetEULAStatus_Request, CWorkshop_GetEULAStatus_Response>( "Workshop.GetEULAStatus#1", request );
         }

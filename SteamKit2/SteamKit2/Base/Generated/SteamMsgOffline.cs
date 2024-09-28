@@ -124,12 +124,12 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Offline";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<COffline_GetOfflineLogonTicket_Response>> GetOfflineLogonTicket(COffline_GetOfflineLogonTicket_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<COffline_GetOfflineLogonTicket_Response>> GetOfflineLogonTicket(COffline_GetOfflineLogonTicket_Request request)
         {
             return UnifiedMessages.SendMessage<COffline_GetOfflineLogonTicket_Request, COffline_GetOfflineLogonTicket_Response>( "Offline.GetOfflineLogonTicket#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<COffline_GetUnsignedOfflineLogonTicket_Response>> GetUnsignedOfflineLogonTicket(COffline_GetUnsignedOfflineLogonTicket_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<COffline_GetUnsignedOfflineLogonTicket_Response>> GetUnsignedOfflineLogonTicket(COffline_GetUnsignedOfflineLogonTicket_Request request)
         {
             return UnifiedMessages.SendMessage<COffline_GetUnsignedOfflineLogonTicket_Request, COffline_GetUnsignedOfflineLogonTicket_Response>( "Offline.GetUnsignedOfflineLogonTicket#1", request );
         }

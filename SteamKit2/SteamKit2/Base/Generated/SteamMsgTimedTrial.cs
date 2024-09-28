@@ -187,17 +187,17 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "TimedTrial";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CTimedTrial_GetTimeRemaining_Response>> GetTimeRemaining(CTimedTrial_GetTimeRemaining_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTimedTrial_GetTimeRemaining_Response>> GetTimeRemaining(CTimedTrial_GetTimeRemaining_Request request)
         {
             return UnifiedMessages.SendMessage<CTimedTrial_GetTimeRemaining_Request, CTimedTrial_GetTimeRemaining_Response>( "TimedTrial.GetTimeRemaining#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CTimedTrial_RecordPlaytime_Response>> RecordPlaytime(CTimedTrial_RecordPlaytime_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTimedTrial_RecordPlaytime_Response>> RecordPlaytime(CTimedTrial_RecordPlaytime_Request request)
         {
             return UnifiedMessages.SendMessage<CTimedTrial_RecordPlaytime_Request, CTimedTrial_RecordPlaytime_Response>( "TimedTrial.RecordPlaytime#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CTimedTrial_ResetPlaytime_Response>> ResetPlaytime(CTimedTrial_ResetPlaytime_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTimedTrial_ResetPlaytime_Response>> ResetPlaytime(CTimedTrial_ResetPlaytime_Request request)
         {
             return UnifiedMessages.SendMessage<CTimedTrial_ResetPlaytime_Request, CTimedTrial_ResetPlaytime_Response>( "TimedTrial.ResetPlaytime#1", request );
         }

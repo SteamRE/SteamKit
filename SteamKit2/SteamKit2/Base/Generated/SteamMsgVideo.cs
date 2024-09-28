@@ -287,7 +287,7 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Video";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CVideo_ClientGetVideoURL_Response>> ClientGetVideoURL(CVideo_ClientGetVideoURL_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CVideo_ClientGetVideoURL_Response>> ClientGetVideoURL(CVideo_ClientGetVideoURL_Request request)
         {
             return UnifiedMessages.SendMessage<CVideo_ClientGetVideoURL_Request, CVideo_ClientGetVideoURL_Response>( "Video.ClientGetVideoURL#1", request );
         }
@@ -297,7 +297,7 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CVideo_SetVideoBookmark_Notification>( "Video.SetVideoBookmark#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CVideo_GetVideoBookmarks_Response>> GetVideoBookmarks(CVideo_GetVideoBookmarks_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CVideo_GetVideoBookmarks_Response>> GetVideoBookmarks(CVideo_GetVideoBookmarks_Request request)
         {
             return UnifiedMessages.SendMessage<CVideo_GetVideoBookmarks_Request, CVideo_GetVideoBookmarks_Response>( "Video.GetVideoBookmarks#1", request );
         }
@@ -334,7 +334,7 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "FovasVideo";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMsg<CFovasVideo_ClientGetOPFSettings_Response>> ClientGetOPFSettings(CFovasVideo_ClientGetOPFSettings_Request request)
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFovasVideo_ClientGetOPFSettings_Response>> ClientGetOPFSettings(CFovasVideo_ClientGetOPFSettings_Request request)
         {
             return UnifiedMessages.SendMessage<CFovasVideo_ClientGetOPFSettings_Request, CFovasVideo_ClientGetOPFSettings_Response>( "FovasVideo.ClientGetOPFSettings#1", request );
         }
