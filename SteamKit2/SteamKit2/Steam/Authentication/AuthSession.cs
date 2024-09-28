@@ -212,11 +212,11 @@ namespace SteamKit2.Authentication
                 throw new AuthenticationException( "Failed to poll status", result.Result );
             }
 
-            HandlePollAuthSessionStatusResponse( result.MessageBody );
+            HandlePollAuthSessionStatusResponse( result.Body );
 
-            if ( result.MessageBody.refresh_token.Length > 0 )
+            if ( result.Body.refresh_token.Length > 0 )
             {
-                return new AuthPollResult( result.MessageBody );
+                return new AuthPollResult( result.Body );
             }
 
             return null;

@@ -34,15 +34,15 @@ namespace SteamKit2
 
         /// <summary>
         /// Sends a message.
-        /// Results are returned in a <see cref="ServiceMsg{TResult}"/>.
+        /// Results are returned in a <see cref="ServiceMethodResponse{TResult}"/>.
         /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <typeparam name="TRequest">The type of a protobuf object.</typeparam>
         /// <typeparam name="TResult">The type of the result of the request.</typeparam>
         /// <param name="name">Name of the RPC endpoint. Takes the format ServiceName.RpcName</param>
         /// <param name="message">The message to send.</param>
-        /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMsg{TResult}"/>.</returns>
-        public AsyncJob<ServiceMsg<TResult>> SendMessage<TRequest, TResult>( string name, TRequest message )
+        /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse{TResult}"/>.</returns>
+        public AsyncJob<ServiceMethodResponse<TResult>> SendMessage<TRequest, TResult>( string name, TRequest message )
             where TRequest : IExtensible, new() where TResult : IExtensible, new()
         {
             if ( message is null )
@@ -60,7 +60,7 @@ namespace SteamKit2
             msg.Body = message;
             Client.Send( msg );
 
-            return new AsyncJob<ServiceMsg<TResult>>( Client, msg.SourceJobID );
+            return new AsyncJob<ServiceMethodResponse<TResult>>( Client, msg.SourceJobID );
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace SteamKit2
         internal void HandleServiceMsg<TService>( IPacketMsg packetMsg )
             where TService : IExtensible, new()
         {
-            var callback = new ServiceMsg<TService>( (packetMsg as PacketClientMsgProtobuf)! );
+            var callback = new ServiceMethodResponse<TService>( (packetMsg as PacketClientMsgProtobuf)! );
             Client.PostCallback( callback );
         }
 

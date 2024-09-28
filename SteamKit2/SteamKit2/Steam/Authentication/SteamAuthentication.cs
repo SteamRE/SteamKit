@@ -51,7 +51,7 @@ namespace SteamKit2.Authentication
                 throw new AuthenticationException( "Failed to get password public key", response.Result );
             }
 
-            return response.MessageBody;
+            return response.Body;
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace SteamKit2.Authentication
                 throw new AuthenticationException( "Failed to generate token", response.Result );
             }
 
-            return new AccessTokenGenerateResult( response.MessageBody );
+            return new AccessTokenGenerateResult( response.Body );
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace SteamKit2.Authentication
                 throw new AuthenticationException( "Failed to begin QR auth session", response.Result );
             }
 
-            var authResponse = new QrAuthSession( this, details.Authenticator, response.MessageBody );
+            var authResponse = new QrAuthSession( this, details.Authenticator, response.Body );
 
             return authResponse;
         }
@@ -174,7 +174,7 @@ namespace SteamKit2.Authentication
                 throw new AuthenticationException( "Authentication failed", response.Result );
             }
 
-            var authResponse = new CredentialsAuthSession( this, details.Authenticator, response.MessageBody );
+            var authResponse = new CredentialsAuthSession( this, details.Authenticator, response.Body );
 
             return authResponse;
         }
