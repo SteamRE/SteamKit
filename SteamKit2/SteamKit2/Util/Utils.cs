@@ -141,6 +141,7 @@ namespace SteamKit2
                     21 => EOSType.MacOS12, // Monterey
                     22 => EOSType.MacOS13, // Ventura
                     23 => EOSType.MacOS14, // Sonoma
+                    24 => EOSType.MacOS15, // Sequoia
                     _ => EOSType.MacOSUnknown,
                 },
 
