@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
@@ -137,6 +136,37 @@ namespace NetHookAnalyzer2
 			else
 			{
 				SetValueForDisplay(null, childNodes: [new TreeNodeObjectExplorer(kv.Name, kv, configuration)]);
+			}
+
+			this.ExpandAll();
+		}
+
+		void DisplayDataAsBinaryKeyValuesLzma( object sender, EventArgs e )
+		{
+			var data = ( byte[] )value;
+			var kv = new KeyValue();
+			bool didRead;
+
+			using ( var compressed = new MemoryStream( data ) )
+			{
+				if ( !LzmaUtil.TryDecompress( compressed, static capacity => new MemoryStream( capacity ), out var decompressed ) )
+				{
+					SetValueForDisplay( "Not a valid LZMA-encoded blob!" );
+				}
+
+				using ( decompressed )
+				{ 
+					didRead = kv.TryReadAsBinary( decompressed );
+				}
+
+				if ( !didRead )
+				{
+					SetValueForDisplay( "Not a valid KeyValues object!" );
+				}
+				else
+				{
+					SetValueForDisplay( null, childNodes: [ new TreeNodeObjectExplorer( kv.Name, kv, configuration ) ] );
+				}
 			}
 
 			this.ExpandAll();
@@ -441,13 +471,19 @@ namespace NetHookAnalyzer2
 					ContextMenuItems.Add(new ToolStripMenuItem( "&Save to file...", null, SaveDataToFile));
 
 					var data = (byte[])value;
-					if (data.Length > 0 && data.Length <= MaxDataLengthForDisplay)
+					if ( data.Length > 0 )
 					{
-						ContextMenuItems.Add(new ToolStripMenuItem( "&ASCII", null, DisplayDataAsAscii).AsRadioCheck());
-						ContextMenuItems.Add(new ToolStripMenuItem( "&UTF-8", null, DisplayDataAsUTF8).AsRadioCheck());
-						ContextMenuItems.Add(new ToolStripMenuItem( "&Hexadecimal", null, DisplayDataAsHexadecimal){ Checked = true }.AsRadioCheck() );
-						ContextMenuItems.Add(new ToolStripMenuItem( "&Binary KeyValues (VDF)", null, DisplayDataAsBinaryKeyValues).AsRadioCheck());
-						ContextMenuItems.Add(new ToolStripMenuItem( "&Protobuf", null, DisplayDataAsProtobuf ).AsRadioCheck());
+
+						ContextMenuItems.Add( new ToolStripMenuItem( "&Binary KeyValues (VDF)", null, DisplayDataAsBinaryKeyValues ).AsRadioCheck() );
+						ContextMenuItems.Add( new ToolStripMenuItem( "&Binary KeyValues (VDF) [LZMA-encoded]", null, DisplayDataAsBinaryKeyValuesLzma ).AsRadioCheck() );
+						ContextMenuItems.Add( new ToolStripMenuItem( "&Protobuf", null, DisplayDataAsProtobuf ).AsRadioCheck() );
+
+						if ( data.Length <= MaxDataLengthForDisplay )
+						{
+							ContextMenuItems.Add( new ToolStripMenuItem( "&ASCII", null, DisplayDataAsAscii ).AsRadioCheck() );
+							ContextMenuItems.Add( new ToolStripMenuItem( "&UTF-8", null, DisplayDataAsUTF8 ).AsRadioCheck() );
+							ContextMenuItems.Add( new ToolStripMenuItem( "&Hexadecimal", null, DisplayDataAsHexadecimal ) { Checked = true }.AsRadioCheck() );
+						}
 					}
 				}
 
