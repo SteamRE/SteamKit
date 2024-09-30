@@ -475,7 +475,12 @@ namespace NetHookAnalyzer2
 					{
 
 						ContextMenuItems.Add( new ToolStripMenuItem( "&Binary KeyValues (VDF)", null, DisplayDataAsBinaryKeyValues ).AsRadioCheck() );
-						ContextMenuItems.Add( new ToolStripMenuItem( "&Binary KeyValues (VDF) [LZMA-encoded]", null, DisplayDataAsBinaryKeyValuesLzma ).AsRadioCheck() );
+
+						if ( LzmaUtil.HasLzmaHeader( data ) )
+						{
+							ContextMenuItems.Add( new ToolStripMenuItem( "&Binary KeyValues (VDF) [LZMA-encoded]", null, DisplayDataAsBinaryKeyValuesLzma ).AsRadioCheck() );
+						}
+
 						ContextMenuItems.Add( new ToolStripMenuItem( "&Protobuf", null, DisplayDataAsProtobuf ).AsRadioCheck() );
 
 						if ( data.Length <= MaxDataLengthForDisplay )

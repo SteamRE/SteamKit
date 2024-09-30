@@ -11,6 +11,22 @@ namespace SteamKit2.Internal
     public static class LzmaUtil
     {
         /// <summary>
+        /// Check to see if some data starts with the LZMA header magic.
+        /// </summary>
+        /// <param name="data">The data to check.</param>
+        /// <returns><c>true</c> if the data begins with the magic</returns>
+        public static bool HasLzmaHeader( ReadOnlySpan<byte> data )
+        {
+            if ( data.Length < sizeof( int ) )
+            {
+                return false;
+            }
+
+            var magic = BinaryPrimitives.ReadInt32BigEndian( data[ ..sizeof( int ) ] );
+            return ( magic == 0x4C5A4D41 );
+        }
+
+        /// <summary>
         /// Decompress a LZMA stream into another stream.
         /// </summary>
         /// <param name="input">The LZMA stream to decode.</param>
