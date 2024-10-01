@@ -8,7 +8,7 @@ namespace SteamKit2.Internal
     /// <summary>
     /// Internal helper to decode data blobs with the 'LZMA' magic header.
     /// </summary>
-    public static class LzmaUtil
+    internal static class LzmaUtil
     {
         /// <summary>
         /// Check to see if some data starts with the LZMA header magic.
