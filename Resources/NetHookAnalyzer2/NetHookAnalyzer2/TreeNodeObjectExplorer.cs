@@ -101,13 +101,13 @@ namespace NetHookAnalyzer2
 		void DisplayDataAsAscii(object sender, EventArgs e)
 		{
 			var data = (byte[])value;
-			SetValueForDisplay(Encoding.ASCII.GetString(data).Replace("\0", "\\0", StringComparison.InvariantCulture) );
+			SetValueForDisplay(Encoding.ASCII.GetString(data).Replace("\0", "\\0", StringComparison.Ordinal));
 		}
 
 		void DisplayDataAsUTF8(object sender, EventArgs e)
 		{
 			var data = (byte[])value;
-			SetValueForDisplay(Encoding.UTF8.GetString(data).Replace("\0", "\\0", StringComparison.InvariantCulture));
+			SetValueForDisplay(Encoding.UTF8.GetString(data).Replace("\0", "\\0", StringComparison.Ordinal));
 		}
 
 		void DisplayDataAsHexadecimal(object sender, EventArgs e)
@@ -482,13 +482,9 @@ namespace NetHookAnalyzer2
 						}
 
 						ContextMenuItems.Add( new ToolStripMenuItem( "&Protobuf", null, DisplayDataAsProtobuf ).AsRadioCheck() );
-
-						if ( data.Length <= MaxDataLengthForDisplay )
-						{
-							ContextMenuItems.Add( new ToolStripMenuItem( "&ASCII", null, DisplayDataAsAscii ).AsRadioCheck() );
-							ContextMenuItems.Add( new ToolStripMenuItem( "&UTF-8", null, DisplayDataAsUTF8 ).AsRadioCheck() );
-							ContextMenuItems.Add( new ToolStripMenuItem( "&Hexadecimal", null, DisplayDataAsHexadecimal ) { Checked = true }.AsRadioCheck() );
-						}
+						ContextMenuItems.Add( new ToolStripMenuItem( "&ASCII", null, DisplayDataAsAscii ).AsRadioCheck() );
+						ContextMenuItems.Add( new ToolStripMenuItem( "&UTF-8", null, DisplayDataAsUTF8 ).AsRadioCheck() );
+						ContextMenuItems.Add( new ToolStripMenuItem( "&Hexadecimal", null, DisplayDataAsHexadecimal ) { Checked = true }.AsRadioCheck() );
 					}
 				}
 
