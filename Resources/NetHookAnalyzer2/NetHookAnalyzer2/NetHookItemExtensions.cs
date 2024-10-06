@@ -21,7 +21,7 @@ namespace NetHookAnalyzer2
 			lvi.SubItems.Add(new ListViewItem.ListViewSubItem
 			{
 				Name = "Timestamp",
-				Text = item.Timestamp.ToString(CultureInfo.CurrentUICulture),
+				Text = item.Timestamp.ToString(CultureInfo.CurrentCulture),
 			});
 
 #pragma warning disable CA1308 // Normalize strings to uppercase
