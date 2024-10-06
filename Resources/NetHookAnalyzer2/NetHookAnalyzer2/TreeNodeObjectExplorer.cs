@@ -70,6 +70,11 @@ namespace NetHookAnalyzer2
 			Clipboard.SetText(name, TextDataFormat.Text);
 		}
 
+		void CopyTypeToClipboard(object sender, EventArgs e)
+		{
+			Clipboard.SetText(value.GetType().Name, TextDataFormat.Text);
+		}
+
 		void CopyValueToClipboard(object sender, EventArgs e)
 		{
 			var valueToCopy = clipboardCopyOverride ?? ValueForDisplay;
@@ -372,7 +377,8 @@ namespace NetHookAnalyzer2
 						[
 							new ToolStripMenuItem("Copy &Name", null, CopyNameToClipboard),
 							new ToolStripMenuItem("Copy &Value", null, CopyValueToClipboard),
-							new ToolStripMenuItem("Copy Name &and Value", null, CopyNameAndValueToClipboard)
+							new ToolStripMenuItem("Copy Name &and Value", null, CopyNameAndValueToClipboard),
+							new ToolStripMenuItem("Copy &Type", null, CopyTypeToClipboard),
 						]));
 			}
 			else
@@ -383,6 +389,7 @@ namespace NetHookAnalyzer2
 						null,
 						[
 							new ToolStripMenuItem("Copy &Name", null, CopyNameToClipboard),
+							new ToolStripMenuItem("Copy &Type", null, CopyTypeToClipboard),
 						]));
 			}
 
