@@ -106,7 +106,25 @@ namespace NetHookAnalyzer2
 		void DisplayDataAsAscii(object sender, EventArgs e)
 		{
 			var data = (byte[])value;
-			SetValueForDisplay(Encoding.ASCII.GetString(data).Replace("\0", "\\0", StringComparison.Ordinal));
+
+			var result = new StringBuilder( data.Length + 32 );
+			foreach ( byte b in data )
+			{
+				if ( b == 0 )
+				{
+					result.Append( "\\0" );
+				}
+				else if ( !char.IsAsciiLetterOrDigit( ( char )b ) )
+				{
+					result.Append( $"\\x{b:X2}" );
+				}
+				else
+				{
+					result.Append( ( char )b );
+				}
+			}
+
+			SetValueForDisplay(result.ToString());
 		}
 
 		void DisplayDataAsUTF8(object sender, EventArgs e)
