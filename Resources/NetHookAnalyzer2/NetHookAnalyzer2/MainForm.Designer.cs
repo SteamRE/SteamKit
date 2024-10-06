@@ -221,7 +221,7 @@
 			this.showAllCheckBox.Name = "showAllCheckBox";
 			this.showAllCheckBox.Size = new System.Drawing.Size(134, 19);
 			this.showAllCheckBox.TabIndex = 3;
-			this.showAllCheckBox.Text = "Show All Msg Values";
+			this.showAllCheckBox.Text = "Show Default Values";
 			this.showAllCheckBox.UseVisualStyleBackColor = true;
 			this.showAllCheckBox.CheckedChanged += new System.EventHandler(this.OnShowAllCheckedChanged);
 			// 
