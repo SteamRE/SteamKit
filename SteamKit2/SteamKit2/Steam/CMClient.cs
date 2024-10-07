@@ -430,6 +430,10 @@ namespace SteamKit2.Internal
             OnClientMsgReceived( GetPacketMsg( e.Data, this ) );
         }
 
+#if DEBUG
+        internal void ReceiveTestPacketMsg( IPacketMsg packetMsg ) => OnClientMsgReceived( packetMsg );
+#endif
+
         void Connected( object? sender, EventArgs e )
         {
             DebugLog.Assert( connection != null, nameof( CMClient ), "No connection object after connecting." );
