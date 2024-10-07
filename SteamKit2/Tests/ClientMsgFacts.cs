@@ -4,6 +4,7 @@ using Xunit;
 
 namespace Tests
 {
+#if DEBUG
     public class ClientMsgFacts
     {
         // this test vector is a packet meant for a ClientMsg<MsgClientChatEnter>
@@ -67,4 +68,5 @@ namespace Tests
             return CMClient.GetPacketMsg( structMsgData, DebugLogContext.Instance );
         }
     }
+#endif
 }

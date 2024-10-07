@@ -222,7 +222,7 @@ namespace Tests
 
                 for ( var i = 1; i <= callbacks.Length; i++ )
                 {
-                    await mgr.RunWaitCallbackAsync();
+                    await mgr.RunWaitCallbackAsync( TestContext.Current.CancellationToken );
                     Assert.Equal( i, numCallbacksRun );
                 }
 

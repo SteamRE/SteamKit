@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Tests
 {
+#if DEBUG
     public class StreamHelpersFacts
     {
         [Fact]
@@ -125,4 +126,5 @@ namespace Tests
             }
         }
     }
+#endif
 }

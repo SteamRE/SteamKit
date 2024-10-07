@@ -1,9 +1,11 @@
-﻿using SteamKit2;
+﻿using System.Threading.Tasks;
+using SteamKit2;
 using Xunit;
-using Xunit.Sdk;
+using Xunit.v3;
 
 namespace Tests
 {
+#if DEBUG
     class TestListener : IDebugListener
     {
         public void WriteLine( string category, string msg )
@@ -15,19 +17,21 @@ namespace Tests
 
     class DebugLogSetupTeardownAttribute : BeforeAfterTestAttribute
     {
-        public override void Before( System.Reflection.MethodInfo methodUnderTest )
+        public override ValueTask Before( System.Reflection.MethodInfo methodUnderTest, IXunitTest test )
         {
             DebugLog.ClearListeners();
+            return ValueTask.CompletedTask;
         }
 
-        public override void After( System.Reflection.MethodInfo methodUnderTest )
+        public override ValueTask After( System.Reflection.MethodInfo methodUnderTest, IXunitTest test )
         {
             DebugLog.Enabled = false;
             DebugLog.ClearListeners();
+            return ValueTask.CompletedTask;
         }
     }
 
-    [CollectionDefinition( nameof( DebugLogFacts ), DisableParallelization = true )]
+    [Collection( nameof( NotThreadSafeResourceCollection ) )]
     public class DebugLogFacts
     {
         [Fact, DebugLogSetupTeardown]
@@ -163,4 +167,5 @@ namespace Tests
             Assert.Equal( "My 1st message", message );
         }
     }
+#endif
 }

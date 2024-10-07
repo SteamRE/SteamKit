@@ -57,12 +57,14 @@ namespace Tests
             Assert.Equal( "SteamKit/" + steamKitAssemblyVersion.ToString( fieldCount: 3 ), client.DefaultRequestHeaders.UserAgent.ToString() );
         }
 
+#if DEBUG
         [Fact]
         public void DefaultMachineInfoProvider()
         {
             Assert.NotNull(configuration.MachineInfoProvider);
             Assert.IsNotType<DefaultMachineInfoProvider>(configuration.MachineInfoProvider);
         }
+#endif
 
         [Fact]
         public void ServerListProviderIsNothingFancy()

@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Tests
 {
+#if DEBUG
     public class MachineInfoFacts
     {
         [Fact]
@@ -90,7 +91,7 @@ namespace Tests
                 threads[i] = new Thread(state =>
                 {
                    var provider = (IMachineInfoProvider)state;
-                   trigger.Wait();
+                   trigger.Wait( TestContext.Current.CancellationToken );
                    HardwareUtils.Init(provider);
                    HardwareUtils.GetMachineID(provider);
                 });
@@ -201,4 +202,5 @@ namespace Tests
             public byte[] GetMachineGuid() => throw new InvalidOperationException("This provider only throws.");
         }
     }
+#endif
 }

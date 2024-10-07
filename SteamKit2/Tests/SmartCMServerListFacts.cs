@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Tests
 {
+    [Collection( nameof( NotThreadSafeResourceCollection ) )]
     public class SmartCMServerListFacts
     {
         public SmartCMServerListFacts()
@@ -69,6 +70,51 @@ namespace Tests
             Assert.Equal( ProtocolTypes.Tcp, nextRecord.ProtocolTypes );
         }
 
+        [Fact]
+        public void GetNextServerCandidate_OnlyReturnsMatchingServerOfType()
+        {
+            var record = ServerRecord.CreateWebSocketServer( "localhost:443" );
+            serverList.ReplaceList( new List<ServerRecord>() { record } );
+
+            var endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
+            Assert.Null( endPoint );
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Udp );
+            Assert.Null( endPoint );
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp | ProtocolTypes.Udp );
+            Assert.Null( endPoint );
+
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.WebSocket );
+            Assert.Equal( record.EndPoint, endPoint.EndPoint );
+            Assert.Equal( ProtocolTypes.WebSocket, endPoint.ProtocolTypes );
+
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.All );
+            Assert.Equal( record.EndPoint, endPoint.EndPoint );
+            Assert.Equal( ProtocolTypes.WebSocket, endPoint.ProtocolTypes );
+
+            record = ServerRecord.CreateSocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
+            serverList.ReplaceList( new List<ServerRecord>() { record } );
+
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.WebSocket );
+            Assert.Null( endPoint );
+
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
+            Assert.Equal( record.EndPoint, endPoint.EndPoint );
+            Assert.Equal( ProtocolTypes.Tcp, endPoint.ProtocolTypes );
+
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Udp );
+            Assert.Equal( record.EndPoint, endPoint.EndPoint );
+            Assert.Equal( ProtocolTypes.Udp, endPoint.ProtocolTypes );
+
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp | ProtocolTypes.Udp );
+            Assert.Equal( record.EndPoint, endPoint.EndPoint );
+            Assert.Equal( ProtocolTypes.Tcp, endPoint.ProtocolTypes );
+
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.All );
+            Assert.Equal( record.EndPoint, endPoint.EndPoint );
+            Assert.Equal( ProtocolTypes.Tcp, endPoint.ProtocolTypes );
+        }
+
+#if DEBUG
         [Fact]
         public void GetNextServerCandidate_ReturnsServer_IfListHasServers_EvenIfAllServersAreBad()
         {
@@ -137,50 +183,6 @@ namespace Tests
             var nextRecord = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
             Assert.Equal( serverBRecord.EndPoint, nextRecord.EndPoint );
             Assert.Equal( ProtocolTypes.Tcp, nextRecord.ProtocolTypes );
-        }
-        
-        [Fact]
-        public void GetNextServerCandidate_OnlyReturnsMatchingServerOfType()
-        {
-            var record = ServerRecord.CreateWebSocketServer( "localhost:443" );
-            serverList.ReplaceList( new List<ServerRecord>() { record } );
-
-            var endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
-            Assert.Null( endPoint );
-            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Udp );
-            Assert.Null( endPoint );
-            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp | ProtocolTypes.Udp);
-            Assert.Null( endPoint );
-
-            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.WebSocket );
-            Assert.Equal( record.EndPoint, endPoint.EndPoint );
-            Assert.Equal( ProtocolTypes.WebSocket, endPoint.ProtocolTypes );
-
-            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.All );
-            Assert.Equal( record.EndPoint, endPoint.EndPoint );
-            Assert.Equal( ProtocolTypes.WebSocket, endPoint.ProtocolTypes );
-
-            record = ServerRecord.CreateSocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
-            serverList.ReplaceList( new List<ServerRecord>() { record } );
-
-            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.WebSocket );
-            Assert.Null( endPoint );
-
-            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
-            Assert.Equal( record.EndPoint, endPoint.EndPoint );
-            Assert.Equal( ProtocolTypes.Tcp, endPoint.ProtocolTypes );
-
-            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Udp);
-            Assert.Equal( record.EndPoint, endPoint.EndPoint );
-            Assert.Equal( ProtocolTypes.Udp, endPoint.ProtocolTypes );
-
-            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp | ProtocolTypes.Udp );
-            Assert.Equal( record.EndPoint, endPoint.EndPoint );
-            Assert.Equal( ProtocolTypes.Tcp, endPoint.ProtocolTypes );
-
-            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.All );
-            Assert.Equal( record.EndPoint, endPoint.EndPoint );
-            Assert.Equal( ProtocolTypes.Tcp, endPoint.ProtocolTypes );
         }
 
         [Fact]
@@ -263,5 +265,6 @@ namespace Tests
             var marked = serverList.TryMark( new IPEndPoint( IPAddress.Loopback, 27016 ), record.ProtocolTypes, ServerQuality.Good );
             Assert.False( marked );
         }
+#endif
     }
 }

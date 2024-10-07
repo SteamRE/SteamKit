@@ -4,6 +4,7 @@ using Xunit;
 
 namespace Tests
 {
+#if DEBUG
     public class NetHelpersFacts
     {
         [Fact]
@@ -67,4 +68,5 @@ namespace Tests
             Assert.Equal( new IPEndPoint( IPAddress.IPv6Loopback, 1337 ), parsedIpv6 );
         }
     }
+#endif
 }

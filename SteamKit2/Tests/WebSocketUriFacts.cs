@@ -5,6 +5,7 @@ using Xunit;
 
 namespace Tests
 {
+#if DEBUG
     public class WebSocketUriFacts
     {
         [Fact]
@@ -38,4 +39,5 @@ namespace Tests
         {
         }
     }
+#endif
 }

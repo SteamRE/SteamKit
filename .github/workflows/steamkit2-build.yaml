@@ -49,8 +49,16 @@ jobs:
       if: matrix.os == 'windows-latest'
 
     - name: Run Tests
-      if: matrix.configuration == 'Debug'
-      run: dotnet test --verbosity normal SteamKit2/Tests/Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput='./Coverage/lcov.info' /p:Include="[SteamKit2]SteamKit*" /p:Exclude="[SteamKit2]SteamKit2*Internal*"
+      run: >
+        dotnet test 
+        --configuration ${{ matrix.configuration }}
+        --verbosity normal
+        SteamKit2/Tests/Tests.csproj
+        /p:CollectCoverage=true
+        /p:CoverletOutputFormat=lcov
+        /p:CoverletOutput='./Coverage/lcov.info'
+        /p:Include="[SteamKit2]SteamKit*"
+        /p:Exclude="[SteamKit2]SteamKit2*Internal*"
 
     - name: Upload test coverage
       uses: codecov/codecov-action@v4
