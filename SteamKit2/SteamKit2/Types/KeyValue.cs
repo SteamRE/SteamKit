@@ -232,6 +232,7 @@ namespace SteamKit2
             UInt64 = 7,
             End = 8,
             Int64 = 10,
+            AlternateEnd = 11,
         }
 
         /// <summary>
@@ -803,7 +804,7 @@ namespace SteamKit2
             {
                 var type = ( Type )input.ReadByte();
 
-                if ( type == Type.End )
+                if ( type is Type.End or Type.AlternateEnd )
                 {
                     break;
                 }

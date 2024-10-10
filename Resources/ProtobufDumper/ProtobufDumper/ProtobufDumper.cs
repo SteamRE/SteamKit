@@ -300,8 +300,8 @@ namespace ProtobufDumper
             {
                 var dependency = proto.dependency[ i ];
                 var modifier = string.Empty;
-                    
-                if( proto.public_dependency.Contains( i ) )
+
+                if ( proto.public_dependency.Contains( i ) )
                 {
                     modifier = "public ";
                 }

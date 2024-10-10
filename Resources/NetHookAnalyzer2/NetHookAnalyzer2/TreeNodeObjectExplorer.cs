@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
@@ -71,6 +70,11 @@ namespace NetHookAnalyzer2
 			Clipboard.SetText(name, TextDataFormat.Text);
 		}
 
+		void CopyTypeToClipboard(object sender, EventArgs e)
+		{
+			Clipboard.SetText(value.GetType().Name, TextDataFormat.Text);
+		}
+
 		void CopyValueToClipboard(object sender, EventArgs e)
 		{
 			var valueToCopy = clipboardCopyOverride ?? ValueForDisplay;
@@ -102,13 +106,31 @@ namespace NetHookAnalyzer2
 		void DisplayDataAsAscii(object sender, EventArgs e)
 		{
 			var data = (byte[])value;
-			SetValueForDisplay(Encoding.ASCII.GetString(data).Replace("\0", "\\0", StringComparison.InvariantCulture) );
+
+			var result = new StringBuilder( data.Length + 32 );
+			foreach ( byte b in data )
+			{
+				if ( b == 0 )
+				{
+					result.Append( "\\0" );
+				}
+				else if ( !char.IsAsciiLetterOrDigit( ( char )b ) )
+				{
+					result.Append( $"\\x{b:X2}" );
+				}
+				else
+				{
+					result.Append( ( char )b );
+				}
+			}
+
+			SetValueForDisplay(result.ToString());
 		}
 
 		void DisplayDataAsUTF8(object sender, EventArgs e)
 		{
 			var data = (byte[])value;
-			SetValueForDisplay(Encoding.UTF8.GetString(data).Replace("\0", "\\0", StringComparison.InvariantCulture));
+			SetValueForDisplay(Encoding.UTF8.GetString(data).Replace("\0", "\\0", StringComparison.Ordinal));
 		}
 
 		void DisplayDataAsHexadecimal(object sender, EventArgs e)
@@ -137,6 +159,37 @@ namespace NetHookAnalyzer2
 			else
 			{
 				SetValueForDisplay(null, childNodes: [new TreeNodeObjectExplorer(kv.Name, kv, configuration)]);
+			}
+
+			this.ExpandAll();
+		}
+
+		void DisplayDataAsBinaryKeyValuesLzma( object sender, EventArgs e )
+		{
+			var data = ( byte[] )value;
+			var kv = new KeyValue();
+			bool didRead;
+
+			using ( var compressed = new MemoryStream( data ) )
+			{
+				if ( !LzmaUtil.TryDecompress( compressed, static capacity => new MemoryStream( capacity ), out var decompressed ) )
+				{
+					SetValueForDisplay( "Not a valid LZMA-encoded blob!" );
+				}
+
+				using ( decompressed )
+				{ 
+					didRead = kv.TryReadAsBinary( decompressed );
+				}
+
+				if ( !didRead )
+				{
+					SetValueForDisplay( "Not a valid KeyValues object!" );
+				}
+				else
+				{
+					SetValueForDisplay( null, childNodes: [ new TreeNodeObjectExplorer( kv.Name, kv, configuration ) ] );
+				}
 			}
 
 			this.ExpandAll();
@@ -342,7 +395,8 @@ namespace NetHookAnalyzer2
 						[
 							new ToolStripMenuItem("Copy &Name", null, CopyNameToClipboard),
 							new ToolStripMenuItem("Copy &Value", null, CopyValueToClipboard),
-							new ToolStripMenuItem("Copy Name &and Value", null, CopyNameAndValueToClipboard)
+							new ToolStripMenuItem("Copy Name &and Value", null, CopyNameAndValueToClipboard),
+							new ToolStripMenuItem("Copy &Type", null, CopyTypeToClipboard),
 						]));
 			}
 			else
@@ -353,6 +407,7 @@ namespace NetHookAnalyzer2
 						null,
 						[
 							new ToolStripMenuItem("Copy &Name", null, CopyNameToClipboard),
+							new ToolStripMenuItem("Copy &Type", null, CopyTypeToClipboard),
 						]));
 			}
 
@@ -441,13 +496,20 @@ namespace NetHookAnalyzer2
 					ContextMenuItems.Add(new ToolStripMenuItem( "&Save to file...", null, SaveDataToFile));
 
 					var data = (byte[])value;
-					if (data.Length > 0 && data.Length <= MaxDataLengthForDisplay)
+					if ( data.Length > 0 )
 					{
-						ContextMenuItems.Add(new ToolStripMenuItem( "&ASCII", null, DisplayDataAsAscii).AsRadioCheck());
-						ContextMenuItems.Add(new ToolStripMenuItem( "&UTF-8", null, DisplayDataAsUTF8).AsRadioCheck());
-						ContextMenuItems.Add(new ToolStripMenuItem( "&Hexadecimal", null, DisplayDataAsHexadecimal){ Checked = true }.AsRadioCheck() );
-						ContextMenuItems.Add(new ToolStripMenuItem( "&Binary KeyValues (VDF)", null, DisplayDataAsBinaryKeyValues).AsRadioCheck());
-						ContextMenuItems.Add(new ToolStripMenuItem( "&Protobuf", null, DisplayDataAsProtobuf ).AsRadioCheck());
+
+						ContextMenuItems.Add( new ToolStripMenuItem( "&Binary KeyValues (VDF)", null, DisplayDataAsBinaryKeyValues ).AsRadioCheck() );
+
+						if ( LzmaUtil.HasLzmaHeader( data ) )
+						{
+							ContextMenuItems.Add( new ToolStripMenuItem( "&Binary KeyValues (VDF) [LZMA-encoded]", null, DisplayDataAsBinaryKeyValuesLzma ).AsRadioCheck() );
+						}
+
+						ContextMenuItems.Add( new ToolStripMenuItem( "&Protobuf", null, DisplayDataAsProtobuf ).AsRadioCheck() );
+						ContextMenuItems.Add( new ToolStripMenuItem( "&ASCII", null, DisplayDataAsAscii ).AsRadioCheck() );
+						ContextMenuItems.Add( new ToolStripMenuItem( "&UTF-8", null, DisplayDataAsUTF8 ).AsRadioCheck() );
+						ContextMenuItems.Add( new ToolStripMenuItem( "&Hexadecimal", null, DisplayDataAsHexadecimal ) { Checked = true }.AsRadioCheck() );
 					}
 				}
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace ProtobufDumper
 {
@@ -11,8 +12,8 @@ namespace ProtobufDumper
         {
             Environment.ExitCode = 0;
 
-            var namedArgs = new List<String>();
-            var unnamedArgs = new List<String>();
+            var namedArgs = new List<string>();
+            var unnamedArgs = new List<string>();
 
             foreach ( var arg in args )
             {
@@ -24,6 +25,13 @@ namespace ProtobufDumper
 
             if ( unnamedArgs.Count == 0 )
             {
+                if ( namedArgs.Contains( "-v" ) )
+                {
+                    var version = typeof( Program ).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+                    Console.WriteLine( $"{nameof( ProtobufDumper )} version: {version}" );
+                    return;
+                }
+
                 Console.WriteLine( "No target specified." );
 
                 Environment.ExitCode = -1;
@@ -32,7 +40,7 @@ namespace ProtobufDumper
 
             var hasDumpCandidates = namedArgs.Contains( "-dump", StringComparer.OrdinalIgnoreCase );
 
-            var targets = new List<String>();
+            var targets = new List<string>();
             string output = null;
 
             for ( var i = 0; i < unnamedArgs.Count; i++ )
