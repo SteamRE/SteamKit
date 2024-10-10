@@ -5,6 +5,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+
 using ProtoBuf;
 
 namespace SteamKit2
@@ -17,7 +19,7 @@ namespace SteamKit2
         private readonly Dictionary<string, UnifiedService> _handlers = [ ];
 
         /// <summary>
-        /// Creates a service that can be used to send messages via Steamworks unified messaging.
+        /// Creates a service that can be used to send messages and receive notifications via Steamworks unified messaging.
         /// </summary>
         /// <typeparam name="TService">The type of the service to create.</typeparam>
         /// <returns>The instance to create requests.</returns>
@@ -103,12 +105,27 @@ namespace SteamKit2
                 return;
 
             var serviceName = jobName[ ..dot ].ToString();
-            if (!_handlers.TryGetValue( serviceName, out var handler ) )
-                return;
 
-            var methodName = jobName[ ( dot + 1 )..hash ].ToString();
-
-            handler.HandleMsg( methodName, packetMsg );
+            switch ( packetMsgProto.MsgType )
+            {
+                case EMsg.ServiceMethodResponse:
+                {
+                    if (!_handlers.TryGetValue( serviceName, out var handler ) )
+                        return;
+                    var methodName = jobName[ ( dot + 1 )..hash ].ToString();
+                    handler.HandleMsg( methodName, packetMsg );
+                    break;
+                }
+                case EMsg.ServiceMethod:
+                {
+                    if ( !int.TryParse( jobName[ ( hash + 1 ).. ], NumberFormatInfo.InvariantInfo, out var version ) )
+                        return;
+                    var methodName = jobName[ ( dot + 1 )..hash ].ToString();
+                    var notification = new ServiceMethodNotification( packetMsgProto, serviceName, methodName, version );
+                    Client.PostCallback( notification );
+                    break;
+                }
+            }
         }
 
         internal void HandleServiceMsg<TService>( IPacketMsg packetMsg )
