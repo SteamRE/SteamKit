@@ -2880,45 +2880,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgDOTACompendiumRemoveAllSelections : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint leagueid
-        {
-            get => __pbn__leagueid.GetValueOrDefault();
-            set => __pbn__leagueid = value;
-        }
-        public bool ShouldSerializeleagueid() => __pbn__leagueid != null;
-        public void Resetleagueid() => __pbn__leagueid = null;
-        private uint? __pbn__leagueid;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgDOTACompendiumRemoveAllSelectionsResponse : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(2u)]
-        public uint eresult
-        {
-            get => __pbn__eresult ?? 2u;
-            set => __pbn__eresult = value;
-        }
-        public bool ShouldSerializeeresult() => __pbn__eresult != null;
-        public void Reseteresult() => __pbn__eresult = null;
-        private uint? __pbn__eresult;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgDOTACompendiumData : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;

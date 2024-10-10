@@ -201,15 +201,46 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public interface ICloudConfigStore
+    public class CloudConfigStore : SteamUnifiedMessages.UnifiedService
     {
-        CCloudConfigStore_Download_Response Download(CCloudConfigStore_Download_Request request);
-        CCloudConfigStore_Upload_Response Upload(CCloudConfigStore_Upload_Request request);
+        public override string ServiceName { get; } = "CloudConfigStore";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloudConfigStore_Download_Response>> Download(CCloudConfigStore_Download_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCloudConfigStore_Download_Request, CCloudConfigStore_Download_Response>( "CloudConfigStore.Download#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloudConfigStore_Upload_Response>> Upload(CCloudConfigStore_Upload_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCloudConfigStore_Upload_Request, CCloudConfigStore_Upload_Response>( "CloudConfigStore.Upload#1", request );
+        }
+
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "Download":
+                    UnifiedMessages.HandleServiceMsg<CCloudConfigStore_Download_Response>( packetMsg );
+                    break;
+                case "Upload":
+                    UnifiedMessages.HandleServiceMsg<CCloudConfigStore_Upload_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface ICloudConfigStoreClient
+    public class CloudConfigStoreClient : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse NotifyChange(CCloudConfigStore_Change_Notification request);
+        public override string ServiceName { get; } = "CloudConfigStoreClient";
+
+        public void NotifyChange(CCloudConfigStore_Change_Notification request)
+        {
+            UnifiedMessages.SendNotification<CCloudConfigStore_Change_Notification>( "CloudConfigStoreClient.NotifyChange#1", request );
+        }
+
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        {
+        }
     }
 
 }

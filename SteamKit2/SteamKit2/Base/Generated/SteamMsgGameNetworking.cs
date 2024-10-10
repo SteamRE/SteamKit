@@ -92,10 +92,29 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface IGameNetworking
+    public class GameNetworking : SteamUnifiedMessages.UnifiedService
     {
-        CGameNetworking_AllocateFakeIP_Response AllocateFakeIP(CGameNetworking_AllocateFakeIP_Request request);
-        NoResponse NotifyReleaseFakeIP(CGameNetworking_ReleaseFakeIP_Notification request);
+        public override string ServiceName { get; } = "GameNetworking";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameNetworking_AllocateFakeIP_Response>> AllocateFakeIP(CGameNetworking_AllocateFakeIP_Request request)
+        {
+            return UnifiedMessages.SendMessage<CGameNetworking_AllocateFakeIP_Request, CGameNetworking_AllocateFakeIP_Response>( "GameNetworking.AllocateFakeIP#1", request );
+        }
+
+        public void NotifyReleaseFakeIP(CGameNetworking_ReleaseFakeIP_Notification request)
+        {
+            UnifiedMessages.SendNotification<CGameNetworking_ReleaseFakeIP_Notification>( "GameNetworking.NotifyReleaseFakeIP#1", request );
+        }
+
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "AllocateFakeIP":
+                    UnifiedMessages.HandleServiceMsg<CGameNetworking_AllocateFakeIP_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

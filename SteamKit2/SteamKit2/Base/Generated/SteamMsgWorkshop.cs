@@ -77,9 +77,24 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface IWorkshop
+    public class Workshop : SteamUnifiedMessages.UnifiedService
     {
-        CWorkshop_GetEULAStatus_Response GetEULAStatus(CWorkshop_GetEULAStatus_Request request);
+        public override string ServiceName { get; } = "Workshop";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CWorkshop_GetEULAStatus_Response>> GetEULAStatus(CWorkshop_GetEULAStatus_Request request)
+        {
+            return UnifiedMessages.SendMessage<CWorkshop_GetEULAStatus_Request, CWorkshop_GetEULAStatus_Response>( "Workshop.GetEULAStatus#1", request );
+        }
+
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "GetEULAStatus":
+                    UnifiedMessages.HandleServiceMsg<CWorkshop_GetEULAStatus_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

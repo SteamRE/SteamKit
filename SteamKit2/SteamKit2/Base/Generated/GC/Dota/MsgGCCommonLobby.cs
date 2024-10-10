@@ -573,6 +573,184 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetcomms_reports_available() => __pbn__comms_reports_available = null;
         private uint? __pbn__comms_reports_available;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string deprecated_name
+        {
+            get => __pbn__deprecated_name ?? "";
+            set => __pbn__deprecated_name = value;
+        }
+        public bool ShouldSerializedeprecated_name() => __pbn__deprecated_name != null;
+        public void Resetdeprecated_name() => __pbn__deprecated_name = null;
+        private string __pbn__deprecated_name;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public ulong deprecated_party_id
+        {
+            get => __pbn__deprecated_party_id.GetValueOrDefault();
+            set => __pbn__deprecated_party_id = value;
+        }
+        public bool ShouldSerializedeprecated_party_id() => __pbn__deprecated_party_id != null;
+        public void Resetdeprecated_party_id() => __pbn__deprecated_party_id = null;
+        private ulong? __pbn__deprecated_party_id;
+
+        [global::ProtoBuf.ProtoMember(53)]
+        public global::System.Collections.Generic.List<uint> deprecated_coached_account_ids { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(42)]
+        public uint deprecated_coach_rating
+        {
+            get => __pbn__deprecated_coach_rating.GetValueOrDefault();
+            set => __pbn__deprecated_coach_rating = value;
+        }
+        public bool ShouldSerializedeprecated_coach_rating() => __pbn__deprecated_coach_rating != null;
+        public void Resetdeprecated_coach_rating() => __pbn__deprecated_coach_rating = null;
+        private uint? __pbn__deprecated_coach_rating;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        [global::System.ComponentModel.DefaultValue(6u)]
+        public uint deprecated_channel
+        {
+            get => __pbn__deprecated_channel ?? 6u;
+            set => __pbn__deprecated_channel = value;
+        }
+        public bool ShouldSerializedeprecated_channel() => __pbn__deprecated_channel != null;
+        public void Resetdeprecated_channel() => __pbn__deprecated_channel = null;
+        private uint? __pbn__deprecated_channel;
+
+        [global::ProtoBuf.ProtoMember(30)]
+        public bool deprecated_cameraman
+        {
+            get => __pbn__deprecated_cameraman.GetValueOrDefault();
+            set => __pbn__deprecated_cameraman = value;
+        }
+        public bool ShouldSerializedeprecated_cameraman() => __pbn__deprecated_cameraman != null;
+        public void Resetdeprecated_cameraman() => __pbn__deprecated_cameraman = null;
+        private bool? __pbn__deprecated_cameraman;
+
+        [global::ProtoBuf.ProtoMember(35)]
+        public ulong deprecated_favorite_team_packed
+        {
+            get => __pbn__deprecated_favorite_team_packed.GetValueOrDefault();
+            set => __pbn__deprecated_favorite_team_packed = value;
+        }
+        public bool ShouldSerializedeprecated_favorite_team_packed() => __pbn__deprecated_favorite_team_packed != null;
+        public void Resetdeprecated_favorite_team_packed() => __pbn__deprecated_favorite_team_packed = null;
+        private ulong? __pbn__deprecated_favorite_team_packed;
+
+        [global::ProtoBuf.ProtoMember(36)]
+        public bool deprecated_is_plus_subscriber
+        {
+            get => __pbn__deprecated_is_plus_subscriber.GetValueOrDefault();
+            set => __pbn__deprecated_is_plus_subscriber = value;
+        }
+        public bool ShouldSerializedeprecated_is_plus_subscriber() => __pbn__deprecated_is_plus_subscriber != null;
+        public void Resetdeprecated_is_plus_subscriber() => __pbn__deprecated_is_plus_subscriber = null;
+        private bool? __pbn__deprecated_is_plus_subscriber;
+
+        [global::ProtoBuf.ProtoMember(38)]
+        public uint deprecated_lane_selection_flags
+        {
+            get => __pbn__deprecated_lane_selection_flags.GetValueOrDefault();
+            set => __pbn__deprecated_lane_selection_flags = value;
+        }
+        public bool ShouldSerializedeprecated_lane_selection_flags() => __pbn__deprecated_lane_selection_flags != null;
+        public void Resetdeprecated_lane_selection_flags() => __pbn__deprecated_lane_selection_flags = null;
+        private uint? __pbn__deprecated_lane_selection_flags;
+
+        [global::ProtoBuf.ProtoMember(39)]
+        public bool deprecated_can_earn_rewards
+        {
+            get => __pbn__deprecated_can_earn_rewards.GetValueOrDefault();
+            set => __pbn__deprecated_can_earn_rewards = value;
+        }
+        public bool ShouldSerializedeprecated_can_earn_rewards() => __pbn__deprecated_can_earn_rewards != null;
+        public void Resetdeprecated_can_earn_rewards() => __pbn__deprecated_can_earn_rewards = null;
+        private bool? __pbn__deprecated_can_earn_rewards;
+
+        [global::ProtoBuf.ProtoMember(43)]
+        public bool deprecated_was_mvp_last_game
+        {
+            get => __pbn__deprecated_was_mvp_last_game.GetValueOrDefault();
+            set => __pbn__deprecated_was_mvp_last_game = value;
+        }
+        public bool ShouldSerializedeprecated_was_mvp_last_game() => __pbn__deprecated_was_mvp_last_game != null;
+        public void Resetdeprecated_was_mvp_last_game() => __pbn__deprecated_was_mvp_last_game = null;
+        private bool? __pbn__deprecated_was_mvp_last_game;
+
+        [global::ProtoBuf.ProtoMember(46)]
+        [global::System.ComponentModel.DefaultValue(EDOTAMMRBoostType.k_EDOTAMMRBoostType_None)]
+        public EDOTAMMRBoostType deprecated_rank_mmr_boost_type
+        {
+            get => __pbn__deprecated_rank_mmr_boost_type ?? EDOTAMMRBoostType.k_EDOTAMMRBoostType_None;
+            set => __pbn__deprecated_rank_mmr_boost_type = value;
+        }
+        public bool ShouldSerializedeprecated_rank_mmr_boost_type() => __pbn__deprecated_rank_mmr_boost_type != null;
+        public void Resetdeprecated_rank_mmr_boost_type() => __pbn__deprecated_rank_mmr_boost_type = null;
+        private EDOTAMMRBoostType? __pbn__deprecated_rank_mmr_boost_type;
+
+        [global::ProtoBuf.ProtoMember(47, DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
+        public int deprecated_queue_point_adjustment
+        {
+            get => __pbn__deprecated_queue_point_adjustment.GetValueOrDefault();
+            set => __pbn__deprecated_queue_point_adjustment = value;
+        }
+        public bool ShouldSerializedeprecated_queue_point_adjustment() => __pbn__deprecated_queue_point_adjustment != null;
+        public void Resetdeprecated_queue_point_adjustment() => __pbn__deprecated_queue_point_adjustment = null;
+        private int? __pbn__deprecated_queue_point_adjustment;
+
+        [global::ProtoBuf.ProtoMember(48)]
+        public int deprecated_rank_tier
+        {
+            get => __pbn__deprecated_rank_tier.GetValueOrDefault();
+            set => __pbn__deprecated_rank_tier = value;
+        }
+        public bool ShouldSerializedeprecated_rank_tier() => __pbn__deprecated_rank_tier != null;
+        public void Resetdeprecated_rank_tier() => __pbn__deprecated_rank_tier = null;
+        private int? __pbn__deprecated_rank_tier;
+
+        [global::ProtoBuf.ProtoMember(50)]
+        public uint deprecated_title
+        {
+            get => __pbn__deprecated_title.GetValueOrDefault();
+            set => __pbn__deprecated_title = value;
+        }
+        public bool ShouldSerializedeprecated_title() => __pbn__deprecated_title != null;
+        public void Resetdeprecated_title() => __pbn__deprecated_title = null;
+        private uint? __pbn__deprecated_title;
+
+        [global::ProtoBuf.ProtoMember(51)]
+        public uint deprecated_guild_id
+        {
+            get => __pbn__deprecated_guild_id.GetValueOrDefault();
+            set => __pbn__deprecated_guild_id = value;
+        }
+        public bool ShouldSerializedeprecated_guild_id() => __pbn__deprecated_guild_id != null;
+        public void Resetdeprecated_guild_id() => __pbn__deprecated_guild_id = null;
+        private uint? __pbn__deprecated_guild_id;
+
+        [global::ProtoBuf.ProtoMember(54)]
+        public bool deprecated_is_steam_china
+        {
+            get => __pbn__deprecated_is_steam_china.GetValueOrDefault();
+            set => __pbn__deprecated_is_steam_china = value;
+        }
+        public bool ShouldSerializedeprecated_is_steam_china() => __pbn__deprecated_is_steam_china != null;
+        public void Resetdeprecated_is_steam_china() => __pbn__deprecated_is_steam_china = null;
+        private bool? __pbn__deprecated_is_steam_china;
+
+        [global::ProtoBuf.ProtoMember(41, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public global::System.Collections.Generic.List<uint> deprecated_disabled_random_hero_bits { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(20)]
+        public global::System.Collections.Generic.List<int> deprecated_disabled_hero_id { get; } = new global::System.Collections.Generic.List<int>();
+
+        [global::ProtoBuf.ProtoMember(22)]
+        public global::System.Collections.Generic.List<int> deprecated_enabled_hero_id { get; } = new global::System.Collections.Generic.List<int>();
+
+        [global::ProtoBuf.ProtoMember(57)]
+        public global::System.Collections.Generic.List<int> deprecated_banned_hero_ids { get; } = new global::System.Collections.Generic.List<int>();
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2070,6 +2248,9 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(118)]
         public global::System.Collections.Generic.List<CLobbyGuildDetails> guild_details { get; } = new global::System.Collections.Generic.List<CLobbyGuildDetails>();
 
+        [global::ProtoBuf.ProtoMember(119)]
+        public global::System.Collections.Generic.List<CMsgLobbyEventPoints> deprecated_lobby_event_points { get; } = new global::System.Collections.Generic.List<CMsgLobbyEventPoints>();
+
         [global::ProtoBuf.ProtoMember(124)]
         public global::System.Collections.Generic.List<int> requested_hero_ids { get; } = new global::System.Collections.Generic.List<int>();
 
@@ -2116,6 +2297,9 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeevent_game_definition() => __pbn__event_game_definition != null;
         public void Resetevent_game_definition() => __pbn__event_game_definition = null;
         private string __pbn__event_game_definition;
+
+        [global::ProtoBuf.ProtoMember(130)]
+        public global::System.Collections.Generic.List<CExtraMsg> deprecated_extra_startup_messages { get; } = new global::System.Collections.Generic.List<CExtraMsg>();
 
         [global::ProtoBuf.ProtoMember(131)]
         public CDOTALobbyMatchQualityData match_quality_data { get; set; }

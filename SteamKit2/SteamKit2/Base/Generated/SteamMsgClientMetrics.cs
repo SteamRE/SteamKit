@@ -1357,16 +1357,6 @@ namespace SteamKit2.Internal
         public void Resetgameid() => __pbn__gameid = null;
         private ulong? __pbn__gameid;
 
-        [global::ProtoBuf.ProtoMember(5)]
-        public bool instant_clip
-        {
-            get => __pbn__instant_clip.GetValueOrDefault();
-            set => __pbn__instant_clip = value;
-        }
-        public bool ShouldSerializeinstant_clip() => __pbn__instant_clip != null;
-        public void Resetinstant_clip() => __pbn__instant_clip = null;
-        private bool? __pbn__instant_clip;
-
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1407,22 +1397,83 @@ namespace SteamKit2.Internal
         k_EClipRangeMethod_EntireClip = 6,
     }
 
-    public interface IClientMetrics
+    public class ClientMetrics : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse ClientAppInterfaceStatsReport(CClientMetrics_AppInterfaceStats_Notification request);
-        NoResponse ClientIPv6ConnectivityReport(CClientMetrics_IPv6Connectivity_Notification request);
-        NoResponse SteamPipeWorkStatsReport(CClientMetrics_SteamPipeWorkStats_Notification request);
-        NoResponse ReportReactUsage(CClientMetrics_ReportReactUsage_Notification request);
-        NoResponse ReportClientError(CClientMetrics_ReportClientError_Notification request);
-        NoResponse ClientBootstrapReport(CClientMetrics_ClientBootstrap_Notification request);
-        NoResponse ClientDownloadRatesReport(CClientMetrics_DownloadRates_Notification request);
-        NoResponse ClientContentValidationReport(CClientMetrics_ContentValidation_Notification request);
-        NoResponse ClientCloudAppSyncStats(CClientMetrics_CloudAppSyncStats_Notification request);
-        NoResponse ClientDownloadResponseCodeCounts(CClientMetrics_ContentDownloadResponse_Counts_Notification request);
-        NoResponse ReportClientArgs(CClientMetrics_ReportClientArgs_Notification request);
-        NoResponse ReportClipShare(CClientMetrics_ClipShare_Notification request);
-        NoResponse ReportClipRange(CClientMetrics_ClipRange_Notification request);
-        NoResponse ReportEndGameRecording(CClientMetrics_EndGameRecording_Notification request);
+        public override string ServiceName { get; } = "ClientMetrics";
+
+        public void ClientAppInterfaceStatsReport(CClientMetrics_AppInterfaceStats_Notification request)
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_AppInterfaceStats_Notification>( "ClientMetrics.ClientAppInterfaceStatsReport#1", request );
+        }
+
+        public void ClientIPv6ConnectivityReport(CClientMetrics_IPv6Connectivity_Notification request)
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_IPv6Connectivity_Notification>( "ClientMetrics.ClientIPv6ConnectivityReport#1", request );
+        }
+
+        public void SteamPipeWorkStatsReport(CClientMetrics_SteamPipeWorkStats_Notification request)
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_SteamPipeWorkStats_Notification>( "ClientMetrics.SteamPipeWorkStatsReport#1", request );
+        }
+
+        public void ReportReactUsage(CClientMetrics_ReportReactUsage_Notification request)
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_ReportReactUsage_Notification>( "ClientMetrics.ReportReactUsage#1", request );
+        }
+
+        public void ReportClientError(CClientMetrics_ReportClientError_Notification request)
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_ReportClientError_Notification>( "ClientMetrics.ReportClientError#1", request );
+        }
+
+        public void ClientBootstrapReport(CClientMetrics_ClientBootstrap_Notification request)
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_ClientBootstrap_Notification>( "ClientMetrics.ClientBootstrapReport#1", request );
+        }
+
+        public void ClientDownloadRatesReport(CClientMetrics_DownloadRates_Notification request)
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_DownloadRates_Notification>( "ClientMetrics.ClientDownloadRatesReport#1", request );
+        }
+
+        public void ClientContentValidationReport(CClientMetrics_ContentValidation_Notification request)
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_ContentValidation_Notification>( "ClientMetrics.ClientContentValidationReport#1", request );
+        }
+
+        public void ClientCloudAppSyncStats(CClientMetrics_CloudAppSyncStats_Notification request)
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_CloudAppSyncStats_Notification>( "ClientMetrics.ClientCloudAppSyncStats#1", request );
+        }
+
+        public void ClientDownloadResponseCodeCounts(CClientMetrics_ContentDownloadResponse_Counts_Notification request)
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_ContentDownloadResponse_Counts_Notification>( "ClientMetrics.ClientDownloadResponseCodeCounts#1", request );
+        }
+
+        public void ReportClientArgs(CClientMetrics_ReportClientArgs_Notification request)
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_ReportClientArgs_Notification>( "ClientMetrics.ReportClientArgs#1", request );
+        }
+
+        public void ReportClipShare(CClientMetrics_ClipShare_Notification request)
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_ClipShare_Notification>( "ClientMetrics.ReportClipShare#1", request );
+        }
+
+        public void ReportClipRange(CClientMetrics_ClipRange_Notification request)
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_ClipRange_Notification>( "ClientMetrics.ReportClipRange#1", request );
+        }
+
+        public void ReportEndGameRecording(CClientMetrics_EndGameRecording_Notification request)
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_EndGameRecording_Notification>( "ClientMetrics.ReportEndGameRecording#1", request );
+        }
+
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        {
+        }
     }
 
 }

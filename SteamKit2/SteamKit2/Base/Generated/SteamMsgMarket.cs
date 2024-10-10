@@ -108,9 +108,24 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface IEconMarket
+    public class EconMarket : SteamUnifiedMessages.UnifiedService
     {
-        CEconMarket_IsMarketplaceAllowed_Response IsMarketplaceAllowed(CEconMarket_IsMarketplaceAllowed_Request request);
+        public override string ServiceName { get; } = "EconMarket";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CEconMarket_IsMarketplaceAllowed_Response>> IsMarketplaceAllowed(CEconMarket_IsMarketplaceAllowed_Request request)
+        {
+            return UnifiedMessages.SendMessage<CEconMarket_IsMarketplaceAllowed_Request, CEconMarket_IsMarketplaceAllowed_Response>( "EconMarket.IsMarketplaceAllowed#1", request );
+        }
+
+        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "IsMarketplaceAllowed":
+                    UnifiedMessages.HandleServiceMsg<CEconMarket_IsMarketplaceAllowed_Response>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }
