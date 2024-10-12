@@ -1,4 +1,4 @@
-﻿/*
+/*
  * This file is subject to the terms and conditions defined in
  * file 'license.txt', which is part of this source code package.
  */
@@ -792,6 +792,13 @@ namespace SteamKit2
                 Result = ( EResult )msg.eresult;
                 Token = msg.token;
                 Expiration = DateUtils.DateTimeFromUnixTime( msg.expiration_time );
+            }
+
+            internal CDNAuthTokenCallback(CContentServerDirectory_GetCDNAuthToken_Response response)
+            {
+                Result = EResult.OK;
+                Token = response.token;
+                Expiration = DateUtils.DateTimeFromUnixTime(response.expiration_time);
             }
         }
 
