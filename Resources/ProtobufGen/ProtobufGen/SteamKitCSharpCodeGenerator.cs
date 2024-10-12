@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Google.Protobuf.Reflection;
 using ProtoBuf.Reflection;
 
 namespace ProtobufGen
 {
-    class SteamKitCSharpCodeGenerator : CSharpCodeGenerator
+    internal class SteamKitCSharpCodeGenerator : CSharpCodeGenerator
     {
         protected override bool UseArray( FieldDescriptorProto field ) => false;
 
@@ -43,43 +44,74 @@ namespace ProtobufGen
 
         protected override void WriteServiceFooter( GeneratorContext ctx, ServiceDescriptorProto service, ref object state )
         {
-            ctx.WriteLine( "public override void HandleMsg( string methodName, IPacketMsg packetMsg )" )
+            var services = service.Methods
+                .Where( static serviceMethod => serviceMethod.OutputType.AsSpan()[ 1.. ] is not "NoResponse")
+                .ToList();
+
+            ctx.WriteLine( "public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )" )
                 .WriteLine( "{" );
 
-                var methods = service.Methods
-                    .Where( static serviceMethod => serviceMethod.OutputType[ 1.. ] != "NoResponse")
-                    .ToList();
+            if ( services.Count != 0 )
+            {
+                ctx.Indent()
+                    .WriteLine( "switch ( methodName )" )
+                    .WriteLine( "{" )
+                    .Indent();
 
-                if ( methods.Count != 0 )
+                foreach ( var serviceMethod in services )
                 {
-                    ctx.Indent()
-                        .WriteLine( "switch ( methodName )" )
-                        .WriteLine( "{" )
-                        .Indent();
-
-                    foreach ( var serviceMethod in methods )
-                    {
-                        ctx.WriteLine( $"case \"{Escape( serviceMethod.Name )}\":" )
-                            .Indent()
-                            .WriteLine( $"UnifiedMessages.HandleServiceMsg<{Escape( serviceMethod.OutputType[ 1.. ] )}>( packetMsg );" )
-                            .WriteLine( "break;" )
-                            .Outdent();
-                    }
-
-                    ctx.Outdent()
-                        .WriteLine( "}" )
+                    ctx.WriteLine( $"case \"{Escape( serviceMethod.Name )}\":" )
+                        .Indent()
+                        .WriteLine( $"UnifiedMessages.HandleResponseMsg<{Escape( serviceMethod.OutputType[ 1.. ] )}>( packetMsg );" )
+                        .WriteLine( "break;" )
                         .Outdent();
                 }
 
-                ctx.WriteLine( "}" )
-                    .Outdent()
+                ctx.Outdent()
                     .WriteLine( "}" )
-                    .WriteLine();
+                    .Outdent();
+            }
+
+            ctx.WriteLine( "}" )
+                .WriteLine();
+
+            var notifications = service.Methods
+                .Where( static serviceMethod => serviceMethod.OutputType.AsSpan()[ 1.. ] is "NoResponse")
+                .ToList();
+
+            ctx.WriteLine( "public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )" )
+                .WriteLine( "{" );
+
+            if ( notifications.Count != 0 )
+            {
+                ctx.Indent()
+                    .WriteLine( "switch ( methodName )" )
+                    .WriteLine( "{" )
+                    .Indent();
+
+                foreach ( var notificationMethod in notifications )
+                {
+                    ctx.WriteLine( $"case \"{Escape( notificationMethod.Name )}\":" )
+                        .Indent()
+                        .WriteLine( $"UnifiedMessages.HandleNotificationMsg<{Escape( notificationMethod.InputType[ 1.. ] )}>( packetMsg );" )
+                        .WriteLine( "break;" )
+                        .Outdent();
+                }
+
+                ctx.Outdent()
+                    .WriteLine( "}" )
+                    .Outdent();
+            }
+
+            ctx.WriteLine( "}" )
+                .Outdent()
+                .WriteLine( "}" )
+                .WriteLine();
         }
 
         protected override void WriteServiceMethod( GeneratorContext ctx, MethodDescriptorProto method, ref object state )
         {
-            if ( method.OutputType[ 1.. ] == "NoResponse" )
+            if ( method.OutputType.AsSpan()[ 1.. ] is "NoResponse" )
             {
                 ctx.WriteLine( $"public void {Escape( method.Name )}({Escape( MakeRelativeName( ctx, method.InputType ) )} request)" )
                     .WriteLine( "{" )

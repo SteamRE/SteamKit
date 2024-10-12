@@ -106,32 +106,31 @@ namespace SteamKit2
 
             var serviceName = jobName[ ..dot ].ToString();
 
+            if (!_handlers.TryGetValue( serviceName, out var handler ) )
+                return;
+
+            var methodName = jobName[ ( dot + 1 )..hash ].ToString();
+
             switch ( packetMsgProto.MsgType )
             {
                 case EMsg.ServiceMethodResponse:
-                {
-                    if (!_handlers.TryGetValue( serviceName, out var handler ) )
-                        return;
-                    var methodName = jobName[ ( dot + 1 )..hash ].ToString();
-                    handler.HandleMsg( methodName, packetMsg );
+                    handler.HandleResponseMsg( methodName, packetMsgProto );
                     break;
-                }
                 case EMsg.ServiceMethod:
-                {
-                    if ( !int.TryParse( jobName[ ( hash + 1 ).. ], NumberFormatInfo.InvariantInfo, out var version ) )
-                        return;
-                    var methodName = jobName[ ( dot + 1 )..hash ].ToString();
-                    var notification = new ServiceMethodNotification( packetMsgProto, serviceName, methodName, version );
-                    Client.PostCallback( notification );
+                    handler.HandleNotificationMsg( methodName, packetMsgProto );
                     break;
-                }
             }
         }
 
-        internal void HandleServiceMsg<TService>( IPacketMsg packetMsg )
-            where TService : IExtensible, new()
+        internal void HandleResponseMsg<TService>( PacketClientMsgProtobuf packetMsg) where TService : IExtensible, new()
         {
-            var callback = new ServiceMethodResponse<TService>( (packetMsg as PacketClientMsgProtobuf)! );
+            var callback = new ServiceMethodResponse<TService>( packetMsg );
+            Client.PostCallback( callback );
+        }
+
+        internal void HandleNotificationMsg<TService>( PacketClientMsgProtobuf packetMsg) where TService : IExtensible, new()
+        {
+            var callback = new ServiceMethodNotification<TService>( packetMsg );
             Client.PostCallback( callback );
         }
 
@@ -141,11 +140,18 @@ namespace SteamKit2
         public abstract class UnifiedService : IDisposable
         {
             /// <summary>
-            /// Handles a message for this service. This should not be called directly.
+            /// Handles a response message for this service. This should not be called directly.
             /// </summary>
             /// <param name="methodName">The name of the method the service should handle</param>
             /// <param name="packetMsg">The packet message that contains the data</param>
-            public abstract void HandleMsg( string methodName, IPacketMsg packetMsg );
+            public abstract void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg );
+
+            /// <summary>
+            /// Handles a notification message for this service. This should not be called directly.
+            /// </summary>
+            /// <param name="methodName">The name of the method the service should handle</param>
+            /// <param name="packetMsg">The packet message that contains the data</param>
+            public abstract void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg );
 
             /// <summary>
             /// The name of the steam unified messages service.
