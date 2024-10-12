@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SteamKit2.Internal;
-using static SteamKit2.SteamApps;
 
 namespace SteamKit2
 {
@@ -16,6 +15,27 @@ namespace SteamKit2
     /// </summary>
     public sealed class SteamContent : ClientMsgHandler
     {
+        /// <summary>
+        /// This is received when a CDN auth token is received
+        /// </summary>
+        public sealed class CDNAuthToken
+        {
+            /// <summary>
+            /// CDN auth token
+            /// </summary>
+            public string Token { get; set; }
+            /// <summary>
+            /// Token expiration date
+            /// </summary>
+            public DateTime Expiration { get; set; }
+
+            internal CDNAuthToken( CContentServerDirectory_GetCDNAuthToken_Response response )
+            {
+                Token = response.token;
+                Expiration = DateUtils.DateTimeFromUnixTime( response.expiration_time );
+            }
+        }
+
         /// <summary>
         /// Load a list of servers from the Content Server Directory Service.
         /// This is an alternative to <see cref="o:ContentServerDirectoryService.LoadAsync"></see>.
@@ -94,14 +114,14 @@ namespace SteamKit2
 
         /// <summary>
         /// Request product information for an app or package
-        /// Results are returned in a <see cref="CDNAuthTokenCallback"/> callback.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
+        /// Results are returned in a <see cref="CDNAuthToken"/>.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the result.
         /// </summary>
         /// <param name="app">App id requested.</param>
         /// <param name="depot">Depot id requested.</param>
         /// <param name="host_name">CDN host name being requested.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="CDNAuthTokenCallback"/>.</returns>
-        public async Task<CDNAuthTokenCallback> GetCDNAuthToken(uint app, uint depot, string host_name)
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="CDNAuthToken"/>.</returns>
+        public async Task<CDNAuthToken> GetCDNAuthToken(uint app, uint depot, string host_name)
         {
             var request = new CContentServerDirectory_GetCDNAuthToken_Request
             {
@@ -117,7 +137,7 @@ namespace SteamKit2
             var message = await contentService.SendMessage(api => api.GetCDNAuthToken(request));
             var response = message.GetDeserializedResponse<CContentServerDirectory_GetCDNAuthToken_Response>();
 
-            return new CDNAuthTokenCallback(response);
+            return new CDNAuthToken(response);
         }
 
         /// <summary>
