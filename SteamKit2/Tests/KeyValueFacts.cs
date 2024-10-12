@@ -614,6 +614,21 @@ namespace Tests
             Assert.Equal( 0x0807060504030201, kv["key"].AsLong() );
         }
 
+        [Fact]
+        public void DecodesBinaryWithAlternateEnd()
+        {
+            var hex = "00546573744F626A656374000A6B65790001020304050607080B0B";
+            var binary = Convert.FromHexString( hex );
+            var kv = new KeyValue();
+            using ( var ms = new MemoryStream( binary ) )
+            {
+                var read = kv.TryReadAsBinary( ms );
+                Assert.True( read );
+            }
+
+            Assert.Equal( 0x0807060504030201, kv[ "key" ].AsLong() );
+        }
+
         static string SaveToText( KeyValue kv )
         {
             string text;
