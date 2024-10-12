@@ -601,29 +601,33 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CContentBuilder_SignInstallScript_Request, CContentBuilder_SignInstallScript_Response>( "ContentBuilder.SignInstallScript#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "InitDepotBuild":
-                    UnifiedMessages.HandleServiceMsg<CContentBuilder_InitDepotBuild_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CContentBuilder_InitDepotBuild_Response>( packetMsg );
                     break;
                 case "StartDepotUpload":
-                    UnifiedMessages.HandleServiceMsg<CContentBuilder_StartDepotUpload_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CContentBuilder_StartDepotUpload_Response>( packetMsg );
                     break;
                 case "GetMissingDepotChunks":
-                    UnifiedMessages.HandleServiceMsg<CContentBuilder_GetMissingDepotChunks_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CContentBuilder_GetMissingDepotChunks_Response>( packetMsg );
                     break;
                 case "FinishDepotUpload":
-                    UnifiedMessages.HandleServiceMsg<CContentBuilder_FinishDepotUpload_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CContentBuilder_FinishDepotUpload_Response>( packetMsg );
                     break;
                 case "CommitAppBuild":
-                    UnifiedMessages.HandleServiceMsg<CContentBuilder_CommitAppBuild_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CContentBuilder_CommitAppBuild_Response>( packetMsg );
                     break;
                 case "SignInstallScript":
-                    UnifiedMessages.HandleServiceMsg<CContentBuilder_SignInstallScript_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CContentBuilder_SignInstallScript_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

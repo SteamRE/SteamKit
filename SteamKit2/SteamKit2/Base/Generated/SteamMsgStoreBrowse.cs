@@ -2696,26 +2696,30 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CStoreBrowse_GetHardwareItems_Request, CStoreBrowse_GetHardwareItems_Response>( "StoreBrowse.GetHardwareItems#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetItems":
-                    UnifiedMessages.HandleServiceMsg<CStoreBrowse_GetItems_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetItems_Response>( packetMsg );
                     break;
                 case "GetStoreCategories":
-                    UnifiedMessages.HandleServiceMsg<CStoreBrowse_GetStoreCategories_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetStoreCategories_Response>( packetMsg );
                     break;
                 case "GetDLCForApps":
-                    UnifiedMessages.HandleServiceMsg<CStoreBrowse_GetDLCForApps_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetDLCForApps_Response>( packetMsg );
                     break;
                 case "GetDLCForAppsSolr":
-                    UnifiedMessages.HandleServiceMsg<CStoreBrowse_GetDLCForAppsSolr_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetDLCForAppsSolr_Response>( packetMsg );
                     break;
                 case "GetHardwareItems":
-                    UnifiedMessages.HandleServiceMsg<CStoreBrowse_GetHardwareItems_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetHardwareItems_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

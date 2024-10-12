@@ -779,32 +779,36 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CContentServerDirectory_GetPeerContentInfo_Request, CContentServerDirectory_GetPeerContentInfo_Response>( "ContentServerDirectory.GetPeerContentInfo#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetServersForSteamPipe":
-                    UnifiedMessages.HandleServiceMsg<CContentServerDirectory_GetServersForSteamPipe_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CContentServerDirectory_GetServersForSteamPipe_Response>( packetMsg );
                     break;
                 case "GetDepotPatchInfo":
-                    UnifiedMessages.HandleServiceMsg<CContentServerDirectory_GetDepotPatchInfo_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CContentServerDirectory_GetDepotPatchInfo_Response>( packetMsg );
                     break;
                 case "GetClientUpdateHosts":
-                    UnifiedMessages.HandleServiceMsg<CContentServerDirectory_GetClientUpdateHosts_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CContentServerDirectory_GetClientUpdateHosts_Response>( packetMsg );
                     break;
                 case "GetManifestRequestCode":
-                    UnifiedMessages.HandleServiceMsg<CContentServerDirectory_GetManifestRequestCode_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CContentServerDirectory_GetManifestRequestCode_Response>( packetMsg );
                     break;
                 case "GetCDNAuthToken":
-                    UnifiedMessages.HandleServiceMsg<CContentServerDirectory_GetCDNAuthToken_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CContentServerDirectory_GetCDNAuthToken_Response>( packetMsg );
                     break;
                 case "RequestPeerContentServer":
-                    UnifiedMessages.HandleServiceMsg<CContentServerDirectory_RequestPeerContentServer_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CContentServerDirectory_RequestPeerContentServer_Response>( packetMsg );
                     break;
                 case "GetPeerContentInfo":
-                    UnifiedMessages.HandleServiceMsg<CContentServerDirectory_GetPeerContentInfo_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CContentServerDirectory_GetPeerContentInfo_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

@@ -2640,72 +2640,100 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CCloud_ClientGetAppQuotaUsage_Request, CCloud_ClientGetAppQuotaUsage_Response>( "Cloud.ClientGetAppQuotaUsage#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetUploadServerInfo":
-                    UnifiedMessages.HandleServiceMsg<CCloud_GetUploadServerInfo_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_GetUploadServerInfo_Response>( packetMsg );
                     break;
                 case "BeginHTTPUpload":
-                    UnifiedMessages.HandleServiceMsg<CCloud_BeginHTTPUpload_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_BeginHTTPUpload_Response>( packetMsg );
                     break;
                 case "CommitHTTPUpload":
-                    UnifiedMessages.HandleServiceMsg<CCloud_CommitHTTPUpload_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_CommitHTTPUpload_Response>( packetMsg );
                     break;
                 case "BeginUGCUpload":
-                    UnifiedMessages.HandleServiceMsg<CCloud_BeginUGCUpload_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_BeginUGCUpload_Response>( packetMsg );
                     break;
                 case "CommitUGCUpload":
-                    UnifiedMessages.HandleServiceMsg<CCloud_CommitUGCUpload_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_CommitUGCUpload_Response>( packetMsg );
                     break;
                 case "GetFileDetails":
-                    UnifiedMessages.HandleServiceMsg<CCloud_GetFileDetails_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_GetFileDetails_Response>( packetMsg );
                     break;
                 case "EnumerateUserFiles":
-                    UnifiedMessages.HandleServiceMsg<CCloud_EnumerateUserFiles_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_EnumerateUserFiles_Response>( packetMsg );
                     break;
                 case "Delete":
-                    UnifiedMessages.HandleServiceMsg<CCloud_Delete_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_Delete_Response>( packetMsg );
                     break;
                 case "GetClientEncryptionKey":
-                    UnifiedMessages.HandleServiceMsg<CCloud_GetClientEncryptionKey_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_GetClientEncryptionKey_Response>( packetMsg );
                     break;
                 case "BeginAppUploadBatch":
-                    UnifiedMessages.HandleServiceMsg<CCloud_BeginAppUploadBatch_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_BeginAppUploadBatch_Response>( packetMsg );
                     break;
                 case "CompleteAppUploadBatchBlocking":
-                    UnifiedMessages.HandleServiceMsg<CCloud_CompleteAppUploadBatch_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_CompleteAppUploadBatch_Response>( packetMsg );
                     break;
                 case "ClientBeginFileUpload":
-                    UnifiedMessages.HandleServiceMsg<CCloud_ClientBeginFileUpload_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_ClientBeginFileUpload_Response>( packetMsg );
                     break;
                 case "ClientCommitFileUpload":
-                    UnifiedMessages.HandleServiceMsg<CCloud_ClientCommitFileUpload_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_ClientCommitFileUpload_Response>( packetMsg );
                     break;
                 case "ClientFileDownload":
-                    UnifiedMessages.HandleServiceMsg<CCloud_ClientFileDownload_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_ClientFileDownload_Response>( packetMsg );
                     break;
                 case "ClientDeleteFile":
-                    UnifiedMessages.HandleServiceMsg<CCloud_ClientDeleteFile_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_ClientDeleteFile_Response>( packetMsg );
                     break;
                 case "EnumerateUserApps":
-                    UnifiedMessages.HandleServiceMsg<CCloud_EnumerateUserApps_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_EnumerateUserApps_Response>( packetMsg );
                     break;
                 case "GetAppFileChangelist":
-                    UnifiedMessages.HandleServiceMsg<CCloud_GetAppFileChangelist_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_GetAppFileChangelist_Response>( packetMsg );
                     break;
                 case "SuspendAppSession":
-                    UnifiedMessages.HandleServiceMsg<CCloud_AppSessionSuspend_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_AppSessionSuspend_Response>( packetMsg );
                     break;
                 case "ResumeAppSession":
-                    UnifiedMessages.HandleServiceMsg<CCloud_AppSessionResume_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_AppSessionResume_Response>( packetMsg );
                     break;
                 case "SignalAppLaunchIntent":
-                    UnifiedMessages.HandleServiceMsg<CCloud_AppLaunchIntent_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_AppLaunchIntent_Response>( packetMsg );
                     break;
                 case "ClientGetAppQuotaUsage":
-                    UnifiedMessages.HandleServiceMsg<CCloud_ClientGetAppQuotaUsage_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloud_ClientGetAppQuotaUsage_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "ClientLogUploadCheck":
+                    UnifiedMessages.HandleNotificationMsg<CCloud_ClientLogUploadCheck_Notification>( packetMsg );
+                    break;
+                case "ClientLogUploadComplete":
+                    UnifiedMessages.HandleNotificationMsg<CCloud_ClientLogUploadComplete_Notification>( packetMsg );
+                    break;
+                case "CDNReport":
+                    UnifiedMessages.HandleNotificationMsg<CCloud_CDNReport_Notification>( packetMsg );
+                    break;
+                case "ExternalStorageTransferReport":
+                    UnifiedMessages.HandleNotificationMsg<CCloud_ExternalStorageTransferReport_Notification>( packetMsg );
+                    break;
+                case "CompleteAppUploadBatch":
+                    UnifiedMessages.HandleNotificationMsg<CCloud_CompleteAppUploadBatch_Notification>( packetMsg );
+                    break;
+                case "ClientConflictResolution":
+                    UnifiedMessages.HandleNotificationMsg<CCloud_ClientConflictResolution_Notification>( packetMsg );
+                    break;
+                case "SignalAppExitSyncDone":
+                    UnifiedMessages.HandleNotificationMsg<CCloud_AppExitSyncDone_Notification>( packetMsg );
                     break;
             }
         }
@@ -2725,8 +2753,21 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CCloud_ClientLogUploadRequest_Notification>( "CloudClient.ClientLogUploadRequest#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyAppStateChange":
+                    UnifiedMessages.HandleNotificationMsg<CCloud_AppCloudStateChange_Notification>( packetMsg );
+                    break;
+                case "ClientLogUploadRequest":
+                    UnifiedMessages.HandleNotificationMsg<CCloud_ClientLogUploadRequest_Notification>( packetMsg );
+                    break;
+            }
         }
     }
 

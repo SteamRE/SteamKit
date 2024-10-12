@@ -758,23 +758,27 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CGameServers_QueryByFakeIP_Request, CGameServers_GameServerQuery_Response>( "GameServers.QueryByFakeIP#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetServerList":
-                    UnifiedMessages.HandleServiceMsg<CGameServers_GetServerList_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CGameServers_GetServerList_Response>( packetMsg );
                     break;
                 case "GetServerSteamIDsByIP":
-                    UnifiedMessages.HandleServiceMsg<CGameServers_IPsWithSteamIDs_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CGameServers_IPsWithSteamIDs_Response>( packetMsg );
                     break;
                 case "GetServerIPsBySteamID":
-                    UnifiedMessages.HandleServiceMsg<CGameServers_IPsWithSteamIDs_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CGameServers_IPsWithSteamIDs_Response>( packetMsg );
                     break;
                 case "QueryByFakeIP":
-                    UnifiedMessages.HandleServiceMsg<CGameServers_GameServerQuery_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CGameServers_GameServerQuery_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 
@@ -787,14 +791,18 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<GameServerClient_QueryServerData_Request, GameServerClient_QueryServerData_Response>( "GameServerClient.QueryServerData#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "QueryServerData":
-                    UnifiedMessages.HandleServiceMsg<GameServerClient_QueryServerData_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<GameServerClient_QueryServerData_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

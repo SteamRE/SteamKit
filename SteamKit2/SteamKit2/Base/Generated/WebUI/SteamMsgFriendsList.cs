@@ -282,23 +282,27 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CFriendsList_SetFavorites_Request, CFriendsList_SetFavorites_Response>( "FriendsList.SetFavorites#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetCategories":
-                    UnifiedMessages.HandleServiceMsg<CFriendsList_GetCategories_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CFriendsList_GetCategories_Response>( packetMsg );
                     break;
                 case "GetFavorites":
-                    UnifiedMessages.HandleServiceMsg<CFriendsList_GetFavorites_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CFriendsList_GetFavorites_Response>( packetMsg );
                     break;
                 case "GetFriendsList":
-                    UnifiedMessages.HandleServiceMsg<CFriendsList_GetFriendsList_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CFriendsList_GetFriendsList_Response>( packetMsg );
                     break;
                 case "SetFavorites":
-                    UnifiedMessages.HandleServiceMsg<CFriendsList_SetFavorites_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CFriendsList_SetFavorites_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 
@@ -311,8 +315,18 @@ namespace SteamKit2.WebUI.Internal
             UnifiedMessages.SendNotification<CFriendsList_FavoritesChanged_Notification>( "FriendsListClient.FavoritesChanged#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "FavoritesChanged":
+                    UnifiedMessages.HandleNotificationMsg<CFriendsList_FavoritesChanged_Notification>( packetMsg );
+                    break;
+            }
         }
     }
 

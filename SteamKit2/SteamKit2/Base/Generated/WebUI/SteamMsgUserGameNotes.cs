@@ -442,23 +442,27 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CUserGameNotes_SaveNote_Request, CUserGameNotes_SaveNote_Response>( "UserGameNotes.SaveNote#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "DeleteNote":
-                    UnifiedMessages.HandleServiceMsg<CUserGameNotes_DeleteNote_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CUserGameNotes_DeleteNote_Response>( packetMsg );
                     break;
                 case "GetGamesWithNotes":
-                    UnifiedMessages.HandleServiceMsg<CUserGameNotes_GetGamesWithNotes_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CUserGameNotes_GetGamesWithNotes_Response>( packetMsg );
                     break;
                 case "GetNotesForGame":
-                    UnifiedMessages.HandleServiceMsg<CUserGameNotes_GetNotesForGame_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CUserGameNotes_GetNotesForGame_Response>( packetMsg );
                     break;
                 case "SaveNote":
-                    UnifiedMessages.HandleServiceMsg<CUserGameNotes_SaveNote_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CUserGameNotes_SaveNote_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

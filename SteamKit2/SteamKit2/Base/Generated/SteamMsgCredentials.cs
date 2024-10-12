@@ -604,29 +604,33 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CCredentials_GetAccountAuthSecret_Request, CCredentials_GetAccountAuthSecret_Response>( "Credentials.GetAccountAuthSecret#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "TestAvailablePassword":
-                    UnifiedMessages.HandleServiceMsg<CCredentials_TestAvailablePassword_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCredentials_TestAvailablePassword_Response>( packetMsg );
                     break;
                 case "GetSteamGuardDetails":
-                    UnifiedMessages.HandleServiceMsg<CCredentials_GetSteamGuardDetails_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCredentials_GetSteamGuardDetails_Response>( packetMsg );
                     break;
                 case "ValidateEmailAddress":
-                    UnifiedMessages.HandleServiceMsg<CCredentials_ValidateEmailAddress_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCredentials_ValidateEmailAddress_Response>( packetMsg );
                     break;
                 case "SteamGuardPhishingReport":
-                    UnifiedMessages.HandleServiceMsg<CCredentials_SteamGuardPhishingReport_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCredentials_SteamGuardPhishingReport_Response>( packetMsg );
                     break;
                 case "GetCredentialChangeTimeDetails":
-                    UnifiedMessages.HandleServiceMsg<CCredentials_LastCredentialChangeTime_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCredentials_LastCredentialChangeTime_Response>( packetMsg );
                     break;
                 case "GetAccountAuthSecret":
-                    UnifiedMessages.HandleServiceMsg<CCredentials_GetAccountAuthSecret_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCredentials_GetAccountAuthSecret_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

@@ -134,17 +134,21 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<COffline_GetUnsignedOfflineLogonTicket_Request, COffline_GetUnsignedOfflineLogonTicket_Response>( "Offline.GetUnsignedOfflineLogonTicket#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetOfflineLogonTicket":
-                    UnifiedMessages.HandleServiceMsg<COffline_GetOfflineLogonTicket_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<COffline_GetOfflineLogonTicket_Response>( packetMsg );
                     break;
                 case "GetUnsignedOfflineLogonTicket":
-                    UnifiedMessages.HandleServiceMsg<COffline_GetUnsignedOfflineLogonTicket_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<COffline_GetUnsignedOfflineLogonTicket_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

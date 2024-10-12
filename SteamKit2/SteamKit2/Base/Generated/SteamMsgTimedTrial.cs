@@ -202,20 +202,24 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CTimedTrial_ResetPlaytime_Request, CTimedTrial_ResetPlaytime_Response>( "TimedTrial.ResetPlaytime#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetTimeRemaining":
-                    UnifiedMessages.HandleServiceMsg<CTimedTrial_GetTimeRemaining_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CTimedTrial_GetTimeRemaining_Response>( packetMsg );
                     break;
                 case "RecordPlaytime":
-                    UnifiedMessages.HandleServiceMsg<CTimedTrial_RecordPlaytime_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CTimedTrial_RecordPlaytime_Response>( packetMsg );
                     break;
                 case "ResetPlaytime":
-                    UnifiedMessages.HandleServiceMsg<CTimedTrial_ResetPlaytime_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CTimedTrial_ResetPlaytime_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

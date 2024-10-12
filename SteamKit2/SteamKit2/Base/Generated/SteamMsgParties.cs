@@ -386,29 +386,33 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CParties_DestroyBeacon_Request, CParties_DestroyBeacon_Response>( "Parties.DestroyBeacon#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "JoinParty":
-                    UnifiedMessages.HandleServiceMsg<CParties_JoinParty_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParties_JoinParty_Response>( packetMsg );
                     break;
                 case "CreateBeacon":
-                    UnifiedMessages.HandleServiceMsg<CParties_CreateBeacon_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParties_CreateBeacon_Response>( packetMsg );
                     break;
                 case "OnReservationCompleted":
-                    UnifiedMessages.HandleServiceMsg<CParties_OnReservationCompleted_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParties_OnReservationCompleted_Response>( packetMsg );
                     break;
                 case "CancelReservation":
-                    UnifiedMessages.HandleServiceMsg<CParties_CancelReservation_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParties_CancelReservation_Response>( packetMsg );
                     break;
                 case "ChangeNumOpenSlots":
-                    UnifiedMessages.HandleServiceMsg<CParties_ChangeNumOpenSlots_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParties_ChangeNumOpenSlots_Response>( packetMsg );
                     break;
                 case "DestroyBeacon":
-                    UnifiedMessages.HandleServiceMsg<CParties_DestroyBeacon_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParties_DestroyBeacon_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

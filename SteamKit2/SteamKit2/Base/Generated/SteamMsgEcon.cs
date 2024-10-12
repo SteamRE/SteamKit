@@ -894,23 +894,27 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CEcon_GetAssetClassInfo_Request, CEcon_GetAssetClassInfo_Response>( "Econ.GetAssetClassInfo#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetInventoryItemsWithDescriptions":
-                    UnifiedMessages.HandleServiceMsg<CEcon_GetInventoryItemsWithDescriptions_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CEcon_GetInventoryItemsWithDescriptions_Response>( packetMsg );
                     break;
                 case "GetTradeOfferAccessToken":
-                    UnifiedMessages.HandleServiceMsg<CEcon_GetTradeOfferAccessToken_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CEcon_GetTradeOfferAccessToken_Response>( packetMsg );
                     break;
                 case "ClientGetItemShopOverlayAuthURL":
-                    UnifiedMessages.HandleServiceMsg<CEcon_ClientGetItemShopOverlayAuthURL_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CEcon_ClientGetItemShopOverlayAuthURL_Response>( packetMsg );
                     break;
                 case "GetAssetClassInfo":
-                    UnifiedMessages.HandleServiceMsg<CEcon_GetAssetClassInfo_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CEcon_GetAssetClassInfo_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

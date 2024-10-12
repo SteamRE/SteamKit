@@ -954,59 +954,63 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CParental_ReportPlaytimeAndNotify_Request, CParental_ReportPlaytimeAndNotify_Response>( "Parental.ReportPlaytimeAndNotify#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "EnableParentalSettings":
-                    UnifiedMessages.HandleServiceMsg<CParental_EnableParentalSettings_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParental_EnableParentalSettings_Response>( packetMsg );
                     break;
                 case "DisableParentalSettings":
-                    UnifiedMessages.HandleServiceMsg<CParental_DisableParentalSettings_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParental_DisableParentalSettings_Response>( packetMsg );
                     break;
                 case "GetParentalSettings":
-                    UnifiedMessages.HandleServiceMsg<CParental_GetParentalSettings_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParental_GetParentalSettings_Response>( packetMsg );
                     break;
                 case "GetSignedParentalSettings":
-                    UnifiedMessages.HandleServiceMsg<CParental_GetSignedParentalSettings_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParental_GetSignedParentalSettings_Response>( packetMsg );
                     break;
                 case "SetParentalSettings":
-                    UnifiedMessages.HandleServiceMsg<CParental_SetParentalSettings_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParental_SetParentalSettings_Response>( packetMsg );
                     break;
                 case "ValidateToken":
-                    UnifiedMessages.HandleServiceMsg<CParental_ValidateToken_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParental_ValidateToken_Response>( packetMsg );
                     break;
                 case "ValidatePassword":
-                    UnifiedMessages.HandleServiceMsg<CParental_ValidatePassword_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParental_ValidatePassword_Response>( packetMsg );
                     break;
                 case "LockClient":
-                    UnifiedMessages.HandleServiceMsg<CParental_LockClient_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParental_LockClient_Response>( packetMsg );
                     break;
                 case "RequestRecoveryCode":
-                    UnifiedMessages.HandleServiceMsg<CParental_RequestRecoveryCode_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParental_RequestRecoveryCode_Response>( packetMsg );
                     break;
                 case "DisableWithRecoveryCode":
-                    UnifiedMessages.HandleServiceMsg<CParental_DisableWithRecoveryCode_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParental_DisableWithRecoveryCode_Response>( packetMsg );
                     break;
                 case "RequestFeatureAccess":
-                    UnifiedMessages.HandleServiceMsg<CParental_RequestFeatureAccess_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParental_RequestFeatureAccess_Response>( packetMsg );
                     break;
                 case "ApproveFeatureAccess":
-                    UnifiedMessages.HandleServiceMsg<CParental_ApproveFeatureAccess_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParental_ApproveFeatureAccess_Response>( packetMsg );
                     break;
                 case "RequestPlaytime":
-                    UnifiedMessages.HandleServiceMsg<CParental_RequestPlaytime_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParental_RequestPlaytime_Response>( packetMsg );
                     break;
                 case "ApprovePlaytime":
-                    UnifiedMessages.HandleServiceMsg<CParental_ApprovePlaytime_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParental_ApprovePlaytime_Response>( packetMsg );
                     break;
                 case "GetRequests":
-                    UnifiedMessages.HandleServiceMsg<CParental_GetRequests_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParental_GetRequests_Response>( packetMsg );
                     break;
                 case "ReportPlaytimeAndNotify":
-                    UnifiedMessages.HandleServiceMsg<CParental_ReportPlaytimeAndNotify_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CParental_ReportPlaytimeAndNotify_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 
@@ -1034,8 +1038,27 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CParental_PlaytimeUsed_Notification>( "ParentalClient.NotifyPlaytimeUsed#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifySettingsChange":
+                    UnifiedMessages.HandleNotificationMsg<CParental_ParentalSettingsChange_Notification>( packetMsg );
+                    break;
+                case "NotifyUnlock":
+                    UnifiedMessages.HandleNotificationMsg<CParental_ParentalUnlock_Notification>( packetMsg );
+                    break;
+                case "NotifyLock":
+                    UnifiedMessages.HandleNotificationMsg<CParental_ParentalLock_Notification>( packetMsg );
+                    break;
+                case "NotifyPlaytimeUsed":
+                    UnifiedMessages.HandleNotificationMsg<CParental_PlaytimeUsed_Notification>( packetMsg );
+                    break;
+            }
         }
     }
 

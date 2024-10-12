@@ -241,8 +241,21 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CSteamNotification_PreferencesUpdated_Notification>( "SteamNotificationClient.PreferencesUpdated#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotificationsReceived":
+                    UnifiedMessages.HandleNotificationMsg<CSteamNotification_NotificationsReceived_Notification>( packetMsg );
+                    break;
+                case "PreferencesUpdated":
+                    UnifiedMessages.HandleNotificationMsg<CSteamNotification_PreferencesUpdated_Notification>( packetMsg );
+                    break;
+            }
         }
     }
 

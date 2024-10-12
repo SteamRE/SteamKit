@@ -745,20 +745,24 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CUserReviews_Update_Request, CUserReviews_Update_Response>( "UserReviews.Update#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetFriendsRecommendedApp":
-                    UnifiedMessages.HandleServiceMsg<CUserReviews_GetFriendsRecommendedApp_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CUserReviews_GetFriendsRecommendedApp_Response>( packetMsg );
                     break;
                 case "GetIndividualRecommendations":
-                    UnifiedMessages.HandleServiceMsg<CUserReviews_GetIndividualRecommendations_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CUserReviews_GetIndividualRecommendations_Response>( packetMsg );
                     break;
                 case "Update":
-                    UnifiedMessages.HandleServiceMsg<CUserReviews_Update_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CUserReviews_Update_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

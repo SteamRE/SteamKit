@@ -704,20 +704,24 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CStoreQuery_SearchSuggestions_Request, CStoreQuery_SearchSuggestions_Response>( "StoreQuery.SearchSuggestions#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetItemsByUserRecommendedTags":
-                    UnifiedMessages.HandleServiceMsg<CStoreQuery_GetItemsByUserRecommendedTags_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CStoreQuery_GetItemsByUserRecommendedTags_Response>( packetMsg );
                     break;
                 case "Query":
-                    UnifiedMessages.HandleServiceMsg<CStoreQuery_Query_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CStoreQuery_Query_Response>( packetMsg );
                     break;
                 case "SearchSuggestions":
-                    UnifiedMessages.HandleServiceMsg<CStoreQuery_SearchSuggestions_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CStoreQuery_SearchSuggestions_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

@@ -1324,63 +1324,73 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CMarketingMessage_GetMarketingMessagesForApps_Request, CMarketingMessage_GetMarketingMessagesForApps_Response>( "MarketingMessages.GetMarketingMessagesForApps#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetActiveMarketingMessages":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessages_GetActiveMarketingMessages_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessages_GetActiveMarketingMessages_Response>( packetMsg );
                     break;
                 case "GetMarketingMessagesForUser":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessages_GetMarketingMessagesForUser_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessages_GetMarketingMessagesForUser_Response>( packetMsg );
                     break;
                 case "DoesUserHavePendingMarketingMessages":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessages_DoesUserHavePendingMarketingMessages_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessages_DoesUserHavePendingMarketingMessages_Response>( packetMsg );
                     break;
                 case "GetDisplayMarketingMessage":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessages_GetDisplayMarketingMessage_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessages_GetDisplayMarketingMessage_Response>( packetMsg );
                     break;
                 case "GetDisplayMarketingMessageForUser":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessages_GetDisplayMarketingMessage_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessages_GetDisplayMarketingMessage_Response>( packetMsg );
                     break;
                 case "GetDisplayMarketingMessageAdmin":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessages_GetDisplayMarketingMessage_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessages_GetDisplayMarketingMessage_Response>( packetMsg );
                     break;
                 case "GetMarketingMessage":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessages_GetMarketingMessage_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessages_GetMarketingMessage_Response>( packetMsg );
                     break;
                 case "CreateMarketingMessage":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessages_CreateMarketingMessage_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessages_CreateMarketingMessage_Response>( packetMsg );
                     break;
                 case "UpdateMarketingMessage":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessages_UpdateMarketingMessage_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessages_UpdateMarketingMessage_Response>( packetMsg );
                     break;
                 case "DeleteMarketingMessage":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessages_DeleteMarketingMessage_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessages_DeleteMarketingMessage_Response>( packetMsg );
                     break;
                 case "FindMarketingMessages":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessages_FindMarketingMessages_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessages_FindMarketingMessages_Response>( packetMsg );
                     break;
                 case "GetMarketingMessageViewerStats":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessages_GetMarketingMessageViewerStats_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessages_GetMarketingMessageViewerStats_Response>( packetMsg );
                     break;
                 case "GetMarketingMessagesViewerRangeStats":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessages_GetMarketingMessagesViewerRangeStats_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessages_GetMarketingMessagesViewerRangeStats_Response>( packetMsg );
                     break;
                 case "GetPartnerReadyToPublishMessages":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessages_GetPartnerReadyToPublishMessages_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessages_GetPartnerReadyToPublishMessages_Response>( packetMsg );
                     break;
                 case "PublishPartnerMessage":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessages_PartnerPublishMessage_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessages_PartnerPublishMessage_Response>( packetMsg );
                     break;
                 case "GetPartnerMessagePreview":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessages_GetPartnerMessagePreview_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessages_GetPartnerMessagePreview_Response>( packetMsg );
                     break;
                 case "GetMarketingMessagesForPartner":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessage_GetMarketingMessagesForPartner_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessage_GetMarketingMessagesForPartner_Response>( packetMsg );
                     break;
                 case "GetMarketingMessagesForApps":
-                    UnifiedMessages.HandleServiceMsg<CMarketingMessage_GetMarketingMessagesForApps_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMarketingMessage_GetMarketingMessagesForApps_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "MarkMessageSeen":
+                    UnifiedMessages.HandleNotificationMsg<CMarketingMessages_MarkMessageSeen_Notification>( packetMsg );
                     break;
             }
         }

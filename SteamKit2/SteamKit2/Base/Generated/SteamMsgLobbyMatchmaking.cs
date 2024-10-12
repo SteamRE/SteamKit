@@ -126,14 +126,18 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<LobbyMatchmakingLegacy_GetLobbyStatus_Request, LobbyMatchmakingLegacy_GetLobbyStatus_Response>( "LobbyMatchmakingLegacy.GetLobbyStatus#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetLobbyStatus":
-                    UnifiedMessages.HandleServiceMsg<LobbyMatchmakingLegacy_GetLobbyStatus_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<LobbyMatchmakingLegacy_GetLobbyStatus_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

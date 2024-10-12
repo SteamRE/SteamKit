@@ -228,14 +228,18 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CUserGameActivity_GetActivity_Request, CUserGameActivity_GetActivity_Response>( "UserGameActivity.GetActivity#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetActivity":
-                    UnifiedMessages.HandleServiceMsg<CUserGameActivity_GetActivity_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CUserGameActivity_GetActivity_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

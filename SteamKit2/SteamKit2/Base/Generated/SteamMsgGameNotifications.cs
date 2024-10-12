@@ -642,29 +642,33 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CGameNotifications_UpdateNotificationSettings_Request, CGameNotifications_UpdateNotificationSettings_Response>( "GameNotifications.UpdateNotificationSettings#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "UserCreateSession":
-                    UnifiedMessages.HandleServiceMsg<CGameNotifications_CreateSession_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CGameNotifications_CreateSession_Response>( packetMsg );
                     break;
                 case "UserDeleteSession":
-                    UnifiedMessages.HandleServiceMsg<CGameNotifications_DeleteSession_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CGameNotifications_DeleteSession_Response>( packetMsg );
                     break;
                 case "UserUpdateSession":
-                    UnifiedMessages.HandleServiceMsg<CGameNotifications_UpdateSession_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CGameNotifications_UpdateSession_Response>( packetMsg );
                     break;
                 case "EnumerateSessions":
-                    UnifiedMessages.HandleServiceMsg<CGameNotifications_EnumerateSessions_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CGameNotifications_EnumerateSessions_Response>( packetMsg );
                     break;
                 case "GetSessionDetails":
-                    UnifiedMessages.HandleServiceMsg<CGameNotifications_GetSessionDetails_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CGameNotifications_GetSessionDetails_Response>( packetMsg );
                     break;
                 case "UpdateNotificationSettings":
-                    UnifiedMessages.HandleServiceMsg<CGameNotifications_UpdateNotificationSettings_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CGameNotifications_UpdateNotificationSettings_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 
@@ -682,8 +686,21 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CGameNotifications_OnUserStatusChanged_Notification>( "GameNotificationsClient.OnUserStatusChanged#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "OnNotificationsRequested":
+                    UnifiedMessages.HandleNotificationMsg<CGameNotifications_OnNotificationsRequested_Notification>( packetMsg );
+                    break;
+                case "OnUserStatusChanged":
+                    UnifiedMessages.HandleNotificationMsg<CGameNotifications_OnUserStatusChanged_Notification>( packetMsg );
+                    break;
+            }
         }
     }
 

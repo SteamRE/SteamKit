@@ -1277,65 +1277,69 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CLoyaltyRewards_RegisterForSteamDeckRewards_Request, CLoyaltyRewards_RegisterForSteamDeckRewards_Response>( "LoyaltyRewards.RegisterForSteamDeckRewards#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "AddReaction":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_AddReaction_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_AddReaction_Response>( packetMsg );
                     break;
                 case "BatchedQueryRewardItems":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_BatchedQueryRewardItems_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_BatchedQueryRewardItems_Response>( packetMsg );
                     break;
                 case "GetActivePurchaseBonuses":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_GetActivePurchaseBonuses_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetActivePurchaseBonuses_Response>( packetMsg );
                     break;
                 case "GetEligibleApps":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_GetEligibleApps_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetEligibleApps_Response>( packetMsg );
                     break;
                 case "GetEquippedProfileItems":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_GetEquippedProfileItems_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetEquippedProfileItems_Response>( packetMsg );
                     break;
                 case "GetPointsForSpend":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_GetPointsForSpend_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetPointsForSpend_Response>( packetMsg );
                     break;
                 case "GetProfileCustomizationsConfig":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_GetProfileCustomizationsConfig_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetProfileCustomizationsConfig_Response>( packetMsg );
                     break;
                 case "GetReactionConfig":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_GetReactionConfig_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetReactionConfig_Response>( packetMsg );
                     break;
                 case "GetReactions":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_GetReactions_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetReactions_Response>( packetMsg );
                     break;
                 case "GetReactionsSummaryForUser":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_GetReactionsSummaryForUser_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetReactionsSummaryForUser_Response>( packetMsg );
                     break;
                 case "GetSummary":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_GetSummary_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetSummary_Response>( packetMsg );
                     break;
                 case "QueryRewardItems":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_QueryRewardItems_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_QueryRewardItems_Response>( packetMsg );
                     break;
                 case "RedeemPoints":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_RedeemPoints_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_RedeemPoints_Response>( packetMsg );
                     break;
                 case "RedeemPointsForBadgeLevel":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_RedeemPoints_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_RedeemPoints_Response>( packetMsg );
                     break;
                 case "RedeemPointsForProfileCustomization":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_RedeemPointsForProfileCustomization_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_RedeemPointsForProfileCustomization_Response>( packetMsg );
                     break;
                 case "RedeemPointsForProfileCustomizationUpgrade":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_RedeemPointsForProfileCustomizationUpgrade_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_RedeemPointsForProfileCustomizationUpgrade_Response>( packetMsg );
                     break;
                 case "RedeemPointsToUpgradeItem":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_RedeemPoints_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_RedeemPoints_Response>( packetMsg );
                     break;
                 case "RegisterForSteamDeckRewards":
-                    UnifiedMessages.HandleServiceMsg<CLoyaltyRewards_RegisterForSteamDeckRewards_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_RegisterForSteamDeckRewards_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

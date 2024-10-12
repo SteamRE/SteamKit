@@ -1395,32 +1395,36 @@ namespace SteamKit2.GC.Dota.Internal
             return UnifiedMessages.SendMessage<CMsgSteamLearn_InferenceMetadata_Request, CMsgSteamLearn_InferenceMetadata_Response>( "SteamLearn.InferenceMetadata#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "RegisterDataSource":
-                    UnifiedMessages.HandleServiceMsg<CMsgSteamLearn_RegisterDataSource_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMsgSteamLearn_RegisterDataSource_Response>( packetMsg );
                     break;
                 case "CacheData":
-                    UnifiedMessages.HandleServiceMsg<CMsgSteamLearn_CacheData_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMsgSteamLearn_CacheData_Response>( packetMsg );
                     break;
                 case "SnapshotProject":
-                    UnifiedMessages.HandleServiceMsg<CMsgSteamLearn_SnapshotProject_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMsgSteamLearn_SnapshotProject_Response>( packetMsg );
                     break;
                 case "BatchOperation":
-                    UnifiedMessages.HandleServiceMsg<CMsgSteamLearn_BatchOperation_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMsgSteamLearn_BatchOperation_Response>( packetMsg );
                     break;
                 case "GetAccessTokens":
-                    UnifiedMessages.HandleServiceMsg<CMsgSteamLearn_GetAccessTokens_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMsgSteamLearn_GetAccessTokens_Response>( packetMsg );
                     break;
                 case "Inference":
-                    UnifiedMessages.HandleServiceMsg<CMsgSteamLearn_Inference_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMsgSteamLearn_Inference_Response>( packetMsg );
                     break;
                 case "InferenceMetadata":
-                    UnifiedMessages.HandleServiceMsg<CMsgSteamLearn_InferenceMetadata_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CMsgSteamLearn_InferenceMetadata_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

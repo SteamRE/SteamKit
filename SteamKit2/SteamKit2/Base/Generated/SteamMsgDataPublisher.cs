@@ -684,18 +684,31 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CDataPublisher_AddVRDeviceInfo_Request, CDataPublisher_AddVRDeviceInfo_Response>( "DataPublisher.AddVRDeviceInfo#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetVRDeviceInfo":
-                    UnifiedMessages.HandleServiceMsg<CDataPublisher_GetVRDeviceInfo_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CDataPublisher_GetVRDeviceInfo_Response>( packetMsg );
                     break;
                 case "SetVRDeviceInfoAggregationReference":
-                    UnifiedMessages.HandleServiceMsg<CDataPublisher_SetVRDeviceInfoAggregationReference_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CDataPublisher_SetVRDeviceInfoAggregationReference_Response>( packetMsg );
                     break;
                 case "AddVRDeviceInfo":
-                    UnifiedMessages.HandleServiceMsg<CDataPublisher_AddVRDeviceInfo_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CDataPublisher_AddVRDeviceInfo_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "ClientContentCorruptionReport":
+                    UnifiedMessages.HandleNotificationMsg<CDataPublisher_ClientContentCorruptionReport_Notification>( packetMsg );
+                    break;
+                case "ClientUpdateAppJobReport":
+                    UnifiedMessages.HandleNotificationMsg<CDataPublisher_ClientUpdateAppJob_Notification>( packetMsg );
                     break;
             }
         }
@@ -710,14 +723,18 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CValveHWSurvey_GetSurveySchedule_Request, CValveHWSurvey_GetSurveySchedule_Response>( "ValveHWSurvey.GetSurveySchedule#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetSurveySchedule":
-                    UnifiedMessages.HandleServiceMsg<CValveHWSurvey_GetSurveySchedule_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CValveHWSurvey_GetSurveySchedule_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

@@ -86,14 +86,18 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CWorkshop_GetEULAStatus_Request, CWorkshop_GetEULAStatus_Response>( "Workshop.GetEULAStatus#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetEULAStatus":
-                    UnifiedMessages.HandleServiceMsg<CWorkshop_GetEULAStatus_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CWorkshop_GetEULAStatus_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

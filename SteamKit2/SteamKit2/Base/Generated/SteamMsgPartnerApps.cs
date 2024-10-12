@@ -618,44 +618,48 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CPartnerApps_Download_Request, CPartnerApps_Download_Response>( "PartnerApps.Download#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "RequestKVSignUploadToken":
-                    UnifiedMessages.HandleServiceMsg<CPartnerApps_RequestUploadToken_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPartnerApps_RequestUploadToken_Response>( packetMsg );
                     break;
                 case "RequestDRMUploadToken":
-                    UnifiedMessages.HandleServiceMsg<CPartnerApps_RequestUploadToken_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPartnerApps_RequestUploadToken_Response>( packetMsg );
                     break;
                 case "RequestCEGUploadToken":
-                    UnifiedMessages.HandleServiceMsg<CPartnerApps_RequestUploadToken_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPartnerApps_RequestUploadToken_Response>( packetMsg );
                     break;
                 case "RequestDepotUploadToken":
-                    UnifiedMessages.HandleServiceMsg<CPartnerApps_RequestUploadToken_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPartnerApps_RequestUploadToken_Response>( packetMsg );
                     break;
                 case "FinishUploadKVSign":
-                    UnifiedMessages.HandleServiceMsg<CPartnerApps_FinishUploadKVSign_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPartnerApps_FinishUploadKVSign_Response>( packetMsg );
                     break;
                 case "FinishUploadDRMUpload":
-                    UnifiedMessages.HandleServiceMsg<CPartnerApps_FinishUploadLegacyDRM_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPartnerApps_FinishUploadLegacyDRM_Response>( packetMsg );
                     break;
                 case "FinishUploadCEGUpload":
-                    UnifiedMessages.HandleServiceMsg<CPartnerApps_FinishUpload_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPartnerApps_FinishUpload_Response>( packetMsg );
                     break;
                 case "FinishUploadDepotUpload":
-                    UnifiedMessages.HandleServiceMsg<CPartnerApps_FinishUploadDepot_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPartnerApps_FinishUploadDepot_Response>( packetMsg );
                     break;
                 case "GetDepotBuildResult":
-                    UnifiedMessages.HandleServiceMsg<CPartnerApps_GetDepotBuildResult_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPartnerApps_GetDepotBuildResult_Response>( packetMsg );
                     break;
                 case "FindDRMUploads":
-                    UnifiedMessages.HandleServiceMsg<CPartnerApps_FindDRMUploads_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPartnerApps_FindDRMUploads_Response>( packetMsg );
                     break;
                 case "Download":
-                    UnifiedMessages.HandleServiceMsg<CPartnerApps_Download_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPartnerApps_Download_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

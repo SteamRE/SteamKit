@@ -448,17 +448,21 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CUserNews_GetUserNews_Request, CUserNews_GetUserNews_Response>( "UserNews.GetUserNews#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetAppDetailsSpotlight":
-                    UnifiedMessages.HandleServiceMsg<CUserNews_GetAppDetailsSpotlight_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CUserNews_GetAppDetailsSpotlight_Response>( packetMsg );
                     break;
                 case "GetUserNews":
-                    UnifiedMessages.HandleServiceMsg<CUserNews_GetUserNews_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CUserNews_GetUserNews_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

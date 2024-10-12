@@ -4789,110 +4789,114 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CPublishedFile_UpdateContentDescriptors_Request, CPublishedFile_UpdateContentDescriptors_Response>( "PublishedFile.UpdateContentDescriptors#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "Vote":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_Vote_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_Vote_Response>( packetMsg );
                     break;
                 case "Subscribe":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_Subscribe_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_Subscribe_Response>( packetMsg );
                     break;
                 case "Unsubscribe":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_Unsubscribe_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_Unsubscribe_Response>( packetMsg );
                     break;
                 case "CanSubscribe":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_CanSubscribe_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_CanSubscribe_Response>( packetMsg );
                     break;
                 case "GetSubSectionData":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_GetSubSectionData_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetSubSectionData_Response>( packetMsg );
                     break;
                 case "Publish":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_Publish_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_Publish_Response>( packetMsg );
                     break;
                 case "GetDetails":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_GetDetails_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetDetails_Response>( packetMsg );
                     break;
                 case "GetItemInfo":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_GetItemInfo_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetItemInfo_Response>( packetMsg );
                     break;
                 case "GetUserFiles":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_GetUserFiles_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetUserFiles_Response>( packetMsg );
                     break;
                 case "GetUserFileCount":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_GetUserFiles_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetUserFiles_Response>( packetMsg );
                     break;
                 case "AreFilesInSubscriptionList":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_AreFilesInSubscriptionList_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_AreFilesInSubscriptionList_Response>( packetMsg );
                     break;
                 case "Update":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_Update_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_Update_Response>( packetMsg );
                     break;
                 case "Delete":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_Delete_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_Delete_Response>( packetMsg );
                     break;
                 case "GetChangeHistoryEntry":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_GetChangeHistoryEntry_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetChangeHistoryEntry_Response>( packetMsg );
                     break;
                 case "GetChangeHistory":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_GetChangeHistory_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetChangeHistory_Response>( packetMsg );
                     break;
                 case "RefreshVotingQueue":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_RefreshVotingQueue_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_RefreshVotingQueue_Response>( packetMsg );
                     break;
                 case "QueryFiles":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_QueryFiles_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_QueryFiles_Response>( packetMsg );
                     break;
                 case "AddAppRelationship":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_AddAppRelationship_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_AddAppRelationship_Response>( packetMsg );
                     break;
                 case "RemoveAppRelationship":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_RemoveAppRelationship_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_RemoveAppRelationship_Response>( packetMsg );
                     break;
                 case "GetAppRelationships":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_GetAppRelationships_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetAppRelationships_Response>( packetMsg );
                     break;
                 case "GetAppRelationshipsBatched":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_GetAppRelationshipsBatched_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetAppRelationshipsBatched_Response>( packetMsg );
                     break;
                 case "StartPlaytimeTracking":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_StartPlaytimeTracking_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_StartPlaytimeTracking_Response>( packetMsg );
                     break;
                 case "StopPlaytimeTracking":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_StopPlaytimeTracking_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_StopPlaytimeTracking_Response>( packetMsg );
                     break;
                 case "StopPlaytimeTrackingForAllAppItems":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response>( packetMsg );
                     break;
                 case "SetPlaytimeForControllerConfigs":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_SetPlaytimeForControllerConfigs_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_SetPlaytimeForControllerConfigs_Response>( packetMsg );
                     break;
                 case "AddChild":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_AddChild_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_AddChild_Response>( packetMsg );
                     break;
                 case "RemoveChild":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_RemoveChild_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_RemoveChild_Response>( packetMsg );
                     break;
                 case "SetCollectionChildren":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_SetCollectionChildren_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_SetCollectionChildren_Response>( packetMsg );
                     break;
                 case "SetSubscriptionListFromCollection":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_SetSubscriptionListFromCollection_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_SetSubscriptionListFromCollection_Response>( packetMsg );
                     break;
                 case "GetUserVoteSummary":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_GetUserVoteSummary_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetUserVoteSummary_Response>( packetMsg );
                     break;
                 case "GetItemChanges":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_GetItemChanges_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetItemChanges_Response>( packetMsg );
                     break;
                 case "GetContentDescriptors":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_GetContentDescriptors_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetContentDescriptors_Response>( packetMsg );
                     break;
                 case "UpdateContentDescriptors":
-                    UnifiedMessages.HandleServiceMsg<CPublishedFile_UpdateContentDescriptors_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_UpdateContentDescriptors_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 
@@ -4915,8 +4919,24 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CPublishedFile_FileDeleted_Client_Notification>( "PublishedFileClient.NotifyFileDeleted#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyFileSubscribed":
+                    UnifiedMessages.HandleNotificationMsg<CPublishedFile_FileSubscribed_Notification>( packetMsg );
+                    break;
+                case "NotifyFileUnsubscribed":
+                    UnifiedMessages.HandleNotificationMsg<CPublishedFile_FileUnsubscribed_Notification>( packetMsg );
+                    break;
+                case "NotifyFileDeleted":
+                    UnifiedMessages.HandleNotificationMsg<CPublishedFile_FileDeleted_Client_Notification>( packetMsg );
+                    break;
+            }
         }
     }
 

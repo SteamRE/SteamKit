@@ -833,24 +833,34 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CFriendMessages_UpdateMessageReaction_Request, CFriendMessages_UpdateMessageReaction_Response>( "FriendMessages.UpdateMessageReaction#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetRecentMessages":
-                    UnifiedMessages.HandleServiceMsg<CFriendMessages_GetRecentMessages_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CFriendMessages_GetRecentMessages_Response>( packetMsg );
                     break;
                 case "GetActiveMessageSessions":
-                    UnifiedMessages.HandleServiceMsg<CFriendsMessages_GetActiveMessageSessions_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CFriendsMessages_GetActiveMessageSessions_Response>( packetMsg );
                     break;
                 case "SendMessage":
-                    UnifiedMessages.HandleServiceMsg<CFriendMessages_SendMessage_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CFriendMessages_SendMessage_Response>( packetMsg );
                     break;
                 case "IsInFriendsUIBeta":
-                    UnifiedMessages.HandleServiceMsg<CFriendMessages_IsInFriendsUIBeta_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CFriendMessages_IsInFriendsUIBeta_Response>( packetMsg );
                     break;
                 case "UpdateMessageReaction":
-                    UnifiedMessages.HandleServiceMsg<CFriendMessages_UpdateMessageReaction_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CFriendMessages_UpdateMessageReaction_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "AckMessage":
+                    UnifiedMessages.HandleNotificationMsg<CFriendMessages_AckMessage_Notification>( packetMsg );
                     break;
             }
         }
@@ -875,8 +885,24 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CFriendMessages_MessageReaction_Notification>( "FriendMessagesClient.MessageReaction#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "IncomingMessage":
+                    UnifiedMessages.HandleNotificationMsg<CFriendMessages_IncomingMessage_Notification>( packetMsg );
+                    break;
+                case "NotifyAckMessageEcho":
+                    UnifiedMessages.HandleNotificationMsg<CFriendMessages_AckMessage_Notification>( packetMsg );
+                    break;
+                case "MessageReaction":
+                    UnifiedMessages.HandleNotificationMsg<CFriendMessages_MessageReaction_Notification>( packetMsg );
+                    break;
+            }
         }
     }
 

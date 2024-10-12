@@ -99,17 +99,21 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CAccountPrivateApps_ToggleAppPrivacy_Request, CAccountPrivateApps_ToggleAppPrivacy_Response>( "AccountPrivateApps.ToggleAppPrivacy#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetPrivateAppList":
-                    UnifiedMessages.HandleServiceMsg<CAccountPrivateApps_GetPrivateAppList_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAccountPrivateApps_GetPrivateAppList_Response>( packetMsg );
                     break;
                 case "ToggleAppPrivacy":
-                    UnifiedMessages.HandleServiceMsg<CAccountPrivateApps_ToggleAppPrivacy_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAccountPrivateApps_ToggleAppPrivacy_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 
@@ -122,8 +126,18 @@ namespace SteamKit2.WebUI.Internal
             UnifiedMessages.SendNotification<CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification>( "AccountPrivateAppsClient.NotifyPrivateAppListChanged#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyPrivateAppListChanged":
+                    UnifiedMessages.HandleNotificationMsg<CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification>( packetMsg );
+                    break;
+            }
         }
     }
 

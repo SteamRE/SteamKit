@@ -302,15 +302,25 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CVideo_GetVideoBookmarks_Request, CVideo_GetVideoBookmarks_Response>( "Video.GetVideoBookmarks#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "ClientGetVideoURL":
-                    UnifiedMessages.HandleServiceMsg<CVideo_ClientGetVideoURL_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CVideo_ClientGetVideoURL_Response>( packetMsg );
                     break;
                 case "GetVideoBookmarks":
-                    UnifiedMessages.HandleServiceMsg<CVideo_GetVideoBookmarks_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CVideo_GetVideoBookmarks_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "SetVideoBookmark":
+                    UnifiedMessages.HandleNotificationMsg<CVideo_SetVideoBookmark_Notification>( packetMsg );
                     break;
             }
         }
@@ -325,8 +335,18 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CVideo_UnlockedH264_Notification>( "VideoClient.NotifyUnlockedH264#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyUnlockedH264":
+                    UnifiedMessages.HandleNotificationMsg<CVideo_UnlockedH264_Notification>( packetMsg );
+                    break;
+            }
         }
     }
 
@@ -339,14 +359,18 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CFovasVideo_ClientGetOPFSettings_Request, CFovasVideo_ClientGetOPFSettings_Response>( "FovasVideo.ClientGetOPFSettings#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "ClientGetOPFSettings":
-                    UnifiedMessages.HandleServiceMsg<CFovasVideo_ClientGetOPFSettings_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CFovasVideo_ClientGetOPFSettings_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

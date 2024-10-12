@@ -2854,107 +2854,111 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CSteamTV_AppCheer_Request, CSteamTV_AppCheer_Response>( "SteamTV.AppCheer#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "CreateBroadcastChannel":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_CreateBroadcastChannel_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_CreateBroadcastChannel_Response>( packetMsg );
                     break;
                 case "GetBroadcastChannelID":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetBroadcastChannelID_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetBroadcastChannelID_Response>( packetMsg );
                     break;
                 case "SetBroadcastChannelProfile":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_SetBroadcastChannelProfile_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_SetBroadcastChannelProfile_Response>( packetMsg );
                     break;
                 case "GetBroadcastChannelProfile":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetBroadcastChannelProfile_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetBroadcastChannelProfile_Response>( packetMsg );
                     break;
                 case "SetBroadcastChannelImage":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_SetBroadcastChannelImage_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_SetBroadcastChannelImage_Response>( packetMsg );
                     break;
                 case "GetBroadcastChannelImages":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetBroadcastChannelImages_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetBroadcastChannelImages_Response>( packetMsg );
                     break;
                 case "SetBroadcastChannelLinkRegions":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_SetBroadcastChannelLinkRegions_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_SetBroadcastChannelLinkRegions_Response>( packetMsg );
                     break;
                 case "GetBroadcastChannelLinks":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetBroadcastChannelLinks_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetBroadcastChannelLinks_Response>( packetMsg );
                     break;
                 case "GetBroadcastChannelBroadcasters":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetBroadcastChannelBroadcasters_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetBroadcastChannelBroadcasters_Response>( packetMsg );
                     break;
                 case "GetFollowedChannels":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetFollowedChannels_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetFollowedChannels_Response>( packetMsg );
                     break;
                 case "GetSubscribedChannels":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetSubscribedChannels_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetSubscribedChannels_Response>( packetMsg );
                     break;
                 case "GetBroadcastChannelStatus":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetBroadcastChannelStatus_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetBroadcastChannelStatus_Response>( packetMsg );
                     break;
                 case "FollowBroadcastChannel":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_FollowBroadcastChannel_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_FollowBroadcastChannel_Response>( packetMsg );
                     break;
                 case "SubscribeBroadcastChannel":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_SubscribeBroadcastChannel_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_SubscribeBroadcastChannel_Response>( packetMsg );
                     break;
                 case "GetBroadcastChannelClips":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetBroadcastChannelClips_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetBroadcastChannelClips_Response>( packetMsg );
                     break;
                 case "ReportBroadcastChannel":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_ReportBroadcastChannel_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_ReportBroadcastChannel_Response>( packetMsg );
                     break;
                 case "GetBroadcastChannelInteraction":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetBroadcastChannelInteraction_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetBroadcastChannelInteraction_Response>( packetMsg );
                     break;
                 case "GetGames":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetGames_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetGames_Response>( packetMsg );
                     break;
                 case "GetChannels":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetChannels_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetChannels_Response>( packetMsg );
                     break;
                 case "AddChatBan":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_AddChatBan_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_AddChatBan_Response>( packetMsg );
                     break;
                 case "GetChatBans":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetChatBans_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetChatBans_Response>( packetMsg );
                     break;
                 case "AddChatModerator":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_AddChatModerator_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_AddChatModerator_Response>( packetMsg );
                     break;
                 case "GetChatModerators":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetChatModerators_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetChatModerators_Response>( packetMsg );
                     break;
                 case "AddWordBan":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_AddWordBan_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_AddWordBan_Response>( packetMsg );
                     break;
                 case "GetWordBans":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetWordBans_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetWordBans_Response>( packetMsg );
                     break;
                 case "JoinChat":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_JoinChat_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_JoinChat_Response>( packetMsg );
                     break;
                 case "Search":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_Search_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_Search_Response>( packetMsg );
                     break;
                 case "GetSteamTVUserSettings":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetSteamTVUserSettings_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetSteamTVUserSettings_Response>( packetMsg );
                     break;
                 case "SetSteamTVUserSettings":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_SetSteamTVUserSettings_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_SetSteamTVUserSettings_Response>( packetMsg );
                     break;
                 case "GetMyBroadcastChannels":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetMyBroadcastChannels_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetMyBroadcastChannels_Response>( packetMsg );
                     break;
                 case "GetHomePageContents":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_GetHomePageContents_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_GetHomePageContents_Response>( packetMsg );
                     break;
                 case "AppCheer":
-                    UnifiedMessages.HandleServiceMsg<CSteamTV_AppCheer_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSteamTV_AppCheer_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

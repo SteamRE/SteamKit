@@ -215,17 +215,21 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CCloudConfigStore_Upload_Request, CCloudConfigStore_Upload_Response>( "CloudConfigStore.Upload#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "Download":
-                    UnifiedMessages.HandleServiceMsg<CCloudConfigStore_Download_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloudConfigStore_Download_Response>( packetMsg );
                     break;
                 case "Upload":
-                    UnifiedMessages.HandleServiceMsg<CCloudConfigStore_Upload_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloudConfigStore_Upload_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 
@@ -238,8 +242,18 @@ namespace SteamKit2.WebUI.Internal
             UnifiedMessages.SendNotification<CCloudConfigStore_Change_Notification>( "CloudConfigStoreClient.NotifyChange#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyChange":
+                    UnifiedMessages.HandleNotificationMsg<CCloudConfigStore_Change_Notification>( packetMsg );
+                    break;
+            }
         }
     }
 

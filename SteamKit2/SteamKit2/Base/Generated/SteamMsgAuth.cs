@@ -2048,50 +2048,54 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CAuthentication_RefreshToken_Revoke_Request, CAuthentication_RefreshToken_Revoke_Response>( "Authentication.RevokeRefreshToken#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetPasswordRSAPublicKey":
-                    UnifiedMessages.HandleServiceMsg<CAuthentication_GetPasswordRSAPublicKey_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAuthentication_GetPasswordRSAPublicKey_Response>( packetMsg );
                     break;
                 case "BeginAuthSessionViaQR":
-                    UnifiedMessages.HandleServiceMsg<CAuthentication_BeginAuthSessionViaQR_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAuthentication_BeginAuthSessionViaQR_Response>( packetMsg );
                     break;
                 case "BeginAuthSessionViaCredentials":
-                    UnifiedMessages.HandleServiceMsg<CAuthentication_BeginAuthSessionViaCredentials_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAuthentication_BeginAuthSessionViaCredentials_Response>( packetMsg );
                     break;
                 case "PollAuthSessionStatus":
-                    UnifiedMessages.HandleServiceMsg<CAuthentication_PollAuthSessionStatus_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAuthentication_PollAuthSessionStatus_Response>( packetMsg );
                     break;
                 case "GetAuthSessionInfo":
-                    UnifiedMessages.HandleServiceMsg<CAuthentication_GetAuthSessionInfo_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAuthentication_GetAuthSessionInfo_Response>( packetMsg );
                     break;
                 case "UpdateAuthSessionWithMobileConfirmation":
-                    UnifiedMessages.HandleServiceMsg<CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response>( packetMsg );
                     break;
                 case "UpdateAuthSessionWithSteamGuardCode":
-                    UnifiedMessages.HandleServiceMsg<CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response>( packetMsg );
                     break;
                 case "GenerateAccessTokenForApp":
-                    UnifiedMessages.HandleServiceMsg<CAuthentication_AccessToken_GenerateForApp_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAuthentication_AccessToken_GenerateForApp_Response>( packetMsg );
                     break;
                 case "EnumerateTokens":
-                    UnifiedMessages.HandleServiceMsg<CAuthentication_RefreshToken_Enumerate_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAuthentication_RefreshToken_Enumerate_Response>( packetMsg );
                     break;
                 case "GetAuthSessionsForAccount":
-                    UnifiedMessages.HandleServiceMsg<CAuthentication_GetAuthSessionsForAccount_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAuthentication_GetAuthSessionsForAccount_Response>( packetMsg );
                     break;
                 case "MigrateMobileSession":
-                    UnifiedMessages.HandleServiceMsg<CAuthentication_MigrateMobileSession_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAuthentication_MigrateMobileSession_Response>( packetMsg );
                     break;
                 case "RevokeToken":
-                    UnifiedMessages.HandleServiceMsg<CAuthentication_Token_Revoke_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAuthentication_Token_Revoke_Response>( packetMsg );
                     break;
                 case "RevokeRefreshToken":
-                    UnifiedMessages.HandleServiceMsg<CAuthentication_RefreshToken_Revoke_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAuthentication_RefreshToken_Revoke_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 
@@ -2119,23 +2123,27 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CAuthenticationSupport_GetTokenHistory_Request, CAuthenticationSupport_GetTokenHistory_Response>( "AuthenticationSupport.GetTokenHistory#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "QueryRefreshTokensByAccount":
-                    UnifiedMessages.HandleServiceMsg<CAuthenticationSupport_QueryRefreshTokensByAccount_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAuthenticationSupport_QueryRefreshTokensByAccount_Response>( packetMsg );
                     break;
                 case "QueryRefreshTokenByID":
-                    UnifiedMessages.HandleServiceMsg<CAuthenticationSupport_QueryRefreshTokenByID_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAuthenticationSupport_QueryRefreshTokenByID_Response>( packetMsg );
                     break;
                 case "RevokeToken":
-                    UnifiedMessages.HandleServiceMsg<CAuthenticationSupport_RevokeToken_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAuthenticationSupport_RevokeToken_Response>( packetMsg );
                     break;
                 case "GetTokenHistory":
-                    UnifiedMessages.HandleServiceMsg<CAuthenticationSupport_GetTokenHistory_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAuthenticationSupport_GetTokenHistory_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 
@@ -2153,17 +2161,21 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CCloudGaming_GetTimeRemaining_Request, CCloudGaming_GetTimeRemaining_Response>( "CloudGaming.GetTimeRemaining#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "CreateNonce":
-                    UnifiedMessages.HandleServiceMsg<CCloudGaming_CreateNonce_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloudGaming_CreateNonce_Response>( packetMsg );
                     break;
                 case "GetTimeRemaining":
-                    UnifiedMessages.HandleServiceMsg<CCloudGaming_GetTimeRemaining_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCloudGaming_GetTimeRemaining_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

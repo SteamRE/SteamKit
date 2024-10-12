@@ -83,33 +83,58 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CRemoteClient_DeleteRemotePlayTogetherInvitation_Request, CRemoteClient_DeleteRemotePlayTogetherInvitation_Response>( "RemoteClient.DeleteRemotePlayTogetherInvitation#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetPairingInfo":
-                    UnifiedMessages.HandleServiceMsg<CRemoteClient_GetPairingInfo_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CRemoteClient_GetPairingInfo_Response>( packetMsg );
                     break;
                 case "GetRecentClients":
-                    UnifiedMessages.HandleServiceMsg<CRemoteClient_GetRecentClients_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CRemoteClient_GetRecentClients_Response>( packetMsg );
                     break;
                 case "MarkTaskComplete":
-                    UnifiedMessages.HandleServiceMsg<CRemoteClient_MarkTaskComplete_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CRemoteClient_MarkTaskComplete_Response>( packetMsg );
                     break;
                 case "AllocateRelayServer":
-                    UnifiedMessages.HandleServiceMsg<CRemoteClient_AllocateRelayServer_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CRemoteClient_AllocateRelayServer_Response>( packetMsg );
                     break;
                 case "AllocateSDR":
-                    UnifiedMessages.HandleServiceMsg<CRemoteClient_AllocateSDR_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CRemoteClient_AllocateSDR_Response>( packetMsg );
                     break;
                 case "SendRemotePlaySessionStarted":
-                    UnifiedMessages.HandleServiceMsg<CRemotePlay_SessionStarted_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CRemotePlay_SessionStarted_Response>( packetMsg );
                     break;
                 case "CreateRemotePlayTogetherInvitation":
-                    UnifiedMessages.HandleServiceMsg<CRemoteClient_CreateRemotePlayTogetherInvitation_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CRemoteClient_CreateRemotePlayTogetherInvitation_Response>( packetMsg );
                     break;
                 case "DeleteRemotePlayTogetherInvitation":
-                    UnifiedMessages.HandleServiceMsg<CRemoteClient_DeleteRemotePlayTogetherInvitation_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CRemoteClient_DeleteRemotePlayTogetherInvitation_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyOnline":
+                    UnifiedMessages.HandleNotificationMsg<CRemoteClient_Online_Notification>( packetMsg );
+                    break;
+                case "NotifyReplyPacket":
+                    UnifiedMessages.HandleNotificationMsg<CRemoteClient_ReplyPacket_Notification>( packetMsg );
+                    break;
+                case "SendSteamBroadcastPacket":
+                    UnifiedMessages.HandleNotificationMsg<CRemoteClient_SteamBroadcast_Notification>( packetMsg );
+                    break;
+                case "SendSteamToSteamPacket":
+                    UnifiedMessages.HandleNotificationMsg<CRemoteClient_SteamToSteam_Notification>( packetMsg );
+                    break;
+                case "SendRemotePlaySessionStopped":
+                    UnifiedMessages.HandleNotificationMsg<CRemotePlay_SessionStopped_Notification>( packetMsg );
+                    break;
+                case "SendRemotePlayTogetherPacket":
+                    UnifiedMessages.HandleNotificationMsg<CRemotePlayTogether_Notification>( packetMsg );
                     break;
             }
         }
@@ -154,8 +179,36 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CRemoteClient_TaskList_Notification>( "RemoteClientSteamClient.NotifyTaskList#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyRegisterStatusUpdate":
+                    UnifiedMessages.HandleNotificationMsg<CRemoteClient_RegisterStatusUpdate_Notification>( packetMsg );
+                    break;
+                case "NotifyUnregisterStatusUpdate":
+                    UnifiedMessages.HandleNotificationMsg<CRemoteClient_UnregisterStatusUpdate_Notification>( packetMsg );
+                    break;
+                case "NotifyRemotePacket":
+                    UnifiedMessages.HandleNotificationMsg<CRemoteClient_RemotePacket_Notification>( packetMsg );
+                    break;
+                case "NotifySteamBroadcastPacket":
+                    UnifiedMessages.HandleNotificationMsg<CRemoteClient_SteamBroadcast_Notification>( packetMsg );
+                    break;
+                case "NotifySteamToSteamPacket":
+                    UnifiedMessages.HandleNotificationMsg<CRemoteClient_SteamToSteam_Notification>( packetMsg );
+                    break;
+                case "NotifyRemotePlayTogetherPacket":
+                    UnifiedMessages.HandleNotificationMsg<CRemotePlayTogether_Notification>( packetMsg );
+                    break;
+                case "NotifyTaskList":
+                    UnifiedMessages.HandleNotificationMsg<CRemoteClient_TaskList_Notification>( packetMsg );
+                    break;
+            }
         }
     }
 

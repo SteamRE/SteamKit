@@ -69,14 +69,18 @@ namespace SteamKit2.Internal.Steamworks
             return UnifiedMessages.SendMessage<COAuthToken_ImplicitGrantNoPrompt_Request, COAuthToken_ImplicitGrantNoPrompt_Response>( "OAuthToken.ImplicitGrantNoPrompt#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "ImplicitGrantNoPrompt":
-                    UnifiedMessages.HandleServiceMsg<COAuthToken_ImplicitGrantNoPrompt_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<COAuthToken_ImplicitGrantNoPrompt_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

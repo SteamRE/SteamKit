@@ -2264,68 +2264,72 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CCommunity_RateCommentThread_Request, CCommunity_RateCommentThread_Response>( "Community.RateCommentThread#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "ClearSinglePartnerEventsAppPriority":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_ClearSinglePartnerEventsAppPriority_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_ClearSinglePartnerEventsAppPriority_Response>( packetMsg );
                     break;
                 case "ClearUserPartnerEventsAppPriorities":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_ClearUserPartnerEventsAppPriorities_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_ClearUserPartnerEventsAppPriorities_Response>( packetMsg );
                     break;
                 case "DeleteCommentFromThread":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_DeleteCommentFromThread_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_DeleteCommentFromThread_Response>( packetMsg );
                     break;
                 case "GetAppRichPresenceLocalization":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_GetAppRichPresenceLocalization_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_GetAppRichPresenceLocalization_Response>( packetMsg );
                     break;
                 case "GetApps":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_GetApps_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_GetApps_Response>( packetMsg );
                     break;
                 case "GetAvatarHistory":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_GetAvatarHistory_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_GetAvatarHistory_Response>( packetMsg );
                     break;
                 case "GetBestEventsForUser":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_GetBestEventsForUser_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_GetBestEventsForUser_Response>( packetMsg );
                     break;
                 case "GetClanAnnouncementVoteForUser":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_GetClanAnnouncementVoteForUser_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_GetClanAnnouncementVoteForUser_Response>( packetMsg );
                     break;
                 case "GetCommentThread":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_GetCommentThread_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_GetCommentThread_Response>( packetMsg );
                     break;
                 case "GetCommentThreadRatings":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_GetCommentThreadRatings_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_GetCommentThreadRatings_Response>( packetMsg );
                     break;
                 case "GetUserPartnerEventNews":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_GetUserPartnerEventNews_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_GetUserPartnerEventNews_Response>( packetMsg );
                     break;
                 case "GetUserPartnerEventsAppPriorities":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_GetUserPartnerEventsAppPriorities_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_GetUserPartnerEventsAppPriorities_Response>( packetMsg );
                     break;
                 case "GetUserPartnerEventViewStatus":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_GetUserPartnerEventViewStatus_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_GetUserPartnerEventViewStatus_Response>( packetMsg );
                     break;
                 case "MarkPartnerEventsForUser":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_MarkPartnerEventsForUser_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_MarkPartnerEventsForUser_Response>( packetMsg );
                     break;
                 case "PartnerEventsShowLessForApp":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_PartnerEventsShowLessForApp_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_PartnerEventsShowLessForApp_Response>( packetMsg );
                     break;
                 case "PartnerEventsShowMoreForApp":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_PartnerEventsShowMoreForApp_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_PartnerEventsShowMoreForApp_Response>( packetMsg );
                     break;
                 case "PostCommentToThread":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_PostCommentToThread_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_PostCommentToThread_Response>( packetMsg );
                     break;
                 case "RateClanAnnouncement":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_RateClanAnnouncement_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_RateClanAnnouncement_Response>( packetMsg );
                     break;
                 case "RateCommentThread":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_RateCommentThread_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_RateCommentThread_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

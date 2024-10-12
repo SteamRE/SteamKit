@@ -574,14 +574,18 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CQueuedMatchmaking_SearchForGame_Request, CQueuedMatchmaking_SearchForGame_Response>( "QueuedMatchmaking.SearchForGame#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "SearchForGame":
-                    UnifiedMessages.HandleServiceMsg<CQueuedMatchmaking_SearchForGame_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CQueuedMatchmaking_SearchForGame_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 
@@ -604,20 +608,24 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_EndGame_Request, CQueuedMatchmakingGameHost_EndGame_Response>( "QueuedMatchmakingGameHost.EndGame#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "SearchForPlayers":
-                    UnifiedMessages.HandleServiceMsg<CQueuedMatchmakingGameHost_SearchForPlayers_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CQueuedMatchmakingGameHost_SearchForPlayers_Response>( packetMsg );
                     break;
                 case "SubmitPlayerResult":
-                    UnifiedMessages.HandleServiceMsg<CQueuedMatchmakingGameHost_SubmitPlayerResult_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CQueuedMatchmakingGameHost_SubmitPlayerResult_Response>( packetMsg );
                     break;
                 case "EndGame":
-                    UnifiedMessages.HandleServiceMsg<CQueuedMatchmakingGameHost_EndGame_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CQueuedMatchmakingGameHost_EndGame_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

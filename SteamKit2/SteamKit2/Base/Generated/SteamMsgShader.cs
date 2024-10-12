@@ -500,29 +500,33 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CShader_ReportExternalBuild_Request, CShader_ReportExternalBuild_Response>( "Shader.ReportExternalBuild#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetShaderReportingCadence":
-                    UnifiedMessages.HandleServiceMsg<CShader_GetShaderReportingCadence_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CShader_GetShaderReportingCadence_Response>( packetMsg );
                     break;
                 case "RegisterShader":
-                    UnifiedMessages.HandleServiceMsg<CShader_RegisterShader_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CShader_RegisterShader_Response>( packetMsg );
                     break;
                 case "SendShader":
-                    UnifiedMessages.HandleServiceMsg<CShader_SendShader_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CShader_SendShader_Response>( packetMsg );
                     break;
                 case "GetBucketManifest":
-                    UnifiedMessages.HandleServiceMsg<CShader_GetBucketManifest_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CShader_GetBucketManifest_Response>( packetMsg );
                     break;
                 case "GetStaleBucket":
-                    UnifiedMessages.HandleServiceMsg<CShader_GetStaleBucket_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CShader_GetStaleBucket_Response>( packetMsg );
                     break;
                 case "ReportExternalBuild":
-                    UnifiedMessages.HandleServiceMsg<CShader_ReportExternalBuild_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CShader_ReportExternalBuild_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

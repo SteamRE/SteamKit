@@ -425,17 +425,21 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CCheckout_ValidateCart_Request, CCheckout_ValidateCart_Response>( "Checkout.ValidateCart#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetFriendOwnershipForGifting":
-                    UnifiedMessages.HandleServiceMsg<CCheckout_GetFriendOwnershipForGifting_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCheckout_GetFriendOwnershipForGifting_Response>( packetMsg );
                     break;
                 case "ValidateCart":
-                    UnifiedMessages.HandleServiceMsg<CCheckout_ValidateCart_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCheckout_ValidateCart_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

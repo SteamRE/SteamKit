@@ -190,14 +190,18 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CKeyEscrow_Request, CKeyEscrow_Response>( "Secrets.KeyEscrow#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "KeyEscrow":
-                    UnifiedMessages.HandleServiceMsg<CKeyEscrow_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CKeyEscrow_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

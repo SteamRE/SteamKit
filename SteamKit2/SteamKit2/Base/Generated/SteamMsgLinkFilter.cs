@@ -179,20 +179,24 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterListVersion_Request, CCommunity_GetLinkFilterListVersion_Response>( "CommunityLinkFilter.GetLinkFilterListVersion#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetLinkFilterHashPrefixes":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_GetLinkFilterHashPrefixes_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_GetLinkFilterHashPrefixes_Response>( packetMsg );
                     break;
                 case "GetLinkFilterHashes":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_GetLinkFilterHashes_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_GetLinkFilterHashes_Response>( packetMsg );
                     break;
                 case "GetLinkFilterListVersion":
-                    UnifiedMessages.HandleServiceMsg<CCommunity_GetLinkFilterListVersion_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CCommunity_GetLinkFilterListVersion_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

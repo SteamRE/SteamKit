@@ -910,44 +910,48 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CAccountHardware_GetSteamDeckComponents_Request, CAccountHardware_GetSteamDeckComponents_Response>( "AccountHardware.GetSteamDeckComponents#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "RegisterSteamController":
-                    UnifiedMessages.HandleServiceMsg<CAccountHardware_RegisterSteamController_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAccountHardware_RegisterSteamController_Response>( packetMsg );
                     break;
                 case "CompleteSteamControllerRegistration":
-                    UnifiedMessages.HandleServiceMsg<CAccountHardware_CompleteSteamControllerRegistration_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAccountHardware_CompleteSteamControllerRegistration_Response>( packetMsg );
                     break;
                 case "QueryAccountsRegisteredToController":
-                    UnifiedMessages.HandleServiceMsg<CAccountHardware_QueryAccountsRegisteredToSerial_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAccountHardware_QueryAccountsRegisteredToSerial_Response>( packetMsg );
                     break;
                 case "SetDesiredControllerConfigForApp":
-                    UnifiedMessages.HandleServiceMsg<CAccountHardware_SteamControllerSetConfig_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAccountHardware_SteamControllerSetConfig_Response>( packetMsg );
                     break;
                 case "GetDesiredControllerConfigForApp":
-                    UnifiedMessages.HandleServiceMsg<CAccountHardware_SteamControllerGetConfig_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAccountHardware_SteamControllerGetConfig_Response>( packetMsg );
                     break;
                 case "DeRegisterSteamController":
-                    UnifiedMessages.HandleServiceMsg<CAccountHardware_DeRegisterSteamController_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAccountHardware_DeRegisterSteamController_Response>( packetMsg );
                     break;
                 case "SetControllerPersonalizationFile":
-                    UnifiedMessages.HandleServiceMsg<CAccountHardware_SetPersonalizationFile_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAccountHardware_SetPersonalizationFile_Response>( packetMsg );
                     break;
                 case "GetControllerPersonalizationFile":
-                    UnifiedMessages.HandleServiceMsg<CAccountHardware_GetPersonalizationFile_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAccountHardware_GetPersonalizationFile_Response>( packetMsg );
                     break;
                 case "VRCompatibilityCheck":
-                    UnifiedMessages.HandleServiceMsg<CAccountHardware_VRCompatibilityCheck_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAccountHardware_VRCompatibilityCheck_Response>( packetMsg );
                     break;
                 case "RegisterValveIndexComponent":
-                    UnifiedMessages.HandleServiceMsg<CAccountHardware_RegisterValveIndexComponent_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAccountHardware_RegisterValveIndexComponent_Response>( packetMsg );
                     break;
                 case "GetSteamDeckComponents":
-                    UnifiedMessages.HandleServiceMsg<CAccountHardware_GetSteamDeckComponents_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CAccountHardware_GetSteamDeckComponents_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

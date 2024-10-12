@@ -542,12 +542,25 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CSiteManagerClient_TrackedPayments_Notification>( "SiteManagerClient.TrackedPaymentsNotification#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "IncomingClient":
-                    UnifiedMessages.HandleServiceMsg<CSiteManagerClient_IncomingClient_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSiteManagerClient_IncomingClient_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "ClientSeatCheckoutNotification":
+                    UnifiedMessages.HandleNotificationMsg<CSiteLicense_ClientSeatCheckout_Notification>( packetMsg );
+                    break;
+                case "TrackedPaymentsNotification":
+                    UnifiedMessages.HandleNotificationMsg<CSiteManagerClient_TrackedPayments_Notification>( packetMsg );
                     break;
             }
         }
@@ -582,26 +595,30 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CSiteLicense_ClientGetAvailableSeats_Request, CSiteLicense_ClientGetAvailableSeats_Response>( "SiteLicense.ClientGetAvailableSeats#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "InitiateAssociation":
-                    UnifiedMessages.HandleServiceMsg<CSiteLicense_InitiateAssociation_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSiteLicense_InitiateAssociation_Response>( packetMsg );
                     break;
                 case "LCSAuthenticate":
-                    UnifiedMessages.HandleServiceMsg<CSiteLicense_LCSAuthenticate_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSiteLicense_LCSAuthenticate_Response>( packetMsg );
                     break;
                 case "LCSAssociateUser":
-                    UnifiedMessages.HandleServiceMsg<CSiteLicense_LCSAssociateUser_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSiteLicense_LCSAssociateUser_Response>( packetMsg );
                     break;
                 case "ClientSeatCheckout":
-                    UnifiedMessages.HandleServiceMsg<CSiteLicense_ClientSeatCheckout_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSiteLicense_ClientSeatCheckout_Response>( packetMsg );
                     break;
                 case "ClientGetAvailableSeats":
-                    UnifiedMessages.HandleServiceMsg<CSiteLicense_ClientGetAvailableSeats_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CSiteLicense_ClientGetAvailableSeats_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

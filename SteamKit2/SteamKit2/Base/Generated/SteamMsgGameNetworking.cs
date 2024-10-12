@@ -106,12 +106,22 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CGameNetworking_ReleaseFakeIP_Notification>( "GameNetworking.NotifyReleaseFakeIP#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "AllocateFakeIP":
-                    UnifiedMessages.HandleServiceMsg<CGameNetworking_AllocateFakeIP_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CGameNetworking_AllocateFakeIP_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyReleaseFakeIP":
+                    UnifiedMessages.HandleNotificationMsg<CGameNetworking_ReleaseFakeIP_Notification>( packetMsg );
                     break;
             }
         }

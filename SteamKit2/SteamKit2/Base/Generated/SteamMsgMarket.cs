@@ -117,14 +117,18 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CEconMarket_IsMarketplaceAllowed_Request, CEconMarket_IsMarketplaceAllowed_Response>( "EconMarket.IsMarketplaceAllowed#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "IsMarketplaceAllowed":
-                    UnifiedMessages.HandleServiceMsg<CEconMarket_IsMarketplaceAllowed_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CEconMarket_IsMarketplaceAllowed_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

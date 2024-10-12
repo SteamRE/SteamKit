@@ -1067,38 +1067,42 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request, CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response>( "TwoFactor.RemoveAuthenticatorViaChallengeContinue#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "QueryTime":
-                    UnifiedMessages.HandleServiceMsg<CTwoFactor_Time_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CTwoFactor_Time_Response>( packetMsg );
                     break;
                 case "QueryStatus":
-                    UnifiedMessages.HandleServiceMsg<CTwoFactor_Status_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CTwoFactor_Status_Response>( packetMsg );
                     break;
                 case "AddAuthenticator":
-                    UnifiedMessages.HandleServiceMsg<CTwoFactor_AddAuthenticator_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CTwoFactor_AddAuthenticator_Response>( packetMsg );
                     break;
                 case "SendEmail":
-                    UnifiedMessages.HandleServiceMsg<CTwoFactor_SendEmail_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CTwoFactor_SendEmail_Response>( packetMsg );
                     break;
                 case "FinalizeAddAuthenticator":
-                    UnifiedMessages.HandleServiceMsg<CTwoFactor_FinalizeAddAuthenticator_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CTwoFactor_FinalizeAddAuthenticator_Response>( packetMsg );
                     break;
                 case "UpdateTokenVersion":
-                    UnifiedMessages.HandleServiceMsg<CTwoFactor_UpdateTokenVersion_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CTwoFactor_UpdateTokenVersion_Response>( packetMsg );
                     break;
                 case "RemoveAuthenticator":
-                    UnifiedMessages.HandleServiceMsg<CTwoFactor_RemoveAuthenticator_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CTwoFactor_RemoveAuthenticator_Response>( packetMsg );
                     break;
                 case "RemoveAuthenticatorViaChallengeStart":
-                    UnifiedMessages.HandleServiceMsg<CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response>( packetMsg );
                     break;
                 case "RemoveAuthenticatorViaChallengeContinue":
-                    UnifiedMessages.HandleServiceMsg<CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 

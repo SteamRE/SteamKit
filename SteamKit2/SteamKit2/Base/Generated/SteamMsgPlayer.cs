@@ -4986,170 +4986,174 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CPlayer_RecordDisconnectedPlaytime_Request, CPlayer_RecordDisconnectedPlaytime_Response>( "Player.RecordDisconnectedPlaytime#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetRecentPlaytimeSessionsForChild":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetRecentPlaytimeSessionsForChild_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetRecentPlaytimeSessionsForChild_Response>( packetMsg );
                     break;
                 case "GetPlayerLinkDetails":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetPlayerLinkDetails_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetPlayerLinkDetails_Response>( packetMsg );
                     break;
                 case "GetMutualFriendsForIncomingInvites":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetMutualFriendsForIncomingInvites_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetMutualFriendsForIncomingInvites_Response>( packetMsg );
                     break;
                 case "GetOwnedGames":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetOwnedGames_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetOwnedGames_Response>( packetMsg );
                     break;
                 case "GetPlayNext":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetPlayNext_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetPlayNext_Response>( packetMsg );
                     break;
                 case "GetFriendsGameplayInfo":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetFriendsGameplayInfo_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetFriendsGameplayInfo_Response>( packetMsg );
                     break;
                 case "GetGameBadgeLevels":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetGameBadgeLevels_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetGameBadgeLevels_Response>( packetMsg );
                     break;
                 case "GetProfileBackground":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetProfileBackground_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetProfileBackground_Response>( packetMsg );
                     break;
                 case "SetProfileBackground":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_SetProfileBackground_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_SetProfileBackground_Response>( packetMsg );
                     break;
                 case "GetMiniProfileBackground":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetMiniProfileBackground_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetMiniProfileBackground_Response>( packetMsg );
                     break;
                 case "SetMiniProfileBackground":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_SetMiniProfileBackground_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_SetMiniProfileBackground_Response>( packetMsg );
                     break;
                 case "GetAvatarFrame":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetAvatarFrame_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetAvatarFrame_Response>( packetMsg );
                     break;
                 case "SetAvatarFrame":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_SetAvatarFrame_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_SetAvatarFrame_Response>( packetMsg );
                     break;
                 case "GetAnimatedAvatar":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetAnimatedAvatar_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetAnimatedAvatar_Response>( packetMsg );
                     break;
                 case "SetAnimatedAvatar":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_SetAnimatedAvatar_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_SetAnimatedAvatar_Response>( packetMsg );
                     break;
                 case "GetSteamDeckKeyboardSkin":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetSteamDeckKeyboardSkin_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetSteamDeckKeyboardSkin_Response>( packetMsg );
                     break;
                 case "SetSteamDeckKeyboardSkin":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_SetSteamDeckKeyboardSkin_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_SetSteamDeckKeyboardSkin_Response>( packetMsg );
                     break;
                 case "GetProfileItemsOwned":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetProfileItemsOwned_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetProfileItemsOwned_Response>( packetMsg );
                     break;
                 case "GetProfileItemsEquipped":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetProfileItemsEquipped_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetProfileItemsEquipped_Response>( packetMsg );
                     break;
                 case "SetEquippedProfileItemFlags":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_SetEquippedProfileItemFlags_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_SetEquippedProfileItemFlags_Response>( packetMsg );
                     break;
                 case "GetEmoticonList":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetEmoticonList_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetEmoticonList_Response>( packetMsg );
                     break;
                 case "GetCommunityBadgeProgress":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetCommunityBadgeProgress_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetCommunityBadgeProgress_Response>( packetMsg );
                     break;
                 case "GetTopAchievementsForGames":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetTopAchievementsForGames_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetTopAchievementsForGames_Response>( packetMsg );
                     break;
                 case "GetAchievementsProgress":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetAchievementsProgress_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetAchievementsProgress_Response>( packetMsg );
                     break;
                 case "GetGameAchievements":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetGameAchievements_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetGameAchievements_Response>( packetMsg );
                     break;
                 case "GetFavoriteBadge":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetFavoriteBadge_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetFavoriteBadge_Response>( packetMsg );
                     break;
                 case "SetFavoriteBadge":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_SetFavoriteBadge_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_SetFavoriteBadge_Response>( packetMsg );
                     break;
                 case "GetProfileCustomization":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetProfileCustomization_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetProfileCustomization_Response>( packetMsg );
                     break;
                 case "GetPurchasedProfileCustomizations":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetPurchasedProfileCustomizations_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetPurchasedProfileCustomizations_Response>( packetMsg );
                     break;
                 case "GetPurchasedAndUpgradedProfileCustomizations":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Response>( packetMsg );
                     break;
                 case "GetProfileThemesAvailable":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetProfileThemesAvailable_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetProfileThemesAvailable_Response>( packetMsg );
                     break;
                 case "SetProfileTheme":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_SetProfileTheme_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_SetProfileTheme_Response>( packetMsg );
                     break;
                 case "SetProfilePreferences":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_SetProfilePreferences_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_SetProfilePreferences_Response>( packetMsg );
                     break;
                 case "PostStatusToFriends":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_PostStatusToFriends_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_PostStatusToFriends_Response>( packetMsg );
                     break;
                 case "GetPostedStatus":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetPostedStatus_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetPostedStatus_Response>( packetMsg );
                     break;
                 case "DeletePostedStatus":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_DeletePostedStatus_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_DeletePostedStatus_Response>( packetMsg );
                     break;
                 case "ClientGetLastPlayedTimes":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetLastPlayedTimes_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetLastPlayedTimes_Response>( packetMsg );
                     break;
                 case "GetTimeSSAAccepted":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetTimeSSAAccepted_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetTimeSSAAccepted_Response>( packetMsg );
                     break;
                 case "AcceptSSA":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_AcceptSSA_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_AcceptSSA_Response>( packetMsg );
                     break;
                 case "GetNicknameList":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetNicknameList_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetNicknameList_Response>( packetMsg );
                     break;
                 case "GetPerFriendPreferences":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetPerFriendPreferences_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetPerFriendPreferences_Response>( packetMsg );
                     break;
                 case "SetPerFriendPreferences":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_SetPerFriendPreferences_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_SetPerFriendPreferences_Response>( packetMsg );
                     break;
                 case "AddFriend":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_AddFriend_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_AddFriend_Response>( packetMsg );
                     break;
                 case "RemoveFriend":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_RemoveFriend_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_RemoveFriend_Response>( packetMsg );
                     break;
                 case "IgnoreFriend":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_IgnoreFriend_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_IgnoreFriend_Response>( packetMsg );
                     break;
                 case "GetCommunityPreferences":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetCommunityPreferences_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetCommunityPreferences_Response>( packetMsg );
                     break;
                 case "SetCommunityPreferences":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_SetCommunityPreferences_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_SetCommunityPreferences_Response>( packetMsg );
                     break;
                 case "GetTextFilterWords":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetTextFilterWords_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetTextFilterWords_Response>( packetMsg );
                     break;
                 case "GetNewSteamAnnouncementState":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetNewSteamAnnouncementState_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetNewSteamAnnouncementState_Response>( packetMsg );
                     break;
                 case "UpdateSteamAnnouncementLastRead":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_UpdateSteamAnnouncementLastRead_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_UpdateSteamAnnouncementLastRead_Response>( packetMsg );
                     break;
                 case "GetPrivacySettings":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetPrivacySettings_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetPrivacySettings_Response>( packetMsg );
                     break;
                 case "GetDurationControl":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_GetDurationControl_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_GetDurationControl_Response>( packetMsg );
                     break;
                 case "RecordDisconnectedPlaytime":
-                    UnifiedMessages.HandleServiceMsg<CPlayer_RecordDisconnectedPlaytime_Response>( packetMsg );
+                    UnifiedMessages.HandleResponseMsg<CPlayer_RecordDisconnectedPlaytime_Response>( packetMsg );
                     break;
             }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
         }
     }
 
@@ -5197,8 +5201,39 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CPlayer_PrivacySettingsChanged_Notification>( "PlayerClient.NotifyPrivacyPrivacySettingsChanged#1", request );
         }
 
-        public override void HandleMsg( string methodName, IPacketMsg packetMsg )
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyLastPlayedTimes":
+                    UnifiedMessages.HandleNotificationMsg<CPlayer_LastPlayedTimes_Notification>( packetMsg );
+                    break;
+                case "NotifyFriendNicknameChanged":
+                    UnifiedMessages.HandleNotificationMsg<CPlayer_FriendNicknameChanged_Notification>( packetMsg );
+                    break;
+                case "NotifyFriendEquippedProfileItemsChanged":
+                    UnifiedMessages.HandleNotificationMsg<CPlayer_FriendEquippedProfileItemsChanged_Notification>( packetMsg );
+                    break;
+                case "NotifyNewSteamAnnouncementState":
+                    UnifiedMessages.HandleNotificationMsg<CPlayer_NewSteamAnnouncementState_Notification>( packetMsg );
+                    break;
+                case "NotifyCommunityPreferencesChanged":
+                    UnifiedMessages.HandleNotificationMsg<CPlayer_CommunityPreferencesChanged_Notification>( packetMsg );
+                    break;
+                case "NotifyTextFilterWordsChanged":
+                    UnifiedMessages.HandleNotificationMsg<CPlayer_TextFilterWordsChanged_Notification>( packetMsg );
+                    break;
+                case "NotifyPerFriendPreferencesChanged":
+                    UnifiedMessages.HandleNotificationMsg<CPlayer_PerFriendPreferencesChanged_Notification>( packetMsg );
+                    break;
+                case "NotifyPrivacyPrivacySettingsChanged":
+                    UnifiedMessages.HandleNotificationMsg<CPlayer_PrivacySettingsChanged_Notification>( packetMsg );
+                    break;
+            }
         }
     }
 
