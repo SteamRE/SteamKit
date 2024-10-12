@@ -765,37 +765,6 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is received when a CDN auth token is received
-        /// </summary>
-        public sealed class CDNAuthTokenCallback : CallbackMsg
-        {
-            /// <summary>
-            /// Result of the operation
-            /// </summary>
-            public EResult Result { get; set; }
-            /// <summary>
-            /// CDN auth token
-            /// </summary>
-            public string Token { get; set; }
-            /// <summary>
-            /// Token expiration date
-            /// </summary>
-            public DateTime Expiration { get; set; }
-
-            internal CDNAuthTokenCallback( IPacketMsg packetMsg )
-            {
-                var response = new ClientMsgProtobuf<CMsgClientGetCDNAuthTokenResponse>( packetMsg );
-                var msg = response.Body;
-
-                JobID = response.TargetJobID;
-
-                Result = ( EResult )msg.eresult;
-                Token = msg.token;
-                Expiration = DateUtils.DateTimeFromUnixTime( msg.expiration_time );
-            }
-        }
-
-        /// <summary>
         /// This callback is received when a beta password check has been completed
         /// </summary>
         public sealed class CheckAppBetaPasswordCallback : CallbackMsg
