@@ -80,7 +80,7 @@ namespace SteamKit2
             HardwareUtils.Init( configuration.MachineInfoProvider );
 
             // add this library's handlers
-            const int HANDLERS_COUNT = 14; // this number should match the amount of AddHandlerCore calls below
+            const int HANDLERS_COUNT = 15; // this number should match the amount of AddHandlerCore calls below
             this.handlers = new( HANDLERS_COUNT );
 
             // notice: SteamFriends should be added before SteamUser due to AccountInfoCallback
@@ -98,6 +98,7 @@ namespace SteamKit2
             this.AddHandlerCore( new SteamMatchmaking() );
             this.AddHandlerCore( new SteamNetworking() );
             this.AddHandlerCore( new SteamContent() );
+            this.AddHandlerCore( new SteamAuthTicket() );
 
             Debug.Assert( this.handlers.Count == HANDLERS_COUNT );
 
