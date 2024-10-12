@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -79,6 +81,26 @@ namespace SteamKit2
         {
             return Encoding.UTF8.GetBytes( "SteamKit-DiskId" );
         }
+
+        internal static byte[] GetCombinedMacAddress( IEnumerable<byte[]> addresses )
+        {
+            var result = addresses
+                .Select( static addr => addr
+                    // pad all found mac addresses to 8 bytes
+                    .Append( ( byte )0 )
+                    .Append( ( byte )0 )
+                )
+                // add fallbacks in case less than 2 adapters are found
+                .Append( Enumerable.Repeat( ( byte )0, 8 ) )
+                .Append( Enumerable.Repeat( ( byte )0, 8 ) )
+                .Take( 2 )
+                .SelectMany( static b => b )
+                .ToArray();
+
+            Debug.Assert( result.Length == 16 );
+
+            return result;
+        }
     }
 
     [SupportedOSPlatform( "windows5.1.2600" )]
@@ -112,7 +134,7 @@ namespace SteamKit2
         {
             // This part of the code finds  *Physical* network interfaces
             // based on : https://social.msdn.microsoft.com/Forums/en-US/46c86903-3698-41bc-b081-fcf444e8a127/get-the-ip-address-of-the-physical-network-card-?forum=winforms
-            return NetworkInterface.GetAllNetworkInterfaces()
+            return DefaultMachineInfoProvider.GetCombinedMacAddress( NetworkInterface.GetAllNetworkInterfaces()
                 .Where( adapter =>
                 {
                     //Accessing the registry key corresponding to each adapter
@@ -124,17 +146,7 @@ namespace SteamKit2
                     var instanceID = rk.GetValue( "PnpInstanceID", "" )?.ToString();
                     return instanceID?.Length > 3 && instanceID.StartsWith( "PCI", StringComparison.Ordinal );
                 } )
-                .Select( networkInterface => networkInterface.GetPhysicalAddress().GetAddressBytes()
-                    //pad all found mac addresses to 8 bytes
-                    .Append( ( byte )0 )
-                    .Append( ( byte )0 ) 
-                )
-                //add fallbacks in case less than 2 adapters are found
-                .Append( Enumerable.Repeat( ( byte )0, 8 ))
-                .Append( Enumerable.Repeat( ( byte )0, 8 ))
-                .Take( 2 )
-                .SelectMany( b => b )
-                .ToArray();
+                .Select( networkInterface => networkInterface.GetPhysicalAddress().GetAddressBytes() ) );
         }
 
         public byte[]? GetDiskId()
@@ -157,12 +169,8 @@ namespace SteamKit2
         {
             string[] machineFiles =
             [
-                "/etc/machine-id", // present on at least some gentoo systems
                 "/var/lib/dbus/machine-id",
-                "/sys/class/net/eth0/address",
-                "/sys/class/net/eth1/address",
-                "/sys/class/net/eth2/address",
-                "/sys/class/net/eth3/address",
+                "/etc/machine-id",
                 "/etc/hostname",
             ];
 
@@ -182,7 +190,10 @@ namespace SteamKit2
             return null;
         }
 
-        public byte[]? GetMacAddress() => null;
+        public byte[]? GetMacAddress()
+        {
+            return DefaultMachineInfoProvider.GetCombinedMacAddress( GetMacAddresses() );
+        }
 
         public byte[]? GetDiskId()
         {
@@ -237,6 +248,9 @@ namespace SteamKit2
             {
                 var dirInfo = new DirectoryInfo( "/dev/disk/by-uuid" );
 
+                // TODO: Check that /sys/class/block/%s/device exists and /sys/class/block/%s/removable is '0'
+                // Steam might be concatenating all the devices
+
                 // we want the oldest disk symlinks first
                 return dirInfo.GetFiles()
                     .OrderBy( f => f.LastWriteTime )
@@ -258,6 +272,45 @@ namespace SteamKit2
                 return null;
 
             return paramString[ param.Length.. ];
+        }
+
+        static List<byte[]> GetMacAddresses( bool checkForPhysicalDevice = true )
+        {
+            var netDirectories = Directory.GetDirectories( "/sys/class/net" );
+            var macs = new List<byte[]>();
+
+            // if /sys/class/net can't be open or is empty, "/proc/net/dev" could be read here
+
+            foreach ( var directory in netDirectories )
+            {
+                var iface = Path.GetFileName( directory );
+
+                if ( checkForPhysicalDevice && !Directory.Exists( $"/sys/class/net/{iface}/device" ) )
+                {
+                    continue;
+                }
+
+                try
+                {
+                    // ioctl could be attempted to read the mac address here
+                    // Loopback mac address will be decoded to zero here
+                    var addressText = File.ReadAllText( $"/sys/class/net/{iface}/address" );
+                    var macAddress = Convert.FromHexString( addressText.Replace( ":", "" ).AsSpan().Trim() );
+
+                    macs.Add( macAddress );
+                }
+                catch
+                {
+                    // if we can't read a file, continue to the next
+                }
+            }
+
+            if ( checkForPhysicalDevice && macs.Count == 0 )
+            {
+                return GetMacAddresses( checkForPhysicalDevice: false );
+            }
+
+            return macs;
         }
     }
 
