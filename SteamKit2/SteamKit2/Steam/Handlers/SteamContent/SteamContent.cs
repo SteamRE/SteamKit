@@ -69,9 +69,8 @@ namespace SteamKit2
             // SendMessage is an AsyncJob, but we want to deserialize it
             // can't really do HandleMsg because it requires parsing the service like its done in HandleServiceMethod
             var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
-            using var contentService = unifiedMessages.CreateService<ContentServerDirectory>();
+            var contentService = unifiedMessages.CreateService<ContentServerDirectory>();
             var response = await contentService.GetServersForSteamPipe( request );
-
             return ContentServerDirectoryService.ConvertServerList( response.Body );
         }
 
@@ -109,7 +108,7 @@ namespace SteamKit2
             // SendMessage is an AsyncJob, but we want to deserialize it
             // can't really do HandleMsg because it requires parsing the service like its done in HandleServiceMethod
             var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
-            using var contentService = unifiedMessages.CreateService<ContentServerDirectory>();
+            var contentService = unifiedMessages.CreateService<ContentServerDirectory>();
             var response = await contentService.GetManifestRequestCode( request );
             return response.Body.manifest_request_code;
         }
