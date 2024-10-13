@@ -4,9 +4,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-
+using System.Collections.Concurrent;
 using ProtoBuf;
 
 namespace SteamKit2
@@ -16,13 +14,13 @@ namespace SteamKit2
     /// </summary>
     public partial class SteamUnifiedMessages : ClientMsgHandler
     {
-        private readonly Dictionary<string, UnifiedService> _handlers = [ ];
+        private readonly ConcurrentDictionary<string, UnifiedService> _handlers = [ ];
 
         /// <summary>
         /// Creates a service that can be used to send messages and receive notifications via Steamworks unified messaging.
         /// </summary>
         /// <typeparam name="TService">The type of the service to create.</typeparam>
-        /// <returns>The instance to create requests.</returns>
+        /// <returns>The instance to create requests from.</returns>
         public TService CreateService<TService>() where TService : UnifiedService, new()
         {
             var service = new TService
@@ -30,8 +28,17 @@ namespace SteamKit2
                 UnifiedMessages = this
             };
 
-            _handlers.Add( service.ServiceName, service);
-            return service;
+            return (_handlers.GetOrAdd( service.ServiceName, service ) as TService)!;
+        }
+
+        /// <summary>
+        /// Removes a service so it no longer can be used to send messages or receive notifications.
+        /// </summary>
+        /// <typeparam name="TService">The type of the service to remove.</typeparam>
+        public void RemoveService<TService>() where TService : UnifiedService, new()
+        {
+            var serviceName = new TService().ServiceName;
+            _handlers.TryRemove( serviceName, out _ );
         }
 
         /// <summary>
@@ -137,7 +144,7 @@ namespace SteamKit2
         /// <summary>
         /// Abstract definition of a steam unified messages service.
         /// </summary>
-        public abstract class UnifiedService : IDisposable
+        public abstract class UnifiedService
         {
             /// <summary>
             /// Handles a response message for this service. This should not be called directly.
@@ -162,12 +169,6 @@ namespace SteamKit2
             /// A reference to the <see cref="SteamUnifiedMessages"/> instance this service was created from.
             /// </summary>
             public SteamUnifiedMessages? UnifiedMessages { get; init; }
-
-            /// <inheritdoc />
-            public void Dispose()
-            {
-                UnifiedMessages!._handlers.Remove( ServiceName );
-            }
         }
     }
 }
