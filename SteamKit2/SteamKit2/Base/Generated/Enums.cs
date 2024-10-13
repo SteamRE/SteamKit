@@ -472,6 +472,39 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public enum EBrowserGPUStatus
+    {
+        k_EBrowserGPUStatus_Invalid = 0,
+        k_EBrowserGPUStatus_Enabled = 1,
+        k_EBrowserGPUStatus_DisabledUnknown = 2,
+        k_EBrowserGPUStatus_DisabledCrashCount = 4,
+        k_EBrowserGPUStatus_DisabledBlocklist = 5,
+        k_EBrowserGPUStatus_DisabledDebugRequest = 6,
+        k_EBrowserGPUStatus_DisabledCommandLine = 7,
+        k_EBrowserGPUStatus_DisabledRuntimeDetect = 8,
+        k_EBrowserGPUStatus_DisabledChildCommandLine = 9,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EBrowserFeatureStatus
+    {
+        k_EBrowserFeatureStatus_Invalid = 0,
+        k_EBrowserFeatureStatus_NotFound = 1,
+        k_EBrowserFeatureStatus_Unknown = 2,
+        k_EBrowserFeatureStatus_DisabledSoftware = 3,
+        k_EBrowserFeatureStatus_DisabledOff = 4,
+        k_EBrowserFeatureStatus_DisabledOffOk = 5,
+        k_EBrowserFeatureStatus_UnavailableSoftware = 6,
+        k_EBrowserFeatureStatus_UnavailableOff = 7,
+        k_EBrowserFeatureStatus_UnavailableOffOk = 8,
+        k_EBrowserFeatureStatus_EnabledReadback = 9,
+        k_EBrowserFeatureStatus_EnabledForce = 10,
+        k_EBrowserFeatureStatus_Enabled = 11,
+        k_EBrowserFeatureStatus_EnabledOn = 12,
+        k_EBrowserFeatureStatus_EnabledForceOn = 13,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ECommunityItemClass
     {
         k_ECommunityItemClass_Invalid = 0,
@@ -620,6 +653,8 @@ namespace SteamKit2.Internal
         k_ECompromiseDetectionType_TradeEvent = 1,
         k_ECompromiseDetectionType_ApiCallRate = 2,
         k_ECompromiseDetectionType_Manual = 3,
+        k_ECompromiseDetectionType_TicketAction = 4,
+        k_ECompromiseDetectionType_MaliciousRefund = 5,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -647,6 +682,14 @@ namespace SteamKit2.Internal
         k_EGameRecordingType_ManualRecording = 2,
         k_EGameRecordingType_BackgroundRecording = 3,
         k_EGameRecordingType_Clip = 4,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EExportCodec
+    {
+        k_EExportCodec_Default = 0,
+        k_EExportCodec_H264 = 1,
+        k_EExportCodec_H265 = 2,
     }
 
     [global::ProtoBuf.ProtoContract()]

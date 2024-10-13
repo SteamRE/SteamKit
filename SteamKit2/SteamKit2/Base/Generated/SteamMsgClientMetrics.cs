@@ -1405,6 +1405,7 @@ namespace SteamKit2.Internal
         k_EClipRangeMethod_ContextMenu = 4,
         k_EClipRangeMethod_Drag = 5,
         k_EClipRangeMethod_EntireClip = 6,
+        k_EClipRangeMethod_PhaseRecording = 7,
     }
 
     public interface IClientMetrics

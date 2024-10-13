@@ -1182,6 +1182,9 @@ namespace SteamKit2.Internal
         k_EMarketingMessageMidweekDeal = 11,
         k_EMarketingMessageDailyDeal = 12,
         k_EMarketingMessageNewDLC = 13,
+        k_EMarketingMessageFreeWeekend = 14,
+        k_EMarketingMessageSalePages = 15,
+        k_EMarketingMessagePlaytestAvailable = 16,
     }
 
     [global::ProtoBuf.ProtoContract()]
