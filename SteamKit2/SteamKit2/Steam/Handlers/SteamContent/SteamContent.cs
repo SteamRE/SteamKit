@@ -21,6 +21,10 @@ namespace SteamKit2
         public sealed class CDNAuthToken
         {
             /// <summary>
+            /// Result of the operation
+            /// </summary>
+            public EResult Result { get; set; }
+            /// <summary>
             /// CDN auth token
             /// </summary>
             public string Token { get; set; }
@@ -29,8 +33,10 @@ namespace SteamKit2
             /// </summary>
             public DateTime Expiration { get; set; }
 
-            internal CDNAuthToken( CContentServerDirectory_GetCDNAuthToken_Response response )
+            internal CDNAuthToken( SteamUnifiedMessages.ServiceMethodResponse message )
             {
+                var response = message.GetDeserializedResponse<CContentServerDirectory_GetCDNAuthToken_Response>();
+                Result = message.Result;
                 Token = response.token;
                 Expiration = DateUtils.DateTimeFromUnixTime( response.expiration_time );
             }
@@ -135,9 +141,8 @@ namespace SteamKit2
             var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
             var contentService = unifiedMessages.CreateService<IContentServerDirectory>();
             var message = await contentService.SendMessage(api => api.GetCDNAuthToken(request));
-            var response = message.GetDeserializedResponse<CContentServerDirectory_GetCDNAuthToken_Response>();
 
-            return new CDNAuthToken(response);
+            return new CDNAuthToken( message );
         }
 
         /// <summary>

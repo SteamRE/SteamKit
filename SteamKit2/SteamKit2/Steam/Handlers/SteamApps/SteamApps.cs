@@ -58,7 +58,6 @@ namespace SteamKit2
             EMsg.ClientPICSChangesSinceResponse => new PICSChangesCallback( packetMsg ),
             EMsg.ClientPICSProductInfoResponse => new PICSProductInfoCallback( packetMsg ),
             EMsg.ClientUpdateGuestPassesList => new GuestPassListCallback( packetMsg ),
-            EMsg.ClientGetCDNAuthTokenResponse => new CDNAuthTokenCallback( packetMsg ),
             EMsg.ClientCheckAppBetaPasswordResponse => new CheckAppBetaPasswordCallback( packetMsg ),
             _ => null,
         };
