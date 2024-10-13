@@ -523,9 +523,12 @@ namespace SteamKit2.Internal
 
     }
 
-    public class SiteManagerClient : SteamUnifiedMessages.UnifiedService
+    public class SiteManagerClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "SiteManagerClient";
+        public static string ServiceName { get; } = "SiteManagerClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteManagerClient_IncomingClient_Response>> IncomingClient(CSiteManagerClient_IncomingClient_Request request)
         {
@@ -542,7 +545,7 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CSiteManagerClient_TrackedPayments_Notification>( "SiteManagerClient.TrackedPaymentsNotification#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -552,7 +555,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -566,9 +569,12 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class SiteLicense : SteamUnifiedMessages.UnifiedService
+    public class SiteLicense : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "SiteLicense";
+        public static string ServiceName { get; } = "SiteLicense";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteLicense_InitiateAssociation_Response>> InitiateAssociation(CSiteLicense_InitiateAssociation_Request request)
         {
@@ -595,7 +601,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CSiteLicense_ClientGetAvailableSeats_Request, CSiteLicense_ClientGetAvailableSeats_Response>( "SiteLicense.ClientGetAvailableSeats#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -617,7 +623,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

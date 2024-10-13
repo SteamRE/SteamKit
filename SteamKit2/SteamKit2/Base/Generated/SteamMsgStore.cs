@@ -2029,9 +2029,12 @@ namespace SteamKit2.Internal
         k_EPartnerLinkTrackingBackfillSource_Desktop = 3,
     }
 
-    public class Store : SteamUnifiedMessages.UnifiedService
+    public class Store : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "Store";
+        public static string ServiceName { get; } = "Store";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_RegisterCDKey_Response>> RegisterCDKey(CStore_RegisterCDKey_Request request)
         {
@@ -2143,7 +2146,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CSteamDeckCompatibility_ShouldPrompt_Request, CSteamDeckCompatibility_ShouldPrompt_Response>( "Store.ShouldPromptForCompatibilityFeedback#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -2210,7 +2213,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -2224,20 +2227,23 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class StoreClient : SteamUnifiedMessages.UnifiedService
+    public class StoreClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "StoreClient";
+        public static string ServiceName { get; } = "StoreClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void NotifyStorePreferencesChanged(CStore_StorePreferencesChanged_Notification request)
         {
             UnifiedMessages.SendNotification<CStore_StorePreferencesChanged_Notification>( "StoreClient.NotifyStorePreferencesChanged#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

@@ -734,9 +734,12 @@ namespace SteamKit2.Internal
 
     }
 
-    public class GameServers : SteamUnifiedMessages.UnifiedService
+    public class GameServers : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "GameServers";
+        public static string ServiceName { get; } = "GameServers";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameServers_GetServerList_Response>> GetServerList(CGameServers_GetServerList_Request request)
         {
@@ -758,7 +761,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CGameServers_QueryByFakeIP_Request, CGameServers_GameServerQuery_Response>( "GameServers.QueryByFakeIP#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -777,21 +780,24 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
 
-    public class GameServerClient : SteamUnifiedMessages.UnifiedService
+    public class GameServerClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "GameServerClient";
+        public static string ServiceName { get; } = "GameServerClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<GameServerClient_QueryServerData_Response>> QueryServerData(GameServerClient_QueryServerData_Request request)
         {
             return UnifiedMessages.SendMessage<GameServerClient_QueryServerData_Request, GameServerClient_QueryServerData_Response>( "GameServerClient.QueryServerData#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -801,7 +807,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

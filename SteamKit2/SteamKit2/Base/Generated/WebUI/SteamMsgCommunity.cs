@@ -2165,9 +2165,12 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public class Community : SteamUnifiedMessages.UnifiedService
+    public class Community : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "Community";
+        public static string ServiceName { get; } = "Community";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_ClearSinglePartnerEventsAppPriority_Response>> ClearSinglePartnerEventsAppPriority(CCommunity_ClearSinglePartnerEventsAppPriority_Request request)
         {
@@ -2264,7 +2267,7 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CCommunity_RateCommentThread_Request, CCommunity_RateCommentThread_Response>( "Community.RateCommentThread#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -2328,7 +2331,7 @@ namespace SteamKit2.WebUI.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

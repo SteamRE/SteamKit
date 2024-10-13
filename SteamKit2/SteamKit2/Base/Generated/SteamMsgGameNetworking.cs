@@ -92,9 +92,12 @@ namespace SteamKit2.Internal
 
     }
 
-    public class GameNetworking : SteamUnifiedMessages.UnifiedService
+    public class GameNetworking : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "GameNetworking";
+        public static string ServiceName { get; } = "GameNetworking";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameNetworking_AllocateFakeIP_Response>> AllocateFakeIP(CGameNetworking_AllocateFakeIP_Request request)
         {
@@ -106,7 +109,7 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CGameNetworking_ReleaseFakeIP_Notification>( "GameNetworking.NotifyReleaseFakeIP#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -116,7 +119,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

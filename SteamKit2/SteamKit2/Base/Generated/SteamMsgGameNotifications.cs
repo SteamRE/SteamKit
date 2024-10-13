@@ -608,9 +608,12 @@ namespace SteamKit2.Internal
 
     }
 
-    public class GameNotifications : SteamUnifiedMessages.UnifiedService
+    public class GameNotifications : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "GameNotifications";
+        public static string ServiceName { get; } = "GameNotifications";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameNotifications_CreateSession_Response>> UserCreateSession(CGameNotifications_CreateSession_Request request)
         {
@@ -642,7 +645,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CGameNotifications_UpdateNotificationSettings_Request, CGameNotifications_UpdateNotificationSettings_Response>( "GameNotifications.UpdateNotificationSettings#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -667,14 +670,17 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
 
-    public class GameNotificationsClient : SteamUnifiedMessages.UnifiedService
+    public class GameNotificationsClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "GameNotificationsClient";
+        public static string ServiceName { get; } = "GameNotificationsClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void OnNotificationsRequested(CGameNotifications_OnNotificationsRequested_Notification request)
         {
@@ -686,11 +692,11 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CGameNotifications_OnUserStatusChanged_Notification>( "GameNotificationsClient.OnUserStatusChanged#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

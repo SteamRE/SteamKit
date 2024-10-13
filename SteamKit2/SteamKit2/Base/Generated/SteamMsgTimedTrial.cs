@@ -183,9 +183,12 @@ namespace SteamKit2.Internal
 
     }
 
-    public class TimedTrial : SteamUnifiedMessages.UnifiedService
+    public class TimedTrial : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "TimedTrial";
+        public static string ServiceName { get; } = "TimedTrial";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTimedTrial_GetTimeRemaining_Response>> GetTimeRemaining(CTimedTrial_GetTimeRemaining_Request request)
         {
@@ -202,7 +205,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CTimedTrial_ResetPlaytime_Request, CTimedTrial_ResetPlaytime_Response>( "TimedTrial.ResetPlaytime#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -218,7 +221,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

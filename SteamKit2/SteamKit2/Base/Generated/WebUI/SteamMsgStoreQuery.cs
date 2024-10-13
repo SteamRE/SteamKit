@@ -685,9 +685,12 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public class StoreQuery : SteamUnifiedMessages.UnifiedService
+    public class StoreQuery : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "StoreQuery";
+        public static string ServiceName { get; } = "StoreQuery";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreQuery_GetItemsByUserRecommendedTags_Response>> GetItemsByUserRecommendedTags(CStoreQuery_GetItemsByUserRecommendedTags_Request request)
         {
@@ -704,7 +707,7 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CStoreQuery_SearchSuggestions_Request, CStoreQuery_SearchSuggestions_Response>( "StoreQuery.SearchSuggestions#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -720,7 +723,7 @@ namespace SteamKit2.WebUI.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

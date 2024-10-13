@@ -726,9 +726,12 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public class UserReviews : SteamUnifiedMessages.UnifiedService
+    public class UserReviews : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "UserReviews";
+        public static string ServiceName { get; } = "UserReviews";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserReviews_GetFriendsRecommendedApp_Response>> GetFriendsRecommendedApp(CUserReviews_GetFriendsRecommendedApp_Request request)
         {
@@ -745,7 +748,7 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CUserReviews_Update_Request, CUserReviews_Update_Response>( "UserReviews.Update#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -761,7 +764,7 @@ namespace SteamKit2.WebUI.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

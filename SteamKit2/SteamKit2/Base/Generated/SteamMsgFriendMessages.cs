@@ -799,9 +799,12 @@ namespace SteamKit2.Internal
         k_EMessageReactionType_Sticker = 2,
     }
 
-    public class FriendMessages : SteamUnifiedMessages.UnifiedService
+    public class FriendMessages : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "FriendMessages";
+        public static string ServiceName { get; } = "FriendMessages";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendMessages_GetRecentMessages_Response>> GetRecentMessages(CFriendMessages_GetRecentMessages_Request request)
         {
@@ -833,7 +836,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CFriendMessages_UpdateMessageReaction_Request, CFriendMessages_UpdateMessageReaction_Response>( "FriendMessages.UpdateMessageReaction#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -855,7 +858,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -866,9 +869,12 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class FriendMessagesClient : SteamUnifiedMessages.UnifiedService
+    public class FriendMessagesClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "FriendMessagesClient";
+        public static string ServiceName { get; } = "FriendMessagesClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void IncomingMessage(CFriendMessages_IncomingMessage_Notification request)
         {
@@ -885,11 +891,11 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CFriendMessages_MessageReaction_Notification>( "FriendMessagesClient.MessageReaction#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

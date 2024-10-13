@@ -5628,16 +5628,19 @@ namespace SteamKit2.Internal
         k_EChatRoomMemberStateChange_RolesChanged = 12,
     }
 
-    public class Chat : SteamUnifiedMessages.UnifiedService
+    public class Chat : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "Chat";
+        public static string ServiceName { get; } = "Chat";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChat_RequestFriendPersonaStates_Response>> RequestFriendPersonaStates(CChat_RequestFriendPersonaStates_Request request)
         {
             return UnifiedMessages.SendMessage<CChat_RequestFriendPersonaStates_Request, CChat_RequestFriendPersonaStates_Response>( "Chat.RequestFriendPersonaStates#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -5647,14 +5650,17 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
 
-    public class ChatRoom : SteamUnifiedMessages.UnifiedService
+    public class ChatRoom : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "ChatRoom";
+        public static string ServiceName { get; } = "ChatRoom";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_CreateChatRoomGroup_Response>> CreateChatRoomGroup(CChatRoom_CreateChatRoomGroup_Request request)
         {
@@ -5921,7 +5927,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CChatRoom_GetMessageReactionReactors_Request, CChatRoom_GetMessageReactionReactors_Response>( "ChatRoom.GetMessageReactionReactors#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -6078,7 +6084,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -6095,9 +6101,12 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class ClanChatRooms : SteamUnifiedMessages.UnifiedService
+    public class ClanChatRooms : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "ClanChatRooms";
+        public static string ServiceName { get; } = "ClanChatRooms";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CClanChatRooms_GetClanChatRoomInfo_Response>> GetClanChatRoomInfo(CClanChatRooms_GetClanChatRoomInfo_Request request)
         {
@@ -6109,7 +6118,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CClanChatRooms_SetClanChatRoomPrivate_Request, CClanChatRooms_SetClanChatRoomPrivate_Response>( "ClanChatRooms.SetClanChatRoomPrivate#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -6122,14 +6131,17 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
 
-    public class ChatRoomClient : SteamUnifiedMessages.UnifiedService
+    public class ChatRoomClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "ChatRoomClient";
+        public static string ServiceName { get; } = "ChatRoomClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void NotifyIncomingChatMessage(CChatRoom_IncomingChatMessage_Notification request)
         {
@@ -6186,11 +6198,11 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CChatRoom_MessageReaction_Notification>( "ChatRoomClient.NotifyMessageReaction#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -6231,20 +6243,23 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class ChatUsability : SteamUnifiedMessages.UnifiedService
+    public class ChatUsability : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "ChatUsability";
+        public static string ServiceName { get; } = "ChatUsability";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void NotifyClientUsabilityMetrics(CChatUsability_ClientUsabilityMetrics_Notification request)
         {
             UnifiedMessages.SendNotification<CChatUsability_ClientUsabilityMetrics_Notification>( "ChatUsability.NotifyClientUsabilityMetrics#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -6255,20 +6270,23 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class ChatUsabilityClient : SteamUnifiedMessages.UnifiedService
+    public class ChatUsabilityClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "ChatUsabilityClient";
+        public static string ServiceName { get; } = "ChatUsabilityClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void NotifyRequestClientUsabilityMetrics(CChatUsability_RequestClientUsabilityMetrics_Notification request)
         {
             UnifiedMessages.SendNotification<CChatUsability_RequestClientUsabilityMetrics_Notification>( "ChatUsabilityClient.NotifyRequestClientUsabilityMetrics#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

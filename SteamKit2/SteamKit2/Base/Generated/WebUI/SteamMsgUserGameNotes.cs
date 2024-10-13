@@ -418,9 +418,12 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public class UserGameNotes : SteamUnifiedMessages.UnifiedService
+    public class UserGameNotes : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "UserGameNotes";
+        public static string ServiceName { get; } = "UserGameNotes";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserGameNotes_DeleteNote_Response>> DeleteNote(CUserGameNotes_DeleteNote_Request request)
         {
@@ -442,7 +445,7 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CUserGameNotes_SaveNote_Request, CUserGameNotes_SaveNote_Response>( "UserGameNotes.SaveNote#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -461,7 +464,7 @@ namespace SteamKit2.WebUI.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

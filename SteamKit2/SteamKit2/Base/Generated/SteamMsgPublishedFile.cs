@@ -4620,9 +4620,12 @@ namespace SteamKit2.Internal
         k_PFFSS_TentativeApproval = 5,
     }
 
-    public class PublishedFile : SteamUnifiedMessages.UnifiedService
+    public class PublishedFile : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "PublishedFile";
+        public static string ServiceName { get; } = "PublishedFile";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_Vote_Response>> Vote(CPublishedFile_Vote_Request request)
         {
@@ -4789,7 +4792,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CPublishedFile_UpdateContentDescriptors_Request, CPublishedFile_UpdateContentDescriptors_Response>( "PublishedFile.UpdateContentDescriptors#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -4895,14 +4898,17 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
 
-    public class PublishedFileClient : SteamUnifiedMessages.UnifiedService
+    public class PublishedFileClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "PublishedFileClient";
+        public static string ServiceName { get; } = "PublishedFileClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void NotifyFileSubscribed(CPublishedFile_FileSubscribed_Notification request)
         {
@@ -4919,11 +4925,11 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CPublishedFile_FileDeleted_Client_Notification>( "PublishedFileClient.NotifyFileDeleted#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

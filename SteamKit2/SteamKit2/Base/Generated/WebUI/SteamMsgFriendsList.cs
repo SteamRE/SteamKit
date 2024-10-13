@@ -258,9 +258,12 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public class FriendsList : SteamUnifiedMessages.UnifiedService
+    public class FriendsList : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "FriendsList";
+        public static string ServiceName { get; } = "FriendsList";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendsList_GetCategories_Response>> GetCategories(CFriendsList_GetCategories_Request request)
         {
@@ -282,7 +285,7 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CFriendsList_SetFavorites_Request, CFriendsList_SetFavorites_Response>( "FriendsList.SetFavorites#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -301,25 +304,28 @@ namespace SteamKit2.WebUI.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
 
-    public class FriendsListClient : SteamUnifiedMessages.UnifiedService
+    public class FriendsListClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "FriendsListClient";
+        public static string ServiceName { get; } = "FriendsListClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void FavoritesChanged(CFriendsList_FavoritesChanged_Notification request)
         {
             UnifiedMessages.SendNotification<CFriendsList_FavoritesChanged_Notification>( "FriendsListClient.FavoritesChanged#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

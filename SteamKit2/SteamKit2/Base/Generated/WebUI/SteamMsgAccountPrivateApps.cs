@@ -85,9 +85,12 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public class AccountPrivateApps : SteamUnifiedMessages.UnifiedService
+    public class AccountPrivateApps : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "AccountPrivateApps";
+        public static string ServiceName { get; } = "AccountPrivateApps";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountPrivateApps_GetPrivateAppList_Response>> GetPrivateAppList(CAccountPrivateApps_GetPrivateAppList_Request request)
         {
@@ -99,7 +102,7 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CAccountPrivateApps_ToggleAppPrivacy_Request, CAccountPrivateApps_ToggleAppPrivacy_Response>( "AccountPrivateApps.ToggleAppPrivacy#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -112,25 +115,28 @@ namespace SteamKit2.WebUI.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
 
-    public class AccountPrivateAppsClient : SteamUnifiedMessages.UnifiedService
+    public class AccountPrivateAppsClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "AccountPrivateAppsClient";
+        public static string ServiceName { get; } = "AccountPrivateAppsClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void NotifyPrivateAppListChanged(CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification request)
         {
             UnifiedMessages.SendNotification<CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification>( "AccountPrivateAppsClient.NotifyPrivateAppListChanged#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

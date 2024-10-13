@@ -1225,9 +1225,12 @@ namespace SteamKit2.Internal
         k_EMarketingMessageLookupByGIDList = 4,
     }
 
-    public class MarketingMessages : SteamUnifiedMessages.UnifiedService
+    public class MarketingMessages : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "MarketingMessages";
+        public static string ServiceName { get; } = "MarketingMessages";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CMarketingMessages_GetActiveMarketingMessages_Response>> GetActiveMarketingMessages(CMarketingMessages_GetActiveMarketingMessages_Request request)
         {
@@ -1324,7 +1327,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CMarketingMessage_GetMarketingMessagesForApps_Request, CMarketingMessage_GetMarketingMessagesForApps_Response>( "MarketingMessages.GetMarketingMessagesForApps#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -1385,7 +1388,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

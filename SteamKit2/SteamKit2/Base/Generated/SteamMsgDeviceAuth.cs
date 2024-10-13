@@ -850,9 +850,12 @@ namespace SteamKit2.Internal
 
     }
 
-    public class DeviceAuth : SteamUnifiedMessages.UnifiedService
+    public class DeviceAuth : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "DeviceAuth";
+        public static string ServiceName { get; } = "DeviceAuth";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDeviceAuth_GetOwnAuthorizedDevices_Response>> GetOwnAuthorizedDevices(CDeviceAuth_GetOwnAuthorizedDevices_Request request)
         {
@@ -909,7 +912,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CDeviceAuth_GetBorrowerPlayHistory_Request, CDeviceAuth_GetBorrowerPlayHistory_Response>( "DeviceAuth.GetBorrowerPlayHistory#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -949,7 +952,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

@@ -1183,9 +1183,12 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public class LoyaltyRewards : SteamUnifiedMessages.UnifiedService
+    public class LoyaltyRewards : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "LoyaltyRewards";
+        public static string ServiceName { get; } = "LoyaltyRewards";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_AddReaction_Response>> AddReaction(CLoyaltyRewards_AddReaction_Request request)
         {
@@ -1277,7 +1280,7 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CLoyaltyRewards_RegisterForSteamDeckRewards_Request, CLoyaltyRewards_RegisterForSteamDeckRewards_Response>( "LoyaltyRewards.RegisterForSteamDeckRewards#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -1338,7 +1341,7 @@ namespace SteamKit2.WebUI.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

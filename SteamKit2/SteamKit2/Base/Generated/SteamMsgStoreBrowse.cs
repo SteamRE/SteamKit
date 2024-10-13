@@ -2667,9 +2667,12 @@ namespace SteamKit2.Internal
         k_EStoreCategoryType_MAX = 5,
     }
 
-    public class StoreBrowse : SteamUnifiedMessages.UnifiedService
+    public class StoreBrowse : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "StoreBrowse";
+        public static string ServiceName { get; } = "StoreBrowse";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetItems_Response>> GetItems(CStoreBrowse_GetItems_Request request)
         {
@@ -2696,7 +2699,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CStoreBrowse_GetHardwareItems_Request, CStoreBrowse_GetHardwareItems_Response>( "StoreBrowse.GetHardwareItems#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -2718,7 +2721,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

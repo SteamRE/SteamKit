@@ -1081,9 +1081,12 @@ namespace SteamKit2.Internal
         k_EExternalFacebookPage = 7,
     }
 
-    public class UserAccount : SteamUnifiedMessages.UnifiedService
+    public class UserAccount : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "UserAccount";
+        public static string ServiceName { get; } = "UserAccount";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserAccount_GetAvailableValveDiscountPromotions_Response>> GetAvailableValveDiscountPromotions(CUserAccount_GetAvailableValveDiscountPromotions_Request request)
         {
@@ -1140,7 +1143,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CUserAccount_RegisterCompatTool_Request, CUserAccount_RegisterCompatTool_Response>( "UserAccount.RegisterCompatTool#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -1180,21 +1183,24 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
 
-    public class AccountLinking : SteamUnifiedMessages.UnifiedService
+    public class AccountLinking : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "AccountLinking";
+        public static string ServiceName { get; } = "AccountLinking";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountLinking_GetLinkedAccountInfo_Response>> GetLinkedAccountInfo(CAccountLinking_GetLinkedAccountInfo_Request request)
         {
             return UnifiedMessages.SendMessage<CAccountLinking_GetLinkedAccountInfo_Request, CAccountLinking_GetLinkedAccountInfo_Response>( "AccountLinking.GetLinkedAccountInfo#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -1204,21 +1210,24 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
 
-    public class EmbeddedClient : SteamUnifiedMessages.UnifiedService
+    public class EmbeddedClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "EmbeddedClient";
+        public static string ServiceName { get; } = "EmbeddedClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CEmbeddedClient_AuthorizeDevice_Response>> AuthorizeCurrentDevice(CEmbeddedClient_AuthorizeCurrentDevice_Request request)
         {
             return UnifiedMessages.SendMessage<CEmbeddedClient_AuthorizeCurrentDevice_Request, CEmbeddedClient_AuthorizeDevice_Response>( "EmbeddedClient.AuthorizeCurrentDevice#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -1228,7 +1237,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

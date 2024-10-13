@@ -371,9 +371,12 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public class SteamNotification : SteamUnifiedMessages.UnifiedService
+    public class SteamNotification : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "SteamNotification";
+        public static string ServiceName { get; } = "SteamNotification";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamNotification_GetPreferences_Response>> GetPreferences(CSteamNotification_GetPreferences_Request request)
         {
@@ -390,7 +393,7 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CSteamNotification_SetPreferences_Request, CSteamNotification_SetPreferences_Response>( "SteamNotification.SetPreferences#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -406,14 +409,17 @@ namespace SteamKit2.WebUI.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
 
-    public class SteamNotificationClient : SteamUnifiedMessages.UnifiedService
+    public class SteamNotificationClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "SteamNotificationClient";
+        public static string ServiceName { get; } = "SteamNotificationClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request)
         {
@@ -425,11 +431,11 @@ namespace SteamKit2.WebUI.Internal
             UnifiedMessages.SendNotification<CSteamNotification_PreferencesUpdated_Notification>( "SteamNotificationClient.PreferencesUpdated#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

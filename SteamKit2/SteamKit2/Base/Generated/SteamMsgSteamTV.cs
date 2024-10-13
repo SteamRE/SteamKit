@@ -2690,9 +2690,12 @@ namespace SteamKit2.Internal
         k_ESteamTVContentTemplate_Event = 8,
     }
 
-    public class SteamTV : SteamUnifiedMessages.UnifiedService
+    public class SteamTV : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "SteamTV";
+        public static string ServiceName { get; } = "SteamTV";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_CreateBroadcastChannel_Response>> CreateBroadcastChannel(CSteamTV_CreateBroadcastChannel_Request request)
         {
@@ -2854,7 +2857,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CSteamTV_AppCheer_Request, CSteamTV_AppCheer_Response>( "SteamTV.AppCheer#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -2957,7 +2960,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
