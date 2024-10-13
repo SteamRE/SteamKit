@@ -225,7 +225,6 @@ namespace SteamKit2
             return null;
         }
 
-
         static string[] GetBootOptions()
         {
             string bootOptions;
@@ -276,8 +275,17 @@ namespace SteamKit2
 
         static List<byte[]> GetMacAddresses( bool checkForPhysicalDevice = true )
         {
-            var netDirectories = Directory.GetDirectories( "/sys/class/net" );
             var macs = new List<byte[]>();
+            string[] netDirectories;
+
+            try
+            {
+                netDirectories = Directory.GetDirectories( "/sys/class/net" );
+            }
+            catch
+            {
+                return macs;
+            }
 
             // if /sys/class/net can't be open or is empty, "/proc/net/dev" could be read here
 
@@ -285,13 +293,13 @@ namespace SteamKit2
             {
                 var iface = Path.GetFileName( directory );
 
-                if ( checkForPhysicalDevice && !Directory.Exists( $"/sys/class/net/{iface}/device" ) )
-                {
-                    continue;
-                }
-
                 try
                 {
+                    if ( checkForPhysicalDevice && !Directory.Exists( $"/sys/class/net/{iface}/device" ) )
+                    {
+                        continue;
+                    }
+
                     // ioctl could be attempted to read the mac address here
                     // Loopback mac address will be decoded to zero here
                     var addressText = File.ReadAllText( $"/sys/class/net/{iface}/address" );
