@@ -8,9 +8,13 @@ v 3.0.0			July 18 2024
 * Added `DepotManifest.Serialize`.
 * Added `SteamClient.WaitForCallbackAsync` and `CallbackManager.RunWaitCallbackAsync`.
 * Added `cdnAuthToken` parameter to `CDN.Client` method for country specific servers that still require it.
+* Added `SteamAuthTicket` handler.
+* Added `WebAPI.AsyncInterface.CallAsync` overload that does not require specifying `HttpMethod.Get`.
 * Added WebSocket as a default enabled protocol, switched to using GetCMListForConnect API.
+* Added support for parsing binary keyvalues that have an alternate end byte.
 * Updated Steam enums and protobufs.
 * Various performance and memory optimizations.
+* Linux machines will now fetch MAC address for the machine id.
 
 BREAKING CHANGES
 * SteamKit now targets .NET 8.
@@ -24,6 +28,7 @@ BREAKING CHANGES
   * Returns the number of written bytes to the destination.
   * You can rent a buffer like `ArrayPool<byte>.Shared.Rent((int)chunk.UncompressedLength)`
   * `DepotChunk` is now a static class that only contains a `Process` method.
+* Moved `SteamApps.GetCDNAuthToken` to `SteamContent.GetCDNAuthToken` due to a Steam change.
 * Removed obsolete methods and enum values.
 * Removed Artifact and Underlords generated protobufs.
 * Removed `SteamTrading` handler.
