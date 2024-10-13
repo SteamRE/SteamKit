@@ -286,7 +286,7 @@ namespace Tests
         [Fact]
         public void KeyValues_TryReadAsBinary_ReadsBinary()
         {
-            var binary = Utils.DecodeHexString( TestObjectHex );
+            var binary = Convert.FromHexString( TestObjectHex );
             var kv = new KeyValue();
             bool success;
             using ( var ms = new MemoryStream( binary ) )
@@ -305,7 +305,7 @@ namespace Tests
         [Fact]
         public void KeyValuesReadsBinaryWithLeftoverData()
         {
-            var binary = Utils.DecodeHexString( TestObjectHex + Guid.NewGuid().ToString().Replace("-", "", StringComparison.Ordinal) );
+            var binary = Convert.FromHexString( TestObjectHex + Guid.NewGuid().ToString().Replace("-", "", StringComparison.Ordinal) );
             var kv = new KeyValue();
             bool success;
             using ( var ms = new MemoryStream( binary ) )
@@ -328,7 +328,7 @@ namespace Tests
             // Test every possible truncation boundary we have.
             for ( int i = 0; i < TestObjectHex.Length; i += 2 )
             {
-                var binary = Utils.DecodeHexString( TestObjectHex[ ..i ] );
+                var binary = Convert.FromHexString( TestObjectHex[ ..i ] );
                 var kv = new KeyValue();
                 bool success;
                 using ( var ms = new MemoryStream( binary ) )
@@ -345,7 +345,7 @@ namespace Tests
         public void KeyValuesReadsBinaryWithMultipleChildren()
         {
             var hex = "00546573744f626a65637400016b6579310076616c75653100016b6579320076616c756532000808";
-            var binary = Utils.DecodeHexString( hex );
+            var binary = Convert.FromHexString( hex );
             var kv = new KeyValue();
             bool success;
             using ( var ms = new MemoryStream( binary ) )
@@ -603,7 +603,7 @@ namespace Tests
         public void DecodesBinaryWithFieldType10()
         {
             var hex = "00546573744F626A656374000A6B65790001020304050607080808";
-            var binary = Utils.DecodeHexString( hex );
+            var binary = Convert.FromHexString( hex );
             var kv = new KeyValue();
             using (var ms = new MemoryStream(binary))
             {
@@ -612,6 +612,21 @@ namespace Tests
             }
 
             Assert.Equal( 0x0807060504030201, kv["key"].AsLong() );
+        }
+
+        [Fact]
+        public void DecodesBinaryWithAlternateEnd()
+        {
+            var hex = "00546573744F626A656374000A6B65790001020304050607080B0B";
+            var binary = Convert.FromHexString( hex );
+            var kv = new KeyValue();
+            using ( var ms = new MemoryStream( binary ) )
+            {
+                var read = kv.TryReadAsBinary( ms );
+                Assert.True( read );
+            }
+
+            Assert.Equal( 0x0807060504030201, kv[ "key" ].AsLong() );
         }
 
         static string SaveToText( KeyValue kv )

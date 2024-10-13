@@ -57,6 +57,7 @@ namespace SteamKit2.Util
             }
 
             var extents = new VOLUME_DISK_EXTENTS();
+            var bytesReturned = 0u;
 
             if ( !DeviceIoControl(
                 handle,
@@ -65,7 +66,7 @@ namespace SteamKit2.Util
                 0,
                 &extents,
                 ( uint )VOLUME_DISK_EXTENTS.SizeOf( 1 ),
-                null,
+                &bytesReturned, // If lpOverlapped is NULL, lpBytesReturned cannot be NULL
                 null
             ) )
             {
@@ -108,6 +109,7 @@ namespace SteamKit2.Util
             // we need to allocate.
 
             var header = new STORAGE_DESCRIPTOR_HEADER();
+            var bytesReturned = 0u;
 
             if ( !DeviceIoControl(
                 handle,
@@ -116,7 +118,7 @@ namespace SteamKit2.Util
                 ( uint )STORAGE_PROPERTY_QUERY.SizeOf( 1 ),
                 &header,
                 ( uint )sizeof( STORAGE_DESCRIPTOR_HEADER ),
-                null,
+                &bytesReturned,
                 null
             ) )
             {
@@ -137,7 +139,7 @@ namespace SteamKit2.Util
                         ( uint )STORAGE_PROPERTY_QUERY.SizeOf( 1 ),
                         ( void* )descriptorPtr,
                         header.Size,
-                        null,
+                        &bytesReturned,
                         null
                     ) )
                 {

@@ -28,6 +28,7 @@ namespace Tests
             Assert.Equal( iface.Timeout, TimeSpan.FromSeconds( 100 ) );
         }
 
+#if DEBUG
         [Fact]
         public void SteamConfigWebAPIInterface()
         {
@@ -41,6 +42,7 @@ namespace Tests
             Assert.Equal( "hello world", iface.apiKey );
             Assert.Equal( new Uri( "http://example.com" ), iface.httpClient.BaseAddress );
         }
+#endif
 
         [Fact]
         public async Task ThrowsWebAPIRequestExceptionIfRequestUnsuccessful()
@@ -210,7 +212,7 @@ namespace Tests
                 Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
                 Assert.Equal( HttpMethod.Put, request.Method );
 
-                var content = await request.Content.ReadAsStringAsync(); // This technically should be ReadAsFormDataAsync
+                var content = await request.Content.ReadAsStringAsync( TestContext.Current.CancellationToken ); // This technically should be ReadAsFormDataAsync
                 var formData = HttpUtility.ParseQueryString( content );
                 Assert.Equal( 3, formData.Count );
                 Assert.Equal( "foo", formData[ "f" ] );

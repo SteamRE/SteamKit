@@ -58,7 +58,6 @@ namespace SteamKit2
             EMsg.ClientPICSChangesSinceResponse => new PICSChangesCallback( packetMsg ),
             EMsg.ClientPICSProductInfoResponse => new PICSProductInfoCallback( packetMsg ),
             EMsg.ClientUpdateGuestPassesList => new GuestPassListCallback( packetMsg ),
-            EMsg.ClientGetCDNAuthTokenResponse => new CDNAuthTokenCallback( packetMsg ),
             EMsg.ClientCheckAppBetaPasswordResponse => new CheckAppBetaPasswordCallback( packetMsg ),
             _ => null,
         };
@@ -230,29 +229,6 @@ namespace SteamKit2
             return new AsyncJobMultiple<PICSProductInfoCallback>( this.Client, request.SourceJobID, static callback => !callback.ResponsePending );
         }
 
-
-        /// <summary>
-        /// Request product information for an app or package
-        /// Results are returned in a <see cref="CDNAuthTokenCallback"/> callback.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
-        /// </summary>
-        /// <param name="app">App id requested.</param>
-        /// <param name="depot">Depot id requested.</param>
-        /// <param name="host_name">CDN host name being requested.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="CDNAuthTokenCallback"/>.</returns>
-        public AsyncJob<CDNAuthTokenCallback> GetCDNAuthToken( uint app, uint depot, string host_name )
-        {
-            var request = new ClientMsgProtobuf<CMsgClientGetCDNAuthToken>( EMsg.ClientGetCDNAuthToken );
-            request.SourceJobID = Client.GetNextJobID();
-
-            request.Body.app_id = app;
-            request.Body.depot_id = depot;
-            request.Body.host_name = host_name;
-
-            this.Client.Send( request );
-
-            return new AsyncJob<CDNAuthTokenCallback>( this.Client, request.SourceJobID );
-        }
 
         /// <summary>
         /// Request a free license for given appid, can be used for free on demand apps
