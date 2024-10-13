@@ -91,7 +91,7 @@ namespace SteamKit2
         /// <inheritdoc />
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            if (packetMsg is not PacketClientMsgProtobuf packetMsgProto)
+            if (packetMsg is not PacketClientMsgProtobuf { MsgType: EMsg.ServiceMethod or EMsg.ServiceMethodResponse } packetMsgProto)
                 return;
 
             var jobName = packetMsgProto.Header.Proto.target_job_name.AsSpan();
