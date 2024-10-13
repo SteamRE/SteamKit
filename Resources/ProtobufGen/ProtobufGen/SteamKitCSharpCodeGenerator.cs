@@ -35,10 +35,13 @@ namespace ProtobufGen
         protected override void WriteServiceHeader( GeneratorContext ctx, ServiceDescriptorProto service, ref object state )
         {
             state = service.Name;
-            ctx.WriteLine( $"{GetAccess( GetAccess( service ) )} class {Escape( service.Name )} : SteamUnifiedMessages.UnifiedService" )
+            ctx.WriteLine( $"{GetAccess( GetAccess( service ) )} class {Escape( service.Name )} : SteamUnifiedMessages.IUnifiedService" )
                 .WriteLine( "{" )
                 .Indent()
-                .WriteLine( $"public override string ServiceName {{ get; }} = \"{Escape( service.Name )}\";" )
+                .WriteLine( $"public static string ServiceName {{ get; }} = \"{Escape( service.Name )}\";" )
+                .WriteLine()
+                .WriteLine( "/// <inheritdoc />" )
+                .WriteLine( "public SteamUnifiedMessages UnifiedMessages { get; init; }" )
                 .WriteLine();
         }
 
@@ -48,7 +51,7 @@ namespace ProtobufGen
                 .Where( static serviceMethod => serviceMethod.OutputType.AsSpan()[ 1.. ] is not "NoResponse")
                 .ToList();
 
-            ctx.WriteLine( "public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )" )
+            ctx.WriteLine( "public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )" )
                 .WriteLine( "{" );
 
             if ( services.Count != 0 )
@@ -79,7 +82,7 @@ namespace ProtobufGen
                 .Where( static serviceMethod => serviceMethod.OutputType.AsSpan()[ 1.. ] is "NoResponse")
                 .ToList();
 
-            ctx.WriteLine( "public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )" )
+            ctx.WriteLine( "public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )" )
                 .WriteLine( "{" );
 
             if ( notifications.Count != 0 )

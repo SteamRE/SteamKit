@@ -14,31 +14,26 @@ namespace SteamKit2
     /// </summary>
     public partial class SteamUnifiedMessages : ClientMsgHandler
     {
-        private readonly ConcurrentDictionary<string, UnifiedService> _handlers = [ ];
+        private readonly ConcurrentDictionary<string, object> _handlers = [ ];
 
         /// <summary>
         /// Creates a service that can be used to send messages and receive notifications via Steamworks unified messaging.
         /// </summary>
         /// <typeparam name="TService">The type of the service to create.</typeparam>
         /// <returns>The instance to create requests from.</returns>
-        public TService CreateService<TService>() where TService : UnifiedService, new()
+        public TService CreateService<TService>() where TService : class, IUnifiedService, new()
         {
-            var service = new TService
-            {
-                UnifiedMessages = this
-            };
-
-            return (_handlers.GetOrAdd( service.ServiceName, service ) as TService)!;
+            return ( _handlers.GetOrAdd( TService.ServiceName, static ( _, unifiedMessages ) =>
+                new TService { UnifiedMessages = unifiedMessages }, this ) as TService )!;
         }
 
         /// <summary>
         /// Removes a service so it no longer can be used to send messages or receive notifications.
         /// </summary>
         /// <typeparam name="TService">The type of the service to remove.</typeparam>
-        public void RemoveService<TService>() where TService : UnifiedService, new()
+        public void RemoveService<TService>() where TService : IUnifiedService, new()
         {
-            var serviceName = new TService().ServiceName;
-            _handlers.TryRemove( serviceName, out _ );
+            _handlers.TryRemove( TService.ServiceName, out _ );
         }
 
         /// <summary>
@@ -113,9 +108,10 @@ namespace SteamKit2
 
             var serviceName = jobName[ ..dot ].ToString();
 
-            if (!_handlers.TryGetValue( serviceName, out var handler ) )
+            if (!_handlers.TryGetValue( serviceName, out var handlerObj ) )
                 return;
 
+            var handler = (handlerObj as IUnifiedService)!;
             var methodName = jobName[ ( dot + 1 )..hash ].ToString();
 
             switch ( packetMsgProto.MsgType )
@@ -144,26 +140,26 @@ namespace SteamKit2
         /// <summary>
         /// Abstract definition of a steam unified messages service.
         /// </summary>
-        public abstract class UnifiedService
+        public interface IUnifiedService
         {
+            /// <summary>
+            /// The name of the steam unified messages service.
+            /// </summary>
+            public static abstract string ServiceName { get; }
+
             /// <summary>
             /// Handles a response message for this service. This should not be called directly.
             /// </summary>
             /// <param name="methodName">The name of the method the service should handle</param>
             /// <param name="packetMsg">The packet message that contains the data</param>
-            public abstract void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg );
+            public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg );
 
             /// <summary>
             /// Handles a notification message for this service. This should not be called directly.
             /// </summary>
             /// <param name="methodName">The name of the method the service should handle</param>
             /// <param name="packetMsg">The packet message that contains the data</param>
-            public abstract void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg );
-
-            /// <summary>
-            /// The name of the steam unified messages service.
-            /// </summary>
-            public abstract string ServiceName { get; }
+            public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg );
 
             /// <summary>
             /// A reference to the <see cref="SteamUnifiedMessages"/> instance this service was created from.
