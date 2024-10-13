@@ -160,9 +160,12 @@ namespace SteamKit2.Internal
 
     }
 
-    public class CommunityLinkFilter : SteamUnifiedMessages.UnifiedService
+    public class CommunityLinkFilter : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "CommunityLinkFilter";
+        public static string ServiceName { get; } = "CommunityLinkFilter";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetLinkFilterHashPrefixes_Response>> GetLinkFilterHashPrefixes(CCommunity_GetLinkFilterHashPrefixes_Request request)
         {
@@ -179,7 +182,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterListVersion_Request, CCommunity_GetLinkFilterListVersion_Response>( "CommunityLinkFilter.GetLinkFilterListVersion#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -195,7 +198,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

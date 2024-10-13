@@ -870,9 +870,12 @@ namespace SteamKit2.Internal
 
     }
 
-    public class Econ : SteamUnifiedMessages.UnifiedService
+    public class Econ : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "Econ";
+        public static string ServiceName { get; } = "Econ";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CEcon_GetInventoryItemsWithDescriptions_Response>> GetInventoryItemsWithDescriptions(CEcon_GetInventoryItemsWithDescriptions_Request request)
         {
@@ -894,7 +897,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CEcon_GetAssetClassInfo_Request, CEcon_GetAssetClassInfo_Response>( "Econ.GetAssetClassInfo#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -913,7 +916,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

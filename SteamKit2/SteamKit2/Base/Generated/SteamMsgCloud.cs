@@ -2496,9 +2496,12 @@ namespace SteamKit2.Internal
 
     }
 
-    public class Cloud : SteamUnifiedMessages.UnifiedService
+    public class Cloud : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "Cloud";
+        public static string ServiceName { get; } = "Cloud";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void ClientLogUploadCheck(CCloud_ClientLogUploadCheck_Notification request)
         {
@@ -2640,7 +2643,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CCloud_ClientGetAppQuotaUsage_Request, CCloud_ClientGetAppQuotaUsage_Response>( "Cloud.ClientGetAppQuotaUsage#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -2710,7 +2713,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -2739,9 +2742,12 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class CloudClient : SteamUnifiedMessages.UnifiedService
+    public class CloudClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "CloudClient";
+        public static string ServiceName { get; } = "CloudClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void NotifyAppStateChange(CCloud_AppCloudStateChange_Notification request)
         {
@@ -2753,11 +2759,11 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CCloud_ClientLogUploadRequest_Notification>( "CloudClient.ClientLogUploadRequest#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

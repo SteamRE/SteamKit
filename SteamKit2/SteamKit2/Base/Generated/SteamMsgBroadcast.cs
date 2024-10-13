@@ -3490,9 +3490,12 @@ namespace SteamKit2.Internal
         k_EBroadcastChatPermissionOwnsApp = 1,
     }
 
-    public class Broadcast : SteamUnifiedMessages.UnifiedService
+    public class Broadcast : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "Broadcast";
+        public static string ServiceName { get; } = "Broadcast";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_BeginBroadcastSession_Response>> BeginBroadcastSession(CBroadcast_BeginBroadcastSession_Request request)
         {
@@ -3664,7 +3667,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastViewerStats_Request, CBroadcast_GetBroadcastViewerStats_Response>( "Broadcast.GetBroadcastViewerStats#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -3758,7 +3761,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -3781,9 +3784,12 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class BroadcastClient : SteamUnifiedMessages.UnifiedService
+    public class BroadcastClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "BroadcastClient";
+        public static string ServiceName { get; } = "BroadcastClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void NotifyBroadcastViewerState(CBroadcast_BroadcastViewerState_Notification request)
         {
@@ -3850,11 +3856,11 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CBroadcast_WebRTCAddViewerCandidate_Notification>( "BroadcastClient.NotifyWebRTCAddViewerCandidate#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

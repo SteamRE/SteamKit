@@ -906,9 +906,12 @@ namespace SteamKit2.Internal
 
     }
 
-    public class Inventory : SteamUnifiedMessages.UnifiedService
+    public class Inventory : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "Inventory";
+        public static string ServiceName { get; } = "Inventory";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> GetInventory(CInventory_GetInventory_Request request)
         {
@@ -990,7 +993,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CInventory_InspectItem_Request, CInventory_Response>( "Inventory.InspectItem#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -1045,25 +1048,28 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
 
-    public class InventoryClient : SteamUnifiedMessages.UnifiedService
+    public class InventoryClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "InventoryClient";
+        public static string ServiceName { get; } = "InventoryClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void NotifyNewItems(CInventoryClient_NewItems_Notification request)
         {
             UnifiedMessages.SendNotification<CInventoryClient_NewItems_Notification>( "InventoryClient.NotifyNewItems#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

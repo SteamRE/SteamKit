@@ -870,9 +870,12 @@ namespace SteamKit2.Internal
 
     }
 
-    public class Parental : SteamUnifiedMessages.UnifiedService
+    public class Parental : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "Parental";
+        public static string ServiceName { get; } = "Parental";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_EnableParentalSettings_Response>> EnableParentalSettings(CParental_EnableParentalSettings_Request request)
         {
@@ -954,7 +957,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CParental_ReportPlaytimeAndNotify_Request, CParental_ReportPlaytimeAndNotify_Response>( "Parental.ReportPlaytimeAndNotify#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -1009,14 +1012,17 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
 
-    public class ParentalClient : SteamUnifiedMessages.UnifiedService
+    public class ParentalClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "ParentalClient";
+        public static string ServiceName { get; } = "ParentalClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void NotifySettingsChange(CParental_ParentalSettingsChange_Notification request)
         {
@@ -1038,11 +1044,11 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CParental_PlaytimeUsed_Notification>( "ParentalClient.NotifyPlaytimeUsed#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

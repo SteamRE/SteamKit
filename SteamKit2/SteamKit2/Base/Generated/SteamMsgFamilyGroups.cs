@@ -2074,9 +2074,12 @@ namespace SteamKit2.Internal
         k_ESharedLibrary_LicenseExcluded_Inactive = 30,
     }
 
-    public class FamilyGroups : SteamUnifiedMessages.UnifiedService
+    public class FamilyGroups : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "FamilyGroups";
+        public static string ServiceName { get; } = "FamilyGroups";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_CreateFamilyGroup_Response>> CreateFamilyGroup(CFamilyGroups_CreateFamilyGroup_Request request)
         {
@@ -2208,7 +2211,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CFamilyGroups_ClearCooldownSkip_Request, CFamilyGroups_ClearCooldownSkip_Response>( "FamilyGroups.ClearCooldownSkip#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -2293,14 +2296,17 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
 
-    public class FamilyGroupsClient : SteamUnifiedMessages.UnifiedService
+    public class FamilyGroupsClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "FamilyGroupsClient";
+        public static string ServiceName { get; } = "FamilyGroupsClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void NotifyRunningApps(CFamilyGroupsClient_NotifyRunningApps_Notification request)
         {
@@ -2317,11 +2323,11 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CFamilyGroupsClient_GroupChanged_Notification>( "FamilyGroupsClient.NotifyGroupChanged#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

@@ -1979,9 +1979,12 @@ namespace SteamKit2.Internal
         k_EAuthTokenState_Revoked = 99,
     }
 
-    public class Authentication : SteamUnifiedMessages.UnifiedService
+    public class Authentication : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "Authentication";
+        public static string ServiceName { get; } = "Authentication";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAuthentication_GetPasswordRSAPublicKey_Response>> GetPasswordRSAPublicKey(CAuthentication_GetPasswordRSAPublicKey_Request request)
         {
@@ -2048,7 +2051,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CAuthentication_RefreshToken_Revoke_Request, CAuthentication_RefreshToken_Revoke_Response>( "Authentication.RevokeRefreshToken#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -2094,14 +2097,17 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
 
-    public class AuthenticationSupport : SteamUnifiedMessages.UnifiedService
+    public class AuthenticationSupport : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "AuthenticationSupport";
+        public static string ServiceName { get; } = "AuthenticationSupport";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAuthenticationSupport_QueryRefreshTokensByAccount_Response>> QueryRefreshTokensByAccount(CAuthenticationSupport_QueryRefreshTokensByAccount_Request request)
         {
@@ -2123,7 +2129,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CAuthenticationSupport_GetTokenHistory_Request, CAuthenticationSupport_GetTokenHistory_Response>( "AuthenticationSupport.GetTokenHistory#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -2142,14 +2148,17 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
 
-    public class CloudGaming : SteamUnifiedMessages.UnifiedService
+    public class CloudGaming : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "CloudGaming";
+        public static string ServiceName { get; } = "CloudGaming";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloudGaming_CreateNonce_Response>> CreateNonce(CCloudGaming_CreateNonce_Request request)
         {
@@ -2161,7 +2170,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CCloudGaming_GetTimeRemaining_Request, CCloudGaming_GetTimeRemaining_Response>( "CloudGaming.GetTimeRemaining#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -2174,7 +2183,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

@@ -559,9 +559,12 @@ namespace SteamKit2.Internal
 
     }
 
-    public class PartnerApps : SteamUnifiedMessages.UnifiedService
+    public class PartnerApps : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "PartnerApps";
+        public static string ServiceName { get; } = "PartnerApps";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPartnerApps_RequestUploadToken_Response>> RequestKVSignUploadToken(CPartnerApps_RequestUploadToken_Request request)
         {
@@ -618,7 +621,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CPartnerApps_Download_Request, CPartnerApps_Download_Response>( "PartnerApps.Download#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -658,7 +661,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

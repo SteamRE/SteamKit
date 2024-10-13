@@ -851,9 +851,12 @@ namespace SteamKit2.Internal
         k_ETempDTst3 = 6,
     }
 
-    public class AccountHardware : SteamUnifiedMessages.UnifiedService
+    public class AccountHardware : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "AccountHardware";
+        public static string ServiceName { get; } = "AccountHardware";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountHardware_RegisterSteamController_Response>> RegisterSteamController(CAccountHardware_RegisterSteamController_Request request)
         {
@@ -910,7 +913,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CAccountHardware_GetSteamDeckComponents_Request, CAccountHardware_GetSteamDeckComponents_Response>( "AccountHardware.GetSteamDeckComponents#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -950,7 +953,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

@@ -4717,9 +4717,12 @@ namespace SteamKit2.Internal
         k_ETextFilterSettingDisabled = 3,
     }
 
-    public class Player : SteamUnifiedMessages.UnifiedService
+    public class Player : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "Player";
+        public static string ServiceName { get; } = "Player";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetRecentPlaytimeSessionsForChild_Response>> GetRecentPlaytimeSessionsForChild(CPlayer_GetRecentPlaytimeSessionsForChild_Request request)
         {
@@ -4986,7 +4989,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CPlayer_RecordDisconnectedPlaytime_Request, CPlayer_RecordDisconnectedPlaytime_Response>( "Player.RecordDisconnectedPlaytime#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -5152,14 +5155,17 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
 
-    public class PlayerClient : SteamUnifiedMessages.UnifiedService
+    public class PlayerClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "PlayerClient";
+        public static string ServiceName { get; } = "PlayerClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void NotifyLastPlayedTimes(CPlayer_LastPlayedTimes_Notification request)
         {
@@ -5201,11 +5207,11 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CPlayer_PrivacySettingsChanged_Notification>( "PlayerClient.NotifyPrivacyPrivacySettingsChanged#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

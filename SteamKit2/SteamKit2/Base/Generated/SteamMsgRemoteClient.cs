@@ -9,9 +9,12 @@
 namespace SteamKit2.Internal
 {
 
-    public class RemoteClient : SteamUnifiedMessages.UnifiedService
+    public class RemoteClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "RemoteClient";
+        public static string ServiceName { get; } = "RemoteClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemoteClient_GetPairingInfo_Response>> GetPairingInfo(CRemoteClient_GetPairingInfo_Request request)
         {
@@ -83,7 +86,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CRemoteClient_DeleteRemotePlayTogetherInvitation_Request, CRemoteClient_DeleteRemotePlayTogetherInvitation_Response>( "RemoteClient.DeleteRemotePlayTogetherInvitation#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -114,7 +117,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -140,9 +143,12 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class RemoteClientSteamClient : SteamUnifiedMessages.UnifiedService
+    public class RemoteClientSteamClient : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "RemoteClientSteamClient";
+        public static string ServiceName { get; } = "RemoteClientSteamClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void NotifyRegisterStatusUpdate(CRemoteClient_RegisterStatusUpdate_Notification request)
         {
@@ -179,11 +185,11 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CRemoteClient_TaskList_Notification>( "RemoteClientSteamClient.NotifyTaskList#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

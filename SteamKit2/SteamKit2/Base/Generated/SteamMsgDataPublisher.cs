@@ -655,9 +655,12 @@ namespace SteamKit2.Internal
 
     }
 
-    public class DataPublisher : SteamUnifiedMessages.UnifiedService
+    public class DataPublisher : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "DataPublisher";
+        public static string ServiceName { get; } = "DataPublisher";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void ClientContentCorruptionReport(CDataPublisher_ClientContentCorruptionReport_Notification request)
         {
@@ -684,7 +687,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CDataPublisher_AddVRDeviceInfo_Request, CDataPublisher_AddVRDeviceInfo_Response>( "DataPublisher.AddVRDeviceInfo#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -700,7 +703,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -714,16 +717,19 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class ValveHWSurvey : SteamUnifiedMessages.UnifiedService
+    public class ValveHWSurvey : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "ValveHWSurvey";
+        public static string ServiceName { get; } = "ValveHWSurvey";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CValveHWSurvey_GetSurveySchedule_Response>> GetSurveySchedule(CValveHWSurvey_GetSurveySchedule_Request request)
         {
             return UnifiedMessages.SendMessage<CValveHWSurvey_GetSurveySchedule_Request, CValveHWSurvey_GetSurveySchedule_Response>( "ValveHWSurvey.GetSurveySchedule#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -733,7 +739,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

@@ -1397,9 +1397,12 @@ namespace SteamKit2.Internal
         k_EClipRangeMethod_EntireClip = 6,
     }
 
-    public class ClientMetrics : SteamUnifiedMessages.UnifiedService
+    public class ClientMetrics : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "ClientMetrics";
+        public static string ServiceName { get; } = "ClientMetrics";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public void ClientAppInterfaceStatsReport(CClientMetrics_AppInterfaceStats_Notification request)
         {
@@ -1471,11 +1474,11 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CClientMetrics_EndGameRecording_Notification>( "ClientMetrics.ReportEndGameRecording#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {

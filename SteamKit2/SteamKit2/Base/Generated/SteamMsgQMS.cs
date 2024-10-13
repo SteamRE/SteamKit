@@ -565,16 +565,19 @@ namespace SteamKit2.Internal
         k_EGameSearchResult_SearchCanceled = 6,
     }
 
-    public class QueuedMatchmaking : SteamUnifiedMessages.UnifiedService
+    public class QueuedMatchmaking : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "QueuedMatchmaking";
+        public static string ServiceName { get; } = "QueuedMatchmaking";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CQueuedMatchmaking_SearchForGame_Response>> SearchForGame(CQueuedMatchmaking_SearchForGame_Request request)
         {
             return UnifiedMessages.SendMessage<CQueuedMatchmaking_SearchForGame_Request, CQueuedMatchmaking_SearchForGame_Response>( "QueuedMatchmaking.SearchForGame#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -584,14 +587,17 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
 
-    public class QueuedMatchmakingGameHost : SteamUnifiedMessages.UnifiedService
+    public class QueuedMatchmakingGameHost : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "QueuedMatchmakingGameHost";
+        public static string ServiceName { get; } = "QueuedMatchmakingGameHost";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CQueuedMatchmakingGameHost_SearchForPlayers_Response>> SearchForPlayers(CQueuedMatchmakingGameHost_SearchForPlayers_Request request)
         {
@@ -608,7 +614,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_EndGame_Request, CQueuedMatchmakingGameHost_EndGame_Response>( "QueuedMatchmakingGameHost.EndGame#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -624,7 +630,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }

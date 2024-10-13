@@ -567,9 +567,12 @@ namespace SteamKit2.Internal
 
     }
 
-    public class ContentBuilder : SteamUnifiedMessages.UnifiedService
+    public class ContentBuilder : SteamUnifiedMessages.IUnifiedService
     {
-        public override string ServiceName { get; } = "ContentBuilder";
+        public static string ServiceName { get; } = "ContentBuilder";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentBuilder_InitDepotBuild_Response>> InitDepotBuild(CContentBuilder_InitDepotBuild_Request request)
         {
@@ -601,7 +604,7 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CContentBuilder_SignInstallScript_Request, CContentBuilder_SignInstallScript_Response>( "ContentBuilder.SignInstallScript#1", request );
         }
 
-        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
@@ -626,7 +629,7 @@ namespace SteamKit2.Internal
             }
         }
 
-        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
     }
