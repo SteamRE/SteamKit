@@ -10,6 +10,7 @@ using System.IO.Compression;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using SteamKit2.Steam.CDN;
 
 namespace SteamKit2.CDN
 {
@@ -29,6 +30,8 @@ namespace SteamKit2.CDN
         /// </summary>
         public static TimeSpan ResponseBodyTimeout { get; set; } = TimeSpan.FromSeconds( 60 );
 
+        private static bool CheckedForLancacheServer { get; set; }
+        private static bool LancacheDetected { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Client"/> class.
@@ -227,10 +230,24 @@ namespace SteamKit2.CDN
                 }
             }
 
+            if ( !CheckedForLancacheServer )
+            {
+                LancacheDetected = LancacheDetector.DetectLancacheServer();
+                CheckedForLancacheServer = true;
+            }
+
+
             var chunkID = Utils.EncodeHexString( chunk.ChunkID );
             var url = $"depot/{depotId}/chunk/{chunkID}";
 
-            using var request = new HttpRequestMessage( HttpMethod.Get, BuildCommand( server, url, cdnAuthToken, proxyServer ) );
+            var builtUrl = BuildCommand( server, url, cdnAuthToken, proxyServer );
+            using var request = new HttpRequestMessage( HttpMethod.Get, builtUrl );
+            if ( LancacheDetected )
+            {
+                request.Headers.Host = server.Host;
+                // User agent must match the Steam client in order for Lancache to correctly identify and cache Valve's CDN content
+                request.Headers.Add( "User-Agent", "Valve/Steam HTTP Client 1.0" );
+            }
 
             using var cts = new CancellationTokenSource();
             cts.CancelAfter( RequestTimeout );
@@ -317,6 +334,20 @@ namespace SteamKit2.CDN
 
         static Uri BuildCommand( Server server, string command, string? query, Server? proxyServer )
         {
+            // If a Lancache instance is detected in Steam it will take priority over all other available servers
+            if ( LancacheDetected )
+            {
+                var builder = new UriBuilder()
+                {
+                    Scheme = "http",
+                    Host = "lancache.steamcontent.com",
+                    Port = 80,
+                    Path = command,
+                    Query = query ?? string.Empty
+                };
+                return builder.Uri;
+            }
+
             var uriBuilder = new UriBuilder
             {
                 Scheme = server.Protocol == Server.ConnectionProtocol.HTTP ? "http" : "https",
