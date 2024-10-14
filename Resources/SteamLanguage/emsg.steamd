@@ -328,7 +328,7 @@ enum EMsg
 	ClientLicenseList = 780;
 	ClientCancelLicenseResponse = 781; removed
 	ClientVACBanStatus = 782;
-	ClientCMList = 783;
+	ClientCMList = 783; removed
 	ClientEncryptPct = 784;
 	ClientGetLegacyGameKeyResponse = 785;
 	ClientFavoritesList = 786; removed

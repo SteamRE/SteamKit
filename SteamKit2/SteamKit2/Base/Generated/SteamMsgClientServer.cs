@@ -138,34 +138,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientCMList : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<uint> cm_addresses { get; } = new global::System.Collections.Generic.List<uint>();
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<uint> cm_ports { get; } = new global::System.Collections.Generic.List<uint>();
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public global::System.Collections.Generic.List<string> cm_websocket_addresses { get; } = new global::System.Collections.Generic.List<string>();
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public uint percent_default_to_websocket
-        {
-            get => __pbn__percent_default_to_websocket.GetValueOrDefault();
-            set => __pbn__percent_default_to_websocket = value;
-        }
-        public bool ShouldSerializepercent_default_to_websocket() => __pbn__percent_default_to_websocket != null;
-        public void Resetpercent_default_to_websocket() => __pbn__percent_default_to_websocket = null;
-        private uint? __pbn__percent_default_to_websocket;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgClientP2PConnectionInfo : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;

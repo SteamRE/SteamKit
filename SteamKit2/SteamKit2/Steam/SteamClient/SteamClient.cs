@@ -284,10 +284,6 @@ namespace SteamKit2
             // we want to handle some of the clientmsgs before we pass them along to registered handlers
             switch ( packetMsg.MsgType )
             {
-                case EMsg.ClientCMList:
-                    HandleCMList( packetMsg );
-                    break;
-
                 case EMsg.JobHeartbeat:
                     HandleJobHeartbeat( packetMsg );
                     break;
@@ -352,13 +348,6 @@ namespace SteamKit2
         void ClearHandlerCaches()
         {
             GetHandler<SteamMatchmaking>()?.ClearLobbyCache();
-        }
-
-        void HandleCMList( IPacketMsg packetMsg )
-        {
-            var cmMsg = new ClientMsgProtobuf<CMsgClientCMList>( packetMsg );
-
-            PostCallback( new CMListCallback( cmMsg.Body ) );
         }
 
         void HandleJobHeartbeat( IPacketMsg packetMsg )

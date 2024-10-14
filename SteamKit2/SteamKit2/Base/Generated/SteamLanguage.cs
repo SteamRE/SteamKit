@@ -301,7 +301,6 @@ namespace SteamKit2
 		ClientGameConnectTokens = 779,
 		ClientLicenseList = 780,
 		ClientVACBanStatus = 782,
-		ClientCMList = 783,
 		ClientEncryptPct = 784,
 		ClientGetLegacyGameKeyResponse = 785,
 		ClientAddFriend = 791,
