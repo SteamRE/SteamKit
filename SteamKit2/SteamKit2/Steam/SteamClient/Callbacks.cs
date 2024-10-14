@@ -3,10 +3,6 @@
  * file 'license.txt', which is part of this source code package.
  */
 
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net;
-using SteamKit2.Discovery;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -39,29 +35,6 @@ namespace SteamKit2
             internal DisconnectedCallback( bool userInitiated )
             {
                 this.UserInitiated = userInitiated;
-            }
-        }
-
-
-        /// <summary>
-        /// This callback is received when the client has received the CM list from Steam.
-        /// </summary>
-        public sealed class CMListCallback : CallbackMsg
-        {
-            /// <summary>
-            /// Gets the CM server list.
-            /// </summary>
-            public ReadOnlyCollection<ServerRecord> Servers { get; private set; }
-
-
-            internal CMListCallback( CMsgClientCMList cmMsg )
-            {
-                var cmList = cmMsg.cm_addresses
-                    .Zip( cmMsg.cm_ports, ( addr, port ) => ServerRecord.CreateSocketServer( new IPEndPoint( NetHelpers.GetIPAddress( addr ), ( int )port ) ) );
-
-                var websocketList = cmMsg.cm_websocket_addresses.Select( ( addr ) => ServerRecord.CreateWebSocketServer( addr ) );
-
-                Servers = new ReadOnlyCollection<ServerRecord>( cmList.Concat( websocketList ).ToList() );
             }
         }
     }
