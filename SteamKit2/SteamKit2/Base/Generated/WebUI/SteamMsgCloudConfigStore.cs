@@ -201,15 +201,66 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public interface ICloudConfigStore
+    public class CloudConfigStore : SteamUnifiedMessages.IUnifiedService
     {
-        CCloudConfigStore_Download_Response Download(CCloudConfigStore_Download_Request request);
-        CCloudConfigStore_Upload_Response Upload(CCloudConfigStore_Upload_Request request);
+        public static string ServiceName { get; } = "CloudConfigStore";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloudConfigStore_Download_Response>> Download(CCloudConfigStore_Download_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCloudConfigStore_Download_Request, CCloudConfigStore_Download_Response>( "CloudConfigStore.Download#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloudConfigStore_Upload_Response>> Upload(CCloudConfigStore_Upload_Request request)
+        {
+            return UnifiedMessages.SendMessage<CCloudConfigStore_Upload_Request, CCloudConfigStore_Upload_Response>( "CloudConfigStore.Upload#1", request );
+        }
+
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "Download":
+                    UnifiedMessages.HandleResponseMsg<CCloudConfigStore_Download_Response>( packetMsg );
+                    break;
+                case "Upload":
+                    UnifiedMessages.HandleResponseMsg<CCloudConfigStore_Upload_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
-    public interface ICloudConfigStoreClient
+    public class CloudConfigStoreClient : SteamUnifiedMessages.IUnifiedService
     {
-        NoResponse NotifyChange(CCloudConfigStore_Change_Notification request);
+        public static string ServiceName { get; } = "CloudConfigStoreClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
+
+        public void NotifyChange(CCloudConfigStore_Change_Notification request)
+        {
+            UnifiedMessages.SendNotification<CCloudConfigStore_Change_Notification>( "CloudConfigStoreClient.NotifyChange#1", request );
+        }
+
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
+
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyChange":
+                    UnifiedMessages.HandleNotificationMsg<CCloudConfigStore_Change_Notification>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

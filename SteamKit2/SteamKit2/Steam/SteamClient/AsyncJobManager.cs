@@ -31,7 +31,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="jobId">The JobID.</param>
         /// <param name="callback">The callback.</param>
-        public void TryCompleteJob( JobID jobId, CallbackMsg callback )
+        public void TryCompleteJob( JobID jobId, ICallbackMsg callback )
         {
             var asyncJob = GetJob( jobId );
 

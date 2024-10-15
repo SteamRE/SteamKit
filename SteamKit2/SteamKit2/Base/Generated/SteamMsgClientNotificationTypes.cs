@@ -1206,36 +1206,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CClientNotificationGameRecordingInstantClip : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong game_id
-        {
-            get => __pbn__game_id.GetValueOrDefault();
-            set => __pbn__game_id = value;
-        }
-        public bool ShouldSerializegame_id() => __pbn__game_id != null;
-        public void Resetgame_id() => __pbn__game_id = null;
-        private ulong? __pbn__game_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string clip_id
-        {
-            get => __pbn__clip_id ?? "";
-            set => __pbn__clip_id = value;
-        }
-        public bool ShouldSerializeclip_id() => __pbn__clip_id != null;
-        public void Resetclip_id() => __pbn__clip_id = null;
-        private string __pbn__clip_id;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public enum EClientNotificationType
     {
         k_EClientNotificationType_Invalid = 0,
@@ -1296,7 +1266,6 @@ namespace SteamKit2.Internal
         k_EClientNotificationType_GameRecordingStart = 55,
         k_EClientNotificationType_GameRecordingStop = 56,
         k_EClientNotificationType_GameRecordingUserMarkerAdded = 57,
-        k_EClientNotificationType_GameRecordingInstantClip = 58,
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -3049,16 +3049,6 @@ namespace SteamKit2.WebUI.Internal
         public void Resetgameid() => __pbn__gameid = null;
         private ulong? __pbn__gameid;
 
-        [global::ProtoBuf.ProtoMember(5)]
-        public bool instant_clip
-        {
-            get => __pbn__instant_clip.GetValueOrDefault();
-            set => __pbn__instant_clip = value;
-        }
-        public bool ShouldSerializeinstant_clip() => __pbn__instant_clip != null;
-        public void Resetinstant_clip() => __pbn__instant_clip = null;
-        private bool? __pbn__instant_clip;
-
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -4027,36 +4017,6 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializeerror_type() => __pbn__error_type != null;
         public void Reseterror_type() => __pbn__error_type = null;
         private int? __pbn__error_type;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CClientNotificationGameRecordingInstantClip : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong game_id
-        {
-            get => __pbn__game_id.GetValueOrDefault();
-            set => __pbn__game_id = value;
-        }
-        public bool ShouldSerializegame_id() => __pbn__game_id != null;
-        public void Resetgame_id() => __pbn__game_id = null;
-        private ulong? __pbn__game_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string clip_id
-        {
-            get => __pbn__clip_id ?? "";
-            set => __pbn__clip_id = value;
-        }
-        public bool ShouldSerializeclip_id() => __pbn__clip_id != null;
-        public void Resetclip_id() => __pbn__clip_id = null;
-        private string __pbn__clip_id;
 
     }
 
@@ -17552,16 +17512,6 @@ namespace SteamKit2.WebUI.Internal
         public void Resetalways_show_user_chooser() => __pbn__always_show_user_chooser = null;
         private bool? __pbn__always_show_user_chooser;
 
-        [global::ProtoBuf.ProtoMember(21)]
-        public bool os_version_unsupported
-        {
-            get => __pbn__os_version_unsupported.GetValueOrDefault();
-            set => __pbn__os_version_unsupported = value;
-        }
-        public bool ShouldSerializeos_version_unsupported() => __pbn__os_version_unsupported != null;
-        public void Resetos_version_unsupported() => __pbn__os_version_unsupported = null;
-        private bool? __pbn__os_version_unsupported;
-
         [global::ProtoBuf.ProtoMember(3000)]
         public bool show_family_sharing_notifications
         {
@@ -18346,16 +18296,6 @@ namespace SteamKit2.WebUI.Internal
         public void Resetgamestream_hardware_video_encode() => __pbn__gamestream_hardware_video_encode = null;
         private bool? __pbn__gamestream_hardware_video_encode;
 
-        [global::ProtoBuf.ProtoMember(13001)]
-        public bool gamestream_enable_video_h265
-        {
-            get => __pbn__gamestream_enable_video_h265.GetValueOrDefault();
-            set => __pbn__gamestream_enable_video_h265 = value;
-        }
-        public bool ShouldSerializegamestream_enable_video_h265() => __pbn__gamestream_enable_video_h265 != null;
-        public void Resetgamestream_enable_video_h265() => __pbn__gamestream_enable_video_h265 = null;
-        private bool? __pbn__gamestream_enable_video_h265;
-
         [global::ProtoBuf.ProtoMember(14001)]
         public bool steam_input_configurator_error_msg_enable
         {
@@ -18566,15 +18506,14 @@ namespace SteamKit2.WebUI.Internal
         private bool? __pbn__g_background_a_m;
 
         [global::ProtoBuf.ProtoMember(18210)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string gamerecording_video_bitrate
+        public int g_background_br
         {
-            get => __pbn__gamerecording_video_bitrate ?? "";
-            set => __pbn__gamerecording_video_bitrate = value;
+            get => __pbn__g_background_br.GetValueOrDefault();
+            set => __pbn__g_background_br = value;
         }
-        public bool ShouldSerializegamerecording_video_bitrate() => __pbn__gamerecording_video_bitrate != null;
-        public void Resetgamerecording_video_bitrate() => __pbn__gamerecording_video_bitrate = null;
-        private string __pbn__gamerecording_video_bitrate;
+        public bool ShouldSerializeg_background_br() => __pbn__g_background_br != null;
+        public void Resetg_background_br() => __pbn__g_background_br = null;
+        private int? __pbn__g_background_br;
 
         [global::ProtoBuf.ProtoMember(18211)]
         public bool g_background_a_s
@@ -18615,110 +18554,6 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializeg_max_fps() => __pbn__g_max_fps != null;
         public void Resetg_max_fps() => __pbn__g_max_fps = null;
         private int? __pbn__g_max_fps;
-
-        [global::ProtoBuf.ProtoMember(18215)]
-        public CMsgHotkey gamerecording_hotkey_ic { get; set; }
-
-        [global::ProtoBuf.ProtoMember(18216)]
-        public float gamerecording_ic_seconds
-        {
-            get => __pbn__gamerecording_ic_seconds.GetValueOrDefault();
-            set => __pbn__gamerecording_ic_seconds = value;
-        }
-        public bool ShouldSerializegamerecording_ic_seconds() => __pbn__gamerecording_ic_seconds != null;
-        public void Resetgamerecording_ic_seconds() => __pbn__gamerecording_ic_seconds = null;
-        private float? __pbn__gamerecording_ic_seconds;
-
-        [global::ProtoBuf.ProtoMember(18217)]
-        public int gamerecording_export_limit_type
-        {
-            get => __pbn__gamerecording_export_limit_type.GetValueOrDefault();
-            set => __pbn__gamerecording_export_limit_type = value;
-        }
-        public bool ShouldSerializegamerecording_export_limit_type() => __pbn__gamerecording_export_limit_type != null;
-        public void Resetgamerecording_export_limit_type() => __pbn__gamerecording_export_limit_type = null;
-        private int? __pbn__gamerecording_export_limit_type;
-
-        [global::ProtoBuf.ProtoMember(18218)]
-        public int gamerecording_export_limit_size_mb
-        {
-            get => __pbn__gamerecording_export_limit_size_mb.GetValueOrDefault();
-            set => __pbn__gamerecording_export_limit_size_mb = value;
-        }
-        public bool ShouldSerializegamerecording_export_limit_size_mb() => __pbn__gamerecording_export_limit_size_mb != null;
-        public void Resetgamerecording_export_limit_size_mb() => __pbn__gamerecording_export_limit_size_mb = null;
-        private int? __pbn__gamerecording_export_limit_size_mb;
-
-        [global::ProtoBuf.ProtoMember(18219)]
-        public int gamerecording_export_limit_bitrate
-        {
-            get => __pbn__gamerecording_export_limit_bitrate.GetValueOrDefault();
-            set => __pbn__gamerecording_export_limit_bitrate = value;
-        }
-        public bool ShouldSerializegamerecording_export_limit_bitrate() => __pbn__gamerecording_export_limit_bitrate != null;
-        public void Resetgamerecording_export_limit_bitrate() => __pbn__gamerecording_export_limit_bitrate = null;
-        private int? __pbn__gamerecording_export_limit_bitrate;
-
-        [global::ProtoBuf.ProtoMember(18220)]
-        public int gamerecording_export_limit_width
-        {
-            get => __pbn__gamerecording_export_limit_width.GetValueOrDefault();
-            set => __pbn__gamerecording_export_limit_width = value;
-        }
-        public bool ShouldSerializegamerecording_export_limit_width() => __pbn__gamerecording_export_limit_width != null;
-        public void Resetgamerecording_export_limit_width() => __pbn__gamerecording_export_limit_width = null;
-        private int? __pbn__gamerecording_export_limit_width;
-
-        [global::ProtoBuf.ProtoMember(18221)]
-        public int gamerecording_export_limit_height
-        {
-            get => __pbn__gamerecording_export_limit_height.GetValueOrDefault();
-            set => __pbn__gamerecording_export_limit_height = value;
-        }
-        public bool ShouldSerializegamerecording_export_limit_height() => __pbn__gamerecording_export_limit_height != null;
-        public void Resetgamerecording_export_limit_height() => __pbn__gamerecording_export_limit_height = null;
-        private int? __pbn__gamerecording_export_limit_height;
-
-        [global::ProtoBuf.ProtoMember(18222)]
-        public int gamerecording_export_limit_frame_rate
-        {
-            get => __pbn__gamerecording_export_limit_frame_rate.GetValueOrDefault();
-            set => __pbn__gamerecording_export_limit_frame_rate = value;
-        }
-        public bool ShouldSerializegamerecording_export_limit_frame_rate() => __pbn__gamerecording_export_limit_frame_rate != null;
-        public void Resetgamerecording_export_limit_frame_rate() => __pbn__gamerecording_export_limit_frame_rate = null;
-        private int? __pbn__gamerecording_export_limit_frame_rate;
-
-        [global::ProtoBuf.ProtoMember(18223)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string gamerecording_export_directory
-        {
-            get => __pbn__gamerecording_export_directory ?? "";
-            set => __pbn__gamerecording_export_directory = value;
-        }
-        public bool ShouldSerializegamerecording_export_directory() => __pbn__gamerecording_export_directory != null;
-        public void Resetgamerecording_export_directory() => __pbn__gamerecording_export_directory = null;
-        private string __pbn__gamerecording_export_directory;
-
-        [global::ProtoBuf.ProtoMember(18224)]
-        public int gamerecording_export_codec
-        {
-            get => __pbn__gamerecording_export_codec.GetValueOrDefault();
-            set => __pbn__gamerecording_export_codec = value;
-        }
-        public bool ShouldSerializegamerecording_export_codec() => __pbn__gamerecording_export_codec != null;
-        public void Resetgamerecording_export_codec() => __pbn__gamerecording_export_codec = null;
-        private int? __pbn__gamerecording_export_codec;
-
-        [global::ProtoBuf.ProtoMember(18225)]
-        public int gamerecording_video_maxheight
-        {
-            get => __pbn__gamerecording_video_maxheight.GetValueOrDefault();
-            set => __pbn__gamerecording_video_maxheight = value;
-        }
-        public bool ShouldSerializegamerecording_video_maxheight() => __pbn__gamerecording_video_maxheight != null;
-        public void Resetgamerecording_video_maxheight() => __pbn__gamerecording_video_maxheight = null;
-        private int? __pbn__gamerecording_video_maxheight;
 
         [global::ProtoBuf.ProtoMember(20000)]
         public bool show_timestamps_in_console
@@ -19091,26 +18926,6 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializesystem_bluetooth_enabled() => __pbn__system_bluetooth_enabled != null;
         public void Resetsystem_bluetooth_enabled() => __pbn__system_bluetooth_enabled = null;
         private bool? __pbn__system_bluetooth_enabled;
-
-        [global::ProtoBuf.ProtoMember(140011)]
-        public bool controller_enable_chord
-        {
-            get => __pbn__controller_enable_chord.GetValueOrDefault();
-            set => __pbn__controller_enable_chord = value;
-        }
-        public bool ShouldSerializecontroller_enable_chord() => __pbn__controller_enable_chord != null;
-        public void Resetcontroller_enable_chord() => __pbn__controller_enable_chord = null;
-        private bool? __pbn__controller_enable_chord;
-
-        [global::ProtoBuf.ProtoMember(140012)]
-        public bool controller_poll_rate
-        {
-            get => __pbn__controller_poll_rate.GetValueOrDefault();
-            set => __pbn__controller_poll_rate = value;
-        }
-        public bool ShouldSerializecontroller_poll_rate() => __pbn__controller_poll_rate != null;
-        public void Resetcontroller_poll_rate() => __pbn__controller_poll_rate = null;
-        private bool? __pbn__controller_poll_rate;
 
     }
 
@@ -29356,6 +29171,286 @@ namespace SteamKit2.WebUI.Internal
         public void Resetjitter_histogram_20() => __pbn__jitter_histogram_20 = null;
         private uint? __pbn__jitter_histogram_20;
 
+        [global::ProtoBuf.ProtoMember(67)]
+        public uint txspeed_max
+        {
+            get => __pbn__txspeed_max.GetValueOrDefault();
+            set => __pbn__txspeed_max = value;
+        }
+        public bool ShouldSerializetxspeed_max() => __pbn__txspeed_max != null;
+        public void Resettxspeed_max() => __pbn__txspeed_max = null;
+        private uint? __pbn__txspeed_max;
+
+        [global::ProtoBuf.ProtoMember(68)]
+        public uint txspeed_histogram_16
+        {
+            get => __pbn__txspeed_histogram_16.GetValueOrDefault();
+            set => __pbn__txspeed_histogram_16 = value;
+        }
+        public bool ShouldSerializetxspeed_histogram_16() => __pbn__txspeed_histogram_16 != null;
+        public void Resettxspeed_histogram_16() => __pbn__txspeed_histogram_16 = null;
+        private uint? __pbn__txspeed_histogram_16;
+
+        [global::ProtoBuf.ProtoMember(69)]
+        public uint txspeed_histogram_32
+        {
+            get => __pbn__txspeed_histogram_32.GetValueOrDefault();
+            set => __pbn__txspeed_histogram_32 = value;
+        }
+        public bool ShouldSerializetxspeed_histogram_32() => __pbn__txspeed_histogram_32 != null;
+        public void Resettxspeed_histogram_32() => __pbn__txspeed_histogram_32 = null;
+        private uint? __pbn__txspeed_histogram_32;
+
+        [global::ProtoBuf.ProtoMember(70)]
+        public uint txspeed_histogram_64
+        {
+            get => __pbn__txspeed_histogram_64.GetValueOrDefault();
+            set => __pbn__txspeed_histogram_64 = value;
+        }
+        public bool ShouldSerializetxspeed_histogram_64() => __pbn__txspeed_histogram_64 != null;
+        public void Resettxspeed_histogram_64() => __pbn__txspeed_histogram_64 = null;
+        private uint? __pbn__txspeed_histogram_64;
+
+        [global::ProtoBuf.ProtoMember(71)]
+        public uint txspeed_histogram_128
+        {
+            get => __pbn__txspeed_histogram_128.GetValueOrDefault();
+            set => __pbn__txspeed_histogram_128 = value;
+        }
+        public bool ShouldSerializetxspeed_histogram_128() => __pbn__txspeed_histogram_128 != null;
+        public void Resettxspeed_histogram_128() => __pbn__txspeed_histogram_128 = null;
+        private uint? __pbn__txspeed_histogram_128;
+
+        [global::ProtoBuf.ProtoMember(72)]
+        public uint txspeed_histogram_256
+        {
+            get => __pbn__txspeed_histogram_256.GetValueOrDefault();
+            set => __pbn__txspeed_histogram_256 = value;
+        }
+        public bool ShouldSerializetxspeed_histogram_256() => __pbn__txspeed_histogram_256 != null;
+        public void Resettxspeed_histogram_256() => __pbn__txspeed_histogram_256 = null;
+        private uint? __pbn__txspeed_histogram_256;
+
+        [global::ProtoBuf.ProtoMember(73)]
+        public uint txspeed_histogram_512
+        {
+            get => __pbn__txspeed_histogram_512.GetValueOrDefault();
+            set => __pbn__txspeed_histogram_512 = value;
+        }
+        public bool ShouldSerializetxspeed_histogram_512() => __pbn__txspeed_histogram_512 != null;
+        public void Resettxspeed_histogram_512() => __pbn__txspeed_histogram_512 = null;
+        private uint? __pbn__txspeed_histogram_512;
+
+        [global::ProtoBuf.ProtoMember(74)]
+        public uint txspeed_histogram_1024
+        {
+            get => __pbn__txspeed_histogram_1024.GetValueOrDefault();
+            set => __pbn__txspeed_histogram_1024 = value;
+        }
+        public bool ShouldSerializetxspeed_histogram_1024() => __pbn__txspeed_histogram_1024 != null;
+        public void Resettxspeed_histogram_1024() => __pbn__txspeed_histogram_1024 = null;
+        private uint? __pbn__txspeed_histogram_1024;
+
+        [global::ProtoBuf.ProtoMember(75)]
+        public uint txspeed_histogram_max
+        {
+            get => __pbn__txspeed_histogram_max.GetValueOrDefault();
+            set => __pbn__txspeed_histogram_max = value;
+        }
+        public bool ShouldSerializetxspeed_histogram_max() => __pbn__txspeed_histogram_max != null;
+        public void Resettxspeed_histogram_max() => __pbn__txspeed_histogram_max = null;
+        private uint? __pbn__txspeed_histogram_max;
+
+        [global::ProtoBuf.ProtoMember(76)]
+        public uint txspeed_ntile_5th
+        {
+            get => __pbn__txspeed_ntile_5th.GetValueOrDefault();
+            set => __pbn__txspeed_ntile_5th = value;
+        }
+        public bool ShouldSerializetxspeed_ntile_5th() => __pbn__txspeed_ntile_5th != null;
+        public void Resettxspeed_ntile_5th() => __pbn__txspeed_ntile_5th = null;
+        private uint? __pbn__txspeed_ntile_5th;
+
+        [global::ProtoBuf.ProtoMember(77)]
+        public uint txspeed_ntile_50th
+        {
+            get => __pbn__txspeed_ntile_50th.GetValueOrDefault();
+            set => __pbn__txspeed_ntile_50th = value;
+        }
+        public bool ShouldSerializetxspeed_ntile_50th() => __pbn__txspeed_ntile_50th != null;
+        public void Resettxspeed_ntile_50th() => __pbn__txspeed_ntile_50th = null;
+        private uint? __pbn__txspeed_ntile_50th;
+
+        [global::ProtoBuf.ProtoMember(78)]
+        public uint txspeed_ntile_75th
+        {
+            get => __pbn__txspeed_ntile_75th.GetValueOrDefault();
+            set => __pbn__txspeed_ntile_75th = value;
+        }
+        public bool ShouldSerializetxspeed_ntile_75th() => __pbn__txspeed_ntile_75th != null;
+        public void Resettxspeed_ntile_75th() => __pbn__txspeed_ntile_75th = null;
+        private uint? __pbn__txspeed_ntile_75th;
+
+        [global::ProtoBuf.ProtoMember(79)]
+        public uint txspeed_ntile_95th
+        {
+            get => __pbn__txspeed_ntile_95th.GetValueOrDefault();
+            set => __pbn__txspeed_ntile_95th = value;
+        }
+        public bool ShouldSerializetxspeed_ntile_95th() => __pbn__txspeed_ntile_95th != null;
+        public void Resettxspeed_ntile_95th() => __pbn__txspeed_ntile_95th = null;
+        private uint? __pbn__txspeed_ntile_95th;
+
+        [global::ProtoBuf.ProtoMember(80)]
+        public uint txspeed_ntile_98th
+        {
+            get => __pbn__txspeed_ntile_98th.GetValueOrDefault();
+            set => __pbn__txspeed_ntile_98th = value;
+        }
+        public bool ShouldSerializetxspeed_ntile_98th() => __pbn__txspeed_ntile_98th != null;
+        public void Resettxspeed_ntile_98th() => __pbn__txspeed_ntile_98th = null;
+        private uint? __pbn__txspeed_ntile_98th;
+
+        [global::ProtoBuf.ProtoMember(81)]
+        public uint rxspeed_max
+        {
+            get => __pbn__rxspeed_max.GetValueOrDefault();
+            set => __pbn__rxspeed_max = value;
+        }
+        public bool ShouldSerializerxspeed_max() => __pbn__rxspeed_max != null;
+        public void Resetrxspeed_max() => __pbn__rxspeed_max = null;
+        private uint? __pbn__rxspeed_max;
+
+        [global::ProtoBuf.ProtoMember(82)]
+        public uint rxspeed_histogram_16
+        {
+            get => __pbn__rxspeed_histogram_16.GetValueOrDefault();
+            set => __pbn__rxspeed_histogram_16 = value;
+        }
+        public bool ShouldSerializerxspeed_histogram_16() => __pbn__rxspeed_histogram_16 != null;
+        public void Resetrxspeed_histogram_16() => __pbn__rxspeed_histogram_16 = null;
+        private uint? __pbn__rxspeed_histogram_16;
+
+        [global::ProtoBuf.ProtoMember(83)]
+        public uint rxspeed_histogram_32
+        {
+            get => __pbn__rxspeed_histogram_32.GetValueOrDefault();
+            set => __pbn__rxspeed_histogram_32 = value;
+        }
+        public bool ShouldSerializerxspeed_histogram_32() => __pbn__rxspeed_histogram_32 != null;
+        public void Resetrxspeed_histogram_32() => __pbn__rxspeed_histogram_32 = null;
+        private uint? __pbn__rxspeed_histogram_32;
+
+        [global::ProtoBuf.ProtoMember(84)]
+        public uint rxspeed_histogram_64
+        {
+            get => __pbn__rxspeed_histogram_64.GetValueOrDefault();
+            set => __pbn__rxspeed_histogram_64 = value;
+        }
+        public bool ShouldSerializerxspeed_histogram_64() => __pbn__rxspeed_histogram_64 != null;
+        public void Resetrxspeed_histogram_64() => __pbn__rxspeed_histogram_64 = null;
+        private uint? __pbn__rxspeed_histogram_64;
+
+        [global::ProtoBuf.ProtoMember(85)]
+        public uint rxspeed_histogram_128
+        {
+            get => __pbn__rxspeed_histogram_128.GetValueOrDefault();
+            set => __pbn__rxspeed_histogram_128 = value;
+        }
+        public bool ShouldSerializerxspeed_histogram_128() => __pbn__rxspeed_histogram_128 != null;
+        public void Resetrxspeed_histogram_128() => __pbn__rxspeed_histogram_128 = null;
+        private uint? __pbn__rxspeed_histogram_128;
+
+        [global::ProtoBuf.ProtoMember(86)]
+        public uint rxspeed_histogram_256
+        {
+            get => __pbn__rxspeed_histogram_256.GetValueOrDefault();
+            set => __pbn__rxspeed_histogram_256 = value;
+        }
+        public bool ShouldSerializerxspeed_histogram_256() => __pbn__rxspeed_histogram_256 != null;
+        public void Resetrxspeed_histogram_256() => __pbn__rxspeed_histogram_256 = null;
+        private uint? __pbn__rxspeed_histogram_256;
+
+        [global::ProtoBuf.ProtoMember(87)]
+        public uint rxspeed_histogram_512
+        {
+            get => __pbn__rxspeed_histogram_512.GetValueOrDefault();
+            set => __pbn__rxspeed_histogram_512 = value;
+        }
+        public bool ShouldSerializerxspeed_histogram_512() => __pbn__rxspeed_histogram_512 != null;
+        public void Resetrxspeed_histogram_512() => __pbn__rxspeed_histogram_512 = null;
+        private uint? __pbn__rxspeed_histogram_512;
+
+        [global::ProtoBuf.ProtoMember(88)]
+        public uint rxspeed_histogram_1024
+        {
+            get => __pbn__rxspeed_histogram_1024.GetValueOrDefault();
+            set => __pbn__rxspeed_histogram_1024 = value;
+        }
+        public bool ShouldSerializerxspeed_histogram_1024() => __pbn__rxspeed_histogram_1024 != null;
+        public void Resetrxspeed_histogram_1024() => __pbn__rxspeed_histogram_1024 = null;
+        private uint? __pbn__rxspeed_histogram_1024;
+
+        [global::ProtoBuf.ProtoMember(89)]
+        public uint rxspeed_histogram_max
+        {
+            get => __pbn__rxspeed_histogram_max.GetValueOrDefault();
+            set => __pbn__rxspeed_histogram_max = value;
+        }
+        public bool ShouldSerializerxspeed_histogram_max() => __pbn__rxspeed_histogram_max != null;
+        public void Resetrxspeed_histogram_max() => __pbn__rxspeed_histogram_max = null;
+        private uint? __pbn__rxspeed_histogram_max;
+
+        [global::ProtoBuf.ProtoMember(90)]
+        public uint rxspeed_ntile_5th
+        {
+            get => __pbn__rxspeed_ntile_5th.GetValueOrDefault();
+            set => __pbn__rxspeed_ntile_5th = value;
+        }
+        public bool ShouldSerializerxspeed_ntile_5th() => __pbn__rxspeed_ntile_5th != null;
+        public void Resetrxspeed_ntile_5th() => __pbn__rxspeed_ntile_5th = null;
+        private uint? __pbn__rxspeed_ntile_5th;
+
+        [global::ProtoBuf.ProtoMember(91)]
+        public uint rxspeed_ntile_50th
+        {
+            get => __pbn__rxspeed_ntile_50th.GetValueOrDefault();
+            set => __pbn__rxspeed_ntile_50th = value;
+        }
+        public bool ShouldSerializerxspeed_ntile_50th() => __pbn__rxspeed_ntile_50th != null;
+        public void Resetrxspeed_ntile_50th() => __pbn__rxspeed_ntile_50th = null;
+        private uint? __pbn__rxspeed_ntile_50th;
+
+        [global::ProtoBuf.ProtoMember(92)]
+        public uint rxspeed_ntile_75th
+        {
+            get => __pbn__rxspeed_ntile_75th.GetValueOrDefault();
+            set => __pbn__rxspeed_ntile_75th = value;
+        }
+        public bool ShouldSerializerxspeed_ntile_75th() => __pbn__rxspeed_ntile_75th != null;
+        public void Resetrxspeed_ntile_75th() => __pbn__rxspeed_ntile_75th = null;
+        private uint? __pbn__rxspeed_ntile_75th;
+
+        [global::ProtoBuf.ProtoMember(93)]
+        public uint rxspeed_ntile_95th
+        {
+            get => __pbn__rxspeed_ntile_95th.GetValueOrDefault();
+            set => __pbn__rxspeed_ntile_95th = value;
+        }
+        public bool ShouldSerializerxspeed_ntile_95th() => __pbn__rxspeed_ntile_95th != null;
+        public void Resetrxspeed_ntile_95th() => __pbn__rxspeed_ntile_95th = null;
+        private uint? __pbn__rxspeed_ntile_95th;
+
+        [global::ProtoBuf.ProtoMember(94)]
+        public uint rxspeed_ntile_98th
+        {
+            get => __pbn__rxspeed_ntile_98th.GetValueOrDefault();
+            set => __pbn__rxspeed_ntile_98th = value;
+        }
+        public bool ShouldSerializerxspeed_ntile_98th() => __pbn__rxspeed_ntile_98th != null;
+        public void Resetrxspeed_ntile_98th() => __pbn__rxspeed_ntile_98th = null;
+        private uint? __pbn__rxspeed_ntile_98th;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -34070,17 +34165,6 @@ namespace SteamKit2.WebUI.Internal
         public void Resetenable_unreliable_fec() => __pbn__enable_unreliable_fec = null;
         private bool? __pbn__enable_unreliable_fec;
 
-        [global::ProtoBuf.ProtoMember(26)]
-        [global::System.ComponentModel.DefaultValue(false)]
-        public bool enable_video_av1
-        {
-            get => __pbn__enable_video_av1 ?? false;
-            set => __pbn__enable_video_av1 = value;
-        }
-        public bool ShouldSerializeenable_video_av1() => __pbn__enable_video_av1 != null;
-        public void Resetenable_video_av1() => __pbn__enable_video_av1 = null;
-        private bool? __pbn__enable_video_av1;
-
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -34323,163 +34407,6 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializecombined_text() => __pbn__combined_text != null;
         public void Resetcombined_text() => __pbn__combined_text = null;
         private string __pbn__combined_text;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CUserInterface_CuratorData : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint clanid
-        {
-            get => __pbn__clanid.GetValueOrDefault();
-            set => __pbn__clanid = value;
-        }
-        public bool ShouldSerializeclanid() => __pbn__clanid != null;
-        public void Resetclanid() => __pbn__clanid = null;
-        private uint? __pbn__clanid;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public ulong listid
-        {
-            get => __pbn__listid.GetValueOrDefault();
-            set => __pbn__listid = value;
-        }
-        public bool ShouldSerializelistid() => __pbn__listid != null;
-        public void Resetlistid() => __pbn__listid = null;
-        private ulong? __pbn__listid;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CUserInterface_NavData : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string domain
-        {
-            get => __pbn__domain ?? "";
-            set => __pbn__domain = value;
-        }
-        public bool ShouldSerializedomain() => __pbn__domain != null;
-        public void Resetdomain() => __pbn__domain = null;
-        private string __pbn__domain;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string controller
-        {
-            get => __pbn__controller ?? "";
-            set => __pbn__controller = value;
-        }
-        public bool ShouldSerializecontroller() => __pbn__controller != null;
-        public void Resetcontroller() => __pbn__controller = null;
-        private string __pbn__controller;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string method
-        {
-            get => __pbn__method ?? "";
-            set => __pbn__method = value;
-        }
-        public bool ShouldSerializemethod() => __pbn__method != null;
-        public void Resetmethod() => __pbn__method = null;
-        private string __pbn__method;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string submethod
-        {
-            get => __pbn__submethod ?? "";
-            set => __pbn__submethod = value;
-        }
-        public bool ShouldSerializesubmethod() => __pbn__submethod != null;
-        public void Resetsubmethod() => __pbn__submethod = null;
-        private string __pbn__submethod;
-
-        [global::ProtoBuf.ProtoMember(5)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string feature
-        {
-            get => __pbn__feature ?? "";
-            set => __pbn__feature = value;
-        }
-        public bool ShouldSerializefeature() => __pbn__feature != null;
-        public void Resetfeature() => __pbn__feature = null;
-        private string __pbn__feature;
-
-        [global::ProtoBuf.ProtoMember(6)]
-        public uint depth
-        {
-            get => __pbn__depth.GetValueOrDefault();
-            set => __pbn__depth = value;
-        }
-        public bool ShouldSerializedepth() => __pbn__depth != null;
-        public void Resetdepth() => __pbn__depth = null;
-        private uint? __pbn__depth;
-
-        [global::ProtoBuf.ProtoMember(7)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string countrycode
-        {
-            get => __pbn__countrycode ?? "";
-            set => __pbn__countrycode = value;
-        }
-        public bool ShouldSerializecountrycode() => __pbn__countrycode != null;
-        public void Resetcountrycode() => __pbn__countrycode = null;
-        private string __pbn__countrycode;
-
-        [global::ProtoBuf.ProtoMember(8)]
-        public ulong webkey
-        {
-            get => __pbn__webkey.GetValueOrDefault();
-            set => __pbn__webkey = value;
-        }
-        public bool ShouldSerializewebkey() => __pbn__webkey != null;
-        public void Resetwebkey() => __pbn__webkey = null;
-        private ulong? __pbn__webkey;
-
-        [global::ProtoBuf.ProtoMember(9)]
-        public bool is_client
-        {
-            get => __pbn__is_client.GetValueOrDefault();
-            set => __pbn__is_client = value;
-        }
-        public bool ShouldSerializeis_client() => __pbn__is_client != null;
-        public void Resetis_client() => __pbn__is_client = null;
-        private bool? __pbn__is_client;
-
-        [global::ProtoBuf.ProtoMember(10)]
-        public CUserInterface_CuratorData curator_data { get; set; }
-
-        [global::ProtoBuf.ProtoMember(11)]
-        public bool is_likely_bot
-        {
-            get => __pbn__is_likely_bot.GetValueOrDefault();
-            set => __pbn__is_likely_bot = value;
-        }
-        public bool ShouldSerializeis_likely_bot() => __pbn__is_likely_bot != null;
-        public void Resetis_likely_bot() => __pbn__is_likely_bot = null;
-        private bool? __pbn__is_likely_bot;
-
-        [global::ProtoBuf.ProtoMember(12)]
-        public bool is_utm
-        {
-            get => __pbn__is_utm.GetValueOrDefault();
-            set => __pbn__is_utm = value;
-        }
-        public bool ShouldSerializeis_utm() => __pbn__is_utm != null;
-        public void Resetis_utm() => __pbn__is_utm = null;
-        private bool? __pbn__is_utm;
 
     }
 
@@ -34824,35 +34751,6 @@ namespace SteamKit2.WebUI.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CVRGamepadUI_Message_ExecuteSteamURL_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string url
-        {
-            get => __pbn__url ?? "";
-            set => __pbn__url = value;
-        }
-        public bool ShouldSerializeurl() => __pbn__url != null;
-        public void Reseturl() => __pbn__url = null;
-        private string __pbn__url;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CVRGamepadUI_Message_ExecuteSteamURL_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CVRGamepadUI_Message_Header : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -35074,26 +34972,6 @@ namespace SteamKit2.WebUI.Internal
         public void Resetparent_device_path() => __pbn__parent_device_path = null;
         private string __pbn__parent_device_path;
 
-        [global::ProtoBuf.ProtoMember(14)]
-        public int sort_order
-        {
-            get => __pbn__sort_order.GetValueOrDefault();
-            set => __pbn__sort_order = value;
-        }
-        public bool ShouldSerializesort_order() => __pbn__sort_order != null;
-        public void Resetsort_order() => __pbn__sort_order = null;
-        private int? __pbn__sort_order;
-
-        [global::ProtoBuf.ProtoMember(15)]
-        public int parent_enum
-        {
-            get => __pbn__parent_enum.GetValueOrDefault();
-            set => __pbn__parent_enum = value;
-        }
-        public bool ShouldSerializeparent_enum() => __pbn__parent_enum != null;
-        public void Resetparent_enum() => __pbn__parent_enum = null;
-        private int? __pbn__parent_enum;
-
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -35274,64 +35152,6 @@ namespace SteamKit2.WebUI.Internal
 
     [global::ProtoBuf.ProtoContract()]
     public partial class CVRGamepadUI_Message_ShowDashboardPopup_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CVRGamepadUI_Message_ShowGame_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string overlay_key
-        {
-            get => __pbn__overlay_key ?? "";
-            set => __pbn__overlay_key = value;
-        }
-        public bool ShouldSerializeoverlay_key() => __pbn__overlay_key != null;
-        public void Resetoverlay_key() => __pbn__overlay_key = null;
-        private string __pbn__overlay_key;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CVRGamepadUI_Message_ShowGame_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CVRGamepadUI_Message_ShowOverlay_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string overlay_key
-        {
-            get => __pbn__overlay_key ?? "";
-            set => __pbn__overlay_key = value;
-        }
-        public bool ShouldSerializeoverlay_key() => __pbn__overlay_key != null;
-        public void Resetoverlay_key() => __pbn__overlay_key = null;
-        private string __pbn__overlay_key;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CVRGamepadUI_Message_ShowOverlay_Response : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -37129,17 +36949,6 @@ namespace SteamKit2.WebUI.Internal
         public void Reseturl() => __pbn__url = null;
         private string __pbn__url;
 
-        [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string text
-        {
-            get => __pbn__text ?? "";
-            set => __pbn__text = value;
-        }
-        public bool ShouldSerializetext() => __pbn__text != null;
-        public void Resettext() => __pbn__text = null;
-        private string __pbn__text;
-
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -37444,10 +37253,9 @@ namespace SteamKit2.WebUI.Internal
         private bool? __pbn__hide_discount_pct_for_compliance;
 
         [global::ProtoBuf.ProtoMember(43)]
-        [global::System.ComponentModel.DefaultValue(1)]
         public int included_game_count
         {
-            get => __pbn__included_game_count ?? 1;
+            get => __pbn__included_game_count.GetValueOrDefault();
             set => __pbn__included_game_count = value;
         }
         public bool ShouldSerializeincluded_game_count() => __pbn__included_game_count != null;
@@ -37605,12 +37413,6 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializeparent_appid() => __pbn__parent_appid != null;
         public void Resetparent_appid() => __pbn__parent_appid = null;
         private uint? __pbn__parent_appid;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<uint> demo_appid { get; } = new global::System.Collections.Generic.List<uint>();
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public global::System.Collections.Generic.List<uint> standalone_demo_appid { get; } = new global::System.Collections.Generic.List<uint>();
 
     }
 

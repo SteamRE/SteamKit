@@ -227,10 +227,39 @@ namespace SteamKit2.Internal
         k_ESteamNotificationType_PartnerEvent = 27,
     }
 
-    public interface ISteamNotificationClient
+    public class SteamNotificationClient : SteamUnifiedMessages.IUnifiedService
     {
-        NoResponse NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request);
-        NoResponse PreferencesUpdated(CSteamNotification_PreferencesUpdated_Notification request);
+        public static string ServiceName { get; } = "SteamNotificationClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
+
+        public void NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request)
+        {
+            UnifiedMessages.SendNotification<CSteamNotification_NotificationsReceived_Notification>( "SteamNotificationClient.NotificationsReceived#1", request );
+        }
+
+        public void PreferencesUpdated(CSteamNotification_PreferencesUpdated_Notification request)
+        {
+            UnifiedMessages.SendNotification<CSteamNotification_PreferencesUpdated_Notification>( "SteamNotificationClient.PreferencesUpdated#1", request );
+        }
+
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
+
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotificationsReceived":
+                    UnifiedMessages.HandleNotificationMsg<CSteamNotification_NotificationsReceived_Notification>( packetMsg );
+                    break;
+                case "PreferencesUpdated":
+                    UnifiedMessages.HandleNotificationMsg<CSteamNotification_PreferencesUpdated_Notification>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

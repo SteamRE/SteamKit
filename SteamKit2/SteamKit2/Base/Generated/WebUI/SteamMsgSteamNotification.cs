@@ -371,17 +371,82 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public interface ISteamNotification
+    public class SteamNotification : SteamUnifiedMessages.IUnifiedService
     {
-        CSteamNotification_GetPreferences_Response GetPreferences(CSteamNotification_GetPreferences_Request request);
-        CSteamNotification_GetSteamNotifications_Response GetSteamNotifications(CSteamNotification_GetSteamNotifications_Request request);
-        CSteamNotification_SetPreferences_Response SetPreferences(CSteamNotification_SetPreferences_Request request);
+        public static string ServiceName { get; } = "SteamNotification";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamNotification_GetPreferences_Response>> GetPreferences(CSteamNotification_GetPreferences_Request request)
+        {
+            return UnifiedMessages.SendMessage<CSteamNotification_GetPreferences_Request, CSteamNotification_GetPreferences_Response>( "SteamNotification.GetPreferences#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamNotification_GetSteamNotifications_Response>> GetSteamNotifications(CSteamNotification_GetSteamNotifications_Request request)
+        {
+            return UnifiedMessages.SendMessage<CSteamNotification_GetSteamNotifications_Request, CSteamNotification_GetSteamNotifications_Response>( "SteamNotification.GetSteamNotifications#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamNotification_SetPreferences_Response>> SetPreferences(CSteamNotification_SetPreferences_Request request)
+        {
+            return UnifiedMessages.SendMessage<CSteamNotification_SetPreferences_Request, CSteamNotification_SetPreferences_Response>( "SteamNotification.SetPreferences#1", request );
+        }
+
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "GetPreferences":
+                    UnifiedMessages.HandleResponseMsg<CSteamNotification_GetPreferences_Response>( packetMsg );
+                    break;
+                case "GetSteamNotifications":
+                    UnifiedMessages.HandleResponseMsg<CSteamNotification_GetSteamNotifications_Response>( packetMsg );
+                    break;
+                case "SetPreferences":
+                    UnifiedMessages.HandleResponseMsg<CSteamNotification_SetPreferences_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
-    public interface ISteamNotificationClient
+    public class SteamNotificationClient : SteamUnifiedMessages.IUnifiedService
     {
-        NoResponse NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request);
-        NoResponse PreferencesUpdated(CSteamNotification_PreferencesUpdated_Notification request);
+        public static string ServiceName { get; } = "SteamNotificationClient";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
+
+        public void NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request)
+        {
+            UnifiedMessages.SendNotification<CSteamNotification_NotificationsReceived_Notification>( "SteamNotificationClient.NotificationsReceived#1", request );
+        }
+
+        public void PreferencesUpdated(CSteamNotification_PreferencesUpdated_Notification request)
+        {
+            UnifiedMessages.SendNotification<CSteamNotification_PreferencesUpdated_Notification>( "SteamNotificationClient.PreferencesUpdated#1", request );
+        }
+
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
+
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotificationsReceived":
+                    UnifiedMessages.HandleNotificationMsg<CSteamNotification_NotificationsReceived_Notification>( packetMsg );
+                    break;
+                case "PreferencesUpdated":
+                    UnifiedMessages.HandleNotificationMsg<CSteamNotification_PreferencesUpdated_Notification>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

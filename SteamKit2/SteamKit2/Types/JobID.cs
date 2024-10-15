@@ -130,7 +130,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="callback">The callback.</param>
         /// <returns><c>true</c> if this result completes the set; otherwise, <c>false</c>.</returns>
-        internal abstract bool AddResult( CallbackMsg callback );
+        internal abstract bool AddResult( ICallbackMsg callback );
 
         /// <summary>
         /// Sets this job as failed, either remotely or due to a message timeout.
@@ -157,7 +157,7 @@ namespace SteamKit2
     /// </summary>
     /// <typeparam name="T">The callback type that will be returned by this async job.</typeparam>
     public sealed class AsyncJob<T> : AsyncJob
-        where T : CallbackMsg
+        where T : ICallbackMsg
     {
         readonly TaskCompletionSource<T> tcs;
 
@@ -199,7 +199,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="callback">The callback.</param>
         /// <returns>Always <c>true</c>.</returns>
-        internal override bool AddResult( CallbackMsg callback )
+        internal override bool AddResult( ICallbackMsg callback )
         {
             ArgumentNullException.ThrowIfNull( callback );
 
@@ -240,7 +240,7 @@ namespace SteamKit2
     /// </summary>
     /// <typeparam name="T">The callback type that will be returned by this async job.</typeparam>
     public sealed class AsyncJobMultiple<T> : AsyncJob
-        where T : CallbackMsg
+        where T : ICallbackMsg
     {
         /// <summary>
         /// The set of callback results for an <see cref="AsyncJobMultiple{T}"/>.
@@ -310,7 +310,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="callback">The callback.</param>
         /// <returns><c>true</c> if this result completes the set; otherwise, <c>false</c>.</returns>
-        internal override bool AddResult( CallbackMsg callback )
+        internal override bool AddResult( ICallbackMsg callback )
         {
             ArgumentNullException.ThrowIfNull( callback );
 

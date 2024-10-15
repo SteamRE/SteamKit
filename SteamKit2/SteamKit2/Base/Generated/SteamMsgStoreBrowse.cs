@@ -595,12 +595,6 @@ namespace SteamKit2.Internal
             public void Resetparent_appid() => __pbn__parent_appid = null;
             private uint? __pbn__parent_appid;
 
-            [global::ProtoBuf.ProtoMember(2)]
-            public global::System.Collections.Generic.List<uint> demo_appid { get; } = new global::System.Collections.Generic.List<uint>();
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public global::System.Collections.Generic.List<uint> standalone_demo_appid { get; } = new global::System.Collections.Generic.List<uint>();
-
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -1388,10 +1382,9 @@ namespace SteamKit2.Internal
             private bool? __pbn__hide_discount_pct_for_compliance;
 
             [global::ProtoBuf.ProtoMember(43)]
-            [global::System.ComponentModel.DefaultValue(1)]
             public int included_game_count
             {
-                get => __pbn__included_game_count ?? 1;
+                get => __pbn__included_game_count.GetValueOrDefault();
                 set => __pbn__included_game_count = value;
             }
             public bool ShouldSerializeincluded_game_count() => __pbn__included_game_count != null;
@@ -1826,17 +1819,6 @@ namespace SteamKit2.Internal
             public void Reseturl() => __pbn__url = null;
             private string __pbn__url;
 
-            [global::ProtoBuf.ProtoMember(3)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string text
-            {
-                get => __pbn__text ?? "";
-                set => __pbn__text = value;
-            }
-            public bool ShouldSerializetext() => __pbn__text != null;
-            public void Resettext() => __pbn__text = null;
-            private string __pbn__text;
-
         }
 
     }
@@ -2167,90 +2149,6 @@ namespace SteamKit2.Internal
             public bool ShouldSerializecomputed() => __pbn__computed != null;
             public void Resetcomputed() => __pbn__computed = null;
             private bool? __pbn__computed;
-
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CStoreBrowse_GetPriceStops_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string country_code
-        {
-            get => __pbn__country_code ?? "";
-            set => __pbn__country_code = value;
-        }
-        public bool ShouldSerializecountry_code() => __pbn__country_code != null;
-        public void Resetcountry_code() => __pbn__country_code = null;
-        private string __pbn__country_code;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string currency_code
-        {
-            get => __pbn__currency_code ?? "";
-            set => __pbn__currency_code = value;
-        }
-        public bool ShouldSerializecurrency_code() => __pbn__currency_code != null;
-        public void Resetcurrency_code() => __pbn__currency_code = null;
-        private string __pbn__currency_code;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CStoreBrowse_GetPriceStops_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<PriceStop> price_stops { get; } = new global::System.Collections.Generic.List<PriceStop>();
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string currency_code
-        {
-            get => __pbn__currency_code ?? "";
-            set => __pbn__currency_code = value;
-        }
-        public bool ShouldSerializecurrency_code() => __pbn__currency_code != null;
-        public void Resetcurrency_code() => __pbn__currency_code = null;
-        private string __pbn__currency_code;
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class PriceStop : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string formatted_amount
-            {
-                get => __pbn__formatted_amount ?? "";
-                set => __pbn__formatted_amount = value;
-            }
-            public bool ShouldSerializeformatted_amount() => __pbn__formatted_amount != null;
-            public void Resetformatted_amount() => __pbn__formatted_amount = null;
-            private string __pbn__formatted_amount;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public long amount_in_cents
-            {
-                get => __pbn__amount_in_cents.GetValueOrDefault();
-                set => __pbn__amount_in_cents = value;
-            }
-            public bool ShouldSerializeamount_in_cents() => __pbn__amount_in_cents != null;
-            public void Resetamount_in_cents() => __pbn__amount_in_cents = null;
-            private long? __pbn__amount_in_cents;
 
         }
 
@@ -2755,20 +2653,7 @@ namespace SteamKit2.Internal
         k_EStoreLinkType_Twitter = 3,
         k_EStoreLinkType_Twitch = 4,
         k_EStoreLinkType_Discord = 5,
-        k_EStoreLinkType_QQ = 6,
-        k_EStoreLinkType_VK = 7,
-        k_EStoreLinkType_Bilibili = 8,
-        k_EStoreLinkType_Weibo = 9,
-        k_EStoreLinkType_Reddit = 10,
-        k_EStoreLinkType_Instagram = 11,
-        k_EStoreLinkType_Tumblr = 12,
-        k_EStoreLinkType_Tieba = 13,
-        k_EStoreLinkType_Tiktok = 14,
-        k_EStoreLinkType_Telegram = 15,
-        k_EStoreLinkType_LinkedIn = 16,
-        k_EStoreLinkType_WeChat = 17,
-        k_EStoreLinkType_QQLink = 18,
-        k_EStoreLinkType_MAX = 19,
+        k_EStoreLinkType_MAX = 6,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2782,14 +2667,63 @@ namespace SteamKit2.Internal
         k_EStoreCategoryType_MAX = 5,
     }
 
-    public interface IStoreBrowse
+    public class StoreBrowse : SteamUnifiedMessages.IUnifiedService
     {
-        CStoreBrowse_GetItems_Response GetItems(CStoreBrowse_GetItems_Request request);
-        CStoreBrowse_GetStoreCategories_Response GetStoreCategories(CStoreBrowse_GetStoreCategories_Request request);
-        CStoreBrowse_GetPriceStops_Response GetPriceStops(CStoreBrowse_GetPriceStops_Request request);
-        CStoreBrowse_GetDLCForApps_Response GetDLCForApps(CStoreBrowse_GetDLCForApps_Request request);
-        CStoreBrowse_GetDLCForAppsSolr_Response GetDLCForAppsSolr(CStoreBrowse_GetDLCForAppsSolr_Request request);
-        CStoreBrowse_GetHardwareItems_Response GetHardwareItems(CStoreBrowse_GetHardwareItems_Request request);
+        public static string ServiceName { get; } = "StoreBrowse";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetItems_Response>> GetItems(CStoreBrowse_GetItems_Request request)
+        {
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetItems_Request, CStoreBrowse_GetItems_Response>( "StoreBrowse.GetItems#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetStoreCategories_Response>> GetStoreCategories(CStoreBrowse_GetStoreCategories_Request request)
+        {
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetStoreCategories_Request, CStoreBrowse_GetStoreCategories_Response>( "StoreBrowse.GetStoreCategories#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetDLCForApps_Response>> GetDLCForApps(CStoreBrowse_GetDLCForApps_Request request)
+        {
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetDLCForApps_Request, CStoreBrowse_GetDLCForApps_Response>( "StoreBrowse.GetDLCForApps#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetDLCForAppsSolr_Response>> GetDLCForAppsSolr(CStoreBrowse_GetDLCForAppsSolr_Request request)
+        {
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetDLCForAppsSolr_Request, CStoreBrowse_GetDLCForAppsSolr_Response>( "StoreBrowse.GetDLCForAppsSolr#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetHardwareItems_Response>> GetHardwareItems(CStoreBrowse_GetHardwareItems_Request request)
+        {
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetHardwareItems_Request, CStoreBrowse_GetHardwareItems_Response>( "StoreBrowse.GetHardwareItems#1", request );
+        }
+
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "GetItems":
+                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetItems_Response>( packetMsg );
+                    break;
+                case "GetStoreCategories":
+                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetStoreCategories_Response>( packetMsg );
+                    break;
+                case "GetDLCForApps":
+                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetDLCForApps_Response>( packetMsg );
+                    break;
+                case "GetDLCForAppsSolr":
+                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetDLCForAppsSolr_Response>( packetMsg );
+                    break;
+                case "GetHardwareItems":
+                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetHardwareItems_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
 }

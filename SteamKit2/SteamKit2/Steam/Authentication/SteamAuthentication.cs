@@ -17,7 +17,7 @@ namespace SteamKit2.Authentication
     public sealed class SteamAuthentication
     {
         SteamClient Client;
-        internal SteamUnifiedMessages.UnifiedService<IAuthentication> AuthenticationService { get; }
+        internal Internal.Authentication AuthenticationService { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SteamAuthentication"/> class.
@@ -30,7 +30,7 @@ namespace SteamKit2.Authentication
             Client = steamClient;
 
             var unifiedMessages = steamClient.GetHandler<SteamUnifiedMessages>()!;
-            AuthenticationService = unifiedMessages.CreateService<IAuthentication>();
+            AuthenticationService = unifiedMessages.CreateService<Internal.Authentication>();
         }
 
         /// <summary>
@@ -44,16 +44,14 @@ namespace SteamKit2.Authentication
                 account_name = accountName
             };
 
-            var message = await AuthenticationService.SendMessage( api => api.GetPasswordRSAPublicKey( request ) );
+            var response = await AuthenticationService.GetPasswordRSAPublicKey( request );
 
-            if ( message.Result != EResult.OK )
+            if ( response.Result != EResult.OK )
             {
-                throw new AuthenticationException( "Failed to get password public key", message.Result );
+                throw new AuthenticationException( "Failed to get password public key", response.Result );
             }
 
-            var response = message.GetDeserializedResponse<CAuthentication_GetPasswordRSAPublicKey_Response>();
-
-            return response;
+            return response.Body;
         }
 
         /// <summary>
@@ -75,16 +73,14 @@ namespace SteamKit2.Authentication
                 request.renewal_type = ETokenRenewalType.k_ETokenRenewalType_Allow;
             }
 
-            var message = await AuthenticationService.SendMessage( api => api.GenerateAccessTokenForApp( request ) );
+            var response = await AuthenticationService.GenerateAccessTokenForApp( request );
 
-            if ( message.Result != EResult.OK )
+            if ( response.Result != EResult.OK )
             {
-                throw new AuthenticationException( "Failed to generate token", message.Result );
+                throw new AuthenticationException( "Failed to generate token", response.Result );
             }
 
-            var response = message.GetDeserializedResponse<CAuthentication_AccessToken_GenerateForApp_Response>();
-
-            return new AccessTokenGenerateResult( response );
+            return new AccessTokenGenerateResult( response.Body );
         }
 
         /// <summary>
@@ -109,16 +105,14 @@ namespace SteamKit2.Authentication
                 }
             };
 
-            var message = await AuthenticationService.SendMessage( api => api.BeginAuthSessionViaQR( request ) );
+            var response = await AuthenticationService.BeginAuthSessionViaQR( request );
 
-            if ( message.Result != EResult.OK )
+            if ( response.Result != EResult.OK )
             {
-                throw new AuthenticationException( "Failed to begin QR auth session", message.Result );
+                throw new AuthenticationException( "Failed to begin QR auth session", response.Result );
             }
 
-            var response = message.GetDeserializedResponse<CAuthentication_BeginAuthSessionViaQR_Response>();
-
-            var authResponse = new QrAuthSession( this, details.Authenticator, response );
+            var authResponse = new QrAuthSession( this, details.Authenticator, response.Body );
 
             return authResponse;
         }
@@ -172,17 +166,15 @@ namespace SteamKit2.Authentication
                 }
             };
 
-            var message = await AuthenticationService.SendMessage( api => api.BeginAuthSessionViaCredentials( request ) );
+            var response = await AuthenticationService.BeginAuthSessionViaCredentials( request );
 
             // eresult can be InvalidPassword, ServiceUnavailable, InvalidParam, RateLimitExceeded
-            if ( message.Result != EResult.OK )
+            if ( response.Result != EResult.OK )
             {
-                throw new AuthenticationException( "Authentication failed", message.Result );
+                throw new AuthenticationException( "Authentication failed", response.Result );
             }
 
-            var response = message.GetDeserializedResponse<CAuthentication_BeginAuthSessionViaCredentials_Response>();
-
-            var authResponse = new CredentialsAuthSession( this, details.Authenticator, response );
+            var authResponse = new CredentialsAuthSession( this, details.Authenticator, response.Body );
 
             return authResponse;
         }

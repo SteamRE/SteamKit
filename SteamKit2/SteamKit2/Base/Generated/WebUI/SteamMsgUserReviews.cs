@@ -726,11 +726,47 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public interface IUserReviews
+    public class UserReviews : SteamUnifiedMessages.IUnifiedService
     {
-        CUserReviews_GetFriendsRecommendedApp_Response GetFriendsRecommendedApp(CUserReviews_GetFriendsRecommendedApp_Request request);
-        CUserReviews_GetIndividualRecommendations_Response GetIndividualRecommendations(CUserReviews_GetIndividualRecommendations_Request request);
-        CUserReviews_Update_Response Update(CUserReviews_Update_Request request);
+        public static string ServiceName { get; } = "UserReviews";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserReviews_GetFriendsRecommendedApp_Response>> GetFriendsRecommendedApp(CUserReviews_GetFriendsRecommendedApp_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserReviews_GetFriendsRecommendedApp_Request, CUserReviews_GetFriendsRecommendedApp_Response>( "UserReviews.GetFriendsRecommendedApp#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserReviews_GetIndividualRecommendations_Response>> GetIndividualRecommendations(CUserReviews_GetIndividualRecommendations_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserReviews_GetIndividualRecommendations_Request, CUserReviews_GetIndividualRecommendations_Response>( "UserReviews.GetIndividualRecommendations#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserReviews_Update_Response>> Update(CUserReviews_Update_Request request)
+        {
+            return UnifiedMessages.SendMessage<CUserReviews_Update_Request, CUserReviews_Update_Response>( "UserReviews.Update#1", request );
+        }
+
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "GetFriendsRecommendedApp":
+                    UnifiedMessages.HandleResponseMsg<CUserReviews_GetFriendsRecommendedApp_Response>( packetMsg );
+                    break;
+                case "GetIndividualRecommendations":
+                    UnifiedMessages.HandleResponseMsg<CUserReviews_GetIndividualRecommendations_Response>( packetMsg );
+                    break;
+                case "Update":
+                    UnifiedMessages.HandleResponseMsg<CUserReviews_Update_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
 }

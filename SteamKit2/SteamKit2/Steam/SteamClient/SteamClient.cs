@@ -232,7 +232,7 @@ namespace SteamKit2
         /// Posts a callback to the queue. This is normally used directly by client message handlers.
         /// </summary>
         /// <param name="msg">The message.</param>
-        public void PostCallback( CallbackMsg msg )
+        public void PostCallback( ICallbackMsg msg )
         {
             if ( msg == null )
                 return;

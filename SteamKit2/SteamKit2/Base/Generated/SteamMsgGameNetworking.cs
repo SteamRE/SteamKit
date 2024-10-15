@@ -92,10 +92,42 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface IGameNetworking
+    public class GameNetworking : SteamUnifiedMessages.IUnifiedService
     {
-        CGameNetworking_AllocateFakeIP_Response AllocateFakeIP(CGameNetworking_AllocateFakeIP_Request request);
-        NoResponse NotifyReleaseFakeIP(CGameNetworking_ReleaseFakeIP_Notification request);
+        public static string ServiceName { get; } = "GameNetworking";
+
+        /// <inheritdoc />
+        public SteamUnifiedMessages UnifiedMessages { get; init; }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameNetworking_AllocateFakeIP_Response>> AllocateFakeIP(CGameNetworking_AllocateFakeIP_Request request)
+        {
+            return UnifiedMessages.SendMessage<CGameNetworking_AllocateFakeIP_Request, CGameNetworking_AllocateFakeIP_Response>( "GameNetworking.AllocateFakeIP#1", request );
+        }
+
+        public void NotifyReleaseFakeIP(CGameNetworking_ReleaseFakeIP_Notification request)
+        {
+            UnifiedMessages.SendNotification<CGameNetworking_ReleaseFakeIP_Notification>( "GameNetworking.NotifyReleaseFakeIP#1", request );
+        }
+
+        public void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "AllocateFakeIP":
+                    UnifiedMessages.HandleResponseMsg<CGameNetworking_AllocateFakeIP_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyReleaseFakeIP":
+                    UnifiedMessages.HandleNotificationMsg<CGameNetworking_ReleaseFakeIP_Notification>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }
