@@ -12,8 +12,11 @@ namespace SteamKit2
         /// <summary>
         /// This callback is returned in response to a service method sent through <see cref="SteamUnifiedMessages"/>.
         /// </summary>
-        public class ServiceMethodResponse<T> : CallbackMsg where T : IExtensible, new()
+        public class ServiceMethodResponse<T> : ICallbackMsg where T : IExtensible, new()
         {
+            /// <inheritdoc />
+            public JobID JobID { get; set; }
+
             /// <summary>
             /// The result of the message.
             /// </summary>
@@ -36,8 +39,11 @@ namespace SteamKit2
         /// <summary>
         /// This callback represents a service notification received though <see cref="SteamUnifiedMessages"/>.
         /// </summary>
-        public class ServiceMethodNotification<T> : CallbackMsg where T : IExtensible, new()
+        public class ServiceMethodNotification<T> : ICallbackMsg where T : IExtensible, new()
         {
+            /// <inheritdoc />
+            public JobID JobID { get; set; }
+
             /// <summary>
             /// The name of the job, in the format Service.Method#Version.
             /// </summary>
@@ -50,6 +56,7 @@ namespace SteamKit2
 
             internal ServiceMethodNotification( PacketClientMsgProtobuf packetMsg)
             {
+                JobID = JobID.Invalid;
                 JobName = packetMsg.Header.Proto.target_job_name;
                 Body = new ClientMsgProtobuf<T>( packetMsg ).Body;
             }
