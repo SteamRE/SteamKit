@@ -398,6 +398,21 @@ namespace SteamKit2.Discovery
             return endPoints;
         }
 
+        /// <summary>
+        /// Force refresh the server list. If directory fetch is allowed, it will refresh from the API first,
+        /// and then fallback to the server list provider.
+        /// </summary>
+        /// <returns>Task to be awaited that refreshes the server list.</returns>
+        public Task ForceRefreshServerList()
+        {
+            lock ( listLock )
+            {
+                listTask = ResolveServerList( forceRefresh: true );
+
+                return listTask;
+            }
+        }
+
         static void DebugWrite( string msg )
         {
             DebugLog.WriteLine( "ServerList", msg );
