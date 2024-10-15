@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 using SteamKit2;
 using SteamKit2.Internal;
@@ -48,6 +49,9 @@ manager.Subscribe<SteamClient.DisconnectedCallback>( OnDisconnected );
 
 manager.Subscribe<SteamUser.LoggedOnCallback>( OnLoggedOn );
 manager.Subscribe<SteamUser.LoggedOffCallback>( OnLoggedOff );
+
+// subscribe to incoming messages from the GameNotificationsClient service
+manager.SubscribeNotifications<GameNotificationsClient, CGameNotifications_OnNotificationsRequested_Notification>( OnGameStartedNotification );
 
 var isRunning = true;
 
@@ -134,8 +138,15 @@ async void OnLoggedOn( SteamUser.LoggedOnCallback callback )
         Console.WriteLine( $"Badge series {badge.series} is level {badge.level}" );
     }
 
-    // now that we've completed our task, lets log off
+    // now that we've completed our task, lets log off after a few seconds to receive possible notifications
+    await Task.Delay( 10000 );
     steamUser.LogOff();
+}
+
+static void OnGameStartedNotification( SteamUnifiedMessages.ServiceMethodNotification<CGameNotifications_OnNotificationsRequested_Notification> notification )
+{
+    Console.WriteLine($"User with id {notification.Body.steamid} started the game:");
+    Console.WriteLine(notification.Body.appid);
 }
 
 static void OnLoggedOff( SteamUser.LoggedOffCallback callback )
