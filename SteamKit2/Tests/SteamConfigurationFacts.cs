@@ -209,6 +209,8 @@ namespace Tests
 
         class CustomServerListProvider : IServerListProvider
         {
+            public DateTime LastServerListRefresh => throw new NotImplementedException();
+
             Task<IEnumerable<ServerRecord>> IServerListProvider.FetchServerListAsync()
                 => throw new NotImplementedException();
 

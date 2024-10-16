@@ -26,6 +26,11 @@ namespace SteamKit2.Discovery
         }
 
         /// <summary>
+        /// Returns the last time the file was written to storage
+        /// </summary>
+        public DateTime LastServerListRefresh => isolatedStorage.GetLastWriteTime(FileName).UtcDateTime;
+
+        /// <summary>
         /// Read the stored list of servers from IsolatedStore
         /// </summary>
         /// <returns>List of servers if persisted, otherwise an empty list</returns>
