@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 
 namespace SteamKit2.Discovery
@@ -52,6 +53,22 @@ namespace SteamKit2.Discovery
         {
             this.configuration = configuration ?? throw new ArgumentNullException( nameof( configuration ) );
         }
+
+        /// <summary>
+        /// The default fallback Websockets server to attempt connecting to if fetching server list through other means fails.
+        /// </summary>
+        /// <remarks>
+        /// If the default server set here no longer works, please create a pull request to update it.
+        /// </remarks>
+        public static string DefaultServerWebsocket { get; set; } = "cmp1-ord1.steamserver.net";
+
+        /// <summary>
+        /// The default fallback TCP/UDP server to attempt connecting to if fetching server list through other means fails.
+        /// </summary>
+        /// <remarks>
+        /// If the default server set here no longer works, please create a pull request to update it.
+        /// </remarks>
+        public static string DefaultServerNetfilter { get; set; } = "ext1-ord1.steamserver.net";
 
         readonly SteamConfiguration configuration;
 
@@ -170,12 +187,23 @@ namespace SteamKit2.Discovery
                 }
             }
 
-            // This is a last effort to attempt any valid connection to Steam,
-            // however Steam client does not appear to do this anymore,
-            // and this will not work when Steam moves to only websocket servers
-            DebugWrite( $"Server list provider had no entries, {nameof( SteamDirectory )} failed, falling back to cm0" );
-            var cm0 = await Dns.GetHostAddressesAsync( "cm0.steampowered.com" ).ConfigureAwait( false );
-            endpointList = cm0.Select( static ipaddr => ServerRecord.CreateSocketServer( new IPEndPoint( ipaddr, 27017 ) ) ).ToList();
+            // This is a last effort to attempt any valid connection to Steam
+            DebugWrite( $"Server list provider had no entries, {nameof( SteamDirectory )} failed, falling back to default server \"{DefaultServerNetfilter}\"" );
+
+            var resolved = await Dns.GetHostAddressesAsync( DefaultServerNetfilter, AddressFamily.InterNetwork ).ConfigureAwait( false );
+
+            if ( resolved == null || resolved.Length == 0 )
+            {
+                DebugWrite( $"Failed to resolve default server \"{DefaultServerNetfilter}\" to any address" );
+                ReplaceList( [], writeProvider: false, DateTime.UtcNow );
+                return;
+            }
+
+            endpointList = resolved
+                .Select( static ipaddr => ServerRecord.CreateSocketServer( new IPEndPoint( ipaddr, 27017 ) ) )
+                .Append( ServerRecord.CreateWebSocketServer( DefaultServerWebsocket ) )
+                .ToList();
+
             ReplaceList( endpointList, writeProvider: false, DateTime.MinValue );
         }
 
