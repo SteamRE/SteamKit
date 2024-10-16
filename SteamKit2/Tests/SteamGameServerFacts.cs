@@ -1,4 +1,4 @@
-﻿using SteamKit2;
+using SteamKit2;
 using Xunit;
 
 namespace Tests
@@ -8,7 +8,7 @@ namespace Tests
         [Fact]
         public void LogOnPostsLoggedOnCallbackWhenNoConnection()
         {
-            Handler.LogOn(new SteamGameServer.LogOnDetails
+            var asyncJob = Handler.LogOn(new SteamGameServer.LogOnDetails
             {
                 Token = "SuperSecretToken"
             });
@@ -19,12 +19,13 @@ namespace Tests
 
             var loc = (SteamUser.LoggedOnCallback)callback;
             Assert.Equal( EResult.NoConnection, loc.Result );
+            Assert.Equal( asyncJob.JobID, loc.JobID );
         }
 
         [Fact]
         public void LogOnAnonymousPostsLoggedOnCallbackWhenNoConnection()
         {
-            Handler.LogOnAnonymous();
+            var asyncJob = Handler.LogOnAnonymous();
 
             var callback = SteamClient.GetCallback( );
             Assert.NotNull( callback );
@@ -32,6 +33,7 @@ namespace Tests
 
             var loc = (SteamUser.LoggedOnCallback)callback;
             Assert.Equal( EResult.NoConnection, loc.Result );
+            Assert.Equal( asyncJob.JobID, loc.JobID );
         }
     }
 }

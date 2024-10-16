@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using SteamKit2;
 using Xunit;
 
@@ -9,7 +9,7 @@ namespace Tests
         [Fact]
         public void LogOnPostsLoggedOnCallbackWhenNoConnection()
         {
-            Handler.LogOn(new SteamUser.LogOnDetails
+            var asyncJob = Handler.LogOn(new SteamUser.LogOnDetails
             {
                 Username = "iamauser",
                 Password = "lamepassword"
@@ -21,6 +21,7 @@ namespace Tests
 
             var loc = (SteamUser.LoggedOnCallback)callback;
             Assert.Equal( EResult.NoConnection, loc.Result );
+            Assert.Equal( asyncJob.JobID, loc.JobID );
         }
 
         [Fact]
@@ -82,7 +83,7 @@ namespace Tests
 
             Assert.Null( ex );
         }
-        
+
         [Fact]
         public void LogOnDoesNotThrowExceptionIfUserNameAndAccessTokenProvided()
         {
@@ -102,7 +103,7 @@ namespace Tests
         [Fact]
         public void LogOnAnonymousPostsLoggedOnCallbackWhenNoConnection()
         {
-            Handler.LogOnAnonymous();
+            var asyncJob = Handler.LogOnAnonymous();
 
             var callback = SteamClient.GetCallback( );
             Assert.NotNull( callback );
@@ -110,6 +111,7 @@ namespace Tests
 
             var loc = (SteamUser.LoggedOnCallback)callback;
             Assert.Equal( EResult.NoConnection, loc.Result );
+            Assert.Equal( asyncJob.JobID, loc.JobID );
         }
     }
 }

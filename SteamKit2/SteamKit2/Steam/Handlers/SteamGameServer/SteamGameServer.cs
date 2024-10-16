@@ -88,7 +88,8 @@ namespace SteamKit2
         /// <param name="details">The details to use for logging on.</param>
         /// <exception cref="System.ArgumentNullException">No logon details were provided.</exception>
         /// <exception cref="System.ArgumentException">Username or password are not set within <paramref name="details"/>.</exception>
-        public void LogOn( LogOnDetails details )
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamUser.LoggedOnCallback"/>.</returns>
+        public AsyncJob<SteamUser.LoggedOnCallback> LogOn( LogOnDetails details )
         {
             ArgumentNullException.ThrowIfNull( details );
 
@@ -96,14 +97,14 @@ namespace SteamKit2
             {
                 throw new ArgumentException( "LogOn requires a game server token to be set in 'details'." );
             }
-            
-            if ( !this.Client.IsConnected )
-            {
-                this.Client.PostCallback( new SteamUser.LoggedOnCallback( EResult.NoConnection ) );
-                return;
-            }
 
             var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogonGameServer );
+
+            if ( !this.Client.IsConnected )
+            {
+                this.Client.PostCallback( new SteamUser.LoggedOnCallback( EResult.NoConnection, logon.SourceJobID ) );
+                return new AsyncJob<SteamUser.LoggedOnCallback>( this.Client, logon.SourceJobID );
+            }
 
             SteamID gsId = new SteamID( 0, 0, Client.Universe, EAccountType.GameServer );
 
@@ -121,6 +122,8 @@ namespace SteamKit2
             logon.Body.game_server_token = details.Token;
 
             this.Client.Send( logon );
+
+            return new AsyncJob<SteamUser.LoggedOnCallback>( this.Client, logon.SourceJobID );
         }
 
         /// <summary>
@@ -129,15 +132,16 @@ namespace SteamKit2
         /// Results are returned in a <see cref="SteamUser.LoggedOnCallback"/>.
         /// </summary>
         /// <param name="appId">The AppID served by this game server, or 0 for the default.</param>
-        public void LogOnAnonymous( uint appId = 0 )
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamUser.LoggedOnCallback"/>.</returns>
+        public AsyncJob<SteamUser.LoggedOnCallback> LogOnAnonymous( uint appId = 0 )
         {
+            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
+
             if ( !this.Client.IsConnected )
             {
-                this.Client.PostCallback( new SteamUser.LoggedOnCallback( EResult.NoConnection ) );
-                return;
+                this.Client.PostCallback( new SteamUser.LoggedOnCallback( EResult.NoConnection, logon.SourceJobID ) );
+                return new AsyncJob<SteamUser.LoggedOnCallback>( this.Client, logon.SourceJobID );
             }
-
-            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
 
             SteamID gsId = new SteamID( 0, 0, Client.Universe, EAccountType.AnonGameServer );
 
@@ -153,6 +157,8 @@ namespace SteamKit2
             logon.Body.machine_id = HardwareUtils.GetMachineID( Client.Configuration.MachineInfoProvider );
 
             this.Client.Send( logon );
+
+            return new AsyncJob<SteamUser.LoggedOnCallback>( this.Client, logon.SourceJobID );
         }
 
         /// <summary>

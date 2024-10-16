@@ -125,6 +125,7 @@ namespace SteamKit2
                 var logonResp = new ClientMsgProtobuf<CMsgClientLogonResponse>( packetMsg );
                 var resp = logonResp.Body;
 
+                this.JobID = logonResp.TargetJobID;
                 this.Result = ( EResult )resp.eresult;
                 this.ExtendedResult = ( EResult )resp.eresult_extended;
 
@@ -167,6 +168,7 @@ namespace SteamKit2
                 var logonResp = new ClientMsg<MsgClientLogOnResponse>( packetMsg );
                 var resp = logonResp.Body;
 
+                this.JobID = logonResp.TargetJobID;
                 this.Result = resp.Result;
 
                 this.OutOfGameSecsPerHeartbeat = resp.OutOfGameHeartbeatRateSec;
@@ -180,8 +182,9 @@ namespace SteamKit2
             }
 
 
-            internal LoggedOnCallback( EResult result )
+            internal LoggedOnCallback( EResult result, JobID jobId )
             {
+                this.JobID = jobId;
                 this.Result = result;
             }
         }
@@ -203,11 +206,13 @@ namespace SteamKit2
                 if ( packetMsg.IsProto )
                 {
                     var loggedOff = new ClientMsgProtobuf<CMsgClientLoggedOff>( packetMsg );
+                    this.JobID = loggedOff.TargetJobID;
                     this.Result = ( EResult )loggedOff.Body.eresult;
                 }
                 else
                 {
                     var loggedOff = new ClientMsg<MsgClientLoggedOff>( packetMsg );
+                    this.JobID = loggedOff.TargetJobID;
                     this.Result = loggedOff.Body.Result;
                 }
             }
