@@ -300,12 +300,19 @@ namespace SteamKit2
                         continue;
                     }
 
-                    // ioctl could be attempted to read the mac address here
-                    // Loopback mac address will be decoded to zero here
-                    var addressText = File.ReadAllText( $"/sys/class/net/{iface}/address" );
-                    var macAddress = Convert.FromHexString( addressText.Replace( ":", "" ).AsSpan().Trim() );
+                    try
+                    {
+                        // ioctl could be attempted to read the mac address here
+                        // Loopback mac address will be decoded to zero here
+                        var addressText = File.ReadAllText( $"/sys/class/net/{iface}/address" );
+                        var macAddress = Convert.FromHexString( addressText.Replace( ":", "" ).AsSpan().Trim() );
 
-                    macs.Add( macAddress );
+                        macs.Add( macAddress );
+                    }
+                    catch
+                    {
+                        // if we can't access to a directory, continue to next
+                    }
                 }
                 catch
                 {
