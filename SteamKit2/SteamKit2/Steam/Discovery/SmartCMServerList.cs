@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 
 namespace SteamKit2.Discovery
@@ -50,28 +51,49 @@ namespace SteamKit2.Discovery
         /// <exception cref="ArgumentNullException">The configuration object is null.</exception>
         public SmartCMServerList( SteamConfiguration configuration )
         {
-            this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-
-            servers = [];
-            listLock = new object();
-            BadConnectionMemoryTimeSpan = TimeSpan.FromMinutes( 5 );
+            this.configuration = configuration ?? throw new ArgumentNullException( nameof( configuration ) );
         }
+
+        /// <summary>
+        /// The default fallback Websockets server to attempt connecting to if fetching server list through other means fails.
+        /// </summary>
+        /// <remarks>
+        /// If the default server set here no longer works, please create a pull request to update it.
+        /// </remarks>
+        public static string DefaultServerWebsocket { get; set; } = "cmp1-sea1.steamserver.net:443";
+
+        /// <summary>
+        /// The default fallback TCP/UDP server to attempt connecting to if fetching server list through other means fails.
+        /// </summary>
+        /// <remarks>
+        /// If the default server set here no longer works, please create a pull request to update it.
+        /// </remarks>
+        public static string DefaultServerNetfilter { get; set; } = "ext1-sea1.steamserver.net:27017";
 
         readonly SteamConfiguration configuration;
 
         Task? listTask;
 
-        object listLock;
-        Collection<ServerInfo> servers;
+        object listLock = new();
+        Collection<ServerInfo> servers = [];
+        DateTime serversLastRefresh = DateTime.MinValue;
 
         private void StartFetchingServers()
         {
             lock ( listLock )
             {
-                // if the server list has been populated, no need to perform any additional work
                 if ( servers.Count > 0 )
                 {
-                    listTask = Task.CompletedTask;
+                    // if the server list has been populated, check if it is still fresh
+                    if ( DateTime.UtcNow - serversLastRefresh >= ServerListBeforeRefreshTimeSpan )
+                    {
+                        listTask = ResolveServerList( forceRefresh: true );
+                    }
+                    else
+                    {
+                        // no work needs to be done
+                        listTask = Task.CompletedTask;
+                    }
                 }
                 else if ( listTask == null || listTask.IsFaulted || listTask.IsCanceled )
                 {
@@ -91,45 +113,101 @@ namespace SteamKit2.Discovery
             }
             catch ( Exception ex )
             {
-                DebugWrite( "Failed to retrieve server list: {0}", ex );
+                DebugWrite( $"Failed to retrieve server list: {ex}" );
             }
 
             return false;
         }
 
-        private async Task ResolveServerList()
+        private async Task ResolveServerList( bool forceRefresh = false )
         {
-            DebugWrite( "Resolving server list" );
+            var providerRefreshTime = configuration.ServerListProvider.LastServerListRefresh;
+            var alreadyTriedDirectoryFetch = false;
+
+            // If this is the first time server list is being resolved,
+            // check if the cache is old enough that requires refreshing from the API first
+            if ( !forceRefresh && DateTime.UtcNow - providerRefreshTime >= ServerListBeforeRefreshTimeSpan )
+            {
+                forceRefresh = true;
+            }
+
+            // Server list can only be force refreshed if the API is allowed in the first place
+            if ( forceRefresh && configuration.AllowDirectoryFetch )
+            {
+                DebugWrite( $"Querying {nameof( SteamDirectory )} for a fresh server list" );
+
+                var directoryList = await SteamDirectory.LoadAsync( configuration ).ConfigureAwait( false );
+                alreadyTriedDirectoryFetch = true;
+
+                // Fresh server list has been loaded
+                if ( directoryList.Count > 0 )
+                {
+                    DebugWrite( $"Resolved {directoryList.Count} servers from {nameof( SteamDirectory )}" );
+                    ReplaceList( directoryList, writeProvider: true, DateTime.UtcNow );
+                    return;
+                }
+
+                DebugWrite( $"Could not query {nameof( SteamDirectory )}, falling back to provider" );
+            }
+            else
+            {
+                DebugWrite( "Resolving server list using the provider" );
+            }
 
             IEnumerable<ServerRecord> serverList = await configuration.ServerListProvider.FetchServerListAsync().ConfigureAwait( false );
             IReadOnlyCollection<ServerRecord> endpointList = serverList.ToList();
 
-            if ( endpointList.Count == 0 && configuration.AllowDirectoryFetch )
+            // Provider server list is fresh enough and it provided servers
+            if ( endpointList.Count > 0 )
             {
-                DebugWrite( "Server list provider had no entries, will query SteamDirectory" );
+                DebugWrite( $"Resolved {endpointList.Count} servers from the provider" );
+                ReplaceList( endpointList, writeProvider: false, providerRefreshTime );
+                return;
+            }
+
+            // If API fetch is not allowed, bail out with no servers
+            if ( !configuration.AllowDirectoryFetch )
+            {
+                DebugWrite( $"Server list provider had no entries, and {nameof( SteamConfiguration.AllowDirectoryFetch )} is false" );
+                ReplaceList( [], writeProvider: false, DateTime.MinValue );
+                return;
+            }
+
+            // If the force refresh tried to fetch the server list already, do not fetch it again
+            if ( !alreadyTriedDirectoryFetch )
+            {
+                DebugWrite( $"Server list provider had no entries, will query {nameof( SteamDirectory )}" );
                 endpointList = await SteamDirectory.LoadAsync( configuration ).ConfigureAwait( false );
+
+                if ( endpointList.Count > 0 )
+                {
+                    DebugWrite( $"Resolved {endpointList.Count} servers from {nameof( SteamDirectory )}" );
+                    ReplaceList( endpointList, writeProvider: true, DateTime.UtcNow );
+                    return;
+                }
             }
 
-            if ( endpointList.Count == 0 && configuration.AllowDirectoryFetch )
-            {
-                DebugWrite( "Could not query SteamDirectory, falling back to cm0" );
-                var cm0 = await Dns.GetHostAddressesAsync( "cm0.steampowered.com" ).ConfigureAwait( false );
+            // This is a last effort to attempt any valid connection to Steam
+            DebugWrite( $"Server list provider had no entries, {nameof( SteamDirectory )} failed, falling back to default servers" );
 
-                endpointList = cm0.Select( ipaddr => ServerRecord.CreateSocketServer( new IPEndPoint(ipaddr, 27017) ) ).ToList();
-            }
+            endpointList =
+            [
+                ServerRecord.CreateWebSocketServer( DefaultServerWebsocket ),
+                ServerRecord.CreateDnsSocketServer( DefaultServerNetfilter ),
+            ];
 
-            DebugWrite( "Resolved {0} servers", endpointList.Count );
-            ReplaceList( endpointList );
+            ReplaceList( endpointList, writeProvider: false, DateTime.MinValue );
         }
+
+        /// <summary>
+        /// Determines how long the server list cache is used as-is before attempting to refresh from the Steam Directory.
+        /// </summary>
+        public TimeSpan ServerListBeforeRefreshTimeSpan { get; set; } = TimeSpan.FromDays( 7 );
 
         /// <summary>
         /// Determines how long a server's bad connection state is remembered for.
         /// </summary>
-        public TimeSpan BadConnectionMemoryTimeSpan
-        {
-            get;
-            set;
-        }
+        public TimeSpan BadConnectionMemoryTimeSpan { get; set; } = TimeSpan.FromMinutes( 5 );
 
         /// <summary>
         /// Resets the scores of all servers which has a last bad connection more than <see cref="BadConnectionMemoryTimeSpan"/> ago.
@@ -154,7 +232,9 @@ namespace SteamKit2.Discovery
         /// Replace the list with a new list of servers provided to us by the Steam servers.
         /// </summary>
         /// <param name="endpointList">The <see cref="ServerRecord"/>s to use for this <see cref="SmartCMServerList"/>.</param>
-        public void ReplaceList( IEnumerable<ServerRecord> endpointList )
+        /// <param name="writeProvider">If true, the replaced list will be updated in the server list provider.</param>
+        /// <param name="serversTime">The time when the provided server list has been updated.</param>
+        public void ReplaceList( IEnumerable<ServerRecord> endpointList, bool writeProvider = true, DateTime? serversTime = null )
         {
             ArgumentNullException.ThrowIfNull( endpointList );
 
@@ -162,6 +242,7 @@ namespace SteamKit2.Discovery
             {
                 var distinctEndPoints = endpointList.Distinct().ToArray();
 
+                serversLastRefresh = serversTime ?? DateTime.UtcNow;
                 servers.Clear();
 
                 for ( var i = 0; i < distinctEndPoints.Length; i++ )
@@ -169,7 +250,10 @@ namespace SteamKit2.Discovery
                     AddCore( distinctEndPoints[ i ] );
                 }
 
-                configuration.ServerListProvider.UpdateServerListAsync( distinctEndPoints ).GetAwaiter().GetResult();
+                if ( writeProvider )
+                {
+                    configuration.ServerListProvider.UpdateServerListAsync( distinctEndPoints ).GetAwaiter().GetResult();
+                }
             }
         }
 
@@ -328,15 +412,30 @@ namespace SteamKit2.Discovery
 
             lock ( listLock )
             {
-                endPoints = servers.Select(s => s.Record).Distinct().ToArray();
+                endPoints = servers.Select( static s => s.Record ).Distinct().ToArray();
             }
 
             return endPoints;
         }
 
-        static void DebugWrite( string msg, params object[] args )
+        /// <summary>
+        /// Force refresh the server list. If directory fetch is allowed, it will refresh from the API first,
+        /// and then fallback to the server list provider.
+        /// </summary>
+        /// <returns>Task to be awaited that refreshes the server list.</returns>
+        public Task ForceRefreshServerList()
         {
-            DebugLog.WriteLine( "ServerList", msg, args);
+            lock ( listLock )
+            {
+                listTask = ResolveServerList( forceRefresh: true );
+
+                return listTask;
+            }
+        }
+
+        static void DebugWrite( string msg )
+        {
+            DebugLog.WriteLine( "ServerList", msg );
         }
     }
 }

@@ -23,6 +23,11 @@ namespace SteamKit2.Discovery
         }
 
         /// <summary>
+        /// Returns the last time the file was written on disk
+        /// </summary>
+        public DateTime LastServerListRefresh => File.GetLastWriteTimeUtc(filename);
+
+        /// <summary>
         /// Read the stored list of servers from the file
         /// </summary>
         /// <returns>List of servers if persisted, otherwise an empty list</returns>
