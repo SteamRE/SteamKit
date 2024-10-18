@@ -60,7 +60,7 @@ namespace SteamKit2.Discovery
         /// <remarks>
         /// If the default server set here no longer works, please create a pull request to update it.
         /// </remarks>
-        public static string DefaultServerWebsocket { get; set; } = "cmp1-ord1.steamserver.net";
+        public static string DefaultServerWebsocket { get; set; } = "cmp1-sea1.steamserver.net:443";
 
         /// <summary>
         /// The default fallback TCP/UDP server to attempt connecting to if fetching server list through other means fails.
@@ -68,7 +68,7 @@ namespace SteamKit2.Discovery
         /// <remarks>
         /// If the default server set here no longer works, please create a pull request to update it.
         /// </remarks>
-        public static string DefaultServerNetfilter { get; set; } = "ext1-ord1.steamserver.net";
+        public static string DefaultServerNetfilter { get; set; } = "ext1-sea1.steamserver.net:27017";
 
         readonly SteamConfiguration configuration;
 
@@ -188,21 +188,13 @@ namespace SteamKit2.Discovery
             }
 
             // This is a last effort to attempt any valid connection to Steam
-            DebugWrite( $"Server list provider had no entries, {nameof( SteamDirectory )} failed, falling back to default server \"{DefaultServerNetfilter}\"" );
+            DebugWrite( $"Server list provider had no entries, {nameof( SteamDirectory )} failed, falling back to default servers" );
 
-            var resolved = await Dns.GetHostAddressesAsync( DefaultServerNetfilter, AddressFamily.InterNetwork ).ConfigureAwait( false );
-
-            if ( resolved == null || resolved.Length == 0 )
-            {
-                DebugWrite( $"Failed to resolve default server \"{DefaultServerNetfilter}\" to any address" );
-                ReplaceList( [], writeProvider: false, DateTime.UtcNow );
-                return;
-            }
-
-            endpointList = resolved
-                .Select( static ipaddr => ServerRecord.CreateSocketServer( new IPEndPoint( ipaddr, 27017 ) ) )
-                .Append( ServerRecord.CreateWebSocketServer( DefaultServerWebsocket ) )
-                .ToList();
+            endpointList =
+            [
+                ServerRecord.CreateWebSocketServer( DefaultServerWebsocket ),
+                ServerRecord.CreateDnsSocketServer( DefaultServerNetfilter ),
+            ];
 
             ReplaceList( endpointList, writeProvider: false, DateTime.MinValue );
         }
