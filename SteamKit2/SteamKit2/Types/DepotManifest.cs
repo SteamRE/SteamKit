@@ -64,7 +64,10 @@ namespace SteamKit2
             {
             }
 
-            internal ChunkData( byte[] id, uint checksum, ulong offset, uint comp_length, uint uncomp_length )
+            /// <summary>
+            /// Initializes a new instance of the <see cref="ChunkData"/> class with specified values.
+            /// </summary>
+            public ChunkData( byte[] id, uint checksum, ulong offset, uint comp_length, uint uncomp_length )
             {
                 this.ChunkID = id;
                 this.Checksum = checksum;
@@ -83,36 +86,49 @@ namespace SteamKit2
             /// <summary>
             /// Gets the name of the file.
             /// </summary>
-            public string FileName { get; internal set; }
+            public string FileName { get; set; }
             /// <summary>
             /// Gets SHA-1 hash of this file's name.
             /// </summary>
-            public byte[] FileNameHash { get; internal set; }
+            public byte[] FileNameHash { get; set; }
             /// <summary>
             /// Gets the chunks that this file is composed of.
             /// </summary>
-            public List<ChunkData> Chunks { get; private set; }
+            public List<ChunkData> Chunks { get; set; }
 
             /// <summary>
             /// Gets the file flags
             /// </summary>
-            public EDepotFileFlag Flags { get; private set; }
+            public EDepotFileFlag Flags { get; set; }
 
             /// <summary>
             /// Gets the total size of this file.
             /// </summary>
-            public ulong TotalSize { get; private set; }
+            public ulong TotalSize { get; set; }
             /// <summary>
             /// Gets SHA-1 hash of this file.
             /// </summary>
-            public byte[] FileHash { get; private set; }
+            public byte[] FileHash { get; set; }
             /// <summary>
             /// Gets symlink target of this file.
             /// </summary>
-            public string LinkTarget { get; private set; }
+            public string? LinkTarget { get; set; }
 
+            /// <summary>
+            /// Initializes a new instance of the <see cref="FileData"/> class.
+            /// </summary>
+            public FileData()
+            {
+                FileName = string.Empty;
+                FileNameHash = [];
+                Chunks = [];
+                FileHash = [];
+            }
 
-            internal FileData(string filename, byte[] filenameHash, EDepotFileFlag flag, ulong size, byte[] hash, string linkTarget, bool encrypted, int numChunks)
+            /// <summary>
+            /// Initializes a new instance of the <see cref="FileData"/> class with specified values.
+            /// </summary>
+            public FileData(string filename, byte[] filenameHash, EDepotFileFlag flag, ulong size, byte[] hash, string linkTarget, bool encrypted, int numChunks)
             {
                 if (encrypted)
                 {
@@ -135,38 +151,38 @@ namespace SteamKit2
         /// <summary>
         /// Gets the list of files within this manifest.
         /// </summary>
-        public List<FileData>? Files { get; private set; }
+        public List<FileData>? Files { get; set; }
         /// <summary>
         /// Gets a value indicating whether filenames within this depot are encrypted.
         /// </summary>
         /// <value>
         ///   <c>true</c> if the filenames are encrypted; otherwise, <c>false</c>.
         /// </value>
-        public bool FilenamesEncrypted { get; private set; }
+        public bool FilenamesEncrypted { get; set; }
         /// <summary>
         /// Gets the depot id.
         /// </summary>
-        public uint DepotID { get; private set; }
+        public uint DepotID { get; set; }
         /// <summary>
         /// Gets the manifest id.
         /// </summary>
-        public ulong ManifestGID { get; private set; }
+        public ulong ManifestGID { get; set; }
         /// <summary>
         /// Gets the depot creation time.
         /// </summary>
-        public DateTime CreationTime { get; private set; }
+        public DateTime CreationTime { get; set; }
         /// <summary>
         /// Gets the total uncompressed size of all files in this depot.
         /// </summary>
-        public ulong TotalUncompressedSize { get; private set; }
+        public ulong TotalUncompressedSize { get; set; }
         /// <summary>
         /// Gets the total compressed size of all files in this depot.
         /// </summary>
-        public ulong TotalCompressedSize { get; private set; }
+        public ulong TotalCompressedSize { get; set; }
         /// <summary>
         /// Gets CRC-32 checksum of encrypted manifest payload.
         /// </summary>
-        public uint EncryptedCRC { get; private set; }
+        public uint EncryptedCRC { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DepotManifest"/> class.
