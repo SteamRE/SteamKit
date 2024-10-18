@@ -137,6 +137,18 @@ namespace SteamKit2
             inSeqAcked = 0;
             inSeqHandled = 0;
 
+            if (endPoint is DnsEndPoint dnsEndPoint)
+            {
+                var resolved = Dns.GetHostAddresses(dnsEndPoint.Host, AddressFamily.InterNetwork);
+
+                if (resolved == null || resolved.Length == 0)
+                {
+                    throw new ArgumentException("Failed to resolve given dns endpoint.", nameof(endPoint));
+                }
+
+                endPoint = new IPEndPoint(resolved[0], dnsEndPoint.Port);
+            }
+
             netThread = new Thread( NetLoop )
             {
                 Name = "SK2-UdpConn"
