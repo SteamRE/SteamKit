@@ -117,9 +117,28 @@ namespace SteamKit2.Internal
         k_ELobbyStatusNotAMember = 3,
     }
 
-    public interface ILobbyMatchmakingLegacy
+    public class LobbyMatchmakingLegacy : SteamUnifiedMessages.UnifiedService
     {
-        LobbyMatchmakingLegacy_GetLobbyStatus_Response GetLobbyStatus(LobbyMatchmakingLegacy_GetLobbyStatus_Request request);
+        public override string ServiceName { get; } = "LobbyMatchmakingLegacy";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<LobbyMatchmakingLegacy_GetLobbyStatus_Response>> GetLobbyStatus( LobbyMatchmakingLegacy_GetLobbyStatus_Request request )
+        {
+            return UnifiedMessages.SendMessage<LobbyMatchmakingLegacy_GetLobbyStatus_Request, LobbyMatchmakingLegacy_GetLobbyStatus_Response>( "LobbyMatchmakingLegacy.GetLobbyStatus#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "GetLobbyStatus":
+                    UnifiedMessages.HandleResponseMsg<LobbyMatchmakingLegacy_GetLobbyStatus_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
 }

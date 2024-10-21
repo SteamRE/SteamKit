@@ -181,9 +181,28 @@ namespace SteamKit2.Internal
         k_EKeyEscrowUsageStreamingDevice = 0,
     }
 
-    public interface ISecrets
+    public class Secrets : SteamUnifiedMessages.UnifiedService
     {
-        CKeyEscrow_Response KeyEscrow(CKeyEscrow_Request request);
+        public override string ServiceName { get; } = "Secrets";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CKeyEscrow_Response>> KeyEscrow( CKeyEscrow_Request request )
+        {
+            return UnifiedMessages.SendMessage<CKeyEscrow_Request, CKeyEscrow_Response>( "Secrets.KeyEscrow#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "KeyEscrow":
+                    UnifiedMessages.HandleResponseMsg<CKeyEscrow_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
 }

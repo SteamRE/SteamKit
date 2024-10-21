@@ -60,9 +60,28 @@ namespace SteamKit2.Internal.Steamworks
 
     }
 
-    public interface IOAuthToken
+    public class OAuthToken : SteamUnifiedMessages.UnifiedService
     {
-        COAuthToken_ImplicitGrantNoPrompt_Response ImplicitGrantNoPrompt(COAuthToken_ImplicitGrantNoPrompt_Request request);
+        public override string ServiceName { get; } = "OAuthToken";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<COAuthToken_ImplicitGrantNoPrompt_Response>> ImplicitGrantNoPrompt( COAuthToken_ImplicitGrantNoPrompt_Request request )
+        {
+            return UnifiedMessages.SendMessage<COAuthToken_ImplicitGrantNoPrompt_Request, COAuthToken_ImplicitGrantNoPrompt_Response>( "OAuthToken.ImplicitGrantNoPrompt#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "ImplicitGrantNoPrompt":
+                    UnifiedMessages.HandleResponseMsg<COAuthToken_ImplicitGrantNoPrompt_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
 }

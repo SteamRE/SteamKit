@@ -352,14 +352,68 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface IParties
+    public class Parties : SteamUnifiedMessages.UnifiedService
     {
-        CParties_JoinParty_Response JoinParty(CParties_JoinParty_Request request);
-        CParties_CreateBeacon_Response CreateBeacon(CParties_CreateBeacon_Request request);
-        CParties_OnReservationCompleted_Response OnReservationCompleted(CParties_OnReservationCompleted_Request request);
-        CParties_CancelReservation_Response CancelReservation(CParties_CancelReservation_Request request);
-        CParties_ChangeNumOpenSlots_Response ChangeNumOpenSlots(CParties_ChangeNumOpenSlots_Request request);
-        CParties_DestroyBeacon_Response DestroyBeacon(CParties_DestroyBeacon_Request request);
+        public override string ServiceName { get; } = "Parties";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParties_JoinParty_Response>> JoinParty( CParties_JoinParty_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParties_JoinParty_Request, CParties_JoinParty_Response>( "Parties.JoinParty#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParties_CreateBeacon_Response>> CreateBeacon( CParties_CreateBeacon_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParties_CreateBeacon_Request, CParties_CreateBeacon_Response>( "Parties.CreateBeacon#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParties_OnReservationCompleted_Response>> OnReservationCompleted( CParties_OnReservationCompleted_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParties_OnReservationCompleted_Request, CParties_OnReservationCompleted_Response>( "Parties.OnReservationCompleted#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParties_CancelReservation_Response>> CancelReservation( CParties_CancelReservation_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParties_CancelReservation_Request, CParties_CancelReservation_Response>( "Parties.CancelReservation#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParties_ChangeNumOpenSlots_Response>> ChangeNumOpenSlots( CParties_ChangeNumOpenSlots_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParties_ChangeNumOpenSlots_Request, CParties_ChangeNumOpenSlots_Response>( "Parties.ChangeNumOpenSlots#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParties_DestroyBeacon_Response>> DestroyBeacon( CParties_DestroyBeacon_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParties_DestroyBeacon_Request, CParties_DestroyBeacon_Response>( "Parties.DestroyBeacon#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "JoinParty":
+                    UnifiedMessages.HandleResponseMsg<CParties_JoinParty_Response>( packetMsg );
+                    break;
+                case "CreateBeacon":
+                    UnifiedMessages.HandleResponseMsg<CParties_CreateBeacon_Response>( packetMsg );
+                    break;
+                case "OnReservationCompleted":
+                    UnifiedMessages.HandleResponseMsg<CParties_OnReservationCompleted_Response>( packetMsg );
+                    break;
+                case "CancelReservation":
+                    UnifiedMessages.HandleResponseMsg<CParties_CancelReservation_Response>( packetMsg );
+                    break;
+                case "ChangeNumOpenSlots":
+                    UnifiedMessages.HandleResponseMsg<CParties_ChangeNumOpenSlots_Response>( packetMsg );
+                    break;
+                case "DestroyBeacon":
+                    UnifiedMessages.HandleResponseMsg<CParties_DestroyBeacon_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
 }

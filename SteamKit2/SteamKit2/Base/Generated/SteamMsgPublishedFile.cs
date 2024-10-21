@@ -4620,48 +4620,324 @@ namespace SteamKit2.Internal
         k_PFFSS_TentativeApproval = 5,
     }
 
-    public interface IPublishedFile
+    public class PublishedFile : SteamUnifiedMessages.UnifiedService
     {
-        CPublishedFile_Vote_Response Vote(CPublishedFile_Vote_Request request);
-        CPublishedFile_Subscribe_Response Subscribe(CPublishedFile_Subscribe_Request request);
-        CPublishedFile_Unsubscribe_Response Unsubscribe(CPublishedFile_Unsubscribe_Request request);
-        CPublishedFile_CanSubscribe_Response CanSubscribe(CPublishedFile_CanSubscribe_Request request);
-        CPublishedFile_GetSubSectionData_Response GetSubSectionData(CPublishedFile_GetSubSectionData_Request request);
-        CPublishedFile_Publish_Response Publish(CPublishedFile_Publish_Request request);
-        CPublishedFile_GetDetails_Response GetDetails(CPublishedFile_GetDetails_Request request);
-        CPublishedFile_GetItemInfo_Response GetItemInfo(CPublishedFile_GetItemInfo_Request request);
-        CPublishedFile_GetUserFiles_Response GetUserFiles(CPublishedFile_GetUserFiles_Request request);
-        CPublishedFile_GetUserFiles_Response GetUserFileCount(CPublishedFile_GetUserFiles_Request request);
-        CPublishedFile_AreFilesInSubscriptionList_Response AreFilesInSubscriptionList(CPublishedFile_AreFilesInSubscriptionList_Request request);
-        CPublishedFile_Update_Response Update(CPublishedFile_Update_Request request);
-        CPublishedFile_Delete_Response Delete(CPublishedFile_Delete_Request request);
-        CPublishedFile_GetChangeHistoryEntry_Response GetChangeHistoryEntry(CPublishedFile_GetChangeHistoryEntry_Request request);
-        CPublishedFile_GetChangeHistory_Response GetChangeHistory(CPublishedFile_GetChangeHistory_Request request);
-        CPublishedFile_RefreshVotingQueue_Response RefreshVotingQueue(CPublishedFile_RefreshVotingQueue_Request request);
-        CPublishedFile_QueryFiles_Response QueryFiles(CPublishedFile_QueryFiles_Request request);
-        CPublishedFile_AddAppRelationship_Response AddAppRelationship(CPublishedFile_AddAppRelationship_Request request);
-        CPublishedFile_RemoveAppRelationship_Response RemoveAppRelationship(CPublishedFile_RemoveAppRelationship_Request request);
-        CPublishedFile_GetAppRelationships_Response GetAppRelationships(CPublishedFile_GetAppRelationships_Request request);
-        CPublishedFile_GetAppRelationshipsBatched_Response GetAppRelationshipsBatched(CPublishedFile_GetAppRelationshipsBatched_Request request);
-        CPublishedFile_StartPlaytimeTracking_Response StartPlaytimeTracking(CPublishedFile_StartPlaytimeTracking_Request request);
-        CPublishedFile_StopPlaytimeTracking_Response StopPlaytimeTracking(CPublishedFile_StopPlaytimeTracking_Request request);
-        CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response StopPlaytimeTrackingForAllAppItems(CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request request);
-        CPublishedFile_SetPlaytimeForControllerConfigs_Response SetPlaytimeForControllerConfigs(CPublishedFile_SetPlaytimeForControllerConfigs_Request request);
-        CPublishedFile_AddChild_Response AddChild(CPublishedFile_AddChild_Request request);
-        CPublishedFile_RemoveChild_Response RemoveChild(CPublishedFile_RemoveChild_Request request);
-        CPublishedFile_SetCollectionChildren_Response SetCollectionChildren(CPublishedFile_SetCollectionChildren_Request request);
-        CPublishedFile_SetSubscriptionListFromCollection_Response SetSubscriptionListFromCollection(CPublishedFile_SetSubscriptionListFromCollection_Request request);
-        CPublishedFile_GetUserVoteSummary_Response GetUserVoteSummary(CPublishedFile_GetUserVoteSummary_Request request);
-        CPublishedFile_GetItemChanges_Response GetItemChanges(CPublishedFile_GetItemChanges_Request request);
-        CPublishedFile_GetContentDescriptors_Response GetContentDescriptors(CPublishedFile_GetContentDescriptors_Request request);
-        CPublishedFile_UpdateContentDescriptors_Response UpdateContentDescriptors(CPublishedFile_UpdateContentDescriptors_Request request);
+        public override string ServiceName { get; } = "PublishedFile";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_Vote_Response>> Vote( CPublishedFile_Vote_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_Vote_Request, CPublishedFile_Vote_Response>( "PublishedFile.Vote#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_Subscribe_Response>> Subscribe( CPublishedFile_Subscribe_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_Subscribe_Request, CPublishedFile_Subscribe_Response>( "PublishedFile.Subscribe#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_Unsubscribe_Response>> Unsubscribe( CPublishedFile_Unsubscribe_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_Unsubscribe_Request, CPublishedFile_Unsubscribe_Response>( "PublishedFile.Unsubscribe#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_CanSubscribe_Response>> CanSubscribe( CPublishedFile_CanSubscribe_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_CanSubscribe_Request, CPublishedFile_CanSubscribe_Response>( "PublishedFile.CanSubscribe#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetSubSectionData_Response>> GetSubSectionData( CPublishedFile_GetSubSectionData_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_GetSubSectionData_Request, CPublishedFile_GetSubSectionData_Response>( "PublishedFile.GetSubSectionData#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_Publish_Response>> Publish( CPublishedFile_Publish_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_Publish_Request, CPublishedFile_Publish_Response>( "PublishedFile.Publish#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetDetails_Response>> GetDetails( CPublishedFile_GetDetails_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_GetDetails_Request, CPublishedFile_GetDetails_Response>( "PublishedFile.GetDetails#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetItemInfo_Response>> GetItemInfo( CPublishedFile_GetItemInfo_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_GetItemInfo_Request, CPublishedFile_GetItemInfo_Response>( "PublishedFile.GetItemInfo#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetUserFiles_Response>> GetUserFiles( CPublishedFile_GetUserFiles_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_GetUserFiles_Request, CPublishedFile_GetUserFiles_Response>( "PublishedFile.GetUserFiles#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetUserFiles_Response>> GetUserFileCount( CPublishedFile_GetUserFiles_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_GetUserFiles_Request, CPublishedFile_GetUserFiles_Response>( "PublishedFile.GetUserFileCount#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_AreFilesInSubscriptionList_Response>> AreFilesInSubscriptionList( CPublishedFile_AreFilesInSubscriptionList_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_AreFilesInSubscriptionList_Request, CPublishedFile_AreFilesInSubscriptionList_Response>( "PublishedFile.AreFilesInSubscriptionList#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_Update_Response>> Update( CPublishedFile_Update_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_Update_Request, CPublishedFile_Update_Response>( "PublishedFile.Update#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_Delete_Response>> Delete( CPublishedFile_Delete_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_Delete_Request, CPublishedFile_Delete_Response>( "PublishedFile.Delete#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetChangeHistoryEntry_Response>> GetChangeHistoryEntry( CPublishedFile_GetChangeHistoryEntry_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_GetChangeHistoryEntry_Request, CPublishedFile_GetChangeHistoryEntry_Response>( "PublishedFile.GetChangeHistoryEntry#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetChangeHistory_Response>> GetChangeHistory( CPublishedFile_GetChangeHistory_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_GetChangeHistory_Request, CPublishedFile_GetChangeHistory_Response>( "PublishedFile.GetChangeHistory#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_RefreshVotingQueue_Response>> RefreshVotingQueue( CPublishedFile_RefreshVotingQueue_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_RefreshVotingQueue_Request, CPublishedFile_RefreshVotingQueue_Response>( "PublishedFile.RefreshVotingQueue#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_QueryFiles_Response>> QueryFiles( CPublishedFile_QueryFiles_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_QueryFiles_Request, CPublishedFile_QueryFiles_Response>( "PublishedFile.QueryFiles#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_AddAppRelationship_Response>> AddAppRelationship( CPublishedFile_AddAppRelationship_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_AddAppRelationship_Request, CPublishedFile_AddAppRelationship_Response>( "PublishedFile.AddAppRelationship#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_RemoveAppRelationship_Response>> RemoveAppRelationship( CPublishedFile_RemoveAppRelationship_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_RemoveAppRelationship_Request, CPublishedFile_RemoveAppRelationship_Response>( "PublishedFile.RemoveAppRelationship#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetAppRelationships_Response>> GetAppRelationships( CPublishedFile_GetAppRelationships_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_GetAppRelationships_Request, CPublishedFile_GetAppRelationships_Response>( "PublishedFile.GetAppRelationships#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetAppRelationshipsBatched_Response>> GetAppRelationshipsBatched( CPublishedFile_GetAppRelationshipsBatched_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_GetAppRelationshipsBatched_Request, CPublishedFile_GetAppRelationshipsBatched_Response>( "PublishedFile.GetAppRelationshipsBatched#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_StartPlaytimeTracking_Response>> StartPlaytimeTracking( CPublishedFile_StartPlaytimeTracking_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_StartPlaytimeTracking_Request, CPublishedFile_StartPlaytimeTracking_Response>( "PublishedFile.StartPlaytimeTracking#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_StopPlaytimeTracking_Response>> StopPlaytimeTracking( CPublishedFile_StopPlaytimeTracking_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_StopPlaytimeTracking_Request, CPublishedFile_StopPlaytimeTracking_Response>( "PublishedFile.StopPlaytimeTracking#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response>> StopPlaytimeTrackingForAllAppItems( CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request, CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response>( "PublishedFile.StopPlaytimeTrackingForAllAppItems#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_SetPlaytimeForControllerConfigs_Response>> SetPlaytimeForControllerConfigs( CPublishedFile_SetPlaytimeForControllerConfigs_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_SetPlaytimeForControllerConfigs_Request, CPublishedFile_SetPlaytimeForControllerConfigs_Response>( "PublishedFile.SetPlaytimeForControllerConfigs#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_AddChild_Response>> AddChild( CPublishedFile_AddChild_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_AddChild_Request, CPublishedFile_AddChild_Response>( "PublishedFile.AddChild#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_RemoveChild_Response>> RemoveChild( CPublishedFile_RemoveChild_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_RemoveChild_Request, CPublishedFile_RemoveChild_Response>( "PublishedFile.RemoveChild#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_SetCollectionChildren_Response>> SetCollectionChildren( CPublishedFile_SetCollectionChildren_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_SetCollectionChildren_Request, CPublishedFile_SetCollectionChildren_Response>( "PublishedFile.SetCollectionChildren#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_SetSubscriptionListFromCollection_Response>> SetSubscriptionListFromCollection( CPublishedFile_SetSubscriptionListFromCollection_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_SetSubscriptionListFromCollection_Request, CPublishedFile_SetSubscriptionListFromCollection_Response>( "PublishedFile.SetSubscriptionListFromCollection#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetUserVoteSummary_Response>> GetUserVoteSummary( CPublishedFile_GetUserVoteSummary_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_GetUserVoteSummary_Request, CPublishedFile_GetUserVoteSummary_Response>( "PublishedFile.GetUserVoteSummary#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetItemChanges_Response>> GetItemChanges( CPublishedFile_GetItemChanges_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_GetItemChanges_Request, CPublishedFile_GetItemChanges_Response>( "PublishedFile.GetItemChanges#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetContentDescriptors_Response>> GetContentDescriptors( CPublishedFile_GetContentDescriptors_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_GetContentDescriptors_Request, CPublishedFile_GetContentDescriptors_Response>( "PublishedFile.GetContentDescriptors#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_UpdateContentDescriptors_Response>> UpdateContentDescriptors( CPublishedFile_UpdateContentDescriptors_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_UpdateContentDescriptors_Request, CPublishedFile_UpdateContentDescriptors_Response>( "PublishedFile.UpdateContentDescriptors#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "Vote":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_Vote_Response>( packetMsg );
+                    break;
+                case "Subscribe":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_Subscribe_Response>( packetMsg );
+                    break;
+                case "Unsubscribe":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_Unsubscribe_Response>( packetMsg );
+                    break;
+                case "CanSubscribe":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_CanSubscribe_Response>( packetMsg );
+                    break;
+                case "GetSubSectionData":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetSubSectionData_Response>( packetMsg );
+                    break;
+                case "Publish":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_Publish_Response>( packetMsg );
+                    break;
+                case "GetDetails":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetDetails_Response>( packetMsg );
+                    break;
+                case "GetItemInfo":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetItemInfo_Response>( packetMsg );
+                    break;
+                case "GetUserFiles":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetUserFiles_Response>( packetMsg );
+                    break;
+                case "GetUserFileCount":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetUserFiles_Response>( packetMsg );
+                    break;
+                case "AreFilesInSubscriptionList":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_AreFilesInSubscriptionList_Response>( packetMsg );
+                    break;
+                case "Update":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_Update_Response>( packetMsg );
+                    break;
+                case "Delete":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_Delete_Response>( packetMsg );
+                    break;
+                case "GetChangeHistoryEntry":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetChangeHistoryEntry_Response>( packetMsg );
+                    break;
+                case "GetChangeHistory":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetChangeHistory_Response>( packetMsg );
+                    break;
+                case "RefreshVotingQueue":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_RefreshVotingQueue_Response>( packetMsg );
+                    break;
+                case "QueryFiles":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_QueryFiles_Response>( packetMsg );
+                    break;
+                case "AddAppRelationship":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_AddAppRelationship_Response>( packetMsg );
+                    break;
+                case "RemoveAppRelationship":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_RemoveAppRelationship_Response>( packetMsg );
+                    break;
+                case "GetAppRelationships":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetAppRelationships_Response>( packetMsg );
+                    break;
+                case "GetAppRelationshipsBatched":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetAppRelationshipsBatched_Response>( packetMsg );
+                    break;
+                case "StartPlaytimeTracking":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_StartPlaytimeTracking_Response>( packetMsg );
+                    break;
+                case "StopPlaytimeTracking":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_StopPlaytimeTracking_Response>( packetMsg );
+                    break;
+                case "StopPlaytimeTrackingForAllAppItems":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response>( packetMsg );
+                    break;
+                case "SetPlaytimeForControllerConfigs":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_SetPlaytimeForControllerConfigs_Response>( packetMsg );
+                    break;
+                case "AddChild":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_AddChild_Response>( packetMsg );
+                    break;
+                case "RemoveChild":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_RemoveChild_Response>( packetMsg );
+                    break;
+                case "SetCollectionChildren":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_SetCollectionChildren_Response>( packetMsg );
+                    break;
+                case "SetSubscriptionListFromCollection":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_SetSubscriptionListFromCollection_Response>( packetMsg );
+                    break;
+                case "GetUserVoteSummary":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetUserVoteSummary_Response>( packetMsg );
+                    break;
+                case "GetItemChanges":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetItemChanges_Response>( packetMsg );
+                    break;
+                case "GetContentDescriptors":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_GetContentDescriptors_Response>( packetMsg );
+                    break;
+                case "UpdateContentDescriptors":
+                    UnifiedMessages.HandleResponseMsg<CPublishedFile_UpdateContentDescriptors_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
-    public interface IPublishedFileClient
+    public class PublishedFileClient : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse NotifyFileSubscribed(CPublishedFile_FileSubscribed_Notification request);
-        NoResponse NotifyFileUnsubscribed(CPublishedFile_FileUnsubscribed_Notification request);
-        NoResponse NotifyFileDeleted(CPublishedFile_FileDeleted_Client_Notification request);
+        public override string ServiceName { get; } = "PublishedFileClient";
+
+        public void NotifyFileSubscribed(CPublishedFile_FileSubscribed_Notification request )
+        {
+            UnifiedMessages.SendNotification<CPublishedFile_FileSubscribed_Notification>( "PublishedFileClient.NotifyFileSubscribed#1", request );
+        }
+
+        public void NotifyFileUnsubscribed(CPublishedFile_FileUnsubscribed_Notification request )
+        {
+            UnifiedMessages.SendNotification<CPublishedFile_FileUnsubscribed_Notification>( "PublishedFileClient.NotifyFileUnsubscribed#1", request );
+        }
+
+        public void NotifyFileDeleted(CPublishedFile_FileDeleted_Client_Notification request )
+        {
+            UnifiedMessages.SendNotification<CPublishedFile_FileDeleted_Client_Notification>( "PublishedFileClient.NotifyFileDeleted#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyFileSubscribed":
+                    UnifiedMessages.HandleNotificationMsg<CPublishedFile_FileSubscribed_Notification>( packetMsg );
+                    break;
+                case "NotifyFileUnsubscribed":
+                    UnifiedMessages.HandleNotificationMsg<CPublishedFile_FileUnsubscribed_Notification>( packetMsg );
+                    break;
+                case "NotifyFileDeleted":
+                    UnifiedMessages.HandleNotificationMsg<CPublishedFile_FileDeleted_Client_Notification>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

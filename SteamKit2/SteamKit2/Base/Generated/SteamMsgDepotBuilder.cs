@@ -567,14 +567,68 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface IContentBuilder
+    public class ContentBuilder : SteamUnifiedMessages.UnifiedService
     {
-        CContentBuilder_InitDepotBuild_Response InitDepotBuild(CContentBuilder_InitDepotBuild_Request request);
-        CContentBuilder_StartDepotUpload_Response StartDepotUpload(CContentBuilder_StartDepotUpload_Request request);
-        CContentBuilder_GetMissingDepotChunks_Response GetMissingDepotChunks(CContentBuilder_GetMissingDepotChunks_Request request);
-        CContentBuilder_FinishDepotUpload_Response FinishDepotUpload(CContentBuilder_FinishDepotUpload_Request request);
-        CContentBuilder_CommitAppBuild_Response CommitAppBuild(CContentBuilder_CommitAppBuild_Request request);
-        CContentBuilder_SignInstallScript_Response SignInstallScript(CContentBuilder_SignInstallScript_Request request);
+        public override string ServiceName { get; } = "ContentBuilder";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentBuilder_InitDepotBuild_Response>> InitDepotBuild( CContentBuilder_InitDepotBuild_Request request )
+        {
+            return UnifiedMessages.SendMessage<CContentBuilder_InitDepotBuild_Request, CContentBuilder_InitDepotBuild_Response>( "ContentBuilder.InitDepotBuild#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentBuilder_StartDepotUpload_Response>> StartDepotUpload( CContentBuilder_StartDepotUpload_Request request )
+        {
+            return UnifiedMessages.SendMessage<CContentBuilder_StartDepotUpload_Request, CContentBuilder_StartDepotUpload_Response>( "ContentBuilder.StartDepotUpload#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentBuilder_GetMissingDepotChunks_Response>> GetMissingDepotChunks( CContentBuilder_GetMissingDepotChunks_Request request )
+        {
+            return UnifiedMessages.SendMessage<CContentBuilder_GetMissingDepotChunks_Request, CContentBuilder_GetMissingDepotChunks_Response>( "ContentBuilder.GetMissingDepotChunks#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentBuilder_FinishDepotUpload_Response>> FinishDepotUpload( CContentBuilder_FinishDepotUpload_Request request )
+        {
+            return UnifiedMessages.SendMessage<CContentBuilder_FinishDepotUpload_Request, CContentBuilder_FinishDepotUpload_Response>( "ContentBuilder.FinishDepotUpload#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentBuilder_CommitAppBuild_Response>> CommitAppBuild( CContentBuilder_CommitAppBuild_Request request )
+        {
+            return UnifiedMessages.SendMessage<CContentBuilder_CommitAppBuild_Request, CContentBuilder_CommitAppBuild_Response>( "ContentBuilder.CommitAppBuild#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentBuilder_SignInstallScript_Response>> SignInstallScript( CContentBuilder_SignInstallScript_Request request )
+        {
+            return UnifiedMessages.SendMessage<CContentBuilder_SignInstallScript_Request, CContentBuilder_SignInstallScript_Response>( "ContentBuilder.SignInstallScript#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "InitDepotBuild":
+                    UnifiedMessages.HandleResponseMsg<CContentBuilder_InitDepotBuild_Response>( packetMsg );
+                    break;
+                case "StartDepotUpload":
+                    UnifiedMessages.HandleResponseMsg<CContentBuilder_StartDepotUpload_Response>( packetMsg );
+                    break;
+                case "GetMissingDepotChunks":
+                    UnifiedMessages.HandleResponseMsg<CContentBuilder_GetMissingDepotChunks_Response>( packetMsg );
+                    break;
+                case "FinishDepotUpload":
+                    UnifiedMessages.HandleResponseMsg<CContentBuilder_FinishDepotUpload_Response>( packetMsg );
+                    break;
+                case "CommitAppBuild":
+                    UnifiedMessages.HandleResponseMsg<CContentBuilder_CommitAppBuild_Response>( packetMsg );
+                    break;
+                case "SignInstallScript":
+                    UnifiedMessages.HandleResponseMsg<CContentBuilder_SignInstallScript_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
 }

@@ -523,20 +523,103 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface ISiteManagerClient
+    public class SiteManagerClient : SteamUnifiedMessages.UnifiedService
     {
-        CSiteManagerClient_IncomingClient_Response IncomingClient(CSiteManagerClient_IncomingClient_Request request);
-        NoResponse ClientSeatCheckoutNotification(CSiteLicense_ClientSeatCheckout_Notification request);
-        NoResponse TrackedPaymentsNotification(CSiteManagerClient_TrackedPayments_Notification request);
+        public override string ServiceName { get; } = "SiteManagerClient";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteManagerClient_IncomingClient_Response>> IncomingClient( CSiteManagerClient_IncomingClient_Request request )
+        {
+            return UnifiedMessages.SendMessage<CSiteManagerClient_IncomingClient_Request, CSiteManagerClient_IncomingClient_Response>( "SiteManagerClient.IncomingClient#1", request );
+        }
+
+        public void ClientSeatCheckoutNotification(CSiteLicense_ClientSeatCheckout_Notification request )
+        {
+            UnifiedMessages.SendNotification<CSiteLicense_ClientSeatCheckout_Notification>( "SiteManagerClient.ClientSeatCheckoutNotification#1", request );
+        }
+
+        public void TrackedPaymentsNotification(CSiteManagerClient_TrackedPayments_Notification request )
+        {
+            UnifiedMessages.SendNotification<CSiteManagerClient_TrackedPayments_Notification>( "SiteManagerClient.TrackedPaymentsNotification#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "IncomingClient":
+                    UnifiedMessages.HandleResponseMsg<CSiteManagerClient_IncomingClient_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "ClientSeatCheckoutNotification":
+                    UnifiedMessages.HandleNotificationMsg<CSiteLicense_ClientSeatCheckout_Notification>( packetMsg );
+                    break;
+                case "TrackedPaymentsNotification":
+                    UnifiedMessages.HandleNotificationMsg<CSiteManagerClient_TrackedPayments_Notification>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface ISiteLicense
+    public class SiteLicense : SteamUnifiedMessages.UnifiedService
     {
-        CSiteLicense_InitiateAssociation_Response InitiateAssociation(CSiteLicense_InitiateAssociation_Request request);
-        CSiteLicense_LCSAuthenticate_Response LCSAuthenticate(CSiteLicense_LCSAuthenticate_Request request);
-        CSiteLicense_LCSAssociateUser_Response LCSAssociateUser(CSiteLicense_LCSAssociateUser_Request request);
-        CSiteLicense_ClientSeatCheckout_Response ClientSeatCheckout(CSiteLicense_ClientSeatCheckout_Request request);
-        CSiteLicense_ClientGetAvailableSeats_Response ClientGetAvailableSeats(CSiteLicense_ClientGetAvailableSeats_Request request);
+        public override string ServiceName { get; } = "SiteLicense";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteLicense_InitiateAssociation_Response>> InitiateAssociation( CSiteLicense_InitiateAssociation_Request request )
+        {
+            return UnifiedMessages.SendMessage<CSiteLicense_InitiateAssociation_Request, CSiteLicense_InitiateAssociation_Response>( "SiteLicense.InitiateAssociation#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteLicense_LCSAuthenticate_Response>> LCSAuthenticate( CSiteLicense_LCSAuthenticate_Request request )
+        {
+            return UnifiedMessages.SendMessage<CSiteLicense_LCSAuthenticate_Request, CSiteLicense_LCSAuthenticate_Response>( "SiteLicense.LCSAuthenticate#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteLicense_LCSAssociateUser_Response>> LCSAssociateUser( CSiteLicense_LCSAssociateUser_Request request )
+        {
+            return UnifiedMessages.SendMessage<CSiteLicense_LCSAssociateUser_Request, CSiteLicense_LCSAssociateUser_Response>( "SiteLicense.LCSAssociateUser#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteLicense_ClientSeatCheckout_Response>> ClientSeatCheckout( CSiteLicense_ClientSeatCheckout_Request request )
+        {
+            return UnifiedMessages.SendMessage<CSiteLicense_ClientSeatCheckout_Request, CSiteLicense_ClientSeatCheckout_Response>( "SiteLicense.ClientSeatCheckout#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteLicense_ClientGetAvailableSeats_Response>> ClientGetAvailableSeats( CSiteLicense_ClientGetAvailableSeats_Request request )
+        {
+            return UnifiedMessages.SendMessage<CSiteLicense_ClientGetAvailableSeats_Request, CSiteLicense_ClientGetAvailableSeats_Response>( "SiteLicense.ClientGetAvailableSeats#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "InitiateAssociation":
+                    UnifiedMessages.HandleResponseMsg<CSiteLicense_InitiateAssociation_Response>( packetMsg );
+                    break;
+                case "LCSAuthenticate":
+                    UnifiedMessages.HandleResponseMsg<CSiteLicense_LCSAuthenticate_Response>( packetMsg );
+                    break;
+                case "LCSAssociateUser":
+                    UnifiedMessages.HandleResponseMsg<CSiteLicense_LCSAssociateUser_Response>( packetMsg );
+                    break;
+                case "ClientSeatCheckout":
+                    UnifiedMessages.HandleResponseMsg<CSiteLicense_ClientSeatCheckout_Response>( packetMsg );
+                    break;
+                case "ClientGetAvailableSeats":
+                    UnifiedMessages.HandleResponseMsg<CSiteLicense_ClientGetAvailableSeats_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
 }

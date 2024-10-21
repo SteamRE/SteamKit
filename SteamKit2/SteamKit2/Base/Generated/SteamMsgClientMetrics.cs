@@ -1408,22 +1408,132 @@ namespace SteamKit2.Internal
         k_EClipRangeMethod_PhaseRecording = 7,
     }
 
-    public interface IClientMetrics
+    public class ClientMetrics : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse ClientAppInterfaceStatsReport(CClientMetrics_AppInterfaceStats_Notification request);
-        NoResponse ClientIPv6ConnectivityReport(CClientMetrics_IPv6Connectivity_Notification request);
-        NoResponse SteamPipeWorkStatsReport(CClientMetrics_SteamPipeWorkStats_Notification request);
-        NoResponse ReportReactUsage(CClientMetrics_ReportReactUsage_Notification request);
-        NoResponse ReportClientError(CClientMetrics_ReportClientError_Notification request);
-        NoResponse ClientBootstrapReport(CClientMetrics_ClientBootstrap_Notification request);
-        NoResponse ClientDownloadRatesReport(CClientMetrics_DownloadRates_Notification request);
-        NoResponse ClientContentValidationReport(CClientMetrics_ContentValidation_Notification request);
-        NoResponse ClientCloudAppSyncStats(CClientMetrics_CloudAppSyncStats_Notification request);
-        NoResponse ClientDownloadResponseCodeCounts(CClientMetrics_ContentDownloadResponse_Counts_Notification request);
-        NoResponse ReportClientArgs(CClientMetrics_ReportClientArgs_Notification request);
-        NoResponse ReportClipShare(CClientMetrics_ClipShare_Notification request);
-        NoResponse ReportClipRange(CClientMetrics_ClipRange_Notification request);
-        NoResponse ReportEndGameRecording(CClientMetrics_EndGameRecording_Notification request);
+        public override string ServiceName { get; } = "ClientMetrics";
+
+        public void ClientAppInterfaceStatsReport(CClientMetrics_AppInterfaceStats_Notification request )
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_AppInterfaceStats_Notification>( "ClientMetrics.ClientAppInterfaceStatsReport#1", request );
+        }
+
+        public void ClientIPv6ConnectivityReport(CClientMetrics_IPv6Connectivity_Notification request )
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_IPv6Connectivity_Notification>( "ClientMetrics.ClientIPv6ConnectivityReport#1", request );
+        }
+
+        public void SteamPipeWorkStatsReport(CClientMetrics_SteamPipeWorkStats_Notification request )
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_SteamPipeWorkStats_Notification>( "ClientMetrics.SteamPipeWorkStatsReport#1", request );
+        }
+
+        public void ReportReactUsage(CClientMetrics_ReportReactUsage_Notification request )
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_ReportReactUsage_Notification>( "ClientMetrics.ReportReactUsage#1", request );
+        }
+
+        public void ReportClientError(CClientMetrics_ReportClientError_Notification request )
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_ReportClientError_Notification>( "ClientMetrics.ReportClientError#1", request );
+        }
+
+        public void ClientBootstrapReport(CClientMetrics_ClientBootstrap_Notification request )
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_ClientBootstrap_Notification>( "ClientMetrics.ClientBootstrapReport#1", request );
+        }
+
+        public void ClientDownloadRatesReport(CClientMetrics_DownloadRates_Notification request )
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_DownloadRates_Notification>( "ClientMetrics.ClientDownloadRatesReport#1", request );
+        }
+
+        public void ClientContentValidationReport(CClientMetrics_ContentValidation_Notification request )
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_ContentValidation_Notification>( "ClientMetrics.ClientContentValidationReport#1", request );
+        }
+
+        public void ClientCloudAppSyncStats(CClientMetrics_CloudAppSyncStats_Notification request )
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_CloudAppSyncStats_Notification>( "ClientMetrics.ClientCloudAppSyncStats#1", request );
+        }
+
+        public void ClientDownloadResponseCodeCounts(CClientMetrics_ContentDownloadResponse_Counts_Notification request )
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_ContentDownloadResponse_Counts_Notification>( "ClientMetrics.ClientDownloadResponseCodeCounts#1", request );
+        }
+
+        public void ReportClientArgs(CClientMetrics_ReportClientArgs_Notification request )
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_ReportClientArgs_Notification>( "ClientMetrics.ReportClientArgs#1", request );
+        }
+
+        public void ReportClipShare(CClientMetrics_ClipShare_Notification request )
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_ClipShare_Notification>( "ClientMetrics.ReportClipShare#1", request );
+        }
+
+        public void ReportClipRange(CClientMetrics_ClipRange_Notification request )
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_ClipRange_Notification>( "ClientMetrics.ReportClipRange#1", request );
+        }
+
+        public void ReportEndGameRecording(CClientMetrics_EndGameRecording_Notification request )
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_EndGameRecording_Notification>( "ClientMetrics.ReportEndGameRecording#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "ClientAppInterfaceStatsReport":
+                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_AppInterfaceStats_Notification>( packetMsg );
+                    break;
+                case "ClientIPv6ConnectivityReport":
+                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_IPv6Connectivity_Notification>( packetMsg );
+                    break;
+                case "SteamPipeWorkStatsReport":
+                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_SteamPipeWorkStats_Notification>( packetMsg );
+                    break;
+                case "ReportReactUsage":
+                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_ReportReactUsage_Notification>( packetMsg );
+                    break;
+                case "ReportClientError":
+                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_ReportClientError_Notification>( packetMsg );
+                    break;
+                case "ClientBootstrapReport":
+                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_ClientBootstrap_Notification>( packetMsg );
+                    break;
+                case "ClientDownloadRatesReport":
+                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_DownloadRates_Notification>( packetMsg );
+                    break;
+                case "ClientContentValidationReport":
+                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_ContentValidation_Notification>( packetMsg );
+                    break;
+                case "ClientCloudAppSyncStats":
+                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_CloudAppSyncStats_Notification>( packetMsg );
+                    break;
+                case "ClientDownloadResponseCodeCounts":
+                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_ContentDownloadResponse_Counts_Notification>( packetMsg );
+                    break;
+                case "ReportClientArgs":
+                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_ReportClientArgs_Notification>( packetMsg );
+                    break;
+                case "ReportClipShare":
+                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_ClipShare_Notification>( packetMsg );
+                    break;
+                case "ReportClipRange":
+                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_ClipRange_Notification>( packetMsg );
+                    break;
+                case "ReportEndGameRecording":
+                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_EndGameRecording_Notification>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

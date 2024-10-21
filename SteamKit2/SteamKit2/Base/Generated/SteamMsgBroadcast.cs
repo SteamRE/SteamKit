@@ -3490,59 +3490,415 @@ namespace SteamKit2.Internal
         k_EBroadcastChatPermissionOwnsApp = 1,
     }
 
-    public interface IBroadcast
+    public class Broadcast : SteamUnifiedMessages.UnifiedService
     {
-        CBroadcast_BeginBroadcastSession_Response BeginBroadcastSession(CBroadcast_BeginBroadcastSession_Request request);
-        CBroadcast_EndBroadcastSession_Response EndBroadcastSession(CBroadcast_EndBroadcastSession_Request request);
-        CBroadcast_StartBroadcastUpload_Response StartBroadcastUpload(CBroadcast_StartBroadcastUpload_Request request);
-        NoResponse NotifyBroadcastUploadStop(CBroadcast_NotifyBroadcastUploadStop_Notification request);
-        CBroadcast_WatchBroadcast_Response WatchBroadcast(CBroadcast_WatchBroadcast_Request request);
-        NoResponse HeartbeatBroadcast(CBroadcast_HeartbeatBroadcast_Notification request);
-        NoResponse StopWatchingBroadcast(CBroadcast_StopWatchingBroadcast_Notification request);
-        CBroadcast_GetBroadcastStatus_Response GetBroadcastStatus(CBroadcast_GetBroadcastStatus_Request request);
-        CBroadcast_GetBroadcastThumbnail_Response GetBroadcastThumbnail(CBroadcast_GetBroadcastThumbnail_Request request);
-        CBroadcast_InviteToBroadcast_Response InviteToBroadcast(CBroadcast_InviteToBroadcast_Request request);
-        CBroadcast_SendBroadcastStateToServer_Response SendBroadcastStateToServer(CBroadcast_SendBroadcastStateToServer_Request request);
-        NoResponse NotifyBroadcastSessionHeartbeat(CBroadcast_NotifyBroadcastSessionHeartbeat_Notification request);
-        CBroadcast_GetBroadcastChatInfo_Response GetBroadcastChatInfo(CBroadcast_GetBroadcastChatInfo_Request request);
-        CBroadcast_PostChatMessage_Response PostChatMessage(CBroadcast_PostChatMessage_Request request);
-        CBroadcast_UpdateChatMessageFlair_Response UpdateChatMessageFlair(CBroadcast_UpdateChatMessageFlair_Request request);
-        CBroadcast_MuteBroadcastChatUser_Response MuteBroadcastChatUser(CBroadcast_MuteBroadcastChatUser_Request request);
-        CBroadcast_RemoveUserChatText_Response RemoveUserChatText(CBroadcast_RemoveUserChatText_Request request);
-        CBroadcast_GetBroadcastChatUserNames_Response GetBroadcastChatUserNames(CBroadcast_GetBroadcastChatUserNames_Request request);
-        CBroadcast_StartBuildClip_Response StartBuildClip(CBroadcast_StartBuildClip_Request request);
-        CBroadcast_GetBuildClipStatus_Response GetBuildClipStatus(CBroadcast_GetBuildClipStatus_Request request);
-        CBroadcast_SetClipDetails_Response SetClipDetails(CBroadcast_SetClipDetails_Request request);
-        CBroadcast_GetClipDetails_Response GetClipDetails(CBroadcast_GetClipDetails_Request request);
-        CBroadcast_SetRTMPInfo_Response SetRTMPInfo(CBroadcast_SetRTMPInfo_Request request);
-        CBroadcast_GetRTMPInfo_Response GetRTMPInfo(CBroadcast_GetRTMPInfo_Request request);
-        NoResponse NotifyWebRTCHaveTURNServer(CBroadcast_WebRTCHaveTURNServer_Notification request);
-        CBroadcast_WebRTCStartResult_Response WebRTCStartResult(CBroadcast_WebRTCStartResult_Request request);
-        CBroadcast_WebRTCStopped_Response WebRTCStopped(CBroadcast_WebRTCStopped_Request request);
-        CBroadcast_WebRTCSetAnswer_Response WebRTCSetAnswer(CBroadcast_WebRTCSetAnswer_Request request);
-        CBroadcast_WebRTCLookupTURNServer_Response WebRTCLookupTURNServer(CBroadcast_WebRTCLookupTURNServer_Request request);
-        CBroadcast_WebRTCAddHostCandidate_Response WebRTCAddHostCandidate(CBroadcast_WebRTCAddHostCandidate_Request request);
-        CBroadcast_WebRTCAddViewerCandidate_Response WebRTCAddViewerCandidate(CBroadcast_WebRTCAddViewerCandidate_Request request);
-        CBroadcast_WebRTCGetHostCandidates_Response WebRTCGetHostCandidates(CBroadcast_WebRTCGetHostCandidates_Request request);
-        CBroadcast_GetBroadcastUploadStats_Response GetBroadcastUploadStats(CBroadcast_GetBroadcastUploadStats_Request request);
-        CBroadcast_GetBroadcastViewerStats_Response GetBroadcastViewerStats(CBroadcast_GetBroadcastViewerStats_Request request);
+        public override string ServiceName { get; } = "Broadcast";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_BeginBroadcastSession_Response>> BeginBroadcastSession( CBroadcast_BeginBroadcastSession_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_BeginBroadcastSession_Request, CBroadcast_BeginBroadcastSession_Response>( "Broadcast.BeginBroadcastSession#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_EndBroadcastSession_Response>> EndBroadcastSession( CBroadcast_EndBroadcastSession_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_EndBroadcastSession_Request, CBroadcast_EndBroadcastSession_Response>( "Broadcast.EndBroadcastSession#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_StartBroadcastUpload_Response>> StartBroadcastUpload( CBroadcast_StartBroadcastUpload_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_StartBroadcastUpload_Request, CBroadcast_StartBroadcastUpload_Response>( "Broadcast.StartBroadcastUpload#1", request );
+        }
+
+        public void NotifyBroadcastUploadStop(CBroadcast_NotifyBroadcastUploadStop_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_NotifyBroadcastUploadStop_Notification>( "Broadcast.NotifyBroadcastUploadStop#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_WatchBroadcast_Response>> WatchBroadcast( CBroadcast_WatchBroadcast_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_WatchBroadcast_Request, CBroadcast_WatchBroadcast_Response>( "Broadcast.WatchBroadcast#1", request );
+        }
+
+        public void HeartbeatBroadcast(CBroadcast_HeartbeatBroadcast_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_HeartbeatBroadcast_Notification>( "Broadcast.HeartbeatBroadcast#1", request );
+        }
+
+        public void StopWatchingBroadcast(CBroadcast_StopWatchingBroadcast_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_StopWatchingBroadcast_Notification>( "Broadcast.StopWatchingBroadcast#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_GetBroadcastStatus_Response>> GetBroadcastStatus( CBroadcast_GetBroadcastStatus_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastStatus_Request, CBroadcast_GetBroadcastStatus_Response>( "Broadcast.GetBroadcastStatus#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_GetBroadcastThumbnail_Response>> GetBroadcastThumbnail( CBroadcast_GetBroadcastThumbnail_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastThumbnail_Request, CBroadcast_GetBroadcastThumbnail_Response>( "Broadcast.GetBroadcastThumbnail#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_InviteToBroadcast_Response>> InviteToBroadcast( CBroadcast_InviteToBroadcast_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_InviteToBroadcast_Request, CBroadcast_InviteToBroadcast_Response>( "Broadcast.InviteToBroadcast#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_SendBroadcastStateToServer_Response>> SendBroadcastStateToServer( CBroadcast_SendBroadcastStateToServer_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_SendBroadcastStateToServer_Request, CBroadcast_SendBroadcastStateToServer_Response>( "Broadcast.SendBroadcastStateToServer#1", request );
+        }
+
+        public void NotifyBroadcastSessionHeartbeat(CBroadcast_NotifyBroadcastSessionHeartbeat_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_NotifyBroadcastSessionHeartbeat_Notification>( "Broadcast.NotifyBroadcastSessionHeartbeat#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_GetBroadcastChatInfo_Response>> GetBroadcastChatInfo( CBroadcast_GetBroadcastChatInfo_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastChatInfo_Request, CBroadcast_GetBroadcastChatInfo_Response>( "Broadcast.GetBroadcastChatInfo#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_PostChatMessage_Response>> PostChatMessage( CBroadcast_PostChatMessage_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_PostChatMessage_Request, CBroadcast_PostChatMessage_Response>( "Broadcast.PostChatMessage#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_UpdateChatMessageFlair_Response>> UpdateChatMessageFlair( CBroadcast_UpdateChatMessageFlair_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_UpdateChatMessageFlair_Request, CBroadcast_UpdateChatMessageFlair_Response>( "Broadcast.UpdateChatMessageFlair#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_MuteBroadcastChatUser_Response>> MuteBroadcastChatUser( CBroadcast_MuteBroadcastChatUser_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_MuteBroadcastChatUser_Request, CBroadcast_MuteBroadcastChatUser_Response>( "Broadcast.MuteBroadcastChatUser#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_RemoveUserChatText_Response>> RemoveUserChatText( CBroadcast_RemoveUserChatText_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_RemoveUserChatText_Request, CBroadcast_RemoveUserChatText_Response>( "Broadcast.RemoveUserChatText#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_GetBroadcastChatUserNames_Response>> GetBroadcastChatUserNames( CBroadcast_GetBroadcastChatUserNames_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastChatUserNames_Request, CBroadcast_GetBroadcastChatUserNames_Response>( "Broadcast.GetBroadcastChatUserNames#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_StartBuildClip_Response>> StartBuildClip( CBroadcast_StartBuildClip_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_StartBuildClip_Request, CBroadcast_StartBuildClip_Response>( "Broadcast.StartBuildClip#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_GetBuildClipStatus_Response>> GetBuildClipStatus( CBroadcast_GetBuildClipStatus_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_GetBuildClipStatus_Request, CBroadcast_GetBuildClipStatus_Response>( "Broadcast.GetBuildClipStatus#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_SetClipDetails_Response>> SetClipDetails( CBroadcast_SetClipDetails_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_SetClipDetails_Request, CBroadcast_SetClipDetails_Response>( "Broadcast.SetClipDetails#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_GetClipDetails_Response>> GetClipDetails( CBroadcast_GetClipDetails_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_GetClipDetails_Request, CBroadcast_GetClipDetails_Response>( "Broadcast.GetClipDetails#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_SetRTMPInfo_Response>> SetRTMPInfo( CBroadcast_SetRTMPInfo_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_SetRTMPInfo_Request, CBroadcast_SetRTMPInfo_Response>( "Broadcast.SetRTMPInfo#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_GetRTMPInfo_Response>> GetRTMPInfo( CBroadcast_GetRTMPInfo_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_GetRTMPInfo_Request, CBroadcast_GetRTMPInfo_Response>( "Broadcast.GetRTMPInfo#1", request );
+        }
+
+        public void NotifyWebRTCHaveTURNServer(CBroadcast_WebRTCHaveTURNServer_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_WebRTCHaveTURNServer_Notification>( "Broadcast.NotifyWebRTCHaveTURNServer#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_WebRTCStartResult_Response>> WebRTCStartResult( CBroadcast_WebRTCStartResult_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCStartResult_Request, CBroadcast_WebRTCStartResult_Response>( "Broadcast.WebRTCStartResult#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_WebRTCStopped_Response>> WebRTCStopped( CBroadcast_WebRTCStopped_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCStopped_Request, CBroadcast_WebRTCStopped_Response>( "Broadcast.WebRTCStopped#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_WebRTCSetAnswer_Response>> WebRTCSetAnswer( CBroadcast_WebRTCSetAnswer_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCSetAnswer_Request, CBroadcast_WebRTCSetAnswer_Response>( "Broadcast.WebRTCSetAnswer#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_WebRTCLookupTURNServer_Response>> WebRTCLookupTURNServer( CBroadcast_WebRTCLookupTURNServer_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCLookupTURNServer_Request, CBroadcast_WebRTCLookupTURNServer_Response>( "Broadcast.WebRTCLookupTURNServer#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_WebRTCAddHostCandidate_Response>> WebRTCAddHostCandidate( CBroadcast_WebRTCAddHostCandidate_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCAddHostCandidate_Request, CBroadcast_WebRTCAddHostCandidate_Response>( "Broadcast.WebRTCAddHostCandidate#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_WebRTCAddViewerCandidate_Response>> WebRTCAddViewerCandidate( CBroadcast_WebRTCAddViewerCandidate_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCAddViewerCandidate_Request, CBroadcast_WebRTCAddViewerCandidate_Response>( "Broadcast.WebRTCAddViewerCandidate#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_WebRTCGetHostCandidates_Response>> WebRTCGetHostCandidates( CBroadcast_WebRTCGetHostCandidates_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_WebRTCGetHostCandidates_Request, CBroadcast_WebRTCGetHostCandidates_Response>( "Broadcast.WebRTCGetHostCandidates#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_GetBroadcastUploadStats_Response>> GetBroadcastUploadStats( CBroadcast_GetBroadcastUploadStats_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastUploadStats_Request, CBroadcast_GetBroadcastUploadStats_Response>( "Broadcast.GetBroadcastUploadStats#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_GetBroadcastViewerStats_Response>> GetBroadcastViewerStats( CBroadcast_GetBroadcastViewerStats_Request request )
+        {
+            return UnifiedMessages.SendMessage<CBroadcast_GetBroadcastViewerStats_Request, CBroadcast_GetBroadcastViewerStats_Response>( "Broadcast.GetBroadcastViewerStats#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "BeginBroadcastSession":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_BeginBroadcastSession_Response>( packetMsg );
+                    break;
+                case "EndBroadcastSession":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_EndBroadcastSession_Response>( packetMsg );
+                    break;
+                case "StartBroadcastUpload":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_StartBroadcastUpload_Response>( packetMsg );
+                    break;
+                case "WatchBroadcast":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_WatchBroadcast_Response>( packetMsg );
+                    break;
+                case "GetBroadcastStatus":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_GetBroadcastStatus_Response>( packetMsg );
+                    break;
+                case "GetBroadcastThumbnail":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_GetBroadcastThumbnail_Response>( packetMsg );
+                    break;
+                case "InviteToBroadcast":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_InviteToBroadcast_Response>( packetMsg );
+                    break;
+                case "SendBroadcastStateToServer":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_SendBroadcastStateToServer_Response>( packetMsg );
+                    break;
+                case "GetBroadcastChatInfo":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_GetBroadcastChatInfo_Response>( packetMsg );
+                    break;
+                case "PostChatMessage":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_PostChatMessage_Response>( packetMsg );
+                    break;
+                case "UpdateChatMessageFlair":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_UpdateChatMessageFlair_Response>( packetMsg );
+                    break;
+                case "MuteBroadcastChatUser":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_MuteBroadcastChatUser_Response>( packetMsg );
+                    break;
+                case "RemoveUserChatText":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_RemoveUserChatText_Response>( packetMsg );
+                    break;
+                case "GetBroadcastChatUserNames":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_GetBroadcastChatUserNames_Response>( packetMsg );
+                    break;
+                case "StartBuildClip":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_StartBuildClip_Response>( packetMsg );
+                    break;
+                case "GetBuildClipStatus":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_GetBuildClipStatus_Response>( packetMsg );
+                    break;
+                case "SetClipDetails":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_SetClipDetails_Response>( packetMsg );
+                    break;
+                case "GetClipDetails":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_GetClipDetails_Response>( packetMsg );
+                    break;
+                case "SetRTMPInfo":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_SetRTMPInfo_Response>( packetMsg );
+                    break;
+                case "GetRTMPInfo":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_GetRTMPInfo_Response>( packetMsg );
+                    break;
+                case "WebRTCStartResult":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_WebRTCStartResult_Response>( packetMsg );
+                    break;
+                case "WebRTCStopped":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_WebRTCStopped_Response>( packetMsg );
+                    break;
+                case "WebRTCSetAnswer":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_WebRTCSetAnswer_Response>( packetMsg );
+                    break;
+                case "WebRTCLookupTURNServer":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_WebRTCLookupTURNServer_Response>( packetMsg );
+                    break;
+                case "WebRTCAddHostCandidate":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_WebRTCAddHostCandidate_Response>( packetMsg );
+                    break;
+                case "WebRTCAddViewerCandidate":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_WebRTCAddViewerCandidate_Response>( packetMsg );
+                    break;
+                case "WebRTCGetHostCandidates":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_WebRTCGetHostCandidates_Response>( packetMsg );
+                    break;
+                case "GetBroadcastUploadStats":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_GetBroadcastUploadStats_Response>( packetMsg );
+                    break;
+                case "GetBroadcastViewerStats":
+                    UnifiedMessages.HandleResponseMsg<CBroadcast_GetBroadcastViewerStats_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyBroadcastUploadStop":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_NotifyBroadcastUploadStop_Notification>( packetMsg );
+                    break;
+                case "HeartbeatBroadcast":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_HeartbeatBroadcast_Notification>( packetMsg );
+                    break;
+                case "StopWatchingBroadcast":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_StopWatchingBroadcast_Notification>( packetMsg );
+                    break;
+                case "NotifyBroadcastSessionHeartbeat":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_NotifyBroadcastSessionHeartbeat_Notification>( packetMsg );
+                    break;
+                case "NotifyWebRTCHaveTURNServer":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_WebRTCHaveTURNServer_Notification>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface IBroadcastClient
+    public class BroadcastClient : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse NotifyBroadcastViewerState(CBroadcast_BroadcastViewerState_Notification request);
-        NoResponse NotifyWaitingBroadcastViewer(CBroadcast_WaitingBroadcastViewer_Notification request);
-        NoResponse NotifyBroadcastUploadStarted(CBroadcast_BroadcastUploadStarted_Notification request);
-        NoResponse NotifyStopBroadcastUpload(CBroadcast_StopBroadcastUpload_Notification request);
-        NoResponse NotifySessionClosed(CBroadcast_SessionClosed_Notification request);
-        NoResponse NotifyViewerBroadcastInvite(CBroadcast_ViewerBroadcastInvite_Notification request);
-        NoResponse NotifyBroadcastStatus(CBroadcast_BroadcastStatus_Notification request);
-        NoResponse NotifyBroadcastChannelLive(CBroadcast_BroadcastChannelLive_Notification request);
-        NoResponse SendThumbnailToRelay(CBroadcast_SendThumbnailToRelay_Notification request);
-        NoResponse NotifyWebRTCNeedTURNServer(CBroadcast_WebRTCNeedTURNServer_Notification request);
-        NoResponse NotifyWebRTCStart(CBroadcast_WebRTCStart_Notification request);
-        NoResponse NotifyWebRTCSetAnswer(CBroadcast_WebRTCSetAnswer_Notification request);
-        NoResponse NotifyWebRTCAddViewerCandidate(CBroadcast_WebRTCAddViewerCandidate_Notification request);
+        public override string ServiceName { get; } = "BroadcastClient";
+
+        public void NotifyBroadcastViewerState(CBroadcast_BroadcastViewerState_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_BroadcastViewerState_Notification>( "BroadcastClient.NotifyBroadcastViewerState#1", request );
+        }
+
+        public void NotifyWaitingBroadcastViewer(CBroadcast_WaitingBroadcastViewer_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_WaitingBroadcastViewer_Notification>( "BroadcastClient.NotifyWaitingBroadcastViewer#1", request );
+        }
+
+        public void NotifyBroadcastUploadStarted(CBroadcast_BroadcastUploadStarted_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_BroadcastUploadStarted_Notification>( "BroadcastClient.NotifyBroadcastUploadStarted#1", request );
+        }
+
+        public void NotifyStopBroadcastUpload(CBroadcast_StopBroadcastUpload_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_StopBroadcastUpload_Notification>( "BroadcastClient.NotifyStopBroadcastUpload#1", request );
+        }
+
+        public void NotifySessionClosed(CBroadcast_SessionClosed_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_SessionClosed_Notification>( "BroadcastClient.NotifySessionClosed#1", request );
+        }
+
+        public void NotifyViewerBroadcastInvite(CBroadcast_ViewerBroadcastInvite_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_ViewerBroadcastInvite_Notification>( "BroadcastClient.NotifyViewerBroadcastInvite#1", request );
+        }
+
+        public void NotifyBroadcastStatus(CBroadcast_BroadcastStatus_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_BroadcastStatus_Notification>( "BroadcastClient.NotifyBroadcastStatus#1", request );
+        }
+
+        public void NotifyBroadcastChannelLive(CBroadcast_BroadcastChannelLive_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_BroadcastChannelLive_Notification>( "BroadcastClient.NotifyBroadcastChannelLive#1", request );
+        }
+
+        public void SendThumbnailToRelay(CBroadcast_SendThumbnailToRelay_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_SendThumbnailToRelay_Notification>( "BroadcastClient.SendThumbnailToRelay#1", request );
+        }
+
+        public void NotifyWebRTCNeedTURNServer(CBroadcast_WebRTCNeedTURNServer_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_WebRTCNeedTURNServer_Notification>( "BroadcastClient.NotifyWebRTCNeedTURNServer#1", request );
+        }
+
+        public void NotifyWebRTCStart(CBroadcast_WebRTCStart_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_WebRTCStart_Notification>( "BroadcastClient.NotifyWebRTCStart#1", request );
+        }
+
+        public void NotifyWebRTCSetAnswer(CBroadcast_WebRTCSetAnswer_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_WebRTCSetAnswer_Notification>( "BroadcastClient.NotifyWebRTCSetAnswer#1", request );
+        }
+
+        public void NotifyWebRTCAddViewerCandidate(CBroadcast_WebRTCAddViewerCandidate_Notification request )
+        {
+            UnifiedMessages.SendNotification<CBroadcast_WebRTCAddViewerCandidate_Notification>( "BroadcastClient.NotifyWebRTCAddViewerCandidate#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyBroadcastViewerState":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_BroadcastViewerState_Notification>( packetMsg );
+                    break;
+                case "NotifyWaitingBroadcastViewer":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_WaitingBroadcastViewer_Notification>( packetMsg );
+                    break;
+                case "NotifyBroadcastUploadStarted":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_BroadcastUploadStarted_Notification>( packetMsg );
+                    break;
+                case "NotifyStopBroadcastUpload":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_StopBroadcastUpload_Notification>( packetMsg );
+                    break;
+                case "NotifySessionClosed":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_SessionClosed_Notification>( packetMsg );
+                    break;
+                case "NotifyViewerBroadcastInvite":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_ViewerBroadcastInvite_Notification>( packetMsg );
+                    break;
+                case "NotifyBroadcastStatus":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_BroadcastStatus_Notification>( packetMsg );
+                    break;
+                case "NotifyBroadcastChannelLive":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_BroadcastChannelLive_Notification>( packetMsg );
+                    break;
+                case "SendThumbnailToRelay":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_SendThumbnailToRelay_Notification>( packetMsg );
+                    break;
+                case "NotifyWebRTCNeedTURNServer":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_WebRTCNeedTURNServer_Notification>( packetMsg );
+                    break;
+                case "NotifyWebRTCStart":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_WebRTCStart_Notification>( packetMsg );
+                    break;
+                case "NotifyWebRTCSetAnswer":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_WebRTCSetAnswer_Notification>( packetMsg );
+                    break;
+                case "NotifyWebRTCAddViewerCandidate":
+                    UnifiedMessages.HandleNotificationMsg<CBroadcast_WebRTCAddViewerCandidate_Notification>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

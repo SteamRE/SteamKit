@@ -2074,41 +2074,268 @@ namespace SteamKit2.Internal
         k_ESharedLibrary_LicenseExcluded_Inactive = 30,
     }
 
-    public interface IFamilyGroups
+    public class FamilyGroups : SteamUnifiedMessages.UnifiedService
     {
-        CFamilyGroups_CreateFamilyGroup_Response CreateFamilyGroup(CFamilyGroups_CreateFamilyGroup_Request request);
-        CFamilyGroups_GetFamilyGroup_Response GetFamilyGroup(CFamilyGroups_GetFamilyGroup_Request request);
-        CFamilyGroups_GetFamilyGroupForUser_Response GetFamilyGroupForUser(CFamilyGroups_GetFamilyGroupForUser_Request request);
-        CFamilyGroups_ModifyFamilyGroupDetails_Response ModifyFamilyGroupDetails(CFamilyGroups_ModifyFamilyGroupDetails_Request request);
-        CFamilyGroups_InviteToFamilyGroup_Response InviteToFamilyGroup(CFamilyGroups_InviteToFamilyGroup_Request request);
-        CFamilyGroups_ConfirmInviteToFamilyGroup_Response ConfirmInviteToFamilyGroup(CFamilyGroups_ConfirmInviteToFamilyGroup_Request request);
-        CFamilyGroups_ResendInvitationToFamilyGroup_Response ResendInvitationToFamilyGroup(CFamilyGroups_ResendInvitationToFamilyGroup_Request request);
-        CFamilyGroups_JoinFamilyGroup_Response JoinFamilyGroup(CFamilyGroups_JoinFamilyGroup_Request request);
-        CFamilyGroups_ConfirmJoinFamilyGroup_Response ConfirmJoinFamilyGroup(CFamilyGroups_ConfirmJoinFamilyGroup_Request request);
-        CFamilyGroups_RemoveFromFamilyGroup_Response RemoveFromFamilyGroup(CFamilyGroups_RemoveFromFamilyGroup_Request request);
-        CFamilyGroups_CancelFamilyGroupInvite_Response CancelFamilyGroupInvite(CFamilyGroups_CancelFamilyGroupInvite_Request request);
-        CFamilyGroups_GetUsersSharingDevice_Response GetUsersSharingDevice(CFamilyGroups_GetUsersSharingDevice_Request request);
-        CFamilyGroups_DeleteFamilyGroup_Response DeleteFamilyGroup(CFamilyGroups_DeleteFamilyGroup_Request request);
-        CFamilyGroups_UndeleteFamilyGroup_Response UndeleteFamilyGroup(CFamilyGroups_UndeleteFamilyGroup_Request request);
-        CFamilyGroups_GetPlaytimeSummary_Response GetPlaytimeSummary(CFamilyGroups_GetPlaytimeSummary_Request request);
-        CFamilyGroups_RequestPurchase_Response RequestPurchase(CFamilyGroups_RequestPurchase_Request request);
-        CFamilyGroups_GetPurchaseRequests_Response GetPurchaseRequests(CFamilyGroups_GetPurchaseRequests_Request request);
-        CFamilyGroups_RespondToRequestedPurchase_Response RespondToRequestedPurchase(CFamilyGroups_RespondToRequestedPurchase_Request request);
-        CFamilyGroups_GetChangeLog_Response GetChangeLog(CFamilyGroups_GetChangeLog_Request request);
-        CFamilyGroups_SetFamilyCooldownOverrides_Response SetFamilyCooldownOverrides(CFamilyGroups_SetFamilyCooldownOverrides_Request request);
-        CFamilyGroups_GetSharedLibraryApps_Response GetSharedLibraryApps(CFamilyGroups_GetSharedLibraryApps_Request request);
-        CFamilyGroups_SetPreferredLender_Response SetPreferredLender(CFamilyGroups_SetPreferredLender_Request request);
-        CFamilyGroups_GetPreferredLenders_Response GetPreferredLenders(CFamilyGroups_GetPreferredLenders_Request request);
-        CFamilyGroups_ForceAcceptInvite_Response ForceAcceptInvite(CFamilyGroups_ForceAcceptInvite_Request request);
-        CFamilyGroups_GetInviteCheckResults_Response GetInviteCheckResults(CFamilyGroups_GetInviteCheckResults_Request request);
-        CFamilyGroups_ClearCooldownSkip_Response ClearCooldownSkip(CFamilyGroups_ClearCooldownSkip_Request request);
+        public override string ServiceName { get; } = "FamilyGroups";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_CreateFamilyGroup_Response>> CreateFamilyGroup( CFamilyGroups_CreateFamilyGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_CreateFamilyGroup_Request, CFamilyGroups_CreateFamilyGroup_Response>( "FamilyGroups.CreateFamilyGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_GetFamilyGroup_Response>> GetFamilyGroup( CFamilyGroups_GetFamilyGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetFamilyGroup_Request, CFamilyGroups_GetFamilyGroup_Response>( "FamilyGroups.GetFamilyGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_GetFamilyGroupForUser_Response>> GetFamilyGroupForUser( CFamilyGroups_GetFamilyGroupForUser_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetFamilyGroupForUser_Request, CFamilyGroups_GetFamilyGroupForUser_Response>( "FamilyGroups.GetFamilyGroupForUser#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_ModifyFamilyGroupDetails_Response>> ModifyFamilyGroupDetails( CFamilyGroups_ModifyFamilyGroupDetails_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_ModifyFamilyGroupDetails_Request, CFamilyGroups_ModifyFamilyGroupDetails_Response>( "FamilyGroups.ModifyFamilyGroupDetails#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_InviteToFamilyGroup_Response>> InviteToFamilyGroup( CFamilyGroups_InviteToFamilyGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_InviteToFamilyGroup_Request, CFamilyGroups_InviteToFamilyGroup_Response>( "FamilyGroups.InviteToFamilyGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_ConfirmInviteToFamilyGroup_Response>> ConfirmInviteToFamilyGroup( CFamilyGroups_ConfirmInviteToFamilyGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_ConfirmInviteToFamilyGroup_Request, CFamilyGroups_ConfirmInviteToFamilyGroup_Response>( "FamilyGroups.ConfirmInviteToFamilyGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_ResendInvitationToFamilyGroup_Response>> ResendInvitationToFamilyGroup( CFamilyGroups_ResendInvitationToFamilyGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_ResendInvitationToFamilyGroup_Request, CFamilyGroups_ResendInvitationToFamilyGroup_Response>( "FamilyGroups.ResendInvitationToFamilyGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_JoinFamilyGroup_Response>> JoinFamilyGroup( CFamilyGroups_JoinFamilyGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_JoinFamilyGroup_Request, CFamilyGroups_JoinFamilyGroup_Response>( "FamilyGroups.JoinFamilyGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_ConfirmJoinFamilyGroup_Response>> ConfirmJoinFamilyGroup( CFamilyGroups_ConfirmJoinFamilyGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_ConfirmJoinFamilyGroup_Request, CFamilyGroups_ConfirmJoinFamilyGroup_Response>( "FamilyGroups.ConfirmJoinFamilyGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_RemoveFromFamilyGroup_Response>> RemoveFromFamilyGroup( CFamilyGroups_RemoveFromFamilyGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_RemoveFromFamilyGroup_Request, CFamilyGroups_RemoveFromFamilyGroup_Response>( "FamilyGroups.RemoveFromFamilyGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_CancelFamilyGroupInvite_Response>> CancelFamilyGroupInvite( CFamilyGroups_CancelFamilyGroupInvite_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_CancelFamilyGroupInvite_Request, CFamilyGroups_CancelFamilyGroupInvite_Response>( "FamilyGroups.CancelFamilyGroupInvite#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_GetUsersSharingDevice_Response>> GetUsersSharingDevice( CFamilyGroups_GetUsersSharingDevice_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetUsersSharingDevice_Request, CFamilyGroups_GetUsersSharingDevice_Response>( "FamilyGroups.GetUsersSharingDevice#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_DeleteFamilyGroup_Response>> DeleteFamilyGroup( CFamilyGroups_DeleteFamilyGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_DeleteFamilyGroup_Request, CFamilyGroups_DeleteFamilyGroup_Response>( "FamilyGroups.DeleteFamilyGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_UndeleteFamilyGroup_Response>> UndeleteFamilyGroup( CFamilyGroups_UndeleteFamilyGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_UndeleteFamilyGroup_Request, CFamilyGroups_UndeleteFamilyGroup_Response>( "FamilyGroups.UndeleteFamilyGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_GetPlaytimeSummary_Response>> GetPlaytimeSummary( CFamilyGroups_GetPlaytimeSummary_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetPlaytimeSummary_Request, CFamilyGroups_GetPlaytimeSummary_Response>( "FamilyGroups.GetPlaytimeSummary#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_RequestPurchase_Response>> RequestPurchase( CFamilyGroups_RequestPurchase_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_RequestPurchase_Request, CFamilyGroups_RequestPurchase_Response>( "FamilyGroups.RequestPurchase#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_GetPurchaseRequests_Response>> GetPurchaseRequests( CFamilyGroups_GetPurchaseRequests_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetPurchaseRequests_Request, CFamilyGroups_GetPurchaseRequests_Response>( "FamilyGroups.GetPurchaseRequests#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_RespondToRequestedPurchase_Response>> RespondToRequestedPurchase( CFamilyGroups_RespondToRequestedPurchase_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_RespondToRequestedPurchase_Request, CFamilyGroups_RespondToRequestedPurchase_Response>( "FamilyGroups.RespondToRequestedPurchase#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_GetChangeLog_Response>> GetChangeLog( CFamilyGroups_GetChangeLog_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetChangeLog_Request, CFamilyGroups_GetChangeLog_Response>( "FamilyGroups.GetChangeLog#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_SetFamilyCooldownOverrides_Response>> SetFamilyCooldownOverrides( CFamilyGroups_SetFamilyCooldownOverrides_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_SetFamilyCooldownOverrides_Request, CFamilyGroups_SetFamilyCooldownOverrides_Response>( "FamilyGroups.SetFamilyCooldownOverrides#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_GetSharedLibraryApps_Response>> GetSharedLibraryApps( CFamilyGroups_GetSharedLibraryApps_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetSharedLibraryApps_Request, CFamilyGroups_GetSharedLibraryApps_Response>( "FamilyGroups.GetSharedLibraryApps#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_SetPreferredLender_Response>> SetPreferredLender( CFamilyGroups_SetPreferredLender_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_SetPreferredLender_Request, CFamilyGroups_SetPreferredLender_Response>( "FamilyGroups.SetPreferredLender#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_GetPreferredLenders_Response>> GetPreferredLenders( CFamilyGroups_GetPreferredLenders_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetPreferredLenders_Request, CFamilyGroups_GetPreferredLenders_Response>( "FamilyGroups.GetPreferredLenders#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_ForceAcceptInvite_Response>> ForceAcceptInvite( CFamilyGroups_ForceAcceptInvite_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_ForceAcceptInvite_Request, CFamilyGroups_ForceAcceptInvite_Response>( "FamilyGroups.ForceAcceptInvite#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_GetInviteCheckResults_Response>> GetInviteCheckResults( CFamilyGroups_GetInviteCheckResults_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_GetInviteCheckResults_Request, CFamilyGroups_GetInviteCheckResults_Response>( "FamilyGroups.GetInviteCheckResults#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_ClearCooldownSkip_Response>> ClearCooldownSkip( CFamilyGroups_ClearCooldownSkip_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_ClearCooldownSkip_Request, CFamilyGroups_ClearCooldownSkip_Response>( "FamilyGroups.ClearCooldownSkip#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "CreateFamilyGroup":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_CreateFamilyGroup_Response>( packetMsg );
+                    break;
+                case "GetFamilyGroup":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetFamilyGroup_Response>( packetMsg );
+                    break;
+                case "GetFamilyGroupForUser":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetFamilyGroupForUser_Response>( packetMsg );
+                    break;
+                case "ModifyFamilyGroupDetails":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_ModifyFamilyGroupDetails_Response>( packetMsg );
+                    break;
+                case "InviteToFamilyGroup":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_InviteToFamilyGroup_Response>( packetMsg );
+                    break;
+                case "ConfirmInviteToFamilyGroup":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_ConfirmInviteToFamilyGroup_Response>( packetMsg );
+                    break;
+                case "ResendInvitationToFamilyGroup":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_ResendInvitationToFamilyGroup_Response>( packetMsg );
+                    break;
+                case "JoinFamilyGroup":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_JoinFamilyGroup_Response>( packetMsg );
+                    break;
+                case "ConfirmJoinFamilyGroup":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_ConfirmJoinFamilyGroup_Response>( packetMsg );
+                    break;
+                case "RemoveFromFamilyGroup":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_RemoveFromFamilyGroup_Response>( packetMsg );
+                    break;
+                case "CancelFamilyGroupInvite":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_CancelFamilyGroupInvite_Response>( packetMsg );
+                    break;
+                case "GetUsersSharingDevice":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetUsersSharingDevice_Response>( packetMsg );
+                    break;
+                case "DeleteFamilyGroup":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_DeleteFamilyGroup_Response>( packetMsg );
+                    break;
+                case "UndeleteFamilyGroup":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_UndeleteFamilyGroup_Response>( packetMsg );
+                    break;
+                case "GetPlaytimeSummary":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetPlaytimeSummary_Response>( packetMsg );
+                    break;
+                case "RequestPurchase":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_RequestPurchase_Response>( packetMsg );
+                    break;
+                case "GetPurchaseRequests":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetPurchaseRequests_Response>( packetMsg );
+                    break;
+                case "RespondToRequestedPurchase":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_RespondToRequestedPurchase_Response>( packetMsg );
+                    break;
+                case "GetChangeLog":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetChangeLog_Response>( packetMsg );
+                    break;
+                case "SetFamilyCooldownOverrides":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_SetFamilyCooldownOverrides_Response>( packetMsg );
+                    break;
+                case "GetSharedLibraryApps":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetSharedLibraryApps_Response>( packetMsg );
+                    break;
+                case "SetPreferredLender":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_SetPreferredLender_Response>( packetMsg );
+                    break;
+                case "GetPreferredLenders":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetPreferredLenders_Response>( packetMsg );
+                    break;
+                case "ForceAcceptInvite":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_ForceAcceptInvite_Response>( packetMsg );
+                    break;
+                case "GetInviteCheckResults":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetInviteCheckResults_Response>( packetMsg );
+                    break;
+                case "ClearCooldownSkip":
+                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_ClearCooldownSkip_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
-    public interface IFamilyGroupsClient
+    public class FamilyGroupsClient : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse NotifyRunningApps(CFamilyGroupsClient_NotifyRunningApps_Notification request);
-        NoResponse NotifyInviteStatus(CFamilyGroupsClient_InviteStatus_Notification request);
-        NoResponse NotifyGroupChanged(CFamilyGroupsClient_GroupChanged_Notification request);
+        public override string ServiceName { get; } = "FamilyGroupsClient";
+
+        public void NotifyRunningApps(CFamilyGroupsClient_NotifyRunningApps_Notification request )
+        {
+            UnifiedMessages.SendNotification<CFamilyGroupsClient_NotifyRunningApps_Notification>( "FamilyGroupsClient.NotifyRunningApps#1", request );
+        }
+
+        public void NotifyInviteStatus(CFamilyGroupsClient_InviteStatus_Notification request )
+        {
+            UnifiedMessages.SendNotification<CFamilyGroupsClient_InviteStatus_Notification>( "FamilyGroupsClient.NotifyInviteStatus#1", request );
+        }
+
+        public void NotifyGroupChanged(CFamilyGroupsClient_GroupChanged_Notification request )
+        {
+            UnifiedMessages.SendNotification<CFamilyGroupsClient_GroupChanged_Notification>( "FamilyGroupsClient.NotifyGroupChanged#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyRunningApps":
+                    UnifiedMessages.HandleNotificationMsg<CFamilyGroupsClient_NotifyRunningApps_Notification>( packetMsg );
+                    break;
+                case "NotifyInviteStatus":
+                    UnifiedMessages.HandleNotificationMsg<CFamilyGroupsClient_InviteStatus_Notification>( packetMsg );
+                    break;
+                case "NotifyGroupChanged":
+                    UnifiedMessages.HandleNotificationMsg<CFamilyGroupsClient_GroupChanged_Notification>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

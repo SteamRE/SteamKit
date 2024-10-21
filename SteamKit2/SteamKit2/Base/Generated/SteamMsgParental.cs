@@ -870,32 +870,196 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface IParental
+    public class Parental : SteamUnifiedMessages.UnifiedService
     {
-        CParental_EnableParentalSettings_Response EnableParentalSettings(CParental_EnableParentalSettings_Request request);
-        CParental_DisableParentalSettings_Response DisableParentalSettings(CParental_DisableParentalSettings_Request request);
-        CParental_GetParentalSettings_Response GetParentalSettings(CParental_GetParentalSettings_Request request);
-        CParental_GetSignedParentalSettings_Response GetSignedParentalSettings(CParental_GetSignedParentalSettings_Request request);
-        CParental_SetParentalSettings_Response SetParentalSettings(CParental_SetParentalSettings_Request request);
-        CParental_ValidateToken_Response ValidateToken(CParental_ValidateToken_Request request);
-        CParental_ValidatePassword_Response ValidatePassword(CParental_ValidatePassword_Request request);
-        CParental_LockClient_Response LockClient(CParental_LockClient_Request request);
-        CParental_RequestRecoveryCode_Response RequestRecoveryCode(CParental_RequestRecoveryCode_Request request);
-        CParental_DisableWithRecoveryCode_Response DisableWithRecoveryCode(CParental_DisableWithRecoveryCode_Request request);
-        CParental_RequestFeatureAccess_Response RequestFeatureAccess(CParental_RequestFeatureAccess_Request request);
-        CParental_ApproveFeatureAccess_Response ApproveFeatureAccess(CParental_ApproveFeatureAccess_Request request);
-        CParental_RequestPlaytime_Response RequestPlaytime(CParental_RequestPlaytime_Request request);
-        CParental_ApprovePlaytime_Response ApprovePlaytime(CParental_ApprovePlaytime_Request request);
-        CParental_GetRequests_Response GetRequests(CParental_GetRequests_Request request);
-        CParental_ReportPlaytimeAndNotify_Response ReportPlaytimeAndNotify(CParental_ReportPlaytimeAndNotify_Request request);
+        public override string ServiceName { get; } = "Parental";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_EnableParentalSettings_Response>> EnableParentalSettings( CParental_EnableParentalSettings_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParental_EnableParentalSettings_Request, CParental_EnableParentalSettings_Response>( "Parental.EnableParentalSettings#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_DisableParentalSettings_Response>> DisableParentalSettings( CParental_DisableParentalSettings_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParental_DisableParentalSettings_Request, CParental_DisableParentalSettings_Response>( "Parental.DisableParentalSettings#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_GetParentalSettings_Response>> GetParentalSettings( CParental_GetParentalSettings_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParental_GetParentalSettings_Request, CParental_GetParentalSettings_Response>( "Parental.GetParentalSettings#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_GetSignedParentalSettings_Response>> GetSignedParentalSettings( CParental_GetSignedParentalSettings_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParental_GetSignedParentalSettings_Request, CParental_GetSignedParentalSettings_Response>( "Parental.GetSignedParentalSettings#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_SetParentalSettings_Response>> SetParentalSettings( CParental_SetParentalSettings_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParental_SetParentalSettings_Request, CParental_SetParentalSettings_Response>( "Parental.SetParentalSettings#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_ValidateToken_Response>> ValidateToken( CParental_ValidateToken_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParental_ValidateToken_Request, CParental_ValidateToken_Response>( "Parental.ValidateToken#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_ValidatePassword_Response>> ValidatePassword( CParental_ValidatePassword_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParental_ValidatePassword_Request, CParental_ValidatePassword_Response>( "Parental.ValidatePassword#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_LockClient_Response>> LockClient( CParental_LockClient_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParental_LockClient_Request, CParental_LockClient_Response>( "Parental.LockClient#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_RequestRecoveryCode_Response>> RequestRecoveryCode( CParental_RequestRecoveryCode_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParental_RequestRecoveryCode_Request, CParental_RequestRecoveryCode_Response>( "Parental.RequestRecoveryCode#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_DisableWithRecoveryCode_Response>> DisableWithRecoveryCode( CParental_DisableWithRecoveryCode_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParental_DisableWithRecoveryCode_Request, CParental_DisableWithRecoveryCode_Response>( "Parental.DisableWithRecoveryCode#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_RequestFeatureAccess_Response>> RequestFeatureAccess( CParental_RequestFeatureAccess_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParental_RequestFeatureAccess_Request, CParental_RequestFeatureAccess_Response>( "Parental.RequestFeatureAccess#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_ApproveFeatureAccess_Response>> ApproveFeatureAccess( CParental_ApproveFeatureAccess_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParental_ApproveFeatureAccess_Request, CParental_ApproveFeatureAccess_Response>( "Parental.ApproveFeatureAccess#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_RequestPlaytime_Response>> RequestPlaytime( CParental_RequestPlaytime_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParental_RequestPlaytime_Request, CParental_RequestPlaytime_Response>( "Parental.RequestPlaytime#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_ApprovePlaytime_Response>> ApprovePlaytime( CParental_ApprovePlaytime_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParental_ApprovePlaytime_Request, CParental_ApprovePlaytime_Response>( "Parental.ApprovePlaytime#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_GetRequests_Response>> GetRequests( CParental_GetRequests_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParental_GetRequests_Request, CParental_GetRequests_Response>( "Parental.GetRequests#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_ReportPlaytimeAndNotify_Response>> ReportPlaytimeAndNotify( CParental_ReportPlaytimeAndNotify_Request request )
+        {
+            return UnifiedMessages.SendMessage<CParental_ReportPlaytimeAndNotify_Request, CParental_ReportPlaytimeAndNotify_Response>( "Parental.ReportPlaytimeAndNotify#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "EnableParentalSettings":
+                    UnifiedMessages.HandleResponseMsg<CParental_EnableParentalSettings_Response>( packetMsg );
+                    break;
+                case "DisableParentalSettings":
+                    UnifiedMessages.HandleResponseMsg<CParental_DisableParentalSettings_Response>( packetMsg );
+                    break;
+                case "GetParentalSettings":
+                    UnifiedMessages.HandleResponseMsg<CParental_GetParentalSettings_Response>( packetMsg );
+                    break;
+                case "GetSignedParentalSettings":
+                    UnifiedMessages.HandleResponseMsg<CParental_GetSignedParentalSettings_Response>( packetMsg );
+                    break;
+                case "SetParentalSettings":
+                    UnifiedMessages.HandleResponseMsg<CParental_SetParentalSettings_Response>( packetMsg );
+                    break;
+                case "ValidateToken":
+                    UnifiedMessages.HandleResponseMsg<CParental_ValidateToken_Response>( packetMsg );
+                    break;
+                case "ValidatePassword":
+                    UnifiedMessages.HandleResponseMsg<CParental_ValidatePassword_Response>( packetMsg );
+                    break;
+                case "LockClient":
+                    UnifiedMessages.HandleResponseMsg<CParental_LockClient_Response>( packetMsg );
+                    break;
+                case "RequestRecoveryCode":
+                    UnifiedMessages.HandleResponseMsg<CParental_RequestRecoveryCode_Response>( packetMsg );
+                    break;
+                case "DisableWithRecoveryCode":
+                    UnifiedMessages.HandleResponseMsg<CParental_DisableWithRecoveryCode_Response>( packetMsg );
+                    break;
+                case "RequestFeatureAccess":
+                    UnifiedMessages.HandleResponseMsg<CParental_RequestFeatureAccess_Response>( packetMsg );
+                    break;
+                case "ApproveFeatureAccess":
+                    UnifiedMessages.HandleResponseMsg<CParental_ApproveFeatureAccess_Response>( packetMsg );
+                    break;
+                case "RequestPlaytime":
+                    UnifiedMessages.HandleResponseMsg<CParental_RequestPlaytime_Response>( packetMsg );
+                    break;
+                case "ApprovePlaytime":
+                    UnifiedMessages.HandleResponseMsg<CParental_ApprovePlaytime_Response>( packetMsg );
+                    break;
+                case "GetRequests":
+                    UnifiedMessages.HandleResponseMsg<CParental_GetRequests_Response>( packetMsg );
+                    break;
+                case "ReportPlaytimeAndNotify":
+                    UnifiedMessages.HandleResponseMsg<CParental_ReportPlaytimeAndNotify_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
-    public interface IParentalClient
+    public class ParentalClient : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse NotifySettingsChange(CParental_ParentalSettingsChange_Notification request);
-        NoResponse NotifyUnlock(CParental_ParentalUnlock_Notification request);
-        NoResponse NotifyLock(CParental_ParentalLock_Notification request);
-        NoResponse NotifyPlaytimeUsed(CParental_PlaytimeUsed_Notification request);
+        public override string ServiceName { get; } = "ParentalClient";
+
+        public void NotifySettingsChange(CParental_ParentalSettingsChange_Notification request )
+        {
+            UnifiedMessages.SendNotification<CParental_ParentalSettingsChange_Notification>( "ParentalClient.NotifySettingsChange#1", request );
+        }
+
+        public void NotifyUnlock(CParental_ParentalUnlock_Notification request )
+        {
+            UnifiedMessages.SendNotification<CParental_ParentalUnlock_Notification>( "ParentalClient.NotifyUnlock#1", request );
+        }
+
+        public void NotifyLock(CParental_ParentalLock_Notification request )
+        {
+            UnifiedMessages.SendNotification<CParental_ParentalLock_Notification>( "ParentalClient.NotifyLock#1", request );
+        }
+
+        public void NotifyPlaytimeUsed(CParental_PlaytimeUsed_Notification request )
+        {
+            UnifiedMessages.SendNotification<CParental_PlaytimeUsed_Notification>( "ParentalClient.NotifyPlaytimeUsed#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifySettingsChange":
+                    UnifiedMessages.HandleNotificationMsg<CParental_ParentalSettingsChange_Notification>( packetMsg );
+                    break;
+                case "NotifyUnlock":
+                    UnifiedMessages.HandleNotificationMsg<CParental_ParentalUnlock_Notification>( packetMsg );
+                    break;
+                case "NotifyLock":
+                    UnifiedMessages.HandleNotificationMsg<CParental_ParentalLock_Notification>( packetMsg );
+                    break;
+                case "NotifyPlaytimeUsed":
+                    UnifiedMessages.HandleNotificationMsg<CParental_PlaytimeUsed_Notification>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

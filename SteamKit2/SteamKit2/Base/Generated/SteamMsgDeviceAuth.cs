@@ -850,19 +850,108 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface IDeviceAuth
+    public class DeviceAuth : SteamUnifiedMessages.UnifiedService
     {
-        CDeviceAuth_GetOwnAuthorizedDevices_Response GetOwnAuthorizedDevices(CDeviceAuth_GetOwnAuthorizedDevices_Request request);
-        CDeviceAuth_AcceptAuthorizationRequest_Response AcceptAuthorizationRequest(CDeviceAuth_AcceptAuthorizationRequest_Request request);
-        CDeviceAuth_AuthorizeRemoteDevice_Response AuthorizeRemoteDevice(CDeviceAuth_AuthorizeRemoteDevice_Request request);
-        CDeviceAuth_DeauthorizeRemoteDevice_Response DeauthorizeRemoteDevice(CDeviceAuth_DeauthorizeRemoteDevice_Request request);
-        CDeviceAuth_GetUsedAuthorizedDevices_Response GetUsedAuthorizedDevices(CDeviceAuth_GetUsedAuthorizedDevices_Request request);
-        CDeviceAuth_GetAuthorizedBorrowers_Response GetAuthorizedBorrowers(CDeviceAuth_GetAuthorizedBorrowers_Request request);
-        CDeviceAuth_AddAuthorizedBorrowers_Response AddAuthorizedBorrowers(CDeviceAuth_AddAuthorizedBorrowers_Request request);
-        CDeviceAuth_RemoveAuthorizedBorrowers_Response RemoveAuthorizedBorrowers(CDeviceAuth_RemoveAuthorizedBorrowers_Request request);
-        CDeviceAuth_GetAuthorizedAsBorrower_Response GetAuthorizedAsBorrower(CDeviceAuth_GetAuthorizedAsBorrower_Request request);
-        CDeviceAuth_GetExcludedGamesInLibrary_Response GetExcludedGamesInLibrary(CDeviceAuth_GetExcludedGamesInLibrary_Request request);
-        CDeviceAuth_GetBorrowerPlayHistory_Response GetBorrowerPlayHistory(CDeviceAuth_GetBorrowerPlayHistory_Request request);
+        public override string ServiceName { get; } = "DeviceAuth";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDeviceAuth_GetOwnAuthorizedDevices_Response>> GetOwnAuthorizedDevices( CDeviceAuth_GetOwnAuthorizedDevices_Request request )
+        {
+            return UnifiedMessages.SendMessage<CDeviceAuth_GetOwnAuthorizedDevices_Request, CDeviceAuth_GetOwnAuthorizedDevices_Response>( "DeviceAuth.GetOwnAuthorizedDevices#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDeviceAuth_AcceptAuthorizationRequest_Response>> AcceptAuthorizationRequest( CDeviceAuth_AcceptAuthorizationRequest_Request request )
+        {
+            return UnifiedMessages.SendMessage<CDeviceAuth_AcceptAuthorizationRequest_Request, CDeviceAuth_AcceptAuthorizationRequest_Response>( "DeviceAuth.AcceptAuthorizationRequest#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDeviceAuth_AuthorizeRemoteDevice_Response>> AuthorizeRemoteDevice( CDeviceAuth_AuthorizeRemoteDevice_Request request )
+        {
+            return UnifiedMessages.SendMessage<CDeviceAuth_AuthorizeRemoteDevice_Request, CDeviceAuth_AuthorizeRemoteDevice_Response>( "DeviceAuth.AuthorizeRemoteDevice#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDeviceAuth_DeauthorizeRemoteDevice_Response>> DeauthorizeRemoteDevice( CDeviceAuth_DeauthorizeRemoteDevice_Request request )
+        {
+            return UnifiedMessages.SendMessage<CDeviceAuth_DeauthorizeRemoteDevice_Request, CDeviceAuth_DeauthorizeRemoteDevice_Response>( "DeviceAuth.DeauthorizeRemoteDevice#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDeviceAuth_GetUsedAuthorizedDevices_Response>> GetUsedAuthorizedDevices( CDeviceAuth_GetUsedAuthorizedDevices_Request request )
+        {
+            return UnifiedMessages.SendMessage<CDeviceAuth_GetUsedAuthorizedDevices_Request, CDeviceAuth_GetUsedAuthorizedDevices_Response>( "DeviceAuth.GetUsedAuthorizedDevices#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDeviceAuth_GetAuthorizedBorrowers_Response>> GetAuthorizedBorrowers( CDeviceAuth_GetAuthorizedBorrowers_Request request )
+        {
+            return UnifiedMessages.SendMessage<CDeviceAuth_GetAuthorizedBorrowers_Request, CDeviceAuth_GetAuthorizedBorrowers_Response>( "DeviceAuth.GetAuthorizedBorrowers#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDeviceAuth_AddAuthorizedBorrowers_Response>> AddAuthorizedBorrowers( CDeviceAuth_AddAuthorizedBorrowers_Request request )
+        {
+            return UnifiedMessages.SendMessage<CDeviceAuth_AddAuthorizedBorrowers_Request, CDeviceAuth_AddAuthorizedBorrowers_Response>( "DeviceAuth.AddAuthorizedBorrowers#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDeviceAuth_RemoveAuthorizedBorrowers_Response>> RemoveAuthorizedBorrowers( CDeviceAuth_RemoveAuthorizedBorrowers_Request request )
+        {
+            return UnifiedMessages.SendMessage<CDeviceAuth_RemoveAuthorizedBorrowers_Request, CDeviceAuth_RemoveAuthorizedBorrowers_Response>( "DeviceAuth.RemoveAuthorizedBorrowers#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDeviceAuth_GetAuthorizedAsBorrower_Response>> GetAuthorizedAsBorrower( CDeviceAuth_GetAuthorizedAsBorrower_Request request )
+        {
+            return UnifiedMessages.SendMessage<CDeviceAuth_GetAuthorizedAsBorrower_Request, CDeviceAuth_GetAuthorizedAsBorrower_Response>( "DeviceAuth.GetAuthorizedAsBorrower#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDeviceAuth_GetExcludedGamesInLibrary_Response>> GetExcludedGamesInLibrary( CDeviceAuth_GetExcludedGamesInLibrary_Request request )
+        {
+            return UnifiedMessages.SendMessage<CDeviceAuth_GetExcludedGamesInLibrary_Request, CDeviceAuth_GetExcludedGamesInLibrary_Response>( "DeviceAuth.GetExcludedGamesInLibrary#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDeviceAuth_GetBorrowerPlayHistory_Response>> GetBorrowerPlayHistory( CDeviceAuth_GetBorrowerPlayHistory_Request request )
+        {
+            return UnifiedMessages.SendMessage<CDeviceAuth_GetBorrowerPlayHistory_Request, CDeviceAuth_GetBorrowerPlayHistory_Response>( "DeviceAuth.GetBorrowerPlayHistory#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "GetOwnAuthorizedDevices":
+                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_GetOwnAuthorizedDevices_Response>( packetMsg );
+                    break;
+                case "AcceptAuthorizationRequest":
+                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_AcceptAuthorizationRequest_Response>( packetMsg );
+                    break;
+                case "AuthorizeRemoteDevice":
+                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_AuthorizeRemoteDevice_Response>( packetMsg );
+                    break;
+                case "DeauthorizeRemoteDevice":
+                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_DeauthorizeRemoteDevice_Response>( packetMsg );
+                    break;
+                case "GetUsedAuthorizedDevices":
+                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_GetUsedAuthorizedDevices_Response>( packetMsg );
+                    break;
+                case "GetAuthorizedBorrowers":
+                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_GetAuthorizedBorrowers_Response>( packetMsg );
+                    break;
+                case "AddAuthorizedBorrowers":
+                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_AddAuthorizedBorrowers_Response>( packetMsg );
+                    break;
+                case "RemoveAuthorizedBorrowers":
+                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_RemoveAuthorizedBorrowers_Response>( packetMsg );
+                    break;
+                case "GetAuthorizedAsBorrower":
+                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_GetAuthorizedAsBorrower_Response>( packetMsg );
+                    break;
+                case "GetExcludedGamesInLibrary":
+                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_GetExcludedGamesInLibrary_Response>( packetMsg );
+                    break;
+                case "GetBorrowerPlayHistory":
+                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_GetBorrowerPlayHistory_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
 }

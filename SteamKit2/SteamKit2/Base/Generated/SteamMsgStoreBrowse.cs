@@ -2782,14 +2782,68 @@ namespace SteamKit2.Internal
         k_EStoreCategoryType_MAX = 5,
     }
 
-    public interface IStoreBrowse
+    public class StoreBrowse : SteamUnifiedMessages.UnifiedService
     {
-        CStoreBrowse_GetItems_Response GetItems(CStoreBrowse_GetItems_Request request);
-        CStoreBrowse_GetStoreCategories_Response GetStoreCategories(CStoreBrowse_GetStoreCategories_Request request);
-        CStoreBrowse_GetPriceStops_Response GetPriceStops(CStoreBrowse_GetPriceStops_Request request);
-        CStoreBrowse_GetDLCForApps_Response GetDLCForApps(CStoreBrowse_GetDLCForApps_Request request);
-        CStoreBrowse_GetDLCForAppsSolr_Response GetDLCForAppsSolr(CStoreBrowse_GetDLCForAppsSolr_Request request);
-        CStoreBrowse_GetHardwareItems_Response GetHardwareItems(CStoreBrowse_GetHardwareItems_Request request);
+        public override string ServiceName { get; } = "StoreBrowse";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetItems_Response>> GetItems( CStoreBrowse_GetItems_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetItems_Request, CStoreBrowse_GetItems_Response>( "StoreBrowse.GetItems#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetStoreCategories_Response>> GetStoreCategories( CStoreBrowse_GetStoreCategories_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetStoreCategories_Request, CStoreBrowse_GetStoreCategories_Response>( "StoreBrowse.GetStoreCategories#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetPriceStops_Response>> GetPriceStops( CStoreBrowse_GetPriceStops_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetPriceStops_Request, CStoreBrowse_GetPriceStops_Response>( "StoreBrowse.GetPriceStops#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetDLCForApps_Response>> GetDLCForApps( CStoreBrowse_GetDLCForApps_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetDLCForApps_Request, CStoreBrowse_GetDLCForApps_Response>( "StoreBrowse.GetDLCForApps#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetDLCForAppsSolr_Response>> GetDLCForAppsSolr( CStoreBrowse_GetDLCForAppsSolr_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetDLCForAppsSolr_Request, CStoreBrowse_GetDLCForAppsSolr_Response>( "StoreBrowse.GetDLCForAppsSolr#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetHardwareItems_Response>> GetHardwareItems( CStoreBrowse_GetHardwareItems_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetHardwareItems_Request, CStoreBrowse_GetHardwareItems_Response>( "StoreBrowse.GetHardwareItems#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "GetItems":
+                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetItems_Response>( packetMsg );
+                    break;
+                case "GetStoreCategories":
+                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetStoreCategories_Response>( packetMsg );
+                    break;
+                case "GetPriceStops":
+                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetPriceStops_Response>( packetMsg );
+                    break;
+                case "GetDLCForApps":
+                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetDLCForApps_Response>( packetMsg );
+                    break;
+                case "GetDLCForAppsSolr":
+                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetDLCForAppsSolr_Response>( packetMsg );
+                    break;
+                case "GetHardwareItems":
+                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetHardwareItems_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
 }

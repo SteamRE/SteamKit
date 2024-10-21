@@ -870,12 +870,52 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface IEcon
+    public class Econ : SteamUnifiedMessages.UnifiedService
     {
-        CEcon_GetInventoryItemsWithDescriptions_Response GetInventoryItemsWithDescriptions(CEcon_GetInventoryItemsWithDescriptions_Request request);
-        CEcon_GetTradeOfferAccessToken_Response GetTradeOfferAccessToken(CEcon_GetTradeOfferAccessToken_Request request);
-        CEcon_ClientGetItemShopOverlayAuthURL_Response ClientGetItemShopOverlayAuthURL(CEcon_ClientGetItemShopOverlayAuthURL_Request request);
-        CEcon_GetAssetClassInfo_Response GetAssetClassInfo(CEcon_GetAssetClassInfo_Request request);
+        public override string ServiceName { get; } = "Econ";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CEcon_GetInventoryItemsWithDescriptions_Response>> GetInventoryItemsWithDescriptions( CEcon_GetInventoryItemsWithDescriptions_Request request )
+        {
+            return UnifiedMessages.SendMessage<CEcon_GetInventoryItemsWithDescriptions_Request, CEcon_GetInventoryItemsWithDescriptions_Response>( "Econ.GetInventoryItemsWithDescriptions#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CEcon_GetTradeOfferAccessToken_Response>> GetTradeOfferAccessToken( CEcon_GetTradeOfferAccessToken_Request request )
+        {
+            return UnifiedMessages.SendMessage<CEcon_GetTradeOfferAccessToken_Request, CEcon_GetTradeOfferAccessToken_Response>( "Econ.GetTradeOfferAccessToken#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CEcon_ClientGetItemShopOverlayAuthURL_Response>> ClientGetItemShopOverlayAuthURL( CEcon_ClientGetItemShopOverlayAuthURL_Request request )
+        {
+            return UnifiedMessages.SendMessage<CEcon_ClientGetItemShopOverlayAuthURL_Request, CEcon_ClientGetItemShopOverlayAuthURL_Response>( "Econ.ClientGetItemShopOverlayAuthURL#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CEcon_GetAssetClassInfo_Response>> GetAssetClassInfo( CEcon_GetAssetClassInfo_Request request )
+        {
+            return UnifiedMessages.SendMessage<CEcon_GetAssetClassInfo_Request, CEcon_GetAssetClassInfo_Response>( "Econ.GetAssetClassInfo#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "GetInventoryItemsWithDescriptions":
+                    UnifiedMessages.HandleResponseMsg<CEcon_GetInventoryItemsWithDescriptions_Response>( packetMsg );
+                    break;
+                case "GetTradeOfferAccessToken":
+                    UnifiedMessages.HandleResponseMsg<CEcon_GetTradeOfferAccessToken_Response>( packetMsg );
+                    break;
+                case "ClientGetItemShopOverlayAuthURL":
+                    UnifiedMessages.HandleResponseMsg<CEcon_ClientGetItemShopOverlayAuthURL_Response>( packetMsg );
+                    break;
+                case "GetAssetClassInfo":
+                    UnifiedMessages.HandleResponseMsg<CEcon_GetAssetClassInfo_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
 }

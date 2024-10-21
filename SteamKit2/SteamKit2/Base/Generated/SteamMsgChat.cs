@@ -5628,97 +5628,655 @@ namespace SteamKit2.Internal
         k_EChatRoomMemberStateChange_RolesChanged = 12,
     }
 
-    public interface IChat
+    public class Chat : SteamUnifiedMessages.UnifiedService
     {
-        CChat_RequestFriendPersonaStates_Response RequestFriendPersonaStates(CChat_RequestFriendPersonaStates_Request request);
+        public override string ServiceName { get; } = "Chat";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChat_RequestFriendPersonaStates_Response>> RequestFriendPersonaStates( CChat_RequestFriendPersonaStates_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChat_RequestFriendPersonaStates_Request, CChat_RequestFriendPersonaStates_Response>( "Chat.RequestFriendPersonaStates#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "RequestFriendPersonaStates":
+                    UnifiedMessages.HandleResponseMsg<CChat_RequestFriendPersonaStates_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
-    public interface IChatRoom
+    public class ChatRoom : SteamUnifiedMessages.UnifiedService
     {
-        CChatRoom_CreateChatRoomGroup_Response CreateChatRoomGroup(CChatRoom_CreateChatRoomGroup_Request request);
-        CChatRoom_SaveChatRoomGroup_Response SaveChatRoomGroup(CChatRoom_SaveChatRoomGroup_Request request);
-        CChatRoom_RenameChatRoomGroup_Response RenameChatRoomGroup(CChatRoom_RenameChatRoomGroup_Request request);
-        CChatRoom_SetChatRoomGroupTagline_Response SetChatRoomGroupTagline(CChatRoom_SetChatRoomGroupTagline_Request request);
-        CChatRoom_SetChatRoomGroupAvatar_Response SetChatRoomGroupAvatar(CChatRoom_SetChatRoomGroupAvatar_Request request);
-        CChatRoom_SetChatRoomGroupWatchingBroadcast_Response SetChatRoomGroupWatchingBroadcast(CChatRoom_SetChatRoomGroupWatchingBroadcast_Request request);
-        CChatRoom_JoinMiniGameForChatRoomGroup_Response JoinMiniGameForChatRoomGroup(CChatRoom_JoinMiniGameForChatRoomGroup_Request request);
-        CChatRoom_EndMiniGameForChatRoomGroup_Response EndMiniGameForChatRoomGroup(CChatRoom_EndMiniGameForChatRoomGroup_Request request);
-        CChatRoom_MuteUser_Response MuteUserInGroup(CChatRoom_MuteUser_Request request);
-        CChatRoom_KickUser_Response KickUserFromGroup(CChatRoom_KickUser_Request request);
-        CChatRoom_SetUserBanState_Response SetUserBanState(CChatRoom_SetUserBanState_Request request);
-        CChatRoom_RevokeInvite_Response RevokeInviteToGroup(CChatRoom_RevokeInvite_Request request);
-        CChatRoom_CreateRole_Response CreateRole(CChatRoom_CreateRole_Request request);
-        CChatRoom_GetRoles_Response GetRoles(CChatRoom_GetRoles_Request request);
-        CChatRoom_RenameRole_Response RenameRole(CChatRoom_RenameRole_Request request);
-        CChatRoom_ReorderRole_Response ReorderRole(CChatRoom_ReorderRole_Request request);
-        CChatRoom_DeleteRole_Response DeleteRole(CChatRoom_DeleteRole_Request request);
-        CChatRoom_GetRoleActions_Response GetRoleActions(CChatRoom_GetRoleActions_Request request);
-        CChatRoom_ReplaceRoleActions_Response ReplaceRoleActions(CChatRoom_ReplaceRoleActions_Request request);
-        CChatRoom_AddRoleToUser_Response AddRoleToUser(CChatRoom_AddRoleToUser_Request request);
-        CChatRoom_GetRolesForUser_Response GetRolesForUser(CChatRoom_GetRolesForUser_Request request);
-        CChatRoom_DeleteRoleFromUser_Response DeleteRoleFromUser(CChatRoom_DeleteRoleFromUser_Request request);
-        CChatRoom_JoinChatRoomGroup_Response JoinChatRoomGroup(CChatRoom_JoinChatRoomGroup_Request request);
-        CChatRoom_InviteFriendToChatRoomGroup_Response InviteFriendToChatRoomGroup(CChatRoom_InviteFriendToChatRoomGroup_Request request);
-        CChatRoom_LeaveChatRoomGroup_Response LeaveChatRoomGroup(CChatRoom_LeaveChatRoomGroup_Request request);
-        CChatRoom_CreateChatRoom_Response CreateChatRoom(CChatRoom_CreateChatRoom_Request request);
-        CChatRoom_DeleteChatRoom_Response DeleteChatRoom(CChatRoom_DeleteChatRoom_Request request);
-        CChatRoom_RenameChatRoom_Response RenameChatRoom(CChatRoom_RenameChatRoom_Request request);
-        CChatRoom_ReorderChatRoom_Response ReorderChatRoom(CChatRoom_ReorderChatRoom_Request request);
-        CChatRoom_SendChatMessage_Response SendChatMessage(CChatRoom_SendChatMessage_Request request);
-        CChatRoom_JoinVoiceChat_Response JoinVoiceChat(CChatRoom_JoinVoiceChat_Request request);
-        CChatRoom_LeaveVoiceChat_Response LeaveVoiceChat(CChatRoom_LeaveVoiceChat_Request request);
-        CChatRoom_GetMessageHistory_Response GetMessageHistory(CChatRoom_GetMessageHistory_Request request);
-        CChatRoom_GetMyChatRoomGroups_Response GetMyChatRoomGroups(CChatRoom_GetMyChatRoomGroups_Request request);
-        CChatRoom_GetChatRoomGroupState_Response GetChatRoomGroupState(CChatRoom_GetChatRoomGroupState_Request request);
-        CChatRoom_GetChatRoomGroupSummary_Response GetChatRoomGroupSummary(CChatRoom_GetChatRoomGroupSummary_Request request);
-        CChatRoom_SetAppChatRoomGroupForceActive_Response SetAppChatRoomGroupForceActive(CChatRoom_SetAppChatRoomGroupForceActive_Request request);
-        NoResponse SetAppChatRoomGroupStopForceActive(CChatRoom_SetAppChatRoomGroupStopForceActive_Notification request);
-        NoResponse AckChatMessage(CChatRoom_AckChatMessage_Notification request);
-        CChatRoom_CreateInviteLink_Response CreateInviteLink(CChatRoom_CreateInviteLink_Request request);
-        CChatRoom_GetInviteLinkInfo_Response GetInviteLinkInfo(CChatRoom_GetInviteLinkInfo_Request request);
-        CChatRoom_GetInviteInfo_Response GetInviteInfo(CChatRoom_GetInviteInfo_Request request);
-        CChatRoom_GetInviteLinksForGroup_Response GetInviteLinksForGroup(CChatRoom_GetInviteLinksForGroup_Request request);
-        CChatRoom_GetBanList_Response GetBanList(CChatRoom_GetBanList_Request request);
-        CChatRoom_GetInviteList_Response GetInviteList(CChatRoom_GetInviteList_Request request);
-        CChatRoom_DeleteInviteLink_Response DeleteInviteLink(CChatRoom_DeleteInviteLink_Request request);
-        CChatRoom_SetSessionActiveChatRoomGroups_Response SetSessionActiveChatRoomGroups(CChatRoom_SetSessionActiveChatRoomGroups_Request request);
-        CChatRoom_SetUserChatGroupPreferences_Response SetUserChatGroupPreferences(CChatRoom_SetUserChatGroupPreferences_Request request);
-        CChatRoom_DeleteChatMessages_Response DeleteChatMessages(CChatRoom_DeleteChatMessages_Request request);
-        NoResponse UpdateMemberListView(CChatRoom_UpdateMemberListView_Notification request);
-        CChatRoom_SearchMembers_Response SearchMembers(CChatRoom_SearchMembers_Request request);
-        CChatRoom_UpdateMessageReaction_Response UpdateMessageReaction(CChatRoom_UpdateMessageReaction_Request request);
-        CChatRoom_GetMessageReactionReactors_Response GetMessageReactionReactors(CChatRoom_GetMessageReactionReactors_Request request);
+        public override string ServiceName { get; } = "ChatRoom";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_CreateChatRoomGroup_Response>> CreateChatRoomGroup( CChatRoom_CreateChatRoomGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_CreateChatRoomGroup_Request, CChatRoom_CreateChatRoomGroup_Response>( "ChatRoom.CreateChatRoomGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_SaveChatRoomGroup_Response>> SaveChatRoomGroup( CChatRoom_SaveChatRoomGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_SaveChatRoomGroup_Request, CChatRoom_SaveChatRoomGroup_Response>( "ChatRoom.SaveChatRoomGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_RenameChatRoomGroup_Response>> RenameChatRoomGroup( CChatRoom_RenameChatRoomGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_RenameChatRoomGroup_Request, CChatRoom_RenameChatRoomGroup_Response>( "ChatRoom.RenameChatRoomGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_SetChatRoomGroupTagline_Response>> SetChatRoomGroupTagline( CChatRoom_SetChatRoomGroupTagline_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_SetChatRoomGroupTagline_Request, CChatRoom_SetChatRoomGroupTagline_Response>( "ChatRoom.SetChatRoomGroupTagline#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_SetChatRoomGroupAvatar_Response>> SetChatRoomGroupAvatar( CChatRoom_SetChatRoomGroupAvatar_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_SetChatRoomGroupAvatar_Request, CChatRoom_SetChatRoomGroupAvatar_Response>( "ChatRoom.SetChatRoomGroupAvatar#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_SetChatRoomGroupWatchingBroadcast_Response>> SetChatRoomGroupWatchingBroadcast( CChatRoom_SetChatRoomGroupWatchingBroadcast_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_SetChatRoomGroupWatchingBroadcast_Request, CChatRoom_SetChatRoomGroupWatchingBroadcast_Response>( "ChatRoom.SetChatRoomGroupWatchingBroadcast#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_JoinMiniGameForChatRoomGroup_Response>> JoinMiniGameForChatRoomGroup( CChatRoom_JoinMiniGameForChatRoomGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_JoinMiniGameForChatRoomGroup_Request, CChatRoom_JoinMiniGameForChatRoomGroup_Response>( "ChatRoom.JoinMiniGameForChatRoomGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_EndMiniGameForChatRoomGroup_Response>> EndMiniGameForChatRoomGroup( CChatRoom_EndMiniGameForChatRoomGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_EndMiniGameForChatRoomGroup_Request, CChatRoom_EndMiniGameForChatRoomGroup_Response>( "ChatRoom.EndMiniGameForChatRoomGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_MuteUser_Response>> MuteUserInGroup( CChatRoom_MuteUser_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_MuteUser_Request, CChatRoom_MuteUser_Response>( "ChatRoom.MuteUserInGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_KickUser_Response>> KickUserFromGroup( CChatRoom_KickUser_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_KickUser_Request, CChatRoom_KickUser_Response>( "ChatRoom.KickUserFromGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_SetUserBanState_Response>> SetUserBanState( CChatRoom_SetUserBanState_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_SetUserBanState_Request, CChatRoom_SetUserBanState_Response>( "ChatRoom.SetUserBanState#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_RevokeInvite_Response>> RevokeInviteToGroup( CChatRoom_RevokeInvite_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_RevokeInvite_Request, CChatRoom_RevokeInvite_Response>( "ChatRoom.RevokeInviteToGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_CreateRole_Response>> CreateRole( CChatRoom_CreateRole_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_CreateRole_Request, CChatRoom_CreateRole_Response>( "ChatRoom.CreateRole#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_GetRoles_Response>> GetRoles( CChatRoom_GetRoles_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_GetRoles_Request, CChatRoom_GetRoles_Response>( "ChatRoom.GetRoles#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_RenameRole_Response>> RenameRole( CChatRoom_RenameRole_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_RenameRole_Request, CChatRoom_RenameRole_Response>( "ChatRoom.RenameRole#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_ReorderRole_Response>> ReorderRole( CChatRoom_ReorderRole_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_ReorderRole_Request, CChatRoom_ReorderRole_Response>( "ChatRoom.ReorderRole#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_DeleteRole_Response>> DeleteRole( CChatRoom_DeleteRole_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_DeleteRole_Request, CChatRoom_DeleteRole_Response>( "ChatRoom.DeleteRole#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_GetRoleActions_Response>> GetRoleActions( CChatRoom_GetRoleActions_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_GetRoleActions_Request, CChatRoom_GetRoleActions_Response>( "ChatRoom.GetRoleActions#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_ReplaceRoleActions_Response>> ReplaceRoleActions( CChatRoom_ReplaceRoleActions_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_ReplaceRoleActions_Request, CChatRoom_ReplaceRoleActions_Response>( "ChatRoom.ReplaceRoleActions#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_AddRoleToUser_Response>> AddRoleToUser( CChatRoom_AddRoleToUser_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_AddRoleToUser_Request, CChatRoom_AddRoleToUser_Response>( "ChatRoom.AddRoleToUser#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_GetRolesForUser_Response>> GetRolesForUser( CChatRoom_GetRolesForUser_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_GetRolesForUser_Request, CChatRoom_GetRolesForUser_Response>( "ChatRoom.GetRolesForUser#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_DeleteRoleFromUser_Response>> DeleteRoleFromUser( CChatRoom_DeleteRoleFromUser_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_DeleteRoleFromUser_Request, CChatRoom_DeleteRoleFromUser_Response>( "ChatRoom.DeleteRoleFromUser#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_JoinChatRoomGroup_Response>> JoinChatRoomGroup( CChatRoom_JoinChatRoomGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_JoinChatRoomGroup_Request, CChatRoom_JoinChatRoomGroup_Response>( "ChatRoom.JoinChatRoomGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_InviteFriendToChatRoomGroup_Response>> InviteFriendToChatRoomGroup( CChatRoom_InviteFriendToChatRoomGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_InviteFriendToChatRoomGroup_Request, CChatRoom_InviteFriendToChatRoomGroup_Response>( "ChatRoom.InviteFriendToChatRoomGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_LeaveChatRoomGroup_Response>> LeaveChatRoomGroup( CChatRoom_LeaveChatRoomGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_LeaveChatRoomGroup_Request, CChatRoom_LeaveChatRoomGroup_Response>( "ChatRoom.LeaveChatRoomGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_CreateChatRoom_Response>> CreateChatRoom( CChatRoom_CreateChatRoom_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_CreateChatRoom_Request, CChatRoom_CreateChatRoom_Response>( "ChatRoom.CreateChatRoom#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_DeleteChatRoom_Response>> DeleteChatRoom( CChatRoom_DeleteChatRoom_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_DeleteChatRoom_Request, CChatRoom_DeleteChatRoom_Response>( "ChatRoom.DeleteChatRoom#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_RenameChatRoom_Response>> RenameChatRoom( CChatRoom_RenameChatRoom_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_RenameChatRoom_Request, CChatRoom_RenameChatRoom_Response>( "ChatRoom.RenameChatRoom#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_ReorderChatRoom_Response>> ReorderChatRoom( CChatRoom_ReorderChatRoom_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_ReorderChatRoom_Request, CChatRoom_ReorderChatRoom_Response>( "ChatRoom.ReorderChatRoom#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_SendChatMessage_Response>> SendChatMessage( CChatRoom_SendChatMessage_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_SendChatMessage_Request, CChatRoom_SendChatMessage_Response>( "ChatRoom.SendChatMessage#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_JoinVoiceChat_Response>> JoinVoiceChat( CChatRoom_JoinVoiceChat_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_JoinVoiceChat_Request, CChatRoom_JoinVoiceChat_Response>( "ChatRoom.JoinVoiceChat#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_LeaveVoiceChat_Response>> LeaveVoiceChat( CChatRoom_LeaveVoiceChat_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_LeaveVoiceChat_Request, CChatRoom_LeaveVoiceChat_Response>( "ChatRoom.LeaveVoiceChat#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_GetMessageHistory_Response>> GetMessageHistory( CChatRoom_GetMessageHistory_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_GetMessageHistory_Request, CChatRoom_GetMessageHistory_Response>( "ChatRoom.GetMessageHistory#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_GetMyChatRoomGroups_Response>> GetMyChatRoomGroups( CChatRoom_GetMyChatRoomGroups_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_GetMyChatRoomGroups_Request, CChatRoom_GetMyChatRoomGroups_Response>( "ChatRoom.GetMyChatRoomGroups#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_GetChatRoomGroupState_Response>> GetChatRoomGroupState( CChatRoom_GetChatRoomGroupState_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_GetChatRoomGroupState_Request, CChatRoom_GetChatRoomGroupState_Response>( "ChatRoom.GetChatRoomGroupState#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_GetChatRoomGroupSummary_Response>> GetChatRoomGroupSummary( CChatRoom_GetChatRoomGroupSummary_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_GetChatRoomGroupSummary_Request, CChatRoom_GetChatRoomGroupSummary_Response>( "ChatRoom.GetChatRoomGroupSummary#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_SetAppChatRoomGroupForceActive_Response>> SetAppChatRoomGroupForceActive( CChatRoom_SetAppChatRoomGroupForceActive_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_SetAppChatRoomGroupForceActive_Request, CChatRoom_SetAppChatRoomGroupForceActive_Response>( "ChatRoom.SetAppChatRoomGroupForceActive#1", request );
+        }
+
+        public void SetAppChatRoomGroupStopForceActive(CChatRoom_SetAppChatRoomGroupStopForceActive_Notification request )
+        {
+            UnifiedMessages.SendNotification<CChatRoom_SetAppChatRoomGroupStopForceActive_Notification>( "ChatRoom.SetAppChatRoomGroupStopForceActive#1", request );
+        }
+
+        public void AckChatMessage(CChatRoom_AckChatMessage_Notification request )
+        {
+            UnifiedMessages.SendNotification<CChatRoom_AckChatMessage_Notification>( "ChatRoom.AckChatMessage#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_CreateInviteLink_Response>> CreateInviteLink( CChatRoom_CreateInviteLink_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_CreateInviteLink_Request, CChatRoom_CreateInviteLink_Response>( "ChatRoom.CreateInviteLink#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_GetInviteLinkInfo_Response>> GetInviteLinkInfo( CChatRoom_GetInviteLinkInfo_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_GetInviteLinkInfo_Request, CChatRoom_GetInviteLinkInfo_Response>( "ChatRoom.GetInviteLinkInfo#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_GetInviteInfo_Response>> GetInviteInfo( CChatRoom_GetInviteInfo_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_GetInviteInfo_Request, CChatRoom_GetInviteInfo_Response>( "ChatRoom.GetInviteInfo#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_GetInviteLinksForGroup_Response>> GetInviteLinksForGroup( CChatRoom_GetInviteLinksForGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_GetInviteLinksForGroup_Request, CChatRoom_GetInviteLinksForGroup_Response>( "ChatRoom.GetInviteLinksForGroup#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_GetBanList_Response>> GetBanList( CChatRoom_GetBanList_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_GetBanList_Request, CChatRoom_GetBanList_Response>( "ChatRoom.GetBanList#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_GetInviteList_Response>> GetInviteList( CChatRoom_GetInviteList_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_GetInviteList_Request, CChatRoom_GetInviteList_Response>( "ChatRoom.GetInviteList#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_DeleteInviteLink_Response>> DeleteInviteLink( CChatRoom_DeleteInviteLink_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_DeleteInviteLink_Request, CChatRoom_DeleteInviteLink_Response>( "ChatRoom.DeleteInviteLink#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_SetSessionActiveChatRoomGroups_Response>> SetSessionActiveChatRoomGroups( CChatRoom_SetSessionActiveChatRoomGroups_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_SetSessionActiveChatRoomGroups_Request, CChatRoom_SetSessionActiveChatRoomGroups_Response>( "ChatRoom.SetSessionActiveChatRoomGroups#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_SetUserChatGroupPreferences_Response>> SetUserChatGroupPreferences( CChatRoom_SetUserChatGroupPreferences_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_SetUserChatGroupPreferences_Request, CChatRoom_SetUserChatGroupPreferences_Response>( "ChatRoom.SetUserChatGroupPreferences#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_DeleteChatMessages_Response>> DeleteChatMessages( CChatRoom_DeleteChatMessages_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_DeleteChatMessages_Request, CChatRoom_DeleteChatMessages_Response>( "ChatRoom.DeleteChatMessages#1", request );
+        }
+
+        public void UpdateMemberListView(CChatRoom_UpdateMemberListView_Notification request )
+        {
+            UnifiedMessages.SendNotification<CChatRoom_UpdateMemberListView_Notification>( "ChatRoom.UpdateMemberListView#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_SearchMembers_Response>> SearchMembers( CChatRoom_SearchMembers_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_SearchMembers_Request, CChatRoom_SearchMembers_Response>( "ChatRoom.SearchMembers#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_UpdateMessageReaction_Response>> UpdateMessageReaction( CChatRoom_UpdateMessageReaction_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_UpdateMessageReaction_Request, CChatRoom_UpdateMessageReaction_Response>( "ChatRoom.UpdateMessageReaction#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_GetMessageReactionReactors_Response>> GetMessageReactionReactors( CChatRoom_GetMessageReactionReactors_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_GetMessageReactionReactors_Request, CChatRoom_GetMessageReactionReactors_Response>( "ChatRoom.GetMessageReactionReactors#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "CreateChatRoomGroup":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_CreateChatRoomGroup_Response>( packetMsg );
+                    break;
+                case "SaveChatRoomGroup":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_SaveChatRoomGroup_Response>( packetMsg );
+                    break;
+                case "RenameChatRoomGroup":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_RenameChatRoomGroup_Response>( packetMsg );
+                    break;
+                case "SetChatRoomGroupTagline":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_SetChatRoomGroupTagline_Response>( packetMsg );
+                    break;
+                case "SetChatRoomGroupAvatar":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_SetChatRoomGroupAvatar_Response>( packetMsg );
+                    break;
+                case "SetChatRoomGroupWatchingBroadcast":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_SetChatRoomGroupWatchingBroadcast_Response>( packetMsg );
+                    break;
+                case "JoinMiniGameForChatRoomGroup":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_JoinMiniGameForChatRoomGroup_Response>( packetMsg );
+                    break;
+                case "EndMiniGameForChatRoomGroup":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_EndMiniGameForChatRoomGroup_Response>( packetMsg );
+                    break;
+                case "MuteUserInGroup":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_MuteUser_Response>( packetMsg );
+                    break;
+                case "KickUserFromGroup":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_KickUser_Response>( packetMsg );
+                    break;
+                case "SetUserBanState":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_SetUserBanState_Response>( packetMsg );
+                    break;
+                case "RevokeInviteToGroup":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_RevokeInvite_Response>( packetMsg );
+                    break;
+                case "CreateRole":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_CreateRole_Response>( packetMsg );
+                    break;
+                case "GetRoles":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_GetRoles_Response>( packetMsg );
+                    break;
+                case "RenameRole":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_RenameRole_Response>( packetMsg );
+                    break;
+                case "ReorderRole":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_ReorderRole_Response>( packetMsg );
+                    break;
+                case "DeleteRole":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_DeleteRole_Response>( packetMsg );
+                    break;
+                case "GetRoleActions":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_GetRoleActions_Response>( packetMsg );
+                    break;
+                case "ReplaceRoleActions":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_ReplaceRoleActions_Response>( packetMsg );
+                    break;
+                case "AddRoleToUser":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_AddRoleToUser_Response>( packetMsg );
+                    break;
+                case "GetRolesForUser":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_GetRolesForUser_Response>( packetMsg );
+                    break;
+                case "DeleteRoleFromUser":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_DeleteRoleFromUser_Response>( packetMsg );
+                    break;
+                case "JoinChatRoomGroup":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_JoinChatRoomGroup_Response>( packetMsg );
+                    break;
+                case "InviteFriendToChatRoomGroup":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_InviteFriendToChatRoomGroup_Response>( packetMsg );
+                    break;
+                case "LeaveChatRoomGroup":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_LeaveChatRoomGroup_Response>( packetMsg );
+                    break;
+                case "CreateChatRoom":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_CreateChatRoom_Response>( packetMsg );
+                    break;
+                case "DeleteChatRoom":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_DeleteChatRoom_Response>( packetMsg );
+                    break;
+                case "RenameChatRoom":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_RenameChatRoom_Response>( packetMsg );
+                    break;
+                case "ReorderChatRoom":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_ReorderChatRoom_Response>( packetMsg );
+                    break;
+                case "SendChatMessage":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_SendChatMessage_Response>( packetMsg );
+                    break;
+                case "JoinVoiceChat":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_JoinVoiceChat_Response>( packetMsg );
+                    break;
+                case "LeaveVoiceChat":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_LeaveVoiceChat_Response>( packetMsg );
+                    break;
+                case "GetMessageHistory":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_GetMessageHistory_Response>( packetMsg );
+                    break;
+                case "GetMyChatRoomGroups":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_GetMyChatRoomGroups_Response>( packetMsg );
+                    break;
+                case "GetChatRoomGroupState":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_GetChatRoomGroupState_Response>( packetMsg );
+                    break;
+                case "GetChatRoomGroupSummary":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_GetChatRoomGroupSummary_Response>( packetMsg );
+                    break;
+                case "SetAppChatRoomGroupForceActive":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_SetAppChatRoomGroupForceActive_Response>( packetMsg );
+                    break;
+                case "CreateInviteLink":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_CreateInviteLink_Response>( packetMsg );
+                    break;
+                case "GetInviteLinkInfo":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_GetInviteLinkInfo_Response>( packetMsg );
+                    break;
+                case "GetInviteInfo":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_GetInviteInfo_Response>( packetMsg );
+                    break;
+                case "GetInviteLinksForGroup":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_GetInviteLinksForGroup_Response>( packetMsg );
+                    break;
+                case "GetBanList":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_GetBanList_Response>( packetMsg );
+                    break;
+                case "GetInviteList":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_GetInviteList_Response>( packetMsg );
+                    break;
+                case "DeleteInviteLink":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_DeleteInviteLink_Response>( packetMsg );
+                    break;
+                case "SetSessionActiveChatRoomGroups":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_SetSessionActiveChatRoomGroups_Response>( packetMsg );
+                    break;
+                case "SetUserChatGroupPreferences":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_SetUserChatGroupPreferences_Response>( packetMsg );
+                    break;
+                case "DeleteChatMessages":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_DeleteChatMessages_Response>( packetMsg );
+                    break;
+                case "SearchMembers":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_SearchMembers_Response>( packetMsg );
+                    break;
+                case "UpdateMessageReaction":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_UpdateMessageReaction_Response>( packetMsg );
+                    break;
+                case "GetMessageReactionReactors":
+                    UnifiedMessages.HandleResponseMsg<CChatRoom_GetMessageReactionReactors_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "SetAppChatRoomGroupStopForceActive":
+                    UnifiedMessages.HandleNotificationMsg<CChatRoom_SetAppChatRoomGroupStopForceActive_Notification>( packetMsg );
+                    break;
+                case "AckChatMessage":
+                    UnifiedMessages.HandleNotificationMsg<CChatRoom_AckChatMessage_Notification>( packetMsg );
+                    break;
+                case "UpdateMemberListView":
+                    UnifiedMessages.HandleNotificationMsg<CChatRoom_UpdateMemberListView_Notification>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface IClanChatRooms
+    public class ClanChatRooms : SteamUnifiedMessages.UnifiedService
     {
-        CClanChatRooms_GetClanChatRoomInfo_Response GetClanChatRoomInfo(CClanChatRooms_GetClanChatRoomInfo_Request request);
-        CClanChatRooms_SetClanChatRoomPrivate_Response SetClanChatRoomPrivate(CClanChatRooms_SetClanChatRoomPrivate_Request request);
+        public override string ServiceName { get; } = "ClanChatRooms";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CClanChatRooms_GetClanChatRoomInfo_Response>> GetClanChatRoomInfo( CClanChatRooms_GetClanChatRoomInfo_Request request )
+        {
+            return UnifiedMessages.SendMessage<CClanChatRooms_GetClanChatRoomInfo_Request, CClanChatRooms_GetClanChatRoomInfo_Response>( "ClanChatRooms.GetClanChatRoomInfo#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CClanChatRooms_SetClanChatRoomPrivate_Response>> SetClanChatRoomPrivate( CClanChatRooms_SetClanChatRoomPrivate_Request request )
+        {
+            return UnifiedMessages.SendMessage<CClanChatRooms_SetClanChatRoomPrivate_Request, CClanChatRooms_SetClanChatRoomPrivate_Response>( "ClanChatRooms.SetClanChatRoomPrivate#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "GetClanChatRoomInfo":
+                    UnifiedMessages.HandleResponseMsg<CClanChatRooms_GetClanChatRoomInfo_Response>( packetMsg );
+                    break;
+                case "SetClanChatRoomPrivate":
+                    UnifiedMessages.HandleResponseMsg<CClanChatRooms_SetClanChatRoomPrivate_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
-    public interface IChatRoomClient
+    public class ChatRoomClient : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse NotifyIncomingChatMessage(CChatRoom_IncomingChatMessage_Notification request);
-        NoResponse NotifyChatMessageModified(CChatRoom_ChatMessageModified_Notification request);
-        NoResponse NotifyMemberStateChange(CChatRoom_MemberStateChange_Notification request);
-        NoResponse NotifyChatRoomHeaderStateChange(CChatRoom_ChatRoomHeaderState_Notification request);
-        NoResponse NotifyChatRoomGroupRoomsChange(CChatRoom_ChatRoomGroupRoomsChange_Notification request);
-        NoResponse NotifyShouldRejoinChatRoomVoiceChat(CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification request);
-        NoResponse NotifyChatGroupUserStateChanged(ChatRoomClient_NotifyChatGroupUserStateChanged_Notification request);
-        NoResponse NotifyAckChatMessageEcho(CChatRoom_AckChatMessage_Notification request);
-        NoResponse NotifyChatRoomDisconnect(ChatRoomClient_NotifyChatRoomDisconnect_Notification request);
-        NoResponse NotifyMemberListViewUpdated(CChatRoomClient_MemberListViewUpdated_Notification request);
-        NoResponse NotifyMessageReaction(CChatRoom_MessageReaction_Notification request);
+        public override string ServiceName { get; } = "ChatRoomClient";
+
+        public void NotifyIncomingChatMessage(CChatRoom_IncomingChatMessage_Notification request )
+        {
+            UnifiedMessages.SendNotification<CChatRoom_IncomingChatMessage_Notification>( "ChatRoomClient.NotifyIncomingChatMessage#1", request );
+        }
+
+        public void NotifyChatMessageModified(CChatRoom_ChatMessageModified_Notification request )
+        {
+            UnifiedMessages.SendNotification<CChatRoom_ChatMessageModified_Notification>( "ChatRoomClient.NotifyChatMessageModified#1", request );
+        }
+
+        public void NotifyMemberStateChange(CChatRoom_MemberStateChange_Notification request )
+        {
+            UnifiedMessages.SendNotification<CChatRoom_MemberStateChange_Notification>( "ChatRoomClient.NotifyMemberStateChange#1", request );
+        }
+
+        public void NotifyChatRoomHeaderStateChange(CChatRoom_ChatRoomHeaderState_Notification request )
+        {
+            UnifiedMessages.SendNotification<CChatRoom_ChatRoomHeaderState_Notification>( "ChatRoomClient.NotifyChatRoomHeaderStateChange#1", request );
+        }
+
+        public void NotifyChatRoomGroupRoomsChange(CChatRoom_ChatRoomGroupRoomsChange_Notification request )
+        {
+            UnifiedMessages.SendNotification<CChatRoom_ChatRoomGroupRoomsChange_Notification>( "ChatRoomClient.NotifyChatRoomGroupRoomsChange#1", request );
+        }
+
+        public void NotifyShouldRejoinChatRoomVoiceChat(CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification request )
+        {
+            UnifiedMessages.SendNotification<CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification>( "ChatRoomClient.NotifyShouldRejoinChatRoomVoiceChat#1", request );
+        }
+
+        public void NotifyChatGroupUserStateChanged(ChatRoomClient_NotifyChatGroupUserStateChanged_Notification request )
+        {
+            UnifiedMessages.SendNotification<ChatRoomClient_NotifyChatGroupUserStateChanged_Notification>( "ChatRoomClient.NotifyChatGroupUserStateChanged#1", request );
+        }
+
+        public void NotifyAckChatMessageEcho(CChatRoom_AckChatMessage_Notification request )
+        {
+            UnifiedMessages.SendNotification<CChatRoom_AckChatMessage_Notification>( "ChatRoomClient.NotifyAckChatMessageEcho#1", request );
+        }
+
+        public void NotifyChatRoomDisconnect(ChatRoomClient_NotifyChatRoomDisconnect_Notification request )
+        {
+            UnifiedMessages.SendNotification<ChatRoomClient_NotifyChatRoomDisconnect_Notification>( "ChatRoomClient.NotifyChatRoomDisconnect#1", request );
+        }
+
+        public void NotifyMemberListViewUpdated(CChatRoomClient_MemberListViewUpdated_Notification request )
+        {
+            UnifiedMessages.SendNotification<CChatRoomClient_MemberListViewUpdated_Notification>( "ChatRoomClient.NotifyMemberListViewUpdated#1", request );
+        }
+
+        public void NotifyMessageReaction(CChatRoom_MessageReaction_Notification request )
+        {
+            UnifiedMessages.SendNotification<CChatRoom_MessageReaction_Notification>( "ChatRoomClient.NotifyMessageReaction#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyIncomingChatMessage":
+                    UnifiedMessages.HandleNotificationMsg<CChatRoom_IncomingChatMessage_Notification>( packetMsg );
+                    break;
+                case "NotifyChatMessageModified":
+                    UnifiedMessages.HandleNotificationMsg<CChatRoom_ChatMessageModified_Notification>( packetMsg );
+                    break;
+                case "NotifyMemberStateChange":
+                    UnifiedMessages.HandleNotificationMsg<CChatRoom_MemberStateChange_Notification>( packetMsg );
+                    break;
+                case "NotifyChatRoomHeaderStateChange":
+                    UnifiedMessages.HandleNotificationMsg<CChatRoom_ChatRoomHeaderState_Notification>( packetMsg );
+                    break;
+                case "NotifyChatRoomGroupRoomsChange":
+                    UnifiedMessages.HandleNotificationMsg<CChatRoom_ChatRoomGroupRoomsChange_Notification>( packetMsg );
+                    break;
+                case "NotifyShouldRejoinChatRoomVoiceChat":
+                    UnifiedMessages.HandleNotificationMsg<CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification>( packetMsg );
+                    break;
+                case "NotifyChatGroupUserStateChanged":
+                    UnifiedMessages.HandleNotificationMsg<ChatRoomClient_NotifyChatGroupUserStateChanged_Notification>( packetMsg );
+                    break;
+                case "NotifyAckChatMessageEcho":
+                    UnifiedMessages.HandleNotificationMsg<CChatRoom_AckChatMessage_Notification>( packetMsg );
+                    break;
+                case "NotifyChatRoomDisconnect":
+                    UnifiedMessages.HandleNotificationMsg<ChatRoomClient_NotifyChatRoomDisconnect_Notification>( packetMsg );
+                    break;
+                case "NotifyMemberListViewUpdated":
+                    UnifiedMessages.HandleNotificationMsg<CChatRoomClient_MemberListViewUpdated_Notification>( packetMsg );
+                    break;
+                case "NotifyMessageReaction":
+                    UnifiedMessages.HandleNotificationMsg<CChatRoom_MessageReaction_Notification>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface IChatUsability
+    public class ChatUsability : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse NotifyClientUsabilityMetrics(CChatUsability_ClientUsabilityMetrics_Notification request);
+        public override string ServiceName { get; } = "ChatUsability";
+
+        public void NotifyClientUsabilityMetrics(CChatUsability_ClientUsabilityMetrics_Notification request )
+        {
+            UnifiedMessages.SendNotification<CChatUsability_ClientUsabilityMetrics_Notification>( "ChatUsability.NotifyClientUsabilityMetrics#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyClientUsabilityMetrics":
+                    UnifiedMessages.HandleNotificationMsg<CChatUsability_ClientUsabilityMetrics_Notification>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface IChatUsabilityClient
+    public class ChatUsabilityClient : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse NotifyRequestClientUsabilityMetrics(CChatUsability_RequestClientUsabilityMetrics_Notification request);
+        public override string ServiceName { get; } = "ChatUsabilityClient";
+
+        public void NotifyRequestClientUsabilityMetrics(CChatUsability_RequestClientUsabilityMetrics_Notification request )
+        {
+            UnifiedMessages.SendNotification<CChatUsability_RequestClientUsabilityMetrics_Notification>( "ChatUsabilityClient.NotifyRequestClientUsabilityMetrics#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyRequestClientUsabilityMetrics":
+                    UnifiedMessages.HandleNotificationMsg<CChatUsability_RequestClientUsabilityMetrics_Notification>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

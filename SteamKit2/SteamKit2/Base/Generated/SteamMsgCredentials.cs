@@ -570,14 +570,68 @@ namespace SteamKit2.Internal
 
     }
 
-    public interface ICredentials
+    public class Credentials : SteamUnifiedMessages.UnifiedService
     {
-        CCredentials_TestAvailablePassword_Response TestAvailablePassword(CCredentials_TestAvailablePassword_Request request);
-        CCredentials_GetSteamGuardDetails_Response GetSteamGuardDetails(CCredentials_GetSteamGuardDetails_Request request);
-        CCredentials_ValidateEmailAddress_Response ValidateEmailAddress(CCredentials_ValidateEmailAddress_Request request);
-        CCredentials_SteamGuardPhishingReport_Response SteamGuardPhishingReport(CCredentials_SteamGuardPhishingReport_Request request);
-        CCredentials_LastCredentialChangeTime_Response GetCredentialChangeTimeDetails(CCredentials_LastCredentialChangeTime_Request request);
-        CCredentials_GetAccountAuthSecret_Response GetAccountAuthSecret(CCredentials_GetAccountAuthSecret_Request request);
+        public override string ServiceName { get; } = "Credentials";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCredentials_TestAvailablePassword_Response>> TestAvailablePassword( CCredentials_TestAvailablePassword_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCredentials_TestAvailablePassword_Request, CCredentials_TestAvailablePassword_Response>( "Credentials.TestAvailablePassword#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCredentials_GetSteamGuardDetails_Response>> GetSteamGuardDetails( CCredentials_GetSteamGuardDetails_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCredentials_GetSteamGuardDetails_Request, CCredentials_GetSteamGuardDetails_Response>( "Credentials.GetSteamGuardDetails#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCredentials_ValidateEmailAddress_Response>> ValidateEmailAddress( CCredentials_ValidateEmailAddress_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCredentials_ValidateEmailAddress_Request, CCredentials_ValidateEmailAddress_Response>( "Credentials.ValidateEmailAddress#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCredentials_SteamGuardPhishingReport_Response>> SteamGuardPhishingReport( CCredentials_SteamGuardPhishingReport_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCredentials_SteamGuardPhishingReport_Request, CCredentials_SteamGuardPhishingReport_Response>( "Credentials.SteamGuardPhishingReport#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCredentials_LastCredentialChangeTime_Response>> GetCredentialChangeTimeDetails( CCredentials_LastCredentialChangeTime_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCredentials_LastCredentialChangeTime_Request, CCredentials_LastCredentialChangeTime_Response>( "Credentials.GetCredentialChangeTimeDetails#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCredentials_GetAccountAuthSecret_Response>> GetAccountAuthSecret( CCredentials_GetAccountAuthSecret_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCredentials_GetAccountAuthSecret_Request, CCredentials_GetAccountAuthSecret_Response>( "Credentials.GetAccountAuthSecret#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "TestAvailablePassword":
+                    UnifiedMessages.HandleResponseMsg<CCredentials_TestAvailablePassword_Response>( packetMsg );
+                    break;
+                case "GetSteamGuardDetails":
+                    UnifiedMessages.HandleResponseMsg<CCredentials_GetSteamGuardDetails_Response>( packetMsg );
+                    break;
+                case "ValidateEmailAddress":
+                    UnifiedMessages.HandleResponseMsg<CCredentials_ValidateEmailAddress_Response>( packetMsg );
+                    break;
+                case "SteamGuardPhishingReport":
+                    UnifiedMessages.HandleResponseMsg<CCredentials_SteamGuardPhishingReport_Response>( packetMsg );
+                    break;
+                case "GetCredentialChangeTimeDetails":
+                    UnifiedMessages.HandleResponseMsg<CCredentials_LastCredentialChangeTime_Response>( packetMsg );
+                    break;
+                case "GetAccountAuthSecret":
+                    UnifiedMessages.HandleResponseMsg<CCredentials_GetAccountAuthSecret_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
 }

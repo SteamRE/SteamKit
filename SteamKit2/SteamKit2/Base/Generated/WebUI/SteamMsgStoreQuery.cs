@@ -685,11 +685,44 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public interface IStoreQuery
+    public class StoreQuery : SteamUnifiedMessages.UnifiedService
     {
-        CStoreQuery_GetItemsByUserRecommendedTags_Response GetItemsByUserRecommendedTags(CStoreQuery_GetItemsByUserRecommendedTags_Request request);
-        CStoreQuery_Query_Response Query(CStoreQuery_Query_Request request);
-        CStoreQuery_SearchSuggestions_Response SearchSuggestions(CStoreQuery_SearchSuggestions_Request request);
+        public override string ServiceName { get; } = "StoreQuery";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreQuery_GetItemsByUserRecommendedTags_Response>> GetItemsByUserRecommendedTags( CStoreQuery_GetItemsByUserRecommendedTags_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStoreQuery_GetItemsByUserRecommendedTags_Request, CStoreQuery_GetItemsByUserRecommendedTags_Response>( "StoreQuery.GetItemsByUserRecommendedTags#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreQuery_Query_Response>> Query( CStoreQuery_Query_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStoreQuery_Query_Request, CStoreQuery_Query_Response>( "StoreQuery.Query#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreQuery_SearchSuggestions_Response>> SearchSuggestions( CStoreQuery_SearchSuggestions_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStoreQuery_SearchSuggestions_Request, CStoreQuery_SearchSuggestions_Response>( "StoreQuery.SearchSuggestions#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "GetItemsByUserRecommendedTags":
+                    UnifiedMessages.HandleResponseMsg<CStoreQuery_GetItemsByUserRecommendedTags_Response>( packetMsg );
+                    break;
+                case "Query":
+                    UnifiedMessages.HandleResponseMsg<CStoreQuery_Query_Response>( packetMsg );
+                    break;
+                case "SearchSuggestions":
+                    UnifiedMessages.HandleResponseMsg<CStoreQuery_SearchSuggestions_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
 }

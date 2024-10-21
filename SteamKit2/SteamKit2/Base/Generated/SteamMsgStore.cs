@@ -2029,35 +2029,223 @@ namespace SteamKit2.Internal
         k_EPartnerLinkTrackingBackfillSource_Desktop = 3,
     }
 
-    public interface IStore
+    public class Store : SteamUnifiedMessages.UnifiedService
     {
-        CStore_RegisterCDKey_Response RegisterCDKey(CStore_RegisterCDKey_Request request);
-        CStore_GetMostPopularTags_Response GetMostPopularTags(CStore_GetMostPopularTags_Request request);
-        CStore_GetLocalizedNameForTags_Response GetLocalizedNameForTags(CStore_GetLocalizedNameForTags_Request request);
-        CStore_GetTagList_Response GetTagList(CStore_GetTagList_Request request);
-        CStore_GetDiscoveryQueue_Response GetDiscoveryQueue(CStore_GetDiscoveryQueue_Request request);
-        CStore_GetDiscoveryQueueSettings_Response GetDiscoveryQueueSettings(CStore_GetDiscoveryQueueSettings_Request request);
-        CStore_SkipDiscoveryQueueItem_Response SkipDiscoveryQueueItem(CStore_SkipDiscoveryQueueItem_Request request);
-        CStore_GetUserGameInterestState_Response GetUserGameInterestState(CStore_GetUserGameInterestState_Request request);
-        CStore_GetDiscoveryQueueSkippedApps_Response GetDiscoveryQueueSkippedApps(CStore_GetDiscoveryQueueSkippedApps_Request request);
-        CStore_ReportApp_Response ReportApp(CStore_ReportApp_Request request);
-        CStore_GetStorePreferences_Response GetStorePreferences(CStore_GetStorePreferences_Request request);
-        CStore_GetTrendingAppsAmongFriends_Response GetTrendingAppsAmongFriends(CStore_GetTrendingAppsAmongFriends_Request request);
-        NoResponse MigratePartnerLinkTracking(CStore_MigratePartnerLinkTracking_Notification request);
-        CStore_UpdatePackageReservations_Response UpdatePackageReservations(CStore_UpdatePackageReservations_Request request);
-        CStore_GetWishlistDemoEmailStatus_Response GetWishlistDemoEmailStatus(CStore_GetWishlistDemoEmailStatus_Request request);
-        CStore_QueueWishlistDemoEmailToFire_Response QueueWishlistDemoEmailToFire(CStore_QueueWishlistDemoEmailToFire_Request request);
-        CStore_SetReservationPositionMessage_Response SetReservationPositionMessage(CStore_SetReservationPositionMessage_Request request);
-        CStore_DeleteReservationPositionMessage_Response DeleteReservationPositionMessage(CStore_DeleteReservationPositionMessage_Request request);
-        CStore_GetAllReservationPositionMessages_Response GetAllReservationPositionMessages(CStore_GetAllReservationPositionMessages_Request request);
-        NoResponse ReloadAllReservationPositionMessages(CStore_ReloadAllReservationPositionMessages_Notification request);
-        CSteamDeckCompatibility_SetFeedback_Response SetCompatibilityFeedback(CSteamDeckCompatibility_SetFeedback_Request request);
-        CSteamDeckCompatibility_ShouldPrompt_Response ShouldPromptForCompatibilityFeedback(CSteamDeckCompatibility_ShouldPrompt_Request request);
+        public override string ServiceName { get; } = "Store";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_RegisterCDKey_Response>> RegisterCDKey( CStore_RegisterCDKey_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_RegisterCDKey_Request, CStore_RegisterCDKey_Response>( "Store.RegisterCDKey#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_GetMostPopularTags_Response>> GetMostPopularTags( CStore_GetMostPopularTags_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_GetMostPopularTags_Request, CStore_GetMostPopularTags_Response>( "Store.GetMostPopularTags#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_GetLocalizedNameForTags_Response>> GetLocalizedNameForTags( CStore_GetLocalizedNameForTags_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_GetLocalizedNameForTags_Request, CStore_GetLocalizedNameForTags_Response>( "Store.GetLocalizedNameForTags#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_GetTagList_Response>> GetTagList( CStore_GetTagList_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_GetTagList_Request, CStore_GetTagList_Response>( "Store.GetTagList#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_GetDiscoveryQueue_Response>> GetDiscoveryQueue( CStore_GetDiscoveryQueue_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_GetDiscoveryQueue_Request, CStore_GetDiscoveryQueue_Response>( "Store.GetDiscoveryQueue#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_GetDiscoveryQueueSettings_Response>> GetDiscoveryQueueSettings( CStore_GetDiscoveryQueueSettings_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_GetDiscoveryQueueSettings_Request, CStore_GetDiscoveryQueueSettings_Response>( "Store.GetDiscoveryQueueSettings#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_SkipDiscoveryQueueItem_Response>> SkipDiscoveryQueueItem( CStore_SkipDiscoveryQueueItem_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_SkipDiscoveryQueueItem_Request, CStore_SkipDiscoveryQueueItem_Response>( "Store.SkipDiscoveryQueueItem#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_GetUserGameInterestState_Response>> GetUserGameInterestState( CStore_GetUserGameInterestState_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_GetUserGameInterestState_Request, CStore_GetUserGameInterestState_Response>( "Store.GetUserGameInterestState#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_GetDiscoveryQueueSkippedApps_Response>> GetDiscoveryQueueSkippedApps( CStore_GetDiscoveryQueueSkippedApps_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_GetDiscoveryQueueSkippedApps_Request, CStore_GetDiscoveryQueueSkippedApps_Response>( "Store.GetDiscoveryQueueSkippedApps#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_ReportApp_Response>> ReportApp( CStore_ReportApp_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_ReportApp_Request, CStore_ReportApp_Response>( "Store.ReportApp#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_GetStorePreferences_Response>> GetStorePreferences( CStore_GetStorePreferences_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_GetStorePreferences_Request, CStore_GetStorePreferences_Response>( "Store.GetStorePreferences#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_GetTrendingAppsAmongFriends_Response>> GetTrendingAppsAmongFriends( CStore_GetTrendingAppsAmongFriends_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_GetTrendingAppsAmongFriends_Request, CStore_GetTrendingAppsAmongFriends_Response>( "Store.GetTrendingAppsAmongFriends#1", request );
+        }
+
+        public void MigratePartnerLinkTracking(CStore_MigratePartnerLinkTracking_Notification request )
+        {
+            UnifiedMessages.SendNotification<CStore_MigratePartnerLinkTracking_Notification>( "Store.MigratePartnerLinkTracking#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_UpdatePackageReservations_Response>> UpdatePackageReservations( CStore_UpdatePackageReservations_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_UpdatePackageReservations_Request, CStore_UpdatePackageReservations_Response>( "Store.UpdatePackageReservations#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_GetWishlistDemoEmailStatus_Response>> GetWishlistDemoEmailStatus( CStore_GetWishlistDemoEmailStatus_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_GetWishlistDemoEmailStatus_Request, CStore_GetWishlistDemoEmailStatus_Response>( "Store.GetWishlistDemoEmailStatus#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_QueueWishlistDemoEmailToFire_Response>> QueueWishlistDemoEmailToFire( CStore_QueueWishlistDemoEmailToFire_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_QueueWishlistDemoEmailToFire_Request, CStore_QueueWishlistDemoEmailToFire_Response>( "Store.QueueWishlistDemoEmailToFire#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_SetReservationPositionMessage_Response>> SetReservationPositionMessage( CStore_SetReservationPositionMessage_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_SetReservationPositionMessage_Request, CStore_SetReservationPositionMessage_Response>( "Store.SetReservationPositionMessage#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_DeleteReservationPositionMessage_Response>> DeleteReservationPositionMessage( CStore_DeleteReservationPositionMessage_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_DeleteReservationPositionMessage_Request, CStore_DeleteReservationPositionMessage_Response>( "Store.DeleteReservationPositionMessage#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_GetAllReservationPositionMessages_Response>> GetAllReservationPositionMessages( CStore_GetAllReservationPositionMessages_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_GetAllReservationPositionMessages_Request, CStore_GetAllReservationPositionMessages_Response>( "Store.GetAllReservationPositionMessages#1", request );
+        }
+
+        public void ReloadAllReservationPositionMessages(CStore_ReloadAllReservationPositionMessages_Notification request )
+        {
+            UnifiedMessages.SendNotification<CStore_ReloadAllReservationPositionMessages_Notification>( "Store.ReloadAllReservationPositionMessages#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamDeckCompatibility_SetFeedback_Response>> SetCompatibilityFeedback( CSteamDeckCompatibility_SetFeedback_Request request )
+        {
+            return UnifiedMessages.SendMessage<CSteamDeckCompatibility_SetFeedback_Request, CSteamDeckCompatibility_SetFeedback_Response>( "Store.SetCompatibilityFeedback#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamDeckCompatibility_ShouldPrompt_Response>> ShouldPromptForCompatibilityFeedback( CSteamDeckCompatibility_ShouldPrompt_Request request )
+        {
+            return UnifiedMessages.SendMessage<CSteamDeckCompatibility_ShouldPrompt_Request, CSteamDeckCompatibility_ShouldPrompt_Response>( "Store.ShouldPromptForCompatibilityFeedback#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "RegisterCDKey":
+                    UnifiedMessages.HandleResponseMsg<CStore_RegisterCDKey_Response>( packetMsg );
+                    break;
+                case "GetMostPopularTags":
+                    UnifiedMessages.HandleResponseMsg<CStore_GetMostPopularTags_Response>( packetMsg );
+                    break;
+                case "GetLocalizedNameForTags":
+                    UnifiedMessages.HandleResponseMsg<CStore_GetLocalizedNameForTags_Response>( packetMsg );
+                    break;
+                case "GetTagList":
+                    UnifiedMessages.HandleResponseMsg<CStore_GetTagList_Response>( packetMsg );
+                    break;
+                case "GetDiscoveryQueue":
+                    UnifiedMessages.HandleResponseMsg<CStore_GetDiscoveryQueue_Response>( packetMsg );
+                    break;
+                case "GetDiscoveryQueueSettings":
+                    UnifiedMessages.HandleResponseMsg<CStore_GetDiscoveryQueueSettings_Response>( packetMsg );
+                    break;
+                case "SkipDiscoveryQueueItem":
+                    UnifiedMessages.HandleResponseMsg<CStore_SkipDiscoveryQueueItem_Response>( packetMsg );
+                    break;
+                case "GetUserGameInterestState":
+                    UnifiedMessages.HandleResponseMsg<CStore_GetUserGameInterestState_Response>( packetMsg );
+                    break;
+                case "GetDiscoveryQueueSkippedApps":
+                    UnifiedMessages.HandleResponseMsg<CStore_GetDiscoveryQueueSkippedApps_Response>( packetMsg );
+                    break;
+                case "ReportApp":
+                    UnifiedMessages.HandleResponseMsg<CStore_ReportApp_Response>( packetMsg );
+                    break;
+                case "GetStorePreferences":
+                    UnifiedMessages.HandleResponseMsg<CStore_GetStorePreferences_Response>( packetMsg );
+                    break;
+                case "GetTrendingAppsAmongFriends":
+                    UnifiedMessages.HandleResponseMsg<CStore_GetTrendingAppsAmongFriends_Response>( packetMsg );
+                    break;
+                case "UpdatePackageReservations":
+                    UnifiedMessages.HandleResponseMsg<CStore_UpdatePackageReservations_Response>( packetMsg );
+                    break;
+                case "GetWishlistDemoEmailStatus":
+                    UnifiedMessages.HandleResponseMsg<CStore_GetWishlistDemoEmailStatus_Response>( packetMsg );
+                    break;
+                case "QueueWishlistDemoEmailToFire":
+                    UnifiedMessages.HandleResponseMsg<CStore_QueueWishlistDemoEmailToFire_Response>( packetMsg );
+                    break;
+                case "SetReservationPositionMessage":
+                    UnifiedMessages.HandleResponseMsg<CStore_SetReservationPositionMessage_Response>( packetMsg );
+                    break;
+                case "DeleteReservationPositionMessage":
+                    UnifiedMessages.HandleResponseMsg<CStore_DeleteReservationPositionMessage_Response>( packetMsg );
+                    break;
+                case "GetAllReservationPositionMessages":
+                    UnifiedMessages.HandleResponseMsg<CStore_GetAllReservationPositionMessages_Response>( packetMsg );
+                    break;
+                case "SetCompatibilityFeedback":
+                    UnifiedMessages.HandleResponseMsg<CSteamDeckCompatibility_SetFeedback_Response>( packetMsg );
+                    break;
+                case "ShouldPromptForCompatibilityFeedback":
+                    UnifiedMessages.HandleResponseMsg<CSteamDeckCompatibility_ShouldPrompt_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "MigratePartnerLinkTracking":
+                    UnifiedMessages.HandleNotificationMsg<CStore_MigratePartnerLinkTracking_Notification>( packetMsg );
+                    break;
+                case "ReloadAllReservationPositionMessages":
+                    UnifiedMessages.HandleNotificationMsg<CStore_ReloadAllReservationPositionMessages_Notification>( packetMsg );
+                    break;
+            }
+        }
     }
 
-    public interface IStoreClient
+    public class StoreClient : SteamUnifiedMessages.UnifiedService
     {
-        NoResponse NotifyStorePreferencesChanged(CStore_StorePreferencesChanged_Notification request);
+        public override string ServiceName { get; } = "StoreClient";
+
+        public void NotifyStorePreferencesChanged(CStore_StorePreferencesChanged_Notification request )
+        {
+            UnifiedMessages.SendNotification<CStore_StorePreferencesChanged_Notification>( "StoreClient.NotifyStorePreferencesChanged#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "NotifyStorePreferencesChanged":
+                    UnifiedMessages.HandleNotificationMsg<CStore_StorePreferencesChanged_Notification>( packetMsg );
+                    break;
+            }
+        }
     }
 
 }

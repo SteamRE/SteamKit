@@ -411,10 +411,36 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public interface ICheckout
+    public class Checkout : SteamUnifiedMessages.UnifiedService
     {
-        CCheckout_GetFriendOwnershipForGifting_Response GetFriendOwnershipForGifting(CCheckout_GetFriendOwnershipForGifting_Request request);
-        CCheckout_ValidateCart_Response ValidateCart(CCheckout_ValidateCart_Request request);
+        public override string ServiceName { get; } = "Checkout";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCheckout_GetFriendOwnershipForGifting_Response>> GetFriendOwnershipForGifting( CCheckout_GetFriendOwnershipForGifting_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCheckout_GetFriendOwnershipForGifting_Request, CCheckout_GetFriendOwnershipForGifting_Response>( "Checkout.GetFriendOwnershipForGifting#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCheckout_ValidateCart_Response>> ValidateCart( CCheckout_ValidateCart_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCheckout_ValidateCart_Request, CCheckout_ValidateCart_Response>( "Checkout.ValidateCart#1", request );
+        }
+
+        public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+            switch ( methodName )
+            {
+                case "GetFriendOwnershipForGifting":
+                    UnifiedMessages.HandleResponseMsg<CCheckout_GetFriendOwnershipForGifting_Response>( packetMsg );
+                    break;
+                case "ValidateCart":
+                    UnifiedMessages.HandleResponseMsg<CCheckout_ValidateCart_Response>( packetMsg );
+                    break;
+            }
+        }
+
+        public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
+        {
+        }
     }
 
 }
