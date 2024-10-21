@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SteamKit2.Discovery
@@ -9,7 +9,13 @@ namespace SteamKit2.Discovery
     /// </summary>
     public class MemoryServerListProvider : IServerListProvider
     {
-        private IEnumerable<ServerRecord> _servers = Enumerable.Empty<ServerRecord>();
+        private IEnumerable<ServerRecord> _servers = [];
+        private DateTime _lastUpdated = DateTime.MinValue;
+
+        /// <summary>
+        /// Returns the last time the server list was updated
+        /// </summary>
+        public DateTime LastServerListRefresh => _lastUpdated;
 
         /// <summary>
         /// Returns the stored server list in memory
@@ -26,6 +32,7 @@ namespace SteamKit2.Discovery
         public Task UpdateServerListAsync( IEnumerable<ServerRecord> endpoints )
         {
             _servers = endpoints;
+            _lastUpdated = DateTime.UtcNow;
 
             return Task.CompletedTask;
         }
