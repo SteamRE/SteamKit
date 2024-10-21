@@ -118,7 +118,7 @@ namespace SteamKit2
         /// <typeparam name="TCallback">The type of callback to subscribe to.</typeparam>
         /// <returns>An <see cref="IDisposable"/>. Disposing of the return value will unsubscribe the <paramref name="callbackFunc"/>.</returns>
         public IDisposable Subscribe<TCallback>( JobID jobID, Action<TCallback> callbackFunc )
-            where TCallback : class, ICallbackMsg
+            where TCallback : CallbackMsg
         {
             ArgumentNullException.ThrowIfNull( jobID );
 
@@ -136,7 +136,7 @@ namespace SteamKit2
         /// <param name="callbackFunc">The function to invoke with the callback.</param>
         /// <returns>An <see cref="IDisposable"/>. Disposing of the return value will unsubscribe the <paramref name="callbackFunc"/>.</returns>
         public IDisposable Subscribe<TCallback>( Action<TCallback> callbackFunc )
-            where TCallback : class, ICallbackMsg
+            where TCallback : CallbackMsg
         {
             return Subscribe( JobID.Invalid, callbackFunc );
         }
@@ -187,7 +187,7 @@ namespace SteamKit2
         void ICallbackMgrInternals.Unregister( CallbackBase call )
             => ImmutableInterlocked.Update( ref registeredCallbacks, static ( list, item ) => list.Remove( item ), call );
 
-        void Handle( ICallbackMsg call )
+        void Handle( CallbackMsg call )
         {
             var callbacks = registeredCallbacks;
             var type = call.GetType();
