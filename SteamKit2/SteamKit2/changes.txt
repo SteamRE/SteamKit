@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
-v 3.0.0			July 18 2024
+v 3.0.0			October 21 2024
 ------------------------------------------------------------------------------
 
 * Added a dependency on `System.IO.Hashing`.
@@ -12,12 +12,21 @@ v 3.0.0			July 18 2024
 * Added `WebAPI.AsyncInterface.CallAsync` overload that does not require specifying `HttpMethod.Get`.
 * Added WebSocket as a default enabled protocol, switched to using GetCMListForConnect API.
 * Added support for parsing binary keyvalues that have an alternate end byte.
+* `SmartCMServerList` will now attempt to refresh itself over the WebAPI if it was last refreshed over 7 days ago.
 * Updated Steam enums and protobufs.
 * Various performance and memory optimizations.
 * Linux machines will now fetch MAC address for the machine id.
 
 BREAKING CHANGES
 * SteamKit now targets .NET 8.
+* `SteamUnifiedMessages` are now reflection-free with a new API.
+  * See updated `013_UnifiedMessages` sample for new usage.
+  * Requests are now generated functions like so: `UnifiedMessages.CreateService<Player>().GetGameBadgeLevels( req );`
+  * If you subscribed to `ServiceMethodResponse`, use `CallbackManager.SubscribeServiceResponse` instead.
+  * if you subscribed to `ServiceMethodNotification`, `CallbackManager.SubscribeServiceNotification` instead.
+  * Response messages are now typed under `Body` property, calling `GetDeserializedResponse` was removed.
+  * For incoming messages to be processed and decoded, the service must be registered with `CreateService` first,
+    which is done for you by using the new subscribe functions on the callback manager.
 * `SteamClient` callback queue is now backed by `BufferBlock`:
   * `FreeLastCallback` and `GetAllCallbacks` have been removed.
   * Calling `GetCallback` and `WaitForCallback` now always dequeues a callback, there is no more peek and "freeLast".
@@ -29,11 +38,15 @@ BREAKING CHANGES
   * You can rent a buffer like `ArrayPool<byte>.Shared.Rent((int)chunk.UncompressedLength)`
   * `DepotChunk` is now a static class that only contains a `Process` method.
 * Moved `SteamApps.GetCDNAuthToken` to `SteamContent.GetCDNAuthToken` due to a Steam change.
+* `IServerListProvider` has a new property `LastServerListRefresh` which should return an UTC DateTime
+  last time the server list was refreshed.
 * Removed obsolete methods and enum values.
 * Removed Artifact and Underlords generated protobufs.
 * Removed `SteamTrading` handler.
 * Removed `RSACrypto` class.
 * Removed all methods from `CryptoHelper` except for `SymmetricDecrypt`.
+* Removed `ICallbackMsg` interface, simply use `CallbackMsg` instead.
+* Removed `CMListCallback` as it was removed by Steam.
 
 ------------------------------------------------------------------------------
 v 2.5.0			November 6 2023
