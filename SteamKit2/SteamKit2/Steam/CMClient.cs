@@ -141,10 +141,12 @@ namespace SteamKit2.Internal
 
             ID = identifier;
 
-            heartBeatFunc = new ScheduledFunction( () =>
-            {
-                Send( new ClientMsgProtobuf<CMsgClientHeartBeat>( EMsg.ClientHeartBeat ) );
-            } );
+            heartBeatFunc = new ScheduledFunction(
+                configuration.TimeProvider,
+                () =>
+                {
+                    Send( new ClientMsgProtobuf<CMsgClientHeartBeat>( EMsg.ClientHeartBeat ) );
+                } );
         }
 
         /// <summary>
