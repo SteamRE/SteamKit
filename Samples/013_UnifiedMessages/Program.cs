@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 using SteamKit2;
 using SteamKit2.Internal;
@@ -14,8 +15,6 @@ using SteamKit2.Internal;
 // in this case, this sample will demonstrate using the IPlayer unified service
 // through the connection to steam
 //
-
-var badgeRequest = JobID.Invalid;
 
 if ( args.Length < 2 )
 {
@@ -39,7 +38,7 @@ var steamUser = steamClient.GetHandler<SteamUser>();
 var steamUnifiedMessages = steamClient.GetHandler<SteamUnifiedMessages>();
 
 // we also want to create our local service interface, which will help us build requests to the unified api
-var playerService = steamUnifiedMessages.CreateService<IPlayer>();
+var playerService = steamUnifiedMessages.CreateService<Player>();
 
 
 // register a few callbacks we're interested in
@@ -51,8 +50,8 @@ manager.Subscribe<SteamClient.DisconnectedCallback>( OnDisconnected );
 manager.Subscribe<SteamUser.LoggedOnCallback>( OnLoggedOn );
 manager.Subscribe<SteamUser.LoggedOffCallback>( OnLoggedOff );
 
-// we use the following callbacks for unified service responses
-manager.Subscribe<SteamUnifiedMessages.ServiceMethodResponse>( OnMethodResponse );
+// subscribe to incoming messages from the GameNotificationsClient service
+manager.SubscribeServiceNotification<GameNotificationsClient, CGameNotifications_OnNotificationsRequested_Notification>( OnGameStartedNotification );
 
 var isRunning = true;
 
@@ -86,7 +85,7 @@ void OnDisconnected( SteamClient.DisconnectedCallback callback )
     isRunning = false;
 }
 
-void OnLoggedOn( SteamUser.LoggedOnCallback callback )
+async void OnLoggedOn( SteamUser.LoggedOnCallback callback )
 {
     if ( callback.Result != EResult.OK )
     {
@@ -119,49 +118,38 @@ void OnLoggedOn( SteamUser.LoggedOnCallback callback )
         appid = 440,
     };
 
-    // now lets send the request, this is done by building an expression tree with the IPlayer interface
-    badgeRequest = playerService.SendMessage( x => x.GetGameBadgeLevels( req ) );
+    // now lets send the request and await for the response
+    var response = await playerService.GetGameBadgeLevels( req );
 
     // alternatively, the request can be made using SteamUnifiedMessages directly, but then you must build the service request name manually
     // the name format is in the form of <Service>.<Method>#<Version>
-    steamUnifiedMessages.SendMessage( "Player.GetGameBadgeLevels#1", req );
+    response = await steamUnifiedMessages.SendMessage<CPlayer_GetGameBadgeLevels_Request, CPlayer_GetGameBadgeLevels_Response>( "Player.GetGameBadgeLevels#1", req );
+
+    if ( response.Result != EResult.OK )
+    {
+        Console.WriteLine( $"Unified service request failed with {response.Result}" );
+        return;
+    }
+
+    Console.WriteLine( $"Our player level is {response.Body.player_level}" );
+
+    foreach ( var badge in response.Body.badges )
+    {
+        Console.WriteLine( $"Badge series {badge.series} is level {badge.level}" );
+    }
+
+    // now that we've completed our task, lets log off after a few seconds to receive possible notifications
+    await Task.Delay( 10000 );
+    steamUser.LogOff();
+}
+
+static void OnGameStartedNotification( SteamUnifiedMessages.ServiceMethodNotification<CGameNotifications_OnNotificationsRequested_Notification> notification )
+{
+    Console.WriteLine($"User with id {notification.Body.steamid} started the game:");
+    Console.WriteLine(notification.Body.appid);
 }
 
 static void OnLoggedOff( SteamUser.LoggedOffCallback callback )
 {
     Console.WriteLine( "Logged off of Steam: {0}", callback.Result );
-}
-
-void OnMethodResponse( SteamUnifiedMessages.ServiceMethodResponse callback )
-{
-    if ( callback.JobID != badgeRequest )
-    {
-        // always double check the jobid of the response to ensure you're matching to your original request
-        return;
-    }
-
-    // and check for success
-    if ( callback.Result != EResult.OK )
-    {
-        Console.WriteLine( $"Unified service request failed with {callback.Result}" );
-        return;
-    }
-
-    // retrieve the deserialized response for the request we made
-    // notice the naming pattern
-    // for requests: CMyService_Method_Request
-    // for responses: CMyService_Method_Response
-    CPlayer_GetGameBadgeLevels_Response resp = callback.GetDeserializedResponse<CPlayer_GetGameBadgeLevels_Response>();
-
-    Console.WriteLine( $"Our player level is {resp.player_level}" );
-
-    foreach ( var badge in resp.badges )
-    {
-        Console.WriteLine( $"Badge series {badge.series} is level {badge.level}" );
-    }
-
-    badgeRequest = JobID.Invalid;
-
-    // now that we've completed our task, lets log off
-    steamUser.LogOff();
 }

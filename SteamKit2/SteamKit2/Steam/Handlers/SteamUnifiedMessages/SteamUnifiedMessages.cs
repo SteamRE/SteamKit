@@ -3,150 +3,73 @@
  * file 'license.txt', which is part of this source code package.
  */
 
-
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
+using System.Collections.Concurrent;
 using ProtoBuf;
 
 namespace SteamKit2
 {
     /// <summary>
-    /// This handler is used for interacting with Steamworks unified messaging
+    /// This handler is used for interacting with Steamworks unified messaging.
     /// </summary>
     public partial class SteamUnifiedMessages : ClientMsgHandler
     {
+        private readonly ConcurrentDictionary<string, UnifiedService> _handlers = [];
+
         /// <summary>
-        /// This wrapper is used for expression-based RPC calls using Steam Unified Messaging.
+        /// Creates a service that can be used to send messages and receive notifications via Steamworks unified messaging.
         /// </summary>
-        public class UnifiedService<TService>
+        /// <typeparam name="TService">The type of the service to create.</typeparam>
+        /// <returns>The instance to create requests from.</returns>
+        public TService CreateService<TService>() where TService : UnifiedService, new()
         {
-            static readonly MethodInfo sendMessageMethod = typeof( SteamUnifiedMessages )
-                .GetMethods( BindingFlags.Public | BindingFlags.Instance )
-                .Single( m => m is { Name: nameof( SteamUnifiedMessages.SendMessage ) } && !Attribute.IsDefined( m, typeof( ObsoleteAttribute ) ) );
-
-            internal UnifiedService( SteamUnifiedMessages steamUnifiedMessages )
+            var service = new TService
             {
-                this.steamUnifiedMessages = steamUnifiedMessages;
-            }
+                UnifiedMessages = this
+            };
 
-            readonly SteamUnifiedMessages steamUnifiedMessages;
+            return ( _handlers.GetOrAdd( service.ServiceName, service ) as TService )!;
+        }
 
-            /// <summary>
-            /// Sends a message.
-            /// Results are returned in a <see cref="ServiceMethodResponse"/>.
-            /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
-            /// </summary>
-            /// <typeparam name="TResponse">The type of the protobuf object which is the response to the RPC call.</typeparam>
-            /// <param name="expr">RPC call expression, e.g. x => x.SomeMethodCall(message);</param>
-            /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
-            public AsyncJob<ServiceMethodResponse> SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr )
-            {
-                return SendMessageOrNotification( expr, false )!;
-            }
-
-            /// <summary>
-            /// Sends a notification.
-            /// </summary>
-            /// <typeparam name="TResponse">The type of the protobuf object which is the response to the RPC call.</typeparam>
-            /// <param name="expr">RPC call expression, e.g. x => x.SomeMethodCall(message);</param>
-            public void SendNotification<TResponse>( Expression<Func<TService, TResponse>> expr )
-            {
-                SendMessageOrNotification( expr, true );
-            }
-
-            AsyncJob<ServiceMethodResponse>? SendMessageOrNotification<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification )
-            {
-                ArgumentNullException.ThrowIfNull( expr );
-
-                var call = ExtractMethodCallExpression( expr, nameof( expr ) );
-                var methodInfo = call.Method;
-
-                var argument = call.Arguments.Single();
-                object message;
-
-                if ( argument.NodeType == ExpressionType.MemberAccess )
-                {
-                    var unary = Expression.Convert( argument, typeof( object ) );
-                    var lambda = Expression.Lambda<Func<object>>( unary );
-                    var getter = lambda.Compile();
-                    message = getter();
-                }
-                else
-                {
-                    throw new NotSupportedException( "Unknown Expression type" );
-                }
-
-                var serviceName = typeof( TService ).Name[ 1.. ]; // IServiceName - remove 'I'
-                var methodName = methodInfo.Name;
-                var version = 1;
-
-                var rpcName = string.Format( "{0}.{1}#{2}", serviceName, methodName, version );
-
-                if ( isNotification )
-                {
-                    var notification = typeof( SteamUnifiedMessages )
-                        .GetMethod( nameof( SteamUnifiedMessages.SendNotification ), BindingFlags.Public | BindingFlags.Instance )!
-                        .MakeGenericMethod( message.GetType() );
-                    notification.Invoke( this.steamUnifiedMessages, new[] { rpcName, message } );
-                    return null;
-                }
-
-                var method = sendMessageMethod.MakeGenericMethod( message.GetType() );
-                var result = method.Invoke( this.steamUnifiedMessages, new[] { rpcName, message } )!;
-                return ( AsyncJob<ServiceMethodResponse> )result;
-            }
-
-            static MethodCallExpression ExtractMethodCallExpression<TResponse>( Expression<Func<TService, TResponse>> expression, string paramName )
-            {
-                switch ( expression.NodeType )
-                {
-                    // Older code/tests/whatever were compiled down to just a single MethodCallExpression.
-                    case ExpressionType.Call:
-                        return ( MethodCallExpression )expression.Body;
-
-                    // Newer code/tests/whatever are now compiled by wrapping the MethodCallExpression in a LambdaExpression.
-                    case ExpressionType.Lambda:
-                        if ( expression.Body.NodeType == ExpressionType.Call )
-                        {
-                            var lambda = ( LambdaExpression )expression;
-                            return ( MethodCallExpression )lambda.Body;
-                        }
-                        break;
-                }
-
-                throw new ArgumentException( "Expression must be a method call.", paramName );
-            }
+        /// <summary>
+        /// Removes a service so it no longer can be used to send messages or receive notifications.
+        /// </summary>
+        /// <typeparam name="TService">The type of the service to remove.</typeparam>
+        public void RemoveService<TService>() where TService : UnifiedService, new()
+        {
+            var serviceName = new TService().ServiceName;
+            _handlers.TryRemove( serviceName, out _ );
         }
 
         /// <summary>
         /// Sends a message.
-        /// Results are returned in a <see cref="ServiceMethodResponse"/>.
+        /// Results are returned in a <see cref="ServiceMethodResponse{TResult}"/>.
         /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <typeparam name="TRequest">The type of a protobuf object.</typeparam>
+        /// <typeparam name="TResult">The type of the result of the request.</typeparam>
         /// <param name="name">Name of the RPC endpoint. Takes the format ServiceName.RpcName</param>
         /// <param name="message">The message to send.</param>
-        /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
-        public AsyncJob<ServiceMethodResponse> SendMessage<TRequest>( string name, TRequest message )
-            where TRequest : IExtensible, new()
+        /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse{TResult}"/>.</returns>
+        public AsyncJob<ServiceMethodResponse<TResult>> SendMessage<TRequest, TResult>( string name, TRequest message )
+            where TRequest : IExtensible, new() where TResult : IExtensible, new()
         {
-            if ( message == null )
+            if ( message is null )
             {
                 throw new ArgumentNullException( nameof( message ) );
             }
 
-            var eMsg = Client.SteamID == null ? EMsg.ServiceMethodCallFromClientNonAuthed : EMsg.ServiceMethodCallFromClient;
-            var msg = new ClientMsgProtobuf<TRequest>( eMsg );
-            msg.SourceJobID = Client.GetNextJobID();
+            var eMsg = Client.SteamID is null ? EMsg.ServiceMethodCallFromClientNonAuthed : EMsg.ServiceMethodCallFromClient;
+            var msg = new ClientMsgProtobuf<TRequest>( eMsg )
+            {
+                SourceJobID = Client.GetNextJobID()
+            };
+
             msg.Header.Proto.target_job_name = name;
             msg.Body = message;
             Client.Send( msg );
 
-            return new AsyncJob<ServiceMethodResponse>( this.Client, msg.SourceJobID );
+            return new AsyncJob<ServiceMethodResponse<TResult>>( Client, msg.SourceJobID );
         }
 
         /// <summary>
@@ -158,101 +81,94 @@ namespace SteamKit2
         public void SendNotification<TRequest>( string name, TRequest message )
             where TRequest : IExtensible, new()
         {
-            if ( message == null )
+            if ( message is null )
             {
                 throw new ArgumentNullException( nameof( message ) );
             }
 
             // Notifications do not set source jobid, otherwise Steam server will actively reject this message
             // if the method being used is a "Notification"
-            var eMsg = Client.SteamID == null ? EMsg.ServiceMethodCallFromClientNonAuthed : EMsg.ServiceMethodCallFromClient;
+            var eMsg = Client.SteamID is null ? EMsg.ServiceMethodCallFromClientNonAuthed : EMsg.ServiceMethodCallFromClient;
             var msg = new ClientMsgProtobuf<TRequest>( eMsg );
             msg.Header.Proto.target_job_name = name;
             msg.Body = message;
             Client.Send( msg );
         }
 
-        /// <summary>
-        /// Creates a <see cref="UnifiedService&lt;TService&gt;"/> wrapper for expression-based unified messaging.
-        /// </summary>
-        /// <typeparam name="TService">The type of a service interface.</typeparam>
-        /// <returns>The <see cref="UnifiedService&lt;TService&gt;"/> wrapper.</returns>
-        public UnifiedService<TService> CreateService<TService>()
-        {
-            return new UnifiedService<TService>( this );
-        }
-
-
-        /// <summary>
-        /// Handles a client message. This should not be called directly.
-        /// </summary>
-        /// <param name="packetMsg">The packet message that contains the data.</param>
+        /// <inheritdoc />
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            switch ( packetMsg.MsgType )
-            {
-                case EMsg.ServiceMethodResponse:
-                    HandleServiceMethodResponse( packetMsg );
-                    break;
-
-                case EMsg.ServiceMethod:
-                    HandleServiceMethod( packetMsg );
-                    break;
-            }
-        }
-
-
-        #region ClientMsg Handlers
-        void HandleServiceMethodResponse( IPacketMsg packetMsg )
-        {
-            if ( packetMsg is not PacketClientMsgProtobuf packetMsgProto )
-            {
-                throw new InvalidDataException( "Packet message is expected to be protobuf." );
-            }
-
-            var callback = new ServiceMethodResponse( packetMsgProto );
-            Client.PostCallback( callback );
-        }
-
-        void HandleServiceMethod( IPacketMsg packetMsg )
-        {
-            if ( packetMsg is not PacketClientMsgProtobuf packetMsgProto )
-            {
-                throw new InvalidDataException( "Packet message is expected to be protobuf." );
-            }
-
-            var jobNameStr = packetMsgProto.Header.Proto.target_job_name;
-            if ( string.IsNullOrEmpty( jobNameStr ) )
-            {
+            if ( packetMsg is not PacketClientMsgProtobuf { MsgType: EMsg.ServiceMethod or EMsg.ServiceMethodResponse } packetMsgProto )
                 return;
-            }
+
+            var jobName = packetMsgProto.Header.Proto.target_job_name.AsSpan();
+            if ( jobName.IsEmpty )
+                return;
 
             // format: Service.Method#Version
-            var jobName = jobNameStr.AsSpan();
             var dot = jobName.IndexOf( '.' );
             var hash = jobName.LastIndexOf( '#' );
             if ( dot < 0 || hash < 0 )
-            {
                 return;
-            }
 
             var serviceName = jobName[ ..dot ].ToString();
+
+            if ( !_handlers.TryGetValue( serviceName, out var handler ) )
+                return;
+
             var methodName = jobName[ ( dot + 1 )..hash ].ToString();
 
-            var serviceInterfaceName = "SteamKit2.Internal.I" + serviceName;
-            var serviceInterfaceType = Type.GetType( serviceInterfaceName );
-            if ( serviceInterfaceType != null )
+            switch ( packetMsgProto.MsgType )
             {
-                var method = serviceInterfaceType.GetMethod( methodName );
-                if ( method != null )
-                {
-                    var argumentType = method.GetParameters().Single().ParameterType;
-
-                    var callback = new ServiceMethodNotification( argumentType, packetMsg );
-                    Client.PostCallback( callback );
-                }
+                case EMsg.ServiceMethodResponse:
+                    handler.HandleResponseMsg( methodName, packetMsgProto );
+                    break;
+                case EMsg.ServiceMethod:
+                    handler.HandleNotificationMsg( methodName, packetMsgProto );
+                    break;
             }
         }
-        #endregion
+
+        internal void HandleResponseMsg<TService>( PacketClientMsgProtobuf packetMsg ) where TService : IExtensible, new()
+        {
+            var callback = new ServiceMethodResponse<TService>( packetMsg );
+            Client.PostCallback( callback );
+        }
+
+        internal void HandleNotificationMsg<TService>( PacketClientMsgProtobuf packetMsg ) where TService : IExtensible, new()
+        {
+            var callback = new ServiceMethodNotification<TService>( packetMsg );
+            Client.PostCallback( callback );
+        }
+
+        /// <summary>
+        /// Abstract definition of a steam unified messages service.
+        /// </summary>
+        public abstract class UnifiedService
+        {
+            /// <summary>
+            /// Handles a response message for this service. This should not be called directly.
+            /// </summary>
+            /// <param name="methodName">The name of the method the service should handle</param>
+            /// <param name="packetMsg">The packet message that contains the data</param>
+            public abstract void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg );
+
+            /// <summary>
+            /// Handles a notification message for this service. This should not be called directly.
+            /// </summary>
+            /// <param name="methodName">The name of the method the service should handle</param>
+            /// <param name="packetMsg">The packet message that contains the data</param>
+            public abstract void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg );
+
+            /// <summary>
+            /// The name of the steam unified messages service.
+            /// </summary>
+            public abstract string ServiceName { get; }
+
+            /// <summary>
+            /// A reference to the <see cref="SteamUnifiedMessages"/> instance this service was created from.
+            /// </summary>
+            public SteamUnifiedMessages? UnifiedMessages { get; init; }
+        }
     }
 }

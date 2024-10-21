@@ -41,15 +41,14 @@ namespace SteamKit2.Authentication
                 code_type = codeType,
             };
 
-            var message = await Authentication.AuthenticationService.SendMessage( api => api.UpdateAuthSessionWithSteamGuardCode( request ) );
-            var response = message.GetDeserializedResponse<CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response>();
+            var response = await Authentication.AuthenticationService.UpdateAuthSessionWithSteamGuardCode( request );
 
             // Observed results can be InvalidLoginAuthCode, TwoFactorCodeMismatch, Expired, DuplicateRequest.
             // DuplicateRequest happens when accepting the prompt in the mobile app, and then trying to send guard code here,
             // we do not throw on it here because authentication will succeed on the next poll.
-            if ( message.Result != EResult.OK && message.Result != EResult.DuplicateRequest )
+            if ( response.Result != EResult.OK && response.Result != EResult.DuplicateRequest )
             {
-                throw new AuthenticationException( "Failed to send steam guard code", message.Result );
+                throw new AuthenticationException( "Failed to send steam guard code", response.Result );
             }
 
             // response may contain agreement_session_url

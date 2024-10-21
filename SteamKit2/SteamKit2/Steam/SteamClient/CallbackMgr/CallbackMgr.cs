@@ -9,6 +9,7 @@ using System;
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
+using ProtoBuf;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -20,7 +21,8 @@ namespace SteamKit2
     /// </summary>
     public sealed class CallbackManager : ICallbackMgrInternals
     {
-        SteamClient client;
+        readonly SteamClient client;
+        readonly SteamUnifiedMessages steamUnifiedMessages;
 
         ImmutableList<CallbackBase> registeredCallbacks = [];
 
@@ -35,6 +37,7 @@ namespace SteamKit2
             ArgumentNullException.ThrowIfNull( client );
 
             this.client = client;
+            this.steamUnifiedMessages = client.GetHandler<SteamUnifiedMessages>()!;
         }
 
 
@@ -136,6 +139,46 @@ namespace SteamKit2
             where TCallback : class, ICallbackMsg
         {
             return Subscribe( JobID.Invalid, callbackFunc );
+        }
+
+        /// <summary>
+        /// Registers the provided <see cref="Action{T}"/> to receive callbacks for notifications from the service of type <typeparam name="TService" />
+        /// with the notification message of type <typeparam name="TNotification"></typeparam>.
+        /// </summary>
+        /// <param name="callbackFunc">The function to invoke with the callback.</param>
+        /// <returns>An <see cref="IDisposable"/>. Disposing of the return value will unsubscribe the <paramref name="callbackFunc"/>.</returns>
+        public IDisposable SubscribeServiceNotification<TService, TNotification>( Action<SteamUnifiedMessages.ServiceMethodNotification<TNotification>> callbackFunc )
+            where TService : SteamUnifiedMessages.UnifiedService, new()
+            where TNotification : IExtensible, new()
+        {
+            ArgumentNullException.ThrowIfNull( callbackFunc );
+
+            steamUnifiedMessages.CreateService<TService>();
+
+#pragma warning disable CA2000 // Not implicitly disposed
+            var callback = new Callback<SteamUnifiedMessages.ServiceMethodNotification<TNotification>>( callbackFunc, this, JobID.Invalid );
+#pragma warning restore CA2000
+            return new Subscription( callback, this );
+        }
+
+        /// <summary>
+        /// Registers the provided <see cref="Action{T}"/> to receive callbacks for responses of <see cref="SteamUnifiedMessages"/> requests
+        /// made by the service of type <typeparam name="TService" /> with the response of type <typeparam name="TResponse"></typeparam>.
+        /// </summary>
+        /// <param name="callbackFunc">The function to invoke with the callback.</param>
+        /// <returns>An <see cref="IDisposable"/>. Disposing of the return value will unsubscribe the <paramref name="callbackFunc"/>.</returns>
+        public IDisposable SubscribeServiceResponse<TService, TResponse>( Action<SteamUnifiedMessages.ServiceMethodResponse<TResponse>> callbackFunc )
+            where TService : SteamUnifiedMessages.UnifiedService, new()
+            where TResponse : IExtensible, new()
+        {
+            ArgumentNullException.ThrowIfNull( callbackFunc );
+
+            steamUnifiedMessages.CreateService<TService>();
+
+#pragma warning disable CA2000 // Not implicitly disposed
+            var callback = new Callback<SteamUnifiedMessages.ServiceMethodResponse<TResponse>>( callbackFunc, this, JobID.Invalid );
+#pragma warning restore CA2000
+            return new Subscription( callback, this );
         }
 
         void ICallbackMgrInternals.Register( CallbackBase call )

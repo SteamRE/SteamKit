@@ -33,12 +33,11 @@ namespace SteamKit2
             /// </summary>
             public DateTime Expiration { get; set; }
 
-            internal CDNAuthToken( SteamUnifiedMessages.ServiceMethodResponse message )
+            internal CDNAuthToken( SteamUnifiedMessages.ServiceMethodResponse<CContentServerDirectory_GetCDNAuthToken_Response> message )
             {
-                var response = message.GetDeserializedResponse<CContentServerDirectory_GetCDNAuthToken_Response>();
                 Result = message.Result;
-                Token = response.token;
-                Expiration = DateUtils.DateTimeFromUnixTime( response.expiration_time );
+                Token = message.Body.token;
+                Expiration = DateUtils.DateTimeFromUnixTime( message.Body.expiration_time );
             }
         }
 
@@ -70,11 +69,9 @@ namespace SteamKit2
             // SendMessage is an AsyncJob, but we want to deserialize it
             // can't really do HandleMsg because it requires parsing the service like its done in HandleServiceMethod
             var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
-            var contentService = unifiedMessages.CreateService<IContentServerDirectory>();
-            var message = await contentService.SendMessage( api => api.GetServersForSteamPipe( request ) );
-            var response = message.GetDeserializedResponse<CContentServerDirectory_GetServersForSteamPipe_Response>();
-
-            return ContentServerDirectoryService.ConvertServerList( response );
+            var contentService = unifiedMessages.CreateService<ContentServerDirectory>();
+            var response = await contentService.GetServersForSteamPipe( request );
+            return ContentServerDirectoryService.ConvertServerList( response.Body );
         }
 
         /// <summary>
@@ -111,11 +108,9 @@ namespace SteamKit2
             // SendMessage is an AsyncJob, but we want to deserialize it
             // can't really do HandleMsg because it requires parsing the service like its done in HandleServiceMethod
             var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
-            var contentService = unifiedMessages.CreateService<IContentServerDirectory>();
-            var message = await contentService.SendMessage( api => api.GetManifestRequestCode( request ) );
-            var response = message.GetDeserializedResponse<CContentServerDirectory_GetManifestRequestCode_Response>();
-
-            return response.manifest_request_code;
+            var contentService = unifiedMessages.CreateService<ContentServerDirectory>();
+            var response = await contentService.GetManifestRequestCode( request );
+            return response.Body.manifest_request_code;
         }
 
         /// <summary>
@@ -139,10 +134,10 @@ namespace SteamKit2
             // SendMessage is an AsyncJob, but we want to deserialize it
             // can't really do HandleMsg because it requires parsing the service like its done in HandleServiceMethod
             var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
-            var contentService = unifiedMessages.CreateService<IContentServerDirectory>();
-            var message = await contentService.SendMessage(api => api.GetCDNAuthToken(request));
+            var contentService = unifiedMessages.CreateService<ContentServerDirectory>();
+            var result = await contentService.GetCDNAuthToken( request );
 
-            return new CDNAuthToken( message );
+            return new CDNAuthToken( result );
         }
 
         /// <summary>
