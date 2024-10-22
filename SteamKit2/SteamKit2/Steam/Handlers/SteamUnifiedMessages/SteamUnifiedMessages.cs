@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using ProtoBuf;
 
 namespace SteamKit2
@@ -51,7 +52,7 @@ namespace SteamKit2
         /// <param name="name">Name of the RPC endpoint. Takes the format ServiceName.RpcName</param>
         /// <param name="message">The message to send.</param>
         /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse{TResult}"/>.</returns>
-        public AsyncJob<ServiceMethodResponse<TResult>> SendMessage<TRequest, TResult>( string name, TRequest message )
+        public AsyncJob<ServiceMethodResponse<TResult>> SendMessage<[DynamicallyAccessedMembers( Trimming.ForProtobufNet )] TRequest, [DynamicallyAccessedMembers( Trimming.ForProtobufNet )] TResult>( string name, TRequest message )
             where TRequest : IExtensible, new() where TResult : IExtensible, new()
         {
             if ( message is null )
@@ -78,7 +79,7 @@ namespace SteamKit2
         /// <typeparam name="TRequest">The type of a protobuf object.</typeparam>
         /// <param name="name">Name of the RPC endpoint. Takes the format ServiceName.RpcName</param>
         /// <param name="message">The message to send.</param>
-        public void SendNotification<TRequest>( string name, TRequest message )
+        public void SendNotification<[DynamicallyAccessedMembers( Trimming.ForProtobufNet )] TRequest>( string name, TRequest message )
             where TRequest : IExtensible, new()
         {
             if ( message is null )
@@ -129,13 +130,13 @@ namespace SteamKit2
             }
         }
 
-        internal void HandleResponseMsg<TService>( PacketClientMsgProtobuf packetMsg ) where TService : IExtensible, new()
+        internal void HandleResponseMsg<[DynamicallyAccessedMembers( Trimming.ForProtobufNet )] TService>( PacketClientMsgProtobuf packetMsg ) where TService : IExtensible, new()
         {
             var callback = new ServiceMethodResponse<TService>( packetMsg );
             Client.PostCallback( callback );
         }
 
-        internal void HandleNotificationMsg<TService>( PacketClientMsgProtobuf packetMsg ) where TService : IExtensible, new()
+        internal void HandleNotificationMsg<[DynamicallyAccessedMembers( Trimming.ForProtobufNet )] TService>( PacketClientMsgProtobuf packetMsg ) where TService : IExtensible, new()
         {
             var callback = new ServiceMethodNotification<TService>( packetMsg );
             Client.PostCallback( callback );

@@ -5,6 +5,7 @@
 
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using ProtoBuf;
 using SteamKit2.Internal;
@@ -18,7 +19,7 @@ namespace SteamKit2.GC
     /// Represents a protobuf backed game coordinator message.
     /// </summary>
     /// <typeparam name="TBody">The body type of this message.</typeparam>
-    public sealed class ClientGCMsgProtobuf<TBody> : GCMsgBase<MsgGCHdrProtoBuf>
+    public sealed class ClientGCMsgProtobuf<[DynamicallyAccessedMembers( Trimming.ForProtobufNet )] TBody> : GCMsgBase<MsgGCHdrProtoBuf>
         where TBody : IExtensible, new()
     {
         /// <summary>

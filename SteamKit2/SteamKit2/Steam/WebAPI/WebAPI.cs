@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
@@ -235,7 +236,7 @@ namespace SteamKit2
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="ProtoException">An error occured when parsing the response from the WebAPI.</exception>
-            public async Task<T> CallProtobufAsync<T>( HttpMethod method, string func, int version = 1, Dictionary<string, object?>? args = null )
+            public async Task<T> CallProtobufAsync<[DynamicallyAccessedMembers( Trimming.ForProtobufNet )] T>( HttpMethod method, string func, int version = 1, Dictionary<string, object?>? args = null )
             {
                 var response = await CallAsyncInternal( method, func, version, args, "protobuf_raw" );
 
@@ -260,7 +261,7 @@ namespace SteamKit2
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="ProtoException">An error occured when parsing the response from the WebAPI.</exception>
-            public async Task<WebAPIResponse<TResponse>> CallProtobufAsync<TResponse, TRequest>( HttpMethod method, string func, TRequest request, int version = 1 )
+            public async Task<WebAPIResponse<TResponse>> CallProtobufAsync<[DynamicallyAccessedMembers( Trimming.ForProtobufNet )]TResponse, [DynamicallyAccessedMembers( Trimming.ForProtobufNet )] TRequest>( HttpMethod method, string func, TRequest request, int version = 1 )
                 where TResponse : IExtensible, new()
                 where TRequest : IExtensible, new()
             {
