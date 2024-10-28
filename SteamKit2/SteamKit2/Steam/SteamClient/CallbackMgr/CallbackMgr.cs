@@ -19,7 +19,7 @@ namespace SteamKit2
     /// In order to bind callbacks to functions, an instance of this class must be created for the
     /// <see cref="SteamClient"/> instance that will be posting callbacks.
     /// </summary>
-    public sealed class CallbackManager : ICallbackMgrInternals
+    public sealed class CallbackManager
     {
         readonly SteamClient client;
         readonly SteamUnifiedMessages steamUnifiedMessages;
@@ -124,10 +124,8 @@ namespace SteamKit2
 
             ArgumentNullException.ThrowIfNull( callbackFunc );
 
-#pragma warning disable CA2000 // Not implicitly disposed
             var callback = new Internal.Callback<TCallback>( callbackFunc, this, jobID );
-#pragma warning restore CA2000
-            return new Subscription( callback, this );
+            return callback;
         }
 
         /// <summary>
@@ -155,10 +153,8 @@ namespace SteamKit2
 
             steamUnifiedMessages.CreateService<TService>();
 
-#pragma warning disable CA2000 // Not implicitly disposed
             var callback = new Callback<SteamUnifiedMessages.ServiceMethodNotification<TNotification>>( callbackFunc, this, JobID.Invalid );
-#pragma warning restore CA2000
-            return new Subscription( callback, this );
+            return callback;
         }
 
         /// <summary>
@@ -175,16 +171,14 @@ namespace SteamKit2
 
             steamUnifiedMessages.CreateService<TService>();
 
-#pragma warning disable CA2000 // Not implicitly disposed
             var callback = new Callback<SteamUnifiedMessages.ServiceMethodResponse<TResponse>>( callbackFunc, this, JobID.Invalid );
-#pragma warning restore CA2000
-            return new Subscription( callback, this );
+            return callback;
         }
 
-        void ICallbackMgrInternals.Register( CallbackBase call )
+        internal void Register( CallbackBase call )
             => ImmutableInterlocked.Update( ref registeredCallbacks, static ( list, item ) => list.Add( item ), call );
 
-        void ICallbackMgrInternals.Unregister( CallbackBase call )
+        internal void Unregister( CallbackBase call )
             => ImmutableInterlocked.Update( ref registeredCallbacks, static ( list, item ) => list.Remove( item ), call );
 
         void Handle( CallbackMsg call )
@@ -198,28 +192,6 @@ namespace SteamKit2
                 if ( callback.CallbackType.IsAssignableFrom( type ) )
                 {
                     callback.Run( call );
-                }
-            }
-        }
-
-        sealed class Subscription : IDisposable
-        {
-            public Subscription( CallbackBase call, ICallbackMgrInternals manager )
-            {
-                this.manager = manager;
-                this.call = call;
-            }
-
-            ICallbackMgrInternals? manager;
-            CallbackBase? call;
-
-            void IDisposable.Dispose()
-            {
-                if ( call != null && manager != null )
-                {
-                    manager.Unregister( call );
-                    call = null;
-                    manager = null;
                 }
             }
         }

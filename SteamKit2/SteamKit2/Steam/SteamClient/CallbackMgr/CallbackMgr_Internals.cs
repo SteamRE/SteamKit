@@ -19,45 +19,26 @@ namespace SteamKit2.Internal
         internal abstract void Run( object callback );
     }
 
-    interface ICallbackMgrInternals
-    {
-        void Register( CallbackBase callback );
-        void Unregister( CallbackBase callback );
-    }
-        
-    sealed class Callback<TCall> : Internal.CallbackBase, IDisposable
+    sealed class Callback<TCall> : CallbackBase, IDisposable
         where TCall : CallbackMsg
     {
-        ICallbackMgrInternals? mgr;
-            
+        CallbackManager? mgr;
+
         public JobID JobID { get; set; }
-            
+
         public Action<TCall> OnRun { get; set; }
 
-        internal override Type CallbackType { get { return typeof( TCall ); } }
-            
-        public Callback(Action<TCall> func, ICallbackMgrInternals? mgr = null)
-            : this ( func, mgr, JobID.Invalid )
-        {
-        }
+        internal override Type CallbackType => typeof( TCall );
 
-        public Callback(Action<TCall> func, ICallbackMgrInternals? mgr, JobID jobID)
+        public Callback( Action<TCall> func, CallbackManager mgr, JobID jobID )
         {
             this.JobID = jobID;
             this.OnRun = func;
-
-            AttachTo(mgr);
-        }
-            
-        void AttachTo( ICallbackMgrInternals? mgr )
-        {
-            if ( mgr == null )
-                return;
-
             this.mgr = mgr;
+
             mgr.Register( this );
         }
-            
+
         ~Callback()
         {
             Dispose();
@@ -66,17 +47,17 @@ namespace SteamKit2.Internal
         public void Dispose()
         {
             mgr?.Unregister( this );
+            mgr = null;
 
             System.GC.SuppressFinalize( this );
         }
 
-
         internal override void Run( object callback )
         {
             var cb = callback as TCall;
-            if (cb != null && (cb.JobID == JobID || JobID == JobID.Invalid) && OnRun != null)
+            if ( cb != null && ( cb.JobID == JobID || JobID == JobID.Invalid ) && OnRun != null )
             {
-                OnRun(cb);
+                OnRun( cb );
             }
         }
     }
