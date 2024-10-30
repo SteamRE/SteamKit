@@ -16,7 +16,7 @@ namespace SteamKit2.Internal
     abstract class CallbackBase
     {
         internal abstract Type CallbackType { get; }
-        internal abstract void Run( object callback );
+        internal abstract void Run( CallbackMsg callback );
     }
 
     sealed class Callback<TCall> : CallbackBase, IDisposable
@@ -52,7 +52,7 @@ namespace SteamKit2.Internal
             System.GC.SuppressFinalize( this );
         }
 
-        internal override void Run( object callback )
+        internal override void Run( CallbackMsg callback )
         {
             var cb = callback as TCall;
             if ( cb != null && ( cb.JobID == JobID || JobID == JobID.Invalid ) && OnRun != null )
