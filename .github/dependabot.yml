@@ -3,19 +3,19 @@ updates:
 - package-ecosystem: nuget
   directory: "/SteamKit2"
   schedule:
-    interval: daily
+    interval: weekly
   open-pull-requests-limit: 10
 
 - package-ecosystem: nuget
   directory: "/Resources/ProtobufGen"
   schedule:
-    interval: daily
+    interval: weekly
   open-pull-requests-limit: 10
 
 - package-ecosystem: nuget
   directory: "/Resources/ProtobufDumper"
   schedule:
-    interval: daily
+    interval: weekly
   open-pull-requests-limit: 10
 
 - package-ecosystem: "github-actions"
