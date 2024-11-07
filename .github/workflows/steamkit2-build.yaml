@@ -8,7 +8,7 @@ on:
 
 jobs:
   steamkit2:
-    name: SteamKit2 on ${{ matrix.os }} - ${{ matrix.configuration }} (SDK ${{ matrix.sdk }})
+    name: SteamKit on ${{ matrix.os }} - ${{ matrix.configuration }} (SDK ${{ matrix.sdk }})
 
     strategy:
       matrix:
@@ -29,7 +29,7 @@ jobs:
       with:
         dotnet-version: ${{ matrix.sdk }}
 
-    - name: Build SteamKit2
+    - name: Build SteamKit
       run: dotnet build --configuration ${{ matrix.configuration }} SteamKit2/SteamKit2/SteamKit2.csproj
 
     - name: Build SteamLanguageParser
