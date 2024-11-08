@@ -119,6 +119,33 @@ namespace Tests
             Assert.Equal( "destination", ex.ParamName );
         }
 
+        [Theory]
+        [InlineData( "10.0.0.1", true )]       // Private IPv4 (10.0.0.0/8)
+        [InlineData( "172.16.0.1", true )]     // Private IPv4 (172.16.0.0/12)
+        [InlineData( "192.168.0.1", true )]    // Private IPv4 (192.168.0.0/16)
+        [InlineData( "8.8.8.8", false )]       // Public IPv4
+        [InlineData( "127.0.0.1", true )]      // Loopback IPv4
+        public void IsPrivateAddress_IPv4Tests( string ipAddress, bool expected )
+        {
+            IPAddress address = IPAddress.Parse( ipAddress );
+            bool result = Client.IsPrivateAddress( address );
+
+            Assert.Equal( expected, result );
+        }
+
+        [Theory]
+        [InlineData( "fc00::1", true )]         // Private IPv6 (Unique Local Address)
+        [InlineData( "fe80::1", true )]         // Link-local IPv6
+        [InlineData( "2001:db8::1", false )]    // Public IPv6
+        [InlineData( "::1", true )]             // Loopback IPv6
+        public void IsPrivateAddress_IPv6Tests( string ipAddress, bool expected )
+        {
+            IPAddress address = IPAddress.Parse( ipAddress );
+            bool result = Client.IsPrivateAddress( address );
+
+            Assert.Equal( expected, result );
+        }
+
         sealed class TeapotHttpMessageHandler : HttpMessageHandler
         {
             protected override Task<HttpResponseMessage> SendAsync( HttpRequestMessage request, CancellationToken cancellationToken )

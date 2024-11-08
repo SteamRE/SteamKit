@@ -10,14 +10,13 @@ using System.IO.Compression;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using SteamKit2.Steam.CDN;
 
 namespace SteamKit2.CDN
 {
     /// <summary>
     /// The <see cref="Client"/> class is used for downloading game content from the Steam servers.
     /// </summary>
-    public sealed class Client : IDisposable
+    public partial class Client : IDisposable
     {
         HttpClient httpClient;
 
@@ -29,9 +28,6 @@ namespace SteamKit2.CDN
         /// Default timeout to use when reading the response body
         /// </summary>
         public static TimeSpan ResponseBodyTimeout { get; set; } = TimeSpan.FromSeconds( 60 );
-
-        private static bool CheckedForLancacheServer { get; set; }
-        private static bool LancacheDetected { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Client"/> class.
@@ -230,23 +226,18 @@ namespace SteamKit2.CDN
                 }
             }
 
-            if ( !CheckedForLancacheServer )
-            {
-                LancacheDetected = LancacheDetector.DetectLancacheServer();
-                CheckedForLancacheServer = true;
-            }
-
-
             var chunkID = Utils.EncodeHexString( chunk.ChunkID );
             var url = $"depot/{depotId}/chunk/{chunkID}";
 
-            var builtUrl = BuildCommand( server, url, cdnAuthToken, proxyServer );
-            using var request = new HttpRequestMessage( HttpMethod.Get, builtUrl );
-            if ( LancacheDetected )
+            HttpRequestMessage request;
+            if ( UseLancacheServer )
             {
-                request.Headers.Host = server.Host;
-                // User agent must match the Steam client in order for Lancache to correctly identify and cache Valve's CDN content
-                request.Headers.Add( "User-Agent", "Valve/Steam HTTP Client 1.0" );
+                request = BuildLancacheRequest( server, url, cdnAuthToken );
+            }
+            else
+            {
+                var builtUrl = BuildCommand( server, url, cdnAuthToken, proxyServer );
+                request = new HttpRequestMessage( HttpMethod.Get, builtUrl );
             }
 
             using var cts = new CancellationTokenSource();
@@ -330,24 +321,14 @@ namespace SteamKit2.CDN
                 DebugLog.WriteLine( nameof( CDN ), $"Failed to download a depot chunk {request.RequestUri}: {ex.Message}" );
                 throw;
             }
+            finally
+            {
+                request.Dispose();
+            }
         }
 
         static Uri BuildCommand( Server server, string command, string? query, Server? proxyServer )
         {
-            // If a Lancache instance is detected in Steam it will take priority over all other available servers
-            if ( LancacheDetected )
-            {
-                var builder = new UriBuilder()
-                {
-                    Scheme = "http",
-                    Host = "lancache.steamcontent.com",
-                    Port = 80,
-                    Path = command,
-                    Query = query ?? string.Empty
-                };
-                return builder.Uri;
-            }
-
             var uriBuilder = new UriBuilder
             {
                 Scheme = server.Protocol == Server.ConnectionProtocol.HTTP ? "http" : "https",
