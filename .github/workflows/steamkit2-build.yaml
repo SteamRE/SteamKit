@@ -8,12 +8,11 @@ on:
 
 jobs:
   steamkit2:
-    name: SteamKit on ${{ matrix.os }} - ${{ matrix.configuration }} (SDK ${{ matrix.sdk }})
+    name: SteamKit on ${{ matrix.os }} - ${{ matrix.configuration }}
 
     strategy:
       matrix:
         os: [ windows-latest, macos-latest, macos-14, ubuntu-latest ]
-        sdk: [ 8.0.x ]
         configuration: [ Debug, Release ]
       fail-fast: false
 
@@ -26,8 +25,6 @@ jobs:
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: ${{ matrix.sdk }}
 
     - name: Build SteamKit
       run: dotnet build --configuration ${{ matrix.configuration }} SteamKit2/SteamKit2/SteamKit2.csproj
@@ -81,8 +78,6 @@ jobs:
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
 
     - name: Create NuGet Package
       run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
@@ -105,8 +100,6 @@ jobs:
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
 
     - name: Publish NetHookAnalyzer2
       run: dotnet publish --configuration Release --runtime win-x64 --self-contained Resources/NetHookAnalyzer2/NetHookAnalyzer2/NetHookAnalyzer2.csproj /p:PublishSingleFile=True
@@ -178,8 +171,6 @@ jobs:
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
 
     - name: Create NuGet Package
       run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj

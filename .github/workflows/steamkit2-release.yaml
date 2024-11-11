@@ -21,8 +21,6 @@ jobs:
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
 
     - name: Create NuGet Package
       run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj /p:Version=${{ github.event.release.tag_name }}
