@@ -23,11 +23,7 @@ namespace SteamKit2.CDN
 
         /// <summary>
         /// Attempts to automatically resolve a Lancache on the local network.  If detected, SteamKit will route all downloads through the cache
-        /// rather than through Steam's CDN.
-        ///
-        /// Will try to detect the Lancache through the poisoned DNS entries, however if that is not possible it will then check
-        /// 'localhost' to see if the Lancache is available locally.  If the server is not available on 'localhost', then 172.17.0.1 will be checked to see if
-        /// the prefill is running from a docker container.
+        /// rather than through Steam's CDN.  Will try to detect the Lancache through the poisoned DNS entry for lancache.steamcontent.com
         ///
         /// This is a modified version from the original source : https://github.com/tpill90/lancache-prefill-common/blob/main/dotnet/LancacheIpResolver.cs
         /// </summary>
