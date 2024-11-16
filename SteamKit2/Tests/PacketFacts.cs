@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if DEBUG
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace Tests
 
                 var packetMsg = CMClient.GetPacketMsg( data, steamClient );
                 Assert.NotNull( packetMsg );
-                Assert.IsAssignableFrom<PacketClientMsgProtobuf>( packetMsg );
+                Assert.IsType<PacketClientMsgProtobuf>( packetMsg, exactMatch: false );
 
                 Assert.Null( steamClient.GetCallback() ); // There must be no callbacks queued
 
@@ -79,3 +80,4 @@ namespace Tests
     }
 }
 #nullable disable
+#endif
