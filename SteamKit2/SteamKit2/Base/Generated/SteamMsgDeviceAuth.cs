@@ -914,37 +914,37 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetOwnAuthorizedDevices":
-                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_GetOwnAuthorizedDevices_Response>( packetMsg );
+                    PostResponseMsg<CDeviceAuth_GetOwnAuthorizedDevices_Response>( packetMsg );
                     break;
                 case "AcceptAuthorizationRequest":
-                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_AcceptAuthorizationRequest_Response>( packetMsg );
+                    PostResponseMsg<CDeviceAuth_AcceptAuthorizationRequest_Response>( packetMsg );
                     break;
                 case "AuthorizeRemoteDevice":
-                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_AuthorizeRemoteDevice_Response>( packetMsg );
+                    PostResponseMsg<CDeviceAuth_AuthorizeRemoteDevice_Response>( packetMsg );
                     break;
                 case "DeauthorizeRemoteDevice":
-                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_DeauthorizeRemoteDevice_Response>( packetMsg );
+                    PostResponseMsg<CDeviceAuth_DeauthorizeRemoteDevice_Response>( packetMsg );
                     break;
                 case "GetUsedAuthorizedDevices":
-                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_GetUsedAuthorizedDevices_Response>( packetMsg );
+                    PostResponseMsg<CDeviceAuth_GetUsedAuthorizedDevices_Response>( packetMsg );
                     break;
                 case "GetAuthorizedBorrowers":
-                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_GetAuthorizedBorrowers_Response>( packetMsg );
+                    PostResponseMsg<CDeviceAuth_GetAuthorizedBorrowers_Response>( packetMsg );
                     break;
                 case "AddAuthorizedBorrowers":
-                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_AddAuthorizedBorrowers_Response>( packetMsg );
+                    PostResponseMsg<CDeviceAuth_AddAuthorizedBorrowers_Response>( packetMsg );
                     break;
                 case "RemoveAuthorizedBorrowers":
-                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_RemoveAuthorizedBorrowers_Response>( packetMsg );
+                    PostResponseMsg<CDeviceAuth_RemoveAuthorizedBorrowers_Response>( packetMsg );
                     break;
                 case "GetAuthorizedAsBorrower":
-                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_GetAuthorizedAsBorrower_Response>( packetMsg );
+                    PostResponseMsg<CDeviceAuth_GetAuthorizedAsBorrower_Response>( packetMsg );
                     break;
                 case "GetExcludedGamesInLibrary":
-                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_GetExcludedGamesInLibrary_Response>( packetMsg );
+                    PostResponseMsg<CDeviceAuth_GetExcludedGamesInLibrary_Response>( packetMsg );
                     break;
                 case "GetBorrowerPlayHistory":
-                    UnifiedMessages.HandleResponseMsg<CDeviceAuth_GetBorrowerPlayHistory_Response>( packetMsg );
+                    PostResponseMsg<CDeviceAuth_GetBorrowerPlayHistory_Response>( packetMsg );
                     break;
             }
         }

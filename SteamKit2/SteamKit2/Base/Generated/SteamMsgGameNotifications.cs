@@ -647,22 +647,22 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "UserCreateSession":
-                    UnifiedMessages.HandleResponseMsg<CGameNotifications_CreateSession_Response>( packetMsg );
+                    PostResponseMsg<CGameNotifications_CreateSession_Response>( packetMsg );
                     break;
                 case "UserDeleteSession":
-                    UnifiedMessages.HandleResponseMsg<CGameNotifications_DeleteSession_Response>( packetMsg );
+                    PostResponseMsg<CGameNotifications_DeleteSession_Response>( packetMsg );
                     break;
                 case "UserUpdateSession":
-                    UnifiedMessages.HandleResponseMsg<CGameNotifications_UpdateSession_Response>( packetMsg );
+                    PostResponseMsg<CGameNotifications_UpdateSession_Response>( packetMsg );
                     break;
                 case "EnumerateSessions":
-                    UnifiedMessages.HandleResponseMsg<CGameNotifications_EnumerateSessions_Response>( packetMsg );
+                    PostResponseMsg<CGameNotifications_EnumerateSessions_Response>( packetMsg );
                     break;
                 case "GetSessionDetails":
-                    UnifiedMessages.HandleResponseMsg<CGameNotifications_GetSessionDetails_Response>( packetMsg );
+                    PostResponseMsg<CGameNotifications_GetSessionDetails_Response>( packetMsg );
                     break;
                 case "UpdateNotificationSettings":
-                    UnifiedMessages.HandleResponseMsg<CGameNotifications_UpdateNotificationSettings_Response>( packetMsg );
+                    PostResponseMsg<CGameNotifications_UpdateNotificationSettings_Response>( packetMsg );
                     break;
             }
         }
@@ -695,10 +695,10 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "OnNotificationsRequested":
-                    UnifiedMessages.HandleNotificationMsg<CGameNotifications_OnNotificationsRequested_Notification>( packetMsg );
+                    PostNotificationMsg<CGameNotifications_OnNotificationsRequested_Notification>( packetMsg );
                     break;
                 case "OnUserStatusChanged":
-                    UnifiedMessages.HandleNotificationMsg<CGameNotifications_OnUserStatusChanged_Notification>( packetMsg );
+                    PostNotificationMsg<CGameNotifications_OnUserStatusChanged_Notification>( packetMsg );
                     break;
             }
         }

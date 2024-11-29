@@ -2213,82 +2213,82 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "CreateFamilyGroup":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_CreateFamilyGroup_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_CreateFamilyGroup_Response>( packetMsg );
                     break;
                 case "GetFamilyGroup":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetFamilyGroup_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_GetFamilyGroup_Response>( packetMsg );
                     break;
                 case "GetFamilyGroupForUser":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetFamilyGroupForUser_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_GetFamilyGroupForUser_Response>( packetMsg );
                     break;
                 case "ModifyFamilyGroupDetails":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_ModifyFamilyGroupDetails_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_ModifyFamilyGroupDetails_Response>( packetMsg );
                     break;
                 case "InviteToFamilyGroup":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_InviteToFamilyGroup_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_InviteToFamilyGroup_Response>( packetMsg );
                     break;
                 case "ConfirmInviteToFamilyGroup":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_ConfirmInviteToFamilyGroup_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_ConfirmInviteToFamilyGroup_Response>( packetMsg );
                     break;
                 case "ResendInvitationToFamilyGroup":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_ResendInvitationToFamilyGroup_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_ResendInvitationToFamilyGroup_Response>( packetMsg );
                     break;
                 case "JoinFamilyGroup":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_JoinFamilyGroup_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_JoinFamilyGroup_Response>( packetMsg );
                     break;
                 case "ConfirmJoinFamilyGroup":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_ConfirmJoinFamilyGroup_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_ConfirmJoinFamilyGroup_Response>( packetMsg );
                     break;
                 case "RemoveFromFamilyGroup":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_RemoveFromFamilyGroup_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_RemoveFromFamilyGroup_Response>( packetMsg );
                     break;
                 case "CancelFamilyGroupInvite":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_CancelFamilyGroupInvite_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_CancelFamilyGroupInvite_Response>( packetMsg );
                     break;
                 case "GetUsersSharingDevice":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetUsersSharingDevice_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_GetUsersSharingDevice_Response>( packetMsg );
                     break;
                 case "DeleteFamilyGroup":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_DeleteFamilyGroup_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_DeleteFamilyGroup_Response>( packetMsg );
                     break;
                 case "UndeleteFamilyGroup":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_UndeleteFamilyGroup_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_UndeleteFamilyGroup_Response>( packetMsg );
                     break;
                 case "GetPlaytimeSummary":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetPlaytimeSummary_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_GetPlaytimeSummary_Response>( packetMsg );
                     break;
                 case "RequestPurchase":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_RequestPurchase_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_RequestPurchase_Response>( packetMsg );
                     break;
                 case "GetPurchaseRequests":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetPurchaseRequests_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_GetPurchaseRequests_Response>( packetMsg );
                     break;
                 case "RespondToRequestedPurchase":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_RespondToRequestedPurchase_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_RespondToRequestedPurchase_Response>( packetMsg );
                     break;
                 case "GetChangeLog":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetChangeLog_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_GetChangeLog_Response>( packetMsg );
                     break;
                 case "SetFamilyCooldownOverrides":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_SetFamilyCooldownOverrides_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_SetFamilyCooldownOverrides_Response>( packetMsg );
                     break;
                 case "GetSharedLibraryApps":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetSharedLibraryApps_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_GetSharedLibraryApps_Response>( packetMsg );
                     break;
                 case "SetPreferredLender":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_SetPreferredLender_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_SetPreferredLender_Response>( packetMsg );
                     break;
                 case "GetPreferredLenders":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetPreferredLenders_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_GetPreferredLenders_Response>( packetMsg );
                     break;
                 case "ForceAcceptInvite":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_ForceAcceptInvite_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_ForceAcceptInvite_Response>( packetMsg );
                     break;
                 case "GetInviteCheckResults":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_GetInviteCheckResults_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_GetInviteCheckResults_Response>( packetMsg );
                     break;
                 case "ClearCooldownSkip":
-                    UnifiedMessages.HandleResponseMsg<CFamilyGroups_ClearCooldownSkip_Response>( packetMsg );
+                    PostResponseMsg<CFamilyGroups_ClearCooldownSkip_Response>( packetMsg );
                     break;
             }
         }
@@ -2326,13 +2326,13 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "NotifyRunningApps":
-                    UnifiedMessages.HandleNotificationMsg<CFamilyGroupsClient_NotifyRunningApps_Notification>( packetMsg );
+                    PostNotificationMsg<CFamilyGroupsClient_NotifyRunningApps_Notification>( packetMsg );
                     break;
                 case "NotifyInviteStatus":
-                    UnifiedMessages.HandleNotificationMsg<CFamilyGroupsClient_InviteStatus_Notification>( packetMsg );
+                    PostNotificationMsg<CFamilyGroupsClient_InviteStatus_Notification>( packetMsg );
                     break;
                 case "NotifyGroupChanged":
-                    UnifiedMessages.HandleNotificationMsg<CFamilyGroupsClient_GroupChanged_Notification>( packetMsg );
+                    PostNotificationMsg<CFamilyGroupsClient_GroupChanged_Notification>( packetMsg );
                     break;
             }
         }

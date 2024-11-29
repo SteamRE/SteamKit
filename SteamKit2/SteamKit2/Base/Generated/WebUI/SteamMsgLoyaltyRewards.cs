@@ -1282,58 +1282,58 @@ namespace SteamKit2.WebUI.Internal
             switch ( methodName )
             {
                 case "AddReaction":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_AddReaction_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_AddReaction_Response>( packetMsg );
                     break;
                 case "BatchedQueryRewardItems":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_BatchedQueryRewardItems_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_BatchedQueryRewardItems_Response>( packetMsg );
                     break;
                 case "GetActivePurchaseBonuses":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetActivePurchaseBonuses_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_GetActivePurchaseBonuses_Response>( packetMsg );
                     break;
                 case "GetEligibleApps":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetEligibleApps_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_GetEligibleApps_Response>( packetMsg );
                     break;
                 case "GetEquippedProfileItems":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetEquippedProfileItems_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_GetEquippedProfileItems_Response>( packetMsg );
                     break;
                 case "GetPointsForSpend":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetPointsForSpend_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_GetPointsForSpend_Response>( packetMsg );
                     break;
                 case "GetProfileCustomizationsConfig":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetProfileCustomizationsConfig_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_GetProfileCustomizationsConfig_Response>( packetMsg );
                     break;
                 case "GetReactionConfig":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetReactionConfig_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_GetReactionConfig_Response>( packetMsg );
                     break;
                 case "GetReactions":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetReactions_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_GetReactions_Response>( packetMsg );
                     break;
                 case "GetReactionsSummaryForUser":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetReactionsSummaryForUser_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_GetReactionsSummaryForUser_Response>( packetMsg );
                     break;
                 case "GetSummary":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_GetSummary_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_GetSummary_Response>( packetMsg );
                     break;
                 case "QueryRewardItems":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_QueryRewardItems_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_QueryRewardItems_Response>( packetMsg );
                     break;
                 case "RedeemPoints":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_RedeemPoints_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_RedeemPoints_Response>( packetMsg );
                     break;
                 case "RedeemPointsForBadgeLevel":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_RedeemPoints_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_RedeemPoints_Response>( packetMsg );
                     break;
                 case "RedeemPointsForProfileCustomization":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_RedeemPointsForProfileCustomization_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_RedeemPointsForProfileCustomization_Response>( packetMsg );
                     break;
                 case "RedeemPointsForProfileCustomizationUpgrade":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_RedeemPointsForProfileCustomizationUpgrade_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_RedeemPointsForProfileCustomizationUpgrade_Response>( packetMsg );
                     break;
                 case "RedeemPointsToUpgradeItem":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_RedeemPoints_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_RedeemPoints_Response>( packetMsg );
                     break;
                 case "RegisterForSteamDeckRewards":
-                    UnifiedMessages.HandleResponseMsg<CLoyaltyRewards_RegisterForSteamDeckRewards_Response>( packetMsg );
+                    PostResponseMsg<CLoyaltyRewards_RegisterForSteamDeckRewards_Response>( packetMsg );
                     break;
             }
         }

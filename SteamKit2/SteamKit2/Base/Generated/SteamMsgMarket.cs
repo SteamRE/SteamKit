@@ -122,7 +122,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "IsMarketplaceAllowed":
-                    UnifiedMessages.HandleResponseMsg<CEconMarket_IsMarketplaceAllowed_Response>( packetMsg );
+                    PostResponseMsg<CEconMarket_IsMarketplaceAllowed_Response>( packetMsg );
                     break;
             }
         }

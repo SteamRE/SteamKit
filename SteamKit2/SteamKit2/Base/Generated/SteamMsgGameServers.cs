@@ -763,16 +763,16 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetServerList":
-                    UnifiedMessages.HandleResponseMsg<CGameServers_GetServerList_Response>( packetMsg );
+                    PostResponseMsg<CGameServers_GetServerList_Response>( packetMsg );
                     break;
                 case "GetServerSteamIDsByIP":
-                    UnifiedMessages.HandleResponseMsg<CGameServers_IPsWithSteamIDs_Response>( packetMsg );
+                    PostResponseMsg<CGameServers_IPsWithSteamIDs_Response>( packetMsg );
                     break;
                 case "GetServerIPsBySteamID":
-                    UnifiedMessages.HandleResponseMsg<CGameServers_IPsWithSteamIDs_Response>( packetMsg );
+                    PostResponseMsg<CGameServers_IPsWithSteamIDs_Response>( packetMsg );
                     break;
                 case "QueryByFakeIP":
-                    UnifiedMessages.HandleResponseMsg<CGameServers_GameServerQuery_Response>( packetMsg );
+                    PostResponseMsg<CGameServers_GameServerQuery_Response>( packetMsg );
                     break;
             }
         }
@@ -796,7 +796,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "QueryServerData":
-                    UnifiedMessages.HandleResponseMsg<GameServerClient_QueryServerData_Response>( packetMsg );
+                    PostResponseMsg<GameServerClient_QueryServerData_Response>( packetMsg );
                     break;
             }
         }

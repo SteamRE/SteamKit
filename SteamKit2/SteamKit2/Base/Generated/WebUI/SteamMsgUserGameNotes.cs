@@ -447,16 +447,16 @@ namespace SteamKit2.WebUI.Internal
             switch ( methodName )
             {
                 case "DeleteNote":
-                    UnifiedMessages.HandleResponseMsg<CUserGameNotes_DeleteNote_Response>( packetMsg );
+                    PostResponseMsg<CUserGameNotes_DeleteNote_Response>( packetMsg );
                     break;
                 case "GetGamesWithNotes":
-                    UnifiedMessages.HandleResponseMsg<CUserGameNotes_GetGamesWithNotes_Response>( packetMsg );
+                    PostResponseMsg<CUserGameNotes_GetGamesWithNotes_Response>( packetMsg );
                     break;
                 case "GetNotesForGame":
-                    UnifiedMessages.HandleResponseMsg<CUserGameNotes_GetNotesForGame_Response>( packetMsg );
+                    PostResponseMsg<CUserGameNotes_GetNotesForGame_Response>( packetMsg );
                     break;
                 case "SaveNote":
-                    UnifiedMessages.HandleResponseMsg<CUserGameNotes_SaveNote_Response>( packetMsg );
+                    PostResponseMsg<CUserGameNotes_SaveNote_Response>( packetMsg );
                     break;
             }
         }

@@ -1491,46 +1491,46 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "ClientAppInterfaceStatsReport":
-                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_AppInterfaceStats_Notification>( packetMsg );
+                    PostNotificationMsg<CClientMetrics_AppInterfaceStats_Notification>( packetMsg );
                     break;
                 case "ClientIPv6ConnectivityReport":
-                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_IPv6Connectivity_Notification>( packetMsg );
+                    PostNotificationMsg<CClientMetrics_IPv6Connectivity_Notification>( packetMsg );
                     break;
                 case "SteamPipeWorkStatsReport":
-                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_SteamPipeWorkStats_Notification>( packetMsg );
+                    PostNotificationMsg<CClientMetrics_SteamPipeWorkStats_Notification>( packetMsg );
                     break;
                 case "ReportReactUsage":
-                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_ReportReactUsage_Notification>( packetMsg );
+                    PostNotificationMsg<CClientMetrics_ReportReactUsage_Notification>( packetMsg );
                     break;
                 case "ReportClientError":
-                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_ReportClientError_Notification>( packetMsg );
+                    PostNotificationMsg<CClientMetrics_ReportClientError_Notification>( packetMsg );
                     break;
                 case "ClientBootstrapReport":
-                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_ClientBootstrap_Notification>( packetMsg );
+                    PostNotificationMsg<CClientMetrics_ClientBootstrap_Notification>( packetMsg );
                     break;
                 case "ClientDownloadRatesReport":
-                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_DownloadRates_Notification>( packetMsg );
+                    PostNotificationMsg<CClientMetrics_DownloadRates_Notification>( packetMsg );
                     break;
                 case "ClientContentValidationReport":
-                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_ContentValidation_Notification>( packetMsg );
+                    PostNotificationMsg<CClientMetrics_ContentValidation_Notification>( packetMsg );
                     break;
                 case "ClientCloudAppSyncStats":
-                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_CloudAppSyncStats_Notification>( packetMsg );
+                    PostNotificationMsg<CClientMetrics_CloudAppSyncStats_Notification>( packetMsg );
                     break;
                 case "ClientDownloadResponseCodeCounts":
-                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_ContentDownloadResponse_Counts_Notification>( packetMsg );
+                    PostNotificationMsg<CClientMetrics_ContentDownloadResponse_Counts_Notification>( packetMsg );
                     break;
                 case "ReportClientArgs":
-                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_ReportClientArgs_Notification>( packetMsg );
+                    PostNotificationMsg<CClientMetrics_ReportClientArgs_Notification>( packetMsg );
                     break;
                 case "ReportClipShare":
-                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_ClipShare_Notification>( packetMsg );
+                    PostNotificationMsg<CClientMetrics_ClipShare_Notification>( packetMsg );
                     break;
                 case "ReportClipRange":
-                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_ClipRange_Notification>( packetMsg );
+                    PostNotificationMsg<CClientMetrics_ClipRange_Notification>( packetMsg );
                     break;
                 case "ReportEndGameRecording":
-                    UnifiedMessages.HandleNotificationMsg<CClientMetrics_EndGameRecording_Notification>( packetMsg );
+                    PostNotificationMsg<CClientMetrics_EndGameRecording_Notification>( packetMsg );
                     break;
             }
         }

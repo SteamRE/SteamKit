@@ -233,7 +233,7 @@ namespace SteamKit2.WebUI.Internal
             switch ( methodName )
             {
                 case "GetActivity":
-                    UnifiedMessages.HandleResponseMsg<CUserGameActivity_GetActivity_Response>( packetMsg );
+                    PostResponseMsg<CUserGameActivity_GetActivity_Response>( packetMsg );
                     break;
             }
         }

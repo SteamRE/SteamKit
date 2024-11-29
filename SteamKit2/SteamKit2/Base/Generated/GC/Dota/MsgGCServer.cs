@@ -8105,37 +8105,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGCToServerSteamLearnAccessTokensChanged : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public CMsgSteamLearnAccessTokens access_tokens { get; set; }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGCToServerSteamLearnUseHTTP : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public bool use_http
-        {
-            get => __pbn__use_http.GetValueOrDefault();
-            set => __pbn__use_http = value;
-        }
-        public bool ShouldSerializeuse_http() => __pbn__use_http != null;
-        public void Resetuse_http() => __pbn__use_http = null;
-        private bool? __pbn__use_http;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgSteamLearnMatchInfo : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -8922,18 +8891,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgSteamLearnEarlyGameItemPurchases : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<int> item_ids { get; } = new global::System.Collections.Generic.List<int>();
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgSteamLearnEarlyGameItemPurchasesV2 : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -8945,18 +8902,6 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<int> other_item_ids { get; } = new global::System.Collections.Generic.List<int>();
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgSteamLearnLateGameItemPurchases : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<int> item_ids { get; } = new global::System.Collections.Generic.List<int>();
 
     }
 

@@ -307,10 +307,10 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "ClientGetVideoURL":
-                    UnifiedMessages.HandleResponseMsg<CVideo_ClientGetVideoURL_Response>( packetMsg );
+                    PostResponseMsg<CVideo_ClientGetVideoURL_Response>( packetMsg );
                     break;
                 case "GetVideoBookmarks":
-                    UnifiedMessages.HandleResponseMsg<CVideo_GetVideoBookmarks_Response>( packetMsg );
+                    PostResponseMsg<CVideo_GetVideoBookmarks_Response>( packetMsg );
                     break;
             }
         }
@@ -320,7 +320,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "SetVideoBookmark":
-                    UnifiedMessages.HandleNotificationMsg<CVideo_SetVideoBookmark_Notification>( packetMsg );
+                    PostNotificationMsg<CVideo_SetVideoBookmark_Notification>( packetMsg );
                     break;
             }
         }
@@ -344,7 +344,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "NotifyUnlockedH264":
-                    UnifiedMessages.HandleNotificationMsg<CVideo_UnlockedH264_Notification>( packetMsg );
+                    PostNotificationMsg<CVideo_UnlockedH264_Notification>( packetMsg );
                     break;
             }
         }
@@ -364,7 +364,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "ClientGetOPFSettings":
-                    UnifiedMessages.HandleResponseMsg<CFovasVideo_ClientGetOPFSettings_Response>( packetMsg );
+                    PostResponseMsg<CFovasVideo_ClientGetOPFSettings_Response>( packetMsg );
                     break;
             }
         }

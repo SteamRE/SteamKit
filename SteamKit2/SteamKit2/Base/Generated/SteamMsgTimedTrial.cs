@@ -207,13 +207,13 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetTimeRemaining":
-                    UnifiedMessages.HandleResponseMsg<CTimedTrial_GetTimeRemaining_Response>( packetMsg );
+                    PostResponseMsg<CTimedTrial_GetTimeRemaining_Response>( packetMsg );
                     break;
                 case "RecordPlaytime":
-                    UnifiedMessages.HandleResponseMsg<CTimedTrial_RecordPlaytime_Response>( packetMsg );
+                    PostResponseMsg<CTimedTrial_RecordPlaytime_Response>( packetMsg );
                     break;
                 case "ResetPlaytime":
-                    UnifiedMessages.HandleResponseMsg<CTimedTrial_ResetPlaytime_Response>( packetMsg );
+                    PostResponseMsg<CTimedTrial_ResetPlaytime_Response>( packetMsg );
                     break;
             }
         }

@@ -565,25 +565,25 @@ namespace SteamKit2.WebUI.Internal
             switch ( methodName )
             {
                 case "AddItemsToCart":
-                    UnifiedMessages.HandleResponseMsg<CAccountCart_AddItemsToCart_Response>( packetMsg );
+                    PostResponseMsg<CAccountCart_AddItemsToCart_Response>( packetMsg );
                     break;
                 case "DeleteCart":
-                    UnifiedMessages.HandleResponseMsg<CAccountCart_DeleteCart_Response>( packetMsg );
+                    PostResponseMsg<CAccountCart_DeleteCart_Response>( packetMsg );
                     break;
                 case "GetCart":
-                    UnifiedMessages.HandleResponseMsg<CAccountCart_GetCart_Response>( packetMsg );
+                    PostResponseMsg<CAccountCart_GetCart_Response>( packetMsg );
                     break;
                 case "GetRelevantCoupons":
-                    UnifiedMessages.HandleResponseMsg<CAccountCart_GetRelevantCoupons_Response>( packetMsg );
+                    PostResponseMsg<CAccountCart_GetRelevantCoupons_Response>( packetMsg );
                     break;
                 case "MergeShoppingCartContents":
-                    UnifiedMessages.HandleResponseMsg<CAccountCart_MergeShoppingCartContents_Response>( packetMsg );
+                    PostResponseMsg<CAccountCart_MergeShoppingCartContents_Response>( packetMsg );
                     break;
                 case "ModifyLineItem":
-                    UnifiedMessages.HandleResponseMsg<CAccountCart_ModifyLineItem_Response>( packetMsg );
+                    PostResponseMsg<CAccountCart_ModifyLineItem_Response>( packetMsg );
                     break;
                 case "RemoveItemFromCart":
-                    UnifiedMessages.HandleResponseMsg<CAccountCart_RemoveItemFromCart_Response>( packetMsg );
+                    PostResponseMsg<CAccountCart_RemoveItemFromCart_Response>( packetMsg );
                     break;
             }
         }

@@ -547,7 +547,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "IncomingClient":
-                    UnifiedMessages.HandleResponseMsg<CSiteManagerClient_IncomingClient_Response>( packetMsg );
+                    PostResponseMsg<CSiteManagerClient_IncomingClient_Response>( packetMsg );
                     break;
             }
         }
@@ -557,10 +557,10 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "ClientSeatCheckoutNotification":
-                    UnifiedMessages.HandleNotificationMsg<CSiteLicense_ClientSeatCheckout_Notification>( packetMsg );
+                    PostNotificationMsg<CSiteLicense_ClientSeatCheckout_Notification>( packetMsg );
                     break;
                 case "TrackedPaymentsNotification":
-                    UnifiedMessages.HandleNotificationMsg<CSiteManagerClient_TrackedPayments_Notification>( packetMsg );
+                    PostNotificationMsg<CSiteManagerClient_TrackedPayments_Notification>( packetMsg );
                     break;
             }
         }
@@ -600,19 +600,19 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "InitiateAssociation":
-                    UnifiedMessages.HandleResponseMsg<CSiteLicense_InitiateAssociation_Response>( packetMsg );
+                    PostResponseMsg<CSiteLicense_InitiateAssociation_Response>( packetMsg );
                     break;
                 case "LCSAuthenticate":
-                    UnifiedMessages.HandleResponseMsg<CSiteLicense_LCSAuthenticate_Response>( packetMsg );
+                    PostResponseMsg<CSiteLicense_LCSAuthenticate_Response>( packetMsg );
                     break;
                 case "LCSAssociateUser":
-                    UnifiedMessages.HandleResponseMsg<CSiteLicense_LCSAssociateUser_Response>( packetMsg );
+                    PostResponseMsg<CSiteLicense_LCSAssociateUser_Response>( packetMsg );
                     break;
                 case "ClientSeatCheckout":
-                    UnifiedMessages.HandleResponseMsg<CSiteLicense_ClientSeatCheckout_Response>( packetMsg );
+                    PostResponseMsg<CSiteLicense_ClientSeatCheckout_Response>( packetMsg );
                     break;
                 case "ClientGetAvailableSeats":
-                    UnifiedMessages.HandleResponseMsg<CSiteLicense_ClientGetAvailableSeats_Response>( packetMsg );
+                    PostResponseMsg<CSiteLicense_ClientGetAvailableSeats_Response>( packetMsg );
                     break;
             }
         }

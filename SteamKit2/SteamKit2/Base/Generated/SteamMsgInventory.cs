@@ -995,52 +995,52 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetInventory":
-                    UnifiedMessages.HandleResponseMsg<CInventory_Response>( packetMsg );
+                    PostResponseMsg<CInventory_Response>( packetMsg );
                     break;
                 case "ExchangeItem":
-                    UnifiedMessages.HandleResponseMsg<CInventory_Response>( packetMsg );
+                    PostResponseMsg<CInventory_Response>( packetMsg );
                     break;
                 case "GetEligiblePromoItemDefIDs":
-                    UnifiedMessages.HandleResponseMsg<CInventory_GetEligiblePromoItemDefIDs_Response>( packetMsg );
+                    PostResponseMsg<CInventory_GetEligiblePromoItemDefIDs_Response>( packetMsg );
                     break;
                 case "AddPromoItem":
-                    UnifiedMessages.HandleResponseMsg<CInventory_Response>( packetMsg );
+                    PostResponseMsg<CInventory_Response>( packetMsg );
                     break;
                 case "SafeModifyItems":
-                    UnifiedMessages.HandleResponseMsg<CInventory_Response>( packetMsg );
+                    PostResponseMsg<CInventory_Response>( packetMsg );
                     break;
                 case "ConsumePlaytime":
-                    UnifiedMessages.HandleResponseMsg<CInventory_Response>( packetMsg );
+                    PostResponseMsg<CInventory_Response>( packetMsg );
                     break;
                 case "ConsumeItem":
-                    UnifiedMessages.HandleResponseMsg<CInventory_Response>( packetMsg );
+                    PostResponseMsg<CInventory_Response>( packetMsg );
                     break;
                 case "DevGenerateItem":
-                    UnifiedMessages.HandleResponseMsg<CInventory_Response>( packetMsg );
+                    PostResponseMsg<CInventory_Response>( packetMsg );
                     break;
                 case "DevSetNextDrop":
-                    UnifiedMessages.HandleResponseMsg<CInventory_Response>( packetMsg );
+                    PostResponseMsg<CInventory_Response>( packetMsg );
                     break;
                 case "SplitItemStack":
-                    UnifiedMessages.HandleResponseMsg<CInventory_Response>( packetMsg );
+                    PostResponseMsg<CInventory_Response>( packetMsg );
                     break;
                 case "CombineItemStacks":
-                    UnifiedMessages.HandleResponseMsg<CInventory_Response>( packetMsg );
+                    PostResponseMsg<CInventory_Response>( packetMsg );
                     break;
                 case "GetItemDefMeta":
-                    UnifiedMessages.HandleResponseMsg<CInventory_GetItemDefMeta_Response>( packetMsg );
+                    PostResponseMsg<CInventory_GetItemDefMeta_Response>( packetMsg );
                     break;
                 case "GetUserPurchaseInfo":
-                    UnifiedMessages.HandleResponseMsg<CInventory_GetUserPurchaseInfo_Response>( packetMsg );
+                    PostResponseMsg<CInventory_GetUserPurchaseInfo_Response>( packetMsg );
                     break;
                 case "PurchaseInit":
-                    UnifiedMessages.HandleResponseMsg<CInventory_PurchaseInit_Response>( packetMsg );
+                    PostResponseMsg<CInventory_PurchaseInit_Response>( packetMsg );
                     break;
                 case "PurchaseFinalize":
-                    UnifiedMessages.HandleResponseMsg<CInventory_Response>( packetMsg );
+                    PostResponseMsg<CInventory_Response>( packetMsg );
                     break;
                 case "InspectItem":
-                    UnifiedMessages.HandleResponseMsg<CInventory_Response>( packetMsg );
+                    PostResponseMsg<CInventory_Response>( packetMsg );
                     break;
             }
         }
@@ -1068,7 +1068,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "NotifyNewItems":
-                    UnifiedMessages.HandleNotificationMsg<CInventoryClient_NewItems_Notification>( packetMsg );
+                    PostNotificationMsg<CInventoryClient_NewItems_Notification>( packetMsg );
                     break;
             }
         }

@@ -287,16 +287,16 @@ namespace SteamKit2.WebUI.Internal
             switch ( methodName )
             {
                 case "GetCategories":
-                    UnifiedMessages.HandleResponseMsg<CFriendsList_GetCategories_Response>( packetMsg );
+                    PostResponseMsg<CFriendsList_GetCategories_Response>( packetMsg );
                     break;
                 case "GetFavorites":
-                    UnifiedMessages.HandleResponseMsg<CFriendsList_GetFavorites_Response>( packetMsg );
+                    PostResponseMsg<CFriendsList_GetFavorites_Response>( packetMsg );
                     break;
                 case "GetFriendsList":
-                    UnifiedMessages.HandleResponseMsg<CFriendsList_GetFriendsList_Response>( packetMsg );
+                    PostResponseMsg<CFriendsList_GetFriendsList_Response>( packetMsg );
                     break;
                 case "SetFavorites":
-                    UnifiedMessages.HandleResponseMsg<CFriendsList_SetFavorites_Response>( packetMsg );
+                    PostResponseMsg<CFriendsList_SetFavorites_Response>( packetMsg );
                     break;
             }
         }
@@ -324,7 +324,7 @@ namespace SteamKit2.WebUI.Internal
             switch ( methodName )
             {
                 case "FavoritesChanged":
-                    UnifiedMessages.HandleNotificationMsg<CFriendsList_FavoritesChanged_Notification>( packetMsg );
+                    PostNotificationMsg<CFriendsList_FavoritesChanged_Notification>( packetMsg );
                     break;
             }
         }

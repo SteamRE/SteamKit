@@ -74,7 +74,7 @@ namespace SteamKit2.Internal.Steamworks
             switch ( methodName )
             {
                 case "ImplicitGrantNoPrompt":
-                    UnifiedMessages.HandleResponseMsg<COAuthToken_ImplicitGrantNoPrompt_Response>( packetMsg );
+                    PostResponseMsg<COAuthToken_ImplicitGrantNoPrompt_Response>( packetMsg );
                     break;
             }
         }

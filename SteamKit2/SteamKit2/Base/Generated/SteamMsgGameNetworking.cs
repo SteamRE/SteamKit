@@ -111,7 +111,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "AllocateFakeIP":
-                    UnifiedMessages.HandleResponseMsg<CGameNetworking_AllocateFakeIP_Response>( packetMsg );
+                    PostResponseMsg<CGameNetworking_AllocateFakeIP_Response>( packetMsg );
                     break;
             }
         }
@@ -121,7 +121,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "NotifyReleaseFakeIP":
-                    UnifiedMessages.HandleNotificationMsg<CGameNetworking_ReleaseFakeIP_Notification>( packetMsg );
+                    PostNotificationMsg<CGameNetworking_ReleaseFakeIP_Notification>( packetMsg );
                     break;
             }
         }

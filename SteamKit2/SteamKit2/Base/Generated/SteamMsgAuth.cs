@@ -2188,46 +2188,46 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetPasswordRSAPublicKey":
-                    UnifiedMessages.HandleResponseMsg<CAuthentication_GetPasswordRSAPublicKey_Response>( packetMsg );
+                    PostResponseMsg<CAuthentication_GetPasswordRSAPublicKey_Response>( packetMsg );
                     break;
                 case "BeginAuthSessionViaQR":
-                    UnifiedMessages.HandleResponseMsg<CAuthentication_BeginAuthSessionViaQR_Response>( packetMsg );
+                    PostResponseMsg<CAuthentication_BeginAuthSessionViaQR_Response>( packetMsg );
                     break;
                 case "BeginAuthSessionViaCredentials":
-                    UnifiedMessages.HandleResponseMsg<CAuthentication_BeginAuthSessionViaCredentials_Response>( packetMsg );
+                    PostResponseMsg<CAuthentication_BeginAuthSessionViaCredentials_Response>( packetMsg );
                     break;
                 case "PollAuthSessionStatus":
-                    UnifiedMessages.HandleResponseMsg<CAuthentication_PollAuthSessionStatus_Response>( packetMsg );
+                    PostResponseMsg<CAuthentication_PollAuthSessionStatus_Response>( packetMsg );
                     break;
                 case "GetAuthSessionInfo":
-                    UnifiedMessages.HandleResponseMsg<CAuthentication_GetAuthSessionInfo_Response>( packetMsg );
+                    PostResponseMsg<CAuthentication_GetAuthSessionInfo_Response>( packetMsg );
                     break;
                 case "GetAuthSessionRiskInfo":
-                    UnifiedMessages.HandleResponseMsg<CAuthentication_GetAuthSessionRiskInfo_Response>( packetMsg );
+                    PostResponseMsg<CAuthentication_GetAuthSessionRiskInfo_Response>( packetMsg );
                     break;
                 case "UpdateAuthSessionWithMobileConfirmation":
-                    UnifiedMessages.HandleResponseMsg<CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response>( packetMsg );
+                    PostResponseMsg<CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response>( packetMsg );
                     break;
                 case "UpdateAuthSessionWithSteamGuardCode":
-                    UnifiedMessages.HandleResponseMsg<CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response>( packetMsg );
+                    PostResponseMsg<CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response>( packetMsg );
                     break;
                 case "GenerateAccessTokenForApp":
-                    UnifiedMessages.HandleResponseMsg<CAuthentication_AccessToken_GenerateForApp_Response>( packetMsg );
+                    PostResponseMsg<CAuthentication_AccessToken_GenerateForApp_Response>( packetMsg );
                     break;
                 case "EnumerateTokens":
-                    UnifiedMessages.HandleResponseMsg<CAuthentication_RefreshToken_Enumerate_Response>( packetMsg );
+                    PostResponseMsg<CAuthentication_RefreshToken_Enumerate_Response>( packetMsg );
                     break;
                 case "GetAuthSessionsForAccount":
-                    UnifiedMessages.HandleResponseMsg<CAuthentication_GetAuthSessionsForAccount_Response>( packetMsg );
+                    PostResponseMsg<CAuthentication_GetAuthSessionsForAccount_Response>( packetMsg );
                     break;
                 case "MigrateMobileSession":
-                    UnifiedMessages.HandleResponseMsg<CAuthentication_MigrateMobileSession_Response>( packetMsg );
+                    PostResponseMsg<CAuthentication_MigrateMobileSession_Response>( packetMsg );
                     break;
                 case "RevokeToken":
-                    UnifiedMessages.HandleResponseMsg<CAuthentication_Token_Revoke_Response>( packetMsg );
+                    PostResponseMsg<CAuthentication_Token_Revoke_Response>( packetMsg );
                     break;
                 case "RevokeRefreshToken":
-                    UnifiedMessages.HandleResponseMsg<CAuthentication_RefreshToken_Revoke_Response>( packetMsg );
+                    PostResponseMsg<CAuthentication_RefreshToken_Revoke_Response>( packetMsg );
                     break;
             }
         }
@@ -2271,19 +2271,19 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "QueryRefreshTokensByAccount":
-                    UnifiedMessages.HandleResponseMsg<CAuthenticationSupport_QueryRefreshTokensByAccount_Response>( packetMsg );
+                    PostResponseMsg<CAuthenticationSupport_QueryRefreshTokensByAccount_Response>( packetMsg );
                     break;
                 case "QueryRefreshTokenByID":
-                    UnifiedMessages.HandleResponseMsg<CAuthenticationSupport_QueryRefreshTokenByID_Response>( packetMsg );
+                    PostResponseMsg<CAuthenticationSupport_QueryRefreshTokenByID_Response>( packetMsg );
                     break;
                 case "RevokeToken":
-                    UnifiedMessages.HandleResponseMsg<CAuthenticationSupport_RevokeToken_Response>( packetMsg );
+                    PostResponseMsg<CAuthenticationSupport_RevokeToken_Response>( packetMsg );
                     break;
                 case "GetTokenHistory":
-                    UnifiedMessages.HandleResponseMsg<CAuthenticationSupport_GetTokenHistory_Response>( packetMsg );
+                    PostResponseMsg<CAuthenticationSupport_GetTokenHistory_Response>( packetMsg );
                     break;
                 case "MarkTokenCompromised":
-                    UnifiedMessages.HandleResponseMsg<CAuthenticationSupport_MarkTokenCompromised_Response>( packetMsg );
+                    PostResponseMsg<CAuthenticationSupport_MarkTokenCompromised_Response>( packetMsg );
                     break;
             }
         }
@@ -2312,10 +2312,10 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "CreateNonce":
-                    UnifiedMessages.HandleResponseMsg<CCloudGaming_CreateNonce_Response>( packetMsg );
+                    PostResponseMsg<CCloudGaming_CreateNonce_Response>( packetMsg );
                     break;
                 case "GetTimeRemaining":
-                    UnifiedMessages.HandleResponseMsg<CCloudGaming_GetTimeRemaining_Response>( packetMsg );
+                    PostResponseMsg<CCloudGaming_GetTimeRemaining_Response>( packetMsg );
                     break;
             }
         }

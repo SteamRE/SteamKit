@@ -10,6 +10,43 @@ namespace SteamKit2.WebUI.Internal
 {
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CCheckout_AddFreeLicense_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public StoreItemID item_id { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCheckout_AddFreeLicense_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<uint> packageids_added { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<uint> appids_added { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint purchase_result_detail
+        {
+            get => __pbn__purchase_result_detail.GetValueOrDefault();
+            set => __pbn__purchase_result_detail = value;
+        }
+        public bool ShouldSerializepurchase_result_detail() => __pbn__purchase_result_detail != null;
+        public void Resetpurchase_result_detail() => __pbn__purchase_result_detail = null;
+        private uint? __pbn__purchase_result_detail;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CCheckout_GetFriendOwnershipForGifting_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -415,6 +452,11 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "Checkout";
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCheckout_AddFreeLicense_Response>> AddFreeLicense( CCheckout_AddFreeLicense_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCheckout_AddFreeLicense_Request, CCheckout_AddFreeLicense_Response>( "Checkout.AddFreeLicense#1", request );
+        }
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCheckout_GetFriendOwnershipForGifting_Response>> GetFriendOwnershipForGifting( CCheckout_GetFriendOwnershipForGifting_Request request )
         {
             return UnifiedMessages.SendMessage<CCheckout_GetFriendOwnershipForGifting_Request, CCheckout_GetFriendOwnershipForGifting_Response>( "Checkout.GetFriendOwnershipForGifting#1", request );
@@ -429,11 +471,14 @@ namespace SteamKit2.WebUI.Internal
         {
             switch ( methodName )
             {
+                case "AddFreeLicense":
+                    PostResponseMsg<CCheckout_AddFreeLicense_Response>( packetMsg );
+                    break;
                 case "GetFriendOwnershipForGifting":
-                    UnifiedMessages.HandleResponseMsg<CCheckout_GetFriendOwnershipForGifting_Response>( packetMsg );
+                    PostResponseMsg<CCheckout_GetFriendOwnershipForGifting_Response>( packetMsg );
                     break;
                 case "ValidateCart":
-                    UnifiedMessages.HandleResponseMsg<CCheckout_ValidateCart_Response>( packetMsg );
+                    PostResponseMsg<CCheckout_ValidateCart_Response>( packetMsg );
                     break;
             }
         }

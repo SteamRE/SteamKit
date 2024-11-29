@@ -395,13 +395,13 @@ namespace SteamKit2.WebUI.Internal
             switch ( methodName )
             {
                 case "GetPreferences":
-                    UnifiedMessages.HandleResponseMsg<CSteamNotification_GetPreferences_Response>( packetMsg );
+                    PostResponseMsg<CSteamNotification_GetPreferences_Response>( packetMsg );
                     break;
                 case "GetSteamNotifications":
-                    UnifiedMessages.HandleResponseMsg<CSteamNotification_GetSteamNotifications_Response>( packetMsg );
+                    PostResponseMsg<CSteamNotification_GetSteamNotifications_Response>( packetMsg );
                     break;
                 case "SetPreferences":
-                    UnifiedMessages.HandleResponseMsg<CSteamNotification_SetPreferences_Response>( packetMsg );
+                    PostResponseMsg<CSteamNotification_SetPreferences_Response>( packetMsg );
                     break;
             }
         }
@@ -434,10 +434,10 @@ namespace SteamKit2.WebUI.Internal
             switch ( methodName )
             {
                 case "NotificationsReceived":
-                    UnifiedMessages.HandleNotificationMsg<CSteamNotification_NotificationsReceived_Notification>( packetMsg );
+                    PostNotificationMsg<CSteamNotification_NotificationsReceived_Notification>( packetMsg );
                     break;
                 case "PreferencesUpdated":
-                    UnifiedMessages.HandleNotificationMsg<CSteamNotification_PreferencesUpdated_Notification>( packetMsg );
+                    PostNotificationMsg<CSteamNotification_PreferencesUpdated_Notification>( packetMsg );
                     break;
             }
         }

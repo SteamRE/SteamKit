@@ -1184,6 +1184,16 @@ namespace SteamKit2.Internal
         public void Resetclip_id() => __pbn__clip_id = null;
         private string __pbn__clip_id;
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public float duration_secs
+        {
+            get => __pbn__duration_secs.GetValueOrDefault();
+            set => __pbn__duration_secs = value;
+        }
+        public bool ShouldSerializeduration_secs() => __pbn__duration_secs != null;
+        public void Resetduration_secs() => __pbn__duration_secs = null;
+        private float? __pbn__duration_secs;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1232,6 +1242,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeclip_id() => __pbn__clip_id != null;
         public void Resetclip_id() => __pbn__clip_id = null;
         private string __pbn__clip_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public float duration_secs
+        {
+            get => __pbn__duration_secs.GetValueOrDefault();
+            set => __pbn__duration_secs = value;
+        }
+        public bool ShouldSerializeduration_secs() => __pbn__duration_secs != null;
+        public void Resetduration_secs() => __pbn__duration_secs = null;
+        private float? __pbn__duration_secs;
 
     }
 

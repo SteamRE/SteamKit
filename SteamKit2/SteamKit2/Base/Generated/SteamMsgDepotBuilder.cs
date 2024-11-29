@@ -67,6 +67,16 @@ namespace SteamKit2.Internal
         public void Resettarget_branch() => __pbn__target_branch = null;
         private string __pbn__target_branch;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool shader_depot
+        {
+            get => __pbn__shader_depot.GetValueOrDefault();
+            set => __pbn__shader_depot = value;
+        }
+        public bool ShouldSerializeshader_depot() => __pbn__shader_depot != null;
+        public void Resetshader_depot() => __pbn__shader_depot = null;
+        private bool? __pbn__shader_depot;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -606,22 +616,22 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "InitDepotBuild":
-                    UnifiedMessages.HandleResponseMsg<CContentBuilder_InitDepotBuild_Response>( packetMsg );
+                    PostResponseMsg<CContentBuilder_InitDepotBuild_Response>( packetMsg );
                     break;
                 case "StartDepotUpload":
-                    UnifiedMessages.HandleResponseMsg<CContentBuilder_StartDepotUpload_Response>( packetMsg );
+                    PostResponseMsg<CContentBuilder_StartDepotUpload_Response>( packetMsg );
                     break;
                 case "GetMissingDepotChunks":
-                    UnifiedMessages.HandleResponseMsg<CContentBuilder_GetMissingDepotChunks_Response>( packetMsg );
+                    PostResponseMsg<CContentBuilder_GetMissingDepotChunks_Response>( packetMsg );
                     break;
                 case "FinishDepotUpload":
-                    UnifiedMessages.HandleResponseMsg<CContentBuilder_FinishDepotUpload_Response>( packetMsg );
+                    PostResponseMsg<CContentBuilder_FinishDepotUpload_Response>( packetMsg );
                     break;
                 case "CommitAppBuild":
-                    UnifiedMessages.HandleResponseMsg<CContentBuilder_CommitAppBuild_Response>( packetMsg );
+                    PostResponseMsg<CContentBuilder_CommitAppBuild_Response>( packetMsg );
                     break;
                 case "SignInstallScript":
-                    UnifiedMessages.HandleResponseMsg<CContentBuilder_SignInstallScript_Response>( packetMsg );
+                    PostResponseMsg<CContentBuilder_SignInstallScript_Response>( packetMsg );
                     break;
             }
         }

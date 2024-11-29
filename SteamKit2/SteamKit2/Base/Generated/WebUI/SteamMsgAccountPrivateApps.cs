@@ -104,10 +104,10 @@ namespace SteamKit2.WebUI.Internal
             switch ( methodName )
             {
                 case "GetPrivateAppList":
-                    UnifiedMessages.HandleResponseMsg<CAccountPrivateApps_GetPrivateAppList_Response>( packetMsg );
+                    PostResponseMsg<CAccountPrivateApps_GetPrivateAppList_Response>( packetMsg );
                     break;
                 case "ToggleAppPrivacy":
-                    UnifiedMessages.HandleResponseMsg<CAccountPrivateApps_ToggleAppPrivacy_Response>( packetMsg );
+                    PostResponseMsg<CAccountPrivateApps_ToggleAppPrivacy_Response>( packetMsg );
                     break;
             }
         }
@@ -135,7 +135,7 @@ namespace SteamKit2.WebUI.Internal
             switch ( methodName )
             {
                 case "NotifyPrivateAppListChanged":
-                    UnifiedMessages.HandleNotificationMsg<CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification>( packetMsg );
+                    PostNotificationMsg<CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification>( packetMsg );
                     break;
             }
         }

@@ -272,6 +272,61 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public CMsgOverworldTokenQuantity path_cost { get; set; }
 
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(EOverworldPathState.k_eOverworldPathState_Invalid)]
+        public EOverworldPathState path_state
+        {
+            get => __pbn__path_state ?? EOverworldPathState.k_eOverworldPathState_Invalid;
+            set => __pbn__path_state = value;
+        }
+        public bool ShouldSerializepath_state() => __pbn__path_state != null;
+        public void Resetpath_state() => __pbn__path_state = null;
+        private EOverworldPathState? __pbn__path_state;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgOverworldMinigameCustomData : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgSurvivorsUserData survivors_data { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgOverworldMinigameUserData : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint node_id
+        {
+            get => __pbn__node_id.GetValueOrDefault();
+            set => __pbn__node_id = value;
+        }
+        public bool ShouldSerializenode_id() => __pbn__node_id != null;
+        public void Resetnode_id() => __pbn__node_id = null;
+        private uint? __pbn__node_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint currency_amount
+        {
+            get => __pbn__currency_amount.GetValueOrDefault();
+            set => __pbn__currency_amount = value;
+        }
+        public bool ShouldSerializecurrency_amount() => __pbn__currency_amount != null;
+        public void Resetcurrency_amount() => __pbn__currency_amount = null;
+        private uint? __pbn__currency_amount;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public CMsgOverworldMinigameCustomData custom_data { get; set; }
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -299,6 +354,31 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializecurrent_node_id() => __pbn__current_node_id != null;
         public void Resetcurrent_node_id() => __pbn__current_node_id = null;
         private uint? __pbn__current_node_id;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public global::System.Collections.Generic.List<MinigameDataEntry> minigame_data { get; } = new global::System.Collections.Generic.List<MinigameDataEntry>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class MinigameDataEntry : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint key
+            {
+                get => __pbn__key.GetValueOrDefault();
+                set => __pbn__key = value;
+            }
+            public bool ShouldSerializekey() => __pbn__key != null;
+            public void Resetkey() => __pbn__key = null;
+            private uint? __pbn__key;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public CMsgOverworldMinigameUserData value { get; set; }
+
+        }
 
     }
 
@@ -567,6 +647,26 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public CMsgOverworldEncounterData extra_reward_data { get; set; }
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint leaderboard_data
+        {
+            get => __pbn__leaderboard_data.GetValueOrDefault();
+            set => __pbn__leaderboard_data = value;
+        }
+        public bool ShouldSerializeleaderboard_data() => __pbn__leaderboard_data != null;
+        public void Resetleaderboard_data() => __pbn__leaderboard_data = null;
+        private uint? __pbn__leaderboard_data;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint leaderboard_index
+        {
+            get => __pbn__leaderboard_index.GetValueOrDefault();
+            set => __pbn__leaderboard_index = value;
+        }
+        public bool ShouldSerializeleaderboard_index() => __pbn__leaderboard_index != null;
+        public void Resetleaderboard_index() => __pbn__leaderboard_index = null;
+        private uint? __pbn__leaderboard_index;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -611,6 +711,7 @@ namespace SteamKit2.GC.Dota.Internal
             k_eInvalidEncounterData = 12,
             k_eNotEnoughTokensForReward = 13,
             k_eNotEnoughResourceForReward = 14,
+            k_eInvalidRewardData = 15,
         }
 
     }
@@ -902,6 +1003,73 @@ namespace SteamKit2.GC.Dota.Internal
             k_eNotEnoughTokens = 9,
             k_eInvalidRecipient = 10,
             k_eNotEnoughPeriodicResource = 11,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCOverworldRequestTokensNeededByFriend : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint friend_account_id
+        {
+            get => __pbn__friend_account_id.GetValueOrDefault();
+            set => __pbn__friend_account_id = value;
+        }
+        public bool ShouldSerializefriend_account_id() => __pbn__friend_account_id != null;
+        public void Resetfriend_account_id() => __pbn__friend_account_id = null;
+        private uint? __pbn__friend_account_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint overworld_id
+        {
+            get => __pbn__overworld_id.GetValueOrDefault();
+            set => __pbn__overworld_id = value;
+        }
+        public bool ShouldSerializeoverworld_id() => __pbn__overworld_id != null;
+        public void Resetoverworld_id() => __pbn__overworld_id = null;
+        private uint? __pbn__overworld_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCOverworldRequestTokensNeededByFriendResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse response
+        {
+            get => __pbn__response ?? EResponse.k_eInternalError;
+            set => __pbn__response = value;
+        }
+        public bool ShouldSerializeresponse() => __pbn__response != null;
+        public void Resetresponse() => __pbn__response = null;
+        private EResponse? __pbn__response;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgOverworldTokenQuantity token_quantity { get; set; }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTooBusy = 2,
+            k_eDisabled = 3,
+            k_eTimeout = 4,
+            k_eNotAllowed = 5,
+            k_eNodeLocked = 6,
+            k_eInvalidOverworld = 7,
+            k_eInvalidFriend = 8,
+            k_eTooManyRequests = 9,
         }
 
     }
@@ -1316,11 +1484,126 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCOverworldMinigameAction : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint overworld_id
+        {
+            get => __pbn__overworld_id.GetValueOrDefault();
+            set => __pbn__overworld_id = value;
+        }
+        public bool ShouldSerializeoverworld_id() => __pbn__overworld_id != null;
+        public void Resetoverworld_id() => __pbn__overworld_id = null;
+        private uint? __pbn__overworld_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint node_id
+        {
+            get => __pbn__node_id.GetValueOrDefault();
+            set => __pbn__node_id = value;
+        }
+        public bool ShouldSerializenode_id() => __pbn__node_id != null;
+        public void Resetnode_id() => __pbn__node_id = null;
+        private uint? __pbn__node_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(EOverworldMinigameAction.k_eOverworldMinigameAction_Invalid)]
+        public EOverworldMinigameAction action
+        {
+            get => __pbn__action ?? EOverworldMinigameAction.k_eOverworldMinigameAction_Invalid;
+            set => __pbn__action = value;
+        }
+        public bool ShouldSerializeaction() => __pbn__action != null;
+        public void Resetaction() => __pbn__action = null;
+        private EOverworldMinigameAction? __pbn__action;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint selection
+        {
+            get => __pbn__selection.GetValueOrDefault();
+            set => __pbn__selection = value;
+        }
+        public bool ShouldSerializeselection() => __pbn__selection != null;
+        public void Resetselection() => __pbn__selection = null;
+        private uint? __pbn__selection;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint option_value
+        {
+            get => __pbn__option_value.GetValueOrDefault();
+            set => __pbn__option_value = value;
+        }
+        public bool ShouldSerializeoption_value() => __pbn__option_value != null;
+        public void Resetoption_value() => __pbn__option_value = null;
+        private uint? __pbn__option_value;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint currency_amount
+        {
+            get => __pbn__currency_amount.GetValueOrDefault();
+            set => __pbn__currency_amount = value;
+        }
+        public bool ShouldSerializecurrency_amount() => __pbn__currency_amount != null;
+        public void Resetcurrency_amount() => __pbn__currency_amount = null;
+        private uint? __pbn__currency_amount;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCOverworldMinigameActionResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse response
+        {
+            get => __pbn__response ?? EResponse.k_eInternalError;
+            set => __pbn__response = value;
+        }
+        public bool ShouldSerializeresponse() => __pbn__response != null;
+        public void Resetresponse() => __pbn__response = null;
+        private EResponse? __pbn__response;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTooBusy = 2,
+            k_eDisabled = 3,
+            k_eTimeout = 4,
+            k_eInvalidOverworld = 5,
+            k_eInvalidNode = 6,
+            k_eNodeLocked = 7,
+            k_eInvalidSelection = 8,
+            k_eNotEnoughTokens = 9,
+            k_eNotEnoughMinigameCurrency = 10,
+            k_eNotAllowed = 11,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EOverworldNodeState
     {
         k_eOverworldNodeState_Invalid = 0,
         k_eOverworldNodeState_Locked = 1,
         k_eOverworldNodeState_Unlocked = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EOverworldPathState
+    {
+        k_eOverworldPathState_Invalid = 0,
+        k_eOverworldPathState_Incomplete = 1,
+        k_eOverworldPathState_Complete = 2,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1343,6 +1626,18 @@ namespace SteamKit2.GC.Dota.Internal
         k_eOverworldAuditAction_EncounterRewardTokenReward = 14,
         k_eOverworldAuditAction_SupportGrantTokens = 16,
         k_eOverworldAuditAction_TokenGiftSent = 17,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EOverworldMinigameAction
+    {
+        k_eOverworldMinigameAction_Invalid = 0,
+        k_eOverworldMinigameAction_DevReset = 1,
+        k_eOverworldMinigameAction_DevGiveCurrency = 2,
+        k_eOverworldMinigameAction_Purchase = 3,
+        k_eOverworldMinigameAction_SetOption = 4,
+        k_eOverworldMinigameAction_ReportCurrencyGained = 5,
+        k_eOverworldMinigameAction_UnlockDifficulty = 6,
     }
 
 }
