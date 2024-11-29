@@ -415,16 +415,9 @@ namespace SteamLanguageParser
 
 
             // first emit variable length members
-            List<string> varLengthProps = [];
-            List<string> openedStreams = [];
-            varLengthProps.Add(baseSize.ToString());
-
             if (cnode.Parent != null)
             {
                 sb.AppendLine(padding + "\tHeader.Serialize(stream);");
-                varLengthProps.Add("(int)msHeader.Length");
-                openedStreams.Add("msHeader");
-
                 sb.AppendLine();
             }
 
@@ -445,7 +438,7 @@ namespace SteamLanguageParser
                             return;
                         }
 
-                        sb.AppendLine(padding + "\tMemoryStream ms" + GetUpperName(prop.Name) + " = new MemoryStream();");
+                        sb.AppendLine(padding + "\tusing MemoryStream ms" + GetUpperName(prop.Name) + " = new MemoryStream();");
                         sb.AppendLine(padding + "\tProtoBuf.Serializer.Serialize<" + typestr + ">(ms" + GetUpperName(prop.Name) + ", " + GetUpperName(prop.Name) + ");");
 
                         if (prop.FlagsOpt != null)
@@ -457,11 +450,8 @@ namespace SteamLanguageParser
                     }
                     else
                     {
-                        sb.AppendLine(padding + "\tMemoryStream ms" + GetUpperName(prop.Name) + " = " + GetUpperName(prop.Name) + ".serialize();");
+                        sb.AppendLine(padding + "\tusing MemoryStream ms" + GetUpperName(prop.Name) + " = " + GetUpperName(prop.Name) + ".serialize();");
                     }
-
-                    varLengthProps.Add("(int)ms" + GetUpperName(prop.Name) + ".Length");
-                    openedStreams.Add("ms" + GetUpperName(prop.Name));
                 }
             }
 
@@ -523,14 +513,6 @@ namespace SteamLanguageParser
             }
 
             sb.AppendLine();
-
-            foreach (string stream in openedStreams)
-            {
-                sb.AppendLine(padding + "\t" + stream + ".Dispose();");
-            }
-
-            //sb.AppendLine();
-            //sb.AppendLine(padding + "\tmsBuffer.Seek( 0, SeekOrigin.Begin );");
             sb.AppendLine(padding + "}");
         }
 
@@ -576,8 +558,8 @@ namespace SteamLanguageParser
                     {
                         if (prop.FlagsOpt != null)
                         {
-                            sb.AppendLine(padding + "\tusing( MemoryStream ms" + GetUpperName(prop.Name) + " = new MemoryStream( br.ReadBytes( " + GetUpperName(prop.FlagsOpt) + " ) ) )");
-                            sb.AppendLine(padding + "\t\t" + GetUpperName(prop.Name) + " = ProtoBuf.Serializer.Deserialize<" + typestr + ">( ms" + GetUpperName(prop.Name) + " );");
+                            sb.AppendLine(padding + "\tArgumentOutOfRangeException.ThrowIfNegative( " + GetUpperName( prop.FlagsOpt ) + " );" );
+                            sb.AppendLine(padding + "\t" + GetUpperName(prop.Name) + " = ProtoBuf.Serializer.Deserialize<" + typestr + ">( stream, length: " + GetUpperName( prop.FlagsOpt ) + " );");
                         }
                         else
                         {

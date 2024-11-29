@@ -349,7 +349,7 @@ namespace SteamKit2.Internal
 
 		public void Serialize(Stream stream)
 		{
-			MemoryStream msProto = new MemoryStream();
+			using MemoryStream msProto = new MemoryStream();
 			ProtoBuf.Serializer.Serialize<SteamKit2.Internal.CMsgProtoBufHeader>(msProto, Proto);
 			HeaderLength = (int)msProto.Length;
 			using BinaryWriter bw = new BinaryWriter( stream, Encoding.UTF8, leaveOpen: true );
@@ -358,7 +358,6 @@ namespace SteamKit2.Internal
 			bw.Write( HeaderLength );
 			bw.Write( msProto.ToArray() );
 
-			msProto.Dispose();
 		}
 
 		public void Deserialize( Stream stream )
@@ -393,7 +392,7 @@ namespace SteamKit2.Internal
 
 		public void Serialize(Stream stream)
 		{
-			MemoryStream msProto = new MemoryStream();
+			using MemoryStream msProto = new MemoryStream();
 			ProtoBuf.Serializer.Serialize<SteamKit2.GC.Internal.CMsgProtoBufHeader>(msProto, Proto);
 			HeaderLength = (int)msProto.Length;
 			using BinaryWriter bw = new BinaryWriter( stream, Encoding.UTF8, leaveOpen: true );
@@ -402,7 +401,6 @@ namespace SteamKit2.Internal
 			bw.Write( HeaderLength );
 			bw.Write( msProto.ToArray() );
 
-			msProto.Dispose();
 		}
 
 		public void Deserialize( Stream stream )
