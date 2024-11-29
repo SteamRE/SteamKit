@@ -62,7 +62,7 @@ namespace ProtobufGen
                 {
                     ctx.WriteLine( $"case \"{Escape( serviceMethod.Name )}\":" )
                         .Indent()
-                        .WriteLine( $"UnifiedMessages.HandleResponseMsg<{Escape( serviceMethod.OutputType[ 1.. ] )}>( packetMsg );" )
+                        .WriteLine( $"PostResponseMsg<{Escape( serviceMethod.OutputType[ 1.. ] )}>( packetMsg );" )
                         .WriteLine( "break;" )
                         .Outdent();
                 }
@@ -93,7 +93,7 @@ namespace ProtobufGen
                 {
                     ctx.WriteLine( $"case \"{Escape( notificationMethod.Name )}\":" )
                         .Indent()
-                        .WriteLine( $"UnifiedMessages.HandleNotificationMsg<{Escape( notificationMethod.InputType[ 1.. ] )}>( packetMsg );" )
+                        .WriteLine( $"PostNotificationMsg<{Escape( notificationMethod.InputType[ 1.. ] )}>( packetMsg );" )
                         .WriteLine( "break;" )
                         .Outdent();
                 }

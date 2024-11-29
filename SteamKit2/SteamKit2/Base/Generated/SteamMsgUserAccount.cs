@@ -1145,37 +1145,37 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetAvailableValveDiscountPromotions":
-                    UnifiedMessages.HandleResponseMsg<CUserAccount_GetAvailableValveDiscountPromotions_Response>( packetMsg );
+                    PostResponseMsg<CUserAccount_GetAvailableValveDiscountPromotions_Response>( packetMsg );
                     break;
                 case "GetClientWalletDetails":
-                    UnifiedMessages.HandleResponseMsg<CUserAccount_GetWalletDetails_Response>( packetMsg );
+                    PostResponseMsg<CUserAccount_GetWalletDetails_Response>( packetMsg );
                     break;
                 case "GetAccountLinkStatus":
-                    UnifiedMessages.HandleResponseMsg<CUserAccount_GetAccountLinkStatus_Response>( packetMsg );
+                    PostResponseMsg<CUserAccount_GetAccountLinkStatus_Response>( packetMsg );
                     break;
                 case "CancelLicenseForApp":
-                    UnifiedMessages.HandleResponseMsg<CUserAccount_CancelLicenseForApp_Response>( packetMsg );
+                    PostResponseMsg<CUserAccount_CancelLicenseForApp_Response>( packetMsg );
                     break;
                 case "GetUserCountry":
-                    UnifiedMessages.HandleResponseMsg<CUserAccount_GetUserCountry_Response>( packetMsg );
+                    PostResponseMsg<CUserAccount_GetUserCountry_Response>( packetMsg );
                     break;
                 case "CreateFriendInviteToken":
-                    UnifiedMessages.HandleResponseMsg<CUserAccount_CreateFriendInviteToken_Response>( packetMsg );
+                    PostResponseMsg<CUserAccount_CreateFriendInviteToken_Response>( packetMsg );
                     break;
                 case "GetFriendInviteTokens":
-                    UnifiedMessages.HandleResponseMsg<CUserAccount_GetFriendInviteTokens_Response>( packetMsg );
+                    PostResponseMsg<CUserAccount_GetFriendInviteTokens_Response>( packetMsg );
                     break;
                 case "ViewFriendInviteToken":
-                    UnifiedMessages.HandleResponseMsg<CUserAccount_ViewFriendInviteToken_Response>( packetMsg );
+                    PostResponseMsg<CUserAccount_ViewFriendInviteToken_Response>( packetMsg );
                     break;
                 case "RedeemFriendInviteToken":
-                    UnifiedMessages.HandleResponseMsg<CUserAccount_RedeemFriendInviteToken_Response>( packetMsg );
+                    PostResponseMsg<CUserAccount_RedeemFriendInviteToken_Response>( packetMsg );
                     break;
                 case "RevokeFriendInviteToken":
-                    UnifiedMessages.HandleResponseMsg<CUserAccount_RevokeFriendInviteToken_Response>( packetMsg );
+                    PostResponseMsg<CUserAccount_RevokeFriendInviteToken_Response>( packetMsg );
                     break;
                 case "RegisterCompatTool":
-                    UnifiedMessages.HandleResponseMsg<CUserAccount_RegisterCompatTool_Response>( packetMsg );
+                    PostResponseMsg<CUserAccount_RegisterCompatTool_Response>( packetMsg );
                     break;
             }
         }
@@ -1199,7 +1199,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetLinkedAccountInfo":
-                    UnifiedMessages.HandleResponseMsg<CAccountLinking_GetLinkedAccountInfo_Response>( packetMsg );
+                    PostResponseMsg<CAccountLinking_GetLinkedAccountInfo_Response>( packetMsg );
                     break;
             }
         }
@@ -1223,7 +1223,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "AuthorizeCurrentDevice":
-                    UnifiedMessages.HandleResponseMsg<CEmbeddedClient_AuthorizeDevice_Response>( packetMsg );
+                    PostResponseMsg<CEmbeddedClient_AuthorizeDevice_Response>( packetMsg );
                     break;
             }
         }

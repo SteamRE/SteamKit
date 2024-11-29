@@ -1393,6 +1393,10 @@ namespace SteamKit2.GC.Dota.Internal
                     kKillEaterEventType_Ringmaster_LongRangeDaggerHits = 279,
                     kKillEaterEventType_Ringmaster_MultiHeroWhips = 280,
                     kKillEaterEventType_Ringmaster_MultiHeroMesmerizes = 281,
+                    kKillEaterEventType_Kez_ParryCounterAttacks = 282,
+                    kKillEaterEventType_Kez_RavensVeilKills = 283,
+                    kKillEaterEventType_Kez_RaptorDanceHealing = 284,
+                    kKillEaterEventType_Kez_KillsDuringFalconRush = 285,
                 }
 
             }

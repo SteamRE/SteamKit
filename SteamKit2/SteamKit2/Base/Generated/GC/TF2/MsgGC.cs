@@ -2301,6 +2301,33 @@ namespace SteamKit2.GC.TF2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgPartyMMError : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(Type.QUEUE_KICK_NO_PING)]
+        public Type type
+        {
+            get => __pbn__type ?? Type.QUEUE_KICK_NO_PING;
+            set => __pbn__type = value;
+        }
+        public bool ShouldSerializetype() => __pbn__type != null;
+        public void Resettype() => __pbn__type = null;
+        private Type? __pbn__type;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum Type
+        {
+            QUEUE_KICK_NO_PING = 1,
+            QUEUE_KICK_AUTH = 2,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgPartyClearPendingPlayerResponse : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -8273,6 +8300,7 @@ namespace SteamKit2.GC.TF2.Internal
         k_EMsgGC_ProcessMatchVoteKickResponse = 6582,
         k_EMsgGCToGC_SendAccountBannedNotifications = 6584,
         k_EMsgGCToGC_SendNotification = 6585,
+        k_EMsgGCParty_MMError = 6586,
         k_EMsgGCDev_GrantWarKill = 10001,
     }
 

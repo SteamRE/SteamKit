@@ -195,7 +195,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "KeyEscrow":
-                    UnifiedMessages.HandleResponseMsg<CKeyEscrow_Response>( packetMsg );
+                    PostResponseMsg<CKeyEscrow_Response>( packetMsg );
                     break;
             }
         }

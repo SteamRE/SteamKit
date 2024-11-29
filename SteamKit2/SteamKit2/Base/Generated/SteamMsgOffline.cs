@@ -139,10 +139,10 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetOfflineLogonTicket":
-                    UnifiedMessages.HandleResponseMsg<COffline_GetOfflineLogonTicket_Response>( packetMsg );
+                    PostResponseMsg<COffline_GetOfflineLogonTicket_Response>( packetMsg );
                     break;
                 case "GetUnsignedOfflineLogonTicket":
-                    UnifiedMessages.HandleResponseMsg<COffline_GetUnsignedOfflineLogonTicket_Response>( packetMsg );
+                    PostResponseMsg<COffline_GetUnsignedOfflineLogonTicket_Response>( packetMsg );
                     break;
             }
         }

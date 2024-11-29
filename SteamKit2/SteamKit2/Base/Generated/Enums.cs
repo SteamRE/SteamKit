@@ -479,10 +479,11 @@ namespace SteamKit2.Internal
         k_EBrowserGPUStatus_DisabledUnknown = 2,
         k_EBrowserGPUStatus_DisabledCrashCount = 4,
         k_EBrowserGPUStatus_DisabledBlocklist = 5,
-        k_EBrowserGPUStatus_DisabledDebugRequest = 6,
+        k_EBrowserGPUStatus_DisabledJSRequest = 6,
         k_EBrowserGPUStatus_DisabledCommandLine = 7,
         k_EBrowserGPUStatus_DisabledRuntimeDetect = 8,
         k_EBrowserGPUStatus_DisabledChildCommandLine = 9,
+        k_EBrowserGPUStatus_DisabledCompositingCommandLine = 10,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -502,6 +503,31 @@ namespace SteamKit2.Internal
         k_EBrowserFeatureStatus_Enabled = 11,
         k_EBrowserFeatureStatus_EnabledOn = 12,
         k_EBrowserFeatureStatus_EnabledForceOn = 13,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EGpuDriverId
+    {
+        k_EGpuDriverId_Invalid = 0,
+        k_EGpuDriverId_Unknown = 1,
+        k_EGpuDriverId_AmdProprietary = 2,
+        k_EGpuDriverId_AmdOpenSource = 3,
+        k_EGpuDriverId_MesaRadv = 4,
+        k_EGpuDriverId_NvidiaProprietary = 5,
+        k_EGpuDriverId_IntelPropietary = 6,
+        k_EGpuDriverId_MesaIntel = 7,
+        k_EGpuDriverId_QualcommProprietary = 8,
+        k_EGpuDriverId_ArmProprietary = 9,
+        k_EGpuDriverId_GoogleSwiftshader = 10,
+        k_EGpuDriverId_BroadcomProprietary = 11,
+        k_EGpuDriverId_MesaLLVMPipe = 12,
+        k_EGpuDriverId_MoltenVK = 13,
+        k_EGpuDriverId_MesaTurnip = 14,
+        k_EGpuDriverId_MesaPanVK = 15,
+        k_EGpuDriverId_MesaVenus = 16,
+        k_EGpuDriverId_MesaDozen = 17,
+        k_EGpuDriverId_MesaNVK = 18,
+        k_EGpuDriverId_MesaHoneyKrisp = 19,
     }
 
     [global::ProtoBuf.ProtoContract()]

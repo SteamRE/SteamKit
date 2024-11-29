@@ -352,6 +352,16 @@ namespace SteamKit2.Internal
         public void Resetis_shader() => __pbn__is_shader = null;
         private bool? __pbn__is_shader;
 
+        [global::ProtoBuf.ProtoMember(25)]
+        public uint seconds_not_played
+        {
+            get => __pbn__seconds_not_played.GetValueOrDefault();
+            set => __pbn__seconds_not_played = value;
+        }
+        public bool ShouldSerializeseconds_not_played() => __pbn__seconds_not_played != null;
+        public void Resetseconds_not_played() => __pbn__seconds_not_played = null;
+        private uint? __pbn__seconds_not_played;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -689,13 +699,13 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetVRDeviceInfo":
-                    UnifiedMessages.HandleResponseMsg<CDataPublisher_GetVRDeviceInfo_Response>( packetMsg );
+                    PostResponseMsg<CDataPublisher_GetVRDeviceInfo_Response>( packetMsg );
                     break;
                 case "SetVRDeviceInfoAggregationReference":
-                    UnifiedMessages.HandleResponseMsg<CDataPublisher_SetVRDeviceInfoAggregationReference_Response>( packetMsg );
+                    PostResponseMsg<CDataPublisher_SetVRDeviceInfoAggregationReference_Response>( packetMsg );
                     break;
                 case "AddVRDeviceInfo":
-                    UnifiedMessages.HandleResponseMsg<CDataPublisher_AddVRDeviceInfo_Response>( packetMsg );
+                    PostResponseMsg<CDataPublisher_AddVRDeviceInfo_Response>( packetMsg );
                     break;
             }
         }
@@ -705,10 +715,10 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "ClientContentCorruptionReport":
-                    UnifiedMessages.HandleNotificationMsg<CDataPublisher_ClientContentCorruptionReport_Notification>( packetMsg );
+                    PostNotificationMsg<CDataPublisher_ClientContentCorruptionReport_Notification>( packetMsg );
                     break;
                 case "ClientUpdateAppJobReport":
-                    UnifiedMessages.HandleNotificationMsg<CDataPublisher_ClientUpdateAppJob_Notification>( packetMsg );
+                    PostNotificationMsg<CDataPublisher_ClientUpdateAppJob_Notification>( packetMsg );
                     break;
             }
         }
@@ -728,7 +738,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetSurveySchedule":
-                    UnifiedMessages.HandleResponseMsg<CValveHWSurvey_GetSurveySchedule_Response>( packetMsg );
+                    PostResponseMsg<CValveHWSurvey_GetSurveySchedule_Response>( packetMsg );
                     break;
             }
         }

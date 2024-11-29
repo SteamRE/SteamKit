@@ -505,22 +505,22 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetShaderReportingCadence":
-                    UnifiedMessages.HandleResponseMsg<CShader_GetShaderReportingCadence_Response>( packetMsg );
+                    PostResponseMsg<CShader_GetShaderReportingCadence_Response>( packetMsg );
                     break;
                 case "RegisterShader":
-                    UnifiedMessages.HandleResponseMsg<CShader_RegisterShader_Response>( packetMsg );
+                    PostResponseMsg<CShader_RegisterShader_Response>( packetMsg );
                     break;
                 case "SendShader":
-                    UnifiedMessages.HandleResponseMsg<CShader_SendShader_Response>( packetMsg );
+                    PostResponseMsg<CShader_SendShader_Response>( packetMsg );
                     break;
                 case "GetBucketManifest":
-                    UnifiedMessages.HandleResponseMsg<CShader_GetBucketManifest_Response>( packetMsg );
+                    PostResponseMsg<CShader_GetBucketManifest_Response>( packetMsg );
                     break;
                 case "GetStaleBucket":
-                    UnifiedMessages.HandleResponseMsg<CShader_GetStaleBucket_Response>( packetMsg );
+                    PostResponseMsg<CShader_GetStaleBucket_Response>( packetMsg );
                     break;
                 case "ReportExternalBuild":
-                    UnifiedMessages.HandleResponseMsg<CShader_ReportExternalBuild_Response>( packetMsg );
+                    PostResponseMsg<CShader_ReportExternalBuild_Response>( packetMsg );
                     break;
             }
         }

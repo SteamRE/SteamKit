@@ -2491,6 +2491,17 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public CMsgDOTAClaimEventActionData data { get; set; }
 
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue(EEventActionScoreMode.k_eEventActionScoreMode_Add)]
+        public EEventActionScoreMode score_mode
+        {
+            get => __pbn__score_mode ?? EEventActionScoreMode.k_eEventActionScoreMode_Add;
+            set => __pbn__score_mode = value;
+        }
+        public bool ShouldSerializescore_mode() => __pbn__score_mode != null;
+        public void Resetscore_mode() => __pbn__score_mode = null;
+        private EEventActionScoreMode? __pbn__score_mode;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

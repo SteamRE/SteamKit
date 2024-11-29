@@ -250,10 +250,10 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "NotificationsReceived":
-                    UnifiedMessages.HandleNotificationMsg<CSteamNotification_NotificationsReceived_Notification>( packetMsg );
+                    PostNotificationMsg<CSteamNotification_NotificationsReceived_Notification>( packetMsg );
                     break;
                 case "PreferencesUpdated":
-                    UnifiedMessages.HandleNotificationMsg<CSteamNotification_PreferencesUpdated_Notification>( packetMsg );
+                    PostNotificationMsg<CSteamNotification_PreferencesUpdated_Notification>( packetMsg );
                     break;
             }
         }

@@ -131,7 +131,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetLobbyStatus":
-                    UnifiedMessages.HandleResponseMsg<LobbyMatchmakingLegacy_GetLobbyStatus_Response>( packetMsg );
+                    PostResponseMsg<LobbyMatchmakingLegacy_GetLobbyStatus_Response>( packetMsg );
                     break;
             }
         }

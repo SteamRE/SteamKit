@@ -220,10 +220,10 @@ namespace SteamKit2.WebUI.Internal
             switch ( methodName )
             {
                 case "Download":
-                    UnifiedMessages.HandleResponseMsg<CCloudConfigStore_Download_Response>( packetMsg );
+                    PostResponseMsg<CCloudConfigStore_Download_Response>( packetMsg );
                     break;
                 case "Upload":
-                    UnifiedMessages.HandleResponseMsg<CCloudConfigStore_Upload_Response>( packetMsg );
+                    PostResponseMsg<CCloudConfigStore_Upload_Response>( packetMsg );
                     break;
             }
         }
@@ -251,7 +251,7 @@ namespace SteamKit2.WebUI.Internal
             switch ( methodName )
             {
                 case "NotifyChange":
-                    UnifiedMessages.HandleNotificationMsg<CCloudConfigStore_Change_Notification>( packetMsg );
+                    PostNotificationMsg<CCloudConfigStore_Change_Notification>( packetMsg );
                     break;
             }
         }

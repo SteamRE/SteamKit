@@ -6807,6 +6807,65 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCCStrike15_v2_MatchmakingGC2ClientSearchStats : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint gs_location_id
+        {
+            get => __pbn__gs_location_id.GetValueOrDefault();
+            set => __pbn__gs_location_id = value;
+        }
+        public bool ShouldSerializegs_location_id() => __pbn__gs_location_id != null;
+        public void Resetgs_location_id() => __pbn__gs_location_id = null;
+        private uint? __pbn__gs_location_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint data_center_id
+        {
+            get => __pbn__data_center_id.GetValueOrDefault();
+            set => __pbn__data_center_id = value;
+        }
+        public bool ShouldSerializedata_center_id() => __pbn__data_center_id != null;
+        public void Resetdata_center_id() => __pbn__data_center_id = null;
+        private uint? __pbn__data_center_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint num_locked_in
+        {
+            get => __pbn__num_locked_in.GetValueOrDefault();
+            set => __pbn__num_locked_in = value;
+        }
+        public bool ShouldSerializenum_locked_in() => __pbn__num_locked_in != null;
+        public void Resetnum_locked_in() => __pbn__num_locked_in = null;
+        private uint? __pbn__num_locked_in;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint num_found_nearby
+        {
+            get => __pbn__num_found_nearby.GetValueOrDefault();
+            set => __pbn__num_found_nearby = value;
+        }
+        public bool ShouldSerializenum_found_nearby() => __pbn__num_found_nearby != null;
+        public void Resetnum_found_nearby() => __pbn__num_found_nearby = null;
+        private uint? __pbn__num_found_nearby;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint note_level
+        {
+            get => __pbn__note_level.GetValueOrDefault();
+            set => __pbn__note_level = value;
+        }
+        public bool ShouldSerializenote_level() => __pbn__note_level != null;
+        public void Resetnote_level() => __pbn__note_level = null;
+        private uint? __pbn__note_level;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgGC_GlobalGame_Subscribe : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -8784,6 +8843,7 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCCStrike15_v2_ClientNetworkConfig = 9220,
         k_EMsgGCCStrike15_v2_GC2ClientNotifyXPShop = 9221,
         k_EMsgGCCStrike15_v2_Client2GcAckXPShopTracks = 9222,
+        k_EMsgGCCStrike15_v2_MatchmakingGC2ClientSearchStats = 9223,
     }
 
     [global::ProtoBuf.ProtoContract()]

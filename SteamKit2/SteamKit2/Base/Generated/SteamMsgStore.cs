@@ -2148,64 +2148,64 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "RegisterCDKey":
-                    UnifiedMessages.HandleResponseMsg<CStore_RegisterCDKey_Response>( packetMsg );
+                    PostResponseMsg<CStore_RegisterCDKey_Response>( packetMsg );
                     break;
                 case "GetMostPopularTags":
-                    UnifiedMessages.HandleResponseMsg<CStore_GetMostPopularTags_Response>( packetMsg );
+                    PostResponseMsg<CStore_GetMostPopularTags_Response>( packetMsg );
                     break;
                 case "GetLocalizedNameForTags":
-                    UnifiedMessages.HandleResponseMsg<CStore_GetLocalizedNameForTags_Response>( packetMsg );
+                    PostResponseMsg<CStore_GetLocalizedNameForTags_Response>( packetMsg );
                     break;
                 case "GetTagList":
-                    UnifiedMessages.HandleResponseMsg<CStore_GetTagList_Response>( packetMsg );
+                    PostResponseMsg<CStore_GetTagList_Response>( packetMsg );
                     break;
                 case "GetDiscoveryQueue":
-                    UnifiedMessages.HandleResponseMsg<CStore_GetDiscoveryQueue_Response>( packetMsg );
+                    PostResponseMsg<CStore_GetDiscoveryQueue_Response>( packetMsg );
                     break;
                 case "GetDiscoveryQueueSettings":
-                    UnifiedMessages.HandleResponseMsg<CStore_GetDiscoveryQueueSettings_Response>( packetMsg );
+                    PostResponseMsg<CStore_GetDiscoveryQueueSettings_Response>( packetMsg );
                     break;
                 case "SkipDiscoveryQueueItem":
-                    UnifiedMessages.HandleResponseMsg<CStore_SkipDiscoveryQueueItem_Response>( packetMsg );
+                    PostResponseMsg<CStore_SkipDiscoveryQueueItem_Response>( packetMsg );
                     break;
                 case "GetUserGameInterestState":
-                    UnifiedMessages.HandleResponseMsg<CStore_GetUserGameInterestState_Response>( packetMsg );
+                    PostResponseMsg<CStore_GetUserGameInterestState_Response>( packetMsg );
                     break;
                 case "GetDiscoveryQueueSkippedApps":
-                    UnifiedMessages.HandleResponseMsg<CStore_GetDiscoveryQueueSkippedApps_Response>( packetMsg );
+                    PostResponseMsg<CStore_GetDiscoveryQueueSkippedApps_Response>( packetMsg );
                     break;
                 case "ReportApp":
-                    UnifiedMessages.HandleResponseMsg<CStore_ReportApp_Response>( packetMsg );
+                    PostResponseMsg<CStore_ReportApp_Response>( packetMsg );
                     break;
                 case "GetStorePreferences":
-                    UnifiedMessages.HandleResponseMsg<CStore_GetStorePreferences_Response>( packetMsg );
+                    PostResponseMsg<CStore_GetStorePreferences_Response>( packetMsg );
                     break;
                 case "GetTrendingAppsAmongFriends":
-                    UnifiedMessages.HandleResponseMsg<CStore_GetTrendingAppsAmongFriends_Response>( packetMsg );
+                    PostResponseMsg<CStore_GetTrendingAppsAmongFriends_Response>( packetMsg );
                     break;
                 case "UpdatePackageReservations":
-                    UnifiedMessages.HandleResponseMsg<CStore_UpdatePackageReservations_Response>( packetMsg );
+                    PostResponseMsg<CStore_UpdatePackageReservations_Response>( packetMsg );
                     break;
                 case "GetWishlistDemoEmailStatus":
-                    UnifiedMessages.HandleResponseMsg<CStore_GetWishlistDemoEmailStatus_Response>( packetMsg );
+                    PostResponseMsg<CStore_GetWishlistDemoEmailStatus_Response>( packetMsg );
                     break;
                 case "QueueWishlistDemoEmailToFire":
-                    UnifiedMessages.HandleResponseMsg<CStore_QueueWishlistDemoEmailToFire_Response>( packetMsg );
+                    PostResponseMsg<CStore_QueueWishlistDemoEmailToFire_Response>( packetMsg );
                     break;
                 case "SetReservationPositionMessage":
-                    UnifiedMessages.HandleResponseMsg<CStore_SetReservationPositionMessage_Response>( packetMsg );
+                    PostResponseMsg<CStore_SetReservationPositionMessage_Response>( packetMsg );
                     break;
                 case "DeleteReservationPositionMessage":
-                    UnifiedMessages.HandleResponseMsg<CStore_DeleteReservationPositionMessage_Response>( packetMsg );
+                    PostResponseMsg<CStore_DeleteReservationPositionMessage_Response>( packetMsg );
                     break;
                 case "GetAllReservationPositionMessages":
-                    UnifiedMessages.HandleResponseMsg<CStore_GetAllReservationPositionMessages_Response>( packetMsg );
+                    PostResponseMsg<CStore_GetAllReservationPositionMessages_Response>( packetMsg );
                     break;
                 case "SetCompatibilityFeedback":
-                    UnifiedMessages.HandleResponseMsg<CSteamDeckCompatibility_SetFeedback_Response>( packetMsg );
+                    PostResponseMsg<CSteamDeckCompatibility_SetFeedback_Response>( packetMsg );
                     break;
                 case "ShouldPromptForCompatibilityFeedback":
-                    UnifiedMessages.HandleResponseMsg<CSteamDeckCompatibility_ShouldPrompt_Response>( packetMsg );
+                    PostResponseMsg<CSteamDeckCompatibility_ShouldPrompt_Response>( packetMsg );
                     break;
             }
         }
@@ -2215,10 +2215,10 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "MigratePartnerLinkTracking":
-                    UnifiedMessages.HandleNotificationMsg<CStore_MigratePartnerLinkTracking_Notification>( packetMsg );
+                    PostNotificationMsg<CStore_MigratePartnerLinkTracking_Notification>( packetMsg );
                     break;
                 case "ReloadAllReservationPositionMessages":
-                    UnifiedMessages.HandleNotificationMsg<CStore_ReloadAllReservationPositionMessages_Notification>( packetMsg );
+                    PostNotificationMsg<CStore_ReloadAllReservationPositionMessages_Notification>( packetMsg );
                     break;
             }
         }
@@ -2242,7 +2242,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "NotifyStorePreferencesChanged":
-                    UnifiedMessages.HandleNotificationMsg<CStore_StorePreferencesChanged_Notification>( packetMsg );
+                    PostNotificationMsg<CStore_StorePreferencesChanged_Notification>( packetMsg );
                     break;
             }
         }

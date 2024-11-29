@@ -391,22 +391,22 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "JoinParty":
-                    UnifiedMessages.HandleResponseMsg<CParties_JoinParty_Response>( packetMsg );
+                    PostResponseMsg<CParties_JoinParty_Response>( packetMsg );
                     break;
                 case "CreateBeacon":
-                    UnifiedMessages.HandleResponseMsg<CParties_CreateBeacon_Response>( packetMsg );
+                    PostResponseMsg<CParties_CreateBeacon_Response>( packetMsg );
                     break;
                 case "OnReservationCompleted":
-                    UnifiedMessages.HandleResponseMsg<CParties_OnReservationCompleted_Response>( packetMsg );
+                    PostResponseMsg<CParties_OnReservationCompleted_Response>( packetMsg );
                     break;
                 case "CancelReservation":
-                    UnifiedMessages.HandleResponseMsg<CParties_CancelReservation_Response>( packetMsg );
+                    PostResponseMsg<CParties_CancelReservation_Response>( packetMsg );
                     break;
                 case "ChangeNumOpenSlots":
-                    UnifiedMessages.HandleResponseMsg<CParties_ChangeNumOpenSlots_Response>( packetMsg );
+                    PostResponseMsg<CParties_ChangeNumOpenSlots_Response>( packetMsg );
                     break;
                 case "DestroyBeacon":
-                    UnifiedMessages.HandleResponseMsg<CParties_DestroyBeacon_Response>( packetMsg );
+                    PostResponseMsg<CParties_DestroyBeacon_Response>( packetMsg );
                     break;
             }
         }

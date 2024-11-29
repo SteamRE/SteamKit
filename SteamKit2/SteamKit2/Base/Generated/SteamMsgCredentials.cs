@@ -609,22 +609,22 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "TestAvailablePassword":
-                    UnifiedMessages.HandleResponseMsg<CCredentials_TestAvailablePassword_Response>( packetMsg );
+                    PostResponseMsg<CCredentials_TestAvailablePassword_Response>( packetMsg );
                     break;
                 case "GetSteamGuardDetails":
-                    UnifiedMessages.HandleResponseMsg<CCredentials_GetSteamGuardDetails_Response>( packetMsg );
+                    PostResponseMsg<CCredentials_GetSteamGuardDetails_Response>( packetMsg );
                     break;
                 case "ValidateEmailAddress":
-                    UnifiedMessages.HandleResponseMsg<CCredentials_ValidateEmailAddress_Response>( packetMsg );
+                    PostResponseMsg<CCredentials_ValidateEmailAddress_Response>( packetMsg );
                     break;
                 case "SteamGuardPhishingReport":
-                    UnifiedMessages.HandleResponseMsg<CCredentials_SteamGuardPhishingReport_Response>( packetMsg );
+                    PostResponseMsg<CCredentials_SteamGuardPhishingReport_Response>( packetMsg );
                     break;
                 case "GetCredentialChangeTimeDetails":
-                    UnifiedMessages.HandleResponseMsg<CCredentials_LastCredentialChangeTime_Response>( packetMsg );
+                    PostResponseMsg<CCredentials_LastCredentialChangeTime_Response>( packetMsg );
                     break;
                 case "GetAccountAuthSecret":
-                    UnifiedMessages.HandleResponseMsg<CCredentials_GetAccountAuthSecret_Response>( packetMsg );
+                    PostResponseMsg<CCredentials_GetAccountAuthSecret_Response>( packetMsg );
                     break;
             }
         }

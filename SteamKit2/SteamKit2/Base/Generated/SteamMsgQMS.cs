@@ -579,7 +579,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "SearchForGame":
-                    UnifiedMessages.HandleResponseMsg<CQueuedMatchmaking_SearchForGame_Response>( packetMsg );
+                    PostResponseMsg<CQueuedMatchmaking_SearchForGame_Response>( packetMsg );
                     break;
             }
         }
@@ -613,13 +613,13 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "SearchForPlayers":
-                    UnifiedMessages.HandleResponseMsg<CQueuedMatchmakingGameHost_SearchForPlayers_Response>( packetMsg );
+                    PostResponseMsg<CQueuedMatchmakingGameHost_SearchForPlayers_Response>( packetMsg );
                     break;
                 case "SubmitPlayerResult":
-                    UnifiedMessages.HandleResponseMsg<CQueuedMatchmakingGameHost_SubmitPlayerResult_Response>( packetMsg );
+                    PostResponseMsg<CQueuedMatchmakingGameHost_SubmitPlayerResult_Response>( packetMsg );
                     break;
                 case "EndGame":
-                    UnifiedMessages.HandleResponseMsg<CQueuedMatchmakingGameHost_EndGame_Response>( packetMsg );
+                    PostResponseMsg<CQueuedMatchmakingGameHost_EndGame_Response>( packetMsg );
                     break;
             }
         }

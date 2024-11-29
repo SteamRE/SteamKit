@@ -784,25 +784,25 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetServersForSteamPipe":
-                    UnifiedMessages.HandleResponseMsg<CContentServerDirectory_GetServersForSteamPipe_Response>( packetMsg );
+                    PostResponseMsg<CContentServerDirectory_GetServersForSteamPipe_Response>( packetMsg );
                     break;
                 case "GetDepotPatchInfo":
-                    UnifiedMessages.HandleResponseMsg<CContentServerDirectory_GetDepotPatchInfo_Response>( packetMsg );
+                    PostResponseMsg<CContentServerDirectory_GetDepotPatchInfo_Response>( packetMsg );
                     break;
                 case "GetClientUpdateHosts":
-                    UnifiedMessages.HandleResponseMsg<CContentServerDirectory_GetClientUpdateHosts_Response>( packetMsg );
+                    PostResponseMsg<CContentServerDirectory_GetClientUpdateHosts_Response>( packetMsg );
                     break;
                 case "GetManifestRequestCode":
-                    UnifiedMessages.HandleResponseMsg<CContentServerDirectory_GetManifestRequestCode_Response>( packetMsg );
+                    PostResponseMsg<CContentServerDirectory_GetManifestRequestCode_Response>( packetMsg );
                     break;
                 case "GetCDNAuthToken":
-                    UnifiedMessages.HandleResponseMsg<CContentServerDirectory_GetCDNAuthToken_Response>( packetMsg );
+                    PostResponseMsg<CContentServerDirectory_GetCDNAuthToken_Response>( packetMsg );
                     break;
                 case "RequestPeerContentServer":
-                    UnifiedMessages.HandleResponseMsg<CContentServerDirectory_RequestPeerContentServer_Response>( packetMsg );
+                    PostResponseMsg<CContentServerDirectory_RequestPeerContentServer_Response>( packetMsg );
                     break;
                 case "GetPeerContentInfo":
-                    UnifiedMessages.HandleResponseMsg<CContentServerDirectory_GetPeerContentInfo_Response>( packetMsg );
+                    PostResponseMsg<CContentServerDirectory_GetPeerContentInfo_Response>( packetMsg );
                     break;
             }
         }

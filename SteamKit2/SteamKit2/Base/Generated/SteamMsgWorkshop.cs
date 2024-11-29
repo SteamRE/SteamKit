@@ -91,7 +91,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetEULAStatus":
-                    UnifiedMessages.HandleResponseMsg<CWorkshop_GetEULAStatus_Response>( packetMsg );
+                    PostResponseMsg<CWorkshop_GetEULAStatus_Response>( packetMsg );
                     break;
             }
         }

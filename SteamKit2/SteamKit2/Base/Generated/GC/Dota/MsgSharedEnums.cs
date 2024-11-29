@@ -1925,6 +1925,14 @@ namespace SteamKit2.GC.Dota.Internal
         k_ECandyShopUpgrade_ExtraExchangeRecipe = 2,
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public enum EItemSuggestPreference
+    {
+        k_EItemSuggestPreference_None = 0,
+        k_EItemSuggestPreference_Liked = 1,
+        k_EItemSuggestPreference_Disliked = 2,
+    }
+
 }
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

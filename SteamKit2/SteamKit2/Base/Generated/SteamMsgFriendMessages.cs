@@ -838,19 +838,19 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetRecentMessages":
-                    UnifiedMessages.HandleResponseMsg<CFriendMessages_GetRecentMessages_Response>( packetMsg );
+                    PostResponseMsg<CFriendMessages_GetRecentMessages_Response>( packetMsg );
                     break;
                 case "GetActiveMessageSessions":
-                    UnifiedMessages.HandleResponseMsg<CFriendsMessages_GetActiveMessageSessions_Response>( packetMsg );
+                    PostResponseMsg<CFriendsMessages_GetActiveMessageSessions_Response>( packetMsg );
                     break;
                 case "SendMessage":
-                    UnifiedMessages.HandleResponseMsg<CFriendMessages_SendMessage_Response>( packetMsg );
+                    PostResponseMsg<CFriendMessages_SendMessage_Response>( packetMsg );
                     break;
                 case "IsInFriendsUIBeta":
-                    UnifiedMessages.HandleResponseMsg<CFriendMessages_IsInFriendsUIBeta_Response>( packetMsg );
+                    PostResponseMsg<CFriendMessages_IsInFriendsUIBeta_Response>( packetMsg );
                     break;
                 case "UpdateMessageReaction":
-                    UnifiedMessages.HandleResponseMsg<CFriendMessages_UpdateMessageReaction_Response>( packetMsg );
+                    PostResponseMsg<CFriendMessages_UpdateMessageReaction_Response>( packetMsg );
                     break;
             }
         }
@@ -860,7 +860,7 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "AckMessage":
-                    UnifiedMessages.HandleNotificationMsg<CFriendMessages_AckMessage_Notification>( packetMsg );
+                    PostNotificationMsg<CFriendMessages_AckMessage_Notification>( packetMsg );
                     break;
             }
         }
@@ -894,13 +894,13 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "IncomingMessage":
-                    UnifiedMessages.HandleNotificationMsg<CFriendMessages_IncomingMessage_Notification>( packetMsg );
+                    PostNotificationMsg<CFriendMessages_IncomingMessage_Notification>( packetMsg );
                     break;
                 case "NotifyAckMessageEcho":
-                    UnifiedMessages.HandleNotificationMsg<CFriendMessages_AckMessage_Notification>( packetMsg );
+                    PostNotificationMsg<CFriendMessages_AckMessage_Notification>( packetMsg );
                     break;
                 case "MessageReaction":
-                    UnifiedMessages.HandleNotificationMsg<CFriendMessages_MessageReaction_Notification>( packetMsg );
+                    PostNotificationMsg<CFriendMessages_MessageReaction_Notification>( packetMsg );
                     break;
             }
         }

@@ -184,13 +184,13 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetLinkFilterHashPrefixes":
-                    UnifiedMessages.HandleResponseMsg<CCommunity_GetLinkFilterHashPrefixes_Response>( packetMsg );
+                    PostResponseMsg<CCommunity_GetLinkFilterHashPrefixes_Response>( packetMsg );
                     break;
                 case "GetLinkFilterHashes":
-                    UnifiedMessages.HandleResponseMsg<CCommunity_GetLinkFilterHashes_Response>( packetMsg );
+                    PostResponseMsg<CCommunity_GetLinkFilterHashes_Response>( packetMsg );
                     break;
                 case "GetLinkFilterListVersion":
-                    UnifiedMessages.HandleResponseMsg<CCommunity_GetLinkFilterListVersion_Response>( packetMsg );
+                    PostResponseMsg<CCommunity_GetLinkFilterListVersion_Response>( packetMsg );
                     break;
             }
         }

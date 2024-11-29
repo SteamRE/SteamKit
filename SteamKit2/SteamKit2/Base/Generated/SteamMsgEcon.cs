@@ -899,16 +899,16 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetInventoryItemsWithDescriptions":
-                    UnifiedMessages.HandleResponseMsg<CEcon_GetInventoryItemsWithDescriptions_Response>( packetMsg );
+                    PostResponseMsg<CEcon_GetInventoryItemsWithDescriptions_Response>( packetMsg );
                     break;
                 case "GetTradeOfferAccessToken":
-                    UnifiedMessages.HandleResponseMsg<CEcon_GetTradeOfferAccessToken_Response>( packetMsg );
+                    PostResponseMsg<CEcon_GetTradeOfferAccessToken_Response>( packetMsg );
                     break;
                 case "ClientGetItemShopOverlayAuthURL":
-                    UnifiedMessages.HandleResponseMsg<CEcon_ClientGetItemShopOverlayAuthURL_Response>( packetMsg );
+                    PostResponseMsg<CEcon_ClientGetItemShopOverlayAuthURL_Response>( packetMsg );
                     break;
                 case "GetAssetClassInfo":
-                    UnifiedMessages.HandleResponseMsg<CEcon_GetAssetClassInfo_Response>( packetMsg );
+                    PostResponseMsg<CEcon_GetAssetClassInfo_Response>( packetMsg );
                     break;
             }
         }

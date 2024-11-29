@@ -915,37 +915,37 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "RegisterSteamController":
-                    UnifiedMessages.HandleResponseMsg<CAccountHardware_RegisterSteamController_Response>( packetMsg );
+                    PostResponseMsg<CAccountHardware_RegisterSteamController_Response>( packetMsg );
                     break;
                 case "CompleteSteamControllerRegistration":
-                    UnifiedMessages.HandleResponseMsg<CAccountHardware_CompleteSteamControllerRegistration_Response>( packetMsg );
+                    PostResponseMsg<CAccountHardware_CompleteSteamControllerRegistration_Response>( packetMsg );
                     break;
                 case "QueryAccountsRegisteredToController":
-                    UnifiedMessages.HandleResponseMsg<CAccountHardware_QueryAccountsRegisteredToSerial_Response>( packetMsg );
+                    PostResponseMsg<CAccountHardware_QueryAccountsRegisteredToSerial_Response>( packetMsg );
                     break;
                 case "SetDesiredControllerConfigForApp":
-                    UnifiedMessages.HandleResponseMsg<CAccountHardware_SteamControllerSetConfig_Response>( packetMsg );
+                    PostResponseMsg<CAccountHardware_SteamControllerSetConfig_Response>( packetMsg );
                     break;
                 case "GetDesiredControllerConfigForApp":
-                    UnifiedMessages.HandleResponseMsg<CAccountHardware_SteamControllerGetConfig_Response>( packetMsg );
+                    PostResponseMsg<CAccountHardware_SteamControllerGetConfig_Response>( packetMsg );
                     break;
                 case "DeRegisterSteamController":
-                    UnifiedMessages.HandleResponseMsg<CAccountHardware_DeRegisterSteamController_Response>( packetMsg );
+                    PostResponseMsg<CAccountHardware_DeRegisterSteamController_Response>( packetMsg );
                     break;
                 case "SetControllerPersonalizationFile":
-                    UnifiedMessages.HandleResponseMsg<CAccountHardware_SetPersonalizationFile_Response>( packetMsg );
+                    PostResponseMsg<CAccountHardware_SetPersonalizationFile_Response>( packetMsg );
                     break;
                 case "GetControllerPersonalizationFile":
-                    UnifiedMessages.HandleResponseMsg<CAccountHardware_GetPersonalizationFile_Response>( packetMsg );
+                    PostResponseMsg<CAccountHardware_GetPersonalizationFile_Response>( packetMsg );
                     break;
                 case "VRCompatibilityCheck":
-                    UnifiedMessages.HandleResponseMsg<CAccountHardware_VRCompatibilityCheck_Response>( packetMsg );
+                    PostResponseMsg<CAccountHardware_VRCompatibilityCheck_Response>( packetMsg );
                     break;
                 case "RegisterValveIndexComponent":
-                    UnifiedMessages.HandleResponseMsg<CAccountHardware_RegisterValveIndexComponent_Response>( packetMsg );
+                    PostResponseMsg<CAccountHardware_RegisterValveIndexComponent_Response>( packetMsg );
                     break;
                 case "GetSteamDeckComponents":
-                    UnifiedMessages.HandleResponseMsg<CAccountHardware_GetSteamDeckComponents_Response>( packetMsg );
+                    PostResponseMsg<CAccountHardware_GetSteamDeckComponents_Response>( packetMsg );
                     break;
             }
         }

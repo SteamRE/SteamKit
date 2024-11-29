@@ -453,10 +453,10 @@ namespace SteamKit2.WebUI.Internal
             switch ( methodName )
             {
                 case "GetAppDetailsSpotlight":
-                    UnifiedMessages.HandleResponseMsg<CUserNews_GetAppDetailsSpotlight_Response>( packetMsg );
+                    PostResponseMsg<CUserNews_GetAppDetailsSpotlight_Response>( packetMsg );
                     break;
                 case "GetUserNews":
-                    UnifiedMessages.HandleResponseMsg<CUserNews_GetUserNews_Response>( packetMsg );
+                    PostResponseMsg<CUserNews_GetUserNews_Response>( packetMsg );
                     break;
             }
         }

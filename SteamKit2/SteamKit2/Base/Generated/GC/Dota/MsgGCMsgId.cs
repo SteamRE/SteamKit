@@ -827,7 +827,6 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGCToClientCollectorsCacheAvailableDataResponse = 8872,
         k_EMsgClientToGCUploadMatchClip = 8873,
         k_EMsgGCToClientUploadMatchClipResponse = 8874,
-        k_EMsgGCToServerSteamLearnAccessTokensChanged = 8876,
         k_EMsgSignOutMuertaMinigame = 8877,
         k_EMsgGCToServerLobbyHeroRoleStats = 8878,
         k_EMsgClientToGCRankRequest = 8879,
@@ -946,7 +945,6 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgGCToClientFightingGameChallenge = 8995,
         k_EMsgGCToClientFightingGameStartMatch = 8996,
         k_EMsgGCToClientFightingGameChallengeCanceled = 8997,
-        k_EMsgGCToServerSteamLearnUseHTTP = 8998,
         k_EMsgClientToGCBingoShuffleCard = 8999,
         k_EMsgClientToGCBingoShuffleCardResponse = 9000,
         k_EMsgClientToGCBingoModifySquare = 9001,
@@ -957,6 +955,12 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgClientToGCBingoDevClearInventoryResponse = 9006,
         k_EMsgGCCompendiumRemoveAllSelections = 9007,
         k_EMsgGCCompendiumRemoveAllSelectionsResponse = 9008,
+        k_EMsgClientToGCOverworldMinigameAction = 9009,
+        k_EMsgClientToGCOverworldMinigameActionResponse = 9010,
+        k_EMsgClientToGCSurvivorsTelemetry = 9011,
+        k_EMsgClientToGCSurvivorsTelemetryResponse = 9012,
+        k_EMsgClientToGCOverworldRequestTokensNeededByFriend = 9013,
+        k_EMsgClientToGCOverworldRequestTokensNeededByFriendResponse = 9014,
     }
 
 }

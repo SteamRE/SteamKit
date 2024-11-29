@@ -750,13 +750,13 @@ namespace SteamKit2.WebUI.Internal
             switch ( methodName )
             {
                 case "GetFriendsRecommendedApp":
-                    UnifiedMessages.HandleResponseMsg<CUserReviews_GetFriendsRecommendedApp_Response>( packetMsg );
+                    PostResponseMsg<CUserReviews_GetFriendsRecommendedApp_Response>( packetMsg );
                     break;
                 case "GetIndividualRecommendations":
-                    UnifiedMessages.HandleResponseMsg<CUserReviews_GetIndividualRecommendations_Response>( packetMsg );
+                    PostResponseMsg<CUserReviews_GetIndividualRecommendations_Response>( packetMsg );
                     break;
                 case "Update":
-                    UnifiedMessages.HandleResponseMsg<CUserReviews_Update_Response>( packetMsg );
+                    PostResponseMsg<CUserReviews_Update_Response>( packetMsg );
                     break;
             }
         }

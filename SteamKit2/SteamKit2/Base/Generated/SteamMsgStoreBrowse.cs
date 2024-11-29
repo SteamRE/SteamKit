@@ -2821,22 +2821,22 @@ namespace SteamKit2.Internal
             switch ( methodName )
             {
                 case "GetItems":
-                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetItems_Response>( packetMsg );
+                    PostResponseMsg<CStoreBrowse_GetItems_Response>( packetMsg );
                     break;
                 case "GetStoreCategories":
-                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetStoreCategories_Response>( packetMsg );
+                    PostResponseMsg<CStoreBrowse_GetStoreCategories_Response>( packetMsg );
                     break;
                 case "GetPriceStops":
-                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetPriceStops_Response>( packetMsg );
+                    PostResponseMsg<CStoreBrowse_GetPriceStops_Response>( packetMsg );
                     break;
                 case "GetDLCForApps":
-                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetDLCForApps_Response>( packetMsg );
+                    PostResponseMsg<CStoreBrowse_GetDLCForApps_Response>( packetMsg );
                     break;
                 case "GetDLCForAppsSolr":
-                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetDLCForAppsSolr_Response>( packetMsg );
+                    PostResponseMsg<CStoreBrowse_GetDLCForAppsSolr_Response>( packetMsg );
                     break;
                 case "GetHardwareItems":
-                    UnifiedMessages.HandleResponseMsg<CStoreBrowse_GetHardwareItems_Response>( packetMsg );
+                    PostResponseMsg<CStoreBrowse_GetHardwareItems_Response>( packetMsg );
                     break;
             }
         }
