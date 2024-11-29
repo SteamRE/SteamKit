@@ -94,6 +94,7 @@ dota2,dota_gcmessages_common_league.proto,GC\Dota\MsgGCCommonLeague.cs,SteamKit2
 dota2,dota_gcmessages_common_lobby.proto,GC\Dota\MsgGCCommonLobby.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_common_match_management.proto,GC\Dota\MsgGCCommonMatchMgmt.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_common_overworld.proto,GC\Dota\MsgGCCommonOverworld.cs,SteamKit2.GC.Dota.Internal
+dota2,dota_gcmessages_common_survivors.proto,GC\Dota\MsgGCCommonSurvivors.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_msgid.proto,GC\Dota\MsgGCMsgId.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_server.proto,GC\Dota\MsgGCServer.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_match_metadata.proto,GC\Dota\MsgMatchMetadata.cs,SteamKit2.GC.Dota.Internal
