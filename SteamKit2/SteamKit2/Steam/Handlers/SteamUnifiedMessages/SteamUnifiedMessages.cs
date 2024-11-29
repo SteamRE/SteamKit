@@ -129,15 +129,15 @@ namespace SteamKit2
             }
         }
 
-        internal void HandleResponseMsg<TService>( PacketClientMsgProtobuf packetMsg ) where TService : IExtensible, new()
+        internal void HandleResponseMsg<TResponse>( PacketClientMsgProtobuf packetMsg ) where TResponse : IExtensible, new()
         {
-            var callback = new ServiceMethodResponse<TService>( packetMsg );
+            var callback = new ServiceMethodResponse<TResponse>( packetMsg );
             Client.PostCallback( callback );
         }
 
-        internal void HandleNotificationMsg<TService>( PacketClientMsgProtobuf packetMsg ) where TService : IExtensible, new()
+        internal void HandleNotificationMsg<TNotification>( PacketClientMsgProtobuf packetMsg ) where TNotification : IExtensible, new()
         {
-            var callback = new ServiceMethodNotification<TService>( packetMsg );
+            var callback = new ServiceMethodNotification<TNotification>( packetMsg );
             Client.PostCallback( callback );
         }
 
@@ -159,6 +159,26 @@ namespace SteamKit2
             /// <param name="methodName">The name of the method the service should handle</param>
             /// <param name="packetMsg">The packet message that contains the data</param>
             public abstract void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg );
+
+            /// <summary>
+            /// Dispatches the provided data as a service method response.
+            /// </summary>
+            /// <param name="packetMsg">The packet message that contains the data.</param>
+            /// <typeparam name="TResponse">The type of the response.</typeparam>
+            protected void PostResponseMsg<TResponse>( PacketClientMsgProtobuf packetMsg ) where TResponse : IExtensible, new()
+            {
+	            UnifiedMessages?.HandleResponseMsg<TResponse>( packetMsg );
+            }
+
+            /// <summary>
+            /// Dispatches the provided data as a service method notification.
+            /// </summary>
+            /// <param name="packetMsg">The packet message that contains the data.</param>
+            /// <typeparam name="TNotification">The type of the notification.</typeparam>
+            protected void PostNotificationMsg<TNotification>( PacketClientMsgProtobuf packetMsg ) where TNotification : IExtensible, new()
+            {
+	            UnifiedMessages?.HandleNotificationMsg<TNotification>( packetMsg );
+            }
 
             /// <summary>
             /// The name of the steam unified messages service.
