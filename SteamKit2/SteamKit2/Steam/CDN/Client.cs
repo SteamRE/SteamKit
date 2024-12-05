@@ -16,7 +16,7 @@ namespace SteamKit2.CDN
     /// <summary>
     /// The <see cref="Client"/> class is used for downloading game content from the Steam servers.
     /// </summary>
-    public sealed class Client : IDisposable
+    public sealed partial class Client : IDisposable
     {
         HttpClient httpClient;
 
@@ -28,7 +28,6 @@ namespace SteamKit2.CDN
         /// Default timeout to use when reading the response body
         /// </summary>
         public static TimeSpan ResponseBodyTimeout { get; set; } = TimeSpan.FromSeconds( 60 );
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Client"/> class.
@@ -230,7 +229,16 @@ namespace SteamKit2.CDN
             var chunkID = Utils.EncodeHexString( chunk.ChunkID );
             var url = $"depot/{depotId}/chunk/{chunkID}";
 
-            using var request = new HttpRequestMessage( HttpMethod.Get, BuildCommand( server, url, cdnAuthToken, proxyServer ) );
+            HttpRequestMessage request;
+            if ( UseLancacheServer )
+            {
+                request = BuildLancacheRequest( server, url, cdnAuthToken );
+            }
+            else
+            {
+                var builtUrl = BuildCommand( server, url, cdnAuthToken, proxyServer );
+                request = new HttpRequestMessage( HttpMethod.Get, builtUrl );
+            }
 
             using var cts = new CancellationTokenSource();
             cts.CancelAfter( RequestTimeout );
@@ -312,6 +320,10 @@ namespace SteamKit2.CDN
             {
                 DebugLog.WriteLine( nameof( CDN ), $"Failed to download a depot chunk {request.RequestUri}: {ex.Message}" );
                 throw;
+            }
+            finally
+            {
+                request.Dispose();
             }
         }
 
