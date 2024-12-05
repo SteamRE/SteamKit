@@ -16,7 +16,7 @@ namespace SteamKit2.CDN
     /// <summary>
     /// The <see cref="Client"/> class is used for downloading game content from the Steam servers.
     /// </summary>
-    public partial class Client : IDisposable
+    public sealed partial class Client : IDisposable
     {
         HttpClient httpClient;
 
