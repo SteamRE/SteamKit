@@ -3481,6 +3481,7 @@ namespace SteamKit2.Internal
         k_EBroadcastWatchLocation_Chat_Friends = 12,
         k_EBroadcastWatchLocation_SteamTV_Web = 13,
         k_EBroadcastWatchLocation_DesktopUI_Overlay = 14,
+        k_EBroadcastWatchLocation_TrailerCarousel = 15,
     }
 
     [global::ProtoBuf.ProtoContract()]

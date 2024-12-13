@@ -1660,6 +1660,36 @@ namespace SteamKit2.Internal
             public void Resetvotes_down() => __pbn__votes_down = null;
             private uint? __pbn__votes_down;
 
+            [global::ProtoBuf.ProtoMember(4)]
+            public float trusted_score
+            {
+                get => __pbn__trusted_score.GetValueOrDefault();
+                set => __pbn__trusted_score = value;
+            }
+            public bool ShouldSerializetrusted_score() => __pbn__trusted_score != null;
+            public void Resettrusted_score() => __pbn__trusted_score = null;
+            private float? __pbn__trusted_score;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public uint trusted_votes_up
+            {
+                get => __pbn__trusted_votes_up.GetValueOrDefault();
+                set => __pbn__trusted_votes_up = value;
+            }
+            public bool ShouldSerializetrusted_votes_up() => __pbn__trusted_votes_up != null;
+            public void Resettrusted_votes_up() => __pbn__trusted_votes_up = null;
+            private uint? __pbn__trusted_votes_up;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public uint trusted_votes_down
+            {
+                get => __pbn__trusted_votes_down.GetValueOrDefault();
+                set => __pbn__trusted_votes_down = value;
+            }
+            public bool ShouldSerializetrusted_votes_down() => __pbn__trusted_votes_down != null;
+            public void Resettrusted_votes_down() => __pbn__trusted_votes_down = null;
+            private uint? __pbn__trusted_votes_down;
+
         }
 
         [global::ProtoBuf.ProtoContract()]

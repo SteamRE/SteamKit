@@ -1586,6 +1586,16 @@ namespace SteamKit2.Internal
         public void Resetdemo_appid() => __pbn__demo_appid = null;
         private uint? __pbn__demo_appid;
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool allow_late_firing
+        {
+            get => __pbn__allow_late_firing.GetValueOrDefault();
+            set => __pbn__allow_late_firing = value;
+        }
+        public bool ShouldSerializeallow_late_firing() => __pbn__allow_late_firing != null;
+        public void Resetallow_late_firing() => __pbn__allow_late_firing = null;
+        private bool? __pbn__allow_late_firing;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1654,6 +1664,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializedemo_appid() => __pbn__demo_appid != null;
         public void Resetdemo_appid() => __pbn__demo_appid = null;
         private uint? __pbn__demo_appid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool allow_late_firing
+        {
+            get => __pbn__allow_late_firing.GetValueOrDefault();
+            set => __pbn__allow_late_firing = value;
+        }
+        public bool ShouldSerializeallow_late_firing() => __pbn__allow_late_firing != null;
+        public void Resetallow_late_firing() => __pbn__allow_late_firing = null;
+        private bool? __pbn__allow_late_firing;
 
     }
 

@@ -667,6 +667,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetleaderboard_index() => __pbn__leaderboard_index = null;
         private uint? __pbn__leaderboard_index;
 
+        [global::ProtoBuf.ProtoMember(8)]
+        public bool should_claim_reward
+        {
+            get => __pbn__should_claim_reward.GetValueOrDefault();
+            set => __pbn__should_claim_reward = value;
+        }
+        public bool ShouldSerializeshould_claim_reward() => __pbn__should_claim_reward != null;
+        public void Resetshould_claim_reward() => __pbn__should_claim_reward = null;
+        private bool? __pbn__should_claim_reward;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -482,6 +482,16 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(33)]
         public StoreGameRating game_rating { get; set; }
 
+        [global::ProtoBuf.ProtoMember(34)]
+        public bool is_coming_soon
+        {
+            get => __pbn__is_coming_soon.GetValueOrDefault();
+            set => __pbn__is_coming_soon = value;
+        }
+        public bool ShouldSerializeis_coming_soon() => __pbn__is_coming_soon != null;
+        public void Resetis_coming_soon() => __pbn__is_coming_soon = null;
+        private bool? __pbn__is_coming_soon;
+
         [global::ProtoBuf.ProtoMember(40)]
         public PurchaseOption best_purchase_option { get; set; }
 
@@ -1265,16 +1275,6 @@ namespace SteamKit2.Internal
             public void Resetoriginal_price_in_cents() => __pbn__original_price_in_cents = null;
             private long? __pbn__original_price_in_cents;
 
-            [global::ProtoBuf.ProtoMember(7)]
-            public long user_final_price_in_cents
-            {
-                get => __pbn__user_final_price_in_cents.GetValueOrDefault();
-                set => __pbn__user_final_price_in_cents = value;
-            }
-            public bool ShouldSerializeuser_final_price_in_cents() => __pbn__user_final_price_in_cents != null;
-            public void Resetuser_final_price_in_cents() => __pbn__user_final_price_in_cents = null;
-            private long? __pbn__user_final_price_in_cents;
-
             [global::ProtoBuf.ProtoMember(8)]
             [global::System.ComponentModel.DefaultValue("")]
             public string formatted_final_price
@@ -1307,16 +1307,6 @@ namespace SteamKit2.Internal
             public void Resetdiscount_pct() => __pbn__discount_pct = null;
             private int? __pbn__discount_pct;
 
-            [global::ProtoBuf.ProtoMember(11)]
-            public int user_discount_pct
-            {
-                get => __pbn__user_discount_pct.GetValueOrDefault();
-                set => __pbn__user_discount_pct = value;
-            }
-            public bool ShouldSerializeuser_discount_pct() => __pbn__user_discount_pct != null;
-            public void Resetuser_discount_pct() => __pbn__user_discount_pct = null;
-            private int? __pbn__user_discount_pct;
-
             [global::ProtoBuf.ProtoMember(12)]
             public int bundle_discount_pct
             {
@@ -1327,24 +1317,39 @@ namespace SteamKit2.Internal
             public void Resetbundle_discount_pct() => __pbn__bundle_discount_pct = null;
             private int? __pbn__bundle_discount_pct;
 
+            [global::ProtoBuf.ProtoMember(13)]
+            public bool is_free_to_keep
+            {
+                get => __pbn__is_free_to_keep.GetValueOrDefault();
+                set => __pbn__is_free_to_keep = value;
+            }
+            public bool ShouldSerializeis_free_to_keep() => __pbn__is_free_to_keep != null;
+            public void Resetis_free_to_keep() => __pbn__is_free_to_keep = null;
+            private bool? __pbn__is_free_to_keep;
+
+            [global::ProtoBuf.ProtoMember(14)]
+            public long price_before_bundle_discount
+            {
+                get => __pbn__price_before_bundle_discount.GetValueOrDefault();
+                set => __pbn__price_before_bundle_discount = value;
+            }
+            public bool ShouldSerializeprice_before_bundle_discount() => __pbn__price_before_bundle_discount != null;
+            public void Resetprice_before_bundle_discount() => __pbn__price_before_bundle_discount = null;
+            private long? __pbn__price_before_bundle_discount;
+
+            [global::ProtoBuf.ProtoMember(15)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string formatted_price_before_bundle_discount
+            {
+                get => __pbn__formatted_price_before_bundle_discount ?? "";
+                set => __pbn__formatted_price_before_bundle_discount = value;
+            }
+            public bool ShouldSerializeformatted_price_before_bundle_discount() => __pbn__formatted_price_before_bundle_discount != null;
+            public void Resetformatted_price_before_bundle_discount() => __pbn__formatted_price_before_bundle_discount = null;
+            private string __pbn__formatted_price_before_bundle_discount;
+
             [global::ProtoBuf.ProtoMember(20)]
             public global::System.Collections.Generic.List<Discount> active_discounts { get; } = new global::System.Collections.Generic.List<Discount>();
-
-            [global::ProtoBuf.ProtoMember(21)]
-            public global::System.Collections.Generic.List<Discount> user_active_discounts { get; } = new global::System.Collections.Generic.List<Discount>();
-
-            [global::ProtoBuf.ProtoMember(22)]
-            public global::System.Collections.Generic.List<Discount> inactive_discounts { get; } = new global::System.Collections.Generic.List<Discount>();
-
-            [global::ProtoBuf.ProtoMember(30)]
-            public bool user_can_purchase
-            {
-                get => __pbn__user_can_purchase.GetValueOrDefault();
-                set => __pbn__user_can_purchase = value;
-            }
-            public bool ShouldSerializeuser_can_purchase() => __pbn__user_can_purchase != null;
-            public void Resetuser_can_purchase() => __pbn__user_can_purchase = null;
-            private bool? __pbn__user_can_purchase;
 
             [global::ProtoBuf.ProtoMember(31)]
             public bool user_can_purchase_as_gift
@@ -1420,6 +1425,16 @@ namespace SteamKit2.Internal
 
             [global::ProtoBuf.ProtoMember(46)]
             public RecurrenceInfo recurrence_info { get; set; }
+
+            [global::ProtoBuf.ProtoMember(47)]
+            public uint free_to_keep_ends
+            {
+                get => __pbn__free_to_keep_ends.GetValueOrDefault();
+                set => __pbn__free_to_keep_ends = value;
+            }
+            public bool ShouldSerializefree_to_keep_ends() => __pbn__free_to_keep_ends != null;
+            public void Resetfree_to_keep_ends() => __pbn__free_to_keep_ends = null;
+            private uint? __pbn__free_to_keep_ends;
 
             [global::ProtoBuf.ProtoContract()]
             public partial class Discount : global::ProtoBuf.IExtensible
@@ -2168,6 +2183,27 @@ namespace SteamKit2.Internal
             public void Resetcomputed() => __pbn__computed = null;
             private bool? __pbn__computed;
 
+            [global::ProtoBuf.ProtoMember(8)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string edit_url
+            {
+                get => __pbn__edit_url ?? "";
+                set => __pbn__edit_url = value;
+            }
+            public bool ShouldSerializeedit_url() => __pbn__edit_url != null;
+            public void Resetedit_url() => __pbn__edit_url = null;
+            private string __pbn__edit_url;
+
+            [global::ProtoBuf.ProtoMember(9)]
+            public uint edit_sort_order
+            {
+                get => __pbn__edit_sort_order.GetValueOrDefault();
+                set => __pbn__edit_sort_order = value;
+            }
+            public bool ShouldSerializeedit_sort_order() => __pbn__edit_sort_order != null;
+            public void Resetedit_sort_order() => __pbn__edit_sort_order = null;
+            private uint? __pbn__edit_sort_order;
+
         }
 
     }
@@ -2768,7 +2804,11 @@ namespace SteamKit2.Internal
         k_EStoreLinkType_LinkedIn = 16,
         k_EStoreLinkType_WeChat = 17,
         k_EStoreLinkType_QQLink = 18,
-        k_EStoreLinkType_MAX = 19,
+        k_EStoreLinkType_Douyin = 19,
+        k_EStoreLinkType_Bluesky = 20,
+        k_EStoreLinkType_Mastodon = 21,
+        k_EStoreLinkType_Threads = 22,
+        k_EStoreLinkType_MAX = 23,
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -1278,6 +1278,16 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(15)]
         public global::System.Collections.Generic.List<ProfileColor> profile_colors { get; } = new global::System.Collections.Generic.List<ProfileColor>();
 
+        [global::ProtoBuf.ProtoMember(16)]
+        public bool tiled
+        {
+            get => __pbn__tiled.GetValueOrDefault();
+            set => __pbn__tiled = value;
+        }
+        public bool ShouldSerializetiled() => __pbn__tiled != null;
+        public void Resettiled() => __pbn__tiled = null;
+        private bool? __pbn__tiled;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class ProfileColor : global::ProtoBuf.IExtensible
         {

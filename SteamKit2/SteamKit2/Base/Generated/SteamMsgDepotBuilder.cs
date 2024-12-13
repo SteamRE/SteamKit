@@ -467,6 +467,16 @@ namespace SteamKit2.Internal
         public void Resetlive_branch() => __pbn__live_branch = null;
         private string __pbn__live_branch;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool for_local_cs
+        {
+            get => __pbn__for_local_cs.GetValueOrDefault();
+            set => __pbn__for_local_cs = value;
+        }
+        public bool ShouldSerializefor_local_cs() => __pbn__for_local_cs != null;
+        public void Resetfor_local_cs() => __pbn__for_local_cs = null;
+        private bool? __pbn__for_local_cs;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Depots : global::ProtoBuf.IExtensible
         {

@@ -287,6 +287,17 @@ namespace SteamKit2.Internal
         public void Resetlabel() => __pbn__label = null;
         private string __pbn__label;
 
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string name
+        {
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
+        }
+        public bool ShouldSerializename() => __pbn__name != null;
+        public void Resetname() => __pbn__name = null;
+        private string __pbn__name;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -582,6 +593,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializemarket_sell_country_restriction() => __pbn__market_sell_country_restriction != null;
         public void Resetmarket_sell_country_restriction() => __pbn__market_sell_country_restriction = null;
         private string __pbn__market_sell_country_restriction;
+
+        [global::ProtoBuf.ProtoMember(32)]
+        public bool @sealed
+        {
+            get => __pbn__sealed.GetValueOrDefault();
+            set => __pbn__sealed = value;
+        }
+        public bool ShouldSerializesealed() => __pbn__sealed != null;
+        public void Resetsealed() => __pbn__sealed = null;
+        private bool? __pbn__sealed;
 
     }
 

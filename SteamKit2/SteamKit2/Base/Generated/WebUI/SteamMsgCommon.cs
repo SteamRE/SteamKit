@@ -18258,6 +18258,16 @@ namespace SteamKit2.WebUI.Internal
         public void Resetdownload_throttle_rate() => __pbn__download_throttle_rate = null;
         private int? __pbn__download_throttle_rate;
 
+        [global::ProtoBuf.ProtoMember(8013)]
+        public int default_app_update_behavior
+        {
+            get => __pbn__default_app_update_behavior.GetValueOrDefault();
+            set => __pbn__default_app_update_behavior = value;
+        }
+        public bool ShouldSerializedefault_app_update_behavior() => __pbn__default_app_update_behavior != null;
+        public void Resetdefault_app_update_behavior() => __pbn__default_app_update_behavior = null;
+        private int? __pbn__default_app_update_behavior;
+
         [global::ProtoBuf.ProtoMember(10000)]
         public bool cloud_enabled
         {
@@ -19053,6 +19063,12 @@ namespace SteamKit2.WebUI.Internal
         public void Resetgamescope_game_resolution_global() => __pbn__gamescope_game_resolution_global = null;
         private string __pbn__gamescope_game_resolution_global;
 
+        [global::ProtoBuf.ProtoMember(21013)]
+        public CMsgHotkey gamescope_guide_hotkey { get; set; }
+
+        [global::ProtoBuf.ProtoMember(21014)]
+        public CMsgHotkey gamescope_qam_hotkey { get; set; }
+
         [global::ProtoBuf.ProtoMember(22000)]
         public int steamos_status_led_brightness
         {
@@ -19204,6 +19220,9 @@ namespace SteamKit2.WebUI.Internal
         public void Resetsetting_validation_string() => __pbn__setting_validation_string = null;
         private string __pbn__setting_validation_string;
 
+        [global::ProtoBuf.ProtoMember(23008)]
+        public CMsgHotkey setting_validation_hotkey { get; set; }
+
         [global::ProtoBuf.ProtoMember(24000)]
         public bool system_bluetooth_enabled
         {
@@ -19213,6 +19232,16 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializesystem_bluetooth_enabled() => __pbn__system_bluetooth_enabled != null;
         public void Resetsystem_bluetooth_enabled() => __pbn__system_bluetooth_enabled = null;
         private bool? __pbn__system_bluetooth_enabled;
+
+        [global::ProtoBuf.ProtoMember(25000)]
+        public bool vr_show_perf_graph_in_hmd
+        {
+            get => __pbn__vr_show_perf_graph_in_hmd.GetValueOrDefault();
+            set => __pbn__vr_show_perf_graph_in_hmd = value;
+        }
+        public bool ShouldSerializevr_show_perf_graph_in_hmd() => __pbn__vr_show_perf_graph_in_hmd != null;
+        public void Resetvr_show_perf_graph_in_hmd() => __pbn__vr_show_perf_graph_in_hmd = null;
+        private bool? __pbn__vr_show_perf_graph_in_hmd;
 
         [global::ProtoBuf.ProtoMember(140011)]
         public bool controller_enable_chord
@@ -32510,28 +32539,6 @@ namespace SteamKit2.WebUI.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CPartnerStoreBrowse_GetItems_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public CStoreBrowse_GetItems_Request request { get; set; }
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public bool include_unpublished
-        {
-            get => __pbn__include_unpublished.GetValueOrDefault();
-            set => __pbn__include_unpublished = value;
-        }
-        public bool ShouldSerializeinclude_unpublished() => __pbn__include_unpublished != null;
-        public void Resetinclude_unpublished() => __pbn__include_unpublished = null;
-        private bool? __pbn__include_unpublished;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CProductImpressionsFromClient_Notification : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -32931,6 +32938,78 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializeid() => __pbn__id != null;
         public void Resetid() => __pbn__id = null;
         private uint? __pbn__id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CSteamVR_Settings_SetValue_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string section
+        {
+            get => __pbn__section ?? "";
+            set => __pbn__section = value;
+        }
+        public bool ShouldSerializesection() => __pbn__section != null;
+        public void Resetsection() => __pbn__section = null;
+        private string __pbn__section;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string settings_key
+        {
+            get => __pbn__settings_key ?? "";
+            set => __pbn__settings_key = value;
+        }
+        public bool ShouldSerializesettings_key() => __pbn__settings_key != null;
+        public void Resetsettings_key() => __pbn__settings_key = null;
+        private string __pbn__settings_key;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool @bool
+        {
+            get => __pbn__bool.GetValueOrDefault();
+            set => __pbn__bool = value;
+        }
+        public bool ShouldSerializebool() => __pbn__bool != null;
+        public void Resetbool() => __pbn__bool = null;
+        private bool? __pbn__bool;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public int @int
+        {
+            get => __pbn__int.GetValueOrDefault();
+            set => __pbn__int = value;
+        }
+        public bool ShouldSerializeint() => __pbn__int != null;
+        public void Resetint() => __pbn__int = null;
+        private int? __pbn__int;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public float @float
+        {
+            get => __pbn__float.GetValueOrDefault();
+            set => __pbn__float = value;
+        }
+        public bool ShouldSerializefloat() => __pbn__float != null;
+        public void Resetfloat() => __pbn__float = null;
+        private float? __pbn__float;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string @string
+        {
+            get => __pbn__string ?? "";
+            set => __pbn__string = value;
+        }
+        public bool ShouldSerializestring() => __pbn__string != null;
+        public void Resetstring() => __pbn__string = null;
+        private string __pbn__string;
 
     }
 
@@ -34657,6 +34736,303 @@ namespace SteamKit2.WebUI.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CVirtualMenuCreateDestroy : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool created
+        {
+            get => __pbn__created.GetValueOrDefault();
+            set => __pbn__created = value;
+        }
+        public bool ShouldSerializecreated() => __pbn__created != null;
+        public void Resetcreated() => __pbn__created = null;
+        private bool? __pbn__created;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint controller_idx
+        {
+            get => __pbn__controller_idx.GetValueOrDefault();
+            set => __pbn__controller_idx = value;
+        }
+        public bool ShouldSerializecontroller_idx() => __pbn__controller_idx != null;
+        public void Resetcontroller_idx() => __pbn__controller_idx = null;
+        private uint? __pbn__controller_idx;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint menu_idx
+        {
+            get => __pbn__menu_idx.GetValueOrDefault();
+            set => __pbn__menu_idx = value;
+        }
+        public bool ShouldSerializemenu_idx() => __pbn__menu_idx != null;
+        public void Resetmenu_idx() => __pbn__menu_idx = null;
+        private uint? __pbn__menu_idx;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint source
+        {
+            get => __pbn__source.GetValueOrDefault();
+            set => __pbn__source = value;
+        }
+        public bool ShouldSerializesource() => __pbn__source != null;
+        public void Resetsource() => __pbn__source = null;
+        private uint? __pbn__source;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public float x_position
+        {
+            get => __pbn__x_position.GetValueOrDefault();
+            set => __pbn__x_position = value;
+        }
+        public bool ShouldSerializex_position() => __pbn__x_position != null;
+        public void Resetx_position() => __pbn__x_position = null;
+        private float? __pbn__x_position;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public float y_position
+        {
+            get => __pbn__y_position.GetValueOrDefault();
+            set => __pbn__y_position = value;
+        }
+        public bool ShouldSerializey_position() => __pbn__y_position != null;
+        public void Resety_position() => __pbn__y_position = null;
+        private float? __pbn__y_position;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public float opacity
+        {
+            get => __pbn__opacity.GetValueOrDefault();
+            set => __pbn__opacity = value;
+        }
+        public bool ShouldSerializeopacity() => __pbn__opacity != null;
+        public void Resetopacity() => __pbn__opacity = null;
+        private float? __pbn__opacity;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public float scale
+        {
+            get => __pbn__scale.GetValueOrDefault();
+            set => __pbn__scale = value;
+        }
+        public bool ShouldSerializescale() => __pbn__scale != null;
+        public void Resetscale() => __pbn__scale = null;
+        private float? __pbn__scale;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public bool show_labels
+        {
+            get => __pbn__show_labels.GetValueOrDefault();
+            set => __pbn__show_labels = value;
+        }
+        public bool ShouldSerializeshow_labels() => __pbn__show_labels != null;
+        public void Resetshow_labels() => __pbn__show_labels = null;
+        private bool? __pbn__show_labels;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public bool force_on
+        {
+            get => __pbn__force_on.GetValueOrDefault();
+            set => __pbn__force_on = value;
+        }
+        public bool ShouldSerializeforce_on() => __pbn__force_on != null;
+        public void Resetforce_on() => __pbn__force_on = null;
+        private bool? __pbn__force_on;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public uint appID
+        {
+            get => __pbn__appID.GetValueOrDefault();
+            set => __pbn__appID = value;
+        }
+        public bool ShouldSerializeappID() => __pbn__appID != null;
+        public void ResetappID() => __pbn__appID = null;
+        private uint? __pbn__appID;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public uint menu_style
+        {
+            get => __pbn__menu_style.GetValueOrDefault();
+            set => __pbn__menu_style = value;
+        }
+        public bool ShouldSerializemenu_style() => __pbn__menu_style != null;
+        public void Resetmenu_style() => __pbn__menu_style = null;
+        private uint? __pbn__menu_style;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public global::System.Collections.Generic.List<CVirtualMenuCreateDestroy_TouchMenuKey> popup_keys { get; } = new global::System.Collections.Generic.List<CVirtualMenuCreateDestroy_TouchMenuKey>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CVirtualMenuCreateDestroy_TouchMenuKey : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint key_idx
+        {
+            get => __pbn__key_idx.GetValueOrDefault();
+            set => __pbn__key_idx = value;
+        }
+        public bool ShouldSerializekey_idx() => __pbn__key_idx != null;
+        public void Resetkey_idx() => __pbn__key_idx = null;
+        private uint? __pbn__key_idx;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool bound
+        {
+            get => __pbn__bound.GetValueOrDefault();
+            set => __pbn__bound = value;
+        }
+        public bool ShouldSerializebound() => __pbn__bound != null;
+        public void Resetbound() => __pbn__bound = null;
+        private bool? __pbn__bound;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool placeholder
+        {
+            get => __pbn__placeholder.GetValueOrDefault();
+            set => __pbn__placeholder = value;
+        }
+        public bool ShouldSerializeplaceholder() => __pbn__placeholder != null;
+        public void Resetplaceholder() => __pbn__placeholder = null;
+        private bool? __pbn__placeholder;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint binding_type
+        {
+            get => __pbn__binding_type.GetValueOrDefault();
+            set => __pbn__binding_type = value;
+        }
+        public bool ShouldSerializebinding_type() => __pbn__binding_type != null;
+        public void Resetbinding_type() => __pbn__binding_type = null;
+        private uint? __pbn__binding_type;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public float x
+        {
+            get => __pbn__x.GetValueOrDefault();
+            set => __pbn__x = value;
+        }
+        public bool ShouldSerializex() => __pbn__x != null;
+        public void Resetx() => __pbn__x = null;
+        private float? __pbn__x;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public float y
+        {
+            get => __pbn__y.GetValueOrDefault();
+            set => __pbn__y = value;
+        }
+        public bool ShouldSerializey() => __pbn__y != null;
+        public void Resety() => __pbn__y = null;
+        private float? __pbn__y;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public float width
+        {
+            get => __pbn__width.GetValueOrDefault();
+            set => __pbn__width = value;
+        }
+        public bool ShouldSerializewidth() => __pbn__width != null;
+        public void Resetwidth() => __pbn__width = null;
+        private float? __pbn__width;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public float height
+        {
+            get => __pbn__height.GetValueOrDefault();
+            set => __pbn__height = value;
+        }
+        public bool ShouldSerializeheight() => __pbn__height != null;
+        public void Resetheight() => __pbn__height = null;
+        private float? __pbn__height;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string description
+        {
+            get => __pbn__description ?? "";
+            set => __pbn__description = value;
+        }
+        public bool ShouldSerializedescription() => __pbn__description != null;
+        public void Resetdescription() => __pbn__description = null;
+        private string __pbn__description;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string label
+        {
+            get => __pbn__label ?? "";
+            set => __pbn__label = value;
+        }
+        public bool ShouldSerializelabel() => __pbn__label != null;
+        public void Resetlabel() => __pbn__label = null;
+        private string __pbn__label;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string glyph_path
+        {
+            get => __pbn__glyph_path ?? "";
+            set => __pbn__glyph_path = value;
+        }
+        public bool ShouldSerializeglyph_path() => __pbn__glyph_path != null;
+        public void Resetglyph_path() => __pbn__glyph_path = null;
+        private string __pbn__glyph_path;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string icon_filename
+        {
+            get => __pbn__icon_filename ?? "";
+            set => __pbn__icon_filename = value;
+        }
+        public bool ShouldSerializeicon_filename() => __pbn__icon_filename != null;
+        public void Reseticon_filename() => __pbn__icon_filename = null;
+        private string __pbn__icon_filename;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string color_foreground
+        {
+            get => __pbn__color_foreground ?? "";
+            set => __pbn__color_foreground = value;
+        }
+        public bool ShouldSerializecolor_foreground() => __pbn__color_foreground != null;
+        public void Resetcolor_foreground() => __pbn__color_foreground = null;
+        private string __pbn__color_foreground;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string color_background
+        {
+            get => __pbn__color_background ?? "";
+            set => __pbn__color_background = value;
+        }
+        public bool ShouldSerializecolor_background() => __pbn__color_background != null;
+        public void Resetcolor_background() => __pbn__color_background = null;
+        private string __pbn__color_background;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public uint quandrants
+        {
+            get => __pbn__quandrants.GetValueOrDefault();
+            set => __pbn__quandrants = value;
+        }
+        public bool ShouldSerializequandrants() => __pbn__quandrants != null;
+        public void Resetquandrants() => __pbn__quandrants = null;
+        private uint? __pbn__quandrants;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CVirtualMenuKey : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -35547,14 +35923,34 @@ namespace SteamKit2.WebUI.Internal
         private int? __pbn__special_invocation;
 
         [global::ProtoBuf.ProtoMember(10)]
-        public bool visible_in_dashboard_menu
+        public bool visible_in_menu
         {
-            get => __pbn__visible_in_dashboard_menu.GetValueOrDefault();
-            set => __pbn__visible_in_dashboard_menu = value;
+            get => __pbn__visible_in_menu.GetValueOrDefault();
+            set => __pbn__visible_in_menu = value;
         }
-        public bool ShouldSerializevisible_in_dashboard_menu() => __pbn__visible_in_dashboard_menu != null;
-        public void Resetvisible_in_dashboard_menu() => __pbn__visible_in_dashboard_menu = null;
-        private bool? __pbn__visible_in_dashboard_menu;
+        public bool ShouldSerializevisible_in_menu() => __pbn__visible_in_menu != null;
+        public void Resetvisible_in_menu() => __pbn__visible_in_menu = null;
+        private bool? __pbn__visible_in_menu;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public bool is_menu
+        {
+            get => __pbn__is_menu.GetValueOrDefault();
+            set => __pbn__is_menu = value;
+        }
+        public bool ShouldSerializeis_menu() => __pbn__is_menu != null;
+        public void Resetis_menu() => __pbn__is_menu = null;
+        private bool? __pbn__is_menu;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public uint parent_menu_action_id
+        {
+            get => __pbn__parent_menu_action_id.GetValueOrDefault();
+            set => __pbn__parent_menu_action_id = value;
+        }
+        public bool ShouldSerializeparent_menu_action_id() => __pbn__parent_menu_action_id != null;
+        public void Resetparent_menu_action_id() => __pbn__parent_menu_action_id = null;
+        private uint? __pbn__parent_menu_action_id;
 
     }
 
@@ -36239,6 +36635,16 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializeprofile_theme_id() => __pbn__profile_theme_id != null;
         public void Resetprofile_theme_id() => __pbn__profile_theme_id = null;
         private string __pbn__profile_theme_id;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public bool tiled
+        {
+            get => __pbn__tiled.GetValueOrDefault();
+            set => __pbn__tiled = value;
+        }
+        public bool ShouldSerializetiled() => __pbn__tiled != null;
+        public void Resettiled() => __pbn__tiled = null;
+        private bool? __pbn__tiled;
 
     }
 
@@ -37640,6 +38046,16 @@ namespace SteamKit2.WebUI.Internal
         [global::ProtoBuf.ProtoMember(46)]
         public StoreItem_PurchaseOption_RecurrenceInfo recurrence_info { get; set; }
 
+        [global::ProtoBuf.ProtoMember(47)]
+        public uint free_to_keep_ends
+        {
+            get => __pbn__free_to_keep_ends.GetValueOrDefault();
+            set => __pbn__free_to_keep_ends = value;
+        }
+        public bool ShouldSerializefree_to_keep_ends() => __pbn__free_to_keep_ends != null;
+        public void Resetfree_to_keep_ends() => __pbn__free_to_keep_ends = null;
+        private uint? __pbn__free_to_keep_ends;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -38182,6 +38598,16 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializetrailer_base_id() => __pbn__trailer_base_id != null;
         public void Resettrailer_base_id() => __pbn__trailer_base_id = null;
         private int? __pbn__trailer_base_id;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public int trailer_category
+        {
+            get => __pbn__trailer_category.GetValueOrDefault();
+            set => __pbn__trailer_category = value;
+        }
+        public bool ShouldSerializetrailer_category() => __pbn__trailer_category != null;
+        public void Resettrailer_category() => __pbn__trailer_category = null;
+        private int? __pbn__trailer_category;
 
     }
 

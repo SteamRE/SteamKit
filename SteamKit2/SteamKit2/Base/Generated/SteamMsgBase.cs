@@ -439,6 +439,91 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgKubeRPCPacket : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public Hdr hdr { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public byte[] payload
+        {
+            get => __pbn__payload;
+            set => __pbn__payload = value;
+        }
+        public bool ShouldSerializepayload() => __pbn__payload != null;
+        public void Resetpayload() => __pbn__payload = null;
+        private byte[] __pbn__payload;
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Hdr : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint sysid_source
+            {
+                get => __pbn__sysid_source.GetValueOrDefault();
+                set => __pbn__sysid_source = value;
+            }
+            public bool ShouldSerializesysid_source() => __pbn__sysid_source != null;
+            public void Resetsysid_source() => __pbn__sysid_source = null;
+            private uint? __pbn__sysid_source;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue(false)]
+            public bool is_fbs_universe
+            {
+                get => __pbn__is_fbs_universe ?? false;
+                set => __pbn__is_fbs_universe = value;
+            }
+            public bool ShouldSerializeis_fbs_universe() => __pbn__is_fbs_universe != null;
+            public void Resetis_fbs_universe() => __pbn__is_fbs_universe = null;
+            private bool? __pbn__is_fbs_universe;
+
+            [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+            [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
+            public ulong jobid_source
+            {
+                get => __pbn__jobid_source ?? 18446744073709551615ul;
+                set => __pbn__jobid_source = value;
+            }
+            public bool ShouldSerializejobid_source() => __pbn__jobid_source != null;
+            public void Resetjobid_source() => __pbn__jobid_source = null;
+            private ulong? __pbn__jobid_source;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            [global::System.ComponentModel.DefaultValue(2)]
+            public int eresult
+            {
+                get => __pbn__eresult ?? 2;
+                set => __pbn__eresult = value;
+            }
+            public bool ShouldSerializeeresult() => __pbn__eresult != null;
+            public void Reseteresult() => __pbn__eresult = null;
+            private int? __pbn__eresult;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string error_message
+            {
+                get => __pbn__error_message ?? "";
+                set => __pbn__error_message = value;
+            }
+            public bool ShouldSerializeerror_message() => __pbn__error_message != null;
+            public void Reseterror_message() => __pbn__error_message = null;
+            private string __pbn__error_message;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgMulti : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1714,6 +1799,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializebuild_branch() => __pbn__build_branch != null;
         public void Resetbuild_branch() => __pbn__build_branch = null;
         private string __pbn__build_branch;
+
+        [global::ProtoBuf.ProtoMember(31)]
+        public bool unlisted
+        {
+            get => __pbn__unlisted.GetValueOrDefault();
+            set => __pbn__unlisted = value;
+        }
+        public bool ShouldSerializeunlisted() => __pbn__unlisted != null;
+        public void Resetunlisted() => __pbn__unlisted = null;
+        private bool? __pbn__unlisted;
 
     }
 

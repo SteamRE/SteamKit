@@ -139,6 +139,17 @@ namespace SteamKit2.Internal
         public void Resetmachine_id() => __pbn__machine_id = null;
         private byte[] __pbn__machine_id;
 
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue(EAuthTokenAppType.k_EAuthTokenAppType_Unknown)]
+        public EAuthTokenAppType app_type
+        {
+            get => __pbn__app_type ?? EAuthTokenAppType.k_EAuthTokenAppType_Unknown;
+            set => __pbn__app_type = value;
+        }
+        public bool ShouldSerializeapp_type() => __pbn__app_type != null;
+        public void Resetapp_type() => __pbn__app_type = null;
+        private EAuthTokenAppType? __pbn__app_type;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -794,6 +805,17 @@ namespace SteamKit2.Internal
         public void Resetdevice_trust() => __pbn__device_trust = null;
         private int? __pbn__device_trust;
 
+        [global::ProtoBuf.ProtoMember(14)]
+        [global::System.ComponentModel.DefaultValue(EAuthTokenAppType.k_EAuthTokenAppType_Unknown)]
+        public EAuthTokenAppType app_type
+        {
+            get => __pbn__app_type ?? EAuthTokenAppType.k_EAuthTokenAppType_Unknown;
+            set => __pbn__app_type = value;
+        }
+        public bool ShouldSerializeapp_type() => __pbn__app_type != null;
+        public void Resetapp_type() => __pbn__app_type = null;
+        private EAuthTokenAppType? __pbn__app_type;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -875,6 +897,88 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeplatform_type() => __pbn__platform_type != null;
         public void Resetplatform_type() => __pbn__platform_type = null;
         private EAuthTokenPlatformType? __pbn__platform_type;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAuthentication_NotifyRiskQuizResults_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong client_id
+        {
+            get => __pbn__client_id.GetValueOrDefault();
+            set => __pbn__client_id = value;
+        }
+        public bool ShouldSerializeclient_id() => __pbn__client_id != null;
+        public void Resetclient_id() => __pbn__client_id = null;
+        private ulong? __pbn__client_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public RiskQuizResults results { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string selected_action
+        {
+            get => __pbn__selected_action ?? "";
+            set => __pbn__selected_action = value;
+        }
+        public bool ShouldSerializeselected_action() => __pbn__selected_action != null;
+        public void Resetselected_action() => __pbn__selected_action = null;
+        private string __pbn__selected_action;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool did_confirm_login
+        {
+            get => __pbn__did_confirm_login.GetValueOrDefault();
+            set => __pbn__did_confirm_login = value;
+        }
+        public bool ShouldSerializedid_confirm_login() => __pbn__did_confirm_login != null;
+        public void Resetdid_confirm_login() => __pbn__did_confirm_login = null;
+        private bool? __pbn__did_confirm_login;
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class RiskQuizResults : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public bool platform
+            {
+                get => __pbn__platform.GetValueOrDefault();
+                set => __pbn__platform = value;
+            }
+            public bool ShouldSerializeplatform() => __pbn__platform != null;
+            public void Resetplatform() => __pbn__platform = null;
+            private bool? __pbn__platform;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public bool location
+            {
+                get => __pbn__location.GetValueOrDefault();
+                set => __pbn__location = value;
+            }
+            public bool ShouldSerializelocation() => __pbn__location != null;
+            public void Resetlocation() => __pbn__location = null;
+            private bool? __pbn__location;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public bool action
+            {
+                get => __pbn__action.GetValueOrDefault();
+                set => __pbn__action = value;
+            }
+            public bool ShouldSerializeaction() => __pbn__action != null;
+            public void Resetaction() => __pbn__action = null;
+            private bool? __pbn__action;
+
+        }
 
     }
 
@@ -2046,6 +2150,14 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public enum EAuthTokenAppType
+    {
+        k_EAuthTokenAppType_Unknown = 0,
+        k_EAuthTokenAppType_Mobile_SteamApp = 1,
+        k_EAuthTokenAppType_Mobile_ChatApp = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EAuthSessionGuardType
     {
         k_EAuthSessionGuardType_Unknown = 0,
@@ -2143,6 +2255,11 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CAuthentication_GetAuthSessionRiskInfo_Request, CAuthentication_GetAuthSessionRiskInfo_Response>( "Authentication.GetAuthSessionRiskInfo#1", request );
         }
 
+        public void NotifyRiskQuizResults(CAuthentication_NotifyRiskQuizResults_Notification request )
+        {
+            UnifiedMessages.SendNotification<CAuthentication_NotifyRiskQuizResults_Notification>( "Authentication.NotifyRiskQuizResults#1", request );
+        }
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response>> UpdateAuthSessionWithMobileConfirmation( CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request request )
         {
             return UnifiedMessages.SendMessage<CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request, CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response>( "Authentication.UpdateAuthSessionWithMobileConfirmation#1", request );
@@ -2234,6 +2351,12 @@ namespace SteamKit2.Internal
 
         public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
+            switch ( methodName )
+            {
+                case "NotifyRiskQuizResults":
+                    PostNotificationMsg<CAuthentication_NotifyRiskQuizResults_Notification>( packetMsg );
+                    break;
+            }
         }
     }
 

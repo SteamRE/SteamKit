@@ -334,6 +334,47 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_GetPastMarketingMessages_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint start_past_days
+        {
+            get => __pbn__start_past_days.GetValueOrDefault();
+            set => __pbn__start_past_days = value;
+        }
+        public bool ShouldSerializestart_past_days() => __pbn__start_past_days != null;
+        public void Resetstart_past_days() => __pbn__start_past_days = null;
+        private uint? __pbn__start_past_days;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint upto_past_days
+        {
+            get => __pbn__upto_past_days.GetValueOrDefault();
+            set => __pbn__upto_past_days = value;
+        }
+        public bool ShouldSerializeupto_past_days() => __pbn__upto_past_days != null;
+        public void Resetupto_past_days() => __pbn__upto_past_days = null;
+        private uint? __pbn__upto_past_days;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_GetPastMarketingMessages_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CMarketingMessageProto> messages { get; } = new global::System.Collections.Generic.List<CMarketingMessageProto>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMarketingMessages_GetMarketingMessagesForUser_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1237,6 +1278,11 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CMarketingMessages_GetActiveMarketingMessages_Request, CMarketingMessages_GetActiveMarketingMessages_Response>( "MarketingMessages.GetActiveMarketingMessages#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CMarketingMessages_GetPastMarketingMessages_Response>> GetPastMarketingMessages( CMarketingMessages_GetPastMarketingMessages_Request request )
+        {
+            return UnifiedMessages.SendMessage<CMarketingMessages_GetPastMarketingMessages_Request, CMarketingMessages_GetPastMarketingMessages_Response>( "MarketingMessages.GetPastMarketingMessages#1", request );
+        }
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CMarketingMessages_GetMarketingMessagesForUser_Response>> GetMarketingMessagesForUser( CMarketingMessages_GetMarketingMessagesForUser_Request request )
         {
             return UnifiedMessages.SendMessage<CMarketingMessages_GetMarketingMessagesForUser_Request, CMarketingMessages_GetMarketingMessagesForUser_Response>( "MarketingMessages.GetMarketingMessagesForUser#1", request );
@@ -1333,6 +1379,9 @@ namespace SteamKit2.Internal
             {
                 case "GetActiveMarketingMessages":
                     PostResponseMsg<CMarketingMessages_GetActiveMarketingMessages_Response>( packetMsg );
+                    break;
+                case "GetPastMarketingMessages":
+                    PostResponseMsg<CMarketingMessages_GetPastMarketingMessages_Response>( packetMsg );
                     break;
                 case "GetMarketingMessagesForUser":
                     PostResponseMsg<CMarketingMessages_GetMarketingMessagesForUser_Response>( packetMsg );

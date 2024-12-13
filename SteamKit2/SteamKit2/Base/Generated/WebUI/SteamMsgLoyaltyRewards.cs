@@ -193,6 +193,16 @@ namespace SteamKit2.WebUI.Internal
         public void Resethero_carousel_image() => __pbn__hero_carousel_image = null;
         private string __pbn__hero_carousel_image;
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public bool owned
+        {
+            get => __pbn__owned.GetValueOrDefault();
+            set => __pbn__owned = value;
+        }
+        public bool ShouldSerializeowned() => __pbn__owned != null;
+        public void Resetowned() => __pbn__owned = null;
+        private bool? __pbn__owned;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -812,6 +822,12 @@ namespace SteamKit2.WebUI.Internal
         public global::System.Collections.Generic.List<uint> excluded_appids { get; } = new global::System.Collections.Generic.List<uint>();
 
         [global::ProtoBuf.ProtoMember(19)]
+        public global::System.Collections.Generic.List<uint> excluded_store_tagids { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(20)]
+        public global::System.Collections.Generic.List<uint> store_tagids { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(21)]
         [global::System.ComponentModel.DefaultValue("")]
         public string search_term
         {

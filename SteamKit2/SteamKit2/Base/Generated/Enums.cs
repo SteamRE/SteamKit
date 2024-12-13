@@ -78,6 +78,8 @@ namespace SteamKit2.Internal
         k_EContentCheckProvider_Amazon = 2,
         k_EContentCheckProvider_Local = 3,
         k_EContentCheckProvider_GoogleVertexAI = 4,
+        k_EContentCheckProvider_GoogleGemini = 5,
+        k_EContentCheckProvider_SteamLearn = 6,
     }
 
     [global::ProtoBuf.ProtoContract()]
