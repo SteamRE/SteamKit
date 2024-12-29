@@ -82,6 +82,7 @@ dota2,dota_gcmessages_client.proto,GC\Dota\MsgGCClient.cs,SteamKit2.GC.Dota.Inte
 dota2,dota_gcmessages_client_battle_report.proto,GC\Dota\MsgMCClientBattleReport.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_client_chat.proto,GC\Dota\MsgGCClientChat.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_client_coaching.proto,GC\Dota\MsgGCClientCoaching.cs,SteamKit2.GC.Dota.Internal
+dota2,dota_gcmessages_client_craftworks.proto,GC\Dota\MSGGCClientCraftworks.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_client_fantasy.proto,GC\Dota\MsgGCClientFantasy.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_client_guild.proto,GC\Dota\MsgGCClientGuild.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_client_guild_events.proto,GC\Dota\MsgGCClientGuild.cs,SteamKit2.GC.Dota.Internal
@@ -90,6 +91,7 @@ dota2,dota_gcmessages_client_team.proto,GC\Dota\MsgGCClientTeam.cs,SteamKit2.GC.
 dota2,dota_gcmessages_client_tournament.proto,GC\Dota\MsgGCClientTournament.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_client_watch.proto,GC\Dota\MsgGCClientWatch.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_common.proto,GC\Dota\MsgGCCommon.cs,SteamKit2.GC.Dota.Internal
+dota2,dota_gcmessages_common_craftworks.proto,GC\Dota\MSGGCCommonCraftworks.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_common_league.proto,GC\Dota\MsgGCCommonLeague.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_common_lobby.proto,GC\Dota\MsgGCCommonLobby.cs,SteamKit2.GC.Dota.Internal
 dota2,dota_gcmessages_common_match_management.proto,GC\Dota\MsgGCCommonMatchMgmt.cs,SteamKit2.GC.Dota.Internal
