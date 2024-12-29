@@ -17,17 +17,15 @@ namespace Tests
 
     class DebugLogSetupTeardownAttribute : BeforeAfterTestAttribute
     {
-        public override ValueTask Before( System.Reflection.MethodInfo methodUnderTest, IXunitTest test )
+        public override void Before( System.Reflection.MethodInfo methodUnderTest, IXunitTest test )
         {
             DebugLog.ClearListeners();
-            return ValueTask.CompletedTask;
         }
 
-        public override ValueTask After( System.Reflection.MethodInfo methodUnderTest, IXunitTest test )
+        public override void After( System.Reflection.MethodInfo methodUnderTest, IXunitTest test )
         {
             DebugLog.Enabled = false;
             DebugLog.ClearListeners();
-            return ValueTask.CompletedTask;
         }
     }
 
