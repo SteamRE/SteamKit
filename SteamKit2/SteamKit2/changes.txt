@@ -1,4 +1,12 @@
 ------------------------------------------------------------------------------
+v 3.0.1			December 29 2024
+------------------------------------------------------------------------------
+
+* Added protected `PostResponseMsg` and `PostNotificationMsg` to `UnifiedService` to allow using user-provided services.
+* Added `DetectLancacheServerAsync` and `UseLancacheServer` to `CDN.Client` to allow downloading via LanCache servers.
+* Updated Steam protobufs.
+
+------------------------------------------------------------------------------
 v 3.0.0			November 7 2024
 ------------------------------------------------------------------------------
 
