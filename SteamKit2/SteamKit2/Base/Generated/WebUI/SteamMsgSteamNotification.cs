@@ -168,6 +168,89 @@ namespace SteamKit2.WebUI.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CSteamNotification_HideNotification_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<ulong> notification_ids { get; } = new global::System.Collections.Generic.List<ulong>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CSteamNotification_MarkNotificationsRead_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint timestamp
+        {
+            get => __pbn__timestamp.GetValueOrDefault();
+            set => __pbn__timestamp = value;
+        }
+        public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
+        public void Resettimestamp() => __pbn__timestamp = null;
+        private uint? __pbn__timestamp;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public int notification_type
+        {
+            get => __pbn__notification_type.GetValueOrDefault();
+            set => __pbn__notification_type = value;
+        }
+        public bool ShouldSerializenotification_type() => __pbn__notification_type != null;
+        public void Resetnotification_type() => __pbn__notification_type = null;
+        private int? __pbn__notification_type;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<ulong> notification_ids { get; } = new global::System.Collections.Generic.List<ulong>();
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool mark_all_read
+        {
+            get => __pbn__mark_all_read.GetValueOrDefault();
+            set => __pbn__mark_all_read = value;
+        }
+        public bool ShouldSerializemark_all_read() => __pbn__mark_all_read != null;
+        public void Resetmark_all_read() => __pbn__mark_all_read = null;
+        private bool? __pbn__mark_all_read;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CSteamNotification_MarkNotificationsViewed_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong remote_client_id
+        {
+            get => __pbn__remote_client_id.GetValueOrDefault();
+            set => __pbn__remote_client_id = value;
+        }
+        public bool ShouldSerializeremote_client_id() => __pbn__remote_client_id != null;
+        public void Resetremote_client_id() => __pbn__remote_client_id = null;
+        private ulong? __pbn__remote_client_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint target_client_type
+        {
+            get => __pbn__target_client_type.GetValueOrDefault();
+            set => __pbn__target_client_type = value;
+        }
+        public bool ShouldSerializetarget_client_type() => __pbn__target_client_type != null;
+        public void Resettarget_client_type() => __pbn__target_client_type = null;
+        private uint? __pbn__target_client_type;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CSteamNotification_NotificationsReceived_Notification : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -385,6 +468,21 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CSteamNotification_GetSteamNotifications_Request, CSteamNotification_GetSteamNotifications_Response>( "SteamNotification.GetSteamNotifications#1", request );
         }
 
+        public void HideNotification(CSteamNotification_HideNotification_Notification request )
+        {
+            UnifiedMessages.SendNotification<CSteamNotification_HideNotification_Notification>( "SteamNotification.HideNotification#1", request );
+        }
+
+        public void MarkNotificationsRead(CSteamNotification_MarkNotificationsRead_Notification request )
+        {
+            UnifiedMessages.SendNotification<CSteamNotification_MarkNotificationsRead_Notification>( "SteamNotification.MarkNotificationsRead#1", request );
+        }
+
+        public void MarkNotificationsViewed(CSteamNotification_MarkNotificationsViewed_Notification request )
+        {
+            UnifiedMessages.SendNotification<CSteamNotification_MarkNotificationsViewed_Notification>( "SteamNotification.MarkNotificationsViewed#1", request );
+        }
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamNotification_SetPreferences_Response>> SetPreferences( CSteamNotification_SetPreferences_Request request )
         {
             return UnifiedMessages.SendMessage<CSteamNotification_SetPreferences_Request, CSteamNotification_SetPreferences_Response>( "SteamNotification.SetPreferences#1", request );
@@ -408,6 +506,18 @@ namespace SteamKit2.WebUI.Internal
 
         public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
+            switch ( methodName )
+            {
+                case "HideNotification":
+                    PostNotificationMsg<CSteamNotification_HideNotification_Notification>( packetMsg );
+                    break;
+                case "MarkNotificationsRead":
+                    PostNotificationMsg<CSteamNotification_MarkNotificationsRead_Notification>( packetMsg );
+                    break;
+                case "MarkNotificationsViewed":
+                    PostNotificationMsg<CSteamNotification_MarkNotificationsViewed_Notification>( packetMsg );
+                    break;
+            }
         }
     }
 

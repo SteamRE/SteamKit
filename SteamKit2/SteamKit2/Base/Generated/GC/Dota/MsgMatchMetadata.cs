@@ -1409,6 +1409,9 @@ namespace SteamKit2.GC.Dota.Internal
                 [global::ProtoBuf.ProtoMember(59)]
                 public OverworldRewards overworld_rewards { get; set; }
 
+                [global::ProtoBuf.ProtoMember(60)]
+                public global::System.Collections.Generic.List<CMsgCraftworksQuestReward> craftworks_quest_rewards { get; } = new global::System.Collections.Generic.List<CMsgCraftworksQuestReward>();
+
                 [global::ProtoBuf.ProtoContract()]
                 public partial class ContractProgress : global::ProtoBuf.IExtensible
                 {

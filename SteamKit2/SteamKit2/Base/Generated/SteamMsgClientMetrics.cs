@@ -1162,6 +1162,76 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CClientMetrics_ReportLinuxStats_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int glibc_version_major
+        {
+            get => __pbn__glibc_version_major.GetValueOrDefault();
+            set => __pbn__glibc_version_major = value;
+        }
+        public bool ShouldSerializeglibc_version_major() => __pbn__glibc_version_major != null;
+        public void Resetglibc_version_major() => __pbn__glibc_version_major = null;
+        private int? __pbn__glibc_version_major;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public int glibc_version_minor
+        {
+            get => __pbn__glibc_version_minor.GetValueOrDefault();
+            set => __pbn__glibc_version_minor = value;
+        }
+        public bool ShouldSerializeglibc_version_minor() => __pbn__glibc_version_minor != null;
+        public void Resetglibc_version_minor() => __pbn__glibc_version_minor = null;
+        private int? __pbn__glibc_version_minor;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public int account_type
+        {
+            get => __pbn__account_type.GetValueOrDefault();
+            set => __pbn__account_type = value;
+        }
+        public bool ShouldSerializeaccount_type() => __pbn__account_type != null;
+        public void Resetaccount_type() => __pbn__account_type = null;
+        private int? __pbn__account_type;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public int launcher_type
+        {
+            get => __pbn__launcher_type.GetValueOrDefault();
+            set => __pbn__launcher_type = value;
+        }
+        public bool ShouldSerializelauncher_type() => __pbn__launcher_type != null;
+        public void Resetlauncher_type() => __pbn__launcher_type = null;
+        private int? __pbn__launcher_type;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public int game_server_appid
+        {
+            get => __pbn__game_server_appid.GetValueOrDefault();
+            set => __pbn__game_server_appid = value;
+        }
+        public bool ShouldSerializegame_server_appid() => __pbn__game_server_appid != null;
+        public void Resetgame_server_appid() => __pbn__game_server_appid = null;
+        private int? __pbn__game_server_appid;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string process_name
+        {
+            get => __pbn__process_name ?? "";
+            set => __pbn__process_name = value;
+        }
+        public bool ShouldSerializeprocess_name() => __pbn__process_name != null;
+        public void Resetprocess_name() => __pbn__process_name = null;
+        private string __pbn__process_name;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CClientMetrics_ClipShare_Notification : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1467,6 +1537,11 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CClientMetrics_ReportClientArgs_Notification>( "ClientMetrics.ReportClientArgs#1", request );
         }
 
+        public void ReportLinuxStats(CClientMetrics_ReportLinuxStats_Notification request )
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_ReportLinuxStats_Notification>( "ClientMetrics.ReportLinuxStats#1", request );
+        }
+
         public void ReportClipShare(CClientMetrics_ClipShare_Notification request )
         {
             UnifiedMessages.SendNotification<CClientMetrics_ClipShare_Notification>( "ClientMetrics.ReportClipShare#1", request );
@@ -1522,6 +1597,9 @@ namespace SteamKit2.Internal
                     break;
                 case "ReportClientArgs":
                     PostNotificationMsg<CClientMetrics_ReportClientArgs_Notification>( packetMsg );
+                    break;
+                case "ReportLinuxStats":
+                    PostNotificationMsg<CClientMetrics_ReportLinuxStats_Notification>( packetMsg );
                     break;
                 case "ReportClipShare":
                     PostNotificationMsg<CClientMetrics_ClipShare_Notification>( packetMsg );

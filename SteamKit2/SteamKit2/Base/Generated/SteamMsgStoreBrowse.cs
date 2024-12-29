@@ -1666,6 +1666,17 @@ namespace SteamKit2.Internal
                 public void Resettrailer_url_format() => __pbn__trailer_url_format = null;
                 private string __pbn__trailer_url_format;
 
+                [global::ProtoBuf.ProtoMember(13)]
+                [global::System.ComponentModel.DefaultValue(ETrailerCategory.k_ETrailerCategory_Invalid)]
+                public ETrailerCategory trailer_category
+                {
+                    get => __pbn__trailer_category ?? ETrailerCategory.k_ETrailerCategory_Invalid;
+                    set => __pbn__trailer_category = value;
+                }
+                public bool ShouldSerializetrailer_category() => __pbn__trailer_category != null;
+                public void Resettrailer_category() => __pbn__trailer_category = null;
+                private ETrailerCategory? __pbn__trailer_category;
+
                 [global::ProtoBuf.ProtoMember(3)]
                 public global::System.Collections.Generic.List<StoreItem.Trailers.VideoSource> trailer_480p { get; } = new global::System.Collections.Generic.List<StoreItem.Trailers.VideoSource>();
 
@@ -2769,6 +2780,18 @@ namespace SteamKit2.Internal
         k_EUserReviewScore_Positive = 7,
         k_EUserReviewScore_VeryPositive = 8,
         k_EUserReviewScore_OverwhelminglyPositive = 9,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ETrailerCategory
+    {
+        k_ETrailerCategory_Invalid = 0,
+        k_ETrailerCategory_Gameplay = 1,
+        k_ETrailerCategory_Teaser = 2,
+        k_ETrailerCategory_Cinematic = 3,
+        k_ETrailerCategory_Update = 4,
+        k_ETrailerCategory_Accolades = 5,
+        k_ETrailerCategory_Interview = 6,
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -961,6 +961,14 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgClientToGCSurvivorsTelemetryResponse = 9012,
         k_EMsgClientToGCOverworldRequestTokensNeededByFriend = 9013,
         k_EMsgClientToGCOverworldRequestTokensNeededByFriendResponse = 9014,
+        k_EMsgClientToGCCraftworksGetUserData = 9015,
+        k_EMsgClientToGCCraftworksGetUserDataResponse = 9016,
+        k_EMsgGCToClientCraftworksUserDataUpdated = 9017,
+        k_EMsgClientToGCCraftworksCraftRecipe = 9018,
+        k_EMsgClientToGCCraftworksCraftRecipeResponse = 9019,
+        k_EMsgClientToGCCraftworksDevModifyComponents = 9020,
+        k_EMsgClientToGCCraftworksDevModifyComponentsResponse = 9021,
+        k_EMsgSignOutCraftworks = 9022,
     }
 
 }

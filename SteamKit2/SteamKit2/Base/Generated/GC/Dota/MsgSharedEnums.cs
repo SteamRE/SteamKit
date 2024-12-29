@@ -1040,6 +1040,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetuses_charges() => __pbn__uses_charges = null;
         private bool? __pbn__uses_charges;
 
+        [global::ProtoBuf.ProtoMember(80)]
+        public uint tracked_stat_id
+        {
+            get => __pbn__tracked_stat_id.GetValueOrDefault();
+            set => __pbn__tracked_stat_id = value;
+        }
+        public bool ShouldSerializetracked_stat_id() => __pbn__tracked_stat_id != null;
+        public void Resettracked_stat_id() => __pbn__tracked_stat_id = null;
+        private uint? __pbn__tracked_stat_id;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1235,6 +1245,7 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_CROWNFALL = 47,
         EVENT_ID_FROSTIVUS_2023 = 48,
         EVENT_ID_INTERNATIONAL_2024 = 49,
+        EVENT_ID_FROSTIVUS_2024 = 50,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1860,6 +1871,7 @@ namespace SteamKit2.GC.Dota.Internal
         DOTA_COMBATLOG_UNIT_TELEPORTED = 41,
         DOTA_COMBATLOG_KILL_EATER_EVENT = 42,
         DOTA_COMBATLOG_NEUTRAL_ITEM_EARNED = 43,
+        DOTA_COMBATLOG_STAT_TRACKER_PLAYER = 44,
     }
 
     [global::ProtoBuf.ProtoContract()]
