@@ -42,7 +42,7 @@ To compile SteamKit, [.NET 8.0 SDK](https://dot.net/) is required.
 
 ## Discussions
 
-If you have questions, [use the Github discussions](https://github.com/SteamRE/SteamKit/discussions) section,
+If you have questions, [use the GitHub discussions](https://github.com/SteamRE/SteamKit/discussions) section,
 also try searching for an existing discussion.
 
 IRC: irc.libera.chat / #steamre ([join via webchat](https://web.libera.chat/#steamre))
