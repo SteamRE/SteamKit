@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using SteamKit2;
 using Xunit;
@@ -257,7 +258,7 @@ namespace Tests
         }
 
         [Fact]
-        public void CorrectlysubscribesFromInsideOfCallback()
+        public void CorrectlySubscribesFromInsideOfCallback()
         {
             static void nothing( CallbackForTest cb )
             {
@@ -273,6 +274,37 @@ namespace Tests
             using var se = mgr.Subscribe<CallbackForTest>( subscribe );
 
             PostAndRunCallback( new CallbackForTest { UniqueID = Guid.NewGuid() } );
+        }
+
+        [Fact]
+        public async Task CorrectlyAwaitsForAsyncCallbacks()
+        {
+            var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
+
+            var numCallbacksRun = 0;
+            async Task action( CallbackForTest cb )
+            {
+                await Task.Delay( 100, TestContext.Current.CancellationToken );
+                Assert.Equal( callback.UniqueID, cb.UniqueID );
+                numCallbacksRun++;
+            }
+
+            using ( mgr.Subscribe<CallbackForTest>( action ) )
+            {
+                for ( var i = 0; i < 10; i++ )
+                {
+                    client.PostCallback( callback );
+                }
+
+                for ( var i = 1; i <= 10; i++ )
+                {
+                    await mgr.RunWaitCallbackAsync( TestContext.Current.CancellationToken );
+                    Assert.Equal( i, numCallbacksRun );
+                }
+
+                mgr.RunWaitAllCallbacks( TimeSpan.Zero );
+                Assert.Equal( 10, numCallbacksRun );
+            }
         }
 
         void PostAndRunCallback(CallbackMsg callback)

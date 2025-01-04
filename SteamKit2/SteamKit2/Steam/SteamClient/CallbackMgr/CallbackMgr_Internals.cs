@@ -6,6 +6,7 @@
 
 
 using System;
+using System.Threading.Tasks;
 
 namespace SteamKit2.Internal
 {
@@ -16,7 +17,7 @@ namespace SteamKit2.Internal
     abstract class CallbackBase
     {
         internal abstract Type CallbackType { get; }
-        internal abstract void Run( CallbackMsg callback );
+        internal abstract Task? Run( CallbackMsg callback );
     }
 
     sealed class Callback<TCall> : CallbackBase, IDisposable
@@ -24,14 +25,16 @@ namespace SteamKit2.Internal
     {
         CallbackManager? mgr;
 
-        public JobID JobID { get; set; }
+        public JobID JobID { get; }
 
-        public Action<TCall> OnRun { get; set; }
+        public Action<TCall> OnRun { get; }
 
         internal override Type CallbackType => typeof( TCall );
 
         public Callback( Action<TCall> func, CallbackManager mgr, JobID jobID )
         {
+            ArgumentNullException.ThrowIfNull( func );
+
             this.JobID = jobID;
             this.OnRun = func;
             this.mgr = mgr;
@@ -52,13 +55,60 @@ namespace SteamKit2.Internal
             System.GC.SuppressFinalize( this );
         }
 
-        internal override void Run( CallbackMsg callback )
+        internal override Task? Run( CallbackMsg callback )
         {
             var cb = callback as TCall;
-            if ( cb != null && ( cb.JobID == JobID || JobID == JobID.Invalid ) && OnRun != null )
+            if ( cb != null && ( cb.JobID == JobID || JobID == JobID.Invalid ) )
             {
                 OnRun( cb );
             }
+            return null;
+        }
+    }
+
+    sealed class AsyncCallback<TCall> : CallbackBase, IDisposable
+        where TCall : CallbackMsg
+    {
+        CallbackManager? mgr;
+
+        public JobID JobID { get; }
+
+        public Func<TCall, Task> OnRun { get; }
+
+        internal override Type CallbackType => typeof( TCall );
+
+        public AsyncCallback( Func<TCall, Task> func, CallbackManager mgr, JobID jobID )
+        {
+            ArgumentNullException.ThrowIfNull( func );
+
+            this.JobID = jobID;
+            this.OnRun = func;
+            this.mgr = mgr;
+
+            mgr.Register( this );
+        }
+
+        ~AsyncCallback()
+        {
+            Dispose();
+        }
+
+        public void Dispose()
+        {
+            mgr?.Unregister( this );
+            mgr = null;
+
+            System.GC.SuppressFinalize( this );
+        }
+
+        internal override Task? Run( CallbackMsg callback )
+        {
+            var cb = callback as TCall;
+            if ( cb != null && ( cb.JobID == JobID || JobID == JobID.Invalid ) )
+            {
+                return OnRun( cb );
+            }
+            return null;
         }
     }
 }
