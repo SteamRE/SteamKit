@@ -105,7 +105,7 @@ namespace SteamKit2
         /// </summary>
         public async Task RunWaitCallbackAsync( CancellationToken cancellationToken = default )
         {
-            var call = await client.WaitForCallbackAsync( cancellationToken );
+            var call = await client.WaitForCallbackAsync( cancellationToken ).ConfigureAwait( false );
             Handle( call );
         }
 

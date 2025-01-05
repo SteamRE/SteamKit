@@ -123,7 +123,7 @@ namespace SteamKit2.CDN
                         ms = new MemoryStream( buffer, 0, contentLength );
 
                         // Stream the http response into the rented buffer
-                        await response.Content.CopyToAsync( ms, cts.Token );
+                        await response.Content.CopyToAsync( ms, cts.Token ).ConfigureAwait( false );
 
                         if ( ms.Position != contentLength )
                         {
@@ -134,7 +134,7 @@ namespace SteamKit2.CDN
                     }
                     else
                     {
-                        var data = await response.Content.ReadAsByteArrayAsync();
+                        var data = await response.Content.ReadAsByteArrayAsync().ConfigureAwait( false );
                         ms = new MemoryStream( data );
                     }
 
@@ -281,7 +281,7 @@ namespace SteamKit2.CDN
                     using var ms = new MemoryStream( destination, 0, contentLength );
 
                     // Stream the http response into the provided destination
-                    await response.Content.CopyToAsync( ms, cts.Token );
+                    await response.Content.CopyToAsync( ms, cts.Token ).ConfigureAwait( false );
 
                     if ( ms.Position != contentLength )
                     {
@@ -299,7 +299,7 @@ namespace SteamKit2.CDN
                     using var ms = new MemoryStream( buffer, 0, contentLength );
 
                     // Stream the http response into the rented buffer
-                    await response.Content.CopyToAsync( ms, cts.Token );
+                    await response.Content.CopyToAsync( ms, cts.Token ).ConfigureAwait( false );
 
                     if ( ms.Position != contentLength )
                     {

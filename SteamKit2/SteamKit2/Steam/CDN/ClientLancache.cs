@@ -29,7 +29,8 @@ namespace SteamKit2.CDN
         /// </summary>
         public static async Task DetectLancacheServerAsync()
         {
-            var ipAddresses = ( await Dns.GetHostAddressesAsync( TriggerDomain ) )
+            var dns = await Dns.GetHostAddressesAsync( TriggerDomain ).ConfigureAwait( false );
+            var ipAddresses = dns
                 .Where( e => e.AddressFamily == AddressFamily.InterNetwork || e.AddressFamily == AddressFamily.InterNetworkV6 )
                 .ToArray();
 

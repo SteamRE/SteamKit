@@ -237,7 +237,7 @@ namespace SteamKit2
             /// <exception cref="ProtoException">An error occured when parsing the response from the WebAPI.</exception>
             public async Task<T> CallProtobufAsync<T>( HttpMethod method, string func, int version = 1, Dictionary<string, object?>? args = null )
             {
-                var response = await CallAsyncInternal( method, func, version, args, "protobuf_raw" );
+                var response = await CallAsyncInternal( method, func, version, args, "protobuf_raw" ).ConfigureAwait( false );
 
                 using var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait( false );
 
@@ -282,7 +282,7 @@ namespace SteamKit2
                     { "input_protobuf_encoded", base64 },
                 };
 
-                var response = await CallAsyncInternal( method, func, version, args, "protobuf_raw" );
+                var response = await CallAsyncInternal( method, func, version, args, "protobuf_raw" ).ConfigureAwait( false );
                 var eresult = EResult.Invalid;
 
                 using var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait( false );
@@ -326,7 +326,7 @@ namespace SteamKit2
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
             public async Task<KeyValue> CallAsync( HttpMethod method, string func, int version = 1, Dictionary<string, object?>? args = null )
             {
-                var response = await CallAsyncInternal( method, func, version, args, "vdf" );
+                var response = await CallAsyncInternal( method, func, version, args, "vdf" ).ConfigureAwait( false );
 
                 using var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait( false );
 
