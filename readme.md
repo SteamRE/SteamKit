@@ -1,5 +1,5 @@
 # SteamKit
-[![Build Status (CI/CD)](https://github.com/SteamRE/SteamKit/workflows/CI/CD/badge.svg?branch=master&event=push)](https://github.com/SteamRE/SteamKit/actions?query=workflow%3ACI%2FCD)
+[![Build Status (CI/CD)](https://github.com/SteamRE/SteamKit/actions/workflows/steamkit2-build.yaml/badge.svg?event=push)](https://github.com/SteamRE/SteamKit/actions/workflows/steamkit2-build.yaml)
 [![NuGet](https://img.shields.io/nuget/v/SteamKit2.svg)](https://www.nuget.org/packages/SteamKit2/)
 [![codecov](https://codecov.io/gh/SteamRE/SteamKit/branch/master/graph/badge.svg?token=qkJCxZI6rd)](https://codecov.io/gh/SteamRE/SteamKit)
 
