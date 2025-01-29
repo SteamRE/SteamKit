@@ -5,7 +5,7 @@
 // </auto-generated>
 
 #region Designer generated code
-#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.WebUI.Internal
 {
 
@@ -588,6 +588,17 @@ namespace SteamKit2.WebUI.Internal
         public void Resetsteam_hw_compat_category_packed() => __pbn__steam_hw_compat_category_packed = null;
         private uint? __pbn__steam_hw_compat_category_packed;
 
+        [global::ProtoBuf.ProtoMember(74)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string album_cover_hash
+        {
+            get => __pbn__album_cover_hash ?? "";
+            set => __pbn__album_cover_hash = value;
+        }
+        public bool ShouldSerializealbum_cover_hash() => __pbn__album_cover_hash != null;
+        public void Resetalbum_cover_hash() => __pbn__album_cover_hash = null;
+        private string __pbn__album_cover_hash;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -998,88 +1009,6 @@ namespace SteamKit2.WebUI.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CAuthentication_NotifyRiskQuizResults_Notification : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public ulong client_id
-        {
-            get => __pbn__client_id.GetValueOrDefault();
-            set => __pbn__client_id = value;
-        }
-        public bool ShouldSerializeclient_id() => __pbn__client_id != null;
-        public void Resetclient_id() => __pbn__client_id = null;
-        private ulong? __pbn__client_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public CAuthentication_NotifyRiskQuizResults_Notification_RiskQuizResults results { get; set; }
-
-        [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string selected_action
-        {
-            get => __pbn__selected_action ?? "";
-            set => __pbn__selected_action = value;
-        }
-        public bool ShouldSerializeselected_action() => __pbn__selected_action != null;
-        public void Resetselected_action() => __pbn__selected_action = null;
-        private string __pbn__selected_action;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public bool did_confirm_login
-        {
-            get => __pbn__did_confirm_login.GetValueOrDefault();
-            set => __pbn__did_confirm_login = value;
-        }
-        public bool ShouldSerializedid_confirm_login() => __pbn__did_confirm_login != null;
-        public void Resetdid_confirm_login() => __pbn__did_confirm_login = null;
-        private bool? __pbn__did_confirm_login;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CAuthentication_NotifyRiskQuizResults_Notification_RiskQuizResults : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public bool platform
-        {
-            get => __pbn__platform.GetValueOrDefault();
-            set => __pbn__platform = value;
-        }
-        public bool ShouldSerializeplatform() => __pbn__platform != null;
-        public void Resetplatform() => __pbn__platform = null;
-        private bool? __pbn__platform;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public bool location
-        {
-            get => __pbn__location.GetValueOrDefault();
-            set => __pbn__location = value;
-        }
-        public bool ShouldSerializelocation() => __pbn__location != null;
-        public void Resetlocation() => __pbn__location = null;
-        private bool? __pbn__location;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public bool action
-        {
-            get => __pbn__action.GetValueOrDefault();
-            set => __pbn__action = value;
-        }
-        public bool ShouldSerializeaction() => __pbn__action != null;
-        public void Resetaction() => __pbn__action = null;
-        private bool? __pbn__action;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CBilling_Address : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1194,54 +1123,6 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializephone() => __pbn__phone != null;
         public void Resetphone() => __pbn__phone = null;
         private string __pbn__phone;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CBroadcast_NotifyBroadcastSessionHeartbeat_Notification : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong broadcast_id
-        {
-            get => __pbn__broadcast_id.GetValueOrDefault();
-            set => __pbn__broadcast_id = value;
-        }
-        public bool ShouldSerializebroadcast_id() => __pbn__broadcast_id != null;
-        public void Resetbroadcast_id() => __pbn__broadcast_id = null;
-        private ulong? __pbn__broadcast_id;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CBroadcast_NotifyBroadcastUploadStop_Notification : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong broadcast_upload_id
-        {
-            get => __pbn__broadcast_upload_id.GetValueOrDefault();
-            set => __pbn__broadcast_upload_id = value;
-        }
-        public bool ShouldSerializebroadcast_upload_id() => __pbn__broadcast_upload_id != null;
-        public void Resetbroadcast_upload_id() => __pbn__broadcast_upload_id = null;
-        private ulong? __pbn__broadcast_upload_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint upload_result
-        {
-            get => __pbn__upload_result.GetValueOrDefault();
-            set => __pbn__upload_result = value;
-        }
-        public bool ShouldSerializeupload_result() => __pbn__upload_result != null;
-        public void Resetupload_result() => __pbn__upload_result = null;
-        private uint? __pbn__upload_result;
 
     }
 
@@ -38259,5 +38140,5 @@ namespace SteamKit2.WebUI.Internal
 
 }
 
-#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

@@ -5,7 +5,7 @@
 // </auto-generated>
 
 #region Designer generated code
-#pragma warning disable CS0612, CS0618, CS1591, CS3021, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning disable CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 namespace SteamKit2.WebUI.Internal
 {
 
@@ -419,6 +419,9 @@ namespace SteamKit2.WebUI.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public global::System.Collections.Generic.List<int> exclude_from { get; } = new global::System.Collections.Generic.List<int>();
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public CStoreQueryFilters_PredefinedFilter predefined_filter { get; set; }
+
         [global::ProtoBuf.ProtoMember(10)]
         public global::System.Collections.Generic.List<CStoreQueryFilters_TagFilter> tagids_must_match { get; } = new global::System.Collections.Generic.List<CStoreQueryFilters_TagFilter>();
 
@@ -479,6 +482,28 @@ namespace SteamKit2.WebUI.Internal
 
         [global::ProtoBuf.ProtoMember(45)]
         public global::System.Collections.Generic.List<uint> parent_appids { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStoreQueryFilters_PredefinedFilter : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int filter_type
+        {
+            get => __pbn__filter_type.GetValueOrDefault();
+            set => __pbn__filter_type = value;
+        }
+        public bool ShouldSerializefilter_type() => __pbn__filter_type != null;
+        public void Resetfilter_type() => __pbn__filter_type = null;
+        private int? __pbn__filter_type;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<int> language_preferences { get; } = new global::System.Collections.Generic.List<int>();
 
     }
 
@@ -834,5 +859,5 @@ namespace SteamKit2.WebUI.Internal
 
 }
 
-#pragma warning restore CS0612, CS0618, CS1591, CS3021, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
+#pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion
