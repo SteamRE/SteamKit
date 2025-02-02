@@ -114,7 +114,7 @@ namespace SteamKit2.Util.MacHelpers
     [SupportedOSPlatform( "macos" )]
     static partial class DiskArbitration
     {
-        const string LibraryName = "DiskArbitration.framework/DiskArbitration";
+        const string LibraryName = "/System/Library/Frameworks/DiskArbitration.framework/DiskArbitration";
         public const string kDADiskDescriptionMediaUUIDKey = "DAMediaUUID";
 
         [LibraryImport( LibraryName )]
