@@ -83,7 +83,7 @@ namespace SteamKit2.Util.MacHelpers
     [SupportedOSPlatform( "macos" )]
     static partial class CoreFoundation
     {
-        const string LibraryName = "CoreFoundation.framework/CoreFoundation";
+        const string LibraryName = "/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation";
 
         public enum CFStringEncoding : uint
         {
