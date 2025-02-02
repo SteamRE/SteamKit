@@ -132,7 +132,7 @@ namespace SteamKit2.Util.MacHelpers
     [SupportedOSPlatform( "macos" )]
     static partial class IOKit
     {
-        const string LibraryName = "IOKit.framework/IOKit";
+        const string LibraryName = "/System/Library/Frameworks/IOKit.framework/IOKit";
 
         public const uint kIOMasterPortDefault = 0;
         public const string kIOPlatformSerialNumberKey = "IOPlatformSerialNumber";
