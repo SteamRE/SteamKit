@@ -83,7 +83,7 @@ namespace SteamKit2.Util.MacHelpers
     [SupportedOSPlatform( "macos" )]
     static partial class CoreFoundation
     {
-        const string LibraryName = "CoreFoundation.framework/CoreFoundation";
+        const string LibraryName = "/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation";
 
         public enum CFStringEncoding : uint
         {
@@ -114,7 +114,7 @@ namespace SteamKit2.Util.MacHelpers
     [SupportedOSPlatform( "macos" )]
     static partial class DiskArbitration
     {
-        const string LibraryName = "DiskArbitration.framework/DiskArbitration";
+        const string LibraryName = "/System/Library/Frameworks/DiskArbitration.framework/DiskArbitration";
         public const string kDADiskDescriptionMediaUUIDKey = "DAMediaUUID";
 
         [LibraryImport( LibraryName )]
@@ -132,7 +132,7 @@ namespace SteamKit2.Util.MacHelpers
     [SupportedOSPlatform( "macos" )]
     static partial class IOKit
     {
-        const string LibraryName = "IOKit.framework/IOKit";
+        const string LibraryName = "/System/Library/Frameworks/IOKit.framework/IOKit";
 
         public const uint kIOMasterPortDefault = 0;
         public const string kIOPlatformSerialNumberKey = "IOPlatformSerialNumber";

@@ -64,6 +64,15 @@ namespace Tests
         }
 
         [Fact]
+        public void DefaultProviderIsOperative()
+        {
+            var defaultProvider = MachineInfoProvider.GetDefaultProvider();
+            
+            HardwareUtils.Init(defaultProvider);
+            HardwareUtils.GetMachineID(defaultProvider);
+        }
+
+        [Fact]
         public void ProviderIsNotRetained()
         {
             static WeakReference Setup()
