@@ -1,10 +1,21 @@
 ------------------------------------------------------------------------------
+v 3.0.2			February 3 2025
+------------------------------------------------------------------------------
+
+* Fixed handling on tasks to reduce chance of deadlocking sync-over-async consumers.
+* Fixed a crash due to library resolution errors when running under .NET 9.0.1 on macOS.
+* Updated Steam protobufs.
+* Updated dependencies.
+
+
+------------------------------------------------------------------------------
 v 3.0.1			December 29 2024
 ------------------------------------------------------------------------------
 
 * Added protected `PostResponseMsg` and `PostNotificationMsg` to `UnifiedService` to allow using user-provided services.
 * Added `DetectLancacheServerAsync` and `UseLancacheServer` to `CDN.Client` to allow downloading via LanCache servers.
 * Updated Steam protobufs.
+
 
 ------------------------------------------------------------------------------
 v 3.0.0			November 7 2024
@@ -55,6 +66,7 @@ BREAKING CHANGES
 * Removed all methods from `CryptoHelper` except for `SymmetricDecrypt`.
 * Removed `ICallbackMsg` interface, simply use `CallbackMsg` instead.
 * Removed `CMListCallback` as it was removed by Steam.
+
 
 ------------------------------------------------------------------------------
 v 2.5.0			November 6 2023
