@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RollForward>LatestMajor</RollForward>
     <SignAssembly>true</SignAssembly>
     <IsTestProject>true</IsTestProject>
     <OutputType>Exe</OutputType>
