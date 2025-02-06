@@ -12,19 +12,19 @@ namespace SteamKit2
         private const int HeaderLength = 7; // magic + version + timestamp/crc
         private const int FooterLength = 10; // crc + decompressed size + magic
 
-        private const char Version = 'a';
+        private const byte Version = (byte)'a';
 
         public static int Decompress( MemoryStream ms, byte[] destination, bool verifyChecksum = true )
         {
             using BinaryReader reader = new BinaryReader( ms );
             if ( reader.ReadUInt16() != VZipHeader )
             {
-                throw new Exception( "Expecting VZipHeader at start of stream" );
+                throw new InvalidDataException( "Expecting VZipHeader at start of stream" );
             }
 
-            if ( reader.ReadChar() != Version )
+            if ( reader.ReadByte() != Version )
             {
-                throw new Exception( "Expecting VZip version 'a'" );
+                throw new InvalidDataException( "Expecting VZip version 'a'" );
             }
 
             // Sometimes this is a creation timestamp (e.g. for Steam Client VZips).
@@ -45,7 +45,7 @@ namespace SteamKit2
 
             if ( reader.ReadUInt16() != VZipFooter )
             {
-                throw new Exception( "Expecting VZipFooter at end of stream" );
+                throw new InvalidDataException( "Expecting VZipFooter at end of stream" );
             }
 
             if ( destination.Length < sizeDecompressed )
