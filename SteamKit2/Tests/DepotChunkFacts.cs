@@ -74,5 +74,37 @@ namespace Tests
             var hash = Convert.ToHexString( SHA1.HashData( destination ) );
             Assert.Equal( "7B8567D9B3C09295CDBF4978C32B348D8E76C750", hash );
         }
+
+        [Fact]
+        public void DecryptsAndDecompressesDepotChunkZStd()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            using var stream = assembly.GetManifestResourceStream( "Tests.Files.depot_3441461_chunk_9e72678e305540630a665b93e1463bc3983eb55a.bin" );
+            using var ms = new MemoryStream();
+            stream.CopyTo( ms );
+            var chunkData = ms.ToArray();
+
+            var chunk = new DepotManifest.ChunkData(
+                id: [], // id is not needed herein 
+                checksum: 3753325726,
+                offset: 0,
+                comp_length: 176,
+                uncomp_length: 156
+            );
+
+            var destination = new byte[ chunk.UncompressedLength ];
+            var writtenLength = DepotChunk.Process( chunk, chunkData, destination, [
+                0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
+                0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10,
+                0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
+                0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x20
+            ] );
+
+            Assert.Equal( chunk.CompressedLength, ( uint )chunkData.Length );
+            Assert.Equal( chunk.UncompressedLength, ( uint )writtenLength );
+
+            var hash = Convert.ToHexString( SHA1.HashData( destination ) );
+            Assert.Equal( "9E72678E305540630A665B93E1463BC3983EB55A", hash );
+        }
     }
 }

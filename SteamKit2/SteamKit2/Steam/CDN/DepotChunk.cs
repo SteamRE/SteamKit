@@ -61,7 +61,7 @@ namespace SteamKit2.CDN
 
                 if ( buffer[ 0 ] == 'V' && buffer[ 1 ] == 'S' && buffer[ 2 ] == 'Z' && buffer[ 3 ] == 'a' ) // Zstd
                 {
-                    throw new NotImplementedException( "Zstd compressed chunks are not yet implemented in SteamKit." );
+                    writtenDecompressed = VZstdUtil.Decompress( buffer.AsSpan( 0, written ), destination, verifyChecksum: false );
                 }
                 else if ( buffer[ 0 ] == 'V' && buffer[ 1 ] == 'Z' && buffer[ 2 ] == 'a' ) // LZMA
                 {
