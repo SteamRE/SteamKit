@@ -10,6 +10,34 @@ namespace Tests
 {
     public class DepotManifestFacts
     {
+        private static readonly byte[] Depot440DecryptionKey =
+        [
+            0x44, 0xCE, 0x5C, 0x52, 0x97, 0xA4, 0x15, 0xA1,
+            0xA6, 0xF6, 0x9C, 0x85, 0x60, 0x37, 0xA5, 0xA2,
+            0xFD, 0xD8, 0x2C, 0xD4, 0x74, 0xFA, 0x65, 0x9E,
+            0xDF, 0xB4, 0xD5, 0x9B, 0x2A, 0xBC, 0x55, 0xFC,
+        ];
+
+        [Fact]
+        public void ParsesAndDecryptsManifestVersion4()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            using var stream = assembly.GetManifestResourceStream( "Tests.Files.depot_440_1118032470228587934_v4.manifest" );
+            using var ms = new MemoryStream();
+            stream.CopyTo( ms );
+
+            var manifestData = ms.ToArray();
+
+            var depotManifest = DepotManifest.Deserialize( manifestData );
+
+            Assert.True( depotManifest.FilenamesEncrypted );
+            Assert.Equal( 1195249848u, depotManifest.EncryptedCRC );
+
+            depotManifest.DecryptFilenames( Depot440DecryptionKey );
+
+            TestDecryptedManifest( depotManifest );
+        }
+
         [Fact]
         public void ParsesAndDecryptsManifest()
         {
@@ -23,13 +51,9 @@ namespace Tests
             var depotManifest = DepotManifest.Deserialize( manifestData );
 
             Assert.True( depotManifest.FilenamesEncrypted );
+            Assert.Equal( 1606273976u, depotManifest.EncryptedCRC );
 
-            depotManifest.DecryptFilenames( [
-                0x44, 0xCE, 0x5C, 0x52, 0x97, 0xA4, 0x15, 0xA1,
-                0xA6, 0xF6, 0x9C, 0x85, 0x60, 0x37, 0xA5, 0xA2,
-                0xFD, 0xD8, 0x2C, 0xD4, 0x74, 0xFA, 0x65, 0x9E,
-                0xDF, 0xB4, 0xD5, 0x9B, 0x2A, 0xBC, 0x55, 0xFC
-            ] );
+            depotManifest.DecryptFilenames( Depot440DecryptionKey );
 
             TestDecryptedManifest( depotManifest );
         }
@@ -112,8 +136,8 @@ namespace Tests
             Assert.Equal( 1118032470228587934ul, depotManifest.ManifestGID );
             Assert.Equal( 825745u, depotManifest.TotalUncompressedSize );
             Assert.Equal( 43168u, depotManifest.TotalCompressedSize );
-            Assert.Equal( 1606273976u, depotManifest.EncryptedCRC );
             Assert.Equal( 7, depotManifest.Files.Count );
+            Assert.Equal( new DateTime( 2013, 4, 17, 20, 39, 24, DateTimeKind.Utc ), depotManifest.CreationTime );
 
             Assert.Equal( Path.Join( "bin", "dxsupport.cfg" ), depotManifest.Files[ 0 ].FileName );
             Assert.Equal( Path.Join( "bin", "dxsupport.csv" ), depotManifest.Files[ 1 ].FileName );
@@ -125,11 +149,21 @@ namespace Tests
 
             Assert.Equal( ( EDepotFileFlag )0, depotManifest.Files[ 0 ].Flags );
             Assert.Equal( 398709u, depotManifest.Files[ 0 ].TotalSize );
+            Assert.Equal( Convert.FromHexString( "BAC8E2657470B2EB70D6DDCD6C07004BE8738697" ), depotManifest.Files[ 2 ].FileHash );
 
             foreach ( var file in depotManifest.Files )
             {
                 Assert.Equal( file.FileNameHash, SHA1.HashData( Encoding.UTF8.GetBytes( file.FileName.Replace( '/', '\\' ) ) ) );
+                Assert.NotNull( file.LinkTarget );
+                Assert.Single( file.Chunks );
             }
+
+            var chunk = depotManifest.Files[ 6 ].Chunks[ 0 ];
+            Assert.Equal( 963249608u, chunk.Checksum );
+            Assert.Equal( 144u, chunk.CompressedLength );
+            Assert.Equal( 17u, chunk.UncompressedLength );
+            Assert.Equal( 0u, chunk.Offset );
+            Assert.Equal( Convert.FromHexString( "94020BDE145A521EDEC9A9424E7A90FD042481E9" ), chunk.ChunkID );
         }
     }
 }

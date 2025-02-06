@@ -124,6 +124,11 @@ namespace SteamKit2
 
             Version = ds.ReadUInt32();
 
+            if ( Version != CURRENT_VERSION )
+            {
+                throw new NotImplementedException( $"Only version {CURRENT_VERSION} is supported." );
+            }
+
             DepotID = ds.ReadUInt32();
 
             ManifestGID = ds.ReadUInt64();
