@@ -53,15 +53,29 @@ namespace SteamKit2.CDN
             try
             {
                 var written = aes.DecryptCbc( data[ iv.Length.. ], iv, buffer, PaddingMode.PKCS7 );
-                var decryptedStream = new MemoryStream( buffer, 0, written );
 
-                if ( buffer.Length > 1 && buffer[ 0 ] == 'V' && buffer[ 1 ] == 'Z' )
+                if ( buffer.Length < 16 )
                 {
+                    throw new InvalidDataException( $"Not enough data in the decrypted depot chunk (was {buffer.Length} bytes)." );
+                }
+
+                if ( buffer[ 0 ] == 'V' && buffer[ 1 ] == 'S' && buffer[ 2 ] == 'Z' && buffer[ 3 ] == 'a' ) // Zstd
+                {
+                    throw new NotImplementedException( "Zstd compressed chunks are not yet implemented in SteamKit." );
+                }
+                else if ( buffer[ 0 ] == 'V' && buffer[ 1 ] == 'Z' && buffer[ 2 ] == 'a' ) // LZMA
+                {
+                    using var decryptedStream = new MemoryStream( buffer, 0, written );
                     writtenDecompressed = VZipUtil.Decompress( decryptedStream, destination, verifyChecksum: false );
+                }
+                else if ( buffer[ 0 ] == 'P' && buffer[ 1 ] == 'K' && buffer[ 2 ] == 0x03 && buffer[ 3 ] == 0x04 ) // PKzip
+                {
+                    using var decryptedStream = new MemoryStream( buffer, 0, written );
+                    writtenDecompressed = ZipUtil.Decompress( decryptedStream, destination, verifyChecksum: false );
                 }
                 else
                 {
-                    writtenDecompressed = ZipUtil.Decompress( decryptedStream, destination, verifyChecksum: false );
+                    throw new InvalidDataException( $"Unexpected depot chunk compression (first four bytes are {Convert.ToHexString( buffer.AsSpan( 0, 4 ) )})." );
                 }
             }
             finally

@@ -35,7 +35,7 @@ namespace SteamKit2
 
             if ( verifyChecksum && Crc32.HashToUInt32( destination.AsSpan()[ ..sizeDecompressed ] ) != entry.Crc32 )
             {
-                throw new Exception( "Checksum validation failed for decompressed file" );
+                throw new InvalidDataException( "Checksum validation failed for decompressed file" );
             }
 
             return sizeDecompressed;
