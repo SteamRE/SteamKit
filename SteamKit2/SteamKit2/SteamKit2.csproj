@@ -55,6 +55,7 @@
     </PackageReference>
     <PackageReference Include="protobuf-net" Version="3.2.46" />
     <PackageReference Include="System.IO.Hashing" Version="9.0.1" />
+    <PackageReference Include="ZstdSharp.Port" Version="0.8.4" />
   </ItemGroup>
 
 </Project>
