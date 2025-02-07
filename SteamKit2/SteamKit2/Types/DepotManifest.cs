@@ -351,7 +351,10 @@ namespace SteamKit2
                         uint marker = br.ReadUInt32();
                         if ( marker != magic )
                             throw new InvalidDataException( "Unable to find end of message marker for depot manifest" );
-                        break;
+
+                        // This is an intentional return because v4 manifest does not have the separate sections
+                        // and it will be parsed by ParseBinaryManifest. If we get here, the entire buffer has been already processed.
+                        return;
 
                     case DepotManifest.PROTOBUF_PAYLOAD_MAGIC:
                         uint payload_length = br.ReadUInt32();
@@ -393,6 +396,7 @@ namespace SteamKit2
             CreationTime = manifest.CreationTime;
             TotalUncompressedSize = manifest.TotalUncompressedSize;
             TotalCompressedSize = manifest.TotalCompressedSize;
+            EncryptedCRC = manifest.EncryptedCRC;
 
             foreach (var file_mapping in manifest.Mapping)
             {
