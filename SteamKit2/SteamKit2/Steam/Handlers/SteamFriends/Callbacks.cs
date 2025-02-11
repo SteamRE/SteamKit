@@ -176,9 +176,9 @@ namespace SteamKit2
             public uint OnlineSessionInstances { get; private set; }
 
 
-            internal PersonaStateCallback( CMsgClientPersonaState.Friend friend )
+            internal PersonaStateCallback( CMsgClientPersonaState.Friend friend, EClientPersonaStateFlag statusFlags )
             {
-                this.StatusFlags = ( EClientPersonaStateFlag )friend.persona_state_flags;
+                this.StatusFlags = statusFlags;
 
                 this.FriendID = friend.friendid;
                 this.State = ( EPersonaState )friend.persona_state;
