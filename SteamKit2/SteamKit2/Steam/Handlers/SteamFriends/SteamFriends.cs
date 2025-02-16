@@ -837,7 +837,7 @@ namespace SteamKit2
 
             foreach ( var friend in perState.Body.friends )
             {
-                var callback = new PersonaStateCallback( friend );
+                var callback = new PersonaStateCallback( friend, flags );
                 this.Client.PostCallback( callback );
             }
         }
