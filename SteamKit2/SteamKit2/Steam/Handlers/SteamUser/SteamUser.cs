@@ -231,6 +231,25 @@ namespace SteamKit2
                 throw new ArgumentException( "LogOn requires a username and password or access token to be set in 'details'." );
             }
 
+            // Password limit.
+            const int MAX_PASSWORD_SIZE = 64;
+            if (!string.IsNullOrEmpty(details.Password) && details.Password.Length >= MAX_PASSWORD_SIZE)
+            {
+                DebugLog.WriteLine(nameof(SteamUser), $"Notice: password is longer than {MAX_PASSWORD_SIZE} characters.");
+            }
+
+            // Password Unicode check.
+            if (details.Password != null)
+            {
+                for (var i = 0; i < details.Password.Length; i++)
+                {
+                    if (details.Password[i] > 127)
+                    {
+                        throw new ArgumentException( "Password contains non standard ASCII characters." );
+                    }
+                }
+            }
+
             if ( !this.Client.IsConnected )
             {
                 this.Client.PostCallback( new LoggedOnCallback( EResult.NoConnection ) );
