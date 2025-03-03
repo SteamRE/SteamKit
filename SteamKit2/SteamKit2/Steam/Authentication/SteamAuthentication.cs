@@ -137,16 +137,27 @@ namespace SteamKit2.Authentication
                 throw new InvalidOperationException( "The SteamClient instance must be connected." );
             }
 
-            // Encrypt the password
-            var publicKey = await GetPasswordRSAPublicKeyAsync( details.Username! ).ConfigureAwait( false );
-
-            // Password limit is 64. If it's longer, trim it.
-            if (!string.IsNullOrEmpty(details.Password) && details.Password.Length > 64)
+            // Password limit.
+            const int MAX_PASSWORD_SIZE = 64;
+            if (!string.IsNullOrEmpty(details.Password) && details.Password.Length >= MAX_PASSWORD_SIZE)
             {
-                DebugLog.WriteLine(nameof(SteamAuthentication), "Notice: password is longer than 64 characters and will be trimmed.");
-                details.Password = details.Password.Substring(0, 64);
+                DebugLog.WriteLine(nameof(SteamUser), $"Notice: password is longer than {MAX_PASSWORD_SIZE} characters.");
             }
 
+            // Password Unicode check.
+            if (details.Password != null)
+            {
+                for (var i = 0; i < details.Password.Length; i++)
+                {
+                    if (details.Password[i] > 127)
+                    {
+                        throw new ArgumentException( "Password contains non standard ASCII characters." );
+                    }
+                }
+            }
+
+            // Encrypt the password
+            var publicKey = await GetPasswordRSAPublicKeyAsync( details.Username! ).ConfigureAwait( false );
             var rsaParameters = new RSAParameters
             {
                 Modulus = Utils.DecodeHexString( publicKey.publickey_mod ),
