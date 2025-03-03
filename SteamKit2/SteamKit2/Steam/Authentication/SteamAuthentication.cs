@@ -139,6 +139,14 @@ namespace SteamKit2.Authentication
 
             // Encrypt the password
             var publicKey = await GetPasswordRSAPublicKeyAsync( details.Username! ).ConfigureAwait( false );
+
+            // Password limit is 64. If it's longer, trim it.
+            if (!string.IsNullOrEmpty(details.Password) && details.Password.Length > 64)
+            {
+                DebugLog.WriteLine("SteamAuthentication", "Notice: password is longer than 64 characters and will be trimmed.");
+                details.Password = details.Password.Substring(0, 64);
+            }
+
             var rsaParameters = new RSAParameters
             {
                 Modulus = Utils.DecodeHexString( publicKey.publickey_mod ),
