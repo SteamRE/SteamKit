@@ -143,7 +143,7 @@ namespace SteamKit2.Authentication
             // Password limit is 64. If it's longer, trim it.
             if (!string.IsNullOrEmpty(details.Password) && details.Password.Length > 64)
             {
-                DebugLog.WriteLine("SteamAuthentication", "Notice: password is longer than 64 characters and will be trimmed.");
+                DebugLog.WriteLine(nameof(SteamAuthentication), "Notice: password is longer than 64 characters and will be trimmed.");
                 details.Password = details.Password.Substring(0, 64);
             }
 
