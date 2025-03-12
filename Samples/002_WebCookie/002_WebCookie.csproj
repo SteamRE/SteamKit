@@ -6,13 +6,13 @@
     <Company>SteamRE</Company>
     <Product>Sample1c_WebCookie</Product>
     <Authors />
-    <Description>SteamKit Sample 1c: Web Authentication Cookie</Description>
+    <Description>SteamKitten Sample 1c: Web Authentication Cookie</Description>
     <Copyright>Copyright © Pavel Djundik 2023</Copyright>
     <PackageId>Sample1c_WebCookie</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SteamKit2\SteamKit2\SteamKit2.csproj" />
+    <ProjectReference Include="..\..\SteamKitten\SteamKitten\SteamKitten.csproj" />
   </ItemGroup>
 
 </Project>

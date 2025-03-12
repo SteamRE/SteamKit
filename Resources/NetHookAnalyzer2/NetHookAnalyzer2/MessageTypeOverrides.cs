@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using SteamKit2;
-using SteamKit2.Internal;
+using SteamKitten;
+using SteamKitten.Internal;
 
-using CSGO = SteamKit2.GC.CSGO.Internal;
-using Dota = SteamKit2.GC.Dota.Internal;
-using TF2 = SteamKit2.GC.TF2.Internal;
+using CSGO = SteamKitten.GC.CSGO.Internal;
+using Dota = SteamKitten.GC.Dota.Internal;
+using TF2 = SteamKitten.GC.TF2.Internal;
 
 namespace NetHookAnalyzer2
 {
@@ -27,7 +27,7 @@ namespace NetHookAnalyzer2
 
             { EMsg.AMGameServerUpdate, typeof(CMsgGameServerData) },
 
-            { EMsg.ClientDPUpdateAppJobReport, typeof(SteamKit2.WebUI.Internal.CMsgClientUpdateAppJobReport) },
+            { EMsg.ClientDPUpdateAppJobReport, typeof(SteamKitten.WebUI.Internal.CMsgClientUpdateAppJobReport) },
 
             { EMsg.ClientPlayingSessionState, typeof(CMsgClientPlayingSessionState) },
 

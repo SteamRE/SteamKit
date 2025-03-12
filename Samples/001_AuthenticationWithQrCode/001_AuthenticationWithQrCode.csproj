@@ -6,7 +6,7 @@
     <Company>SteamRE</Company>
     <Product>Sample1b_QrCodeAuthentication</Product>
     <Authors />
-    <Description>SteamKit Sample 1b: Authentication using QR codes</Description>
+    <Description>SteamKitten Sample 1b: Authentication using QR codes</Description>
     <Copyright>Copyright © Pavel Djundik 2023</Copyright>
     <PackageId>Sample1b_QrCodeAuthentication</PackageId>
   </PropertyGroup>
@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SteamKit2\SteamKit2\SteamKit2.csproj" />
+    <ProjectReference Include="..\..\SteamKitten\SteamKitten\SteamKitten.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json;
-using SteamKit2;
-using SteamKit2.Authentication;
+using SteamKitten;
+using SteamKitten.Authentication;
 
 if ( args.Length < 2 )
 {

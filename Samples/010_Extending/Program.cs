@@ -1,9 +1,9 @@
 ﻿using System;
 using Sample2_Extending;
-using SteamKit2;
+using SteamKitten;
 
 //
-// Sample 2: Extending SteamKit2
+// Sample 2: Extending SteamKitten
 //
 // this sample introduces the method through which SK2 can be extended
 // with custom message handling and additional features

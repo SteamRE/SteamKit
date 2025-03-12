@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using SteamKit2;
-using SteamKit2.Internal;
+using SteamKitten;
+using SteamKitten.Internal;
 
 namespace NetHookAnalyzer2.Specializations
 {

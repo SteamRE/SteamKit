@@ -4,8 +4,8 @@ using System.IO;
 using System.Windows.Forms;
 using ProtoBuf;
 using ProtoBuf.Meta;
-using SteamKit2;
-using SteamKit2.Internal;
+using SteamKitten;
+using SteamKitten.Internal;
 
 namespace NetHookAnalyzer2.Specializations
 {

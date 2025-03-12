@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json;
-using SteamKit2;
-using SteamKit2.Authentication;
+using SteamKitten;
+using SteamKitten.Authentication;
 
 if ( args.Length < 2 )
 {
@@ -61,10 +61,10 @@ async void OnConnected( SteamClient.ConnectedCallback callback )
         // See NewGuardData comment below
         GuardData = previouslyStoredGuardData,
 
-        /// <see cref="UserConsoleAuthenticator"/> is the default authenticator implemention provided by SteamKit
+        /// <see cref="UserConsoleAuthenticator"/> is the default authenticator implemention provided by SteamKitten
         /// for ease of use which blocks the thread and asks for user input to enter the code.
         /// However, if you require special handling (e.g. you have the TOTP secret and can generate codes on the fly),
-        /// you can implement your own <see cref="SteamKit2.Authentication.IAuthenticator"/>.
+        /// you can implement your own <see cref="SteamKitten.Authentication.IAuthenticator"/>.
         Authenticator = new UserConsoleAuthenticator(),
     } );
 

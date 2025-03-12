@@ -19,7 +19,7 @@ namespace SteamLanguageParser
                 throw new Exception("Unable to find SteamRE project path, please specify the `SteamRE` environment variable");
             }
 
-            ParseFile(projectPath, Path.Combine("Resources", "SteamLanguage"), "steammsg.steamd", "SteamKit2", Path.Combine("SteamKit2", "SteamKit2", "Base", "Generated"), "SteamLanguage", true, new CSharpGen(), "cs");
+            ParseFile(projectPath, Path.Combine("Resources", "SteamLanguage"), "steammsg.steamd", "SteamKitten", Path.Combine("SteamKitten", "SteamKitten", "Base", "Generated"), "SteamLanguage", true, new CSharpGen(), "cs");
         }
 
         private static void ParseFile(string projectPath, string path, string file, string nspace, string outputPath, string outFile, bool supportsGC, ICodeGen codeGen, string fileNameSuffix)

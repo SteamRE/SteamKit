@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SteamKit2.GC.CSGO.Internal;
+using SteamKitten.GC.CSGO.Internal;
 
 namespace NetHookAnalyzer2.Specializations
 {

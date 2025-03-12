@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using SteamKit2.Internal;
+using SteamKitten.Internal;
 
 namespace NetHookAnalyzer2
 {

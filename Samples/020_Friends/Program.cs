@@ -1,6 +1,6 @@
 ﻿using System;
 
-using SteamKit2;
+using SteamKitten;
 
 //
 // Sample 4: Friends

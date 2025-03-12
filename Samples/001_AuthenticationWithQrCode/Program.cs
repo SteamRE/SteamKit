@@ -1,7 +1,7 @@
 ﻿using System;
 using QRCoder;
-using SteamKit2;
-using SteamKit2.Authentication;
+using SteamKitten;
+using SteamKitten.Authentication;
 
 // create our steamclient instance
 var steamClient = new SteamClient();

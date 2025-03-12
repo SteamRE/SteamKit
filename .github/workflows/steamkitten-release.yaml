@@ -1,0 +1,45 @@
+name: Publish Package Release
+
+on:
+  release:
+    types: [ published ]
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  publish-nupkg:
+    name: Publish NuGet Package
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4
+
+    - name: Create NuGet Package
+      run: dotnet pack --configuration Release SteamKitten/SteamKitten/SteamKitten.csproj /p:Version=${{ github.event.release.tag_name }}
+
+    - name: Upload NuGet Package as Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: SteamKitten-${{ github.event.release.tag_name }}.nupkg
+        path: 'SteamKitten/SteamKitten/bin/Release/SteamKitten.${{ github.event.release.tag_name }}.nupkg'
+
+    - name: Upload NuGet Package to GitHub Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: gh release upload "${{ github.event.release.tag_name }}" "SteamKitten/SteamKitten/bin/Release/SteamKitten.${{ github.event.release.tag_name }}.nupkg"
+
+    - name: Publish NuGet Package to NuGet Gallery
+      run: |
+        dotnet nuget push SteamKitten/SteamKitten/bin/Release/SteamKitten.${{ github.event.release.tag_name }}.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+
+    - name: Publish NuGet Package to GitHub Packages
+      run: |
+        dotnet nuget push SteamKitten/SteamKitten/bin/Release/SteamKitten.${{ github.event.release.tag_name }}.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/SteamRE/index.json

@@ -8,8 +8,8 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
-using SteamKit2;
-using SteamKit2.Internal;
+using SteamKitten;
+using SteamKitten.Internal;
 
 namespace NetHookAnalyzer2
 {

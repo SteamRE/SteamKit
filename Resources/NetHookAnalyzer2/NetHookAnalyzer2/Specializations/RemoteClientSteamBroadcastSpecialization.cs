@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using ProtoBuf.Meta;
-using SteamKit2.Internal;
+using SteamKitten.Internal;
 
 namespace NetHookAnalyzer2.Specializations
 {
@@ -43,7 +43,7 @@ namespace NetHookAnalyzer2.Specializations
 				.Replace( "k_E", "CMsg", StringComparison.InvariantCulture )
 				.Replace( "BroadcastMsg", "Broadcast", StringComparison.InvariantCulture );
 
-			var bodyType = Type.GetType( $"SteamKit2.Internal.{typeName}, SteamKit2" );
+			var bodyType = Type.GetType( $"SteamKitten.Internal.{typeName}, SteamKitten" );
 
 			if ( bodyType == null )
 			{

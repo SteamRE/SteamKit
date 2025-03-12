@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-using SteamKit2;
+using SteamKitten;
 
 //
 // WARNING!

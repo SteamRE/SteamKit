@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Threading;
 
-using SteamKit2;
-using SteamKit2.Internal; // brings in our protobuf client messages
-using SteamKit2.GC; // brings in the GC related classes
-using SteamKit2.GC.Dota.Internal; // brings in dota specific protobuf messages
+using SteamKitten;
+using SteamKitten.Internal; // brings in our protobuf client messages
+using SteamKitten.GC; // brings in the GC related classes
+using SteamKitten.GC.Dota.Internal; // brings in dota specific protobuf messages
 
 namespace DotaMatchRequest;
 
@@ -106,7 +106,7 @@ class DotaClient
         // we've logged into the account
         // now we need to inform the steam server that we're playing dota (in order to receive GC messages)
 
-        // steamkit doesn't expose the "play game" message through any handler, so we'll just send the message manually
+        // SteamKitten doesn't expose the "play game" message through any handler, so we'll just send the message manually
         var playGame = new ClientMsgProtobuf<CMsgClientGamesPlayed>( EMsg.ClientGamesPlayed );
 
         playGame.Body.games_played.Add( new CMsgClientGamesPlayed.GamePlayed
@@ -122,7 +122,7 @@ class DotaClient
         Thread.Sleep( 5000 );
 
         // inform the dota GC that we want a session
-        var clientHello = new ClientGCMsgProtobuf<SteamKit2.GC.Dota.Internal.CMsgClientHello>( ( uint )EGCBaseClientMsg.k_EMsgGCClientHello );
+        var clientHello = new ClientGCMsgProtobuf<SteamKitten.GC.Dota.Internal.CMsgClientHello>( ( uint )EGCBaseClientMsg.k_EMsgGCClientHello );
         clientHello.Body.engine = ESourceEngine.k_ESE_Source2;
         gameCoordinator.Send( clientHello, APPID );
     }

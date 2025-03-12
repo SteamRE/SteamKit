@@ -1,11 +1,11 @@
 ﻿using System;
 
-using SteamKit2;
+using SteamKitten;
 
 //
 // Sample 3: DebugLog
 //
-// sometimes is may be necessary to peek under the hood of SteamKit2
+// sometimes is may be necessary to peek under the hood of SteamKitten
 // to debug or diagnose some issues
 //
 // to help with this, SK2 includes a component named the DebugLog
@@ -142,7 +142,7 @@ class MyListener : IDebugListener
 {
     public void WriteLine( string category, string msg )
     {
-        // this function will be called when internal steamkit components write to the debuglog
+        // this function will be called when internal SteamKitten components write to the debuglog
 
         // for this example, we'll print the output to the console
         Console.WriteLine( "MyListener - {0}: {1}", category, msg );

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.IO;
 using System.Net;
-using SteamKit2;
+using SteamKitten;
 using System.Threading.Tasks;
 
 //

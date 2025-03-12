@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <ApplicationIcon>..\Misc\steamkit.ico</ApplicationIcon>
+    <ApplicationIcon>..\Misc\SteamKitten.ico</ApplicationIcon>
   </PropertyGroup>
 
 </Project>

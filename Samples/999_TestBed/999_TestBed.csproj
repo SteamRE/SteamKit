@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SteamKit2\SteamKit2\SteamKit2.csproj" />
+    <ProjectReference Include="..\..\SteamKitten\SteamKitten\SteamKitten.csproj" />
   </ItemGroup>
 
 </Project>

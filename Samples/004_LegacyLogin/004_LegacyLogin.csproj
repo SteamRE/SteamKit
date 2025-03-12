@@ -6,13 +6,13 @@
     <Company>SteamRE</Company>
     <Product>Sample1_Logon</Product>
     <Authors />
-    <Description>SteamKit Sample 1: Logon</Description>
+    <Description>SteamKitten Sample 1: Logon</Description>
     <Copyright>Copyright © Ryan Stecker 2018</Copyright>
     <PackageId>Sample1_Logon</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SteamKit2\SteamKit2\SteamKit2.csproj" />
+    <ProjectReference Include="..\..\SteamKitten\SteamKitten\SteamKitten.csproj" />
   </ItemGroup>
 
 </Project>

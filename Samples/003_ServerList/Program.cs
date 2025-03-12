@@ -1,5 +1,5 @@
-﻿using SteamKit2;
-using SteamKit2.Discovery;
+﻿using SteamKitten;
+using SteamKitten.Discovery;
 using System;
 using System.IO;
 

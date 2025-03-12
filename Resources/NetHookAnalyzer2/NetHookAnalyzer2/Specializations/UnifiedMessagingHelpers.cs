@@ -21,9 +21,9 @@ namespace NetHookAnalyzer2.Specializations
 
 			var namespaces = new[]
 			{
-				("SteamKit2", "SteamKit2.Internal"),
-				("SteamKit2", "SteamKit2.Internal.Steamworks"),
-				("SteamKit2", "SteamKit2.WebUI.Internal"),
+				("SteamKitten", "SteamKitten.Internal"),
+				("SteamKitten", "SteamKitten.Internal.Steamworks"),
+				("SteamKitten", "SteamKitten.WebUI.Internal"),
 			};
 
 			foreach (var (assembly, ns) in namespaces)

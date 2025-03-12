@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using SteamKit2;
+using SteamKitten;
 
 // This is just a test bed to nethook various packets to later be added in tests
 

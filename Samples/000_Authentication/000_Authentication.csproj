@@ -6,13 +6,13 @@
     <Company>SteamRE</Company>
     <Product>Sample1a_Authentication</Product>
     <Authors />
-    <Description>SteamKit Sample 1a: Authentication</Description>
+    <Description>SteamKitten Sample 1a: Authentication</Description>
     <Copyright>Copyright © Pavel Djundik 2023</Copyright>
     <PackageId>Sample1a_Authentication</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SteamKit2\SteamKit2\SteamKit2.csproj" />
+    <ProjectReference Include="..\..\SteamKitten\SteamKitten\SteamKitten.csproj" />
   </ItemGroup>
 
 </Project>

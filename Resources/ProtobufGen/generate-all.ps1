@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-    Generate C# proto code from protobufs for SteamKit
+    Generate C# proto code from protobufs for SteamKitten
 .DESCRIPTION
     For each file in protos.csv, run protogen to create or update corresponding
-    C# code and classes for use in SteamKit
+    C# code and classes for use in SteamKitten
 .PARAMETER ProtoDir
     Protobuf folders to process. (Default: all)
 .EXAMPLE
@@ -14,7 +14,7 @@ param([string[]]$ProtoDir)
 $ProtoGenSrc = Join-Path $PSScriptRoot 'ProtobufGen'
 $ProtoGenDll = Join-Path $ProtoGenSrc '\bin\Debug\ProtobufGen.dll'
 $ProtoBase = Join-Path $PSScriptRoot '..\Protobufs'
-$SK2Base = Join-Path $PSScriptRoot '..\..\SteamKit2\SteamKit2\Base\Generated'
+$SK2Base = Join-Path $PSScriptRoot '..\..\SteamKitten\SteamKitten\Base\Generated'
 
 & dotnet build --configuration Debug $ProtoGenSrc
 
@@ -28,7 +28,7 @@ Set-Location -LiteralPath $PSScriptRoot
 $params = $CommonParams + @(
     '--proto', "gc.proto",
     '--output', (Join-Path $SK2Base 'GC\MsgBaseGC.cs'),
-    '--namespace', "SteamKit2.GC.Internal"
+    '--namespace', "SteamKitten.GC.Internal"
     )
 
 & dotnet $ProtoGenDll $params > $null

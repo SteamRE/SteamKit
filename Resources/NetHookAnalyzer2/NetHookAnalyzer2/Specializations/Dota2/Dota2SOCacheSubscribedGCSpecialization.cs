@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using ProtoBuf;
 using ProtoBuf.Meta;
-using SteamKit2.GC.Dota.Internal;
+using SteamKitten.GC.Dota.Internal;
 
 namespace NetHookAnalyzer2.Specializations
 {

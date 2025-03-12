@@ -2,7 +2,7 @@
 using System.IO;
 using ProtoBuf;
 using ProtoBuf.Meta;
-using SteamKit2.GC.TF2.Internal;
+using SteamKitten.GC.TF2.Internal;
 
 namespace NetHookAnalyzer2.Specializations
 {

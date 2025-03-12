@@ -4,8 +4,8 @@ using System.Linq;
 using NetHookAnalyzer2.Specializations;
 using ProtoBuf;
 using ProtoBuf.Meta;
-using SteamKit2;
-using SteamKit2.Internal;
+using SteamKitten;
+using SteamKitten.Internal;
 
 namespace NetHookAnalyzer2
 {
@@ -132,7 +132,7 @@ namespace NetHookAnalyzer2
 			// check name
 			if (msgType == null)
 			{
-				msgType = MessageTypeFinder.GetSteamKitType(string.Format("SteamKit2.Msg{0}", eMsgName));
+				msgType = MessageTypeFinder.GetSteamKitType(string.Format("SteamKitten.Msg{0}", eMsgName));
 			}
 
 			if (msgType != null)
@@ -143,7 +143,7 @@ namespace NetHookAnalyzer2
 				return body;
 			}
 
-			msgType = MessageTypeFinder.GetSteamKitType(string.Format("SteamKit2.CMsg{0}", eMsgName));
+			msgType = MessageTypeFinder.GetSteamKitType(string.Format("SteamKitten.CMsg{0}", eMsgName));
 			if (msgType != null)
 			{
 				return Serializer.NonGeneric.Deserialize(msgType, stream);

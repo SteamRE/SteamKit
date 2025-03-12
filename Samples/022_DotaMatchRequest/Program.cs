@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using DotaMatchRequest;
-using SteamKit2.GC.Dota.Internal; // for CMsgDOTAMatch
+using SteamKitten.GC.Dota.Internal; // for CMsgDOTAMatch
 
 if ( args.Length < 3 )
 {

@@ -1,14 +1,14 @@
 ﻿using System;
 
-using SteamKit2;
+using SteamKitten;
 
 //
 // Sample 1: Logon
 //
-// the first act of business before being able to use steamkit2's features is to
+// the first act of business before being able to use SteamKitten's features is to
 // logon to the steam network
 //
-// interaction with steamkit is done through client message handlers and the results
+// interaction with SteamKitten is done through client message handlers and the results
 // come back through a callback queue controlled by a steamclient instance 
 //
 // your code must create a CallbackMgr, and instances of Callback<T>. Callback<T> maps a specific

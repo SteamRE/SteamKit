@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using SteamKit2.Internal;
+using SteamKitten.Internal;
 
 namespace NetHookAnalyzer2
 {
@@ -43,7 +43,7 @@ namespace NetHookAnalyzer2
 
 			items.Add(item);
 
-			if (item.EMsg == SteamKit2.EMsg.ServiceMethodResponse && item.InnerMessageName == "Credentials.GetAccountAuthSecret#1")
+			if (item.EMsg == SteamKitten.EMsg.ServiceMethodResponse && item.InnerMessageName == "Credentials.GetAccountAuthSecret#1")
 			{
 				var authSecretBody = item.ReadFile().Body as CCredentials_GetAccountAuthSecret_Response;
 

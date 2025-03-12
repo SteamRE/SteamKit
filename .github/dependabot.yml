@@ -1,7 +1,7 @@
 version: 2
 updates:
 - package-ecosystem: nuget
-  directory: "/SteamKit2"
+  directory: "/SteamKitten"
   schedule:
     interval: weekly
   open-pull-requests-limit: 10

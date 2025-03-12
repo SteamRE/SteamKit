@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using SteamKit2;
+using SteamKitten;
 
 //
 // Sample 6: WebAPI

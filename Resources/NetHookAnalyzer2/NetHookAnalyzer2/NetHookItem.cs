@@ -2,8 +2,8 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using ProtoBuf;
-using SteamKit2;
-using SteamKit2.Internal;
+using SteamKitten;
+using SteamKitten.Internal;
 
 namespace NetHookAnalyzer2
 {
@@ -88,8 +88,8 @@ namespace NetHookAnalyzer2
 		{
 			switch (EMsg)
 			{
-				case SteamKit2.EMsg.ClientToGC:
-				case SteamKit2.EMsg.ClientFromGC:
+				case SteamKitten.EMsg.ClientToGC:
+				case SteamKitten.EMsg.ClientFromGC:
 				{
 					var proto = ReadAsProtobufMsg<CMsgGCClient>();
 					var gcEMsg = proto.Body.msgtype;
@@ -104,11 +104,11 @@ namespace NetHookAnalyzer2
 					return gcName;
 				}
 
-				case SteamKit2.EMsg.ServiceMethod:
-				case SteamKit2.EMsg.ServiceMethodSendToClient:
-				case SteamKit2.EMsg.ServiceMethodCallFromClient:
-				case SteamKit2.EMsg.ServiceMethodCallFromClientNonAuthed:
-				case SteamKit2.EMsg.ServiceMethodResponse:
+				case SteamKitten.EMsg.ServiceMethod:
+				case SteamKitten.EMsg.ServiceMethodSendToClient:
+				case SteamKitten.EMsg.ServiceMethodCallFromClient:
+				case SteamKitten.EMsg.ServiceMethodCallFromClientNonAuthed:
+				case SteamKitten.EMsg.ServiceMethodResponse:
 				{
 					using var stream = OpenStream();
 					var hdr = new MsgHdrProtoBuf();
@@ -116,13 +116,13 @@ namespace NetHookAnalyzer2
 					return hdr.Proto.target_job_name;
 				}
 
-				case SteamKit2.EMsg.ClientServiceMethodLegacy:
+				case SteamKitten.EMsg.ClientServiceMethodLegacy:
 				{
 					var proto = ReadAsProtobufMsg<CMsgClientServiceMethodLegacy>();
 					return proto.Body.method_name;
 				}
 
-				case SteamKit2.EMsg.ClientServiceMethodLegacyResponse:
+				case SteamKitten.EMsg.ClientServiceMethodLegacyResponse:
 				{
 					var proto = ReadAsProtobufMsg<CMsgClientServiceMethodLegacyResponse>();
 					return proto.Body.method_name;
@@ -138,7 +138,7 @@ namespace NetHookAnalyzer2
 			where T : IExtensible, new()
 		{
 			var fileData = File.ReadAllBytes(FileInfo.FullName);
-			var msg = new SteamKit2.PacketClientMsgProtobuf(EMsg, fileData);
+			var msg = new SteamKitten.PacketClientMsgProtobuf(EMsg, fileData);
 			var proto = new ClientMsgProtobuf<T>(msg);
 			return proto;
 		}

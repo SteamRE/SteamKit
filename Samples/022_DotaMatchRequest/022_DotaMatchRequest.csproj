@@ -5,12 +5,12 @@
     <TargetFramework>net8.0</TargetFramework>
     <Authors />
     <Company>SteamRE Team</Company>
-    <Description>SteamKit Sample 10: Dota 2 Coordinator</Description>
+    <Description>SteamKitten Sample 10: Dota 2 Coordinator</Description>
     <Copyright>Copyright © Ryan Stecker 2018</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SteamKit2\SteamKit2\SteamKit2.csproj" />
+    <ProjectReference Include="..\..\SteamKitten\SteamKitten\SteamKitten.csproj" />
   </ItemGroup>
 
 </Project>

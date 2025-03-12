@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report! Before you proceed, please ensure that you are running the latest NetHook2 code. You can get precompiled DLLs from [GitHub Actions](https://github.com/SteamRE/SteamKit/actions/workflows/steamkit2-build.yaml?query=branch%3Amaster+is%3Asuccess).
+        Thanks for taking the time to fill out this bug report! Before you proceed, please ensure that you are running the latest NetHook2 code. You can get precompiled DLLs from [GitHub Actions](https://github.com/SteamRE/SteamKitten/actions/workflows/SteamKitten-build.yaml?query=branch%3Amaster+is%3Asuccess).
   - type: textarea
     id: what-should-have-happened
     attributes:

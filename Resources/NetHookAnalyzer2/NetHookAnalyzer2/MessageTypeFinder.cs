@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using ProtoBuf;
-using SteamKit2;
-using SteamKit2.Internal;
+using SteamKitten;
+using SteamKitten.Internal;
 
 namespace NetHookAnalyzer2
 {
@@ -74,7 +74,7 @@ namespace NetHookAnalyzer2
 			return msgType;
 		}
 
-		#region How to find SteamKit2
+		#region How to find SteamKitten
 
 		static Type SteamKit2MarkerType
 		{
@@ -97,7 +97,7 @@ namespace NetHookAnalyzer2
 				return false;
 			}
 
-			if (type.Namespace != "SteamKit2.Internal")
+			if (type.Namespace != "SteamKitten.Internal")
 			{
 				return false;
 			}
@@ -114,20 +114,20 @@ namespace NetHookAnalyzer2
 
 		static IEnumerable<string> GetPossibleGCTypePrefixes(uint appid)
 		{
-			yield return "SteamKit2.GC.Internal.CMsg";
+			yield return "SteamKitten.GC.Internal.CMsg";
 
 			switch (appid)
 			{
 				case WellKnownAppIDs.TeamFortress2:
-					yield return "SteamKit2.GC.TF.Internal.CMsg";
+					yield return "SteamKitten.GC.TF.Internal.CMsg";
 					break;
 
 				case WellKnownAppIDs.Dota2:
-					yield return "SteamKit2.GC.Dota.Internal.CMsg";
+					yield return "SteamKitten.GC.Dota.Internal.CMsg";
 					break;
 
 				case WellKnownAppIDs.CounterStrike2:
-					yield return "SteamKit2.GC.CSGO.Internal.CMsg";
+					yield return "SteamKitten.GC.CSGO.Internal.CMsg";
 					break;
             }
 		}

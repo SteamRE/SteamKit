@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHookAnalyzer2", "NetHookAnalyzer2\NetHookAnalyzer2.csproj", "{19DB2A0A-4D96-492A-AD32-BED727ECD39D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SteamKit2", "..\..\SteamKit2\SteamKit2\SteamKit2.csproj", "{4B2B0365-DE37-4B65-B614-3E4E7C05147D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SteamKitten", "..\..\SteamKitten\SteamKitten\SteamKitten.csproj", "{4B2B0365-DE37-4B65-B614-3E4E7C05147D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

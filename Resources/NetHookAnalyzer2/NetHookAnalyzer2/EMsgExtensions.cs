@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using SteamKit2;
+using SteamKitten;
 
-using CSGO = SteamKit2.GC.CSGO.Internal;
-using Dota = SteamKit2.GC.Dota.Internal;
-using TF2 = SteamKit2.GC.TF2.Internal;
+using CSGO = SteamKitten.GC.CSGO.Internal;
+using Dota = SteamKitten.GC.Dota.Internal;
+using TF2 = SteamKitten.GC.TF2.Internal;
 
 namespace NetHookAnalyzer2
 {

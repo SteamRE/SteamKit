@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SteamKit2.GC.Dota.Internal;
-using SteamKit2.GC.Internal;
+using SteamKitten.GC.Dota.Internal;
+using SteamKitten.GC.Internal;
 using System.Collections.ObjectModel;
 
 namespace NetHookAnalyzer2.Specializations

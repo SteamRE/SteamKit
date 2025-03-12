@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <PackageProjectUrl>https://github.com/SteamRE/SteamKit/tree/master/Resources/ProtobufDumper</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/SteamRE/SteamKit/blob/master/SteamKit2/SteamKit2/license.txt</PackageLicenseUrl>
-    <RepositoryUrl>https://github.com/SteamRE/SteamKit</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/SteamRE/SteamKitten/tree/master/Resources/ProtobufDumper</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/SteamRE/SteamKitten/blob/master/SteamKitten/SteamKitten/license.txt</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/SteamRE/SteamKitten</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <OutputType>Exe</OutputType>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <ApplicationIcon>..\..\Misc\steamkit.ico</ApplicationIcon>
+    <ApplicationIcon>..\..\Misc\SteamKitten.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
