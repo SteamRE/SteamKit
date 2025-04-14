@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -54,7 +54,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="protobuf-net" Version="3.2.46" />
-    <PackageReference Include="System.IO.Hashing" Version="9.0.3" />
+    <PackageReference Include="System.IO.Hashing" Version="9.0.4" />
   </ItemGroup>
 
 </Project>
