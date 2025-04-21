@@ -1874,6 +1874,8 @@ enum EMsg
 	ClientPICSProductInfoResponse = 8904;
 	ClientPICSAccessTokenRequest = 8905;
 	ClientPICSAccessTokenResponse = 8906;
+	ClientPICSPrivateBetaRequest = 8907;
+	ClientPICSPrivateBetaResponse = 8908;
 
 	WorkerProcess = 9000;
 	WorkerProcessPingRequest = 9000;
@@ -1915,6 +1917,8 @@ enum EMsg
 	DRMWorkerProcessUnpackBlobResponse = 9131;
 	DRMWorkerProcessInstallAllRequest = 9132;
 	DRMWorkerProcessInstallAllResponse = 9133;
+	DRMWorkerProcessSignFile = 9134;
+	DRMWorkerProcessSignFileResponse = 9135;
 
 	TestWorkerProcess = 9200;
 	TestWorkerProcessLoadUnloadModuleRequest = 9200;
@@ -1956,6 +1960,12 @@ enum EMsg
 	ClientUnlockHEVCResponse = 9514;
 	RemoteClientStatusRequest = 9515;
 	RemoteClientStatusResponse = 9516;
+	RemoteClientAuthorizationRequest = 9517;
+	RemoteClientAuthorizationResponse = 9518;
+	RemoteClientAuthorizationCancelRequest = 9519;
+	RemoteClientAuthorizationConfirmed = 9520;
+	RemoteClientProofRequest = 9521;
+	RemoteClientProofResponse = 9522;
 
 	ClientConcurrentSessionsBase = 9600;
 	ClientPlayingSessionState = 9600;
