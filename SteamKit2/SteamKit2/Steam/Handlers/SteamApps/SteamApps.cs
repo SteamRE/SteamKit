@@ -59,6 +59,7 @@ namespace SteamKit2
             EMsg.ClientPICSProductInfoResponse => new PICSProductInfoCallback( packetMsg ),
             EMsg.ClientUpdateGuestPassesList => new GuestPassListCallback( packetMsg ),
             EMsg.ClientCheckAppBetaPasswordResponse => new CheckAppBetaPasswordCallback( packetMsg ),
+            EMsg.ClientPICSPrivateBetaResponse => new PrivateBetaCallback( packetMsg ),
             _ => null,
         };
 
@@ -296,6 +297,31 @@ namespace SteamKit2
             this.Client.Send( request );
 
             return new AsyncJob<LegacyGameKeyCallback>( this.Client, request.SourceJobID );
+        }
+
+        /// <summary>
+        /// Submit a beta password for a given app to retrieve any betas and their encryption keys.
+        /// Results are returned in a <see cref="CheckAppBetaPasswordCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
+        /// </summary>
+        /// <param name="app">App id requested.</param>
+        /// <param name="accessToken">Access token associated with the app.</param>
+        /// <param name="branch">The branch name.</param>
+        /// <param name="branchPasswordHash">The branch password from <see cref="CheckAppBetaPasswordCallback"/></param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="CheckAppBetaPasswordCallback"/>.</returns>
+        public AsyncJob<PrivateBetaCallback> PICSGetPrivateBeta( uint app, ulong accessToken, string branch, byte[] branchPasswordHash )
+        {
+            var request = new ClientMsgProtobuf<CMsgClientPICSPrivateBetaRequest>( EMsg.ClientPICSPrivateBetaRequest );
+            request.SourceJobID = Client.GetNextJobID();
+
+            request.Body.appid = app;
+            request.Body.access_token = accessToken;
+            request.Body.beta_name = branch;
+            request.Body.password_hash = branchPasswordHash;
+
+            this.Client.Send( request );
+
+            return new AsyncJob<PrivateBetaCallback>( this.Client, request.SourceJobID );
         }
 
         /// <summary>

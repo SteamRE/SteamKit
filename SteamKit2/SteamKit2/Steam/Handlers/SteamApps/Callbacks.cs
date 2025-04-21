@@ -794,5 +794,39 @@ namespace SteamKit2
                 }
             }
         }
+
+        /// <summary>
+        /// This callback is received when a private beta request has been completed
+        /// </summary>
+        public sealed class PrivateBetaCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Result of the operation
+            /// </summary>
+            public EResult Result { get; set; }
+            /// <summary>
+            /// Gets the keyvalue info to be merged into main appinfo
+            /// </summary>
+            public KeyValue DepotSection { get; private set; }
+
+            internal PrivateBetaCallback( IPacketMsg packetMsg )
+            {
+                var response = new ClientMsgProtobuf<CMsgClientPICSPrivateBetaResponse>( packetMsg );
+                var msg = response.Body;
+
+                JobID = response.TargetJobID;
+
+                Result = ( EResult )msg.eresult;
+
+                this.DepotSection = new KeyValue();
+
+                if ( msg.depot_section != null && msg.depot_section.Length > 0 )
+                {
+                    // we don't want to read the trailing null byte
+                    using var ms = new MemoryStream( msg.depot_section, 0, msg.depot_section.Length - 1 );
+                    this.DepotSection.ReadAsText( ms );
+                }
+            }
+        }
     }
 }
