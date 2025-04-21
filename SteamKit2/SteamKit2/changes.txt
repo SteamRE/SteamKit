@@ -1,4 +1,16 @@
 ------------------------------------------------------------------------------
+v 3.1.0			April 21 2025
+------------------------------------------------------------------------------
+
+* Added `SteamApps.PICSGetPrivateBeta`.
+* Fixed `PersonaStateCallback.StatusFlags`
+* Fixed parsing old v4 depot manifests.
+* `DepotChunk.Process` now validates the magic bytes of the compression.
+* Updated Steam EMsg.
+* Updated dependencies.
+
+
+------------------------------------------------------------------------------
 v 3.0.2			February 3 2025
 ------------------------------------------------------------------------------
 
