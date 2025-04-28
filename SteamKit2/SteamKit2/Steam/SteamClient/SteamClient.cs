@@ -262,6 +262,12 @@ namespace SteamKit2
         }
         internal void StartJob( AsyncJob job )
         {
+            if (!IsConnected)
+            {
+                job.SetFailed( dueToRemoteFailure: true );
+                return;
+            }
+            
             jobManager.StartJob( job );
         }
         #endregion
