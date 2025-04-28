@@ -427,6 +427,7 @@ namespace SteamKit2.Internal
 
 #if DEBUG
         internal void ReceiveTestPacketMsg( IPacketMsg packetMsg ) => OnClientMsgReceived( packetMsg );
+        internal void SetIsConnected( bool value ) => IsConnected = value;
 #endif
 
         void Connected( object? sender, EventArgs e )
