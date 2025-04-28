@@ -16,7 +16,7 @@ namespace Tests
         [Fact]
         public void AysncJobCompletesOnCallback()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
             Task<Callback> asyncTask = asyncJob.ToTask();
@@ -31,7 +31,7 @@ namespace Tests
         [Fact]
         public async Task AsyncJobGivesBackCallback()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
             Task<Callback> jobTask = asyncJob.ToTask();
@@ -43,11 +43,24 @@ namespace Tests
             Assert.Same( await jobTask, ourCallback );
         }
 
+        [Fact]
+        public void AsyncJobFailureWhenClientDiconnected()
+        {
+            SteamClient client = new SteamClient();
+            
+            AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
+            Task<Callback> jobTask = asyncJob.ToTask();
+            
+            Assert.True( jobTask.IsCompleted, "Async job should be completed when client is disconnected" );
+            Assert.False( jobTask.IsCanceled, "Async job should not be when client is disconnected" );
+            Assert.True( jobTask.IsFaulted, "Async job should be faulted when client is disconnected" );
+        }
+
 #if DEBUG
         [Fact]
         public void AsyncJobCtorRegistersJob()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
 
@@ -58,7 +71,7 @@ namespace Tests
         [Fact]
         public void AsyncJobClearsOnCompletion()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
 
@@ -71,7 +84,7 @@ namespace Tests
         [Fact]
         public async Task AsyncJobClearsOnTimeout()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
             asyncJob.Timeout = TimeSpan.FromMilliseconds( 50 );
@@ -86,7 +99,7 @@ namespace Tests
         [Fact]
         public async Task AsyncJobCancelsOnSetFailedTimeout()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
             Task<Callback> asyncTask = asyncJob.ToTask();
@@ -103,7 +116,7 @@ namespace Tests
         [Fact]
         public async Task AsyncJobTimesout()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
             asyncJob.Timeout = TimeSpan.FromMilliseconds( 50 );
@@ -123,7 +136,7 @@ namespace Tests
         [Fact]
         public void AsyncJobThrowsExceptionOnNullCallback()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
 
@@ -133,7 +146,7 @@ namespace Tests
         [Fact]
         public async Task AsyncJobThrowsFailureExceptionOnFailure()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
             Task<Callback> asyncTask = asyncJob.ToTask();
@@ -150,7 +163,7 @@ namespace Tests
         [Fact]
         public void AsyncJobMultipleFinishedOnEmptyPredicate()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => true );
             Task<AsyncJobMultiple<Callback>.ResultSet> asyncTask = asyncJob.ToTask();
@@ -166,7 +179,7 @@ namespace Tests
         [Fact]
         public void AsyncJobMultipleFinishedOnPredicate()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
             Task<AsyncJobMultiple<Callback>.ResultSet> asyncTask = asyncJob.ToTask();
@@ -189,7 +202,7 @@ namespace Tests
         [Fact]
         public void AsyncJobMultipleClearsOnCompletion()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
 
@@ -202,7 +215,7 @@ namespace Tests
         [Fact]
         public async Task AsyncJobMultipleClearsOnTimeout()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, ccall => true );
             asyncJob.Timeout = TimeSpan.FromMilliseconds( 50 );
@@ -217,7 +230,7 @@ namespace Tests
         [Fact]
         public async Task AsyncJobMultipleExtendsTimeoutOnMessage()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
             asyncJob.Timeout = TimeSpan.FromMilliseconds( 50 );
@@ -253,7 +266,7 @@ namespace Tests
         [Fact]
         public async Task AsyncJobMultipleTimesout()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => false );
             asyncJob.Timeout = TimeSpan.FromMilliseconds( 50 );
@@ -273,7 +286,7 @@ namespace Tests
         [Fact]
         public async Task AsyncJobMultipleCompletesOnIncompleteResult()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
             asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
@@ -305,7 +318,7 @@ namespace Tests
         [Fact]
         public async Task AsyncJobMultipleCompletesOnIncompleteResultAndFailure()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
             asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
@@ -333,7 +346,7 @@ namespace Tests
         [Fact]
         public void AsyncJobMultipleThrowsExceptionOnNullCallback()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => true );
 
@@ -343,7 +356,7 @@ namespace Tests
         [Fact]
         public async Task AsyncJobMultipleThrowsFailureExceptionOnFailure()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => false );
             Task<AsyncJobMultiple<Callback>.ResultSet> asyncTask = asyncJob.ToTask();
@@ -360,7 +373,7 @@ namespace Tests
         [Fact]
         public void AsyncJobContinuesAsynchronously()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             var asyncJob = new AsyncJob<Callback>( client, 123 );
             var asyncTask = asyncJob.ToTask();
@@ -383,7 +396,7 @@ namespace Tests
         [Fact]
         public void AsyncJobMultipleContinuesAsynchronously()
         {
-            SteamClient client = new SteamClient();
+            SteamClient client = ConnectedSteamClient.Get();
 
             var asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => true );
             var asyncTask = asyncJob.ToTask();
