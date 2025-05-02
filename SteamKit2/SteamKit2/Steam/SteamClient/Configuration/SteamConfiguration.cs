@@ -94,6 +94,12 @@ namespace SteamKit2
         public IServerListProvider ServerListProvider => state.ServerListProvider;
 
         /// <summary>
+        /// The <see cref="TimeProvider"/> used to control the flow of time.
+        /// This can be changed for testing and diagnostic purposes.
+        /// </summary>
+        public TimeProvider TimeProvider => state.TimeProvider;
+
+        /// <summary>
         /// The Universe to connect to. This should always be <see cref="EUniverse.Public"/> unless
         /// you work at Valve and are using this internally. If this is you, hello there.
         /// </summary>
@@ -106,7 +112,7 @@ namespace SteamKit2
         public Uri WebAPIBaseAddress => state.WebAPIBaseAddress;
 
         /// <summary>
-        /// An  API key to be used for authorized requests.
+        /// An API key to be used for authorized requests.
         /// Keys can be obtained from https://steamcommunity.com/dev or the Steamworks Partner site.
         /// </summary>
         public string WebAPIKey => state.WebAPIKey;
