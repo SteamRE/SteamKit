@@ -253,6 +253,7 @@ namespace SteamKit2
             /// <typeparam name="TResponse">Protobuf type of the response message.</typeparam>
             /// <param name="func">The function name to call.</param>
             /// <param name="version">The version of the function to call.</param>
+            /// <param name="extraArgs">A dictionary of string key value pairs representing extra arguments to be passed to the API (in addition to <see cref="request"/>).</param>
             /// <param name="request">A protobuf object representing arguments to be passed to the API.</param>
             /// <param name="method">The http request method. Either "POST" or "GET".</param>
             /// <returns>A <see cref="Task{T}"/> that contains object representing the results of the Web API call.</returns>
@@ -260,7 +261,7 @@ namespace SteamKit2
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="ProtoException">An error occured when parsing the response from the WebAPI.</exception>
-            public async Task<WebAPIResponse<TResponse>> CallProtobufAsync<TResponse, TRequest>( HttpMethod method, string func, TRequest request, int version = 1 )
+            public async Task<WebAPIResponse<TResponse>> CallProtobufAsync<TResponse, TRequest>( HttpMethod method, string func, TRequest request, int version = 1, Dictionary<string, object?>? extraArgs = null )
                 where TResponse : IExtensible, new()
                 where TRequest : IExtensible, new()
             {
@@ -281,6 +282,14 @@ namespace SteamKit2
                 {
                     { "input_protobuf_encoded", base64 },
                 };
+
+                if ( extraArgs != null )
+                {
+                    foreach ( var (key, value) in extraArgs )
+                    {
+                        args.TryAdd( key, value );
+                    }
+                }
 
                 var response = await CallAsyncInternal( method, func, version, args, "protobuf_raw" ).ConfigureAwait( false );
                 var eresult = EResult.Invalid;
