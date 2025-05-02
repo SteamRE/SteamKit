@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,6 +8,7 @@ using System.Threading.Tasks;
 using System.IO.Hashing;
 using SteamKit2.Internal;
 using System.Diagnostics;
+using System.Text;
 using System.Threading;
 
 namespace SteamKit2
@@ -18,6 +18,25 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamAuthTicket : ClientMsgHandler
     {
+        /// <summary>
+        /// Represents the information about the generated authentication session ticket.
+        /// </summary>
+        public enum TicketType : uint
+        {
+            /// <summary>
+            /// Default auth session ticket type.
+            /// </summary>
+            AuthSession = 2,
+            
+            /// <summary>
+            /// Web API auth session ticket type.
+            /// </summary>
+            WebApiTicket = 5
+        }
+        
+        //According to https://partner.steamgames.com/doc/api/ISteamUser#GetTicketForWebApiResponse_t the m_rgubTicket size is 2560 bytes
+        private const int WebApiTicketSize = 2560;
+        
         private readonly Dictionary<EMsg, Action<IPacketMsg>> DispatchMap;
         private readonly Queue<byte[]> GameConnectTokens = new();
         private readonly Dictionary<uint, List<CMsgAuthTicket>> TicketsByGame = [];
@@ -44,7 +63,24 @@ namespace SteamKit2
         /// <param name="appid">Game to generate ticket for.</param>
         /// <returns>A task representing the asynchronous operation. The task result contains a <see cref="TicketInfo"/> 
         /// object that provides details about the generated valid authentication session ticket.</returns>
-        public async Task<TicketInfo> GetAuthSessionTicket( uint appid )
+        public Task<TicketInfo> GetAuthSessionTicket( uint appid )
+        {
+            return GetAuthSessionTicketInternal( appid, TicketType.AuthSession, string.Empty );
+        }
+
+        /// <summary>
+        /// Performs <see href="https://partner.steamgames.com/doc/api/ISteamUser#GetAuthTicketForWebApi">WebApi session ticket</see> generation and validation for specified <paramref name="appid"/> and  <paramref name="identity"/> .
+        /// </summary>
+        /// <param name="appid">Game to generate ticket for.</param>
+        /// <param name="identity">The identity of the remote service that will authenticate the ticket. The service should provide a string identifier.</param>
+        /// <returns>A task representing the asynchronous operation. The task result contains a <see cref="TicketInfo"/> 
+        /// object that provides details about the generated valid authentication WebApi session ticket.</returns>
+        public Task<TicketInfo> GetAuthTicketForWebApi( uint appid, string identity )
+        {
+            return GetAuthSessionTicketInternal( appid, TicketType.WebApiTicket, identity );
+        }
+        
+        internal async Task<TicketInfo> GetAuthSessionTicketInternal( uint appid, TicketType ticketType, string? identity )
         {
             if ( Client.CellID == null ) throw new Exception( "User not logged in." );
 
@@ -55,13 +91,18 @@ namespace SteamKit2
 
             if ( GameConnectTokens.TryDequeue( out var token ) )
             {
-                var authTicket = BuildAuthTicket( token );
-                var ticket = await VerifyTicket( appid, authTicket, out var crc );
+                var authTicket = BuildAuthTicket( token, ticketType );
+                
+                // Steam add the 'str:' prefix to the identity string itself and appends a null terminator
+                var serverSecret = string.IsNullOrEmpty( identity )
+                    ? null
+                    : Encoding.UTF8.GetBytes( $"str:{identity}\0" );
+                var ticket = await VerifyTicket( appid, authTicket, serverSecret, out var crc );
 
                 // Verify just in case
                 if ( ticket.ActiveTicketsCRC.Any( x => x == crc ) )
                 {
-                    var tok = CombineTickets( authTicket, appTicket.Ticket );
+                    var tok = CombineTickets( authTicket, appTicket.Ticket, ticketType is TicketType.WebApiTicket );
                     return new TicketInfo( this, appid, tok );
                 }
                 else
@@ -88,14 +129,22 @@ namespace SteamKit2
             SendTickets();
         }
 
-        private static byte[] CombineTickets( byte[] authTicket, byte[] appTicket )
+        private static byte[] CombineTickets( byte[] authTicket, byte[] appTicket, bool padToWebApiSize )
         {
             var len = appTicket.Length;
-            var token = new byte[ authTicket.Length + 4 + len ];
+            
+            int rawSize = authTicket.Length + 4 + appTicket.Length;
+            int target  = padToWebApiSize ? Math.Max(rawSize, WebApiTicketSize) : rawSize;
+            
+            var token = new byte[ target ];
             var mem = token.AsSpan();
             authTicket.CopyTo( mem );
             MemoryMarshal.Write( mem[ authTicket.Length.. ], in len );
             appTicket.CopyTo( mem[ ( authTicket.Length + 4 ).. ] );
+            
+            // The WebApiTicket is always 2560 bytes long, but everything after the tickets is just a trash after memory allocation
+            if (padToWebApiSize && rawSize < target)
+                RandomNumberGenerator.Fill(mem[rawSize..target]);
 
             return token;
         }
@@ -103,11 +152,11 @@ namespace SteamKit2
         /// <summary>
         /// Handles generation of auth ticket.
         /// </summary>
-        private static byte[] BuildAuthTicket( byte[] gameConnectToken )
+        private static byte[] BuildAuthTicket( byte[] gameConnectToken, TicketType ticketType )
         {
             const int sessionSize =
                 4 + // unknown, always 1
-                4 + // unknown, always 2
+                4 + // TicketType, 2 or 5
                 4 + // public IP v4, optional
                 4 + // private IP v4, optional
                 4 + // timestamp & uint.MaxValue
@@ -121,7 +170,7 @@ namespace SteamKit2
 
                 writer.Write( sessionSize );
                 writer.Write( 1 );
-                writer.Write( 2 );
+                writer.Write( ( uint )ticketType );
 
                 Span<byte> randomBytes = stackalloc byte[ 8 ];
                 RandomNumberGenerator.Fill( randomBytes );
@@ -133,7 +182,7 @@ namespace SteamKit2
             return stream.ToArray();
         }
 
-        private AsyncJob<TicketAcceptedCallback> VerifyTicket( uint appid, byte[] authToken, out uint crc )
+        private AsyncJob<TicketAcceptedCallback> VerifyTicket( uint appid, byte[] authToken, byte[]? serverSecret, out uint crc )
         {
             crc = BitConverter.ToUInt32( Crc32.Hash( authToken ), 0 );
             lock ( TicketChangeLock )
@@ -149,7 +198,8 @@ namespace SteamKit2
                 {
                     gameid = appid,
                     ticket = authToken,
-                    ticket_crc = crc
+                    ticket_crc = crc,
+                    server_secret = serverSecret
                 } );
             }
 
