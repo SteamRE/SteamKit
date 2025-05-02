@@ -14,6 +14,20 @@ namespace Tests
         }
 
         [Fact]
+        public void AsyncJobFailureWhenClientDiconnected()
+        {
+            SteamClient client = new SteamClient();
+            
+            AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
+            Task<Callback> jobTask = asyncJob.ToTask();
+            
+            Assert.True( jobTask.IsCompleted, "Async job should be completed when client is disconnected" );
+            Assert.False( jobTask.IsCanceled, "Async job should not be when client is disconnected" );
+            Assert.True( jobTask.IsFaulted, "Async job should be faulted when client is disconnected" );
+        }
+
+#if DEBUG
+         [Fact]
         public void AysncJobCompletesOnCallback()
         {
             SteamClient client = ConnectedSteamClient.Get();
@@ -43,20 +57,6 @@ namespace Tests
             Assert.Same( await jobTask, ourCallback );
         }
 
-        [Fact]
-        public void AsyncJobFailureWhenClientDiconnected()
-        {
-            SteamClient client = new SteamClient();
-            
-            AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
-            Task<Callback> jobTask = asyncJob.ToTask();
-            
-            Assert.True( jobTask.IsCompleted, "Async job should be completed when client is disconnected" );
-            Assert.False( jobTask.IsCanceled, "Async job should not be when client is disconnected" );
-            Assert.True( jobTask.IsFaulted, "Async job should be faulted when client is disconnected" );
-        }
-
-#if DEBUG
         [Fact]
         public void AsyncJobCtorRegistersJob()
         {

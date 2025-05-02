@@ -5,6 +5,7 @@ namespace Tests;
 
 public static class ConnectedSteamClient
 {
+#if DEBUG
     public static SteamClient Get()
     {
         var client = new SteamClient();
@@ -12,4 +13,5 @@ public static class ConnectedSteamClient
         
         return client;
     }
+#endif
 }
