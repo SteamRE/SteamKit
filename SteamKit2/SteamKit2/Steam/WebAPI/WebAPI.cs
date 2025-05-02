@@ -253,7 +253,7 @@ namespace SteamKit2
             /// <typeparam name="TResponse">Protobuf type of the response message.</typeparam>
             /// <param name="func">The function name to call.</param>
             /// <param name="version">The version of the function to call.</param>
-            /// <param name="extraArgs">A dictionary of string key value pairs representing extra arguments to be passed to the API (in addition to <see cref="request"/>).</param>
+            /// <param name="extraArgs">A dictionary of string key value pairs representing extra arguments to be passed to the API (in addition to request).</param>
             /// <param name="request">A protobuf object representing arguments to be passed to the API.</param>
             /// <param name="method">The http request method. Either "POST" or "GET".</param>
             /// <returns>A <see cref="Task{T}"/> that contains object representing the results of the Web API call.</returns>
