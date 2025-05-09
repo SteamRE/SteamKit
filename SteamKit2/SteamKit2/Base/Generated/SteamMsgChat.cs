@@ -2800,25 +2800,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CChatRoom_GetChatRoomGroupSummary_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public ulong chat_group_id
-        {
-            get => __pbn__chat_group_id.GetValueOrDefault();
-            set => __pbn__chat_group_id = value;
-        }
-        public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
-        public void Resetchat_group_id() => __pbn__chat_group_id = null;
-        private ulong? __pbn__chat_group_id;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CChatRoom_SetAppChatRoomGroupForceActive_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -5831,11 +5812,6 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CChatRoom_GetChatRoomGroupState_Request, CChatRoom_GetChatRoomGroupState_Response>( "ChatRoom.GetChatRoomGroupState#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_GetChatRoomGroupSummary_Response>> GetChatRoomGroupSummary( CChatRoom_GetChatRoomGroupSummary_Request request )
-        {
-            return UnifiedMessages.SendMessage<CChatRoom_GetChatRoomGroupSummary_Request, CChatRoom_GetChatRoomGroupSummary_Response>( "ChatRoom.GetChatRoomGroupSummary#1", request );
-        }
-
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_SetAppChatRoomGroupForceActive_Response>> SetAppChatRoomGroupForceActive( CChatRoom_SetAppChatRoomGroupForceActive_Request request )
         {
             return UnifiedMessages.SendMessage<CChatRoom_SetAppChatRoomGroupForceActive_Request, CChatRoom_SetAppChatRoomGroupForceActive_Response>( "ChatRoom.SetAppChatRoomGroupForceActive#1", request );
@@ -6029,9 +6005,6 @@ namespace SteamKit2.Internal
                     break;
                 case "GetChatRoomGroupState":
                     PostResponseMsg<CChatRoom_GetChatRoomGroupState_Response>( packetMsg );
-                    break;
-                case "GetChatRoomGroupSummary":
-                    PostResponseMsg<CChatRoom_GetChatRoomGroupSummary_Response>( packetMsg );
                     break;
                 case "SetAppChatRoomGroupForceActive":
                     PostResponseMsg<CChatRoom_SetAppChatRoomGroupForceActive_Response>( packetMsg );

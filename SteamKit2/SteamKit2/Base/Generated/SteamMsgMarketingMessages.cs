@@ -712,6 +712,58 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_MarkMessageClicked_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong gid
+        {
+            get => __pbn__gid.GetValueOrDefault();
+            set => __pbn__gid = value;
+        }
+        public bool ShouldSerializegid() => __pbn__gid != null;
+        public void Resetgid() => __pbn__gid = null;
+        private ulong? __pbn__gid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(0u)]
+        public uint display_index
+        {
+            get => __pbn__display_index ?? 0u;
+            set => __pbn__display_index = value;
+        }
+        public bool ShouldSerializedisplay_index() => __pbn__display_index != null;
+        public void Resetdisplay_index() => __pbn__display_index = null;
+        private uint? __pbn__display_index;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(EMarketingMessageTemplateType.k_EMarketingMessageTemplate_Unknown)]
+        public EMarketingMessageTemplateType template_type
+        {
+            get => __pbn__template_type ?? EMarketingMessageTemplateType.k_EMarketingMessageTemplate_Unknown;
+            set => __pbn__template_type = value;
+        }
+        public bool ShouldSerializetemplate_type() => __pbn__template_type != null;
+        public void Resettemplate_type() => __pbn__template_type = null;
+        private EMarketingMessageTemplateType? __pbn__template_type;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(EMarketingMessageClickLocation.k_EMarketingMessageClickLocation_Unknown)]
+        public EMarketingMessageClickLocation click_location
+        {
+            get => __pbn__click_location ?? EMarketingMessageClickLocation.k_EMarketingMessageClickLocation_Unknown;
+            set => __pbn__click_location = value;
+        }
+        public bool ShouldSerializeclick_location() => __pbn__click_location != null;
+        public void Resetclick_location() => __pbn__click_location = null;
+        private EMarketingMessageClickLocation? __pbn__click_location;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMarketingMessages_GetMarketingMessage_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1042,6 +1094,98 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_GetMarketingMessageClickedStats_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong gid
+        {
+            get => __pbn__gid.GetValueOrDefault();
+            set => __pbn__gid = value;
+        }
+        public bool ShouldSerializegid() => __pbn__gid != null;
+        public void Resetgid() => __pbn__gid = null;
+        private ulong? __pbn__gid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessageClickedHourlyStats : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint rt_time_hour
+        {
+            get => __pbn__rt_time_hour.GetValueOrDefault();
+            set => __pbn__rt_time_hour = value;
+        }
+        public bool ShouldSerializert_time_hour() => __pbn__rt_time_hour != null;
+        public void Resetrt_time_hour() => __pbn__rt_time_hour = null;
+        private uint? __pbn__rt_time_hour;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint clicked_count
+        {
+            get => __pbn__clicked_count.GetValueOrDefault();
+            set => __pbn__clicked_count = value;
+        }
+        public bool ShouldSerializeclicked_count() => __pbn__clicked_count != null;
+        public void Resetclicked_count() => __pbn__clicked_count = null;
+        private uint? __pbn__clicked_count;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint display_index
+        {
+            get => __pbn__display_index.GetValueOrDefault();
+            set => __pbn__display_index = value;
+        }
+        public bool ShouldSerializedisplay_index() => __pbn__display_index != null;
+        public void Resetdisplay_index() => __pbn__display_index = null;
+        private uint? __pbn__display_index;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(EMarketingMessageTemplateType.k_EMarketingMessageTemplate_Unknown)]
+        public EMarketingMessageTemplateType template_type
+        {
+            get => __pbn__template_type ?? EMarketingMessageTemplateType.k_EMarketingMessageTemplate_Unknown;
+            set => __pbn__template_type = value;
+        }
+        public bool ShouldSerializetemplate_type() => __pbn__template_type != null;
+        public void Resettemplate_type() => __pbn__template_type = null;
+        private EMarketingMessageTemplateType? __pbn__template_type;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue(EMarketingMessageClickLocation.k_EMarketingMessageClickLocation_Unknown)]
+        public EMarketingMessageClickLocation click_location
+        {
+            get => __pbn__click_location ?? EMarketingMessageClickLocation.k_EMarketingMessageClickLocation_Unknown;
+            set => __pbn__click_location = value;
+        }
+        public bool ShouldSerializeclick_location() => __pbn__click_location != null;
+        public void Resetclick_location() => __pbn__click_location = null;
+        private EMarketingMessageClickLocation? __pbn__click_location;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_GetMarketingMessageClickedStats_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CMarketingMessageClickedHourlyStats> stats { get; } = new global::System.Collections.Generic.List<CMarketingMessageClickedHourlyStats>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMarketingMessages_GetPartnerReadyToPublishMessages_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1256,7 +1400,21 @@ namespace SteamKit2.Internal
         k_EMarketingMessageTemplate_Featured_Video = 3,
         k_EMarketingMessageTemplate_DLC_Override = 4,
         k_EMarketingMessageTemplate_Replay = 5,
-        k_EMarketingMessageTemplate_MAX = 6,
+        k_EMarketingMessageTemplate_Event = 6,
+        k_EMarketingMessageTemplate_AutoRender = 7,
+        k_EMarketingMessageTemplate_MAX = 8,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EMarketingMessageClickLocation
+    {
+        k_EMarketingMessageClickLocation_Unknown = 0,
+        k_EMarketingMessageClickLocation_Image = 1,
+        k_EMarketingMessageClickLocation_Button = 2,
+        k_EMarketingMessageClickLocation_DlcCapsule = 3,
+        k_EMarketingMessageClickLocation_HeaderArea = 4,
+        k_EMarketingMessageClickLocation_GameCapsule = 5,
+        k_EMarketingMessageClickLocation_PartnerEvent = 6,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1313,6 +1471,11 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CMarketingMessages_MarkMessageSeen_Notification>( "MarketingMessages.MarkMessageSeen#1", request );
         }
 
+        public void MarkMessageClicked(CMarketingMessages_MarkMessageClicked_Notification request )
+        {
+            UnifiedMessages.SendNotification<CMarketingMessages_MarkMessageClicked_Notification>( "MarketingMessages.MarkMessageClicked#1", request );
+        }
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CMarketingMessages_GetMarketingMessage_Response>> GetMarketingMessage( CMarketingMessages_GetMarketingMessage_Request request )
         {
             return UnifiedMessages.SendMessage<CMarketingMessages_GetMarketingMessage_Request, CMarketingMessages_GetMarketingMessage_Response>( "MarketingMessages.GetMarketingMessage#1", request );
@@ -1346,6 +1509,11 @@ namespace SteamKit2.Internal
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CMarketingMessages_GetMarketingMessagesViewerRangeStats_Response>> GetMarketingMessagesViewerRangeStats( CMarketingMessages_GetMarketingMessagesViewerRangeStats_Request request )
         {
             return UnifiedMessages.SendMessage<CMarketingMessages_GetMarketingMessagesViewerRangeStats_Request, CMarketingMessages_GetMarketingMessagesViewerRangeStats_Response>( "MarketingMessages.GetMarketingMessagesViewerRangeStats#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CMarketingMessages_GetMarketingMessageClickedStats_Response>> GetMarketingMessageClickedStats( CMarketingMessages_GetMarketingMessageClickedStats_Request request )
+        {
+            return UnifiedMessages.SendMessage<CMarketingMessages_GetMarketingMessageClickedStats_Request, CMarketingMessages_GetMarketingMessageClickedStats_Response>( "MarketingMessages.GetMarketingMessageClickedStats#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CMarketingMessages_GetPartnerReadyToPublishMessages_Response>> GetPartnerReadyToPublishMessages( CMarketingMessages_GetPartnerReadyToPublishMessages_Request request )
@@ -1419,6 +1587,9 @@ namespace SteamKit2.Internal
                 case "GetMarketingMessagesViewerRangeStats":
                     PostResponseMsg<CMarketingMessages_GetMarketingMessagesViewerRangeStats_Response>( packetMsg );
                     break;
+                case "GetMarketingMessageClickedStats":
+                    PostResponseMsg<CMarketingMessages_GetMarketingMessageClickedStats_Response>( packetMsg );
+                    break;
                 case "GetPartnerReadyToPublishMessages":
                     PostResponseMsg<CMarketingMessages_GetPartnerReadyToPublishMessages_Response>( packetMsg );
                     break;
@@ -1443,6 +1614,9 @@ namespace SteamKit2.Internal
             {
                 case "MarkMessageSeen":
                     PostNotificationMsg<CMarketingMessages_MarkMessageSeen_Notification>( packetMsg );
+                    break;
+                case "MarkMessageClicked":
+                    PostNotificationMsg<CMarketingMessages_MarkMessageClicked_Notification>( packetMsg );
                     break;
             }
         }

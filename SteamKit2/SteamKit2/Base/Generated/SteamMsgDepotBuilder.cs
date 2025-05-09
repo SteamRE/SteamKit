@@ -197,6 +197,16 @@ namespace SteamKit2.Internal
         public void Resetoffset_detection_max_distance_post() => __pbn__offset_detection_max_distance_post = null;
         private uint? __pbn__offset_detection_max_distance_post;
 
+        [global::ProtoBuf.ProtoMember(12)]
+        public uint compression_method
+        {
+            get => __pbn__compression_method.GetValueOrDefault();
+            set => __pbn__compression_method = value;
+        }
+        public bool ShouldSerializecompression_method() => __pbn__compression_method != null;
+        public void Resetcompression_method() => __pbn__compression_method = null;
+        private uint? __pbn__compression_method;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

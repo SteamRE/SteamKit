@@ -5425,6 +5425,26 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<CMsgDOTASDOHeroStatsHistory> records { get; } = new global::System.Collections.Generic.List<CMsgDOTASDOHeroStatsHistory>();
 
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse result
+        {
+            get => __pbn__result ?? EResponse.k_eInternalError;
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResponse? __pbn__result;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTooBusy = 2,
+            k_eDisabled = 3,
+        }
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -15855,6 +15875,53 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetclient_comic_language() => __pbn__client_comic_language = null;
             private uint? __pbn__client_comic_language;
 
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCRankedPlayerInfoSubmit : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string name
+        {
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
+        }
+        public bool ShouldSerializename() => __pbn__name != null;
+        public void Resetname() => __pbn__name = null;
+        private string __pbn__name;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCRankedPlayerInfoSubmitResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResult.SUCCESS)]
+        public EResult result
+        {
+            get => __pbn__result ?? EResult.SUCCESS;
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResult? __pbn__result;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResult
+        {
+            SUCCESS = 0,
+            ERROR_UNSPECIFIED = 1,
         }
 
     }

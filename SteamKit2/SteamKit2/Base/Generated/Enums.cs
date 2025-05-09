@@ -273,24 +273,13 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public enum EScalingFilter
-    {
-        k_EScalingFilter_Invalid = 0,
-        k_EScalingFilter_FSR = 1,
-        k_EScalingFilter_Nearest = 2,
-        k_EScalingFilter_Integer = 3,
-        k_EScalingFilter_Linear = 4,
-        k_EScalingFilter_NIS = 5,
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public enum ESplitScalingFilter
     {
         k_ESplitScalingFilter_Invalid = 0,
         k_ESplitScalingFilter_Linear = 1,
         k_ESplitScalingFilter_Nearest = 2,
-        k_ESplitScalingFilter_FSR = 3,
-        k_ESplitScalingFilter_NIS = 4,
+        k_ESplitScalingFilter_Sharp = 3,
+        k_ESplitScalingFilter_NIS_Deprecated = 4,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -321,6 +310,7 @@ namespace SteamKit2.Internal
         k_ESLSHelper_Journal = 3,
         k_ESLSHelper_Gpu = 4,
         k_ESLSHelper_SystemInfo = 5,
+        k_ESLSHelper_Devcoredump = 6,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -411,6 +401,23 @@ namespace SteamKit2.Internal
         k_ESystemDisplayCompatibilityMode_Invalid = 0,
         k_ESystemDisplayCompatibilityMode_None = 1,
         k_ESystemDisplayCompatibilityMode_MinimalBandwith = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESteamOSCompatibilityCategory
+    {
+        k_ESteamOSCompatibilityCategory_Unknown = 0,
+        k_ESteamOSCompatibilityCategory_Unsupported = 1,
+        k_ESteamOSCompatibilityCategory_Compatible = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ESteamOSCompatibilityResultDisplayType
+    {
+        k_ESteamOSCompatibilityResultDisplayType_Invisible = 0,
+        k_ESteamOSCompatibilityResultDisplayType_Informational = 1,
+        k_ESteamOSCompatibilityResultDisplayType_Unsupported = 2,
+        k_ESteamOSCompatibilityResultDisplayType_Compatible = 3,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -684,6 +691,7 @@ namespace SteamKit2.Internal
         k_ECompromiseDetectionType_Manual = 3,
         k_ECompromiseDetectionType_TicketAction = 4,
         k_ECompromiseDetectionType_MaliciousRefund = 5,
+        k_ECompromiseDetectionType_Move2FA = 6,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -747,6 +755,25 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public enum EChildProcessQueryCommand
+    {
+        k_EChildProcessQueryCommand_Invalid = 0,
+        k_EChildProcessQueryCommand_GpuTopology = 1,
+        k_EChildProcessQueryCommand_Max = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EChildProcessQueryExitCode
+    {
+        k_EChildProcessQueryExitCode_Success = 0,
+        k_EChildProcessQueryExitCode_ErrorCommandline = -1,
+        k_EChildProcessQueryExitCode_ErrorOther = -2,
+        k_EChildProcessQueryExitCode_ErrorUnimplemented = -3,
+        k_EChildProcessQueryExitCode_ErrorFileSave = -4,
+        k_EChildProcessQueryExitCode_ErrorNotSupportedByPlatform = -5,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EWindowsUpdateInstallationImpact
     {
         k_EWindowsUpdateInstallationImpact_Unknown = -1,
@@ -773,6 +800,18 @@ namespace SteamKit2.Internal
         k_EExternalSaleEventType_Region = 3,
         k_EExternalSaleEventType_Theme = 4,
         k_EExternalSaleEventType_Franchise = 5,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EContentReportReason
+    {
+        k_EContentReportReason_Invalid = 0,
+        k_EContentReportReason_Abusive = 1,
+        k_EContentReportReason_Commercial = 2,
+        k_EContentReportReason_OffTopic = 3,
+        k_EContentReportReason_Prohibited = 4,
+        k_EContentReportReason_Other = 5,
+        k_EContentReportReason_MAX = 6,
     }
 
 }

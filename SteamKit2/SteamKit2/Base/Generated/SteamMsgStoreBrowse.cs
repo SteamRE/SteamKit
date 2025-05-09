@@ -972,6 +972,28 @@ namespace SteamKit2.Internal
             public void Resetclan_avatar() => __pbn__clan_avatar = null;
             private string __pbn__clan_avatar;
 
+            [global::ProtoBuf.ProtoMember(15)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string page_background_path
+            {
+                get => __pbn__page_background_path ?? "";
+                set => __pbn__page_background_path = value;
+            }
+            public bool ShouldSerializepage_background_path() => __pbn__page_background_path != null;
+            public void Resetpage_background_path() => __pbn__page_background_path = null;
+            private string __pbn__page_background_path;
+
+            [global::ProtoBuf.ProtoMember(16)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string raw_page_background
+            {
+                get => __pbn__raw_page_background ?? "";
+                set => __pbn__raw_page_background = value;
+            }
+            public bool ShouldSerializeraw_page_background() => __pbn__raw_page_background != null;
+            public void Resetraw_page_background() => __pbn__raw_page_background = null;
+            private string __pbn__raw_page_background;
+
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -1092,6 +1114,16 @@ namespace SteamKit2.Internal
             public bool ShouldSerializelinux_release_date() => __pbn__linux_release_date != null;
             public void Resetlinux_release_date() => __pbn__linux_release_date = null;
             private uint? __pbn__linux_release_date;
+
+            [global::ProtoBuf.ProtoMember(22)]
+            public bool limited_launch_active
+            {
+                get => __pbn__limited_launch_active.GetValueOrDefault();
+                set => __pbn__limited_launch_active = value;
+            }
+            public bool ShouldSerializelimited_launch_active() => __pbn__limited_launch_active != null;
+            public void Resetlimited_launch_active() => __pbn__limited_launch_active = null;
+            private bool? __pbn__limited_launch_active;
 
         }
 
@@ -1718,6 +1750,16 @@ namespace SteamKit2.Internal
                 public void Resettrailer_base_id() => __pbn__trailer_base_id = null;
                 private int? __pbn__trailer_base_id;
 
+                [global::ProtoBuf.ProtoMember(14)]
+                public bool all_ages
+                {
+                    get => __pbn__all_ages.GetValueOrDefault();
+                    set => __pbn__all_ages = value;
+                }
+                public bool ShouldSerializeall_ages() => __pbn__all_ages != null;
+                public void Resetall_ages() => __pbn__all_ages = null;
+                private bool? __pbn__all_ages;
+
             }
 
         }
@@ -2214,6 +2256,93 @@ namespace SteamKit2.Internal
             public bool ShouldSerializeedit_sort_order() => __pbn__edit_sort_order != null;
             public void Resetedit_sort_order() => __pbn__edit_sort_order = null;
             private uint? __pbn__edit_sort_order;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStoreBrowse_GetContentHubConfig_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public StoreBrowseContext context { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStoreBrowse_GetContentHubConfig_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<ContentHubConfig> hubconfigs { get; } = new global::System.Collections.Generic.List<ContentHubConfig>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class ContentHubConfig : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint hubcategoryid
+            {
+                get => __pbn__hubcategoryid.GetValueOrDefault();
+                set => __pbn__hubcategoryid = value;
+            }
+            public bool ShouldSerializehubcategoryid() => __pbn__hubcategoryid != null;
+            public void Resethubcategoryid() => __pbn__hubcategoryid = null;
+            private uint? __pbn__hubcategoryid;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string type
+            {
+                get => __pbn__type ?? "";
+                set => __pbn__type = value;
+            }
+            public bool ShouldSerializetype() => __pbn__type != null;
+            public void Resettype() => __pbn__type = null;
+            private string __pbn__type;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string handle
+            {
+                get => __pbn__handle ?? "";
+                set => __pbn__handle = value;
+            }
+            public bool ShouldSerializehandle() => __pbn__handle != null;
+            public void Resethandle() => __pbn__handle = null;
+            private string __pbn__handle;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string display_name
+            {
+                get => __pbn__display_name ?? "";
+                set => __pbn__display_name = value;
+            }
+            public bool ShouldSerializedisplay_name() => __pbn__display_name != null;
+            public void Resetdisplay_name() => __pbn__display_name = null;
+            private string __pbn__display_name;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string url_path
+            {
+                get => __pbn__url_path ?? "";
+                set => __pbn__url_path = value;
+            }
+            public bool ShouldSerializeurl_path() => __pbn__url_path != null;
+            public void Reseturl_path() => __pbn__url_path = null;
+            private string __pbn__url_path;
 
         }
 
@@ -2831,7 +2960,8 @@ namespace SteamKit2.Internal
         k_EStoreLinkType_Bluesky = 20,
         k_EStoreLinkType_Mastodon = 21,
         k_EStoreLinkType_Threads = 22,
-        k_EStoreLinkType_MAX = 23,
+        k_EStoreLinkType_QQChannel = 23,
+        k_EStoreLinkType_MAX = 24,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2857,6 +2987,11 @@ namespace SteamKit2.Internal
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetStoreCategories_Response>> GetStoreCategories( CStoreBrowse_GetStoreCategories_Request request )
         {
             return UnifiedMessages.SendMessage<CStoreBrowse_GetStoreCategories_Request, CStoreBrowse_GetStoreCategories_Response>( "StoreBrowse.GetStoreCategories#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetContentHubConfig_Response>> GetContentHubConfig( CStoreBrowse_GetContentHubConfig_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetContentHubConfig_Request, CStoreBrowse_GetContentHubConfig_Response>( "StoreBrowse.GetContentHubConfig#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetPriceStops_Response>> GetPriceStops( CStoreBrowse_GetPriceStops_Request request )
@@ -2888,6 +3023,9 @@ namespace SteamKit2.Internal
                     break;
                 case "GetStoreCategories":
                     PostResponseMsg<CStoreBrowse_GetStoreCategories_Response>( packetMsg );
+                    break;
+                case "GetContentHubConfig":
+                    PostResponseMsg<CStoreBrowse_GetContentHubConfig_Response>( packetMsg );
                     break;
                 case "GetPriceStops":
                     PostResponseMsg<CStoreBrowse_GetPriceStops_Response>( packetMsg );

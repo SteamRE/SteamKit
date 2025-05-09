@@ -409,6 +409,26 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(41)]
         public global::System.Collections.Generic.List<int> exclude_client_sessionids { get; } = new global::System.Collections.Generic.List<int>();
 
+        [global::ProtoBuf.ProtoMember(43, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong admin_request_spoofing_steamid
+        {
+            get => __pbn__admin_request_spoofing_steamid.GetValueOrDefault();
+            set => __pbn__admin_request_spoofing_steamid = value;
+        }
+        public bool ShouldSerializeadmin_request_spoofing_steamid() => __pbn__admin_request_spoofing_steamid != null;
+        public void Resetadmin_request_spoofing_steamid() => __pbn__admin_request_spoofing_steamid = null;
+        private ulong? __pbn__admin_request_spoofing_steamid;
+
+        [global::ProtoBuf.ProtoMember(44)]
+        public bool is_valveds
+        {
+            get => __pbn__is_valveds.GetValueOrDefault();
+            set => __pbn__is_valveds = value;
+        }
+        public bool ShouldSerializeis_valveds() => __pbn__is_valveds != null;
+        public void Resetis_valveds() => __pbn__is_valveds = null;
+        private bool? __pbn__is_valveds;
+
         [global::ProtoBuf.ProtoMember(15)]
         public uint ip
         {
@@ -465,28 +485,7 @@ namespace SteamKit2.Internal
             global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint sysid_source
-            {
-                get => __pbn__sysid_source.GetValueOrDefault();
-                set => __pbn__sysid_source = value;
-            }
-            public bool ShouldSerializesysid_source() => __pbn__sysid_source != null;
-            public void Resetsysid_source() => __pbn__sysid_source = null;
-            private uint? __pbn__sysid_source;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            [global::System.ComponentModel.DefaultValue(false)]
-            public bool is_fbs_universe
-            {
-                get => __pbn__is_fbs_universe ?? false;
-                set => __pbn__is_fbs_universe = value;
-            }
-            public bool ShouldSerializeis_fbs_universe() => __pbn__is_fbs_universe != null;
-            public void Resetis_fbs_universe() => __pbn__is_fbs_universe = null;
-            private bool? __pbn__is_fbs_universe;
-
-            [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+            [global::ProtoBuf.ProtoMember(10, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
             [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
             public ulong jobid_source
             {
@@ -497,7 +496,18 @@ namespace SteamKit2.Internal
             public void Resetjobid_source() => __pbn__jobid_source = null;
             private ulong? __pbn__jobid_source;
 
-            [global::ProtoBuf.ProtoMember(4)]
+            [global::ProtoBuf.ProtoMember(11, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+            [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
+            public ulong jobid_target
+            {
+                get => __pbn__jobid_target ?? 18446744073709551615ul;
+                set => __pbn__jobid_target = value;
+            }
+            public bool ShouldSerializejobid_target() => __pbn__jobid_target != null;
+            public void Resetjobid_target() => __pbn__jobid_target = null;
+            private ulong? __pbn__jobid_target;
+
+            [global::ProtoBuf.ProtoMember(13)]
             [global::System.ComponentModel.DefaultValue(2)]
             public int eresult
             {
@@ -508,7 +518,18 @@ namespace SteamKit2.Internal
             public void Reseteresult() => __pbn__eresult = null;
             private int? __pbn__eresult;
 
-            [global::ProtoBuf.ProtoMember(5)]
+            [global::ProtoBuf.ProtoMember(12)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string target_job_name
+            {
+                get => __pbn__target_job_name ?? "";
+                set => __pbn__target_job_name = value;
+            }
+            public bool ShouldSerializetarget_job_name() => __pbn__target_job_name != null;
+            public void Resettarget_job_name() => __pbn__target_job_name = null;
+            private string __pbn__target_job_name;
+
+            [global::ProtoBuf.ProtoMember(14)]
             [global::System.ComponentModel.DefaultValue("")]
             public string error_message
             {
@@ -518,6 +539,17 @@ namespace SteamKit2.Internal
             public bool ShouldSerializeerror_message() => __pbn__error_message != null;
             public void Reseterror_message() => __pbn__error_message = null;
             private string __pbn__error_message;
+
+            [global::ProtoBuf.ProtoMember(42)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string reply_address
+            {
+                get => __pbn__reply_address ?? "";
+                set => __pbn__reply_address = value;
+            }
+            public bool ShouldSerializereply_address() => __pbn__reply_address != null;
+            public void Resetreply_address() => __pbn__reply_address = null;
+            private string __pbn__reply_address;
 
         }
 
@@ -824,6 +856,9 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(17)]
         public global::System.Collections.Generic.List<uint> content_descriptorids { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(18)]
+        public global::System.Collections.Generic.List<uint> content_descriptorids_including_dlc { get; } = new global::System.Collections.Generic.List<uint>();
 
     }
 

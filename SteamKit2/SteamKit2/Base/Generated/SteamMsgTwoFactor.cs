@@ -144,6 +144,67 @@ namespace SteamKit2.Internal
         public void Resetsteamid() => __pbn__steamid = null;
         private ulong? __pbn__steamid;
 
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(ETwoFactorStatusFieldFlag.k_ETwoFactorStatusFieldFlag_None)]
+        public ETwoFactorStatusFieldFlag include
+        {
+            get => __pbn__include ?? ETwoFactorStatusFieldFlag.k_ETwoFactorStatusFieldFlag_None;
+            set => __pbn__include = value;
+        }
+        public bool ShouldSerializeinclude() => __pbn__include != null;
+        public void Resetinclude() => __pbn__include = null;
+        private ETwoFactorStatusFieldFlag? __pbn__include;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CTwoFactor_UsageEvent : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint time
+        {
+            get => __pbn__time.GetValueOrDefault();
+            set => __pbn__time = value;
+        }
+        public bool ShouldSerializetime() => __pbn__time != null;
+        public void Resettime() => __pbn__time = null;
+        private uint? __pbn__time;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(ETwoFactorUsageType.k_ETwoFactorUsageType_Unknown)]
+        public ETwoFactorUsageType usage_type
+        {
+            get => __pbn__usage_type ?? ETwoFactorUsageType.k_ETwoFactorUsageType_Unknown;
+            set => __pbn__usage_type = value;
+        }
+        public bool ShouldSerializeusage_type() => __pbn__usage_type != null;
+        public void Resetusage_type() => __pbn__usage_type = null;
+        private ETwoFactorUsageType? __pbn__usage_type;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public int confirmation_type
+        {
+            get => __pbn__confirmation_type.GetValueOrDefault();
+            set => __pbn__confirmation_type = value;
+        }
+        public bool ShouldSerializeconfirmation_type() => __pbn__confirmation_type != null;
+        public void Resetconfirmation_type() => __pbn__confirmation_type = null;
+        private int? __pbn__confirmation_type;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public int confirmation_action
+        {
+            get => __pbn__confirmation_action.GetValueOrDefault();
+            set => __pbn__confirmation_action = value;
+        }
+        public bool ShouldSerializeconfirmation_action() => __pbn__confirmation_action != null;
+        public void Resetconfirmation_action() => __pbn__confirmation_action = null;
+        private int? __pbn__confirmation_action;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -295,6 +356,19 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeversion() => __pbn__version != null;
         public void Resetversion() => __pbn__version = null;
         private uint? __pbn__version;
+
+        [global::ProtoBuf.ProtoMember(15, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong last_seen_auth_token_id
+        {
+            get => __pbn__last_seen_auth_token_id.GetValueOrDefault();
+            set => __pbn__last_seen_auth_token_id = value;
+        }
+        public bool ShouldSerializelast_seen_auth_token_id() => __pbn__last_seen_auth_token_id != null;
+        public void Resetlast_seen_auth_token_id() => __pbn__last_seen_auth_token_id = null;
+        private ulong? __pbn__last_seen_auth_token_id;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public global::System.Collections.Generic.List<CTwoFactor_UsageEvent> usages { get; } = new global::System.Collections.Generic.List<CTwoFactor_UsageEvent>();
 
     }
 
@@ -503,54 +577,6 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeconfirm_type() => __pbn__confirm_type != null;
         public void Resetconfirm_type() => __pbn__confirm_type = null;
         private int? __pbn__confirm_type;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CTwoFactor_SendEmail_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong steamid
-        {
-            get => __pbn__steamid.GetValueOrDefault();
-            set => __pbn__steamid = value;
-        }
-        public bool ShouldSerializesteamid() => __pbn__steamid != null;
-        public void Resetsteamid() => __pbn__steamid = null;
-        private ulong? __pbn__steamid;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint email_type
-        {
-            get => __pbn__email_type.GetValueOrDefault();
-            set => __pbn__email_type = value;
-        }
-        public bool ShouldSerializeemail_type() => __pbn__email_type != null;
-        public void Resetemail_type() => __pbn__email_type = null;
-        private uint? __pbn__email_type;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public bool include_activation_code
-        {
-            get => __pbn__include_activation_code.GetValueOrDefault();
-            set => __pbn__include_activation_code = value;
-        }
-        public bool ShouldSerializeinclude_activation_code() => __pbn__include_activation_code != null;
-        public void Resetinclude_activation_code() => __pbn__include_activation_code = null;
-        private bool? __pbn__include_activation_code;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CTwoFactor_SendEmail_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
     }
 
@@ -1018,6 +1044,22 @@ namespace SteamKit2.Internal
 
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public enum ETwoFactorStatusFieldFlag
+    {
+        k_ETwoFactorStatusFieldFlag_None = 0,
+        k_ETwoFactorStatusFieldFlag_LastUsage = 1,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ETwoFactorUsageType
+    {
+        k_ETwoFactorUsageType_Unknown = 0,
+        k_ETwoFactorUsageType_None = 1,
+        k_ETwoFactorUsageType_MobileConfirmation = 2,
+        k_ETwoFactorUsageType_Login = 3,
+    }
+
     public class TwoFactor : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "TwoFactor";
@@ -1035,11 +1077,6 @@ namespace SteamKit2.Internal
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTwoFactor_AddAuthenticator_Response>> AddAuthenticator( CTwoFactor_AddAuthenticator_Request request )
         {
             return UnifiedMessages.SendMessage<CTwoFactor_AddAuthenticator_Request, CTwoFactor_AddAuthenticator_Response>( "TwoFactor.AddAuthenticator#1", request );
-        }
-
-        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTwoFactor_SendEmail_Response>> SendEmail( CTwoFactor_SendEmail_Request request )
-        {
-            return UnifiedMessages.SendMessage<CTwoFactor_SendEmail_Request, CTwoFactor_SendEmail_Response>( "TwoFactor.SendEmail#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTwoFactor_FinalizeAddAuthenticator_Response>> FinalizeAddAuthenticator( CTwoFactor_FinalizeAddAuthenticator_Request request )
@@ -1079,9 +1116,6 @@ namespace SteamKit2.Internal
                     break;
                 case "AddAuthenticator":
                     PostResponseMsg<CTwoFactor_AddAuthenticator_Response>( packetMsg );
-                    break;
-                case "SendEmail":
-                    PostResponseMsg<CTwoFactor_SendEmail_Response>( packetMsg );
                     break;
                 case "FinalizeAddAuthenticator":
                     PostResponseMsg<CTwoFactor_FinalizeAddAuthenticator_Response>( packetMsg );

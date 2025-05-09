@@ -355,6 +355,17 @@ namespace SteamKit2.GC.Dota.Internal
                 public void Resetneutral_item_id() => __pbn__neutral_item_id = null;
                 private int? __pbn__neutral_item_id;
 
+                [global::ProtoBuf.ProtoMember(9)]
+                [global::System.ComponentModel.DefaultValue(-1)]
+                public int neutral_enhancement_id
+                {
+                    get => __pbn__neutral_enhancement_id ?? -1;
+                    set => __pbn__neutral_enhancement_id = value;
+                }
+                public bool ShouldSerializeneutral_enhancement_id() => __pbn__neutral_enhancement_id != null;
+                public void Resetneutral_enhancement_id() => __pbn__neutral_enhancement_id = null;
+                private int? __pbn__neutral_enhancement_id;
+
             }
 
             [global::ProtoBuf.ProtoContract()]

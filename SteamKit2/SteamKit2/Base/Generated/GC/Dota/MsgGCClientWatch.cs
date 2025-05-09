@@ -321,6 +321,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetcustom_game_difficulty() => __pbn__custom_game_difficulty = null;
         private uint? __pbn__custom_game_difficulty;
 
+        [global::ProtoBuf.ProtoMember(33)]
+        public bool is_player_draft
+        {
+            get => __pbn__is_player_draft.GetValueOrDefault();
+            set => __pbn__is_player_draft = value;
+        }
+        public bool ShouldSerializeis_player_draft() => __pbn__is_player_draft != null;
+        public void Resetis_player_draft() => __pbn__is_player_draft = null;
+        private bool? __pbn__is_player_draft;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Player : global::ProtoBuf.IExtensible
         {

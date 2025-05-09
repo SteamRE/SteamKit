@@ -207,6 +207,9 @@ namespace SteamKit2.WebUI.Internal
         [global::ProtoBuf.ProtoMember(17)]
         public global::System.Collections.Generic.List<uint> content_descriptorids { get; } = new global::System.Collections.Generic.List<uint>();
 
+        [global::ProtoBuf.ProtoMember(18)]
+        public global::System.Collections.Generic.List<uint> content_descriptorids_including_dlc { get; } = new global::System.Collections.Generic.List<uint>();
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -667,14 +670,14 @@ namespace SteamKit2.WebUI.Internal
         private ulong? __pbn__itemid;
 
         [global::ProtoBuf.ProtoMember(3)]
-        public uint language
+        public int language
         {
             get => __pbn__language.GetValueOrDefault();
             set => __pbn__language = value;
         }
         public bool ShouldSerializelanguage() => __pbn__language != null;
         public void Resetlanguage() => __pbn__language = null;
-        private uint? __pbn__language;
+        private int? __pbn__language;
 
     }
 

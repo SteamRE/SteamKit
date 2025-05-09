@@ -1012,6 +1012,9 @@ namespace SteamKit2.Internal
             public void Reseton_steam_deck() => __pbn__on_steam_deck = null;
             private bool? __pbn__on_steam_deck;
 
+            [global::ProtoBuf.ProtoMember(82)]
+            public global::System.Collections.Generic.List<OtherGameData> other_game_data { get; } = new global::System.Collections.Generic.List<OtherGameData>();
+
             [global::ProtoBuf.ProtoContract()]
             public partial class ClanData : global::ProtoBuf.IExtensible
             {
@@ -1069,6 +1072,28 @@ namespace SteamKit2.Internal
                 public bool ShouldSerializevalue() => __pbn__value != null;
                 public void Resetvalue() => __pbn__value = null;
                 private string __pbn__value;
+
+            }
+
+            [global::ProtoBuf.ProtoContract()]
+            public partial class OtherGameData : global::ProtoBuf.IExtensible
+            {
+                private global::ProtoBuf.IExtension __pbn__extensionData;
+                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+                [global::ProtoBuf.ProtoMember(1)]
+                public ulong gameid
+                {
+                    get => __pbn__gameid.GetValueOrDefault();
+                    set => __pbn__gameid = value;
+                }
+                public bool ShouldSerializegameid() => __pbn__gameid != null;
+                public void Resetgameid() => __pbn__gameid = null;
+                private ulong? __pbn__gameid;
+
+                [global::ProtoBuf.ProtoMember(2)]
+                public global::System.Collections.Generic.List<CMsgClientPersonaState.Friend.KV> rich_presence { get; } = new global::System.Collections.Generic.List<CMsgClientPersonaState.Friend.KV>();
 
             }
 

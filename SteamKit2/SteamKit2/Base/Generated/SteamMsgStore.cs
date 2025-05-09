@@ -299,6 +299,99 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_GetRecommendedTagsForUser_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string language
+        {
+            get => __pbn__language ?? "";
+            set => __pbn__language = value;
+        }
+        public bool ShouldSerializelanguage() => __pbn__language != null;
+        public void Resetlanguage() => __pbn__language = null;
+        private string __pbn__language;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string country_code
+        {
+            get => __pbn__country_code ?? "";
+            set => __pbn__country_code = value;
+        }
+        public bool ShouldSerializecountry_code() => __pbn__country_code != null;
+        public void Resetcountry_code() => __pbn__country_code = null;
+        private string __pbn__country_code;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool favor_rarer_tags
+        {
+            get => __pbn__favor_rarer_tags.GetValueOrDefault();
+            set => __pbn__favor_rarer_tags = value;
+        }
+        public bool ShouldSerializefavor_rarer_tags() => __pbn__favor_rarer_tags != null;
+        public void Resetfavor_rarer_tags() => __pbn__favor_rarer_tags = null;
+        private bool? __pbn__favor_rarer_tags;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_GetRecommendedTagsForUser_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<Tag> tags { get; } = new global::System.Collections.Generic.List<Tag>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Tag : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint tagid
+            {
+                get => __pbn__tagid.GetValueOrDefault();
+                set => __pbn__tagid = value;
+            }
+            public bool ShouldSerializetagid() => __pbn__tagid != null;
+            public void Resettagid() => __pbn__tagid = null;
+            private uint? __pbn__tagid;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string name
+            {
+                get => __pbn__name ?? "";
+                set => __pbn__name = value;
+            }
+            public bool ShouldSerializename() => __pbn__name != null;
+            public void Resetname() => __pbn__name = null;
+            private string __pbn__name;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public float weight
+            {
+                get => __pbn__weight.GetValueOrDefault();
+                set => __pbn__weight = value;
+            }
+            public bool ShouldSerializeweight() => __pbn__weight != null;
+            public void Resetweight() => __pbn__weight = null;
+            private float? __pbn__weight;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CStore_GetMostPopularTags_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -761,6 +854,12 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(12)]
         public CStorePageFilter store_page_filter { get; set; }
 
+        [global::ProtoBuf.ProtoMember(13)]
+        public StoreBrowseContext context { get; set; }
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public StoreBrowseItemDataRequest data_request { get; set; }
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -827,6 +926,9 @@ namespace SteamKit2.Internal
         public bool ShouldSerializedebug_solr_query() => __pbn__debug_solr_query != null;
         public void Resetdebug_solr_query() => __pbn__debug_solr_query = null;
         private string __pbn__debug_solr_query;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public global::System.Collections.Generic.List<StoreItem> store_items { get; } = new global::System.Collections.Generic.List<StoreItem>();
 
     }
 
@@ -2010,6 +2112,7 @@ namespace SteamKit2.Internal
         k_ETesterStatusPending = 1,
         k_ETesterStatusInvited = 2,
         k_ETesterStatusGranted = 3,
+        k_ETesterStatusExpired = 4,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2056,6 +2159,11 @@ namespace SteamKit2.Internal
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_RegisterCDKey_Response>> RegisterCDKey( CStore_RegisterCDKey_Request request )
         {
             return UnifiedMessages.SendMessage<CStore_RegisterCDKey_Request, CStore_RegisterCDKey_Response>( "Store.RegisterCDKey#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_GetRecommendedTagsForUser_Response>> GetRecommendedTagsForUser( CStore_GetRecommendedTagsForUser_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_GetRecommendedTagsForUser_Request, CStore_GetRecommendedTagsForUser_Response>( "Store.GetRecommendedTagsForUser#1", request );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_GetMostPopularTags_Response>> GetMostPopularTags( CStore_GetMostPopularTags_Request request )
@@ -2169,6 +2277,9 @@ namespace SteamKit2.Internal
             {
                 case "RegisterCDKey":
                     PostResponseMsg<CStore_RegisterCDKey_Response>( packetMsg );
+                    break;
+                case "GetRecommendedTagsForUser":
+                    PostResponseMsg<CStore_GetRecommendedTagsForUser_Response>( packetMsg );
                     break;
                 case "GetMostPopularTags":
                     PostResponseMsg<CStore_GetMostPopularTags_Response>( packetMsg );

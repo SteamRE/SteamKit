@@ -511,6 +511,17 @@ namespace SteamKit2.Internal
             public void Resetcount() => __pbn__count = null;
             private uint? __pbn__count;
 
+            [global::ProtoBuf.ProtoMember(4)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string context
+            {
+                get => __pbn__context ?? "";
+                set => __pbn__context = value;
+            }
+            public bool ShouldSerializecontext() => __pbn__context != null;
+            public void Resetcontext() => __pbn__context = null;
+            private string __pbn__context;
+
         }
 
     }
@@ -1440,6 +1451,130 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CClientMetrics_GamePerformance_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<FrameRateReport> reports { get; } = new global::System.Collections.Generic.List<FrameRateReport>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class FrameRateReport : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+            public ulong gameid
+            {
+                get => __pbn__gameid.GetValueOrDefault();
+                set => __pbn__gameid = value;
+            }
+            public bool ShouldSerializegameid() => __pbn__gameid != null;
+            public void Resetgameid() => __pbn__gameid = null;
+            private ulong? __pbn__gameid;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint frame_rate
+            {
+                get => __pbn__frame_rate.GetValueOrDefault();
+                set => __pbn__frame_rate = value;
+            }
+            public bool ShouldSerializeframe_rate() => __pbn__frame_rate != null;
+            public void Resetframe_rate() => __pbn__frame_rate = null;
+            private uint? __pbn__frame_rate;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string manufacturer
+            {
+                get => __pbn__manufacturer ?? "";
+                set => __pbn__manufacturer = value;
+            }
+            public bool ShouldSerializemanufacturer() => __pbn__manufacturer != null;
+            public void Resetmanufacturer() => __pbn__manufacturer = null;
+            private string __pbn__manufacturer;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string model
+            {
+                get => __pbn__model ?? "";
+                set => __pbn__model = value;
+            }
+            public bool ShouldSerializemodel() => __pbn__model != null;
+            public void Resetmodel() => __pbn__model = null;
+            private string __pbn__model;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string dx_video_card
+            {
+                get => __pbn__dx_video_card ?? "";
+                set => __pbn__dx_video_card = value;
+            }
+            public bool ShouldSerializedx_video_card() => __pbn__dx_video_card != null;
+            public void Resetdx_video_card() => __pbn__dx_video_card = null;
+            private string __pbn__dx_video_card;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public int dx_vendorid
+            {
+                get => __pbn__dx_vendorid.GetValueOrDefault();
+                set => __pbn__dx_vendorid = value;
+            }
+            public bool ShouldSerializedx_vendorid() => __pbn__dx_vendorid != null;
+            public void Resetdx_vendorid() => __pbn__dx_vendorid = null;
+            private int? __pbn__dx_vendorid;
+
+            [global::ProtoBuf.ProtoMember(7)]
+            public int dx_deviceid
+            {
+                get => __pbn__dx_deviceid.GetValueOrDefault();
+                set => __pbn__dx_deviceid = value;
+            }
+            public bool ShouldSerializedx_deviceid() => __pbn__dx_deviceid != null;
+            public void Resetdx_deviceid() => __pbn__dx_deviceid = null;
+            private int? __pbn__dx_deviceid;
+
+            [global::ProtoBuf.ProtoMember(8)]
+            public uint num_gpu
+            {
+                get => __pbn__num_gpu.GetValueOrDefault();
+                set => __pbn__num_gpu = value;
+            }
+            public bool ShouldSerializenum_gpu() => __pbn__num_gpu != null;
+            public void Resetnum_gpu() => __pbn__num_gpu = null;
+            private uint? __pbn__num_gpu;
+
+            [global::ProtoBuf.ProtoMember(9)]
+            public ulong system_ram
+            {
+                get => __pbn__system_ram.GetValueOrDefault();
+                set => __pbn__system_ram = value;
+            }
+            public bool ShouldSerializesystem_ram() => __pbn__system_ram != null;
+            public void Resetsystem_ram() => __pbn__system_ram = null;
+            private ulong? __pbn__system_ram;
+
+            [global::ProtoBuf.ProtoMember(10)]
+            public int session_seconds
+            {
+                get => __pbn__session_seconds.GetValueOrDefault();
+                set => __pbn__session_seconds = value;
+            }
+            public bool ShouldSerializesession_seconds() => __pbn__session_seconds != null;
+            public void Resetsession_seconds() => __pbn__session_seconds = null;
+            private int? __pbn__session_seconds;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ESteamPipeWorkType
     {
         k_ESteamPipeClientWorkType_Invalid = 0,
@@ -1557,6 +1692,11 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CClientMetrics_EndGameRecording_Notification>( "ClientMetrics.ReportEndGameRecording#1", request );
         }
 
+        public void ReportGamePerformance(CClientMetrics_GamePerformance_Notification request )
+        {
+            UnifiedMessages.SendNotification<CClientMetrics_GamePerformance_Notification>( "ClientMetrics.ReportGamePerformance#1", request );
+        }
+
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
@@ -1609,6 +1749,9 @@ namespace SteamKit2.Internal
                     break;
                 case "ReportEndGameRecording":
                     PostNotificationMsg<CClientMetrics_EndGameRecording_Notification>( packetMsg );
+                    break;
+                case "ReportGamePerformance":
+                    PostNotificationMsg<CClientMetrics_GamePerformance_Notification>( packetMsg );
                     break;
             }
         }

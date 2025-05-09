@@ -10,66 +10,6 @@ namespace SteamKit2.Internal
 {
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CCredentials_TestAvailablePassword_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string password
-        {
-            get => __pbn__password ?? "";
-            set => __pbn__password = value;
-        }
-        public bool ShouldSerializepassword() => __pbn__password != null;
-        public void Resetpassword() => __pbn__password = null;
-        private string __pbn__password;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public byte[] sha_digest_password
-        {
-            get => __pbn__sha_digest_password;
-            set => __pbn__sha_digest_password = value;
-        }
-        public bool ShouldSerializesha_digest_password() => __pbn__sha_digest_password != null;
-        public void Resetsha_digest_password() => __pbn__sha_digest_password = null;
-        private byte[] __pbn__sha_digest_password;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string account_name
-        {
-            get => __pbn__account_name ?? "";
-            set => __pbn__account_name = value;
-        }
-        public bool ShouldSerializeaccount_name() => __pbn__account_name != null;
-        public void Resetaccount_name() => __pbn__account_name = null;
-        private string __pbn__account_name;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CCredentials_TestAvailablePassword_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public bool is_valid
-        {
-            get => __pbn__is_valid.GetValueOrDefault();
-            set => __pbn__is_valid = value;
-        }
-        public bool ShouldSerializeis_valid() => __pbn__is_valid != null;
-        public void Resetis_valid() => __pbn__is_valid = null;
-        private bool? __pbn__is_valid;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CCredentials_GetSteamGuardDetails_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -574,11 +514,6 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Credentials";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCredentials_TestAvailablePassword_Response>> TestAvailablePassword( CCredentials_TestAvailablePassword_Request request )
-        {
-            return UnifiedMessages.SendMessage<CCredentials_TestAvailablePassword_Request, CCredentials_TestAvailablePassword_Response>( "Credentials.TestAvailablePassword#1", request );
-        }
-
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCredentials_GetSteamGuardDetails_Response>> GetSteamGuardDetails( CCredentials_GetSteamGuardDetails_Request request )
         {
             return UnifiedMessages.SendMessage<CCredentials_GetSteamGuardDetails_Request, CCredentials_GetSteamGuardDetails_Response>( "Credentials.GetSteamGuardDetails#1", request );
@@ -608,9 +543,6 @@ namespace SteamKit2.Internal
         {
             switch ( methodName )
             {
-                case "TestAvailablePassword":
-                    PostResponseMsg<CCredentials_TestAvailablePassword_Response>( packetMsg );
-                    break;
                 case "GetSteamGuardDetails":
                     PostResponseMsg<CCredentials_GetSteamGuardDetails_Response>( packetMsg );
                     break;

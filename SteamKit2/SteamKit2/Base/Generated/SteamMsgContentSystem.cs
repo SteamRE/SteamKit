@@ -812,11 +812,84 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CDepotContentDetection_GetDetectedContentSingleApp_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CDepotContentDetection_GetDetectedContentSingleApp_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EAppAntiCheatType.k_EAppAntiCheatTypeNone)]
+        public EAppAntiCheatType detected_anticheat
+        {
+            get => __pbn__detected_anticheat ?? EAppAntiCheatType.k_EAppAntiCheatTypeNone;
+            set => __pbn__detected_anticheat = value;
+        }
+        public bool ShouldSerializedetected_anticheat() => __pbn__detected_anticheat != null;
+        public void Resetdetected_anticheat() => __pbn__detected_anticheat = null;
+        private EAppAntiCheatType? __pbn__detected_anticheat;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(EAppGameEngineType.k_EAppGameEngineTypeNone)]
+        public EAppGameEngineType detected_gameengine
+        {
+            get => __pbn__detected_gameengine ?? EAppGameEngineType.k_EAppGameEngineTypeNone;
+            set => __pbn__detected_gameengine = value;
+        }
+        public bool ShouldSerializedetected_gameengine() => __pbn__detected_gameengine != null;
+        public void Resetdetected_gameengine() => __pbn__detected_gameengine = null;
+        private EAppGameEngineType? __pbn__detected_gameengine;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EAppContentDetectionType
     {
         k_EAppContentDetectionType_None = 0,
         k_EAppContentDetectionType_AntiCheat = 1,
         k_EAppContentDetectionType_GameEngine = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EAppAntiCheatType
+    {
+        k_EAppAntiCheatTypeNone = 0,
+        k_EAppAntiCheatTypeEasyAC = 1,
+        k_EAppAntiCheatTypeDenuvo = 2,
+        k_EAppAntiCheatTypeBattlEye = 3,
+        k_EAppAntiCheatTypeXignCode = 4,
+        k_EAppAntiCheatTypePunkBuster = 5,
+        k_EAppAntiCheatTypeVAC = 6,
+        k_EAppAntiCheatTypeGameGuard = 7,
+        k_EAppAntiCheatTypeHackShield = 8,
+        k_EAppAntiCheatTypeAntiCheatExpert = 9,
+        k_EAppAntiCheatTypeOther = 10,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EAppGameEngineType
+    {
+        k_EAppGameEngineTypeNone = 0,
+        k_EAppGameEngineTypeUnreal = 1,
     }
 
     public class ContentServerDirectory : SteamUnifiedMessages.UnifiedService
@@ -900,12 +973,20 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CDepotContentDetection_GetAllDetectedAppContent_Request, CDepotContentDetection_GetAllDetectedAppContent_Response>( "DepotContentDetection.GetAllDetectedAppContent#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDepotContentDetection_GetDetectedContentSingleApp_Response>> GetDetectedContentSingleApp( CDepotContentDetection_GetDetectedContentSingleApp_Request request )
+        {
+            return UnifiedMessages.SendMessage<CDepotContentDetection_GetDetectedContentSingleApp_Request, CDepotContentDetection_GetDetectedContentSingleApp_Response>( "DepotContentDetection.GetDetectedContentSingleApp#1", request );
+        }
+
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
             {
                 case "GetAllDetectedAppContent":
                     PostResponseMsg<CDepotContentDetection_GetAllDetectedAppContent_Response>( packetMsg );
+                    break;
+                case "GetDetectedContentSingleApp":
+                    PostResponseMsg<CDepotContentDetection_GetDetectedContentSingleApp_Response>( packetMsg );
                     break;
             }
         }

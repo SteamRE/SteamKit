@@ -522,16 +522,6 @@ namespace SteamKit2.Internal
             public void Resetnum_downloading() => __pbn__num_downloading = null;
             private uint? __pbn__num_downloading;
 
-            [global::ProtoBuf.ProtoMember(13)]
-            public uint num_paused
-            {
-                get => __pbn__num_paused.GetValueOrDefault();
-                set => __pbn__num_paused = value;
-            }
-            public bool ShouldSerializenum_paused() => __pbn__num_paused != null;
-            public void Resetnum_paused() => __pbn__num_paused = null;
-            private uint? __pbn__num_paused;
-
             [global::ProtoBuf.ProtoMember(14)]
             public bool changing
             {
@@ -651,6 +641,16 @@ namespace SteamKit2.Internal
             public bool ShouldSerializerunning() => __pbn__running != null;
             public void Resetrunning() => __pbn__running = null;
             private bool? __pbn__running;
+
+            [global::ProtoBuf.ProtoMember(26)]
+            public uint update_percentage
+            {
+                get => __pbn__update_percentage.GetValueOrDefault();
+                set => __pbn__update_percentage = value;
+            }
+            public bool ShouldSerializeupdate_percentage() => __pbn__update_percentage != null;
+            public void Resetupdate_percentage() => __pbn__update_percentage = null;
+            private uint? __pbn__update_percentage;
 
             [global::ProtoBuf.ProtoContract()]
             public partial class DLC : global::ProtoBuf.IExtensible

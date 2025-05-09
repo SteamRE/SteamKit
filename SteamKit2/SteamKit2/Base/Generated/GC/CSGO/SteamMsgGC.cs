@@ -1466,73 +1466,6 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgAdjustItemEquippedState : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public ulong item_id
-        {
-            get => __pbn__item_id.GetValueOrDefault();
-            set => __pbn__item_id = value;
-        }
-        public bool ShouldSerializeitem_id() => __pbn__item_id != null;
-        public void Resetitem_id() => __pbn__item_id = null;
-        private ulong? __pbn__item_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint new_class
-        {
-            get => __pbn__new_class.GetValueOrDefault();
-            set => __pbn__new_class = value;
-        }
-        public bool ShouldSerializenew_class() => __pbn__new_class != null;
-        public void Resetnew_class() => __pbn__new_class = null;
-        private uint? __pbn__new_class;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public uint new_slot
-        {
-            get => __pbn__new_slot.GetValueOrDefault();
-            set => __pbn__new_slot = value;
-        }
-        public bool ShouldSerializenew_slot() => __pbn__new_slot != null;
-        public void Resetnew_slot() => __pbn__new_slot = null;
-        private uint? __pbn__new_slot;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public bool swap
-        {
-            get => __pbn__swap.GetValueOrDefault();
-            set => __pbn__swap = value;
-        }
-        public bool ShouldSerializeswap() => __pbn__swap != null;
-        public void Resetswap() => __pbn__swap = null;
-        private bool? __pbn__swap;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgAdjustItemEquippedStateMulti : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<ulong> t_equips { get; } = new global::System.Collections.Generic.List<ulong>();
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<ulong> ct_equips { get; } = new global::System.Collections.Generic.List<ulong>();
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public global::System.Collections.Generic.List<ulong> noteam_equips { get; } = new global::System.Collections.Generic.List<ulong>();
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgSortItems : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2746,55 +2679,6 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializegroup_id() => __pbn__group_id != null;
         public void Resetgroup_id() => __pbn__group_id = null;
         private uint? __pbn__group_id;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CSOEconDefaultEquippedDefinitionInstanceClient : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint account_id
-        {
-            get => __pbn__account_id.GetValueOrDefault();
-            set => __pbn__account_id = value;
-        }
-        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
-        public void Resetaccount_id() => __pbn__account_id = null;
-        private uint? __pbn__account_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint item_definition
-        {
-            get => __pbn__item_definition.GetValueOrDefault();
-            set => __pbn__item_definition = value;
-        }
-        public bool ShouldSerializeitem_definition() => __pbn__item_definition != null;
-        public void Resetitem_definition() => __pbn__item_definition = null;
-        private uint? __pbn__item_definition;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public uint class_id
-        {
-            get => __pbn__class_id.GetValueOrDefault();
-            set => __pbn__class_id = value;
-        }
-        public bool ShouldSerializeclass_id() => __pbn__class_id != null;
-        public void Resetclass_id() => __pbn__class_id = null;
-        private uint? __pbn__class_id;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public uint slot_id
-        {
-            get => __pbn__slot_id.GetValueOrDefault();
-            set => __pbn__slot_id = value;
-        }
-        public bool ShouldSerializeslot_id() => __pbn__slot_id != null;
-        public void Resetslot_id() => __pbn__slot_id = null;
-        private uint? __pbn__slot_id;
 
     }
 

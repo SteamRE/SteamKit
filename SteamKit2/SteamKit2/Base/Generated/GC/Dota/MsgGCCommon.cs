@@ -3642,6 +3642,16 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetstart_timestamp() => __pbn__start_timestamp = null;
             private uint? __pbn__start_timestamp;
 
+            [global::ProtoBuf.ProtoMember(22)]
+            public bool is_player_draft
+            {
+                get => __pbn__is_player_draft.GetValueOrDefault();
+                set => __pbn__is_player_draft = value;
+            }
+            public bool ShouldSerializeis_player_draft() => __pbn__is_player_draft != null;
+            public void Resetis_player_draft() => __pbn__is_player_draft = null;
+            private bool? __pbn__is_player_draft;
+
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -4251,6 +4261,16 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializestart_timestamp() => __pbn__start_timestamp != null;
             public void Resetstart_timestamp() => __pbn__start_timestamp = null;
             private uint? __pbn__start_timestamp;
+
+            [global::ProtoBuf.ProtoMember(15)]
+            public bool is_player_draft
+            {
+                get => __pbn__is_player_draft.GetValueOrDefault();
+                set => __pbn__is_player_draft = value;
+            }
+            public bool ShouldSerializeis_player_draft() => __pbn__is_player_draft != null;
+            public void Resetis_player_draft() => __pbn__is_player_draft = null;
+            private bool? __pbn__is_player_draft;
 
         }
 
@@ -5652,6 +5672,27 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializeitem_9() => __pbn__item_9 != null;
             public void Resetitem_9() => __pbn__item_9 = null;
             private int? __pbn__item_9;
+
+            [global::ProtoBuf.ProtoMember(83)]
+            [global::System.ComponentModel.DefaultValue(-1)]
+            public int item_10
+            {
+                get => __pbn__item_10 ?? -1;
+                set => __pbn__item_10 = value;
+            }
+            public bool ShouldSerializeitem_10() => __pbn__item_10 != null;
+            public void Resetitem_10() => __pbn__item_10 = null;
+            private int? __pbn__item_10;
+
+            [global::ProtoBuf.ProtoMember(84)]
+            public int item_10_lvl
+            {
+                get => __pbn__item_10_lvl.GetValueOrDefault();
+                set => __pbn__item_10_lvl = value;
+            }
+            public bool ShouldSerializeitem_10_lvl() => __pbn__item_10_lvl != null;
+            public void Resetitem_10_lvl() => __pbn__item_10_lvl = null;
+            private int? __pbn__item_10_lvl;
 
             [global::ProtoBuf.ProtoMember(10)]
             public float expected_team_contribution
@@ -7488,6 +7529,16 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializelobby_type() => __pbn__lobby_type != null;
         public void Resetlobby_type() => __pbn__lobby_type = null;
         private uint? __pbn__lobby_type;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public bool is_player_draft
+        {
+            get => __pbn__is_player_draft.GetValueOrDefault();
+            set => __pbn__is_player_draft = value;
+        }
+        public bool ShouldSerializeis_player_draft() => __pbn__is_player_draft != null;
+        public void Resetis_player_draft() => __pbn__is_player_draft = null;
+        private bool? __pbn__is_player_draft;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class Player : global::ProtoBuf.IExtensible
@@ -9681,6 +9732,16 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializegradient_id() => __pbn__gradient_id != null;
             public void Resetgradient_id() => __pbn__gradient_id = null;
             private int? __pbn__gradient_id;
+
+            [global::ProtoBuf.ProtoMember(7)]
+            public uint index
+            {
+                get => __pbn__index.GetValueOrDefault();
+                set => __pbn__index = value;
+            }
+            public bool ShouldSerializeindex() => __pbn__index != null;
+            public void Resetindex() => __pbn__index = null;
+            private uint? __pbn__index;
 
         }
 

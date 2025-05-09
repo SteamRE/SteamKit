@@ -58,45 +58,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CCloud_GetUploadServerInfo_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint appid
-        {
-            get => __pbn__appid.GetValueOrDefault();
-            set => __pbn__appid = value;
-        }
-        public bool ShouldSerializeappid() => __pbn__appid != null;
-        public void Resetappid() => __pbn__appid = null;
-        private uint? __pbn__appid;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CCloud_GetUploadServerInfo_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string server_url
-        {
-            get => __pbn__server_url ?? "";
-            set => __pbn__server_url = value;
-        }
-        public bool ShouldSerializeserver_url() => __pbn__server_url != null;
-        public void Resetserver_url() => __pbn__server_url = null;
-        private string __pbn__server_url;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CCloud_BeginHTTPUpload_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1925,66 +1886,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CCloud_EnumerateUserApps_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CCloud_EnumerateUserApps_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<Apps> apps { get; } = new global::System.Collections.Generic.List<Apps>();
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class Apps : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint appid
-            {
-                get => __pbn__appid.GetValueOrDefault();
-                set => __pbn__appid = value;
-            }
-            public bool ShouldSerializeappid() => __pbn__appid != null;
-            public void Resetappid() => __pbn__appid = null;
-            private uint? __pbn__appid;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public int totalcount
-            {
-                get => __pbn__totalcount.GetValueOrDefault();
-                set => __pbn__totalcount = value;
-            }
-            public bool ShouldSerializetotalcount() => __pbn__totalcount != null;
-            public void Resettotalcount() => __pbn__totalcount = null;
-            private int? __pbn__totalcount;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public long totalsize
-            {
-                get => __pbn__totalsize.GetValueOrDefault();
-                set => __pbn__totalsize = value;
-            }
-            public bool ShouldSerializetotalsize() => __pbn__totalsize != null;
-            public void Resettotalsize() => __pbn__totalsize = null;
-            private long? __pbn__totalsize;
-
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CCloud_GetAppFileChangelist_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2510,11 +2411,6 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CCloud_ClientLogUploadComplete_Notification>( "Cloud.ClientLogUploadComplete#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_GetUploadServerInfo_Response>> GetUploadServerInfo( CCloud_GetUploadServerInfo_Request request )
-        {
-            return UnifiedMessages.SendMessage<CCloud_GetUploadServerInfo_Request, CCloud_GetUploadServerInfo_Response>( "Cloud.GetUploadServerInfo#1", request );
-        }
-
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_BeginHTTPUpload_Response>> BeginHTTPUpload( CCloud_BeginHTTPUpload_Request request )
         {
             return UnifiedMessages.SendMessage<CCloud_BeginHTTPUpload_Request, CCloud_BeginHTTPUpload_Response>( "Cloud.BeginHTTPUpload#1", request );
@@ -2605,11 +2501,6 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CCloud_ClientConflictResolution_Notification>( "Cloud.ClientConflictResolution#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_EnumerateUserApps_Response>> EnumerateUserApps( CCloud_EnumerateUserApps_Request request )
-        {
-            return UnifiedMessages.SendMessage<CCloud_EnumerateUserApps_Request, CCloud_EnumerateUserApps_Response>( "Cloud.EnumerateUserApps#1", request );
-        }
-
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_GetAppFileChangelist_Response>> GetAppFileChangelist( CCloud_GetAppFileChangelist_Request request )
         {
             return UnifiedMessages.SendMessage<CCloud_GetAppFileChangelist_Request, CCloud_GetAppFileChangelist_Response>( "Cloud.GetAppFileChangelist#1", request );
@@ -2644,9 +2535,6 @@ namespace SteamKit2.Internal
         {
             switch ( methodName )
             {
-                case "GetUploadServerInfo":
-                    PostResponseMsg<CCloud_GetUploadServerInfo_Response>( packetMsg );
-                    break;
                 case "BeginHTTPUpload":
                     PostResponseMsg<CCloud_BeginHTTPUpload_Response>( packetMsg );
                     break;
@@ -2688,9 +2576,6 @@ namespace SteamKit2.Internal
                     break;
                 case "ClientDeleteFile":
                     PostResponseMsg<CCloud_ClientDeleteFile_Response>( packetMsg );
-                    break;
-                case "EnumerateUserApps":
-                    PostResponseMsg<CCloud_EnumerateUserApps_Response>( packetMsg );
                     break;
                 case "GetAppFileChangelist":
                     PostResponseMsg<CCloud_GetAppFileChangelist_Response>( packetMsg );

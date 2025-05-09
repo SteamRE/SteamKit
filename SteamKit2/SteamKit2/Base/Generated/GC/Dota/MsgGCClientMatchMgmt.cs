@@ -889,6 +889,9 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetdo_player_draft() => __pbn__do_player_draft = null;
         private bool? __pbn__do_player_draft;
 
+        [global::ProtoBuf.ProtoMember(54)]
+        public global::System.Collections.Generic.List<int> requested_hero_teams { get; } = new global::System.Collections.Generic.List<int>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class AbilityDraftSpecificDetails : global::ProtoBuf.IExtensible
         {
@@ -2737,6 +2740,8 @@ namespace SteamKit2.GC.Dota.Internal
         k_EStartFindingMatchResult_SteamChinaBanned = 133,
         k_EStartFindingMatchResult_SteamChinaInvalidMixedParty = 134,
         k_EStartFindingMatchResult_RestrictedFromRanked = 135,
+        k_EStartFindingMatchResult_RankPreventsParties = 136,
+        k_EStartFindingMatchResult_RegisteredNameRequired = 137,
     }
 
 }

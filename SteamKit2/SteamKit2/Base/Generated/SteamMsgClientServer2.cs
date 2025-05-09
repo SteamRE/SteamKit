@@ -113,6 +113,37 @@ namespace SteamKit2.Internal
         public global::System.Collections.Generic.List<RichPresence> rich_presence { get; } = new global::System.Collections.Generic.List<RichPresence>();
 
         [global::ProtoBuf.ProtoContract()]
+        public partial class KV : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string key
+            {
+                get => __pbn__key ?? "";
+                set => __pbn__key = value;
+            }
+            public bool ShouldSerializekey() => __pbn__key != null;
+            public void Resetkey() => __pbn__key = null;
+            private string __pbn__key;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string value
+            {
+                get => __pbn__value ?? "";
+                set => __pbn__value = value;
+            }
+            public bool ShouldSerializevalue() => __pbn__value != null;
+            public void Resetvalue() => __pbn__value = null;
+            private string __pbn__value;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
         public partial class RichPresence : global::ProtoBuf.IExtensible
         {
             private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -138,6 +169,9 @@ namespace SteamKit2.Internal
             public bool ShouldSerializerich_presence_kv() => __pbn__rich_presence_kv != null;
             public void Resetrich_presence_kv() => __pbn__rich_presence_kv = null;
             private byte[] __pbn__rich_presence_kv;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public global::System.Collections.Generic.List<CMsgClientRichPresenceInfo.KV> rich_presense { get; } = new global::System.Collections.Generic.List<CMsgClientRichPresenceInfo.KV>();
 
         }
 
@@ -269,349 +303,6 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeevalvesignaturecheckdetail() => __pbn__evalvesignaturecheckdetail != null;
         public void Resetevalvesignaturecheckdetail() => __pbn__evalvesignaturecheckdetail = null;
         private uint? __pbn__evalvesignaturecheckdetail;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientReadMachineAuth : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string filename
-        {
-            get => __pbn__filename ?? "";
-            set => __pbn__filename = value;
-        }
-        public bool ShouldSerializefilename() => __pbn__filename != null;
-        public void Resetfilename() => __pbn__filename = null;
-        private string __pbn__filename;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint offset
-        {
-            get => __pbn__offset.GetValueOrDefault();
-            set => __pbn__offset = value;
-        }
-        public bool ShouldSerializeoffset() => __pbn__offset != null;
-        public void Resetoffset() => __pbn__offset = null;
-        private uint? __pbn__offset;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public uint cubtoread
-        {
-            get => __pbn__cubtoread.GetValueOrDefault();
-            set => __pbn__cubtoread = value;
-        }
-        public bool ShouldSerializecubtoread() => __pbn__cubtoread != null;
-        public void Resetcubtoread() => __pbn__cubtoread = null;
-        private uint? __pbn__cubtoread;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientReadMachineAuthResponse : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string filename
-        {
-            get => __pbn__filename ?? "";
-            set => __pbn__filename = value;
-        }
-        public bool ShouldSerializefilename() => __pbn__filename != null;
-        public void Resetfilename() => __pbn__filename = null;
-        private string __pbn__filename;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint eresult
-        {
-            get => __pbn__eresult.GetValueOrDefault();
-            set => __pbn__eresult = value;
-        }
-        public bool ShouldSerializeeresult() => __pbn__eresult != null;
-        public void Reseteresult() => __pbn__eresult = null;
-        private uint? __pbn__eresult;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public uint filesize
-        {
-            get => __pbn__filesize.GetValueOrDefault();
-            set => __pbn__filesize = value;
-        }
-        public bool ShouldSerializefilesize() => __pbn__filesize != null;
-        public void Resetfilesize() => __pbn__filesize = null;
-        private uint? __pbn__filesize;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public byte[] sha_file
-        {
-            get => __pbn__sha_file;
-            set => __pbn__sha_file = value;
-        }
-        public bool ShouldSerializesha_file() => __pbn__sha_file != null;
-        public void Resetsha_file() => __pbn__sha_file = null;
-        private byte[] __pbn__sha_file;
-
-        [global::ProtoBuf.ProtoMember(5)]
-        public uint getlasterror
-        {
-            get => __pbn__getlasterror.GetValueOrDefault();
-            set => __pbn__getlasterror = value;
-        }
-        public bool ShouldSerializegetlasterror() => __pbn__getlasterror != null;
-        public void Resetgetlasterror() => __pbn__getlasterror = null;
-        private uint? __pbn__getlasterror;
-
-        [global::ProtoBuf.ProtoMember(6)]
-        public uint offset
-        {
-            get => __pbn__offset.GetValueOrDefault();
-            set => __pbn__offset = value;
-        }
-        public bool ShouldSerializeoffset() => __pbn__offset != null;
-        public void Resetoffset() => __pbn__offset = null;
-        private uint? __pbn__offset;
-
-        [global::ProtoBuf.ProtoMember(7)]
-        public uint cubread
-        {
-            get => __pbn__cubread.GetValueOrDefault();
-            set => __pbn__cubread = value;
-        }
-        public bool ShouldSerializecubread() => __pbn__cubread != null;
-        public void Resetcubread() => __pbn__cubread = null;
-        private uint? __pbn__cubread;
-
-        [global::ProtoBuf.ProtoMember(8)]
-        public byte[] bytes_read
-        {
-            get => __pbn__bytes_read;
-            set => __pbn__bytes_read = value;
-        }
-        public bool ShouldSerializebytes_read() => __pbn__bytes_read != null;
-        public void Resetbytes_read() => __pbn__bytes_read = null;
-        private byte[] __pbn__bytes_read;
-
-        [global::ProtoBuf.ProtoMember(9)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string filename_sentry
-        {
-            get => __pbn__filename_sentry ?? "";
-            set => __pbn__filename_sentry = value;
-        }
-        public bool ShouldSerializefilename_sentry() => __pbn__filename_sentry != null;
-        public void Resetfilename_sentry() => __pbn__filename_sentry = null;
-        private string __pbn__filename_sentry;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientUpdateMachineAuth : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string filename
-        {
-            get => __pbn__filename ?? "";
-            set => __pbn__filename = value;
-        }
-        public bool ShouldSerializefilename() => __pbn__filename != null;
-        public void Resetfilename() => __pbn__filename = null;
-        private string __pbn__filename;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint offset
-        {
-            get => __pbn__offset.GetValueOrDefault();
-            set => __pbn__offset = value;
-        }
-        public bool ShouldSerializeoffset() => __pbn__offset != null;
-        public void Resetoffset() => __pbn__offset = null;
-        private uint? __pbn__offset;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public uint cubtowrite
-        {
-            get => __pbn__cubtowrite.GetValueOrDefault();
-            set => __pbn__cubtowrite = value;
-        }
-        public bool ShouldSerializecubtowrite() => __pbn__cubtowrite != null;
-        public void Resetcubtowrite() => __pbn__cubtowrite = null;
-        private uint? __pbn__cubtowrite;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public byte[] bytes
-        {
-            get => __pbn__bytes;
-            set => __pbn__bytes = value;
-        }
-        public bool ShouldSerializebytes() => __pbn__bytes != null;
-        public void Resetbytes() => __pbn__bytes = null;
-        private byte[] __pbn__bytes;
-
-        [global::ProtoBuf.ProtoMember(5)]
-        public uint otp_type
-        {
-            get => __pbn__otp_type.GetValueOrDefault();
-            set => __pbn__otp_type = value;
-        }
-        public bool ShouldSerializeotp_type() => __pbn__otp_type != null;
-        public void Resetotp_type() => __pbn__otp_type = null;
-        private uint? __pbn__otp_type;
-
-        [global::ProtoBuf.ProtoMember(6)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string otp_identifier
-        {
-            get => __pbn__otp_identifier ?? "";
-            set => __pbn__otp_identifier = value;
-        }
-        public bool ShouldSerializeotp_identifier() => __pbn__otp_identifier != null;
-        public void Resetotp_identifier() => __pbn__otp_identifier = null;
-        private string __pbn__otp_identifier;
-
-        [global::ProtoBuf.ProtoMember(7)]
-        public byte[] otp_sharedsecret
-        {
-            get => __pbn__otp_sharedsecret;
-            set => __pbn__otp_sharedsecret = value;
-        }
-        public bool ShouldSerializeotp_sharedsecret() => __pbn__otp_sharedsecret != null;
-        public void Resetotp_sharedsecret() => __pbn__otp_sharedsecret = null;
-        private byte[] __pbn__otp_sharedsecret;
-
-        [global::ProtoBuf.ProtoMember(8)]
-        public uint otp_timedrift
-        {
-            get => __pbn__otp_timedrift.GetValueOrDefault();
-            set => __pbn__otp_timedrift = value;
-        }
-        public bool ShouldSerializeotp_timedrift() => __pbn__otp_timedrift != null;
-        public void Resetotp_timedrift() => __pbn__otp_timedrift = null;
-        private uint? __pbn__otp_timedrift;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientUpdateMachineAuthResponse : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string filename
-        {
-            get => __pbn__filename ?? "";
-            set => __pbn__filename = value;
-        }
-        public bool ShouldSerializefilename() => __pbn__filename != null;
-        public void Resetfilename() => __pbn__filename = null;
-        private string __pbn__filename;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint eresult
-        {
-            get => __pbn__eresult.GetValueOrDefault();
-            set => __pbn__eresult = value;
-        }
-        public bool ShouldSerializeeresult() => __pbn__eresult != null;
-        public void Reseteresult() => __pbn__eresult = null;
-        private uint? __pbn__eresult;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public uint filesize
-        {
-            get => __pbn__filesize.GetValueOrDefault();
-            set => __pbn__filesize = value;
-        }
-        public bool ShouldSerializefilesize() => __pbn__filesize != null;
-        public void Resetfilesize() => __pbn__filesize = null;
-        private uint? __pbn__filesize;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public byte[] sha_file
-        {
-            get => __pbn__sha_file;
-            set => __pbn__sha_file = value;
-        }
-        public bool ShouldSerializesha_file() => __pbn__sha_file != null;
-        public void Resetsha_file() => __pbn__sha_file = null;
-        private byte[] __pbn__sha_file;
-
-        [global::ProtoBuf.ProtoMember(5)]
-        public uint getlasterror
-        {
-            get => __pbn__getlasterror.GetValueOrDefault();
-            set => __pbn__getlasterror = value;
-        }
-        public bool ShouldSerializegetlasterror() => __pbn__getlasterror != null;
-        public void Resetgetlasterror() => __pbn__getlasterror = null;
-        private uint? __pbn__getlasterror;
-
-        [global::ProtoBuf.ProtoMember(6)]
-        public uint offset
-        {
-            get => __pbn__offset.GetValueOrDefault();
-            set => __pbn__offset = value;
-        }
-        public bool ShouldSerializeoffset() => __pbn__offset != null;
-        public void Resetoffset() => __pbn__offset = null;
-        private uint? __pbn__offset;
-
-        [global::ProtoBuf.ProtoMember(7)]
-        public uint cubwrote
-        {
-            get => __pbn__cubwrote.GetValueOrDefault();
-            set => __pbn__cubwrote = value;
-        }
-        public bool ShouldSerializecubwrote() => __pbn__cubwrote != null;
-        public void Resetcubwrote() => __pbn__cubwrote = null;
-        private uint? __pbn__cubwrote;
-
-        [global::ProtoBuf.ProtoMember(8)]
-        public int otp_type
-        {
-            get => __pbn__otp_type.GetValueOrDefault();
-            set => __pbn__otp_type = value;
-        }
-        public bool ShouldSerializeotp_type() => __pbn__otp_type != null;
-        public void Resetotp_type() => __pbn__otp_type = null;
-        private int? __pbn__otp_type;
-
-        [global::ProtoBuf.ProtoMember(9)]
-        public uint otp_value
-        {
-            get => __pbn__otp_value.GetValueOrDefault();
-            set => __pbn__otp_value = value;
-        }
-        public bool ShouldSerializeotp_value() => __pbn__otp_value != null;
-        public void Resetotp_value() => __pbn__otp_value = null;
-        private uint? __pbn__otp_value;
-
-        [global::ProtoBuf.ProtoMember(10)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string otp_identifier
-        {
-            get => __pbn__otp_identifier ?? "";
-            set => __pbn__otp_identifier = value;
-        }
-        public bool ShouldSerializeotp_identifier() => __pbn__otp_identifier != null;
-        public void Resetotp_identifier() => __pbn__otp_identifier = null;
-        private string __pbn__otp_identifier;
 
     }
 

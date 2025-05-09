@@ -2120,6 +2120,9 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(131)]
         public CDOTALobbyMatchQualityData match_quality_data { get; set; }
 
+        [global::ProtoBuf.ProtoMember(132)]
+        public global::System.Collections.Generic.List<int> requested_hero_teams { get; } = new global::System.Collections.Generic.List<int>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class CExtraMsg : global::ProtoBuf.IExtensible
         {

@@ -795,6 +795,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resethighest_rank() => __pbn__highest_rank = null;
         private uint? __pbn__highest_rank;
 
+        [global::ProtoBuf.ProtoMember(16)]
+        public uint rank_expiry
+        {
+            get => __pbn__rank_expiry.GetValueOrDefault();
+            set => __pbn__rank_expiry = value;
+        }
+        public bool ShouldSerializerank_expiry() => __pbn__rank_expiry != null;
+        public void Resetrank_expiry() => __pbn__rank_expiry = null;
+        private uint? __pbn__rank_expiry;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class PerMapRank : global::ProtoBuf.IExtensible
         {
@@ -1574,6 +1584,47 @@ namespace SteamKit2.GC.CSGO.Internal
             public bool ShouldSerializequest_bonus_points_earned() => __pbn__quest_bonus_points_earned != null;
             public void Resetquest_bonus_points_earned() => __pbn__quest_bonus_points_earned = null;
             private int? __pbn__quest_bonus_points_earned;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public int quest_normal_points_required
+            {
+                get => __pbn__quest_normal_points_required.GetValueOrDefault();
+                set => __pbn__quest_normal_points_required = value;
+            }
+            public bool ShouldSerializequest_normal_points_required() => __pbn__quest_normal_points_required != null;
+            public void Resetquest_normal_points_required() => __pbn__quest_normal_points_required = null;
+            private int? __pbn__quest_normal_points_required;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public int quest_reward_xp
+            {
+                get => __pbn__quest_reward_xp.GetValueOrDefault();
+                set => __pbn__quest_reward_xp = value;
+            }
+            public bool ShouldSerializequest_reward_xp() => __pbn__quest_reward_xp != null;
+            public void Resetquest_reward_xp() => __pbn__quest_reward_xp = null;
+            private int? __pbn__quest_reward_xp;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public int quest_period
+            {
+                get => __pbn__quest_period.GetValueOrDefault();
+                set => __pbn__quest_period = value;
+            }
+            public bool ShouldSerializequest_period() => __pbn__quest_period != null;
+            public void Resetquest_period() => __pbn__quest_period = null;
+            private int? __pbn__quest_period;
+
+            [global::ProtoBuf.ProtoMember(7)]
+            [global::System.ComponentModel.DefaultValue(QuestType.k_EQuestType_Operation)]
+            public QuestType quest_type
+            {
+                get => __pbn__quest_type ?? QuestType.k_EQuestType_Operation;
+                set => __pbn__quest_type = value;
+            }
+            public bool ShouldSerializequest_type() => __pbn__quest_type != null;
+            public void Resetquest_type() => __pbn__quest_type = null;
+            private QuestType? __pbn__quest_type;
 
         }
 
@@ -2817,6 +2868,16 @@ namespace SteamKit2.GC.CSGO.Internal
 
         [global::ProtoBuf.ProtoMember(21)]
         public global::System.Collections.Generic.List<int> teammate_colors { get; } = new global::System.Collections.Generic.List<int>();
+
+        [global::ProtoBuf.ProtoMember(22)]
+        public uint match_id_additional
+        {
+            get => __pbn__match_id_additional.GetValueOrDefault();
+            set => __pbn__match_id_additional = value;
+        }
+        public bool ShouldSerializematch_id_additional() => __pbn__match_id_additional != null;
+        public void Resetmatch_id_additional() => __pbn__match_id_additional = null;
+        private uint? __pbn__match_id_additional;
 
     }
 
@@ -6934,6 +6995,45 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CSOGameAccountSteamChina : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint time_last_update
+        {
+            get => __pbn__time_last_update.GetValueOrDefault();
+            set => __pbn__time_last_update = value;
+        }
+        public bool ShouldSerializetime_last_update() => __pbn__time_last_update != null;
+        public void Resettime_last_update() => __pbn__time_last_update = null;
+        private uint? __pbn__time_last_update;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint time_comms_ban
+        {
+            get => __pbn__time_comms_ban.GetValueOrDefault();
+            set => __pbn__time_comms_ban = value;
+        }
+        public bool ShouldSerializetime_comms_ban() => __pbn__time_comms_ban != null;
+        public void Resettime_comms_ban() => __pbn__time_comms_ban = null;
+        private uint? __pbn__time_comms_ban;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint time_play_ban
+        {
+            get => __pbn__time_play_ban.GetValueOrDefault();
+            set => __pbn__time_play_ban = value;
+        }
+        public bool ShouldSerializetime_play_ban() => __pbn__time_play_ban != null;
+        public void Resettime_play_ban() => __pbn__time_play_ban = null;
+        private uint? __pbn__time_play_ban;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CSOPersonaDataPublic : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -6982,6 +7082,55 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializexp_trail_level() => __pbn__xp_trail_level != null;
         public void Resetxp_trail_level() => __pbn__xp_trail_level = null;
         private uint? __pbn__xp_trail_level;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CSOAccountRecurringMission : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint account_id
+        {
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
+        }
+        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+        public void Resetaccount_id() => __pbn__account_id = null;
+        private uint? __pbn__account_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint mission_id
+        {
+            get => __pbn__mission_id.GetValueOrDefault();
+            set => __pbn__mission_id = value;
+        }
+        public bool ShouldSerializemission_id() => __pbn__mission_id != null;
+        public void Resetmission_id() => __pbn__mission_id = null;
+        private uint? __pbn__mission_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint period
+        {
+            get => __pbn__period.GetValueOrDefault();
+            set => __pbn__period = value;
+        }
+        public bool ShouldSerializeperiod() => __pbn__period != null;
+        public void Resetperiod() => __pbn__period = null;
+        private uint? __pbn__period;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint progress
+        {
+            get => __pbn__progress.GetValueOrDefault();
+            set => __pbn__progress = value;
+        }
+        public bool ShouldSerializeprogress() => __pbn__progress != null;
+        public void Resetprogress() => __pbn__progress = null;
+        private uint? __pbn__progress;
 
     }
 
@@ -8960,6 +9109,49 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgRequestRecurringMissionSchedule : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgRecurringMissionSchema : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<MissionTemplateList> missions { get; } = new global::System.Collections.Generic.List<MissionTemplateList>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class MissionTemplateList : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint period
+            {
+                get => __pbn__period.GetValueOrDefault();
+                set => __pbn__period = value;
+            }
+            public bool ShouldSerializeperiod() => __pbn__period != null;
+            public void Resetperiod() => __pbn__period = null;
+            private uint? __pbn__period;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public global::System.Collections.Generic.List<byte[]> mission_templates { get; } = new global::System.Collections.Generic.List<byte[]>();
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ECsgoGCMsg
     {
         k_EMsgGCCStrike15_v2_Base = 9100,
@@ -9068,6 +9260,8 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCCStrike15_v2_Client2GcAckXPShopTracks = 9222,
         k_EMsgGCCStrike15_v2_MatchmakingGC2ClientSearchStats = 9223,
         k_EMsgGCCStrike15_v2_PremierSeasonSummary = 9224,
+        k_EMsgGCCStrike15_v2_RequestRecurringMissionSchedule = 9225,
+        k_EMsgGCCStrike15_v2_RecurringMissionSchema = 9226,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -9076,6 +9270,13 @@ namespace SteamKit2.GC.CSGO.Internal
         k_ECsgoSteamUserStat_XpEarnedGames = 1,
         k_ECsgoSteamUserStat_MatchWinsCompetitive = 2,
         k_ECsgoSteamUserStat_SurvivedDangerZone = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum QuestType
+    {
+        k_EQuestType_Operation = 1,
+        k_EQuestType_RecurringMission = 2,
     }
 
     [global::ProtoBuf.ProtoContract()]

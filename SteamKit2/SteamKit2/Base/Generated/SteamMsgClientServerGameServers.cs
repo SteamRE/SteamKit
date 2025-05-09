@@ -137,6 +137,16 @@ namespace SteamKit2.Internal
         public void Resetis_secure() => __pbn__is_secure = null;
         private bool? __pbn__is_secure;
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool is_valveds
+        {
+            get => __pbn__is_valveds.GetValueOrDefault();
+            set => __pbn__is_valveds = value;
+        }
+        public bool ShouldSerializeis_valveds() => __pbn__is_valveds != null;
+        public void Resetis_valveds() => __pbn__is_valveds = null;
+        private bool? __pbn__is_valveds;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
