@@ -1,4 +1,17 @@
 ------------------------------------------------------------------------------
+v 3.2.0			May 9 2025
+------------------------------------------------------------------------------
+
+* `AsyncJob` will now instantly fail if not connected to Steam.
+  * This is technically a breaking change if you relied on this behaviour.
+* Added support for zstd compressed depot chunks.
+  * Added a dependency on `ZstdSharp.Port`.
+* Added an `GetAuthTicketForWebApi`
+* Added an argument to pass extra args to `WebAPI.CallProtobufAsync<TResponse, TRequest>()`
+* Updated Steam protobufs.
+
+
+------------------------------------------------------------------------------
 v 3.1.0			April 21 2025
 ------------------------------------------------------------------------------
 
