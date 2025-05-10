@@ -6,6 +6,7 @@ using SteamKit2;
 using CSGO = SteamKit2.GC.CSGO.Internal;
 using Dota = SteamKit2.GC.Dota.Internal;
 using TF2 = SteamKit2.GC.TF2.Internal;
+using Deadlock = SteamKit2.GC.Deadlock.Internal;
 
 namespace NetHookAnalyzer2
 {
@@ -54,6 +55,14 @@ namespace NetHookAnalyzer2
 					yield return typeof(CSGO.EGCSystemMsg);
 					yield return typeof(CSGO.EGCItemMsg);
 					yield return typeof(CSGO.EGCBaseClientMsg);
+					break;
+
+				case WellKnownAppIDs.Deadlock:
+					yield return typeof(Deadlock.EGCCitadelClientMessages);
+					yield return typeof(Deadlock.EGCBaseMsg);
+					yield return typeof(Deadlock.ESOMsg);
+					yield return typeof(Deadlock.EGCItemMsg);
+					yield return typeof(Deadlock.EGCBaseClientMsg);
 					break;
             }
 		}
