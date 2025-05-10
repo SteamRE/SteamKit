@@ -129,6 +129,10 @@ namespace NetHookAnalyzer2
 				case WellKnownAppIDs.CounterStrike2:
 					yield return "SteamKit2.GC.CSGO.Internal.CMsg";
 					break;
+
+				case WellKnownAppIDs.Deadlock:
+					yield return "SteamKit2.GC.Deadlock.Internal.CMsg";
+					break;
             }
 		}
 	}
