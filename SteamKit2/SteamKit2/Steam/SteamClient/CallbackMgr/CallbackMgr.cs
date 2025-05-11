@@ -106,7 +106,7 @@ namespace SteamKit2
         public async Task RunWaitCallbackAsync( CancellationToken cancellationToken = default )
         {
             var call = await client.WaitForCallbackAsync( cancellationToken ).ConfigureAwait( false );
-            Handle( call );
+            await HandleAsync( call ).ConfigureAwait( false );
         }
 
         /// <summary>
@@ -134,6 +134,36 @@ namespace SteamKit2
         /// <param name="callbackFunc">The function to invoke with the callback.</param>
         /// <returns>An <see cref="IDisposable"/>. Disposing of the return value will unsubscribe the <paramref name="callbackFunc"/>.</returns>
         public IDisposable Subscribe<TCallback>( Action<TCallback> callbackFunc )
+            where TCallback : CallbackMsg
+        {
+            return Subscribe( JobID.Invalid, callbackFunc );
+        }
+
+        /// <summary>
+        /// Registers the provided <see cref="Func{T, Task}"/> to receive callbacks of type <typeparamref name="TCallback" />.
+        /// </summary>
+        /// <param name="jobID">The <see cref="JobID"/> of the callbacks that should be subscribed to.
+        ///		If this is <see cref="JobID.Invalid"/>, all callbacks of type <typeparamref name="TCallback" /> will be received.</param>
+        /// <param name="callbackFunc">The function to invoke with the callback.</param>
+        /// <typeparam name="TCallback">The type of callback to subscribe to.</typeparam>
+        /// <remarks>When subscribing to asynchronous methods, <see cref="RunWaitCallbackAsync"/> should be used for awaiting callbacks.</remarks>
+        /// <returns>An <see cref="IDisposable"/>. Disposing of the return value will unsubscribe the <paramref name="callbackFunc"/>.</returns>
+        public IDisposable Subscribe<TCallback>( JobID jobID, Func<TCallback, Task> callbackFunc ) where TCallback : CallbackMsg
+        {
+            ArgumentNullException.ThrowIfNull( jobID );
+            ArgumentNullException.ThrowIfNull( callbackFunc );
+
+            var callback = new Internal.AsyncCallback<TCallback>( callbackFunc, this, jobID );
+            return callback;
+        }
+
+        /// <summary>
+        /// Registers the provided <see cref="Func{T, Task}"/> to receive callbacks of type <typeparam name="TCallback" />.
+        /// </summary>
+        /// <param name="callbackFunc">The function to invoke with the callback.</param>
+        /// <remarks>When subscribing to asynchronous methods, <see cref="RunWaitCallbackAsync"/> should be used for awaiting callbacks.</remarks>
+        /// <returns>An <see cref="IDisposable"/>. Disposing of the return value will unsubscribe the <paramref name="callbackFunc"/>.</returns>
+        public IDisposable Subscribe<TCallback>( Func<TCallback, Task> callbackFunc )
             where TCallback : CallbackMsg
         {
             return Subscribe( JobID.Invalid, callbackFunc );
@@ -191,7 +221,28 @@ namespace SteamKit2
             {
                 if ( callback.CallbackType.IsAssignableFrom( type ) )
                 {
-                    callback.Run( call );
+                    var task = callback.Run( call );
+                    task?.Wait();
+                }
+            }
+        }
+
+        async Task HandleAsync( CallbackMsg call )
+        {
+            var callbacks = registeredCallbacks;
+            var type = call.GetType();
+
+            // find handlers interested in this callback
+            foreach ( var callback in callbacks )
+            {
+                if ( callback.CallbackType.IsAssignableFrom( type ) )
+                {
+                    var task = callback.Run( call );
+
+                    if ( task != null )
+                    {
+                        await task.ConfigureAwait( false );
+                    }
                 }
             }
         }
