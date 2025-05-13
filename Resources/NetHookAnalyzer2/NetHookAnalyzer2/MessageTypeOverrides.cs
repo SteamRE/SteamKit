@@ -6,6 +6,7 @@ using SteamKit2.Internal;
 using CSGO = SteamKit2.GC.CSGO.Internal;
 using Dota = SteamKit2.GC.Dota.Internal;
 using TF2 = SteamKit2.GC.TF2.Internal;
+using Deadlock = SteamKit2.GC.Deadlock.Internal;
 
 namespace NetHookAnalyzer2
 {
@@ -78,6 +79,20 @@ namespace NetHookAnalyzer2
                 [(uint)CSGO.ESOMsg.k_ESOMsg_Destroy] = typeof(CSGO.CMsgSOSingleObject),
                 [(uint)CSGO.ESOMsg.k_ESOMsg_Update] = typeof(CSGO.CMsgSOSingleObject),
                 [(uint)CSGO.ESOMsg.k_ESOMsg_UpdateMultiple] = typeof(CSGO.CMsgSOMultipleObjects),
+            },
+            [WellKnownAppIDs.Deadlock] = new Dictionary<uint, Type>
+            {
+                [(uint)Deadlock.EGCBaseClientMsg.k_EMsgGCClientHello] = typeof(Deadlock.CMsgClientHello),
+                [(uint)Deadlock.EGCBaseClientMsg.k_EMsgGCClientWelcome] = typeof(Deadlock.CMsgClientWelcome),
+                [(uint)Deadlock.EGCBaseClientMsg.k_EMsgGCServerHello] = typeof(Deadlock.CMsgClientHello),
+                [(uint)Deadlock.EGCBaseClientMsg.k_EMsgGCServerWelcome] = typeof(Deadlock.CMsgClientWelcome),
+				[(uint)Deadlock.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = typeof(Deadlock.CMsgConnectionStatus),
+				[(uint)Deadlock.EGCBaseClientMsg.k_EMsgGCServerConnectionStatus] = typeof(Deadlock.CMsgConnectionStatus),
+
+				[(uint)Deadlock.ESOMsg.k_ESOMsg_Create] = typeof(Deadlock.CMsgSOSingleObject),
+                [(uint)Deadlock.ESOMsg.k_ESOMsg_Destroy] = typeof(Deadlock.CMsgSOSingleObject),
+                [(uint)Deadlock.ESOMsg.k_ESOMsg_Update] = typeof(Deadlock.CMsgSOSingleObject),
+                [(uint)Deadlock.ESOMsg.k_ESOMsg_UpdateMultiple] = typeof(Deadlock.CMsgSOMultipleObjects),
             },
         };
     }
