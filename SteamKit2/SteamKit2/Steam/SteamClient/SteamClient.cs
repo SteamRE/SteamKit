@@ -340,14 +340,14 @@ namespace SteamKit2
         {
             base.OnClientDisconnected( userInitiated );
 
+            PostCallback( new DisconnectedCallback( userInitiated ) );
+
             // if we are disconnected, cancel all pending jobs
             jobManager.CancelPendingJobs();
 
             jobManager.SetTimeoutsEnabled( false );
 
             ClearHandlerCaches();
-
-            PostCallback( new DisconnectedCallback( userInitiated ) );
         }
 
 
