@@ -19,6 +19,7 @@ namespace SteamKit2
         public IMachineInfoProvider MachineInfoProvider;
         public ProtocolTypes ProtocolTypes;
         public IServerListProvider ServerListProvider;
+        public TimeProvider TimeProvider;
         public EUniverse Universe;
         public Uri WebAPIBaseAddress;
         public string WebAPIKey;
