@@ -405,7 +405,7 @@ namespace SteamKit2.Internal
         {
             if ( protocol.HasFlagsFast( ProtocolTypes.WebSocket ) )
             {
-                return new WebSocketConnection( this );
+                return new WebSocketConnection( this, Configuration.HttpClientFactory() );
             }
             else if ( protocol.HasFlagsFast( ProtocolTypes.Tcp ) )
             {
@@ -472,6 +472,11 @@ namespace SteamKit2.Internal
             connectionRelease.NetMsgReceived -= NetMsgReceived;
             connectionRelease.Connected -= Connected;
             connectionRelease.Disconnected -= Disconnected;
+
+            if ( connectionRelease is IDisposable disposableConnection )
+            {
+                disposableConnection.Dispose();
+            }
 
             heartBeatFunc.Stop();
 
