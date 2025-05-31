@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
 
 namespace SteamKit2
 {
-    partial class WebSocketConnection : IConnection
+    partial class WebSocketConnection : IConnection, IDisposable
     {
-        public WebSocketConnection(ILogContext log)
+        public WebSocketConnection(ILogContext log, HttpMessageInvoker invoker)
         {
             this.log = log ?? throw new ArgumentNullException( nameof( log ) );
+            this.invoker = invoker ?? throw new ArgumentNullException( nameof( invoker ) );
         }
 
         readonly ILogContext log;
+        readonly HttpMessageInvoker invoker;
 
         WebSocketContext? currentContext;
 
@@ -36,7 +39,7 @@ namespace SteamKit2
             }
 
             CurrentEndPoint = newContext.EndPoint;
-            newContext.Start(TimeSpan.FromMilliseconds(timeout));
+            newContext.Start(invoker, TimeSpan.FromMilliseconds(timeout));
         }
 
         public void Disconnect(bool userInitiated)
@@ -71,6 +74,11 @@ namespace SteamKit2
             {
                 specificContext?.Dispose();
             }
+        }
+
+        public void Dispose()
+        {
+            invoker.Dispose();
         }
     }
 }

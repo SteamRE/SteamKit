@@ -2,6 +2,7 @@
 using System.Buffers;
 using System.ComponentModel;
 using System.Net;
+using System.Net.Http;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -32,12 +33,12 @@ namespace SteamKit2
 
             public EndPoint EndPoint { get; }
 
-            public void Start(TimeSpan connectionTimeout)
+            public void Start(HttpMessageInvoker invoker, TimeSpan connectionTimeout)
             {
-                runloopTask = RunCore(connectionTimeout, cts.Token).IgnoringCancellation(cts.Token);
+                runloopTask = RunCore(invoker, connectionTimeout, cts.Token).IgnoringCancellation(cts.Token);
             }
 
-            async Task RunCore(TimeSpan connectionTimeout, CancellationToken cancellationToken)
+            async Task RunCore(HttpMessageInvoker invoker, TimeSpan connectionTimeout, CancellationToken cancellationToken)
             {
                 using (var timeout = new CancellationTokenSource())
                 using (var combinedCancellation = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, timeout.Token))
@@ -46,7 +47,7 @@ namespace SteamKit2
 
                     try
                     {
-                        await socket.ConnectAsync(connectionUri, combinedCancellation.Token).ConfigureAwait(false);
+                        await socket.ConnectAsync(connectionUri, invoker, combinedCancellation.Token).ConfigureAwait(false);
                     }
                     catch (TaskCanceledException) when (timeout.IsCancellationRequested)
                     {
