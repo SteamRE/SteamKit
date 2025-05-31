@@ -49,7 +49,7 @@ namespace Tests
         [Fact]
         public void DefaultHttpClientFactory()
         {
-            using var client = configuration.HttpClientFactory();
+            using var client = configuration.HttpClientFactory( HttpClientPurpose.WebAPI );
             Assert.NotNull( client );
             Assert.IsType<HttpClient>( client );
 
@@ -112,7 +112,7 @@ namespace Tests
                  .WithCellID(123)
                  .WithConnectionTimeout(TimeSpan.FromMinutes(1))
                  .WithDefaultPersonaStateFlags(EClientPersonaStateFlag.SourceID)
-                 .WithHttpClientFactory(() => { var c = new HttpClient(); c.DefaultRequestHeaders.Add("X-SteamKit-Tests", "true"); return c; })
+                 .WithHttpClientFactory((purpose) => { var c = new HttpClient(); c.DefaultRequestHeaders.Add("X-SteamKit-Tests", "true"); return c; })
                  .WithMachineInfoProvider(new CustomMachineInfoProvider())
                  .WithProtocolTypes(ProtocolTypes.WebSocket | ProtocolTypes.Udp)
                  .WithServerListProvider(new CustomServerListProvider())
@@ -144,7 +144,7 @@ namespace Tests
         [Fact]
         public void HttpClientFactoryIsConfigured()
         {
-            using var client = configuration.HttpClientFactory();
+            using var client = configuration.HttpClientFactory( HttpClientPurpose.WebAPI );
             Assert.Equal( "true", client.DefaultRequestHeaders.GetValues( "X-SteamKit-Tests" ).FirstOrDefault() );
         }
 

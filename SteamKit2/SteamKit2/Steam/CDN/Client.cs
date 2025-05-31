@@ -39,7 +39,7 @@ namespace SteamKit2.CDN
         {
             ArgumentNullException.ThrowIfNull( steamClient );
 
-            this.httpClient = steamClient.Configuration.HttpClientFactory();
+            this.httpClient = steamClient.Configuration.HttpClientFactory( HttpClientPurpose.CDN );
         }
 
         /// <summary>

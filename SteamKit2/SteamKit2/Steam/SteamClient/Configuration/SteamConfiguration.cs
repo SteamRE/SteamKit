@@ -11,11 +11,34 @@ using SteamKit2.Discovery;
 namespace SteamKit2
 {
     /// <summary>
-    /// Factory function to create a user-configured HttpClient.
+    /// Specifies the intended purpose or target for an HttpClient to enable appropriate configuration.
+    /// </summary>
+    public enum HttpClientPurpose
+    {
+        /// <summary>
+        /// HttpClient configured for WebSocket communication with CM services.
+        /// </summary>
+        /// <see cref="WebSocketConnection"/>
+        CMWebSocket,
+        /// <summary>
+        /// HttpClient configured for interacting with the Steam Web API.
+        /// </summary>
+        /// <see cref="SteamKit2.WebAPI"/>
+        WebAPI,
+        /// <summary>
+        /// HttpClient configured for downloading game content from the Steam servers.
+        /// </summary>
+        /// <see cref="CDN.Client"/>
+        CDN,
+    }
+
+    /// <summary>
+    /// Factory function to create a user-configured HttpClient based on its intended purpose.
     /// The HttpClient will be disposed of after use.
     /// </summary>
+    /// <param name="purpose">The purpose for which the HttpClient will be used.</param>
     /// <returns>A new <see cref="HttpClient"/> to be used to send HTTP requests.</returns>
-    public delegate HttpClient HttpClientFactory();
+    public delegate HttpClient HttpClientFactory( HttpClientPurpose purpose );
 
     /// <summary>
     /// Configuration object to use.

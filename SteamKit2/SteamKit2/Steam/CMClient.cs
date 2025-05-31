@@ -405,7 +405,7 @@ namespace SteamKit2.Internal
         {
             if ( protocol.HasFlagsFast( ProtocolTypes.WebSocket ) )
             {
-                return new WebSocketConnection( this, Configuration.HttpClientFactory() );
+                return new WebSocketConnection( this, Configuration.HttpClientFactory( HttpClientPurpose.CMWebSocket ) );
             }
             else if ( protocol.HasFlagsFast( ProtocolTypes.Tcp ) )
             {

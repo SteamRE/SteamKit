@@ -116,7 +116,7 @@ namespace SteamKit2
             return this;
         }
 
-        static HttpClient DefaultHttpClientFactory()
+        static HttpClient DefaultHttpClientFactory( HttpClientPurpose purpose )
         {
             var client = new HttpClient();
 
