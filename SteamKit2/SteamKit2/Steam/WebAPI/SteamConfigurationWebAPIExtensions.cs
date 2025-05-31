@@ -36,7 +36,7 @@ namespace SteamKit2
 
         internal static HttpClient GetHttpClientForWebAPI(this SteamConfiguration config)
         {
-            var client = config.HttpClientFactory();
+            var client = config.HttpClientFactory( HttpClientPurpose.WebAPI );
 
             client.BaseAddress = config.WebAPIBaseAddress;
             client.Timeout = WebAPI.DefaultTimeout;

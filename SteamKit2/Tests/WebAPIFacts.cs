@@ -47,7 +47,7 @@ namespace Tests
         [Fact]
         public async Task ThrowsWebAPIRequestExceptionIfRequestUnsuccessful()
         {
-            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( new ServiceUnavailableHttpMessageHandler() ) ) );
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( ( purpose ) => new HttpClient( new ServiceUnavailableHttpMessageHandler() ) ) );
             dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
             await Assert.ThrowsAsync<WebAPIRequestException>( () => ( Task )iface.PerformFooOperation() );
@@ -57,7 +57,7 @@ namespace Tests
         public async Task ThrowsOnIncorrectFormatInArgsProvided()
         {
             using var hookableHandler = new HookableHandler();
-            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
 
             WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
@@ -75,7 +75,7 @@ namespace Tests
         public async Task DoesntThrowWhenCorrectFormatInArgsProvided()
         {
             using var hookableHandler = new HookableHandler();
-            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
 
             WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
@@ -93,7 +93,7 @@ namespace Tests
         public async Task DoesntThrowWhenKeyInArgsProvided()
         {
             using var hookableHandler = new HookableHandler();
-            var configuration = SteamConfiguration.Create( c => c.WithWebAPIKey( "test1" ).WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
+            var configuration = SteamConfiguration.Create( c => c.WithWebAPIKey( "test1" ).WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
 
             WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
@@ -113,7 +113,7 @@ namespace Tests
         public async Task DoesntThrowOnArgumentsReuse()
         {
             using var hookableHandler = new HookableHandler();
-            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
 
             WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
@@ -131,7 +131,7 @@ namespace Tests
         public async Task UsesArgsAsQueryStringParams()
         {
             using var hookableHandler = new HookableHandler();
-            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
 
             dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
@@ -166,7 +166,7 @@ namespace Tests
         public async Task SupportsNullArgsDictionary()
         {
             using var hookableHandler = new HookableHandler();
-            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
 
             dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
@@ -194,7 +194,7 @@ namespace Tests
         public async Task UsesSingleParameterArgumentsDictionary()
         {
             using var hookableHandler = new HookableHandler();
-            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( () => new HttpClient( hookableHandler ) ) );
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
 
             dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
@@ -231,7 +231,7 @@ namespace Tests
         {
             using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c
-                .WithHttpClientFactory( () => new HttpClient( hookableHandler ) )
+                .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) )
                 .WithWebAPIKey( "MySecretApiKey" ) );
 
             dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );

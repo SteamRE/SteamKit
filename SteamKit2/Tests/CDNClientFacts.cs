@@ -15,7 +15,7 @@ namespace Tests
         [Fact]
         public async Task ThrowsSteamKitWebExceptionOnUnsuccessfulWebResponseForManifest()
         {
-            var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( () => new HttpClient( new TeapotHttpMessageHandler() ) ) );
+            var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( ( purpose ) => new HttpClient( new TeapotHttpMessageHandler() ) ) );
             var steam = new SteamClient( configuration );
             using var client = new Client( steam );
             var server = new Server
@@ -33,7 +33,7 @@ namespace Tests
         [Fact]
         public async Task ThrowsSteamKitWebExceptionOnUnsuccessfulWebResponseForChunk()
         {
-            var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( () => new HttpClient( new TeapotHttpMessageHandler() ) ) );
+            var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( ( purpose ) => new HttpClient( new TeapotHttpMessageHandler() ) ) );
             var steam = new SteamClient( configuration );
             using var client = new Client( steam );
             var server = new Server
@@ -55,7 +55,7 @@ namespace Tests
         [Fact]
         public async Task ThrowsWhenNoChunkIDIsSet()
         {
-            var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( () => new HttpClient( new TeapotHttpMessageHandler() ) ) );
+            var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( ( purpose ) => new HttpClient( new TeapotHttpMessageHandler() ) ) );
             var steam = new SteamClient( configuration );
             using var client = new Client( steam );
             var server = new Server
@@ -74,7 +74,7 @@ namespace Tests
         [Fact]
         public async Task ThrowsWhenDestinationBufferSmaller()
         {
-            var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( () => new HttpClient( new TeapotHttpMessageHandler() ) ) );
+            var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( ( purpose ) => new HttpClient( new TeapotHttpMessageHandler() ) ) );
             var steam = new SteamClient( configuration );
             using var client = new Client( steam );
             var server = new Server
@@ -98,7 +98,7 @@ namespace Tests
         [Fact]
         public async Task ThrowsWhenDestinationBufferSmallerWithDepotKey()
         {
-            var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( () => new HttpClient( new TeapotHttpMessageHandler() ) ) );
+            var configuration = SteamConfiguration.Create( x => x.WithHttpClientFactory( ( purpose ) => new HttpClient( new TeapotHttpMessageHandler() ) ) );
             var steam = new SteamClient( configuration );
             using var client = new Client( steam );
             var server = new Server
