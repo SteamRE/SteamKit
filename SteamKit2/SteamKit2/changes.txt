@@ -1,4 +1,17 @@
 ------------------------------------------------------------------------------
+v 3.3.0			June 9 2025
+------------------------------------------------------------------------------
+
+* `Configuration.HttpClientFactory` will now be used for websocket CM connections.
+  * Added `HttpClientPurpose` enum to allow returning different HTTP clients for different purposes.
+* Post client disconnection callback before cancelling async jobs.
+  * Related to the `AsyncJob` change in the previous release.
+* Added some Deadlock protobufs.
+* Updated Steam protocol version.
+* Updated Steam protobufs.
+
+
+------------------------------------------------------------------------------
 v 3.2.0			May 9 2025
 ------------------------------------------------------------------------------
 
