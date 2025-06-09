@@ -692,6 +692,7 @@ namespace SteamKit2.Internal
         k_ECompromiseDetectionType_TicketAction = 4,
         k_ECompromiseDetectionType_MaliciousRefund = 5,
         k_ECompromiseDetectionType_Move2FA = 6,
+        k_ECompromiseDetectionType_DeviceType = 7,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -811,7 +812,27 @@ namespace SteamKit2.Internal
         k_EContentReportReason_OffTopic = 3,
         k_EContentReportReason_Prohibited = 4,
         k_EContentReportReason_Other = 5,
-        k_EContentReportReason_MAX = 6,
+        k_EContentReportReason_CSAM = 6,
+        k_EContentReportReason_Terrorism = 7,
+        k_EContentReportReason_MAX = 8,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EControlledLegalCategoryStatus
+    {
+        k_EControlledLegalCategoryStatus_None = 0,
+        k_EControlledLegalCategoryStatus_Accused = 1,
+        k_EControlledLegalCategoryStatus_Convicted = 2,
+        k_EControlledLegalCategoryStatus_Acquitted = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EContentModeratorLevel
+    {
+        k_EContentModeratorLevel_Any = 0,
+        k_EContentModeratorLevel_Supervisor = 1,
+        k_EContentModeratorLevel_Valve = 10,
+        k_EContentModeratorLevel_MAX = 11,
     }
 
 }

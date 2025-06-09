@@ -924,6 +924,17 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetwatch_tv_unique_secret_code() => __pbn__watch_tv_unique_secret_code = null;
         private ulong? __pbn__watch_tv_unique_secret_code;
 
+        [global::ProtoBuf.ProtoMember(8)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string broadcast_url
+        {
+            get => __pbn__broadcast_url ?? "";
+            set => __pbn__broadcast_url = value;
+        }
+        public bool ShouldSerializebroadcast_url() => __pbn__broadcast_url != null;
+        public void Resetbroadcast_url() => __pbn__broadcast_url = null;
+        private string __pbn__broadcast_url;
+
         [global::ProtoBuf.ProtoContract()]
         public enum WatchGameResult
         {

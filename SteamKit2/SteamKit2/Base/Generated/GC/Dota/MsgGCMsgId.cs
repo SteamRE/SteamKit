@@ -689,7 +689,6 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgClientToGCRequestAccountGuildPersonaInfoBatch = 8729,
         k_EMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse = 8730,
         k_EMsgGCToClientUnderDraftGoldUpdated = 8731,
-        k_EMsgGCToServerRecordTrainingData = 8732,
         k_EMsgSignOutBounties = 8733,
         k_EMsgLobbyFeaturedGamemodeProgress = 8734,
         k_EMsgLobbyGauntletProgress = 8735,

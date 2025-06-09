@@ -11114,6 +11114,494 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CDotaMsgStructuredTooltipProperties : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string ability_name_loc_token
+        {
+            get => __pbn__ability_name_loc_token ?? "";
+            set => __pbn__ability_name_loc_token = value;
+        }
+        public bool ShouldSerializeability_name_loc_token() => __pbn__ability_name_loc_token != null;
+        public void Resetability_name_loc_token() => __pbn__ability_name_loc_token = null;
+        private string __pbn__ability_name_loc_token;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string ability_category_loc_token
+        {
+            get => __pbn__ability_category_loc_token ?? "";
+            set => __pbn__ability_category_loc_token = value;
+        }
+        public bool ShouldSerializeability_category_loc_token() => __pbn__ability_category_loc_token != null;
+        public void Resetability_category_loc_token() => __pbn__ability_category_loc_token = null;
+        private string __pbn__ability_category_loc_token;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public int ability_level
+        {
+            get => __pbn__ability_level.GetValueOrDefault();
+            set => __pbn__ability_level = value;
+        }
+        public bool ShouldSerializeability_level() => __pbn__ability_level != null;
+        public void Resetability_level() => __pbn__ability_level = null;
+        private int? __pbn__ability_level;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public int current_mana_cost
+        {
+            get => __pbn__current_mana_cost.GetValueOrDefault();
+            set => __pbn__current_mana_cost = value;
+        }
+        public bool ShouldSerializecurrent_mana_cost() => __pbn__current_mana_cost != null;
+        public void Resetcurrent_mana_cost() => __pbn__current_mana_cost = null;
+        private int? __pbn__current_mana_cost;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public int current_health_cost
+        {
+            get => __pbn__current_health_cost.GetValueOrDefault();
+            set => __pbn__current_health_cost = value;
+        }
+        public bool ShouldSerializecurrent_health_cost() => __pbn__current_health_cost != null;
+        public void Resetcurrent_health_cost() => __pbn__current_health_cost = null;
+        private int? __pbn__current_health_cost;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public float current_cooldown
+        {
+            get => __pbn__current_cooldown.GetValueOrDefault();
+            set => __pbn__current_cooldown = value;
+        }
+        public bool ShouldSerializecurrent_cooldown() => __pbn__current_cooldown != null;
+        public void Resetcurrent_cooldown() => __pbn__current_cooldown = null;
+        private float? __pbn__current_cooldown;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string summary_description_loc_token
+        {
+            get => __pbn__summary_description_loc_token ?? "";
+            set => __pbn__summary_description_loc_token = value;
+        }
+        public bool ShouldSerializesummary_description_loc_token() => __pbn__summary_description_loc_token != null;
+        public void Resetsummary_description_loc_token() => __pbn__summary_description_loc_token = null;
+        private string __pbn__summary_description_loc_token;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string summary_description_level_up_loc_token
+        {
+            get => __pbn__summary_description_level_up_loc_token ?? "";
+            set => __pbn__summary_description_level_up_loc_token = value;
+        }
+        public bool ShouldSerializesummary_description_level_up_loc_token() => __pbn__summary_description_level_up_loc_token != null;
+        public void Resetsummary_description_level_up_loc_token() => __pbn__summary_description_level_up_loc_token = null;
+        private string __pbn__summary_description_level_up_loc_token;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public global::System.Collections.Generic.List<SummaryDescriptionEmbedValue> summary_description_embed_values { get; } = new global::System.Collections.Generic.List<SummaryDescriptionEmbedValue>();
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public FacetDisplayProperties summary_description_facet { get; set; }
+
+        [global::ProtoBuf.ProtoMember(20)]
+        public global::System.Collections.Generic.List<TooltipContentChunk> chunks { get; } = new global::System.Collections.Generic.List<TooltipContentChunk>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class AttributeValueValue : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public float value
+            {
+                get => __pbn__value.GetValueOrDefault();
+                set => __pbn__value = value;
+            }
+            public bool ShouldSerializevalue() => __pbn__value != null;
+            public void Resetvalue() => __pbn__value = null;
+            private float? __pbn__value;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public bool is_active_value
+            {
+                get => __pbn__is_active_value.GetValueOrDefault();
+                set => __pbn__is_active_value = value;
+            }
+            public bool ShouldSerializeis_active_value() => __pbn__is_active_value != null;
+            public void Resetis_active_value() => __pbn__is_active_value = null;
+            private bool? __pbn__is_active_value;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class AttributeValue_Single : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public CDotaMsgStructuredTooltipProperties.AttributeValueValue single_value { get; set; }
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class AttributeValue_Variable : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public global::System.Collections.Generic.List<CDotaMsgStructuredTooltipProperties.AttributeValueValue> values { get; } = new global::System.Collections.Generic.List<CDotaMsgStructuredTooltipProperties.AttributeValueValue>();
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class AttributeValue_Delta : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public CDotaMsgStructuredTooltipProperties.AttributeValueValue prev { get; set; }
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public CDotaMsgStructuredTooltipProperties.AttributeValueValue next { get; set; }
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class AttributeValue : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public CDotaMsgStructuredTooltipProperties.AttributeValue_Single single
+            {
+                get => __pbn__attr_value.Is(1) ? ((CDotaMsgStructuredTooltipProperties.AttributeValue_Single)__pbn__attr_value.Object) : default;
+                set => __pbn__attr_value = new global::ProtoBuf.DiscriminatedUnionObject(1, value);
+            }
+            public bool ShouldSerializesingle() => __pbn__attr_value.Is(1);
+            public void Resetsingle() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__attr_value, 1);
+
+            private global::ProtoBuf.DiscriminatedUnionObject __pbn__attr_value;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public CDotaMsgStructuredTooltipProperties.AttributeValue_Variable variable
+            {
+                get => __pbn__attr_value.Is(2) ? ((CDotaMsgStructuredTooltipProperties.AttributeValue_Variable)__pbn__attr_value.Object) : default;
+                set => __pbn__attr_value = new global::ProtoBuf.DiscriminatedUnionObject(2, value);
+            }
+            public bool ShouldSerializevariable() => __pbn__attr_value.Is(2);
+            public void Resetvariable() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__attr_value, 2);
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public CDotaMsgStructuredTooltipProperties.AttributeValue_Delta delta
+            {
+                get => __pbn__attr_value.Is(3) ? ((CDotaMsgStructuredTooltipProperties.AttributeValue_Delta)__pbn__attr_value.Object) : default;
+                set => __pbn__attr_value = new global::ProtoBuf.DiscriminatedUnionObject(3, value);
+            }
+            public bool ShouldSerializedelta() => __pbn__attr_value.Is(3);
+            public void Resetdelta() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__attr_value, 3);
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class FacetDisplayProperties : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string facet_name_loc_token
+            {
+                get => __pbn__facet_name_loc_token ?? "";
+                set => __pbn__facet_name_loc_token = value;
+            }
+            public bool ShouldSerializefacet_name_loc_token() => __pbn__facet_name_loc_token != null;
+            public void Resetfacet_name_loc_token() => __pbn__facet_name_loc_token = null;
+            private string __pbn__facet_name_loc_token;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string facet_desc_loc_token
+            {
+                get => __pbn__facet_desc_loc_token ?? "";
+                set => __pbn__facet_desc_loc_token = value;
+            }
+            public bool ShouldSerializefacet_desc_loc_token() => __pbn__facet_desc_loc_token != null;
+            public void Resetfacet_desc_loc_token() => __pbn__facet_desc_loc_token = null;
+            private string __pbn__facet_desc_loc_token;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string facet_icon_style_name
+            {
+                get => __pbn__facet_icon_style_name ?? "";
+                set => __pbn__facet_icon_style_name = value;
+            }
+            public bool ShouldSerializefacet_icon_style_name() => __pbn__facet_icon_style_name != null;
+            public void Resetfacet_icon_style_name() => __pbn__facet_icon_style_name = null;
+            private string __pbn__facet_icon_style_name;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string facet_color_style_name
+            {
+                get => __pbn__facet_color_style_name ?? "";
+                set => __pbn__facet_color_style_name = value;
+            }
+            public bool ShouldSerializefacet_color_style_name() => __pbn__facet_color_style_name != null;
+            public void Resetfacet_color_style_name() => __pbn__facet_color_style_name = null;
+            private string __pbn__facet_color_style_name;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string facet_gradient_style_name
+            {
+                get => __pbn__facet_gradient_style_name ?? "";
+                set => __pbn__facet_gradient_style_name = value;
+            }
+            public bool ShouldSerializefacet_gradient_style_name() => __pbn__facet_gradient_style_name != null;
+            public void Resetfacet_gradient_style_name() => __pbn__facet_gradient_style_name = null;
+            private string __pbn__facet_gradient_style_name;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Attribute : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string name_loc_token
+            {
+                get => __pbn__name_loc_token ?? "";
+                set => __pbn__name_loc_token = value;
+            }
+            public bool ShouldSerializename_loc_token() => __pbn__name_loc_token != null;
+            public void Resetname_loc_token() => __pbn__name_loc_token = null;
+            private string __pbn__name_loc_token;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue(CDotaMsgStructuredTooltipProperties.EAttributeType.kUnknown)]
+            public CDotaMsgStructuredTooltipProperties.EAttributeType type
+            {
+                get => __pbn__type ?? CDotaMsgStructuredTooltipProperties.EAttributeType.kUnknown;
+                set => __pbn__type = value;
+            }
+            public bool ShouldSerializetype() => __pbn__type != null;
+            public void Resettype() => __pbn__type = null;
+            private CDotaMsgStructuredTooltipProperties.EAttributeType? __pbn__type;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public CDotaMsgStructuredTooltipProperties.AttributeValue value { get; set; }
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public CDotaMsgStructuredTooltipProperties.FacetDisplayProperties facet { get; set; }
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class AttributeGroupDesc_Basic : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class AttributeGroupDesc_Specific : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string title_loc_token
+            {
+                get => __pbn__title_loc_token ?? "";
+                set => __pbn__title_loc_token = value;
+            }
+            public bool ShouldSerializetitle_loc_token() => __pbn__title_loc_token != null;
+            public void Resettitle_loc_token() => __pbn__title_loc_token = null;
+            private string __pbn__title_loc_token;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string desc_loc_token
+            {
+                get => __pbn__desc_loc_token ?? "";
+                set => __pbn__desc_loc_token = value;
+            }
+            public bool ShouldSerializedesc_loc_token() => __pbn__desc_loc_token != null;
+            public void Resetdesc_loc_token() => __pbn__desc_loc_token = null;
+            private string __pbn__desc_loc_token;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class AttributeGroupDesc_Facet : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public CDotaMsgStructuredTooltipProperties.FacetDisplayProperties facet { get; set; }
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class AttributeGroupDescription : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Basic basic
+            {
+                get => __pbn__attr_group_desc.Is(1) ? ((CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Basic)__pbn__attr_group_desc.Object) : default;
+                set => __pbn__attr_group_desc = new global::ProtoBuf.DiscriminatedUnionObject(1, value);
+            }
+            public bool ShouldSerializebasic() => __pbn__attr_group_desc.Is(1);
+            public void Resetbasic() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__attr_group_desc, 1);
+
+            private global::ProtoBuf.DiscriminatedUnionObject __pbn__attr_group_desc;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Specific specific
+            {
+                get => __pbn__attr_group_desc.Is(2) ? ((CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Specific)__pbn__attr_group_desc.Object) : default;
+                set => __pbn__attr_group_desc = new global::ProtoBuf.DiscriminatedUnionObject(2, value);
+            }
+            public bool ShouldSerializespecific() => __pbn__attr_group_desc.Is(2);
+            public void Resetspecific() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__attr_group_desc, 2);
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Facet facet
+            {
+                get => __pbn__attr_group_desc.Is(3) ? ((CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Facet)__pbn__attr_group_desc.Object) : default;
+                set => __pbn__attr_group_desc = new global::ProtoBuf.DiscriminatedUnionObject(3, value);
+            }
+            public bool ShouldSerializefacet() => __pbn__attr_group_desc.Is(3);
+            public void Resetfacet() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__attr_group_desc, 3);
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class AttributeGroup : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public CDotaMsgStructuredTooltipProperties.AttributeGroupDescription desc { get; set; }
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public global::System.Collections.Generic.List<CDotaMsgStructuredTooltipProperties.Attribute> attributes { get; } = new global::System.Collections.Generic.List<CDotaMsgStructuredTooltipProperties.Attribute>();
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class ContentChunk_AttributeGroup : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public global::System.Collections.Generic.List<CDotaMsgStructuredTooltipProperties.AttributeGroup> groups { get; } = new global::System.Collections.Generic.List<CDotaMsgStructuredTooltipProperties.AttributeGroup>();
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class TooltipContentChunk : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public CDotaMsgStructuredTooltipProperties.ContentChunk_AttributeGroup attribute_group { get; set; }
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class SummaryDescriptionEmbedValue : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string name
+            {
+                get => __pbn__name ?? "";
+                set => __pbn__name = value;
+            }
+            public bool ShouldSerializename() => __pbn__name != null;
+            public void Resetname() => __pbn__name = null;
+            private string __pbn__name;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue(CDotaMsgStructuredTooltipProperties.EAttributeType.kUnknown)]
+            public CDotaMsgStructuredTooltipProperties.EAttributeType type
+            {
+                get => __pbn__type ?? CDotaMsgStructuredTooltipProperties.EAttributeType.kUnknown;
+                set => __pbn__type = value;
+            }
+            public bool ShouldSerializetype() => __pbn__type != null;
+            public void Resettype() => __pbn__type = null;
+            private CDotaMsgStructuredTooltipProperties.EAttributeType? __pbn__type;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public CDotaMsgStructuredTooltipProperties.AttributeValue value { get; set; }
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EAttributeType
+        {
+            kUnknown = 0,
+            kDuration = 1,
+            kManaCost = 2,
+            kHealthCost = 3,
+            kCastRange = 4,
+            kAreaOfEffectRadius = 5,
+            kPhysicalDamage = 6,
+            kMagicalDamage = 7,
+            kPureDamage = 8,
+            kCooldown = 9,
+            kDebuffPercentage = 10,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ESpecialPingValue
     {
         k_ESpecialPingValue_NoData = 16382,

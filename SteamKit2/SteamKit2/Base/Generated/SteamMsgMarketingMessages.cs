@@ -1082,37 +1082,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMarketingMessages_GetMarketingMessagesViewerRangeStats_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<CMarketingMessageHourlyStats> stats { get; } = new global::System.Collections.Generic.List<CMarketingMessageHourlyStats>();
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMarketingMessages_GetMarketingMessageClickedStats_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong gid
-        {
-            get => __pbn__gid.GetValueOrDefault();
-            set => __pbn__gid = value;
-        }
-        public bool ShouldSerializegid() => __pbn__gid != null;
-        public void Resetgid() => __pbn__gid = null;
-        private ulong? __pbn__gid;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMarketingMessageClickedHourlyStats : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1170,6 +1139,40 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeclick_location() => __pbn__click_location != null;
         public void Resetclick_location() => __pbn__click_location = null;
         private EMarketingMessageClickLocation? __pbn__click_location;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_GetMarketingMessagesViewerRangeStats_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CMarketingMessageHourlyStats> stats { get; } = new global::System.Collections.Generic.List<CMarketingMessageHourlyStats>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<CMarketingMessageClickedHourlyStats> clicked_stats { get; } = new global::System.Collections.Generic.List<CMarketingMessageClickedHourlyStats>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMarketingMessages_GetMarketingMessageClickedStats_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong gid
+        {
+            get => __pbn__gid.GetValueOrDefault();
+            set => __pbn__gid = value;
+        }
+        public bool ShouldSerializegid() => __pbn__gid != null;
+        public void Resetgid() => __pbn__gid = null;
+        private ulong? __pbn__gid;
 
     }
 

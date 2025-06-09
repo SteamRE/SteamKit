@@ -1279,6 +1279,22 @@ namespace SteamKit2.Internal
         public void Resetip() => __pbn__ip = null;
         private uint? __pbn__ip;
 
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint flags
+        {
+            get => __pbn__flags.GetValueOrDefault();
+            set => __pbn__flags = value;
+        }
+        public bool ShouldSerializeflags() => __pbn__flags != null;
+        public void Resetflags() => __pbn__flags = null;
+        private uint? __pbn__flags;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EFlag
+        {
+            VALVE_DS = 1,
+        }
+
     }
 
     [global::ProtoBuf.ProtoContract()]

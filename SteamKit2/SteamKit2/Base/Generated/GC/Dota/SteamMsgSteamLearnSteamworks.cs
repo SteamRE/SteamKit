@@ -586,6 +586,107 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgInferenceIterateBeamSearch : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint beam_length
+        {
+            get => __pbn__beam_length.GetValueOrDefault();
+            set => __pbn__beam_length = value;
+        }
+        public bool ShouldSerializebeam_length() => __pbn__beam_length != null;
+        public void Resetbeam_length() => __pbn__beam_length = null;
+        private uint? __pbn__beam_length;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint beam_width
+        {
+            get => __pbn__beam_width.GetValueOrDefault();
+            set => __pbn__beam_width = value;
+        }
+        public bool ShouldSerializebeam_width() => __pbn__beam_width != null;
+        public void Resetbeam_width() => __pbn__beam_width = null;
+        private uint? __pbn__beam_width;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public float item_decay
+        {
+            get => __pbn__item_decay.GetValueOrDefault();
+            set => __pbn__item_decay = value;
+        }
+        public bool ShouldSerializeitem_decay() => __pbn__item_decay != null;
+        public void Resetitem_decay() => __pbn__item_decay = null;
+        private float? __pbn__item_decay;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint next_item_count
+        {
+            get => __pbn__next_item_count.GetValueOrDefault();
+            set => __pbn__next_item_count = value;
+        }
+        public bool ShouldSerializenext_item_count() => __pbn__next_item_count != null;
+        public void Resetnext_item_count() => __pbn__next_item_count = null;
+        private uint? __pbn__next_item_count;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public global::System.Collections.Generic.List<CustomItemScalar> item_scalars { get; } = new global::System.Collections.Generic.List<CustomItemScalar>();
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint item_sequence_end
+        {
+            get => __pbn__item_sequence_end.GetValueOrDefault();
+            set => __pbn__item_sequence_end = value;
+        }
+        public bool ShouldSerializeitem_sequence_end() => __pbn__item_sequence_end != null;
+        public void Resetitem_sequence_end() => __pbn__item_sequence_end = null;
+        private uint? __pbn__item_sequence_end;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public float item_sequence_end_threshold
+        {
+            get => __pbn__item_sequence_end_threshold.GetValueOrDefault();
+            set => __pbn__item_sequence_end_threshold = value;
+        }
+        public bool ShouldSerializeitem_sequence_end_threshold() => __pbn__item_sequence_end_threshold != null;
+        public void Resetitem_sequence_end_threshold() => __pbn__item_sequence_end_threshold = null;
+        private float? __pbn__item_sequence_end_threshold;
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class CustomItemScalar : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint item
+            {
+                get => __pbn__item.GetValueOrDefault();
+                set => __pbn__item = value;
+            }
+            public bool ShouldSerializeitem() => __pbn__item != null;
+            public void Resetitem() => __pbn__item = null;
+            private uint? __pbn__item;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public float scale
+            {
+                get => __pbn__scale.GetValueOrDefault();
+                set => __pbn__scale = value;
+            }
+            public bool ShouldSerializescale() => __pbn__scale != null;
+            public void Resetscale() => __pbn__scale = null;
+            private float? __pbn__scale;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgSteamLearn_Inference_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -638,6 +739,23 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(7)]
         public global::System.Collections.Generic.List<float> additional_data { get; } = new global::System.Collections.Generic.List<float>();
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public global::System.Collections.Generic.List<ulong> keys { get; } = new global::System.Collections.Generic.List<ulong>();
+
+        [global::ProtoBuf.ProtoMember(9)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string named_inference
+        {
+            get => __pbn__named_inference ?? "";
+            set => __pbn__named_inference = value;
+        }
+        public bool ShouldSerializenamed_inference() => __pbn__named_inference != null;
+        public void Resetnamed_inference() => __pbn__named_inference = null;
+        private string __pbn__named_inference;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public CMsgInferenceIterateBeamSearch iterate_beam_search { get; set; }
 
     }
 

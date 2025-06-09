@@ -263,16 +263,6 @@ namespace SteamKit2.Internal
         public void Resetsysid() => __pbn__sysid = null;
         private uint? __pbn__sysid;
 
-        [global::ProtoBuf.ProtoMember(21)]
-        public ulong trace_tag
-        {
-            get => __pbn__trace_tag.GetValueOrDefault();
-            set => __pbn__trace_tag = value;
-        }
-        public bool ShouldSerializetrace_tag() => __pbn__trace_tag != null;
-        public void Resettrace_tag() => __pbn__trace_tag = null;
-        private ulong? __pbn__trace_tag;
-
         [global::ProtoBuf.ProtoMember(25)]
         public uint webapi_key_id
         {
@@ -428,6 +418,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeis_valveds() => __pbn__is_valveds != null;
         public void Resetis_valveds() => __pbn__is_valveds = null;
         private bool? __pbn__is_valveds;
+
+        [global::ProtoBuf.ProtoMember(45, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong trace_tag
+        {
+            get => __pbn__trace_tag.GetValueOrDefault();
+            set => __pbn__trace_tag = value;
+        }
+        public bool ShouldSerializetrace_tag() => __pbn__trace_tag != null;
+        public void Resettrace_tag() => __pbn__trace_tag = null;
+        private ulong? __pbn__trace_tag;
 
         [global::ProtoBuf.ProtoMember(15)]
         public uint ip

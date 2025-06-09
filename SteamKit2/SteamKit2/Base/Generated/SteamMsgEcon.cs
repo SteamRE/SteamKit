@@ -604,6 +604,26 @@ namespace SteamKit2.Internal
         public void Resetsealed() => __pbn__sealed = null;
         private bool? __pbn__sealed;
 
+        [global::ProtoBuf.ProtoMember(33)]
+        public ulong contextid
+        {
+            get => __pbn__contextid.GetValueOrDefault();
+            set => __pbn__contextid = value;
+        }
+        public bool ShouldSerializecontextid() => __pbn__contextid != null;
+        public void Resetcontextid() => __pbn__contextid = null;
+        private ulong? __pbn__contextid;
+
+        [global::ProtoBuf.ProtoMember(34)]
+        public ulong assetid
+        {
+            get => __pbn__assetid.GetValueOrDefault();
+            set => __pbn__assetid = value;
+        }
+        public bool ShouldSerializeassetid() => __pbn__assetid != null;
+        public void Resetassetid() => __pbn__assetid = null;
+        private ulong? __pbn__assetid;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

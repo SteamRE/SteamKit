@@ -2195,6 +2195,16 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<CSODOTALobby.CExtraMsg> extra_startup_messages { get; } = new global::System.Collections.Generic.List<CSODOTALobby.CExtraMsg>();
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool broadcast_active
+        {
+            get => __pbn__broadcast_active.GetValueOrDefault();
+            set => __pbn__broadcast_active = value;
+        }
+        public bool ShouldSerializebroadcast_active() => __pbn__broadcast_active != null;
+        public void Resetbroadcast_active() => __pbn__broadcast_active = null;
+        private bool? __pbn__broadcast_active;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2251,6 +2261,17 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(3)]
         public global::System.Collections.Generic.List<CMsgLobbyEventPoints> lobby_event_points { get; } = new global::System.Collections.Generic.List<CMsgLobbyEventPoints>();
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string broadcast_url
+        {
+            get => __pbn__broadcast_url ?? "";
+            set => __pbn__broadcast_url = value;
+        }
+        public bool ShouldSerializebroadcast_url() => __pbn__broadcast_url != null;
+        public void Resetbroadcast_url() => __pbn__broadcast_url = null;
+        private string __pbn__broadcast_url;
 
     }
 

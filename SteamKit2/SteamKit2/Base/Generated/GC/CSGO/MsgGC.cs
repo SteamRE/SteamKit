@@ -5539,6 +5539,16 @@ namespace SteamKit2.GC.CSGO.Internal
             public void Resetpattern() => __pbn__pattern = null;
             private uint? __pbn__pattern;
 
+            [global::ProtoBuf.ProtoMember(11)]
+            public uint highlight_reel
+            {
+                get => __pbn__highlight_reel.GetValueOrDefault();
+                set => __pbn__highlight_reel = value;
+            }
+            public bool ShouldSerializehighlight_reel() => __pbn__highlight_reel != null;
+            public void Resethighlight_reel() => __pbn__highlight_reel = null;
+            private uint? __pbn__highlight_reel;
+
         }
 
     }

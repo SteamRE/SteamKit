@@ -1178,6 +1178,17 @@ namespace SteamKit2.Internal
             public void Resetsteam_deck_compat_category() => __pbn__steam_deck_compat_category = null;
             private ESteamDeckCompatibilityCategory? __pbn__steam_deck_compat_category;
 
+            [global::ProtoBuf.ProtoMember(12)]
+            [global::System.ComponentModel.DefaultValue(ESteamOSCompatibilityCategory.k_ESteamOSCompatibilityCategory_Unknown)]
+            public ESteamOSCompatibilityCategory steam_os_compat_category
+            {
+                get => __pbn__steam_os_compat_category ?? ESteamOSCompatibilityCategory.k_ESteamOSCompatibilityCategory_Unknown;
+                set => __pbn__steam_os_compat_category = value;
+            }
+            public bool ShouldSerializesteam_os_compat_category() => __pbn__steam_os_compat_category != null;
+            public void Resetsteam_os_compat_category() => __pbn__steam_os_compat_category = null;
+            private ESteamOSCompatibilityCategory? __pbn__steam_os_compat_category;
+
             [global::ProtoBuf.ProtoContract()]
             public partial class VRSupport : global::ProtoBuf.IExtensible
             {

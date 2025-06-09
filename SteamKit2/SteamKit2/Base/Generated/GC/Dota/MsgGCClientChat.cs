@@ -716,6 +716,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetrequested_hero_id() => __pbn__requested_hero_id = null;
         private int? __pbn__requested_hero_id;
 
+        [global::ProtoBuf.ProtoMember(45)]
+        public ulong requested_hero_facet_key
+        {
+            get => __pbn__requested_hero_facet_key.GetValueOrDefault();
+            set => __pbn__requested_hero_facet_key = value;
+        }
+        public bool ShouldSerializerequested_hero_facet_key() => __pbn__requested_hero_facet_key != null;
+        public void Resetrequested_hero_facet_key() => __pbn__requested_hero_facet_key = null;
+        private ulong? __pbn__requested_hero_facet_key;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class DiceRoll : global::ProtoBuf.IExtensible
         {

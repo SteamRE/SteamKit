@@ -1895,6 +1895,36 @@ namespace SteamKit2.GC.Deadlock.Internal
                 public void Resetteam_bonus() => __pbn__team_bonus = null;
                 private uint? __pbn__team_bonus;
 
+                [global::ProtoBuf.ProtoMember(13)]
+                public uint ability_assassinate
+                {
+                    get => __pbn__ability_assassinate.GetValueOrDefault();
+                    set => __pbn__ability_assassinate = value;
+                }
+                public bool ShouldSerializeability_assassinate() => __pbn__ability_assassinate != null;
+                public void Resetability_assassinate() => __pbn__ability_assassinate = null;
+                private uint? __pbn__ability_assassinate;
+
+                [global::ProtoBuf.ProtoMember(14)]
+                public uint item_trophy_collector
+                {
+                    get => __pbn__item_trophy_collector.GetValueOrDefault();
+                    set => __pbn__item_trophy_collector = value;
+                }
+                public bool ShouldSerializeitem_trophy_collector() => __pbn__item_trophy_collector != null;
+                public void Resetitem_trophy_collector() => __pbn__item_trophy_collector = null;
+                private uint? __pbn__item_trophy_collector;
+
+                [global::ProtoBuf.ProtoMember(15)]
+                public uint item_cultist_sacrifice
+                {
+                    get => __pbn__item_cultist_sacrifice.GetValueOrDefault();
+                    set => __pbn__item_cultist_sacrifice = value;
+                }
+                public bool ShouldSerializeitem_cultist_sacrifice() => __pbn__item_cultist_sacrifice != null;
+                public void Resetitem_cultist_sacrifice() => __pbn__item_cultist_sacrifice = null;
+                private uint? __pbn__item_cultist_sacrifice;
+
             }
 
         }

@@ -4267,6 +4267,9 @@ namespace SteamKit2.GC.Deadlock.Internal
         public void Resetorigin_build_id() => __pbn__origin_build_id = null;
         private uint? __pbn__origin_build_id;
 
+        [global::ProtoBuf.ProtoMember(10)]
+        public Details_V0 details { get; set; }
+
         [global::ProtoBuf.ProtoMember(11)]
         public global::System.Collections.Generic.List<uint> tags { get; } = new global::System.Collections.Generic.List<uint>();
 
@@ -4280,8 +4283,15 @@ namespace SteamKit2.GC.Deadlock.Internal
         public void Resetdevelopment_build() => __pbn__development_build = null;
         private bool? __pbn__development_build;
 
-        [global::ProtoBuf.ProtoMember(10)]
-        public Details_V0 details { get; set; }
+        [global::ProtoBuf.ProtoMember(13)]
+        public uint publish_timestamp
+        {
+            get => __pbn__publish_timestamp.GetValueOrDefault();
+            set => __pbn__publish_timestamp = value;
+        }
+        public bool ShouldSerializepublish_timestamp() => __pbn__publish_timestamp != null;
+        public void Resetpublish_timestamp() => __pbn__publish_timestamp = null;
+        private uint? __pbn__publish_timestamp;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class BuildModEntry : global::ProtoBuf.IExtensible

@@ -963,6 +963,69 @@ namespace SteamKit2.WebUI.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_GetBotReviewScoreForRecommendation_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<ulong> recommendation_ids { get; } = new global::System.Collections.Generic.List<ulong>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool force_rerun
+        {
+            get => __pbn__force_rerun.GetValueOrDefault();
+            set => __pbn__force_rerun = value;
+        }
+        public bool ShouldSerializeforce_rerun() => __pbn__force_rerun != null;
+        public void Resetforce_rerun() => __pbn__force_rerun = null;
+        private bool? __pbn__force_rerun;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_GetBotReviewScoreForRecommendation_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CCommunity_GetBotReviewScoreForRecommendation_Response_BotReviewScoreEntry> bot_review_score { get; } = new global::System.Collections.Generic.List<CCommunity_GetBotReviewScoreForRecommendation_Response_BotReviewScoreEntry>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_GetBotReviewScoreForRecommendation_Response_BotReviewScoreEntry : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong key
+        {
+            get => __pbn__key.GetValueOrDefault();
+            set => __pbn__key = value;
+        }
+        public bool ShouldSerializekey() => __pbn__key != null;
+        public void Resetkey() => __pbn__key = null;
+        private ulong? __pbn__key;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint value
+        {
+            get => __pbn__value.GetValueOrDefault();
+            set => __pbn__value = value;
+        }
+        public bool ShouldSerializevalue() => __pbn__value != null;
+        public void Resetvalue() => __pbn__value = null;
+        private uint? __pbn__value;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CCommunity_GetClanAnnouncementVoteForUser_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1752,6 +1815,106 @@ namespace SteamKit2.WebUI.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_HideAndReportComment_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong gidfeature
+        {
+            get => __pbn__gidfeature.GetValueOrDefault();
+            set => __pbn__gidfeature = value;
+        }
+        public bool ShouldSerializegidfeature() => __pbn__gidfeature != null;
+        public void Resetgidfeature() => __pbn__gidfeature = null;
+        private ulong? __pbn__gidfeature;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong gidfeature2
+        {
+            get => __pbn__gidfeature2.GetValueOrDefault();
+            set => __pbn__gidfeature2 = value;
+        }
+        public bool ShouldSerializegidfeature2() => __pbn__gidfeature2 != null;
+        public void Resetgidfeature2() => __pbn__gidfeature2 = null;
+        private ulong? __pbn__gidfeature2;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong gidcomment
+        {
+            get => __pbn__gidcomment.GetValueOrDefault();
+            set => __pbn__gidcomment = value;
+        }
+        public bool ShouldSerializegidcomment() => __pbn__gidcomment != null;
+        public void Resetgidcomment() => __pbn__gidcomment = null;
+        private ulong? __pbn__gidcomment;
+
+        [global::ProtoBuf.ProtoMember(4, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string commentthreadtype
+        {
+            get => __pbn__commentthreadtype ?? "";
+            set => __pbn__commentthreadtype = value;
+        }
+        public bool ShouldSerializecommentthreadtype() => __pbn__commentthreadtype != null;
+        public void Resetcommentthreadtype() => __pbn__commentthreadtype = null;
+        private string __pbn__commentthreadtype;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool hide
+        {
+            get => __pbn__hide.GetValueOrDefault();
+            set => __pbn__hide = value;
+        }
+        public bool ShouldSerializehide() => __pbn__hide != null;
+        public void Resethide() => __pbn__hide = null;
+        private bool? __pbn__hide;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public int report_reason
+        {
+            get => __pbn__report_reason.GetValueOrDefault();
+            set => __pbn__report_reason = value;
+        }
+        public bool ShouldSerializereport_reason() => __pbn__report_reason != null;
+        public void Resetreport_reason() => __pbn__report_reason = null;
+        private int? __pbn__report_reason;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string report_text
+        {
+            get => __pbn__report_text ?? "";
+            set => __pbn__report_text = value;
+        }
+        public bool ShouldSerializereport_text() => __pbn__report_text != null;
+        public void Resetreport_text() => __pbn__report_text = null;
+        private string __pbn__report_text;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_HideAndReportComment_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CCommunity_MarkPartnerEventsForUser_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2332,6 +2495,66 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_SetRecommendationBotReviewStatus_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CCommunity_SetRecommendationBotReviewStatus_Request_ReviewLabel> review_labels { get; } = new global::System.Collections.Generic.List<CCommunity_SetRecommendationBotReviewStatus_Request_ReviewLabel>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_SetRecommendationBotReviewStatus_Request_ReviewLabel : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong recommendationid
+        {
+            get => __pbn__recommendationid.GetValueOrDefault();
+            set => __pbn__recommendationid = value;
+        }
+        public bool ShouldSerializerecommendationid() => __pbn__recommendationid != null;
+        public void Resetrecommendationid() => __pbn__recommendationid = null;
+        private ulong? __pbn__recommendationid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool is_bot_review
+        {
+            get => __pbn__is_bot_review.GetValueOrDefault();
+            set => __pbn__is_bot_review = value;
+        }
+        public bool ShouldSerializeis_bot_review() => __pbn__is_bot_review != null;
+        public void Resetis_bot_review() => __pbn__is_bot_review = null;
+        private bool? __pbn__is_bot_review;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_SetRecommendationBotReviewStatus_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
     public class Community : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "Community";
@@ -2376,6 +2599,11 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CCommunity_GetBestEventsForUser_Request, CCommunity_GetBestEventsForUser_Response>( "Community.GetBestEventsForUser#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetBotReviewScoreForRecommendation_Response>> GetBotReviewScoreForRecommendation( CCommunity_GetBotReviewScoreForRecommendation_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCommunity_GetBotReviewScoreForRecommendation_Request, CCommunity_GetBotReviewScoreForRecommendation_Response>( "Community.GetBotReviewScoreForRecommendation#1", request );
+        }
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetClanAnnouncementVoteForUser_Response>> GetClanAnnouncementVoteForUser( CCommunity_GetClanAnnouncementVoteForUser_Request request )
         {
             return UnifiedMessages.SendMessage<CCommunity_GetClanAnnouncementVoteForUser_Request, CCommunity_GetClanAnnouncementVoteForUser_Response>( "Community.GetClanAnnouncementVoteForUser#1", request );
@@ -2416,6 +2644,11 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CCommunity_GetUserPartnerEventViewStatus_Request, CCommunity_GetUserPartnerEventViewStatus_Response>( "Community.GetUserPartnerEventViewStatus#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_HideAndReportComment_Response>> HideAndReportComment( CCommunity_HideAndReportComment_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCommunity_HideAndReportComment_Request, CCommunity_HideAndReportComment_Response>( "Community.HideAndReportComment#1", request );
+        }
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_MarkPartnerEventsForUser_Response>> MarkPartnerEventsForUser( CCommunity_MarkPartnerEventsForUser_Request request )
         {
             return UnifiedMessages.SendMessage<CCommunity_MarkPartnerEventsForUser_Request, CCommunity_MarkPartnerEventsForUser_Response>( "Community.MarkPartnerEventsForUser#1", request );
@@ -2446,6 +2679,11 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CCommunity_RateCommentThread_Request, CCommunity_RateCommentThread_Response>( "Community.RateCommentThread#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_SetRecommendationBotReviewStatus_Response>> SetRecommendationBotReviewStatus( CCommunity_SetRecommendationBotReviewStatus_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCommunity_SetRecommendationBotReviewStatus_Request, CCommunity_SetRecommendationBotReviewStatus_Response>( "Community.SetRecommendationBotReviewStatus#1", request );
+        }
+
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
@@ -2474,6 +2712,9 @@ namespace SteamKit2.WebUI.Internal
                 case "GetBestEventsForUser":
                     PostResponseMsg<CCommunity_GetBestEventsForUser_Response>( packetMsg );
                     break;
+                case "GetBotReviewScoreForRecommendation":
+                    PostResponseMsg<CCommunity_GetBotReviewScoreForRecommendation_Response>( packetMsg );
+                    break;
                 case "GetClanAnnouncementVoteForUser":
                     PostResponseMsg<CCommunity_GetClanAnnouncementVoteForUser_Response>( packetMsg );
                     break;
@@ -2498,6 +2739,9 @@ namespace SteamKit2.WebUI.Internal
                 case "GetUserPartnerEventViewStatus":
                     PostResponseMsg<CCommunity_GetUserPartnerEventViewStatus_Response>( packetMsg );
                     break;
+                case "HideAndReportComment":
+                    PostResponseMsg<CCommunity_HideAndReportComment_Response>( packetMsg );
+                    break;
                 case "MarkPartnerEventsForUser":
                     PostResponseMsg<CCommunity_MarkPartnerEventsForUser_Response>( packetMsg );
                     break;
@@ -2515,6 +2759,9 @@ namespace SteamKit2.WebUI.Internal
                     break;
                 case "RateCommentThread":
                     PostResponseMsg<CCommunity_RateCommentThread_Response>( packetMsg );
+                    break;
+                case "SetRecommendationBotReviewStatus":
+                    PostResponseMsg<CCommunity_SetRecommendationBotReviewStatus_Response>( packetMsg );
                     break;
             }
         }

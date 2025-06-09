@@ -624,6 +624,17 @@ namespace SteamKit2.Internal
         public void Resetmax_servers() => __pbn__max_servers = null;
         private uint? __pbn__max_servers;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string sdr_ping_location
+        {
+            get => __pbn__sdr_ping_location ?? "";
+            set => __pbn__sdr_ping_location = value;
+        }
+        public bool ShouldSerializesdr_ping_location() => __pbn__sdr_ping_location != null;
+        public void Resetsdr_ping_location() => __pbn__sdr_ping_location = null;
+        private string __pbn__sdr_ping_location;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -19091,6 +19091,16 @@ namespace SteamKit2.WebUI.Internal
         public void Resetvr_show_perf_graph_in_hmd() => __pbn__vr_show_perf_graph_in_hmd = null;
         private bool? __pbn__vr_show_perf_graph_in_hmd;
 
+        [global::ProtoBuf.ProtoMember(26000)]
+        public bool accessibility_debug_visualizer
+        {
+            get => __pbn__accessibility_debug_visualizer.GetValueOrDefault();
+            set => __pbn__accessibility_debug_visualizer = value;
+        }
+        public bool ShouldSerializeaccessibility_debug_visualizer() => __pbn__accessibility_debug_visualizer != null;
+        public void Resetaccessibility_debug_visualizer() => __pbn__accessibility_debug_visualizer = null;
+        private bool? __pbn__accessibility_debug_visualizer;
+
         [global::ProtoBuf.ProtoMember(140011)]
         public bool controller_enable_chord
         {
@@ -23969,12 +23979,32 @@ namespace SteamKit2.WebUI.Internal
         private int? __pbn__controller_type;
 
         [global::ProtoBuf.ProtoMember(6)]
-        public global::System.Collections.Generic.List<CMsgGameActionSet> sets { get; } = new global::System.Collections.Generic.List<CMsgGameActionSet>();
+        public uint capability_bits
+        {
+            get => __pbn__capability_bits.GetValueOrDefault();
+            set => __pbn__capability_bits = value;
+        }
+        public bool ShouldSerializecapability_bits() => __pbn__capability_bits != null;
+        public void Resetcapability_bits() => __pbn__capability_bits = null;
+        private uint? __pbn__capability_bits;
 
         [global::ProtoBuf.ProtoMember(7)]
-        public global::System.Collections.Generic.List<CMsgControllerMode> modes { get; } = new global::System.Collections.Generic.List<CMsgControllerMode>();
+        public int controller_style
+        {
+            get => __pbn__controller_style.GetValueOrDefault();
+            set => __pbn__controller_style = value;
+        }
+        public bool ShouldSerializecontroller_style() => __pbn__controller_style != null;
+        public void Resetcontroller_style() => __pbn__controller_style = null;
+        private int? __pbn__controller_style;
 
         [global::ProtoBuf.ProtoMember(8)]
+        public global::System.Collections.Generic.List<CMsgGameActionSet> sets { get; } = new global::System.Collections.Generic.List<CMsgGameActionSet>();
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public global::System.Collections.Generic.List<CMsgControllerMode> modes { get; } = new global::System.Collections.Generic.List<CMsgControllerMode>();
+
+        [global::ProtoBuf.ProtoMember(10)]
         [global::System.ComponentModel.DefaultValue("")]
         public string error_msg
         {
@@ -23985,7 +24015,7 @@ namespace SteamKit2.WebUI.Internal
         public void Reseterror_msg() => __pbn__error_msg = null;
         private string __pbn__error_msg;
 
-        [global::ProtoBuf.ProtoMember(9)]
+        [global::ProtoBuf.ProtoMember(11)]
         [global::System.ComponentModel.DefaultValue("")]
         public string action_block_path
         {
@@ -23996,10 +24026,10 @@ namespace SteamKit2.WebUI.Internal
         public void Resetaction_block_path() => __pbn__action_block_path = null;
         private string __pbn__action_block_path;
 
-        [global::ProtoBuf.ProtoMember(10)]
+        [global::ProtoBuf.ProtoMember(12)]
         public CMsgControllerActionSetMiscSettings misc_action_set_settings { get; set; }
 
-        [global::ProtoBuf.ProtoMember(11)]
+        [global::ProtoBuf.ProtoMember(13)]
         [global::System.ComponentModel.DefaultValue("")]
         public string url
         {
@@ -28248,6 +28278,16 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializeis_valveds() => __pbn__is_valveds != null;
         public void Resetis_valveds() => __pbn__is_valveds = null;
         private bool? __pbn__is_valveds;
+
+        [global::ProtoBuf.ProtoMember(45, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong trace_tag__field_45
+        {
+            get => __pbn__trace_tag__field_45.GetValueOrDefault();
+            set => __pbn__trace_tag__field_45 = value;
+        }
+        public bool ShouldSerializetrace_tag__field_45() => __pbn__trace_tag__field_45 != null;
+        public void Resettrace_tag__field_45() => __pbn__trace_tag__field_45 = null;
+        private ulong? __pbn__trace_tag__field_45;
 
     }
 
@@ -37273,6 +37313,16 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializesteam_deck_compat_category() => __pbn__steam_deck_compat_category != null;
         public void Resetsteam_deck_compat_category() => __pbn__steam_deck_compat_category = null;
         private int? __pbn__steam_deck_compat_category;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public int steam_os_compat_category
+        {
+            get => __pbn__steam_os_compat_category.GetValueOrDefault();
+            set => __pbn__steam_os_compat_category = value;
+        }
+        public bool ShouldSerializesteam_os_compat_category() => __pbn__steam_os_compat_category != null;
+        public void Resetsteam_os_compat_category() => __pbn__steam_os_compat_category = null;
+        private int? __pbn__steam_os_compat_category;
 
     }
 

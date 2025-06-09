@@ -2717,6 +2717,10 @@ namespace SteamKit2.GC.Deadlock.Internal
             k_eAssists = 6,
             k_eDenies = 7,
             k_eTeamBonus = 8,
+            k_eAbilityAssassinate = 9,
+            k_eItemTrophyCollector = 10,
+            k_eItemCultistSacrifice = 11,
+            k_eBreakable = 12,
         }
 
     }
