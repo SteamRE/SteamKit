@@ -222,7 +222,8 @@ namespace SteamKit2
         /// <param name="details">The details to use for logging on.</param>
         /// <exception cref="ArgumentNullException">No logon details were provided.</exception>
         /// <exception cref="ArgumentException">Username or password are not set within <paramref name="details"/>.</exception>
-        public void LogOn( LogOnDetails details )
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="LoggedOnCallback"/>.</returns>
+        public AsyncJob<LoggedOnCallback> LogOn( LogOnDetails details )
         {
             ArgumentNullException.ThrowIfNull( details );
 
@@ -231,13 +232,13 @@ namespace SteamKit2
                 throw new ArgumentException( "LogOn requires a username and password or access token to be set in 'details'." );
             }
 
+            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
+
             if ( !this.Client.IsConnected )
             {
                 this.Client.PostCallback( new LoggedOnCallback( EResult.NoConnection ) );
-                return;
+                return new AsyncJob<LoggedOnCallback>( this.Client, logon.SourceJobID );
             }
-
-            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
 
             SteamID steamId = new SteamID( details.AccountID, details.AccountInstance, Client.Universe, EAccountType.Individual );
 
@@ -302,6 +303,8 @@ namespace SteamKit2
             logon.Body.access_token = details.AccessToken;
 
             this.Client.Send( logon );
+
+            return new AsyncJob<LoggedOnCallback>( this.Client, logon.SourceJobID );
         }
 
         /// <summary>
@@ -309,9 +312,10 @@ namespace SteamKit2
         /// The client should already have been connected at this point.
         /// Results are returned in a <see cref="LoggedOnCallback"/>.
         /// </summary>
-        public void LogOnAnonymous()
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="LoggedOnCallback"/>.</returns>
+        public AsyncJob<LoggedOnCallback> LogOnAnonymous()
         {
-            LogOnAnonymous( new AnonymousLogOnDetails() );
+            return LogOnAnonymous( new AnonymousLogOnDetails() );
         }
         /// <summary>
         /// Logs the client into the Steam3 network as an anonymous user.
@@ -319,17 +323,19 @@ namespace SteamKit2
         /// Results are returned in a <see cref="LoggedOnCallback"/>.
         /// </summary>
         /// <param name="details">The details to use for logging on.</param>
-        public void LogOnAnonymous( AnonymousLogOnDetails details )
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="LoggedOnCallback"/>.</returns>
+        public AsyncJob<LoggedOnCallback> LogOnAnonymous( AnonymousLogOnDetails details )
         {
             ArgumentNullException.ThrowIfNull( details );
+
+            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
 
             if ( !this.Client.IsConnected )
             {
                 this.Client.PostCallback( new LoggedOnCallback( EResult.NoConnection ) );
-                return;
-            }
 
-            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
+                return new AsyncJob<LoggedOnCallback>( this.Client, logon.SourceJobID );
+            }
 
             SteamID auId = new SteamID( 0, 0, Client.Universe, EAccountType.AnonUser );
 
@@ -344,6 +350,8 @@ namespace SteamKit2
             logon.Body.machine_id = HardwareUtils.GetMachineID( Client.Configuration.MachineInfoProvider );
 
             this.Client.Send( logon );
+
+            return new AsyncJob<LoggedOnCallback>( this.Client, logon.SourceJobID );
         }
 
         /// <summary>
