@@ -53,7 +53,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="protobuf-net" Version="3.2.52" />
+    <PackageReference Include="protobuf-net" Version="3.2.56" />
     <PackageReference Include="System.IO.Hashing" Version="9.0.7" />
     <PackageReference Include="ZstdSharp.Port" Version="0.8.6" />
   </ItemGroup>
