@@ -599,6 +599,27 @@ namespace SteamKit2.WebUI.Internal
         public void Resetalbum_cover_hash() => __pbn__album_cover_hash = null;
         private string __pbn__album_cover_hash;
 
+        [global::ProtoBuf.ProtoMember(75)]
+        [global::System.ComponentModel.DefaultValue(-1)]
+        public int display_name_elanguage
+        {
+            get => __pbn__display_name_elanguage ?? -1;
+            set => __pbn__display_name_elanguage = value;
+        }
+        public bool ShouldSerializedisplay_name_elanguage() => __pbn__display_name_elanguage != null;
+        public void Resetdisplay_name_elanguage() => __pbn__display_name_elanguage = null;
+        private int? __pbn__display_name_elanguage;
+
+        [global::ProtoBuf.ProtoMember(76)]
+        public bool has_custom_sort_as
+        {
+            get => __pbn__has_custom_sort_as.GetValueOrDefault();
+            set => __pbn__has_custom_sort_as = value;
+        }
+        public bool ShouldSerializehas_custom_sort_as() => __pbn__has_custom_sort_as != null;
+        public void Resethas_custom_sort_as() => __pbn__has_custom_sort_as = null;
+        private bool? __pbn__has_custom_sort_as;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -17664,6 +17685,69 @@ namespace SteamKit2.WebUI.Internal
         public void Resetenable_avif_screenshots() => __pbn__enable_avif_screenshots = null;
         private bool? __pbn__enable_avif_screenshots;
 
+        [global::ProtoBuf.ProtoMember(4025)]
+        public int overlay_fps_counter_detail_level
+        {
+            get => __pbn__overlay_fps_counter_detail_level.GetValueOrDefault();
+            set => __pbn__overlay_fps_counter_detail_level = value;
+        }
+        public bool ShouldSerializeoverlay_fps_counter_detail_level() => __pbn__overlay_fps_counter_detail_level != null;
+        public void Resetoverlay_fps_counter_detail_level() => __pbn__overlay_fps_counter_detail_level = null;
+        private int? __pbn__overlay_fps_counter_detail_level;
+
+        [global::ProtoBuf.ProtoMember(4026)]
+        public float overlay_fps_counter_saturation_factor
+        {
+            get => __pbn__overlay_fps_counter_saturation_factor.GetValueOrDefault();
+            set => __pbn__overlay_fps_counter_saturation_factor = value;
+        }
+        public bool ShouldSerializeoverlay_fps_counter_saturation_factor() => __pbn__overlay_fps_counter_saturation_factor != null;
+        public void Resetoverlay_fps_counter_saturation_factor() => __pbn__overlay_fps_counter_saturation_factor = null;
+        private float? __pbn__overlay_fps_counter_saturation_factor;
+
+        [global::ProtoBuf.ProtoMember(4027)]
+        public float overlay_fps_counter_bgopacity
+        {
+            get => __pbn__overlay_fps_counter_bgopacity.GetValueOrDefault();
+            set => __pbn__overlay_fps_counter_bgopacity = value;
+        }
+        public bool ShouldSerializeoverlay_fps_counter_bgopacity() => __pbn__overlay_fps_counter_bgopacity != null;
+        public void Resetoverlay_fps_counter_bgopacity() => __pbn__overlay_fps_counter_bgopacity = null;
+        private float? __pbn__overlay_fps_counter_bgopacity;
+
+        [global::ProtoBuf.ProtoMember(4028)]
+        public float overlay_fps_counter_scale_factor
+        {
+            get => __pbn__overlay_fps_counter_scale_factor.GetValueOrDefault();
+            set => __pbn__overlay_fps_counter_scale_factor = value;
+        }
+        public bool ShouldSerializeoverlay_fps_counter_scale_factor() => __pbn__overlay_fps_counter_scale_factor != null;
+        public void Resetoverlay_fps_counter_scale_factor() => __pbn__overlay_fps_counter_scale_factor = null;
+        private float? __pbn__overlay_fps_counter_scale_factor;
+
+        [global::ProtoBuf.ProtoMember(4029)]
+        public CMsgHotkey overlay_fps_counter_key { get; set; }
+
+        [global::ProtoBuf.ProtoMember(4030)]
+        public bool overlay_fps_counter_fps_graph
+        {
+            get => __pbn__overlay_fps_counter_fps_graph.GetValueOrDefault();
+            set => __pbn__overlay_fps_counter_fps_graph = value;
+        }
+        public bool ShouldSerializeoverlay_fps_counter_fps_graph() => __pbn__overlay_fps_counter_fps_graph != null;
+        public void Resetoverlay_fps_counter_fps_graph() => __pbn__overlay_fps_counter_fps_graph = null;
+        private bool? __pbn__overlay_fps_counter_fps_graph;
+
+        [global::ProtoBuf.ProtoMember(4031)]
+        public bool overlay_fps_counter_cpu_graph
+        {
+            get => __pbn__overlay_fps_counter_cpu_graph.GetValueOrDefault();
+            set => __pbn__overlay_fps_counter_cpu_graph = value;
+        }
+        public bool ShouldSerializeoverlay_fps_counter_cpu_graph() => __pbn__overlay_fps_counter_cpu_graph != null;
+        public void Resetoverlay_fps_counter_cpu_graph() => __pbn__overlay_fps_counter_cpu_graph = null;
+        private bool? __pbn__overlay_fps_counter_cpu_graph;
+
         [global::ProtoBuf.ProtoMember(5000)]
         public bool smooth_scroll_webviews
         {
@@ -18388,51 +18472,51 @@ namespace SteamKit2.WebUI.Internal
 
         [global::ProtoBuf.ProtoMember(18201)]
         [global::System.ComponentModel.DefaultValue("")]
-        public string g_background_path
+        public string gamerecording_background_path
         {
-            get => __pbn__g_background_path ?? "";
-            set => __pbn__g_background_path = value;
+            get => __pbn__gamerecording_background_path ?? "";
+            set => __pbn__gamerecording_background_path = value;
         }
-        public bool ShouldSerializeg_background_path() => __pbn__g_background_path != null;
-        public void Resetg_background_path() => __pbn__g_background_path = null;
-        private string __pbn__g_background_path;
+        public bool ShouldSerializegamerecording_background_path() => __pbn__gamerecording_background_path != null;
+        public void Resetgamerecording_background_path() => __pbn__gamerecording_background_path = null;
+        private string __pbn__gamerecording_background_path;
 
         [global::ProtoBuf.ProtoMember(18202)]
         [global::System.ComponentModel.DefaultValue("")]
-        public string g_background_max_keep
+        public string gamerecording_background_max_keep
         {
-            get => __pbn__g_background_max_keep ?? "";
-            set => __pbn__g_background_max_keep = value;
+            get => __pbn__gamerecording_background_max_keep ?? "";
+            set => __pbn__gamerecording_background_max_keep = value;
         }
-        public bool ShouldSerializeg_background_max_keep() => __pbn__g_background_max_keep != null;
-        public void Resetg_background_max_keep() => __pbn__g_background_max_keep = null;
-        private string __pbn__g_background_max_keep;
+        public bool ShouldSerializegamerecording_background_max_keep() => __pbn__gamerecording_background_max_keep != null;
+        public void Resetgamerecording_background_max_keep() => __pbn__gamerecording_background_max_keep = null;
+        private string __pbn__gamerecording_background_max_keep;
 
         [global::ProtoBuf.ProtoMember(18203)]
-        public int g_background_time_resolution
+        public int gamerecording_background_time_resolution
         {
-            get => __pbn__g_background_time_resolution.GetValueOrDefault();
-            set => __pbn__g_background_time_resolution = value;
+            get => __pbn__gamerecording_background_time_resolution.GetValueOrDefault();
+            set => __pbn__gamerecording_background_time_resolution = value;
         }
-        public bool ShouldSerializeg_background_time_resolution() => __pbn__g_background_time_resolution != null;
-        public void Resetg_background_time_resolution() => __pbn__g_background_time_resolution = null;
-        private int? __pbn__g_background_time_resolution;
+        public bool ShouldSerializegamerecording_background_time_resolution() => __pbn__gamerecording_background_time_resolution != null;
+        public void Resetgamerecording_background_time_resolution() => __pbn__gamerecording_background_time_resolution = null;
+        private int? __pbn__gamerecording_background_time_resolution;
 
         [global::ProtoBuf.ProtoMember(18207)]
-        public CMsgHotkey g_background_mk { get; set; }
+        public CMsgHotkey gamerecording_background_mk { get; set; }
 
         [global::ProtoBuf.ProtoMember(18208)]
-        public CMsgHotkey g_background_tg { get; set; }
+        public CMsgHotkey gamerecording_background_tg { get; set; }
 
         [global::ProtoBuf.ProtoMember(18209)]
-        public bool g_background_a_m
+        public bool gamerecording_background_a_m
         {
-            get => __pbn__g_background_a_m.GetValueOrDefault();
-            set => __pbn__g_background_a_m = value;
+            get => __pbn__gamerecording_background_a_m.GetValueOrDefault();
+            set => __pbn__gamerecording_background_a_m = value;
         }
-        public bool ShouldSerializeg_background_a_m() => __pbn__g_background_a_m != null;
-        public void Resetg_background_a_m() => __pbn__g_background_a_m = null;
-        private bool? __pbn__g_background_a_m;
+        public bool ShouldSerializegamerecording_background_a_m() => __pbn__gamerecording_background_a_m != null;
+        public void Resetgamerecording_background_a_m() => __pbn__gamerecording_background_a_m = null;
+        private bool? __pbn__gamerecording_background_a_m;
 
         [global::ProtoBuf.ProtoMember(18210)]
         [global::System.ComponentModel.DefaultValue("")]
@@ -18445,45 +18529,35 @@ namespace SteamKit2.WebUI.Internal
         public void Resetgamerecording_video_bitrate() => __pbn__gamerecording_video_bitrate = null;
         private string __pbn__gamerecording_video_bitrate;
 
-        [global::ProtoBuf.ProtoMember(18211)]
-        public bool g_background_a_s
-        {
-            get => __pbn__g_background_a_s.GetValueOrDefault();
-            set => __pbn__g_background_a_s = value;
-        }
-        public bool ShouldSerializeg_background_a_s() => __pbn__g_background_a_s != null;
-        public void Resetg_background_a_s() => __pbn__g_background_a_s = null;
-        private bool? __pbn__g_background_a_s;
-
         [global::ProtoBuf.ProtoMember(18212)]
-        public int g_background_mode
+        public int gamerecording_background_mode
         {
-            get => __pbn__g_background_mode.GetValueOrDefault();
-            set => __pbn__g_background_mode = value;
+            get => __pbn__gamerecording_background_mode.GetValueOrDefault();
+            set => __pbn__gamerecording_background_mode = value;
         }
-        public bool ShouldSerializeg_background_mode() => __pbn__g_background_mode != null;
-        public void Resetg_background_mode() => __pbn__g_background_mode = null;
-        private int? __pbn__g_background_mode;
+        public bool ShouldSerializegamerecording_background_mode() => __pbn__gamerecording_background_mode != null;
+        public void Resetgamerecording_background_mode() => __pbn__gamerecording_background_mode = null;
+        private int? __pbn__gamerecording_background_mode;
 
         [global::ProtoBuf.ProtoMember(18213)]
-        public int g_background_audio
+        public int gamerecording_background_audio
         {
-            get => __pbn__g_background_audio.GetValueOrDefault();
-            set => __pbn__g_background_audio = value;
+            get => __pbn__gamerecording_background_audio.GetValueOrDefault();
+            set => __pbn__gamerecording_background_audio = value;
         }
-        public bool ShouldSerializeg_background_audio() => __pbn__g_background_audio != null;
-        public void Resetg_background_audio() => __pbn__g_background_audio = null;
-        private int? __pbn__g_background_audio;
+        public bool ShouldSerializegamerecording_background_audio() => __pbn__gamerecording_background_audio != null;
+        public void Resetgamerecording_background_audio() => __pbn__gamerecording_background_audio = null;
+        private int? __pbn__gamerecording_background_audio;
 
         [global::ProtoBuf.ProtoMember(18214)]
-        public int g_max_fps
+        public int gamerecording_max_fps
         {
-            get => __pbn__g_max_fps.GetValueOrDefault();
-            set => __pbn__g_max_fps = value;
+            get => __pbn__gamerecording_max_fps.GetValueOrDefault();
+            set => __pbn__gamerecording_max_fps = value;
         }
-        public bool ShouldSerializeg_max_fps() => __pbn__g_max_fps != null;
-        public void Resetg_max_fps() => __pbn__g_max_fps = null;
-        private int? __pbn__g_max_fps;
+        public bool ShouldSerializegamerecording_max_fps() => __pbn__gamerecording_max_fps != null;
+        public void Resetgamerecording_max_fps() => __pbn__gamerecording_max_fps = null;
+        private int? __pbn__gamerecording_max_fps;
 
         [global::ProtoBuf.ProtoMember(18215)]
         public CMsgHotkey gamerecording_hotkey_ic { get; set; }
@@ -19100,6 +19174,97 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializeaccessibility_debug_visualizer() => __pbn__accessibility_debug_visualizer != null;
         public void Resetaccessibility_debug_visualizer() => __pbn__accessibility_debug_visualizer = null;
         private bool? __pbn__accessibility_debug_visualizer;
+
+        [global::ProtoBuf.ProtoMember(26001)]
+        public bool accessibility_screen_reader_enabled
+        {
+            get => __pbn__accessibility_screen_reader_enabled.GetValueOrDefault();
+            set => __pbn__accessibility_screen_reader_enabled = value;
+        }
+        public bool ShouldSerializeaccessibility_screen_reader_enabled() => __pbn__accessibility_screen_reader_enabled != null;
+        public void Resetaccessibility_screen_reader_enabled() => __pbn__accessibility_screen_reader_enabled = null;
+        private bool? __pbn__accessibility_screen_reader_enabled;
+
+        [global::ProtoBuf.ProtoMember(26002)]
+        public float accessibility_screen_reader_rate
+        {
+            get => __pbn__accessibility_screen_reader_rate.GetValueOrDefault();
+            set => __pbn__accessibility_screen_reader_rate = value;
+        }
+        public bool ShouldSerializeaccessibility_screen_reader_rate() => __pbn__accessibility_screen_reader_rate != null;
+        public void Resetaccessibility_screen_reader_rate() => __pbn__accessibility_screen_reader_rate = null;
+        private float? __pbn__accessibility_screen_reader_rate;
+
+        [global::ProtoBuf.ProtoMember(26003)]
+        public float accessibility_screen_reader_pitch
+        {
+            get => __pbn__accessibility_screen_reader_pitch.GetValueOrDefault();
+            set => __pbn__accessibility_screen_reader_pitch = value;
+        }
+        public bool ShouldSerializeaccessibility_screen_reader_pitch() => __pbn__accessibility_screen_reader_pitch != null;
+        public void Resetaccessibility_screen_reader_pitch() => __pbn__accessibility_screen_reader_pitch = null;
+        private float? __pbn__accessibility_screen_reader_pitch;
+
+        [global::ProtoBuf.ProtoMember(26004)]
+        public float accessibility_screen_reader_volume
+        {
+            get => __pbn__accessibility_screen_reader_volume.GetValueOrDefault();
+            set => __pbn__accessibility_screen_reader_volume = value;
+        }
+        public bool ShouldSerializeaccessibility_screen_reader_volume() => __pbn__accessibility_screen_reader_volume != null;
+        public void Resetaccessibility_screen_reader_volume() => __pbn__accessibility_screen_reader_volume = null;
+        private float? __pbn__accessibility_screen_reader_volume;
+
+        [global::ProtoBuf.ProtoMember(26005)]
+        public bool accessibility_high_contrast_mode
+        {
+            get => __pbn__accessibility_high_contrast_mode.GetValueOrDefault();
+            set => __pbn__accessibility_high_contrast_mode = value;
+        }
+        public bool ShouldSerializeaccessibility_high_contrast_mode() => __pbn__accessibility_high_contrast_mode != null;
+        public void Resetaccessibility_high_contrast_mode() => __pbn__accessibility_high_contrast_mode = null;
+        private bool? __pbn__accessibility_high_contrast_mode;
+
+        [global::ProtoBuf.ProtoMember(26006)]
+        public bool accessibility_reduce_motion
+        {
+            get => __pbn__accessibility_reduce_motion.GetValueOrDefault();
+            set => __pbn__accessibility_reduce_motion = value;
+        }
+        public bool ShouldSerializeaccessibility_reduce_motion() => __pbn__accessibility_reduce_motion != null;
+        public void Resetaccessibility_reduce_motion() => __pbn__accessibility_reduce_motion = null;
+        private bool? __pbn__accessibility_reduce_motion;
+
+        [global::ProtoBuf.ProtoMember(26008)]
+        public uint accessibility_minimum_font_size
+        {
+            get => __pbn__accessibility_minimum_font_size.GetValueOrDefault();
+            set => __pbn__accessibility_minimum_font_size = value;
+        }
+        public bool ShouldSerializeaccessibility_minimum_font_size() => __pbn__accessibility_minimum_font_size != null;
+        public void Resetaccessibility_minimum_font_size() => __pbn__accessibility_minimum_font_size = null;
+        private uint? __pbn__accessibility_minimum_font_size;
+
+        [global::ProtoBuf.ProtoMember(26009)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string accessibility_color_filter_name
+        {
+            get => __pbn__accessibility_color_filter_name ?? "";
+            set => __pbn__accessibility_color_filter_name = value;
+        }
+        public bool ShouldSerializeaccessibility_color_filter_name() => __pbn__accessibility_color_filter_name != null;
+        public void Resetaccessibility_color_filter_name() => __pbn__accessibility_color_filter_name = null;
+        private string __pbn__accessibility_color_filter_name;
+
+        [global::ProtoBuf.ProtoMember(26010)]
+        public float accessibility_desktop_ui_scale
+        {
+            get => __pbn__accessibility_desktop_ui_scale.GetValueOrDefault();
+            set => __pbn__accessibility_desktop_ui_scale = value;
+        }
+        public bool ShouldSerializeaccessibility_desktop_ui_scale() => __pbn__accessibility_desktop_ui_scale != null;
+        public void Resetaccessibility_desktop_ui_scale() => __pbn__accessibility_desktop_ui_scale = null;
+        private float? __pbn__accessibility_desktop_ui_scale;
 
         [global::ProtoBuf.ProtoMember(140011)]
         public bool controller_enable_chord
@@ -23979,14 +24144,15 @@ namespace SteamKit2.WebUI.Internal
         private int? __pbn__controller_type;
 
         [global::ProtoBuf.ProtoMember(6)]
-        public uint capability_bits
+        [global::System.ComponentModel.DefaultValue("")]
+        public string capability_bits
         {
-            get => __pbn__capability_bits.GetValueOrDefault();
+            get => __pbn__capability_bits ?? "";
             set => __pbn__capability_bits = value;
         }
         public bool ShouldSerializecapability_bits() => __pbn__capability_bits != null;
         public void Resetcapability_bits() => __pbn__capability_bits = null;
-        private uint? __pbn__capability_bits;
+        private string __pbn__capability_bits;
 
         [global::ProtoBuf.ProtoMember(7)]
         public int controller_style
@@ -35804,6 +35970,36 @@ namespace SteamKit2.WebUI.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CVRGamepadUIShared_PathProperty_VRVersionInfo : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string version
+        {
+            get => __pbn__version ?? "";
+            set => __pbn__version = value;
+        }
+        public bool ShouldSerializeversion() => __pbn__version != null;
+        public void Resetversion() => __pbn__version = null;
+        private string __pbn__version;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint webpack_build_timestamp
+        {
+            get => __pbn__webpack_build_timestamp.GetValueOrDefault();
+            set => __pbn__webpack_build_timestamp = value;
+        }
+        public bool ShouldSerializewebpack_build_timestamp() => __pbn__webpack_build_timestamp != null;
+        public void Resetwebpack_build_timestamp() => __pbn__webpack_build_timestamp = null;
+        private uint? __pbn__webpack_build_timestamp;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class EncryptedAppTicket : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -37292,14 +37488,14 @@ namespace SteamKit2.WebUI.Internal
         private bool? __pbn__mac;
 
         [global::ProtoBuf.ProtoMember(3)]
-        public bool linux
+        public bool steamos_linux
         {
-            get => __pbn__linux.GetValueOrDefault();
-            set => __pbn__linux = value;
+            get => __pbn__steamos_linux.GetValueOrDefault();
+            set => __pbn__steamos_linux = value;
         }
-        public bool ShouldSerializelinux() => __pbn__linux != null;
-        public void Resetlinux() => __pbn__linux = null;
-        private bool? __pbn__linux;
+        public bool ShouldSerializesteamos_linux() => __pbn__steamos_linux != null;
+        public void Resetsteamos_linux() => __pbn__steamos_linux = null;
+        private bool? __pbn__steamos_linux;
 
         [global::ProtoBuf.ProtoMember(10)]
         public StoreItem_Platforms_VRSupport vr_support { get; set; }

@@ -597,6 +597,47 @@ namespace SteamKit2.Internal
 
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgRemoteClientWifiAPStatus : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string ssid
+        {
+            get => __pbn__ssid ?? "";
+            set => __pbn__ssid = value;
+        }
+        public bool ShouldSerializessid() => __pbn__ssid != null;
+        public void Resetssid() => __pbn__ssid = null;
+        private string __pbn__ssid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string password
+        {
+            get => __pbn__password ?? "";
+            set => __pbn__password = value;
+        }
+        public bool ShouldSerializepassword() => __pbn__password != null;
+        public void Resetpassword() => __pbn__password = null;
+        private string __pbn__password;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool wpa2
+        {
+            get => __pbn__wpa2.GetValueOrDefault();
+            set => __pbn__wpa2 = value;
+        }
+        public bool ShouldSerializewpa2() => __pbn__wpa2 != null;
+        public void Resetwpa2() => __pbn__wpa2 = null;
+        private bool? __pbn__wpa2;
+
+    }
+
 }
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

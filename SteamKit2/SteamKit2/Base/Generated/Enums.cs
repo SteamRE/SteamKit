@@ -804,6 +804,16 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public enum EContentReportSubjectType
+    {
+        k_EContentReportSubjectType_Invalid = 0,
+        k_EContentReportSubjectType_ForumPost = 1,
+        k_EContentReportSubjectType_UGCComment = 2,
+        k_EContentReportSubjectType_UGCFile = 3,
+        k_EContentReportSubjectType_MAX = 4,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EContentReportReason
     {
         k_EContentReportReason_Invalid = 0,
@@ -833,6 +843,26 @@ namespace SteamKit2.Internal
         k_EContentModeratorLevel_Supervisor = 1,
         k_EContentModeratorLevel_Valve = 10,
         k_EContentModeratorLevel_MAX = 11,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EContentReportResolution
+    {
+        k_EContentReportResolution_Unresolved = 0,
+        k_EContentReportResolution_Acquitted = 1,
+        k_EContentReportResolution_Removed = 2,
+        k_EContentReportResolution_Relabelled = 3,
+        k_EContentReportResolution_MAX = 4,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EContentModeratedReason
+    {
+        k_EContentModeratedReason_Invalid = 0,
+        k_EContentModeratedReason_None = 1,
+        k_EContentModeratedReason_Unknown = 2,
+        k_EContentModeratedReason_AnimalHarm = 3,
+        k_EContentModeratedReason_MAX = 4,
     }
 
 }

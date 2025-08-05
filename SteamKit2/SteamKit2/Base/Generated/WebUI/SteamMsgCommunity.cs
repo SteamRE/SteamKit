@@ -364,6 +364,98 @@ namespace SteamKit2.WebUI.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_ClanLocGroupImage : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong loc_group_id
+        {
+            get => __pbn__loc_group_id.GetValueOrDefault();
+            set => __pbn__loc_group_id = value;
+        }
+        public bool ShouldSerializeloc_group_id() => __pbn__loc_group_id != null;
+        public void Resetloc_group_id() => __pbn__loc_group_id = null;
+        private ulong? __pbn__loc_group_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string image_hash
+        {
+            get => __pbn__image_hash ?? "";
+            set => __pbn__image_hash = value;
+        }
+        public bool ShouldSerializeimage_hash() => __pbn__image_hash != null;
+        public void Resetimage_hash() => __pbn__image_hash = null;
+        private string __pbn__image_hash;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string thumbnail_hash
+        {
+            get => __pbn__thumbnail_hash ?? "";
+            set => __pbn__thumbnail_hash = value;
+        }
+        public bool ShouldSerializethumbnail_hash() => __pbn__thumbnail_hash != null;
+        public void Resetthumbnail_hash() => __pbn__thumbnail_hash = null;
+        private string __pbn__thumbnail_hash;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public int file_type
+        {
+            get => __pbn__file_type.GetValueOrDefault();
+            set => __pbn__file_type = value;
+        }
+        public bool ShouldSerializefile_type() => __pbn__file_type != null;
+        public void Resetfile_type() => __pbn__file_type = null;
+        private int? __pbn__file_type;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public int group
+        {
+            get => __pbn__group.GetValueOrDefault();
+            set => __pbn__group = value;
+        }
+        public bool ShouldSerializegroup() => __pbn__group != null;
+        public void Resetgroup() => __pbn__group = null;
+        private int? __pbn__group;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint width
+        {
+            get => __pbn__width.GetValueOrDefault();
+            set => __pbn__width = value;
+        }
+        public bool ShouldSerializewidth() => __pbn__width != null;
+        public void Resetwidth() => __pbn__width = null;
+        private uint? __pbn__width;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint height
+        {
+            get => __pbn__height.GetValueOrDefault();
+            set => __pbn__height = value;
+        }
+        public bool ShouldSerializeheight() => __pbn__height != null;
+        public void Resetheight() => __pbn__height = null;
+        private uint? __pbn__height;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string extensions
+        {
+            get => __pbn__extensions ?? "";
+            set => __pbn__extensions = value;
+        }
+        public bool ShouldSerializeextensions() => __pbn__extensions != null;
+        public void Resetextensions() => __pbn__extensions = null;
+        private string __pbn__extensions;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CCommunity_ClearSinglePartnerEventsAppPriority_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -973,14 +1065,14 @@ namespace SteamKit2.WebUI.Internal
         public global::System.Collections.Generic.List<ulong> recommendation_ids { get; } = new global::System.Collections.Generic.List<ulong>();
 
         [global::ProtoBuf.ProtoMember(2)]
-        public bool force_rerun
+        public uint app_id
         {
-            get => __pbn__force_rerun.GetValueOrDefault();
-            set => __pbn__force_rerun = value;
+            get => __pbn__app_id.GetValueOrDefault();
+            set => __pbn__app_id = value;
         }
-        public bool ShouldSerializeforce_rerun() => __pbn__force_rerun != null;
-        public void Resetforce_rerun() => __pbn__force_rerun = null;
-        private bool? __pbn__force_rerun;
+        public bool ShouldSerializeapp_id() => __pbn__app_id != null;
+        public void Resetapp_id() => __pbn__app_id = null;
+        private uint? __pbn__app_id;
 
     }
 
@@ -1186,6 +1278,60 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializecrowdin_file_id() => __pbn__crowdin_file_id != null;
         public void Resetcrowdin_file_id() => __pbn__crowdin_file_id = null;
         private ulong? __pbn__crowdin_file_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_GetClanLocGroupImages_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public int group
+        {
+            get => __pbn__group.GetValueOrDefault();
+            set => __pbn__group = value;
+        }
+        public bool ShouldSerializegroup() => __pbn__group != null;
+        public void Resetgroup() => __pbn__group = null;
+        private int? __pbn__group;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint language
+        {
+            get => __pbn__language.GetValueOrDefault();
+            set => __pbn__language = value;
+        }
+        public bool ShouldSerializelanguage() => __pbn__language != null;
+        public void Resetlanguage() => __pbn__language = null;
+        private uint? __pbn__language;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<ulong> loc_group_ids { get; } = new global::System.Collections.Generic.List<ulong>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_GetClanLocGroupImages_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CCommunity_ClanLocGroupImage> images { get; } = new global::System.Collections.Generic.List<CCommunity_ClanLocGroupImage>();
 
     }
 
@@ -2619,6 +2765,11 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CCommunity_GetClanEventCrowdInMetadata_Request, CCommunity_GetClanEventCrowdInMetadata_Response>( "Community.GetClanEventCrowdInMetadata#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetClanLocGroupImages_Response>> GetClanLocGroupImages( CCommunity_GetClanLocGroupImages_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCommunity_GetClanLocGroupImages_Request, CCommunity_GetClanLocGroupImages_Response>( "Community.GetClanLocGroupImages#1", request );
+        }
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetCommentThread_Response>> GetCommentThread( CCommunity_GetCommentThread_Request request )
         {
             return UnifiedMessages.SendMessage<CCommunity_GetCommentThread_Request, CCommunity_GetCommentThread_Response>( "Community.GetCommentThread#1", request );
@@ -2723,6 +2874,9 @@ namespace SteamKit2.WebUI.Internal
                     break;
                 case "GetClanEventCrowdInMetadata":
                     PostResponseMsg<CCommunity_GetClanEventCrowdInMetadata_Response>( packetMsg );
+                    break;
+                case "GetClanLocGroupImages":
+                    PostResponseMsg<CCommunity_GetClanLocGroupImages_Response>( packetMsg );
                     break;
                 case "GetCommentThread":
                     PostResponseMsg<CCommunity_GetCommentThread_Response>( packetMsg );

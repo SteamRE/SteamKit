@@ -299,6 +299,16 @@ namespace SteamKit2.Internal
         public void Resetvr_link_caps() => __pbn__vr_link_caps = null;
         private EVRLinkCaps? __pbn__vr_link_caps;
 
+        [global::ProtoBuf.ProtoMember(27, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong vr_link_invite_client_id
+        {
+            get => __pbn__vr_link_invite_client_id.GetValueOrDefault();
+            set => __pbn__vr_link_invite_client_id = value;
+        }
+        public bool ShouldSerializevr_link_invite_client_id() => __pbn__vr_link_invite_client_id != null;
+        public void Resetvr_link_invite_client_id() => __pbn__vr_link_invite_client_id = null;
+        private ulong? __pbn__vr_link_invite_client_id;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class User : global::ProtoBuf.IExtensible
         {

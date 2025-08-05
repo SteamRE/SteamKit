@@ -3912,14 +3912,14 @@ namespace SteamKit2.Internal
         public global::System.Collections.Generic.List<string> tags { get; } = new global::System.Collections.Generic.List<string>();
 
         [global::ProtoBuf.ProtoMember(11)]
-        public bool is_remote
+        public ulong remote_client_id
         {
-            get => __pbn__is_remote.GetValueOrDefault();
-            set => __pbn__is_remote = value;
+            get => __pbn__remote_client_id.GetValueOrDefault();
+            set => __pbn__remote_client_id = value;
         }
-        public bool ShouldSerializeis_remote() => __pbn__is_remote != null;
-        public void Resetis_remote() => __pbn__is_remote = null;
-        private bool? __pbn__is_remote;
+        public bool ShouldSerializeremote_client_id() => __pbn__remote_client_id != null;
+        public void Resetremote_client_id() => __pbn__remote_client_id = null;
+        private ulong? __pbn__remote_client_id;
 
         [global::ProtoBuf.ProtoMember(12)]
         public bool is_hidden
@@ -4001,6 +4001,39 @@ namespace SteamKit2.Internal
         public bool ShouldSerializedevkit_gameid() => __pbn__devkit_gameid != null;
         public void Resetdevkit_gameid() => __pbn__devkit_gameid = null;
         private string __pbn__devkit_gameid;
+
+        [global::ProtoBuf.ProtoMember(20)]
+        public bool remote_launch_available
+        {
+            get => __pbn__remote_launch_available.GetValueOrDefault();
+            set => __pbn__remote_launch_available = value;
+        }
+        public bool ShouldSerializeremote_launch_available() => __pbn__remote_launch_available != null;
+        public void Resetremote_launch_available() => __pbn__remote_launch_available = null;
+        private bool? __pbn__remote_launch_available;
+
+        [global::ProtoBuf.ProtoMember(21)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string sortas
+        {
+            get => __pbn__sortas ?? "";
+            set => __pbn__sortas = value;
+        }
+        public bool ShouldSerializesortas() => __pbn__sortas != null;
+        public void Resetsortas() => __pbn__sortas = null;
+        private string __pbn__sortas;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgShortcutInfos : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CMsgShortcutInfo> shorcuts { get; } = new global::System.Collections.Generic.List<CMsgShortcutInfo>();
 
     }
 

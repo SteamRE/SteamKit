@@ -1315,6 +1315,8 @@ namespace SteamKit2.Internal
         k_EClientNotificationType_GameRecordingStop = 56,
         k_EClientNotificationType_GameRecordingUserMarkerAdded = 57,
         k_EClientNotificationType_GameRecordingInstantClip = 58,
+        k_EClientNotificationType_PlaytestInvite = 59,
+        k_EClientNotificationType_TradeReversal = 60,
     }
 
     [global::ProtoBuf.ProtoContract()]

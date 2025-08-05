@@ -331,6 +331,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetis_player_draft() => __pbn__is_player_draft = null;
         private bool? __pbn__is_player_draft;
 
+        [global::ProtoBuf.ProtoMember(34)]
+        public bool is_watch_eligible
+        {
+            get => __pbn__is_watch_eligible.GetValueOrDefault();
+            set => __pbn__is_watch_eligible = value;
+        }
+        public bool ShouldSerializeis_watch_eligible() => __pbn__is_watch_eligible != null;
+        public void Resetis_watch_eligible() => __pbn__is_watch_eligible = null;
+        private bool? __pbn__is_watch_eligible;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Player : global::ProtoBuf.IExtensible
         {

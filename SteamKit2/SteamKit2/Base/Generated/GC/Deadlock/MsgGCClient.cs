@@ -3229,6 +3229,7 @@ namespace SteamKit2.GC.Deadlock.Internal
             k_eResult_RateLimited = 5,
             k_eResult_InvalidMatch = 6,
             k_eResult_MatchInFlight = 7,
+            k_eResult_Timeout = 8,
         }
 
     }
@@ -3543,6 +3544,7 @@ namespace SteamKit2.GC.Deadlock.Internal
             k_eBanAccount = 11,
             k_eExonerateAccount = 12,
             k_eRequireAccountInMM = 13,
+            k_eResetAccountSurvey = 14,
         }
 
     }
@@ -5022,6 +5024,7 @@ namespace SteamKit2.GC.Deadlock.Internal
             k_eReportingWindowExpired = 6,
             k_eTooBusy = 7,
             k_eBannedFromReporting = 8,
+            k_eTimeout = 9,
         }
 
     }
@@ -5551,6 +5554,7 @@ namespace SteamKit2.GC.Deadlock.Internal
             k_eDisabled = 2,
             k_eTooBusy = 3,
             k_eRateLimited = 4,
+            k_eTimeout = 5,
         }
 
     }
@@ -6004,6 +6008,179 @@ namespace SteamKit2.GC.Deadlock.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSurveyQuestion : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint question_id
+        {
+            get => __pbn__question_id.GetValueOrDefault();
+            set => __pbn__question_id = value;
+        }
+        public bool ShouldSerializequestion_id() => __pbn__question_id != null;
+        public void Resetquestion_id() => __pbn__question_id = null;
+        private uint? __pbn__question_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(EQuestionType.k_eInvalid)]
+        public EQuestionType question_type
+        {
+            get => __pbn__question_type ?? EQuestionType.k_eInvalid;
+            set => __pbn__question_type = value;
+        }
+        public bool ShouldSerializequestion_type() => __pbn__question_type != null;
+        public void Resetquestion_type() => __pbn__question_type = null;
+        private EQuestionType? __pbn__question_type;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<uint> question_params { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint remaining_questions
+        {
+            get => __pbn__remaining_questions.GetValueOrDefault();
+            set => __pbn__remaining_questions = value;
+        }
+        public bool ShouldSerializeremaining_questions() => __pbn__remaining_questions != null;
+        public void Resetremaining_questions() => __pbn__remaining_questions = null;
+        private uint? __pbn__remaining_questions;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint answered_questions
+        {
+            get => __pbn__answered_questions.GetValueOrDefault();
+            set => __pbn__answered_questions = value;
+        }
+        public bool ShouldSerializeanswered_questions() => __pbn__answered_questions != null;
+        public void Resetanswered_questions() => __pbn__answered_questions = null;
+        private uint? __pbn__answered_questions;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EQuestionType
+        {
+            k_eInvalid = 0,
+            k_eItemPower = 1,
+            k_eItemDesign = 2,
+            k_eHeroPlayAgainst = 3,
+            k_eMoreFunHero = 4,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCGetSurveyQuestion : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCGetSurveyQuestionResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResult.k_eSuccess)]
+        public EResult result
+        {
+            get => __pbn__result ?? EResult.k_eSuccess;
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResult? __pbn__result;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgSurveyQuestion question { get; set; }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResult
+        {
+            k_eSuccess = 0,
+            k_eInternalError = 1,
+            k_eTooBusy = 2,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCSubmitSurvey : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint question_id
+        {
+            get => __pbn__question_id.GetValueOrDefault();
+            set => __pbn__question_id = value;
+        }
+        public bool ShouldSerializequestion_id() => __pbn__question_id != null;
+        public void Resetquestion_id() => __pbn__question_id = null;
+        private uint? __pbn__question_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool is_skip
+        {
+            get => __pbn__is_skip.GetValueOrDefault();
+            set => __pbn__is_skip = value;
+        }
+        public bool ShouldSerializeis_skip() => __pbn__is_skip != null;
+        public void Resetis_skip() => __pbn__is_skip = null;
+        private bool? __pbn__is_skip;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint response_value
+        {
+            get => __pbn__response_value.GetValueOrDefault();
+            set => __pbn__response_value = value;
+        }
+        public bool ShouldSerializeresponse_value() => __pbn__response_value != null;
+        public void Resetresponse_value() => __pbn__response_value = null;
+        private uint? __pbn__response_value;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCSubmitSurveyResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResult.k_eSuccess)]
+        public EResult result
+        {
+            get => __pbn__result ?? EResult.k_eSuccess;
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResult? __pbn__result;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgSurveyQuestion question { get; set; }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResult
+        {
+            k_eSuccess = 0,
+            k_eInternalError = 1,
+            k_eTooBusy = 2,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EGCCitadelClientMessages
     {
         k_EMsgClientToGCStartMatchmaking = 9010,
@@ -6137,6 +6314,10 @@ namespace SteamKit2.GC.Deadlock.Internal
         k_EMsgClientToGCTarotDevGenerateTestTilesResponse = 9256,
         k_EMsgClientToGCTarotDevModifyEnergy = 9257,
         k_EMsgClientToGCTarotDevModifyEnergyResponse = 9258,
+        k_EMsgClientToGCGetSurveyQuestion = 9267,
+        k_EMsgClientToGCGetSurveyQuestionResponse = 9268,
+        k_EMsgClientToGCSubmitSurvey = 9269,
+        k_EMsgClientToGCSubmitSurveyResponse = 9270,
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -724,6 +724,29 @@ namespace SteamKit2.WebUI.Internal
         public void Resetdeck_playtime_at_review() => __pbn__deck_playtime_at_review = null;
         private int? __pbn__deck_playtime_at_review;
 
+        [global::ProtoBuf.ProtoMember(50)]
+        public uint is_bot_review_pct
+        {
+            get => __pbn__is_bot_review_pct.GetValueOrDefault();
+            set => __pbn__is_bot_review_pct = value;
+        }
+        public bool ShouldSerializeis_bot_review_pct() => __pbn__is_bot_review_pct != null;
+        public void Resetis_bot_review_pct() => __pbn__is_bot_review_pct = null;
+        private uint? __pbn__is_bot_review_pct;
+
+        [global::ProtoBuf.ProtoMember(51)]
+        public uint positivity_pct
+        {
+            get => __pbn__positivity_pct.GetValueOrDefault();
+            set => __pbn__positivity_pct = value;
+        }
+        public bool ShouldSerializepositivity_pct() => __pbn__positivity_pct != null;
+        public void Resetpositivity_pct() => __pbn__positivity_pct = null;
+        private uint? __pbn__positivity_pct;
+
+        [global::ProtoBuf.ProtoMember(53)]
+        public global::System.Collections.Generic.List<ulong> tags { get; } = new global::System.Collections.Generic.List<ulong>();
+
     }
 
     public class UserReviews : SteamUnifiedMessages.UnifiedService

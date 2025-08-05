@@ -332,7 +332,6 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCRecurringSubscriptionStatus = 2530,
         k_EMsgGCAdjustEquipSlotsManual = 2531,
         k_EMsgGCAdjustEquipSlotsShuffle = 2532,
-        k_EMsgGCNameItemAndEquip = 2533,
         k_EMsgGCOpenCrate = 2534,
         k_EMsgGCAcknowledgeRentalExpiration = 2535,
     }

@@ -6798,16 +6798,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetsmokes() => __pbn__smokes = null;
         private uint? __pbn__smokes;
 
-        [global::ProtoBuf.ProtoMember(23)]
-        public uint neutral_tokens
-        {
-            get => __pbn__neutral_tokens.GetValueOrDefault();
-            set => __pbn__neutral_tokens = value;
-        }
-        public bool ShouldSerializeneutral_tokens() => __pbn__neutral_tokens != null;
-        public void Resetneutral_tokens() => __pbn__neutral_tokens = null;
-        private uint? __pbn__neutral_tokens;
-
         [global::ProtoBuf.ProtoMember(24)]
         public uint watchers
         {
@@ -6857,6 +6847,16 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializetitle_stats() => __pbn__title_stats != null;
         public void Resettitle_stats() => __pbn__title_stats = null;
         private ulong? __pbn__title_stats;
+
+        [global::ProtoBuf.ProtoMember(29)]
+        public uint madstone
+        {
+            get => __pbn__madstone.GetValueOrDefault();
+            set => __pbn__madstone = value;
+        }
+        public bool ShouldSerializemadstone() => __pbn__madstone != null;
+        public void Resetmadstone() => __pbn__madstone = null;
+        private uint? __pbn__madstone;
 
     }
 

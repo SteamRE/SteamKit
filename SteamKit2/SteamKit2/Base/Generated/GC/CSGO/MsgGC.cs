@@ -498,16 +498,6 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetrtime32_cur() => __pbn__rtime32_cur = null;
         private uint? __pbn__rtime32_cur;
 
-        [global::ProtoBuf.ProtoMember(15)]
-        public uint rtime32_event_start
-        {
-            get => __pbn__rtime32_event_start.GetValueOrDefault();
-            set => __pbn__rtime32_event_start = value;
-        }
-        public bool ShouldSerializertime32_event_start() => __pbn__rtime32_event_start != null;
-        public void Resetrtime32_event_start() => __pbn__rtime32_event_start = null;
-        private uint? __pbn__rtime32_event_start;
-
         [global::ProtoBuf.ProtoMember(16)]
         public uint required_appid_version2
         {
@@ -1586,24 +1576,10 @@ namespace SteamKit2.GC.CSGO.Internal
             private int? __pbn__quest_bonus_points_earned;
 
             [global::ProtoBuf.ProtoMember(4)]
-            public int quest_normal_points_required
-            {
-                get => __pbn__quest_normal_points_required.GetValueOrDefault();
-                set => __pbn__quest_normal_points_required = value;
-            }
-            public bool ShouldSerializequest_normal_points_required() => __pbn__quest_normal_points_required != null;
-            public void Resetquest_normal_points_required() => __pbn__quest_normal_points_required = null;
-            private int? __pbn__quest_normal_points_required;
+            public global::System.Collections.Generic.List<int> quest_normal_points_required { get; } = new global::System.Collections.Generic.List<int>();
 
             [global::ProtoBuf.ProtoMember(5)]
-            public int quest_reward_xp
-            {
-                get => __pbn__quest_reward_xp.GetValueOrDefault();
-                set => __pbn__quest_reward_xp = value;
-            }
-            public bool ShouldSerializequest_reward_xp() => __pbn__quest_reward_xp != null;
-            public void Resetquest_reward_xp() => __pbn__quest_reward_xp = null;
-            private int? __pbn__quest_reward_xp;
+            public global::System.Collections.Generic.List<int> quest_reward_xp { get; } = new global::System.Collections.Generic.List<int>();
 
             [global::ProtoBuf.ProtoMember(6)]
             public int quest_period
@@ -2832,16 +2808,6 @@ namespace SteamKit2.GC.CSGO.Internal
 
         [global::ProtoBuf.ProtoMember(15)]
         public CPreMatchInfoData pre_match_data { get; set; }
-
-        [global::ProtoBuf.ProtoMember(16)]
-        public uint rtime32_event_start
-        {
-            get => __pbn__rtime32_event_start.GetValueOrDefault();
-            set => __pbn__rtime32_event_start = value;
-        }
-        public bool ShouldSerializertime32_event_start() => __pbn__rtime32_event_start != null;
-        public void Resetrtime32_event_start() => __pbn__rtime32_event_start = null;
-        private uint? __pbn__rtime32_event_start;
 
         [global::ProtoBuf.ProtoMember(17)]
         public uint tv_control
@@ -4274,35 +4240,6 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGCCstrike15_v2_ClientRequestNewMission : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint mission_id
-        {
-            get => __pbn__mission_id.GetValueOrDefault();
-            set => __pbn__mission_id = value;
-        }
-        public bool ShouldSerializemission_id() => __pbn__mission_id != null;
-        public void Resetmission_id() => __pbn__mission_id = null;
-        private uint? __pbn__mission_id;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public uint campaign_id
-        {
-            get => __pbn__campaign_id.GetValueOrDefault();
-            set => __pbn__campaign_id = value;
-        }
-        public bool ShouldSerializecampaign_id() => __pbn__campaign_id != null;
-        public void Resetcampaign_id() => __pbn__campaign_id = null;
-        private uint? __pbn__campaign_id;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgGCCstrike15_v2_ClientRedeemMissionReward : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -4348,6 +4285,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializeexpected_cost() => __pbn__expected_cost != null;
         public void Resetexpected_cost() => __pbn__expected_cost = null;
         private uint? __pbn__expected_cost;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public int bid_control
+        {
+            get => __pbn__bid_control.GetValueOrDefault();
+            set => __pbn__bid_control = value;
+        }
+        public bool ShouldSerializebid_control() => __pbn__bid_control != null;
+        public void Resetbid_control() => __pbn__bid_control = null;
+        private int? __pbn__bid_control;
 
     }
 
@@ -5431,6 +5378,29 @@ namespace SteamKit2.GC.CSGO.Internal
 
         [global::ProtoBuf.ProtoMember(20)]
         public global::System.Collections.Generic.List<Sticker> keychains { get; } = new global::System.Collections.Generic.List<Sticker>();
+
+        [global::ProtoBuf.ProtoMember(21)]
+        public uint style
+        {
+            get => __pbn__style.GetValueOrDefault();
+            set => __pbn__style = value;
+        }
+        public bool ShouldSerializestyle() => __pbn__style != null;
+        public void Resetstyle() => __pbn__style = null;
+        private uint? __pbn__style;
+
+        [global::ProtoBuf.ProtoMember(22)]
+        public global::System.Collections.Generic.List<Sticker> variations { get; } = new global::System.Collections.Generic.List<Sticker>();
+
+        [global::ProtoBuf.ProtoMember(23)]
+        public uint upgrade_level
+        {
+            get => __pbn__upgrade_level.GetValueOrDefault();
+            set => __pbn__upgrade_level = value;
+        }
+        public bool ShouldSerializeupgrade_level() => __pbn__upgrade_level != null;
+        public void Resetupgrade_level() => __pbn__upgrade_level = null;
+        private uint? __pbn__upgrade_level;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class Sticker : global::ProtoBuf.IExtensible
@@ -6835,6 +6805,55 @@ namespace SteamKit2.GC.CSGO.Internal
 
         [global::ProtoBuf.ProtoMember(3)]
         public global::System.Collections.Generic.List<uint> xp_tracks { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CSOAccountXpShopBids : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint campaign_id
+        {
+            get => __pbn__campaign_id.GetValueOrDefault();
+            set => __pbn__campaign_id = value;
+        }
+        public bool ShouldSerializecampaign_id() => __pbn__campaign_id != null;
+        public void Resetcampaign_id() => __pbn__campaign_id = null;
+        private uint? __pbn__campaign_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint redeem_id
+        {
+            get => __pbn__redeem_id.GetValueOrDefault();
+            set => __pbn__redeem_id = value;
+        }
+        public bool ShouldSerializeredeem_id() => __pbn__redeem_id != null;
+        public void Resetredeem_id() => __pbn__redeem_id = null;
+        private uint? __pbn__redeem_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint expected_cost
+        {
+            get => __pbn__expected_cost.GetValueOrDefault();
+            set => __pbn__expected_cost = value;
+        }
+        public bool ShouldSerializeexpected_cost() => __pbn__expected_cost != null;
+        public void Resetexpected_cost() => __pbn__expected_cost = null;
+        private uint? __pbn__expected_cost;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint generation_time
+        {
+            get => __pbn__generation_time.GetValueOrDefault();
+            set => __pbn__generation_time = value;
+        }
+        public bool ShouldSerializegeneration_time() => __pbn__generation_time != null;
+        public void Resetgeneration_time() => __pbn__generation_time = null;
+        private uint? __pbn__generation_time;
 
     }
 
@@ -9215,7 +9234,6 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCCStrike15_v2_DraftSummary = 9162,
         k_EMsgGCCStrike15_v2_ClientRequestJoinFriendData = 9163,
         k_EMsgGCCStrike15_v2_ClientRequestJoinServerData = 9164,
-        k_EMsgGCCStrike15_v2_ClientRequestNewMission = 9165,
         k_EMsgGCCStrike15_v2_GC2ClientTournamentInfo = 9167,
         k_EMsgGC_GlobalGame_Subscribe = 9168,
         k_EMsgGC_GlobalGame_Unsubscribe = 9169,

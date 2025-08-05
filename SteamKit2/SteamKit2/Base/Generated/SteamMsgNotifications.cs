@@ -225,6 +225,8 @@ namespace SteamKit2.Internal
         k_ESteamNotificationType_2FAPrompt = 25,
         k_ESteamNotificationType_MobileConfirmation = 26,
         k_ESteamNotificationType_PartnerEvent = 27,
+        k_ESteamNotificationType_PlaytestInvite = 28,
+        k_ESteamNotificationType_TradeReversal = 29,
     }
 
     public class SteamNotificationClient : SteamUnifiedMessages.UnifiedService

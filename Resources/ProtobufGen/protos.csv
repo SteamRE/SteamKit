@@ -31,7 +31,6 @@ steam,steammessages_contentsystem.steamclient.proto,SteamMsgContentSystem.cs,Ste
 steam,steammessages_credentials.steamclient.proto,SteamMsgCredentials.cs,SteamKit2.Internal
 steam,steammessages_datapublisher.steamclient.proto,SteamMsgDataPublisher.cs,SteamKit2.Internal
 steam,steammessages_depotbuilder.steamclient.proto,SteamMsgDepotBuilder.cs,SteamKit2.Internal
-steam,steammessages_deviceauth.steamclient.proto,SteamMsgDeviceAuth.cs,SteamKit2.Internal
 steam,steammessages_econ.steamclient.proto,SteamMsgEcon.cs,SteamKit2.Internal
 steam,steammessages_familygroups.steamclient.proto,SteamMsgFamilyGroups.cs,SteamKit2.Internal
 steam,steammessages_friendmessages.steamclient.proto,SteamMsgFriendMessages.cs,SteamKit2.Internal

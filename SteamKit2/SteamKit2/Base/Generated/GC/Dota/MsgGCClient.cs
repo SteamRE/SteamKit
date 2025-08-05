@@ -3513,14 +3513,14 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(1)]
         [global::System.ComponentModel.DefaultValue("")]
-        public string name
+        public string player_name
         {
-            get => __pbn__name ?? "";
-            set => __pbn__name = value;
+            get => __pbn__player_name ?? "";
+            set => __pbn__player_name = value;
         }
-        public bool ShouldSerializename() => __pbn__name != null;
-        public void Resetname() => __pbn__name = null;
-        private string __pbn__name;
+        public bool ShouldSerializeplayer_name() => __pbn__player_name != null;
+        public void Resetplayer_name() => __pbn__player_name = null;
+        private string __pbn__player_name;
 
         [global::ProtoBuf.ProtoMember(2)]
         [global::System.ComponentModel.DefaultValue("")]
@@ -3563,6 +3563,37 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializesponsor() => __pbn__sponsor != null;
         public void Resetsponsor() => __pbn__sponsor = null;
         private string __pbn__sponsor;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool accepted_pro_agreement
+        {
+            get => __pbn__accepted_pro_agreement.GetValueOrDefault();
+            set => __pbn__accepted_pro_agreement = value;
+        }
+        public bool ShouldSerializeaccepted_pro_agreement() => __pbn__accepted_pro_agreement != null;
+        public void Resetaccepted_pro_agreement() => __pbn__accepted_pro_agreement = null;
+        private bool? __pbn__accepted_pro_agreement;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint registration_period
+        {
+            get => __pbn__registration_period.GetValueOrDefault();
+            set => __pbn__registration_period = value;
+        }
+        public bool ShouldSerializeregistration_period() => __pbn__registration_period != null;
+        public void Resetregistration_period() => __pbn__registration_period = null;
+        private uint? __pbn__registration_period;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string real_name
+        {
+            get => __pbn__real_name ?? "";
+            set => __pbn__real_name = value;
+        }
+        public bool ShouldSerializereal_name() => __pbn__real_name != null;
+        public void Resetreal_name() => __pbn__real_name = null;
+        private string __pbn__real_name;
 
     }
 

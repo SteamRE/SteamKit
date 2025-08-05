@@ -102,26 +102,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetsponsor() => __pbn__sponsor = null;
         private string __pbn__sponsor;
 
-        [global::ProtoBuf.ProtoMember(9)]
-        public bool is_locked
-        {
-            get => __pbn__is_locked.GetValueOrDefault();
-            set => __pbn__is_locked = value;
-        }
-        public bool ShouldSerializeis_locked() => __pbn__is_locked != null;
-        public void Resetis_locked() => __pbn__is_locked = null;
-        private bool? __pbn__is_locked;
-
-        [global::ProtoBuf.ProtoMember(10)]
-        public bool is_pro
-        {
-            get => __pbn__is_pro.GetValueOrDefault();
-            set => __pbn__is_pro = value;
-        }
-        public bool ShouldSerializeis_pro() => __pbn__is_pro != null;
-        public void Resetis_pro() => __pbn__is_pro = null;
-        private bool? __pbn__is_pro;
-
         [global::ProtoBuf.ProtoMember(11)]
         [global::System.ComponentModel.DefaultValue("")]
         public string real_name
@@ -170,6 +150,19 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeteam_abbreviation() => __pbn__team_abbreviation != null;
         public void Resetteam_abbreviation() => __pbn__team_abbreviation = null;
         private string __pbn__team_abbreviation;
+
+        [global::ProtoBuf.ProtoMember(18)]
+        public global::System.Collections.Generic.List<ProRegistration> pro_registration { get; } = new global::System.Collections.Generic.List<ProRegistration>();
+
+        [global::ProtoBuf.ProtoMember(19)]
+        public bool has_played_in_international
+        {
+            get => __pbn__has_played_in_international.GetValueOrDefault();
+            set => __pbn__has_played_in_international = value;
+        }
+        public bool ShouldSerializehas_played_in_international() => __pbn__has_played_in_international != null;
+        public void Resethas_played_in_international() => __pbn__has_played_in_international = null;
+        private bool? __pbn__has_played_in_international;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class Results : global::ProtoBuf.IExtensible
@@ -279,6 +272,35 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializeteam_url_logo() => __pbn__team_url_logo != null;
             public void Resetteam_url_logo() => __pbn__team_url_logo = null;
             private string __pbn__team_url_logo;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class ProRegistration : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint registration_period
+            {
+                get => __pbn__registration_period.GetValueOrDefault();
+                set => __pbn__registration_period = value;
+            }
+            public bool ShouldSerializeregistration_period() => __pbn__registration_period != null;
+            public void Resetregistration_period() => __pbn__registration_period = null;
+            private uint? __pbn__registration_period;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint timestamp
+            {
+                get => __pbn__timestamp.GetValueOrDefault();
+                set => __pbn__timestamp = value;
+            }
+            public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
+            public void Resettimestamp() => __pbn__timestamp = null;
+            private uint? __pbn__timestamp;
 
         }
 

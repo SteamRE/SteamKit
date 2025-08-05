@@ -2238,6 +2238,67 @@ namespace SteamKit2.GC.Deadlock.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgServerSignoutData_MatchKills : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<Kill> kills { get; } = new global::System.Collections.Generic.List<Kill>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Kill : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint killer
+            {
+                get => __pbn__killer.GetValueOrDefault();
+                set => __pbn__killer = value;
+            }
+            public bool ShouldSerializekiller() => __pbn__killer != null;
+            public void Resetkiller() => __pbn__killer = null;
+            private uint? __pbn__killer;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint victim
+            {
+                get => __pbn__victim.GetValueOrDefault();
+                set => __pbn__victim = value;
+            }
+            public bool ShouldSerializevictim() => __pbn__victim != null;
+            public void Resetvictim() => __pbn__victim = null;
+            private uint? __pbn__victim;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint match_time
+            {
+                get => __pbn__match_time.GetValueOrDefault();
+                set => __pbn__match_time = value;
+            }
+            public bool ShouldSerializematch_time() => __pbn__match_time != null;
+            public void Resetmatch_time() => __pbn__match_time = null;
+            private uint? __pbn__match_time;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public uint killer_streak
+            {
+                get => __pbn__killer_streak.GetValueOrDefault();
+                set => __pbn__killer_streak = value;
+            }
+            public bool ShouldSerializekiller_streak() => __pbn__killer_streak != null;
+            public void Resetkiller_streak() => __pbn__killer_streak = null;
+            private uint? __pbn__killer_streak;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgServerSignoutData_AccountStatChanges : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -4034,6 +4095,7 @@ namespace SteamKit2.GC.Deadlock.Internal
         k_EServerSignoutData_PenalizedPlayers = 9,
         k_EServerSignoutData_ReportCheaters = 10,
         k_EServerSignoutData_MatchDevStats = 11,
+        k_EServerSignoutData_MatchKills = 14,
     }
 
 }

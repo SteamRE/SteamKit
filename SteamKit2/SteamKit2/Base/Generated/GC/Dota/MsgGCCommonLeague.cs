@@ -381,6 +381,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetmax_rounds() => __pbn__max_rounds = null;
         private uint? __pbn__max_rounds;
 
+        [global::ProtoBuf.ProtoMember(27)]
+        public uint win_loss_limit
+        {
+            get => __pbn__win_loss_limit.GetValueOrDefault();
+            set => __pbn__win_loss_limit = value;
+        }
+        public bool ShouldSerializewin_loss_limit() => __pbn__win_loss_limit != null;
+        public void Resetwin_loss_limit() => __pbn__win_loss_limit = null;
+        private uint? __pbn__win_loss_limit;
+
         [global::ProtoBuf.ProtoMember(12)]
         public bool is_tiebreaker
         {
@@ -623,36 +633,6 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetteam_abbreviation() => __pbn__team_abbreviation = null;
             private string __pbn__team_abbreviation;
 
-            [global::ProtoBuf.ProtoMember(11)]
-            public long score_tiebreak_group
-            {
-                get => __pbn__score_tiebreak_group.GetValueOrDefault();
-                set => __pbn__score_tiebreak_group = value;
-            }
-            public bool ShouldSerializescore_tiebreak_group() => __pbn__score_tiebreak_group != null;
-            public void Resetscore_tiebreak_group() => __pbn__score_tiebreak_group = null;
-            private long? __pbn__score_tiebreak_group;
-
-            [global::ProtoBuf.ProtoMember(12)]
-            public long score_tiebreak_below
-            {
-                get => __pbn__score_tiebreak_below.GetValueOrDefault();
-                set => __pbn__score_tiebreak_below = value;
-            }
-            public bool ShouldSerializescore_tiebreak_below() => __pbn__score_tiebreak_below != null;
-            public void Resetscore_tiebreak_below() => __pbn__score_tiebreak_below = null;
-            private long? __pbn__score_tiebreak_below;
-
-            [global::ProtoBuf.ProtoMember(13)]
-            public long score_tiebreak_random
-            {
-                get => __pbn__score_tiebreak_random.GetValueOrDefault();
-                set => __pbn__score_tiebreak_random = value;
-            }
-            public bool ShouldSerializescore_tiebreak_random() => __pbn__score_tiebreak_random != null;
-            public void Resetscore_tiebreak_random() => __pbn__score_tiebreak_random = null;
-            private long? __pbn__score_tiebreak_random;
-
             [global::ProtoBuf.ProtoMember(14)]
             public bool is_pro
             {
@@ -662,6 +642,46 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializeis_pro() => __pbn__is_pro != null;
             public void Resetis_pro() => __pbn__is_pro = null;
             private bool? __pbn__is_pro;
+
+            [global::ProtoBuf.ProtoMember(15)]
+            public uint tiebreak_game_win_pct
+            {
+                get => __pbn__tiebreak_game_win_pct.GetValueOrDefault();
+                set => __pbn__tiebreak_game_win_pct = value;
+            }
+            public bool ShouldSerializetiebreak_game_win_pct() => __pbn__tiebreak_game_win_pct != null;
+            public void Resettiebreak_game_win_pct() => __pbn__tiebreak_game_win_pct = null;
+            private uint? __pbn__tiebreak_game_win_pct;
+
+            [global::ProtoBuf.ProtoMember(16)]
+            public uint tiebreak_opponent_match_wins
+            {
+                get => __pbn__tiebreak_opponent_match_wins.GetValueOrDefault();
+                set => __pbn__tiebreak_opponent_match_wins = value;
+            }
+            public bool ShouldSerializetiebreak_opponent_match_wins() => __pbn__tiebreak_opponent_match_wins != null;
+            public void Resettiebreak_opponent_match_wins() => __pbn__tiebreak_opponent_match_wins = null;
+            private uint? __pbn__tiebreak_opponent_match_wins;
+
+            [global::ProtoBuf.ProtoMember(17)]
+            public uint tiebreak_opponent_game_win_pct
+            {
+                get => __pbn__tiebreak_opponent_game_win_pct.GetValueOrDefault();
+                set => __pbn__tiebreak_opponent_game_win_pct = value;
+            }
+            public bool ShouldSerializetiebreak_opponent_game_win_pct() => __pbn__tiebreak_opponent_game_win_pct != null;
+            public void Resettiebreak_opponent_game_win_pct() => __pbn__tiebreak_opponent_game_win_pct = null;
+            private uint? __pbn__tiebreak_opponent_game_win_pct;
+
+            [global::ProtoBuf.ProtoMember(18)]
+            public uint tiebreak_coinflip
+            {
+                get => __pbn__tiebreak_coinflip.GetValueOrDefault();
+                set => __pbn__tiebreak_coinflip = value;
+            }
+            public bool ShouldSerializetiebreak_coinflip() => __pbn__tiebreak_coinflip != null;
+            public void Resettiebreak_coinflip() => __pbn__tiebreak_coinflip = null;
+            private uint? __pbn__tiebreak_coinflip;
 
         }
 
