@@ -4940,6 +4940,17 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetleague_node_id() => __pbn__league_node_id = null;
             private uint? __pbn__league_node_id;
 
+            [global::ProtoBuf.ProtoMember(21)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string reward_event_action
+            {
+                get => __pbn__reward_event_action ?? "";
+                set => __pbn__reward_event_action = value;
+            }
+            public bool ShouldSerializereward_event_action() => __pbn__reward_event_action != null;
+            public void Resetreward_event_action() => __pbn__reward_event_action = null;
+            private string __pbn__reward_event_action;
+
             [global::ProtoBuf.ProtoContract()]
             public partial class Answers : global::ProtoBuf.IExtensible
             {
@@ -11597,6 +11608,9 @@ namespace SteamKit2.GC.Dota.Internal
             kPureDamage = 8,
             kCooldown = 9,
             kDebuffPercentage = 10,
+            kDebuffValue = 11,
+            kBuffPercentage = 12,
+            kBuffValue = 13,
         }
 
     }

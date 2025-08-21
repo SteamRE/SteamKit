@@ -722,6 +722,7 @@ namespace SteamKit2.GC.Dota.Internal
             k_eNotEnoughTokensForReward = 13,
             k_eNotEnoughResourceForReward = 14,
             k_eInvalidRewardData = 15,
+            k_eEventExpired = 16,
         }
 
     }

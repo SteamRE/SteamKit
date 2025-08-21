@@ -112,6 +112,16 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(13)]
         public global::System.Collections.Generic.List<CMsgTrackedStat> match_tracked_stats { get; } = new global::System.Collections.Generic.List<CMsgTrackedStat>();
 
+        [global::ProtoBuf.ProtoMember(14)]
+        public uint primary_event_id_for_display
+        {
+            get => __pbn__primary_event_id_for_display.GetValueOrDefault();
+            set => __pbn__primary_event_id_for_display = value;
+        }
+        public bool ShouldSerializeprimary_event_id_for_display() => __pbn__primary_event_id_for_display != null;
+        public void Resetprimary_event_id_for_display() => __pbn__primary_event_id_for_display = null;
+        private uint? __pbn__primary_event_id_for_display;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class EconItem : global::ProtoBuf.IExtensible
         {

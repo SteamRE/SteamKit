@@ -230,39 +230,66 @@ namespace SteamKit2.GC.Deadlock.Internal
             public void Resetwas_server_shutdown() => __pbn__was_server_shutdown = null;
             private bool? __pbn__was_server_shutdown;
 
+            [global::ProtoBuf.ProtoMember(9)]
+            public ulong hideout_lobby_id
+            {
+                get => __pbn__hideout_lobby_id.GetValueOrDefault();
+                set => __pbn__hideout_lobby_id = value;
+            }
+            public bool ShouldSerializehideout_lobby_id() => __pbn__hideout_lobby_id != null;
+            public void Resethideout_lobby_id() => __pbn__hideout_lobby_id = null;
+            private ulong? __pbn__hideout_lobby_id;
+
         }
 
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgAccountEquippedItems : global::ProtoBuf.IExtensible
+    public partial class CMsgAccountChallengesActive : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<HeroItems> hero_items { get; } = new global::System.Collections.Generic.List<HeroItems>();
+        public global::System.Collections.Generic.List<Challenge> challenges { get; } = new global::System.Collections.Generic.List<Challenge>();
 
         [global::ProtoBuf.ProtoContract()]
-        public partial class HeroItems : global::ProtoBuf.IExtensible
+        public partial class Challenge : global::ProtoBuf.IExtensible
         {
             private global::ProtoBuf.IExtension __pbn__extensionData;
             global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1)]
-            public uint hero_id
+            public ulong challenge_id
             {
-                get => __pbn__hero_id.GetValueOrDefault();
-                set => __pbn__hero_id = value;
+                get => __pbn__challenge_id.GetValueOrDefault();
+                set => __pbn__challenge_id = value;
             }
-            public bool ShouldSerializehero_id() => __pbn__hero_id != null;
-            public void Resethero_id() => __pbn__hero_id = null;
-            private uint? __pbn__hero_id;
+            public bool ShouldSerializechallenge_id() => __pbn__challenge_id != null;
+            public void Resetchallenge_id() => __pbn__challenge_id = null;
+            private ulong? __pbn__challenge_id;
 
             [global::ProtoBuf.ProtoMember(2)]
-            public global::System.Collections.Generic.List<CSOEconItem> items { get; } = new global::System.Collections.Generic.List<CSOEconItem>();
+            public uint progress
+            {
+                get => __pbn__progress.GetValueOrDefault();
+                set => __pbn__progress = value;
+            }
+            public bool ShouldSerializeprogress() => __pbn__progress != null;
+            public void Resetprogress() => __pbn__progress = null;
+            private uint? __pbn__progress;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint max_progress
+            {
+                get => __pbn__max_progress.GetValueOrDefault();
+                set => __pbn__max_progress = value;
+            }
+            public bool ShouldSerializemax_progress() => __pbn__max_progress != null;
+            public void Resetmax_progress() => __pbn__max_progress = null;
+            private uint? __pbn__max_progress;
 
         }
 
@@ -284,16 +311,6 @@ namespace SteamKit2.GC.Deadlock.Internal
             private global::ProtoBuf.IExtension __pbn__extensionData;
             global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint account_id
-            {
-                get => __pbn__account_id.GetValueOrDefault();
-                set => __pbn__account_id = value;
-            }
-            public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
-            public void Resetaccount_id() => __pbn__account_id = null;
-            private uint? __pbn__account_id;
 
             [global::ProtoBuf.ProtoMember(2)]
             public uint player_mmr
@@ -366,24 +383,14 @@ namespace SteamKit2.GC.Deadlock.Internal
         public void Resetaccount_id() => __pbn__account_id = null;
         private uint? __pbn__account_id;
 
-        [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<CMsgAccountHeroStats> account_stats { get; } = new global::System.Collections.Generic.List<CMsgAccountHeroStats>();
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public uint mmr_level
-        {
-            get => __pbn__mmr_level.GetValueOrDefault();
-            set => __pbn__mmr_level = value;
-        }
-        public bool ShouldSerializemmr_level() => __pbn__mmr_level != null;
-        public void Resetmmr_level() => __pbn__mmr_level = null;
-        private uint? __pbn__mmr_level;
-
         [global::ProtoBuf.ProtoMember(5)]
         public global::System.Collections.Generic.List<CMsgAccountBookStats> book_info { get; } = new global::System.Collections.Generic.List<CMsgAccountBookStats>();
 
-        [global::ProtoBuf.ProtoMember(6)]
-        public CMsgAccountEquippedItems equipped_items { get; set; }
+        [global::ProtoBuf.ProtoMember(7)]
+        public CMsgAccountChallengesActive challenges { get; set; }
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public CMsgEquippedItemList global_equips { get; set; }
 
     }
 
@@ -710,6 +717,16 @@ namespace SteamKit2.GC.Deadlock.Internal
         public void Resetgameplay_experiment() => __pbn__gameplay_experiment = null;
         private string __pbn__gameplay_experiment;
 
+        [global::ProtoBuf.ProtoMember(28)]
+        public bool rewards_eligible
+        {
+            get => __pbn__rewards_eligible.GetValueOrDefault();
+            set => __pbn__rewards_eligible = value;
+        }
+        public bool ShouldSerializerewards_eligible() => __pbn__rewards_eligible != null;
+        public void Resetrewards_eligible() => __pbn__rewards_eligible = null;
+        private bool? __pbn__rewards_eligible;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Member : global::ProtoBuf.IExtensible
         {
@@ -837,15 +854,28 @@ namespace SteamKit2.GC.Deadlock.Internal
             public void Resetbot_difficulty() => __pbn__bot_difficulty = null;
             private ECitadelBotDifficulty? __pbn__bot_difficulty;
 
-            [global::ProtoBuf.ProtoMember(17)]
-            public uint hero_xp
+            [global::ProtoBuf.ProtoMember(18)]
+            public bool requires_skill_calibration
             {
-                get => __pbn__hero_xp.GetValueOrDefault();
-                set => __pbn__hero_xp = value;
+                get => __pbn__requires_skill_calibration.GetValueOrDefault();
+                set => __pbn__requires_skill_calibration = value;
             }
-            public bool ShouldSerializehero_xp() => __pbn__hero_xp != null;
-            public void Resethero_xp() => __pbn__hero_xp = null;
-            private uint? __pbn__hero_xp;
+            public bool ShouldSerializerequires_skill_calibration() => __pbn__requires_skill_calibration != null;
+            public void Resetrequires_skill_calibration() => __pbn__requires_skill_calibration = null;
+            private bool? __pbn__requires_skill_calibration;
+
+            [global::ProtoBuf.ProtoMember(19)]
+            public CMsgPlayerHeroData hero_data { get; set; }
+
+            [global::ProtoBuf.ProtoMember(20)]
+            public uint match_number
+            {
+                get => __pbn__match_number.GetValueOrDefault();
+                set => __pbn__match_number = value;
+            }
+            public bool ShouldSerializematch_number() => __pbn__match_number != null;
+            public void Resetmatch_number() => __pbn__match_number = null;
+            private uint? __pbn__match_number;
 
         }
 
@@ -1766,6 +1796,46 @@ namespace SteamKit2.GC.Deadlock.Internal
                 public void Resetheal_lost() => __pbn__heal_lost = null;
                 private uint? __pbn__heal_lost;
 
+                [global::ProtoBuf.ProtoMember(28)]
+                public uint player_barriering
+                {
+                    get => __pbn__player_barriering.GetValueOrDefault();
+                    set => __pbn__player_barriering = value;
+                }
+                public bool ShouldSerializeplayer_barriering() => __pbn__player_barriering != null;
+                public void Resetplayer_barriering() => __pbn__player_barriering = null;
+                private uint? __pbn__player_barriering;
+
+                [global::ProtoBuf.ProtoMember(45)]
+                public uint teammate_healing
+                {
+                    get => __pbn__teammate_healing.GetValueOrDefault();
+                    set => __pbn__teammate_healing = value;
+                }
+                public bool ShouldSerializeteammate_healing() => __pbn__teammate_healing != null;
+                public void Resetteammate_healing() => __pbn__teammate_healing = null;
+                private uint? __pbn__teammate_healing;
+
+                [global::ProtoBuf.ProtoMember(46)]
+                public uint teammate_barriering
+                {
+                    get => __pbn__teammate_barriering.GetValueOrDefault();
+                    set => __pbn__teammate_barriering = value;
+                }
+                public bool ShouldSerializeteammate_barriering() => __pbn__teammate_barriering != null;
+                public void Resetteammate_barriering() => __pbn__teammate_barriering = null;
+                private uint? __pbn__teammate_barriering;
+
+                [global::ProtoBuf.ProtoMember(47)]
+                public uint self_damage
+                {
+                    get => __pbn__self_damage.GetValueOrDefault();
+                    set => __pbn__self_damage = value;
+                }
+                public bool ShouldSerializeself_damage() => __pbn__self_damage != null;
+                public void Resetself_damage() => __pbn__self_damage = null;
+                private uint? __pbn__self_damage;
+
             }
 
             [global::ProtoBuf.ProtoContract()]
@@ -2233,6 +2303,151 @@ namespace SteamKit2.GC.Deadlock.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public CMsgServerSignoutData_BookRewards.BookReward book_reward { get; set; }
 
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgServerSignoutData_ChallengeProgress : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<AccountChallenges> account_challenges { get; } = new global::System.Collections.Generic.List<AccountChallenges>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class ChallengeProgress : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public ulong challenge_id
+            {
+                get => __pbn__challenge_id.GetValueOrDefault();
+                set => __pbn__challenge_id = value;
+            }
+            public bool ShouldSerializechallenge_id() => __pbn__challenge_id != null;
+            public void Resetchallenge_id() => __pbn__challenge_id = null;
+            private ulong? __pbn__challenge_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint progress
+            {
+                get => __pbn__progress.GetValueOrDefault();
+                set => __pbn__progress = value;
+            }
+            public bool ShouldSerializeprogress() => __pbn__progress != null;
+            public void Resetprogress() => __pbn__progress = null;
+            private uint? __pbn__progress;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class AccountChallenges : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint account_id
+            {
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
+            }
+            public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+            public void Resetaccount_id() => __pbn__account_id = null;
+            private uint? __pbn__account_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public global::System.Collections.Generic.List<CMsgServerSignoutData_ChallengeProgress.ChallengeProgress> challenges { get; } = new global::System.Collections.Generic.List<CMsgServerSignoutData_ChallengeProgress.ChallengeProgress>();
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgServerSignoutData_HeroXPGrant : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<AccountXPGrant> account_xp { get; } = new global::System.Collections.Generic.List<AccountXPGrant>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class HeroXPGrant : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint hero_id
+            {
+                get => __pbn__hero_id.GetValueOrDefault();
+                set => __pbn__hero_id = value;
+            }
+            public bool ShouldSerializehero_id() => __pbn__hero_id != null;
+            public void Resethero_id() => __pbn__hero_id = null;
+            private uint? __pbn__hero_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint xp_grant
+            {
+                get => __pbn__xp_grant.GetValueOrDefault();
+                set => __pbn__xp_grant = value;
+            }
+            public bool ShouldSerializexp_grant() => __pbn__xp_grant != null;
+            public void Resetxp_grant() => __pbn__xp_grant = null;
+            private uint? __pbn__xp_grant;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            [global::System.ComponentModel.DefaultValue(CMsgServerSignoutData_HeroXPGrant.EGrantReason.k_eGrant_Win)]
+            public CMsgServerSignoutData_HeroXPGrant.EGrantReason reason
+            {
+                get => __pbn__reason ?? CMsgServerSignoutData_HeroXPGrant.EGrantReason.k_eGrant_Win;
+                set => __pbn__reason = value;
+            }
+            public bool ShouldSerializereason() => __pbn__reason != null;
+            public void Resetreason() => __pbn__reason = null;
+            private CMsgServerSignoutData_HeroXPGrant.EGrantReason? __pbn__reason;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class AccountXPGrant : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint account_id
+            {
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
+            }
+            public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+            public void Resetaccount_id() => __pbn__account_id = null;
+            private uint? __pbn__account_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public global::System.Collections.Generic.List<CMsgServerSignoutData_HeroXPGrant.HeroXPGrant> xp_grant { get; } = new global::System.Collections.Generic.List<CMsgServerSignoutData_HeroXPGrant.HeroXPGrant>();
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EGrantReason
+        {
+            k_eGrant_Win = 0,
+            k_eGrant_Loss = 1,
+            k_eGrant_Award = 2,
         }
 
     }
@@ -3229,6 +3444,66 @@ namespace SteamKit2.GC.Deadlock.Internal
             public void Resetavg_time_to_kill_s() => __pbn__avg_time_to_kill_s = null;
             private float? __pbn__avg_time_to_kill_s;
 
+            [global::ProtoBuf.ProtoMember(48)]
+            public bool requires_skill_calibration
+            {
+                get => __pbn__requires_skill_calibration.GetValueOrDefault();
+                set => __pbn__requires_skill_calibration = value;
+            }
+            public bool ShouldSerializerequires_skill_calibration() => __pbn__requires_skill_calibration != null;
+            public void Resetrequires_skill_calibration() => __pbn__requires_skill_calibration = null;
+            private bool? __pbn__requires_skill_calibration;
+
+            [global::ProtoBuf.ProtoMember(49)]
+            public uint player_barriering
+            {
+                get => __pbn__player_barriering.GetValueOrDefault();
+                set => __pbn__player_barriering = value;
+            }
+            public bool ShouldSerializeplayer_barriering() => __pbn__player_barriering != null;
+            public void Resetplayer_barriering() => __pbn__player_barriering = null;
+            private uint? __pbn__player_barriering;
+
+            [global::ProtoBuf.ProtoMember(50)]
+            public uint teammate_healing
+            {
+                get => __pbn__teammate_healing.GetValueOrDefault();
+                set => __pbn__teammate_healing = value;
+            }
+            public bool ShouldSerializeteammate_healing() => __pbn__teammate_healing != null;
+            public void Resetteammate_healing() => __pbn__teammate_healing = null;
+            private uint? __pbn__teammate_healing;
+
+            [global::ProtoBuf.ProtoMember(51)]
+            public uint teammate_barriering
+            {
+                get => __pbn__teammate_barriering.GetValueOrDefault();
+                set => __pbn__teammate_barriering = value;
+            }
+            public bool ShouldSerializeteammate_barriering() => __pbn__teammate_barriering != null;
+            public void Resetteammate_barriering() => __pbn__teammate_barriering = null;
+            private uint? __pbn__teammate_barriering;
+
+            [global::ProtoBuf.ProtoMember(52)]
+            public uint self_damage
+            {
+                get => __pbn__self_damage.GetValueOrDefault();
+                set => __pbn__self_damage = value;
+            }
+            public bool ShouldSerializeself_damage() => __pbn__self_damage != null;
+            public void Resetself_damage() => __pbn__self_damage = null;
+            private uint? __pbn__self_damage;
+
+            [global::ProtoBuf.ProtoMember(53)]
+            public uint match_number
+            {
+                get => __pbn__match_number.GetValueOrDefault();
+                set => __pbn__match_number = value;
+            }
+            public bool ShouldSerializematch_number() => __pbn__match_number != null;
+            public void Resetmatch_number() => __pbn__match_number = null;
+            private uint? __pbn__match_number;
+
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -3404,6 +3679,54 @@ namespace SteamKit2.GC.Deadlock.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToServerAllocateForHideout : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong hideout_lobby_id
+        {
+            get => __pbn__hideout_lobby_id.GetValueOrDefault();
+            set => __pbn__hideout_lobby_id = value;
+        }
+        public bool ShouldSerializehideout_lobby_id() => __pbn__hideout_lobby_id != null;
+        public void Resethideout_lobby_id() => __pbn__hideout_lobby_id = null;
+        private ulong? __pbn__hideout_lobby_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToServerAllocateForHideoutResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong hideout_lobby_id
+        {
+            get => __pbn__hideout_lobby_id.GetValueOrDefault();
+            set => __pbn__hideout_lobby_id = value;
+        }
+        public bool ShouldSerializehideout_lobby_id() => __pbn__hideout_lobby_id != null;
+        public void Resethideout_lobby_id() => __pbn__hideout_lobby_id = null;
+        private ulong? __pbn__hideout_lobby_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool success
+        {
+            get => __pbn__success.GetValueOrDefault();
+            set => __pbn__success = value;
+        }
+        public bool ShouldSerializesuccess() => __pbn__success != null;
+        public void Resetsuccess() => __pbn__success = null;
+        private bool? __pbn__success;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgServerToGCEnterMatchmaking : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -3501,6 +3824,26 @@ namespace SteamKit2.GC.Deadlock.Internal
         public void Resetreplay_group_id() => __pbn__replay_group_id = null;
         private uint? __pbn__replay_group_id;
 
+        [global::ProtoBuf.ProtoMember(11)]
+        public bool allow_matches
+        {
+            get => __pbn__allow_matches.GetValueOrDefault();
+            set => __pbn__allow_matches = value;
+        }
+        public bool ShouldSerializeallow_matches() => __pbn__allow_matches != null;
+        public void Resetallow_matches() => __pbn__allow_matches = null;
+        private bool? __pbn__allow_matches;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public bool allow_hideout
+        {
+            get => __pbn__allow_hideout.GetValueOrDefault();
+            set => __pbn__allow_hideout = value;
+        }
+        public bool ShouldSerializeallow_hideout() => __pbn__allow_hideout != null;
+        public void Resetallow_hideout() => __pbn__allow_hideout = null;
+        private bool? __pbn__allow_hideout;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -3519,6 +3862,16 @@ namespace SteamKit2.GC.Deadlock.Internal
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
         private ulong? __pbn__match_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong hideout_lobby_id
+        {
+            get => __pbn__hideout_lobby_id.GetValueOrDefault();
+            set => __pbn__hideout_lobby_id = value;
+        }
+        public bool ShouldSerializehideout_lobby_id() => __pbn__hideout_lobby_id != null;
+        public void Resethideout_lobby_id() => __pbn__hideout_lobby_id = null;
+        private ulong? __pbn__hideout_lobby_id;
 
     }
 
@@ -3735,6 +4088,26 @@ namespace SteamKit2.GC.Deadlock.Internal
         public void Resetregion_id() => __pbn__region_id = null;
         private uint? __pbn__region_id;
 
+        [global::ProtoBuf.ProtoMember(19)]
+        public ulong hideout_lobby_id
+        {
+            get => __pbn__hideout_lobby_id.GetValueOrDefault();
+            set => __pbn__hideout_lobby_id = value;
+        }
+        public bool ShouldSerializehideout_lobby_id() => __pbn__hideout_lobby_id != null;
+        public void Resethideout_lobby_id() => __pbn__hideout_lobby_id = null;
+        private ulong? __pbn__hideout_lobby_id;
+
+        [global::ProtoBuf.ProtoMember(20)]
+        public ulong routing_id
+        {
+            get => __pbn__routing_id.GetValueOrDefault();
+            set => __pbn__routing_id = value;
+        }
+        public bool ShouldSerializerouting_id() => __pbn__routing_id != null;
+        public void Resetrouting_id() => __pbn__routing_id = null;
+        private ulong? __pbn__routing_id;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Player : global::ProtoBuf.IExtensible
         {
@@ -3807,26 +4180,6 @@ namespace SteamKit2.GC.Deadlock.Internal
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint state
-        {
-            get => __pbn__state.GetValueOrDefault();
-            set => __pbn__state = value;
-        }
-        public bool ShouldSerializestate() => __pbn__state != null;
-        public void Resetstate() => __pbn__state = null;
-        private uint? __pbn__state;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public ulong lobby_id
-        {
-            get => __pbn__lobby_id.GetValueOrDefault();
-            set => __pbn__lobby_id = value;
-        }
-        public bool ShouldSerializelobby_id() => __pbn__lobby_id != null;
-        public void Resetlobby_id() => __pbn__lobby_id = null;
-        private ulong? __pbn__lobby_id;
 
     }
 
@@ -4047,6 +4400,69 @@ namespace SteamKit2.GC.Deadlock.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgServerToGCRequestPlayerHeroData : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint account_id
+        {
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
+        }
+        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+        public void Resetaccount_id() => __pbn__account_id = null;
+        private uint? __pbn__account_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint hero_id
+        {
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
+        }
+        public bool ShouldSerializehero_id() => __pbn__hero_id != null;
+        public void Resethero_id() => __pbn__hero_id = null;
+        private uint? __pbn__hero_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgServerToGCRequestPlayerHeroDataResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResult.k_eInternalError)]
+        public EResult result
+        {
+            get => __pbn__result ?? EResult.k_eInternalError;
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResult? __pbn__result;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgPlayerHeroData hero_data { get; set; }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResult
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTooBusy = 2,
+            k_eDisabled = 3,
+            k_eTimeout = 4,
+            k_eInvalidPermission = 5,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EGCCitadelServerMessages
     {
         k_EMsgServerToGCMatchSignoutPermission = 10012,
@@ -4071,6 +4487,10 @@ namespace SteamKit2.GC.Deadlock.Internal
         k_EMsgServerToGCUpdateMatchInfo = 10041,
         k_EMsgServerToGCReportCheater = 10042,
         k_EMsgServerToGCReportCheaterResponse = 10043,
+        k_EMsgServerToGCRequestPlayerHeroData = 10044,
+        k_EMsgServerToGCRequestPlayerHeroDataResponse = 10045,
+        k_EMsgGCToServerAllocateForHideout = 10046,
+        k_EMsgGCToServerAllocateForHideoutResponse = 10047,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -4095,6 +4515,8 @@ namespace SteamKit2.GC.Deadlock.Internal
         k_EServerSignoutData_PenalizedPlayers = 9,
         k_EServerSignoutData_ReportCheaters = 10,
         k_EServerSignoutData_MatchDevStats = 11,
+        k_EServerSignoutData_ChallengeProgress = 12,
+        k_EServerSignoutData_HeroXPGrant = 13,
         k_EServerSignoutData_MatchKills = 14,
     }
 

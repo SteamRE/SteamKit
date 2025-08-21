@@ -11874,14 +11874,14 @@ namespace SteamKit2.WebUI.Internal
         private bool? __pbn__disable_partner_autogrants;
 
         [global::ProtoBuf.ProtoMember(107)]
-        public bool is_steam_deck
+        public bool is_steam_deck_deprecated
         {
-            get => __pbn__is_steam_deck.GetValueOrDefault();
-            set => __pbn__is_steam_deck = value;
+            get => __pbn__is_steam_deck_deprecated.GetValueOrDefault();
+            set => __pbn__is_steam_deck_deprecated = value;
         }
-        public bool ShouldSerializeis_steam_deck() => __pbn__is_steam_deck != null;
-        public void Resetis_steam_deck() => __pbn__is_steam_deck = null;
-        private bool? __pbn__is_steam_deck;
+        public bool ShouldSerializeis_steam_deck_deprecated() => __pbn__is_steam_deck_deprecated != null;
+        public void Resetis_steam_deck_deprecated() => __pbn__is_steam_deck_deprecated = null;
+        private bool? __pbn__is_steam_deck_deprecated;
 
         [global::ProtoBuf.ProtoMember(108)]
         [global::System.ComponentModel.DefaultValue("")]
@@ -11905,14 +11905,24 @@ namespace SteamKit2.WebUI.Internal
         private bool? __pbn__is_chrome_os;
 
         [global::ProtoBuf.ProtoMember(110)]
-        public bool is_tesla
+        public bool is_tesla_deprecated
         {
-            get => __pbn__is_tesla.GetValueOrDefault();
-            set => __pbn__is_tesla = value;
+            get => __pbn__is_tesla_deprecated.GetValueOrDefault();
+            set => __pbn__is_tesla_deprecated = value;
         }
-        public bool ShouldSerializeis_tesla() => __pbn__is_tesla != null;
-        public void Resetis_tesla() => __pbn__is_tesla = null;
-        private bool? __pbn__is_tesla;
+        public bool ShouldSerializeis_tesla_deprecated() => __pbn__is_tesla_deprecated != null;
+        public void Resetis_tesla_deprecated() => __pbn__is_tesla_deprecated = null;
+        private bool? __pbn__is_tesla_deprecated;
+
+        [global::ProtoBuf.ProtoMember(111)]
+        public uint gaming_device_type
+        {
+            get => __pbn__gaming_device_type.GetValueOrDefault();
+            set => __pbn__gaming_device_type = value;
+        }
+        public bool ShouldSerializegaming_device_type() => __pbn__gaming_device_type != null;
+        public void Resetgaming_device_type() => __pbn__gaming_device_type = null;
+        private uint? __pbn__gaming_device_type;
 
     }
 
@@ -17748,6 +17758,16 @@ namespace SteamKit2.WebUI.Internal
         public void Resetoverlay_fps_counter_cpu_graph() => __pbn__overlay_fps_counter_cpu_graph = null;
         private bool? __pbn__overlay_fps_counter_cpu_graph;
 
+        [global::ProtoBuf.ProtoMember(4032)]
+        public bool overlay_fps_counter_allow_km_driver
+        {
+            get => __pbn__overlay_fps_counter_allow_km_driver.GetValueOrDefault();
+            set => __pbn__overlay_fps_counter_allow_km_driver = value;
+        }
+        public bool ShouldSerializeoverlay_fps_counter_allow_km_driver() => __pbn__overlay_fps_counter_allow_km_driver != null;
+        public void Resetoverlay_fps_counter_allow_km_driver() => __pbn__overlay_fps_counter_allow_km_driver = null;
+        private bool? __pbn__overlay_fps_counter_allow_km_driver;
+
         [global::ProtoBuf.ProtoMember(5000)]
         public bool smooth_scroll_webviews
         {
@@ -19265,6 +19285,17 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializeaccessibility_desktop_ui_scale() => __pbn__accessibility_desktop_ui_scale != null;
         public void Resetaccessibility_desktop_ui_scale() => __pbn__accessibility_desktop_ui_scale = null;
         private float? __pbn__accessibility_desktop_ui_scale;
+
+        [global::ProtoBuf.ProtoMember(26011)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string accessibility_screen_reader_locale
+        {
+            get => __pbn__accessibility_screen_reader_locale ?? "";
+            set => __pbn__accessibility_screen_reader_locale = value;
+        }
+        public bool ShouldSerializeaccessibility_screen_reader_locale() => __pbn__accessibility_screen_reader_locale != null;
+        public void Resetaccessibility_screen_reader_locale() => __pbn__accessibility_screen_reader_locale = null;
+        private string __pbn__accessibility_screen_reader_locale;
 
         [global::ProtoBuf.ProtoMember(140011)]
         public bool controller_enable_chord

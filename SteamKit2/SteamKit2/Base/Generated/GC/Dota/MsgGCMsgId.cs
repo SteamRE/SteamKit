@@ -379,6 +379,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgClientToGCGetProfileTicketsResponse = 8074,
         k_EMsgGCToClientMatchGroupsVersion = 8075,
         k_EMsgClientToGCH264Unsupported = 8076,
+        k_EMsgClientToGCWatchingBroadcast = 8077,
         k_EMsgClientToGCGetQuestProgress = 8078,
         k_EMsgClientToGCGetQuestProgressResponse = 8079,
         k_EMsgSignOutXPCoins = 8080,
@@ -602,6 +603,8 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgSQLGCToGCGrantAllHeroProgressVictory = 8364,
         k_EMsgDevDeleteEventActions = 8365,
         k_EMsgDevDeleteEventActionsResponse = 8366,
+        k_EMsgDevReloadAllEvents = 8367,
+        k_EMsgDevReloadAllEventsResponse = 8368,
         k_EMsgGCToGCGetAllHeroCurrent = 8635,
         k_EMsgGCToGCGetAllHeroCurrentResponse = 8636,
         k_EMsgGCSubmitPlayerAvoidRequest = 8637,
@@ -970,6 +973,10 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgClientToGCCraftworksDevModifyComponents = 9020,
         k_EMsgClientToGCCraftworksDevModifyComponentsResponse = 9021,
         k_EMsgSignOutCraftworks = 9022,
+        k_EMsgClientToGCClaimGatedEvent = 9043,
+        k_EMsgClientToGCClaimGatedEventResponse = 9044,
+        k_EMsgClientToGCGetEventRanking = 9107,
+        k_EMsgClientToGCGetEventRankingResponse = 9108,
     }
 
 }

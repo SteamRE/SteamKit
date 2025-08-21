@@ -1990,6 +1990,17 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetcurrent_primary_event() => __pbn__current_primary_event = null;
         private EEvent? __pbn__current_primary_event;
 
+        [global::ProtoBuf.ProtoMember(104)]
+        [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
+        public EEvent current_primary_event_for_display
+        {
+            get => __pbn__current_primary_event_for_display ?? EEvent.EVENT_ID_NONE;
+            set => __pbn__current_primary_event_for_display = value;
+        }
+        public bool ShouldSerializecurrent_primary_event_for_display() => __pbn__current_primary_event_for_display != null;
+        public void Resetcurrent_primary_event_for_display() => __pbn__current_primary_event_for_display = null;
+        private EEvent? __pbn__current_primary_event_for_display;
+
         [global::ProtoBuf.ProtoMember(105)]
         public global::System.Collections.Generic.List<int> emergency_disabled_hero_ids { get; } = new global::System.Collections.Generic.List<int>();
 

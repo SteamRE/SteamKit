@@ -195,7 +195,7 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCDelete = 1004,
         k_EMsgGCVerifyCacheSubscription = 1005,
         k_EMsgGCNameItem = 1006,
-        k_EMsgGCUnlockCrate = 1007,
+        k_EMsgGCUnlockCrate_DEPRECATED = 1007,
         k_EMsgGCUnlockCrateResponse = 1008,
         k_EMsgGCPaintItem = 1009,
         k_EMsgGCPaintItemResponse = 1010,
@@ -334,6 +334,7 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCAdjustEquipSlotsShuffle = 2532,
         k_EMsgGCOpenCrate = 2534,
         k_EMsgGCAcknowledgeRentalExpiration = 2535,
+        k_EMsgGCVolatileItemLoadContents = 2536,
     }
 
     [global::ProtoBuf.ProtoContract()]

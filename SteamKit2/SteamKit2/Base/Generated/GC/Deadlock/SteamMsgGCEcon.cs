@@ -1094,6 +1094,45 @@ namespace SteamKit2.GC.Deadlock.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToGCUnlockCrate : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint account_id
+        {
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
+        }
+        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+        public void Resetaccount_id() => __pbn__account_id = null;
+        private uint? __pbn__account_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong crate_item_id
+        {
+            get => __pbn__crate_item_id.GetValueOrDefault();
+            set => __pbn__crate_item_id = value;
+        }
+        public bool ShouldSerializecrate_item_id() => __pbn__crate_item_id != null;
+        public void Resetcrate_item_id() => __pbn__crate_item_id = null;
+        private ulong? __pbn__crate_item_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong key_item_id
+        {
+            get => __pbn__key_item_id.GetValueOrDefault();
+            set => __pbn__key_item_id = value;
+        }
+        public bool ShouldSerializekey_item_id() => __pbn__key_item_id != null;
+        public void Resetkey_item_id() => __pbn__key_item_id = null;
+        private ulong? __pbn__key_item_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgUseItem : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -4771,6 +4810,7 @@ namespace SteamKit2.GC.Deadlock.Internal
         k_EMsgGCToGCRefreshSOCache = 2549,
         k_EMsgGCToGCGrantAccountRolledItems = 2554,
         k_EMsgGCToGCGrantSelfMadeItemToAccount = 2555,
+        k_EMsgGCToGCUnlockCrate = 2556,
         k_EMsgGCStatueCraft = 2561,
         k_EMsgGCRedeemCode = 2562,
         k_EMsgGCRedeemCodeResponse = 2563,

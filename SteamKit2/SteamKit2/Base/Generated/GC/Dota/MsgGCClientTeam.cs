@@ -194,19 +194,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Reseturl_logo() => __pbn__url_logo = null;
         private string __pbn__url_logo;
 
-        [global::ProtoBuf.ProtoMember(30)]
-        public global::System.Collections.Generic.List<uint> registered_member_account_ids { get; } = new global::System.Collections.Generic.List<uint>();
-
-        [global::ProtoBuf.ProtoMember(36)]
-        public uint coach_account_id
-        {
-            get => __pbn__coach_account_id.GetValueOrDefault();
-            set => __pbn__coach_account_id = value;
-        }
-        public bool ShouldSerializecoach_account_id() => __pbn__coach_account_id != null;
-        public void Resetcoach_account_id() => __pbn__coach_account_id = null;
-        private uint? __pbn__coach_account_id;
-
         [global::ProtoBuf.ProtoMember(31)]
         public global::System.Collections.Generic.List<AuditEntry> audit_entries { get; } = new global::System.Collections.Generic.List<AuditEntry>();
 

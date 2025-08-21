@@ -3291,6 +3291,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetfor_rental() => __pbn__for_rental = null;
         private bool? __pbn__for_rental;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint points_remaining
+        {
+            get => __pbn__points_remaining.GetValueOrDefault();
+            set => __pbn__points_remaining = value;
+        }
+        public bool ShouldSerializepoints_remaining() => __pbn__points_remaining != null;
+        public void Resetpoints_remaining() => __pbn__points_remaining = null;
+        private uint? __pbn__points_remaining;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

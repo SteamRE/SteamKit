@@ -635,6 +635,36 @@ namespace SteamKit2.GC.Deadlock.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public global::System.Collections.Generic.List<CustomItemScalar> item_scalars { get; } = new global::System.Collections.Generic.List<CustomItemScalar>();
 
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint item_sequence_end
+        {
+            get => __pbn__item_sequence_end.GetValueOrDefault();
+            set => __pbn__item_sequence_end = value;
+        }
+        public bool ShouldSerializeitem_sequence_end() => __pbn__item_sequence_end != null;
+        public void Resetitem_sequence_end() => __pbn__item_sequence_end = null;
+        private uint? __pbn__item_sequence_end;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public float item_sequence_end_threshold
+        {
+            get => __pbn__item_sequence_end_threshold.GetValueOrDefault();
+            set => __pbn__item_sequence_end_threshold = value;
+        }
+        public bool ShouldSerializeitem_sequence_end_threshold() => __pbn__item_sequence_end_threshold != null;
+        public void Resetitem_sequence_end_threshold() => __pbn__item_sequence_end_threshold = null;
+        private float? __pbn__item_sequence_end_threshold;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public float repeat_multiplier
+        {
+            get => __pbn__repeat_multiplier.GetValueOrDefault();
+            set => __pbn__repeat_multiplier = value;
+        }
+        public bool ShouldSerializerepeat_multiplier() => __pbn__repeat_multiplier != null;
+        public void Resetrepeat_multiplier() => __pbn__repeat_multiplier = null;
+        private float? __pbn__repeat_multiplier;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class CustomItemScalar : global::ProtoBuf.IExtensible
         {
@@ -736,6 +766,16 @@ namespace SteamKit2.GC.Deadlock.Internal
 
         [global::ProtoBuf.ProtoMember(13)]
         public CMsgInferenceIterateBeamSearch iterate_beam_search { get; set; }
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public uint debug_spew
+        {
+            get => __pbn__debug_spew.GetValueOrDefault();
+            set => __pbn__debug_spew = value;
+        }
+        public bool ShouldSerializedebug_spew() => __pbn__debug_spew != null;
+        public void Resetdebug_spew() => __pbn__debug_spew = null;
+        private uint? __pbn__debug_spew;
 
     }
 
@@ -1459,7 +1499,7 @@ namespace SteamKit2.GC.Deadlock.Internal
             global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1)]
+            [global::ProtoBuf.ProtoMember(2)]
             public float value
             {
                 get => __pbn__value.GetValueOrDefault();
@@ -1468,6 +1508,18 @@ namespace SteamKit2.GC.Deadlock.Internal
             public bool ShouldSerializevalue() => __pbn__value != null;
             public void Resetvalue() => __pbn__value = null;
             private float? __pbn__value;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class NamedInferenceOutput : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public global::System.Collections.Generic.List<float> value { get; } = new global::System.Collections.Generic.List<float>();
 
         }
 
@@ -1570,6 +1622,15 @@ namespace SteamKit2.GC.Deadlock.Internal
             }
             public bool ShouldSerializeregression() => __pbn__ResponseType.Is(4);
             public void Resetregression() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__ResponseType, 4);
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public CMsgSteamLearn_InferenceBackend_Response.NamedInferenceOutput named_inference
+            {
+                get => __pbn__ResponseType.Is(5) ? ((CMsgSteamLearn_InferenceBackend_Response.NamedInferenceOutput)__pbn__ResponseType.Object) : default;
+                set => __pbn__ResponseType = new global::ProtoBuf.DiscriminatedUnionObject(5, value);
+            }
+            public bool ShouldSerializenamed_inference() => __pbn__ResponseType.Is(5);
+            public void Resetnamed_inference() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__ResponseType, 5);
 
         }
 
@@ -1679,6 +1740,11 @@ namespace SteamKit2.GC.Deadlock.Internal
         STEAMLEARN_INFERENCE_ERROR_INVALID_PUBLISHED_VERSION = 7,
         STEAMLEARN_INFERENCE_ERROR_NO_FETCH_ID_FOUND = 8,
         STEAMLEARN_INFERENCE_ERROR_TOO_BUSY = 9,
+        STEAMLEARN_INFERENCE_ERROR_UNSUPPLIED_DATA_FAIL = 10,
+        STEAMLEARN_INFERENCE_ERROR_UNSUPPLIED_DATA_NO_KEYS = 11,
+        STEAMLEARN_INFERENCE_DISABLED = 12,
+        STEAMLEARN_INFERENCE_ERROR_NO_OUTPUT = 13,
+        STEAMLEARN_INFERENCE_ERROR_INVALID_NAMED_INFERENCE = 14,
     }
 
     [global::ProtoBuf.ProtoContract()]

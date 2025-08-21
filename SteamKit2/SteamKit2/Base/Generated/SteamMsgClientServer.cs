@@ -204,6 +204,16 @@ namespace SteamKit2.Internal
         public void Resetrendezvous() => __pbn__rendezvous = null;
         private byte[] __pbn__rendezvous;
 
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint app_id_secondary
+        {
+            get => __pbn__app_id_secondary.GetValueOrDefault();
+            set => __pbn__app_id_secondary = value;
+        }
+        public bool ShouldSerializeapp_id_secondary() => __pbn__app_id_secondary != null;
+        public void Resetapp_id_secondary() => __pbn__app_id_secondary = null;
+        private uint? __pbn__app_id_secondary;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1089,6 +1099,35 @@ namespace SteamKit2.Internal
         public bool ShouldSerializemessage_sequence() => __pbn__message_sequence != null;
         public void Resetmessage_sequence() => __pbn__message_sequence = null;
         private uint? __pbn__message_sequence;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGameServerPolicyUpdate : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint app_id
+        {
+            get => __pbn__app_id.GetValueOrDefault();
+            set => __pbn__app_id = value;
+        }
+        public bool ShouldSerializeapp_id() => __pbn__app_id != null;
+        public void Resetapp_id() => __pbn__app_id = null;
+        private uint? __pbn__app_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint app_id_aux
+        {
+            get => __pbn__app_id_aux.GetValueOrDefault();
+            set => __pbn__app_id_aux = value;
+        }
+        public bool ShouldSerializeapp_id_aux() => __pbn__app_id_aux != null;
+        public void Resetapp_id_aux() => __pbn__app_id_aux = null;
+        private uint? __pbn__app_id_aux;
 
     }
 

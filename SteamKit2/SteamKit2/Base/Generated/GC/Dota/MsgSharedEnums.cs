@@ -1246,6 +1246,8 @@ namespace SteamKit2.GC.Dota.Internal
         EVENT_ID_FROSTIVUS_2023 = 48,
         EVENT_ID_INTERNATIONAL_2024 = 49,
         EVENT_ID_FROSTIVUS_2024 = 50,
+        EVENT_ID_INTERNATIONAL_2025 = 52,
+        EVENT_ID_FALL_2025 = 53,
     }
 
     [global::ProtoBuf.ProtoContract()]
