@@ -132,17 +132,24 @@ namespace SteamKit2
             /// </summary>
             /// <value>The chat mode.</value>
             public ChatMode ChatMode { get; set; } = ChatMode.Default;
-            
+
             /// <summary>
             /// Gets or sets the ui mode.
             /// </summary>
             /// <value>The ui mode.</value>
             public EUIMode UIMode { get; set; } = EUIMode.Unknown;
-            
+
+            /// <summary>
+            /// Gets or sets the gaming device type.
+            /// </summary>
+            /// <value>The gaming device type.</value>
+            public EGamingDeviceType GamingDeviceType { get; set; } = EGamingDeviceType.Unknown;
+
             /// <summary>
             /// Gets or sets whether this is Steam Deck login.
             /// </summary>
             /// <value>The Steam Deck login value.</value>
+            [Obsolete( "Use GamingDeviceType instead" )]
             public bool IsSteamDeck { get; set; }
 
             /// <summary>
@@ -284,16 +291,23 @@ namespace SteamKit2
             {
                 logon.Body.chat_mode = ( uint )details.ChatMode;
             }
-            
+
             if ( details.UIMode != EUIMode.Unknown )
             {
                 logon.Body.ui_mode = ( uint )details.UIMode;
             }
 
+            if ( details.GamingDeviceType != EGamingDeviceType.Unknown )
+            {
+                logon.Body.gaming_device_type = ( uint )details.GamingDeviceType;
+            }
+
+#pragma warning disable CS0618 // Type or member is obsolete
             if ( details.IsSteamDeck )
             {
-                logon.Body.is_steam_deck = true;
+                logon.Body.is_steam_deck_deprecated = true;
             }
+#pragma warning restore CS0618 // Type or member is obsolete
 
             // steam guard 
             logon.Body.auth_code = details.AuthCode;

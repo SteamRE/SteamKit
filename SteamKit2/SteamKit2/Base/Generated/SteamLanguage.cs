@@ -3407,6 +3407,18 @@ namespace SteamKit2
 		MobileChat = 5,
 		EmbeddedClient = 6,
 	}
+	public enum EGamingDeviceType
+	{
+		Unknown = 0,
+		StandardPC = 1,
+		Console = 256,
+		PS3 = 272,
+		Steambox = 288,
+		Tesla = 320,
+		Handheld = 512,
+		Phone = 528,
+		SteamDeck = 544,
+	}
 	public enum EUdpPacketType : byte
 	{
 		Invalid = 0,

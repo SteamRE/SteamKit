@@ -1673,3 +1673,18 @@ public enum EUIMode
 	MobileChat = 5;
 	EmbeddedClient = 6;
 }
+
+public enum EGamingDeviceType
+{
+	Unknown = 0;
+	StandardPC = 1;
+
+	Console = 256;
+	PS3 = 272; // Console + 16
+	Steambox = 288; // Console + 32
+	Tesla = 320; // Console + 64
+
+	Handheld = 512;
+	Phone = 528; // Handheld + 16
+	SteamDeck = 544; // Handheld + 32
+}
