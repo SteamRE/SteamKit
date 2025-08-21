@@ -1,7 +1,7 @@
 <Project>
     <PropertyGroup>
         <SteamKitRootDir>$(MSBuildThisFileDirectory)</SteamKitRootDir>
-        <SteamKitBaseVersion>3.3.0</SteamKitBaseVersion>
+        <SteamKitBaseVersion>3.3.1</SteamKitBaseVersion>
     </PropertyGroup>
 
     <PropertyGroup>
