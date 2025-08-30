@@ -6,6 +6,7 @@
 using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.IO.Hashing;
 using System.Linq;
@@ -233,7 +234,6 @@ namespace SteamKit2
             aes.Key = encryptionKey;
 
             Span<byte> iv = stackalloc byte[ 16 ];
-            var filenameLength = 0;
             var bufferDecoded = ArrayPool<byte>.Shared.Rent( 256 );
             var bufferDecrypted = ArrayPool<byte>.Shared.Rent( 256 );
 
@@ -241,47 +241,22 @@ namespace SteamKit2
             {
                 foreach ( var file in Files )
                 {
-                    var decodedLength = file.FileName.Length / 4 * 3; // This may be higher due to padding
-
-                    // Majority of filenames are short, even when they are encrypted and base64 encoded,
-                    // so this resize will be hit *very* rarely
-                    if ( decodedLength > bufferDecoded.Length )
+                    if ( !TryDecryptName( file.FileName, iv, out var name ) )
                     {
-                        ArrayPool<byte>.Shared.Return( bufferDecoded );
-                        bufferDecoded = ArrayPool<byte>.Shared.Rent( decodedLength );
-
-                        ArrayPool<byte>.Shared.Return( bufferDecrypted );
-                        bufferDecrypted = ArrayPool<byte>.Shared.Rent( decodedLength );
-                    }
-
-                    if ( !Convert.TryFromBase64Chars( file.FileName, bufferDecoded, out decodedLength ) )
-                    {
-                        DebugLog.Assert( false, nameof( DepotManifest ), "Failed to base64 decode the filename." );
                         return false;
                     }
 
-                    try
-                    {
-                        var encryptedFilename = bufferDecoded.AsSpan()[ ..decodedLength ];
-                        aes.DecryptEcb( encryptedFilename[ ..iv.Length ], iv, PaddingMode.None );
-                        filenameLength = aes.DecryptCbc( encryptedFilename[ iv.Length.. ], iv, bufferDecrypted, PaddingMode.PKCS7 );
-                    }
-                    catch ( Exception )
-                    {
-                        DebugLog.Assert( false, nameof( DepotManifest ), "Failed to decrypt the filename." );
-                        return false;
-                    }
+                    file.FileName = name;
 
-                    // Trim the ending null byte, safe for UTF-8
-                    if ( filenameLength > 0 && bufferDecrypted[ filenameLength ] == 0 )
+                    if ( !string.IsNullOrEmpty( file.LinkTarget ) )
                     {
-                        filenameLength--;
+                        if ( !TryDecryptName( file.LinkTarget, iv, out var linkName ) )
+                        {
+                            return false;
+                        }
+
+                        file.LinkTarget = linkName;
                     }
-
-                    // ASCII is subset of UTF-8, so it safe to replace the raw bytes here
-                    MemoryExtensions.Replace( bufferDecrypted.AsSpan(), ( byte )altDirChar, ( byte )Path.DirectorySeparatorChar );
-
-                    file.FileName = Encoding.UTF8.GetString( bufferDecrypted, 0, filenameLength );
                 }
             }
             finally
@@ -296,6 +271,55 @@ namespace SteamKit2
 
             FilenamesEncrypted = false;
             return true;
+
+            bool TryDecryptName( string name, Span<byte> iv, [MaybeNullWhen(false)] out string decoded )
+            {
+                decoded = null;
+
+                var decodedLength = name.Length / 4 * 3; // This may be higher due to padding
+
+                // Majority of filenames are short, even when they are encrypted and base64 encoded,
+                // so this resize will be hit *very* rarely
+                if ( decodedLength > bufferDecoded.Length )
+                {
+                    ArrayPool<byte>.Shared.Return( bufferDecoded );
+                    bufferDecoded = ArrayPool<byte>.Shared.Rent( decodedLength );
+
+                    ArrayPool<byte>.Shared.Return( bufferDecrypted );
+                    bufferDecrypted = ArrayPool<byte>.Shared.Rent( decodedLength );
+                }
+
+                if ( !Convert.TryFromBase64Chars( name, bufferDecoded, out decodedLength ) )
+                {
+                    DebugLog.Assert( false, nameof( DepotManifest ), "Failed to base64 decode the filename." );
+                    return false;
+                }
+
+                int filenameLength;
+                try
+                {
+                    var encryptedFilename = bufferDecoded.AsSpan()[ ..decodedLength ];
+                    aes.DecryptEcb( encryptedFilename[ ..iv.Length ], iv, PaddingMode.None );
+                    filenameLength = aes.DecryptCbc( encryptedFilename[ iv.Length.. ], iv, bufferDecrypted, PaddingMode.PKCS7 );
+                }
+                catch ( Exception )
+                {
+                    DebugLog.Assert( false, nameof( DepotManifest ), "Failed to decrypt the filename." );
+                    return false;
+                }
+
+                // Trim the ending null byte, safe for UTF-8
+                if ( filenameLength > 0 && bufferDecrypted[ filenameLength ] == 0 )
+                {
+                    filenameLength--;
+                }
+
+                // ASCII is subset of UTF-8, so it safe to replace the raw bytes here
+                MemoryExtensions.Replace( bufferDecrypted.AsSpan(), ( byte )altDirChar, ( byte )Path.DirectorySeparatorChar );
+
+                decoded = Encoding.UTF8.GetString( bufferDecrypted, 0, filenameLength );
+                return true;
+            }
         }
 
         /// <summary>
