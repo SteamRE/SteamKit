@@ -1686,5 +1686,7 @@ public enum EGamingDeviceType
 
 	Handheld = 512;
 	Phone = 528; // Handheld + 16
+	SteamOS = 541; // Handheld + 29
 	SteamDeck = 544; // Handheld + 32
+	LegionGoS = 545; // Handheld + 33
 }
