@@ -3417,7 +3417,9 @@ namespace SteamKit2
 		Tesla = 320,
 		Handheld = 512,
 		Phone = 528,
+		SteamOS = 541,
 		SteamDeck = 544,
+		LegionGoS = 545,
 	}
 	public enum EUdpPacketType : byte
 	{
