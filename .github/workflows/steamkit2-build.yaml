@@ -24,7 +24,7 @@ jobs:
         submodules: recursive
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
 
     - name: Build SteamKit
       run: dotnet build --configuration ${{ matrix.configuration }} SteamKit2/SteamKit2/SteamKit2.csproj
@@ -77,7 +77,7 @@ jobs:
         submodules: recursive
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
 
     - name: Create NuGet Package
       run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
@@ -99,7 +99,7 @@ jobs:
         submodules: recursive
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
 
     - name: Publish NetHookAnalyzer2
       run: dotnet publish --configuration Release --runtime win-x64 --self-contained Resources/NetHookAnalyzer2/NetHookAnalyzer2/NetHookAnalyzer2.csproj /p:PublishSingleFile=True
@@ -169,7 +169,7 @@ jobs:
         submodules: recursive
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
 
     - name: Create NuGet Package
       run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj
