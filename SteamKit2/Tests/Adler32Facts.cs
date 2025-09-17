@@ -29,8 +29,30 @@ public class Adler32Facts
         Random.Shared.NextBytes( data );
 
         var expected = ReferenceImplementation( data );
+
         var actual = Adler32.Calculate( Seed, data );
         Assert.Equal( expected, actual );
+
+        actual = Adler32.CalculateScalar( Seed, data );
+        Assert.Equal( expected, actual );
+
+        if ( System.Runtime.Intrinsics.X86.Avx2.IsSupported && length >= 64 )
+        {
+            actual = Adler32.CalculateAvx2( Seed, data );
+            Assert.Equal( expected, actual );
+        }
+
+        if ( System.Runtime.Intrinsics.X86.Ssse3.IsSupported && length >= 64 )
+        {
+            actual = Adler32.CalculateSse( Seed, data );
+            Assert.Equal( expected, actual );
+        }
+
+        if ( System.Runtime.Intrinsics.Arm.AdvSimd.IsSupported )
+        {
+            actual = Adler32.CalculateArm( Seed, data );
+            Assert.Equal( expected, actual );
+        }
     }
 
     private static uint ReferenceImplementation( ReadOnlySpan<byte> input )
