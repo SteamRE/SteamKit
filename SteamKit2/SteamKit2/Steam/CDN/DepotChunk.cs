@@ -88,7 +88,7 @@ namespace SteamKit2.CDN
                 throw new InvalidDataException( $"Processed data checksum failed to decompressed to the expected chunk uncompressed length. (was {writtenDecompressed}, should be {info.UncompressedLength})" );
             }
 
-            var dataCrc = Utils.AdlerHash( destination.AsSpan()[ ..writtenDecompressed ] );
+            var dataCrc = AdlerHash( destination.AsSpan( 0, writtenDecompressed ) );
 
             if ( dataCrc != info.Checksum )
             {
@@ -97,5 +97,11 @@ namespace SteamKit2.CDN
 
             return writtenDecompressed;
         }
+
+        /// <summary>
+        /// Calculates the Adler32 checksum with the bytes taken from the span using zero as the initial seed.
+        /// </summary>
+        public static uint AdlerHash( ReadOnlySpan<byte> input )
+            => Adler32.Calculate( 0, input );
     }
 }
