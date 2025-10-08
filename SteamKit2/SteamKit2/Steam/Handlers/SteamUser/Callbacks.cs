@@ -208,7 +208,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is fired when the client recieves it's unique Steam3 session token. This token is used for authenticated content downloading in Steam2.
+        /// This callback is fired when the client receives its unique Steam3 session token. This token is used for authenticated content downloading in Steam2.
         /// </summary>
         public sealed class SessionTokenCallback : CallbackMsg
         {
@@ -397,7 +397,7 @@ namespace SteamKit2
             internal VanityURLChangedCallback( IPacketMsg packetMsg )
             {
                 var vanityUrl = new ClientMsgProtobuf<CMsgClientVanityURLChangedNotification>( packetMsg );
-                
+
                 this.JobID = vanityUrl.TargetJobID;
                 this.VanityURL = vanityUrl.Body.vanity_url;
             }

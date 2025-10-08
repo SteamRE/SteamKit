@@ -106,7 +106,7 @@ namespace SteamKit2
             gameid.Data = gameId;
         }
         /// <summary>
-        /// Converts this GameID into it's 64bit integer form.
+        /// Converts this GameID into its 64bit integer form.
         /// </summary>
         /// <returns>A 64bit integer representing this GameID.</returns>
         public ulong ToUInt64()

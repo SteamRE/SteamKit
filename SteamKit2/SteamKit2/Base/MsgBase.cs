@@ -222,7 +222,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Writes the secified string and a null terminator to the message payload using UTF-8 encoding.
+        /// Writes the specified string and a null terminator to the message payload using UTF-8 encoding.
         /// </summary>
         /// <param name="data">The string to write.</param>
         public void WriteNullTermString( string data )

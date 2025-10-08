@@ -143,7 +143,7 @@ class DotaClient
         Action<IPacketGCMsg> func;
         if ( !messageMap.TryGetValue( callback.EMsg, out func ) )
         {
-            // this will happen when we recieve some GC messages that we're not handling
+            // this will happen when we receive some GC messages that we're not handling
             // this is okay because we're handling every essential message, and the rest can be ignored
             return;
         }
@@ -156,7 +156,7 @@ class DotaClient
     // this can also happen after the GC has restarted (due to a crash or new version)
     void OnClientWelcome( IPacketGCMsg packetMsg )
     {
-        // in order to get at the contents of the message, we need to create a ClientGCMsgProtobuf from the packet message we recieve
+        // in order to get at the contents of the message, we need to create a ClientGCMsgProtobuf from the packet message we receive
         // note here the difference between ClientGCMsgProtobuf and the ClientMsgProtobuf used when sending ClientGamesPlayed
         // this message is used for the GC, while the other is used for general steam messages
         var msg = new ClientGCMsgProtobuf<CMsgClientWelcome>( packetMsg );

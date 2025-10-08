@@ -265,7 +265,7 @@ namespace SteamKit2
                 }
                 catch (Exception ex)
                 {
-                    log.LogDebug( nameof( TcpConnection ), "Unexpected exception propogated back to NetLoop: {0}", ex );
+                    log.LogDebug( nameof( TcpConnection ), "Unexpected exception propagated back to NetLoop: {0}", ex );
                 }
             }
 

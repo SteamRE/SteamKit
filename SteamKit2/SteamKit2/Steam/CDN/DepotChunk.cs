@@ -23,7 +23,7 @@ namespace SteamKit2.CDN
         /// <param name="data">The encrypted chunk data.</param>
         /// <param name="destination">The buffer to receive the decrypted chunk data.</param>
         /// <param name="depotKey">The depot decryption key.</param>
-        /// <exception cref="InvalidDataException">Thrown if the processed data does not match the expected checksum given in it's chunk information.</exception>
+        /// <exception cref="InvalidDataException">Thrown if the processed data does not match the expected checksum given in its chunk information.</exception>
         public static int Process( DepotManifest.ChunkData info, ReadOnlySpan<byte> data, byte[] destination, byte[] depotKey )
         {
             ArgumentNullException.ThrowIfNull( info );

@@ -13,7 +13,7 @@ using SteamKit2.Internal;
 namespace SteamKit2.Authentication
 {
     /// <summary>
-    /// Represents an authentication sesssion which can be used to finish the authentication and get access tokens.
+    /// Represents an authentication session which can be used to finish the authentication and get access tokens.
     /// </summary>
     public class AuthSession
     {

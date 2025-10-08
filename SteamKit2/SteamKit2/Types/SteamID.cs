@@ -330,7 +330,7 @@ namespace SteamKit2
         public void SetFromUInt64( ulong ulSteamID ) => this.steamid.Data = ulSteamID;
 
         /// <summary>
-        /// Converts this SteamID into it's 64bit integer form.
+        /// Converts this SteamID into its 64bit integer form.
         /// </summary>
         /// <returns>A 64bit integer representing this SteamID.</returns>
         public ulong ConvertToUInt64() => this.steamid.Data;
@@ -522,7 +522,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Renders this instance into it's Steam2 "STEAM_" or Steam3 representation.
+        /// Renders this instance into its Steam2 "STEAM_" or Steam3 representation.
         /// </summary>
         /// <param name="steam3">If set to <c>true</c>, the Steam3 rendering will be returned; otherwise, the Steam2 STEAM_ rendering.</param>
         /// <returns>

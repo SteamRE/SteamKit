@@ -225,7 +225,7 @@ namespace SteamKit2
             }
 
             DebugLog.Assert( Files != null, nameof( DepotManifest ), "Files was null when attempting to decrypt filenames." );
-            DebugLog.Assert( encryptionKey.Length == 32, nameof( DepotManifest ), $"Decrypt filnames used with non 32 byte key!" );
+            DebugLog.Assert( encryptionKey.Length == 32, nameof( DepotManifest ), $"Decrypt filenames used with non 32 byte key!" );
 
             // This was copypasted from <see cref="CryptoHelper.SymmetricDecrypt"/> to avoid allocating Aes instance for every filename
             using var aes = Aes.Create();

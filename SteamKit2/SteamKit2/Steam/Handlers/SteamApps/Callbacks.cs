@@ -17,7 +17,7 @@ namespace SteamKit2
     {
 
         /// <summary>
-        /// This callback is fired during logon, informing the client of it's available licenses.
+        /// This callback is fired during logon, informing the client of its available licenses.
         /// </summary>
         public sealed class LicenseListCallback : CallbackMsg
         {
@@ -328,7 +328,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is fired when the client receives it's VAC banned status.
+        /// This callback is fired when the client receives its VAC banned status.
         /// </summary>
         public sealed class VACStatusCallback : CallbackMsg
         {

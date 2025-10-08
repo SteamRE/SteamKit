@@ -42,7 +42,7 @@ namespace SteamKit2
         /// <summary>
         /// Disconnects this instance.
         /// </summary>
-        /// <param name="userInitiated">If true, this disconnection attempt was initated by a consumer.</param>
+        /// <param name="userInitiated">If true, this disconnection attempt was initiated by a consumer.</param>
         void Disconnect( bool userInitiated );
 
         /// <summary>

@@ -103,7 +103,7 @@ namespace SteamKit2
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ClientMsgProtobuf"/> class.
-        /// This is a recieve constructor.
+        /// This is a receive constructor.
         /// </summary>
         /// <param name="msg">The packet message to build this client message from.</param>
         public ClientMsgProtobuf( IPacketMsg msg )
@@ -178,7 +178,7 @@ namespace SteamKit2
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ClientMsgProtobuf&lt;BodyType&gt;"/> class.
-        /// This is a recieve constructor.
+        /// This is a receive constructor.
         /// </summary>
         /// <param name="msg">The packet message to build this client message from.</param>
         public ClientMsgProtobuf( IPacketMsg msg )
@@ -333,7 +333,7 @@ namespace SteamKit2
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ClientMsg&lt;BodyType&gt;"/> class.
-        /// This is a recieve constructor.
+        /// This is a receive constructor.
         /// </summary>
         /// <param name="msg">The packet message to build this client message from.</param>
         public ClientMsg( IPacketMsg msg )
@@ -481,7 +481,7 @@ namespace SteamKit2
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Msg&lt;BodyType&gt;"/> class.
-        /// This is a recieve constructor.
+        /// This is a receive constructor.
         /// </summary>
         /// <param name="msg">The packet message to build this client message from.</param>
         public Msg( IPacketMsg msg )

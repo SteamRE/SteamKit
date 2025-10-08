@@ -42,7 +42,7 @@ var myHandler = steamClient.GetHandler<MyHandler>();
 // to the functions specified
 manager.Subscribe<SteamClient.ConnectedCallback>( OnConnected );
 manager.Subscribe<SteamClient.DisconnectedCallback>( OnDisconnected );
-            
+
 manager.Subscribe<SteamUser.LoggedOnCallback>( OnLoggedOn );
 manager.Subscribe<SteamUser.LoggedOffCallback>( OnLoggedOff );
 
@@ -87,7 +87,7 @@ void OnLoggedOn( SteamUser.LoggedOnCallback callback )
     {
         if ( callback.Result == EResult.AccountLogonDenied )
         {
-            // if we recieve AccountLogonDenied or one of it's flavors (AccountLogonDeniedNoMailSent, etc)
+            // if we receive AccountLogonDenied or one of its flavors (AccountLogonDeniedNoMailSent, etc)
             // then the account we're logging into is SteamGuard protected
             // see sample 6 for how SteamGuard can be handled
 

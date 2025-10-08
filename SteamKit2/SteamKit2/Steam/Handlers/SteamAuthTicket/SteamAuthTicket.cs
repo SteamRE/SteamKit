@@ -14,7 +14,7 @@ using System.Threading;
 namespace SteamKit2
 {
     /// <summary>
-    /// This handler generates auth session ticket and handles it's verification by steam.
+    /// This handler generates auth session ticket and handles its verification by steam.
     /// </summary>
     public sealed partial class SteamAuthTicket : ClientMsgHandler
     {
@@ -27,16 +27,16 @@ namespace SteamKit2
             /// Default auth session ticket type.
             /// </summary>
             AuthSession = 2,
-            
+
             /// <summary>
             /// Web API auth session ticket type.
             /// </summary>
             WebApiTicket = 5
         }
-        
+
         //According to https://partner.steamgames.com/doc/api/ISteamUser#GetTicketForWebApiResponse_t the m_rgubTicket size is 2560 bytes
         private const int WebApiTicketSize = 2560;
-        
+
         private readonly Dictionary<EMsg, Action<IPacketMsg>> DispatchMap;
         private readonly Queue<byte[]> GameConnectTokens = new();
         private readonly Dictionary<uint, List<CMsgAuthTicket>> TicketsByGame = [];
@@ -79,7 +79,7 @@ namespace SteamKit2
         {
             return GetAuthSessionTicketInternal( appid, TicketType.WebApiTicket, identity );
         }
-        
+
         internal async Task<TicketInfo> GetAuthSessionTicketInternal( uint appid, TicketType ticketType, string? identity )
         {
             if ( Client.CellID == null ) throw new Exception( "User not logged in." );
@@ -92,7 +92,7 @@ namespace SteamKit2
             if ( GameConnectTokens.TryDequeue( out var token ) )
             {
                 var authTicket = BuildAuthTicket( token, ticketType );
-                
+
                 // Steam add the 'str:' prefix to the identity string itself and appends a null terminator
                 var serverSecret = string.IsNullOrEmpty( identity )
                     ? null
@@ -132,7 +132,7 @@ namespace SteamKit2
         private static byte[] CombineTickets( byte[] authTicket, byte[] appTicket, bool padToWebApiSize )
         {
             var len = appTicket.Length;
-            
+
             int rawSize = authTicket.Length + 4 + appTicket.Length;
             int target  = padToWebApiSize ? Math.Max(rawSize, WebApiTicketSize) : rawSize;
             
@@ -141,7 +141,7 @@ namespace SteamKit2
             authTicket.CopyTo( mem );
             MemoryMarshal.Write( mem[ authTicket.Length.. ], in len );
             appTicket.CopyTo( mem[ ( authTicket.Length + 4 ).. ] );
-            
+
             // The WebApiTicket is always 2560 bytes long, but everything after the tickets is just a trash after memory allocation
             if (padToWebApiSize && rawSize < target)
                 RandomNumberGenerator.Fill(mem[rawSize..target]);

@@ -42,7 +42,7 @@ namespace SteamKit2
         /// 
         /// Header is populated from the MemoryStream
         /// </summary>
-        /// <param name="ms">The stream containing the packet and it's payload data.</param>
+        /// <param name="ms">The stream containing the packet and its payload data.</param>
         public UdpPacket(MemoryStream ms)
         {
             Header = new UdpHeader();

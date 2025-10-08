@@ -105,7 +105,7 @@ namespace SteamKit2.GC
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ClientGCMsgProtobuf&lt;BodyType&gt;"/> class.
-        /// This is a recieve constructor.
+        /// This is a receive constructor.
         /// </summary>
         /// <param name="msg">The packet message to build this gc message from.</param>
         public ClientGCMsgProtobuf( IPacketGCMsg msg )
@@ -236,7 +236,7 @@ namespace SteamKit2.GC
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ClientGCMsg&lt;BodyType&gt;"/> class.
-        /// This is a recieve constructor.
+        /// This is a receive constructor.
         /// </summary>
         /// <param name="msg">The packet message to build this gc message from.</param>
         public ClientGCMsg( IPacketGCMsg msg )
