@@ -329,7 +329,7 @@ namespace SteamKit2
         /// </returns>
         public override int GetHashCode()
         {
-            return gameid.GetHashCode();
+            return gameid.Data.GetHashCode();
         }
 
         /// <summary>

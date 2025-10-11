@@ -29,5 +29,18 @@ namespace Tests
             Assert.True(gameId.IsShortcut);
             Assert.Equal(new GameID(12754778225939316736), gameId);
         }
+
+        [Fact]
+        public void GameIDsKHashcodeEquality()
+        {             
+            GameID gameId1 = new GameID(570);
+            GameID gameId2 = new GameID(570);
+            GameID gameId3 = new GameID(570, "test");
+            GameID gameid4 = new GameID(440);
+            Assert.Equal(gameId1.GetHashCode(), gameId2.GetHashCode());
+            Assert.NotEqual(gameId1.GetHashCode(), gameId3.GetHashCode());
+            Assert.NotEqual(gameId2.GetHashCode(), gameId3.GetHashCode());
+            Assert.NotEqual(gameId1.GetHashCode(), gameid4.GetHashCode());
+        }
     }
 }
