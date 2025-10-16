@@ -87,18 +87,14 @@ namespace SteamKit2
                     }
                 }
 
-                if (socket.State == WebSocketState.Open)
+                if (socket.State == WebSocketState.Open && disposed == 0)
                 {
                     connection.log.LogDebug( nameof(WebSocketContext), "Closing connection...");
                     try
                     {
                         await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, null, default).ConfigureAwait(false);
                     }
-                    catch ( ObjectDisposedException ex )
-                    {
-                        connection.log.LogDebug( nameof(WebSocketContext), "Error closing connection: {0}", ex.Message);
-                    }
-                    catch ( Win32Exception ex )
+                    catch (Win32Exception ex)
                     {
                         connection.log.LogDebug( nameof(WebSocketContext), "Error closing connection: {0}", ex.Message);
                     }
