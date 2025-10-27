@@ -26,7 +26,7 @@ jobs:
       run: dotnet pack --configuration Release SteamKit2/SteamKit2/SteamKit2.csproj /p:Version=${{ github.event.release.tag_name }}
 
     - name: Upload NuGet Package as Artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: SteamKit2-${{ github.event.release.tag_name }}.nupkg
         path: 'SteamKit2/SteamKit2/bin/Release/SteamKit2.${{ github.event.release.tag_name }}.nupkg'
