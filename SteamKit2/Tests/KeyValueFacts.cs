@@ -64,6 +64,21 @@ namespace Tests
         }
 
         [Fact]
+        public void KeyValueIndexerHandlesCaseInsensitiveDuplicates()
+        {
+            KeyValue kv = new KeyValue();
+
+            kv["key"] = new KeyValue();
+            Assert.Single( kv.Children );
+
+            kv["KEY"] = new KeyValue(); // Different case
+            Assert.Single( kv.Children ); // Should still be 1, not 2
+
+            kv["Key"] = new KeyValue(); // Another variation
+            Assert.Single( kv.Children ); // Should still be 1
+        }
+
+        [Fact]
         public void KeyValueLoadsFromString()
         {
             KeyValue kv = KeyValue.LoadFromString(

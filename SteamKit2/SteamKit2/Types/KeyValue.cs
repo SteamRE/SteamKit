@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Text;
 
 namespace SteamKit2
@@ -278,27 +277,28 @@ namespace SteamKit2
             {
                 ArgumentNullException.ThrowIfNull( key );
 
-                var child = this.Children
-                    .FirstOrDefault( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
-
-                if ( child == null )
+                foreach ( var c in this.Children )
                 {
-                    return Invalid;
+                    if ( string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) )
+                    {
+                        return c;
+                    }
                 }
 
-                return child;
+                return Invalid;
             }
             set
             {
                 ArgumentNullException.ThrowIfNull( key );
 
-                var existingChild = this.Children
-                    .FirstOrDefault( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
-
-                if ( existingChild != null )
+                foreach ( var c in this.Children )
                 {
-                    // if the key already exists, remove the old one
-                    this.Children.Remove( existingChild );
+                    if ( string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) )
+                    {
+                        // if the key already exists, remove the old one
+                        this.Children.Remove( c );
+                        break;
+                    }
                 }
 
                 // ensure the given KV actually has the correct key assigned
@@ -810,7 +810,7 @@ namespace SteamKit2
                 }
 
                 current.Name = input.ReadNullTermString( Encoding.UTF8 );
-                
+
                 switch ( type )
                 {
                     case Type.None:
