@@ -260,6 +260,16 @@ namespace SteamKit2.WebUI.Internal
         public void Resetrestrict_add_additional_to_cart() => __pbn__restrict_add_additional_to_cart = null;
         private bool? __pbn__restrict_add_additional_to_cart;
 
+        [global::ProtoBuf.ProtoMember(14)]
+        public uint quantity
+        {
+            get => __pbn__quantity.GetValueOrDefault();
+            set => __pbn__quantity = value;
+        }
+        public bool ShouldSerializequantity() => __pbn__quantity != null;
+        public void Resetquantity() => __pbn__quantity = null;
+        private uint? __pbn__quantity;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

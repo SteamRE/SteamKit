@@ -309,6 +309,16 @@ namespace SteamKit2.Internal
         public void Resetvr_link_invite_client_id() => __pbn__vr_link_invite_client_id = null;
         private ulong? __pbn__vr_link_invite_client_id;
 
+        [global::ProtoBuf.ProtoMember(28, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong connected_wifi_ap_client_id
+        {
+            get => __pbn__connected_wifi_ap_client_id.GetValueOrDefault();
+            set => __pbn__connected_wifi_ap_client_id = value;
+        }
+        public bool ShouldSerializeconnected_wifi_ap_client_id() => __pbn__connected_wifi_ap_client_id != null;
+        public void Resetconnected_wifi_ap_client_id() => __pbn__connected_wifi_ap_client_id = null;
+        private ulong? __pbn__connected_wifi_ap_client_id;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class User : global::ProtoBuf.IExtensible
         {

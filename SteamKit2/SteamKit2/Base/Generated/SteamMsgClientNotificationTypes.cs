@@ -1066,6 +1066,16 @@ namespace SteamKit2.Internal
         private string __pbn__machine;
 
         [global::ProtoBuf.ProtoMember(3)]
+        public uint guest_id
+        {
+            get => __pbn__guest_id.GetValueOrDefault();
+            set => __pbn__guest_id = value;
+        }
+        public bool ShouldSerializeguest_id() => __pbn__guest_id != null;
+        public void Resetguest_id() => __pbn__guest_id = null;
+        private uint? __pbn__guest_id;
+
+        [global::ProtoBuf.ProtoMember(4)]
         public bool connected
         {
             get => __pbn__connected.GetValueOrDefault();
@@ -1256,6 +1266,18 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CClientNotificationHardwareUpdateAvailable : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<uint> etype { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EClientNotificationType
     {
         k_EClientNotificationType_Invalid = 0,
@@ -1317,6 +1339,7 @@ namespace SteamKit2.Internal
         k_EClientNotificationType_GameRecordingInstantClip = 58,
         k_EClientNotificationType_PlaytestInvite = 59,
         k_EClientNotificationType_TradeReversal = 60,
+        k_EClientNotificationType_HardwareUpdateAvailable = 61,
     }
 
     [global::ProtoBuf.ProtoContract()]

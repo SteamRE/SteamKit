@@ -1015,6 +1015,16 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(82)]
             public global::System.Collections.Generic.List<OtherGameData> other_game_data { get; } = new global::System.Collections.Generic.List<OtherGameData>();
 
+            [global::ProtoBuf.ProtoMember(83)]
+            public uint gaming_device_type
+            {
+                get => __pbn__gaming_device_type.GetValueOrDefault();
+                set => __pbn__gaming_device_type = value;
+            }
+            public bool ShouldSerializegaming_device_type() => __pbn__gaming_device_type != null;
+            public void Resetgaming_device_type() => __pbn__gaming_device_type = null;
+            private uint? __pbn__gaming_device_type;
+
             [global::ProtoBuf.ProtoContract()]
             public partial class ClanData : global::ProtoBuf.IExtensible
             {

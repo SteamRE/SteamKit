@@ -1702,6 +1702,11 @@ namespace SteamKit2.GC.Dota.Internal
         k_EBadgeType_TI13_FinalsDay2 = 19,
         k_EBadgeType_TI13_FinalsDay3 = 20,
         k_EBadgeType_TI13_Special = 21,
+        k_EBadgeType_TI14_FinalsDay1 = 22,
+        k_EBadgeType_TI14_FinalsDay2 = 23,
+        k_EBadgeType_TI14_FinalsDay3 = 24,
+        k_EBadgeType_TI14_FinalsDay4 = 25,
+        k_EBadgeType_TI14_Special = 26,
     }
 
     [global::ProtoBuf.ProtoContract()]

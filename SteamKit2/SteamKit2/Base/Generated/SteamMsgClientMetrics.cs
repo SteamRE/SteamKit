@@ -472,6 +472,9 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public global::System.Collections.Generic.List<Error> errors { get; } = new global::System.Collections.Generic.List<Error>();
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<string> tags { get; } = new global::System.Collections.Generic.List<string>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Error : global::ProtoBuf.IExtensible
         {
@@ -1161,14 +1164,15 @@ namespace SteamKit2.Internal
         private bool? __pbn__library_low_perf_mode_enabled;
 
         [global::ProtoBuf.ProtoMember(10)]
-        public int gr_mode
+        [global::System.ComponentModel.DefaultValue(EGRMode.k_EGRMode_Never)]
+        public EGRMode gr_mode
         {
-            get => __pbn__gr_mode.GetValueOrDefault();
+            get => __pbn__gr_mode ?? EGRMode.k_EGRMode_Never;
             set => __pbn__gr_mode = value;
         }
         public bool ShouldSerializegr_mode() => __pbn__gr_mode != null;
         public void Resetgr_mode() => __pbn__gr_mode = null;
-        private int? __pbn__gr_mode;
+        private EGRMode? __pbn__gr_mode;
 
     }
 

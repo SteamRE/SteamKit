@@ -1316,6 +1316,17 @@ namespace SteamKit2.Internal
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string country_code
+        {
+            get => __pbn__country_code ?? "";
+            set => __pbn__country_code = value;
+        }
+        public bool ShouldSerializecountry_code() => __pbn__country_code != null;
+        public void Resetcountry_code() => __pbn__country_code = null;
+        private string __pbn__country_code;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2102,7 +2113,8 @@ namespace SteamKit2.Internal
         k_EStoreDiscoveryQueueTypeRecommendedDemos = 12,
         k_EStoreDiscoveryQueueTypeDLCNewReleases = 13,
         k_EStoreDiscoveryQueueTypeDLCTopSellers = 14,
-        k_EStoreDiscoveryQueueTypeMAX = 15,
+        k_EStoreDiscoveryQueueTypeDLCUpcoming = 15,
+        k_EStoreDiscoveryQueueTypeMAX = 16,
     }
 
     [global::ProtoBuf.ProtoContract()]

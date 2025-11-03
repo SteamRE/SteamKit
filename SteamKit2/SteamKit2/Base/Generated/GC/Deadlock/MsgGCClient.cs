@@ -5823,6 +5823,7 @@ namespace SteamKit2.GC.Deadlock.Internal
             k_eItemDesign = 2,
             k_eHeroPlayAgainst = 3,
             k_eMoreFunHero = 4,
+            k_eHeroPower = 5,
         }
 
     }

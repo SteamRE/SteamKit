@@ -2834,6 +2834,16 @@ namespace SteamKit2.Internal
         public void Resetmanifest_id() => __pbn__manifest_id = null;
         private ulong? __pbn__manifest_id;
 
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint accountid
+        {
+            get => __pbn__accountid.GetValueOrDefault();
+            set => __pbn__accountid = value;
+        }
+        public bool ShouldSerializeaccountid() => __pbn__accountid != null;
+        public void Resetaccountid() => __pbn__accountid = null;
+        private uint? __pbn__accountid;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2995,6 +3005,16 @@ namespace SteamKit2.Internal
             public bool ShouldSerializemanifest_id() => __pbn__manifest_id != null;
             public void Resetmanifest_id() => __pbn__manifest_id = null;
             private ulong? __pbn__manifest_id;
+
+            [global::ProtoBuf.ProtoMember(8)]
+            public uint accountid
+            {
+                get => __pbn__accountid.GetValueOrDefault();
+                set => __pbn__accountid = value;
+            }
+            public bool ShouldSerializeaccountid() => __pbn__accountid != null;
+            public void Resetaccountid() => __pbn__accountid = null;
+            private uint? __pbn__accountid;
 
         }
 

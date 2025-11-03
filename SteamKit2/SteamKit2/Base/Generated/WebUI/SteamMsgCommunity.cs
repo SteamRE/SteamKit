@@ -70,28 +70,6 @@ namespace SteamKit2.WebUI.Internal
         public void Reseticon() => __pbn__icon = null;
         private string __pbn__icon;
 
-        [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string logo
-        {
-            get => __pbn__logo ?? "";
-            set => __pbn__logo = value;
-        }
-        public bool ShouldSerializelogo() => __pbn__logo != null;
-        public void Resetlogo() => __pbn__logo = null;
-        private string __pbn__logo;
-
-        [global::ProtoBuf.ProtoMember(5)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string logo_small
-        {
-            get => __pbn__logo_small ?? "";
-            set => __pbn__logo_small = value;
-        }
-        public bool ShouldSerializelogo_small() => __pbn__logo_small != null;
-        public void Resetlogo_small() => __pbn__logo_small = null;
-        private string __pbn__logo_small;
-
         [global::ProtoBuf.ProtoMember(6)]
         public bool tool
         {
@@ -1051,69 +1029,6 @@ namespace SteamKit2.WebUI.Internal
 
         [global::ProtoBuf.ProtoMember(1)]
         public global::System.Collections.Generic.List<CCommunity_PartnerEventResult> results { get; } = new global::System.Collections.Generic.List<CCommunity_PartnerEventResult>();
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CCommunity_GetBotReviewScoreForRecommendation_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<ulong> recommendation_ids { get; } = new global::System.Collections.Generic.List<ulong>();
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint app_id
-        {
-            get => __pbn__app_id.GetValueOrDefault();
-            set => __pbn__app_id = value;
-        }
-        public bool ShouldSerializeapp_id() => __pbn__app_id != null;
-        public void Resetapp_id() => __pbn__app_id = null;
-        private uint? __pbn__app_id;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CCommunity_GetBotReviewScoreForRecommendation_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<CCommunity_GetBotReviewScoreForRecommendation_Response_BotReviewScoreEntry> bot_review_score { get; } = new global::System.Collections.Generic.List<CCommunity_GetBotReviewScoreForRecommendation_Response_BotReviewScoreEntry>();
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CCommunity_GetBotReviewScoreForRecommendation_Response_BotReviewScoreEntry : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public ulong key
-        {
-            get => __pbn__key.GetValueOrDefault();
-            set => __pbn__key = value;
-        }
-        public bool ShouldSerializekey() => __pbn__key != null;
-        public void Resetkey() => __pbn__key = null;
-        private ulong? __pbn__key;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint value
-        {
-            get => __pbn__value.GetValueOrDefault();
-            set => __pbn__value = value;
-        }
-        public bool ShouldSerializevalue() => __pbn__value != null;
-        public void Resetvalue() => __pbn__value = null;
-        private uint? __pbn__value;
 
     }
 
@@ -2745,11 +2660,6 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CCommunity_GetBestEventsForUser_Request, CCommunity_GetBestEventsForUser_Response>( "Community.GetBestEventsForUser#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetBotReviewScoreForRecommendation_Response>> GetBotReviewScoreForRecommendation( CCommunity_GetBotReviewScoreForRecommendation_Request request )
-        {
-            return UnifiedMessages.SendMessage<CCommunity_GetBotReviewScoreForRecommendation_Request, CCommunity_GetBotReviewScoreForRecommendation_Response>( "Community.GetBotReviewScoreForRecommendation#1", request );
-        }
-
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetClanAnnouncementVoteForUser_Response>> GetClanAnnouncementVoteForUser( CCommunity_GetClanAnnouncementVoteForUser_Request request )
         {
             return UnifiedMessages.SendMessage<CCommunity_GetClanAnnouncementVoteForUser_Request, CCommunity_GetClanAnnouncementVoteForUser_Response>( "Community.GetClanAnnouncementVoteForUser#1", request );
@@ -2862,9 +2772,6 @@ namespace SteamKit2.WebUI.Internal
                     break;
                 case "GetBestEventsForUser":
                     PostResponseMsg<CCommunity_GetBestEventsForUser_Response>( packetMsg );
-                    break;
-                case "GetBotReviewScoreForRecommendation":
-                    PostResponseMsg<CCommunity_GetBotReviewScoreForRecommendation_Response>( packetMsg );
                     break;
                 case "GetClanAnnouncementVoteForUser":
                     PostResponseMsg<CCommunity_GetClanAnnouncementVoteForUser_Response>( packetMsg );

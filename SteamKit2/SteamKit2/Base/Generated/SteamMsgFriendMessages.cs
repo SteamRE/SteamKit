@@ -313,6 +313,9 @@ namespace SteamKit2.Internal
             public void Resetunread_message_count() => __pbn__unread_message_count = null;
             private uint? __pbn__unread_message_count;
 
+            [global::ProtoBuf.ProtoMember(5)]
+            public global::System.Collections.Generic.List<EChatSessionNotice> notices { get; } = new global::System.Collections.Generic.List<EChatSessionNotice>();
+
         }
 
     }
@@ -610,6 +613,207 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CFriendMessages_ReportMessage_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid_from
+        {
+            get => __pbn__steamid_from.GetValueOrDefault();
+            set => __pbn__steamid_from = value;
+        }
+        public bool ShouldSerializesteamid_from() => __pbn__steamid_from != null;
+        public void Resetsteamid_from() => __pbn__steamid_from = null;
+        private ulong? __pbn__steamid_from;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid_to
+        {
+            get => __pbn__steamid_to.GetValueOrDefault();
+            set => __pbn__steamid_to = value;
+        }
+        public bool ShouldSerializesteamid_to() => __pbn__steamid_to != null;
+        public void Resetsteamid_to() => __pbn__steamid_to = null;
+        private ulong? __pbn__steamid_to;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint timestamp
+        {
+            get => __pbn__timestamp.GetValueOrDefault();
+            set => __pbn__timestamp = value;
+        }
+        public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
+        public void Resettimestamp() => __pbn__timestamp = null;
+        private uint? __pbn__timestamp;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint ordinal
+        {
+            get => __pbn__ordinal.GetValueOrDefault();
+            set => __pbn__ordinal = value;
+        }
+        public bool ShouldSerializeordinal() => __pbn__ordinal != null;
+        public void Resetordinal() => __pbn__ordinal = null;
+        private uint? __pbn__ordinal;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue(EContentReportReason.k_EContentReportReason_Invalid)]
+        public EContentReportReason report_reason
+        {
+            get => __pbn__report_reason ?? EContentReportReason.k_EContentReportReason_Invalid;
+            set => __pbn__report_reason = value;
+        }
+        public bool ShouldSerializereport_reason() => __pbn__report_reason != null;
+        public void Resetreport_reason() => __pbn__report_reason = null;
+        private EContentReportReason? __pbn__report_reason;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string report_text
+        {
+            get => __pbn__report_text ?? "";
+            set => __pbn__report_text = value;
+        }
+        public bool ShouldSerializereport_text() => __pbn__report_text != null;
+        public void Resetreport_text() => __pbn__report_text = null;
+        private string __pbn__report_text;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string language
+        {
+            get => __pbn__language ?? "";
+            set => __pbn__language = value;
+        }
+        public bool ShouldSerializelanguage() => __pbn__language != null;
+        public void Resetlanguage() => __pbn__language = null;
+        private string __pbn__language;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CFriendMessages_ReportMessage_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CFriendMessages_ResolveReport_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid_from
+        {
+            get => __pbn__steamid_from.GetValueOrDefault();
+            set => __pbn__steamid_from = value;
+        }
+        public bool ShouldSerializesteamid_from() => __pbn__steamid_from != null;
+        public void Resetsteamid_from() => __pbn__steamid_from = null;
+        private ulong? __pbn__steamid_from;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid_to
+        {
+            get => __pbn__steamid_to.GetValueOrDefault();
+            set => __pbn__steamid_to = value;
+        }
+        public bool ShouldSerializesteamid_to() => __pbn__steamid_to != null;
+        public void Resetsteamid_to() => __pbn__steamid_to = null;
+        private ulong? __pbn__steamid_to;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong subject_group_id
+        {
+            get => __pbn__subject_group_id.GetValueOrDefault();
+            set => __pbn__subject_group_id = value;
+        }
+        public bool ShouldSerializesubject_group_id() => __pbn__subject_group_id != null;
+        public void Resetsubject_group_id() => __pbn__subject_group_id = null;
+        private ulong? __pbn__subject_group_id;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public ulong subject_id
+        {
+            get => __pbn__subject_id.GetValueOrDefault();
+            set => __pbn__subject_id = value;
+        }
+        public bool ShouldSerializesubject_id() => __pbn__subject_id != null;
+        public void Resetsubject_id() => __pbn__subject_id = null;
+        private ulong? __pbn__subject_id;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue(EContentReportResolution.k_EContentReportResolution_Unresolved)]
+        public EContentReportResolution resolution
+        {
+            get => __pbn__resolution ?? EContentReportResolution.k_EContentReportResolution_Unresolved;
+            set => __pbn__resolution = value;
+        }
+        public bool ShouldSerializeresolution() => __pbn__resolution != null;
+        public void Resetresolution() => __pbn__resolution = null;
+        private EContentReportResolution? __pbn__resolution;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue(EContentReportReason.k_EContentReportReason_Invalid)]
+        public EContentReportReason reason
+        {
+            get => __pbn__reason ?? EContentReportReason.k_EContentReportReason_Invalid;
+            set => __pbn__reason = value;
+        }
+        public bool ShouldSerializereason() => __pbn__reason != null;
+        public void Resetreason() => __pbn__reason = null;
+        private EContentReportReason? __pbn__reason;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CFriendMessages_ResolveReport_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CFriendMessages_DismissSessionNotice_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid_friend
+        {
+            get => __pbn__steamid_friend.GetValueOrDefault();
+            set => __pbn__steamid_friend = value;
+        }
+        public bool ShouldSerializesteamid_friend() => __pbn__steamid_friend != null;
+        public void Resetsteamid_friend() => __pbn__steamid_friend = null;
+        private ulong? __pbn__steamid_friend;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(EChatSessionNotice.k_EChatSessionNotice_Invalid)]
+        public EChatSessionNotice notice_type
+        {
+            get => __pbn__notice_type ?? EChatSessionNotice.k_EChatSessionNotice_Invalid;
+            set => __pbn__notice_type = value;
+        }
+        public bool ShouldSerializenotice_type() => __pbn__notice_type != null;
+        public void Resetnotice_type() => __pbn__notice_type = null;
+        private EChatSessionNotice? __pbn__notice_type;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CFriendMessages_IncomingMessage_Notification : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -792,11 +996,58 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CFriendMessages_SessionNotice_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid_friend
+        {
+            get => __pbn__steamid_friend.GetValueOrDefault();
+            set => __pbn__steamid_friend = value;
+        }
+        public bool ShouldSerializesteamid_friend() => __pbn__steamid_friend != null;
+        public void Resetsteamid_friend() => __pbn__steamid_friend = null;
+        private ulong? __pbn__steamid_friend;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(EChatSessionNotice.k_EChatSessionNotice_Invalid)]
+        public EChatSessionNotice notice_type
+        {
+            get => __pbn__notice_type ?? EChatSessionNotice.k_EChatSessionNotice_Invalid;
+            set => __pbn__notice_type = value;
+        }
+        public bool ShouldSerializenotice_type() => __pbn__notice_type != null;
+        public void Resetnotice_type() => __pbn__notice_type = null;
+        private EChatSessionNotice? __pbn__notice_type;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool active
+        {
+            get => __pbn__active.GetValueOrDefault();
+            set => __pbn__active = value;
+        }
+        public bool ShouldSerializeactive() => __pbn__active != null;
+        public void Resetactive() => __pbn__active = null;
+        private bool? __pbn__active;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EMessageReactionType
     {
         k_EMessageReactionType_Invalid = 0,
         k_EMessageReactionType_Emoticon = 1,
         k_EMessageReactionType_Sticker = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EChatSessionNotice
+    {
+        k_EChatSessionNotice_Invalid = 0,
+        k_EChatSessionNotice_Suspicious = 1,
     }
 
     public class FriendMessages : SteamUnifiedMessages.UnifiedService
@@ -833,6 +1084,21 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CFriendMessages_UpdateMessageReaction_Request, CFriendMessages_UpdateMessageReaction_Response>( "FriendMessages.UpdateMessageReaction#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendMessages_ReportMessage_Response>> ReportMessage( CFriendMessages_ReportMessage_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFriendMessages_ReportMessage_Request, CFriendMessages_ReportMessage_Response>( "FriendMessages.ReportMessage#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendMessages_ResolveReport_Response>> ResolveReport( CFriendMessages_ResolveReport_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFriendMessages_ResolveReport_Request, CFriendMessages_ResolveReport_Response>( "FriendMessages.ResolveReport#1", request );
+        }
+
+        public void DismissSessionNotice(CFriendMessages_DismissSessionNotice_Notification request )
+        {
+            UnifiedMessages.SendNotification<CFriendMessages_DismissSessionNotice_Notification>( "FriendMessages.DismissSessionNotice#1", request );
+        }
+
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
@@ -852,6 +1118,12 @@ namespace SteamKit2.Internal
                 case "UpdateMessageReaction":
                     PostResponseMsg<CFriendMessages_UpdateMessageReaction_Response>( packetMsg );
                     break;
+                case "ReportMessage":
+                    PostResponseMsg<CFriendMessages_ReportMessage_Response>( packetMsg );
+                    break;
+                case "ResolveReport":
+                    PostResponseMsg<CFriendMessages_ResolveReport_Response>( packetMsg );
+                    break;
             }
         }
 
@@ -861,6 +1133,9 @@ namespace SteamKit2.Internal
             {
                 case "AckMessage":
                     PostNotificationMsg<CFriendMessages_AckMessage_Notification>( packetMsg );
+                    break;
+                case "DismissSessionNotice":
+                    PostNotificationMsg<CFriendMessages_DismissSessionNotice_Notification>( packetMsg );
                     break;
             }
         }
@@ -885,6 +1160,11 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CFriendMessages_MessageReaction_Notification>( "FriendMessagesClient.MessageReaction#1", request );
         }
 
+        public void SessionNotice(CFriendMessages_SessionNotice_Notification request )
+        {
+            UnifiedMessages.SendNotification<CFriendMessages_SessionNotice_Notification>( "FriendMessagesClient.SessionNotice#1", request );
+        }
+
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
         }
@@ -901,6 +1181,9 @@ namespace SteamKit2.Internal
                     break;
                 case "MessageReaction":
                     PostNotificationMsg<CFriendMessages_MessageReaction_Notification>( packetMsg );
+                    break;
+                case "SessionNotice":
+                    PostNotificationMsg<CFriendMessages_SessionNotice_Notification>( packetMsg );
                     break;
             }
         }

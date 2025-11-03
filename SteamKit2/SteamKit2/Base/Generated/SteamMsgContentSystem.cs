@@ -890,6 +890,7 @@ namespace SteamKit2.Internal
     {
         k_EAppGameEngineTypeNone = 0,
         k_EAppGameEngineTypeUnreal = 1,
+        k_EAppGameEngineTypeUnity = 2,
     }
 
     public class ContentServerDirectory : SteamUnifiedMessages.UnifiedService

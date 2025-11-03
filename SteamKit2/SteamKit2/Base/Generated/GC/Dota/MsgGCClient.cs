@@ -16189,6 +16189,105 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCGetEventCoupon : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
+        public EEvent event_id
+        {
+            get => __pbn__event_id ?? EEvent.EVENT_ID_NONE;
+            set => __pbn__event_id = value;
+        }
+        public bool ShouldSerializeevent_id() => __pbn__event_id != null;
+        public void Resetevent_id() => __pbn__event_id = null;
+        private EEvent? __pbn__event_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<uint> coupon_ids { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCGetEventCouponResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(ResultCode.Success)]
+        public ResultCode result
+        {
+            get => __pbn__result ?? ResultCode.Success;
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private ResultCode? __pbn__result;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
+        public EEvent event_id
+        {
+            get => __pbn__event_id ?? EEvent.EVENT_ID_NONE;
+            set => __pbn__event_id = value;
+        }
+        public bool ShouldSerializeevent_id() => __pbn__event_id != null;
+        public void Resetevent_id() => __pbn__event_id = null;
+        private EEvent? __pbn__event_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<Coupon> coupons { get; } = new global::System.Collections.Generic.List<Coupon>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Coupon : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint coupon_id
+            {
+                get => __pbn__coupon_id.GetValueOrDefault();
+                set => __pbn__coupon_id = value;
+            }
+            public bool ShouldSerializecoupon_id() => __pbn__coupon_id != null;
+            public void Resetcoupon_id() => __pbn__coupon_id = null;
+            private uint? __pbn__coupon_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string coupon_code
+            {
+                get => __pbn__coupon_code ?? "";
+                set => __pbn__coupon_code = value;
+            }
+            public bool ShouldSerializecoupon_code() => __pbn__coupon_code != null;
+            public void Resetcoupon_code() => __pbn__coupon_code = null;
+            private string __pbn__coupon_code;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum ResultCode
+        {
+            Success = 0,
+            InvalidEvent = 1,
+            EventNotActive = 2,
+            UserIneligible = 3,
+            ServerError = 4,
+            Timeout = 5,
+            MultipleCoupons = 6,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum CMsgDOTARequestMatches_SkillLevel
     {
         CMsgDOTARequestMatches_SkillLevel_Any = 0,

@@ -343,6 +343,75 @@ namespace SteamKit2.Internal
         public void Resetawaiting_2fa() => __pbn__awaiting_2fa = null;
         private bool? __pbn__awaiting_2fa;
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public ulong invite_id
+        {
+            get => __pbn__invite_id.GetValueOrDefault();
+            set => __pbn__invite_id = value;
+        }
+        public bool ShouldSerializeinvite_id() => __pbn__invite_id != null;
+        public void Resetinvite_id() => __pbn__invite_id = null;
+        private ulong? __pbn__invite_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class FamilyGroupMembership : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong family_groupid
+        {
+            get => __pbn__family_groupid.GetValueOrDefault();
+            set => __pbn__family_groupid = value;
+        }
+        public bool ShouldSerializefamily_groupid() => __pbn__family_groupid != null;
+        public void Resetfamily_groupid() => __pbn__family_groupid = null;
+        private ulong? __pbn__family_groupid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint rtime_joined
+        {
+            get => __pbn__rtime_joined.GetValueOrDefault();
+            set => __pbn__rtime_joined = value;
+        }
+        public bool ShouldSerializertime_joined() => __pbn__rtime_joined != null;
+        public void Resetrtime_joined() => __pbn__rtime_joined = null;
+        private uint? __pbn__rtime_joined;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint rtime_left
+        {
+            get => __pbn__rtime_left.GetValueOrDefault();
+            set => __pbn__rtime_left = value;
+        }
+        public bool ShouldSerializertime_left() => __pbn__rtime_left != null;
+        public void Resetrtime_left() => __pbn__rtime_left = null;
+        private uint? __pbn__rtime_left;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint role
+        {
+            get => __pbn__role.GetValueOrDefault();
+            set => __pbn__role = value;
+        }
+        public bool ShouldSerializerole() => __pbn__role != null;
+        public void Resetrole() => __pbn__role = null;
+        private uint? __pbn__role;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public bool participated
+        {
+            get => __pbn__participated.GetValueOrDefault();
+            set => __pbn__participated = value;
+        }
+        public bool ShouldSerializeparticipated() => __pbn__participated != null;
+        public void Resetparticipated() => __pbn__participated = null;
+        private bool? __pbn__participated;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -427,6 +496,9 @@ namespace SteamKit2.Internal
         public bool ShouldSerializecan_undelete_last_joined_family() => __pbn__can_undelete_last_joined_family != null;
         public void Resetcan_undelete_last_joined_family() => __pbn__can_undelete_last_joined_family = null;
         private bool? __pbn__can_undelete_last_joined_family;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public global::System.Collections.Generic.List<FamilyGroupMembership> membership_history { get; } = new global::System.Collections.Generic.List<FamilyGroupMembership>();
 
     }
 
@@ -691,6 +763,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeinvite_already_accepted() => __pbn__invite_already_accepted != null;
         public void Resetinvite_already_accepted() => __pbn__invite_already_accepted = null;
         private bool? __pbn__invite_already_accepted;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint cooldown_seconds_remaining
+        {
+            get => __pbn__cooldown_seconds_remaining.GetValueOrDefault();
+            set => __pbn__cooldown_seconds_remaining = value;
+        }
+        public bool ShouldSerializecooldown_seconds_remaining() => __pbn__cooldown_seconds_remaining != null;
+        public void Resetcooldown_seconds_remaining() => __pbn__cooldown_seconds_remaining = null;
+        private uint? __pbn__cooldown_seconds_remaining;
 
     }
 
@@ -1881,6 +1963,44 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CFamilyGroups_RollbackFamilyGroup_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong family_groupid
+        {
+            get => __pbn__family_groupid.GetValueOrDefault();
+            set => __pbn__family_groupid = value;
+        }
+        public bool ShouldSerializefamily_groupid() => __pbn__family_groupid != null;
+        public void Resetfamily_groupid() => __pbn__family_groupid = null;
+        private ulong? __pbn__family_groupid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint rtime32_target
+        {
+            get => __pbn__rtime32_target.GetValueOrDefault();
+            set => __pbn__rtime32_target = value;
+        }
+        public bool ShouldSerializertime32_target() => __pbn__rtime32_target != null;
+        public void Resetrtime32_target() => __pbn__rtime32_target = null;
+        private uint? __pbn__rtime32_target;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CFamilyGroups_RollbackFamilyGroup_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CFamilyGroupsClient_NotifyRunningApps_Notification : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2208,6 +2328,11 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CFamilyGroups_ClearCooldownSkip_Request, CFamilyGroups_ClearCooldownSkip_Response>( "FamilyGroups.ClearCooldownSkip#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_RollbackFamilyGroup_Response>> RollbackFamilyGroup( CFamilyGroups_RollbackFamilyGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFamilyGroups_RollbackFamilyGroup_Request, CFamilyGroups_RollbackFamilyGroup_Response>( "FamilyGroups.RollbackFamilyGroup#1", request );
+        }
+
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
@@ -2289,6 +2414,9 @@ namespace SteamKit2.Internal
                     break;
                 case "ClearCooldownSkip":
                     PostResponseMsg<CFamilyGroups_ClearCooldownSkip_Response>( packetMsg );
+                    break;
+                case "RollbackFamilyGroup":
+                    PostResponseMsg<CFamilyGroups_RollbackFamilyGroup_Response>( packetMsg );
                     break;
             }
         }

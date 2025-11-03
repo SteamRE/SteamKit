@@ -977,6 +977,8 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgClientToGCClaimGatedEventResponse = 9044,
         k_EMsgClientToGCGetEventRanking = 9107,
         k_EMsgClientToGCGetEventRankingResponse = 9108,
+        k_EMsgClientToGCGetEventCoupon = 9109,
+        k_EMsgClientToGCGetEventCouponResponse = 9110,
     }
 
 }

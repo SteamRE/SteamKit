@@ -160,16 +160,6 @@ namespace SteamKit2.Internal
             public void Resetsteamid_user() => __pbn__steamid_user = null;
             private ulong? __pbn__steamid_user;
 
-            [global::ProtoBuf.ProtoMember(2)]
-            public byte[] rich_presence_kv
-            {
-                get => __pbn__rich_presence_kv;
-                set => __pbn__rich_presence_kv = value;
-            }
-            public bool ShouldSerializerich_presence_kv() => __pbn__rich_presence_kv != null;
-            public void Resetrich_presence_kv() => __pbn__rich_presence_kv = null;
-            private byte[] __pbn__rich_presence_kv;
-
             [global::ProtoBuf.ProtoMember(3)]
             public global::System.Collections.Generic.List<CMsgClientRichPresenceInfo.KV> rich_presense { get; } = new global::System.Collections.Generic.List<CMsgClientRichPresenceInfo.KV>();
 

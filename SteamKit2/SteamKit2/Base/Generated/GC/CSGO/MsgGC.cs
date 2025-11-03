@@ -6858,6 +6858,56 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CSOVolatileItemOffer : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint defidx
+        {
+            get => __pbn__defidx.GetValueOrDefault();
+            set => __pbn__defidx = value;
+        }
+        public bool ShouldSerializedefidx() => __pbn__defidx != null;
+        public void Resetdefidx() => __pbn__defidx = null;
+        private uint? __pbn__defidx;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<ulong> faux_itemid { get; } = new global::System.Collections.Generic.List<ulong>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<uint> generation_time { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CSOVolatileItemClaimedRewards : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint defidx
+        {
+            get => __pbn__defidx.GetValueOrDefault();
+            set => __pbn__defidx = value;
+        }
+        public bool ShouldSerializedefidx() => __pbn__defidx != null;
+        public void Resetdefidx() => __pbn__defidx = null;
+        private uint? __pbn__defidx;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<uint> reward { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<uint> generation_time { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CSOAccountKeychainRemoveToolCharges : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -9290,6 +9340,7 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCCStrike15_v2_PremierSeasonSummary = 9224,
         k_EMsgGCCStrike15_v2_RequestRecurringMissionSchedule = 9225,
         k_EMsgGCCStrike15_v2_RecurringMissionSchema = 9226,
+        k_EMsgGCCStrike15_v2_VolatileItemClaimReward = 9227,
     }
 
     [global::ProtoBuf.ProtoContract()]

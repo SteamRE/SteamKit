@@ -37,14 +37,14 @@ namespace SteamKit2.GC.CSGO.Internal
         private uint? __pbn__quantity;
 
         [global::ProtoBuf.ProtoMember(3)]
-        public uint cost_in_local_currency
+        public ulong cost_in_local_currency
         {
             get => __pbn__cost_in_local_currency.GetValueOrDefault();
             set => __pbn__cost_in_local_currency = value;
         }
         public bool ShouldSerializecost_in_local_currency() => __pbn__cost_in_local_currency != null;
         public void Resetcost_in_local_currency() => __pbn__cost_in_local_currency = null;
-        private uint? __pbn__cost_in_local_currency;
+        private ulong? __pbn__cost_in_local_currency;
 
         [global::ProtoBuf.ProtoMember(4)]
         public uint purchase_type

@@ -614,6 +614,9 @@ namespace SteamKit2.Internal
         public void Resetsealed() => __pbn__sealed = null;
         private bool? __pbn__sealed;
 
+        [global::ProtoBuf.ProtoMember(33)]
+        public CEconItem_ContainerProperties container_properties { get; set; }
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -687,6 +690,50 @@ namespace SteamKit2.Internal
         public bool ShouldSerializecolor() => __pbn__color != null;
         public void Resetcolor() => __pbn__color = null;
         private string __pbn__color;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CEconItem_ClassIdentifiers : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong classid
+        {
+            get => __pbn__classid.GetValueOrDefault();
+            set => __pbn__classid = value;
+        }
+        public bool ShouldSerializeclassid() => __pbn__classid != null;
+        public void Resetclassid() => __pbn__classid = null;
+        private ulong? __pbn__classid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong instanceid
+        {
+            get => __pbn__instanceid.GetValueOrDefault();
+            set => __pbn__instanceid = value;
+        }
+        public bool ShouldSerializeinstanceid() => __pbn__instanceid != null;
+        public void Resetinstanceid() => __pbn__instanceid = null;
+        private ulong? __pbn__instanceid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CEconItem_ContainerProperties : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CEconItem_ClassIdentifiers> contained_items { get; } = new global::System.Collections.Generic.List<CEconItem_ClassIdentifiers>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<CEconItem_Tag> search_tags { get; } = new global::System.Collections.Generic.List<CEconItem_Tag>();
 
     }
 
@@ -930,7 +977,7 @@ namespace SteamKit2.Internal
         private uint? __pbn__appid;
 
         [global::ProtoBuf.ProtoMember(3)]
-        public global::System.Collections.Generic.List<Class> classes { get; } = new global::System.Collections.Generic.List<Class>();
+        public global::System.Collections.Generic.List<CEconItem_ClassIdentifiers> classes { get; } = new global::System.Collections.Generic.List<CEconItem_ClassIdentifiers>();
 
         [global::ProtoBuf.ProtoMember(4)]
         public bool high_pri
@@ -941,35 +988,6 @@ namespace SteamKit2.Internal
         public bool ShouldSerializehigh_pri() => __pbn__high_pri != null;
         public void Resethigh_pri() => __pbn__high_pri = null;
         private bool? __pbn__high_pri;
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class Class : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public ulong classid
-            {
-                get => __pbn__classid.GetValueOrDefault();
-                set => __pbn__classid = value;
-            }
-            public bool ShouldSerializeclassid() => __pbn__classid != null;
-            public void Resetclassid() => __pbn__classid = null;
-            private ulong? __pbn__classid;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public ulong instanceid
-            {
-                get => __pbn__instanceid.GetValueOrDefault();
-                set => __pbn__instanceid = value;
-            }
-            public bool ShouldSerializeinstanceid() => __pbn__instanceid != null;
-            public void Resetinstanceid() => __pbn__instanceid = null;
-            private ulong? __pbn__instanceid;
-
-        }
 
     }
 

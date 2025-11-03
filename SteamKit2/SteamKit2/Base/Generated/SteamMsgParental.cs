@@ -392,44 +392,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CParental_DisableWithRecoveryCode_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint recovery_code
-        {
-            get => __pbn__recovery_code.GetValueOrDefault();
-            set => __pbn__recovery_code = value;
-        }
-        public bool ShouldSerializerecovery_code() => __pbn__recovery_code != null;
-        public void Resetrecovery_code() => __pbn__recovery_code = null;
-        private uint? __pbn__recovery_code;
-
-        [global::ProtoBuf.ProtoMember(10, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong steamid
-        {
-            get => __pbn__steamid.GetValueOrDefault();
-            set => __pbn__steamid = value;
-        }
-        public bool ShouldSerializesteamid() => __pbn__steamid != null;
-        public void Resetsteamid() => __pbn__steamid = null;
-        private ulong? __pbn__steamid;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CParental_DisableWithRecoveryCode_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CParental_RequestFeatureAccess_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -919,11 +881,6 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CParental_RequestRecoveryCode_Request, CParental_RequestRecoveryCode_Response>( "Parental.RequestRecoveryCode#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_DisableWithRecoveryCode_Response>> DisableWithRecoveryCode( CParental_DisableWithRecoveryCode_Request request )
-        {
-            return UnifiedMessages.SendMessage<CParental_DisableWithRecoveryCode_Request, CParental_DisableWithRecoveryCode_Response>( "Parental.DisableWithRecoveryCode#1", request );
-        }
-
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_RequestFeatureAccess_Response>> RequestFeatureAccess( CParental_RequestFeatureAccess_Request request )
         {
             return UnifiedMessages.SendMessage<CParental_RequestFeatureAccess_Request, CParental_RequestFeatureAccess_Response>( "Parental.RequestFeatureAccess#1", request );
@@ -984,9 +941,6 @@ namespace SteamKit2.Internal
                     break;
                 case "RequestRecoveryCode":
                     PostResponseMsg<CParental_RequestRecoveryCode_Response>( packetMsg );
-                    break;
-                case "DisableWithRecoveryCode":
-                    PostResponseMsg<CParental_DisableWithRecoveryCode_Response>( packetMsg );
                     break;
                 case "RequestFeatureAccess":
                     PostResponseMsg<CParental_RequestFeatureAccess_Response>( packetMsg );

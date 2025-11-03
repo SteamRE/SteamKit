@@ -126,6 +126,57 @@ namespace SteamKit2.WebUI.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CUserReviews_Recommendation_Tag : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int id
+        {
+            get => __pbn__id.GetValueOrDefault();
+            set => __pbn__id = value;
+        }
+        public bool ShouldSerializeid() => __pbn__id != null;
+        public void Resetid() => __pbn__id = null;
+        private int? __pbn__id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<CUserReviews_Recommendation_Tag_Range> ranges { get; } = new global::System.Collections.Generic.List<CUserReviews_Recommendation_Tag_Range>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CUserReviews_Recommendation_Tag_Range : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint start
+        {
+            get => __pbn__start.GetValueOrDefault();
+            set => __pbn__start = value;
+        }
+        public bool ShouldSerializestart() => __pbn__start != null;
+        public void Resetstart() => __pbn__start = null;
+        private uint? __pbn__start;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint end
+        {
+            get => __pbn__end.GetValueOrDefault();
+            set => __pbn__end = value;
+        }
+        public bool ShouldSerializeend() => __pbn__end != null;
+        public void Resetend() => __pbn__end = null;
+        private uint? __pbn__end;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CUserReviews_Update_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -746,6 +797,9 @@ namespace SteamKit2.WebUI.Internal
 
         [global::ProtoBuf.ProtoMember(53)]
         public global::System.Collections.Generic.List<ulong> tags { get; } = new global::System.Collections.Generic.List<ulong>();
+
+        [global::ProtoBuf.ProtoMember(54)]
+        public global::System.Collections.Generic.List<CUserReviews_Recommendation_Tag> tags_with_ranges { get; } = new global::System.Collections.Generic.List<CUserReviews_Recommendation_Tag>();
 
     }
 

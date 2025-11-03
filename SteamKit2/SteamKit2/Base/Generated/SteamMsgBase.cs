@@ -2211,6 +2211,7 @@ namespace SteamKit2.Internal
         k_EClanSeasonUpdate = 33,
         k_EClanCrosspostEvent = 34,
         k_EClanInGameEventGeneral = 35,
+        k_EClanCreatorHome = 36,
     }
 
     [global::ProtoBuf.ProtoContract()]

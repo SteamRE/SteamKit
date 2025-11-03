@@ -500,6 +500,17 @@ namespace SteamKit2.Internal
                     public void Resetstrength_raw() => __pbn__strength_raw = null;
                     private int? __pbn__strength_raw;
 
+                    [global::ProtoBuf.ProtoMember(10)]
+                    [global::System.ComponentModel.DefaultValue("")]
+                    public string band_filter
+                    {
+                        get => __pbn__band_filter ?? "";
+                        set => __pbn__band_filter = value;
+                    }
+                    public bool ShouldSerializeband_filter() => __pbn__band_filter != null;
+                    public void Resetband_filter() => __pbn__band_filter = null;
+                    private string __pbn__band_filter;
+
                 }
 
             }
@@ -632,6 +643,51 @@ namespace SteamKit2.Internal
             public bool ShouldSerializepassword() => __pbn__password != null;
             public void Resetpassword() => __pbn__password = null;
             private string __pbn__password;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgNetworkDeviceSetOptions : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public Wireless wireless { get; set; }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Wireless : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1, IsRequired = true)]
+            public uint ap_id { get; set; }
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public bool is_autoconnect
+            {
+                get => __pbn__is_autoconnect.GetValueOrDefault();
+                set => __pbn__is_autoconnect = value;
+            }
+            public bool ShouldSerializeis_autoconnect() => __pbn__is_autoconnect != null;
+            public void Resetis_autoconnect() => __pbn__is_autoconnect = null;
+            private bool? __pbn__is_autoconnect;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string band_filter
+            {
+                get => __pbn__band_filter ?? "";
+                set => __pbn__band_filter = value;
+            }
+            public bool ShouldSerializeband_filter() => __pbn__band_filter != null;
+            public void Resetband_filter() => __pbn__band_filter = null;
+            private string __pbn__band_filter;
 
         }
 
@@ -1412,16 +1468,6 @@ namespace SteamKit2.Internal
         public void Resetperf_overlay_is_standalone() => __pbn__perf_overlay_is_standalone = null;
         private bool? __pbn__perf_overlay_is_standalone;
 
-        [global::ProtoBuf.ProtoMember(8)]
-        public bool is_dynamic_vrs_available
-        {
-            get => __pbn__is_dynamic_vrs_available.GetValueOrDefault();
-            set => __pbn__is_dynamic_vrs_available = value;
-        }
-        public bool ShouldSerializeis_dynamic_vrs_available() => __pbn__is_dynamic_vrs_available != null;
-        public void Resetis_dynamic_vrs_available() => __pbn__is_dynamic_vrs_available = null;
-        private bool? __pbn__is_dynamic_vrs_available;
-
         [global::ProtoBuf.ProtoMember(9)]
         public bool is_manual_display_refresh_rate_available
         {
@@ -1555,17 +1601,6 @@ namespace SteamKit2.Internal
         public bool ShouldSerializediagnostic_update_rate() => __pbn__diagnostic_update_rate != null;
         public void Resetdiagnostic_update_rate() => __pbn__diagnostic_update_rate = null;
         private float? __pbn__diagnostic_update_rate;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(ESystemServiceState.k_ESystemServiceState_Unavailable)]
-        public ESystemServiceState system_trace_service_state
-        {
-            get => __pbn__system_trace_service_state ?? ESystemServiceState.k_ESystemServiceState_Unavailable;
-            set => __pbn__system_trace_service_state = value;
-        }
-        public bool ShouldSerializesystem_trace_service_state() => __pbn__system_trace_service_state != null;
-        public void Resetsystem_trace_service_state() => __pbn__system_trace_service_state = null;
-        private ESystemServiceState? __pbn__system_trace_service_state;
 
         [global::ProtoBuf.ProtoMember(3)]
         [global::System.ComponentModel.DefaultValue(ESystemServiceState.k_ESystemServiceState_Unavailable)]

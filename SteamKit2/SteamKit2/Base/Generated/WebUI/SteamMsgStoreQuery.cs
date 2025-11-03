@@ -221,6 +221,90 @@ namespace SteamKit2.WebUI.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CStoreQuery_MoreLikeThis_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string query_name
+        {
+            get => __pbn__query_name ?? "";
+            set => __pbn__query_name = value;
+        }
+        public bool ShouldSerializequery_name() => __pbn__query_name != null;
+        public void Resetquery_name() => __pbn__query_name = null;
+        private string __pbn__query_name;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public StoreBrowseContext context { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public StoreBrowseItemDataRequest data_request { get; set; }
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public StoreItemID item_id { get; set; }
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue(20)]
+        public int count
+        {
+            get => __pbn__count ?? 20;
+            set => __pbn__count = value;
+        }
+        public bool ShouldSerializecount() => __pbn__count != null;
+        public void Resetcount() => __pbn__count = null;
+        private int? __pbn__count;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public CStoreQueryFilters filters { get; set; }
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public CStoreQuery_MoreLikeThis_Request_MoreLikeThisOptions options { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStoreQuery_MoreLikeThis_Request_MoreLikeThisOptions : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(90f)]
+        public float tag_weight
+        {
+            get => __pbn__tag_weight ?? 90f;
+            set => __pbn__tag_weight = value;
+        }
+        public bool ShouldSerializetag_weight() => __pbn__tag_weight != null;
+        public void Resettag_weight() => __pbn__tag_weight = null;
+        private float? __pbn__tag_weight;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStoreQuery_MoreLikeThis_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CStoreQueryResultMetadata metadata { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<StoreItemID> ids { get; } = new global::System.Collections.Generic.List<StoreItemID>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<StoreItem> store_items { get; } = new global::System.Collections.Generic.List<StoreItem>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CStoreQuery_Query_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -355,16 +439,6 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializesearch_creators() => __pbn__search_creators != null;
         public void Resetsearch_creators() => __pbn__search_creators = null;
         private bool? __pbn__search_creators;
-
-        [global::ProtoBuf.ProtoMember(10)]
-        public bool prefilter_creators
-        {
-            get => __pbn__prefilter_creators.GetValueOrDefault();
-            set => __pbn__prefilter_creators = value;
-        }
-        public bool ShouldSerializeprefilter_creators() => __pbn__prefilter_creators != null;
-        public void Resetprefilter_creators() => __pbn__prefilter_creators = null;
-        private bool? __pbn__prefilter_creators;
 
     }
 
@@ -685,6 +759,16 @@ namespace SteamKit2.WebUI.Internal
         public void Resetinclude_music() => __pbn__include_music = null;
         private bool? __pbn__include_music;
 
+        [global::ProtoBuf.ProtoMember(19)]
+        public uint dlc_for_appid
+        {
+            get => __pbn__dlc_for_appid.GetValueOrDefault();
+            set => __pbn__dlc_for_appid = value;
+        }
+        public bool ShouldSerializedlc_for_appid() => __pbn__dlc_for_appid != null;
+        public void Resetdlc_for_appid() => __pbn__dlc_for_appid = null;
+        private uint? __pbn__dlc_for_appid;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -823,6 +907,11 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CStoreQuery_GetItemsByUserRecommendedTags_Request, CStoreQuery_GetItemsByUserRecommendedTags_Response>( "StoreQuery.GetItemsByUserRecommendedTags#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreQuery_MoreLikeThis_Response>> MoreLikeThis( CStoreQuery_MoreLikeThis_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStoreQuery_MoreLikeThis_Request, CStoreQuery_MoreLikeThis_Response>( "StoreQuery.MoreLikeThis#1", request );
+        }
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreQuery_Query_Response>> Query( CStoreQuery_Query_Request request )
         {
             return UnifiedMessages.SendMessage<CStoreQuery_Query_Request, CStoreQuery_Query_Response>( "StoreQuery.Query#1", request );
@@ -842,6 +931,9 @@ namespace SteamKit2.WebUI.Internal
                     break;
                 case "GetItemsByUserRecommendedTags":
                     PostResponseMsg<CStoreQuery_GetItemsByUserRecommendedTags_Response>( packetMsg );
+                    break;
+                case "MoreLikeThis":
+                    PostResponseMsg<CStoreQuery_MoreLikeThis_Response>( packetMsg );
                     break;
                 case "Query":
                     PostResponseMsg<CStoreQuery_Query_Response>( packetMsg );

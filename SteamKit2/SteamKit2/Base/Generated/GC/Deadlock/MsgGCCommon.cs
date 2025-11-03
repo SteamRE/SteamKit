@@ -1090,6 +1090,16 @@ namespace SteamKit2.GC.Deadlock.Internal
             [global::ProtoBuf.ProtoMember(12, IsPacked = true)]
             public global::System.Collections.Generic.List<uint> owned_heroes { get; } = new global::System.Collections.Generic.List<uint>();
 
+            [global::ProtoBuf.ProtoMember(13)]
+            public uint low_priority_games_remaining
+            {
+                get => __pbn__low_priority_games_remaining.GetValueOrDefault();
+                set => __pbn__low_priority_games_remaining = value;
+            }
+            public bool ShouldSerializelow_priority_games_remaining() => __pbn__low_priority_games_remaining != null;
+            public void Resetlow_priority_games_remaining() => __pbn__low_priority_games_remaining = null;
+            private uint? __pbn__low_priority_games_remaining;
+
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -2928,6 +2938,16 @@ namespace SteamKit2.GC.Deadlock.Internal
             public bool ShouldSerializerewards_eligible() => __pbn__rewards_eligible != null;
             public void Resetrewards_eligible() => __pbn__rewards_eligible = null;
             private bool? __pbn__rewards_eligible;
+
+            [global::ProtoBuf.ProtoMember(27)]
+            public bool not_scored
+            {
+                get => __pbn__not_scored.GetValueOrDefault();
+                set => __pbn__not_scored = value;
+            }
+            public bool ShouldSerializenot_scored() => __pbn__not_scored != null;
+            public void Resetnot_scored() => __pbn__not_scored = null;
+            private bool? __pbn__not_scored;
 
         }
 
