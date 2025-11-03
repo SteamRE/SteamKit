@@ -1,4 +1,15 @@
 ------------------------------------------------------------------------------
+v 3.4.0			X
+------------------------------------------------------------------------------
+
+* Moved `Utils.AdlerHash` to `DepotChunk.AdlerHash` which is an unrolled version for better performance.
+* Removed LINQ allocations from `KeyValue` indexer.
+* Updated `EGamingDeviceType` enum.
+* Fixed `GameID.GetHashCode`.
+* Fixed `LinkTarget` not being decrypted in `DepotManifest`.
+* Updated dependencies.
+
+------------------------------------------------------------------------------
 v 3.3.1			August 21 2025
 ------------------------------------------------------------------------------
 
