@@ -28,7 +28,7 @@ namespace NetHookAnalyzer2
 
             { EMsg.AMGameServerUpdate, typeof(CMsgGameServerData) },
 
-            { EMsg.ClientDPUpdateAppJobReport, typeof(SteamKit2.WebUI.Internal.CMsgClientUpdateAppJobReport) },
+            { EMsg.ClientDPUpdateAppJobReport, typeof(CDataPublisher_ClientUpdateAppJob_Notification) },
 
             { EMsg.ClientPlayingSessionState, typeof(CMsgClientPlayingSessionState) },
 
