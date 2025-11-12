@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <SignAssembly>true</SignAssembly>
     <Description>.NET library that aims to interoperate with the Steam network.</Description>
     <PackageReleaseNotes>Release notes are available at https://github.com/SteamRE/SteamKit/releases/tag/3.4.0</PackageReleaseNotes>
@@ -48,13 +48,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.183">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="protobuf-net" Version="3.2.56" />
-    <PackageReference Include="System.IO.Hashing" Version="9.0.10" />
+    <PackageReference Include="System.IO.Hashing" Version="10.0.0" />
     <PackageReference Include="ZstdSharp.Port" Version="0.8.6" />
   </ItemGroup>
 

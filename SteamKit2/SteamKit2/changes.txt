@@ -9,6 +9,9 @@ v 3.4.0			X
 * Fixed `LinkTarget` not being decrypted in `DepotManifest`.
 * Updated dependencies.
 
+BREAKING CHANGES
+* SteamKit now targets .NET 10.
+
 ------------------------------------------------------------------------------
 v 3.3.1			August 21 2025
 ------------------------------------------------------------------------------

@@ -34,11 +34,11 @@ SteamKit is released under the [LGPL-2.1 license](https://choosealicense.com/lic
 
 ## Dependencies
 
-In order to use SteamKit at runtime, [.NET 8.0 Runtime](https://dot.net/) or higher is required.
+In order to use SteamKit at runtime, [.NET 10.0 Runtime](https://dot.net/) or higher is required.
 
 If you're using the SteamKit NuGet package, dependencies should be resolved for you. See the [Installation Guide](https://github.com/SteamRE/SteamKit/wiki/Installation) for more information.
 
-To compile SteamKit, [.NET 8.0 SDK](https://dot.net/) is required.
+To compile SteamKit, [.NET 10.0 SDK](https://dot.net/) is required.
 
 ## Discussions
 
