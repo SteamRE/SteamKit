@@ -99,7 +99,7 @@ namespace NetHookAnalyzer2
 			var payloadLength = (int)(stream.Length - stream.Position);
 
 			var payloadData = new byte[payloadLength];
-			stream.Read(payloadData, 0, payloadData.Length);
+			stream.ReadExactly(payloadData);
 
 			return payloadData;
 		}
@@ -107,7 +107,7 @@ namespace NetHookAnalyzer2
 		static uint PeekUInt(Stream stream)
 		{
 			var data = new byte[sizeof(uint)];
-			stream.Read(data, 0, data.Length);
+			stream.ReadExactly(data);
 			stream.Seek(-sizeof(uint), SeekOrigin.Current);
 			return BitConverter.ToUInt32(data, 0);
 		}
