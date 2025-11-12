@@ -5,11 +5,12 @@ using System.Text.RegularExpressions;
 
 namespace ProtobufDumper
 {
-    class ExecutableScanner
+    partial class ExecutableScanner
     {
-        static readonly Regex ProtoFileNameRegex = new Regex( @"^[a-zA-Z_0-9\\/.]+\.proto$", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture );
+        [GeneratedRegex( @"^[a-zA-Z_0-9\\/.]+\.proto$", RegexOptions.ExplicitCapture | RegexOptions.Compiled | RegexOptions.CultureInvariant )]
+        private static partial Regex ProtoFileNameRegex();
 
-        public delegate bool ProcessCandidate( string name, Stream buffer );
+        public delegate bool ProcessCandidate( string name, Stream buffer, out long bytesConsumed );
 
         public static void ScanFile( string fileName, ProcessCandidate processCandidate )
         {
@@ -18,45 +19,50 @@ namespace ProtobufDumper
 
         static void ScanFile( byte[] data, ProcessCandidate processCandidate )
         {
-            const char markerStart = '\n';
+            const byte markerStart = 0x0A;
             const int markerLength = 2;
 
-            var scanSkipOffset = 0;
-
-            for ( var i = 0; i < data.Length - 1; i++ )
+            var i = 0;
+            while ( i < data.Length - 1 )
             {
-                var currentByte = data[ i ];
-                var expectedLength = data[ i + 1 ];
+                i = Array.IndexOf( data, markerStart, i );
 
-                if ( currentByte != markerStart ) continue;
-
-                var y = i + scanSkipOffset;
-                for ( ; y < data.Length; y++ )
+                if ( i == -1 || i >= data.Length - 1 )
                 {
-                    if ( data[ y ] == 0 ) break;
+                    break;
                 }
 
-                if ( y == data.Length ) continue;
+                var expectedLength = data[ i + 1 ];
 
-                var length = y - i;
-
-                if ( length < markerLength || length - markerLength < expectedLength ) continue;
+                if ( i + markerLength + expectedLength > data.Length )
+                {
+                    i++;
+                    continue;
+                }
 
                 var protoName = Encoding.ASCII.GetString( data, i + markerLength, expectedLength );
 
-                if ( !ProtoFileNameRegex.IsMatch( protoName ) ) continue;
+                if ( !protoName.EndsWith( ".proto", StringComparison.OrdinalIgnoreCase ) )
+                {
+                    i++;
+                    continue;
+                }
 
-                using var buffer = new MemoryStream( data, i, length );
-                if ( !processCandidate( protoName, buffer ) )
+                if ( !ProtoFileNameRegex().IsMatch( protoName ) )
                 {
-                    scanSkipOffset = length + 1;
-                    i -= 1;
+                    Console.WriteLine( $"Skipping potentially valid '{protoName}'" );
+                    i++;
+                    continue;
                 }
-                else
+
+                using var buffer = new MemoryStream( data, i, data.Length - i );
+                if ( !processCandidate( protoName, buffer, out var bytesConsumed ) )
                 {
-                    i = y;
-                    scanSkipOffset = 0;
+                    i++;
+                    continue;
                 }
+
+                i += ( int )Math.Max( 1, bytesConsumed );
             }
         }
     }

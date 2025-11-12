@@ -79,25 +79,21 @@ namespace ProtobufDumper
             {
                 Console.WriteLine( "Loading binary '{0}'...", target );
 
-                ExecutableScanner.ScanFile( target, ( name, buffer ) =>
+                ExecutableScanner.ScanFile( target, ( string name, Stream buffer, out long bytesConsumed ) =>
                 {
+                    bytesConsumed = 0;
+
                     if ( collector.Candidates.Find( c => c.name == name ) != null ) return true;
 
                     Console.Write( "{0}... ", name );
 
-                    var complete = collector.TryParseCandidate( buffer, out var result, out var error );
+                    var complete = collector.TryParseCandidate( buffer, out var result, out var error, out bytesConsumed );
 
                     switch ( result )
                     {
                         case ProtobufCollector.CandidateResult.OK:
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine( "OK!" );
-                            Console.ResetColor();
-                            break;
-
-                        case ProtobufCollector.CandidateResult.Rescan:
-                            Console.ForegroundColor = ConsoleColor.Cyan;
-                            Console.WriteLine( "needs rescan: {0}", error.Message );
                             Console.ResetColor();
                             break;
 
