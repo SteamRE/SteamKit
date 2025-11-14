@@ -37,7 +37,7 @@ namespace ProtobufDumper
 
                 data.Position = 0;
                 var buffer = new byte[ bytesConsumed ];
-                data.Read( buffer, 0, ( int )bytesConsumed );
+                data.ReadExactly( buffer, 0, ( int )bytesConsumed );
 
                 candidate = Serializer.Deserialize<FileDescriptorProto>( buffer.AsSpan() );
             }
