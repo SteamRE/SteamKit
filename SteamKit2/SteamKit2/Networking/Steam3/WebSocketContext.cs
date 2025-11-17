@@ -68,31 +68,31 @@ namespace SteamKit2
                 connection.log.LogDebug( nameof(WebSocketContext), "Connected to {0}", connectionUri);
                 connection.Connected?.Invoke(connection, EventArgs.Empty);
 
-                while (!cancellationToken.IsCancellationRequested && socket.State == WebSocketState.Open)
-                {
-                    byte[]? packet = null;
-
-                    try
-                    {
-                        packet = await ReadMessageAsync( cancellationToken ).ConfigureAwait( false );
-                    }
-                    catch ( Exception ex )
-                    {
-                        connection.log.LogDebug( nameof( WebSocketContext ), "Exception reading from websocket: {0} - {1}", ex.GetType().FullName, ex.Message );
-                        connection.DisconnectCore( userInitiated: false, specificContext: this );
-                        return;
-                    }
-
-                    if (packet != null && packet.Length > 0)
-                    {
-                        connection.NetMsgReceived?.Invoke(connection, new NetMsgEventArgs(packet, EndPoint));
-                    }
-                }
-
-                await semaphore.WaitAsync().ConfigureAwait( false );
+                await semaphore.WaitAsync(CancellationToken.None).ConfigureAwait( false );
 
                 try
                 {
+                    while (!cancellationToken.IsCancellationRequested && socket.State == WebSocketState.Open)
+                    {
+                        byte[]? packet = null;
+
+                        try
+                        {
+                            packet = await ReadMessageAsync( cancellationToken ).ConfigureAwait( false );
+                        }
+                        catch ( Exception ex )
+                        {
+                            connection.log.LogDebug( nameof( WebSocketContext ), "Exception reading from websocket: {0} - {1}", ex.GetType().FullName, ex.Message );
+                            connection.DisconnectCore( userInitiated: false, specificContext: this );
+                            return;
+                        }
+
+                        if (packet != null && packet.Length > 0)
+                        {
+                            connection.NetMsgReceived?.Invoke(connection, new NetMsgEventArgs(packet, EndPoint));
+                        }
+                    }
+
                     if (!cancellationToken.IsCancellationRequested && socket.State == WebSocketState.Open)
                     {
                         connection.log.LogDebug( nameof(WebSocketContext), "Closing connection...");
@@ -133,10 +133,10 @@ namespace SteamKit2
                     return;
                 }
 
+                cts.Cancel();
                 semaphore.Wait();
                 try
                 {
-                    cts.Cancel();
                     cts.Dispose();
                     runloopTask = null;
 
@@ -144,7 +144,7 @@ namespace SteamKit2
                 }
                 finally
                 {
-                    semaphore.Release();
+                    semaphore.Dispose();
                 }
             }
 
