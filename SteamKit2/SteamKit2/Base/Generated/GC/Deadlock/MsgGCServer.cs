@@ -1859,6 +1859,26 @@ namespace SteamKit2.GC.Deadlock.Internal
                 [global::ProtoBuf.ProtoMember(48)]
                 public global::System.Collections.Generic.List<uint> damage_per_hero_ability { get; } = new global::System.Collections.Generic.List<uint>();
 
+                [global::ProtoBuf.ProtoMember(49)]
+                public uint player_bullet_damage
+                {
+                    get => __pbn__player_bullet_damage.GetValueOrDefault();
+                    set => __pbn__player_bullet_damage = value;
+                }
+                public bool ShouldSerializeplayer_bullet_damage() => __pbn__player_bullet_damage != null;
+                public void Resetplayer_bullet_damage() => __pbn__player_bullet_damage = null;
+                private uint? __pbn__player_bullet_damage;
+
+                [global::ProtoBuf.ProtoMember(50)]
+                public uint player_ability_damage
+                {
+                    get => __pbn__player_ability_damage.GetValueOrDefault();
+                    set => __pbn__player_ability_damage = value;
+                }
+                public bool ShouldSerializeplayer_ability_damage() => __pbn__player_ability_damage != null;
+                public void Resetplayer_ability_damage() => __pbn__player_ability_damage = null;
+                private uint? __pbn__player_ability_damage;
+
             }
 
             [global::ProtoBuf.ProtoContract()]
@@ -3764,6 +3784,16 @@ namespace SteamKit2.GC.Deadlock.Internal
 
             [global::ProtoBuf.ProtoMember(55)]
             public global::System.Collections.Generic.List<CMsgMatchData.AuxStat> aux_stats { get; } = new global::System.Collections.Generic.List<CMsgMatchData.AuxStat>();
+
+            [global::ProtoBuf.ProtoMember(57)]
+            public float new_player_score
+            {
+                get => __pbn__new_player_score.GetValueOrDefault();
+                set => __pbn__new_player_score = value;
+            }
+            public bool ShouldSerializenew_player_score() => __pbn__new_player_score != null;
+            public void Resetnew_player_score() => __pbn__new_player_score = null;
+            private float? __pbn__new_player_score;
 
         }
 

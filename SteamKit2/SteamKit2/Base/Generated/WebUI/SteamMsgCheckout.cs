@@ -368,6 +368,26 @@ namespace SteamKit2.WebUI.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public global::System.Collections.Generic.List<int> missing_must_own_appids { get; } = new global::System.Collections.Generic.List<int>();
 
+        [global::ProtoBuf.ProtoMember(12)]
+        public bool adult_content_restricted
+        {
+            get => __pbn__adult_content_restricted.GetValueOrDefault();
+            set => __pbn__adult_content_restricted = value;
+        }
+        public bool ShouldSerializeadult_content_restricted() => __pbn__adult_content_restricted != null;
+        public void Resetadult_content_restricted() => __pbn__adult_content_restricted = null;
+        private bool? __pbn__adult_content_restricted;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public bool commercial_license_restricted
+        {
+            get => __pbn__commercial_license_restricted.GetValueOrDefault();
+            set => __pbn__commercial_license_restricted = value;
+        }
+        public bool ShouldSerializecommercial_license_restricted() => __pbn__commercial_license_restricted != null;
+        public void Resetcommercial_license_restricted() => __pbn__commercial_license_restricted = null;
+        private bool? __pbn__commercial_license_restricted;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

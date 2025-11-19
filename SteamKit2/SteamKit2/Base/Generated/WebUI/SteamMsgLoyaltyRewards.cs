@@ -429,6 +429,16 @@ namespace SteamKit2.WebUI.Internal
         [global::ProtoBuf.ProtoMember(5)]
         public global::System.Collections.Generic.List<uint> valid_ugc_types { get; } = new global::System.Collections.Generic.List<uint>();
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool purchaseable
+        {
+            get => __pbn__purchaseable.GetValueOrDefault();
+            set => __pbn__purchaseable = value;
+        }
+        public bool ShouldSerializepurchaseable() => __pbn__purchaseable != null;
+        public void Resetpurchaseable() => __pbn__purchaseable = null;
+        private bool? __pbn__purchaseable;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

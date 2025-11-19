@@ -660,6 +660,16 @@ namespace SteamKit2.Internal
         public void Resetfile_sha() => __pbn__file_sha = null;
         private string __pbn__file_sha;
 
+        [global::ProtoBuf.ProtoMember(11)]
+        public uint compressed_file_size
+        {
+            get => __pbn__compressed_file_size.GetValueOrDefault();
+            set => __pbn__compressed_file_size = value;
+        }
+        public bool ShouldSerializecompressed_file_size() => __pbn__compressed_file_size != null;
+        public void Resetcompressed_file_size() => __pbn__compressed_file_size = null;
+        private uint? __pbn__compressed_file_size;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -671,6 +681,167 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(1)]
         public CCloud_UserFile details { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string rangecheck_host
+        {
+            get => __pbn__rangecheck_host ?? "";
+            set => __pbn__rangecheck_host = value;
+        }
+        public bool ShouldSerializerangecheck_host() => __pbn__rangecheck_host != null;
+        public void Resetrangecheck_host() => __pbn__rangecheck_host = null;
+        private string __pbn__rangecheck_host;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_GetSingleFileInfo_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint app_id
+        {
+            get => __pbn__app_id.GetValueOrDefault();
+            set => __pbn__app_id = value;
+        }
+        public bool ShouldSerializeapp_id() => __pbn__app_id != null;
+        public void Resetapp_id() => __pbn__app_id = null;
+        private uint? __pbn__app_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string file_name
+        {
+            get => __pbn__file_name ?? "";
+            set => __pbn__file_name = value;
+        }
+        public bool ShouldSerializefile_name() => __pbn__file_name != null;
+        public void Resetfile_name() => __pbn__file_name = null;
+        private string __pbn__file_name;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_GetSingleFileInfo_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint app_id
+        {
+            get => __pbn__app_id.GetValueOrDefault();
+            set => __pbn__app_id = value;
+        }
+        public bool ShouldSerializeapp_id() => __pbn__app_id != null;
+        public void Resetapp_id() => __pbn__app_id = null;
+        private uint? __pbn__app_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string file_name
+        {
+            get => __pbn__file_name ?? "";
+            set => __pbn__file_name = value;
+        }
+        public bool ShouldSerializefile_name() => __pbn__file_name != null;
+        public void Resetfile_name() => __pbn__file_name = null;
+        private string __pbn__file_name;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public byte[] sha_file
+        {
+            get => __pbn__sha_file;
+            set => __pbn__sha_file = value;
+        }
+        public bool ShouldSerializesha_file() => __pbn__sha_file != null;
+        public void Resetsha_file() => __pbn__sha_file = null;
+        private byte[] __pbn__sha_file;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public ulong time_stamp
+        {
+            get => __pbn__time_stamp.GetValueOrDefault();
+            set => __pbn__time_stamp = value;
+        }
+        public bool ShouldSerializetime_stamp() => __pbn__time_stamp != null;
+        public void Resettime_stamp() => __pbn__time_stamp = null;
+        private ulong? __pbn__time_stamp;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint raw_file_size
+        {
+            get => __pbn__raw_file_size.GetValueOrDefault();
+            set => __pbn__raw_file_size = value;
+        }
+        public bool ShouldSerializeraw_file_size() => __pbn__raw_file_size != null;
+        public void Resetraw_file_size() => __pbn__raw_file_size = null;
+        private uint? __pbn__raw_file_size;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool is_explicit_delete
+        {
+            get => __pbn__is_explicit_delete.GetValueOrDefault();
+            set => __pbn__is_explicit_delete = value;
+        }
+        public bool ShouldSerializeis_explicit_delete() => __pbn__is_explicit_delete != null;
+        public void Resetis_explicit_delete() => __pbn__is_explicit_delete = null;
+        private bool? __pbn__is_explicit_delete;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_ShareFile_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint app_id
+        {
+            get => __pbn__app_id.GetValueOrDefault();
+            set => __pbn__app_id = value;
+        }
+        public bool ShouldSerializeapp_id() => __pbn__app_id != null;
+        public void Resetapp_id() => __pbn__app_id = null;
+        private uint? __pbn__app_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string file_name
+        {
+            get => __pbn__file_name ?? "";
+            set => __pbn__file_name = value;
+        }
+        public bool ShouldSerializefile_name() => __pbn__file_name != null;
+        public void Resetfile_name() => __pbn__file_name = null;
+        private string __pbn__file_name;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCloud_ShareFile_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        [global::System.ComponentModel.DefaultValue(typeof(ulong), "18446744073709551615")]
+        public ulong hcontent
+        {
+            get => __pbn__hcontent ?? 18446744073709551615ul;
+            set => __pbn__hcontent = value;
+        }
+        public bool ShouldSerializehcontent() => __pbn__hcontent != null;
+        public void Resethcontent() => __pbn__hcontent = null;
+        private ulong? __pbn__hcontent;
 
     }
 
@@ -2436,6 +2607,16 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CCloud_GetFileDetails_Request, CCloud_GetFileDetails_Response>( "Cloud.GetFileDetails#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_GetSingleFileInfo_Response>> GetSingleFileInfo( CCloud_GetSingleFileInfo_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCloud_GetSingleFileInfo_Request, CCloud_GetSingleFileInfo_Response>( "Cloud.GetSingleFileInfo#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_ShareFile_Response>> ShareFile( CCloud_ShareFile_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCloud_ShareFile_Request, CCloud_ShareFile_Response>( "Cloud.ShareFile#1", request );
+        }
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_EnumerateUserFiles_Response>> EnumerateUserFiles( CCloud_EnumerateUserFiles_Request request )
         {
             return UnifiedMessages.SendMessage<CCloud_EnumerateUserFiles_Request, CCloud_EnumerateUserFiles_Response>( "Cloud.EnumerateUserFiles#1", request );
@@ -2549,6 +2730,12 @@ namespace SteamKit2.Internal
                     break;
                 case "GetFileDetails":
                     PostResponseMsg<CCloud_GetFileDetails_Response>( packetMsg );
+                    break;
+                case "GetSingleFileInfo":
+                    PostResponseMsg<CCloud_GetSingleFileInfo_Response>( packetMsg );
+                    break;
+                case "ShareFile":
+                    PostResponseMsg<CCloud_ShareFile_Response>( packetMsg );
                     break;
                 case "EnumerateUserFiles":
                     PostResponseMsg<CCloud_EnumerateUserFiles_Response>( packetMsg );

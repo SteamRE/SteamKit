@@ -603,6 +603,16 @@ namespace SteamKit2.WebUI.Internal
         public void Resetgidparentcomment() => __pbn__gidparentcomment = null;
         private ulong? __pbn__gidparentcomment;
 
+        [global::ProtoBuf.ProtoMember(14)]
+        public int delete_reason
+        {
+            get => __pbn__delete_reason.GetValueOrDefault();
+            set => __pbn__delete_reason = value;
+        }
+        public bool ShouldSerializedelete_reason() => __pbn__delete_reason != null;
+        public void Resetdelete_reason() => __pbn__delete_reason = null;
+        private int? __pbn__delete_reason;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2616,6 +2626,40 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_VerifyClanMembership_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<ulong> steamids_verifymembership { get; } = new global::System.Collections.Generic.List<ulong>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_VerifyClanMembership_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<ulong> steamids_nonmembers { get; } = new global::System.Collections.Generic.List<ulong>();
+
+    }
+
     public class Community : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "Community";
@@ -2745,6 +2789,11 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CCommunity_SetRecommendationBotReviewStatus_Request, CCommunity_SetRecommendationBotReviewStatus_Response>( "Community.SetRecommendationBotReviewStatus#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_VerifyClanMembership_Response>> VerifyClanMembership( CCommunity_VerifyClanMembership_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCommunity_VerifyClanMembership_Request, CCommunity_VerifyClanMembership_Response>( "Community.VerifyClanMembership#1", request );
+        }
+
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
@@ -2823,6 +2872,9 @@ namespace SteamKit2.WebUI.Internal
                     break;
                 case "SetRecommendationBotReviewStatus":
                     PostResponseMsg<CCommunity_SetRecommendationBotReviewStatus_Response>( packetMsg );
+                    break;
+                case "VerifyClanMembership":
+                    PostResponseMsg<CCommunity_VerifyClanMembership_Response>( packetMsg );
                     break;
             }
         }

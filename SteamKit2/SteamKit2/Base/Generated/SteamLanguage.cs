@@ -1872,6 +1872,8 @@ namespace SteamKit2
 		PhoneNumberIsVOIP = 127,
 		NotSupported = 128,
 		FamilySizeLimitExceeded = 129,
+		OfflineAppCacheInvalid = 130,
+		TryLater = 131,
 	}
 	public enum EUniverse
 	{

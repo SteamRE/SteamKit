@@ -4113,10 +4113,81 @@ namespace SteamKit2.Internal
         public void Resetlanguage() => __pbn__language = null;
         private string __pbn__language;
 
+        [global::ProtoBuf.ProtoMember(9)]
+        [global::System.ComponentModel.DefaultValue(EContentReportSubjectType.k_EContentReportSubjectType_Invalid)]
+        public EContentReportSubjectType subject_type
+        {
+            get => __pbn__subject_type ?? EContentReportSubjectType.k_EContentReportSubjectType_Invalid;
+            set => __pbn__subject_type = value;
+        }
+        public bool ShouldSerializesubject_type() => __pbn__subject_type != null;
+        public void Resetsubject_type() => __pbn__subject_type = null;
+        private EContentReportSubjectType? __pbn__subject_type;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
     public partial class CChatRoom_ReportMessage_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CChatRoom_ResolveReport_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong subject_group_id
+        {
+            get => __pbn__subject_group_id.GetValueOrDefault();
+            set => __pbn__subject_group_id = value;
+        }
+        public bool ShouldSerializesubject_group_id() => __pbn__subject_group_id != null;
+        public void Resetsubject_group_id() => __pbn__subject_group_id = null;
+        private ulong? __pbn__subject_group_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong subject_id
+        {
+            get => __pbn__subject_id.GetValueOrDefault();
+            set => __pbn__subject_id = value;
+        }
+        public bool ShouldSerializesubject_id() => __pbn__subject_id != null;
+        public void Resetsubject_id() => __pbn__subject_id = null;
+        private ulong? __pbn__subject_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue(EContentReportResolution.k_EContentReportResolution_Unresolved)]
+        public EContentReportResolution resolution
+        {
+            get => __pbn__resolution ?? EContentReportResolution.k_EContentReportResolution_Unresolved;
+            set => __pbn__resolution = value;
+        }
+        public bool ShouldSerializeresolution() => __pbn__resolution != null;
+        public void Resetresolution() => __pbn__resolution = null;
+        private EContentReportResolution? __pbn__resolution;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(EContentReportReason.k_EContentReportReason_Invalid)]
+        public EContentReportReason reason
+        {
+            get => __pbn__reason ?? EContentReportReason.k_EContentReportReason_Invalid;
+            set => __pbn__reason = value;
+        }
+        public bool ShouldSerializereason() => __pbn__reason != null;
+        public void Resetreason() => __pbn__reason = null;
+        private EContentReportReason? __pbn__reason;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CChatRoom_ResolveReport_Response : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -6003,6 +6074,11 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CChatRoom_ReportMessage_Request, CChatRoom_ReportMessage_Response>( "ChatRoom.ReportMessage#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_ResolveReport_Response>> ResolveReport( CChatRoom_ResolveReport_Request request )
+        {
+            return UnifiedMessages.SendMessage<CChatRoom_ResolveReport_Request, CChatRoom_ResolveReport_Response>( "ChatRoom.ResolveReport#1", request );
+        }
+
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
@@ -6156,6 +6232,9 @@ namespace SteamKit2.Internal
                     break;
                 case "ReportMessage":
                     PostResponseMsg<CChatRoom_ReportMessage_Response>( packetMsg );
+                    break;
+                case "ResolveReport":
+                    PostResponseMsg<CChatRoom_ResolveReport_Response>( packetMsg );
                     break;
             }
         }

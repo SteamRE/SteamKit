@@ -3177,36 +3177,6 @@ namespace SteamKit2.Internal
         public void Resetidle_backlight_dim_ac_seconds() => __pbn__idle_backlight_dim_ac_seconds = null;
         private float? __pbn__idle_backlight_dim_ac_seconds;
 
-        [global::ProtoBuf.ProtoMember(3)]
-        public float idle_suspend_battery_seconds
-        {
-            get => __pbn__idle_suspend_battery_seconds.GetValueOrDefault();
-            set => __pbn__idle_suspend_battery_seconds = value;
-        }
-        public bool ShouldSerializeidle_suspend_battery_seconds() => __pbn__idle_suspend_battery_seconds != null;
-        public void Resetidle_suspend_battery_seconds() => __pbn__idle_suspend_battery_seconds = null;
-        private float? __pbn__idle_suspend_battery_seconds;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public float idle_suspend_ac_seconds
-        {
-            get => __pbn__idle_suspend_ac_seconds.GetValueOrDefault();
-            set => __pbn__idle_suspend_ac_seconds = value;
-        }
-        public bool ShouldSerializeidle_suspend_ac_seconds() => __pbn__idle_suspend_ac_seconds != null;
-        public void Resetidle_suspend_ac_seconds() => __pbn__idle_suspend_ac_seconds = null;
-        private float? __pbn__idle_suspend_ac_seconds;
-
-        [global::ProtoBuf.ProtoMember(5)]
-        public bool idle_suspend_supressed
-        {
-            get => __pbn__idle_suspend_supressed.GetValueOrDefault();
-            set => __pbn__idle_suspend_supressed = value;
-        }
-        public bool ShouldSerializeidle_suspend_supressed() => __pbn__idle_suspend_supressed != null;
-        public void Resetidle_suspend_supressed() => __pbn__idle_suspend_supressed = null;
-        private bool? __pbn__idle_suspend_supressed;
-
         [global::ProtoBuf.ProtoMember(6)]
         public bool is_adaptive_brightness_available
         {

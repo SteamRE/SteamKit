@@ -5519,6 +5519,16 @@ namespace SteamKit2.GC.CSGO.Internal
             public void Resethighlight_reel() => __pbn__highlight_reel = null;
             private uint? __pbn__highlight_reel;
 
+            [global::ProtoBuf.ProtoMember(12)]
+            public uint wrapped_sticker
+            {
+                get => __pbn__wrapped_sticker.GetValueOrDefault();
+                set => __pbn__wrapped_sticker = value;
+            }
+            public bool ShouldSerializewrapped_sticker() => __pbn__wrapped_sticker != null;
+            public void Resetwrapped_sticker() => __pbn__wrapped_sticker = null;
+            private uint? __pbn__wrapped_sticker;
+
         }
 
     }

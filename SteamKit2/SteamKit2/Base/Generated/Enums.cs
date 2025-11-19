@@ -829,7 +829,8 @@ namespace SteamKit2.Internal
         k_EContentReportSubjectType_UGCFile = 3,
         k_EContentReportSubjectType_FriendChatMsg = 4,
         k_EContentReportSubjectType_ChatRoomMsg = 5,
-        k_EContentReportSubjectType_MAX = 6,
+        k_EContentReportSubjectType_ChatGroup = 6,
+        k_EContentReportSubjectType_MAX = 7,
     }
 
     [global::ProtoBuf.ProtoContract()]

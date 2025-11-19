@@ -9381,6 +9381,16 @@ namespace SteamKit2.WebUI.Internal
         public void Resetsteamos_separate_led_colors() => __pbn__steamos_separate_led_colors = null;
         private bool? __pbn__steamos_separate_led_colors;
 
+        [global::ProtoBuf.ProtoMember(22017)]
+        public bool steamos_wifi_reload_wifi_driver_on_sleep
+        {
+            get => __pbn__steamos_wifi_reload_wifi_driver_on_sleep.GetValueOrDefault();
+            set => __pbn__steamos_wifi_reload_wifi_driver_on_sleep = value;
+        }
+        public bool ShouldSerializesteamos_wifi_reload_wifi_driver_on_sleep() => __pbn__steamos_wifi_reload_wifi_driver_on_sleep != null;
+        public void Resetsteamos_wifi_reload_wifi_driver_on_sleep() => __pbn__steamos_wifi_reload_wifi_driver_on_sleep = null;
+        private bool? __pbn__steamos_wifi_reload_wifi_driver_on_sleep;
+
         [global::ProtoBuf.ProtoMember(23001)]
         public bool setting_validation_bool
         {
@@ -9474,6 +9484,46 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializehardware_updater_enabled() => __pbn__hardware_updater_enabled != null;
         public void Resethardware_updater_enabled() => __pbn__hardware_updater_enabled = null;
         private bool? __pbn__hardware_updater_enabled;
+
+        [global::ProtoBuf.ProtoMember(24003)]
+        public int system_idle_suspend_battery_sec
+        {
+            get => __pbn__system_idle_suspend_battery_sec.GetValueOrDefault();
+            set => __pbn__system_idle_suspend_battery_sec = value;
+        }
+        public bool ShouldSerializesystem_idle_suspend_battery_sec() => __pbn__system_idle_suspend_battery_sec != null;
+        public void Resetsystem_idle_suspend_battery_sec() => __pbn__system_idle_suspend_battery_sec = null;
+        private int? __pbn__system_idle_suspend_battery_sec;
+
+        [global::ProtoBuf.ProtoMember(24004)]
+        public int system_idle_suspend_ac_sec
+        {
+            get => __pbn__system_idle_suspend_ac_sec.GetValueOrDefault();
+            set => __pbn__system_idle_suspend_ac_sec = value;
+        }
+        public bool ShouldSerializesystem_idle_suspend_ac_sec() => __pbn__system_idle_suspend_ac_sec != null;
+        public void Resetsystem_idle_suspend_ac_sec() => __pbn__system_idle_suspend_ac_sec = null;
+        private int? __pbn__system_idle_suspend_ac_sec;
+
+        [global::ProtoBuf.ProtoMember(24005)]
+        public bool system_enable_low_power_downloads
+        {
+            get => __pbn__system_enable_low_power_downloads.GetValueOrDefault();
+            set => __pbn__system_enable_low_power_downloads = value;
+        }
+        public bool ShouldSerializesystem_enable_low_power_downloads() => __pbn__system_enable_low_power_downloads != null;
+        public void Resetsystem_enable_low_power_downloads() => __pbn__system_enable_low_power_downloads = null;
+        private bool? __pbn__system_enable_low_power_downloads;
+
+        [global::ProtoBuf.ProtoMember(24006)]
+        public bool system_allow_battery_low_power_downloads
+        {
+            get => __pbn__system_allow_battery_low_power_downloads.GetValueOrDefault();
+            set => __pbn__system_allow_battery_low_power_downloads = value;
+        }
+        public bool ShouldSerializesystem_allow_battery_low_power_downloads() => __pbn__system_allow_battery_low_power_downloads != null;
+        public void Resetsystem_allow_battery_low_power_downloads() => __pbn__system_allow_battery_low_power_downloads = null;
+        private bool? __pbn__system_allow_battery_low_power_downloads;
 
         [global::ProtoBuf.ProtoMember(24007)]
         public int game_framerate_report_enabled
@@ -14703,36 +14753,6 @@ namespace SteamKit2.WebUI.Internal
         public void Resetidle_backlight_dim_ac_seconds() => __pbn__idle_backlight_dim_ac_seconds = null;
         private float? __pbn__idle_backlight_dim_ac_seconds;
 
-        [global::ProtoBuf.ProtoMember(3)]
-        public float idle_suspend_battery_seconds
-        {
-            get => __pbn__idle_suspend_battery_seconds.GetValueOrDefault();
-            set => __pbn__idle_suspend_battery_seconds = value;
-        }
-        public bool ShouldSerializeidle_suspend_battery_seconds() => __pbn__idle_suspend_battery_seconds != null;
-        public void Resetidle_suspend_battery_seconds() => __pbn__idle_suspend_battery_seconds = null;
-        private float? __pbn__idle_suspend_battery_seconds;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public float idle_suspend_ac_seconds
-        {
-            get => __pbn__idle_suspend_ac_seconds.GetValueOrDefault();
-            set => __pbn__idle_suspend_ac_seconds = value;
-        }
-        public bool ShouldSerializeidle_suspend_ac_seconds() => __pbn__idle_suspend_ac_seconds != null;
-        public void Resetidle_suspend_ac_seconds() => __pbn__idle_suspend_ac_seconds = null;
-        private float? __pbn__idle_suspend_ac_seconds;
-
-        [global::ProtoBuf.ProtoMember(5)]
-        public bool idle_suspend_supressed
-        {
-            get => __pbn__idle_suspend_supressed.GetValueOrDefault();
-            set => __pbn__idle_suspend_supressed = value;
-        }
-        public bool ShouldSerializeidle_suspend_supressed() => __pbn__idle_suspend_supressed != null;
-        public void Resetidle_suspend_supressed() => __pbn__idle_suspend_supressed = null;
-        private bool? __pbn__idle_suspend_supressed;
-
         [global::ProtoBuf.ProtoMember(6)]
         public bool is_adaptive_brightness_available
         {
@@ -18508,6 +18528,9 @@ namespace SteamKit2.WebUI.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public global::System.Collections.Generic.List<CVRGamepadUIShared_Action> defined_actions { get; } = new global::System.Collections.Generic.List<CVRGamepadUIShared_Action>();
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public CVRGamepadUI_Frame_FrameControls controls { get; set; }
+
         [global::ProtoBuf.ProtoMember(1000)]
         [global::System.ComponentModel.DefaultValue("")]
         public string tmp_title
@@ -18518,6 +18541,50 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializetmp_title() => __pbn__tmp_title != null;
         public void Resettmp_title() => __pbn__tmp_title = null;
         private string __pbn__tmp_title;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CVRGamepadUI_Frame_FrameControls : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CVRGamepadUI_Frame_FrameControls_Item> items_for_bottom_frame_controls { get; } = new global::System.Collections.Generic.List<CVRGamepadUI_Frame_FrameControls_Item>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<CVRGamepadUI_Frame_FrameControls_Item> items_for_tab_hover_menu { get; } = new global::System.Collections.Generic.List<CVRGamepadUI_Frame_FrameControls_Item>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CVRGamepadUI_Frame_FrameControls_Item : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int type
+        {
+            get => __pbn__type.GetValueOrDefault();
+            set => __pbn__type = value;
+        }
+        public bool ShouldSerializetype() => __pbn__type != null;
+        public void Resettype() => __pbn__type = null;
+        private int? __pbn__type;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint action_id
+        {
+            get => __pbn__action_id.GetValueOrDefault();
+            set => __pbn__action_id = value;
+        }
+        public bool ShouldSerializeaction_id() => __pbn__action_id != null;
+        public void Resetaction_id() => __pbn__action_id = null;
+        private uint? __pbn__action_id;
 
     }
 
@@ -18689,25 +18756,25 @@ namespace SteamKit2.WebUI.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public int error
+        public int error_code
         {
-            get => __pbn__error.GetValueOrDefault();
-            set => __pbn__error = value;
+            get => __pbn__error_code.GetValueOrDefault();
+            set => __pbn__error_code = value;
         }
-        public bool ShouldSerializeerror() => __pbn__error != null;
-        public void Reseterror() => __pbn__error = null;
-        private int? __pbn__error;
+        public bool ShouldSerializeerror_code() => __pbn__error_code != null;
+        public void Reseterror_code() => __pbn__error_code = null;
+        private int? __pbn__error_code;
 
         [global::ProtoBuf.ProtoMember(2)]
         [global::System.ComponentModel.DefaultValue("")]
-        public string description
+        public string error_description
         {
-            get => __pbn__description ?? "";
-            set => __pbn__description = value;
+            get => __pbn__error_description ?? "";
+            set => __pbn__error_description = value;
         }
-        public bool ShouldSerializedescription() => __pbn__description != null;
-        public void Resetdescription() => __pbn__description = null;
-        private string __pbn__description;
+        public bool ShouldSerializeerror_description() => __pbn__error_description != null;
+        public void Reseterror_description() => __pbn__error_description = null;
+        private string __pbn__error_description;
 
         [global::ProtoBuf.ProtoMember(3)]
         public int origin
@@ -18718,6 +18785,16 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializeorigin() => __pbn__origin != null;
         public void Resetorigin() => __pbn__origin = null;
         private int? __pbn__origin;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool was_transmitted
+        {
+            get => __pbn__was_transmitted.GetValueOrDefault();
+            set => __pbn__was_transmitted = value;
+        }
+        public bool ShouldSerializewas_transmitted() => __pbn__was_transmitted != null;
+        public void Resetwas_transmitted() => __pbn__was_transmitted = null;
+        private bool? __pbn__was_transmitted;
 
     }
 
@@ -19048,6 +19125,9 @@ namespace SteamKit2.WebUI.Internal
         public void Resetspecial_identifier() => __pbn__special_identifier = null;
         private int? __pbn__special_identifier;
 
+        [global::ProtoBuf.ProtoMember(17)]
+        public CVRGamepadUI_Message_ShowDashboardPopup_Request_Scale scale { get; set; }
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -19223,6 +19303,25 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializeyaw_degrees() => __pbn__yaw_degrees != null;
         public void Resetyaw_degrees() => __pbn__yaw_degrees = null;
         private float? __pbn__yaw_degrees;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CVRGamepadUI_Message_ShowDashboardPopup_Request_Scale : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public float scaler_value
+        {
+            get => __pbn__scaler_value.GetValueOrDefault();
+            set => __pbn__scaler_value = value;
+        }
+        public bool ShouldSerializescaler_value() => __pbn__scaler_value != null;
+        public void Resetscaler_value() => __pbn__scaler_value = null;
+        private float? __pbn__scaler_value;
 
     }
 
