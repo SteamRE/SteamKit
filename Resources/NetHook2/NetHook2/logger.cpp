@@ -20,7 +20,7 @@ CLogger::CLogger() noexcept
 
 	m_RootDir = tempName;
 	m_RootDir = m_RootDir.substr( 0, m_RootDir.find_last_of( '\\' ) );
-	m_RootDir += "\\nethook\\";
+	m_RootDir = "C:\\nethook\\";
 
 	// create root nethook log directory if it doesn't exist
 	CreateDirectoryA( m_RootDir.c_str(), nullptr );
@@ -229,3 +229,4 @@ void CLogger::MultiplexMulti( ENetDirection eDirection, const uint8 *pData, uint
 	if ( bDecomp )
 		delete [] pMsgData;
 }
+
