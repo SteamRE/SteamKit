@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using Windows.Win32.Storage.FileSystem;
@@ -51,22 +52,18 @@ namespace SteamKit2.Util
                 null
             );
 
-            if ( handle == null || handle.IsInvalid )
+            if ( handle.IsInvalid )
             {
                 throw new Win32Exception();
             }
 
             var extents = new VOLUME_DISK_EXTENTS();
-            var bytesReturned = 0u;
 
             if ( !DeviceIoControl(
                 handle,
                 IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS,
                 null,
-                0,
-                &extents,
-                ( uint )VOLUME_DISK_EXTENTS.SizeOf( 1 ),
-                &bytesReturned, // If lpOverlapped is NULL, lpBytesReturned cannot be NULL
+                new Span<byte>( &extents, VOLUME_DISK_EXTENTS.SizeOf( 1 ) ),
                 null
             ) )
             {
@@ -94,7 +91,7 @@ namespace SteamKit2.Util
                 null
             );
 
-            if ( handle == null || handle.IsInvalid )
+            if ( handle.IsInvalid )
             {
                 throw new Win32Exception();
             }
@@ -104,21 +101,18 @@ namespace SteamKit2.Util
                 PropertyId = STORAGE_PROPERTY_ID.StorageDeviceProperty,
                 QueryType = STORAGE_QUERY_TYPE.PropertyStandardQuery,
             };
+            var queryBuffer = new ReadOnlySpan<byte>( &query, STORAGE_PROPERTY_QUERY.SizeOf( 1 ) );
 
             // 1. Call DeviceIoControl(STORAGE_PROPERTY_QUERY, out STORAGE_DESCRIPTOR_HEADER) to figure out how many bytes
             // we need to allocate.
 
             var header = new STORAGE_DESCRIPTOR_HEADER();
-            var bytesReturned = 0u;
 
             if ( !DeviceIoControl(
                 handle,
                 IOCTL_STORAGE_QUERY_PROPERTY,
-                &query,
-                ( uint )STORAGE_PROPERTY_QUERY.SizeOf( 1 ),
-                &header,
-                ( uint )sizeof( STORAGE_DESCRIPTOR_HEADER ),
-                &bytesReturned,
+                queryBuffer,
+                new Span<byte>( &header, sizeof( STORAGE_DESCRIPTOR_HEADER ) ),
                 null
             ) )
             {
@@ -128,25 +122,25 @@ namespace SteamKit2.Util
             // 2. Call DeviceIOControl(STORAGE_PROPERTY_QUERY, STORAGE_DEVICE_DESCRIPTOR) to get a bunch of device info with a header
             // containing the offsets to each piece of information.
 
-            var descriptorPtr = Marshal.AllocHGlobal( ( int )header.Size );
+            var descriptorSize = ( int )header.Size;
+            var descriptorBuffer = NativeMemory.Alloc( ( nuint )descriptorSize );
 
             try
             {
+                var descriptorSpan = new Span<byte>( descriptorBuffer, descriptorSize );
+
                 if ( !DeviceIoControl(
                         handle,
                         IOCTL_STORAGE_QUERY_PROPERTY,
-                        &query,
-                        ( uint )STORAGE_PROPERTY_QUERY.SizeOf( 1 ),
-                        ( void* )descriptorPtr,
-                        header.Size,
-                        &bytesReturned,
+                        queryBuffer,
+                        descriptorSpan,
                         null
                     ) )
                 {
                     throw new Win32Exception();
                 }
 
-                var descriptor = Marshal.PtrToStructure<STORAGE_DEVICE_DESCRIPTOR>( descriptorPtr );
+                ref var descriptor = ref Unsafe.AsRef<STORAGE_DEVICE_DESCRIPTOR>( descriptorBuffer );
 
                 // 3. Figure out where in the blob the serial number is
                 // and read it from there.
@@ -158,14 +152,14 @@ namespace SteamKit2.Util
                     throw new InvalidOperationException( "Serial number offset is zero." );
                 }
 
-                var serialNumberPtr = IntPtr.Add( descriptorPtr, ( int )serialNumberOffset );
+                var serialNumberPtr = ( nint )descriptorBuffer + ( int )serialNumberOffset;
 
                 var serialNumber = Marshal.PtrToStringAnsi( serialNumberPtr );
                 return serialNumber;
             }
             finally
             {
-                Marshal.FreeHGlobal( descriptorPtr );
+                NativeMemory.Free( descriptorBuffer );
             }
         }
     }
