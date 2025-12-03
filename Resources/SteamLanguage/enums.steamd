@@ -849,7 +849,7 @@ enum EServerType
 	Client = -3;
 	CServer = -4;
 	CEconBase = -5;
-	
+
 	Invalid = -1;
 	First = 0;
 
@@ -985,7 +985,7 @@ enum EServerType
 	China = 125;
 	CrashDump = 126;
 };
- 
+
 enum EBillingType
 {
 	NoCost = 0;
@@ -1342,7 +1342,7 @@ enum ELeaderboardSortMethod
 
 enum ELeaderboardDisplayType
 {
-	None = 0; 
+	None = 0;
 	Numeric = 1;
 	TimeSeconds = 2;
 	TimeMilliSeconds = 3;
@@ -1733,4 +1733,22 @@ public enum EMobileConfirmationType
 	JoinFamilyGroup = 11;
 	MarketPurchase = 12;
 	RequestRefund = 13;
+}
+
+public enum ECommentPermission
+{
+    Invalid = -1;
+
+    FriendsOnly = 0;
+    Anyone = 1;
+    SelfOnly = 2;
+}
+
+public enum ECommunityPrivacy
+{
+    Invalid = 0;
+
+    Private = 1;
+    FriendsOnly = 2;
+    Public = 3;
 }

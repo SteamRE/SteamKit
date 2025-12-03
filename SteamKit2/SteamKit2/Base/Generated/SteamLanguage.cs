@@ -3463,6 +3463,20 @@ namespace SteamKit2
 		MarketPurchase = 12,
 		RequestRefund = 13,
 	}
+	public enum ECommentPermission
+	{
+		Invalid = -1,
+		FriendsOnly = 0,
+		Anyone = 1,
+		SelfOnly = 2,
+	}
+	public enum ECommunityPrivacy
+	{
+		Invalid = 0,
+		Private = 1,
+		FriendsOnly = 2,
+		Public = 3,
+	}
 	public enum EUdpPacketType : byte
 	{
 		Invalid = 0,
