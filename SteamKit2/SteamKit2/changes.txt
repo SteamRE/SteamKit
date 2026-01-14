@@ -2,15 +2,19 @@
 v 3.4.0			X
 ------------------------------------------------------------------------------
 
+* Added `UserCountryCode` to `LoggedOnCallback`.
+* Added privacy-related enums.
 * Moved `Utils.AdlerHash` to `DepotChunk.AdlerHash` which is an unrolled version for better performance.
 * Removed LINQ allocations from `KeyValue` indexer.
 * Updated `EGamingDeviceType` enum.
 * Fixed `GameID.GetHashCode`.
 * Fixed `LinkTarget` not being decrypted in `DepotManifest`.
+* Updated Steam enums and protobufs.
 * Updated dependencies.
 
 BREAKING CHANGES
 * SteamKit now targets .NET 10.
+* Removed deprecated Facebook fields from `AccountInfoCallback`.
 
 ------------------------------------------------------------------------------
 v 3.3.1			August 21 2025
