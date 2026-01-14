@@ -257,16 +257,6 @@ namespace SteamKit2
             /// </summary>
             public EAccountFlags AccountFlags { get; private set; }
 
-            /// <summary>
-            /// Gets the facebook ID of this account if it is linked with facebook.
-            /// </summary>
-            public ulong FacebookID { get; private set; }
-            /// <summary>
-            /// Gets the facebook name if this account is linked with facebook.
-            /// </summary>
-            public string FacebookName { get; private set; }
-
-
             internal AccountInfoCallback( IPacketMsg packetMsg )
             {
                 var accInfo = new ClientMsgProtobuf<CMsgClientAccountInfo>( packetMsg );
@@ -278,9 +268,6 @@ namespace SteamKit2
                 CountAuthedComputers = msg.count_authed_computers;
 
                 AccountFlags = ( EAccountFlags )msg.account_flags;
-
-                FacebookID = msg.facebook_id;
-                FacebookName = msg.facebook_name;
             }
         }
 
