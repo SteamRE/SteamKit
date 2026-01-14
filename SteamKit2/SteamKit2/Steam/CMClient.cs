@@ -64,6 +64,13 @@ namespace SteamKit2.Internal
         public string? IPCountryCode { get; private set; }
 
         /// <summary>
+        /// Gets the country code of our account country code. This value is assigned after a logon attempt has succeeded.
+        /// This value will be <c>null</c> if the client is logged off of Steam.
+        /// </summary>
+        /// <value>The SteamID.</value>
+        public string? UserCountryCode { get; private set; }
+
+        /// <summary>
         /// Gets the universe of this client.
         /// </summary>
         /// <value>The universe.</value>
@@ -582,6 +589,7 @@ namespace SteamKit2.Internal
                 CellID = logonResp.Body.cell_id;
                 PublicIP = logonResp.Body.public_ip.GetIPAddress();
                 IPCountryCode = logonResp.Body.ip_country_code;
+                UserCountryCode = logonResp.Body.user_country;
 
                 int hbDelay = logonResp.Body.legacy_out_of_game_heartbeat_seconds;
 
@@ -606,6 +614,7 @@ namespace SteamKit2.Internal
             CellID = null;
             PublicIP = null;
             IPCountryCode = null;
+            UserCountryCode = null;
 
             heartBeatFunc.Stop();
 

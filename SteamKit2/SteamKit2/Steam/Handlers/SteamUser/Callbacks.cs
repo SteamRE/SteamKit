@@ -91,6 +91,11 @@ namespace SteamKit2
             public string? IPCountryCode { get; private set; }
 
             /// <summary>
+            /// Gets the account country code.
+            /// </summary>
+            public string? UserCountryCode { get; private set; }
+
+            /// <summary>
             /// Gets the vanity URL.
             /// </summary>
             public string? VanityURL { get; private set; }
@@ -142,6 +147,7 @@ namespace SteamKit2
                 this.Steam2Ticket = resp.steam2_ticket;
 
                 this.IPCountryCode = resp.ip_country_code;
+                this.UserCountryCode = resp.user_country;
 
                 this.VanityURL = resp.vanity_url;
 
