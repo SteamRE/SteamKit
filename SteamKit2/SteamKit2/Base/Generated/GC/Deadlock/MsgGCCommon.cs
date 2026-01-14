@@ -284,8 +284,18 @@ namespace SteamKit2.GC.Deadlock.Internal
             public void Resetaccount_id() => __pbn__account_id = null;
             private uint? __pbn__account_id;
 
-            [global::ProtoBuf.ProtoMember(20, IsPacked = true)]
-            public global::System.Collections.Generic.List<uint> account_awards { get; } = new global::System.Collections.Generic.List<uint>();
+            [global::ProtoBuf.ProtoMember(30)]
+            public bool hideout_holiday_award_2024
+            {
+                get => __pbn__hideout_holiday_award_2024.GetValueOrDefault();
+                set => __pbn__hideout_holiday_award_2024 = value;
+            }
+            public bool ShouldSerializehideout_holiday_award_2024() => __pbn__hideout_holiday_award_2024 != null;
+            public void Resethideout_holiday_award_2024() => __pbn__hideout_holiday_award_2024 = null;
+            private bool? __pbn__hideout_holiday_award_2024;
+
+            [global::ProtoBuf.ProtoMember(31, IsPacked = true)]
+            public global::System.Collections.Generic.List<uint> hideout_holiday_awards_2025 { get; } = new global::System.Collections.Generic.List<uint>();
 
         }
 
@@ -2330,6 +2340,45 @@ namespace SteamKit2.GC.Deadlock.Internal
         }
 
         [global::ProtoBuf.ProtoContract()]
+        public partial class PlayerAccolade : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint accolade_id
+            {
+                get => __pbn__accolade_id.GetValueOrDefault();
+                set => __pbn__accolade_id = value;
+            }
+            public bool ShouldSerializeaccolade_id() => __pbn__accolade_id != null;
+            public void Resetaccolade_id() => __pbn__accolade_id = null;
+            private uint? __pbn__accolade_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public int accolade_stat_value
+            {
+                get => __pbn__accolade_stat_value.GetValueOrDefault();
+                set => __pbn__accolade_stat_value = value;
+            }
+            public bool ShouldSerializeaccolade_stat_value() => __pbn__accolade_stat_value != null;
+            public void Resetaccolade_stat_value() => __pbn__accolade_stat_value = null;
+            private int? __pbn__accolade_stat_value;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public int accolade_threshold_achieved
+            {
+                get => __pbn__accolade_threshold_achieved.GetValueOrDefault();
+                set => __pbn__accolade_threshold_achieved = value;
+            }
+            public bool ShouldSerializeaccolade_threshold_achieved() => __pbn__accolade_threshold_achieved != null;
+            public void Resetaccolade_threshold_achieved() => __pbn__accolade_threshold_achieved = null;
+            private int? __pbn__accolade_threshold_achieved;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
         public partial class Players : global::ProtoBuf.IExtensible
         {
             private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2520,6 +2569,55 @@ namespace SteamKit2.GC.Deadlock.Internal
             public bool ShouldSerializerewards_eligible() => __pbn__rewards_eligible != null;
             public void Resetrewards_eligible() => __pbn__rewards_eligible = null;
             private bool? __pbn__rewards_eligible;
+
+            [global::ProtoBuf.ProtoMember(29)]
+            public bool earned_holiday_award_2025
+            {
+                get => __pbn__earned_holiday_award_2025.GetValueOrDefault();
+                set => __pbn__earned_holiday_award_2025 = value;
+            }
+            public bool ShouldSerializeearned_holiday_award_2025() => __pbn__earned_holiday_award_2025 != null;
+            public void Resetearned_holiday_award_2025() => __pbn__earned_holiday_award_2025 = null;
+            private bool? __pbn__earned_holiday_award_2025;
+
+            [global::ProtoBuf.ProtoMember(48)]
+            public global::System.Collections.Generic.List<CMsgTrackedStat> player_tracked_stats { get; } = new global::System.Collections.Generic.List<CMsgTrackedStat>();
+
+            [global::ProtoBuf.ProtoMember(27)]
+            public global::System.Collections.Generic.List<CMsgMatchMetaDataContents.PlayerAccolade> accolades { get; } = new global::System.Collections.Generic.List<CMsgMatchMetaDataContents.PlayerAccolade>();
+
+            [global::ProtoBuf.ProtoMember(28)]
+            public uint mvp_rank
+            {
+                get => __pbn__mvp_rank.GetValueOrDefault();
+                set => __pbn__mvp_rank = value;
+            }
+            public bool ShouldSerializemvp_rank() => __pbn__mvp_rank != null;
+            public void Resetmvp_rank() => __pbn__mvp_rank = null;
+            private uint? __pbn__mvp_rank;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Teams : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue(ECitadelLobbyTeam.k_ECitadelLobbyTeam_Team0)]
+            public ECitadelLobbyTeam team
+            {
+                get => __pbn__team ?? ECitadelLobbyTeam.k_ECitadelLobbyTeam_Team0;
+                set => __pbn__team = value;
+            }
+            public bool ShouldSerializeteam() => __pbn__team != null;
+            public void Resetteam() => __pbn__team = null;
+            private ECitadelLobbyTeam? __pbn__team;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public global::System.Collections.Generic.List<CMsgTrackedStat> team_tracked_stats { get; } = new global::System.Collections.Generic.List<CMsgTrackedStat>();
 
         }
 
@@ -2949,6 +3047,12 @@ namespace SteamKit2.GC.Deadlock.Internal
             public void Resetnot_scored() => __pbn__not_scored = null;
             private bool? __pbn__not_scored;
 
+            [global::ProtoBuf.ProtoMember(29)]
+            public global::System.Collections.Generic.List<CMsgTrackedStat> match_tracked_stats { get; } = new global::System.Collections.Generic.List<CMsgTrackedStat>();
+
+            [global::ProtoBuf.ProtoMember(30)]
+            public global::System.Collections.Generic.List<CMsgMatchMetaDataContents.Teams> teams { get; } = new global::System.Collections.Generic.List<CMsgMatchMetaDataContents.Teams>();
+
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -3147,6 +3251,35 @@ namespace SteamKit2.GC.Deadlock.Internal
 
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<CMsgAccountHeroStats> stats { get; } = new global::System.Collections.Generic.List<CMsgAccountHeroStats>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgTrackedStat : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint tracked_stat_id
+        {
+            get => __pbn__tracked_stat_id.GetValueOrDefault();
+            set => __pbn__tracked_stat_id = value;
+        }
+        public bool ShouldSerializetracked_stat_id() => __pbn__tracked_stat_id != null;
+        public void Resettracked_stat_id() => __pbn__tracked_stat_id = null;
+        private uint? __pbn__tracked_stat_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public int tracked_stat_value
+        {
+            get => __pbn__tracked_stat_value.GetValueOrDefault();
+            set => __pbn__tracked_stat_value = value;
+        }
+        public bool ShouldSerializetracked_stat_value() => __pbn__tracked_stat_value != null;
+        public void Resettracked_stat_value() => __pbn__tracked_stat_value = null;
+        private int? __pbn__tracked_stat_value;
 
     }
 

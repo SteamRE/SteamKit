@@ -2516,6 +2516,51 @@ namespace SteamKit2.WebUI.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public global::System.Collections.Generic.List<CClientMetrics_GamePerformance_Notification_FrameRateReport> reports { get; } = new global::System.Collections.Generic.List<CClientMetrics_GamePerformance_Notification_FrameRateReport>();
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<CClientMetrics_GamePerformance_Notification_FrameRate> frame_rates { get; } = new global::System.Collections.Generic.List<CClientMetrics_GamePerformance_Notification_FrameRate>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public CClientMetrics_GamePerformance_Notification_SystemInformation system_info { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientMetrics_GamePerformance_Notification_FrameRate : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong gameid
+        {
+            get => __pbn__gameid.GetValueOrDefault();
+            set => __pbn__gameid = value;
+        }
+        public bool ShouldSerializegameid() => __pbn__gameid != null;
+        public void Resetgameid() => __pbn__gameid = null;
+        private ulong? __pbn__gameid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint frame_rate
+        {
+            get => __pbn__frame_rate.GetValueOrDefault();
+            set => __pbn__frame_rate = value;
+        }
+        public bool ShouldSerializeframe_rate() => __pbn__frame_rate != null;
+        public void Resetframe_rate() => __pbn__frame_rate = null;
+        private uint? __pbn__frame_rate;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public int session_seconds
+        {
+            get => __pbn__session_seconds.GetValueOrDefault();
+            set => __pbn__session_seconds = value;
+        }
+        public bool ShouldSerializesession_seconds() => __pbn__session_seconds != null;
+        public void Resetsession_seconds() => __pbn__session_seconds = null;
+        private int? __pbn__session_seconds;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2627,6 +2672,121 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializesession_seconds() => __pbn__session_seconds != null;
         public void Resetsession_seconds() => __pbn__session_seconds = null;
         private int? __pbn__session_seconds;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CClientMetrics_GamePerformance_Notification_SystemInformation : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string manufacturer
+        {
+            get => __pbn__manufacturer ?? "";
+            set => __pbn__manufacturer = value;
+        }
+        public bool ShouldSerializemanufacturer() => __pbn__manufacturer != null;
+        public void Resetmanufacturer() => __pbn__manufacturer = null;
+        private string __pbn__manufacturer;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string model
+        {
+            get => __pbn__model ?? "";
+            set => __pbn__model = value;
+        }
+        public bool ShouldSerializemodel() => __pbn__model != null;
+        public void Resetmodel() => __pbn__model = null;
+        private string __pbn__model;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string dx_video_card
+        {
+            get => __pbn__dx_video_card ?? "";
+            set => __pbn__dx_video_card = value;
+        }
+        public bool ShouldSerializedx_video_card() => __pbn__dx_video_card != null;
+        public void Resetdx_video_card() => __pbn__dx_video_card = null;
+        private string __pbn__dx_video_card;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public int dx_vendorid
+        {
+            get => __pbn__dx_vendorid.GetValueOrDefault();
+            set => __pbn__dx_vendorid = value;
+        }
+        public bool ShouldSerializedx_vendorid() => __pbn__dx_vendorid != null;
+        public void Resetdx_vendorid() => __pbn__dx_vendorid = null;
+        private int? __pbn__dx_vendorid;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public int dx_deviceid
+        {
+            get => __pbn__dx_deviceid.GetValueOrDefault();
+            set => __pbn__dx_deviceid = value;
+        }
+        public bool ShouldSerializedx_deviceid() => __pbn__dx_deviceid != null;
+        public void Resetdx_deviceid() => __pbn__dx_deviceid = null;
+        private int? __pbn__dx_deviceid;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint num_gpu
+        {
+            get => __pbn__num_gpu.GetValueOrDefault();
+            set => __pbn__num_gpu = value;
+        }
+        public bool ShouldSerializenum_gpu() => __pbn__num_gpu != null;
+        public void Resetnum_gpu() => __pbn__num_gpu = null;
+        private uint? __pbn__num_gpu;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public ulong system_ram
+        {
+            get => __pbn__system_ram.GetValueOrDefault();
+            set => __pbn__system_ram = value;
+        }
+        public bool ShouldSerializesystem_ram() => __pbn__system_ram != null;
+        public void Resetsystem_ram() => __pbn__system_ram = null;
+        private ulong? __pbn__system_ram;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string os
+        {
+            get => __pbn__os ?? "";
+            set => __pbn__os = value;
+        }
+        public bool ShouldSerializeos() => __pbn__os != null;
+        public void Resetos() => __pbn__os = null;
+        private string __pbn__os;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string cpu_vendor
+        {
+            get => __pbn__cpu_vendor ?? "";
+            set => __pbn__cpu_vendor = value;
+        }
+        public bool ShouldSerializecpu_vendor() => __pbn__cpu_vendor != null;
+        public void Resetcpu_vendor() => __pbn__cpu_vendor = null;
+        private string __pbn__cpu_vendor;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string cpu_name
+        {
+            get => __pbn__cpu_name ?? "";
+            set => __pbn__cpu_name = value;
+        }
+        public bool ShouldSerializecpu_name() => __pbn__cpu_name != null;
+        public void Resetcpu_name() => __pbn__cpu_name = null;
+        private string __pbn__cpu_name;
 
     }
 
@@ -4804,27 +4964,6 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializeaccount_flags() => __pbn__account_flags != null;
         public void Resetaccount_flags() => __pbn__account_flags = null;
         private uint? __pbn__account_flags;
-
-        [global::ProtoBuf.ProtoMember(8)]
-        public ulong facebook_id
-        {
-            get => __pbn__facebook_id.GetValueOrDefault();
-            set => __pbn__facebook_id = value;
-        }
-        public bool ShouldSerializefacebook_id() => __pbn__facebook_id != null;
-        public void Resetfacebook_id() => __pbn__facebook_id = null;
-        private ulong? __pbn__facebook_id;
-
-        [global::ProtoBuf.ProtoMember(9)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string facebook_name
-        {
-            get => __pbn__facebook_name ?? "";
-            set => __pbn__facebook_name = value;
-        }
-        public bool ShouldSerializefacebook_name() => __pbn__facebook_name != null;
-        public void Resetfacebook_name() => __pbn__facebook_name = null;
-        private string __pbn__facebook_name;
 
         [global::ProtoBuf.ProtoMember(15)]
         [global::System.ComponentModel.DefaultValue("")]
@@ -7540,16 +7679,6 @@ namespace SteamKit2.WebUI.Internal
         public void Resetno_save_personal_info() => __pbn__no_save_personal_info = null;
         private bool? __pbn__no_save_personal_info;
 
-        [global::ProtoBuf.ProtoMember(2)]
-        public bool oobe_test_mode_enabled
-        {
-            get => __pbn__oobe_test_mode_enabled.GetValueOrDefault();
-            set => __pbn__oobe_test_mode_enabled = value;
-        }
-        public bool ShouldSerializeoobe_test_mode_enabled() => __pbn__oobe_test_mode_enabled != null;
-        public void Resetoobe_test_mode_enabled() => __pbn__oobe_test_mode_enabled = null;
-        private bool? __pbn__oobe_test_mode_enabled;
-
         [global::ProtoBuf.ProtoMember(3)]
         public bool in_client_beta
         {
@@ -8983,16 +9112,6 @@ namespace SteamKit2.WebUI.Internal
         public void Resetshow_timestamps_in_console() => __pbn__show_timestamps_in_console = null;
         private bool? __pbn__show_timestamps_in_console;
 
-        [global::ProtoBuf.ProtoMember(20001)]
-        public bool force_oobe
-        {
-            get => __pbn__force_oobe.GetValueOrDefault();
-            set => __pbn__force_oobe = value;
-        }
-        public bool ShouldSerializeforce_oobe() => __pbn__force_oobe != null;
-        public void Resetforce_oobe() => __pbn__force_oobe = null;
-        private bool? __pbn__force_oobe;
-
         [global::ProtoBuf.ProtoMember(20002)]
         public int override_browser_composer_mode
         {
@@ -9657,6 +9776,180 @@ namespace SteamKit2.WebUI.Internal
         public void Resetaccessibility_screen_reader_locale() => __pbn__accessibility_screen_reader_locale = null;
         private string __pbn__accessibility_screen_reader_locale;
 
+        [global::ProtoBuf.ProtoMember(27000)]
+        public bool remote_play_wifi_ap_enabled
+        {
+            get => __pbn__remote_play_wifi_ap_enabled.GetValueOrDefault();
+            set => __pbn__remote_play_wifi_ap_enabled = value;
+        }
+        public bool ShouldSerializeremote_play_wifi_ap_enabled() => __pbn__remote_play_wifi_ap_enabled != null;
+        public void Resetremote_play_wifi_ap_enabled() => __pbn__remote_play_wifi_ap_enabled = null;
+        private bool? __pbn__remote_play_wifi_ap_enabled;
+
+        [global::ProtoBuf.ProtoMember(27001)]
+        public int remote_play_wifi_ap_channel_5ghz
+        {
+            get => __pbn__remote_play_wifi_ap_channel_5ghz.GetValueOrDefault();
+            set => __pbn__remote_play_wifi_ap_channel_5ghz = value;
+        }
+        public bool ShouldSerializeremote_play_wifi_ap_channel_5ghz() => __pbn__remote_play_wifi_ap_channel_5ghz != null;
+        public void Resetremote_play_wifi_ap_channel_5ghz() => __pbn__remote_play_wifi_ap_channel_5ghz = null;
+        private int? __pbn__remote_play_wifi_ap_channel_5ghz;
+
+        [global::ProtoBuf.ProtoMember(27002)]
+        public int remote_play_wifi_ap_channel_6ghz
+        {
+            get => __pbn__remote_play_wifi_ap_channel_6ghz.GetValueOrDefault();
+            set => __pbn__remote_play_wifi_ap_channel_6ghz = value;
+        }
+        public bool ShouldSerializeremote_play_wifi_ap_channel_6ghz() => __pbn__remote_play_wifi_ap_channel_6ghz != null;
+        public void Resetremote_play_wifi_ap_channel_6ghz() => __pbn__remote_play_wifi_ap_channel_6ghz = null;
+        private int? __pbn__remote_play_wifi_ap_channel_6ghz;
+
+        [global::ProtoBuf.ProtoMember(27003)]
+        public int remote_play_wifi_ap_channel_width
+        {
+            get => __pbn__remote_play_wifi_ap_channel_width.GetValueOrDefault();
+            set => __pbn__remote_play_wifi_ap_channel_width = value;
+        }
+        public bool ShouldSerializeremote_play_wifi_ap_channel_width() => __pbn__remote_play_wifi_ap_channel_width != null;
+        public void Resetremote_play_wifi_ap_channel_width() => __pbn__remote_play_wifi_ap_channel_width = null;
+        private int? __pbn__remote_play_wifi_ap_channel_width;
+
+        [global::ProtoBuf.ProtoMember(27004)]
+        public bool remote_play_wifi_ap_hotspot_mode
+        {
+            get => __pbn__remote_play_wifi_ap_hotspot_mode.GetValueOrDefault();
+            set => __pbn__remote_play_wifi_ap_hotspot_mode = value;
+        }
+        public bool ShouldSerializeremote_play_wifi_ap_hotspot_mode() => __pbn__remote_play_wifi_ap_hotspot_mode != null;
+        public void Resetremote_play_wifi_ap_hotspot_mode() => __pbn__remote_play_wifi_ap_hotspot_mode = null;
+        private bool? __pbn__remote_play_wifi_ap_hotspot_mode;
+
+        [global::ProtoBuf.ProtoMember(27005)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string remote_play_wifi_ap_hotspot_ssid
+        {
+            get => __pbn__remote_play_wifi_ap_hotspot_ssid ?? "";
+            set => __pbn__remote_play_wifi_ap_hotspot_ssid = value;
+        }
+        public bool ShouldSerializeremote_play_wifi_ap_hotspot_ssid() => __pbn__remote_play_wifi_ap_hotspot_ssid != null;
+        public void Resetremote_play_wifi_ap_hotspot_ssid() => __pbn__remote_play_wifi_ap_hotspot_ssid = null;
+        private string __pbn__remote_play_wifi_ap_hotspot_ssid;
+
+        [global::ProtoBuf.ProtoMember(27006)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string remote_play_wifi_ap_hotspot_password
+        {
+            get => __pbn__remote_play_wifi_ap_hotspot_password ?? "";
+            set => __pbn__remote_play_wifi_ap_hotspot_password = value;
+        }
+        public bool ShouldSerializeremote_play_wifi_ap_hotspot_password() => __pbn__remote_play_wifi_ap_hotspot_password != null;
+        public void Resetremote_play_wifi_ap_hotspot_password() => __pbn__remote_play_wifi_ap_hotspot_password = null;
+        private string __pbn__remote_play_wifi_ap_hotspot_password;
+
+        [global::ProtoBuf.ProtoMember(27007)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string remote_play_wifi_ap_hotspot_routing
+        {
+            get => __pbn__remote_play_wifi_ap_hotspot_routing ?? "";
+            set => __pbn__remote_play_wifi_ap_hotspot_routing = value;
+        }
+        public bool ShouldSerializeremote_play_wifi_ap_hotspot_routing() => __pbn__remote_play_wifi_ap_hotspot_routing != null;
+        public void Resetremote_play_wifi_ap_hotspot_routing() => __pbn__remote_play_wifi_ap_hotspot_routing = null;
+        private string __pbn__remote_play_wifi_ap_hotspot_routing;
+
+        [global::ProtoBuf.ProtoMember(27008)]
+        public bool remote_play_wifi_ap_show_advanced
+        {
+            get => __pbn__remote_play_wifi_ap_show_advanced.GetValueOrDefault();
+            set => __pbn__remote_play_wifi_ap_show_advanced = value;
+        }
+        public bool ShouldSerializeremote_play_wifi_ap_show_advanced() => __pbn__remote_play_wifi_ap_show_advanced != null;
+        public void Resetremote_play_wifi_ap_show_advanced() => __pbn__remote_play_wifi_ap_show_advanced = null;
+        private bool? __pbn__remote_play_wifi_ap_show_advanced;
+
+        [global::ProtoBuf.ProtoMember(27009)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string remote_play_wifi_ap_paired_ssid
+        {
+            get => __pbn__remote_play_wifi_ap_paired_ssid ?? "";
+            set => __pbn__remote_play_wifi_ap_paired_ssid = value;
+        }
+        public bool ShouldSerializeremote_play_wifi_ap_paired_ssid() => __pbn__remote_play_wifi_ap_paired_ssid != null;
+        public void Resetremote_play_wifi_ap_paired_ssid() => __pbn__remote_play_wifi_ap_paired_ssid = null;
+        private string __pbn__remote_play_wifi_ap_paired_ssid;
+
+        [global::ProtoBuf.ProtoMember(27010)]
+        public bool skip_steamframe_pairing_dialog
+        {
+            get => __pbn__skip_steamframe_pairing_dialog.GetValueOrDefault();
+            set => __pbn__skip_steamframe_pairing_dialog = value;
+        }
+        public bool ShouldSerializeskip_steamframe_pairing_dialog() => __pbn__skip_steamframe_pairing_dialog != null;
+        public void Resetskip_steamframe_pairing_dialog() => __pbn__skip_steamframe_pairing_dialog = null;
+        private bool? __pbn__skip_steamframe_pairing_dialog;
+
+        [global::ProtoBuf.ProtoMember(28001)]
+        public bool oobe_completed
+        {
+            get => __pbn__oobe_completed.GetValueOrDefault();
+            set => __pbn__oobe_completed = value;
+        }
+        public bool ShouldSerializeoobe_completed() => __pbn__oobe_completed != null;
+        public void Resetoobe_completed() => __pbn__oobe_completed = null;
+        private bool? __pbn__oobe_completed;
+
+        [global::ProtoBuf.ProtoMember(28002)]
+        public bool oobe_test_mode_enabled
+        {
+            get => __pbn__oobe_test_mode_enabled.GetValueOrDefault();
+            set => __pbn__oobe_test_mode_enabled = value;
+        }
+        public bool ShouldSerializeoobe_test_mode_enabled() => __pbn__oobe_test_mode_enabled != null;
+        public void Resetoobe_test_mode_enabled() => __pbn__oobe_test_mode_enabled = null;
+        private bool? __pbn__oobe_test_mode_enabled;
+
+        [global::ProtoBuf.ProtoMember(28003)]
+        public bool force_oobe
+        {
+            get => __pbn__force_oobe.GetValueOrDefault();
+            set => __pbn__force_oobe = value;
+        }
+        public bool ShouldSerializeforce_oobe() => __pbn__force_oobe != null;
+        public void Resetforce_oobe() => __pbn__force_oobe = null;
+        private bool? __pbn__force_oobe;
+
+        [global::ProtoBuf.ProtoMember(28004)]
+        public bool oobe_stage_2_completed
+        {
+            get => __pbn__oobe_stage_2_completed.GetValueOrDefault();
+            set => __pbn__oobe_stage_2_completed = value;
+        }
+        public bool ShouldSerializeoobe_stage_2_completed() => __pbn__oobe_stage_2_completed != null;
+        public void Resetoobe_stage_2_completed() => __pbn__oobe_stage_2_completed = null;
+        private bool? __pbn__oobe_stage_2_completed;
+
+        [global::ProtoBuf.ProtoMember(28005)]
+        public bool oobe_stage_2_test_mode_enabled
+        {
+            get => __pbn__oobe_stage_2_test_mode_enabled.GetValueOrDefault();
+            set => __pbn__oobe_stage_2_test_mode_enabled = value;
+        }
+        public bool ShouldSerializeoobe_stage_2_test_mode_enabled() => __pbn__oobe_stage_2_test_mode_enabled != null;
+        public void Resetoobe_stage_2_test_mode_enabled() => __pbn__oobe_stage_2_test_mode_enabled = null;
+        private bool? __pbn__oobe_stage_2_test_mode_enabled;
+
+        [global::ProtoBuf.ProtoMember(28006)]
+        public bool force_stage_2_oobe
+        {
+            get => __pbn__force_stage_2_oobe.GetValueOrDefault();
+            set => __pbn__force_stage_2_oobe = value;
+        }
+        public bool ShouldSerializeforce_stage_2_oobe() => __pbn__force_stage_2_oobe != null;
+        public void Resetforce_stage_2_oobe() => __pbn__force_stage_2_oobe = null;
+        private bool? __pbn__force_stage_2_oobe;
+
         [global::ProtoBuf.ProtoMember(140011)]
         public bool controller_enable_chord
         {
@@ -9791,17 +10084,6 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializecontroller_type() => __pbn__controller_type != null;
         public void Resetcontroller_type() => __pbn__controller_type = null;
         private int? __pbn__controller_type;
-
-        [global::ProtoBuf.ProtoMember(6)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string capability_bits
-        {
-            get => __pbn__capability_bits ?? "";
-            set => __pbn__capability_bits = value;
-        }
-        public bool ShouldSerializecapability_bits() => __pbn__capability_bits != null;
-        public void Resetcapability_bits() => __pbn__capability_bits = null;
-        private string __pbn__capability_bits;
 
         [global::ProtoBuf.ProtoMember(7)]
         public int controller_style
@@ -11330,6 +11612,9 @@ namespace SteamKit2.WebUI.Internal
         [global::ProtoBuf.ProtoMember(6)]
         public CMsgNetworkDeviceIP6Config ip6 { get; set; }
 
+        [global::ProtoBuf.ProtoMember(7)]
+        public CMsgNetworkDeviceConnect_Wireless wireless { get; set; }
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -11409,6 +11694,26 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializeap_id() => __pbn__ap_id != null;
         public void Resetap_id() => __pbn__ap_id = null;
         private uint? __pbn__ap_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgNetworkDeviceConnect_Wireless : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string band_filter
+        {
+            get => __pbn__band_filter ?? "";
+            set => __pbn__band_filter = value;
+        }
+        public bool ShouldSerializeband_filter() => __pbn__band_filter != null;
+        public void Resetband_filter() => __pbn__band_filter = null;
+        private string __pbn__band_filter;
 
     }
 
@@ -11866,6 +12171,26 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializeband_filter() => __pbn__band_filter != null;
         public void Resetband_filter() => __pbn__band_filter = null;
         private string __pbn__band_filter;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public bool has_non_6ghz_channel
+        {
+            get => __pbn__has_non_6ghz_channel.GetValueOrDefault();
+            set => __pbn__has_non_6ghz_channel = value;
+        }
+        public bool ShouldSerializehas_non_6ghz_channel() => __pbn__has_non_6ghz_channel != null;
+        public void Resethas_non_6ghz_channel() => __pbn__has_non_6ghz_channel = null;
+        private bool? __pbn__has_non_6ghz_channel;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public bool is_saved
+        {
+            get => __pbn__is_saved.GetValueOrDefault();
+            set => __pbn__is_saved = value;
+        }
+        public bool ShouldSerializeis_saved() => __pbn__is_saved != null;
+        public void Resetis_saved() => __pbn__is_saved = null;
+        private bool? __pbn__is_saved;
 
     }
 
@@ -16370,6 +16695,45 @@ namespace SteamKit2.WebUI.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CSteamVR_Vector3 : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public float x
+        {
+            get => __pbn__x.GetValueOrDefault();
+            set => __pbn__x = value;
+        }
+        public bool ShouldSerializex() => __pbn__x != null;
+        public void Resetx() => __pbn__x = null;
+        private float? __pbn__x;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public float y
+        {
+            get => __pbn__y.GetValueOrDefault();
+            set => __pbn__y = value;
+        }
+        public bool ShouldSerializey() => __pbn__y != null;
+        public void Resety() => __pbn__y = null;
+        private float? __pbn__y;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public float z
+        {
+            get => __pbn__z.GetValueOrDefault();
+            set => __pbn__z = value;
+        }
+        public bool ShouldSerializez() => __pbn__z != null;
+        public void Resetz() => __pbn__z = null;
+        private float? __pbn__z;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CSteamVR_VoiceChat_Active_Notification : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -16858,6 +17222,46 @@ namespace SteamKit2.WebUI.Internal
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CSteamVR_VoiceChat_SetSpatialAudioListener_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CSteamVR_Vector3 position { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CSteamVR_Vector3 forward { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public CSteamVR_Vector3 up { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CSteamVR_VoiceChat_SetSpatialAudioSource_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CSteamVR_Vector3 position { get; set; }
 
     }
 
@@ -18599,7 +19003,7 @@ namespace SteamKit2.WebUI.Internal
         public global::System.Collections.Generic.List<CVRGamepadUI_Frame_FrameMenu_Item> items_for_left_frame_menu { get; } = new global::System.Collections.Generic.List<CVRGamepadUI_Frame_FrameMenu_Item>();
 
         [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<CVRGamepadUI_Frame_FrameMenu_Item> items_for_tab_frame_menu { get; } = new global::System.Collections.Generic.List<CVRGamepadUI_Frame_FrameMenu_Item>();
+        public global::System.Collections.Generic.List<CVRGamepadUI_Frame_FrameMenu_Item> items_for_tab_hover_menu { get; } = new global::System.Collections.Generic.List<CVRGamepadUI_Frame_FrameMenu_Item>();
 
     }
 
@@ -18955,6 +19359,35 @@ namespace SteamKit2.WebUI.Internal
 
     [global::ProtoBuf.ProtoContract()]
     public partial class CVRGamepadUI_Message_RemoteVideoStream_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CVRGamepadUI_Message_SetCurrentLanguage_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string language
+        {
+            get => __pbn__language ?? "";
+            set => __pbn__language = value;
+        }
+        public bool ShouldSerializelanguage() => __pbn__language != null;
+        public void Resetlanguage() => __pbn__language = null;
+        private string __pbn__language;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CVRGamepadUI_Message_SetCurrentLanguage_Response : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -19780,6 +20213,9 @@ namespace SteamKit2.WebUI.Internal
         [global::ProtoBuf.ProtoMember(4)]
         public global::System.Collections.Generic.List<CVRGamepadUIShared_PathProperty_DashboardBarActions_BarMenuItem> bar_menu_items { get; } = new global::System.Collections.Generic.List<CVRGamepadUIShared_PathProperty_DashboardBarActions_BarMenuItem>();
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public global::System.Collections.Generic.List<uint> playspace_actions { get; } = new global::System.Collections.Generic.List<uint>();
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -20145,6 +20581,17 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializewebpack_build_timestamp() => __pbn__webpack_build_timestamp != null;
         public void Resetwebpack_build_timestamp() => __pbn__webpack_build_timestamp = null;
         private uint? __pbn__webpack_build_timestamp;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string hmd_tracking_info
+        {
+            get => __pbn__hmd_tracking_info ?? "";
+            set => __pbn__hmd_tracking_info = value;
+        }
+        public bool ShouldSerializehmd_tracking_info() => __pbn__hmd_tracking_info != null;
+        public void Resethmd_tracking_info() => __pbn__hmd_tracking_info = null;
+        private string __pbn__hmd_tracking_info;
 
     }
 

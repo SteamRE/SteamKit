@@ -1213,27 +1213,6 @@ namespace SteamKit2.Internal
         public void Resetaccount_flags() => __pbn__account_flags = null;
         private uint? __pbn__account_flags;
 
-        [global::ProtoBuf.ProtoMember(8)]
-        public ulong facebook_id
-        {
-            get => __pbn__facebook_id.GetValueOrDefault();
-            set => __pbn__facebook_id = value;
-        }
-        public bool ShouldSerializefacebook_id() => __pbn__facebook_id != null;
-        public void Resetfacebook_id() => __pbn__facebook_id = null;
-        private ulong? __pbn__facebook_id;
-
-        [global::ProtoBuf.ProtoMember(9)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string facebook_name
-        {
-            get => __pbn__facebook_name ?? "";
-            set => __pbn__facebook_name = value;
-        }
-        public bool ShouldSerializefacebook_name() => __pbn__facebook_name != null;
-        public void Resetfacebook_name() => __pbn__facebook_name = null;
-        private string __pbn__facebook_name;
-
         [global::ProtoBuf.ProtoMember(15)]
         [global::System.ComponentModel.DefaultValue("")]
         public string steamguard_machine_name_user_chosen

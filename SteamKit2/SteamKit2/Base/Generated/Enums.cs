@@ -167,6 +167,7 @@ namespace SteamKit2.Internal
         k_EStartupMovieVariant_Generic = 1,
         k_EStartupMovieVariant_DeckBlue = 2,
         k_EStartupMovieVariant_DeckOrange = 3,
+        k_EStartupMovieVariant_Machine = 4,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -865,7 +866,10 @@ namespace SteamKit2.Internal
         k_EContentReportResolution_SuspiciousIncludingUpvoters = 8,
         k_EContentReportResolution_VisibilityChanged = 9,
         k_EContentReportResolution_CountryRestrictionsChanged = 10,
-        k_EContentReportResolution_MAX = 11,
+        k_EContentReportResolution_RemoveAndWarn = 11,
+        k_EContentReportResolution_RemoveAndBan = 12,
+        k_EContentReportResolution_RemoveAndKick = 13,
+        k_EContentReportResolution_MAX = 14,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -882,6 +886,18 @@ namespace SteamKit2.Internal
         k_EContentReportSubjectAction_SustainedOnDispute = 8,
         k_EContentReportSubjectAction_Locked = 9,
         k_EContentReportSubjectAction_Unlocked = 10,
+        k_EContentReportSubjectAction_Deleted = 11,
+        k_EContentReportSubjectAction_Warned = 12,
+        k_EContentReportSubjectAction_BannedFromHub = 13,
+        k_EContentReportSubjectAction_BannedFromCommunity = 14,
+        k_EContentReportSubjectAction_TradeBanned = 15,
+        k_EContentReportSubjectAction_MarkedAsSuspicious = 16,
+        k_EContentReportSubjectAction_ResetContent = 17,
+        k_EContentReportSubjectAction_EscalatedForCSAM = 18,
+        k_EContentReportSubjectAction_EscalatedForTerrorism = 19,
+        k_EContentReportSubjectAction_Claimed = 20,
+        k_EContentReportSubjectAction_Released = 21,
+        k_EContentReportSubjectAction_PrivateMessaged = 22,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -949,7 +965,9 @@ namespace SteamKit2.Internal
         k_EContentReportReason_FakedGenderedNonConsensualMaterial = 59,
         k_EContentReportReason_FakedNonConsensualMaterial = 60,
         k_EContentReportReason_NegativeEffectonDiscourseOrElections = 61,
-        k_EContentReportReason_MAX = 62,
+        k_EContentReportReason_QuotesModeratedContent = 62,
+        k_EContentReportReason_CredibleThreatOfViolence = 63,
+        k_EContentReportReason_MAX = 64,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -959,6 +977,19 @@ namespace SteamKit2.Internal
         k_EResolutionAutomation_PartiallyAutomated = 1,
         k_EResolutionAutomation_FullyAutomated = 2,
         k_EResolutionAutomation_MAX = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EPressOutletAction
+    {
+        k_EPressOutletAction_Invalid = 0,
+        k_EPressOutletAction_Granted = 1,
+        k_EPressOutletAction_Removed = 2,
+        k_EPressOutletAction_Created = 3,
+        k_EPressOutletAction_Updated = 4,
+        k_EPressOutletAction_Deleted = 5,
+        k_EPressOutletAction_Undeleted = 6,
+        k_EPressOutletAction_MAX = 7,
     }
 
 }

@@ -504,6 +504,9 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(43)]
         public PurchaseOption self_purchase_option { get; set; }
 
+        [global::ProtoBuf.ProtoMember(44)]
+        public global::System.Collections.Generic.List<PurchaseOption> invalid_purchase_options { get; } = new global::System.Collections.Generic.List<PurchaseOption>();
+
         [global::ProtoBuf.ProtoMember(50)]
         public Screenshots screenshots { get; set; }
 
@@ -1482,6 +1485,17 @@ namespace SteamKit2.Internal
             public void Resetfree_to_keep_ends() => __pbn__free_to_keep_ends = null;
             private uint? __pbn__free_to_keep_ends;
 
+            [global::ProtoBuf.ProtoMember(48)]
+            [global::System.ComponentModel.DefaultValue(false)]
+            public bool must_purchase_as_set
+            {
+                get => __pbn__must_purchase_as_set ?? false;
+                set => __pbn__must_purchase_as_set = value;
+            }
+            public bool ShouldSerializemust_purchase_as_set() => __pbn__must_purchase_as_set != null;
+            public void Resetmust_purchase_as_set() => __pbn__must_purchase_as_set = null;
+            private bool? __pbn__must_purchase_as_set;
+
             [global::ProtoBuf.ProtoContract()]
             public partial class Discount : global::ProtoBuf.IExtensible
             {
@@ -2394,6 +2408,18 @@ namespace SteamKit2.Internal
             public bool ShouldSerializeurl_path() => __pbn__url_path != null;
             public void Reseturl_path() => __pbn__url_path = null;
             private string __pbn__url_path;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public global::System.Collections.Generic.List<uint> replaces_tags { get; } = new global::System.Collections.Generic.List<uint>();
+
+            [global::ProtoBuf.ProtoMember(7)]
+            public global::System.Collections.Generic.List<uint> must_have_tags { get; } = new global::System.Collections.Generic.List<uint>();
+
+            [global::ProtoBuf.ProtoMember(8)]
+            public global::System.Collections.Generic.List<uint> any_one_of_tags { get; } = new global::System.Collections.Generic.List<uint>();
+
+            [global::ProtoBuf.ProtoMember(9)]
+            public global::System.Collections.Generic.List<uint> must_not_have_tags { get; } = new global::System.Collections.Generic.List<uint>();
 
         }
 

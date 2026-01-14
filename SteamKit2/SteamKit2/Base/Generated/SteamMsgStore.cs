@@ -1215,6 +1215,75 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_GetGamesFollowed_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_GetGamesFollowed_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<uint> appids { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_GetGamesFollowedCount_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CStore_GetGamesFollowedCount_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint followed_game_count
+        {
+            get => __pbn__followed_game_count.GetValueOrDefault();
+            set => __pbn__followed_game_count = value;
+        }
+        public bool ShouldSerializefollowed_game_count() => __pbn__followed_game_count != null;
+        public void Resetfollowed_game_count() => __pbn__followed_game_count = null;
+        private uint? __pbn__followed_game_count;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CStore_GetDiscoveryQueueSkippedApps_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2213,6 +2282,16 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CStore_GetUserGameInterestState_Request, CStore_GetUserGameInterestState_Response>( "Store.GetUserGameInterestState#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_GetGamesFollowed_Response>> GetGamesFollowed( CStore_GetGamesFollowed_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_GetGamesFollowed_Request, CStore_GetGamesFollowed_Response>( "Store.GetGamesFollowed#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_GetGamesFollowedCount_Response>> GetGamesFollowedCount( CStore_GetGamesFollowedCount_Request request )
+        {
+            return UnifiedMessages.SendMessage<CStore_GetGamesFollowedCount_Request, CStore_GetGamesFollowedCount_Response>( "Store.GetGamesFollowedCount#1", request );
+        }
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_GetDiscoveryQueueSkippedApps_Response>> GetDiscoveryQueueSkippedApps( CStore_GetDiscoveryQueueSkippedApps_Request request )
         {
             return UnifiedMessages.SendMessage<CStore_GetDiscoveryQueueSkippedApps_Request, CStore_GetDiscoveryQueueSkippedApps_Response>( "Store.GetDiscoveryQueueSkippedApps#1", request );
@@ -2313,6 +2392,12 @@ namespace SteamKit2.Internal
                     break;
                 case "GetUserGameInterestState":
                     PostResponseMsg<CStore_GetUserGameInterestState_Response>( packetMsg );
+                    break;
+                case "GetGamesFollowed":
+                    PostResponseMsg<CStore_GetGamesFollowed_Response>( packetMsg );
+                    break;
+                case "GetGamesFollowedCount":
+                    PostResponseMsg<CStore_GetGamesFollowedCount_Response>( packetMsg );
                     break;
                 case "GetDiscoveryQueueSkippedApps":
                     PostResponseMsg<CStore_GetDiscoveryQueueSkippedApps_Response>( packetMsg );

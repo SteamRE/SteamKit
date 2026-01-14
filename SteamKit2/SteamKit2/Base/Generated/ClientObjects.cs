@@ -511,6 +511,26 @@ namespace SteamKit2.Internal
                     public void Resetband_filter() => __pbn__band_filter = null;
                     private string __pbn__band_filter;
 
+                    [global::ProtoBuf.ProtoMember(11)]
+                    public bool has_non_6ghz_channel
+                    {
+                        get => __pbn__has_non_6ghz_channel.GetValueOrDefault();
+                        set => __pbn__has_non_6ghz_channel = value;
+                    }
+                    public bool ShouldSerializehas_non_6ghz_channel() => __pbn__has_non_6ghz_channel != null;
+                    public void Resethas_non_6ghz_channel() => __pbn__has_non_6ghz_channel = null;
+                    private bool? __pbn__has_non_6ghz_channel;
+
+                    [global::ProtoBuf.ProtoMember(12)]
+                    public bool is_saved
+                    {
+                        get => __pbn__is_saved.GetValueOrDefault();
+                        set => __pbn__is_saved = value;
+                    }
+                    public bool ShouldSerializeis_saved() => __pbn__is_saved != null;
+                    public void Resetis_saved() => __pbn__is_saved = null;
+                    private bool? __pbn__is_saved;
+
                 }
 
             }
@@ -545,6 +565,9 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(6)]
         public CMsgNetworkDeviceIP6Config ip6 { get; set; }
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public Wireless wireless { get; set; }
 
         [global::ProtoBuf.ProtoMember(2)]
         public KnownAP ap_known
@@ -643,6 +666,26 @@ namespace SteamKit2.Internal
             public bool ShouldSerializepassword() => __pbn__password != null;
             public void Resetpassword() => __pbn__password = null;
             private string __pbn__password;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Wireless : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string band_filter
+            {
+                get => __pbn__band_filter ?? "";
+                set => __pbn__band_filter = value;
+            }
+            public bool ShouldSerializeband_filter() => __pbn__band_filter != null;
+            public void Resetband_filter() => __pbn__band_filter = null;
+            private string __pbn__band_filter;
 
         }
 

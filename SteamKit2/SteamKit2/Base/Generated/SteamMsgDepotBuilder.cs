@@ -77,6 +77,16 @@ namespace SteamKit2.Internal
         public void Resetshader_depot() => __pbn__shader_depot = null;
         private bool? __pbn__shader_depot;
 
+        [global::ProtoBuf.ProtoMember(7)]
+        public ulong baseline_manifest_id
+        {
+            get => __pbn__baseline_manifest_id.GetValueOrDefault();
+            set => __pbn__baseline_manifest_id = value;
+        }
+        public bool ShouldSerializebaseline_manifest_id() => __pbn__baseline_manifest_id != null;
+        public void Resetbaseline_manifest_id() => __pbn__baseline_manifest_id = null;
+        private ulong? __pbn__baseline_manifest_id;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -128,14 +138,14 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(5)]
         [global::System.ComponentModel.DefaultValue("")]
-        public string url_host
+        public string deprecated_url_host
         {
-            get => __pbn__url_host ?? "";
-            set => __pbn__url_host = value;
+            get => __pbn__deprecated_url_host ?? "";
+            set => __pbn__deprecated_url_host = value;
         }
-        public bool ShouldSerializeurl_host() => __pbn__url_host != null;
-        public void Reseturl_host() => __pbn__url_host = null;
-        private string __pbn__url_host;
+        public bool ShouldSerializedeprecated_url_host() => __pbn__deprecated_url_host != null;
+        public void Resetdeprecated_url_host() => __pbn__deprecated_url_host = null;
+        private string __pbn__deprecated_url_host;
 
         [global::ProtoBuf.ProtoMember(6)]
         public bool offset_detection_enabled
@@ -539,6 +549,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializefor_local_cs() => __pbn__for_local_cs != null;
         public void Resetfor_local_cs() => __pbn__for_local_cs = null;
         private bool? __pbn__for_local_cs;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool web_upload
+        {
+            get => __pbn__web_upload.GetValueOrDefault();
+            set => __pbn__web_upload = value;
+        }
+        public bool ShouldSerializeweb_upload() => __pbn__web_upload != null;
+        public void Resetweb_upload() => __pbn__web_upload = null;
+        private bool? __pbn__web_upload;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class Depots : global::ProtoBuf.IExtensible

@@ -409,67 +409,6 @@ namespace SteamKit2.Internal
 
     }
 
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientStoreUserStats : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong game_id
-        {
-            get => __pbn__game_id.GetValueOrDefault();
-            set => __pbn__game_id = value;
-        }
-        public bool ShouldSerializegame_id() => __pbn__game_id != null;
-        public void Resetgame_id() => __pbn__game_id = null;
-        private ulong? __pbn__game_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public bool explicit_reset
-        {
-            get => __pbn__explicit_reset.GetValueOrDefault();
-            set => __pbn__explicit_reset = value;
-        }
-        public bool ShouldSerializeexplicit_reset() => __pbn__explicit_reset != null;
-        public void Resetexplicit_reset() => __pbn__explicit_reset = null;
-        private bool? __pbn__explicit_reset;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public global::System.Collections.Generic.List<Stats_To_Store> stats_to_store { get; } = new global::System.Collections.Generic.List<Stats_To_Store>();
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class Stats_To_Store : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint stat_id
-            {
-                get => __pbn__stat_id.GetValueOrDefault();
-                set => __pbn__stat_id = value;
-            }
-            public bool ShouldSerializestat_id() => __pbn__stat_id != null;
-            public void Resetstat_id() => __pbn__stat_id = null;
-            private uint? __pbn__stat_id;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public uint stat_value
-            {
-                get => __pbn__stat_value.GetValueOrDefault();
-                set => __pbn__stat_value = value;
-            }
-            public bool ShouldSerializestat_value() => __pbn__stat_value != null;
-            public void Resetstat_value() => __pbn__stat_value = null;
-            private uint? __pbn__stat_value;
-
-        }
-
-    }
-
 }
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192

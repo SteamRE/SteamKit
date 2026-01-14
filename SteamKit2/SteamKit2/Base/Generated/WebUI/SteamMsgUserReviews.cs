@@ -795,9 +795,6 @@ namespace SteamKit2.WebUI.Internal
         public void Resetpositivity_pct() => __pbn__positivity_pct = null;
         private uint? __pbn__positivity_pct;
 
-        [global::ProtoBuf.ProtoMember(53)]
-        public global::System.Collections.Generic.List<ulong> tags { get; } = new global::System.Collections.Generic.List<ulong>();
-
         [global::ProtoBuf.ProtoMember(54)]
         public global::System.Collections.Generic.List<CUserReviews_Recommendation_Tag> tags_with_ranges { get; } = new global::System.Collections.Generic.List<CUserReviews_Recommendation_Tag>();
 

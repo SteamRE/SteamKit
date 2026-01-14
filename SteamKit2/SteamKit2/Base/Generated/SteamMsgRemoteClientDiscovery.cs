@@ -310,14 +310,24 @@ namespace SteamKit2.Internal
         private ulong? __pbn__vr_link_invite_client_id;
 
         [global::ProtoBuf.ProtoMember(28, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong connected_wifi_ap_client_id
+        public ulong connected_paired_network_hash
         {
-            get => __pbn__connected_wifi_ap_client_id.GetValueOrDefault();
-            set => __pbn__connected_wifi_ap_client_id = value;
+            get => __pbn__connected_paired_network_hash.GetValueOrDefault();
+            set => __pbn__connected_paired_network_hash = value;
         }
-        public bool ShouldSerializeconnected_wifi_ap_client_id() => __pbn__connected_wifi_ap_client_id != null;
-        public void Resetconnected_wifi_ap_client_id() => __pbn__connected_wifi_ap_client_id = null;
-        private ulong? __pbn__connected_wifi_ap_client_id;
+        public bool ShouldSerializeconnected_paired_network_hash() => __pbn__connected_paired_network_hash != null;
+        public void Resetconnected_paired_network_hash() => __pbn__connected_paired_network_hash = null;
+        private ulong? __pbn__connected_paired_network_hash;
+
+        [global::ProtoBuf.ProtoMember(29)]
+        public bool wifi_dongle_present
+        {
+            get => __pbn__wifi_dongle_present.GetValueOrDefault();
+            set => __pbn__wifi_dongle_present = value;
+        }
+        public bool ShouldSerializewifi_dongle_present() => __pbn__wifi_dongle_present != null;
+        public void Resetwifi_dongle_present() => __pbn__wifi_dongle_present = null;
+        private bool? __pbn__wifi_dongle_present;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class User : global::ProtoBuf.IExtensible

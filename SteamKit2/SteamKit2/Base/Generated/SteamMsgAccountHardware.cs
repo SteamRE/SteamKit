@@ -898,9 +898,10 @@ namespace SteamKit2.Internal
         k_EValveIndexComponentHMD = 1,
         k_EValveIndexComponentLeftKnuckle = 2,
         k_EValveIndexComponentRightKnuckle = 3,
-        k_ETempDTst1 = 4,
-        k_ETempDTst2 = 5,
-        k_ETempDTst3 = 6,
+        k_EValveIndexComponentSteamFrameHMD = 4,
+        k_EValveIndexComponentSteamFrameLeftController = 5,
+        k_EValveIndexComponentSteamFrameRightController = 6,
+        k_EValveIndexComponentSteamFrameWirelessAdapter = 7,
     }
 
     public class AccountHardware : SteamUnifiedMessages.UnifiedService

@@ -270,6 +270,9 @@ namespace SteamKit2.WebUI.Internal
         public void Resetquantity() => __pbn__quantity = null;
         private uint? __pbn__quantity;
 
+        [global::ProtoBuf.ProtoMember(15)]
+        public global::System.Collections.Generic.List<uint> included_packageids { get; } = new global::System.Collections.Generic.List<uint>();
+
     }
 
     [global::ProtoBuf.ProtoContract()]

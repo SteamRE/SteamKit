@@ -42,6 +42,16 @@ namespace SteamKit2.Internal
             public void Resetsale_tagid() => __pbn__sale_tagid = null;
             private uint? __pbn__sale_tagid;
 
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint creator_clan_account_id
+            {
+                get => __pbn__creator_clan_account_id.GetValueOrDefault();
+                set => __pbn__creator_clan_account_id = value;
+            }
+            public bool ShouldSerializecreator_clan_account_id() => __pbn__creator_clan_account_id != null;
+            public void Resetcreator_clan_account_id() => __pbn__creator_clan_account_id = null;
+            private uint? __pbn__creator_clan_account_id;
+
         }
 
         [global::ProtoBuf.ProtoContract()]

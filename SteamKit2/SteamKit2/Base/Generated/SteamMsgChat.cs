@@ -794,6 +794,16 @@ namespace SteamKit2.Internal
         public void Resetunread_indicator_muted() => __pbn__unread_indicator_muted = null;
         private bool? __pbn__unread_indicator_muted;
 
+        [global::ProtoBuf.ProtoMember(8)]
+        public bool direct_messages_allowed
+        {
+            get => __pbn__direct_messages_allowed.GetValueOrDefault();
+            set => __pbn__direct_messages_allowed = value;
+        }
+        public bool ShouldSerializedirect_messages_allowed() => __pbn__direct_messages_allowed != null;
+        public void Resetdirect_messages_allowed() => __pbn__direct_messages_allowed = null;
+        private bool? __pbn__direct_messages_allowed;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -3527,6 +3537,16 @@ namespace SteamKit2.Internal
             public void Resetunread_indicator_muted() => __pbn__unread_indicator_muted = null;
             private bool? __pbn__unread_indicator_muted;
 
+            [global::ProtoBuf.ProtoMember(4)]
+            public bool direct_messages_allowed
+            {
+                get => __pbn__direct_messages_allowed.GetValueOrDefault();
+                set => __pbn__direct_messages_allowed = value;
+            }
+            public bool ShouldSerializedirect_messages_allowed() => __pbn__direct_messages_allowed != null;
+            public void Resetdirect_messages_allowed() => __pbn__direct_messages_allowed = null;
+            private bool? __pbn__direct_messages_allowed;
+
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -4183,6 +4203,47 @@ namespace SteamKit2.Internal
         public bool ShouldSerializereason() => __pbn__reason != null;
         public void Resetreason() => __pbn__reason = null;
         private EContentReportReason? __pbn__reason;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue(EContentReportSubjectType.k_EContentReportSubjectType_Invalid)]
+        public EContentReportSubjectType subject_type
+        {
+            get => __pbn__subject_type ?? EContentReportSubjectType.k_EContentReportSubjectType_Invalid;
+            set => __pbn__subject_type = value;
+        }
+        public bool ShouldSerializesubject_type() => __pbn__subject_type != null;
+        public void Resetsubject_type() => __pbn__subject_type = null;
+        private EContentReportSubjectType? __pbn__subject_type;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public ulong chat_group_id
+        {
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
+        }
+        public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
+        public void Resetchat_group_id() => __pbn__chat_group_id = null;
+        private ulong? __pbn__chat_group_id;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint kick_expiration_time
+        {
+            get => __pbn__kick_expiration_time.GetValueOrDefault();
+            set => __pbn__kick_expiration_time = value;
+        }
+        public bool ShouldSerializekick_expiration_time() => __pbn__kick_expiration_time != null;
+        public void Resetkick_expiration_time() => __pbn__kick_expiration_time = null;
+        private uint? __pbn__kick_expiration_time;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public bool skip_lock
+        {
+            get => __pbn__skip_lock.GetValueOrDefault();
+            set => __pbn__skip_lock = value;
+        }
+        public bool ShouldSerializeskip_lock() => __pbn__skip_lock != null;
+        public void Resetskip_lock() => __pbn__skip_lock = null;
+        private bool? __pbn__skip_lock;
 
     }
 

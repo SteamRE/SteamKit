@@ -625,6 +625,16 @@ namespace SteamKit2.WebUI.Internal
         public void Resetpoints_received() => __pbn__points_received = null;
         private long? __pbn__points_received;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool purchaseable
+        {
+            get => __pbn__purchaseable.GetValueOrDefault();
+            set => __pbn__purchaseable = value;
+        }
+        public bool ShouldSerializepurchaseable() => __pbn__purchaseable != null;
+        public void Resetpurchaseable() => __pbn__purchaseable = null;
+        private bool? __pbn__purchaseable;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

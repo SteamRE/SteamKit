@@ -2074,6 +2074,26 @@ namespace SteamKit2.Internal
         public void Resetnotificaton_token() => __pbn__notificaton_token = null;
         private string __pbn__notificaton_token;
 
+        [global::ProtoBuf.ProtoMember(11)]
+        public int queue_head_position_at_reservation
+        {
+            get => __pbn__queue_head_position_at_reservation.GetValueOrDefault();
+            set => __pbn__queue_head_position_at_reservation = value;
+        }
+        public bool ShouldSerializequeue_head_position_at_reservation() => __pbn__queue_head_position_at_reservation != null;
+        public void Resetqueue_head_position_at_reservation() => __pbn__queue_head_position_at_reservation = null;
+        private int? __pbn__queue_head_position_at_reservation;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        public int queue_head_position_now
+        {
+            get => __pbn__queue_head_position_now.GetValueOrDefault();
+            set => __pbn__queue_head_position_now = value;
+        }
+        public bool ShouldSerializequeue_head_position_now() => __pbn__queue_head_position_now != null;
+        public void Resetqueue_head_position_now() => __pbn__queue_head_position_now = null;
+        private int? __pbn__queue_head_position_now;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

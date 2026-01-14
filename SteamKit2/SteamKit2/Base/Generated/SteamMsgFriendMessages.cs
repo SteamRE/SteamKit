@@ -772,6 +772,16 @@ namespace SteamKit2.Internal
         public void Resetreason() => __pbn__reason = null;
         private EContentReportReason? __pbn__reason;
 
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool skip_lock
+        {
+            get => __pbn__skip_lock.GetValueOrDefault();
+            set => __pbn__skip_lock = value;
+        }
+        public bool ShouldSerializeskip_lock() => __pbn__skip_lock != null;
+        public void Resetskip_lock() => __pbn__skip_lock = null;
+        private bool? __pbn__skip_lock;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
