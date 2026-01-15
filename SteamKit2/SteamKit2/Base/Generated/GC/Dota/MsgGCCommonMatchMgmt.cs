@@ -674,6 +674,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetbehavior_score_likert_scale() => __pbn__behavior_score_likert_scale = null;
         private uint? __pbn__behavior_score_likert_scale;
 
+        [global::ProtoBuf.ProtoMember(78)]
+        public bool contains_required_playtester
+        {
+            get => __pbn__contains_required_playtester.GetValueOrDefault();
+            set => __pbn__contains_required_playtester = value;
+        }
+        public bool ShouldSerializecontains_required_playtester() => __pbn__contains_required_playtester != null;
+        public void Resetcontains_required_playtester() => __pbn__contains_required_playtester = null;
+        private bool? __pbn__contains_required_playtester;
+
         [global::ProtoBuf.ProtoContract()]
         public enum State
         {
@@ -1402,6 +1412,8 @@ namespace SteamKit2.GC.Dota.Internal
                     kKillEaterEventType_Kez_KillsDuringFalconRush = 285,
                     kKillEaterEventType_Seasonal_PartyHatsStolen = 286,
                     kKillEaterEventType_Seasonal_TallestHat = 287,
+                    kKillEaterEventType_Largo_MultiHeroFrogstomp = 288,
+                    kKillEaterEventType_Largo_AmphibianRhapsodyKillsAndAssists = 289,
                 }
 
             }

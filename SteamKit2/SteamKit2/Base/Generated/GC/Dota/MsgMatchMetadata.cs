@@ -1539,6 +1539,9 @@ namespace SteamKit2.GC.Dota.Internal
                 public void Resetad_facet_hero_id() => __pbn__ad_facet_hero_id = null;
                 private int? __pbn__ad_facet_hero_id;
 
+                [global::ProtoBuf.ProtoMember(62)]
+                public CMsgMonsterHunterMatchRewards.Player monster_hunter_rewards { get; set; }
+
                 [global::ProtoBuf.ProtoContract()]
                 public partial class ContractProgress : global::ProtoBuf.IExtensible
                 {
@@ -2172,6 +2175,16 @@ namespace SteamKit2.GC.Dota.Internal
                         public bool ShouldSerializeis_hidden() => __pbn__is_hidden != null;
                         public void Resetis_hidden() => __pbn__is_hidden = null;
                         private bool? __pbn__is_hidden;
+
+                        [global::ProtoBuf.ProtoMember(4)]
+                        public int instance_count
+                        {
+                            get => __pbn__instance_count.GetValueOrDefault();
+                            set => __pbn__instance_count = value;
+                        }
+                        public bool ShouldSerializeinstance_count() => __pbn__instance_count != null;
+                        public void Resetinstance_count() => __pbn__instance_count = null;
+                        private int? __pbn__instance_count;
 
                     }
 

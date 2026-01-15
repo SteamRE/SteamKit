@@ -4731,6 +4731,69 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCRecycleMultipleItems : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<Item> items { get; } = new global::System.Collections.Generic.List<Item>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Item : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public ulong item_id
+            {
+                get => __pbn__item_id.GetValueOrDefault();
+                set => __pbn__item_id = value;
+            }
+            public bool ShouldSerializeitem_id() => __pbn__item_id != null;
+            public void Resetitem_id() => __pbn__item_id = null;
+            private ulong? __pbn__item_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint slot_id
+            {
+                get => __pbn__slot_id.GetValueOrDefault();
+                set => __pbn__slot_id = value;
+            }
+            public bool ShouldSerializeslot_id() => __pbn__slot_id != null;
+            public void Resetslot_id() => __pbn__slot_id = null;
+            private uint? __pbn__slot_id;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint recipe_def_index
+            {
+                get => __pbn__recipe_def_index.GetValueOrDefault();
+                set => __pbn__recipe_def_index = value;
+            }
+            public bool ShouldSerializerecipe_def_index() => __pbn__recipe_def_index != null;
+            public void Resetrecipe_def_index() => __pbn__recipe_def_index = null;
+            private uint? __pbn__recipe_def_index;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCRecycleMultipleItemsResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CMsgClientToGCCreateStaticRecipeResponse> responses { get; } = new global::System.Collections.Generic.List<CMsgClientToGCCreateStaticRecipeResponse>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EGCItemMsg
     {
         k_EMsgGCBase = 1000,
@@ -4866,6 +4929,8 @@ namespace SteamKit2.GC.Dota.Internal
         k_EMsgClientToGCPurchaseChargeCostItemsResponse = 2616,
         k_EMsgClientToGCCancelUnfinalizedTransactions = 2617,
         k_EMsgClientToGCCancelUnfinalizedTransactionsResponse = 2618,
+        k_EMsgClientToGCRecycleMultipleItems = 2619,
+        k_EMsgClientToGCRecycleMultipleItemsResponse = 2620,
     }
 
     [global::ProtoBuf.ProtoContract()]

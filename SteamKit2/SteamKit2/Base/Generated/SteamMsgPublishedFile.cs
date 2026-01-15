@@ -1864,6 +1864,17 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(3)]
         public global::System.Collections.Generic.List<WorkshopItem> workshop_items { get; } = new global::System.Collections.Generic.List<WorkshopItem>();
 
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(EPublishedFileRevision.k_EPublishedFileRevision_Default)]
+        public EPublishedFileRevision desired_revision
+        {
+            get => __pbn__desired_revision ?? EPublishedFileRevision.k_EPublishedFileRevision_Default;
+            set => __pbn__desired_revision = value;
+        }
+        public bool ShouldSerializedesired_revision() => __pbn__desired_revision != null;
+        public void Resetdesired_revision() => __pbn__desired_revision = null;
+        private EPublishedFileRevision? __pbn__desired_revision;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class WorkshopItem : global::ProtoBuf.IExtensible
         {

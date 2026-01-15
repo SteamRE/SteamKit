@@ -2189,6 +2189,7 @@ namespace SteamKit2.GC.Dota.Internal
             EVENT_MATCH = 12,
             NEW_PLAYER_POOL = 14,
             FEATURED_GAMEMODE = 15,
+            AUTOMATED_BOT_ONLY_MATCH = 16,
         }
 
     }

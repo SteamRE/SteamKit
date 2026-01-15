@@ -2664,6 +2664,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetmsg_data() => __pbn__msg_data = null;
         private byte[] __pbn__msg_data;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool trusted_servers_only
+        {
+            get => __pbn__trusted_servers_only.GetValueOrDefault();
+            set => __pbn__trusted_servers_only = value;
+        }
+        public bool ShouldSerializetrusted_servers_only() => __pbn__trusted_servers_only != null;
+        public void Resettrusted_servers_only() => __pbn__trusted_servers_only = null;
+        private bool? __pbn__trusted_servers_only;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

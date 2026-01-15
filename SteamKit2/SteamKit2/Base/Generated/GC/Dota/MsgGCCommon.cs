@@ -5885,6 +5885,16 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resethero_healing() => __pbn__hero_healing = null;
             private uint? __pbn__hero_healing;
 
+            [global::ProtoBuf.ProtoMember(85)]
+            public uint disable_duration
+            {
+                get => __pbn__disable_duration.GetValueOrDefault();
+                set => __pbn__disable_duration = value;
+            }
+            public bool ShouldSerializedisable_duration() => __pbn__disable_duration != null;
+            public void Resetdisable_duration() => __pbn__disable_duration = null;
+            private uint? __pbn__disable_duration;
+
             [global::ProtoBuf.ProtoMember(27)]
             public uint level
             {
@@ -10864,6 +10874,47 @@ namespace SteamKit2.GC.Dota.Internal
                 public bool ShouldSerializetoken_count() => __pbn__token_count != null;
                 public void Resettoken_count() => __pbn__token_count = null;
                 private uint? __pbn__token_count;
+
+            }
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class MonsterHunterMaterialRewardData : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public global::System.Collections.Generic.List<MaterialQuantity> materials { get; } = new global::System.Collections.Generic.List<MaterialQuantity>();
+
+            [global::ProtoBuf.ProtoContract()]
+            public partial class MaterialQuantity : global::ProtoBuf.IExtensible
+            {
+                private global::ProtoBuf.IExtension __pbn__extensionData;
+                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+                [global::ProtoBuf.ProtoMember(1)]
+                public uint material_id
+                {
+                    get => __pbn__material_id.GetValueOrDefault();
+                    set => __pbn__material_id = value;
+                }
+                public bool ShouldSerializematerial_id() => __pbn__material_id != null;
+                public void Resetmaterial_id() => __pbn__material_id = null;
+                private uint? __pbn__material_id;
+
+                [global::ProtoBuf.ProtoMember(2)]
+                public uint material_count
+                {
+                    get => __pbn__material_count.GetValueOrDefault();
+                    set => __pbn__material_count = value;
+                }
+                public bool ShouldSerializematerial_count() => __pbn__material_count != null;
+                public void Resetmaterial_count() => __pbn__material_count = null;
+                private uint? __pbn__material_count;
 
             }
 
