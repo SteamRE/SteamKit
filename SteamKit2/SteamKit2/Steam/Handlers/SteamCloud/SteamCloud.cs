@@ -6,7 +6,7 @@
 
 
 using System;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -16,75 +16,70 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamCloud : ClientMsgHandler
     {
-        private static CallbackMsg? GetCallback( IPacketMsg packetMsg ) => packetMsg.MsgType switch
-        {
-            EMsg.ClientUFSGetUGCDetailsResponse => new UGCDetailsCallback( packetMsg ),
-            EMsg.ClientUFSGetSingleFileInfoResponse => new SingleFileInfoCallback( packetMsg ),
-            EMsg.ClientUFSShareFileResponse => new ShareFileCallback( packetMsg ),
-            _ => null,
-        };
-
         /// <summary>
         /// Requests details for a specific item of user generated content from the Steam servers.
         /// Results are returned in a <see cref="UGCDetailsCallback"/>.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="ugcId">The unique user generated content id.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="UGCDetailsCallback"/>.</returns>
-        public AsyncJob<UGCDetailsCallback> RequestUGCDetails( UGCHandle ugcId )
+        /// <returns>The UGC details.</returns>
+        public async Task<UGCDetailsCallback> RequestUGCDetails( UGCHandle ugcId )
         {
             ArgumentNullException.ThrowIfNull( ugcId );
 
-            var request = new ClientMsgProtobuf<CMsgClientUFSGetUGCDetails>( EMsg.ClientUFSGetUGCDetails );
-            request.SourceJobID = Client.GetNextJobID();
+            var request = new CCloud_GetFileDetails_Request
+            {
+                ugcid = ugcId,
+            };
 
-            request.Body.hcontent = ugcId;
+            var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
+            var cloudService = unifiedMessages.CreateService<Cloud>();
+            var response = await cloudService.GetFileDetails( request );
 
-            this.Client.Send( request );
-
-            return new AsyncJob<UGCDetailsCallback>( this.Client, request.SourceJobID );
+            return new UGCDetailsCallback( response );
         }
 
         /// <summary>
         /// Requests details for a specific file in the user's Cloud storage.
         /// Results are returned in a <see cref="SingleFileInfoCallback"/>.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="appid">The app id of the game.</param>
         /// <param name="filename">The path to the file being requested.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SingleFileInfoCallback"/>.</returns>
-        public AsyncJob<SingleFileInfoCallback> GetSingleFileInfo( uint appid, string filename )
+        /// <returns>The file info.</returns>
+        public async Task<SingleFileInfoCallback> GetSingleFileInfo( uint appid, string filename )
         {
-            var request = new ClientMsgProtobuf<CMsgClientUFSGetSingleFileInfo> (EMsg.ClientUFSGetSingleFileInfo );
-            request.SourceJobID = Client.GetNextJobID();
+            var request = new CCloud_GetSingleFileInfo_Request
+            {
+                app_id = appid,
+                file_name = filename,
+            };
 
-            request.Body.app_id = appid;
-            request.Body.file_name = filename;
+            var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
+            var cloudService = unifiedMessages.CreateService<Cloud>();
+            var response = await cloudService.GetSingleFileInfo( request );
 
-            this.Client.Send(request);
-
-            return new AsyncJob<SingleFileInfoCallback>( this.Client, request.SourceJobID );
+            return new SingleFileInfoCallback( response );
         }
 
         /// <summary>
         /// Commit a Cloud file at the given path to make its UGC handle publicly visible.
         /// Results are returned in a <see cref="ShareFileCallback"/>.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="appid">The app id of the game.</param>
         /// <param name="filename">The path to the file being requested.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="ShareFileCallback"/>.</returns>
-        public AsyncJob<ShareFileCallback> ShareFile( uint appid, string filename )
+        /// <returns>The share file result.</returns>
+        public async Task<ShareFileCallback> ShareFile( uint appid, string filename )
         {
-            var request = new ClientMsgProtobuf<CMsgClientUFSShareFile>(EMsg.ClientUFSShareFile);
-            request.SourceJobID = Client.GetNextJobID();
+            var request = new CCloud_ShareFile_Request
+            {
+                app_id = appid,
+                file_name = filename,
+            };
 
-            request.Body.app_id = appid;
-            request.Body.file_name = filename;
+            var unifiedMessages = Client.GetHandler<SteamUnifiedMessages>()!;
+            var cloudService = unifiedMessages.CreateService<Cloud>();
+            var response = await cloudService.ShareFile( request );
 
-            this.Client.Send(request);
-
-            return new AsyncJob<ShareFileCallback>( this.Client, request.SourceJobID );
+            return new ShareFileCallback( response );
         }
 
         /// <summary>
@@ -93,15 +88,7 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            var callback = GetCallback( packetMsg );
-
-            if ( callback == null )
-            {
-                // ignore messages that we don't have a handler function for
-                return;
-            }
-
-            this.Client.PostCallback( callback );
+            // not used
         }
     }
 }
