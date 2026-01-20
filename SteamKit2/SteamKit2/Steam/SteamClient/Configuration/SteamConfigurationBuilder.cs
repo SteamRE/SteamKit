@@ -39,6 +39,8 @@ namespace SteamKit2
 
                 ServerListProvider = new MemoryServerListProvider(),
 
+                TimeProvider = TimeProvider.System,
+
                 Universe = EUniverse.Public,
 
                 WebAPIBaseAddress = WebAPI.DefaultBaseAddress
@@ -95,6 +97,13 @@ namespace SteamKit2
         public ISteamConfigurationBuilder WithServerListProvider(IServerListProvider provider)
         {
             state.ServerListProvider = provider ?? throw new ArgumentNullException(nameof(provider));
+            return this;
+        }
+
+        public ISteamConfigurationBuilder WithTimeProvider(TimeProvider timeProvider)
+        {
+            ArgumentNullException.ThrowIfNull(timeProvider);
+            state.TimeProvider = timeProvider;
             return this;
         }
 

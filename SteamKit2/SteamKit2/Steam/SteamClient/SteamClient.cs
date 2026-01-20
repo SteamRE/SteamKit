@@ -107,7 +107,7 @@ namespace SteamKit2
                 this.processStartTime = process.StartTime;
             }
 
-            jobManager = new AsyncJobManager();
+            jobManager = new AsyncJobManager( configuration.TimeProvider );
         }
 
 
