@@ -21,12 +21,14 @@ namespace SteamKit2
 
                 cts = new CancellationTokenSource();
                 socket = new ClientWebSocket();
+                semaphore = new SemaphoreSlim( 1, 1 );
                 connectionUri = ConstructUri(endPoint);
             }
 
             readonly WebSocketConnection connection;
             readonly CancellationTokenSource cts;
             readonly ClientWebSocket socket;
+            readonly SemaphoreSlim semaphore;
             readonly Uri connectionUri;
             Task? runloopTask;
             int disposed;
@@ -66,38 +68,47 @@ namespace SteamKit2
                 connection.log.LogDebug( nameof(WebSocketContext), "Connected to {0}", connectionUri);
                 connection.Connected?.Invoke(connection, EventArgs.Empty);
 
-                while (!cancellationToken.IsCancellationRequested && socket.State == WebSocketState.Open)
+                await semaphore.WaitAsync(CancellationToken.None).ConfigureAwait( false );
+
+                try
                 {
-                    byte[]? packet = null;
+                    while (!cancellationToken.IsCancellationRequested && socket.State == WebSocketState.Open)
+                    {
+                        byte[]? packet = null;
 
-                    try
-                    {
-                        packet = await ReadMessageAsync( cancellationToken ).ConfigureAwait( false );
-                    }
-                    catch ( Exception ex )
-                    {
-                        connection.log.LogDebug( nameof( WebSocketContext ), "Exception reading from websocket: {0} - {1}", ex.GetType().FullName, ex.Message );
-                        connection.DisconnectCore( userInitiated: false, specificContext: this );
-                        return;
+                        try
+                        {
+                            packet = await ReadMessageAsync( cancellationToken ).ConfigureAwait( false );
+                        }
+                        catch ( Exception ex )
+                        {
+                            connection.log.LogDebug( nameof( WebSocketContext ), "Exception reading from websocket: {0} - {1}", ex.GetType().FullName, ex.Message );
+                            connection.DisconnectCore( userInitiated: false, specificContext: this );
+                            return;
+                        }
+
+                        if (packet != null && packet.Length > 0)
+                        {
+                            connection.NetMsgReceived?.Invoke(connection, new NetMsgEventArgs(packet, EndPoint));
+                        }
                     }
 
-                    if (packet != null && packet.Length > 0)
+                    if (!cancellationToken.IsCancellationRequested && socket.State == WebSocketState.Open)
                     {
-                        connection.NetMsgReceived?.Invoke(connection, new NetMsgEventArgs(packet, EndPoint));
+                        connection.log.LogDebug( nameof(WebSocketContext), "Closing connection...");
+                        try
+                        {
+                            await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, null, default).ConfigureAwait(false);
+                        }
+                        catch (Win32Exception ex)
+                        {
+                            connection.log.LogDebug( nameof(WebSocketContext), "Error closing connection: {0}", ex.Message);
+                        }
                     }
                 }
-
-                if (socket.State == WebSocketState.Open)
+                finally
                 {
-                    connection.log.LogDebug( nameof(WebSocketContext), "Closing connection...");
-                    try
-                    {
-                        await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, null, default).ConfigureAwait(false);
-                    }
-                    catch (Win32Exception ex)
-                    {
-                        connection.log.LogDebug( nameof(WebSocketContext), "Error closing connection: {0}", ex.Message);
-                    }
+                    semaphore.Release();
                 }
             }
 
@@ -117,16 +128,24 @@ namespace SteamKit2
 
             public void Dispose()
             {
-                if (Interlocked.Exchange(ref disposed, 1) == 1)
+                if ( Interlocked.Exchange( ref disposed, 1 ) == 1 )
                 {
                     return;
                 }
 
                 cts.Cancel();
-                cts.Dispose();
-                runloopTask = null;
+                semaphore.Wait();
+                try
+                {
+                    cts.Dispose();
+                    runloopTask = null;
 
-                socket.Dispose();
+                    socket.Dispose();
+                }
+                finally
+                {
+                    semaphore.Dispose();
+                }
             }
 
             async Task<byte[]?> ReadMessageAsync( CancellationToken cancellationToken )
