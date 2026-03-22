@@ -17,7 +17,7 @@ namespace SteamKit2.Internal
     abstract class CallbackBase
     {
         internal abstract Type CallbackType { get; }
-        internal abstract Task? Run( CallbackMsg callback );
+        internal abstract ValueTask Run( CallbackMsg callback );
     }
 
     sealed class Callback<TCall> : CallbackBase, IDisposable
@@ -55,14 +55,14 @@ namespace SteamKit2.Internal
             System.GC.SuppressFinalize( this );
         }
 
-        internal override Task? Run( CallbackMsg callback )
+        internal override ValueTask Run( CallbackMsg callback )
         {
             var cb = callback as TCall;
             if ( cb != null && ( cb.JobID == JobID || JobID == JobID.Invalid ) )
             {
                 OnRun( cb );
             }
-            return null;
+            return default;
         }
     }
 
@@ -101,14 +101,14 @@ namespace SteamKit2.Internal
             System.GC.SuppressFinalize( this );
         }
 
-        internal override Task? Run( CallbackMsg callback )
+        internal override ValueTask Run( CallbackMsg callback )
         {
             var cb = callback as TCall;
             if ( cb != null && ( cb.JobID == JobID || JobID == JobID.Invalid ) )
             {
-                return OnRun( cb );
+                return new ValueTask( OnRun( cb ) );
             }
-            return null;
+            return default;
         }
     }
 }

@@ -45,6 +45,8 @@ namespace SteamKit2
         /// Runs a single queued callback.
         /// If no callback is queued, this method will instantly return.
         /// </summary>
+        /// <remarks>If any asynchronous callbacks are registered, they will be blocked on synchronously.
+        /// Use <see cref="RunWaitCallbackAsync"/> to properly await asynchronous callbacks.</remarks>
         /// <returns>Returns true if a callback has been run, false otherwise.</returns>
         public bool RunCallbacks()
         {
@@ -61,6 +63,7 @@ namespace SteamKit2
         /// If no callback is queued, the method will block for the given timeout or until a callback becomes available.
         /// </summary>
         /// <param name="timeout">The length of time to block.</param>
+        /// <remarks><inheritdoc cref="RunCallbacks" path="/remarks"/></remarks>
         /// <returns>Returns true if a callback has been run, false otherwise.</returns>
         public bool RunWaitCallbacks( TimeSpan timeout )
         {
@@ -78,6 +81,7 @@ namespace SteamKit2
         /// This method returns once the queue has been emptied.
         /// </summary>
         /// <param name="timeout">The length of time to block.</param>
+        /// <remarks><inheritdoc cref="RunCallbacks" path="/remarks"/></remarks>
         public void RunWaitAllCallbacks( TimeSpan timeout )
         {
             if ( !RunWaitCallbacks( timeout ) )
@@ -94,6 +98,7 @@ namespace SteamKit2
         /// Blocks the current thread to run a single queued callback.
         /// If no callback is queued, the method will block until one becomes available.
         /// </summary>
+        /// <remarks><inheritdoc cref="RunCallbacks" path="/remarks"/></remarks>
         public void RunWaitCallbacks()
         {
             var call = client.WaitForCallback();
@@ -222,7 +227,11 @@ namespace SteamKit2
                 if ( callback.CallbackType.IsAssignableFrom( type ) )
                 {
                     var task = callback.Run( call );
-                    task?.Wait();
+
+                    if ( !task.IsCompletedSuccessfully )
+                    {
+                        task.AsTask().Wait();
+                    }
                 }
             }
         }
@@ -237,12 +246,7 @@ namespace SteamKit2
             {
                 if ( callback.CallbackType.IsAssignableFrom( type ) )
                 {
-                    var task = callback.Run( call );
-
-                    if ( task != null )
-                    {
-                        await task.ConfigureAwait( false );
-                    }
+                    await callback.Run( call ).ConfigureAwait( false );
                 }
             }
         }
