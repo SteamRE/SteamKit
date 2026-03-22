@@ -1,0 +1,54 @@
+name: Update Protobufs
+
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: '0 17 * * SUN'
+
+permissions:
+  actions: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-protobufs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v6
+      with:
+        submodules: recursive
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v5
+
+    - name: Update protobufs
+      shell: pwsh
+      run: Resources/ProtobufGen/update.ps1
+
+    - name: Check for changes
+      id: changes
+      run: |
+        if git diff --quiet; then
+          echo "has_changes=false" >> "$GITHUB_OUTPUT"
+        else
+          echo "has_changes=true" >> "$GITHUB_OUTPUT"
+        fi
+
+    - name: Create Pull Request
+      if: steps.changes.outputs.has_changes == 'true'
+      id: create-pr
+      uses: peter-evans/create-pull-request@v8
+      with:
+        commit-message: Update protobufs
+        title: Update protobufs
+        body: Automated protobuf update from SteamTracking.
+        branch: auto/protobufs
+        delete-branch: true
+
+    - name: Trigger CI
+      if: steps.create-pr.outputs.pull-request-operation == 'created' || steps.create-pr.outputs.pull-request-operation == 'updated'
+      run: gh workflow run steamkit2-build.yaml --ref auto/protobufs
+      env:
+        GH_TOKEN: ${{ github.token }}

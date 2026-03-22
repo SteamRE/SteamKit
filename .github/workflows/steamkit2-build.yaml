@@ -5,6 +5,10 @@ on:
     branches: [ master, gh-actions ]
   pull_request:
     branches: [ master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   steamkit2:
