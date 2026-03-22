@@ -143,7 +143,7 @@ jobs:
         restore-keys: vcpkg-${{ matrix.platform }}-
 
     - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v2
+      uses: microsoft/setup-msbuild@v3
 
     - name: Configure Dependencies
       run: pwsh -File Resources/NetHook2/SetupDependencies.ps1
