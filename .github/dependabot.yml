@@ -1,27 +1,25 @@
 version: 2
 updates:
 - package-ecosystem: nuget
-  directory: "/SteamKit2"
+  directories:
+    - "/SteamKit2"
+    - "/Resources/ProtobufGen"
+    - "/Resources/ProtobufDumper"
   schedule:
-    interval: weekly
+    interval: monthly
   open-pull-requests-limit: 10
-
-- package-ecosystem: nuget
-  directory: "/Resources/ProtobufGen"
-  schedule:
-    interval: weekly
-  open-pull-requests-limit: 10
-
-- package-ecosystem: nuget
-  directory: "/Resources/ProtobufDumper"
-  schedule:
-    interval: weekly
-  open-pull-requests-limit: 10
+  groups:
+    all-nuget:
+      patterns:
+        - "*"
+      cooldown:
+        period: 7
+        period-unit: days
 
 - package-ecosystem: "github-actions"
   directory: "/"
   schedule:
-    interval: weekly
+    interval: monthly
   ignore:
     - dependency-name: "*"
       update-types: ["version-update:semver-minor", "version-update:semver-patch"]
