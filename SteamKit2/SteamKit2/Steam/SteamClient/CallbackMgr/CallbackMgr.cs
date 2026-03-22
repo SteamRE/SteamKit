@@ -193,6 +193,25 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Registers the provided <see cref="Func{T, Task}"/> to receive callbacks for notifications from the service of type <typeparam name="TService" />
+        /// with the notification message of type <typeparam name="TNotification"></typeparam>.
+        /// </summary>
+        /// <param name="callbackFunc">The function to invoke with the callback.</param>
+        /// <remarks>When subscribing to asynchronous methods, <see cref="RunWaitCallbackAsync"/> should be used for awaiting callbacks.</remarks>
+        /// <returns>An <see cref="IDisposable"/>. Disposing of the return value will unsubscribe the <paramref name="callbackFunc"/>.</returns>
+        public IDisposable SubscribeServiceNotification<TService, TNotification>( Func<SteamUnifiedMessages.ServiceMethodNotification<TNotification>, Task> callbackFunc )
+            where TService : SteamUnifiedMessages.UnifiedService, new()
+            where TNotification : IExtensible, new()
+        {
+            ArgumentNullException.ThrowIfNull( callbackFunc );
+
+            steamUnifiedMessages.CreateService<TService>();
+
+            var callback = new AsyncCallback<SteamUnifiedMessages.ServiceMethodNotification<TNotification>>( callbackFunc, this, JobID.Invalid );
+            return callback;
+        }
+
+        /// <summary>
         /// Registers the provided <see cref="Action{T}"/> to receive callbacks for responses of <see cref="SteamUnifiedMessages"/> requests
         /// made by the service of type <typeparam name="TService" /> with the response of type <typeparam name="TResponse"></typeparam>.
         /// </summary>
@@ -207,6 +226,25 @@ namespace SteamKit2
             steamUnifiedMessages.CreateService<TService>();
 
             var callback = new Callback<SteamUnifiedMessages.ServiceMethodResponse<TResponse>>( callbackFunc, this, JobID.Invalid );
+            return callback;
+        }
+
+        /// <summary>
+        /// Registers the provided <see cref="Func{T, Task}"/> to receive callbacks for responses of <see cref="SteamUnifiedMessages"/> requests
+        /// made by the service of type <typeparam name="TService" /> with the response of type <typeparam name="TResponse"></typeparam>.
+        /// </summary>
+        /// <param name="callbackFunc">The function to invoke with the callback.</param>
+        /// <remarks>When subscribing to asynchronous methods, <see cref="RunWaitCallbackAsync"/> should be used for awaiting callbacks.</remarks>
+        /// <returns>An <see cref="IDisposable"/>. Disposing of the return value will unsubscribe the <paramref name="callbackFunc"/>.</returns>
+        public IDisposable SubscribeServiceResponse<TService, TResponse>( Func<SteamUnifiedMessages.ServiceMethodResponse<TResponse>, Task> callbackFunc )
+            where TService : SteamUnifiedMessages.UnifiedService, new()
+            where TResponse : IExtensible, new()
+        {
+            ArgumentNullException.ThrowIfNull( callbackFunc );
+
+            steamUnifiedMessages.CreateService<TService>();
+
+            var callback = new AsyncCallback<SteamUnifiedMessages.ServiceMethodResponse<TResponse>>( callbackFunc, this, JobID.Invalid );
             return callback;
         }
 
