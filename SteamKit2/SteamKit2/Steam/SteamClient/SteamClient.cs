@@ -175,6 +175,21 @@ namespace SteamKit2
 
             return handlers.Find( h => h.GetType() == type ) as T;
         }
+
+        /// <summary>
+        /// Returns a registered handler, throwing if not found.
+        /// </summary>
+        /// <typeparam name="T">The type of the handler to cast to. Must derive from ClientMsgHandler.</typeparam>
+        /// <returns>
+        /// A registered handler.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">No handler of type <typeparamref name="T"/> is registered.</exception>
+        public T GetRequiredHandler<T>()
+            where T : ClientMsgHandler
+        {
+            return GetHandler<T>()
+                ?? throw new InvalidOperationException( $"A handler of type \"{typeof( T )}\" is not registered." );
+        }
         #endregion
 
 
