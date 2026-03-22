@@ -121,12 +121,12 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( handler );
 
-            var type = handler.GetType();
-            var msgIndex = handlers.FindIndex( h => h.GetType() == type );
-
-            if ( msgIndex > -1 )
+            foreach ( var h in handlers )
             {
-                throw new InvalidOperationException( string.Format( "A handler of type \"{0}\" is already registered.", handler.GetType() ) );
+                if ( h.GetType() == handler.GetType() )
+                {
+                    throw new InvalidOperationException( $"A handler of type \"{handler.GetType()}\" is already registered." );
+                }
             }
 
             AddHandlerCore( handler );
@@ -144,11 +144,13 @@ namespace SteamKit2
         /// <param name="handler">The handler name to remove.</param>
         public void RemoveHandler( Type handler )
         {
-            var msgIndex = handlers.FindIndex( h => h.GetType() == handler );
-
-            if ( msgIndex > -1 )
+            for ( var i = 0; i < handlers.Count; i++ )
             {
-                handlers.RemoveAt( msgIndex );
+                if ( handlers[ i ].GetType() == handler )
+                {
+                    handlers.RemoveAt( i );
+                    return;
+                }
             }
         }
 
@@ -171,9 +173,15 @@ namespace SteamKit2
         public T? GetHandler<T>()
             where T : ClientMsgHandler
         {
-            Type type = typeof( T );
+            foreach ( var handler in handlers )
+            {
+                if ( handler.GetType() == typeof( T ) )
+                {
+                    return ( T )handler;
+                }
+            }
 
-            return handlers.Find( h => h.GetType() == type ) as T;
+            return null;
         }
 
         /// <summary>

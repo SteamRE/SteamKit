@@ -26,6 +26,7 @@ namespace Tests
             Assert.NotNull(steamClient.GetHandler<SteamMatchmaking>());
             Assert.NotNull(steamClient.GetHandler<SteamNetworking>());
             Assert.NotNull(steamClient.GetHandler<SteamContent>());
+            Assert.NotNull(steamClient.GetHandler<SteamAuthTicket>());
         }
 
         [Fact]
@@ -60,6 +61,43 @@ namespace Tests
 
             steamClient.RemoveHandler(handler);
             Assert.Null(steamClient.GetHandler<TestMsgHandler>());
+        }
+
+        [Fact]
+        public void AddHandlerThrowsOnDuplicateHandler()
+        {
+            var steamClient = new SteamClient();
+            steamClient.AddHandler(new TestMsgHandler());
+
+            Assert.Throws<InvalidOperationException>(() => steamClient.AddHandler(new TestMsgHandler()));
+        }
+
+        [Fact]
+        public void RemoveHandlerByTypeDoesNothingWhenNotRegistered()
+        {
+            var steamClient = new SteamClient();
+            Assert.Null(steamClient.GetHandler<TestMsgHandler>());
+
+            steamClient.RemoveHandler(typeof(TestMsgHandler));
+            Assert.Null(steamClient.GetHandler<TestMsgHandler>());
+        }
+
+        [Fact]
+        public void GetRequiredHandlerReturnsHandler()
+        {
+            var steamClient = new SteamClient();
+            var handler = steamClient.GetRequiredHandler<SteamUser>();
+
+            Assert.NotNull(handler);
+            Assert.IsType<SteamUser>(handler);
+        }
+
+        [Fact]
+        public void GetRequiredHandlerThrowsWhenNotRegistered()
+        {
+            var steamClient = new SteamClient();
+
+            Assert.Throws<InvalidOperationException>(() => steamClient.GetRequiredHandler<TestMsgHandler>());
         }
 
         [Fact]
