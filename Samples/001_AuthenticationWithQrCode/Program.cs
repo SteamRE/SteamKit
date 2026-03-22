@@ -58,7 +58,7 @@ async void OnConnected( SteamClient.ConnectedCallback callback )
     Console.WriteLine( $"Logging in as '{pollResponse.AccountName}'..." );
 
     // Logon to Steam with the access token we have received
-    steamUser.LogOn( new SteamUser.LogOnDetails
+    _ = steamUser.LogOn( new SteamUser.LogOnDetails
     {
         Username = pollResponse.AccountName,
         AccessToken = pollResponse.RefreshToken,
