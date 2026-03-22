@@ -8,13 +8,13 @@ updates:
   schedule:
     interval: monthly
   open-pull-requests-limit: 10
+  cooldown:
+    period: 7
+    period-unit: days
   groups:
     all-nuget:
       patterns:
         - "*"
-      cooldown:
-        period: 7
-        period-unit: days
 
 - package-ecosystem: "github-actions"
   directory: "/"
