@@ -2393,6 +2393,158 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetUserStats_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public byte[] sha_schema
+        {
+            get => __pbn__sha_schema;
+            set => __pbn__sha_schema = value;
+        }
+        public bool ShouldSerializesha_schema() => __pbn__sha_schema != null;
+        public void Resetsha_schema() => __pbn__sha_schema = null;
+        private byte[] __pbn__sha_schema;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint crc_stats
+        {
+            get => __pbn__crc_stats.GetValueOrDefault();
+            set => __pbn__crc_stats = value;
+        }
+        public bool ShouldSerializecrc_stats() => __pbn__crc_stats != null;
+        public void Resetcrc_stats() => __pbn__crc_stats = null;
+        private uint? __pbn__crc_stats;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPlayer_GetUserStats_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public byte[] sha_schema
+        {
+            get => __pbn__sha_schema;
+            set => __pbn__sha_schema = value;
+        }
+        public bool ShouldSerializesha_schema() => __pbn__sha_schema != null;
+        public void Resetsha_schema() => __pbn__sha_schema = null;
+        private byte[] __pbn__sha_schema;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint crc_stats
+        {
+            get => __pbn__crc_stats.GetValueOrDefault();
+            set => __pbn__crc_stats = value;
+        }
+        public bool ShouldSerializecrc_stats() => __pbn__crc_stats != null;
+        public void Resetcrc_stats() => __pbn__crc_stats = null;
+        private uint? __pbn__crc_stats;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public byte[] schema
+        {
+            get => __pbn__schema;
+            set => __pbn__schema = value;
+        }
+        public bool ShouldSerializeschema() => __pbn__schema != null;
+        public void Resetschema() => __pbn__schema = null;
+        private byte[] __pbn__schema;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<Stats> stats { get; } = new global::System.Collections.Generic.List<Stats>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Unlock_Time : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint achievement_bit
+            {
+                get => __pbn__achievement_bit.GetValueOrDefault();
+                set => __pbn__achievement_bit = value;
+            }
+            public bool ShouldSerializeachievement_bit() => __pbn__achievement_bit != null;
+            public void Resetachievement_bit() => __pbn__achievement_bit = null;
+            private uint? __pbn__achievement_bit;
+
+            [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+            public uint unlock_time
+            {
+                get => __pbn__unlock_time.GetValueOrDefault();
+                set => __pbn__unlock_time = value;
+            }
+            public bool ShouldSerializeunlock_time() => __pbn__unlock_time != null;
+            public void Resetunlock_time() => __pbn__unlock_time = null;
+            private uint? __pbn__unlock_time;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Stats : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint stat_id
+            {
+                get => __pbn__stat_id.GetValueOrDefault();
+                set => __pbn__stat_id = value;
+            }
+            public bool ShouldSerializestat_id() => __pbn__stat_id != null;
+            public void Resetstat_id() => __pbn__stat_id = null;
+            private uint? __pbn__stat_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint stat_value
+            {
+                get => __pbn__stat_value.GetValueOrDefault();
+                set => __pbn__stat_value = value;
+            }
+            public bool ShouldSerializestat_value() => __pbn__stat_value != null;
+            public void Resetstat_value() => __pbn__stat_value = null;
+            private uint? __pbn__stat_value;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public global::System.Collections.Generic.List<CPlayer_GetUserStats_Response.Unlock_Time> unlock_times { get; } = new global::System.Collections.Generic.List<CPlayer_GetUserStats_Response.Unlock_Time>();
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CPlayer_GetFavoriteBadge_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -4856,6 +5008,11 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CPlayer_GetGameAchievements_Request, CPlayer_GetGameAchievements_Response>( "Player.GetGameAchievements#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetUserStats_Response>> GetUserStats( CPlayer_GetUserStats_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPlayer_GetUserStats_Request, CPlayer_GetUserStats_Response>( "Player.GetUserStats#1", request );
+        }
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetFavoriteBadge_Response>> GetFavoriteBadge( CPlayer_GetFavoriteBadge_Request request )
         {
             return UnifiedMessages.SendMessage<CPlayer_GetFavoriteBadge_Request, CPlayer_GetFavoriteBadge_Response>( "Player.GetFavoriteBadge#1", request );
@@ -5074,6 +5231,9 @@ namespace SteamKit2.Internal
                     break;
                 case "GetGameAchievements":
                     PostResponseMsg<CPlayer_GetGameAchievements_Response>( packetMsg );
+                    break;
+                case "GetUserStats":
+                    PostResponseMsg<CPlayer_GetUserStats_Response>( packetMsg );
                     break;
                 case "GetFavoriteBadge":
                     PostResponseMsg<CPlayer_GetFavoriteBadge_Response>( packetMsg );

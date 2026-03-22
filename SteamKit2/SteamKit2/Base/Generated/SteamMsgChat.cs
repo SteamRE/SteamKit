@@ -5817,6 +5817,9 @@ namespace SteamKit2.Internal
         k_EChatRoomServerMsg_ChatRoomTaglineChanged = 9,
         k_EChatRoomServerMsg_ChatRoomAvatarChanged = 10,
         k_EChatRoomServerMsg_AppCustom = 11,
+        k_EChatRoomServerMsg_JoinedMany = 12,
+        k_EChatRoomServerMsg_PartedMany = 13,
+        k_EChatRoomServerMsg_InvitedMany = 14,
     }
 
     [global::ProtoBuf.ProtoContract()]

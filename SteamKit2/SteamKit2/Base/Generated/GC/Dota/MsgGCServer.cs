@@ -3320,6 +3320,66 @@ namespace SteamKit2.GC.Dota.Internal
         [global::ProtoBuf.ProtoMember(22)]
         public global::System.Collections.Generic.List<float> max_input_processing_time { get; } = new global::System.Collections.Generic.List<float>();
 
+        [global::ProtoBuf.ProtoMember(23)]
+        public uint num_slow_frames
+        {
+            get => __pbn__num_slow_frames.GetValueOrDefault();
+            set => __pbn__num_slow_frames = value;
+        }
+        public bool ShouldSerializenum_slow_frames() => __pbn__num_slow_frames != null;
+        public void Resetnum_slow_frames() => __pbn__num_slow_frames = null;
+        private uint? __pbn__num_slow_frames;
+
+        [global::ProtoBuf.ProtoMember(24)]
+        public float server_average_oversleep_frame_time
+        {
+            get => __pbn__server_average_oversleep_frame_time.GetValueOrDefault();
+            set => __pbn__server_average_oversleep_frame_time = value;
+        }
+        public bool ShouldSerializeserver_average_oversleep_frame_time() => __pbn__server_average_oversleep_frame_time != null;
+        public void Resetserver_average_oversleep_frame_time() => __pbn__server_average_oversleep_frame_time = null;
+        private float? __pbn__server_average_oversleep_frame_time;
+
+        [global::ProtoBuf.ProtoMember(25)]
+        public float server_max_oversleep_frame_time
+        {
+            get => __pbn__server_max_oversleep_frame_time.GetValueOrDefault();
+            set => __pbn__server_max_oversleep_frame_time = value;
+        }
+        public bool ShouldSerializeserver_max_oversleep_frame_time() => __pbn__server_max_oversleep_frame_time != null;
+        public void Resetserver_max_oversleep_frame_time() => __pbn__server_max_oversleep_frame_time = null;
+        private float? __pbn__server_max_oversleep_frame_time;
+
+        [global::ProtoBuf.ProtoMember(26)]
+        public float server_average_sleep_frame_time
+        {
+            get => __pbn__server_average_sleep_frame_time.GetValueOrDefault();
+            set => __pbn__server_average_sleep_frame_time = value;
+        }
+        public bool ShouldSerializeserver_average_sleep_frame_time() => __pbn__server_average_sleep_frame_time != null;
+        public void Resetserver_average_sleep_frame_time() => __pbn__server_average_sleep_frame_time = null;
+        private float? __pbn__server_average_sleep_frame_time;
+
+        [global::ProtoBuf.ProtoMember(27)]
+        public float server_max_sleep_frame_time
+        {
+            get => __pbn__server_max_sleep_frame_time.GetValueOrDefault();
+            set => __pbn__server_max_sleep_frame_time = value;
+        }
+        public bool ShouldSerializeserver_max_sleep_frame_time() => __pbn__server_max_sleep_frame_time != null;
+        public void Resetserver_max_sleep_frame_time() => __pbn__server_max_sleep_frame_time = null;
+        private float? __pbn__server_max_sleep_frame_time;
+
+        [global::ProtoBuf.ProtoMember(28)]
+        public uint num_multitick_frames
+        {
+            get => __pbn__num_multitick_frames.GetValueOrDefault();
+            set => __pbn__num_multitick_frames = value;
+        }
+        public bool ShouldSerializenum_multitick_frames() => __pbn__num_multitick_frames != null;
+        public void Resetnum_multitick_frames() => __pbn__num_multitick_frames = null;
+        private uint? __pbn__num_multitick_frames;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -8364,6 +8424,33 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSteamLearnMatchHeroesV4 : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<int> radiant_hero_ids { get; } = new global::System.Collections.Generic.List<int>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<int> dire_hero_ids { get; } = new global::System.Collections.Generic.List<int>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public global::System.Collections.Generic.List<uint> radiant_lanes { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<uint> dire_lanes { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public global::System.Collections.Generic.List<uint> radiant_positions { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public global::System.Collections.Generic.List<uint> dire_positions { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgSteamLearnMatchHeroV6 : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -8425,6 +8512,51 @@ namespace SteamKit2.GC.Dota.Internal
 
         [global::ProtoBuf.ProtoMember(7)]
         public global::System.Collections.Generic.List<uint> enemy_hero_and_facet { get; } = new global::System.Collections.Generic.List<uint>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgSteamLearnMatchHeroV8 : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int hero_id
+        {
+            get => __pbn__hero_id.GetValueOrDefault();
+            set => __pbn__hero_id = value;
+        }
+        public bool ShouldSerializehero_id() => __pbn__hero_id != null;
+        public void Resethero_id() => __pbn__hero_id = null;
+        private int? __pbn__hero_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint lane
+        {
+            get => __pbn__lane.GetValueOrDefault();
+            set => __pbn__lane = value;
+        }
+        public bool ShouldSerializelane() => __pbn__lane != null;
+        public void Resetlane() => __pbn__lane = null;
+        private uint? __pbn__lane;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint position
+        {
+            get => __pbn__position.GetValueOrDefault();
+            set => __pbn__position = value;
+        }
+        public bool ShouldSerializeposition() => __pbn__position != null;
+        public void Resetposition() => __pbn__position = null;
+        private uint? __pbn__position;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public global::System.Collections.Generic.List<uint> allied_heroes { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public global::System.Collections.Generic.List<uint> enemy_heroes { get; } = new global::System.Collections.Generic.List<uint>();
 
     }
 

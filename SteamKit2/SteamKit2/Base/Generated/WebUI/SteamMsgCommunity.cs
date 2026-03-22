@@ -1261,6 +1261,76 @@ namespace SteamKit2.WebUI.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_GetClanMetadata_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_GetClanMetadata_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool is_ogg
+        {
+            get => __pbn__is_ogg.GetValueOrDefault();
+            set => __pbn__is_ogg = value;
+        }
+        public bool ShouldSerializeis_ogg() => __pbn__is_ogg != null;
+        public void Resetis_ogg() => __pbn__is_ogg = null;
+        private bool? __pbn__is_ogg;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string name
+        {
+            get => __pbn__name ?? "";
+            set => __pbn__name = value;
+        }
+        public bool ShouldSerializename() => __pbn__name != null;
+        public void Resetname() => __pbn__name = null;
+        private string __pbn__name;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string profile_url
+        {
+            get => __pbn__profile_url ?? "";
+            set => __pbn__profile_url = value;
+        }
+        public bool ShouldSerializeprofile_url() => __pbn__profile_url != null;
+        public void Resetprofile_url() => __pbn__profile_url = null;
+        private string __pbn__profile_url;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint appid
+        {
+            get => __pbn__appid.GetValueOrDefault();
+            set => __pbn__appid = value;
+        }
+        public bool ShouldSerializeappid() => __pbn__appid != null;
+        public void Resetappid() => __pbn__appid = null;
+        private uint? __pbn__appid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CCommunity_GetCommentThread_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2724,6 +2794,11 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CCommunity_GetClanLocGroupImages_Request, CCommunity_GetClanLocGroupImages_Response>( "Community.GetClanLocGroupImages#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetClanMetadata_Response>> GetClanMetadata( CCommunity_GetClanMetadata_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCommunity_GetClanMetadata_Request, CCommunity_GetClanMetadata_Response>( "Community.GetClanMetadata#1", request );
+        }
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetCommentThread_Response>> GetCommentThread( CCommunity_GetCommentThread_Request request )
         {
             return UnifiedMessages.SendMessage<CCommunity_GetCommentThread_Request, CCommunity_GetCommentThread_Response>( "Community.GetCommentThread#1", request );
@@ -2833,6 +2908,9 @@ namespace SteamKit2.WebUI.Internal
                     break;
                 case "GetClanLocGroupImages":
                     PostResponseMsg<CCommunity_GetClanLocGroupImages_Response>( packetMsg );
+                    break;
+                case "GetClanMetadata":
+                    PostResponseMsg<CCommunity_GetClanMetadata_Response>( packetMsg );
                     break;
                 case "GetCommentThread":
                     PostResponseMsg<CCommunity_GetCommentThread_Response>( packetMsg );

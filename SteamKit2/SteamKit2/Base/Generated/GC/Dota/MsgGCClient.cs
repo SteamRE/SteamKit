@@ -6809,6 +6809,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetpurchase_def() => __pbn__purchase_def = null;
         private uint? __pbn__purchase_def;
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool claim_as_points
+        {
+            get => __pbn__claim_as_points.GetValueOrDefault();
+            set => __pbn__claim_as_points = value;
+        }
+        public bool ShouldSerializeclaim_as_points() => __pbn__claim_as_points != null;
+        public void Resetclaim_as_points() => __pbn__claim_as_points = null;
+        private bool? __pbn__claim_as_points;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

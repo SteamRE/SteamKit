@@ -1518,6 +1518,37 @@ namespace SteamKit2.Internal
         public void Resetadditional_languages() => __pbn__additional_languages = null;
         private string __pbn__additional_languages;
 
+        [global::ProtoBuf.ProtoMember(14)]
+        [global::System.ComponentModel.DefaultValue(EGameFrameRateReportingPreference.k_EGameFrameRateReportingPreference_Unset)]
+        public EGameFrameRateReportingPreference game_frame_rate_reporting
+        {
+            get => __pbn__game_frame_rate_reporting ?? EGameFrameRateReportingPreference.k_EGameFrameRateReportingPreference_Unset;
+            set => __pbn__game_frame_rate_reporting = value;
+        }
+        public bool ShouldSerializegame_frame_rate_reporting() => __pbn__game_frame_rate_reporting != null;
+        public void Resetgame_frame_rate_reporting() => __pbn__game_frame_rate_reporting = null;
+        private EGameFrameRateReportingPreference? __pbn__game_frame_rate_reporting;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        public bool disable_microtrailers
+        {
+            get => __pbn__disable_microtrailers.GetValueOrDefault();
+            set => __pbn__disable_microtrailers = value;
+        }
+        public bool ShouldSerializedisable_microtrailers() => __pbn__disable_microtrailers != null;
+        public void Resetdisable_microtrailers() => __pbn__disable_microtrailers = null;
+        private bool? __pbn__disable_microtrailers;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        public bool disable_animated_marketing
+        {
+            get => __pbn__disable_animated_marketing.GetValueOrDefault();
+            set => __pbn__disable_animated_marketing = value;
+        }
+        public bool ShouldSerializedisable_animated_marketing() => __pbn__disable_animated_marketing != null;
+        public void Resetdisable_animated_marketing() => __pbn__disable_animated_marketing = null;
+        private bool? __pbn__disable_animated_marketing;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -2076,6 +2107,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializefeedback() => __pbn__feedback != null;
         public void Resetfeedback() => __pbn__feedback = null;
         private ESteamDeckCompatibilityFeedback? __pbn__feedback;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint feedback_details
+        {
+            get => __pbn__feedback_details.GetValueOrDefault();
+            set => __pbn__feedback_details = value;
+        }
+        public bool ShouldSerializefeedback_details() => __pbn__feedback_details != null;
+        public void Resetfeedback_details() => __pbn__feedback_details = null;
+        private uint? __pbn__feedback_details;
 
     }
 

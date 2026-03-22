@@ -805,6 +805,36 @@ namespace SteamKit2.Internal
         public void Resetstream_interface() => __pbn__stream_interface = null;
         private EStreamInterface? __pbn__stream_interface;
 
+        [global::ProtoBuf.ProtoMember(21)]
+        public int maximum_framerate_numerator
+        {
+            get => __pbn__maximum_framerate_numerator.GetValueOrDefault();
+            set => __pbn__maximum_framerate_numerator = value;
+        }
+        public bool ShouldSerializemaximum_framerate_numerator() => __pbn__maximum_framerate_numerator != null;
+        public void Resetmaximum_framerate_numerator() => __pbn__maximum_framerate_numerator = null;
+        private int? __pbn__maximum_framerate_numerator;
+
+        [global::ProtoBuf.ProtoMember(22)]
+        public int maximum_framerate_denominator
+        {
+            get => __pbn__maximum_framerate_denominator.GetValueOrDefault();
+            set => __pbn__maximum_framerate_denominator = value;
+        }
+        public bool ShouldSerializemaximum_framerate_denominator() => __pbn__maximum_framerate_denominator != null;
+        public void Resetmaximum_framerate_denominator() => __pbn__maximum_framerate_denominator = null;
+        private int? __pbn__maximum_framerate_denominator;
+
+        [global::ProtoBuf.ProtoMember(23)]
+        public bool display_hdr
+        {
+            get => __pbn__display_hdr.GetValueOrDefault();
+            set => __pbn__display_hdr = value;
+        }
+        public bool ShouldSerializedisplay_hdr() => __pbn__display_hdr != null;
+        public void Resetdisplay_hdr() => __pbn__display_hdr = null;
+        private bool? __pbn__display_hdr;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class ReservedGamepad : global::ProtoBuf.IExtensible
         {
@@ -1101,11 +1131,11 @@ namespace SteamKit2.Internal
     {
         k_EStreamTransportNone = 0,
         k_EStreamTransportUDP = 1,
-        k_EStreamTransportUDPRelay = 2,
+        k_EStreamTransportUDPRelay_OBSOLETE = 2,
         k_EStreamTransportWebRTC_OBSOLETE = 3,
         k_EStreamTransportSDR = 4,
         k_EStreamTransportUDP_SNS = 5,
-        k_EStreamTransportUDPRelay_SNS = 6,
+        k_EStreamTransportUDPRelay_SNS_OBSOLETE = 6,
     }
 
     [global::ProtoBuf.ProtoContract()]

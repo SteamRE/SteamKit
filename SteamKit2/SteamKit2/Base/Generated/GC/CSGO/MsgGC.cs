@@ -4164,6 +4164,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Reseterrormsg() => __pbn__errormsg = null;
         private string __pbn__errormsg;
 
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool is_local_server
+        {
+            get => __pbn__is_local_server.GetValueOrDefault();
+            set => __pbn__is_local_server = value;
+        }
+        public bool ShouldSerializeis_local_server() => __pbn__is_local_server != null;
+        public void Resetis_local_server() => __pbn__is_local_server = null;
+        private bool? __pbn__is_local_server;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

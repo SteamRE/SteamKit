@@ -1464,78 +1464,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CAuthentication_MigrateMobileSession_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong steamid
-        {
-            get => __pbn__steamid.GetValueOrDefault();
-            set => __pbn__steamid = value;
-        }
-        public bool ShouldSerializesteamid() => __pbn__steamid != null;
-        public void Resetsteamid() => __pbn__steamid = null;
-        private ulong? __pbn__steamid;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string token
-        {
-            get => __pbn__token ?? "";
-            set => __pbn__token = value;
-        }
-        public bool ShouldSerializetoken() => __pbn__token != null;
-        public void Resettoken() => __pbn__token = null;
-        private string __pbn__token;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string signature
-        {
-            get => __pbn__signature ?? "";
-            set => __pbn__signature = value;
-        }
-        public bool ShouldSerializesignature() => __pbn__signature != null;
-        public void Resetsignature() => __pbn__signature = null;
-        private string __pbn__signature;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CAuthentication_MigrateMobileSession_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string refresh_token
-        {
-            get => __pbn__refresh_token ?? "";
-            set => __pbn__refresh_token = value;
-        }
-        public bool ShouldSerializerefresh_token() => __pbn__refresh_token != null;
-        public void Resetrefresh_token() => __pbn__refresh_token = null;
-        private string __pbn__refresh_token;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string access_token
-        {
-            get => __pbn__access_token ?? "";
-            set => __pbn__access_token = value;
-        }
-        public bool ShouldSerializeaccess_token() => __pbn__access_token != null;
-        public void Resetaccess_token() => __pbn__access_token = null;
-        private string __pbn__access_token;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CAuthentication_Token_Revoke_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2307,11 +2235,6 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CAuthentication_GetAuthSessionsForAccount_Request, CAuthentication_GetAuthSessionsForAccount_Response>( "Authentication.GetAuthSessionsForAccount#1", request );
         }
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAuthentication_MigrateMobileSession_Response>> MigrateMobileSession( CAuthentication_MigrateMobileSession_Request request )
-        {
-            return UnifiedMessages.SendMessage<CAuthentication_MigrateMobileSession_Request, CAuthentication_MigrateMobileSession_Response>( "Authentication.MigrateMobileSession#1", request );
-        }
-
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAuthentication_Token_Revoke_Response>> RevokeToken( CAuthentication_Token_Revoke_Request request )
         {
             return UnifiedMessages.SendMessage<CAuthentication_Token_Revoke_Request, CAuthentication_Token_Revoke_Response>( "Authentication.RevokeToken#1", request );
@@ -2358,9 +2281,6 @@ namespace SteamKit2.Internal
                     break;
                 case "GetAuthSessionsForAccount":
                     PostResponseMsg<CAuthentication_GetAuthSessionsForAccount_Response>( packetMsg );
-                    break;
-                case "MigrateMobileSession":
-                    PostResponseMsg<CAuthentication_MigrateMobileSession_Response>( packetMsg );
                     break;
                 case "RevokeToken":
                     PostResponseMsg<CAuthentication_Token_Revoke_Response>( packetMsg );

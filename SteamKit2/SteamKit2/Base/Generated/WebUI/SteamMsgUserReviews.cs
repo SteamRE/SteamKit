@@ -10,6 +10,44 @@ namespace SteamKit2.WebUI.Internal
 {
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CUserReviews_BackfillSavedHardware_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong saved_hardware_id
+        {
+            get => __pbn__saved_hardware_id.GetValueOrDefault();
+            set => __pbn__saved_hardware_id = value;
+        }
+        public bool ShouldSerializesaved_hardware_id() => __pbn__saved_hardware_id != null;
+        public void Resetsaved_hardware_id() => __pbn__saved_hardware_id = null;
+        private ulong? __pbn__saved_hardware_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CUserReviews_BackfillSavedHardware_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint num_backfilled
+        {
+            get => __pbn__num_backfilled.GetValueOrDefault();
+            set => __pbn__num_backfilled = value;
+        }
+        public bool ShouldSerializenum_backfilled() => __pbn__num_backfilled != null;
+        public void Resetnum_backfilled() => __pbn__num_backfilled = null;
+        private uint? __pbn__num_backfilled;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CUserReviews_GetFriendsRecommendedApp_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -274,6 +312,16 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializehide_in_steam_china() => __pbn__hide_in_steam_china != null;
         public void Resethide_in_steam_china() => __pbn__hide_in_steam_china = null;
         private bool? __pbn__hide_in_steam_china;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public ulong saved_hardware_id
+        {
+            get => __pbn__saved_hardware_id.GetValueOrDefault();
+            set => __pbn__saved_hardware_id = value;
+        }
+        public bool ShouldSerializesaved_hardware_id() => __pbn__saved_hardware_id != null;
+        public void Resetsaved_hardware_id() => __pbn__saved_hardware_id = null;
+        private ulong? __pbn__saved_hardware_id;
 
     }
 
@@ -798,11 +846,36 @@ namespace SteamKit2.WebUI.Internal
         [global::ProtoBuf.ProtoMember(54)]
         public global::System.Collections.Generic.List<CUserReviews_Recommendation_Tag> tags_with_ranges { get; } = new global::System.Collections.Generic.List<CUserReviews_Recommendation_Tag>();
 
+        [global::ProtoBuf.ProtoMember(56)]
+        public ulong saved_hardware_id
+        {
+            get => __pbn__saved_hardware_id.GetValueOrDefault();
+            set => __pbn__saved_hardware_id = value;
+        }
+        public bool ShouldSerializesaved_hardware_id() => __pbn__saved_hardware_id != null;
+        public void Resetsaved_hardware_id() => __pbn__saved_hardware_id = null;
+        private ulong? __pbn__saved_hardware_id;
+
+        [global::ProtoBuf.ProtoMember(57)]
+        public ulong hardware_cluster_id
+        {
+            get => __pbn__hardware_cluster_id.GetValueOrDefault();
+            set => __pbn__hardware_cluster_id = value;
+        }
+        public bool ShouldSerializehardware_cluster_id() => __pbn__hardware_cluster_id != null;
+        public void Resethardware_cluster_id() => __pbn__hardware_cluster_id = null;
+        private ulong? __pbn__hardware_cluster_id;
+
     }
 
     public class UserReviews : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "UserReviews";
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserReviews_BackfillSavedHardware_Response>> BackfillSavedHardware( CUserReviews_BackfillSavedHardware_Request request )
+        {
+            return UnifiedMessages.SendMessage<CUserReviews_BackfillSavedHardware_Request, CUserReviews_BackfillSavedHardware_Response>( "UserReviews.BackfillSavedHardware#1", request );
+        }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserReviews_GetFriendsRecommendedApp_Response>> GetFriendsRecommendedApp( CUserReviews_GetFriendsRecommendedApp_Request request )
         {
@@ -823,6 +896,9 @@ namespace SteamKit2.WebUI.Internal
         {
             switch ( methodName )
             {
+                case "BackfillSavedHardware":
+                    PostResponseMsg<CUserReviews_BackfillSavedHardware_Response>( packetMsg );
+                    break;
                 case "GetFriendsRecommendedApp":
                     PostResponseMsg<CUserReviews_GetFriendsRecommendedApp_Response>( packetMsg );
                     break;

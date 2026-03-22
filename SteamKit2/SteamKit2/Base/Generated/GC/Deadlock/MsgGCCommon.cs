@@ -294,8 +294,15 @@ namespace SteamKit2.GC.Deadlock.Internal
             public void Resethideout_holiday_award_2024() => __pbn__hideout_holiday_award_2024 = null;
             private bool? __pbn__hideout_holiday_award_2024;
 
-            [global::ProtoBuf.ProtoMember(31, IsPacked = true)]
-            public global::System.Collections.Generic.List<uint> hideout_holiday_awards_2025 { get; } = new global::System.Collections.Generic.List<uint>();
+            [global::ProtoBuf.ProtoMember(32)]
+            public bool hideout_holiday_award_2025
+            {
+                get => __pbn__hideout_holiday_award_2025.GetValueOrDefault();
+                set => __pbn__hideout_holiday_award_2025 = value;
+            }
+            public bool ShouldSerializehideout_holiday_award_2025() => __pbn__hideout_holiday_award_2025 != null;
+            public void Resethideout_holiday_award_2025() => __pbn__hideout_holiday_award_2025 = null;
+            private bool? __pbn__hideout_holiday_award_2025;
 
         }
 
@@ -351,6 +358,9 @@ namespace SteamKit2.GC.Deadlock.Internal
 
         [global::ProtoBuf.ProtoMember(1)]
         public global::System.Collections.Generic.List<Hero> hero_selections { get; } = new global::System.Collections.Generic.List<Hero>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<uint> banned_heroes { get; } = new global::System.Collections.Generic.List<uint>();
 
         [global::ProtoBuf.ProtoContract()]
         public partial class Hero : global::ProtoBuf.IExtensible
@@ -971,16 +981,6 @@ namespace SteamKit2.GC.Deadlock.Internal
             public bool ShouldSerializeduplicate_heroes_enabled() => __pbn__duplicate_heroes_enabled != null;
             public void Resetduplicate_heroes_enabled() => __pbn__duplicate_heroes_enabled = null;
             private bool? __pbn__duplicate_heroes_enabled;
-
-            [global::ProtoBuf.ProtoMember(10)]
-            public bool experimental_heroes_enabled
-            {
-                get => __pbn__experimental_heroes_enabled.GetValueOrDefault();
-                set => __pbn__experimental_heroes_enabled = value;
-            }
-            public bool ShouldSerializeexperimental_heroes_enabled() => __pbn__experimental_heroes_enabled != null;
-            public void Resetexperimental_heroes_enabled() => __pbn__experimental_heroes_enabled = null;
-            private bool? __pbn__experimental_heroes_enabled;
 
         }
 
@@ -1807,6 +1807,46 @@ namespace SteamKit2.GC.Deadlock.Internal
         }
 
         [global::ProtoBuf.ProtoContract()]
+        public partial class PowerUpBuff : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string type
+            {
+                get => __pbn__type ?? "";
+                set => __pbn__type = value;
+            }
+            public bool ShouldSerializetype() => __pbn__type != null;
+            public void Resettype() => __pbn__type = null;
+            private string __pbn__type;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint value
+            {
+                get => __pbn__value.GetValueOrDefault();
+                set => __pbn__value = value;
+            }
+            public bool ShouldSerializevalue() => __pbn__value != null;
+            public void Resetvalue() => __pbn__value = null;
+            private uint? __pbn__value;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public bool is_permanent
+            {
+                get => __pbn__is_permanent.GetValueOrDefault();
+                set => __pbn__is_permanent = value;
+            }
+            public bool ShouldSerializeis_permanent() => __pbn__is_permanent != null;
+            public void Resetis_permanent() => __pbn__is_permanent = null;
+            private bool? __pbn__is_permanent;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
         public partial class PlayerStats : global::ProtoBuf.IExtensible
         {
             private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2269,6 +2309,46 @@ namespace SteamKit2.GC.Deadlock.Internal
             public void Resetself_damage() => __pbn__self_damage = null;
             private uint? __pbn__self_damage;
 
+            [global::ProtoBuf.ProtoMember(48)]
+            public uint bullet_kills
+            {
+                get => __pbn__bullet_kills.GetValueOrDefault();
+                set => __pbn__bullet_kills = value;
+            }
+            public bool ShouldSerializebullet_kills() => __pbn__bullet_kills != null;
+            public void Resetbullet_kills() => __pbn__bullet_kills = null;
+            private uint? __pbn__bullet_kills;
+
+            [global::ProtoBuf.ProtoMember(49)]
+            public uint melee_kills
+            {
+                get => __pbn__melee_kills.GetValueOrDefault();
+                set => __pbn__melee_kills = value;
+            }
+            public bool ShouldSerializemelee_kills() => __pbn__melee_kills != null;
+            public void Resetmelee_kills() => __pbn__melee_kills = null;
+            private uint? __pbn__melee_kills;
+
+            [global::ProtoBuf.ProtoMember(50)]
+            public uint ability_kills
+            {
+                get => __pbn__ability_kills.GetValueOrDefault();
+                set => __pbn__ability_kills = value;
+            }
+            public bool ShouldSerializeability_kills() => __pbn__ability_kills != null;
+            public void Resetability_kills() => __pbn__ability_kills = null;
+            private uint? __pbn__ability_kills;
+
+            [global::ProtoBuf.ProtoMember(51)]
+            public uint headshot_kills
+            {
+                get => __pbn__headshot_kills.GetValueOrDefault();
+                set => __pbn__headshot_kills = value;
+            }
+            public bool ShouldSerializeheadshot_kills() => __pbn__headshot_kills != null;
+            public void Resetheadshot_kills() => __pbn__headshot_kills = null;
+            private uint? __pbn__headshot_kills;
+
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -2505,16 +2585,6 @@ namespace SteamKit2.GC.Deadlock.Internal
             public void Resetability_points() => __pbn__ability_points = null;
             private uint? __pbn__ability_points;
 
-            [global::ProtoBuf.ProtoMember(16)]
-            public uint party
-            {
-                get => __pbn__party.GetValueOrDefault();
-                set => __pbn__party = value;
-            }
-            public bool ShouldSerializeparty() => __pbn__party != null;
-            public void Resetparty() => __pbn__party = null;
-            private uint? __pbn__party;
-
             [global::ProtoBuf.ProtoMember(17)]
             public uint assigned_lane
             {
@@ -2570,16 +2640,6 @@ namespace SteamKit2.GC.Deadlock.Internal
             public void Resetrewards_eligible() => __pbn__rewards_eligible = null;
             private bool? __pbn__rewards_eligible;
 
-            [global::ProtoBuf.ProtoMember(29)]
-            public bool earned_holiday_award_2025
-            {
-                get => __pbn__earned_holiday_award_2025.GetValueOrDefault();
-                set => __pbn__earned_holiday_award_2025 = value;
-            }
-            public bool ShouldSerializeearned_holiday_award_2025() => __pbn__earned_holiday_award_2025 != null;
-            public void Resetearned_holiday_award_2025() => __pbn__earned_holiday_award_2025 = null;
-            private bool? __pbn__earned_holiday_award_2025;
-
             [global::ProtoBuf.ProtoMember(48)]
             public global::System.Collections.Generic.List<CMsgTrackedStat> player_tracked_stats { get; } = new global::System.Collections.Generic.List<CMsgTrackedStat>();
 
@@ -2595,6 +2655,19 @@ namespace SteamKit2.GC.Deadlock.Internal
             public bool ShouldSerializemvp_rank() => __pbn__mvp_rank != null;
             public void Resetmvp_rank() => __pbn__mvp_rank = null;
             private uint? __pbn__mvp_rank;
+
+            [global::ProtoBuf.ProtoMember(29)]
+            public bool earned_holiday_award_2025
+            {
+                get => __pbn__earned_holiday_award_2025.GetValueOrDefault();
+                set => __pbn__earned_holiday_award_2025 = value;
+            }
+            public bool ShouldSerializeearned_holiday_award_2025() => __pbn__earned_holiday_award_2025 != null;
+            public void Resetearned_holiday_award_2025() => __pbn__earned_holiday_award_2025 = null;
+            private bool? __pbn__earned_holiday_award_2025;
+
+            [global::ProtoBuf.ProtoMember(30)]
+            public global::System.Collections.Generic.List<CMsgMatchMetaDataContents.PowerUpBuff> power_up_buffs { get; } = new global::System.Collections.Generic.List<CMsgMatchMetaDataContents.PowerUpBuff>();
 
         }
 
@@ -2721,6 +2794,16 @@ namespace SteamKit2.GC.Deadlock.Internal
             public void Resetteam() => __pbn__team = null;
             private ECitadelLobbyTeam? __pbn__team;
 
+            [global::ProtoBuf.ProtoMember(11)]
+            public uint player_spirit_damage
+            {
+                get => __pbn__player_spirit_damage.GetValueOrDefault();
+                set => __pbn__player_spirit_damage = value;
+            }
+            public bool ShouldSerializeplayer_spirit_damage() => __pbn__player_spirit_damage != null;
+            public void Resetplayer_spirit_damage() => __pbn__player_spirit_damage = null;
+            private uint? __pbn__player_spirit_damage;
+
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -2829,6 +2912,36 @@ namespace SteamKit2.GC.Deadlock.Internal
             public bool ShouldSerializeplayer_slot() => __pbn__player_slot != null;
             public void Resetplayer_slot() => __pbn__player_slot = null;
             private uint? __pbn__player_slot;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class StreetBrawlRound : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint round_duration_s
+            {
+                get => __pbn__round_duration_s.GetValueOrDefault();
+                set => __pbn__round_duration_s = value;
+            }
+            public bool ShouldSerializeround_duration_s() => __pbn__round_duration_s != null;
+            public void Resetround_duration_s() => __pbn__round_duration_s = null;
+            private uint? __pbn__round_duration_s;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue(ECitadelLobbyTeam.k_ECitadelLobbyTeam_Team0)]
+            public ECitadelLobbyTeam winning_team
+            {
+                get => __pbn__winning_team ?? ECitadelLobbyTeam.k_ECitadelLobbyTeam_Team0;
+                set => __pbn__winning_team = value;
+            }
+            public bool ShouldSerializewinning_team() => __pbn__winning_team != null;
+            public void Resetwinning_team() => __pbn__winning_team = null;
+            private ECitadelLobbyTeam? __pbn__winning_team;
 
         }
 
@@ -3047,11 +3160,28 @@ namespace SteamKit2.GC.Deadlock.Internal
             public void Resetnot_scored() => __pbn__not_scored = null;
             private bool? __pbn__not_scored;
 
+            [global::ProtoBuf.ProtoMember(28)]
+            public global::System.Collections.Generic.List<uint> team_score { get; } = new global::System.Collections.Generic.List<uint>();
+
             [global::ProtoBuf.ProtoMember(29)]
             public global::System.Collections.Generic.List<CMsgTrackedStat> match_tracked_stats { get; } = new global::System.Collections.Generic.List<CMsgTrackedStat>();
 
             [global::ProtoBuf.ProtoMember(30)]
             public global::System.Collections.Generic.List<CMsgMatchMetaDataContents.Teams> teams { get; } = new global::System.Collections.Generic.List<CMsgMatchMetaDataContents.Teams>();
+
+            [global::ProtoBuf.ProtoMember(32)]
+            [global::System.ComponentModel.DefaultValue(ECitadelBotDifficulty.k_ECitadelBotDifficulty_None)]
+            public ECitadelBotDifficulty bot_difficulty
+            {
+                get => __pbn__bot_difficulty ?? ECitadelBotDifficulty.k_ECitadelBotDifficulty_None;
+                set => __pbn__bot_difficulty = value;
+            }
+            public bool ShouldSerializebot_difficulty() => __pbn__bot_difficulty != null;
+            public void Resetbot_difficulty() => __pbn__bot_difficulty = null;
+            private ECitadelBotDifficulty? __pbn__bot_difficulty;
+
+            [global::ProtoBuf.ProtoMember(33)]
+            public global::System.Collections.Generic.List<CMsgMatchMetaDataContents.StreetBrawlRound> street_brawl_rounds { get; } = new global::System.Collections.Generic.List<CMsgMatchMetaDataContents.StreetBrawlRound>();
 
         }
 
@@ -3060,6 +3190,7 @@ namespace SteamKit2.GC.Deadlock.Internal
         {
             k_eOutcome_TeamWin = 0,
             k_eOutcome_Error = 1,
+            k_eOutcome_MatchDraw = 2,
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -3077,6 +3208,7 @@ namespace SteamKit2.GC.Deadlock.Internal
             k_eItemTrophyCollector = 10,
             k_eItemCultistSacrifice = 11,
             k_eBreakable = 12,
+            k_eItemGooseEgg = 13,
         }
 
     }
@@ -3680,6 +3812,38 @@ namespace SteamKit2.GC.Deadlock.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgHeroReleaseVoteTally : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint remaining_votes
+        {
+            get => __pbn__remaining_votes.GetValueOrDefault();
+            set => __pbn__remaining_votes = value;
+        }
+        public bool ShouldSerializeremaining_votes() => __pbn__remaining_votes != null;
+        public void Resetremaining_votes() => __pbn__remaining_votes = null;
+        private uint? __pbn__remaining_votes;
+
+        [global::ProtoBuf.ProtoMember(2, IsPacked = true)]
+        public global::System.Collections.Generic.List<uint> votes_cast { get; } = new global::System.Collections.Generic.List<uint>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint daily_reward_time_stamp
+        {
+            get => __pbn__daily_reward_time_stamp.GetValueOrDefault();
+            set => __pbn__daily_reward_time_stamp = value;
+        }
+        public bool ShouldSerializedaily_reward_time_stamp() => __pbn__daily_reward_time_stamp != null;
+        public void Resetdaily_reward_time_stamp() => __pbn__daily_reward_time_stamp = null;
+        private uint? __pbn__daily_reward_time_stamp;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum CMsgLaneColor
     {
         k_ELaneColor_Invalid = 0,
@@ -3834,6 +3998,9 @@ namespace SteamKit2.GC.Deadlock.Internal
         k_ECitadelGameMode_Normal = 1,
         k_ECitadelGameMode_1v1Test = 2,
         k_ECitadelGameMode_Sandbox = 3,
+        k_ECitadelGameMode_StreetBrawl = 4,
+        k_ECitadelGameMode_ExploreNYC = 5,
+        k_ECitadelGameMode_Internal = 6,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -3860,9 +4027,9 @@ namespace SteamKit2.GC.Deadlock.Internal
     {
         k_eFeatureBanReason_Invalid = 0,
         k_eFeatureBanReason_DevCommand = 1,
-        k_eFeatureBanReason_PlayerReports = 2,
+        k_eFeatureBanReason_ReportedByOtherPlayers = 2,
         k_eFeatureBanReason_MatchAbandons = 3,
-        k_eFeatureBanReason_ExcessivePlayerReports = 4,
+        k_eFeatureBanReason_TooManyReportsSubmitted = 4,
     }
 
 }

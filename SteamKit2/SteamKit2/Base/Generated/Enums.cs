@@ -582,6 +582,26 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public enum EHardwareCompatibilityFeedbackDetails
+    {
+        k_EHardwareCompatibilityFeedbackDetails_Unset = 0,
+        k_EHardwareCompatibilityFeedbackDetails_Performance = 1,
+        k_EHardwareCompatibilityFeedbackDetails_Stability = 2,
+        k_EHardwareCompatibilityFeedbackDetails_Legibility = 4,
+        k_EHardwareCompatibilityFeedbackDetails_Input = 8,
+        k_EHardwareCompatibilityFeedbackDetails_Other = 16,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EGameFrameRateReportingPreference
+    {
+        k_EGameFrameRateReportingPreference_Unset = 0,
+        k_EGameFrameRateReportingPreference_No = 1,
+        k_EGameFrameRateReportingPreference_Yes_Anonymous = 2,
+        k_EGameFrameRateReportingPreference_Yes_NonAnonymous = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum ETouchGesture
     {
         k_ETouchGestureNone = 0,
@@ -869,7 +889,26 @@ namespace SteamKit2.Internal
         k_EContentReportResolution_RemoveAndWarn = 11,
         k_EContentReportResolution_RemoveAndBan = 12,
         k_EContentReportResolution_RemoveAndKick = 13,
-        k_EContentReportResolution_MAX = 14,
+        k_EContentReportResolution_Sanctioned = 14,
+        k_EContentReportResolution_Sustained = 15,
+        k_EContentReportResolution_MAX = 16,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EContentModerationSanction
+    {
+        k_EContentModerationSanction_Invalid = 0,
+        k_EContentModerationSanction_Deleted = 1,
+        k_EContentModerationSanction_CommunityBanned = 2,
+        k_EContentModerationSanction_HubBanned = 3,
+        k_EContentModerationSanction_TradeBanned = 4,
+        k_EContentModerationSanction_CommentHistoryDeleted = 5,
+        k_EContentModerationSanction_Relabelled = 6,
+        k_EContentModerationSanction_MarkAsSuspicious = 7,
+        k_EContentModerationSanction_Warned = 8,
+        k_EContentModerationSanction_KickedFromGroup = 9,
+        k_EContentModerationSanction_HarassmentBanned = 10,
+        k_EContentModerationSanction_MAX = 11,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -989,7 +1028,34 @@ namespace SteamKit2.Internal
         k_EPressOutletAction_Updated = 4,
         k_EPressOutletAction_Deleted = 5,
         k_EPressOutletAction_Undeleted = 6,
-        k_EPressOutletAction_MAX = 7,
+        k_EPressOutletAction_StagedAdd = 7,
+        k_EPressOutletAction_StagedDelete = 8,
+        k_EPressOutletAction_EnterStaging = 9,
+        k_EPressOutletAction_ExitStaging = 10,
+        k_EPressOutletAction_ReverseStagedAdd = 11,
+        k_EPressOutletAction_ReverseStagedDelete = 12,
+        k_EPressOutletAction_MAX = 13,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum EPressOutletMemberPendingState
+    {
+        k_EPressOutletMemberPendingState_Member = 0,
+        k_EPressOutletMemberPendingState_StagedDelete = 1,
+        k_EPressOutletMemberPendingState_StagedAdd = 2,
+        k_EPressOutletMemberPendingState_MAX = 3,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ECommentDeleteReason
+    {
+        k_ECommentDeleteReason_Invalid = 0,
+        k_ECommentDeleteReason_User = 1,
+        k_ECommentDeleteReason_ThreadOwner = 2,
+        k_ECommentDeleteReason_Moderator = 3,
+        k_ECommentDeleteReason_Support = 4,
+        k_ECommentDeleteReason_Spam = 5,
+        k_ECommentDeleteReason_AccountDeletion = 6,
     }
 
 }

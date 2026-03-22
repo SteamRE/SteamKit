@@ -239,6 +239,25 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CRemoteClient_CancelPairing_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong session_id
+        {
+            get => __pbn__session_id.GetValueOrDefault();
+            set => __pbn__session_id = value;
+        }
+        public bool ShouldSerializesession_id() => __pbn__session_id != null;
+        public void Resetsession_id() => __pbn__session_id = null;
+        private ulong? __pbn__session_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CRemoteClient_RegisterStatusUpdate_Notification : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -274,6 +293,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializedevice_id() => __pbn__device_id != null;
         public void Resetdevice_id() => __pbn__device_id = null;
         private ulong? __pbn__device_id;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public bool disable_polling
+        {
+            get => __pbn__disable_polling.GetValueOrDefault();
+            set => __pbn__disable_polling = value;
+        }
+        public bool ShouldSerializedisable_polling() => __pbn__disable_polling != null;
+        public void Resetdisable_polling() => __pbn__disable_polling = null;
+        private bool? __pbn__disable_polling;
 
     }
 
@@ -379,11 +408,41 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CRemoteClient_GetRecentClients_Request : global::ProtoBuf.IExtensible
+    public partial class CRemoteClient_Offline_Notification : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong session_id
+        {
+            get => __pbn__session_id.GetValueOrDefault();
+            set => __pbn__session_id = value;
+        }
+        public bool ShouldSerializesession_id() => __pbn__session_id != null;
+        public void Resetsession_id() => __pbn__session_id = null;
+        private ulong? __pbn__session_id;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong remote_client_id
+        {
+            get => __pbn__remote_client_id.GetValueOrDefault();
+            set => __pbn__remote_client_id = value;
+        }
+        public bool ShouldSerializeremote_client_id() => __pbn__remote_client_id != null;
+        public void Resetremote_client_id() => __pbn__remote_client_id = null;
+        private ulong? __pbn__remote_client_id;
 
     }
 
@@ -491,6 +550,15 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeis_online() => __pbn__is_online != null;
         public void Resetis_online() => __pbn__is_online = null;
         private bool? __pbn__is_online;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CRemoteClient_GetRecentClients_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
     }
 
@@ -829,6 +897,24 @@ namespace SteamKit2.Internal
 
     [global::ProtoBuf.ProtoContract()]
     public partial class CRemoteClient_AllocateSDR_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CRemoteClient_EnableSteamBroadcast_Notification : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CRemoteClient_DisableSteamBroadcast_Notification : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1540,6 +1626,15 @@ namespace SteamKit2.Internal
         }
         public bool ShouldSerializereply_packet() => __pbn__Message.Is(6);
         public void Resetreply_packet() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__Message, 6);
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public CRemoteClient_Offline_Notification offline
+        {
+            get => __pbn__Message.Is(7) ? ((CRemoteClient_Offline_Notification)__pbn__Message.Object) : default;
+            set => __pbn__Message = new global::ProtoBuf.DiscriminatedUnionObject(7, value);
+        }
+        public bool ShouldSerializeoffline() => __pbn__Message.Is(7);
+        public void Resetoffline() => global::ProtoBuf.DiscriminatedUnionObject.Reset(ref __pbn__Message, 7);
 
     }
 

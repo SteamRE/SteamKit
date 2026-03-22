@@ -3301,6 +3301,16 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetpoints_remaining() => __pbn__points_remaining = null;
         private uint? __pbn__points_remaining;
 
+        [global::ProtoBuf.ProtoMember(5)]
+        public uint volatile_limit
+        {
+            get => __pbn__volatile_limit.GetValueOrDefault();
+            set => __pbn__volatile_limit = value;
+        }
+        public bool ShouldSerializevolatile_limit() => __pbn__volatile_limit != null;
+        public void Resetvolatile_limit() => __pbn__volatile_limit = null;
+        private uint? __pbn__volatile_limit;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

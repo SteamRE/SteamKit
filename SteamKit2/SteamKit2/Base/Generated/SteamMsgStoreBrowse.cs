@@ -117,16 +117,6 @@ namespace SteamKit2.Internal
         public void Resetcountry_code() => __pbn__country_code = null;
         private string __pbn__country_code;
 
-        [global::ProtoBuf.ProtoMember(4)]
-        public int steam_realm
-        {
-            get => __pbn__steam_realm.GetValueOrDefault();
-            set => __pbn__steam_realm = value;
-        }
-        public bool ShouldSerializesteam_realm() => __pbn__steam_realm != null;
-        public void Resetsteam_realm() => __pbn__steam_realm = null;
-        private int? __pbn__steam_realm;
-
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -629,6 +619,9 @@ namespace SteamKit2.Internal
             [global::ProtoBuf.ProtoMember(2)]
             public global::System.Collections.Generic.List<StoreItem> included_packages { get; } = new global::System.Collections.Generic.List<StoreItem>();
 
+            [global::ProtoBuf.ProtoMember(3)]
+            public global::System.Collections.Generic.List<StoreItem> included_bundles { get; } = new global::System.Collections.Generic.List<StoreItem>();
+
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -1038,6 +1031,26 @@ namespace SteamKit2.Internal
             public bool ShouldSerializeoriginal_steam_release_date() => __pbn__original_steam_release_date != null;
             public void Resetoriginal_steam_release_date() => __pbn__original_steam_release_date = null;
             private uint? __pbn__original_steam_release_date;
+
+            [global::ProtoBuf.ProtoMember(11)]
+            public uint release_from_early_access_date
+            {
+                get => __pbn__release_from_early_access_date.GetValueOrDefault();
+                set => __pbn__release_from_early_access_date = value;
+            }
+            public bool ShouldSerializerelease_from_early_access_date() => __pbn__release_from_early_access_date != null;
+            public void Resetrelease_from_early_access_date() => __pbn__release_from_early_access_date = null;
+            private uint? __pbn__release_from_early_access_date;
+
+            [global::ProtoBuf.ProtoMember(12)]
+            public uint release_from_early_access_style
+            {
+                get => __pbn__release_from_early_access_style.GetValueOrDefault();
+                set => __pbn__release_from_early_access_style = value;
+            }
+            public bool ShouldSerializerelease_from_early_access_style() => __pbn__release_from_early_access_style != null;
+            public void Resetrelease_from_early_access_style() => __pbn__release_from_early_access_style = null;
+            private uint? __pbn__release_from_early_access_style;
 
             [global::ProtoBuf.ProtoMember(4)]
             public bool is_coming_soon
@@ -1768,12 +1781,6 @@ namespace SteamKit2.Internal
                 public void Resettrailer_category() => __pbn__trailer_category = null;
                 private ETrailerCategory? __pbn__trailer_category;
 
-                [global::ProtoBuf.ProtoMember(3)]
-                public global::System.Collections.Generic.List<StoreItem.Trailers.VideoSource> trailer_480p { get; } = new global::System.Collections.Generic.List<StoreItem.Trailers.VideoSource>();
-
-                [global::ProtoBuf.ProtoMember(4)]
-                public global::System.Collections.Generic.List<StoreItem.Trailers.VideoSource> trailer_max { get; } = new global::System.Collections.Generic.List<StoreItem.Trailers.VideoSource>();
-
                 [global::ProtoBuf.ProtoMember(5)]
                 public global::System.Collections.Generic.List<StoreItem.Trailers.VideoSource> microtrailer { get; } = new global::System.Collections.Generic.List<StoreItem.Trailers.VideoSource>();
 
@@ -2420,6 +2427,17 @@ namespace SteamKit2.Internal
 
             [global::ProtoBuf.ProtoMember(9)]
             public global::System.Collections.Generic.List<uint> must_not_have_tags { get; } = new global::System.Collections.Generic.List<uint>();
+
+            [global::ProtoBuf.ProtoMember(10)]
+            [global::System.ComponentModel.DefaultValue("")]
+            public string hub_description
+            {
+                get => __pbn__hub_description ?? "";
+                set => __pbn__hub_description = value;
+            }
+            public bool ShouldSerializehub_description() => __pbn__hub_description != null;
+            public void Resethub_description() => __pbn__hub_description = null;
+            private string __pbn__hub_description;
 
         }
 

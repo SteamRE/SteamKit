@@ -2181,6 +2181,185 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class UserSystemInformation : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string manufacturer
+        {
+            get => __pbn__manufacturer ?? "";
+            set => __pbn__manufacturer = value;
+        }
+        public bool ShouldSerializemanufacturer() => __pbn__manufacturer != null;
+        public void Resetmanufacturer() => __pbn__manufacturer = null;
+        private string __pbn__manufacturer;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string model
+        {
+            get => __pbn__model ?? "";
+            set => __pbn__model = value;
+        }
+        public bool ShouldSerializemodel() => __pbn__model != null;
+        public void Resetmodel() => __pbn__model = null;
+        private string __pbn__model;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string dx_video_card
+        {
+            get => __pbn__dx_video_card ?? "";
+            set => __pbn__dx_video_card = value;
+        }
+        public bool ShouldSerializedx_video_card() => __pbn__dx_video_card != null;
+        public void Resetdx_video_card() => __pbn__dx_video_card = null;
+        private string __pbn__dx_video_card;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public int dx_vendorid
+        {
+            get => __pbn__dx_vendorid.GetValueOrDefault();
+            set => __pbn__dx_vendorid = value;
+        }
+        public bool ShouldSerializedx_vendorid() => __pbn__dx_vendorid != null;
+        public void Resetdx_vendorid() => __pbn__dx_vendorid = null;
+        private int? __pbn__dx_vendorid;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public int dx_deviceid
+        {
+            get => __pbn__dx_deviceid.GetValueOrDefault();
+            set => __pbn__dx_deviceid = value;
+        }
+        public bool ShouldSerializedx_deviceid() => __pbn__dx_deviceid != null;
+        public void Resetdx_deviceid() => __pbn__dx_deviceid = null;
+        private int? __pbn__dx_deviceid;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint num_gpu
+        {
+            get => __pbn__num_gpu.GetValueOrDefault();
+            set => __pbn__num_gpu = value;
+        }
+        public bool ShouldSerializenum_gpu() => __pbn__num_gpu != null;
+        public void Resetnum_gpu() => __pbn__num_gpu = null;
+        private uint? __pbn__num_gpu;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public ulong system_ram
+        {
+            get => __pbn__system_ram.GetValueOrDefault();
+            set => __pbn__system_ram = value;
+        }
+        public bool ShouldSerializesystem_ram() => __pbn__system_ram != null;
+        public void Resetsystem_ram() => __pbn__system_ram = null;
+        private ulong? __pbn__system_ram;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string os
+        {
+            get => __pbn__os ?? "";
+            set => __pbn__os = value;
+        }
+        public bool ShouldSerializeos() => __pbn__os != null;
+        public void Resetos() => __pbn__os = null;
+        private string __pbn__os;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string cpu_vendor
+        {
+            get => __pbn__cpu_vendor ?? "";
+            set => __pbn__cpu_vendor = value;
+        }
+        public bool ShouldSerializecpu_vendor() => __pbn__cpu_vendor != null;
+        public void Resetcpu_vendor() => __pbn__cpu_vendor = null;
+        private string __pbn__cpu_vendor;
+
+        [global::ProtoBuf.ProtoMember(10)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string cpu_name
+        {
+            get => __pbn__cpu_name ?? "";
+            set => __pbn__cpu_name = value;
+        }
+        public bool ShouldSerializecpu_name() => __pbn__cpu_name != null;
+        public void Resetcpu_name() => __pbn__cpu_name = null;
+        private string __pbn__cpu_name;
+
+        [global::ProtoBuf.ProtoMember(11)]
+        public uint gaming_device_type
+        {
+            get => __pbn__gaming_device_type.GetValueOrDefault();
+            set => __pbn__gaming_device_type = value;
+        }
+        public bool ShouldSerializegaming_device_type() => __pbn__gaming_device_type != null;
+        public void Resetgaming_device_type() => __pbn__gaming_device_type = null;
+        private uint? __pbn__gaming_device_type;
+
+        [global::ProtoBuf.ProtoMember(12)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string dx_driver_version
+        {
+            get => __pbn__dx_driver_version ?? "";
+            set => __pbn__dx_driver_version = value;
+        }
+        public bool ShouldSerializedx_driver_version() => __pbn__dx_driver_version != null;
+        public void Resetdx_driver_version() => __pbn__dx_driver_version = null;
+        private string __pbn__dx_driver_version;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string adapter_description
+        {
+            get => __pbn__adapter_description ?? "";
+            set => __pbn__adapter_description = value;
+        }
+        public bool ShouldSerializeadapter_description() => __pbn__adapter_description != null;
+        public void Resetadapter_description() => __pbn__adapter_description = null;
+        private string __pbn__adapter_description;
+
+        [global::ProtoBuf.ProtoMember(15)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string driver_version
+        {
+            get => __pbn__driver_version ?? "";
+            set => __pbn__driver_version = value;
+        }
+        public bool ShouldSerializedriver_version() => __pbn__driver_version != null;
+        public void Resetdriver_version() => __pbn__driver_version = null;
+        private string __pbn__driver_version;
+
+        [global::ProtoBuf.ProtoMember(16)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string driver_date
+        {
+            get => __pbn__driver_date ?? "";
+            set => __pbn__driver_date = value;
+        }
+        public bool ShouldSerializedriver_date() => __pbn__driver_date != null;
+        public void Resetdriver_date() => __pbn__driver_date = null;
+        private string __pbn__driver_date;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        public uint vram_size
+        {
+            get => __pbn__vram_size.GetValueOrDefault();
+            set => __pbn__vram_size = value;
+        }
+        public bool ShouldSerializevram_size() => __pbn__vram_size != null;
+        public void Resetvram_size() => __pbn__vram_size = null;
+        private uint? __pbn__vram_size;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EBanContentCheckResult
     {
         k_EBanContentCheckResult_NotScanned = 0,

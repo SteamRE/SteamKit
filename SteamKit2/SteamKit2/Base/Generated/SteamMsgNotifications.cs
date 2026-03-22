@@ -227,6 +227,7 @@ namespace SteamKit2.Internal
         k_ESteamNotificationType_PartnerEvent = 27,
         k_ESteamNotificationType_PlaytestInvite = 28,
         k_ESteamNotificationType_TradeReversal = 29,
+        k_ESteamNotificationType_ReportedContentAction = 30,
     }
 
     public class SteamNotificationClient : SteamUnifiedMessages.UnifiedService

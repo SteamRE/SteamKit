@@ -1521,11 +1521,14 @@ namespace SteamKit2.Internal
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<FrameRateReport> reports { get; } = new global::System.Collections.Generic.List<FrameRateReport>();
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<FrameRate> frame_rates { get; } = new global::System.Collections.Generic.List<FrameRate>();
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public UserSystemInformation system_info { get; set; }
 
         [global::ProtoBuf.ProtoContract()]
-        public partial class FrameRateReport : global::ProtoBuf.IExtensible
+        public partial class FrameRate : global::ProtoBuf.IExtensible
         {
             private global::ProtoBuf.IExtension __pbn__extensionData;
             global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1552,79 +1555,6 @@ namespace SteamKit2.Internal
             private uint? __pbn__frame_rate;
 
             [global::ProtoBuf.ProtoMember(3)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string manufacturer
-            {
-                get => __pbn__manufacturer ?? "";
-                set => __pbn__manufacturer = value;
-            }
-            public bool ShouldSerializemanufacturer() => __pbn__manufacturer != null;
-            public void Resetmanufacturer() => __pbn__manufacturer = null;
-            private string __pbn__manufacturer;
-
-            [global::ProtoBuf.ProtoMember(4)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string model
-            {
-                get => __pbn__model ?? "";
-                set => __pbn__model = value;
-            }
-            public bool ShouldSerializemodel() => __pbn__model != null;
-            public void Resetmodel() => __pbn__model = null;
-            private string __pbn__model;
-
-            [global::ProtoBuf.ProtoMember(5)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string dx_video_card
-            {
-                get => __pbn__dx_video_card ?? "";
-                set => __pbn__dx_video_card = value;
-            }
-            public bool ShouldSerializedx_video_card() => __pbn__dx_video_card != null;
-            public void Resetdx_video_card() => __pbn__dx_video_card = null;
-            private string __pbn__dx_video_card;
-
-            [global::ProtoBuf.ProtoMember(6)]
-            public int dx_vendorid
-            {
-                get => __pbn__dx_vendorid.GetValueOrDefault();
-                set => __pbn__dx_vendorid = value;
-            }
-            public bool ShouldSerializedx_vendorid() => __pbn__dx_vendorid != null;
-            public void Resetdx_vendorid() => __pbn__dx_vendorid = null;
-            private int? __pbn__dx_vendorid;
-
-            [global::ProtoBuf.ProtoMember(7)]
-            public int dx_deviceid
-            {
-                get => __pbn__dx_deviceid.GetValueOrDefault();
-                set => __pbn__dx_deviceid = value;
-            }
-            public bool ShouldSerializedx_deviceid() => __pbn__dx_deviceid != null;
-            public void Resetdx_deviceid() => __pbn__dx_deviceid = null;
-            private int? __pbn__dx_deviceid;
-
-            [global::ProtoBuf.ProtoMember(8)]
-            public uint num_gpu
-            {
-                get => __pbn__num_gpu.GetValueOrDefault();
-                set => __pbn__num_gpu = value;
-            }
-            public bool ShouldSerializenum_gpu() => __pbn__num_gpu != null;
-            public void Resetnum_gpu() => __pbn__num_gpu = null;
-            private uint? __pbn__num_gpu;
-
-            [global::ProtoBuf.ProtoMember(9)]
-            public ulong system_ram
-            {
-                get => __pbn__system_ram.GetValueOrDefault();
-                set => __pbn__system_ram = value;
-            }
-            public bool ShouldSerializesystem_ram() => __pbn__system_ram != null;
-            public void Resetsystem_ram() => __pbn__system_ram = null;
-            private ulong? __pbn__system_ram;
-
-            [global::ProtoBuf.ProtoMember(10)]
             public int session_seconds
             {
                 get => __pbn__session_seconds.GetValueOrDefault();
@@ -1633,6 +1563,16 @@ namespace SteamKit2.Internal
             public bool ShouldSerializesession_seconds() => __pbn__session_seconds != null;
             public void Resetsession_seconds() => __pbn__session_seconds = null;
             private int? __pbn__session_seconds;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public uint framegen_frame_rate
+            {
+                get => __pbn__framegen_frame_rate.GetValueOrDefault();
+                set => __pbn__framegen_frame_rate = value;
+            }
+            public bool ShouldSerializeframegen_frame_rate() => __pbn__framegen_frame_rate != null;
+            public void Resetframegen_frame_rate() => __pbn__framegen_frame_rate = null;
+            private uint? __pbn__framegen_frame_rate;
 
         }
 

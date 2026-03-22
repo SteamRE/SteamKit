@@ -341,6 +341,36 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(11)]
         public global::System.Collections.Generic.List<EStreamTransport> supported_transport { get; } = new global::System.Collections.Generic.List<EStreamTransport>();
 
+        [global::ProtoBuf.ProtoMember(12)]
+        public int maximum_framerate_numerator
+        {
+            get => __pbn__maximum_framerate_numerator.GetValueOrDefault();
+            set => __pbn__maximum_framerate_numerator = value;
+        }
+        public bool ShouldSerializemaximum_framerate_numerator() => __pbn__maximum_framerate_numerator != null;
+        public void Resetmaximum_framerate_numerator() => __pbn__maximum_framerate_numerator = null;
+        private int? __pbn__maximum_framerate_numerator;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public int maximum_framerate_denominator
+        {
+            get => __pbn__maximum_framerate_denominator.GetValueOrDefault();
+            set => __pbn__maximum_framerate_denominator = value;
+        }
+        public bool ShouldSerializemaximum_framerate_denominator() => __pbn__maximum_framerate_denominator != null;
+        public void Resetmaximum_framerate_denominator() => __pbn__maximum_framerate_denominator = null;
+        private int? __pbn__maximum_framerate_denominator;
+
+        [global::ProtoBuf.ProtoMember(14)]
+        public bool display_hdr
+        {
+            get => __pbn__display_hdr.GetValueOrDefault();
+            set => __pbn__display_hdr = value;
+        }
+        public bool ShouldSerializedisplay_hdr() => __pbn__display_hdr != null;
+        public void Resetdisplay_hdr() => __pbn__display_hdr = null;
+        private bool? __pbn__display_hdr;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class ReservedGamepad : global::ProtoBuf.IExtensible
         {

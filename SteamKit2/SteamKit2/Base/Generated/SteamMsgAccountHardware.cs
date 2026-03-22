@@ -892,6 +892,191 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CAccountHardware_SaveHardware_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string friendly_name
+        {
+            get => __pbn__friendly_name ?? "";
+            set => __pbn__friendly_name = value;
+        }
+        public bool ShouldSerializefriendly_name() => __pbn__friendly_name != null;
+        public void Resetfriendly_name() => __pbn__friendly_name = null;
+        private string __pbn__friendly_name;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public UserSystemInformation system_info { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool backfill_user_reviews
+        {
+            get => __pbn__backfill_user_reviews.GetValueOrDefault();
+            set => __pbn__backfill_user_reviews = value;
+        }
+        public bool ShouldSerializebackfill_user_reviews() => __pbn__backfill_user_reviews != null;
+        public void Resetbackfill_user_reviews() => __pbn__backfill_user_reviews = null;
+        private bool? __pbn__backfill_user_reviews;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAccountHardware_SaveHardware_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong hardware_id
+        {
+            get => __pbn__hardware_id.GetValueOrDefault();
+            set => __pbn__hardware_id = value;
+        }
+        public bool ShouldSerializehardware_id() => __pbn__hardware_id != null;
+        public void Resethardware_id() => __pbn__hardware_id = null;
+        private ulong? __pbn__hardware_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAccountHardware_ManageSavedHardware_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong hardware_id
+        {
+            get => __pbn__hardware_id.GetValueOrDefault();
+            set => __pbn__hardware_id = value;
+        }
+        public bool ShouldSerializehardware_id() => __pbn__hardware_id != null;
+        public void Resethardware_id() => __pbn__hardware_id = null;
+        private ulong? __pbn__hardware_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool delete_hardware
+        {
+            get => __pbn__delete_hardware.GetValueOrDefault();
+            set => __pbn__delete_hardware = value;
+        }
+        public bool ShouldSerializedelete_hardware() => __pbn__delete_hardware != null;
+        public void Resetdelete_hardware() => __pbn__delete_hardware = null;
+        private bool? __pbn__delete_hardware;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string friendly_name_update
+        {
+            get => __pbn__friendly_name_update ?? "";
+            set => __pbn__friendly_name_update = value;
+        }
+        public bool ShouldSerializefriendly_name_update() => __pbn__friendly_name_update != null;
+        public void Resetfriendly_name_update() => __pbn__friendly_name_update = null;
+        private string __pbn__friendly_name_update;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAccountHardware_ManageSavedHardware_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAccountHardware_GetSavedHardwareList_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAccountHardware_SavedHardware_Details : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong hardware_id
+        {
+            get => __pbn__hardware_id.GetValueOrDefault();
+            set => __pbn__hardware_id = value;
+        }
+        public bool ShouldSerializehardware_id() => __pbn__hardware_id != null;
+        public void Resethardware_id() => __pbn__hardware_id = null;
+        private ulong? __pbn__hardware_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string friendly_name
+        {
+            get => __pbn__friendly_name ?? "";
+            set => __pbn__friendly_name = value;
+        }
+        public bool ShouldSerializefriendly_name() => __pbn__friendly_name != null;
+        public void Resetfriendly_name() => __pbn__friendly_name = null;
+        private string __pbn__friendly_name;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint timestamp_created
+        {
+            get => __pbn__timestamp_created.GetValueOrDefault();
+            set => __pbn__timestamp_created = value;
+        }
+        public bool ShouldSerializetimestamp_created() => __pbn__timestamp_created != null;
+        public void Resettimestamp_created() => __pbn__timestamp_created = null;
+        private uint? __pbn__timestamp_created;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public ulong hardware_cluster_id
+        {
+            get => __pbn__hardware_cluster_id.GetValueOrDefault();
+            set => __pbn__hardware_cluster_id = value;
+        }
+        public bool ShouldSerializehardware_cluster_id() => __pbn__hardware_cluster_id != null;
+        public void Resethardware_cluster_id() => __pbn__hardware_cluster_id = null;
+        private ulong? __pbn__hardware_cluster_id;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public UserSystemInformation system_info { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CAccountHardware_GetSavedHardwareList_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public global::System.Collections.Generic.List<CAccountHardware_SavedHardware_Details> saved_hardware { get; } = new global::System.Collections.Generic.List<CAccountHardware_SavedHardware_Details>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EValveIndexComponent
     {
         k_EValveIndexComponentUnknown = 0,
@@ -968,6 +1153,21 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CAccountHardware_GetSteamDeckComponents_Request, CAccountHardware_GetSteamDeckComponents_Response>( "AccountHardware.GetSteamDeckComponents#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountHardware_SaveHardware_Response>> SaveHardware( CAccountHardware_SaveHardware_Request request )
+        {
+            return UnifiedMessages.SendMessage<CAccountHardware_SaveHardware_Request, CAccountHardware_SaveHardware_Response>( "AccountHardware.SaveHardware#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountHardware_ManageSavedHardware_Response>> ManageSavedHardware( CAccountHardware_ManageSavedHardware_Request request )
+        {
+            return UnifiedMessages.SendMessage<CAccountHardware_ManageSavedHardware_Request, CAccountHardware_ManageSavedHardware_Response>( "AccountHardware.ManageSavedHardware#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountHardware_GetSavedHardwareList_Response>> GetSavedHardwareList( CAccountHardware_GetSavedHardwareList_Request request )
+        {
+            return UnifiedMessages.SendMessage<CAccountHardware_GetSavedHardwareList_Request, CAccountHardware_GetSavedHardwareList_Response>( "AccountHardware.GetSavedHardwareList#1", request );
+        }
+
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
@@ -1007,6 +1207,15 @@ namespace SteamKit2.Internal
                     break;
                 case "GetSteamDeckComponents":
                     PostResponseMsg<CAccountHardware_GetSteamDeckComponents_Response>( packetMsg );
+                    break;
+                case "SaveHardware":
+                    PostResponseMsg<CAccountHardware_SaveHardware_Response>( packetMsg );
+                    break;
+                case "ManageSavedHardware":
+                    PostResponseMsg<CAccountHardware_ManageSavedHardware_Response>( packetMsg );
+                    break;
+                case "GetSavedHardwareList":
+                    PostResponseMsg<CAccountHardware_GetSavedHardwareList_Response>( packetMsg );
                     break;
             }
         }

@@ -4105,7 +4105,7 @@ namespace SteamKit2.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1, IsRequired = true)]
-        public string selected_display_name { get; set; }
+        public string selected_device_name { get; set; }
 
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<MonitorInfo> monitors { get; } = new global::System.Collections.Generic.List<MonitorInfo>();

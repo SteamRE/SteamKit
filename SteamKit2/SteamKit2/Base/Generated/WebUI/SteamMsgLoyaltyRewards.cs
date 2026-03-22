@@ -372,6 +372,16 @@ namespace SteamKit2.WebUI.Internal
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
+        [global::ProtoBuf.ProtoMember(1)]
+        public int elanguage
+        {
+            get => __pbn__elanguage.GetValueOrDefault();
+            set => __pbn__elanguage = value;
+        }
+        public bool ShouldSerializeelanguage() => __pbn__elanguage != null;
+        public void Resetelanguage() => __pbn__elanguage = null;
+        private int? __pbn__elanguage;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -438,6 +448,38 @@ namespace SteamKit2.WebUI.Internal
         public bool ShouldSerializepurchaseable() => __pbn__purchaseable != null;
         public void Resetpurchaseable() => __pbn__purchaseable = null;
         private bool? __pbn__purchaseable;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string localized_title
+        {
+            get => __pbn__localized_title ?? "";
+            set => __pbn__localized_title = value;
+        }
+        public bool ShouldSerializelocalized_title() => __pbn__localized_title != null;
+        public void Resetlocalized_title() => __pbn__localized_title = null;
+        private string __pbn__localized_title;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string localized_desc
+        {
+            get => __pbn__localized_desc ?? "";
+            set => __pbn__localized_desc = value;
+        }
+        public bool ShouldSerializelocalized_desc() => __pbn__localized_desc != null;
+        public void Resetlocalized_desc() => __pbn__localized_desc = null;
+        private string __pbn__localized_desc;
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public uint available_until
+        {
+            get => __pbn__available_until.GetValueOrDefault();
+            set => __pbn__available_until = value;
+        }
+        public bool ShouldSerializeavailable_until() => __pbn__available_until != null;
+        public void Resetavailable_until() => __pbn__available_until = null;
+        private uint? __pbn__available_until;
 
     }
 

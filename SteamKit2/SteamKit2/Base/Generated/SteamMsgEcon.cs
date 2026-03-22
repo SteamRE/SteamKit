@@ -617,6 +617,38 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(33)]
         public CEconItem_ContainerProperties container_properties { get; set; }
 
+        [global::ProtoBuf.ProtoMember(34)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string market_bucket_group_name
+        {
+            get => __pbn__market_bucket_group_name ?? "";
+            set => __pbn__market_bucket_group_name = value;
+        }
+        public bool ShouldSerializemarket_bucket_group_name() => __pbn__market_bucket_group_name != null;
+        public void Resetmarket_bucket_group_name() => __pbn__market_bucket_group_name = null;
+        private string __pbn__market_bucket_group_name;
+
+        [global::ProtoBuf.ProtoMember(35)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string market_bucket_group_id
+        {
+            get => __pbn__market_bucket_group_id ?? "";
+            set => __pbn__market_bucket_group_id = value;
+        }
+        public bool ShouldSerializemarket_bucket_group_id() => __pbn__market_bucket_group_id != null;
+        public void Resetmarket_bucket_group_id() => __pbn__market_bucket_group_id = null;
+        private string __pbn__market_bucket_group_id;
+
+        [global::ProtoBuf.ProtoMember(37)]
+        public uint sealed_type
+        {
+            get => __pbn__sealed_type.GetValueOrDefault();
+            set => __pbn__sealed_type = value;
+        }
+        public bool ShouldSerializesealed_type() => __pbn__sealed_type != null;
+        public void Resetsealed_type() => __pbn__sealed_type = null;
+        private uint? __pbn__sealed_type;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

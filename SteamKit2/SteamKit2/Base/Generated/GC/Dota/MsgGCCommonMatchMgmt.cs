@@ -1444,6 +1444,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_ELaneSelectionFlagGroup_CORE = 7,
         k_ELaneSelectionFlagGroup_SUPPORT = 24,
         k_ELaneSelectionFlagGroup_ALL = 31,
+        k_ELaneSelectionFlagGroup_HIGHDEMAND = 18,
     }
 
     [global::ProtoBuf.ProtoContract()]

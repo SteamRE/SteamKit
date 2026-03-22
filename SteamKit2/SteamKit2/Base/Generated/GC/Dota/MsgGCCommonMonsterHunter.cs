@@ -998,6 +998,7 @@ namespace SteamKit2.GC.Dota.Internal
         k_eMonsterHunterAuditAction_DevClaimInvestigationRewards = 12,
         k_eMonsterHunterAuditAction_HeroCodexUpdate = 13,
         k_eMonsterHunterAuditAction_EventActionReward = 14,
+        k_eMonsterHunterAuditAction_AutoCraft = 15,
     }
 
     [global::ProtoBuf.ProtoContract()]

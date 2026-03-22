@@ -159,6 +159,16 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CRemoteClient_RemotePacket_Notification>( "RemoteClientSteamClient.NotifyRemotePacket#1", request );
         }
 
+        public void NotifyEnableSteamBroadcast(CRemoteClient_EnableSteamBroadcast_Notification request )
+        {
+            UnifiedMessages.SendNotification<CRemoteClient_EnableSteamBroadcast_Notification>( "RemoteClientSteamClient.NotifyEnableSteamBroadcast#1", request );
+        }
+
+        public void NotifyDisableSteamBroadcast(CRemoteClient_DisableSteamBroadcast_Notification request )
+        {
+            UnifiedMessages.SendNotification<CRemoteClient_DisableSteamBroadcast_Notification>( "RemoteClientSteamClient.NotifyDisableSteamBroadcast#1", request );
+        }
+
         public void NotifySteamBroadcastPacket(CRemoteClient_SteamBroadcast_Notification request )
         {
             UnifiedMessages.SendNotification<CRemoteClient_SteamBroadcast_Notification>( "RemoteClientSteamClient.NotifySteamBroadcastPacket#1", request );
@@ -195,6 +205,12 @@ namespace SteamKit2.Internal
                     break;
                 case "NotifyRemotePacket":
                     PostNotificationMsg<CRemoteClient_RemotePacket_Notification>( packetMsg );
+                    break;
+                case "NotifyEnableSteamBroadcast":
+                    PostNotificationMsg<CRemoteClient_EnableSteamBroadcast_Notification>( packetMsg );
+                    break;
+                case "NotifyDisableSteamBroadcast":
+                    PostNotificationMsg<CRemoteClient_DisableSteamBroadcast_Notification>( packetMsg );
                     break;
                 case "NotifySteamBroadcastPacket":
                     PostNotificationMsg<CRemoteClient_SteamBroadcast_Notification>( packetMsg );
