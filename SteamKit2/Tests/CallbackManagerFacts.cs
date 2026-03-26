@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using SteamKit2;
 using Xunit;
@@ -257,7 +258,7 @@ namespace Tests
         }
 
         [Fact]
-        public void CorrectlysubscribesFromInsideOfCallback()
+        public void CorrectlySubscribesFromInsideOfCallback()
         {
             static void nothing( CallbackForTest cb )
             {
@@ -273,6 +274,199 @@ namespace Tests
             using var se = mgr.Subscribe<CallbackForTest>( subscribe );
 
             PostAndRunCallback( new CallbackForTest { UniqueID = Guid.NewGuid() } );
+        }
+
+        [Fact]
+        public async Task CorrectlyAwaitsForAsyncCallbacks()
+        {
+            var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
+
+            var numCallbacksRun = 0;
+            async Task action( CallbackForTest cb )
+            {
+                await Task.Delay( 100, TestContext.Current.CancellationToken );
+                Assert.Equal( callback.UniqueID, cb.UniqueID );
+                numCallbacksRun++;
+            }
+
+            using ( mgr.Subscribe<CallbackForTest>( action ) )
+            {
+                for ( var i = 0; i < 10; i++ )
+                {
+                    client.PostCallback( callback );
+                }
+
+                for ( var i = 1; i <= 10; i++ )
+                {
+                    await mgr.RunWaitCallbackAsync( TestContext.Current.CancellationToken );
+                    Assert.Equal( i, numCallbacksRun );
+                }
+
+                mgr.RunWaitAllCallbacks( TimeSpan.Zero );
+                Assert.Equal( 10, numCallbacksRun );
+            }
+        }
+
+        [Fact]
+        public async Task AsyncCallbackWithJobIDTriggersAction()
+        {
+            var jobID = new JobID( 123456 );
+            var callback = new CallbackForTest { JobID = jobID, UniqueID = Guid.NewGuid() };
+
+            var didCall = false;
+            async Task action( CallbackForTest cb )
+            {
+                await Task.Yield();
+                Assert.Equal( callback.UniqueID, cb.UniqueID );
+                Assert.Equal( jobID, cb.JobID );
+                didCall = true;
+            }
+
+            using ( mgr.Subscribe<CallbackForTest>( 123456, action ) )
+            {
+                client.PostCallback( callback );
+                await mgr.RunWaitCallbackAsync( TestContext.Current.CancellationToken );
+            }
+
+            Assert.True( didCall );
+        }
+
+        [Fact]
+        public async Task AsyncCallbackDoesNotTriggerActionForWrongJobID()
+        {
+            var jobID = new JobID( 123456 );
+            var callback = new CallbackForTest { JobID = jobID, UniqueID = Guid.NewGuid() };
+
+            var didCall = false;
+            async Task action( CallbackForTest cb )
+            {
+                await Task.Yield();
+                didCall = true;
+            }
+
+            using ( mgr.Subscribe<CallbackForTest>( 123, action ) )
+            {
+                client.PostCallback( callback );
+                await mgr.RunWaitCallbackAsync( TestContext.Current.CancellationToken );
+            }
+
+            Assert.False( didCall );
+        }
+
+        [Fact]
+        public void AsyncCallbackIsBlockedBySyncRunCallbacks()
+        {
+            var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
+
+            var didCall = false;
+            async Task action( CallbackForTest cb )
+            {
+                await Task.Delay( 50, TestContext.Current.CancellationToken );
+                Assert.Equal( callback.UniqueID, cb.UniqueID );
+                didCall = true;
+            }
+
+            using ( mgr.Subscribe<CallbackForTest>( action ) )
+            {
+                PostAndRunCallback( callback );
+            }
+
+            Assert.True( didCall );
+        }
+
+        [Fact]
+        public void AsyncSubscribedFunctionDoesNotRunWhenSubscriptionIsDisposed()
+        {
+            var callback = new CallbackForTest();
+
+            var callCount = 0;
+            async Task action( CallbackForTest cb )
+            {
+                await Task.Yield();
+                callCount++;
+            }
+
+            using ( mgr.Subscribe<CallbackForTest>( action ) )
+            {
+                PostAndRunCallback( callback );
+            }
+            PostAndRunCallback( callback );
+
+            Assert.Equal( 1, callCount );
+        }
+
+        [Fact]
+        public async Task MixedSyncAndAsyncSubscribersBothTrigger()
+        {
+            var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
+
+            var syncCalled = false;
+            var asyncCalled = false;
+
+            void syncAction( CallbackForTest cb )
+            {
+                Assert.Equal( callback.UniqueID, cb.UniqueID );
+                syncCalled = true;
+            }
+
+            async Task asyncAction( CallbackForTest cb )
+            {
+                await Task.Yield();
+                Assert.Equal( callback.UniqueID, cb.UniqueID );
+                asyncCalled = true;
+            }
+
+            using ( mgr.Subscribe<CallbackForTest>( syncAction ) )
+            using ( mgr.Subscribe<CallbackForTest>( asyncAction ) )
+            {
+                client.PostCallback( callback );
+                await mgr.RunWaitCallbackAsync( TestContext.Current.CancellationToken );
+            }
+
+            Assert.True( syncCalled );
+            Assert.True( asyncCalled );
+        }
+
+        [Fact]
+        public async Task AsyncCallbackExceptionPropagatesOnAsyncPath()
+        {
+            var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
+
+            async Task action( CallbackForTest cb )
+            {
+                await Task.Yield();
+                throw new InvalidOperationException( "test exception" );
+            }
+
+            using ( mgr.Subscribe<CallbackForTest>( action ) )
+            {
+                client.PostCallback( callback );
+
+                var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => mgr.RunWaitCallbackAsync( TestContext.Current.CancellationToken ) );
+                Assert.Equal( "test exception", ex.Message );
+            }
+        }
+
+        [Fact]
+        public void AsyncCallbackExceptionWrappedInAggregateOnSyncPath()
+        {
+            var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
+
+            async Task action( CallbackForTest cb )
+            {
+                await Task.Yield();
+                throw new InvalidOperationException( "test exception" );
+            }
+
+            using ( mgr.Subscribe<CallbackForTest>( action ) )
+            {
+                client.PostCallback( callback );
+
+                var ex = Assert.Throws<AggregateException>( () => mgr.RunCallbacks() );
+                Assert.IsType<InvalidOperationException>( ex.InnerException );
+                Assert.Equal( "test exception", ex.InnerException.Message );
+            }
         }
 
         void PostAndRunCallback(CallbackMsg callback)
