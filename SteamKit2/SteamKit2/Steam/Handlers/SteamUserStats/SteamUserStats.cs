@@ -126,6 +126,37 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Asks the Steam back-end for a set of rows for the specified users in the leaderboard.
+        /// Results are returned in a <see cref="LeaderboardEntriesCallback"/>.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
+        /// </summary>
+        /// <param name="appId">The AppID to request leaderboard rows for.</param>
+        /// <param name="id">ID of the leaderboard to view.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="LeaderboardEntriesCallback"/>.</returns>
+        /// <param name="users">The IDs of each user to request leaderboard rows for.</param>
+        public AsyncJob<LeaderboardEntriesCallback> DownloadLeaderboardEntriesForUsers( uint appId, int id, SteamID[] users )
+        {
+            var msg = new ClientMsgProtobuf<CMsgClientLBSGetLBEntries>( EMsg.ClientLBSGetLBEntries );
+            msg.SourceJobID = Client.GetNextJobID();
+
+            // routing_appid has to be set correctly to receive a response
+            msg.ProtoHeader.routing_appid = appId;
+
+            msg.Body.app_id = ( int )appId;
+            msg.Body.leaderboard_id = id;
+            msg.Body.leaderboard_data_request = ( int )ELeaderboardDataRequest.Users;
+
+            foreach ( var steamId in users )
+            {
+                msg.Body.steamids.Add( steamId.ConvertToUInt64() );
+            }
+
+            Client.Send( msg );
+
+            return new AsyncJob<LeaderboardEntriesCallback>( this.Client, msg.SourceJobID );
+        }
+
+        /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
         /// <param name="packetMsg">The packet message that contains the data.</param>

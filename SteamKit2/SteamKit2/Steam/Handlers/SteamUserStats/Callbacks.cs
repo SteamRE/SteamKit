@@ -84,7 +84,8 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is fired in response to <see cref="GetLeaderboardEntries" />.
+        /// This callback is fired in response to <see cref="GetLeaderboardEntries" />
+        /// and <see cref="SteamUserStats.DownloadLeaderboardEntriesForUsers" />.
         /// </summary>
         public class LeaderboardEntriesCallback : CallbackMsg
         {
