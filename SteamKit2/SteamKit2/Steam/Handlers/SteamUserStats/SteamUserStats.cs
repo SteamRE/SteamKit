@@ -134,7 +134,7 @@ namespace SteamKit2
         /// <param name="id">ID of the leaderboard to view.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="LeaderboardEntriesCallback"/>.</returns>
         /// <param name="users">The IDs of each user to request leaderboard rows for.</param>
-        public AsyncJob<LeaderboardEntriesCallback> DownloadLeaderboardEntriesForUsers( uint appId, int id, SteamID[] users )
+        public AsyncJob<LeaderboardEntriesCallback> DownloadLeaderboardEntriesForUsers( uint appId, int id, IEnumerable<SteamID> users )
         {
             var msg = new ClientMsgProtobuf<CMsgClientLBSGetLBEntries>( EMsg.ClientLBSGetLBEntries );
             msg.SourceJobID = Client.GetNextJobID();
