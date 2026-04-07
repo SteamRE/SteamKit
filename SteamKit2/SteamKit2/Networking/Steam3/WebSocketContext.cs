@@ -21,14 +21,12 @@ namespace SteamKit2
 
                 cts = new CancellationTokenSource();
                 socket = new ClientWebSocket();
-                semaphore = new SemaphoreSlim( 1, 1 );
                 connectionUri = ConstructUri(endPoint);
             }
 
             readonly WebSocketConnection connection;
             readonly CancellationTokenSource cts;
             readonly ClientWebSocket socket;
-            readonly SemaphoreSlim semaphore;
             readonly Uri connectionUri;
             Task? runloopTask;
             int disposed;
@@ -68,47 +66,25 @@ namespace SteamKit2
                 connection.log.LogDebug( nameof(WebSocketContext), "Connected to {0}", connectionUri);
                 connection.Connected?.Invoke(connection, EventArgs.Empty);
 
-                await semaphore.WaitAsync(CancellationToken.None).ConfigureAwait( false );
-
-                try
+                while (!cancellationToken.IsCancellationRequested && socket.State == WebSocketState.Open)
                 {
-                    while (!cancellationToken.IsCancellationRequested && socket.State == WebSocketState.Open)
+                    byte[]? packet = null;
+
+                    try
                     {
-                        byte[]? packet = null;
-
-                        try
-                        {
-                            packet = await ReadMessageAsync( cancellationToken ).ConfigureAwait( false );
-                        }
-                        catch ( Exception ex )
-                        {
-                            connection.log.LogDebug( nameof( WebSocketContext ), "Exception reading from websocket: {0} - {1}", ex.GetType().FullName, ex.Message );
-                            connection.DisconnectCore( userInitiated: false, specificContext: this );
-                            return;
-                        }
-
-                        if (packet != null && packet.Length > 0)
-                        {
-                            connection.NetMsgReceived?.Invoke(connection, new NetMsgEventArgs(packet, EndPoint));
-                        }
+                        packet = await ReadMessageAsync( cancellationToken ).ConfigureAwait( false );
+                    }
+                    catch ( Exception ex )
+                    {
+                        connection.log.LogDebug( nameof( WebSocketContext ), "Exception reading from websocket: {0} - {1}", ex.GetType().FullName, ex.Message );
+                        connection.DisconnectCore( userInitiated: false, specificContext: this );
+                        return;
                     }
 
-                    if (!cancellationToken.IsCancellationRequested && socket.State == WebSocketState.Open)
+                    if (packet != null && packet.Length > 0)
                     {
-                        connection.log.LogDebug( nameof(WebSocketContext), "Closing connection...");
-                        try
-                        {
-                            await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, null, default).ConfigureAwait(false);
-                        }
-                        catch (Win32Exception ex)
-                        {
-                            connection.log.LogDebug( nameof(WebSocketContext), "Error closing connection: {0}", ex.Message);
-                        }
+                        connection.NetMsgReceived?.Invoke(connection, new NetMsgEventArgs(packet, EndPoint));
                     }
-                }
-                finally
-                {
-                    semaphore.Release();
                 }
             }
 
@@ -128,24 +104,27 @@ namespace SteamKit2
 
             public void Dispose()
             {
-                if ( Interlocked.Exchange( ref disposed, 1 ) == 1 )
+                if (Interlocked.Exchange(ref disposed, 1) == 1)
                 {
                     return;
                 }
 
                 cts.Cancel();
-                semaphore.Wait();
-                try
-                {
-                    cts.Dispose();
-                    runloopTask = null;
+                cts.Dispose();
+                runloopTask = null;
 
-                    socket.Dispose();
-                }
-                finally
+                if (socket.State == WebSocketState.Open)
                 {
-                    semaphore.Dispose();
+                    try
+                    {
+                        socket.CloseAsync(WebSocketCloseStatus.NormalClosure, null, CancellationToken.None).RunSynchronously();
+                    }
+                    catch ( WebSocketException )
+                    {
+                    }
                 }
+
+                socket.Dispose();
             }
 
             async Task<byte[]?> ReadMessageAsync( CancellationToken cancellationToken )
