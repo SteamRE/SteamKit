@@ -86,19 +86,6 @@ namespace SteamKit2
                         connection.NetMsgReceived?.Invoke(connection, new NetMsgEventArgs(packet, EndPoint));
                     }
                 }
-
-                if (socket.State == WebSocketState.Open)
-                {
-                    connection.log.LogDebug( nameof(WebSocketContext), "Closing connection...");
-                    try
-                    {
-                        await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, null, default).ConfigureAwait(false);
-                    }
-                    catch (Win32Exception ex)
-                    {
-                        connection.log.LogDebug( nameof(WebSocketContext), "Error closing connection: {0}", ex.Message);
-                    }
-                }
             }
 
             public async Task SendAsync(Memory<byte> data)
@@ -125,6 +112,17 @@ namespace SteamKit2
                 cts.Cancel();
                 cts.Dispose();
                 runloopTask = null;
+
+                if (socket.State == WebSocketState.Open)
+                {
+                    try
+                    {
+                        socket.CloseAsync(WebSocketCloseStatus.NormalClosure, null, CancellationToken.None).RunSynchronously();
+                    }
+                    catch ( WebSocketException )
+                    {
+                    }
+                }
 
                 socket.Dispose();
             }
