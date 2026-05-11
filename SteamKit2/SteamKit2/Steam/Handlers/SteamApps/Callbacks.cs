@@ -18,6 +18,8 @@ namespace SteamKit2
 
         /// <summary>
         /// This callback is fired during logon, informing the client of its available licenses.
+        /// It is also fired when the license list is changed, for example due to a purchase,
+        /// redemption of a product key, or processing of a product refund.
         /// </summary>
         public sealed class LicenseListCallback : CallbackMsg
         {
