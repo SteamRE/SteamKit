@@ -73,6 +73,14 @@ namespace SteamKit2
         ISteamConfigurationBuilder WithServerListProvider(IServerListProvider provider);
 
         /// <summary>
+        /// Configures the <see cref="TimeProvider"/> for this <see cref="SteamConfiguration" />.
+        /// This can be changed for testing and diagnostic purposes.
+        /// </summary>
+        /// <param name="timeProvider">The time provider to use.</param>
+        /// <returns>A builder with modified configuration.</returns>
+        ISteamConfigurationBuilder WithTimeProvider(TimeProvider timeProvider);
+
+        /// <summary>
         /// Configures the Universe that this <see cref="SteamConfiguration" /> belongs to.
         /// </summary>
         /// <param name="universe">The Universe to connect to. This should always be <see cref="EUniverse.Public"/> unless
