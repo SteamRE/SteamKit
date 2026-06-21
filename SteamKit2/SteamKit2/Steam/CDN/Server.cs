@@ -91,6 +91,9 @@ namespace SteamKit2.CDN
         /// </summary>
         public uint[] AllowedAppIds { get; internal set; } = [];
 
+        /// <summary>
+        /// Gets the list of bypass proxies.
+        /// </summary>
         public List<string> BypassProxiesOfType { get; internal set; } = new List<string>();
 
         /// <summary>
