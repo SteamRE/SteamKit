@@ -4,6 +4,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Net;
 
 namespace SteamKit2.CDN
@@ -89,6 +90,11 @@ namespace SteamKit2.CDN
         /// Gets the list of app ids this server can be used with.
         /// </summary>
         public uint[] AllowedAppIds { get; internal set; } = [];
+
+        /// <summary>
+        /// Gets the list of bypass proxies.
+        /// </summary>
+        public List<string> BypassProxiesOfType { get; internal set; } = new List<string>();
 
         /// <summary>
         /// Performs an implicit conversion from <see cref="System.Net.IPEndPoint"/> to <see cref="Server"/>.

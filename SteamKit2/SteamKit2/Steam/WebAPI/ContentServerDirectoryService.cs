@@ -115,6 +115,7 @@ namespace SteamKit2
                     ProxyRequestPathTemplate = child.proxy_request_path_template,
 
                     AllowedAppIds = child.allowed_app_ids.ToArray(),
+                    BypassProxiesOfType = child.bypass_proxies_of_type
                 }
                 );
             }
