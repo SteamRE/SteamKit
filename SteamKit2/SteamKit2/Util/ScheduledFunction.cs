@@ -17,19 +17,19 @@ namespace SteamKit2
         Action func;
 
         bool bStarted;
-        Timer timer;
+        ITimer timer;
 
-        public ScheduledFunction( Action func )
-            : this( func, TimeSpan.FromMilliseconds( -1 ) )
+        public ScheduledFunction( TimeProvider timeProvider, Action func )
+            : this( timeProvider, func, TimeSpan.FromMilliseconds( -1 ) )
         {
         }
 
-        public ScheduledFunction( Action func, TimeSpan delay )
+        public ScheduledFunction( TimeProvider timeProvider, Action func, TimeSpan delay )
         {
             this.func = func;
             this.Delay = delay;
 
-            timer = new Timer( Tick, null, TimeSpan.FromMilliseconds( -1 ), delay );
+            timer = timeProvider.CreateTimer( Tick, null, TimeSpan.FromMilliseconds( -1 ), delay );
         }
         ~ScheduledFunction()
         {
