@@ -1,0 +1,27 @@
+name: Build ProtobufDumper
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore Resources/ProtobufDumper/ProtobufDumper.sln
+
+      - name: Build
+        run: dotnet build Resources/ProtobufDumper/ProtobufDumper.sln -c Release
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ProtobufDumper
+          path: Resources/ProtobufDumper/ProtobufDumper/bin/Release/**
