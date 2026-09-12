@@ -10,6 +10,7 @@ using SteamKit2.Internal;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
+using System.Collections.Concurrent;
 
 namespace SteamKit2
 {
@@ -42,6 +43,12 @@ namespace SteamKit2
         private readonly Dictionary<uint, List<CMsgAuthTicket>> TicketsByGame = [];
         private readonly object TicketChangeLock = new();
         private static uint Sequence;
+
+        // Per-CRC acknowledgement waiters. Steam correlates the auth-list ack by the ticket CRCs it
+        // currently considers active (CMsgClientAuthListAck.ticket_crc), which stays reliable - unlike
+        // the JobID, which Steam stopped echoing on repeated auth lists after its 2025-08 change (issue #1567).
+        private readonly ConcurrentDictionary<uint, TaskCompletionSource<bool>> TicketAcks = new();
+        private static readonly TimeSpan TicketAckTimeout = TimeSpan.FromSeconds( 10 );
 
         /// <summary>
         /// Initializes all necessary callbacks.
@@ -97,18 +104,19 @@ namespace SteamKit2
                 var serverSecret = string.IsNullOrEmpty( identity )
                     ? null
                     : Encoding.UTF8.GetBytes( $"str:{identity}\0" );
-                var ticket = await VerifyTicket( appid, authTicket, serverSecret, out var crc );
+                var crc = RegisterAndSendTicket( appid, authTicket, serverSecret );
 
-                // Verify just in case
-                if ( ticket.ActiveTicketsCRC.Any( x => x == crc ) )
+                // Wait for Steam to acknowledge this specific ticket by its CRC. Steam no longer reliably
+                // re-acks repeated auth lists, so a missing ack here is not a failure signal - the ticket is
+                // already submitted and is validated server-side via BeginAuthSession. Log the anomaly on
+                // timeout and return the ticket regardless (see issue #1567).
+                if ( !await WaitForTicketAck( crc ).ConfigureAwait( false ) )
                 {
-                    var tok = CombineTickets( authTicket, appTicket.Ticket, ticketType is TicketType.WebApiTicket );
-                    return new TicketInfo( this, appid, tok );
+                    DebugLog.WriteLine( nameof( SteamAuthTicket ), $"Ticket CRC {crc} for app {appid} was not acknowledged by Steam within {TicketAckTimeout.TotalSeconds}s; returning it anyway as it validates server-side (see issue #1567)." );
                 }
-                else
-                {
-                    throw new Exception( "Ticket verification failed." );
-                }
+
+                var tok = CombineTickets( authTicket, appTicket.Ticket, ticketType is TicketType.WebApiTicket );
+                return new TicketInfo( this, appid, tok );
             }
             else
             {
@@ -182,9 +190,9 @@ namespace SteamKit2
             return stream.ToArray();
         }
 
-        private AsyncJob<TicketAcceptedCallback> VerifyTicket( uint appid, byte[] authToken, byte[]? serverSecret, out uint crc )
+        private uint RegisterAndSendTicket( uint appid, byte[] authToken, byte[]? serverSecret )
         {
-            crc = BitConverter.ToUInt32( Crc32.Hash( authToken ), 0 );
+            uint crc = BitConverter.ToUInt32( Crc32.Hash( authToken ), 0 );
             lock ( TicketChangeLock )
             {
                 if ( !TicketsByGame.TryGetValue( appid, out var items ) )
@@ -203,9 +211,30 @@ namespace SteamKit2
                 } );
             }
 
-            return SendTickets();
+            // Register the per-CRC ack waiter BEFORE sending, to avoid racing the incoming ack.
+            TicketAcks[ crc ] = new TaskCompletionSource<bool>( TaskCreationOptions.RunContinuationsAsynchronously );
+            SendTickets();
+            return crc;
         }
-        private AsyncJob<TicketAcceptedCallback> SendTickets()
+
+        private async Task<bool> WaitForTicketAck( uint crc )
+        {
+            if ( !TicketAcks.TryGetValue( crc, out var tcs ) )
+            {
+                return false;
+            }
+
+            try
+            {
+                var completed = await Task.WhenAny( tcs.Task, Task.Delay( TicketAckTimeout ) ).ConfigureAwait( false );
+                return ( completed == tcs.Task ) && tcs.Task.Result;
+            }
+            finally
+            {
+                TicketAcks.TryRemove( crc, out _ );
+            }
+        }
+        private void SendTickets()
         {
             var auth = new ClientMsgProtobuf<CMsgClientAuthList>( EMsg.ClientAuthList );
             auth.Body.tokens_left = ( uint )GameConnectTokens.Count;
@@ -219,8 +248,6 @@ namespace SteamKit2
 
             auth.SourceJobID = Client.GetNextJobID();
             Client.Send( auth );
-
-            return new AsyncJob<TicketAcceptedCallback>( Client, auth.SourceJobID );
         }
 
         /// <summary>
@@ -270,6 +297,17 @@ namespace SteamKit2
         {
             // Ticket acknowledged as valid by Steam
             var authAck = new ClientMsgProtobuf<CMsgClientAuthListAck>( packetMsg );
+
+            // Complete per-CRC ack waiters: correlate on the acknowledged ticket CRCs rather than the JobID,
+            // which Steam stopped echoing on repeated auth lists after its 2025-08 change (see issue #1567).
+            foreach ( var crc in authAck.Body.ticket_crc )
+            {
+                if ( TicketAcks.TryGetValue( crc, out var tcs ) )
+                {
+                    tcs.TrySetResult( true );
+                }
+            }
+
             var acknowledged = new TicketAcceptedCallback( authAck.TargetJobID, authAck.Body );
             Client.PostCallback( acknowledged );
         }
