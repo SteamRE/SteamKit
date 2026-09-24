@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -561,7 +561,7 @@ namespace ProtobufDumper
                 source
             };
 
-            foreach ( var type in protobufTypeMap )
+            foreach ( var type in protobufTypeMap.OrderBy( t => t.Value.Source is FieldDescriptorProto f ? f.number : 0 ) )
             {
                 if ( dependencies.Contains( type.Value.Proto ) && type.Value.Source is FieldDescriptorProto field )
                 {
@@ -577,7 +577,7 @@ namespace ProtobufDumper
         {
             var levelspace = new string( '\t', level );
 
-            foreach ( var mapping in fields.GroupBy( x => x.extendee ) )
+            foreach ( var mapping in fields.GroupBy( x => x.extendee ).OrderBy( g => g.Key ) )
             {
                 if ( string.IsNullOrEmpty( mapping.Key ) )
                     throw new Exception( "Empty extendee in extension, this should not be possible" );
