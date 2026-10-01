@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="protobuf-net" Version="3.4.21" />
+    <PackageReference Include="protobuf-net" Version="3.4.30" />
   </ItemGroup>
 
 </Project>
