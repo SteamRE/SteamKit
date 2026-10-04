@@ -534,7 +534,8 @@ namespace ProtobufDumper
                     {
                         var value = enumProto.value.Find( x => x.number == idx );
 
-                        optionsKv.Add( key, value.name );
+                        // Unknown values can only be written as their number
+                        optionsKv.Add( key, value?.name ?? Convert.ToString( idx, CultureInfo.InvariantCulture ) );
                     }
                 }
                 else if ( fieldData is DescriptorProto messageProto )
@@ -920,41 +921,64 @@ namespace ProtobufDumper
             };
         }
 
+        static DataFormat GetDataFormat( FieldDescriptorProto.Type type )
+        {
+            return type switch
+            {
+                FieldDescriptorProto.Type.TYPE_FIXED32 or FieldDescriptorProto.Type.TYPE_FIXED64 or
+                FieldDescriptorProto.Type.TYPE_SFIXED32 or FieldDescriptorProto.Type.TYPE_SFIXED64 => DataFormat.FixedSize,
+                _ => DataFormat.Default,
+            };
+        }
+
         static bool ExtractType( IExtensible data, FieldDescriptorProto field, out string value )
         {
             switch ( field.type )
             {
                 case FieldDescriptorProto.Type.TYPE_INT32:
+                case FieldDescriptorProto.Type.TYPE_SFIXED32:
+                    if ( Extensible.TryGetValue( data, field.number, GetDataFormat( field.type ), out int int32 ) )
+                    {
+                        value = Convert.ToString( int32, CultureInfo.InvariantCulture );
+                        return true;
+                    }
+                    break;
                 case FieldDescriptorProto.Type.TYPE_UINT32:
                 case FieldDescriptorProto.Type.TYPE_FIXED32:
-                    if ( Extensible.TryGetValue( data, field.number, out uint int32 ) )
+                    if ( Extensible.TryGetValue( data, field.number, GetDataFormat( field.type ), out uint uint32 ) )
                     {
-                        value = Convert.ToString( int32 );
+                        value = Convert.ToString( uint32, CultureInfo.InvariantCulture );
                         return true;
                     }
                     break;
                 case FieldDescriptorProto.Type.TYPE_INT64:
-                case FieldDescriptorProto.Type.TYPE_UINT64:
-                case FieldDescriptorProto.Type.TYPE_FIXED64:
-                    if ( Extensible.TryGetValue( data, field.number, out ulong int64 ) )
+                case FieldDescriptorProto.Type.TYPE_SFIXED64:
+                    if ( Extensible.TryGetValue( data, field.number, GetDataFormat( field.type ), out long int64 ) )
                     {
-                        value = Convert.ToString( int64 );
+                        value = Convert.ToString( int64, CultureInfo.InvariantCulture );
                         return true;
                     }
                     break;
-                case FieldDescriptorProto.Type.TYPE_SINT32:
-                case FieldDescriptorProto.Type.TYPE_SFIXED32:
-                    if ( Extensible.TryGetValue( data, field.number, out int sint32 ) )
+                case FieldDescriptorProto.Type.TYPE_UINT64:
+                case FieldDescriptorProto.Type.TYPE_FIXED64:
+                    if ( Extensible.TryGetValue( data, field.number, GetDataFormat( field.type ), out ulong uint64 ) )
                     {
-                        value = Convert.ToString( sint32 );
+                        value = Convert.ToString( uint64, CultureInfo.InvariantCulture );
+                        return true;
+                    }
+                    break;
+                // protobuf-net does not decode zigzag for extension values
+                case FieldDescriptorProto.Type.TYPE_SINT32:
+                    if ( Extensible.TryGetValue( data, field.number, out uint sint32 ) )
+                    {
+                        value = Convert.ToString( ( int )( sint32 >> 1 ) ^ -( int )( sint32 & 1 ), CultureInfo.InvariantCulture );
                         return true;
                     }
                     break;
                 case FieldDescriptorProto.Type.TYPE_SINT64:
-                case FieldDescriptorProto.Type.TYPE_SFIXED64:
-                    if ( Extensible.TryGetValue( data, field.number, out long sint64 ) )
+                    if ( Extensible.TryGetValue( data, field.number, out ulong sint64 ) )
                     {
-                        value = Convert.ToString( sint64 );
+                        value = Convert.ToString( ( long )( sint64 >> 1 ) ^ -( long )( sint64 & 1 ), CultureInfo.InvariantCulture );
                         return true;
                     }
                     break;
@@ -975,21 +999,21 @@ namespace ProtobufDumper
                 case FieldDescriptorProto.Type.TYPE_BYTES:
                     if ( Extensible.TryGetValue( data, field.number, out byte[] bytes ) )
                     {
-                        value = Convert.ToString( bytes );
+                        value = Util.ToLiteral( bytes );
                         return true;
                     }
                     break;
                 case FieldDescriptorProto.Type.TYPE_DOUBLE:
                     if ( Extensible.TryGetValue( data, field.number, out double dbl ) )
                     {
-                        value = Convert.ToString( dbl, CultureInfo.InvariantCulture );
+                        value = Util.ToLiteral( dbl );
                         return true;
                     }
                     break;
                 case FieldDescriptorProto.Type.TYPE_FLOAT:
                     if ( Extensible.TryGetValue( data, field.number, out float flt ) )
                     {
-                        value = Convert.ToString( flt, CultureInfo.InvariantCulture );
+                        value = Util.ToLiteral( flt );
                         return true;
                     }
                     break;
