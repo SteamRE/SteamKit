@@ -20,6 +20,8 @@ $SK2Base = Join-Path $PSScriptRoot '..\..\SteamKit2\SteamKit2\Base\Generated'
 
 Push-Location
 
+$failed = @()
+
 $protos = Import-Csv -LiteralPath (Join-Path $PSScriptRoot 'protos.csv') |
     Where-Object { (!$ProtoDir) -or ($_.ProtoDir -in $ProtoDir)}
 
@@ -32,9 +34,10 @@ $params = $CommonParams + @(
     )
 
 & dotnet $ProtoGenDll $params > $null
+if ($LASTEXITCODE -ne 0) { $failed += 'gc.proto' }
 
 # protobuf dumper descriptor
-Set-Location -LiteralPath (Join-Path $ProtoBase 'google\protobuf')
+Set-Location -LiteralPath (Join-Path $ProtoBase 'steam\google\protobuf')
 $params = $CommonParams + @(
     '--proto', "descriptor.proto",
     '--output', (Join-Path $PSScriptRoot '..\ProtobufDumper\ProtobufDumper\Descriptor.cs'),
@@ -52,8 +55,15 @@ $protos | % {
     )
 
     & dotnet $ProtoGenDll -- $params > $null
+    if ($LASTEXITCODE -ne 0) { $failed += "$($_.ProtoDir)/$($_.ProtoFileName)" }
 
     $_
 }
 
 Pop-Location
+
+# A proto that fails to generate keeps its previous generated code
+if ($failed.Count -gt 0) {
+    Write-Error "Failed to generate: $($failed -join ', ')"
+    exit 1
+}
