@@ -625,6 +625,17 @@ namespace ProtobufDumper
                 source
             };
 
+            // Options that the binary's descriptor.proto has but Descriptor.cs does not, such as the ones Valve added,
+            // are left over as unknown fields. The ones Descriptor.cs has were read into its properties.
+            if ( protobufTypeMap.TryGetValue( typeName, out var optionsType ) && optionsType.Source is DescriptorProto optionsProto )
+            {
+                foreach ( var field in optionsProto.field )
+                {
+                    if ( field.name != "uninterpreted_option" )
+                        DumpOptionsFieldRecursive( field, options, optionsKv, field.name );
+                }
+            }
+
             foreach ( var type in protobufTypeMap )
             {
                 if ( dependencies.Contains( type.Value.Proto ) && type.Value.Source is FieldDescriptorProto field )
