@@ -20,7 +20,6 @@ namespace ProtobufDumper
         static void ScanFile( byte[] data, ProcessCandidate processCandidate )
         {
             const byte markerStart = 0x0A;
-            const int markerLength = 2;
 
             var i = 0;
             while ( i < data.Length - 1 )
@@ -32,7 +31,21 @@ namespace ProtobufDumper
                     break;
                 }
 
-                var expectedLength = data[ i + 1 ];
+                // The name length is a varint, names of 128 characters or more take two bytes
+                var expectedLength = data[ i + 1 ] & 0x7F;
+                var markerLength = 2;
+
+                if ( ( data[ i + 1 ] & 0x80 ) != 0 )
+                {
+                    if ( i + 2 >= data.Length || ( data[ i + 2 ] & 0x80 ) != 0 )
+                    {
+                        i++;
+                        continue;
+                    }
+
+                    expectedLength |= data[ i + 2 ] << 7;
+                    markerLength = 3;
+                }
 
                 if ( i + markerLength + expectedLength > data.Length )
                 {
