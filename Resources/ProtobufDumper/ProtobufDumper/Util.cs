@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace ProtobufDumper
 {
@@ -40,13 +41,26 @@ namespace ProtobufDumper
                         literal.Append( "\\\"" );
                         break;
                     default:
-                        literal.Append( c );
+                        if ( c < 0x20 || c == 0x7F )
+                        {
+                            AppendOctal( literal, c );
+                        }
+                        else
+                        {
+                            literal.Append( c );
+                        }
                         break;
                 }
             }
 
             literal.Append( '"' );
             return literal.ToString();
+        }
+
+        static void AppendOctal( StringBuilder literal, int c )
+        {
+            literal.Append( '\\' );
+            literal.Append( Convert.ToString( c, 8 ).PadLeft( 3, '0' ) );
         }
     }
 }
