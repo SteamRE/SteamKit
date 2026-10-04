@@ -1136,14 +1136,14 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(2)]
         [global::System.ComponentModel.DefaultValue("")]
-        public string computed_serial
+        public string component_serial
         {
-            get => __pbn__computed_serial ?? "";
-            set => __pbn__computed_serial = value;
+            get => __pbn__component_serial ?? "";
+            set => __pbn__component_serial = value;
         }
-        public bool ShouldSerializecomputed_serial() => __pbn__computed_serial != null;
-        public void Resetcomputed_serial() => __pbn__computed_serial = null;
-        private string __pbn__computed_serial;
+        public bool ShouldSerializecomponent_serial() => __pbn__component_serial != null;
+        public void Resetcomponent_serial() => __pbn__component_serial = null;
+        private string __pbn__component_serial;
 
     }
 

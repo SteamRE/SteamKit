@@ -1446,29 +1446,8 @@ namespace SteamKit2.GC.Dota.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<TabletPeriodDataEntry> tablet_period_data { get; } = new global::System.Collections.Generic.List<TabletPeriodDataEntry>();
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class TabletPeriodDataEntry : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint key
-            {
-                get => __pbn__key.GetValueOrDefault();
-                set => __pbn__key = value;
-            }
-            public bool ShouldSerializekey() => __pbn__key != null;
-            public void Resetkey() => __pbn__key = null;
-            private uint? __pbn__key;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public CMsgDotaFantasyCraftingTabletPeriodData value { get; set; }
-
-        }
+        [global::ProtoBuf.ProtoMap]
+        public global::System.Collections.Generic.Dictionary<uint, CMsgDotaFantasyCraftingTabletPeriodData> tablet_period_data { get; } = new global::System.Collections.Generic.Dictionary<uint, CMsgDotaFantasyCraftingTabletPeriodData>();
 
     }
 
@@ -1483,10 +1462,12 @@ namespace SteamKit2.GC.Dota.Internal
         public global::System.Collections.Generic.List<uint> available_rolls { get; } = new global::System.Collections.Generic.List<uint>();
 
         [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<PeriodRollTokensEntry> period_roll_tokens { get; } = new global::System.Collections.Generic.List<PeriodRollTokensEntry>();
+        [global::ProtoBuf.ProtoMap]
+        public global::System.Collections.Generic.Dictionary<uint, uint> period_roll_tokens { get; } = new global::System.Collections.Generic.Dictionary<uint, uint>();
 
         [global::ProtoBuf.ProtoMember(3)]
-        public global::System.Collections.Generic.List<PeriodScoresEntry> period_scores { get; } = new global::System.Collections.Generic.List<PeriodScoresEntry>();
+        [global::ProtoBuf.ProtoMap]
+        public global::System.Collections.Generic.Dictionary<uint, CMsgDotaFantasyCraftingUserData.PeriodScore> period_scores { get; } = new global::System.Collections.Generic.Dictionary<uint, CMsgDotaFantasyCraftingUserData.PeriodScore>();
 
         [global::ProtoBuf.ProtoContract()]
         public partial class PeriodScore : global::ProtoBuf.IExtensible
@@ -1514,57 +1495,6 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializepercentile() => __pbn__percentile != null;
             public void Resetpercentile() => __pbn__percentile = null;
             private float? __pbn__percentile;
-
-        }
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class PeriodRollTokensEntry : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint key
-            {
-                get => __pbn__key.GetValueOrDefault();
-                set => __pbn__key = value;
-            }
-            public bool ShouldSerializekey() => __pbn__key != null;
-            public void Resetkey() => __pbn__key = null;
-            private uint? __pbn__key;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public uint value
-            {
-                get => __pbn__value.GetValueOrDefault();
-                set => __pbn__value = value;
-            }
-            public bool ShouldSerializevalue() => __pbn__value != null;
-            public void Resetvalue() => __pbn__value = null;
-            private uint? __pbn__value;
-
-        }
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class PeriodScoresEntry : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint key
-            {
-                get => __pbn__key.GetValueOrDefault();
-                set => __pbn__key = value;
-            }
-            public bool ShouldSerializekey() => __pbn__key != null;
-            public void Resetkey() => __pbn__key = null;
-            private uint? __pbn__key;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public CMsgDotaFantasyCraftingUserData.PeriodScore value { get; set; }
 
         }
 

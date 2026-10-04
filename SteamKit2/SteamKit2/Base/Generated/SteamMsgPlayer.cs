@@ -2895,6 +2895,16 @@ namespace SteamKit2.Internal
         public void Resetcrc_schema() => __pbn__crc_schema = null;
         private uint? __pbn__crc_schema;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool app_running
+        {
+            get => __pbn__app_running.GetValueOrDefault();
+            set => __pbn__app_running = value;
+        }
+        public bool ShouldSerializeapp_running() => __pbn__app_running != null;
+        public void Resetapp_running() => __pbn__app_running = null;
+        private bool? __pbn__app_running;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

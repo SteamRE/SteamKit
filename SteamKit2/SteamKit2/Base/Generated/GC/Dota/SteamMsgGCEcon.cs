@@ -3597,16 +3597,6 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetsteam_txn_id() => __pbn__steam_txn_id = null;
         private ulong? __pbn__steam_txn_id;
 
-        [global::ProtoBuf.ProtoMember(3)]
-        public ulong partner_txn_id
-        {
-            get => __pbn__partner_txn_id.GetValueOrDefault();
-            set => __pbn__partner_txn_id = value;
-        }
-        public bool ShouldSerializepartner_txn_id() => __pbn__partner_txn_id != null;
-        public void Resetpartner_txn_id() => __pbn__partner_txn_id = null;
-        private ulong? __pbn__partner_txn_id;
-
         [global::ProtoBuf.ProtoMember(4, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steam_id
         {

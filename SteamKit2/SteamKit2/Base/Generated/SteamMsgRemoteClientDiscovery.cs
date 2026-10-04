@@ -319,6 +319,16 @@ namespace SteamKit2.Internal
         public void Resetconnected_paired_network_hash() => __pbn__connected_paired_network_hash = null;
         private ulong? __pbn__connected_paired_network_hash;
 
+        [global::ProtoBuf.ProtoMember(32, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong connecting_paired_network_hash
+        {
+            get => __pbn__connecting_paired_network_hash.GetValueOrDefault();
+            set => __pbn__connecting_paired_network_hash = value;
+        }
+        public bool ShouldSerializeconnecting_paired_network_hash() => __pbn__connecting_paired_network_hash != null;
+        public void Resetconnecting_paired_network_hash() => __pbn__connecting_paired_network_hash = null;
+        private ulong? __pbn__connecting_paired_network_hash;
+
         [global::ProtoBuf.ProtoMember(29)]
         public bool wifi_dongle_present
         {

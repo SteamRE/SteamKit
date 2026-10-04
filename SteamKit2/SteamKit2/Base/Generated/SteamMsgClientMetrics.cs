@@ -1638,6 +1638,16 @@ namespace SteamKit2.Internal
             public void Resetseconds_since_active() => __pbn__seconds_since_active = null;
             private uint? __pbn__seconds_since_active;
 
+            [global::ProtoBuf.ProtoMember(7)]
+            public uint frame_rate_limit
+            {
+                get => __pbn__frame_rate_limit.GetValueOrDefault();
+                set => __pbn__frame_rate_limit = value;
+            }
+            public bool ShouldSerializeframe_rate_limit() => __pbn__frame_rate_limit != null;
+            public void Resetframe_rate_limit() => __pbn__frame_rate_limit = null;
+            private uint? __pbn__frame_rate_limit;
+
         }
 
     }

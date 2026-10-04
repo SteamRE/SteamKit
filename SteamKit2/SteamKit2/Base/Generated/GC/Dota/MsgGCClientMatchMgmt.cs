@@ -1162,6 +1162,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetclient_version() => __pbn__client_version = null;
         private uint? __pbn__client_version;
 
+        [global::ProtoBuf.ProtoMember(6, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong nonce
+        {
+            get => __pbn__nonce.GetValueOrDefault();
+            set => __pbn__nonce = value;
+        }
+        public bool ShouldSerializenonce() => __pbn__nonce != null;
+        public void Resetnonce() => __pbn__nonce = null;
+        private ulong? __pbn__nonce;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -33,14 +33,14 @@ namespace SteamKit2.GC.Dota.Internal
         public global::System.Collections.Generic.List<uint> region_ping_times { get; } = new global::System.Collections.Generic.List<uint>();
 
         [global::ProtoBuf.ProtoMember(6)]
-        public uint region_ping_failed_bitmask
+        public ulong region_ping_failed_bitmask
         {
             get => __pbn__region_ping_failed_bitmask.GetValueOrDefault();
             set => __pbn__region_ping_failed_bitmask = value;
         }
         public bool ShouldSerializeregion_ping_failed_bitmask() => __pbn__region_ping_failed_bitmask != null;
         public void Resetregion_ping_failed_bitmask() => __pbn__region_ping_failed_bitmask = null;
-        private uint? __pbn__region_ping_failed_bitmask;
+        private ulong? __pbn__region_ping_failed_bitmask;
 
         [global::ProtoBuf.ProtoMember(10)]
         public bool is_plus_subscriber

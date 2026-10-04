@@ -71,7 +71,8 @@ namespace SteamKit2.GC.Dota.Internal
         public CMsgMonsterHunterMaterialQuantity material_inventory { get; set; }
 
         [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<HeroCodexEntry> hero_codex { get; } = new global::System.Collections.Generic.List<HeroCodexEntry>();
+        [global::ProtoBuf.ProtoMap]
+        public global::System.Collections.Generic.Dictionary<int, CMsgMonsterHunterHeroCodexEntry> hero_codex { get; } = new global::System.Collections.Generic.Dictionary<int, CMsgMonsterHunterHeroCodexEntry>();
 
         [global::ProtoBuf.ProtoMember(3)]
         public int unlocked_count
@@ -82,28 +83,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeunlocked_count() => __pbn__unlocked_count != null;
         public void Resetunlocked_count() => __pbn__unlocked_count = null;
         private int? __pbn__unlocked_count;
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class HeroCodexEntry : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public int key
-            {
-                get => __pbn__key.GetValueOrDefault();
-                set => __pbn__key = value;
-            }
-            public bool ShouldSerializekey() => __pbn__key != null;
-            public void Resetkey() => __pbn__key = null;
-            private int? __pbn__key;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public CMsgMonsterHunterHeroCodexEntry value { get; set; }
-
-        }
 
     }
 

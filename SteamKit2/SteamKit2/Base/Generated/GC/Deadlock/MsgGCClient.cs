@@ -201,6 +201,212 @@ namespace SteamKit2.GC.Deadlock.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CSOAccountCabalMembership : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint account_id
+        {
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
+        }
+        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+        public void Resetaccount_id() => __pbn__account_id = null;
+        private uint? __pbn__account_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong cabal_id
+        {
+            get => __pbn__cabal_id.GetValueOrDefault();
+            set => __pbn__cabal_id = value;
+        }
+        public bool ShouldSerializecabal_id() => __pbn__cabal_id != null;
+        public void Resetcabal_id() => __pbn__cabal_id = null;
+        private ulong? __pbn__cabal_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint state
+        {
+            get => __pbn__state.GetValueOrDefault();
+            set => __pbn__state = value;
+        }
+        public bool ShouldSerializestate() => __pbn__state != null;
+        public void Resetstate() => __pbn__state = null;
+        private uint? __pbn__state;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgCitadelCabal : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong cabal_id
+        {
+            get => __pbn__cabal_id.GetValueOrDefault();
+            set => __pbn__cabal_id = value;
+        }
+        public bool ShouldSerializecabal_id() => __pbn__cabal_id != null;
+        public void Resetcabal_id() => __pbn__cabal_id = null;
+        private ulong? __pbn__cabal_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string cabal_name
+        {
+            get => __pbn__cabal_name ?? "";
+            set => __pbn__cabal_name = value;
+        }
+        public bool ShouldSerializecabal_name() => __pbn__cabal_name != null;
+        public void Resetcabal_name() => __pbn__cabal_name = null;
+        private string __pbn__cabal_name;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint created_time
+        {
+            get => __pbn__created_time.GetValueOrDefault();
+            set => __pbn__created_time = value;
+        }
+        public bool ShouldSerializecreated_time() => __pbn__created_time != null;
+        public void Resetcreated_time() => __pbn__created_time = null;
+        private uint? __pbn__created_time;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public uint created_by
+        {
+            get => __pbn__created_by.GetValueOrDefault();
+            set => __pbn__created_by = value;
+        }
+        public bool ShouldSerializecreated_by() => __pbn__created_by != null;
+        public void Resetcreated_by() => __pbn__created_by = null;
+        private uint? __pbn__created_by;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public global::System.Collections.Generic.List<Member> members { get; } = new global::System.Collections.Generic.List<Member>();
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public global::System.Collections.Generic.List<MMStats> mm_stats { get; } = new global::System.Collections.Generic.List<MMStats>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class MMStats : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue(ECitadelCabalMMTier.k_eCabalMMTier_Invalid)]
+            public ECitadelCabalMMTier mm_tier
+            {
+                get => __pbn__mm_tier ?? ECitadelCabalMMTier.k_eCabalMMTier_Invalid;
+                set => __pbn__mm_tier = value;
+            }
+            public bool ShouldSerializemm_tier() => __pbn__mm_tier != null;
+            public void Resetmm_tier() => __pbn__mm_tier = null;
+            private ECitadelCabalMMTier? __pbn__mm_tier;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint wins
+            {
+                get => __pbn__wins.GetValueOrDefault();
+                set => __pbn__wins = value;
+            }
+            public bool ShouldSerializewins() => __pbn__wins != null;
+            public void Resetwins() => __pbn__wins = null;
+            private uint? __pbn__wins;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint matches
+            {
+                get => __pbn__matches.GetValueOrDefault();
+                set => __pbn__matches = value;
+            }
+            public bool ShouldSerializematches() => __pbn__matches != null;
+            public void Resetmatches() => __pbn__matches = null;
+            private uint? __pbn__matches;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Member : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint account_id
+            {
+                get => __pbn__account_id.GetValueOrDefault();
+                set => __pbn__account_id = value;
+            }
+            public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+            public void Resetaccount_id() => __pbn__account_id = null;
+            private uint? __pbn__account_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            [global::System.ComponentModel.DefaultValue(CMsgCitadelCabal.EMemberState.k_eMemberState_Left)]
+            public CMsgCitadelCabal.EMemberState member_state
+            {
+                get => __pbn__member_state ?? CMsgCitadelCabal.EMemberState.k_eMemberState_Left;
+                set => __pbn__member_state = value;
+            }
+            public bool ShouldSerializemember_state() => __pbn__member_state != null;
+            public void Resetmember_state() => __pbn__member_state = null;
+            private CMsgCitadelCabal.EMemberState? __pbn__member_state;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint time_stamp
+            {
+                get => __pbn__time_stamp.GetValueOrDefault();
+                set => __pbn__time_stamp = value;
+            }
+            public bool ShouldSerializetime_stamp() => __pbn__time_stamp != null;
+            public void Resettime_stamp() => __pbn__time_stamp = null;
+            private uint? __pbn__time_stamp;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public uint wins
+            {
+                get => __pbn__wins.GetValueOrDefault();
+                set => __pbn__wins = value;
+            }
+            public bool ShouldSerializewins() => __pbn__wins != null;
+            public void Resetwins() => __pbn__wins = null;
+            private uint? __pbn__wins;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public uint matches
+            {
+                get => __pbn__matches.GetValueOrDefault();
+                set => __pbn__matches = value;
+            }
+            public bool ShouldSerializematches() => __pbn__matches != null;
+            public void Resetmatches() => __pbn__matches = null;
+            private uint? __pbn__matches;
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public global::System.Collections.Generic.List<CMsgCitadelCabal.MMStats> mm_stats { get; } = new global::System.Collections.Generic.List<CMsgCitadelCabal.MMStats>();
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EMemberState
+        {
+            k_eMemberState_Left = 0,
+            k_eMemberState_Active = 1,
+            k_eMemberState_Invited = 2,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CSOGameAccountClient : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -336,16 +542,6 @@ namespace SteamKit2.GC.Deadlock.Internal
         public bool ShouldSerializereport_ban_until() => __pbn__report_ban_until != null;
         public void Resetreport_ban_until() => __pbn__report_ban_until = null;
         private uint? __pbn__report_ban_until;
-
-        [global::ProtoBuf.ProtoMember(14)]
-        public uint ranked_badge_level
-        {
-            get => __pbn__ranked_badge_level.GetValueOrDefault();
-            set => __pbn__ranked_badge_level = value;
-        }
-        public bool ShouldSerializeranked_badge_level() => __pbn__ranked_badge_level != null;
-        public void Resetranked_badge_level() => __pbn__ranked_badge_level = null;
-        private uint? __pbn__ranked_badge_level;
 
         [global::ProtoBuf.ProtoMember(15)]
         public uint priority_tokens
@@ -2215,6 +2411,9 @@ namespace SteamKit2.GC.Deadlock.Internal
             k_eSetDesiresLaningTogether = 23,
             k_eSetMMPreference = 24,
             k_eSetPrivateLobbyGameMode = 25,
+            k_eSetCorruptedItemShopSpawnTime = 26,
+            k_eSetActiveCabal = 27,
+            k_eSetCabalMMTier = 28,
         }
 
     }
@@ -2586,15 +2785,15 @@ namespace SteamKit2.GC.Deadlock.Internal
         private ulong? __pbn__party_id;
 
         [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue(EEvent.k_ePlayerKicked)]
-        public EEvent @event
+        [global::System.ComponentModel.DefaultValue(EPartyEvent.k_ePlayerKicked)]
+        public EPartyEvent @event
         {
-            get => __pbn__event ?? EEvent.k_ePlayerKicked;
+            get => __pbn__event ?? EPartyEvent.k_ePlayerKicked;
             set => __pbn__event = value;
         }
         public bool ShouldSerializeevent() => __pbn__event != null;
         public void Resetevent() => __pbn__event = null;
-        private EEvent? __pbn__event;
+        private EPartyEvent? __pbn__event;
 
         [global::ProtoBuf.ProtoMember(3)]
         public uint initiator_account_id
@@ -2648,7 +2847,7 @@ namespace SteamKit2.GC.Deadlock.Internal
         private ulong? __pbn__uint_data;
 
         [global::ProtoBuf.ProtoContract()]
-        public enum EEvent
+        public enum EPartyEvent
         {
             k_ePlayerKicked = 1,
             k_eJoinedParty = 3,
@@ -2906,6 +3105,16 @@ namespace SteamKit2.GC.Deadlock.Internal
         public bool ShouldSerializerank_interval() => __pbn__rank_interval != null;
         public void Resetrank_interval() => __pbn__rank_interval = null;
         private uint? __pbn__rank_interval;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public ulong cabal_id
+        {
+            get => __pbn__cabal_id.GetValueOrDefault();
+            set => __pbn__cabal_id = value;
+        }
+        public bool ShouldSerializecabal_id() => __pbn__cabal_id != null;
+        public void Resetcabal_id() => __pbn__cabal_id = null;
+        private ulong? __pbn__cabal_id;
 
     }
 
@@ -3893,222 +4102,6 @@ namespace SteamKit2.GC.Deadlock.Internal
             k_eResult_InvalidMatch = 6,
             k_eResult_MatchInFlight = 7,
             k_eResult_Timeout = 8,
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGCToClientDevAnnouncements : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<Announcement> announcements { get; } = new global::System.Collections.Generic.List<Announcement>();
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class Announcement : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint priority
-            {
-                get => __pbn__priority.GetValueOrDefault();
-                set => __pbn__priority = value;
-            }
-            public bool ShouldSerializepriority() => __pbn__priority != null;
-            public void Resetpriority() => __pbn__priority = null;
-            private uint? __pbn__priority;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string title
-            {
-                get => __pbn__title ?? "";
-                set => __pbn__title = value;
-            }
-            public bool ShouldSerializetitle() => __pbn__title != null;
-            public void Resettitle() => __pbn__title = null;
-            private string __pbn__title;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string message
-            {
-                get => __pbn__message ?? "";
-                set => __pbn__message = value;
-            }
-            public bool ShouldSerializemessage() => __pbn__message != null;
-            public void Resetmessage() => __pbn__message = null;
-            private string __pbn__message;
-
-            [global::ProtoBuf.ProtoMember(4)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string url
-            {
-                get => __pbn__url ?? "";
-                set => __pbn__url = value;
-            }
-            public bool ShouldSerializeurl() => __pbn__url != null;
-            public void Reseturl() => __pbn__url = null;
-            private string __pbn__url;
-
-            [global::ProtoBuf.ProtoMember(5)]
-            public uint unique_id
-            {
-                get => __pbn__unique_id.GetValueOrDefault();
-                set => __pbn__unique_id = value;
-            }
-            public bool ShouldSerializeunique_id() => __pbn__unique_id != null;
-            public void Resetunique_id() => __pbn__unique_id = null;
-            private uint? __pbn__unique_id;
-
-            [global::ProtoBuf.ProtoMember(6)]
-            public uint posted_time
-            {
-                get => __pbn__posted_time.GetValueOrDefault();
-                set => __pbn__posted_time = value;
-            }
-            public bool ShouldSerializeposted_time() => __pbn__posted_time != null;
-            public void Resetposted_time() => __pbn__posted_time = null;
-            private uint? __pbn__posted_time;
-
-            [global::ProtoBuf.ProtoMember(7)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string patch_version
-            {
-                get => __pbn__patch_version ?? "";
-                set => __pbn__patch_version = value;
-            }
-            public bool ShouldSerializepatch_version() => __pbn__patch_version != null;
-            public void Resetpatch_version() => __pbn__patch_version = null;
-            private string __pbn__patch_version;
-
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientToGCModifyDevAnnouncements : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(EOperation.k_eCreate)]
-        public EOperation operation
-        {
-            get => __pbn__operation ?? EOperation.k_eCreate;
-            set => __pbn__operation = value;
-        }
-        public bool ShouldSerializeoperation() => __pbn__operation != null;
-        public void Resetoperation() => __pbn__operation = null;
-        private EOperation? __pbn__operation;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint target_id
-        {
-            get => __pbn__target_id.GetValueOrDefault();
-            set => __pbn__target_id = value;
-        }
-        public bool ShouldSerializetarget_id() => __pbn__target_id != null;
-        public void Resettarget_id() => __pbn__target_id = null;
-        private uint? __pbn__target_id;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public uint priority
-        {
-            get => __pbn__priority.GetValueOrDefault();
-            set => __pbn__priority = value;
-        }
-        public bool ShouldSerializepriority() => __pbn__priority != null;
-        public void Resetpriority() => __pbn__priority = null;
-        private uint? __pbn__priority;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string title
-        {
-            get => __pbn__title ?? "";
-            set => __pbn__title = value;
-        }
-        public bool ShouldSerializetitle() => __pbn__title != null;
-        public void Resettitle() => __pbn__title = null;
-        private string __pbn__title;
-
-        [global::ProtoBuf.ProtoMember(5)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string message
-        {
-            get => __pbn__message ?? "";
-            set => __pbn__message = value;
-        }
-        public bool ShouldSerializemessage() => __pbn__message != null;
-        public void Resetmessage() => __pbn__message = null;
-        private string __pbn__message;
-
-        [global::ProtoBuf.ProtoMember(6)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string url
-        {
-            get => __pbn__url ?? "";
-            set => __pbn__url = value;
-        }
-        public bool ShouldSerializeurl() => __pbn__url != null;
-        public void Reseturl() => __pbn__url = null;
-        private string __pbn__url;
-
-        [global::ProtoBuf.ProtoMember(7)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string patch_version
-        {
-            get => __pbn__patch_version ?? "";
-            set => __pbn__patch_version = value;
-        }
-        public bool ShouldSerializepatch_version() => __pbn__patch_version != null;
-        public void Resetpatch_version() => __pbn__patch_version = null;
-        private string __pbn__patch_version;
-
-        [global::ProtoBuf.ProtoContract()]
-        public enum EOperation
-        {
-            k_eCreate = 0,
-            k_eUpdate = 1,
-            k_eDelete = 2,
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientToGCModifyDevAnnouncementsResponse : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(EResult.k_eSuccess)]
-        public EResult result
-        {
-            get => __pbn__result ?? EResult.k_eSuccess;
-            set => __pbn__result = value;
-        }
-        public bool ShouldSerializeresult() => __pbn__result != null;
-        public void Resetresult() => __pbn__result = null;
-        private EResult? __pbn__result;
-
-        [global::ProtoBuf.ProtoContract()]
-        public enum EResult
-        {
-            k_eSuccess = 0,
-            k_eInvalidPermission = 1,
-            k_eInvalidTarget = 2,
-            k_eInternalError = 3,
         }
 
     }
@@ -5295,6 +5288,65 @@ namespace SteamKit2.GC.Deadlock.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCRequestReporterUpdates : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCRequestReporterUpdatesResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse response
+        {
+            get => __pbn__response ?? EResponse.k_eInternalError;
+            set => __pbn__response = value;
+        }
+        public bool ShouldSerializeresponse() => __pbn__response != null;
+        public void Resetresponse() => __pbn__response = null;
+        private EResponse? __pbn__response;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue(CMsgClientToGCReportPlayerFromMatch.EReportType.k_eReport_None)]
+        public CMsgClientToGCReportPlayerFromMatch.EReportType report_type
+        {
+            get => __pbn__report_type ?? CMsgClientToGCReportPlayerFromMatch.EReportType.k_eReport_None;
+            set => __pbn__report_type = value;
+        }
+        public bool ShouldSerializereport_type() => __pbn__report_type != null;
+        public void Resetreport_type() => __pbn__report_type = null;
+        private CMsgClientToGCReportPlayerFromMatch.EReportType? __pbn__report_type;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eRateLimited = 2,
+            k_eDisabled = 4,
+            k_eTooBusy = 7,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCAcknowledgeReporterUpdates : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgClientToGCDeleteHeroBuild : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -5728,6 +5780,8 @@ namespace SteamKit2.GC.Deadlock.Internal
             k_eTooBusy = 3,
             k_eRateLimited = 4,
             k_eTimeout = 5,
+            k_eEnemyCommendsDisabled = 6,
+            k_eTooLate = 7,
         }
 
     }
@@ -6660,6 +6714,16 @@ namespace SteamKit2.GC.Deadlock.Internal
         [global::ProtoBuf.ProtoMember(1, IsPacked = true)]
         public global::System.Collections.Generic.List<uint> vote_rounds { get; } = new global::System.Collections.Generic.List<uint>();
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool is_initial_request
+        {
+            get => __pbn__is_initial_request.GetValueOrDefault();
+            set => __pbn__is_initial_request = value;
+        }
+        public bool ShouldSerializeis_initial_request() => __pbn__is_initial_request != null;
+        public void Resetis_initial_request() => __pbn__is_initial_request = null;
+        private bool? __pbn__is_initial_request;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -6670,29 +6734,8 @@ namespace SteamKit2.GC.Deadlock.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public global::System.Collections.Generic.List<VoteRoundToTallyEntry> vote_round_to_tally { get; } = new global::System.Collections.Generic.List<VoteRoundToTallyEntry>();
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class VoteRoundToTallyEntry : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint key
-            {
-                get => __pbn__key.GetValueOrDefault();
-                set => __pbn__key = value;
-            }
-            public bool ShouldSerializekey() => __pbn__key != null;
-            public void Resetkey() => __pbn__key = null;
-            private uint? __pbn__key;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public CMsgHeroReleaseVoteTally value { get; set; }
-
-        }
+        [global::ProtoBuf.ProtoMap]
+        public global::System.Collections.Generic.Dictionary<uint, CMsgHeroReleaseVoteTally> vote_round_to_tally { get; } = new global::System.Collections.Generic.Dictionary<uint, CMsgHeroReleaseVoteTally>();
 
     }
 
@@ -6849,6 +6892,35 @@ namespace SteamKit2.GC.Deadlock.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToClientPartyPlayerTyping : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong party_id
+        {
+            get => __pbn__party_id.GetValueOrDefault();
+            set => __pbn__party_id = value;
+        }
+        public bool ShouldSerializeparty_id() => __pbn__party_id != null;
+        public void Resetparty_id() => __pbn__party_id = null;
+        private ulong? __pbn__party_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint account_id
+        {
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
+        }
+        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+        public void Resetaccount_id() => __pbn__account_id = null;
+        private uint? __pbn__account_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgPostGameProgressData : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -6924,6 +6996,12 @@ namespace SteamKit2.GC.Deadlock.Internal
 
         [global::ProtoBuf.ProtoMember(8)]
         public global::System.Collections.Generic.List<PlayerData> mvp_players { get; } = new global::System.Collections.Generic.List<PlayerData>();
+
+        [global::ProtoBuf.ProtoMember(9)]
+        public CMsgMatchHeroReleaseVotes hero_release_votes { get; set; }
+
+        [global::ProtoBuf.ProtoMember(10)]
+        public global::System.Collections.Generic.List<PlayerData> all_players { get; } = new global::System.Collections.Generic.List<PlayerData>();
 
         [global::ProtoBuf.ProtoContract()]
         public partial class PlayerAccolade : global::ProtoBuf.IExtensible
@@ -7195,6 +7273,113 @@ namespace SteamKit2.GC.Deadlock.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCVariantItemChangeSlotStyles : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong item_id
+        {
+            get => __pbn__item_id.GetValueOrDefault();
+            set => __pbn__item_id = value;
+        }
+        public bool ShouldSerializeitem_id() => __pbn__item_id != null;
+        public void Resetitem_id() => __pbn__item_id = null;
+        private ulong? __pbn__item_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<SlotStyleAction> slot_style_actions { get; } = new global::System.Collections.Generic.List<SlotStyleAction>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class SlotStyleAction : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint slot_id
+            {
+                get => __pbn__slot_id.GetValueOrDefault();
+                set => __pbn__slot_id = value;
+            }
+            public bool ShouldSerializeslot_id() => __pbn__slot_id != null;
+            public void Resetslot_id() => __pbn__slot_id = null;
+            private uint? __pbn__slot_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint style_id
+            {
+                get => __pbn__style_id.GetValueOrDefault();
+                set => __pbn__style_id = value;
+            }
+            public bool ShouldSerializestyle_id() => __pbn__style_id != null;
+            public void Resetstyle_id() => __pbn__style_id = null;
+            private uint? __pbn__style_id;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            [global::System.ComponentModel.DefaultValue(CMsgClientToGCVariantItemChangeSlotStyles.EStyleAction.k_eUnlockStyle)]
+            public CMsgClientToGCVariantItemChangeSlotStyles.EStyleAction style_action
+            {
+                get => __pbn__style_action ?? CMsgClientToGCVariantItemChangeSlotStyles.EStyleAction.k_eUnlockStyle;
+                set => __pbn__style_action = value;
+            }
+            public bool ShouldSerializestyle_action() => __pbn__style_action != null;
+            public void Resetstyle_action() => __pbn__style_action = null;
+            private CMsgClientToGCVariantItemChangeSlotStyles.EStyleAction? __pbn__style_action;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EStyleAction
+        {
+            k_eUnlockStyle = 0,
+            k_eEquipStyle = 1,
+            k_eDevUnlockStyle = 2,
+            k_eDevLockStyle = 3,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCVariantItemChangeSlotStylesResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse response
+        {
+            get => __pbn__response ?? EResponse.k_eInternalError;
+            set => __pbn__response = value;
+        }
+        public bool ShouldSerializeresponse() => __pbn__response != null;
+        public void Resetresponse() => __pbn__response = null;
+        private EResponse? __pbn__response;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTooBusy = 2,
+            k_eDisabled = 3,
+            k_eTimeout = 4,
+            k_eNoItem = 5,
+            k_eNoActions = 6,
+            k_eUnknownAction = 8,
+            k_eCantEquipNotOwned = 9,
+            k_eNoPermission = 10,
+            k_eInvalidSlot = 11,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgClientToGCStartRankedInterval : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -7251,6 +7436,111 @@ namespace SteamKit2.GC.Deadlock.Internal
             k_eAlreadyStarted = 3,
             k_eNotEnoughMatchesPlayed = 4,
             k_eNotEnoughHeroesUnlocked = 5,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCGetInternalLeaderboards : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint account_id
+        {
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
+        }
+        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+        public void Resetaccount_id() => __pbn__account_id = null;
+        private uint? __pbn__account_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCGetInternalLeaderboardsResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse response
+        {
+            get => __pbn__response ?? EResponse.k_eInternalError;
+            set => __pbn__response = value;
+        }
+        public bool ShouldSerializeresponse() => __pbn__response != null;
+        public void Resetresponse() => __pbn__response = null;
+        private EResponse? __pbn__response;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<LeaderboardMatch> matches { get; } = new global::System.Collections.Generic.List<LeaderboardMatch>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class LeaderboardMatch : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public ulong match_id
+            {
+                get => __pbn__match_id.GetValueOrDefault();
+                set => __pbn__match_id = value;
+            }
+            public bool ShouldSerializematch_id() => __pbn__match_id != null;
+            public void Resetmatch_id() => __pbn__match_id = null;
+            private ulong? __pbn__match_id;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint round
+            {
+                get => __pbn__round.GetValueOrDefault();
+                set => __pbn__round = value;
+            }
+            public bool ShouldSerializeround() => __pbn__round != null;
+            public void Resetround() => __pbn__round = null;
+            private uint? __pbn__round;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint duration
+            {
+                get => __pbn__duration.GetValueOrDefault();
+                set => __pbn__duration = value;
+            }
+            public bool ShouldSerializeduration() => __pbn__duration != null;
+            public void Resetduration() => __pbn__duration = null;
+            private uint? __pbn__duration;
+
+            [global::ProtoBuf.ProtoMember(4)]
+            public uint timestamp
+            {
+                get => __pbn__timestamp.GetValueOrDefault();
+                set => __pbn__timestamp = value;
+            }
+            public bool ShouldSerializetimestamp() => __pbn__timestamp != null;
+            public void Resettimestamp() => __pbn__timestamp = null;
+            private uint? __pbn__timestamp;
+
+            [global::ProtoBuf.ProtoMember(5)]
+            public global::System.Collections.Generic.List<uint> account_ids { get; } = new global::System.Collections.Generic.List<uint>();
+
+            [global::ProtoBuf.ProtoMember(6)]
+            public global::System.Collections.Generic.List<uint> hero_ids { get; } = new global::System.Collections.Generic.List<uint>();
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eAccessDenied = 2,
         }
 
     }
@@ -7469,6 +7759,425 @@ namespace SteamKit2.GC.Deadlock.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCCabalCreate : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCCabalCreateResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResult.k_eInternalError)]
+        public EResult result
+        {
+            get => __pbn__result ?? EResult.k_eInternalError;
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResult? __pbn__result;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong cabal_id
+        {
+            get => __pbn__cabal_id.GetValueOrDefault();
+            set => __pbn__cabal_id = value;
+        }
+        public bool ShouldSerializecabal_id() => __pbn__cabal_id != null;
+        public void Resetcabal_id() => __pbn__cabal_id = null;
+        private ulong? __pbn__cabal_id;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResult
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTooBusy = 2,
+            k_eRateLimited = 3,
+            k_eAlreadyInMaxCabals = 4,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCCabalInviteAccount : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong cabal_id
+        {
+            get => __pbn__cabal_id.GetValueOrDefault();
+            set => __pbn__cabal_id = value;
+        }
+        public bool ShouldSerializecabal_id() => __pbn__cabal_id != null;
+        public void Resetcabal_id() => __pbn__cabal_id = null;
+        private ulong? __pbn__cabal_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint account_id
+        {
+            get => __pbn__account_id.GetValueOrDefault();
+            set => __pbn__account_id = value;
+        }
+        public bool ShouldSerializeaccount_id() => __pbn__account_id != null;
+        public void Resetaccount_id() => __pbn__account_id = null;
+        private uint? __pbn__account_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool cancel_invite
+        {
+            get => __pbn__cancel_invite.GetValueOrDefault();
+            set => __pbn__cancel_invite = value;
+        }
+        public bool ShouldSerializecancel_invite() => __pbn__cancel_invite != null;
+        public void Resetcancel_invite() => __pbn__cancel_invite = null;
+        private bool? __pbn__cancel_invite;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCCabalInviteAccountResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResult.k_eInternalError)]
+        public EResult result
+        {
+            get => __pbn__result ?? EResult.k_eInternalError;
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResult? __pbn__result;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResult
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTooBusy = 2,
+            k_eRateLimited = 3,
+            k_eInvalidPermission = 4,
+            k_eTargetInMaxCabals = 5,
+            k_eTargetAtMaxInvites = 6,
+            k_eTargetAlreadyInvited = 7,
+            k_eCabalAtMaxInvites = 8,
+            k_eCabalAtMaxMembers = 9,
+            k_eInvalidTargetAccount = 10,
+            k_eTargetNotInvited = 11,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCCabalAnswerInvite : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong cabal_id
+        {
+            get => __pbn__cabal_id.GetValueOrDefault();
+            set => __pbn__cabal_id = value;
+        }
+        public bool ShouldSerializecabal_id() => __pbn__cabal_id != null;
+        public void Resetcabal_id() => __pbn__cabal_id = null;
+        private ulong? __pbn__cabal_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool accepted
+        {
+            get => __pbn__accepted.GetValueOrDefault();
+            set => __pbn__accepted = value;
+        }
+        public bool ShouldSerializeaccepted() => __pbn__accepted != null;
+        public void Resetaccepted() => __pbn__accepted = null;
+        private bool? __pbn__accepted;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCCabalAnswerInviteResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResult.k_eInternalError)]
+        public EResult result
+        {
+            get => __pbn__result ?? EResult.k_eInternalError;
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResult? __pbn__result;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResult
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTooBusy = 2,
+            k_eRateLimited = 3,
+            k_eInvalidPermission = 4,
+            k_eAlreadyInMaxCabals = 5,
+            k_eCabalAtMaxMembers = 6,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCCabalLeave : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong cabal_id
+        {
+            get => __pbn__cabal_id.GetValueOrDefault();
+            set => __pbn__cabal_id = value;
+        }
+        public bool ShouldSerializecabal_id() => __pbn__cabal_id != null;
+        public void Resetcabal_id() => __pbn__cabal_id = null;
+        private ulong? __pbn__cabal_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool acknowledged_last_member
+        {
+            get => __pbn__acknowledged_last_member.GetValueOrDefault();
+            set => __pbn__acknowledged_last_member = value;
+        }
+        public bool ShouldSerializeacknowledged_last_member() => __pbn__acknowledged_last_member != null;
+        public void Resetacknowledged_last_member() => __pbn__acknowledged_last_member = null;
+        private bool? __pbn__acknowledged_last_member;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCCabalLeaveResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResult.k_eInternalError)]
+        public EResult result
+        {
+            get => __pbn__result ?? EResult.k_eInternalError;
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResult? __pbn__result;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResult
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTooBusy = 2,
+            k_eWasLastMember = 3,
+            k_eNotMember = 4,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCCabalGetDetails : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong cabal_id
+        {
+            get => __pbn__cabal_id.GetValueOrDefault();
+            set => __pbn__cabal_id = value;
+        }
+        public bool ShouldSerializecabal_id() => __pbn__cabal_id != null;
+        public void Resetcabal_id() => __pbn__cabal_id = null;
+        private ulong? __pbn__cabal_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCCabalGetDetailsResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResult.k_eInternalError)]
+        public EResult result
+        {
+            get => __pbn__result ?? EResult.k_eInternalError;
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResult? __pbn__result;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public CMsgCitadelCabal cabal_info { get; set; }
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResult
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTooBusy = 2,
+            k_eRateLimited = 3,
+            k_eInvalidPermission = 4,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgGCToClientCabalUpdated : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgCitadelCabal cabal_info { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCCabalKickPlayer : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong cabal_id
+        {
+            get => __pbn__cabal_id.GetValueOrDefault();
+            set => __pbn__cabal_id = value;
+        }
+        public bool ShouldSerializecabal_id() => __pbn__cabal_id != null;
+        public void Resetcabal_id() => __pbn__cabal_id = null;
+        private ulong? __pbn__cabal_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public uint kick_account_id
+        {
+            get => __pbn__kick_account_id.GetValueOrDefault();
+            set => __pbn__kick_account_id = value;
+        }
+        public bool ShouldSerializekick_account_id() => __pbn__kick_account_id != null;
+        public void Resetkick_account_id() => __pbn__kick_account_id = null;
+        private uint? __pbn__kick_account_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCCabalKickPlayerResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(EResult.k_eInternalError)]
+        public EResult result
+        {
+            get => __pbn__result ?? EResult.k_eInternalError;
+            set => __pbn__result = value;
+        }
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResult? __pbn__result;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResult
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eInvalidPermission = 4,
+            k_eInvalidTarget = 5,
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCCabalGetMatchHistory : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong cabal_id
+        {
+            get => __pbn__cabal_id.GetValueOrDefault();
+            set => __pbn__cabal_id = value;
+        }
+        public bool ShouldSerializecabal_id() => __pbn__cabal_id != null;
+        public void Resetcabal_id() => __pbn__cabal_id = null;
+        private ulong? __pbn__cabal_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(ECitadelCabalMMTier.k_eCabalMMTier_Invalid)]
+        public ECitadelCabalMMTier cabal_mm_tier
+        {
+            get => __pbn__cabal_mm_tier ?? ECitadelCabalMMTier.k_eCabalMMTier_Invalid;
+            set => __pbn__cabal_mm_tier = value;
+        }
+        public bool ShouldSerializecabal_mm_tier() => __pbn__cabal_mm_tier != null;
+        public void Resetcabal_mm_tier() => __pbn__cabal_mm_tier = null;
+        private ECitadelCabalMMTier? __pbn__cabal_mm_tier;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public ulong cursor
+        {
+            get => __pbn__cursor.GetValueOrDefault();
+            set => __pbn__cursor = value;
+        }
+        public bool ShouldSerializecursor() => __pbn__cursor != null;
+        public void Resetcursor() => __pbn__cursor = null;
+        private ulong? __pbn__cursor;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgClientToGCCabalGetMatchHistoryResponse : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CMsgClientToGCGetMatchHistoryResponse history_response { get; set; }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public enum EGCCitadelClientMessages
     {
         k_EMsgClientToGCStartMatchmaking = 9010,
@@ -7487,9 +8196,6 @@ namespace SteamKit2.GC.Deadlock.Internal
         k_EMsgClientToGCUpdateRoster = 9026,
         k_EMsgClientToGCUpdateRosterResponse = 9027,
         k_EMsgGCToClientProfileCardUpdated = 9028,
-        k_EMsgGCToClientDevAnnouncements = 9029,
-        k_EMsgClientToGCModifyDevAnnouncements = 9030,
-        k_EMsgClientToGCModifyDevAnnouncementsResponse = 9031,
         k_EMsgGCToClientSDRTicket = 9100,
         k_EMsgClientToGCReplacementSDRTicket = 9101,
         k_EMsgClientToGCReplacementSDRTicketResponse = 9102,
@@ -7625,10 +8331,35 @@ namespace SteamKit2.GC.Deadlock.Internal
         k_EMsgGCToClientUpdateHeroReleaseVoteTally = 9281,
         k_EMsgClientToGCSetAccountPrivacySetting = 9282,
         k_EMsgClientToGCSetAccountPrivacySettingResponse = 9283,
+        k_EMsgClientToGCVariantItemChangeSlotStyles = 9284,
+        k_EMsgClientToGCVariantItemChangeSlotStylesResponse = 9285,
+        k_EMsgClientToGCPartyPlayerTyping = 9286,
+        k_EMsgClientToGCPartyPlayerTypingResponse = 9287,
+        k_EMsgGCToClientPartyPlayerTyping = 9288,
         k_EMsgClientToGCStartRankedInterval = 9289,
         k_EMsgClientToGCStartRankedIntervalResponse = 9290,
+        k_EMsgClientToGCGetInternalLeaderboards = 9291,
+        k_EMsgClientToGCGetInternalLeaderboardsResponse = 9292,
         k_EMsgClientToGCGetLeaderboardStatus = 9293,
         k_EMsgClientToGCGetLeaderboardStatusResponse = 9294,
+        k_EMsgClientToGCRequestReporterUpdates = 9295,
+        k_EMsgClientToGCRequestReporterUpdatesResponse = 9296,
+        k_EMsgClientToGCAcknowledgeReporterUpdates = 9297,
+        k_EMsgClientToGCCabalCreate = 9298,
+        k_EMsgClientToGCCabalCreateResponse = 9299,
+        k_EMsgClientToGCCabalInviteAccount = 9300,
+        k_EMsgClientToGCCabalInviteAccountResponse = 9301,
+        k_EMsgClientToGCCabalAnswerInvite = 9302,
+        k_EMsgClientToGCCabalAnswerInviteResponse = 9303,
+        k_EMsgClientToGCCabalLeave = 9304,
+        k_EMsgClientToGCCabalLeaveResponse = 9305,
+        k_EMsgClientToGCCabalGetDetails = 9306,
+        k_EMsgClientToGCCabalGetDetailsResponse = 9307,
+        k_EMsgGCToClientCabalUpdated = 9308,
+        k_EMsgClientToGCCabalKickPlayer = 9309,
+        k_EMsgClientToGCCabalKickPlayerResponse = 9310,
+        k_EMsgClientToGCCabalGetMatchHistory = 9311,
+        k_EMsgClientToGCCabalGetMatchHistoryResponse = 9312,
     }
 
     [global::ProtoBuf.ProtoContract()]

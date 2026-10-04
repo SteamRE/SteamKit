@@ -629,8 +629,6 @@ namespace SteamKit2.GC.Deadlock.Internal
         k_eGCPlatform_PC = 1,
         k_eGCPlatform_Mac = 2,
         k_eGCPlatform_Linux = 3,
-        k_eGCPlatform_Android = 4,
-        k_eGCPlatform_iOS = 5,
     }
 
     [global::ProtoBuf.ProtoContract()]

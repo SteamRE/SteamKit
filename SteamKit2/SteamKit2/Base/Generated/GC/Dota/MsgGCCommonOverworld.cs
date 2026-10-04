@@ -462,7 +462,8 @@ namespace SteamKit2.GC.Dota.Internal
         private uint? __pbn__current_node_id;
 
         [global::ProtoBuf.ProtoMember(5)]
-        public global::System.Collections.Generic.List<MinigameDataEntry> minigame_data { get; } = new global::System.Collections.Generic.List<MinigameDataEntry>();
+        [global::ProtoBuf.ProtoMap]
+        public global::System.Collections.Generic.Dictionary<uint, CMsgOverworldMinigameUserData> minigame_data { get; } = new global::System.Collections.Generic.Dictionary<uint, CMsgOverworldMinigameUserData>();
 
         [global::ProtoBuf.ProtoMember(6)]
         public CMsgOverworldFortune current_fortune { get; set; }
@@ -486,28 +487,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializeoverworld_version() => __pbn__overworld_version != null;
         public void Resetoverworld_version() => __pbn__overworld_version = null;
         private uint? __pbn__overworld_version;
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class MinigameDataEntry : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public uint key
-            {
-                get => __pbn__key.GetValueOrDefault();
-                set => __pbn__key = value;
-            }
-            public bool ShouldSerializekey() => __pbn__key != null;
-            public void Resetkey() => __pbn__key = null;
-            private uint? __pbn__key;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public CMsgOverworldMinigameUserData value { get; set; }
-
-        }
 
     }
 

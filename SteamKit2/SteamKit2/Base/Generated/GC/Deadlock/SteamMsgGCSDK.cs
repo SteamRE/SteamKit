@@ -1072,17 +1072,6 @@ namespace SteamKit2.GC.Deadlock.Internal
         public void Resetclient_launcher() => __pbn__client_launcher = null;
         private PartnerAccountType? __pbn__client_launcher;
 
-        [global::ProtoBuf.ProtoMember(5)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string secret_key
-        {
-            get => __pbn__secret_key ?? "";
-            set => __pbn__secret_key = value;
-        }
-        public bool ShouldSerializesecret_key() => __pbn__secret_key != null;
-        public void Resetsecret_key() => __pbn__secret_key = null;
-        private string __pbn__secret_key;
-
         [global::ProtoBuf.ProtoMember(6)]
         public uint client_language
         {

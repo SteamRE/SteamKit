@@ -1331,6 +1331,117 @@ namespace SteamKit2.WebUI.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_GetComment_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public int comment_thread_type
+        {
+            get => __pbn__comment_thread_type.GetValueOrDefault();
+            set => __pbn__comment_thread_type = value;
+        }
+        public bool ShouldSerializecomment_thread_type() => __pbn__comment_thread_type != null;
+        public void Resetcomment_thread_type() => __pbn__comment_thread_type = null;
+        private int? __pbn__comment_thread_type;
+
+        [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong gidfeature
+        {
+            get => __pbn__gidfeature.GetValueOrDefault();
+            set => __pbn__gidfeature = value;
+        }
+        public bool ShouldSerializegidfeature() => __pbn__gidfeature != null;
+        public void Resetgidfeature() => __pbn__gidfeature = null;
+        private ulong? __pbn__gidfeature;
+
+        [global::ProtoBuf.ProtoMember(4, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong gidfeature2
+        {
+            get => __pbn__gidfeature2.GetValueOrDefault();
+            set => __pbn__gidfeature2 = value;
+        }
+        public bool ShouldSerializegidfeature2() => __pbn__gidfeature2 != null;
+        public void Resetgidfeature2() => __pbn__gidfeature2 = null;
+        private ulong? __pbn__gidfeature2;
+
+        [global::ProtoBuf.ProtoMember(5, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong gidcomment
+        {
+            get => __pbn__gidcomment.GetValueOrDefault();
+            set => __pbn__gidcomment = value;
+        }
+        public bool ShouldSerializegidcomment() => __pbn__gidcomment != null;
+        public void Resetgidcomment() => __pbn__gidcomment = null;
+        private ulong? __pbn__gidcomment;
+
+        [global::ProtoBuf.ProtoMember(6, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong comment_thread_id
+        {
+            get => __pbn__comment_thread_id.GetValueOrDefault();
+            set => __pbn__comment_thread_id = value;
+        }
+        public bool ShouldSerializecomment_thread_id() => __pbn__comment_thread_id != null;
+        public void Resetcomment_thread_id() => __pbn__comment_thread_id = null;
+        private ulong? __pbn__comment_thread_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_GetComment_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public CCommunity_Comment comment { get; set; }
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public int comment_thread_type
+        {
+            get => __pbn__comment_thread_type.GetValueOrDefault();
+            set => __pbn__comment_thread_type = value;
+        }
+        public bool ShouldSerializecomment_thread_type() => __pbn__comment_thread_type != null;
+        public void Resetcomment_thread_type() => __pbn__comment_thread_type = null;
+        private int? __pbn__comment_thread_type;
+
+        [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong gidfeature
+        {
+            get => __pbn__gidfeature.GetValueOrDefault();
+            set => __pbn__gidfeature = value;
+        }
+        public bool ShouldSerializegidfeature() => __pbn__gidfeature != null;
+        public void Resetgidfeature() => __pbn__gidfeature = null;
+        private ulong? __pbn__gidfeature;
+
+        [global::ProtoBuf.ProtoMember(4, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong gidfeature2
+        {
+            get => __pbn__gidfeature2.GetValueOrDefault();
+            set => __pbn__gidfeature2 = value;
+        }
+        public bool ShouldSerializegidfeature2() => __pbn__gidfeature2 != null;
+        public void Resetgidfeature2() => __pbn__gidfeature2 = null;
+        private ulong? __pbn__gidfeature2;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CCommunity_GetCommentThread_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2637,6 +2748,127 @@ namespace SteamKit2.WebUI.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_SanctionComment_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong comment_thread_id
+        {
+            get => __pbn__comment_thread_id.GetValueOrDefault();
+            set => __pbn__comment_thread_id = value;
+        }
+        public bool ShouldSerializecomment_thread_id() => __pbn__comment_thread_id != null;
+        public void Resetcomment_thread_id() => __pbn__comment_thread_id = null;
+        private ulong? __pbn__comment_thread_id;
+
+        [global::ProtoBuf.ProtoMember(3, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong gidcomment
+        {
+            get => __pbn__gidcomment.GetValueOrDefault();
+            set => __pbn__gidcomment = value;
+        }
+        public bool ShouldSerializegidcomment() => __pbn__gidcomment != null;
+        public void Resetgidcomment() => __pbn__gidcomment = null;
+        private ulong? __pbn__gidcomment;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public int reason
+        {
+            get => __pbn__reason.GetValueOrDefault();
+            set => __pbn__reason = value;
+        }
+        public bool ShouldSerializereason() => __pbn__reason != null;
+        public void Resetreason() => __pbn__reason = null;
+        private int? __pbn__reason;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string note
+        {
+            get => __pbn__note ?? "";
+            set => __pbn__note = value;
+        }
+        public bool ShouldSerializenote() => __pbn__note != null;
+        public void Resetnote() => __pbn__note = null;
+        private string __pbn__note;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        public global::System.Collections.Generic.List<CCommunity_SanctionComment_Request_Sanction> sanctions { get; } = new global::System.Collections.Generic.List<CCommunity_SanctionComment_Request_Sanction>();
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public bool skip_lock
+        {
+            get => __pbn__skip_lock.GetValueOrDefault();
+            set => __pbn__skip_lock = value;
+        }
+        public bool ShouldSerializeskip_lock() => __pbn__skip_lock != null;
+        public void Resetskip_lock() => __pbn__skip_lock = null;
+        private bool? __pbn__skip_lock;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_SanctionComment_Request_Sanction : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public int sanction
+        {
+            get => __pbn__sanction.GetValueOrDefault();
+            set => __pbn__sanction = value;
+        }
+        public bool ShouldSerializesanction() => __pbn__sanction != null;
+        public void Resetsanction() => __pbn__sanction = null;
+        private int? __pbn__sanction;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public int days
+        {
+            get => __pbn__days.GetValueOrDefault();
+            set => __pbn__days = value;
+        }
+        public bool ShouldSerializedays() => __pbn__days != null;
+        public void Resetdays() => __pbn__days = null;
+        private int? __pbn__days;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public int escalate_to
+        {
+            get => __pbn__escalate_to.GetValueOrDefault();
+            set => __pbn__escalate_to = value;
+        }
+        public bool ShouldSerializeescalate_to() => __pbn__escalate_to != null;
+        public void Resetescalate_to() => __pbn__escalate_to = null;
+        private int? __pbn__escalate_to;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CCommunity_SanctionComment_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CCommunity_SetRecommendationBotReviewStatus_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2799,6 +3031,11 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CCommunity_GetClanMetadata_Request, CCommunity_GetClanMetadata_Response>( "Community.GetClanMetadata#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetComment_Response>> GetComment( CCommunity_GetComment_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCommunity_GetComment_Request, CCommunity_GetComment_Response>( "Community.GetComment#1", request );
+        }
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetCommentThread_Response>> GetCommentThread( CCommunity_GetCommentThread_Request request )
         {
             return UnifiedMessages.SendMessage<CCommunity_GetCommentThread_Request, CCommunity_GetCommentThread_Response>( "Community.GetCommentThread#1", request );
@@ -2859,6 +3096,11 @@ namespace SteamKit2.WebUI.Internal
             return UnifiedMessages.SendMessage<CCommunity_RateCommentThread_Request, CCommunity_RateCommentThread_Response>( "Community.RateCommentThread#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_SanctionComment_Response>> SanctionComment( CCommunity_SanctionComment_Request request )
+        {
+            return UnifiedMessages.SendMessage<CCommunity_SanctionComment_Request, CCommunity_SanctionComment_Response>( "Community.SanctionComment#1", request );
+        }
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_SetRecommendationBotReviewStatus_Response>> SetRecommendationBotReviewStatus( CCommunity_SetRecommendationBotReviewStatus_Request request )
         {
             return UnifiedMessages.SendMessage<CCommunity_SetRecommendationBotReviewStatus_Request, CCommunity_SetRecommendationBotReviewStatus_Response>( "Community.SetRecommendationBotReviewStatus#1", request );
@@ -2912,6 +3154,9 @@ namespace SteamKit2.WebUI.Internal
                 case "GetClanMetadata":
                     PostResponseMsg<CCommunity_GetClanMetadata_Response>( packetMsg );
                     break;
+                case "GetComment":
+                    PostResponseMsg<CCommunity_GetComment_Response>( packetMsg );
+                    break;
                 case "GetCommentThread":
                     PostResponseMsg<CCommunity_GetCommentThread_Response>( packetMsg );
                     break;
@@ -2947,6 +3192,9 @@ namespace SteamKit2.WebUI.Internal
                     break;
                 case "RateCommentThread":
                     PostResponseMsg<CCommunity_RateCommentThread_Response>( packetMsg );
+                    break;
+                case "SanctionComment":
+                    PostResponseMsg<CCommunity_SanctionComment_Response>( packetMsg );
                     break;
                 case "SetRecommendationBotReviewStatus":
                     PostResponseMsg<CCommunity_SetRecommendationBotReviewStatus_Response>( packetMsg );

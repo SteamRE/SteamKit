@@ -170,14 +170,14 @@ namespace SteamKit2.GC.Deadlock.Internal
         public global::System.Collections.Generic.List<uint> region_pings { get; } = new global::System.Collections.Generic.List<uint>();
 
         [global::ProtoBuf.ProtoMember(10)]
-        public uint region_ping_failed_bitmask
+        public ulong region_ping_failed_bitmask
         {
             get => __pbn__region_ping_failed_bitmask.GetValueOrDefault();
             set => __pbn__region_ping_failed_bitmask = value;
         }
         public bool ShouldSerializeregion_ping_failed_bitmask() => __pbn__region_ping_failed_bitmask != null;
         public void Resetregion_ping_failed_bitmask() => __pbn__region_ping_failed_bitmask = null;
-        private uint? __pbn__region_ping_failed_bitmask;
+        private ulong? __pbn__region_ping_failed_bitmask;
 
     }
 
@@ -499,6 +499,16 @@ namespace SteamKit2.GC.Deadlock.Internal
         public bool ShouldSerializelobby_id() => __pbn__lobby_id != null;
         public void Resetlobby_id() => __pbn__lobby_id = null;
         private ulong? __pbn__lobby_id;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong nonce
+        {
+            get => __pbn__nonce.GetValueOrDefault();
+            set => __pbn__nonce = value;
+        }
+        public bool ShouldSerializenonce() => __pbn__nonce != null;
+        public void Resetnonce() => __pbn__nonce = null;
+        private ulong? __pbn__nonce;
 
     }
 

@@ -659,6 +659,13 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EGCMsgRecurringSubscriptionStatusChange = 530,
         k_EGCMsgDirectServiceMethod = 531,
         k_EGCMsgDirectServiceMethodResponse = 532,
+        k_EGCMsgAppCheersReceived = 533,
+        k_EGCMsgAppCheersGetAllowedTypes = 534,
+        k_EGCMsgAppCheersGetAllowedTypesResponse = 535,
+        k_EGCMsgReportMetrics = 536,
+        k_EGCMsgReportMetricsResponse = 537,
+        k_EGCMsgGetClanDetails = 538,
+        k_EGCMsgGetClanDetailsResponse = 539,
     }
 
     [global::ProtoBuf.ProtoContract()]

@@ -1500,14 +1500,28 @@ namespace SteamKit2.GC.Deadlock.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public bool success
+        [global::System.ComponentModel.DefaultValue(EResponse.k_eInternalError)]
+        public EResponse result
         {
-            get => __pbn__success.GetValueOrDefault();
-            set => __pbn__success = value;
+            get => __pbn__result ?? EResponse.k_eInternalError;
+            set => __pbn__result = value;
         }
-        public bool ShouldSerializesuccess() => __pbn__success != null;
-        public void Resetsuccess() => __pbn__success = null;
-        private bool? __pbn__success;
+        public bool ShouldSerializeresult() => __pbn__result != null;
+        public void Resetresult() => __pbn__result = null;
+        private EResponse? __pbn__result;
+
+        [global::ProtoBuf.ProtoContract()]
+        public enum EResponse
+        {
+            k_eInternalError = 0,
+            k_eSuccess = 1,
+            k_eTooBusy = 2,
+            k_eDisabled = 3,
+            k_eTimeout = 4,
+            k_eNotAllowed = 5,
+            k_eUnknownItemDef = 6,
+            k_eItemDefNotAllowed = 7,
+        }
 
     }
 
@@ -3582,16 +3596,6 @@ namespace SteamKit2.GC.Deadlock.Internal
         public bool ShouldSerializesteam_txn_id() => __pbn__steam_txn_id != null;
         public void Resetsteam_txn_id() => __pbn__steam_txn_id = null;
         private ulong? __pbn__steam_txn_id;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public ulong partner_txn_id
-        {
-            get => __pbn__partner_txn_id.GetValueOrDefault();
-            set => __pbn__partner_txn_id = value;
-        }
-        public bool ShouldSerializepartner_txn_id() => __pbn__partner_txn_id != null;
-        public void Resetpartner_txn_id() => __pbn__partner_txn_id = null;
-        private ulong? __pbn__partner_txn_id;
 
         [global::ProtoBuf.ProtoMember(4, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong steam_id

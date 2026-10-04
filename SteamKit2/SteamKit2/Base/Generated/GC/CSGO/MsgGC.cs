@@ -2845,6 +2845,9 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetmatch_id_additional() => __pbn__match_id_additional = null;
         private uint? __pbn__match_id_additional;
 
+        [global::ProtoBuf.ProtoMember(23)]
+        public global::System.Collections.Generic.List<string> clan_tags { get; } = new global::System.Collections.Generic.List<string>();
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -5326,15 +5329,7 @@ namespace SteamKit2.GC.CSGO.Internal
         private uint? __pbn__killeatervalue;
 
         [global::ProtoBuf.ProtoMember(11)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string customname
-        {
-            get => __pbn__customname ?? "";
-            set => __pbn__customname = value;
-        }
-        public bool ShouldSerializecustomname() => __pbn__customname != null;
-        public void Resetcustomname() => __pbn__customname = null;
-        private string __pbn__customname;
+        public global::System.Collections.Generic.List<string> customnames { get; } = new global::System.Collections.Generic.List<string>();
 
         [global::ProtoBuf.ProtoMember(12)]
         public global::System.Collections.Generic.List<Sticker> stickers { get; } = new global::System.Collections.Generic.List<Sticker>();
@@ -5434,6 +5429,26 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializeupgrade_level() => __pbn__upgrade_level != null;
         public void Resetupgrade_level() => __pbn__upgrade_level = null;
         private uint? __pbn__upgrade_level;
+
+        [global::ProtoBuf.ProtoMember(24)]
+        public uint pet_food_expiration_date
+        {
+            get => __pbn__pet_food_expiration_date.GetValueOrDefault();
+            set => __pbn__pet_food_expiration_date = value;
+        }
+        public bool ShouldSerializepet_food_expiration_date() => __pbn__pet_food_expiration_date != null;
+        public void Resetpet_food_expiration_date() => __pbn__pet_food_expiration_date = null;
+        private uint? __pbn__pet_food_expiration_date;
+
+        [global::ProtoBuf.ProtoMember(25)]
+        public byte[] blobdata
+        {
+            get => __pbn__blobdata;
+            set => __pbn__blobdata = value;
+        }
+        public bool ShouldSerializeblobdata() => __pbn__blobdata != null;
+        public void Resetblobdata() => __pbn__blobdata = null;
+        private byte[] __pbn__blobdata;
 
         [global::ProtoBuf.ProtoContract()]
         public partial class Sticker : global::ProtoBuf.IExtensible
@@ -7274,6 +7289,17 @@ namespace SteamKit2.GC.CSGO.Internal
         public void Resetclan_id() => __pbn__clan_id = null;
         private uint? __pbn__clan_id;
 
+        [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string clan_tag
+        {
+            get => __pbn__clan_tag ?? "";
+            set => __pbn__clan_tag = value;
+        }
+        public bool ShouldSerializeclan_tag() => __pbn__clan_tag != null;
+        public void Resetclan_tag() => __pbn__clan_tag = null;
+        private string __pbn__clan_tag;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -8750,350 +8776,6 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGCCStrike15_v2_GC2ClientRefuseSecureMode : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string file_report
-        {
-            get => __pbn__file_report ?? "";
-            set => __pbn__file_report = value;
-        }
-        public bool ShouldSerializefile_report() => __pbn__file_report != null;
-        public void Resetfile_report() => __pbn__file_report = null;
-        private string __pbn__file_report;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public bool offer_insecure_mode
-        {
-            get => __pbn__offer_insecure_mode.GetValueOrDefault();
-            set => __pbn__offer_insecure_mode = value;
-        }
-        public bool ShouldSerializeoffer_insecure_mode() => __pbn__offer_insecure_mode != null;
-        public void Resetoffer_insecure_mode() => __pbn__offer_insecure_mode = null;
-        private bool? __pbn__offer_insecure_mode;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public bool offer_secure_mode
-        {
-            get => __pbn__offer_secure_mode.GetValueOrDefault();
-            set => __pbn__offer_secure_mode = value;
-        }
-        public bool ShouldSerializeoffer_secure_mode() => __pbn__offer_secure_mode != null;
-        public void Resetoffer_secure_mode() => __pbn__offer_secure_mode = null;
-        private bool? __pbn__offer_secure_mode;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public bool show_unsigned_ui
-        {
-            get => __pbn__show_unsigned_ui.GetValueOrDefault();
-            set => __pbn__show_unsigned_ui = value;
-        }
-        public bool ShouldSerializeshow_unsigned_ui() => __pbn__show_unsigned_ui != null;
-        public void Resetshow_unsigned_ui() => __pbn__show_unsigned_ui = null;
-        private bool? __pbn__show_unsigned_ui;
-
-        [global::ProtoBuf.ProtoMember(5)]
-        public bool kick_user
-        {
-            get => __pbn__kick_user.GetValueOrDefault();
-            set => __pbn__kick_user = value;
-        }
-        public bool ShouldSerializekick_user() => __pbn__kick_user != null;
-        public void Resetkick_user() => __pbn__kick_user = null;
-        private bool? __pbn__kick_user;
-
-        [global::ProtoBuf.ProtoMember(6)]
-        public bool show_trusted_ui
-        {
-            get => __pbn__show_trusted_ui.GetValueOrDefault();
-            set => __pbn__show_trusted_ui = value;
-        }
-        public bool ShouldSerializeshow_trusted_ui() => __pbn__show_trusted_ui != null;
-        public void Resetshow_trusted_ui() => __pbn__show_trusted_ui = null;
-        private bool? __pbn__show_trusted_ui;
-
-        [global::ProtoBuf.ProtoMember(7)]
-        public bool show_warning_not_trusted
-        {
-            get => __pbn__show_warning_not_trusted.GetValueOrDefault();
-            set => __pbn__show_warning_not_trusted = value;
-        }
-        public bool ShouldSerializeshow_warning_not_trusted() => __pbn__show_warning_not_trusted != null;
-        public void Resetshow_warning_not_trusted() => __pbn__show_warning_not_trusted = null;
-        private bool? __pbn__show_warning_not_trusted;
-
-        [global::ProtoBuf.ProtoMember(8)]
-        public bool show_warning_not_trusted_2
-        {
-            get => __pbn__show_warning_not_trusted_2.GetValueOrDefault();
-            set => __pbn__show_warning_not_trusted_2 = value;
-        }
-        public bool ShouldSerializeshow_warning_not_trusted_2() => __pbn__show_warning_not_trusted_2 != null;
-        public void Resetshow_warning_not_trusted_2() => __pbn__show_warning_not_trusted_2 = null;
-        private bool? __pbn__show_warning_not_trusted_2;
-
-        [global::ProtoBuf.ProtoMember(9)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string files_prevented_trusted
-        {
-            get => __pbn__files_prevented_trusted ?? "";
-            set => __pbn__files_prevented_trusted = value;
-        }
-        public bool ShouldSerializefiles_prevented_trusted() => __pbn__files_prevented_trusted != null;
-        public void Resetfiles_prevented_trusted() => __pbn__files_prevented_trusted = null;
-        private string __pbn__files_prevented_trusted;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGCCStrike15_v2_GC2ClientRequestValidation : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public bool full_report
-        {
-            get => __pbn__full_report.GetValueOrDefault();
-            set => __pbn__full_report = value;
-        }
-        public bool ShouldSerializefull_report() => __pbn__full_report != null;
-        public void Resetfull_report() => __pbn__full_report = null;
-        private bool? __pbn__full_report;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string module
-        {
-            get => __pbn__module ?? "";
-            set => __pbn__module = value;
-        }
-        public bool ShouldSerializemodule() => __pbn__module != null;
-        public void Resetmodule() => __pbn__module = null;
-        private string __pbn__module;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGCCStrike15_v2_GC2ClientInitSystem : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public bool load
-        {
-            get => __pbn__load.GetValueOrDefault();
-            set => __pbn__load = value;
-        }
-        public bool ShouldSerializeload() => __pbn__load != null;
-        public void Resetload() => __pbn__load = null;
-        private bool? __pbn__load;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string name
-        {
-            get => __pbn__name ?? "";
-            set => __pbn__name = value;
-        }
-        public bool ShouldSerializename() => __pbn__name != null;
-        public void Resetname() => __pbn__name = null;
-        private string __pbn__name;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string outputname
-        {
-            get => __pbn__outputname ?? "";
-            set => __pbn__outputname = value;
-        }
-        public bool ShouldSerializeoutputname() => __pbn__outputname != null;
-        public void Resetoutputname() => __pbn__outputname = null;
-        private string __pbn__outputname;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public byte[] key_data
-        {
-            get => __pbn__key_data;
-            set => __pbn__key_data = value;
-        }
-        public bool ShouldSerializekey_data() => __pbn__key_data != null;
-        public void Resetkey_data() => __pbn__key_data = null;
-        private byte[] __pbn__key_data;
-
-        [global::ProtoBuf.ProtoMember(5)]
-        public byte[] sha_hash
-        {
-            get => __pbn__sha_hash;
-            set => __pbn__sha_hash = value;
-        }
-        public bool ShouldSerializesha_hash() => __pbn__sha_hash != null;
-        public void Resetsha_hash() => __pbn__sha_hash = null;
-        private byte[] __pbn__sha_hash;
-
-        [global::ProtoBuf.ProtoMember(6)]
-        public int cookie
-        {
-            get => __pbn__cookie.GetValueOrDefault();
-            set => __pbn__cookie = value;
-        }
-        public bool ShouldSerializecookie() => __pbn__cookie != null;
-        public void Resetcookie() => __pbn__cookie = null;
-        private int? __pbn__cookie;
-
-        [global::ProtoBuf.ProtoMember(7)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string manifest
-        {
-            get => __pbn__manifest ?? "";
-            set => __pbn__manifest = value;
-        }
-        public bool ShouldSerializemanifest() => __pbn__manifest != null;
-        public void Resetmanifest() => __pbn__manifest = null;
-        private string __pbn__manifest;
-
-        [global::ProtoBuf.ProtoMember(8)]
-        public byte[] system_package
-        {
-            get => __pbn__system_package;
-            set => __pbn__system_package = value;
-        }
-        public bool ShouldSerializesystem_package() => __pbn__system_package != null;
-        public void Resetsystem_package() => __pbn__system_package = null;
-        private byte[] __pbn__system_package;
-
-        [global::ProtoBuf.ProtoMember(9)]
-        public bool load_system
-        {
-            get => __pbn__load_system.GetValueOrDefault();
-            set => __pbn__load_system = value;
-        }
-        public bool ShouldSerializeload_system() => __pbn__load_system != null;
-        public void Resetload_system() => __pbn__load_system = null;
-        private bool? __pbn__load_system;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGCCStrike15_v2_GC2ClientInitSystem_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public bool success
-        {
-            get => __pbn__success.GetValueOrDefault();
-            set => __pbn__success = value;
-        }
-        public bool ShouldSerializesuccess() => __pbn__success != null;
-        public void Resetsuccess() => __pbn__success = null;
-        private bool? __pbn__success;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string diagnostic
-        {
-            get => __pbn__diagnostic ?? "";
-            set => __pbn__diagnostic = value;
-        }
-        public bool ShouldSerializediagnostic() => __pbn__diagnostic != null;
-        public void Resetdiagnostic() => __pbn__diagnostic = null;
-        private string __pbn__diagnostic;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public byte[] sha_hash
-        {
-            get => __pbn__sha_hash;
-            set => __pbn__sha_hash = value;
-        }
-        public bool ShouldSerializesha_hash() => __pbn__sha_hash != null;
-        public void Resetsha_hash() => __pbn__sha_hash = null;
-        private byte[] __pbn__sha_hash;
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public int response
-        {
-            get => __pbn__response.GetValueOrDefault();
-            set => __pbn__response = value;
-        }
-        public bool ShouldSerializeresponse() => __pbn__response != null;
-        public void Resetresponse() => __pbn__response = null;
-        private int? __pbn__response;
-
-        [global::ProtoBuf.ProtoMember(5)]
-        public int error_code1
-        {
-            get => __pbn__error_code1.GetValueOrDefault();
-            set => __pbn__error_code1 = value;
-        }
-        public bool ShouldSerializeerror_code1() => __pbn__error_code1 != null;
-        public void Reseterror_code1() => __pbn__error_code1 = null;
-        private int? __pbn__error_code1;
-
-        [global::ProtoBuf.ProtoMember(6)]
-        public int error_code2
-        {
-            get => __pbn__error_code2.GetValueOrDefault();
-            set => __pbn__error_code2 = value;
-        }
-        public bool ShouldSerializeerror_code2() => __pbn__error_code2 != null;
-        public void Reseterror_code2() => __pbn__error_code2 = null;
-        private int? __pbn__error_code2;
-
-        [global::ProtoBuf.ProtoMember(7)]
-        public long handle
-        {
-            get => __pbn__handle.GetValueOrDefault();
-            set => __pbn__handle = value;
-        }
-        public bool ShouldSerializehandle() => __pbn__handle != null;
-        public void Resethandle() => __pbn__handle = null;
-        private long? __pbn__handle;
-
-        [global::ProtoBuf.ProtoMember(8)]
-        [global::System.ComponentModel.DefaultValue(EInitSystemResult.k_EInitSystemResult_Invalid)]
-        public EInitSystemResult einit_result
-        {
-            get => __pbn__einit_result ?? EInitSystemResult.k_EInitSystemResult_Invalid;
-            set => __pbn__einit_result = value;
-        }
-        public bool ShouldSerializeeinit_result() => __pbn__einit_result != null;
-        public void Reseteinit_result() => __pbn__einit_result = null;
-        private EInitSystemResult? __pbn__einit_result;
-
-        [global::ProtoBuf.ProtoMember(9)]
-        public int aux_system1
-        {
-            get => __pbn__aux_system1.GetValueOrDefault();
-            set => __pbn__aux_system1 = value;
-        }
-        public bool ShouldSerializeaux_system1() => __pbn__aux_system1 != null;
-        public void Resetaux_system1() => __pbn__aux_system1 = null;
-        private int? __pbn__aux_system1;
-
-        [global::ProtoBuf.ProtoMember(10)]
-        public int aux_system2
-        {
-            get => __pbn__aux_system2.GetValueOrDefault();
-            set => __pbn__aux_system2 = value;
-        }
-        public bool ShouldSerializeaux_system2() => __pbn__aux_system2 != null;
-        public void Resetaux_system2() => __pbn__aux_system2 = null;
-        private int? __pbn__aux_system2;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgGCCStrike15_v2_SetPlayerLeaderboardSafeName : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -9246,13 +8928,9 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EMsgGCCStrike15_v2_ClientPerfReport = 9202,
         k_EMsgGCCStrike15_v2_GetEventFavorites_Response = 9203,
         k_EMsgGCCStrike15_v2_ClientRequestSouvenir = 9204,
-        k_EMsgGCCStrike15_v2_GC2ClientRefuseSecureMode = 9206,
-        k_EMsgGCCStrike15_v2_GC2ClientRequestValidation = 9207,
         k_EMsgGCCStrike15_v2_ClientRedeemMissionReward = 9209,
         k_EMsgGCCStrike15_ClientDeepStats = 9210,
         k_EMsgGCCStrike15_StartAgreementSessionInGame = 9211,
-        k_EMsgGCCStrike15_v2_GC2ClientInitSystem = 9212,
-        k_EMsgGCCStrike15_v2_GC2ClientInitSystem_Response = 9213,
         k_EMsgGCCStrike15_v2_PrivateQueues = 9214,
         k_EMsgGCCStrike15_v2_MatchListTournamentOperatorMgmt = 9215,
         k_EMsgGCCStrike15_v2_BetaEnrollment = 9217,
@@ -9291,20 +8969,6 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EClientReportingVersion_OldVersion = 0,
         k_EClientReportingVersion_BetaVersion = 1,
         k_EClientReportingVersion_SupportsTrustedMode = 2,
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public enum EInitSystemResult
-    {
-        k_EInitSystemResult_Invalid = 0,
-        k_EInitSystemResult_Success = 1,
-        k_EInitSystemResult_None = 2,
-        k_EInitSystemResult_NotFound = 3,
-        k_EInitSystemResult_Existing = 4,
-        k_EInitSystemResult_FailedOpen = 5,
-        k_EInitSystemResult_Mismatch = 6,
-        k_EInitSystemResult_FailedInit = 7,
-        k_EInitSystemResult_Max = 8,
     }
 
 }
